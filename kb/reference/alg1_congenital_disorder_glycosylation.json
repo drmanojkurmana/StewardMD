@@ -1,172 +1,479 @@
 {
- "id": "alg1_congenital_disorder_glycosylation",
- "name": "ALG1-congenital disorder of glycosylation",
- "aliases": [
-  "ALG1-CDG",
-  "CDG-Ik",
-  "CDG type Ik"
- ],
- "class": "non_infective",
- "system": "Metabolic / Congenital disorders of glycosylation",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Metabolic medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive N-linked congenital disorder of glycosylation caused by ALG1 mutations",
-   "One of the more common of the rare type I CDGs after PMM2-CDG",
-   "Typically presents with a severe multisystem phenotype: developmental delay, epilepsy, hypotonia and microcephaly",
-   "Frequent additional features include coagulopathy, nephrotic-range protein loss, immune dysfunction and dysmorphism",
-   "Transferrin isoform analysis (isoelectric focusing) shows a type I pattern, prompting confirmatory genetics",
-   "There is no curative therapy; management is supportive and multidisciplinary",
-   "Severe neonatal-onset disease often has a poor prognosis"
+  "id": "alg1_congenital_disorder_glycosylation",
+  "name": "ALG1-congenital disorder of glycosylation",
+  "aliases": [
+    "ALG1-CDG",
+    "CDG-Ik",
+    "CDG type Ik"
   ],
-  "pathophysiology": "ALG1 encodes a mannosyltransferase that acts early in the assembly of the lipid-linked oligosaccharide precursor used for N-linked glycosylation in the endoplasmic reticulum. Deficient activity impairs building of the dolichol-linked glycan, so many secreted and membrane glycoproteins are under-glycosylated. Because N-glycosylation is required for the correct folding, stability and function of numerous proteins (including clotting factors, hormones and immune proteins), the defect produces a multisystem disorder with prominent neurological involvement, coagulopathy and protein-losing features, as seen across the type I CDGs.",
-  "additionalDifferentials": [
-   "PMM2-CDG and other type I congenital disorders of glycosylation",
-   "Other genetic epileptic encephalopathies",
-   "Congenital muscular dystrophies (dystroglycanopathies)",
-   "Mitochondrial disorders",
-   "Congenital nephrotic syndrome of other cause",
-   "Inherited coagulopathies"
-  ],
-  "additionalInvestigations": [
-   "Serum transferrin isoelectric focusing or mass spectrometry (type I pattern)",
-   "Genetic testing of ALG1",
-   "Coagulation studies (including factors affected by glycosylation)",
-   "Assessment of renal protein loss and immune function",
-   "Brain imaging and EEG"
-  ],
-  "redFlags": [
-   "Intractable neonatal or infantile seizures",
-   "Unexplained coagulopathy with bleeding or thrombosis",
-   "Nephrotic-range protein loss",
-   "Recurrent or severe infections"
-  ],
-  "prognosis": "The prognosis is variable but often poor in early-onset multisystem disease, with significant early mortality; milder phenotypes with longer survival and predominant neurological impairment occur.",
-  "pitfalls": [
-   "Not sending transferrin glycoform analysis in an unexplained multisystem infantile disorder",
-   "Attributing coagulopathy to liver disease rather than glycosylation defect",
-   "Overlooking CDG in a child labelled as having a non-specific epileptic encephalopathy",
-   "Assuming a normal transferrin screen fully excludes all CDGs"
-  ],
-  "references": [
-   "Textbook of Inborn Metabolic Diseases (standard reference)",
-   "GeneReviews (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No curative treatment is available; care is supportive and multidisciplinary through a metabolic centre",
-   "Manage epilepsy with anticonvulsants and provide developmental therapy for hypotonia and delay",
-   "Correct coagulation abnormalities peri-operatively and during illness given glycosylation-dependent clotting factor deficiency",
-   "Nutritional support and management of nephrotic-range protein loss and associated oedema",
-   "Immune assessment with treatment of infections and immunoglobulin support where dysfunction is significant",
-   "Regular neurodevelopmental, feeding and growth review",
-   "Genetic counselling and family screening for this autosomal recessive disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alg1_congenital_disorder_glycosylation-pathway",
-   "title": "ALG1-congenital disorder of glycosylation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive N-linked congenital disorder of glycosylation caused by ALG1 mutations",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intractable neonatal or infantile seizures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum transferrin isoelectric focusing or mass spectrometry (type I pattern), Genetic testing of ALG1, Coagulation studies (including factors affected by glycosylation)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No curative treatment is available; care is supportive and multidisciplinary through a metabolic centre"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not sending transferrin glycoform analysis in an unexplained multisystem infantile disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alg1-congenital disorder of glycosylation."
-  }
- ],
- "tables": [
-  {
-   "id": "alg1_congenital_disorder_glycosylation-matrix",
-   "title": "ALG1-congenital disorder of glycosylation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive N-linked congenital disorder of glycosylation caused by ALG1 mutations",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Congenital disorders of glycosylation",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Metabolic medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive N-linked congenital disorder of glycosylation caused by ALG1 mutations",
+      "One of the more common of the rare type I CDGs after PMM2-CDG",
+      "Typically presents with a severe multisystem phenotype: developmental delay, epilepsy, hypotonia and microcephaly",
+      "Frequent additional features include coagulopathy, nephrotic-range protein loss, immune dysfunction and dysmorphism",
+      "Transferrin isoform analysis (isoelectric focusing) shows a type I pattern, prompting confirmatory genetics",
+      "There is no curative therapy; management is supportive and multidisciplinary",
+      "Severe neonatal-onset disease often has a poor prognosis"
     ],
-    [
-     "Key Investigations",
-     "Serum transferrin isoelectric focusing or mass spectrometry (type I pattern), Genetic testing of ALG1, Coagulation studies",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ALG1 encodes a mannosyltransferase that acts early in the assembly of the lipid-linked oligosaccharide precursor used for N-linked glycosylation in the endoplasmic reticulum. Deficient activity impairs building of the dolichol-linked glycan, so many secreted and membrane glycoproteins are under-glycosylated. Because N-glycosylation is required for the correct folding, stability and function of numerous proteins (including clotting factors, hormones and immune proteins), the defect produces a multisystem disorder with prominent neurological involvement, coagulopathy and protein-losing features, as seen across the type I CDGs.",
+    "additionalDifferentials": [
+      "PMM2-CDG and other type I congenital disorders of glycosylation",
+      "Other genetic epileptic encephalopathies",
+      "Congenital muscular dystrophies (dystroglycanopathies)",
+      "Mitochondrial disorders",
+      "Congenital nephrotic syndrome of other cause",
+      "Inherited coagulopathies"
     ],
-    [
-     "Primary Differentials",
-     "PMM2-CDG and other type I congenital disorders of glycosylation, Other genetic epileptic encephalopathies, Congenital muscular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum transferrin isoelectric focusing or mass spectrometry (type I pattern)",
+      "Genetic testing of ALG1",
+      "Coagulation studies (including factors affected by glycosylation)",
+      "Assessment of renal protein loss and immune function",
+      "Brain imaging and EEG"
     ],
-    [
-     "Management Strategy",
-     "No curative treatment is available; care is supportive and multidisciplinary through a metabolic centre",
-     "Core treatment modality"
+    "redFlags": [
+      "Intractable neonatal or infantile seizures",
+      "Unexplained coagulopathy with bleeding or thrombosis",
+      "Nephrotic-range protein loss",
+      "Recurrent or severe infections"
     ],
-    [
-     "Clinical Pitfall",
-     "Not sending transferrin glycoform analysis in an unexplained multisystem infantile disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is variable but often poor in early-onset multisystem disease, with significant early mortality; milder phenotypes with longer survival and predominant neurological impairment occur.",
+    "pitfalls": [
+      "Not sending transferrin glycoform analysis in an unexplained multisystem infantile disorder",
+      "Attributing coagulopathy to liver disease rather than glycosylation defect",
+      "Overlooking CDG in a child labelled as having a non-specific epileptic encephalopathy",
+      "Assuming a normal transferrin screen fully excludes all CDGs"
+    ],
+    "references": [
+      "Textbook of Inborn Metabolic Diseases (standard reference)",
+      "GeneReviews (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No curative treatment is available; care is supportive and multidisciplinary through a metabolic centre",
+      "Manage epilepsy with anticonvulsants and provide developmental therapy for hypotonia and delay",
+      "Correct coagulation abnormalities peri-operatively and during illness given glycosylation-dependent clotting factor deficiency",
+      "Nutritional support and management of nephrotic-range protein loss and associated oedema",
+      "Immune assessment with treatment of infections and immunoglobulin support where dysfunction is significant",
+      "Regular neurodevelopmental, feeding and growth review",
+      "Genetic counselling and family screening for this autosomal recessive disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for alg1-congenital disorder of glycosylation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alg1-congenital-disorder-glycosylation-real-image",
-   "title": "ALG1-congenital disorder of glycosylation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "alg1_congenital_disorder_glycosylation-pathway",
+      "title": "ALG1-congenital disorder of glycosylation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive N-linked congenital disorder of glycosylation caused by ALG1 mutations",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intractable neonatal or infantile seizures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum transferrin isoelectric focusing or mass spectrometry (type I pattern), Genetic testing of ALG1, Coagulation studies (including factors affected by glycosylation)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No curative treatment is available; care is supportive and multidisciplinary through a metabolic centre"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not sending transferrin glycoform analysis in an unexplained multisystem infantile disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alg1-congenital disorder of glycosylation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alg1_congenital_disorder_glycosylation-matrix",
+      "title": "ALG1-congenital disorder of glycosylation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive N-linked congenital disorder of glycosylation caused by ALG1 mutations",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum transferrin isoelectric focusing or mass spectrometry (type I pattern), Genetic testing of ALG1, Coagulation studies",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "PMM2-CDG and other type I congenital disorders of glycosylation, Other genetic epileptic encephalopathies, Congenital muscular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No curative treatment is available; care is supportive and multidisciplinary through a metabolic centre",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not sending transferrin glycoform analysis in an unexplained multisystem infantile disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alg1-congenital disorder of glycosylation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alg1_congenital_disorder_glycosylation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Type I pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of ALG1",
+          "cells": [
+            {
+              "text": "Causative variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies including glycosylation-dependent factors",
+          "cells": [
+            {
+              "text": "Coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of renal protein loss and immune function",
+          "cells": [
+            {
+              "text": "Protein loss and immune dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging and EEG",
+          "cells": [
+            {
+              "text": "Encephalopathy and epilepsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alg1_congenital_disorder_glycosylation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "PMM2-CDG and other type I congenital disorders of glycosylation",
+          "cells": [
+            {
+              "text": "Another type I CDG"
+            },
+            {
+              "text": "Gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital muscular dystrophies (dystroglycanopathies)",
+          "cells": [
+            {
+              "text": "Muscular dystrophy with brain involvement"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital nephrotic syndrome of other cause",
+          "cells": [
+            {
+              "text": "Nephrotic-range proteinuria"
+            },
+            {
+              "text": "Renal protein loss assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alg1_congenital_disorder_glycosylation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticonvulsants with developmental therapy for hypotonia and delay",
+          "cells": [
+            {
+              "text": "Epilepsy and developmental delay"
+            },
+            {
+              "text": "Physiotherapy and developmental therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of coagulation abnormalities peri-operatively and during illness",
+          "cells": [
+            {
+              "text": "Glycosylation-dependent clotting factor deficiency"
+            },
+            {
+              "text": "Peri-operative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support and management of nephrotic-range protein loss and oedema",
+          "cells": [
+            {
+              "text": "Protein loss"
+            },
+            {
+              "text": "Oedema management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune assessment, treatment of infections and immunoglobulin support",
+          "cells": [
+            {
+              "text": "Immune dysfunction"
+            },
+            {
+              "text": "Where significant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular neurodevelopmental, feeding and growth review",
+          "cells": [
+            {
+              "text": "Multisystem follow-up"
+            },
+            {
+              "text": "Ongoing review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alg1_congenital_disorder_glycosylation-dx-mgmt",
+      "title": "Diagnosis and management of ALG1-congenital disorder of glycosylation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multisystem infantile disorder with seizures, nephrotic proteinuria or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intractable seizures, unexplained bleeding or thrombosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic and haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin glycoform analysis; ALG1 testing; coagulation; renal protein loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Type I glycosylation pattern confirmed with ALG1 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review PMM2-CDG, dystroglycanopathy and other nephrotic syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsants with developmental therapy for hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct coagulation abnormalities during illness and surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage nephrotic protein loss and oedema; treat infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis variable; early-onset disease often poor",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

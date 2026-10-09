@@ -1,176 +1,578 @@
 {
- "id": "hypereosinophilic_syndrome",
- "name": "Hypereosinophilic syndrome",
- "aliases": [
-  "HES",
-  "Idiopathic hypereosinophilic syndrome"
- ],
- "class": "non_infective",
- "system": "Haematological",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Wintrobe's Clinical Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by persistent marked eosinophilia (greater than 1.5 x 10^9/L on repeated testing or marked tissue eosinophilia) with end-organ damage and exclusion of secondary causes.",
-   "Recognised variants include myeloproliferative (often FIP1L1-PDGFRA fusion), lymphocytic (an aberrant clonal T-cell population driving interleukin-5), idiopathic and overlap forms.",
-   "FIP1L1-PDGFRA-positive disease is exquisitely responsive to tyrosine kinase inhibitors such as imatinib.",
-   "Cardiac involvement (Loffler endocarditis, endomyocardial fibrosis and mural thrombi) is the major cause of morbidity and mortality.",
-   "Other affected organs include the skin, lungs, gastrointestinal tract and nervous system, with peripheral neuropathy and thromboembolic stroke.",
-   "Raised serum tryptase and vitamin B12 point towards the myeloproliferative variant.",
-   "Exclude secondary eosinophilia from parasites, drugs, allergy, malignancy, eosinophilic granulomatosis with polyangiitis and adrenal insufficiency.",
-   "Corticosteroids are first line for non-PDGFRA disease, with anti-interleukin-5 therapy (mepolizumab) and tyrosine kinase inhibitors as targeted options."
+  "id": "hypereosinophilic_syndrome",
+  "name": "Hypereosinophilic syndrome",
+  "aliases": [
+    "HES",
+    "Idiopathic hypereosinophilic syndrome"
   ],
-  "pathophysiology": "Hypereosinophilic syndrome is a heterogeneous group of disorders characterised by sustained overproduction of eosinophils that infiltrate and damage tissues through release of granule proteins (major basic protein and eosinophil cationic protein), cytokines and pro-thrombotic mediators. In the myeloproliferative variant, clonal expansion is driven by fusion tyrosine kinases, classically FIP1L1-PDGFRA; in the lymphocytic variant an aberrant clonal T-cell population secretes interleukin-5 driving reactive eosinophilia. Cardiac damage evolves through acute necrotic, thrombotic and fibrotic stages, producing restrictive endomyocardial fibrosis.",
-  "additionalDifferentials": [
-   "Secondary (reactive) eosinophilia from parasitic infection",
-   "Drug reaction including DRESS",
-   "Eosinophilic granulomatosis with polyangiitis",
-   "Chronic eosinophilic leukaemia and other myeloid neoplasms",
-   "Lymphoma (Hodgkin or T-cell) with eosinophilia",
-   "Allergic or atopic disease and allergic bronchopulmonary aspergillosis",
-   "Adrenal insufficiency"
-  ],
-  "additionalInvestigations": [
-   "Repeated full blood count with eosinophil quantification and blood film",
-   "Testing for FIP1L1-PDGFRA and other PDGFRA, PDGFRB and FGFR1 rearrangements",
-   "Peripheral blood T-cell immunophenotyping and T-cell receptor clonality",
-   "Serum tryptase, vitamin B12 and IgE",
-   "Bone marrow aspirate and trephine with cytogenetics",
-   "Echocardiography, cardiac MRI and troponin",
-   "Stool and serology for parasites and exclusion of secondary causes"
-  ],
-  "redFlags": [
-   "Cardiac involvement with heart failure, a new murmur, raised troponin or mural thrombus",
-   "Thromboembolic events including stroke",
-   "Rapidly rising eosinophil count with systemic deterioration",
-   "New focal neurological deficit"
-  ],
-  "prognosis": "Prognosis has improved markedly with modern targeted therapy: FIP1L1-PDGFRA disease responds excellently to tyrosine kinase inhibitors, while outcome in other variants depends largely on the extent of cardiac and neurological damage.",
-  "pitfalls": [
-   "Missing FIP1L1-PDGFRA, a highly treatable cause, before committing to corticosteroids alone",
-   "Overlooking cardiac involvement because symptoms lag behind structural damage",
-   "Failing to exclude Strongyloides before immunosuppression",
-   "Confusing the syndrome with eosinophilic granulomatosis with polyangiitis or reactive eosinophilia"
-  ],
-  "references": [
-   "Wintrobe's Clinical Hematology",
-   "Oxford Textbook of Medicine",
-   "World Health Organization classification of haematolymphoid tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat FIP1L1-PDGFRA-positive disease with a tyrosine kinase inhibitor such as imatinib, to which it is exquisitely responsive",
-   "Use corticosteroids as first-line therapy for non-clonal and idiopathic disease, giving empirical anti-helminth cover such as ivermectin beforehand where Strongyloides is possible",
-   "Add steroid-sparing agents such as the anti-interleukin-5 biologic mepolizumab, or hydroxycarbamide or interferon, for chronic control",
-   "Escalate to high-dose corticosteroids for organ-threatening presentations to rapidly reduce the eosinophil count",
-   "Anticoagulate for thromboembolic complications and manage cardiac, cutaneous, pulmonary, gastrointestinal and neurological involvement",
-   "Monitor cardiac status with echocardiography, cardiac magnetic resonance and troponin, since endomyocardial disease is the main cause of mortality",
-   "Undertake bone marrow and molecular evaluation to define the variant and coordinate care through haematology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypereosinophilic_syndrome-pathway",
-   "title": "Hypereosinophilic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by persistent marked eosinophilia (greater than 1.5 x 10^9/L on repeated testing or marked tissue eosinophilia) with end-organ damage and exclusion of secondary causes.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac involvement with heart failure, a new murmur, raised troponin or mural thrombus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repeated full blood count with eosinophil quantification and blood film, Testing for FIP1L1-PDGFRA and other PDGFRA, PDGFRB and FGFR1 rearrangements, Peripheral blood T-cell immunophenotyping and T-cell receptor clonality"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat FIP1L1-PDGFRA-positive disease with a tyrosine kinase inhibitor such as imatinib, to which it is exquisitely responsive"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing FIP1L1-PDGFRA, a highly treatable cause, before committing to corticosteroids alone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypereosinophilic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "hypereosinophilic_syndrome-matrix",
-   "title": "Hypereosinophilic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by persistent marked eosinophilia (greater than 1.5 x 10^9/L on repeated testing or marked tissue eosinophilia) with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Wintrobe's Clinical Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by persistent marked eosinophilia (greater than 1.5 x 10^9/L on repeated testing or marked tissue eosinophilia) with end-organ damage and exclusion of secondary causes.",
+      "Recognised variants include myeloproliferative (often FIP1L1-PDGFRA fusion), lymphocytic (an aberrant clonal T-cell population driving interleukin-5), idiopathic and overlap forms.",
+      "FIP1L1-PDGFRA-positive disease is exquisitely responsive to tyrosine kinase inhibitors such as imatinib.",
+      "Cardiac involvement (Loffler endocarditis, endomyocardial fibrosis and mural thrombi) is the major cause of morbidity and mortality.",
+      "Other affected organs include the skin, lungs, gastrointestinal tract and nervous system, with peripheral neuropathy and thromboembolic stroke.",
+      "Raised serum tryptase and vitamin B12 point towards the myeloproliferative variant.",
+      "Exclude secondary eosinophilia from parasites, drugs, allergy, malignancy, eosinophilic granulomatosis with polyangiitis and adrenal insufficiency.",
+      "Corticosteroids are first line for non-PDGFRA disease, with anti-interleukin-5 therapy (mepolizumab) and tyrosine kinase inhibitors as targeted options."
     ],
-    [
-     "Key Investigations",
-     "Repeated full blood count with eosinophil quantification and blood film, Testing for FIP1L1-PDGFRA and other PDGFRA, PDGFRB and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hypereosinophilic syndrome is a heterogeneous group of disorders characterised by sustained overproduction of eosinophils that infiltrate and damage tissues through release of granule proteins (major basic protein and eosinophil cationic protein), cytokines and pro-thrombotic mediators. In the myeloproliferative variant, clonal expansion is driven by fusion tyrosine kinases, classically FIP1L1-PDGFRA; in the lymphocytic variant an aberrant clonal T-cell population secretes interleukin-5 driving reactive eosinophilia. Cardiac damage evolves through acute necrotic, thrombotic and fibrotic stages, producing restrictive endomyocardial fibrosis.",
+    "additionalDifferentials": [
+      "Secondary (reactive) eosinophilia from parasitic infection",
+      "Drug reaction including DRESS",
+      "Eosinophilic granulomatosis with polyangiitis",
+      "Chronic eosinophilic leukaemia and other myeloid neoplasms",
+      "Lymphoma (Hodgkin or T-cell) with eosinophilia",
+      "Allergic or atopic disease and allergic bronchopulmonary aspergillosis",
+      "Adrenal insufficiency"
     ],
-    [
-     "Primary Differentials",
-     "Secondary (reactive) eosinophilia from parasitic infection, Drug reaction including DRESS, Eosinophilic granulomatosis with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Repeated full blood count with eosinophil quantification and blood film",
+      "Testing for FIP1L1-PDGFRA and other PDGFRA, PDGFRB and FGFR1 rearrangements",
+      "Peripheral blood T-cell immunophenotyping and T-cell receptor clonality",
+      "Serum tryptase, vitamin B12 and IgE",
+      "Bone marrow aspirate and trephine with cytogenetics",
+      "Echocardiography, cardiac MRI and troponin",
+      "Stool and serology for parasites and exclusion of secondary causes"
     ],
-    [
-     "Management Strategy",
-     "Treat FIP1L1-PDGFRA-positive disease with a tyrosine kinase inhibitor such as imatinib, to which it is exquisitely responsive",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac involvement with heart failure, a new murmur, raised troponin or mural thrombus",
+      "Thromboembolic events including stroke",
+      "Rapidly rising eosinophil count with systemic deterioration",
+      "New focal neurological deficit"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing FIP1L1-PDGFRA, a highly treatable cause, before committing to corticosteroids alone",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis has improved markedly with modern targeted therapy: FIP1L1-PDGFRA disease responds excellently to tyrosine kinase inhibitors, while outcome in other variants depends largely on the extent of cardiac and neurological damage.",
+    "pitfalls": [
+      "Missing FIP1L1-PDGFRA, a highly treatable cause, before committing to corticosteroids alone",
+      "Overlooking cardiac involvement because symptoms lag behind structural damage",
+      "Failing to exclude Strongyloides before immunosuppression",
+      "Confusing the syndrome with eosinophilic granulomatosis with polyangiitis or reactive eosinophilia"
+    ],
+    "references": [
+      "Wintrobe's Clinical Hematology",
+      "Oxford Textbook of Medicine",
+      "World Health Organization classification of haematolymphoid tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat FIP1L1-PDGFRA-positive disease with a tyrosine kinase inhibitor such as imatinib, to which it is exquisitely responsive",
+      "Use corticosteroids as first-line therapy for non-clonal and idiopathic disease, giving empirical anti-helminth cover such as ivermectin beforehand where Strongyloides is possible",
+      "Add steroid-sparing agents such as the anti-interleukin-5 biologic mepolizumab, or hydroxycarbamide or interferon, for chronic control",
+      "Escalate to high-dose corticosteroids for organ-threatening presentations to rapidly reduce the eosinophil count",
+      "Anticoagulate for thromboembolic complications and manage cardiac, cutaneous, pulmonary, gastrointestinal and neurological involvement",
+      "Monitor cardiac status with echocardiography, cardiac magnetic resonance and troponin, since endomyocardial disease is the main cause of mortality",
+      "Undertake bone marrow and molecular evaluation to define the variant and coordinate care through haematology"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypereosinophilic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypereosinophilic-syndrome-real-image",
-   "title": "Hypereosinophilic syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "hypereosinophilic_syndrome-pathway",
+      "title": "Hypereosinophilic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by persistent marked eosinophilia (greater than 1.5 x 10^9/L on repeated testing or marked tissue eosinophilia) with end-organ damage and exclusion of secondary causes.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac involvement with heart failure, a new murmur, raised troponin or mural thrombus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repeated full blood count with eosinophil quantification and blood film, Testing for FIP1L1-PDGFRA and other PDGFRA, PDGFRB and FGFR1 rearrangements, Peripheral blood T-cell immunophenotyping and T-cell receptor clonality"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat FIP1L1-PDGFRA-positive disease with a tyrosine kinase inhibitor such as imatinib, to which it is exquisitely responsive"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing FIP1L1-PDGFRA, a highly treatable cause, before committing to corticosteroids alone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypereosinophilic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypereosinophilic_syndrome-matrix",
+      "title": "Hypereosinophilic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by persistent marked eosinophilia (greater than 1.5 x 10^9/L on repeated testing or marked tissue eosinophilia) with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repeated full blood count with eosinophil quantification and blood film, Testing for FIP1L1-PDGFRA and other PDGFRA, PDGFRB and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary (reactive) eosinophilia from parasitic infection, Drug reaction including DRESS, Eosinophilic granulomatosis with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat FIP1L1-PDGFRA-positive disease with a tyrosine kinase inhibitor such as imatinib, to which it is exquisitely responsive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing FIP1L1-PDGFRA, a highly treatable cause, before committing to corticosteroids alone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypereosinophilic syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Wintrobe's Clinical Hematology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table e21-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypereosinophilic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated full blood count with eosinophil count and blood film",
+          "cells": [
+            {
+              "text": "Persistent eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FIP1L1-PDGFRA, PDGFRB and FGFR1 rearrangement testing",
+          "cells": [
+            {
+              "text": "Myeloproliferative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell immunophenotyping and T-cell receptor clonality",
+          "cells": [
+            {
+              "text": "Lymphocytic variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum tryptase, vitamin B12 and IgE",
+          "cells": [
+            {
+              "text": "Myeloproliferative clues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine with cytogenetics",
+          "cells": [
+            {
+              "text": "Myeloid neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography, cardiac MRI and troponin",
+          "cells": [
+            {
+              "text": "Cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool and serology for parasites",
+          "cells": [
+            {
+              "text": "Exclusion of secondary causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypereosinophilic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parasitic infection",
+          "cells": [
+            {
+              "text": "Helminth exposure and parasite testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug reaction including DRESS",
+          "cells": [
+            {
+              "text": "Drug exposure and systemic rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Asthma with vasculitic features and ANCA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic eosinophilic leukaemia",
+          "cells": [
+            {
+              "text": "Clonal marrow findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma with eosinophilia",
+          "cells": [
+            {
+              "text": "Lymphadenopathy and nodal histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypereosinophilic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Imatinib",
+          "cells": [
+            {
+              "text": "For FIP1L1-PDGFRA-positive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for non-clonal and idiopathic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical anti-helminth cover",
+          "cells": [
+            {
+              "text": "Ivermectin where Strongyloides is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mepolizumab, hydroxycarbamide or interferon",
+          "cells": [
+            {
+              "text": "Steroid-sparing control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "Organ-threatening presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Thromboembolic complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "Echocardiography, cardiac MRI and troponin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypereosinophilic_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnosis of chronic eosinophilic leukemia and hypereosinophilic syndrome",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement"
+      ],
+      "rows": [
+        {
+          "parameter": "Required findings",
+          "cells": [
+            {
+              "text": "Persistent blood eosinophilia of at least 1500/uL, increased marrow eosinophils, and myeloblasts <20% in blood or marrow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Step 1",
+          "cells": [
+            {
+              "text": "Exclude all causes of reactive eosinophilia: allergy, parasites, infection, pulmonary disease (for example hypersensitivity pneumonitis, Loeffler's), collagen vascular disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Step 2",
+          "cells": [
+            {
+              "text": "Exclude primary neoplasms with secondary eosinophilia: T cell lymphomas, Hodgkin's disease, acute lymphoid leukemia, mastocytosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Step 3",
+          "cells": [
+            {
+              "text": "Exclude other primary myeloid neoplasms that may involve eosinophils: chronic myeloid leukemia, acute myeloid leukemia with inv(16) or t(16;16)(p13;q22), other myeloproliferative syndromes and myelodysplasia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Step 4",
+          "cells": [
+            {
+              "text": "Exclude T cell reaction with increased IL-5 or other cytokine production"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypereosinophilic syndrome",
+          "cells": [
+            {
+              "text": "Diagnosed when all of the above are excluded and there is no evidence of a clonal myeloid disorder"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic eosinophilic leukemia",
+          "cells": [
+            {
+              "text": "Diagnosed when all of the above are excluded and the myeloid cells show a clonal chromosome abnormality or other evidence of clonality, with blasts >2% in peripheral blood or increased in marrow (but <20%)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypereosinophilic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hypereosinophilic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent marked eosinophilia with organ involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, mural thrombus, stroke, or rapidly rising eosinophil count?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent high-dose steroids and cardiology review for organ threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated FBC and film; FIP1L1-PDGFRA; T-cell clonality; tryptase; marrow; cardiac tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is eosinophilia persistent with secondary causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider parasitic infection, drug reaction, EGPA or a myeloid neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Imatinib for FIP1L1-PDGFRA-positive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids first-line for non-clonal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mepolizumab, hydroxycarbamide or interferon for chronic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticoagulation and cardiac monitoring for endomyocardial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Eosinophil count controlled; cardiac status followed through haematology",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

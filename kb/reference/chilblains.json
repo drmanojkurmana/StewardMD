@@ -1,172 +1,472 @@
 {
- "id": "chilblains",
- "name": "Chilblains (pernio)",
- "aliases": [
-  "pernio",
-  "perniosis",
-  "cold-induced vasculopathy"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency & Wilderness Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An inflammatory cold injury, not a freezing injury, caused by repeated exposure to cold but non-freezing, often damp conditions",
-   "Presents with itchy or painful erythematous to violaceous papules, plaques, or nodules on acral sites such as toes, fingers, ears, and nose",
-   "Lesions typically appear hours after cold exposure and may blister or ulcerate in severe cases",
-   "Distinguished from frostbite by the absence of tissue freezing and from Raynaud phenomenon by the fixed inflammatory lesions rather than transient colour change",
-   "Rewarming should be gradual, with keeping the affected part dry and warm and avoiding further cold exposure",
-   "Persistent, recurrent, or atypical pernio may be associated with connective tissue disease (notably lupus) and warrants further evaluation",
-   "Prevention through warm, dry, layered clothing and avoiding damp cold is the mainstay of management"
+  "id": "chilblains",
+  "name": "Chilblains (pernio)",
+  "aliases": [
+    "pernio",
+    "perniosis",
+    "cold-induced vasculopathy"
   ],
-  "pathophysiology": "Chilblains represent an abnormal inflammatory response to cold, non-freezing exposure. Cold-induced vasoconstriction of dermal vessels, followed by a poorly regulated inflammatory and vascular reaction on rewarming, produces localised tissue oedema, a perivascular inflammatory infiltrate, and the characteristic tender discoloured acral lesions. Unlike frostbite there is no ice crystal formation, so the injury is inflammatory rather than a direct freezing necrosis. A subset of cases reflects an underlying autoimmune or connective tissue disorder that predisposes to the exaggerated vascular response.",
-  "additionalDifferentials": [
-   "Frostbite and frostnip",
-   "Raynaud phenomenon",
-   "Lupus pernio and other connective tissue disease-related vasculopathy",
-   "Trench foot / immersion foot (non-freezing cold injury of prolonged wet exposure)",
-   "Acrocyanosis",
-   "Vasculitis or embolic acral lesions"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis based on history of cold, damp exposure and characteristic acral lesions",
-   "Autoimmune screen (including antinuclear antibodies) in recurrent, severe, or atypical cases",
-   "Cold agglutinins and cryoglobulins where an alternative vasculopathy is suspected",
-   "Skin biopsy in diagnostic uncertainty or when connective tissue disease is considered",
-   "Assessment for peripheral vascular disease in older patients"
-  ],
-  "redFlags": [
-   "Ulceration, necrosis, or secondary infection of lesions",
-   "Features suggesting underlying connective tissue disease or systemic vasculitis",
-   "Persistent lesions unresponsive to cold avoidance",
-   "Signs of concurrent freezing injury (frostbite) after severe exposure"
-  ],
-  "prognosis": "Acute chilblains usually resolve over one to three weeks with cold avoidance and supportive care; chronic or recurrent perniosis can persist through cold seasons and, when linked to autoimmune disease, follows the course of the underlying condition.",
-  "pitfalls": [
-   "Mistaking pernio for frostbite and applying inappropriately aggressive rewarming",
-   "Failing to investigate recurrent or atypical cases for connective tissue disease",
-   "Rubbing or applying direct heat, which can aggravate the inflammatory injury",
-   "Overlooking secondary infection of blistered or ulcerated lesions"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Bove and Davis' Diving Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cold avoidance with gradual rewarming, keeping the affected parts dry and warm using insulation, gloves and warm footwear, is the mainstay",
-   "Smoking cessation to reduce peripheral vasoconstriction",
-   "Topical corticosteroids for symptomatic lesions, with wound care for blistering or ulceration",
-   "Vasodilator therapy with a calcium-channel blocker such as nifedipine for severe or recurrent perniosis",
-   "Analgesia and relief of pruritus",
-   "Investigate for and manage underlying connective tissue disease, notably lupus, in persistent, recurrent or atypical cases",
-   "Referral to dermatology or rheumatology for refractory or autoimmune-associated disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chilblains-pathway",
-   "title": "Chilblains (pernio): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An inflammatory cold injury, not a freezing injury, caused by repeated exposure to cold but non-freezing, often damp conditions",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ulceration, necrosis, or secondary infection of lesions",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis based on history of cold, damp exposure and characteristic acral lesions, Autoimmune screen (including antinuclear antibodies) in recurrent, severe, or atypical cases, Cold agglutinins and cryoglobulins"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cold avoidance with gradual rewarming, keeping the affected parts dry and warm using insulation, gloves and warm footwear, is the mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking pernio for frostbite and applying inappropriately aggressive rewarming"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chilblains (pernio)."
-  }
- ],
- "tables": [
-  {
-   "id": "chilblains-matrix",
-   "title": "Chilblains (pernio): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An inflammatory cold injury, not a freezing injury, caused by repeated exposure to cold but non-freezing, often damp conditions",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency & Wilderness Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An inflammatory cold injury, not a freezing injury, caused by repeated exposure to cold but non-freezing, often damp conditions",
+      "Presents with itchy or painful erythematous to violaceous papules, plaques, or nodules on acral sites such as toes, fingers, ears, and nose",
+      "Lesions typically appear hours after cold exposure and may blister or ulcerate in severe cases",
+      "Distinguished from frostbite by the absence of tissue freezing and from Raynaud phenomenon by the fixed inflammatory lesions rather than transient colour change",
+      "Rewarming should be gradual, with keeping the affected part dry and warm and avoiding further cold exposure",
+      "Persistent, recurrent, or atypical pernio may be associated with connective tissue disease (notably lupus) and warrants further evaluation",
+      "Prevention through warm, dry, layered clothing and avoiding damp cold is the mainstay of management"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis based on history of cold, damp exposure and characteristic acral lesions, Autoimmune screen (including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chilblains represent an abnormal inflammatory response to cold, non-freezing exposure. Cold-induced vasoconstriction of dermal vessels, followed by a poorly regulated inflammatory and vascular reaction on rewarming, produces localised tissue oedema, a perivascular inflammatory infiltrate, and the characteristic tender discoloured acral lesions. Unlike frostbite there is no ice crystal formation, so the injury is inflammatory rather than a direct freezing necrosis. A subset of cases reflects an underlying autoimmune or connective tissue disorder that predisposes to the exaggerated vascular response.",
+    "additionalDifferentials": [
+      "Frostbite and frostnip",
+      "Raynaud phenomenon",
+      "Lupus pernio and other connective tissue disease-related vasculopathy",
+      "Trench foot / immersion foot (non-freezing cold injury of prolonged wet exposure)",
+      "Acrocyanosis",
+      "Vasculitis or embolic acral lesions"
     ],
-    [
-     "Primary Differentials",
-     "Frostbite and frostnip, Raynaud phenomenon, Lupus pernio and other connective tissue disease-related vasculopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis based on history of cold, damp exposure and characteristic acral lesions",
+      "Autoimmune screen (including antinuclear antibodies) in recurrent, severe, or atypical cases",
+      "Cold agglutinins and cryoglobulins where an alternative vasculopathy is suspected",
+      "Skin biopsy in diagnostic uncertainty or when connective tissue disease is considered",
+      "Assessment for peripheral vascular disease in older patients"
     ],
-    [
-     "Management Strategy",
-     "Cold avoidance with gradual rewarming, keeping the affected parts dry and warm using insulation, gloves and warm footwear, is the",
-     "Core treatment modality"
+    "redFlags": [
+      "Ulceration, necrosis, or secondary infection of lesions",
+      "Features suggesting underlying connective tissue disease or systemic vasculitis",
+      "Persistent lesions unresponsive to cold avoidance",
+      "Signs of concurrent freezing injury (frostbite) after severe exposure"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking pernio for frostbite and applying inappropriately aggressive rewarming",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute chilblains usually resolve over one to three weeks with cold avoidance and supportive care; chronic or recurrent perniosis can persist through cold seasons and, when linked to autoimmune disease, follows the course of the underlying condition.",
+    "pitfalls": [
+      "Mistaking pernio for frostbite and applying inappropriately aggressive rewarming",
+      "Failing to investigate recurrent or atypical cases for connective tissue disease",
+      "Rubbing or applying direct heat, which can aggravate the inflammatory injury",
+      "Overlooking secondary infection of blistered or ulcerated lesions"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Bove and Davis' Diving Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cold avoidance with gradual rewarming, keeping the affected parts dry and warm using insulation, gloves and warm footwear, is the mainstay",
+      "Smoking cessation to reduce peripheral vasoconstriction",
+      "Topical corticosteroids for symptomatic lesions, with wound care for blistering or ulceration",
+      "Vasodilator therapy with a calcium-channel blocker such as nifedipine for severe or recurrent perniosis",
+      "Analgesia and relief of pruritus",
+      "Investigate for and manage underlying connective tissue disease, notably lupus, in persistent, recurrent or atypical cases",
+      "Referral to dermatology or rheumatology for refractory or autoimmune-associated disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for chilblains (pernio)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chilblains-real-image",
-   "title": "Chilblains (pernio): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "chilblains-pathway",
+      "title": "Chilblains (pernio): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An inflammatory cold injury, not a freezing injury, caused by repeated exposure to cold but non-freezing, often damp conditions",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ulceration, necrosis, or secondary infection of lesions",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis based on history of cold, damp exposure and characteristic acral lesions, Autoimmune screen (including antinuclear antibodies) in recurrent, severe, or atypical cases, Cold agglutinins and cryoglobulins"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cold avoidance with gradual rewarming, keeping the affected parts dry and warm using insulation, gloves and warm footwear, is the mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking pernio for frostbite and applying inappropriately aggressive rewarming"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chilblains (pernio)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chilblains-matrix",
+      "title": "Chilblains (pernio): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An inflammatory cold injury, not a freezing injury, caused by repeated exposure to cold but non-freezing, often damp conditions",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis based on history of cold, damp exposure and characteristic acral lesions, Autoimmune screen (including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Frostbite and frostnip, Raynaud phenomenon, Lupus pernio and other connective tissue disease-related vasculopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cold avoidance with gradual rewarming, keeping the affected parts dry and warm using insulation, gloves and warm footwear, is the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking pernio for frostbite and applying inappropriately aggressive rewarming",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chilblains (pernio)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chilblains-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from cold, damp exposure history",
+          "cells": [
+            {
+              "text": "Characteristic acral lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune screen including antinuclear antibodies",
+          "cells": [
+            {
+              "text": "Recurrent, severe or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold agglutinins and cryoglobulins",
+          "cells": [
+            {
+              "text": "Where an alternative vasculopathy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty or suspected connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral vascular assessment",
+          "cells": [
+            {
+              "text": "Older patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chilblains-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Frostbite",
+          "cells": [
+            {
+              "text": "Tissue freezing; chilblains do not freeze tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raynaud phenomenon",
+          "cells": [
+            {
+              "text": "Transient colour change rather than fixed inflammatory lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chilblains-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cold avoidance and gradual rewarming",
+          "cells": [
+            {
+              "text": "Keep dry and warm with insulation, gloves and warm footwear"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Reduce peripheral vasoconstriction"
+            },
+            {
+              "text": "Vasoconstriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "For symptomatic lesions; wound care for blistering or ulceration"
+            },
+            {
+              "text": "Symptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasodilator therapy",
+          "cells": [
+            {
+              "text": "Calcium-channel blocker such as nifedipine"
+            },
+            {
+              "text": "Severe or recurrent perniosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and pruritus",
+          "cells": [
+            {
+              "text": "Relief of pain and itch"
+            },
+            {
+              "text": "Symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective tissue disease",
+          "cells": [
+            {
+              "text": "Investigate and manage, notably lupus, in persistent or atypical cases"
+            },
+            {
+              "text": "Persistent, recurrent or atypical disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Dermatology or rheumatology"
+            },
+            {
+              "text": "Refractory or autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chilblains-dx-mgmt",
+      "title": "Diagnosis and management of Chilblains (pernio)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chilblains: itchy acral violaceous papules after damp cold exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ulceration, necrosis, infection, connective tissue or vasculitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent assessment for infection, necrosis or systemic vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis from cold exposure history; autoimmune screen if recurrent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Characteristic acral lesions after cold exposure, no alternative vasculopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cold avoidance with gradual rewarming; keep dry and warm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check frostbite, Raynaud phenomenon and lupus pernio",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Smoking cessation to reduce peripheral vasoconstriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids and wound care for blistering or ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nifedipine vasodilator therapy for severe or recurrent perniosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lupus or other connective tissue disease managed in persistent or atypical cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

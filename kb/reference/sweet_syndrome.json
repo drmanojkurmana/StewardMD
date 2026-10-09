@@ -1,174 +1,461 @@
 {
- "id": "sweet_syndrome",
- "name": "Sweet syndrome (acute febrile neutrophilic dermatosis)",
- "aliases": [
-  "acute febrile neutrophilic dermatosis",
-  "Sweet's syndrome",
-  "neutrophilic dermatosis"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with the abrupt onset of tender, red-to-violaceous plaques and nodules, often with fever and a raised neutrophil count",
-   "Lesions typically favour the face, neck, and upper limbs and may look oedematous or pseudovesicular ('juicy' plaques)",
-   "Histology shows a dense dermal infiltrate of neutrophils without evidence of true vasculitis",
-   "Recognised subtypes are classic or idiopathic (often post-infectious or associated with inflammatory bowel disease and pregnancy), malignancy-associated (notably acute myeloid leukaemia), and drug-induced",
-   "Drug-induced disease is classically linked to granulocyte colony-stimulating factor and several other medications",
-   "Pathergy may occur, with new lesions arising at sites of trauma, and extracutaneous neutrophilic involvement of eyes, joints, lungs, and other organs can accompany the skin disease",
-   "Responds briskly to systemic glucocorticoids, with steroid-sparing agents used for recurrent or refractory disease and treatment of any underlying trigger"
+  "id": "sweet_syndrome",
+  "name": "Sweet syndrome (acute febrile neutrophilic dermatosis)",
+  "aliases": [
+    "acute febrile neutrophilic dermatosis",
+    "Sweet's syndrome",
+    "neutrophilic dermatosis"
   ],
-  "pathophysiology": "Sweet syndrome is a reactive neutrophilic dermatosis in which activated neutrophils accumulate in the dermis, producing tender inflammatory plaques, fever, and systemic inflammation. It is thought to reflect a hypersensitivity-type response driven by cytokines and colony-stimulating factors that recruit and activate neutrophils, rather than by infection or primary vasculitis. Triggers include preceding infections, inflammatory and autoimmune diseases, pregnancy, certain drugs, and, importantly, underlying malignancy, most often myeloid haematological disorders, where the syndrome can be paraneoplastic. Dysregulated innate immune activation and possible clonal myeloid contributions underlie the neutrophil-rich inflammation.",
-  "additionalDifferentials": [
-   "Erythema nodosum and other panniculitides",
-   "Cutaneous leukocytoclastic vasculitis",
-   "Pyoderma gangrenosum (another neutrophilic dermatosis)",
-   "Cellulitis or other skin infection",
-   "Bullous or atypical erythema multiforme",
-   "Leukaemia cutis",
-   "Behcet disease with cutaneous lesions"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing dense dermal neutrophilic infiltrate without vasculitis",
-   "Full blood count with differential for neutrophilia and to screen for haematological disease",
-   "Inflammatory markers such as ESR and CRP",
-   "Blood film and, where indicated, haematology referral to exclude myeloid malignancy",
-   "Review of recent medications, especially colony-stimulating factors",
-   "Investigations for associated infection, inflammatory bowel disease, or other trigger as guided by history"
-  ],
-  "redFlags": [
-   "Features suggesting underlying acute myeloid leukaemia or myelodysplasia such as cytopenias or abnormal blood film",
-   "Systemic neutrophilic involvement of lungs, eyes, or central nervous system",
-   "Recurrent or treatment-resistant disease prompting a search for occult malignancy",
-   "Severe systemic upset with high fever mimicking sepsis"
-  ],
-  "prognosis": "Classic and drug-induced disease usually responds rapidly to glucocorticoids and often resolves, though recurrences occur; malignancy-associated disease tends to follow the course of the underlying cancer and may relapse with disease activity.",
-  "pitfalls": [
-   "Misdiagnosing tender plaques as cellulitis and treating with antibiotics alone",
-   "Failing to investigate for an underlying haematological malignancy, particularly in recurrent or atypical cases",
-   "Overlooking a recent drug, such as a colony-stimulating factor, as the cause",
-   "Not recognising extracutaneous neutrophilic organ involvement"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Systemic corticosteroids are the mainstay and typically produce rapid resolution of skin lesions and systemic inflammation",
-   "Identify and remove or treat the trigger, withdrawing a culprit drug such as granulocyte colony-stimulating factor and treating associated infection or inflammatory bowel disease",
-   "Use steroid-sparing agents such as colchicine, dapsone or potassium iodide for recurrent, refractory or steroid-intolerant disease",
-   "Treat localised disease with potent topical or intralesional corticosteroids",
-   "Investigate for and manage an underlying malignancy, particularly acute myeloid leukaemia, since paraneoplastic disease tracks the cancer",
-   "Monitor for recurrence during corticosteroid tapering and with reactivation of any associated disease",
-   "Involve dermatology and, where malignancy is suspected, haematology in ongoing care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sweet_syndrome-pathway",
-   "title": "Sweet syndrome (acute febrile neutrophilic dermatosis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with the abrupt onset of tender, red-to-violaceous plaques and nodules, often with fever and a raised neutrophil count",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting underlying acute myeloid leukaemia or myelodysplasia such as cytopenias or abnormal blood film",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing dense dermal neutrophilic infiltrate without vasculitis, Full blood count with differential for neutrophilia and to screen for haematological disease, Inflammatory markers such as ESR and CRP"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Systemic corticosteroids are the mainstay and typically produce rapid resolution of skin lesions and systemic inflammation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing tender plaques as cellulitis and treating with antibiotics alone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sweet syndrome (acute febrile neutrophilic dermatosis)."
-  }
- ],
- "tables": [
-  {
-   "id": "sweet_syndrome-matrix",
-   "title": "Sweet syndrome (acute febrile neutrophilic dermatosis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with the abrupt onset of tender, red-to-violaceous plaques and nodules, often with fever and a raised neutrophil count",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with the abrupt onset of tender, red-to-violaceous plaques and nodules, often with fever and a raised neutrophil count",
+      "Lesions typically favour the face, neck, and upper limbs and may look oedematous or pseudovesicular ('juicy' plaques)",
+      "Histology shows a dense dermal infiltrate of neutrophils without evidence of true vasculitis",
+      "Recognised subtypes are classic or idiopathic (often post-infectious or associated with inflammatory bowel disease and pregnancy), malignancy-associated (notably acute myeloid leukaemia), and drug-induced",
+      "Drug-induced disease is classically linked to granulocyte colony-stimulating factor and several other medications",
+      "Pathergy may occur, with new lesions arising at sites of trauma, and extracutaneous neutrophilic involvement of eyes, joints, lungs, and other organs can accompany the skin disease",
+      "Responds briskly to systemic glucocorticoids, with steroid-sparing agents used for recurrent or refractory disease and treatment of any underlying trigger"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing dense dermal neutrophilic infiltrate without vasculitis, Full blood count with differential for neutrophilia",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sweet syndrome is a reactive neutrophilic dermatosis in which activated neutrophils accumulate in the dermis, producing tender inflammatory plaques, fever, and systemic inflammation. It is thought to reflect a hypersensitivity-type response driven by cytokines and colony-stimulating factors that recruit and activate neutrophils, rather than by infection or primary vasculitis. Triggers include preceding infections, inflammatory and autoimmune diseases, pregnancy, certain drugs, and, importantly, underlying malignancy, most often myeloid haematological disorders, where the syndrome can be paraneoplastic. Dysregulated innate immune activation and possible clonal myeloid contributions underlie the neutrophil-rich inflammation.",
+    "additionalDifferentials": [
+      "Erythema nodosum and other panniculitides",
+      "Cutaneous leukocytoclastic vasculitis",
+      "Pyoderma gangrenosum (another neutrophilic dermatosis)",
+      "Cellulitis or other skin infection",
+      "Bullous or atypical erythema multiforme",
+      "Leukaemia cutis",
+      "Behcet disease with cutaneous lesions"
     ],
-    [
-     "Primary Differentials",
-     "Erythema nodosum and other panniculitides, Cutaneous leukocytoclastic vasculitis, Pyoderma gangrenosum (another neutrophilic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing dense dermal neutrophilic infiltrate without vasculitis",
+      "Full blood count with differential for neutrophilia and to screen for haematological disease",
+      "Inflammatory markers such as ESR and CRP",
+      "Blood film and, where indicated, haematology referral to exclude myeloid malignancy",
+      "Review of recent medications, especially colony-stimulating factors",
+      "Investigations for associated infection, inflammatory bowel disease, or other trigger as guided by history"
     ],
-    [
-     "Management Strategy",
-     "Systemic corticosteroids are the mainstay and typically produce rapid resolution of skin lesions and systemic inflammation",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting underlying acute myeloid leukaemia or myelodysplasia such as cytopenias or abnormal blood film",
+      "Systemic neutrophilic involvement of lungs, eyes, or central nervous system",
+      "Recurrent or treatment-resistant disease prompting a search for occult malignancy",
+      "Severe systemic upset with high fever mimicking sepsis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing tender plaques as cellulitis and treating with antibiotics alone",
-     "Prevent diagnostic or management error"
+    "prognosis": "Classic and drug-induced disease usually responds rapidly to glucocorticoids and often resolves, though recurrences occur; malignancy-associated disease tends to follow the course of the underlying cancer and may relapse with disease activity.",
+    "pitfalls": [
+      "Misdiagnosing tender plaques as cellulitis and treating with antibiotics alone",
+      "Failing to investigate for an underlying haematological malignancy, particularly in recurrent or atypical cases",
+      "Overlooking a recent drug, such as a colony-stimulating factor, as the cause",
+      "Not recognising extracutaneous neutrophilic organ involvement"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Systemic corticosteroids are the mainstay and typically produce rapid resolution of skin lesions and systemic inflammation",
+      "Identify and remove or treat the trigger, withdrawing a culprit drug such as granulocyte colony-stimulating factor and treating associated infection or inflammatory bowel disease",
+      "Use steroid-sparing agents such as colchicine, dapsone or potassium iodide for recurrent, refractory or steroid-intolerant disease",
+      "Treat localised disease with potent topical or intralesional corticosteroids",
+      "Investigate for and manage an underlying malignancy, particularly acute myeloid leukaemia, since paraneoplastic disease tracks the cancer",
+      "Monitor for recurrence during corticosteroid tapering and with reactivation of any associated disease",
+      "Involve dermatology and, where malignancy is suspected, haematology in ongoing care"
     ]
-   ],
-   "caption": "Overview comparison matrix for sweet syndrome (acute febrile neutrophilic dermatosis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sweet-syndrome-real-image",
-   "title": "Sweet syndrome (acute febrile neutrophilic dermatosis): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "sweet_syndrome-pathway",
+      "title": "Sweet syndrome (acute febrile neutrophilic dermatosis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with the abrupt onset of tender, red-to-violaceous plaques and nodules, often with fever and a raised neutrophil count",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting underlying acute myeloid leukaemia or myelodysplasia such as cytopenias or abnormal blood film",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing dense dermal neutrophilic infiltrate without vasculitis, Full blood count with differential for neutrophilia and to screen for haematological disease, Inflammatory markers such as ESR and CRP"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Systemic corticosteroids are the mainstay and typically produce rapid resolution of skin lesions and systemic inflammation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing tender plaques as cellulitis and treating with antibiotics alone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sweet syndrome (acute febrile neutrophilic dermatosis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sweet_syndrome-matrix",
+      "title": "Sweet syndrome (acute febrile neutrophilic dermatosis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with the abrupt onset of tender, red-to-violaceous plaques and nodules, often with fever and a raised neutrophil count",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing dense dermal neutrophilic infiltrate without vasculitis, Full blood count with differential for neutrophilia",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Erythema nodosum and other panniculitides, Cutaneous leukocytoclastic vasculitis, Pyoderma gangrenosum (another neutrophilic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Systemic corticosteroids are the mainstay and typically produce rapid resolution of skin lesions and systemic inflammation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing tender plaques as cellulitis and treating with antibiotics alone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sweet syndrome (acute febrile neutrophilic dermatosis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sweet_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sweet syndrome (acute febrile neutrophilic dermatosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Sweet syndrome: tender red-violaceous plaques with fever and neutrophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cytopenias, abnormal blood film, or organ involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for suspected myeloid malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy; full blood count with differential; blood film; ESR and CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a dense neutrophilic infiltrate without vasculitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider erythema nodosum, pyoderma gangrenosum, cellulitis or vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids, the mainstay, for rapid resolution",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw a culprit drug such as G-CSF; treat infection or IBD",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Colchicine, dapsone or potassium iodide for recurrent or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate for acute myeloid leukaemia, which the skin disease can track",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Classic and drug-induced disease usually resolves with steroids; recurrence occurs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sweet_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dense dermal neutrophilic infiltrate without vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Neutrophilia; screens for haematological disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Systemic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film and haematology referral",
+          "cells": [
+            {
+              "text": "Myeloid malignancy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Recent colony-stimulating factors such as G-CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and inflammatory bowel disease screen",
+          "cells": [
+            {
+              "text": "Trigger, as guided by history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sweet_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Tender plaques are often misdiagnosed as cellulitis and treated with antibiotics alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous leukocytoclastic vasculitis",
+          "cells": [
+            {
+              "text": "Biopsy shows neutrophils without true vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemia cutis",
+          "cells": [
+            {
+              "text": "Acute myeloid leukaemia is the malignancy linked to Sweet syndrome; blood film and haematology exclude it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sweet_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay; rapid resolution of skin lesions and systemic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove or treat the trigger",
+          "cells": [
+            {
+              "text": "Withdraw a culprit drug such as G-CSF; treat associated infection or inflammatory bowel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Colchicine, dapsone or potassium iodide for recurrent, refractory or steroid-intolerant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "Localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy evaluation",
+          "cells": [
+            {
+              "text": "Particularly acute myeloid leukaemia; paraneoplastic disease tracks the cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence monitoring",
+          "cells": [
+            {
+              "text": "During corticosteroid tapering and reactivation of associated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

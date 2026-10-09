@@ -1,173 +1,462 @@
 {
- "id": "hyperphosphatasia_intellectual_disability_syndrome",
- "name": "Hyperphosphatasia with intellectual disability (Mabry, PIGV/GPI-anchor)",
- "aliases": [
-  "Mabry syndrome",
-  "HPMRS",
-  "hyperphosphatasia with mental retardation syndrome",
-  "GPI-anchor deficiency (PIGV)"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nyhan's Atlas of Inherited Metabolic Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital disorder of glycosylphosphatidylinositol (GPI) anchor biosynthesis, most often from PIGV mutations, with other PIG/PGAP genes implicated",
-   "Cardinal features are persistently raised serum alkaline phosphatase (hyperphosphatasia), intellectual disability, and seizures",
-   "The paradoxical hyperphosphatasia arises because alkaline phosphatase, a GPI-anchored enzyme, is shed into the circulation when its anchor is defective",
-   "Additional features include distinctive facial dysmorphism, brachytelephalangy (short distal phalanges with hypoplastic nails), and variable neurological impairment",
-   "Some patients have Hirschsprung disease, anorectal or other structural anomalies as part of the phenotypic spectrum",
-   "The persistently elevated alkaline phosphatase is the biochemical clue that prompts consideration of a GPI-anchor defect rather than bone or liver disease",
-   "Management is supportive and multidisciplinary, targeting seizures, developmental support, and associated anomalies, as no specific corrective therapy exists"
+  "id": "hyperphosphatasia_intellectual_disability_syndrome",
+  "name": "Hyperphosphatasia with intellectual disability (Mabry, PIGV/GPI-anchor)",
+  "aliases": [
+    "Mabry syndrome",
+    "HPMRS",
+    "hyperphosphatasia with mental retardation syndrome",
+    "GPI-anchor deficiency (PIGV)"
   ],
-  "pathophysiology": "The GPI anchor tethers numerous proteins to the outer cell membrane. PIGV and related genes encode enzymes in the GPI biosynthetic pathway; loss-of-function mutations impair anchor assembly, so GPI-anchored proteins are either misprocessed or released rather than retained at the cell surface. Alkaline phosphatase is a GPI-anchored ectoenzyme, so a defective anchor causes it to be secreted into plasma, producing the characteristic hyperphosphatasia. Disruption of other GPI-anchored proteins essential for neuronal function underlies the intellectual disability and seizures, while developmental roles of affected proteins explain the dysmorphism, digital anomalies, and structural malformations. The disorder therefore links a striking laboratory finding to a neurodevelopmental syndrome through a shared membrane-anchoring defect.",
-  "additionalDifferentials": [
-   "Other congenital disorders of glycosylation",
-   "Transient benign hyperphosphatasaemia of infancy",
-   "Metabolic or hepatic causes of raised alkaline phosphatase",
-   "Other syndromic intellectual disability with seizures",
-   "Skeletal dysplasia with elevated alkaline phosphatase",
-   "Coffin-Siris and other brachydactyly-dysmorphism syndromes"
-  ],
-  "additionalInvestigations": [
-   "Serum alkaline phosphatase, persistently and unexplainedly elevated",
-   "Flow cytometry for GPI-anchored surface proteins on blood cells where available",
-   "Developmental and neurological assessment with EEG for seizures",
-   "Brain imaging for structural abnormalities",
-   "Evaluation for Hirschsprung disease and anorectal or other structural anomalies when suggested",
-   "Molecular testing of PIGV and other GPI-anchor pathway genes"
-  ],
-  "redFlags": [
-   "Poorly controlled or evolving epilepsy",
-   "Feeding difficulty or bowel obstruction suggesting Hirschsprung disease",
-   "Significant developmental regression",
-   "Structural cardiac or renal anomalies requiring intervention"
-  ],
-  "prognosis": "Prognosis is determined by the severity of neurological impairment and associated malformations; many affected individuals have lifelong intellectual disability and epilepsy, and management remains supportive since no disease-modifying therapy is established.",
-  "pitfalls": [
-   "Chasing bone or liver disease to explain the raised alkaline phosphatase and missing the GPI-anchor defect",
-   "Overlooking the diagnostic significance of persistent hyperphosphatasia in a child with developmental delay and seizures",
-   "Missing associated Hirschsprung disease or anorectal anomalies",
-   "Assuming the elevated alkaline phosphatase reflects increased bone turnover requiring treatment"
-  ],
-  "references": [
-   "GeneReviews",
-   "Nyhan's Atlas of Inherited Metabolic Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anticonvulsant therapy for seizures, with a trial of pyridoxine given reported responsiveness in some GPI-anchor defects",
-   "Early developmental intervention, special educational support and physiotherapy for intellectual disability and neurological impairment",
-   "Surgical management of Hirschsprung disease and anorectal or other structural anomalies where present",
-   "Assessment and management of associated malformations including brain imaging and evaluation of the digital and skeletal features",
-   "Multidisciplinary care coordinated across paediatric neurology, clinical genetics, surgery and developmental services",
-   "Genetic counselling for autosomal recessive inheritance with family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hyperphosphatasia_intellectual_disability_syndrome-pathway",
-   "title": "Hyperphosphatasia with intellectual disability (Mabry, PIGV/GPI-anchor): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital disorder of glycosylphosphatidylinositol (GPI) anchor biosynthesis, most often from PIGV mutations, with other PIG/PGAP genes implicated",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Poorly controlled or evolving epilepsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum alkaline phosphatase, persistently and unexplainedly elevated, Flow cytometry for GPI-anchored surface proteins on blood cells where available, Developmental and neurological assessment with EEG for seizures"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anticonvulsant therapy for seizures, with a trial of pyridoxine given reported responsiveness in some GPI-anchor defects"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Chasing bone or liver disease to explain the raised alkaline phosphatase and missing the GPI-anchor defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hyperphosphatasia with intellectual disability (mabry, pigv/gpi-anchor)."
-  }
- ],
- "tables": [
-  {
-   "id": "hyperphosphatasia_intellectual_disability_syndrome-matrix",
-   "title": "Hyperphosphatasia with intellectual disability (Mabry, PIGV/GPI-anchor): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital disorder of glycosylphosphatidylinositol (GPI) anchor biosynthesis, most often from PIGV mutations, with other",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nyhan's Atlas of Inherited Metabolic Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital disorder of glycosylphosphatidylinositol (GPI) anchor biosynthesis, most often from PIGV mutations, with other PIG/PGAP genes implicated",
+      "Cardinal features are persistently raised serum alkaline phosphatase (hyperphosphatasia), intellectual disability, and seizures",
+      "The paradoxical hyperphosphatasia arises because alkaline phosphatase, a GPI-anchored enzyme, is shed into the circulation when its anchor is defective",
+      "Additional features include distinctive facial dysmorphism, brachytelephalangy (short distal phalanges with hypoplastic nails), and variable neurological impairment",
+      "Some patients have Hirschsprung disease, anorectal or other structural anomalies as part of the phenotypic spectrum",
+      "The persistently elevated alkaline phosphatase is the biochemical clue that prompts consideration of a GPI-anchor defect rather than bone or liver disease",
+      "Management is supportive and multidisciplinary, targeting seizures, developmental support, and associated anomalies, as no specific corrective therapy exists"
     ],
-    [
-     "Key Investigations",
-     "Serum alkaline phosphatase, persistently and unexplainedly elevated, Flow cytometry for GPI-anchored surface proteins on blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The GPI anchor tethers numerous proteins to the outer cell membrane. PIGV and related genes encode enzymes in the GPI biosynthetic pathway; loss-of-function mutations impair anchor assembly, so GPI-anchored proteins are either misprocessed or released rather than retained at the cell surface. Alkaline phosphatase is a GPI-anchored ectoenzyme, so a defective anchor causes it to be secreted into plasma, producing the characteristic hyperphosphatasia. Disruption of other GPI-anchored proteins essential for neuronal function underlies the intellectual disability and seizures, while developmental roles of affected proteins explain the dysmorphism, digital anomalies, and structural malformations. The disorder therefore links a striking laboratory finding to a neurodevelopmental syndrome through a shared membrane-anchoring defect.",
+    "additionalDifferentials": [
+      "Other congenital disorders of glycosylation",
+      "Transient benign hyperphosphatasaemia of infancy",
+      "Metabolic or hepatic causes of raised alkaline phosphatase",
+      "Other syndromic intellectual disability with seizures",
+      "Skeletal dysplasia with elevated alkaline phosphatase",
+      "Coffin-Siris and other brachydactyly-dysmorphism syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Other congenital disorders of glycosylation, Transient benign hyperphosphatasaemia of infancy, Metabolic or hepatic causes of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum alkaline phosphatase, persistently and unexplainedly elevated",
+      "Flow cytometry for GPI-anchored surface proteins on blood cells where available",
+      "Developmental and neurological assessment with EEG for seizures",
+      "Brain imaging for structural abnormalities",
+      "Evaluation for Hirschsprung disease and anorectal or other structural anomalies when suggested",
+      "Molecular testing of PIGV and other GPI-anchor pathway genes"
     ],
-    [
-     "Management Strategy",
-     "Anticonvulsant therapy for seizures, with a trial of pyridoxine given reported responsiveness in some GPI-anchor defects",
-     "Core treatment modality"
+    "redFlags": [
+      "Poorly controlled or evolving epilepsy",
+      "Feeding difficulty or bowel obstruction suggesting Hirschsprung disease",
+      "Significant developmental regression",
+      "Structural cardiac or renal anomalies requiring intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Chasing bone or liver disease to explain the raised alkaline phosphatase and missing the GPI-anchor defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is determined by the severity of neurological impairment and associated malformations; many affected individuals have lifelong intellectual disability and epilepsy, and management remains supportive since no disease-modifying therapy is established.",
+    "pitfalls": [
+      "Chasing bone or liver disease to explain the raised alkaline phosphatase and missing the GPI-anchor defect",
+      "Overlooking the diagnostic significance of persistent hyperphosphatasia in a child with developmental delay and seizures",
+      "Missing associated Hirschsprung disease or anorectal anomalies",
+      "Assuming the elevated alkaline phosphatase reflects increased bone turnover requiring treatment"
+    ],
+    "references": [
+      "GeneReviews",
+      "Nyhan's Atlas of Inherited Metabolic Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anticonvulsant therapy for seizures, with a trial of pyridoxine given reported responsiveness in some GPI-anchor defects",
+      "Early developmental intervention, special educational support and physiotherapy for intellectual disability and neurological impairment",
+      "Surgical management of Hirschsprung disease and anorectal or other structural anomalies where present",
+      "Assessment and management of associated malformations including brain imaging and evaluation of the digital and skeletal features",
+      "Multidisciplinary care coordinated across paediatric neurology, clinical genetics, surgery and developmental services",
+      "Genetic counselling for autosomal recessive inheritance with family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for hyperphosphatasia with intellectual disability (mabry, pigv/gpi-anchor)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hyperphosphatasia-intellectual-disability-syndrome-real-image",
-   "title": "Hyperphosphatasia with intellectual disability (Mabry, PIGV/GPI-anchor): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-pathway",
+      "title": "Hyperphosphatasia with intellectual disability (Mabry, PIGV/GPI-anchor): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital disorder of glycosylphosphatidylinositol (GPI) anchor biosynthesis, most often from PIGV mutations, with other PIG/PGAP genes implicated",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Poorly controlled or evolving epilepsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum alkaline phosphatase, persistently and unexplainedly elevated, Flow cytometry for GPI-anchored surface proteins on blood cells where available, Developmental and neurological assessment with EEG for seizures"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anticonvulsant therapy for seizures, with a trial of pyridoxine given reported responsiveness in some GPI-anchor defects"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Chasing bone or liver disease to explain the raised alkaline phosphatase and missing the GPI-anchor defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hyperphosphatasia with intellectual disability (mabry, pigv/gpi-anchor)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-matrix",
+      "title": "Hyperphosphatasia with intellectual disability (Mabry, PIGV/GPI-anchor): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital disorder of glycosylphosphatidylinositol (GPI) anchor biosynthesis, most often from PIGV mutations, with other",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum alkaline phosphatase, persistently and unexplainedly elevated, Flow cytometry for GPI-anchored surface proteins on blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other congenital disorders of glycosylation, Transient benign hyperphosphatasaemia of infancy, Metabolic or hepatic causes of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anticonvulsant therapy for seizures, with a trial of pyridoxine given reported responsiveness in some GPI-anchor defects",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Chasing bone or liver disease to explain the raised alkaline phosphatase and missing the GPI-anchor defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hyperphosphatasia with intellectual disability (mabry, pigv/gpi-anchor)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nyhan's Atlas of Inherited Metabolic Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial serum alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Persistently and unexplainedly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry of GPI-anchored surface proteins",
+          "cells": [
+            {
+              "text": "Expression on blood cells, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging",
+          "cells": [
+            {
+              "text": "Structural abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirschsprung or anorectal evaluation",
+          "cells": [
+            {
+              "text": "Hirschsprung disease or anorectal anomalies when suggested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIGV and GPI-anchor pathway gene testing",
+          "cells": [
+            {
+              "text": "Confirms a GPI-anchor pathway variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bone or liver source of raised alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Raised ALP from shedding of a GPI-anchored enzyme when the anchor is defective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Increased bone turnover",
+          "cells": [
+            {
+              "text": "Not the explanation for the raised ALP; treatment is not needed for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "For seizures, with a trial of pyridoxine given reported responsiveness in some GPI-anchor defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental intervention",
+          "cells": [
+            {
+              "text": "Early developmental intervention, educational support and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Hirschsprung disease and anorectal or other structural anomalies where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malformation assessment",
+          "cells": [
+            {
+              "text": "Brain imaging and evaluation of digital and skeletal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric neurology, clinical genetics, surgery and developmental services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance with family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperphosphatasia_intellectual_disability_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Hyperphosphatasia with intellectual disability (Mabry, PIGV/GPI-anchor)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent raised serum ALP with intellectual disability and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Poorly controlled epilepsy, regression, or feeding difficulty with obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology and surgical review; assess for Hirschsprung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial ALP, flow cytometry, EEG, brain imaging and PIGV sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "GPI-anchor pathway variant, such as PIGV, identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other glycosylation disorders or transient hyperphosphatasaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anticonvulsants; trial of pyridoxine for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early developmental intervention, physiotherapy and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgery for Hirschsprung disease or anorectal anomalies if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Coordinated care across neurology, genetics, surgery and development",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome set by seizure control and developmental support; family counselled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

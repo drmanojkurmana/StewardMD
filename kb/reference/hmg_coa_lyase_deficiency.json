@@ -1,179 +1,493 @@
 {
- "id": "hmg_coa_lyase_deficiency",
- "name": "HMG-CoA lyase deficiency",
- "aliases": [
-  "3-hydroxy-3-methylglutaryl-CoA lyase deficiency",
-  "HMGCL deficiency",
-  "3-hydroxy-3-methylglutaric aciduria",
-  "HL deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defect in the final step of leucine catabolism and of ketogenesis, caused by biallelic HMGCL variants",
-   "Presents with acute episodes of hypoketotic hypoglycaemia and metabolic acidosis, often triggered by fasting or intercurrent illness",
-   "Hyperammonaemia and hepatomegaly frequently accompany crises, mimicking Reye syndrome",
-   "Because ketone body synthesis is blocked, hypoglycaemia occurs without appropriate ketosis (hypoketotic)",
-   "Urine organic acids show elevated 3-hydroxy-3-methylglutarate, 3-methylglutaconate, 3-methylglutarate and 3-hydroxyisovalerate",
-   "Diagnosis is supported by acylcarnitine profile (raised 3-methylglutaryl/3-hydroxyisovaleryl species) and confirmed by enzyme assay or HMGCL sequencing",
-   "Acute management is aggressive intravenous glucose to halt catabolism, with ammonia scavengers and correction of acidosis as needed",
-   "Long-term care combines avoidance of fasting, moderate protein/leucine restriction and carnitine supplementation"
+  "id": "hmg_coa_lyase_deficiency",
+  "name": "HMG-CoA lyase deficiency",
+  "aliases": [
+    "3-hydroxy-3-methylglutaryl-CoA lyase deficiency",
+    "HMGCL deficiency",
+    "3-hydroxy-3-methylglutaric aciduria",
+    "HL deficiency"
   ],
-  "pathophysiology": "HMG-CoA lyase catalyses the final step of leucine degradation and the terminal reaction of hepatic ketogenesis, cleaving 3-hydroxy-3-methylglutaryl-CoA into acetoacetate and acetyl-CoA. Deficiency blocks both pathways, so during fasting or catabolic stress the liver cannot generate ketone bodies to provide alternative fuel, producing hypoketotic hypoglycaemia once glycogen stores are exhausted. Simultaneously, leucine-derived intermediates and organic acids accumulate, causing a high anion gap metabolic acidosis, and secondary inhibition of the urea cycle contributes to hyperammonaemia. The accumulating organic acids and energy failure injure the brain and liver, accounting for the encephalopathic, Reye-like crises. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Other organic acidaemias (isovaleric, methylmalonic, propionic)",
-   "Fatty acid oxidation disorders (e.g. MCAD deficiency) with hypoketotic hypoglycaemia",
-   "3-methylglutaconic aciduria of other types",
-   "Reye syndrome and Reye-like presentations",
-   "Urea cycle disorders presenting with hyperammonaemia",
-   "Ketogenesis defects such as HMG-CoA synthase deficiency"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acid analysis for the characteristic 3-hydroxy-3-methylglutarate and related acids",
-   "Plasma acylcarnitine profile by tandem mass spectrometry",
-   "Blood glucose, blood gas and ketone (beta-hydroxybutyrate) measurement during crises",
-   "Plasma ammonia and lactate",
-   "HMGCL gene sequencing or enzyme assay in fibroblasts/leukocytes",
-   "Liver function tests and transaminases",
-   "Brain imaging if encephalopathic, to assess white-matter changes"
-  ],
-  "redFlags": [
-   "Hypoketotic hypoglycaemia with encephalopathy and coma",
-   "Significant hyperammonaemia during an acute crisis",
-   "Severe high anion gap metabolic acidosis",
-   "Reye-like hepatic dysfunction with rising transaminases",
-   "Rapid neurological deterioration during intercurrent illness or fasting"
-  ],
-  "prognosis": "With early diagnosis, avoidance of fasting and prompt treatment of crises, many patients do well, but severe or delayed decompensations can cause permanent neurological injury or death, and outcome depends heavily on preventing metabolic crises.",
-  "pitfalls": [
-   "Expecting ketosis to accompany hypoglycaemia and being falsely reassured by its absence",
-   "Misdiagnosing an acute crisis as Reye syndrome and missing the metabolic cause",
-   "Delaying intravenous glucose while awaiting confirmatory results",
-   "Overlooking hyperammonaemia as a treatable contributor to encephalopathy",
-   "Allowing prolonged fasting for procedures or illness without a metabolic emergency plan"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics",
-   "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prevent metabolic crises by avoiding fasting: frequent carbohydrate-based feeds, uncooked cornstarch for overnight cover, and a written emergency (sick-day) regimen with increased carbohydrate intake and early hospital presentation during intercurrent illness.",
-   "Institute a protein- and leucine-restricted diet supervised by a metabolic dietitian, supplemented with L-carnitine to replenish free carnitine and aid excretion of accumulated organic acids.",
-   "Treat acute decompensation with intravenous dextrose to reverse hypoketotic hypoglycaemia and suppress catabolism, alongside correction of the high-anion-gap metabolic acidosis.",
-   "Manage crisis hyperammonaemia with protein withdrawal, generous glucose-based energy and nitrogen-scavenging agents, escalating to haemofiltration or dialysis if ammonia fails to fall or encephalopathy worsens.",
-   "Provide interval surveillance with serial urine organic acids and plasma acylcarnitine profile, plus monitoring of growth, liver function and neurodevelopment.",
-   "Equip the family with an emergency alert card and clear escalation instructions to present promptly to a specialist metabolic centre, and coordinate care through a multidisciplinary metabolic team.",
-   "Offer genetic counselling for this autosomal recessive HMGCL disorder, including carrier testing of relatives and discussion of prenatal and newborn-screening options."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hmg_coa_lyase_deficiency-pathway",
-   "title": "HMG-CoA lyase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defect in the final step of leucine catabolism and of ketogenesis, caused by biallelic HMGCL variants",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypoketotic hypoglycaemia with encephalopathy and coma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acid analysis for the characteristic 3-hydroxy-3-methylglutarate and related acids, Plasma acylcarnitine profile by tandem mass spectrometry, Blood glucose, blood gas and ketone (beta-hydroxybutyrate)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevent metabolic crises by avoiding fasting: frequent carbohydrate-based feeds, uncooked cornstarch for overnight cover, and a written emergency (sick-day) regimen with increased carbohydrate intake and early hospital"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting ketosis to accompany hypoglycaemia and being falsely reassured by its absence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hmg-coa lyase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "hmg_coa_lyase_deficiency-matrix",
-   "title": "HMG-CoA lyase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defect in the final step of leucine catabolism and of ketogenesis, caused by biallelic HMGCL variants",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defect in the final step of leucine catabolism and of ketogenesis, caused by biallelic HMGCL variants",
+      "Presents with acute episodes of hypoketotic hypoglycaemia and metabolic acidosis, often triggered by fasting or intercurrent illness",
+      "Hyperammonaemia and hepatomegaly frequently accompany crises, mimicking Reye syndrome",
+      "Because ketone body synthesis is blocked, hypoglycaemia occurs without appropriate ketosis (hypoketotic)",
+      "Urine organic acids show elevated 3-hydroxy-3-methylglutarate, 3-methylglutaconate, 3-methylglutarate and 3-hydroxyisovalerate",
+      "Diagnosis is supported by acylcarnitine profile (raised 3-methylglutaryl/3-hydroxyisovaleryl species) and confirmed by enzyme assay or HMGCL sequencing",
+      "Acute management is aggressive intravenous glucose to halt catabolism, with ammonia scavengers and correction of acidosis as needed",
+      "Long-term care combines avoidance of fasting, moderate protein/leucine restriction and carnitine supplementation"
     ],
-    [
-     "Key Investigations",
-     "Urine organic acid analysis for the characteristic 3-hydroxy-3-methylglutarate and related acids, Plasma acylcarnitine profile by",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "HMG-CoA lyase catalyses the final step of leucine degradation and the terminal reaction of hepatic ketogenesis, cleaving 3-hydroxy-3-methylglutaryl-CoA into acetoacetate and acetyl-CoA. Deficiency blocks both pathways, so during fasting or catabolic stress the liver cannot generate ketone bodies to provide alternative fuel, producing hypoketotic hypoglycaemia once glycogen stores are exhausted. Simultaneously, leucine-derived intermediates and organic acids accumulate, causing a high anion gap metabolic acidosis, and secondary inhibition of the urea cycle contributes to hyperammonaemia. The accumulating organic acids and energy failure injure the brain and liver, accounting for the encephalopathic, Reye-like crises. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Other organic acidaemias (isovaleric, methylmalonic, propionic)",
+      "Fatty acid oxidation disorders (e.g. MCAD deficiency) with hypoketotic hypoglycaemia",
+      "3-methylglutaconic aciduria of other types",
+      "Reye syndrome and Reye-like presentations",
+      "Urea cycle disorders presenting with hyperammonaemia",
+      "Ketogenesis defects such as HMG-CoA synthase deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Other organic acidaemias (isovaleric, methylmalonic, propionic), Fatty acid oxidation disorders (e.g. MCAD deficiency) with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acid analysis for the characteristic 3-hydroxy-3-methylglutarate and related acids",
+      "Plasma acylcarnitine profile by tandem mass spectrometry",
+      "Blood glucose, blood gas and ketone (beta-hydroxybutyrate) measurement during crises",
+      "Plasma ammonia and lactate",
+      "HMGCL gene sequencing or enzyme assay in fibroblasts/leukocytes",
+      "Liver function tests and transaminases",
+      "Brain imaging if encephalopathic, to assess white-matter changes"
     ],
-    [
-     "Management Strategy",
-     "Prevent metabolic crises by avoiding fasting: frequent carbohydrate-based feeds, uncooked cornstarch for overnight cover, and a",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypoketotic hypoglycaemia with encephalopathy and coma",
+      "Significant hyperammonaemia during an acute crisis",
+      "Severe high anion gap metabolic acidosis",
+      "Reye-like hepatic dysfunction with rising transaminases",
+      "Rapid neurological deterioration during intercurrent illness or fasting"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting ketosis to accompany hypoglycaemia and being falsely reassured by its absence",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis, avoidance of fasting and prompt treatment of crises, many patients do well, but severe or delayed decompensations can cause permanent neurological injury or death, and outcome depends heavily on preventing metabolic crises.",
+    "pitfalls": [
+      "Expecting ketosis to accompany hypoglycaemia and being falsely reassured by its absence",
+      "Misdiagnosing an acute crisis as Reye syndrome and missing the metabolic cause",
+      "Delaying intravenous glucose while awaiting confirmatory results",
+      "Overlooking hyperammonaemia as a treatable contributor to encephalopathy",
+      "Allowing prolonged fasting for procedures or illness without a metabolic emergency plan"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics",
+      "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prevent metabolic crises by avoiding fasting: frequent carbohydrate-based feeds, uncooked cornstarch for overnight cover, and a written emergency (sick-day) regimen with increased carbohydrate intake and early hospital presentation during intercurrent illness.",
+      "Institute a protein- and leucine-restricted diet supervised by a metabolic dietitian, supplemented with L-carnitine to replenish free carnitine and aid excretion of accumulated organic acids.",
+      "Treat acute decompensation with intravenous dextrose to reverse hypoketotic hypoglycaemia and suppress catabolism, alongside correction of the high-anion-gap metabolic acidosis.",
+      "Manage crisis hyperammonaemia with protein withdrawal, generous glucose-based energy and nitrogen-scavenging agents, escalating to haemofiltration or dialysis if ammonia fails to fall or encephalopathy worsens.",
+      "Provide interval surveillance with serial urine organic acids and plasma acylcarnitine profile, plus monitoring of growth, liver function and neurodevelopment.",
+      "Equip the family with an emergency alert card and clear escalation instructions to present promptly to a specialist metabolic centre, and coordinate care through a multidisciplinary metabolic team.",
+      "Offer genetic counselling for this autosomal recessive HMGCL disorder, including carrier testing of relatives and discussion of prenatal and newborn-screening options."
     ]
-   ],
-   "caption": "Overview comparison matrix for hmg-coa lyase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hmg-coa-lyase-deficiency-real-image",
-   "title": "HMG-CoA lyase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hmg_coa_lyase_deficiency-pathway",
+      "title": "HMG-CoA lyase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defect in the final step of leucine catabolism and of ketogenesis, caused by biallelic HMGCL variants",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypoketotic hypoglycaemia with encephalopathy and coma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acid analysis for the characteristic 3-hydroxy-3-methylglutarate and related acids, Plasma acylcarnitine profile by tandem mass spectrometry, Blood glucose, blood gas and ketone (beta-hydroxybutyrate)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevent metabolic crises by avoiding fasting: frequent carbohydrate-based feeds, uncooked cornstarch for overnight cover, and a written emergency (sick-day) regimen with increased carbohydrate intake and early hospital"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting ketosis to accompany hypoglycaemia and being falsely reassured by its absence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hmg-coa lyase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hmg_coa_lyase_deficiency-matrix",
+      "title": "HMG-CoA lyase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defect in the final step of leucine catabolism and of ketogenesis, caused by biallelic HMGCL variants",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acid analysis for the characteristic 3-hydroxy-3-methylglutarate and related acids, Plasma acylcarnitine profile by",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other organic acidaemias (isovaleric, methylmalonic, propionic), Fatty acid oxidation disorders (e.g. MCAD deficiency) with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevent metabolic crises by avoiding fasting: frequent carbohydrate-based feeds, uncooked cornstarch for overnight cover, and a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting ketosis to accompany hypoglycaemia and being falsely reassured by its absence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hmg-coa lyase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hmg_coa_lyase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acid analysis",
+          "cells": [
+            {
+              "text": "3-hydroxy-3-methylglutaric acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitine profile by tandem mass spectrometry",
+          "cells": [
+            {
+              "text": "Acylcarnitine pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, blood gas and ketones",
+          "cells": [
+            {
+              "text": "Hypoketotic hypoglycaemia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ammonia and lactate",
+          "cells": [
+            {
+              "text": "Hyperammonaemia and lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HMGCL gene sequencing or enzyme assay",
+          "cells": [
+            {
+              "text": "Genetic or enzyme diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and transaminases",
+          "cells": [
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging if encephalopathic",
+          "cells": [
+            {
+              "text": "White matter change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hmg_coa_lyase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fatty acid oxidation disorders (for example MCAD deficiency)",
+          "cells": [
+            {
+              "text": "Hypoketotic hypoglycaemia; acylcarnitine profile separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reye syndrome and Reye-like presentations",
+          "cells": [
+            {
+              "text": "Reye-like hepatic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other organic acidaemias",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other types of 3-methylglutaconic aciduria",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hmg_coa_lyase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid fasting",
+          "cells": [
+            {
+              "text": "Frequent carbohydrate feeds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein and leucine-restricted diet",
+          "cells": [
+            {
+              "text": "Supervised by a metabolic team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous dextrose",
+          "cells": [
+            {
+              "text": "Acute decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crisis hyperammonaemia",
+          "cells": [
+            {
+              "text": "Protein withdrawal and glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval surveillance",
+          "cells": [
+            {
+              "text": "Serial urine organic acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency alert card",
+          "cells": [
+            {
+              "text": "For the family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hmg_coa_lyase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of HMG-CoA lyase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypoketotic hypoglycaemia and acidosis during illness or fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coma, severe hyperammonaemia, high anion gap acidosis, or Reye-like liver failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: intravenous dextrose and crisis care for hypoglycaemia and hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids; acylcarnitines; glucose, ketones, ammonia, lactate; HMGCL testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is 3-hydroxy-3-methylglutaric acid raised, with HMGCL variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MCAD deficiency, Reye syndrome, other organic acidaemias or urea cycle disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid fasting with frequent carbohydrate feeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Protein and leucine-restricted diet under supervision",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous dextrose for acute decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emergency alert card and interval urine organic acid surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Crises prevented; interval surveillance and genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

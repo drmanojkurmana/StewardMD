@@ -1,173 +1,384 @@
 {
- "id": "rectal_prolapse",
- "name": "Rectal prolapse",
- "aliases": [
-  "procidentia",
-  "complete rectal prolapse",
-  "full-thickness rectal prolapse",
-  "rectal procidentia"
- ],
- "class": "non_infective",
- "system": "Colorectal surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Full-thickness (complete) rectal prolapse is protrusion of the entire rectal wall through the anus, with concentric mucosal folds, whereas mucosal prolapse and internal intussusception are distinct, less severe entities",
-   "It is most common in older women and in children, and is frequently associated with chronic straining, pelvic floor weakness, and a redundant sigmoid colon",
-   "Typical symptoms are a protruding mass on defecation, mucous discharge, bleeding, and a sensation of incomplete evacuation, with faecal incontinence in a large proportion",
-   "The diagnosis is often made by asking the patient to strain, ideally on a commode, to reproduce the prolapse; concentric rings distinguish it from the radial folds of prolapsing haemorrhoids",
-   "Defecating proctography or dynamic MRI can demonstrate internal intussusception and associated pelvic floor abnormalities when clinical findings are equivocal",
-   "Coexisting incontinence and constipation should be assessed, and colonic evaluation is prudent to exclude a lead point or synchronous pathology",
-   "Definitive treatment is surgical and is broadly divided into abdominal approaches (rectopexy, with or without resection) and perineal procedures, chosen according to fitness, symptoms, and surgeon preference"
+  "id": "rectal_prolapse",
+  "name": "Rectal prolapse",
+  "aliases": [
+    "procidentia",
+    "complete rectal prolapse",
+    "full-thickness rectal prolapse",
+    "rectal procidentia"
   ],
-  "pathophysiology": "Full-thickness rectal prolapse is understood as a circumferential intussusception of the rectum that progresses until the bowel protrudes through the anal canal. Contributing factors include a deep rectovaginal or rectovesical pouch, loss of the normal posterior rectal fixation, a redundant mobile rectosigmoid, weak pelvic floor and anal sphincter musculature, and chronically raised intra-abdominal pressure from straining. Repeated prolapse stretches and damages the pudendal nerves and sphincter complex, which explains the frequent association with faecal incontinence, while chronic mucosal exposure produces discharge, bleeding, and ulceration.",
-  "additionalDifferentials": [
-   "Prolapsing (third- or fourth-degree) haemorrhoids",
-   "Mucosal-only rectal prolapse",
-   "Internal rectal intussusception",
-   "Prolapsing rectal polyp or tumour",
-   "Solitary rectal ulcer syndrome",
-   "Anal or perianal skin tags or condylomata"
-  ],
-  "additionalInvestigations": [
-   "Examination with the patient straining to reproduce the prolapse",
-   "Colonoscopy or sigmoidoscopy to exclude a lead-point lesion or synchronous colorectal pathology",
-   "Defecating proctography or dynamic pelvic MRI for internal intussusception and pelvic floor assessment",
-   "Anorectal manometry and endoanal ultrasound when incontinence is prominent",
-   "Colonic transit studies where significant constipation coexists"
-  ],
-  "redFlags": [
-   "Irreducible, incarcerated prolapse with congestion, ulceration, or impending strangulation requiring urgent reduction or surgery",
-   "Ischaemic or gangrenous prolapsed bowel",
-   "Significant bleeding or a palpable mass suggesting an underlying tumour",
-   "Acute large prolapse in a frail patient with obstruction"
-  ],
-  "prognosis": "Surgical repair relieves the prolapse in most patients with acceptable recurrence rates that vary by procedure, and continence often improves over time though it may not fully recover if pelvic floor and nerve damage is longstanding. Constipation can persist or occasionally worsen, and outcomes are best when associated functional problems are addressed alongside the anatomical repair.",
-  "pitfalls": [
-   "Confusing full-thickness prolapse with prolapsing haemorrhoids and offering inappropriate treatment",
-   "Failing to reproduce the prolapse on examination and therefore missing or underestimating it",
-   "Not excluding a colorectal neoplasm acting as a lead point before elective repair",
-   "Ignoring coexisting incontinence or constipation, leading to poor functional results despite anatomical success",
-   "Delaying intervention in an incarcerated or ischaemic prolapse"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment is surgical repair, either abdominal rectopexy (increasingly ventral mesh rectopexy) or a perineal procedure such as Delorme or Altemeier in frail patients",
-   "Optimise bowel habit with fibre, fluids and laxatives to reduce straining before and after surgery",
-   "Manually reduce an incarcerated prolapse, using topical sugar to shrink oedema, with urgent surgery if it is irreducible or strangulated",
-   "Assess and manage coexisting faecal incontinence and constipation, including pelvic-floor biofeedback",
-   "Exclude a lead-point lesion with colonic evaluation before repair",
-   "Multidisciplinary colorectal and pelvic-floor input, with monitoring for recurrence and persistent bowel dysfunction after repair"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rectal_prolapse-pathway",
-   "title": "Rectal prolapse: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Full-thickness (complete) rectal prolapse is protrusion of the entire rectal wall through the anus, with concentric mucosal folds, whereas mucosal prolapse and internal intussusception are distinct, less severe entities",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Irreducible, incarcerated prolapse with congestion, ulceration, or impending strangulation requiring urgent reduction or surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination with the patient straining to reproduce the prolapse, Colonoscopy or sigmoidoscopy to exclude a lead-point lesion or synchronous colorectal pathology, Defecating proctography or dynamic pelvic MRI for internal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment is surgical repair, either abdominal rectopexy (increasingly ventral mesh rectopexy) or a perineal procedure such as Delorme or Altemeier in frail patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing full-thickness prolapse with prolapsing haemorrhoids and offering inappropriate treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rectal prolapse."
-  }
- ],
- "tables": [
-  {
-   "id": "rectal_prolapse-matrix",
-   "title": "Rectal prolapse: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Full-thickness (complete) rectal prolapse is protrusion of the entire rectal wall through the anus, with concentric mucosal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Colorectal surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Full-thickness (complete) rectal prolapse is protrusion of the entire rectal wall through the anus, with concentric mucosal folds, whereas mucosal prolapse and internal intussusception are distinct, less severe entities",
+      "It is most common in older women and in children, and is frequently associated with chronic straining, pelvic floor weakness, and a redundant sigmoid colon",
+      "Typical symptoms are a protruding mass on defecation, mucous discharge, bleeding, and a sensation of incomplete evacuation, with faecal incontinence in a large proportion",
+      "The diagnosis is often made by asking the patient to strain, ideally on a commode, to reproduce the prolapse; concentric rings distinguish it from the radial folds of prolapsing haemorrhoids",
+      "Defecating proctography or dynamic MRI can demonstrate internal intussusception and associated pelvic floor abnormalities when clinical findings are equivocal",
+      "Coexisting incontinence and constipation should be assessed, and colonic evaluation is prudent to exclude a lead point or synchronous pathology",
+      "Definitive treatment is surgical and is broadly divided into abdominal approaches (rectopexy, with or without resection) and perineal procedures, chosen according to fitness, symptoms, and surgeon preference"
     ],
-    [
-     "Key Investigations",
-     "Examination with the patient straining to reproduce the prolapse, Colonoscopy or sigmoidoscopy to exclude a lead-point lesion or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Full-thickness rectal prolapse is understood as a circumferential intussusception of the rectum that progresses until the bowel protrudes through the anal canal. Contributing factors include a deep rectovaginal or rectovesical pouch, loss of the normal posterior rectal fixation, a redundant mobile rectosigmoid, weak pelvic floor and anal sphincter musculature, and chronically raised intra-abdominal pressure from straining. Repeated prolapse stretches and damages the pudendal nerves and sphincter complex, which explains the frequent association with faecal incontinence, while chronic mucosal exposure produces discharge, bleeding, and ulceration.",
+    "additionalDifferentials": [
+      "Prolapsing (third- or fourth-degree) haemorrhoids",
+      "Mucosal-only rectal prolapse",
+      "Internal rectal intussusception",
+      "Prolapsing rectal polyp or tumour",
+      "Solitary rectal ulcer syndrome",
+      "Anal or perianal skin tags or condylomata"
     ],
-    [
-     "Primary Differentials",
-     "Prolapsing (third- or fourth-degree) haemorrhoids, Mucosal-only rectal prolapse, Internal rectal intussusception",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination with the patient straining to reproduce the prolapse",
+      "Colonoscopy or sigmoidoscopy to exclude a lead-point lesion or synchronous colorectal pathology",
+      "Defecating proctography or dynamic pelvic MRI for internal intussusception and pelvic floor assessment",
+      "Anorectal manometry and endoanal ultrasound when incontinence is prominent",
+      "Colonic transit studies where significant constipation coexists"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment is surgical repair, either abdominal rectopexy (increasingly ventral mesh rectopexy) or a perineal procedure",
-     "Core treatment modality"
+    "redFlags": [
+      "Irreducible, incarcerated prolapse with congestion, ulceration, or impending strangulation requiring urgent reduction or surgery",
+      "Ischaemic or gangrenous prolapsed bowel",
+      "Significant bleeding or a palpable mass suggesting an underlying tumour",
+      "Acute large prolapse in a frail patient with obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing full-thickness prolapse with prolapsing haemorrhoids and offering inappropriate treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical repair relieves the prolapse in most patients with acceptable recurrence rates that vary by procedure, and continence often improves over time though it may not fully recover if pelvic floor and nerve damage is longstanding. Constipation can persist or occasionally worsen, and outcomes are best when associated functional problems are addressed alongside the anatomical repair.",
+    "pitfalls": [
+      "Confusing full-thickness prolapse with prolapsing haemorrhoids and offering inappropriate treatment",
+      "Failing to reproduce the prolapse on examination and therefore missing or underestimating it",
+      "Not excluding a colorectal neoplasm acting as a lead point before elective repair",
+      "Ignoring coexisting incontinence or constipation, leading to poor functional results despite anatomical success",
+      "Delaying intervention in an incarcerated or ischaemic prolapse"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment is surgical repair, either abdominal rectopexy (increasingly ventral mesh rectopexy) or a perineal procedure such as Delorme or Altemeier in frail patients",
+      "Optimise bowel habit with fibre, fluids and laxatives to reduce straining before and after surgery",
+      "Manually reduce an incarcerated prolapse, using topical sugar to shrink oedema, with urgent surgery if it is irreducible or strangulated",
+      "Assess and manage coexisting faecal incontinence and constipation, including pelvic-floor biofeedback",
+      "Exclude a lead-point lesion with colonic evaluation before repair",
+      "Multidisciplinary colorectal and pelvic-floor input, with monitoring for recurrence and persistent bowel dysfunction after repair"
     ]
-   ],
-   "caption": "Overview comparison matrix for rectal prolapse."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rectal-prolapse-real-image",
-   "title": "Rectal prolapse: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "rectal_prolapse-pathway",
+      "title": "Rectal prolapse: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Full-thickness (complete) rectal prolapse is protrusion of the entire rectal wall through the anus, with concentric mucosal folds, whereas mucosal prolapse and internal intussusception are distinct, less severe entities",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Irreducible, incarcerated prolapse with congestion, ulceration, or impending strangulation requiring urgent reduction or surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination with the patient straining to reproduce the prolapse, Colonoscopy or sigmoidoscopy to exclude a lead-point lesion or synchronous colorectal pathology, Defecating proctography or dynamic pelvic MRI for internal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment is surgical repair, either abdominal rectopexy (increasingly ventral mesh rectopexy) or a perineal procedure such as Delorme or Altemeier in frail patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing full-thickness prolapse with prolapsing haemorrhoids and offering inappropriate treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rectal prolapse."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rectal_prolapse-matrix",
+      "title": "Rectal prolapse: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Full-thickness (complete) rectal prolapse is protrusion of the entire rectal wall through the anus, with concentric mucosal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination with the patient straining to reproduce the prolapse, Colonoscopy or sigmoidoscopy to exclude a lead-point lesion or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Prolapsing (third- or fourth-degree) haemorrhoids, Mucosal-only rectal prolapse, Internal rectal intussusception",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment is surgical repair, either abdominal rectopexy (increasingly ventral mesh rectopexy) or a perineal procedure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing full-thickness prolapse with prolapsing haemorrhoids and offering inappropriate treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rectal prolapse."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rectal_prolapse-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination with straining",
+          "cells": [
+            {
+              "text": "Prolapse reproduced on straining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy or sigmoidoscopy",
+          "cells": [
+            {
+              "text": "Lead-point lesion or synchronous colonic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectal_prolapse-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolapsing third- or fourth-degree haemorrhoids",
+          "cells": [
+            {
+              "text": "Third- or fourth-degree haemorrhoids"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucosal-only rectal prolapse",
+          "cells": [
+            {
+              "text": "Mucosal prolapse only"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectal_prolapse-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Abdominal rectopexy or perineal repair as definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel habit",
+          "cells": [
+            {
+              "text": "Fibre, fluids and laxatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery",
+          "cells": [
+            {
+              "text": "For irreducible or ischaemic prolapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rectal_prolapse-dx-mgmt",
+      "title": "Diagnosis and management of Rectal prolapse",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected rectal prolapse: protrusion of rectal wall on straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Irreducible prolapse with congestion, ulceration, ischaemia, or gangrene?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for strangulated or gangrenous prolapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination while straining; colonoscopy or sigmoidoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is full-thickness rectal prolapse confirmed on straining examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemorrhoids or mucosal prolapse; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Abdominal rectopexy or perineal repair as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Optimise bowel habit with fibre, fluids and laxatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent surgery for irreducible or ischaemic prolapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Colorectal follow-up for recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

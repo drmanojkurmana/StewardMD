@@ -1,180 +1,529 @@
 {
- "id": "age_related_functional_decline",
- "name": "age related functional decline",
- "aliases": [
-  "functional decline in older adults",
-  "age-related disability",
-  "deconditioning"
- ],
- "class": "non_infective",
- "system": "Multisystem",
- "specialty": "Geriatric Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Brocklehurst's Textbook of Geriatric Medicine and Gerontology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Decline is defined by loss of basic and instrumental activities of daily living, so quantify it with validated scales rather than relying on diagnoses alone.",
-   "An abrupt functional decline is frequently the sole presenting sign of acute illness such as infection or myocardial infarction in older adults, and should be treated as a red flag.",
-   "Hospital-associated deconditioning develops within days of bed rest, so early mobilisation and removal of tethers such as catheters and lines are preventive.",
-   "Frailty, sarcopenia and disability are overlapping but distinct constructs that guide different interventions.",
-   "Comprehensive geriatric assessment reduces functional decline and institutionalisation.",
-   "Correctable contributors such as visual and hearing impairment, foot problems and home hazards are easily overlooked.",
-   "Progressive resistance exercise combined with adequate protein intake can reverse sarcopenia even in the very old.",
-   "Always screen for reversible drivers including depression, polypharmacy, pain, malnutrition and undertreated chronic disease."
+  "id": "age_related_functional_decline",
+  "name": "age related functional decline",
+  "aliases": [
+    "functional decline in older adults",
+    "age-related disability",
+    "deconditioning"
   ],
-  "pathophysiology": "Age-related functional decline is the progressive loss of ability to perform activities of daily living arising from the interaction of ageing physiology and superimposed disease. Intrinsic changes include sarcopenia, reduced aerobic capacity and physiological reserve, and sensory decline, which lower the threshold at which stressors overwhelm capacity. Chronic multimorbidity and frailty erode reserve further, while acute precipitants such as illness, hospitalisation, enforced immobility and iatrogenesis trigger rapid deconditioning. Much of the observed decline reflects modifiable disease and inactivity rather than intrinsic ageing, which is why distinguishing usual from successful ageing matters and why targeted intervention can alter the trajectory.",
-  "additionalDifferentials": [
-   "frailty syndrome",
-   "sarcopenia",
-   "depression",
-   "dementia or other cognitive impairment",
-   "parkinsonism and other gait disorders",
-   "occult infection or other acute illness",
-   "anaemia or hypothyroidism"
-  ],
-  "additionalInvestigations": [
-   "comprehensive geriatric assessment",
-   "functional scales such as the Barthel Index, Lawton instrumental scale, gait speed and Timed Up and Go",
-   "frailty assessment using the Fried phenotype or Clinical Frailty Scale",
-   "cognitive and mood screening",
-   "full blood count, urea and electrolytes and thyroid function",
-   "vitamin D and vitamin B12 levels",
-   "medication review with physiotherapy and occupational therapy assessment"
-  ],
-  "redFlags": [
-   "abrupt or stepwise decline suggesting acute illness or stroke",
-   "recurrent falls with injury",
-   "new urinary or faecal incontinence",
-   "rapid unintentional weight loss",
-   "safeguarding concerns such as neglect or an unsafe home environment"
-  ],
-  "prognosis": "Functional decline predicts falls, hospitalisation, institutionalisation and death, but multicomponent interventions combining exercise, nutrition and comprehensive geriatric assessment can slow, halt or partially reverse it, particularly when precipitants are addressed early.",
-  "pitfalls": [
-   "attributing acute decline to old age and missing an underlying acute illness",
-   "prescribing bed rest and promoting deconditioning",
-   "overlooking sensory impairment and environmental hazards",
-   "failing to set realistic patient-centred functional goals",
-   "not reassessing function after a hospital admission"
-  ],
-  "references": [
-   "Brocklehurst's Textbook of Geriatric Medicine and Gerontology",
-   "Hazzard's Geriatric Medicine and Gerontology",
-   "British Geriatrics Society guidance on comprehensive geriatric assessment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prescribe a structured, progressive exercise programme combining resistance and balance training to counter sarcopenia and deconditioning",
-   "Optimise nutrition with dietetic assessment and protein-rich oral supplementation, correcting deficiencies such as vitamin D and vitamin B12",
-   "Identify and treat the acute precipitant, since abrupt decline may be the only sign of infection or myocardial infarction",
-   "Promote early mobilisation and remove tethers such as urinary catheters and lines to prevent hospital-associated deconditioning",
-   "Review and rationalise medication to reduce iatrogenic contributors such as sedation and postural hypotension",
-   "Correct sensory and mobility barriers including visual and hearing impairment, foot problems and home hazards",
-   "Undertake comprehensive geriatric assessment to reduce further decline and institutionalisation",
-   "Coordinate multidisciplinary rehabilitation with physiotherapy, occupational therapy and social support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "age_related_functional_decline-pathway",
-   "title": "age related functional decline: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Decline is defined by loss of basic and instrumental activities of daily living, so quantify it with validated scales rather than relying on diagnoses alone.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: abrupt or stepwise decline suggesting acute illness or stroke",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: comprehensive geriatric assessment, functional scales such as the Barthel Index, Lawton instrumental scale, gait speed and Timed Up and Go, frailty assessment using the Fried phenotype or Clinical Frailty Scale"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prescribe a structured, progressive exercise programme combining resistance and balance training to counter sarcopenia and deconditioning"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: attributing acute decline to old age and missing an underlying acute illness"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of age related functional decline."
-  }
- ],
- "tables": [
-  {
-   "id": "age_related_functional_decline-matrix",
-   "title": "age related functional decline: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Decline is defined by loss of basic and instrumental activities of daily living, so quantify it with validated scales rather than",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem",
+  "specialty": "Geriatric Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Brocklehurst's Textbook of Geriatric Medicine and Gerontology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Decline is defined by loss of basic and instrumental activities of daily living, so quantify it with validated scales rather than relying on diagnoses alone.",
+      "An abrupt functional decline is frequently the sole presenting sign of acute illness such as infection or myocardial infarction in older adults, and should be treated as a red flag.",
+      "Hospital-associated deconditioning develops within days of bed rest, so early mobilisation and removal of tethers such as catheters and lines are preventive.",
+      "Frailty, sarcopenia and disability are overlapping but distinct constructs that guide different interventions.",
+      "Comprehensive geriatric assessment reduces functional decline and institutionalisation.",
+      "Correctable contributors such as visual and hearing impairment, foot problems and home hazards are easily overlooked.",
+      "Progressive resistance exercise combined with adequate protein intake can reverse sarcopenia even in the very old.",
+      "Always screen for reversible drivers including depression, polypharmacy, pain, malnutrition and undertreated chronic disease."
     ],
-    [
-     "Key Investigations",
-     "comprehensive geriatric assessment, functional scales such as the Barthel Index, Lawton instrumental scale, gait speed and Timed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Age-related functional decline is the progressive loss of ability to perform activities of daily living arising from the interaction of ageing physiology and superimposed disease. Intrinsic changes include sarcopenia, reduced aerobic capacity and physiological reserve, and sensory decline, which lower the threshold at which stressors overwhelm capacity. Chronic multimorbidity and frailty erode reserve further, while acute precipitants such as illness, hospitalisation, enforced immobility and iatrogenesis trigger rapid deconditioning. Much of the observed decline reflects modifiable disease and inactivity rather than intrinsic ageing, which is why distinguishing usual from successful ageing matters and why targeted intervention can alter the trajectory.",
+    "additionalDifferentials": [
+      "frailty syndrome",
+      "sarcopenia",
+      "depression",
+      "dementia or other cognitive impairment",
+      "parkinsonism and other gait disorders",
+      "occult infection or other acute illness",
+      "anaemia or hypothyroidism"
     ],
-    [
-     "Primary Differentials",
-     "frailty syndrome, sarcopenia, depression",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "comprehensive geriatric assessment",
+      "functional scales such as the Barthel Index, Lawton instrumental scale, gait speed and Timed Up and Go",
+      "frailty assessment using the Fried phenotype or Clinical Frailty Scale",
+      "cognitive and mood screening",
+      "full blood count, urea and electrolytes and thyroid function",
+      "vitamin D and vitamin B12 levels",
+      "medication review with physiotherapy and occupational therapy assessment"
     ],
-    [
-     "Management Strategy",
-     "Prescribe a structured, progressive exercise programme combining resistance and balance training to counter sarcopenia and",
-     "Core treatment modality"
+    "redFlags": [
+      "abrupt or stepwise decline suggesting acute illness or stroke",
+      "recurrent falls with injury",
+      "new urinary or faecal incontinence",
+      "rapid unintentional weight loss",
+      "safeguarding concerns such as neglect or an unsafe home environment"
     ],
-    [
-     "Clinical Pitfall",
-     "attributing acute decline to old age and missing an underlying acute illness",
-     "Prevent diagnostic or management error"
+    "prognosis": "Functional decline predicts falls, hospitalisation, institutionalisation and death, but multicomponent interventions combining exercise, nutrition and comprehensive geriatric assessment can slow, halt or partially reverse it, particularly when precipitants are addressed early.",
+    "pitfalls": [
+      "attributing acute decline to old age and missing an underlying acute illness",
+      "prescribing bed rest and promoting deconditioning",
+      "overlooking sensory impairment and environmental hazards",
+      "failing to set realistic patient-centred functional goals",
+      "not reassessing function after a hospital admission"
+    ],
+    "references": [
+      "Brocklehurst's Textbook of Geriatric Medicine and Gerontology",
+      "Hazzard's Geriatric Medicine and Gerontology",
+      "British Geriatrics Society guidance on comprehensive geriatric assessment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prescribe a structured, progressive exercise programme combining resistance and balance training to counter sarcopenia and deconditioning",
+      "Optimise nutrition with dietetic assessment and protein-rich oral supplementation, correcting deficiencies such as vitamin D and vitamin B12",
+      "Identify and treat the acute precipitant, since abrupt decline may be the only sign of infection or myocardial infarction",
+      "Promote early mobilisation and remove tethers such as urinary catheters and lines to prevent hospital-associated deconditioning",
+      "Review and rationalise medication to reduce iatrogenic contributors such as sedation and postural hypotension",
+      "Correct sensory and mobility barriers including visual and hearing impairment, foot problems and home hazards",
+      "Undertake comprehensive geriatric assessment to reduce further decline and institutionalisation",
+      "Coordinate multidisciplinary rehabilitation with physiotherapy, occupational therapy and social support"
     ]
-   ],
-   "caption": "Overview comparison matrix for age related functional decline."
-  }
- ],
- "diagrams": [
-  {
-   "id": "age-related-functional-decline-real-image",
-   "title": "age related functional decline: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "age_related_functional_decline-pathway",
+      "title": "age related functional decline: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Decline is defined by loss of basic and instrumental activities of daily living, so quantify it with validated scales rather than relying on diagnoses alone.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: abrupt or stepwise decline suggesting acute illness or stroke",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: comprehensive geriatric assessment, functional scales such as the Barthel Index, Lawton instrumental scale, gait speed and Timed Up and Go, frailty assessment using the Fried phenotype or Clinical Frailty Scale"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prescribe a structured, progressive exercise programme combining resistance and balance training to counter sarcopenia and deconditioning"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: attributing acute decline to old age and missing an underlying acute illness"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of age related functional decline."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "age_related_functional_decline-matrix",
+      "title": "age related functional decline: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Decline is defined by loss of basic and instrumental activities of daily living, so quantify it with validated scales rather than",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "comprehensive geriatric assessment, functional scales such as the Barthel Index, Lawton instrumental scale, gait speed and Timed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "frailty syndrome, sarcopenia, depression",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prescribe a structured, progressive exercise programme combining resistance and balance training to counter sarcopenia and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "attributing acute decline to old age and missing an underlying acute illness",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for age related functional decline."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brocklehurst's Textbook of Geriatric Medicine and Gerontology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "age_related_functional_decline-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Comprehensive geriatric assessment",
+          "cells": [
+            {
+              "text": "Multidomain assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional scales: Barthel Index, Lawton scale, gait speed and Timed Up and Go",
+          "cells": [
+            {
+              "text": "Functional ability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frailty assessment with the Fried phenotype or Clinical Frailty Scale",
+          "cells": [
+            {
+              "text": "Frailty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive and mood screening",
+          "cells": [
+            {
+              "text": "Cognition and mood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, urea and electrolytes and thyroid function",
+          "cells": [
+            {
+              "text": "Anaemia, renal and thyroid causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D and vitamin B12 levels",
+          "cells": [
+            {
+              "text": "Correctable deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review with physiotherapy and occupational therapy assessment",
+          "cells": [
+            {
+              "text": "Iatrogenic and mobility factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "age_related_functional_decline-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Frailty syndrome",
+          "cells": [
+            {
+              "text": "Overlapping construct with loss of physiological reserve"
+            },
+            {
+              "text": "Fried phenotype or Clinical Frailty Scale"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcopenia",
+          "cells": [
+            {
+              "text": "Loss of muscle mass and strength"
+            },
+            {
+              "text": "Gait speed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression",
+          "cells": [
+            {
+              "text": "Mood disturbance"
+            },
+            {
+              "text": "Mood screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dementia or other cognitive impairment",
+          "cells": [
+            {
+              "text": "Cognitive impairment"
+            },
+            {
+              "text": "Cognitive screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "age_related_functional_decline-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured progressive exercise with resistance and balance training",
+          "cells": [
+            {
+              "text": "Sarcopenia and deconditioning"
+            },
+            {
+              "text": "Progressive programme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietetic assessment and protein-rich oral supplementation",
+          "cells": [
+            {
+              "text": "Nutrition"
+            },
+            {
+              "text": "Correct vitamin D and B12 deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identification and treatment of the acute precipitant",
+          "cells": [
+            {
+              "text": "Abrupt decline may be the only sign of infection or MI"
+            },
+            {
+              "text": "Treat the precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early mobilisation and removal of catheters and lines",
+          "cells": [
+            {
+              "text": "Hospital-associated deconditioning"
+            },
+            {
+              "text": "Prevents deconditioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review for sedation and postural hypotension",
+          "cells": [
+            {
+              "text": "Iatrogenic contributors"
+            },
+            {
+              "text": "Rationalise drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of sensory and mobility barriers and home hazards",
+          "cells": [
+            {
+              "text": "Barriers to function"
+            },
+            {
+              "text": "Hearing, vision, feet and home"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation with physiotherapy, occupational therapy and social support",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            },
+            {
+              "text": "Reduces institutionalisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "age_related_functional_decline-dx-mgmt",
+      "title": "Diagnosis and management of age related functional decline",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Loss of daily living ability in an older adult, often gradual",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Abrupt or stepwise decline, recurrent falls or rapid weight loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent medical review for infection, MI or stroke",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Comprehensive geriatric assessment, Barthel, gait speed, TUG, frailty score",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reversible contributor found: medication, mood, deficiency or illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the contributor; deprescribe; correct vitamin D or B12",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review frailty, sarcopenia, depression, dementia and gait disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Structured progressive resistance and balance exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early mobilisation; remove catheters and lines to prevent deconditioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietetic input and protein supplements; correct sensory and home barriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Decline predicts falls and institutionalisation; multicomponent care slows it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

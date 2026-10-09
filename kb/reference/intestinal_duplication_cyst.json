@@ -1,177 +1,475 @@
 {
- "id": "intestinal_duplication_cyst",
- "name": "intestinal duplication cyst",
- "aliases": [
-  "enteric duplication cyst",
-  "alimentary tract duplication"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Ashcraft's Pediatric Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Duplications are spherical (cystic, commoner) or tubular structures that arise on the mesenteric border of the native bowel and share a common muscular wall and blood supply with it.",
-   "The ileum is the single most frequent site, but duplications can occur anywhere from the oral cavity to the anus; most are non-communicating with the true lumen.",
-   "The epithelial lining is typically alimentary mucosa, and ectopic gastric or pancreatic tissue is common, predisposing to peptic ulceration and gastrointestinal bleeding.",
-   "Ultrasound shows the classic 'gut signature' or double-wall sign — an inner echogenic mucosa with an outer hypoechoic muscular rim — which strongly suggests the diagnosis.",
-   "Presentation is usually in infancy or early childhood with a palpable mass, obstruction, or bleeding, but incidental adult diagnosis is well recognised.",
-   "Complications include bowel obstruction, volvulus, intussusception (the cyst acting as a lead point), and pain from distension or intracystic haemorrhage.",
-   "Thoracic and thoraco-abdominal (oesophageal) duplications are frequently associated with vertebral anomalies and a persistent connection to the spinal canal, in keeping with the split-notochord theory.",
-   "A technetium-99m pertechnetate scan can localise ectopic gastric mucosa when bleeding is the presenting feature."
+  "id": "intestinal_duplication_cyst",
+  "name": "intestinal duplication cyst",
+  "aliases": [
+    "enteric duplication cyst",
+    "alimentary tract duplication"
   ],
-  "pathophysiology": "Intestinal duplications are congenital malformations whose precise embryogenesis is uncertain; leading theories include aberrant recanalisation of the gut lumen, persistence of embryonic diverticula, partial twinning, and the split-notochord hypothesis for the thoracic and thoraco-abdominal forms associated with vertebral defects. The lesion invariably lies on the mesenteric aspect of the adjacent alimentary tract, shares a common muscular coat and mesenteric blood supply, and is lined by gastrointestinal-type epithelium. Ectopic gastric mucosa, present in a substantial minority, secretes acid that ulcerates the lining or adjacent bowel and produces haemorrhage or perforation; ectopic pancreatic tissue may also occur. Progressive accumulation of secretions within a non-communicating cyst causes mass effect, obstruction, or a lead point for intussusception or volvulus.",
-  "additionalDifferentials": [
-   "mesenteric or omental cyst",
-   "choledochal cyst",
-   "cystic lymphangioma",
-   "ovarian cyst",
-   "Meckel diverticulum",
-   "cystic teratoma",
-   "pancreatic pseudocyst"
-  ],
-  "additionalInvestigations": [
-   "abdominal ultrasound to demonstrate the gut-signature double-wall sign",
-   "contrast-enhanced CT to define anatomy and relationship to bowel",
-   "MRI, particularly for thoracic and spinal involvement",
-   "technetium-99m pertechnetate scintigraphy for ectopic gastric mucosa",
-   "contrast luminal studies to assess communication",
-   "spinal imaging when a thoracic duplication is identified",
-   "histopathology of the resected specimen"
-  ],
-  "redFlags": [
-   "gastrointestinal haemorrhage suggesting ectopic gastric mucosa",
-   "features of bowel obstruction, volvulus, or intussusception",
-   "acute abdomen from perforation or intracystic haemorrhage",
-   "respiratory compromise from a thoracic duplication",
-   "new solid or nodular components raising concern for rare malignant change in adults"
-  ],
-  "prognosis": "Prognosis is excellent following complete surgical excision, which is curative. Malignant transformation is rare and largely confined to lesions presenting in adulthood.",
-  "pitfalls": [
-   "mistaking the cyst for another abdominal cystic lesion and overlooking its shared wall with native bowel",
-   "failing to resect adjacent bowel when the shared blood supply precludes simple enucleation, leading to incomplete removal",
-   "overlooking ectopic gastric mucosa as the source of occult bleeding",
-   "missing an associated spinal or vertebral anomaly in thoracic duplications",
-   "attempting enucleation of a long tubular duplication and leaving retained mucosa"
-  ],
-  "references": [
-   "Ashcraft's Pediatric Surgery",
-   "Coran, Pediatric Surgery",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake complete surgical excision, which is curative, usually resecting the shared-wall bowel segment with anastomosis",
-   "Resuscitate and correct anaemia preoperatively where bleeding or obstruction has occurred",
-   "Address ectopic gastric mucosa as the source of peptic ulceration and haemorrhage, using acid suppression as a temporising measure",
-   "Treat acute complications such as obstruction, volvulus or intussusception with the cyst as lead point by urgent surgery",
-   "Obtain spinal imaging and involve neurosurgery where a thoracic duplication is associated with vertebral anomalies",
-   "Provide paediatric surgical follow-up after resection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "intestinal_duplication_cyst-pathway",
-   "title": "intestinal duplication cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Duplications are spherical (cystic, commoner) or tubular structures that arise on the mesenteric border of the native bowel and share a common muscular wall and blood supply with it.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: gastrointestinal haemorrhage suggesting ectopic gastric mucosa",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: abdominal ultrasound to demonstrate the gut-signature double-wall sign, contrast-enhanced CT to define anatomy and relationship to bowel, MRI, particularly for thoracic and spinal involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake complete surgical excision, which is curative, usually resecting the shared-wall bowel segment with anastomosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: mistaking the cyst for another abdominal cystic lesion and overlooking its shared wall with native bowel"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of intestinal duplication cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "intestinal_duplication_cyst-matrix",
-   "title": "intestinal duplication cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Duplications are spherical (cystic, commoner) or tubular structures that arise on the mesenteric border of the native bowel and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ashcraft's Pediatric Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Duplications are spherical (cystic, commoner) or tubular structures that arise on the mesenteric border of the native bowel and share a common muscular wall and blood supply with it.",
+      "The ileum is the single most frequent site, but duplications can occur anywhere from the oral cavity to the anus; most are non-communicating with the true lumen.",
+      "The epithelial lining is typically alimentary mucosa, and ectopic gastric or pancreatic tissue is common, predisposing to peptic ulceration and gastrointestinal bleeding.",
+      "Ultrasound shows the classic 'gut signature' or double-wall sign — an inner echogenic mucosa with an outer hypoechoic muscular rim — which strongly suggests the diagnosis.",
+      "Presentation is usually in infancy or early childhood with a palpable mass, obstruction, or bleeding, but incidental adult diagnosis is well recognised.",
+      "Complications include bowel obstruction, volvulus, intussusception (the cyst acting as a lead point), and pain from distension or intracystic haemorrhage.",
+      "Thoracic and thoraco-abdominal (oesophageal) duplications are frequently associated with vertebral anomalies and a persistent connection to the spinal canal, in keeping with the split-notochord theory.",
+      "A technetium-99m pertechnetate scan can localise ectopic gastric mucosa when bleeding is the presenting feature."
     ],
-    [
-     "Key Investigations",
-     "abdominal ultrasound to demonstrate the gut-signature double-wall sign, contrast-enhanced CT to define anatomy and relationship",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Intestinal duplications are congenital malformations whose precise embryogenesis is uncertain; leading theories include aberrant recanalisation of the gut lumen, persistence of embryonic diverticula, partial twinning, and the split-notochord hypothesis for the thoracic and thoraco-abdominal forms associated with vertebral defects. The lesion invariably lies on the mesenteric aspect of the adjacent alimentary tract, shares a common muscular coat and mesenteric blood supply, and is lined by gastrointestinal-type epithelium. Ectopic gastric mucosa, present in a substantial minority, secretes acid that ulcerates the lining or adjacent bowel and produces haemorrhage or perforation; ectopic pancreatic tissue may also occur. Progressive accumulation of secretions within a non-communicating cyst causes mass effect, obstruction, or a lead point for intussusception or volvulus.",
+    "additionalDifferentials": [
+      "mesenteric or omental cyst",
+      "choledochal cyst",
+      "cystic lymphangioma",
+      "ovarian cyst",
+      "Meckel diverticulum",
+      "cystic teratoma",
+      "pancreatic pseudocyst"
     ],
-    [
-     "Primary Differentials",
-     "mesenteric or omental cyst, choledochal cyst, cystic lymphangioma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "abdominal ultrasound to demonstrate the gut-signature double-wall sign",
+      "contrast-enhanced CT to define anatomy and relationship to bowel",
+      "MRI, particularly for thoracic and spinal involvement",
+      "technetium-99m pertechnetate scintigraphy for ectopic gastric mucosa",
+      "contrast luminal studies to assess communication",
+      "spinal imaging when a thoracic duplication is identified",
+      "histopathology of the resected specimen"
     ],
-    [
-     "Management Strategy",
-     "Undertake complete surgical excision, which is curative, usually resecting the shared-wall bowel segment with anastomosis",
-     "Core treatment modality"
+    "redFlags": [
+      "gastrointestinal haemorrhage suggesting ectopic gastric mucosa",
+      "features of bowel obstruction, volvulus, or intussusception",
+      "acute abdomen from perforation or intracystic haemorrhage",
+      "respiratory compromise from a thoracic duplication",
+      "new solid or nodular components raising concern for rare malignant change in adults"
     ],
-    [
-     "Clinical Pitfall",
-     "mistaking the cyst for another abdominal cystic lesion and overlooking its shared wall with native bowel",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent following complete surgical excision, which is curative. Malignant transformation is rare and largely confined to lesions presenting in adulthood.",
+    "pitfalls": [
+      "mistaking the cyst for another abdominal cystic lesion and overlooking its shared wall with native bowel",
+      "failing to resect adjacent bowel when the shared blood supply precludes simple enucleation, leading to incomplete removal",
+      "overlooking ectopic gastric mucosa as the source of occult bleeding",
+      "missing an associated spinal or vertebral anomaly in thoracic duplications",
+      "attempting enucleation of a long tubular duplication and leaving retained mucosa"
+    ],
+    "references": [
+      "Ashcraft's Pediatric Surgery",
+      "Coran, Pediatric Surgery",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake complete surgical excision, which is curative, usually resecting the shared-wall bowel segment with anastomosis",
+      "Resuscitate and correct anaemia preoperatively where bleeding or obstruction has occurred",
+      "Address ectopic gastric mucosa as the source of peptic ulceration and haemorrhage, using acid suppression as a temporising measure",
+      "Treat acute complications such as obstruction, volvulus or intussusception with the cyst as lead point by urgent surgery",
+      "Obtain spinal imaging and involve neurosurgery where a thoracic duplication is associated with vertebral anomalies",
+      "Provide paediatric surgical follow-up after resection"
     ]
-   ],
-   "caption": "Overview comparison matrix for intestinal duplication cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "intestinal-duplication-cyst-real-image",
-   "title": "intestinal duplication cyst: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "intestinal_duplication_cyst-pathway",
+      "title": "intestinal duplication cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Duplications are spherical (cystic, commoner) or tubular structures that arise on the mesenteric border of the native bowel and share a common muscular wall and blood supply with it.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: gastrointestinal haemorrhage suggesting ectopic gastric mucosa",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: abdominal ultrasound to demonstrate the gut-signature double-wall sign, contrast-enhanced CT to define anatomy and relationship to bowel, MRI, particularly for thoracic and spinal involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake complete surgical excision, which is curative, usually resecting the shared-wall bowel segment with anastomosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: mistaking the cyst for another abdominal cystic lesion and overlooking its shared wall with native bowel"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of intestinal duplication cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "intestinal_duplication_cyst-matrix",
+      "title": "intestinal duplication cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Duplications are spherical (cystic, commoner) or tubular structures that arise on the mesenteric border of the native bowel and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "abdominal ultrasound to demonstrate the gut-signature double-wall sign, contrast-enhanced CT to define anatomy and relationship",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "mesenteric or omental cyst, choledochal cyst, cystic lymphangioma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake complete surgical excision, which is curative, usually resecting the shared-wall bowel segment with anastomosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "mistaking the cyst for another abdominal cystic lesion and overlooking its shared wall with native bowel",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for intestinal duplication cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ashcraft's Pediatric Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intestinal_duplication_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Gut-signature double-wall sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Anatomy and relation to bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Thoracic and spinal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Technetium-99m pertechnetate scintigraphy",
+          "cells": [
+            {
+              "text": "Ectopic gastric mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast luminal study",
+          "cells": [
+            {
+              "text": "Communication with the lumen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal imaging",
+          "cells": [
+            {
+              "text": "When a thoracic duplication is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of resected specimen",
+          "cells": [
+            {
+              "text": "Lining and ectopic tissue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intestinal_duplication_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mesenteric or omental cyst",
+          "cells": [
+            {
+              "text": "No shared muscular wall with native bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic pseudocyst",
+          "cells": [
+            {
+              "text": "Pancreatic rather than alimentary-type lining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intestinal_duplication_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete excision",
+          "cells": [
+            {
+              "text": "Curative; usually resects the shared-wall bowel segment with anastomosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative care",
+          "cells": [
+            {
+              "text": "Resuscitate and correct anaemia where bleeding or obstruction has occurred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic gastric mucosa",
+          "cells": [
+            {
+              "text": "Acid suppression as a temporising measure for peptic ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute complications",
+          "cells": [
+            {
+              "text": "Urgent surgery for obstruction, volvulus or intussusception with the cyst as lead point"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic duplication",
+          "cells": [
+            {
+              "text": "Spinal imaging and neurosurgery where vertebral anomalies coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Paediatric surgical review after resection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intestinal_duplication_cyst-dx-mgmt",
+      "title": "Diagnosis and management of intestinal duplication cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abdominal cyst on the mesenteric border, often in infancy or childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "GI bleeding, obstruction, volvulus, perforation or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgery for obstruction, volvulus or perforation; resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound double-wall sign, contrast CT, pertechnetate scan, MRI, spinal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Duplication with shared bowel wall confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mesenteric cyst or pancreatic pseudocyst; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete excision, usually with shared-wall bowel resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct anaemia and resuscitate before surgery if bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acid suppression for ectopic gastric mucosa while planning surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Spinal imaging and neurosurgery for thoracic duplication with vertebral anomaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Paediatric surgical follow-up after resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Curative after complete excision; follow-up after resection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

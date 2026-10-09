@@ -1,172 +1,497 @@
 {
- "id": "mucopolysaccharidosis",
- "name": "Mucopolysaccharidosis",
- "aliases": [
-  "MPS",
-  "mucopolysaccharidoses",
-  "glycosaminoglycan storage disorders"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of lysosomal storage disorders caused by deficiency of specific enzymes needed to degrade glycosaminoglycans (mucopolysaccharides), leading to their accumulation in tissues and excretion in urine",
-   "Most subtypes are inherited in an autosomal recessive manner; the notable exception is MPS II (Hunter syndrome), which is X-linked recessive",
-   "Shared features across many subtypes include coarse facial features, short stature, joint stiffness or contractures, hepatosplenomegaly, and dysostosis multiplex on radiographs",
-   "Corneal clouding is prominent in several subtypes (for example MPS I and MPS VI) but characteristically absent in MPS II and in the neuronopathic MPS III",
-   "Neurocognitive decline is a major feature of severe MPS I, MPS II, and especially MPS III (Sanfilippo), whereas MPS IV (Morquio) primarily affects the skeleton with preserved intellect",
-   "Cardiac valve disease, airway narrowing, hearing loss, and carpal tunnel syndrome are common and progressive complications",
-   "Cervical spine instability and cord compression are important risks, particularly in Morquio syndrome",
-   "Enzyme replacement therapy exists for several subtypes, and haematopoietic stem cell transplantation can benefit selected patients, most notably severe MPS I when performed early"
+  "id": "mucopolysaccharidosis",
+  "name": "Mucopolysaccharidosis",
+  "aliases": [
+    "MPS",
+    "mucopolysaccharidoses",
+    "glycosaminoglycan storage disorders"
   ],
-  "pathophysiology": "The mucopolysaccharidoses arise from deficiency of one of the lysosomal enzymes required for the stepwise degradation of glycosaminoglycans such as dermatan sulfate, heparan sulfate, keratan sulfate, and chondroitin sulfate. Incomplete breakdown leads to progressive accumulation of partially degraded glycosaminoglycans within lysosomes across many tissues, including connective tissue, cartilage, bone, cornea, heart valves, airways, and the central nervous system. This storage produces the progressive, multisystem, and often neurodegenerative phenotypes. The specific enzyme deficiency and the glycosaminoglycans that accumulate determine the clinical subtype.",
-  "additionalDifferentials": [
-   "Other lysosomal storage disorders such as the oligosaccharidoses and mucolipidoses",
-   "GM1 gangliosidosis with coarse features and skeletal changes",
-   "Skeletal dysplasias from other causes",
-   "Congenital hypothyroidism with coarse features",
-   "Multiple sulfatase deficiency"
-  ],
-  "additionalInvestigations": [
-   "Urinary glycosaminoglycan quantification and electrophoresis as a screening step",
-   "Specific lysosomal enzyme assays to identify the subtype",
-   "Molecular genetic testing to confirm the diagnosis and guide counselling",
-   "Skeletal survey to demonstrate dysostosis multiplex and assess spine stability",
-   "Echocardiography, audiology, ophthalmology, and airway assessment for multisystem involvement"
-  ],
-  "redFlags": [
-   "Signs of cervical spine instability or spinal cord compression",
-   "Progressive airway obstruction or obstructive sleep apnoea",
-   "Cardiac valve disease or heart failure",
-   "Rapid neurocognitive regression in neuronopathic subtypes"
-  ],
-  "prognosis": "Prognosis varies widely by subtype and severity. Severe neuronopathic forms progress to early disability and death, while attenuated forms are compatible with longer survival. Enzyme replacement and, for selected patients, stem cell transplantation can slow somatic disease, but established skeletal and neurological damage is often irreversible and does not fully respond to enzyme therapy.",
-  "pitfalls": [
-   "Missing early disease because features can be subtle in infancy and evolve over time",
-   "Overlooking cervical spine risk before anaesthesia or intubation",
-   "Assuming enzyme replacement will reverse neurological or advanced skeletal disease",
-   "Not recognising the X-linked inheritance of MPS II when counselling families"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give enzyme replacement therapy for the subtypes where it exists, using laronidase for MPS I, idursulfase for MPS II, galsulfase for MPS VI and elosulfase alfa for MPS IVA, to slow somatic disease",
-   "Consider haematopoietic stem cell transplantation for severe MPS I (Hurler) in early infancy to preserve neurocognition",
-   "Manage the airway carefully, treating obstructive disease and anticipating a difficult airway and cervical instability during anaesthesia",
-   "Undertake cardiac surveillance with echocardiography and manage progressive valve disease",
-   "Provide orthopaedic and spinal surgery for dysostosis multiplex, cervical cord compression and carpal tunnel syndrome",
-   "Address hearing loss with aids, treat hydrocephalus with shunting and provide ophthalmological care for corneal clouding",
-   "Offer genetic counselling, noting most subtypes are autosomal recessive while MPS II (Hunter) is X-linked recessive",
-   "Coordinate lifelong multidisciplinary specialist care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mucopolysaccharidosis-pathway",
-   "title": "Mucopolysaccharidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of lysosomal storage disorders caused by deficiency of specific enzymes needed to degrade glycosaminoglycans (mucopolysaccharides), leading to their accumulation in tissues and excretion in urine",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of cervical spine instability or spinal cord compression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinary glycosaminoglycan quantification and electrophoresis as a screening step, Specific lysosomal enzyme assays to identify the subtype, Molecular genetic testing to confirm the diagnosis and guide counselling"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give enzyme replacement therapy for the subtypes where it exists, using laronidase for MPS I, idursulfase for MPS II, galsulfase for MPS VI and elosulfase alfa for MPS IVA, to slow somatic disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing early disease because features can be subtle in infancy and evolve over time"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mucopolysaccharidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "mucopolysaccharidosis-matrix",
-   "title": "Mucopolysaccharidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of lysosomal storage disorders caused by deficiency of specific enzymes needed to degrade glycosaminoglycans",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of lysosomal storage disorders caused by deficiency of specific enzymes needed to degrade glycosaminoglycans (mucopolysaccharides), leading to their accumulation in tissues and excretion in urine",
+      "Most subtypes are inherited in an autosomal recessive manner; the notable exception is MPS II (Hunter syndrome), which is X-linked recessive",
+      "Shared features across many subtypes include coarse facial features, short stature, joint stiffness or contractures, hepatosplenomegaly, and dysostosis multiplex on radiographs",
+      "Corneal clouding is prominent in several subtypes (for example MPS I and MPS VI) but characteristically absent in MPS II and in the neuronopathic MPS III",
+      "Neurocognitive decline is a major feature of severe MPS I, MPS II, and especially MPS III (Sanfilippo), whereas MPS IV (Morquio) primarily affects the skeleton with preserved intellect",
+      "Cardiac valve disease, airway narrowing, hearing loss, and carpal tunnel syndrome are common and progressive complications",
+      "Cervical spine instability and cord compression are important risks, particularly in Morquio syndrome",
+      "Enzyme replacement therapy exists for several subtypes, and haematopoietic stem cell transplantation can benefit selected patients, most notably severe MPS I when performed early"
     ],
-    [
-     "Key Investigations",
-     "Urinary glycosaminoglycan quantification and electrophoresis as a screening step, Specific lysosomal enzyme assays to identify",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The mucopolysaccharidoses arise from deficiency of one of the lysosomal enzymes required for the stepwise degradation of glycosaminoglycans such as dermatan sulfate, heparan sulfate, keratan sulfate, and chondroitin sulfate. Incomplete breakdown leads to progressive accumulation of partially degraded glycosaminoglycans within lysosomes across many tissues, including connective tissue, cartilage, bone, cornea, heart valves, airways, and the central nervous system. This storage produces the progressive, multisystem, and often neurodegenerative phenotypes. The specific enzyme deficiency and the glycosaminoglycans that accumulate determine the clinical subtype.",
+    "additionalDifferentials": [
+      "Other lysosomal storage disorders such as the oligosaccharidoses and mucolipidoses",
+      "GM1 gangliosidosis with coarse features and skeletal changes",
+      "Skeletal dysplasias from other causes",
+      "Congenital hypothyroidism with coarse features",
+      "Multiple sulfatase deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Other lysosomal storage disorders such as the oligosaccharidoses and mucolipidoses, GM1 gangliosidosis with coarse features and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinary glycosaminoglycan quantification and electrophoresis as a screening step",
+      "Specific lysosomal enzyme assays to identify the subtype",
+      "Molecular genetic testing to confirm the diagnosis and guide counselling",
+      "Skeletal survey to demonstrate dysostosis multiplex and assess spine stability",
+      "Echocardiography, audiology, ophthalmology, and airway assessment for multisystem involvement"
     ],
-    [
-     "Management Strategy",
-     "Give enzyme replacement therapy for the subtypes where it exists, using laronidase for MPS I, idursulfase for MPS II, galsulfase",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of cervical spine instability or spinal cord compression",
+      "Progressive airway obstruction or obstructive sleep apnoea",
+      "Cardiac valve disease or heart failure",
+      "Rapid neurocognitive regression in neuronopathic subtypes"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing early disease because features can be subtle in infancy and evolve over time",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies widely by subtype and severity. Severe neuronopathic forms progress to early disability and death, while attenuated forms are compatible with longer survival. Enzyme replacement and, for selected patients, stem cell transplantation can slow somatic disease, but established skeletal and neurological damage is often irreversible and does not fully respond to enzyme therapy.",
+    "pitfalls": [
+      "Missing early disease because features can be subtle in infancy and evolve over time",
+      "Overlooking cervical spine risk before anaesthesia or intubation",
+      "Assuming enzyme replacement will reverse neurological or advanced skeletal disease",
+      "Not recognising the X-linked inheritance of MPS II when counselling families"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give enzyme replacement therapy for the subtypes where it exists, using laronidase for MPS I, idursulfase for MPS II, galsulfase for MPS VI and elosulfase alfa for MPS IVA, to slow somatic disease",
+      "Consider haematopoietic stem cell transplantation for severe MPS I (Hurler) in early infancy to preserve neurocognition",
+      "Manage the airway carefully, treating obstructive disease and anticipating a difficult airway and cervical instability during anaesthesia",
+      "Undertake cardiac surveillance with echocardiography and manage progressive valve disease",
+      "Provide orthopaedic and spinal surgery for dysostosis multiplex, cervical cord compression and carpal tunnel syndrome",
+      "Address hearing loss with aids, treat hydrocephalus with shunting and provide ophthalmological care for corneal clouding",
+      "Offer genetic counselling, noting most subtypes are autosomal recessive while MPS II (Hunter) is X-linked recessive",
+      "Coordinate lifelong multidisciplinary specialist care"
     ]
-   ],
-   "caption": "Overview comparison matrix for mucopolysaccharidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mucopolysaccharidosis-real-image",
-   "title": "Mucopolysaccharidosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mucopolysaccharidosis-pathway",
+      "title": "Mucopolysaccharidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of lysosomal storage disorders caused by deficiency of specific enzymes needed to degrade glycosaminoglycans (mucopolysaccharides), leading to their accumulation in tissues and excretion in urine",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of cervical spine instability or spinal cord compression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinary glycosaminoglycan quantification and electrophoresis as a screening step, Specific lysosomal enzyme assays to identify the subtype, Molecular genetic testing to confirm the diagnosis and guide counselling"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give enzyme replacement therapy for the subtypes where it exists, using laronidase for MPS I, idursulfase for MPS II, galsulfase for MPS VI and elosulfase alfa for MPS IVA, to slow somatic disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing early disease because features can be subtle in infancy and evolve over time"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mucopolysaccharidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mucopolysaccharidosis-matrix",
+      "title": "Mucopolysaccharidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of lysosomal storage disorders caused by deficiency of specific enzymes needed to degrade glycosaminoglycans",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinary glycosaminoglycan quantification and electrophoresis as a screening step, Specific lysosomal enzyme assays to identify",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other lysosomal storage disorders such as the oligosaccharidoses and mucolipidoses, GM1 gangliosidosis with coarse features and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give enzyme replacement therapy for the subtypes where it exists, using laronidase for MPS I, idursulfase for MPS II, galsulfase",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing early disease because features can be subtle in infancy and evolve over time",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mucopolysaccharidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mucopolysaccharidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary glycosaminoglycan quantification and electrophoresis",
+          "cells": [
+            {
+              "text": "Screening step for glycosaminoglycan excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific lysosomal enzyme assays",
+          "cells": [
+            {
+              "text": "Identify the MPS subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and guides counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Dysostosis multiplex and assessment of spine stability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography, audiology, ophthalmology, airway assessment",
+          "cells": [
+            {
+              "text": "Multisystem involvement: valve disease, hearing loss, corneal clouding, airway narrowing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucopolysaccharidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "GM1 gangliosidosis with coarse features and skeletal changes",
+          "cells": [
+            {
+              "text": "Coarse features and skeletal changes overlap; enzyme assays separate it from MPS subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other lysosomal storage disorders such as oligosaccharidoses and mucolipidoses",
+          "cells": [
+            {
+              "text": "Separated by specific lysosomal enzyme assays after urinary GAG screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal dysplasias from other causes",
+          "cells": [
+            {
+              "text": "Dysostosis multiplex on skeletal survey is the MPS skeletal pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital hypothyroidism with coarse features",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple sulfatase deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucopolysaccharidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement therapy",
+          "cells": [
+            {
+              "text": "Laronidase for MPS I, idursulfase for MPS II, galsulfase for MPS VI, elosulfase alfa for MPS IVA; slows somatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Considered for severe MPS I (Hurler) in early infancy to preserve neurocognition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway management",
+          "cells": [
+            {
+              "text": "Treat obstructive disease; anticipate difficult airway and cervical instability at anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and management of progressive valve disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and spinal surgery",
+          "cells": [
+            {
+              "text": "Dysostosis multiplex, cervical cord compression, carpal tunnel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing, hydrocephalus and eye care",
+          "cells": [
+            {
+              "text": "Hearing aids; shunting for hydrocephalus; ophthalmology for corneal clouding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Most subtypes autosomal recessive; MPS II is X-linked recessive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong multidisciplinary care",
+          "cells": [
+            {
+              "text": "Coordinated specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mucopolysaccharidosis-dx-mgmt",
+      "title": "Diagnosis and management of Mucopolysaccharidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected MPS: coarse features, short stature, stiff joints, dysostosis multiplex",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cervical instability, airway obstruction, valve disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent escalation for cord compression, airway or cardiac risk; plan difficult airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary GAG screen, subtype enzyme assay, skeletal survey, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Subtype identified by enzyme assay and molecular genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat assessment for early or subtle disease as features evolve",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Enzyme replacement therapy where available for the subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Airway management with cervical instability precautions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiac surveillance and valve disease management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic and spinal surgery as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling; note X-linked inheritance in MPS II",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong coordinated multidisciplinary care; outcome varies by subtype",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

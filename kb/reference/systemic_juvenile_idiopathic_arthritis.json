@@ -1,180 +1,505 @@
 {
- "id": "systemic_juvenile_idiopathic_arthritis",
- "name": "Systemic juvenile idiopathic arthritis (Still disease)",
- "aliases": [
-  "systemic JIA",
-  "sJIA",
-  "Still disease",
-  "systemic-onset juvenile idiopathic arthritis"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Paediatrics",
- "specialty": "Paediatric Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic triad is a quotidian (once- or twice-daily spiking) fever, an evanescent salmon-pink rash that appears with fever peaks, and arthritis, though joint involvement may lag behind the systemic features",
-   "Regarded as an autoinflammatory rather than a classically autoantibody-driven disease, so antinuclear antibody and rheumatoid factor are typically negative and unhelpful diagnostically",
-   "Markedly raised inflammatory markers, neutrophilia, thrombocytosis, anaemia of inflammation and a strikingly high serum ferritin are characteristic",
-   "Serositis (pericarditis, pleuritis), hepatosplenomegaly and generalised lymphadenopathy are common systemic accompaniments",
-   "Macrophage activation syndrome (MAS) is a life-threatening complication signalled by falling cell counts, falling erythrocyte sedimentation rate with rising ferritin, hypofibrinogenaemia, hypertriglyceridaemia and hepatic dysfunction",
-   "IL-1 and IL-6 blockade have transformed management and are used early in systemic disease, alongside systemic corticosteroids for severe presentations",
-   "Chronic anterior uveitis is uncommon in the systemic subtype compared with oligoarticular disease, but ophthalmology review remains part of overall JIA surveillance",
-   "A biphasic course is described, with an early systemic-inflammatory phase and a later chronic destructive arthritis phase in a subset of children"
+  "id": "systemic_juvenile_idiopathic_arthritis",
+  "name": "Systemic juvenile idiopathic arthritis (Still disease)",
+  "aliases": [
+    "systemic JIA",
+    "sJIA",
+    "Still disease",
+    "systemic-onset juvenile idiopathic arthritis"
   ],
-  "pathophysiology": "Systemic juvenile idiopathic arthritis is best understood as an autoinflammatory disorder driven by dysregulated innate immunity rather than adaptive autoimmunity. Excess production of the proinflammatory cytokines interleukin-1, interleukin-6 and interleukin-18, together with activated neutrophils and macrophages, produces the systemic features of fever, rash, serositis and reticuloendothelial activation. Uncontrolled macrophage and T-cell activation can tip into a cytokine storm known as macrophage activation syndrome, a form of secondary haemophagocytic lymphohistiocytosis. Persistent joint inflammation in the chronic phase may reflect a shift towards adaptive immune mechanisms and can lead to erosive, destructive arthritis if inadequately controlled.",
-  "additionalDifferentials": [
-   "Systemic infection or occult sepsis",
-   "Leukaemia or lymphoma presenting with fever and cytopenias",
-   "Kawasaki disease",
-   "Primary haemophagocytic lymphohistiocytosis",
-   "Systemic lupus erythematosus and other connective tissue disease",
-   "Inflammatory bowel disease with systemic features",
-   "Monogenic autoinflammatory (periodic fever) syndromes"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with differential looking for neutrophilia, thrombocytosis and anaemia (and cytopenias suggesting MAS)",
-   "Inflammatory markers including erythrocyte sedimentation rate and C-reactive protein",
-   "Serum ferritin, fibrinogen, triglycerides and liver function tests to detect macrophage activation syndrome",
-   "Antinuclear antibody and rheumatoid factor (usually negative) to help exclude other subtypes and connective tissue disease",
-   "Blood cultures and infection screen, plus bone marrow examination when malignancy or HLH is a concern",
-   "Echocardiography and chest imaging when serositis is suspected",
-   "Slit-lamp ophthalmology assessment as part of JIA uveitis surveillance"
-  ],
-  "redFlags": [
-   "Falling blood counts, rising ferritin and falling erythrocyte sedimentation rate suggesting macrophage activation syndrome",
-   "Bleeding, encephalopathy or multiorgan dysfunction indicating severe MAS",
-   "Cardiac tamponade from large pericardial effusion",
-   "Cytopenias, bone pain or blast cells raising concern for underlying malignancy",
-   "Persistent unexplained fever with clinical deterioration despite treatment"
-  ],
-  "prognosis": "Outcomes have improved substantially with early cytokine-targeted therapy; some children achieve durable remission, whereas others develop persistent destructive polyarthritis or recurrent systemic flares. Macrophage activation syndrome carries appreciable mortality and requires prompt recognition and intensive immunosuppression.",
-  "pitfalls": [
-   "Attributing persistent fever and raised inflammatory markers to infection and delaying rheumatological assessment",
-   "Overlooking evolving macrophage activation syndrome when the erythrocyte sedimentation rate paradoxically falls",
-   "Assuming a negative antinuclear antibody and rheumatoid factor exclude the diagnosis",
-   "Failing to exclude leukaemia before starting corticosteroids in a febrile child with cytopenias",
-   "Neglecting long-term monitoring for growth impairment and joint damage"
-  ],
-  "references": [
-   "Textbook of Pediatric Rheumatology",
-   "ILAR classification of juvenile idiopathic arthritis",
-   "PRINTO/PReS consensus on systemic JIA and MAS"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early cytokine-targeted biologic therapy with interleukin-1 blockade (anakinra, canakinumab) or interleukin-6 blockade (tocilizumab) as the disease-modifying mainstay",
-   "Systemic corticosteroids for severe systemic presentations and to bridge to biologic control",
-   "NSAIDs for symptomatic relief of fever and arthralgia in milder disease",
-   "Methotrexate or continued biologic therapy for persistent, potentially erosive arthritis",
-   "Vigilance for macrophage activation syndrome, treated urgently with high-dose corticosteroids, anakinra and ciclosporin",
-   "Monitoring of growth, bone health, and drug toxicity, with physiotherapy to preserve joint function",
-   "Management within a paediatric rheumatology multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "systemic_juvenile_idiopathic_arthritis-pathway",
-   "title": "Systemic juvenile idiopathic arthritis (Still disease): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic triad is a quotidian (once- or twice-daily spiking) fever, an evanescent salmon-pink rash that appears with fever peaks, and arthritis, though joint involvement may lag behind the systemic features",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Falling blood counts, rising ferritin and falling erythrocyte sedimentation rate suggesting macrophage activation syndrome",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with differential looking for neutrophilia, thrombocytosis and anaemia (and cytopenias suggesting MAS), Inflammatory markers including erythrocyte sedimentation rate and C-reactive protein, Serum ferritin,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early cytokine-targeted biologic therapy with interleukin-1 blockade (anakinra, canakinumab) or interleukin-6 blockade (tocilizumab) as the disease-modifying mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing persistent fever and raised inflammatory markers to infection and delaying rheumatological assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of systemic juvenile idiopathic arthritis (still disease)."
-  }
- ],
- "tables": [
-  {
-   "id": "systemic_juvenile_idiopathic_arthritis-matrix",
-   "title": "Systemic juvenile idiopathic arthritis (Still disease): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic triad is a quotidian (once- or twice-daily spiking) fever, an evanescent salmon-pink rash that appears with fever",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Paediatrics",
+  "specialty": "Paediatric Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic triad is a quotidian (once- or twice-daily spiking) fever, an evanescent salmon-pink rash that appears with fever peaks, and arthritis, though joint involvement may lag behind the systemic features",
+      "Regarded as an autoinflammatory rather than a classically autoantibody-driven disease, so antinuclear antibody and rheumatoid factor are typically negative and unhelpful diagnostically",
+      "Markedly raised inflammatory markers, neutrophilia, thrombocytosis, anaemia of inflammation and a strikingly high serum ferritin are characteristic",
+      "Serositis (pericarditis, pleuritis), hepatosplenomegaly and generalised lymphadenopathy are common systemic accompaniments",
+      "Macrophage activation syndrome (MAS) is a life-threatening complication signalled by falling cell counts, falling erythrocyte sedimentation rate with rising ferritin, hypofibrinogenaemia, hypertriglyceridaemia and hepatic dysfunction",
+      "IL-1 and IL-6 blockade have transformed management and are used early in systemic disease, alongside systemic corticosteroids for severe presentations",
+      "Chronic anterior uveitis is uncommon in the systemic subtype compared with oligoarticular disease, but ophthalmology review remains part of overall JIA surveillance",
+      "A biphasic course is described, with an early systemic-inflammatory phase and a later chronic destructive arthritis phase in a subset of children"
     ],
-    [
-     "Key Investigations",
-     "Full blood count with differential looking for neutrophilia, thrombocytosis and anaemia (and cytopenias suggesting MAS),",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Systemic juvenile idiopathic arthritis is best understood as an autoinflammatory disorder driven by dysregulated innate immunity rather than adaptive autoimmunity. Excess production of the proinflammatory cytokines interleukin-1, interleukin-6 and interleukin-18, together with activated neutrophils and macrophages, produces the systemic features of fever, rash, serositis and reticuloendothelial activation. Uncontrolled macrophage and T-cell activation can tip into a cytokine storm known as macrophage activation syndrome, a form of secondary haemophagocytic lymphohistiocytosis. Persistent joint inflammation in the chronic phase may reflect a shift towards adaptive immune mechanisms and can lead to erosive, destructive arthritis if inadequately controlled.",
+    "additionalDifferentials": [
+      "Systemic infection or occult sepsis",
+      "Leukaemia or lymphoma presenting with fever and cytopenias",
+      "Kawasaki disease",
+      "Primary haemophagocytic lymphohistiocytosis",
+      "Systemic lupus erythematosus and other connective tissue disease",
+      "Inflammatory bowel disease with systemic features",
+      "Monogenic autoinflammatory (periodic fever) syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Systemic infection or occult sepsis, Leukaemia or lymphoma presenting with fever and cytopenias, Kawasaki disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with differential looking for neutrophilia, thrombocytosis and anaemia (and cytopenias suggesting MAS)",
+      "Inflammatory markers including erythrocyte sedimentation rate and C-reactive protein",
+      "Serum ferritin, fibrinogen, triglycerides and liver function tests to detect macrophage activation syndrome",
+      "Antinuclear antibody and rheumatoid factor (usually negative) to help exclude other subtypes and connective tissue disease",
+      "Blood cultures and infection screen, plus bone marrow examination when malignancy or HLH is a concern",
+      "Echocardiography and chest imaging when serositis is suspected",
+      "Slit-lamp ophthalmology assessment as part of JIA uveitis surveillance"
     ],
-    [
-     "Management Strategy",
-     "Early cytokine-targeted biologic therapy with interleukin-1 blockade (anakinra, canakinumab) or interleukin-6 blockade",
-     "Core treatment modality"
+    "redFlags": [
+      "Falling blood counts, rising ferritin and falling erythrocyte sedimentation rate suggesting macrophage activation syndrome",
+      "Bleeding, encephalopathy or multiorgan dysfunction indicating severe MAS",
+      "Cardiac tamponade from large pericardial effusion",
+      "Cytopenias, bone pain or blast cells raising concern for underlying malignancy",
+      "Persistent unexplained fever with clinical deterioration despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing persistent fever and raised inflammatory markers to infection and delaying rheumatological assessment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes have improved substantially with early cytokine-targeted therapy; some children achieve durable remission, whereas others develop persistent destructive polyarthritis or recurrent systemic flares. Macrophage activation syndrome carries appreciable mortality and requires prompt recognition and intensive immunosuppression.",
+    "pitfalls": [
+      "Attributing persistent fever and raised inflammatory markers to infection and delaying rheumatological assessment",
+      "Overlooking evolving macrophage activation syndrome when the erythrocyte sedimentation rate paradoxically falls",
+      "Assuming a negative antinuclear antibody and rheumatoid factor exclude the diagnosis",
+      "Failing to exclude leukaemia before starting corticosteroids in a febrile child with cytopenias",
+      "Neglecting long-term monitoring for growth impairment and joint damage"
+    ],
+    "references": [
+      "Textbook of Pediatric Rheumatology",
+      "ILAR classification of juvenile idiopathic arthritis",
+      "PRINTO/PReS consensus on systemic JIA and MAS"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early cytokine-targeted biologic therapy with interleukin-1 blockade (anakinra, canakinumab) or interleukin-6 blockade (tocilizumab) as the disease-modifying mainstay",
+      "Systemic corticosteroids for severe systemic presentations and to bridge to biologic control",
+      "NSAIDs for symptomatic relief of fever and arthralgia in milder disease",
+      "Methotrexate or continued biologic therapy for persistent, potentially erosive arthritis",
+      "Vigilance for macrophage activation syndrome, treated urgently with high-dose corticosteroids, anakinra and ciclosporin",
+      "Monitoring of growth, bone health, and drug toxicity, with physiotherapy to preserve joint function",
+      "Management within a paediatric rheumatology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for systemic juvenile idiopathic arthritis (still disease)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "systemic-juvenile-idiopathic-arthritis-real-image",
-   "title": "Systemic juvenile idiopathic arthritis (Still disease): 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "systemic_juvenile_idiopathic_arthritis-pathway",
+      "title": "Systemic juvenile idiopathic arthritis (Still disease): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic triad is a quotidian (once- or twice-daily spiking) fever, an evanescent salmon-pink rash that appears with fever peaks, and arthritis, though joint involvement may lag behind the systemic features",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Falling blood counts, rising ferritin and falling erythrocyte sedimentation rate suggesting macrophage activation syndrome",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with differential looking for neutrophilia, thrombocytosis and anaemia (and cytopenias suggesting MAS), Inflammatory markers including erythrocyte sedimentation rate and C-reactive protein, Serum ferritin,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early cytokine-targeted biologic therapy with interleukin-1 blockade (anakinra, canakinumab) or interleukin-6 blockade (tocilizumab) as the disease-modifying mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing persistent fever and raised inflammatory markers to infection and delaying rheumatological assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of systemic juvenile idiopathic arthritis (still disease)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis-matrix",
+      "title": "Systemic juvenile idiopathic arthritis (Still disease): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad is a quotidian (once- or twice-daily spiking) fever, an evanescent salmon-pink rash that appears with fever",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with differential looking for neutrophilia, thrombocytosis and anaemia (and cytopenias suggesting MAS),",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic infection or occult sepsis, Leukaemia or lymphoma presenting with fever and cytopenias, Kawasaki disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early cytokine-targeted biologic therapy with interleukin-1 blockade (anakinra, canakinumab) or interleukin-6 blockade",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing persistent fever and raised inflammatory markers to infection and delaying rheumatological assessment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for systemic juvenile idiopathic arthritis (still disease)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis-dx-mgmt",
+      "title": "Diagnosis and management of Systemic juvenile idiopathic arthritis (Still disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected systemic JIA: quotidian fever, evanescent salmon-pink rash, arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling counts with rising ferritin, bleeding, or tamponade)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent MAS treatment: high-dose corticosteroids, anakinra and ciclosporin",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC; ESR and CRP; ferritin, fibrinogen, triglycerides; ANA and rheumatoid factor",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are infection and malignancy excluded, with ANA and rheumatoid factor negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Kawasaki disease, leukaemia or periodic fever syndromes; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early interleukin-1 blockade with anakinra or canakinumab as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interleukin-6 blockade with tocilizumab",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic corticosteroids for severe presentations and as a bridge",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "NSAIDs for fever and arthralgia in milder disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Methotrexate or continued biologic for potentially erosive arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early cytokine-targeted therapy has improved outcomes; MAS carries high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Neutrophilia, thrombocytosis and anaemia; cytopenias suggest MAS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ferritin, fibrinogen, triglycerides and liver function tests",
+          "cells": [
+            {
+              "text": "Macrophage activation syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANA and rheumatoid factor",
+          "cells": [
+            {
+              "text": "Usually negative; helps exclude other subtypes and connective tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures, infection screen and bone marrow",
+          "cells": [
+            {
+              "text": "Infection, malignancy or HLH, when a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and chest imaging",
+          "cells": [
+            {
+              "text": "Serositis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp ophthalmology assessment",
+          "cells": [
+            {
+              "text": "Uveitis, as part of JIA surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic infection or occult sepsis",
+          "cells": [
+            {
+              "text": "Persistent fever and raised markers are often attributed to infection; rheumatology review should not be delayed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukaemia or lymphoma",
+          "cells": [
+            {
+              "text": "Excluded before corticosteroids in a febrile child with cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Antinuclear antibody is typically negative in systemic JIA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "systemic_juvenile_idiopathic_arthritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra or canakinumab as the disease-modifying mainstay, used early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interleukin-6 blockade",
+          "cells": [
+            {
+              "text": "Tocilizumab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Severe systemic presentations, and to bridge to biologic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Symptomatic relief of fever and arthralgia in milder disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methotrexate or continued biologic therapy",
+          "cells": [
+            {
+              "text": "Persistent, potentially erosive arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrophage activation syndrome treatment",
+          "cells": [
+            {
+              "text": "High-dose corticosteroids, anakinra and ciclosporin, given urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, bone and drug toxicity monitoring",
+          "cells": [
+            {
+              "text": "Physiotherapy to preserve joint function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric rheumatology team",
+          "cells": [
+            {
+              "text": "Multidisciplinary management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

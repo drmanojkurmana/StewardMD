@@ -1,177 +1,493 @@
 {
- "id": "lobomycosis",
- "name": "Lobomycosis",
- "aliases": [
-  "Lacazia loboi",
-  "Loboa loboi",
-  "lacaziosis",
-  "Jorge Lobo disease",
-  "keloidal blastomycosis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Lobomycosis is a chronic cutaneous and subcutaneous fungal infection caused by the uncultivated organism Lacazia loboi, endemic to the humid tropics of the Amazon basin and Central/South America",
-   "It occurs in rural forest and riverine workers and has also been reported in dolphins, with rare dolphin-to-human transmission",
-   "Infection follows traumatic inoculation of the organism into the skin; there is no evidence of person-to-person spread",
-   "The characteristic lesions are slowly growing, firm, shiny keloid-like nodules and plaques, typically on exposed cooler sites such as the ears, limbs and face",
-   "Lesions are usually painless but may itch; they spread by local extension and autoinoculation over years while sparing internal organs",
-   "Diagnosis is made histologically by finding chains of uniform, thick-walled yeast-like cells linked by tubular bridges; the organism cannot be cultured in vitro",
-   "Treatment is difficult: surgical excision of localised lesions is preferred, and antifungal drugs alone are generally disappointing, so wide excision with clear margins is often required"
+  "id": "lobomycosis",
+  "name": "Lobomycosis",
+  "aliases": [
+    "Lacazia loboi",
+    "Loboa loboi",
+    "lacaziosis",
+    "Jorge Lobo disease",
+    "keloidal blastomycosis"
   ],
-  "pathophysiology": "Lacazia loboi is thought to reside in soil, vegetation or aquatic environments and is introduced into the dermis through minor trauma. The organism proliferates as yeast-like cells within the dermis, provoking a granulomatous response, and spreads slowly by contiguous extension and by autoinoculation from scratching. Because it does not disseminate haematogenously or invade viscera, disease remains confined to the skin and subcutaneous tissue, producing progressively enlarging fibrotic, keloid-like nodules. The inability to culture the fungus reflects its obligate in vivo growth and has limited understanding of its biology.",
-  "additionalDifferentials": [
-   "Keloid or hypertrophic scar",
-   "Chromoblastomycosis",
-   "Cutaneous leishmaniasis",
-   "Lepromatous leprosy",
-   "Dermatofibrosarcoma protuberans or other cutaneous tumours",
-   "Other subcutaneous mycoses (e.g. paracoccidioidomycosis)"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with fungal stains showing chains of yeast cells joined by tubular bridges",
-   "Direct microscopy of tissue scrapings for the characteristic yeast cells",
-   "Clinical and exposure history (forest/riverine work, dolphin contact)",
-   "Assessment of lesion extent and margins to plan excision",
-   "Exclusion of other subcutaneous mycoses and leprosy",
-   "Molecular identification where available given inability to culture"
-  ],
-  "redFlags": [
-   "Rapid change, ulceration or induration in a long-standing lesion raising concern for malignant transformation",
-   "Extensive or multifocal disease limiting surgical options",
-   "Involvement of functionally or cosmetically critical sites",
-   "Recurrence after excision",
-   "Diagnostic uncertainty with a cutaneous malignancy"
-  ],
-  "prognosis": "Lobomycosis is indolent and non-life-threatening but chronic and disfiguring; localised lesions may be cured by complete excision, whereas extensive disease tends to recur and responds poorly to medical therapy, and rare malignant transformation is reported in long-standing lesions.",
-  "pitfalls": [
-   "Mistaking lesions for keloid and delaying biopsy and diagnosis",
-   "Expecting antifungal drugs alone to be curative",
-   "Incomplete excision leading to recurrence",
-   "Attempting culture and being misled by its failure to grow",
-   "Overlooking malignant change in chronic, altering lesions"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake complete surgical excision with clear margins, the mainstay offering the best chance of cure for localised lesions",
-   "Use cryotherapy or Mohs micrographic surgery for selected accessible lesions",
-   "Add prolonged antifungal therapy such as itraconazole or posaconazole, recognising that medical treatment alone is often disappointing",
-   "Combine surgery with antifungal therapy in extensive disease to reduce recurrence",
-   "Follow up long term for local recurrence and the rare malignant transformation of longstanding lesions",
-   "Provide wound care and advise against scratching to prevent autoinoculation",
-   "Refer to dermatology or infectious diseases with histological confirmation, since the organism cannot be cultured"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lobomycosis-pathway",
-   "title": "Lobomycosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Lobomycosis is a chronic cutaneous and subcutaneous fungal infection caused by the uncultivated organism Lacazia loboi, endemic to the humid tropics of the Amazon basin and Central/South America",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid change, ulceration or induration in a long-standing lesion raising concern for malignant transformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with fungal stains showing chains of yeast cells joined by tubular bridges, Direct microscopy of tissue scrapings for the characteristic yeast cells, Clinical and exposure history (forest/riverine work, dolphin"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake complete surgical excision with clear margins, the mainstay offering the best chance of cure for localised lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking lesions for keloid and delaying biopsy and diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lobomycosis."
-  }
- ],
- "tables": [
-  {
-   "id": "lobomycosis-matrix",
-   "title": "Lobomycosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Lobomycosis is a chronic cutaneous and subcutaneous fungal infection caused by the uncultivated organism Lacazia loboi, endemic",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Lobomycosis is a chronic cutaneous and subcutaneous fungal infection caused by the uncultivated organism Lacazia loboi, endemic to the humid tropics of the Amazon basin and Central/South America",
+      "It occurs in rural forest and riverine workers and has also been reported in dolphins, with rare dolphin-to-human transmission",
+      "Infection follows traumatic inoculation of the organism into the skin; there is no evidence of person-to-person spread",
+      "The characteristic lesions are slowly growing, firm, shiny keloid-like nodules and plaques, typically on exposed cooler sites such as the ears, limbs and face",
+      "Lesions are usually painless but may itch; they spread by local extension and autoinoculation over years while sparing internal organs",
+      "Diagnosis is made histologically by finding chains of uniform, thick-walled yeast-like cells linked by tubular bridges; the organism cannot be cultured in vitro",
+      "Treatment is difficult: surgical excision of localised lesions is preferred, and antifungal drugs alone are generally disappointing, so wide excision with clear margins is often required"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with fungal stains showing chains of yeast cells joined by tubular bridges, Direct microscopy of tissue scrapings for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lacazia loboi is thought to reside in soil, vegetation or aquatic environments and is introduced into the dermis through minor trauma. The organism proliferates as yeast-like cells within the dermis, provoking a granulomatous response, and spreads slowly by contiguous extension and by autoinoculation from scratching. Because it does not disseminate haematogenously or invade viscera, disease remains confined to the skin and subcutaneous tissue, producing progressively enlarging fibrotic, keloid-like nodules. The inability to culture the fungus reflects its obligate in vivo growth and has limited understanding of its biology.",
+    "additionalDifferentials": [
+      "Keloid or hypertrophic scar",
+      "Chromoblastomycosis",
+      "Cutaneous leishmaniasis",
+      "Lepromatous leprosy",
+      "Dermatofibrosarcoma protuberans or other cutaneous tumours",
+      "Other subcutaneous mycoses (e.g. paracoccidioidomycosis)"
     ],
-    [
-     "Primary Differentials",
-     "Keloid or hypertrophic scar, Chromoblastomycosis, Cutaneous leishmaniasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with fungal stains showing chains of yeast cells joined by tubular bridges",
+      "Direct microscopy of tissue scrapings for the characteristic yeast cells",
+      "Clinical and exposure history (forest/riverine work, dolphin contact)",
+      "Assessment of lesion extent and margins to plan excision",
+      "Exclusion of other subcutaneous mycoses and leprosy",
+      "Molecular identification where available given inability to culture"
     ],
-    [
-     "Management Strategy",
-     "Undertake complete surgical excision with clear margins, the mainstay offering the best chance of cure for localised lesions",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid change, ulceration or induration in a long-standing lesion raising concern for malignant transformation",
+      "Extensive or multifocal disease limiting surgical options",
+      "Involvement of functionally or cosmetically critical sites",
+      "Recurrence after excision",
+      "Diagnostic uncertainty with a cutaneous malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking lesions for keloid and delaying biopsy and diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lobomycosis is indolent and non-life-threatening but chronic and disfiguring; localised lesions may be cured by complete excision, whereas extensive disease tends to recur and responds poorly to medical therapy, and rare malignant transformation is reported in long-standing lesions.",
+    "pitfalls": [
+      "Mistaking lesions for keloid and delaying biopsy and diagnosis",
+      "Expecting antifungal drugs alone to be curative",
+      "Incomplete excision leading to recurrence",
+      "Attempting culture and being misled by its failure to grow",
+      "Overlooking malignant change in chronic, altering lesions"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake complete surgical excision with clear margins, the mainstay offering the best chance of cure for localised lesions",
+      "Use cryotherapy or Mohs micrographic surgery for selected accessible lesions",
+      "Add prolonged antifungal therapy such as itraconazole or posaconazole, recognising that medical treatment alone is often disappointing",
+      "Combine surgery with antifungal therapy in extensive disease to reduce recurrence",
+      "Follow up long term for local recurrence and the rare malignant transformation of longstanding lesions",
+      "Provide wound care and advise against scratching to prevent autoinoculation",
+      "Refer to dermatology or infectious diseases with histological confirmation, since the organism cannot be cultured"
     ]
-   ],
-   "caption": "Overview comparison matrix for lobomycosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lobomycosis-real-image",
-   "title": "Lobomycosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "lobomycosis-pathway",
+      "title": "Lobomycosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Lobomycosis is a chronic cutaneous and subcutaneous fungal infection caused by the uncultivated organism Lacazia loboi, endemic to the humid tropics of the Amazon basin and Central/South America",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid change, ulceration or induration in a long-standing lesion raising concern for malignant transformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with fungal stains showing chains of yeast cells joined by tubular bridges, Direct microscopy of tissue scrapings for the characteristic yeast cells, Clinical and exposure history (forest/riverine work, dolphin"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake complete surgical excision with clear margins, the mainstay offering the best chance of cure for localised lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking lesions for keloid and delaying biopsy and diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lobomycosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lobomycosis-matrix",
+      "title": "Lobomycosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Lobomycosis is a chronic cutaneous and subcutaneous fungal infection caused by the uncultivated organism Lacazia loboi, endemic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with fungal stains showing chains of yeast cells joined by tubular bridges, Direct microscopy of tissue scrapings for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Keloid or hypertrophic scar, Chromoblastomycosis, Cutaneous leishmaniasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake complete surgical excision with clear margins, the mainstay offering the best chance of cure for localised lesions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking lesions for keloid and delaying biopsy and diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lobomycosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lobomycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with fungal stains",
+          "cells": [
+            {
+              "text": "Chains of yeast cells joined by tubular bridges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct microscopy of tissue scrapings",
+          "cells": [
+            {
+              "text": "Characteristic yeast cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure history",
+          "cells": [
+            {
+              "text": "Forest or riverine work; dolphin contact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesion extent and margins",
+          "cells": [
+            {
+              "text": "Planning of excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of other subcutaneous mycoses and leprosy",
+          "cells": [
+            {
+              "text": "Differential diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular identification",
+          "cells": [
+            {
+              "text": "Where the organism cannot be cultured"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lobomycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Keloid or hypertrophic scar",
+          "cells": [
+            {
+              "text": "Clinical mimic; biopsy avoids delay in diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromoblastomycosis",
+          "cells": [
+            {
+              "text": "Other subcutaneous mycosis; histology separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lepromatous leprosy",
+          "cells": [
+            {
+              "text": "Excluded by testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatofibrosarcoma protuberans",
+          "cells": [
+            {
+              "text": "Cutaneous tumour mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lobomycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Mainstay; clear margins for localised lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryotherapy or Mohs surgery",
+          "cells": [
+            {
+              "text": "Selected accessible lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itraconazole or posaconazole",
+          "cells": [
+            {
+              "text": "Prolonged antifungal therapy; medical treatment alone often disappointing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery with antifungals",
+          "cells": [
+            {
+              "text": "Extensive disease, to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Local recurrence and rare malignant change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Avoid scratching to prevent autoinoculation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Dermatology or infectious diseases, with histological confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lobomycosis-dx-mgmt",
+      "title": "Diagnosis and management of Lobomycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly growing firm, shiny keloid-like nodules on ears, limbs or face in forest workers",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid change, ulceration, induration, recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biopsy to exclude malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with fungal stains, scrapings, exposure history, lesion mapping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are chains of yeast cells with tubular bridges seen on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider keloid, chromoblastomycosis, leishmaniasis or leprosy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical excision with clear margins, the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cryotherapy or Mohs surgery for selected accessible lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prolonged itraconazole or posaconazole for extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term follow-up for recurrence and rare malignant change",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dermatology or infectious diseases referral with histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Indolent; localised lesions cure with excision; extensive disease recurs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,472 @@
 {
- "id": "stat3_gain_of_function_disease",
- "name": "STAT3 Gain-of-Function Disease",
- "aliases": [
-  "STAT3 GOF",
-  "STAT3",
-  "STAT3 gain-of-function syndrome"
- ],
- "class": "non_infective",
- "system": "Immunology / Inborn errors of immunity",
- "specialty": "Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Germline activating (gain-of-function) variants in STAT3 cause early-onset, multi-organ autoimmunity and lymphoproliferation, the mechanistic mirror image of STAT3 loss-of-function, which produces autosomal dominant hyper-IgE (Job) syndrome.",
-   "Typical presentation is an infant or young child with combinations of autoimmune cytopenias, enteropathy with failure to thrive, early-onset type 1 diabetes and autoimmune thyroid disease.",
-   "Short stature and growth failure are common and disproportionate to nutritional state.",
-   "Lymphoproliferation with lymphadenopathy and hepatosplenomegaly overlaps clinically with autoimmune lymphoproliferative syndrome.",
-   "Interstitial lung disease and recurrent respiratory infection may occur, and some patients have hypogammaglobulinaemia despite an autoimmunity-predominant phenotype.",
-   "Constitutive STAT3 activation skews T-helper differentiation and reduces regulatory T-cell numbers and function, driving loss of self-tolerance.",
-   "JAK inhibitors and interleukin-6 pathway blockade are rational targeted therapies, and haematopoietic stem cell transplantation is used in severe or refractory disease."
+  "id": "stat3_gain_of_function_disease",
+  "name": "STAT3 Gain-of-Function Disease",
+  "aliases": [
+    "STAT3 GOF",
+    "STAT3",
+    "STAT3 gain-of-function syndrome"
   ],
-  "pathophysiology": "STAT3 is a transcription factor activated by the JAK family downstream of numerous cytokine receptors, including those for interleukin-6, interleukin-10, interleukin-21 and interleukin-23. Heterozygous germline gain-of-function variants render STAT3 hyperactive or constitutively active, increasing transcription of its target genes. This disturbs the balance between effector T-helper responses (particularly the Th17 axis) and regulatory T cells, reduces regulatory T-cell numbers and function partly through interference with interleukin-2 and STAT5 signalling, and promotes survival and expansion of autoreactive lymphocytes. The net effect is early-onset multi-system autoimmunity, lymphoproliferation and impaired immune homeostasis. This contrasts sharply with dominant-negative loss-of-function STAT3 variants, which impair Th17 development and produce the hyper-IgE syndrome phenotype.",
-  "additionalDifferentials": [
-   "IPEX syndrome (FOXP3 defect)",
-   "CTLA4 haploinsufficiency",
-   "LRBA deficiency",
-   "Autoimmune lymphoproliferative syndrome (FAS pathway defects)",
-   "STAT1 gain-of-function disease",
-   "Activated PI3K-delta syndrome",
-   "Common variable immunodeficiency with autoimmune and lymphoproliferative complications"
-  ],
-  "additionalInvestigations": [
-   "Targeted panel or exome sequencing including STAT3, with functional confirmation such as transactivation reporter or phospho-STAT3 assays",
-   "Serum immunoglobulin quantification and specific antibody or vaccine response testing",
-   "Lymphocyte immunophenotyping with enumeration of regulatory T cells",
-   "Broad autoantibody screen covering islet, thyroid and cytopenia-associated antibodies",
-   "Direct antiglobulin test and blood film to characterise autoimmune cytopenias",
-   "Thyroid function and glucose or glycated haemoglobin assessment for endocrine autoimmunity",
-   "High-resolution chest imaging and nodal/abdominal imaging for interstitial lung disease and lymphoproliferation"
-  ],
-  "redFlags": [
-   "Multiple simultaneous or sequential autoimmune diseases arising in early childhood",
-   "Combination of autoimmune cytopenia with enteropathy and endocrinopathy in one patient",
-   "Progressive interstitial lung disease",
-   "Disproportionate growth failure accompanying lymphoproliferation"
-  ],
-  "prognosis": "The course is variable and often severe, with multi-organ autoimmunity, infection and interstitial lung disease driving morbidity. Targeted JAK or interleukin-6 inhibition and, in refractory cases, haematopoietic stem cell transplantation can improve outcomes.",
-  "pitfalls": [
-   "Labelling the illness as an isolated autoimmune disorder (such as type 1 diabetes or immune thrombocytopenia) and missing the unifying monogenic diagnosis.",
-   "Confusing STAT3 gain-of-function with STAT3 loss-of-function hyper-IgE syndrome, which have opposite mechanisms and phenotypes.",
-   "Assuming normal immunoglobulins exclude the diagnosis, as hypogammaglobulinaemia can coexist.",
-   "Attributing short stature solely to chronic illness or corticosteroids rather than the intrinsic disorder."
-  ],
-  "references": [
-   "IUIS Expert Committee classification of inborn errors of immunity",
-   "Stiehm's Immune Deficiencies",
-   "ESID clinical guidance on immune dysregulation disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Targeted therapy with JAK inhibition and interleukin-6 receptor blockade (tocilizumab) to counter constitutive STAT3 activity",
-   "Immunosuppression with corticosteroids and steroid-sparing agents for autoimmune cytopenias, enteropathy and other organ-specific autoimmunity",
-   "Hormone replacement and glycaemic control for early-onset type 1 diabetes and autoimmune thyroid disease, with nutritional support for failure to thrive",
-   "Immunoglobulin replacement and infection prophylaxis where hypogammaglobulinaemia and recurrent respiratory infection occur",
-   "Monitor for and manage interstitial lung disease and lymphoproliferation",
-   "Haematopoietic stem cell transplantation in refractory, severe multisystem disease",
-   "Genetic counselling for this germline dominant disorder, with family evaluation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "stat3_gain_of_function_disease-pathway",
-   "title": "STAT3 Gain-of-Function Disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Germline activating (gain-of-function) variants in STAT3 cause early-onset, multi-organ autoimmunity and lymphoproliferation, the mechanistic mirror image of STAT3 loss-of-function, which produces autosomal dominant hyper-IgE (Job)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Multiple simultaneous or sequential autoimmune diseases arising in early childhood",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted panel or exome sequencing including STAT3, with functional confirmation such as transactivation reporter or phospho-STAT3 assays, Serum immunoglobulin quantification and specific antibody or vaccine response"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Targeted therapy with JAK inhibition and interleukin-6 receptor blockade (tocilizumab) to counter constitutive STAT3 activity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the illness as an isolated autoimmune disorder (such as type 1 diabetes or immune thrombocytopenia) and missing the unifying monogenic diagnosis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of stat3 gain-of-function disease."
-  }
- ],
- "tables": [
-  {
-   "id": "stat3_gain_of_function_disease-matrix",
-   "title": "STAT3 Gain-of-Function Disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Germline activating (gain-of-function) variants in STAT3 cause early-onset, multi-organ autoimmunity and lymphoproliferation, the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Inborn errors of immunity",
+  "specialty": "Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Germline activating (gain-of-function) variants in STAT3 cause early-onset, multi-organ autoimmunity and lymphoproliferation, the mechanistic mirror image of STAT3 loss-of-function, which produces autosomal dominant hyper-IgE (Job) syndrome.",
+      "Typical presentation is an infant or young child with combinations of autoimmune cytopenias, enteropathy with failure to thrive, early-onset type 1 diabetes and autoimmune thyroid disease.",
+      "Short stature and growth failure are common and disproportionate to nutritional state.",
+      "Lymphoproliferation with lymphadenopathy and hepatosplenomegaly overlaps clinically with autoimmune lymphoproliferative syndrome.",
+      "Interstitial lung disease and recurrent respiratory infection may occur, and some patients have hypogammaglobulinaemia despite an autoimmunity-predominant phenotype.",
+      "Constitutive STAT3 activation skews T-helper differentiation and reduces regulatory T-cell numbers and function, driving loss of self-tolerance.",
+      "JAK inhibitors and interleukin-6 pathway blockade are rational targeted therapies, and haematopoietic stem cell transplantation is used in severe or refractory disease."
     ],
-    [
-     "Key Investigations",
-     "Targeted panel or exome sequencing including STAT3, with functional confirmation such as transactivation reporter or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "STAT3 is a transcription factor activated by the JAK family downstream of numerous cytokine receptors, including those for interleukin-6, interleukin-10, interleukin-21 and interleukin-23. Heterozygous germline gain-of-function variants render STAT3 hyperactive or constitutively active, increasing transcription of its target genes. This disturbs the balance between effector T-helper responses (particularly the Th17 axis) and regulatory T cells, reduces regulatory T-cell numbers and function partly through interference with interleukin-2 and STAT5 signalling, and promotes survival and expansion of autoreactive lymphocytes. The net effect is early-onset multi-system autoimmunity, lymphoproliferation and impaired immune homeostasis. This contrasts sharply with dominant-negative loss-of-function STAT3 variants, which impair Th17 development and produce the hyper-IgE syndrome phenotype.",
+    "additionalDifferentials": [
+      "IPEX syndrome (FOXP3 defect)",
+      "CTLA4 haploinsufficiency",
+      "LRBA deficiency",
+      "Autoimmune lymphoproliferative syndrome (FAS pathway defects)",
+      "STAT1 gain-of-function disease",
+      "Activated PI3K-delta syndrome",
+      "Common variable immunodeficiency with autoimmune and lymphoproliferative complications"
     ],
-    [
-     "Primary Differentials",
-     "IPEX syndrome (FOXP3 defect), CTLA4 haploinsufficiency, LRBA deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted panel or exome sequencing including STAT3, with functional confirmation such as transactivation reporter or phospho-STAT3 assays",
+      "Serum immunoglobulin quantification and specific antibody or vaccine response testing",
+      "Lymphocyte immunophenotyping with enumeration of regulatory T cells",
+      "Broad autoantibody screen covering islet, thyroid and cytopenia-associated antibodies",
+      "Direct antiglobulin test and blood film to characterise autoimmune cytopenias",
+      "Thyroid function and glucose or glycated haemoglobin assessment for endocrine autoimmunity",
+      "High-resolution chest imaging and nodal/abdominal imaging for interstitial lung disease and lymphoproliferation"
     ],
-    [
-     "Management Strategy",
-     "Targeted therapy with JAK inhibition and interleukin-6 receptor blockade (tocilizumab) to counter constitutive STAT3 activity",
-     "Core treatment modality"
+    "redFlags": [
+      "Multiple simultaneous or sequential autoimmune diseases arising in early childhood",
+      "Combination of autoimmune cytopenia with enteropathy and endocrinopathy in one patient",
+      "Progressive interstitial lung disease",
+      "Disproportionate growth failure accompanying lymphoproliferation"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the illness as an isolated autoimmune disorder (such as type 1 diabetes or immune thrombocytopenia) and missing the",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable and often severe, with multi-organ autoimmunity, infection and interstitial lung disease driving morbidity. Targeted JAK or interleukin-6 inhibition and, in refractory cases, haematopoietic stem cell transplantation can improve outcomes.",
+    "pitfalls": [
+      "Labelling the illness as an isolated autoimmune disorder (such as type 1 diabetes or immune thrombocytopenia) and missing the unifying monogenic diagnosis.",
+      "Confusing STAT3 gain-of-function with STAT3 loss-of-function hyper-IgE syndrome, which have opposite mechanisms and phenotypes.",
+      "Assuming normal immunoglobulins exclude the diagnosis, as hypogammaglobulinaemia can coexist.",
+      "Attributing short stature solely to chronic illness or corticosteroids rather than the intrinsic disorder."
+    ],
+    "references": [
+      "IUIS Expert Committee classification of inborn errors of immunity",
+      "Stiehm's Immune Deficiencies",
+      "ESID clinical guidance on immune dysregulation disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Targeted therapy with JAK inhibition and interleukin-6 receptor blockade (tocilizumab) to counter constitutive STAT3 activity",
+      "Immunosuppression with corticosteroids and steroid-sparing agents for autoimmune cytopenias, enteropathy and other organ-specific autoimmunity",
+      "Hormone replacement and glycaemic control for early-onset type 1 diabetes and autoimmune thyroid disease, with nutritional support for failure to thrive",
+      "Immunoglobulin replacement and infection prophylaxis where hypogammaglobulinaemia and recurrent respiratory infection occur",
+      "Monitor for and manage interstitial lung disease and lymphoproliferation",
+      "Haematopoietic stem cell transplantation in refractory, severe multisystem disease",
+      "Genetic counselling for this germline dominant disorder, with family evaluation"
     ]
-   ],
-   "caption": "Overview comparison matrix for stat3 gain-of-function disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "stat3-gain-of-function-disease-real-image",
-   "title": "STAT3 Gain-of-Function Disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "stat3_gain_of_function_disease-pathway",
+      "title": "STAT3 Gain-of-Function Disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Germline activating (gain-of-function) variants in STAT3 cause early-onset, multi-organ autoimmunity and lymphoproliferation, the mechanistic mirror image of STAT3 loss-of-function, which produces autosomal dominant hyper-IgE (Job)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Multiple simultaneous or sequential autoimmune diseases arising in early childhood",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted panel or exome sequencing including STAT3, with functional confirmation such as transactivation reporter or phospho-STAT3 assays, Serum immunoglobulin quantification and specific antibody or vaccine response"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Targeted therapy with JAK inhibition and interleukin-6 receptor blockade (tocilizumab) to counter constitutive STAT3 activity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the illness as an isolated autoimmune disorder (such as type 1 diabetes or immune thrombocytopenia) and missing the unifying monogenic diagnosis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of stat3 gain-of-function disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "stat3_gain_of_function_disease-matrix",
+      "title": "STAT3 Gain-of-Function Disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Germline activating (gain-of-function) variants in STAT3 cause early-onset, multi-organ autoimmunity and lymphoproliferation, the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted panel or exome sequencing including STAT3, with functional confirmation such as transactivation reporter or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "IPEX syndrome (FOXP3 defect), CTLA4 haploinsufficiency, LRBA deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Targeted therapy with JAK inhibition and interleukin-6 receptor blockade (tocilizumab) to counter constitutive STAT3 activity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the illness as an isolated autoimmune disorder (such as type 1 diabetes or immune thrombocytopenia) and missing the",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for stat3 gain-of-function disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "stat3_gain_of_function_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "STAT3 sequencing with functional confirmation",
+          "cells": [
+            {
+              "text": "Activating variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulins and specific antibody responses",
+          "cells": [
+            {
+              "text": "Immune deficiency pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte immunophenotyping",
+          "cells": [
+            {
+              "text": "Regulatory T cell enumeration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad autoantibody screen",
+          "cells": [
+            {
+              "text": "Islet, thyroid and cytopenia antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test and blood film",
+          "cells": [
+            {
+              "text": "Autoimmune cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and glucose assessment",
+          "cells": [
+            {
+              "text": "Endocrine autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stat3_gain_of_function_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "IPEX syndrome (FOXP3 defect)",
+          "cells": [
+            {
+              "text": "Similar autoimmunity; FOXP3 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CTLA4 haploinsufficiency",
+          "cells": [
+            {
+              "text": "Autoimmunity and lymphoproliferation; genetic testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "stat3_gain_of_function_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "JAK inhibition and IL-6 receptor blockade",
+          "cells": [
+            {
+              "text": "Such as tocilizumab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids and steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Autoimmune complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement and glycaemic control",
+          "cells": [
+            {
+              "text": "Early-onset type 1 diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement and prophylaxis",
+          "cells": [
+            {
+              "text": "Where hypogammaglobulinaemia is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Interstitial lung disease and lymphoproliferation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Refractory, severe multisystem disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Germline dominant disorder; family evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "stat3_gain_of_function_disease-dx-mgmt",
+      "title": "Diagnosis and management of STAT3 Gain-of-Function Disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early autoimmunity, growth failure and lymphoproliferation: suspected STAT3 GOF",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (several autoimmune diseases, progressive lung disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review for progressive interstitial lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "STAT3 sequencing with functional confirmation; immunoglobulins; autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an activating STAT3 variant confirmed with a functional assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider IPEX, CTLA4 haploinsufficiency or STAT3 loss of function; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "JAK inhibition and IL-6 receptor blockade such as tocilizumab",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids and steroid-sparing agents for autoimmune disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hormone replacement and glucose control for early diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunoglobulin replacement if hypogammaglobulinaemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multisystem disease; lung and lymphoproliferative complications need monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

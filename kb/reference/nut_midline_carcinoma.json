@@ -1,182 +1,442 @@
 {
- "id": "nut_midline_carcinoma",
- "name": "NUT carcinoma",
- "aliases": [
-  "NUT midline carcinoma",
-  "nuclear protein in testis carcinoma",
-  "NUTM1-rearranged carcinoma",
-  "BRD4-NUT carcinoma",
-  "NMC"
- ],
- "class": "non_infective",
- "system": "Oncology / Pathology",
- "specialty": "Surgical Pathology / Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by rearrangement of the NUTM1 gene, most often fused to BRD4 (less commonly BRD3 or NSD3), producing an oncogenic fusion protein that blocks squamous differentiation",
-   "Arises predominantly in midline structures such as the mediastinum, thymus, lung and head and neck, though non-midline sites are increasingly recognised",
-   "Typically affects children, adolescents and younger adults, but can occur at any age and shows no strong sex predilection",
-   "Histology shows a monotonous poorly differentiated carcinoma with abrupt (rather than gradual) foci of squamous keratinisation",
-   "Diagnosis is confirmed by the monoclonal NUT immunohistochemical antibody, which gives a characteristic speckled nuclear staining pattern in the majority of cases",
-   "Should be considered in any young patient with an aggressive undifferentiated or poorly differentiated midline carcinoma of unknown primary",
-   "Often initially misdiagnosed as another poorly differentiated squamous carcinoma, thymic carcinoma, Ewing sarcoma or germ cell tumour before molecular testing"
+  "id": "nut_midline_carcinoma",
+  "name": "NUT carcinoma",
+  "aliases": [
+    "NUT midline carcinoma",
+    "nuclear protein in testis carcinoma",
+    "NUTM1-rearranged carcinoma",
+    "BRD4-NUT carcinoma",
+    "NMC"
   ],
-  "pathophysiology": "NUT carcinoma is driven by a balanced rearrangement of the NUTM1 gene, most commonly generating a BRD4-NUT fusion in which a bromodomain protein is joined to nuclear protein in testis. The fusion protein sequesters histone-modifying machinery and drives aberrant chromatin acetylation across large genomic regions, locking cells in a proliferative, undifferentiated state and preventing terminal squamous maturation. This single genetic event is sufficient to produce a highly aggressive epithelial malignancy, and the resulting dependence on chromatin readers and acetylation underpins interest in bromodomain and histone-deacetylase directed therapies.",
-  "additionalDifferentials": [
-   "Poorly differentiated or basaloid squamous cell carcinoma",
-   "Thymic carcinoma and other mediastinal carcinomas",
-   "SMARCA4-deficient undifferentiated thoracic tumour",
-   "Ewing sarcoma and other small round blue cell tumours",
-   "Germ cell tumour, particularly in mediastinal disease",
-   "Sinonasal undifferentiated carcinoma",
-   "Lymphoma involving the mediastinum"
-  ],
-  "additionalInvestigations": [
-   "NUT immunohistochemistry showing speckled nuclear positivity as the principal screening test",
-   "Molecular confirmation of NUTM1 rearrangement by FISH break-apart probe or next-generation sequencing",
-   "Broad immunohistochemical panel including squamous, epithelial, germ cell and haematolymphoid markers to exclude mimics",
-   "Cross-sectional imaging of chest, abdomen and pelvis to define the primary site and stage disease",
-   "Biopsy with adequate tissue for ancillary molecular studies given the undifferentiated appearance",
-   "Assessment for distant metastases, which are frequently present at diagnosis"
-  ],
-  "redFlags": [
-   "Rapidly enlarging midline mass in a child, adolescent or young adult",
-   "Airway compromise or superior vena cava obstruction from a bulky mediastinal or thoracic tumour",
-   "Widespread metastatic disease at presentation, often to bone and lung",
-   "Aggressive clinical course with rapid progression despite conventional therapy"
-  ],
-  "prognosis": "NUT carcinoma is one of the most aggressive human solid tumours, with rapid local progression, early metastasis and generally short survival despite multimodality treatment; long-term survival is uncommon, although outcomes may be marginally better for non-thoracic primaries amenable to complete surgical resection combined with radiotherapy, and targeted agents remain investigational.",
-  "pitfalls": [
-   "Mistaking the tumour for ordinary poorly differentiated squamous carcinoma and not requesting NUT testing",
-   "Overlooking the diagnosis in older adults or non-midline sites where it is less expected",
-   "Interpreting focal keratinisation as evidence of a more differentiated, less aggressive carcinoma",
-   "Failing to preserve tissue for molecular confirmation when the initial impression is a small round cell tumour",
-   "Attributing weak or patchy NUT staining to a negative result without confirmatory molecular studies"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Thoracic Tumours",
-   "WHO Classification of Tumours: Head and Neck Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For localized resectable disease, pursue complete surgical resection where feasible, generally combined with radiotherapy for local control.",
-   "For locally advanced unresectable disease, definitive radiotherapy is a reasonable option for local control given resistance to conventional chemotherapy.",
-   "For metastatic disease, conventional cytotoxic chemotherapy has not been shown to improve outcomes and should not be relied on; prioritize clinical trial enrollment and early palliative and supportive care.",
-   "Bromodomain (BET) inhibitors are an investigational epigenetic class aimed at restoring differentiation gene expression, available mainly through clinical trials.",
-   "Histone deacetylase inhibitors are another investigational class exploiting the same fusion biology and should be considered trial-based rather than established therapy.",
-   "Because effective systemic options outside trials are lacking, refer early to a center with access to experimental therapy protocols once diagnosis is confirmed.",
-   "Radiotherapy, whether definitive or adjuvant after resection, should be part of local management whenever feasible.",
-   "Multidisciplinary planning involving surgery, radiation oncology, medical oncology, and pathology is warranted given the disease's rarity and aggressiveness.",
-   "Maintain close surveillance for rapid local recurrence and distant metastasis given the aggressive course and short expected survival.",
-   "Build reassessment for distant metastatic disease into follow-up, since metastases are frequently present at diagnosis.",
-   "Refer any suspected case promptly to a center experienced with this diagnosis for confirmatory testing and clinical trial access.",
-   "Involve specialized multidisciplinary oncology teams and palliative and supportive care early, rather than waiting until conventional therapy has failed."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nut_midline_carcinoma-pathway",
-   "title": "NUT carcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by rearrangement of the NUTM1 gene, most often fused to BRD4 (less commonly BRD3 or NSD3), producing an oncogenic fusion protein that blocks squamous differentiation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging midline mass in a child, adolescent or young adult",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: NUT immunohistochemistry showing speckled nuclear positivity as the principal screening test, Molecular confirmation of NUTM1 rearrangement by FISH break-apart probe or next-generation sequencing, Broad immunohistochemical"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For localized resectable disease, pursue complete surgical resection where feasible, generally combined with radiotherapy for local control."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the tumour for ordinary poorly differentiated squamous carcinoma and not requesting NUT testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nut carcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "nut_midline_carcinoma-matrix",
-   "title": "NUT carcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by rearrangement of the NUTM1 gene, most often fused to BRD4 (less commonly BRD3 or NSD3), producing an oncogenic fusion",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Pathology",
+  "specialty": "Surgical Pathology / Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by rearrangement of the NUTM1 gene, most often fused to BRD4 (less commonly BRD3 or NSD3), producing an oncogenic fusion protein that blocks squamous differentiation",
+      "Arises predominantly in midline structures such as the mediastinum, thymus, lung and head and neck, though non-midline sites are increasingly recognised",
+      "Typically affects children, adolescents and younger adults, but can occur at any age and shows no strong sex predilection",
+      "Histology shows a monotonous poorly differentiated carcinoma with abrupt (rather than gradual) foci of squamous keratinisation",
+      "Diagnosis is confirmed by the monoclonal NUT immunohistochemical antibody, which gives a characteristic speckled nuclear staining pattern in the majority of cases",
+      "Should be considered in any young patient with an aggressive undifferentiated or poorly differentiated midline carcinoma of unknown primary",
+      "Often initially misdiagnosed as another poorly differentiated squamous carcinoma, thymic carcinoma, Ewing sarcoma or germ cell tumour before molecular testing"
     ],
-    [
-     "Key Investigations",
-     "NUT immunohistochemistry showing speckled nuclear positivity as the principal screening test, Molecular confirmation of NUTM1",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "NUT carcinoma is driven by a balanced rearrangement of the NUTM1 gene, most commonly generating a BRD4-NUT fusion in which a bromodomain protein is joined to nuclear protein in testis. The fusion protein sequesters histone-modifying machinery and drives aberrant chromatin acetylation across large genomic regions, locking cells in a proliferative, undifferentiated state and preventing terminal squamous maturation. This single genetic event is sufficient to produce a highly aggressive epithelial malignancy, and the resulting dependence on chromatin readers and acetylation underpins interest in bromodomain and histone-deacetylase directed therapies.",
+    "additionalDifferentials": [
+      "Poorly differentiated or basaloid squamous cell carcinoma",
+      "Thymic carcinoma and other mediastinal carcinomas",
+      "SMARCA4-deficient undifferentiated thoracic tumour",
+      "Ewing sarcoma and other small round blue cell tumours",
+      "Germ cell tumour, particularly in mediastinal disease",
+      "Sinonasal undifferentiated carcinoma",
+      "Lymphoma involving the mediastinum"
     ],
-    [
-     "Primary Differentials",
-     "Poorly differentiated or basaloid squamous cell carcinoma, Thymic carcinoma and other mediastinal carcinomas, SMARCA4-deficient",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "NUT immunohistochemistry showing speckled nuclear positivity as the principal screening test",
+      "Molecular confirmation of NUTM1 rearrangement by FISH break-apart probe or next-generation sequencing",
+      "Broad immunohistochemical panel including squamous, epithelial, germ cell and haematolymphoid markers to exclude mimics",
+      "Cross-sectional imaging of chest, abdomen and pelvis to define the primary site and stage disease",
+      "Biopsy with adequate tissue for ancillary molecular studies given the undifferentiated appearance",
+      "Assessment for distant metastases, which are frequently present at diagnosis"
     ],
-    [
-     "Management Strategy",
-     "For localized resectable disease, pursue complete surgical resection where feasible, generally combined with radiotherapy for",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging midline mass in a child, adolescent or young adult",
+      "Airway compromise or superior vena cava obstruction from a bulky mediastinal or thoracic tumour",
+      "Widespread metastatic disease at presentation, often to bone and lung",
+      "Aggressive clinical course with rapid progression despite conventional therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the tumour for ordinary poorly differentiated squamous carcinoma and not requesting NUT testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "NUT carcinoma is one of the most aggressive human solid tumours, with rapid local progression, early metastasis and generally short survival despite multimodality treatment; long-term survival is uncommon, although outcomes may be marginally better for non-thoracic primaries amenable to complete surgical resection combined with radiotherapy, and targeted agents remain investigational.",
+    "pitfalls": [
+      "Mistaking the tumour for ordinary poorly differentiated squamous carcinoma and not requesting NUT testing",
+      "Overlooking the diagnosis in older adults or non-midline sites where it is less expected",
+      "Interpreting focal keratinisation as evidence of a more differentiated, less aggressive carcinoma",
+      "Failing to preserve tissue for molecular confirmation when the initial impression is a small round cell tumour",
+      "Attributing weak or patchy NUT staining to a negative result without confirmatory molecular studies"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Thoracic Tumours",
+      "WHO Classification of Tumours: Head and Neck Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For localized resectable disease, pursue complete surgical resection where feasible, generally combined with radiotherapy for local control.",
+      "For locally advanced unresectable disease, definitive radiotherapy is a reasonable option for local control given resistance to conventional chemotherapy.",
+      "For metastatic disease, conventional cytotoxic chemotherapy has not been shown to improve outcomes and should not be relied on; prioritize clinical trial enrollment and early palliative and supportive care.",
+      "Bromodomain (BET) inhibitors are an investigational epigenetic class aimed at restoring differentiation gene expression, available mainly through clinical trials.",
+      "Histone deacetylase inhibitors are another investigational class exploiting the same fusion biology and should be considered trial-based rather than established therapy.",
+      "Because effective systemic options outside trials are lacking, refer early to a center with access to experimental therapy protocols once diagnosis is confirmed.",
+      "Radiotherapy, whether definitive or adjuvant after resection, should be part of local management whenever feasible.",
+      "Multidisciplinary planning involving surgery, radiation oncology, medical oncology, and pathology is warranted given the disease's rarity and aggressiveness.",
+      "Maintain close surveillance for rapid local recurrence and distant metastasis given the aggressive course and short expected survival.",
+      "Build reassessment for distant metastatic disease into follow-up, since metastases are frequently present at diagnosis.",
+      "Refer any suspected case promptly to a center experienced with this diagnosis for confirmatory testing and clinical trial access.",
+      "Involve specialized multidisciplinary oncology teams and palliative and supportive care early, rather than waiting until conventional therapy has failed."
     ]
-   ],
-   "caption": "Overview comparison matrix for nut carcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nut-midline-carcinoma-real-image",
-   "title": "NUT carcinoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "nut_midline_carcinoma-pathway",
+      "title": "NUT carcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by rearrangement of the NUTM1 gene, most often fused to BRD4 (less commonly BRD3 or NSD3), producing an oncogenic fusion protein that blocks squamous differentiation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging midline mass in a child, adolescent or young adult",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: NUT immunohistochemistry showing speckled nuclear positivity as the principal screening test, Molecular confirmation of NUTM1 rearrangement by FISH break-apart probe or next-generation sequencing, Broad immunohistochemical"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For localized resectable disease, pursue complete surgical resection where feasible, generally combined with radiotherapy for local control."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the tumour for ordinary poorly differentiated squamous carcinoma and not requesting NUT testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nut carcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nut_midline_carcinoma-matrix",
+      "title": "NUT carcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by rearrangement of the NUTM1 gene, most often fused to BRD4 (less commonly BRD3 or NSD3), producing an oncogenic fusion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "NUT immunohistochemistry showing speckled nuclear positivity as the principal screening test, Molecular confirmation of NUTM1",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Poorly differentiated or basaloid squamous cell carcinoma, Thymic carcinoma and other mediastinal carcinomas, SMARCA4-deficient",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For localized resectable disease, pursue complete surgical resection where feasible, generally combined with radiotherapy for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the tumour for ordinary poorly differentiated squamous carcinoma and not requesting NUT testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nut carcinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nut_midline_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NUT immunohistochemistry",
+          "cells": [
+            {
+              "text": "Speckled nuclear positivity as principal screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NUTM1 rearrangement testing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of the mass",
+          "cells": [
+            {
+              "text": "Extent and mediastinal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of midline mass",
+          "cells": [
+            {
+              "text": "Tissue diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nut_midline_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Poorly differentiated squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Morphologically similar; NUT testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thymic carcinoma",
+          "cells": [
+            {
+              "text": "Mediastinal carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SMARCA4-deficient undifferentiated tumour",
+          "cells": [
+            {
+              "text": "Other undifferentiated carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basaloid squamous carcinoma",
+          "cells": [
+            {
+              "text": "Morphological mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nut_midline_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Where feasible for localised resectable disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Combined with surgery for local control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy for locally advanced or metastatic disease",
+          "cells": [
+            {
+              "text": "Multimodal treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early oncology referral",
+          "cells": [
+            {
+              "text": "Aggressive course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nut_midline_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of NUT carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly enlarging midline mass in a young person or child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway compromise, superior vena cava obstruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and superior vena cava assessment; oncology referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy, NUT immunohistochemistry, NUTM1 testing, cross-sectional imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "NUT-positive carcinoma with NUTM1 rearrangement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider squamous or other undifferentiated carcinoma; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical resection where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy combined for local control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multimodal chemotherapy for advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early oncology referral because of rapid progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "One of the most aggressive solid tumours; early metastasis and short survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

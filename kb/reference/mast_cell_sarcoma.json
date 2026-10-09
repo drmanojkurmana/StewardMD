@@ -1,168 +1,408 @@
 {
- "id": "mast_cell_sarcoma",
- "name": "Mast cell sarcoma",
- "aliases": [
-  "MCS"
- ],
- "class": "non_infective",
- "system": "Haematology / Soft tissue",
- "specialty": "Haematology / Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO haematolymphoid classification / mastocytosis literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An extremely rare, highly aggressive localised tumour of atypical mast cells with destructive growth",
-   "It presents as a solitary mass that invades and destroys local tissue",
-   "Despite an initially localised presentation, it has a strong tendency to disseminate",
-   "It may progress to a mast cell leukaemia-like picture",
-   "Diagnosis requires histology with mast cell markers and exclusion of systemic mastocytosis at presentation",
-   "Prognosis is poor, and management uses surgery, cytoreductive and targeted therapy with transplantation considered"
+  "id": "mast_cell_sarcoma",
+  "name": "Mast cell sarcoma",
+  "aliases": [
+    "MCS"
   ],
-  "pathophysiology": "Mast cell sarcoma is a malignant neoplasm of mast cells forming a destructive solid tumour, in contrast to the marrow-based infiltration of mast cell leukaemia. The atypical mast cells show high-grade cytological features and invade surrounding tissues. Although localised at diagnosis, the tumour behaves aggressively with a marked propensity for systemic spread, and terminal disease can resemble mast cell leukaemia. KIT and other mutations may be present and influence therapy.",
-  "additionalDifferentials": [
-   "Mast cell leukaemia",
-   "Extramedullary myeloid sarcoma",
-   "Anaplastic large cell or other lymphoma",
-   "Poorly differentiated carcinoma or sarcoma",
-   "Extracutaneous mastocytoma (benign)"
-  ],
-  "additionalInvestigations": [
-   "Tissue biopsy with mast cell immunohistochemistry",
-   "Assessment for systemic mastocytosis (marrow, tryptase)",
-   "KIT and molecular studies",
-   "Staging imaging for local extent and dissemination",
-   "Multidisciplinary review for treatment planning"
-  ],
-  "redFlags": [
-   "Rapid local growth and tissue destruction",
-   "Evidence of systemic dissemination",
-   "Transformation toward a leukaemic picture",
-   "Severe mediator symptoms"
-  ],
-  "prognosis": "Mast cell sarcoma has a poor prognosis with frequent dissemination and progression despite treatment, although outcomes may improve with targeted therapy and transplantation in selected cases.",
-  "pitfalls": [
-   "Mistaking it for a benign extracutaneous mastocytoma",
-   "Underestimating its propensity to disseminate",
-   "Delaying molecular characterisation that could guide targeted therapy",
-   "Failing to assess for systemic mast cell disease"
-  ],
-  "references": [
-   "WHO classification of haematolymphoid tumours",
-   "Mastocytosis clinical guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical resection of the localised destructive tumour where feasible",
-   "Local radiotherapy for unresectable or residual disease",
-   "KIT-targeted tyrosine kinase inhibitors and cytoreductive therapy, guided by mutation analysis, given the strong tendency to disseminate",
-   "Consider allogeneic haematopoietic stem cell transplantation in selected patients",
-   "Mediator-directed therapy with antihistamines and self-injectable adrenaline for mediator release and anaphylaxis",
-   "Surveillance for systemic dissemination and progression to a mast cell leukaemia-like picture",
-   "Coordinate management through a specialist multidisciplinary sarcoma and haematology team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mast_cell_sarcoma-pathway",
-   "title": "Mast cell sarcoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An extremely rare, highly aggressive localised tumour of atypical mast cells with destructive growth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid local growth and tissue destruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Tissue biopsy with mast cell immunohistochemistry, Assessment for systemic mastocytosis (marrow, tryptase), KIT and molecular studies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical resection of the localised destructive tumour where feasible"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for a benign extracutaneous mastocytoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mast cell sarcoma."
-  }
- ],
- "tables": [
-  {
-   "id": "mast_cell_sarcoma-matrix",
-   "title": "Mast cell sarcoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An extremely rare, highly aggressive localised tumour of atypical mast cells with destructive growth",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Soft tissue",
+  "specialty": "Haematology / Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO haematolymphoid classification / mastocytosis literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An extremely rare, highly aggressive localised tumour of atypical mast cells with destructive growth",
+      "It presents as a solitary mass that invades and destroys local tissue",
+      "Despite an initially localised presentation, it has a strong tendency to disseminate",
+      "It may progress to a mast cell leukaemia-like picture",
+      "Diagnosis requires histology with mast cell markers and exclusion of systemic mastocytosis at presentation",
+      "Prognosis is poor, and management uses surgery, cytoreductive and targeted therapy with transplantation considered"
     ],
-    [
-     "Key Investigations",
-     "Tissue biopsy with mast cell immunohistochemistry, Assessment for systemic mastocytosis (marrow, tryptase), KIT and molecular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mast cell sarcoma is a malignant neoplasm of mast cells forming a destructive solid tumour, in contrast to the marrow-based infiltration of mast cell leukaemia. The atypical mast cells show high-grade cytological features and invade surrounding tissues. Although localised at diagnosis, the tumour behaves aggressively with a marked propensity for systemic spread, and terminal disease can resemble mast cell leukaemia. KIT and other mutations may be present and influence therapy.",
+    "additionalDifferentials": [
+      "Mast cell leukaemia",
+      "Extramedullary myeloid sarcoma",
+      "Anaplastic large cell or other lymphoma",
+      "Poorly differentiated carcinoma or sarcoma",
+      "Extracutaneous mastocytoma (benign)"
     ],
-    [
-     "Primary Differentials",
-     "Mast cell leukaemia, Extramedullary myeloid sarcoma, Anaplastic large cell or other lymphoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Tissue biopsy with mast cell immunohistochemistry",
+      "Assessment for systemic mastocytosis (marrow, tryptase)",
+      "KIT and molecular studies",
+      "Staging imaging for local extent and dissemination",
+      "Multidisciplinary review for treatment planning"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical resection of the localised destructive tumour where feasible",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid local growth and tissue destruction",
+      "Evidence of systemic dissemination",
+      "Transformation toward a leukaemic picture",
+      "Severe mediator symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for a benign extracutaneous mastocytoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mast cell sarcoma has a poor prognosis with frequent dissemination and progression despite treatment, although outcomes may improve with targeted therapy and transplantation in selected cases.",
+    "pitfalls": [
+      "Mistaking it for a benign extracutaneous mastocytoma",
+      "Underestimating its propensity to disseminate",
+      "Delaying molecular characterisation that could guide targeted therapy",
+      "Failing to assess for systemic mast cell disease"
+    ],
+    "references": [
+      "WHO classification of haematolymphoid tumours",
+      "Mastocytosis clinical guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical resection of the localised destructive tumour where feasible",
+      "Local radiotherapy for unresectable or residual disease",
+      "KIT-targeted tyrosine kinase inhibitors and cytoreductive therapy, guided by mutation analysis, given the strong tendency to disseminate",
+      "Consider allogeneic haematopoietic stem cell transplantation in selected patients",
+      "Mediator-directed therapy with antihistamines and self-injectable adrenaline for mediator release and anaphylaxis",
+      "Surveillance for systemic dissemination and progression to a mast cell leukaemia-like picture",
+      "Coordinate management through a specialist multidisciplinary sarcoma and haematology team"
     ]
-   ],
-   "caption": "Overview comparison matrix for mast cell sarcoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mast-cell-sarcoma-real-image",
-   "title": "Mast cell sarcoma: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "mast_cell_sarcoma-pathway",
+      "title": "Mast cell sarcoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An extremely rare, highly aggressive localised tumour of atypical mast cells with destructive growth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid local growth and tissue destruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Tissue biopsy with mast cell immunohistochemistry, Assessment for systemic mastocytosis (marrow, tryptase), KIT and molecular studies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical resection of the localised destructive tumour where feasible"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for a benign extracutaneous mastocytoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mast cell sarcoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mast_cell_sarcoma-matrix",
+      "title": "Mast cell sarcoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An extremely rare, highly aggressive localised tumour of atypical mast cells with destructive growth",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Tissue biopsy with mast cell immunohistochemistry, Assessment for systemic mastocytosis (marrow, tryptase), KIT and molecular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mast cell leukaemia, Extramedullary myeloid sarcoma, Anaplastic large cell or other lymphoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical resection of the localised destructive tumour where feasible",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for a benign extracutaneous mastocytoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mast cell sarcoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO haematolymphoid classification / mastocytosis literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mast_cell_sarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tissue biopsy with mast cell immunohistochemistry",
+          "cells": [
+            {
+              "text": "Mast cell population in the tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for systemic mastocytosis (marrow and tryptase)",
+          "cells": [
+            {
+              "text": "Systemic dissemination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT and molecular studies",
+          "cells": [
+            {
+              "text": "Mutation profile that guides therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "Local extent and dissemination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mast_cell_sarcoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Localised destructive tumour, where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local radiotherapy",
+          "cells": [
+            {
+              "text": "Unresectable or residual disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT-targeted tyrosine kinase inhibitors and cytoreduction",
+          "cells": [
+            {
+              "text": "Guided by mutation analysis, given the strong tendency to disseminate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Considered in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mediator-directed therapy",
+          "cells": [
+            {
+              "text": "Antihistamines and self-injectable adrenaline for mediator release and anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Systemic dissemination and progression to a mast cell leukaemia-like picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary management",
+          "cells": [
+            {
+              "text": "Specialist sarcoma and haematology team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mast_cell_sarcoma-dx-mgmt",
+      "title": "Diagnosis and management of Mast cell sarcoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly growing mast cell tumour with local tissue destruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Systemic dissemination, leukaemic transformation or severe mediator symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology and sarcoma review; assess for systemic dissemination",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tissue biopsy with mast cell immunohistochemistry, marrow and tryptase, KIT studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is mast cell sarcoma confirmed on tissue immunohistochemistry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider extramedullary myeloid sarcoma, lymphoma or carcinoma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical resection of the localised destructive tumour where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Local radiotherapy for unresectable or residual disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "KIT-targeted tyrosine kinase inhibitors and cytoreduction guided by mutation analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Mediator control with antihistamines and self-injectable adrenaline",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance for systemic dissemination; sarcoma and haematology team management",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

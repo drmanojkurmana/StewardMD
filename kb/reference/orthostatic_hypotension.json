@@ -1,175 +1,495 @@
 {
- "id": "orthostatic_hypotension",
- "name": "Orthostatic hypotension",
- "aliases": [
-  "postural hypotension",
-  "orthostatic intolerance",
-  "postural drop",
-  "OH"
- ],
- "class": "non_infective",
- "system": "Geriatrics / Palliative",
- "specialty": "Geriatrics & Palliative Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Orthostatic hypotension is conventionally defined as a sustained fall in systolic blood pressure of at least 20 mmHg, or diastolic of at least 10 mmHg, within three minutes of standing",
-   "Symptoms include light-headedness, dizziness, visual dimming, weakness, and falls on standing, but many older adults are asymptomatic",
-   "Measure blood pressure supine and then after standing, ideally at one and three minutes, to detect both early and delayed drops",
-   "Medications are among the commonest and most reversible causes, including antihypertensives, diuretics, nitrates, alpha-blockers, and drugs with anticholinergic or vasodilating effects",
-   "Volume depletion from dehydration, bleeding, or diuretics should always be considered and corrected",
-   "Neurogenic causes include diabetic and other autonomic neuropathies and neurodegenerative disorders such as Parkinson disease and related synucleinopathies",
-   "Non-drug management comes first: gradual position change, adequate fluid and salt intake where appropriate, compression garments, avoiding large meals and alcohol, and reviewing culprit drugs",
-   "A large post-prandial blood pressure fall is a related phenomenon in older adults and can also precipitate falls and syncope"
+  "id": "orthostatic_hypotension",
+  "name": "Orthostatic hypotension",
+  "aliases": [
+    "postural hypotension",
+    "orthostatic intolerance",
+    "postural drop",
+    "OH"
   ],
-  "pathophysiology": "On standing, gravity shifts blood to the lower body, and normally baroreceptor-mediated reflex increases in heart rate and vascular tone maintain cerebral perfusion. Ageing blunts baroreflex sensitivity and reduces cardiac and vascular compensatory responses. Orthostatic hypotension develops when these mechanisms fail, either because of impaired autonomic reflexes (neurogenic causes) or because of reduced circulating volume or vasodilating and blood-pressure-lowering drugs (non-neurogenic causes). The resulting transient cerebral hypoperfusion produces symptoms and predisposes to falls and syncope.",
-  "additionalDifferentials": [
-   "Vasovagal syncope",
-   "Cardiac arrhythmia or structural heart disease causing syncope",
-   "Dehydration or acute blood loss",
-   "Post-prandial hypotension",
-   "Vertigo or other non-cardiovascular dizziness",
-   "Adrenal insufficiency"
-  ],
-  "additionalInvestigations": [
-   "Lying and standing blood pressure measurements at one and three minutes",
-   "Medication review to identify contributing agents",
-   "Assessment of hydration status and relevant bloods including electrolytes and haemoglobin",
-   "ECG and cardiac evaluation when arrhythmia or structural disease is suspected",
-   "Evaluation for autonomic neuropathy or neurodegenerative disease when a neurogenic cause is likely"
-  ],
-  "redFlags": [
-   "Syncope resulting in injury or occurring without warning",
-   "Orthostatic drop accompanied by chest pain, palpitations, or signs of cardiac disease",
-   "Evidence of significant volume loss such as gastrointestinal bleeding",
-   "Recurrent falls attributable to postural drops",
-   "Severe, treatment-resistant orthostatic hypotension suggesting advanced autonomic failure"
-  ],
-  "prognosis": "Orthostatic hypotension is common in older adults and is associated with falls, syncope, reduced quality of life, and higher cardiovascular and overall mortality. Many cases improve substantially once contributing medications are withdrawn, volume is restored, and non-pharmacological measures are applied, though neurogenic forms can be chronic and challenging.",
-  "pitfalls": [
-   "Measuring standing blood pressure only once and missing delayed orthostatic drops",
-   "Overlooking medications as the reversible cause",
-   "Failing to consider volume depletion or occult bleeding",
-   "Aggressively treating supine hypertension in ways that worsen orthostatic symptoms",
-   "Not recognising post-prandial hypotension as a distinct contributor to falls"
-  ],
-  "references": [
-   "Hazzard's Geriatric Medicine and Gerontology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Review and rationalise contributing drugs — antihypertensives, diuretics, nitrates, alpha-blockers and agents with vasodilating or anticholinergic effects — and correct volume depletion",
-   "Non-pharmacological measures first: liberalising salt and fluid intake, graduated compression garments or an abdominal binder, physical counter-manoeuvres, slow staged rising and head-up sleeping",
-   "Pharmacological therapy when non-drug measures fail, using a volume expander such as fludrocortisone or a pressor such as midodrine or droxidopa, particularly in neurogenic causes",
-   "Identify and treat the underlying cause, including diabetic or other autonomic neuropathy and neurodegenerative synucleinopathies such as Parkinson disease",
-   "Monitor for and avoid provoking supine hypertension, balancing daytime symptom control against nocturnal blood pressure",
-   "Falls-prevention assessment and patient education on recognising and aborting presyncopal symptoms",
-   "Referral to geriatric, cardiology or autonomic specialist services for refractory or neurogenic disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "orthostatic_hypotension-pathway",
-   "title": "Orthostatic hypotension: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Orthostatic hypotension is conventionally defined as a sustained fall in systolic blood pressure of at least 20 mmHg, or diastolic of at least 10 mmHg, within three minutes of standing",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope resulting in injury or occurring without warning",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lying and standing blood pressure measurements at one and three minutes, Medication review to identify contributing agents, Assessment of hydration status and relevant bloods including electrolytes and haemoglobin"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Review and rationalise contributing drugs - antihypertensives, diuretics, nitrates, alpha-blockers and agents with vasodilating or anticholinergic effects - and correct volume depletion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Measuring standing blood pressure only once and missing delayed orthostatic drops"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of orthostatic hypotension."
-  }
- ],
- "tables": [
-  {
-   "id": "orthostatic_hypotension-matrix",
-   "title": "Orthostatic hypotension: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Orthostatic hypotension is conventionally defined as a sustained fall in systolic blood pressure of at least 20 mmHg, or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Geriatrics / Palliative",
+  "specialty": "Geriatrics & Palliative Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Orthostatic hypotension is conventionally defined as a sustained fall in systolic blood pressure of at least 20 mmHg, or diastolic of at least 10 mmHg, within three minutes of standing",
+      "Symptoms include light-headedness, dizziness, visual dimming, weakness, and falls on standing, but many older adults are asymptomatic",
+      "Measure blood pressure supine and then after standing, ideally at one and three minutes, to detect both early and delayed drops",
+      "Medications are among the commonest and most reversible causes, including antihypertensives, diuretics, nitrates, alpha-blockers, and drugs with anticholinergic or vasodilating effects",
+      "Volume depletion from dehydration, bleeding, or diuretics should always be considered and corrected",
+      "Neurogenic causes include diabetic and other autonomic neuropathies and neurodegenerative disorders such as Parkinson disease and related synucleinopathies",
+      "Non-drug management comes first: gradual position change, adequate fluid and salt intake where appropriate, compression garments, avoiding large meals and alcohol, and reviewing culprit drugs",
+      "A large post-prandial blood pressure fall is a related phenomenon in older adults and can also precipitate falls and syncope"
     ],
-    [
-     "Key Investigations",
-     "Lying and standing blood pressure measurements at one and three minutes, Medication review to identify contributing agents,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "On standing, gravity shifts blood to the lower body, and normally baroreceptor-mediated reflex increases in heart rate and vascular tone maintain cerebral perfusion. Ageing blunts baroreflex sensitivity and reduces cardiac and vascular compensatory responses. Orthostatic hypotension develops when these mechanisms fail, either because of impaired autonomic reflexes (neurogenic causes) or because of reduced circulating volume or vasodilating and blood-pressure-lowering drugs (non-neurogenic causes). The resulting transient cerebral hypoperfusion produces symptoms and predisposes to falls and syncope.",
+    "additionalDifferentials": [
+      "Vasovagal syncope",
+      "Cardiac arrhythmia or structural heart disease causing syncope",
+      "Dehydration or acute blood loss",
+      "Post-prandial hypotension",
+      "Vertigo or other non-cardiovascular dizziness",
+      "Adrenal insufficiency"
     ],
-    [
-     "Primary Differentials",
-     "Vasovagal syncope, Cardiac arrhythmia or structural heart disease causing syncope, Dehydration or acute blood loss",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lying and standing blood pressure measurements at one and three minutes",
+      "Medication review to identify contributing agents",
+      "Assessment of hydration status and relevant bloods including electrolytes and haemoglobin",
+      "ECG and cardiac evaluation when arrhythmia or structural disease is suspected",
+      "Evaluation for autonomic neuropathy or neurodegenerative disease when a neurogenic cause is likely"
     ],
-    [
-     "Management Strategy",
-     "Review and rationalise contributing drugs - antihypertensives, diuretics, nitrates, alpha-blockers and agents with vasodilating",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope resulting in injury or occurring without warning",
+      "Orthostatic drop accompanied by chest pain, palpitations, or signs of cardiac disease",
+      "Evidence of significant volume loss such as gastrointestinal bleeding",
+      "Recurrent falls attributable to postural drops",
+      "Severe, treatment-resistant orthostatic hypotension suggesting advanced autonomic failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Measuring standing blood pressure only once and missing delayed orthostatic drops",
-     "Prevent diagnostic or management error"
+    "prognosis": "Orthostatic hypotension is common in older adults and is associated with falls, syncope, reduced quality of life, and higher cardiovascular and overall mortality. Many cases improve substantially once contributing medications are withdrawn, volume is restored, and non-pharmacological measures are applied, though neurogenic forms can be chronic and challenging.",
+    "pitfalls": [
+      "Measuring standing blood pressure only once and missing delayed orthostatic drops",
+      "Overlooking medications as the reversible cause",
+      "Failing to consider volume depletion or occult bleeding",
+      "Aggressively treating supine hypertension in ways that worsen orthostatic symptoms",
+      "Not recognising post-prandial hypotension as a distinct contributor to falls"
+    ],
+    "references": [
+      "Hazzard's Geriatric Medicine and Gerontology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Review and rationalise contributing drugs — antihypertensives, diuretics, nitrates, alpha-blockers and agents with vasodilating or anticholinergic effects — and correct volume depletion",
+      "Non-pharmacological measures first: liberalising salt and fluid intake, graduated compression garments or an abdominal binder, physical counter-manoeuvres, slow staged rising and head-up sleeping",
+      "Pharmacological therapy when non-drug measures fail, using a volume expander such as fludrocortisone or a pressor such as midodrine or droxidopa, particularly in neurogenic causes",
+      "Identify and treat the underlying cause, including diabetic or other autonomic neuropathy and neurodegenerative synucleinopathies such as Parkinson disease",
+      "Monitor for and avoid provoking supine hypertension, balancing daytime symptom control against nocturnal blood pressure",
+      "Falls-prevention assessment and patient education on recognising and aborting presyncopal symptoms",
+      "Referral to geriatric, cardiology or autonomic specialist services for refractory or neurogenic disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for orthostatic hypotension."
-  }
- ],
- "diagrams": [
-  {
-   "id": "orthostatic-hypotension-real-image",
-   "title": "Orthostatic hypotension: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "orthostatic_hypotension-pathway",
+      "title": "Orthostatic hypotension: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Orthostatic hypotension is conventionally defined as a sustained fall in systolic blood pressure of at least 20 mmHg, or diastolic of at least 10 mmHg, within three minutes of standing",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope resulting in injury or occurring without warning",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lying and standing blood pressure measurements at one and three minutes, Medication review to identify contributing agents, Assessment of hydration status and relevant bloods including electrolytes and haemoglobin"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Review and rationalise contributing drugs - antihypertensives, diuretics, nitrates, alpha-blockers and agents with vasodilating or anticholinergic effects - and correct volume depletion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Measuring standing blood pressure only once and missing delayed orthostatic drops"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of orthostatic hypotension."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "orthostatic_hypotension-matrix",
+      "title": "Orthostatic hypotension: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Orthostatic hypotension is conventionally defined as a sustained fall in systolic blood pressure of at least 20 mmHg, or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lying and standing blood pressure measurements at one and three minutes, Medication review to identify contributing agents,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vasovagal syncope, Cardiac arrhythmia or structural heart disease causing syncope, Dehydration or acute blood loss",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Review and rationalise contributing drugs - antihypertensives, diuretics, nitrates, alpha-blockers and agents with vasodilating",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Measuring standing blood pressure only once and missing delayed orthostatic drops",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for orthostatic hypotension."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orthostatic_hypotension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lying and standing blood pressure at one and three minutes",
+          "cells": [
+            {
+              "text": "A sustained systolic fall of at least 20 mmHg or diastolic fall of at least 10 mmHg"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Antihypertensives, diuretics, nitrates, alpha-blockers and anticholinergic or vasodilating drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration status and bloods",
+          "cells": [
+            {
+              "text": "Volume depletion, electrolytes and haemoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Arrhythmia or structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic evaluation",
+          "cells": [
+            {
+              "text": "Autonomic neuropathy or neurodegenerative disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orthostatic_hypotension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dehydration or acute blood loss",
+          "cells": [
+            {
+              "text": "Volume depletion, which should always be corrected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-prandial hypotension",
+          "cells": [
+            {
+              "text": "A large fall after meals; a distinct contributor to falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrhythmia or structural heart disease",
+          "cells": [
+            {
+              "text": "Chest pain, palpitations or signs of cardiac disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orthostatic_hypotension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Review and rationalise drugs",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Culprit antihypertensives, diuretics, nitrates and alpha-blockers; correct volume depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-drug measures first",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Liberalised salt and fluid intake, compression garments or abdominal binder, counter-manoeuvres, slow rising and head-up sleeping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacological therapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Fludrocortisone, midodrine or droxidopa when non-drug measures fail, particularly in neurogenic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Diabetic or other autonomic neuropathy; synucleinopathies such as Parkinson disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid supine hypertension",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Balance daytime symptom control against nocturnal blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention and education",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Assessment, and recognising and aborting presyncopal symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Geriatric, cardiology or autonomic services for refractory or neurogenic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orthostatic_hypotension-dx-mgmt",
+      "title": "Diagnosis and management of Orthostatic hypotension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Light-headedness or falls on standing; systolic drop of 20 mmHg within three minutes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (syncope with injury, chest pain, bleeding or recurrent falls)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for bleeding or a cardiac cause of syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lying and standing BP at one and three minutes, medication review, bloods, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a drug, volume depletion or autonomic cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vasovagal syncope, arrhythmia, post-prandial drop or adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw contributing drugs and correct volume depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Liberal salt and fluids, compression garments, counter-manoeuvres and slow rising",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fludrocortisone, midodrine or droxidopa if non-drug measures fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat autonomic neuropathy or synucleinopathy such as Parkinson disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Falls-prevention assessment; monitor for supine hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Common in older adults and linked to falls; many improve once drugs are withdrawn",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

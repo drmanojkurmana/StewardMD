@@ -1,200 +1,656 @@
 {
- "id": "alcohol_liver_disease",
- "name": "Alcohol-Associated Liver Disease",
- "system": "Hepatology",
- "class": "non_infective",
- "chapter": 353,
- "page": 2697,
- "aliases": [
-  "alcoholic hepatitis",
-  "alcoholic cirrhosis",
-  "ALD"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2697-2700",
-  "clinicalPearls": [
-   "ALD is a spectrum: alcohol-associated fatty liver (steatosis) and steatohepatitis progress to fibrosis and cirrhosis; acute alcohol-associated hepatitis is an acute-on-chronic form associated with liver failure and high mortality (p.2697).",
-   "Characteristic biochemical signature: AST/ALT ratio >1 (commonly cited as >2:1 for alcoholic liver disease), with serum AST rarely exceeding 300 IU/L; in alcohol-associated hepatitis AST and ALT do not exceed 400 IU/L and the AST/ALT ratio is >1.5 with serum bilirubin >3 mg/dL (p.2699).",
-   "Steatosis and steatohepatitis are clinically silent; symptoms typically appear only when alcohol-associated cirrhosis decompensates or alcohol-associated hepatitis develops (p.2699).",
-   "Alcohol-associated hepatitis is defined clinically by heavy drinking (>40 g/d women, >50-60 g/d men) for >6 months with <60 days abstinence before symptom onset, presenting with rapid-onset jaundice (bilirubin >3 mg/dL), often with fever, malaise, and tender hepatomegaly (p.2698).",
-   "Prolonged alcohol abstinence is the most effective therapy to reduce progression and reverse ALD; steatosis and steatohepatitis are reversible with cessation of alcohol consumption (p.2699).",
-   "There are currently NO approved drugs for treatment of alcohol-associated steatosis or steatohepatitis with or without fibrosis (p.2699).",
-   "Severity of alcohol-associated hepatitis is stratified by Maddrey discriminant function (MDF) and MELD: severe disease (MDF >=32 or MELD >20) carries high short-term mortality (~30% at 3 months) and may benefit from glucocorticoids; moderate disease (MDF <32 or MELD <=20) still carries ~20% 1-year mortality (p.2700).",
-   "Lille score >=0.45 after 7 days of glucocorticoid treatment identifies non-responders unlikely to benefit from continued therapy; glucocorticoids should be stopped and early liver transplantation considered (p.2700).",
-   "Liver transplantation for alcohol-associated decompensated cirrhosis or HCC is the leading indication for liver transplantation in the United States (p.2699-2700).",
-   "In confirmed cirrhosis, HCC surveillance with liver ultrasonography and serum alpha-fetoprotein (AFP) every 6 months and upper GI endoscopy to screen for varices are recommended (p.2699).",
-   "Only 10-20% of individuals with alcohol-induced hepatic steatosis develop progressive liver disease and cirrhosis; women develop ALD at a lower daily alcohol intake (p.2698)."
+  "id": "alcohol_liver_disease",
+  "name": "Alcohol-Associated Liver Disease",
+  "system": "Hepatology",
+  "class": "non_infective",
+  "chapter": 353,
+  "page": 2697,
+  "aliases": [
+    "alcoholic hepatitis",
+    "alcoholic cirrhosis",
+    "ALD"
   ],
-  "pathophysiology": "Ethanol is rapidly absorbed in the upper GI tract and metabolized predominantly in the liver, reaching it via the portal vein. Most ethanol is oxidized by alcohol dehydrogenase 1 (ADH1) to acetaldehyde in hepatocytes; chronic consumption also induces CYP2E1, which similarly generates acetaldehyde. Beyond direct acetaldehyde toxicity, ethanol metabolism generates reactive oxygen species causing hepatocyte injury through lipid peroxidation and DNA damage. Acetaldehyde is then oxidized to acetate by acetaldehyde dehydrogenase (ALDH); inherited ALDH2 deficiency (common in Asian populations) causes acetaldehyde accumulation with nausea and cutaneous flushing. Steatosis arises because acetate becomes acetyl-CoA feeding fatty acid/triglyceride synthesis, alcohol upregulates lipogenic genes (partly epigenetically) while suppressing fatty acid transport/oxidation, and the increased NADH/NAD+ ratio reduces mitochondrial beta-oxidation; alcohol also mobilizes fatty acids from adipose and intestine into the liver. A subset develop gut dysbiosis and increased intestinal permeability, allowing microbial components (e.g., bacterial LPS) to reach the liver via the portal vein, driving inflammation, hepatocyte death, and fibrotic pathway activation; sustained alcohol use progresses to cirrhosis with portal hypertension. Impaired liver regeneration may contribute to acute alcohol-associated hepatitis arising in underlying cirrhosis (p.2698).",
-  "additionalDifferentials": [
-   "Viral hepatitis (e.g., hepatitis B or C)",
-   "Wilson's disease",
-   "Severe autoimmune liver disease",
-   "Drug-induced liver injury (DILI), including amiodarone-related pseudoalcoholic injury",
-   "Metabolic dysfunction-associated steatotic liver disease (MASLD/NAFLD) and MetALD",
-   "Hemochromatosis",
-   "Ischemic hepatitis",
-   "Biliary obstruction",
-   "Hepatocellular carcinoma (HCC)"
-  ],
-  "infectionMimics": [
-   "Viral hepatitis (hepatitis B or C) producing aminotransferase elevation that can be confused with ALD"
-  ],
-  "nonInfectiousMimics": [
-   "MASLD/NAFLD (key distinction: ALD typically shows AST/ALT >2:1, whereas NAFLD usually has ALT >= AST)",
-   "Amiodarone hepatotoxicity producing pseudoalcoholic liver injury (steatosis to alcoholic-hepatitis-like neutrophilic infiltration with Mallory-Denk bodies)",
-   "Wilson's disease",
-   "Autoimmune hepatitis",
-   "Hemochromatosis",
-   "Ischemic hepatitis"
-  ],
-  "additionalInvestigations": [
-   "Liver function tests with AST, ALT (AST/ALT ratio), GGT, bilirubin, INR, albumin, platelet count",
-   "AUDIT (Alcohol Use Disorders Inventory Test) to identify alcohol use disorder",
-   "Abdominal ultrasound, MRI, or CT to detect steatosis, nodularity, and signs of portal hypertension",
-   "Controlled attenuation parameter (CAP) or MR proton density fat fraction (MR-PDFF) for noninvasive hepatic fat quantification",
-   "Transient elastography / liver stiffness measurement (e.g., FibroScan) for fibrosis staging",
-   "Fib-4 score (age, AST, ALT, platelets) to exclude advanced fibrosis/cirrhosis (threshold <3.25)",
-   "Transjugular liver biopsy when confounding factors are present (to confirm alcohol-associated hepatitis)",
-   "Imaging to exclude biliary obstruction and HCC; AFP and ultrasonography for HCC surveillance in cirrhosis",
-   "Infection workup: chest x-ray plus blood, urine, and ascites cultures in alcohol-associated hepatitis"
-  ],
-  "redFlags": [
-   "Severe alcohol-associated hepatitis (MDF >=32 or MELD >20) - high short-term mortality (~30% at 3 months)",
-   "Rapid-onset jaundice with serum bilirubin >3 mg/dL, fever, and tender hepatomegaly",
-   "Clinical signs of hepatic decompensation: ascites, variceal bleeding, hepatic encephalopathy",
-   "Bacterial infection (occurs in 12-26% of severe alcohol-associated hepatitis at admission)",
-   "Systemic inflammatory response syndrome (SIRS)",
-   "Acute kidney injury / hepatorenal syndrome",
-   "Lille score >=0.45 at day 7 (glucocorticoid non-response) - high 30-day mortality",
-   "Multiorgan failure and shock"
-  ],
-  "prognosis": "Steatosis and steatohepatitis are reversible with abstinence, but only 10-20% of those with steatosis progress to cirrhosis. In alcohol-associated hepatitis, short-term mortality is predicted by MDF, MELD, or ABIC scores: moderate disease (MDF <32 or MELD <=20) carries ~20% 1-year mortality, whereas severe disease (MDF >=32 or MELD >20) carries ~30% 3-month mortality. Glucocorticoids reduce risk of death in severe disease within 28 days but not over the following 6 months. While short-term prognosis depends on disease severity at presentation, long-term prognosis (>1 year) largely depends on alcohol abstinence and underlying cirrhosis. Non-responders to medical therapy have high 30-day mortality (p.2700).",
-  "pitfalls": [
-   "Diagnosis of ALD requires exclusion of other liver diseases in heavy drinkers; do not attribute liver disease to alcohol without ruling out viral hepatitis, Wilson's disease, autoimmune liver disease, and DILI.",
-   "Atypical laboratory values (AST <50 IU/L or >400 IU/L, or AST/ALT ratio <1.5) argue against alcohol-associated hepatitis and warrant transjugular liver biopsy - 10-20% of clinically diagnosed cases have a different disease on biopsy.",
-   "Do not give glucocorticoids when contraindications are present: uncontrolled infection/sepsis, AKI/hepatorenal syndrome, uncontrolled upper GI bleeding, concomitant viral hepatitis/HCC/pancreatitis/DILI/active TB/HIV, multiorgan failure, or shock; glucocorticoids may be used only once infection, sepsis, and GI bleeding are adequately controlled.",
-   "Liver biopsy is rarely needed to diagnose simple steatosis or steatohepatitis - reserve invasive biopsy for confounding/atypical cases.",
-   "Distinguish ALD from NAFLD/MASLD by the AST/ALT pattern (ALD favors AST/ALT >2:1)."
-  ],
-  "severityClassification": "Alcohol-associated hepatitis severity: Moderate AH = MDF <32 or MELD <=20 (~20% 1-year mortality); Severe AH = Maddrey discriminant function (MDF) >=32 or MELD >20 (~30% 3-month mortality), candidates for glucocorticoids if no contraindication. MDF = 4.6 x (prothrombin time prolongation above control in seconds) + serum bilirubin (mg/dL). Day-7 Lille score >=0.45 defines glucocorticoid non-response. Cirrhosis prognosis assessed by Child-Pugh-Turcotte (CPT) and MELD (or sodium-MELD). Fibrosis staging by liver stiffness: <6 kPa normal, >8 kPa indicates >=F3 advanced fibrosis, >12.5 kPa indicates F4 cirrhosis.",
-  "references": [
-   "Harrison 22e p.2697-2700"
-  ],
-  "crossLinks": [
-   "decomp_cirrhosis",
-   "hepatic_enceph",
-   "toxic_hepatitis",
-   "chronic_hepatitis"
-  ],
-  "management": [
-   "Complete and sustained alcohol abstinence, the single most effective measure to halt progression and allow regression of steatosis",
-   "Treatment of the underlying alcohol use disorder with relapse-prevention pharmacotherapy and psychosocial support",
-   "Nutritional support with adequate protein and calorie intake and correction of micronutrient deficiency",
-   "Corticosteroids for severe alcohol-associated hepatitis, guided by discriminant function or MELD, after excluding and treating infection",
-   "Medically managed withdrawal with benzodiazepines and parenteral thiamine to prevent Wernicke encephalopathy",
-   "Manage complications of cirrhosis and portal hypertension including ascites, variceal haemorrhage, hepatic encephalopathy and spontaneous bacterial peritonitis",
-   "Surveillance for hepatocellular carcinoma and oesophageal varices in established cirrhosis",
-   "Refer for liver transplantation assessment in decompensated disease or steroid-non-responsive severe hepatitis"
-  ]
- },
- "algorithms": [
-  {
-   "id": "alcohol_liver_disease-pathway",
-   "title": "Alcohol-Associated Liver Disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "ALD is a spectrum: alcohol-associated fatty liver (steatosis) and steatohepatitis progress to fibrosis and cirrhosis; acute alcohol-associated hepatitis is an acute-on-chronic form associated with liver failure and high mortality (p.2697).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe alcohol-associated hepatitis (MDF >=32 or MELD >20) - high short-term mortality (~30% at 3 months)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Liver function tests with AST, ALT (AST/ALT ratio), GGT, bilirubin, INR, albumin, platelet count, AUDIT (Alcohol Use Disorders Inventory Test) to identify alcohol use disorder, Abdominal ultrasound, MRI, or CT to detect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete and sustained alcohol abstinence, the single most effective measure to halt progression and allow regression of steatosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosis of ALD requires exclusion of other liver diseases in heavy drinkers; do not attribute liver disease to alcohol without ruling out viral hepatitis, Wilson's disease, autoimmune liver disease, and DILI."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alcohol-associated liver disease."
-  }
- ],
- "tables": [
-  {
-   "id": "alcohol_liver_disease-matrix",
-   "title": "Alcohol-Associated Liver Disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "ALD is a spectrum: alcohol-associated fatty liver (steatosis) and steatohepatitis progress to fibrosis and cirrhosis; acute",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2697-2700",
+    "clinicalPearls": [
+      "ALD is a spectrum: alcohol-associated fatty liver (steatosis) and steatohepatitis progress to fibrosis and cirrhosis; acute alcohol-associated hepatitis is an acute-on-chronic form associated with liver failure and high mortality (p.2697).",
+      "Characteristic biochemical signature: AST/ALT ratio >1 (commonly cited as >2:1 for alcoholic liver disease), with serum AST rarely exceeding 300 IU/L; in alcohol-associated hepatitis AST and ALT do not exceed 400 IU/L and the AST/ALT ratio is >1.5 with serum bilirubin >3 mg/dL (p.2699).",
+      "Steatosis and steatohepatitis are clinically silent; symptoms typically appear only when alcohol-associated cirrhosis decompensates or alcohol-associated hepatitis develops (p.2699).",
+      "Alcohol-associated hepatitis is defined clinically by heavy drinking (>40 g/d women, >50-60 g/d men) for >6 months with <60 days abstinence before symptom onset, presenting with rapid-onset jaundice (bilirubin >3 mg/dL), often with fever, malaise, and tender hepatomegaly (p.2698).",
+      "Prolonged alcohol abstinence is the most effective therapy to reduce progression and reverse ALD; steatosis and steatohepatitis are reversible with cessation of alcohol consumption (p.2699).",
+      "There are currently NO approved drugs for treatment of alcohol-associated steatosis or steatohepatitis with or without fibrosis (p.2699).",
+      "Severity of alcohol-associated hepatitis is stratified by Maddrey discriminant function (MDF) and MELD: severe disease (MDF >=32 or MELD >20) carries high short-term mortality (~30% at 3 months) and may benefit from glucocorticoids; moderate disease (MDF <32 or MELD <=20) still carries ~20% 1-year mortality (p.2700).",
+      "Lille score >=0.45 after 7 days of glucocorticoid treatment identifies non-responders unlikely to benefit from continued therapy; glucocorticoids should be stopped and early liver transplantation considered (p.2700).",
+      "Liver transplantation for alcohol-associated decompensated cirrhosis or HCC is the leading indication for liver transplantation in the United States (p.2699-2700).",
+      "In confirmed cirrhosis, HCC surveillance with liver ultrasonography and serum alpha-fetoprotein (AFP) every 6 months and upper GI endoscopy to screen for varices are recommended (p.2699).",
+      "Only 10-20% of individuals with alcohol-induced hepatic steatosis develop progressive liver disease and cirrhosis; women develop ALD at a lower daily alcohol intake (p.2698)."
     ],
-    [
-     "Key Investigations",
-     "Liver function tests with AST, ALT (AST/ALT ratio), GGT, bilirubin, INR, albumin, platelet count, AUDIT (Alcohol Use Disorders",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ethanol is rapidly absorbed in the upper GI tract and metabolized predominantly in the liver, reaching it via the portal vein. Most ethanol is oxidized by alcohol dehydrogenase 1 (ADH1) to acetaldehyde in hepatocytes; chronic consumption also induces CYP2E1, which similarly generates acetaldehyde. Beyond direct acetaldehyde toxicity, ethanol metabolism generates reactive oxygen species causing hepatocyte injury through lipid peroxidation and DNA damage. Acetaldehyde is then oxidized to acetate by acetaldehyde dehydrogenase (ALDH); inherited ALDH2 deficiency (common in Asian populations) causes acetaldehyde accumulation with nausea and cutaneous flushing. Steatosis arises because acetate becomes acetyl-CoA feeding fatty acid/triglyceride synthesis, alcohol upregulates lipogenic genes (partly epigenetically) while suppressing fatty acid transport/oxidation, and the increased NADH/NAD+ ratio reduces mitochondrial beta-oxidation; alcohol also mobilizes fatty acids from adipose and intestine into the liver. A subset develop gut dysbiosis and increased intestinal permeability, allowing microbial components (e.g., bacterial LPS) to reach the liver via the portal vein, driving inflammation, hepatocyte death, and fibrotic pathway activation; sustained alcohol use progresses to cirrhosis with portal hypertension. Impaired liver regeneration may contribute to acute alcohol-associated hepatitis arising in underlying cirrhosis (p.2698).",
+    "additionalDifferentials": [
+      "Viral hepatitis (e.g., hepatitis B or C)",
+      "Wilson's disease",
+      "Severe autoimmune liver disease",
+      "Drug-induced liver injury (DILI), including amiodarone-related pseudoalcoholic injury",
+      "Metabolic dysfunction-associated steatotic liver disease (MASLD/NAFLD) and MetALD",
+      "Hemochromatosis",
+      "Ischemic hepatitis",
+      "Biliary obstruction",
+      "Hepatocellular carcinoma (HCC)"
     ],
-    [
-     "Primary Differentials",
-     "Viral hepatitis (e.g., hepatitis B or C), Wilson's disease, Severe autoimmune liver disease",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Viral hepatitis (hepatitis B or C) producing aminotransferase elevation that can be confused with ALD"
     ],
-    [
-     "Management Strategy",
-     "Complete and sustained alcohol abstinence, the single most effective measure to halt progression and allow regression of steatosis",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "MASLD/NAFLD (key distinction: ALD typically shows AST/ALT >2:1, whereas NAFLD usually has ALT >= AST)",
+      "Amiodarone hepatotoxicity producing pseudoalcoholic liver injury (steatosis to alcoholic-hepatitis-like neutrophilic infiltration with Mallory-Denk bodies)",
+      "Wilson's disease",
+      "Autoimmune hepatitis",
+      "Hemochromatosis",
+      "Ischemic hepatitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosis of ALD requires exclusion of other liver diseases in heavy drinkers; do not attribute liver disease to alcohol without",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Liver function tests with AST, ALT (AST/ALT ratio), GGT, bilirubin, INR, albumin, platelet count",
+      "AUDIT (Alcohol Use Disorders Inventory Test) to identify alcohol use disorder",
+      "Abdominal ultrasound, MRI, or CT to detect steatosis, nodularity, and signs of portal hypertension",
+      "Controlled attenuation parameter (CAP) or MR proton density fat fraction (MR-PDFF) for noninvasive hepatic fat quantification",
+      "Transient elastography / liver stiffness measurement (e.g., FibroScan) for fibrosis staging",
+      "Fib-4 score (age, AST, ALT, platelets) to exclude advanced fibrosis/cirrhosis (threshold <3.25)",
+      "Transjugular liver biopsy when confounding factors are present (to confirm alcohol-associated hepatitis)",
+      "Imaging to exclude biliary obstruction and HCC; AFP and ultrasonography for HCC surveillance in cirrhosis",
+      "Infection workup: chest x-ray plus blood, urine, and ascites cultures in alcohol-associated hepatitis"
+    ],
+    "redFlags": [
+      "Severe alcohol-associated hepatitis (MDF >=32 or MELD >20) - high short-term mortality (~30% at 3 months)",
+      "Rapid-onset jaundice with serum bilirubin >3 mg/dL, fever, and tender hepatomegaly",
+      "Clinical signs of hepatic decompensation: ascites, variceal bleeding, hepatic encephalopathy",
+      "Bacterial infection (occurs in 12-26% of severe alcohol-associated hepatitis at admission)",
+      "Systemic inflammatory response syndrome (SIRS)",
+      "Acute kidney injury / hepatorenal syndrome",
+      "Lille score >=0.45 at day 7 (glucocorticoid non-response) - high 30-day mortality",
+      "Multiorgan failure and shock"
+    ],
+    "prognosis": "Steatosis and steatohepatitis are reversible with abstinence, but only 10-20% of those with steatosis progress to cirrhosis. In alcohol-associated hepatitis, short-term mortality is predicted by MDF, MELD, or ABIC scores: moderate disease (MDF <32 or MELD <=20) carries ~20% 1-year mortality, whereas severe disease (MDF >=32 or MELD >20) carries ~30% 3-month mortality. Glucocorticoids reduce risk of death in severe disease within 28 days but not over the following 6 months. While short-term prognosis depends on disease severity at presentation, long-term prognosis (>1 year) largely depends on alcohol abstinence and underlying cirrhosis. Non-responders to medical therapy have high 30-day mortality (p.2700).",
+    "pitfalls": [
+      "Diagnosis of ALD requires exclusion of other liver diseases in heavy drinkers; do not attribute liver disease to alcohol without ruling out viral hepatitis, Wilson's disease, autoimmune liver disease, and DILI.",
+      "Atypical laboratory values (AST <50 IU/L or >400 IU/L, or AST/ALT ratio <1.5) argue against alcohol-associated hepatitis and warrant transjugular liver biopsy - 10-20% of clinically diagnosed cases have a different disease on biopsy.",
+      "Do not give glucocorticoids when contraindications are present: uncontrolled infection/sepsis, AKI/hepatorenal syndrome, uncontrolled upper GI bleeding, concomitant viral hepatitis/HCC/pancreatitis/DILI/active TB/HIV, multiorgan failure, or shock; glucocorticoids may be used only once infection, sepsis, and GI bleeding are adequately controlled.",
+      "Liver biopsy is rarely needed to diagnose simple steatosis or steatohepatitis - reserve invasive biopsy for confounding/atypical cases.",
+      "Distinguish ALD from NAFLD/MASLD by the AST/ALT pattern (ALD favors AST/ALT >2:1)."
+    ],
+    "severityClassification": "Alcohol-associated hepatitis severity: Moderate AH = MDF <32 or MELD <=20 (~20% 1-year mortality); Severe AH = Maddrey discriminant function (MDF) >=32 or MELD >20 (~30% 3-month mortality), candidates for glucocorticoids if no contraindication. MDF = 4.6 x (prothrombin time prolongation above control in seconds) + serum bilirubin (mg/dL). Day-7 Lille score >=0.45 defines glucocorticoid non-response. Cirrhosis prognosis assessed by Child-Pugh-Turcotte (CPT) and MELD (or sodium-MELD). Fibrosis staging by liver stiffness: <6 kPa normal, >8 kPa indicates >=F3 advanced fibrosis, >12.5 kPa indicates F4 cirrhosis.",
+    "references": [
+      "Harrison 22e p.2697-2700"
+    ],
+    "crossLinks": [
+      "decomp_cirrhosis",
+      "hepatic_enceph",
+      "toxic_hepatitis",
+      "chronic_hepatitis"
+    ],
+    "management": [
+      "Complete and sustained alcohol abstinence, the single most effective measure to halt progression and allow regression of steatosis",
+      "Treatment of the underlying alcohol use disorder with relapse-prevention pharmacotherapy and psychosocial support",
+      "Nutritional support with adequate protein and calorie intake and correction of micronutrient deficiency",
+      "Corticosteroids for severe alcohol-associated hepatitis, guided by discriminant function or MELD, after excluding and treating infection",
+      "Medically managed withdrawal with benzodiazepines and parenteral thiamine to prevent Wernicke encephalopathy",
+      "Manage complications of cirrhosis and portal hypertension including ascites, variceal haemorrhage, hepatic encephalopathy and spontaneous bacterial peritonitis",
+      "Surveillance for hepatocellular carcinoma and oesophageal varices in established cirrhosis",
+      "Refer for liver transplantation assessment in decompensated disease or steroid-non-responsive severe hepatitis"
     ]
-   ],
-   "caption": "Overview comparison matrix for alcohol-associated liver disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alcohol-liver-disease-real-image",
-   "title": "Alcohol-Associated Liver Disease: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "alcohol_liver_disease-pathway",
+      "title": "Alcohol-Associated Liver Disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "ALD is a spectrum: alcohol-associated fatty liver (steatosis) and steatohepatitis progress to fibrosis and cirrhosis; acute alcohol-associated hepatitis is an acute-on-chronic form associated with liver failure and high mortality (p.2697).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe alcohol-associated hepatitis (MDF >=32 or MELD >20) - high short-term mortality (~30% at 3 months)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Liver function tests with AST, ALT (AST/ALT ratio), GGT, bilirubin, INR, albumin, platelet count, AUDIT (Alcohol Use Disorders Inventory Test) to identify alcohol use disorder, Abdominal ultrasound, MRI, or CT to detect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete and sustained alcohol abstinence, the single most effective measure to halt progression and allow regression of steatosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosis of ALD requires exclusion of other liver diseases in heavy drinkers; do not attribute liver disease to alcohol without ruling out viral hepatitis, Wilson's disease, autoimmune liver disease, and DILI."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alcohol-associated liver disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alcohol_liver_disease-matrix",
+      "title": "Alcohol-Associated Liver Disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ALD is a spectrum: alcohol-associated fatty liver (steatosis) and steatohepatitis progress to fibrosis and cirrhosis; acute",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Liver function tests with AST, ALT (AST/ALT ratio), GGT, bilirubin, INR, albumin, platelet count, AUDIT (Alcohol Use Disorders",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Viral hepatitis (e.g., hepatitis B or C), Wilson's disease, Severe autoimmune liver disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete and sustained alcohol abstinence, the single most effective measure to halt progression and allow regression of steatosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosis of ALD requires exclusion of other liver diseases in heavy drinkers; do not attribute liver disease to alcohol without",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alcohol-associated liver disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Alcohol-Related Liver Disease",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/alcohol-related-liver-disease/alcohol-related-liver-disease",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 307-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alcohol_liver_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Laboratory diagnosis and severity of alcohol-associated liver disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "AST",
+          "unit": "U/L",
+          "cells": [
+            {
+              "text": "Raised 2 to 7 fold, below 400, above ALT",
+              "op": "<",
+              "value": 400
+            },
+            {
+              "text": "Merck: aminotransferases usually below 300 IU/L"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ALT",
+          "unit": "U/L",
+          "cells": [
+            {
+              "text": "Raised 2 to 7 fold, below 400",
+              "op": "<",
+              "value": 400
+            },
+            {
+              "text": "Lower than AST"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "AST to ALT ratio",
+          "cells": [
+            {
+              "text": "{{hy:Usually above 1; 2 or more typical}}",
+              "op": ">",
+              "value": 1
+            },
+            {
+              "text": "Merck gives 2 or more"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "GGT",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Not specific; easily induced; raised in all fatty liver"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bilirubin",
+          "cells": [
+            {
+              "text": "May be markedly raised in alcoholic hepatitis"
+            },
+            {
+              "text": "Despite modest ALP rise"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Neutrophils",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Above 5500",
+              "op": ">",
+              "value": 5500
+            },
+            {
+              "text": "Predicts severe alcoholic hepatitis when DF above 32"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Maddrey discriminant function",
+          "cells": [
+            {
+              "text": "32 or more, or MELD above 20",
+              "op": ">=",
+              "value": 32
+            },
+            {
+              "text": "Severe hepatitis: about 30% 3-month mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lille score at day 7",
+          "cells": [
+            {
+              "text": "0.45 or more",
+              "op": ">=",
+              "value": 0.45
+            },
+            {
+              "text": "Steroid non-response; stop steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver stiffness",
+          "unit": "kPa",
+          "cells": [
+            {
+              "text": "Above 8 advanced fibrosis; above 12.5 cirrhosis"
+            },
+            {
+              "text": "Below 6 normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol intake",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Men above 60; women about half or less (20 to 30)",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "One standard drink is 14 g"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "AST/ALT ratio: the Tables PDF states usually above 1, Merck states 2 or more is typical. Upper aminotransferase level: Tables PDF below 400 U/L, Merck usually below 300 IU/L. Both values are kept."
+    },
+    {
+      "id": "alcohol_liver_disease-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of alcohol-associated liver disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Why it matters"
+      ],
+      "rows": [
+        {
+          "parameter": "MASLD or MetALD",
+          "cells": [
+            {
+              "text": "{{hy:Metabolic fatty liver can coexist with alcohol use}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral hepatitis B or C",
+          "cells": [
+            {
+              "text": "Serology in all"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced liver injury, including amiodarone",
+          "cells": [
+            {
+              "text": "Pseudo-alcoholic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease, haemochromatosis, autoimmune liver disease",
+          "cells": [
+            {
+              "text": "Metabolic and autoimmune screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic hepatitis or biliary obstruction",
+          "cells": [
+            {
+              "text": "Imaging and clinical context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatocellular carcinoma",
+          "cells": [
+            {
+              "text": "Imaging and AFP in cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alcohol_liver_disease-treatment",
+      "kind": "treatment",
+      "title": "Treatment of alcohol-associated liver disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete abstinence",
+          "cells": [
+            {
+              "text": "{{hy:All patients; most effective measure}}"
+            },
+            {
+              "text": "Treat alcohol use disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prednisolone",
+          "cells": [
+            {
+              "text": "Severe hepatitis: DF 32 or more or MELD above 20, no infection, GI bleed, renal failure or pancreatitis"
+            },
+            {
+              "text": "40 mg/day orally for 4 weeks, then taper; stop if Lille non-response at day 7"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Adjunct to steroids"
+            },
+            {
+              "text": "Optional"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pentoxifylline",
+          "cells": [
+            {
+              "text": "Severe hepatitis"
+            },
+            {
+              "text": "Not shown to improve outcomes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nutrition and B vitamins",
+          "cells": [
+            {
+              "text": "All, especially early abstinence"
+            },
+            {
+              "text": "Thiamine to prevent Wernicke"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infection screen",
+          "cells": [
+            {
+              "text": "Before steroids"
+            },
+            {
+              "text": "Chest X-ray, blood, urine and ascites cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Decompensated disease despite abstinence"
+            },
+            {
+              "text": "Judge likely abstinence rather than a fixed 6-month rule"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cirrhosis care",
+          "cells": [
+            {
+              "text": "Ascites, varices, encephalopathy, SBP"
+            },
+            {
+              "text": "HCC and variceal surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Five-year survival with complicated alcoholic cirrhosis about 50%."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alcohol_liver_disease-dx-mgmt",
+      "title": "Diagnosis and management of alcohol-associated liver disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heavy drinker with abnormal liver tests or jaundice",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "AST, ALT, GGT, bilirubin, INR, albumin, platelets; ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Exclude viral, metabolic, drug and biliary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Jaundice with features of alcoholic hepatitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Calculate Maddrey DF and MELD; infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "DF 32 or more or MELD above 20?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prednisolone 40 mg/day if no contraindication",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Lille score 0.45 or more at day 7?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Stop steroids; consider transplant assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Complete 4 weeks then taper",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Abstinence, nutrition, stage fibrosis; cirrhosis surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

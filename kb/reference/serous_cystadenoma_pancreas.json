@@ -1,174 +1,452 @@
 {
- "id": "serous_cystadenoma_pancreas",
- "name": "Serous cystadenoma of the pancreas",
- "aliases": [
-  "serous cystadenoma",
-  "microcystic adenoma",
-  "serous cystic neoplasm",
-  "SCA"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatobiliary",
- "specialty": "Hepatobiliary / Pancreatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign cystic neoplasm composed of glycogen-rich cuboidal epithelium, with a very low risk of malignant transformation",
-   "More common in older women and often discovered incidentally",
-   "The classic microcystic form has numerous small cysts producing a honeycomb appearance, sometimes with a central stellate scar and calcification",
-   "The cyst fluid is typically low in CEA, helping to distinguish it from mucinous cystic lesions",
-   "Less common macrocystic (oligocystic) variants can mimic mucinous neoplasms on imaging and are harder to characterise",
-   "Because it is benign, asymptomatic serous cystadenoma can usually be managed by observation once the diagnosis is confident",
-   "Resection is reserved for diagnostic uncertainty, large or rapidly enlarging lesions, or symptoms from mass effect"
+  "id": "serous_cystadenoma_pancreas",
+  "name": "Serous cystadenoma of the pancreas",
+  "aliases": [
+    "serous cystadenoma",
+    "microcystic adenoma",
+    "serous cystic neoplasm",
+    "SCA"
   ],
-  "pathophysiology": "Serous cystadenomas arise from centroacinar or ductal epithelial cells and are lined by a single layer of glycogen-rich, cuboidal serous epithelium that secretes thin, watery fluid. The cells proliferate to form clusters of cysts, most often numerous small locules separated by thin fibrous septa that radiate from a central scar, giving the characteristic microcystic and honeycomb morphology; calcification may develop within the scar. Many of these tumours are associated with inactivation of the VHL tumour-suppressor gene, and lesions are common in von Hippel-Lindau disease. The epithelium lacks the mucinous phenotype and malignant potential of mucinous cystic neoplasms, so the fluid CEA is characteristically low and malignant change is exceedingly rare.",
-  "additionalDifferentials": [
-   "Mucinous cystic neoplasm of the pancreas",
-   "Branch-duct intraductal papillary mucinous neoplasm",
-   "Pancreatic pseudocyst",
-   "Cystic pancreatic neuroendocrine tumour",
-   "Solid pseudopapillary neoplasm",
-   "Lymphangioma or other benign cyst"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT or MRI to identify the microcystic pattern and central scar",
-   "Endoscopic ultrasound to characterise the cysts and septa",
-   "Fine-needle aspiration for cyst fluid CEA (characteristically low) and cytology",
-   "Cyst fluid glucose assessment, which tends to be high in serous lesions",
-   "MRCP to confirm absence of main duct communication",
-   "Genetic evaluation for von Hippel-Lindau disease when clinically suggested"
-  ],
-  "redFlags": [
-   "Atypical or macrocystic morphology that cannot be distinguished from a mucinous neoplasm",
-   "Rapid growth or a very large lesion causing compressive symptoms",
-   "An enhancing solid component prompting reconsideration of the diagnosis",
-   "Obstructive jaundice or duct dilatation from mass effect"
-  ],
-  "prognosis": "The outlook is excellent because malignant transformation is very rare; most lesions can be observed safely, and surgical resection, when required for symptoms or uncertainty, is curative.",
-  "pitfalls": [
-   "Mistaking an oligocystic (macrocystic) serous cystadenoma for a mucinous neoplasm and over-treating, or the reverse and under-treating",
-   "Over-reliance on imaging alone without confirmatory low cyst fluid CEA",
-   "Attempting aspiration of a highly vascular microcystic lesion with risk of bleeding",
-   "Recommending resection of a confidently benign, asymptomatic lesion"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "European evidence-based guidelines on pancreatic cystic neoplasms",
-   "WHO classification of tumours of the digestive system"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage a confidently diagnosed asymptomatic lesion by observation with periodic surveillance imaging, given the very low malignant potential",
-   "Undertake surgical resection appropriate to site, such as distal pancreatectomy, enucleation, or pancreatoduodenectomy, for symptomatic, large, enlarging, or diagnostically uncertain lesions",
-   "Characterise the cyst with endoscopic ultrasound and fine-needle aspiration, using low fluid CEA and high fluid glucose to distinguish it from mucinous neoplasms",
-   "Manage mass-effect complications such as biliary or gastric outlet obstruction",
-   "Evaluate for von Hippel-Lindau disease when clinically suggested, with genetic counselling and surveillance if confirmed",
-   "Refer to a hepatobiliary and pancreatology multidisciplinary team for the resection-versus-observation decision"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "serous_cystadenoma_pancreas-pathway",
-   "title": "Serous cystadenoma of the pancreas: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign cystic neoplasm composed of glycogen-rich cuboidal epithelium, with a very low risk of malignant transformation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Atypical or macrocystic morphology that cannot be distinguished from a mucinous neoplasm",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT or MRI to identify the microcystic pattern and central scar, Endoscopic ultrasound to characterise the cysts and septa, Fine-needle aspiration for cyst fluid CEA (characteristically low) and cytology"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage a confidently diagnosed asymptomatic lesion by observation with periodic surveillance imaging, given the very low malignant potential"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking an oligocystic (macrocystic) serous cystadenoma for a mucinous neoplasm and over-treating, or the reverse and under-treating"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of serous cystadenoma of the pancreas."
-  }
- ],
- "tables": [
-  {
-   "id": "serous_cystadenoma_pancreas-matrix",
-   "title": "Serous cystadenoma of the pancreas: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign cystic neoplasm composed of glycogen-rich cuboidal epithelium, with a very low risk of malignant transformation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatobiliary",
+  "specialty": "Hepatobiliary / Pancreatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign cystic neoplasm composed of glycogen-rich cuboidal epithelium, with a very low risk of malignant transformation",
+      "More common in older women and often discovered incidentally",
+      "The classic microcystic form has numerous small cysts producing a honeycomb appearance, sometimes with a central stellate scar and calcification",
+      "The cyst fluid is typically low in CEA, helping to distinguish it from mucinous cystic lesions",
+      "Less common macrocystic (oligocystic) variants can mimic mucinous neoplasms on imaging and are harder to characterise",
+      "Because it is benign, asymptomatic serous cystadenoma can usually be managed by observation once the diagnosis is confident",
+      "Resection is reserved for diagnostic uncertainty, large or rapidly enlarging lesions, or symptoms from mass effect"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT or MRI to identify the microcystic pattern and central scar, Endoscopic ultrasound to characterise the cysts",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Serous cystadenomas arise from centroacinar or ductal epithelial cells and are lined by a single layer of glycogen-rich, cuboidal serous epithelium that secretes thin, watery fluid. The cells proliferate to form clusters of cysts, most often numerous small locules separated by thin fibrous septa that radiate from a central scar, giving the characteristic microcystic and honeycomb morphology; calcification may develop within the scar. Many of these tumours are associated with inactivation of the VHL tumour-suppressor gene, and lesions are common in von Hippel-Lindau disease. The epithelium lacks the mucinous phenotype and malignant potential of mucinous cystic neoplasms, so the fluid CEA is characteristically low and malignant change is exceedingly rare.",
+    "additionalDifferentials": [
+      "Mucinous cystic neoplasm of the pancreas",
+      "Branch-duct intraductal papillary mucinous neoplasm",
+      "Pancreatic pseudocyst",
+      "Cystic pancreatic neuroendocrine tumour",
+      "Solid pseudopapillary neoplasm",
+      "Lymphangioma or other benign cyst"
     ],
-    [
-     "Primary Differentials",
-     "Mucinous cystic neoplasm of the pancreas, Branch-duct intraductal papillary mucinous neoplasm, Pancreatic pseudocyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT or MRI to identify the microcystic pattern and central scar",
+      "Endoscopic ultrasound to characterise the cysts and septa",
+      "Fine-needle aspiration for cyst fluid CEA (characteristically low) and cytology",
+      "Cyst fluid glucose assessment, which tends to be high in serous lesions",
+      "MRCP to confirm absence of main duct communication",
+      "Genetic evaluation for von Hippel-Lindau disease when clinically suggested"
     ],
-    [
-     "Management Strategy",
-     "Manage a confidently diagnosed asymptomatic lesion by observation with periodic surveillance imaging, given the very low",
-     "Core treatment modality"
+    "redFlags": [
+      "Atypical or macrocystic morphology that cannot be distinguished from a mucinous neoplasm",
+      "Rapid growth or a very large lesion causing compressive symptoms",
+      "An enhancing solid component prompting reconsideration of the diagnosis",
+      "Obstructive jaundice or duct dilatation from mass effect"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking an oligocystic (macrocystic) serous cystadenoma for a mucinous neoplasm and over-treating, or the reverse and",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is excellent because malignant transformation is very rare; most lesions can be observed safely, and surgical resection, when required for symptoms or uncertainty, is curative.",
+    "pitfalls": [
+      "Mistaking an oligocystic (macrocystic) serous cystadenoma for a mucinous neoplasm and over-treating, or the reverse and under-treating",
+      "Over-reliance on imaging alone without confirmatory low cyst fluid CEA",
+      "Attempting aspiration of a highly vascular microcystic lesion with risk of bleeding",
+      "Recommending resection of a confidently benign, asymptomatic lesion"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "European evidence-based guidelines on pancreatic cystic neoplasms",
+      "WHO classification of tumours of the digestive system"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage a confidently diagnosed asymptomatic lesion by observation with periodic surveillance imaging, given the very low malignant potential",
+      "Undertake surgical resection appropriate to site, such as distal pancreatectomy, enucleation, or pancreatoduodenectomy, for symptomatic, large, enlarging, or diagnostically uncertain lesions",
+      "Characterise the cyst with endoscopic ultrasound and fine-needle aspiration, using low fluid CEA and high fluid glucose to distinguish it from mucinous neoplasms",
+      "Manage mass-effect complications such as biliary or gastric outlet obstruction",
+      "Evaluate for von Hippel-Lindau disease when clinically suggested, with genetic counselling and surveillance if confirmed",
+      "Refer to a hepatobiliary and pancreatology multidisciplinary team for the resection-versus-observation decision"
     ]
-   ],
-   "caption": "Overview comparison matrix for serous cystadenoma of the pancreas."
-  }
- ],
- "diagrams": [
-  {
-   "id": "serous-cystadenoma-pancreas-real-image",
-   "title": "Serous cystadenoma of the pancreas: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "serous_cystadenoma_pancreas-pathway",
+      "title": "Serous cystadenoma of the pancreas: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign cystic neoplasm composed of glycogen-rich cuboidal epithelium, with a very low risk of malignant transformation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Atypical or macrocystic morphology that cannot be distinguished from a mucinous neoplasm",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT or MRI to identify the microcystic pattern and central scar, Endoscopic ultrasound to characterise the cysts and septa, Fine-needle aspiration for cyst fluid CEA (characteristically low) and cytology"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage a confidently diagnosed asymptomatic lesion by observation with periodic surveillance imaging, given the very low malignant potential"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking an oligocystic (macrocystic) serous cystadenoma for a mucinous neoplasm and over-treating, or the reverse and under-treating"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of serous cystadenoma of the pancreas."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "serous_cystadenoma_pancreas-matrix",
+      "title": "Serous cystadenoma of the pancreas: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign cystic neoplasm composed of glycogen-rich cuboidal epithelium, with a very low risk of malignant transformation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT or MRI to identify the microcystic pattern and central scar, Endoscopic ultrasound to characterise the cysts",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mucinous cystic neoplasm of the pancreas, Branch-duct intraductal papillary mucinous neoplasm, Pancreatic pseudocyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage a confidently diagnosed asymptomatic lesion by observation with periodic surveillance imaging, given the very low",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking an oligocystic (macrocystic) serous cystadenoma for a mucinous neoplasm and over-treating, or the reverse and",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for serous cystadenoma of the pancreas."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "serous_cystadenoma_pancreas-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast CT or MRI",
+          "cells": [
+            {
+              "text": "Microcystic honeycomb pattern with central scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Characterises cysts and septa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fine-needle aspiration, cyst fluid CEA",
+          "cells": [
+            {
+              "text": "Characteristically low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst fluid glucose",
+          "cells": [
+            {
+              "text": "Tends to be high in serous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Confirms absence of main duct communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation for von Hippel-Lindau",
+          "cells": [
+            {
+              "text": "When clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serous_cystadenoma_pancreas-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mucinous cystic neoplasm",
+          "cells": [
+            {
+              "text": "Fluid CEA is low in serous lesions; macrocystic serous variants can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Branch-duct IPMN",
+          "cells": [
+            {
+              "text": "MRCP confirms serous cystadenoma lacks main duct communication"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "serous_cystadenoma_pancreas-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Confidently diagnosed asymptomatic lesion, with periodic surveillance imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Distal pancreatectomy, enucleation or pancreatoduodenectomy for symptomatic, large, enlarging or uncertain lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EUS and aspiration",
+          "cells": [
+            {
+              "text": "Low fluid CEA and high fluid glucose separate it from mucinous neoplasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mass-effect complications",
+          "cells": [
+            {
+              "text": "Biliary or gastric outlet obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Hippel-Lindau evaluation",
+          "cells": [
+            {
+              "text": "Genetic counselling and surveillance if confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary review",
+          "cells": [
+            {
+              "text": "Hepatobiliary and pancreatology team decides resection versus observation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "serous_cystadenoma_pancreas-dx-mgmt",
+      "title": "Diagnosis and management of Serous cystadenoma of the pancreas",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental pancreatic cystic lesion, often in an older woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Macrocystic look-alike of mucinous neoplasm, solid component, rapid growth or jaundice?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Multidisciplinary review and consider resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI; MRCP; EUS with fluid CEA, glucose and cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Microcystic honeycomb with central scar and low fluid CEA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Evaluate as mucinous cystic neoplasm, IPMN or solid pseudopapillary neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic lesions with periodic imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resect symptomatic, large, enlarging or uncertain lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat biliary or gastric outlet obstruction from mass effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Check for von Hippel-Lindau disease when suggested",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent: malignant change very rare; resection is curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,179 +1,494 @@
 {
- "id": "prostatitis_chronic_bacterial",
- "name": "Chronic bacterial prostatitis",
- "aliases": [
-  "chronic bacterial prostatitis",
-  "NIH category II prostatitis",
-  "recurrent prostatic infection",
-  "CBP"
- ],
- "class": "infective",
- "system": "Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / EAU Guidelines on Urological Infections",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Corresponds to NIH category II prostatitis and is defined by recurrent urinary tract infections caused by the same uropathogen, most often Escherichia coli and related Enterobacteriaceae, seeding from a persistent prostatic focus",
-   "Between symptomatic flares men may be well or have only low-grade perineal or pelvic discomfort, mild voiding symptoms, or post-ejaculatory pain",
-   "The prostate behaves as a protected reservoir in which organisms persist within ducts, biofilm and calcifications, which explains relapse after short antibiotic courses",
-   "Segmented localisation cultures, either the four-glass Meares-Stamey test or the simpler pre- and post-massage two-glass test, support a prostatic source when post-massage specimens grow markedly higher counts of the same organism",
-   "It is separated from chronic pelvic pain syndrome (NIH category III) by demonstrable bacterial growth localised to prostatic secretions",
-   "Management relies on a prolonged course of an antibiotic with good prostatic penetration guided by culture and sensitivity, rather than a brief course",
-   "Alpha-blockers, treatment of prostatic calculi and attention to sources of reinfection may reduce the relapse rate"
+  "id": "prostatitis_chronic_bacterial",
+  "name": "Chronic bacterial prostatitis",
+  "aliases": [
+    "chronic bacterial prostatitis",
+    "NIH category II prostatitis",
+    "recurrent prostatic infection",
+    "CBP"
   ],
-  "pathophysiology": "Chronic bacterial prostatitis develops when ascending or intraprostatic infection establishes a persistent nidus, frequently within obstructed ducts, prostatic calculi, or areas of intraprostatic reflux of infected urine. The blood-prostate barrier and poor antibiotic penetration into non-inflamed prostatic tissue allow organisms to survive, and biofilm on prostatic stones shelters bacteria, producing the characteristic relapsing pattern of recurrent lower urinary tract infection with an identical organism.",
-  "additionalDifferentials": [
-   "Chronic pelvic pain syndrome (NIH category III prostatitis)",
-   "Acute bacterial prostatitis (NIH category I)",
-   "Benign prostatic enlargement with recurrent infection",
-   "Bladder outlet obstruction or incomplete emptying causing recurrent urinary tract infection",
-   "Interstitial cystitis / bladder pain syndrome",
-   "Urethritis, including sexually transmitted infection",
-   "Prostatic abscess"
-  ],
-  "additionalInvestigations": [
-   "Segmented localisation cultures (four-glass Meares-Stamey test or two-glass pre- and post-massage test)",
-   "Midstream urine culture during symptomatic episodes to identify the recurrent organism",
-   "Microscopy and culture of expressed prostatic secretions",
-   "Post-void residual measurement and uroflowmetry to assess for obstruction",
-   "Transrectal ultrasound or MRI when abscess or prostatic calculi are suspected",
-   "PSA interpreted with caution because prostatic inflammation can raise it",
-   "Sexually transmitted infection screening where urethritis is possible"
-  ],
-  "redFlags": [
-   "High fever, rigors or systemic sepsis suggesting acute prostatitis or a prostatic abscess",
-   "Acute urinary retention",
-   "Failure to respond to appropriately targeted therapy, raising concern for abscess or a resistant organism",
-   "A rising PSA that does not settle after treatment, warranting exclusion of malignancy"
-  ],
-  "prognosis": "Many men achieve cure or prolonged remission after an adequate, prolonged course of a prostate-penetrating antibiotic, but relapse is common, particularly when prostatic calculi harbour organisms, and some follow a chronic relapsing course requiring suppressive or repeated treatment.",
-  "pitfalls": [
-   "Using short antibiotic courses that fail to achieve adequate prostatic penetration, leading to relapse",
-   "Not performing localisation cultures and so mislabelling abacterial category III disease as bacterial",
-   "Overlooking prostatic calculi as a reservoir of persistent infection",
-   "Attributing a raised PSA solely to prostatitis without arranging follow-up to exclude cancer"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "EAU Guidelines on Urological Infections"
-  ],
-  "crossLinks": [
-   "verumontanum_hyperplasia",
-   "posterior_urethral_polyp"
-  ],
-  "management": [
-   "Treat with a prolonged course of an antibiotic that penetrates the prostate, such as a fluoroquinolone like ciprofloxacin or trimethoprim, guided by culture and sensitivity",
-   "Relieve voiding symptoms with an alpha-blocker and provide analgesia or anti-inflammatory drugs for pelvic and post-ejaculatory pain",
-   "Identify and address predisposing factors such as bladder-outlet obstruction and prostatic calculi that harbour organisms",
-   "Confirm the prostatic source and eradication with segmented localisation and follow-up cultures",
-   "Use low-dose suppressive antibiotic therapy or repeated culture-directed courses for the relapsing pattern",
-   "Consider surgical intervention such as transurethral resection to remove infected calculi in refractory relapsing disease, and drain any prostatic abscess",
-   "Refer to urology for recurrent or treatment-resistant disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "prostatitis_chronic_bacterial-pathway",
-   "title": "Chronic bacterial prostatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Corresponds to NIH category II prostatitis and is defined by recurrent urinary tract infections caused by the same uropathogen, most often Escherichia coli and related Enterobacteriaceae, seeding from a persistent prostatic focus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: High fever, rigors or systemic sepsis suggesting acute prostatitis or a prostatic abscess",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Segmented localisation cultures (four-glass Meares-Stamey test or two-glass pre- and post-massage test), Midstream urine culture during symptomatic episodes to identify the recurrent organism, Microscopy and culture of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with a prolonged course of an antibiotic that penetrates the prostate, such as a fluoroquinolone like ciprofloxacin or trimethoprim, guided by culture and sensitivity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Using short antibiotic courses that fail to achieve adequate prostatic penetration, leading to relapse"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic bacterial prostatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "prostatitis_chronic_bacterial-matrix",
-   "title": "Chronic bacterial prostatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Corresponds to NIH category II prostatitis and is defined by recurrent urinary tract infections caused by the same uropathogen,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / EAU Guidelines on Urological Infections",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Corresponds to NIH category II prostatitis and is defined by recurrent urinary tract infections caused by the same uropathogen, most often Escherichia coli and related Enterobacteriaceae, seeding from a persistent prostatic focus",
+      "Between symptomatic flares men may be well or have only low-grade perineal or pelvic discomfort, mild voiding symptoms, or post-ejaculatory pain",
+      "The prostate behaves as a protected reservoir in which organisms persist within ducts, biofilm and calcifications, which explains relapse after short antibiotic courses",
+      "Segmented localisation cultures, either the four-glass Meares-Stamey test or the simpler pre- and post-massage two-glass test, support a prostatic source when post-massage specimens grow markedly higher counts of the same organism",
+      "It is separated from chronic pelvic pain syndrome (NIH category III) by demonstrable bacterial growth localised to prostatic secretions",
+      "Management relies on a prolonged course of an antibiotic with good prostatic penetration guided by culture and sensitivity, rather than a brief course",
+      "Alpha-blockers, treatment of prostatic calculi and attention to sources of reinfection may reduce the relapse rate"
     ],
-    [
-     "Key Investigations",
-     "Segmented localisation cultures (four-glass Meares-Stamey test or two-glass pre- and post-massage test), Midstream urine culture",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic bacterial prostatitis develops when ascending or intraprostatic infection establishes a persistent nidus, frequently within obstructed ducts, prostatic calculi, or areas of intraprostatic reflux of infected urine. The blood-prostate barrier and poor antibiotic penetration into non-inflamed prostatic tissue allow organisms to survive, and biofilm on prostatic stones shelters bacteria, producing the characteristic relapsing pattern of recurrent lower urinary tract infection with an identical organism.",
+    "additionalDifferentials": [
+      "Chronic pelvic pain syndrome (NIH category III prostatitis)",
+      "Acute bacterial prostatitis (NIH category I)",
+      "Benign prostatic enlargement with recurrent infection",
+      "Bladder outlet obstruction or incomplete emptying causing recurrent urinary tract infection",
+      "Interstitial cystitis / bladder pain syndrome",
+      "Urethritis, including sexually transmitted infection",
+      "Prostatic abscess"
     ],
-    [
-     "Primary Differentials",
-     "Chronic pelvic pain syndrome (NIH category III prostatitis), Acute bacterial prostatitis (NIH category I), Benign prostatic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Segmented localisation cultures (four-glass Meares-Stamey test or two-glass pre- and post-massage test)",
+      "Midstream urine culture during symptomatic episodes to identify the recurrent organism",
+      "Microscopy and culture of expressed prostatic secretions",
+      "Post-void residual measurement and uroflowmetry to assess for obstruction",
+      "Transrectal ultrasound or MRI when abscess or prostatic calculi are suspected",
+      "PSA interpreted with caution because prostatic inflammation can raise it",
+      "Sexually transmitted infection screening where urethritis is possible"
     ],
-    [
-     "Management Strategy",
-     "Treat with a prolonged course of an antibiotic that penetrates the prostate, such as a fluoroquinolone like ciprofloxacin or",
-     "Core treatment modality"
+    "redFlags": [
+      "High fever, rigors or systemic sepsis suggesting acute prostatitis or a prostatic abscess",
+      "Acute urinary retention",
+      "Failure to respond to appropriately targeted therapy, raising concern for abscess or a resistant organism",
+      "A rising PSA that does not settle after treatment, warranting exclusion of malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Using short antibiotic courses that fail to achieve adequate prostatic penetration, leading to relapse",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many men achieve cure or prolonged remission after an adequate, prolonged course of a prostate-penetrating antibiotic, but relapse is common, particularly when prostatic calculi harbour organisms, and some follow a chronic relapsing course requiring suppressive or repeated treatment.",
+    "pitfalls": [
+      "Using short antibiotic courses that fail to achieve adequate prostatic penetration, leading to relapse",
+      "Not performing localisation cultures and so mislabelling abacterial category III disease as bacterial",
+      "Overlooking prostatic calculi as a reservoir of persistent infection",
+      "Attributing a raised PSA solely to prostatitis without arranging follow-up to exclude cancer"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "EAU Guidelines on Urological Infections"
+    ],
+    "crossLinks": [
+      "verumontanum_hyperplasia",
+      "posterior_urethral_polyp"
+    ],
+    "management": [
+      "Treat with a prolonged course of an antibiotic that penetrates the prostate, such as a fluoroquinolone like ciprofloxacin or trimethoprim, guided by culture and sensitivity",
+      "Relieve voiding symptoms with an alpha-blocker and provide analgesia or anti-inflammatory drugs for pelvic and post-ejaculatory pain",
+      "Identify and address predisposing factors such as bladder-outlet obstruction and prostatic calculi that harbour organisms",
+      "Confirm the prostatic source and eradication with segmented localisation and follow-up cultures",
+      "Use low-dose suppressive antibiotic therapy or repeated culture-directed courses for the relapsing pattern",
+      "Consider surgical intervention such as transurethral resection to remove infected calculi in refractory relapsing disease, and drain any prostatic abscess",
+      "Refer to urology for recurrent or treatment-resistant disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic bacterial prostatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "prostatitis-chronic-bacterial-real-image",
-   "title": "Chronic bacterial prostatitis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "prostatitis_chronic_bacterial-pathway",
+      "title": "Chronic bacterial prostatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Corresponds to NIH category II prostatitis and is defined by recurrent urinary tract infections caused by the same uropathogen, most often Escherichia coli and related Enterobacteriaceae, seeding from a persistent prostatic focus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: High fever, rigors or systemic sepsis suggesting acute prostatitis or a prostatic abscess",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Segmented localisation cultures (four-glass Meares-Stamey test or two-glass pre- and post-massage test), Midstream urine culture during symptomatic episodes to identify the recurrent organism, Microscopy and culture of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with a prolonged course of an antibiotic that penetrates the prostate, such as a fluoroquinolone like ciprofloxacin or trimethoprim, guided by culture and sensitivity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Using short antibiotic courses that fail to achieve adequate prostatic penetration, leading to relapse"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic bacterial prostatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "prostatitis_chronic_bacterial-matrix",
+      "title": "Chronic bacterial prostatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Corresponds to NIH category II prostatitis and is defined by recurrent urinary tract infections caused by the same uropathogen,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Segmented localisation cultures (four-glass Meares-Stamey test or two-glass pre- and post-massage test), Midstream urine culture",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic pelvic pain syndrome (NIH category III prostatitis), Acute bacterial prostatitis (NIH category I), Benign prostatic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with a prolonged course of an antibiotic that penetrates the prostate, such as a fluoroquinolone like ciprofloxacin or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Using short antibiotic courses that fail to achieve adequate prostatic penetration, leading to relapse",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic bacterial prostatitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / EAU Guidelines on Urological Infections",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prostatitis_chronic_bacterial-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Segmented localisation cultures (four-glass or two-glass test)",
+          "cells": [
+            {
+              "text": "Prostatic source of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Midstream urine culture during symptomatic episodes",
+          "cells": [
+            {
+              "text": "Recurrent organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopy and culture of expressed prostatic secretions",
+          "cells": [
+            {
+              "text": "Prostatic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-void residual and uroflowmetry",
+          "cells": [
+            {
+              "text": "Obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transrectal ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Abscess or prostatic calculi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PSA",
+          "cells": [
+            {
+              "text": "Interpret with caution; inflammation can raise it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexually transmitted infection screening",
+          "cells": [
+            {
+              "text": "Urethritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prostatitis_chronic_bacterial-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign prostatic enlargement with recurrent infection",
+          "cells": [
+            {
+              "text": "Incomplete emptying"
+            },
+            {
+              "text": "Post-void residual measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostatic abscess",
+          "cells": [
+            {
+              "text": "Failure to respond to appropriately targeted therapy"
+            },
+            {
+              "text": "Transrectal ultrasound or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethritis, including sexually transmitted infection",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Sexually transmitted infection screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prostatitis_chronic_bacterial-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged antibiotic course",
+          "cells": [
+            {
+              "text": "Prostate-penetrating agent such as ciprofloxacin or trimethoprim, guided by culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-blocker and analgesia",
+          "cells": [
+            {
+              "text": "Alpha-blocker for voiding symptoms; analgesia or anti-inflammatory drugs for pelvic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predisposing factors",
+          "cells": [
+            {
+              "text": "Bladder-outlet obstruction and prostatic calculi that harbour organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm eradication",
+          "cells": [
+            {
+              "text": "Segmented localisation and follow-up cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapsing pattern",
+          "cells": [
+            {
+              "text": "Low-dose suppressive antibiotic or repeated culture-directed courses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for refractory relapse",
+          "cells": [
+            {
+              "text": "Transurethral resection to remove infected calculi; drainage of any prostatic abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Urology for recurrent or treatment-resistant disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prostatitis_chronic_bacterial-dx-mgmt",
+      "title": "Diagnosis and management of Chronic bacterial prostatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic bacterial prostatitis: recurrent infection with pelvic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "High fever, rigors, retention, failure of targeted therapy, or a rising PSA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent urology review for abscess or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Segmented localisation cultures; urine and prostatic secretion culture; PVR; TRUS or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do segmented cultures identify the prostate as the source of the organism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic pelvic pain syndrome, BPE or bladder pain syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged course of a prostate-penetrating antibiotic, guided by culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Alpha-blocker for voiding symptoms; analgesia for pelvic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Address obstruction and prostatic calculi that harbour organisms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Suppressive or repeated culture-directed courses for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Urology referral for recurrent or resistant disease; surgery for refractory calculi",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,445 @@
 {
- "id": "generalised_eruptive_histiocytosis",
- "name": "Generalised eruptive histiocytosis",
- "aliases": [
-  "generalised eruptive histiocytoma",
-  "GEH"
- ],
- "class": "non_infective",
- "system": "Skin / Haematology",
- "specialty": "Dermatology / Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare non-Langerhans cell histiocytosis presenting with recurrent crops of numerous symmetrical red-brown papules distributed widely over the trunk, face and proximal limbs.",
-   "It occurs predominantly in adults but is reported in children, and the eruption appears in successive waves.",
-   "Lesions are typically monomorphic, non-coalescing papules a few millimetres in diameter that spare or minimally involve mucous membranes.",
-   "By definition there is no visceral involvement, and the condition is regarded as a purely cutaneous, self-healing histiocytosis.",
-   "Individual papules tend to resolve spontaneously leaving transient macular hyperpigmentation, though new crops may recur over months to years.",
-   "Histology shows a monomorphous dermal infiltrate of histiocytes without significant lipidisation, foam cells or Touton giant cells, which are CD68 positive and CD1a and langerin negative.",
-   "It is widely considered an early or transitional form within the spectrum of cutaneous non-Langerhans cell histiocytoses and may evolve towards xanthomatous forms such as juvenile xanthogranuloma or xanthoma disseminatum.",
-   "The diagnosis is partly one of exclusion, requiring differentiation from Langerhans cell histiocytosis and from histiocytoses with systemic involvement."
+  "id": "generalised_eruptive_histiocytosis",
+  "name": "Generalised eruptive histiocytosis",
+  "aliases": [
+    "generalised eruptive histiocytoma",
+    "GEH"
   ],
-  "pathophysiology": "Generalised eruptive histiocytosis is a reactive proliferation of macrophage-derived dermal histiocytes belonging to the non-Langerhans cell histiocytoses. The lesional cells are non-lipidised histiocytes expressing macrophage markers such as CD68 while lacking the Langerhans cell markers CD1a and langerin and Birbeck granules. The characteristic absence of foam cells and Touton giant cells early in the disease, together with the tendency of some cases to acquire xanthomatous features over time, supports the concept that generalised eruptive histiocytosis represents an early, non-lipidised phase of the cutaneous non-Langerhans cell histiocytosis spectrum that overlaps with benign cephalic histiocytosis, juvenile xanthogranuloma and xanthoma disseminatum. The self-healing crops reflect a self-limited reactive process with clearance of the histiocytic infiltrate rather than a persistent clonal neoplasm.",
-  "additionalDifferentials": [
-   "Langerhans cell histiocytosis",
-   "Benign cephalic histiocytosis",
-   "Xanthoma disseminatum",
-   "Juvenile / adult xanthogranuloma",
-   "Eruptive xanthomas",
-   "Papular sarcoidosis",
-   "Secondary syphilis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with histology and immunohistochemistry (CD68, factor XIIIa, CD1a, langerin)",
-   "Electron microscopy to confirm absence of Birbeck granules where required",
-   "Fasting serum lipid profile to exclude eruptive xanthoma",
-   "Clinical and laboratory review to exclude systemic histiocytosis and internal malignancy",
-   "Full blood count and inflammatory markers",
-   "Serum protein electrophoresis where an associated dyscrasia is suspected",
-   "Serial assessment to detect evolution towards a xanthomatous histiocytosis"
-  ],
-  "redFlags": [
-   "Hepatosplenomegaly, lymphadenopathy or cytopenias suggesting a systemic histiocytosis",
-   "Constitutional symptoms such as fever, weight loss or night sweats",
-   "Bone pain or lytic lesions raising the possibility of Langerhans cell histiocytosis",
-   "Rapidly progressive, non-regressing disease",
-   "Evolution of lesions with features suggesting an alternative malignant histiocytic disorder"
-  ],
-  "prognosis": "The prognosis is favourable, with a chronic but ultimately self-healing course in which crops of papules regress spontaneously over months to years; a minority of cases evolve into other cutaneous non-Langerhans cell histiocytoses, and treatment is generally unnecessary.",
-  "pitfalls": [
-   "Making the diagnosis without adequately excluding Langerhans cell histiocytosis and systemic histiocytoses.",
-   "Mislabelling the eruption as eruptive xanthoma despite normal lipids and absent foam cells on histology.",
-   "Assuming permanence and over-treating a self-limiting condition.",
-   "Failing to follow patients for possible evolution towards xanthomatous forms.",
-   "Confusing recurrent crops with treatment failure."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology (current edition)",
-   "WHO Classification of Histiocytoses and revised histiocytosis classification (current)",
-   "Standard dermatology reference texts (current editions)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and observation, since the eruption is purely cutaneous and typically self-healing, so active treatment is often unnecessary",
-   "Exclude mimics and associations by confirming histology, checking a fasting lipid profile to exclude eruptive xanthoma, and screening for systemic histiocytosis and internal malignancy",
-   "Symptomatic or cosmetic treatment of troublesome crops with options such as phototherapy, topical or systemic retinoids or corticosteroids where warranted",
-   "Longitudinal monitoring for evolution into another cutaneous non-Langerhans cell histiocytosis such as xanthoma disseminatum",
-   "Dermatology follow-up with repeat biopsy if lesional morphology changes or xanthomatous features emerge"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "generalised_eruptive_histiocytosis-pathway",
-   "title": "Generalised eruptive histiocytosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare non-Langerhans cell histiocytosis presenting with recurrent crops of numerous symmetrical red-brown papules distributed widely over the trunk, face and proximal limbs.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hepatosplenomegaly, lymphadenopathy or cytopenias suggesting a systemic histiocytosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with histology and immunohistochemistry (CD68, factor XIIIa, CD1a, langerin), Electron microscopy to confirm absence of Birbeck granules where required, Fasting serum lipid profile to exclude eruptive xanthoma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and observation, since the eruption is purely cutaneous and typically self-healing, so active treatment is often unnecessary"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Making the diagnosis without adequately excluding Langerhans cell histiocytosis and systemic histiocytoses."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of generalised eruptive histiocytosis."
-  }
- ],
- "tables": [
-  {
-   "id": "generalised_eruptive_histiocytosis-matrix",
-   "title": "Generalised eruptive histiocytosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare non-Langerhans cell histiocytosis presenting with recurrent crops of numerous symmetrical red-brown papules distributed",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Haematology",
+  "specialty": "Dermatology / Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare non-Langerhans cell histiocytosis presenting with recurrent crops of numerous symmetrical red-brown papules distributed widely over the trunk, face and proximal limbs.",
+      "It occurs predominantly in adults but is reported in children, and the eruption appears in successive waves.",
+      "Lesions are typically monomorphic, non-coalescing papules a few millimetres in diameter that spare or minimally involve mucous membranes.",
+      "By definition there is no visceral involvement, and the condition is regarded as a purely cutaneous, self-healing histiocytosis.",
+      "Individual papules tend to resolve spontaneously leaving transient macular hyperpigmentation, though new crops may recur over months to years.",
+      "Histology shows a monomorphous dermal infiltrate of histiocytes without significant lipidisation, foam cells or Touton giant cells, which are CD68 positive and CD1a and langerin negative.",
+      "It is widely considered an early or transitional form within the spectrum of cutaneous non-Langerhans cell histiocytoses and may evolve towards xanthomatous forms such as juvenile xanthogranuloma or xanthoma disseminatum.",
+      "The diagnosis is partly one of exclusion, requiring differentiation from Langerhans cell histiocytosis and from histiocytoses with systemic involvement."
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with histology and immunohistochemistry (CD68, factor XIIIa, CD1a, langerin), Electron microscopy to confirm absence",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Generalised eruptive histiocytosis is a reactive proliferation of macrophage-derived dermal histiocytes belonging to the non-Langerhans cell histiocytoses. The lesional cells are non-lipidised histiocytes expressing macrophage markers such as CD68 while lacking the Langerhans cell markers CD1a and langerin and Birbeck granules. The characteristic absence of foam cells and Touton giant cells early in the disease, together with the tendency of some cases to acquire xanthomatous features over time, supports the concept that generalised eruptive histiocytosis represents an early, non-lipidised phase of the cutaneous non-Langerhans cell histiocytosis spectrum that overlaps with benign cephalic histiocytosis, juvenile xanthogranuloma and xanthoma disseminatum. The self-healing crops reflect a self-limited reactive process with clearance of the histiocytic infiltrate rather than a persistent clonal neoplasm.",
+    "additionalDifferentials": [
+      "Langerhans cell histiocytosis",
+      "Benign cephalic histiocytosis",
+      "Xanthoma disseminatum",
+      "Juvenile / adult xanthogranuloma",
+      "Eruptive xanthomas",
+      "Papular sarcoidosis",
+      "Secondary syphilis"
     ],
-    [
-     "Primary Differentials",
-     "Langerhans cell histiocytosis, Benign cephalic histiocytosis, Xanthoma disseminatum",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with histology and immunohistochemistry (CD68, factor XIIIa, CD1a, langerin)",
+      "Electron microscopy to confirm absence of Birbeck granules where required",
+      "Fasting serum lipid profile to exclude eruptive xanthoma",
+      "Clinical and laboratory review to exclude systemic histiocytosis and internal malignancy",
+      "Full blood count and inflammatory markers",
+      "Serum protein electrophoresis where an associated dyscrasia is suspected",
+      "Serial assessment to detect evolution towards a xanthomatous histiocytosis"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and observation, since the eruption is purely cutaneous and typically self-healing, so active treatment is often",
-     "Core treatment modality"
+    "redFlags": [
+      "Hepatosplenomegaly, lymphadenopathy or cytopenias suggesting a systemic histiocytosis",
+      "Constitutional symptoms such as fever, weight loss or night sweats",
+      "Bone pain or lytic lesions raising the possibility of Langerhans cell histiocytosis",
+      "Rapidly progressive, non-regressing disease",
+      "Evolution of lesions with features suggesting an alternative malignant histiocytic disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Making the diagnosis without adequately excluding Langerhans cell histiocytosis and systemic histiocytoses.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is favourable, with a chronic but ultimately self-healing course in which crops of papules regress spontaneously over months to years; a minority of cases evolve into other cutaneous non-Langerhans cell histiocytoses, and treatment is generally unnecessary.",
+    "pitfalls": [
+      "Making the diagnosis without adequately excluding Langerhans cell histiocytosis and systemic histiocytoses.",
+      "Mislabelling the eruption as eruptive xanthoma despite normal lipids and absent foam cells on histology.",
+      "Assuming permanence and over-treating a self-limiting condition.",
+      "Failing to follow patients for possible evolution towards xanthomatous forms.",
+      "Confusing recurrent crops with treatment failure."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology (current edition)",
+      "WHO Classification of Histiocytoses and revised histiocytosis classification (current)",
+      "Standard dermatology reference texts (current editions)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and observation, since the eruption is purely cutaneous and typically self-healing, so active treatment is often unnecessary",
+      "Exclude mimics and associations by confirming histology, checking a fasting lipid profile to exclude eruptive xanthoma, and screening for systemic histiocytosis and internal malignancy",
+      "Symptomatic or cosmetic treatment of troublesome crops with options such as phototherapy, topical or systemic retinoids or corticosteroids where warranted",
+      "Longitudinal monitoring for evolution into another cutaneous non-Langerhans cell histiocytosis such as xanthoma disseminatum",
+      "Dermatology follow-up with repeat biopsy if lesional morphology changes or xanthomatous features emerge"
     ]
-   ],
-   "caption": "Overview comparison matrix for generalised eruptive histiocytosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "generalised-eruptive-histiocytosis-real-image",
-   "title": "Generalised eruptive histiocytosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "generalised_eruptive_histiocytosis-pathway",
+      "title": "Generalised eruptive histiocytosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare non-Langerhans cell histiocytosis presenting with recurrent crops of numerous symmetrical red-brown papules distributed widely over the trunk, face and proximal limbs.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hepatosplenomegaly, lymphadenopathy or cytopenias suggesting a systemic histiocytosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with histology and immunohistochemistry (CD68, factor XIIIa, CD1a, langerin), Electron microscopy to confirm absence of Birbeck granules where required, Fasting serum lipid profile to exclude eruptive xanthoma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and observation, since the eruption is purely cutaneous and typically self-healing, so active treatment is often unnecessary"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Making the diagnosis without adequately excluding Langerhans cell histiocytosis and systemic histiocytoses."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of generalised eruptive histiocytosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "generalised_eruptive_histiocytosis-matrix",
+      "title": "Generalised eruptive histiocytosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare non-Langerhans cell histiocytosis presenting with recurrent crops of numerous symmetrical red-brown papules distributed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with histology and immunohistochemistry (CD68, factor XIIIa, CD1a, langerin), Electron microscopy to confirm absence",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Langerhans cell histiocytosis, Benign cephalic histiocytosis, Xanthoma disseminatum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and observation, since the eruption is purely cutaneous and typically self-healing, so active treatment is often",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Making the diagnosis without adequately excluding Langerhans cell histiocytosis and systemic histiocytoses.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for generalised eruptive histiocytosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "generalised_eruptive_histiocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with histology and immunohistochemistry",
+          "cells": [
+            {
+              "text": "CD68, factor XIIIa, CD1a and langerin profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electron microscopy",
+          "cells": [
+            {
+              "text": "Absence of Birbeck granules where required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting serum lipid profile",
+          "cells": [
+            {
+              "text": "Excludes eruptive xanthoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical and laboratory review",
+          "cells": [
+            {
+              "text": "Excludes systemic histiocytosis and internal malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic disease screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum protein electrophoresis",
+          "cells": [
+            {
+              "text": "Where an associated dyscrasia is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalised_eruptive_histiocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Langerhans cell histiocytosis",
+          "cells": [
+            {
+              "text": "Bone pain or lytic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eruptive xanthomas",
+          "cells": [
+            {
+              "text": "Excluded by fasting lipid profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalised_eruptive_histiocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Purely cutaneous and typically self-healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm histology and lipids",
+          "cells": [
+            {
+              "text": "Excludes mimics and associations, including eruptive xanthoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic or cosmetic treatment",
+          "cells": [
+            {
+              "text": "Phototherapy or topical or systemic retinoids for troublesome crops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Longitudinal monitoring",
+          "cells": [
+            {
+              "text": "Evolution into xanthoma disseminatum or another histiocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology follow-up",
+          "cells": [
+            {
+              "text": "Repeat biopsy if morphology changes or xanthomatous features emerge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "generalised_eruptive_histiocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Generalised eruptive histiocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected generalised eruptive histiocytosis: crops of papules across the skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (organomegaly, constitutional symptoms, lytic bone lesions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic review for organomegaly, cytopenias or fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with CD68, factor XIIIa, CD1a and langerin; lipid profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show histiocytes with normal lipids and no systemic disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Langerhans cell histiocytosis, eruptive xanthoma or sarcoidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and observation; purely cutaneous and typically self-healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Symptomatic or cosmetic treatment of troublesome crops, such as phototherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Longitudinal monitoring for evolution into xanthoma disseminatum",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat biopsy if morphology changes or xanthomatous features emerge",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Favourable; crops regress spontaneously over months to years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

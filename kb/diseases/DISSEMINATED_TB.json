@@ -252,25 +252,504 @@
       "caption": "Diagnostic and clinical overview matrix for disseminated (miliary) tuberculosis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "disseminated-tb-real-image",
-      "title": "Disseminated (Miliary) Tuberculosis: 12-Lead Diagnostic Electrocardiogram",
-      "type": "ecg",
-      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 168-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 165-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Primary Care Notebook, Treatment of tuberculosis (cites NICE NG33)",
+      "url": "https://primarycarenotebook.com/en-GB/pages/infectious-disease/specific-treatments/treatment-of-tuberculosis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "DISSEMINATED_TB-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing miliary and disseminated tuberculosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Conduction & Axis",
-          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+          "parameter": "Constitutional symptoms",
+          "cells": [
+            {
+              "text": "Fever, night sweats, anorexia, weakness, weight loss"
+            },
+            {
+              "text": "Non-specific; needs a high index of suspicion"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Repolarization",
-          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+          "parameter": "Choroidal tubercles on dilated fundoscopy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to about 30% of cases",
+              "op": "<=",
+              "value": 30
+            },
+            {
+              "text": "{{hy:Pathognomonic of miliary TB}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Rhythm & Intervals",
-          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+          "parameter": "Chest x-ray",
+          "cells": [
+            {
+              "text": "Miliary reticulonodular pattern; may be normal early or in HIV, or show infiltrates or effusion"
+            },
+            {
+              "text": "A normal film does not exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum smear",
+          "cells": [
+            {
+              "text": "Negative in most cases"
+            },
+            {
+              "text": "Does not exclude disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculin skin test",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Negative in up to 50%",
+              "op": "<=",
+              "value": 50
+            },
+            {
+              "text": "Cannot rule out disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver or bone marrow biopsy",
+          "cells": [
+            {
+              "text": "Granulomas often found"
+            },
+            {
+              "text": "Tissue confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy with BAL and transbronchial biopsy",
+          "cells": [
+            {
+              "text": "Improves bacteriologic yield"
+            },
+            {
+              "text": "Use when sputum is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood count",
+          "cells": [
+            {
+              "text": "Anaemia, leukopenia, lymphopenia, leukaemoid reaction; pancytopenia in non-reactive form"
+            },
+            {
+              "text": "Pancytopenia with sepsis suggests rapidly fatal non-reactive TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningismus",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 10%",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Look for concurrent TB meningitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture",
+          "cells": [
+            {
+              "text": "All disseminated TB; add CT or MRI brain if CNS signs"
+            },
+            {
+              "text": "CNS involvement changes the regimen"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Risk: HIV infection",
+          "cells": [
+            {
+              "text": "Relative risk 21 to over 30 for active TB"
+            },
+            {
+              "text": "Highest-risk comorbidity with silicosis (30) and transplantation (20 to 70)"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "DISSEMINATED_TB-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic miliary tuberculosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated fungal infection",
+          "cells": [
+            {
+              "text": "Miliary or interstitial infiltrates with multi-organ disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptic miliary TB in the elderly",
+          "cells": [
+            {
+              "text": "Chronic mild intermittent fever and anaemia only"
+            },
+            {
+              "text": "Liver or marrow biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-reactive miliary TB versus bacterial sepsis",
+          "cells": [
+            {
+              "text": "Acute septicaemic course with pancytopenia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous meningitis",
+          "cells": [
+            {
+              "text": "Meningismus or CNS signs"
+            },
+            {
+              "text": "{{hy:Lumbar puncture; Xpert MTB/RIF first}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison names disseminated fungal infection as the main mimic; separating tests were not stated in the sources opened."
+    },
+    {
+      "id": "DISSEMINATED_TB-treatment",
+      "kind": "treatment",
+      "title": "Treatment of disseminated tuberculosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "HRZE intensive phase",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Drug-susceptible disease; start early",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Isoniazid, rifampicin, pyrazinamide, ethambutol for 2 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HR continuation phase",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "No CNS involvement",
+              "op": "=",
+              "value": 4
+            },
+            {
+              "text": "Isoniazid and rifampicin for 4 months; isoniazid with pyridoxine"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Extend to 9 months",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Pyrazinamide not completed, slow culture conversion or cavitation",
+              "op": "=",
+              "value": 9
+            },
+            {
+              "text": "From the culture-positive row"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CNS involvement",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "HRZE 2 months then HR 10 months",
+              "op": "=",
+              "value": 12
+            },
+            {
+              "text": "{{hy:Treat as TB meningitis with adjunctive steroid withdrawn over 4 to 8 weeks}}"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Isoniazid resistance",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "RZE or S (with quinolone) for 6",
+              "op": "=",
+              "value": 6
+            },
+            {
+              "text": "Per susceptibility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rifampicin resistance",
+          "cells": [
+            {
+              "text": "HZE plus quinolone (with injectable) for 2 months, then HE plus quinolone for 10 to 16 months"
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isoniazid and rifampicin resistance",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "ZE plus quinolone with injectable and other agents for 18 to 24",
+              "range": [
+                18,
+                24
+              ]
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids without CNS disease",
+          "cells": [
+            {
+              "text": "Not routinely"
+            },
+            {
+              "text": "No proven benefit in miliary TB"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 168-2 reflects older ATS-era resistant regimens (injectables); current WHO drug-resistant regimens differ and should be checked."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "DISSEMINATED_TB-dx-mgmt",
+      "title": "Diagnosis and management of disseminated tuberculosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged fever, weight loss, night sweats, risk factor such as HIV",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest x-ray, dilated fundoscopy, blood count, LFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Miliary pattern or choroidal tubercles?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sputum, BAL with transbronchial biopsy, liver or marrow biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Granulomas or M. tuberculosis found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Consider disseminated fungal infection or other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lumbar puncture in all; brain imaging if CNS signs",
+          "cite": "c4"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "CNS involvement?",
+          "cite": "c4"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "HRZE 2 months, HR 10 months, adjunctive steroid",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "HRZE 2 months, HR 4 months; adjust to susceptibility",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No but suspicion high"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
         }
       ]
     }

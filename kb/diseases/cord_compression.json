@@ -224,25 +224,529 @@
       "caption": "Diagnostic and clinical overview matrix for spinal cord compression."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "cord-compression-real-image",
-      "title": "Spinal cord compression: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Spinal Cord Compression",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/spinal-cord-disorders/spinal-cord-compression",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 377-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cord_compression-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising and localising spinal cord compression",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Back pain",
+          "cells": [
+            {
+              "text": "Worse lying down and at night; may precede deficits by days to months"
+            },
+            {
+              "text": "{{hy:Earliest symptom of metastatic compression}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Sensory level",
+          "cells": [
+            {
+              "text": "Horizontal level of sensory loss"
+            },
+            {
+              "text": "True lesion often 1 to 2 segments higher"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Landmarks",
+          "cells": [
+            {
+              "text": "Nipples T4, umbilicus T10"
+            },
+            {
+              "text": "Bedside localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor and reflex signs",
+          "cells": [
+            {
+              "text": "Hyporeflexia acutely, later hyperreflexia, extensor plantars"
+            },
+            {
+              "text": "Cord involvement"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sphincter dysfunction",
+          "cells": [
+            {
+              "text": "Bladder or bowel loss"
+            },
+            {
+              "text": "Usually late"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal percussion tenderness",
+          "cells": [
+            {
+              "text": "Prominent"
+            },
+            {
+              "text": "Metastasis, abscess or haematoma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lhermitte sign",
+          "cells": [
+            {
+              "text": "Electric sensation on neck flexion"
+            },
+            {
+              "text": "Early clue to cervical compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Immediately when available"
+            },
+            {
+              "text": "Test of choice"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT myelography",
+          "cells": [
+            {
+              "text": "If MRI unavailable"
+            },
+            {
+              "text": "Defines the block"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disc space on imaging",
+          "cells": [
+            {
+              "text": "Infection crosses the disc; tumour respects it"
+            },
+            {
+              "text": "Separates infection from tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain films",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Insensitive; about 20% of collapses are osteoporotic"
+            },
+            {
+              "text": "Normal film does not exclude tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cord_compression-ddx",
+      "kind": "ddx",
+      "title": "Causes and mimics of spinal cord compression",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic epidural compression",
+          "cells": [
+            {
+              "text": "{{hy:Known cancer, night pain, percussion tenderness}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spinal epidural abscess",
+          "cells": [
+            {
+              "text": "Fever, midline pain; diabetes, IV drug use; often S. aureus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous spondylitis (Pott)",
+          "cells": [
+            {
+              "text": "Endemic areas; vertebral destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural haematoma",
+          "cells": [
+            {
+              "text": "Anticoagulation, trauma or recent spinal procedure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disc herniation or spondylotic myelopathy",
+          "cells": [
+            {
+              "text": "Degenerative disease, stepwise course"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intradural or intramedullary tumour",
+          "cells": [
+            {
+              "text": "Long history; sacral sparing with intramedullary lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal cord infarction",
+          "cells": [
+            {
+              "text": "Sudden painless deficit with preserved vibration and position sense"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transverse myelitis",
+          "cells": [
+            {
+              "text": "Noncompressive; consider once MRI excludes compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conus medullaris or cauda equina lesion",
+          "cells": [
+            {
+              "text": "Saddle anaesthesia, early sphincter loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cord_compression-treatment",
+      "kind": "treatment",
+      "title": "Management of spinal cord compression",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dexamethasone",
+          "cells": [
+            {
+              "text": "{{hy:Neurological deficit or pain, immediately}}"
+            },
+            {
+              "text": "Dose not stated in sources opened"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Radiosensitive tumour without instability"
+            },
+            {
+              "text": "Prompt after steroids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Worsening deficit, unstable spine, need for biopsy, recurrence after radiation, abscess or haematoma"
+            },
+            {
+              "text": "Paraparesis recovers better after surgery than radiotherapy alone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Separation surgery then stereotactic radiotherapy",
+          "cells": [
+            {
+              "text": "High-grade compression from radioresistant tumour"
+            },
+            {
+              "text": "NOMS framework"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics with drainage",
+          "cells": [
+            {
+              "text": "Spinal epidural abscess"
+            },
+            {
+              "text": "Cover S. aureus including MRSA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat within hours",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Deficits fixed >12 h seldom improve",
+              "op": ">",
+              "value": 12
+            },
+            {
+              "text": "Little recovery after 48 h"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Outcome is best when the patient is still walking and continent at the start of treatment."
+    },
+    {
+      "id": "cord_compression-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Spinal cord level versus vertebral body",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Corresponding vertebral body"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper cervical",
+          "cells": [
+            {
+              "text": "Same level as the cord segment"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lower cervical",
+          "cells": [
+            {
+              "text": "1 level higher"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Upper thoracic",
+          "cells": [
+            {
+              "text": "2 levels higher"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lower thoracic",
+          "cells": [
+            {
+              "text": "2 to 3 levels higher"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lumbar",
+          "cells": [
+            {
+              "text": "T10 to T12"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sacral",
+          "cells": [
+            {
+              "text": "T12 to L1"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cord_compression-dx-mgmt",
+      "title": "Diagnosis and management of spinal cord compression",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Back pain with limb weakness, sensory level or sphincter change",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Dexamethasone now if deficit or malignant pain",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Immediate MRI (CT myelography if unavailable)",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Compression shown?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Look for myelitis, infarction, other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Abscess or haematoma?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Urgent surgical drainage; antibiotics for abscess",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Unstable spine, worsening deficit or radioresistant tumour?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Surgical decompression, then radiotherapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Radiotherapy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
         }
       ]
     }

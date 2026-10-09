@@ -1,174 +1,470 @@
 {
- "id": "hip_fracture",
- "name": "Hip fracture",
- "aliases": [
-  "proximal femoral fracture",
-  "fractured neck of femur",
-  "femoral neck fracture",
-  "intertrochanteric fracture",
-  "NOF fracture"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically follows a low-energy fall in an older, often osteoporotic patient; the leg is characteristically shortened and externally rotated with pain on any movement",
-   "Fractures are broadly divided into intracapsular (subcapital/transcervical) and extracapsular (intertrochanteric and subtrochanteric), a distinction that governs both blood supply risk and treatment",
-   "The femoral head's blood supply runs retrograde up the neck, so displaced intracapsular fractures carry a high risk of avascular necrosis and non-union",
-   "Displaced intracapsular fractures in older patients are usually managed with arthroplasty (hemiarthroplasty or total hip replacement), whereas undisplaced or young patients' fractures are fixed to preserve the head",
-   "Extracapsular fractures retain a good blood supply and are typically treated with internal fixation such as a dynamic hip screw or intramedullary device",
-   "Early surgery (generally within about a day or two) and rapid mobilisation reduce complications; prolonged bed rest causes pressure sores, chest infection, and venous thromboembolism",
-   "A minority present with subtle or occult fractures and a normal-appearing radiograph; persistent inability to weight-bear warrants MRI or CT",
-   "Outcome depends heavily on comorbidity and pre-injury mobility; orthogeriatric co-management and bone-health assessment for future fracture prevention are integral"
+  "id": "hip_fracture",
+  "name": "Hip fracture",
+  "aliases": [
+    "proximal femoral fracture",
+    "fractured neck of femur",
+    "femoral neck fracture",
+    "intertrochanteric fracture",
+    "NOF fracture"
   ],
-  "pathophysiology": "Hip fractures usually result from a fall onto the greater trochanter in bone weakened by osteoporosis, though high-energy trauma or pathological lesions can cause them at any age. The proximal femur is supplied largely by the medial femoral circumflex artery via retinacular vessels ascending the femoral neck beneath the capsule. Intracapsular fractures may tear these vessels, threatening viability of the femoral head and predisposing to avascular necrosis and non-union, especially when displaced. Extracapsular fractures occur through well-vascularised cancellous bone and heal reliably but can bleed substantially. Immobility after fracture drives systemic decompensation in frail patients.",
-  "additionalDifferentials": [
-   "Pubic ramus or acetabular fracture",
-   "Greater trochanteric contusion or avulsion",
-   "Trochanteric bursitis or gluteal tendinopathy",
-   "Pathological fracture from metastasis or myeloma",
-   "Osteoarthritis of the hip with acute-on-chronic pain",
-   "Referred pain from lumbar spine"
-  ],
-  "additionalInvestigations": [
-   "Anteroposterior pelvis and lateral hip radiographs as first-line imaging",
-   "MRI (or CT) when a fracture is suspected clinically despite normal radiographs (occult fracture)",
-   "Full blood count, renal function and electrolytes, group and save/crossmatch as part of preoperative workup",
-   "ECG and assessment of cardiopulmonary fitness for anaesthesia",
-   "Bone mineral density assessment and metabolic bone screen for secondary fracture prevention"
-  ],
-  "redFlags": [
-   "Signs of significant blood loss or haemodynamic instability, particularly with subtrochanteric fractures",
-   "Pathological fracture features (bone destruction, minimal trauma in a younger patient) suggesting malignancy",
-   "Open fracture or associated neurovascular compromise of the limb",
-   "Prolonged surgical delay increasing mortality and complication risk in the frail elderly"
-  ],
-  "prognosis": "Hip fracture in the elderly carries substantial morbidity and a significant one-year mortality driven by comorbidity; prompt surgery, early mobilisation, orthogeriatric care, and osteoporosis treatment improve functional recovery, though many patients do not regain full pre-injury independence.",
-  "pitfalls": [
-   "Dismissing a hip fracture because the initial radiograph looks normal, missing an occult fracture",
-   "Delaying surgery unnecessarily for over-investigation of stable comorbidities",
-   "Choosing internal fixation for a displaced intracapsular fracture in an older patient, risking avascular necrosis and reoperation",
-   "Overlooking underlying osteoporosis and failing to institute secondary prevention"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early surgery, generally within a day or two of admission, to reduce complications",
-   "Arthroplasty (hemiarthroplasty or total hip replacement) for displaced intracapsular fractures in older patients",
-   "Internal fixation to preserve the femoral head for undisplaced intracapsular fractures and in younger patients",
-   "Internal fixation with a dynamic hip screw or intramedullary device for extracapsular fractures",
-   "Multimodal analgesia including regional fascia iliaca nerve blocks, with venous thromboembolism prophylaxis",
-   "Orthogeriatric co-management with early mobilisation and prevention of delirium, pressure sores and chest infection",
-   "Osteoporosis treatment with bisphosphonates or other bone-protective agents plus falls prevention for secondary fracture prevention"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hip_fracture-pathway",
-   "title": "Hip fracture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically follows a low-energy fall in an older, often osteoporotic patient; the leg is characteristically shortened and externally rotated with pain on any movement",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of significant blood loss or haemodynamic instability, particularly with subtrochanteric fractures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anteroposterior pelvis and lateral hip radiographs as first-line imaging, MRI (or CT) when a fracture is suspected clinically despite normal radiographs (occult fracture), Full blood count, renal function and electrolytes,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early surgery, generally within a day or two of admission, to reduce complications"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing a hip fracture because the initial radiograph looks normal, missing an occult fracture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hip fracture."
-  }
- ],
- "tables": [
-  {
-   "id": "hip_fracture-matrix",
-   "title": "Hip fracture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically follows a low-energy fall in an older, often osteoporotic patient; the leg is characteristically shortened and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically follows a low-energy fall in an older, often osteoporotic patient; the leg is characteristically shortened and externally rotated with pain on any movement",
+      "Fractures are broadly divided into intracapsular (subcapital/transcervical) and extracapsular (intertrochanteric and subtrochanteric), a distinction that governs both blood supply risk and treatment",
+      "The femoral head's blood supply runs retrograde up the neck, so displaced intracapsular fractures carry a high risk of avascular necrosis and non-union",
+      "Displaced intracapsular fractures in older patients are usually managed with arthroplasty (hemiarthroplasty or total hip replacement), whereas undisplaced or young patients' fractures are fixed to preserve the head",
+      "Extracapsular fractures retain a good blood supply and are typically treated with internal fixation such as a dynamic hip screw or intramedullary device",
+      "Early surgery (generally within about a day or two) and rapid mobilisation reduce complications; prolonged bed rest causes pressure sores, chest infection, and venous thromboembolism",
+      "A minority present with subtle or occult fractures and a normal-appearing radiograph; persistent inability to weight-bear warrants MRI or CT",
+      "Outcome depends heavily on comorbidity and pre-injury mobility; orthogeriatric co-management and bone-health assessment for future fracture prevention are integral"
     ],
-    [
-     "Key Investigations",
-     "Anteroposterior pelvis and lateral hip radiographs as first-line imaging, MRI (or CT) when a fracture is suspected clinically",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hip fractures usually result from a fall onto the greater trochanter in bone weakened by osteoporosis, though high-energy trauma or pathological lesions can cause them at any age. The proximal femur is supplied largely by the medial femoral circumflex artery via retinacular vessels ascending the femoral neck beneath the capsule. Intracapsular fractures may tear these vessels, threatening viability of the femoral head and predisposing to avascular necrosis and non-union, especially when displaced. Extracapsular fractures occur through well-vascularised cancellous bone and heal reliably but can bleed substantially. Immobility after fracture drives systemic decompensation in frail patients.",
+    "additionalDifferentials": [
+      "Pubic ramus or acetabular fracture",
+      "Greater trochanteric contusion or avulsion",
+      "Trochanteric bursitis or gluteal tendinopathy",
+      "Pathological fracture from metastasis or myeloma",
+      "Osteoarthritis of the hip with acute-on-chronic pain",
+      "Referred pain from lumbar spine"
     ],
-    [
-     "Primary Differentials",
-     "Pubic ramus or acetabular fracture, Greater trochanteric contusion or avulsion, Trochanteric bursitis or gluteal tendinopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anteroposterior pelvis and lateral hip radiographs as first-line imaging",
+      "MRI (or CT) when a fracture is suspected clinically despite normal radiographs (occult fracture)",
+      "Full blood count, renal function and electrolytes, group and save/crossmatch as part of preoperative workup",
+      "ECG and assessment of cardiopulmonary fitness for anaesthesia",
+      "Bone mineral density assessment and metabolic bone screen for secondary fracture prevention"
     ],
-    [
-     "Management Strategy",
-     "Early surgery, generally within a day or two of admission, to reduce complications",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of significant blood loss or haemodynamic instability, particularly with subtrochanteric fractures",
+      "Pathological fracture features (bone destruction, minimal trauma in a younger patient) suggesting malignancy",
+      "Open fracture or associated neurovascular compromise of the limb",
+      "Prolonged surgical delay increasing mortality and complication risk in the frail elderly"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing a hip fracture because the initial radiograph looks normal, missing an occult fracture",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hip fracture in the elderly carries substantial morbidity and a significant one-year mortality driven by comorbidity; prompt surgery, early mobilisation, orthogeriatric care, and osteoporosis treatment improve functional recovery, though many patients do not regain full pre-injury independence.",
+    "pitfalls": [
+      "Dismissing a hip fracture because the initial radiograph looks normal, missing an occult fracture",
+      "Delaying surgery unnecessarily for over-investigation of stable comorbidities",
+      "Choosing internal fixation for a displaced intracapsular fracture in an older patient, risking avascular necrosis and reoperation",
+      "Overlooking underlying osteoporosis and failing to institute secondary prevention"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early surgery, generally within a day or two of admission, to reduce complications",
+      "Arthroplasty (hemiarthroplasty or total hip replacement) for displaced intracapsular fractures in older patients",
+      "Internal fixation to preserve the femoral head for undisplaced intracapsular fractures and in younger patients",
+      "Internal fixation with a dynamic hip screw or intramedullary device for extracapsular fractures",
+      "Multimodal analgesia including regional fascia iliaca nerve blocks, with venous thromboembolism prophylaxis",
+      "Orthogeriatric co-management with early mobilisation and prevention of delirium, pressure sores and chest infection",
+      "Osteoporosis treatment with bisphosphonates or other bone-protective agents plus falls prevention for secondary fracture prevention"
     ]
-   ],
-   "caption": "Overview comparison matrix for hip fracture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hip-fracture-real-image",
-   "title": "Hip fracture: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "hip_fracture-pathway",
+      "title": "Hip fracture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically follows a low-energy fall in an older, often osteoporotic patient; the leg is characteristically shortened and externally rotated with pain on any movement",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of significant blood loss or haemodynamic instability, particularly with subtrochanteric fractures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anteroposterior pelvis and lateral hip radiographs as first-line imaging, MRI (or CT) when a fracture is suspected clinically despite normal radiographs (occult fracture), Full blood count, renal function and electrolytes,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early surgery, generally within a day or two of admission, to reduce complications"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing a hip fracture because the initial radiograph looks normal, missing an occult fracture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hip fracture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hip_fracture-matrix",
+      "title": "Hip fracture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically follows a low-energy fall in an older, often osteoporotic patient; the leg is characteristically shortened and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anteroposterior pelvis and lateral hip radiographs as first-line imaging, MRI (or CT) when a fracture is suspected clinically",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pubic ramus or acetabular fracture, Greater trochanteric contusion or avulsion, Trochanteric bursitis or gluteal tendinopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early surgery, generally within a day or two of admission, to reduce complications",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing a hip fracture because the initial radiograph looks normal, missing an occult fracture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hip fracture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hip_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AP pelvis and lateral hip radiographs",
+          "cells": [
+            {
+              "text": "Fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT",
+          "cells": [
+            {
+              "text": "Occult fracture when suspected clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, renal function, electrolytes, group and save",
+          "cells": [
+            {
+              "text": "Pre-operative status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiopulmonary assessment",
+          "cells": [
+            {
+              "text": "Anaesthetic fitness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone mineral density and metabolic bone screen",
+          "cells": [
+            {
+              "text": "Osteoporosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hip_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pathological fracture from metastasis or myeloma",
+          "cells": [
+            {
+              "text": "Bone destruction or minimal trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoarthritis of the hip with acute-on-chronic pain",
+          "cells": [
+            {
+              "text": "Acute-on-chronic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referred pain from the lumbar spine",
+          "cells": [
+            {
+              "text": "Referred pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pubic ramus or acetabular fracture",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hip_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early surgery",
+          "cells": [
+            {
+              "text": "Generally within a day or two of admission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroplasty",
+          "cells": [
+            {
+              "text": "Hemiarthroplasty or total hip replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Internal fixation",
+          "cells": [
+            {
+              "text": "Preserves the femoral head where undisplaced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic hip screw or intramedullary nail",
+          "cells": [
+            {
+              "text": "Fixation of trochanteric fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multimodal analgesia",
+          "cells": [
+            {
+              "text": "Including regional fascia iliaca nerve block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthogeriatric co-management",
+          "cells": [
+            {
+              "text": "Early mobilisation and rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporosis treatment",
+          "cells": [
+            {
+              "text": "Bisphosphonates or other bone-active agents"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hip_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Hip fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hip pain after a fall with inability to bear weight",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Major blood loss, pathological features, open fracture or neurovascular compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: resuscitate for blood loss; urgent surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AP pelvis and lateral hip films; MRI or CT if occult; bloods; ECG; bone density",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a hip fracture confirmed on radiographs, CT or MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pubic ramus fracture, trochanteric injury, pathological fracture or hip OA",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early surgery, generally within a day or two of admission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Arthroplasty: hemiarthroplasty or total hip replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Internal fixation to preserve the femoral head where undisplaced",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthogeriatric co-management with early mobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early surgery and mobilisation; osteoporosis treatment started",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

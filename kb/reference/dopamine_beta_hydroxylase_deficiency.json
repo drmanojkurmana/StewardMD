@@ -1,174 +1,463 @@
 {
- "id": "dopamine_beta_hydroxylase_deficiency",
- "name": "Dopamine beta-hydroxylase deficiency",
- "aliases": [
-  "DBH deficiency",
-  "dopamine beta-hydroxylase deficiency",
-  "noradrenaline deficiency"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare inherited (autosomal recessive) autonomic disorder in which noradrenaline and adrenaline cannot be synthesised, leaving dopamine as the released catecholamine",
-   "Presents with profound orthostatic hypotension from infancy or childhood, often with perinatal complications such as hypotension, hypoglycaemia, and hypothermia",
-   "The biochemical hallmark is very low or undetectable plasma noradrenaline and adrenaline with markedly raised plasma dopamine, giving a high dopamine-to-noradrenaline ratio",
-   "Ptosis, nasal stuffiness, retrograde ejaculation, and exercise intolerance are characteristic",
-   "Sweating is relatively preserved because sudomotor fibres are cholinergic, distinguishing it from some other forms of autonomic failure",
-   "Uniquely, it can be treated by replacing the deficient product with the synthetic precursor droxidopa, which is converted directly to noradrenaline and bypasses the missing enzyme",
-   "Should be considered in a young patient with severe orthostatic hypotension and a characteristic catecholamine profile",
-   "Supportive management follows autonomic-failure principles: volume and salt expansion, compression garments, and physical counter-manoeuvres"
+  "id": "dopamine_beta_hydroxylase_deficiency",
+  "name": "Dopamine beta-hydroxylase deficiency",
+  "aliases": [
+    "DBH deficiency",
+    "dopamine beta-hydroxylase deficiency",
+    "noradrenaline deficiency"
   ],
-  "pathophysiology": "Dopamine beta-hydroxylase is the enzyme that converts dopamine to noradrenaline within sympathetic nerve terminals and the adrenal medulla. In dopamine beta-hydroxylase deficiency, biallelic loss-of-function variants abolish enzyme activity, so noradrenaline and adrenaline cannot be produced and dopamine is released instead from sympathetic nerves. The absence of noradrenergic vasoconstriction causes severe orthostatic hypotension, while excess circulating dopamine may contribute to renal and other effects. Parasympathetic and cholinergic sympathetic (sudomotor) functions, which do not depend on this enzyme, are preserved. Because the defect is a single missing biosynthetic step, supplying a precursor that is decarboxylated directly to noradrenaline can restore noradrenergic signalling.",
-  "additionalDifferentials": [
-   "Pure autonomic failure",
-   "Multiple system atrophy",
-   "Familial dysautonomia (Riley-Day syndrome)",
-   "Other inherited catecholamine-biosynthesis or aromatic L-amino acid decarboxylase disorders",
-   "Menkes disease with copper-dependent enzyme dysfunction",
-   "Secondary autonomic neuropathy"
-  ],
-  "additionalInvestigations": [
-   "Supine and standing plasma catecholamines showing absent noradrenaline and adrenaline with raised dopamine",
-   "Calculation of the plasma dopamine-to-noradrenaline ratio",
-   "Head-up tilt-table testing to quantify the orthostatic hypotension",
-   "Genetic testing of the DBH gene",
-   "Cardiovascular autonomic reflex tests",
-   "Assessment of sudomotor (sweating) function to demonstrate its relative preservation"
-  ],
-  "redFlags": [
-   "Neonatal or infantile hypotension, hypoglycaemia, and collapse",
-   "Recurrent syncope with injury",
-   "Severe exercise intolerance limiting daily function",
-   "Coexisting supine hypertension complicating treatment"
-  ],
-  "prognosis": "With precursor replacement therapy many patients gain substantial and durable relief of orthostatic hypotension and can lead near-normal lives, which makes recognition important; untreated, disabling orthostatic symptoms persist, and perinatal presentations carry early morbidity.",
-  "pitfalls": [
-   "Missing this treatable diagnosis in a young person with severe orthostatic hypotension",
-   "Not measuring plasma catecholamines to reveal the characteristic dopamine-to-noradrenaline profile",
-   "Confusing it with pure autonomic failure or multiple system atrophy",
-   "Overlooking supine hypertension that can arise during treatment"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Droxidopa, a synthetic noradrenaline precursor converted directly to noradrenaline, is the specific treatment and markedly improves the orthostatic hypotension",
-   "Non-pharmacological orthostatic measures including increased salt and fluid intake, compression garments, head-up sleeping and physical counter-manoeuvres",
-   "Manage associated features such as nasal stuffiness and ptosis, with awareness of retrograde ejaculation",
-   "Monitor supine and standing blood pressure and adjust therapy to avoid supine hypertension",
-   "Attention to perinatal complications in affected infants, including hypotension, hypoglycaemia and hypothermia",
-   "Autonomic and cardiology follow-up",
-   "Genetic counselling and family testing given autosomal recessive DBH inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dopamine_beta_hydroxylase_deficiency-pathway",
-   "title": "Dopamine beta-hydroxylase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare inherited (autosomal recessive) autonomic disorder in which noradrenaline and adrenaline cannot be synthesised, leaving dopamine as the released catecholamine",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal or infantile hypotension, hypoglycaemia, and collapse",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Supine and standing plasma catecholamines showing absent noradrenaline and adrenaline with raised dopamine, Calculation of the plasma dopamine-to-noradrenaline ratio, Head-up tilt-table testing to quantify the orthostatic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Droxidopa, a synthetic noradrenaline precursor converted directly to noradrenaline, is the specific treatment and markedly improves the orthostatic hypotension"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing this treatable diagnosis in a young person with severe orthostatic hypotension"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dopamine beta-hydroxylase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "dopamine_beta_hydroxylase_deficiency-matrix",
-   "title": "Dopamine beta-hydroxylase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare inherited (autosomal recessive) autonomic disorder in which noradrenaline and adrenaline cannot be synthesised, leaving",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare inherited (autosomal recessive) autonomic disorder in which noradrenaline and adrenaline cannot be synthesised, leaving dopamine as the released catecholamine",
+      "Presents with profound orthostatic hypotension from infancy or childhood, often with perinatal complications such as hypotension, hypoglycaemia, and hypothermia",
+      "The biochemical hallmark is very low or undetectable plasma noradrenaline and adrenaline with markedly raised plasma dopamine, giving a high dopamine-to-noradrenaline ratio",
+      "Ptosis, nasal stuffiness, retrograde ejaculation, and exercise intolerance are characteristic",
+      "Sweating is relatively preserved because sudomotor fibres are cholinergic, distinguishing it from some other forms of autonomic failure",
+      "Uniquely, it can be treated by replacing the deficient product with the synthetic precursor droxidopa, which is converted directly to noradrenaline and bypasses the missing enzyme",
+      "Should be considered in a young patient with severe orthostatic hypotension and a characteristic catecholamine profile",
+      "Supportive management follows autonomic-failure principles: volume and salt expansion, compression garments, and physical counter-manoeuvres"
     ],
-    [
-     "Key Investigations",
-     "Supine and standing plasma catecholamines showing absent noradrenaline and adrenaline with raised dopamine, Calculation of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dopamine beta-hydroxylase is the enzyme that converts dopamine to noradrenaline within sympathetic nerve terminals and the adrenal medulla. In dopamine beta-hydroxylase deficiency, biallelic loss-of-function variants abolish enzyme activity, so noradrenaline and adrenaline cannot be produced and dopamine is released instead from sympathetic nerves. The absence of noradrenergic vasoconstriction causes severe orthostatic hypotension, while excess circulating dopamine may contribute to renal and other effects. Parasympathetic and cholinergic sympathetic (sudomotor) functions, which do not depend on this enzyme, are preserved. Because the defect is a single missing biosynthetic step, supplying a precursor that is decarboxylated directly to noradrenaline can restore noradrenergic signalling.",
+    "additionalDifferentials": [
+      "Pure autonomic failure",
+      "Multiple system atrophy",
+      "Familial dysautonomia (Riley-Day syndrome)",
+      "Other inherited catecholamine-biosynthesis or aromatic L-amino acid decarboxylase disorders",
+      "Menkes disease with copper-dependent enzyme dysfunction",
+      "Secondary autonomic neuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Pure autonomic failure, Multiple system atrophy, Familial dysautonomia (Riley-Day syndrome)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Supine and standing plasma catecholamines showing absent noradrenaline and adrenaline with raised dopamine",
+      "Calculation of the plasma dopamine-to-noradrenaline ratio",
+      "Head-up tilt-table testing to quantify the orthostatic hypotension",
+      "Genetic testing of the DBH gene",
+      "Cardiovascular autonomic reflex tests",
+      "Assessment of sudomotor (sweating) function to demonstrate its relative preservation"
     ],
-    [
-     "Management Strategy",
-     "Droxidopa, a synthetic noradrenaline precursor converted directly to noradrenaline, is the specific treatment and markedly",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal or infantile hypotension, hypoglycaemia, and collapse",
+      "Recurrent syncope with injury",
+      "Severe exercise intolerance limiting daily function",
+      "Coexisting supine hypertension complicating treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing this treatable diagnosis in a young person with severe orthostatic hypotension",
-     "Prevent diagnostic or management error"
+    "prognosis": "With precursor replacement therapy many patients gain substantial and durable relief of orthostatic hypotension and can lead near-normal lives, which makes recognition important; untreated, disabling orthostatic symptoms persist, and perinatal presentations carry early morbidity.",
+    "pitfalls": [
+      "Missing this treatable diagnosis in a young person with severe orthostatic hypotension",
+      "Not measuring plasma catecholamines to reveal the characteristic dopamine-to-noradrenaline profile",
+      "Confusing it with pure autonomic failure or multiple system atrophy",
+      "Overlooking supine hypertension that can arise during treatment"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Droxidopa, a synthetic noradrenaline precursor converted directly to noradrenaline, is the specific treatment and markedly improves the orthostatic hypotension",
+      "Non-pharmacological orthostatic measures including increased salt and fluid intake, compression garments, head-up sleeping and physical counter-manoeuvres",
+      "Manage associated features such as nasal stuffiness and ptosis, with awareness of retrograde ejaculation",
+      "Monitor supine and standing blood pressure and adjust therapy to avoid supine hypertension",
+      "Attention to perinatal complications in affected infants, including hypotension, hypoglycaemia and hypothermia",
+      "Autonomic and cardiology follow-up",
+      "Genetic counselling and family testing given autosomal recessive DBH inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for dopamine beta-hydroxylase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dopamine-beta-hydroxylase-deficiency-real-image",
-   "title": "Dopamine beta-hydroxylase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dopamine_beta_hydroxylase_deficiency-pathway",
+      "title": "Dopamine beta-hydroxylase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare inherited (autosomal recessive) autonomic disorder in which noradrenaline and adrenaline cannot be synthesised, leaving dopamine as the released catecholamine",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal or infantile hypotension, hypoglycaemia, and collapse",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Supine and standing plasma catecholamines showing absent noradrenaline and adrenaline with raised dopamine, Calculation of the plasma dopamine-to-noradrenaline ratio, Head-up tilt-table testing to quantify the orthostatic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Droxidopa, a synthetic noradrenaline precursor converted directly to noradrenaline, is the specific treatment and markedly improves the orthostatic hypotension"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing this treatable diagnosis in a young person with severe orthostatic hypotension"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dopamine beta-hydroxylase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dopamine_beta_hydroxylase_deficiency-matrix",
+      "title": "Dopamine beta-hydroxylase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare inherited (autosomal recessive) autonomic disorder in which noradrenaline and adrenaline cannot be synthesised, leaving",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Supine and standing plasma catecholamines showing absent noradrenaline and adrenaline with raised dopamine, Calculation of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pure autonomic failure, Multiple system atrophy, Familial dysautonomia (Riley-Day syndrome)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Droxidopa, a synthetic noradrenaline precursor converted directly to noradrenaline, is the specific treatment and markedly",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing this treatable diagnosis in a young person with severe orthostatic hypotension",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dopamine beta-hydroxylase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dopamine_beta_hydroxylase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Supine and standing plasma catecholamines",
+          "cells": [
+            {
+              "text": "Absent noradrenaline and adrenaline with raised dopamine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma dopamine-to-noradrenaline ratio",
+          "cells": [
+            {
+              "text": "Characteristic raised ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head-up tilt-table testing",
+          "cells": [
+            {
+              "text": "Orthostatic hypotension quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DBH gene testing",
+          "cells": [
+            {
+              "text": "Biallelic DBH variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sudomotor function assessment",
+          "cells": [
+            {
+              "text": "Relative preservation of sweating"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dopamine_beta_hydroxylase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure autonomic failure",
+          "cells": [
+            {
+              "text": "Confused with DBH deficiency; the catecholamine profile separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple system atrophy",
+          "cells": [
+            {
+              "text": "Confused with DBH deficiency; the catecholamine profile separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dopamine_beta_hydroxylase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Droxidopa",
+          "cells": [
+            {
+              "text": "Noradrenaline precursor; specific treatment that markedly improves orthostatic hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-pharmacological measures",
+          "cells": [
+            {
+              "text": "Salt and fluids, compression garments, head-up sleeping and counter-manoeuvres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated features",
+          "cells": [
+            {
+              "text": "Nasal stuffiness and ptosis; awareness of retrograde ejaculation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure monitoring",
+          "cells": [
+            {
+              "text": "Supine and standing readings; avoid supine hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perinatal care",
+          "cells": [
+            {
+              "text": "Hypotension, hypoglycaemia and hypothermia in affected infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic and cardiology follow-up",
+          "cells": [
+            {
+              "text": "Ongoing review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DBH; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dopamine_beta_hydroxylase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Dopamine beta-hydroxylase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DBH deficiency: severe orthostatic hypotension and syncope in a young person",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infant hypotension, syncope with injury, supine hypertension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for syncope with injury or infant hypotension and collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Catecholamines supine and standing; tilt-table test; DBH gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are noradrenaline and adrenaline absent with raised dopamine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pure autonomic failure, multiple system atrophy or familial dysautonomia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Droxidopa, a noradrenaline precursor, which markedly improves orthostatic hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Salt, fluids, compression garments and head-up sleeping",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor supine and standing blood pressure to avoid supine hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Attention to perinatal hypotension, hypoglycaemia and hypothermia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing for autosomal recessive DBH",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Precursor replacement gives durable relief and near-normal lives; untreated persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

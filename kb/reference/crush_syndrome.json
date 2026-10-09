@@ -1,172 +1,450 @@
 {
- "id": "crush_syndrome",
- "name": "Crush syndrome",
- "aliases": [
-  "traumatic rhabdomyolysis",
-  "crush injury syndrome"
- ],
- "class": "non_infective",
- "system": "Emergency / Trauma / Critical care",
- "specialty": "Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Anticipate systemic collapse when a compressed limb or torso is released, as reperfusion floods the circulation with potassium and other cell contents",
-   "Hyperkalaemia is the most immediately life-threatening consequence and can precipitate fatal arrhythmia at or shortly after extrication",
-   "Begin generous intravenous fluid resuscitation early, ideally before release of the crushed part, to protect the kidneys and dilute the metabolic load",
-   "Myoglobin released from damaged muscle causes pigment-induced acute kidney injury, often heralded by dark, tea-coloured urine",
-   "Monitor the electrocardiogram continuously for peaked T waves and other signs of hyperkalaemia during and after extrication",
-   "The crushed limb can develop compartment syndrome, so examine repeatedly for tense swelling and disproportionate pain",
-   "Correct hypovolaemia, acidosis, and electrolyte disturbance in parallel while maintaining a good urine output"
+  "id": "crush_syndrome",
+  "name": "Crush syndrome",
+  "aliases": [
+    "traumatic rhabdomyolysis",
+    "crush injury syndrome"
   ],
-  "pathophysiology": "Prolonged compression of muscle causes ischaemic and pressure necrosis (rhabdomyolysis). While compressed, the injury is largely contained, but on release reperfusion washes the accumulated intracellular contents into the systemic circulation. Potassium, myoglobin, phosphate, and organic acids surge, producing hyperkalaemia, metabolic acidosis, and hypocalcaemia. Myoglobin precipitates in the renal tubules, and combined with hypovolaemia from fluid sequestration into damaged muscle, causes acute kidney injury. Massive fluid shifts and the release of vasoactive and inflammatory mediators can cause shock, while swelling within fascial compartments produces compartment syndrome.",
-  "additionalDifferentials": [
-   "Non-traumatic rhabdomyolysis (prolonged immobility, drugs, seizures)",
-   "Acute kidney injury from other causes",
-   "Hyperkalaemia from renal failure or other aetiology",
-   "Compartment syndrome without systemic crush features",
-   "Hypovolaemic or haemorrhagic shock from associated trauma"
-  ],
-  "additionalInvestigations": [
-   "Serum potassium and other electrolytes, including calcium and phosphate",
-   "Creatine kinase and myoglobin as markers of muscle breakdown",
-   "Renal function and urine output monitoring",
-   "Urinalysis showing pigment (dark urine positive for blood without red cells)",
-   "Electrocardiogram and continuous cardiac monitoring for hyperkalaemic changes"
-  ],
-  "redFlags": [
-   "Hyperkalaemia with electrocardiographic changes threatening fatal arrhythmia around the time of extrication",
-   "Progressive acute kidney injury with falling urine output and dark urine",
-   "Signs of compartment syndrome in the crushed limb requiring urgent assessment",
-   "Metabolic acidosis and haemodynamic instability on reperfusion",
-   "Sudden cardiovascular collapse immediately after release of the crushed part"
-  ],
-  "prognosis": "Early and aggressive fluid resuscitation with prevention and treatment of hyperkalaemia and pigment nephropathy improves outcome. Untreated crush syndrome carries high mortality from arrhythmia and renal failure, though renal function often recovers with timely supportive care and dialysis where needed.",
-  "pitfalls": [
-   "Delaying fluid resuscitation until after the limb is freed, when the potassium surge is already underway",
-   "Overlooking hyperkalaemia and failing to monitor the electrocardiogram during extrication",
-   "Missing evolving compartment syndrome in the injured limb",
-   "Under-resuscitating and allowing pigment nephropathy to progress",
-   "Attributing dark urine to visible blood rather than myoglobin"
-  ],
-  "references": [
-   "ATLS (Advanced Trauma Life Support)",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin generous intravenous fluid resuscitation early, ideally before release of the compressed part, to protect the kidneys and dilute the metabolic load",
-   "Anticipate and treat hyperkalaemia with cardiac-membrane stabilisation using calcium and potassium-shifting therapy with insulin-dextrose and salbutamol, and continuous ECG monitoring for peaked T waves",
-   "Consider urinary alkalinisation with sodium bicarbonate and maintenance of brisk diuresis to limit pigment (myoglobin) nephropathy",
-   "Provide renal replacement therapy for refractory hyperkalaemia, severe acidosis or established acute kidney injury",
-   "Assess the limb repeatedly for compartment syndrome and perform fasciotomy where indicated",
-   "Correct symptomatic hypocalcaemia and metabolic acidosis and treat shock with ongoing haemodynamic support",
-   "Manage in a critical care setting with a trauma multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "crush_syndrome-pathway",
-   "title": "Crush syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Anticipate systemic collapse when a compressed limb or torso is released, as reperfusion floods the circulation with potassium and other cell contents",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hyperkalaemia with electrocardiographic changes threatening fatal arrhythmia around the time of extrication",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum potassium and other electrolytes, including calcium and phosphate, Creatine kinase and myoglobin as markers of muscle breakdown, Renal function and urine output monitoring"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin generous intravenous fluid resuscitation early, ideally before release of the compressed part, to protect the kidneys and dilute the metabolic load"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying fluid resuscitation until after the limb is freed, when the potassium surge is already underway"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of crush syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "crush_syndrome-matrix",
-   "title": "Crush syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Anticipate systemic collapse when a compressed limb or torso is released, as reperfusion floods the circulation with potassium",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Emergency / Trauma / Critical care",
+  "specialty": "Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Anticipate systemic collapse when a compressed limb or torso is released, as reperfusion floods the circulation with potassium and other cell contents",
+      "Hyperkalaemia is the most immediately life-threatening consequence and can precipitate fatal arrhythmia at or shortly after extrication",
+      "Begin generous intravenous fluid resuscitation early, ideally before release of the crushed part, to protect the kidneys and dilute the metabolic load",
+      "Myoglobin released from damaged muscle causes pigment-induced acute kidney injury, often heralded by dark, tea-coloured urine",
+      "Monitor the electrocardiogram continuously for peaked T waves and other signs of hyperkalaemia during and after extrication",
+      "The crushed limb can develop compartment syndrome, so examine repeatedly for tense swelling and disproportionate pain",
+      "Correct hypovolaemia, acidosis, and electrolyte disturbance in parallel while maintaining a good urine output"
     ],
-    [
-     "Key Investigations",
-     "Serum potassium and other electrolytes, including calcium and phosphate, Creatine kinase and myoglobin as markers of muscle",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Prolonged compression of muscle causes ischaemic and pressure necrosis (rhabdomyolysis). While compressed, the injury is largely contained, but on release reperfusion washes the accumulated intracellular contents into the systemic circulation. Potassium, myoglobin, phosphate, and organic acids surge, producing hyperkalaemia, metabolic acidosis, and hypocalcaemia. Myoglobin precipitates in the renal tubules, and combined with hypovolaemia from fluid sequestration into damaged muscle, causes acute kidney injury. Massive fluid shifts and the release of vasoactive and inflammatory mediators can cause shock, while swelling within fascial compartments produces compartment syndrome.",
+    "additionalDifferentials": [
+      "Non-traumatic rhabdomyolysis (prolonged immobility, drugs, seizures)",
+      "Acute kidney injury from other causes",
+      "Hyperkalaemia from renal failure or other aetiology",
+      "Compartment syndrome without systemic crush features",
+      "Hypovolaemic or haemorrhagic shock from associated trauma"
     ],
-    [
-     "Primary Differentials",
-     "Non-traumatic rhabdomyolysis (prolonged immobility, drugs, seizures), Acute kidney injury from other causes, Hyperkalaemia from",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum potassium and other electrolytes, including calcium and phosphate",
+      "Creatine kinase and myoglobin as markers of muscle breakdown",
+      "Renal function and urine output monitoring",
+      "Urinalysis showing pigment (dark urine positive for blood without red cells)",
+      "Electrocardiogram and continuous cardiac monitoring for hyperkalaemic changes"
     ],
-    [
-     "Management Strategy",
-     "Begin generous intravenous fluid resuscitation early, ideally before release of the compressed part, to protect the kidneys and",
-     "Core treatment modality"
+    "redFlags": [
+      "Hyperkalaemia with electrocardiographic changes threatening fatal arrhythmia around the time of extrication",
+      "Progressive acute kidney injury with falling urine output and dark urine",
+      "Signs of compartment syndrome in the crushed limb requiring urgent assessment",
+      "Metabolic acidosis and haemodynamic instability on reperfusion",
+      "Sudden cardiovascular collapse immediately after release of the crushed part"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying fluid resuscitation until after the limb is freed, when the potassium surge is already underway",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early and aggressive fluid resuscitation with prevention and treatment of hyperkalaemia and pigment nephropathy improves outcome. Untreated crush syndrome carries high mortality from arrhythmia and renal failure, though renal function often recovers with timely supportive care and dialysis where needed.",
+    "pitfalls": [
+      "Delaying fluid resuscitation until after the limb is freed, when the potassium surge is already underway",
+      "Overlooking hyperkalaemia and failing to monitor the electrocardiogram during extrication",
+      "Missing evolving compartment syndrome in the injured limb",
+      "Under-resuscitating and allowing pigment nephropathy to progress",
+      "Attributing dark urine to visible blood rather than myoglobin"
+    ],
+    "references": [
+      "ATLS (Advanced Trauma Life Support)",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin generous intravenous fluid resuscitation early, ideally before release of the compressed part, to protect the kidneys and dilute the metabolic load",
+      "Anticipate and treat hyperkalaemia with cardiac-membrane stabilisation using calcium and potassium-shifting therapy with insulin-dextrose and salbutamol, and continuous ECG monitoring for peaked T waves",
+      "Consider urinary alkalinisation with sodium bicarbonate and maintenance of brisk diuresis to limit pigment (myoglobin) nephropathy",
+      "Provide renal replacement therapy for refractory hyperkalaemia, severe acidosis or established acute kidney injury",
+      "Assess the limb repeatedly for compartment syndrome and perform fasciotomy where indicated",
+      "Correct symptomatic hypocalcaemia and metabolic acidosis and treat shock with ongoing haemodynamic support",
+      "Manage in a critical care setting with a trauma multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for crush syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "crush-syndrome-real-image",
-   "title": "Crush syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "crush_syndrome-pathway",
+      "title": "Crush syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Anticipate systemic collapse when a compressed limb or torso is released, as reperfusion floods the circulation with potassium and other cell contents",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hyperkalaemia with electrocardiographic changes threatening fatal arrhythmia around the time of extrication",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum potassium and other electrolytes, including calcium and phosphate, Creatine kinase and myoglobin as markers of muscle breakdown, Renal function and urine output monitoring"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin generous intravenous fluid resuscitation early, ideally before release of the compressed part, to protect the kidneys and dilute the metabolic load"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying fluid resuscitation until after the limb is freed, when the potassium surge is already underway"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of crush syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "crush_syndrome-matrix",
+      "title": "Crush syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Anticipate systemic collapse when a compressed limb or torso is released, as reperfusion floods the circulation with potassium",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum potassium and other electrolytes, including calcium and phosphate, Creatine kinase and myoglobin as markers of muscle",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-traumatic rhabdomyolysis (prolonged immobility, drugs, seizures), Acute kidney injury from other causes, Hyperkalaemia from",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin generous intravenous fluid resuscitation early, ideally before release of the compressed part, to protect the kidneys and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying fluid resuscitation until after the limb is freed, when the potassium surge is already underway",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for crush syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "crush_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum potassium, calcium and phosphate",
+          "cells": [
+            {
+              "text": "Hyperkalaemia and electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and myoglobin",
+          "cells": [
+            {
+              "text": "Muscle breakdown"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Pigment: dark urine positive for blood without red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Hyperkalaemic changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crush_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-traumatic rhabdomyolysis",
+          "cells": [
+            {
+              "text": "Immobility, drugs or seizures instead of crush"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment syndrome without systemic features",
+          "cells": [
+            {
+              "text": "Limb-only process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhagic shock from associated trauma",
+          "cells": [
+            {
+              "text": "Blood loss rather than muscle breakdown"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crush_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early IV fluid resuscitation",
+          "cells": [
+            {
+              "text": "Generous, ideally before release of the compressed part"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia treatment",
+          "cells": [
+            {
+              "text": "Membrane stabilisation with calcium; insulin-dextrose and salbutamol shift"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary alkalinisation",
+          "cells": [
+            {
+              "text": "Sodium bicarbonate and brisk diuresis to limit myoglobin nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement",
+          "cells": [
+            {
+              "text": "Refractory hyperkalaemia, severe acidosis or established AKI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment checks",
+          "cells": [
+            {
+              "text": "Repeated assessment; fasciotomy where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium and acidosis correction",
+          "cells": [
+            {
+              "text": "Symptomatic hypocalcaemia; shock support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care",
+          "cells": [
+            {
+              "text": "Trauma multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "crush_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Crush syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected crush syndrome: prolonged limb compression followed by release",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (hyperkalaemia with ECG change, falling urine output, compartment signs)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium control and cardiac monitoring during extrication",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Potassium and calcium; CK and myoglobin; renal function; urinalysis; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are CK and myoglobin raised with pigmenturia after compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-traumatic rhabdomyolysis or compartment syndrome alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early generous IV fluid resuscitation before limb release",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat hyperkalaemia with calcium, insulin-dextrose and salbutamol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alkalinise urine and maintain brisk diuresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement for refractory hyperkalaemia or AKI; fasciotomy if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early fluids and treatment of hyperkalaemia and pigment nephropathy improve outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,544 @@
 {
- "id": "imerslund_grasbeck_syndrome",
- "name": "Imerslund-Grasbeck syndrome",
- "aliases": [
-  "IGS",
-  "selective vitamin B12 malabsorption with proteinuria",
-  "megaloblastic anaemia 1",
-  "CUBN",
-  "AMN"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews / Nathan and Oski's Haematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Consider it in a child with megaloblastic anaemia and low serum B12 who also has mild, benign proteinuria",
-   "Autosomal recessive disorder caused by biallelic pathogenic variants in CUBN (cubilin) or AMN (amnionless), which together form the cubam receptor for intrinsic factor-B12 complex in the terminal ileum",
-   "The receptor defect blocks ileal absorption of the intrinsic factor-B12 complex, causing selective B12 malabsorption",
-   "Cubilin also mediates renal tubular protein reabsorption, so tubular (low-molecular-weight) proteinuria is a characteristic feature, especially with CUBN variants",
-   "Typical onset is in infancy or early childhood with anaemia, failure to thrive, recurrent infection and sometimes neurological signs",
-   "Lifelong parenteral B12 corrects the anaemia and neurological features; the proteinuria persists but is generally benign",
-   "Intrinsic factor level and gastric parietal cell function are normal, distinguishing it from pernicious anaemia",
-   "The Schilling test historically showed malabsorption not corrected by intrinsic factor, reflecting the ileal receptor defect"
+  "id": "imerslund_grasbeck_syndrome",
+  "name": "Imerslund-Grasbeck syndrome",
+  "aliases": [
+    "IGS",
+    "selective vitamin B12 malabsorption with proteinuria",
+    "megaloblastic anaemia 1",
+    "CUBN",
+    "AMN"
   ],
-  "pathophysiology": "Imerslund-Grasbeck syndrome is a selective inherited defect of vitamin B12 absorption. The cubam receptor, formed by cubilin (CUBN) and amnionless (AMN), mediates endocytosis of the intrinsic factor-B12 complex at the brush border of terminal ileal enterocytes. Biallelic loss-of-function variants in either gene disable this receptor, so dietary B12 that has bound intrinsic factor cannot be taken up, producing systemic B12 deficiency with megaloblastic anaemia and, if prolonged, neurological dysfunction. Because cubilin is also expressed in the renal proximal tubule where it reclaims filtered proteins, its deficiency additionally causes low-grade tubular proteinuria. Bypassing the absorptive defect with parenteral B12 restores cobalamin status.",
-  "additionalDifferentials": [
-   "Pernicious anaemia and juvenile pernicious anaemia",
-   "Transcobalamin deficiency",
-   "Intrinsic factor deficiency (hereditary)",
-   "Nutritional vitamin B12 deficiency",
-   "Other causes of childhood megaloblastic anaemia (folate deficiency)",
-   "Chronic ileal disease causing B12 malabsorption"
-  ],
-  "additionalInvestigations": [
-   "CUBN and AMN molecular genetic testing",
-   "Serum vitamin B12 with plasma homocysteine and methylmalonic acid",
-   "Full blood count and blood film for megaloblastic anaemia",
-   "Urinalysis and quantification of low-molecular-weight proteinuria",
-   "Intrinsic factor antibody and gastric studies to exclude pernicious anaemia",
-   "Bone marrow examination when needed"
-  ],
-  "redFlags": [
-   "Neurological features of B12 deficiency such as regression or subacute combined degeneration",
-   "Severe symptomatic anaemia in infancy",
-   "Recurrent infection from associated cytopenias",
-   "Failure to thrive"
-  ],
-  "prognosis": "Lifelong parenteral B12 fully corrects the anaemia and prevents neurological complications, giving an excellent outlook; the accompanying proteinuria usually remains mild and non-progressive.",
-  "pitfalls": [
-   "Overlooking the diagnosis when proteinuria is dismissed as unrelated",
-   "Attributing B12 deficiency to diet or pernicious anaemia without testing absorption or genetics",
-   "Relying on oral B12, which cannot bypass the ileal receptor defect reliably",
-   "Assuming the proteinuria signifies progressive renal disease"
-  ],
-  "references": [
-   "GeneReviews / OMIM entries for CUBN and AMN (Imerslund-Grasbeck Syndrome)",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct and prevent deficiency with lifelong parenteral hydroxocobalamin, bypassing the ileal absorptive defect",
-   "Monitor the haematological and neurological response with full blood count, serum B12, plasma homocysteine and methylmalonic acid",
-   "Follow the accompanying low-molecular-weight tubular proteinuria, which is benign and needs no specific treatment",
-   "Ensure iron and folate sufficiency to support recovery of erythropoiesis, replacing B12 before folate to avoid precipitating neurological deficit",
-   "Escalate promptly if neurological features emerge, ensuring adequate ongoing cobalamin replacement",
-   "Offer genetic counselling and family screening for this autosomal recessive CUBN or AMN disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "imerslund_grasbeck_syndrome-pathway",
-   "title": "Imerslund-Grasbeck syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Consider it in a child with megaloblastic anaemia and low serum B12 who also has mild, benign proteinuria",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological features of B12 deficiency such as regression or subacute combined degeneration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CUBN and AMN molecular genetic testing, Serum vitamin B12 with plasma homocysteine and methylmalonic acid, Full blood count and blood film for megaloblastic anaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct and prevent deficiency with lifelong parenteral hydroxocobalamin, bypassing the ileal absorptive defect"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis when proteinuria is dismissed as unrelated"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of imerslund-grasbeck syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "imerslund_grasbeck_syndrome-matrix",
-   "title": "Imerslund-Grasbeck syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Consider it in a child with megaloblastic anaemia and low serum B12 who also has mild, benign proteinuria",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews / Nathan and Oski's Haematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Consider it in a child with megaloblastic anaemia and low serum B12 who also has mild, benign proteinuria",
+      "Autosomal recessive disorder caused by biallelic pathogenic variants in CUBN (cubilin) or AMN (amnionless), which together form the cubam receptor for intrinsic factor-B12 complex in the terminal ileum",
+      "The receptor defect blocks ileal absorption of the intrinsic factor-B12 complex, causing selective B12 malabsorption",
+      "Cubilin also mediates renal tubular protein reabsorption, so tubular (low-molecular-weight) proteinuria is a characteristic feature, especially with CUBN variants",
+      "Typical onset is in infancy or early childhood with anaemia, failure to thrive, recurrent infection and sometimes neurological signs",
+      "Lifelong parenteral B12 corrects the anaemia and neurological features; the proteinuria persists but is generally benign",
+      "Intrinsic factor level and gastric parietal cell function are normal, distinguishing it from pernicious anaemia",
+      "The Schilling test historically showed malabsorption not corrected by intrinsic factor, reflecting the ileal receptor defect"
     ],
-    [
-     "Key Investigations",
-     "CUBN and AMN molecular genetic testing, Serum vitamin B12 with plasma homocysteine and methylmalonic acid, Full blood count and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Imerslund-Grasbeck syndrome is a selective inherited defect of vitamin B12 absorption. The cubam receptor, formed by cubilin (CUBN) and amnionless (AMN), mediates endocytosis of the intrinsic factor-B12 complex at the brush border of terminal ileal enterocytes. Biallelic loss-of-function variants in either gene disable this receptor, so dietary B12 that has bound intrinsic factor cannot be taken up, producing systemic B12 deficiency with megaloblastic anaemia and, if prolonged, neurological dysfunction. Because cubilin is also expressed in the renal proximal tubule where it reclaims filtered proteins, its deficiency additionally causes low-grade tubular proteinuria. Bypassing the absorptive defect with parenteral B12 restores cobalamin status.",
+    "additionalDifferentials": [
+      "Pernicious anaemia and juvenile pernicious anaemia",
+      "Transcobalamin deficiency",
+      "Intrinsic factor deficiency (hereditary)",
+      "Nutritional vitamin B12 deficiency",
+      "Other causes of childhood megaloblastic anaemia (folate deficiency)",
+      "Chronic ileal disease causing B12 malabsorption"
     ],
-    [
-     "Primary Differentials",
-     "Pernicious anaemia and juvenile pernicious anaemia, Transcobalamin deficiency, Intrinsic factor deficiency (hereditary)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CUBN and AMN molecular genetic testing",
+      "Serum vitamin B12 with plasma homocysteine and methylmalonic acid",
+      "Full blood count and blood film for megaloblastic anaemia",
+      "Urinalysis and quantification of low-molecular-weight proteinuria",
+      "Intrinsic factor antibody and gastric studies to exclude pernicious anaemia",
+      "Bone marrow examination when needed"
     ],
-    [
-     "Management Strategy",
-     "Correct and prevent deficiency with lifelong parenteral hydroxocobalamin, bypassing the ileal absorptive defect",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological features of B12 deficiency such as regression or subacute combined degeneration",
+      "Severe symptomatic anaemia in infancy",
+      "Recurrent infection from associated cytopenias",
+      "Failure to thrive"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis when proteinuria is dismissed as unrelated",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lifelong parenteral B12 fully corrects the anaemia and prevents neurological complications, giving an excellent outlook; the accompanying proteinuria usually remains mild and non-progressive.",
+    "pitfalls": [
+      "Overlooking the diagnosis when proteinuria is dismissed as unrelated",
+      "Attributing B12 deficiency to diet or pernicious anaemia without testing absorption or genetics",
+      "Relying on oral B12, which cannot bypass the ileal receptor defect reliably",
+      "Assuming the proteinuria signifies progressive renal disease"
+    ],
+    "references": [
+      "GeneReviews / OMIM entries for CUBN and AMN (Imerslund-Grasbeck Syndrome)",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct and prevent deficiency with lifelong parenteral hydroxocobalamin, bypassing the ileal absorptive defect",
+      "Monitor the haematological and neurological response with full blood count, serum B12, plasma homocysteine and methylmalonic acid",
+      "Follow the accompanying low-molecular-weight tubular proteinuria, which is benign and needs no specific treatment",
+      "Ensure iron and folate sufficiency to support recovery of erythropoiesis, replacing B12 before folate to avoid precipitating neurological deficit",
+      "Escalate promptly if neurological features emerge, ensuring adequate ongoing cobalamin replacement",
+      "Offer genetic counselling and family screening for this autosomal recessive CUBN or AMN disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for imerslund-grasbeck syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "imerslund-grasbeck-syndrome-real-image",
-   "title": "Imerslund-Grasbeck syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "imerslund_grasbeck_syndrome-pathway",
+      "title": "Imerslund-Grasbeck syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Consider it in a child with megaloblastic anaemia and low serum B12 who also has mild, benign proteinuria",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological features of B12 deficiency such as regression or subacute combined degeneration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CUBN and AMN molecular genetic testing, Serum vitamin B12 with plasma homocysteine and methylmalonic acid, Full blood count and blood film for megaloblastic anaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct and prevent deficiency with lifelong parenteral hydroxocobalamin, bypassing the ileal absorptive defect"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis when proteinuria is dismissed as unrelated"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of imerslund-grasbeck syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "imerslund_grasbeck_syndrome-matrix",
+      "title": "Imerslund-Grasbeck syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Consider it in a child with megaloblastic anaemia and low serum B12 who also has mild, benign proteinuria",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CUBN and AMN molecular genetic testing, Serum vitamin B12 with plasma homocysteine and methylmalonic acid, Full blood count and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pernicious anaemia and juvenile pernicious anaemia, Transcobalamin deficiency, Intrinsic factor deficiency (hereditary)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct and prevent deficiency with lifelong parenteral hydroxocobalamin, bypassing the ileal absorptive defect",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis when proteinuria is dismissed as unrelated",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for imerslund-grasbeck syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews / Nathan and Oski's Haematology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 105-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "imerslund_grasbeck_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CUBN and AMN molecular testing",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum B12, plasma homocysteine and methylmalonic acid",
+          "cells": [
+            {
+              "text": "B12 deficiency and metabolic markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Megaloblastic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and low-molecular-weight proteinuria",
+          "cells": [
+            {
+              "text": "Benign tubular proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrinsic factor antibodies and gastric studies",
+          "cells": [
+            {
+              "text": "Excludes pernicious anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "When needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "imerslund_grasbeck_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pernicious anaemia",
+          "cells": [
+            {
+              "text": "Intrinsic factor antibodies and gastric studies distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folate deficiency causing megaloblastic anaemia",
+          "cells": [
+            {
+              "text": "Serum B12 measurement separates it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "imerslund_grasbeck_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral hydroxocobalamin",
+          "cells": [
+            {
+              "text": "Lifelong; bypasses the ileal absorptive defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Full blood count, serum B12, plasma homocysteine and methylmalonic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proteinuria",
+          "cells": [
+            {
+              "text": "Low-molecular-weight tubular proteinuria is benign; no specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron and folate",
+          "cells": [
+            {
+              "text": "Ensure sufficiency; replace B12 before folate to avoid neurological deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological features",
+          "cells": [
+            {
+              "text": "Escalate promptly with ongoing cobalamin replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive CUBN or AMN disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "imerslund_grasbeck_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of megaloblastic anemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Cobalamin deficiency or abnormal cobalamin metabolism",
+          "cells": [
+            {
+              "text": "See Tables 105-3 and 105-4 of the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Folate deficiency or abnormal folate metabolism",
+          "cells": [
+            {
+              "text": "See Table 105-5 of the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antifolate drug therapy",
+          "cells": [
+            {
+              "text": "For example methotrexate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: leukemia and myelodysplasia",
+          "cells": [
+            {
+              "text": "Some cases of acute myeloid leukemia and myelodysplasia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: DNA synthesis inhibitors",
+          "cells": [
+            {
+              "text": "Cytosine arabinoside, hydroxyurea, 6-mercaptopurine, azidothymidine (AZT)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: orotic aciduria",
+          "cells": [
+            {
+              "text": "Responds to uridine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: thiamine-responsive",
+          "cells": [
+            {
+              "text": "Thiamine-responsive megaloblastic anemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "imerslund_grasbeck_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Imerslund-Grasbeck syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Megaloblastic anaemia with low B12 and mild benign proteinuria in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological B12 features, severe infant anaemia or failure to thrive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent parenteral B12 replacement and neurology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CUBN and AMN sequencing, B12, homocysteine, methylmalonic acid, IF antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic CUBN or AMN variant with normal intrinsic factor antibodies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test for pernicious anaemia or transcobalamin deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong parenteral hydroxocobalamin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor blood count, B12, homocysteine and methylmalonic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace B12 before folate to avoid neurological deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ensure iron and folate sufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Haematological recovery on parenteral B12; benign proteinuria needs no treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

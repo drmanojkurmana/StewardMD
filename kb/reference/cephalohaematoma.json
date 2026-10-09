@@ -1,167 +1,426 @@
 {
- "id": "cephalohaematoma",
- "name": "Cephalohaematoma",
- "aliases": [
-  "cephalhaematoma",
-  "subperiosteal haemorrhage of the newborn"
- ],
- "class": "non_infective",
- "system": "Neonatal",
- "specialty": "Neonatology / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Neonatology reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A subperiosteal collection of blood over a skull bone, confined by the periosteal attachments at the sutures",
-   "It does not cross suture lines, in contrast to caput succedaneum and subgaleal haemorrhage",
-   "It often becomes apparent hours after birth and enlarges over the first day or two, then resolves over weeks",
-   "It is associated with instrumental delivery and may overlie a linear skull fracture in a minority",
-   "Resorption of the blood can contribute to jaundice, and a firm rim may calcify as it heals",
-   "Management is expectant; the collection should not be aspirated because of infection risk"
+  "id": "cephalohaematoma",
+  "name": "Cephalohaematoma",
+  "aliases": [
+    "cephalhaematoma",
+    "subperiosteal haemorrhage of the newborn"
   ],
-  "pathophysiology": "A cephalohaematoma forms when shearing forces during birth, often with instrumental delivery, rupture blood vessels beneath the periosteum of a skull bone. Because the periosteum is firmly attached at the suture margins, the accumulating blood is confined to the surface of a single bone and cannot cross the sutures. The collection resorbs gradually; breakdown of the trapped blood adds to the bilirubin load, and organisation at the margins can produce a calcified rim during healing.",
-  "additionalDifferentials": [
-   "Caput succedaneum",
-   "Subgaleal haemorrhage",
-   "Skull fracture with associated swelling",
-   "Cranial meningocele or encephalocele"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from a fluctuant swelling limited by sutures",
-   "Bilirubin monitoring for associated jaundice",
-   "Skull imaging only if an underlying fracture or intracranial injury is suspected",
-   "Assessment for anaemia if the collection is large",
-   "Distinguishing it from subgaleal haemorrhage clinically"
-  ],
-  "redFlags": [
-   "A swelling that crosses sutures and is diffuse, suggesting subgaleal haemorrhage",
-   "Signs of significant blood loss or anaemia",
-   "Features suggesting depressed or complex skull fracture or intracranial injury",
-   "Signs of secondary infection of the collection"
-  ],
-  "prognosis": "Cephalohaematoma is usually benign and resolves over weeks to a few months; the main issues are exaggerated jaundice, occasional anaemia and, rarely, calcification or infection.",
-  "pitfalls": [
-   "Confusing it with subgaleal haemorrhage, which is far more dangerous",
-   "Aspirating the collection and introducing infection",
-   "Overlooking associated hyperbilirubinaemia",
-   "Missing an underlying skull fracture when clinically indicated"
-  ],
-  "references": [
-   "Neonatology reference texts (standard reference)",
-   "Paediatric examination references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage expectantly, allowing spontaneous resorption over weeks, and never aspirate the collection because of infection risk",
-   "Monitor bilirubin and treat associated hyperbilirubinaemia with phototherapy, escalating to exchange transfusion if severe",
-   "Monitor for anaemia when the collection is large",
-   "Ensure adequate vitamin K to support coagulation in the newborn",
-   "Obtain skull imaging only if an underlying fracture or intracranial injury is suspected, and distinguish clinically from subgaleal haemorrhage",
-   "Reassure parents about the slow resolution and possible calcified rim, and escalate if signs of infection, rapid enlargement or neurological compromise appear"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cephalohaematoma-pathway",
-   "title": "Cephalohaematoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A subperiosteal collection of blood over a skull bone, confined by the periosteal attachments at the sutures",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A swelling that crosses sutures and is diffuse, suggesting subgaleal haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from a fluctuant swelling limited by sutures, Bilirubin monitoring for associated jaundice, Skull imaging only if an underlying fracture or intracranial injury is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage expectantly, allowing spontaneous resorption over weeks, and never aspirate the collection because of infection risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with subgaleal haemorrhage, which is far more dangerous"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cephalohaematoma."
-  }
- ],
- "tables": [
-  {
-   "id": "cephalohaematoma-matrix",
-   "title": "Cephalohaematoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A subperiosteal collection of blood over a skull bone, confined by the periosteal attachments at the sutures",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neonatal",
+  "specialty": "Neonatology / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neonatology reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A subperiosteal collection of blood over a skull bone, confined by the periosteal attachments at the sutures",
+      "It does not cross suture lines, in contrast to caput succedaneum and subgaleal haemorrhage",
+      "It often becomes apparent hours after birth and enlarges over the first day or two, then resolves over weeks",
+      "It is associated with instrumental delivery and may overlie a linear skull fracture in a minority",
+      "Resorption of the blood can contribute to jaundice, and a firm rim may calcify as it heals",
+      "Management is expectant; the collection should not be aspirated because of infection risk"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from a fluctuant swelling limited by sutures, Bilirubin monitoring for associated jaundice, Skull imaging only",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A cephalohaematoma forms when shearing forces during birth, often with instrumental delivery, rupture blood vessels beneath the periosteum of a skull bone. Because the periosteum is firmly attached at the suture margins, the accumulating blood is confined to the surface of a single bone and cannot cross the sutures. The collection resorbs gradually; breakdown of the trapped blood adds to the bilirubin load, and organisation at the margins can produce a calcified rim during healing.",
+    "additionalDifferentials": [
+      "Caput succedaneum",
+      "Subgaleal haemorrhage",
+      "Skull fracture with associated swelling",
+      "Cranial meningocele or encephalocele"
     ],
-    [
-     "Primary Differentials",
-     "Caput succedaneum, Subgaleal haemorrhage, Skull fracture with associated swelling",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from a fluctuant swelling limited by sutures",
+      "Bilirubin monitoring for associated jaundice",
+      "Skull imaging only if an underlying fracture or intracranial injury is suspected",
+      "Assessment for anaemia if the collection is large",
+      "Distinguishing it from subgaleal haemorrhage clinically"
     ],
-    [
-     "Management Strategy",
-     "Manage expectantly, allowing spontaneous resorption over weeks, and never aspirate the collection because of infection risk",
-     "Core treatment modality"
+    "redFlags": [
+      "A swelling that crosses sutures and is diffuse, suggesting subgaleal haemorrhage",
+      "Signs of significant blood loss or anaemia",
+      "Features suggesting depressed or complex skull fracture or intracranial injury",
+      "Signs of secondary infection of the collection"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with subgaleal haemorrhage, which is far more dangerous",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cephalohaematoma is usually benign and resolves over weeks to a few months; the main issues are exaggerated jaundice, occasional anaemia and, rarely, calcification or infection.",
+    "pitfalls": [
+      "Confusing it with subgaleal haemorrhage, which is far more dangerous",
+      "Aspirating the collection and introducing infection",
+      "Overlooking associated hyperbilirubinaemia",
+      "Missing an underlying skull fracture when clinically indicated"
+    ],
+    "references": [
+      "Neonatology reference texts (standard reference)",
+      "Paediatric examination references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage expectantly, allowing spontaneous resorption over weeks, and never aspirate the collection because of infection risk",
+      "Monitor bilirubin and treat associated hyperbilirubinaemia with phototherapy, escalating to exchange transfusion if severe",
+      "Monitor for anaemia when the collection is large",
+      "Ensure adequate vitamin K to support coagulation in the newborn",
+      "Obtain skull imaging only if an underlying fracture or intracranial injury is suspected, and distinguish clinically from subgaleal haemorrhage",
+      "Reassure parents about the slow resolution and possible calcified rim, and escalate if signs of infection, rapid enlargement or neurological compromise appear"
     ]
-   ],
-   "caption": "Overview comparison matrix for cephalohaematoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cephalohaematoma-real-image",
-   "title": "Cephalohaematoma: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "cephalohaematoma-pathway",
+      "title": "Cephalohaematoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A subperiosteal collection of blood over a skull bone, confined by the periosteal attachments at the sutures",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A swelling that crosses sutures and is diffuse, suggesting subgaleal haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from a fluctuant swelling limited by sutures, Bilirubin monitoring for associated jaundice, Skull imaging only if an underlying fracture or intracranial injury is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage expectantly, allowing spontaneous resorption over weeks, and never aspirate the collection because of infection risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with subgaleal haemorrhage, which is far more dangerous"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cephalohaematoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cephalohaematoma-matrix",
+      "title": "Cephalohaematoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A subperiosteal collection of blood over a skull bone, confined by the periosteal attachments at the sutures",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from a fluctuant swelling limited by sutures, Bilirubin monitoring for associated jaundice, Skull imaging only",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Caput succedaneum, Subgaleal haemorrhage, Skull fracture with associated swelling",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage expectantly, allowing spontaneous resorption over weeks, and never aspirate the collection because of infection risk",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with subgaleal haemorrhage, which is far more dangerous",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cephalohaematoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neonatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cephalohaematoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Fluctuant swelling limited by sutures; does not cross suture lines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin monitoring",
+          "cells": [
+            {
+              "text": "Associated jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull imaging",
+          "cells": [
+            {
+              "text": "Only if an underlying fracture or intracranial injury is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin assessment",
+          "cells": [
+            {
+              "text": "Anaemia when the collection is large"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical distinction from subgaleal haemorrhage",
+          "cells": [
+            {
+              "text": "Subgaleal haemorrhage crosses sutures and is diffuse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cephalohaematoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Allow spontaneous resorption over weeks"
+            },
+            {
+              "text": "Never aspirate because of infection risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin management",
+          "cells": [
+            {
+              "text": "Phototherapy, escalating to exchange transfusion if severe"
+            },
+            {
+              "text": "Associated hyperbilirubinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia monitoring",
+          "cells": [
+            {
+              "text": "Monitor when the collection is large"
+            },
+            {
+              "text": "Large collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K",
+          "cells": [
+            {
+              "text": "Ensure adequate vitamin K to support coagulation"
+            },
+            {
+              "text": "Newborn coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective skull imaging",
+          "cells": [
+            {
+              "text": "Image only if fracture or intracranial injury is suspected"
+            },
+            {
+              "text": "Clinical suspicion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parent counselling",
+          "cells": [
+            {
+              "text": "Explain slow resolution and possible calcified rim"
+            },
+            {
+              "text": "Escalate for infection, rapid enlargement or neurological signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cephalohaematoma-dx-mgmt",
+      "title": "Diagnosis and management of Cephalohaematoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cephalohaematoma: swelling limited by sutures after instrumental birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (swelling crosses sutures, blood loss, fracture or infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude subgaleal haemorrhage or intracranial injury; urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; bilirubin monitoring; skull imaging only if fracture suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Swelling confined to one bone, not crossing sutures, without fracture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Expectant management; allow resorption over weeks, never aspirate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check subgaleal haemorrhage and caput succedaneum",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Phototherapy for associated hyperbilirubinaemia; exchange transfusion if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor haemoglobin if the collection is large; ensure vitamin K",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel parents on slow resolution and possible calcified rim",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually benign, resolving over weeks to months; jaundice is the main issue",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

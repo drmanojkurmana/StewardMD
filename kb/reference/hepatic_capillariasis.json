@@ -1,173 +1,460 @@
 {
- "id": "hepatic_capillariasis",
- "name": "Hepatic capillariasis (Capillaria hepatica)",
- "aliases": [
-  "Capillaria hepatica infection",
-  "Calodium hepaticum infection",
-  "hepatic capillariosis",
-  "liver capillariasis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare zoonosis caused by the nematode Capillaria hepatica, primarily a parasite of rodents, acquired by ingesting embryonated eggs from soil contaminated with decayed infected animal carcasses",
-   "The adult worms and their eggs lodge in the liver parenchyma rather than the gut, so true infection does not produce eggs in the stool",
-   "Genuine hepatic capillariasis presents with fever, tender hepatomegaly, abdominal pain and marked eosinophilia, and can progress to hepatic dysfunction",
-   "Spurious infection is an important pitfall: eggs pass through the gut and appear in stool after eating infected animal liver, without the person being parasitised",
-   "Diagnosis of true disease usually requires liver biopsy demonstrating adult worms and characteristic eggs within the parenchyma",
-   "Treatment is with an anthelmintic such as albendazole, often with corticosteroid cover for the inflammatory reaction",
-   "Prevention centres on hygiene and avoiding ingestion of soil contaminated by infected rodent carcasses"
+  "id": "hepatic_capillariasis",
+  "name": "Hepatic capillariasis (Capillaria hepatica)",
+  "aliases": [
+    "Capillaria hepatica infection",
+    "Calodium hepaticum infection",
+    "hepatic capillariosis",
+    "liver capillariasis"
   ],
-  "pathophysiology": "Capillaria hepatica is a nematode whose natural cycle involves rodents and other mammals. Adult worms live within the liver parenchyma and deposit eggs directly into the surrounding tissue; these eggs are not released into the intestine and only become infective after the host dies and the carcass decomposes, releasing eggs into the soil where they embryonate. Humans are infected by ingesting these embryonated eggs. Larvae hatch in the intestine, penetrate the wall and travel via the portal circulation to the liver, where they mature and lay eggs. The accumulating worms and egg masses provoke a granulomatous and eosinophilic inflammatory response with focal necrosis and progressive fibrosis of the liver. Because eggs remain trapped in the parenchyma, they are absent from the stool in genuine infection, whereas spurious egg passage occurs harmlessly after eating an infected animal's liver.",
-  "additionalDifferentials": [
-   "Visceral larva migrans (Toxocara) with hepatic involvement",
-   "Fascioliasis and other hepatobiliary trematode infection",
-   "Hepatic abscess (amoebic or pyogenic)",
-   "Other causes of eosinophilic hepatitis or hepatic granulomas",
-   "Hepatic malignancy or metastatic disease",
-   "Spurious egg passage after eating infected liver"
-  ],
-  "additionalInvestigations": [
-   "Full blood count demonstrating marked eosinophilia and leucocytosis",
-   "Liver function tests and inflammatory markers",
-   "Liver biopsy showing adult worms and characteristic eggs in the parenchyma",
-   "Repeat stool examination on a liver-free diet to distinguish true from spurious infection",
-   "Abdominal imaging for hepatomegaly and focal hepatic lesions",
-   "Serology where available to support the diagnosis"
-  ],
-  "redFlags": [
-   "Progressive hepatic dysfunction or evolving liver failure",
-   "High fever with tender hepatomegaly and marked eosinophilia",
-   "Extensive hepatic necrosis or fibrosis on biopsy",
-   "Failure to improve, prompting reconsideration of malignancy or other pathology"
-  ],
-  "prognosis": "True hepatic capillariasis is a serious infection that can be fatal in heavy or untreated cases, though timely anthelmintic therapy can lead to recovery; spurious infection is entirely benign and requires only recognition.",
-  "pitfalls": [
-   "Diagnosing infection from stool eggs alone, which usually reflects spurious passage rather than true disease",
-   "Failing to repeat stool testing on a liver-free diet to exclude spurious eggs",
-   "Overlooking liver biopsy as the definitive means of confirming genuine infection",
-   "Mistaking the hepatic lesions for abscess or malignancy"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat true infection with an anthelmintic such as albendazole or mebendazole to clear the parasite",
-   "Cover the anthelmintic with corticosteroids to dampen the granulomatous and eosinophilic inflammatory reaction as worms die",
-   "Provide supportive care for hepatic dysfunction and pain",
-   "Confirm genuine parasitism rather than spurious infection before treating, sparing unnecessary therapy where only ingested eggs pass through the gut",
-   "Monitor the eosinophil count and liver function to gauge response",
-   "Refer to tropical medicine or hepatology and advise hand and food hygiene to avoid ingesting soil-borne embryonated eggs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hepatic_capillariasis-pathway",
-   "title": "Hepatic capillariasis (Capillaria hepatica): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare zoonosis caused by the nematode Capillaria hepatica, primarily a parasite of rodents, acquired by ingesting embryonated eggs from soil contaminated with decayed infected animal carcasses",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive hepatic dysfunction or evolving liver failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count demonstrating marked eosinophilia and leucocytosis, Liver function tests and inflammatory markers, Liver biopsy showing adult worms and characteristic eggs in the parenchyma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat true infection with an anthelmintic such as albendazole or mebendazole to clear the parasite"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing infection from stool eggs alone, which usually reflects spurious passage rather than true disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hepatic capillariasis (capillaria hepatica)."
-  }
- ],
- "tables": [
-  {
-   "id": "hepatic_capillariasis-matrix",
-   "title": "Hepatic capillariasis (Capillaria hepatica): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare zoonosis caused by the nematode Capillaria hepatica, primarily a parasite of rodents, acquired by ingesting embryonated",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare zoonosis caused by the nematode Capillaria hepatica, primarily a parasite of rodents, acquired by ingesting embryonated eggs from soil contaminated with decayed infected animal carcasses",
+      "The adult worms and their eggs lodge in the liver parenchyma rather than the gut, so true infection does not produce eggs in the stool",
+      "Genuine hepatic capillariasis presents with fever, tender hepatomegaly, abdominal pain and marked eosinophilia, and can progress to hepatic dysfunction",
+      "Spurious infection is an important pitfall: eggs pass through the gut and appear in stool after eating infected animal liver, without the person being parasitised",
+      "Diagnosis of true disease usually requires liver biopsy demonstrating adult worms and characteristic eggs within the parenchyma",
+      "Treatment is with an anthelmintic such as albendazole, often with corticosteroid cover for the inflammatory reaction",
+      "Prevention centres on hygiene and avoiding ingestion of soil contaminated by infected rodent carcasses"
     ],
-    [
-     "Key Investigations",
-     "Full blood count demonstrating marked eosinophilia and leucocytosis, Liver function tests and inflammatory markers, Liver biopsy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Capillaria hepatica is a nematode whose natural cycle involves rodents and other mammals. Adult worms live within the liver parenchyma and deposit eggs directly into the surrounding tissue; these eggs are not released into the intestine and only become infective after the host dies and the carcass decomposes, releasing eggs into the soil where they embryonate. Humans are infected by ingesting these embryonated eggs. Larvae hatch in the intestine, penetrate the wall and travel via the portal circulation to the liver, where they mature and lay eggs. The accumulating worms and egg masses provoke a granulomatous and eosinophilic inflammatory response with focal necrosis and progressive fibrosis of the liver. Because eggs remain trapped in the parenchyma, they are absent from the stool in genuine infection, whereas spurious egg passage occurs harmlessly after eating an infected animal's liver.",
+    "additionalDifferentials": [
+      "Visceral larva migrans (Toxocara) with hepatic involvement",
+      "Fascioliasis and other hepatobiliary trematode infection",
+      "Hepatic abscess (amoebic or pyogenic)",
+      "Other causes of eosinophilic hepatitis or hepatic granulomas",
+      "Hepatic malignancy or metastatic disease",
+      "Spurious egg passage after eating infected liver"
     ],
-    [
-     "Primary Differentials",
-     "Visceral larva migrans (Toxocara) with hepatic involvement, Fascioliasis and other hepatobiliary trematode infection, Hepatic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count demonstrating marked eosinophilia and leucocytosis",
+      "Liver function tests and inflammatory markers",
+      "Liver biopsy showing adult worms and characteristic eggs in the parenchyma",
+      "Repeat stool examination on a liver-free diet to distinguish true from spurious infection",
+      "Abdominal imaging for hepatomegaly and focal hepatic lesions",
+      "Serology where available to support the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Treat true infection with an anthelmintic such as albendazole or mebendazole to clear the parasite",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive hepatic dysfunction or evolving liver failure",
+      "High fever with tender hepatomegaly and marked eosinophilia",
+      "Extensive hepatic necrosis or fibrosis on biopsy",
+      "Failure to improve, prompting reconsideration of malignancy or other pathology"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing infection from stool eggs alone, which usually reflects spurious passage rather than true disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "True hepatic capillariasis is a serious infection that can be fatal in heavy or untreated cases, though timely anthelmintic therapy can lead to recovery; spurious infection is entirely benign and requires only recognition.",
+    "pitfalls": [
+      "Diagnosing infection from stool eggs alone, which usually reflects spurious passage rather than true disease",
+      "Failing to repeat stool testing on a liver-free diet to exclude spurious eggs",
+      "Overlooking liver biopsy as the definitive means of confirming genuine infection",
+      "Mistaking the hepatic lesions for abscess or malignancy"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat true infection with an anthelmintic such as albendazole or mebendazole to clear the parasite",
+      "Cover the anthelmintic with corticosteroids to dampen the granulomatous and eosinophilic inflammatory reaction as worms die",
+      "Provide supportive care for hepatic dysfunction and pain",
+      "Confirm genuine parasitism rather than spurious infection before treating, sparing unnecessary therapy where only ingested eggs pass through the gut",
+      "Monitor the eosinophil count and liver function to gauge response",
+      "Refer to tropical medicine or hepatology and advise hand and food hygiene to avoid ingesting soil-borne embryonated eggs"
     ]
-   ],
-   "caption": "Overview comparison matrix for hepatic capillariasis (capillaria hepatica)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hepatic-capillariasis-real-image",
-   "title": "Hepatic capillariasis (Capillaria hepatica): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "hepatic_capillariasis-pathway",
+      "title": "Hepatic capillariasis (Capillaria hepatica): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare zoonosis caused by the nematode Capillaria hepatica, primarily a parasite of rodents, acquired by ingesting embryonated eggs from soil contaminated with decayed infected animal carcasses",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive hepatic dysfunction or evolving liver failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count demonstrating marked eosinophilia and leucocytosis, Liver function tests and inflammatory markers, Liver biopsy showing adult worms and characteristic eggs in the parenchyma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat true infection with an anthelmintic such as albendazole or mebendazole to clear the parasite"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing infection from stool eggs alone, which usually reflects spurious passage rather than true disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hepatic capillariasis (capillaria hepatica)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hepatic_capillariasis-matrix",
+      "title": "Hepatic capillariasis (Capillaria hepatica): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare zoonosis caused by the nematode Capillaria hepatica, primarily a parasite of rodents, acquired by ingesting embryonated",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count demonstrating marked eosinophilia and leucocytosis, Liver function tests and inflammatory markers, Liver biopsy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Visceral larva migrans (Toxocara) with hepatic involvement, Fascioliasis and other hepatobiliary trematode infection, Hepatic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat true infection with an anthelmintic such as albendazole or mebendazole to clear the parasite",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing infection from stool eggs alone, which usually reflects spurious passage rather than true disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hepatic capillariasis (capillaria hepatica)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hepatic_capillariasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Marked eosinophilia and leucocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and inflammatory markers",
+          "cells": [
+            {
+              "text": "Hepatic dysfunction and inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Adult worms and characteristic eggs in the parenchyma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat stool examination on a liver-free diet",
+          "cells": [
+            {
+              "text": "Distinguishes true from spurious infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal imaging",
+          "cells": [
+            {
+              "text": "Hepatomegaly and focal hepatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology, where available",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatic_capillariasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spurious egg passage after eating infected liver",
+          "cells": [
+            {
+              "text": "Eggs pass through the gut and appear in stool, without true parasitism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visceral larva migrans (Toxocara) with hepatic involvement",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fascioliasis and other hepatobiliary trematode infection",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hepatic_capillariasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anthelmintic such as albendazole or mebendazole",
+          "cells": [
+            {
+              "text": "Clears true infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid cover",
+          "cells": [
+            {
+              "text": "Dampens the granulomatous and eosinophilic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Hepatic dysfunction and pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm true parasitism before treating",
+          "cells": [
+            {
+              "text": "Spares unnecessary treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Eosinophil count and liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and hygiene",
+          "cells": [
+            {
+              "text": "Tropical medicine or hepatology; hand and food hygiene"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hepatic_capillariasis-dx-mgmt",
+      "title": "Diagnosis and management of Hepatic capillariasis (Capillaria hepatica)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, tender hepatomegaly and marked eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive liver failure, extensive necrosis on biopsy, or no improvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: hepatology review; reconsider malignancy if no improvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full blood count with eosinophils; liver tests; liver biopsy; repeat stool exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are adult worms or eggs seen in the liver, not only in stool?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Likely spurious egg passage; consider other eosinophilic hepatitis or granulomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anthelmintic such as albendazole or mebendazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroid cover for granulomatous and eosinophilic inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for hepatic dysfunction and pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor eosinophil count and liver function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Worms cleared with monitored recovery; hygiene advice to prevent reinfection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

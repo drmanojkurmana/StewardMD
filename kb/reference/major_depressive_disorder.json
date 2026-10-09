@@ -1,177 +1,466 @@
 {
- "id": "major_depressive_disorder",
- "name": "Major depressive disorder",
- "aliases": [
-  "MDD",
-  "major depression",
-  "clinical depression",
-  "unipolar depression"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Diagnosis requires a sustained period (at least around two weeks) of either persistently low mood or loss of interest/pleasure, together with several additional symptoms causing significant distress or functional impairment",
-   "Associated features commonly include disturbed sleep, appetite or weight change, fatigue, poor concentration, psychomotor slowing or agitation, feelings of worthlessness or excessive guilt, and recurrent thoughts of death",
-   "Always screen actively for suicidal ideation, intent, and plan, and ask about prior attempts and access to means",
-   "Screen for a past manic or hypomanic episode before starting an antidepressant, because an unrecognised bipolar diathesis can be destabilised",
-   "Exclude medical and substance-related contributors such as hypothyroidism, anaemia, and medication effects before attributing symptoms solely to a primary mood disorder",
-   "Management principles combine evidence-based psychotherapy (such as cognitive behavioural therapy or interpersonal therapy) with antidepressant pharmacotherapy, typically first-line SSRIs, chosen by side-effect profile and comorbidity",
-   "Antidepressant benefit is often delayed by several weeks, adherence should be reinforced, and treatment is generally continued well beyond symptom remission to reduce relapse",
-   "Severe, psychotic, treatment-resistant, or high-suicide-risk presentations may warrant combination pharmacotherapy, augmentation, or electroconvulsive therapy"
+  "id": "major_depressive_disorder",
+  "name": "Major depressive disorder",
+  "aliases": [
+    "MDD",
+    "major depression",
+    "clinical depression",
+    "unipolar depression"
   ],
-  "pathophysiology": "Major depressive disorder is understood as a multifactorial condition arising from interactions among genetic vulnerability, dysregulation of monoamine neurotransmission (serotonin, noradrenaline, and dopamine), and disturbance of hypothalamic-pituitary-adrenal axis stress responses. Contemporary models also emphasise impaired neuroplasticity and neurotrophic signalling, altered function in limbic and prefrontal circuits, and the role of chronic stress and adverse life events acting on a predisposed individual.",
-  "additionalDifferentials": [
-   "Bipolar disorder in a depressive phase",
-   "Persistent depressive disorder (dysthymia)",
-   "Adjustment disorder with depressed mood",
-   "Grief and bereavement reactions",
-   "Hypothyroidism and other endocrine or metabolic disorders",
-   "Substance-induced or medication-induced mood disorder",
-   "Depression in the context of a neurocognitive disorder (pseudodementia)"
-  ],
-  "additionalInvestigations": [
-   "Structured suicide risk assessment",
-   "Standardised symptom rating scales to gauge severity and track response",
-   "Thyroid function testing",
-   "Full blood count and metabolic panel to exclude anaemia and other medical contributors",
-   "Vitamin B12 and folate where clinically indicated",
-   "Substance use screening"
-  ],
-  "redFlags": [
-   "Active suicidal ideation with plan, intent, or access to means",
-   "Psychotic features such as mood-congruent delusions or hallucinations",
-   "Profound self-neglect, refusal of food or fluids, or catatonia",
-   "Rapid deterioration or emerging manic symptoms after starting an antidepressant"
-  ],
-  "prognosis": "Major depressive disorder is frequently recurrent; many patients respond to treatment but relapse risk rises with each subsequent episode and with residual symptoms. Prognosis is generally better with early treatment, good adherence, and psychosocial support, and worse with comorbid substance use, chronic medical illness, and untreated recurrent episodes.",
-  "pitfalls": [
-   "Starting an antidepressant without screening for a prior manic or hypomanic episode",
-   "Underestimating suicide risk or failing to reassess it during treatment",
-   "Stopping antidepressants too early once mood improves, increasing relapse risk",
-   "Attributing symptoms to depression while missing an underlying medical cause such as hypothyroidism",
-   "Judging non-response before an adequate dose and duration of treatment"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line antidepressant pharmacotherapy, typically an SSRI chosen by side-effect profile and comorbidity, with alternatives such as SNRIs, mirtazapine or bupropion as needed",
-   "Evidence-based psychotherapy such as cognitive behavioural therapy or interpersonal therapy, alone or combined with medication according to severity",
-   "Structured and repeated suicide risk assessment with safety planning and restriction of access to means",
-   "Screen for a prior manic or hypomanic episode before starting an antidepressant, and exclude and treat medical contributors such as hypothyroidism and anaemia",
-   "Manage treatment-resistant disease with switching, augmentation using lithium or an atypical antipsychotic, and electroconvulsive therapy for severe, psychotic or life-threatening depression",
-   "Monitor response with standardised rating scales, continue treatment to prevent relapse, and address psychosocial support and comorbid substance use",
-   "Escalate to specialist psychiatric services and consider admission for high suicide risk, psychosis or severe functional impairment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "major_depressive_disorder-pathway",
-   "title": "Major depressive disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Diagnosis requires a sustained period (at least around two weeks) of either persistently low mood or loss of interest/pleasure, together with several additional symptoms causing significant distress or functional impairment",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Active suicidal ideation with plan, intent, or access to means",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Structured suicide risk assessment, Standardised symptom rating scales to gauge severity and track response, Thyroid function testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line antidepressant pharmacotherapy, typically an SSRI chosen by side-effect profile and comorbidity, with alternatives such as SNRIs, mirtazapine or bupropion as needed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Starting an antidepressant without screening for a prior manic or hypomanic episode"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of major depressive disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "major_depressive_disorder-matrix",
-   "title": "Major depressive disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Diagnosis requires a sustained period (at least around two weeks) of either persistently low mood or loss of interest/pleasure,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Diagnosis requires a sustained period (at least around two weeks) of either persistently low mood or loss of interest/pleasure, together with several additional symptoms causing significant distress or functional impairment",
+      "Associated features commonly include disturbed sleep, appetite or weight change, fatigue, poor concentration, psychomotor slowing or agitation, feelings of worthlessness or excessive guilt, and recurrent thoughts of death",
+      "Always screen actively for suicidal ideation, intent, and plan, and ask about prior attempts and access to means",
+      "Screen for a past manic or hypomanic episode before starting an antidepressant, because an unrecognised bipolar diathesis can be destabilised",
+      "Exclude medical and substance-related contributors such as hypothyroidism, anaemia, and medication effects before attributing symptoms solely to a primary mood disorder",
+      "Management principles combine evidence-based psychotherapy (such as cognitive behavioural therapy or interpersonal therapy) with antidepressant pharmacotherapy, typically first-line SSRIs, chosen by side-effect profile and comorbidity",
+      "Antidepressant benefit is often delayed by several weeks, adherence should be reinforced, and treatment is generally continued well beyond symptom remission to reduce relapse",
+      "Severe, psychotic, treatment-resistant, or high-suicide-risk presentations may warrant combination pharmacotherapy, augmentation, or electroconvulsive therapy"
     ],
-    [
-     "Key Investigations",
-     "Structured suicide risk assessment, Standardised symptom rating scales to gauge severity and track response, Thyroid function",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Major depressive disorder is understood as a multifactorial condition arising from interactions among genetic vulnerability, dysregulation of monoamine neurotransmission (serotonin, noradrenaline, and dopamine), and disturbance of hypothalamic-pituitary-adrenal axis stress responses. Contemporary models also emphasise impaired neuroplasticity and neurotrophic signalling, altered function in limbic and prefrontal circuits, and the role of chronic stress and adverse life events acting on a predisposed individual.",
+    "additionalDifferentials": [
+      "Bipolar disorder in a depressive phase",
+      "Persistent depressive disorder (dysthymia)",
+      "Adjustment disorder with depressed mood",
+      "Grief and bereavement reactions",
+      "Hypothyroidism and other endocrine or metabolic disorders",
+      "Substance-induced or medication-induced mood disorder",
+      "Depression in the context of a neurocognitive disorder (pseudodementia)"
     ],
-    [
-     "Primary Differentials",
-     "Bipolar disorder in a depressive phase, Persistent depressive disorder (dysthymia), Adjustment disorder with depressed mood",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Structured suicide risk assessment",
+      "Standardised symptom rating scales to gauge severity and track response",
+      "Thyroid function testing",
+      "Full blood count and metabolic panel to exclude anaemia and other medical contributors",
+      "Vitamin B12 and folate where clinically indicated",
+      "Substance use screening"
     ],
-    [
-     "Management Strategy",
-     "First-line antidepressant pharmacotherapy, typically an SSRI chosen by side-effect profile and comorbidity, with alternatives",
-     "Core treatment modality"
+    "redFlags": [
+      "Active suicidal ideation with plan, intent, or access to means",
+      "Psychotic features such as mood-congruent delusions or hallucinations",
+      "Profound self-neglect, refusal of food or fluids, or catatonia",
+      "Rapid deterioration or emerging manic symptoms after starting an antidepressant"
     ],
-    [
-     "Clinical Pitfall",
-     "Starting an antidepressant without screening for a prior manic or hypomanic episode",
-     "Prevent diagnostic or management error"
+    "prognosis": "Major depressive disorder is frequently recurrent; many patients respond to treatment but relapse risk rises with each subsequent episode and with residual symptoms. Prognosis is generally better with early treatment, good adherence, and psychosocial support, and worse with comorbid substance use, chronic medical illness, and untreated recurrent episodes.",
+    "pitfalls": [
+      "Starting an antidepressant without screening for a prior manic or hypomanic episode",
+      "Underestimating suicide risk or failing to reassess it during treatment",
+      "Stopping antidepressants too early once mood improves, increasing relapse risk",
+      "Attributing symptoms to depression while missing an underlying medical cause such as hypothyroidism",
+      "Judging non-response before an adequate dose and duration of treatment"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line antidepressant pharmacotherapy, typically an SSRI chosen by side-effect profile and comorbidity, with alternatives such as SNRIs, mirtazapine or bupropion as needed",
+      "Evidence-based psychotherapy such as cognitive behavioural therapy or interpersonal therapy, alone or combined with medication according to severity",
+      "Structured and repeated suicide risk assessment with safety planning and restriction of access to means",
+      "Screen for a prior manic or hypomanic episode before starting an antidepressant, and exclude and treat medical contributors such as hypothyroidism and anaemia",
+      "Manage treatment-resistant disease with switching, augmentation using lithium or an atypical antipsychotic, and electroconvulsive therapy for severe, psychotic or life-threatening depression",
+      "Monitor response with standardised rating scales, continue treatment to prevent relapse, and address psychosocial support and comorbid substance use",
+      "Escalate to specialist psychiatric services and consider admission for high suicide risk, psychosis or severe functional impairment"
     ]
-   ],
-   "caption": "Overview comparison matrix for major depressive disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "major-depressive-disorder-real-image",
-   "title": "Major depressive disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "major_depressive_disorder-pathway",
+      "title": "Major depressive disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Diagnosis requires a sustained period (at least around two weeks) of either persistently low mood or loss of interest/pleasure, together with several additional symptoms causing significant distress or functional impairment",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Active suicidal ideation with plan, intent, or access to means",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Structured suicide risk assessment, Standardised symptom rating scales to gauge severity and track response, Thyroid function testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line antidepressant pharmacotherapy, typically an SSRI chosen by side-effect profile and comorbidity, with alternatives such as SNRIs, mirtazapine or bupropion as needed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Starting an antidepressant without screening for a prior manic or hypomanic episode"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of major depressive disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "major_depressive_disorder-matrix",
+      "title": "Major depressive disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diagnosis requires a sustained period (at least around two weeks) of either persistently low mood or loss of interest/pleasure,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Structured suicide risk assessment, Standardised symptom rating scales to gauge severity and track response, Thyroid function",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bipolar disorder in a depressive phase, Persistent depressive disorder (dysthymia), Adjustment disorder with depressed mood",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line antidepressant pharmacotherapy, typically an SSRI chosen by side-effect profile and comorbidity, with alternatives",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Starting an antidepressant without screening for a prior manic or hypomanic episode",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for major depressive disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "major_depressive_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured suicide risk assessment",
+          "cells": [
+            {
+              "text": "Risk level guides setting of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standardised symptom rating scales",
+          "cells": [
+            {
+              "text": "Severity and response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Hypothyroidism excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and metabolic panel",
+          "cells": [
+            {
+              "text": "Anaemia and medical contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance use screening",
+          "cells": [
+            {
+              "text": "Substance-related contribution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "major_depressive_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bipolar disorder in a depressive phase",
+          "cells": [
+            {
+              "text": "Prior manic or hypomanic episode"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent depressive disorder",
+          "cells": [
+            {
+              "text": "Chronic lower-grade course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjustment disorder with depressed mood",
+          "cells": [
+            {
+              "text": "Clear stressor and time frame"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Biochemical testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "major_depressive_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line antidepressant",
+          "cells": [
+            {
+              "text": "SSRI chosen by side-effect profile; SNRI, mirtazapine or bupropion alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychotherapy",
+          "cells": [
+            {
+              "text": "CBT or interpersonal therapy, alone or with medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suicide risk",
+          "cells": [
+            {
+              "text": "Repeated assessment, safety planning and restriction of means"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment-resistant disease",
+          "cells": [
+            {
+              "text": "Switching, lithium or atypical antipsychotic augmentation, ECT for severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse prevention",
+          "cells": [
+            {
+              "text": "Continue treatment beyond remission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "major_depressive_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Major depressive disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent low mood or anhedonia for at least two weeks with associated symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (active suicidal intent, psychosis or catatonia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent psychiatric review and consider admission for high suicide risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Suicide risk assessment, rating scales, thyroid tests, full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are DSM-5-TR criteria met with medical and substance causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bipolar depression, adjustment disorder or hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "First-line SSRI chosen by side-effect profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CBT or interpersonal therapy alone or combined",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Safety planning and restriction of access to means",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Augmentation or ECT for treatment-resistant or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Continue treatment beyond remission to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often recurrent; relapse risk rises with each episode and with residual symptoms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

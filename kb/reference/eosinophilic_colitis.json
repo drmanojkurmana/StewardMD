@@ -1,176 +1,463 @@
 {
- "id": "eosinophilic_colitis",
- "name": "Eosinophilic colitis",
- "aliases": [
-  "EC",
-  "Eosinophilic proctocolitis"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The rarest of the eosinophilic gastrointestinal disorders in adults, with a bimodal age distribution affecting infants and adults.",
-   "The infantile form (allergic proctocolitis) is typically benign, cow's milk protein-related and resolves with dietary change.",
-   "The adult form presents with diarrhoea, abdominal pain and sometimes rectal bleeding, and is often idiopathic.",
-   "Physiological colonic eosinophil counts vary by site, being higher in the caecum and right colon, so biopsies must be interpreted against regional norms.",
-   "It is a diagnosis of exclusion: rule out parasites, drugs, inflammatory bowel disease, connective tissue disease, hypereosinophilic syndrome and malignancy.",
-   "Peripheral eosinophilia is less consistent than in upper gastrointestinal eosinophilic disorders.",
-   "Treatment is dietary elimination in infants and corticosteroids or other agents in persistent adult disease.",
-   "Multiple biopsies across colonic segments are required to make the diagnosis."
+  "id": "eosinophilic_colitis",
+  "name": "Eosinophilic colitis",
+  "aliases": [
+    "EC",
+    "Eosinophilic proctocolitis"
   ],
-  "pathophysiology": "Eosinophilic colitis is an eosinophilic infiltration of the colonic mucosa, and sometimes deeper layers, driven by Th2 allergic mechanisms that are most clearly food-antigen (cow's milk protein) related in infants. Eosinophil recruitment and degranulation cause mucosal inflammation, altered motility and secretory diarrhoea. Because baseline colonic eosinophil density is normally high and regionally variable, distinguishing pathological infiltration from physiological presence is central and challenging.",
-  "additionalDifferentials": [
-   "Inflammatory bowel disease (ulcerative colitis, Crohn's disease)",
-   "Parasitic colitis (Strongyloides, Trichuris, schistosomiasis)",
-   "Drug-induced colonic eosinophilia",
-   "Hypereosinophilic syndrome with colonic involvement",
-   "Connective tissue disease or vasculitis",
-   "Cow's milk protein allergy in infants",
-   "Colorectal malignancy or lymphoma"
-  ],
-  "additionalInvestigations": [
-   "Ileocolonoscopy with segmental biopsies and eosinophil counts against regional norms",
-   "Full blood count with eosinophil count",
-   "Stool microscopy and serology for parasites",
-   "Faecal calprotectin",
-   "Allergy assessment where food allergy is suspected",
-   "Cross-sectional imaging if wall thickening or a mass is present",
-   "Screen for hypereosinophilic syndrome and vasculitis where indicated"
-  ],
-  "redFlags": [
-   "Significant rectal bleeding or anaemia",
-   "Weight loss or failure to thrive in infants",
-   "Features suggesting inflammatory bowel disease, malignancy or systemic vasculitis",
-   "Severe or refractory diarrhoea with dehydration"
-  ],
-  "prognosis": "Infantile allergic proctocolitis has an excellent prognosis and usually resolves with dietary modification, whereas adult eosinophilic colitis is more variable and often relapsing but is generally not life-threatening.",
-  "pitfalls": [
-   "Overdiagnosis by ignoring the normal regional variation in colonic eosinophils",
-   "Missing an underlying parasitic infection or drug cause",
-   "Labelling inflammatory bowel disease-related eosinophilia as primary eosinophilic colitis",
-   "Starting immunosuppression before excluding Strongyloides"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Oxford Textbook of Medicine",
-   "International consensus nomenclature for eosinophilic gastrointestinal diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In infantile allergic proctocolitis, eliminate cow's milk protein, using maternal dietary exclusion in breastfed infants or an extensively hydrolysed or amino-acid formula",
-   "Empirical dietary elimination with structured reintroduction to identify food triggers in older children and adults",
-   "Corticosteroids, including targeted budesonide, for symptomatic adult disease not controlled by diet",
-   "Exclude and treat secondary causes such as parasites, drugs and inflammatory bowel disease before settling on the diagnosis",
-   "Steroid-sparing immunomodulators or anti-eosinophil biologics for relapsing or steroid-dependent disease",
-   "Monitor symptoms, colonic histology and growth in children, with gastroenterology referral",
-   "Reassure families about the benign, self-limiting course of the infantile form"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eosinophilic_colitis-pathway",
-   "title": "Eosinophilic colitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The rarest of the eosinophilic gastrointestinal disorders in adults, with a bimodal age distribution affecting infants and adults.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant rectal bleeding or anaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ileocolonoscopy with segmental biopsies and eosinophil counts against regional norms, Full blood count with eosinophil count, Stool microscopy and serology for parasites"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In infantile allergic proctocolitis, eliminate cow's milk protein, using maternal dietary exclusion in breastfed infants or an extensively hydrolysed or amino-acid formula"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overdiagnosis by ignoring the normal regional variation in colonic eosinophils"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eosinophilic colitis."
-  }
- ],
- "tables": [
-  {
-   "id": "eosinophilic_colitis-matrix",
-   "title": "Eosinophilic colitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The rarest of the eosinophilic gastrointestinal disorders in adults, with a bimodal age distribution affecting infants and adults.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The rarest of the eosinophilic gastrointestinal disorders in adults, with a bimodal age distribution affecting infants and adults.",
+      "The infantile form (allergic proctocolitis) is typically benign, cow's milk protein-related and resolves with dietary change.",
+      "The adult form presents with diarrhoea, abdominal pain and sometimes rectal bleeding, and is often idiopathic.",
+      "Physiological colonic eosinophil counts vary by site, being higher in the caecum and right colon, so biopsies must be interpreted against regional norms.",
+      "It is a diagnosis of exclusion: rule out parasites, drugs, inflammatory bowel disease, connective tissue disease, hypereosinophilic syndrome and malignancy.",
+      "Peripheral eosinophilia is less consistent than in upper gastrointestinal eosinophilic disorders.",
+      "Treatment is dietary elimination in infants and corticosteroids or other agents in persistent adult disease.",
+      "Multiple biopsies across colonic segments are required to make the diagnosis."
     ],
-    [
-     "Key Investigations",
-     "Ileocolonoscopy with segmental biopsies and eosinophil counts against regional norms, Full blood count with eosinophil count,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Eosinophilic colitis is an eosinophilic infiltration of the colonic mucosa, and sometimes deeper layers, driven by Th2 allergic mechanisms that are most clearly food-antigen (cow's milk protein) related in infants. Eosinophil recruitment and degranulation cause mucosal inflammation, altered motility and secretory diarrhoea. Because baseline colonic eosinophil density is normally high and regionally variable, distinguishing pathological infiltration from physiological presence is central and challenging.",
+    "additionalDifferentials": [
+      "Inflammatory bowel disease (ulcerative colitis, Crohn's disease)",
+      "Parasitic colitis (Strongyloides, Trichuris, schistosomiasis)",
+      "Drug-induced colonic eosinophilia",
+      "Hypereosinophilic syndrome with colonic involvement",
+      "Connective tissue disease or vasculitis",
+      "Cow's milk protein allergy in infants",
+      "Colorectal malignancy or lymphoma"
     ],
-    [
-     "Primary Differentials",
-     "Inflammatory bowel disease (ulcerative colitis, Crohn's disease), Parasitic colitis (Strongyloides, Trichuris, schistosomiasis),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ileocolonoscopy with segmental biopsies and eosinophil counts against regional norms",
+      "Full blood count with eosinophil count",
+      "Stool microscopy and serology for parasites",
+      "Faecal calprotectin",
+      "Allergy assessment where food allergy is suspected",
+      "Cross-sectional imaging if wall thickening or a mass is present",
+      "Screen for hypereosinophilic syndrome and vasculitis where indicated"
     ],
-    [
-     "Management Strategy",
-     "In infantile allergic proctocolitis, eliminate cow's milk protein, using maternal dietary exclusion in breastfed infants or an",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant rectal bleeding or anaemia",
+      "Weight loss or failure to thrive in infants",
+      "Features suggesting inflammatory bowel disease, malignancy or systemic vasculitis",
+      "Severe or refractory diarrhoea with dehydration"
     ],
-    [
-     "Clinical Pitfall",
-     "Overdiagnosis by ignoring the normal regional variation in colonic eosinophils",
-     "Prevent diagnostic or management error"
+    "prognosis": "Infantile allergic proctocolitis has an excellent prognosis and usually resolves with dietary modification, whereas adult eosinophilic colitis is more variable and often relapsing but is generally not life-threatening.",
+    "pitfalls": [
+      "Overdiagnosis by ignoring the normal regional variation in colonic eosinophils",
+      "Missing an underlying parasitic infection or drug cause",
+      "Labelling inflammatory bowel disease-related eosinophilia as primary eosinophilic colitis",
+      "Starting immunosuppression before excluding Strongyloides"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Oxford Textbook of Medicine",
+      "International consensus nomenclature for eosinophilic gastrointestinal diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In infantile allergic proctocolitis, eliminate cow's milk protein, using maternal dietary exclusion in breastfed infants or an extensively hydrolysed or amino-acid formula",
+      "Empirical dietary elimination with structured reintroduction to identify food triggers in older children and adults",
+      "Corticosteroids, including targeted budesonide, for symptomatic adult disease not controlled by diet",
+      "Exclude and treat secondary causes such as parasites, drugs and inflammatory bowel disease before settling on the diagnosis",
+      "Steroid-sparing immunomodulators or anti-eosinophil biologics for relapsing or steroid-dependent disease",
+      "Monitor symptoms, colonic histology and growth in children, with gastroenterology referral",
+      "Reassure families about the benign, self-limiting course of the infantile form"
     ]
-   ],
-   "caption": "Overview comparison matrix for eosinophilic colitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eosinophilic-colitis-real-image",
-   "title": "Eosinophilic colitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "eosinophilic_colitis-pathway",
+      "title": "Eosinophilic colitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The rarest of the eosinophilic gastrointestinal disorders in adults, with a bimodal age distribution affecting infants and adults.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant rectal bleeding or anaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ileocolonoscopy with segmental biopsies and eosinophil counts against regional norms, Full blood count with eosinophil count, Stool microscopy and serology for parasites"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In infantile allergic proctocolitis, eliminate cow's milk protein, using maternal dietary exclusion in breastfed infants or an extensively hydrolysed or amino-acid formula"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overdiagnosis by ignoring the normal regional variation in colonic eosinophils"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eosinophilic colitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eosinophilic_colitis-matrix",
+      "title": "Eosinophilic colitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The rarest of the eosinophilic gastrointestinal disorders in adults, with a bimodal age distribution affecting infants and adults.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ileocolonoscopy with segmental biopsies and eosinophil counts against regional norms, Full blood count with eosinophil count,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inflammatory bowel disease (ulcerative colitis, Crohn's disease), Parasitic colitis (Strongyloides, Trichuris, schistosomiasis),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In infantile allergic proctocolitis, eliminate cow's milk protein, using maternal dietary exclusion in breastfed infants or an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overdiagnosis by ignoring the normal regional variation in colonic eosinophils",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eosinophilic colitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilic_colitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ileocolonoscopy with segmental biopsies and eosinophil counts",
+          "cells": [
+            {
+              "text": "Eosinophil counts compared against regional norms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with eosinophil count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia, which is less consistent than in upper gastrointestinal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy and parasite serology",
+          "cells": [
+            {
+              "text": "Parasitic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy assessment",
+          "cells": [
+            {
+              "text": "Where food allergy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Wall thickening or a mass, when present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_colitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inflammatory bowel disease (ulcerative colitis, Crohn's disease)",
+          "cells": [
+            {
+              "text": "Eosinophilia from IBD must not be labelled primary eosinophilic colitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parasitic colitis (Strongyloides, Trichuris, schistosomiasis)",
+          "cells": [
+            {
+              "text": "Excluded by stool microscopy and serology before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cow's milk protein allergy in infants",
+          "cells": [
+            {
+              "text": "Infantile form is cow's milk protein-related and resolves with dietary change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_colitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Infants: cow's milk protein elimination",
+          "cells": [
+            {
+              "text": "Maternal dietary exclusion in breastfed infants, or extensively hydrolysed or amino-acid formula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical elimination with structured reintroduction",
+          "cells": [
+            {
+              "text": "Older children and adults, to identify food triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids, including targeted budesonide",
+          "cells": [
+            {
+              "text": "Symptomatic adult disease not controlled by diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude secondary causes",
+          "cells": [
+            {
+              "text": "Parasites, drugs and inflammatory bowel disease before settling on the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing or anti-eosinophil agents",
+          "cells": [
+            {
+              "text": "Immunomodulators or biologics for relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Symptoms, colonic histology and growth in children, with gastroenterology referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting course of the infantile form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilic_colitis-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilic colitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diarrhoea or rectal bleeding in an infant or adult with colonic eosinophilia suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (significant rectal bleeding, anaemia, weight loss, failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Gastroenterology referral; exclude inflammatory bowel disease, malignancy or vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ileocolonoscopy with multiple segmental biopsies and eosinophil counts",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Eosinophil counts raised above regional norms on segmental biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inflammatory bowel disease, parasitic colitis or drug-induced eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Infants: remove cow's milk protein, by maternal exclusion or hydrolysed formula",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Older children and adults: empirical diet elimination with reintroduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Targeted budesonide for adult disease not controlled by diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude parasites, drugs and IBD; screen Strongyloides before immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infantile allergic proctocolitis usually resolves with dietary modification",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

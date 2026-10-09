@@ -1,183 +1,613 @@
 {
- "id": "focal_atrial_tachycardia",
- "name": "Focal Atrial Tachycardia",
- "system": "Cardiovascular",
- "class": "non_infective",
- "chapter": 255,
- "page": 1937,
- "aliases": [
-  "Focal AT",
-  "Atrial tachycardia",
-  "AT"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1937",
-  "clinicalPearls": [
-   "Focal AT arises from a discrete atrial site and is driven by one of three mechanisms: abnormal automaticity, triggered activity, or microreentry within diseased atrial tissue; the term 'focal' distinguishes it from typical and atypical (macroreentrant) atrial flutter and does not by itself specify the underlying mechanism (p.1937).",
-   "It accounts for roughly 10% of paroxysmal SVTs in patients referred for catheter ablation, and may be sustained, nonsustained, paroxysmal, or incessant (p.1937).",
-   "Because focal AT is not dependent on AV nodal conduction, it does NOT terminate when AV block is induced and the atrial rate is unaffected by AV-nodal blockade — a key feature separating it from AV-nodal-dependent SVTs such as AVNRT and AVRT (p.1937).",
-   "P waves are typically discrete with an intervening isoelectric baseline (because atrial activation from a single focus occupies only a small part of the cycle), in contrast to the continuous undulating activation of atrial flutter / macroreentrant AT (p.1937).",
-   "A 'warm-up' phase (gradual acceleration of atrial rate after onset) or a 'cool-down' phase (gradual slowing before termination) favors focal AT with enhanced automaticity over AV-nodal-dependent SVT (p.1937).",
-   "Foci tend to cluster in areas of complex atrial anatomy — the crista terminalis, valve annuli, atrial septum, and atrial muscle sleeves extending into the thoracic veins (superior vena cava, coronary sinus, pulmonary veins) — and the focus location can often be approximated from P-wave morphology (p.1937).",
-   "P-wave localization clues: septal foci give a narrower P than sinus; left atrial foci give a monophasic positive P in V1 with negative P in I and aVL; superior foci (SVC, superior pulmonary veins) are positive in II, III, aVF; inferior foci (e.g., coronary sinus ostium) are negative in II, III, aVF (p.1937).",
-   "Atrial tachycardia WITH AV block is the characteristic arrhythmia of digitalis toxicity, so emergence of AT should prompt consideration of drug toxicity or another underlying illness; sympathetic stimulation promotes AT (p.1937).",
-   "Incessant focal AT can cause tachycardia-induced (tachycardia-mediated) cardiomyopathy, which is an important reversible cause of LV dysfunction (p.1937).",
-   "Asymptomatic nonsustained AT seen on monitoring is frequently mislabeled 'SVT' on monitor reports; treatment is NOT recommended for asymptomatic nonsustained AT identified on ECG monitoring (p.1937).",
-   "Frequent atrial ectopy and nonsustained AT are often precursors to more significant arrhythmias such as atrial fibrillation and atrial flutter (p.1937).",
-   "Vagal maneuvers, carotid sinus massage, Valsalva, or AV-nodal-blocking agents (e.g., adenosine) are used diagnostically to create transient AV block and unmask P waves when they are buried in the T wave or QRS (p.1937-1938)."
+  "id": "focal_atrial_tachycardia",
+  "name": "Focal Atrial Tachycardia",
+  "system": "Cardiovascular",
+  "class": "non_infective",
+  "chapter": 255,
+  "page": 1937,
+  "aliases": [
+    "Focal AT",
+    "Atrial tachycardia",
+    "AT"
   ],
-  "pathophysiology": "Focal AT originates from a single discrete atrial site and is caused by abnormal automaticity, triggered activity, or a small reentry circuit in diseased atrial tissue. It may occur in structurally normal hearts or in association with any condition causing atrial fibrosis, including atrial tissue scarred by prior catheter ablation. Zones of fibrosis serve as a nidus for abnormal automaticity arising from injured but partially viable cells, or for microreentry within and at the border of regions of slow conduction. Sympathetic stimulation is a facilitating factor, and the appearance of AT may signal underlying illness or drug toxicity (digitalis being characteristic). The arrhythmia activates the atria from a focal source through only a small portion of the cycle, producing discrete P waves with isoelectric intervals (p.1937).",
-  "additionalDifferentials": [
-   "Sinus tachycardia (especially when the focus lies high on the crista terminalis near the sinus node, producing a near-sinus P-wave morphology; abrupt onset/offset favors AT)",
-   "Inappropriate sinus tachycardia",
-   "AV nodal reentry tachycardia (AVNRT)",
-   "AV reentry tachycardia using an accessory pathway (AVRT)",
-   "Atrial flutter / macroreentrant atrial tachycardia (continuous flutter waves, no isoelectric baseline)",
-   "Multifocal atrial tachycardia (multiple distinct P-wave morphologies)",
-   "Junctional tachycardia"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Sinus tachycardia (physiologic or inappropriate)",
-   "Atrial flutter and macroreentrant atrial tachycardia",
-   "AV-nodal-dependent SVTs (AVNRT, AVRT)"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG to characterize P-wave morphology and the R-P / P-R relationship and to localize the focus",
-   "Ambulatory/Holter ECG monitoring (nonsustained AT is commonly detected and its prevalence rises with age)",
-   "Maneuvers to induce AV block (carotid sinus massage, Valsalva, adenosine) to expose buried P waves and to demonstrate that the atrial tachycardia persists despite AV block",
-   "Assessment for digitalis toxicity and other precipitating illness/drug toxicity when AT with AV block is seen",
-   "Echocardiography to evaluate for structural heart disease and tachycardia-induced cardiomyopathy",
-   "Electrophysiology study with electroanatomic mapping to identify the earliest activation (focal) site, typically prior to catheter ablation"
-  ],
-  "redFlags": [
-   "Incessant AT — risk of tachycardia-induced cardiomyopathy",
-   "Hemodynamic instability with the tachycardia",
-   "AT with AV block — suggests digitalis toxicity or other underlying illness/drug toxicity",
-   "Rapid ventricular response causing angina, hypotension, pulmonary edema, or syncope",
-   "AT as a harbinger of atrial fibrillation or atrial flutter"
-  ],
-  "prognosis": "Symptoms vary widely and parallel those of other SVTs. Many nonsustained, asymptomatic episodes require no treatment. The principal adverse outcome is tachycardia-induced cardiomyopathy from incessant AT, which is typically reversible once rhythm is controlled. Focal AT is frequently a precursor to atrial fibrillation or atrial flutter; however, the stroke risk and the indications for long-term anticoagulation are not considered equivalent to those of AF/flutter and remain unclear. Catheter ablation targeting the focus is successful in more than 80% of patients (p.1937-1938).",
-  "pitfalls": [
-   "Mislabeling asymptomatic nonsustained AT on a monitor as actionable 'SVT' and over-treating it — treatment is not recommended in this setting (p.1937).",
-   "Confusing focal AT with sinus tachycardia when the focus is near the sinus node; rely on abrupt onset/offset and subtle P-wave morphology differences (p.1937).",
-   "Expecting AV-nodal blockade (adenosine, vagal maneuvers) to terminate the tachycardia — it usually only increases AV block while the atrial rhythm continues, since AT is independent of the AV node (p.1937-1938).",
-   "Overlooking digitalis toxicity or another precipitant when AT presents with AV block (p.1937).",
-   "Missing reversible tachycardia-induced cardiomyopathy as the cause of new LV dysfunction in a patient with incessant AT (p.1937)."
-  ],
-  "severityClassification": "No formal grading scale; clinical stratification is by hemodynamic tolerance (stable vs unstable), by burden/pattern (nonsustained vs sustained, paroxysmal vs incessant), and by symptom status (asymptomatic vs symptomatic), since incessant disease carries the risk of tachycardia-induced cardiomyopathy (p.1937).",
-  "references": [
-   "Harrison 22e p.1937",
-   "Harrison 22e p.1938"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Catheter ablation guided by electroanatomic mapping of the earliest activation site is the definitive, high-success treatment for recurrent or drug-refractory disease",
-   "Rate and rhythm control with beta-blockers or non-dihydropyridine calcium-channel blockers, with antiarrhythmic agents such as flecainide, sotalol or amiodarone for suppression",
-   "Acute management with vagal manoeuvres and intravenous adenosine, recognising that the atrial rate may be unaffected by AV-nodal blockade",
-   "Identification and correction of precipitants, including withdrawal of digitalis and use of digoxin-specific antibody in toxicity, and correction of electrolyte disturbance",
-   "Recognition and reversal of tachycardia-induced cardiomyopathy through rhythm control, with echocardiographic surveillance of ventricular function",
-   "Observation with ambulatory monitoring and no treatment for asymptomatic, self-terminating nonsustained episodes",
-   "Cardiology and electrophysiology referral for mapping and ablation"
-  ]
- },
- "algorithms": [
-  {
-   "id": "focal_atrial_tachycardia-pathway",
-   "title": "Focal Atrial Tachycardia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Focal AT arises from a discrete atrial site and is driven by one of three mechanisms: abnormal automaticity, triggered activity, or microreentry within diseased atrial tissue; the term 'focal' distinguishes it from typical and atypical",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Incessant AT - risk of tachycardia-induced cardiomyopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG to characterize P-wave morphology and the R-P / P-R relationship and to localize the focus, Ambulatory/Holter ECG monitoring (nonsustained AT is commonly detected and its prevalence rises with age), Maneuvers"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Catheter ablation guided by electroanatomic mapping of the earliest activation site is the definitive, high-success treatment for recurrent or drug-refractory disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabeling asymptomatic nonsustained AT on a monitor as actionable 'SVT' and over-treating it - treatment is not recommended in this setting (p.1937)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of focal atrial tachycardia."
-  }
- ],
- "tables": [
-  {
-   "id": "focal_atrial_tachycardia-matrix",
-   "title": "Focal Atrial Tachycardia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Focal AT arises from a discrete atrial site and is driven by one of three mechanisms: abnormal automaticity, triggered activity,",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1937",
+    "clinicalPearls": [
+      "Focal AT arises from a discrete atrial site and is driven by one of three mechanisms: abnormal automaticity, triggered activity, or microreentry within diseased atrial tissue; the term 'focal' distinguishes it from typical and atypical (macroreentrant) atrial flutter and does not by itself specify the underlying mechanism (p.1937).",
+      "It accounts for roughly 10% of paroxysmal SVTs in patients referred for catheter ablation, and may be sustained, nonsustained, paroxysmal, or incessant (p.1937).",
+      "Because focal AT is not dependent on AV nodal conduction, it does NOT terminate when AV block is induced and the atrial rate is unaffected by AV-nodal blockade — a key feature separating it from AV-nodal-dependent SVTs such as AVNRT and AVRT (p.1937).",
+      "P waves are typically discrete with an intervening isoelectric baseline (because atrial activation from a single focus occupies only a small part of the cycle), in contrast to the continuous undulating activation of atrial flutter / macroreentrant AT (p.1937).",
+      "A 'warm-up' phase (gradual acceleration of atrial rate after onset) or a 'cool-down' phase (gradual slowing before termination) favors focal AT with enhanced automaticity over AV-nodal-dependent SVT (p.1937).",
+      "Foci tend to cluster in areas of complex atrial anatomy — the crista terminalis, valve annuli, atrial septum, and atrial muscle sleeves extending into the thoracic veins (superior vena cava, coronary sinus, pulmonary veins) — and the focus location can often be approximated from P-wave morphology (p.1937).",
+      "P-wave localization clues: septal foci give a narrower P than sinus; left atrial foci give a monophasic positive P in V1 with negative P in I and aVL; superior foci (SVC, superior pulmonary veins) are positive in II, III, aVF; inferior foci (e.g., coronary sinus ostium) are negative in II, III, aVF (p.1937).",
+      "Atrial tachycardia WITH AV block is the characteristic arrhythmia of digitalis toxicity, so emergence of AT should prompt consideration of drug toxicity or another underlying illness; sympathetic stimulation promotes AT (p.1937).",
+      "Incessant focal AT can cause tachycardia-induced (tachycardia-mediated) cardiomyopathy, which is an important reversible cause of LV dysfunction (p.1937).",
+      "Asymptomatic nonsustained AT seen on monitoring is frequently mislabeled 'SVT' on monitor reports; treatment is NOT recommended for asymptomatic nonsustained AT identified on ECG monitoring (p.1937).",
+      "Frequent atrial ectopy and nonsustained AT are often precursors to more significant arrhythmias such as atrial fibrillation and atrial flutter (p.1937).",
+      "Vagal maneuvers, carotid sinus massage, Valsalva, or AV-nodal-blocking agents (e.g., adenosine) are used diagnostically to create transient AV block and unmask P waves when they are buried in the T wave or QRS (p.1937-1938)."
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG to characterize P-wave morphology and the R-P / P-R relationship and to localize the focus, Ambulatory/Holter ECG",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Focal AT originates from a single discrete atrial site and is caused by abnormal automaticity, triggered activity, or a small reentry circuit in diseased atrial tissue. It may occur in structurally normal hearts or in association with any condition causing atrial fibrosis, including atrial tissue scarred by prior catheter ablation. Zones of fibrosis serve as a nidus for abnormal automaticity arising from injured but partially viable cells, or for microreentry within and at the border of regions of slow conduction. Sympathetic stimulation is a facilitating factor, and the appearance of AT may signal underlying illness or drug toxicity (digitalis being characteristic). The arrhythmia activates the atria from a focal source through only a small portion of the cycle, producing discrete P waves with isoelectric intervals (p.1937).",
+    "additionalDifferentials": [
+      "Sinus tachycardia (especially when the focus lies high on the crista terminalis near the sinus node, producing a near-sinus P-wave morphology; abrupt onset/offset favors AT)",
+      "Inappropriate sinus tachycardia",
+      "AV nodal reentry tachycardia (AVNRT)",
+      "AV reentry tachycardia using an accessory pathway (AVRT)",
+      "Atrial flutter / macroreentrant atrial tachycardia (continuous flutter waves, no isoelectric baseline)",
+      "Multifocal atrial tachycardia (multiple distinct P-wave morphologies)",
+      "Junctional tachycardia"
     ],
-    [
-     "Primary Differentials",
-     "Sinus tachycardia (especially when the focus lies high on the crista terminalis near the sinus node, producing a near-sinus",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Sinus tachycardia (physiologic or inappropriate)",
+      "Atrial flutter and macroreentrant atrial tachycardia",
+      "AV-nodal-dependent SVTs (AVNRT, AVRT)"
     ],
-    [
-     "Management Strategy",
-     "Catheter ablation guided by electroanatomic mapping of the earliest activation site is the definitive, high-success treatment for",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "12-lead ECG to characterize P-wave morphology and the R-P / P-R relationship and to localize the focus",
+      "Ambulatory/Holter ECG monitoring (nonsustained AT is commonly detected and its prevalence rises with age)",
+      "Maneuvers to induce AV block (carotid sinus massage, Valsalva, adenosine) to expose buried P waves and to demonstrate that the atrial tachycardia persists despite AV block",
+      "Assessment for digitalis toxicity and other precipitating illness/drug toxicity when AT with AV block is seen",
+      "Echocardiography to evaluate for structural heart disease and tachycardia-induced cardiomyopathy",
+      "Electrophysiology study with electroanatomic mapping to identify the earliest activation (focal) site, typically prior to catheter ablation"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabeling asymptomatic nonsustained AT on a monitor as actionable 'SVT' and over-treating it - treatment is not recommended in",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Incessant AT — risk of tachycardia-induced cardiomyopathy",
+      "Hemodynamic instability with the tachycardia",
+      "AT with AV block — suggests digitalis toxicity or other underlying illness/drug toxicity",
+      "Rapid ventricular response causing angina, hypotension, pulmonary edema, or syncope",
+      "AT as a harbinger of atrial fibrillation or atrial flutter"
+    ],
+    "prognosis": "Symptoms vary widely and parallel those of other SVTs. Many nonsustained, asymptomatic episodes require no treatment. The principal adverse outcome is tachycardia-induced cardiomyopathy from incessant AT, which is typically reversible once rhythm is controlled. Focal AT is frequently a precursor to atrial fibrillation or atrial flutter; however, the stroke risk and the indications for long-term anticoagulation are not considered equivalent to those of AF/flutter and remain unclear. Catheter ablation targeting the focus is successful in more than 80% of patients (p.1937-1938).",
+    "pitfalls": [
+      "Mislabeling asymptomatic nonsustained AT on a monitor as actionable 'SVT' and over-treating it — treatment is not recommended in this setting (p.1937).",
+      "Confusing focal AT with sinus tachycardia when the focus is near the sinus node; rely on abrupt onset/offset and subtle P-wave morphology differences (p.1937).",
+      "Expecting AV-nodal blockade (adenosine, vagal maneuvers) to terminate the tachycardia — it usually only increases AV block while the atrial rhythm continues, since AT is independent of the AV node (p.1937-1938).",
+      "Overlooking digitalis toxicity or another precipitant when AT presents with AV block (p.1937).",
+      "Missing reversible tachycardia-induced cardiomyopathy as the cause of new LV dysfunction in a patient with incessant AT (p.1937)."
+    ],
+    "severityClassification": "No formal grading scale; clinical stratification is by hemodynamic tolerance (stable vs unstable), by burden/pattern (nonsustained vs sustained, paroxysmal vs incessant), and by symptom status (asymptomatic vs symptomatic), since incessant disease carries the risk of tachycardia-induced cardiomyopathy (p.1937).",
+    "references": [
+      "Harrison 22e p.1937",
+      "Harrison 22e p.1938"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Catheter ablation guided by electroanatomic mapping of the earliest activation site is the definitive, high-success treatment for recurrent or drug-refractory disease",
+      "Rate and rhythm control with beta-blockers or non-dihydropyridine calcium-channel blockers, with antiarrhythmic agents such as flecainide, sotalol or amiodarone for suppression",
+      "Acute management with vagal manoeuvres and intravenous adenosine, recognising that the atrial rate may be unaffected by AV-nodal blockade",
+      "Identification and correction of precipitants, including withdrawal of digitalis and use of digoxin-specific antibody in toxicity, and correction of electrolyte disturbance",
+      "Recognition and reversal of tachycardia-induced cardiomyopathy through rhythm control, with echocardiographic surveillance of ventricular function",
+      "Observation with ambulatory monitoring and no treatment for asymptomatic, self-terminating nonsustained episodes",
+      "Cardiology and electrophysiology referral for mapping and ablation"
     ]
-   ],
-   "caption": "Overview comparison matrix for focal atrial tachycardia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "focal-atrial-tachycardia-real-image",
-   "title": "Focal Atrial Tachycardia: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "focal_atrial_tachycardia-pathway",
+      "title": "Focal Atrial Tachycardia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Focal AT arises from a discrete atrial site and is driven by one of three mechanisms: abnormal automaticity, triggered activity, or microreentry within diseased atrial tissue; the term 'focal' distinguishes it from typical and atypical",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Incessant AT - risk of tachycardia-induced cardiomyopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG to characterize P-wave morphology and the R-P / P-R relationship and to localize the focus, Ambulatory/Holter ECG monitoring (nonsustained AT is commonly detected and its prevalence rises with age), Maneuvers"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Catheter ablation guided by electroanatomic mapping of the earliest activation site is the definitive, high-success treatment for recurrent or drug-refractory disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabeling asymptomatic nonsustained AT on a monitor as actionable 'SVT' and over-treating it - treatment is not recommended in this setting (p.1937)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of focal atrial tachycardia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "focal_atrial_tachycardia-matrix",
+      "title": "Focal Atrial Tachycardia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Focal AT arises from a discrete atrial site and is driven by one of three mechanisms: abnormal automaticity, triggered activity,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG to characterize P-wave morphology and the R-P / P-R relationship and to localize the focus, Ambulatory/Holter ECG",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sinus tachycardia (especially when the focus lies high on the crista terminalis near the sinus node, producing a near-sinus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Catheter ablation guided by electroanatomic mapping of the earliest activation site is the definitive, high-success treatment for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabeling asymptomatic nonsustained AT on a monitor as actionable 'SVT' and over-treating it - treatment is not recommended in",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for focal atrial tachycardia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP, Catheter Ablation of Supraventricular Arrhythmias and Atrial Fibrillation, 2009",
+      "url": "https://www.aafp.org/pubs/afp/issues/2009/1115/p1089.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "focal_atrial_tachycardia-diagnostic",
+      "kind": "diagnostic",
+      "title": "ECG diagnosis of focal atrial tachycardia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Discrete P waves with isoelectric baseline",
+          "cells": [
+            {
+              "text": "Single focus activates only part of the cycle"
+            },
+            {
+              "text": "Separates from flutter and macroreentrant AT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persists despite AV block",
+          "cells": [
+            {
+              "text": "{{hy:Atrial rate unchanged by adenosine or vagal manoeuvres}}"
+            },
+            {
+              "text": "Separates from AVNRT and AVRT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warm-up or cool-down",
+          "cells": [
+            {
+              "text": "Gradual acceleration or slowing"
+            },
+            {
+              "text": "Favours automatic focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positive monophasic P in V1, negative in I and aVL",
+          "cells": [
+            {
+              "text": "Left atrial focus"
+            },
+            {
+              "text": "Pulmonary vein origin common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "P positive in II, III, aVF",
+          "cells": [
+            {
+              "text": "Superior focus (SVC, superior pulmonary veins)"
+            },
+            {
+              "text": "Inferior foci give negative P in inferior leads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narrower P than sinus",
+          "cells": [
+            {
+              "text": "Septal focus"
+            },
+            {
+              "text": "Localisation before ablation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AT with AV block",
+          "cells": [
+            {
+              "text": "Digitalis toxicity until proven otherwise"
+            },
+            {
+              "text": "Check drug levels and electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Share of referred paroxysmal SVT",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10"
+            },
+            {
+              "text": "Sustained, nonsustained, paroxysmal or incessant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "focal_atrial_tachycardia-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of focal atrial tachycardia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sinus or inappropriate sinus tachycardia",
+          "cells": [
+            {
+              "text": "Gradual onset; focal AT near crista starts abruptly"
+            },
+            {
+              "text": "Onset pattern and subtle P morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AVNRT",
+          "cells": [
+            {
+              "text": "AV-node dependent; terminates with adenosine"
+            },
+            {
+              "text": "Adenosine response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AVRT",
+          "cells": [
+            {
+              "text": "Uses accessory pathway; AV node needed"
+            },
+            {
+              "text": "Adenosine response; EP study"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial flutter or macroreentrant AT",
+          "cells": [
+            {
+              "text": "Continuous undulating flutter waves, no isoelectric line"
+            },
+            {
+              "text": "12-lead ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multifocal atrial tachycardia",
+          "cells": [
+            {
+              "text": "Three or more P morphologies"
+            },
+            {
+              "text": "12-lead ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Junctional tachycardia",
+          "cells": [
+            {
+              "text": "P absent or retrograde"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "focal_atrial_tachycardia-treatment",
+      "kind": "treatment",
+      "title": "Treatment of focal atrial tachycardia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment",
+          "cells": [
+            {
+              "text": "Asymptomatic nonsustained AT on monitoring"
+            },
+            {
+              "text": "Do not treat monitor-labelled SVT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vagal manoeuvres or IV adenosine",
+          "cells": [
+            {
+              "text": "Acute episode; diagnostic"
+            },
+            {
+              "text": "Usually only increases AV block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blocker or non-dihydropyridine calcium blocker",
+          "cells": [
+            {
+              "text": "Rate control and suppression"
+            },
+            {
+              "text": "First drug options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flecainide, sotalol or amiodarone",
+          "cells": [
+            {
+              "text": "Suppression when nodal blockers fail"
+            },
+            {
+              "text": "Antiarrhythmic choice by structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "{{hy:Symptomatic, incessant or drug-refractory AT; tachycardia cardiomyopathy}}"
+            },
+            {
+              "text": "Success 86 to 100%; recurrence and complications 0 to 8%",
+              "range": [
+                86,
+                100
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop digoxin; digoxin-specific antibody",
+          "cells": [
+            {
+              "text": "AT with block from digitalis toxicity"
+            },
+            {
+              "text": "Correct electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhythm control and echo follow-up",
+          "cells": [
+            {
+              "text": "Tachycardia-induced cardiomyopathy"
+            },
+            {
+              "text": "LV function usually recovers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "focal_atrial_tachycardia-dx-mgmt",
+      "title": "Diagnosis and management of focal atrial tachycardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Narrow-complex tachycardia with discrete P waves",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamically unstable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Unstable tachycardia: urgent cardiology management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Vagal manoeuvres or adenosine to unmask P waves",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Atrial rhythm continues despite AV block?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "AV-node dependent SVT: AVNRT or AVRT pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "AV block with digoxin use?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop digoxin, correct electrolytes, consider antibody",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blocker or calcium blocker; echo for LV function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Symptomatic recurrent, incessant or cardiomyopathy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Catheter ablation after mapping",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Observe; ambulatory monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

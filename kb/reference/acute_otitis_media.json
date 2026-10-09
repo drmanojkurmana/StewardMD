@@ -1,172 +1,491 @@
 {
- "id": "acute_otitis_media",
- "name": "Acute otitis media",
- "aliases": [
-  "AOM",
-  "acute suppurative otitis media",
-  "acute middle ear infection"
- ],
- "class": "infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most common in infants and young children because of a shorter, more horizontal Eustachian tube; often follows an upper respiratory tract infection",
-   "Presents with ear pain, fever, irritability and conduction-type hearing loss; young children may only tug at the ear or feed poorly",
-   "Otoscopy progresses through stages: initial hyperaemia, then a bulging congested drum, then perforation with discharge, and finally resolution",
-   "Sudden relief of pain accompanied by ear discharge usually signals spontaneous perforation of the tympanic membrane",
-   "Common organisms include Streptococcus pneumoniae, Haemophilus influenzae and Moraxella catarrhalis",
-   "Management principles centre on analgesia and appropriate antibiotics; myringotomy is considered when the drum is bulging, pain is severe, or complications threaten",
-   "Watchful waiting without immediate antibiotics may be appropriate in older children with mild, non-severe disease",
-   "Recurrent episodes or persistent effusion warrant assessment for adenoid hypertrophy and Eustachian tube dysfunction"
+  "id": "acute_otitis_media",
+  "name": "Acute otitis media",
+  "aliases": [
+    "AOM",
+    "acute suppurative otitis media",
+    "acute middle ear infection"
   ],
-  "pathophysiology": "Acute otitis media is an acute suppurative inflammation of the middle ear cleft, usually arising when Eustachian tube dysfunction (commonly from a viral upper respiratory infection or adenoid obstruction) impairs middle ear ventilation and drainage. Negative middle ear pressure and mucosal oedema allow pathogens to ascend from the nasopharynx and proliferate, producing an inflammatory exudate that becomes purulent. Rising pressure causes the tympanic membrane to bulge and may lead to necrosis and perforation with discharge, after which the process typically resolves. Untreated or aggressive infection can extend to adjacent structures.",
-  "additionalDifferentials": [
-   "Otitis externa",
-   "Otitis media with effusion",
-   "Referred otalgia from teeth, throat or temporomandibular joint",
-   "Bullous myringitis",
-   "Early mastoiditis",
-   "Furuncle of the external auditory canal"
-  ],
-  "additionalInvestigations": [
-   "Otoscopy to assess drum colour, position, mobility and integrity",
-   "Tuning fork tests and audiometry to characterise conductive hearing loss",
-   "Tympanometry where effusion or Eustachian tube dysfunction is suspected",
-   "Culture of ear discharge in severe, recurrent or non-resolving cases",
-   "Imaging of the temporal bone if intratemporal or intracranial complications are suspected"
-  ],
-  "redFlags": [
-   "Postauricular swelling, tenderness or a protruding pinna suggesting acute mastoiditis",
-   "Persistent high fever, severe headache, neck stiffness or altered consciousness indicating intracranial spread",
-   "Facial nerve weakness or vertigo suggesting facial canal or labyrinthine involvement",
-   "Failure to improve despite adequate treatment"
-  ],
-  "prognosis": "Most cases resolve completely with prompt treatment and restoration of normal hearing, but neglected or recurrent infection can progress to chronic otitis media, persistent effusion, or intratemporal and intracranial complications.",
-  "pitfalls": [
-   "Mistaking otitis externa or referred otalgia for middle ear infection",
-   "Overlooking early mastoiditis in a child who is not improving",
-   "Assuming a red drum alone confirms the diagnosis without assessing bulging and mobility",
-   "Failing to follow up to ensure resolution of effusion and return of hearing"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Adequate analgesia and antipyresis with paracetamol or ibuprofen as first-line symptom control",
-   "Watchful waiting in otherwise well children with mild disease, reserving antibiotics for severe, bilateral, or non-resolving cases",
-   "Oral amoxicillin as first-line antibiotic, with co-amoxiclav for treatment failure or severe disease",
-   "Myringotomy for a bulging drum, severe pain, or threatened complications",
-   "Monitor for persistent effusion and conductive hearing loss after the acute episode",
-   "Watch for intratemporal and intracranial complications such as mastoiditis and refer urgently if they arise",
-   "ENT referral for recurrent episodes, with consideration of ventilation tubes (grommets)"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_otitis_media-pathway",
-   "title": "Acute otitis media: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most common in infants and young children because of a shorter, more horizontal Eustachian tube; often follows an upper respiratory tract infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Postauricular swelling, tenderness or a protruding pinna suggesting acute mastoiditis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Otoscopy to assess drum colour, position, mobility and integrity, Tuning fork tests and audiometry to characterise conductive hearing loss, Tympanometry where effusion or Eustachian tube dysfunction is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Adequate analgesia and antipyresis with paracetamol or ibuprofen as first-line symptom control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking otitis externa or referred otalgia for middle ear infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute otitis media."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_otitis_media-matrix",
-   "title": "Acute otitis media: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most common in infants and young children because of a shorter, more horizontal Eustachian tube; often follows an upper",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most common in infants and young children because of a shorter, more horizontal Eustachian tube; often follows an upper respiratory tract infection",
+      "Presents with ear pain, fever, irritability and conduction-type hearing loss; young children may only tug at the ear or feed poorly",
+      "Otoscopy progresses through stages: initial hyperaemia, then a bulging congested drum, then perforation with discharge, and finally resolution",
+      "Sudden relief of pain accompanied by ear discharge usually signals spontaneous perforation of the tympanic membrane",
+      "Common organisms include Streptococcus pneumoniae, Haemophilus influenzae and Moraxella catarrhalis",
+      "Management principles centre on analgesia and appropriate antibiotics; myringotomy is considered when the drum is bulging, pain is severe, or complications threaten",
+      "Watchful waiting without immediate antibiotics may be appropriate in older children with mild, non-severe disease",
+      "Recurrent episodes or persistent effusion warrant assessment for adenoid hypertrophy and Eustachian tube dysfunction"
     ],
-    [
-     "Key Investigations",
-     "Otoscopy to assess drum colour, position, mobility and integrity, Tuning fork tests and audiometry to characterise conductive",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute otitis media is an acute suppurative inflammation of the middle ear cleft, usually arising when Eustachian tube dysfunction (commonly from a viral upper respiratory infection or adenoid obstruction) impairs middle ear ventilation and drainage. Negative middle ear pressure and mucosal oedema allow pathogens to ascend from the nasopharynx and proliferate, producing an inflammatory exudate that becomes purulent. Rising pressure causes the tympanic membrane to bulge and may lead to necrosis and perforation with discharge, after which the process typically resolves. Untreated or aggressive infection can extend to adjacent structures.",
+    "additionalDifferentials": [
+      "Otitis externa",
+      "Otitis media with effusion",
+      "Referred otalgia from teeth, throat or temporomandibular joint",
+      "Bullous myringitis",
+      "Early mastoiditis",
+      "Furuncle of the external auditory canal"
     ],
-    [
-     "Primary Differentials",
-     "Otitis externa, Otitis media with effusion, Referred otalgia from teeth, throat or temporomandibular joint",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Otoscopy to assess drum colour, position, mobility and integrity",
+      "Tuning fork tests and audiometry to characterise conductive hearing loss",
+      "Tympanometry where effusion or Eustachian tube dysfunction is suspected",
+      "Culture of ear discharge in severe, recurrent or non-resolving cases",
+      "Imaging of the temporal bone if intratemporal or intracranial complications are suspected"
     ],
-    [
-     "Management Strategy",
-     "Adequate analgesia and antipyresis with paracetamol or ibuprofen as first-line symptom control",
-     "Core treatment modality"
+    "redFlags": [
+      "Postauricular swelling, tenderness or a protruding pinna suggesting acute mastoiditis",
+      "Persistent high fever, severe headache, neck stiffness or altered consciousness indicating intracranial spread",
+      "Facial nerve weakness or vertigo suggesting facial canal or labyrinthine involvement",
+      "Failure to improve despite adequate treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking otitis externa or referred otalgia for middle ear infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases resolve completely with prompt treatment and restoration of normal hearing, but neglected or recurrent infection can progress to chronic otitis media, persistent effusion, or intratemporal and intracranial complications.",
+    "pitfalls": [
+      "Mistaking otitis externa or referred otalgia for middle ear infection",
+      "Overlooking early mastoiditis in a child who is not improving",
+      "Assuming a red drum alone confirms the diagnosis without assessing bulging and mobility",
+      "Failing to follow up to ensure resolution of effusion and return of hearing"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Adequate analgesia and antipyresis with paracetamol or ibuprofen as first-line symptom control",
+      "Watchful waiting in otherwise well children with mild disease, reserving antibiotics for severe, bilateral, or non-resolving cases",
+      "Oral amoxicillin as first-line antibiotic, with co-amoxiclav for treatment failure or severe disease",
+      "Myringotomy for a bulging drum, severe pain, or threatened complications",
+      "Monitor for persistent effusion and conductive hearing loss after the acute episode",
+      "Watch for intratemporal and intracranial complications such as mastoiditis and refer urgently if they arise",
+      "ENT referral for recurrent episodes, with consideration of ventilation tubes (grommets)"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute otitis media."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-otitis-media-real-image",
-   "title": "Acute otitis media: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acute_otitis_media-pathway",
+      "title": "Acute otitis media: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most common in infants and young children because of a shorter, more horizontal Eustachian tube; often follows an upper respiratory tract infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Postauricular swelling, tenderness or a protruding pinna suggesting acute mastoiditis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Otoscopy to assess drum colour, position, mobility and integrity, Tuning fork tests and audiometry to characterise conductive hearing loss, Tympanometry where effusion or Eustachian tube dysfunction is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Adequate analgesia and antipyresis with paracetamol or ibuprofen as first-line symptom control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking otitis externa or referred otalgia for middle ear infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute otitis media."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_otitis_media-matrix",
+      "title": "Acute otitis media: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most common in infants and young children because of a shorter, more horizontal Eustachian tube; often follows an upper",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Otoscopy to assess drum colour, position, mobility and integrity, Tuning fork tests and audiometry to characterise conductive",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Otitis externa, Otitis media with effusion, Referred otalgia from teeth, throat or temporomandibular joint",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Adequate analgesia and antipyresis with paracetamol or ibuprofen as first-line symptom control",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking otitis externa or referred otalgia for middle ear infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute otitis media."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_otitis_media-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Drum colour, position, mobility and integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuning fork tests and audiometry",
+          "cells": [
+            {
+              "text": "Conductive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry",
+          "cells": [
+            {
+              "text": "Effusion or Eustachian tube dysfunction when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of ear discharge",
+          "cells": [
+            {
+              "text": "Severe, recurrent or non-resolving cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal bone imaging",
+          "cells": [
+            {
+              "text": "Intratemporal or intracranial complications when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_otitis_media-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Otitis externa",
+          "cells": [
+            {
+              "text": "Canal infection rather than middle-ear infection"
+            },
+            {
+              "text": "Otoscopy with intact drum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otitis media with effusion",
+          "cells": [
+            {
+              "text": "Effusion without acute suppuration"
+            },
+            {
+              "text": "Tympanometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early mastoiditis",
+          "cells": [
+            {
+              "text": "Postauricular swelling or tenderness"
+            },
+            {
+              "text": "Temporal bone imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_otitis_media-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Paracetamol or ibuprofen",
+          "cells": [
+            {
+              "text": "First-line symptom control"
+            },
+            {
+              "text": "Analgesia and antipyresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "Otherwise well children with mild disease"
+            },
+            {
+              "text": "Antibiotics reserved for severe, bilateral or non-resolving cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral amoxicillin",
+          "cells": [
+            {
+              "text": "First-line antibiotic"
+            },
+            {
+              "text": "Co-amoxiclav for treatment failure or severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myringotomy",
+          "cells": [
+            {
+              "text": "Bulging drum, severe pain or threatened complications"
+            },
+            {
+              "text": "Surgical drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for persistent effusion and conductive hearing loss",
+          "cells": [
+            {
+              "text": "After the acute episode"
+            },
+            {
+              "text": "Follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral for mastoiditis or intracranial complications",
+          "cells": [
+            {
+              "text": "Complications"
+            },
+            {
+              "text": "Refer urgently if they arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT referral for recurrent episodes",
+          "cells": [
+            {
+              "text": "Recurrent disease"
+            },
+            {
+              "text": "Consider ventilation tubes (grommets)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_otitis_media-dx-mgmt",
+      "title": "Diagnosis and management of Acute otitis media",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ear pain, fever and irritability after an upper respiratory infection in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Postauricular swelling, persistent high fever or facial weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ENT review for mastoiditis or intracranial spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, tympanometry if effusion is suspected, and audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Acute suppurative middle-ear infection on otoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Paracetamol or ibuprofen; amoxicillin if severe, bilateral or not improving",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review otitis externa, effusion, referred otalgia and bullous myringitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Watchful waiting in well children with mild disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Co-amoxiclav for treatment failure or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Myringotomy for bulging drum, severe pain or threatened complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most resolve fully; recurrent disease may need grommets",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

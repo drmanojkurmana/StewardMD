@@ -1,174 +1,416 @@
 {
- "id": "rosai_dorfman_disease",
- "name": "Rosai-Dorfman disease",
- "aliases": [
-  "sinus histiocytosis with massive lymphadenopathy",
-  "SHML",
-  "Rosai-Dorfman-Destombes disease"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Immunology",
- "specialty": "Rheumatology / Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically presents with massive, painless, bilateral cervical lymphadenopathy, often with fever, night sweats, and raised inflammatory markers",
-   "Extranodal disease occurs in a large proportion, involving skin, sinonasal tract, orbit, central nervous system, and bone",
-   "The defining histological feature is emperipolesis: intact lymphocytes and other cells engulfed within the cytoplasm of large histiocytes",
-   "The pathognomonic histiocytes are S100-positive and CD1a-negative, distinguishing them from Langerhans cells",
-   "Most cases are sporadic and self-limiting, but disseminated or vital-organ disease can be aggressive",
-   "It may coexist with autoimmune or lymphoproliferative disorders and with other histiocytoses",
-   "Treatment ranges from observation for limited disease to corticosteroids, surgery, or systemic therapy for extensive or organ-threatening involvement"
+  "id": "rosai_dorfman_disease",
+  "name": "Rosai-Dorfman disease",
+  "aliases": [
+    "sinus histiocytosis with massive lymphadenopathy",
+    "SHML",
+    "Rosai-Dorfman-Destombes disease"
   ],
-  "pathophysiology": "Rosai-Dorfman disease is a histiocytic proliferative disorder characterised by accumulation of large, activated histiocytes derived from the monocyte-macrophage lineage within lymph node sinuses and extranodal tissues. The hallmark is emperipolesis, the presence of intact inflammatory cells within histiocyte cytoplasm. Although historically considered reactive and possibly infection- or immune-triggered, a subset harbours clonal MAPK pathway mutations, placing it within the histiocytic neoplasm spectrum. The infiltrating S100-positive histiocytes expand lymph nodes and infiltrate extranodal sites, producing the clinical manifestations.",
-  "additionalDifferentials": [
-   "Lymphoma, including Hodgkin lymphoma",
-   "Langerhans cell histiocytosis",
-   "Erdheim-Chester disease",
-   "Reactive or infective lymphadenopathy (including mycobacterial)",
-   "IgG4-related disease",
-   "Metastatic malignancy"
-  ],
-  "additionalInvestigations": [
-   "Excisional lymph node or tissue biopsy demonstrating emperipolesis within S100-positive, CD1a-negative histiocytes",
-   "Full blood count and inflammatory markers (often raised ESR and polyclonal hypergammaglobulinaemia)",
-   "Cross-sectional imaging (CT/MRI) to map nodal and extranodal disease",
-   "MRI of brain and orbit when central nervous system or orbital involvement is suspected",
-   "Molecular testing for MAPK pathway mutations in atypical or aggressive cases",
-   "Screening for associated autoimmune or lymphoproliferative disorders"
-  ],
-  "redFlags": [
-   "Central nervous system or spinal involvement causing neurological deficit",
-   "Airway or orbital compromise from bulky masses",
-   "Vital-organ infiltration (kidney, liver, lower respiratory tract) associated with worse outcomes",
-   "Features suggesting concurrent lymphoma or autoimmune disease"
-  ],
-  "prognosis": "Most patients, particularly those with isolated nodal disease, follow a benign self-limiting or relapsing-remitting course, but extensive extranodal disease, central nervous system involvement, or associated immune dysregulation confers a more guarded prognosis.",
-  "pitfalls": [
-   "Misinterpreting the histiocytic infiltrate as lymphoma and missing emperipolesis",
-   "Failing to use S100 and CD1a staining to distinguish it from Langerhans cell histiocytosis",
-   "Overtreating limited disease that would resolve spontaneously",
-   "Underestimating the extent of extranodal or central nervous system involvement",
-   "Not looking for associated autoimmune or lymphoproliferative conditions"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observation for asymptomatic isolated nodal disease, given the frequent spontaneous regression",
-   "Surgical excision or debulking of symptomatic, localised or compressive lesions",
-   "Corticosteroids as first-line systemic therapy for symptomatic or extranodal disease",
-   "Systemic chemoimmunotherapy such as vinblastine, methotrexate or mercaptopurine for refractory or disseminated disease",
-   "Targeted MAPK-pathway inhibition with MEK or BRAF inhibitors where clonal kinase mutations are identified",
-   "Radiotherapy for critical-site disease threatening vital structures such as the central nervous system or orbit when otherwise uncontrolled",
-   "Screening for and management of coexisting autoimmune or lymphoproliferative disorders, with multidisciplinary haematology and immunology input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rosai_dorfman_disease-pathway",
-   "title": "Rosai-Dorfman disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically presents with massive, painless, bilateral cervical lymphadenopathy, often with fever, night sweats, and raised inflammatory markers",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Central nervous system or spinal involvement causing neurological deficit",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Excisional lymph node or tissue biopsy demonstrating emperipolesis within S100-positive, CD1a-negative histiocytes, Full blood count and inflammatory markers (often raised ESR and polyclonal hypergammaglobulinaemia),"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observation for asymptomatic isolated nodal disease, given the frequent spontaneous regression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the histiocytic infiltrate as lymphoma and missing emperipolesis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rosai-dorfman disease."
-  }
- ],
- "tables": [
-  {
-   "id": "rosai_dorfman_disease-matrix",
-   "title": "Rosai-Dorfman disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically presents with massive, painless, bilateral cervical lymphadenopathy, often with fever, night sweats, and raised",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Immunology",
+  "specialty": "Rheumatology / Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically presents with massive, painless, bilateral cervical lymphadenopathy, often with fever, night sweats, and raised inflammatory markers",
+      "Extranodal disease occurs in a large proportion, involving skin, sinonasal tract, orbit, central nervous system, and bone",
+      "The defining histological feature is emperipolesis: intact lymphocytes and other cells engulfed within the cytoplasm of large histiocytes",
+      "The pathognomonic histiocytes are S100-positive and CD1a-negative, distinguishing them from Langerhans cells",
+      "Most cases are sporadic and self-limiting, but disseminated or vital-organ disease can be aggressive",
+      "It may coexist with autoimmune or lymphoproliferative disorders and with other histiocytoses",
+      "Treatment ranges from observation for limited disease to corticosteroids, surgery, or systemic therapy for extensive or organ-threatening involvement"
     ],
-    [
-     "Key Investigations",
-     "Excisional lymph node or tissue biopsy demonstrating emperipolesis within S100-positive, CD1a-negative histiocytes, Full blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rosai-Dorfman disease is a histiocytic proliferative disorder characterised by accumulation of large, activated histiocytes derived from the monocyte-macrophage lineage within lymph node sinuses and extranodal tissues. The hallmark is emperipolesis, the presence of intact inflammatory cells within histiocyte cytoplasm. Although historically considered reactive and possibly infection- or immune-triggered, a subset harbours clonal MAPK pathway mutations, placing it within the histiocytic neoplasm spectrum. The infiltrating S100-positive histiocytes expand lymph nodes and infiltrate extranodal sites, producing the clinical manifestations.",
+    "additionalDifferentials": [
+      "Lymphoma, including Hodgkin lymphoma",
+      "Langerhans cell histiocytosis",
+      "Erdheim-Chester disease",
+      "Reactive or infective lymphadenopathy (including mycobacterial)",
+      "IgG4-related disease",
+      "Metastatic malignancy"
     ],
-    [
-     "Primary Differentials",
-     "Lymphoma, including Hodgkin lymphoma, Langerhans cell histiocytosis, Erdheim-Chester disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Excisional lymph node or tissue biopsy demonstrating emperipolesis within S100-positive, CD1a-negative histiocytes",
+      "Full blood count and inflammatory markers (often raised ESR and polyclonal hypergammaglobulinaemia)",
+      "Cross-sectional imaging (CT/MRI) to map nodal and extranodal disease",
+      "MRI of brain and orbit when central nervous system or orbital involvement is suspected",
+      "Molecular testing for MAPK pathway mutations in atypical or aggressive cases",
+      "Screening for associated autoimmune or lymphoproliferative disorders"
     ],
-    [
-     "Management Strategy",
-     "Observation for asymptomatic isolated nodal disease, given the frequent spontaneous regression",
-     "Core treatment modality"
+    "redFlags": [
+      "Central nervous system or spinal involvement causing neurological deficit",
+      "Airway or orbital compromise from bulky masses",
+      "Vital-organ infiltration (kidney, liver, lower respiratory tract) associated with worse outcomes",
+      "Features suggesting concurrent lymphoma or autoimmune disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the histiocytic infiltrate as lymphoma and missing emperipolesis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients, particularly those with isolated nodal disease, follow a benign self-limiting or relapsing-remitting course, but extensive extranodal disease, central nervous system involvement, or associated immune dysregulation confers a more guarded prognosis.",
+    "pitfalls": [
+      "Misinterpreting the histiocytic infiltrate as lymphoma and missing emperipolesis",
+      "Failing to use S100 and CD1a staining to distinguish it from Langerhans cell histiocytosis",
+      "Overtreating limited disease that would resolve spontaneously",
+      "Underestimating the extent of extranodal or central nervous system involvement",
+      "Not looking for associated autoimmune or lymphoproliferative conditions"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observation for asymptomatic isolated nodal disease, given the frequent spontaneous regression",
+      "Surgical excision or debulking of symptomatic, localised or compressive lesions",
+      "Corticosteroids as first-line systemic therapy for symptomatic or extranodal disease",
+      "Systemic chemoimmunotherapy such as vinblastine, methotrexate or mercaptopurine for refractory or disseminated disease",
+      "Targeted MAPK-pathway inhibition with MEK or BRAF inhibitors where clonal kinase mutations are identified",
+      "Radiotherapy for critical-site disease threatening vital structures such as the central nervous system or orbit when otherwise uncontrolled",
+      "Screening for and management of coexisting autoimmune or lymphoproliferative disorders, with multidisciplinary haematology and immunology input"
     ]
-   ],
-   "caption": "Overview comparison matrix for rosai-dorfman disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rosai-dorfman-disease-real-image",
-   "title": "Rosai-Dorfman disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "rosai_dorfman_disease-pathway",
+      "title": "Rosai-Dorfman disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically presents with massive, painless, bilateral cervical lymphadenopathy, often with fever, night sweats, and raised inflammatory markers",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Central nervous system or spinal involvement causing neurological deficit",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Excisional lymph node or tissue biopsy demonstrating emperipolesis within S100-positive, CD1a-negative histiocytes, Full blood count and inflammatory markers (often raised ESR and polyclonal hypergammaglobulinaemia),"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observation for asymptomatic isolated nodal disease, given the frequent spontaneous regression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the histiocytic infiltrate as lymphoma and missing emperipolesis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rosai-dorfman disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rosai_dorfman_disease-matrix",
+      "title": "Rosai-Dorfman disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically presents with massive, painless, bilateral cervical lymphadenopathy, often with fever, night sweats, and raised",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Excisional lymph node or tissue biopsy demonstrating emperipolesis within S100-positive, CD1a-negative histiocytes, Full blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lymphoma, including Hodgkin lymphoma, Langerhans cell histiocytosis, Erdheim-Chester disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observation for asymptomatic isolated nodal disease, given the frequent spontaneous regression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the histiocytic infiltrate as lymphoma and missing emperipolesis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rosai-dorfman disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rosai_dorfman_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional node biopsy",
+          "cells": [
+            {
+              "text": "Emperipolesis within S100-positive, CD1a-negative histiocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Raised ESR and polyclonal hypergammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Nodal and extranodal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and orbit",
+          "cells": [
+            {
+              "text": "CNS or orbital disease, when involved"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rosai_dorfman_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoma, including Hodgkin lymphoma",
+          "cells": [
+            {
+              "text": "Biopsy separates it; emperipolesis is the histological clue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Langerhans cell histiocytosis",
+          "cells": [
+            {
+              "text": "CD1a-negative histiocytes distinguish it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rosai_dorfman_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic isolated nodal disease, given frequent spontaneous regression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Excision or debulking of symptomatic, localised or compressive lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "First-line systemic therapy for symptomatic or extranodal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemoimmunotherapy",
+          "cells": [
+            {
+              "text": "Vinblastine, methotrexate or mercaptopurine for refractory or disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rosai_dorfman_disease-dx-mgmt",
+      "title": "Diagnosis and management of Rosai-Dorfman disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bulky lymphadenopathy with raised ESR and polyclonal hypergammaglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (CNS or spinal disease, airway or orbital compromise, organ spread)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of airway, orbital or neurological compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Excision biopsy with S100 and CD1a staining; CT or MRI for extent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is emperipolesis seen in S100-positive, CD1a-negative histiocytes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphoma, Langerhans cell histiocytosis or reactive lymphadenopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic isolated nodal disease; spontaneous regression is frequent",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excision or debulking of symptomatic or compressive lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids as first-line systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Chemoimmunotherapy for refractory or disseminated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated nodal disease often regresses spontaneously",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,481 @@
 {
- "id": "atp6v0a2_cdg",
- "name": "ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA)",
- "aliases": [
-  "ARCL2A",
-  "Cutis laxa type IIA",
-  "Wrinkly skin syndrome"
- ],
- "class": "non_infective",
- "system": "Metabolic / Glycosylation & peroxisomal",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Metabolic medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "ATP6V0A2 encodes the a2 subunit of the membrane-embedded V0 domain of the vacuolar H+-ATPase, which acidifies the Golgi and endosomal compartments; its loss impairs both glycosylation and elastic-fibre formation.",
-   "It is a combined N- and O-glycosylation disorder, so both serum transferrin (N-glycan) and apolipoprotein C-III (mucin-type O-glycan) isoform patterns are typically abnormal.",
-   "The gene underlies both autosomal recessive cutis laxa type IIA and the allelic wrinkly skin syndrome, which form a phenotypic continuum.",
-   "The skin is loose, redundant and wrinkled, most obvious over the face, abdomen and hands, and may partially improve with age.",
-   "A large, late-closing anterior fontanelle, downslanting palpebral fissures and a long philtrum are characteristic dysmorphic clues.",
-   "Neurological involvement with developmental delay and seizures is common, and neuronal migration abnormalities such as a cobblestone-like malformation may be seen on imaging.",
-   "Skeletal features include joint laxity, hip dislocation and delayed bone age, and strabismus and myopia are frequent."
+  "id": "atp6v0a2_cdg",
+  "name": "ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA)",
+  "aliases": [
+    "ARCL2A",
+    "Cutis laxa type IIA",
+    "Wrinkly skin syndrome"
   ],
-  "pathophysiology": "The vacuolar H+-ATPase maintains the acidic luminal pH of the Golgi apparatus and the endosomal-lysosomal system. ATP6V0A2 encodes an isoform of the membrane-embedded a subunit of the proton-translocating V0 domain that is important for Golgi acidification and vesicular trafficking. When it is deficient, defective luminal acidification perturbs the activity and localisation of pH-sensitive glycosyltransferases and glycosidases, producing a combined defect of N-linked and mucin-type O-linked glycosylation. Disturbed Golgi trafficking also impairs secretion and assembly of tropoelastin and processing of elastic-fibre components, leaving the dermis with sparse, fragmented elastic fibres and giving the cutis laxa phenotype, while hypoglycosylation of numerous other proteins accounts for the neurological, skeletal and connective-tissue manifestations. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Other inherited cutis laxa syndromes (ELN, EFEMP2/FBLN4, FBLN5, LTBP4)",
-   "De Barsy syndrome and related PYCR1 or ALDH18A1 disorders",
-   "Other combined N- and O-glycosylation CDGs such as COG-complex defects",
-   "Ehlers-Danlos syndromes and other heritable connective-tissue disorders",
-   "Menkes disease and occipital horn syndrome (ATP7A)",
-   "Geroderma osteodysplasticum (GORAB)",
-   "Acquired post-inflammatory cutis laxa"
-  ],
-  "additionalInvestigations": [
-   "Serum transferrin isoelectric focusing (a type II pattern)",
-   "Apolipoprotein C-III isoform analysis as an O-glycosylation screen",
-   "ATP6V0A2 molecular genetic testing",
-   "Skin biopsy with elastic-fibre staining showing fragmented or reduced fibres",
-   "Neuroimaging for cortical malformation and migration defects",
-   "Skeletal survey and bone-age assessment",
-   "Ophthalmological review for strabismus and myopia"
-  ],
-  "redFlags": [
-   "Seizures accompanied by a structural neuronal migration abnormality",
-   "Progressive neurological deterioration",
-   "Complications of connective-tissue fragility such as hernias",
-   "Feeding difficulty and growth failure in infancy"
-  ],
-  "prognosis": "Life expectancy is often relatively preserved and the cutaneous laxity may improve with age, but neurodevelopmental outcome varies and can include lasting cognitive and motor impairment.",
-  "pitfalls": [
-   "Testing only N-glycosylation with transferrin and missing the disorder, as O-glycosylation screening with apolipoprotein C-III is also needed",
-   "Attributing cutis laxa to a purely dermatological or connective-tissue cause without metabolic screening",
-   "Overlooking a structural brain malformation as the cause of seizures",
-   "Confusing it with elastin-related or De Barsy syndrome cutis laxa"
-  ],
-  "references": [
-   "Inherited metabolic disease textbooks",
-   "Congenital disorders of glycosylation review literature",
-   "Connective-tissue and dermatology reference sources"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care as there is no disease-specific therapy, protecting the fragile lax skin and reserving plastic surgical correction for functionally or cosmetically significant redundancy, recognising it may recur",
-   "Support neurodevelopment with physiotherapy, occupational therapy, speech and language therapy and individualised educational provision",
-   "Manage seizures with anticonvulsant therapy guided by neurology",
-   "Optimise feeding and nutrition and monitor growth in infancy and childhood",
-   "Undertake surveillance for connective-tissue and vascular complications, including herniae and arterial tortuosity, alongside ophthalmic and skeletal review",
-   "Coordinate multidisciplinary care through metabolic medicine, neurology and clinical genetics, and offer genetic counselling with family screening for this autosomal recessive disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "atp6v0a2_cdg-pathway",
-   "title": "ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "ATP6V0A2 encodes the a2 subunit of the membrane-embedded V0 domain of the vacuolar H+-ATPase, which acidifies the Golgi and endosomal compartments; its loss impairs both glycosylation and elastic-fibre formation.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Seizures accompanied by a structural neuronal migration abnormality",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum transferrin isoelectric focusing (a type II pattern), Apolipoprotein C-III isoform analysis as an O-glycosylation screen, ATP6V0A2 molecular genetic testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care as there is no disease-specific therapy, protecting the fragile lax skin and reserving plastic surgical correction for functionally or cosmetically significant redundancy, recognising it may"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Testing only N-glycosylation with transferrin and missing the disorder, as O-glycosylation screening with apolipoprotein C-III is also needed"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of atp6v0a2-cdg (autosomal recessive cutis laxa type iia)."
-  }
- ],
- "tables": [
-  {
-   "id": "atp6v0a2_cdg-matrix",
-   "title": "ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "ATP6V0A2 encodes the a2 subunit of the membrane-embedded V0 domain of the vacuolar H+-ATPase, which acidifies the Golgi and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Glycosylation & peroxisomal",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Metabolic medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "ATP6V0A2 encodes the a2 subunit of the membrane-embedded V0 domain of the vacuolar H+-ATPase, which acidifies the Golgi and endosomal compartments; its loss impairs both glycosylation and elastic-fibre formation.",
+      "It is a combined N- and O-glycosylation disorder, so both serum transferrin (N-glycan) and apolipoprotein C-III (mucin-type O-glycan) isoform patterns are typically abnormal.",
+      "The gene underlies both autosomal recessive cutis laxa type IIA and the allelic wrinkly skin syndrome, which form a phenotypic continuum.",
+      "The skin is loose, redundant and wrinkled, most obvious over the face, abdomen and hands, and may partially improve with age.",
+      "A large, late-closing anterior fontanelle, downslanting palpebral fissures and a long philtrum are characteristic dysmorphic clues.",
+      "Neurological involvement with developmental delay and seizures is common, and neuronal migration abnormalities such as a cobblestone-like malformation may be seen on imaging.",
+      "Skeletal features include joint laxity, hip dislocation and delayed bone age, and strabismus and myopia are frequent."
     ],
-    [
-     "Key Investigations",
-     "Serum transferrin isoelectric focusing (a type II pattern), Apolipoprotein C-III isoform analysis as an O-glycosylation screen,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The vacuolar H+-ATPase maintains the acidic luminal pH of the Golgi apparatus and the endosomal-lysosomal system. ATP6V0A2 encodes an isoform of the membrane-embedded a subunit of the proton-translocating V0 domain that is important for Golgi acidification and vesicular trafficking. When it is deficient, defective luminal acidification perturbs the activity and localisation of pH-sensitive glycosyltransferases and glycosidases, producing a combined defect of N-linked and mucin-type O-linked glycosylation. Disturbed Golgi trafficking also impairs secretion and assembly of tropoelastin and processing of elastic-fibre components, leaving the dermis with sparse, fragmented elastic fibres and giving the cutis laxa phenotype, while hypoglycosylation of numerous other proteins accounts for the neurological, skeletal and connective-tissue manifestations. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Other inherited cutis laxa syndromes (ELN, EFEMP2/FBLN4, FBLN5, LTBP4)",
+      "De Barsy syndrome and related PYCR1 or ALDH18A1 disorders",
+      "Other combined N- and O-glycosylation CDGs such as COG-complex defects",
+      "Ehlers-Danlos syndromes and other heritable connective-tissue disorders",
+      "Menkes disease and occipital horn syndrome (ATP7A)",
+      "Geroderma osteodysplasticum (GORAB)",
+      "Acquired post-inflammatory cutis laxa"
     ],
-    [
-     "Primary Differentials",
-     "Other inherited cutis laxa syndromes (ELN, EFEMP2/FBLN4, FBLN5, LTBP4), De Barsy syndrome and related PYCR1 or ALDH18A1",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum transferrin isoelectric focusing (a type II pattern)",
+      "Apolipoprotein C-III isoform analysis as an O-glycosylation screen",
+      "ATP6V0A2 molecular genetic testing",
+      "Skin biopsy with elastic-fibre staining showing fragmented or reduced fibres",
+      "Neuroimaging for cortical malformation and migration defects",
+      "Skeletal survey and bone-age assessment",
+      "Ophthalmological review for strabismus and myopia"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care as there is no disease-specific therapy, protecting the fragile lax skin and reserving plastic surgical",
-     "Core treatment modality"
+    "redFlags": [
+      "Seizures accompanied by a structural neuronal migration abnormality",
+      "Progressive neurological deterioration",
+      "Complications of connective-tissue fragility such as hernias",
+      "Feeding difficulty and growth failure in infancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Testing only N-glycosylation with transferrin and missing the disorder, as O-glycosylation screening with apolipoprotein C-III is",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is often relatively preserved and the cutaneous laxity may improve with age, but neurodevelopmental outcome varies and can include lasting cognitive and motor impairment.",
+    "pitfalls": [
+      "Testing only N-glycosylation with transferrin and missing the disorder, as O-glycosylation screening with apolipoprotein C-III is also needed",
+      "Attributing cutis laxa to a purely dermatological or connective-tissue cause without metabolic screening",
+      "Overlooking a structural brain malformation as the cause of seizures",
+      "Confusing it with elastin-related or De Barsy syndrome cutis laxa"
+    ],
+    "references": [
+      "Inherited metabolic disease textbooks",
+      "Congenital disorders of glycosylation review literature",
+      "Connective-tissue and dermatology reference sources"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care as there is no disease-specific therapy, protecting the fragile lax skin and reserving plastic surgical correction for functionally or cosmetically significant redundancy, recognising it may recur",
+      "Support neurodevelopment with physiotherapy, occupational therapy, speech and language therapy and individualised educational provision",
+      "Manage seizures with anticonvulsant therapy guided by neurology",
+      "Optimise feeding and nutrition and monitor growth in infancy and childhood",
+      "Undertake surveillance for connective-tissue and vascular complications, including herniae and arterial tortuosity, alongside ophthalmic and skeletal review",
+      "Coordinate multidisciplinary care through metabolic medicine, neurology and clinical genetics, and offer genetic counselling with family screening for this autosomal recessive disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for atp6v0a2-cdg (autosomal recessive cutis laxa type iia)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "atp6v0a2-cdg-real-image",
-   "title": "ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "atp6v0a2_cdg-pathway",
+      "title": "ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "ATP6V0A2 encodes the a2 subunit of the membrane-embedded V0 domain of the vacuolar H+-ATPase, which acidifies the Golgi and endosomal compartments; its loss impairs both glycosylation and elastic-fibre formation.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Seizures accompanied by a structural neuronal migration abnormality",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum transferrin isoelectric focusing (a type II pattern), Apolipoprotein C-III isoform analysis as an O-glycosylation screen, ATP6V0A2 molecular genetic testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care as there is no disease-specific therapy, protecting the fragile lax skin and reserving plastic surgical correction for functionally or cosmetically significant redundancy, recognising it may"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Testing only N-glycosylation with transferrin and missing the disorder, as O-glycosylation screening with apolipoprotein C-III is also needed"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of atp6v0a2-cdg (autosomal recessive cutis laxa type iia)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "atp6v0a2_cdg-matrix",
+      "title": "ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ATP6V0A2 encodes the a2 subunit of the membrane-embedded V0 domain of the vacuolar H+-ATPase, which acidifies the Golgi and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum transferrin isoelectric focusing (a type II pattern), Apolipoprotein C-III isoform analysis as an O-glycosylation screen,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other inherited cutis laxa syndromes (ELN, EFEMP2/FBLN4, FBLN5, LTBP4), De Barsy syndrome and related PYCR1 or ALDH18A1",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care as there is no disease-specific therapy, protecting the fragile lax skin and reserving plastic surgical",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Testing only N-glycosylation with transferrin and missing the disorder, as O-glycosylation screening with apolipoprotein C-III is",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for atp6v0a2-cdg (autosomal recessive cutis laxa type iia)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atp6v0a2_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin isoelectric focusing",
+          "cells": [
+            {
+              "text": "Type II pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apolipoprotein C-III isoform analysis",
+          "cells": [
+            {
+              "text": "O-glycosylation screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATP6V0A2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with elastic-fibre staining",
+          "cells": [
+            {
+              "text": "Fragmented or reduced elastic fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Cortical malformation and migration defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey and bone-age assessment",
+          "cells": [
+            {
+              "text": "Skeletal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Strabismus and myopia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atp6v0a2_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other inherited cutis laxa syndromes (ELN, EFEMP2/FBLN4, FBLN5, LTBP4)",
+          "cells": [
+            {
+              "text": "Distinguished by ATP6V0A2 molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "De Barsy syndrome and PYCR1 or ALDH18A1 disorders",
+          "cells": [
+            {
+              "text": "Distinguished by ATP6V0A2 molecular testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atp6v0a2_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy; protect fragile lax skin"
+            },
+            {
+              "text": "Plastic surgery reserved for functional problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy, educational provision"
+            },
+            {
+              "text": "Development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "Guided by neurology"
+            },
+            {
+              "text": "Seizures with a migration abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and growth",
+          "cells": [
+            {
+              "text": "Optimise feeding and monitor growth in infancy and childhood"
+            },
+            {
+              "text": "Infancy and childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective-tissue and vascular surveillance",
+          "cells": [
+            {
+              "text": "Herniae, arterial tortuosity; ophthalmic and skeletal review"
+            },
+            {
+              "text": "Complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care and genetic counselling",
+          "cells": [
+            {
+              "text": "Metabolic medicine, neurology and clinical genetics; family screening"
+            },
+            {
+              "text": "Autosomal recessive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atp6v0a2_cdg-dx-mgmt",
+      "title": "Diagnosis and management of ATP6V0A2-CDG (autosomal recessive cutis laxa type IIA)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lax, fragile skin with neurodevelopmental delay and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Seizures with migration abnormality or progressive decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurology-guided anticonvulsant treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin IEF, apoC-III, ATP6V0A2 testing, skin elastic-fibre biopsy, MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ATP6V0A2 variant with type II transferrin and abnormal elastic fibres?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive care and neurodevelopmental therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat glycosylation screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsant therapy guided by neurology",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveillance for hernia and arterial tortuosity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Optimise feeding and monitor growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling with family screening; plastic surgery for functional problems",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

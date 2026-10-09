@@ -1,174 +1,385 @@
 {
- "id": "refsum_disease",
- "name": "Refsum disease",
- "aliases": [
-  "Classic Refsum disease",
-  "Heredopathia atactica polyneuritiformis",
-  "Phytanic acid storage disease",
-  "PHYH",
-  "PEX7"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Mitochondrial Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews Refsum Disease / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classic Refsum disease is an autosomal recessive peroxisomal disorder of phytanic acid alpha-oxidation, usually from PHYH mutations and less often from PEX7 defects",
-   "The cardinal tetrad is retinitis pigmentosa, chronic peripheral polyneuropathy, cerebellar ataxia and raised cerebrospinal fluid protein without pleocytosis (albuminocytological dissociation)",
-   "Night blindness and progressively constricted visual fields from pigmentary retinopathy are often the earliest and most consistent feature",
-   "Additional clues include anosmia, sensorineural deafness, ichthyosis, skeletal abnormalities such as a shortened fourth toe, and cardiac conduction disturbance",
-   "Diagnosis rests on a markedly elevated plasma phytanic acid with normal or only mildly elevated very-long-chain fatty acids, distinguishing it from generalised peroxisomal disorders",
-   "Because phytanic acid is entirely of dietary (exogenous) origin, strict dietary restriction of phytanic acid, avoiding ruminant fats, dairy and certain fish, is the mainstay of treatment",
-   "Rapid weight loss and fasting mobilise phytanic acid from fat stores and can precipitate acute deterioration, so these are avoided; plasma exchange is used generically for acute severe episodes"
+  "id": "refsum_disease",
+  "name": "Refsum disease",
+  "aliases": [
+    "Classic Refsum disease",
+    "Heredopathia atactica polyneuritiformis",
+    "Phytanic acid storage disease",
+    "PHYH",
+    "PEX7"
   ],
-  "pathophysiology": "Classic Refsum disease is a peroxisomal single-enzyme disorder in which deficiency of phytanoyl-CoA hydroxylase (encoded by PHYH), or less commonly a defect of the peroxisomal targeting receptor PEX7, blocks the alpha-oxidation of phytanic acid. Phytanic acid is a branched-chain fatty acid derived exclusively from the diet, and because its beta-methyl group prevents beta-oxidation it must first undergo alpha-oxidation. When this pathway fails, phytanic acid accumulates in blood and lipid-rich tissues, where it is incorporated into membranes and disrupts myelin, retinal and neural function, producing the neuropathy, retinopathy and ataxia. Its wholly dietary origin is what makes dietary restriction effective.",
-  "additionalDifferentials": [
-   "Other causes of syndromic retinitis pigmentosa such as Usher and Bardet-Biedl syndromes",
-   "Chronic inflammatory demyelinating polyneuropathy",
-   "Charcot-Marie-Tooth and other hereditary neuropathies",
-   "Rhizomelic chondrodysplasia punctata (PEX7-related, with high phytanic acid)",
-   "Generalised peroxisome biogenesis disorders (Zellweger spectrum)",
-   "Abetalipoproteinaemia and vitamin E deficiency"
-  ],
-  "additionalInvestigations": [
-   "Plasma phytanic acid level, which is markedly elevated",
-   "Plasma pristanic acid and very-long-chain fatty acids to distinguish from generalised peroxisomal disorders",
-   "Cerebrospinal fluid analysis showing raised protein with normal cell count",
-   "Ophthalmological assessment with electroretinography for pigmentary retinopathy",
-   "Nerve conduction studies and audiometry",
-   "PHYH and PEX7 molecular genetic testing"
-  ],
-  "redFlags": [
-   "Cardiac arrhythmia or conduction block, a recognised cause of sudden death",
-   "Acute worsening of weakness or ataxia after fasting, illness or rapid weight loss",
-   "Rapidly progressive visual or hearing loss",
-   "Severe polyneuropathy compromising mobility or respiration"
-  ],
-  "prognosis": "With early diagnosis and sustained dietary phytanic acid restriction the neuropathy and ataxia can stabilise or partially improve and progression slows, although retinopathy, deafness and anosmia tend to persist; untreated disease progresses and carries a risk of fatal cardiac complications.",
-  "pitfalls": [
-   "Permitting rapid weight loss or fasting, which mobilises stored phytanic acid and can trigger acute deterioration",
-   "Failing to measure phytanic acid, so a treatable disorder is mistaken for another hereditary neuropathy or retinopathy",
-   "Overlooking cardiac conduction disease that requires monitoring",
-   "Not distinguishing classic Refsum disease from generalised peroxisomal disorders by checking very-long-chain fatty acids"
-  ],
-  "references": [
-   "GeneReviews: Refsum Disease",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong dietary restriction of phytanic acid, avoiding ruminant fats, dairy and certain fish, is the mainstay since phytanic acid is wholly dietary in origin",
-   "Maintain adequate caloric intake and avoid rapid weight loss or fasting, which mobilise phytanic acid from fat stores and can precipitate acute deterioration",
-   "Use plasmapheresis or lipid apheresis to rapidly lower phytanic acid in acute exacerbations or severe cardiac and neurological involvement",
-   "Provide dietitian-supervised nutrition with monitoring of plasma phytanic acid to guide dietary adjustment",
-   "Manage complications with cardiac conduction monitoring and pacing where needed, ophthalmology for the retinopathy, and support for neuropathy, ataxia, deafness and ichthyosis",
-   "Coordinate multidisciplinary specialist care and offer genetic counselling with family screening for this autosomal recessive disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "refsum_disease-pathway",
-   "title": "Refsum disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic Refsum disease is an autosomal recessive peroxisomal disorder of phytanic acid alpha-oxidation, usually from PHYH mutations and less often from PEX7 defects",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac arrhythmia or conduction block, a recognised cause of sudden death",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma phytanic acid level, which is markedly elevated, Plasma pristanic acid and very-long-chain fatty acids to distinguish from generalised peroxisomal disorders, Cerebrospinal fluid analysis showing raised protein with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong dietary restriction of phytanic acid, avoiding ruminant fats, dairy and certain fish, is the mainstay since phytanic acid is wholly dietary in origin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Permitting rapid weight loss or fasting, which mobilises stored phytanic acid and can trigger acute deterioration"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of refsum disease."
-  }
- ],
- "tables": [
-  {
-   "id": "refsum_disease-matrix",
-   "title": "Refsum disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic Refsum disease is an autosomal recessive peroxisomal disorder of phytanic acid alpha-oxidation, usually from PHYH",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Mitochondrial Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews Refsum Disease / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classic Refsum disease is an autosomal recessive peroxisomal disorder of phytanic acid alpha-oxidation, usually from PHYH mutations and less often from PEX7 defects",
+      "The cardinal tetrad is retinitis pigmentosa, chronic peripheral polyneuropathy, cerebellar ataxia and raised cerebrospinal fluid protein without pleocytosis (albuminocytological dissociation)",
+      "Night blindness and progressively constricted visual fields from pigmentary retinopathy are often the earliest and most consistent feature",
+      "Additional clues include anosmia, sensorineural deafness, ichthyosis, skeletal abnormalities such as a shortened fourth toe, and cardiac conduction disturbance",
+      "Diagnosis rests on a markedly elevated plasma phytanic acid with normal or only mildly elevated very-long-chain fatty acids, distinguishing it from generalised peroxisomal disorders",
+      "Because phytanic acid is entirely of dietary (exogenous) origin, strict dietary restriction of phytanic acid, avoiding ruminant fats, dairy and certain fish, is the mainstay of treatment",
+      "Rapid weight loss and fasting mobilise phytanic acid from fat stores and can precipitate acute deterioration, so these are avoided; plasma exchange is used generically for acute severe episodes"
     ],
-    [
-     "Key Investigations",
-     "Plasma phytanic acid level, which is markedly elevated, Plasma pristanic acid and very-long-chain fatty acids to distinguish from",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Classic Refsum disease is a peroxisomal single-enzyme disorder in which deficiency of phytanoyl-CoA hydroxylase (encoded by PHYH), or less commonly a defect of the peroxisomal targeting receptor PEX7, blocks the alpha-oxidation of phytanic acid. Phytanic acid is a branched-chain fatty acid derived exclusively from the diet, and because its beta-methyl group prevents beta-oxidation it must first undergo alpha-oxidation. When this pathway fails, phytanic acid accumulates in blood and lipid-rich tissues, where it is incorporated into membranes and disrupts myelin, retinal and neural function, producing the neuropathy, retinopathy and ataxia. Its wholly dietary origin is what makes dietary restriction effective.",
+    "additionalDifferentials": [
+      "Other causes of syndromic retinitis pigmentosa such as Usher and Bardet-Biedl syndromes",
+      "Chronic inflammatory demyelinating polyneuropathy",
+      "Charcot-Marie-Tooth and other hereditary neuropathies",
+      "Rhizomelic chondrodysplasia punctata (PEX7-related, with high phytanic acid)",
+      "Generalised peroxisome biogenesis disorders (Zellweger spectrum)",
+      "Abetalipoproteinaemia and vitamin E deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of syndromic retinitis pigmentosa such as Usher and Bardet-Biedl syndromes, Chronic inflammatory demyelinating",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma phytanic acid level, which is markedly elevated",
+      "Plasma pristanic acid and very-long-chain fatty acids to distinguish from generalised peroxisomal disorders",
+      "Cerebrospinal fluid analysis showing raised protein with normal cell count",
+      "Ophthalmological assessment with electroretinography for pigmentary retinopathy",
+      "Nerve conduction studies and audiometry",
+      "PHYH and PEX7 molecular genetic testing"
     ],
-    [
-     "Management Strategy",
-     "Lifelong dietary restriction of phytanic acid, avoiding ruminant fats, dairy and certain fish, is the mainstay since phytanic",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac arrhythmia or conduction block, a recognised cause of sudden death",
+      "Acute worsening of weakness or ataxia after fasting, illness or rapid weight loss",
+      "Rapidly progressive visual or hearing loss",
+      "Severe polyneuropathy compromising mobility or respiration"
     ],
-    [
-     "Clinical Pitfall",
-     "Permitting rapid weight loss or fasting, which mobilises stored phytanic acid and can trigger acute deterioration",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis and sustained dietary phytanic acid restriction the neuropathy and ataxia can stabilise or partially improve and progression slows, although retinopathy, deafness and anosmia tend to persist; untreated disease progresses and carries a risk of fatal cardiac complications.",
+    "pitfalls": [
+      "Permitting rapid weight loss or fasting, which mobilises stored phytanic acid and can trigger acute deterioration",
+      "Failing to measure phytanic acid, so a treatable disorder is mistaken for another hereditary neuropathy or retinopathy",
+      "Overlooking cardiac conduction disease that requires monitoring",
+      "Not distinguishing classic Refsum disease from generalised peroxisomal disorders by checking very-long-chain fatty acids"
+    ],
+    "references": [
+      "GeneReviews: Refsum Disease",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong dietary restriction of phytanic acid, avoiding ruminant fats, dairy and certain fish, is the mainstay since phytanic acid is wholly dietary in origin",
+      "Maintain adequate caloric intake and avoid rapid weight loss or fasting, which mobilise phytanic acid from fat stores and can precipitate acute deterioration",
+      "Use plasmapheresis or lipid apheresis to rapidly lower phytanic acid in acute exacerbations or severe cardiac and neurological involvement",
+      "Provide dietitian-supervised nutrition with monitoring of plasma phytanic acid to guide dietary adjustment",
+      "Manage complications with cardiac conduction monitoring and pacing where needed, ophthalmology for the retinopathy, and support for neuropathy, ataxia, deafness and ichthyosis",
+      "Coordinate multidisciplinary specialist care and offer genetic counselling with family screening for this autosomal recessive disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for refsum disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "refsum-disease-real-image",
-   "title": "Refsum disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "refsum_disease-pathway",
+      "title": "Refsum disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic Refsum disease is an autosomal recessive peroxisomal disorder of phytanic acid alpha-oxidation, usually from PHYH mutations and less often from PEX7 defects",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac arrhythmia or conduction block, a recognised cause of sudden death",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma phytanic acid level, which is markedly elevated, Plasma pristanic acid and very-long-chain fatty acids to distinguish from generalised peroxisomal disorders, Cerebrospinal fluid analysis showing raised protein with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong dietary restriction of phytanic acid, avoiding ruminant fats, dairy and certain fish, is the mainstay since phytanic acid is wholly dietary in origin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Permitting rapid weight loss or fasting, which mobilises stored phytanic acid and can trigger acute deterioration"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of refsum disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "refsum_disease-matrix",
+      "title": "Refsum disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic Refsum disease is an autosomal recessive peroxisomal disorder of phytanic acid alpha-oxidation, usually from PHYH",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma phytanic acid level, which is markedly elevated, Plasma pristanic acid and very-long-chain fatty acids to distinguish from",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of syndromic retinitis pigmentosa such as Usher and Bardet-Biedl syndromes, Chronic inflammatory demyelinating",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong dietary restriction of phytanic acid, avoiding ruminant fats, dairy and certain fish, is the mainstay since phytanic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Permitting rapid weight loss or fasting, which mobilises stored phytanic acid and can trigger acute deterioration",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for refsum disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews Refsum Disease / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "refsum_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma phytanic acid",
+          "cells": [
+            {
+              "text": "Markedly elevated phytanic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma pristanic acid and very-long-chain fatty acids",
+          "cells": [
+            {
+              "text": "Distinguishes from related disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "refsum_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other syndromic retinitis pigmentosa",
+          "cells": [
+            {
+              "text": "Retinitis pigmentosa"
+            },
+            {
+              "text": "Phytanic acid level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyneuropathy",
+          "cells": [
+            {
+              "text": "Demyelinating neuropathy"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "refsum_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary restriction",
+          "cells": [
+            {
+              "text": "Lifelong restriction of phytanic acid, avoiding ruminant fats and dairy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calories",
+          "cells": [
+            {
+              "text": "Maintain adequate caloric intake and avoid fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "For arrhythmia or conduction block"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "refsum_disease-dx-mgmt",
+      "title": "Diagnosis and management of Refsum disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Refsum disease: retinitis pigmentosa with neuropathy and ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Arrhythmia or conduction block, or acute worsening after fasting or illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology review for conduction block",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma phytanic acid; pristanic acid and VLCFA; genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is phytanic acid markedly elevated with related disorders excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other retinitis pigmentosa or neuropathy syndromes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong dietary restriction of phytanic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maintain adequate caloric intake and avoid fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiac monitoring for arrhythmia or conduction block",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Metabolic and cardiac follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

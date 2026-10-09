@@ -1,179 +1,466 @@
 {
- "id": "cornelia_de_lange_syndrome",
- "name": "Cornelia de Lange syndrome",
- "aliases": [
-  "CdLS",
-  "Brachmann-de Lange syndrome",
-  "NIPBL",
-  "SMC1A",
-  "SMC3",
-  "RAD21",
-  "HDAC8",
-  "cohesinopathy"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A distinctive facial gestalt with synophrys (confluent eyebrows), long philtrum, thin down-turned upper lip, and long curly eyelashes is the diagnostic hallmark",
-   "Prenatal and postnatal growth restriction with microcephaly is characteristic and often severe",
-   "Upper-limb reduction defects range from small hands with proximally placed thumbs to severe oligodactyly or phocomelia",
-   "Generalised hirsutism, a low anterior and posterior hairline, and cutis marmorata are frequently seen",
-   "Most cases follow autosomal dominant inheritance from de novo NIPBL variants, with X-linked (SMC1A, HDAC8) and other cohesin-related genes accounting for milder phenotypes",
-   "Gastro-oesophageal reflux is common and easily overlooked, and can drive irritability, feeding refusal and self-injurious behaviour",
-   "Intellectual disability, autistic features, and expressive language deficits are typical, with severity broadly tracking the causative gene and mutation type"
+  "id": "cornelia_de_lange_syndrome",
+  "name": "Cornelia de Lange syndrome",
+  "aliases": [
+    "CdLS",
+    "Brachmann-de Lange syndrome",
+    "NIPBL",
+    "SMC1A",
+    "SMC3",
+    "RAD21",
+    "HDAC8",
+    "cohesinopathy"
   ],
-  "pathophysiology": "Cornelia de Lange syndrome is a cohesinopathy caused by dysfunction of the cohesin complex or its regulators, which normally hold sister chromatids together and also regulate transcription and chromatin architecture. Loss-of-function or missense variants in NIPBL (the commonest) or in the structural and regulatory subunits SMC1A, SMC3, RAD21 and HDAC8 disturb the expression of developmental gene networks. This dysregulation during embryogenesis produces the multisystem pattern of growth failure, limb reduction, craniofacial malformation and neurodevelopmental impairment. Somatic mosaicism is well recognised and can lead to false-negative blood testing.",
-  "additionalDifferentials": [
-   "Fetal alcohol spectrum disorder",
-   "Coffin-Siris syndrome",
-   "Rubinstein-Taybi syndrome",
-   "Fryns syndrome",
-   "Duplication 3q syndrome",
-   "KBG syndrome"
-  ],
-  "additionalInvestigations": [
-   "Targeted gene-panel or exome sequencing covering NIPBL, SMC1A, SMC3, RAD21 and HDAC8",
-   "Testing of tissues such as buccal cells or fibroblasts when mosaicism is suspected despite negative blood results",
-   "Chromosomal microarray to exclude copy-number mimics",
-   "Echocardiography to detect congenital heart disease",
-   "Upper gastrointestinal evaluation and monitoring for reflux and malrotation",
-   "Hearing and ophthalmology assessment including for ptosis and refractive error"
-  ],
-  "redFlags": [
-   "Unexplained irritability or feeding refusal suggesting severe gastro-oesophageal reflux or oesophagitis",
-   "Cyanosis or poor feeding indicating an undiagnosed congenital heart defect",
-   "Bilious vomiting raising concern for intestinal malrotation with volvulus",
-   "Recurrent aspiration and respiratory compromise"
-  ],
-  "prognosis": "Prognosis varies widely with genotype and severity; individuals with classic NIPBL-related disease often have significant intellectual disability and medical comorbidity, whereas milder variants permit better cognitive and functional outcomes. Life expectancy is largely determined by cardiac, gastrointestinal and respiratory complications.",
-  "pitfalls": [
-   "Excluding the diagnosis on a negative blood test when tissue mosaicism can still be present",
-   "Attributing behavioural disturbance to the syndrome itself and missing treatable reflux or pain",
-   "Overlooking hearing loss that compounds language delay",
-   "Failing to screen for occult congenital heart disease and genitourinary anomalies"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics",
-   "Kline et al. Consensus statement on diagnosis and management of Cornelia de Lange syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no disease-specific cure, so care is multidisciplinary and supportive, coordinated through clinical genetics and paediatrics",
-   "Treat the frequently overlooked gastro-oesophageal reflux aggressively with proton pump inhibitors and feeding support, considering fundoplication, as it can drive irritability and self-injurious behaviour",
-   "Support growth and nutrition with feeding therapy and enteral feeding via nasogastric tube or gastrostomy where needed",
-   "Provide neurodevelopmental support with early intervention, speech, occupational and physiotherapy and structured behavioural management",
-   "Screen for and manage associated anomalies including congenital heart disease, hearing loss, ptosis and refractive error, with surgical correction of limb and palatal defects",
-   "Offer genetic counselling addressing de novo dominant and X-linked inheritance and the possibility of mosaicism, with family testing",
-   "Maintain long-term surveillance for medical comorbidities that largely determine outcome"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cornelia_de_lange_syndrome-pathway",
-   "title": "Cornelia de Lange syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A distinctive facial gestalt with synophrys (confluent eyebrows), long philtrum, thin down-turned upper lip, and long curly eyelashes is the diagnostic hallmark",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unexplained irritability or feeding refusal suggesting severe gastro-oesophageal reflux or oesophagitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted gene-panel or exome sequencing covering NIPBL, SMC1A, SMC3, RAD21 and HDAC8, Testing of tissues such as buccal cells or fibroblasts when mosaicism is suspected despite negative blood results, Chromosomal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no disease-specific cure, so care is multidisciplinary and supportive, coordinated through clinical genetics and paediatrics"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis on a negative blood test when tissue mosaicism can still be present"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cornelia de lange syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cornelia_de_lange_syndrome-matrix",
-   "title": "Cornelia de Lange syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A distinctive facial gestalt with synophrys (confluent eyebrows), long philtrum, thin down-turned upper lip, and long curly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A distinctive facial gestalt with synophrys (confluent eyebrows), long philtrum, thin down-turned upper lip, and long curly eyelashes is the diagnostic hallmark",
+      "Prenatal and postnatal growth restriction with microcephaly is characteristic and often severe",
+      "Upper-limb reduction defects range from small hands with proximally placed thumbs to severe oligodactyly or phocomelia",
+      "Generalised hirsutism, a low anterior and posterior hairline, and cutis marmorata are frequently seen",
+      "Most cases follow autosomal dominant inheritance from de novo NIPBL variants, with X-linked (SMC1A, HDAC8) and other cohesin-related genes accounting for milder phenotypes",
+      "Gastro-oesophageal reflux is common and easily overlooked, and can drive irritability, feeding refusal and self-injurious behaviour",
+      "Intellectual disability, autistic features, and expressive language deficits are typical, with severity broadly tracking the causative gene and mutation type"
     ],
-    [
-     "Key Investigations",
-     "Targeted gene-panel or exome sequencing covering NIPBL, SMC1A, SMC3, RAD21 and HDAC8, Testing of tissues such as buccal cells or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cornelia de Lange syndrome is a cohesinopathy caused by dysfunction of the cohesin complex or its regulators, which normally hold sister chromatids together and also regulate transcription and chromatin architecture. Loss-of-function or missense variants in NIPBL (the commonest) or in the structural and regulatory subunits SMC1A, SMC3, RAD21 and HDAC8 disturb the expression of developmental gene networks. This dysregulation during embryogenesis produces the multisystem pattern of growth failure, limb reduction, craniofacial malformation and neurodevelopmental impairment. Somatic mosaicism is well recognised and can lead to false-negative blood testing.",
+    "additionalDifferentials": [
+      "Fetal alcohol spectrum disorder",
+      "Coffin-Siris syndrome",
+      "Rubinstein-Taybi syndrome",
+      "Fryns syndrome",
+      "Duplication 3q syndrome",
+      "KBG syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Fetal alcohol spectrum disorder, Coffin-Siris syndrome, Rubinstein-Taybi syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted gene-panel or exome sequencing covering NIPBL, SMC1A, SMC3, RAD21 and HDAC8",
+      "Testing of tissues such as buccal cells or fibroblasts when mosaicism is suspected despite negative blood results",
+      "Chromosomal microarray to exclude copy-number mimics",
+      "Echocardiography to detect congenital heart disease",
+      "Upper gastrointestinal evaluation and monitoring for reflux and malrotation",
+      "Hearing and ophthalmology assessment including for ptosis and refractive error"
     ],
-    [
-     "Management Strategy",
-     "There is no disease-specific cure, so care is multidisciplinary and supportive, coordinated through clinical genetics and",
-     "Core treatment modality"
+    "redFlags": [
+      "Unexplained irritability or feeding refusal suggesting severe gastro-oesophageal reflux or oesophagitis",
+      "Cyanosis or poor feeding indicating an undiagnosed congenital heart defect",
+      "Bilious vomiting raising concern for intestinal malrotation with volvulus",
+      "Recurrent aspiration and respiratory compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis on a negative blood test when tissue mosaicism can still be present",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies widely with genotype and severity; individuals with classic NIPBL-related disease often have significant intellectual disability and medical comorbidity, whereas milder variants permit better cognitive and functional outcomes. Life expectancy is largely determined by cardiac, gastrointestinal and respiratory complications.",
+    "pitfalls": [
+      "Excluding the diagnosis on a negative blood test when tissue mosaicism can still be present",
+      "Attributing behavioural disturbance to the syndrome itself and missing treatable reflux or pain",
+      "Overlooking hearing loss that compounds language delay",
+      "Failing to screen for occult congenital heart disease and genitourinary anomalies"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics",
+      "Kline et al. Consensus statement on diagnosis and management of Cornelia de Lange syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no disease-specific cure, so care is multidisciplinary and supportive, coordinated through clinical genetics and paediatrics",
+      "Treat the frequently overlooked gastro-oesophageal reflux aggressively with proton pump inhibitors and feeding support, considering fundoplication, as it can drive irritability and self-injurious behaviour",
+      "Support growth and nutrition with feeding therapy and enteral feeding via nasogastric tube or gastrostomy where needed",
+      "Provide neurodevelopmental support with early intervention, speech, occupational and physiotherapy and structured behavioural management",
+      "Screen for and manage associated anomalies including congenital heart disease, hearing loss, ptosis and refractive error, with surgical correction of limb and palatal defects",
+      "Offer genetic counselling addressing de novo dominant and X-linked inheritance and the possibility of mosaicism, with family testing",
+      "Maintain long-term surveillance for medical comorbidities that largely determine outcome"
     ]
-   ],
-   "caption": "Overview comparison matrix for cornelia de lange syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cornelia-de-lange-syndrome-real-image",
-   "title": "Cornelia de Lange syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cornelia_de_lange_syndrome-pathway",
+      "title": "Cornelia de Lange syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A distinctive facial gestalt with synophrys (confluent eyebrows), long philtrum, thin down-turned upper lip, and long curly eyelashes is the diagnostic hallmark",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unexplained irritability or feeding refusal suggesting severe gastro-oesophageal reflux or oesophagitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted gene-panel or exome sequencing covering NIPBL, SMC1A, SMC3, RAD21 and HDAC8, Testing of tissues such as buccal cells or fibroblasts when mosaicism is suspected despite negative blood results, Chromosomal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no disease-specific cure, so care is multidisciplinary and supportive, coordinated through clinical genetics and paediatrics"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis on a negative blood test when tissue mosaicism can still be present"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cornelia de lange syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cornelia_de_lange_syndrome-matrix",
+      "title": "Cornelia de Lange syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A distinctive facial gestalt with synophrys (confluent eyebrows), long philtrum, thin down-turned upper lip, and long curly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted gene-panel or exome sequencing covering NIPBL, SMC1A, SMC3, RAD21 and HDAC8, Testing of tissues such as buccal cells or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fetal alcohol spectrum disorder, Coffin-Siris syndrome, Rubinstein-Taybi syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no disease-specific cure, so care is multidisciplinary and supportive, coordinated through clinical genetics and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis on a negative blood test when tissue mosaicism can still be present",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cornelia de lange syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cornelia_de_lange_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene-panel or exome sequencing (NIPBL, SMC1A, SMC3, RAD21, HDAC8)",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue testing (buccal cells or fibroblasts)",
+          "cells": [
+            {
+              "text": "Mosaicism when blood results are negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Copy-number mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI evaluation",
+          "cells": [
+            {
+              "text": "Reflux and malrotation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cornelia_de_lange_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fetal alcohol spectrum disorder",
+          "cells": [
+            {
+              "text": "Named look-alike with growth and facial features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coffin-Siris syndrome",
+          "cells": [
+            {
+              "text": "Named look-alike with digit and facial features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rubinstein-Taybi syndrome",
+          "cells": [
+            {
+              "text": "Named look-alike with intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cornelia_de_lange_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary supportive care",
+          "cells": [
+            {
+              "text": "No cure; coordinated through clinical genetics and paediatrics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux",
+          "cells": [
+            {
+              "text": "Aggressive treatment with proton pump inhibitors and feeding support; fundoplication considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and feeding",
+          "cells": [
+            {
+              "text": "Feeding therapy; nasogastric tube or gastrostomy where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Early intervention, speech, occupational and physiotherapy, behavioural management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated anomalies",
+          "cells": [
+            {
+              "text": "Heart disease, hearing loss, ptosis and refractive error"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "De novo dominant and X-linked inheritance; mosaicism; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Comorbidities largely determine outcome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cornelia_de_lange_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cornelia de Lange syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cornelia de Lange syndrome: growth failure, distinctive face, limb anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (feeding refusal, cyanosis, bilious vomiting, aspiration)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review: malrotation with volvulus or congenital heart defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gene panel or exome; tissue testing if mosaicism; microarray; echo; upper GI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sequencing confirm a cohesin or NIPBL-pathway variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Coffin-Siris, Rubinstein-Taybi or fetal alcohol spectrum disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aggressive reflux treatment with proton pump inhibitors and feeding support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enteral feeding by nasogastric tube or gastrostomy where needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early intervention with speech, occupational and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and treat heart, hearing, ptosis and refraction; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome varies with genotype; NIPBL disease often has significant intellectual disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

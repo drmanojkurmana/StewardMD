@@ -1,179 +1,479 @@
 {
- "id": "chondromyxoid_fibroma",
- "name": "Chondromyxoid fibroma",
- "aliases": [
-  "chondromyxoid fibroma",
-  "CMF"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Oncology",
- "specialty": "Orthopaedic Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The rarest of the benign cartilage tumours, typically presenting in adolescents and young adults with slowly progressive localised pain and sometimes swelling",
-   "Has a predilection for the metaphysis of long bones, classically the proximal tibia, and also occurs in flat bones and small bones of the foot",
-   "Radiographs show an eccentric, lobulated, well-defined lytic metaphyseal lesion with a sclerotic scalloped margin, often expanding the cortex",
-   "In contrast to many cartilage tumours it usually shows little or no visible matrix calcification on imaging",
-   "Histology reveals lobules of spindle and stellate cells in a myxoid and chondroid background with peripheral hypercellularity and giant cells",
-   "The hypercellular, myxoid appearance can be mistaken for chondrosarcoma, so clinicopathological correlation is essential",
-   "Treatment is surgical, usually curettage with bone grafting, reserving wider excision for recurrent or aggressive lesions"
+  "id": "chondromyxoid_fibroma",
+  "name": "Chondromyxoid fibroma",
+  "aliases": [
+    "chondromyxoid fibroma",
+    "CMF"
   ],
-  "pathophysiology": "Chondromyxoid fibroma is a benign neoplasm derived from cartilage-forming mesenchyme, characterised by lobules of stellate and spindle-shaped cells embedded in an abundant myxoid and chondroid matrix, with increased cellularity and scattered giant cells at the lobule margins. It typically arises in the metaphysis of tubular bones and grows in an eccentric, expansile fashion that thins and remodels the overlying cortex. Recurrent rearrangements involving the GRM1 gene have been described as a driver of the tumour. Despite its sometimes worrying microscopic hypercellularity and pleomorphism, its behaviour is benign, and the main clinical difficulty is distinguishing it from chondrosarcoma.",
-  "additionalDifferentials": [
-   "Chondrosarcoma (particularly on limited biopsy)",
-   "Chondroblastoma",
-   "Aneurysmal bone cyst",
-   "Non-ossifying fibroma or fibrous dysplasia",
-   "Giant cell tumour of bone",
-   "Enchondroma"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs showing an eccentric lobulated lytic metaphyseal lesion with a sclerotic margin",
-   "CT to assess cortical thinning, expansion and any subtle matrix",
-   "MRI to define the lobulated architecture and soft-tissue extent",
-   "Image-guided or open biopsy with expert bone pathology review",
-   "Molecular studies for GRM1 rearrangement where available",
-   "Staging imaging if malignancy cannot be excluded on initial assessment"
-  ],
-  "redFlags": [
-   "Rapid growth, cortical breakthrough or a soft-tissue mass suggesting chondrosarcoma",
-   "Markedly atypical histology that cannot confidently be called benign",
-   "Recurrence after previous curettage",
-   "Pathological fracture through the lesion"
-  ],
-  "prognosis": "The prognosis is favourable, with cure expected after complete curettage or excision, although local recurrence is recognised, particularly after incomplete removal in younger patients. Malignant transformation is very rare.",
-  "pitfalls": [
-   "Overdiagnosing chondrosarcoma because of the hypercellular, myxoid histology",
-   "Underestimating the recurrence risk after simple curettage in adolescents",
-   "Failing to correlate imaging with pathology in an equivocal cartilage lesion",
-   "Missing a pathological fracture arising through a cortically thinned lesion"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Soft Tissue and Bone",
-   "Standard orthopaedic oncology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Benign bone tumor with no malignant staging and no role for systemic anticancer therapy",
-   "Confirmed lesions generally warrant definitive surgical treatment rather than watchful waiting, given risk of continued growth and cortical thinning",
-   "Intralesional curettage with bone grafting or an equivalent filler is the mainstay treatment for lesions confined to bone",
-   "En bloc excision is favored over curettage for expendable bones or lesions difficult to curette adequately",
-   "Wider resection is reserved for recurrent, locally aggressive, or inadequately margined disease rather than used up front",
-   "Pathological fracture through the lesion requires surgical stabilization combined with curettage or excision as appropriate",
-   "Adjuncts at the time of curettage such as high-speed burring, cryotherapy, or a phenol wash may reduce local recurrence",
-   "Recurrence after curettage can be managed with repeat curettage, though a lower threshold for en bloc or wider excision is generally applied",
-   "No established role for radiotherapy or systemic chemotherapy or targeted therapy in routine management",
-   "Histological confirmation before definitive treatment is essential since the histology can closely mimic chondrosarcoma",
-   "Periodic clinical and imaging follow-up with radiographs, supplemented by MRI or CT as needed, is used to detect local recurrence",
-   "Malignant transformation is very rare, so routine screening for metastatic disease is not indicated",
-   "Refer to or manage within an orthopaedic oncology multidisciplinary team given difficulty distinguishing from chondrosarcoma",
-   "Refer for expert bone pathology review when histology shows atypia or imaging shows features worrying for a malignant cartilage tumor"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chondromyxoid_fibroma-pathway",
-   "title": "Chondromyxoid fibroma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The rarest of the benign cartilage tumours, typically presenting in adolescents and young adults with slowly progressive localised pain and sometimes swelling",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, cortical breakthrough or a soft-tissue mass suggesting chondrosarcoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs showing an eccentric lobulated lytic metaphyseal lesion with a sclerotic margin, CT to assess cortical thinning, expansion and any subtle matrix, MRI to define the lobulated architecture and soft-tissue"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Benign bone tumor with no malignant staging and no role for systemic anticancer therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overdiagnosing chondrosarcoma because of the hypercellular, myxoid histology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chondromyxoid fibroma."
-  }
- ],
- "tables": [
-  {
-   "id": "chondromyxoid_fibroma-matrix",
-   "title": "Chondromyxoid fibroma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The rarest of the benign cartilage tumours, typically presenting in adolescents and young adults with slowly progressive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Oncology",
+  "specialty": "Orthopaedic Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The rarest of the benign cartilage tumours, typically presenting in adolescents and young adults with slowly progressive localised pain and sometimes swelling",
+      "Has a predilection for the metaphysis of long bones, classically the proximal tibia, and also occurs in flat bones and small bones of the foot",
+      "Radiographs show an eccentric, lobulated, well-defined lytic metaphyseal lesion with a sclerotic scalloped margin, often expanding the cortex",
+      "In contrast to many cartilage tumours it usually shows little or no visible matrix calcification on imaging",
+      "Histology reveals lobules of spindle and stellate cells in a myxoid and chondroid background with peripheral hypercellularity and giant cells",
+      "The hypercellular, myxoid appearance can be mistaken for chondrosarcoma, so clinicopathological correlation is essential",
+      "Treatment is surgical, usually curettage with bone grafting, reserving wider excision for recurrent or aggressive lesions"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs showing an eccentric lobulated lytic metaphyseal lesion with a sclerotic margin, CT to assess cortical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chondromyxoid fibroma is a benign neoplasm derived from cartilage-forming mesenchyme, characterised by lobules of stellate and spindle-shaped cells embedded in an abundant myxoid and chondroid matrix, with increased cellularity and scattered giant cells at the lobule margins. It typically arises in the metaphysis of tubular bones and grows in an eccentric, expansile fashion that thins and remodels the overlying cortex. Recurrent rearrangements involving the GRM1 gene have been described as a driver of the tumour. Despite its sometimes worrying microscopic hypercellularity and pleomorphism, its behaviour is benign, and the main clinical difficulty is distinguishing it from chondrosarcoma.",
+    "additionalDifferentials": [
+      "Chondrosarcoma (particularly on limited biopsy)",
+      "Chondroblastoma",
+      "Aneurysmal bone cyst",
+      "Non-ossifying fibroma or fibrous dysplasia",
+      "Giant cell tumour of bone",
+      "Enchondroma"
     ],
-    [
-     "Primary Differentials",
-     "Chondrosarcoma (particularly on limited biopsy), Chondroblastoma, Aneurysmal bone cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs showing an eccentric lobulated lytic metaphyseal lesion with a sclerotic margin",
+      "CT to assess cortical thinning, expansion and any subtle matrix",
+      "MRI to define the lobulated architecture and soft-tissue extent",
+      "Image-guided or open biopsy with expert bone pathology review",
+      "Molecular studies for GRM1 rearrangement where available",
+      "Staging imaging if malignancy cannot be excluded on initial assessment"
     ],
-    [
-     "Management Strategy",
-     "Benign bone tumor with no malignant staging and no role for systemic anticancer therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, cortical breakthrough or a soft-tissue mass suggesting chondrosarcoma",
+      "Markedly atypical histology that cannot confidently be called benign",
+      "Recurrence after previous curettage",
+      "Pathological fracture through the lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Overdiagnosing chondrosarcoma because of the hypercellular, myxoid histology",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is favourable, with cure expected after complete curettage or excision, although local recurrence is recognised, particularly after incomplete removal in younger patients. Malignant transformation is very rare.",
+    "pitfalls": [
+      "Overdiagnosing chondrosarcoma because of the hypercellular, myxoid histology",
+      "Underestimating the recurrence risk after simple curettage in adolescents",
+      "Failing to correlate imaging with pathology in an equivocal cartilage lesion",
+      "Missing a pathological fracture arising through a cortically thinned lesion"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Soft Tissue and Bone",
+      "Standard orthopaedic oncology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Benign bone tumor with no malignant staging and no role for systemic anticancer therapy",
+      "Confirmed lesions generally warrant definitive surgical treatment rather than watchful waiting, given risk of continued growth and cortical thinning",
+      "Intralesional curettage with bone grafting or an equivalent filler is the mainstay treatment for lesions confined to bone",
+      "En bloc excision is favored over curettage for expendable bones or lesions difficult to curette adequately",
+      "Wider resection is reserved for recurrent, locally aggressive, or inadequately margined disease rather than used up front",
+      "Pathological fracture through the lesion requires surgical stabilization combined with curettage or excision as appropriate",
+      "Adjuncts at the time of curettage such as high-speed burring, cryotherapy, or a phenol wash may reduce local recurrence",
+      "Recurrence after curettage can be managed with repeat curettage, though a lower threshold for en bloc or wider excision is generally applied",
+      "No established role for radiotherapy or systemic chemotherapy or targeted therapy in routine management",
+      "Histological confirmation before definitive treatment is essential since the histology can closely mimic chondrosarcoma",
+      "Periodic clinical and imaging follow-up with radiographs, supplemented by MRI or CT as needed, is used to detect local recurrence",
+      "Malignant transformation is very rare, so routine screening for metastatic disease is not indicated",
+      "Refer to or manage within an orthopaedic oncology multidisciplinary team given difficulty distinguishing from chondrosarcoma",
+      "Refer for expert bone pathology review when histology shows atypia or imaging shows features worrying for a malignant cartilage tumor"
     ]
-   ],
-   "caption": "Overview comparison matrix for chondromyxoid fibroma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chondromyxoid-fibroma-real-image",
-   "title": "Chondromyxoid fibroma: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "chondromyxoid_fibroma-pathway",
+      "title": "Chondromyxoid fibroma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The rarest of the benign cartilage tumours, typically presenting in adolescents and young adults with slowly progressive localised pain and sometimes swelling",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, cortical breakthrough or a soft-tissue mass suggesting chondrosarcoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs showing an eccentric lobulated lytic metaphyseal lesion with a sclerotic margin, CT to assess cortical thinning, expansion and any subtle matrix, MRI to define the lobulated architecture and soft-tissue"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Benign bone tumor with no malignant staging and no role for systemic anticancer therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overdiagnosing chondrosarcoma because of the hypercellular, myxoid histology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chondromyxoid fibroma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chondromyxoid_fibroma-matrix",
+      "title": "Chondromyxoid fibroma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The rarest of the benign cartilage tumours, typically presenting in adolescents and young adults with slowly progressive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs showing an eccentric lobulated lytic metaphyseal lesion with a sclerotic margin, CT to assess cortical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chondrosarcoma (particularly on limited biopsy), Chondroblastoma, Aneurysmal bone cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Benign bone tumor with no malignant staging and no role for systemic anticancer therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overdiagnosing chondrosarcoma because of the hypercellular, myxoid histology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chondromyxoid fibroma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / standard orthopaedic oncology texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chondromyxoid_fibroma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Eccentric lobulated lytic metaphyseal lesion with sclerotic margin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Cortical thinning, expansion and any subtle matrix"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Lobulated architecture and soft-tissue extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided or open biopsy",
+          "cells": [
+            {
+              "text": "Expert bone pathology review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GRM1 rearrangement studies",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondromyxoid_fibroma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chondrosarcoma",
+          "cells": [
+            {
+              "text": "Histology can closely mimic it on limited biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enchondroma",
+          "cells": [
+            {
+              "text": "Benign cartilage tumour; histology overlaps"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondromyxoid_fibroma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical treatment",
+          "cells": [
+            {
+              "text": "Definitive surgery for confirmed lesions rather than watchful waiting"
+            },
+            {
+              "text": "Risk of continued growth and cortical thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional curettage with graft",
+          "cells": [
+            {
+              "text": "Curettage with bone grafting or equivalent filler for lesions confined to bone"
+            },
+            {
+              "text": "Mainstay for intraosseous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "En bloc excision",
+          "cells": [
+            {
+              "text": "Favoured for expendable bones or lesions difficult to curette"
+            },
+            {
+              "text": "Specific situations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuncts",
+          "cells": [
+            {
+              "text": "High-speed burring, cryotherapy or phenol wash at curettage"
+            },
+            {
+              "text": "Reduces local recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wider resection",
+          "cells": [
+            {
+              "text": "Reserved for recurrent, aggressive or inadequately margined disease"
+            },
+            {
+              "text": "Not first line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fracture management",
+          "cells": [
+            {
+              "text": "Stabilisation with curettage or excision as appropriate"
+            },
+            {
+              "text": "Pathological fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Clinical and radiographic follow-up with MRI or CT as needed"
+            },
+            {
+              "text": "Local recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chondromyxoid_fibroma-dx-mgmt",
+      "title": "Diagnosis and management of Chondromyxoid fibroma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chondromyxoid fibroma: slowly progressive metaphyseal pain in a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, cortical breakthrough, recurrence, fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent orthopaedic oncology review for suspected chondrosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, CT, MRI and biopsy with expert bone pathology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Eccentric lobulated lytic lesion with histology confirming a benign tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Surgical treatment; intralesional curettage with bone grafting",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check chondrosarcoma, enchondroma and giant cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant high-speed burring, cryotherapy or phenol at curettage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "En bloc excision for expendable bones or hard-to-curette lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wider resection only for recurrent or aggressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Local recurrence managed with repeat curettage; no systemic therapy role",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,482 @@
 {
- "id": "osgood_schlatter_disease",
- "name": "Osgood-Schlatter disease",
- "aliases": [
-  "tibial tubercle apophysitis",
-  "tibial tuberosity apophysitis",
-  "Osgood-Schlatter lesion",
-  "osteochondrosis of the tibial tubercle"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A traction apophysitis of the tibial tubercle rather than a true osteonecrosis",
-   "Affected site is the tibial tuberosity at the insertion of the patellar tendon",
-   "Typically affects athletic adolescents, roughly ten to fifteen years, and is more common in boys, often bilaterally",
-   "Presents with anterior knee pain and a tender, sometimes prominent, swollen tibial tubercle aggravated by running, jumping and kneeling",
-   "The radiographic hallmark is fragmentation and irregularity of the tibial tubercle with overlying soft-tissue swelling",
-   "Pain is reproduced by resisted knee extension and by direct pressure over the tuberosity",
-   "A residual bony ossicle or prominent tubercle may persist into adulthood and occasionally remain symptomatic",
-   "Management is conservative with activity modification, quadriceps and hamstring stretching, and physiotherapy, with surgery reserved for a persistent painful ossicle as needed"
+  "id": "osgood_schlatter_disease",
+  "name": "Osgood-Schlatter disease",
+  "aliases": [
+    "tibial tubercle apophysitis",
+    "tibial tuberosity apophysitis",
+    "Osgood-Schlatter lesion",
+    "osteochondrosis of the tibial tubercle"
   ],
-  "pathophysiology": "Osgood-Schlatter disease is a traction apophysitis of the tibial tuberosity, the apophysis onto which the patellar tendon inserts. Repetitive, forceful quadriceps contraction during running and jumping transmits tension through the patellar tendon to the developing tuberosity at a time when the apophysis is still partly cartilaginous and mechanically weak. This repeated microtrauma causes small avulsive injuries, inflammation and heterotopic ossification within the distal patellar tendon and apophysis, producing the characteristic prominence and fragmentation. Rapid adolescent growth, with relative tightness of the extensor mechanism, increases the traction load. The condition typically settles as the tuberosity ossifies and the apophysis fuses, although a separate ossicle can persist and remain a source of pain.",
-  "additionalDifferentials": [
-   "Sinding-Larsen-Johansson syndrome (inferior patellar pole apophysitis)",
-   "Patellar tendinopathy (jumper's knee)",
-   "Patellofemoral pain syndrome",
-   "Tibial tubercle avulsion fracture",
-   "Infrapatellar bursitis",
-   "Bone tumour or infection of the proximal tibia"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination reproducing pain over the tibial tubercle with resisted extension",
-   "Lateral knee radiographs to assess tubercle fragmentation and exclude other lesions",
-   "Ultrasound to evaluate the distal patellar tendon and any ossicle or bursitis",
-   "Magnetic resonance imaging in atypical or persistent cases",
-   "Assessment of extensor mechanism flexibility and lower limb alignment",
-   "Inflammatory markers if infection or inflammatory arthropathy is suspected"
-  ],
-  "redFlags": [
-   "Acute severe pain and inability to extend the knee suggesting a tibial tubercle avulsion fracture",
-   "Rest pain, night pain or systemic symptoms raising concern for infection or malignancy",
-   "A rapidly enlarging mass or lytic bony change on imaging",
-   "Persistent disabling pain after skeletal maturity indicating a symptomatic ununited ossicle"
-  ],
-  "prognosis": "The prognosis is favourable; symptoms are self-limiting and usually resolve as the tubercle ossifies and the apophysis fuses, though a prominent tubercle or persistent ossicle may cause residual discomfort with kneeling in a minority of patients.",
-  "pitfalls": [
-   "Overlooking an acute tibial tubercle avulsion fracture in an adolescent presenting with sudden severe pain",
-   "Confusing the condition with Sinding-Larsen-Johansson syndrome at the inferior patellar pole",
-   "Failing to address extensor mechanism tightness that perpetuates apophyseal traction",
-   "Recommending prolonged complete rest rather than graded activity modification"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Campbell's Operative Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Activity and load modification with relative rest from running, jumping and kneeling as the mainstay for this self-limiting apophysitis",
-   "Simple analgesia, ice after activity and short courses of non-steroidal anti-inflammatory drugs for pain",
-   "Physiotherapy focusing on quadriceps and hamstring flexibility and progressive strengthening of the extensor mechanism",
-   "A protective infrapatellar strap or knee padding to reduce load and shield the tender tubercle during kneeling",
-   "Reassurance and education that symptoms resolve as the tuberosity ossifies and the apophysis fuses",
-   "Referral for excision of a persistent painful ossicle in the minority of skeletally mature patients with ongoing symptoms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "osgood_schlatter_disease-pathway",
-   "title": "Osgood-Schlatter disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A traction apophysitis of the tibial tubercle rather than a true osteonecrosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe pain and inability to extend the knee suggesting a tibial tubercle avulsion fracture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination reproducing pain over the tibial tubercle with resisted extension, Lateral knee radiographs to assess tubercle fragmentation and exclude other lesions, Ultrasound to evaluate the distal patellar tendon"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Activity and load modification with relative rest from running, jumping and kneeling as the mainstay for this self-limiting apophysitis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking an acute tibial tubercle avulsion fracture in an adolescent presenting with sudden severe pain"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of osgood-schlatter disease."
-  }
- ],
- "tables": [
-  {
-   "id": "osgood_schlatter_disease-matrix",
-   "title": "Osgood-Schlatter disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A traction apophysitis of the tibial tubercle rather than a true osteonecrosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A traction apophysitis of the tibial tubercle rather than a true osteonecrosis",
+      "Affected site is the tibial tuberosity at the insertion of the patellar tendon",
+      "Typically affects athletic adolescents, roughly ten to fifteen years, and is more common in boys, often bilaterally",
+      "Presents with anterior knee pain and a tender, sometimes prominent, swollen tibial tubercle aggravated by running, jumping and kneeling",
+      "The radiographic hallmark is fragmentation and irregularity of the tibial tubercle with overlying soft-tissue swelling",
+      "Pain is reproduced by resisted knee extension and by direct pressure over the tuberosity",
+      "A residual bony ossicle or prominent tubercle may persist into adulthood and occasionally remain symptomatic",
+      "Management is conservative with activity modification, quadriceps and hamstring stretching, and physiotherapy, with surgery reserved for a persistent painful ossicle as needed"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination reproducing pain over the tibial tubercle with resisted extension, Lateral knee radiographs to assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Osgood-Schlatter disease is a traction apophysitis of the tibial tuberosity, the apophysis onto which the patellar tendon inserts. Repetitive, forceful quadriceps contraction during running and jumping transmits tension through the patellar tendon to the developing tuberosity at a time when the apophysis is still partly cartilaginous and mechanically weak. This repeated microtrauma causes small avulsive injuries, inflammation and heterotopic ossification within the distal patellar tendon and apophysis, producing the characteristic prominence and fragmentation. Rapid adolescent growth, with relative tightness of the extensor mechanism, increases the traction load. The condition typically settles as the tuberosity ossifies and the apophysis fuses, although a separate ossicle can persist and remain a source of pain.",
+    "additionalDifferentials": [
+      "Sinding-Larsen-Johansson syndrome (inferior patellar pole apophysitis)",
+      "Patellar tendinopathy (jumper's knee)",
+      "Patellofemoral pain syndrome",
+      "Tibial tubercle avulsion fracture",
+      "Infrapatellar bursitis",
+      "Bone tumour or infection of the proximal tibia"
     ],
-    [
-     "Primary Differentials",
-     "Sinding-Larsen-Johansson syndrome (inferior patellar pole apophysitis), Patellar tendinopathy (jumper's knee), Patellofemoral",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination reproducing pain over the tibial tubercle with resisted extension",
+      "Lateral knee radiographs to assess tubercle fragmentation and exclude other lesions",
+      "Ultrasound to evaluate the distal patellar tendon and any ossicle or bursitis",
+      "Magnetic resonance imaging in atypical or persistent cases",
+      "Assessment of extensor mechanism flexibility and lower limb alignment",
+      "Inflammatory markers if infection or inflammatory arthropathy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Activity and load modification with relative rest from running, jumping and kneeling as the mainstay for this self-limiting",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe pain and inability to extend the knee suggesting a tibial tubercle avulsion fracture",
+      "Rest pain, night pain or systemic symptoms raising concern for infection or malignancy",
+      "A rapidly enlarging mass or lytic bony change on imaging",
+      "Persistent disabling pain after skeletal maturity indicating a symptomatic ununited ossicle"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking an acute tibial tubercle avulsion fracture in an adolescent presenting with sudden severe pain",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is favourable; symptoms are self-limiting and usually resolve as the tubercle ossifies and the apophysis fuses, though a prominent tubercle or persistent ossicle may cause residual discomfort with kneeling in a minority of patients.",
+    "pitfalls": [
+      "Overlooking an acute tibial tubercle avulsion fracture in an adolescent presenting with sudden severe pain",
+      "Confusing the condition with Sinding-Larsen-Johansson syndrome at the inferior patellar pole",
+      "Failing to address extensor mechanism tightness that perpetuates apophyseal traction",
+      "Recommending prolonged complete rest rather than graded activity modification"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Campbell's Operative Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Activity and load modification with relative rest from running, jumping and kneeling as the mainstay for this self-limiting apophysitis",
+      "Simple analgesia, ice after activity and short courses of non-steroidal anti-inflammatory drugs for pain",
+      "Physiotherapy focusing on quadriceps and hamstring flexibility and progressive strengthening of the extensor mechanism",
+      "A protective infrapatellar strap or knee padding to reduce load and shield the tender tubercle during kneeling",
+      "Reassurance and education that symptoms resolve as the tuberosity ossifies and the apophysis fuses",
+      "Referral for excision of a persistent painful ossicle in the minority of skeletally mature patients with ongoing symptoms"
     ]
-   ],
-   "caption": "Overview comparison matrix for osgood-schlatter disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "osgood-schlatter-disease-real-image",
-   "title": "Osgood-Schlatter disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "osgood_schlatter_disease-pathway",
+      "title": "Osgood-Schlatter disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A traction apophysitis of the tibial tubercle rather than a true osteonecrosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe pain and inability to extend the knee suggesting a tibial tubercle avulsion fracture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination reproducing pain over the tibial tubercle with resisted extension, Lateral knee radiographs to assess tubercle fragmentation and exclude other lesions, Ultrasound to evaluate the distal patellar tendon"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Activity and load modification with relative rest from running, jumping and kneeling as the mainstay for this self-limiting apophysitis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking an acute tibial tubercle avulsion fracture in an adolescent presenting with sudden severe pain"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of osgood-schlatter disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "osgood_schlatter_disease-matrix",
+      "title": "Osgood-Schlatter disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A traction apophysitis of the tibial tubercle rather than a true osteonecrosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination reproducing pain over the tibial tubercle with resisted extension, Lateral knee radiographs to assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sinding-Larsen-Johansson syndrome (inferior patellar pole apophysitis), Patellar tendinopathy (jumper's knee), Patellofemoral",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Activity and load modification with relative rest from running, jumping and kneeling as the mainstay for this self-limiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking an acute tibial tubercle avulsion fracture in an adolescent presenting with sudden severe pain",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for osgood-schlatter disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osgood_schlatter_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination with resisted knee extension",
+          "cells": [
+            {
+              "text": "Pain over the tibial tubercle reproduced by resisted extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral knee radiographs",
+          "cells": [
+            {
+              "text": "Tubercle fragmentation; other lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Distal patellar tendon, any ossicle or bursitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Atypical or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extensor mechanism flexibility and limb alignment",
+          "cells": [
+            {
+              "text": "Flexibility of the extensor mechanism and alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Infection or inflammatory arthropathy, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osgood_schlatter_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sinding-Larsen-Johansson syndrome",
+          "cells": [
+            {
+              "text": "Inferior patellar pole, rather than the tibial tubercle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tibial tubercle avulsion fracture",
+          "cells": [
+            {
+              "text": "Acute severe pain and inability to extend the knee"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osgood_schlatter_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity and load modification",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Relative rest from running, jumping and kneeling; the mainstay for this self-limiting apophysitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and ice",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Simple analgesia, ice after activity and short NSAID courses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Quadriceps and hamstring flexibility and progressive extensor mechanism strengthening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective strap or padding",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Infrapatellar strap or knee padding to shield the tubercle during kneeling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Symptoms resolve as the tuberosity ossifies and the apophysis fuses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Excision of a persistent painful ossicle in a minority of skeletally mature patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osgood_schlatter_disease-dx-mgmt",
+      "title": "Diagnosis and management of Osgood-Schlatter disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anterior knee pain with a tender tibial tubercle in an active adolescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (inability to extend the knee, rest or night pain, or a mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for avulsion fracture, infection or tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tubercle pain on resisted extension; lateral knee radiograph; ultrasound if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does radiograph show tubercle fragmentation, with other lesions excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sinding-Larsen-Johansson, patellar tendinopathy or patellofemoral pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relative rest from running, jumping and kneeling as the mainstay of care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, ice after activity and short courses of NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy for quadriceps and hamstring flexibility and extensor strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Infrapatellar strap or knee padding to shield the tender tubercle",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassurance that symptoms resolve as the tubercle ossifies and fuses",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Favourable; symptoms self-limit, though a prominent tubercle may cause kneeling pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

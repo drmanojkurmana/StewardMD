@@ -1,173 +1,460 @@
 {
- "id": "mooren_ulcer",
- "name": "Mooren ulcer",
- "aliases": [
-  "chronic serpiginous ulcer of the cornea",
-  "rodent ulcer of the cornea",
-  "idiopathic peripheral ulcerative keratitis"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Cornea",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A painful, progressive, idiopathic peripheral ulcerative keratitis that spreads circumferentially and centrally from the limbus",
-   "The ulcer has a characteristic overhanging, undermined leading edge with an intact epithelium beyond the advancing margin",
-   "It is a diagnosis of exclusion, made only after autoimmune and infective causes of peripheral ulcerative keratitis have been ruled out",
-   "A limited unilateral form typically affects older patients, while an aggressive bilateral form is more common in younger patients and can be relentless",
-   "Severe pain, out of proportion to signs, together with progressive thinning is typical",
-   "There is no scleral involvement, which helps distinguish it from Terrien degeneration and from scleritis-associated peripheral keratitis",
-   "Management follows an immunosuppressive ladder from topical corticosteroids to systemic immunomodulators, with conjunctival resection and surgical repair for perforation",
-   "An association with hepatitis C has been described in some aggressive cases and is worth considering"
+  "id": "mooren_ulcer",
+  "name": "Mooren ulcer",
+  "aliases": [
+    "chronic serpiginous ulcer of the cornea",
+    "rodent ulcer of the cornea",
+    "idiopathic peripheral ulcerative keratitis"
   ],
-  "pathophysiology": "Mooren ulcer is thought to be an autoimmune peripheral ulcerative keratitis in which an immune response against corneal stromal antigens leads to progressive destruction. Autoantibodies and cell-mediated inflammation recruit neutrophils and activate collagenolytic and proteolytic enzymes from the limbal vessels and adjacent conjunctiva, degrading peripheral corneal stroma. The ulcer advances circumferentially and centrally with a characteristic undermined edge, and the sclera is spared. Progressive stromal melting can lead to marked thinning, irregular astigmatism, and perforation. Because the process is inflammatory rather than infective, treatment is directed at suppressing the immune response.",
-  "additionalDifferentials": [
-   "Peripheral ulcerative keratitis from systemic vasculitis (e.g. granulomatosis with polyangiitis, rheumatoid arthritis)",
-   "Terrien marginal degeneration",
-   "Marginal (staphylococcal hypersensitivity) keratitis",
-   "Infective peripheral keratitis (bacterial, herpetic, fungal, acanthamoeba)",
-   "Scleritis with associated keratolysis",
-   "Dellen and other non-inflammatory peripheral thinning"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination documenting the undermined advancing edge and degree of thinning",
-   "Corneal scrapings and cultures to exclude infective keratitis",
-   "Systemic autoimmune and vasculitis workup (including inflammatory markers and autoantibodies) to exclude secondary peripheral ulcerative keratitis",
-   "Hepatitis C serology in aggressive or bilateral disease",
-   "Anterior segment optical coherence tomography or pachymetry to monitor thinning",
-   "Corneal topography to assess induced astigmatism"
-  ],
-  "redFlags": [
-   "Rapidly progressive thinning threatening or causing perforation",
-   "Severe unremitting pain with an advancing undermined edge",
-   "Bilateral aggressive disease in a younger patient",
-   "Features suggesting an underlying systemic vasculitis requiring urgent systemic treatment"
-  ],
-  "prognosis": "The limited unilateral form in older patients often responds to treatment, whereas the bilateral aggressive form can be relentless, causing severe thinning, perforation, and significant visual loss despite immunosuppression.",
-  "pitfalls": [
-   "Diagnosing Mooren ulcer without first excluding systemic vasculitis and infection",
-   "Missing scleral involvement that would point away from Mooren ulcer",
-   "Undertreating aggressive disease and allowing progression to perforation",
-   "Overlooking an associated systemic condition such as hepatitis C"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Cornea by Krachmer, Mannis and Holland"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress the autoimmune process, beginning with intensive topical corticosteroids and escalating to systemic corticosteroids and steroid-sparing immunosuppression such as ciclosporin, methotrexate or cyclophosphamide for aggressive or bilateral disease",
-   "Limit stromal melting with collagenase inhibitors and generous lubrication, and avoid topical anaesthetic misuse",
-   "Control the severe pain and support the ocular surface",
-   "Surgical and adjunctive measures for progressive thinning or perforation, including conjunctival resection or recession, tissue adhesive, amniotic membrane grafting or tectonic corneal grafting",
-   "Investigate and treat associated systemic disease, including hepatitis C, where antiviral therapy can improve virus-associated cases",
-   "Regular monitoring of thinning with anterior segment optical coherence tomography or pachymetry and vigilance for perforation, under corneal specialist care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mooren_ulcer-pathway",
-   "title": "Mooren ulcer: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A painful, progressive, idiopathic peripheral ulcerative keratitis that spreads circumferentially and centrally from the limbus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive thinning threatening or causing perforation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination documenting the undermined advancing edge and degree of thinning, Corneal scrapings and cultures to exclude infective keratitis, Systemic autoimmune and vasculitis workup (including inflammatory"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress the autoimmune process, beginning with intensive topical corticosteroids and escalating to systemic corticosteroids and steroid-sparing immunosuppression such as ciclosporin, methotrexate or cyclophosphamide"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing Mooren ulcer without first excluding systemic vasculitis and infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mooren ulcer."
-  }
- ],
- "tables": [
-  {
-   "id": "mooren_ulcer-matrix",
-   "title": "Mooren ulcer: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A painful, progressive, idiopathic peripheral ulcerative keratitis that spreads circumferentially and centrally from the limbus",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Cornea",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A painful, progressive, idiopathic peripheral ulcerative keratitis that spreads circumferentially and centrally from the limbus",
+      "The ulcer has a characteristic overhanging, undermined leading edge with an intact epithelium beyond the advancing margin",
+      "It is a diagnosis of exclusion, made only after autoimmune and infective causes of peripheral ulcerative keratitis have been ruled out",
+      "A limited unilateral form typically affects older patients, while an aggressive bilateral form is more common in younger patients and can be relentless",
+      "Severe pain, out of proportion to signs, together with progressive thinning is typical",
+      "There is no scleral involvement, which helps distinguish it from Terrien degeneration and from scleritis-associated peripheral keratitis",
+      "Management follows an immunosuppressive ladder from topical corticosteroids to systemic immunomodulators, with conjunctival resection and surgical repair for perforation",
+      "An association with hepatitis C has been described in some aggressive cases and is worth considering"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination documenting the undermined advancing edge and degree of thinning, Corneal scrapings and cultures to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mooren ulcer is thought to be an autoimmune peripheral ulcerative keratitis in which an immune response against corneal stromal antigens leads to progressive destruction. Autoantibodies and cell-mediated inflammation recruit neutrophils and activate collagenolytic and proteolytic enzymes from the limbal vessels and adjacent conjunctiva, degrading peripheral corneal stroma. The ulcer advances circumferentially and centrally with a characteristic undermined edge, and the sclera is spared. Progressive stromal melting can lead to marked thinning, irregular astigmatism, and perforation. Because the process is inflammatory rather than infective, treatment is directed at suppressing the immune response.",
+    "additionalDifferentials": [
+      "Peripheral ulcerative keratitis from systemic vasculitis (e.g. granulomatosis with polyangiitis, rheumatoid arthritis)",
+      "Terrien marginal degeneration",
+      "Marginal (staphylococcal hypersensitivity) keratitis",
+      "Infective peripheral keratitis (bacterial, herpetic, fungal, acanthamoeba)",
+      "Scleritis with associated keratolysis",
+      "Dellen and other non-inflammatory peripheral thinning"
     ],
-    [
-     "Primary Differentials",
-     "Peripheral ulcerative keratitis from systemic vasculitis (e.g. granulomatosis with polyangiitis, rheumatoid arthritis), Terrien",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination documenting the undermined advancing edge and degree of thinning",
+      "Corneal scrapings and cultures to exclude infective keratitis",
+      "Systemic autoimmune and vasculitis workup (including inflammatory markers and autoantibodies) to exclude secondary peripheral ulcerative keratitis",
+      "Hepatitis C serology in aggressive or bilateral disease",
+      "Anterior segment optical coherence tomography or pachymetry to monitor thinning",
+      "Corneal topography to assess induced astigmatism"
     ],
-    [
-     "Management Strategy",
-     "Suppress the autoimmune process, beginning with intensive topical corticosteroids and escalating to systemic corticosteroids and",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive thinning threatening or causing perforation",
+      "Severe unremitting pain with an advancing undermined edge",
+      "Bilateral aggressive disease in a younger patient",
+      "Features suggesting an underlying systemic vasculitis requiring urgent systemic treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing Mooren ulcer without first excluding systemic vasculitis and infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "The limited unilateral form in older patients often responds to treatment, whereas the bilateral aggressive form can be relentless, causing severe thinning, perforation, and significant visual loss despite immunosuppression.",
+    "pitfalls": [
+      "Diagnosing Mooren ulcer without first excluding systemic vasculitis and infection",
+      "Missing scleral involvement that would point away from Mooren ulcer",
+      "Undertreating aggressive disease and allowing progression to perforation",
+      "Overlooking an associated systemic condition such as hepatitis C"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Cornea by Krachmer, Mannis and Holland"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress the autoimmune process, beginning with intensive topical corticosteroids and escalating to systemic corticosteroids and steroid-sparing immunosuppression such as ciclosporin, methotrexate or cyclophosphamide for aggressive or bilateral disease",
+      "Limit stromal melting with collagenase inhibitors and generous lubrication, and avoid topical anaesthetic misuse",
+      "Control the severe pain and support the ocular surface",
+      "Surgical and adjunctive measures for progressive thinning or perforation, including conjunctival resection or recession, tissue adhesive, amniotic membrane grafting or tectonic corneal grafting",
+      "Investigate and treat associated systemic disease, including hepatitis C, where antiviral therapy can improve virus-associated cases",
+      "Regular monitoring of thinning with anterior segment optical coherence tomography or pachymetry and vigilance for perforation, under corneal specialist care"
     ]
-   ],
-   "caption": "Overview comparison matrix for mooren ulcer."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mooren-ulcer-real-image",
-   "title": "Mooren ulcer: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "mooren_ulcer-pathway",
+      "title": "Mooren ulcer: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A painful, progressive, idiopathic peripheral ulcerative keratitis that spreads circumferentially and centrally from the limbus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive thinning threatening or causing perforation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination documenting the undermined advancing edge and degree of thinning, Corneal scrapings and cultures to exclude infective keratitis, Systemic autoimmune and vasculitis workup (including inflammatory"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress the autoimmune process, beginning with intensive topical corticosteroids and escalating to systemic corticosteroids and steroid-sparing immunosuppression such as ciclosporin, methotrexate or cyclophosphamide"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing Mooren ulcer without first excluding systemic vasculitis and infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mooren ulcer."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mooren_ulcer-matrix",
+      "title": "Mooren ulcer: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A painful, progressive, idiopathic peripheral ulcerative keratitis that spreads circumferentially and centrally from the limbus",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination documenting the undermined advancing edge and degree of thinning, Corneal scrapings and cultures to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peripheral ulcerative keratitis from systemic vasculitis (e.g. granulomatosis with polyangiitis, rheumatoid arthritis), Terrien",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress the autoimmune process, beginning with intensive topical corticosteroids and escalating to systemic corticosteroids and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing Mooren ulcer without first excluding systemic vasculitis and infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mooren ulcer."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mooren_ulcer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Undermined advancing edge and degree of thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal scrapings and cultures",
+          "cells": [
+            {
+              "text": "Exclude infective keratitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and vasculitis workup",
+          "cells": [
+            {
+              "text": "Excludes secondary peripheral ulcerative keratitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatitis C serology",
+          "cells": [
+            {
+              "text": "In aggressive or bilateral disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment OCT or pachymetry",
+          "cells": [
+            {
+              "text": "Monitors thinning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mooren_ulcer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "PUK from systemic vasculitis (for example GPA)",
+          "cells": [
+            {
+              "text": "Mooren ulcer is diagnosed only after vasculitis is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Terrien marginal degeneration",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective peripheral keratitis",
+          "cells": [
+            {
+              "text": "Excluded by corneal scrapings and cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleritis with keratolysis",
+          "cells": [
+            {
+              "text": "Scleral involvement points away from Mooren ulcer"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mooren_ulcer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical corticosteroids, then systemic steroids",
+          "cells": [
+            {
+              "text": "Escalate to steroid-sparing immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collagenase inhibitors and lubrication",
+          "cells": [
+            {
+              "text": "Limit stromal melting; avoid topical anaesthetic misuse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain control and ocular surface support",
+          "cells": [
+            {
+              "text": "Severe pain is typical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical measures",
+          "cells": [
+            {
+              "text": "Conjunctival resection or recession, tissue adhesive, amniotic membrane for thinning or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat associated systemic disease",
+          "cells": [
+            {
+              "text": "Hepatitis C antiviral therapy can improve virus-associated cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial OCT or pachymetry; vigilance for perforation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mooren_ulcer-dx-mgmt",
+      "title": "Diagnosis and management of Mooren ulcer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful peripheral corneal ulcer with undermined advancing edge",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid thinning, perforation risk, bilateral disease or vasculitis signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent corneal specialist care, tectonic support and systemic treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corneal scrapings, vasculitis and autoantibody screen, hepatitis C serology, AS-OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection, vasculitis and scleral disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat infection or underlying systemic vasculitis; reconsider diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical then systemic steroids, with steroid-sparing agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Collagenase inhibitors, lubricants and pain control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conjunctival resection, glue or amniotic membrane for progressive thinning",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat hepatitis C if present; monitor thinning with OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Unilateral limited form often responds; bilateral aggressive form can be relentless",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

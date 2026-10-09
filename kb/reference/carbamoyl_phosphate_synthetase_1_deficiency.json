@@ -1,181 +1,239 @@
 {
- "id": "carbamoyl_phosphate_synthetase_1_deficiency",
- "name": "Carbamoyl phosphate synthetase 1 deficiency",
- "aliases": [
-  "CPS1 deficiency",
-  "carbamyl phosphate synthetase I deficiency",
-  "CPSD",
-  "hyperammonaemia due to CPS1 deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Urea cycle disorder caused by biallelic CPS1 variants affecting the first, rate-limiting mitochondrial step of ureagenesis",
-   "Severe neonatal form presents with rapidly progressive hyperammonaemic encephalopathy: poor feeding, vomiting, tachypnoea, hypotonia, seizures and coma",
-   "Biochemistry shows marked hyperammonaemia with low/normal citrulline, low arginine, raised glutamine and characteristically low urine orotic acid",
-   "Low orotic aciduria distinguishes it (and NAGS deficiency) from ornithine transcarbamylase deficiency, in which orotic acid is high",
-   "Milder, later-onset presentations feature episodic hyperammonaemia, protein intolerance and neurocognitive problems",
-   "Biochemically indistinguishable from NAGS deficiency, so a carglumic acid trial and gene testing are used to separate the two",
-   "Confirm with CPS1 sequencing; enzyme assay requires liver tissue and is now rarely needed",
-   "Acute management is emergency ammonia removal (haemodialysis/haemofiltration if severe), nitrogen scavengers, arginine and protein restriction; liver transplantation is definitive for severe disease"
+  "id": "carbamoyl_phosphate_synthetase_1_deficiency",
+  "name": "Carbamoyl phosphate synthetase 1 deficiency",
+  "aliases": [
+    "CPS1 deficiency",
+    "carbamyl phosphate synthetase I deficiency",
+    "CPSD",
+    "hyperammonaemia due to CPS1 deficiency"
   ],
-  "pathophysiology": "Carbamoyl phosphate synthetase 1 is the mitochondrial enzyme that initiates the urea cycle by condensing ammonia and bicarbonate into carbamoyl phosphate, a reaction that absolutely requires N-acetylglutamate as an allosteric activator. When CPS1 activity is deficient, waste nitrogen cannot enter the urea cycle, so ammonia accumulates to toxic levels while downstream urea cycle intermediates (citrulline, arginine) are low. Because carbamoyl phosphate is not overproduced, it is not shunted into the pyrimidine pathway, so orotic acid excretion remains low, a key feature shared with NAGS deficiency and distinguishing both from the more distal OTC deficiency. Hyperammonaemia is directly neurotoxic, causing cerebral oedema and encephalopathy, particularly in the neonate. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "N-acetylglutamate synthase deficiency (near-identical biochemistry, carglumic acid responsive)",
-   "Ornithine transcarbamylase deficiency (raised orotic acid, X-linked)",
-   "Citrullinaemia type 1 and argininosuccinic aciduria",
-   "Organic acidaemias causing secondary hyperammonaemia",
-   "Fatty acid oxidation disorders with hyperammonaemia",
-   "Transient hyperammonaemia of the newborn",
-   "Neonatal sepsis or hypoxic-ischaemic encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Urgent plasma ammonia during suspected crises",
-   "Plasma amino acids (low citrulline and arginine, raised glutamine)",
-   "Urine orotic acid (characteristically low)",
-   "Blood gas showing respiratory alkalosis with hyperammonaemia",
-   "CPS1 gene sequencing for confirmation",
-   "Carglumic acid trial to help distinguish from NAGS deficiency",
-   "Plasma acylcarnitines/organic acids to exclude secondary hyperammonaemia"
-  ],
-  "redFlags": [
-   "Neonatal hyperammonaemic coma requiring emergency dialysis",
-   "Cerebral oedema and raised intracranial pressure from severe hyperammonaemia",
-   "Rapidly rising ammonia with deteriorating consciousness at any age",
-   "Decompensation during catabolic illness, high protein intake or surgery",
-   "Failure of ammonia to fall despite scavenger and dietary measures"
-  ],
-  "prognosis": "The severe neonatal form carries a high risk of death or permanent neurological disability related to the depth and duration of hyperammonaemia, whereas milder late-onset disease can be managed medically; liver transplantation corrects the hepatic enzyme defect and can prevent further crises.",
-  "pitfalls": [
-   "Delaying ammonia measurement and dialysis in an encephalopathic neonate",
-   "Confusing CPS1 with OTC deficiency by not checking orotic acid",
-   "Not separating CPS1 from NAGS deficiency, missing the carglumic-acid-responsive disorder",
-   "Under-dialysing when ammonia is dangerously high and scavengers alone are inadequate",
-   "Failing to establish an emergency regimen and long-term dietary/scavenger plan"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics",
-   "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Emergency management of hyperammonaemic crisis by stopping protein intake and giving high-calorie glucose (with intralipid) to reverse catabolism",
-   "Nitrogen-scavenging therapy with sodium benzoate and sodium phenylbutyrate to provide alternative routes of nitrogen excretion",
-   "Arginine or citrulline supplementation to replenish depleted urea cycle intermediates",
-   "Haemodialysis or haemofiltration for severe or refractory hyperammonaemia to clear ammonia rapidly",
-   "Long-term protein-restricted diet with essential amino acid supplementation supervised by a metabolic dietitian",
-   "A carglumic acid trial to distinguish from and treat NAGS deficiency",
-   "Liver transplantation for definitive correction of the hepatic enzyme defect and prevention of further crises",
-   "Genetic counselling and family testing given autosomal recessive inheritance, with regular monitoring of plasma ammonia and amino acids"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "carbamoyl_phosphate_synthetase_1_deficiency-pathway",
-   "title": "Carbamoyl phosphate synthetase 1 deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Urea cycle disorder caused by biallelic CPS1 variants affecting the first, rate-limiting mitochondrial step of ureagenesis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal hyperammonaemic coma requiring emergency dialysis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urgent plasma ammonia during suspected crises, Plasma amino acids (low citrulline and arginine, raised glutamine), Urine orotic acid (characteristically low)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Emergency management of hyperammonaemic crisis by stopping protein intake and giving high-calorie glucose (with intralipid) to reverse catabolism"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying ammonia measurement and dialysis in an encephalopathic neonate"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of carbamoyl phosphate synthetase 1 deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "carbamoyl_phosphate_synthetase_1_deficiency-matrix",
-   "title": "Carbamoyl phosphate synthetase 1 deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Urea cycle disorder caused by biallelic CPS1 variants affecting the first, rate-limiting mitochondrial step of ureagenesis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Urea cycle disorder caused by biallelic CPS1 variants affecting the first, rate-limiting mitochondrial step of ureagenesis",
+      "Severe neonatal form presents with rapidly progressive hyperammonaemic encephalopathy: poor feeding, vomiting, tachypnoea, hypotonia, seizures and coma",
+      "Biochemistry shows marked hyperammonaemia with low/normal citrulline, low arginine, raised glutamine and characteristically low urine orotic acid",
+      "Low orotic aciduria distinguishes it (and NAGS deficiency) from ornithine transcarbamylase deficiency, in which orotic acid is high",
+      "Milder, later-onset presentations feature episodic hyperammonaemia, protein intolerance and neurocognitive problems",
+      "Biochemically indistinguishable from NAGS deficiency, so a carglumic acid trial and gene testing are used to separate the two",
+      "Confirm with CPS1 sequencing; enzyme assay requires liver tissue and is now rarely needed",
+      "Acute management is emergency ammonia removal (haemodialysis/haemofiltration if severe), nitrogen scavengers, arginine and protein restriction; liver transplantation is definitive for severe disease"
     ],
-    [
-     "Key Investigations",
-     "Urgent plasma ammonia during suspected crises, Plasma amino acids (low citrulline and arginine, raised glutamine), Urine orotic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Carbamoyl phosphate synthetase 1 is the mitochondrial enzyme that initiates the urea cycle by condensing ammonia and bicarbonate into carbamoyl phosphate, a reaction that absolutely requires N-acetylglutamate as an allosteric activator. When CPS1 activity is deficient, waste nitrogen cannot enter the urea cycle, so ammonia accumulates to toxic levels while downstream urea cycle intermediates (citrulline, arginine) are low. Because carbamoyl phosphate is not overproduced, it is not shunted into the pyrimidine pathway, so orotic acid excretion remains low, a key feature shared with NAGS deficiency and distinguishing both from the more distal OTC deficiency. Hyperammonaemia is directly neurotoxic, causing cerebral oedema and encephalopathy, particularly in the neonate. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "N-acetylglutamate synthase deficiency (near-identical biochemistry, carglumic acid responsive)",
+      "Ornithine transcarbamylase deficiency (raised orotic acid, X-linked)",
+      "Citrullinaemia type 1 and argininosuccinic aciduria",
+      "Organic acidaemias causing secondary hyperammonaemia",
+      "Fatty acid oxidation disorders with hyperammonaemia",
+      "Transient hyperammonaemia of the newborn",
+      "Neonatal sepsis or hypoxic-ischaemic encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "N-acetylglutamate synthase deficiency (near-identical biochemistry, carglumic acid responsive), Ornithine transcarbamylase",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urgent plasma ammonia during suspected crises",
+      "Plasma amino acids (low citrulline and arginine, raised glutamine)",
+      "Urine orotic acid (characteristically low)",
+      "Blood gas showing respiratory alkalosis with hyperammonaemia",
+      "CPS1 gene sequencing for confirmation",
+      "Carglumic acid trial to help distinguish from NAGS deficiency",
+      "Plasma acylcarnitines/organic acids to exclude secondary hyperammonaemia"
     ],
-    [
-     "Management Strategy",
-     "Emergency management of hyperammonaemic crisis by stopping protein intake and giving high-calorie glucose (with intralipid) to",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal hyperammonaemic coma requiring emergency dialysis",
+      "Cerebral oedema and raised intracranial pressure from severe hyperammonaemia",
+      "Rapidly rising ammonia with deteriorating consciousness at any age",
+      "Decompensation during catabolic illness, high protein intake or surgery",
+      "Failure of ammonia to fall despite scavenger and dietary measures"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying ammonia measurement and dialysis in an encephalopathic neonate",
-     "Prevent diagnostic or management error"
+    "prognosis": "The severe neonatal form carries a high risk of death or permanent neurological disability related to the depth and duration of hyperammonaemia, whereas milder late-onset disease can be managed medically; liver transplantation corrects the hepatic enzyme defect and can prevent further crises.",
+    "pitfalls": [
+      "Delaying ammonia measurement and dialysis in an encephalopathic neonate",
+      "Confusing CPS1 with OTC deficiency by not checking orotic acid",
+      "Not separating CPS1 from NAGS deficiency, missing the carglumic-acid-responsive disorder",
+      "Under-dialysing when ammonia is dangerously high and scavengers alone are inadequate",
+      "Failing to establish an emergency regimen and long-term dietary/scavenger plan"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics",
+      "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Emergency management of hyperammonaemic crisis by stopping protein intake and giving high-calorie glucose (with intralipid) to reverse catabolism",
+      "Nitrogen-scavenging therapy with sodium benzoate and sodium phenylbutyrate to provide alternative routes of nitrogen excretion",
+      "Arginine or citrulline supplementation to replenish depleted urea cycle intermediates",
+      "Haemodialysis or haemofiltration for severe or refractory hyperammonaemia to clear ammonia rapidly",
+      "Long-term protein-restricted diet with essential amino acid supplementation supervised by a metabolic dietitian",
+      "A carglumic acid trial to distinguish from and treat NAGS deficiency",
+      "Liver transplantation for definitive correction of the hepatic enzyme defect and prevention of further crises",
+      "Genetic counselling and family testing given autosomal recessive inheritance, with regular monitoring of plasma ammonia and amino acids"
     ]
-   ],
-   "caption": "Overview comparison matrix for carbamoyl phosphate synthetase 1 deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "carbamoyl-phosphate-synthetase-1-deficiency-real-image",
-   "title": "Carbamoyl phosphate synthetase 1 deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "carbamoyl_phosphate_synthetase_1_deficiency-pathway",
+      "title": "Carbamoyl phosphate synthetase 1 deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Urea cycle disorder caused by biallelic CPS1 variants affecting the first, rate-limiting mitochondrial step of ureagenesis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal hyperammonaemic coma requiring emergency dialysis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urgent plasma ammonia during suspected crises, Plasma amino acids (low citrulline and arginine, raised glutamine), Urine orotic acid (characteristically low)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Emergency management of hyperammonaemic crisis by stopping protein intake and giving high-calorie glucose (with intralipid) to reverse catabolism"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying ammonia measurement and dialysis in an encephalopathic neonate"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of carbamoyl phosphate synthetase 1 deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "carbamoyl_phosphate_synthetase_1_deficiency-matrix",
+      "title": "Carbamoyl phosphate synthetase 1 deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Urea cycle disorder caused by biallelic CPS1 variants affecting the first, rate-limiting mitochondrial step of ureagenesis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urgent plasma ammonia during suspected crises, Plasma amino acids (low citrulline and arginine, raised glutamine), Urine orotic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "N-acetylglutamate synthase deficiency (near-identical biochemistry, carglumic acid responsive), Ornithine transcarbamylase",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Emergency management of hyperammonaemic crisis by stopping protein intake and giving high-calorie glucose (with intralipid) to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying ammonia measurement and dialysis in an encephalopathic neonate",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for carbamoyl phosphate synthetase 1 deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carbamoyl_phosphate_synthetase_1_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in carbamoyl phosphate synthetase 1 deficiency",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Plasma ammonia", "cells": [{"text": "Marked hyperammonaemia during crises"}], "cite": "c1"},
+        {"parameter": "Plasma amino acids", "cells": [{"text": "Low citrulline and arginine; raised glutamine"}], "cite": "c1"},
+        {"parameter": "Urine orotic acid", "cells": [{"text": "Characteristically low; distinguishes from ornithine transcarbamylase deficiency"}], "cite": "c1"},
+        {"parameter": "Blood gas", "cells": [{"text": "Respiratory alkalosis with hyperammonaemia"}], "cite": "c1"},
+        {"parameter": "CPS1 gene sequencing", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "Carglumic acid trial", "cells": [{"text": "Helps separate from NAGS deficiency"}], "cite": "c1"},
+        {"parameter": "Plasma acylcarnitines and organic acids", "cells": [{"text": "Excludes secondary hyperammonaemia"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "carbamoyl_phosphate_synthetase_1_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike urea cycle disorders",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Ornithine transcarbamylase deficiency", "cells": [{"text": "Raised orotic acid, whereas orotic acid is low in CPS1 deficiency"}], "cite": "c1"},
+        {"parameter": "N-acetylglutamate synthase deficiency", "cells": [{"text": "Near-identical biochemistry; carglumic acid responsive, separated by gene testing and trial"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "carbamoyl_phosphate_synthetase_1_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options in carbamoyl phosphate synthetase 1 deficiency",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Emergency crisis management", "cells": [{"text": "Stop protein intake; high-calorie glucose with intralipid to reverse catabolism"}, {"text": "Acute"}], "cite": "c1"},
+        {"parameter": "Nitrogen scavengers", "cells": [{"text": "Sodium benzoate and sodium phenylbutyrate as alternative nitrogen routes"}, {"text": "Acute and maintenance"}], "cite": "c1"},
+        {"parameter": "Arginine or citrulline", "cells": [{"text": "Replenishes depleted urea cycle intermediates"}, {"text": "Adjunct"}], "cite": "c1"},
+        {"parameter": "Dialysis", "cells": [{"text": "Haemodialysis or haemofiltration for severe or refractory hyperammonaemia"}, {"text": "Rapid ammonia clearance"}], "cite": "c1"},
+        {"parameter": "Long-term diet", "cells": [{"text": "Protein restriction with essential amino acid supplementation under a metabolic dietitian"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Carglumic acid trial", "cells": [{"text": "Distinguishes from and treats NAGS deficiency"}, {"text": "Diagnostic and therapeutic"}], "cite": "c1"},
+        {"parameter": "Liver transplantation", "cells": [{"text": "Definitive correction of the hepatic enzyme defect; prevents further crises"}, {"text": "Severe disease"}], "cite": "c1"},
+        {"parameter": "Genetic counselling and monitoring", "cells": [{"text": "Autosomal recessive; family testing; regular ammonia and amino acid monitoring"}, {"text": "Ongoing"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carbamoyl_phosphate_synthetase_1_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of carbamoyl phosphate synthetase 1 deficiency",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Neonate with poor feeding, vomiting, tachypnoea, hypotonia and encephalopathy", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: ammonia very high with coma, cerebral oedema, or failure to fall?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: emergency haemodialysis or haemofiltration; stop protein; scavengers; intensive care", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Urgent plasma ammonia, amino acids, urine orotic acid and blood gas", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Low citrulline and low orotic acid with hyperammonaemia?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "CPS1 sequencing; carglumic acid trial; long-term protein-restricted diet", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Assess ornithine transcarbamylase deficiency or other urea cycle and organic acid causes", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Severe neonatal form carries high risk of death or disability; liver transplantation is definitive", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

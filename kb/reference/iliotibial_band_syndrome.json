@@ -1,173 +1,462 @@
 {
- "id": "iliotibial_band_syndrome",
- "name": "Iliotibial band syndrome",
- "aliases": [
-  "ITB syndrome",
-  "iliotibial band friction syndrome",
-  "lateral runner's knee"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Hand & Peripheral nerve",
- "specialty": "Orthopaedics / Hand Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common overuse injury causing lateral knee pain in runners and cyclists",
-   "Pain localises over the lateral femoral epicondyle and is provoked by repetitive flexion and extension, characteristically near thirty degrees of flexion",
-   "The Noble compression test and the Ober test for iliotibial band tightness assist the diagnosis",
-   "Contributing factors include training errors, downhill running, worn footwear, hip abductor weakness and lower-limb malalignment such as genu varum",
-   "Rather than a true friction phenomenon, current understanding attributes the pain to compression of a richly innervated fat pad beneath the band",
-   "There is point tenderness over the lateral femoral epicondyle without a joint effusion",
-   "It should be distinguished from lateral meniscal and patellofemoral pathology",
-   "Generic management includes relative rest and activity modification, stretching with hip abductor strengthening, corticosteroid injection and, rarely, surgical release or lengthening"
+  "id": "iliotibial_band_syndrome",
+  "name": "Iliotibial band syndrome",
+  "aliases": [
+    "ITB syndrome",
+    "iliotibial band friction syndrome",
+    "lateral runner's knee"
   ],
-  "pathophysiology": "Iliotibial band syndrome arises when repetitive knee flexion and extension causes the distal iliotibial band to compress the underlying highly vascular and innervated connective and fatty tissue against the lateral femoral epicondyle, particularly around thirty degrees of flexion. This produces local inflammation and pain. Hip abductor weakness, training overload, downhill running and lower-limb malalignment predispose to the condition. It was historically attributed to friction of the band moving back and forth over the epicondyle.",
-  "additionalDifferentials": [
-   "Lateral meniscal tear",
-   "Patellofemoral pain syndrome",
-   "Lateral collateral ligament injury",
-   "Biceps femoris tendinopathy",
-   "Popliteus tendinopathy",
-   "Common peroneal nerve irritation",
-   "Lateral compartment osteoarthritis"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination including the Noble compression and Ober tests with point tenderness over the epicondyle",
-   "MRI showing a thickened band with fluid or oedema beneath it when the diagnosis is uncertain",
-   "Ultrasound to assess the band and underlying tissue",
-   "Plain radiographs to exclude joint pathology and assess alignment",
-   "Gait and biomechanical assessment to identify predisposing factors"
-  ],
-  "redFlags": [
-   "True mechanical symptoms such as locking suggesting a meniscal or intra-articular lesion",
-   "A joint effusion pointing to an intra-articular cause",
-   "Neurological symptoms suggesting common peroneal nerve involvement",
-   "Night pain or systemic features"
-  ],
-  "prognosis": "The outlook is good with conservative management and correction of training and biomechanical factors, though the condition tends to recur if these factors are left unaddressed.",
-  "pitfalls": [
-   "Missing intra-articular pathology, signalled by an effusion or locking",
-   "Ignoring hip abductor weakness and biomechanical factors, leading to recurrence",
-   "Prescribing prolonged rest without addressing the underlying cause",
-   "Relying on stretching alone without strengthening"
-  ],
-  "references": [
-   "Campbell's Operative Orthopaedics",
-   "Green's Operative Hand Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce the aggravating load with relative rest, decreased mileage and avoidance of downhill running",
-   "Refer for physiotherapy focused on hip abductor strengthening and correction of lower-limb biomechanics",
-   "Control acute pain with ice and a short course of non-steroidal anti-inflammatory drugs",
-   "Offer a local corticosteroid injection beneath the band for persistent lateral epicondylar pain",
-   "Correct predisposing factors including worn footwear and malalignment, using orthoses where appropriate",
-   "Reserve surgical release or lengthening of the band for the uncommon refractory case after failed conservative care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "iliotibial_band_syndrome-pathway",
-   "title": "Iliotibial band syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common overuse injury causing lateral knee pain in runners and cyclists",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: True mechanical symptoms such as locking suggesting a meniscal or intra-articular lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination including the Noble compression and Ober tests with point tenderness over the epicondyle, MRI showing a thickened band with fluid or oedema beneath it when the diagnosis is uncertain, Ultrasound to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce the aggravating load with relative rest, decreased mileage and avoidance of downhill running"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing intra-articular pathology, signalled by an effusion or locking"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of iliotibial band syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "iliotibial_band_syndrome-matrix",
-   "title": "Iliotibial band syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common overuse injury causing lateral knee pain in runners and cyclists",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Hand & Peripheral nerve",
+  "specialty": "Orthopaedics / Hand Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common overuse injury causing lateral knee pain in runners and cyclists",
+      "Pain localises over the lateral femoral epicondyle and is provoked by repetitive flexion and extension, characteristically near thirty degrees of flexion",
+      "The Noble compression test and the Ober test for iliotibial band tightness assist the diagnosis",
+      "Contributing factors include training errors, downhill running, worn footwear, hip abductor weakness and lower-limb malalignment such as genu varum",
+      "Rather than a true friction phenomenon, current understanding attributes the pain to compression of a richly innervated fat pad beneath the band",
+      "There is point tenderness over the lateral femoral epicondyle without a joint effusion",
+      "It should be distinguished from lateral meniscal and patellofemoral pathology",
+      "Generic management includes relative rest and activity modification, stretching with hip abductor strengthening, corticosteroid injection and, rarely, surgical release or lengthening"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination including the Noble compression and Ober tests with point tenderness over the epicondyle, MRI showing a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Iliotibial band syndrome arises when repetitive knee flexion and extension causes the distal iliotibial band to compress the underlying highly vascular and innervated connective and fatty tissue against the lateral femoral epicondyle, particularly around thirty degrees of flexion. This produces local inflammation and pain. Hip abductor weakness, training overload, downhill running and lower-limb malalignment predispose to the condition. It was historically attributed to friction of the band moving back and forth over the epicondyle.",
+    "additionalDifferentials": [
+      "Lateral meniscal tear",
+      "Patellofemoral pain syndrome",
+      "Lateral collateral ligament injury",
+      "Biceps femoris tendinopathy",
+      "Popliteus tendinopathy",
+      "Common peroneal nerve irritation",
+      "Lateral compartment osteoarthritis"
     ],
-    [
-     "Primary Differentials",
-     "Lateral meniscal tear, Patellofemoral pain syndrome, Lateral collateral ligament injury",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination including the Noble compression and Ober tests with point tenderness over the epicondyle",
+      "MRI showing a thickened band with fluid or oedema beneath it when the diagnosis is uncertain",
+      "Ultrasound to assess the band and underlying tissue",
+      "Plain radiographs to exclude joint pathology and assess alignment",
+      "Gait and biomechanical assessment to identify predisposing factors"
     ],
-    [
-     "Management Strategy",
-     "Reduce the aggravating load with relative rest, decreased mileage and avoidance of downhill running",
-     "Core treatment modality"
+    "redFlags": [
+      "True mechanical symptoms such as locking suggesting a meniscal or intra-articular lesion",
+      "A joint effusion pointing to an intra-articular cause",
+      "Neurological symptoms suggesting common peroneal nerve involvement",
+      "Night pain or systemic features"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing intra-articular pathology, signalled by an effusion or locking",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is good with conservative management and correction of training and biomechanical factors, though the condition tends to recur if these factors are left unaddressed.",
+    "pitfalls": [
+      "Missing intra-articular pathology, signalled by an effusion or locking",
+      "Ignoring hip abductor weakness and biomechanical factors, leading to recurrence",
+      "Prescribing prolonged rest without addressing the underlying cause",
+      "Relying on stretching alone without strengthening"
+    ],
+    "references": [
+      "Campbell's Operative Orthopaedics",
+      "Green's Operative Hand Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce the aggravating load with relative rest, decreased mileage and avoidance of downhill running",
+      "Refer for physiotherapy focused on hip abductor strengthening and correction of lower-limb biomechanics",
+      "Control acute pain with ice and a short course of non-steroidal anti-inflammatory drugs",
+      "Offer a local corticosteroid injection beneath the band for persistent lateral epicondylar pain",
+      "Correct predisposing factors including worn footwear and malalignment, using orthoses where appropriate",
+      "Reserve surgical release or lengthening of the band for the uncommon refractory case after failed conservative care"
     ]
-   ],
-   "caption": "Overview comparison matrix for iliotibial band syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "iliotibial-band-syndrome-real-image",
-   "title": "Iliotibial band syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "iliotibial_band_syndrome-pathway",
+      "title": "Iliotibial band syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common overuse injury causing lateral knee pain in runners and cyclists",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: True mechanical symptoms such as locking suggesting a meniscal or intra-articular lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination including the Noble compression and Ober tests with point tenderness over the epicondyle, MRI showing a thickened band with fluid or oedema beneath it when the diagnosis is uncertain, Ultrasound to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce the aggravating load with relative rest, decreased mileage and avoidance of downhill running"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing intra-articular pathology, signalled by an effusion or locking"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of iliotibial band syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "iliotibial_band_syndrome-matrix",
+      "title": "Iliotibial band syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common overuse injury causing lateral knee pain in runners and cyclists",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination including the Noble compression and Ober tests with point tenderness over the epicondyle, MRI showing a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lateral meniscal tear, Patellofemoral pain syndrome, Lateral collateral ligament injury",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce the aggravating load with relative rest, decreased mileage and avoidance of downhill running",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing intra-articular pathology, signalled by an effusion or locking",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for iliotibial band syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iliotibial_band_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Noble compression and Ober tests",
+          "cells": [
+            {
+              "text": "Band tightness and epicondylar point tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Thickened band with fluid beneath, when diagnosis uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Band and underlying tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Joint pathology and alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait and biomechanical assessment",
+          "cells": [
+            {
+              "text": "Predisposing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iliotibial_band_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lateral meniscal tear",
+          "cells": [
+            {
+              "text": "Locking indicates an intra-articular lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common peroneal nerve irritation",
+          "cells": [
+            {
+              "text": "Neurological symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral compartment osteoarthritis",
+          "cells": [
+            {
+              "text": "Joint pathology on radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iliotibial_band_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relative rest",
+          "cells": [
+            {
+              "text": "Decreased mileage and avoidance of downhill running"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Hip abductor strengthening and lower-limb biomechanics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pain",
+          "cells": [
+            {
+              "text": "Ice and a short course of non-steroidal anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local corticosteroid",
+          "cells": [
+            {
+              "text": "Injection beneath the band for persistent lateral epicondylar pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predisposing factors",
+          "cells": [
+            {
+              "text": "Worn footwear and malalignment; orthoses where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Release or lengthening of the band for the uncommon refractory case"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iliotibial_band_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Iliotibial band syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lateral knee pain over the femoral epicondyle with running or cycling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Locking, effusion, neurological symptoms or night pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate intra-articular, nerve or systemic cause before treating",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Noble and Ober tests, radiographs, MRI if uncertain, gait assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical epicondylar pain with no intra-articular or nerve signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess meniscus, nerve or joint causes; repeat examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relative rest and reduced mileage; avoid downhill running",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy for hip abductor strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ice and short NSAID course for acute pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Local corticosteroid injection for persistent pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Footwear correction and orthoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most settle with load management; surgery only for refractory cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

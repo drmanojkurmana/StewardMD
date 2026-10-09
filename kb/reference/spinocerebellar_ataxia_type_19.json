@@ -1,173 +1,451 @@
 {
- "id": "spinocerebellar_ataxia_type_19",
- "name": "Spinocerebellar ataxia type 19",
- "aliases": [
-  "SCA19",
-  "SCA22",
-  "KCND3-related spinocerebellar ataxia"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology / Neurogenetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant, slowly progressive cerebellar ataxia caused by heterozygous KCND3 variants; SCA19 and SCA22 were mapped separately but are the same allelic disorder.",
-   "KCND3 encodes the Kv4.3 voltage-gated potassium channel alpha subunit that carries the transient A-type outward current shaping Purkinje neuron firing.",
-   "Gait and limb ataxia with dysarthria are the core features, typically evolving over years.",
-   "Cognitive impairment and executive dysfunction are relatively common and can help distinguish it from purely motor cerebellar syndromes.",
-   "Additional signs include postural/action tremor, myoclonus, hyporeflexia and, in some pedigrees, a mild peripheral sensory neuropathy.",
-   "Age of onset is wide (childhood to late adulthood) with marked intrafamilial variability.",
-   "MRI usually shows cerebellar (predominantly vermian) atrophy with relative brainstem sparing, but can appear normal early."
+  "id": "spinocerebellar_ataxia_type_19",
+  "name": "Spinocerebellar ataxia type 19",
+  "aliases": [
+    "SCA19",
+    "SCA22",
+    "KCND3-related spinocerebellar ataxia"
   ],
-  "pathophysiology": "SCA19 is caused by pathogenic variants in KCND3, which encodes the pore-forming alpha subunit of the voltage-gated potassium channel Kv4.3. This channel generates the fast transient (A-type) outward potassium current that regulates dendritic excitability, back-propagating action potentials and repetitive firing of cerebellar Purkinje cells. Missense and small in-frame variants impair trafficking of the channel to the plasma membrane and/or alter its gating, reducing surface A-type current; mutant subunits also exert a dominant-negative effect by co-assembling with wild-type subunits and retaining them within the endoplasmic reticulum. The resulting disturbance of Purkinje cell firing and intracellular calcium handling drives progressive Purkinje cell dysfunction and degeneration, producing the cerebellar phenotype and, in some individuals, the associated cognitive and peripheral nerve features.",
-  "additionalDifferentials": [
-   "Other autosomal dominant SCAs, especially channelopathies (SCA6 due to CACNA1A; SCA13 due to KCNC3)",
-   "SCA14 (PRKCG) and other conventional-mutation dominant ataxias",
-   "Episodic ataxia type 1 (KCNA1) and type 2 (CACNA1A)",
-   "Polyglutamine SCAs with cognitive involvement (SCA17, dentatorubral-pallidoluysian atrophy)",
-   "Fragile X-associated tremor/ataxia syndrome",
-   "Acquired cerebellar ataxia (alcohol, anticonvulsant toxicity, immune-mediated) and multiple system atrophy, cerebellar type"
-  ],
-  "additionalInvestigations": [
-   "KCND3 sequencing, ideally within a next-generation hereditary ataxia gene panel",
-   "Brain MRI to document cerebellar/vermian atrophy and exclude structural mimics",
-   "Repeat-expansion testing to exclude common polyglutamine spinocerebellar ataxias",
-   "Nerve conduction studies where a peripheral neuropathy is suspected",
-   "Neuropsychometric assessment for cognitive and executive dysfunction",
-   "Detailed family history with segregation and cascade genetic testing"
-  ],
-  "redFlags": [
-   "Rapid or subacute progression suggesting an acquired, toxic or paraneoplastic cause rather than SCA19",
-   "Prominent early autonomic or pyramidal/brainstem features pointing to multiple system atrophy",
-   "Emerging cognitive decline requiring formal assessment and support"
-  ],
-  "prognosis": "Slowly progressive with ambulation preserved for many years and a life expectancy that is often near-normal. Disability accrues gradually and associated cognitive involvement may affect independence.",
-  "pitfalls": [
-   "Assuming a normal MRI excludes the diagnosis early in the disease course",
-   "Overlooking cognitive impairment as part of the phenotype and attributing it to an unrelated condition",
-   "Not recognising that SCA19 and SCA22 are the same KCND3 disorder, which causes confusion when reviewing the literature",
-   "Relying only on repeat-expansion panels, which miss this conventional (non-expansion) mutation"
-  ],
-  "references": [
-   "Hereditary ataxia clinical references",
-   "Movement disorders textbooks",
-   "Neurogenetics textbooks"
-  ],
-  "crossLinks": [],
-  "management": [
-   "With no disease-modifying therapy for this KCND3-related ataxia, centre care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria",
-   "Arrange neuropsychological assessment and cognitive support for the executive and cognitive impairment that characteristically accompanies this subtype",
-   "Treat postural and action tremor symptomatically with a trial of a beta-blocker or alternative anti-tremor agent, and address troublesome myoclonus",
-   "Institute falls prevention and provide mobility aids as gait ataxia progresses",
-   "Monitor for bulbar dysfunction with periodic swallow assessment and dietitian input",
-   "Provide multidisciplinary ataxia clinic follow-up",
-   "Offer genetic counselling with cascade testing, noting SCA19 and SCA22 are the same allelic KCND3 disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_19-pathway",
-   "title": "Spinocerebellar ataxia type 19: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant, slowly progressive cerebellar ataxia caused by heterozygous KCND3 variants; SCA19 and SCA22 were mapped separately but are the same allelic disorder.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid or subacute progression suggesting an acquired, toxic or paraneoplastic cause rather than SCA19",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: KCND3 sequencing, ideally within a next-generation hereditary ataxia gene panel, Brain MRI to document cerebellar/vermian atrophy and exclude structural mimics, Repeat-expansion testing to exclude common polyglutamine"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: With no disease-modifying therapy for this KCND3-related ataxia, centre care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal MRI excludes the diagnosis early in the disease course"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 19."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_19-matrix",
-   "title": "Spinocerebellar ataxia type 19: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant, slowly progressive cerebellar ataxia caused by heterozygous KCND3 variants; SCA19 and SCA22 were mapped",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology / Neurogenetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant, slowly progressive cerebellar ataxia caused by heterozygous KCND3 variants; SCA19 and SCA22 were mapped separately but are the same allelic disorder.",
+      "KCND3 encodes the Kv4.3 voltage-gated potassium channel alpha subunit that carries the transient A-type outward current shaping Purkinje neuron firing.",
+      "Gait and limb ataxia with dysarthria are the core features, typically evolving over years.",
+      "Cognitive impairment and executive dysfunction are relatively common and can help distinguish it from purely motor cerebellar syndromes.",
+      "Additional signs include postural/action tremor, myoclonus, hyporeflexia and, in some pedigrees, a mild peripheral sensory neuropathy.",
+      "Age of onset is wide (childhood to late adulthood) with marked intrafamilial variability.",
+      "MRI usually shows cerebellar (predominantly vermian) atrophy with relative brainstem sparing, but can appear normal early."
     ],
-    [
-     "Key Investigations",
-     "KCND3 sequencing, ideally within a next-generation hereditary ataxia gene panel, Brain MRI to document cerebellar/vermian atrophy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA19 is caused by pathogenic variants in KCND3, which encodes the pore-forming alpha subunit of the voltage-gated potassium channel Kv4.3. This channel generates the fast transient (A-type) outward potassium current that regulates dendritic excitability, back-propagating action potentials and repetitive firing of cerebellar Purkinje cells. Missense and small in-frame variants impair trafficking of the channel to the plasma membrane and/or alter its gating, reducing surface A-type current; mutant subunits also exert a dominant-negative effect by co-assembling with wild-type subunits and retaining them within the endoplasmic reticulum. The resulting disturbance of Purkinje cell firing and intracellular calcium handling drives progressive Purkinje cell dysfunction and degeneration, producing the cerebellar phenotype and, in some individuals, the associated cognitive and peripheral nerve features.",
+    "additionalDifferentials": [
+      "Other autosomal dominant SCAs, especially channelopathies (SCA6 due to CACNA1A; SCA13 due to KCNC3)",
+      "SCA14 (PRKCG) and other conventional-mutation dominant ataxias",
+      "Episodic ataxia type 1 (KCNA1) and type 2 (CACNA1A)",
+      "Polyglutamine SCAs with cognitive involvement (SCA17, dentatorubral-pallidoluysian atrophy)",
+      "Fragile X-associated tremor/ataxia syndrome",
+      "Acquired cerebellar ataxia (alcohol, anticonvulsant toxicity, immune-mediated) and multiple system atrophy, cerebellar type"
     ],
-    [
-     "Primary Differentials",
-     "Other autosomal dominant SCAs, especially channelopathies (SCA6 due to CACNA1A; SCA13 due to KCNC3), SCA14 (PRKCG) and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "KCND3 sequencing, ideally within a next-generation hereditary ataxia gene panel",
+      "Brain MRI to document cerebellar/vermian atrophy and exclude structural mimics",
+      "Repeat-expansion testing to exclude common polyglutamine spinocerebellar ataxias",
+      "Nerve conduction studies where a peripheral neuropathy is suspected",
+      "Neuropsychometric assessment for cognitive and executive dysfunction",
+      "Detailed family history with segregation and cascade genetic testing"
     ],
-    [
-     "Management Strategy",
-     "With no disease-modifying therapy for this KCND3-related ataxia, centre care on physiotherapy for gait and balance, occupational",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid or subacute progression suggesting an acquired, toxic or paraneoplastic cause rather than SCA19",
+      "Prominent early autonomic or pyramidal/brainstem features pointing to multiple system atrophy",
+      "Emerging cognitive decline requiring formal assessment and support"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal MRI excludes the diagnosis early in the disease course",
-     "Prevent diagnostic or management error"
+    "prognosis": "Slowly progressive with ambulation preserved for many years and a life expectancy that is often near-normal. Disability accrues gradually and associated cognitive involvement may affect independence.",
+    "pitfalls": [
+      "Assuming a normal MRI excludes the diagnosis early in the disease course",
+      "Overlooking cognitive impairment as part of the phenotype and attributing it to an unrelated condition",
+      "Not recognising that SCA19 and SCA22 are the same KCND3 disorder, which causes confusion when reviewing the literature",
+      "Relying only on repeat-expansion panels, which miss this conventional (non-expansion) mutation"
+    ],
+    "references": [
+      "Hereditary ataxia clinical references",
+      "Movement disorders textbooks",
+      "Neurogenetics textbooks"
+    ],
+    "crossLinks": [],
+    "management": [
+      "With no disease-modifying therapy for this KCND3-related ataxia, centre care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria",
+      "Arrange neuropsychological assessment and cognitive support for the executive and cognitive impairment that characteristically accompanies this subtype",
+      "Treat postural and action tremor symptomatically with a trial of a beta-blocker or alternative anti-tremor agent, and address troublesome myoclonus",
+      "Institute falls prevention and provide mobility aids as gait ataxia progresses",
+      "Monitor for bulbar dysfunction with periodic swallow assessment and dietitian input",
+      "Provide multidisciplinary ataxia clinic follow-up",
+      "Offer genetic counselling with cascade testing, noting SCA19 and SCA22 are the same allelic KCND3 disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 19."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-19-real-image",
-   "title": "Spinocerebellar ataxia type 19: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "spinocerebellar_ataxia_type_19-pathway",
+      "title": "Spinocerebellar ataxia type 19: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant, slowly progressive cerebellar ataxia caused by heterozygous KCND3 variants; SCA19 and SCA22 were mapped separately but are the same allelic disorder.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid or subacute progression suggesting an acquired, toxic or paraneoplastic cause rather than SCA19",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: KCND3 sequencing, ideally within a next-generation hereditary ataxia gene panel, Brain MRI to document cerebellar/vermian atrophy and exclude structural mimics, Repeat-expansion testing to exclude common polyglutamine"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: With no disease-modifying therapy for this KCND3-related ataxia, centre care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy for dysarthria"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal MRI excludes the diagnosis early in the disease course"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 19."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_19-matrix",
+      "title": "Spinocerebellar ataxia type 19: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant, slowly progressive cerebellar ataxia caused by heterozygous KCND3 variants; SCA19 and SCA22 were mapped",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "KCND3 sequencing, ideally within a next-generation hereditary ataxia gene panel, Brain MRI to document cerebellar/vermian atrophy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other autosomal dominant SCAs, especially channelopathies (SCA6 due to CACNA1A; SCA13 due to KCNC3), SCA14 (PRKCG) and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "With no disease-modifying therapy for this KCND3-related ataxia, centre care on physiotherapy for gait and balance, occupational",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal MRI excludes the diagnosis early in the disease course",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 19."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_19-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "KCND3 sequencing",
+          "cells": [
+            {
+              "text": "Heterozygous variant in an ataxia panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Vermian atrophy with brainstem sparing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat-expansion SCA testing",
+          "cells": [
+            {
+              "text": "Excludes polyglutamine subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral involvement, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychometric assessment",
+          "cells": [
+            {
+              "text": "Cognitive and executive dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family segregation analysis",
+          "cells": [
+            {
+              "text": "Cascade testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_19-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinocerebellar ataxia type 13 (KCNC3)",
+          "cells": [
+            {
+              "text": "Also a channelopathy with cognitive impairment; KCNC3 separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia type 17 (TBP)",
+          "cells": [
+            {
+              "text": "Cognitive decline with psychiatric change and chorea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_19-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy for gait and balance",
+          "cells": [
+            {
+              "text": "Core of care without disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological and cognitive support",
+          "cells": [
+            {
+              "text": "Executive and cognitive impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blocker trial",
+          "cells": [
+            {
+              "text": "Postural and action tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention and mobility aids",
+          "cells": [
+            {
+              "text": "As gait ataxia progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow assessment",
+          "cells": [
+            {
+              "text": "Periodic review with dietitian input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade testing; SCA19 and SCA22 are the same KCND3 disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_19-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 19",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slow ataxia with cognitive impairment and tremor: suspected SCA19",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (subacute progression, autonomic or pyramidal features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for an acquired, toxic or multiple system atrophy picture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "KCND3 sequencing in an ataxia panel; brain MRI; repeat-expansion exclusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a heterozygous KCND3 variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired ataxia, MSA or another channelopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy for gait and balance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neuropsychological assessment and cognitive support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blocker trial for postural and action tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Falls prevention and mobility aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-modifying therapy; care targets gait, cognition and falls",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

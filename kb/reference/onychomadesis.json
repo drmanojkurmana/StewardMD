@@ -1,172 +1,468 @@
 {
- "id": "onychomadesis",
- "name": "Onychomadesis",
- "aliases": [
-  "nail shedding",
-  "proximal nail separation",
-  "onychomadesis"
- ],
- "class": "non_infective",
- "system": "Dermatology / Nail",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Onychomadesis is complete, full-thickness separation of the nail plate beginning at the proximal end, which can progress to shedding of the whole nail",
-   "It represents the severe end of the same spectrum as Beau lines, both reflecting temporary arrest of nail matrix activity",
-   "When several nails are affected it usually follows a systemic insult such as a febrile illness, chemotherapy, or a major metabolic disturbance",
-   "It is a well-recognised sequel of hand, foot and mouth disease, appearing weeks after the acute infection has resolved",
-   "A single affected nail more often reflects local trauma to that matrix",
-   "The timing of the causative event can be estimated from the position of the separation and the rate of nail growth",
-   "It is generally self-limiting, and a new nail grows to replace the shed plate once matrix function recovers, so reassurance is central to management"
+  "id": "onychomadesis",
+  "name": "Onychomadesis",
+  "aliases": [
+    "nail shedding",
+    "proximal nail separation",
+    "onychomadesis"
   ],
-  "pathophysiology": "Onychomadesis is caused by a complete but temporary halt in nail matrix activity, so that for a period no nail plate is produced and the newly forming proximal plate is disconnected from the older distal plate. When matrix function resumes, the new plate grows out and pushes off the detached older nail, which is shed. The insult may be systemic, such as a high fever, viral infection, cytotoxic drug, or metabolic upheaval that transiently diverts the matrix from plate production, or local trauma affecting a single digit; the more severe or prolonged the arrest, the more complete the separation compared with the partial groove of a Beau line.",
-  "additionalDifferentials": [
-   "Beau lines (partial matrix arrest on the same spectrum)",
-   "Traumatic nail avulsion",
-   "Severe bullous disorders affecting the nail (for example epidermolysis bullosa or drug reactions)",
-   "Onychomycosis with proximal involvement",
-   "Nail shedding in severe psoriasis or lichen planus",
-   "Idiopathic periodic shedding"
-  ],
-  "additionalInvestigations": [
-   "History for recent febrile illness, viral infection (including hand, foot and mouth disease), or chemotherapy",
-   "Examination of all nails to determine single versus multiple involvement",
-   "Estimation of the timing of the insult from the level of separation",
-   "Screening for systemic or metabolic disease if no clear trigger is found",
-   "Review of recent medications, particularly cytotoxic agents",
-   "Mycology if fungal infection is a consideration"
-  ],
-  "redFlags": [
-   "Widespread nail shedding pointing to a significant systemic illness or drug reaction",
-   "Mucocutaneous blistering or a severe drug eruption requiring urgent evaluation",
-   "Signs of secondary infection of the exposed nail bed",
-   "Recurrent shedding suggesting cyclical systemic disease or ongoing exposure"
-  ],
-  "prognosis": "Onychomadesis is usually self-limiting, and a new nail regrows over several months once the matrix recovers, with a good outcome provided the underlying trigger is transient and any secondary infection is prevented.",
-  "pitfalls": [
-   "Alarming the patient rather than reassuring them when the cause is a self-limited illness",
-   "Failing to link post-viral nail shedding to a preceding hand, foot and mouth disease episode",
-   "Overlooking a serious systemic cause when many nails shed simultaneously",
-   "Neglecting protection of the exposed nail bed, allowing secondary infection"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Baran and Dawber's Diseases of the Nails and their Management"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and manage expectantly, as the condition is self-limiting and a new plate regrows once matrix activity resumes",
-   "Identify and address the precipitating systemic trigger, such as a febrile illness, hand, foot and mouth disease, chemotherapy or a metabolic disturbance",
-   "Review causative medications, particularly cytotoxic agents, and modify where clinically possible",
-   "Protect the nail unit during regrowth and take measures to prevent secondary infection",
-   "Screen for underlying systemic or metabolic disease when no clear trigger is apparent",
-   "Monitor nail regrowth over several months to confirm recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "onychomadesis-pathway",
-   "title": "Onychomadesis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Onychomadesis is complete, full-thickness separation of the nail plate beginning at the proximal end, which can progress to shedding of the whole nail",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Widespread nail shedding pointing to a significant systemic illness or drug reaction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: History for recent febrile illness, viral infection (including hand, foot and mouth disease), or chemotherapy, Examination of all nails to determine single versus multiple involvement, Estimation of the timing of the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and manage expectantly, as the condition is self-limiting and a new plate regrows once matrix activity resumes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Alarming the patient rather than reassuring them when the cause is a self-limited illness"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of onychomadesis."
-  }
- ],
- "tables": [
-  {
-   "id": "onychomadesis-matrix",
-   "title": "Onychomadesis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Onychomadesis is complete, full-thickness separation of the nail plate beginning at the proximal end, which can progress to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Nail",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Onychomadesis is complete, full-thickness separation of the nail plate beginning at the proximal end, which can progress to shedding of the whole nail",
+      "It represents the severe end of the same spectrum as Beau lines, both reflecting temporary arrest of nail matrix activity",
+      "When several nails are affected it usually follows a systemic insult such as a febrile illness, chemotherapy, or a major metabolic disturbance",
+      "It is a well-recognised sequel of hand, foot and mouth disease, appearing weeks after the acute infection has resolved",
+      "A single affected nail more often reflects local trauma to that matrix",
+      "The timing of the causative event can be estimated from the position of the separation and the rate of nail growth",
+      "It is generally self-limiting, and a new nail grows to replace the shed plate once matrix function recovers, so reassurance is central to management"
     ],
-    [
-     "Key Investigations",
-     "History for recent febrile illness, viral infection (including hand, foot and mouth disease), or chemotherapy, Examination of all",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Onychomadesis is caused by a complete but temporary halt in nail matrix activity, so that for a period no nail plate is produced and the newly forming proximal plate is disconnected from the older distal plate. When matrix function resumes, the new plate grows out and pushes off the detached older nail, which is shed. The insult may be systemic, such as a high fever, viral infection, cytotoxic drug, or metabolic upheaval that transiently diverts the matrix from plate production, or local trauma affecting a single digit; the more severe or prolonged the arrest, the more complete the separation compared with the partial groove of a Beau line.",
+    "additionalDifferentials": [
+      "Beau lines (partial matrix arrest on the same spectrum)",
+      "Traumatic nail avulsion",
+      "Severe bullous disorders affecting the nail (for example epidermolysis bullosa or drug reactions)",
+      "Onychomycosis with proximal involvement",
+      "Nail shedding in severe psoriasis or lichen planus",
+      "Idiopathic periodic shedding"
     ],
-    [
-     "Primary Differentials",
-     "Beau lines (partial matrix arrest on the same spectrum), Traumatic nail avulsion, Severe bullous disorders affecting the nail",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "History for recent febrile illness, viral infection (including hand, foot and mouth disease), or chemotherapy",
+      "Examination of all nails to determine single versus multiple involvement",
+      "Estimation of the timing of the insult from the level of separation",
+      "Screening for systemic or metabolic disease if no clear trigger is found",
+      "Review of recent medications, particularly cytotoxic agents",
+      "Mycology if fungal infection is a consideration"
     ],
-    [
-     "Management Strategy",
-     "Reassure and manage expectantly, as the condition is self-limiting and a new plate regrows once matrix activity resumes",
-     "Core treatment modality"
+    "redFlags": [
+      "Widespread nail shedding pointing to a significant systemic illness or drug reaction",
+      "Mucocutaneous blistering or a severe drug eruption requiring urgent evaluation",
+      "Signs of secondary infection of the exposed nail bed",
+      "Recurrent shedding suggesting cyclical systemic disease or ongoing exposure"
     ],
-    [
-     "Clinical Pitfall",
-     "Alarming the patient rather than reassuring them when the cause is a self-limited illness",
-     "Prevent diagnostic or management error"
+    "prognosis": "Onychomadesis is usually self-limiting, and a new nail regrows over several months once the matrix recovers, with a good outcome provided the underlying trigger is transient and any secondary infection is prevented.",
+    "pitfalls": [
+      "Alarming the patient rather than reassuring them when the cause is a self-limited illness",
+      "Failing to link post-viral nail shedding to a preceding hand, foot and mouth disease episode",
+      "Overlooking a serious systemic cause when many nails shed simultaneously",
+      "Neglecting protection of the exposed nail bed, allowing secondary infection"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Baran and Dawber's Diseases of the Nails and their Management"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and manage expectantly, as the condition is self-limiting and a new plate regrows once matrix activity resumes",
+      "Identify and address the precipitating systemic trigger, such as a febrile illness, hand, foot and mouth disease, chemotherapy or a metabolic disturbance",
+      "Review causative medications, particularly cytotoxic agents, and modify where clinically possible",
+      "Protect the nail unit during regrowth and take measures to prevent secondary infection",
+      "Screen for underlying systemic or metabolic disease when no clear trigger is apparent",
+      "Monitor nail regrowth over several months to confirm recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for onychomadesis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "onychomadesis-real-image",
-   "title": "Onychomadesis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "onychomadesis-pathway",
+      "title": "Onychomadesis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Onychomadesis is complete, full-thickness separation of the nail plate beginning at the proximal end, which can progress to shedding of the whole nail",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Widespread nail shedding pointing to a significant systemic illness or drug reaction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: History for recent febrile illness, viral infection (including hand, foot and mouth disease), or chemotherapy, Examination of all nails to determine single versus multiple involvement, Estimation of the timing of the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and manage expectantly, as the condition is self-limiting and a new plate regrows once matrix activity resumes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Alarming the patient rather than reassuring them when the cause is a self-limited illness"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of onychomadesis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "onychomadesis-matrix",
+      "title": "Onychomadesis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Onychomadesis is complete, full-thickness separation of the nail plate beginning at the proximal end, which can progress to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "History for recent febrile illness, viral infection (including hand, foot and mouth disease), or chemotherapy, Examination of all",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Beau lines (partial matrix arrest on the same spectrum), Traumatic nail avulsion, Severe bullous disorders affecting the nail",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and manage expectantly, as the condition is self-limiting and a new plate regrows once matrix activity resumes",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Alarming the patient rather than reassuring them when the cause is a self-limited illness",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for onychomadesis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "onychomadesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History of febrile illness, hand, foot and mouth disease or chemotherapy",
+          "cells": [
+            {
+              "text": "Systemic triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of all nails",
+          "cells": [
+            {
+              "text": "Single versus multiple involvement; many nails suggests a systemic insult"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timing from the level of separation",
+          "cells": [
+            {
+              "text": "Timing of the insult, given the growth rate of the nail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of medications",
+          "cells": [
+            {
+              "text": "Cytotoxic agents in particular"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycology",
+          "cells": [
+            {
+              "text": "When fungal infection is a consideration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "onychomadesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Beau lines",
+          "cells": [
+            {
+              "text": "Same spectrum, with partial matrix arrest rather than complete separation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic nail avulsion",
+          "cells": [
+            {
+              "text": "A single affected nail more often reflects local trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe bullous disorders or drug reactions",
+          "cells": [
+            {
+              "text": "Mucocutaneous blistering or severe drug eruption needs urgent evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "onychomadesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and expectant management",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Self-limiting; a new plate regrows once matrix activity resumes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the precipitating trigger",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Febrile illness, hand, foot and mouth disease, chemotherapy or metabolic disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review causative medication",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Particularly cytotoxic agents; modify where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protect the nail unit",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Guard the exposed nail bed and prevent secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor regrowth",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Over several months to confirm recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "onychomadesis-dx-mgmt",
+      "title": "Diagnosis and management of Onychomadesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Complete proximal nail separation affecting several nails after a systemic insult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (widespread shedding, blistering or drug eruption, or secondary infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent evaluation for severe drug reaction or mucocutaneous blistering",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History of febrile illness, HFMD or chemotherapy; examine all nails; review drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a precipitating systemic trigger identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Screen for systemic or metabolic disease; consider mycology or local trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: self-limiting, with a new plate regrowing once matrix activity resumes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the trigger, such as hand, foot and mouth disease or chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Review and modify causative drugs, particularly cytotoxic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protect the exposed nail bed and prevent secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor nail regrowth over several months to confirm recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually self-limiting, with a good outcome if the trigger is transient",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

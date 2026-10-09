@@ -1,176 +1,445 @@
 {
- "id": "tetralogy_of_fallot",
- "name": "Tetralogy of Fallot",
- "aliases": [
-  "TOF",
-  "ToF"
- ],
- "class": "non_infective",
- "system": "Paediatric cardiology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common cyanotic congenital heart lesion beyond infancy, comprising four features: a large ventricular septal defect, an overriding aorta, right ventricular outflow tract obstruction, and right ventricular hypertrophy.",
-   "The degree of cyanosis reflects the severity of right ventricular outflow obstruction; some infants are minimally cyanotic (so-called pink Fallot) while others present with marked desaturation.",
-   "A harsh systolic ejection murmur at the left upper sternal border arises from the outflow obstruction, not from the septal defect itself; the murmur softens during a hypercyanotic spell as flow across the outflow tract falls.",
-   "Hypercyanotic (tet) spells are episodes of sudden, worsening cyanosis with agitation and deep breathing, often on waking or after feeding or crying, and can be life-threatening.",
-   "Calming manoeuvres for a spell aim to increase systemic vascular resistance and outflow through the lungs: comforting the child, bringing the knees to the chest, and giving oxygen, with pharmacological support as needed.",
-   "The chest radiograph classically shows a boot-shaped heart with a concave main pulmonary artery segment and normal or reduced pulmonary vascularity.",
-   "Echocardiography confirms the anatomy and defines the outflow tract, pulmonary arteries, and coronary artery course before surgery.",
-   "Older, unrepaired children may adopt squatting to relieve exertional cyanosis by transiently raising systemic resistance and pulmonary blood flow.",
-   "Complete surgical repair, involving closure of the septal defect and relief of outflow obstruction, is the definitive treatment and is usually performed in infancy."
+  "id": "tetralogy_of_fallot",
+  "name": "Tetralogy of Fallot",
+  "aliases": [
+    "TOF",
+    "ToF"
   ],
-  "pathophysiology": "Anterior and cephalad deviation of the infundibular septum during development produces right ventricular outflow tract obstruction, a malaligned ventricular septal defect, and an aorta that overrides the defect. Obstruction to pulmonary outflow, combined with the large communication between the ventricles, allows deoxygenated right ventricular blood to shunt right-to-left into the aorta, producing systemic desaturation. The volume of pulmonary blood flow and the resulting cyanosis depend dynamically on the balance between the fixed and dynamic outflow obstruction and systemic vascular resistance; a fall in systemic resistance or a spasm of the infundibulum increases right-to-left shunting and precipitates a hypercyanotic spell.",
-  "additionalDifferentials": [
-   "Transposition of the great arteries",
-   "Tricuspid atresia",
-   "Pulmonary atresia with ventricular septal defect",
-   "Truncus arteriosus",
-   "Severe isolated pulmonary stenosis",
-   "Double-outlet right ventricle"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography to define the outflow tract, septal defect, aortic override, and pulmonary artery anatomy",
-   "Chest radiograph looking for a boot-shaped heart and pulmonary vascularity",
-   "Electrocardiogram showing right axis deviation and right ventricular hypertrophy",
-   "Pulse oximetry and, in spells, assessment of acidosis",
-   "Cardiac catheterisation or CT/MR angiography when coronary or pulmonary artery anatomy is unclear",
-   "Genetic evaluation for 22q11.2 deletion when associated features are present"
-  ],
-  "redFlags": [
-   "Hypercyanotic (tet) spell with deepening cyanosis, agitation, and a disappearing murmur",
-   "Loss of consciousness, seizures, or limpness during a spell",
-   "Duct-dependent presentation with severe outflow obstruction and cardiovascular collapse as the ductus closes",
-   "Profound or worsening hypoxaemia unresponsive to calming measures",
-   "Metabolic acidosis indicating inadequate pulmonary blood flow"
-  ],
-  "prognosis": "With timely complete surgical repair the long-term outlook is generally good, though survivors need lifelong cardiology follow-up for pulmonary regurgitation, residual outflow obstruction, arrhythmia, and possible need for pulmonary valve replacement. Untreated disease carries high morbidity and mortality from progressive cyanosis, spells, and complications.",
-  "pitfalls": [
-   "Interpreting a softening or absent murmur reassuringly when it actually signals a severe hypercyanotic spell",
-   "Aggressively sedating or agitating an infant in a spell rather than using calming, resistance-raising manoeuvres",
-   "Overlooking a duct-dependent lesion in a neonate whose cyanosis worsens as the ductus arteriosus closes",
-   "Attributing exertional symptoms or squatting in an older child to behaviour rather than underlying cyanotic heart disease",
-   "Failing to screen for associated 22q11.2 deletion and other anomalies"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical repair — closure of the ventricular septal defect and relief of right ventricular outflow tract obstruction — is the definitive treatment, with a palliative systemic-to-pulmonary (Blalock-Taussig) shunt in neonates unsuitable for early repair",
-   "In duct-dependent presentation maintain ductal patency with a prostaglandin infusion until intervention",
-   "Abort a hypercyanotic spell by placing the child knee-to-chest, giving oxygen, opioid sedation and fluids, and a vasopressor (phenylephrine) or beta-blocker to raise systemic resistance and relax the infundibulum, correcting any metabolic acidosis",
-   "Prophylactic beta-blockade may reduce infundibular spasm and the frequency of spells while awaiting repair",
-   "Lifelong cardiology surveillance with echocardiography for pulmonary regurgitation, residual outflow obstruction and arrhythmia",
-   "Timely pulmonary valve replacement for significant pulmonary regurgitation, with electrophysiological assessment for ventricular arrhythmia",
-   "Infective endocarditis prophylaxis and coordinated transition from paediatric to adult congenital cardiology follow-up",
-   "Genetic testing and counselling for 22q11.2 deletion when associated features are present"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tetralogy_of_fallot-pathway",
-   "title": "Tetralogy of Fallot: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common cyanotic congenital heart lesion beyond infancy, comprising four features: a large ventricular septal defect, an overriding aorta, right ventricular outflow tract obstruction, and right ventricular hypertrophy.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypercyanotic (tet) spell with deepening cyanosis, agitation, and a disappearing murmur",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography to define the outflow tract, septal defect, aortic override, and pulmonary artery anatomy, Chest radiograph looking for a boot-shaped heart and pulmonary vascularity, Electrocardiogram showing right axis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical repair - closure of the ventricular septal defect and relief of right ventricular outflow tract obstruction - is the definitive treatment, with a palliative systemic-to-pulmonary (Blalock-Taussig)"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting a softening or absent murmur reassuringly when it actually signals a severe hypercyanotic spell"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tetralogy of fallot."
-  }
- ],
- "tables": [
-  {
-   "id": "tetralogy_of_fallot-matrix",
-   "title": "Tetralogy of Fallot: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common cyanotic congenital heart lesion beyond infancy, comprising four features: a large ventricular septal defect, an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric cardiology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common cyanotic congenital heart lesion beyond infancy, comprising four features: a large ventricular septal defect, an overriding aorta, right ventricular outflow tract obstruction, and right ventricular hypertrophy.",
+      "The degree of cyanosis reflects the severity of right ventricular outflow obstruction; some infants are minimally cyanotic (so-called pink Fallot) while others present with marked desaturation.",
+      "A harsh systolic ejection murmur at the left upper sternal border arises from the outflow obstruction, not from the septal defect itself; the murmur softens during a hypercyanotic spell as flow across the outflow tract falls.",
+      "Hypercyanotic (tet) spells are episodes of sudden, worsening cyanosis with agitation and deep breathing, often on waking or after feeding or crying, and can be life-threatening.",
+      "Calming manoeuvres for a spell aim to increase systemic vascular resistance and outflow through the lungs: comforting the child, bringing the knees to the chest, and giving oxygen, with pharmacological support as needed.",
+      "The chest radiograph classically shows a boot-shaped heart with a concave main pulmonary artery segment and normal or reduced pulmonary vascularity.",
+      "Echocardiography confirms the anatomy and defines the outflow tract, pulmonary arteries, and coronary artery course before surgery.",
+      "Older, unrepaired children may adopt squatting to relieve exertional cyanosis by transiently raising systemic resistance and pulmonary blood flow.",
+      "Complete surgical repair, involving closure of the septal defect and relief of outflow obstruction, is the definitive treatment and is usually performed in infancy."
     ],
-    [
-     "Key Investigations",
-     "Echocardiography to define the outflow tract, septal defect, aortic override, and pulmonary artery anatomy, Chest radiograph",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Anterior and cephalad deviation of the infundibular septum during development produces right ventricular outflow tract obstruction, a malaligned ventricular septal defect, and an aorta that overrides the defect. Obstruction to pulmonary outflow, combined with the large communication between the ventricles, allows deoxygenated right ventricular blood to shunt right-to-left into the aorta, producing systemic desaturation. The volume of pulmonary blood flow and the resulting cyanosis depend dynamically on the balance between the fixed and dynamic outflow obstruction and systemic vascular resistance; a fall in systemic resistance or a spasm of the infundibulum increases right-to-left shunting and precipitates a hypercyanotic spell.",
+    "additionalDifferentials": [
+      "Transposition of the great arteries",
+      "Tricuspid atresia",
+      "Pulmonary atresia with ventricular septal defect",
+      "Truncus arteriosus",
+      "Severe isolated pulmonary stenosis",
+      "Double-outlet right ventricle"
     ],
-    [
-     "Primary Differentials",
-     "Transposition of the great arteries, Tricuspid atresia, Pulmonary atresia with ventricular septal defect",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography to define the outflow tract, septal defect, aortic override, and pulmonary artery anatomy",
+      "Chest radiograph looking for a boot-shaped heart and pulmonary vascularity",
+      "Electrocardiogram showing right axis deviation and right ventricular hypertrophy",
+      "Pulse oximetry and, in spells, assessment of acidosis",
+      "Cardiac catheterisation or CT/MR angiography when coronary or pulmonary artery anatomy is unclear",
+      "Genetic evaluation for 22q11.2 deletion when associated features are present"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical repair - closure of the ventricular septal defect and relief of right ventricular outflow tract obstruction -",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypercyanotic (tet) spell with deepening cyanosis, agitation, and a disappearing murmur",
+      "Loss of consciousness, seizures, or limpness during a spell",
+      "Duct-dependent presentation with severe outflow obstruction and cardiovascular collapse as the ductus closes",
+      "Profound or worsening hypoxaemia unresponsive to calming measures",
+      "Metabolic acidosis indicating inadequate pulmonary blood flow"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting a softening or absent murmur reassuringly when it actually signals a severe hypercyanotic spell",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely complete surgical repair the long-term outlook is generally good, though survivors need lifelong cardiology follow-up for pulmonary regurgitation, residual outflow obstruction, arrhythmia, and possible need for pulmonary valve replacement. Untreated disease carries high morbidity and mortality from progressive cyanosis, spells, and complications.",
+    "pitfalls": [
+      "Interpreting a softening or absent murmur reassuringly when it actually signals a severe hypercyanotic spell",
+      "Aggressively sedating or agitating an infant in a spell rather than using calming, resistance-raising manoeuvres",
+      "Overlooking a duct-dependent lesion in a neonate whose cyanosis worsens as the ductus arteriosus closes",
+      "Attributing exertional symptoms or squatting in an older child to behaviour rather than underlying cyanotic heart disease",
+      "Failing to screen for associated 22q11.2 deletion and other anomalies"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical repair — closure of the ventricular septal defect and relief of right ventricular outflow tract obstruction — is the definitive treatment, with a palliative systemic-to-pulmonary (Blalock-Taussig) shunt in neonates unsuitable for early repair",
+      "In duct-dependent presentation maintain ductal patency with a prostaglandin infusion until intervention",
+      "Abort a hypercyanotic spell by placing the child knee-to-chest, giving oxygen, opioid sedation and fluids, and a vasopressor (phenylephrine) or beta-blocker to raise systemic resistance and relax the infundibulum, correcting any metabolic acidosis",
+      "Prophylactic beta-blockade may reduce infundibular spasm and the frequency of spells while awaiting repair",
+      "Lifelong cardiology surveillance with echocardiography for pulmonary regurgitation, residual outflow obstruction and arrhythmia",
+      "Timely pulmonary valve replacement for significant pulmonary regurgitation, with electrophysiological assessment for ventricular arrhythmia",
+      "Infective endocarditis prophylaxis and coordinated transition from paediatric to adult congenital cardiology follow-up",
+      "Genetic testing and counselling for 22q11.2 deletion when associated features are present"
     ]
-   ],
-   "caption": "Overview comparison matrix for tetralogy of fallot."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tetralogy-of-fallot-real-image",
-   "title": "Tetralogy of Fallot: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "tetralogy_of_fallot-pathway",
+      "title": "Tetralogy of Fallot: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common cyanotic congenital heart lesion beyond infancy, comprising four features: a large ventricular septal defect, an overriding aorta, right ventricular outflow tract obstruction, and right ventricular hypertrophy.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypercyanotic (tet) spell with deepening cyanosis, agitation, and a disappearing murmur",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography to define the outflow tract, septal defect, aortic override, and pulmonary artery anatomy, Chest radiograph looking for a boot-shaped heart and pulmonary vascularity, Electrocardiogram showing right axis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical repair - closure of the ventricular septal defect and relief of right ventricular outflow tract obstruction - is the definitive treatment, with a palliative systemic-to-pulmonary (Blalock-Taussig)"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting a softening or absent murmur reassuringly when it actually signals a severe hypercyanotic spell"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tetralogy of fallot."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tetralogy_of_fallot-matrix",
+      "title": "Tetralogy of Fallot: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common cyanotic congenital heart lesion beyond infancy, comprising four features: a large ventricular septal defect, an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography to define the outflow tract, septal defect, aortic override, and pulmonary artery anatomy, Chest radiograph",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transposition of the great arteries, Tricuspid atresia, Pulmonary atresia with ventricular septal defect",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical repair - closure of the ventricular septal defect and relief of right ventricular outflow tract obstruction -",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting a softening or absent murmur reassuringly when it actually signals a severe hypercyanotic spell",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tetralogy of fallot."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tetralogy_of_fallot-dx-mgmt",
+      "title": "Diagnosis and management of Tetralogy of Fallot",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tetralogy of Fallot: cyanosis, systolic murmur and tet spells",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: hypercyanotic spell with collapse, seizures, or acidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency spell care: knee-to-chest, oxygen, sedation and a vasopressor",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography; chest radiograph; ECG; pulse oximetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echocardiography show the four features of tetralogy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transposition, tricuspid atresia or pulmonary atresia with VSD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical repair: VSD closure and relief of outflow obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prostaglandin infusion to keep the duct open in duct-dependent cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prophylactic beta-blockade to reduce spells while awaiting repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong cardiology follow-up for pulmonary regurgitation and arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Pulmonary valve replacement for significant regurgitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Timely repair gives a generally good outlook; untreated disease carries high morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tetralogy_of_fallot-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Outflow tract, septal defect, aortic override and pulmonary artery anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Boot-shaped heart with reduced pulmonary vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Right axis deviation and right ventricular hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry",
+          "cells": [
+            {
+              "text": "Degree of cyanosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation or CT or MR angiography",
+          "cells": [
+            {
+              "text": "Coronary or pulmonary artery anatomy when unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "22q11.2 deletion when associated features are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tetralogy_of_fallot-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical repair",
+          "cells": [
+            {
+              "text": "Closure of the septal defect and relief of outflow obstruction; definitive, usually in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative shunt",
+          "cells": [
+            {
+              "text": "Systemic-to-pulmonary (Blalock-Taussig) shunt where repair is not yet possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostaglandin infusion",
+          "cells": [
+            {
+              "text": "Duct-dependent presentation, until intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spell management",
+          "cells": [
+            {
+              "text": "Knee-to-chest position, oxygen, sedation, fluids, and phenylephrine or a beta-blocker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic beta-blockade",
+          "cells": [
+            {
+              "text": "Reduces infundibular spasm while awaiting repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong cardiology surveillance",
+          "cells": [
+            {
+              "text": "Pulmonary regurgitation, residual obstruction and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary valve replacement",
+          "cells": [
+            {
+              "text": "Significant pulmonary regurgitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

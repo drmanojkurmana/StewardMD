@@ -1,173 +1,462 @@
 {
- "id": "traumatic_optic_neuropathy",
- "name": "traumatic optic neuropathy",
- "aliases": [
-  "TON",
-  "post-traumatic optic neuropathy"
- ],
- "class": "non_infective",
- "system": "Ophthalmic",
- "specialty": "Neuro-ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Follows blunt or penetrating head and orbital trauma, classically frontal or brow impact that transmits force to the tightly tethered intracanalicular optic nerve.",
-   "Distinguish direct injury, such as nerve laceration, avulsion, bony fragment or sheath haematoma, from indirect injury from deceleration and shearing forces.",
-   "There is acute visual loss with a relative afferent pupillary defect, while the disc is often normal at onset and becomes pale after several weeks.",
-   "It is commonly associated with maxillofacial and orbital fractures and closed head injury and may be masked in an unconscious patient.",
-   "Computed tomography of the orbits and optic canal with fine cuts is central to assessment, identifying fractures, haematoma and nerve impingement.",
-   "Management is controversial and includes observation, high-dose corticosteroids or optic canal decompression, with no proven benefit from routine steroids.",
-   "High-dose corticosteroids are potentially harmful in the setting of significant head injury, as shown in major head-injury trials.",
-   "An orbital compartment syndrome from retrobulbar haemorrhage is a treatable emergency requiring urgent lateral canthotomy and cantholysis."
+  "id": "traumatic_optic_neuropathy",
+  "name": "traumatic optic neuropathy",
+  "aliases": [
+    "TON",
+    "post-traumatic optic neuropathy"
   ],
-  "pathophysiology": "Traumatic optic neuropathy involves both primary and secondary mechanisms. Primary injury results from direct disruption of axons or from mechanical force transmitted to the firmly anchored intracanalicular segment, where the nerve is least able to dissipate energy. Secondary injury then evolves within the confined bony optic canal through oedema, ischaemia, oxidative stress and apoptotic cell death, causing progressive axonal loss. A retrobulbar haemorrhage can additionally compress the nerve and its blood supply, producing a compartment-type ischaemic insult.",
-  "additionalDifferentials": [
-   "Orbital compartment syndrome from retrobulbar haemorrhage",
-   "Globe rupture or severe anterior segment injury",
-   "Commotio retinae or traumatic maculopathy",
-   "Retinal detachment",
-   "Occipital or cortical visual injury",
-   "Functional (non-organic) visual loss"
-  ],
-  "additionalInvestigations": [
-   "Computed tomography of the head and orbits with dedicated fine optic canal views",
-   "Assessment of visual acuity and pupils for a relative afferent pupillary defect",
-   "Colour vision testing and visual fields when the patient is able to cooperate",
-   "Measurement of intraocular pressure and assessment for proptosis and a tense orbit",
-   "Magnetic resonance imaging when a sheath haematoma or soft-tissue injury is suspected",
-   "Optical coherence tomography of the retinal nerve fibre layer at follow-up"
-  ],
-  "redFlags": [
-   "Proptosis with raised intraocular pressure and a tense orbit indicating a compartment syndrome needing emergency canthotomy",
-   "An expanding orbital haematoma",
-   "Bilateral visual loss or no perception of light",
-   "Associated significant intracranial injury"
-  ],
-  "prognosis": "Outcome is variable; poor prognostic features include no perception of light at presentation, an optic canal fracture, older age and loss of consciousness. Some patients recover useful vision spontaneously.",
-  "pitfalls": [
-   "Missing the diagnosis in an unconscious or multiply injured patient",
-   "Administering high-dose corticosteroids in significant head injury despite evidence of harm",
-   "Overlooking a treatable retrobulbar haemorrhage requiring urgent orbital decompression",
-   "Delaying surgical decompression when a clear compressive lesion is present"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Kanski's Clinical Ophthalmology",
-   "International Optic Nerve Trauma Study"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relieve orbital compartment pressure emergently with lateral canthotomy and cantholysis when a retrobulbar haemorrhage threatens the nerve",
-   "Consider observation, high-dose corticosteroids or optic canal decompression on an individualised basis, recognising that routine steroids are of unproven benefit",
-   "Image the head and orbits with fine-cut CT of the optic canal to identify fracture, haematoma or nerve impingement amenable to surgery",
-   "Undertake surgical decompression of the optic canal or evacuation of a compressive sheath haematoma in selected cases with impingement",
-   "Serially monitor visual acuity, pupillary responses and colour vision to track the afferent defect and treatment response",
-   "Manage jointly with neuro-ophthalmology and maxillofacial or orbital surgery, alongside treatment of associated head and facial injuries"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "traumatic_optic_neuropathy-pathway",
-   "title": "traumatic optic neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Follows blunt or penetrating head and orbital trauma, classically frontal or brow impact that transmits force to the tightly tethered intracanalicular optic nerve.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Proptosis with raised intraocular pressure and a tense orbit indicating a compartment syndrome needing emergency canthotomy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Computed tomography of the head and orbits with dedicated fine optic canal views, Assessment of visual acuity and pupils for a relative afferent pupillary defect, Colour vision testing and visual fields when the patient is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve orbital compartment pressure emergently with lateral canthotomy and cantholysis when a retrobulbar haemorrhage threatens the nerve"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis in an unconscious or multiply injured patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of traumatic optic neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "traumatic_optic_neuropathy-matrix",
-   "title": "traumatic optic neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Follows blunt or penetrating head and orbital trauma, classically frontal or brow impact that transmits force to the tightly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmic",
+  "specialty": "Neuro-ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Follows blunt or penetrating head and orbital trauma, classically frontal or brow impact that transmits force to the tightly tethered intracanalicular optic nerve.",
+      "Distinguish direct injury, such as nerve laceration, avulsion, bony fragment or sheath haematoma, from indirect injury from deceleration and shearing forces.",
+      "There is acute visual loss with a relative afferent pupillary defect, while the disc is often normal at onset and becomes pale after several weeks.",
+      "It is commonly associated with maxillofacial and orbital fractures and closed head injury and may be masked in an unconscious patient.",
+      "Computed tomography of the orbits and optic canal with fine cuts is central to assessment, identifying fractures, haematoma and nerve impingement.",
+      "Management is controversial and includes observation, high-dose corticosteroids or optic canal decompression, with no proven benefit from routine steroids.",
+      "High-dose corticosteroids are potentially harmful in the setting of significant head injury, as shown in major head-injury trials.",
+      "An orbital compartment syndrome from retrobulbar haemorrhage is a treatable emergency requiring urgent lateral canthotomy and cantholysis."
     ],
-    [
-     "Key Investigations",
-     "Computed tomography of the head and orbits with dedicated fine optic canal views, Assessment of visual acuity and pupils for a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Traumatic optic neuropathy involves both primary and secondary mechanisms. Primary injury results from direct disruption of axons or from mechanical force transmitted to the firmly anchored intracanalicular segment, where the nerve is least able to dissipate energy. Secondary injury then evolves within the confined bony optic canal through oedema, ischaemia, oxidative stress and apoptotic cell death, causing progressive axonal loss. A retrobulbar haemorrhage can additionally compress the nerve and its blood supply, producing a compartment-type ischaemic insult.",
+    "additionalDifferentials": [
+      "Orbital compartment syndrome from retrobulbar haemorrhage",
+      "Globe rupture or severe anterior segment injury",
+      "Commotio retinae or traumatic maculopathy",
+      "Retinal detachment",
+      "Occipital or cortical visual injury",
+      "Functional (non-organic) visual loss"
     ],
-    [
-     "Primary Differentials",
-     "Orbital compartment syndrome from retrobulbar haemorrhage, Globe rupture or severe anterior segment injury, Commotio retinae or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Computed tomography of the head and orbits with dedicated fine optic canal views",
+      "Assessment of visual acuity and pupils for a relative afferent pupillary defect",
+      "Colour vision testing and visual fields when the patient is able to cooperate",
+      "Measurement of intraocular pressure and assessment for proptosis and a tense orbit",
+      "Magnetic resonance imaging when a sheath haematoma or soft-tissue injury is suspected",
+      "Optical coherence tomography of the retinal nerve fibre layer at follow-up"
     ],
-    [
-     "Management Strategy",
-     "Relieve orbital compartment pressure emergently with lateral canthotomy and cantholysis when a retrobulbar haemorrhage threatens",
-     "Core treatment modality"
+    "redFlags": [
+      "Proptosis with raised intraocular pressure and a tense orbit indicating a compartment syndrome needing emergency canthotomy",
+      "An expanding orbital haematoma",
+      "Bilateral visual loss or no perception of light",
+      "Associated significant intracranial injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis in an unconscious or multiply injured patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable; poor prognostic features include no perception of light at presentation, an optic canal fracture, older age and loss of consciousness. Some patients recover useful vision spontaneously.",
+    "pitfalls": [
+      "Missing the diagnosis in an unconscious or multiply injured patient",
+      "Administering high-dose corticosteroids in significant head injury despite evidence of harm",
+      "Overlooking a treatable retrobulbar haemorrhage requiring urgent orbital decompression",
+      "Delaying surgical decompression when a clear compressive lesion is present"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Kanski's Clinical Ophthalmology",
+      "International Optic Nerve Trauma Study"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relieve orbital compartment pressure emergently with lateral canthotomy and cantholysis when a retrobulbar haemorrhage threatens the nerve",
+      "Consider observation, high-dose corticosteroids or optic canal decompression on an individualised basis, recognising that routine steroids are of unproven benefit",
+      "Image the head and orbits with fine-cut CT of the optic canal to identify fracture, haematoma or nerve impingement amenable to surgery",
+      "Undertake surgical decompression of the optic canal or evacuation of a compressive sheath haematoma in selected cases with impingement",
+      "Serially monitor visual acuity, pupillary responses and colour vision to track the afferent defect and treatment response",
+      "Manage jointly with neuro-ophthalmology and maxillofacial or orbital surgery, alongside treatment of associated head and facial injuries"
     ]
-   ],
-   "caption": "Overview comparison matrix for traumatic optic neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "traumatic-optic-neuropathy-real-image",
-   "title": "traumatic optic neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "traumatic_optic_neuropathy-pathway",
+      "title": "traumatic optic neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Follows blunt or penetrating head and orbital trauma, classically frontal or brow impact that transmits force to the tightly tethered intracanalicular optic nerve.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Proptosis with raised intraocular pressure and a tense orbit indicating a compartment syndrome needing emergency canthotomy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Computed tomography of the head and orbits with dedicated fine optic canal views, Assessment of visual acuity and pupils for a relative afferent pupillary defect, Colour vision testing and visual fields when the patient is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve orbital compartment pressure emergently with lateral canthotomy and cantholysis when a retrobulbar haemorrhage threatens the nerve"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis in an unconscious or multiply injured patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of traumatic optic neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "traumatic_optic_neuropathy-matrix",
+      "title": "traumatic optic neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Follows blunt or penetrating head and orbital trauma, classically frontal or brow impact that transmits force to the tightly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Computed tomography of the head and orbits with dedicated fine optic canal views, Assessment of visual acuity and pupils for a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Orbital compartment syndrome from retrobulbar haemorrhage, Globe rupture or severe anterior segment injury, Commotio retinae or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve orbital compartment pressure emergently with lateral canthotomy and cantholysis when a retrobulbar haemorrhage threatens",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis in an unconscious or multiply injured patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for traumatic optic neuropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "traumatic_optic_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of traumatic optic neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected traumatic optic neuropathy: visual loss after brow or orbital trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: tense orbit with raised pressure, or expanding retrobulbar haematoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent lateral canthotomy and cantholysis for orbital compartment syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fine-cut CT of optic canal; acuity and pupil testing; intraocular pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT show canal fracture, haematoma or nerve impingement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider globe injury, retinal detachment or functional visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emergency canthotomy for retrobulbar haemorrhage threatening the nerve",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Individualised steroids or canal decompression; steroids unproven",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical decompression for canal impingement or sheath haematoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial monitoring of acuity, pupils and colour vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Joint care with neuro-ophthalmology and facial surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable; no light perception at presentation and canal fracture carry poor prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "traumatic_optic_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fine-cut CT of head and orbits with optic canal views",
+          "cells": [
+            {
+              "text": "Fracture, haematoma or nerve impingement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity and relative afferent pupillary defect",
+          "cells": [
+            {
+              "text": "Optic nerve function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour vision and visual fields",
+          "cells": [
+            {
+              "text": "Defect pattern when cooperative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure and orbit examination",
+          "cells": [
+            {
+              "text": "Proptosis and tense orbit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Sheath haematoma or soft-tissue injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer",
+          "cells": [
+            {
+              "text": "Follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traumatic_optic_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital compartment syndrome from retrobulbar haemorrhage",
+          "cells": [
+            {
+              "text": "Tense orbit with raised pressure; treatable by canthotomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Globe rupture or anterior segment injury",
+          "cells": [
+            {
+              "text": "Visible globe injury on examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal detachment or commotio retinae",
+          "cells": [
+            {
+              "text": "Retinal rather than optic nerve injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "traumatic_optic_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency lateral canthotomy and cantholysis",
+          "cells": [
+            {
+              "text": "Retrobulbar haemorrhage threatening the nerve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individualised steroids or optic canal decompression",
+          "cells": [
+            {
+              "text": "Routine steroids of unproven benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fine-cut CT of the optic canal",
+          "cells": [
+            {
+              "text": "Fracture, haematoma or nerve impingement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Selected cases with canal impingement or sheath haematoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Acuity, pupillary responses and colour vision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

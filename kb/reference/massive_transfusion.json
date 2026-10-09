@@ -1,172 +1,553 @@
 {
- "id": "massive_transfusion",
- "name": "Massive transfusion",
- "aliases": [
-  "massive transfusion protocol",
-  "MTP",
-  "massive haemorrhage protocol"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion",
- "specialty": "Transfusion & Haemostasis Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Commonly defined as replacement of roughly one whole blood volume within about 24 hours, or transfusion of around ten or more red cell units in that period; rapid-loss definitions (several units within an hour) are also used in trauma",
-   "Modern resuscitation favours a balanced ratio of red cells, plasma, and platelets that approximates whole blood rather than red cells alone, to limit dilutional coagulopathy",
-   "The lethal triad of hypothermia, acidosis, and coagulopathy compounds bleeding and must be actively prevented with warmed fluids and blood products",
-   "Citrate anticoagulant in stored products binds calcium, so ionised hypocalcaemia is common during rapid transfusion and should be monitored and corrected",
-   "Hyperkalaemia can occur, especially with older stored red cells and rapid infusion in neonates or patients with renal impairment",
-   "Point-of-care viscoelastic testing (thromboelastography or ROTEM) helps guide targeted product replacement in preference to fixed ratios once bleeding is controlled",
-   "Tranexamic acid given early in traumatic haemorrhage reduces mortality; early activation of an institutional protocol streamlines product delivery"
+  "id": "massive_transfusion",
+  "name": "Massive transfusion",
+  "aliases": [
+    "massive transfusion protocol",
+    "MTP",
+    "massive haemorrhage protocol"
   ],
-  "pathophysiology": "Massive haemorrhage and its replacement produce a combination of dilutional and consumptive coagulopathy: clotting factors and platelets are lost with bleeding and diluted by crystalloid and red cell replacement. Hypoperfusion drives metabolic acidosis and, together with infusion of cold products, causes hypothermia; both impair enzymatic clotting and platelet function. Citrate load from banked products chelates ionised calcium and magnesium, further impairing coagulation and cardiac contractility, while potassium leaked from stored red cells can accumulate. The result is a self-perpetuating cycle of bleeding, impaired haemostasis, and shock unless actively interrupted.",
-  "additionalDifferentials": [
-   "Disseminated intravascular coagulation",
-   "Pre-existing anticoagulant or antiplatelet effect",
-   "Inherited or acquired factor deficiency",
-   "Hyperfibrinolysis",
-   "Surgical or mechanical bleeding requiring intervention"
-  ],
-  "additionalInvestigations": [
-   "Serial full blood count, prothrombin time/INR, activated partial thromboplastin time, and fibrinogen",
-   "Ionised calcium, potassium, and arterial blood gas with lactate and pH",
-   "Viscoelastic haemostatic assays (TEG/ROTEM) for goal-directed replacement",
-   "Core temperature monitoring",
-   "Type and crossmatch with repeat sampling to detect ongoing loss"
-  ],
-  "redFlags": [
-   "Ongoing uncontrolled haemorrhage with haemodynamic instability requiring emergency surgical or interventional haemostasis",
-   "Refractory hypocalcaemia with cardiovascular compromise during rapid transfusion",
-   "Rising potassium with electrocardiographic changes",
-   "Persistent coagulopathy despite balanced product resuscitation, suggesting DIC or hyperfibrinolysis"
-  ],
-  "prognosis": "Outcome depends chiefly on control of the bleeding source and speed of resuscitation; early balanced transfusion, prevention of the lethal triad, and timely antifibrinolytic therapy improve survival, whereas delayed correction of coagulopathy and shock markedly increases mortality.",
-  "pitfalls": [
-   "Over-reliance on crystalloid resuscitation, worsening dilutional coagulopathy and tissue oedema",
-   "Neglecting patient and fluid warming, allowing hypothermia-driven coagulopathy",
-   "Forgetting to monitor and replace ionised calcium during rapid citrate exposure",
-   "Continuing fixed high-ratio product delivery after bleeding is controlled rather than switching to laboratory-guided replacement"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "AABB Technical Manual"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Activate a major haemorrhage protocol with early, balanced transfusion of red cells, plasma and platelets approximating whole blood",
-   "Achieve rapid definitive control of the bleeding source by surgical, endoscopic or interventional radiology means",
-   "Give an antifibrinolytic (tranexamic acid) early, particularly in trauma",
-   "Prevent and correct the lethal triad by warming the patient and all fluids and products and by correcting metabolic acidosis",
-   "Monitor and correct citrate-induced ionised hypocalcaemia with intravenous calcium",
-   "Monitor for and treat hyperkalaemia, especially with rapidly infused older red cell units",
-   "Transition to viscoelastic-guided (TEG/ROTEM) goal-directed component replacement once bleeding is controlled, with cryoprecipitate or fibrinogen concentrate for hypofibrinogenaemia",
-   "Involve transfusion, haematology and critical care teams"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "massive_transfusion-pathway",
-   "title": "Massive transfusion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Commonly defined as replacement of roughly one whole blood volume within about 24 hours, or transfusion of around ten or more red cell units in that period; rapid-loss definitions (several units within an hour) are also used in trauma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ongoing uncontrolled haemorrhage with haemodynamic instability requiring emergency surgical or interventional haemostasis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial full blood count, prothrombin time/INR, activated partial thromboplastin time, and fibrinogen, Ionised calcium, potassium, and arterial blood gas with lactate and pH, Viscoelastic haemostatic assays (TEG/ROTEM) for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Activate a major haemorrhage protocol with early, balanced transfusion of red cells, plasma and platelets approximating whole blood"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Over-reliance on crystalloid resuscitation, worsening dilutional coagulopathy and tissue oedema"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of massive transfusion."
-  }
- ],
- "tables": [
-  {
-   "id": "massive_transfusion-matrix",
-   "title": "Massive transfusion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Commonly defined as replacement of roughly one whole blood volume within about 24 hours, or transfusion of around ten or more red",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion",
+  "specialty": "Transfusion & Haemostasis Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Commonly defined as replacement of roughly one whole blood volume within about 24 hours, or transfusion of around ten or more red cell units in that period; rapid-loss definitions (several units within an hour) are also used in trauma",
+      "Modern resuscitation favours a balanced ratio of red cells, plasma, and platelets that approximates whole blood rather than red cells alone, to limit dilutional coagulopathy",
+      "The lethal triad of hypothermia, acidosis, and coagulopathy compounds bleeding and must be actively prevented with warmed fluids and blood products",
+      "Citrate anticoagulant in stored products binds calcium, so ionised hypocalcaemia is common during rapid transfusion and should be monitored and corrected",
+      "Hyperkalaemia can occur, especially with older stored red cells and rapid infusion in neonates or patients with renal impairment",
+      "Point-of-care viscoelastic testing (thromboelastography or ROTEM) helps guide targeted product replacement in preference to fixed ratios once bleeding is controlled",
+      "Tranexamic acid given early in traumatic haemorrhage reduces mortality; early activation of an institutional protocol streamlines product delivery"
     ],
-    [
-     "Key Investigations",
-     "Serial full blood count, prothrombin time/INR, activated partial thromboplastin time, and fibrinogen, Ionised calcium, potassium,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Massive haemorrhage and its replacement produce a combination of dilutional and consumptive coagulopathy: clotting factors and platelets are lost with bleeding and diluted by crystalloid and red cell replacement. Hypoperfusion drives metabolic acidosis and, together with infusion of cold products, causes hypothermia; both impair enzymatic clotting and platelet function. Citrate load from banked products chelates ionised calcium and magnesium, further impairing coagulation and cardiac contractility, while potassium leaked from stored red cells can accumulate. The result is a self-perpetuating cycle of bleeding, impaired haemostasis, and shock unless actively interrupted.",
+    "additionalDifferentials": [
+      "Disseminated intravascular coagulation",
+      "Pre-existing anticoagulant or antiplatelet effect",
+      "Inherited or acquired factor deficiency",
+      "Hyperfibrinolysis",
+      "Surgical or mechanical bleeding requiring intervention"
     ],
-    [
-     "Primary Differentials",
-     "Disseminated intravascular coagulation, Pre-existing anticoagulant or antiplatelet effect, Inherited or acquired factor deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial full blood count, prothrombin time/INR, activated partial thromboplastin time, and fibrinogen",
+      "Ionised calcium, potassium, and arterial blood gas with lactate and pH",
+      "Viscoelastic haemostatic assays (TEG/ROTEM) for goal-directed replacement",
+      "Core temperature monitoring",
+      "Type and crossmatch with repeat sampling to detect ongoing loss"
     ],
-    [
-     "Management Strategy",
-     "Activate a major haemorrhage protocol with early, balanced transfusion of red cells, plasma and platelets approximating whole",
-     "Core treatment modality"
+    "redFlags": [
+      "Ongoing uncontrolled haemorrhage with haemodynamic instability requiring emergency surgical or interventional haemostasis",
+      "Refractory hypocalcaemia with cardiovascular compromise during rapid transfusion",
+      "Rising potassium with electrocardiographic changes",
+      "Persistent coagulopathy despite balanced product resuscitation, suggesting DIC or hyperfibrinolysis"
     ],
-    [
-     "Clinical Pitfall",
-     "Over-reliance on crystalloid resuscitation, worsening dilutional coagulopathy and tissue oedema",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends chiefly on control of the bleeding source and speed of resuscitation; early balanced transfusion, prevention of the lethal triad, and timely antifibrinolytic therapy improve survival, whereas delayed correction of coagulopathy and shock markedly increases mortality.",
+    "pitfalls": [
+      "Over-reliance on crystalloid resuscitation, worsening dilutional coagulopathy and tissue oedema",
+      "Neglecting patient and fluid warming, allowing hypothermia-driven coagulopathy",
+      "Forgetting to monitor and replace ionised calcium during rapid citrate exposure",
+      "Continuing fixed high-ratio product delivery after bleeding is controlled rather than switching to laboratory-guided replacement"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "AABB Technical Manual"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Activate a major haemorrhage protocol with early, balanced transfusion of red cells, plasma and platelets approximating whole blood",
+      "Achieve rapid definitive control of the bleeding source by surgical, endoscopic or interventional radiology means",
+      "Give an antifibrinolytic (tranexamic acid) early, particularly in trauma",
+      "Prevent and correct the lethal triad by warming the patient and all fluids and products and by correcting metabolic acidosis",
+      "Monitor and correct citrate-induced ionised hypocalcaemia with intravenous calcium",
+      "Monitor for and treat hyperkalaemia, especially with rapidly infused older red cell units",
+      "Transition to viscoelastic-guided (TEG/ROTEM) goal-directed component replacement once bleeding is controlled, with cryoprecipitate or fibrinogen concentrate for hypofibrinogenaemia",
+      "Involve transfusion, haematology and critical care teams"
     ]
-   ],
-   "caption": "Overview comparison matrix for massive transfusion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "massive-transfusion-real-image",
-   "title": "Massive transfusion: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "massive_transfusion-pathway",
+      "title": "Massive transfusion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Commonly defined as replacement of roughly one whole blood volume within about 24 hours, or transfusion of around ten or more red cell units in that period; rapid-loss definitions (several units within an hour) are also used in trauma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ongoing uncontrolled haemorrhage with haemodynamic instability requiring emergency surgical or interventional haemostasis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial full blood count, prothrombin time/INR, activated partial thromboplastin time, and fibrinogen, Ionised calcium, potassium, and arterial blood gas with lactate and pH, Viscoelastic haemostatic assays (TEG/ROTEM) for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Activate a major haemorrhage protocol with early, balanced transfusion of red cells, plasma and platelets approximating whole blood"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Over-reliance on crystalloid resuscitation, worsening dilutional coagulopathy and tissue oedema"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of massive transfusion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "massive_transfusion-matrix",
+      "title": "Massive transfusion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Commonly defined as replacement of roughly one whole blood volume within about 24 hours, or transfusion of around ten or more red",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial full blood count, prothrombin time/INR, activated partial thromboplastin time, and fibrinogen, Ionised calcium, potassium,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Disseminated intravascular coagulation, Pre-existing anticoagulant or antiplatelet effect, Inherited or acquired factor deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Activate a major haemorrhage protocol with early, balanced transfusion of red cells, plasma and platelets approximating whole",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-reliance on crystalloid resuscitation, worsening dilutional coagulopathy and tissue oedema",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for massive transfusion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 113-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "massive_transfusion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial full blood count, PT/INR, APTT and fibrinogen",
+          "cells": [
+            {
+              "text": "Coagulation status and fibrinogen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised calcium, potassium, arterial blood gas with lactate and pH",
+          "cells": [
+            {
+              "text": "Calcium, potassium, lactate and pH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viscoelastic haemostatic assays (TEG/ROTEM)",
+          "cells": [
+            {
+              "text": "Goal-directed replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core temperature monitoring",
+          "cells": [
+            {
+              "text": "Hypothermia, part of the lethal triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type and crossmatch with repeat sampling",
+          "cells": [
+            {
+              "text": "Ongoing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Persistent coagulopathy despite balanced product resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical or mechanical bleeding",
+          "cells": [
+            {
+              "text": "Ongoing uncontrolled haemorrhage needing surgical or interventional haemostasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activate major haemorrhage protocol",
+          "cells": [
+            {
+              "text": "Early, balanced transfusion of red cells, plasma and platelets approximating whole blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Surgical, endoscopic or interventional radiology control of the bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "Early, particularly in trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent the lethal triad",
+          "cells": [
+            {
+              "text": "Warm the patient and all fluids and products; correct metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ionised hypocalcaemia",
+          "cells": [
+            {
+              "text": "Monitor and correct citrate-induced hypocalcaemia with intravenous calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia",
+          "cells": [
+            {
+              "text": "Monitor and treat, especially with rapidly infused older red cell units"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viscoelastic-guided replacement",
+          "cells": [
+            {
+              "text": "Once bleeding is controlled; cryoprecipitate or fibrinogen concentrate for hypofibrinogenaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary involvement",
+          "cells": [
+            {
+              "text": "Transfusion, haematology and critical care teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_transfusion-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Characteristics of selected blood components",
+      "rowHeader": "Component",
+      "columns": [
+        "Volume, mL",
+        "Content",
+        "Clinical response"
+      ],
+      "rows": [
+        {
+          "parameter": "PRBC",
+          "cells": [
+            {
+              "text": "180-200"
+            },
+            {
+              "text": "Red cells with variable leukocyte content and a small amount of plasma"
+            },
+            {
+              "text": "Raises hemoglobin by 10 g/L and hematocrit by 3%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (random donor unit)",
+          "cells": [
+            {
+              "text": "50-70"
+            },
+            {
+              "text": "5.5 x 10^10 per random-donor unit"
+            },
+            {
+              "text": "Raises platelet count by 5000-10,000/uL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (single-donor apheresis product)",
+          "cells": [
+            {
+              "text": "200-400"
+            },
+            {
+              "text": ">=3 x 10^11 per single-donor apheresis product"
+            },
+            {
+              "text": "Corrected count increment >=10 x 10^9/L within 1 h and >=7.5 x 10^9/L within 24 h after transfusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FFP",
+          "cells": [
+            {
+              "text": "200-250"
+            },
+            {
+              "text": "Plasma proteins: coagulation factors, proteins C and S, antithrombin"
+            },
+            {
+              "text": "Raises coagulation factors by about 2%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cryoprecipitate",
+          "cells": [
+            {
+              "text": "10-15"
+            },
+            {
+              "text": "Cold-insoluble plasma proteins: fibrinogen, factor VIII, vWF"
+            },
+            {
+              "text": "Used as topical fibrin glue; also supplies 80 IU of factor VIII"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The PDF prints the platelet component as two rows; the second row has no component label and is read here as the apheresis product (CCI = corrected count increment)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "massive_transfusion-dx-mgmt",
+      "title": "Diagnosis and management of Massive transfusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Major haemorrhage with rapid transfusion of red cells, plasma and platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Uncontrolled bleeding, refractory hypocalcaemia or rising potassium with ECG change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical, endoscopic or interventional haemostasis; major haemorrhage protocol",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC, coagulation screen, fibrinogen, ionised calcium, blood gas and viscoelastic tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is coagulopathy or ongoing loss confirmed on repeat tests?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat sampling and crossmatch to detect ongoing loss; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early balanced red cells, plasma and platelets approximating whole blood",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early tranexamic acid, particularly in trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Warm products; correct acidosis and ionised hypocalcaemia with IV calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Viscoelastic-guided replacement; fibrinogen concentrate or cryoprecipitate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Goal-directed component replacement once bleeding is controlled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

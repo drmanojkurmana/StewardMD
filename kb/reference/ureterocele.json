@@ -1,172 +1,459 @@
 {
- "id": "ureterocele",
- "name": "Ureterocele",
- "aliases": [
-  "orthotopic ureterocele",
-  "ectopic ureterocele",
-  "cobra-head deformity"
- ],
- "class": "non_infective",
- "system": "Renal / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A cystic dilatation of the terminal intravesical ureter, classified as intravesical (orthotopic), lying entirely within the bladder, or ectopic, extending into the bladder neck or urethra",
-   "In children, ectopic ureteroceles most often arise from the upper-pole moiety of a duplex system, in accordance with the Weigert-Meyer rule (the upper-pole ureter inserts inferomedially and is prone to obstruction/ureterocele, the lower-pole ureter inserts superolaterally and tends to reflux)",
-   "In adults, simple orthotopic ureteroceles are usually associated with single systems and may be incidental",
-   "May present with antenatal hydronephrosis, urinary tract infection, obstruction, a palpable mass, or, in girls, prolapse of an ectopic ureterocele through the urethra",
-   "On urography a ureterocele can produce the classic cobra-head or spring-onion appearance",
-   "Large ureteroceles can obstruct the ipsilateral moiety, the contralateral ureter, or the bladder outlet",
-   "Management options include endoscopic incision/puncture for decompression, upper-pole heminephrectomy for a non-functioning moiety, and ureteric reimplantation or complete reconstruction depending on function, reflux, and anatomy"
+  "id": "ureterocele",
+  "name": "Ureterocele",
+  "aliases": [
+    "orthotopic ureterocele",
+    "ectopic ureterocele",
+    "cobra-head deformity"
   ],
-  "pathophysiology": "A ureterocele is thought to result from a developmental failure of the terminal ureteric membrane (Chwalla's membrane) to resorb normally, together with abnormal muscular development of the distal ureter, producing a cystic ballooning of the intravesical ureter beneath the bladder mucosa. In duplex systems the upper-pole ureter drains more caudally and medially and is the segment that typically forms an obstructing ureterocele, following the Weigert-Meyer rule. The dilated terminal sac can obstruct urine drainage from its own moiety and, when large or ectopic, may distort the bladder base and outlet, causing wider urinary tract dysfunction and predisposing to infection and upper-tract deterioration.",
-  "additionalDifferentials": [
-   "Ectopic ureter without a ureterocele",
-   "Ureteropelvic junction obstruction",
-   "Primary obstructive megaureter",
-   "Bladder diverticulum or cyst near the trigone",
-   "Pseudoureterocele from a bladder tumour or oedema around the orifice",
-   "Vesicoureteric reflux in a duplex lower moiety"
-  ],
-  "additionalInvestigations": [
-   "Renal and bladder ultrasound to identify the intravesical cyst and duplex anatomy",
-   "Micturating cystourethrogram (MCUG) to assess reflux and ureterocele configuration",
-   "MAG3 or DMSA renography to assess function of the affected moiety",
-   "Cystoscopy to define the ureterocele and orifice anatomy",
-   "MR urography in complex duplex anatomy",
-   "Urinalysis and culture when infection is present"
-  ],
-  "redFlags": [
-   "Bladder outlet obstruction or urinary retention from a large ectopic ureterocele",
-   "Prolapse of an ectopic ureterocele through the urethra in a girl",
-   "Febrile urinary tract infection or urosepsis with obstruction",
-   "Deteriorating function of the affected or contralateral renal unit"
-  ],
-  "prognosis": "Outcome depends on the function of the affected moiety and on associated reflux and obstruction; simple orthotopic ureteroceles often do well with endoscopic or conservative management, while complex ectopic duplex ureteroceles may require staged reconstruction but generally preserve overall renal function with appropriate treatment.",
-  "pitfalls": [
-   "Forgetting the Weigert-Meyer rule and misidentifying which moiety the ureterocele drains",
-   "Endoscopic incision creating iatrogenic reflux into the decompressed moiety",
-   "Overlooking obstruction of the contralateral ureter or bladder outlet by a large ureterocele",
-   "Assuming a poorly functioning upper pole must be removed without confirming function"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Gearhart, Rink & Mouriquand: Pediatric Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat and, where recurrent, prophylax against urinary tract infection to protect the affected moiety and upper tracts",
-   "Perform endoscopic transurethral incision or puncture to decompress an obstructing or infected ureterocele, often as the initial intervention in children",
-   "Undertake definitive reconstruction such as upper-pole heminephrectomy for a non-functioning moiety, ureteric reimplantation, or excision with bladder-base repair for complex ectopic duplex ureteroceles",
-   "Observe small, incidental, orthotopic single-system ureteroceles with good drainage",
-   "Monitor with serial renal and bladder ultrasound and MAG3 or DMSA renography to track moiety function, reflux and obstruction",
-   "Manage through a paediatric urology service, coordinating staged reconstruction where required"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ureterocele-pathway",
-   "title": "Ureterocele: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A cystic dilatation of the terminal intravesical ureter, classified as intravesical (orthotopic), lying entirely within the bladder, or ectopic, extending into the bladder neck or urethra",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bladder outlet obstruction or urinary retention from a large ectopic ureterocele",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal and bladder ultrasound to identify the intravesical cyst and duplex anatomy, Micturating cystourethrogram (MCUG) to assess reflux and ureterocele configuration, MAG3 or DMSA renography to assess function of the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat and, where recurrent, prophylax against urinary tract infection to protect the affected moiety and upper tracts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Forgetting the Weigert-Meyer rule and misidentifying which moiety the ureterocele drains"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ureterocele."
-  }
- ],
- "tables": [
-  {
-   "id": "ureterocele-matrix",
-   "title": "Ureterocele: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A cystic dilatation of the terminal intravesical ureter, classified as intravesical (orthotopic), lying entirely within the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A cystic dilatation of the terminal intravesical ureter, classified as intravesical (orthotopic), lying entirely within the bladder, or ectopic, extending into the bladder neck or urethra",
+      "In children, ectopic ureteroceles most often arise from the upper-pole moiety of a duplex system, in accordance with the Weigert-Meyer rule (the upper-pole ureter inserts inferomedially and is prone to obstruction/ureterocele, the lower-pole ureter inserts superolaterally and tends to reflux)",
+      "In adults, simple orthotopic ureteroceles are usually associated with single systems and may be incidental",
+      "May present with antenatal hydronephrosis, urinary tract infection, obstruction, a palpable mass, or, in girls, prolapse of an ectopic ureterocele through the urethra",
+      "On urography a ureterocele can produce the classic cobra-head or spring-onion appearance",
+      "Large ureteroceles can obstruct the ipsilateral moiety, the contralateral ureter, or the bladder outlet",
+      "Management options include endoscopic incision/puncture for decompression, upper-pole heminephrectomy for a non-functioning moiety, and ureteric reimplantation or complete reconstruction depending on function, reflux, and anatomy"
     ],
-    [
-     "Key Investigations",
-     "Renal and bladder ultrasound to identify the intravesical cyst and duplex anatomy, Micturating cystourethrogram (MCUG) to assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A ureterocele is thought to result from a developmental failure of the terminal ureteric membrane (Chwalla's membrane) to resorb normally, together with abnormal muscular development of the distal ureter, producing a cystic ballooning of the intravesical ureter beneath the bladder mucosa. In duplex systems the upper-pole ureter drains more caudally and medially and is the segment that typically forms an obstructing ureterocele, following the Weigert-Meyer rule. The dilated terminal sac can obstruct urine drainage from its own moiety and, when large or ectopic, may distort the bladder base and outlet, causing wider urinary tract dysfunction and predisposing to infection and upper-tract deterioration.",
+    "additionalDifferentials": [
+      "Ectopic ureter without a ureterocele",
+      "Ureteropelvic junction obstruction",
+      "Primary obstructive megaureter",
+      "Bladder diverticulum or cyst near the trigone",
+      "Pseudoureterocele from a bladder tumour or oedema around the orifice",
+      "Vesicoureteric reflux in a duplex lower moiety"
     ],
-    [
-     "Primary Differentials",
-     "Ectopic ureter without a ureterocele, Ureteropelvic junction obstruction, Primary obstructive megaureter",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal and bladder ultrasound to identify the intravesical cyst and duplex anatomy",
+      "Micturating cystourethrogram (MCUG) to assess reflux and ureterocele configuration",
+      "MAG3 or DMSA renography to assess function of the affected moiety",
+      "Cystoscopy to define the ureterocele and orifice anatomy",
+      "MR urography in complex duplex anatomy",
+      "Urinalysis and culture when infection is present"
     ],
-    [
-     "Management Strategy",
-     "Treat and, where recurrent, prophylax against urinary tract infection to protect the affected moiety and upper tracts",
-     "Core treatment modality"
+    "redFlags": [
+      "Bladder outlet obstruction or urinary retention from a large ectopic ureterocele",
+      "Prolapse of an ectopic ureterocele through the urethra in a girl",
+      "Febrile urinary tract infection or urosepsis with obstruction",
+      "Deteriorating function of the affected or contralateral renal unit"
     ],
-    [
-     "Clinical Pitfall",
-     "Forgetting the Weigert-Meyer rule and misidentifying which moiety the ureterocele drains",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the function of the affected moiety and on associated reflux and obstruction; simple orthotopic ureteroceles often do well with endoscopic or conservative management, while complex ectopic duplex ureteroceles may require staged reconstruction but generally preserve overall renal function with appropriate treatment.",
+    "pitfalls": [
+      "Forgetting the Weigert-Meyer rule and misidentifying which moiety the ureterocele drains",
+      "Endoscopic incision creating iatrogenic reflux into the decompressed moiety",
+      "Overlooking obstruction of the contralateral ureter or bladder outlet by a large ureterocele",
+      "Assuming a poorly functioning upper pole must be removed without confirming function"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Gearhart, Rink & Mouriquand: Pediatric Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat and, where recurrent, prophylax against urinary tract infection to protect the affected moiety and upper tracts",
+      "Perform endoscopic transurethral incision or puncture to decompress an obstructing or infected ureterocele, often as the initial intervention in children",
+      "Undertake definitive reconstruction such as upper-pole heminephrectomy for a non-functioning moiety, ureteric reimplantation, or excision with bladder-base repair for complex ectopic duplex ureteroceles",
+      "Observe small, incidental, orthotopic single-system ureteroceles with good drainage",
+      "Monitor with serial renal and bladder ultrasound and MAG3 or DMSA renography to track moiety function, reflux and obstruction",
+      "Manage through a paediatric urology service, coordinating staged reconstruction where required"
     ]
-   ],
-   "caption": "Overview comparison matrix for ureterocele."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ureterocele-real-image",
-   "title": "Ureterocele: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "ureterocele-pathway",
+      "title": "Ureterocele: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A cystic dilatation of the terminal intravesical ureter, classified as intravesical (orthotopic), lying entirely within the bladder, or ectopic, extending into the bladder neck or urethra",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bladder outlet obstruction or urinary retention from a large ectopic ureterocele",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal and bladder ultrasound to identify the intravesical cyst and duplex anatomy, Micturating cystourethrogram (MCUG) to assess reflux and ureterocele configuration, MAG3 or DMSA renography to assess function of the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat and, where recurrent, prophylax against urinary tract infection to protect the affected moiety and upper tracts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Forgetting the Weigert-Meyer rule and misidentifying which moiety the ureterocele drains"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ureterocele."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ureterocele-matrix",
+      "title": "Ureterocele: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A cystic dilatation of the terminal intravesical ureter, classified as intravesical (orthotopic), lying entirely within the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal and bladder ultrasound to identify the intravesical cyst and duplex anatomy, Micturating cystourethrogram (MCUG) to assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ectopic ureter without a ureterocele, Ureteropelvic junction obstruction, Primary obstructive megaureter",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat and, where recurrent, prophylax against urinary tract infection to protect the affected moiety and upper tracts",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Forgetting the Weigert-Meyer rule and misidentifying which moiety the ureterocele drains",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ureterocele."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ureterocele-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Intravesical cyst and duplex anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micturating cystourethrogram",
+          "cells": [
+            {
+              "text": "Reflux and ureterocele configuration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MAG3 or DMSA renography",
+          "cells": [
+            {
+              "text": "Function of the affected moiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy",
+          "cells": [
+            {
+              "text": "Ureterocele and orifice anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR urography",
+          "cells": [
+            {
+              "text": "Complex duplex anatomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ureterocele-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ectopic ureter without ureterocele",
+          "cells": [
+            {
+              "text": "No cystic dilatation of the terminal ureter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudoureterocele from bladder tumour or oedema",
+          "cells": [
+            {
+              "text": "Mimics a ureterocele around the orifice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ureteropelvic junction obstruction",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary obstructive megaureter",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ureterocele-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat and prophylax recurrent UTI",
+          "cells": [
+            {
+              "text": "Protects the affected moiety and upper tracts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic incision or puncture",
+          "cells": [
+            {
+              "text": "Decompresses an obstructing or infected ureterocele; often the initial intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive reconstruction",
+          "cells": [
+            {
+              "text": "Upper-pole heminephrectomy for a non-functioning moiety, or ureteric reimplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, incidental, orthotopic single-system ureteroceles with good drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Renal and bladder ultrasound with MAG3 or DMSA renography for function, reflux and obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric urology",
+          "cells": [
+            {
+              "text": "Coordinated staged reconstruction where required"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ureterocele-dx-mgmt",
+      "title": "Diagnosis and management of Ureterocele",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ureterocele: cystic bladder lesion with antenatal hydronephrosis or UTI",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (urinary retention, prolapsed ectopic ureterocele or urosepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endoscopic decompression for obstruction or urosepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal and bladder ultrasound, MCUG, MAG3 or DMSA renography, cystoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an intravesical cyst with duplex anatomy confirmed on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ectopic ureter, UPJ obstruction or pseudoureterocele; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat and prophylax recurrent UTI to protect the affected moiety",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Endoscopic decompression of an obstructing or infected ureterocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Definitive reconstruction such as heminephrectomy or reimplantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial ultrasound and renography, coordinated by paediatric urology",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Small incidental orthotopic cysts may be observed; ectopic disease needs reconstruction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

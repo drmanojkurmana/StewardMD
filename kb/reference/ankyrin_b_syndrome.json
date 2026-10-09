@@ -1,176 +1,485 @@
 {
- "id": "ankyrin_b_syndrome",
- "name": "Ankyrin-B Syndrome",
- "aliases": [
-  "ANK2-related cardiac arrhythmia",
-  "Long QT syndrome type 4",
-  "LQT4"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Inherited cardiac arrhythmia references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by loss-of-function variants in ANK2, which encodes ankyrin-B, a cytoskeletal adaptor that anchors ion channels and transporters in cardiomyocytes.",
-   "Originally labelled long QT syndrome type 4 (LQT4), but QT prolongation is inconsistent, so it is better regarded as a distinct 'ankyrin-B syndrome'.",
-   "The characteristic phenotype is a mixed arrhythmia picture: sinus node dysfunction with bradycardia, atrial fibrillation and susceptibility to ventricular arrhythmia.",
-   "Catecholamine- and exercise-induced ventricular tachycardia can resemble CPVT and may cause syncope or sudden cardiac death.",
-   "Penetrance and expressivity are highly variable, even within a single family carrying the same variant.",
-   "It is fundamentally a disorder of membrane protein organisation rather than a classic single ion-channel channelopathy.",
-   "The resting ECG may be normal or show only borderline QT changes, so provocation testing and prolonged monitoring are often required."
+  "id": "ankyrin_b_syndrome",
+  "name": "Ankyrin-B Syndrome",
+  "aliases": [
+    "ANK2-related cardiac arrhythmia",
+    "Long QT syndrome type 4",
+    "LQT4"
   ],
-  "pathophysiology": "Ankyrin-B, encoded by ANK2, is a large adaptor protein that links integral membrane proteins to the underlying spectrin-based cytoskeleton, organising functional microdomains within cardiomyocytes. It is required for the correct localisation and stability of the sodium–potassium ATPase, the sodium–calcium exchanger and the inositol trisphosphate receptor at the transverse-tubule and sarcoplasmic-reticulum junction. Loss-of-function ANK2 variants cause mislocalisation and reduced expression of these transporters, disturbing intracellular sodium and calcium handling. The resulting calcium-handling abnormality promotes afterdepolarisations and triggered activity, particularly under adrenergic stress, while disordered ion transport in nodal and atrial tissue produces sinus node dysfunction and atrial arrhythmia. Because the defect lies in membrane protein targeting rather than in a single channel's gating, the electrophysiological phenotype is broad and the QT interval is only variably prolonged, distinguishing it from the canonical long QT channelopathies.",
-  "additionalDifferentials": [
-   "Congenital long QT syndrome types 1–3 (KCNQ1, KCNH2, SCN5A)",
-   "Catecholaminergic polymorphic ventricular tachycardia (RYR2, CASQ2)",
-   "Sinus node dysfunction or sick sinus syndrome of other cause",
-   "Familial atrial fibrillation",
-   "Brugada syndrome",
-   "Acquired QT prolongation from drugs or electrolyte disturbance",
-   "Neurocardiogenic (vasovagal) syncope"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG with serial and exercise/recovery assessment of the QT interval",
-   "Ambulatory Holter and prolonged or implantable rhythm monitoring for bradycardia, atrial fibrillation and ventricular ectopy",
-   "Exercise stress testing to unmask catecholamine-provoked ventricular arrhythmia",
-   "ANK2 genetic testing within an inherited-arrhythmia gene panel, with cascade family screening",
-   "Echocardiography to exclude structural heart disease",
-   "Electrolyte and thyroid assessment to exclude reversible causes of arrhythmia",
-   "Family history review and clinical evaluation of first-degree relatives"
-  ],
-  "redFlags": [
-   "Exertional or stress-induced syncope, which may herald malignant ventricular arrhythmia",
-   "Documented polymorphic ventricular tachycardia or an aborted cardiac arrest",
-   "Family history of unexplained sudden cardiac death, especially at a young age",
-   "Profound symptomatic bradycardia or prolonged sinus pauses"
-  ],
-  "prognosis": "Prognosis is variable and genotype–phenotype correlations are weak; many carriers remain relatively asymptomatic, but sinus node dysfunction, atrial fibrillation and life-threatening ventricular arrhythmia can occur and sudden cardiac death is described. Risk-directed monitoring and avoidance of arrhythmia triggers underpin management.",
-  "pitfalls": [
-   "Excluding the diagnosis because the QT interval is normal, when QT prolongation is inconsistent in ankyrin-B syndrome.",
-   "Managing it as classic long QT syndrome types 1–3 and overlooking the prominent sinus node dysfunction and atrial fibrillation.",
-   "Missing exercise-induced ventricular arrhythmia by relying on a resting ECG alone.",
-   "Failing to screen first-degree relatives given the variable and incompletely penetrant phenotype."
-  ],
-  "references": [
-   "Inherited cardiac arrhythmia references",
-   "Cardiology reference texts",
-   "Clinical genetics references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid arrhythmia triggers by withdrawing QT-prolonging drugs and correcting electrolyte disturbances",
-   "Use beta-blockade to blunt catecholamine- and exercise-induced ventricular arrhythmia",
-   "Implant a permanent pacemaker for symptomatic sinus node dysfunction and bradycardia",
-   "Consider an implantable cardioverter-defibrillator in those with life-threatening ventricular arrhythmia or aborted sudden cardiac death",
-   "Manage atrial fibrillation with rate or rhythm control and assess thromboembolic risk for anticoagulation",
-   "Advise restriction of competitive and strenuous exertion, and provide risk-directed rhythm monitoring under a specialist inherited-arrhythmia service",
-   "Offer ANK2 genetic testing, genetic counselling, and cascade family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ankyrin_b_syndrome-pathway",
-   "title": "Ankyrin-B Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by loss-of-function variants in ANK2, which encodes ankyrin-B, a cytoskeletal adaptor that anchors ion channels and transporters in cardiomyocytes.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Exertional or stress-induced syncope, which may herald malignant ventricular arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG with serial and exercise/recovery assessment of the QT interval, Ambulatory Holter and prolonged or implantable rhythm monitoring for bradycardia, atrial fibrillation and ventricular ectopy, Exercise stress"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid arrhythmia triggers by withdrawing QT-prolonging drugs and correcting electrolyte disturbances"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis because the QT interval is normal, when QT prolongation is inconsistent in ankyrin-B syndrome."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ankyrin-b syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "ankyrin_b_syndrome-matrix",
-   "title": "Ankyrin-B Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by loss-of-function variants in ANK2, which encodes ankyrin-B, a cytoskeletal adaptor that anchors ion channels and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Inherited cardiac arrhythmia references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by loss-of-function variants in ANK2, which encodes ankyrin-B, a cytoskeletal adaptor that anchors ion channels and transporters in cardiomyocytes.",
+      "Originally labelled long QT syndrome type 4 (LQT4), but QT prolongation is inconsistent, so it is better regarded as a distinct 'ankyrin-B syndrome'.",
+      "The characteristic phenotype is a mixed arrhythmia picture: sinus node dysfunction with bradycardia, atrial fibrillation and susceptibility to ventricular arrhythmia.",
+      "Catecholamine- and exercise-induced ventricular tachycardia can resemble CPVT and may cause syncope or sudden cardiac death.",
+      "Penetrance and expressivity are highly variable, even within a single family carrying the same variant.",
+      "It is fundamentally a disorder of membrane protein organisation rather than a classic single ion-channel channelopathy.",
+      "The resting ECG may be normal or show only borderline QT changes, so provocation testing and prolonged monitoring are often required."
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG with serial and exercise/recovery assessment of the QT interval, Ambulatory Holter and prolonged or implantable",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ankyrin-B, encoded by ANK2, is a large adaptor protein that links integral membrane proteins to the underlying spectrin-based cytoskeleton, organising functional microdomains within cardiomyocytes. It is required for the correct localisation and stability of the sodium–potassium ATPase, the sodium–calcium exchanger and the inositol trisphosphate receptor at the transverse-tubule and sarcoplasmic-reticulum junction. Loss-of-function ANK2 variants cause mislocalisation and reduced expression of these transporters, disturbing intracellular sodium and calcium handling. The resulting calcium-handling abnormality promotes afterdepolarisations and triggered activity, particularly under adrenergic stress, while disordered ion transport in nodal and atrial tissue produces sinus node dysfunction and atrial arrhythmia. Because the defect lies in membrane protein targeting rather than in a single channel's gating, the electrophysiological phenotype is broad and the QT interval is only variably prolonged, distinguishing it from the canonical long QT channelopathies.",
+    "additionalDifferentials": [
+      "Congenital long QT syndrome types 1–3 (KCNQ1, KCNH2, SCN5A)",
+      "Catecholaminergic polymorphic ventricular tachycardia (RYR2, CASQ2)",
+      "Sinus node dysfunction or sick sinus syndrome of other cause",
+      "Familial atrial fibrillation",
+      "Brugada syndrome",
+      "Acquired QT prolongation from drugs or electrolyte disturbance",
+      "Neurocardiogenic (vasovagal) syncope"
     ],
-    [
-     "Primary Differentials",
-     "Congenital long QT syndrome types 1 to 3 (KCNQ1, KCNH2, SCN5A), Catecholaminergic polymorphic ventricular tachycardia (RYR2,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG with serial and exercise/recovery assessment of the QT interval",
+      "Ambulatory Holter and prolonged or implantable rhythm monitoring for bradycardia, atrial fibrillation and ventricular ectopy",
+      "Exercise stress testing to unmask catecholamine-provoked ventricular arrhythmia",
+      "ANK2 genetic testing within an inherited-arrhythmia gene panel, with cascade family screening",
+      "Echocardiography to exclude structural heart disease",
+      "Electrolyte and thyroid assessment to exclude reversible causes of arrhythmia",
+      "Family history review and clinical evaluation of first-degree relatives"
     ],
-    [
-     "Management Strategy",
-     "Avoid arrhythmia triggers by withdrawing QT-prolonging drugs and correcting electrolyte disturbances",
-     "Core treatment modality"
+    "redFlags": [
+      "Exertional or stress-induced syncope, which may herald malignant ventricular arrhythmia",
+      "Documented polymorphic ventricular tachycardia or an aborted cardiac arrest",
+      "Family history of unexplained sudden cardiac death, especially at a young age",
+      "Profound symptomatic bradycardia or prolonged sinus pauses"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis because the QT interval is normal, when QT prolongation is inconsistent in ankyrin-B syndrome.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is variable and genotype–phenotype correlations are weak; many carriers remain relatively asymptomatic, but sinus node dysfunction, atrial fibrillation and life-threatening ventricular arrhythmia can occur and sudden cardiac death is described. Risk-directed monitoring and avoidance of arrhythmia triggers underpin management.",
+    "pitfalls": [
+      "Excluding the diagnosis because the QT interval is normal, when QT prolongation is inconsistent in ankyrin-B syndrome.",
+      "Managing it as classic long QT syndrome types 1–3 and overlooking the prominent sinus node dysfunction and atrial fibrillation.",
+      "Missing exercise-induced ventricular arrhythmia by relying on a resting ECG alone.",
+      "Failing to screen first-degree relatives given the variable and incompletely penetrant phenotype."
+    ],
+    "references": [
+      "Inherited cardiac arrhythmia references",
+      "Cardiology reference texts",
+      "Clinical genetics references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid arrhythmia triggers by withdrawing QT-prolonging drugs and correcting electrolyte disturbances",
+      "Use beta-blockade to blunt catecholamine- and exercise-induced ventricular arrhythmia",
+      "Implant a permanent pacemaker for symptomatic sinus node dysfunction and bradycardia",
+      "Consider an implantable cardioverter-defibrillator in those with life-threatening ventricular arrhythmia or aborted sudden cardiac death",
+      "Manage atrial fibrillation with rate or rhythm control and assess thromboembolic risk for anticoagulation",
+      "Advise restriction of competitive and strenuous exertion, and provide risk-directed rhythm monitoring under a specialist inherited-arrhythmia service",
+      "Offer ANK2 genetic testing, genetic counselling, and cascade family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for ankyrin-b syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ankyrin-b-syndrome-real-image",
-   "title": "Ankyrin-B Syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "ankyrin_b_syndrome-pathway",
+      "title": "Ankyrin-B Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by loss-of-function variants in ANK2, which encodes ankyrin-B, a cytoskeletal adaptor that anchors ion channels and transporters in cardiomyocytes.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Exertional or stress-induced syncope, which may herald malignant ventricular arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG with serial and exercise/recovery assessment of the QT interval, Ambulatory Holter and prolonged or implantable rhythm monitoring for bradycardia, atrial fibrillation and ventricular ectopy, Exercise stress"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid arrhythmia triggers by withdrawing QT-prolonging drugs and correcting electrolyte disturbances"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis because the QT interval is normal, when QT prolongation is inconsistent in ankyrin-B syndrome."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ankyrin-b syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ankyrin_b_syndrome-matrix",
+      "title": "Ankyrin-B Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by loss-of-function variants in ANK2, which encodes ankyrin-B, a cytoskeletal adaptor that anchors ion channels and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG with serial and exercise/recovery assessment of the QT interval, Ambulatory Holter and prolonged or implantable",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital long QT syndrome types 1 to 3 (KCNQ1, KCNH2, SCN5A), Catecholaminergic polymorphic ventricular tachycardia (RYR2,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid arrhythmia triggers by withdrawing QT-prolonging drugs and correcting electrolyte disturbances",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis because the QT interval is normal, when QT prolongation is inconsistent in ankyrin-B syndrome.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ankyrin-b syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited cardiac arrhythmia references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ankyrin_b_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG with serial and exercise or recovery QT assessment",
+          "cells": [
+            {
+              "text": "QT prolongation is inconsistent in ankyrin-B syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory Holter and prolonged or implantable monitoring",
+          "cells": [
+            {
+              "text": "Bradycardia, atrial fibrillation and ventricular ectopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise stress testing",
+          "cells": [
+            {
+              "text": "Unmasks catecholamine-provoked ventricular arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANK2 genetic testing within an inherited-arrhythmia panel",
+          "cells": [
+            {
+              "text": "Confirms the genetic basis, with cascade family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Excludes structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and thyroid assessment",
+          "cells": [
+            {
+              "text": "Excludes reversible causes of arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankyrin_b_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital long QT syndrome types 1-3",
+          "cells": [
+            {
+              "text": "QT prolongation is inconsistent in ankyrin-B syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinus node dysfunction of other cause",
+          "cells": [
+            {
+              "text": "Prominent sinus node dysfunction is a feature of ankyrin-B syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankyrin_b_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid arrhythmia triggers",
+          "cells": [
+            {
+              "text": "Withdraw QT-prolonging drugs; correct electrolyte disturbances"
+            },
+            {
+              "text": "Trigger avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Blunts catecholamine- and exercise-induced ventricular arrhythmia"
+            },
+            {
+              "text": "Exercise-provoked arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Permanent pacemaker",
+          "cells": [
+            {
+              "text": "Symptomatic sinus node dysfunction and bradycardia"
+            },
+            {
+              "text": "Symptomatic only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Life-threatening ventricular arrhythmia or aborted sudden cardiac death"
+            },
+            {
+              "text": "Considered in these patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial fibrillation management",
+          "cells": [
+            {
+              "text": "Rate or rhythm control"
+            },
+            {
+              "text": "Assess thromboembolic risk for anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exertion restriction and monitoring",
+          "cells": [
+            {
+              "text": "Restrict competitive and strenuous exertion; risk-directed rhythm monitoring"
+            },
+            {
+              "text": "Under a specialist inherited-arrhythmia service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "ANK2 testing and cascade family screening"
+            },
+            {
+              "text": "Autosomal inheritance counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ankyrin_b_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Ankyrin-B Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arrhythmia or sinus node dysfunction, possibly with exertional syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Exertional syncope, polymorphic VT or aborted arrest?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent inherited-arrhythmia assessment; ICD consideration if arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG with exercise QT assessment, Holter, stress test, ANK2 panel, echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ANK2 variant or arrhythmia pattern confirms ankyrin-B syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Beta-blockade to blunt exercise-induced ventricular arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat QT and rhythm monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pacemaker for symptomatic sinus node dysfunction or bradycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ICD for life-threatening ventricular arrhythmia or aborted arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Restrict strenuous exertion; withdraw QT-prolonging drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Risk-directed monitoring and cascade family screening under specialist care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

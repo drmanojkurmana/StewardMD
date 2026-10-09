@@ -1,169 +1,418 @@
 {
- "id": "pulmonary_barotrauma",
- "name": "Pulmonary barotrauma",
- "aliases": [
-  "pulmonary overinflation syndrome",
-  "burst lung"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Diving and hyperbaric medicine / Respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Diving and hyperbaric medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Overexpansion and rupture of lung tissue caused by expanding gas that cannot escape, classically during ascent from a dive",
-   "Breath-holding during ascent or air trapping from airway disease markedly increases the risk",
-   "Consequences include pneumothorax, pneumomediastinum, surgical emphysema and arterial gas embolism",
-   "It can also occur with positive-pressure mechanical ventilation at high airway pressures",
-   "Presentation ranges from chest pain and breathlessness to catastrophic arterial gas embolism",
-   "Management targets the specific complication, with recompression for gas embolism and chest decompression for tension pneumothorax"
+  "id": "pulmonary_barotrauma",
+  "name": "Pulmonary barotrauma",
+  "aliases": [
+    "pulmonary overinflation syndrome",
+    "burst lung"
   ],
-  "pathophysiology": "Pulmonary barotrauma results from Boyle's law: as ambient pressure falls during ascent, gas in the lungs expands, and if it cannot be exhaled the alveoli overdistend and rupture. Escaping gas tracks into the pleural space (pneumothorax), the mediastinum and soft tissues (pneumomediastinum and surgical emphysema), or into the pulmonary veins to cause arterial gas embolism. Air trapping from breath-holding, bronchospasm or bullous disease localises the overpressure and predisposes to rupture.",
-  "additionalDifferentials": [
-   "Decompression sickness",
-   "Spontaneous pneumothorax of another cause",
-   "Acute coronary syndrome",
-   "Immersion pulmonary oedema",
-   "Asthma exacerbation"
-  ],
-  "additionalInvestigations": [
-   "Chest imaging for pneumothorax, pneumomediastinum and surgical emphysema",
-   "Assessment for arterial gas embolism, which takes management priority",
-   "Oxygenation and ventilation assessment",
-   "Evaluation of underlying airway disease as a risk factor",
-   "Monitoring for tension physiology"
-  ],
-  "redFlags": [
-   "Neurological symptoms indicating arterial gas embolism",
-   "Signs of tension pneumothorax",
-   "Rapidly worsening respiratory distress",
-   "Haemodynamic instability"
-  ],
-  "prognosis": "Isolated small air leaks often resolve with supportive care, but arterial gas embolism or tension pneumothorax can be life-threatening; prompt treatment of complications determines outcome.",
-  "pitfalls": [
-   "Overlooking arterial gas embolism while focusing on a pneumothorax",
-   "Missing air trapping from undiagnosed airway disease as the cause",
-   "Delaying chest decompression in tension pneumothorax",
-   "Allowing a diver with lung bullae to continue diving"
-  ],
-  "references": [
-   "Diving and hyperbaric medicine references (standard reference)",
-   "Respiratory medicine reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "High-flow, high-concentration oxygen to accelerate resorption of extra-alveolar gas and treat hypoxaemia",
-   "Urgent recompression with hyperbaric oxygen for arterial gas embolism, which takes management priority",
-   "Needle decompression and intercostal drainage for pneumothorax, urgently when there is tension physiology",
-   "Conservative observation for small, stable pneumomediastinum and surgical emphysema",
-   "Supportive positioning and haemodynamic support for arterial gas embolism alongside treatment of the precipitating event",
-   "On mechanical ventilation, adopt lung-protective low-pressure strategies to prevent and limit barotrauma",
-   "Assess diving fitness and treat underlying airway or bullous disease before any return to diving, escalating to critical care and diving medicine specialists for gas embolism or tension pneumothorax"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_barotrauma-pathway",
-   "title": "Pulmonary barotrauma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Overexpansion and rupture of lung tissue caused by expanding gas that cannot escape, classically during ascent from a dive",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological symptoms indicating arterial gas embolism",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest imaging for pneumothorax, pneumomediastinum and surgical emphysema, Assessment for arterial gas embolism, which takes management priority, Oxygenation and ventilation assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: High-flow, high-concentration oxygen to accelerate resorption of extra-alveolar gas and treat hypoxaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking arterial gas embolism while focusing on a pneumothorax"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary barotrauma."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_barotrauma-matrix",
-   "title": "Pulmonary barotrauma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Overexpansion and rupture of lung tissue caused by expanding gas that cannot escape, classically during ascent from a dive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Diving and hyperbaric medicine / Respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Diving and hyperbaric medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Overexpansion and rupture of lung tissue caused by expanding gas that cannot escape, classically during ascent from a dive",
+      "Breath-holding during ascent or air trapping from airway disease markedly increases the risk",
+      "Consequences include pneumothorax, pneumomediastinum, surgical emphysema and arterial gas embolism",
+      "It can also occur with positive-pressure mechanical ventilation at high airway pressures",
+      "Presentation ranges from chest pain and breathlessness to catastrophic arterial gas embolism",
+      "Management targets the specific complication, with recompression for gas embolism and chest decompression for tension pneumothorax"
     ],
-    [
-     "Key Investigations",
-     "Chest imaging for pneumothorax, pneumomediastinum and surgical emphysema, Assessment for arterial gas embolism, which takes",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pulmonary barotrauma results from Boyle's law: as ambient pressure falls during ascent, gas in the lungs expands, and if it cannot be exhaled the alveoli overdistend and rupture. Escaping gas tracks into the pleural space (pneumothorax), the mediastinum and soft tissues (pneumomediastinum and surgical emphysema), or into the pulmonary veins to cause arterial gas embolism. Air trapping from breath-holding, bronchospasm or bullous disease localises the overpressure and predisposes to rupture.",
+    "additionalDifferentials": [
+      "Decompression sickness",
+      "Spontaneous pneumothorax of another cause",
+      "Acute coronary syndrome",
+      "Immersion pulmonary oedema",
+      "Asthma exacerbation"
     ],
-    [
-     "Primary Differentials",
-     "Decompression sickness, Spontaneous pneumothorax of another cause, Acute coronary syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest imaging for pneumothorax, pneumomediastinum and surgical emphysema",
+      "Assessment for arterial gas embolism, which takes management priority",
+      "Oxygenation and ventilation assessment",
+      "Evaluation of underlying airway disease as a risk factor",
+      "Monitoring for tension physiology"
     ],
-    [
-     "Management Strategy",
-     "High-flow, high-concentration oxygen to accelerate resorption of extra-alveolar gas and treat hypoxaemia",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological symptoms indicating arterial gas embolism",
+      "Signs of tension pneumothorax",
+      "Rapidly worsening respiratory distress",
+      "Haemodynamic instability"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking arterial gas embolism while focusing on a pneumothorax",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated small air leaks often resolve with supportive care, but arterial gas embolism or tension pneumothorax can be life-threatening; prompt treatment of complications determines outcome.",
+    "pitfalls": [
+      "Overlooking arterial gas embolism while focusing on a pneumothorax",
+      "Missing air trapping from undiagnosed airway disease as the cause",
+      "Delaying chest decompression in tension pneumothorax",
+      "Allowing a diver with lung bullae to continue diving"
+    ],
+    "references": [
+      "Diving and hyperbaric medicine references (standard reference)",
+      "Respiratory medicine reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "High-flow, high-concentration oxygen to accelerate resorption of extra-alveolar gas and treat hypoxaemia",
+      "Urgent recompression with hyperbaric oxygen for arterial gas embolism, which takes management priority",
+      "Needle decompression and intercostal drainage for pneumothorax, urgently when there is tension physiology",
+      "Conservative observation for small, stable pneumomediastinum and surgical emphysema",
+      "Supportive positioning and haemodynamic support for arterial gas embolism alongside treatment of the precipitating event",
+      "On mechanical ventilation, adopt lung-protective low-pressure strategies to prevent and limit barotrauma",
+      "Assess diving fitness and treat underlying airway or bullous disease before any return to diving, escalating to critical care and diving medicine specialists for gas embolism or tension pneumothorax"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary barotrauma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-barotrauma-real-image",
-   "title": "Pulmonary barotrauma: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pulmonary_barotrauma-pathway",
+      "title": "Pulmonary barotrauma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Overexpansion and rupture of lung tissue caused by expanding gas that cannot escape, classically during ascent from a dive",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological symptoms indicating arterial gas embolism",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest imaging for pneumothorax, pneumomediastinum and surgical emphysema, Assessment for arterial gas embolism, which takes management priority, Oxygenation and ventilation assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: High-flow, high-concentration oxygen to accelerate resorption of extra-alveolar gas and treat hypoxaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking arterial gas embolism while focusing on a pneumothorax"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary barotrauma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_barotrauma-matrix",
+      "title": "Pulmonary barotrauma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Overexpansion and rupture of lung tissue caused by expanding gas that cannot escape, classically during ascent from a dive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest imaging for pneumothorax, pneumomediastinum and surgical emphysema, Assessment for arterial gas embolism, which takes",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Decompression sickness, Spontaneous pneumothorax of another cause, Acute coronary syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "High-flow, high-concentration oxygen to accelerate resorption of extra-alveolar gas and treat hypoxaemia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking arterial gas embolism while focusing on a pneumothorax",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary barotrauma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Diving and hyperbaric medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_barotrauma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pneumothorax, pneumomediastinum and surgical emphysema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for arterial gas embolism",
+          "cells": [
+            {
+              "text": "Priority in management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygenation and ventilation assessment",
+          "cells": [
+            {
+              "text": "Gas exchange"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation of underlying airway disease",
+          "cells": [
+            {
+              "text": "Risk factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for tension physiology",
+          "cells": [
+            {
+              "text": "Tension physiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_barotrauma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-flow oxygen",
+          "cells": [
+            {
+              "text": "High-flow, high-concentration oxygen to accelerate resorption of extra-alveolar gas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recompression",
+          "cells": [
+            {
+              "text": "Urgent hyperbaric oxygen for arterial gas embolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompression",
+          "cells": [
+            {
+              "text": "Needle decompression and intercostal drainage for pneumothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, stable pneumomediastinum and surgical emphysema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Positioning and haemodynamic support for arterial gas embolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation",
+          "cells": [
+            {
+              "text": "Lung-protective low-pressure strategies on mechanical ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Return to diving",
+          "cells": [
+            {
+              "text": "Assess fitness and treat underlying airway or bullous disease first"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_barotrauma-dx-mgmt",
+      "title": "Diagnosis and management of Pulmonary barotrauma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary barotrauma: pneumothorax or gas embolism after pressure change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological signs of gas embolism, tension pneumothorax, or worsening distress?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent hyperbaric oxygen for arterial gas embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest imaging; assessment for arterial gas embolism; oxygenation; airway disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is extra-alveolar gas confirmed on chest imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider decompression sickness, acute coronary syndrome or asthma; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-flow, high-concentration oxygen to accelerate gas resorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent recompression with hyperbaric oxygen for arterial gas embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Needle decompression and intercostal drainage for pneumothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Conservative observation for small, stable pneumomediastinum",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Assess diving fitness and treat underlying airway or bullous disease before return",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

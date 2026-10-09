@@ -1,168 +1,446 @@
 {
- "id": "functional_diarrhea",
- "name": "Functional diarrhoea",
- "aliases": [
-  "functional diarrhea"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rome IV criteria / gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Recurrent passage of loose or watery stools without predominant abdominal pain or bloating",
-   "The absence of significant pain distinguishes it from diarrhoea-predominant irritable bowel syndrome",
-   "It is a diagnosis made after excluding organic causes of chronic diarrhoea",
-   "Important mimics include coeliac disease, microscopic colitis, bile acid diarrhoea and inflammatory bowel disease",
-   "Nocturnal diarrhoea, weight loss or bleeding are not typical and should prompt investigation",
-   "Management includes dietary review and antidiarrhoeal or bile-acid-binding therapy where appropriate"
+  "id": "functional_diarrhea",
+  "name": "Functional diarrhoea",
+  "aliases": [
+    "functional diarrhea"
   ],
-  "pathophysiology": "Functional diarrhoea is a disorder of gut-brain interaction characterised by accelerated colonic transit and altered secretion and motility without a structural or biochemical cause. Visceral hypersensitivity and disturbed gut-brain signalling contribute, and there is overlap with diarrhoea-predominant irritable bowel syndrome, from which it is separated chiefly by the lack of prominent pain. Because several organic conditions can produce an identical clinical picture, the diagnosis depends on their reasonable exclusion.",
-  "additionalDifferentials": [
-   "Diarrhoea-predominant irritable bowel syndrome",
-   "Coeliac disease",
-   "Microscopic colitis",
-   "Bile acid diarrhoea",
-   "Inflammatory bowel disease",
-   "Chronic infection or malabsorption"
-  ],
-  "additionalInvestigations": [
-   "Coeliac serology and, where indicated, faecal calprotectin",
-   "Assessment for bile acid diarrhoea in suitable patients",
-   "Colonoscopy with biopsies to exclude microscopic colitis where appropriate",
-   "Blood tests for inflammatory, thyroid and malabsorptive causes",
-   "Stool studies where infection or malabsorption is suspected"
-  ],
-  "redFlags": [
-   "Nocturnal or progressive diarrhoea",
-   "Weight loss, bleeding or anaemia",
-   "Onset in an older patient",
-   "Features suggesting malabsorption or inflammation"
-  ],
-  "prognosis": "The condition is benign and often fluctuates over time; symptoms are usually controllable with dietary measures and targeted antidiarrhoeal treatment.",
-  "pitfalls": [
-   "Missing microscopic colitis, which needs biopsies to diagnose",
-   "Overlooking bile acid diarrhoea as a treatable cause",
-   "Attributing organic diarrhoea to a functional cause",
-   "Failing to exclude coeliac disease"
-  ],
-  "references": [
-   "Rome IV diagnostic criteria",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Dietary review reducing caffeine, alcohol and poorly absorbed carbohydrates, with a trial of a low-FODMAP diet",
-   "Antidiarrhoeal therapy with loperamide as the mainstay symptomatic treatment",
-   "Bile-acid sequestrants such as colestyramine where bile acid diarrhoea is contributory",
-   "Neuromodulators such as tricyclic antidepressants for associated visceral hypersensitivity",
-   "Exclude organic mimics including coeliac disease, microscopic colitis, bile acid diarrhoea and inflammatory bowel disease before confirming the diagnosis",
-   "Investigate red flags such as nocturnal diarrhoea, weight loss or rectal bleeding rather than attributing them to functional disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "functional_diarrhea-pathway",
-   "title": "Functional diarrhoea: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Recurrent passage of loose or watery stools without predominant abdominal pain or bloating",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Nocturnal or progressive diarrhoea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Coeliac serology and, where indicated, faecal calprotectin, Assessment for bile acid diarrhoea in suitable patients, Colonoscopy with biopsies to exclude microscopic colitis where appropriate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Dietary review reducing caffeine, alcohol and poorly absorbed carbohydrates, with a trial of a low-FODMAP diet"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing microscopic colitis, which needs biopsies to diagnose"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of functional diarrhoea."
-  }
- ],
- "tables": [
-  {
-   "id": "functional_diarrhea-matrix",
-   "title": "Functional diarrhoea: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Recurrent passage of loose or watery stools without predominant abdominal pain or bloating",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rome IV criteria / gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Recurrent passage of loose or watery stools without predominant abdominal pain or bloating",
+      "The absence of significant pain distinguishes it from diarrhoea-predominant irritable bowel syndrome",
+      "It is a diagnosis made after excluding organic causes of chronic diarrhoea",
+      "Important mimics include coeliac disease, microscopic colitis, bile acid diarrhoea and inflammatory bowel disease",
+      "Nocturnal diarrhoea, weight loss or bleeding are not typical and should prompt investigation",
+      "Management includes dietary review and antidiarrhoeal or bile-acid-binding therapy where appropriate"
     ],
-    [
-     "Key Investigations",
-     "Coeliac serology and, where indicated, faecal calprotectin, Assessment for bile acid diarrhoea in suitable patients, Colonoscopy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Functional diarrhoea is a disorder of gut-brain interaction characterised by accelerated colonic transit and altered secretion and motility without a structural or biochemical cause. Visceral hypersensitivity and disturbed gut-brain signalling contribute, and there is overlap with diarrhoea-predominant irritable bowel syndrome, from which it is separated chiefly by the lack of prominent pain. Because several organic conditions can produce an identical clinical picture, the diagnosis depends on their reasonable exclusion.",
+    "additionalDifferentials": [
+      "Diarrhoea-predominant irritable bowel syndrome",
+      "Coeliac disease",
+      "Microscopic colitis",
+      "Bile acid diarrhoea",
+      "Inflammatory bowel disease",
+      "Chronic infection or malabsorption"
     ],
-    [
-     "Primary Differentials",
-     "Diarrhoea-predominant irritable bowel syndrome, Coeliac disease, Microscopic colitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Coeliac serology and, where indicated, faecal calprotectin",
+      "Assessment for bile acid diarrhoea in suitable patients",
+      "Colonoscopy with biopsies to exclude microscopic colitis where appropriate",
+      "Blood tests for inflammatory, thyroid and malabsorptive causes",
+      "Stool studies where infection or malabsorption is suspected"
     ],
-    [
-     "Management Strategy",
-     "Dietary review reducing caffeine, alcohol and poorly absorbed carbohydrates, with a trial of a low-FODMAP diet",
-     "Core treatment modality"
+    "redFlags": [
+      "Nocturnal or progressive diarrhoea",
+      "Weight loss, bleeding or anaemia",
+      "Onset in an older patient",
+      "Features suggesting malabsorption or inflammation"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing microscopic colitis, which needs biopsies to diagnose",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and often fluctuates over time; symptoms are usually controllable with dietary measures and targeted antidiarrhoeal treatment.",
+    "pitfalls": [
+      "Missing microscopic colitis, which needs biopsies to diagnose",
+      "Overlooking bile acid diarrhoea as a treatable cause",
+      "Attributing organic diarrhoea to a functional cause",
+      "Failing to exclude coeliac disease"
+    ],
+    "references": [
+      "Rome IV diagnostic criteria",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Dietary review reducing caffeine, alcohol and poorly absorbed carbohydrates, with a trial of a low-FODMAP diet",
+      "Antidiarrhoeal therapy with loperamide as the mainstay symptomatic treatment",
+      "Bile-acid sequestrants such as colestyramine where bile acid diarrhoea is contributory",
+      "Neuromodulators such as tricyclic antidepressants for associated visceral hypersensitivity",
+      "Exclude organic mimics including coeliac disease, microscopic colitis, bile acid diarrhoea and inflammatory bowel disease before confirming the diagnosis",
+      "Investigate red flags such as nocturnal diarrhoea, weight loss or rectal bleeding rather than attributing them to functional disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for functional diarrhoea."
-  }
- ],
- "diagrams": [
-  {
-   "id": "functional-diarrhea-real-image",
-   "title": "Functional diarrhoea: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "functional_diarrhea-pathway",
+      "title": "Functional diarrhoea: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Recurrent passage of loose or watery stools without predominant abdominal pain or bloating",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Nocturnal or progressive diarrhoea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Coeliac serology and, where indicated, faecal calprotectin, Assessment for bile acid diarrhoea in suitable patients, Colonoscopy with biopsies to exclude microscopic colitis where appropriate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Dietary review reducing caffeine, alcohol and poorly absorbed carbohydrates, with a trial of a low-FODMAP diet"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing microscopic colitis, which needs biopsies to diagnose"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of functional diarrhoea."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "functional_diarrhea-matrix",
+      "title": "Functional diarrhoea: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Recurrent passage of loose or watery stools without predominant abdominal pain or bloating",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Coeliac serology and, where indicated, faecal calprotectin, Assessment for bile acid diarrhoea in suitable patients, Colonoscopy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Diarrhoea-predominant irritable bowel syndrome, Coeliac disease, Microscopic colitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Dietary review reducing caffeine, alcohol and poorly absorbed carbohydrates, with a trial of a low-FODMAP diet",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing microscopic colitis, which needs biopsies to diagnose",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for functional diarrhoea."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome IV criteria / gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_diarrhea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac serology",
+          "cells": [
+            {
+              "text": "Screens for coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for bile acid diarrhoea",
+          "cells": [
+            {
+              "text": "In suitable patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy with biopsies",
+          "cells": [
+            {
+              "text": "Excludes microscopic colitis where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests",
+          "cells": [
+            {
+              "text": "Inflammatory, thyroid and malabsorptive causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool studies",
+          "cells": [
+            {
+              "text": "Where infection or malabsorption is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_diarrhea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Excluded by coeliac serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopic colitis",
+          "cells": [
+            {
+              "text": "Diagnosed only on colonoscopy with biopsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile acid diarrhoea",
+          "cells": [
+            {
+              "text": "Treatable; responds to bile-acid sequestrants where contributory"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_diarrhea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary review",
+          "cells": [
+            {
+              "text": "Reduce caffeine, alcohol and poorly absorbed carbohydrates; trial of a low-FODMAP diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loperamide",
+          "cells": [
+            {
+              "text": "Mainstay symptomatic antidiarrhoeal treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile-acid sequestrants",
+          "cells": [
+            {
+              "text": "Such as colestyramine where bile acid diarrhoea is contributory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricyclic antidepressants",
+          "cells": [
+            {
+              "text": "For associated visceral hypersensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude organic mimics",
+          "cells": [
+            {
+              "text": "Coeliac disease, microscopic colitis, bile acid diarrhoea and IBD before diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigate red flags",
+          "cells": [
+            {
+              "text": "Nocturnal diarrhoea, weight loss or rectal bleeding are not attributed to functional disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_diarrhea-dx-mgmt",
+      "title": "Diagnosis and management of Functional diarrhoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional diarrhoea: chronic loose stools without organic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (nocturnal diarrhoea, weight loss, bleeding, anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation of weight loss, rectal bleeding or anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Coeliac serology, blood tests, stool studies and colonoscopy with biopsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are coeliac disease, microscopic colitis and bile acid diarrhoea excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inflammatory bowel disease, infection or malabsorption; investigate further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dietary review: reduce caffeine, alcohol and poorly absorbed carbohydrates",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Loperamide as the mainstay symptomatic treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bile-acid sequestrants where bile acid diarrhoea contributes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tricyclic antidepressants for visceral hypersensitivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, fluctuating; usually controlled with diet and targeted antidiarrhoeal treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,453 @@
 {
- "id": "spinocerebellar_ataxia_type_40",
- "name": "Spinocerebellar ataxia type 40",
- "aliases": [
-  "SCA40",
-  "CCDC88C-related ataxia",
-  "DAPLE"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary ataxia",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant cerebellar ataxia caused by a heterozygous variant in CCDC88C, which encodes the scaffold protein DAPLE, on chromosome 14q32.",
-   "Adult-onset, slowly progressive gait and limb ataxia with dysarthria.",
-   "Distinctive pyramidal involvement: hyperreflexia, spasticity and extensor plantar responses accompany the cerebellar signs, unlike the purer cerebellar subtypes.",
-   "Oculomotor findings include saccadic (broken) smooth pursuit and gaze-evoked nystagmus, and intention tremor is common.",
-   "First reported in a Han Chinese family.",
-   "MRI shows cerebellar atrophy, sometimes with brainstem or pontine involvement.",
-   "Mechanistically linked to hyperactivation of the c-Jun N-terminal kinase (JNK) apoptotic pathway.",
-   "Biallelic loss-of-function CCDC88C variants cause a wholly distinct autosomal recessive congenital hydrocephalus, a different mechanism and phenotype from the dominant ataxia."
+  "id": "spinocerebellar_ataxia_type_40",
+  "name": "Spinocerebellar ataxia type 40",
+  "aliases": [
+    "SCA40",
+    "CCDC88C-related ataxia",
+    "DAPLE"
   ],
-  "pathophysiology": "SCA40 is caused by a heterozygous variant in CCDC88C, which encodes DAPLE (Dishevelled-associating protein with a high frequency of leucine residues), a scaffold protein that modulates Wnt and planar-cell-polarity signalling and the c-Jun N-terminal kinase (JNK) cascade. The dominant ataxia variant is thought to act as a gain of function that hyperactivates JNK signalling, promoting caspase-dependent apoptosis of cerebellar and brainstem neurons and producing progressive spinocerebellar degeneration with prominent pyramidal features. By contrast, biallelic loss-of-function variants in the same gene disrupt neural-tube and ependymal development to cause congenital hydrocephalus, underscoring the allele- and dose-dependent effects of CCDC88C. No nucleotide repeat expansion is involved.",
-  "additionalDifferentials": [
-   "SCA1 (ATXN1) — dominant ataxia in which pyramidal signs and spasticity are prominent",
-   "SCA3 / Machado-Joseph disease (ATXN3) — ataxia with spasticity, pyramidal signs and variable extrapyramidal features",
-   "SCA7 (ATXN7) — dominant ataxia, distinguished by retinopathy",
-   "Spastic ataxia and hereditary spastic paraplegia with cerebellar features, such as SPG7-related disease",
-   "Autosomal recessive spastic ataxia of Charlevoix-Saguenay (SACS)",
-   "Acquired posterior-fossa or demyelinating disease presenting with mixed cerebellar and pyramidal signs"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain to show cerebellar and possible pontine atrophy and exclude structural or demyelinating lesions",
-   "CCDC88C sequencing or a hereditary-ataxia gene panel / exome",
-   "Repeat-expansion panel to exclude the common repeat-based subtypes such as SCA1, SCA2, SCA3, SCA6 and SCA7",
-   "Nerve conduction studies if a peripheral component is suspected",
-   "Acquired-ataxia screen where the diagnosis is uncertain",
-   "Genetic counselling and family segregation analysis"
-  ],
-  "redFlags": [
-   "Rapidly progressive spasticity or bulbar failure",
-   "Features of raised intracranial pressure or hydrocephalus, particularly in infants or relatives with biallelic disease",
-   "Visual or optic symptoms suggesting an alternative subtype",
-   "Sphincter disturbance or a sensory level pointing to a spinal cord lesion"
-  ],
-  "prognosis": "The disorder is slowly progressive over years to decades; superimposed spasticity may add to gait disability, but life expectancy is generally preserved.",
-  "pitfalls": [
-   "Mistaking the pyramidal-predominant picture for hereditary spastic paraplegia or multiple sclerosis",
-   "Failing to distinguish the dominant ataxia from the recessive congenital hydrocephalus phenotype of the same gene",
-   "Assuming a repeat-expansion mechanism and not proceeding to sequencing",
-   "Overlooking the family history when cerebellar and pyramidal signs coexist"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Standard hereditary ataxia genetics reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "With no disease-modifying therapy for this CCDC88C-related ataxia, base care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy",
-   "Manage the prominent pyramidal spasticity with physiotherapy, stretching, an antispasticity agent such as baclofen, and botulinum toxin for focal spasticity",
-   "Treat intention tremor symptomatically where it impairs function",
-   "Institute falls prevention and provide mobility aids, as spasticity compounds the ataxic gait disability",
-   "Monitor for bulbar dysfunction with periodic swallow assessment",
-   "Provide multidisciplinary ataxia clinic follow-up",
-   "Offer genetic counselling and family segregation analysis for the autosomal dominant transmission"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_40-pathway",
-   "title": "Spinocerebellar ataxia type 40: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant cerebellar ataxia caused by a heterozygous variant in CCDC88C, which encodes the scaffold protein DAPLE, on chromosome 14q32.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive spasticity or bulbar failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain to show cerebellar and possible pontine atrophy and exclude structural or demyelinating lesions, CCDC88C sequencing or a hereditary-ataxia gene panel / exome, Repeat-expansion panel to exclude the common"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: With no disease-modifying therapy for this CCDC88C-related ataxia, base care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the pyramidal-predominant picture for hereditary spastic paraplegia or multiple sclerosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 40."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_40-matrix",
-   "title": "Spinocerebellar ataxia type 40: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant cerebellar ataxia caused by a heterozygous variant in CCDC88C, which encodes the scaffold protein DAPLE, on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary ataxia",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant cerebellar ataxia caused by a heterozygous variant in CCDC88C, which encodes the scaffold protein DAPLE, on chromosome 14q32.",
+      "Adult-onset, slowly progressive gait and limb ataxia with dysarthria.",
+      "Distinctive pyramidal involvement: hyperreflexia, spasticity and extensor plantar responses accompany the cerebellar signs, unlike the purer cerebellar subtypes.",
+      "Oculomotor findings include saccadic (broken) smooth pursuit and gaze-evoked nystagmus, and intention tremor is common.",
+      "First reported in a Han Chinese family.",
+      "MRI shows cerebellar atrophy, sometimes with brainstem or pontine involvement.",
+      "Mechanistically linked to hyperactivation of the c-Jun N-terminal kinase (JNK) apoptotic pathway.",
+      "Biallelic loss-of-function CCDC88C variants cause a wholly distinct autosomal recessive congenital hydrocephalus, a different mechanism and phenotype from the dominant ataxia."
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain to show cerebellar and possible pontine atrophy and exclude structural or demyelinating lesions, CCDC88C",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA40 is caused by a heterozygous variant in CCDC88C, which encodes DAPLE (Dishevelled-associating protein with a high frequency of leucine residues), a scaffold protein that modulates Wnt and planar-cell-polarity signalling and the c-Jun N-terminal kinase (JNK) cascade. The dominant ataxia variant is thought to act as a gain of function that hyperactivates JNK signalling, promoting caspase-dependent apoptosis of cerebellar and brainstem neurons and producing progressive spinocerebellar degeneration with prominent pyramidal features. By contrast, biallelic loss-of-function variants in the same gene disrupt neural-tube and ependymal development to cause congenital hydrocephalus, underscoring the allele- and dose-dependent effects of CCDC88C. No nucleotide repeat expansion is involved.",
+    "additionalDifferentials": [
+      "SCA1 (ATXN1) — dominant ataxia in which pyramidal signs and spasticity are prominent",
+      "SCA3 / Machado-Joseph disease (ATXN3) — ataxia with spasticity, pyramidal signs and variable extrapyramidal features",
+      "SCA7 (ATXN7) — dominant ataxia, distinguished by retinopathy",
+      "Spastic ataxia and hereditary spastic paraplegia with cerebellar features, such as SPG7-related disease",
+      "Autosomal recessive spastic ataxia of Charlevoix-Saguenay (SACS)",
+      "Acquired posterior-fossa or demyelinating disease presenting with mixed cerebellar and pyramidal signs"
     ],
-    [
-     "Primary Differentials",
-     "SCA1 (ATXN1) - dominant ataxia in which pyramidal signs and spasticity are prominent, SCA3 / Machado-Joseph disease (ATXN3) -",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain to show cerebellar and possible pontine atrophy and exclude structural or demyelinating lesions",
+      "CCDC88C sequencing or a hereditary-ataxia gene panel / exome",
+      "Repeat-expansion panel to exclude the common repeat-based subtypes such as SCA1, SCA2, SCA3, SCA6 and SCA7",
+      "Nerve conduction studies if a peripheral component is suspected",
+      "Acquired-ataxia screen where the diagnosis is uncertain",
+      "Genetic counselling and family segregation analysis"
     ],
-    [
-     "Management Strategy",
-     "With no disease-modifying therapy for this CCDC88C-related ataxia, base care on physiotherapy for gait and balance, occupational",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive spasticity or bulbar failure",
+      "Features of raised intracranial pressure or hydrocephalus, particularly in infants or relatives with biallelic disease",
+      "Visual or optic symptoms suggesting an alternative subtype",
+      "Sphincter disturbance or a sensory level pointing to a spinal cord lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the pyramidal-predominant picture for hereditary spastic paraplegia or multiple sclerosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is slowly progressive over years to decades; superimposed spasticity may add to gait disability, but life expectancy is generally preserved.",
+    "pitfalls": [
+      "Mistaking the pyramidal-predominant picture for hereditary spastic paraplegia or multiple sclerosis",
+      "Failing to distinguish the dominant ataxia from the recessive congenital hydrocephalus phenotype of the same gene",
+      "Assuming a repeat-expansion mechanism and not proceeding to sequencing",
+      "Overlooking the family history when cerebellar and pyramidal signs coexist"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Standard hereditary ataxia genetics reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "With no disease-modifying therapy for this CCDC88C-related ataxia, base care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy",
+      "Manage the prominent pyramidal spasticity with physiotherapy, stretching, an antispasticity agent such as baclofen, and botulinum toxin for focal spasticity",
+      "Treat intention tremor symptomatically where it impairs function",
+      "Institute falls prevention and provide mobility aids, as spasticity compounds the ataxic gait disability",
+      "Monitor for bulbar dysfunction with periodic swallow assessment",
+      "Provide multidisciplinary ataxia clinic follow-up",
+      "Offer genetic counselling and family segregation analysis for the autosomal dominant transmission"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 40."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-40-real-image",
-   "title": "Spinocerebellar ataxia type 40: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia_type_40-pathway",
+      "title": "Spinocerebellar ataxia type 40: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant cerebellar ataxia caused by a heterozygous variant in CCDC88C, which encodes the scaffold protein DAPLE, on chromosome 14q32.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive spasticity or bulbar failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain to show cerebellar and possible pontine atrophy and exclude structural or demyelinating lesions, CCDC88C sequencing or a hereditary-ataxia gene panel / exome, Repeat-expansion panel to exclude the common"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: With no disease-modifying therapy for this CCDC88C-related ataxia, base care on physiotherapy for gait and balance, occupational therapy, and speech and language therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the pyramidal-predominant picture for hereditary spastic paraplegia or multiple sclerosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 40."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_40-matrix",
+      "title": "Spinocerebellar ataxia type 40: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant cerebellar ataxia caused by a heterozygous variant in CCDC88C, which encodes the scaffold protein DAPLE, on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain to show cerebellar and possible pontine atrophy and exclude structural or demyelinating lesions, CCDC88C",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SCA1 (ATXN1) - dominant ataxia in which pyramidal signs and spasticity are prominent, SCA3 / Machado-Joseph disease (ATXN3) -",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "With no disease-modifying therapy for this CCDC88C-related ataxia, base care on physiotherapy for gait and balance, occupational",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the pyramidal-predominant picture for hereditary spastic paraplegia or multiple sclerosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 40."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_40-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CCDC88C sequencing",
+          "cells": [
+            {
+              "text": "Heterozygous variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy, sometimes with pontine involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat-expansion SCA panel",
+          "cells": [
+            {
+              "text": "Excludes the common repeat subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral component, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired ataxia screen",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family segregation analysis",
+          "cells": [
+            {
+              "text": "Dominant transmission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_40-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinocerebellar ataxia type 1",
+          "cells": [
+            {
+              "text": "Pyramidal signs and spasticity are prominent; repeat testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charlevoix-Saguenay spastic ataxia (SACS)",
+          "cells": [
+            {
+              "text": "Recessive spastic ataxia with cerebellar features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_40-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Pyramidal spasticity; no disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity agent",
+          "cells": [
+            {
+              "text": "Pyramidal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment of intention tremor",
+          "cells": [
+            {
+              "text": "Where it impairs function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention and mobility aids",
+          "cells": [
+            {
+              "text": "Spasticity compounds the ataxic gait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow surveillance",
+          "cells": [
+            {
+              "text": "Periodic assessment for bulbar dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant transmission; segregation analysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_40-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 40",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult ataxia with prominent spasticity and extensor plantar signs: suspected SCA40",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid spasticity, bulbar failure, hydrocephalus, sensory level)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical or spinal review for hydrocephalus or cord lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CCDC88C sequencing; brain MRI; repeat-expansion exclusion; family segregation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a heterozygous CCDC88C variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SCA1, SCA3, SPG7 disease or SACS; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and stretching for pyramidal spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antispasticity agent for pyramidal features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic treatment of intention tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Falls prevention and swallow surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No disease-modifying therapy; spasticity and falls compound the ataxia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,471 @@
 {
- "id": "sialidosis",
- "name": "Sialidosis (mucolipidosis I)",
- "aliases": [
-  "mucolipidosis I",
-  "ML I",
-  "neuraminidase deficiency",
-  "NEU1 deficiency",
-  "cherry-red spot myoclonus syndrome (type 1)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deficiency of lysosomal alpha-N-acetylneuraminidase (sialidase), leading to accumulation of sialylated oligosaccharides and glycopeptides",
-   "Type 1 is the milder, later-onset form presenting with progressive myoclonus, visual failure, and a macular cherry-red spot without coarse features",
-   "Type 2 is more severe with earlier onset, coarse facies, dysostosis multiplex, organomegaly, and, in the congenital form, hydrops fetalis",
-   "The cherry-red spot with myoclonus is a classic clue to type 1 sialidosis",
-   "Urinary oligosaccharide screening shows a characteristic pattern of sialylated compounds rather than glycosaminoglycans",
-   "Distinct from galactosialidosis, which involves combined deficiency of neuraminidase and beta-galactosidase due to a protective protein defect",
-   "Diagnosis is confirmed by deficient neuraminidase activity and NEU1 gene testing"
+  "id": "sialidosis",
+  "name": "Sialidosis (mucolipidosis I)",
+  "aliases": [
+    "mucolipidosis I",
+    "ML I",
+    "neuraminidase deficiency",
+    "NEU1 deficiency",
+    "cherry-red spot myoclonus syndrome (type 1)"
   ],
-  "pathophysiology": "Sialidosis is caused by biallelic pathogenic variants in NEU1, encoding lysosomal alpha-N-acetylneuraminidase (sialidase). This enzyme removes terminal sialic acid residues from sialylated glycoconjugates during their lysosomal degradation. Its deficiency causes accumulation of sialyloligosaccharides and sialylated glycopeptides within lysosomes and their excretion in the urine. The severity spectrum reflects residual enzyme activity: type 1 causes a progressive myoclonic epilepsy with visual decline and preserved somatic appearance, while type 2 causes earlier, more generalised storage disease with dysmorphism, skeletal changes, and visceromegaly, including a congenital hydropic form. Neuraminidase normally functions in a complex with beta-galactosidase and the protective protein cathepsin A, and defects in that protective protein instead cause galactosialidosis. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Galactosialidosis (combined neuraminidase and beta-galactosidase deficiency)",
-   "GM1 and GM2 gangliosidoses presenting with a cherry-red spot",
-   "Other progressive myoclonic epilepsies (e.g. Unverricht-Lundborg, Lafora disease)",
-   "Mucopolysaccharidoses in type 2 given coarse features",
-   "Metabolic causes of non-immune hydrops fetalis for the congenital form",
-   "Niemann-Pick disease and other lysosomal storage disorders with cherry-red spot"
-  ],
-  "additionalInvestigations": [
-   "Leucocyte or fibroblast neuraminidase enzyme assay",
-   "Urinary oligosaccharide and sialyloligosaccharide analysis",
-   "Assay of beta-galactosidase to distinguish sialidosis from galactosialidosis",
-   "NEU1 gene sequencing",
-   "Ophthalmological examination for a macular cherry-red spot",
-   "Neurophysiology (EEG, evoked potentials) to characterise myoclonus in type 1"
-  ],
-  "redFlags": [
-   "Progressive myoclonus and seizures unresponsive to standard therapy",
-   "Rapid visual deterioration",
-   "Hydrops fetalis or severe neonatal presentation in the congenital form",
-   "Cardiorespiratory decline in type 2 disease"
-  ],
-  "prognosis": "Type 1 follows a slowly progressive course with disabling myoclonus and visual loss but relatively preserved somatic health, whereas type 2, especially the congenital form, is severe with high early mortality. No disease-modifying therapy is established, so care is supportive.",
-  "pitfalls": [
-   "Attributing progressive myoclonic epilepsy to an idiopathic cause and missing the cherry-red spot",
-   "Failing to distinguish sialidosis from galactosialidosis by not assaying beta-galactosidase",
-   "Screening only for glycosaminoglycans and missing the sialylated oligosaccharide pattern",
-   "Overlooking sialidosis in the differential of non-immune hydrops fetalis"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive care, as no established disease-modifying therapy exists for neuraminidase deficiency",
-   "Control of the progressive myoclonus and any seizures in type 1 with antimyoclonic and antiepileptic agents such as valproate, levetiracetam, clonazepam or piracetam, recognising the myoclonus is often drug-resistant",
-   "Ophthalmological review and low-vision support for the progressive visual failure and macular cherry-red spot",
-   "Physiotherapy, occupational therapy and mobility aids for the progressive neurological disability",
-   "Management of multisystem storage complications in type 2, with perinatal palliative care for the congenital hydropic form",
-   "Coordinated multidisciplinary care across metabolic medicine, neurology and ophthalmology",
-   "Genetic counselling with family and prenatal testing given autosomal recessive NEU1 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sialidosis-pathway",
-   "title": "Sialidosis (mucolipidosis I): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deficiency of lysosomal alpha-N-acetylneuraminidase (sialidase), leading to accumulation of sialylated oligosaccharides and glycopeptides",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive myoclonus and seizures unresponsive to standard therapy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Leucocyte or fibroblast neuraminidase enzyme assay, Urinary oligosaccharide and sialyloligosaccharide analysis, Assay of beta-galactosidase to distinguish sialidosis from galactosialidosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care, as no established disease-modifying therapy exists for neuraminidase deficiency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing progressive myoclonic epilepsy to an idiopathic cause and missing the cherry-red spot"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sialidosis (mucolipidosis i)."
-  }
- ],
- "tables": [
-  {
-   "id": "sialidosis-matrix",
-   "title": "Sialidosis (mucolipidosis I): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deficiency of lysosomal alpha-N-acetylneuraminidase (sialidase), leading to accumulation of sialylated oligosaccharides",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deficiency of lysosomal alpha-N-acetylneuraminidase (sialidase), leading to accumulation of sialylated oligosaccharides and glycopeptides",
+      "Type 1 is the milder, later-onset form presenting with progressive myoclonus, visual failure, and a macular cherry-red spot without coarse features",
+      "Type 2 is more severe with earlier onset, coarse facies, dysostosis multiplex, organomegaly, and, in the congenital form, hydrops fetalis",
+      "The cherry-red spot with myoclonus is a classic clue to type 1 sialidosis",
+      "Urinary oligosaccharide screening shows a characteristic pattern of sialylated compounds rather than glycosaminoglycans",
+      "Distinct from galactosialidosis, which involves combined deficiency of neuraminidase and beta-galactosidase due to a protective protein defect",
+      "Diagnosis is confirmed by deficient neuraminidase activity and NEU1 gene testing"
     ],
-    [
-     "Key Investigations",
-     "Leucocyte or fibroblast neuraminidase enzyme assay, Urinary oligosaccharide and sialyloligosaccharide analysis, Assay of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sialidosis is caused by biallelic pathogenic variants in NEU1, encoding lysosomal alpha-N-acetylneuraminidase (sialidase). This enzyme removes terminal sialic acid residues from sialylated glycoconjugates during their lysosomal degradation. Its deficiency causes accumulation of sialyloligosaccharides and sialylated glycopeptides within lysosomes and their excretion in the urine. The severity spectrum reflects residual enzyme activity: type 1 causes a progressive myoclonic epilepsy with visual decline and preserved somatic appearance, while type 2 causes earlier, more generalised storage disease with dysmorphism, skeletal changes, and visceromegaly, including a congenital hydropic form. Neuraminidase normally functions in a complex with beta-galactosidase and the protective protein cathepsin A, and defects in that protective protein instead cause galactosialidosis. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Galactosialidosis (combined neuraminidase and beta-galactosidase deficiency)",
+      "GM1 and GM2 gangliosidoses presenting with a cherry-red spot",
+      "Other progressive myoclonic epilepsies (e.g. Unverricht-Lundborg, Lafora disease)",
+      "Mucopolysaccharidoses in type 2 given coarse features",
+      "Metabolic causes of non-immune hydrops fetalis for the congenital form",
+      "Niemann-Pick disease and other lysosomal storage disorders with cherry-red spot"
     ],
-    [
-     "Primary Differentials",
-     "Galactosialidosis (combined neuraminidase and beta-galactosidase deficiency), GM1 and GM2 gangliosidoses presenting with a",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Leucocyte or fibroblast neuraminidase enzyme assay",
+      "Urinary oligosaccharide and sialyloligosaccharide analysis",
+      "Assay of beta-galactosidase to distinguish sialidosis from galactosialidosis",
+      "NEU1 gene sequencing",
+      "Ophthalmological examination for a macular cherry-red spot",
+      "Neurophysiology (EEG, evoked potentials) to characterise myoclonus in type 1"
     ],
-    [
-     "Management Strategy",
-     "Supportive care, as no established disease-modifying therapy exists for neuraminidase deficiency",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive myoclonus and seizures unresponsive to standard therapy",
+      "Rapid visual deterioration",
+      "Hydrops fetalis or severe neonatal presentation in the congenital form",
+      "Cardiorespiratory decline in type 2 disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing progressive myoclonic epilepsy to an idiopathic cause and missing the cherry-red spot",
-     "Prevent diagnostic or management error"
+    "prognosis": "Type 1 follows a slowly progressive course with disabling myoclonus and visual loss but relatively preserved somatic health, whereas type 2, especially the congenital form, is severe with high early mortality. No disease-modifying therapy is established, so care is supportive.",
+    "pitfalls": [
+      "Attributing progressive myoclonic epilepsy to an idiopathic cause and missing the cherry-red spot",
+      "Failing to distinguish sialidosis from galactosialidosis by not assaying beta-galactosidase",
+      "Screening only for glycosaminoglycans and missing the sialylated oligosaccharide pattern",
+      "Overlooking sialidosis in the differential of non-immune hydrops fetalis"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive care, as no established disease-modifying therapy exists for neuraminidase deficiency",
+      "Control of the progressive myoclonus and any seizures in type 1 with antimyoclonic and antiepileptic agents such as valproate, levetiracetam, clonazepam or piracetam, recognising the myoclonus is often drug-resistant",
+      "Ophthalmological review and low-vision support for the progressive visual failure and macular cherry-red spot",
+      "Physiotherapy, occupational therapy and mobility aids for the progressive neurological disability",
+      "Management of multisystem storage complications in type 2, with perinatal palliative care for the congenital hydropic form",
+      "Coordinated multidisciplinary care across metabolic medicine, neurology and ophthalmology",
+      "Genetic counselling with family and prenatal testing given autosomal recessive NEU1 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for sialidosis (mucolipidosis i)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sialidosis-real-image",
-   "title": "Sialidosis (mucolipidosis I): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sialidosis-pathway",
+      "title": "Sialidosis (mucolipidosis I): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deficiency of lysosomal alpha-N-acetylneuraminidase (sialidase), leading to accumulation of sialylated oligosaccharides and glycopeptides",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive myoclonus and seizures unresponsive to standard therapy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Leucocyte or fibroblast neuraminidase enzyme assay, Urinary oligosaccharide and sialyloligosaccharide analysis, Assay of beta-galactosidase to distinguish sialidosis from galactosialidosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care, as no established disease-modifying therapy exists for neuraminidase deficiency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing progressive myoclonic epilepsy to an idiopathic cause and missing the cherry-red spot"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sialidosis (mucolipidosis i)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sialidosis-matrix",
+      "title": "Sialidosis (mucolipidosis I): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deficiency of lysosomal alpha-N-acetylneuraminidase (sialidase), leading to accumulation of sialylated oligosaccharides",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Leucocyte or fibroblast neuraminidase enzyme assay, Urinary oligosaccharide and sialyloligosaccharide analysis, Assay of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Galactosialidosis (combined neuraminidase and beta-galactosidase deficiency), GM1 and GM2 gangliosidoses presenting with a",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care, as no established disease-modifying therapy exists for neuraminidase deficiency",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing progressive myoclonic epilepsy to an idiopathic cause and missing the cherry-red spot",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sialidosis (mucolipidosis i)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sialidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Leucocyte or fibroblast neuraminidase assay",
+          "cells": [
+            {
+              "text": "Enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary oligosaccharide analysis",
+          "cells": [
+            {
+              "text": "Sialyloligosaccharides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-galactosidase assay",
+          "cells": [
+            {
+              "text": "Separates sialidosis from galactosialidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NEU1 gene sequencing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Macular cherry-red spot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and evoked potentials",
+          "cells": [
+            {
+              "text": "Characterise myoclonus in type 1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sialidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Galactosialidosis",
+          "cells": [
+            {
+              "text": "Combined neuraminidase and beta-galactosidase deficiency; assay beta-galactosidase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other progressive myoclonic epilepsies",
+          "cells": [
+            {
+              "text": "Cherry-red spot may be missed and the cause called idiopathic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucopolysaccharidoses",
+          "cells": [
+            {
+              "text": "Coarse features also seen in type 2"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sialidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No established disease-modifying therapy for neuraminidase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimyoclonic and antiepileptic drugs",
+          "cells": [
+            {
+              "text": "For myoclonus and seizures in type 1, such as valproate and levetiracetam"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology",
+          "cells": [
+            {
+              "text": "Review and low-vision support for visual failure and cherry-red spot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 2 care",
+          "cells": [
+            {
+              "text": "Manage storage complications; perinatal palliative care for the congenital hydropic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine, neurology and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive NEU1; family and prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sialidosis-dx-mgmt",
+      "title": "Diagnosis and management of Sialidosis (mucolipidosis I)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive myoclonus with visual loss and macular cherry-red spot: suspect sialidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (refractory myoclonus, rapid visual loss, hydrops, cardiorespiratory decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate antiseizure therapy; perinatal palliative care for congenital hydropic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neuraminidase assay, urinary oligosaccharides, beta-galactosidase, NEU1 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does enzyme assay with normal beta-galactosidase and NEU1 testing confirm sialidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider galactosialidosis, GM1/GM2 gangliosidosis and other myoclonic epilepsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Valproate, levetiracetam or clonazepam for type 1 myoclonus and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ophthalmology review and low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and mobility aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive NEU1 inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type 1 is slowly progressive; type 2 and congenital forms are more severe",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

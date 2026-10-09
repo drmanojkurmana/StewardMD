@@ -1,173 +1,469 @@
 {
- "id": "fibrogenesis_imperfecta_ossium",
- "name": "Fibrogenesis imperfecta ossium",
- "aliases": [
-  "fibrogenesis imperfecta ossium",
-  "FIO",
-  "collagen fibre disorganisation osteopathy"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Primer on the Metabolic Bone Diseases / Resnick Diagnosis of Bone and Joint Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare acquired osteopathy of middle-aged and older adults characterised by disorganised, abnormally woven bone collagen and defective mineralisation",
-   "Presents with progressive, often debilitating generalised bone pain and immobilising fractures affecting the axial skeleton and long bones",
-   "Radiographs show a coarse, disorganised trabecular pattern (a 'fish-net' or smudged appearance) with reduced bone density and fractures",
-   "Bone histology is diagnostic, showing loss of the normal birefringent lamellar collagen pattern under polarised light with abundant unmineralised osteoid",
-   "Serum alkaline phosphatase is often raised while calcium, phosphate, and parathyroid hormone are typically normal, distinguishing it from classic osteomalacia",
-   "Some cases are associated with a paraproteinaemia or macroglobulinaemia, so screening for a monoclonal gammopathy is worthwhile",
-   "Management is largely supportive with analgesia, fracture care, and treatment of any associated plasma-cell or lymphoproliferative disorder; response to standard osteomalacia therapy is generally poor"
+  "id": "fibrogenesis_imperfecta_ossium",
+  "name": "Fibrogenesis imperfecta ossium",
+  "aliases": [
+    "fibrogenesis imperfecta ossium",
+    "FIO",
+    "collagen fibre disorganisation osteopathy"
   ],
-  "pathophysiology": "Fibrogenesis imperfecta ossium is a disorder of bone matrix in which osteoblasts lay down collagen in a disorganised, non-lamellar arrangement that fails to mineralise normally, accumulating as abnormal woven bone and excess osteoid. Unlike osteomalacia driven by vitamin D or phosphate deficiency, the mineral-regulating hormones and metabolites are usually normal, and the primary abnormality lies in the collagen fibre organisation itself, evident as loss of normal birefringence on polarised microscopy. The structurally deficient bone is mechanically weak, producing pain and fractures. The occasional association with a monoclonal gammopathy suggests that, in some patients, a circulating paraprotein or marrow disorder may interfere with matrix formation, though the mechanism is incompletely understood.",
-  "additionalDifferentials": [
-   "Osteomalacia from vitamin D or phosphate deficiency",
-   "Paget disease of bone",
-   "Myeloma and other plasma-cell dyscrasias with bone involvement",
-   "Axial osteomalacia",
-   "Metastatic bone disease",
-   "Osteoporosis with fragility fractures"
-  ],
-  "additionalInvestigations": [
-   "Radiographs showing the coarse disorganised trabecular pattern and fractures",
-   "Serum calcium, phosphate, alkaline phosphatase, and parathyroid hormone (typically normal except raised alkaline phosphatase)",
-   "Vitamin D metabolites to exclude classic osteomalacia",
-   "Serum and urine protein electrophoresis with free light chains to detect an associated paraproteinaemia",
-   "Bone biopsy with polarised microscopy demonstrating loss of normal lamellar birefringence",
-   "Bone densitometry to quantify reduced density"
-  ],
-  "redFlags": [
-   "Progressive immobilising bone pain and recurrent fractures",
-   "Detection of a monoclonal gammopathy or macroglobulinaemia",
-   "Vertebral collapse compromising function",
-   "Failure to respond to standard osteomalacia therapy, prompting reassessment"
-  ],
-  "prognosis": "The disorder tends to be progressive and disabling with a variable course; some patients stabilise or improve, particularly if an associated plasma-cell disorder is treated, but overall response to conventional metabolic bone therapy is limited.",
-  "pitfalls": [
-   "Mislabelling it as ordinary osteomalacia and treating with vitamin D, which does not correct the matrix defect",
-   "Not performing bone biopsy with polarised microscopy, the key to diagnosis",
-   "Overlooking an associated paraproteinaemia that may be driving the bone disease",
-   "Confusing the coarse radiographic pattern with Paget disease or metastatic infiltration"
-  ],
-  "references": [
-   "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism",
-   "Resnick's Diagnosis of Bone and Joint Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Screen for and treat any associated plasma-cell dyscrasia or paraproteinaemia, as controlling it may improve the underlying bone disease",
-   "Provide structured analgesia and a pain-management approach for the debilitating generalised bone pain",
-   "Manage fractures orthopaedically with fixation and rehabilitation",
-   "Trial bone-directed therapy such as bisphosphonates while recognising the limited response to conventional metabolic bone treatment",
-   "Ensure vitamin D and calcium sufficiency to exclude and avoid a coexisting osteomalacia",
-   "Monitor disease progression and fracture risk with bone densitometry and serial radiographs",
-   "Provide physiotherapy, mobility support and falls prevention to preserve function, and refer to metabolic bone and haematology specialists for combined management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fibrogenesis_imperfecta_ossium-pathway",
-   "title": "Fibrogenesis imperfecta ossium: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare acquired osteopathy of middle-aged and older adults characterised by disorganised, abnormally woven bone collagen and defective mineralisation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive immobilising bone pain and recurrent fractures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Radiographs showing the coarse disorganised trabecular pattern and fractures, Serum calcium, phosphate, alkaline phosphatase, and parathyroid hormone (typically normal except raised alkaline phosphatase), Vitamin D"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Screen for and treat any associated plasma-cell dyscrasia or paraproteinaemia, as controlling it may improve the underlying bone disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling it as ordinary osteomalacia and treating with vitamin D, which does not correct the matrix defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fibrogenesis imperfecta ossium."
-  }
- ],
- "tables": [
-  {
-   "id": "fibrogenesis_imperfecta_ossium-matrix",
-   "title": "Fibrogenesis imperfecta ossium: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare acquired osteopathy of middle-aged and older adults characterised by disorganised, abnormally woven bone collagen and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Primer on the Metabolic Bone Diseases / Resnick Diagnosis of Bone and Joint Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare acquired osteopathy of middle-aged and older adults characterised by disorganised, abnormally woven bone collagen and defective mineralisation",
+      "Presents with progressive, often debilitating generalised bone pain and immobilising fractures affecting the axial skeleton and long bones",
+      "Radiographs show a coarse, disorganised trabecular pattern (a 'fish-net' or smudged appearance) with reduced bone density and fractures",
+      "Bone histology is diagnostic, showing loss of the normal birefringent lamellar collagen pattern under polarised light with abundant unmineralised osteoid",
+      "Serum alkaline phosphatase is often raised while calcium, phosphate, and parathyroid hormone are typically normal, distinguishing it from classic osteomalacia",
+      "Some cases are associated with a paraproteinaemia or macroglobulinaemia, so screening for a monoclonal gammopathy is worthwhile",
+      "Management is largely supportive with analgesia, fracture care, and treatment of any associated plasma-cell or lymphoproliferative disorder; response to standard osteomalacia therapy is generally poor"
     ],
-    [
-     "Key Investigations",
-     "Radiographs showing the coarse disorganised trabecular pattern and fractures, Serum calcium, phosphate, alkaline phosphatase, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fibrogenesis imperfecta ossium is a disorder of bone matrix in which osteoblasts lay down collagen in a disorganised, non-lamellar arrangement that fails to mineralise normally, accumulating as abnormal woven bone and excess osteoid. Unlike osteomalacia driven by vitamin D or phosphate deficiency, the mineral-regulating hormones and metabolites are usually normal, and the primary abnormality lies in the collagen fibre organisation itself, evident as loss of normal birefringence on polarised microscopy. The structurally deficient bone is mechanically weak, producing pain and fractures. The occasional association with a monoclonal gammopathy suggests that, in some patients, a circulating paraprotein or marrow disorder may interfere with matrix formation, though the mechanism is incompletely understood.",
+    "additionalDifferentials": [
+      "Osteomalacia from vitamin D or phosphate deficiency",
+      "Paget disease of bone",
+      "Myeloma and other plasma-cell dyscrasias with bone involvement",
+      "Axial osteomalacia",
+      "Metastatic bone disease",
+      "Osteoporosis with fragility fractures"
     ],
-    [
-     "Primary Differentials",
-     "Osteomalacia from vitamin D or phosphate deficiency, Paget disease of bone, Myeloma and other plasma-cell dyscrasias with bone",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Radiographs showing the coarse disorganised trabecular pattern and fractures",
+      "Serum calcium, phosphate, alkaline phosphatase, and parathyroid hormone (typically normal except raised alkaline phosphatase)",
+      "Vitamin D metabolites to exclude classic osteomalacia",
+      "Serum and urine protein electrophoresis with free light chains to detect an associated paraproteinaemia",
+      "Bone biopsy with polarised microscopy demonstrating loss of normal lamellar birefringence",
+      "Bone densitometry to quantify reduced density"
     ],
-    [
-     "Management Strategy",
-     "Screen for and treat any associated plasma-cell dyscrasia or paraproteinaemia, as controlling it may improve the underlying bone",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive immobilising bone pain and recurrent fractures",
+      "Detection of a monoclonal gammopathy or macroglobulinaemia",
+      "Vertebral collapse compromising function",
+      "Failure to respond to standard osteomalacia therapy, prompting reassessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling it as ordinary osteomalacia and treating with vitamin D, which does not correct the matrix defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder tends to be progressive and disabling with a variable course; some patients stabilise or improve, particularly if an associated plasma-cell disorder is treated, but overall response to conventional metabolic bone therapy is limited.",
+    "pitfalls": [
+      "Mislabelling it as ordinary osteomalacia and treating with vitamin D, which does not correct the matrix defect",
+      "Not performing bone biopsy with polarised microscopy, the key to diagnosis",
+      "Overlooking an associated paraproteinaemia that may be driving the bone disease",
+      "Confusing the coarse radiographic pattern with Paget disease or metastatic infiltration"
+    ],
+    "references": [
+      "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism",
+      "Resnick's Diagnosis of Bone and Joint Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Screen for and treat any associated plasma-cell dyscrasia or paraproteinaemia, as controlling it may improve the underlying bone disease",
+      "Provide structured analgesia and a pain-management approach for the debilitating generalised bone pain",
+      "Manage fractures orthopaedically with fixation and rehabilitation",
+      "Trial bone-directed therapy such as bisphosphonates while recognising the limited response to conventional metabolic bone treatment",
+      "Ensure vitamin D and calcium sufficiency to exclude and avoid a coexisting osteomalacia",
+      "Monitor disease progression and fracture risk with bone densitometry and serial radiographs",
+      "Provide physiotherapy, mobility support and falls prevention to preserve function, and refer to metabolic bone and haematology specialists for combined management"
     ]
-   ],
-   "caption": "Overview comparison matrix for fibrogenesis imperfecta ossium."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fibrogenesis-imperfecta-ossium-real-image",
-   "title": "Fibrogenesis imperfecta ossium: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "fibrogenesis_imperfecta_ossium-pathway",
+      "title": "Fibrogenesis imperfecta ossium: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare acquired osteopathy of middle-aged and older adults characterised by disorganised, abnormally woven bone collagen and defective mineralisation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive immobilising bone pain and recurrent fractures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Radiographs showing the coarse disorganised trabecular pattern and fractures, Serum calcium, phosphate, alkaline phosphatase, and parathyroid hormone (typically normal except raised alkaline phosphatase), Vitamin D"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Screen for and treat any associated plasma-cell dyscrasia or paraproteinaemia, as controlling it may improve the underlying bone disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling it as ordinary osteomalacia and treating with vitamin D, which does not correct the matrix defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fibrogenesis imperfecta ossium."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fibrogenesis_imperfecta_ossium-matrix",
+      "title": "Fibrogenesis imperfecta ossium: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare acquired osteopathy of middle-aged and older adults characterised by disorganised, abnormally woven bone collagen and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Radiographs showing the coarse disorganised trabecular pattern and fractures, Serum calcium, phosphate, alkaline phosphatase, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Osteomalacia from vitamin D or phosphate deficiency, Paget disease of bone, Myeloma and other plasma-cell dyscrasias with bone",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Screen for and treat any associated plasma-cell dyscrasia or paraproteinaemia, as controlling it may improve the underlying bone",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling it as ordinary osteomalacia and treating with vitamin D, which does not correct the matrix defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fibrogenesis imperfecta ossium."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases / Resnick Diagnosis of Bone and Joint Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibrogenesis_imperfecta_ossium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Coarse disorganised trabecular pattern and fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate, ALP and PTH",
+          "cells": [
+            {
+              "text": "Typically normal except raised alkaline phosphatase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D metabolites",
+          "cells": [
+            {
+              "text": "Classic osteomalacia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine electrophoresis with free light chains",
+          "cells": [
+            {
+              "text": "Paraproteinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone biopsy with polarised microscopy",
+          "cells": [
+            {
+              "text": "Loss of lamellar birefringence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone densitometry",
+          "cells": [
+            {
+              "text": "Reduced density"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrogenesis_imperfecta_ossium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteomalacia from vitamin D or phosphate deficiency",
+          "cells": [
+            {
+              "text": "Excluded by vitamin D metabolites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paget disease of bone",
+          "cells": [
+            {
+              "text": "Coarse trabecular pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myeloma or plasma-cell dyscrasia",
+          "cells": [
+            {
+              "text": "Bone involvement with paraprotein"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrogenesis_imperfecta_ossium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat any plasma-cell dyscrasia or paraproteinaemia",
+          "cells": [
+            {
+              "text": "May improve the underlying bone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured analgesia and pain management",
+          "cells": [
+            {
+              "text": "Debilitating generalised bone pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic fixation and rehabilitation",
+          "cells": [
+            {
+              "text": "Fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonates",
+          "cells": [
+            {
+              "text": "Limited response to conventional therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D and calcium sufficiency",
+          "cells": [
+            {
+              "text": "Excludes coexisting osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Densitometry and serial radiographs",
+          "cells": [
+            {
+              "text": "Disease progression and fracture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and falls prevention",
+          "cells": [
+            {
+              "text": "Preserve function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibrogenesis_imperfecta_ossium-dx-mgmt",
+      "title": "Diagnosis and management of Fibrogenesis imperfecta ossium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive generalised bone pain and fractures in a middle-aged or older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (immobilising pain, monoclonal gammopathy, vertebral collapse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for vertebral collapse or spinal cord compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs; ALP and calcium; vitamin D; electrophoresis with free light chains; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Abnormal lamellar birefringence on bone biopsy under polarised light?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteomalacia, Paget disease, myeloma or metastatic bone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat any associated plasma-cell dyscrasia or paraproteinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Structured analgesia and pain management",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic fixation for fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trial of bisphosphonates with vitamin D and calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive and disabling; some stabilise if the plasma-cell disorder is treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

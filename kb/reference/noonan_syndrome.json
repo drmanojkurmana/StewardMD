@@ -1,171 +1,431 @@
 {
- "id": "noonan_syndrome",
- "name": "Noonan syndrome",
- "aliases": [
-  "NS",
-  "male Turner syndrome (historical, inaccurate)",
-  "RASopathy"
- ],
- "class": "non_infective",
- "system": "Genetic / Paediatrics",
- "specialty": "Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Common features include short stature, characteristic facies, congenital heart disease, and a broad or webbed neck",
-   "Facial features evolve with age but classically include hypertelorism, downslanting palpebral fissures, ptosis, and low-set posteriorly rotated ears",
-   "Pulmonary valve stenosis is the most characteristic cardiac lesion, and hypertrophic cardiomyopathy also occurs",
-   "A pectus deformity (carinatum superiorly and excavatum inferiorly) and cubitus valgus are typical skeletal findings",
-   "A bleeding tendency from coagulation factor deficiencies or platelet dysfunction may complicate surgery",
-   "Belongs to the RASopathy group caused by mutations that dysregulate the RAS-MAPK signalling pathway, most commonly in PTPN11",
-   "Cryptorchidism is common in affected males and may affect fertility",
-   "Development is usually normal or only mildly affected, distinguishing it from many other syndromes"
+  "id": "noonan_syndrome",
+  "name": "Noonan syndrome",
+  "aliases": [
+    "NS",
+    "male Turner syndrome (historical, inaccurate)",
+    "RASopathy"
   ],
-  "pathophysiology": "Noonan syndrome is one of the RASopathies, a family of disorders caused by germline mutations that increase signalling through the RAS-mitogen-activated protein kinase (RAS-MAPK) pathway, which governs cell proliferation, differentiation, and survival. The most frequent gene involved is PTPN11, with additional cases attributed to SOS1, RAF1, RIT1, KRAS, and others. Excess pathway activity during development produces the cardiac defects, characteristic facial and skeletal features, growth restriction, and haematological abnormalities. Inheritance is autosomal dominant with variable expressivity, and many cases arise de novo.",
-  "additionalDifferentials": [
-   "Turner syndrome",
-   "Other RASopathies such as cardiofaciocutaneous and Costello syndromes",
-   "Neurofibromatosis-Noonan overlap phenotype",
-   "Williams syndrome",
-   "Fetal alcohol spectrum disorder"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic panel testing for RASopathy-associated genes",
-   "Echocardiography and electrocardiography to characterise cardiac involvement",
-   "Coagulation screen and platelet studies, particularly before surgery",
-   "Growth monitoring and endocrine assessment for short stature",
-   "Renal ultrasound and developmental assessment as indicated"
-  ],
-  "redFlags": [
-   "Hypertrophic cardiomyopathy that may progress and cause heart failure or arrhythmia",
-   "Unexpected bleeding during surgery or trauma from an underlying coagulopathy",
-   "Rare association with juvenile myelomonocytic leukaemia, especially in certain genotypes",
-   "Significant feeding difficulties and failure to thrive in infancy"
-  ],
-  "prognosis": "Most individuals have a good long-term outlook with normal or near-normal cognition, though prognosis is influenced by the severity of cardiac disease, particularly hypertrophic cardiomyopathy.",
-  "pitfalls": [
-   "Overlooking the diagnosis in a child with short stature and pulmonary stenosis",
-   "Failing to check coagulation before invasive procedures",
-   "Attributing the phenotype in a female to Turner syndrome without genetic testing",
-   "Not monitoring for evolving hypertrophic cardiomyopathy over time"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the characteristic pulmonary valve stenosis with balloon valvuloplasty or surgical repair, and monitor for and manage hypertrophic cardiomyopathy",
-   "Consider growth hormone therapy for short stature after endocrine assessment",
-   "Screen coagulation and platelet function before any surgery and manage the bleeding tendency proactively",
-   "Provide developmental support and educational intervention for learning and motor delays",
-   "Undertake regular cardiac surveillance with echocardiography and electrocardiography given the risk from hypertrophic cardiomyopathy",
-   "Offer genetic counselling for this autosomal dominant RASopathy, with molecular confirmation and assessment of relatives",
-   "Coordinate multidisciplinary care across cardiology, endocrinology, clinical genetics and developmental services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "noonan_syndrome-pathway",
-   "title": "Noonan syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Common features include short stature, characteristic facies, congenital heart disease, and a broad or webbed neck",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypertrophic cardiomyopathy that may progress and cause heart failure or arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic panel testing for RASopathy-associated genes, Echocardiography and electrocardiography to characterise cardiac involvement, Coagulation screen and platelet studies, particularly before surgery"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the characteristic pulmonary valve stenosis with balloon valvuloplasty or surgical repair, and monitor for and manage hypertrophic cardiomyopathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis in a child with short stature and pulmonary stenosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of noonan syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "noonan_syndrome-matrix",
-   "title": "Noonan syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Common features include short stature, characteristic facies, congenital heart disease, and a broad or webbed neck",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Paediatrics",
+  "specialty": "Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Common features include short stature, characteristic facies, congenital heart disease, and a broad or webbed neck",
+      "Facial features evolve with age but classically include hypertelorism, downslanting palpebral fissures, ptosis, and low-set posteriorly rotated ears",
+      "Pulmonary valve stenosis is the most characteristic cardiac lesion, and hypertrophic cardiomyopathy also occurs",
+      "A pectus deformity (carinatum superiorly and excavatum inferiorly) and cubitus valgus are typical skeletal findings",
+      "A bleeding tendency from coagulation factor deficiencies or platelet dysfunction may complicate surgery",
+      "Belongs to the RASopathy group caused by mutations that dysregulate the RAS-MAPK signalling pathway, most commonly in PTPN11",
+      "Cryptorchidism is common in affected males and may affect fertility",
+      "Development is usually normal or only mildly affected, distinguishing it from many other syndromes"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic panel testing for RASopathy-associated genes, Echocardiography and electrocardiography to characterise cardiac",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Noonan syndrome is one of the RASopathies, a family of disorders caused by germline mutations that increase signalling through the RAS-mitogen-activated protein kinase (RAS-MAPK) pathway, which governs cell proliferation, differentiation, and survival. The most frequent gene involved is PTPN11, with additional cases attributed to SOS1, RAF1, RIT1, KRAS, and others. Excess pathway activity during development produces the cardiac defects, characteristic facial and skeletal features, growth restriction, and haematological abnormalities. Inheritance is autosomal dominant with variable expressivity, and many cases arise de novo.",
+    "additionalDifferentials": [
+      "Turner syndrome",
+      "Other RASopathies such as cardiofaciocutaneous and Costello syndromes",
+      "Neurofibromatosis-Noonan overlap phenotype",
+      "Williams syndrome",
+      "Fetal alcohol spectrum disorder"
     ],
-    [
-     "Primary Differentials",
-     "Turner syndrome, Other RASopathies such as cardiofaciocutaneous and Costello syndromes, Neurofibromatosis-Noonan overlap phenotype",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic panel testing for RASopathy-associated genes",
+      "Echocardiography and electrocardiography to characterise cardiac involvement",
+      "Coagulation screen and platelet studies, particularly before surgery",
+      "Growth monitoring and endocrine assessment for short stature",
+      "Renal ultrasound and developmental assessment as indicated"
     ],
-    [
-     "Management Strategy",
-     "Treat the characteristic pulmonary valve stenosis with balloon valvuloplasty or surgical repair, and monitor for and manage",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypertrophic cardiomyopathy that may progress and cause heart failure or arrhythmia",
+      "Unexpected bleeding during surgery or trauma from an underlying coagulopathy",
+      "Rare association with juvenile myelomonocytic leukaemia, especially in certain genotypes",
+      "Significant feeding difficulties and failure to thrive in infancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis in a child with short stature and pulmonary stenosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most individuals have a good long-term outlook with normal or near-normal cognition, though prognosis is influenced by the severity of cardiac disease, particularly hypertrophic cardiomyopathy.",
+    "pitfalls": [
+      "Overlooking the diagnosis in a child with short stature and pulmonary stenosis",
+      "Failing to check coagulation before invasive procedures",
+      "Attributing the phenotype in a female to Turner syndrome without genetic testing",
+      "Not monitoring for evolving hypertrophic cardiomyopathy over time"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the characteristic pulmonary valve stenosis with balloon valvuloplasty or surgical repair, and monitor for and manage hypertrophic cardiomyopathy",
+      "Consider growth hormone therapy for short stature after endocrine assessment",
+      "Screen coagulation and platelet function before any surgery and manage the bleeding tendency proactively",
+      "Provide developmental support and educational intervention for learning and motor delays",
+      "Undertake regular cardiac surveillance with echocardiography and electrocardiography given the risk from hypertrophic cardiomyopathy",
+      "Offer genetic counselling for this autosomal dominant RASopathy, with molecular confirmation and assessment of relatives",
+      "Coordinate multidisciplinary care across cardiology, endocrinology, clinical genetics and developmental services"
     ]
-   ],
-   "caption": "Overview comparison matrix for noonan syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "noonan-syndrome-real-image",
-   "title": "Noonan syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "noonan_syndrome-pathway",
+      "title": "Noonan syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Common features include short stature, characteristic facies, congenital heart disease, and a broad or webbed neck",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypertrophic cardiomyopathy that may progress and cause heart failure or arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic panel testing for RASopathy-associated genes, Echocardiography and electrocardiography to characterise cardiac involvement, Coagulation screen and platelet studies, particularly before surgery"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the characteristic pulmonary valve stenosis with balloon valvuloplasty or surgical repair, and monitor for and manage hypertrophic cardiomyopathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis in a child with short stature and pulmonary stenosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of noonan syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "noonan_syndrome-matrix",
+      "title": "Noonan syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Common features include short stature, characteristic facies, congenital heart disease, and a broad or webbed neck",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic panel testing for RASopathy-associated genes, Echocardiography and electrocardiography to characterise cardiac",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Turner syndrome, Other RASopathies such as cardiofaciocutaneous and Costello syndromes, Neurofibromatosis-Noonan overlap phenotype",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the characteristic pulmonary valve stenosis with balloon valvuloplasty or surgical repair, and monitor for and manage",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis in a child with short stature and pulmonary stenosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for noonan syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard medical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "noonan_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic panel for RASopathy genes",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and electrocardiography",
+          "cells": [
+            {
+              "text": "Cardiac involvement, especially hypertrophic cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Bleeding risk before procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and facial assessment",
+          "cells": [
+            {
+              "text": "Short stature and characteristic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "noonan_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Turner syndrome",
+          "cells": [
+            {
+              "text": "Short stature in girls with similar features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiofaciocutaneous syndrome",
+          "cells": [
+            {
+              "text": "Other RASopathy with distinct features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Costello syndrome",
+          "cells": [
+            {
+              "text": "RASopathy with different growth and skin features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Williams syndrome",
+          "cells": [
+            {
+              "text": "Different cardiac and cognitive profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "noonan_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Balloon valvuloplasty or surgical repair",
+          "cells": [
+            {
+              "text": "For pulmonary valve stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and treatment of hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Lifelong cardiac surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation check before invasive procedures",
+          "cells": [
+            {
+              "text": "Bleeding tendency with coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone where indicated",
+          "cells": [
+            {
+              "text": "For short stature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "noonan_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Noonan syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short stature, characteristic facies and congenital heart disease in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hypertrophic cardiomyopathy, heart failure, arrhythmia, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for heart failure or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RASopathy panel, echocardiogram, ECG, coagulation screen, growth assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "RASopathy variant with characteristic facies and heart disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Turner syndrome or other RASopathy; retest genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Balloon valvuloplasty or surgery for pulmonary stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor and treat hypertrophic cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Check coagulation before invasive procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Growth hormone where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mostly good, with normal or near-normal cognition; cardiac severity drives outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

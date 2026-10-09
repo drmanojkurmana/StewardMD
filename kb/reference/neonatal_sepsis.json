@@ -1,178 +1,447 @@
 {
- "id": "neonatal_sepsis",
- "name": "Neonatal sepsis",
- "aliases": [
-  "sepsis neonatorum",
-  "newborn sepsis",
-  "early-onset neonatal sepsis",
-  "late-onset neonatal sepsis",
-  "EOS",
-  "LOS"
- ],
- "class": "infective",
- "system": "Neonatology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset (within roughly the first 72 hours, often maternally acquired) and late-onset (after 72 hours, frequently nosocomial or community-acquired).",
-   "Signs are notoriously nonspecific: temperature instability (fever or hypothermia), poor feeding, lethargy or irritability, respiratory distress, apnoea, tachycardia, and abdominal distension.",
-   "Group B Streptococcus and Escherichia coli dominate early-onset disease; coagulase-negative staphylococci, Staphylococcus aureus, and Gram-negative organisms are common in late-onset disease, especially in preterm infants with indwelling lines.",
-   "Maternal risk factors include prolonged rupture of membranes, chorioamnionitis, maternal fever, and GBS colonisation without adequate intrapartum prophylaxis.",
-   "Blood culture is the diagnostic gold standard; a lumbar puncture should be considered because meningitis frequently coexists and may be missed.",
-   "Empirical broad-spectrum antibiotics must be started promptly after cultures because deterioration can be rapid; the regimen is later narrowed to culture results.",
-   "Supportive care (thermoregulation, respiratory and haemodynamic support, glucose management) is as important as antimicrobials.",
-   "A low threshold for treatment is appropriate given nonspecific signs, but antibiotics are stopped early when cultures remain negative and the infant is well."
+  "id": "neonatal_sepsis",
+  "name": "Neonatal sepsis",
+  "aliases": [
+    "sepsis neonatorum",
+    "newborn sepsis",
+    "early-onset neonatal sepsis",
+    "late-onset neonatal sepsis",
+    "EOS",
+    "LOS"
   ],
-  "pathophysiology": "Neonates are relatively immunocompromised, with immature innate and adaptive defences, low immunoglobulin levels, and impaired neutrophil function. Organisms reach the infant by ascending or intrapartum transmission from the maternal genital tract in early-onset disease, or from the postnatal environment and invasive devices in late-onset disease. Once bloodstream invasion occurs, bacterial products trigger a systemic inflammatory response with cytokine release, endothelial injury, capillary leak, and impaired perfusion that can progress to septic shock, disseminated intravascular coagulation, and multi-organ dysfunction. The immature blood-brain barrier and limited containment of infection predispose to meningitis.",
-  "additionalDifferentials": [
-   "Transient tachypnoea of the newborn",
-   "Respiratory distress syndrome",
-   "Congenital heart disease with poor perfusion",
-   "Inborn errors of metabolism",
-   "Neonatal encephalopathy / birth asphyxia",
-   "Congenital viral infection (e.g. herpes simplex, cytomegalovirus)"
-  ],
-  "additionalInvestigations": [
-   "Blood culture before starting antibiotics",
-   "Complete blood count with differential and immature-to-total neutrophil ratio",
-   "C-reactive protein and/or procalcitonin, ideally serially",
-   "Lumbar puncture with CSF cell count, protein, glucose and culture",
-   "Urine culture (more relevant in late-onset disease)",
-   "Chest radiograph if respiratory signs are present",
-   "Blood glucose, electrolytes and blood gas to assess metabolic status"
-  ],
-  "redFlags": [
-   "Septic shock: poor perfusion, hypotension, prolonged capillary refill",
-   "Apnoea or worsening respiratory failure requiring support",
-   "Bulging fontanelle, seizures, or other signs suggesting meningitis",
-   "Petechiae, purpura, or bleeding suggesting disseminated intravascular coagulation",
-   "Persistent hypoglycaemia or profound metabolic acidosis"
-  ],
-  "prognosis": "Outcome depends on gestational age, organism, and speed of treatment; prompt therapy usually leads to recovery, but meningitis, shock, and prematurity carry higher mortality and risk of neurodevelopmental sequelae.",
-  "pitfalls": [
-   "Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation",
-   "Omitting a lumbar puncture and missing coexisting meningitis",
-   "Relying on a single normal inflammatory marker to exclude sepsis early in the illness",
-   "Failing to remove or consider infected central venous catheters in late-onset disease"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or ampicillin) plus an aminoglycoside for early-onset disease, because deterioration can be rapid",
-   "Tailor late-onset cover to likely nosocomial organisms and local patterns, adding anti-staphylococcal or glycopeptide cover, and broaden to a cephalosporin when meningitis is suspected",
-   "Narrow the regimen to culture and sensitivity results and add antifungal therapy if invasive fungal infection is identified",
-   "Provide supportive intensive care with fluid resuscitation, inotropes for septic shock, respiratory support and correction of disseminated intravascular coagulation",
-   "Perform lumbar puncture and treat coexisting meningitis with an appropriate agent and duration",
-   "Monitor blood cultures, inflammatory markers and clinical response to guide duration and de-escalation",
-   "Reinforce prevention through intrapartum antibiotic prophylaxis for maternal group B streptococcus colonisation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neonatal_sepsis-pathway",
-   "title": "Neonatal sepsis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset (within roughly the first 72 hours, often maternally acquired) and late-onset (after 72 hours, frequently",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Septic shock: poor perfusion, hypotension, prolonged capillary refill",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood culture before starting antibiotics, Complete blood count with differential and immature-to-total neutrophil ratio, C-reactive protein and/or procalcitonin, ideally serially"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or ampicillin) plus an aminoglycoside for early-onset disease, because deterioration can be rapid"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neonatal sepsis."
-  }
- ],
- "tables": [
-  {
-   "id": "neonatal_sepsis-matrix",
-   "title": "Neonatal sepsis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Neonatology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset (within roughly the first 72 hours, often maternally acquired) and late-onset (after 72 hours, frequently nosocomial or community-acquired).",
+      "Signs are notoriously nonspecific: temperature instability (fever or hypothermia), poor feeding, lethargy or irritability, respiratory distress, apnoea, tachycardia, and abdominal distension.",
+      "Group B Streptococcus and Escherichia coli dominate early-onset disease; coagulase-negative staphylococci, Staphylococcus aureus, and Gram-negative organisms are common in late-onset disease, especially in preterm infants with indwelling lines.",
+      "Maternal risk factors include prolonged rupture of membranes, chorioamnionitis, maternal fever, and GBS colonisation without adequate intrapartum prophylaxis.",
+      "Blood culture is the diagnostic gold standard; a lumbar puncture should be considered because meningitis frequently coexists and may be missed.",
+      "Empirical broad-spectrum antibiotics must be started promptly after cultures because deterioration can be rapid; the regimen is later narrowed to culture results.",
+      "Supportive care (thermoregulation, respiratory and haemodynamic support, glucose management) is as important as antimicrobials.",
+      "A low threshold for treatment is appropriate given nonspecific signs, but antibiotics are stopped early when cultures remain negative and the infant is well."
     ],
-    [
-     "Key Investigations",
-     "Blood culture before starting antibiotics, Complete blood count with differential and immature-to-total neutrophil ratio,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Neonates are relatively immunocompromised, with immature innate and adaptive defences, low immunoglobulin levels, and impaired neutrophil function. Organisms reach the infant by ascending or intrapartum transmission from the maternal genital tract in early-onset disease, or from the postnatal environment and invasive devices in late-onset disease. Once bloodstream invasion occurs, bacterial products trigger a systemic inflammatory response with cytokine release, endothelial injury, capillary leak, and impaired perfusion that can progress to septic shock, disseminated intravascular coagulation, and multi-organ dysfunction. The immature blood-brain barrier and limited containment of infection predispose to meningitis.",
+    "additionalDifferentials": [
+      "Transient tachypnoea of the newborn",
+      "Respiratory distress syndrome",
+      "Congenital heart disease with poor perfusion",
+      "Inborn errors of metabolism",
+      "Neonatal encephalopathy / birth asphyxia",
+      "Congenital viral infection (e.g. herpes simplex, cytomegalovirus)"
     ],
-    [
-     "Primary Differentials",
-     "Transient tachypnoea of the newborn, Respiratory distress syndrome, Congenital heart disease with poor perfusion",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood culture before starting antibiotics",
+      "Complete blood count with differential and immature-to-total neutrophil ratio",
+      "C-reactive protein and/or procalcitonin, ideally serially",
+      "Lumbar puncture with CSF cell count, protein, glucose and culture",
+      "Urine culture (more relevant in late-onset disease)",
+      "Chest radiograph if respiratory signs are present",
+      "Blood glucose, electrolytes and blood gas to assess metabolic status"
     ],
-    [
-     "Management Strategy",
-     "Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or",
-     "Core treatment modality"
+    "redFlags": [
+      "Septic shock: poor perfusion, hypotension, prolonged capillary refill",
+      "Apnoea or worsening respiratory failure requiring support",
+      "Bulging fontanelle, seizures, or other signs suggesting meningitis",
+      "Petechiae, purpura, or bleeding suggesting disseminated intravascular coagulation",
+      "Persistent hypoglycaemia or profound metabolic acidosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on gestational age, organism, and speed of treatment; prompt therapy usually leads to recovery, but meningitis, shock, and prematurity carry higher mortality and risk of neurodevelopmental sequelae.",
+    "pitfalls": [
+      "Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation",
+      "Omitting a lumbar puncture and missing coexisting meningitis",
+      "Relying on a single normal inflammatory marker to exclude sepsis early in the illness",
+      "Failing to remove or consider infected central venous catheters in late-onset disease"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or ampicillin) plus an aminoglycoside for early-onset disease, because deterioration can be rapid",
+      "Tailor late-onset cover to likely nosocomial organisms and local patterns, adding anti-staphylococcal or glycopeptide cover, and broaden to a cephalosporin when meningitis is suspected",
+      "Narrow the regimen to culture and sensitivity results and add antifungal therapy if invasive fungal infection is identified",
+      "Provide supportive intensive care with fluid resuscitation, inotropes for septic shock, respiratory support and correction of disseminated intravascular coagulation",
+      "Perform lumbar puncture and treat coexisting meningitis with an appropriate agent and duration",
+      "Monitor blood cultures, inflammatory markers and clinical response to guide duration and de-escalation",
+      "Reinforce prevention through intrapartum antibiotic prophylaxis for maternal group B streptococcus colonisation"
     ]
-   ],
-   "caption": "Overview comparison matrix for neonatal sepsis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neonatal-sepsis-real-image",
-   "title": "Neonatal sepsis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "neonatal_sepsis-pathway",
+      "title": "Neonatal sepsis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset (within roughly the first 72 hours, often maternally acquired) and late-onset (after 72 hours, frequently",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Septic shock: poor perfusion, hypotension, prolonged capillary refill",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood culture before starting antibiotics, Complete blood count with differential and immature-to-total neutrophil ratio, C-reactive protein and/or procalcitonin, ideally serially"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or ampicillin) plus an aminoglycoside for early-onset disease, because deterioration can be rapid"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neonatal sepsis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neonatal_sepsis-matrix",
+      "title": "Neonatal sepsis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A systemic bacterial (occasionally fungal or viral) infection in the first 28 days of life, conventionally split into early-onset",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood culture before starting antibiotics, Complete blood count with differential and immature-to-total neutrophil ratio,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transient tachypnoea of the newborn, Respiratory distress syndrome, Congenital heart disease with poor perfusion",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start prompt empirical broad-spectrum antibiotics after obtaining cultures, typically a penicillin (benzylpenicillin or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing nonspecific signs to prematurity or feeding issues and delaying evaluation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neonatal sepsis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neonatal_sepsis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood culture before antibiotics",
+          "cells": [
+            {
+              "text": "Diagnostic gold standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential and immature-to-total neutrophil ratio",
+          "cells": [
+            {
+              "text": "Inflammatory response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-reactive protein or procalcitonin, serially",
+          "cells": [
+            {
+              "text": "Trend in response to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture with CSF cell count, protein, glucose and culture",
+          "cells": [
+            {
+              "text": "Coexisting meningitis, which may be missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine culture",
+          "cells": [
+            {
+              "text": "More relevant in late-onset disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_sepsis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory distress syndrome",
+          "cells": [
+            {
+              "text": "Presentations overlap; sepsis must be considered in any preterm respiratory distress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient tachypnoea of the newborn",
+          "cells": [
+            {
+              "text": "Respiratory signs overlap; cultures and inflammatory markers help"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neonatal_sepsis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical broad-spectrum antibiotics after cultures",
+          "cells": [
+            {
+              "text": "Benzylpenicillin or ampicillin plus an aminoglycoside for early-onset disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late-onset cover",
+          "cells": [
+            {
+              "text": "Tailored to nosocomial organisms; broadened to a cephalosporin when meningitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narrowing to culture results",
+          "cells": [
+            {
+              "text": "Antifungal added if invasive fungal infection is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Fluids, inotropes for septic shock, respiratory support and correction of DIC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting meningitis",
+          "cells": [
+            {
+              "text": "Lumbar puncture guides agent and duration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Intrapartum antibiotic prophylaxis for maternal group B streptococcus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neonatal_sepsis-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal sepsis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate in the first 28 days with temperature instability, poor feeding or lethargy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (septic shock, apnoea, bulging fontanelle, petechiae)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cultures, then immediate empirical broad-spectrum antibiotics; ICU support for shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood culture, CBC, CRP or procalcitonin, lumbar puncture, glucose and gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Culture-proven or compatible sepsis with raised inflammatory markers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop antibiotics early if cultures are negative and the infant is well",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical penicillin plus aminoglycoside for early-onset; cover nosocomial organisms late",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Narrow therapy to culture results; add antifungal if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lumbar puncture and treatment of coexisting meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intrapartum antibiotic prophylaxis for group B streptococcus colonisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prompt treatment usually recovers; meningitis, shock and prematurity raise mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

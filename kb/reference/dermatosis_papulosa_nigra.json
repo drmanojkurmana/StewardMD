@@ -1,172 +1,443 @@
 {
- "id": "dermatosis_papulosa_nigra",
- "name": "dermatosis papulosa nigra",
- "aliases": [
-  "DPN"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as multiple small, smooth, dark brown to black dome-shaped papules on the face, especially the malar region and periorbital skin.",
-   "It is regarded as a variant of seborrhoeic keratosis occurring predominantly in people of African and, less commonly, Asian descent.",
-   "Onset is typically in adolescence or early adulthood, with lesions increasing in number and size over time.",
-   "There is a strong familial tendency and a female predominance, and lesions are entirely benign.",
-   "The papules are asymptomatic and of cosmetic concern only, though occasional lesions may become pruritic or catch on clothing.",
-   "Diagnosis is clinical; dermoscopy shows features shared with seborrhoeic keratosis such as comedo-like openings and a cerebriform pattern.",
-   "Treatment is for cosmetic reasons and includes light electrodesiccation, curettage, snip excision or laser, undertaken cautiously given the risk of dyspigmentation.",
-   "Careful test treatment of a few lesions is advised in richly pigmented skin because of the risk of post-inflammatory hyperpigmentation and keloid scarring."
+  "id": "dermatosis_papulosa_nigra",
+  "name": "dermatosis papulosa nigra",
+  "aliases": [
+    "DPN"
   ],
-  "pathophysiology": "Dermatosis papulosa nigra is considered a clinical variant of seborrhoeic keratosis, with histology showing hyperkeratosis, acanthosis and elongation of rete ridges in an epidermal proliferation of basaloid and squamoid keratinocytes. A pronounced familial and genetic predisposition in people with darker skin phototypes underlies the characteristic distribution and early onset, and a naevoid or developmental defect of the pilosebaceous follicle has been proposed. Increased epidermal melanisation accounts for the dark colour. As with seborrhoeic keratosis, the lesions are benign proliferations without malignant potential.",
-  "additionalDifferentials": [
-   "seborrhoeic keratosis",
-   "melanocytic naevi",
-   "verruca plana (flat warts)",
-   "syringoma",
-   "acrochordon (skin tag)",
-   "adnexal tumours such as trichoepithelioma",
-   "angiofibroma"
-  ],
-  "additionalInvestigations": [
-   "clinical diagnosis based on morphology and distribution",
-   "dermoscopy showing seborrhoeic-keratosis-like features",
-   "biopsy reserved for atypical or diagnostically uncertain lesions",
-   "clinical photography to monitor cosmetic treatment outcomes",
-   "test-spot treatment to assess pigmentary response before wider therapy"
-  ],
-  "redFlags": [
-   "an individual lesion showing asymmetry, irregular pigmentation or ulceration suggesting melanoma",
-   "rapid change in a solitary lesion within the field",
-   "keloid formation or marked dyspigmentation following treatment",
-   "atypical distribution or morphology prompting biopsy"
-  ],
-  "prognosis": "Dermatosis papulosa nigra is entirely benign with no malignant potential; lesions persist and slowly accumulate over life. Cosmetic treatment can improve appearance but carries a risk of dyspigmentation and scarring in richly pigmented skin.",
-  "pitfalls": [
-   "Aggressive or extensive destructive treatment causing post-inflammatory hyperpigmentation, hypopigmentation or keloid scarring in darker skin.",
-   "Failing to perform a test treatment before treating numerous lesions.",
-   "Overlooking an atypical lesion within the field that warrants biopsy.",
-   "Confusing the condition with flat warts and applying inappropriate therapy."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "Andrews' Diseases of the Skin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that the lesions are entirely benign with no malignant potential and that treatment is purely cosmetic",
-   "Make the diagnosis clinically and dermoscopically, reserving biopsy for atypical lesions",
-   "Offer cosmetic removal of troublesome lesions by light electrodesiccation, curettage, scissor snip, cryotherapy or laser",
-   "Perform test-spot treatment first to gauge the pigmentary response before treating widely, given the risk of dyspigmentation in richly pigmented skin",
-   "Use gentle technique and photoprotection to minimise post-inflammatory hyperpigmentation and scarring",
-   "Use clinical photography to monitor cosmetic treatment outcomes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dermatosis_papulosa_nigra-pathway",
-   "title": "dermatosis papulosa nigra: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as multiple small, smooth, dark brown to black dome-shaped papules on the face, especially the malar region and periorbital skin.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: an individual lesion showing asymmetry, irregular pigmentation or ulceration suggesting melanoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: clinical diagnosis based on morphology and distribution, dermoscopy showing seborrhoeic-keratosis-like features, biopsy reserved for atypical or diagnostically uncertain lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that the lesions are entirely benign with no malignant potential and that treatment is purely cosmetic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Aggressive or extensive destructive treatment causing post-inflammatory hyperpigmentation, hypopigmentation or keloid scarring in darker skin."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dermatosis papulosa nigra."
-  }
- ],
- "tables": [
-  {
-   "id": "dermatosis_papulosa_nigra-matrix",
-   "title": "dermatosis papulosa nigra: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as multiple small, smooth, dark brown to black dome-shaped papules on the face, especially the malar region and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as multiple small, smooth, dark brown to black dome-shaped papules on the face, especially the malar region and periorbital skin.",
+      "It is regarded as a variant of seborrhoeic keratosis occurring predominantly in people of African and, less commonly, Asian descent.",
+      "Onset is typically in adolescence or early adulthood, with lesions increasing in number and size over time.",
+      "There is a strong familial tendency and a female predominance, and lesions are entirely benign.",
+      "The papules are asymptomatic and of cosmetic concern only, though occasional lesions may become pruritic or catch on clothing.",
+      "Diagnosis is clinical; dermoscopy shows features shared with seborrhoeic keratosis such as comedo-like openings and a cerebriform pattern.",
+      "Treatment is for cosmetic reasons and includes light electrodesiccation, curettage, snip excision or laser, undertaken cautiously given the risk of dyspigmentation.",
+      "Careful test treatment of a few lesions is advised in richly pigmented skin because of the risk of post-inflammatory hyperpigmentation and keloid scarring."
     ],
-    [
-     "Key Investigations",
-     "clinical diagnosis based on morphology and distribution, dermoscopy showing seborrhoeic-keratosis-like features, biopsy reserved",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dermatosis papulosa nigra is considered a clinical variant of seborrhoeic keratosis, with histology showing hyperkeratosis, acanthosis and elongation of rete ridges in an epidermal proliferation of basaloid and squamoid keratinocytes. A pronounced familial and genetic predisposition in people with darker skin phototypes underlies the characteristic distribution and early onset, and a naevoid or developmental defect of the pilosebaceous follicle has been proposed. Increased epidermal melanisation accounts for the dark colour. As with seborrhoeic keratosis, the lesions are benign proliferations without malignant potential.",
+    "additionalDifferentials": [
+      "seborrhoeic keratosis",
+      "melanocytic naevi",
+      "verruca plana (flat warts)",
+      "syringoma",
+      "acrochordon (skin tag)",
+      "adnexal tumours such as trichoepithelioma",
+      "angiofibroma"
     ],
-    [
-     "Primary Differentials",
-     "seborrhoeic keratosis, melanocytic naevi, verruca plana (flat warts)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "clinical diagnosis based on morphology and distribution",
+      "dermoscopy showing seborrhoeic-keratosis-like features",
+      "biopsy reserved for atypical or diagnostically uncertain lesions",
+      "clinical photography to monitor cosmetic treatment outcomes",
+      "test-spot treatment to assess pigmentary response before wider therapy"
     ],
-    [
-     "Management Strategy",
-     "Reassure that the lesions are entirely benign with no malignant potential and that treatment is purely cosmetic",
-     "Core treatment modality"
+    "redFlags": [
+      "an individual lesion showing asymmetry, irregular pigmentation or ulceration suggesting melanoma",
+      "rapid change in a solitary lesion within the field",
+      "keloid formation or marked dyspigmentation following treatment",
+      "atypical distribution or morphology prompting biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Aggressive or extensive destructive treatment causing post-inflammatory hyperpigmentation, hypopigmentation or keloid scarring in",
-     "Prevent diagnostic or management error"
+    "prognosis": "Dermatosis papulosa nigra is entirely benign with no malignant potential; lesions persist and slowly accumulate over life. Cosmetic treatment can improve appearance but carries a risk of dyspigmentation and scarring in richly pigmented skin.",
+    "pitfalls": [
+      "Aggressive or extensive destructive treatment causing post-inflammatory hyperpigmentation, hypopigmentation or keloid scarring in darker skin.",
+      "Failing to perform a test treatment before treating numerous lesions.",
+      "Overlooking an atypical lesion within the field that warrants biopsy.",
+      "Confusing the condition with flat warts and applying inappropriate therapy."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "Andrews' Diseases of the Skin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that the lesions are entirely benign with no malignant potential and that treatment is purely cosmetic",
+      "Make the diagnosis clinically and dermoscopically, reserving biopsy for atypical lesions",
+      "Offer cosmetic removal of troublesome lesions by light electrodesiccation, curettage, scissor snip, cryotherapy or laser",
+      "Perform test-spot treatment first to gauge the pigmentary response before treating widely, given the risk of dyspigmentation in richly pigmented skin",
+      "Use gentle technique and photoprotection to minimise post-inflammatory hyperpigmentation and scarring",
+      "Use clinical photography to monitor cosmetic treatment outcomes"
     ]
-   ],
-   "caption": "Overview comparison matrix for dermatosis papulosa nigra."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dermatosis-papulosa-nigra-real-image",
-   "title": "dermatosis papulosa nigra: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "dermatosis_papulosa_nigra-pathway",
+      "title": "dermatosis papulosa nigra: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as multiple small, smooth, dark brown to black dome-shaped papules on the face, especially the malar region and periorbital skin.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: an individual lesion showing asymmetry, irregular pigmentation or ulceration suggesting melanoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: clinical diagnosis based on morphology and distribution, dermoscopy showing seborrhoeic-keratosis-like features, biopsy reserved for atypical or diagnostically uncertain lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that the lesions are entirely benign with no malignant potential and that treatment is purely cosmetic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Aggressive or extensive destructive treatment causing post-inflammatory hyperpigmentation, hypopigmentation or keloid scarring in darker skin."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dermatosis papulosa nigra."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dermatosis_papulosa_nigra-matrix",
+      "title": "dermatosis papulosa nigra: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as multiple small, smooth, dark brown to black dome-shaped papules on the face, especially the malar region and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "clinical diagnosis based on morphology and distribution, dermoscopy showing seborrhoeic-keratosis-like features, biopsy reserved",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "seborrhoeic keratosis, melanocytic naevi, verruca plana (flat warts)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that the lesions are entirely benign with no malignant potential and that treatment is purely cosmetic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Aggressive or extensive destructive treatment causing post-inflammatory hyperpigmentation, hypopigmentation or keloid scarring in",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dermatosis papulosa nigra."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dermatosis_papulosa_nigra-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis by morphology and distribution",
+          "cells": [
+            {
+              "text": "Diagnosed clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Seborrhoeic-keratosis-like features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test-spot treatment",
+          "cells": [
+            {
+              "text": "Pigmentary response before wider therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical photography",
+          "cells": [
+            {
+              "text": "Monitors cosmetic treatment outcome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatosis_papulosa_nigra-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Seborrhoeic keratosis",
+          "cells": [
+            {
+              "text": "Clinical variant of it; dermoscopy shows similar features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verruca plana (flat warts)",
+          "cells": [
+            {
+              "text": "Confusing them leads to inappropriate therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melanoma within the field",
+          "cells": [
+            {
+              "text": "Asymmetry, irregular pigmentation or ulceration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatosis_papulosa_nigra-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Entirely benign with no malignant potential; treatment is cosmetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic removal",
+          "cells": [
+            {
+              "text": "Light electrodesiccation, curettage, scissor snip, cryotherapy or laser"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test-spot treatment",
+          "cells": [
+            {
+              "text": "Before treating widely, given the dyspigmentation risk in pigmented skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle technique and photoprotection",
+          "cells": [
+            {
+              "text": "Minimises post-inflammatory hyperpigmentation and scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic monitoring",
+          "cells": [
+            {
+              "text": "Tracks the cosmetic outcome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dermatosis_papulosa_nigra-dx-mgmt",
+      "title": "Diagnosis and management of dermatosis papulosa nigra",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dermatosis papulosa nigra: multiple small dark papules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (asymmetry, irregular pigment, ulceration or rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy the atypical lesion to exclude melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis by morphology; dermoscopy for seborrhoeic keratosis-like features",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do dermoscopic features match a benign seborrhoeic keratosis-like lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider verruca plana, melanocytic naevus or other benign lesions; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: entirely benign; treatment is purely cosmetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cosmetic removal by electrodesiccation, curettage, snip, cryotherapy or laser",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Test-spot treatment first, given dyspigmentation risk in pigmented skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gentle technique and photoprotection to limit hyperpigmentation and scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Clinical photography to monitor the cosmetic outcome",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Entirely benign; lesions accumulate slowly; cosmetic treatment risks dyspigmentation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

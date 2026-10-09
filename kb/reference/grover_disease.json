@@ -1,173 +1,451 @@
 {
- "id": "grover_disease",
- "name": "Grover disease (transient acantholytic dermatosis)",
- "aliases": [
-  "transient acantholytic dermatosis",
-  "persistent acantholytic dermatosis",
-  "TAD",
-  "benign papular acantholytic dermatosis"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acquired, often intensely pruritic eruption of discrete keratotic or crusted papules and papulovesicles on the trunk",
-   "Predominantly affects middle-aged and older men, particularly on the central chest and back",
-   "Frequently provoked by heat, sweating, sun exposure, prolonged bed rest, and febrile illness",
-   "Despite the name 'transient', a proportion of cases persist or relapse chronically",
-   "Histology shows focal acantholysis with several possible patterns resembling Darier, Hailey-Hailey, pemphigus, or spongiotic disease",
-   "Direct immunofluorescence is negative, distinguishing it from the autoimmune pemphigus group",
-   "It is a benign condition, and management centres on itch control and avoidance of aggravating factors such as heat and sweating"
+  "id": "grover_disease",
+  "name": "Grover disease (transient acantholytic dermatosis)",
+  "aliases": [
+    "transient acantholytic dermatosis",
+    "persistent acantholytic dermatosis",
+    "TAD",
+    "benign papular acantholytic dermatosis"
   ],
-  "pathophysiology": "Grover disease is characterised by focal acantholysis and dyskeratosis in the epidermis, producing small blisters and keratotic papules, but unlike pemphigus it is not autoantibody-mediated and direct immunofluorescence is negative. The precise cause is unknown; disruption of the stratum corneum barrier and eccrine duct occlusion related to heat, sweating, xerosis, and ultraviolet exposure are thought to trigger transient loss of keratinocyte cohesion. Occlusion, immobility, and systemic illness commonly precipitate flares, and associations with malignancy and other dermatoses have been reported, though the disorder is fundamentally benign.",
-  "additionalDifferentials": [
-   "Darier disease",
-   "Hailey-Hailey disease (familial benign pemphigus)",
-   "Miliaria",
-   "Folliculitis",
-   "Pemphigus foliaceus / pemphigus vulgaris",
-   "Dermatitis herpetiformis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy demonstrating focal acantholysis and dyskeratosis",
-   "Direct immunofluorescence (negative) to exclude autoimmune pemphigus",
-   "Review of precipitating factors such as heat, sweating, and immobilisation",
-   "Assessment of xerosis and coexisting dermatoses",
-   "Consideration of an underlying systemic illness or malignancy in atypical or refractory cases",
-   "Medication review for potential drug-related triggers"
-  ],
-  "redFlags": [
-   "Atypical, widespread, or refractory disease prompting consideration of an underlying malignancy",
-   "Secondary infection of excoriated lesions",
-   "Severe intractable pruritus disturbing sleep and quality of life",
-   "Diagnostic uncertainty requiring exclusion of autoimmune blistering disease"
-  ],
-  "prognosis": "Grover disease is benign and often self-limiting over weeks to months, though a subset follows a persistent or relapsing course; it does not scar and generally responds to symptomatic measures and avoidance of triggers.",
-  "pitfalls": [
-   "Confusing it with an autoimmune pemphigus without performing direct immunofluorescence",
-   "Failing to advise avoidance of heat, sweating, and occlusion that drive flares",
-   "Overtreating a fundamentally benign, self-limiting condition",
-   "Missing an underlying systemic illness in atypical or persistent presentations"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Advise avoidance of triggers such as heat, sweating, sun exposure, occlusion and prolonged bed rest",
-   "Use topical corticosteroids with emollients as first-line therapy for the eruption and pruritus, adding topical calcineurin inhibitors or a vitamin D analogue as adjuncts",
-   "Give oral antihistamines for itch and correct coexisting xerosis",
-   "Escalate refractory or extensive disease to phototherapy, a systemic retinoid such as acitretin, or a short course of systemic corticosteroid",
-   "Review medications for potential drug-related triggers",
-   "Consider evaluation for an underlying systemic illness or malignancy in atypical or persistently refractory cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "grover_disease-pathway",
-   "title": "Grover disease (transient acantholytic dermatosis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acquired, often intensely pruritic eruption of discrete keratotic or crusted papules and papulovesicles on the trunk",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Atypical, widespread, or refractory disease prompting consideration of an underlying malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy demonstrating focal acantholysis and dyskeratosis, Direct immunofluorescence (negative) to exclude autoimmune pemphigus, Review of precipitating factors such as heat, sweating, and immobilisation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Advise avoidance of triggers such as heat, sweating, sun exposure, occlusion and prolonged bed rest"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with an autoimmune pemphigus without performing direct immunofluorescence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of grover disease (transient acantholytic dermatosis)."
-  }
- ],
- "tables": [
-  {
-   "id": "grover_disease-matrix",
-   "title": "Grover disease (transient acantholytic dermatosis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acquired, often intensely pruritic eruption of discrete keratotic or crusted papules and papulovesicles on the trunk",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acquired, often intensely pruritic eruption of discrete keratotic or crusted papules and papulovesicles on the trunk",
+      "Predominantly affects middle-aged and older men, particularly on the central chest and back",
+      "Frequently provoked by heat, sweating, sun exposure, prolonged bed rest, and febrile illness",
+      "Despite the name 'transient', a proportion of cases persist or relapse chronically",
+      "Histology shows focal acantholysis with several possible patterns resembling Darier, Hailey-Hailey, pemphigus, or spongiotic disease",
+      "Direct immunofluorescence is negative, distinguishing it from the autoimmune pemphigus group",
+      "It is a benign condition, and management centres on itch control and avoidance of aggravating factors such as heat and sweating"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy demonstrating focal acantholysis and dyskeratosis, Direct immunofluorescence (negative) to exclude autoimmune",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Grover disease is characterised by focal acantholysis and dyskeratosis in the epidermis, producing small blisters and keratotic papules, but unlike pemphigus it is not autoantibody-mediated and direct immunofluorescence is negative. The precise cause is unknown; disruption of the stratum corneum barrier and eccrine duct occlusion related to heat, sweating, xerosis, and ultraviolet exposure are thought to trigger transient loss of keratinocyte cohesion. Occlusion, immobility, and systemic illness commonly precipitate flares, and associations with malignancy and other dermatoses have been reported, though the disorder is fundamentally benign.",
+    "additionalDifferentials": [
+      "Darier disease",
+      "Hailey-Hailey disease (familial benign pemphigus)",
+      "Miliaria",
+      "Folliculitis",
+      "Pemphigus foliaceus / pemphigus vulgaris",
+      "Dermatitis herpetiformis"
     ],
-    [
-     "Primary Differentials",
-     "Darier disease, Hailey-Hailey disease (familial benign pemphigus), Miliaria",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy demonstrating focal acantholysis and dyskeratosis",
+      "Direct immunofluorescence (negative) to exclude autoimmune pemphigus",
+      "Review of precipitating factors such as heat, sweating, and immobilisation",
+      "Assessment of xerosis and coexisting dermatoses",
+      "Consideration of an underlying systemic illness or malignancy in atypical or refractory cases",
+      "Medication review for potential drug-related triggers"
     ],
-    [
-     "Management Strategy",
-     "Advise avoidance of triggers such as heat, sweating, sun exposure, occlusion and prolonged bed rest",
-     "Core treatment modality"
+    "redFlags": [
+      "Atypical, widespread, or refractory disease prompting consideration of an underlying malignancy",
+      "Secondary infection of excoriated lesions",
+      "Severe intractable pruritus disturbing sleep and quality of life",
+      "Diagnostic uncertainty requiring exclusion of autoimmune blistering disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with an autoimmune pemphigus without performing direct immunofluorescence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Grover disease is benign and often self-limiting over weeks to months, though a subset follows a persistent or relapsing course; it does not scar and generally responds to symptomatic measures and avoidance of triggers.",
+    "pitfalls": [
+      "Confusing it with an autoimmune pemphigus without performing direct immunofluorescence",
+      "Failing to advise avoidance of heat, sweating, and occlusion that drive flares",
+      "Overtreating a fundamentally benign, self-limiting condition",
+      "Missing an underlying systemic illness in atypical or persistent presentations"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Advise avoidance of triggers such as heat, sweating, sun exposure, occlusion and prolonged bed rest",
+      "Use topical corticosteroids with emollients as first-line therapy for the eruption and pruritus, adding topical calcineurin inhibitors or a vitamin D analogue as adjuncts",
+      "Give oral antihistamines for itch and correct coexisting xerosis",
+      "Escalate refractory or extensive disease to phototherapy, a systemic retinoid such as acitretin, or a short course of systemic corticosteroid",
+      "Review medications for potential drug-related triggers",
+      "Consider evaluation for an underlying systemic illness or malignancy in atypical or persistently refractory cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for grover disease (transient acantholytic dermatosis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "grover-disease-real-image",
-   "title": "Grover disease (transient acantholytic dermatosis): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "grover_disease-pathway",
+      "title": "Grover disease (transient acantholytic dermatosis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acquired, often intensely pruritic eruption of discrete keratotic or crusted papules and papulovesicles on the trunk",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Atypical, widespread, or refractory disease prompting consideration of an underlying malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy demonstrating focal acantholysis and dyskeratosis, Direct immunofluorescence (negative) to exclude autoimmune pemphigus, Review of precipitating factors such as heat, sweating, and immobilisation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Advise avoidance of triggers such as heat, sweating, sun exposure, occlusion and prolonged bed rest"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with an autoimmune pemphigus without performing direct immunofluorescence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of grover disease (transient acantholytic dermatosis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "grover_disease-matrix",
+      "title": "Grover disease (transient acantholytic dermatosis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acquired, often intensely pruritic eruption of discrete keratotic or crusted papules and papulovesicles on the trunk",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy demonstrating focal acantholysis and dyskeratosis, Direct immunofluorescence (negative) to exclude autoimmune",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Darier disease, Hailey-Hailey disease (familial benign pemphigus), Miliaria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Advise avoidance of triggers such as heat, sweating, sun exposure, occlusion and prolonged bed rest",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with an autoimmune pemphigus without performing direct immunofluorescence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for grover disease (transient acantholytic dermatosis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "grover_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Focal acantholysis and dyskeratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Negative; excludes autoimmune pemphigus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of triggers",
+          "cells": [
+            {
+              "text": "Heat, sweating and immobilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of xerosis and coexisting dermatoses",
+          "cells": [
+            {
+              "text": "Coexisting skin disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Drug-related triggers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "grover_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Darier disease",
+          "cells": [
+            {
+              "text": "Acantholytic disorder with a genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hailey-Hailey disease",
+          "cells": [
+            {
+              "text": "Familial benign pemphigus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pemphigus foliaceus or vulgaris",
+          "cells": [
+            {
+              "text": "Autoimmune blistering disease; excluded by immunofluorescence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "grover_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Heat, sweating, sun exposure, occlusion and prolonged bed rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids with emollients",
+          "cells": [
+            {
+              "text": "First-line for eruption and pruritus; topical calcineurin inhibitors added"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines",
+          "cells": [
+            {
+              "text": "For itch and correction of coexisting xerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for refractory disease",
+          "cells": [
+            {
+              "text": "Phototherapy, a systemic retinoid such as acitretin, or short systemic steroid course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Drug-related triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic work-up",
+          "cells": [
+            {
+              "text": "Atypical or persistently refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "grover_disease-dx-mgmt",
+      "title": "Diagnosis and management of Grover disease (transient acantholytic dermatosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Grover disease: pruritic papules on the trunk in a sweating or hot patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atypical or refractory disease, secondary infection, intractable itch)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Systemic review for atypical, widespread or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with focal acantholysis, negative immunofluorescence and trigger review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show focal acantholysis with negative immunofluorescence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Darier disease, Hailey-Hailey disease or pemphigus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid heat, sweating, occlusion and prolonged bed rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids with emollients for eruption and itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral antihistamines and correction of xerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Phototherapy or systemic retinoid for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, often self-limiting over weeks to months; a subset runs a relapsing course",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

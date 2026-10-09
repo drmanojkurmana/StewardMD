@@ -1,188 +1,493 @@
 {
- "id": "gastrointestinal_stromal_tumour",
- "name": "gastrointestinal stromal tumour",
- "aliases": [
-  "GI stromal tumour",
-  "GIST",
-  "Gastrointestinal stromal tumour",
-  "gastrointestinal pacemaker cell tumour",
-  "gastrointestinal stromal tumor",
-  "gi stromal tumor"
- ],
- "class": "non_infective",
- "system": "gastrointestinal",
- "specialty": "surgical oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Digestive System Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most common mesenchymal tumour of the gastrointestinal tract, arising from the interstitial cells of Cajal or their precursors, most frequently in the stomach followed by the small intestine.",
-   "The great majority harbour activating mutations in KIT (CD117) or PDGFRA; immunohistochemistry for CD117 and DOG1 is the diagnostic cornerstone.",
-   "Small tumours are frequently incidental findings at endoscopy, imaging or surgery for another indication, whereas larger lesions present with occult or overt gastrointestinal bleeding, anaemia, abdominal mass or vague discomfort.",
-   "Risk stratification for malignant behaviour rests on tumour size, mitotic rate and anatomical site rather than a simple benign-versus-malignant dichotomy; small-bowel lesions behave more aggressively than gastric ones of equivalent size.",
-   "Endoscopic ultrasound shows a hypoechoic mass arising from the muscularis propria (fourth layer) and guides biopsy when tissue is needed; percutaneous biopsy of a resectable lesion is generally avoided owing to rupture and seeding risk.",
-   "Imatinib and successor tyrosine kinase inhibitors transformed management of advanced disease; response and drug selection are strongly mutation-dependent, and PDGFRA exon 18 D842V tumours are classically imatinib-resistant.",
-   "Wild-type GIST lacking KIT and PDGFRA mutations includes SDH-deficient tumours (often gastric, paediatric, associated with Carney triad and Carney-Stratakis syndrome) and NF1-associated and BRAF-mutant forms.",
-   "Complete surgical resection with an intact pseudocapsule and negative margins is the mainstay for localised disease; lymphadenectomy is not routinely required as nodal spread is uncommon except in SDH-deficient tumours."
+  "id": "gastrointestinal_stromal_tumour",
+  "name": "gastrointestinal stromal tumour",
+  "aliases": [
+    "GI stromal tumour",
+    "GIST",
+    "Gastrointestinal stromal tumour",
+    "gastrointestinal pacemaker cell tumour",
+    "gastrointestinal stromal tumor",
+    "gi stromal tumor"
   ],
-  "pathophysiology": "Gastrointestinal stromal tumours arise from the interstitial cells of Cajal, the pacemaker cells that regulate gut peristalsis, or from their mesenchymal precursors within the wall of the tubular gastrointestinal tract. In most tumours a gain-of-function mutation in the receptor tyrosine kinase KIT drives ligand-independent, constitutive downstream signalling through the RAS-MAPK and PI3K-AKT pathways, promoting proliferation and survival; a minority are driven by analogous activating mutations in PDGFRA. A distinct subset lacks these mutations and instead shows loss of function of the succinate dehydrogenase complex, producing pseudohypoxic signalling, or is associated with neurofibromatosis type 1 or BRAF mutation. The specific driver dictates both morphology and, critically, sensitivity to tyrosine kinase inhibition, so molecular characterisation is integral to biological understanding and treatment.",
-  "additionalDifferentials": [
-   "leiomyoma or leiomyosarcoma of the gut wall",
-   "schwannoma of the gastrointestinal tract",
-   "desmoid-type fibromatosis",
-   "gastrointestinal neuroendocrine tumour",
-   "solitary fibrous tumour",
-   "metastatic melanoma to the gut",
-   "inflammatory fibroid polyp"
-  ],
-  "additionalInvestigations": [
-   "contrast-enhanced CT of the abdomen and pelvis for staging and response assessment",
-   "endoscopic ultrasound with fine-needle aspiration or biopsy",
-   "immunohistochemistry for CD117 (KIT), DOG1, CD34 and SDHB",
-   "molecular genotyping of KIT and PDGFRA (and BRAF/SDH where indicated)",
-   "assessment of mitotic count per defined high-power field area by histopathology",
-   "MRI for rectal or hepatic lesions where CT characterisation is limited",
-   "FDG-PET for early metabolic response to tyrosine kinase inhibitor therapy"
-  ],
-  "redFlags": [
-   "acute gastrointestinal haemorrhage or haemodynamic instability from a bleeding tumour",
-   "tumour rupture into the peritoneal cavity, markedly increasing recurrence risk",
-   "rapidly enlarging mass with new pain suggesting high-grade progression",
-   "signs of bowel obstruction or perforation",
-   "new hepatic or peritoneal lesions indicating metastatic spread"
-  ],
-  "prognosis": "Prognosis depends chiefly on tumour size, mitotic rate, site and completeness of resection, with small gastric tumours often cured by excision while large small-bowel or ruptured tumours carry substantial recurrence risk. Tyrosine kinase inhibitors have markedly prolonged survival in advanced disease, though outcome varies with the underlying mutation.",
-  "pitfalls": [
-   "Labelling a GIST as benign on size alone; small tumours can still metastasise and risk is a continuum.",
-   "Percutaneous biopsy of a readily resectable lesion, risking rupture and peritoneal seeding.",
-   "Failing to genotype before systemic therapy, leading to use of imatinib in resistant PDGFRA D842V tumours.",
-   "Misdiagnosing a CD117-negative or DOG1-positive tumour as leiomyoma or schwannoma without full immunohistochemistry.",
-   "Overlooking SDH-deficient GIST in young patients and its associated syndromic and nodal-spread implications."
-  ],
-  "references": [
-   "WHO Classification of Tumours: Digestive System Tumours (current edition)",
-   "ESMO Clinical Practice Guidelines on gastrointestinal stromal tumours",
-   "NCCN Guidelines on soft tissue sarcoma and GIST"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm diagnosis by core needle biopsy and perform KIT/PDGFRA mutational analysis (with SDH immunohistochemistry if both negative) before planning medical therapy, since genotype predicts prognosis and drug sensitivity.",
-   "For localized disease, surgery with macroscopically complete (R0) resection is the mainstay; tumours 2 cm or larger should generally be resected, small 1 to 2 cm lesions may be observed or resected, and rupture or capsule violation during surgery must be avoided given its adverse prognostic impact.",
-   "Consider preoperative (neoadjuvant) imatinib to shrink a large or high rupture risk tumour before surgery, only after confirming an imatinib-sensitive genotype, monitoring response clinically and radiologically.",
-   "Offer adjuvant imatinib, typically for about three years, to patients with a sufficiently high estimated relapse risk after complete resection, restricted to imatinib-sensitive genotypes (KIT-mutated or PDGFRA-mutated excluding D842V and related exon 18 variants).",
-   "For metastatic or unresectable disease, start indefinite TKI therapy rather than a fixed course, since stopping typically leads to progression within months.",
-   "Sequence systemic therapy by line: imatinib first for imatinib-sensitive genotypes (with avapritinib instead for PDGFRA D842V and related exon 18 mutations), then sunitinib, then regorafenib, then ripretinib as later lines for progressive disease.",
-   "Consider dose escalation of the current TKI at progression in some patients, as this can produce temporary benefit, and check adherence before attributing progression to molecular resistance.",
-   "For SDH-deficient GIST, which is essentially imatinib-insensitive, consider sunitinib or regorafenib given the more indolent natural history of this subtype.",
-   "For limited or focal progression on an otherwise responding TKI, consider continuing the current TKI while using surgery or ablation to control the progressing focus, recognizing this is not backed by prospective trial data.",
-   "Consider surgical resection of residual imatinib-responding metastatic disease only when complete resection of all visible disease is feasible, continuing the TKI afterward regardless of how complete resection appears, since its prognostic benefit is unproven.",
-   "Reserve radiotherapy for palliation, such as extra-abdominal (bone) metastases, since it has no established curative role in GIST.",
-   "Follow up after curative surgery with periodic CT of the abdomen (MRI as an alternative) to detect peritoneal or liver relapse, without routine endoscopy, focusing surveillance on the highest-risk two to three year window after surgery or adjuvant therapy.",
-   "On TKI therapy, follow response with periodic cross-sectional imaging, using FDG-PET selectively for early response or resistance signals, and refer to a multidisciplinary sarcoma/GIST team for neoadjuvant candidates, syndromic or resistant genotypes, rectal or periampullary GIST, and decisions about surgery for residual metastatic disease."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gastrointestinal_stromal_tumour-pathway",
-   "title": "gastrointestinal stromal tumour: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most common mesenchymal tumour of the gastrointestinal tract, arising from the interstitial cells of Cajal or their precursors, most frequently in the stomach followed by the small intestine.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: acute gastrointestinal haemorrhage or haemodynamic instability from a bleeding tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: contrast-enhanced CT of the abdomen and pelvis for staging and response assessment, endoscopic ultrasound with fine-needle aspiration or biopsy, immunohistochemistry for CD117 (KIT), DOG1, CD34 and SDHB"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm diagnosis by core needle biopsy and perform KIT/PDGFRA mutational analysis (with SDH immunohistochemistry if both negative) before planning medical therapy, since genotype predicts prognosis and drug"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling a GIST as benign on size alone; small tumours can still metastasise and risk is a continuum."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gastrointestinal stromal tumour."
-  }
- ],
- "tables": [
-  {
-   "id": "gastrointestinal_stromal_tumour-matrix",
-   "title": "gastrointestinal stromal tumour: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most common mesenchymal tumour of the gastrointestinal tract, arising from the interstitial cells of Cajal or their precursors,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "gastrointestinal",
+  "specialty": "surgical oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Digestive System Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most common mesenchymal tumour of the gastrointestinal tract, arising from the interstitial cells of Cajal or their precursors, most frequently in the stomach followed by the small intestine.",
+      "The great majority harbour activating mutations in KIT (CD117) or PDGFRA; immunohistochemistry for CD117 and DOG1 is the diagnostic cornerstone.",
+      "Small tumours are frequently incidental findings at endoscopy, imaging or surgery for another indication, whereas larger lesions present with occult or overt gastrointestinal bleeding, anaemia, abdominal mass or vague discomfort.",
+      "Risk stratification for malignant behaviour rests on tumour size, mitotic rate and anatomical site rather than a simple benign-versus-malignant dichotomy; small-bowel lesions behave more aggressively than gastric ones of equivalent size.",
+      "Endoscopic ultrasound shows a hypoechoic mass arising from the muscularis propria (fourth layer) and guides biopsy when tissue is needed; percutaneous biopsy of a resectable lesion is generally avoided owing to rupture and seeding risk.",
+      "Imatinib and successor tyrosine kinase inhibitors transformed management of advanced disease; response and drug selection are strongly mutation-dependent, and PDGFRA exon 18 D842V tumours are classically imatinib-resistant.",
+      "Wild-type GIST lacking KIT and PDGFRA mutations includes SDH-deficient tumours (often gastric, paediatric, associated with Carney triad and Carney-Stratakis syndrome) and NF1-associated and BRAF-mutant forms.",
+      "Complete surgical resection with an intact pseudocapsule and negative margins is the mainstay for localised disease; lymphadenectomy is not routinely required as nodal spread is uncommon except in SDH-deficient tumours."
     ],
-    [
-     "Key Investigations",
-     "contrast-enhanced CT of the abdomen and pelvis for staging and response assessment, endoscopic ultrasound with fine-needle",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gastrointestinal stromal tumours arise from the interstitial cells of Cajal, the pacemaker cells that regulate gut peristalsis, or from their mesenchymal precursors within the wall of the tubular gastrointestinal tract. In most tumours a gain-of-function mutation in the receptor tyrosine kinase KIT drives ligand-independent, constitutive downstream signalling through the RAS-MAPK and PI3K-AKT pathways, promoting proliferation and survival; a minority are driven by analogous activating mutations in PDGFRA. A distinct subset lacks these mutations and instead shows loss of function of the succinate dehydrogenase complex, producing pseudohypoxic signalling, or is associated with neurofibromatosis type 1 or BRAF mutation. The specific driver dictates both morphology and, critically, sensitivity to tyrosine kinase inhibition, so molecular characterisation is integral to biological understanding and treatment.",
+    "additionalDifferentials": [
+      "leiomyoma or leiomyosarcoma of the gut wall",
+      "schwannoma of the gastrointestinal tract",
+      "desmoid-type fibromatosis",
+      "gastrointestinal neuroendocrine tumour",
+      "solitary fibrous tumour",
+      "metastatic melanoma to the gut",
+      "inflammatory fibroid polyp"
     ],
-    [
-     "Primary Differentials",
-     "leiomyoma or leiomyosarcoma of the gut wall, schwannoma of the gastrointestinal tract, desmoid-type fibromatosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "contrast-enhanced CT of the abdomen and pelvis for staging and response assessment",
+      "endoscopic ultrasound with fine-needle aspiration or biopsy",
+      "immunohistochemistry for CD117 (KIT), DOG1, CD34 and SDHB",
+      "molecular genotyping of KIT and PDGFRA (and BRAF/SDH where indicated)",
+      "assessment of mitotic count per defined high-power field area by histopathology",
+      "MRI for rectal or hepatic lesions where CT characterisation is limited",
+      "FDG-PET for early metabolic response to tyrosine kinase inhibitor therapy"
     ],
-    [
-     "Management Strategy",
-     "Confirm diagnosis by core needle biopsy and perform KIT/PDGFRA mutational analysis (with SDH immunohistochemistry if both",
-     "Core treatment modality"
+    "redFlags": [
+      "acute gastrointestinal haemorrhage or haemodynamic instability from a bleeding tumour",
+      "tumour rupture into the peritoneal cavity, markedly increasing recurrence risk",
+      "rapidly enlarging mass with new pain suggesting high-grade progression",
+      "signs of bowel obstruction or perforation",
+      "new hepatic or peritoneal lesions indicating metastatic spread"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling a GIST as benign on size alone; small tumours can still metastasise and risk is a continuum.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends chiefly on tumour size, mitotic rate, site and completeness of resection, with small gastric tumours often cured by excision while large small-bowel or ruptured tumours carry substantial recurrence risk. Tyrosine kinase inhibitors have markedly prolonged survival in advanced disease, though outcome varies with the underlying mutation.",
+    "pitfalls": [
+      "Labelling a GIST as benign on size alone; small tumours can still metastasise and risk is a continuum.",
+      "Percutaneous biopsy of a readily resectable lesion, risking rupture and peritoneal seeding.",
+      "Failing to genotype before systemic therapy, leading to use of imatinib in resistant PDGFRA D842V tumours.",
+      "Misdiagnosing a CD117-negative or DOG1-positive tumour as leiomyoma or schwannoma without full immunohistochemistry.",
+      "Overlooking SDH-deficient GIST in young patients and its associated syndromic and nodal-spread implications."
+    ],
+    "references": [
+      "WHO Classification of Tumours: Digestive System Tumours (current edition)",
+      "ESMO Clinical Practice Guidelines on gastrointestinal stromal tumours",
+      "NCCN Guidelines on soft tissue sarcoma and GIST"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm diagnosis by core needle biopsy and perform KIT/PDGFRA mutational analysis (with SDH immunohistochemistry if both negative) before planning medical therapy, since genotype predicts prognosis and drug sensitivity.",
+      "For localized disease, surgery with macroscopically complete (R0) resection is the mainstay; tumours 2 cm or larger should generally be resected, small 1 to 2 cm lesions may be observed or resected, and rupture or capsule violation during surgery must be avoided given its adverse prognostic impact.",
+      "Consider preoperative (neoadjuvant) imatinib to shrink a large or high rupture risk tumour before surgery, only after confirming an imatinib-sensitive genotype, monitoring response clinically and radiologically.",
+      "Offer adjuvant imatinib, typically for about three years, to patients with a sufficiently high estimated relapse risk after complete resection, restricted to imatinib-sensitive genotypes (KIT-mutated or PDGFRA-mutated excluding D842V and related exon 18 variants).",
+      "For metastatic or unresectable disease, start indefinite TKI therapy rather than a fixed course, since stopping typically leads to progression within months.",
+      "Sequence systemic therapy by line: imatinib first for imatinib-sensitive genotypes (with avapritinib instead for PDGFRA D842V and related exon 18 mutations), then sunitinib, then regorafenib, then ripretinib as later lines for progressive disease.",
+      "Consider dose escalation of the current TKI at progression in some patients, as this can produce temporary benefit, and check adherence before attributing progression to molecular resistance.",
+      "For SDH-deficient GIST, which is essentially imatinib-insensitive, consider sunitinib or regorafenib given the more indolent natural history of this subtype.",
+      "For limited or focal progression on an otherwise responding TKI, consider continuing the current TKI while using surgery or ablation to control the progressing focus, recognizing this is not backed by prospective trial data.",
+      "Consider surgical resection of residual imatinib-responding metastatic disease only when complete resection of all visible disease is feasible, continuing the TKI afterward regardless of how complete resection appears, since its prognostic benefit is unproven.",
+      "Reserve radiotherapy for palliation, such as extra-abdominal (bone) metastases, since it has no established curative role in GIST.",
+      "Follow up after curative surgery with periodic CT of the abdomen (MRI as an alternative) to detect peritoneal or liver relapse, without routine endoscopy, focusing surveillance on the highest-risk two to three year window after surgery or adjuvant therapy.",
+      "On TKI therapy, follow response with periodic cross-sectional imaging, using FDG-PET selectively for early response or resistance signals, and refer to a multidisciplinary sarcoma/GIST team for neoadjuvant candidates, syndromic or resistant genotypes, rectal or periampullary GIST, and decisions about surgery for residual metastatic disease."
     ]
-   ],
-   "caption": "Overview comparison matrix for gastrointestinal stromal tumour."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gastrointestinal-stromal-tumour-real-image",
-   "title": "gastrointestinal stromal tumour: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "gastrointestinal_stromal_tumour-pathway",
+      "title": "gastrointestinal stromal tumour: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most common mesenchymal tumour of the gastrointestinal tract, arising from the interstitial cells of Cajal or their precursors, most frequently in the stomach followed by the small intestine.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: acute gastrointestinal haemorrhage or haemodynamic instability from a bleeding tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: contrast-enhanced CT of the abdomen and pelvis for staging and response assessment, endoscopic ultrasound with fine-needle aspiration or biopsy, immunohistochemistry for CD117 (KIT), DOG1, CD34 and SDHB"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm diagnosis by core needle biopsy and perform KIT/PDGFRA mutational analysis (with SDH immunohistochemistry if both negative) before planning medical therapy, since genotype predicts prognosis and drug"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling a GIST as benign on size alone; small tumours can still metastasise and risk is a continuum."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gastrointestinal stromal tumour."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gastrointestinal_stromal_tumour-matrix",
+      "title": "gastrointestinal stromal tumour: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most common mesenchymal tumour of the gastrointestinal tract, arising from the interstitial cells of Cajal or their precursors,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "contrast-enhanced CT of the abdomen and pelvis for staging and response assessment, endoscopic ultrasound with fine-needle",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "leiomyoma or leiomyosarcoma of the gut wall, schwannoma of the gastrointestinal tract, desmoid-type fibromatosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm diagnosis by core needle biopsy and perform KIT/PDGFRA mutational analysis (with SDH immunohistochemistry if both",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling a GIST as benign on size alone; small tumours can still metastasise and risk is a continuum.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gastrointestinal stromal tumour."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Digestive System Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastrointestinal_stromal_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Staging and response assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound with FNA or biopsy",
+          "cells": [
+            {
+              "text": "Tissue sampling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for CD117, DOG1, CD34 and SDHB",
+          "cells": [
+            {
+              "text": "Marker profile for GIST"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genotyping of KIT and PDGFRA",
+          "cells": [
+            {
+              "text": "Mutation status; BRAF or SDH where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitotic count per high-power field",
+          "cells": [
+            {
+              "text": "Histological grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI for rectal or hepatic lesions",
+          "cells": [
+            {
+              "text": "Where CT characterisation is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Early metabolic response to tyrosine kinase inhibitor therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_stromal_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastrointestinal neuroendocrine tumour",
+          "cells": [
+            {
+              "text": "Distinguished by the CD117 and DOG1 marker profile"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_stromal_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Core needle biopsy and mutation analysis",
+          "cells": [
+            {
+              "text": "Confirms diagnosis; SDH immunohistochemistry if KIT and PDGFRA are negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for localised disease",
+          "cells": [
+            {
+              "text": "Macroscopically complete (R0) resection is the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neoadjuvant imatinib",
+          "cells": [
+            {
+              "text": "Large or high rupture-risk tumours, only after confirmation of diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant imatinib",
+          "cells": [
+            {
+              "text": "Typically about three years, for a high estimated relapse risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indefinite TKI therapy for metastatic disease",
+          "cells": [
+            {
+              "text": "Stopping typically leads to progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sequenced TKI therapy",
+          "cells": [
+            {
+              "text": "Imatinib first for imatinib-sensitive genotypes; avapritinib for PDGFRA D842V"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SDH-deficient GIST",
+          "cells": [
+            {
+              "text": "Largely imatinib-insensitive; sunitinib or regorafenib considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Palliation only, such as bone metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up after resection",
+          "cells": [
+            {
+              "text": "Periodic CT of the abdomen (MRI as an alternative) to detect relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastrointestinal_stromal_tumour-dx-mgmt",
+      "title": "Diagnosis and management of gastrointestinal stromal tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GIST: submucosal or intramural gastrointestinal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bleeding, rupture, rapid enlargement, obstruction, metastasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for bleeding, rupture or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT abdomen and pelvis, endoscopic ultrasound with biopsy, CD117 and DOG1 staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do CD117 or DOG1 staining and KIT or PDGFRA testing confirm GIST?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider leiomyoma, schwannoma, neuroendocrine tumour or desmoid fibromatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Core biopsy and KIT or PDGFRA mutation analysis to confirm the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgery with complete (R0) resection for localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant imatinib, typically about three years, for high relapse risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Indefinite TKI therapy for metastatic or unresectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on size, mitotic rate, site and resection; small gastric tumours often cured",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

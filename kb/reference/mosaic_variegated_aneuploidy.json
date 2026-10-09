@@ -1,174 +1,452 @@
 {
- "id": "mosaic_variegated_aneuploidy",
- "name": "Mosaic variegated aneuploidy syndrome",
- "aliases": [
-  "MVA",
-  "MVA syndrome",
-  "BUB1B-related mosaic variegated aneuploidy",
-  "mosaic variegated aneuploidy syndrome 1"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The defining laboratory feature is constitutional mosaic aneuploidy, with different cells carrying gains or losses of various chromosomes (variegated), typically involving a substantial proportion of cells on cytogenetic study",
-   "Clinically it presents with severe microcephaly, pre- and postnatal growth restriction, and developmental delay",
-   "There is a strong predisposition to childhood cancers, particularly Wilms tumour, rhabdomyosarcoma, and leukaemia, reflecting genome instability",
-   "The most recognised cause is biallelic variants in BUB1B, which encodes BUBR1, a core component of the mitotic spindle assembly checkpoint; other causes include CEP57 and TRIP13",
-   "Additional features can include Dandy-Walker malformation and other brain anomalies, cataracts and other eye abnormalities, and seizures",
-   "Diagnosis combines cytogenetic demonstration of multiple aneuploidies across cells with molecular confirmation of the causative gene",
-   "Management is supportive with heightened tumour surveillance, since early detection of embryonal tumours is central to care"
+  "id": "mosaic_variegated_aneuploidy",
+  "name": "Mosaic variegated aneuploidy syndrome",
+  "aliases": [
+    "MVA",
+    "MVA syndrome",
+    "BUB1B-related mosaic variegated aneuploidy",
+    "mosaic variegated aneuploidy syndrome 1"
   ],
-  "pathophysiology": "The syndrome is a chromosome-instability disorder arising, in its classic form, from biallelic loss-of-function variants in BUB1B, which encodes BUBR1, an essential protein of the spindle assembly checkpoint. This checkpoint normally delays progression through mitosis until all chromosomes are correctly attached to the spindle, preventing missegregation. When checkpoint function is impaired, chromosomes are distributed unequally to daughter cells, generating the characteristic mosaic pattern of gains and losses across many different chromosomes. The resulting aneuploidy and genomic instability drive the growth failure, microcephaly, neurodevelopmental impairment, and the marked predisposition to embryonal tumours. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Constitutional mismatch repair deficiency",
-   "Fanconi anaemia and other chromosome-breakage syndromes",
-   "Nijmegen breakage syndrome",
-   "Primary microcephaly syndromes without aneuploidy",
-   "Seckel syndrome and microcephalic primordial dwarfism",
-   "Other cancer-predisposition syndromes presenting in early childhood"
-  ],
-  "additionalInvestigations": [
-   "Cytogenetic karyotyping of multiple cells to demonstrate variegated mosaic aneuploidy",
-   "Molecular genetic testing of BUB1B, CEP57, and TRIP13",
-   "MRI of the brain to assess microcephaly and posterior fossa anomalies such as Dandy-Walker malformation",
-   "Tumour surveillance imaging, particularly abdominal ultrasound for Wilms tumour",
-   "Ophthalmological examination for cataract and other anomalies",
-   "Developmental assessment and, where relevant, EEG for seizures"
-  ],
-  "redFlags": [
-   "An abdominal mass, haematuria, or other features suggesting Wilms tumour or another embryonal malignancy",
-   "Pancytopenia or other haematological abnormalities suggesting leukaemia",
-   "Rapidly enlarging head or signs of raised intracranial pressure",
-   "New seizures or acute neurological deterioration"
-  ],
-  "prognosis": "The prognosis is generally guarded, reflecting the combination of severe growth and neurodevelopmental impairment and a high risk of early childhood malignancy. Outcomes depend substantially on the specific genotype and on whether tumours are detected and treated early through surveillance.",
-  "pitfalls": [
-   "Dismissing an isolated aneuploid cell on karyotype without recognising the pattern of variegated mosaic aneuploidy",
-   "Failing to institute tumour surveillance and thereby missing early, treatable embryonal tumours",
-   "Overlooking posterior fossa malformations on neuroimaging",
-   "Not recognising the autosomal recessive inheritance and its implications for recurrence risk"
-  ],
-  "references": [
-   "GeneReviews (University of Washington)",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute intensive childhood tumour surveillance for Wilms tumour, rhabdomyosarcoma and leukaemia with regular abdominal ultrasound, clinical examination and blood counts",
-   "Refer promptly for paediatric oncology treatment when an embryonal tumour or leukaemia is detected",
-   "Provide neurodevelopmental support with early intervention, physiotherapy, occupational and speech therapy for the developmental impairment",
-   "Treat seizures with anticonvulsants and monitor with electroencephalography",
-   "Arrange ophthalmological review with cataract surgery, and optimise growth and nutrition given the severe growth restriction",
-   "Offer genetic counselling for this autosomal recessive condition, with testing of parents and at-risk relatives",
-   "Coordinate multidisciplinary care across clinical genetics, paediatric oncology, neurology and ophthalmology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mosaic_variegated_aneuploidy-pathway",
-   "title": "Mosaic variegated aneuploidy syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The defining laboratory feature is constitutional mosaic aneuploidy, with different cells carrying gains or losses of various chromosomes (variegated), typically involving a substantial proportion of cells on cytogenetic study",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An abdominal mass, haematuria, or other features suggesting Wilms tumour or another embryonal malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cytogenetic karyotyping of multiple cells to demonstrate variegated mosaic aneuploidy, Molecular genetic testing of BUB1B, CEP57, and TRIP13, MRI of the brain to assess microcephaly and posterior fossa anomalies such as"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute intensive childhood tumour surveillance for Wilms tumour, rhabdomyosarcoma and leukaemia with regular abdominal ultrasound, clinical examination and blood counts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing an isolated aneuploid cell on karyotype without recognising the pattern of variegated mosaic aneuploidy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mosaic variegated aneuploidy syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "mosaic_variegated_aneuploidy-matrix",
-   "title": "Mosaic variegated aneuploidy syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The defining laboratory feature is constitutional mosaic aneuploidy, with different cells carrying gains or losses of various",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The defining laboratory feature is constitutional mosaic aneuploidy, with different cells carrying gains or losses of various chromosomes (variegated), typically involving a substantial proportion of cells on cytogenetic study",
+      "Clinically it presents with severe microcephaly, pre- and postnatal growth restriction, and developmental delay",
+      "There is a strong predisposition to childhood cancers, particularly Wilms tumour, rhabdomyosarcoma, and leukaemia, reflecting genome instability",
+      "The most recognised cause is biallelic variants in BUB1B, which encodes BUBR1, a core component of the mitotic spindle assembly checkpoint; other causes include CEP57 and TRIP13",
+      "Additional features can include Dandy-Walker malformation and other brain anomalies, cataracts and other eye abnormalities, and seizures",
+      "Diagnosis combines cytogenetic demonstration of multiple aneuploidies across cells with molecular confirmation of the causative gene",
+      "Management is supportive with heightened tumour surveillance, since early detection of embryonal tumours is central to care"
     ],
-    [
-     "Key Investigations",
-     "Cytogenetic karyotyping of multiple cells to demonstrate variegated mosaic aneuploidy, Molecular genetic testing of BUB1B, CEP57,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The syndrome is a chromosome-instability disorder arising, in its classic form, from biallelic loss-of-function variants in BUB1B, which encodes BUBR1, an essential protein of the spindle assembly checkpoint. This checkpoint normally delays progression through mitosis until all chromosomes are correctly attached to the spindle, preventing missegregation. When checkpoint function is impaired, chromosomes are distributed unequally to daughter cells, generating the characteristic mosaic pattern of gains and losses across many different chromosomes. The resulting aneuploidy and genomic instability drive the growth failure, microcephaly, neurodevelopmental impairment, and the marked predisposition to embryonal tumours. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Constitutional mismatch repair deficiency",
+      "Fanconi anaemia and other chromosome-breakage syndromes",
+      "Nijmegen breakage syndrome",
+      "Primary microcephaly syndromes without aneuploidy",
+      "Seckel syndrome and microcephalic primordial dwarfism",
+      "Other cancer-predisposition syndromes presenting in early childhood"
     ],
-    [
-     "Primary Differentials",
-     "Constitutional mismatch repair deficiency, Fanconi anaemia and other chromosome-breakage syndromes, Nijmegen breakage syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cytogenetic karyotyping of multiple cells to demonstrate variegated mosaic aneuploidy",
+      "Molecular genetic testing of BUB1B, CEP57, and TRIP13",
+      "MRI of the brain to assess microcephaly and posterior fossa anomalies such as Dandy-Walker malformation",
+      "Tumour surveillance imaging, particularly abdominal ultrasound for Wilms tumour",
+      "Ophthalmological examination for cataract and other anomalies",
+      "Developmental assessment and, where relevant, EEG for seizures"
     ],
-    [
-     "Management Strategy",
-     "Institute intensive childhood tumour surveillance for Wilms tumour, rhabdomyosarcoma and leukaemia with regular abdominal",
-     "Core treatment modality"
+    "redFlags": [
+      "An abdominal mass, haematuria, or other features suggesting Wilms tumour or another embryonal malignancy",
+      "Pancytopenia or other haematological abnormalities suggesting leukaemia",
+      "Rapidly enlarging head or signs of raised intracranial pressure",
+      "New seizures or acute neurological deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing an isolated aneuploid cell on karyotype without recognising the pattern of variegated mosaic aneuploidy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally guarded, reflecting the combination of severe growth and neurodevelopmental impairment and a high risk of early childhood malignancy. Outcomes depend substantially on the specific genotype and on whether tumours are detected and treated early through surveillance.",
+    "pitfalls": [
+      "Dismissing an isolated aneuploid cell on karyotype without recognising the pattern of variegated mosaic aneuploidy",
+      "Failing to institute tumour surveillance and thereby missing early, treatable embryonal tumours",
+      "Overlooking posterior fossa malformations on neuroimaging",
+      "Not recognising the autosomal recessive inheritance and its implications for recurrence risk"
+    ],
+    "references": [
+      "GeneReviews (University of Washington)",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute intensive childhood tumour surveillance for Wilms tumour, rhabdomyosarcoma and leukaemia with regular abdominal ultrasound, clinical examination and blood counts",
+      "Refer promptly for paediatric oncology treatment when an embryonal tumour or leukaemia is detected",
+      "Provide neurodevelopmental support with early intervention, physiotherapy, occupational and speech therapy for the developmental impairment",
+      "Treat seizures with anticonvulsants and monitor with electroencephalography",
+      "Arrange ophthalmological review with cataract surgery, and optimise growth and nutrition given the severe growth restriction",
+      "Offer genetic counselling for this autosomal recessive condition, with testing of parents and at-risk relatives",
+      "Coordinate multidisciplinary care across clinical genetics, paediatric oncology, neurology and ophthalmology"
     ]
-   ],
-   "caption": "Overview comparison matrix for mosaic variegated aneuploidy syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mosaic-variegated-aneuploidy-real-image",
-   "title": "Mosaic variegated aneuploidy syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mosaic_variegated_aneuploidy-pathway",
+      "title": "Mosaic variegated aneuploidy syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The defining laboratory feature is constitutional mosaic aneuploidy, with different cells carrying gains or losses of various chromosomes (variegated), typically involving a substantial proportion of cells on cytogenetic study",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An abdominal mass, haematuria, or other features suggesting Wilms tumour or another embryonal malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cytogenetic karyotyping of multiple cells to demonstrate variegated mosaic aneuploidy, Molecular genetic testing of BUB1B, CEP57, and TRIP13, MRI of the brain to assess microcephaly and posterior fossa anomalies such as"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute intensive childhood tumour surveillance for Wilms tumour, rhabdomyosarcoma and leukaemia with regular abdominal ultrasound, clinical examination and blood counts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing an isolated aneuploid cell on karyotype without recognising the pattern of variegated mosaic aneuploidy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mosaic variegated aneuploidy syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mosaic_variegated_aneuploidy-matrix",
+      "title": "Mosaic variegated aneuploidy syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The defining laboratory feature is constitutional mosaic aneuploidy, with different cells carrying gains or losses of various",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cytogenetic karyotyping of multiple cells to demonstrate variegated mosaic aneuploidy, Molecular genetic testing of BUB1B, CEP57,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Constitutional mismatch repair deficiency, Fanconi anaemia and other chromosome-breakage syndromes, Nijmegen breakage syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute intensive childhood tumour surveillance for Wilms tumour, rhabdomyosarcoma and leukaemia with regular abdominal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing an isolated aneuploid cell on karyotype without recognising the pattern of variegated mosaic aneuploidy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mosaic variegated aneuploidy syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mosaic_variegated_aneuploidy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype of multiple cells",
+          "cells": [
+            {
+              "text": "Variegated mosaic aneuploidy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BUB1B, CEP57 and TRIP13 testing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Microcephaly and posterior fossa anomalies such as Dandy-Walker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Tumour surveillance, particularly Wilms tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Cataract and other anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mosaic_variegated_aneuploidy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Constitutional mismatch repair deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fanconi anaemia and chromosome-breakage syndromes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seckel syndrome and primordial dwarfism",
+          "cells": [
+            {
+              "text": "Microcephaly without aneuploidy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mosaic_variegated_aneuploidy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour surveillance",
+          "cells": [
+            {
+              "text": "Wilms tumour, rhabdomyosarcoma and leukaemia; regular abdominal ultrasound and examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric oncology referral",
+          "cells": [
+            {
+              "text": "Prompt when an embryonal tumour or leukaemia is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Early intervention, physiotherapy, occupational and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsants and EEG",
+          "cells": [
+            {
+              "text": "Seizure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and nutrition",
+          "cells": [
+            {
+              "text": "Cataract surgery; optimise growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; test parents and at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mosaic_variegated_aneuploidy-dx-mgmt",
+      "title": "Diagnosis and management of Mosaic variegated aneuploidy syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Microcephaly and growth restriction with suspected variegated aneuploidy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Abdominal mass, haematuria, pancytopenia, raised ICP or new seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric oncology and neurology assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Multicell karyotype, BUB1B/CEP57/TRIP13 testing, brain MRI, abdominal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Variegated aneuploidy in many cells with a gene variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CMMRD, Fanconi, Nijmegen, Seckel and primary microcephaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive tumour surveillance with regular abdominal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt paediatric oncology referral for any malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurodevelopmental support; anticonvulsants if seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cataract surgery, nutrition and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Guarded: severe impairment and high early childhood malignancy risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

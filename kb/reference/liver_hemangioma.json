@@ -1,175 +1,491 @@
 {
- "id": "liver_hemangioma",
- "name": "Liver haemangioma",
- "aliases": [
-  "hepatic haemangioma",
-  "cavernous haemangioma of the liver",
-  "hepatic cavernous haemangioma",
-  "liver hemangioma"
- ],
- "class": "non_infective",
- "system": "Hepatobiliary surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hepatic haemangioma is the commonest benign liver tumour and is usually an incidental finding on imaging in an asymptomatic patient",
-   "Most are small and require no treatment; large (giant) lesions may cause dull right upper quadrant discomfort, early satiety, or a mass effect",
-   "Contrast imaging shows a characteristic pattern of peripheral nodular enhancement with progressive centripetal fill-in on CT or MRI, which is typically diagnostic",
-   "MRI demonstrates a markedly hyperintense lesion on heavily T2-weighted sequences, helping to confirm the diagnosis non-invasively",
-   "Percutaneous biopsy is generally avoided because of the theoretical risk of bleeding and because imaging is usually diagnostic",
-   "Management is overwhelmingly conservative with reassurance and, for uncertain or enlarging lesions, surveillance; intervention is reserved for significant symptoms, diagnostic doubt, or complications",
-   "Kasabach-Merritt syndrome, a consumptive coagulopathy, is a rare association with very large lesions, chiefly in infants"
+  "id": "liver_hemangioma",
+  "name": "Liver haemangioma",
+  "aliases": [
+    "hepatic haemangioma",
+    "cavernous haemangioma of the liver",
+    "hepatic cavernous haemangioma",
+    "liver hemangioma"
   ],
-  "pathophysiology": "A hepatic haemangioma is a benign vascular malformation composed of multiple dilated, blood-filled vascular channels lined by a single layer of endothelium and separated by thin fibrous septa. It is thought to be congenital in origin, enlarging by ectasia rather than by cellular proliferation, and its growth can be influenced by hormonal factors such as pregnancy and oestrogen exposure. Blood flow through the lesion is slow, which underlies the characteristic delayed centripetal enhancement on imaging. Very large lesions can trap and consume platelets and clotting factors, producing the Kasabach-Merritt consumptive coagulopathy, and rarely a superficial lesion may bleed after trauma.",
-  "additionalDifferentials": [
-   "Focal nodular hyperplasia",
-   "Hepatic adenoma",
-   "Hepatocellular carcinoma",
-   "Hypervascular liver metastasis",
-   "Simple hepatic cyst",
-   "Angiosarcoma (rare)"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT showing peripheral nodular discontinuous enhancement with centripetal fill-in",
-   "MRI with heavily T2-weighted sequences for a characteristically bright lesion",
-   "Ultrasound (often a well-defined hyperechoic lesion) as an initial or incidental finding",
-   "Labelled red-cell scintigraphy in selected diagnostically uncertain cases",
-   "Coagulation screen and platelet count if a very large lesion raises concern for consumptive coagulopathy",
-   "Interval imaging surveillance for indeterminate or enlarging lesions"
-  ],
-  "redFlags": [
-   "Spontaneous or traumatic rupture with intraperitoneal haemorrhage and haemodynamic instability (rare but life-threatening)",
-   "Consumptive coagulopathy (Kasabach-Merritt syndrome) with a very large lesion",
-   "Rapid enlargement or atypical imaging raising doubt about the benign diagnosis",
-   "Severe, progressive symptoms from a giant lesion causing mass effect"
-  ],
-  "prognosis": "The prognosis is excellent; most haemangiomas remain stable, cause no symptoms, and never require treatment, with an extremely low risk of complications. Even large lesions usually behave benignly, and surgical resection of genuinely symptomatic or complicated lesions gives good long-term results.",
-  "pitfalls": [
-   "Performing percutaneous biopsy of a suspected haemangioma and risking haemorrhage",
-   "Misinterpreting the lesion as a metastasis or hepatocellular carcinoma and subjecting the patient to unnecessary intervention",
-   "Over-treating small asymptomatic lesions that only need reassurance",
-   "Attributing unrelated abdominal symptoms to a small incidental haemangioma",
-   "Overlooking coagulopathy in a patient with a very large lesion"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and give no treatment for typical small asymptomatic lesions, the usual approach",
-   "Arrange interval imaging surveillance for indeterminate or enlarging lesions",
-   "Reserve surgical resection or enucleation for genuinely symptomatic giant lesions, diagnostic uncertainty or complications",
-   "Counsel on oestrogen avoidance and around pregnancy, given the hormonal influence on growth",
-   "Avoid percutaneous biopsy because of bleeding risk and because imaging is usually diagnostic",
-   "Monitor coagulation and platelets in very large lesions for Kasabach-Merritt consumptive coagulopathy",
-   "Refer to hepatobiliary surgery for large, symptomatic or complicated tumours, with transarterial embolisation as an alternative in selected cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "liver_hemangioma-pathway",
-   "title": "Liver haemangioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hepatic haemangioma is the commonest benign liver tumour and is usually an incidental finding on imaging in an asymptomatic patient",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Spontaneous or traumatic rupture with intraperitoneal haemorrhage and haemodynamic instability (rare but life-threatening)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT showing peripheral nodular discontinuous enhancement with centripetal fill-in, MRI with heavily T2-weighted sequences for a characteristically bright lesion, Ultrasound (often a well-defined"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and give no treatment for typical small asymptomatic lesions, the usual approach"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing percutaneous biopsy of a suspected haemangioma and risking haemorrhage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of liver haemangioma."
-  }
- ],
- "tables": [
-  {
-   "id": "liver_hemangioma-matrix",
-   "title": "Liver haemangioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hepatic haemangioma is the commonest benign liver tumour and is usually an incidental finding on imaging in an asymptomatic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatobiliary surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hepatic haemangioma is the commonest benign liver tumour and is usually an incidental finding on imaging in an asymptomatic patient",
+      "Most are small and require no treatment; large (giant) lesions may cause dull right upper quadrant discomfort, early satiety, or a mass effect",
+      "Contrast imaging shows a characteristic pattern of peripheral nodular enhancement with progressive centripetal fill-in on CT or MRI, which is typically diagnostic",
+      "MRI demonstrates a markedly hyperintense lesion on heavily T2-weighted sequences, helping to confirm the diagnosis non-invasively",
+      "Percutaneous biopsy is generally avoided because of the theoretical risk of bleeding and because imaging is usually diagnostic",
+      "Management is overwhelmingly conservative with reassurance and, for uncertain or enlarging lesions, surveillance; intervention is reserved for significant symptoms, diagnostic doubt, or complications",
+      "Kasabach-Merritt syndrome, a consumptive coagulopathy, is a rare association with very large lesions, chiefly in infants"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT showing peripheral nodular discontinuous enhancement with centripetal fill-in, MRI with heavily T2-weighted",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A hepatic haemangioma is a benign vascular malformation composed of multiple dilated, blood-filled vascular channels lined by a single layer of endothelium and separated by thin fibrous septa. It is thought to be congenital in origin, enlarging by ectasia rather than by cellular proliferation, and its growth can be influenced by hormonal factors such as pregnancy and oestrogen exposure. Blood flow through the lesion is slow, which underlies the characteristic delayed centripetal enhancement on imaging. Very large lesions can trap and consume platelets and clotting factors, producing the Kasabach-Merritt consumptive coagulopathy, and rarely a superficial lesion may bleed after trauma.",
+    "additionalDifferentials": [
+      "Focal nodular hyperplasia",
+      "Hepatic adenoma",
+      "Hepatocellular carcinoma",
+      "Hypervascular liver metastasis",
+      "Simple hepatic cyst",
+      "Angiosarcoma (rare)"
     ],
-    [
-     "Primary Differentials",
-     "Focal nodular hyperplasia, Hepatic adenoma, Hepatocellular carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT showing peripheral nodular discontinuous enhancement with centripetal fill-in",
+      "MRI with heavily T2-weighted sequences for a characteristically bright lesion",
+      "Ultrasound (often a well-defined hyperechoic lesion) as an initial or incidental finding",
+      "Labelled red-cell scintigraphy in selected diagnostically uncertain cases",
+      "Coagulation screen and platelet count if a very large lesion raises concern for consumptive coagulopathy",
+      "Interval imaging surveillance for indeterminate or enlarging lesions"
     ],
-    [
-     "Management Strategy",
-     "Reassure and give no treatment for typical small asymptomatic lesions, the usual approach",
-     "Core treatment modality"
+    "redFlags": [
+      "Spontaneous or traumatic rupture with intraperitoneal haemorrhage and haemodynamic instability (rare but life-threatening)",
+      "Consumptive coagulopathy (Kasabach-Merritt syndrome) with a very large lesion",
+      "Rapid enlargement or atypical imaging raising doubt about the benign diagnosis",
+      "Severe, progressive symptoms from a giant lesion causing mass effect"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing percutaneous biopsy of a suspected haemangioma and risking haemorrhage",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent; most haemangiomas remain stable, cause no symptoms, and never require treatment, with an extremely low risk of complications. Even large lesions usually behave benignly, and surgical resection of genuinely symptomatic or complicated lesions gives good long-term results.",
+    "pitfalls": [
+      "Performing percutaneous biopsy of a suspected haemangioma and risking haemorrhage",
+      "Misinterpreting the lesion as a metastasis or hepatocellular carcinoma and subjecting the patient to unnecessary intervention",
+      "Over-treating small asymptomatic lesions that only need reassurance",
+      "Attributing unrelated abdominal symptoms to a small incidental haemangioma",
+      "Overlooking coagulopathy in a patient with a very large lesion"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and give no treatment for typical small asymptomatic lesions, the usual approach",
+      "Arrange interval imaging surveillance for indeterminate or enlarging lesions",
+      "Reserve surgical resection or enucleation for genuinely symptomatic giant lesions, diagnostic uncertainty or complications",
+      "Counsel on oestrogen avoidance and around pregnancy, given the hormonal influence on growth",
+      "Avoid percutaneous biopsy because of bleeding risk and because imaging is usually diagnostic",
+      "Monitor coagulation and platelets in very large lesions for Kasabach-Merritt consumptive coagulopathy",
+      "Refer to hepatobiliary surgery for large, symptomatic or complicated tumours, with transarterial embolisation as an alternative in selected cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for liver haemangioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "liver-hemangioma-real-image",
-   "title": "Liver haemangioma: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "liver_hemangioma-pathway",
+      "title": "Liver haemangioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hepatic haemangioma is the commonest benign liver tumour and is usually an incidental finding on imaging in an asymptomatic patient",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Spontaneous or traumatic rupture with intraperitoneal haemorrhage and haemodynamic instability (rare but life-threatening)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT showing peripheral nodular discontinuous enhancement with centripetal fill-in, MRI with heavily T2-weighted sequences for a characteristically bright lesion, Ultrasound (often a well-defined"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and give no treatment for typical small asymptomatic lesions, the usual approach"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing percutaneous biopsy of a suspected haemangioma and risking haemorrhage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of liver haemangioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "liver_hemangioma-matrix",
+      "title": "Liver haemangioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hepatic haemangioma is the commonest benign liver tumour and is usually an incidental finding on imaging in an asymptomatic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT showing peripheral nodular discontinuous enhancement with centripetal fill-in, MRI with heavily T2-weighted",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Focal nodular hyperplasia, Hepatic adenoma, Hepatocellular carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and give no treatment for typical small asymptomatic lesions, the usual approach",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing percutaneous biopsy of a suspected haemangioma and risking haemorrhage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for liver haemangioma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "liver_hemangioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Peripheral nodular enhancement with centripetal fill-in"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with heavily T2-weighted sequences",
+          "cells": [
+            {
+              "text": "Characteristically bright lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Well-defined hyperechoic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Labelled red-cell scintigraphy",
+          "cells": [
+            {
+              "text": "Diagnostically uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen and platelet count",
+          "cells": [
+            {
+              "text": "Very large lesion; consumptive coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging",
+          "cells": [
+            {
+              "text": "Indeterminate or enlarging lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "liver_hemangioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Focal nodular hyperplasia",
+          "cells": [
+            {
+              "text": "Separated by the enhancement pattern on contrast imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic adenoma",
+          "cells": [
+            {
+              "text": "Separated by contrast-enhanced imaging characteristics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatocellular carcinoma",
+          "cells": [
+            {
+              "text": "Hypervascular lesion with a different contrast pattern; a missed diagnosis leads to unneeded intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiosarcoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "liver_hemangioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Typical small asymptomatic lesions need no treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval surveillance",
+          "cells": [
+            {
+              "text": "Indeterminate or enlarging lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resection or enucleation",
+          "cells": [
+            {
+              "text": "Genuinely symptomatic giant lesions, diagnostic uncertainty or complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen avoidance",
+          "cells": [
+            {
+              "text": "Hormonal influence on growth; counselling around pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No percutaneous biopsy",
+          "cells": [
+            {
+              "text": "Bleeding risk; imaging is usually diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation monitoring",
+          "cells": [
+            {
+              "text": "Very large lesions, for Kasabach-Merritt consumptive coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Hepatobiliary surgery; transarterial embolisation in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "liver_hemangioma-dx-mgmt",
+      "title": "Diagnosis and management of Liver haemangioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental liver lesion on imaging in an asymptomatic patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rupture, coagulopathy, rapid growth, atypical imaging)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for rupture or Kasabach-Merritt coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI with heavily T2-weighted sequences; coagulation screen if large",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does contrast imaging show peripheral nodular enhancement with centripetal fill-in?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider focal nodular hyperplasia, adenoma or hepatocellular carcinoma; further imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure; no treatment for typical small asymptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interval imaging for indeterminate or enlarging lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Counsel on oestrogen avoidance around pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid percutaneous biopsy because of bleeding risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Hepatobiliary referral for large symptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent prognosis; most remain stable and never require treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

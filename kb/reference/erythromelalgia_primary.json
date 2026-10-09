@@ -1,174 +1,463 @@
 {
- "id": "erythromelalgia_primary",
- "name": "erythromelalgia primary",
- "aliases": [
-  "primary erythromelalgia",
-  "erythermalgia",
-  "Mitchell disease"
- ],
- "class": "non_infective",
- "system": "Cardiovascular and vascular",
- "specialty": "Vascular medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by episodes of burning pain, erythema and increased warmth of the extremities, affecting the feet more often than the hands and usually bilateral and symmetrical.",
-   "Symptoms are provoked by heat, exercise and limb dependency and are relieved by cooling and elevation.",
-   "Patients often immerse the limbs in cold water for relief, which can cause maceration, non-healing wounds and immersion injury.",
-   "The primary (inherited) form is linked to gain-of-function mutations in SCN9A encoding the Nav1.7 sodium channel, with autosomal dominant inheritance and early onset.",
-   "Secondary erythromelalgia is most importantly associated with myeloproliferative neoplasms, particularly polycythaemia vera and essential thrombocythaemia.",
-   "Erythromelalgia due to thrombocythaemia responds dramatically to aspirin, whereas primary channelopathy-related disease typically does not.",
-   "There is considerable overlap with small-fibre neuropathy, and many patients have abnormal intraepidermal nerve fibre findings."
+  "id": "erythromelalgia_primary",
+  "name": "erythromelalgia primary",
+  "aliases": [
+    "primary erythromelalgia",
+    "erythermalgia",
+    "Mitchell disease"
   ],
-  "pathophysiology": "Erythromelalgia reflects a mismatch between skin metabolic demand and perfusion, with maldistribution of cutaneous blood flow and arteriovenous shunting that leaves the skin relatively hypoxic despite increased total flow, producing the red, hot, painful extremity. In the primary inherited form, gain-of-function mutations in the SCN9A gene alter the Nav1.7 voltage-gated sodium channel expressed in nociceptive and sympathetic neurons, lowering their firing threshold and causing hyperexcitability and neuropathic burning pain. Secondary forms arise from platelet-mediated microvascular occlusion in myeloproliferative disease or from other neuropathic and vasomotor disturbances.",
-  "additionalDifferentials": [
-   "Complex regional pain syndrome",
-   "Peripheral small-fibre neuropathy",
-   "Raynaud phenomenon (opposite triggers and colour change)",
-   "Fabry disease",
-   "Peripheral arterial disease",
-   "Cellulitis",
-   "Acute gout or inflammatory arthritis"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with JAK2 mutation analysis to exclude a myeloproliferative neoplasm",
-   "SCN9A genetic testing when there is early onset or a family history",
-   "Small-fibre neuropathy assessment including skin biopsy for intraepidermal nerve fibre density and quantitative sensory testing",
-   "Thermography or skin temperature monitoring during an episode",
-   "Autoimmune and connective tissue disease screen",
-   "Review of medications known to provoke the condition"
-  ],
-  "redFlags": [
-   "Skin breakdown, ulceration or immersion injury from repeated cooling",
-   "Features of a myeloproliferative neoplasm such as thrombosis, splenomegaly or abnormal blood counts",
-   "Rapidly progressive or treatment-refractory symptoms",
-   "Signs of secondary infection in macerated skin"
-  ],
-  "prognosis": "The primary form is often lifelong and may be refractory to treatment, whereas secondary erythromelalgia usually improves when the underlying cause is addressed, and thrombocythaemic disease characteristically responds to aspirin.",
-  "pitfalls": [
-   "Permitting prolonged cold-water immersion, which causes tissue damage and non-healing wounds.",
-   "Missing an underlying myeloproliferative neoplasm as a treatable cause.",
-   "Misdiagnosing an acute episode as cellulitis and giving unnecessary antibiotics.",
-   "Failing to recognise a heritable sodium-channelopathy in a child or young adult with a positive family history."
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine",
-   "Rook's Textbook of Dermatology",
-   "Brain"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Sodium-channel blockade and neuropathic pain agents (mexiletine, carbamazepine or gabapentinoids) as the mainstay, since this channelopathy-related disease typically does not respond to aspirin",
-   "Symptomatic cooling and elevation of the affected limb for acute relief",
-   "Counsel against harmful prolonged cold-water immersion, with skin and wound care for immersion injury and secondary infection",
-   "Advise avoidance of heat, exertion and limb dependency as triggers",
-   "SCN9A genetic testing and autosomal dominant genetic counselling with family assessment",
-   "Refer to a multidisciplinary pain service, with psychological support for the chronic refractory pain"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "erythromelalgia_primary-pathway",
-   "title": "erythromelalgia primary: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by episodes of burning pain, erythema and increased warmth of the extremities, affecting the feet more often than the hands and usually bilateral and symmetrical.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Skin breakdown, ulceration or immersion injury from repeated cooling",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with JAK2 mutation analysis to exclude a myeloproliferative neoplasm, SCN9A genetic testing when there is early onset or a family history, Small-fibre neuropathy assessment including skin biopsy for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Sodium-channel blockade and neuropathic pain agents (mexiletine, carbamazepine or gabapentinoids) as the mainstay, since this channelopathy-related disease typically does not respond to aspirin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Permitting prolonged cold-water immersion, which causes tissue damage and non-healing wounds."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of erythromelalgia primary."
-  }
- ],
- "tables": [
-  {
-   "id": "erythromelalgia_primary-matrix",
-   "title": "erythromelalgia primary: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by episodes of burning pain, erythema and increased warmth of the extremities, affecting the feet more often than",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular and vascular",
+  "specialty": "Vascular medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by episodes of burning pain, erythema and increased warmth of the extremities, affecting the feet more often than the hands and usually bilateral and symmetrical.",
+      "Symptoms are provoked by heat, exercise and limb dependency and are relieved by cooling and elevation.",
+      "Patients often immerse the limbs in cold water for relief, which can cause maceration, non-healing wounds and immersion injury.",
+      "The primary (inherited) form is linked to gain-of-function mutations in SCN9A encoding the Nav1.7 sodium channel, with autosomal dominant inheritance and early onset.",
+      "Secondary erythromelalgia is most importantly associated with myeloproliferative neoplasms, particularly polycythaemia vera and essential thrombocythaemia.",
+      "Erythromelalgia due to thrombocythaemia responds dramatically to aspirin, whereas primary channelopathy-related disease typically does not.",
+      "There is considerable overlap with small-fibre neuropathy, and many patients have abnormal intraepidermal nerve fibre findings."
     ],
-    [
-     "Key Investigations",
-     "Full blood count with JAK2 mutation analysis to exclude a myeloproliferative neoplasm, SCN9A genetic testing when there is early",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Erythromelalgia reflects a mismatch between skin metabolic demand and perfusion, with maldistribution of cutaneous blood flow and arteriovenous shunting that leaves the skin relatively hypoxic despite increased total flow, producing the red, hot, painful extremity. In the primary inherited form, gain-of-function mutations in the SCN9A gene alter the Nav1.7 voltage-gated sodium channel expressed in nociceptive and sympathetic neurons, lowering their firing threshold and causing hyperexcitability and neuropathic burning pain. Secondary forms arise from platelet-mediated microvascular occlusion in myeloproliferative disease or from other neuropathic and vasomotor disturbances.",
+    "additionalDifferentials": [
+      "Complex regional pain syndrome",
+      "Peripheral small-fibre neuropathy",
+      "Raynaud phenomenon (opposite triggers and colour change)",
+      "Fabry disease",
+      "Peripheral arterial disease",
+      "Cellulitis",
+      "Acute gout or inflammatory arthritis"
     ],
-    [
-     "Primary Differentials",
-     "Complex regional pain syndrome, Peripheral small-fibre neuropathy, Raynaud phenomenon (opposite triggers and colour change)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with JAK2 mutation analysis to exclude a myeloproliferative neoplasm",
+      "SCN9A genetic testing when there is early onset or a family history",
+      "Small-fibre neuropathy assessment including skin biopsy for intraepidermal nerve fibre density and quantitative sensory testing",
+      "Thermography or skin temperature monitoring during an episode",
+      "Autoimmune and connective tissue disease screen",
+      "Review of medications known to provoke the condition"
     ],
-    [
-     "Management Strategy",
-     "Sodium-channel blockade and neuropathic pain agents (mexiletine, carbamazepine or gabapentinoids) as the mainstay, since this",
-     "Core treatment modality"
+    "redFlags": [
+      "Skin breakdown, ulceration or immersion injury from repeated cooling",
+      "Features of a myeloproliferative neoplasm such as thrombosis, splenomegaly or abnormal blood counts",
+      "Rapidly progressive or treatment-refractory symptoms",
+      "Signs of secondary infection in macerated skin"
     ],
-    [
-     "Clinical Pitfall",
-     "Permitting prolonged cold-water immersion, which causes tissue damage and non-healing wounds.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The primary form is often lifelong and may be refractory to treatment, whereas secondary erythromelalgia usually improves when the underlying cause is addressed, and thrombocythaemic disease characteristically responds to aspirin.",
+    "pitfalls": [
+      "Permitting prolonged cold-water immersion, which causes tissue damage and non-healing wounds.",
+      "Missing an underlying myeloproliferative neoplasm as a treatable cause.",
+      "Misdiagnosing an acute episode as cellulitis and giving unnecessary antibiotics.",
+      "Failing to recognise a heritable sodium-channelopathy in a child or young adult with a positive family history."
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine",
+      "Rook's Textbook of Dermatology",
+      "Brain"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Sodium-channel blockade and neuropathic pain agents (mexiletine, carbamazepine or gabapentinoids) as the mainstay, since this channelopathy-related disease typically does not respond to aspirin",
+      "Symptomatic cooling and elevation of the affected limb for acute relief",
+      "Counsel against harmful prolonged cold-water immersion, with skin and wound care for immersion injury and secondary infection",
+      "Advise avoidance of heat, exertion and limb dependency as triggers",
+      "SCN9A genetic testing and autosomal dominant genetic counselling with family assessment",
+      "Refer to a multidisciplinary pain service, with psychological support for the chronic refractory pain"
     ]
-   ],
-   "caption": "Overview comparison matrix for erythromelalgia primary."
-  }
- ],
- "diagrams": [
-  {
-   "id": "erythromelalgia-primary-real-image",
-   "title": "erythromelalgia primary: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "erythromelalgia_primary-pathway",
+      "title": "erythromelalgia primary: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by episodes of burning pain, erythema and increased warmth of the extremities, affecting the feet more often than the hands and usually bilateral and symmetrical.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Skin breakdown, ulceration or immersion injury from repeated cooling",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with JAK2 mutation analysis to exclude a myeloproliferative neoplasm, SCN9A genetic testing when there is early onset or a family history, Small-fibre neuropathy assessment including skin biopsy for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Sodium-channel blockade and neuropathic pain agents (mexiletine, carbamazepine or gabapentinoids) as the mainstay, since this channelopathy-related disease typically does not respond to aspirin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Permitting prolonged cold-water immersion, which causes tissue damage and non-healing wounds."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of erythromelalgia primary."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "erythromelalgia_primary-matrix",
+      "title": "erythromelalgia primary: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by episodes of burning pain, erythema and increased warmth of the extremities, affecting the feet more often than",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with JAK2 mutation analysis to exclude a myeloproliferative neoplasm, SCN9A genetic testing when there is early",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Complex regional pain syndrome, Peripheral small-fibre neuropathy, Raynaud phenomenon (opposite triggers and colour change)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Sodium-channel blockade and neuropathic pain agents (mexiletine, carbamazepine or gabapentinoids) as the mainstay, since this",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Permitting prolonged cold-water immersion, which causes tissue damage and non-healing wounds.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for erythromelalgia primary."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erythromelalgia_primary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with JAK2 mutation analysis",
+          "cells": [
+            {
+              "text": "Excludes a myeloproliferative neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN9A genetic testing",
+          "cells": [
+            {
+              "text": "Early onset or family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-fibre neuropathy assessment with skin biopsy",
+          "cells": [
+            {
+              "text": "Intraepidermal nerve fibre density and quantitative sensory testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thermography or skin temperature monitoring",
+          "cells": [
+            {
+              "text": "During an episode"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and connective tissue disease screen",
+          "cells": [
+            {
+              "text": "Associated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Drugs that provoke the condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythromelalgia_primary-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral small-fibre neuropathy",
+          "cells": [
+            {
+              "text": "Considerable overlap; many patients have abnormal intraepidermal nerve fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raynaud phenomenon",
+          "cells": [
+            {
+              "text": "Opposite triggers and colour change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erythromelalgia_primary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium-channel blockers and neuropathic agents",
+          "cells": [
+            {
+              "text": "Mexiletine, carbamazepine or gabapentinoids as the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cooling and elevation",
+          "cells": [
+            {
+              "text": "Acute relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counsel against prolonged cold-water immersion",
+          "cells": [
+            {
+              "text": "Skin and wound care for immersion injury and secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Heat, exertion and limb dependency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCN9A testing and genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; family assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain service referral",
+          "cells": [
+            {
+              "text": "Multidisciplinary care with psychological support for refractory pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erythromelalgia_primary-dx-mgmt",
+      "title": "Diagnosis and management of erythromelalgia primary",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Burning pain, erythema and warmth of the extremities, provoked by heat or dependency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (skin breakdown, myeloproliferative features, refractory symptoms, infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Wound care or infection treatment; assess for myeloproliferative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC with JAK2 testing; SCN9A testing if early-onset; small-fibre assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Myeloproliferative neoplasm excluded on blood count and JAK2?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the myeloproliferative neoplasm; aspirin and haematology referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sodium-channel blockers or neuropathic agents as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cool and elevate the limb for acute relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Counsel against prolonged cold-water immersion; care for wounds",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid heat, exertion and limb dependency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "SCN9A testing and family counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often lifelong and may be refractory to treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

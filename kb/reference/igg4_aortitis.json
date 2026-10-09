@@ -1,175 +1,464 @@
 {
- "id": "igg4_aortitis",
- "name": "IgG4-related aortitis/periaortitis",
- "aliases": [
-  "IgG4-related aortitis",
-  "IgG4-related periaortitis",
-  "IgG4-related disease",
-  "chronic periaortitis",
-  "inflammatory aortic disease"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Vascular",
- "specialty": "Rheumatology / Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Kelley & Firestein's Textbook of Rheumatology / IgG4-related disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Part of the IgG4-related disease spectrum, characterised by inflammatory thickening of the aortic wall and surrounding tissue",
-   "Periaortitis may extend to encase the ureters and produce retroperitoneal fibrosis with obstructive uropathy",
-   "Histology shows a dense lymphoplasmacytic infiltrate rich in IgG4-positive plasma cells, storiform fibrosis, and obliterative phlebitis",
-   "Serum IgG4 is often but not invariably elevated, so a normal level does not exclude the diagnosis",
-   "Other organ involvement (pancreas, salivary glands, lacrimal glands) supports the systemic diagnosis",
-   "It responds well to glucocorticoids, frequently with steroid-sparing immunosuppression to maintain remission",
-   "Aneurysm and dissection risk means structural surveillance accompanies immunosuppression"
+  "id": "igg4_aortitis",
+  "name": "IgG4-related aortitis/periaortitis",
+  "aliases": [
+    "IgG4-related aortitis",
+    "IgG4-related periaortitis",
+    "IgG4-related disease",
+    "chronic periaortitis",
+    "inflammatory aortic disease"
   ],
-  "pathophysiology": "IgG4-related aortitis and periaortitis result from the fibroinflammatory process of IgG4-related disease affecting the aorta and periaortic tissues. Aberrant T-follicular helper and B-cell responses drive infiltration by IgG4-positive plasma cells and lymphocytes, with characteristic storiform fibrosis and obliterative phlebitis. Inflammation and fibrosis thicken and weaken the aortic wall while the surrounding fibrotic mass may entrap adjacent structures such as the ureters. Wall damage predisposes to aneurysm formation and dissection.",
-  "additionalDifferentials": [
-   "Clinically isolated aortitis",
-   "Giant-cell arteritis with aortic involvement",
-   "Takayasu arteritis",
-   "Idiopathic retroperitoneal fibrosis",
-   "Infective (mycotic) aortitis",
-   "Erdheim-Chester disease"
-  ],
-  "additionalInvestigations": [
-   "CT or MR angiography of the aorta and retroperitoneum",
-   "Serum IgG4 and IgG subclass measurement",
-   "Tissue biopsy showing IgG4-positive plasma cells with storiform fibrosis",
-   "PET imaging to map disease extent and other organ involvement",
-   "Renal function and urinary tract imaging for obstructive uropathy",
-   "Inflammatory markers and assessment for other IgG4-related organ disease"
-  ],
-  "redFlags": [
-   "Acute chest or back pain suggesting dissection or rupture",
-   "Rapid aneurysm growth on imaging",
-   "Obstructive uropathy with rising creatinine from periureteric fibrosis",
-   "Progressive aortic dilatation despite treatment"
-  ],
-  "prognosis": "IgG4-related aortitis usually responds well to immunosuppression with regression of inflammation, but relapse is common and established fibrosis or aneurysm may persist. Prognosis is favourable with treatment and monitoring, though structural complications can require surgical repair.",
-  "pitfalls": [
-   "Excluding the diagnosis because serum IgG4 is normal",
-   "Overlooking retroperitoneal extension and obstructive uropathy",
-   "Failing to look for other organ manifestations of IgG4-related disease",
-   "Relying on immunosuppression alone when an aneurysm needs structural repair"
-  ],
-  "references": [
-   "Kelley & Firestein's Textbook of Rheumatology",
-   "International consensus guidance on IgG4-related disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with glucocorticoids, which typically produce rapid regression of the aortic wall inflammation",
-   "Add a steroid-sparing immunosuppressant or rituximab to maintain remission and manage the common relapses",
-   "Monitor with serial CT or MR angiography for aneurysm formation and dissection, alongside serum IgG4 and inflammatory markers",
-   "Refer for surgical or endovascular repair of aneurysm or dissection when structural aortic damage is established",
-   "Relieve any associated ureteric entrapment and obstructive uropathy with stenting while treating the underlying disease",
-   "Screen for and monitor IgG4-related involvement of other organs such as the pancreas and salivary glands",
-   "Coordinate care across rheumatology, vascular medicine and surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "igg4_aortitis-pathway",
-   "title": "IgG4-related aortitis/periaortitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Part of the IgG4-related disease spectrum, characterised by inflammatory thickening of the aortic wall and surrounding tissue",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute chest or back pain suggesting dissection or rupture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT or MR angiography of the aorta and retroperitoneum, Serum IgG4 and IgG subclass measurement, Tissue biopsy showing IgG4-positive plasma cells with storiform fibrosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with glucocorticoids, which typically produce rapid regression of the aortic wall inflammation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis because serum IgG4 is normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of igg4-related aortitis/periaortitis."
-  }
- ],
- "tables": [
-  {
-   "id": "igg4_aortitis-matrix",
-   "title": "IgG4-related aortitis/periaortitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Part of the IgG4-related disease spectrum, characterised by inflammatory thickening of the aortic wall and surrounding tissue",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Vascular",
+  "specialty": "Rheumatology / Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kelley & Firestein's Textbook of Rheumatology / IgG4-related disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Part of the IgG4-related disease spectrum, characterised by inflammatory thickening of the aortic wall and surrounding tissue",
+      "Periaortitis may extend to encase the ureters and produce retroperitoneal fibrosis with obstructive uropathy",
+      "Histology shows a dense lymphoplasmacytic infiltrate rich in IgG4-positive plasma cells, storiform fibrosis, and obliterative phlebitis",
+      "Serum IgG4 is often but not invariably elevated, so a normal level does not exclude the diagnosis",
+      "Other organ involvement (pancreas, salivary glands, lacrimal glands) supports the systemic diagnosis",
+      "It responds well to glucocorticoids, frequently with steroid-sparing immunosuppression to maintain remission",
+      "Aneurysm and dissection risk means structural surveillance accompanies immunosuppression"
     ],
-    [
-     "Key Investigations",
-     "CT or MR angiography of the aorta and retroperitoneum, Serum IgG4 and IgG subclass measurement, Tissue biopsy showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "IgG4-related aortitis and periaortitis result from the fibroinflammatory process of IgG4-related disease affecting the aorta and periaortic tissues. Aberrant T-follicular helper and B-cell responses drive infiltration by IgG4-positive plasma cells and lymphocytes, with characteristic storiform fibrosis and obliterative phlebitis. Inflammation and fibrosis thicken and weaken the aortic wall while the surrounding fibrotic mass may entrap adjacent structures such as the ureters. Wall damage predisposes to aneurysm formation and dissection.",
+    "additionalDifferentials": [
+      "Clinically isolated aortitis",
+      "Giant-cell arteritis with aortic involvement",
+      "Takayasu arteritis",
+      "Idiopathic retroperitoneal fibrosis",
+      "Infective (mycotic) aortitis",
+      "Erdheim-Chester disease"
     ],
-    [
-     "Primary Differentials",
-     "Clinically isolated aortitis, Giant-cell arteritis with aortic involvement, Takayasu arteritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT or MR angiography of the aorta and retroperitoneum",
+      "Serum IgG4 and IgG subclass measurement",
+      "Tissue biopsy showing IgG4-positive plasma cells with storiform fibrosis",
+      "PET imaging to map disease extent and other organ involvement",
+      "Renal function and urinary tract imaging for obstructive uropathy",
+      "Inflammatory markers and assessment for other IgG4-related organ disease"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with glucocorticoids, which typically produce rapid regression of the aortic wall inflammation",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute chest or back pain suggesting dissection or rupture",
+      "Rapid aneurysm growth on imaging",
+      "Obstructive uropathy with rising creatinine from periureteric fibrosis",
+      "Progressive aortic dilatation despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis because serum IgG4 is normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "IgG4-related aortitis usually responds well to immunosuppression with regression of inflammation, but relapse is common and established fibrosis or aneurysm may persist. Prognosis is favourable with treatment and monitoring, though structural complications can require surgical repair.",
+    "pitfalls": [
+      "Excluding the diagnosis because serum IgG4 is normal",
+      "Overlooking retroperitoneal extension and obstructive uropathy",
+      "Failing to look for other organ manifestations of IgG4-related disease",
+      "Relying on immunosuppression alone when an aneurysm needs structural repair"
+    ],
+    "references": [
+      "Kelley & Firestein's Textbook of Rheumatology",
+      "International consensus guidance on IgG4-related disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with glucocorticoids, which typically produce rapid regression of the aortic wall inflammation",
+      "Add a steroid-sparing immunosuppressant or rituximab to maintain remission and manage the common relapses",
+      "Monitor with serial CT or MR angiography for aneurysm formation and dissection, alongside serum IgG4 and inflammatory markers",
+      "Refer for surgical or endovascular repair of aneurysm or dissection when structural aortic damage is established",
+      "Relieve any associated ureteric entrapment and obstructive uropathy with stenting while treating the underlying disease",
+      "Screen for and monitor IgG4-related involvement of other organs such as the pancreas and salivary glands",
+      "Coordinate care across rheumatology, vascular medicine and surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for igg4-related aortitis/periaortitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "igg4-aortitis-real-image",
-   "title": "IgG4-related aortitis/periaortitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "igg4_aortitis-pathway",
+      "title": "IgG4-related aortitis/periaortitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Part of the IgG4-related disease spectrum, characterised by inflammatory thickening of the aortic wall and surrounding tissue",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute chest or back pain suggesting dissection or rupture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT or MR angiography of the aorta and retroperitoneum, Serum IgG4 and IgG subclass measurement, Tissue biopsy showing IgG4-positive plasma cells with storiform fibrosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with glucocorticoids, which typically produce rapid regression of the aortic wall inflammation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis because serum IgG4 is normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of igg4-related aortitis/periaortitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "igg4_aortitis-matrix",
+      "title": "IgG4-related aortitis/periaortitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Part of the IgG4-related disease spectrum, characterised by inflammatory thickening of the aortic wall and surrounding tissue",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT or MR angiography of the aorta and retroperitoneum, Serum IgG4 and IgG subclass measurement, Tissue biopsy showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Clinically isolated aortitis, Giant-cell arteritis with aortic involvement, Takayasu arteritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with glucocorticoids, which typically produce rapid regression of the aortic wall inflammation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis because serum IgG4 is normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for igg4-related aortitis/periaortitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / IgG4-related disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "igg4_aortitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MR angiography of aorta and retroperitoneum",
+          "cells": [
+            {
+              "text": "Aortic and retroperitoneal extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgG4 and IgG subclass measurement",
+          "cells": [
+            {
+              "text": "IgG4 levels; neither sensitive nor required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue biopsy",
+          "cells": [
+            {
+              "text": "IgG4-positive plasma cells with storiform fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET imaging",
+          "cells": [
+            {
+              "text": "Extent and other organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinary tract imaging",
+          "cells": [
+            {
+              "text": "Obstructive uropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and other IgG4-related organ screen",
+          "cells": [
+            {
+              "text": "Other IgG4-related disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_aortitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic retroperitoneal fibrosis",
+          "cells": [
+            {
+              "text": "Periaortitis encasing the ureters; IgG4 histology distinguishes the IgG4-related form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinically isolated aortitis",
+          "cells": [
+            {
+              "text": "Screening for IgG4-related disease at other organs distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_aortitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Induce remission; typically rapid regression of aortic wall inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agent or rituximab",
+          "cells": [
+            {
+              "text": "Maintain remission and manage common relapses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial surveillance",
+          "cells": [
+            {
+              "text": "CT or MR angiography for aneurysm or dissection, with serum IgG4 and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural repair",
+          "cells": [
+            {
+              "text": "Surgical or endovascular repair when aneurysm or dissection is established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ureteric obstruction",
+          "cells": [
+            {
+              "text": "Stenting to relieve entrapment while treating the underlying disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other organs",
+          "cells": [
+            {
+              "text": "Screen and monitor pancreas and salivary glands; coordinate rheumatology, vascular and surgical care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "igg4_aortitis-dx-mgmt",
+      "title": "Diagnosis and management of IgG4-related aortitis/periaortitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Aortic wall and periaortic thickening, often with back or chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute chest or back pain, rapid aneurysm growth, or obstructive uropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular surgery review for dissection or rupture; relieve obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MR angiography, serum IgG4, biopsy, PET, renal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "IgG4-related pattern confirmed on imaging or biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic retroperitoneal fibrosis or other aortitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Glucocorticoids to induce remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroid-sparing agent or rituximab for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial angiography, IgG4 and inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repair of aneurysm or dissection when structural damage is established",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Stenting for ureteric obstruction; screen other organs",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Inflammation usually regresses; relapses need surveillance and repair if needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

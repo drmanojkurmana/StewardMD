@@ -1,174 +1,472 @@
 {
- "id": "perrault_syndrome",
- "name": "Perrault syndrome (SNHL + ovarian dysgenesis)",
- "aliases": [
-  "Perrault syndrome",
-  "gonadal dysgenesis with deafness",
-  "ovarian dysgenesis-sensorineural deafness syndrome",
-  "CLPP-related Perrault syndrome"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology",
- "specialty": "Otology / Audiovestibular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal recessive disorder combining sensorineural hearing loss in both sexes with primary ovarian insufficiency in 46,XX females",
-   "Affected males have normal gonadal function, so the ovarian component is not apparent, and the diagnosis may be missed in isolated male cases",
-   "Hearing loss is usually bilateral and progressive, ranging from mild to profound",
-   "Females may present with primary or secondary amenorrhoea, absent puberty, or premature ovarian insufficiency",
-   "Some subtypes include a progressive neurological phenotype with ataxia and peripheral neuropathy",
-   "Several genes are implicated, many encoding proteins involved in mitochondrial function and protein quality control, such as CLPP, HARS2, LARS2, and C10orf2 (TWNK)",
-   "Management is multidisciplinary, combining audiological rehabilitation with endocrine and fertility care"
+  "id": "perrault_syndrome",
+  "name": "Perrault syndrome (SNHL + ovarian dysgenesis)",
+  "aliases": [
+    "Perrault syndrome",
+    "gonadal dysgenesis with deafness",
+    "ovarian dysgenesis-sensorineural deafness syndrome",
+    "CLPP-related Perrault syndrome"
   ],
-  "pathophysiology": "Perrault syndrome is genetically heterogeneous, but many of the implicated genes encode proteins critical to mitochondrial function, including mitochondrial aminoacyl-tRNA synthetases and components of mitochondrial protein quality control and DNA maintenance. Impaired mitochondrial protein synthesis and homeostasis particularly affects tissues with high metabolic demand, so cochlear hair cells and the developing ovary are vulnerable, producing progressive sensorineural hearing loss and accelerated loss of ovarian follicles leading to ovarian dysgenesis or premature insufficiency. In neurological subtypes the same metabolic vulnerability extends to the cerebellum and peripheral nerves, adding ataxia and neuropathy.",
-  "additionalDifferentials": [
-   "Turner syndrome and other causes of gonadal dysgenesis",
-   "Isolated non-syndromic hereditary hearing loss",
-   "Other mitochondrial disorders with hearing loss",
-   "Autoimmune premature ovarian insufficiency",
-   "Fragile X-associated primary ovarian insufficiency",
-   "Usher and Pendred syndromes when systemic features overlap"
-  ],
-  "additionalInvestigations": [
-   "Pure-tone audiometry to characterise and monitor sensorineural loss",
-   "Karyotype to exclude Turner syndrome and confirm 46,XX status in females",
-   "Endocrine assessment including gonadotrophins and ovarian reserve markers with pelvic imaging",
-   "Molecular genetic testing of Perrault-associated genes such as CLPP, HARS2, LARS2, and TWNK",
-   "Neurological evaluation and nerve conduction studies where ataxia or neuropathy is suspected",
-   "Cross-sectional temporal bone imaging before cochlear implantation when indicated"
-  ],
-  "redFlags": [
-   "Primary or premature ovarian insufficiency in a young female with hearing loss",
-   "Progressive neurological decline with ataxia or neuropathy",
-   "Profound progressive hearing loss limiting communication",
-   "Fertility and bone-health consequences of untreated ovarian insufficiency"
-  ],
-  "prognosis": "Hearing loss tends to progress and is rehabilitated with amplification or cochlear implantation, while ovarian insufficiency usually causes infertility and requires hormone replacement; neurological subtypes carry a more guarded outlook.",
-  "pitfalls": [
-   "Diagnosing isolated hearing loss in a female without evaluating ovarian function",
-   "Missing the syndrome in affected males who lack a gonadal phenotype",
-   "Overlooking the neurological subtype and its long-term implications",
-   "Not arranging early endocrine care to protect bone and address fertility"
-  ],
-  "references": [
-   "Cummings Otolaryngology",
-   "GeneReviews: Perrault Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive multisystem care, as no disease-specific drug therapy exists",
-   "Hearing rehabilitation with hearing aids and cochlear implantation for progressive sensorineural hearing loss",
-   "Oestrogen and progesterone hormone replacement for ovarian insufficiency to induce or maintain puberty and protect bone health",
-   "Fertility counselling with assisted reproduction or oocyte donation as appropriate",
-   "Neurological management and physiotherapy for the ataxia and peripheral neuropathy of the neurological subtypes",
-   "Genetic counselling and family screening for the autosomal recessive genes such as CLPP, HARS2, LARS2 and TWNK",
-   "Coordinate audiology, reproductive endocrinology, clinical genetics and neurology input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "perrault_syndrome-pathway",
-   "title": "Perrault syndrome (SNHL + ovarian dysgenesis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal recessive disorder combining sensorineural hearing loss in both sexes with primary ovarian insufficiency in 46,XX females",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Primary or premature ovarian insufficiency in a young female with hearing loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pure-tone audiometry to characterise and monitor sensorineural loss, Karyotype to exclude Turner syndrome and confirm 46,XX status in females, Endocrine assessment including gonadotrophins and ovarian reserve markers with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive multisystem care, as no disease-specific drug therapy exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing isolated hearing loss in a female without evaluating ovarian function"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of perrault syndrome (snhl + ovarian dysgenesis)."
-  }
- ],
- "tables": [
-  {
-   "id": "perrault_syndrome-matrix",
-   "title": "Perrault syndrome (SNHL + ovarian dysgenesis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal recessive disorder combining sensorineural hearing loss in both sexes with primary ovarian insufficiency in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology",
+  "specialty": "Otology / Audiovestibular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal recessive disorder combining sensorineural hearing loss in both sexes with primary ovarian insufficiency in 46,XX females",
+      "Affected males have normal gonadal function, so the ovarian component is not apparent, and the diagnosis may be missed in isolated male cases",
+      "Hearing loss is usually bilateral and progressive, ranging from mild to profound",
+      "Females may present with primary or secondary amenorrhoea, absent puberty, or premature ovarian insufficiency",
+      "Some subtypes include a progressive neurological phenotype with ataxia and peripheral neuropathy",
+      "Several genes are implicated, many encoding proteins involved in mitochondrial function and protein quality control, such as CLPP, HARS2, LARS2, and C10orf2 (TWNK)",
+      "Management is multidisciplinary, combining audiological rehabilitation with endocrine and fertility care"
     ],
-    [
-     "Key Investigations",
-     "Pure-tone audiometry to characterise and monitor sensorineural loss, Karyotype to exclude Turner syndrome and confirm 46,XX",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Perrault syndrome is genetically heterogeneous, but many of the implicated genes encode proteins critical to mitochondrial function, including mitochondrial aminoacyl-tRNA synthetases and components of mitochondrial protein quality control and DNA maintenance. Impaired mitochondrial protein synthesis and homeostasis particularly affects tissues with high metabolic demand, so cochlear hair cells and the developing ovary are vulnerable, producing progressive sensorineural hearing loss and accelerated loss of ovarian follicles leading to ovarian dysgenesis or premature insufficiency. In neurological subtypes the same metabolic vulnerability extends to the cerebellum and peripheral nerves, adding ataxia and neuropathy.",
+    "additionalDifferentials": [
+      "Turner syndrome and other causes of gonadal dysgenesis",
+      "Isolated non-syndromic hereditary hearing loss",
+      "Other mitochondrial disorders with hearing loss",
+      "Autoimmune premature ovarian insufficiency",
+      "Fragile X-associated primary ovarian insufficiency",
+      "Usher and Pendred syndromes when systemic features overlap"
     ],
-    [
-     "Primary Differentials",
-     "Turner syndrome and other causes of gonadal dysgenesis, Isolated non-syndromic hereditary hearing loss, Other mitochondrial",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pure-tone audiometry to characterise and monitor sensorineural loss",
+      "Karyotype to exclude Turner syndrome and confirm 46,XX status in females",
+      "Endocrine assessment including gonadotrophins and ovarian reserve markers with pelvic imaging",
+      "Molecular genetic testing of Perrault-associated genes such as CLPP, HARS2, LARS2, and TWNK",
+      "Neurological evaluation and nerve conduction studies where ataxia or neuropathy is suspected",
+      "Cross-sectional temporal bone imaging before cochlear implantation when indicated"
     ],
-    [
-     "Management Strategy",
-     "Supportive multisystem care, as no disease-specific drug therapy exists",
-     "Core treatment modality"
+    "redFlags": [
+      "Primary or premature ovarian insufficiency in a young female with hearing loss",
+      "Progressive neurological decline with ataxia or neuropathy",
+      "Profound progressive hearing loss limiting communication",
+      "Fertility and bone-health consequences of untreated ovarian insufficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing isolated hearing loss in a female without evaluating ovarian function",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hearing loss tends to progress and is rehabilitated with amplification or cochlear implantation, while ovarian insufficiency usually causes infertility and requires hormone replacement; neurological subtypes carry a more guarded outlook.",
+    "pitfalls": [
+      "Diagnosing isolated hearing loss in a female without evaluating ovarian function",
+      "Missing the syndrome in affected males who lack a gonadal phenotype",
+      "Overlooking the neurological subtype and its long-term implications",
+      "Not arranging early endocrine care to protect bone and address fertility"
+    ],
+    "references": [
+      "Cummings Otolaryngology",
+      "GeneReviews: Perrault Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive multisystem care, as no disease-specific drug therapy exists",
+      "Hearing rehabilitation with hearing aids and cochlear implantation for progressive sensorineural hearing loss",
+      "Oestrogen and progesterone hormone replacement for ovarian insufficiency to induce or maintain puberty and protect bone health",
+      "Fertility counselling with assisted reproduction or oocyte donation as appropriate",
+      "Neurological management and physiotherapy for the ataxia and peripheral neuropathy of the neurological subtypes",
+      "Genetic counselling and family screening for the autosomal recessive genes such as CLPP, HARS2, LARS2 and TWNK",
+      "Coordinate audiology, reproductive endocrinology, clinical genetics and neurology input"
     ]
-   ],
-   "caption": "Overview comparison matrix for perrault syndrome (snhl + ovarian dysgenesis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "perrault-syndrome-real-image",
-   "title": "Perrault syndrome (SNHL + ovarian dysgenesis): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "perrault_syndrome-pathway",
+      "title": "Perrault syndrome (SNHL + ovarian dysgenesis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal recessive disorder combining sensorineural hearing loss in both sexes with primary ovarian insufficiency in 46,XX females",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Primary or premature ovarian insufficiency in a young female with hearing loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pure-tone audiometry to characterise and monitor sensorineural loss, Karyotype to exclude Turner syndrome and confirm 46,XX status in females, Endocrine assessment including gonadotrophins and ovarian reserve markers with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive multisystem care, as no disease-specific drug therapy exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing isolated hearing loss in a female without evaluating ovarian function"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of perrault syndrome (snhl + ovarian dysgenesis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "perrault_syndrome-matrix",
+      "title": "Perrault syndrome (SNHL + ovarian dysgenesis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal recessive disorder combining sensorineural hearing loss in both sexes with primary ovarian insufficiency in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pure-tone audiometry to characterise and monitor sensorineural loss, Karyotype to exclude Turner syndrome and confirm 46,XX",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Turner syndrome and other causes of gonadal dysgenesis, Isolated non-syndromic hereditary hearing loss, Other mitochondrial",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive multisystem care, as no disease-specific drug therapy exists",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing isolated hearing loss in a female without evaluating ovarian function",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for perrault syndrome (snhl + ovarian dysgenesis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perrault_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pure-tone audiometry",
+          "cells": [
+            {
+              "text": "Characterises and monitors sensorineural loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Excludes Turner syndrome; confirms 46,XX status in females"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine assessment with pelvic imaging",
+          "cells": [
+            {
+              "text": "Gonadotrophins and ovarian reserve markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing",
+          "cells": [
+            {
+              "text": "Perrault-associated genes such as CLPP, HARS2, LARS2 and TWNK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological evaluation and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Ataxia or neuropathy, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal bone imaging before cochlear implantation",
+          "cells": [
+            {
+              "text": "Cross-sectional imaging, when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perrault_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Turner syndrome",
+          "cells": [
+            {
+              "text": "Gonadal dysgenesis; excluded by karyotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Usher and Pendred syndromes",
+          "cells": [
+            {
+              "text": "Systemic features overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perrault_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive multisystem care",
+          "cells": [
+            {
+              "text": "No disease-specific drug therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids and cochlear implantation for progressive sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Oestrogen and progesterone to induce or maintain puberty and protect bone health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility counselling",
+          "cells": [
+            {
+              "text": "Assisted reproduction or oocyte donation, as appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological management",
+          "cells": [
+            {
+              "text": "Physiotherapy for ataxia and peripheral neuropathy in neurological subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening for autosomal recessive genes such as CLPP, HARS2, LARS2 and TWNK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Audiology, reproductive endocrinology, clinical genetics and neurology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perrault_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Perrault syndrome (SNHL + ovarian dysgenesis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hearing loss in a female with primary or premature ovarian insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (ovarian insufficiency, progressive ataxia, profound progressive hearing loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist audiology and reproductive endocrine input for profound or progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pure-tone audiometry; karyotype; gonadotrophins and ovarian reserve; genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does genetic testing confirm a Perrault-associated gene variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Turner syndrome, Usher or Pendred syndrome, or autoimmune ovarian failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive multisystem care, as no disease-specific drug therapy exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation for progressive sensorineural hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oestrogen and progesterone replacement to induce or maintain puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Fertility counselling, with assisted reproduction or oocyte donation as appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening for autosomal recessive genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Hearing loss progresses; ovarian insufficiency usually causes infertility",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

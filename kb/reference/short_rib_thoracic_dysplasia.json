@@ -1,175 +1,433 @@
 {
- "id": "short_rib_thoracic_dysplasia",
- "name": "Short-rib thoracic dysplasia spectrum",
- "aliases": [
-  "SRTD",
-  "Jeune asphyxiating thoracic dystrophy",
-  "short-rib polydactyly syndrome",
-  "asphyxiating thoracic dystrophy",
-  "DYNC2H1"
- ],
- "class": "non_infective",
- "system": "Genetics / Ciliopathy",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A spectrum of skeletal ciliopathies unified by a narrow, long thorax with short horizontal ribs and variable limb shortening",
-   "Encompasses Jeune asphyxiating thoracic dystrophy and the more severe, often lethal short-rib polydactyly syndromes (Saldino-Noonan, Majewski, Verma-Naumoff and Beemer-Langer types)",
-   "Polydactyly is present in some subtypes and absent in others, so its absence does not exclude the diagnosis",
-   "Neonatal respiratory insufficiency from a constricted rib cage dominates the early clinical picture",
-   "Extra-skeletal involvement includes cystic renal disease, hepatic fibrosis, retinal dystrophy and pancreatic or intestinal anomalies",
-   "Caused by biallelic variants in intraflagellar transport and dynein-2 motor genes, most commonly DYNC2H1",
-   "Survivors of infancy may later develop progressive renal and hepatic disease requiring surveillance"
+  "id": "short_rib_thoracic_dysplasia",
+  "name": "Short-rib thoracic dysplasia spectrum",
+  "aliases": [
+    "SRTD",
+    "Jeune asphyxiating thoracic dystrophy",
+    "short-rib polydactyly syndrome",
+    "asphyxiating thoracic dystrophy",
+    "DYNC2H1"
   ],
-  "pathophysiology": "The short-rib thoracic dysplasias result from biallelic variants in genes encoding components of the intraflagellar transport system and the cytoplasmic dynein-2 retrograde motor, most often DYNC2H1. These proteins are essential for building and maintaining the primary cilium, through which hedgehog and other signals that pattern the developing skeleton are transduced. Disrupted ciliary signalling in growth-plate chondrocytes impairs endochondral ossification, producing the characteristically short ribs, narrow thorax and shortened limbs, while abnormal hedgehog signalling in the limb bud underlies the polydactyly seen in some subtypes. Because the same cilia are required in kidney, liver, retina and pancreas, affected individuals may also develop cystic kidney disease, hepatic fibrosis, retinal degeneration and other visceral abnormalities.",
-  "additionalDifferentials": [
-   "Ellis-van Creveld syndrome",
-   "Cranioectodermal dysplasia (Sensenbrenner)",
-   "Thanatophoric dysplasia and other lethal skeletal dysplasias",
-   "Achondrogenesis",
-   "Bardet-Biedl syndrome",
-   "Oral-facial-digital syndromes with skeletal involvement"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey to assess rib length, thoracic dimensions, pelvis and limb bones",
-   "Chest imaging and respiratory assessment for thoracic insufficiency",
-   "Renal ultrasound and renal function testing for cystic or tubulointerstitial disease",
-   "Liver function tests and hepatic imaging for fibrosis",
-   "Ophthalmological assessment with electroretinography for retinal dystrophy",
-   "Molecular testing with a skeletal ciliopathy gene panel"
-  ],
-  "redFlags": [
-   "Severe thoracic insufficiency and respiratory failure in the newborn",
-   "Recurrent respiratory infection with failure to thrive",
-   "Progressive renal impairment",
-   "Hepatic fibrosis with portal hypertension"
-  ],
-  "prognosis": "Outcome is highly variable across the spectrum: the lethal short-rib polydactyly forms are fatal in the perinatal period, whereas Jeune syndrome has a variable respiratory course, and survivors of the early years remain at risk of progressive renal and hepatic disease.",
-  "pitfalls": [
-   "Excluding the diagnosis simply because polydactyly is absent",
-   "Underestimating the risk of progressive renal or hepatic disease in survivors",
-   "Failing to anticipate and plan for a difficult respiratory course",
-   "Assuming a uniformly lethal outcome across the whole spectrum"
-  ],
-  "references": [
-   "GeneReviews: Short-Rib Thoracic Dysplasia with or without Polydactyly",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Respiratory support proportionate to thoracic insufficiency, ranging from supplemental oxygen and assisted ventilation to aggressive treatment of recurrent chest infections",
-   "Thoracic expansion surgery, such as expansion thoracoplasty or a vertical expandable prosthetic titanium rib, in selected survivable cases to enlarge the constricted rib cage",
-   "Surveillance and management of cystic renal disease with monitoring of renal function, treatment of hypertension and renal replacement therapy for progressive failure",
-   "Monitoring for hepatic fibrosis with liver function tests and imaging",
-   "Ophthalmological surveillance and low-vision support for retinal dystrophy",
-   "Coordinated multidisciplinary care across respiratory medicine, thoracic surgery, nephrology, hepatology, ophthalmology and clinical genetics",
-   "Genetic counselling with cascade and prenatal testing given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "short_rib_thoracic_dysplasia-pathway",
-   "title": "Short-rib thoracic dysplasia spectrum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A spectrum of skeletal ciliopathies unified by a narrow, long thorax with short horizontal ribs and variable limb shortening",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe thoracic insufficiency and respiratory failure in the newborn",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey to assess rib length, thoracic dimensions, pelvis and limb bones, Chest imaging and respiratory assessment for thoracic insufficiency, Renal ultrasound and renal function testing for cystic or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Respiratory support proportionate to thoracic insufficiency, ranging from supplemental oxygen and assisted ventilation to aggressive treatment of recurrent chest infections"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis simply because polydactyly is absent"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of short-rib thoracic dysplasia spectrum."
-  }
- ],
- "tables": [
-  {
-   "id": "short_rib_thoracic_dysplasia-matrix",
-   "title": "Short-rib thoracic dysplasia spectrum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A spectrum of skeletal ciliopathies unified by a narrow, long thorax with short horizontal ribs and variable limb shortening",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Ciliopathy",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A spectrum of skeletal ciliopathies unified by a narrow, long thorax with short horizontal ribs and variable limb shortening",
+      "Encompasses Jeune asphyxiating thoracic dystrophy and the more severe, often lethal short-rib polydactyly syndromes (Saldino-Noonan, Majewski, Verma-Naumoff and Beemer-Langer types)",
+      "Polydactyly is present in some subtypes and absent in others, so its absence does not exclude the diagnosis",
+      "Neonatal respiratory insufficiency from a constricted rib cage dominates the early clinical picture",
+      "Extra-skeletal involvement includes cystic renal disease, hepatic fibrosis, retinal dystrophy and pancreatic or intestinal anomalies",
+      "Caused by biallelic variants in intraflagellar transport and dynein-2 motor genes, most commonly DYNC2H1",
+      "Survivors of infancy may later develop progressive renal and hepatic disease requiring surveillance"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey to assess rib length, thoracic dimensions, pelvis and limb bones, Chest imaging and respiratory assessment for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The short-rib thoracic dysplasias result from biallelic variants in genes encoding components of the intraflagellar transport system and the cytoplasmic dynein-2 retrograde motor, most often DYNC2H1. These proteins are essential for building and maintaining the primary cilium, through which hedgehog and other signals that pattern the developing skeleton are transduced. Disrupted ciliary signalling in growth-plate chondrocytes impairs endochondral ossification, producing the characteristically short ribs, narrow thorax and shortened limbs, while abnormal hedgehog signalling in the limb bud underlies the polydactyly seen in some subtypes. Because the same cilia are required in kidney, liver, retina and pancreas, affected individuals may also develop cystic kidney disease, hepatic fibrosis, retinal degeneration and other visceral abnormalities.",
+    "additionalDifferentials": [
+      "Ellis-van Creveld syndrome",
+      "Cranioectodermal dysplasia (Sensenbrenner)",
+      "Thanatophoric dysplasia and other lethal skeletal dysplasias",
+      "Achondrogenesis",
+      "Bardet-Biedl syndrome",
+      "Oral-facial-digital syndromes with skeletal involvement"
     ],
-    [
-     "Primary Differentials",
-     "Ellis-van Creveld syndrome, Cranioectodermal dysplasia (Sensenbrenner), Thanatophoric dysplasia and other lethal skeletal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey to assess rib length, thoracic dimensions, pelvis and limb bones",
+      "Chest imaging and respiratory assessment for thoracic insufficiency",
+      "Renal ultrasound and renal function testing for cystic or tubulointerstitial disease",
+      "Liver function tests and hepatic imaging for fibrosis",
+      "Ophthalmological assessment with electroretinography for retinal dystrophy",
+      "Molecular testing with a skeletal ciliopathy gene panel"
     ],
-    [
-     "Management Strategy",
-     "Respiratory support proportionate to thoracic insufficiency, ranging from supplemental oxygen and assisted ventilation to",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe thoracic insufficiency and respiratory failure in the newborn",
+      "Recurrent respiratory infection with failure to thrive",
+      "Progressive renal impairment",
+      "Hepatic fibrosis with portal hypertension"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis simply because polydactyly is absent",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is highly variable across the spectrum: the lethal short-rib polydactyly forms are fatal in the perinatal period, whereas Jeune syndrome has a variable respiratory course, and survivors of the early years remain at risk of progressive renal and hepatic disease.",
+    "pitfalls": [
+      "Excluding the diagnosis simply because polydactyly is absent",
+      "Underestimating the risk of progressive renal or hepatic disease in survivors",
+      "Failing to anticipate and plan for a difficult respiratory course",
+      "Assuming a uniformly lethal outcome across the whole spectrum"
+    ],
+    "references": [
+      "GeneReviews: Short-Rib Thoracic Dysplasia with or without Polydactyly",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Respiratory support proportionate to thoracic insufficiency, ranging from supplemental oxygen and assisted ventilation to aggressive treatment of recurrent chest infections",
+      "Thoracic expansion surgery, such as expansion thoracoplasty or a vertical expandable prosthetic titanium rib, in selected survivable cases to enlarge the constricted rib cage",
+      "Surveillance and management of cystic renal disease with monitoring of renal function, treatment of hypertension and renal replacement therapy for progressive failure",
+      "Monitoring for hepatic fibrosis with liver function tests and imaging",
+      "Ophthalmological surveillance and low-vision support for retinal dystrophy",
+      "Coordinated multidisciplinary care across respiratory medicine, thoracic surgery, nephrology, hepatology, ophthalmology and clinical genetics",
+      "Genetic counselling with cascade and prenatal testing given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for short-rib thoracic dysplasia spectrum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "short-rib-thoracic-dysplasia-real-image",
-   "title": "Short-rib thoracic dysplasia spectrum: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "short_rib_thoracic_dysplasia-pathway",
+      "title": "Short-rib thoracic dysplasia spectrum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A spectrum of skeletal ciliopathies unified by a narrow, long thorax with short horizontal ribs and variable limb shortening",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe thoracic insufficiency and respiratory failure in the newborn",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey to assess rib length, thoracic dimensions, pelvis and limb bones, Chest imaging and respiratory assessment for thoracic insufficiency, Renal ultrasound and renal function testing for cystic or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Respiratory support proportionate to thoracic insufficiency, ranging from supplemental oxygen and assisted ventilation to aggressive treatment of recurrent chest infections"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis simply because polydactyly is absent"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of short-rib thoracic dysplasia spectrum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "short_rib_thoracic_dysplasia-matrix",
+      "title": "Short-rib thoracic dysplasia spectrum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A spectrum of skeletal ciliopathies unified by a narrow, long thorax with short horizontal ribs and variable limb shortening",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey to assess rib length, thoracic dimensions, pelvis and limb bones, Chest imaging and respiratory assessment for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ellis-van Creveld syndrome, Cranioectodermal dysplasia (Sensenbrenner), Thanatophoric dysplasia and other lethal skeletal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Respiratory support proportionate to thoracic insufficiency, ranging from supplemental oxygen and assisted ventilation to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis simply because polydactyly is absent",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for short-rib thoracic dysplasia spectrum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "short_rib_thoracic_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Rib length, thoracic dimensions, pelvis and limb bones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and respiratory assessment",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and renal function",
+          "cells": [
+            {
+              "text": "Cystic or tubulointerstitial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and imaging",
+          "cells": [
+            {
+              "text": "Hepatic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology with electroretinography",
+          "cells": [
+            {
+              "text": "Retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal ciliopathy gene panel",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_rib_thoracic_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Oxygen and assisted ventilation, and treatment of recurrent infection, matched to thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic expansion surgery",
+          "cells": [
+            {
+              "text": "Expansion thoracoplasty or vertical expandable titanium rib in selected survivable cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal surveillance",
+          "cells": [
+            {
+              "text": "Monitor renal function, treat hypertension, renal replacement for progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic monitoring",
+          "cells": [
+            {
+              "text": "Liver function tests and imaging for fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology",
+          "cells": [
+            {
+              "text": "Surveillance and low-vision support for retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Respiratory, thoracic surgery, nephrology, hepatology, ophthalmology and genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; cascade and prenatal testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "short_rib_thoracic_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Short-rib thoracic dysplasia spectrum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short ribs and narrow thorax with respiratory difficulty: short-rib thoracic dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (newborn respiratory failure, progressive renal or hepatic disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support and assessment of thoracic insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, renal ultrasound, liver tests, retinal assessment, ciliopathy panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the ciliopathy gene panel confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Do not exclude because polydactyly is absent; consider other dysplasias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Respiratory support, with expansion thoracoplasty or VEPTR in selected survivors",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor renal function and treat hypertension; renal replacement if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Liver function and imaging for fibrosis; ophthalmology for retinal dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling with cascade and prenatal testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable: lethal in the perinatal short-rib polydactyly forms, better in Jeune syndrome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,181 +1,506 @@
 {
- "id": "androgen_deficiency_aging_male",
- "name": "Androgen deficiency in the ageing male (late-onset hypogonadism)",
- "aliases": [
-  "late-onset hypogonadism",
-  "LOH",
-  "age-related testosterone deficiency",
-  "adult-onset hypogonadism",
-  "testosterone deficiency syndrome"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Andrology / Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The diagnosis rests on the combination of persistent, characteristic symptoms together with unequivocally low serum testosterone; neither a low level alone nor symptoms alone is sufficient",
-   "Sexual features are the most specific complaints and include reduced libido, poorer spontaneous morning erections, and erectile difficulty, alongside fatigue, reduced muscle bulk, and depressed mood",
-   "Testosterone should be sampled in the early morning when concentrations peak and any low result confirmed on a second fasting specimen before labelling a man deficient",
-   "Calculated free or bioavailable testosterone is more informative when sex-hormone-binding globulin is altered, as occurs with ageing, obesity, and systemic illness",
-   "Addressing reversible contributors such as obesity, poorly controlled diabetes, and the metabolic syndrome can meaningfully raise endogenous testosterone and should precede replacement in many men",
-   "Before and during testosterone replacement, haematocrit, prostate-specific antigen, and a prostate examination should be checked because therapy can provoke erythrocytosis and unmask prostate disease",
-   "Replacement is contraindicated in untreated prostate or breast cancer, and caution applies with polycythaemia, untreated severe obstructive sleep apnoea, and unstable cardiac disease",
-   "Exogenous testosterone suppresses spermatogenesis, so men wishing to preserve fertility should instead be considered for gonadotropin-based treatment"
+  "id": "androgen_deficiency_aging_male",
+  "name": "Androgen deficiency in the ageing male (late-onset hypogonadism)",
+  "aliases": [
+    "late-onset hypogonadism",
+    "LOH",
+    "age-related testosterone deficiency",
+    "adult-onset hypogonadism",
+    "testosterone deficiency syndrome"
   ],
-  "pathophysiology": "Serum testosterone declines gradually with advancing age through combined defects at several levels of the hypothalamic-pituitary-testicular axis. There is a reduction in Leydig cell number and secretory capacity (a primary testicular component) alongside blunting of luteinising hormone pulse amplitude and altered hypothalamic drive (a secondary central component), so gonadotropins are often only modestly elevated. A progressive rise in sex-hormone-binding globulin further lowers the free fraction available to tissues. Comorbidities that accumulate with age, particularly obesity, type 2 diabetes, the metabolic syndrome, and chronic illness, suppress the axis and amplify the fall, meaning much of the observed deficiency is functional rather than fixed organic gonadal failure.",
-  "additionalDifferentials": [
-   "Classical organic hypogonadism such as Klinefelter syndrome or prior testicular injury",
-   "Pituitary or hypothalamic pathology including prolactinoma and other sellar tumours",
-   "Depression and other primary mood disorders",
-   "Hypothyroidism and other endocrinopathies",
-   "Anaemia or chronic systemic illness producing fatigue",
-   "Obstructive sleep apnoea",
-   "Drug effects, particularly opioids, glucocorticoids, and antiandrogens"
-  ],
-  "additionalInvestigations": [
-   "Early-morning fasting total testosterone, repeated on a second occasion to confirm a low result",
-   "Sex-hormone-binding globulin with calculated free or bioavailable testosterone when binding protein is abnormal",
-   "Luteinising hormone and follicle-stimulating hormone to distinguish primary from secondary hypogonadism",
-   "Serum prolactin, with pituitary imaging if a central cause or markedly low gonadotropins are found",
-   "Iron studies and ferritin to screen for haemochromatosis in suspected primary failure",
-   "Baseline haematocrit and prostate-specific antigen prior to any replacement",
-   "Metabolic assessment including HbA1c and lipid profile given the strong association with cardiometabolic disease"
-  ],
-  "redFlags": [
-   "Visual field loss, persistent headache, or other features suggesting a pituitary mass",
-   "Very low testosterone with inappropriately low or normal gonadotropins pointing to central pathology",
-   "A breast mass or gynaecomastia raising concern for oestrogen excess or malignancy",
-   "A rising prostate-specific antigen or abnormal prostate on examination",
-   "Marked erythrocytosis developing on replacement therapy"
-  ],
-  "prognosis": "In men with genuine symptomatic deficiency confirmed biochemically, replacement typically improves libido, mood, energy, and body composition, while lifestyle and comorbidity optimisation can restore endogenous production in functional cases; long-term outcomes depend on careful monitoring for prostate and haematological effects and on treating the underlying cardiometabolic burden.",
-  "pitfalls": [
-   "Diagnosing deficiency from a single random or afternoon sample rather than a confirmed early-morning value",
-   "Commencing replacement in men with borderline levels and few or non-specific symptoms",
-   "Overlooking a treatable secondary cause such as hyperprolactinaemia or a pituitary tumour",
-   "Failing to monitor haematocrit and prostate-specific antigen during therapy",
-   "Prescribing testosterone to a man who wishes to father children, thereby suppressing his sperm production"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "European Association of Urology guidelines on sexual and reproductive health",
-   "WHO laboratory manual for the examination and processing of human semen"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Optimise reversible functional contributors first — weight reduction, glycaemic control in type 2 diabetes and treatment of the metabolic syndrome, which can restore endogenous testosterone before any replacement",
-   "Testosterone replacement, by transdermal gel or intramuscular ester, in men with persistent characteristic symptoms and biochemically confirmed low early-morning testosterone",
-   "Treat associated erectile dysfunction with phosphodiesterase-5 inhibitors alongside hormonal correction",
-   "Preserve fertility with gonadotropin therapy rather than exogenous testosterone in men still seeking fatherhood, since replacement suppresses spermatogenesis",
-   "Monitor haematocrit for therapy-induced erythrocytosis, managing with dose reduction or venesection if it develops",
-   "Baseline and periodic prostate-specific antigen with prostate examination to detect unmasked prostate disease during replacement",
-   "Avoid testosterone in untreated prostate or breast cancer and in decompensated heart failure, and assess bone density given fracture risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "androgen_deficiency_aging_male-pathway",
-   "title": "Androgen deficiency in the ageing male (late-onset hypogonadism): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The diagnosis rests on the combination of persistent, characteristic symptoms together with unequivocally low serum testosterone; neither a low level alone nor symptoms alone is sufficient",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Visual field loss, persistent headache, or other features suggesting a pituitary mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Early-morning fasting total testosterone, repeated on a second occasion to confirm a low result, Sex-hormone-binding globulin with calculated free or bioavailable testosterone when binding protein is abnormal, Luteinising"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Optimise reversible functional contributors first - weight reduction, glycaemic control in type 2 diabetes and treatment of the metabolic syndrome, which can restore endogenous testosterone before any replacement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing deficiency from a single random or afternoon sample rather than a confirmed early-morning value"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of androgen deficiency in the ageing male (late-onset hypogonadism)."
-  }
- ],
- "tables": [
-  {
-   "id": "androgen_deficiency_aging_male-matrix",
-   "title": "Androgen deficiency in the ageing male (late-onset hypogonadism): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The diagnosis rests on the combination of persistent, characteristic symptoms together with unequivocally low serum testosterone;",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Andrology / Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The diagnosis rests on the combination of persistent, characteristic symptoms together with unequivocally low serum testosterone; neither a low level alone nor symptoms alone is sufficient",
+      "Sexual features are the most specific complaints and include reduced libido, poorer spontaneous morning erections, and erectile difficulty, alongside fatigue, reduced muscle bulk, and depressed mood",
+      "Testosterone should be sampled in the early morning when concentrations peak and any low result confirmed on a second fasting specimen before labelling a man deficient",
+      "Calculated free or bioavailable testosterone is more informative when sex-hormone-binding globulin is altered, as occurs with ageing, obesity, and systemic illness",
+      "Addressing reversible contributors such as obesity, poorly controlled diabetes, and the metabolic syndrome can meaningfully raise endogenous testosterone and should precede replacement in many men",
+      "Before and during testosterone replacement, haematocrit, prostate-specific antigen, and a prostate examination should be checked because therapy can provoke erythrocytosis and unmask prostate disease",
+      "Replacement is contraindicated in untreated prostate or breast cancer, and caution applies with polycythaemia, untreated severe obstructive sleep apnoea, and unstable cardiac disease",
+      "Exogenous testosterone suppresses spermatogenesis, so men wishing to preserve fertility should instead be considered for gonadotropin-based treatment"
     ],
-    [
-     "Key Investigations",
-     "Early-morning fasting total testosterone, repeated on a second occasion to confirm a low result, Sex-hormone-binding globulin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Serum testosterone declines gradually with advancing age through combined defects at several levels of the hypothalamic-pituitary-testicular axis. There is a reduction in Leydig cell number and secretory capacity (a primary testicular component) alongside blunting of luteinising hormone pulse amplitude and altered hypothalamic drive (a secondary central component), so gonadotropins are often only modestly elevated. A progressive rise in sex-hormone-binding globulin further lowers the free fraction available to tissues. Comorbidities that accumulate with age, particularly obesity, type 2 diabetes, the metabolic syndrome, and chronic illness, suppress the axis and amplify the fall, meaning much of the observed deficiency is functional rather than fixed organic gonadal failure.",
+    "additionalDifferentials": [
+      "Classical organic hypogonadism such as Klinefelter syndrome or prior testicular injury",
+      "Pituitary or hypothalamic pathology including prolactinoma and other sellar tumours",
+      "Depression and other primary mood disorders",
+      "Hypothyroidism and other endocrinopathies",
+      "Anaemia or chronic systemic illness producing fatigue",
+      "Obstructive sleep apnoea",
+      "Drug effects, particularly opioids, glucocorticoids, and antiandrogens"
     ],
-    [
-     "Primary Differentials",
-     "Classical organic hypogonadism such as Klinefelter syndrome or prior testicular injury, Pituitary or hypothalamic pathology",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Early-morning fasting total testosterone, repeated on a second occasion to confirm a low result",
+      "Sex-hormone-binding globulin with calculated free or bioavailable testosterone when binding protein is abnormal",
+      "Luteinising hormone and follicle-stimulating hormone to distinguish primary from secondary hypogonadism",
+      "Serum prolactin, with pituitary imaging if a central cause or markedly low gonadotropins are found",
+      "Iron studies and ferritin to screen for haemochromatosis in suspected primary failure",
+      "Baseline haematocrit and prostate-specific antigen prior to any replacement",
+      "Metabolic assessment including HbA1c and lipid profile given the strong association with cardiometabolic disease"
     ],
-    [
-     "Management Strategy",
-     "Optimise reversible functional contributors first - weight reduction, glycaemic control in type 2 diabetes and treatment of the",
-     "Core treatment modality"
+    "redFlags": [
+      "Visual field loss, persistent headache, or other features suggesting a pituitary mass",
+      "Very low testosterone with inappropriately low or normal gonadotropins pointing to central pathology",
+      "A breast mass or gynaecomastia raising concern for oestrogen excess or malignancy",
+      "A rising prostate-specific antigen or abnormal prostate on examination",
+      "Marked erythrocytosis developing on replacement therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing deficiency from a single random or afternoon sample rather than a confirmed early-morning value",
-     "Prevent diagnostic or management error"
+    "prognosis": "In men with genuine symptomatic deficiency confirmed biochemically, replacement typically improves libido, mood, energy, and body composition, while lifestyle and comorbidity optimisation can restore endogenous production in functional cases; long-term outcomes depend on careful monitoring for prostate and haematological effects and on treating the underlying cardiometabolic burden.",
+    "pitfalls": [
+      "Diagnosing deficiency from a single random or afternoon sample rather than a confirmed early-morning value",
+      "Commencing replacement in men with borderline levels and few or non-specific symptoms",
+      "Overlooking a treatable secondary cause such as hyperprolactinaemia or a pituitary tumour",
+      "Failing to monitor haematocrit and prostate-specific antigen during therapy",
+      "Prescribing testosterone to a man who wishes to father children, thereby suppressing his sperm production"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "European Association of Urology guidelines on sexual and reproductive health",
+      "WHO laboratory manual for the examination and processing of human semen"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Optimise reversible functional contributors first — weight reduction, glycaemic control in type 2 diabetes and treatment of the metabolic syndrome, which can restore endogenous testosterone before any replacement",
+      "Testosterone replacement, by transdermal gel or intramuscular ester, in men with persistent characteristic symptoms and biochemically confirmed low early-morning testosterone",
+      "Treat associated erectile dysfunction with phosphodiesterase-5 inhibitors alongside hormonal correction",
+      "Preserve fertility with gonadotropin therapy rather than exogenous testosterone in men still seeking fatherhood, since replacement suppresses spermatogenesis",
+      "Monitor haematocrit for therapy-induced erythrocytosis, managing with dose reduction or venesection if it develops",
+      "Baseline and periodic prostate-specific antigen with prostate examination to detect unmasked prostate disease during replacement",
+      "Avoid testosterone in untreated prostate or breast cancer and in decompensated heart failure, and assess bone density given fracture risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for androgen deficiency in the ageing male (late-onset hypogonadism)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "androgen-deficiency-aging-male-real-image",
-   "title": "Androgen deficiency in the ageing male (late-onset hypogonadism): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "androgen_deficiency_aging_male-pathway",
+      "title": "Androgen deficiency in the ageing male (late-onset hypogonadism): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The diagnosis rests on the combination of persistent, characteristic symptoms together with unequivocally low serum testosterone; neither a low level alone nor symptoms alone is sufficient",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Visual field loss, persistent headache, or other features suggesting a pituitary mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Early-morning fasting total testosterone, repeated on a second occasion to confirm a low result, Sex-hormone-binding globulin with calculated free or bioavailable testosterone when binding protein is abnormal, Luteinising"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Optimise reversible functional contributors first - weight reduction, glycaemic control in type 2 diabetes and treatment of the metabolic syndrome, which can restore endogenous testosterone before any replacement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing deficiency from a single random or afternoon sample rather than a confirmed early-morning value"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of androgen deficiency in the ageing male (late-onset hypogonadism)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "androgen_deficiency_aging_male-matrix",
+      "title": "Androgen deficiency in the ageing male (late-onset hypogonadism): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The diagnosis rests on the combination of persistent, characteristic symptoms together with unequivocally low serum testosterone;",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Early-morning fasting total testosterone, repeated on a second occasion to confirm a low result, Sex-hormone-binding globulin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classical organic hypogonadism such as Klinefelter syndrome or prior testicular injury, Pituitary or hypothalamic pathology",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Optimise reversible functional contributors first - weight reduction, glycaemic control in type 2 diabetes and treatment of the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing deficiency from a single random or afternoon sample rather than a confirmed early-morning value",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for androgen deficiency in the ageing male (late-onset hypogonadism)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 72-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "androgen_deficiency_aging_male-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Early-morning fasting total testosterone",
+          "cells": [
+            {
+              "text": "Repeated on a second occasion to confirm a low result"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex-hormone-binding globulin with calculated free or bioavailable testosterone",
+          "cells": [
+            {
+              "text": "Used when binding protein is abnormal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Luteinising hormone and follicle-stimulating hormone",
+          "cells": [
+            {
+              "text": "Distinguish primary from secondary hypogonadism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum prolactin",
+          "cells": [
+            {
+              "text": "Pituitary imaging if a central cause or markedly low gonadotropins are found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies and ferritin",
+          "cells": [
+            {
+              "text": "Screen for haemochromatosis in suspected primary failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline haematocrit and prostate-specific antigen",
+          "cells": [
+            {
+              "text": "Taken before any replacement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "androgen_deficiency_aging_male-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reversible contributors first",
+          "cells": [
+            {
+              "text": "Weight reduction, glycaemic control in type 2 diabetes, treat metabolic syndrome"
+            },
+            {
+              "text": "Can restore endogenous testosterone before any replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone replacement",
+          "cells": [
+            {
+              "text": "Transdermal gel or intramuscular ester"
+            },
+            {
+              "text": "Men with persistent characteristic symptoms and confirmed low early-morning testosterone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphodiesterase-5 inhibitors",
+          "cells": [
+            {
+              "text": "Treat associated erectile dysfunction"
+            },
+            {
+              "text": "Used alongside hormonal correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadotropin therapy",
+          "cells": [
+            {
+              "text": "Preserve fertility rather than give exogenous testosterone"
+            },
+            {
+              "text": "Men still seeking fatherhood, since replacement suppresses spermatogenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematocrit monitoring",
+          "cells": [
+            {
+              "text": "Dose reduction or venesection for therapy-induced erythrocytosis"
+            },
+            {
+              "text": "Haematocrit monitored during therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostate surveillance",
+          "cells": [
+            {
+              "text": "Baseline and periodic prostate-specific antigen with prostate examination"
+            },
+            {
+              "text": "Detects unmasked prostate disease during replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid testosterone",
+          "cells": [
+            {
+              "text": "Untreated prostate or breast cancer, decompensated heart failure"
+            },
+            {
+              "text": "Assess bone density given fracture risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "androgen_deficiency_aging_male-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Hormone changes with aging",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Hormones"
+      ],
+      "rows": [
+        {
+          "parameter": "Decrease",
+          "cells": [
+            {
+              "text": "Growth hormone; luteinizing hormone (men); insulin growth factor I; testosterone; estradiol; DHEA and DHEAs; pregnenolone; 25(OH) vitamin D; aldosterone; vasoactive intestinal peptide; melatonin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No change",
+          "cells": [
+            {
+              "text": "Prolactin; thyrotropin; thyroid hormones; epinephrine; glucagon-like peptide 1; gastric inhibitory polypeptide"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Increase",
+          "cells": [
+            {
+              "text": "Cholecystokinin; luteinizing hormone (women); follicle-stimulating hormone; cortisol; prolactin; norepinephrine; insulin; parathormone"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Prolactin appears under both No change and Increase, as printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "androgen_deficiency_aging_male-dx-mgmt",
+      "title": "Diagnosis and management of Androgen deficiency in the ageing male (late-onset hypogonadism)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent characteristic symptoms with unequivocally low serum testosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Pituitary mass, breast mass or rising PSA suggested?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for pituitary mass, breast or prostate disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat fasting early-morning testosterone, LH, FSH, SHBG, prolactin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low testosterone confirmed on a second early-morning sample?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Correct reversible causes: weight, glycaemia, metabolic syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Testosterone gel or ester for confirmed symptomatic men",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Phosphodiesterase-5 inhibitor for associated erectile dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor haematocrit and PSA; assess bone density",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptomatic men with confirmed deficiency usually improve on replacement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,172 +1,457 @@
 {
- "id": "chronic_subdural_hematoma",
- "name": "Chronic subdural haematoma",
- "aliases": [
-  "cSDH",
-  "chronic SDH",
-  "subdural haematoma (chronic)"
- ],
- "class": "non_infective",
- "system": "Neurosurgery / Neurology",
- "specialty": "Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically affects older adults, often with only trivial or forgotten head trauma weeks earlier, and is more common in those on antiplatelet or anticoagulant therapy",
-   "Presentation is usually insidious over days to weeks, with headache, confusion, gait disturbance, focal weakness, or a fluctuating conscious level that can mimic dementia or stroke",
-   "Brain atrophy in the elderly and in chronic alcohol use increases the subdural space and stretches bridging veins, predisposing to slow venous bleeding",
-   "On CT the collection is classically crescent-shaped over the convexity and hypodense or mixed density relative to acute blood; layering or membranes suggest recurrent bleeding of differing ages",
-   "Symptomatic collections causing mass effect are commonly managed with surgical drainage (burr-hole or craniotomy), while small asymptomatic collections may be observed",
-   "Correction of coagulopathy and careful review of anticoagulation are central to management and to reducing recurrence",
-   "Recurrence after drainage is relatively frequent, and subdural drains plus adequate brain re-expansion help lower this risk",
-   "Bilateral collections can mask midline shift, so symmetry on imaging should not be taken as reassurance"
+  "id": "chronic_subdural_hematoma",
+  "name": "Chronic subdural haematoma",
+  "aliases": [
+    "cSDH",
+    "chronic SDH",
+    "subdural haematoma (chronic)"
   ],
-  "pathophysiology": "A chronic subdural haematoma is a slowly accumulating collection of blood and its breakdown products in the subdural space, between the dura and arachnoid. It often begins with minor tearing of bridging cortical veins, particularly where cerebral atrophy has enlarged the subdural space. An encapsulating membrane forms with fragile, leaky neovessels, and repeated micro-haemorrhages together with osmotic and inflammatory factors allow the collection to expand over weeks. Gradual enlargement produces mass effect on the underlying cortex, causing progressive or fluctuating neurological signs.",
-  "additionalDifferentials": [
-   "Acute or subacute subdural haematoma",
-   "Ischaemic stroke or transient ischaemic attack",
-   "Intracranial neoplasm or metastasis",
-   "Normal pressure hydrocephalus",
-   "Neurodegenerative dementia",
-   "Subdural empyema or hygroma"
-  ],
-  "additionalInvestigations": [
-   "Non-contrast CT head to identify the crescentic collection, its density, and midline shift",
-   "MRI brain when the diagnosis or age of blood is uncertain or isodense collections are suspected",
-   "Full blood count, coagulation profile, and platelet function assessment",
-   "Review of antiplatelet and anticoagulant medication and relevant drug levels or reversal targets"
-  ],
-  "redFlags": [
-   "Rapid deterioration in conscious level or new pupillary asymmetry suggesting acute rebleeding or herniation",
-   "Large collection with significant midline shift and effacement of basal cisterns",
-   "New or worsening focal deficit or seizures",
-   "Bilateral collections with clinical deterioration despite symmetric imaging"
-  ],
-  "prognosis": "Many patients recover well after drainage of a symptomatic collection, but outcome is worse in the frail elderly and those with marked preoperative neurological impairment; recurrence and the need for repeat surgery are recognised problems.",
-  "pitfalls": [
-   "Attributing gradual cognitive or gait decline to dementia and overlooking a treatable collection",
-   "Missing an isodense collection on CT, especially when bilateral and symmetric",
-   "Resuming anticoagulation without weighing rebleeding risk against thrombotic risk",
-   "Assuming complete resolution immediately after drainage when residual or recurrent collections are common"
-  ],
-  "references": [
-   "Youmans & Winn Neurological Surgery",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical evacuation by burr-hole drainage or craniotomy for symptomatic collections causing mass effect",
-   "Conservative observation with interval imaging for small, asymptomatic collections",
-   "Correction of coagulopathy and careful review and reversal of antiplatelet or anticoagulant therapy",
-   "Middle meningeal artery embolisation as an adjunct to reduce recurrence in selected patients",
-   "Postoperative subdural drainage and repeat CT to monitor for the recognised risk of re-accumulation",
-   "Antiseizure treatment where clinical or subclinical seizures occur",
-   "Rehabilitation, falls prevention and considered decisions on resuming anticoagulation, particularly in frail elderly patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_subdural_hematoma-pathway",
-   "title": "Chronic subdural haematoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically affects older adults, often with only trivial or forgotten head trauma weeks earlier, and is more common in those on antiplatelet or anticoagulant therapy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid deterioration in conscious level or new pupillary asymmetry suggesting acute rebleeding or herniation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Non-contrast CT head to identify the crescentic collection, its density, and midline shift, MRI brain when the diagnosis or age of blood is uncertain or isodense collections are suspected, Full blood count, coagulation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical evacuation by burr-hole drainage or craniotomy for symptomatic collections causing mass effect"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing gradual cognitive or gait decline to dementia and overlooking a treatable collection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic subdural haematoma."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_subdural_hematoma-matrix",
-   "title": "Chronic subdural haematoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically affects older adults, often with only trivial or forgotten head trauma weeks earlier, and is more common in those on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurosurgery / Neurology",
+  "specialty": "Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically affects older adults, often with only trivial or forgotten head trauma weeks earlier, and is more common in those on antiplatelet or anticoagulant therapy",
+      "Presentation is usually insidious over days to weeks, with headache, confusion, gait disturbance, focal weakness, or a fluctuating conscious level that can mimic dementia or stroke",
+      "Brain atrophy in the elderly and in chronic alcohol use increases the subdural space and stretches bridging veins, predisposing to slow venous bleeding",
+      "On CT the collection is classically crescent-shaped over the convexity and hypodense or mixed density relative to acute blood; layering or membranes suggest recurrent bleeding of differing ages",
+      "Symptomatic collections causing mass effect are commonly managed with surgical drainage (burr-hole or craniotomy), while small asymptomatic collections may be observed",
+      "Correction of coagulopathy and careful review of anticoagulation are central to management and to reducing recurrence",
+      "Recurrence after drainage is relatively frequent, and subdural drains plus adequate brain re-expansion help lower this risk",
+      "Bilateral collections can mask midline shift, so symmetry on imaging should not be taken as reassurance"
     ],
-    [
-     "Key Investigations",
-     "Non-contrast CT head to identify the crescentic collection, its density, and midline shift, MRI brain when the diagnosis or age",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A chronic subdural haematoma is a slowly accumulating collection of blood and its breakdown products in the subdural space, between the dura and arachnoid. It often begins with minor tearing of bridging cortical veins, particularly where cerebral atrophy has enlarged the subdural space. An encapsulating membrane forms with fragile, leaky neovessels, and repeated micro-haemorrhages together with osmotic and inflammatory factors allow the collection to expand over weeks. Gradual enlargement produces mass effect on the underlying cortex, causing progressive or fluctuating neurological signs.",
+    "additionalDifferentials": [
+      "Acute or subacute subdural haematoma",
+      "Ischaemic stroke or transient ischaemic attack",
+      "Intracranial neoplasm or metastasis",
+      "Normal pressure hydrocephalus",
+      "Neurodegenerative dementia",
+      "Subdural empyema or hygroma"
     ],
-    [
-     "Primary Differentials",
-     "Acute or subacute subdural haematoma, Ischaemic stroke or transient ischaemic attack, Intracranial neoplasm or metastasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Non-contrast CT head to identify the crescentic collection, its density, and midline shift",
+      "MRI brain when the diagnosis or age of blood is uncertain or isodense collections are suspected",
+      "Full blood count, coagulation profile, and platelet function assessment",
+      "Review of antiplatelet and anticoagulant medication and relevant drug levels or reversal targets"
     ],
-    [
-     "Management Strategy",
-     "Surgical evacuation by burr-hole drainage or craniotomy for symptomatic collections causing mass effect",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid deterioration in conscious level or new pupillary asymmetry suggesting acute rebleeding or herniation",
+      "Large collection with significant midline shift and effacement of basal cisterns",
+      "New or worsening focal deficit or seizures",
+      "Bilateral collections with clinical deterioration despite symmetric imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing gradual cognitive or gait decline to dementia and overlooking a treatable collection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients recover well after drainage of a symptomatic collection, but outcome is worse in the frail elderly and those with marked preoperative neurological impairment; recurrence and the need for repeat surgery are recognised problems.",
+    "pitfalls": [
+      "Attributing gradual cognitive or gait decline to dementia and overlooking a treatable collection",
+      "Missing an isodense collection on CT, especially when bilateral and symmetric",
+      "Resuming anticoagulation without weighing rebleeding risk against thrombotic risk",
+      "Assuming complete resolution immediately after drainage when residual or recurrent collections are common"
+    ],
+    "references": [
+      "Youmans & Winn Neurological Surgery",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical evacuation by burr-hole drainage or craniotomy for symptomatic collections causing mass effect",
+      "Conservative observation with interval imaging for small, asymptomatic collections",
+      "Correction of coagulopathy and careful review and reversal of antiplatelet or anticoagulant therapy",
+      "Middle meningeal artery embolisation as an adjunct to reduce recurrence in selected patients",
+      "Postoperative subdural drainage and repeat CT to monitor for the recognised risk of re-accumulation",
+      "Antiseizure treatment where clinical or subclinical seizures occur",
+      "Rehabilitation, falls prevention and considered decisions on resuming anticoagulation, particularly in frail elderly patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic subdural haematoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-subdural-hematoma-real-image",
-   "title": "Chronic subdural haematoma: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "chronic_subdural_hematoma-pathway",
+      "title": "Chronic subdural haematoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically affects older adults, often with only trivial or forgotten head trauma weeks earlier, and is more common in those on antiplatelet or anticoagulant therapy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid deterioration in conscious level or new pupillary asymmetry suggesting acute rebleeding or herniation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Non-contrast CT head to identify the crescentic collection, its density, and midline shift, MRI brain when the diagnosis or age of blood is uncertain or isodense collections are suspected, Full blood count, coagulation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical evacuation by burr-hole drainage or craniotomy for symptomatic collections causing mass effect"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing gradual cognitive or gait decline to dementia and overlooking a treatable collection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic subdural haematoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_subdural_hematoma-matrix",
+      "title": "Chronic subdural haematoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically affects older adults, often with only trivial or forgotten head trauma weeks earlier, and is more common in those on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Non-contrast CT head to identify the crescentic collection, its density, and midline shift, MRI brain when the diagnosis or age",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute or subacute subdural haematoma, Ischaemic stroke or transient ischaemic attack, Intracranial neoplasm or metastasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical evacuation by burr-hole drainage or craniotomy for symptomatic collections causing mass effect",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing gradual cognitive or gait decline to dementia and overlooking a treatable collection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic subdural haematoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_subdural_hematoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-contrast CT head",
+          "cells": [
+            {
+              "text": "Crescentic collection, density and midline shift"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "When the age of blood is uncertain or the collection is isodense"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation profile",
+          "cells": [
+            {
+              "text": "Coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet function assessment",
+          "cells": [
+            {
+              "text": "Antiplatelet effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of antiplatelet and anticoagulant medication",
+          "cells": [
+            {
+              "text": "Drug levels and reversal targets"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_subdural_hematoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute or subacute subdural haematoma",
+          "cells": [
+            {
+              "text": "Shorter history of symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic stroke or transient ischaemic attack",
+          "cells": [
+            {
+              "text": "Focal deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal pressure hydrocephalus",
+          "cells": [
+            {
+              "text": "Gait disturbance with cognitive change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_subdural_hematoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical evacuation",
+          "cells": [
+            {
+              "text": "Burr-hole drainage or craniotomy for symptomatic mass effect"
+            },
+            {
+              "text": "Mass effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative observation",
+          "cells": [
+            {
+              "text": "Interval imaging for small asymptomatic collections"
+            },
+            {
+              "text": "Asymptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct coagulopathy",
+          "cells": [
+            {
+              "text": "Reverse and review antiplatelet or anticoagulant therapy"
+            },
+            {
+              "text": "Reduces recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Middle meningeal artery embolisation",
+          "cells": [
+            {
+              "text": "Adjunct to reduce recurrence in selected patients"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative subdural drainage",
+          "cells": [
+            {
+              "text": "Repeat CT to monitor for re-accumulation"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_subdural_hematoma-dx-mgmt",
+      "title": "Diagnosis and management of Chronic subdural haematoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic subdural haematoma: insidious headache or confusion, older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling consciousness, pupil asymmetry, midline shift)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency neurosurgical review for herniation or rebleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Non-contrast CT head, coagulation profile and antiplatelet review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Symptomatic collection causing mass effect on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Burr-hole drainage or craniotomy for mass effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check acute subdural, stroke, neoplasm and normal pressure hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Conservative observation with interval imaging for small collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct coagulopathy; review anticoagulant or antiplatelet therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Middle meningeal artery embolisation as adjunct in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Postoperative drain and repeat CT; seizure treatment and falls prevention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,483 @@
 {
- "id": "hypoxic_ischemic_encephalopathy",
- "name": "Neonatal hypoxic-ischaemic encephalopathy",
- "aliases": [
-  "HIE",
-  "birth asphyxia",
-  "hypoxic ischaemic encephalopathy",
-  "neonatal encephalopathy",
-  "perinatal asphyxia encephalopathy"
- ],
- "class": "non_infective",
- "system": "Neonatology",
- "specialty": "Neonatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cloherty and Stark Manual of Neonatal Care / Volpe's Neurology of the Newborn",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Suspect HIE in a term or near-term infant with a sentinel perinatal event, low Apgar scores, need for resuscitation, and a cord or early arterial blood gas showing severe metabolic acidaemia",
-   "Severity is graded clinically using the Sarnat staging (mild, moderate, severe) based on level of consciousness, tone, primitive reflexes, autonomic function, and seizures",
-   "Therapeutic hypothermia is the cornerstone of neuroprotection and is most effective when started within the therapeutic window in the first hours after birth in infants meeting cooling criteria",
-   "Injury evolves in phases: initial insult, a latent period, then delayed secondary energy failure over the following hours to days, which is the rationale for early cooling",
-   "Amplitude-integrated EEG and conventional EEG help assess background activity, detect subclinical seizures, and support prognostication",
-   "Multi-organ dysfunction is common, affecting the kidneys, liver, heart, gut, and coagulation, so HIE is a systemic as well as a neurological condition",
-   "MRI with diffusion-weighted imaging, typically performed in the first days to weeks, is the most useful investigation for defining injury pattern and prognosis"
+  "id": "hypoxic_ischemic_encephalopathy",
+  "name": "Neonatal hypoxic-ischaemic encephalopathy",
+  "aliases": [
+    "HIE",
+    "birth asphyxia",
+    "hypoxic ischaemic encephalopathy",
+    "neonatal encephalopathy",
+    "perinatal asphyxia encephalopathy"
   ],
-  "pathophysiology": "Hypoxic-ischaemic encephalopathy results from a perinatal reduction in cerebral blood flow and oxygen delivery. The acute insult causes primary energy failure with anaerobic metabolism, lactic acidosis, and failure of ion pumps, leading to cytotoxic oedema and early cell death. After partial recovery of oxygenation and perfusion there is a latent phase, followed by delayed secondary energy failure driven by excitotoxicity from excess glutamate, mitochondrial dysfunction, oxidative stress, and inflammatory and apoptotic cascades over the subsequent hours to days. This delayed injury provides the therapeutic window during which cooling can reduce neuronal loss. The pattern of injury depends on the severity and duration of the insult, with the basal ganglia, thalamus, and perirolandic cortex affected in acute profound events and watershed regions in prolonged partial insults.",
-  "additionalDifferentials": [
-   "Neonatal sepsis or meningitis with encephalopathy",
-   "Inborn errors of metabolism presenting with acute encephalopathy",
-   "Neonatal stroke or intracranial haemorrhage",
-   "Congenital brain malformation or genetic encephalopathy",
-   "Neuromuscular disorder causing hypotonia and poor respiratory effort",
-   "Drug exposure or maternal sedation causing neonatal depression"
-  ],
-  "additionalInvestigations": [
-   "Cord and early neonatal arterial blood gas with lactate to document metabolic acidaemia",
-   "Amplitude-integrated and conventional EEG for background grading and seizure detection",
-   "Brain MRI with diffusion-weighted imaging to define injury pattern and prognosis",
-   "Cranial ultrasound as an early bedside adjunct to exclude haemorrhage or major structural lesion",
-   "Multi-organ monitoring including renal function, liver enzymes, coagulation, and cardiac assessment",
-   "Metabolic and infective screen when the presentation is atypical"
-  ],
-  "redFlags": [
-   "Severe (Sarnat stage 3) encephalopathy with coma, absent brainstem reflexes, and flaccid tone",
-   "Refractory or prolonged seizures and a severely suppressed or burst-suppression EEG background",
-   "Profound multi-organ failure with anuria, coagulopathy, or cardiovascular collapse",
-   "Persistent severe acidaemia or deterioration despite resuscitation and supportive care"
-  ],
-  "prognosis": "Outcome depends on the severity and pattern of injury: mild encephalopathy usually has a favourable outcome, whereas moderate and severe HIE carry substantial risk of death or long-term disability including cerebral palsy, cognitive impairment, and epilepsy. Therapeutic hypothermia improves survival free of disability in eligible infants, but severe injury on EEG and MRI predicts poor neurodevelopmental outcome.",
-  "pitfalls": [
-   "Delaying assessment for cooling so that the therapeutic window is missed",
-   "Attributing all encephalopathy to hypoxia-ischaemia and overlooking sepsis, metabolic disease, or stroke",
-   "Missing subclinical (electrographic) seizures because there are no visible clinical signs",
-   "Overheating or allowing temperature instability, which can worsen brain injury",
-   "Offering firm prognosis too early before EEG and MRI findings are available"
-  ],
-  "references": [
-   "Cloherty and Stark Manual of Neonatal Care",
-   "Volpe's Neurology of the Newborn"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start therapeutic hypothermia as the cornerstone of neuroprotection within the therapeutic window in the first hours after birth for infants meeting cooling criteria, with controlled rewarming afterwards",
-   "Deliver supportive neonatal intensive care maintaining normoxia, normocapnia, normoglycaemia and normal blood pressure while avoiding hyperthermia",
-   "Detect and treat clinical and subclinical seizures with antiseizure medication (phenobarbital first-line) guided by amplitude-integrated and conventional EEG",
-   "Recognise and manage systemic multi-organ dysfunction of the kidneys, liver, heart, gut and coagulation with judicious fluids and organ support",
-   "Rule out and treat alternative causes of encephalopathy including sepsis, metabolic disease and perinatal stroke",
-   "Use brain MRI with diffusion-weighted imaging and EEG for injury characterisation and prognostication",
-   "Provide family counselling and coordinate long-term neurodevelopmental follow-up with early intervention"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypoxic_ischemic_encephalopathy-pathway",
-   "title": "Neonatal hypoxic-ischaemic encephalopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Suspect HIE in a term or near-term infant with a sentinel perinatal event, low Apgar scores, need for resuscitation, and a cord or early arterial blood gas showing severe metabolic acidaemia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe (Sarnat stage 3) encephalopathy with coma, absent brainstem reflexes, and flaccid tone",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cord and early neonatal arterial blood gas with lactate to document metabolic acidaemia, Amplitude-integrated and conventional EEG for background grading and seizure detection, Brain MRI with diffusion-weighted imaging to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start therapeutic hypothermia as the cornerstone of neuroprotection within the therapeutic window in the first hours after birth for infants meeting cooling criteria, with controlled rewarming afterwards"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying assessment for cooling so that the therapeutic window is missed"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neonatal hypoxic-ischaemic encephalopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "hypoxic_ischemic_encephalopathy-matrix",
-   "title": "Neonatal hypoxic-ischaemic encephalopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Suspect HIE in a term or near-term infant with a sentinel perinatal event, low Apgar scores, need for resuscitation, and a cord",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neonatology",
+  "specialty": "Neonatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cloherty and Stark Manual of Neonatal Care / Volpe's Neurology of the Newborn",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Suspect HIE in a term or near-term infant with a sentinel perinatal event, low Apgar scores, need for resuscitation, and a cord or early arterial blood gas showing severe metabolic acidaemia",
+      "Severity is graded clinically using the Sarnat staging (mild, moderate, severe) based on level of consciousness, tone, primitive reflexes, autonomic function, and seizures",
+      "Therapeutic hypothermia is the cornerstone of neuroprotection and is most effective when started within the therapeutic window in the first hours after birth in infants meeting cooling criteria",
+      "Injury evolves in phases: initial insult, a latent period, then delayed secondary energy failure over the following hours to days, which is the rationale for early cooling",
+      "Amplitude-integrated EEG and conventional EEG help assess background activity, detect subclinical seizures, and support prognostication",
+      "Multi-organ dysfunction is common, affecting the kidneys, liver, heart, gut, and coagulation, so HIE is a systemic as well as a neurological condition",
+      "MRI with diffusion-weighted imaging, typically performed in the first days to weeks, is the most useful investigation for defining injury pattern and prognosis"
     ],
-    [
-     "Key Investigations",
-     "Cord and early neonatal arterial blood gas with lactate to document metabolic acidaemia, Amplitude-integrated and conventional",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hypoxic-ischaemic encephalopathy results from a perinatal reduction in cerebral blood flow and oxygen delivery. The acute insult causes primary energy failure with anaerobic metabolism, lactic acidosis, and failure of ion pumps, leading to cytotoxic oedema and early cell death. After partial recovery of oxygenation and perfusion there is a latent phase, followed by delayed secondary energy failure driven by excitotoxicity from excess glutamate, mitochondrial dysfunction, oxidative stress, and inflammatory and apoptotic cascades over the subsequent hours to days. This delayed injury provides the therapeutic window during which cooling can reduce neuronal loss. The pattern of injury depends on the severity and duration of the insult, with the basal ganglia, thalamus, and perirolandic cortex affected in acute profound events and watershed regions in prolonged partial insults.",
+    "additionalDifferentials": [
+      "Neonatal sepsis or meningitis with encephalopathy",
+      "Inborn errors of metabolism presenting with acute encephalopathy",
+      "Neonatal stroke or intracranial haemorrhage",
+      "Congenital brain malformation or genetic encephalopathy",
+      "Neuromuscular disorder causing hypotonia and poor respiratory effort",
+      "Drug exposure or maternal sedation causing neonatal depression"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal sepsis or meningitis with encephalopathy, Inborn errors of metabolism presenting with acute encephalopathy, Neonatal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cord and early neonatal arterial blood gas with lactate to document metabolic acidaemia",
+      "Amplitude-integrated and conventional EEG for background grading and seizure detection",
+      "Brain MRI with diffusion-weighted imaging to define injury pattern and prognosis",
+      "Cranial ultrasound as an early bedside adjunct to exclude haemorrhage or major structural lesion",
+      "Multi-organ monitoring including renal function, liver enzymes, coagulation, and cardiac assessment",
+      "Metabolic and infective screen when the presentation is atypical"
     ],
-    [
-     "Management Strategy",
-     "Start therapeutic hypothermia as the cornerstone of neuroprotection within the therapeutic window in the first hours after birth",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe (Sarnat stage 3) encephalopathy with coma, absent brainstem reflexes, and flaccid tone",
+      "Refractory or prolonged seizures and a severely suppressed or burst-suppression EEG background",
+      "Profound multi-organ failure with anuria, coagulopathy, or cardiovascular collapse",
+      "Persistent severe acidaemia or deterioration despite resuscitation and supportive care"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying assessment for cooling so that the therapeutic window is missed",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the severity and pattern of injury: mild encephalopathy usually has a favourable outcome, whereas moderate and severe HIE carry substantial risk of death or long-term disability including cerebral palsy, cognitive impairment, and epilepsy. Therapeutic hypothermia improves survival free of disability in eligible infants, but severe injury on EEG and MRI predicts poor neurodevelopmental outcome.",
+    "pitfalls": [
+      "Delaying assessment for cooling so that the therapeutic window is missed",
+      "Attributing all encephalopathy to hypoxia-ischaemia and overlooking sepsis, metabolic disease, or stroke",
+      "Missing subclinical (electrographic) seizures because there are no visible clinical signs",
+      "Overheating or allowing temperature instability, which can worsen brain injury",
+      "Offering firm prognosis too early before EEG and MRI findings are available"
+    ],
+    "references": [
+      "Cloherty and Stark Manual of Neonatal Care",
+      "Volpe's Neurology of the Newborn"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start therapeutic hypothermia as the cornerstone of neuroprotection within the therapeutic window in the first hours after birth for infants meeting cooling criteria, with controlled rewarming afterwards",
+      "Deliver supportive neonatal intensive care maintaining normoxia, normocapnia, normoglycaemia and normal blood pressure while avoiding hyperthermia",
+      "Detect and treat clinical and subclinical seizures with antiseizure medication (phenobarbital first-line) guided by amplitude-integrated and conventional EEG",
+      "Recognise and manage systemic multi-organ dysfunction of the kidneys, liver, heart, gut and coagulation with judicious fluids and organ support",
+      "Rule out and treat alternative causes of encephalopathy including sepsis, metabolic disease and perinatal stroke",
+      "Use brain MRI with diffusion-weighted imaging and EEG for injury characterisation and prognostication",
+      "Provide family counselling and coordinate long-term neurodevelopmental follow-up with early intervention"
     ]
-   ],
-   "caption": "Overview comparison matrix for neonatal hypoxic-ischaemic encephalopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypoxic-ischemic-encephalopathy-real-image",
-   "title": "Neonatal hypoxic-ischaemic encephalopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hypoxic_ischemic_encephalopathy-pathway",
+      "title": "Neonatal hypoxic-ischaemic encephalopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Suspect HIE in a term or near-term infant with a sentinel perinatal event, low Apgar scores, need for resuscitation, and a cord or early arterial blood gas showing severe metabolic acidaemia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe (Sarnat stage 3) encephalopathy with coma, absent brainstem reflexes, and flaccid tone",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cord and early neonatal arterial blood gas with lactate to document metabolic acidaemia, Amplitude-integrated and conventional EEG for background grading and seizure detection, Brain MRI with diffusion-weighted imaging to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start therapeutic hypothermia as the cornerstone of neuroprotection within the therapeutic window in the first hours after birth for infants meeting cooling criteria, with controlled rewarming afterwards"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying assessment for cooling so that the therapeutic window is missed"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neonatal hypoxic-ischaemic encephalopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypoxic_ischemic_encephalopathy-matrix",
+      "title": "Neonatal hypoxic-ischaemic encephalopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Suspect HIE in a term or near-term infant with a sentinel perinatal event, low Apgar scores, need for resuscitation, and a cord",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cord and early neonatal arterial blood gas with lactate to document metabolic acidaemia, Amplitude-integrated and conventional",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal sepsis or meningitis with encephalopathy, Inborn errors of metabolism presenting with acute encephalopathy, Neonatal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start therapeutic hypothermia as the cornerstone of neuroprotection within the therapeutic window in the first hours after birth",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying assessment for cooling so that the therapeutic window is missed",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neonatal hypoxic-ischaemic encephalopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cloherty and Stark Manual of Neonatal Care / Volpe's Neurology of the Newborn",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypoxic_ischemic_encephalopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cord and early arterial blood gas with lactate",
+          "cells": [
+            {
+              "text": "Documents metabolic acidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amplitude-integrated and conventional EEG",
+          "cells": [
+            {
+              "text": "Background grading and seizure detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI with diffusion-weighted imaging",
+          "cells": [
+            {
+              "text": "Injury pattern and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial ultrasound",
+          "cells": [
+            {
+              "text": "Haemorrhage or major structural lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multi-organ monitoring",
+          "cells": [
+            {
+              "text": "Renal function, liver enzymes, coagulation and cardiac assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and infective screen",
+          "cells": [
+            {
+              "text": "Used when the presentation is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarnat staging",
+          "cells": [
+            {
+              "text": "Mild, moderate or severe, by consciousness, tone, reflexes, autonomic function and seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypoxic_ischemic_encephalopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal sepsis or meningitis",
+          "cells": [
+            {
+              "text": "Infective screen when the presentation is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inborn errors of metabolism",
+          "cells": [
+            {
+              "text": "Metabolic screen when the presentation is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal stroke or intracranial haemorrhage",
+          "cells": [
+            {
+              "text": "Cranial ultrasound, and MRI with diffusion-weighted imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypoxic_ischemic_encephalopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic hypothermia",
+          "cells": [
+            {
+              "text": "Cornerstone of neuroprotection for cooling criteria, started in the first hours; controlled rewarming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive intensive care",
+          "cells": [
+            {
+              "text": "Normoxia, normocapnia, normoglycaemia and normal blood pressure; avoid hyperthermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures",
+          "cells": [
+            {
+              "text": "Antiseizure medication, phenobarbital first-line, guided by EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multi-organ dysfunction",
+          "cells": [
+            {
+              "text": "Judicious fluids and organ support for kidneys, liver, heart, gut and coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative causes",
+          "cells": [
+            {
+              "text": "Treat sepsis, metabolic disease or perinatal stroke when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Injury and prognosis",
+          "cells": [
+            {
+              "text": "MRI with diffusion-weighted imaging and EEG; avoid firm prognosis too early"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypoxic_ischemic_encephalopathy-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal hypoxic-ischaemic encephalopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Term infant with sentinel event, low Apgar scores and severe metabolic acidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sarnat stage 3, refractory seizures, multi-organ failure or persistent acidaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: severe injury, multi-organ support and prognosis discussion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood gas, lactate, aEEG and EEG, cranial ultrasound, MRI with DWI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cooling criteria met within the therapeutic window?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess for sepsis, metabolic disease or stroke; repeat evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Therapeutic hypothermia in the first hours, then controlled rewarming",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Maintain normoxia, normocapnia, normoglycaemia and normal blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Phenobarbital first-line for seizures, guided by aEEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Judicious fluids and organ support for multi-organ dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "MRI with diffusion-weighted imaging and EEG for injury and prognosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Neuroprotection given; prognosis refined by MRI and EEG findings",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

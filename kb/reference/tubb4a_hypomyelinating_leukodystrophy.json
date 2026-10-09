@@ -1,177 +1,475 @@
 {
- "id": "tubb4a_hypomyelinating_leukodystrophy",
- "name": "TUBB4A-related hypomyelinating leukodystrophy",
- "aliases": [
-  "TUBB4A leukodystrophy",
-  "HLD6",
-  "tubulinopathy hypomyelination",
-  "isolated hypomyelination with TUBB4A",
-  "DYT4-associated leukodystrophy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A hypomyelinating leukodystrophy caused by variants in TUBB4A, encoding a central-nervous-system beta-tubulin isotype, spanning a wide clinical spectrum",
-   "At one end is severe hypomyelination with atrophy of the basal ganglia and cerebellum (H-ABC); at the other are milder or isolated hypomyelination and the dominant dystonia syndrome DYT4 (whispering dysphonia with generalised dystonia and ataxia)",
-   "Milder cases may show hypomyelination on MRI with little or no striatal atrophy, so imaging appearances range from pure hypomyelination to the full H-ABC pattern of a shrinking putamen and caudate",
-   "Clinical features commonly include a movement disorder (dystonia, spasticity, chorea), cerebellar ataxia, dysarthria and variable developmental involvement",
-   "Most disease-causing variants arise de novo and are dominant, though inherited variants (including the DYT4 variant) occur, so family history may be positive or negative",
-   "Diagnosis is guided by recognition of a hypomyelinating pattern with or without basal ganglia and cerebellar atrophy, confirmed by TUBB4A sequencing",
-   "There is no specific therapy; management is supportive and multidisciplinary, targeting dystonia and spasticity, communication, nutrition and physiotherapy"
+  "id": "tubb4a_hypomyelinating_leukodystrophy",
+  "name": "TUBB4A-related hypomyelinating leukodystrophy",
+  "aliases": [
+    "TUBB4A leukodystrophy",
+    "HLD6",
+    "tubulinopathy hypomyelination",
+    "isolated hypomyelination with TUBB4A",
+    "DYT4-associated leukodystrophy"
   ],
-  "pathophysiology": "TUBB4A-related disease is caused by dominant variants in TUBB4A, which encodes a beta-tubulin isotype highly expressed in the brain. Tubulin heterodimers assemble into microtubules that are essential for cell shape, intracellular transport and division. Variant tubulin perturbs microtubule dynamics in oligodendrocytes and neurons; disrupted oligodendrocyte function impairs myelin formation to produce hypomyelination, while neuronal microtubule dysfunction contributes to degeneration of the striatum and cerebellum in more severe cases. The particular variant strongly influences where on the spectrum a patient falls, from isolated hypomyelination to full H-ABC.",
-  "additionalDifferentials": [
-   "Hypomyelination with atrophy of basal ganglia and cerebellum (the severe TUBB4A phenotype)",
-   "Pelizaeus-Merzbacher and Pelizaeus-Merzbacher-like disease",
-   "POLR3-related (4H) leukodystrophy",
-   "Hypomyelination with congenital cataract (FAM126A)",
-   "Other tubulinopathies and cortical malformation syndromes",
-   "Primary dystonia syndromes when the movement disorder dominates"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to characterise the degree of hypomyelination and any basal ganglia or cerebellar atrophy",
-   "TUBB4A sequencing, including analysis for the recurrent H-ABC variant and the DYT4 variant",
-   "Hypomyelinating leukodystrophy gene panel or exome if TUBB4A is negative",
-   "Metabolic screen to exclude treatable causes of a hypomyelinating or movement-disorder phenotype",
-   "Movement-disorder assessment to guide symptomatic management",
-   "Speech, swallow and developmental evaluation as clinically indicated"
-  ],
-  "redFlags": [
-   "Status dystonicus with severe dystonia, pain and metabolic disturbance",
-   "Progressive dysphagia with aspiration and faltering growth",
-   "Rapid neurological regression suggesting intercurrent illness or an alternative cause",
-   "Respiratory compromise from bulbar and truncal involvement"
-  ],
-  "prognosis": "Prognosis varies markedly across the TUBB4A spectrum: severe early-onset (H-ABC) disease is progressive with substantial motor and cognitive disability and reduced life expectancy, whereas milder hypomyelination and the DYT4 dystonia phenotype can follow a more indolent course. The specific variant is the main determinant of severity and rate of progression.",
-  "pitfalls": [
-   "Not appreciating the breadth of the TUBB4A spectrum and expecting only the severe H-ABC picture",
-   "Overlooking basal ganglia atrophy or, conversely, excluding the diagnosis when striatal atrophy is absent in milder cases",
-   "Assuming autosomal recessive inheritance when most variants are de novo dominant",
-   "Missing the DYT4 dystonia phenotype as part of the same gene's spectrum",
-   "Failing to counsel families about recurrence risk, including germline mosaicism"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [
-   "hypomyelination_atrophy_basal_ganglia_cerebellum"
-  ],
-  "management": [
-   "Manage the movement disorder symptomatically, treating dystonia with agents such as trihexyphenidyl or baclofen and using botulinum toxin for focal dystonia",
-   "Provide physiotherapy and occupational therapy for spasticity, ataxia and mobility, with orthoses and aids as needed",
-   "Offer speech and language therapy for dysarthria and swallow assessment with nutritional support where feeding is impaired",
-   "Provide developmental support and manage any seizures",
-   "Coordinate multidisciplinary neurology-led follow-up across the wide clinical spectrum",
-   "Offer genetic counselling, noting most variants arise de novo while some, including the DYT4 variant, are inherited dominantly"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tubb4a_hypomyelinating_leukodystrophy-pathway",
-   "title": "TUBB4A-related hypomyelinating leukodystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A hypomyelinating leukodystrophy caused by variants in TUBB4A, encoding a central-nervous-system beta-tubulin isotype, spanning a wide clinical spectrum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Status dystonicus with severe dystonia, pain and metabolic disturbance",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to characterise the degree of hypomyelination and any basal ganglia or cerebellar atrophy, TUBB4A sequencing, including analysis for the recurrent H-ABC variant and the DYT4 variant, Hypomyelinating"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the movement disorder symptomatically, treating dystonia with agents such as trihexyphenidyl or baclofen and using botulinum toxin for focal dystonia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not appreciating the breadth of the TUBB4A spectrum and expecting only the severe H-ABC picture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tubb4a-related hypomyelinating leukodystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "tubb4a_hypomyelinating_leukodystrophy-matrix",
-   "title": "TUBB4A-related hypomyelinating leukodystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A hypomyelinating leukodystrophy caused by variants in TUBB4A, encoding a central-nervous-system beta-tubulin isotype, spanning a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A hypomyelinating leukodystrophy caused by variants in TUBB4A, encoding a central-nervous-system beta-tubulin isotype, spanning a wide clinical spectrum",
+      "At one end is severe hypomyelination with atrophy of the basal ganglia and cerebellum (H-ABC); at the other are milder or isolated hypomyelination and the dominant dystonia syndrome DYT4 (whispering dysphonia with generalised dystonia and ataxia)",
+      "Milder cases may show hypomyelination on MRI with little or no striatal atrophy, so imaging appearances range from pure hypomyelination to the full H-ABC pattern of a shrinking putamen and caudate",
+      "Clinical features commonly include a movement disorder (dystonia, spasticity, chorea), cerebellar ataxia, dysarthria and variable developmental involvement",
+      "Most disease-causing variants arise de novo and are dominant, though inherited variants (including the DYT4 variant) occur, so family history may be positive or negative",
+      "Diagnosis is guided by recognition of a hypomyelinating pattern with or without basal ganglia and cerebellar atrophy, confirmed by TUBB4A sequencing",
+      "There is no specific therapy; management is supportive and multidisciplinary, targeting dystonia and spasticity, communication, nutrition and physiotherapy"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to characterise the degree of hypomyelination and any basal ganglia or cerebellar atrophy, TUBB4A sequencing, including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "TUBB4A-related disease is caused by dominant variants in TUBB4A, which encodes a beta-tubulin isotype highly expressed in the brain. Tubulin heterodimers assemble into microtubules that are essential for cell shape, intracellular transport and division. Variant tubulin perturbs microtubule dynamics in oligodendrocytes and neurons; disrupted oligodendrocyte function impairs myelin formation to produce hypomyelination, while neuronal microtubule dysfunction contributes to degeneration of the striatum and cerebellum in more severe cases. The particular variant strongly influences where on the spectrum a patient falls, from isolated hypomyelination to full H-ABC.",
+    "additionalDifferentials": [
+      "Hypomyelination with atrophy of basal ganglia and cerebellum (the severe TUBB4A phenotype)",
+      "Pelizaeus-Merzbacher and Pelizaeus-Merzbacher-like disease",
+      "POLR3-related (4H) leukodystrophy",
+      "Hypomyelination with congenital cataract (FAM126A)",
+      "Other tubulinopathies and cortical malformation syndromes",
+      "Primary dystonia syndromes when the movement disorder dominates"
     ],
-    [
-     "Primary Differentials",
-     "Hypomyelination with atrophy of basal ganglia and cerebellum (the severe TUBB4A phenotype), Pelizaeus-Merzbacher and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to characterise the degree of hypomyelination and any basal ganglia or cerebellar atrophy",
+      "TUBB4A sequencing, including analysis for the recurrent H-ABC variant and the DYT4 variant",
+      "Hypomyelinating leukodystrophy gene panel or exome if TUBB4A is negative",
+      "Metabolic screen to exclude treatable causes of a hypomyelinating or movement-disorder phenotype",
+      "Movement-disorder assessment to guide symptomatic management",
+      "Speech, swallow and developmental evaluation as clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Manage the movement disorder symptomatically, treating dystonia with agents such as trihexyphenidyl or baclofen and using",
-     "Core treatment modality"
+    "redFlags": [
+      "Status dystonicus with severe dystonia, pain and metabolic disturbance",
+      "Progressive dysphagia with aspiration and faltering growth",
+      "Rapid neurological regression suggesting intercurrent illness or an alternative cause",
+      "Respiratory compromise from bulbar and truncal involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Not appreciating the breadth of the TUBB4A spectrum and expecting only the severe H-ABC picture",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies markedly across the TUBB4A spectrum: severe early-onset (H-ABC) disease is progressive with substantial motor and cognitive disability and reduced life expectancy, whereas milder hypomyelination and the DYT4 dystonia phenotype can follow a more indolent course. The specific variant is the main determinant of severity and rate of progression.",
+    "pitfalls": [
+      "Not appreciating the breadth of the TUBB4A spectrum and expecting only the severe H-ABC picture",
+      "Overlooking basal ganglia atrophy or, conversely, excluding the diagnosis when striatal atrophy is absent in milder cases",
+      "Assuming autosomal recessive inheritance when most variants are de novo dominant",
+      "Missing the DYT4 dystonia phenotype as part of the same gene's spectrum",
+      "Failing to counsel families about recurrence risk, including germline mosaicism"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [
+      "hypomyelination_atrophy_basal_ganglia_cerebellum"
+    ],
+    "management": [
+      "Manage the movement disorder symptomatically, treating dystonia with agents such as trihexyphenidyl or baclofen and using botulinum toxin for focal dystonia",
+      "Provide physiotherapy and occupational therapy for spasticity, ataxia and mobility, with orthoses and aids as needed",
+      "Offer speech and language therapy for dysarthria and swallow assessment with nutritional support where feeding is impaired",
+      "Provide developmental support and manage any seizures",
+      "Coordinate multidisciplinary neurology-led follow-up across the wide clinical spectrum",
+      "Offer genetic counselling, noting most variants arise de novo while some, including the DYT4 variant, are inherited dominantly"
     ]
-   ],
-   "caption": "Overview comparison matrix for tubb4a-related hypomyelinating leukodystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tubb4a-hypomyelinating-leukodystrophy-real-image",
-   "title": "TUBB4A-related hypomyelinating leukodystrophy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "tubb4a_hypomyelinating_leukodystrophy-pathway",
+      "title": "TUBB4A-related hypomyelinating leukodystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A hypomyelinating leukodystrophy caused by variants in TUBB4A, encoding a central-nervous-system beta-tubulin isotype, spanning a wide clinical spectrum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Status dystonicus with severe dystonia, pain and metabolic disturbance",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to characterise the degree of hypomyelination and any basal ganglia or cerebellar atrophy, TUBB4A sequencing, including analysis for the recurrent H-ABC variant and the DYT4 variant, Hypomyelinating"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the movement disorder symptomatically, treating dystonia with agents such as trihexyphenidyl or baclofen and using botulinum toxin for focal dystonia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not appreciating the breadth of the TUBB4A spectrum and expecting only the severe H-ABC picture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tubb4a-related hypomyelinating leukodystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tubb4a_hypomyelinating_leukodystrophy-matrix",
+      "title": "TUBB4A-related hypomyelinating leukodystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A hypomyelinating leukodystrophy caused by variants in TUBB4A, encoding a central-nervous-system beta-tubulin isotype, spanning a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to characterise the degree of hypomyelination and any basal ganglia or cerebellar atrophy, TUBB4A sequencing, including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypomyelination with atrophy of basal ganglia and cerebellum (the severe TUBB4A phenotype), Pelizaeus-Merzbacher and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the movement disorder symptomatically, treating dystonia with agents such as trihexyphenidyl or baclofen and using",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not appreciating the breadth of the TUBB4A spectrum and expecting only the severe H-ABC picture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tubb4a-related hypomyelinating leukodystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tubb4a_hypomyelinating_leukodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of TUBB4A-related hypomyelinating leukodystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TUBB4A leukodystrophy: hypomyelination with dystonia, ataxia or spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: status dystonicus, progressive dysphagia or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intensive care input for status dystonicus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI for hypomyelination and atrophy; TUBB4A sequencing; metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TUBB4A sequencing confirm a pathogenic variant matching the MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Pelizaeus-Merzbacher disease, POLR3-related disease or primary dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trihexyphenidyl or baclofen for dystonia and spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Botulinum toxin for focal dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and orthoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech and language therapy with nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling noting most variants arise de novo",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe H-ABC form is progressive; milder and DYT4 forms are indolent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tubb4a_hypomyelinating_leukodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Degree of hypomyelination; basal ganglia and cerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TUBB4A sequencing",
+          "cells": [
+            {
+              "text": "Includes recurrent H-ABC and DYT4 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukodystrophy gene panel or exome",
+          "cells": [
+            {
+              "text": "If TUBB4A is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Exclude treatable causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement-disorder assessment",
+          "cells": [
+            {
+              "text": "Guides symptomatic management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech, swallow and developmental evaluation",
+          "cells": [
+            {
+              "text": "As clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tubb4a_hypomyelinating_leukodystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pelizaeus-Merzbacher disease",
+          "cells": [
+            {
+              "text": "Hypomyelination with a different gene; specific testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "POLR3-related (4H) leukodystrophy",
+          "cells": [
+            {
+              "text": "Hypomyelination from a different genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary dystonia syndromes",
+          "cells": [
+            {
+              "text": "Movement disorder without hypomyelination on MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tubb4a_hypomyelinating_leukodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trihexyphenidyl or baclofen",
+          "cells": [
+            {
+              "text": "Dystonia and spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Focal dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and orthoses",
+          "cells": [
+            {
+              "text": "Spasticity, ataxia and mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy and nutritional support",
+          "cells": [
+            {
+              "text": "Dysarthria and impaired feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support and seizure management",
+          "cells": [
+            {
+              "text": "As needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology-led multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Wide clinical spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

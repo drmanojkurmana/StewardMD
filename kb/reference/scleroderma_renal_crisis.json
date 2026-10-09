@@ -1,174 +1,584 @@
 {
- "id": "scleroderma_renal_crisis",
- "name": "Scleroderma renal crisis",
- "aliases": [
-  "SRC",
-  "systemic sclerosis renal crisis",
-  "scleroderma kidney",
-  "anti-RNA polymerase III"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Vascular",
- "specialty": "Rheumatology / Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with abrupt severe (often malignant) hypertension and rapidly rising creatinine, usually in early diffuse systemic sclerosis",
-   "Anti-RNA polymerase III antibodies and recent glucocorticoid exposure are important risk factors",
-   "A microangiopathic haemolytic anaemia with thrombocytopenia frequently accompanies the renal injury",
-   "Prompt angiotensin-converting enzyme inhibition is the cornerstone of treatment and can rescue kidney function even after dialysis is started",
-   "Headache, visual disturbance, encephalopathy, or acute pulmonary oedema may reflect the hypertensive emergency",
-   "A minority of cases are normotensive, which can delay recognition and worsen outcome",
-   "Glucocorticoids should be used cautiously and at the lowest effective exposure in at-risk patients because they may precipitate crisis"
+  "id": "scleroderma_renal_crisis",
+  "name": "Scleroderma renal crisis",
+  "aliases": [
+    "SRC",
+    "systemic sclerosis renal crisis",
+    "scleroderma kidney",
+    "anti-RNA polymerase III"
   ],
-  "pathophysiology": "Scleroderma renal crisis arises from obliterative vasculopathy of the renal arcuate and interlobular arteries, with intimal proliferation and luminal narrowing reducing renal blood flow. Consequent activation of the renin-angiotensin system produces severe hypertension, which further injures the vessel walls in a self-amplifying cycle. Endothelial damage in the small vessels drives a thrombotic microangiopathy with mechanical fragmentation of red cells and platelet consumption. Angiotensin-converting enzyme inhibition interrupts the renin-angiotensin drive and is therefore central to management.",
-  "additionalDifferentials": [
-   "Thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome",
-   "Malignant hypertension of other cause",
-   "Antineutrophil cytoplasmic antibody-associated vasculitis with renal involvement",
-   "Drug-induced thrombotic microangiopathy",
-   "Antiphospholipid syndrome with renal involvement",
-   "Acute glomerulonephritis"
-  ],
-  "additionalInvestigations": [
-   "Serial blood pressure measurement and renal function monitoring",
-   "Blood film for schistocytes with haptoglobin, lactate dehydrogenase, and platelet count",
-   "Urinalysis for proteinuria and haematuria",
-   "Anti-RNA polymerase III and systemic sclerosis autoantibody profiling",
-   "ADAMTS13 activity to help exclude thrombotic thrombocytopenic purpura",
-   "Renal biopsy in selected diagnostically uncertain cases"
-  ],
-  "redFlags": [
-   "Accelerated or malignant hypertension with encephalopathy or seizures",
-   "Rapidly rising creatinine with oligoanuria",
-   "Flash pulmonary oedema from hypertensive heart failure",
-   "Falling platelets with schistocytes signalling thrombotic microangiopathy"
-  ],
-  "prognosis": "Before the era of angiotensin-converting enzyme inhibition renal crisis was almost uniformly fatal; timely blood pressure control now allows many patients to recover renal function, though some remain dialysis-dependent and overall mortality stays significant.",
-  "pitfalls": [
-   "Withholding or stopping angiotensin-converting enzyme inhibition because creatinine rises initially",
-   "Missing a normotensive presentation and attributing renal failure to another cause",
-   "Confusing the microangiopathy with primary thrombotic thrombocytopenic purpura and giving inappropriate plasma exchange alone",
-   "Using unnecessary glucocorticoids in high-risk early diffuse disease"
-  ],
-  "references": [
-   "Kelley & Firestein's Textbook of Rheumatology",
-   "EULAR recommendations for the treatment of systemic sclerosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start an angiotensin-converting enzyme inhibitor promptly as the cornerstone, titrating to control blood pressure even if renal function transiently worsens",
-   "Add further antihypertensives such as calcium-channel blockers or other vasodilators if blood pressure remains uncontrolled",
-   "Withdraw or minimise glucocorticoids, which can precipitate crisis, and avoid nephrotoxic agents",
-   "Provide renal replacement therapy for severe acute kidney injury while continuing ACE inhibition, since recovery may still allow dialysis independence",
-   "Manage hypertensive-emergency complications such as encephalopathy and acute pulmonary oedema with intensive monitoring and supportive care",
-   "Monitor blood pressure, renal function, and the accompanying microangiopathic haemolytic anaemia and thrombocytopenia serially",
-   "Liaise closely with rheumatology and nephrology, and assess for kidney transplantation in those who remain dialysis-dependent"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scleroderma_renal_crisis-pathway",
-   "title": "Scleroderma renal crisis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with abrupt severe (often malignant) hypertension and rapidly rising creatinine, usually in early diffuse systemic sclerosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Accelerated or malignant hypertension with encephalopathy or seizures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial blood pressure measurement and renal function monitoring, Blood film for schistocytes with haptoglobin, lactate dehydrogenase, and platelet count, Urinalysis for proteinuria and haematuria"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start an angiotensin-converting enzyme inhibitor promptly as the cornerstone, titrating to control blood pressure even if renal function transiently worsens"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Withholding or stopping angiotensin-converting enzyme inhibition because creatinine rises initially"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scleroderma renal crisis."
-  }
- ],
- "tables": [
-  {
-   "id": "scleroderma_renal_crisis-matrix",
-   "title": "Scleroderma renal crisis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with abrupt severe (often malignant) hypertension and rapidly rising creatinine, usually in early diffuse systemic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Vascular",
+  "specialty": "Rheumatology / Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with abrupt severe (often malignant) hypertension and rapidly rising creatinine, usually in early diffuse systemic sclerosis",
+      "Anti-RNA polymerase III antibodies and recent glucocorticoid exposure are important risk factors",
+      "A microangiopathic haemolytic anaemia with thrombocytopenia frequently accompanies the renal injury",
+      "Prompt angiotensin-converting enzyme inhibition is the cornerstone of treatment and can rescue kidney function even after dialysis is started",
+      "Headache, visual disturbance, encephalopathy, or acute pulmonary oedema may reflect the hypertensive emergency",
+      "A minority of cases are normotensive, which can delay recognition and worsen outcome",
+      "Glucocorticoids should be used cautiously and at the lowest effective exposure in at-risk patients because they may precipitate crisis"
     ],
-    [
-     "Key Investigations",
-     "Serial blood pressure measurement and renal function monitoring, Blood film for schistocytes with haptoglobin, lactate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scleroderma renal crisis arises from obliterative vasculopathy of the renal arcuate and interlobular arteries, with intimal proliferation and luminal narrowing reducing renal blood flow. Consequent activation of the renin-angiotensin system produces severe hypertension, which further injures the vessel walls in a self-amplifying cycle. Endothelial damage in the small vessels drives a thrombotic microangiopathy with mechanical fragmentation of red cells and platelet consumption. Angiotensin-converting enzyme inhibition interrupts the renin-angiotensin drive and is therefore central to management.",
+    "additionalDifferentials": [
+      "Thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome",
+      "Malignant hypertension of other cause",
+      "Antineutrophil cytoplasmic antibody-associated vasculitis with renal involvement",
+      "Drug-induced thrombotic microangiopathy",
+      "Antiphospholipid syndrome with renal involvement",
+      "Acute glomerulonephritis"
     ],
-    [
-     "Primary Differentials",
-     "Thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome, Malignant hypertension of other cause, Antineutrophil",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial blood pressure measurement and renal function monitoring",
+      "Blood film for schistocytes with haptoglobin, lactate dehydrogenase, and platelet count",
+      "Urinalysis for proteinuria and haematuria",
+      "Anti-RNA polymerase III and systemic sclerosis autoantibody profiling",
+      "ADAMTS13 activity to help exclude thrombotic thrombocytopenic purpura",
+      "Renal biopsy in selected diagnostically uncertain cases"
     ],
-    [
-     "Management Strategy",
-     "Start an angiotensin-converting enzyme inhibitor promptly as the cornerstone, titrating to control blood pressure even if renal",
-     "Core treatment modality"
+    "redFlags": [
+      "Accelerated or malignant hypertension with encephalopathy or seizures",
+      "Rapidly rising creatinine with oligoanuria",
+      "Flash pulmonary oedema from hypertensive heart failure",
+      "Falling platelets with schistocytes signalling thrombotic microangiopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Withholding or stopping angiotensin-converting enzyme inhibition because creatinine rises initially",
-     "Prevent diagnostic or management error"
+    "prognosis": "Before the era of angiotensin-converting enzyme inhibition renal crisis was almost uniformly fatal; timely blood pressure control now allows many patients to recover renal function, though some remain dialysis-dependent and overall mortality stays significant.",
+    "pitfalls": [
+      "Withholding or stopping angiotensin-converting enzyme inhibition because creatinine rises initially",
+      "Missing a normotensive presentation and attributing renal failure to another cause",
+      "Confusing the microangiopathy with primary thrombotic thrombocytopenic purpura and giving inappropriate plasma exchange alone",
+      "Using unnecessary glucocorticoids in high-risk early diffuse disease"
+    ],
+    "references": [
+      "Kelley & Firestein's Textbook of Rheumatology",
+      "EULAR recommendations for the treatment of systemic sclerosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start an angiotensin-converting enzyme inhibitor promptly as the cornerstone, titrating to control blood pressure even if renal function transiently worsens",
+      "Add further antihypertensives such as calcium-channel blockers or other vasodilators if blood pressure remains uncontrolled",
+      "Withdraw or minimise glucocorticoids, which can precipitate crisis, and avoid nephrotoxic agents",
+      "Provide renal replacement therapy for severe acute kidney injury while continuing ACE inhibition, since recovery may still allow dialysis independence",
+      "Manage hypertensive-emergency complications such as encephalopathy and acute pulmonary oedema with intensive monitoring and supportive care",
+      "Monitor blood pressure, renal function, and the accompanying microangiopathic haemolytic anaemia and thrombocytopenia serially",
+      "Liaise closely with rheumatology and nephrology, and assess for kidney transplantation in those who remain dialysis-dependent"
     ]
-   ],
-   "caption": "Overview comparison matrix for scleroderma renal crisis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scleroderma-renal-crisis-real-image",
-   "title": "Scleroderma renal crisis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "scleroderma_renal_crisis-pathway",
+      "title": "Scleroderma renal crisis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with abrupt severe (often malignant) hypertension and rapidly rising creatinine, usually in early diffuse systemic sclerosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Accelerated or malignant hypertension with encephalopathy or seizures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial blood pressure measurement and renal function monitoring, Blood film for schistocytes with haptoglobin, lactate dehydrogenase, and platelet count, Urinalysis for proteinuria and haematuria"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start an angiotensin-converting enzyme inhibitor promptly as the cornerstone, titrating to control blood pressure even if renal function transiently worsens"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Withholding or stopping angiotensin-converting enzyme inhibition because creatinine rises initially"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scleroderma renal crisis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scleroderma_renal_crisis-matrix",
+      "title": "Scleroderma renal crisis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with abrupt severe (often malignant) hypertension and rapidly rising creatinine, usually in early diffuse systemic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial blood pressure measurement and renal function monitoring, Blood film for schistocytes with haptoglobin, lactate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome, Malignant hypertension of other cause, Antineutrophil",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start an angiotensin-converting enzyme inhibitor promptly as the cornerstone, titrating to control blood pressure even if renal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Withholding or stopping angiotensin-converting enzyme inhibition because creatinine rises initially",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scleroderma renal crisis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 323-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scleroderma_renal_crisis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial blood pressure and renal function",
+          "cells": [
+            {
+              "text": "Accelerated hypertension and rising creatinine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film, haptoglobin, LDH, platelets",
+          "cells": [
+            {
+              "text": "Schistocytes and microangiopathic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Proteinuria and haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-RNA polymerase III and SSc antibody profile",
+          "cells": [
+            {
+              "text": "Autoantibody risk markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADAMTS13 activity",
+          "cells": [
+            {
+              "text": "Helps exclude TTP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy",
+          "cells": [
+            {
+              "text": "Selected diagnostically uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleroderma_renal_crisis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thrombotic thrombocytopenic purpura or HUS",
+          "cells": [
+            {
+              "text": "Excluded in part by ADAMTS13 activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA-associated vasculitis with renal involvement",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced thrombotic microangiopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleroderma_renal_crisis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor",
+          "cells": [
+            {
+              "text": "Start promptly as cornerstone; titrate to control blood pressure even if renal function transiently worsens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional antihypertensives",
+          "cells": [
+            {
+              "text": "Calcium-channel blockers or other vasodilators if still uncontrolled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoids and nephrotoxins",
+          "cells": [
+            {
+              "text": "Withdraw or minimise glucocorticoids; avoid nephrotoxic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Severe AKI; continue ACE inhibition as dialysis independence may recover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication care",
+          "cells": [
+            {
+              "text": "Hypertensive encephalopathy and pulmonary oedema with intensive monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure, renal function, haemolytic anaemia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Rheumatology and nephrology; assess for transplantation if dialysis-dependent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleroderma_renal_crisis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Organ involvement in limited and diffuse cutaneous systemic sclerosis (% of patients)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Limited cutaneous SSc (%)",
+        "Diffuse cutaneous SSc (%)"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin involvement",
+          "cells": [
+            {
+              "text": "90"
+            },
+            {
+              "text": "100"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Raynaud's phenomenon",
+          "cells": [
+            {
+              "text": "99"
+            },
+            {
+              "text": "98"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Esophageal involvement",
+          "cells": [
+            {
+              "text": "90"
+            },
+            {
+              "text": "80"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary fibrosis",
+          "cells": [
+            {
+              "text": "35"
+            },
+            {
+              "text": "65"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary arterial hypertension",
+          "cells": [
+            {
+              "text": "15"
+            },
+            {
+              "text": "15"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myopathy",
+          "cells": [
+            {
+              "text": "11"
+            },
+            {
+              "text": "23"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac involvement",
+          "cells": [
+            {
+              "text": "9"
+            },
+            {
+              "text": "12"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Scleroderma renal crisis",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "15"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The 90 for skin involvement in limited disease carries an asterisk in the source whose footnote text is not printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scleroderma_renal_crisis-dx-mgmt",
+      "title": "Diagnosis and management of Scleroderma renal crisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Systemic sclerosis with new severe hypertension or rising creatinine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypertensive encephalopathy, oligoanuria, pulmonary oedema or schistocytes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency admission: ACE inhibitor, intensive monitoring, dialysis if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BP, creatinine, blood film, haptoglobin, LDH, platelets, urinalysis, ADAMTS13",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypertension with renal failure and microangiopathy in systemic sclerosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider TTP/HUS, ANCA vasculitis or other thrombotic microangiopathy; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start ACE inhibitor promptly and titrate to blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add calcium-channel blocker or vasodilator if uncontrolled",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw glucocorticoids and avoid nephrotoxins",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dialysis for severe AKI while continuing ACE inhibition",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Timely control allows many to recover; some stay dialysis-dependent and need transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

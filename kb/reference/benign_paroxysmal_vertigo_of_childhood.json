@@ -1,175 +1,233 @@
 {
- "id": "benign_paroxysmal_vertigo_of_childhood",
- "name": "Benign paroxysmal vertigo of childhood",
- "aliases": [
-  "benign paroxysmal vertigo",
-  "childhood periodic syndrome (vertiginous type)"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Paediatric neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / Swaiman's Pediatric Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "One of the episodic syndromes that may be associated with migraine (ICHD-3), formerly grouped with the childhood periodic syndromes; most affected children have a strong family history of migraine or later develop migraine themselves",
-   "Presents in toddlers and preschool children (typically 2-4 years) with recurrent, sudden, brief attacks of vertigo and unsteadiness lasting minutes and resolving spontaneously",
-   "During an attack the child suddenly appears frightened, off-balance or refuses to walk, may clutch a parent and become pale, sweaty or nauseated; observable nystagmus supports the diagnosis",
-   "Consciousness is fully preserved with no ictal confusion or postictal drowsiness, which helps distinguish attacks from epileptic seizures",
-   "Attacks are stereotyped and self-limiting and the child is entirely well between episodes, with a normal neurological and audiological examination",
-   "Diagnosis is clinical using ICHD-3 criteria (at least five stereotyped attacks with spontaneous resolution and normal examination and investigations between attacks); routine investigation is not needed in typical cases",
-   "The condition remits spontaneously over months to a few years and is often followed by more typical migraine headaches later in childhood or adolescence",
-   "Reassurance is the mainstay of management; migraine-preventive strategies are reserved for frequent or disabling attacks"
+  "id": "benign_paroxysmal_vertigo_of_childhood",
+  "name": "Benign paroxysmal vertigo of childhood",
+  "aliases": [
+    "benign paroxysmal vertigo",
+    "childhood periodic syndrome (vertiginous type)"
   ],
-  "pathophysiology": "Benign paroxysmal vertigo of childhood is regarded as part of the migraine spectrum and a migraine precursor. Attacks are thought to arise from transient dysfunction of central vestibular pathways, plausibly driven by the same paroxysmal neuronal excitability, channel dysfunction and brainstem/trigeminovascular mechanisms that underlie migraine. The strong association with a personal or family history of migraine, and the tendency to evolve into typical migraine, support a shared pathophysiology; a subset overlaps with the calcium-channel dysfunction seen in familial hemiplegic migraine.",
-  "additionalDifferentials": [
-   "Epileptic seizures, particularly focal seizures with a vestibular or temporal aura",
-   "Peripheral labyrinthine disorders including vestibular neuritis and labyrinthitis",
-   "Benign paroxysmal positional vertigo in older children",
-   "Posterior fossa tumour affecting the brainstem or cerebellum",
-   "Vestibular migraine in older children and adolescents",
-   "Benign paroxysmal torticollis of infancy and paroxysmal tonic upgaze",
-   "Cardiac arrhythmia causing presyncope"
-  ],
-  "additionalInvestigations": [
-   "Detailed history and eyewitness account or home video of the attacks",
-   "Neurological and otological examination performed between attacks",
-   "Audiometry and vestibular testing if there is hearing loss or persistent signs",
-   "EEG only if epileptic seizures are seriously suspected (usually normal)",
-   "MRI brain if there are atypical features, persistent nystagmus or posterior fossa signs",
-   "ECG to exclude a cardiac cause of episodic events where the history is atypical"
-  ],
-  "redFlags": [
-   "Persistent or interictal nystagmus, ataxia or other neurological signs suggesting a posterior fossa lesion",
-   "Hearing loss or tinnitus pointing to a peripheral or structural cause",
-   "Headache with early-morning vomiting, papilloedema or increasing head circumference",
-   "Progressive or worsening attacks, or a new focal neurological deficit",
-   "Altered consciousness during episodes, which points towards seizures"
-  ],
-  "prognosis": "The outlook is excellent; it is a benign, self-limiting condition that resolves spontaneously over months to a few years. Many children subsequently develop migraine in later childhood or adolescence.",
-  "pitfalls": [
-   "Misdiagnosing attacks as epileptic seizures and starting antiepileptic drugs",
-   "Failing to recognise the strong link with migraine and the family history",
-   "Overlooking a posterior fossa tumour when interictal neurological signs are present",
-   "Ordering unnecessary investigations in a child with a typical, self-limiting picture",
-   "Confusing it with benign paroxysmal torticollis or other paroxysmal infantile syndromes"
-  ],
-  "references": [
-   "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
-   "Swaiman's Pediatric Neurology: Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the family that this is a benign migraine-related syndrome that resolves spontaneously and needs no routine drug treatment",
-   "Manage attacks with reassurance and a safe environment during the brief episodes of vertigo and unsteadiness",
-   "Advise on migraine hygiene including regular sleep, hydration and trigger avoidance given the migraine association",
-   "Monitor for evolution into typical migraine in later childhood and treat accordingly if it develops",
-   "Undertake interval neurological and audiological examination to confirm normal findings between attacks",
-   "Investigate with brain MRI and further testing, and escalate, if nystagmus persists, posterior fossa signs appear or features are atypical"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "benign_paroxysmal_vertigo_of_childhood-pathway",
-   "title": "Benign paroxysmal vertigo of childhood: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "One of the episodic syndromes that may be associated with migraine (ICHD-3), formerly grouped with the childhood periodic syndromes; most affected children have a strong family history of migraine or later develop migraine themselves",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent or interictal nystagmus, ataxia or other neurological signs suggesting a posterior fossa lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed history and eyewitness account or home video of the attacks, Neurological and otological examination performed between attacks, Audiometry and vestibular testing if there is hearing loss or persistent signs"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the family that this is a benign migraine-related syndrome that resolves spontaneously and needs no routine drug treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing attacks as epileptic seizures and starting antiepileptic drugs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of benign paroxysmal vertigo of childhood."
-  }
- ],
- "tables": [
-  {
-   "id": "benign_paroxysmal_vertigo_of_childhood-matrix",
-   "title": "Benign paroxysmal vertigo of childhood: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "One of the episodic syndromes that may be associated with migraine (ICHD-3), formerly grouped with the childhood periodic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Paediatric neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / Swaiman's Pediatric Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "One of the episodic syndromes that may be associated with migraine (ICHD-3), formerly grouped with the childhood periodic syndromes; most affected children have a strong family history of migraine or later develop migraine themselves",
+      "Presents in toddlers and preschool children (typically 2-4 years) with recurrent, sudden, brief attacks of vertigo and unsteadiness lasting minutes and resolving spontaneously",
+      "During an attack the child suddenly appears frightened, off-balance or refuses to walk, may clutch a parent and become pale, sweaty or nauseated; observable nystagmus supports the diagnosis",
+      "Consciousness is fully preserved with no ictal confusion or postictal drowsiness, which helps distinguish attacks from epileptic seizures",
+      "Attacks are stereotyped and self-limiting and the child is entirely well between episodes, with a normal neurological and audiological examination",
+      "Diagnosis is clinical using ICHD-3 criteria (at least five stereotyped attacks with spontaneous resolution and normal examination and investigations between attacks); routine investigation is not needed in typical cases",
+      "The condition remits spontaneously over months to a few years and is often followed by more typical migraine headaches later in childhood or adolescence",
+      "Reassurance is the mainstay of management; migraine-preventive strategies are reserved for frequent or disabling attacks"
     ],
-    [
-     "Key Investigations",
-     "Detailed history and eyewitness account or home video of the attacks, Neurological and otological examination performed between",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Benign paroxysmal vertigo of childhood is regarded as part of the migraine spectrum and a migraine precursor. Attacks are thought to arise from transient dysfunction of central vestibular pathways, plausibly driven by the same paroxysmal neuronal excitability, channel dysfunction and brainstem/trigeminovascular mechanisms that underlie migraine. The strong association with a personal or family history of migraine, and the tendency to evolve into typical migraine, support a shared pathophysiology; a subset overlaps with the calcium-channel dysfunction seen in familial hemiplegic migraine.",
+    "additionalDifferentials": [
+      "Epileptic seizures, particularly focal seizures with a vestibular or temporal aura",
+      "Peripheral labyrinthine disorders including vestibular neuritis and labyrinthitis",
+      "Benign paroxysmal positional vertigo in older children",
+      "Posterior fossa tumour affecting the brainstem or cerebellum",
+      "Vestibular migraine in older children and adolescents",
+      "Benign paroxysmal torticollis of infancy and paroxysmal tonic upgaze",
+      "Cardiac arrhythmia causing presyncope"
     ],
-    [
-     "Primary Differentials",
-     "Epileptic seizures, particularly focal seizures with a vestibular or temporal aura, Peripheral labyrinthine disorders including",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed history and eyewitness account or home video of the attacks",
+      "Neurological and otological examination performed between attacks",
+      "Audiometry and vestibular testing if there is hearing loss or persistent signs",
+      "EEG only if epileptic seizures are seriously suspected (usually normal)",
+      "MRI brain if there are atypical features, persistent nystagmus or posterior fossa signs",
+      "ECG to exclude a cardiac cause of episodic events where the history is atypical"
     ],
-    [
-     "Management Strategy",
-     "Reassure the family that this is a benign migraine-related syndrome that resolves spontaneously and needs no routine drug",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent or interictal nystagmus, ataxia or other neurological signs suggesting a posterior fossa lesion",
+      "Hearing loss or tinnitus pointing to a peripheral or structural cause",
+      "Headache with early-morning vomiting, papilloedema or increasing head circumference",
+      "Progressive or worsening attacks, or a new focal neurological deficit",
+      "Altered consciousness during episodes, which points towards seizures"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing attacks as epileptic seizures and starting antiepileptic drugs",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is excellent; it is a benign, self-limiting condition that resolves spontaneously over months to a few years. Many children subsequently develop migraine in later childhood or adolescence.",
+    "pitfalls": [
+      "Misdiagnosing attacks as epileptic seizures and starting antiepileptic drugs",
+      "Failing to recognise the strong link with migraine and the family history",
+      "Overlooking a posterior fossa tumour when interictal neurological signs are present",
+      "Ordering unnecessary investigations in a child with a typical, self-limiting picture",
+      "Confusing it with benign paroxysmal torticollis or other paroxysmal infantile syndromes"
+    ],
+    "references": [
+      "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
+      "Swaiman's Pediatric Neurology: Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the family that this is a benign migraine-related syndrome that resolves spontaneously and needs no routine drug treatment",
+      "Manage attacks with reassurance and a safe environment during the brief episodes of vertigo and unsteadiness",
+      "Advise on migraine hygiene including regular sleep, hydration and trigger avoidance given the migraine association",
+      "Monitor for evolution into typical migraine in later childhood and treat accordingly if it develops",
+      "Undertake interval neurological and audiological examination to confirm normal findings between attacks",
+      "Investigate with brain MRI and further testing, and escalate, if nystagmus persists, posterior fossa signs appear or features are atypical"
     ]
-   ],
-   "caption": "Overview comparison matrix for benign paroxysmal vertigo of childhood."
-  }
- ],
- "diagrams": [
-  {
-   "id": "benign-paroxysmal-vertigo-of-childhood-real-image",
-   "title": "Benign paroxysmal vertigo of childhood: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "benign_paroxysmal_vertigo_of_childhood-pathway",
+      "title": "Benign paroxysmal vertigo of childhood: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "One of the episodic syndromes that may be associated with migraine (ICHD-3), formerly grouped with the childhood periodic syndromes; most affected children have a strong family history of migraine or later develop migraine themselves",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent or interictal nystagmus, ataxia or other neurological signs suggesting a posterior fossa lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed history and eyewitness account or home video of the attacks, Neurological and otological examination performed between attacks, Audiometry and vestibular testing if there is hearing loss or persistent signs"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the family that this is a benign migraine-related syndrome that resolves spontaneously and needs no routine drug treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing attacks as epileptic seizures and starting antiepileptic drugs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of benign paroxysmal vertigo of childhood."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "benign_paroxysmal_vertigo_of_childhood-matrix",
+      "title": "Benign paroxysmal vertigo of childhood: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "One of the episodic syndromes that may be associated with migraine (ICHD-3), formerly grouped with the childhood periodic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed history and eyewitness account or home video of the attacks, Neurological and otological examination performed between",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epileptic seizures, particularly focal seizures with a vestibular or temporal aura, Peripheral labyrinthine disorders including",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the family that this is a benign migraine-related syndrome that resolves spontaneously and needs no routine drug",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing attacks as epileptic seizures and starting antiepileptic drugs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for benign paroxysmal vertigo of childhood."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / Swaiman's Pediatric Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "benign_paroxysmal_vertigo_of_childhood-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in benign paroxysmal vertigo of childhood",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "History, eyewitness account or home video", "cells": [{"text": "Stereotyped, sudden, brief attacks with consciousness preserved"}], "cite": "c1"},
+        {"parameter": "Neurological and otological examination between attacks", "cells": [{"text": "Normal between attacks"}], "cite": "c1"},
+        {"parameter": "Audiometry and vestibular testing", "cells": [{"text": "Used if there is hearing loss or persistent signs"}], "cite": "c1"},
+        {"parameter": "EEG", "cells": [{"text": "Only if epileptic seizures are seriously suspected; usually normal"}], "cite": "c1"},
+        {"parameter": "MRI brain", "cells": [{"text": "Used if atypical features, persistent nystagmus or posterior fossa signs"}], "cite": "c1"},
+        {"parameter": "ECG", "cells": [{"text": "Excludes a cardiac cause where the history is atypical"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_paroxysmal_vertigo_of_childhood-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for benign paroxysmal vertigo of childhood",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Epileptic seizures", "cells": [{"text": "Consciousness is fully preserved, with no ictal confusion or postictal drowsiness"}], "cite": "c1"},
+        {"parameter": "Vestibular neuritis or labyrinthitis", "cells": [{"text": "Hearing loss or tinnitus points to a peripheral cause"}], "cite": "c1"},
+        {"parameter": "Posterior fossa tumour", "cells": [{"text": "Persistent or interictal nystagmus, ataxia or other neurological signs"}], "cite": "c1"},
+        {"parameter": "Cardiac arrhythmia", "cells": [{"text": "Excluded with an ECG where the history is atypical"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_paroxysmal_vertigo_of_childhood-treatment",
+      "kind": "treatment",
+      "title": "Management options in benign paroxysmal vertigo of childhood",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "Explain a benign migraine-related syndrome that resolves spontaneously; no routine drug treatment"}, {"text": "Mainstay of management"}], "cite": "c1"},
+        {"parameter": "Care during attacks", "cells": [{"text": "Reassurance and a safe environment during brief episodes"}, {"text": "Episodes of vertigo and unsteadiness are brief"}], "cite": "c1"},
+        {"parameter": "Migraine hygiene", "cells": [{"text": "Regular sleep, hydration and trigger avoidance"}, {"text": "Given the migraine association"}], "cite": "c1"},
+        {"parameter": "Monitoring for migraine", "cells": [{"text": "Monitor for evolution into typical migraine and treat if it develops"}, {"text": "Often in later childhood or adolescence"}], "cite": "c1"},
+        {"parameter": "Interval examination", "cells": [{"text": "Neurological and audiological examination to confirm normal findings between attacks"}, {"text": "Performed between attacks"}], "cite": "c1"},
+        {"parameter": "Migraine-preventive strategies", "cells": [{"text": "Reserved for frequent or disabling attacks"}, {"text": "Not routine"}], "cite": "c1"},
+        {"parameter": "Further investigation", "cells": [{"text": "Brain MRI and further testing if nystagmus persists, posterior fossa signs appear or features are atypical"}, {"text": "Escalate when present"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "benign_paroxysmal_vertigo_of_childhood-dx-mgmt",
+      "title": "Diagnosis and management of benign paroxysmal vertigo of childhood",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Sudden brief vertigo and unsteadiness in a toddler, consciousness preserved, child pale", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: interictal nystagmus or ataxia, hearing loss, or altered consciousness?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: MRI brain and audiometry; EEG only if seizures are seriously suspected", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Eyewitness account or home video; examination between attacks", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "At least five stereotyped attacks with normal examination between them?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Reassure; migraine hygiene and monitoring for later migraine", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: atypical course; specialist review and ECG if the history is atypical", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Resolves over months to a few years; often followed by migraine later", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

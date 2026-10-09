@@ -1,178 +1,505 @@
 {
- "id": "accessory_navicular_syndrome",
- "name": "Accessory navicular syndrome",
- "aliases": [
-  "os tibiale externum",
-  "os naviculare",
-  "symptomatic accessory navicular",
-  "prehallux"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Foot & Ankle",
- "specialty": "Orthopaedics / Podiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Mann's Surgery of the Foot and Ankle",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An accessory navicular is a common accessory ossicle on the medial side of the navicular, present in a significant minority of feet and usually asymptomatic",
-   "Symptoms arise when the ossicle becomes painful at the insertion of the tibialis posterior tendon, producing medial midfoot pain and a tender bony prominence",
-   "The type II accessory navicular, joined to the navicular by a cartilaginous synchondrosis into which the tibialis posterior inserts, is the type most likely to become symptomatic through shear across that junction",
-   "Pain is aggravated by activity and by footwear pressing on the medial prominence, and there may be an associated flatfoot",
-   "Because the tibialis posterior inserts onto the ossicle, symptomatic cases can be associated with tibialis posterior dysfunction and a flexible flatfoot deformity",
-   "Weight-bearing radiographs including an external oblique view demonstrate the ossicle and its type, while MRI shows oedema across the synchondrosis in symptomatic cases",
-   "Distinguish it from tibialis posterior tendinopathy, navicular stress fracture, and midfoot arthritis",
-   "Initial management is conservative with supportive orthoses and medial arch support, footwear modification, activity modification, and physiotherapy, with excision of the ossicle and tibialis posterior reconstruction reserved for resistant cases"
+  "id": "accessory_navicular_syndrome",
+  "name": "Accessory navicular syndrome",
+  "aliases": [
+    "os tibiale externum",
+    "os naviculare",
+    "symptomatic accessory navicular",
+    "prehallux"
   ],
-  "pathophysiology": "The accessory navicular is a secondary ossification centre on the medial aspect of the navicular that fails to fuse, and it is intimately related to the insertion of the tibialis posterior tendon. In the commonly symptomatic type II variant, the ossicle is connected to the navicular by a fibrocartilaginous synchondrosis, and much of the tibialis posterior inserts onto the ossicle rather than directly onto the navicular. Repetitive traction and shear from the tibialis posterior across this synchondrosis, together with direct pressure from footwear on the bony prominence, produce pain, local inflammation, and stress across the junction, which MRI shows as oedema. Because the tibialis posterior is the principal dynamic support of the medial longitudinal arch, an insertion compromised by a symptomatic accessory navicular can be associated with tibialis posterior dysfunction and a flexible flatfoot. Acute exacerbations may follow minor trauma or a twisting injury that stresses the synchondrosis.",
-  "additionalDifferentials": [
-   "Tibialis posterior tendinopathy or dysfunction",
-   "Navicular stress fracture",
-   "Midfoot or talonavicular osteoarthritis",
-   "Flexible flatfoot from other causes",
-   "Tarsal coalition",
-   "Medial midfoot ganglion or soft-tissue lesion",
-   "Kohler's disease in a child"
-  ],
-  "additionalInvestigations": [
-   "Weight-bearing foot radiographs including an external oblique view to identify the ossicle and its type",
-   "Clinical examination for a tender medial prominence and assessment of tibialis posterior function and arch",
-   "MRI to demonstrate oedema across the synchondrosis and assess the tibialis posterior tendon",
-   "Single-limb heel-raise and too-many-toes assessment where flatfoot coexists",
-   "Ultrasound to evaluate the tibialis posterior tendon insertion where indicated",
-   "Comparison views of the contralateral foot given the frequent bilaterality",
-   "Bone scan in selected cases to confirm the ossicle as the pain source"
-  ],
-  "redFlags": [
-   "A painful, progressive flatfoot suggesting associated tibialis posterior rupture or dysfunction",
-   "Focal navicular tenderness with activity-related pain suggesting a navicular stress fracture",
-   "A rigid, painful flatfoot suggesting tarsal coalition rather than a simple accessory navicular",
-   "Signs of infection or a destructive lesion at the medial midfoot"
-  ],
-  "prognosis": "Most symptomatic accessory naviculars settle with conservative measures aimed at offloading the tibialis posterior insertion and supporting the arch, particularly in adolescents whose symptoms often improve with skeletal maturity. When symptoms persist, excision of the ossicle with reattachment or reconstruction of the tibialis posterior gives good pain relief in the majority, although recovery is gradual and associated flatfoot may need to be addressed.",
-  "pitfalls": [
-   "Dismissing medial midfoot pain as simple tendinopathy and missing a symptomatic accessory navicular",
-   "Failing to recognise associated tibialis posterior dysfunction and flatfoot",
-   "Overlooking a navicular stress fracture presenting with similar medial pain",
-   "Excising the ossicle without securing the tibialis posterior insertion, weakening arch support",
-   "Not considering tarsal coalition when the flatfoot is rigid"
-  ],
-  "references": [
-   "Mann's Surgery of the Foot and Ankle",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initial conservative management with activity modification, relative rest and simple analgesia or NSAIDs for pain",
-   "Offload the tibialis posterior insertion and support the medial longitudinal arch with orthoses and supportive footwear that avoids pressure over the bony prominence",
-   "A short period of immobilisation in a walking boot or cast for acute or refractory symptoms",
-   "Physiotherapy with tibialis posterior strengthening and stretching once acute pain settles, particularly where a flexible flatfoot coexists",
-   "Consider a corticosteroid injection around the synchondrosis in selected refractory cases",
-   "Surgical excision of the ossicle with reattachment or advancement of the tibialis posterior tendon (Kidner-type procedure) for symptoms failing conservative care",
-   "Reassure adolescents that symptoms often improve with skeletal maturity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "accessory_navicular_syndrome-pathway",
-   "title": "Accessory navicular syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An accessory navicular is a common accessory ossicle on the medial side of the navicular, present in a significant minority of feet and usually asymptomatic",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A painful, progressive flatfoot suggesting associated tibialis posterior rupture or dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Weight-bearing foot radiographs including an external oblique view to identify the ossicle and its type, Clinical examination for a tender medial prominence and assessment of tibialis posterior function and arch, MRI to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initial conservative management with activity modification, relative rest and simple analgesia or NSAIDs for pain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing medial midfoot pain as simple tendinopathy and missing a symptomatic accessory navicular"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of accessory navicular syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "accessory_navicular_syndrome-matrix",
-   "title": "Accessory navicular syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An accessory navicular is a common accessory ossicle on the medial side of the navicular, present in a significant minority of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Foot & Ankle",
+  "specialty": "Orthopaedics / Podiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mann's Surgery of the Foot and Ankle",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An accessory navicular is a common accessory ossicle on the medial side of the navicular, present in a significant minority of feet and usually asymptomatic",
+      "Symptoms arise when the ossicle becomes painful at the insertion of the tibialis posterior tendon, producing medial midfoot pain and a tender bony prominence",
+      "The type II accessory navicular, joined to the navicular by a cartilaginous synchondrosis into which the tibialis posterior inserts, is the type most likely to become symptomatic through shear across that junction",
+      "Pain is aggravated by activity and by footwear pressing on the medial prominence, and there may be an associated flatfoot",
+      "Because the tibialis posterior inserts onto the ossicle, symptomatic cases can be associated with tibialis posterior dysfunction and a flexible flatfoot deformity",
+      "Weight-bearing radiographs including an external oblique view demonstrate the ossicle and its type, while MRI shows oedema across the synchondrosis in symptomatic cases",
+      "Distinguish it from tibialis posterior tendinopathy, navicular stress fracture, and midfoot arthritis",
+      "Initial management is conservative with supportive orthoses and medial arch support, footwear modification, activity modification, and physiotherapy, with excision of the ossicle and tibialis posterior reconstruction reserved for resistant cases"
     ],
-    [
-     "Key Investigations",
-     "Weight-bearing foot radiographs including an external oblique view to identify the ossicle and its type, Clinical examination for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The accessory navicular is a secondary ossification centre on the medial aspect of the navicular that fails to fuse, and it is intimately related to the insertion of the tibialis posterior tendon. In the commonly symptomatic type II variant, the ossicle is connected to the navicular by a fibrocartilaginous synchondrosis, and much of the tibialis posterior inserts onto the ossicle rather than directly onto the navicular. Repetitive traction and shear from the tibialis posterior across this synchondrosis, together with direct pressure from footwear on the bony prominence, produce pain, local inflammation, and stress across the junction, which MRI shows as oedema. Because the tibialis posterior is the principal dynamic support of the medial longitudinal arch, an insertion compromised by a symptomatic accessory navicular can be associated with tibialis posterior dysfunction and a flexible flatfoot. Acute exacerbations may follow minor trauma or a twisting injury that stresses the synchondrosis.",
+    "additionalDifferentials": [
+      "Tibialis posterior tendinopathy or dysfunction",
+      "Navicular stress fracture",
+      "Midfoot or talonavicular osteoarthritis",
+      "Flexible flatfoot from other causes",
+      "Tarsal coalition",
+      "Medial midfoot ganglion or soft-tissue lesion",
+      "Kohler's disease in a child"
     ],
-    [
-     "Primary Differentials",
-     "Tibialis posterior tendinopathy or dysfunction, Navicular stress fracture, Midfoot or talonavicular osteoarthritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Weight-bearing foot radiographs including an external oblique view to identify the ossicle and its type",
+      "Clinical examination for a tender medial prominence and assessment of tibialis posterior function and arch",
+      "MRI to demonstrate oedema across the synchondrosis and assess the tibialis posterior tendon",
+      "Single-limb heel-raise and too-many-toes assessment where flatfoot coexists",
+      "Ultrasound to evaluate the tibialis posterior tendon insertion where indicated",
+      "Comparison views of the contralateral foot given the frequent bilaterality",
+      "Bone scan in selected cases to confirm the ossicle as the pain source"
     ],
-    [
-     "Management Strategy",
-     "Initial conservative management with activity modification, relative rest and simple analgesia or NSAIDs for pain",
-     "Core treatment modality"
+    "redFlags": [
+      "A painful, progressive flatfoot suggesting associated tibialis posterior rupture or dysfunction",
+      "Focal navicular tenderness with activity-related pain suggesting a navicular stress fracture",
+      "A rigid, painful flatfoot suggesting tarsal coalition rather than a simple accessory navicular",
+      "Signs of infection or a destructive lesion at the medial midfoot"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing medial midfoot pain as simple tendinopathy and missing a symptomatic accessory navicular",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most symptomatic accessory naviculars settle with conservative measures aimed at offloading the tibialis posterior insertion and supporting the arch, particularly in adolescents whose symptoms often improve with skeletal maturity. When symptoms persist, excision of the ossicle with reattachment or reconstruction of the tibialis posterior gives good pain relief in the majority, although recovery is gradual and associated flatfoot may need to be addressed.",
+    "pitfalls": [
+      "Dismissing medial midfoot pain as simple tendinopathy and missing a symptomatic accessory navicular",
+      "Failing to recognise associated tibialis posterior dysfunction and flatfoot",
+      "Overlooking a navicular stress fracture presenting with similar medial pain",
+      "Excising the ossicle without securing the tibialis posterior insertion, weakening arch support",
+      "Not considering tarsal coalition when the flatfoot is rigid"
+    ],
+    "references": [
+      "Mann's Surgery of the Foot and Ankle",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initial conservative management with activity modification, relative rest and simple analgesia or NSAIDs for pain",
+      "Offload the tibialis posterior insertion and support the medial longitudinal arch with orthoses and supportive footwear that avoids pressure over the bony prominence",
+      "A short period of immobilisation in a walking boot or cast for acute or refractory symptoms",
+      "Physiotherapy with tibialis posterior strengthening and stretching once acute pain settles, particularly where a flexible flatfoot coexists",
+      "Consider a corticosteroid injection around the synchondrosis in selected refractory cases",
+      "Surgical excision of the ossicle with reattachment or advancement of the tibialis posterior tendon (Kidner-type procedure) for symptoms failing conservative care",
+      "Reassure adolescents that symptoms often improve with skeletal maturity"
     ]
-   ],
-   "caption": "Overview comparison matrix for accessory navicular syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "accessory-navicular-syndrome-real-image",
-   "title": "Accessory navicular syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "accessory_navicular_syndrome-pathway",
+      "title": "Accessory navicular syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An accessory navicular is a common accessory ossicle on the medial side of the navicular, present in a significant minority of feet and usually asymptomatic",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A painful, progressive flatfoot suggesting associated tibialis posterior rupture or dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Weight-bearing foot radiographs including an external oblique view to identify the ossicle and its type, Clinical examination for a tender medial prominence and assessment of tibialis posterior function and arch, MRI to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initial conservative management with activity modification, relative rest and simple analgesia or NSAIDs for pain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing medial midfoot pain as simple tendinopathy and missing a symptomatic accessory navicular"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of accessory navicular syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "accessory_navicular_syndrome-matrix",
+      "title": "Accessory navicular syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An accessory navicular is a common accessory ossicle on the medial side of the navicular, present in a significant minority of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Weight-bearing foot radiographs including an external oblique view to identify the ossicle and its type, Clinical examination for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tibialis posterior tendinopathy or dysfunction, Navicular stress fracture, Midfoot or talonavicular osteoarthritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initial conservative management with activity modification, relative rest and simple analgesia or NSAIDs for pain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing medial midfoot pain as simple tendinopathy and missing a symptomatic accessory navicular",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for accessory navicular syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "accessory_navicular_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight-bearing foot radiographs with external oblique view",
+          "cells": [
+            {
+              "text": "Identifies the ossicle and its type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Tender medial prominence, tibialis posterior function and arch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Oedema across the synchondrosis and the tibialis posterior tendon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-limb heel-raise and too-many-toes assessment",
+          "cells": [
+            {
+              "text": "Tibialis posterior function where flatfoot coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of the tibialis posterior insertion",
+          "cells": [
+            {
+              "text": "Tendon insertion when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral foot comparison",
+          "cells": [
+            {
+              "text": "Frequent bilaterality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scan",
+          "cells": [
+            {
+              "text": "Confirms the ossicle as the pain source in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accessory_navicular_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tibialis posterior tendinopathy or dysfunction",
+          "cells": [
+            {
+              "text": "Painful, progressive flatfoot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Navicular stress fracture",
+          "cells": [
+            {
+              "text": "Focal navicular tenderness with activity-related pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tarsal coalition",
+          "cells": [
+            {
+              "text": "Rigid, painful flatfoot"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accessory_navicular_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification and relative rest",
+          "cells": [
+            {
+              "text": "Initial conservative management"
+            },
+            {
+              "text": "Simple analgesia or NSAIDs for pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and supportive footwear",
+          "cells": [
+            {
+              "text": "Offloads the tibialis posterior insertion and supports the arch"
+            },
+            {
+              "text": "Avoids pressure over the bony prominence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short immobilisation in a walking boot or cast",
+          "cells": [
+            {
+              "text": "Acute or refractory symptoms"
+            },
+            {
+              "text": "Short period only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy: tibialis posterior strengthening and stretching",
+          "cells": [
+            {
+              "text": "Once acute pain settles"
+            },
+            {
+              "text": "Particularly where flexible flatfoot coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection around the synchondrosis",
+          "cells": [
+            {
+              "text": "Selected refractory cases"
+            },
+            {
+              "text": "Selected cases only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision with tibialis posterior reattachment or advancement",
+          "cells": [
+            {
+              "text": "Symptoms failing conservative care"
+            },
+            {
+              "text": "Kidner-type procedure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance for adolescents",
+          "cells": [
+            {
+              "text": "Symptoms often improve with skeletal maturity"
+            },
+            {
+              "text": "Skeletal maturity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "accessory_navicular_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Accessory navicular syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Medial midfoot pain with tender prominence at tibialis posterior insertion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Painful progressive flatfoot suggesting tibialis posterior rupture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent foot and ankle review for tendon rupture or dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight-bearing radiographs with oblique view; examine the prominence",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Oedema across the synchondrosis on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Activity modification, relative rest and simple analgesia or NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review tibialis posterior dysfunction, stress fracture and tarsal coalition",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthoses and supportive footwear that avoid pressure on the prominence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short immobilisation in a walking boot for refractory symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy for tibialis posterior strengthening once pain settles",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most settle conservatively; excision for persisting symptoms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

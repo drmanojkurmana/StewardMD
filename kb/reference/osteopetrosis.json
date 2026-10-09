@@ -1,174 +1,453 @@
 {
- "id": "osteopetrosis",
- "name": "Osteopetrosis",
- "aliases": [
-  "marble bone disease",
-  "Albers-Schonberg disease",
-  "CLCN7",
-  "TCIRG1"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of disorders of defective osteoclast bone resorption producing dense, sclerotic but paradoxically brittle bones",
-   "The severe autosomal recessive (infantile malignant) form presents early with marrow failure, hepatosplenomegaly from extramedullary haematopoiesis, and cranial nerve compression, whereas the dominant adult form is milder",
-   "Common causative genes include TCIRG1 and CLCN7, which are needed for the acidification that allows osteoclasts to dissolve mineralised matrix",
-   "Encroachment of dense bone on marrow spaces causes anaemia, thrombocytopenia, and susceptibility to infection, while narrowed skull foramina compress optic, facial, and auditory nerves",
-   "Bones are dense but fragile and prone to fracture, and there is a risk of osteomyelitis, particularly of the mandible",
-   "Radiographs show diffusely dense bones, a bone-in-bone appearance, sandwich or rugger-jersey vertebrae, and metaphyseal Erlenmeyer-flask deformity",
-   "Haematopoietic stem cell transplantation can be curative in severe osteoclast-intrinsic infantile forms, whereas milder forms are managed supportively"
+  "id": "osteopetrosis",
+  "name": "Osteopetrosis",
+  "aliases": [
+    "marble bone disease",
+    "Albers-Schonberg disease",
+    "CLCN7",
+    "TCIRG1"
   ],
-  "pathophysiology": "Osteopetrosis results from failure of osteoclast-mediated bone resorption, most often due to defects in the machinery that acidifies the resorption lacuna, such as the proton pump subunit encoded by TCIRG1 or the chloride channel encoded by CLCN7. Without effective resorption, bone remodelling is disrupted and immature, poorly organised, densely mineralised bone accumulates. This encroaches on the marrow cavity, causing cytopenias and extramedullary haematopoiesis, narrows cranial foramina to compress nerves, and produces bone that is dense yet mechanically brittle. Some forms reflect defective osteoclast differentiation rather than function, which influences whether transplantation is likely to help.",
-  "additionalDifferentials": [
-   "Pyknodysostosis",
-   "Sclerosteosis and van Buchem disease",
-   "Osteopoikilosis and osteopathia striata",
-   "Metastatic or myelofibrotic marrow infiltration",
-   "Fluorosis and heavy-metal osteosclerosis",
-   "Hypervitaminosis and other sclerosing bone dysplasias"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating diffuse sclerosis, bone-in-bone appearance, and metaphyseal flaring",
-   "Full blood count and blood film to assess cytopenias and extramedullary haematopoiesis",
-   "Molecular genetic testing of an osteopetrosis gene panel including TCIRG1 and CLCN7",
-   "Cross-sectional imaging of cranial foramina for nerve compression",
-   "Ophthalmological and audiological assessment for optic and auditory involvement",
-   "Bone marrow evaluation and biochemical assessment of calcium metabolism"
-  ],
-  "redFlags": [
-   "Progressive visual loss from optic nerve compression requiring urgent decompression consideration",
-   "Marrow failure with severe anaemia, thrombocytopenia, or recurrent serious infection",
-   "Osteomyelitis, particularly of the mandible",
-   "Hypocalcaemic complications in the infantile form"
-  ],
-  "prognosis": "Untreated severe infantile osteopetrosis is often fatal in early childhood from marrow failure and infection, whereas transplantation can be curative in suitable osteoclast-intrinsic forms. The dominant adult form is compatible with a normal lifespan but carries fracture, osteomyelitis, and nerve-compression morbidity.",
-  "pitfalls": [
-   "Assuming dense bone is strong and underestimating fracture risk",
-   "Delaying transplantation assessment in severe infantile disease",
-   "Missing progressive cranial nerve compression, especially optic nerve involvement",
-   "Failing to distinguish osteoclast-intrinsic from osteoclast-poor forms, which affects transplant suitability"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Haematopoietic stem cell transplantation for severe infantile autosomal recessive disease due to osteoclast-intrinsic defects, which can be curative",
-   "Supportive haematological care with transfusion for anaemia and thrombocytopenia and prompt treatment of intercurrent infection",
-   "Careful management of fractures, recognising that the dense bone is brittle and prone to malunion, with vigilance for osteomyelitis, particularly of the mandible",
-   "Regular ophthalmological and audiological surveillance for optic, facial and auditory nerve compression, with surgical decompression of narrowed cranial foramina where sight or hearing is threatened",
-   "Gene-panel testing including TCIRG1 and CLCN7 to identify osteoclast-poor differentiation defects, in which transplantation is unlikely to help",
-   "Monitor calcium metabolism, watching for hypocalcaemia in infantile disease",
-   "Clinical genetics referral with family screening and counselling for the inherited forms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "osteopetrosis-pathway",
-   "title": "Osteopetrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of disorders of defective osteoclast bone resorption producing dense, sclerotic but paradoxically brittle bones",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive visual loss from optic nerve compression requiring urgent decompression consideration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating diffuse sclerosis, bone-in-bone appearance, and metaphyseal flaring, Full blood count and blood film to assess cytopenias and extramedullary haematopoiesis, Molecular genetic testing of an"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Haematopoietic stem cell transplantation for severe infantile autosomal recessive disease due to osteoclast-intrinsic defects, which can be curative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming dense bone is strong and underestimating fracture risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of osteopetrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "osteopetrosis-matrix",
-   "title": "Osteopetrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of disorders of defective osteoclast bone resorption producing dense, sclerotic but paradoxically brittle bones",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of disorders of defective osteoclast bone resorption producing dense, sclerotic but paradoxically brittle bones",
+      "The severe autosomal recessive (infantile malignant) form presents early with marrow failure, hepatosplenomegaly from extramedullary haematopoiesis, and cranial nerve compression, whereas the dominant adult form is milder",
+      "Common causative genes include TCIRG1 and CLCN7, which are needed for the acidification that allows osteoclasts to dissolve mineralised matrix",
+      "Encroachment of dense bone on marrow spaces causes anaemia, thrombocytopenia, and susceptibility to infection, while narrowed skull foramina compress optic, facial, and auditory nerves",
+      "Bones are dense but fragile and prone to fracture, and there is a risk of osteomyelitis, particularly of the mandible",
+      "Radiographs show diffusely dense bones, a bone-in-bone appearance, sandwich or rugger-jersey vertebrae, and metaphyseal Erlenmeyer-flask deformity",
+      "Haematopoietic stem cell transplantation can be curative in severe osteoclast-intrinsic infantile forms, whereas milder forms are managed supportively"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating diffuse sclerosis, bone-in-bone appearance, and metaphyseal flaring, Full blood count and blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Osteopetrosis results from failure of osteoclast-mediated bone resorption, most often due to defects in the machinery that acidifies the resorption lacuna, such as the proton pump subunit encoded by TCIRG1 or the chloride channel encoded by CLCN7. Without effective resorption, bone remodelling is disrupted and immature, poorly organised, densely mineralised bone accumulates. This encroaches on the marrow cavity, causing cytopenias and extramedullary haematopoiesis, narrows cranial foramina to compress nerves, and produces bone that is dense yet mechanically brittle. Some forms reflect defective osteoclast differentiation rather than function, which influences whether transplantation is likely to help.",
+    "additionalDifferentials": [
+      "Pyknodysostosis",
+      "Sclerosteosis and van Buchem disease",
+      "Osteopoikilosis and osteopathia striata",
+      "Metastatic or myelofibrotic marrow infiltration",
+      "Fluorosis and heavy-metal osteosclerosis",
+      "Hypervitaminosis and other sclerosing bone dysplasias"
     ],
-    [
-     "Primary Differentials",
-     "Pyknodysostosis, Sclerosteosis and van Buchem disease, Osteopoikilosis and osteopathia striata",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating diffuse sclerosis, bone-in-bone appearance, and metaphyseal flaring",
+      "Full blood count and blood film to assess cytopenias and extramedullary haematopoiesis",
+      "Molecular genetic testing of an osteopetrosis gene panel including TCIRG1 and CLCN7",
+      "Cross-sectional imaging of cranial foramina for nerve compression",
+      "Ophthalmological and audiological assessment for optic and auditory involvement",
+      "Bone marrow evaluation and biochemical assessment of calcium metabolism"
     ],
-    [
-     "Management Strategy",
-     "Haematopoietic stem cell transplantation for severe infantile autosomal recessive disease due to osteoclast-intrinsic defects,",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive visual loss from optic nerve compression requiring urgent decompression consideration",
+      "Marrow failure with severe anaemia, thrombocytopenia, or recurrent serious infection",
+      "Osteomyelitis, particularly of the mandible",
+      "Hypocalcaemic complications in the infantile form"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming dense bone is strong and underestimating fracture risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated severe infantile osteopetrosis is often fatal in early childhood from marrow failure and infection, whereas transplantation can be curative in suitable osteoclast-intrinsic forms. The dominant adult form is compatible with a normal lifespan but carries fracture, osteomyelitis, and nerve-compression morbidity.",
+    "pitfalls": [
+      "Assuming dense bone is strong and underestimating fracture risk",
+      "Delaying transplantation assessment in severe infantile disease",
+      "Missing progressive cranial nerve compression, especially optic nerve involvement",
+      "Failing to distinguish osteoclast-intrinsic from osteoclast-poor forms, which affects transplant suitability"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Haematopoietic stem cell transplantation for severe infantile autosomal recessive disease due to osteoclast-intrinsic defects, which can be curative",
+      "Supportive haematological care with transfusion for anaemia and thrombocytopenia and prompt treatment of intercurrent infection",
+      "Careful management of fractures, recognising that the dense bone is brittle and prone to malunion, with vigilance for osteomyelitis, particularly of the mandible",
+      "Regular ophthalmological and audiological surveillance for optic, facial and auditory nerve compression, with surgical decompression of narrowed cranial foramina where sight or hearing is threatened",
+      "Gene-panel testing including TCIRG1 and CLCN7 to identify osteoclast-poor differentiation defects, in which transplantation is unlikely to help",
+      "Monitor calcium metabolism, watching for hypocalcaemia in infantile disease",
+      "Clinical genetics referral with family screening and counselling for the inherited forms"
     ]
-   ],
-   "caption": "Overview comparison matrix for osteopetrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "osteopetrosis-real-image",
-   "title": "Osteopetrosis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "osteopetrosis-pathway",
+      "title": "Osteopetrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of disorders of defective osteoclast bone resorption producing dense, sclerotic but paradoxically brittle bones",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive visual loss from optic nerve compression requiring urgent decompression consideration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating diffuse sclerosis, bone-in-bone appearance, and metaphyseal flaring, Full blood count and blood film to assess cytopenias and extramedullary haematopoiesis, Molecular genetic testing of an"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Haematopoietic stem cell transplantation for severe infantile autosomal recessive disease due to osteoclast-intrinsic defects, which can be curative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming dense bone is strong and underestimating fracture risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of osteopetrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "osteopetrosis-matrix",
+      "title": "Osteopetrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of disorders of defective osteoclast bone resorption producing dense, sclerotic but paradoxically brittle bones",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating diffuse sclerosis, bone-in-bone appearance, and metaphyseal flaring, Full blood count and blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pyknodysostosis, Sclerosteosis and van Buchem disease, Osteopoikilosis and osteopathia striata",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Haematopoietic stem cell transplantation for severe infantile autosomal recessive disease due to osteoclast-intrinsic defects,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming dense bone is strong and underestimating fracture risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for osteopetrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteopetrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Diffuse sclerosis, bone-in-bone appearance and metaphyseal flaring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Cytopenias and extramedullary haematopoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteopetrosis gene panel including TCIRG1 and CLCN7",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of cranial foramina",
+          "cells": [
+            {
+              "text": "Cranial nerve compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and audiological assessment",
+          "cells": [
+            {
+              "text": "Optic and auditory involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow evaluation and calcium metabolism",
+          "cells": [
+            {
+              "text": "Marrow involvement and calcium status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteopetrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "For severe infantile autosomal recessive osteoclast-intrinsic disease; can be curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive haematological care",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Transfusion for anaemia and thrombocytopenia; prompt treatment of intercurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fracture care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Dense bone is brittle and prone to malunion; vigilance for mandibular osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye and hearing surveillance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Surgical decompression of narrowed foramina where sight or hearing is threatened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene-panel testing",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Identifies osteoclast-poor defects in which transplantation is unlikely to help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium monitoring and genetics",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Watch for hypocalcaemia in infantile disease; family screening and counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteopetrosis-dx-mgmt",
+      "title": "Diagnosis and management of Osteopetrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dense brittle bones with cytopenias, hepatosplenomegaly or cranial nerve signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (visual loss, marrow failure, mandible infection or hypocalcaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent optic nerve decompression and haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, blood count and film, TCIRG1 and CLCN7 testing, foramina imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gene testing confirm an osteoclast-intrinsic defect suitable for transplant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Osteoclast-poor forms: transplant unlikely; supportive care and surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stem cell transplantation for severe infantile osteoclast-intrinsic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transfusion for anaemia and thrombocytopenia; prompt treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Careful fracture care, as dense bone is brittle; watch for mandibular osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Eye and hearing surveillance; decompress foramina if vision or hearing is threatened",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor calcium in infantile disease; genetics referral and family counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated severe infantile disease is often fatal early; transplant can be curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

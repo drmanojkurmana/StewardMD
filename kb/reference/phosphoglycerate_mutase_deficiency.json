@@ -1,173 +1,462 @@
 {
- "id": "phosphoglycerate_mutase_deficiency",
- "name": "Phosphoglycerate mutase deficiency",
- "aliases": [
-  "PGAM deficiency",
-  "glycogen storage disease type X",
-  "phosphoglyceromutase deficiency",
-  "PGAM2 gene"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare recessive glycolytic defect that classically produces a muscle phenotype with exercise intolerance, cramps and exertional rhabdomyolysis",
-   "The muscle isoform (PGAM2) predominates in skeletal muscle, so myopathy is the dominant feature and haemolysis is variable when the erythrocyte enzyme is affected",
-   "Presents in some patients with pigmenturia (myoglobinuria) after vigorous exercise, akin to the muscle glycogenoses",
-   "When the red-cell enzyme is reduced, a chronic non-spherocytic, Coombs-negative haemolytic anaemia may accompany the muscle disease",
-   "A forearm ischaemic exercise test may show a subnormal rise in venous lactate, pointing to a glycolytic block",
-   "Diagnosis is confirmed by reduced enzyme activity on assay and PGAM2 mutation analysis",
-   "Management centres on avoiding strenuous exertion that triggers rhabdomyolysis, with supportive transfusion and folate if significant haemolysis is present"
+  "id": "phosphoglycerate_mutase_deficiency",
+  "name": "Phosphoglycerate mutase deficiency",
+  "aliases": [
+    "PGAM deficiency",
+    "glycogen storage disease type X",
+    "phosphoglyceromutase deficiency",
+    "PGAM2 gene"
   ],
-  "pathophysiology": "Phosphoglycerate mutase catalyses the interconversion of 3-phosphoglycerate and 2-phosphoglycerate in the ATP-generating lower half of glycolysis. Deficiency impedes glycolytic energy production; in skeletal muscle this manifests as exercise intolerance, cramps and exertional muscle breakdown, while in the red cell, which relies wholly on glycolysis for ATP, reduced activity can shorten cell survival and cause a chronic non-spherocytic haemolytic anaemia. The relative contribution of muscle and erythrocyte disease depends on which isoform and mutation are involved.",
-  "additionalDifferentials": [
-   "McArdle disease (myophosphorylase deficiency)",
-   "Phosphofructokinase deficiency (Tarui disease)",
-   "Aldolase A deficiency",
-   "Other glycolytic enzymopathies causing haemolysis",
-   "Lactate dehydrogenase deficiency",
-   "Metabolic myopathies of fatty-acid oxidation"
-  ],
-  "additionalInvestigations": [
-   "Muscle or red-cell phosphoglycerate mutase enzyme assay",
-   "Forearm ischaemic exercise test measuring venous lactate and ammonia",
-   "Creatine kinase and myoglobin during and after exertion",
-   "Full blood count, reticulocytes and blood film if haemolysis is suspected",
-   "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
-   "Molecular testing of the PGAM2 gene"
-  ],
-  "redFlags": [
-   "Exertional rhabdomyolysis with myoglobinuria and risk of acute kidney injury",
-   "Recurrent severe muscle cramps limiting activity",
-   "Significant haemolytic anaemia when the erythrocyte enzyme is affected",
-   "Aplastic crisis following parvovirus B19 infection"
-  ],
-  "prognosis": "The muscle disease is usually compatible with a normal lifespan provided provocative exertion is avoided; haemolysis, when present, is generally mild to moderate and well tolerated.",
-  "pitfalls": [
-   "Attributing exertional symptoms to deconditioning rather than a metabolic myopathy",
-   "Omitting a forearm exercise test that would flag a glycolytic block",
-   "Not warning patients to avoid the strenuous exercise that provokes rhabdomyolysis",
-   "Overlooking a concurrent mild haemolytic anaemia"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Wintrobe's Clinical Hematology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid vigorous anaerobic exercise that provokes cramps and exertional rhabdomyolysis, and use gradual warm-up and paced activity",
-   "Treat episodes of myoglobinuria with prompt intravenous hydration and protect renal function, managing any acute kidney injury",
-   "Support coexisting haemolytic anaemia, where present, with folate supplementation and transfusion when needed",
-   "Monitor creatine kinase, renal function and haemolysis markers, checking urine myoglobin after exertion",
-   "Offer genetic counselling with PGAM2 testing of the family",
-   "Coordinate care through metabolic medicine and neuromuscular services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phosphoglycerate_mutase_deficiency-pathway",
-   "title": "Phosphoglycerate mutase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare recessive glycolytic defect that classically produces a muscle phenotype with exercise intolerance, cramps and exertional rhabdomyolysis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Exertional rhabdomyolysis with myoglobinuria and risk of acute kidney injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Muscle or red-cell phosphoglycerate mutase enzyme assay, Forearm ischaemic exercise test measuring venous lactate and ammonia, Creatine kinase and myoglobin during and after exertion"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid vigorous anaerobic exercise that provokes cramps and exertional rhabdomyolysis, and use gradual warm-up and paced activity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing exertional symptoms to deconditioning rather than a metabolic myopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phosphoglycerate mutase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "phosphoglycerate_mutase_deficiency-matrix",
-   "title": "Phosphoglycerate mutase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare recessive glycolytic defect that classically produces a muscle phenotype with exercise intolerance, cramps and exertional",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare recessive glycolytic defect that classically produces a muscle phenotype with exercise intolerance, cramps and exertional rhabdomyolysis",
+      "The muscle isoform (PGAM2) predominates in skeletal muscle, so myopathy is the dominant feature and haemolysis is variable when the erythrocyte enzyme is affected",
+      "Presents in some patients with pigmenturia (myoglobinuria) after vigorous exercise, akin to the muscle glycogenoses",
+      "When the red-cell enzyme is reduced, a chronic non-spherocytic, Coombs-negative haemolytic anaemia may accompany the muscle disease",
+      "A forearm ischaemic exercise test may show a subnormal rise in venous lactate, pointing to a glycolytic block",
+      "Diagnosis is confirmed by reduced enzyme activity on assay and PGAM2 mutation analysis",
+      "Management centres on avoiding strenuous exertion that triggers rhabdomyolysis, with supportive transfusion and folate if significant haemolysis is present"
     ],
-    [
-     "Key Investigations",
-     "Muscle or red-cell phosphoglycerate mutase enzyme assay, Forearm ischaemic exercise test measuring venous lactate and ammonia,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phosphoglycerate mutase catalyses the interconversion of 3-phosphoglycerate and 2-phosphoglycerate in the ATP-generating lower half of glycolysis. Deficiency impedes glycolytic energy production; in skeletal muscle this manifests as exercise intolerance, cramps and exertional muscle breakdown, while in the red cell, which relies wholly on glycolysis for ATP, reduced activity can shorten cell survival and cause a chronic non-spherocytic haemolytic anaemia. The relative contribution of muscle and erythrocyte disease depends on which isoform and mutation are involved.",
+    "additionalDifferentials": [
+      "McArdle disease (myophosphorylase deficiency)",
+      "Phosphofructokinase deficiency (Tarui disease)",
+      "Aldolase A deficiency",
+      "Other glycolytic enzymopathies causing haemolysis",
+      "Lactate dehydrogenase deficiency",
+      "Metabolic myopathies of fatty-acid oxidation"
     ],
-    [
-     "Primary Differentials",
-     "McArdle disease (myophosphorylase deficiency), Phosphofructokinase deficiency (Tarui disease), Aldolase A deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Muscle or red-cell phosphoglycerate mutase enzyme assay",
+      "Forearm ischaemic exercise test measuring venous lactate and ammonia",
+      "Creatine kinase and myoglobin during and after exertion",
+      "Full blood count, reticulocytes and blood film if haemolysis is suspected",
+      "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
+      "Molecular testing of the PGAM2 gene"
     ],
-    [
-     "Management Strategy",
-     "Avoid vigorous anaerobic exercise that provokes cramps and exertional rhabdomyolysis, and use gradual warm-up and paced activity",
-     "Core treatment modality"
+    "redFlags": [
+      "Exertional rhabdomyolysis with myoglobinuria and risk of acute kidney injury",
+      "Recurrent severe muscle cramps limiting activity",
+      "Significant haemolytic anaemia when the erythrocyte enzyme is affected",
+      "Aplastic crisis following parvovirus B19 infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing exertional symptoms to deconditioning rather than a metabolic myopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The muscle disease is usually compatible with a normal lifespan provided provocative exertion is avoided; haemolysis, when present, is generally mild to moderate and well tolerated.",
+    "pitfalls": [
+      "Attributing exertional symptoms to deconditioning rather than a metabolic myopathy",
+      "Omitting a forearm exercise test that would flag a glycolytic block",
+      "Not warning patients to avoid the strenuous exercise that provokes rhabdomyolysis",
+      "Overlooking a concurrent mild haemolytic anaemia"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Wintrobe's Clinical Hematology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid vigorous anaerobic exercise that provokes cramps and exertional rhabdomyolysis, and use gradual warm-up and paced activity",
+      "Treat episodes of myoglobinuria with prompt intravenous hydration and protect renal function, managing any acute kidney injury",
+      "Support coexisting haemolytic anaemia, where present, with folate supplementation and transfusion when needed",
+      "Monitor creatine kinase, renal function and haemolysis markers, checking urine myoglobin after exertion",
+      "Offer genetic counselling with PGAM2 testing of the family",
+      "Coordinate care through metabolic medicine and neuromuscular services"
     ]
-   ],
-   "caption": "Overview comparison matrix for phosphoglycerate mutase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phosphoglycerate-mutase-deficiency-real-image",
-   "title": "Phosphoglycerate mutase deficiency: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "phosphoglycerate_mutase_deficiency-pathway",
+      "title": "Phosphoglycerate mutase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare recessive glycolytic defect that classically produces a muscle phenotype with exercise intolerance, cramps and exertional rhabdomyolysis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Exertional rhabdomyolysis with myoglobinuria and risk of acute kidney injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Muscle or red-cell phosphoglycerate mutase enzyme assay, Forearm ischaemic exercise test measuring venous lactate and ammonia, Creatine kinase and myoglobin during and after exertion"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid vigorous anaerobic exercise that provokes cramps and exertional rhabdomyolysis, and use gradual warm-up and paced activity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing exertional symptoms to deconditioning rather than a metabolic myopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phosphoglycerate mutase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phosphoglycerate_mutase_deficiency-matrix",
+      "title": "Phosphoglycerate mutase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare recessive glycolytic defect that classically produces a muscle phenotype with exercise intolerance, cramps and exertional",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Muscle or red-cell phosphoglycerate mutase enzyme assay, Forearm ischaemic exercise test measuring venous lactate and ammonia,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "McArdle disease (myophosphorylase deficiency), Phosphofructokinase deficiency (Tarui disease), Aldolase A deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid vigorous anaerobic exercise that provokes cramps and exertional rhabdomyolysis, and use gradual warm-up and paced activity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing exertional symptoms to deconditioning rather than a metabolic myopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phosphoglycerate mutase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phosphoglycerate_mutase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Phosphoglycerate mutase enzyme assay (muscle or red cell)",
+          "cells": [
+            {
+              "text": "Enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forearm ischaemic exercise test",
+          "cells": [
+            {
+              "text": "Venous lactate and ammonia response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and myoglobin during and after exertion",
+          "cells": [
+            {
+              "text": "Exertional muscle injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocytes and blood film",
+          "cells": [
+            {
+              "text": "Haemolysis, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen (bilirubin, LDH, haptoglobin)",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PGAM2 gene testing",
+          "cells": [
+            {
+              "text": "Molecular basis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phosphoglycerate_mutase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "McArdle disease",
+          "cells": [
+            {
+              "text": "Myophosphorylase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tarui disease",
+          "cells": [
+            {
+              "text": "Phosphofructokinase deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phosphoglycerate_mutase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Avoid vigorous anaerobic exercise; gradual warm-up and paced activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myoglobinuria",
+          "cells": [
+            {
+              "text": "Prompt intravenous hydration to protect renal function; manage any acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Folate supplementation and transfusion when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Creatine kinase, renal function and haemolysis markers; urine myoglobin after exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "PGAM2 testing of the family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Metabolic medicine and neuromuscular services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phosphoglycerate_mutase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Phosphoglycerate mutase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent exertional cramps and muscle pain, possibly with myoglobinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rhabdomyolysis, severe cramps, significant haemolysis, aplastic crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent renal protection for rhabdomyolysis with myoglobinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Enzyme assay; forearm ischaemic exercise test; CK and myoglobin; haemolysis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the exercise test or enzyme assay confirm a metabolic myopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider McArdle, Tarui or aldolase A deficiency, or a fatty-acid oxidation disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid vigorous anaerobic exercise; use gradual warm-up and paced activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat myoglobinuria with prompt intravenous hydration to protect renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Folate supplementation and transfusion when haemolytic anaemia is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor creatine kinase, renal function and haemolysis markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with PGAM2 testing of the family",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually compatible with a normal lifespan if provocative exertion is avoided",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,172 +1,432 @@
 {
- "id": "niemann_pick_disease",
- "name": "Niemann-Pick disease",
- "aliases": [
-  "acid sphingomyelinase deficiency",
-  "sphingomyelin lipidosis",
-  "NPD",
-  "NPC"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive group of storage disorders; types A and B result from deficiency of the enzyme acid sphingomyelinase, while type C is a distinct defect of intracellular cholesterol trafficking",
-   "Type A is a severe infantile neurovisceral form with hepatosplenomegaly, failure to thrive, and rapid neurodegeneration, often fatal in early childhood",
-   "Type B is a chronic, largely non-neurological visceral form with organomegaly and pulmonary involvement that is compatible with survival into adulthood",
-   "A cherry-red macular spot may be seen, particularly in the acute infantile (type A) form",
-   "Type C arises from defects in the NPC1 or NPC2 proteins, causing impaired cholesterol handling and a variable neurological course",
-   "Vertical supranuclear gaze palsy is a characteristic clinical clue to type C disease",
-   "Lipid-laden foamy macrophages (Niemann-Pick cells) infiltrate the marrow, spleen, and liver",
-   "Enzyme replacement therapy is available for the non-neurological manifestations of acid sphingomyelinase deficiency, and substrate reduction therapy is used to modify neurological progression in type C"
+  "id": "niemann_pick_disease",
+  "name": "Niemann-Pick disease",
+  "aliases": [
+    "acid sphingomyelinase deficiency",
+    "sphingomyelin lipidosis",
+    "NPD",
+    "NPC"
   ],
-  "pathophysiology": "In Niemann-Pick types A and B, pathogenic variants in SMPD1 reduce acid sphingomyelinase activity, so sphingomyelin cannot be hydrolysed and accumulates within lysosomes of macrophages and other cells, producing visceral organomegaly and, when severe, progressive neurodegeneration. Niemann-Pick type C is mechanistically distinct: variants in NPC1 or NPC2 disrupt the intracellular transport of unesterified cholesterol and other lipids out of the late endosomal/lysosomal compartment, leading to lipid accumulation, neuronal dysfunction, and secondary sphingomyelin storage. All forms are inherited in an autosomal recessive pattern.",
-  "additionalDifferentials": [
-   "Gaucher disease",
-   "GM1 gangliosidosis",
-   "Other lysosomal storage disorders with hepatosplenomegaly",
-   "Haematological malignancy causing organomegaly",
-   "Other causes of neurodegeneration with visceromegaly in infancy"
-  ],
-  "additionalInvestigations": [
-   "Acid sphingomyelinase enzyme activity in leukocytes for types A and B",
-   "Molecular genetic testing of SMPD1, or NPC1/NPC2 for type C",
-   "Bone marrow examination showing foamy storage cells when performed",
-   "Specialised biomarkers and cell-based cholesterol studies for type C",
-   "Ophthalmological examination for cherry-red spot and imaging for organomegaly and lung disease"
-  ],
-  "redFlags": [
-   "Rapid neurodevelopmental regression in an infant with hepatosplenomegaly",
-   "Progressive respiratory compromise from pulmonary infiltration in type B",
-   "New vertical gaze palsy or ataxia suggesting type C",
-   "Severe hypersplenism with cytopenias or risk of splenic rupture"
-  ],
-  "prognosis": "Type A is uniformly severe with death typically in early childhood. Type B has a more favourable course with survival into adulthood, though pulmonary and hepatic disease may limit outcomes. Type C is progressive and variable, with age of onset strongly influencing survival; disease-modifying and supportive therapies can slow but not cure neurological decline.",
-  "pitfalls": [
-   "Confusing the acid sphingomyelinase forms with type C, which requires different diagnostic tests and therapies",
-   "Attributing organomegaly solely to a haematological cause and missing a storage disorder",
-   "Overlooking vertical supranuclear gaze palsy as a specific pointer to type C",
-   "Assuming enzyme replacement will address the neurological features"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer enzyme replacement therapy with olipudase alfa to address the non-neurological visceral and pulmonary manifestations of acid sphingomyelinase deficiency (types A and B)",
-   "For type C, use substrate-reduction therapy with miglustat to slow neurological progression, as this form is not correctable by enzyme replacement",
-   "Provide supportive care for organomegaly and hypersplenism, respiratory support for interstitial lung disease, and nutritional support for failure to thrive",
-   "Manage complications including bleeding from thrombocytopenia and intercurrent infection",
-   "Undertake surveillance of pulmonary function, liver and spleen, growth and neurological status appropriate to the subtype",
-   "Coordinate multidisciplinary care through metabolic medicine with neurology, respiratory and hepatology input, and offer palliative care in severe infantile type A",
-   "Provide genetic counselling and family screening given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "niemann_pick_disease-pathway",
-   "title": "Niemann-Pick disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive group of storage disorders; types A and B result from deficiency of the enzyme acid sphingomyelinase, while type C is a distinct defect of intracellular cholesterol trafficking",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid neurodevelopmental regression in an infant with hepatosplenomegaly",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Acid sphingomyelinase enzyme activity in leukocytes for types A and B, Molecular genetic testing of SMPD1, or NPC1/NPC2 for type C, Bone marrow examination showing foamy storage cells when performed"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer enzyme replacement therapy with olipudase alfa to address the non-neurological visceral and pulmonary manifestations of acid sphingomyelinase deficiency (types A and B)"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the acid sphingomyelinase forms with type C, which requires different diagnostic tests and therapies"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of niemann-pick disease."
-  }
- ],
- "tables": [
-  {
-   "id": "niemann_pick_disease-matrix",
-   "title": "Niemann-Pick disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive group of storage disorders; types A and B result from deficiency of the enzyme acid sphingomyelinase,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive group of storage disorders; types A and B result from deficiency of the enzyme acid sphingomyelinase, while type C is a distinct defect of intracellular cholesterol trafficking",
+      "Type A is a severe infantile neurovisceral form with hepatosplenomegaly, failure to thrive, and rapid neurodegeneration, often fatal in early childhood",
+      "Type B is a chronic, largely non-neurological visceral form with organomegaly and pulmonary involvement that is compatible with survival into adulthood",
+      "A cherry-red macular spot may be seen, particularly in the acute infantile (type A) form",
+      "Type C arises from defects in the NPC1 or NPC2 proteins, causing impaired cholesterol handling and a variable neurological course",
+      "Vertical supranuclear gaze palsy is a characteristic clinical clue to type C disease",
+      "Lipid-laden foamy macrophages (Niemann-Pick cells) infiltrate the marrow, spleen, and liver",
+      "Enzyme replacement therapy is available for the non-neurological manifestations of acid sphingomyelinase deficiency, and substrate reduction therapy is used to modify neurological progression in type C"
     ],
-    [
-     "Key Investigations",
-     "Acid sphingomyelinase enzyme activity in leukocytes for types A and B, Molecular genetic testing of SMPD1, or NPC1/NPC2 for type",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In Niemann-Pick types A and B, pathogenic variants in SMPD1 reduce acid sphingomyelinase activity, so sphingomyelin cannot be hydrolysed and accumulates within lysosomes of macrophages and other cells, producing visceral organomegaly and, when severe, progressive neurodegeneration. Niemann-Pick type C is mechanistically distinct: variants in NPC1 or NPC2 disrupt the intracellular transport of unesterified cholesterol and other lipids out of the late endosomal/lysosomal compartment, leading to lipid accumulation, neuronal dysfunction, and secondary sphingomyelin storage. All forms are inherited in an autosomal recessive pattern.",
+    "additionalDifferentials": [
+      "Gaucher disease",
+      "GM1 gangliosidosis",
+      "Other lysosomal storage disorders with hepatosplenomegaly",
+      "Haematological malignancy causing organomegaly",
+      "Other causes of neurodegeneration with visceromegaly in infancy"
     ],
-    [
-     "Primary Differentials",
-     "Gaucher disease, GM1 gangliosidosis, Other lysosomal storage disorders with hepatosplenomegaly",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Acid sphingomyelinase enzyme activity in leukocytes for types A and B",
+      "Molecular genetic testing of SMPD1, or NPC1/NPC2 for type C",
+      "Bone marrow examination showing foamy storage cells when performed",
+      "Specialised biomarkers and cell-based cholesterol studies for type C",
+      "Ophthalmological examination for cherry-red spot and imaging for organomegaly and lung disease"
     ],
-    [
-     "Management Strategy",
-     "Offer enzyme replacement therapy with olipudase alfa to address the non-neurological visceral and pulmonary manifestations of",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid neurodevelopmental regression in an infant with hepatosplenomegaly",
+      "Progressive respiratory compromise from pulmonary infiltration in type B",
+      "New vertical gaze palsy or ataxia suggesting type C",
+      "Severe hypersplenism with cytopenias or risk of splenic rupture"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the acid sphingomyelinase forms with type C, which requires different diagnostic tests and therapies",
-     "Prevent diagnostic or management error"
+    "prognosis": "Type A is uniformly severe with death typically in early childhood. Type B has a more favourable course with survival into adulthood, though pulmonary and hepatic disease may limit outcomes. Type C is progressive and variable, with age of onset strongly influencing survival; disease-modifying and supportive therapies can slow but not cure neurological decline.",
+    "pitfalls": [
+      "Confusing the acid sphingomyelinase forms with type C, which requires different diagnostic tests and therapies",
+      "Attributing organomegaly solely to a haematological cause and missing a storage disorder",
+      "Overlooking vertical supranuclear gaze palsy as a specific pointer to type C",
+      "Assuming enzyme replacement will address the neurological features"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer enzyme replacement therapy with olipudase alfa to address the non-neurological visceral and pulmonary manifestations of acid sphingomyelinase deficiency (types A and B)",
+      "For type C, use substrate-reduction therapy with miglustat to slow neurological progression, as this form is not correctable by enzyme replacement",
+      "Provide supportive care for organomegaly and hypersplenism, respiratory support for interstitial lung disease, and nutritional support for failure to thrive",
+      "Manage complications including bleeding from thrombocytopenia and intercurrent infection",
+      "Undertake surveillance of pulmonary function, liver and spleen, growth and neurological status appropriate to the subtype",
+      "Coordinate multidisciplinary care through metabolic medicine with neurology, respiratory and hepatology input, and offer palliative care in severe infantile type A",
+      "Provide genetic counselling and family screening given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for niemann-pick disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "niemann-pick-disease-real-image",
-   "title": "Niemann-Pick disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "niemann_pick_disease-pathway",
+      "title": "Niemann-Pick disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive group of storage disorders; types A and B result from deficiency of the enzyme acid sphingomyelinase, while type C is a distinct defect of intracellular cholesterol trafficking",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid neurodevelopmental regression in an infant with hepatosplenomegaly",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Acid sphingomyelinase enzyme activity in leukocytes for types A and B, Molecular genetic testing of SMPD1, or NPC1/NPC2 for type C, Bone marrow examination showing foamy storage cells when performed"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer enzyme replacement therapy with olipudase alfa to address the non-neurological visceral and pulmonary manifestations of acid sphingomyelinase deficiency (types A and B)"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the acid sphingomyelinase forms with type C, which requires different diagnostic tests and therapies"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of niemann-pick disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "niemann_pick_disease-matrix",
+      "title": "Niemann-Pick disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive group of storage disorders; types A and B result from deficiency of the enzyme acid sphingomyelinase,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Acid sphingomyelinase enzyme activity in leukocytes for types A and B, Molecular genetic testing of SMPD1, or NPC1/NPC2 for type",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gaucher disease, GM1 gangliosidosis, Other lysosomal storage disorders with hepatosplenomegaly",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer enzyme replacement therapy with olipudase alfa to address the non-neurological visceral and pulmonary manifestations of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the acid sphingomyelinase forms with type C, which requires different diagnostic tests and therapies",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for niemann-pick disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "niemann_pick_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Acid sphingomyelinase activity in leukocytes",
+          "cells": [
+            {
+              "text": "Types A and B"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SMPD1 genetic testing, or NPC1 and NPC2 for type C",
+          "cells": [
+            {
+              "text": "Confirms the subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Foamy storage cells when performed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist metabolic review",
+          "cells": [
+            {
+              "text": "Subtype assignment and management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "niemann_pick_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gaucher disease",
+          "cells": [
+            {
+              "text": "Hepatosplenomegaly with a different enzyme defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GM1 gangliosidosis",
+          "cells": [
+            {
+              "text": "Neurodegeneration with visceromegaly in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological malignancy",
+          "cells": [
+            {
+              "text": "Organomegaly without a storage disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other lysosomal storage disorders",
+          "cells": [
+            {
+              "text": "Hepatosplenomegaly with neurological features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "niemann_pick_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement with olipudase alfa",
+          "cells": [
+            {
+              "text": "Non-neurological visceral and pulmonary disease in types A and B"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substrate-reduction therapy with miglustat",
+          "cells": [
+            {
+              "text": "For type C"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Respiratory, hepatic and haematological complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic, respiratory and neurological teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "niemann_pick_disease-dx-mgmt",
+      "title": "Diagnosis and management of Niemann-Pick disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hepatosplenomegaly with neurodevelopmental regression or lung disease in childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (regression, respiratory compromise, vertical gaze palsy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Respiratory support and urgent metabolic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acid sphingomyelinase activity, SMPD1, NPC1 and NPC2 testing, marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low sphingomyelinase activity or NPC1 or NPC2 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gaucher disease or GM1 gangliosidosis; repeat testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Olipudase alfa enzyme replacement for types A and B",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Miglustat substrate reduction for type C",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive respiratory and haematological care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary specialist follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type A is severe with early childhood death; type B survives longer; type C is variable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

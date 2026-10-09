@@ -1,175 +1,453 @@
 {
- "id": "splenogonadal_fusion",
- "name": "Splenogonadal fusion",
- "aliases": [
-  "SGF",
-  "spleno-gonadal fusion",
-  "accessory splenic tissue fused to gonad"
- ],
- "class": "non_infective",
- "system": "Reticuloendothelial / Genitourinary system",
- "specialty": "Paediatric Surgery / Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / Bailey & Love's Short Practice of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare congenital anomaly in which splenic tissue is abnormally connected to the gonad or a mesonephric derivative, arising when the splenic anlage lies adjacent to the developing gonad and urogenital ridge in the dorsal mesogastrium during the second month of embryonic development",
-   "Two forms are recognised: a continuous type, in which a cord of splenic or fibrous tissue links the orthotopic spleen to the gonad, and a discontinuous type, in which isolated ectopic splenic tissue is fused to the gonad with no connection to the spleen",
-   "There is a marked left-sided and male predominance, so the left testis is the structure most often involved",
-   "The continuous type is associated with terminal transverse limb defects and micrognathia, constituting the splenogonadal fusion-limb defect syndrome",
-   "It typically presents as a scrotal or inguinal mass or an undescended testis and is a well-recognised mimic of a testicular tumour, risking unnecessary orchidectomy",
-   "The ectopic splenic tissue enlarges in parallel with the spleen during systemic illness, so the scrotal swelling may wax and wane with intercurrent infection",
-   "Because the diagnosis is frequently made only at operation, intra-operative frozen section and radionuclide splenic scintigraphy help confirm splenic tissue and permit testis-sparing surgery"
+  "id": "splenogonadal_fusion",
+  "name": "Splenogonadal fusion",
+  "aliases": [
+    "SGF",
+    "spleno-gonadal fusion",
+    "accessory splenic tissue fused to gonad"
   ],
-  "pathophysiology": "During the second month of embryogenesis the splenic primordium develops within the dorsal mesogastrium in close proximity to the left urogenital ridge, mesonephros and gonad. If splenic tissue adheres abnormally to the gonadal anlage before the gonad begins its descent, the splenic tissue is either tethered to or carried along with the gonad. In the continuous type a cord, sometimes beaded with splenic nodules, connects the orthotopic spleen to the gonad; in the discontinuous type an isolated mass of splenic tissue is fused to the gonad. The preponderance of left-sided and male cases reflects these embryological relationships, and the association with limb reduction defects in the continuous type reflects the timing of the developmental insult.",
-  "additionalDifferentials": [
-   "Testicular germ cell tumour",
-   "Paratesticular rhabdomyosarcoma or other paratesticular tumour",
-   "Epididymo-orchitis or torsion of a testicular appendage",
-   "Simple cryptorchidism without fusion",
-   "Inguinal hernia or hydrocele",
-   "Polyorchidism or an adrenal rest",
-   "Acquired splenosis involving the scrotum"
-  ],
-  "additionalInvestigations": [
-   "Scrotal ultrasound with Doppler to characterise the mass and its vascularity",
-   "Technetium-labelled sulphur colloid or heat-damaged red cell scintigraphy to identify splenic tissue",
-   "Serum germ cell tumour markers (alpha-fetoprotein, beta-human chorionic gonadotrophin, lactate dehydrogenase) to help exclude malignancy",
-   "MRI of the pelvis and scrotum for anatomical characterisation",
-   "Intra-operative frozen-section histology",
-   "Skeletal and craniofacial assessment for associated limb defects and micrognathia in the continuous type"
-  ],
-  "redFlags": [
-   "A scrotal mass misinterpreted as malignancy prompting orchidectomy",
-   "A hard or rapidly enlarging testicular mass requiring urgent tumour work-up",
-   "Associated limb reduction defects or micrognathia indicating the syndromic form",
-   "An undescended testis with its attendant malignancy and torsion risk"
-  ],
-  "prognosis": "Splenogonadal fusion is benign and the prognosis is excellent when it is recognised and treated with testis-sparing excision of the ectopic splenic tissue. The principal avoidable morbidity is unnecessary orchidectomy resulting from misdiagnosis as a testicular tumour.",
-  "pitfalls": [
-   "Removing the testis for a presumed tumour without frozen section or splenic scintigraphy",
-   "Not considering the diagnosis in a boy with a left scrotal mass and a limb anomaly",
-   "Attributing a waxing and waning scrotal swelling to a hernia",
-   "Failing to preserve the gonad in a child when benign splenic tissue is confirmed",
-   "Overlooking associated cryptorchidism and its long-term surveillance needs"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Bailey & Love's Short Practice of Surgery",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Testis-sparing excision of the ectopic splenic tissue as definitive treatment, preserving the gonad",
-   "Avoid unnecessary orchidectomy by recognising the diagnosis and using intra-operative frozen-section histology when a testicular tumour is suspected",
-   "Pre-operative confirmation of splenic tissue with scintigraphy and exclusion of malignancy with germ cell tumour markers",
-   "Orchidopexy where the anomaly is associated with an undescended testis",
-   "Assess for and manage associated terminal transverse limb defects and micrognathia in the continuous type",
-   "Paediatric surgery and urology referral, with reassurance regarding the benign nature and excellent prognosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "splenogonadal_fusion-pathway",
-   "title": "Splenogonadal fusion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare congenital anomaly in which splenic tissue is abnormally connected to the gonad or a mesonephric derivative, arising when the splenic anlage lies adjacent to the developing gonad and urogenital ridge in the dorsal mesogastrium",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A scrotal mass misinterpreted as malignancy prompting orchidectomy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Scrotal ultrasound with Doppler to characterise the mass and its vascularity, Technetium-labelled sulphur colloid or heat-damaged red cell scintigraphy to identify splenic tissue, Serum germ cell tumour markers"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Testis-sparing excision of the ectopic splenic tissue as definitive treatment, preserving the gonad"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Removing the testis for a presumed tumour without frozen section or splenic scintigraphy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of splenogonadal fusion."
-  }
- ],
- "tables": [
-  {
-   "id": "splenogonadal_fusion-matrix",
-   "title": "Splenogonadal fusion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare congenital anomaly in which splenic tissue is abnormally connected to the gonad or a mesonephric derivative, arising when",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Reticuloendothelial / Genitourinary system",
+  "specialty": "Paediatric Surgery / Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / Bailey & Love's Short Practice of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare congenital anomaly in which splenic tissue is abnormally connected to the gonad or a mesonephric derivative, arising when the splenic anlage lies adjacent to the developing gonad and urogenital ridge in the dorsal mesogastrium during the second month of embryonic development",
+      "Two forms are recognised: a continuous type, in which a cord of splenic or fibrous tissue links the orthotopic spleen to the gonad, and a discontinuous type, in which isolated ectopic splenic tissue is fused to the gonad with no connection to the spleen",
+      "There is a marked left-sided and male predominance, so the left testis is the structure most often involved",
+      "The continuous type is associated with terminal transverse limb defects and micrognathia, constituting the splenogonadal fusion-limb defect syndrome",
+      "It typically presents as a scrotal or inguinal mass or an undescended testis and is a well-recognised mimic of a testicular tumour, risking unnecessary orchidectomy",
+      "The ectopic splenic tissue enlarges in parallel with the spleen during systemic illness, so the scrotal swelling may wax and wane with intercurrent infection",
+      "Because the diagnosis is frequently made only at operation, intra-operative frozen section and radionuclide splenic scintigraphy help confirm splenic tissue and permit testis-sparing surgery"
     ],
-    [
-     "Key Investigations",
-     "Scrotal ultrasound with Doppler to characterise the mass and its vascularity, Technetium-labelled sulphur colloid or heat-damaged",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During the second month of embryogenesis the splenic primordium develops within the dorsal mesogastrium in close proximity to the left urogenital ridge, mesonephros and gonad. If splenic tissue adheres abnormally to the gonadal anlage before the gonad begins its descent, the splenic tissue is either tethered to or carried along with the gonad. In the continuous type a cord, sometimes beaded with splenic nodules, connects the orthotopic spleen to the gonad; in the discontinuous type an isolated mass of splenic tissue is fused to the gonad. The preponderance of left-sided and male cases reflects these embryological relationships, and the association with limb reduction defects in the continuous type reflects the timing of the developmental insult.",
+    "additionalDifferentials": [
+      "Testicular germ cell tumour",
+      "Paratesticular rhabdomyosarcoma or other paratesticular tumour",
+      "Epididymo-orchitis or torsion of a testicular appendage",
+      "Simple cryptorchidism without fusion",
+      "Inguinal hernia or hydrocele",
+      "Polyorchidism or an adrenal rest",
+      "Acquired splenosis involving the scrotum"
     ],
-    [
-     "Primary Differentials",
-     "Testicular germ cell tumour, Paratesticular rhabdomyosarcoma or other paratesticular tumour, Epididymo-orchitis or torsion of a",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Scrotal ultrasound with Doppler to characterise the mass and its vascularity",
+      "Technetium-labelled sulphur colloid or heat-damaged red cell scintigraphy to identify splenic tissue",
+      "Serum germ cell tumour markers (alpha-fetoprotein, beta-human chorionic gonadotrophin, lactate dehydrogenase) to help exclude malignancy",
+      "MRI of the pelvis and scrotum for anatomical characterisation",
+      "Intra-operative frozen-section histology",
+      "Skeletal and craniofacial assessment for associated limb defects and micrognathia in the continuous type"
     ],
-    [
-     "Management Strategy",
-     "Testis-sparing excision of the ectopic splenic tissue as definitive treatment, preserving the gonad",
-     "Core treatment modality"
+    "redFlags": [
+      "A scrotal mass misinterpreted as malignancy prompting orchidectomy",
+      "A hard or rapidly enlarging testicular mass requiring urgent tumour work-up",
+      "Associated limb reduction defects or micrognathia indicating the syndromic form",
+      "An undescended testis with its attendant malignancy and torsion risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Removing the testis for a presumed tumour without frozen section or splenic scintigraphy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Splenogonadal fusion is benign and the prognosis is excellent when it is recognised and treated with testis-sparing excision of the ectopic splenic tissue. The principal avoidable morbidity is unnecessary orchidectomy resulting from misdiagnosis as a testicular tumour.",
+    "pitfalls": [
+      "Removing the testis for a presumed tumour without frozen section or splenic scintigraphy",
+      "Not considering the diagnosis in a boy with a left scrotal mass and a limb anomaly",
+      "Attributing a waxing and waning scrotal swelling to a hernia",
+      "Failing to preserve the gonad in a child when benign splenic tissue is confirmed",
+      "Overlooking associated cryptorchidism and its long-term surveillance needs"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Bailey & Love's Short Practice of Surgery",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Testis-sparing excision of the ectopic splenic tissue as definitive treatment, preserving the gonad",
+      "Avoid unnecessary orchidectomy by recognising the diagnosis and using intra-operative frozen-section histology when a testicular tumour is suspected",
+      "Pre-operative confirmation of splenic tissue with scintigraphy and exclusion of malignancy with germ cell tumour markers",
+      "Orchidopexy where the anomaly is associated with an undescended testis",
+      "Assess for and manage associated terminal transverse limb defects and micrognathia in the continuous type",
+      "Paediatric surgery and urology referral, with reassurance regarding the benign nature and excellent prognosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for splenogonadal fusion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "splenogonadal-fusion-real-image",
-   "title": "Splenogonadal fusion: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "splenogonadal_fusion-pathway",
+      "title": "Splenogonadal fusion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare congenital anomaly in which splenic tissue is abnormally connected to the gonad or a mesonephric derivative, arising when the splenic anlage lies adjacent to the developing gonad and urogenital ridge in the dorsal mesogastrium",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A scrotal mass misinterpreted as malignancy prompting orchidectomy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Scrotal ultrasound with Doppler to characterise the mass and its vascularity, Technetium-labelled sulphur colloid or heat-damaged red cell scintigraphy to identify splenic tissue, Serum germ cell tumour markers"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Testis-sparing excision of the ectopic splenic tissue as definitive treatment, preserving the gonad"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Removing the testis for a presumed tumour without frozen section or splenic scintigraphy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of splenogonadal fusion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "splenogonadal_fusion-matrix",
+      "title": "Splenogonadal fusion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare congenital anomaly in which splenic tissue is abnormally connected to the gonad or a mesonephric derivative, arising when",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Scrotal ultrasound with Doppler to characterise the mass and its vascularity, Technetium-labelled sulphur colloid or heat-damaged",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Testicular germ cell tumour, Paratesticular rhabdomyosarcoma or other paratesticular tumour, Epididymo-orchitis or torsion of a",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Testis-sparing excision of the ectopic splenic tissue as definitive treatment, preserving the gonad",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Removing the testis for a presumed tumour without frozen section or splenic scintigraphy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for splenogonadal fusion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / Bailey & Love's Short Practice of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "splenogonadal_fusion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Scrotal ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Mass and its vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Technetium sulphur colloid or heat-damaged red cell scintigraphy",
+          "cells": [
+            {
+              "text": "Identifies splenic tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germ cell tumour markers (AFP, beta-hCG)",
+          "cells": [
+            {
+              "text": "Excludes a germ cell tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of pelvis and scrotum",
+          "cells": [
+            {
+              "text": "Anatomical characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-operative frozen-section histology",
+          "cells": [
+            {
+              "text": "Tissue diagnosis at operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and craniofacial assessment",
+          "cells": [
+            {
+              "text": "Limb defects and micrognathia in the syndromic form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenogonadal_fusion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Testicular germ cell tumour",
+          "cells": [
+            {
+              "text": "Removing the testis without frozen section or scintigraphy is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inguinal hernia or hydrocele",
+          "cells": [
+            {
+              "text": "Waxing and waning scrotal swelling is often wrongly attributed to a hernia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenogonadal_fusion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Testis-sparing excision",
+          "cells": [
+            {
+              "text": "Ectopic splenic tissue, as definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary orchidectomy",
+          "cells": [
+            {
+              "text": "Using intra-operative frozen section"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative scintigraphy",
+          "cells": [
+            {
+              "text": "Confirms splenic tissue and excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchidopexy",
+          "cells": [
+            {
+              "text": "Where an undescended testis is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb and jaw assessment",
+          "cells": [
+            {
+              "text": "Terminal transverse limb defects and micrognathia in the syndromic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric surgery and urology referral",
+          "cells": [
+            {
+              "text": "Reassurance about the benign nature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "splenogonadal_fusion-dx-mgmt",
+      "title": "Diagnosis and management of Splenogonadal fusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Left scrotal mass in a boy, possibly with a limb anomaly: suspected splenogonadal fusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hard or rapidly growing testicular mass, limb or jaw defects)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent tumour work-up; avoid orchidectomy before tissue diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Scrotal Doppler ultrasound; Tc colloid scintigraphy; AFP and beta-hCG; frozen section",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does scintigraphy or frozen section confirm splenic tissue with malignancy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider germ cell tumour or hernia; complete tumour work-up and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Testis-sparing excision of the ectopic splenic tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid unnecessary orchidectomy using intra-operative frozen section",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orchidopexy where an undescended testis is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess limb defects and micrognathia in the syndromic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; the gonad is preserved when splenic tissue is confirmed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

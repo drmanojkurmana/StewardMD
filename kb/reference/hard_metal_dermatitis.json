@@ -1,177 +1,491 @@
 {
- "id": "hard_metal_dermatitis",
- "name": "hard metal dermatitis",
- "aliases": [
-  "cobalt-tungsten carbide dermatitis",
-  "tungsten carbide worker dermatitis"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "occupational medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hard metal is a sintered composite of tungsten carbide with a cobalt binder used for cutting tools, drill bits and wear-resistant parts; cobalt is the principal skin sensitiser.",
-   "Workers in tool grinding, sharpening and manufacture present with hand and forearm eczema, and diamond polishers using cobalt-containing wheels are a classic at-risk group.",
-   "The dermatitis is usually an allergic contact dermatitis to cobalt, though irritant contact dermatitis from coolants, abrasives and wet work frequently coexists and can be hard to separate.",
-   "Cobalt allergy commonly occurs together with nickel and sometimes chromate sensitivity, so concurrent reactions on patch testing are frequent.",
-   "Wet grinding coolants both leach cobalt from the workpiece and act as irritants, increasing skin exposure and barrier damage.",
-   "The same cobalt exposure can cause hard metal lung disease (giant-cell interstitial pneumonitis) and occupational asthma, so enquire about respiratory symptoms.",
-   "Patch testing to cobalt chloride, nickel sulfate and potassium dichromate is central to diagnosis; workplace and glove assessment complements it.",
-   "Management combines cobalt avoidance and substitution, improved coolant hygiene, appropriate gloves and barrier care, and treatment of the eczema."
+  "id": "hard_metal_dermatitis",
+  "name": "hard metal dermatitis",
+  "aliases": [
+    "cobalt-tungsten carbide dermatitis",
+    "tungsten carbide worker dermatitis"
   ],
-  "pathophysiology": "Hard metal dermatitis is predominantly a delayed-type (type IV) hypersensitivity to cobalt. Cobalt ions released from the alloy — especially when wet-grinding coolants leach metal from tools — penetrate the epidermis and bind host proteins to form haptens that are processed by Langerhans cells and presented to T lymphocytes; on re-exposure a sensitised T-cell response produces spongiotic eczematous inflammation. Superimposed irritant contact dermatitis is common, driven by coolants, solvents, abrasive dusts and repetitive wet work that damage the stratum corneum barrier, enhance penetration of allergens and lower the threshold for both irritant and allergic reactions. Frequent co-sensitisation to nickel and chromium reflects shared exposures and possibly cross-reactivity. Inhaled cobalt-tungsten carbide particles can additionally provoke immunologically mediated interstitial lung disease and asthma through separate respiratory mechanisms.",
-  "additionalDifferentials": [
-   "irritant contact dermatitis from coolants and wet work",
-   "allergic contact dermatitis to nickel or chromate",
-   "allergic contact dermatitis to biocides or additives in metalworking fluids",
-   "atopic hand eczema",
-   "pompholyx (dyshidrotic eczema)",
-   "psoriasis of the hands",
-   "contact urticaria to metalworking fluids"
-  ],
-  "additionalInvestigations": [
-   "detailed occupational history of grinding, coolants and materials handled",
-   "patch testing to cobalt chloride, nickel sulfate and potassium dichromate",
-   "patch testing to metalworking fluid components and biocides",
-   "assessment and testing of coolants and gloves used in the workplace",
-   "skin swabs if secondary infection of eczema is suspected",
-   "respiratory enquiry with spirometry or peak-flow monitoring if symptomatic",
-   "chest imaging and specialist referral if hard metal lung disease is suspected"
-  ],
-  "redFlags": [
-   "breathlessness or cough suggesting hard metal lung disease or occupational asthma",
-   "severe or widely spreading eczema with signs of secondary infection",
-   "rapid recurrence on return to work indicating uncontrolled exposure",
-   "involvement of multiple co-workers implying a systemic hygiene failure",
-   "features suggesting systemic contact dermatitis from ingested or inhaled cobalt"
-  ],
-  "prognosis": "With cobalt avoidance, improved coolant hygiene and barrier measures the dermatitis often improves, but established cobalt sensitisation is lifelong and eczema may persist or recur if exposure continues. Coexisting respiratory disease worsens the overall outlook and warrants separate management.",
-  "pitfalls": [
-   "Attributing the eczema solely to irritation and missing underlying cobalt allergy.",
-   "Testing only for nickel and overlooking concurrent cobalt and chromate sensitivity.",
-   "Ignoring respiratory symptoms and failing to consider hard metal lung disease.",
-   "Assuming gloves are protective without checking permeation and hygiene practices.",
-   "Overlooking coolant biocides and additives as separate sensitisers or irritants."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Adams' Occupational Skin Disease, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Eliminate cobalt exposure through substitution, improved coolant hygiene, and engineering controls, as avoidance is the definitive treatment",
-   "Restore and protect the skin barrier with emollients, suitable protective gloves, and reduction of wet work",
-   "Treat eczematous flares with topical corticosteroids, reserving short courses of systemic steroids for severe disease",
-   "Address coexisting irritant contact dermatitis by minimising contact with metalworking-fluid coolants, solvents, and abrasive dusts",
-   "Confirm and characterise sensitisation with patch testing to cobalt, nickel, and chromate to direct avoidance",
-   "Enquire about and screen for associated respiratory disease such as occupational asthma and hard metal lung disease",
-   "Refer to occupational health for workplace assessment, and escalate to task modification or redeployment where dermatitis persists despite exposure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hard_metal_dermatitis-pathway",
-   "title": "hard metal dermatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hard metal is a sintered composite of tungsten carbide with a cobalt binder used for cutting tools, drill bits and wear-resistant parts; cobalt is the principal skin sensitiser.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: breathlessness or cough suggesting hard metal lung disease or occupational asthma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: detailed occupational history of grinding, coolants and materials handled, patch testing to cobalt chloride, nickel sulfate and potassium dichromate, patch testing to metalworking fluid components and biocides"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Eliminate cobalt exposure through substitution, improved coolant hygiene, and engineering controls, as avoidance is the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the eczema solely to irritation and missing underlying cobalt allergy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hard metal dermatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "hard_metal_dermatitis-matrix",
-   "title": "hard metal dermatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hard metal is a sintered composite of tungsten carbide with a cobalt binder used for cutting tools, drill bits and wear-resistant",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "occupational medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hard metal is a sintered composite of tungsten carbide with a cobalt binder used for cutting tools, drill bits and wear-resistant parts; cobalt is the principal skin sensitiser.",
+      "Workers in tool grinding, sharpening and manufacture present with hand and forearm eczema, and diamond polishers using cobalt-containing wheels are a classic at-risk group.",
+      "The dermatitis is usually an allergic contact dermatitis to cobalt, though irritant contact dermatitis from coolants, abrasives and wet work frequently coexists and can be hard to separate.",
+      "Cobalt allergy commonly occurs together with nickel and sometimes chromate sensitivity, so concurrent reactions on patch testing are frequent.",
+      "Wet grinding coolants both leach cobalt from the workpiece and act as irritants, increasing skin exposure and barrier damage.",
+      "The same cobalt exposure can cause hard metal lung disease (giant-cell interstitial pneumonitis) and occupational asthma, so enquire about respiratory symptoms.",
+      "Patch testing to cobalt chloride, nickel sulfate and potassium dichromate is central to diagnosis; workplace and glove assessment complements it.",
+      "Management combines cobalt avoidance and substitution, improved coolant hygiene, appropriate gloves and barrier care, and treatment of the eczema."
     ],
-    [
-     "Key Investigations",
-     "detailed occupational history of grinding, coolants and materials handled, patch testing to cobalt chloride, nickel sulfate and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hard metal dermatitis is predominantly a delayed-type (type IV) hypersensitivity to cobalt. Cobalt ions released from the alloy — especially when wet-grinding coolants leach metal from tools — penetrate the epidermis and bind host proteins to form haptens that are processed by Langerhans cells and presented to T lymphocytes; on re-exposure a sensitised T-cell response produces spongiotic eczematous inflammation. Superimposed irritant contact dermatitis is common, driven by coolants, solvents, abrasive dusts and repetitive wet work that damage the stratum corneum barrier, enhance penetration of allergens and lower the threshold for both irritant and allergic reactions. Frequent co-sensitisation to nickel and chromium reflects shared exposures and possibly cross-reactivity. Inhaled cobalt-tungsten carbide particles can additionally provoke immunologically mediated interstitial lung disease and asthma through separate respiratory mechanisms.",
+    "additionalDifferentials": [
+      "irritant contact dermatitis from coolants and wet work",
+      "allergic contact dermatitis to nickel or chromate",
+      "allergic contact dermatitis to biocides or additives in metalworking fluids",
+      "atopic hand eczema",
+      "pompholyx (dyshidrotic eczema)",
+      "psoriasis of the hands",
+      "contact urticaria to metalworking fluids"
     ],
-    [
-     "Primary Differentials",
-     "irritant contact dermatitis from coolants and wet work, allergic contact dermatitis to nickel or chromate, allergic contact",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "detailed occupational history of grinding, coolants and materials handled",
+      "patch testing to cobalt chloride, nickel sulfate and potassium dichromate",
+      "patch testing to metalworking fluid components and biocides",
+      "assessment and testing of coolants and gloves used in the workplace",
+      "skin swabs if secondary infection of eczema is suspected",
+      "respiratory enquiry with spirometry or peak-flow monitoring if symptomatic",
+      "chest imaging and specialist referral if hard metal lung disease is suspected"
     ],
-    [
-     "Management Strategy",
-     "Eliminate cobalt exposure through substitution, improved coolant hygiene, and engineering controls, as avoidance is the",
-     "Core treatment modality"
+    "redFlags": [
+      "breathlessness or cough suggesting hard metal lung disease or occupational asthma",
+      "severe or widely spreading eczema with signs of secondary infection",
+      "rapid recurrence on return to work indicating uncontrolled exposure",
+      "involvement of multiple co-workers implying a systemic hygiene failure",
+      "features suggesting systemic contact dermatitis from ingested or inhaled cobalt"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the eczema solely to irritation and missing underlying cobalt allergy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With cobalt avoidance, improved coolant hygiene and barrier measures the dermatitis often improves, but established cobalt sensitisation is lifelong and eczema may persist or recur if exposure continues. Coexisting respiratory disease worsens the overall outlook and warrants separate management.",
+    "pitfalls": [
+      "Attributing the eczema solely to irritation and missing underlying cobalt allergy.",
+      "Testing only for nickel and overlooking concurrent cobalt and chromate sensitivity.",
+      "Ignoring respiratory symptoms and failing to consider hard metal lung disease.",
+      "Assuming gloves are protective without checking permeation and hygiene practices.",
+      "Overlooking coolant biocides and additives as separate sensitisers or irritants."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Adams' Occupational Skin Disease, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Eliminate cobalt exposure through substitution, improved coolant hygiene, and engineering controls, as avoidance is the definitive treatment",
+      "Restore and protect the skin barrier with emollients, suitable protective gloves, and reduction of wet work",
+      "Treat eczematous flares with topical corticosteroids, reserving short courses of systemic steroids for severe disease",
+      "Address coexisting irritant contact dermatitis by minimising contact with metalworking-fluid coolants, solvents, and abrasive dusts",
+      "Confirm and characterise sensitisation with patch testing to cobalt, nickel, and chromate to direct avoidance",
+      "Enquire about and screen for associated respiratory disease such as occupational asthma and hard metal lung disease",
+      "Refer to occupational health for workplace assessment, and escalate to task modification or redeployment where dermatitis persists despite exposure"
     ]
-   ],
-   "caption": "Overview comparison matrix for hard metal dermatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hard-metal-dermatitis-real-image",
-   "title": "hard metal dermatitis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "hard_metal_dermatitis-pathway",
+      "title": "hard metal dermatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hard metal is a sintered composite of tungsten carbide with a cobalt binder used for cutting tools, drill bits and wear-resistant parts; cobalt is the principal skin sensitiser.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: breathlessness or cough suggesting hard metal lung disease or occupational asthma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: detailed occupational history of grinding, coolants and materials handled, patch testing to cobalt chloride, nickel sulfate and potassium dichromate, patch testing to metalworking fluid components and biocides"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Eliminate cobalt exposure through substitution, improved coolant hygiene, and engineering controls, as avoidance is the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the eczema solely to irritation and missing underlying cobalt allergy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hard metal dermatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hard_metal_dermatitis-matrix",
+      "title": "hard metal dermatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hard metal is a sintered composite of tungsten carbide with a cobalt binder used for cutting tools, drill bits and wear-resistant",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "detailed occupational history of grinding, coolants and materials handled, patch testing to cobalt chloride, nickel sulfate and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "irritant contact dermatitis from coolants and wet work, allergic contact dermatitis to nickel or chromate, allergic contact",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Eliminate cobalt exposure through substitution, improved coolant hygiene, and engineering controls, as avoidance is the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the eczema solely to irritation and missing underlying cobalt allergy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hard metal dermatitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hard_metal_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed occupational history",
+          "cells": [
+            {
+              "text": "Grinding, coolants and materials handled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing to cobalt chloride, nickel sulfate and potassium dichromate",
+          "cells": [
+            {
+              "text": "Allergic sensitisation to cobalt, nickel and chromate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing to metalworking fluid components and biocides",
+          "cells": [
+            {
+              "text": "Sensitisation to fluid additives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing of workplace coolants and gloves",
+          "cells": [
+            {
+              "text": "Workplace agents implicated in contact dermatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swabs",
+          "cells": [
+            {
+              "text": "Secondary infection of eczema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry or peak-flow monitoring",
+          "cells": [
+            {
+              "text": "Respiratory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Used when hard metal lung disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hard_metal_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Irritant contact dermatitis from coolants and wet work",
+          "cells": [
+            {
+              "text": "Wet grinding coolants act as irritants and leach cobalt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic contact dermatitis to nickel or chromate",
+          "cells": [
+            {
+              "text": "Cobalt allergy often occurs together with nickel or chromate sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atopic hand eczema",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pompholyx (dyshidrotic eczema)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hard_metal_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Eliminate cobalt exposure",
+          "cells": [
+            {
+              "text": "Substitution, improved coolant hygiene and engineering controls; avoidance is the key"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barrier protection",
+          "cells": [
+            {
+              "text": "Emollients, suitable protective gloves and reduced wet work"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "For eczematous flares; short systemic courses for severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimise irritant contact",
+          "cells": [
+            {
+              "text": "Coolants, solvents and abrasives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "Confirms sensitisation to cobalt, nickel and chromate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory screening",
+          "cells": [
+            {
+              "text": "Occupational asthma and hard metal lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health referral",
+          "cells": [
+            {
+              "text": "Workplace assessment; task modification or redeployment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hard_metal_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of hard metal dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hand and forearm eczema in a worker exposed to hard metal or coolants",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (breathlessness, secondary infection, spreading or systemic eczema)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: assess for hard metal lung disease; treat infected eczema urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Occupational history; patch testing for cobalt, nickel and chromate; spirometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does patch testing confirm cobalt or metalworking fluid sensitisation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider irritant dermatitis, nickel or chromate allergy, or other hand eczema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Eliminate cobalt exposure through substitution and better coolant hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients, suitable protective gloves and reduced wet work",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids for flares; systemic steroids for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer to occupational health for task modification or redeployment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Exposure controlled; dermatitis settles, with respiratory review as needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

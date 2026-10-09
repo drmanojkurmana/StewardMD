@@ -1,172 +1,460 @@
 {
- "id": "prepatellar_bursitis",
- "name": "Prepatellar bursitis",
- "aliases": [
-  "housemaid's knee",
-  "carpet layer's knee",
-  "kneecap bursitis",
-  "prepatellar bursopathy"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Sports & Soft tissue",
- "specialty": "Sports Medicine / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Brukner and Khan's Clinical Sports Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Swelling over the front of the kneecap from inflammation of the superficial prepatellar bursa",
-   "Classically related to prolonged or repetitive kneeling, hence 'housemaid's knee'",
-   "As with the olecranon bursa, the superficial position makes it prone to septic bursitis",
-   "Distinguishing septic from aseptic bursitis is the priority; warmth, erythema, fever and disproportionate pain suggest infection",
-   "Aspiration for cell count, Gram stain, culture and crystal microscopy guides management when infection is suspected",
-   "The knee joint itself is usually uninvolved and joint range is typically preserved",
-   "Aseptic cases are managed with avoidance of kneeling, protection and aspiration if symptomatic, with corticosteroid injection reserved for resistant aseptic cases and avoided when infection is possible"
+  "id": "prepatellar_bursitis",
+  "name": "Prepatellar bursitis",
+  "aliases": [
+    "housemaid's knee",
+    "carpet layer's knee",
+    "kneecap bursitis",
+    "prepatellar bursopathy"
   ],
-  "pathophysiology": "The prepatellar bursa lies superficially between the skin and the patella, allowing the skin to glide over the kneecap. Repetitive kneeling, friction or a direct blow provokes inflammation and effusion. Its superficial location makes it vulnerable to inoculation and infection, particularly through breaks in the overlying skin and typically with skin organisms such as staphylococci. Systemic causes such as gout and rheumatoid disease can also inflame the bursa. Because the bursa does not communicate with the knee joint, intra-articular structures are usually spared.",
-  "additionalDifferentials": [
-   "Septic prepatellar bursitis",
-   "Knee joint effusion or intra-articular pathology",
-   "Gout or pseudogout",
-   "Infrapatellar bursitis (clergyman's knee)",
-   "Cellulitis of the anterior knee",
-   "Patellar fracture or contusion"
-  ],
-  "additionalInvestigations": [
-   "Bursal aspiration for cell count, Gram stain and culture",
-   "Polarised light microscopy for crystals",
-   "Inflammatory markers, with blood cultures if systemically unwell",
-   "Ultrasound to confirm a superficial bursal collection separate from the joint",
-   "Plain radiographs if fracture or a foreign body is suspected"
-  ],
-  "redFlags": [
-   "Fever, spreading erythema and severe pain suggesting septic bursitis or cellulitis",
-   "An overlying wound or immunosuppression",
-   "Features of systemic sepsis",
-   "A tense joint effusion or inability to bear weight suggesting intra-articular pathology"
-  ],
-  "prognosis": "Aseptic prepatellar bursitis usually resolves with protection and activity change, recurring if kneeling continues; septic bursitis typically responds to antibiotics and drainage.",
-  "pitfalls": [
-   "Injecting a potentially infected bursa with corticosteroid",
-   "Confusing a superficial bursal swelling with a true knee joint effusion",
-   "Not analysing aspirate when infection is suspected",
-   "Overlooking a foreign body or penetrating injury"
-  ],
-  "references": [
-   "Brukner and Khan's Clinical Sports Medicine",
-   "British Journal of Sports Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Aseptic bursitis: conservative care with avoidance of kneeling, rest, ice, compression and NSAIDs, aspirating a large effusion for comfort",
-   "Bursal aspiration for cell count, Gram stain, culture and crystal microscopy to distinguish septic from aseptic bursitis and direct therapy",
-   "Septic bursitis: antistaphylococcal antibiotics with surgical drainage if pus persists",
-   "Treat systemic contributors such as gout with crystal-directed therapy or rheumatoid disease",
-   "Prevent recurrence with knee protection such as kneeling pads and activity modification",
-   "Surgical bursectomy for recurrent or refractory aseptic bursitis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "prepatellar_bursitis-pathway",
-   "title": "Prepatellar bursitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Swelling over the front of the kneecap from inflammation of the superficial prepatellar bursa",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fever, spreading erythema and severe pain suggesting septic bursitis or cellulitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bursal aspiration for cell count, Gram stain and culture, Polarised light microscopy for crystals, Inflammatory markers, with blood cultures if systemically unwell"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Aseptic bursitis: conservative care with avoidance of kneeling, rest, ice, compression and NSAIDs, aspirating a large effusion for comfort"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Injecting a potentially infected bursa with corticosteroid"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of prepatellar bursitis."
-  }
- ],
- "tables": [
-  {
-   "id": "prepatellar_bursitis-matrix",
-   "title": "Prepatellar bursitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Swelling over the front of the kneecap from inflammation of the superficial prepatellar bursa",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Sports & Soft tissue",
+  "specialty": "Sports Medicine / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Brukner and Khan's Clinical Sports Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Swelling over the front of the kneecap from inflammation of the superficial prepatellar bursa",
+      "Classically related to prolonged or repetitive kneeling, hence 'housemaid's knee'",
+      "As with the olecranon bursa, the superficial position makes it prone to septic bursitis",
+      "Distinguishing septic from aseptic bursitis is the priority; warmth, erythema, fever and disproportionate pain suggest infection",
+      "Aspiration for cell count, Gram stain, culture and crystal microscopy guides management when infection is suspected",
+      "The knee joint itself is usually uninvolved and joint range is typically preserved",
+      "Aseptic cases are managed with avoidance of kneeling, protection and aspiration if symptomatic, with corticosteroid injection reserved for resistant aseptic cases and avoided when infection is possible"
     ],
-    [
-     "Key Investigations",
-     "Bursal aspiration for cell count, Gram stain and culture, Polarised light microscopy for crystals, Inflammatory markers, with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The prepatellar bursa lies superficially between the skin and the patella, allowing the skin to glide over the kneecap. Repetitive kneeling, friction or a direct blow provokes inflammation and effusion. Its superficial location makes it vulnerable to inoculation and infection, particularly through breaks in the overlying skin and typically with skin organisms such as staphylococci. Systemic causes such as gout and rheumatoid disease can also inflame the bursa. Because the bursa does not communicate with the knee joint, intra-articular structures are usually spared.",
+    "additionalDifferentials": [
+      "Septic prepatellar bursitis",
+      "Knee joint effusion or intra-articular pathology",
+      "Gout or pseudogout",
+      "Infrapatellar bursitis (clergyman's knee)",
+      "Cellulitis of the anterior knee",
+      "Patellar fracture or contusion"
     ],
-    [
-     "Primary Differentials",
-     "Septic prepatellar bursitis, Knee joint effusion or intra-articular pathology, Gout or pseudogout",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bursal aspiration for cell count, Gram stain and culture",
+      "Polarised light microscopy for crystals",
+      "Inflammatory markers, with blood cultures if systemically unwell",
+      "Ultrasound to confirm a superficial bursal collection separate from the joint",
+      "Plain radiographs if fracture or a foreign body is suspected"
     ],
-    [
-     "Management Strategy",
-     "Aseptic bursitis: conservative care with avoidance of kneeling, rest, ice, compression and NSAIDs, aspirating a large effusion",
-     "Core treatment modality"
+    "redFlags": [
+      "Fever, spreading erythema and severe pain suggesting septic bursitis or cellulitis",
+      "An overlying wound or immunosuppression",
+      "Features of systemic sepsis",
+      "A tense joint effusion or inability to bear weight suggesting intra-articular pathology"
     ],
-    [
-     "Clinical Pitfall",
-     "Injecting a potentially infected bursa with corticosteroid",
-     "Prevent diagnostic or management error"
+    "prognosis": "Aseptic prepatellar bursitis usually resolves with protection and activity change, recurring if kneeling continues; septic bursitis typically responds to antibiotics and drainage.",
+    "pitfalls": [
+      "Injecting a potentially infected bursa with corticosteroid",
+      "Confusing a superficial bursal swelling with a true knee joint effusion",
+      "Not analysing aspirate when infection is suspected",
+      "Overlooking a foreign body or penetrating injury"
+    ],
+    "references": [
+      "Brukner and Khan's Clinical Sports Medicine",
+      "British Journal of Sports Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Aseptic bursitis: conservative care with avoidance of kneeling, rest, ice, compression and NSAIDs, aspirating a large effusion for comfort",
+      "Bursal aspiration for cell count, Gram stain, culture and crystal microscopy to distinguish septic from aseptic bursitis and direct therapy",
+      "Septic bursitis: antistaphylococcal antibiotics with surgical drainage if pus persists",
+      "Treat systemic contributors such as gout with crystal-directed therapy or rheumatoid disease",
+      "Prevent recurrence with knee protection such as kneeling pads and activity modification",
+      "Surgical bursectomy for recurrent or refractory aseptic bursitis"
     ]
-   ],
-   "caption": "Overview comparison matrix for prepatellar bursitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "prepatellar-bursitis-real-image",
-   "title": "Prepatellar bursitis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "prepatellar_bursitis-pathway",
+      "title": "Prepatellar bursitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Swelling over the front of the kneecap from inflammation of the superficial prepatellar bursa",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fever, spreading erythema and severe pain suggesting septic bursitis or cellulitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bursal aspiration for cell count, Gram stain and culture, Polarised light microscopy for crystals, Inflammatory markers, with blood cultures if systemically unwell"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Aseptic bursitis: conservative care with avoidance of kneeling, rest, ice, compression and NSAIDs, aspirating a large effusion for comfort"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Injecting a potentially infected bursa with corticosteroid"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of prepatellar bursitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "prepatellar_bursitis-matrix",
+      "title": "Prepatellar bursitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Swelling over the front of the kneecap from inflammation of the superficial prepatellar bursa",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bursal aspiration for cell count, Gram stain and culture, Polarised light microscopy for crystals, Inflammatory markers, with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Septic prepatellar bursitis, Knee joint effusion or intra-articular pathology, Gout or pseudogout",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Aseptic bursitis: conservative care with avoidance of kneeling, rest, ice, compression and NSAIDs, aspirating a large effusion",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Injecting a potentially infected bursa with corticosteroid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for prepatellar bursitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "prepatellar_bursitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bursal aspiration for cell count, Gram stain and culture",
+          "cells": [
+            {
+              "text": "Septic versus aseptic bursitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polarised light microscopy",
+          "cells": [
+            {
+              "text": "Crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers, blood cultures if unwell",
+          "cells": [
+            {
+              "text": "Systemic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Superficial bursal collection separate from the joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Fracture or a foreign body, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prepatellar_bursitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Knee joint effusion or intra-articular pathology",
+          "cells": [
+            {
+              "text": "Tense effusion or inability to bear weight"
+            },
+            {
+              "text": "Ultrasound to separate bursa from joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout or pseudogout",
+          "cells": [
+            {
+              "text": "Crystals on bursal aspirate"
+            },
+            {
+              "text": "Polarised light microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis of the anterior knee",
+          "cells": [
+            {
+              "text": "Fever, spreading erythema and severe pain"
+            },
+            {
+              "text": "Blood cultures if systemically unwell"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "prepatellar_bursitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aseptic bursitis, conservative care",
+          "cells": [
+            {
+              "text": "Rest, ice, compression; avoid kneeling and NSAIDs; aspirate a large effusion for comfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bursal aspiration",
+          "cells": [
+            {
+              "text": "Cell count, Gram stain, culture and crystal microscopy to direct therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic bursitis antibiotics",
+          "cells": [
+            {
+              "text": "Antistaphylococcal antibiotics; surgical drainage if pus persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat systemic contributors",
+          "cells": [
+            {
+              "text": "Crystal-directed therapy for gout, or treatment of rheumatoid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent recurrence",
+          "cells": [
+            {
+              "text": "Knee protection such as kneeling pads and activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical bursectomy",
+          "cells": [
+            {
+              "text": "Recurrent or refractory aseptic bursitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "prepatellar_bursitis-dx-mgmt",
+      "title": "Diagnosis and management of Prepatellar bursitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected prepatellar bursitis: swelling over the patella",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever, spreading erythema, wound, immunosuppression or tense effusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for septic bursitis or intra-articular pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bursal aspiration: cell count, Gram stain, culture and crystal microscopy; ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the aspirate show infection (septic bursitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider aseptic bursitis, crystal arthropathy or cellulitis; repeat assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aseptic: rest, ice, compression, avoid kneeling and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Septic: antistaphylococcal antibiotics, surgical drainage if pus persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat systemic contributors such as gout or rheumatoid disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Kneeling pads and activity change to prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgical bursectomy for recurrent or refractory aseptic bursitis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

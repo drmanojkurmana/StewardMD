@@ -1,177 +1,486 @@
 {
- "id": "alagille_syndrome",
- "name": "Alagille syndrome",
- "aliases": [
-  "arteriohepatic dysplasia",
-  "JAG1",
-  "NOTCH2",
-  "syndromic bile duct paucity",
-  "Watson-Alagille syndrome"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatology / Genetics",
- "specialty": "Hepatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant multisystem disorder caused chiefly by pathogenic variants in JAG1, and less often NOTCH2, disrupting Notch signalling during development",
-   "The hepatic hallmark is paucity of the interlobular bile ducts on liver biopsy, producing chronic cholestasis, pruritus, and xanthomata",
-   "Cardiac involvement is common, classically peripheral pulmonary artery stenosis, and tetralogy of Fallot is the most frequent complex lesion",
-   "Characteristic facies include a broad forehead, deep-set eyes, a pointed chin, and a bulbous nasal tip, giving an inverted-triangle appearance",
-   "Ocular posterior embryotoxon and skeletal butterfly vertebrae are supportive diagnostic features",
-   "Renal disease and vascular anomalies, including intracranial aneurysms, contribute to morbidity and sudden events",
-   "Management is supportive with treatment of pruritus (including ileal bile acid transport inhibitors), nutritional and fat-soluble vitamin support, and liver transplantation in decompensated cholestasis"
+  "id": "alagille_syndrome",
+  "name": "Alagille syndrome",
+  "aliases": [
+    "arteriohepatic dysplasia",
+    "JAG1",
+    "NOTCH2",
+    "syndromic bile duct paucity",
+    "Watson-Alagille syndrome"
   ],
-  "pathophysiology": "Alagille syndrome results from haploinsufficiency of the Notch signalling pathway, most commonly through mutations in the ligand JAG1 and occasionally the receptor NOTCH2. Notch signalling is essential for the differentiation and branching morphogenesis of intrahepatic bile ducts, as well as for cardiac, vascular, renal, skeletal, and ocular development. Impaired signalling leads to progressive loss (paucity) of the interlobular bile ducts, causing chronic intrahepatic cholestasis with retention of bile acids and cholesterol, alongside the syndrome's characteristic extrahepatic malformations. Expressivity is highly variable even within families.",
-  "additionalDifferentials": [
-   "Biliary atresia",
-   "Progressive familial intrahepatic cholestasis",
-   "Alpha-1-antitrypsin deficiency",
-   "Neonatal sclerosing cholangitis",
-   "Cystic fibrosis-associated liver disease",
-   "Other syndromic causes of ductal paucity"
-  ],
-  "additionalInvestigations": [
-   "Liver biopsy demonstrating bile duct paucity",
-   "Molecular genetic testing of JAG1 and NOTCH2",
-   "Echocardiography and cardiac imaging for pulmonary artery and structural anomalies",
-   "Ophthalmological slit-lamp examination for posterior embryotoxon",
-   "Spinal radiographs for butterfly vertebrae",
-   "Renal ultrasound and function tests, with vascular imaging where clinically indicated"
-  ],
-  "redFlags": [
-   "Severe congenital heart disease causing cyanosis or heart failure",
-   "Sudden neurological deterioration from an intracranial vascular event",
-   "Progressive cholestatic liver failure with coagulopathy",
-   "Intractable pruritus with disabling quality-of-life impact"
-  ],
-  "prognosis": "Outcome is largely determined by the severity of cardiac and vascular anomalies and the progression of liver disease; many patients do well, but a subset develops end-stage cholestatic liver disease requiring transplantation, and vascular events can cause sudden morbidity or mortality.",
-  "pitfalls": [
-   "Misdiagnosing infants as biliary atresia and proceeding to unnecessary Kasai portoenterostomy",
-   "Underestimating vascular risk, including intracranial aneurysms and bleeding",
-   "Assuming absence of the classic facies or one feature excludes the diagnosis given variable expressivity",
-   "Neglecting cardiac assessment before considering liver transplantation",
-   "Failing to counsel on the autosomal dominant inheritance and variable family expression"
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage cholestatic pruritus with the ileal bile acid transport inhibitor maralixibat, alongside agents such as rifampicin, ursodeoxycholic acid, colestyramine or naltrexone",
-   "Nutritional support with high-energy feeds and supplementation of the fat-soluble vitamins A, D, E and K",
-   "Surveillance and treatment of chronic cholestasis complications including xanthomata, fractures and growth failure",
-   "Cardiology assessment and management of associated lesions such as peripheral pulmonary artery stenosis or tetralogy of Fallot",
-   "Monitor for progression to end-stage liver disease with consideration of biliary diversion for intractable pruritus and liver transplantation",
-   "Vascular surveillance for intracranial aneurysms and renal assessment for associated nephropathy",
-   "Multidisciplinary care spanning hepatology, cardiology, ophthalmology and clinical genetics",
-   "Genetic counselling for this autosomal dominant condition with testing of at-risk relatives given variable expressivity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alagille_syndrome-pathway",
-   "title": "Alagille syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant multisystem disorder caused chiefly by pathogenic variants in JAG1, and less often NOTCH2, disrupting Notch signalling during development",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe congenital heart disease causing cyanosis or heart failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Liver biopsy demonstrating bile duct paucity, Molecular genetic testing of JAG1 and NOTCH2, Echocardiography and cardiac imaging for pulmonary artery and structural anomalies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage cholestatic pruritus with the ileal bile acid transport inhibitor maralixibat, alongside agents such as rifampicin, ursodeoxycholic acid, colestyramine or naltrexone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing infants as biliary atresia and proceeding to unnecessary Kasai portoenterostomy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alagille syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "alagille_syndrome-matrix",
-   "title": "Alagille syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant multisystem disorder caused chiefly by pathogenic variants in JAG1, and less often NOTCH2, disrupting Notch",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatology / Genetics",
+  "specialty": "Hepatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant multisystem disorder caused chiefly by pathogenic variants in JAG1, and less often NOTCH2, disrupting Notch signalling during development",
+      "The hepatic hallmark is paucity of the interlobular bile ducts on liver biopsy, producing chronic cholestasis, pruritus, and xanthomata",
+      "Cardiac involvement is common, classically peripheral pulmonary artery stenosis, and tetralogy of Fallot is the most frequent complex lesion",
+      "Characteristic facies include a broad forehead, deep-set eyes, a pointed chin, and a bulbous nasal tip, giving an inverted-triangle appearance",
+      "Ocular posterior embryotoxon and skeletal butterfly vertebrae are supportive diagnostic features",
+      "Renal disease and vascular anomalies, including intracranial aneurysms, contribute to morbidity and sudden events",
+      "Management is supportive with treatment of pruritus (including ileal bile acid transport inhibitors), nutritional and fat-soluble vitamin support, and liver transplantation in decompensated cholestasis"
     ],
-    [
-     "Key Investigations",
-     "Liver biopsy demonstrating bile duct paucity, Molecular genetic testing of JAG1 and NOTCH2, Echocardiography and cardiac imaging",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Alagille syndrome results from haploinsufficiency of the Notch signalling pathway, most commonly through mutations in the ligand JAG1 and occasionally the receptor NOTCH2. Notch signalling is essential for the differentiation and branching morphogenesis of intrahepatic bile ducts, as well as for cardiac, vascular, renal, skeletal, and ocular development. Impaired signalling leads to progressive loss (paucity) of the interlobular bile ducts, causing chronic intrahepatic cholestasis with retention of bile acids and cholesterol, alongside the syndrome's characteristic extrahepatic malformations. Expressivity is highly variable even within families.",
+    "additionalDifferentials": [
+      "Biliary atresia",
+      "Progressive familial intrahepatic cholestasis",
+      "Alpha-1-antitrypsin deficiency",
+      "Neonatal sclerosing cholangitis",
+      "Cystic fibrosis-associated liver disease",
+      "Other syndromic causes of ductal paucity"
     ],
-    [
-     "Primary Differentials",
-     "Biliary atresia, Progressive familial intrahepatic cholestasis, Alpha-1-antitrypsin deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Liver biopsy demonstrating bile duct paucity",
+      "Molecular genetic testing of JAG1 and NOTCH2",
+      "Echocardiography and cardiac imaging for pulmonary artery and structural anomalies",
+      "Ophthalmological slit-lamp examination for posterior embryotoxon",
+      "Spinal radiographs for butterfly vertebrae",
+      "Renal ultrasound and function tests, with vascular imaging where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Manage cholestatic pruritus with the ileal bile acid transport inhibitor maralixibat, alongside agents such as rifampicin,",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe congenital heart disease causing cyanosis or heart failure",
+      "Sudden neurological deterioration from an intracranial vascular event",
+      "Progressive cholestatic liver failure with coagulopathy",
+      "Intractable pruritus with disabling quality-of-life impact"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing infants as biliary atresia and proceeding to unnecessary Kasai portoenterostomy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is largely determined by the severity of cardiac and vascular anomalies and the progression of liver disease; many patients do well, but a subset develops end-stage cholestatic liver disease requiring transplantation, and vascular events can cause sudden morbidity or mortality.",
+    "pitfalls": [
+      "Misdiagnosing infants as biliary atresia and proceeding to unnecessary Kasai portoenterostomy",
+      "Underestimating vascular risk, including intracranial aneurysms and bleeding",
+      "Assuming absence of the classic facies or one feature excludes the diagnosis given variable expressivity",
+      "Neglecting cardiac assessment before considering liver transplantation",
+      "Failing to counsel on the autosomal dominant inheritance and variable family expression"
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage cholestatic pruritus with the ileal bile acid transport inhibitor maralixibat, alongside agents such as rifampicin, ursodeoxycholic acid, colestyramine or naltrexone",
+      "Nutritional support with high-energy feeds and supplementation of the fat-soluble vitamins A, D, E and K",
+      "Surveillance and treatment of chronic cholestasis complications including xanthomata, fractures and growth failure",
+      "Cardiology assessment and management of associated lesions such as peripheral pulmonary artery stenosis or tetralogy of Fallot",
+      "Monitor for progression to end-stage liver disease with consideration of biliary diversion for intractable pruritus and liver transplantation",
+      "Vascular surveillance for intracranial aneurysms and renal assessment for associated nephropathy",
+      "Multidisciplinary care spanning hepatology, cardiology, ophthalmology and clinical genetics",
+      "Genetic counselling for this autosomal dominant condition with testing of at-risk relatives given variable expressivity"
     ]
-   ],
-   "caption": "Overview comparison matrix for alagille syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alagille-syndrome-real-image",
-   "title": "Alagille syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "alagille_syndrome-pathway",
+      "title": "Alagille syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant multisystem disorder caused chiefly by pathogenic variants in JAG1, and less often NOTCH2, disrupting Notch signalling during development",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe congenital heart disease causing cyanosis or heart failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Liver biopsy demonstrating bile duct paucity, Molecular genetic testing of JAG1 and NOTCH2, Echocardiography and cardiac imaging for pulmonary artery and structural anomalies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage cholestatic pruritus with the ileal bile acid transport inhibitor maralixibat, alongside agents such as rifampicin, ursodeoxycholic acid, colestyramine or naltrexone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing infants as biliary atresia and proceeding to unnecessary Kasai portoenterostomy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alagille syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alagille_syndrome-matrix",
+      "title": "Alagille syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant multisystem disorder caused chiefly by pathogenic variants in JAG1, and less often NOTCH2, disrupting Notch",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Liver biopsy demonstrating bile duct paucity, Molecular genetic testing of JAG1 and NOTCH2, Echocardiography and cardiac imaging",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Biliary atresia, Progressive familial intrahepatic cholestasis, Alpha-1-antitrypsin deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage cholestatic pruritus with the ileal bile acid transport inhibitor maralixibat, alongside agents such as rifampicin,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing infants as biliary atresia and proceeding to unnecessary Kasai portoenterostomy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alagille syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alagille_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver biopsy demonstrating bile duct paucity",
+          "cells": [
+            {
+              "text": "Interlobular bile duct paucity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "JAG1 and NOTCH2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac imaging",
+          "cells": [
+            {
+              "text": "Pulmonary artery and structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Posterior embryotoxon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal radiographs",
+          "cells": [
+            {
+              "text": "Butterfly vertebrae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and function tests",
+          "cells": [
+            {
+              "text": "Associated nephropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alagille_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Biliary atresia",
+          "cells": [
+            {
+              "text": "Liver biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive familial intrahepatic cholestasis",
+          "cells": [
+            {
+              "text": "JAG1 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alagille_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maralixibat, with rifampicin, ursodeoxycholic acid, colestyramine or naltrexone",
+          "cells": [
+            {
+              "text": "Cholestatic pruritus"
+            },
+            {
+              "text": "Ileal bile acid transport inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-energy feeds and fat-soluble vitamins A, D, E and K",
+          "cells": [
+            {
+              "text": "Malabsorption and nutrition"
+            },
+            {
+              "text": "Vitamin supplementation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and treatment of xanthomata, fractures and growth failure",
+          "cells": [
+            {
+              "text": "Chronic cholestasis complications"
+            },
+            {
+              "text": "Ongoing care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology assessment for peripheral pulmonary stenosis or tetralogy of Fallot",
+          "cells": [
+            {
+              "text": "Associated cardiac lesions"
+            },
+            {
+              "text": "Cardiac management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for end-stage liver disease, biliary diversion and transplant",
+          "cells": [
+            {
+              "text": "Progressive liver disease"
+            },
+            {
+              "text": "Intractable pruritus option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular surveillance for intracranial aneurysm and renal assessment",
+          "cells": [
+            {
+              "text": "Vascular and renal disease"
+            },
+            {
+              "text": "Clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care with genetic counselling",
+          "cells": [
+            {
+              "text": "Hepatology, cardiology, ophthalmology and genetics"
+            },
+            {
+              "text": "Testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alagille_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Alagille syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonatal or infant cholestasis with characteristic facies and heart murmur",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe cardiac defect, cyanosis or progressive liver failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology and hepatology review; coagulation support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Liver biopsy for bile duct paucity; JAG1 and NOTCH2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bile duct paucity with JAG1 or NOTCH2 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cardiac imaging, eye and spine checks; maralixibat for pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review biliary atresia, PFIC, AATD and neonatal sclerosing cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-energy feeds and fat-soluble vitamins A, D, E and K",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rifampicin, ursodeoxycholic acid, colestyramine or naltrexone for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for xanthomata, fractures, growth failure and vascular events",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many do well; some need biliary diversion or liver transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

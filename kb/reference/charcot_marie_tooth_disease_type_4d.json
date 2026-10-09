@@ -1,175 +1,484 @@
 {
- "id": "charcot_marie_tooth_disease_type_4d",
- "name": "Charcot-Marie-Tooth Disease Type 4D",
- "aliases": [
-  "CMT4D",
-  "HMSN-Lom",
-  "NDRG1-related neuropathy",
-  "Hereditary motor and sensory neuropathy Lom type"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary neuropathy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive demyelinating neuropathy first described in the Roma (Gypsy) population of Lom, Bulgaria, hence the eponym HMSN-Lom; a founder NDRG1 variant underlies most cases.",
-   "The distinctive feature separating it from other demyelinating CMT is progressive sensorineural deafness developing from the second to third decade.",
-   "Childhood onset with distal weakness, wasting, foot deformity and early loss of deep tendon reflexes, followed by a slowly progressive course with prominent sensory loss.",
-   "Motor nerve conduction velocities are severely slowed in the demyelinating range, and by later life there is marked secondary axonal loss with distal amyotrophy.",
-   "Tongue atrophy and fasciculations may be seen, and some patients develop dysarthria as the disease advances.",
-   "Ask about ethnic background and consanguinity, as founder-effect testing for the common NDRG1 truncating variant can rapidly confirm the diagnosis.",
-   "Management is supportive: hearing aids or cochlear implantation for deafness, orthoses, physiotherapy and foot-deformity correction."
+  "id": "charcot_marie_tooth_disease_type_4d",
+  "name": "Charcot-Marie-Tooth Disease Type 4D",
+  "aliases": [
+    "CMT4D",
+    "HMSN-Lom",
+    "NDRG1-related neuropathy",
+    "Hereditary motor and sensory neuropathy Lom type"
   ],
-  "pathophysiology": "CMT4D results from biallelic loss-of-function variants in NDRG1 (N-myc downstream-regulated gene 1), classically a founder truncating variant prevalent in Roma communities. NDRG1 encodes a cytoplasmic protein highly expressed in Schwann cells that is implicated in intracellular trafficking, membrane protein recycling and stress responses, and appears essential for the maintenance rather than the initial formation of myelin. Loss of NDRG1 function impairs the Schwann cell's ability to sustain the myelin sheath and support the underlying axon, leading to a demyelinating and progressively axonal peripheral neuropathy. The same protein's role in cochlear and neural tissue accounts for the characteristic sensorineural hearing loss, distinguishing CMT4D from other autosomal recessive demyelinating neuropathies and linking the peripheral and auditory phenotypes to a shared defect in NDRG1-dependent cellular maintenance.",
-  "additionalDifferentials": [
-   "CMT4C (SH3TC2) and other autosomal recessive demyelinating (CMT4) subtypes",
-   "CMT4B subtypes (MTMR2/SBF2/SBF1) with myelin outfoldings",
-   "CMT1A and dominant demyelinating CMT type 1",
-   "Other hereditary neuropathies with deafness (e.g. CMT associated with mitochondrial or connexin defects)",
-   "Refsum disease and other metabolic neuropathies with hearing loss",
-   "Acquired demyelinating polyneuropathy with unrelated sensorineural deafness"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies and electromyography demonstrating a demyelinating neuropathy with superimposed axonal loss",
-   "Targeted testing for the founder NDRG1 variant, or NDRG1 sequencing and gene panel where the founder allele is absent",
-   "Pure-tone audiometry and auditory brainstem responses to characterise sensorineural hearing loss",
-   "Sural nerve biopsy showing demyelination, onion-bulb formation and Schwann cell inclusions if genetics are unrevealing",
-   "Detailed family history with attention to ethnicity and consanguinity for founder-effect counselling",
-   "Speech and swallowing assessment where bulbar features emerge"
-  ],
-  "redFlags": [
-   "Progressive dysarthria or swallowing difficulty from bulbar involvement",
-   "Rapidly worsening hearing threatening communication and safety",
-   "Deterioration disproportionate to the expected slow course, prompting search for a superimposed acquired cause",
-   "Foot ulceration or injury arising from severe sensory loss"
-  ],
-  "prognosis": "CMT4D causes progressive disability with loss of ambulation commonly by mid-adulthood, compounded by sensorineural deafness that usually becomes significant from young adulthood. The combined motor, sensory and auditory burden is disabling, though life expectancy is generally preserved.",
-  "pitfalls": [
-   "Overlooking the diagnosis by not eliciting ethnic background, thereby missing rapid founder-variant confirmation",
-   "Attributing the hearing loss to an unrelated cause rather than recognising it as intrinsic to CMT4D",
-   "Assuming dominant inheritance and failing to counsel consanguineous families about recurrence risk",
-   "Delaying auditory rehabilitation because the neuropathy dominates the early clinical picture"
-  ],
-  "references": [
-   "Peripheral Neuropathy (comprehensive neurology reference text)",
-   "Principles of clinical neurogenetics reference",
-   "International consensus guidance on inherited neuropathy classification"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
-   "Audiology surveillance with hearing aids and consideration of cochlear implantation for the progressive sensorineural deafness",
-   "Physiotherapy and ankle-foot orthoses for distal weakness, wasting and foot deformity",
-   "Speech-and-language assessment for dysarthria and swallowing as bulbar features emerge",
-   "Neuropathic pain management with gabapentinoids or tricyclic agents",
-   "Avoidance of neurotoxic drugs such as vincristine",
-   "Autosomal recessive genetic counselling with founder-variant (NDRG1) testing and family screening, guided by Roma ancestry and consanguinity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "charcot_marie_tooth_disease_type_4d-pathway",
-   "title": "Charcot-Marie-Tooth Disease Type 4D: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive demyelinating neuropathy first described in the Roma (Gypsy) population of Lom, Bulgaria, hence the eponym HMSN-Lom; a founder NDRG1 variant underlies most cases.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive dysarthria or swallowing difficulty from bulbar involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies and electromyography demonstrating a demyelinating neuropathy with superimposed axonal loss, Targeted testing for the founder NDRG1 variant, or NDRG1 sequencing and gene panel where the founder"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis by not eliciting ethnic background, thereby missing rapid founder-variant confirmation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 4d."
-  }
- ],
- "tables": [
-  {
-   "id": "charcot_marie_tooth_disease_type_4d-matrix",
-   "title": "Charcot-Marie-Tooth Disease Type 4D: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive demyelinating neuropathy first described in the Roma (Gypsy) population of Lom, Bulgaria, hence the eponym",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary neuropathy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive demyelinating neuropathy first described in the Roma (Gypsy) population of Lom, Bulgaria, hence the eponym HMSN-Lom; a founder NDRG1 variant underlies most cases.",
+      "The distinctive feature separating it from other demyelinating CMT is progressive sensorineural deafness developing from the second to third decade.",
+      "Childhood onset with distal weakness, wasting, foot deformity and early loss of deep tendon reflexes, followed by a slowly progressive course with prominent sensory loss.",
+      "Motor nerve conduction velocities are severely slowed in the demyelinating range, and by later life there is marked secondary axonal loss with distal amyotrophy.",
+      "Tongue atrophy and fasciculations may be seen, and some patients develop dysarthria as the disease advances.",
+      "Ask about ethnic background and consanguinity, as founder-effect testing for the common NDRG1 truncating variant can rapidly confirm the diagnosis.",
+      "Management is supportive: hearing aids or cochlear implantation for deafness, orthoses, physiotherapy and foot-deformity correction."
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies and electromyography demonstrating a demyelinating neuropathy with superimposed axonal loss, Targeted",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CMT4D results from biallelic loss-of-function variants in NDRG1 (N-myc downstream-regulated gene 1), classically a founder truncating variant prevalent in Roma communities. NDRG1 encodes a cytoplasmic protein highly expressed in Schwann cells that is implicated in intracellular trafficking, membrane protein recycling and stress responses, and appears essential for the maintenance rather than the initial formation of myelin. Loss of NDRG1 function impairs the Schwann cell's ability to sustain the myelin sheath and support the underlying axon, leading to a demyelinating and progressively axonal peripheral neuropathy. The same protein's role in cochlear and neural tissue accounts for the characteristic sensorineural hearing loss, distinguishing CMT4D from other autosomal recessive demyelinating neuropathies and linking the peripheral and auditory phenotypes to a shared defect in NDRG1-dependent cellular maintenance.",
+    "additionalDifferentials": [
+      "CMT4C (SH3TC2) and other autosomal recessive demyelinating (CMT4) subtypes",
+      "CMT4B subtypes (MTMR2/SBF2/SBF1) with myelin outfoldings",
+      "CMT1A and dominant demyelinating CMT type 1",
+      "Other hereditary neuropathies with deafness (e.g. CMT associated with mitochondrial or connexin defects)",
+      "Refsum disease and other metabolic neuropathies with hearing loss",
+      "Acquired demyelinating polyneuropathy with unrelated sensorineural deafness"
     ],
-    [
-     "Primary Differentials",
-     "CMT4C (SH3TC2) and other autosomal recessive demyelinating (CMT4) subtypes, CMT4B subtypes (MTMR2/SBF2/SBF1) with myelin",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies and electromyography demonstrating a demyelinating neuropathy with superimposed axonal loss",
+      "Targeted testing for the founder NDRG1 variant, or NDRG1 sequencing and gene panel where the founder allele is absent",
+      "Pure-tone audiometry and auditory brainstem responses to characterise sensorineural hearing loss",
+      "Sural nerve biopsy showing demyelination, onion-bulb formation and Schwann cell inclusions if genetics are unrevealing",
+      "Detailed family history with attention to ethnicity and consanguinity for founder-effect counselling",
+      "Speech and swallowing assessment where bulbar features emerge"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive dysarthria or swallowing difficulty from bulbar involvement",
+      "Rapidly worsening hearing threatening communication and safety",
+      "Deterioration disproportionate to the expected slow course, prompting search for a superimposed acquired cause",
+      "Foot ulceration or injury arising from severe sensory loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis by not eliciting ethnic background, thereby missing rapid founder-variant confirmation",
-     "Prevent diagnostic or management error"
+    "prognosis": "CMT4D causes progressive disability with loss of ambulation commonly by mid-adulthood, compounded by sensorineural deafness that usually becomes significant from young adulthood. The combined motor, sensory and auditory burden is disabling, though life expectancy is generally preserved.",
+    "pitfalls": [
+      "Overlooking the diagnosis by not eliciting ethnic background, thereby missing rapid founder-variant confirmation",
+      "Attributing the hearing loss to an unrelated cause rather than recognising it as intrinsic to CMT4D",
+      "Assuming dominant inheritance and failing to counsel consanguineous families about recurrence risk",
+      "Delaying auditory rehabilitation because the neuropathy dominates the early clinical picture"
+    ],
+    "references": [
+      "Peripheral Neuropathy (comprehensive neurology reference text)",
+      "Principles of clinical neurogenetics reference",
+      "International consensus guidance on inherited neuropathy classification"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+      "Audiology surveillance with hearing aids and consideration of cochlear implantation for the progressive sensorineural deafness",
+      "Physiotherapy and ankle-foot orthoses for distal weakness, wasting and foot deformity",
+      "Speech-and-language assessment for dysarthria and swallowing as bulbar features emerge",
+      "Neuropathic pain management with gabapentinoids or tricyclic agents",
+      "Avoidance of neurotoxic drugs such as vincristine",
+      "Autosomal recessive genetic counselling with founder-variant (NDRG1) testing and family screening, guided by Roma ancestry and consanguinity"
     ]
-   ],
-   "caption": "Overview comparison matrix for charcot-marie-tooth disease type 4d."
-  }
- ],
- "diagrams": [
-  {
-   "id": "charcot-marie-tooth-disease-type-4d-real-image",
-   "title": "Charcot-Marie-Tooth Disease Type 4D: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "charcot_marie_tooth_disease_type_4d-pathway",
+      "title": "Charcot-Marie-Tooth Disease Type 4D: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive demyelinating neuropathy first described in the Roma (Gypsy) population of Lom, Bulgaria, hence the eponym HMSN-Lom; a founder NDRG1 variant underlies most cases.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive dysarthria or swallowing difficulty from bulbar involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies and electromyography demonstrating a demyelinating neuropathy with superimposed axonal loss, Targeted testing for the founder NDRG1 variant, or NDRG1 sequencing and gene panel where the founder"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis by not eliciting ethnic background, thereby missing rapid founder-variant confirmation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 4d."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_4d-matrix",
+      "title": "Charcot-Marie-Tooth Disease Type 4D: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive demyelinating neuropathy first described in the Roma (Gypsy) population of Lom, Bulgaria, hence the eponym",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies and electromyography demonstrating a demyelinating neuropathy with superimposed axonal loss, Targeted",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CMT4C (SH3TC2) and other autosomal recessive demyelinating (CMT4) subtypes, CMT4B subtypes (MTMR2/SBF2/SBF1) with myelin",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis by not eliciting ethnic background, thereby missing rapid founder-variant confirmation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for charcot-marie-tooth disease type 4d."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_4d-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Demyelinating neuropathy with superimposed axonal loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted testing for the founder NDRG1 variant",
+          "cells": [
+            {
+              "text": "Confirms diagnosis when the founder allele is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure-tone audiometry and auditory brainstem responses",
+          "cells": [
+            {
+              "text": "Characterise sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sural nerve biopsy",
+          "cells": [
+            {
+              "text": "Demyelination, onion bulbs and Schwann cell inclusions if genetics are unrevealing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallowing assessment",
+          "cells": [
+            {
+              "text": "Bulbar features as they emerge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_4d-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Refsum disease and metabolic neuropathies",
+          "cells": [
+            {
+              "text": "Neuropathy with hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired demyelinating polyneuropathy",
+          "cells": [
+            {
+              "text": "Unrelated sensorineural deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMT4B subtypes (MTMR2, SBF2, SBF1)",
+          "cells": [
+            {
+              "text": "Myelin outfoldings on biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_4d-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Audiology and hearing support",
+          "cells": [
+            {
+              "text": "Hearing aids and consideration of cochlear implantation"
+            },
+            {
+              "text": "Progressive sensorineural deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and orthoses",
+          "cells": [
+            {
+              "text": "Physiotherapy and ankle-foot orthoses for distal weakness, wasting and foot deformity"
+            },
+            {
+              "text": "Wasting and foot deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallowing",
+          "cells": [
+            {
+              "text": "Speech-and-language assessment for dysarthria and swallowing"
+            },
+            {
+              "text": "Bulbar features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain",
+          "cells": [
+            {
+              "text": "Gabapentinoids or tricyclic agents"
+            },
+            {
+              "text": "Neuropathic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug caution",
+          "cells": [
+            {
+              "text": "Avoid neurotoxic drugs such as vincristine"
+            },
+            {
+              "text": "Neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive counselling with founder NDRG1 testing and family screening"
+            },
+            {
+              "text": "Roma ancestry and consanguinity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Neuromuscular multidisciplinary team; no disease-specific pharmacotherapy"
+            },
+            {
+              "text": "Core care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_type_4d-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth Disease Type 4D",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 4D (NDRG1): childhood demyelinating neuropathy, progressive deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dysarthria, swallowing difficulty, rapid hearing loss, foot ulcers)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: speech and swallow assessment; urgent review for rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, founder NDRG1 testing, audiometry, ancestry history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Demyelinating neuropathy with deafness and NDRG1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive neuromuscular care; no disease-specific pharmacotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CMT4C, CMT4B, Refsum disease and acquired demyelinating neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Audiology surveillance; hearing aids or cochlear implantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and ankle-foot orthoses for distal weakness and foot deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech and swallowing support as bulbar features emerge",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recessive counselling guided by Roma ancestry and consanguinity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

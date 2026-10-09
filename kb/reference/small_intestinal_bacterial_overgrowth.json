@@ -1,169 +1,640 @@
 {
- "id": "small_intestinal_bacterial_overgrowth",
- "name": "Small intestinal bacterial overgrowth",
- "aliases": [
-  "SIBO"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Excessive numbers of bacteria in the small intestine causing bloating, flatulence, diarrhoea and, when severe, malabsorption",
-   "It is a consequence of impaired clearance of small-bowel bacteria rather than a communicable infection",
-   "Predisposing factors include disordered motility, anatomical changes such as blind loops and strictures, and loss of protective gastric acid",
-   "Severe or long-standing cases can cause fat and vitamin B12 malabsorption with weight loss and deficiency",
-   "Breath testing after a carbohydrate load is commonly used, though it has recognised limitations",
-   "Treatment combines antibiotics with correction of the underlying predisposing factor where possible"
+  "id": "small_intestinal_bacterial_overgrowth",
+  "name": "Small intestinal bacterial overgrowth",
+  "aliases": [
+    "SIBO"
   ],
-  "pathophysiology": "Small intestinal bacterial overgrowth develops when the mechanisms that normally keep the small-bowel bacterial population low, principally propulsive motility, gastric acid and an intact ileocaecal valve, are impaired. Overgrowth of predominantly colonic-type bacteria in the small bowel leads to fermentation of carbohydrates, producing gas and bloating, deconjugation of bile salts causing fat malabsorption, and competition for and altered handling of nutrients such as vitamin B12. It is therefore a disorder of dysbiosis and impaired clearance secondary to motility or structural abnormalities, not a primary infective disease.",
-  "additionalDifferentials": [
-   "Irritable bowel syndrome",
-   "Coeliac disease",
-   "Pancreatic exocrine insufficiency",
-   "Carbohydrate malabsorption (for example lactose)",
-   "Inflammatory bowel disease",
-   "Bile acid diarrhoea"
-  ],
-  "additionalInvestigations": [
-   "Carbohydrate breath testing (for example glucose or lactulose)",
-   "Assessment for underlying motility disorders or anatomical abnormalities",
-   "Nutritional studies including vitamin B12 and fat-soluble vitamins in suspected malabsorption",
-   "Coeliac serology and pancreatic assessment to exclude mimics",
-   "Small-bowel imaging where structural causes are suspected"
-  ],
-  "redFlags": [
-   "Weight loss and features of malabsorption",
-   "Vitamin deficiency states",
-   "An underlying structural lesion such as a stricture or fistula",
-   "Failure to respond to appropriate treatment"
-  ],
-  "prognosis": "Symptoms usually improve with antibiotic treatment, but recurrence is common when the underlying predisposing factor persists, so addressing the cause is important for durable control.",
-  "pitfalls": [
-   "Diagnosing it on symptoms alone given overlap with irritable bowel syndrome",
-   "Treating recurrent episodes without addressing the underlying motility or anatomical cause",
-   "Over-reliance on breath tests despite their limitations",
-   "Missing malabsorption and nutritional deficiencies"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Gastroenterology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antibiotic therapy, commonly rifaximin or alternatives such as tetracyclines, metronidazole or co-amoxiclav, to reduce the small-bowel bacterial load.",
-   "Correct the underlying predisposing factor where possible, whether a motility disorder, an anatomical blind loop or stricture, or loss of protective gastric acid.",
-   "Replace nutritional deficiencies, notably vitamin B12 and fat-soluble vitamins, and optimise nutrition in malabsorption.",
-   "Consider prokinetic agents to improve small-bowel clearance and reduce recurrence in dysmotility.",
-   "Surgical correction of amenable anatomical abnormalities such as strictures or blind loops.",
-   "Monitor for symptom recurrence and repeat or cycle antibiotics where the predisposing cause persists.",
-   "Refer to gastroenterology for refractory or recurrent disease and to investigate an underlying cause."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "small_intestinal_bacterial_overgrowth-pathway",
-   "title": "Small intestinal bacterial overgrowth: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Excessive numbers of bacteria in the small intestine causing bloating, flatulence, diarrhoea and, when severe, malabsorption",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Weight loss and features of malabsorption",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Carbohydrate breath testing (for example glucose or lactulose), Assessment for underlying motility disorders or anatomical abnormalities, Nutritional studies including vitamin B12 and fat-soluble vitamins in suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antibiotic therapy, commonly rifaximin or alternatives such as tetracyclines, metronidazole or co-amoxiclav, to reduce the small-bowel bacterial load."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing it on symptoms alone given overlap with irritable bowel syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of small intestinal bacterial overgrowth."
-  }
- ],
- "tables": [
-  {
-   "id": "small_intestinal_bacterial_overgrowth-matrix",
-   "title": "Small intestinal bacterial overgrowth: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Excessive numbers of bacteria in the small intestine causing bloating, flatulence, diarrhoea and, when severe, malabsorption",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Excessive numbers of bacteria in the small intestine causing bloating, flatulence, diarrhoea and, when severe, malabsorption",
+      "It is a consequence of impaired clearance of small-bowel bacteria rather than a communicable infection",
+      "Predisposing factors include disordered motility, anatomical changes such as blind loops and strictures, and loss of protective gastric acid",
+      "Severe or long-standing cases can cause fat and vitamin B12 malabsorption with weight loss and deficiency",
+      "Breath testing after a carbohydrate load is commonly used, though it has recognised limitations",
+      "Treatment combines antibiotics with correction of the underlying predisposing factor where possible"
     ],
-    [
-     "Key Investigations",
-     "Carbohydrate breath testing (for example glucose or lactulose), Assessment for underlying motility disorders or anatomical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Small intestinal bacterial overgrowth develops when the mechanisms that normally keep the small-bowel bacterial population low, principally propulsive motility, gastric acid and an intact ileocaecal valve, are impaired. Overgrowth of predominantly colonic-type bacteria in the small bowel leads to fermentation of carbohydrates, producing gas and bloating, deconjugation of bile salts causing fat malabsorption, and competition for and altered handling of nutrients such as vitamin B12. It is therefore a disorder of dysbiosis and impaired clearance secondary to motility or structural abnormalities, not a primary infective disease.",
+    "additionalDifferentials": [
+      "Irritable bowel syndrome",
+      "Coeliac disease",
+      "Pancreatic exocrine insufficiency",
+      "Carbohydrate malabsorption (for example lactose)",
+      "Inflammatory bowel disease",
+      "Bile acid diarrhoea"
     ],
-    [
-     "Primary Differentials",
-     "Irritable bowel syndrome, Coeliac disease, Pancreatic exocrine insufficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Carbohydrate breath testing (for example glucose or lactulose)",
+      "Assessment for underlying motility disorders or anatomical abnormalities",
+      "Nutritional studies including vitamin B12 and fat-soluble vitamins in suspected malabsorption",
+      "Coeliac serology and pancreatic assessment to exclude mimics",
+      "Small-bowel imaging where structural causes are suspected"
     ],
-    [
-     "Management Strategy",
-     "Antibiotic therapy, commonly rifaximin or alternatives such as tetracyclines, metronidazole or co-amoxiclav, to reduce the",
-     "Core treatment modality"
+    "redFlags": [
+      "Weight loss and features of malabsorption",
+      "Vitamin deficiency states",
+      "An underlying structural lesion such as a stricture or fistula",
+      "Failure to respond to appropriate treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing it on symptoms alone given overlap with irritable bowel syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms usually improve with antibiotic treatment, but recurrence is common when the underlying predisposing factor persists, so addressing the cause is important for durable control.",
+    "pitfalls": [
+      "Diagnosing it on symptoms alone given overlap with irritable bowel syndrome",
+      "Treating recurrent episodes without addressing the underlying motility or anatomical cause",
+      "Over-reliance on breath tests despite their limitations",
+      "Missing malabsorption and nutritional deficiencies"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Gastroenterology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antibiotic therapy, commonly rifaximin or alternatives such as tetracyclines, metronidazole or co-amoxiclav, to reduce the small-bowel bacterial load.",
+      "Correct the underlying predisposing factor where possible, whether a motility disorder, an anatomical blind loop or stricture, or loss of protective gastric acid.",
+      "Replace nutritional deficiencies, notably vitamin B12 and fat-soluble vitamins, and optimise nutrition in malabsorption.",
+      "Consider prokinetic agents to improve small-bowel clearance and reduce recurrence in dysmotility.",
+      "Surgical correction of amenable anatomical abnormalities such as strictures or blind loops.",
+      "Monitor for symptom recurrence and repeat or cycle antibiotics where the predisposing cause persists.",
+      "Refer to gastroenterology for refractory or recurrent disease and to investigate an underlying cause."
     ]
-   ],
-   "caption": "Overview comparison matrix for small intestinal bacterial overgrowth."
-  }
- ],
- "diagrams": [
-  {
-   "id": "small-intestinal-bacterial-overgrowth-real-image",
-   "title": "Small intestinal bacterial overgrowth: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "small_intestinal_bacterial_overgrowth-pathway",
+      "title": "Small intestinal bacterial overgrowth: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Excessive numbers of bacteria in the small intestine causing bloating, flatulence, diarrhoea and, when severe, malabsorption",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Weight loss and features of malabsorption",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Carbohydrate breath testing (for example glucose or lactulose), Assessment for underlying motility disorders or anatomical abnormalities, Nutritional studies including vitamin B12 and fat-soluble vitamins in suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antibiotic therapy, commonly rifaximin or alternatives such as tetracyclines, metronidazole or co-amoxiclav, to reduce the small-bowel bacterial load."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing it on symptoms alone given overlap with irritable bowel syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of small intestinal bacterial overgrowth."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "small_intestinal_bacterial_overgrowth-matrix",
+      "title": "Small intestinal bacterial overgrowth: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Excessive numbers of bacteria in the small intestine causing bloating, flatulence, diarrhoea and, when severe, malabsorption",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Carbohydrate breath testing (for example glucose or lactulose), Assessment for underlying motility disorders or anatomical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Irritable bowel syndrome, Coeliac disease, Pancreatic exocrine insufficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antibiotic therapy, commonly rifaximin or alternatives such as tetracyclines, metronidazole or co-amoxiclav, to reduce the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing it on symptoms alone given overlap with irritable bowel syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for small intestinal bacterial overgrowth."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Gastroenterology references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 294-7",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table e37-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "small_intestinal_bacterial_overgrowth-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbohydrate breath testing",
+          "cells": [
+            {
+              "text": "Glucose or lactulose; has recognised limitations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motility and anatomical assessment",
+          "cells": [
+            {
+              "text": "Dysmotility, blind loops or strictures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional studies",
+          "cells": [
+            {
+              "text": "Vitamin B12 and fat-soluble vitamins in suspected malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and pancreatic assessment",
+          "cells": [
+            {
+              "text": "Excludes coeliac disease and exocrine insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel imaging",
+          "cells": [
+            {
+              "text": "Structural causes, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "small_intestinal_bacterial_overgrowth-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "Symptoms overlap; diagnosis on symptoms alone is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Excluded by coeliac serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic exocrine insufficiency",
+          "cells": [
+            {
+              "text": "Excluded by pancreatic assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "small_intestinal_bacterial_overgrowth-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Rifaximin, or alternatives such as tetracyclines, metronidazole or co-amoxiclav"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct the predisposing factor",
+          "cells": [
+            {
+              "text": "Motility disorder, blind loop or stricture, or loss of protective gastric acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replace deficiencies",
+          "cells": [
+            {
+              "text": "Vitamin B12 and fat-soluble vitamins; optimised nutrition in malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prokinetic agents",
+          "cells": [
+            {
+              "text": "To improve clearance and reduce recurrence in dysmotility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical correction",
+          "cells": [
+            {
+              "text": "Amenable strictures or blind loops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence monitoring",
+          "cells": [
+            {
+              "text": "Repeat or cycle antibiotics where the predisposing cause persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroenterology referral",
+          "cells": [
+            {
+              "text": "Refractory or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "small_intestinal_bacterial_overgrowth-ddx-2",
+      "kind": "ddx",
+      "title": "Diagnostic studies in causes of steatorrhea",
+      "rowHeader": "Condition",
+      "columns": [
+        "D-xylose test",
+        "Schilling test",
+        "Duodenal mucosal biopsy"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "50% abnormal; if abnormal, normal with pancreatic enzymes"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bacterial overgrowth syndrome",
+          "cells": [
+            {
+              "text": "Normal or only modestly abnormal"
+            },
+            {
+              "text": "Often abnormal; if abnormal, normal after antibiotics"
+            },
+            {
+              "text": "Usually normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ileal disease",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Abnormal"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Celiac disease",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Abnormal, probably flat"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intestinal lymphangiectasia",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Abnormal, dilated lymphatics"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "small_intestinal_bacterial_overgrowth-ddx-3",
+      "kind": "ddx",
+      "title": "Schilling test results by cause of cobalamin malabsorption",
+      "rowHeader": "Condition",
+      "columns": [
+        "58Co-Cbl alone",
+        "With intrinsic factor",
+        "With pancreatic enzymes",
+        "After 5 days of antibiotics"
+      ],
+      "rows": [
+        {
+          "parameter": "Pernicious anemia",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ileal disease",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "small_intestinal_bacterial_overgrowth-dx-mgmt",
+      "title": "Diagnosis and management of Small intestinal bacterial overgrowth",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bloating, diarrhoea and flatulence, possibly with weight loss: suspected SIBO",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weight loss, vitamin deficiency, stricture or fistula)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for a structural lesion; treat malabsorption and deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Carbohydrate breath testing; motility and anatomy; B12 and fat-soluble vitamins",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does breath testing support overgrowth, with coeliac and pancreatic mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider IBS, coeliac disease, exocrine insufficiency or bile acid diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antibiotics, commonly rifaximin or alternatives such as metronidazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct the predisposing motility, blind loop or acid factor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace vitamin B12 and fat-soluble vitamins",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prokinetics for dysmotility; surgery for amenable strictures or blind loops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms usually improve with antibiotics; recurrence is common without cause treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

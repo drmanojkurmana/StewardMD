@@ -1,173 +1,462 @@
 {
- "id": "dihydropteridine_reductase_deficiency",
- "name": "Dihydropteridine reductase deficiency",
- "aliases": [
-  "DHPR deficiency",
-  "QDPR gene deficiency",
-  "BH4 recycling defect (DHPR)",
-  "tetrahydrobiopterin-deficient hyperphenylalaninaemia (DHPR)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive defect of tetrahydrobiopterin (BH4) recycling caused by QDPR mutations, in which dihydropteridine reductase cannot regenerate BH4 from its oxidised form",
-   "Like other BH4 disorders it presents as hyperphenylalaninaemia on newborn screening but is not corrected by dietary phenylalanine restriction alone, because dopamine and serotonin synthesis is also impaired",
-   "A distinguishing feature is secondary cerebral folate deficiency, so treatment includes folinic acid alongside neurotransmitter precursors, and untreated disease can cause intracranial calcification and a demyelinating course",
-   "Untreated children develop a progressive encephalopathy with dystonia, hypotonia, seizures, oculogyric crises, and developmental regression",
-   "Because BH4 recycling rather than synthesis is impaired, giving BH4 alone is often insufficient; management centres on controlling phenylalanine plus levodopa, a serotonin precursor, and folinic acid",
-   "The biochemical clue is normal or raised biopterin with markedly deficient dihydropteridine reductase enzyme activity, differentiating it from PTPS and GTPCH defects"
+  "id": "dihydropteridine_reductase_deficiency",
+  "name": "Dihydropteridine reductase deficiency",
+  "aliases": [
+    "DHPR deficiency",
+    "QDPR gene deficiency",
+    "BH4 recycling defect (DHPR)",
+    "tetrahydrobiopterin-deficient hyperphenylalaninaemia (DHPR)"
   ],
-  "pathophysiology": "Dihydropteridine reductase regenerates tetrahydrobiopterin (BH4) from quinonoid dihydrobiopterin, sustaining the active cofactor pool. Biallelic QDPR mutations impair this recycling, so BH4 becomes functionally deficient despite adequate synthesis, disabling phenylalanine, tyrosine, and tryptophan hydroxylases. This produces hyperphenylalaninaemia together with central dopamine and serotonin deficiency. The defect additionally reduces regeneration of folate cofactors, causing cerebral folate deficiency that contributes to demyelination and basal ganglia calcification. The combined amino-acid, neurotransmitter, and folate disturbances underlie the progressive neurological deterioration seen when treatment is inadequate.",
-  "additionalDifferentials": [
-   "Classic phenylketonuria (phenylalanine hydroxylase deficiency)",
-   "6-pyruvoyl-tetrahydropterin synthase deficiency (BH4 synthesis defect)",
-   "GTP cyclohydrolase I deficiency",
-   "Sepiapterin reductase deficiency",
-   "Cerebral folate deficiency from other causes",
-   "Other neurotransmitter disorders causing infantile dystonia and encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Dihydropteridine reductase enzyme activity assay (deficient) in blood spots",
-   "Blood and urine pterin profile (biopterin normal or elevated) with blood phenylalanine",
-   "QDPR gene sequencing to confirm the diagnosis",
-   "Cerebrospinal fluid neurotransmitter metabolites and 5-methyltetrahydrofolate to detect cerebral folate deficiency",
-   "Brain MRI/CT for demyelination and basal ganglia calcification",
-   "BH4 loading test to characterise phenylalanine responsiveness"
-  ],
-  "redFlags": [
-   "Neurological regression despite good phenylalanine control, indicating untreated cofactor and folate deficiency",
-   "Seizures, dystonia, or oculogyric crises evolving in an infant with hyperphenylalaninaemia",
-   "Intracranial calcification or demyelination on neuroimaging",
-   "Failure to add folinic acid, allowing progressive cerebral folate deficiency"
-  ],
-  "prognosis": "Early combined treatment with phenylalanine control, neurotransmitter precursors, and folinic acid can substantially improve outcome, but delayed or incomplete therapy, especially neglect of cerebral folate deficiency, leads to progressive neurological damage and disability. Lifelong metabolic follow-up is essential.",
-  "pitfalls": [
-   "Managing as classic phenylketonuria and omitting the essential folinic acid and neurotransmitter therapy",
-   "Assuming BH4 supplementation alone suffices when the problem is cofactor recycling",
-   "Not measuring dihydropteridine reductase activity, so the specific recycling defect is missed",
-   "Overlooking cerebral folate deficiency and associated calcification/demyelination"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control blood phenylalanine through dietary phenylalanine restriction, recognising that diet alone is insufficient because neurotransmitter synthesis is also impaired",
-   "Replace neurotransmitter precursors with levodopa combined with a decarboxylase inhibitor and a serotonin precursor such as 5-hydroxytryptophan",
-   "Add folinic acid to treat the secondary cerebral folate deficiency and prevent demyelination and intracranial calcification",
-   "Note that tetrahydrobiopterin supplementation alone is often inadequate because the defect lies in recycling rather than synthesis",
-   "Manage seizures and dystonia symptomatically with physiotherapy and developmental support",
-   "Monitor cerebrospinal fluid neurotransmitter metabolites and blood phenylalanine with regular developmental assessment",
-   "Genetic counselling and family screening given autosomal recessive inheritance, with lifelong metabolic follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dihydropteridine_reductase_deficiency-pathway",
-   "title": "Dihydropteridine reductase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive defect of tetrahydrobiopterin (BH4) recycling caused by QDPR mutations, in which dihydropteridine reductase cannot regenerate BH4 from its oxidised form",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological regression despite good phenylalanine control, indicating untreated cofactor and folate deficiency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dihydropteridine reductase enzyme activity assay (deficient) in blood spots, Blood and urine pterin profile (biopterin normal or elevated) with blood phenylalanine, QDPR gene sequencing to confirm the diagnosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control blood phenylalanine through dietary phenylalanine restriction, recognising that diet alone is insufficient because neurotransmitter synthesis is also impaired"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Managing as classic phenylketonuria and omitting the essential folinic acid and neurotransmitter therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dihydropteridine reductase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "dihydropteridine_reductase_deficiency-matrix",
-   "title": "Dihydropteridine reductase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive defect of tetrahydrobiopterin (BH4) recycling caused by QDPR mutations, in which dihydropteridine reductase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive defect of tetrahydrobiopterin (BH4) recycling caused by QDPR mutations, in which dihydropteridine reductase cannot regenerate BH4 from its oxidised form",
+      "Like other BH4 disorders it presents as hyperphenylalaninaemia on newborn screening but is not corrected by dietary phenylalanine restriction alone, because dopamine and serotonin synthesis is also impaired",
+      "A distinguishing feature is secondary cerebral folate deficiency, so treatment includes folinic acid alongside neurotransmitter precursors, and untreated disease can cause intracranial calcification and a demyelinating course",
+      "Untreated children develop a progressive encephalopathy with dystonia, hypotonia, seizures, oculogyric crises, and developmental regression",
+      "Because BH4 recycling rather than synthesis is impaired, giving BH4 alone is often insufficient; management centres on controlling phenylalanine plus levodopa, a serotonin precursor, and folinic acid",
+      "The biochemical clue is normal or raised biopterin with markedly deficient dihydropteridine reductase enzyme activity, differentiating it from PTPS and GTPCH defects"
     ],
-    [
-     "Key Investigations",
-     "Dihydropteridine reductase enzyme activity assay (deficient) in blood spots, Blood and urine pterin profile (biopterin normal or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dihydropteridine reductase regenerates tetrahydrobiopterin (BH4) from quinonoid dihydrobiopterin, sustaining the active cofactor pool. Biallelic QDPR mutations impair this recycling, so BH4 becomes functionally deficient despite adequate synthesis, disabling phenylalanine, tyrosine, and tryptophan hydroxylases. This produces hyperphenylalaninaemia together with central dopamine and serotonin deficiency. The defect additionally reduces regeneration of folate cofactors, causing cerebral folate deficiency that contributes to demyelination and basal ganglia calcification. The combined amino-acid, neurotransmitter, and folate disturbances underlie the progressive neurological deterioration seen when treatment is inadequate.",
+    "additionalDifferentials": [
+      "Classic phenylketonuria (phenylalanine hydroxylase deficiency)",
+      "6-pyruvoyl-tetrahydropterin synthase deficiency (BH4 synthesis defect)",
+      "GTP cyclohydrolase I deficiency",
+      "Sepiapterin reductase deficiency",
+      "Cerebral folate deficiency from other causes",
+      "Other neurotransmitter disorders causing infantile dystonia and encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Classic phenylketonuria (phenylalanine hydroxylase deficiency), 6-pyruvoyl-tetrahydropterin synthase deficiency (BH4 synthesis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dihydropteridine reductase enzyme activity assay (deficient) in blood spots",
+      "Blood and urine pterin profile (biopterin normal or elevated) with blood phenylalanine",
+      "QDPR gene sequencing to confirm the diagnosis",
+      "Cerebrospinal fluid neurotransmitter metabolites and 5-methyltetrahydrofolate to detect cerebral folate deficiency",
+      "Brain MRI/CT for demyelination and basal ganglia calcification",
+      "BH4 loading test to characterise phenylalanine responsiveness"
     ],
-    [
-     "Management Strategy",
-     "Control blood phenylalanine through dietary phenylalanine restriction, recognising that diet alone is insufficient because",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological regression despite good phenylalanine control, indicating untreated cofactor and folate deficiency",
+      "Seizures, dystonia, or oculogyric crises evolving in an infant with hyperphenylalaninaemia",
+      "Intracranial calcification or demyelination on neuroimaging",
+      "Failure to add folinic acid, allowing progressive cerebral folate deficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Managing as classic phenylketonuria and omitting the essential folinic acid and neurotransmitter therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early combined treatment with phenylalanine control, neurotransmitter precursors, and folinic acid can substantially improve outcome, but delayed or incomplete therapy, especially neglect of cerebral folate deficiency, leads to progressive neurological damage and disability. Lifelong metabolic follow-up is essential.",
+    "pitfalls": [
+      "Managing as classic phenylketonuria and omitting the essential folinic acid and neurotransmitter therapy",
+      "Assuming BH4 supplementation alone suffices when the problem is cofactor recycling",
+      "Not measuring dihydropteridine reductase activity, so the specific recycling defect is missed",
+      "Overlooking cerebral folate deficiency and associated calcification/demyelination"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control blood phenylalanine through dietary phenylalanine restriction, recognising that diet alone is insufficient because neurotransmitter synthesis is also impaired",
+      "Replace neurotransmitter precursors with levodopa combined with a decarboxylase inhibitor and a serotonin precursor such as 5-hydroxytryptophan",
+      "Add folinic acid to treat the secondary cerebral folate deficiency and prevent demyelination and intracranial calcification",
+      "Note that tetrahydrobiopterin supplementation alone is often inadequate because the defect lies in recycling rather than synthesis",
+      "Manage seizures and dystonia symptomatically with physiotherapy and developmental support",
+      "Monitor cerebrospinal fluid neurotransmitter metabolites and blood phenylalanine with regular developmental assessment",
+      "Genetic counselling and family screening given autosomal recessive inheritance, with lifelong metabolic follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for dihydropteridine reductase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dihydropteridine-reductase-deficiency-real-image",
-   "title": "Dihydropteridine reductase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dihydropteridine_reductase_deficiency-pathway",
+      "title": "Dihydropteridine reductase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive defect of tetrahydrobiopterin (BH4) recycling caused by QDPR mutations, in which dihydropteridine reductase cannot regenerate BH4 from its oxidised form",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological regression despite good phenylalanine control, indicating untreated cofactor and folate deficiency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dihydropteridine reductase enzyme activity assay (deficient) in blood spots, Blood and urine pterin profile (biopterin normal or elevated) with blood phenylalanine, QDPR gene sequencing to confirm the diagnosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control blood phenylalanine through dietary phenylalanine restriction, recognising that diet alone is insufficient because neurotransmitter synthesis is also impaired"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Managing as classic phenylketonuria and omitting the essential folinic acid and neurotransmitter therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dihydropteridine reductase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dihydropteridine_reductase_deficiency-matrix",
+      "title": "Dihydropteridine reductase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive defect of tetrahydrobiopterin (BH4) recycling caused by QDPR mutations, in which dihydropteridine reductase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dihydropteridine reductase enzyme activity assay (deficient) in blood spots, Blood and urine pterin profile (biopterin normal or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic phenylketonuria (phenylalanine hydroxylase deficiency), 6-pyruvoyl-tetrahydropterin synthase deficiency (BH4 synthesis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control blood phenylalanine through dietary phenylalanine restriction, recognising that diet alone is insufficient because",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Managing as classic phenylketonuria and omitting the essential folinic acid and neurotransmitter therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dihydropteridine reductase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dihydropteridine_reductase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dihydropteridine reductase activity in blood spots",
+          "cells": [
+            {
+              "text": "Deficient DHPR activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and urine pterin profile with phenylalanine",
+          "cells": [
+            {
+              "text": "Biopterin normal or raised with raised phenylalanine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "QDPR gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the QDPR variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF neurotransmitter metabolites and 5-methyltetrahydrofolate",
+          "cells": [
+            {
+              "text": "Neurotransmitter deficit and cerebral folate deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI or CT",
+          "cells": [
+            {
+              "text": "Demyelination and basal ganglia calcification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dihydropteridine_reductase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic phenylketonuria",
+          "cells": [
+            {
+              "text": "Biopterin profile separates it; diet alone is insufficient here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "6-pyruvoyl-tetrahydropterin synthase deficiency",
+          "cells": [
+            {
+              "text": "A BH4 synthesis defect, not a recycling defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dihydropteridine_reductase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phenylalanine restriction",
+          "cells": [
+            {
+              "text": "Controls blood phenylalanine; diet alone is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurotransmitter precursors",
+          "cells": [
+            {
+              "text": "Levodopa with a decarboxylase inhibitor, and 5-hydroxytryptophan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folinic acid",
+          "cells": [
+            {
+              "text": "Treats secondary cerebral folate deficiency; prevents demyelination and calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BH4 supplementation",
+          "cells": [
+            {
+              "text": "Often inadequate alone because the defect lies in recycling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Physiotherapy and developmental support for seizures and dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "CSF neurotransmitter metabolites, blood phenylalanine and developmental assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and follow-up",
+          "cells": [
+            {
+              "text": "Autosomal recessive; lifelong metabolic follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dihydropteridine_reductase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Dihydropteridine reductase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DHPR deficiency: infant with hyperphenylalaninaemia, dystonia and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (regression, dystonia, intracranial calcification)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent start of neurotransmitter precursors and folinic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DHPR activity in blood spots; pterin profile; QDPR sequencing; CSF neurotransmitters",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is DHPR activity deficient with QDPR variants on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider classic PKU, 6-PTPS or GTP cyclohydrolase I deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restrict dietary phenylalanine to control blood levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levodopa with decarboxylase inhibitor and 5-hydroxytryptophan replace neurotransmitters",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add folinic acid for cerebral folate deficiency and prevent demyelination",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Do not rely on BH4 alone; the defect is in recycling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong metabolic follow-up and genetic counselling for the family",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early combined treatment can substantially improve outcome; delay leaves lasting damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

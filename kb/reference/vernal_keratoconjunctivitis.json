@@ -1,174 +1,423 @@
 {
- "id": "vernal_keratoconjunctivitis",
- "name": "Vernal keratoconjunctivitis",
- "aliases": [
-  "VKC",
-  "spring catarrh",
-  "vernal catarrh"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Cornea",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic, bilateral, often seasonally recurrent allergic keratoconjunctivitis affecting mainly children and young males, frequently with atopy",
-   "The palpebral form shows large cobblestone (giant) papillae on the upper tarsal conjunctiva",
-   "The limbal form shows gelatinous limbal papillae with white Horner-Trantas dots (collections of eosinophils and epithelial cells)",
-   "Intense itching, ropy mucoid discharge, photophobia, and tearing are characteristic symptoms",
-   "Corneal involvement ranges from punctate epithelial keratitis to a shield ulcer, a sterile oval epithelial defect in the superior cornea from inflammatory mediators and mechanical trauma from giant papillae",
-   "A shield ulcer can become plaque-covered and heal poorly, threatening the visual axis, and warrants more intensive treatment",
-   "Management uses allergen avoidance, topical mast cell stabilisers and antihistamines, topical corticosteroids for flares, and topical immunomodulators (calcineurin inhibitors) for steroid-sparing control",
-   "The condition tends to remit after adolescence but can leave limbal stem cell damage, scarring, or keratoconus in severe cases"
+  "id": "vernal_keratoconjunctivitis",
+  "name": "Vernal keratoconjunctivitis",
+  "aliases": [
+    "VKC",
+    "spring catarrh",
+    "vernal catarrh"
   ],
-  "pathophysiology": "Vernal keratoconjunctivitis is a chronic allergic inflammation of the ocular surface involving both IgE-mediated (type I) and cell-mediated (type IV) hypersensitivity, with a prominent role for eosinophils, mast cells, and T lymphocytes. Repeated allergen exposure and chronic inflammation drive proliferation of the tarsal conjunctiva into giant cobblestone papillae and produce gelatinous limbal papillae with Horner-Trantas dots. Eosinophil-derived toxic mediators, together with mechanical rubbing by giant papillae, damage the corneal epithelium and can produce a sterile shield ulcer in the superior cornea. Chronic severe disease may injure the limbal stem cells and cause scarring, and eye rubbing contributes to associated keratoconus.",
-  "additionalDifferentials": [
-   "Atopic keratoconjunctivitis",
-   "Giant papillary conjunctivitis (contact-lens related)",
-   "Seasonal and perennial allergic conjunctivitis",
-   "Bacterial or viral conjunctivitis",
-   "Superior limbic keratoconjunctivitis",
-   "Blepharokeratoconjunctivitis"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination documenting giant tarsal papillae, limbal papillae, and Horner-Trantas dots",
-   "Fluorescein staining to detect punctate keratopathy and shield ulcers",
-   "Conjunctival scraping or cytology showing eosinophils when the diagnosis is uncertain",
-   "Corneal topography to detect associated keratoconus",
-   "Allergy evaluation and atopy history",
-   "Assessment of limbal stem cell function in severe chronic disease"
-  ],
-  "redFlags": [
-   "Shield ulcer or plaque threatening the visual axis",
-   "Progressive corneal scarring or limbal stem cell failure",
-   "Development of keratoconus from chronic eye rubbing",
-   "Secondary microbial keratitis complicating an epithelial defect"
-  ],
-  "prognosis": "The disease is usually self-limiting and tends to resolve after adolescence, but severe or poorly controlled cases can cause shield ulcers, corneal scarring, limbal stem cell damage, and keratoconus with lasting visual consequences.",
-  "pitfalls": [
-   "Prolonged unmonitored topical steroid use causing glaucoma, cataract, or infection",
-   "Missing a shield ulcer and its threat to the visual axis",
-   "Overlooking associated keratoconus in a child who rubs the eyes",
-   "Attributing chronic itching solely to simple allergic conjunctivitis and underestimating corneal risk"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Cornea by Krachmer, Mannis and Holland"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Advise allergen avoidance, cool compresses, ocular lubricants and cessation of eye rubbing as baseline measures",
-   "Use topical mast-cell stabilisers or dual-acting antihistamine and mast-cell stabilisers for ongoing control",
-   "Give short pulsed courses of topical corticosteroids for severe acute flares, monitoring intraocular pressure",
-   "Introduce topical calcineurin inhibitors such as ciclosporin or tacrolimus as steroid-sparing agents in severe or chronic disease",
-   "Treat a shield ulcer intensively with anti-inflammatory therapy, lubrication and antibiotic cover, with plaque debridement or surgery if it fails to heal",
-   "Monitor for steroid-induced glaucoma and cataract, and screen with corneal topography for associated keratoconus",
-   "Refer to ophthalmology and cornea services, reassuring that the disease usually remits after adolescence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vernal_keratoconjunctivitis-pathway",
-   "title": "Vernal keratoconjunctivitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic, bilateral, often seasonally recurrent allergic keratoconjunctivitis affecting mainly children and young males, frequently with atopy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Shield ulcer or plaque threatening the visual axis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination documenting giant tarsal papillae, limbal papillae, and Horner-Trantas dots, Fluorescein staining to detect punctate keratopathy and shield ulcers, Conjunctival scraping or cytology showing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Advise allergen avoidance, cool compresses, ocular lubricants and cessation of eye rubbing as baseline measures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prolonged unmonitored topical steroid use causing glaucoma, cataract, or infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vernal keratoconjunctivitis."
-  }
- ],
- "tables": [
-  {
-   "id": "vernal_keratoconjunctivitis-matrix",
-   "title": "Vernal keratoconjunctivitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic, bilateral, often seasonally recurrent allergic keratoconjunctivitis affecting mainly children and young males,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Cornea",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic, bilateral, often seasonally recurrent allergic keratoconjunctivitis affecting mainly children and young males, frequently with atopy",
+      "The palpebral form shows large cobblestone (giant) papillae on the upper tarsal conjunctiva",
+      "The limbal form shows gelatinous limbal papillae with white Horner-Trantas dots (collections of eosinophils and epithelial cells)",
+      "Intense itching, ropy mucoid discharge, photophobia, and tearing are characteristic symptoms",
+      "Corneal involvement ranges from punctate epithelial keratitis to a shield ulcer, a sterile oval epithelial defect in the superior cornea from inflammatory mediators and mechanical trauma from giant papillae",
+      "A shield ulcer can become plaque-covered and heal poorly, threatening the visual axis, and warrants more intensive treatment",
+      "Management uses allergen avoidance, topical mast cell stabilisers and antihistamines, topical corticosteroids for flares, and topical immunomodulators (calcineurin inhibitors) for steroid-sparing control",
+      "The condition tends to remit after adolescence but can leave limbal stem cell damage, scarring, or keratoconus in severe cases"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination documenting giant tarsal papillae, limbal papillae, and Horner-Trantas dots, Fluorescein staining to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vernal keratoconjunctivitis is a chronic allergic inflammation of the ocular surface involving both IgE-mediated (type I) and cell-mediated (type IV) hypersensitivity, with a prominent role for eosinophils, mast cells, and T lymphocytes. Repeated allergen exposure and chronic inflammation drive proliferation of the tarsal conjunctiva into giant cobblestone papillae and produce gelatinous limbal papillae with Horner-Trantas dots. Eosinophil-derived toxic mediators, together with mechanical rubbing by giant papillae, damage the corneal epithelium and can produce a sterile shield ulcer in the superior cornea. Chronic severe disease may injure the limbal stem cells and cause scarring, and eye rubbing contributes to associated keratoconus.",
+    "additionalDifferentials": [
+      "Atopic keratoconjunctivitis",
+      "Giant papillary conjunctivitis (contact-lens related)",
+      "Seasonal and perennial allergic conjunctivitis",
+      "Bacterial or viral conjunctivitis",
+      "Superior limbic keratoconjunctivitis",
+      "Blepharokeratoconjunctivitis"
     ],
-    [
-     "Primary Differentials",
-     "Atopic keratoconjunctivitis, Giant papillary conjunctivitis (contact-lens related), Seasonal and perennial allergic conjunctivitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination documenting giant tarsal papillae, limbal papillae, and Horner-Trantas dots",
+      "Fluorescein staining to detect punctate keratopathy and shield ulcers",
+      "Conjunctival scraping or cytology showing eosinophils when the diagnosis is uncertain",
+      "Corneal topography to detect associated keratoconus",
+      "Allergy evaluation and atopy history",
+      "Assessment of limbal stem cell function in severe chronic disease"
     ],
-    [
-     "Management Strategy",
-     "Advise allergen avoidance, cool compresses, ocular lubricants and cessation of eye rubbing as baseline measures",
-     "Core treatment modality"
+    "redFlags": [
+      "Shield ulcer or plaque threatening the visual axis",
+      "Progressive corneal scarring or limbal stem cell failure",
+      "Development of keratoconus from chronic eye rubbing",
+      "Secondary microbial keratitis complicating an epithelial defect"
     ],
-    [
-     "Clinical Pitfall",
-     "Prolonged unmonitored topical steroid use causing glaucoma, cataract, or infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease is usually self-limiting and tends to resolve after adolescence, but severe or poorly controlled cases can cause shield ulcers, corneal scarring, limbal stem cell damage, and keratoconus with lasting visual consequences.",
+    "pitfalls": [
+      "Prolonged unmonitored topical steroid use causing glaucoma, cataract, or infection",
+      "Missing a shield ulcer and its threat to the visual axis",
+      "Overlooking associated keratoconus in a child who rubs the eyes",
+      "Attributing chronic itching solely to simple allergic conjunctivitis and underestimating corneal risk"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Cornea by Krachmer, Mannis and Holland"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Advise allergen avoidance, cool compresses, ocular lubricants and cessation of eye rubbing as baseline measures",
+      "Use topical mast-cell stabilisers or dual-acting antihistamine and mast-cell stabilisers for ongoing control",
+      "Give short pulsed courses of topical corticosteroids for severe acute flares, monitoring intraocular pressure",
+      "Introduce topical calcineurin inhibitors such as ciclosporin or tacrolimus as steroid-sparing agents in severe or chronic disease",
+      "Treat a shield ulcer intensively with anti-inflammatory therapy, lubrication and antibiotic cover, with plaque debridement or surgery if it fails to heal",
+      "Monitor for steroid-induced glaucoma and cataract, and screen with corneal topography for associated keratoconus",
+      "Refer to ophthalmology and cornea services, reassuring that the disease usually remits after adolescence"
     ]
-   ],
-   "caption": "Overview comparison matrix for vernal keratoconjunctivitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vernal-keratoconjunctivitis-real-image",
-   "title": "Vernal keratoconjunctivitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vernal_keratoconjunctivitis-pathway",
+      "title": "Vernal keratoconjunctivitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic, bilateral, often seasonally recurrent allergic keratoconjunctivitis affecting mainly children and young males, frequently with atopy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Shield ulcer or plaque threatening the visual axis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination documenting giant tarsal papillae, limbal papillae, and Horner-Trantas dots, Fluorescein staining to detect punctate keratopathy and shield ulcers, Conjunctival scraping or cytology showing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Advise allergen avoidance, cool compresses, ocular lubricants and cessation of eye rubbing as baseline measures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prolonged unmonitored topical steroid use causing glaucoma, cataract, or infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vernal keratoconjunctivitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vernal_keratoconjunctivitis-matrix",
+      "title": "Vernal keratoconjunctivitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic, bilateral, often seasonally recurrent allergic keratoconjunctivitis affecting mainly children and young males,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination documenting giant tarsal papillae, limbal papillae, and Horner-Trantas dots, Fluorescein staining to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Atopic keratoconjunctivitis, Giant papillary conjunctivitis (contact-lens related), Seasonal and perennial allergic conjunctivitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Advise allergen avoidance, cool compresses, ocular lubricants and cessation of eye rubbing as baseline measures",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prolonged unmonitored topical steroid use causing glaucoma, cataract, or infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vernal keratoconjunctivitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vernal_keratoconjunctivitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Giant tarsal papillae, limbal papillae and Horner-Trantas dots"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein staining",
+          "cells": [
+            {
+              "text": "Punctate keratopathy and shield ulcers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conjunctival scraping or cytology",
+          "cells": [
+            {
+              "text": "Eosinophils, when the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal topography",
+          "cells": [
+            {
+              "text": "Keratoconus from chronic eye rubbing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vernal_keratoconjunctivitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atopic keratoconjunctivitis",
+          "cells": [
+            {
+              "text": "Atopic disease; distinguished by the distribution of the papillae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant papillary conjunctivitis",
+          "cells": [
+            {
+              "text": "Contact lens related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superior limbic keratoconjunctivitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial or viral conjunctivitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vernal_keratoconjunctivitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergen avoidance and cool compresses",
+          "cells": [
+            {
+              "text": "Baseline measures with ocular lubricants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop eye rubbing",
+          "cells": [
+            {
+              "text": "Reduces keratoconus risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mast-cell stabilisers or dual-acting antihistamines",
+          "cells": [
+            {
+              "text": "Ongoing control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short pulsed topical corticosteroids",
+          "cells": [
+            {
+              "text": "Severe acute episodes, with monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vernal_keratoconjunctivitis-dx-mgmt",
+      "title": "Diagnosis and management of Vernal keratoconjunctivitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vernal keratoconjunctivitis: bilateral itch and papillae in a child with atopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (shield ulcer, progressive scarring or keratoconus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmic review for shield ulcer threatening the visual axis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, fluorescein staining, conjunctival cytology if uncertain, topography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are giant papillae and Horner-Trantas dots seen on slit-lamp examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atopic keratoconjunctivitis or bacterial or viral conjunctivitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Allergen avoidance, cool compresses, lubricants and stopping eye rubbing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mast-cell stabilisers or dual-acting antihistamines for ongoing control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short pulsed topical corticosteroids for severe episodes, with monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Chronic recurrent disease; monitor for steroid complications and corneal damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -213,25 +213,753 @@
       "caption": "Diagnostic and clinical overview matrix for immune thrombocytopenia (itp)."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "itp-real-image",
-      "title": "Immune thrombocytopenia (ITP): Diagnostic Peripheral Blood Smear Examination",
-      "type": "diagram",
-      "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-      "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Immune Thrombocytopenia, 2026",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/thrombocytopenia-and-platelet-dysfunction/immune-thrombocytopenia-itp"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 115-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 143-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 113-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "itp-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings and platelet thresholds in ITP",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Erythrocyte Indices",
-          "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+          "parameter": "CBC and peripheral smear",
+          "cells": [
+            {
+              "text": "Isolated thrombocytopenia, otherwise normal cells and smear"
+            },
+            {
+              "text": "{{hy:ITP is a diagnosis of exclusion}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Leukocyte Differential",
-          "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+          "parameter": "Platelet morphology",
+          "cells": [
+            {
+              "text": "Large platelets, raised MPV"
+            },
+            {
+              "text": "Young, rapidly turned-over platelets"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Platelet Count",
-          "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+          "parameter": "Immature platelet fraction",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "May be raised when platelets below 50,000/uL",
+              "op": "<",
+              "value": 50000
+            },
+            {
+              "text": "Supports peripheral destruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelet count with no excess mortality",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Above 30,000/uL",
+              "op": ">",
+              "value": 30000
+            },
+            {
+              "text": "Asymptomatic patients are usually observed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular integrity threshold",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "About 5,000 to 10,000/uL",
+              "range": [
+                5000,
+                10000
+              ]
+            },
+            {
+              "text": "Level needed to keep microvessels intact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe thrombocytopenia",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Below 5,000/uL",
+              "op": "<",
+              "value": 5000
+            },
+            {
+              "text": "Treatment decision point in Harrison"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Petechiae, wet purpura, retinal haemorrhage",
+          "cells": [
+            {
+              "text": "Petechiae in dependent areas; oral blood blisters; retinal bleeds"
+            },
+            {
+              "text": "Wet purpura and retinal haemorrhage may herald life-threatening bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary-cause screen",
+          "cells": [
+            {
+              "text": "HIV, hepatitis C, SLE serology, SPEP and immunoglobulins, H. pylori as indicated"
+            },
+            {
+              "text": "Excludes secondary ITP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Positive with anaemia"
+            },
+            {
+              "text": "Evans syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet antibody testing",
+          "cells": [
+            {
+              "text": "Low sensitivity and specificity"
+            },
+            {
+              "text": "Generally not helpful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Not required routinely"
+            },
+            {
+              "text": "Only for other abnormal counts, atypical features or no response to therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "itp-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic ITP",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudothrombocytopenia",
+          "cells": [
+            {
+              "text": "EDTA-dependent clumping giving a falsely low automated count"
+            },
+            {
+              "text": "{{hy:Smear review; redraw in citrate or heparin}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "Exposure to quinine, quinidine, vancomycin, rifampin, valproate, carbamazepine, phenytoin, trimethoprim-sulfamethoxazole and others"
+            },
+            {
+              "text": "Drug, herbal and OTC history; recovery off drug"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Heparin-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "Thrombosis rather than bleeding; nadir rarely below 20,000/uL"
+            },
+            {
+              "text": "4T score"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evans syndrome",
+          "cells": [
+            {
+              "text": "Autoimmune haemolytic anaemia with thrombocytopenia"
+            },
+            {
+              "text": "Direct antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited thrombocytopenia",
+          "cells": [
+            {
+              "text": "Lifelong low count, often macrothrombocytes, family history"
+            },
+            {
+              "text": "Smear and family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TTP or leukaemia",
+          "cells": [
+            {
+              "text": "Schistocytes or abnormal white cells on smear"
+            },
+            {
+              "text": "Peripheral smear"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary ITP (HIV, HCV, SLE, lymphoproliferative)",
+          "cells": [
+            {
+              "text": "Underlying infection or autoimmune disease"
+            },
+            {
+              "text": "HIV, HCV and SLE serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "itp-treatment",
+      "kind": "treatment",
+      "title": "Treatment of ITP in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated in source"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "No bleeding, platelets above 30,000/uL, no added bleeding risk"
+            },
+            {
+              "text": "Monitor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone",
+          "cells": [
+            {
+              "text": "First line when bleeding and platelets below 30,000/uL"
+            },
+            {
+              "text": "1 mg/kg orally daily; usually stop by about 6 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dexamethasone",
+          "cells": [
+            {
+              "text": "First-line alternative"
+            },
+            {
+              "text": "40 mg orally daily for 4 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVIG",
+          "cells": [
+            {
+              "text": "{{hy:Life-threatening bleeding or before procedures}}"
+            },
+            {
+              "text": "1 g/kg IV daily for 1 to 2 days; effect lasts 2 to 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV anti-D immune globulin",
+          "cells": [
+            {
+              "text": "Rh-positive, non-splenectomised patients"
+            },
+            {
+              "text": "75 mcg/kg IV once; risk of haemolysis and DIC"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Methylprednisolone",
+          "cells": [
+            {
+              "text": "Life-threatening bleeding"
+            },
+            {
+              "text": "1 g IV daily for 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelet transfusion",
+          "cells": [
+            {
+              "text": "Life-threatening bleeding only"
+            },
+            {
+              "text": "Not prophylactic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TPO receptor agonists",
+          "cells": [
+            {
+              "text": "Second line"
+            },
+            {
+              "text": "Romiplostim 1 to 10 mcg/kg SC weekly; eltrombopag 25 to 75 mg daily; avatrombopag 20 to 40 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Second line"
+            },
+            {
+              "text": "375 mg/m2 IV weekly for 4 weeks, or 1000 mg twice 2 weeks apart"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fostamatinib or rilzabrutinib",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            },
+            {
+              "text": "Fostamatinib 100 mg twice daily, up to 150 mg; rilzabrutinib 400 mg every 12 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Platelets below 15,000/uL with uncontrolled bleeding risk, or disease beyond 12 months"
+            },
+            {
+              "text": "Vaccinate against pneumococcus, H. influenzae and meningococcus over 2 weeks before"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Children are usually managed supportively; most recover spontaneously. Doses are as stated by Merck 2026; verify against local formulary."
+    },
+    {
+      "id": "itp-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common causes of petechial or purpuric rashes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral infections",
+          "cells": [
+            {
+              "text": "Enteroviruses; influenza and other respiratory viruses; measles virus; Epstein-Barr virus; cytomegalovirus; parvovirus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Coagulation",
+          "cells": [
+            {
+              "text": "Deficiency of protein C or S (including postvaricella protein S deficiency)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Platelet disorders",
+          "cells": [
+            {
+              "text": "Idiopathic thrombocytopenic purpura, drug effects, bone marrow infiltration"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Other noninfective",
+          "cells": [
+            {
+              "text": "Henoch-Schonlein purpura; connective tissue disorders; trauma (including nonaccidental injury in children)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bacterial sepsis",
+          "cells": [
+            {
+              "text": "Pneumococcal, streptococcal, staphylococcal, or gram-negative bacterial sepsis"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "itp-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Characteristics of selected blood components",
+      "rowHeader": "Component",
+      "columns": [
+        "Volume, mL",
+        "Content",
+        "Clinical response"
+      ],
+      "rows": [
+        {
+          "parameter": "PRBC",
+          "cells": [
+            {
+              "text": "180-200"
+            },
+            {
+              "text": "Red cells with variable leukocyte content and a small amount of plasma"
+            },
+            {
+              "text": "Raises hemoglobin by 10 g/L and hematocrit by 3%"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Platelets (random donor unit)",
+          "cells": [
+            {
+              "text": "50-70"
+            },
+            {
+              "text": "5.5 x 10^10 per random-donor unit"
+            },
+            {
+              "text": "Raises platelet count by 5000-10,000/uL"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Platelets (single-donor apheresis product)",
+          "cells": [
+            {
+              "text": "200-400"
+            },
+            {
+              "text": ">=3 x 10^11 per single-donor apheresis product"
+            },
+            {
+              "text": "Corrected count increment >=10 x 10^9/L within 1 h and >=7.5 x 10^9/L within 24 h after transfusion"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "FFP",
+          "cells": [
+            {
+              "text": "200-250"
+            },
+            {
+              "text": "Plasma proteins: coagulation factors, proteins C and S, antithrombin"
+            },
+            {
+              "text": "Raises coagulation factors by about 2%"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Cryoprecipitate",
+          "cells": [
+            {
+              "text": "10-15"
+            },
+            {
+              "text": "Cold-insoluble plasma proteins: fibrinogen, factor VIII, vWF"
+            },
+            {
+              "text": "Used as topical fibrin glue; also supplies 80 IU of factor VIII"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "The PDF prints the platelet component as two rows; the second row has no component label and is read here as the apheresis product (CCI = corrected count increment)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "itp-dx-mgmt",
+      "title": "Diagnosis and management of immune thrombocytopenia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Petechiae, mucosal bleeding or incidental low platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CBC and smear review",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Clumping on smear?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Pseudothrombocytopenia; recount in citrate tube",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Other cell lines or smear abnormal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Marrow exam; work up TTP, leukaemia, other causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude drugs, HIV, HCV, SLE; DAT if anaemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Life-threatening bleeding?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IVIG, IV methylprednisolone, platelet transfusion",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Bleeding with platelets below 30,000/uL?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Observe and monitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Prednisone or dexamethasone",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "decision",
+          "text": "Relapse or no response?",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Taper off and follow",
+          "cite": "c2"
+        },
+        {
+          "id": "n15",
+          "type": "outcome",
+          "text": "Second line: TPO-RA, rituximab or splenectomy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n13",
+          "to": "n15",
+          "label": "Yes"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "No"
         }
       ]
     }

@@ -1,175 +1,457 @@
 {
- "id": "ventricular_tachycardia",
- "name": "Ventricular tachycardia",
- "aliases": [
-  "VT",
-  "monomorphic ventricular tachycardia",
-  "polymorphic ventricular tachycardia",
-  "wide-complex tachycardia"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "VT is a wide-complex tachycardia arising below the bundle of His; any wide-complex tachycardia should be assumed to be VT until proven otherwise, especially in patients with structural heart disease or prior infarction",
-   "It is classified as non-sustained or sustained, and as monomorphic or polymorphic, distinctions that guide both diagnosis and management",
-   "Monomorphic VT usually reflects a fixed reentry substrate such as a myocardial scar, while polymorphic VT often indicates acute ischaemia or, in the setting of a long QT, torsades de pointes",
-   "ECG clues favouring VT over SVT with aberrancy include AV dissociation, capture and fusion beats, and very broad or concordant QRS morphology",
-   "Haemodynamically unstable sustained VT requires immediate synchronised cardioversion, and pulseless VT is treated as cardiac arrest with defibrillation",
-   "Stable sustained monomorphic VT may be treated pharmacologically under monitoring, but readiness to cardiovert must be maintained",
-   "Identifying and correcting reversible triggers such as ischaemia, electrolyte disturbance, and QT-prolonging drugs is essential",
-   "An implantable cardioverter-defibrillator is central to secondary prevention in patients with sustained VT and structural heart disease, and catheter ablation reduces recurrent episodes"
+  "id": "ventricular_tachycardia",
+  "name": "Ventricular tachycardia",
+  "aliases": [
+    "VT",
+    "monomorphic ventricular tachycardia",
+    "polymorphic ventricular tachycardia",
+    "wide-complex tachycardia"
   ],
-  "pathophysiology": "Most sustained monomorphic VT is due to reentry around regions of myocardial scar, typically after prior infarction, where slow conduction through surviving fibres embedded in fibrosis creates a stable circuit. Polymorphic VT commonly arises from acute ischaemia producing heterogeneous repolarisation, or from delayed repolarisation in long QT syndromes, generating triggered activity that degenerates into torsades de pointes. Abnormal automaticity and triggered activity from afterdepolarisations also contribute, particularly with electrolyte disturbance, drug effects, or catecholamine excess. Sustained rapid ventricular rates impair filling and cardiac output and can degenerate into ventricular fibrillation.",
-  "additionalDifferentials": [
-   "Supraventricular tachycardia with aberrant conduction",
-   "Pre-excited tachycardia (antidromic AVRT or atrial fibrillation with an accessory pathway)",
-   "Ventricular fibrillation",
-   "Torsades de pointes in long QT syndrome",
-   "Paced rhythm with rapid tracking",
-   "Artefact mimicking wide-complex tachycardia"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG during tachycardia and in sinus rhythm to assess morphology and baseline substrate",
-   "Electrolytes including potassium and magnesium, and review of QT-prolonging medications",
-   "Echocardiography and often cardiac MRI to define structural substrate and scar",
-   "Assessment for coronary ischaemia including angiography when indicated",
-   "Electrophysiology study to characterise the circuit and guide ablation",
-   "Ambulatory monitoring to capture non-sustained episodes"
-  ],
-  "redFlags": [
-   "MEDICAL EMERGENCY: pulseless VT or degeneration into ventricular fibrillation is cardiac arrest requiring immediate defibrillation and resuscitation",
-   "Haemodynamically unstable sustained VT with hypotension, ischaemia, or reduced consciousness requiring urgent synchronised cardioversion",
-   "Polymorphic VT with a prolonged QT (torsades) requiring correction of the QT and specific measures",
-   "Incessant or recurrent VT (electrical storm) requiring intensive management"
-  ],
-  "prognosis": "Prognosis is strongly tied to the underlying substrate and left ventricular function; VT in structurally normal hearts is often benign, whereas sustained VT with impaired ventricular function or scar carries a high risk of sudden death that is mitigated by defibrillator therapy and substrate-targeted treatment.",
-  "pitfalls": [
-   "Treating a wide-complex tachycardia as SVT with aberrancy when it is VT, potentially with hazardous AV nodal blocking drugs",
-   "Delaying cardioversion in an unstable patient in favour of drug therapy",
-   "Missing a reversible cause such as ischaemia, hyperkalaemia, hypomagnesaemia, or QT-prolonging drugs",
-   "Overlooking the need for defibrillator evaluation in secondary prevention after sustained VT with structural disease"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ESC/ACC-AHA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat haemodynamically unstable sustained VT with immediate synchronised cardioversion, and pulseless VT as cardiac arrest with defibrillation and resuscitation",
-   "Manage stable monomorphic VT with intravenous antiarrhythmics such as amiodarone, lidocaine or procainamide while maintaining readiness to cardiovert",
-   "For polymorphic VT and torsades de pointes, correct hypokalaemia and hypomagnesaemia, give intravenous magnesium, withdraw QT-prolonging drugs and treat underlying ischaemia",
-   "Address reversible substrate and precipitants, including coronary revascularisation for ischaemia and correction of electrolyte disturbance",
-   "Implant a defibrillator for secondary prevention in patients with structural heart disease or impaired ventricular function, supported by beta-blocker therapy",
-   "Offer catheter ablation for recurrent scar-related monomorphic VT, with adjunctive antiarrhythmic drug therapy",
-   "Refer to electrophysiology and pursue genetic evaluation and family screening where an inherited arrhythmia syndrome such as long QT is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ventricular_tachycardia-pathway",
-   "title": "Ventricular tachycardia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "VT is a wide-complex tachycardia arising below the bundle of His; any wide-complex tachycardia should be assumed to be VT until proven otherwise, especially in patients with structural heart disease or prior infarction",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: pulseless VT or degeneration into ventricular fibrillation is cardiac arrest requiring immediate defibrillation and resuscitation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG during tachycardia and in sinus rhythm to assess morphology and baseline substrate, Electrolytes including potassium and magnesium, and review of QT-prolonging medications, Echocardiography and often cardiac"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat haemodynamically unstable sustained VT with immediate synchronised cardioversion, and pulseless VT as cardiac arrest with defibrillation and resuscitation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a wide-complex tachycardia as SVT with aberrancy when it is VT, potentially with hazardous AV nodal blocking drugs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ventricular tachycardia."
-  }
- ],
- "tables": [
-  {
-   "id": "ventricular_tachycardia-matrix",
-   "title": "Ventricular tachycardia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "VT is a wide-complex tachycardia arising below the bundle of His; any wide-complex tachycardia should be assumed to be VT until",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "VT is a wide-complex tachycardia arising below the bundle of His; any wide-complex tachycardia should be assumed to be VT until proven otherwise, especially in patients with structural heart disease or prior infarction",
+      "It is classified as non-sustained or sustained, and as monomorphic or polymorphic, distinctions that guide both diagnosis and management",
+      "Monomorphic VT usually reflects a fixed reentry substrate such as a myocardial scar, while polymorphic VT often indicates acute ischaemia or, in the setting of a long QT, torsades de pointes",
+      "ECG clues favouring VT over SVT with aberrancy include AV dissociation, capture and fusion beats, and very broad or concordant QRS morphology",
+      "Haemodynamically unstable sustained VT requires immediate synchronised cardioversion, and pulseless VT is treated as cardiac arrest with defibrillation",
+      "Stable sustained monomorphic VT may be treated pharmacologically under monitoring, but readiness to cardiovert must be maintained",
+      "Identifying and correcting reversible triggers such as ischaemia, electrolyte disturbance, and QT-prolonging drugs is essential",
+      "An implantable cardioverter-defibrillator is central to secondary prevention in patients with sustained VT and structural heart disease, and catheter ablation reduces recurrent episodes"
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG during tachycardia and in sinus rhythm to assess morphology and baseline substrate, Electrolytes including potassium",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Most sustained monomorphic VT is due to reentry around regions of myocardial scar, typically after prior infarction, where slow conduction through surviving fibres embedded in fibrosis creates a stable circuit. Polymorphic VT commonly arises from acute ischaemia producing heterogeneous repolarisation, or from delayed repolarisation in long QT syndromes, generating triggered activity that degenerates into torsades de pointes. Abnormal automaticity and triggered activity from afterdepolarisations also contribute, particularly with electrolyte disturbance, drug effects, or catecholamine excess. Sustained rapid ventricular rates impair filling and cardiac output and can degenerate into ventricular fibrillation.",
+    "additionalDifferentials": [
+      "Supraventricular tachycardia with aberrant conduction",
+      "Pre-excited tachycardia (antidromic AVRT or atrial fibrillation with an accessory pathway)",
+      "Ventricular fibrillation",
+      "Torsades de pointes in long QT syndrome",
+      "Paced rhythm with rapid tracking",
+      "Artefact mimicking wide-complex tachycardia"
     ],
-    [
-     "Primary Differentials",
-     "Supraventricular tachycardia with aberrant conduction, Pre-excited tachycardia (antidromic AVRT or atrial fibrillation with an",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG during tachycardia and in sinus rhythm to assess morphology and baseline substrate",
+      "Electrolytes including potassium and magnesium, and review of QT-prolonging medications",
+      "Echocardiography and often cardiac MRI to define structural substrate and scar",
+      "Assessment for coronary ischaemia including angiography when indicated",
+      "Electrophysiology study to characterise the circuit and guide ablation",
+      "Ambulatory monitoring to capture non-sustained episodes"
     ],
-    [
-     "Management Strategy",
-     "Treat haemodynamically unstable sustained VT with immediate synchronised cardioversion, and pulseless VT as cardiac arrest with",
-     "Core treatment modality"
+    "redFlags": [
+      "MEDICAL EMERGENCY: pulseless VT or degeneration into ventricular fibrillation is cardiac arrest requiring immediate defibrillation and resuscitation",
+      "Haemodynamically unstable sustained VT with hypotension, ischaemia, or reduced consciousness requiring urgent synchronised cardioversion",
+      "Polymorphic VT with a prolonged QT (torsades) requiring correction of the QT and specific measures",
+      "Incessant or recurrent VT (electrical storm) requiring intensive management"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a wide-complex tachycardia as SVT with aberrancy when it is VT, potentially with hazardous AV nodal blocking drugs",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is strongly tied to the underlying substrate and left ventricular function; VT in structurally normal hearts is often benign, whereas sustained VT with impaired ventricular function or scar carries a high risk of sudden death that is mitigated by defibrillator therapy and substrate-targeted treatment.",
+    "pitfalls": [
+      "Treating a wide-complex tachycardia as SVT with aberrancy when it is VT, potentially with hazardous AV nodal blocking drugs",
+      "Delaying cardioversion in an unstable patient in favour of drug therapy",
+      "Missing a reversible cause such as ischaemia, hyperkalaemia, hypomagnesaemia, or QT-prolonging drugs",
+      "Overlooking the need for defibrillator evaluation in secondary prevention after sustained VT with structural disease"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ESC/ACC-AHA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat haemodynamically unstable sustained VT with immediate synchronised cardioversion, and pulseless VT as cardiac arrest with defibrillation and resuscitation",
+      "Manage stable monomorphic VT with intravenous antiarrhythmics such as amiodarone, lidocaine or procainamide while maintaining readiness to cardiovert",
+      "For polymorphic VT and torsades de pointes, correct hypokalaemia and hypomagnesaemia, give intravenous magnesium, withdraw QT-prolonging drugs and treat underlying ischaemia",
+      "Address reversible substrate and precipitants, including coronary revascularisation for ischaemia and correction of electrolyte disturbance",
+      "Implant a defibrillator for secondary prevention in patients with structural heart disease or impaired ventricular function, supported by beta-blocker therapy",
+      "Offer catheter ablation for recurrent scar-related monomorphic VT, with adjunctive antiarrhythmic drug therapy",
+      "Refer to electrophysiology and pursue genetic evaluation and family screening where an inherited arrhythmia syndrome such as long QT is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for ventricular tachycardia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ventricular-tachycardia-real-image",
-   "title": "Ventricular tachycardia: 12-Lead Diagnostic ECG (Ventricular Tachycardia)",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/ventricular-tachycardia-ecg.jpg?v=kbri3",
-   "caption": "Real 12-lead electrocardiogram showing monomorphic wide-complex ventricular tachycardia with AV dissociation and extreme axis deviation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Wide QRS",
-     "description": "QRS duration >140 ms with concordant precordial pattern."
-    },
-    {
-     "label": "AV Dissociation",
-     "description": "Independent P waves dissociated from rapid regular ventricular rhythm."
-    },
-    {
-     "label": "Capture & Fusion",
-     "description": "Intermittent capture and fusion beats confirming ventricular origin."
+      "id": "ventricular_tachycardia-pathway",
+      "title": "Ventricular tachycardia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "VT is a wide-complex tachycardia arising below the bundle of His; any wide-complex tachycardia should be assumed to be VT until proven otherwise, especially in patients with structural heart disease or prior infarction",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: pulseless VT or degeneration into ventricular fibrillation is cardiac arrest requiring immediate defibrillation and resuscitation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG during tachycardia and in sinus rhythm to assess morphology and baseline substrate, Electrolytes including potassium and magnesium, and review of QT-prolonging medications, Echocardiography and often cardiac"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat haemodynamically unstable sustained VT with immediate synchronised cardioversion, and pulseless VT as cardiac arrest with defibrillation and resuscitation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a wide-complex tachycardia as SVT with aberrancy when it is VT, potentially with hazardous AV nodal blocking drugs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ventricular tachycardia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ventricular_tachycardia-matrix",
+      "title": "Ventricular tachycardia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "VT is a wide-complex tachycardia arising below the bundle of His; any wide-complex tachycardia should be assumed to be VT until",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG during tachycardia and in sinus rhythm to assess morphology and baseline substrate, Electrolytes including potassium",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Supraventricular tachycardia with aberrant conduction, Pre-excited tachycardia (antidromic AVRT or atrial fibrillation with an",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat haemodynamically unstable sustained VT with immediate synchronised cardioversion, and pulseless VT as cardiac arrest with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a wide-complex tachycardia as SVT with aberrancy when it is VT, potentially with hazardous AV nodal blocking drugs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ventricular tachycardia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "ventricular-tachycardia-real-image",
+      "title": "Ventricular tachycardia: 12-Lead Diagnostic ECG (Ventricular Tachycardia)",
+      "type": "ecg",
+      "src": "/assets/kb-real-images/ventricular-tachycardia-ecg.jpg?v=kbri3",
+      "caption": "Real 12-lead electrocardiogram showing monomorphic wide-complex ventricular tachycardia with AV dissociation and extreme axis deviation.",
+      "annotations": [
+        {
+          "label": "Wide QRS",
+          "description": "QRS duration >140 ms with concordant precordial pattern."
+        },
+        {
+          "label": "AV Dissociation",
+          "description": "Independent P waves dissociated from rapid regular ventricular rhythm."
+        },
+        {
+          "label": "Capture & Fusion",
+          "description": "Intermittent capture and fusion beats confirming ventricular origin."
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC and ACC-AHA guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ventricular_tachycardia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG during tachycardia and in sinus rhythm",
+          "cells": [
+            {
+              "text": "Morphology and baseline substrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes with potassium and magnesium",
+          "cells": [
+            {
+              "text": "Electrolyte disturbance; review of QT-prolonging drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Structural substrate and scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary assessment",
+          "cells": [
+            {
+              "text": "Ischaemic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ventricular_tachycardia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Supraventricular tachycardia with aberrant conduction",
+          "cells": [
+            {
+              "text": "Wide complex treated as SVT can lead to hazardous AV nodal blocking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-excited tachycardia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Torsades de pointes in long QT syndrome",
+          "cells": [
+            {
+              "text": "Polymorphic VT with a prolonged QT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Artefact mimicking wide-complex tachycardia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ventricular_tachycardia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Synchronised cardioversion",
+          "cells": [
+            {
+              "text": "Haemodynamically unstable sustained VT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defibrillation",
+          "cells": [
+            {
+              "text": "Pulseless VT managed as cardiac arrest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous antiarrhythmics",
+          "cells": [
+            {
+              "text": "Stable monomorphic VT: amiodarone, lidocaine or procainamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Torsades correction",
+          "cells": [
+            {
+              "text": "Polymorphic VT with a prolonged QT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ventricular_tachycardia-dx-mgmt",
+      "title": "Diagnosis and management of Ventricular tachycardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ventricular tachycardia: wide-complex tachycardia, until proven otherwise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pulseless VT, unstable VT or polymorphic VT with long QT)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Medical emergency: defibrillation for pulseless VT; cardioversion if unstable",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG, electrolytes, echo, cardiac MRI, coronary tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the wide-complex rhythm confirmed as VT rather than SVT with aberrancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SVT with aberrancy, pre-excitation, artefact or paced rhythm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate synchronised cardioversion for haemodynamically unstable VT",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous amiodarone, lidocaine or procainamide for stable monomorphic VT",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct electrolytes and QT-prolonging drugs for polymorphic VT",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Structural substrate evaluation and rhythm management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on substrate and rapidity of treatment of unstable rhythm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

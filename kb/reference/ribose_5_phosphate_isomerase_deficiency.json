@@ -1,174 +1,423 @@
 {
- "id": "ribose_5_phosphate_isomerase_deficiency",
- "name": "Ribose-5-phosphate isomerase deficiency",
- "aliases": [
-  "RPI deficiency",
-  "RPIA deficiency",
-  "ribose-5-phosphate isomerase A deficiency",
-  "pentose phosphate pathway leukoencephalopathy"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Extremely rare autosomal recessive defect of ribose-5-phosphate isomerase (RPIA gene) in the non-oxidative pentose phosphate pathway, one of the rarest reported inborn errors",
-   "Dominant feature is a slowly progressive leukoencephalopathy with developmental regression, seizures and peripheral neuropathy",
-   "Onset is typically in childhood with white-matter disease evident on MRI and characteristic accumulation of polyols on brain spectroscopy",
-   "Elevated ribitol and D-arabitol are found in body fluids and are markedly raised in cerebrospinal fluid and on cerebral magnetic resonance spectroscopy",
-   "The clinical course is remarkably slow compared with many leukoencephalopathies, sometimes spanning many years",
-   "No specific treatment exists, so care is supportive with management of seizures, spasticity and neurological disability",
-   "Diagnosis rests on demonstrating polyol accumulation (especially in CSF/brain) with confirmatory RPIA molecular and enzyme studies"
+  "id": "ribose_5_phosphate_isomerase_deficiency",
+  "name": "Ribose-5-phosphate isomerase deficiency",
+  "aliases": [
+    "RPI deficiency",
+    "RPIA deficiency",
+    "ribose-5-phosphate isomerase A deficiency",
+    "pentose phosphate pathway leukoencephalopathy"
   ],
-  "pathophysiology": "Ribose-5-phosphate isomerase catalyses interconversion of ribose-5-phosphate and ribulose-5-phosphate in the non-oxidative branch of the pentose phosphate pathway. Deficiency disturbs pentose phosphate metabolism, leading to accumulation of the polyols ribitol and D-arabitol, which reach particularly high concentrations in the central nervous system. The resulting toxic or osmotic effects on the brain are thought to drive a progressive leukoencephalopathy with demyelination, alongside a peripheral neuropathy. Because the accumulated polyols concentrate in the brain, cerebral magnetic resonance spectroscopy is especially informative.",
-  "additionalDifferentials": [
-   "Other genetic leukoencephalopathies (e.g. metachromatic leukodystrophy, vanishing white matter disease)",
-   "Transaldolase deficiency and other pentose phosphate pathway disorders",
-   "Mitochondrial leukoencephalopathies",
-   "Polyol pathway disorders causing white-matter disease",
-   "Peroxisomal disorders with neurodegeneration",
-   "Acquired demyelinating disease"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to characterise the leukoencephalopathy",
-   "Cerebral magnetic resonance spectroscopy showing abnormal polyol peaks",
-   "Measurement of ribitol and D-arabitol in urine, plasma and cerebrospinal fluid",
-   "Nerve conduction studies to assess peripheral neuropathy",
-   "RPIA molecular genetic testing to confirm the diagnosis",
-   "Enzyme activity assay in fibroblasts where genetics are inconclusive"
-  ],
-  "redFlags": [
-   "Progressive developmental regression with an evolving leukoencephalopathy",
-   "New or worsening seizures alongside white-matter disease",
-   "Progressive peripheral neuropathy with weakness",
-   "Marked polyol elevation in cerebrospinal fluid or on spectroscopy"
-  ],
-  "prognosis": "The disorder is progressive but often unusually slowly, with accumulating neurological disability over years; there is no curative therapy and long-term outcome depends on the extent of central and peripheral nervous system involvement.",
-  "pitfalls": [
-   "Not requesting polyol analysis of cerebrospinal fluid or spectroscopy in unexplained leukoencephalopathy",
-   "Attributing the white-matter changes to a mitochondrial or acquired demyelinating cause without metabolic workup",
-   "Overlooking the coexisting peripheral neuropathy",
-   "Expecting a rapid course and dismissing the diagnosis because progression is slow"
-  ],
-  "references": [
-   "Scriver's OMMBID: Disorders of the Pentose Phosphate Pathway",
-   "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive care only, as no curative or substrate-lowering therapy exists for this pentose-phosphate-pathway defect",
-   "Anticonvulsants to control seizures",
-   "Antispasticity treatment with agents such as baclofen alongside physiotherapy",
-   "Neurorehabilitation and symptomatic management of the peripheral neuropathy",
-   "Developmental and educational support with assistive devices for progressive disability",
-   "Serial brain MRI and magnetic resonance spectroscopy to monitor leukoencephalopathy and polyol accumulation",
-   "Genetic counselling and family testing for this autosomal recessive RPIA disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ribose_5_phosphate_isomerase_deficiency-pathway",
-   "title": "Ribose-5-phosphate isomerase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Extremely rare autosomal recessive defect of ribose-5-phosphate isomerase (RPIA gene) in the non-oxidative pentose phosphate pathway, one of the rarest reported inborn errors",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive developmental regression with an evolving leukoencephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to characterise the leukoencephalopathy, Cerebral magnetic resonance spectroscopy showing abnormal polyol peaks, Measurement of ribitol and D-arabitol in urine, plasma and cerebrospinal fluid"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care only, as no curative or substrate-lowering therapy exists for this pentose-phosphate-pathway defect"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not requesting polyol analysis of cerebrospinal fluid or spectroscopy in unexplained leukoencephalopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ribose-5-phosphate isomerase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "ribose_5_phosphate_isomerase_deficiency-matrix",
-   "title": "Ribose-5-phosphate isomerase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Extremely rare autosomal recessive defect of ribose-5-phosphate isomerase (RPIA gene) in the non-oxidative pentose phosphate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Extremely rare autosomal recessive defect of ribose-5-phosphate isomerase (RPIA gene) in the non-oxidative pentose phosphate pathway, one of the rarest reported inborn errors",
+      "Dominant feature is a slowly progressive leukoencephalopathy with developmental regression, seizures and peripheral neuropathy",
+      "Onset is typically in childhood with white-matter disease evident on MRI and characteristic accumulation of polyols on brain spectroscopy",
+      "Elevated ribitol and D-arabitol are found in body fluids and are markedly raised in cerebrospinal fluid and on cerebral magnetic resonance spectroscopy",
+      "The clinical course is remarkably slow compared with many leukoencephalopathies, sometimes spanning many years",
+      "No specific treatment exists, so care is supportive with management of seizures, spasticity and neurological disability",
+      "Diagnosis rests on demonstrating polyol accumulation (especially in CSF/brain) with confirmatory RPIA molecular and enzyme studies"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to characterise the leukoencephalopathy, Cerebral magnetic resonance spectroscopy showing abnormal polyol peaks,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ribose-5-phosphate isomerase catalyses interconversion of ribose-5-phosphate and ribulose-5-phosphate in the non-oxidative branch of the pentose phosphate pathway. Deficiency disturbs pentose phosphate metabolism, leading to accumulation of the polyols ribitol and D-arabitol, which reach particularly high concentrations in the central nervous system. The resulting toxic or osmotic effects on the brain are thought to drive a progressive leukoencephalopathy with demyelination, alongside a peripheral neuropathy. Because the accumulated polyols concentrate in the brain, cerebral magnetic resonance spectroscopy is especially informative.",
+    "additionalDifferentials": [
+      "Other genetic leukoencephalopathies (e.g. metachromatic leukodystrophy, vanishing white matter disease)",
+      "Transaldolase deficiency and other pentose phosphate pathway disorders",
+      "Mitochondrial leukoencephalopathies",
+      "Polyol pathway disorders causing white-matter disease",
+      "Peroxisomal disorders with neurodegeneration",
+      "Acquired demyelinating disease"
     ],
-    [
-     "Primary Differentials",
-     "Other genetic leukoencephalopathies (e.g. metachromatic leukodystrophy, vanishing white matter disease), Transaldolase deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to characterise the leukoencephalopathy",
+      "Cerebral magnetic resonance spectroscopy showing abnormal polyol peaks",
+      "Measurement of ribitol and D-arabitol in urine, plasma and cerebrospinal fluid",
+      "Nerve conduction studies to assess peripheral neuropathy",
+      "RPIA molecular genetic testing to confirm the diagnosis",
+      "Enzyme activity assay in fibroblasts where genetics are inconclusive"
     ],
-    [
-     "Management Strategy",
-     "Supportive care only, as no curative or substrate-lowering therapy exists for this pentose-phosphate-pathway defect",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive developmental regression with an evolving leukoencephalopathy",
+      "New or worsening seizures alongside white-matter disease",
+      "Progressive peripheral neuropathy with weakness",
+      "Marked polyol elevation in cerebrospinal fluid or on spectroscopy"
     ],
-    [
-     "Clinical Pitfall",
-     "Not requesting polyol analysis of cerebrospinal fluid or spectroscopy in unexplained leukoencephalopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is progressive but often unusually slowly, with accumulating neurological disability over years; there is no curative therapy and long-term outcome depends on the extent of central and peripheral nervous system involvement.",
+    "pitfalls": [
+      "Not requesting polyol analysis of cerebrospinal fluid or spectroscopy in unexplained leukoencephalopathy",
+      "Attributing the white-matter changes to a mitochondrial or acquired demyelinating cause without metabolic workup",
+      "Overlooking the coexisting peripheral neuropathy",
+      "Expecting a rapid course and dismissing the diagnosis because progression is slow"
+    ],
+    "references": [
+      "Scriver's OMMBID: Disorders of the Pentose Phosphate Pathway",
+      "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive care only, as no curative or substrate-lowering therapy exists for this pentose-phosphate-pathway defect",
+      "Anticonvulsants to control seizures",
+      "Antispasticity treatment with agents such as baclofen alongside physiotherapy",
+      "Neurorehabilitation and symptomatic management of the peripheral neuropathy",
+      "Developmental and educational support with assistive devices for progressive disability",
+      "Serial brain MRI and magnetic resonance spectroscopy to monitor leukoencephalopathy and polyol accumulation",
+      "Genetic counselling and family testing for this autosomal recessive RPIA disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for ribose-5-phosphate isomerase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ribose-5-phosphate-isomerase-deficiency-real-image",
-   "title": "Ribose-5-phosphate isomerase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ribose_5_phosphate_isomerase_deficiency-pathway",
+      "title": "Ribose-5-phosphate isomerase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Extremely rare autosomal recessive defect of ribose-5-phosphate isomerase (RPIA gene) in the non-oxidative pentose phosphate pathway, one of the rarest reported inborn errors",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive developmental regression with an evolving leukoencephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to characterise the leukoencephalopathy, Cerebral magnetic resonance spectroscopy showing abnormal polyol peaks, Measurement of ribitol and D-arabitol in urine, plasma and cerebrospinal fluid"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care only, as no curative or substrate-lowering therapy exists for this pentose-phosphate-pathway defect"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not requesting polyol analysis of cerebrospinal fluid or spectroscopy in unexplained leukoencephalopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ribose-5-phosphate isomerase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ribose_5_phosphate_isomerase_deficiency-matrix",
+      "title": "Ribose-5-phosphate isomerase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Extremely rare autosomal recessive defect of ribose-5-phosphate isomerase (RPIA gene) in the non-oxidative pentose phosphate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to characterise the leukoencephalopathy, Cerebral magnetic resonance spectroscopy showing abnormal polyol peaks,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other genetic leukoencephalopathies (e.g. metachromatic leukodystrophy, vanishing white matter disease), Transaldolase deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care only, as no curative or substrate-lowering therapy exists for this pentose-phosphate-pathway defect",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not requesting polyol analysis of cerebrospinal fluid or spectroscopy in unexplained leukoencephalopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ribose-5-phosphate isomerase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ribose_5_phosphate_isomerase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Characterises the leukoencephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral magnetic resonance spectroscopy",
+          "cells": [
+            {
+              "text": "Abnormal polyol peaks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ribitol and D-arabitol in urine, plasma and CSF",
+          "cells": [
+            {
+              "text": "Polyol elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RPIA molecular genetic testing",
+          "cells": [
+            {
+              "text": "Causative RPIA variants confirm the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ribose_5_phosphate_isomerase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care only",
+          "cells": [
+            {
+              "text": "No curative or substrate-lowering therapy for this pentose-phosphate-pathway defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsants",
+          "cells": [
+            {
+              "text": "Control seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity treatment",
+          "cells": [
+            {
+              "text": "Baclofen alongside physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathy management",
+          "cells": [
+            {
+              "text": "Neurorehabilitation and symptomatic management of the peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Educational support and assistive devices for progressive disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "Brain MRI and magnetic resonance spectroscopy to monitor leukoencephalopathy and polyol accumulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family testing for this autosomal recessive disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ribose_5_phosphate_isomerase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Ribose-5-phosphate isomerase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with developmental regression, leukoencephalopathy and seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive regression, new seizures, peripheral neuropathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for worsening seizures or progressive regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, MR spectroscopy, ribitol and D-arabitol levels, nerve studies, RPIA testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are polyols elevated with causative RPIA variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other leukoencephalopathies or pentose pathway disorders; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care only; no curative or substrate-lowering therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsants for seizures and baclofen for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurorehabilitation and physiotherapy for neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial MRI and spectroscopy; genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive disease managed supportively; no curative therapy is described",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

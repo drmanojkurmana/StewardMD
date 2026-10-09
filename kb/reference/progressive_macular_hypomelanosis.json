@@ -1,170 +1,446 @@
 {
- "id": "progressive_macular_hypomelanosis",
- "name": "Progressive macular hypomelanosis",
- "aliases": [
-  "PMH",
-  "progressive macular hypomelanosis of the trunk",
-  "cutaneous hypomelanosis of Cutibacterium"
- ],
- "class": "non_infective",
- "system": "Dermatology / Pigmentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Ill-defined, non-scaly, nummular hypopigmented macules concentrated on the trunk, particularly the central back and chest, in young adults",
-   "Follicular red fluorescence under Wood lamp reflects porphyrin-producing Cutibacterium (formerly Propionibacterium) acnes within the follicles",
-   "Frequently mistaken for pityriasis versicolor, but potassium hydroxide microscopy is negative for fungal elements",
-   "More common in young women and in tropical or warmer climates",
-   "The hypopigmentation is functional rather than destructive, with melanocytes preserved but producing less melanin",
-   "Antimicrobial and light-based treatments directed at the follicular organism, including targeted ultraviolet phototherapy, can encourage repigmentation",
-   "Tends to run a chronic course with a tendency to relapse"
+  "id": "progressive_macular_hypomelanosis",
+  "name": "Progressive macular hypomelanosis",
+  "aliases": [
+    "PMH",
+    "progressive macular hypomelanosis of the trunk",
+    "cutaneous hypomelanosis of Cutibacterium"
   ],
-  "pathophysiology": "A particular strain of follicular Cutibacterium acnes is thought to produce a factor that interferes with melanogenesis, reducing melanin output without destroying melanocytes; this explains the hypopigmentation rather than depigmentation and the characteristic follicular porphyrin fluorescence. The lack of scale and negative fungal microscopy separate it from pityriasis versicolor. The condition is not primarily an inflammatory or autoimmune process.",
-  "additionalDifferentials": [
-   "Pityriasis (tinea) versicolor",
-   "Idiopathic guttate hypomelanosis",
-   "Vitiligo",
-   "Post-inflammatory hypopigmentation",
-   "Pityriasis alba",
-   "Hypopigmented leprosy"
-  ],
-  "additionalInvestigations": [
-   "Wood-lamp examination for follicular red fluorescence",
-   "Potassium hydroxide microscopy, which is negative for fungal hyphae",
-   "Dermoscopy to assess the hypopigmented pattern",
-   "Sensory examination to exclude leprosy in endemic areas",
-   "Skin biopsy in atypical or diagnostically uncertain cases"
-  ],
-  "redFlags": [
-   "An anaesthetic patch or thickened peripheral nerve suggesting leprosy in endemic settings",
-   "Atypical, rapidly spreading or persistently symptomatic lesions",
-   "Failure to respond to appropriate therapy, prompting reconsideration of the diagnosis"
-  ],
-  "prognosis": "The condition is benign but chronic and relapsing; repigmentation may follow treatment and some cases improve spontaneously over years, though recurrence is common.",
-  "pitfalls": [
-   "Repeatedly treating it as pityriasis versicolor despite negative microscopy",
-   "Overlooking hypopigmented leprosy in endemic populations",
-   "Expecting a rapid response, when repigmentation is typically slow",
-   "Confusing it with vitiligo or idiopathic guttate hypomelanosis"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antimicrobial therapy directed at follicular Cutibacterium acnes, using topical benzoyl peroxide and clindamycin and, where needed, an oral tetracycline-class antibiotic",
-   "Ultraviolet phototherapy such as narrowband UVB, often combined with antimicrobials, to stimulate repigmentation",
-   "Reassure the patient about the benign, non-scarring nature and set expectations for slow repigmentation and possible relapse",
-   "Distinguish from pityriasis versicolor and avoid ineffective antifungal treatment given the negative potassium hydroxide microscopy",
-   "Monitor response and re-treat relapses, as recurrence is common while some cases improve spontaneously over years",
-   "Dermatology referral for diagnostic confirmation and access to phototherapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_macular_hypomelanosis-pathway",
-   "title": "Progressive macular hypomelanosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Ill-defined, non-scaly, nummular hypopigmented macules concentrated on the trunk, particularly the central back and chest, in young adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An anaesthetic patch or thickened peripheral nerve suggesting leprosy in endemic settings",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Wood-lamp examination for follicular red fluorescence, Potassium hydroxide microscopy, which is negative for fungal hyphae, Dermoscopy to assess the hypopigmented pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antimicrobial therapy directed at follicular Cutibacterium acnes, using topical benzoyl peroxide and clindamycin and, where needed, an oral tetracycline-class antibiotic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Repeatedly treating it as pityriasis versicolor despite negative microscopy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive macular hypomelanosis."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_macular_hypomelanosis-matrix",
-   "title": "Progressive macular hypomelanosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Ill-defined, non-scaly, nummular hypopigmented macules concentrated on the trunk, particularly the central back and chest, in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Pigmentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Ill-defined, non-scaly, nummular hypopigmented macules concentrated on the trunk, particularly the central back and chest, in young adults",
+      "Follicular red fluorescence under Wood lamp reflects porphyrin-producing Cutibacterium (formerly Propionibacterium) acnes within the follicles",
+      "Frequently mistaken for pityriasis versicolor, but potassium hydroxide microscopy is negative for fungal elements",
+      "More common in young women and in tropical or warmer climates",
+      "The hypopigmentation is functional rather than destructive, with melanocytes preserved but producing less melanin",
+      "Antimicrobial and light-based treatments directed at the follicular organism, including targeted ultraviolet phototherapy, can encourage repigmentation",
+      "Tends to run a chronic course with a tendency to relapse"
     ],
-    [
-     "Key Investigations",
-     "Wood-lamp examination for follicular red fluorescence, Potassium hydroxide microscopy, which is negative for fungal hyphae,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A particular strain of follicular Cutibacterium acnes is thought to produce a factor that interferes with melanogenesis, reducing melanin output without destroying melanocytes; this explains the hypopigmentation rather than depigmentation and the characteristic follicular porphyrin fluorescence. The lack of scale and negative fungal microscopy separate it from pityriasis versicolor. The condition is not primarily an inflammatory or autoimmune process.",
+    "additionalDifferentials": [
+      "Pityriasis (tinea) versicolor",
+      "Idiopathic guttate hypomelanosis",
+      "Vitiligo",
+      "Post-inflammatory hypopigmentation",
+      "Pityriasis alba",
+      "Hypopigmented leprosy"
     ],
-    [
-     "Primary Differentials",
-     "Pityriasis (tinea) versicolor, Idiopathic guttate hypomelanosis, Vitiligo",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Wood-lamp examination for follicular red fluorescence",
+      "Potassium hydroxide microscopy, which is negative for fungal hyphae",
+      "Dermoscopy to assess the hypopigmented pattern",
+      "Sensory examination to exclude leprosy in endemic areas",
+      "Skin biopsy in atypical or diagnostically uncertain cases"
     ],
-    [
-     "Management Strategy",
-     "Antimicrobial therapy directed at follicular Cutibacterium acnes, using topical benzoyl peroxide and clindamycin and, where",
-     "Core treatment modality"
+    "redFlags": [
+      "An anaesthetic patch or thickened peripheral nerve suggesting leprosy in endemic settings",
+      "Atypical, rapidly spreading or persistently symptomatic lesions",
+      "Failure to respond to appropriate therapy, prompting reconsideration of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Repeatedly treating it as pityriasis versicolor despite negative microscopy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign but chronic and relapsing; repigmentation may follow treatment and some cases improve spontaneously over years, though recurrence is common.",
+    "pitfalls": [
+      "Repeatedly treating it as pityriasis versicolor despite negative microscopy",
+      "Overlooking hypopigmented leprosy in endemic populations",
+      "Expecting a rapid response, when repigmentation is typically slow",
+      "Confusing it with vitiligo or idiopathic guttate hypomelanosis"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antimicrobial therapy directed at follicular Cutibacterium acnes, using topical benzoyl peroxide and clindamycin and, where needed, an oral tetracycline-class antibiotic",
+      "Ultraviolet phototherapy such as narrowband UVB, often combined with antimicrobials, to stimulate repigmentation",
+      "Reassure the patient about the benign, non-scarring nature and set expectations for slow repigmentation and possible relapse",
+      "Distinguish from pityriasis versicolor and avoid ineffective antifungal treatment given the negative potassium hydroxide microscopy",
+      "Monitor response and re-treat relapses, as recurrence is common while some cases improve spontaneously over years",
+      "Dermatology referral for diagnostic confirmation and access to phototherapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive macular hypomelanosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-macular-hypomelanosis-real-image",
-   "title": "Progressive macular hypomelanosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "progressive_macular_hypomelanosis-pathway",
+      "title": "Progressive macular hypomelanosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Ill-defined, non-scaly, nummular hypopigmented macules concentrated on the trunk, particularly the central back and chest, in young adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An anaesthetic patch or thickened peripheral nerve suggesting leprosy in endemic settings",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Wood-lamp examination for follicular red fluorescence, Potassium hydroxide microscopy, which is negative for fungal hyphae, Dermoscopy to assess the hypopigmented pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antimicrobial therapy directed at follicular Cutibacterium acnes, using topical benzoyl peroxide and clindamycin and, where needed, an oral tetracycline-class antibiotic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Repeatedly treating it as pityriasis versicolor despite negative microscopy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive macular hypomelanosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_macular_hypomelanosis-matrix",
+      "title": "Progressive macular hypomelanosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Ill-defined, non-scaly, nummular hypopigmented macules concentrated on the trunk, particularly the central back and chest, in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Wood-lamp examination for follicular red fluorescence, Potassium hydroxide microscopy, which is negative for fungal hyphae,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pityriasis (tinea) versicolor, Idiopathic guttate hypomelanosis, Vitiligo",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antimicrobial therapy directed at follicular Cutibacterium acnes, using topical benzoyl peroxide and clindamycin and, where",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Repeatedly treating it as pityriasis versicolor despite negative microscopy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive macular hypomelanosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_macular_hypomelanosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wood-lamp examination",
+          "cells": [
+            {
+              "text": "Follicular red fluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium hydroxide microscopy",
+          "cells": [
+            {
+              "text": "Negative for fungal hyphae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Hypopigmented pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory examination in endemic areas",
+          "cells": [
+            {
+              "text": "Leprosy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical or uncertain cases",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_macular_hypomelanosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pityriasis (tinea) versicolor",
+          "cells": [
+            {
+              "text": "Negative potassium hydroxide microscopy"
+            },
+            {
+              "text": "Potassium hydroxide microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopigmented leprosy",
+          "cells": [
+            {
+              "text": "Anaesthetic patch or thickened peripheral nerve"
+            },
+            {
+              "text": "Sensory examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_macular_hypomelanosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antimicrobial therapy",
+          "cells": [
+            {
+              "text": "Topical benzoyl peroxide and clindamycin for follicular Cutibacterium acnes; oral tetracycline if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narrowband UVB phototherapy",
+          "cells": [
+            {
+              "text": "Often combined with antimicrobials to stimulate repigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, non-scarring; slow repigmentation and possible relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid ineffective antifungals",
+          "cells": [
+            {
+              "text": "Distinguish from pityriasis versicolor given negative KOH microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and re-treatment",
+          "cells": [
+            {
+              "text": "Relapse is common; some cases improve spontaneously over years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "Diagnostic confirmation and access to phototherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_macular_hypomelanosis-dx-mgmt",
+      "title": "Diagnosis and management of Progressive macular hypomelanosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected progressive macular hypomelanosis: hypopigmented macules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Anaesthetic patch, thickened nerve, rapid spread, or failure to respond to therapy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude leprosy urgently with sensory and nerve assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wood-lamp; KOH microscopy; dermoscopy; sensory examination; biopsy if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is follicular red fluorescence present with negative KOH microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pityriasis versicolor, vitiligo or leprosy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical benzoyl peroxide and clindamycin for follicular Cutibacterium acnes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral tetracycline if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Narrowband UVB phototherapy to stimulate repigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid antifungals; reassure about benign, non-scarring course",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Re-treat relapses; dermatology referral for phototherapy access",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

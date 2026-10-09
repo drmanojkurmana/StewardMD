@@ -1,174 +1,472 @@
 {
- "id": "factor_vii_deficiency",
- "name": "Factor VII deficiency",
- "aliases": [
-  "FVII deficiency",
-  "factor 7 deficiency",
-  "proconvertin deficiency",
-  "congenital FVII deficiency"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest of the rare inherited coagulation factor deficiencies, inherited in an autosomal recessive manner from F7 mutations",
-   "Characteristically causes an isolated prolonged prothrombin time with a normal activated partial thromboplastin time, because factor VII is the sole factor of the extrinsic pathway",
-   "The correlation between factor VII activity and bleeding severity is poor, so phenotype must guide management rather than the level alone",
-   "Clinical severity ranges from asymptomatic to serious bleeding, including mucocutaneous, joint, and, in severe cases, intracranial or gastrointestinal haemorrhage",
-   "Menorrhagia is a frequent presenting feature in affected women",
-   "Some patients experience thrombosis, and there is a recognised paradoxical thrombotic risk that complicates replacement therapy",
-   "Diagnosis rests on a specific factor VII activity assay after finding an isolated prolonged prothrombin time, with treatment using factor VII replacement (including recombinant factor VIIa) for bleeding or surgery"
+  "id": "factor_vii_deficiency",
+  "name": "Factor VII deficiency",
+  "aliases": [
+    "FVII deficiency",
+    "factor 7 deficiency",
+    "proconvertin deficiency",
+    "congenital FVII deficiency"
   ],
-  "pathophysiology": "Factor VII is a vitamin K-dependent clotting factor that, on exposure to tissue factor at a site of vascular injury, initiates the extrinsic (tissue-factor) pathway of coagulation and triggers thrombin generation. Congenital deficiency, usually from biallelic mutations in F7, reduces the amount or function of the protein, so extrinsic pathway activation is impaired. Because factor VII participates only in the extrinsic limb, its deficiency prolongs the prothrombin time while leaving the activated partial thromboplastin time normal. The clinical phenotype is notably variable and correlates poorly with the measured factor level, reflecting compensatory features of the coagulation network; some individuals with very low levels bleed little, whereas others bleed significantly, and a subset paradoxically develop thrombosis.",
-  "additionalDifferentials": [
-   "Vitamin K deficiency or warfarin effect (multiple factors affected)",
-   "Early or mild liver disease",
-   "Other rare inherited factor deficiencies",
-   "Combined deficiency of vitamin K-dependent factors",
-   "Acquired factor VII inhibitor",
-   "Disseminated intravascular coagulation"
-  ],
-  "additionalInvestigations": [
-   "Specific factor VII activity assay to confirm the deficiency",
-   "Prothrombin time (prolonged) with a normal activated partial thromboplastin time",
-   "Mixing studies to distinguish deficiency from an inhibitor",
-   "Assays of other vitamin K-dependent factors to exclude combined deficiency",
-   "Liver function tests to exclude an acquired cause",
-   "F7 genetic testing where confirmation or counselling is needed"
-  ],
-  "redFlags": [
-   "Intracranial or gastrointestinal haemorrhage, which can occur in severe deficiency",
-   "Severe bleeding in a neonate or after surgery in an undiagnosed patient",
-   "Heavy menstrual bleeding causing symptomatic anaemia",
-   "Thrombotic complications, which may be precipitated by replacement therapy"
-  ],
-  "prognosis": "Outcome depends on the bleeding phenotype rather than the factor level; many patients have a mild course, while those with severe deficiency are at risk of major bleeding but can usually be managed effectively with targeted factor VII replacement.",
-  "pitfalls": [
-   "Predicting bleeding risk from the factor VII level, which correlates poorly with phenotype",
-   "Attributing an isolated prolonged prothrombin time to warfarin or liver disease without assaying factor VII",
-   "Overlooking the paradoxical thrombotic risk when giving replacement therapy",
-   "Failing to investigate menorrhagia as a manifestation in affected women"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Replacement with recombinant activated factor VII as the preferred agent for bleeding and surgical cover, guided by the bleeding phenotype rather than the factor level alone",
-   "Plasma-derived factor VII concentrate or prothrombin complex concentrate as alternatives, with fresh frozen plasma only if concentrates are unavailable",
-   "Antifibrinolytics such as tranexamic acid for mucosal bleeding, menorrhagia and as an adjunct to replacement",
-   "Hormonal management of menorrhagia in affected women",
-   "Regular prophylaxis in severe deficiency or after serious bleeds such as intracranial haemorrhage",
-   "Cautious, individualised replacement mindful of the recognised paradoxical thrombotic risk",
-   "Haematology-led perioperative and peripartum planning, avoiding antiplatelet agents and NSAIDs, with genetic counselling for autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "factor_vii_deficiency-pathway",
-   "title": "Factor VII deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest of the rare inherited coagulation factor deficiencies, inherited in an autosomal recessive manner from F7 mutations",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intracranial or gastrointestinal haemorrhage, which can occur in severe deficiency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Specific factor VII activity assay to confirm the deficiency, Prothrombin time (prolonged) with a normal activated partial thromboplastin time, Mixing studies to distinguish deficiency from an inhibitor"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replacement with recombinant activated factor VII as the preferred agent for bleeding and surgical cover, guided by the bleeding phenotype rather than the factor level alone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Predicting bleeding risk from the factor VII level, which correlates poorly with phenotype"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of factor vii deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "factor_vii_deficiency-matrix",
-   "title": "Factor VII deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest of the rare inherited coagulation factor deficiencies, inherited in an autosomal recessive manner from F7 mutations",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest of the rare inherited coagulation factor deficiencies, inherited in an autosomal recessive manner from F7 mutations",
+      "Characteristically causes an isolated prolonged prothrombin time with a normal activated partial thromboplastin time, because factor VII is the sole factor of the extrinsic pathway",
+      "The correlation between factor VII activity and bleeding severity is poor, so phenotype must guide management rather than the level alone",
+      "Clinical severity ranges from asymptomatic to serious bleeding, including mucocutaneous, joint, and, in severe cases, intracranial or gastrointestinal haemorrhage",
+      "Menorrhagia is a frequent presenting feature in affected women",
+      "Some patients experience thrombosis, and there is a recognised paradoxical thrombotic risk that complicates replacement therapy",
+      "Diagnosis rests on a specific factor VII activity assay after finding an isolated prolonged prothrombin time, with treatment using factor VII replacement (including recombinant factor VIIa) for bleeding or surgery"
     ],
-    [
-     "Key Investigations",
-     "Specific factor VII activity assay to confirm the deficiency, Prothrombin time (prolonged) with a normal activated partial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Factor VII is a vitamin K-dependent clotting factor that, on exposure to tissue factor at a site of vascular injury, initiates the extrinsic (tissue-factor) pathway of coagulation and triggers thrombin generation. Congenital deficiency, usually from biallelic mutations in F7, reduces the amount or function of the protein, so extrinsic pathway activation is impaired. Because factor VII participates only in the extrinsic limb, its deficiency prolongs the prothrombin time while leaving the activated partial thromboplastin time normal. The clinical phenotype is notably variable and correlates poorly with the measured factor level, reflecting compensatory features of the coagulation network; some individuals with very low levels bleed little, whereas others bleed significantly, and a subset paradoxically develop thrombosis.",
+    "additionalDifferentials": [
+      "Vitamin K deficiency or warfarin effect (multiple factors affected)",
+      "Early or mild liver disease",
+      "Other rare inherited factor deficiencies",
+      "Combined deficiency of vitamin K-dependent factors",
+      "Acquired factor VII inhibitor",
+      "Disseminated intravascular coagulation"
     ],
-    [
-     "Primary Differentials",
-     "Vitamin K deficiency or warfarin effect (multiple factors affected), Early or mild liver disease, Other rare inherited factor",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Specific factor VII activity assay to confirm the deficiency",
+      "Prothrombin time (prolonged) with a normal activated partial thromboplastin time",
+      "Mixing studies to distinguish deficiency from an inhibitor",
+      "Assays of other vitamin K-dependent factors to exclude combined deficiency",
+      "Liver function tests to exclude an acquired cause",
+      "F7 genetic testing where confirmation or counselling is needed"
     ],
-    [
-     "Management Strategy",
-     "Replacement with recombinant activated factor VII as the preferred agent for bleeding and surgical cover, guided by the bleeding",
-     "Core treatment modality"
+    "redFlags": [
+      "Intracranial or gastrointestinal haemorrhage, which can occur in severe deficiency",
+      "Severe bleeding in a neonate or after surgery in an undiagnosed patient",
+      "Heavy menstrual bleeding causing symptomatic anaemia",
+      "Thrombotic complications, which may be precipitated by replacement therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Predicting bleeding risk from the factor VII level, which correlates poorly with phenotype",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the bleeding phenotype rather than the factor level; many patients have a mild course, while those with severe deficiency are at risk of major bleeding but can usually be managed effectively with targeted factor VII replacement.",
+    "pitfalls": [
+      "Predicting bleeding risk from the factor VII level, which correlates poorly with phenotype",
+      "Attributing an isolated prolonged prothrombin time to warfarin or liver disease without assaying factor VII",
+      "Overlooking the paradoxical thrombotic risk when giving replacement therapy",
+      "Failing to investigate menorrhagia as a manifestation in affected women"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Replacement with recombinant activated factor VII as the preferred agent for bleeding and surgical cover, guided by the bleeding phenotype rather than the factor level alone",
+      "Plasma-derived factor VII concentrate or prothrombin complex concentrate as alternatives, with fresh frozen plasma only if concentrates are unavailable",
+      "Antifibrinolytics such as tranexamic acid for mucosal bleeding, menorrhagia and as an adjunct to replacement",
+      "Hormonal management of menorrhagia in affected women",
+      "Regular prophylaxis in severe deficiency or after serious bleeds such as intracranial haemorrhage",
+      "Cautious, individualised replacement mindful of the recognised paradoxical thrombotic risk",
+      "Haematology-led perioperative and peripartum planning, avoiding antiplatelet agents and NSAIDs, with genetic counselling for autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for factor vii deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "factor-vii-deficiency-real-image",
-   "title": "Factor VII deficiency: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "factor_vii_deficiency-pathway",
+      "title": "Factor VII deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest of the rare inherited coagulation factor deficiencies, inherited in an autosomal recessive manner from F7 mutations",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intracranial or gastrointestinal haemorrhage, which can occur in severe deficiency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Specific factor VII activity assay to confirm the deficiency, Prothrombin time (prolonged) with a normal activated partial thromboplastin time, Mixing studies to distinguish deficiency from an inhibitor"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replacement with recombinant activated factor VII as the preferred agent for bleeding and surgical cover, guided by the bleeding phenotype rather than the factor level alone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Predicting bleeding risk from the factor VII level, which correlates poorly with phenotype"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of factor vii deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "factor_vii_deficiency-matrix",
+      "title": "Factor VII deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest of the rare inherited coagulation factor deficiencies, inherited in an autosomal recessive manner from F7 mutations",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Specific factor VII activity assay to confirm the deficiency, Prothrombin time (prolonged) with a normal activated partial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vitamin K deficiency or warfarin effect (multiple factors affected), Early or mild liver disease, Other rare inherited factor",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replacement with recombinant activated factor VII as the preferred agent for bleeding and surgical cover, guided by the bleeding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Predicting bleeding risk from the factor VII level, which correlates poorly with phenotype",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for factor vii deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "factor_vii_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Specific factor VII activity assay",
+          "cells": [
+            {
+              "text": "Confirms the deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prothrombin time",
+          "cells": [
+            {
+              "text": "Prolonged, with a normal activated partial thromboplastin time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing studies",
+          "cells": [
+            {
+              "text": "Distinguishes deficiency from an inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assays of other vitamin K-dependent factors",
+          "cells": [
+            {
+              "text": "Combined deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Acquired causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F7 genetic testing",
+          "cells": [
+            {
+              "text": "Where confirmation or counselling is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factor_vii_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin K deficiency or warfarin effect",
+          "cells": [
+            {
+              "text": "Several factors are affected; an isolated prolonged PT should be assayed for factor VII"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired factor VII inhibitor",
+          "cells": [
+            {
+              "text": "Distinguished by mixing studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "factor_vii_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recombinant activated factor VII",
+          "cells": [
+            {
+              "text": "Preferred agent for bleeding and surgical cover, guided by the bleeding phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma-derived factor VII or prothrombin complex concentrate",
+          "cells": [
+            {
+              "text": "Alternatives; fresh frozen plasma only if concentrates are unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytics such as tranexamic acid",
+          "cells": [
+            {
+              "text": "Mucosal bleeding and menorrhagia, and as an adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal management of menorrhagia",
+          "cells": [
+            {
+              "text": "Affected women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular prophylaxis",
+          "cells": [
+            {
+              "text": "Severe deficiency or after serious bleeds such as intracranial haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious, individualised replacement",
+          "cells": [
+            {
+              "text": "Mindful of the paradoxical thrombotic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology-led planning and genetic counselling",
+          "cells": [
+            {
+              "text": "Avoid antiplatelet agents and NSAIDs; autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "factor_vii_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Factor VII deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Isolated prolonged prothrombin time with normal APTT in a patient who bleeds",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (intracranial or GI bleeding, neonatal or post-surgical bleed, thrombosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Haematology review; factor VII replacement for significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Factor VII activity assay; mixing study; other vitamin K factors; liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low factor VII activity with no inhibitor and no liver or vitamin K cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat vitamin K deficiency, liver disease or inhibitor as found",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recombinant activated factor VII as preferred replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antifibrinolytics for mucosal bleeding and menorrhagia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Regular prophylaxis in severe deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cautious replacement given the paradoxical thrombotic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid antiplatelet agents and NSAIDs around procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on the bleeding phenotype rather than the level; many have a mild course",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

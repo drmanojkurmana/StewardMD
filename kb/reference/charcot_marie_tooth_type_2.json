@@ -1,175 +1,661 @@
 {
- "id": "charcot_marie_tooth_type_2",
- "name": "Charcot-Marie-Tooth disease type 2",
- "aliases": [
-  "CMT2",
-  "axonal Charcot-Marie-Tooth disease",
-  "hereditary motor and sensory neuropathy type II",
-  "HMSN II",
-  "MFN2"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuromuscular Disorders reference texts / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The axonal form of Charcot-Marie-Tooth disease, genetically heterogeneous but with mitofusin 2 (MFN2) variants being the most frequent cause",
-   "Clinically resembles CMT1 with distal weakness, wasting, pes cavus and distal sensory loss, but onset can be more variable and reflexes may be relatively preserved",
-   "The distinguishing feature is on nerve conduction studies: motor conduction velocities are normal or only mildly reduced while compound muscle action potential amplitudes are reduced, reflecting axonal loss rather than demyelination",
-   "Palpable nerve hypertrophy is not a feature, in contrast to CMT1A",
-   "Inheritance is usually autosomal dominant, though recessive and other patterns occur depending on the causative gene",
-   "Some subtypes have distinctive associations such as optic atrophy, vocal cord palsy or a predominantly motor phenotype",
-   "Foot drop, frequent tripping and later hand wasting are common functional problems"
+  "id": "charcot_marie_tooth_type_2",
+  "name": "Charcot-Marie-Tooth disease type 2",
+  "aliases": [
+    "CMT2",
+    "axonal Charcot-Marie-Tooth disease",
+    "hereditary motor and sensory neuropathy type II",
+    "HMSN II",
+    "MFN2"
   ],
-  "pathophysiology": "Charcot-Marie-Tooth disease type 2 is a hereditary axonal (type 2) motor and sensory neuropathy in which the primary defect is degeneration of peripheral nerve axons rather than the myelin sheath. It is genetically heterogeneous, with the most common cause being variants in MFN2, which encodes a mitochondrial outer-membrane GTPase essential for mitochondrial fusion and axonal mitochondrial transport. Impaired mitochondrial dynamics and energy delivery preferentially affect the longest axons, producing a length-dependent, distal-predominant loss of motor and sensory function. Because myelin is relatively spared, conduction velocities remain near normal while response amplitudes fall as axons are lost.",
-  "additionalDifferentials": [
-   "Charcot-Marie-Tooth disease type 1A (demyelinating)",
-   "Distal hereditary motor neuropathy",
-   "Acquired axonal polyneuropathy (diabetic, toxic, nutritional)",
-   "Amyotrophic lateral sclerosis (in predominantly motor forms)",
-   "Hereditary sensory and autonomic neuropathy",
-   "Mitochondrial neuropathy"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies showing reduced motor amplitudes with preserved or near-normal velocities, indicating an axonal process",
-   "Electromyography demonstrating chronic neurogenic changes",
-   "Genetic panel testing including MFN2 and other CMT2-associated genes",
-   "Clinical assessment for pes cavus and distal wasting",
-   "Investigations to exclude acquired axonal neuropathies where the picture is atypical",
-   "Family evaluation to establish the inheritance pattern"
-  ],
-  "redFlags": [
-   "Rapid or asymmetric progression suggesting a superimposed acquired neuropathy",
-   "Prominent autonomic, respiratory or bulbar features suggesting an alternative diagnosis",
-   "Additional signs such as optic atrophy or upper motor neuron features prompting reassessment",
-   "Severe sensory ataxia with recurrent injury"
-  ],
-  "prognosis": "Progression is generally slow and life expectancy is normal, though disability from distal weakness, deformity and sensory loss accumulates over time; phenotype severity varies with the specific causative gene and variant.",
-  "pitfalls": [
-   "Failing to separate axonal CMT2 from demyelinating CMT1 on nerve conduction studies, which changes the genetic workup",
-   "Overlooking a treatable acquired axonal neuropathy by prematurely assuming a hereditary cause",
-   "Missing subtype-specific associated features such as optic atrophy",
-   "Assuming preserved reflexes exclude a hereditary neuropathy"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "OMIM: Charcot-Marie-Tooth disease type 2 (MFN2)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
-   "Physiotherapy, stretching and ankle-foot orthoses for distal weakness, wasting and foot drop",
-   "Podiatry and orthopaedic care for pes cavus, including corrective surgery for fixed deformity",
-   "Neuropathic pain management with gabapentinoids or tricyclic agents for distal sensory symptoms",
-   "Screening for subtype-specific associations such as optic atrophy or vocal cord palsy, with referral to ophthalmology or laryngology as indicated",
-   "Avoidance of neurotoxic drugs such as vincristine",
-   "Genetic counselling, usually for autosomal dominant inheritance, with panel testing including MFN2 and family evaluation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "charcot_marie_tooth_type_2-pathway",
-   "title": "Charcot-Marie-Tooth disease type 2: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The axonal form of Charcot-Marie-Tooth disease, genetically heterogeneous but with mitofusin 2 (MFN2) variants being the most frequent cause",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid or asymmetric progression suggesting a superimposed acquired neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies showing reduced motor amplitudes with preserved or near-normal velocities, indicating an axonal process, Electromyography demonstrating chronic neurogenic changes, Genetic panel testing including"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to separate axonal CMT2 from demyelinating CMT1 on nerve conduction studies, which changes the genetic workup"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 2."
-  }
- ],
- "tables": [
-  {
-   "id": "charcot_marie_tooth_type_2-matrix",
-   "title": "Charcot-Marie-Tooth disease type 2: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The axonal form of Charcot-Marie-Tooth disease, genetically heterogeneous but with mitofusin 2 (MFN2) variants being the most",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuromuscular Disorders reference texts / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The axonal form of Charcot-Marie-Tooth disease, genetically heterogeneous but with mitofusin 2 (MFN2) variants being the most frequent cause",
+      "Clinically resembles CMT1 with distal weakness, wasting, pes cavus and distal sensory loss, but onset can be more variable and reflexes may be relatively preserved",
+      "The distinguishing feature is on nerve conduction studies: motor conduction velocities are normal or only mildly reduced while compound muscle action potential amplitudes are reduced, reflecting axonal loss rather than demyelination",
+      "Palpable nerve hypertrophy is not a feature, in contrast to CMT1A",
+      "Inheritance is usually autosomal dominant, though recessive and other patterns occur depending on the causative gene",
+      "Some subtypes have distinctive associations such as optic atrophy, vocal cord palsy or a predominantly motor phenotype",
+      "Foot drop, frequent tripping and later hand wasting are common functional problems"
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies showing reduced motor amplitudes with preserved or near-normal velocities, indicating an axonal process,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Charcot-Marie-Tooth disease type 2 is a hereditary axonal (type 2) motor and sensory neuropathy in which the primary defect is degeneration of peripheral nerve axons rather than the myelin sheath. It is genetically heterogeneous, with the most common cause being variants in MFN2, which encodes a mitochondrial outer-membrane GTPase essential for mitochondrial fusion and axonal mitochondrial transport. Impaired mitochondrial dynamics and energy delivery preferentially affect the longest axons, producing a length-dependent, distal-predominant loss of motor and sensory function. Because myelin is relatively spared, conduction velocities remain near normal while response amplitudes fall as axons are lost.",
+    "additionalDifferentials": [
+      "Charcot-Marie-Tooth disease type 1A (demyelinating)",
+      "Distal hereditary motor neuropathy",
+      "Acquired axonal polyneuropathy (diabetic, toxic, nutritional)",
+      "Amyotrophic lateral sclerosis (in predominantly motor forms)",
+      "Hereditary sensory and autonomic neuropathy",
+      "Mitochondrial neuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Charcot-Marie-Tooth disease type 1A (demyelinating), Distal hereditary motor neuropathy, Acquired axonal polyneuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies showing reduced motor amplitudes with preserved or near-normal velocities, indicating an axonal process",
+      "Electromyography demonstrating chronic neurogenic changes",
+      "Genetic panel testing including MFN2 and other CMT2-associated genes",
+      "Clinical assessment for pes cavus and distal wasting",
+      "Investigations to exclude acquired axonal neuropathies where the picture is atypical",
+      "Family evaluation to establish the inheritance pattern"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid or asymmetric progression suggesting a superimposed acquired neuropathy",
+      "Prominent autonomic, respiratory or bulbar features suggesting an alternative diagnosis",
+      "Additional signs such as optic atrophy or upper motor neuron features prompting reassessment",
+      "Severe sensory ataxia with recurrent injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to separate axonal CMT2 from demyelinating CMT1 on nerve conduction studies, which changes the genetic workup",
-     "Prevent diagnostic or management error"
+    "prognosis": "Progression is generally slow and life expectancy is normal, though disability from distal weakness, deformity and sensory loss accumulates over time; phenotype severity varies with the specific causative gene and variant.",
+    "pitfalls": [
+      "Failing to separate axonal CMT2 from demyelinating CMT1 on nerve conduction studies, which changes the genetic workup",
+      "Overlooking a treatable acquired axonal neuropathy by prematurely assuming a hereditary cause",
+      "Missing subtype-specific associated features such as optic atrophy",
+      "Assuming preserved reflexes exclude a hereditary neuropathy"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "OMIM: Charcot-Marie-Tooth disease type 2 (MFN2)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+      "Physiotherapy, stretching and ankle-foot orthoses for distal weakness, wasting and foot drop",
+      "Podiatry and orthopaedic care for pes cavus, including corrective surgery for fixed deformity",
+      "Neuropathic pain management with gabapentinoids or tricyclic agents for distal sensory symptoms",
+      "Screening for subtype-specific associations such as optic atrophy or vocal cord palsy, with referral to ophthalmology or laryngology as indicated",
+      "Avoidance of neurotoxic drugs such as vincristine",
+      "Genetic counselling, usually for autosomal dominant inheritance, with panel testing including MFN2 and family evaluation"
     ]
-   ],
-   "caption": "Overview comparison matrix for charcot-marie-tooth disease type 2."
-  }
- ],
- "diagrams": [
-  {
-   "id": "charcot-marie-tooth-type-2-real-image",
-   "title": "Charcot-Marie-Tooth disease type 2: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "charcot_marie_tooth_type_2-pathway",
+      "title": "Charcot-Marie-Tooth disease type 2: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The axonal form of Charcot-Marie-Tooth disease, genetically heterogeneous but with mitofusin 2 (MFN2) variants being the most frequent cause",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid or asymmetric progression suggesting a superimposed acquired neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies showing reduced motor amplitudes with preserved or near-normal velocities, indicating an axonal process, Electromyography demonstrating chronic neurogenic changes, Genetic panel testing including"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to separate axonal CMT2 from demyelinating CMT1 on nerve conduction studies, which changes the genetic workup"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 2."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "charcot_marie_tooth_type_2-matrix",
+      "title": "Charcot-Marie-Tooth disease type 2: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The axonal form of Charcot-Marie-Tooth disease, genetically heterogeneous but with mitofusin 2 (MFN2) variants being the most",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies showing reduced motor amplitudes with preserved or near-normal velocities, indicating an axonal process,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Charcot-Marie-Tooth disease type 1A (demyelinating), Distal hereditary motor neuropathy, Acquired axonal polyneuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to separate axonal CMT2 from demyelinating CMT1 on nerve conduction studies, which changes the genetic workup",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for charcot-marie-tooth disease type 2."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular Disorders reference texts / OMIM",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 384-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Reduced motor amplitudes with preserved or near-normal velocities, an axonal process"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Chronic neurogenic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic panel including MFN2 and other CMT2 genes",
+          "cells": [
+            {
+              "text": "Identifies the causative gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment for pes cavus and distal wasting",
+          "cells": [
+            {
+              "text": "Distal deformity and wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family evaluation",
+          "cells": [
+            {
+              "text": "Establishes the inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CMT type 1A",
+          "cells": [
+            {
+              "text": "Demyelinating pattern with nerve enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyotrophic lateral sclerosis",
+          "cells": [
+            {
+              "text": "Predominantly motor forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Neuromuscular multidisciplinary team; no disease-modifying therapy"
+            },
+            {
+              "text": "Core care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and orthoses",
+          "cells": [
+            {
+              "text": "Physiotherapy, stretching and ankle-foot orthoses for distal weakness, wasting and foot drop"
+            },
+            {
+              "text": "Foot drop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Podiatry and orthopaedic care",
+          "cells": [
+            {
+              "text": "Pes cavus, including corrective surgery for fixed deformity"
+            },
+            {
+              "text": "Fixed deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain",
+          "cells": [
+            {
+              "text": "Gabapentinoids or tricyclic agents for distal sensory symptoms"
+            },
+            {
+              "text": "Sensory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subtype-specific screening",
+          "cells": [
+            {
+              "text": "Ophthalmology or laryngology for optic atrophy or vocal cord palsy"
+            },
+            {
+              "text": "Subtype associations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug caution",
+          "cells": [
+            {
+              "text": "Avoid neurotoxic drugs such as vincristine"
+            },
+            {
+              "text": "Neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually autosomal dominant; panel testing including MFN2 and family evaluation"
+            },
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_type_2-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Axonal versus demyelinating electrophysiology",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Axonal degeneration",
+        "Segmental demyelination"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor: CMAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal (except with conduction block)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: conduction block",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: temporal dispersion",
+          "cells": [
+            {
+              "text": "Absent"
+            },
+            {
+              "text": "Present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: F wave",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor: H reflex",
+          "cells": [
+            {
+              "text": "Normal or absent"
+            },
+            {
+              "text": "Prolonged or absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: SNAP amplitude",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: distal latency",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Prolonged"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensory: conduction velocity",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle EMG: fibrillations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle EMG: fasciculations",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor unit potentials: recruitment",
+          "cells": [
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Decreased"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Motor unit potentials: morphology",
+          "cells": [
+            {
+              "text": "Long duration or polyphasic"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "CB in the source means conduction block."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth disease type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 2 (axonal): distal weakness and wasting with normal velocities",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid asymmetric decline, autonomic or bulbar signs, optic atrophy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: review for superimposed acquired neuropathy or alternative diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, electromyography and CMT2 gene panel including MFN2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reduced amplitudes with preserved velocities and axonal genetic result confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Neuromuscular multidisciplinary supportive care; no disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CMT1A, distal hereditary motor neuropathy and acquired axonal neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, stretching and ankle-foot orthoses for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Podiatry and orthopaedic surgery for fixed pes cavus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gabapentinoids or tricyclics for distal sensory symptoms; avoid vincristine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Screen for optic atrophy or vocal cord palsy; autosomal dominant counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

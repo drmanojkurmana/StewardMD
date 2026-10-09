@@ -1,207 +1,647 @@
 {
- "id": "urinary_tract_obstruction",
- "name": "Urinary Tract Obstruction",
- "system": "Nephrology / Urology",
- "class": "non_infective",
- "chapter": 331,
- "page": 2453,
- "aliases": [
-  "obstructive uropathy",
-  "hydronephrosis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2453",
-  "clinicalPearls": [
-   "Urinary tract obstruction (UTO) is a common and potentially reversible cause of both acute and chronic kidney disease (obstructive nephropathy); early recognition and prompt relief can prevent or reverse devastating effects on kidney structure and function (p.2453).",
-   "Any patient with otherwise unexplained renal failure, or with a history of nephrolithiasis, hematuria, diabetes mellitus, prostatic enlargement, pelvic surgery, trauma, or tumor should be evaluated for UTO (p.2455-2456).",
-   "When suspected, a bladder catheter should be inserted and abdominal ultrasonography performed to assess renal/bladder size and pyelocalyceal contour; bladder volume can be readily assessed at the bedside by ultrasound (p.2454-2455).",
-   "Flank pain is the most common presenting symptom and is due to distention of the collecting system or renal capsule; its severity is influenced more by the rate at which distention develops than by the degree of distention (p.2454).",
-   "Complete bilateral obstruction should be suspected when acute renal failure is accompanied by anuria (p.2455).",
-   "Wide fluctuations in urine output in an azotemic patient should always raise the possibility of intermittent or partial UTO (p.2455).",
-   "Azotemia with hyperkalemia and metabolic acidosis (acquired distal renal tubular acidosis pattern) should prompt consideration of UTO (p.2455).",
-   "Flank pain that occurs only with micturition is pathognomonic of vesicoureteral reflux (p.2455).",
-   "Lower obstruction above the bladder causes unilateral hydroureter and hydronephrosis, whereas lesions at or below the bladder cause bilateral involvement (p.2454).",
-   "Posterior urethral valves are the most common cause of bilateral hydronephrosis in boys; in adults UTO is usually due to acquired defects, with pelvic tumors, calculi, and urethral stricture predominating (p.2454).",
-   "As many as 50% of men aged >40 years may have lower urinary tract symptoms associated with benign prostatic hypertrophy, but these symptoms may occur without bladder outlet obstruction (p.2454).",
-   "Noncontrast CT is the imaging test of choice for acute flank pain and improves visualization of the urinary tract in renal impairment; retrograde/antegrade urography carry no risk of contrast-induced AKI in patients with renal insufficiency (p.2455-2456)."
+  "id": "urinary_tract_obstruction",
+  "name": "Urinary Tract Obstruction",
+  "system": "Nephrology / Urology",
+  "class": "non_infective",
+  "chapter": 331,
+  "page": 2453,
+  "aliases": [
+    "obstructive uropathy",
+    "hydronephrosis"
   ],
-  "pathophysiology": "Obstruction to urine flow produces stasis and a rise in hydrostatic pressure proximal to the blockade; this pressure is transmitted to the glomerular urinary space, decreasing or stopping filtration. Acutely, bilateral obstruction increases renal blood flow with rising ureteral/tubule pressures (mediated by vasodilator prostaglandins and nitric oxide), then renal blood flow and GFR fall with chronicity as vasoconstrictor prostaglandins and renin-angiotensin production increase. Tubular dysfunction develops: loss of medullary hypertonicity and concentrating ability (AVP-insensitive polyuria, a form of acquired nephrogenic diabetes insipidus from dysregulation of aquaporin-2 water channels), natriuresis from downregulation of proximal salt reabsorption and transporters (Na+/K+-ATPase, NKCC2, ENaC), and partial bilateral UTO causing acquired distal RTA with hyperkalemia and renal salt wasting (disrupted H+-ATPase trafficking in alpha-intercalated cells, reduced ENaC-driven Na+ reabsorption and K+ secretion, impaired ammonium excretion). The renal interstitium becomes edematous with mononuclear infiltrate early; later interstitial fibrosis and atrophy of papillae and medulla precede cortical involvement. Increased angiotensin II drives inflammation and fibroblast accumulation via profibrotic cytokines, progressing to chronic kidney damage and permanent loss of renal mass (renal atrophy). Obstruction can be mechanical (intrinsic or extrinsic) at any level from the renal tubules to the urethral meatus, or functional from abnormal pontine/sacral micturition control (e.g., neurogenic bladder). Genetic/fetal causes (CAKUT, LUTO) reflect reduced nephron number, as there is no nephrogenesis after birth (p.2453-2456).",
-  "additionalDifferentials": [
-   "Benign prostatic hyperplasia (bladder outlet obstruction)",
-   "Carcinoma of prostate, bladder, cervix, colon, or rectum",
-   "Retroperitoneal fibrosis",
-   "Lymphoma (particularly follicular) with retroperitoneal involvement",
-   "Calculi (ureteric, bladder, urethral)",
-   "Urethral stricture",
-   "Ureteropelvic junction (UPJ) narrowing/obstruction",
-   "Vesicoureteral reflux",
-   "Posterior urethral valves (boys)",
-   "Neurogenic bladder / functional obstruction (diabetic neuropathy, spinal cord disease, cauda equina syndrome)",
-   "Pregnant uterus / uterine leiomyomata",
-   "Accidental surgical ligation or injury of the ureter during pelvic or colonic surgery",
-   "Aortic aneurysm (extrinsic ureteric compression)",
-   "Drug-related urinary retention (anticholinergics, alpha-adrenergic agonists, opiates)"
-  ],
-  "infectionMimics": [
-   "Pyelonephritis (urinary stasis from obstruction encourages organism growth; UTO must always be considered with UTIs)",
-   "Generalized sepsis from an infected obstructed system"
-  ],
-  "nonInfectiousMimics": [
-   "Prerenal azotemia (acute partial bilateral obstruction may mimic it with high BUN-to-creatinine ratio, concentrated urine, and sodium retention)",
-   "Renal cystic disease (congenital UPJ obstruction may be mistaken for it; extrarenal pelvis is a normal variant causing false-positive hydronephrosis)",
-   "Other causes of polyuria/nocturia and concentrating defects",
-   "ADPKD and other ciliopathies (cystic compression of normal nephrons leading to fibrosis)"
-  ],
-  "additionalInvestigations": [
-   "Bladder catheter insertion and postvoid residual measurement",
-   "Bedside bladder ultrasound to assess bladder volume",
-   "Abdominal ultrasonography (~90% sensitive and specific for hydronephrosis)",
-   "Noncontrast multidetector CT (test of choice for acute flank pain; visualizes retroperitoneum and intrinsic/extrinsic sites of obstruction; characterizes stones by Hounsfield units)",
-   "Duplex Doppler ultrasonography (increased resistive index)",
-   "Retrograde or antegrade urography (no contrast-induced AKI risk in renal insufficiency)",
-   "Voiding cystourethrography (vesicoureteral reflux, bladder neck and urethral obstruction; postvoid residual urine)",
-   "Cystourethroscopy and urodynamic studies (cystometry, pressure-flow analysis)",
-   "Radionuclide (renal) scan for differential renal function and to predict reversibility after prolonged decompression",
-   "Abdominal scout film/KUB (insensitive; may show nephrocalcinosis or radiopaque stone)",
-   "Furosemide-augmented imaging to distinguish functional from anatomic obstruction"
-  ],
-  "redFlags": [
-   "UTO complicated by infection (infected obstructed system) requires immediate relief of obstruction to prevent generalized sepsis and progressive renal damage; sepsis necessitates prompt urologic intervention with drainage (nephrostomy, ureterostomy, or catheterization)",
-   "Acute renal failure with anuria suggesting complete bilateral obstruction",
-   "Overflow incontinence with sudden-onset fecal incontinence, severe lower back pain, and saddle anesthesia requires emergency evaluation for cauda equina syndrome",
-   "Complete obstruction with infection can lead to total destruction of the kidney within days",
-   "Fetal LUTO with maternal oligohydramnios or anhydramnios (risk of pulmonary hypoplasia and infant death if untreated)"
-  ],
-  "prognosis": "With relief of obstruction, return of renal function depends largely on whether irreversible renal damage has occurred. If obstruction is not relieved, course depends on whether it is complete or incomplete, bilateral or unilateral, and whether infection coexists. Complete obstruction with infection can destroy the kidney within days. Partial return of GFR may follow relief of complete obstruction of 1-2 weeks' duration, but after 8 weeks of obstruction recovery is unlikely. In the absence of definitive evidence of irreversibility, every effort should be made to decompress; a renal radionuclide scan after a prolonged period of decompression may predict reversibility. Chronic fibrotic progression to a failing kidney has no demonstrated reversal of scarring to date (p.2453, 2456-2457).",
-  "pitfalls": [
-   "UTO is a reversible cause of AKI that must be actively excluded in any unexplained AKI (insert bladder catheter and perform bladder scan/ultrasound) - the urine sediment is often normal even with marked azotemia and extensive structural damage.",
-   "Hydronephrosis may be ABSENT on ultrasound when obstruction is <48 h in duration, or associated with volume contraction, staghorn calculi, retroperitoneal fibrosis, or infiltrative renal disease - a negative ultrasound does not exclude obstruction when suspicion remains high.",
-   "False-positive hydronephrosis can occur with diuresis, renal cysts, or a normal extrarenal pelvis.",
-   "Insidious obstruction (e.g., chronic UPJ narrowing) may cause little or no pain yet result in total destruction of the affected kidney; unilateral ureteric injury during surgery may remain undetected.",
-   "After relief, anticipate postobstructive diuresis (see below) - iatrogenic over-replacement of fluids can sustain the diuresis, while under-recognition can lead to profound dehydration and vascular collapse.",
-   "NSAIDs for renal colic must account for potential renal harm, and opiates in patients with decreased renal function may be dangerous and used with caution.",
-   "Alpha-adrenergic blockers for BPH carry a risk of intraoperative floppy iris syndrome during cataract surgery."
-  ],
-  "severityClassification": "No formal severity grade; characterized along clinically meaningful axes per Tables 331-1 and 331-2: by level (upper tract/ureter vs bladder outlet vs urethra), laterality (unilateral hydroureter/hydronephrosis vs bilateral involvement at/below the bladder), completeness (complete vs partial/incomplete), acuity (acute vs chronic vs release/postobstructive phase), and presence of superimposed infection. Postobstructive diuresis follows relief of bilateral, but not unilateral, complete obstruction.",
-  "references": [
-   "Harrison 22e p.2453",
-   "Harrison 22e p.2454",
-   "Harrison 22e p.2455",
-   "Harrison 22e p.2456",
-   "Harrison 22e p.2457"
-  ],
-  "crossLinks": [
-   "aki",
-   "renal_colic",
-   "ckd"
-  ],
-  "management": [
-   "Relieve obstruction promptly to preserve renal function, using a bladder catheter for outlet obstruction and a percutaneous nephrostomy or retrograde ureteric stent for upper-tract obstruction",
-   "Undertake emergency decompression when obstruction is complicated by infection and sepsis (pyonephrosis) or by anuric bilateral obstruction with acute kidney injury",
-   "Treat the underlying cause, such as stone removal, relief of prostatic obstruction with an alpha-blocker and transurethral resection, or management of tumour or stricture",
-   "Anticipate and manage post-obstructive diuresis with careful fluid and electrolyte replacement",
-   "Correct the hyperkalaemia and metabolic acidosis of obstructive acute kidney injury, using dialysis for refractory derangement",
-   "Monitor recovery of renal function after relief and maintain surveillance for recurrent obstruction",
-   "Manage jointly with urology and nephrology, tailoring intervention to whether obstruction is complete or partial and unilateral or bilateral"
-  ]
- },
- "algorithms": [
-  {
-   "id": "urinary_tract_obstruction-pathway",
-   "title": "Urinary Tract Obstruction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Urinary tract obstruction (UTO) is a common and potentially reversible cause of both acute and chronic kidney disease (obstructive nephropathy); early recognition and prompt relief can prevent or reverse devastating effects on kidney",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: UTO complicated by infection (infected obstructed system) requires immediate relief of obstruction to prevent generalized sepsis and progressive renal damage; sepsis necessitates prompt urologic intervention",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bladder catheter insertion and postvoid residual measurement, Bedside bladder ultrasound to assess bladder volume, Abdominal ultrasonography (~90% sensitive and specific for hydronephrosis)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve obstruction promptly to preserve renal function, using a bladder catheter for outlet obstruction and a percutaneous nephrostomy or retrograde ureteric stent for upper-tract obstruction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: UTO is a reversible cause of AKI that must be actively excluded in any unexplained AKI (insert bladder catheter and perform bladder scan/ultrasound) - the urine sediment is often normal even with marked azotemia and"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of urinary tract obstruction."
-  }
- ],
- "tables": [
-  {
-   "id": "urinary_tract_obstruction-matrix",
-   "title": "Urinary Tract Obstruction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Urinary tract obstruction (UTO) is a common and potentially reversible cause of both acute and chronic kidney disease",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2453",
+    "clinicalPearls": [
+      "Urinary tract obstruction (UTO) is a common and potentially reversible cause of both acute and chronic kidney disease (obstructive nephropathy); early recognition and prompt relief can prevent or reverse devastating effects on kidney structure and function (p.2453).",
+      "Any patient with otherwise unexplained renal failure, or with a history of nephrolithiasis, hematuria, diabetes mellitus, prostatic enlargement, pelvic surgery, trauma, or tumor should be evaluated for UTO (p.2455-2456).",
+      "When suspected, a bladder catheter should be inserted and abdominal ultrasonography performed to assess renal/bladder size and pyelocalyceal contour; bladder volume can be readily assessed at the bedside by ultrasound (p.2454-2455).",
+      "Flank pain is the most common presenting symptom and is due to distention of the collecting system or renal capsule; its severity is influenced more by the rate at which distention develops than by the degree of distention (p.2454).",
+      "Complete bilateral obstruction should be suspected when acute renal failure is accompanied by anuria (p.2455).",
+      "Wide fluctuations in urine output in an azotemic patient should always raise the possibility of intermittent or partial UTO (p.2455).",
+      "Azotemia with hyperkalemia and metabolic acidosis (acquired distal renal tubular acidosis pattern) should prompt consideration of UTO (p.2455).",
+      "Flank pain that occurs only with micturition is pathognomonic of vesicoureteral reflux (p.2455).",
+      "Lower obstruction above the bladder causes unilateral hydroureter and hydronephrosis, whereas lesions at or below the bladder cause bilateral involvement (p.2454).",
+      "Posterior urethral valves are the most common cause of bilateral hydronephrosis in boys; in adults UTO is usually due to acquired defects, with pelvic tumors, calculi, and urethral stricture predominating (p.2454).",
+      "As many as 50% of men aged >40 years may have lower urinary tract symptoms associated with benign prostatic hypertrophy, but these symptoms may occur without bladder outlet obstruction (p.2454).",
+      "Noncontrast CT is the imaging test of choice for acute flank pain and improves visualization of the urinary tract in renal impairment; retrograde/antegrade urography carry no risk of contrast-induced AKI in patients with renal insufficiency (p.2455-2456)."
     ],
-    [
-     "Key Investigations",
-     "Bladder catheter insertion and postvoid residual measurement, Bedside bladder ultrasound to assess bladder volume, Abdominal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Obstruction to urine flow produces stasis and a rise in hydrostatic pressure proximal to the blockade; this pressure is transmitted to the glomerular urinary space, decreasing or stopping filtration. Acutely, bilateral obstruction increases renal blood flow with rising ureteral/tubule pressures (mediated by vasodilator prostaglandins and nitric oxide), then renal blood flow and GFR fall with chronicity as vasoconstrictor prostaglandins and renin-angiotensin production increase. Tubular dysfunction develops: loss of medullary hypertonicity and concentrating ability (AVP-insensitive polyuria, a form of acquired nephrogenic diabetes insipidus from dysregulation of aquaporin-2 water channels), natriuresis from downregulation of proximal salt reabsorption and transporters (Na+/K+-ATPase, NKCC2, ENaC), and partial bilateral UTO causing acquired distal RTA with hyperkalemia and renal salt wasting (disrupted H+-ATPase trafficking in alpha-intercalated cells, reduced ENaC-driven Na+ reabsorption and K+ secretion, impaired ammonium excretion). The renal interstitium becomes edematous with mononuclear infiltrate early; later interstitial fibrosis and atrophy of papillae and medulla precede cortical involvement. Increased angiotensin II drives inflammation and fibroblast accumulation via profibrotic cytokines, progressing to chronic kidney damage and permanent loss of renal mass (renal atrophy). Obstruction can be mechanical (intrinsic or extrinsic) at any level from the renal tubules to the urethral meatus, or functional from abnormal pontine/sacral micturition control (e.g., neurogenic bladder). Genetic/fetal causes (CAKUT, LUTO) reflect reduced nephron number, as there is no nephrogenesis after birth (p.2453-2456).",
+    "additionalDifferentials": [
+      "Benign prostatic hyperplasia (bladder outlet obstruction)",
+      "Carcinoma of prostate, bladder, cervix, colon, or rectum",
+      "Retroperitoneal fibrosis",
+      "Lymphoma (particularly follicular) with retroperitoneal involvement",
+      "Calculi (ureteric, bladder, urethral)",
+      "Urethral stricture",
+      "Ureteropelvic junction (UPJ) narrowing/obstruction",
+      "Vesicoureteral reflux",
+      "Posterior urethral valves (boys)",
+      "Neurogenic bladder / functional obstruction (diabetic neuropathy, spinal cord disease, cauda equina syndrome)",
+      "Pregnant uterus / uterine leiomyomata",
+      "Accidental surgical ligation or injury of the ureter during pelvic or colonic surgery",
+      "Aortic aneurysm (extrinsic ureteric compression)",
+      "Drug-related urinary retention (anticholinergics, alpha-adrenergic agonists, opiates)"
     ],
-    [
-     "Primary Differentials",
-     "Benign prostatic hyperplasia (bladder outlet obstruction), Carcinoma of prostate, bladder, cervix, colon, or rectum,",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Pyelonephritis (urinary stasis from obstruction encourages organism growth; UTO must always be considered with UTIs)",
+      "Generalized sepsis from an infected obstructed system"
     ],
-    [
-     "Management Strategy",
-     "Relieve obstruction promptly to preserve renal function, using a bladder catheter for outlet obstruction and a percutaneous",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Prerenal azotemia (acute partial bilateral obstruction may mimic it with high BUN-to-creatinine ratio, concentrated urine, and sodium retention)",
+      "Renal cystic disease (congenital UPJ obstruction may be mistaken for it; extrarenal pelvis is a normal variant causing false-positive hydronephrosis)",
+      "Other causes of polyuria/nocturia and concentrating defects",
+      "ADPKD and other ciliopathies (cystic compression of normal nephrons leading to fibrosis)"
     ],
-    [
-     "Clinical Pitfall",
-     "UTO is a reversible cause of AKI that must be actively excluded in any unexplained AKI (insert bladder catheter and perform",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Bladder catheter insertion and postvoid residual measurement",
+      "Bedside bladder ultrasound to assess bladder volume",
+      "Abdominal ultrasonography (~90% sensitive and specific for hydronephrosis)",
+      "Noncontrast multidetector CT (test of choice for acute flank pain; visualizes retroperitoneum and intrinsic/extrinsic sites of obstruction; characterizes stones by Hounsfield units)",
+      "Duplex Doppler ultrasonography (increased resistive index)",
+      "Retrograde or antegrade urography (no contrast-induced AKI risk in renal insufficiency)",
+      "Voiding cystourethrography (vesicoureteral reflux, bladder neck and urethral obstruction; postvoid residual urine)",
+      "Cystourethroscopy and urodynamic studies (cystometry, pressure-flow analysis)",
+      "Radionuclide (renal) scan for differential renal function and to predict reversibility after prolonged decompression",
+      "Abdominal scout film/KUB (insensitive; may show nephrocalcinosis or radiopaque stone)",
+      "Furosemide-augmented imaging to distinguish functional from anatomic obstruction"
+    ],
+    "redFlags": [
+      "UTO complicated by infection (infected obstructed system) requires immediate relief of obstruction to prevent generalized sepsis and progressive renal damage; sepsis necessitates prompt urologic intervention with drainage (nephrostomy, ureterostomy, or catheterization)",
+      "Acute renal failure with anuria suggesting complete bilateral obstruction",
+      "Overflow incontinence with sudden-onset fecal incontinence, severe lower back pain, and saddle anesthesia requires emergency evaluation for cauda equina syndrome",
+      "Complete obstruction with infection can lead to total destruction of the kidney within days",
+      "Fetal LUTO with maternal oligohydramnios or anhydramnios (risk of pulmonary hypoplasia and infant death if untreated)"
+    ],
+    "prognosis": "With relief of obstruction, return of renal function depends largely on whether irreversible renal damage has occurred. If obstruction is not relieved, course depends on whether it is complete or incomplete, bilateral or unilateral, and whether infection coexists. Complete obstruction with infection can destroy the kidney within days. Partial return of GFR may follow relief of complete obstruction of 1-2 weeks' duration, but after 8 weeks of obstruction recovery is unlikely. In the absence of definitive evidence of irreversibility, every effort should be made to decompress; a renal radionuclide scan after a prolonged period of decompression may predict reversibility. Chronic fibrotic progression to a failing kidney has no demonstrated reversal of scarring to date (p.2453, 2456-2457).",
+    "pitfalls": [
+      "UTO is a reversible cause of AKI that must be actively excluded in any unexplained AKI (insert bladder catheter and perform bladder scan/ultrasound) - the urine sediment is often normal even with marked azotemia and extensive structural damage.",
+      "Hydronephrosis may be ABSENT on ultrasound when obstruction is <48 h in duration, or associated with volume contraction, staghorn calculi, retroperitoneal fibrosis, or infiltrative renal disease - a negative ultrasound does not exclude obstruction when suspicion remains high.",
+      "False-positive hydronephrosis can occur with diuresis, renal cysts, or a normal extrarenal pelvis.",
+      "Insidious obstruction (e.g., chronic UPJ narrowing) may cause little or no pain yet result in total destruction of the affected kidney; unilateral ureteric injury during surgery may remain undetected.",
+      "After relief, anticipate postobstructive diuresis (see below) - iatrogenic over-replacement of fluids can sustain the diuresis, while under-recognition can lead to profound dehydration and vascular collapse.",
+      "NSAIDs for renal colic must account for potential renal harm, and opiates in patients with decreased renal function may be dangerous and used with caution.",
+      "Alpha-adrenergic blockers for BPH carry a risk of intraoperative floppy iris syndrome during cataract surgery."
+    ],
+    "severityClassification": "No formal severity grade; characterized along clinically meaningful axes per Tables 331-1 and 331-2: by level (upper tract/ureter vs bladder outlet vs urethra), laterality (unilateral hydroureter/hydronephrosis vs bilateral involvement at/below the bladder), completeness (complete vs partial/incomplete), acuity (acute vs chronic vs release/postobstructive phase), and presence of superimposed infection. Postobstructive diuresis follows relief of bilateral, but not unilateral, complete obstruction.",
+    "references": [
+      "Harrison 22e p.2453",
+      "Harrison 22e p.2454",
+      "Harrison 22e p.2455",
+      "Harrison 22e p.2456",
+      "Harrison 22e p.2457"
+    ],
+    "crossLinks": [
+      "aki",
+      "renal_colic",
+      "ckd"
+    ],
+    "management": [
+      "Relieve obstruction promptly to preserve renal function, using a bladder catheter for outlet obstruction and a percutaneous nephrostomy or retrograde ureteric stent for upper-tract obstruction",
+      "Undertake emergency decompression when obstruction is complicated by infection and sepsis (pyonephrosis) or by anuric bilateral obstruction with acute kidney injury",
+      "Treat the underlying cause, such as stone removal, relief of prostatic obstruction with an alpha-blocker and transurethral resection, or management of tumour or stricture",
+      "Anticipate and manage post-obstructive diuresis with careful fluid and electrolyte replacement",
+      "Correct the hyperkalaemia and metabolic acidosis of obstructive acute kidney injury, using dialysis for refractory derangement",
+      "Monitor recovery of renal function after relief and maintain surveillance for recurrent obstruction",
+      "Manage jointly with urology and nephrology, tailoring intervention to whether obstruction is complete or partial and unilateral or bilateral"
     ]
-   ],
-   "caption": "Overview comparison matrix for urinary tract obstruction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "urinary-tract-obstruction-real-image",
-   "title": "Urinary Tract Obstruction: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "urinary_tract_obstruction-pathway",
+      "title": "Urinary Tract Obstruction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Urinary tract obstruction (UTO) is a common and potentially reversible cause of both acute and chronic kidney disease (obstructive nephropathy); early recognition and prompt relief can prevent or reverse devastating effects on kidney",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: UTO complicated by infection (infected obstructed system) requires immediate relief of obstruction to prevent generalized sepsis and progressive renal damage; sepsis necessitates prompt urologic intervention",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bladder catheter insertion and postvoid residual measurement, Bedside bladder ultrasound to assess bladder volume, Abdominal ultrasonography (~90% sensitive and specific for hydronephrosis)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve obstruction promptly to preserve renal function, using a bladder catheter for outlet obstruction and a percutaneous nephrostomy or retrograde ureteric stent for upper-tract obstruction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: UTO is a reversible cause of AKI that must be actively excluded in any unexplained AKI (insert bladder catheter and perform bladder scan/ultrasound) - the urine sediment is often normal even with marked azotemia and"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of urinary tract obstruction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "urinary_tract_obstruction-matrix",
+      "title": "Urinary Tract Obstruction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Urinary tract obstruction (UTO) is a common and potentially reversible cause of both acute and chronic kidney disease",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bladder catheter insertion and postvoid residual measurement, Bedside bladder ultrasound to assess bladder volume, Abdominal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Benign prostatic hyperplasia (bladder outlet obstruction), Carcinoma of prostate, bladder, cervix, colon, or rectum,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve obstruction promptly to preserve renal function, using a bladder catheter for outlet obstruction and a percutaneous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "UTO is a reversible cause of AKI that must be actively excluded in any unexplained AKI (insert bladder catheter and perform",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for urinary tract obstruction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Obstructive Uropathy",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/obstructive-uropathy/obstructive-uropathy"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urinary_tract_obstruction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing urinary tract obstruction",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-void residual",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "Over 50 mL",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Suggests outlet obstruction (higher cut-off in older adults)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90% sensitive and specific for hydronephrosis",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "First imaging test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early or atypical obstruction",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Under 48 h, dehydration, retroperitoneal fibrosis",
+              "op": "<",
+              "value": 48
+            },
+            {
+              "text": "{{hy:Hydronephrosis may be absent; negative scan does not exclude}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Stones, retroperitoneal masses"
+            },
+            {
+              "text": "Test of choice for acute flank pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex Doppler",
+          "cells": [
+            {
+              "text": "Raised resistive index"
+            },
+            {
+              "text": "Can precede dilation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diuretic renogram",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Washout half-time over 20 min (normal under 15)",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Obstruction; furosemide 0.5 mg/kg IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Perfusion pressure (Whitaker)",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Pelvic pressure over 22 mm Hg at 10 mL/min",
+              "op": ">",
+              "value": 22
+            },
+            {
+              "text": "Positive for obstruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine sediment",
+          "cells": [
+            {
+              "text": "Often bland despite azotemia"
+            },
+            {
+              "text": "Do not rely on it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison quotes ultrasound at about 90% sensitivity and specificity; Merck cites a point-of-care study with 61% positive predictive value. Both kept."
+    },
+    {
+      "id": "urinary_tract_obstruction-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic urinary tract obstruction",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Prerenal azotemia",
+          "cells": [
+            {
+              "text": "High BUN/creatinine ratio, concentrated urine (also in acute partial obstruction)"
+            },
+            {
+              "text": "Bladder scan, renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrarenal pelvis or renal cysts",
+          "cells": [
+            {
+              "text": "False-positive hydronephrosis"
+            },
+            {
+              "text": "CT or diuretic renogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vesicoureteral reflux",
+          "cells": [
+            {
+              "text": "Dilation without obstruction"
+            },
+            {
+              "text": "Voiding cystourethrogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuresis or pregnancy",
+          "cells": [
+            {
+              "text": "Physiological dilation"
+            },
+            {
+              "text": "Clinical context, renogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyelonephritis without obstruction",
+          "cells": [
+            {
+              "text": "Fever and flank pain"
+            },
+            {
+              "text": "Ultrasound or CT to exclude obstructed infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder",
+          "cells": [
+            {
+              "text": "Diabetes, spinal disease; large residual"
+            },
+            {
+              "text": "Urodynamics, neurological exam"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urinary_tract_obstruction-treatment",
+      "kind": "treatment",
+      "title": "Relieving urinary tract obstruction",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bladder catheter",
+          "cells": [
+            {
+              "text": "Bladder outlet obstruction"
+            },
+            {
+              "text": "Complete prompt decompression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent drainage",
+          "cells": [
+            {
+              "text": "Obstruction with infection"
+            },
+            {
+              "text": "{{hy:Immediate nephrostomy or stent for infected obstructed kidney}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prompt drainage",
+          "cells": [
+            {
+              "text": "Renal impairment, persistent UTI, uncontrolled pain"
+            },
+            {
+              "text": "Stent or nephrostomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Percutaneous nephrostomy",
+          "cells": [
+            {
+              "text": "Severe upper tract obstruction, stent not possible"
+            },
+            {
+              "text": "Temporary"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ureteral stent",
+          "cells": [
+            {
+              "text": "Upper tract obstruction"
+            },
+            {
+              "text": "Acute or long-term drainage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat cause",
+          "cells": [
+            {
+              "text": "Stones, BPH, tumour, stricture"
+            },
+            {
+              "text": "Alpha-blocker or TURP for BPH; stone removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and electrolyte replacement",
+          "cells": [
+            {
+              "text": "Post-obstructive diuresis after bilateral relief"
+            },
+            {
+              "text": "Monitor closely"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urinary_tract_obstruction-dx-mgmt",
+      "title": "Diagnosis and management of urinary tract obstruction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained AKI, flank pain, anuria or poor stream",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Bladder scan or catheter for post-void residual",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Residual over 50 mL?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Catheterise; find outlet cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Renal ultrasound; CT if flank pain or stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Hydronephrosis or obstructing lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "High suspicion despite negative scan?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Repeat imaging, CT or renogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Look for other cause of AKI",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Infection, sepsis or anuric AKI?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Emergency nephrostomy or stent plus antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Planned drainage and treat cause; watch for diuresis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

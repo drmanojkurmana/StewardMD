@@ -1,176 +1,483 @@
 {
- "id": "syne1_ataxia",
- "name": "SYNE1-Related Ataxia",
- "aliases": [
-  "ARCA1",
-  "SCAR8",
-  "Autosomal recessive cerebellar ataxia type 1",
-  "Recessive ataxia of Beauce"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary ataxia",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive ataxia caused by biallelic SYNE1 mutations affecting nesprin-1, a component of the LINC complex that tethers the nuclear envelope to the cytoskeleton.",
-   "Originally described as a relatively pure, adult-onset, slowly progressive cerebellar ataxia in a French-Canadian population (the recessive ataxia of Beauce).",
-   "Dysarthria is common and often prominent, accompanying gait and limb ataxia and cerebellar oculomotor signs such as nystagmus and saccadic pursuit.",
-   "Beyond the pure cerebellar form, an expanded multisystem phenotype includes upper and lower motor neuron signs, brainstem involvement and occasional cognitive change, reported more often outside Quebec.",
-   "Brain MRI typically shows cerebellar atrophy, with relative preservation of other structures in the pure form.",
-   "SYNE1 is an exceptionally large gene, and distinct mutations underlie different disorders including arthrogryposis and Emery-Dreifuss-like presentations.",
-   "Tendon reflexes may be normal or brisk when pyramidal involvement is present in the complex phenotype.",
-   "Peripheral sensation is often relatively spared compared with several other autosomal recessive ataxias."
+  "id": "syne1_ataxia",
+  "name": "SYNE1-Related Ataxia",
+  "aliases": [
+    "ARCA1",
+    "SCAR8",
+    "Autosomal recessive cerebellar ataxia type 1",
+    "Recessive ataxia of Beauce"
   ],
-  "pathophysiology": "SYNE1 encodes nesprin-1, a giant spectrin-repeat protein of the outer nuclear membrane that, together with SUN-domain partners, forms the LINC complex physically coupling the nucleoskeleton to the cytoskeleton. Nesprin-1 is highly expressed in cerebellar Purkinje cells and is also enriched at the neuromuscular junction, where it contributes to nuclear positioning and cytoskeletal organisation. Loss of functional nesprin-1 disrupts these structural links, and the resulting impairment of nuclear anchoring and cytoskeletal integrity is associated with degeneration of the cerebellar cortex, producing the characteristic ataxia. In the expanded phenotypes, additional involvement of motor neurons and brainstem structures is thought to reflect the wider distribution and function of nesprin-1, accounting for the pyramidal, lower motor neuron and bulbar features that can accompany the cerebellar syndrome.",
-  "additionalDifferentials": [
-   "Autosomal recessive spastic ataxia of Charlevoix-Saguenay",
-   "Ataxia with oculomotor apraxia types 1 and 2",
-   "Sporadic adult-onset cerebellar ataxia and multiple system atrophy of cerebellar type",
-   "Autosomal dominant spinocerebellar ataxias",
-   "Friedreich ataxia",
-   "Motor neuron disease when lower and upper motor neuron signs dominate",
-   "Acquired ataxias including alcohol-related, gluten and paraneoplastic causes"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI assessing cerebellar atrophy",
-   "SYNE1 sequencing accounting for its very large size, or exome/recessive ataxia panel",
-   "Nerve conduction studies and electromyography to assess neuropathy and motor neuron involvement",
-   "Creatine kinase where muscle or neuromuscular junction involvement is suspected",
-   "Screening for acquired causes of ataxia",
-   "Cognitive assessment where a complex multisystem phenotype is suspected"
-  ],
-  "redFlags": [
-   "Emergence of prominent lower motor neuron or bulbar signs suggesting motor neuron involvement",
-   "Respiratory or swallowing compromise",
-   "Rapid deterioration atypical for the usually slow cerebellar course"
-  ],
-  "prognosis": "The disorder is usually slowly progressive with relatively preserved lifespan, particularly in the pure cerebellar form. Complex multisystem forms with motor neuron involvement may carry greater disability.",
-  "pitfalls": [
-   "Assuming SYNE1 ataxia is always a pure cerebellar syndrome, when motor neuron and brainstem involvement can occur.",
-   "Missing the diagnosis because the very large gene poses technical sequencing challenges.",
-   "Mistaking complex SYNE1 phenotypes for primary motor neuron disease.",
-   "Assuming the disorder is confined to French-Canadian populations, when it is reported worldwide."
-  ],
-  "references": [
-   "Neurogenetics reference texts",
-   "Hereditary ataxia consensus reviews",
-   "Clinical neurology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy exists, so care is supportive and directed at symptoms",
-   "Provide physiotherapy and occupational therapy to maintain gait, balance and function, with mobility aids and falls prevention",
-   "Offer speech and language therapy for dysarthria and assessment of swallowing safety",
-   "Manage features of the expanded phenotype such as spasticity and lower motor neuron involvement symptomatically",
-   "Monitor for progression of swallowing, respiratory and motor-neuron complications over time",
-   "Offer genetic counselling and family testing given autosomal recessive inheritance",
-   "Coordinate long-term care through a neurology-led multidisciplinary ataxia service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "syne1_ataxia-pathway",
-   "title": "SYNE1-Related Ataxia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive ataxia caused by biallelic SYNE1 mutations affecting nesprin-1, a component of the LINC complex that tethers the nuclear envelope to the cytoskeleton.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emergence of prominent lower motor neuron or bulbar signs suggesting motor neuron involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI assessing cerebellar atrophy, SYNE1 sequencing accounting for its very large size, or exome/recessive ataxia panel, Nerve conduction studies and electromyography to assess neuropathy and motor neuron involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy exists, so care is supportive and directed at symptoms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming SYNE1 ataxia is always a pure cerebellar syndrome, when motor neuron and brainstem involvement can occur."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of syne1-related ataxia."
-  }
- ],
- "tables": [
-  {
-   "id": "syne1_ataxia-matrix",
-   "title": "SYNE1-Related Ataxia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive ataxia caused by biallelic SYNE1 mutations affecting nesprin-1, a component of the LINC complex that tethers",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary ataxia",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive ataxia caused by biallelic SYNE1 mutations affecting nesprin-1, a component of the LINC complex that tethers the nuclear envelope to the cytoskeleton.",
+      "Originally described as a relatively pure, adult-onset, slowly progressive cerebellar ataxia in a French-Canadian population (the recessive ataxia of Beauce).",
+      "Dysarthria is common and often prominent, accompanying gait and limb ataxia and cerebellar oculomotor signs such as nystagmus and saccadic pursuit.",
+      "Beyond the pure cerebellar form, an expanded multisystem phenotype includes upper and lower motor neuron signs, brainstem involvement and occasional cognitive change, reported more often outside Quebec.",
+      "Brain MRI typically shows cerebellar atrophy, with relative preservation of other structures in the pure form.",
+      "SYNE1 is an exceptionally large gene, and distinct mutations underlie different disorders including arthrogryposis and Emery-Dreifuss-like presentations.",
+      "Tendon reflexes may be normal or brisk when pyramidal involvement is present in the complex phenotype.",
+      "Peripheral sensation is often relatively spared compared with several other autosomal recessive ataxias."
     ],
-    [
-     "Key Investigations",
-     "Brain MRI assessing cerebellar atrophy, SYNE1 sequencing accounting for its very large size, or exome/recessive ataxia panel,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SYNE1 encodes nesprin-1, a giant spectrin-repeat protein of the outer nuclear membrane that, together with SUN-domain partners, forms the LINC complex physically coupling the nucleoskeleton to the cytoskeleton. Nesprin-1 is highly expressed in cerebellar Purkinje cells and is also enriched at the neuromuscular junction, where it contributes to nuclear positioning and cytoskeletal organisation. Loss of functional nesprin-1 disrupts these structural links, and the resulting impairment of nuclear anchoring and cytoskeletal integrity is associated with degeneration of the cerebellar cortex, producing the characteristic ataxia. In the expanded phenotypes, additional involvement of motor neurons and brainstem structures is thought to reflect the wider distribution and function of nesprin-1, accounting for the pyramidal, lower motor neuron and bulbar features that can accompany the cerebellar syndrome.",
+    "additionalDifferentials": [
+      "Autosomal recessive spastic ataxia of Charlevoix-Saguenay",
+      "Ataxia with oculomotor apraxia types 1 and 2",
+      "Sporadic adult-onset cerebellar ataxia and multiple system atrophy of cerebellar type",
+      "Autosomal dominant spinocerebellar ataxias",
+      "Friedreich ataxia",
+      "Motor neuron disease when lower and upper motor neuron signs dominate",
+      "Acquired ataxias including alcohol-related, gluten and paraneoplastic causes"
     ],
-    [
-     "Primary Differentials",
-     "Autosomal recessive spastic ataxia of Charlevoix-Saguenay, Ataxia with oculomotor apraxia types 1 and 2, Sporadic adult-onset",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI assessing cerebellar atrophy",
+      "SYNE1 sequencing accounting for its very large size, or exome/recessive ataxia panel",
+      "Nerve conduction studies and electromyography to assess neuropathy and motor neuron involvement",
+      "Creatine kinase where muscle or neuromuscular junction involvement is suspected",
+      "Screening for acquired causes of ataxia",
+      "Cognitive assessment where a complex multisystem phenotype is suspected"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy exists, so care is supportive and directed at symptoms",
-     "Core treatment modality"
+    "redFlags": [
+      "Emergence of prominent lower motor neuron or bulbar signs suggesting motor neuron involvement",
+      "Respiratory or swallowing compromise",
+      "Rapid deterioration atypical for the usually slow cerebellar course"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming SYNE1 ataxia is always a pure cerebellar syndrome, when motor neuron and brainstem involvement can occur.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is usually slowly progressive with relatively preserved lifespan, particularly in the pure cerebellar form. Complex multisystem forms with motor neuron involvement may carry greater disability.",
+    "pitfalls": [
+      "Assuming SYNE1 ataxia is always a pure cerebellar syndrome, when motor neuron and brainstem involvement can occur.",
+      "Missing the diagnosis because the very large gene poses technical sequencing challenges.",
+      "Mistaking complex SYNE1 phenotypes for primary motor neuron disease.",
+      "Assuming the disorder is confined to French-Canadian populations, when it is reported worldwide."
+    ],
+    "references": [
+      "Neurogenetics reference texts",
+      "Hereditary ataxia consensus reviews",
+      "Clinical neurology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy exists, so care is supportive and directed at symptoms",
+      "Provide physiotherapy and occupational therapy to maintain gait, balance and function, with mobility aids and falls prevention",
+      "Offer speech and language therapy for dysarthria and assessment of swallowing safety",
+      "Manage features of the expanded phenotype such as spasticity and lower motor neuron involvement symptomatically",
+      "Monitor for progression of swallowing, respiratory and motor-neuron complications over time",
+      "Offer genetic counselling and family testing given autosomal recessive inheritance",
+      "Coordinate long-term care through a neurology-led multidisciplinary ataxia service"
     ]
-   ],
-   "caption": "Overview comparison matrix for syne1-related ataxia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "syne1-ataxia-real-image",
-   "title": "SYNE1-Related Ataxia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "syne1_ataxia-pathway",
+      "title": "SYNE1-Related Ataxia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive ataxia caused by biallelic SYNE1 mutations affecting nesprin-1, a component of the LINC complex that tethers the nuclear envelope to the cytoskeleton.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emergence of prominent lower motor neuron or bulbar signs suggesting motor neuron involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI assessing cerebellar atrophy, SYNE1 sequencing accounting for its very large size, or exome/recessive ataxia panel, Nerve conduction studies and electromyography to assess neuropathy and motor neuron involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy exists, so care is supportive and directed at symptoms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming SYNE1 ataxia is always a pure cerebellar syndrome, when motor neuron and brainstem involvement can occur."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of syne1-related ataxia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "syne1_ataxia-matrix",
+      "title": "SYNE1-Related Ataxia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive ataxia caused by biallelic SYNE1 mutations affecting nesprin-1, a component of the LINC complex that tethers",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI assessing cerebellar atrophy, SYNE1 sequencing accounting for its very large size, or exome/recessive ataxia panel,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autosomal recessive spastic ataxia of Charlevoix-Saguenay, Ataxia with oculomotor apraxia types 1 and 2, Sporadic adult-onset",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy exists, so care is supportive and directed at symptoms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming SYNE1 ataxia is always a pure cerebellar syndrome, when motor neuron and brainstem involvement can occur.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for syne1-related ataxia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "syne1_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of SYNE1-Related Ataxia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected SYNE1 ataxia: slowly progressive cerebellar ataxia with dysarthria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (prominent motor neuron or bulbar signs, or swallowing compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for respiratory or swallowing compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI for cerebellar atrophy; SYNE1 sequencing or recessive ataxia panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do biallelic SYNE1 variants explain the cerebellar ataxia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Friedreich ataxia, motor neuron disease or an acquired ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for gait, balance and function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Speech and language therapy for dysarthria and swallowing safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic treatment of spasticity and lower motor neuron features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor swallowing, respiratory and motor-neuron complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually slowly progressive with preserved lifespan; multisystem forms are more disabling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "syne1_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy; other structures relatively preserved in the pure form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SYNE1 sequencing or recessive ataxia panel",
+          "cells": [
+            {
+              "text": "Biallelic SYNE1 variants; the gene is very large"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Neuropathy and motor neuron involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Muscle or neuromuscular junction involvement, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for acquired causes",
+          "cells": [
+            {
+              "text": "Acquired ataxias excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive assessment",
+          "cells": [
+            {
+              "text": "Cognitive change in a complex multisystem phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syne1_ataxia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Motor neuron disease",
+          "cells": [
+            {
+              "text": "Complex SYNE1 phenotypes can include motor neuron signs and should not be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired ataxias (alcohol-related, gluten, paraneoplastic)",
+          "cells": [
+            {
+              "text": "Excluded by screening for acquired causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic adult-onset cerebellar ataxia",
+          "cells": [
+            {
+              "text": "Pure, adult-onset, slowly progressive cerebellar ataxia; biallelic SYNE1 variants identify SYNE1 ataxia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syne1_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Gait, balance and function; mobility aids and falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Dysarthria and assessment of swallowing safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic management of the expanded phenotype",
+          "cells": [
+            {
+              "text": "Spasticity and lower motor neuron involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for complications",
+          "cells": [
+            {
+              "text": "Swallowing, respiratory and motor-neuron complications over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology-led ataxia service",
+          "cells": [
+            {
+              "text": "Long-term coordination of multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,485 @@
 {
- "id": "autosomal_recessive_spastic_ataxia",
- "name": "Autosomal recessive spastic ataxia (ARSACS / SACS)",
- "aliases": [
-  "ARSACS",
-  "autosomal recessive spastic ataxia of Charlevoix-Saguenay",
-  "SACS-related spastic ataxia",
-  "sacsin deficiency"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive spastic ataxias are a group in which cerebellar ataxia combines with pyramidal spasticity; the prototype is ARSACS, caused by biallelic variants in SACS, which encodes the chaperone-like protein sacsin",
-   "ARSACS classically presents in early childhood with a triad of progressive cerebellar ataxia, lower-limb spasticity and a peripheral sensorimotor neuropathy",
-   "A characteristic feature is thickening of the retinal nerve fibres, demonstrable on fundoscopy or optical coherence tomography",
-   "Brain MRI often shows superior cerebellar vermian atrophy together with linear pontine hypointensities and a bulky pons, forming a recognisable pattern",
-   "Although first described in the Charlevoix-Saguenay region of Quebec, ARSACS is now identified worldwide with a wide range of SACS variants",
-   "Other recessive spastic ataxias, including SPG7-related and metabolic causes, should be considered where the picture is atypical",
-   "Diagnosis combines the clinical triad, the characteristic MRI and retinal findings, and molecular confirmation, usually by sequencing or a gene panel",
-   "There is no cure; management is supportive, addressing spasticity, ataxia, neuropathy and mobility"
+  "id": "autosomal_recessive_spastic_ataxia",
+  "name": "Autosomal recessive spastic ataxia (ARSACS / SACS)",
+  "aliases": [
+    "ARSACS",
+    "autosomal recessive spastic ataxia of Charlevoix-Saguenay",
+    "SACS-related spastic ataxia",
+    "sacsin deficiency"
   ],
-  "pathophysiology": "ARSACS results from loss-of-function variants in SACS, which encodes sacsin, a very large multidomain protein with chaperone-like activity that supports protein folding and mitochondrial dynamics and distribution, and is important in Purkinje cells and in long motor and sensory axons. Deficiency of sacsin disturbs protein quality control and mitochondrial function, causing Purkinje cell abnormalities, corticospinal tract dysfunction and a length-dependent peripheral neuropathy. These combined effects produce the characteristic spastic, ataxic and neuropathic phenotype, and the broader group of recessive spastic ataxias reflects related disturbances of neuronal maintenance from other genes.",
-  "additionalDifferentials": [
-   "Friedreich ataxia",
-   "Hereditary spastic paraplegia with cerebellar features, such as SPG7",
-   "Other recessive ataxias including ataxia with oculomotor apraxia and ataxia-telangiectasia",
-   "Cerebral palsy in young children presenting with spasticity and incoordination",
-   "Leukodystrophies affecting cerebellar and corticospinal pathways",
-   "Treatable metabolic ataxias such as vitamin E deficiency and cerebrotendinous xanthomatosis"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to identify vermian atrophy, linear pontine hypointensities and a bulky pons",
-   "Nerve conduction studies to document the peripheral neuropathy",
-   "Optical coherence tomography or fundoscopy for retinal nerve fibre thickening",
-   "SACS sequencing by gene panel or exome, with copy-number analysis",
-   "Screening for treatable recessive ataxias (vitamin E level, plasma cholestanol)",
-   "Family history and consanguinity assessment to support recessive inheritance"
-  ],
-  "redFlags": [
-   "Rapid deterioration or regression suggesting an alternative or acquired disorder",
-   "Severe bulbar or respiratory involvement requiring supportive intervention",
-   "Cognitive decline or white-matter change raising the possibility of a leukodystrophy",
-   "A treatable metabolic mimic on screening (vitamin E deficiency or cerebrotendinous xanthomatosis) that must not be missed"
-  ],
-  "prognosis": "ARSACS is progressive over years, and many affected individuals lose independent ambulation and become wheelchair-dependent in mid-adult life, with the tempo and severity varying by variant; other recessive spastic ataxias differ in course, so prognosis is best individualised once the specific gene is known.",
-  "pitfalls": [
-   "Missing a treatable recessive mimic such as vitamin E deficiency or cerebrotendinous xanthomatosis before settling on ARSACS",
-   "Mislabelling a young child with spasticity and incoordination as having cerebral palsy",
-   "Overlooking the retinal and MRI clues that strongly suggest ARSACS",
-   "Not testing SACS or not recognising the broader recessive spastic ataxia group",
-   "Failing to address consanguinity and recessive inheritance in genetic counselling"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy is available, so management is supportive and centred on physiotherapy and occupational therapy to sustain gait and daily function",
-   "Treat pyramidal spasticity with oral antispasticity drugs such as baclofen or tizanidine, focal botulinum toxin injections and stretching",
-   "Fit ankle-foot orthoses and provide walking aids and podiatry for the length-dependent neuropathy and foot deformity",
-   "Offer balance and gait rehabilitation, falls prevention and speech-and-language therapy for dysarthria and swallowing",
-   "Monitor for orthopaedic complications such as pes cavus and scoliosis, and assess vision given the retinal involvement",
-   "Screen for and exclude treatable ataxia mimics such as vitamin E deficiency before settling on supportive care",
-   "Provide genetic counselling and family screening for autosomal recessive inheritance, coordinated by a neurology-led team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "autosomal_recessive_spastic_ataxia-pathway",
-   "title": "Autosomal recessive spastic ataxia (ARSACS / SACS): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive spastic ataxias are a group in which cerebellar ataxia combines with pyramidal spasticity; the prototype is ARSACS, caused by biallelic variants in SACS, which encodes the chaperone-like protein sacsin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid deterioration or regression suggesting an alternative or acquired disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to identify vermian atrophy, linear pontine hypointensities and a bulky pons, Nerve conduction studies to document the peripheral neuropathy, Optical coherence tomography or fundoscopy for retinal nerve fibre"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy is available, so management is supportive and centred on physiotherapy and occupational therapy to sustain gait and daily function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing a treatable recessive mimic such as vitamin E deficiency or cerebrotendinous xanthomatosis before settling on ARSACS"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autosomal recessive spastic ataxia (arsacs / sacs)."
-  }
- ],
- "tables": [
-  {
-   "id": "autosomal_recessive_spastic_ataxia-matrix",
-   "title": "Autosomal recessive spastic ataxia (ARSACS / SACS): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive spastic ataxias are a group in which cerebellar ataxia combines with pyramidal spasticity; the prototype is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive spastic ataxias are a group in which cerebellar ataxia combines with pyramidal spasticity; the prototype is ARSACS, caused by biallelic variants in SACS, which encodes the chaperone-like protein sacsin",
+      "ARSACS classically presents in early childhood with a triad of progressive cerebellar ataxia, lower-limb spasticity and a peripheral sensorimotor neuropathy",
+      "A characteristic feature is thickening of the retinal nerve fibres, demonstrable on fundoscopy or optical coherence tomography",
+      "Brain MRI often shows superior cerebellar vermian atrophy together with linear pontine hypointensities and a bulky pons, forming a recognisable pattern",
+      "Although first described in the Charlevoix-Saguenay region of Quebec, ARSACS is now identified worldwide with a wide range of SACS variants",
+      "Other recessive spastic ataxias, including SPG7-related and metabolic causes, should be considered where the picture is atypical",
+      "Diagnosis combines the clinical triad, the characteristic MRI and retinal findings, and molecular confirmation, usually by sequencing or a gene panel",
+      "There is no cure; management is supportive, addressing spasticity, ataxia, neuropathy and mobility"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to identify vermian atrophy, linear pontine hypointensities and a bulky pons, Nerve conduction studies to document the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ARSACS results from loss-of-function variants in SACS, which encodes sacsin, a very large multidomain protein with chaperone-like activity that supports protein folding and mitochondrial dynamics and distribution, and is important in Purkinje cells and in long motor and sensory axons. Deficiency of sacsin disturbs protein quality control and mitochondrial function, causing Purkinje cell abnormalities, corticospinal tract dysfunction and a length-dependent peripheral neuropathy. These combined effects produce the characteristic spastic, ataxic and neuropathic phenotype, and the broader group of recessive spastic ataxias reflects related disturbances of neuronal maintenance from other genes.",
+    "additionalDifferentials": [
+      "Friedreich ataxia",
+      "Hereditary spastic paraplegia with cerebellar features, such as SPG7",
+      "Other recessive ataxias including ataxia with oculomotor apraxia and ataxia-telangiectasia",
+      "Cerebral palsy in young children presenting with spasticity and incoordination",
+      "Leukodystrophies affecting cerebellar and corticospinal pathways",
+      "Treatable metabolic ataxias such as vitamin E deficiency and cerebrotendinous xanthomatosis"
     ],
-    [
-     "Primary Differentials",
-     "Friedreich ataxia, Hereditary spastic paraplegia with cerebellar features, such as SPG7, Other recessive ataxias including ataxia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to identify vermian atrophy, linear pontine hypointensities and a bulky pons",
+      "Nerve conduction studies to document the peripheral neuropathy",
+      "Optical coherence tomography or fundoscopy for retinal nerve fibre thickening",
+      "SACS sequencing by gene panel or exome, with copy-number analysis",
+      "Screening for treatable recessive ataxias (vitamin E level, plasma cholestanol)",
+      "Family history and consanguinity assessment to support recessive inheritance"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy is available, so management is supportive and centred on physiotherapy and occupational therapy to",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid deterioration or regression suggesting an alternative or acquired disorder",
+      "Severe bulbar or respiratory involvement requiring supportive intervention",
+      "Cognitive decline or white-matter change raising the possibility of a leukodystrophy",
+      "A treatable metabolic mimic on screening (vitamin E deficiency or cerebrotendinous xanthomatosis) that must not be missed"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing a treatable recessive mimic such as vitamin E deficiency or cerebrotendinous xanthomatosis before settling on ARSACS",
-     "Prevent diagnostic or management error"
+    "prognosis": "ARSACS is progressive over years, and many affected individuals lose independent ambulation and become wheelchair-dependent in mid-adult life, with the tempo and severity varying by variant; other recessive spastic ataxias differ in course, so prognosis is best individualised once the specific gene is known.",
+    "pitfalls": [
+      "Missing a treatable recessive mimic such as vitamin E deficiency or cerebrotendinous xanthomatosis before settling on ARSACS",
+      "Mislabelling a young child with spasticity and incoordination as having cerebral palsy",
+      "Overlooking the retinal and MRI clues that strongly suggest ARSACS",
+      "Not testing SACS or not recognising the broader recessive spastic ataxia group",
+      "Failing to address consanguinity and recessive inheritance in genetic counselling"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy is available, so management is supportive and centred on physiotherapy and occupational therapy to sustain gait and daily function",
+      "Treat pyramidal spasticity with oral antispasticity drugs such as baclofen or tizanidine, focal botulinum toxin injections and stretching",
+      "Fit ankle-foot orthoses and provide walking aids and podiatry for the length-dependent neuropathy and foot deformity",
+      "Offer balance and gait rehabilitation, falls prevention and speech-and-language therapy for dysarthria and swallowing",
+      "Monitor for orthopaedic complications such as pes cavus and scoliosis, and assess vision given the retinal involvement",
+      "Screen for and exclude treatable ataxia mimics such as vitamin E deficiency before settling on supportive care",
+      "Provide genetic counselling and family screening for autosomal recessive inheritance, coordinated by a neurology-led team"
     ]
-   ],
-   "caption": "Overview comparison matrix for autosomal recessive spastic ataxia (arsacs / sacs)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "autosomal-recessive-spastic-ataxia-real-image",
-   "title": "Autosomal recessive spastic ataxia (ARSACS / SACS): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "autosomal_recessive_spastic_ataxia-pathway",
+      "title": "Autosomal recessive spastic ataxia (ARSACS / SACS): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive spastic ataxias are a group in which cerebellar ataxia combines with pyramidal spasticity; the prototype is ARSACS, caused by biallelic variants in SACS, which encodes the chaperone-like protein sacsin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid deterioration or regression suggesting an alternative or acquired disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to identify vermian atrophy, linear pontine hypointensities and a bulky pons, Nerve conduction studies to document the peripheral neuropathy, Optical coherence tomography or fundoscopy for retinal nerve fibre"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy is available, so management is supportive and centred on physiotherapy and occupational therapy to sustain gait and daily function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing a treatable recessive mimic such as vitamin E deficiency or cerebrotendinous xanthomatosis before settling on ARSACS"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autosomal recessive spastic ataxia (arsacs / sacs)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "autosomal_recessive_spastic_ataxia-matrix",
+      "title": "Autosomal recessive spastic ataxia (ARSACS / SACS): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive spastic ataxias are a group in which cerebellar ataxia combines with pyramidal spasticity; the prototype is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to identify vermian atrophy, linear pontine hypointensities and a bulky pons, Nerve conduction studies to document the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Friedreich ataxia, Hereditary spastic paraplegia with cerebellar features, such as SPG7, Other recessive ataxias including ataxia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy is available, so management is supportive and centred on physiotherapy and occupational therapy to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing a treatable recessive mimic such as vitamin E deficiency or cerebrotendinous xanthomatosis before settling on ARSACS",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autosomal recessive spastic ataxia (arsacs / sacs)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autosomal_recessive_spastic_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Vermian atrophy, linear pontine hypointensities and a bulky pons"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography or fundoscopy",
+          "cells": [
+            {
+              "text": "Retinal nerve fibre thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SACS sequencing by gene panel or exome",
+          "cells": [
+            {
+              "text": "Gene diagnosis with copy-number analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for treatable recessive ataxias",
+          "cells": [
+            {
+              "text": "Vitamin E level and plasma cholestanol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and consanguinity assessment",
+          "cells": [
+            {
+              "text": "Recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_recessive_spastic_ataxia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary spastic paraplegia with cerebellar features, such as SPG7",
+          "cells": [
+            {
+              "text": "Separated by SACS sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other recessive ataxias including ataxia with oculomotor apraxia",
+          "cells": [
+            {
+              "text": "Separated by SACS sequencing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_recessive_spastic_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "To sustain gait and daily function"
+            },
+            {
+              "text": "No disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antispasticity treatment",
+          "cells": [
+            {
+              "text": "Baclofen or tizanidine; focal botulinum toxin injections; stretching"
+            },
+            {
+              "text": "Pyramidal spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthoses and walking aids",
+          "cells": [
+            {
+              "text": "Podiatry for length-dependent neuropathy and foot deformity"
+            },
+            {
+              "text": "Neuropathy and foot deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balance, gait and speech therapy",
+          "cells": [
+            {
+              "text": "Balance and gait rehabilitation; falls prevention; speech and swallowing therapy"
+            },
+            {
+              "text": "Dysarthria and swallowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and vision monitoring",
+          "cells": [
+            {
+              "text": "Pes cavus, scoliosis and vision"
+            },
+            {
+              "text": "Retinal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude treatable mimics",
+          "cells": [
+            {
+              "text": "Vitamin E deficiency screened before settling on supportive care"
+            },
+            {
+              "text": "Treatable recessive mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family screening"
+            },
+            {
+              "text": "Neurology-led team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autosomal_recessive_spastic_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal recessive spastic ataxia (ARSACS / SACS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive spastic ataxia with peripheral neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid deterioration or severe bulbar or respiratory involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Screen for treatable mimics such as vitamin E deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, nerve conduction, OCT, SACS sequencing, vitamin E and cholestanol",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SACS variants confirmed with characteristic MRI changes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive physiotherapy, occupational therapy and antispasticity agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and screen for further recessive ataxias",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses, walking aids and podiatry",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Speech therapy for dysarthria and swallowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor pes cavus, scoliosis and vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and family screening under a neurology-led team",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,525 @@
 {
- "id": "anal_fistula",
- "name": "Anal fistula",
- "aliases": [
-  "fistula-in-ano",
-  "anorectal fistula",
-  "perianal fistula"
- ],
- "class": "non_infective",
- "system": "Colorectal / Pelvic floor",
- "specialty": "Colorectal Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most fistulae follow the cryptoglandular hypothesis: infection of an anal gland in the intersphincteric plane drains and leaves a chronic epithelialised track between the anal canal and the perianal skin",
-   "Typically presents with persistent or intermittent perianal discharge, recurrent abscesses, and a palpable indurated track with an external opening",
-   "Goodsall's rule predicts the internal opening: anteriorly placed external openings usually track radially and directly to the anal canal, whereas posterior openings tend to curve to the posterior midline",
-   "The Parks classification categorises tracks relative to the sphincter complex as intersphincteric, transsphincteric, suprasphincteric, or extrasphincteric",
-   "Complex, multiple, or atypical fistulae should prompt consideration of Crohn's disease, malignancy, tuberculosis, prior radiation, or hidradenitis suppurativa",
-   "Treatment depends on how much sphincter the track crosses: fistulotomy (lay-open) suits low simple tracks, while sphincter-preserving options (loose or cutting seton, LIFT, advancement flap, fibrin glue or plug) protect continence in high or complex tracks",
-   "Accurate mapping of the track and internal opening with MRI or endoanal ultrasound is central to avoiding recurrence and incontinence"
+  "id": "anal_fistula",
+  "name": "Anal fistula",
+  "aliases": [
+    "fistula-in-ano",
+    "anorectal fistula",
+    "perianal fistula"
   ],
-  "pathophysiology": "Most anal fistulae follow the cryptoglandular hypothesis, in which infection of an anal gland at the dentate line lodges in the intersphincteric space and forms an abscess; once this drains, a persistent epithelialised track remains, connecting the internal opening in the anal canal to an external opening on the perianal skin. Chronic inflammation, incomplete drainage, and secondary tracks perpetuate the disease. The relationship of the track to the internal and external sphincters, described by the Parks classification, determines both surgical strategy and the risk to continence. Secondary or atypical fistulae may reflect Crohn's disease, malignancy, or other specific pathology.",
-  "additionalDifferentials": [
-   "Hidradenitis suppurativa",
-   "Pilonidal sinus disease",
-   "Crohn's perianal disease",
-   "Perianal or anal canal malignancy",
-   "Infected epidermoid or sebaceous cyst",
-   "Sacrococcygeal or presacral sinus"
-  ],
-  "additionalInvestigations": [
-   "Examination under anaesthesia with gentle probing to define the track and internal opening",
-   "MRI of the pelvis and anal canal to map complex tracks and secondary extensions",
-   "Endoanal ultrasound, with or without hydrogen peroxide enhancement, to delineate the track and sphincters",
-   "Assessment for Crohn's disease (ileocolonoscopy) in complex or recurrent disease",
-   "Biopsy of atypical or non-healing tracks to exclude malignancy",
-   "Anorectal manometry when continence is a concern before dividing any sphincter"
-  ],
-  "redFlags": [
-   "Multiple, complex, or non-healing fistulae suggesting Crohn's disease or immunosuppression",
-   "Induration, irregularity, or a mass raising suspicion of underlying malignancy",
-   "Rapidly spreading perianal sepsis or systemic toxicity indicating necrotising infection",
-   "A new fistula in a patient with previous pelvic radiotherapy"
-  ],
-  "prognosis": "Simple low fistulae treated by fistulotomy generally heal well with low recurrence, but high, complex, or Crohn's-related fistulae are prone to recurrence and to disturbance of continence, often requiring staged sphincter-preserving procedures.",
-  "pitfalls": [
-   "Performing fistulotomy on a high transsphincteric track and causing faecal incontinence",
-   "Missing the internal opening or a secondary track, leading to early recurrence",
-   "Failing to recognise underlying Crohn's disease before undertaking aggressive surgery",
-   "Overlooking malignancy in a chronic, indurated, or atypical fistula"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Keighley & Williams' Surgery of the Anus, Rectum and Colon"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Drain any associated abscess promptly and place a loose seton to control sepsis before definitive repair",
-   "Treat low simple tracks by fistulotomy, which offers reliable healing with low recurrence",
-   "Use sphincter-preserving techniques for high or complex tracks, including seton, ligation of the intersphincteric fistula tract, advancement flap, or fibrin glue or plug",
-   "Manage Crohn-related fistulae with biologic therapy such as anti-tumour necrosis factor agents alongside seton drainage",
-   "Map the track and internal opening preoperatively with examination under anaesthesia and pelvic MRI",
-   "Assess sphincter function and continence, including anorectal manometry, before dividing any sphincter",
-   "Manage within a colorectal surgical service, particularly for recurrent or complex disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anal_fistula-pathway",
-   "title": "Anal fistula: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most fistulae follow the cryptoglandular hypothesis: infection of an anal gland in the intersphincteric plane drains and leaves a chronic epithelialised track between the anal canal and the perianal skin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Multiple, complex, or non-healing fistulae suggesting Crohn's disease or immunosuppression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination under anaesthesia with gentle probing to define the track and internal opening, MRI of the pelvis and anal canal to map complex tracks and secondary extensions, Endoanal ultrasound, with or without hydrogen"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Drain any associated abscess promptly and place a loose seton to control sepsis before definitive repair"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing fistulotomy on a high transsphincteric track and causing faecal incontinence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anal fistula."
-  }
- ],
- "tables": [
-  {
-   "id": "anal_fistula-matrix",
-   "title": "Anal fistula: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most fistulae follow the cryptoglandular hypothesis: infection of an anal gland in the intersphincteric plane drains and leaves a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Colorectal / Pelvic floor",
+  "specialty": "Colorectal Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most fistulae follow the cryptoglandular hypothesis: infection of an anal gland in the intersphincteric plane drains and leaves a chronic epithelialised track between the anal canal and the perianal skin",
+      "Typically presents with persistent or intermittent perianal discharge, recurrent abscesses, and a palpable indurated track with an external opening",
+      "Goodsall's rule predicts the internal opening: anteriorly placed external openings usually track radially and directly to the anal canal, whereas posterior openings tend to curve to the posterior midline",
+      "The Parks classification categorises tracks relative to the sphincter complex as intersphincteric, transsphincteric, suprasphincteric, or extrasphincteric",
+      "Complex, multiple, or atypical fistulae should prompt consideration of Crohn's disease, malignancy, tuberculosis, prior radiation, or hidradenitis suppurativa",
+      "Treatment depends on how much sphincter the track crosses: fistulotomy (lay-open) suits low simple tracks, while sphincter-preserving options (loose or cutting seton, LIFT, advancement flap, fibrin glue or plug) protect continence in high or complex tracks",
+      "Accurate mapping of the track and internal opening with MRI or endoanal ultrasound is central to avoiding recurrence and incontinence"
     ],
-    [
-     "Key Investigations",
-     "Examination under anaesthesia with gentle probing to define the track and internal opening, MRI of the pelvis and anal canal to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Most anal fistulae follow the cryptoglandular hypothesis, in which infection of an anal gland at the dentate line lodges in the intersphincteric space and forms an abscess; once this drains, a persistent epithelialised track remains, connecting the internal opening in the anal canal to an external opening on the perianal skin. Chronic inflammation, incomplete drainage, and secondary tracks perpetuate the disease. The relationship of the track to the internal and external sphincters, described by the Parks classification, determines both surgical strategy and the risk to continence. Secondary or atypical fistulae may reflect Crohn's disease, malignancy, or other specific pathology.",
+    "additionalDifferentials": [
+      "Hidradenitis suppurativa",
+      "Pilonidal sinus disease",
+      "Crohn's perianal disease",
+      "Perianal or anal canal malignancy",
+      "Infected epidermoid or sebaceous cyst",
+      "Sacrococcygeal or presacral sinus"
     ],
-    [
-     "Primary Differentials",
-     "Hidradenitis suppurativa, Pilonidal sinus disease, Crohn's perianal disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination under anaesthesia with gentle probing to define the track and internal opening",
+      "MRI of the pelvis and anal canal to map complex tracks and secondary extensions",
+      "Endoanal ultrasound, with or without hydrogen peroxide enhancement, to delineate the track and sphincters",
+      "Assessment for Crohn's disease (ileocolonoscopy) in complex or recurrent disease",
+      "Biopsy of atypical or non-healing tracks to exclude malignancy",
+      "Anorectal manometry when continence is a concern before dividing any sphincter"
     ],
-    [
-     "Management Strategy",
-     "Drain any associated abscess promptly and place a loose seton to control sepsis before definitive repair",
-     "Core treatment modality"
+    "redFlags": [
+      "Multiple, complex, or non-healing fistulae suggesting Crohn's disease or immunosuppression",
+      "Induration, irregularity, or a mass raising suspicion of underlying malignancy",
+      "Rapidly spreading perianal sepsis or systemic toxicity indicating necrotising infection",
+      "A new fistula in a patient with previous pelvic radiotherapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing fistulotomy on a high transsphincteric track and causing faecal incontinence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Simple low fistulae treated by fistulotomy generally heal well with low recurrence, but high, complex, or Crohn's-related fistulae are prone to recurrence and to disturbance of continence, often requiring staged sphincter-preserving procedures.",
+    "pitfalls": [
+      "Performing fistulotomy on a high transsphincteric track and causing faecal incontinence",
+      "Missing the internal opening or a secondary track, leading to early recurrence",
+      "Failing to recognise underlying Crohn's disease before undertaking aggressive surgery",
+      "Overlooking malignancy in a chronic, indurated, or atypical fistula"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Keighley & Williams' Surgery of the Anus, Rectum and Colon"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Drain any associated abscess promptly and place a loose seton to control sepsis before definitive repair",
+      "Treat low simple tracks by fistulotomy, which offers reliable healing with low recurrence",
+      "Use sphincter-preserving techniques for high or complex tracks, including seton, ligation of the intersphincteric fistula tract, advancement flap, or fibrin glue or plug",
+      "Manage Crohn-related fistulae with biologic therapy such as anti-tumour necrosis factor agents alongside seton drainage",
+      "Map the track and internal opening preoperatively with examination under anaesthesia and pelvic MRI",
+      "Assess sphincter function and continence, including anorectal manometry, before dividing any sphincter",
+      "Manage within a colorectal surgical service, particularly for recurrent or complex disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for anal fistula."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anal-fistula-real-image",
-   "title": "Anal fistula: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "anal_fistula-pathway",
+      "title": "Anal fistula: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most fistulae follow the cryptoglandular hypothesis: infection of an anal gland in the intersphincteric plane drains and leaves a chronic epithelialised track between the anal canal and the perianal skin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Multiple, complex, or non-healing fistulae suggesting Crohn's disease or immunosuppression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination under anaesthesia with gentle probing to define the track and internal opening, MRI of the pelvis and anal canal to map complex tracks and secondary extensions, Endoanal ultrasound, with or without hydrogen"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Drain any associated abscess promptly and place a loose seton to control sepsis before definitive repair"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing fistulotomy on a high transsphincteric track and causing faecal incontinence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anal fistula."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anal_fistula-matrix",
+      "title": "Anal fistula: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most fistulae follow the cryptoglandular hypothesis: infection of an anal gland in the intersphincteric plane drains and leaves a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination under anaesthesia with gentle probing to define the track and internal opening, MRI of the pelvis and anal canal to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hidradenitis suppurativa, Pilonidal sinus disease, Crohn's perianal disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Drain any associated abscess promptly and place a loose seton to control sepsis before definitive repair",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing fistulotomy on a high transsphincteric track and causing faecal incontinence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anal fistula."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anal_fistula-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination under anaesthesia with gentle probing",
+          "cells": [
+            {
+              "text": "Track and internal opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the pelvis and anal canal",
+          "cells": [
+            {
+              "text": "Complex tracks and secondary extensions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoanal ultrasound, with or without hydrogen peroxide enhancement",
+          "cells": [
+            {
+              "text": "Track and sphincter anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ileocolonoscopy in complex or recurrent disease",
+          "cells": [
+            {
+              "text": "Crohn disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of atypical or non-healing tracks",
+          "cells": [
+            {
+              "text": "Malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry before dividing any sphincter",
+          "cells": [
+            {
+              "text": "Continence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_fistula-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hidradenitis suppurativa",
+          "cells": [
+            {
+              "text": "Recurrent perianal abscesses in skin folds"
+            },
+            {
+              "text": "Clinical examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pilonidal sinus disease",
+          "cells": [
+            {
+              "text": "Sacrococcygeal midline sinus"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn perianal disease",
+          "cells": [
+            {
+              "text": "Complex or multiple tracks"
+            },
+            {
+              "text": "Ileocolonoscopy and MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal or anal canal malignancy",
+          "cells": [
+            {
+              "text": "Indurated or irregular track"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infected epidermoid or sebaceous cyst",
+          "cells": [
+            {
+              "text": "Cyst with discharge"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Presacral sinus",
+          "cells": [
+            {
+              "text": "Midline sinus with discharge"
+            },
+            {
+              "text": "Imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_fistula-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt drainage of abscess and loose seton",
+          "cells": [
+            {
+              "text": "Sepsis control before repair"
+            },
+            {
+              "text": "First step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fistulotomy for low simple tracks",
+          "cells": [
+            {
+              "text": "Reliable healing with low recurrence"
+            },
+            {
+              "text": "Simple tracks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sphincter-preserving techniques such as seton, ligation or advancement flap",
+          "cells": [
+            {
+              "text": "High or complex tracks"
+            },
+            {
+              "text": "Staged procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-TNF biologic therapy with seton drainage",
+          "cells": [
+            {
+              "text": "Crohn-related fistula"
+            },
+            {
+              "text": "Alongside drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative mapping with examination under anaesthesia and pelvic MRI",
+          "cells": [
+            {
+              "text": "Track definition"
+            },
+            {
+              "text": "Planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continence assessment including anorectal manometry",
+          "cells": [
+            {
+              "text": "Sphincter function"
+            },
+            {
+              "text": "Before dividing sphincter"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anal_fistula-dx-mgmt",
+      "title": "Diagnosis and management of Anal fistula",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent perianal discharge, abscesses or a palpable indurated track",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Multiple or non-healing track, induration, or rapidly spreading sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for abscess or necrotising infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EUA with probing; pelvic MRI; endoanal ultrasound; biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cryptoglandular track with no malignancy or Crohn features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Drain abscess and place a loose seton",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review Crohn fistula, hidradenitis, pilonidal sinus and malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fistulotomy for low simple tracks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sphincter-preserving repair for high or complex tracks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anti-TNF therapy for Crohn-related fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Simple low fistulae heal well; complex ones recur more often",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

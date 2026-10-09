@@ -1,175 +1,705 @@
 {
- "id": "onchocerciasis",
- "name": "Onchocerciasis (river blindness)",
- "aliases": [
-  "river blindness",
-  "Onchocerca volvulus infection",
-  "onchocerciasis",
-  "Robles disease",
-  "Mazzotti reaction"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / WHO guidance on onchocerciasis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by the filarial nematode Onchocerca volvulus, transmitted by the bite of Simulium blackflies that breed in fast-flowing rivers, hence 'river blindness'",
-   "Chronic infection produces intensely itchy dermatitis, altered skin pigmentation ('leopard skin'), skin atrophy, and firm subcutaneous nodules (onchocercomas) housing adult worms",
-   "Microfilariae migrating to the eye cause keratitis, iritis, chorioretinitis, and optic atrophy, leading to progressive and potentially irreversible blindness",
-   "The endosymbiotic bacterium Wolbachia within the worm drives much of the inflammatory response, making doxycycline for Wolbachia a useful adjunct that also sterilises adult female worms",
-   "Diagnosis is classically by skin snips examined for emerging microfilariae, supported by nodule examination and antigen/antibody or PCR testing",
-   "Ivermectin is the mainstay microfilaricidal treatment and the basis of mass drug administration control programmes, given repeatedly as it does not reliably kill adult worms",
-   "Ivermectin can precipitate a severe reaction in patients heavily co-infected with Loa loa, so loiasis must be considered in co-endemic areas before treatment"
+  "id": "onchocerciasis",
+  "name": "Onchocerciasis (river blindness)",
+  "aliases": [
+    "river blindness",
+    "Onchocerca volvulus infection",
+    "onchocerciasis",
+    "Robles disease",
+    "Mazzotti reaction"
   ],
-  "pathophysiology": "Onchocerciasis results from infection with Onchocerca volvulus. Infective larvae are introduced by biting Simulium blackflies and mature into adult worms that reside coiled within fibrous subcutaneous nodules. Adult females release large numbers of microfilariae that migrate through the skin, connective tissue, and eye. Most disease is driven not by the live microfilariae but by the inflammatory reaction to dying microfilariae and to their endosymbiotic Wolbachia bacteria, which provoke dermal and ocular inflammation. In the eye, repeated microfilarial death causes punctate then sclerosing keratitis, anterior uveitis, and posterior segment damage, culminating in blindness. In the skin, chronic inflammation produces pruritus, depigmentation, and atrophy. Killing microfilariae abruptly, as with treatment, can intensify this inflammatory response (the Mazzotti reaction).",
-  "additionalDifferentials": [
-   "Loiasis and lymphatic filariasis",
-   "Scabies and other causes of chronic pruritic dermatitis",
-   "Cutaneous leishmaniasis",
-   "Leprosy (for skin and nerve changes)",
-   "Other causes of chorioretinitis or anterior uveitis",
-   "Streptocerciasis (Mansonella streptocerca)"
-  ],
-  "additionalInvestigations": [
-   "Skin snips examined microscopically for emerging microfilariae",
-   "Palpation and examination or excision of subcutaneous nodules for adult worms",
-   "Slit-lamp examination for microfilariae and ocular inflammatory changes",
-   "Serological (Ov-16) antibody or antigen testing",
-   "PCR assays on skin snips for species confirmation",
-   "Assessment for Loa loa co-infection in co-endemic areas before treatment"
-  ],
-  "redFlags": [
-   "Ocular involvement threatening progressive or irreversible visual loss",
-   "Severe Mazzotti reaction after microfilaricidal treatment",
-   "Risk of severe reaction if ivermectin is given with high Loa loa co-infection",
-   "Extensive sight-threatening keratitis or optic atrophy"
-  ],
-  "prognosis": "With repeated ivermectin therapy and vector control, transmission and morbidity can be greatly reduced; however, established ocular damage and optic atrophy are irreversible, and untreated chronic infection remains a leading infective cause of blindness.",
-  "pitfalls": [
-   "Giving ivermectin without excluding heavy Loa loa co-infection in co-endemic regions",
-   "Expecting a single course of ivermectin to cure infection despite persistence of adult worms",
-   "Underestimating the sight-threatening potential of ocular microfilariae",
-   "Failing to anticipate and manage the Mazzotti reaction after treatment"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "WHO guidance on onchocerciasis control"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Microfilaricidal treatment with ivermectin is the mainstay, given repeatedly at intervals because it does not reliably kill the adult worms",
-   "Add doxycycline to target the endosymbiotic Wolbachia, which sterilises and eventually kills adult female worms and dampens the inflammatory reaction",
-   "Exclude Loa loa co-infection in co-endemic areas before ivermectin, given the risk of severe encephalopathic reactions with high loiasis microfilaraemia",
-   "Provide symptomatic dermatological care for pruritus and dermatitis with antihistamines and emollients",
-   "Undertake regular slit-lamp ophthalmic surveillance for keratitis and uveitis, treating ocular inflammation to limit progression to irreversible blindness",
-   "Excise symptomatic subcutaneous nodules (onchocercomas), particularly those on the head",
-   "Support mass drug administration and Simulium vector control as the basis of community-level transmission reduction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "onchocerciasis-pathway",
-   "title": "Onchocerciasis (river blindness): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by the filarial nematode Onchocerca volvulus, transmitted by the bite of Simulium blackflies that breed in fast-flowing rivers, hence 'river blindness'",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ocular involvement threatening progressive or irreversible visual loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin snips examined microscopically for emerging microfilariae, Palpation and examination or excision of subcutaneous nodules for adult worms, Slit-lamp examination for microfilariae and ocular inflammatory changes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Microfilaricidal treatment with ivermectin is the mainstay, given repeatedly at intervals because it does not reliably kill the adult worms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving ivermectin without excluding heavy Loa loa co-infection in co-endemic regions"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of onchocerciasis (river blindness)."
-  }
- ],
- "tables": [
-  {
-   "id": "onchocerciasis-matrix",
-   "title": "Onchocerciasis (river blindness): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by the filarial nematode Onchocerca volvulus, transmitted by the bite of Simulium blackflies that breed in fast-flowing",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / WHO guidance on onchocerciasis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by the filarial nematode Onchocerca volvulus, transmitted by the bite of Simulium blackflies that breed in fast-flowing rivers, hence 'river blindness'",
+      "Chronic infection produces intensely itchy dermatitis, altered skin pigmentation ('leopard skin'), skin atrophy, and firm subcutaneous nodules (onchocercomas) housing adult worms",
+      "Microfilariae migrating to the eye cause keratitis, iritis, chorioretinitis, and optic atrophy, leading to progressive and potentially irreversible blindness",
+      "The endosymbiotic bacterium Wolbachia within the worm drives much of the inflammatory response, making doxycycline for Wolbachia a useful adjunct that also sterilises adult female worms",
+      "Diagnosis is classically by skin snips examined for emerging microfilariae, supported by nodule examination and antigen/antibody or PCR testing",
+      "Ivermectin is the mainstay microfilaricidal treatment and the basis of mass drug administration control programmes, given repeatedly as it does not reliably kill adult worms",
+      "Ivermectin can precipitate a severe reaction in patients heavily co-infected with Loa loa, so loiasis must be considered in co-endemic areas before treatment"
     ],
-    [
-     "Key Investigations",
-     "Skin snips examined microscopically for emerging microfilariae, Palpation and examination or excision of subcutaneous nodules for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Onchocerciasis results from infection with Onchocerca volvulus. Infective larvae are introduced by biting Simulium blackflies and mature into adult worms that reside coiled within fibrous subcutaneous nodules. Adult females release large numbers of microfilariae that migrate through the skin, connective tissue, and eye. Most disease is driven not by the live microfilariae but by the inflammatory reaction to dying microfilariae and to their endosymbiotic Wolbachia bacteria, which provoke dermal and ocular inflammation. In the eye, repeated microfilarial death causes punctate then sclerosing keratitis, anterior uveitis, and posterior segment damage, culminating in blindness. In the skin, chronic inflammation produces pruritus, depigmentation, and atrophy. Killing microfilariae abruptly, as with treatment, can intensify this inflammatory response (the Mazzotti reaction).",
+    "additionalDifferentials": [
+      "Loiasis and lymphatic filariasis",
+      "Scabies and other causes of chronic pruritic dermatitis",
+      "Cutaneous leishmaniasis",
+      "Leprosy (for skin and nerve changes)",
+      "Other causes of chorioretinitis or anterior uveitis",
+      "Streptocerciasis (Mansonella streptocerca)"
     ],
-    [
-     "Primary Differentials",
-     "Loiasis and lymphatic filariasis, Scabies and other causes of chronic pruritic dermatitis, Cutaneous leishmaniasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin snips examined microscopically for emerging microfilariae",
+      "Palpation and examination or excision of subcutaneous nodules for adult worms",
+      "Slit-lamp examination for microfilariae and ocular inflammatory changes",
+      "Serological (Ov-16) antibody or antigen testing",
+      "PCR assays on skin snips for species confirmation",
+      "Assessment for Loa loa co-infection in co-endemic areas before treatment"
     ],
-    [
-     "Management Strategy",
-     "Microfilaricidal treatment with ivermectin is the mainstay, given repeatedly at intervals because it does not reliably kill the",
-     "Core treatment modality"
+    "redFlags": [
+      "Ocular involvement threatening progressive or irreversible visual loss",
+      "Severe Mazzotti reaction after microfilaricidal treatment",
+      "Risk of severe reaction if ivermectin is given with high Loa loa co-infection",
+      "Extensive sight-threatening keratitis or optic atrophy"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving ivermectin without excluding heavy Loa loa co-infection in co-endemic regions",
-     "Prevent diagnostic or management error"
+    "prognosis": "With repeated ivermectin therapy and vector control, transmission and morbidity can be greatly reduced; however, established ocular damage and optic atrophy are irreversible, and untreated chronic infection remains a leading infective cause of blindness.",
+    "pitfalls": [
+      "Giving ivermectin without excluding heavy Loa loa co-infection in co-endemic regions",
+      "Expecting a single course of ivermectin to cure infection despite persistence of adult worms",
+      "Underestimating the sight-threatening potential of ocular microfilariae",
+      "Failing to anticipate and manage the Mazzotti reaction after treatment"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "WHO guidance on onchocerciasis control"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Microfilaricidal treatment with ivermectin is the mainstay, given repeatedly at intervals because it does not reliably kill the adult worms",
+      "Add doxycycline to target the endosymbiotic Wolbachia, which sterilises and eventually kills adult female worms and dampens the inflammatory reaction",
+      "Exclude Loa loa co-infection in co-endemic areas before ivermectin, given the risk of severe encephalopathic reactions with high loiasis microfilaraemia",
+      "Provide symptomatic dermatological care for pruritus and dermatitis with antihistamines and emollients",
+      "Undertake regular slit-lamp ophthalmic surveillance for keratitis and uveitis, treating ocular inflammation to limit progression to irreversible blindness",
+      "Excise symptomatic subcutaneous nodules (onchocercomas), particularly those on the head",
+      "Support mass drug administration and Simulium vector control as the basis of community-level transmission reduction"
     ]
-   ],
-   "caption": "Overview comparison matrix for onchocerciasis (river blindness)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "onchocerciasis-real-image",
-   "title": "Onchocerciasis (river blindness): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "onchocerciasis-pathway",
+      "title": "Onchocerciasis (river blindness): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by the filarial nematode Onchocerca volvulus, transmitted by the bite of Simulium blackflies that breed in fast-flowing rivers, hence 'river blindness'",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ocular involvement threatening progressive or irreversible visual loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin snips examined microscopically for emerging microfilariae, Palpation and examination or excision of subcutaneous nodules for adult worms, Slit-lamp examination for microfilariae and ocular inflammatory changes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Microfilaricidal treatment with ivermectin is the mainstay, given repeatedly at intervals because it does not reliably kill the adult worms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving ivermectin without excluding heavy Loa loa co-infection in co-endemic regions"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of onchocerciasis (river blindness)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "onchocerciasis-matrix",
+      "title": "Onchocerciasis (river blindness): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by the filarial nematode Onchocerca volvulus, transmitted by the bite of Simulium blackflies that breed in fast-flowing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin snips examined microscopically for emerging microfilariae, Palpation and examination or excision of subcutaneous nodules for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Loiasis and lymphatic filariasis, Scabies and other causes of chronic pruritic dermatitis, Cutaneous leishmaniasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Microfilaricidal treatment with ivermectin is the mainstay, given repeatedly at intervals because it does not reliably kill the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving ivermectin without excluding heavy Loa loa co-infection in co-endemic regions",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for onchocerciasis (river blindness)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / WHO guidance on onchocerciasis",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 218-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "onchocerciasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin snips examined microscopically",
+          "cells": [
+            {
+              "text": "Emerging microfilariae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palpation or excision of subcutaneous nodules",
+          "cells": [
+            {
+              "text": "Adult worms within the nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Microfilariae and ocular inflammatory change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ov-16 antibody or antigen testing",
+          "cells": [
+            {
+              "text": "Antibody or antigen to Onchocerca"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR on skin snips",
+          "cells": [
+            {
+              "text": "Species confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loa loa assessment in co-endemic areas",
+          "cells": [
+            {
+              "text": "Co-infection, to be excluded before treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "onchocerciasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ivermectin, after Loa loa exclusion",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Microfilaricidal mainstay, given repeatedly because it does not reliably kill adult worms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Targets the endosymbiotic Wolbachia; sterilises and eventually kills adult female worms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic skin care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Antihistamines and emollients for pruritus and dermatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision of symptomatic nodules",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Onchocercomas, particularly on the head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surveillance",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Regular slit-lamp review; treat keratitis and uveitis to limit irreversible blindness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Community-level control",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Mass drug administration and Simulium vector control"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "onchocerciasis-ddx",
+      "kind": "ddx",
+      "title": "Characteristics of the filariae",
+      "rowHeader": "Organism",
+      "columns": [
+        "Periodicity",
+        "Distribution",
+        "Vector",
+        "Location of adult",
+        "Microfilarial location",
+        "Sheath"
+      ],
+      "rows": [
+        {
+          "parameter": "Wuchereria bancrofti (nocturnal)",
+          "cells": [
+            {
+              "text": "Nocturnal"
+            },
+            {
+              "text": "Cosmopolitan areas worldwide, including South America, Africa, southern Asia, Papua New Guinea, China, Indonesia"
+            },
+            {
+              "text": "Culex, Anopheles (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "W. bancrofti (subperiodic)",
+          "cells": [
+            {
+              "text": "Subperiodic"
+            },
+            {
+              "text": "Eastern Pacific"
+            },
+            {
+              "text": "Aedes (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Brugia malayi (nocturnal)",
+          "cells": [
+            {
+              "text": "Nocturnal"
+            },
+            {
+              "text": "Southeast Asia, Indonesia, India"
+            },
+            {
+              "text": "Mansonia, Anopheles (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B. malayi (subperiodic)",
+          "cells": [
+            {
+              "text": "Subperiodic"
+            },
+            {
+              "text": "Indonesia, Southeast Asia"
+            },
+            {
+              "text": "Coquillettidia, Mansonia (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B. timori",
+          "cells": [
+            {
+              "text": "Nocturnal"
+            },
+            {
+              "text": "Indonesia"
+            },
+            {
+              "text": "Anopheles (mosquitoes)"
+            },
+            {
+              "text": "Lymphatic tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loa loa",
+          "cells": [
+            {
+              "text": "Diurnal"
+            },
+            {
+              "text": "West and Central Africa"
+            },
+            {
+              "text": "Chrysops (deerflies)"
+            },
+            {
+              "text": "Subcutaneous tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Onchocerca volvulus",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "South and Central America, Africa"
+            },
+            {
+              "text": "Simulium (blackflies)"
+            },
+            {
+              "text": "Subcutaneous tissue"
+            },
+            {
+              "text": "Skin, eye"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mansonella ozzardi",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "South and Central America (Culicoides, midges); Caribbean (Simulium, blackflies)"
+            },
+            {
+              "text": "Not stated separately in the source row"
+            },
+            {
+              "text": "Undetermined site"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. perstans",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "South and Central America, Africa"
+            },
+            {
+              "text": "Culicoides (midges)"
+            },
+            {
+              "text": "Body cavities, mesentery, perirenal tissue"
+            },
+            {
+              "text": "Blood"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "M. streptocerca",
+          "cells": [
+            {
+              "text": "None"
+            },
+            {
+              "text": "West and Central Africa"
+            },
+            {
+              "text": "Culicoides (midges)"
+            },
+            {
+              "text": "Subcutaneous tissue"
+            },
+            {
+              "text": "Skin"
+            },
+            {
+              "text": "-"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "For M. ozzardi the vector names appear inside the distribution cell in the source."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "onchocerciasis-dx-mgmt",
+      "title": "Diagnosis and management of Onchocerciasis (river blindness)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Itchy dermatitis and nodules from an endemic area; onchocerciasis suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (ocular involvement, severe Mazzotti reaction or sight-threatening keratitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: ophthalmology review for keratitis, uveitis or optic atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin snips, slit-lamp, Ov-16 serology and PCR; Loa loa check before treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are microfilariae found on skin snips or slit-lamp examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider loiasis, scabies, cutaneous leishmaniasis or other filariasis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ivermectin as the microfilaricidal mainstay, after Loa loa exclusion, given repeatedly",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Doxycycline to target Wolbachia, sterilising adult female worms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antihistamines and emollients for pruritus; excise symptomatic onchocercomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular slit-lamp surveillance and treatment of ocular inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ivermectin and vector control cut transmission; established blindness is irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

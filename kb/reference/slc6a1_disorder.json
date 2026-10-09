@@ -1,172 +1,450 @@
 {
- "id": "slc6a1_disorder",
- "name": "SLC6A1-related disorder (GAT1)",
- "aliases": [
-  "SLC6A1",
-  "GAT1 deficiency",
-  "GABA transporter 1 disorder",
-  "SLC6A1-related myoclonic-atonic epilepsy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Clinical Genetics / Neurodevelopmental",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents with mild to moderate intellectual disability and a characteristic epilepsy beginning in early childhood",
-   "Myoclonic-atonic epilepsy (Doose-like), atypical absences and generalised seizures are the usual pattern",
-   "Early development may be relatively preserved before seizure onset, followed by developmental slowing or regression",
-   "Autism spectrum features, behavioural difficulties and hypotonia are frequently present",
-   "Caused by heterozygous loss-of-function variants in SLC6A1, usually de novo and autosomal dominant, encoding the GABA transporter GAT1",
-   "EEG commonly shows generalised spike-and-wave discharges consistent with a generalised epilepsy",
-   "Movement problems such as ataxia and tremor may accompany the epilepsy"
+  "id": "slc6a1_disorder",
+  "name": "SLC6A1-related disorder (GAT1)",
+  "aliases": [
+    "SLC6A1",
+    "GAT1 deficiency",
+    "GABA transporter 1 disorder",
+    "SLC6A1-related myoclonic-atonic epilepsy"
   ],
-  "pathophysiology": "SLC6A1 encodes GAT1, the principal transporter that clears the inhibitory neurotransmitter GABA from the synaptic cleft into neurons and astrocytes, terminating inhibitory signalling and recycling GABA. Heterozygous loss-of-function variants reduce transporter function through haploinsufficiency or dominant-negative effects, disturbing the normal spatial and temporal control of GABAergic inhibition. Dysregulated inhibitory neurotransmission destabilises cortical and thalamocortical networks, producing the generalised epilepsy, and impairs the balance of excitation and inhibition needed for normal cognitive development. The resulting picture combines myoclonic-atonic epilepsy with intellectual disability and autistic features.",
-  "additionalDifferentials": [
-   "Myoclonic-atonic epilepsy (Doose syndrome) of other cause",
-   "Childhood absence epilepsy",
-   "Lennox-Gastaut syndrome",
-   "SYNGAP1-related disorder",
-   "Other genetic generalised epilepsies with intellectual disability",
-   "Autism spectrum disorder with epilepsy"
-  ],
-  "additionalInvestigations": [
-   "EEG to characterise generalised spike-and-wave and other epileptiform activity",
-   "Brain MRI, usually normal or non-specific",
-   "Neuropsychological and autism assessment",
-   "Gene panel or exome sequencing including SLC6A1",
-   "Chromosomal microarray to detect deletions involving the locus"
-  ],
-  "redFlags": [
-   "Frequent drop attacks or myoclonic-atonic seizures causing falls",
-   "Developmental regression coinciding with seizure onset",
-   "Status epilepticus, including atypical absence status",
-   "Behavioural deterioration affecting safety"
-  ],
-  "prognosis": "Most individuals have mild to moderate intellectual disability with epilepsy that is variably responsive to treatment; seizures may improve over time in some. Long-term outcome depends on seizure control and cognitive impact, and management is supportive and multidisciplinary.",
-  "pitfalls": [
-   "Diagnosing generic Doose syndrome and not testing for SLC6A1",
-   "Overlooking pre-seizure developmental concerns because early milestones seemed adequate",
-   "Assuming a normal MRI excludes a genetic epilepsy",
-   "Using vigabatrin-type strategies without recognising the underlying GABAergic transport defect"
-  ],
-  "references": [
-   "GeneReviews: SLC6A1-Related Disorder",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control the myoclonic-atonic and absence seizures with broad-spectrum antiseizure medication such as valproate, ethosuximide or lamotrigine, avoiding agents that aggravate generalised seizures",
-   "Provide neurodevelopmental support with special education, behavioural therapy and speech and language therapy for the intellectual disability and autism features",
-   "Offer physiotherapy and occupational therapy for hypotonia and motor difficulties",
-   "Consider ketogenic dietary therapy in drug-resistant seizures",
-   "Undertake regular EEG monitoring and review of seizure control over time",
-   "Offer genetic counselling for the usually de novo autosomal dominant variant, with parental testing and recurrence-risk advice, within multidisciplinary paediatric neurology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "slc6a1_disorder-pathway",
-   "title": "SLC6A1-related disorder (GAT1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents with mild to moderate intellectual disability and a characteristic epilepsy beginning in early childhood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Frequent drop attacks or myoclonic-atonic seizures causing falls",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: EEG to characterise generalised spike-and-wave and other epileptiform activity, Brain MRI, usually normal or non-specific, Neuropsychological and autism assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control the myoclonic-atonic and absence seizures with broad-spectrum antiseizure medication such as valproate, ethosuximide or lamotrigine, avoiding agents that aggravate generalised seizures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing generic Doose syndrome and not testing for SLC6A1"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of slc6a1-related disorder (gat1)."
-  }
- ],
- "tables": [
-  {
-   "id": "slc6a1_disorder-matrix",
-   "title": "SLC6A1-related disorder (GAT1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents with mild to moderate intellectual disability and a characteristic epilepsy beginning in early childhood",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Clinical Genetics / Neurodevelopmental",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents with mild to moderate intellectual disability and a characteristic epilepsy beginning in early childhood",
+      "Myoclonic-atonic epilepsy (Doose-like), atypical absences and generalised seizures are the usual pattern",
+      "Early development may be relatively preserved before seizure onset, followed by developmental slowing or regression",
+      "Autism spectrum features, behavioural difficulties and hypotonia are frequently present",
+      "Caused by heterozygous loss-of-function variants in SLC6A1, usually de novo and autosomal dominant, encoding the GABA transporter GAT1",
+      "EEG commonly shows generalised spike-and-wave discharges consistent with a generalised epilepsy",
+      "Movement problems such as ataxia and tremor may accompany the epilepsy"
     ],
-    [
-     "Key Investigations",
-     "EEG to characterise generalised spike-and-wave and other epileptiform activity, Brain MRI, usually normal or non-specific,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SLC6A1 encodes GAT1, the principal transporter that clears the inhibitory neurotransmitter GABA from the synaptic cleft into neurons and astrocytes, terminating inhibitory signalling and recycling GABA. Heterozygous loss-of-function variants reduce transporter function through haploinsufficiency or dominant-negative effects, disturbing the normal spatial and temporal control of GABAergic inhibition. Dysregulated inhibitory neurotransmission destabilises cortical and thalamocortical networks, producing the generalised epilepsy, and impairs the balance of excitation and inhibition needed for normal cognitive development. The resulting picture combines myoclonic-atonic epilepsy with intellectual disability and autistic features.",
+    "additionalDifferentials": [
+      "Myoclonic-atonic epilepsy (Doose syndrome) of other cause",
+      "Childhood absence epilepsy",
+      "Lennox-Gastaut syndrome",
+      "SYNGAP1-related disorder",
+      "Other genetic generalised epilepsies with intellectual disability",
+      "Autism spectrum disorder with epilepsy"
     ],
-    [
-     "Primary Differentials",
-     "Myoclonic-atonic epilepsy (Doose syndrome) of other cause, Childhood absence epilepsy, Lennox-Gastaut syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "EEG to characterise generalised spike-and-wave and other epileptiform activity",
+      "Brain MRI, usually normal or non-specific",
+      "Neuropsychological and autism assessment",
+      "Gene panel or exome sequencing including SLC6A1",
+      "Chromosomal microarray to detect deletions involving the locus"
     ],
-    [
-     "Management Strategy",
-     "Control the myoclonic-atonic and absence seizures with broad-spectrum antiseizure medication such as valproate, ethosuximide or",
-     "Core treatment modality"
+    "redFlags": [
+      "Frequent drop attacks or myoclonic-atonic seizures causing falls",
+      "Developmental regression coinciding with seizure onset",
+      "Status epilepticus, including atypical absence status",
+      "Behavioural deterioration affecting safety"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing generic Doose syndrome and not testing for SLC6A1",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most individuals have mild to moderate intellectual disability with epilepsy that is variably responsive to treatment; seizures may improve over time in some. Long-term outcome depends on seizure control and cognitive impact, and management is supportive and multidisciplinary.",
+    "pitfalls": [
+      "Diagnosing generic Doose syndrome and not testing for SLC6A1",
+      "Overlooking pre-seizure developmental concerns because early milestones seemed adequate",
+      "Assuming a normal MRI excludes a genetic epilepsy",
+      "Using vigabatrin-type strategies without recognising the underlying GABAergic transport defect"
+    ],
+    "references": [
+      "GeneReviews: SLC6A1-Related Disorder",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control the myoclonic-atonic and absence seizures with broad-spectrum antiseizure medication such as valproate, ethosuximide or lamotrigine, avoiding agents that aggravate generalised seizures",
+      "Provide neurodevelopmental support with special education, behavioural therapy and speech and language therapy for the intellectual disability and autism features",
+      "Offer physiotherapy and occupational therapy for hypotonia and motor difficulties",
+      "Consider ketogenic dietary therapy in drug-resistant seizures",
+      "Undertake regular EEG monitoring and review of seizure control over time",
+      "Offer genetic counselling for the usually de novo autosomal dominant variant, with parental testing and recurrence-risk advice, within multidisciplinary paediatric neurology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for slc6a1-related disorder (gat1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "slc6a1-disorder-real-image",
-   "title": "SLC6A1-related disorder (GAT1): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "slc6a1_disorder-pathway",
+      "title": "SLC6A1-related disorder (GAT1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents with mild to moderate intellectual disability and a characteristic epilepsy beginning in early childhood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Frequent drop attacks or myoclonic-atonic seizures causing falls",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: EEG to characterise generalised spike-and-wave and other epileptiform activity, Brain MRI, usually normal or non-specific, Neuropsychological and autism assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control the myoclonic-atonic and absence seizures with broad-spectrum antiseizure medication such as valproate, ethosuximide or lamotrigine, avoiding agents that aggravate generalised seizures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing generic Doose syndrome and not testing for SLC6A1"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of slc6a1-related disorder (gat1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "slc6a1_disorder-matrix",
+      "title": "SLC6A1-related disorder (GAT1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents with mild to moderate intellectual disability and a characteristic epilepsy beginning in early childhood",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "EEG to characterise generalised spike-and-wave and other epileptiform activity, Brain MRI, usually normal or non-specific,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Myoclonic-atonic epilepsy (Doose syndrome) of other cause, Childhood absence epilepsy, Lennox-Gastaut syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control the myoclonic-atonic and absence seizures with broad-spectrum antiseizure medication such as valproate, ethosuximide or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing generic Doose syndrome and not testing for SLC6A1",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for slc6a1-related disorder (gat1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "slc6a1_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Generalised spike-and-wave and other epileptiform activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Usually normal or non-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological and autism assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability and autistic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel or exome sequencing including SLC6A1",
+          "cells": [
+            {
+              "text": "Heterozygous loss-of-function variants, usually de novo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Deletions involving the SLC6A1 locus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc6a1_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myoclonic-atonic epilepsy (Doose syndrome) of other cause",
+          "cells": [
+            {
+              "text": "Generic Doose syndrome should not be diagnosed without testing SLC6A1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Childhood absence epilepsy",
+          "cells": [
+            {
+              "text": "Absences occur here alongside intellectual disability and autistic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autism spectrum disorder with epilepsy",
+          "cells": [
+            {
+              "text": "Autism features and behavioural difficulties are frequent here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "slc6a1_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Broad-spectrum antiseizure medication",
+          "cells": [
+            {
+              "text": "Valproate, ethosuximide or lamotrigine; avoid agents that aggravate generalised seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Special education, behavioural therapy and speech and language therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "For hypotonia and motor difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic dietary therapy",
+          "cells": [
+            {
+              "text": "For drug-resistant seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular EEG monitoring",
+          "cells": [
+            {
+              "text": "Review of seizure control over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually de novo autosomal dominant variant; parental testing and recurrence-risk advice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "slc6a1_disorder-dx-mgmt",
+      "title": "Diagnosis and management of SLC6A1-related disorder (GAT1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Myoclonic-atonic or absence epilepsy with intellectual disability and autistic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (drop attacks, regression with seizures, status epilepticus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of status epilepticus or drop attacks causing falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG; gene panel or exome including SLC6A1; microarray; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC6A1 sequencing show a heterozygous loss-of-function variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other genetic generalised epilepsies or SYNGAP1-related disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure medication such as valproate, ethosuximide or lamotrigine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neurodevelopmental support: special education, behavioural and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ketogenic diet for drug-resistant seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and parental testing for the de novo variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild to moderate intellectual disability; seizures may improve over time in some",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

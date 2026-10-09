@@ -1,175 +1,482 @@
 {
- "id": "longitudinal_melanonychia",
- "name": "Longitudinal melanonychia",
- "aliases": [
-  "melanonychia striata",
-  "longitudinal pigmented band",
-  "melanonychia"
- ],
- "class": "non_infective",
- "system": "Dermatology / Nail",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Longitudinal melanonychia is a brown-to-black pigmented band running lengthwise along the nail, caused by increased melanin deposition within the plate",
-   "It has many benign causes, including racial or ethnic pigmentation (often multiple nails in darker skin), melanocytic activation, drugs, trauma, and benign naevi",
-   "The crucial task is to separate benign bands from those arising from a subungual melanoma, especially when a single nail is involved in a fair-skinned adult",
-   "Worrying features can be remembered with the ABCDEF guide (age and ethnicity, band characteristics, change, digit involved, extension of pigment, family or personal history)",
-   "Hutchinson sign, spread of pigment onto the proximal or lateral nail fold, is an important warning sign for melanoma, though a pseudo-Hutchinson sign can mislead",
-   "Onychoscopy helps by showing regular parallel lines in benign activation versus irregular, variably coloured lines with disrupted parallelism in melanoma",
-   "A suspicious band requires a nail matrix biopsy for histology, as pigment alone cannot reliably distinguish benign from malignant"
+  "id": "longitudinal_melanonychia",
+  "name": "Longitudinal melanonychia",
+  "aliases": [
+    "melanonychia striata",
+    "longitudinal pigmented band",
+    "melanonychia"
   ],
-  "pathophysiology": "Longitudinal melanonychia occurs when melanin is deposited into the developing nail plate by melanocytes in the nail matrix, producing a pigmented streak that grows out along the length of the nail. The pigment may reflect simple activation of matrix melanocytes without an increase in their number, as seen with racial pigmentation, drugs, trauma, or inflammation, or a true increase in melanocytes such as a benign naevus or, importantly, a melanoma. Because a malignant melanocytic proliferation in the matrix can present in exactly the same way as a benign band, the pattern, regularity, and behaviour of the pigment, rather than its mere presence, guide the assessment.",
-  "additionalDifferentials": [
-   "Benign melanocytic activation (racial, drug-induced, traumatic, inflammatory)",
-   "Nail matrix naevus",
-   "Subungual melanoma",
-   "Subungual haematoma (usually non-longitudinal and moves out with growth)",
-   "Fungal or bacterial pigmentation (for example Pseudomonas or dematiaceous fungi)",
-   "Pigmentation from systemic disease or endocrinopathy",
-   "Exogenous staining of the nail"
-  ],
-  "additionalInvestigations": [
-   "Onychoscopy (dermoscopy of the nail) to assess the pattern and regularity of pigmented lines",
-   "Assessment for Hutchinson sign and periungual pigment spread",
-   "Nail matrix biopsy for histology of a suspicious or changing band",
-   "Photographic documentation to monitor change over time",
-   "Review of drug history and examination of other nails and skin",
-   "Mycology or microbiology if an infective pigment source is suspected"
-  ],
-  "redFlags": [
-   "A single broad, irregular, or widening band in an adult, particularly of the thumb, index finger, or great toe",
-   "Hutchinson sign with pigment extending onto the nail folds",
-   "Variegated colour, blurred borders, or loss of parallelism on onychoscopy",
-   "Associated nail dystrophy, bleeding, or a nodule suggesting invasive melanoma",
-   "Rapid change in the width or colour of an established band"
-  ],
-  "prognosis": "Most bands are benign and require only monitoring, but subungual melanoma carries a serious prognosis that worsens with delayed diagnosis, so appropriately timed biopsy of suspicious lesions is critical to outcome.",
-  "pitfalls": [
-   "Reassuring a patient without biopsy when a single band shows suspicious features",
-   "Relying on pigment colour alone rather than pattern, change, and histology",
-   "Misinterpreting a pseudo-Hutchinson sign or, conversely, dismissing a true one",
-   "Assuming multiple bands in darker skin are always benign without examining each nail",
-   "Delaying matrix biopsy for fear of nail deformity in a potentially malignant lesion"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Baran and Dawber's Diseases of the Nails and their Management"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stratify risk clinically and with onychoscopy using the ABCDEF features and the Hutchinson sign to separate benign bands from possible subungual melanoma",
-   "Reassure and observe benign patterns such as racial pigmentation or multiple-nail involvement, using photographic documentation to monitor for change",
-   "Identify and withdraw provoking causes such as offending drugs, and address trauma or inflammation driving melanocytic activation",
-   "Perform a nail matrix biopsy for histology of any single, changing, irregular or worrying band to exclude melanoma",
-   "Refer confirmed subungual melanoma for definitive surgical excision and oncological staging",
-   "Arrange dermatology referral and timely re-review of suspicious or evolving lesions, escalating to biopsy rather than delaying"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "longitudinal_melanonychia-pathway",
-   "title": "Longitudinal melanonychia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Longitudinal melanonychia is a brown-to-black pigmented band running lengthwise along the nail, caused by increased melanin deposition within the plate",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A single broad, irregular, or widening band in an adult, particularly of the thumb, index finger, or great toe",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Onychoscopy (dermoscopy of the nail) to assess the pattern and regularity of pigmented lines, Assessment for Hutchinson sign and periungual pigment spread, Nail matrix biopsy for histology of a suspicious or changing band"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stratify risk clinically and with onychoscopy using the ABCDEF features and the Hutchinson sign to separate benign bands from possible subungual melanoma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reassuring a patient without biopsy when a single band shows suspicious features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of longitudinal melanonychia."
-  }
- ],
- "tables": [
-  {
-   "id": "longitudinal_melanonychia-matrix",
-   "title": "Longitudinal melanonychia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Longitudinal melanonychia is a brown-to-black pigmented band running lengthwise along the nail, caused by increased melanin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Nail",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Longitudinal melanonychia is a brown-to-black pigmented band running lengthwise along the nail, caused by increased melanin deposition within the plate",
+      "It has many benign causes, including racial or ethnic pigmentation (often multiple nails in darker skin), melanocytic activation, drugs, trauma, and benign naevi",
+      "The crucial task is to separate benign bands from those arising from a subungual melanoma, especially when a single nail is involved in a fair-skinned adult",
+      "Worrying features can be remembered with the ABCDEF guide (age and ethnicity, band characteristics, change, digit involved, extension of pigment, family or personal history)",
+      "Hutchinson sign, spread of pigment onto the proximal or lateral nail fold, is an important warning sign for melanoma, though a pseudo-Hutchinson sign can mislead",
+      "Onychoscopy helps by showing regular parallel lines in benign activation versus irregular, variably coloured lines with disrupted parallelism in melanoma",
+      "A suspicious band requires a nail matrix biopsy for histology, as pigment alone cannot reliably distinguish benign from malignant"
     ],
-    [
-     "Key Investigations",
-     "Onychoscopy (dermoscopy of the nail) to assess the pattern and regularity of pigmented lines, Assessment for Hutchinson sign and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Longitudinal melanonychia occurs when melanin is deposited into the developing nail plate by melanocytes in the nail matrix, producing a pigmented streak that grows out along the length of the nail. The pigment may reflect simple activation of matrix melanocytes without an increase in their number, as seen with racial pigmentation, drugs, trauma, or inflammation, or a true increase in melanocytes such as a benign naevus or, importantly, a melanoma. Because a malignant melanocytic proliferation in the matrix can present in exactly the same way as a benign band, the pattern, regularity, and behaviour of the pigment, rather than its mere presence, guide the assessment.",
+    "additionalDifferentials": [
+      "Benign melanocytic activation (racial, drug-induced, traumatic, inflammatory)",
+      "Nail matrix naevus",
+      "Subungual melanoma",
+      "Subungual haematoma (usually non-longitudinal and moves out with growth)",
+      "Fungal or bacterial pigmentation (for example Pseudomonas or dematiaceous fungi)",
+      "Pigmentation from systemic disease or endocrinopathy",
+      "Exogenous staining of the nail"
     ],
-    [
-     "Primary Differentials",
-     "Benign melanocytic activation (racial, drug-induced, traumatic, inflammatory), Nail matrix naevus, Subungual melanoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Onychoscopy (dermoscopy of the nail) to assess the pattern and regularity of pigmented lines",
+      "Assessment for Hutchinson sign and periungual pigment spread",
+      "Nail matrix biopsy for histology of a suspicious or changing band",
+      "Photographic documentation to monitor change over time",
+      "Review of drug history and examination of other nails and skin",
+      "Mycology or microbiology if an infective pigment source is suspected"
     ],
-    [
-     "Management Strategy",
-     "Stratify risk clinically and with onychoscopy using the ABCDEF features and the Hutchinson sign to separate benign bands from",
-     "Core treatment modality"
+    "redFlags": [
+      "A single broad, irregular, or widening band in an adult, particularly of the thumb, index finger, or great toe",
+      "Hutchinson sign with pigment extending onto the nail folds",
+      "Variegated colour, blurred borders, or loss of parallelism on onychoscopy",
+      "Associated nail dystrophy, bleeding, or a nodule suggesting invasive melanoma",
+      "Rapid change in the width or colour of an established band"
     ],
-    [
-     "Clinical Pitfall",
-     "Reassuring a patient without biopsy when a single band shows suspicious features",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most bands are benign and require only monitoring, but subungual melanoma carries a serious prognosis that worsens with delayed diagnosis, so appropriately timed biopsy of suspicious lesions is critical to outcome.",
+    "pitfalls": [
+      "Reassuring a patient without biopsy when a single band shows suspicious features",
+      "Relying on pigment colour alone rather than pattern, change, and histology",
+      "Misinterpreting a pseudo-Hutchinson sign or, conversely, dismissing a true one",
+      "Assuming multiple bands in darker skin are always benign without examining each nail",
+      "Delaying matrix biopsy for fear of nail deformity in a potentially malignant lesion"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Baran and Dawber's Diseases of the Nails and their Management"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stratify risk clinically and with onychoscopy using the ABCDEF features and the Hutchinson sign to separate benign bands from possible subungual melanoma",
+      "Reassure and observe benign patterns such as racial pigmentation or multiple-nail involvement, using photographic documentation to monitor for change",
+      "Identify and withdraw provoking causes such as offending drugs, and address trauma or inflammation driving melanocytic activation",
+      "Perform a nail matrix biopsy for histology of any single, changing, irregular or worrying band to exclude melanoma",
+      "Refer confirmed subungual melanoma for definitive surgical excision and oncological staging",
+      "Arrange dermatology referral and timely re-review of suspicious or evolving lesions, escalating to biopsy rather than delaying"
     ]
-   ],
-   "caption": "Overview comparison matrix for longitudinal melanonychia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "longitudinal-melanonychia-real-image",
-   "title": "Longitudinal melanonychia: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "longitudinal_melanonychia-pathway",
+      "title": "Longitudinal melanonychia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Longitudinal melanonychia is a brown-to-black pigmented band running lengthwise along the nail, caused by increased melanin deposition within the plate",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A single broad, irregular, or widening band in an adult, particularly of the thumb, index finger, or great toe",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Onychoscopy (dermoscopy of the nail) to assess the pattern and regularity of pigmented lines, Assessment for Hutchinson sign and periungual pigment spread, Nail matrix biopsy for histology of a suspicious or changing band"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stratify risk clinically and with onychoscopy using the ABCDEF features and the Hutchinson sign to separate benign bands from possible subungual melanoma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reassuring a patient without biopsy when a single band shows suspicious features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of longitudinal melanonychia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "longitudinal_melanonychia-matrix",
+      "title": "Longitudinal melanonychia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Longitudinal melanonychia is a brown-to-black pigmented band running lengthwise along the nail, caused by increased melanin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Onychoscopy (dermoscopy of the nail) to assess the pattern and regularity of pigmented lines, Assessment for Hutchinson sign and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Benign melanocytic activation (racial, drug-induced, traumatic, inflammatory), Nail matrix naevus, Subungual melanoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stratify risk clinically and with onychoscopy using the ABCDEF features and the Hutchinson sign to separate benign bands from",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reassuring a patient without biopsy when a single band shows suspicious features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for longitudinal melanonychia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "longitudinal_melanonychia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Onychoscopy",
+          "cells": [
+            {
+              "text": "Regular parallel lines in benign bands; irregular lines with disrupted parallelism in melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hutchinson sign assessment",
+          "cells": [
+            {
+              "text": "Pigment spread onto the proximal or lateral nail folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail matrix biopsy",
+          "cells": [
+            {
+              "text": "Histology of a suspicious or changing band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic documentation",
+          "cells": [
+            {
+              "text": "Change over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug history and examination of other nails and skin",
+          "cells": [
+            {
+              "text": "Provoking causes; multiple-nail involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycology or microbiology",
+          "cells": [
+            {
+              "text": "Where an infective pigment source is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "longitudinal_melanonychia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subungual melanoma",
+          "cells": [
+            {
+              "text": "Single broad, irregular or widening band in an adult; biopsy needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail matrix naevus",
+          "cells": [
+            {
+              "text": "Benign band; onychoscopy and change over time guide the assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual haematoma",
+          "cells": [
+            {
+              "text": "Usually non-longitudinal and moves out with nail growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal or bacterial pigmentation (Pseudomonas, dematiaceous fungi)",
+          "cells": [
+            {
+              "text": "Infective source; mycology or microbiology identifies it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "longitudinal_melanonychia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "ABCDEF features, Hutchinson sign and onychoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Benign patterns such as racial pigmentation or multiple-nail involvement, with photographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal of provoking causes",
+          "cells": [
+            {
+              "text": "Offending drugs, trauma or inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail matrix biopsy",
+          "cells": [
+            {
+              "text": "Any single, changing, irregular or worrying band, to exclude melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmed melanoma",
+          "cells": [
+            {
+              "text": "Definitive surgical excision and oncological staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "Timely re-review; biopsy rather than delay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "longitudinal_melanonychia-dx-mgmt",
+      "title": "Diagnosis and management of Longitudinal melanonychia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brown or black longitudinal nail band, with or without pigment spread to the nail folds",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (single broad irregular band in adult, Hutchinson sign, rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent nail matrix biopsy for suspected subungual melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Onychoscopy, Hutchinson sign check, photographs, drug history, mycology if infective",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the band single, irregular or suspicious on onychoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassure and observe; photograph to monitor change",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Biopsy any single, changing or irregular band to exclude melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw provoking drugs or trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassure benign patterns with photographic follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excision and staging if melanoma is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dermatology re-review; biopsy rather than delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most bands are benign; subungual melanoma prognosis worsens with delayed diagnosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

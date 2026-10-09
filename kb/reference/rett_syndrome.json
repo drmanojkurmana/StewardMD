@@ -1,173 +1,469 @@
 {
- "id": "rett_syndrome",
- "name": "Rett syndrome",
- "aliases": [
-  "MECP2",
-  "RTT",
-  "methyl-CpG-binding protein 2 disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Epileptology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "ILAE classification / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classic Rett syndrome is caused by pathogenic variants in the X-linked MECP2 gene and occurs almost exclusively in girls",
-   "There is a period of apparently normal early development followed by regression, typically between six and eighteen months of age",
-   "Loss of purposeful hand use with characteristic midline hand stereotypies such as wringing and washing movements is a defining feature",
-   "Regression brings loss of acquired language, gait abnormalities or loss of ambulation, and deceleration of head growth causing acquired microcephaly",
-   "Epilepsy develops in a large proportion of patients, alongside breathing dysregulation, autonomic disturbance and scoliosis",
-   "Diagnosis rests on established clinical criteria supported by MECP2 genetic testing",
-   "Care is multidisciplinary and supportive, targeting seizures, feeding, orthopaedic and respiratory complications"
+  "id": "rett_syndrome",
+  "name": "Rett syndrome",
+  "aliases": [
+    "MECP2",
+    "RTT",
+    "methyl-CpG-binding protein 2 disorder"
   ],
-  "pathophysiology": "Rett syndrome is caused by loss-of-function variants in MECP2, which encodes methyl-CpG-binding protein 2, a transcriptional regulator essential for mature neuronal function and synaptic maintenance. MeCP2 deficiency does not cause neurodegeneration but arrests and disrupts postnatal synaptic development and network refinement, so early milestones are attained and then lost. X-linkage and X-inactivation explain the female predominance and clinical variability, while the widespread neuronal dysfunction underlies the epilepsy, movement, breathing and autonomic manifestations.",
-  "additionalDifferentials": [
-   "CDKL5 deficiency disorder",
-   "FOXG1-related disorder (congenital Rett variant)",
-   "Autism spectrum disorder with regression",
-   "Angelman syndrome",
-   "Other developmental and epileptic encephalopathies",
-   "Neurodegenerative and metabolic disorders with regression"
-  ],
-  "additionalInvestigations": [
-   "MECP2 sequencing and deletion/duplication analysis, with wider gene testing if negative",
-   "EEG, which commonly shows epileptiform abnormalities and background slowing",
-   "Brain MRI to exclude alternative structural pathology",
-   "Assessment of growth and head circumference over time",
-   "Multidisciplinary evaluation of feeding, breathing, spine and development"
-  ],
-  "redFlags": [
-   "Developmental regression with loss of purposeful hand skills and language",
-   "Deceleration of head growth producing acquired microcephaly",
-   "New or worsening seizures superimposed on stereotyped movements",
-   "Progressive scoliosis or feeding and respiratory compromise"
-  ],
-  "prognosis": "Rett syndrome causes lifelong severe disability with variable epilepsy, motor and communication impairment, but many individuals survive into adulthood with supportive care. Life expectancy is somewhat reduced, with cardiorespiratory complications and, less commonly, sudden death contributing to mortality.",
-  "pitfalls": [
-   "Mistaking early regression for idiopathic autism and delaying MECP2 testing",
-   "Assuming a normal MECP2 result excludes a Rett-like disorder such as CDKL5 or FOXG1",
-   "Overtreating stereotypies as seizures without EEG correlation",
-   "Neglecting scoliosis, feeding and breathing complications that drive morbidity"
-  ],
-  "references": [
-   "ILAE classification of the epilepsies",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer trofinetide, the approved disease-specific therapy, to reduce core symptom burden where available",
-   "Control epilepsy with anti-seizure medication tailored to the seizure type",
-   "Manage breathing dysregulation and autonomic disturbance, and monitor for QT prolongation with periodic ECG",
-   "Provide multidisciplinary physiotherapy, occupational therapy and orthotics, and surveil for scoliosis with bracing or spinal surgery as needed",
-   "Support feeding and nutrition, treating dysphagia and gastro-oesophageal reflux, with gastrostomy where required",
-   "Facilitate communication through augmentative and alternative communication and eye-gaze technology",
-   "Provide genetic counselling on the MECP2 variant and recurrence risk, with family testing",
-   "Monitor bone health given the increased fracture risk and coordinate lifelong supportive care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rett_syndrome-pathway",
-   "title": "Rett syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic Rett syndrome is caused by pathogenic variants in the X-linked MECP2 gene and occurs almost exclusively in girls",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Developmental regression with loss of purposeful hand skills and language",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MECP2 sequencing and deletion/duplication analysis, with wider gene testing if negative, EEG, which commonly shows epileptiform abnormalities and background slowing, Brain MRI to exclude alternative structural pathology"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer trofinetide, the approved disease-specific therapy, to reduce core symptom burden where available"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking early regression for idiopathic autism and delaying MECP2 testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rett syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "rett_syndrome-matrix",
-   "title": "Rett syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic Rett syndrome is caused by pathogenic variants in the X-linked MECP2 gene and occurs almost exclusively in girls",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Epileptology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ILAE classification / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classic Rett syndrome is caused by pathogenic variants in the X-linked MECP2 gene and occurs almost exclusively in girls",
+      "There is a period of apparently normal early development followed by regression, typically between six and eighteen months of age",
+      "Loss of purposeful hand use with characteristic midline hand stereotypies such as wringing and washing movements is a defining feature",
+      "Regression brings loss of acquired language, gait abnormalities or loss of ambulation, and deceleration of head growth causing acquired microcephaly",
+      "Epilepsy develops in a large proportion of patients, alongside breathing dysregulation, autonomic disturbance and scoliosis",
+      "Diagnosis rests on established clinical criteria supported by MECP2 genetic testing",
+      "Care is multidisciplinary and supportive, targeting seizures, feeding, orthopaedic and respiratory complications"
     ],
-    [
-     "Key Investigations",
-     "MECP2 sequencing and deletion/duplication analysis, with wider gene testing if negative, EEG, which commonly shows epileptiform",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rett syndrome is caused by loss-of-function variants in MECP2, which encodes methyl-CpG-binding protein 2, a transcriptional regulator essential for mature neuronal function and synaptic maintenance. MeCP2 deficiency does not cause neurodegeneration but arrests and disrupts postnatal synaptic development and network refinement, so early milestones are attained and then lost. X-linkage and X-inactivation explain the female predominance and clinical variability, while the widespread neuronal dysfunction underlies the epilepsy, movement, breathing and autonomic manifestations.",
+    "additionalDifferentials": [
+      "CDKL5 deficiency disorder",
+      "FOXG1-related disorder (congenital Rett variant)",
+      "Autism spectrum disorder with regression",
+      "Angelman syndrome",
+      "Other developmental and epileptic encephalopathies",
+      "Neurodegenerative and metabolic disorders with regression"
     ],
-    [
-     "Primary Differentials",
-     "CDKL5 deficiency disorder, FOXG1-related disorder (congenital Rett variant), Autism spectrum disorder with regression",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MECP2 sequencing and deletion/duplication analysis, with wider gene testing if negative",
+      "EEG, which commonly shows epileptiform abnormalities and background slowing",
+      "Brain MRI to exclude alternative structural pathology",
+      "Assessment of growth and head circumference over time",
+      "Multidisciplinary evaluation of feeding, breathing, spine and development"
     ],
-    [
-     "Management Strategy",
-     "Offer trofinetide, the approved disease-specific therapy, to reduce core symptom burden where available",
-     "Core treatment modality"
+    "redFlags": [
+      "Developmental regression with loss of purposeful hand skills and language",
+      "Deceleration of head growth producing acquired microcephaly",
+      "New or worsening seizures superimposed on stereotyped movements",
+      "Progressive scoliosis or feeding and respiratory compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking early regression for idiopathic autism and delaying MECP2 testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Rett syndrome causes lifelong severe disability with variable epilepsy, motor and communication impairment, but many individuals survive into adulthood with supportive care. Life expectancy is somewhat reduced, with cardiorespiratory complications and, less commonly, sudden death contributing to mortality.",
+    "pitfalls": [
+      "Mistaking early regression for idiopathic autism and delaying MECP2 testing",
+      "Assuming a normal MECP2 result excludes a Rett-like disorder such as CDKL5 or FOXG1",
+      "Overtreating stereotypies as seizures without EEG correlation",
+      "Neglecting scoliosis, feeding and breathing complications that drive morbidity"
+    ],
+    "references": [
+      "ILAE classification of the epilepsies",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer trofinetide, the approved disease-specific therapy, to reduce core symptom burden where available",
+      "Control epilepsy with anti-seizure medication tailored to the seizure type",
+      "Manage breathing dysregulation and autonomic disturbance, and monitor for QT prolongation with periodic ECG",
+      "Provide multidisciplinary physiotherapy, occupational therapy and orthotics, and surveil for scoliosis with bracing or spinal surgery as needed",
+      "Support feeding and nutrition, treating dysphagia and gastro-oesophageal reflux, with gastrostomy where required",
+      "Facilitate communication through augmentative and alternative communication and eye-gaze technology",
+      "Provide genetic counselling on the MECP2 variant and recurrence risk, with family testing",
+      "Monitor bone health given the increased fracture risk and coordinate lifelong supportive care"
     ]
-   ],
-   "caption": "Overview comparison matrix for rett syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rett-syndrome-real-image",
-   "title": "Rett syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "rett_syndrome-pathway",
+      "title": "Rett syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic Rett syndrome is caused by pathogenic variants in the X-linked MECP2 gene and occurs almost exclusively in girls",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Developmental regression with loss of purposeful hand skills and language",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MECP2 sequencing and deletion/duplication analysis, with wider gene testing if negative, EEG, which commonly shows epileptiform abnormalities and background slowing, Brain MRI to exclude alternative structural pathology"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer trofinetide, the approved disease-specific therapy, to reduce core symptom burden where available"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking early regression for idiopathic autism and delaying MECP2 testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rett syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rett_syndrome-matrix",
+      "title": "Rett syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic Rett syndrome is caused by pathogenic variants in the X-linked MECP2 gene and occurs almost exclusively in girls",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MECP2 sequencing and deletion/duplication analysis, with wider gene testing if negative, EEG, which commonly shows epileptiform",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CDKL5 deficiency disorder, FOXG1-related disorder (congenital Rett variant), Autism spectrum disorder with regression",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer trofinetide, the approved disease-specific therapy, to reduce core symptom burden where available",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking early regression for idiopathic autism and delaying MECP2 testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rett syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rett_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MECP2 sequencing and deletion or duplication analysis",
+          "cells": [
+            {
+              "text": "MECP2 variant, the usual cause; wider gene testing if negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Epileptiform abnormalities and background slowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Excludes alternative structural pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and head circumference over time",
+          "cells": [
+            {
+              "text": "Deceleration of head growth, an acquired microcephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary evaluation",
+          "cells": [
+            {
+              "text": "Feeding, breathing, spine and related complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rett_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CDKL5 deficiency disorder",
+          "cells": [
+            {
+              "text": "Rett-like disorder; a normal MECP2 result does not exclude it (pitfall)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FOXG1-related disorder",
+          "cells": [
+            {
+              "text": "Congenital Rett variant; a normal MECP2 result does not exclude it (pitfall)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autism spectrum disorder with regression",
+          "cells": [
+            {
+              "text": "Early regression can be mistaken for idiopathic autism, delaying MECP2 testing (pitfall)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rett_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trofinetide",
+          "cells": [
+            {
+              "text": "Disease-specific therapy to reduce core symptom burden, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy",
+          "cells": [
+            {
+              "text": "Anti-seizure medication tailored to seizure type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breathing and autonomic disturbance",
+          "cells": [
+            {
+              "text": "Manage dysregulation; periodic ECG to monitor for QT prolongation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and spine",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy, orthotics; scoliosis surveillance with bracing or spinal surgery as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and nutrition",
+          "cells": [
+            {
+              "text": "Treat dysphagia and reflux; gastrostomy where required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Communication",
+          "cells": [
+            {
+              "text": "Augmentative and alternative communication and eye-gaze technology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "MECP2 variant and recurrence risk, with family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health",
+          "cells": [
+            {
+              "text": "Monitor for increased fracture risk; coordinate lifelong supportive care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rett_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Rett syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Girl with developmental regression of hand skills and language",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (slowing head growth, new seizures, scoliosis, feeding or breathing)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent multidisciplinary review of seizures, feeding and breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MECP2 sequencing, EEG, brain MRI and serial head circumference",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MECP2 testing confirm a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test wider genes such as CDKL5 and FOXG1; reassess the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Trofinetide and anti-seizure medication tailored to seizure type",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and orthotics; monitor scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding support, gastrostomy if needed; communication aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for the MECP2 variant and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong disability with variable epilepsy; many survive into adulthood with support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

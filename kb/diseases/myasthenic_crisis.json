@@ -220,25 +220,1484 @@
       "caption": "Diagnostic and clinical overview matrix for myasthenic crisis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "myasthenic-crisis-real-image",
-      "title": "Myasthenic crisis: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Myasthenia Gravis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/peripheral-nervous-system-and-motor-unit-disorders/myasthenia-gravis"
+    },
+    {
+      "id": "c3",
+      "label": "Mount Sinai Emergency Medicine, Myasthenia Gravis: Disease Overview",
+      "kind": "web",
+      "url": "https://sinaiem.org/?p=19001"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 22-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 387-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 366-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myasthenic_crisis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising myasthenic crisis and confirming MG",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Crisis definition",
+          "cells": [
+            {
+              "text": "Weakness needing intubation or noninvasive ventilation to avoid intubation"
+            },
+            {
+              "text": "{{hy:Lesser worsening is an exacerbation, not a crisis}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Forced vital capacity",
+          "unit": "mL/kg",
+          "cells": [
+            {
+              "text": "Concerning below 1 L or below 20 to 25 mL/kg",
+              "range": [
+                20,
+                25
+              ]
+            },
+            {
+              "text": "Trend serially; do not intubate on FVC alone"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Negative inspiratory force",
+          "unit": "cm H2O",
+          "cells": [
+            {
+              "text": "Concerning if weaker than 20 cm H2O",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "Effort dependent; less reliable in a tired patient"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pulse oximetry and gases",
+          "cells": [
+            {
+              "text": "Hypoxaemia or CO2 retention"
+            },
+            {
+              "text": "Late signs; intubate for severe distress"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bulbar and neck weakness",
+          "cells": [
+            {
+              "text": "Dysphagia, nasal speech, head drop"
+            },
+            {
+              "text": "Aspiration and airway risk, prominent in MuSK MG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AChR antibodies",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 80 to 90% of generalised and about 50% of ocular MG",
+              "range": [
+                80,
+                90
+              ]
+            },
+            {
+              "text": "Level does not track severity; negative test does not exclude MG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MuSK antibodies",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 30 to 60% of AChR-negative patients",
+              "range": [
+                30,
+                60
+              ]
+            },
+            {
+              "text": "MuSK MG may respond poorly or worsen with anticholinesterases"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Repetitive nerve stimulation at 2 to 3 Hz",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "CMAP decrement over 10%",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Seen in about 60%; stop anticholinesterase 12 to 24 h before"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Single-fibre EMG",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Abnormal in over 95%",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Sensitive but not specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ice pack test",
+          "cells": [
+            {
+              "text": "Ice on closed lids for 2 minutes; ptosis improves"
+            },
+            {
+              "text": "Sensitivity about 80%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest CT or MRI",
+          "cells": [
+            {
+              "text": "Thymic hyperplasia or thymoma"
+            },
+            {
+              "text": "Thymoma in about 10% of MG"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "AChR positivity: Merck gives 80 to 90% of generalised MG, Harrison 22e gives about 85%. Sinai EM gives FVC concern below 20 to 25 mL/kg and no fixed intubation cutoff."
+    },
+    {
+      "id": "myasthenic_crisis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic myasthenic crisis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cholinergic crisis",
+          "cells": [
+            {
+              "text": "Fasciculations, lacrimation, salivation, diarrhoea after excess anticholinesterase"
+            },
+            {
+              "text": "Clinical; stop anticholinesterase and support breathing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lambert-Eaton myasthenic syndrome",
+          "cells": [
+            {
+              "text": "Proximal leg weakness, absent reflexes, dry mouth; strength improves with effort"
+            },
+            {
+              "text": "{{hy:Increment after high-rate stimulation or brief exercise}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulism",
+          "cells": [
+            {
+              "text": "Bulbar weakness with dilated, poorly reactive pupils and autonomic features"
+            },
+            {
+              "text": "CMAP increases after high-frequency stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Checkpoint inhibitor myositis or myocarditis",
+          "cells": [
+            {
+              "text": "Ocular and bulbar weakness after immunotherapy"
+            },
+            {
+              "text": "No decrement on repetitive nerve stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid disease",
+          "cells": [
+            {
+              "text": "Graves disease can mimic or aggravate MG"
+            },
+            {
+              "text": "Thyroid function tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial mass",
+          "cells": [
+            {
+              "text": "Compressive lesion causing diplopia, such as sphenoid ridge meningioma"
+            },
+            {
+              "text": "MRI brain and orbits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myasthenic syndrome",
+          "cells": [
+            {
+              "text": "Onset in infancy or childhood, not immune"
+            },
+            {
+              "text": "AChR and MuSK antibodies absent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myasthenic_crisis-treatment",
+      "kind": "treatment",
+      "title": "Managing myasthenic crisis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway and ventilation",
+          "cells": [
+            {
+              "text": "Severe distress, hypoxaemia, poor effort or CO2 retention"
+            },
+            {
+              "text": "BiPAP for mild to moderate distress; intubate for severe"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rapid sequence intubation",
+          "cells": [
+            {
+              "text": "Half-dose nondepolarising paralytic, for example rocuronium 0.6 mg/kg"
+            },
+            {
+              "text": "Succinylcholine may fail with reduced receptor density"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Find and treat the trigger",
+          "cells": [
+            {
+              "text": "{{hy:Infection is the commonest trigger}}"
+            },
+            {
+              "text": "Treat as an immunocompromised host; review drugs and recent taper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV immunoglobulin",
+          "cells": [
+            {
+              "text": "400 mg/kg once daily for 5 days"
+            },
+            {
+              "text": "About 70% improve in 1 to 2 weeks; effect lasts 1 to 2 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Course over 7 to 14 days"
+            },
+            {
+              "text": "Effect similar to IVIG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticholinesterase",
+          "cells": [
+            {
+              "text": "If deterioration after initial response, stop for several days"
+            },
+            {
+              "text": "Possible cholinergic crisis; neostigmine replaces oral pyridostigmine if swallowing fails"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Little immediate effect; over half worsen acutely on high doses"
+            },
+            {
+              "text": "Start prednisone 10 mg daily, rising 10 mg weekly to 60 mg, under neurology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid precipitating drugs",
+          "cells": [
+            {
+              "text": "Aminoglycosides, quinine, magnesium sulfate, procainamide, calcium channel blockers, checkpoint inhibitors"
+            },
+            {
+              "text": "Harrison also lists fluoroquinolones, macrolides, beta-blockers"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "myasthenic_crisis-ddx-2",
+      "kind": "ddx",
+      "title": "Causes of episodic generalized weakness",
+      "rowHeader": "Condition",
+      "columns": [
+        "Examples"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrolyte disturbances",
+          "cells": [
+            {
+              "text": "hypokalemia, hyperkalemia, hypercalcemia, hypernatremia, hyponatremia, hypophosphatemia, hypermagnesemia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Muscle disorders",
+          "cells": [
+            {
+              "text": "channelopathies (periodic paralyses); metabolic defects of muscle (impaired carbohydrate or fatty acid use, abnormal mitochondrial function)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Neuromuscular junction disorders",
+          "cells": [
+            {
+              "text": "myasthenia gravis; Lambert-Eaton myasthenic syndrome"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Central nervous system disorders",
+          "cells": [
+            {
+              "text": "transient ischemic attacks of the brainstem; transient global cerebral ischemia; multiple sclerosis"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "myasthenic_crisis-ddx-3",
+      "kind": "ddx",
+      "title": "Neuromuscular causes of ptosis or ophthalmoplegia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Disorders"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral neuropathy",
+          "cells": [
+            {
+              "text": "Guillain-Barre syndrome; Miller-Fisher syndrome"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Neuromuscular junction",
+          "cells": [
+            {
+              "text": "botulism; Lambert-Eaton syndrome; myasthenia gravis; congenital myasthenia"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Myopathy",
+          "cells": [
+            {
+              "text": "mitochondrial myopathies (Kearns-Sayre syndrome, progressive external ophthalmoplegia); oculopharyngeal and oculopharyngodistal muscular dystrophy; myotonic dystrophy (ptosis only); congenital myopathy (myotubular; nemaline, ptosis only); hyperthyroidism or Graves disease (ophthalmoplegia without ptosis); hereditary inclusion body myopathy type 3"
+            }
+          ],
+          "cite": "c5"
+        }
+      ]
+    },
+    {
+      "id": "myasthenic_crisis-ddx-4",
+      "kind": "ddx",
+      "title": "Neurologic channelopathies: channel and gene",
+      "rowHeader": "Condition",
+      "columns": [
+        "Category",
+        "Channel type",
+        "Mutated gene"
+      ],
+      "rows": [
+        {
+          "parameter": "Episodic ataxia 1",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNA1"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Episodic ataxia 2",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia 6",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 1",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 3",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN1A"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Benign neonatal familial convulsions",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ2, KCNQ3, SCN1B"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Generalized epilepsy with febrile convulsions plus",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "not separately listed (shares the cell above)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hyperkalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hypokalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A3"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Myotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Cl"
+            },
+            {
+              "text": "CLCN1"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Paramyotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Jervell and Lange-Nielsen syndrome (deafness, prolonged QT, arrhythmia)",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ1, KCNE1"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Autosomal dominant progressive deafness",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ4"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Limbic encephalitis",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Acquired neuromyotonia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Cerebellar ataxia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Lambert-Eaton syndrome",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "Chapter cross-references in the source are omitted."
+    },
+    {
+      "id": "myasthenic_crisis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c7"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myasthenic_crisis-dx-mgmt",
+      "title": "Diagnosis and management of myasthenic crisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known or suspected MG with worsening bulbar or breathing weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Serial FVC and NIF, gases, swallow and neck strength",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe distress, hypoxaemia or CO2 retention?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Intubate with half-dose nondepolarising paralytic",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FVC below 20 to 25 mL/kg or NIF weaker than 20 cm H2O?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ICU care; BiPAP if secretions are cleared",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Exacerbation: ward monitoring, trend FVC and NIF",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Fasciculations, salivation, diarrhoea after high anticholinesterase dose?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cholinergic crisis: stop anticholinesterase, support breathing",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Search for infection and stop precipitating drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "IVIG 400 mg/kg daily for 5 days or plasma exchange",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Neurology: steroids started cautiously, thymoma imaging",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Wean ventilation as FVC and NIF recover",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
         }
       ]
     }

@@ -1,172 +1,414 @@
 {
- "id": "normal_pressure_hydrocephalus",
- "name": "Normal pressure hydrocephalus",
- "aliases": [
-  "NPH",
-  "idiopathic normal pressure hydrocephalus",
-  "Hakim-Adams syndrome"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically presents with the triad of gait disturbance, cognitive impairment, and urinary incontinence, though not all three are always present",
-   "Gait difficulty is usually the earliest and most prominent feature and is often described as magnetic, broad-based and shuffling, sometimes termed a gait apraxia",
-   "It is one of the few potentially reversible causes of dementia, so recognition matters because shunting can help selected patients",
-   "Imaging shows ventricular enlargement out of proportion to cortical atrophy, and disproportionate widening of the Sylvian fissures relative to compressed high-convexity sulci is characteristic",
-   "Cerebrospinal fluid opening pressure is within the normal range, distinguishing it from obstructive high-pressure hydrocephalus",
-   "A high-volume lumbar puncture (tap test) or extended lumbar drainage that transiently improves gait helps predict a favourable response to shunting",
-   "Gait tends to respond best to shunting, cognition variably, and long-standing incontinence least reliably",
-   "The condition predominantly affects older adults and is frequently misattributed to ageing or Parkinson disease"
+  "id": "normal_pressure_hydrocephalus",
+  "name": "Normal pressure hydrocephalus",
+  "aliases": [
+    "NPH",
+    "idiopathic normal pressure hydrocephalus",
+    "Hakim-Adams syndrome"
   ],
-  "pathophysiology": "Normal pressure hydrocephalus is a communicating hydrocephalus in which impaired cerebrospinal fluid absorption leads to ventricular enlargement despite normal mean intracranial pressure. Intermittent pressure waves and altered periventricular compliance are thought to distort the corona radiata fibres, particularly those serving the legs and bladder, producing the characteristic clinical triad. It may be idiopathic or secondary to prior subarachnoid haemorrhage, meningitis, or head injury that scars the arachnoid granulations.",
-  "additionalDifferentials": [
-   "Alzheimer disease and other neurodegenerative dementias",
-   "Parkinson disease and vascular parkinsonism",
-   "Cerebral small vessel disease with vascular cognitive impairment",
-   "Obstructive hydrocephalus from a mass lesion",
-   "Cervical or lumbar spondylotic myelopathy affecting gait"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain to assess ventricular size, callosal angle, and the DESH pattern of disproportionate CSF distribution",
-   "Large-volume lumbar puncture with pre- and post-tap gait assessment",
-   "Extended external lumbar drainage in equivocal cases to predict shunt responsiveness",
-   "Neuropsychological testing to characterise the cognitive profile",
-   "Assessment for comorbid neurodegenerative or vascular disease that may limit surgical benefit"
-  ],
-  "redFlags": [
-   "The full gait, cognitive and continence triad in an older adult should prompt evaluation for a treatable, potentially reversible cause rather than being dismissed as ageing",
-   "Rapidly progressive deterioration or focal deficits suggesting an obstructing mass or alternative diagnosis",
-   "Headache, vomiting or reduced consciousness indicating raised pressure and possible acute obstruction",
-   "Shunt malfunction or infection after surgery presenting with fever or acute neurological decline"
-  ],
-  "prognosis": "Carefully selected patients, especially those with predominant early gait impairment and a positive tap or drainage test, often gain meaningful and sometimes durable benefit from ventriculoperitoneal shunting. Prognosis is worse when significant coexisting neurodegenerative or vascular disease is present or when symptoms are long-standing.",
-  "pitfalls": [
-   "Attributing the syndrome to normal ageing or a primary dementia and missing a reversible cause",
-   "Selecting patients for shunting on imaging alone without supportive CSF drainage testing",
-   "Underestimating the surgical risks of shunting, including subdural collections, infection, and over- or under-drainage",
-   "Expecting equal improvement in all three symptoms when gait typically responds best and incontinence least"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer ventriculoperitoneal shunting to carefully selected patients, especially those with predominant early gait impairment, as the definitive treatment",
-   "Select candidates with a large-volume lumbar puncture tap test or extended external lumbar drainage assessing gait response before committing to surgery",
-   "Use a programmable shunt valve and adjust it to manage overdrainage complications",
-   "Provide supportive gait and physiotherapy rehabilitation, continence management and cognitive support",
-   "Monitor after shunting for complications including subdural collections, infection and shunt malfunction",
-   "Assess for coexisting neurodegenerative or vascular disease that limits surgical benefit and informs prognosis",
-   "Manage jointly through neurology and neurosurgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "normal_pressure_hydrocephalus-pathway",
-   "title": "Normal pressure hydrocephalus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically presents with the triad of gait disturbance, cognitive impairment, and urinary incontinence, though not all three are always present",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: The full gait, cognitive and continence triad in an older adult should prompt evaluation for a treatable, potentially reversible cause rather than being dismissed as ageing",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain to assess ventricular size, callosal angle, and the DESH pattern of disproportionate CSF distribution, Large-volume lumbar puncture with pre- and post-tap gait assessment, Extended external lumbar drainage"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer ventriculoperitoneal shunting to carefully selected patients, especially those with predominant early gait impairment, as the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the syndrome to normal ageing or a primary dementia and missing a reversible cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of normal pressure hydrocephalus."
-  }
- ],
- "tables": [
-  {
-   "id": "normal_pressure_hydrocephalus-matrix",
-   "title": "Normal pressure hydrocephalus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically presents with the triad of gait disturbance, cognitive impairment, and urinary incontinence, though not all three are",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically presents with the triad of gait disturbance, cognitive impairment, and urinary incontinence, though not all three are always present",
+      "Gait difficulty is usually the earliest and most prominent feature and is often described as magnetic, broad-based and shuffling, sometimes termed a gait apraxia",
+      "It is one of the few potentially reversible causes of dementia, so recognition matters because shunting can help selected patients",
+      "Imaging shows ventricular enlargement out of proportion to cortical atrophy, and disproportionate widening of the Sylvian fissures relative to compressed high-convexity sulci is characteristic",
+      "Cerebrospinal fluid opening pressure is within the normal range, distinguishing it from obstructive high-pressure hydrocephalus",
+      "A high-volume lumbar puncture (tap test) or extended lumbar drainage that transiently improves gait helps predict a favourable response to shunting",
+      "Gait tends to respond best to shunting, cognition variably, and long-standing incontinence least reliably",
+      "The condition predominantly affects older adults and is frequently misattributed to ageing or Parkinson disease"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain to assess ventricular size, callosal angle, and the DESH pattern of disproportionate CSF distribution,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Normal pressure hydrocephalus is a communicating hydrocephalus in which impaired cerebrospinal fluid absorption leads to ventricular enlargement despite normal mean intracranial pressure. Intermittent pressure waves and altered periventricular compliance are thought to distort the corona radiata fibres, particularly those serving the legs and bladder, producing the characteristic clinical triad. It may be idiopathic or secondary to prior subarachnoid haemorrhage, meningitis, or head injury that scars the arachnoid granulations.",
+    "additionalDifferentials": [
+      "Alzheimer disease and other neurodegenerative dementias",
+      "Parkinson disease and vascular parkinsonism",
+      "Cerebral small vessel disease with vascular cognitive impairment",
+      "Obstructive hydrocephalus from a mass lesion",
+      "Cervical or lumbar spondylotic myelopathy affecting gait"
     ],
-    [
-     "Primary Differentials",
-     "Alzheimer disease and other neurodegenerative dementias, Parkinson disease and vascular parkinsonism, Cerebral small vessel",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain to assess ventricular size, callosal angle, and the DESH pattern of disproportionate CSF distribution",
+      "Large-volume lumbar puncture with pre- and post-tap gait assessment",
+      "Extended external lumbar drainage in equivocal cases to predict shunt responsiveness",
+      "Neuropsychological testing to characterise the cognitive profile",
+      "Assessment for comorbid neurodegenerative or vascular disease that may limit surgical benefit"
     ],
-    [
-     "Management Strategy",
-     "Offer ventriculoperitoneal shunting to carefully selected patients, especially those with predominant early gait impairment, as",
-     "Core treatment modality"
+    "redFlags": [
+      "The full gait, cognitive and continence triad in an older adult should prompt evaluation for a treatable, potentially reversible cause rather than being dismissed as ageing",
+      "Rapidly progressive deterioration or focal deficits suggesting an obstructing mass or alternative diagnosis",
+      "Headache, vomiting or reduced consciousness indicating raised pressure and possible acute obstruction",
+      "Shunt malfunction or infection after surgery presenting with fever or acute neurological decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the syndrome to normal ageing or a primary dementia and missing a reversible cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Carefully selected patients, especially those with predominant early gait impairment and a positive tap or drainage test, often gain meaningful and sometimes durable benefit from ventriculoperitoneal shunting. Prognosis is worse when significant coexisting neurodegenerative or vascular disease is present or when symptoms are long-standing.",
+    "pitfalls": [
+      "Attributing the syndrome to normal ageing or a primary dementia and missing a reversible cause",
+      "Selecting patients for shunting on imaging alone without supportive CSF drainage testing",
+      "Underestimating the surgical risks of shunting, including subdural collections, infection, and over- or under-drainage",
+      "Expecting equal improvement in all three symptoms when gait typically responds best and incontinence least"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer ventriculoperitoneal shunting to carefully selected patients, especially those with predominant early gait impairment, as the definitive treatment",
+      "Select candidates with a large-volume lumbar puncture tap test or extended external lumbar drainage assessing gait response before committing to surgery",
+      "Use a programmable shunt valve and adjust it to manage overdrainage complications",
+      "Provide supportive gait and physiotherapy rehabilitation, continence management and cognitive support",
+      "Monitor after shunting for complications including subdural collections, infection and shunt malfunction",
+      "Assess for coexisting neurodegenerative or vascular disease that limits surgical benefit and informs prognosis",
+      "Manage jointly through neurology and neurosurgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for normal pressure hydrocephalus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "normal-pressure-hydrocephalus-real-image",
-   "title": "Normal pressure hydrocephalus: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "normal_pressure_hydrocephalus-pathway",
+      "title": "Normal pressure hydrocephalus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically presents with the triad of gait disturbance, cognitive impairment, and urinary incontinence, though not all three are always present",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: The full gait, cognitive and continence triad in an older adult should prompt evaluation for a treatable, potentially reversible cause rather than being dismissed as ageing",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain to assess ventricular size, callosal angle, and the DESH pattern of disproportionate CSF distribution, Large-volume lumbar puncture with pre- and post-tap gait assessment, Extended external lumbar drainage"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer ventriculoperitoneal shunting to carefully selected patients, especially those with predominant early gait impairment, as the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the syndrome to normal ageing or a primary dementia and missing a reversible cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of normal pressure hydrocephalus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "normal_pressure_hydrocephalus-matrix",
+      "title": "Normal pressure hydrocephalus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically presents with the triad of gait disturbance, cognitive impairment, and urinary incontinence, though not all three are",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain to assess ventricular size, callosal angle, and the DESH pattern of disproportionate CSF distribution,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alzheimer disease and other neurodegenerative dementias, Parkinson disease and vascular parkinsonism, Cerebral small vessel",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer ventriculoperitoneal shunting to carefully selected patients, especially those with predominant early gait impairment, as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the syndrome to normal ageing or a primary dementia and missing a reversible cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for normal pressure hydrocephalus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "normal_pressure_hydrocephalus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Ventricular size, callosal angle and DESH pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Large-volume lumbar puncture or tap test",
+          "cells": [
+            {
+              "text": "Predicts response to shunting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive and gait assessment",
+          "cells": [
+            {
+              "text": "Baseline for response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "normal_pressure_hydrocephalus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Alzheimer disease and neurodegenerative dementias",
+          "cells": [
+            {
+              "text": "Dementia without the gait triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinson disease or vascular parkinsonism",
+          "cells": [
+            {
+              "text": "Gait change with other parkinsonian features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral small vessel disease",
+          "cells": [
+            {
+              "text": "Vascular cognitive and gait change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "normal_pressure_hydrocephalus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ventriculoperitoneal shunting",
+          "cells": [
+            {
+              "text": "Definitive treatment in carefully selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selection by predominant early gait impairment",
+          "cells": [
+            {
+              "text": "Best candidates respond well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tap or drainage test before shunting",
+          "cells": [
+            {
+              "text": "Positive test supports shunt selection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Search for reversible causes",
+          "cells": [
+            {
+              "text": "Avoid missing a treatable cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "normal_pressure_hydrocephalus-dx-mgmt",
+      "title": "Diagnosis and management of Normal pressure hydrocephalus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Older adult with gait disturbance, cognitive decline and urinary incontinence",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (triad present, rapid decline, no other explanation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for a treatable cause; neurosurgical referral if a shunt is considered",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain for ventricles and DESH pattern, large-volume tap test, cognitive review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ventriculomegaly with DESH and a positive tap test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neurodegenerative dementia or parkinsonism; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ventriculoperitoneal shunt for carefully selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Select those with predominant early gait impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Use a positive tap or drainage test to support shunting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Search for and treat reversible causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Selected patients, especially with early gait loss and a positive tap test, often improve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,442 @@
 {
- "id": "ganglion_cyst",
- "name": "Ganglion cyst",
- "aliases": [
-  "ganglion",
-  "synovial cyst",
-  "dorsal wrist ganglion",
-  "Bible cyst"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Sports & Musculoskeletal Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon / standard sports medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A ganglion is the commonest soft-tissue swelling of the hand and wrist, presenting as a smooth, firm, rounded lump that may fluctuate in size",
-   "The most frequent sites are the dorsal wrist (arising from the scapholunate region), the volar wrist, and the flexor tendon sheath of the fingers",
-   "The cyst contains a viscous, gelatinous mucin and typically transilluminates, which helps distinguish it from a solid mass",
-   "It arises from a joint capsule or tendon sheath and communicates with the joint through a valve-like stalk, so it is not a true cyst with an epithelial lining",
-   "Many are painless and diagnosed on appearance alone; discomfort, if present, relates to size, position, or pressure on adjacent structures",
-   "A small occult dorsal ganglion can cause wrist pain before it becomes visible and may only be found on imaging",
-   "Reassurance and observation are appropriate for most, as a significant proportion resolve spontaneously",
-   "Aspiration can relieve symptoms but recurrence is common, and the old practice of striking the cyst is not recommended",
-   "Surgical excision including the stalk and capsular origin gives the lowest recurrence rate but still carries a risk of recurrence and of scar or stiffness"
+  "id": "ganglion_cyst",
+  "name": "Ganglion cyst",
+  "aliases": [
+    "ganglion",
+    "synovial cyst",
+    "dorsal wrist ganglion",
+    "Bible cyst"
   ],
-  "pathophysiology": "A ganglion forms from mucoid degeneration of the connective tissue of a joint capsule or tendon sheath. Mucin accumulates to form a cyst that connects to the underlying joint via a tortuous, valve-like duct, allowing one-way flow of fluid that fills the cyst. It lacks a true synovial or epithelial lining. Local irritation or minor trauma may contribute, and the fluctuation in size reflects communication with the joint.",
-  "additionalDifferentials": [
-   "Giant cell tumour of the tendon sheath",
-   "Lipoma or other benign soft-tissue tumour",
-   "Extensor tenosynovitis or synovial swelling",
-   "Carpal boss (osteoarthritic osteophyte)",
-   "Aneurysm at the volar wrist (near the radial artery)",
-   "Rarely, a soft-tissue sarcoma"
-  ],
-  "additionalInvestigations": [
-   "Usually diagnosed clinically, aided by transillumination",
-   "Ultrasound to confirm a cystic lesion, identify an occult ganglion, and assess its relation to vessels and tendons",
-   "MRI for occult, deep, or atypical swellings and to exclude other soft-tissue lesions",
-   "Consider vascular imaging for a pulsatile volar wrist mass before any intervention",
-   "Histology after excision to confirm the diagnosis"
-  ],
-  "redFlags": [
-   "A rapidly enlarging, hard, fixed, or irregular mass suggesting a soft-tissue tumour",
-   "A pulsatile volar wrist swelling raising the possibility of an aneurysm",
-   "Neurological symptoms from compression of an adjacent nerve",
-   "Signs of infection or unexpected features prompting further imaging or biopsy"
-  ],
-  "prognosis": "Ganglia are benign, and a large proportion resolve without treatment; aspiration has a high recurrence rate, and surgical excision reduces but does not eliminate recurrence.",
-  "pitfalls": [
-   "Assuming any wrist lump is a ganglion and missing a tumour or aneurysm",
-   "Aspirating a volar wrist mass without first excluding a vascular lesion",
-   "Underestimating recurrence after aspiration or incomplete excision",
-   "Overlooking an occult dorsal ganglion as a cause of unexplained wrist pain"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe asymptomatic cysts, since a large proportion resolve spontaneously",
-   "Offer needle aspiration for symptomatic lesions, counselling that recurrence is frequent",
-   "Relieve discomfort with simple analgesia, activity modification and splinting",
-   "Undertake surgical excision of the cyst together with its capsular stalk for painful, recurrent or functionally limiting lesions, giving the lowest recurrence",
-   "Confirm arterial patency with an Allen test and image the radial artery before any volar wrist intervention",
-   "Counsel patients that recurrence remains possible even after meticulous excision"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ganglion_cyst-pathway",
-   "title": "Ganglion cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A ganglion is the commonest soft-tissue swelling of the hand and wrist, presenting as a smooth, firm, rounded lump that may fluctuate in size",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A rapidly enlarging, hard, fixed, or irregular mass suggesting a soft-tissue tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Usually diagnosed clinically, aided by transillumination, Ultrasound to confirm a cystic lesion, identify an occult ganglion, and assess its relation to vessels and tendons, MRI for occult, deep, or atypical swellings and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe asymptomatic cysts, since a large proportion resolve spontaneously"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming any wrist lump is a ganglion and missing a tumour or aneurysm"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ganglion cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "ganglion_cyst-matrix",
-   "title": "Ganglion cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A ganglion is the commonest soft-tissue swelling of the hand and wrist, presenting as a smooth, firm, rounded lump that may",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Sports & Musculoskeletal Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon / standard sports medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A ganglion is the commonest soft-tissue swelling of the hand and wrist, presenting as a smooth, firm, rounded lump that may fluctuate in size",
+      "The most frequent sites are the dorsal wrist (arising from the scapholunate region), the volar wrist, and the flexor tendon sheath of the fingers",
+      "The cyst contains a viscous, gelatinous mucin and typically transilluminates, which helps distinguish it from a solid mass",
+      "It arises from a joint capsule or tendon sheath and communicates with the joint through a valve-like stalk, so it is not a true cyst with an epithelial lining",
+      "Many are painless and diagnosed on appearance alone; discomfort, if present, relates to size, position, or pressure on adjacent structures",
+      "A small occult dorsal ganglion can cause wrist pain before it becomes visible and may only be found on imaging",
+      "Reassurance and observation are appropriate for most, as a significant proportion resolve spontaneously",
+      "Aspiration can relieve symptoms but recurrence is common, and the old practice of striking the cyst is not recommended",
+      "Surgical excision including the stalk and capsular origin gives the lowest recurrence rate but still carries a risk of recurrence and of scar or stiffness"
     ],
-    [
-     "Key Investigations",
-     "Usually diagnosed clinically, aided by transillumination, Ultrasound to confirm a cystic lesion, identify an occult ganglion, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A ganglion forms from mucoid degeneration of the connective tissue of a joint capsule or tendon sheath. Mucin accumulates to form a cyst that connects to the underlying joint via a tortuous, valve-like duct, allowing one-way flow of fluid that fills the cyst. It lacks a true synovial or epithelial lining. Local irritation or minor trauma may contribute, and the fluctuation in size reflects communication with the joint.",
+    "additionalDifferentials": [
+      "Giant cell tumour of the tendon sheath",
+      "Lipoma or other benign soft-tissue tumour",
+      "Extensor tenosynovitis or synovial swelling",
+      "Carpal boss (osteoarthritic osteophyte)",
+      "Aneurysm at the volar wrist (near the radial artery)",
+      "Rarely, a soft-tissue sarcoma"
     ],
-    [
-     "Primary Differentials",
-     "Giant cell tumour of the tendon sheath, Lipoma or other benign soft-tissue tumour, Extensor tenosynovitis or synovial swelling",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Usually diagnosed clinically, aided by transillumination",
+      "Ultrasound to confirm a cystic lesion, identify an occult ganglion, and assess its relation to vessels and tendons",
+      "MRI for occult, deep, or atypical swellings and to exclude other soft-tissue lesions",
+      "Consider vascular imaging for a pulsatile volar wrist mass before any intervention",
+      "Histology after excision to confirm the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe asymptomatic cysts, since a large proportion resolve spontaneously",
-     "Core treatment modality"
+    "redFlags": [
+      "A rapidly enlarging, hard, fixed, or irregular mass suggesting a soft-tissue tumour",
+      "A pulsatile volar wrist swelling raising the possibility of an aneurysm",
+      "Neurological symptoms from compression of an adjacent nerve",
+      "Signs of infection or unexpected features prompting further imaging or biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming any wrist lump is a ganglion and missing a tumour or aneurysm",
-     "Prevent diagnostic or management error"
+    "prognosis": "Ganglia are benign, and a large proportion resolve without treatment; aspiration has a high recurrence rate, and surgical excision reduces but does not eliminate recurrence.",
+    "pitfalls": [
+      "Assuming any wrist lump is a ganglion and missing a tumour or aneurysm",
+      "Aspirating a volar wrist mass without first excluding a vascular lesion",
+      "Underestimating recurrence after aspiration or incomplete excision",
+      "Overlooking an occult dorsal ganglion as a cause of unexplained wrist pain"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe asymptomatic cysts, since a large proportion resolve spontaneously",
+      "Offer needle aspiration for symptomatic lesions, counselling that recurrence is frequent",
+      "Relieve discomfort with simple analgesia, activity modification and splinting",
+      "Undertake surgical excision of the cyst together with its capsular stalk for painful, recurrent or functionally limiting lesions, giving the lowest recurrence",
+      "Confirm arterial patency with an Allen test and image the radial artery before any volar wrist intervention",
+      "Counsel patients that recurrence remains possible even after meticulous excision"
     ]
-   ],
-   "caption": "Overview comparison matrix for ganglion cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ganglion-cyst-real-image",
-   "title": "Ganglion cyst: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "ganglion_cyst-pathway",
+      "title": "Ganglion cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A ganglion is the commonest soft-tissue swelling of the hand and wrist, presenting as a smooth, firm, rounded lump that may fluctuate in size",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A rapidly enlarging, hard, fixed, or irregular mass suggesting a soft-tissue tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Usually diagnosed clinically, aided by transillumination, Ultrasound to confirm a cystic lesion, identify an occult ganglion, and assess its relation to vessels and tendons, MRI for occult, deep, or atypical swellings and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe asymptomatic cysts, since a large proportion resolve spontaneously"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming any wrist lump is a ganglion and missing a tumour or aneurysm"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ganglion cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ganglion_cyst-matrix",
+      "title": "Ganglion cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A ganglion is the commonest soft-tissue swelling of the hand and wrist, presenting as a smooth, firm, rounded lump that may",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Usually diagnosed clinically, aided by transillumination, Ultrasound to confirm a cystic lesion, identify an occult ganglion, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Giant cell tumour of the tendon sheath, Lipoma or other benign soft-tissue tumour, Extensor tenosynovitis or synovial swelling",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe asymptomatic cysts, since a large proportion resolve spontaneously",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any wrist lump is a ganglion and missing a tumour or aneurysm",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ganglion cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon / standard sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ganglion_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical features with transillumination",
+          "cells": [
+            {
+              "text": "Usually diagnosed clinically, aided by transillumination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms a cystic lesion, finds occult ganglia, assesses relation to vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Occult, deep or atypical swellings; excludes other soft-tissue lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "Pulsatile volar wrist mass before any intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology after excision",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglion_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aneurysm at the volar wrist",
+          "cells": [
+            {
+              "text": "Pulsatile volar wrist swelling near the radial artery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soft-tissue sarcoma",
+          "cells": [
+            {
+              "text": "Rapidly enlarging, hard, fixed or irregular mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ganglion_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Asymptomatic cysts; a large proportion resolve spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle aspiration",
+          "cells": [
+            {
+              "text": "For symptomatic lesions; recurrence is frequent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia, activity modification and splinting",
+          "cells": [
+            {
+              "text": "Relief of discomfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision with capsular stalk",
+          "cells": [
+            {
+              "text": "For painful, recurrent or functionally limiting lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allen test and radial artery imaging",
+          "cells": [
+            {
+              "text": "Before any volar wrist intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on recurrence",
+          "cells": [
+            {
+              "text": "Recurrence remains possible after meticulous excision"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ganglion_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Ganglion cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ganglion cyst: cystic wrist swelling, usually clinically diagnosed",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hard fixed mass, pulsatile volar swelling, nerve compression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Vascular imaging for pulsatile volar swelling before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transillumination, ultrasound, and MRI for occult or atypical swellings",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ultrasound confirm a cystic lesion, with vascular and solid tumours excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider giant cell tumour, lipoma, carpal boss or soft-tissue sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe asymptomatic cysts, many of which resolve",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Needle aspiration for symptomatic lesions, with warning of frequent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical excision with capsular stalk for painful, recurrent or limiting lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Confirm arterial patency with an Allen test before volar wrist intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; many resolve, aspiration often recurs, and excision reduces recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

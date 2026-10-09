@@ -1,175 +1,439 @@
 {
- "id": "peliosis_hepatis",
- "name": "peliosis hepatis",
- "aliases": [
-  "hepatic peliosis",
-  "peliosis of the liver"
- ],
- "class": "non_infective",
- "system": "hepatobiliary",
- "specialty": "hepatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Peliosis hepatis is a rare vascular disorder in which the liver contains multiple blood-filled cystic spaces due to dilatation of the hepatic sinusoids.",
-   "It is classically drug- or toxin-associated, with anabolic androgenic steroids, oestrogens and oral contraceptives, corticosteroids, tamoxifen and thiopurines such as azathioprine among the recognised culprits.",
-   "It also complicates chronic wasting states such as advanced malignancy, tuberculosis and malnutrition, as well as solid-organ transplantation.",
-   "Bacillary peliosis caused by Bartonella species in immunocompromised hosts is an important infective mimic to consider but is a separate entity.",
-   "Most cases are asymptomatic and found incidentally; when symptomatic there may be hepatomegaly, cholestatic or mixed enzyme derangement and portal hypertension.",
-   "The feared complication is spontaneous rupture of a peliotic cavity causing life-threatening intraperitoneal haemorrhage and haemodynamic collapse.",
-   "Imaging is non-specific and easily confused with metastases, abscess or haemangioma, and percutaneous biopsy carries a significant bleeding risk.",
-   "Withdrawal of the offending agent often leads to regression, and management is otherwise supportive, with embolisation or resection reserved for bleeding."
+  "id": "peliosis_hepatis",
+  "name": "peliosis hepatis",
+  "aliases": [
+    "hepatic peliosis",
+    "peliosis of the liver"
   ],
-  "pathophysiology": "Peliosis hepatis results from injury to the hepatic sinusoidal endothelium and the reticulin framework that supports the hepatocyte plates. Loss of this support allows the sinusoids to dilate into blood-filled lacunar spaces distributed randomly throughout the parenchyma. Two histological patterns are described: a parenchymal type in which the cavities lack an endothelial lining and communicate with disrupted hepatocytes, and a phlebectatic type in which endothelium-lined spaces are centred on dilated central veins. Hormonal, cytotoxic and immunosuppressive agents are thought to weaken the sinusoidal wall and impair outflow, while chronic infection or wasting may act through endothelial injury and altered hepatic blood flow. Because the cavities are thin-walled and engorged they are prone to rupture, and extensive involvement can compress adjacent parenchyma and impair hepatic function.",
-  "additionalDifferentials": [
-   "Hepatic metastases",
-   "Pyogenic liver abscess",
-   "Cavernous haemangioma",
-   "Hepatic adenoma or adenomatosis",
-   "Hepatocellular carcinoma",
-   "Multifocal simple cysts or biliary hamartomas",
-   "Sinusoidal obstruction syndrome or Budd-Chiari syndrome"
-  ],
-  "additionalInvestigations": [
-   "Multiphase contrast-enhanced CT of the liver",
-   "MRI with hepatobiliary contrast",
-   "Doppler ultrasound of the hepatic vasculature",
-   "Careful, often transjugular, liver biopsy where the diagnosis is uncertain",
-   "Full liver function panel and coagulation profile",
-   "Detailed drug and medication history including performance-enhancing agents",
-   "Screen for underlying malignancy or chronic infection"
-  ],
-  "redFlags": [
-   "Sudden severe abdominal pain with hypotension suggesting cavity rupture and haemoperitoneum",
-   "Falling haemoglobin with haemodynamic instability",
-   "Progressive hepatic dysfunction or synthetic failure",
-   "New portal hypertension with variceal bleeding"
-  ],
-  "prognosis": "Drug-associated disease frequently regresses once the causative agent is stopped, but spontaneous rupture or extensive parenchymal involvement carries a high mortality and may precipitate hepatic failure.",
-  "pitfalls": [
-   "Performing a routine percutaneous biopsy of a vascular lesion and provoking major haemorrhage.",
-   "Misdiagnosing the lesions as metastatic malignancy and subjecting the patient to unnecessary treatment.",
-   "Failing to take a thorough medication and anabolic-steroid history.",
-   "Overlooking the diagnosis as a cause of unexplained intra-abdominal haemorrhage."
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "MacSween's Pathology of the Liver",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Withdraw the causative drug or toxin such as anabolic androgenic steroids, oestrogens, tamoxifen, corticosteroids or thiopurines like azathioprine, as disease often regresses once the agent is stopped",
-   "Treat the underlying wasting or infective condition such as tuberculosis, malignancy or malnutrition, and manage bacillary peliosis from Bartonella in the immunocompromised with appropriate antimicrobials",
-   "Manage spontaneous intraperitoneal haemorrhage as an emergency with resuscitation, transfusion and correction of coagulopathy, achieving haemostasis by transarterial embolisation or surgery including hepatic resection",
-   "Monitor lesions with serial cross-sectional imaging to confirm regression after removal of the precipitant",
-   "Support hepatic dysfunction and portal hypertension where present",
-   "Refer to hepatology and interventional radiology, particularly when the diagnosis is uncertain or rupture is a risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "peliosis_hepatis-pathway",
-   "title": "peliosis hepatis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Peliosis hepatis is a rare vascular disorder in which the liver contains multiple blood-filled cystic spaces due to dilatation of the hepatic sinusoids.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden severe abdominal pain with hypotension suggesting cavity rupture and haemoperitoneum",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Multiphase contrast-enhanced CT of the liver, MRI with hepatobiliary contrast, Doppler ultrasound of the hepatic vasculature"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Withdraw the causative drug or toxin such as anabolic androgenic steroids, oestrogens, tamoxifen, corticosteroids or thiopurines like azathioprine, as disease often regresses once the agent is stopped"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing a routine percutaneous biopsy of a vascular lesion and provoking major haemorrhage."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of peliosis hepatis."
-  }
- ],
- "tables": [
-  {
-   "id": "peliosis_hepatis-matrix",
-   "title": "peliosis hepatis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Peliosis hepatis is a rare vascular disorder in which the liver contains multiple blood-filled cystic spaces due to dilatation of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "hepatobiliary",
+  "specialty": "hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Peliosis hepatis is a rare vascular disorder in which the liver contains multiple blood-filled cystic spaces due to dilatation of the hepatic sinusoids.",
+      "It is classically drug- or toxin-associated, with anabolic androgenic steroids, oestrogens and oral contraceptives, corticosteroids, tamoxifen and thiopurines such as azathioprine among the recognised culprits.",
+      "It also complicates chronic wasting states such as advanced malignancy, tuberculosis and malnutrition, as well as solid-organ transplantation.",
+      "Bacillary peliosis caused by Bartonella species in immunocompromised hosts is an important infective mimic to consider but is a separate entity.",
+      "Most cases are asymptomatic and found incidentally; when symptomatic there may be hepatomegaly, cholestatic or mixed enzyme derangement and portal hypertension.",
+      "The feared complication is spontaneous rupture of a peliotic cavity causing life-threatening intraperitoneal haemorrhage and haemodynamic collapse.",
+      "Imaging is non-specific and easily confused with metastases, abscess or haemangioma, and percutaneous biopsy carries a significant bleeding risk.",
+      "Withdrawal of the offending agent often leads to regression, and management is otherwise supportive, with embolisation or resection reserved for bleeding."
     ],
-    [
-     "Key Investigations",
-     "Multiphase contrast-enhanced CT of the liver, MRI with hepatobiliary contrast, Doppler ultrasound of the hepatic vasculature",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Peliosis hepatis results from injury to the hepatic sinusoidal endothelium and the reticulin framework that supports the hepatocyte plates. Loss of this support allows the sinusoids to dilate into blood-filled lacunar spaces distributed randomly throughout the parenchyma. Two histological patterns are described: a parenchymal type in which the cavities lack an endothelial lining and communicate with disrupted hepatocytes, and a phlebectatic type in which endothelium-lined spaces are centred on dilated central veins. Hormonal, cytotoxic and immunosuppressive agents are thought to weaken the sinusoidal wall and impair outflow, while chronic infection or wasting may act through endothelial injury and altered hepatic blood flow. Because the cavities are thin-walled and engorged they are prone to rupture, and extensive involvement can compress adjacent parenchyma and impair hepatic function.",
+    "additionalDifferentials": [
+      "Hepatic metastases",
+      "Pyogenic liver abscess",
+      "Cavernous haemangioma",
+      "Hepatic adenoma or adenomatosis",
+      "Hepatocellular carcinoma",
+      "Multifocal simple cysts or biliary hamartomas",
+      "Sinusoidal obstruction syndrome or Budd-Chiari syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Hepatic metastases, Pyogenic liver abscess, Cavernous haemangioma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Multiphase contrast-enhanced CT of the liver",
+      "MRI with hepatobiliary contrast",
+      "Doppler ultrasound of the hepatic vasculature",
+      "Careful, often transjugular, liver biopsy where the diagnosis is uncertain",
+      "Full liver function panel and coagulation profile",
+      "Detailed drug and medication history including performance-enhancing agents",
+      "Screen for underlying malignancy or chronic infection"
     ],
-    [
-     "Management Strategy",
-     "Withdraw the causative drug or toxin such as anabolic androgenic steroids, oestrogens, tamoxifen, corticosteroids or thiopurines",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden severe abdominal pain with hypotension suggesting cavity rupture and haemoperitoneum",
+      "Falling haemoglobin with haemodynamic instability",
+      "Progressive hepatic dysfunction or synthetic failure",
+      "New portal hypertension with variceal bleeding"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing a routine percutaneous biopsy of a vascular lesion and provoking major haemorrhage.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Drug-associated disease frequently regresses once the causative agent is stopped, but spontaneous rupture or extensive parenchymal involvement carries a high mortality and may precipitate hepatic failure.",
+    "pitfalls": [
+      "Performing a routine percutaneous biopsy of a vascular lesion and provoking major haemorrhage.",
+      "Misdiagnosing the lesions as metastatic malignancy and subjecting the patient to unnecessary treatment.",
+      "Failing to take a thorough medication and anabolic-steroid history.",
+      "Overlooking the diagnosis as a cause of unexplained intra-abdominal haemorrhage."
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "MacSween's Pathology of the Liver",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Withdraw the causative drug or toxin such as anabolic androgenic steroids, oestrogens, tamoxifen, corticosteroids or thiopurines like azathioprine, as disease often regresses once the agent is stopped",
+      "Treat the underlying wasting or infective condition such as tuberculosis, malignancy or malnutrition, and manage bacillary peliosis from Bartonella in the immunocompromised with appropriate antimicrobials",
+      "Manage spontaneous intraperitoneal haemorrhage as an emergency with resuscitation, transfusion and correction of coagulopathy, achieving haemostasis by transarterial embolisation or surgery including hepatic resection",
+      "Monitor lesions with serial cross-sectional imaging to confirm regression after removal of the precipitant",
+      "Support hepatic dysfunction and portal hypertension where present",
+      "Refer to hepatology and interventional radiology, particularly when the diagnosis is uncertain or rupture is a risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for peliosis hepatis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "peliosis-hepatis-real-image",
-   "title": "peliosis hepatis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "peliosis_hepatis-pathway",
+      "title": "peliosis hepatis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Peliosis hepatis is a rare vascular disorder in which the liver contains multiple blood-filled cystic spaces due to dilatation of the hepatic sinusoids.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden severe abdominal pain with hypotension suggesting cavity rupture and haemoperitoneum",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Multiphase contrast-enhanced CT of the liver, MRI with hepatobiliary contrast, Doppler ultrasound of the hepatic vasculature"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Withdraw the causative drug or toxin such as anabolic androgenic steroids, oestrogens, tamoxifen, corticosteroids or thiopurines like azathioprine, as disease often regresses once the agent is stopped"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing a routine percutaneous biopsy of a vascular lesion and provoking major haemorrhage."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of peliosis hepatis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "peliosis_hepatis-matrix",
+      "title": "peliosis hepatis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Peliosis hepatis is a rare vascular disorder in which the liver contains multiple blood-filled cystic spaces due to dilatation of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Multiphase contrast-enhanced CT of the liver, MRI with hepatobiliary contrast, Doppler ultrasound of the hepatic vasculature",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hepatic metastases, Pyogenic liver abscess, Cavernous haemangioma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Withdraw the causative drug or toxin such as anabolic androgenic steroids, oestrogens, tamoxifen, corticosteroids or thiopurines",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing a routine percutaneous biopsy of a vascular lesion and provoking major haemorrhage.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for peliosis hepatis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "peliosis_hepatis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiphase contrast-enhanced CT of the liver",
+          "cells": [
+            {
+              "text": "Blood-filled cystic spaces"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with hepatobiliary contrast",
+          "cells": [
+            {
+              "text": "Lesion characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound of hepatic vasculature",
+          "cells": [
+            {
+              "text": "Vascular flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transjugular liver biopsy if uncertain",
+          "cells": [
+            {
+              "text": "Diagnosis where imaging is equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function panel",
+          "cells": [
+            {
+              "text": "Hepatic synthetic function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peliosis_hepatis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepatic metastases",
+          "cells": [
+            {
+              "text": "Imaging mimic; avoid misdiagnosis as malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cavernous haemangioma",
+          "cells": [
+            {
+              "text": "Vascular mimic; contrast imaging characterises it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "peliosis_hepatis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the causative agent",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Anabolic steroids, oestrogens, tamoxifen, corticosteroids or azathioprine; often regresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying condition",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Address the underlying wasting or infective illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine biopsy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Percutaneous biopsy of a vascular lesion can provoke major haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rupture surveillance",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Watch for haemoperitoneum and falling haemoglobin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "peliosis_hepatis-dx-mgmt",
+      "title": "Diagnosis and management of peliosis hepatis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Liver lesions with cystic blood-filled spaces in a patient on steroids or oestrogens",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (sudden pain with hypotension, falling haemoglobin or variceal bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical and haematology review for haemoperitoneum",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Multiphase contrast CT, MRI, hepatic Doppler, transjugular biopsy if uncertain, LFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are blood-filled sinusoidal spaces seen with a drug or toxin cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider liver metastases, abscess, haemangioma, adenoma or Budd-Chiari syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the causative drug, such as anabolic steroids or oestrogens",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the underlying wasting or infective condition",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid routine percutaneous biopsy because of haemorrhage risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for rupture, haemoperitoneum and worsening liver function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often regresses after the agent stops; rupture or extensive disease is fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

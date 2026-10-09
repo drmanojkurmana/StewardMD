@@ -1,176 +1,483 @@
 {
- "id": "ischaemic_hepatitis",
- "name": "ischaemic hepatitis",
- "aliases": [
-  "shock liver",
-  "hypoxic hepatitis"
- ],
- "class": "non_infective",
- "system": "hepatobiliary",
- "specialty": "hepatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Ischaemic hepatitis, or shock liver, is diffuse hepatocellular injury caused by inadequate oxygen delivery to the liver rather than by a primary hepatic disease.",
-   "Cardiac failure with hepatic venous congestion is the most frequent setting, while circulatory shock, severe hypoxaemia and sepsis are other important precipitants.",
-   "The biochemical hallmark is a massive, abrupt rise in serum transaminases that peaks quickly and then falls rapidly once perfusion is restored.",
-   "A markedly elevated lactate dehydrogenase with a low ALT-to-LDH ratio helps distinguish it from acute viral hepatitis.",
-   "Mild jaundice, a transient coagulopathy and acute kidney injury commonly accompany the transaminase spike.",
-   "The diagnosis is clinical and biochemical, and liver biopsy, rarely needed, shows centrilobular zone 3 necrosis.",
-   "Management is directed entirely at restoring haemodynamics and treating the underlying cardiac or circulatory disorder rather than the liver itself.",
-   "A precipitating haemodynamic event is not always overt, and cardiac failure can cause the picture without a documented episode of hypotension."
+  "id": "ischaemic_hepatitis",
+  "name": "ischaemic hepatitis",
+  "aliases": [
+    "shock liver",
+    "hypoxic hepatitis"
   ],
-  "pathophysiology": "Hepatocytes in the centrilobular zone, acinar zone 3, lie furthest from the incoming oxygenated blood and are the most metabolically active, making them exquisitely sensitive to hypoxia. Ischaemic hepatitis develops when oxygen delivery falls below hepatic demand through reduced cardiac output, systemic hypotension, passive venous congestion, arterial hypoxaemia or a combination of these. Congestive cardiac failure is especially important because raised central venous pressure produces hepatic congestion that both lowers effective perfusion pressure and sensitises the parenchyma, so that even a modest fall in output precipitates injury. The resulting zone 3 necrosis releases large quantities of intracellular enzymes, generating the characteristic transaminase and lactate dehydrogenase surge, and a reperfusion component may follow restoration of flow. Because the insult is typically brief and the hepatic architecture is preserved, enzymes normalise rapidly and function usually recovers once the circulation is corrected.",
-  "additionalDifferentials": [
-   "Acute viral hepatitis",
-   "Paracetamol or other drug-induced hepatotoxicity",
-   "Acute Budd-Chiari syndrome",
-   "Hepatic infarction",
-   "Autoimmune hepatitis flare",
-   "Acute biliary obstruction",
-   "Heat stroke-related liver injury"
-  ],
-  "additionalInvestigations": [
-   "Serial liver function tests demonstrating the rapid rise and fall in transaminases",
-   "Serum lactate dehydrogenase with calculation of the ALT-to-LDH ratio",
-   "Echocardiography and assessment of cardiac output",
-   "Arterial blood gas and lactate",
-   "Coagulation profile and renal function",
-   "Viral hepatitis and paracetamol screen to exclude alternatives",
-   "Doppler assessment of the hepatic vessels where outflow obstruction is suspected"
-  ],
-  "redFlags": [
-   "Progressive rise in bilirubin and INR after transaminases have peaked, suggesting evolving liver failure",
-   "Persistent shock or refractory hypotension",
-   "Encephalopathy or other features of acute liver failure",
-   "Concurrent multi-organ dysfunction"
-  ],
-  "prognosis": "The liver injury itself usually resolves quickly once perfusion is restored, but overall prognosis is poor and is driven by the severity of the underlying cardiac, circulatory or respiratory illness.",
-  "pitfalls": [
-   "Misdiagnosing the transaminase spike as acute viral or drug-induced hepatitis and missing the haemodynamic cause.",
-   "Waiting for a documented episode of hypotension, which may be absent in congestive cardiac failure.",
-   "Focusing on hepatic management rather than urgently correcting the underlying circulatory problem.",
-   "Attributing the accompanying acute kidney injury to a separate process."
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore hepatic perfusion by treating the underlying cause, optimising cardiac output, managing heart failure and reversing shock and hypoxaemia",
-   "Support the circulation with fluids and inotropes or vasopressors as appropriate, and relieve hepatic venous congestion in cardiac failure with diuretics",
-   "Correct hypoxaemia with supplemental oxygen and ventilatory support where needed",
-   "Provide supportive care for the accompanying transient coagulopathy and acute kidney injury",
-   "Avoid or dose-adjust hepatotoxic and hepatically cleared drugs during the injury",
-   "Monitor with serial liver function tests, expecting rapid resolution once perfusion is restored, and exclude viral hepatitis and paracetamol toxicity as alternatives",
-   "Escalate to critical care, since the prognosis is driven by the severity of the underlying cardiac, circulatory or respiratory illness"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ischaemic_hepatitis-pathway",
-   "title": "ischaemic hepatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Ischaemic hepatitis, or shock liver, is diffuse hepatocellular injury caused by inadequate oxygen delivery to the liver rather than by a primary hepatic disease.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive rise in bilirubin and INR after transaminases have peaked, suggesting evolving liver failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial liver function tests demonstrating the rapid rise and fall in transaminases, Serum lactate dehydrogenase with calculation of the ALT-to-LDH ratio, Echocardiography and assessment of cardiac output"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore hepatic perfusion by treating the underlying cause, optimising cardiac output, managing heart failure and reversing shock and hypoxaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the transaminase spike as acute viral or drug-induced hepatitis and missing the haemodynamic cause."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ischaemic hepatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "ischaemic_hepatitis-matrix",
-   "title": "ischaemic hepatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Ischaemic hepatitis, or shock liver, is diffuse hepatocellular injury caused by inadequate oxygen delivery to the liver rather",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "hepatobiliary",
+  "specialty": "hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Ischaemic hepatitis, or shock liver, is diffuse hepatocellular injury caused by inadequate oxygen delivery to the liver rather than by a primary hepatic disease.",
+      "Cardiac failure with hepatic venous congestion is the most frequent setting, while circulatory shock, severe hypoxaemia and sepsis are other important precipitants.",
+      "The biochemical hallmark is a massive, abrupt rise in serum transaminases that peaks quickly and then falls rapidly once perfusion is restored.",
+      "A markedly elevated lactate dehydrogenase with a low ALT-to-LDH ratio helps distinguish it from acute viral hepatitis.",
+      "Mild jaundice, a transient coagulopathy and acute kidney injury commonly accompany the transaminase spike.",
+      "The diagnosis is clinical and biochemical, and liver biopsy, rarely needed, shows centrilobular zone 3 necrosis.",
+      "Management is directed entirely at restoring haemodynamics and treating the underlying cardiac or circulatory disorder rather than the liver itself.",
+      "A precipitating haemodynamic event is not always overt, and cardiac failure can cause the picture without a documented episode of hypotension."
     ],
-    [
-     "Key Investigations",
-     "Serial liver function tests demonstrating the rapid rise and fall in transaminases, Serum lactate dehydrogenase with calculation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hepatocytes in the centrilobular zone, acinar zone 3, lie furthest from the incoming oxygenated blood and are the most metabolically active, making them exquisitely sensitive to hypoxia. Ischaemic hepatitis develops when oxygen delivery falls below hepatic demand through reduced cardiac output, systemic hypotension, passive venous congestion, arterial hypoxaemia or a combination of these. Congestive cardiac failure is especially important because raised central venous pressure produces hepatic congestion that both lowers effective perfusion pressure and sensitises the parenchyma, so that even a modest fall in output precipitates injury. The resulting zone 3 necrosis releases large quantities of intracellular enzymes, generating the characteristic transaminase and lactate dehydrogenase surge, and a reperfusion component may follow restoration of flow. Because the insult is typically brief and the hepatic architecture is preserved, enzymes normalise rapidly and function usually recovers once the circulation is corrected.",
+    "additionalDifferentials": [
+      "Acute viral hepatitis",
+      "Paracetamol or other drug-induced hepatotoxicity",
+      "Acute Budd-Chiari syndrome",
+      "Hepatic infarction",
+      "Autoimmune hepatitis flare",
+      "Acute biliary obstruction",
+      "Heat stroke-related liver injury"
     ],
-    [
-     "Primary Differentials",
-     "Acute viral hepatitis, Paracetamol or other drug-induced hepatotoxicity, Acute Budd-Chiari syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial liver function tests demonstrating the rapid rise and fall in transaminases",
+      "Serum lactate dehydrogenase with calculation of the ALT-to-LDH ratio",
+      "Echocardiography and assessment of cardiac output",
+      "Arterial blood gas and lactate",
+      "Coagulation profile and renal function",
+      "Viral hepatitis and paracetamol screen to exclude alternatives",
+      "Doppler assessment of the hepatic vessels where outflow obstruction is suspected"
     ],
-    [
-     "Management Strategy",
-     "Restore hepatic perfusion by treating the underlying cause, optimising cardiac output, managing heart failure and reversing shock",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive rise in bilirubin and INR after transaminases have peaked, suggesting evolving liver failure",
+      "Persistent shock or refractory hypotension",
+      "Encephalopathy or other features of acute liver failure",
+      "Concurrent multi-organ dysfunction"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the transaminase spike as acute viral or drug-induced hepatitis and missing the haemodynamic cause.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The liver injury itself usually resolves quickly once perfusion is restored, but overall prognosis is poor and is driven by the severity of the underlying cardiac, circulatory or respiratory illness.",
+    "pitfalls": [
+      "Misdiagnosing the transaminase spike as acute viral or drug-induced hepatitis and missing the haemodynamic cause.",
+      "Waiting for a documented episode of hypotension, which may be absent in congestive cardiac failure.",
+      "Focusing on hepatic management rather than urgently correcting the underlying circulatory problem.",
+      "Attributing the accompanying acute kidney injury to a separate process."
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore hepatic perfusion by treating the underlying cause, optimising cardiac output, managing heart failure and reversing shock and hypoxaemia",
+      "Support the circulation with fluids and inotropes or vasopressors as appropriate, and relieve hepatic venous congestion in cardiac failure with diuretics",
+      "Correct hypoxaemia with supplemental oxygen and ventilatory support where needed",
+      "Provide supportive care for the accompanying transient coagulopathy and acute kidney injury",
+      "Avoid or dose-adjust hepatotoxic and hepatically cleared drugs during the injury",
+      "Monitor with serial liver function tests, expecting rapid resolution once perfusion is restored, and exclude viral hepatitis and paracetamol toxicity as alternatives",
+      "Escalate to critical care, since the prognosis is driven by the severity of the underlying cardiac, circulatory or respiratory illness"
     ]
-   ],
-   "caption": "Overview comparison matrix for ischaemic hepatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ischaemic-hepatitis-real-image",
-   "title": "ischaemic hepatitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "ischaemic_hepatitis-pathway",
+      "title": "ischaemic hepatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Ischaemic hepatitis, or shock liver, is diffuse hepatocellular injury caused by inadequate oxygen delivery to the liver rather than by a primary hepatic disease.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive rise in bilirubin and INR after transaminases have peaked, suggesting evolving liver failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial liver function tests demonstrating the rapid rise and fall in transaminases, Serum lactate dehydrogenase with calculation of the ALT-to-LDH ratio, Echocardiography and assessment of cardiac output"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore hepatic perfusion by treating the underlying cause, optimising cardiac output, managing heart failure and reversing shock and hypoxaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the transaminase spike as acute viral or drug-induced hepatitis and missing the haemodynamic cause."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ischaemic hepatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ischaemic_hepatitis-matrix",
+      "title": "ischaemic hepatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Ischaemic hepatitis, or shock liver, is diffuse hepatocellular injury caused by inadequate oxygen delivery to the liver rather",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial liver function tests demonstrating the rapid rise and fall in transaminases, Serum lactate dehydrogenase with calculation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute viral hepatitis, Paracetamol or other drug-induced hepatotoxicity, Acute Budd-Chiari syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore hepatic perfusion by treating the underlying cause, optimising cardiac output, managing heart failure and reversing shock",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the transaminase spike as acute viral or drug-induced hepatitis and missing the haemodynamic cause.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ischaemic hepatitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ischaemic_hepatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial liver function tests",
+          "cells": [
+            {
+              "text": "Rapid rise and fall in transaminases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum LDH with ALT-to-LDH ratio",
+          "cells": [
+            {
+              "text": "Ratio supports ischaemic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac output",
+          "cells": [
+            {
+              "text": "Cardiac cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Hypoxaemia and hypoperfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile and renal function",
+          "cells": [
+            {
+              "text": "Coagulopathy and acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral hepatitis and paracetamol screen",
+          "cells": [
+            {
+              "text": "Alternatives excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler of hepatic vessels",
+          "cells": [
+            {
+              "text": "Outflow obstruction when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ischaemic_hepatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute viral hepatitis",
+          "cells": [
+            {
+              "text": "Excluded by viral serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paracetamol or drug-induced hepatotoxicity",
+          "cells": [
+            {
+              "text": "Excluded by paracetamol screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute Budd-Chiari syndrome",
+          "cells": [
+            {
+              "text": "Outflow obstruction on hepatic vessel Doppler"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ischaemic_hepatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "Optimise cardiac output, manage heart failure and reverse shock and hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circulatory support",
+          "cells": [
+            {
+              "text": "Fluids, inotropes or vasopressors as appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congestion",
+          "cells": [
+            {
+              "text": "Diuretics to relieve hepatic venous congestion in cardiac failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygenation",
+          "cells": [
+            {
+              "text": "Supplemental oxygen and ventilatory support where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ support",
+          "cells": [
+            {
+              "text": "Supportive care for transient coagulopathy and acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drugs and monitoring",
+          "cells": [
+            {
+              "text": "Avoid or dose-adjust hepatotoxic drugs; serial liver tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ischaemic_hepatitis-dx-mgmt",
+      "title": "Diagnosis and management of ischaemic hepatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abrupt massive transaminase rise after hypotension, heart failure or hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising bilirubin and INR after the peak, shock, or encephalopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Critical care escalation; assess for acute liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial LFT, LDH and ALT-to-LDH ratio, echo, gas, lactate, viral and paracetamol screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Shock, hypoxaemia or heart failure present with viral and drug causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider viral, drug, Budd-Chiari or biliary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the cardiac or circulatory cause and reverse shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fluids, inotropes or vasopressors as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diuretics to relieve hepatic venous congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oxygen and ventilatory support for hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dose-adjust hepatotoxic drugs; serial liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Rapid resolution once perfusion is restored; prognosis set by the underlying illness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

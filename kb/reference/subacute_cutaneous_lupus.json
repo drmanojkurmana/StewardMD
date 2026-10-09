@@ -1,176 +1,637 @@
 {
- "id": "subacute_cutaneous_lupus",
- "name": "Subacute cutaneous lupus erythematosus",
- "aliases": [
-  "SCLE",
-  "Subacute cutaneous LE"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Dermatology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A photosensitive, non-scarring cutaneous lupus subtype presenting in two morphologies: annular polycyclic lesions and papulosquamous (psoriasiform) plaques, favouring the upper back, shoulders, extensor arms and V of the neck while sparing the mid-face and knuckles.",
-   "Strongly associated with anti-Ro/SSA (and often anti-La/SSB) antibodies; most patients are anti-Ro positive.",
-   "Lesions characteristically heal without scarring but often leave persistent dyspigmentation and telangiectasia; central clearing gives annular lesions a distinctive rim.",
-   "A large proportion of cases are drug-induced, classically by thiazides, terbinafine, calcium-channel blockers, proton-pump inhibitors, antifungals, TNF inhibitors and chemotherapy agents.",
-   "Only a minority meet full criteria for systemic lupus erythematosus, and systemic involvement, when present, tends to be mild; nonetheless screening for systemic disease is essential.",
-   "Anti-Ro positivity carries a risk of neonatal lupus and congenital heart block in offspring, so pregnancy planning and fetal monitoring are important.",
-   "Photoprotection and photosensitivity counselling are cornerstones, since ultraviolet light reliably provokes and worsens lesions.",
-   "Antimalarials such as hydroxychloroquine are first-line systemic therapy, alongside topical corticosteroids and calcineurin inhibitors; smoking reduces antimalarial efficacy."
+  "id": "subacute_cutaneous_lupus",
+  "name": "Subacute cutaneous lupus erythematosus",
+  "aliases": [
+    "SCLE",
+    "Subacute cutaneous LE"
   ],
-  "pathophysiology": "Subacute cutaneous lupus erythematosus is an autoimmune interface dermatitis in which ultraviolet radiation, particularly UVB, drives keratinocyte apoptosis and translocation of intracellular Ro/SSA antigen to the cell surface. Anti-Ro/SSA autoantibodies then bind these exposed antigens, promoting antibody-dependent and cytotoxic T-cell-mediated destruction of basal keratinocytes at the dermo-epidermal junction. A type I interferon-rich milieu amplifies the response, and genetic predisposition (including HLA associations and complement deficiencies) increases susceptibility. Photosensitivity is therefore intrinsic to the disease mechanism. Numerous systemic drugs can trigger or unmask SCLE, presumably by enhancing photosensitivity or altering keratinocyte antigen expression, producing lesions clinically and serologically indistinguishable from idiopathic disease that typically remit after the culprit drug is withdrawn. Because the inflammatory attack is centred on the basal layer rather than the deeper appendages, lesions resolve without the dermal scarring and follicular destruction that characterise discoid lupus, though pigmentary change frequently persists.",
-  "additionalDifferentials": [
-   "Discoid lupus erythematosus and other chronic cutaneous lupus variants",
-   "Dermatomyositis (photodistributed poikiloderma and Gottron changes)",
-   "Psoriasis (papulosquamous variant overlap)",
-   "Tinea corporis and other annular dermatoses (granuloma annulare, erythema annulare centrifugum)",
-   "Polymorphic light eruption and other photodermatoses",
-   "Nummular eczema and pityriasis rosea",
-   "Secondary syphilis with annular plaques"
-  ],
-  "additionalInvestigations": [
-   "Anti-Ro/SSA and anti-La/SSB antibodies with a full antinuclear antibody panel",
-   "Skin biopsy with histology showing interface dermatitis and direct immunofluorescence",
-   "Complement levels, full blood count, renal function and urinalysis to screen for systemic lupus",
-   "Detailed drug history and medication review for photosensitising culprit agents",
-   "Antiphospholipid antibody testing where thrombotic or obstetric risk is a concern",
-   "Assessment for neonatal lupus risk and fetal cardiac monitoring in anti-Ro-positive pregnancy"
-  ],
-  "redFlags": [
-   "Features suggesting systemic lupus such as nephritis, cytopenias, serositis or neuropsychiatric symptoms",
-   "New or worsening eruption temporally linked to a recently started photosensitising drug",
-   "Anti-Ro positivity in pregnancy given the risk of congenital heart block",
-   "Extensive or rapidly progressive disease unresponsive to first-line therapy"
-  ],
-  "prognosis": "The cutaneous prognosis is generally favourable, with non-scarring lesions that respond to photoprotection and antimalarials and, in drug-induced cases, remit after withdrawal of the culprit. A minority progress to or coexist with systemic lupus, so ongoing surveillance is warranted.",
-  "pitfalls": [
-   "Overlooking a drug trigger and continuing the offending photosensitising medication",
-   "Assuming all cutaneous lupus is systemic, or conversely failing to screen for systemic involvement",
-   "Missing anti-Ro-related neonatal lupus and heart-block risk in women of childbearing age",
-   "Confusing papulosquamous SCLE with psoriasis and treating with agents that may aggravate lupus",
-   "Neglecting rigorous photoprotection and smoking cessation, which undermines antimalarial response"
-  ],
-  "references": [
-   "Standard dermatology textbooks",
-   "Cutaneous lupus erythematosus clinical guidelines",
-   "Peer-reviewed rheumatology and dermatology literature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Strict photoprotection with broad-spectrum sunscreen, sun avoidance and protective clothing, since ultraviolet exposure is intrinsic to the disease",
-   "Identify and withdraw culprit photosensitising drugs such as thiazides, terbinafine, calcium-channel blockers, proton-pump inhibitors and TNF inhibitors in drug-induced cases",
-   "Antimalarials such as hydroxychloroquine as the mainstay systemic therapy, with topical corticosteroids and calcineurin inhibitors for individual lesions",
-   "Escalate refractory disease to systemic immunosuppression with agents such as methotrexate or mycophenolate mofetil",
-   "Screen for and monitor systemic lupus involvement with renal function, blood counts, complement and urinalysis",
-   "In anti-Ro-positive women, undertake pregnancy planning and foetal cardiac monitoring for neonatal lupus and congenital heart block",
-   "Dermatology and rheumatology referral for ongoing management and surveillance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subacute_cutaneous_lupus-pathway",
-   "title": "Subacute cutaneous lupus erythematosus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A photosensitive, non-scarring cutaneous lupus subtype presenting in two morphologies: annular polycyclic lesions and papulosquamous (psoriasiform) plaques, favouring the upper back, shoulders, extensor arms and V of the neck while sparing",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting systemic lupus such as nephritis, cytopenias, serositis or neuropsychiatric symptoms",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anti-Ro/SSA and anti-La/SSB antibodies with a full antinuclear antibody panel, Skin biopsy with histology showing interface dermatitis and direct immunofluorescence, Complement levels, full blood count, renal function and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Strict photoprotection with broad-spectrum sunscreen, sun avoidance and protective clothing, since ultraviolet exposure is intrinsic to the disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking a drug trigger and continuing the offending photosensitising medication"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of subacute cutaneous lupus erythematosus."
-  }
- ],
- "tables": [
-  {
-   "id": "subacute_cutaneous_lupus-matrix",
-   "title": "Subacute cutaneous lupus erythematosus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A photosensitive, non-scarring cutaneous lupus subtype presenting in two morphologies: annular polycyclic lesions and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dermatology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A photosensitive, non-scarring cutaneous lupus subtype presenting in two morphologies: annular polycyclic lesions and papulosquamous (psoriasiform) plaques, favouring the upper back, shoulders, extensor arms and V of the neck while sparing the mid-face and knuckles.",
+      "Strongly associated with anti-Ro/SSA (and often anti-La/SSB) antibodies; most patients are anti-Ro positive.",
+      "Lesions characteristically heal without scarring but often leave persistent dyspigmentation and telangiectasia; central clearing gives annular lesions a distinctive rim.",
+      "A large proportion of cases are drug-induced, classically by thiazides, terbinafine, calcium-channel blockers, proton-pump inhibitors, antifungals, TNF inhibitors and chemotherapy agents.",
+      "Only a minority meet full criteria for systemic lupus erythematosus, and systemic involvement, when present, tends to be mild; nonetheless screening for systemic disease is essential.",
+      "Anti-Ro positivity carries a risk of neonatal lupus and congenital heart block in offspring, so pregnancy planning and fetal monitoring are important.",
+      "Photoprotection and photosensitivity counselling are cornerstones, since ultraviolet light reliably provokes and worsens lesions.",
+      "Antimalarials such as hydroxychloroquine are first-line systemic therapy, alongside topical corticosteroids and calcineurin inhibitors; smoking reduces antimalarial efficacy."
     ],
-    [
-     "Key Investigations",
-     "Anti-Ro/SSA and anti-La/SSB antibodies with a full antinuclear antibody panel, Skin biopsy with histology showing interface",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Subacute cutaneous lupus erythematosus is an autoimmune interface dermatitis in which ultraviolet radiation, particularly UVB, drives keratinocyte apoptosis and translocation of intracellular Ro/SSA antigen to the cell surface. Anti-Ro/SSA autoantibodies then bind these exposed antigens, promoting antibody-dependent and cytotoxic T-cell-mediated destruction of basal keratinocytes at the dermo-epidermal junction. A type I interferon-rich milieu amplifies the response, and genetic predisposition (including HLA associations and complement deficiencies) increases susceptibility. Photosensitivity is therefore intrinsic to the disease mechanism. Numerous systemic drugs can trigger or unmask SCLE, presumably by enhancing photosensitivity or altering keratinocyte antigen expression, producing lesions clinically and serologically indistinguishable from idiopathic disease that typically remit after the culprit drug is withdrawn. Because the inflammatory attack is centred on the basal layer rather than the deeper appendages, lesions resolve without the dermal scarring and follicular destruction that characterise discoid lupus, though pigmentary change frequently persists.",
+    "additionalDifferentials": [
+      "Discoid lupus erythematosus and other chronic cutaneous lupus variants",
+      "Dermatomyositis (photodistributed poikiloderma and Gottron changes)",
+      "Psoriasis (papulosquamous variant overlap)",
+      "Tinea corporis and other annular dermatoses (granuloma annulare, erythema annulare centrifugum)",
+      "Polymorphic light eruption and other photodermatoses",
+      "Nummular eczema and pityriasis rosea",
+      "Secondary syphilis with annular plaques"
     ],
-    [
-     "Primary Differentials",
-     "Discoid lupus erythematosus and other chronic cutaneous lupus variants, Dermatomyositis (photodistributed poikiloderma and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anti-Ro/SSA and anti-La/SSB antibodies with a full antinuclear antibody panel",
+      "Skin biopsy with histology showing interface dermatitis and direct immunofluorescence",
+      "Complement levels, full blood count, renal function and urinalysis to screen for systemic lupus",
+      "Detailed drug history and medication review for photosensitising culprit agents",
+      "Antiphospholipid antibody testing where thrombotic or obstetric risk is a concern",
+      "Assessment for neonatal lupus risk and fetal cardiac monitoring in anti-Ro-positive pregnancy"
     ],
-    [
-     "Management Strategy",
-     "Strict photoprotection with broad-spectrum sunscreen, sun avoidance and protective clothing, since ultraviolet exposure is",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting systemic lupus such as nephritis, cytopenias, serositis or neuropsychiatric symptoms",
+      "New or worsening eruption temporally linked to a recently started photosensitising drug",
+      "Anti-Ro positivity in pregnancy given the risk of congenital heart block",
+      "Extensive or rapidly progressive disease unresponsive to first-line therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking a drug trigger and continuing the offending photosensitising medication",
-     "Prevent diagnostic or management error"
+    "prognosis": "The cutaneous prognosis is generally favourable, with non-scarring lesions that respond to photoprotection and antimalarials and, in drug-induced cases, remit after withdrawal of the culprit. A minority progress to or coexist with systemic lupus, so ongoing surveillance is warranted.",
+    "pitfalls": [
+      "Overlooking a drug trigger and continuing the offending photosensitising medication",
+      "Assuming all cutaneous lupus is systemic, or conversely failing to screen for systemic involvement",
+      "Missing anti-Ro-related neonatal lupus and heart-block risk in women of childbearing age",
+      "Confusing papulosquamous SCLE with psoriasis and treating with agents that may aggravate lupus",
+      "Neglecting rigorous photoprotection and smoking cessation, which undermines antimalarial response"
+    ],
+    "references": [
+      "Standard dermatology textbooks",
+      "Cutaneous lupus erythematosus clinical guidelines",
+      "Peer-reviewed rheumatology and dermatology literature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Strict photoprotection with broad-spectrum sunscreen, sun avoidance and protective clothing, since ultraviolet exposure is intrinsic to the disease",
+      "Identify and withdraw culprit photosensitising drugs such as thiazides, terbinafine, calcium-channel blockers, proton-pump inhibitors and TNF inhibitors in drug-induced cases",
+      "Antimalarials such as hydroxychloroquine as the mainstay systemic therapy, with topical corticosteroids and calcineurin inhibitors for individual lesions",
+      "Escalate refractory disease to systemic immunosuppression with agents such as methotrexate or mycophenolate mofetil",
+      "Screen for and monitor systemic lupus involvement with renal function, blood counts, complement and urinalysis",
+      "In anti-Ro-positive women, undertake pregnancy planning and foetal cardiac monitoring for neonatal lupus and congenital heart block",
+      "Dermatology and rheumatology referral for ongoing management and surveillance"
     ]
-   ],
-   "caption": "Overview comparison matrix for subacute cutaneous lupus erythematosus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subacute-cutaneous-lupus-real-image",
-   "title": "Subacute cutaneous lupus erythematosus: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "subacute_cutaneous_lupus-pathway",
+      "title": "Subacute cutaneous lupus erythematosus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A photosensitive, non-scarring cutaneous lupus subtype presenting in two morphologies: annular polycyclic lesions and papulosquamous (psoriasiform) plaques, favouring the upper back, shoulders, extensor arms and V of the neck while sparing",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting systemic lupus such as nephritis, cytopenias, serositis or neuropsychiatric symptoms",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anti-Ro/SSA and anti-La/SSB antibodies with a full antinuclear antibody panel, Skin biopsy with histology showing interface dermatitis and direct immunofluorescence, Complement levels, full blood count, renal function and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Strict photoprotection with broad-spectrum sunscreen, sun avoidance and protective clothing, since ultraviolet exposure is intrinsic to the disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking a drug trigger and continuing the offending photosensitising medication"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of subacute cutaneous lupus erythematosus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subacute_cutaneous_lupus-matrix",
+      "title": "Subacute cutaneous lupus erythematosus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A photosensitive, non-scarring cutaneous lupus subtype presenting in two morphologies: annular polycyclic lesions and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anti-Ro/SSA and anti-La/SSB antibodies with a full antinuclear antibody panel, Skin biopsy with histology showing interface",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Discoid lupus erythematosus and other chronic cutaneous lupus variants, Dermatomyositis (photodistributed poikiloderma and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Strict photoprotection with broad-spectrum sunscreen, sun avoidance and protective clothing, since ultraviolet exposure is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking a drug trigger and continuing the offending photosensitising medication",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for subacute cutaneous lupus erythematosus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subacute_cutaneous_lupus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-Ro/SSA and anti-La/SSB with ANA",
+          "cells": [
+            {
+              "text": "Antibody profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Interface dermatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement, FBC, renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Systemic lupus excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed drug history",
+          "cells": [
+            {
+              "text": "Photosensitising culprits, such as thiazides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibody testing",
+          "cells": [
+            {
+              "text": "Thrombotic or obstetric risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal lupus risk assessment",
+          "cells": [
+            {
+              "text": "Fetal cardiac monitoring in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_cutaneous_lupus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Discoid lupus erythematosus",
+          "cells": [
+            {
+              "text": "Scarring chronic cutaneous lupus; this subtype is non-scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriasis",
+          "cells": [
+            {
+              "text": "Papulosquamous overlap; biopsy separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_cutaneous_lupus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict photoprotection",
+          "cells": [
+            {
+              "text": "Broad-spectrum sunscreen and sun avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdrawal of culprit drugs",
+          "cells": [
+            {
+              "text": "Thiazides and other photosensitising agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Mainstay systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic immunosuppression",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for systemic lupus",
+          "cells": [
+            {
+              "text": "Renal function and blood counts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy planning",
+          "cells": [
+            {
+              "text": "Anti-Ro-positive women, with fetal cardiac monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and rheumatology referral",
+          "cells": [
+            {
+              "text": "Ongoing management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_cutaneous_lupus-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs linked to lupus-like illness",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced lupus",
+          "cells": [
+            {
+              "text": "hydralazine, procainamide, quinidine, phenytoin, carbamazepine, methyldopa, isoniazid, chlorpromazine, lithium, penicillamine, tetracyclines, TNF inhibitors, ACE inhibitors, ticlopidine"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "subacute_cutaneous_lupus-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "ANA patterns, target antigens and clinical correlates",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antigen identified",
+        "Clinical correlate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse",
+          "cells": [
+            {
+              "text": "Deoxyribonucleoprotein, histones"
+            },
+            {
+              "text": "Nonspecific; drug-induced lupus, lupus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Peripheral (rim)",
+          "cells": [
+            {
+              "text": "ds-DNA"
+            },
+            {
+              "text": "50% of SLE (specific)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: U1-RNP",
+          "cells": [
+            {
+              "text": "U1-RNP"
+            },
+            {
+              "text": "Up to 90% of MCTD"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: Sm",
+          "cells": [
+            {
+              "text": "Sm"
+            },
+            {
+              "text": "30% of SLE (specific)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: Ro (SS-A)",
+          "cells": [
+            {
+              "text": "Ro (SS-A)"
+            },
+            {
+              "text": "Sjogren's 60%, subacute cutaneous lupus, neonatal lupus, ANA-negative lupus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: La (SS-B)",
+          "cells": [
+            {
+              "text": "La (SS-B)"
+            },
+            {
+              "text": "50% of Sjogren's, 15% of lupus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: Scl-70",
+          "cells": [
+            {
+              "text": "Scl-70"
+            },
+            {
+              "text": "40% of diffuse scleroderma"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: PM-1",
+          "cells": [
+            {
+              "text": "PM-1"
+            },
+            {
+              "text": "Polymyositis, dermatomyositis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: Jo-1",
+          "cells": [
+            {
+              "text": "Jo-1"
+            },
+            {
+              "text": "Polymyositis with pneumonitis and arthritis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nucleolar",
+          "cells": [
+            {
+              "text": "RNA polymerase I, others"
+            },
+            {
+              "text": "40% of progressive systemic sclerosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Centromere",
+          "cells": [
+            {
+              "text": "Kinetochore"
+            },
+            {
+              "text": "75% of CREST (limited scleroderma)"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subacute_cutaneous_lupus-dx-mgmt",
+      "title": "Diagnosis and management of Subacute cutaneous lupus erythematosus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Photosensitive non-scarring lesions: suspected subacute cutaneous lupus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (nephritis, cytopenias, anti-Ro in pregnancy, drug onset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rheumatology review for systemic lupus or pregnancy with anti-Ro",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-Ro and anti-La with ANA; skin biopsy; complement, FBC, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are anti-Ro antibodies and a compatible biopsy found with no systemic lupus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider discoid lupus, psoriasis or dermatomyositis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict photoprotection with broad-spectrum sunscreen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw culprit drugs such as thiazides",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hydroxychloroquine as the mainstay systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate refractory disease to systemic immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually heals without scarring but leaves persistent change; some progress to SLE",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

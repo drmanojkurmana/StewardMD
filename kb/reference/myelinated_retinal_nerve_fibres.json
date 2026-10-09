@@ -1,173 +1,451 @@
 {
- "id": "myelinated_retinal_nerve_fibres",
- "name": "myelinated retinal nerve fibres",
- "aliases": [
-  "medullated nerve fibres",
-  "myelinated nerve fibre layer"
- ],
- "class": "non_infective",
- "system": "ophthalmic",
- "specialty": "ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Appear as white or greyish-white patches with characteristic feathery, striated borders following the retinal nerve fibre bundle orientation.",
-   "Most commonly located at or contiguous with the optic disc margin, most often superiorly or inferiorly, and may obscure the underlying retinal vessels.",
-   "Represent aberrant myelination of retinal ganglion cell axons anterior to the lamina cribrosa, where myelin normally stops.",
-   "Usually an incidental, benign and non-progressive finding compatible with normal vision when isolated.",
-   "Extensive peripapillary myelination can produce a corresponding scotoma or enlarged blind spot on perimetry.",
-   "A recognised triad exists of unilateral extensive myelinated fibres, high axial myopia and dense amblyopia that responds poorly to treatment.",
-   "Rarely associated with neurofibromatosis and other neurocutaneous or developmental disorders.",
-   "Acquired myelinated fibres are uncommon but reported, sometimes following optic nerve or retinal insult."
+  "id": "myelinated_retinal_nerve_fibres",
+  "name": "myelinated retinal nerve fibres",
+  "aliases": [
+    "medullated nerve fibres",
+    "myelinated nerve fibre layer"
   ],
-  "pathophysiology": "Myelination of the anterior visual pathway normally proceeds from the lateral geniculate body towards the eye and halts at the lamina cribrosa before birth, so that the retinal nerve fibre layer remains unmyelinated. Myelinated retinal nerve fibres result from oligodendrocytes, or oligodendrocyte-like cells, aberrantly present within the retina depositing myelin around ganglion cell axons anterior to the lamina cribrosa. The opaque myelin sheaths scatter light, producing the white feathery patches and obscuring the underlying vasculature. The myelin itself does not usually impair conduction, but dense peripapillary or macular involvement can create field defects, and when combined with high myopia it contributes to a deprivation-type amblyopia that is characteristically refractory.",
-  "additionalDifferentials": [
-   "Cotton wool spots",
-   "Retinal infiltrates or exudates",
-   "Chorioretinal scarring",
-   "Retinoblastoma or astrocytic hamartoma (in children)",
-   "Branch retinal artery occlusion with retinal whitening",
-   "Optic disc drusen with peripapillary changes",
-   "Combined hamartoma of the retina and RPE"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundoscopy and fundus photography documenting the feathery-edged patch",
-   "Optical coherence tomography showing hyper-reflective thickening of the nerve fibre layer",
-   "Automated perimetry to map any associated scotoma or enlarged blind spot",
-   "Cycloplegic refraction to detect associated high myopia",
-   "Amblyopia assessment in children, including visual acuity and fixation testing",
-   "Fundus autofluorescence or fluorescein angiography where the diagnosis is uncertain"
-  ],
-  "redFlags": [
-   "Apparent progression or new appearance of myelination, which is atypical and warrants investigation",
-   "Associated dense amblyopia and high myopia in a child requiring prompt management",
-   "Features suggesting an alternative infiltrative or vascular lesion masquerading as myelin",
-   "Systemic signs suggesting neurofibromatosis or other syndromic association"
-  ],
-  "prognosis": "Isolated myelinated retinal nerve fibres are benign and stable with an excellent visual prognosis. When part of the myopia–amblyopia triad, the visual outcome is poor and often resistant to conventional amblyopia therapy.",
-  "pitfalls": [
-   "Mistaking myelinated fibres for cotton wool spots or retinal infiltrates and pursuing an unnecessary systemic work-up.",
-   "In children, confusing extensive lesions with retinoblastoma or a retinal hamartoma.",
-   "Failing to detect and treat the associated high myopia and deprivation amblyopia early.",
-   "Assuming the amblyopia will respond fully to occlusion, leading to unrealistic expectations."
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Pediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe when isolated, as the finding is benign, non-progressive and compatible with normal vision and needs no active treatment",
-   "Correct any associated high axial myopia with cycloplegic-refraction-guided spectacles or contact lenses",
-   "Treat associated amblyopia in children with full refractive correction and occlusion or pharmacological penalisation of the fellow eye, recognising the myopia-amblyopia triad often responds poorly",
-   "Perform baseline and periodic automated perimetry to document any scotoma or enlarged blind spot from dense peripapillary involvement",
-   "Monitor visual acuity, fixation and fundus appearance with serial fundus photography and optical coherence tomography",
-   "Refer children promptly to paediatric ophthalmology and orthoptics for amblyopia therapy and monitoring"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myelinated_retinal_nerve_fibres-pathway",
-   "title": "myelinated retinal nerve fibres: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Appear as white or greyish-white patches with characteristic feathery, striated borders following the retinal nerve fibre bundle orientation.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Apparent progression or new appearance of myelination, which is atypical and warrants investigation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundoscopy and fundus photography documenting the feathery-edged patch, Optical coherence tomography showing hyper-reflective thickening of the nerve fibre layer, Automated perimetry to map any associated scotoma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe when isolated, as the finding is benign, non-progressive and compatible with normal vision and needs no active treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking myelinated fibres for cotton wool spots or retinal infiltrates and pursuing an unnecessary systemic work-up."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myelinated retinal nerve fibres."
-  }
- ],
- "tables": [
-  {
-   "id": "myelinated_retinal_nerve_fibres-matrix",
-   "title": "myelinated retinal nerve fibres: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Appear as white or greyish-white patches with characteristic feathery, striated borders following the retinal nerve fibre bundle",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ophthalmic",
+  "specialty": "ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Appear as white or greyish-white patches with characteristic feathery, striated borders following the retinal nerve fibre bundle orientation.",
+      "Most commonly located at or contiguous with the optic disc margin, most often superiorly or inferiorly, and may obscure the underlying retinal vessels.",
+      "Represent aberrant myelination of retinal ganglion cell axons anterior to the lamina cribrosa, where myelin normally stops.",
+      "Usually an incidental, benign and non-progressive finding compatible with normal vision when isolated.",
+      "Extensive peripapillary myelination can produce a corresponding scotoma or enlarged blind spot on perimetry.",
+      "A recognised triad exists of unilateral extensive myelinated fibres, high axial myopia and dense amblyopia that responds poorly to treatment.",
+      "Rarely associated with neurofibromatosis and other neurocutaneous or developmental disorders.",
+      "Acquired myelinated fibres are uncommon but reported, sometimes following optic nerve or retinal insult."
     ],
-    [
-     "Key Investigations",
-     "Dilated fundoscopy and fundus photography documenting the feathery-edged patch, Optical coherence tomography showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Myelination of the anterior visual pathway normally proceeds from the lateral geniculate body towards the eye and halts at the lamina cribrosa before birth, so that the retinal nerve fibre layer remains unmyelinated. Myelinated retinal nerve fibres result from oligodendrocytes, or oligodendrocyte-like cells, aberrantly present within the retina depositing myelin around ganglion cell axons anterior to the lamina cribrosa. The opaque myelin sheaths scatter light, producing the white feathery patches and obscuring the underlying vasculature. The myelin itself does not usually impair conduction, but dense peripapillary or macular involvement can create field defects, and when combined with high myopia it contributes to a deprivation-type amblyopia that is characteristically refractory.",
+    "additionalDifferentials": [
+      "Cotton wool spots",
+      "Retinal infiltrates or exudates",
+      "Chorioretinal scarring",
+      "Retinoblastoma or astrocytic hamartoma (in children)",
+      "Branch retinal artery occlusion with retinal whitening",
+      "Optic disc drusen with peripapillary changes",
+      "Combined hamartoma of the retina and RPE"
     ],
-    [
-     "Primary Differentials",
-     "Cotton wool spots, Retinal infiltrates or exudates, Chorioretinal scarring",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundoscopy and fundus photography documenting the feathery-edged patch",
+      "Optical coherence tomography showing hyper-reflective thickening of the nerve fibre layer",
+      "Automated perimetry to map any associated scotoma or enlarged blind spot",
+      "Cycloplegic refraction to detect associated high myopia",
+      "Amblyopia assessment in children, including visual acuity and fixation testing",
+      "Fundus autofluorescence or fluorescein angiography where the diagnosis is uncertain"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe when isolated, as the finding is benign, non-progressive and compatible with normal vision and needs no",
-     "Core treatment modality"
+    "redFlags": [
+      "Apparent progression or new appearance of myelination, which is atypical and warrants investigation",
+      "Associated dense amblyopia and high myopia in a child requiring prompt management",
+      "Features suggesting an alternative infiltrative or vascular lesion masquerading as myelin",
+      "Systemic signs suggesting neurofibromatosis or other syndromic association"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking myelinated fibres for cotton wool spots or retinal infiltrates and pursuing an unnecessary systemic work-up.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated myelinated retinal nerve fibres are benign and stable with an excellent visual prognosis. When part of the myopia–amblyopia triad, the visual outcome is poor and often resistant to conventional amblyopia therapy.",
+    "pitfalls": [
+      "Mistaking myelinated fibres for cotton wool spots or retinal infiltrates and pursuing an unnecessary systemic work-up.",
+      "In children, confusing extensive lesions with retinoblastoma or a retinal hamartoma.",
+      "Failing to detect and treat the associated high myopia and deprivation amblyopia early.",
+      "Assuming the amblyopia will respond fully to occlusion, leading to unrealistic expectations."
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Pediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe when isolated, as the finding is benign, non-progressive and compatible with normal vision and needs no active treatment",
+      "Correct any associated high axial myopia with cycloplegic-refraction-guided spectacles or contact lenses",
+      "Treat associated amblyopia in children with full refractive correction and occlusion or pharmacological penalisation of the fellow eye, recognising the myopia-amblyopia triad often responds poorly",
+      "Perform baseline and periodic automated perimetry to document any scotoma or enlarged blind spot from dense peripapillary involvement",
+      "Monitor visual acuity, fixation and fundus appearance with serial fundus photography and optical coherence tomography",
+      "Refer children promptly to paediatric ophthalmology and orthoptics for amblyopia therapy and monitoring"
     ]
-   ],
-   "caption": "Overview comparison matrix for myelinated retinal nerve fibres."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myelinated-retinal-nerve-fibres-real-image",
-   "title": "myelinated retinal nerve fibres: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "myelinated_retinal_nerve_fibres-pathway",
+      "title": "myelinated retinal nerve fibres: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Appear as white or greyish-white patches with characteristic feathery, striated borders following the retinal nerve fibre bundle orientation.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Apparent progression or new appearance of myelination, which is atypical and warrants investigation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundoscopy and fundus photography documenting the feathery-edged patch, Optical coherence tomography showing hyper-reflective thickening of the nerve fibre layer, Automated perimetry to map any associated scotoma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe when isolated, as the finding is benign, non-progressive and compatible with normal vision and needs no active treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking myelinated fibres for cotton wool spots or retinal infiltrates and pursuing an unnecessary systemic work-up."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myelinated retinal nerve fibres."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myelinated_retinal_nerve_fibres-matrix",
+      "title": "myelinated retinal nerve fibres: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Appear as white or greyish-white patches with characteristic feathery, striated borders following the retinal nerve fibre bundle",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundoscopy and fundus photography documenting the feathery-edged patch, Optical coherence tomography showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cotton wool spots, Retinal infiltrates or exudates, Chorioretinal scarring",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe when isolated, as the finding is benign, non-progressive and compatible with normal vision and needs no",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking myelinated fibres for cotton wool spots or retinal infiltrates and pursuing an unnecessary systemic work-up.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myelinated retinal nerve fibres."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myelinated_retinal_nerve_fibres-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundoscopy and fundus photography",
+          "cells": [
+            {
+              "text": "Feathery-edged white patch at the disc margin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Hyper-reflective thickening of the nerve fibre layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Any associated scotoma or enlarged blind spot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Associated high axial myopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia assessment in children",
+          "cells": [
+            {
+              "text": "Visual acuity and fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence or fluorescein angiography",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myelinated_retinal_nerve_fibres-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cotton wool spots",
+          "cells": [
+            {
+              "text": "Myelinated fibres are feathery-edged and follow fibre bundles; mistaking them triggers unnecessary systemic work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinoblastoma or astrocytic hamartoma in children",
+          "cells": [
+            {
+              "text": "Extensive lesions in children can be confused with these"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myelinated_retinal_nerve_fibres-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "When isolated; benign, non-progressive and compatible with normal vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of high axial myopia",
+          "cells": [
+            {
+              "text": "Cycloplegic-refraction-guided spectacles or contact lenses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Full refractive correction with occlusion or penalisation of the fellow eye; response often poor in the triad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perimetry",
+          "cells": [
+            {
+              "text": "Baseline and periodic, to document any scotoma or enlarged blind spot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Acuity, fixation, serial fundus photography and OCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric referral",
+          "cells": [
+            {
+              "text": "Paediatric ophthalmology and orthoptics for children with amblyopia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myelinated_retinal_nerve_fibres-dx-mgmt",
+      "title": "Diagnosis and management of myelinated retinal nerve fibres",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "White feathery-edged patch at the optic disc margin, usually superior or inferior",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new or progressive myelination, dense amblyopia with high myopia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prompt paediatric ophthalmology and orthoptic management of amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundus photography, OCT, automated perimetry, cycloplegic refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Feathery myelinated patch confirmed, with masquerading lesions excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-examine for retinoblastoma, infiltrate or vascular lesion; repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe when isolated; benign and non-progressive",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct high axial myopia with cycloplegic-refraction-guided lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat amblyopia with full correction and occlusion or penalisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial perimetry, acuity and fundus photography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated: benign and stable; with the myopia-amblyopia triad, vision is often poor",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

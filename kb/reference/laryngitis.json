@@ -1,171 +1,478 @@
 {
- "id": "laryngitis",
- "name": "Laryngitis",
- "aliases": [
-  "acute laryngitis",
-  "chronic laryngitis",
-  "laryngeal inflammation"
- ],
- "class": "infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Inflammation of the larynx presenting chiefly with hoarseness or voice change, often with throat discomfort and a dry cough",
-   "Acute laryngitis is usually viral and self-limiting, frequently accompanying an upper respiratory tract infection",
-   "Chronic laryngitis develops over weeks and is linked to vocal abuse, smoking, reflux, chronic sinus infection and occupational irritants",
-   "Voice rest and hydration are central to recovery in acute cases, as continued voice use aggravates the inflamed cords",
-   "Reflux laryngitis (laryngopharyngeal reflux) can cause posterior laryngeal inflammation, throat clearing and a globus sensation",
-   "Management principles emphasise treating the underlying cause, vocal hygiene, and addressing irritants such as smoking and reflux",
-   "In young children, inflammatory laryngeal narrowing can cause croup or, in acute epiglottitis, life-threatening airway obstruction",
-   "Hoarseness persisting beyond a few weeks, particularly in a smoker, requires laryngeal visualisation to exclude malignancy"
+  "id": "laryngitis",
+  "name": "Laryngitis",
+  "aliases": [
+    "acute laryngitis",
+    "chronic laryngitis",
+    "laryngeal inflammation"
   ],
-  "pathophysiology": "Laryngitis is inflammation of the laryngeal mucosa, especially the vocal folds. In acute laryngitis, viral (or sometimes bacterial) infection produces mucosal hyperaemia and oedema that increase the mass and stiffness of the vocal folds, disturbing their vibratory pattern and causing hoarseness. In chronic laryngitis, sustained irritation from voice overuse, tobacco smoke, gastric reflux or persistent infection leads to ongoing mucosal changes such as oedema, thickening and keratosis. In children, the narrow subglottis means that inflammatory swelling can significantly compromise the airway.",
-  "additionalDifferentials": [
-   "Vocal cord nodules or polyps",
-   "Laryngeal carcinoma",
-   "Vocal cord palsy",
-   "Laryngopharyngeal reflux",
-   "Croup or acute epiglottitis in children",
-   "Functional or muscle tension dysphonia"
-  ],
-  "additionalInvestigations": [
-   "Laryngoscopy (indirect, flexible or videostroboscopy) to inspect the vocal folds",
-   "Assessment for reflux and its contribution to symptoms",
-   "Voice assessment where vocal misuse is suspected",
-   "Biopsy of suspicious lesions to exclude malignancy",
-   "Imaging where deep infection, mass or airway compromise is a concern"
-  ],
-  "redFlags": [
-   "Stridor or respiratory difficulty, especially in a child, suggesting airway compromise or epiglottitis",
-   "Hoarseness persisting beyond a few weeks in a smoker raising concern for laryngeal cancer",
-   "Associated dysphagia, weight loss, haemoptysis or a neck mass",
-   "Rapidly worsening symptoms with drooling and toxaemia"
-  ],
-  "prognosis": "Acute laryngitis usually resolves within days to a couple of weeks with conservative measures, whereas chronic laryngitis requires removal of the underlying irritant for improvement; persistent hoarseness always warrants exclusion of a serious cause.",
-  "pitfalls": [
-   "Attributing persistent hoarseness to simple laryngitis and delaying laryngoscopy in a smoker",
-   "Overlooking laryngopharyngeal reflux as a driver of chronic symptoms",
-   "Underestimating airway risk in a child with laryngeal inflammation",
-   "Failing to address vocal misuse and continued irritant exposure"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage acute viral laryngitis conservatively with voice rest, hydration, and humidification, reserving antibiotics for proven bacterial infection",
-   "For chronic laryngitis, treat the underlying cause with smoking cessation, removal of occupational irritants, and control of laryngopharyngeal reflux through lifestyle measures and acid-suppressing therapy",
-   "Institute vocal hygiene and refer for speech-and-language voice therapy where vocal misuse or overuse is contributory",
-   "Give simple symptomatic relief for throat discomfort and cough",
-   "Investigate and exclude malignancy by laryngoscopy in any hoarseness persisting beyond a few weeks",
-   "In children, monitor closely for subglottic airway compromise and escalate for stridor or respiratory distress"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "laryngitis-pathway",
-   "title": "Laryngitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Inflammation of the larynx presenting chiefly with hoarseness or voice change, often with throat discomfort and a dry cough",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Stridor or respiratory difficulty, especially in a child, suggesting airway compromise or epiglottitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Laryngoscopy (indirect, flexible or videostroboscopy) to inspect the vocal folds, Assessment for reflux and its contribution to symptoms, Voice assessment where vocal misuse is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage acute viral laryngitis conservatively with voice rest, hydration, and humidification, reserving antibiotics for proven bacterial infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing persistent hoarseness to simple laryngitis and delaying laryngoscopy in a smoker"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of laryngitis."
-  }
- ],
- "tables": [
-  {
-   "id": "laryngitis-matrix",
-   "title": "Laryngitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Inflammation of the larynx presenting chiefly with hoarseness or voice change, often with throat discomfort and a dry cough",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Inflammation of the larynx presenting chiefly with hoarseness or voice change, often with throat discomfort and a dry cough",
+      "Acute laryngitis is usually viral and self-limiting, frequently accompanying an upper respiratory tract infection",
+      "Chronic laryngitis develops over weeks and is linked to vocal abuse, smoking, reflux, chronic sinus infection and occupational irritants",
+      "Voice rest and hydration are central to recovery in acute cases, as continued voice use aggravates the inflamed cords",
+      "Reflux laryngitis (laryngopharyngeal reflux) can cause posterior laryngeal inflammation, throat clearing and a globus sensation",
+      "Management principles emphasise treating the underlying cause, vocal hygiene, and addressing irritants such as smoking and reflux",
+      "In young children, inflammatory laryngeal narrowing can cause croup or, in acute epiglottitis, life-threatening airway obstruction",
+      "Hoarseness persisting beyond a few weeks, particularly in a smoker, requires laryngeal visualisation to exclude malignancy"
     ],
-    [
-     "Key Investigations",
-     "Laryngoscopy (indirect, flexible or videostroboscopy) to inspect the vocal folds, Assessment for reflux and its contribution to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Laryngitis is inflammation of the laryngeal mucosa, especially the vocal folds. In acute laryngitis, viral (or sometimes bacterial) infection produces mucosal hyperaemia and oedema that increase the mass and stiffness of the vocal folds, disturbing their vibratory pattern and causing hoarseness. In chronic laryngitis, sustained irritation from voice overuse, tobacco smoke, gastric reflux or persistent infection leads to ongoing mucosal changes such as oedema, thickening and keratosis. In children, the narrow subglottis means that inflammatory swelling can significantly compromise the airway.",
+    "additionalDifferentials": [
+      "Vocal cord nodules or polyps",
+      "Laryngeal carcinoma",
+      "Vocal cord palsy",
+      "Laryngopharyngeal reflux",
+      "Croup or acute epiglottitis in children",
+      "Functional or muscle tension dysphonia"
     ],
-    [
-     "Primary Differentials",
-     "Vocal cord nodules or polyps, Laryngeal carcinoma, Vocal cord palsy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Laryngoscopy (indirect, flexible or videostroboscopy) to inspect the vocal folds",
+      "Assessment for reflux and its contribution to symptoms",
+      "Voice assessment where vocal misuse is suspected",
+      "Biopsy of suspicious lesions to exclude malignancy",
+      "Imaging where deep infection, mass or airway compromise is a concern"
     ],
-    [
-     "Management Strategy",
-     "Manage acute viral laryngitis conservatively with voice rest, hydration, and humidification, reserving antibiotics for proven",
-     "Core treatment modality"
+    "redFlags": [
+      "Stridor or respiratory difficulty, especially in a child, suggesting airway compromise or epiglottitis",
+      "Hoarseness persisting beyond a few weeks in a smoker raising concern for laryngeal cancer",
+      "Associated dysphagia, weight loss, haemoptysis or a neck mass",
+      "Rapidly worsening symptoms with drooling and toxaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing persistent hoarseness to simple laryngitis and delaying laryngoscopy in a smoker",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute laryngitis usually resolves within days to a couple of weeks with conservative measures, whereas chronic laryngitis requires removal of the underlying irritant for improvement; persistent hoarseness always warrants exclusion of a serious cause.",
+    "pitfalls": [
+      "Attributing persistent hoarseness to simple laryngitis and delaying laryngoscopy in a smoker",
+      "Overlooking laryngopharyngeal reflux as a driver of chronic symptoms",
+      "Underestimating airway risk in a child with laryngeal inflammation",
+      "Failing to address vocal misuse and continued irritant exposure"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage acute viral laryngitis conservatively with voice rest, hydration, and humidification, reserving antibiotics for proven bacterial infection",
+      "For chronic laryngitis, treat the underlying cause with smoking cessation, removal of occupational irritants, and control of laryngopharyngeal reflux through lifestyle measures and acid-suppressing therapy",
+      "Institute vocal hygiene and refer for speech-and-language voice therapy where vocal misuse or overuse is contributory",
+      "Give simple symptomatic relief for throat discomfort and cough",
+      "Investigate and exclude malignancy by laryngoscopy in any hoarseness persisting beyond a few weeks",
+      "In children, monitor closely for subglottic airway compromise and escalate for stridor or respiratory distress"
     ]
-   ],
-   "caption": "Overview comparison matrix for laryngitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "laryngitis-real-image",
-   "title": "Laryngitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "laryngitis-pathway",
+      "title": "Laryngitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Inflammation of the larynx presenting chiefly with hoarseness or voice change, often with throat discomfort and a dry cough",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Stridor or respiratory difficulty, especially in a child, suggesting airway compromise or epiglottitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Laryngoscopy (indirect, flexible or videostroboscopy) to inspect the vocal folds, Assessment for reflux and its contribution to symptoms, Voice assessment where vocal misuse is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage acute viral laryngitis conservatively with voice rest, hydration, and humidification, reserving antibiotics for proven bacterial infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing persistent hoarseness to simple laryngitis and delaying laryngoscopy in a smoker"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of laryngitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "laryngitis-matrix",
+      "title": "Laryngitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Inflammation of the larynx presenting chiefly with hoarseness or voice change, often with throat discomfort and a dry cough",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Laryngoscopy (indirect, flexible or videostroboscopy) to inspect the vocal folds, Assessment for reflux and its contribution to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vocal cord nodules or polyps, Laryngeal carcinoma, Vocal cord palsy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage acute viral laryngitis conservatively with voice rest, hydration, and humidification, reserving antibiotics for proven",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing persistent hoarseness to simple laryngitis and delaying laryngoscopy in a smoker",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for laryngitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "laryngitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Laryngoscopy (indirect, flexible or videostroboscopy)",
+          "cells": [
+            {
+              "text": "Inspects the vocal folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for reflux",
+          "cells": [
+            {
+              "text": "Its contribution to symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice assessment",
+          "cells": [
+            {
+              "text": "Where vocal misuse is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of suspicious lesions",
+          "cells": [
+            {
+              "text": "Excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Deep infection, mass or airway compromise"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vocal cord nodules or polyps",
+          "cells": [
+            {
+              "text": "Persistent voice change; laryngoscopy distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngeal carcinoma",
+          "cells": [
+            {
+              "text": "Hoarseness beyond a few weeks in a smoker needs laryngoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngopharyngeal reflux",
+          "cells": [
+            {
+              "text": "Posterior laryngeal inflammation, throat clearing and globus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Croup or acute epiglottitis",
+          "cells": [
+            {
+              "text": "Inflammatory narrowing in children; epiglottitis obstructs the airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional or muscle tension dysphonia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "laryngitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute viral laryngitis",
+          "cells": [
+            {
+              "text": "Voice rest, hydration and humidification; antibiotics only for proven bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic laryngitis",
+          "cells": [
+            {
+              "text": "Smoking cessation, removal of occupational irritants, control of reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vocal hygiene",
+          "cells": [
+            {
+              "text": "Speech-and-language voice therapy where vocal misuse contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Throat discomfort and cough"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy exclusion",
+          "cells": [
+            {
+              "text": "Laryngoscopy for any hoarseness persisting beyond a few weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Children",
+          "cells": [
+            {
+              "text": "Close monitoring for subglottic airway compromise; escalate for stridor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "laryngitis-dx-mgmt",
+      "title": "Diagnosis and management of Laryngitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hoarseness and throat discomfort, often after an upper respiratory infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, hoarseness beyond weeks in a smoker, neck mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway assessment for stridor or epiglottitis in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy, reflux and voice assessment, biopsy if suspicious",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a suspicious lesion excluded on laryngoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy the lesion; exclude laryngeal carcinoma or vocal cord palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Voice rest, hydration and humidification for acute viral laryngitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat chronic causes: smoking, irritants and reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vocal hygiene and speech-and-language voice therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Simple relief for throat discomfort and cough",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor children for subglottic airway compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute laryngitis resolves in days to weeks; chronic cases improve once irritants stop",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

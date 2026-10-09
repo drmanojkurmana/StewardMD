@@ -1,174 +1,619 @@
 {
- "id": "overlap_syndrome_rheum",
- "name": "Rheumatological overlap syndrome",
- "aliases": [
-  "overlap syndrome",
-  "connective tissue overlap",
-  "scleromyositis",
-  "anti-PM/Scl",
-  "anti-Ku"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Vascular",
- "specialty": "Rheumatology / Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Kelley & Firestein's Textbook of Rheumatology / international connective tissue disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
-   "Common combinations include systemic sclerosis with inflammatory myositis (scleromyositis) or lupus with rheumatoid arthritis",
-   "Specific autoantibodies such as anti-PM/Scl and anti-Ku help characterise particular overlap phenotypes",
-   "Unlike mixed connective tissue disease, overlap syndromes meet full criteria for each component disorder rather than sharing a single defining antibody",
-   "Management is directed at the dominant and most threatening organ involvement across the combined diseases",
-   "Careful serological and clinical mapping guides prognosis and treatment intensity",
-   "The overlapping features may appear together or accrue sequentially over time"
+  "id": "overlap_syndrome_rheum",
+  "name": "Rheumatological overlap syndrome",
+  "aliases": [
+    "overlap syndrome",
+    "connective tissue overlap",
+    "scleromyositis",
+    "anti-PM/Scl",
+    "anti-Ku"
   ],
-  "pathophysiology": "Rheumatological overlap syndromes arise when autoimmune mechanisms characteristic of more than one defined connective tissue disease coexist in a single patient. Shared genetic susceptibility and dysregulated adaptive immunity generate autoantibodies and tissue inflammation spanning several disorders, sometimes marked by antibodies such as anti-PM/Scl or anti-Ku that associate with combined phenotypes. The resulting clinical picture blends the vasculopathy, fibrosis, synovitis, and myositis of the component diseases, and organ involvement reflects the summed pathology.",
-  "additionalDifferentials": [
-   "Mixed connective tissue disease",
-   "Systemic lupus erythematosus",
-   "Systemic sclerosis",
-   "Idiopathic inflammatory myopathy",
-   "Rheumatoid arthritis",
-   "Undifferentiated connective tissue disease"
-  ],
-  "additionalInvestigations": [
-   "Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel",
-   "Anti-PM/Scl and anti-Ku testing when scleromyositis is suspected",
-   "Creatine kinase and inflammatory markers for myositis",
-   "Transthoracic echocardiography and pulmonary function tests for cardiopulmonary involvement",
-   "High-resolution CT for interstitial lung disease",
-   "Renal function and urinalysis to detect nephritis"
-  ],
-  "redFlags": [
-   "Severe myositis with respiratory or bulbar involvement",
-   "Progressive interstitial lung disease or pulmonary hypertension",
-   "Lupus-type nephritis with declining renal function",
-   "Digital or systemic ischaemia from active vasculopathy"
-  ],
-  "prognosis": "Outcome is determined by the combination and severity of component diseases and their organ involvement; some overlaps behave indolently while others, particularly those with significant lung, cardiac, or renal disease, carry substantial morbidity. Tailored immunosuppression can control inflammation across the overlapping conditions.",
-  "pitfalls": [
-   "Treating only the most obvious component and neglecting concurrent organ-threatening disease",
-   "Confusing an overlap syndrome with mixed connective tissue disease and mislabelling the serology",
-   "Missing evolving features of a second disorder over time",
-   "Under-recognising myositis-associated interstitial lung disease"
-  ],
-  "references": [
-   "Kelley & Firestein's Textbook of Rheumatology",
-   "International literature on connective tissue overlap syndromes"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather than at a single label",
-   "Use corticosteroids with a steroid-sparing immunosuppressant such as methotrexate, azathioprine or mycophenolate for the inflammatory arthritis and myositis components",
-   "Escalate to potent agents such as cyclophosphamide or rituximab for severe organ involvement including nephritis or progressive interstitial lung disease",
-   "Manage scleroderma-spectrum features with Raynaud measures including a calcium-channel blocker, and treat pulmonary arterial hypertension where present",
-   "Monitor across systems with creatine kinase, renal function and urinalysis, pulmonary function tests, echocardiography and high-resolution CT",
-   "Coordinate care through rheumatology with respiratory, nephrology and cardiology input, adjusting immunosuppression intensity to the combined phenotype"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "overlap_syndrome_rheum-pathway",
-   "title": "Rheumatological overlap syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe myositis with respiratory or bulbar involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel, Anti-PM/Scl and anti-Ku testing when scleromyositis is suspected, Creatine kinase and inflammatory markers for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather than at a single label"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating only the most obvious component and neglecting concurrent organ-threatening disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rheumatological overlap syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "overlap_syndrome_rheum-matrix",
-   "title": "Rheumatological overlap syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Vascular",
+  "specialty": "Rheumatology / Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kelley & Firestein's Textbook of Rheumatology / international connective tissue disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
+      "Common combinations include systemic sclerosis with inflammatory myositis (scleromyositis) or lupus with rheumatoid arthritis",
+      "Specific autoantibodies such as anti-PM/Scl and anti-Ku help characterise particular overlap phenotypes",
+      "Unlike mixed connective tissue disease, overlap syndromes meet full criteria for each component disorder rather than sharing a single defining antibody",
+      "Management is directed at the dominant and most threatening organ involvement across the combined diseases",
+      "Careful serological and clinical mapping guides prognosis and treatment intensity",
+      "The overlapping features may appear together or accrue sequentially over time"
     ],
-    [
-     "Key Investigations",
-     "Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel, Anti-PM/Scl and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rheumatological overlap syndromes arise when autoimmune mechanisms characteristic of more than one defined connective tissue disease coexist in a single patient. Shared genetic susceptibility and dysregulated adaptive immunity generate autoantibodies and tissue inflammation spanning several disorders, sometimes marked by antibodies such as anti-PM/Scl or anti-Ku that associate with combined phenotypes. The resulting clinical picture blends the vasculopathy, fibrosis, synovitis, and myositis of the component diseases, and organ involvement reflects the summed pathology.",
+    "additionalDifferentials": [
+      "Mixed connective tissue disease",
+      "Systemic lupus erythematosus",
+      "Systemic sclerosis",
+      "Idiopathic inflammatory myopathy",
+      "Rheumatoid arthritis",
+      "Undifferentiated connective tissue disease"
     ],
-    [
-     "Primary Differentials",
-     "Mixed connective tissue disease, Systemic lupus erythematosus, Systemic sclerosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel",
+      "Anti-PM/Scl and anti-Ku testing when scleromyositis is suspected",
+      "Creatine kinase and inflammatory markers for myositis",
+      "Transthoracic echocardiography and pulmonary function tests for cardiopulmonary involvement",
+      "High-resolution CT for interstitial lung disease",
+      "Renal function and urinalysis to detect nephritis"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe myositis with respiratory or bulbar involvement",
+      "Progressive interstitial lung disease or pulmonary hypertension",
+      "Lupus-type nephritis with declining renal function",
+      "Digital or systemic ischaemia from active vasculopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating only the most obvious component and neglecting concurrent organ-threatening disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is determined by the combination and severity of component diseases and their organ involvement; some overlaps behave indolently while others, particularly those with significant lung, cardiac, or renal disease, carry substantial morbidity. Tailored immunosuppression can control inflammation across the overlapping conditions.",
+    "pitfalls": [
+      "Treating only the most obvious component and neglecting concurrent organ-threatening disease",
+      "Confusing an overlap syndrome with mixed connective tissue disease and mislabelling the serology",
+      "Missing evolving features of a second disorder over time",
+      "Under-recognising myositis-associated interstitial lung disease"
+    ],
+    "references": [
+      "Kelley & Firestein's Textbook of Rheumatology",
+      "International literature on connective tissue overlap syndromes"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather than at a single label",
+      "Use corticosteroids with a steroid-sparing immunosuppressant such as methotrexate, azathioprine or mycophenolate for the inflammatory arthritis and myositis components",
+      "Escalate to potent agents such as cyclophosphamide or rituximab for severe organ involvement including nephritis or progressive interstitial lung disease",
+      "Manage scleroderma-spectrum features with Raynaud measures including a calcium-channel blocker, and treat pulmonary arterial hypertension where present",
+      "Monitor across systems with creatine kinase, renal function and urinalysis, pulmonary function tests, echocardiography and high-resolution CT",
+      "Coordinate care through rheumatology with respiratory, nephrology and cardiology input, adjusting immunosuppression intensity to the combined phenotype"
     ]
-   ],
-   "caption": "Overview comparison matrix for rheumatological overlap syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "overlap-syndrome-rheum-real-image",
-   "title": "Rheumatological overlap syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "overlap_syndrome_rheum-pathway",
+      "title": "Rheumatological overlap syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe myositis with respiratory or bulbar involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel, Anti-PM/Scl and anti-Ku testing when scleromyositis is suspected, Creatine kinase and inflammatory markers for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather than at a single label"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating only the most obvious component and neglecting concurrent organ-threatening disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rheumatological overlap syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "overlap_syndrome_rheum-matrix",
+      "title": "Rheumatological overlap syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel, Anti-PM/Scl and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mixed connective tissue disease, Systemic lupus erythematosus, Systemic sclerosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating only the most obvious component and neglecting concurrent organ-threatening disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rheumatological overlap syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kelley & Firestein's Textbook of Rheumatology / international connective tissue disease guidance",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "overlap_syndrome_rheum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ANA with extractable nuclear antigen and myositis panel",
+          "cells": [
+            {
+              "text": "Overlap-specific antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-PM/Scl and anti-Ku testing",
+          "cells": [
+            {
+              "text": "Scleromyositis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and inflammatory markers",
+          "cells": [
+            {
+              "text": "Myositis activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and pulmonary function tests",
+          "cells": [
+            {
+              "text": "Cardiopulmonary involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Nephritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_syndrome_rheum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mixed connective tissue disease",
+          "cells": [
+            {
+              "text": "Shares a defining antibody; an overlap meets full criteria for each component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Undifferentiated connective tissue disease",
+          "cells": [
+            {
+              "text": "Incomplete criteria; an overlap meets full criteria for each component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_syndrome_rheum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the dominant organ threat",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "The most organ-threatening manifestation, rather than a single label"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids with a steroid-sparing agent",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Methotrexate, azathioprine or mycophenolate for arthritis and myositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent agents for severe organ disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Cyclophosphamide or rituximab for nephritis or progressive interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleroderma-spectrum features",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Calcium-channel blocker for Raynaud; treat pulmonary arterial hypertension where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-system monitoring",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Creatine kinase, renal function, urinalysis, lung function and echocardiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_syndrome_rheum-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "ANA patterns, target antigens and clinical correlates",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antigen identified",
+        "Clinical correlate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse",
+          "cells": [
+            {
+              "text": "Deoxyribonucleoprotein, histones"
+            },
+            {
+              "text": "Nonspecific; drug-induced lupus, lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral (rim)",
+          "cells": [
+            {
+              "text": "ds-DNA"
+            },
+            {
+              "text": "50% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: U1-RNP",
+          "cells": [
+            {
+              "text": "U1-RNP"
+            },
+            {
+              "text": "Up to 90% of MCTD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Sm",
+          "cells": [
+            {
+              "text": "Sm"
+            },
+            {
+              "text": "30% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Ro (SS-A)",
+          "cells": [
+            {
+              "text": "Ro (SS-A)"
+            },
+            {
+              "text": "Sjogren's 60%, subacute cutaneous lupus, neonatal lupus, ANA-negative lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: La (SS-B)",
+          "cells": [
+            {
+              "text": "La (SS-B)"
+            },
+            {
+              "text": "50% of Sjogren's, 15% of lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Scl-70",
+          "cells": [
+            {
+              "text": "Scl-70"
+            },
+            {
+              "text": "40% of diffuse scleroderma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: PM-1",
+          "cells": [
+            {
+              "text": "PM-1"
+            },
+            {
+              "text": "Polymyositis, dermatomyositis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Jo-1",
+          "cells": [
+            {
+              "text": "Jo-1"
+            },
+            {
+              "text": "Polymyositis with pneumonitis and arthritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nucleolar",
+          "cells": [
+            {
+              "text": "RNA polymerase I, others"
+            },
+            {
+              "text": "40% of progressive systemic sclerosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Centromere",
+          "cells": [
+            {
+              "text": "Kinetochore"
+            },
+            {
+              "text": "75% of CREST (limited scleroderma)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "overlap_syndrome_rheum-dx-mgmt",
+      "title": "Diagnosis and management of Rheumatological overlap syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Features of two connective tissue diseases, such as myositis with sclerodactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (bulbar or respiratory myositis, nephritis or digital ischaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent renal, pulmonary and immunosuppression review for organ threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANA with ENA and myositis panel, CK, echo, PFT, HRCT, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do both disease sets of criteria appear to be met, with antibodies mapped?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MCTD, lupus, systemic sclerosis or undifferentiated connective tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the dominant, most organ-threatening manifestation across the combined diseases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids with a steroid-sparing agent for arthritis and myositis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyclophosphamide or rituximab for severe nephritis or progressive lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Calcium-channel blocker for Raynaud; treat pulmonary arterial hypertension if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor CK, renal function, lung function and echocardiography across systems",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on component diseases and organ involvement; tailored treatment controls many",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

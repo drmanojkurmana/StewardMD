@@ -1,180 +1,467 @@
 {
- "id": "cryopyrin_associated_periodic_syndrome",
- "name": "Cryopyrin-associated periodic syndromes (CAPS)",
- "aliases": [
-  "CAPS",
-  "CIAS1",
-  "CINCA",
-  "Cryopyrin-associated periodic syndromes",
-  "FCAS",
-  "Muckle-Wells syndrome",
-  "NLRP3",
-  "NOMID",
-  "cryopyrin associated periodic",
-  "familial cold autoinflammatory syndrome"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology / EULAR recommendations for autoinflammatory diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A spectrum of autosomal dominant disorders caused by gain-of-function mutations in NLRP3 (CIAS1), encoding cryopyrin",
-   "The spectrum spans mild familial cold autoinflammatory syndrome, intermediate Muckle-Wells syndrome, and severe neonatal-onset multisystem inflammatory disease (NOMID/CINCA)",
-   "A recurrent urticaria-like (neutrophilic) rash with fever, arthralgia and conjunctivitis is common across the spectrum",
-   "Cold exposure is a classic trigger in the milder familial cold form",
-   "Sensorineural hearing loss is a hallmark of Muckle-Wells syndrome, and chronic aseptic meningitis with developmental delay and bony overgrowth characterises NOMID",
-   "AA amyloidosis is a serious long-term complication of the more severe phenotypes",
-   "Disease is exquisitely responsive to interleukin-1 inhibition, which can prevent progression of organ damage if started early"
+  "id": "cryopyrin_associated_periodic_syndrome",
+  "name": "Cryopyrin-associated periodic syndromes (CAPS)",
+  "aliases": [
+    "CAPS",
+    "CIAS1",
+    "CINCA",
+    "Cryopyrin-associated periodic syndromes",
+    "FCAS",
+    "Muckle-Wells syndrome",
+    "NLRP3",
+    "NOMID",
+    "cryopyrin associated periodic",
+    "familial cold autoinflammatory syndrome"
   ],
-  "pathophysiology": "Cryopyrin-associated periodic syndromes are driven by gain-of-function mutations in NLRP3, which encodes cryopyrin, a sensor protein of the innate immune system. Cryopyrin nucleates the NLRP3 inflammasome, a multiprotein complex that activates caspase-1. The mutations lower the threshold for or constitutively enhance inflammasome assembly, leading to excessive caspase-1-mediated cleavage of pro-interleukin-1 beta into its active form. The resulting overproduction of interleukin-1 beta produces systemic and organ-specific inflammation, and the severity of the phenotype broadly tracks the degree of inflammasome dysregulation. Chronic interleukin-1-driven inflammation underlies the sensorineural deafness, central nervous system disease, and predisposition to AA amyloidosis.",
-  "additionalDifferentials": [
-   "Systemic juvenile idiopathic arthritis or adult-onset Still disease",
-   "Chronic spontaneous urticaria",
-   "Schnitzler syndrome (acquired, with monoclonal IgM)",
-   "Other hereditary periodic fever syndromes (TRAPS, hyper-IgD syndrome, familial Mediterranean fever)",
-   "Chronic infective or aseptic meningitis (for NOMID)",
-   "Deficiency of the interleukin-1 receptor antagonist (DIRA)"
-  ],
-  "additionalInvestigations": [
-   "Acute phase reactants (C-reactive protein and serum amyloid A)",
-   "Genetic testing of NLRP3, including analysis for somatic mosaicism when routine testing is negative",
-   "Audiometry to detect sensorineural hearing loss",
-   "Ophthalmology assessment for conjunctivitis, uveitis and papilloedema",
-   "Cerebrospinal fluid examination and neuroimaging in suspected NOMID",
-   "Urinalysis for proteinuria to screen for AA amyloidosis"
-  ],
-  "redFlags": [
-   "New or progressive sensorineural hearing loss",
-   "Features of central nervous system involvement such as chronic headache, raised intracranial pressure or developmental regression in neonatal-onset disease",
-   "Proteinuria signalling AA amyloidosis",
-   "Visual compromise from papilloedema or uveitis"
-  ],
-  "prognosis": "Milder cold-induced disease has a favourable outlook, but untreated Muckle-Wells syndrome and NOMID cause progressive deafness, neurological damage and amyloidosis; early and sustained interleukin-1 inhibition can halt organ damage and greatly improve prognosis.",
-  "pitfalls": [
-   "Mislabelling the recurrent rash as ordinary allergic urticaria and giving antihistamines",
-   "Missing the diagnosis when standard NLRP3 sequencing is negative because of somatic mosaicism",
-   "Delaying interleukin-1 blockade until irreversible hearing or neurological damage has occurred",
-   "Neglecting audiological and renal surveillance"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "EULAR recommendations for the management of autoinflammatory diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use interleukin-1 blockade with anakinra, canakinumab or rilonacept as the definitive therapy that suppresses the IL-1-driven inflammation of CAPS",
-   "Initiate sustained IL-1 inhibition early, particularly in Muckle-Wells syndrome and NOMID, to prevent progressive deafness, neurological injury and amyloidosis",
-   "Advise cold-trigger avoidance in the milder familial cold autoinflammatory form",
-   "Monitor acute-phase reactants (C-reactive protein and serum amyloid A) and perform serial audiometry to detect sensorineural hearing loss",
-   "Arrange ophthalmology review for conjunctivitis, uveitis and papilloedema, and manage chronic aseptic meningitis and raised intracranial pressure in NOMID",
-   "Screen for AA amyloidosis with urinalysis for proteinuria",
-   "Provide genetic counselling for this autosomal dominant NLRP3 disorder, with family testing and consideration of somatic mosaicism"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cryopyrin_associated_periodic_syndrome-pathway",
-   "title": "Cryopyrin-associated periodic syndromes (CAPS): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A spectrum of autosomal dominant disorders caused by gain-of-function mutations in NLRP3 (CIAS1), encoding cryopyrin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or progressive sensorineural hearing loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Acute phase reactants (C-reactive protein and serum amyloid A), Genetic testing of NLRP3, including analysis for somatic mosaicism when routine testing is negative, Audiometry to detect sensorineural hearing loss"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use interleukin-1 blockade with anakinra, canakinumab or rilonacept as the definitive therapy that suppresses the IL-1-driven inflammation of CAPS"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the recurrent rash as ordinary allergic urticaria and giving antihistamines"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cryopyrin-associated periodic syndromes (caps)."
-  }
- ],
- "tables": [
-  {
-   "id": "cryopyrin_associated_periodic_syndrome-matrix",
-   "title": "Cryopyrin-associated periodic syndromes (CAPS): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A spectrum of autosomal dominant disorders caused by gain-of-function mutations in NLRP3 (CIAS1), encoding cryopyrin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology / EULAR recommendations for autoinflammatory diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A spectrum of autosomal dominant disorders caused by gain-of-function mutations in NLRP3 (CIAS1), encoding cryopyrin",
+      "The spectrum spans mild familial cold autoinflammatory syndrome, intermediate Muckle-Wells syndrome, and severe neonatal-onset multisystem inflammatory disease (NOMID/CINCA)",
+      "A recurrent urticaria-like (neutrophilic) rash with fever, arthralgia and conjunctivitis is common across the spectrum",
+      "Cold exposure is a classic trigger in the milder familial cold form",
+      "Sensorineural hearing loss is a hallmark of Muckle-Wells syndrome, and chronic aseptic meningitis with developmental delay and bony overgrowth characterises NOMID",
+      "AA amyloidosis is a serious long-term complication of the more severe phenotypes",
+      "Disease is exquisitely responsive to interleukin-1 inhibition, which can prevent progression of organ damage if started early"
     ],
-    [
-     "Key Investigations",
-     "Acute phase reactants (C-reactive protein and serum amyloid A), Genetic testing of NLRP3, including analysis for somatic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cryopyrin-associated periodic syndromes are driven by gain-of-function mutations in NLRP3, which encodes cryopyrin, a sensor protein of the innate immune system. Cryopyrin nucleates the NLRP3 inflammasome, a multiprotein complex that activates caspase-1. The mutations lower the threshold for or constitutively enhance inflammasome assembly, leading to excessive caspase-1-mediated cleavage of pro-interleukin-1 beta into its active form. The resulting overproduction of interleukin-1 beta produces systemic and organ-specific inflammation, and the severity of the phenotype broadly tracks the degree of inflammasome dysregulation. Chronic interleukin-1-driven inflammation underlies the sensorineural deafness, central nervous system disease, and predisposition to AA amyloidosis.",
+    "additionalDifferentials": [
+      "Systemic juvenile idiopathic arthritis or adult-onset Still disease",
+      "Chronic spontaneous urticaria",
+      "Schnitzler syndrome (acquired, with monoclonal IgM)",
+      "Other hereditary periodic fever syndromes (TRAPS, hyper-IgD syndrome, familial Mediterranean fever)",
+      "Chronic infective or aseptic meningitis (for NOMID)",
+      "Deficiency of the interleukin-1 receptor antagonist (DIRA)"
     ],
-    [
-     "Primary Differentials",
-     "Systemic juvenile idiopathic arthritis or adult-onset Still disease, Chronic spontaneous urticaria, Schnitzler syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Acute phase reactants (C-reactive protein and serum amyloid A)",
+      "Genetic testing of NLRP3, including analysis for somatic mosaicism when routine testing is negative",
+      "Audiometry to detect sensorineural hearing loss",
+      "Ophthalmology assessment for conjunctivitis, uveitis and papilloedema",
+      "Cerebrospinal fluid examination and neuroimaging in suspected NOMID",
+      "Urinalysis for proteinuria to screen for AA amyloidosis"
     ],
-    [
-     "Management Strategy",
-     "Use interleukin-1 blockade with anakinra, canakinumab or rilonacept as the definitive therapy that suppresses the IL-1-driven",
-     "Core treatment modality"
+    "redFlags": [
+      "New or progressive sensorineural hearing loss",
+      "Features of central nervous system involvement such as chronic headache, raised intracranial pressure or developmental regression in neonatal-onset disease",
+      "Proteinuria signalling AA amyloidosis",
+      "Visual compromise from papilloedema or uveitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the recurrent rash as ordinary allergic urticaria and giving antihistamines",
-     "Prevent diagnostic or management error"
+    "prognosis": "Milder cold-induced disease has a favourable outlook, but untreated Muckle-Wells syndrome and NOMID cause progressive deafness, neurological damage and amyloidosis; early and sustained interleukin-1 inhibition can halt organ damage and greatly improve prognosis.",
+    "pitfalls": [
+      "Mislabelling the recurrent rash as ordinary allergic urticaria and giving antihistamines",
+      "Missing the diagnosis when standard NLRP3 sequencing is negative because of somatic mosaicism",
+      "Delaying interleukin-1 blockade until irreversible hearing or neurological damage has occurred",
+      "Neglecting audiological and renal surveillance"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "EULAR recommendations for the management of autoinflammatory diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use interleukin-1 blockade with anakinra, canakinumab or rilonacept as the definitive therapy that suppresses the IL-1-driven inflammation of CAPS",
+      "Initiate sustained IL-1 inhibition early, particularly in Muckle-Wells syndrome and NOMID, to prevent progressive deafness, neurological injury and amyloidosis",
+      "Advise cold-trigger avoidance in the milder familial cold autoinflammatory form",
+      "Monitor acute-phase reactants (C-reactive protein and serum amyloid A) and perform serial audiometry to detect sensorineural hearing loss",
+      "Arrange ophthalmology review for conjunctivitis, uveitis and papilloedema, and manage chronic aseptic meningitis and raised intracranial pressure in NOMID",
+      "Screen for AA amyloidosis with urinalysis for proteinuria",
+      "Provide genetic counselling for this autosomal dominant NLRP3 disorder, with family testing and consideration of somatic mosaicism"
     ]
-   ],
-   "caption": "Overview comparison matrix for cryopyrin-associated periodic syndromes (caps)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cryopyrin-associated-periodic-syndrome-real-image",
-   "title": "Cryopyrin-associated periodic syndromes (CAPS): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cryopyrin_associated_periodic_syndrome-pathway",
+      "title": "Cryopyrin-associated periodic syndromes (CAPS): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A spectrum of autosomal dominant disorders caused by gain-of-function mutations in NLRP3 (CIAS1), encoding cryopyrin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or progressive sensorineural hearing loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Acute phase reactants (C-reactive protein and serum amyloid A), Genetic testing of NLRP3, including analysis for somatic mosaicism when routine testing is negative, Audiometry to detect sensorineural hearing loss"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use interleukin-1 blockade with anakinra, canakinumab or rilonacept as the definitive therapy that suppresses the IL-1-driven inflammation of CAPS"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the recurrent rash as ordinary allergic urticaria and giving antihistamines"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cryopyrin-associated periodic syndromes (caps)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cryopyrin_associated_periodic_syndrome-matrix",
+      "title": "Cryopyrin-associated periodic syndromes (CAPS): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A spectrum of autosomal dominant disorders caused by gain-of-function mutations in NLRP3 (CIAS1), encoding cryopyrin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Acute phase reactants (C-reactive protein and serum amyloid A), Genetic testing of NLRP3, including analysis for somatic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic juvenile idiopathic arthritis or adult-onset Still disease, Chronic spontaneous urticaria, Schnitzler syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use interleukin-1 blockade with anakinra, canakinumab or rilonacept as the definitive therapy that suppresses the IL-1-driven",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the recurrent rash as ordinary allergic urticaria and giving antihistamines",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cryopyrin-associated periodic syndromes (caps)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / EULAR recommendations for autoinflammatory diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cryopyrin_associated_periodic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CRP and serum amyloid A",
+          "cells": [
+            {
+              "text": "Acute-phase response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NLRP3 genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant; somatic mosaicism when routine testing negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology assessment",
+          "cells": [
+            {
+              "text": "Conjunctivitis, uveitis and papilloedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for proteinuria",
+          "cells": [
+            {
+              "text": "AA amyloidosis screened"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryopyrin_associated_periodic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic juvenile idiopathic arthritis or adult-onset Still disease",
+          "cells": [
+            {
+              "text": "Named periodic fever look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic spontaneous urticaria",
+          "cells": [
+            {
+              "text": "Pitfall: recurrent rash treated as allergic urticaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schnitzler syndrome",
+          "cells": [
+            {
+              "text": "Acquired, with monoclonal IgM"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryopyrin_associated_periodic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IL-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra, canakinumab or rilonacept as definitive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early sustained IL-1 inhibition",
+          "cells": [
+            {
+              "text": "Particularly Muckle-Wells syndrome and NOMID"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold-trigger avoidance",
+          "cells": [
+            {
+              "text": "Milder familial cold autoinflammatory form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Acute-phase reactants and audiometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye and CNS care",
+          "cells": [
+            {
+              "text": "Ophthalmology review; chronic aseptic meningitis and raised pressure in NOMID"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid screening",
+          "cells": [
+            {
+              "text": "Urinalysis for proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant NLRP3; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cryopyrin_associated_periodic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cryopyrin-associated periodic syndromes (CAPS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CAPS: recurrent urticarial rash with fever from infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (progressive hearing loss, CNS involvement, proteinuria, visual compromise)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for proteinuria or visual compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CRP and SAA; NLRP3 testing; audiometry; ophthalmology; urinalysis; CSF if NOMID",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does NLRP3 testing confirm a CAPS variant or mosaicism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Still disease, chronic urticaria or Schnitzler syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IL-1 blockade with anakinra, canakinumab or rilonacept",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early sustained IL-1 inhibition to prevent deafness and neurological injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cold avoidance for the milder familial form",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial audiometry, eye review and urinary screening for amyloid",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Milder disease has a favourable outlook; untreated severe forms cause progressive damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

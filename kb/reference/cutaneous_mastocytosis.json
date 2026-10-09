@@ -1,167 +1,436 @@
 {
- "id": "cutaneous_mastocytosis",
- "name": "Cutaneous mastocytosis",
- "aliases": [
-  "mastocytosis of the skin"
- ],
- "class": "non_infective",
- "system": "Skin",
- "specialty": "Dermatology / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Mastocytosis literature / dermatology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Accumulation of mast cells confined to the skin, most commonly presenting in childhood",
-   "Major forms are maculopapular cutaneous mastocytosis (urticaria pigmentosa), diffuse cutaneous mastocytosis and solitary mastocytoma",
-   "Stroking a lesion causes urtication and erythema (a positive Darier sign), a useful bedside clue",
-   "Childhood-onset disease often regresses around puberty, whereas adult-onset skin disease more often reflects underlying systemic mastocytosis",
-   "Mediator symptoms such as flushing and pruritus can occur, and extensive disease risks more serious reactions",
-   "Management is largely supportive with trigger avoidance and mediator-targeted therapy, reserving systemic workup for suggestive features"
+  "id": "cutaneous_mastocytosis",
+  "name": "Cutaneous mastocytosis",
+  "aliases": [
+    "mastocytosis of the skin"
   ],
-  "pathophysiology": "Cutaneous mastocytosis results from clonal accumulation of mast cells within the dermis, frequently associated with activating KIT mutations. The excess dermal mast cells release mediators such as histamine when mechanically or chemically triggered, producing the characteristic weal-and-flare on stroking (Darier sign) and symptoms of flushing and itch. In children the process is usually limited to the skin and tends to involute, whereas in adults cutaneous involvement is commonly a marker of systemic disease.",
-  "additionalDifferentials": [
-   "Systemic mastocytosis with skin involvement",
-   "Urticaria",
-   "Juvenile xanthogranuloma or other histiocytoses",
-   "Post-inflammatory pigmentation",
-   "Bullous disorders (in diffuse cutaneous disease of infancy)"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis with elicitation of Darier sign",
-   "Skin biopsy demonstrating increased dermal mast cells where confirmation is needed",
-   "Serum baseline tryptase to screen for systemic involvement",
-   "Assessment for systemic symptoms, especially in adults",
-   "Referral for systemic workup if features suggest systemic mastocytosis"
-  ],
-  "redFlags": [
-   "Adult onset raising concern for systemic mastocytosis",
-   "Systemic symptoms such as recurrent anaphylaxis or organ involvement",
-   "Extensive blistering disease in infancy",
-   "A markedly raised tryptase"
-  ],
-  "prognosis": "Childhood cutaneous mastocytosis often improves or resolves by adolescence with an excellent prognosis, whereas adult disease frequently persists and may indicate systemic mastocytosis.",
-  "pitfalls": [
-   "Assuming adult cutaneous disease is skin-limited without checking for systemic mastocytosis",
-   "Provoking severe mediator release by triggering extensive lesions",
-   "Missing the Darier sign as a diagnostic clue",
-   "Overlooking anaphylaxis risk in extensive disease"
-  ],
-  "references": [
-   "Dermatology reference texts (standard reference)",
-   "Mastocytosis clinical guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive management centred on avoiding mediator-release triggers such as heat, friction, alcohol and certain drugs including NSAIDs and opioids",
-   "H1 antihistamines for pruritus and flushing, with H2 antihistamines, the mast-cell stabiliser sodium cromoglicate or leukotriene antagonists as needed",
-   "Topical corticosteroids for symptomatic lesions and phototherapy for extensive skin disease",
-   "An adrenaline auto-injector and an anaphylaxis action plan for extensive disease at risk of severe mediator reactions",
-   "Baseline serum tryptase and assessment for systemic involvement, particularly in adult-onset disease",
-   "Reassurance that childhood disease often regresses around puberty, with referral for a systemic workup when features suggest systemic mastocytosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cutaneous_mastocytosis-pathway",
-   "title": "Cutaneous mastocytosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Accumulation of mast cells confined to the skin, most commonly presenting in childhood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Adult onset raising concern for systemic mastocytosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis with elicitation of Darier sign, Skin biopsy demonstrating increased dermal mast cells where confirmation is needed, Serum baseline tryptase to screen for systemic involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive management centred on avoiding mediator-release triggers such as heat, friction, alcohol and certain drugs including NSAIDs and opioids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming adult cutaneous disease is skin-limited without checking for systemic mastocytosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cutaneous mastocytosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cutaneous_mastocytosis-matrix",
-   "title": "Cutaneous mastocytosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Accumulation of mast cells confined to the skin, most commonly presenting in childhood",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin",
+  "specialty": "Dermatology / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mastocytosis literature / dermatology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Accumulation of mast cells confined to the skin, most commonly presenting in childhood",
+      "Major forms are maculopapular cutaneous mastocytosis (urticaria pigmentosa), diffuse cutaneous mastocytosis and solitary mastocytoma",
+      "Stroking a lesion causes urtication and erythema (a positive Darier sign), a useful bedside clue",
+      "Childhood-onset disease often regresses around puberty, whereas adult-onset skin disease more often reflects underlying systemic mastocytosis",
+      "Mediator symptoms such as flushing and pruritus can occur, and extensive disease risks more serious reactions",
+      "Management is largely supportive with trigger avoidance and mediator-targeted therapy, reserving systemic workup for suggestive features"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis with elicitation of Darier sign, Skin biopsy demonstrating increased dermal mast cells where confirmation is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cutaneous mastocytosis results from clonal accumulation of mast cells within the dermis, frequently associated with activating KIT mutations. The excess dermal mast cells release mediators such as histamine when mechanically or chemically triggered, producing the characteristic weal-and-flare on stroking (Darier sign) and symptoms of flushing and itch. In children the process is usually limited to the skin and tends to involute, whereas in adults cutaneous involvement is commonly a marker of systemic disease.",
+    "additionalDifferentials": [
+      "Systemic mastocytosis with skin involvement",
+      "Urticaria",
+      "Juvenile xanthogranuloma or other histiocytoses",
+      "Post-inflammatory pigmentation",
+      "Bullous disorders (in diffuse cutaneous disease of infancy)"
     ],
-    [
-     "Primary Differentials",
-     "Systemic mastocytosis with skin involvement, Urticaria, Juvenile xanthogranuloma or other histiocytoses",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis with elicitation of Darier sign",
+      "Skin biopsy demonstrating increased dermal mast cells where confirmation is needed",
+      "Serum baseline tryptase to screen for systemic involvement",
+      "Assessment for systemic symptoms, especially in adults",
+      "Referral for systemic workup if features suggest systemic mastocytosis"
     ],
-    [
-     "Management Strategy",
-     "Supportive management centred on avoiding mediator-release triggers such as heat, friction, alcohol and certain drugs including",
-     "Core treatment modality"
+    "redFlags": [
+      "Adult onset raising concern for systemic mastocytosis",
+      "Systemic symptoms such as recurrent anaphylaxis or organ involvement",
+      "Extensive blistering disease in infancy",
+      "A markedly raised tryptase"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming adult cutaneous disease is skin-limited without checking for systemic mastocytosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Childhood cutaneous mastocytosis often improves or resolves by adolescence with an excellent prognosis, whereas adult disease frequently persists and may indicate systemic mastocytosis.",
+    "pitfalls": [
+      "Assuming adult cutaneous disease is skin-limited without checking for systemic mastocytosis",
+      "Provoking severe mediator release by triggering extensive lesions",
+      "Missing the Darier sign as a diagnostic clue",
+      "Overlooking anaphylaxis risk in extensive disease"
+    ],
+    "references": [
+      "Dermatology reference texts (standard reference)",
+      "Mastocytosis clinical guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive management centred on avoiding mediator-release triggers such as heat, friction, alcohol and certain drugs including NSAIDs and opioids",
+      "H1 antihistamines for pruritus and flushing, with H2 antihistamines, the mast-cell stabiliser sodium cromoglicate or leukotriene antagonists as needed",
+      "Topical corticosteroids for symptomatic lesions and phototherapy for extensive skin disease",
+      "An adrenaline auto-injector and an anaphylaxis action plan for extensive disease at risk of severe mediator reactions",
+      "Baseline serum tryptase and assessment for systemic involvement, particularly in adult-onset disease",
+      "Reassurance that childhood disease often regresses around puberty, with referral for a systemic workup when features suggest systemic mastocytosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for cutaneous mastocytosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cutaneous-mastocytosis-real-image",
-   "title": "Cutaneous mastocytosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "cutaneous_mastocytosis-pathway",
+      "title": "Cutaneous mastocytosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Accumulation of mast cells confined to the skin, most commonly presenting in childhood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Adult onset raising concern for systemic mastocytosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis with elicitation of Darier sign, Skin biopsy demonstrating increased dermal mast cells where confirmation is needed, Serum baseline tryptase to screen for systemic involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive management centred on avoiding mediator-release triggers such as heat, friction, alcohol and certain drugs including NSAIDs and opioids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming adult cutaneous disease is skin-limited without checking for systemic mastocytosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cutaneous mastocytosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cutaneous_mastocytosis-matrix",
+      "title": "Cutaneous mastocytosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Accumulation of mast cells confined to the skin, most commonly presenting in childhood",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis with elicitation of Darier sign, Skin biopsy demonstrating increased dermal mast cells where confirmation is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic mastocytosis with skin involvement, Urticaria, Juvenile xanthogranuloma or other histiocytoses",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive management centred on avoiding mediator-release triggers such as heat, friction, alcohol and certain drugs including",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming adult cutaneous disease is skin-limited without checking for systemic mastocytosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cutaneous mastocytosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mastocytosis literature / dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cutaneous_mastocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis with Darier sign",
+          "cells": [
+            {
+              "text": "Mast-cell mediator release on rubbing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Increased dermal mast cells where confirmation needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum baseline tryptase",
+          "cells": [
+            {
+              "text": "Systemic involvement screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for systemic symptoms",
+          "cells": [
+            {
+              "text": "Especially in adults"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_mastocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic mastocytosis with skin involvement",
+          "cells": [
+            {
+              "text": "Adult-onset disease; tryptase and systemic workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urticaria",
+          "cells": [
+            {
+              "text": "Named look-alike; Darier sign absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile xanthogranuloma or other histiocytoses",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_mastocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Heat, friction, alcohol, NSAIDs and opioids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "H1 antihistamines",
+          "cells": [
+            {
+              "text": "Pruritus and flushing; H2 antihistamines, sodium cromoglicate or leukotriene antagonists as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and phototherapy",
+          "cells": [
+            {
+              "text": "Symptomatic lesions; extensive skin disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenaline auto-injector",
+          "cells": [
+            {
+              "text": "Extensive disease at risk of severe mediator reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tryptase and systemic assessment",
+          "cells": [
+            {
+              "text": "Particularly adult-onset disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Childhood disease often regresses around puberty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cutaneous_mastocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Cutaneous mastocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cutaneous mastocytosis: urticaria pigmentosa with Darier sign",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (adult onset, recurrent anaphylaxis, organ involvement, high tryptase)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency anaphylaxis treatment; systemic workup for raised tryptase",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Darier sign; skin biopsy if uncertain; baseline serum tryptase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show increased dermal mast cells?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider urticaria, histiocytosis or post-inflammatory pigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid heat, friction, alcohol and NSAIDs or opioids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "H1 antihistamines for itch and flushing; mast-cell stabilisers as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adrenaline auto-injector for extensive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tryptase and systemic workup, particularly in adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Childhood disease often improves by adolescence; adult disease frequently persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

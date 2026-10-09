@@ -1,173 +1,469 @@
 {
- "id": "gitelman_variant_tubulopathy",
- "name": "Gitelman-spectrum salt-losing tubulopathy",
- "aliases": [
-  "Gitelman syndrome",
-  "SLC12A3",
-  "NCCT defect",
-  "familial hypokalaemia-hypomagnesaemia"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive salt-losing tubulopathy caused by loss-of-function variants in SLC12A3, which encodes the thiazide-sensitive sodium-chloride cotransporter of the distal convoluted tubule",
-   "The biochemical signature is hypokalaemic metabolic alkalosis with hypomagnesaemia and, characteristically, low urinary calcium excretion (hypocalciuria)",
-   "It effectively mimics the biochemical effect of chronic thiazide diuretic use, so surreptitious diuretic misuse must be excluded",
-   "Presentation is often in adolescence or adulthood with fatigue, muscle cramps and weakness, tetany, carpopedal spasm and salt craving, and it is generally milder than Bartter syndrome",
-   "Blood pressure tends to be low or low-normal and the renin-angiotensin-aldosterone system is activated",
-   "The combination of hypomagnesaemia and hypocalciuria helps distinguish it from Bartter syndrome, which typically shows normal or high urinary calcium",
-   "Chondrocalcinosis and QT prolongation can complicate longstanding electrolyte disturbance"
+  "id": "gitelman_variant_tubulopathy",
+  "name": "Gitelman-spectrum salt-losing tubulopathy",
+  "aliases": [
+    "Gitelman syndrome",
+    "SLC12A3",
+    "NCCT defect",
+    "familial hypokalaemia-hypomagnesaemia"
   ],
-  "pathophysiology": "Gitelman-spectrum tubulopathy results from biallelic loss-of-function variants in SLC12A3, which encodes the thiazide-sensitive sodium-chloride cotransporter (NCCT) in the apical membrane of the distal convoluted tubule. Impaired sodium and chloride reabsorption at this site causes mild renal salt wasting and volume contraction, which activates the renin-angiotensin-aldosterone system; the resulting increased distal sodium delivery and aldosterone drive potassium and hydrogen secretion, producing hypokalaemia and metabolic alkalosis. Associated downregulation and remodelling of the distal tubule impair magnesium reabsorption and enhance passive calcium reabsorption, generating the characteristic hypomagnesaemia and hypocalciuria. The phenotype thus recapitulates chronic thiazide exposure.",
-  "additionalDifferentials": [
-   "Bartter syndrome",
-   "Surreptitious diuretic use or misuse",
-   "Chronic vomiting or laxative abuse",
-   "Primary or secondary hyperaldosteronism",
-   "Other causes of hypomagnesaemia (e.g. drug-induced, gastrointestinal loss)",
-   "Familial hypomagnesaemia with hypercalciuria (contrasting phenotype)"
-  ],
-  "additionalInvestigations": [
-   "Serum electrolytes including potassium, magnesium, bicarbonate and calcium",
-   "Blood gas or bicarbonate to confirm metabolic alkalosis",
-   "Urinary calcium-to-creatinine ratio demonstrating hypocalciuria",
-   "Urinary electrolytes and, where needed, a urinary diuretic screen to exclude surreptitious diuretic use",
-   "Plasma renin and aldosterone showing activation of the axis",
-   "Genetic testing of SLC12A3 (and related tubulopathy genes) to confirm the diagnosis"
-  ],
-  "redFlags": [
-   "Severe hypokalaemia or hypomagnesaemia with cardiac arrhythmia or marked QT prolongation",
-   "Tetany or seizures from profound electrolyte depletion",
-   "Severe muscle weakness or rhabdomyolysis",
-   "Acute decompensation during intercurrent illness with vomiting or diarrhoea"
-  ],
-  "prognosis": "Gitelman syndrome generally has a good long-term prognosis with appropriate electrolyte supplementation and normal life expectancy in most patients, although chronic symptoms and occasional severe electrolyte disturbances can affect quality of life. Kidney function is usually preserved.",
-  "pitfalls": [
-   "Failing to exclude surreptitious diuretic use, which produces an identical biochemical picture",
-   "Confusing it with Bartter syndrome by not checking urinary calcium and magnesium",
-   "Neglecting magnesium repletion, without which potassium is difficult to correct",
-   "Underestimating arrhythmia risk from combined hypokalaemia and hypomagnesaemia"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "OMIM: Gitelman syndrome (SLC12A3)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong oral magnesium replacement as the cornerstone, since restoring magnesium is usually essential to correcting the hypokalaemia",
-   "Oral potassium supplementation alongside a liberal salt and fluid intake to compensate for renal salt wasting",
-   "Potassium-sparing diuretics such as spironolactone, eplerenone or amiloride to limit renal potassium and magnesium wasting",
-   "Intravenous magnesium and potassium replacement for severe symptomatic depletion presenting with tetany, carpopedal spasm or arrhythmia",
-   "Periodic monitoring of serum electrolytes, with ECG when disturbance is marked, and counselling on salt and fluid maintenance during intercurrent illness",
-   "Confirm with SLC12A3 genetic testing and provide counselling for this autosomal recessive tubulopathy, screening at-risk siblings"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gitelman_variant_tubulopathy-pathway",
-   "title": "Gitelman-spectrum salt-losing tubulopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive salt-losing tubulopathy caused by loss-of-function variants in SLC12A3, which encodes the thiazide-sensitive sodium-chloride cotransporter of the distal convoluted tubule",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypokalaemia or hypomagnesaemia with cardiac arrhythmia or marked QT prolongation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum electrolytes including potassium, magnesium, bicarbonate and calcium, Blood gas or bicarbonate to confirm metabolic alkalosis, Urinary calcium-to-creatinine ratio demonstrating hypocalciuria"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong oral magnesium replacement as the cornerstone, since restoring magnesium is usually essential to correcting the hypokalaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to exclude surreptitious diuretic use, which produces an identical biochemical picture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gitelman-spectrum salt-losing tubulopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "gitelman_variant_tubulopathy-matrix",
-   "title": "Gitelman-spectrum salt-losing tubulopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive salt-losing tubulopathy caused by loss-of-function variants in SLC12A3, which encodes the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive salt-losing tubulopathy caused by loss-of-function variants in SLC12A3, which encodes the thiazide-sensitive sodium-chloride cotransporter of the distal convoluted tubule",
+      "The biochemical signature is hypokalaemic metabolic alkalosis with hypomagnesaemia and, characteristically, low urinary calcium excretion (hypocalciuria)",
+      "It effectively mimics the biochemical effect of chronic thiazide diuretic use, so surreptitious diuretic misuse must be excluded",
+      "Presentation is often in adolescence or adulthood with fatigue, muscle cramps and weakness, tetany, carpopedal spasm and salt craving, and it is generally milder than Bartter syndrome",
+      "Blood pressure tends to be low or low-normal and the renin-angiotensin-aldosterone system is activated",
+      "The combination of hypomagnesaemia and hypocalciuria helps distinguish it from Bartter syndrome, which typically shows normal or high urinary calcium",
+      "Chondrocalcinosis and QT prolongation can complicate longstanding electrolyte disturbance"
     ],
-    [
-     "Key Investigations",
-     "Serum electrolytes including potassium, magnesium, bicarbonate and calcium, Blood gas or bicarbonate to confirm metabolic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gitelman-spectrum tubulopathy results from biallelic loss-of-function variants in SLC12A3, which encodes the thiazide-sensitive sodium-chloride cotransporter (NCCT) in the apical membrane of the distal convoluted tubule. Impaired sodium and chloride reabsorption at this site causes mild renal salt wasting and volume contraction, which activates the renin-angiotensin-aldosterone system; the resulting increased distal sodium delivery and aldosterone drive potassium and hydrogen secretion, producing hypokalaemia and metabolic alkalosis. Associated downregulation and remodelling of the distal tubule impair magnesium reabsorption and enhance passive calcium reabsorption, generating the characteristic hypomagnesaemia and hypocalciuria. The phenotype thus recapitulates chronic thiazide exposure.",
+    "additionalDifferentials": [
+      "Bartter syndrome",
+      "Surreptitious diuretic use or misuse",
+      "Chronic vomiting or laxative abuse",
+      "Primary or secondary hyperaldosteronism",
+      "Other causes of hypomagnesaemia (e.g. drug-induced, gastrointestinal loss)",
+      "Familial hypomagnesaemia with hypercalciuria (contrasting phenotype)"
     ],
-    [
-     "Primary Differentials",
-     "Bartter syndrome, Surreptitious diuretic use or misuse, Chronic vomiting or laxative abuse",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum electrolytes including potassium, magnesium, bicarbonate and calcium",
+      "Blood gas or bicarbonate to confirm metabolic alkalosis",
+      "Urinary calcium-to-creatinine ratio demonstrating hypocalciuria",
+      "Urinary electrolytes and, where needed, a urinary diuretic screen to exclude surreptitious diuretic use",
+      "Plasma renin and aldosterone showing activation of the axis",
+      "Genetic testing of SLC12A3 (and related tubulopathy genes) to confirm the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Lifelong oral magnesium replacement as the cornerstone, since restoring magnesium is usually essential to correcting the",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypokalaemia or hypomagnesaemia with cardiac arrhythmia or marked QT prolongation",
+      "Tetany or seizures from profound electrolyte depletion",
+      "Severe muscle weakness or rhabdomyolysis",
+      "Acute decompensation during intercurrent illness with vomiting or diarrhoea"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to exclude surreptitious diuretic use, which produces an identical biochemical picture",
-     "Prevent diagnostic or management error"
+    "prognosis": "Gitelman syndrome generally has a good long-term prognosis with appropriate electrolyte supplementation and normal life expectancy in most patients, although chronic symptoms and occasional severe electrolyte disturbances can affect quality of life. Kidney function is usually preserved.",
+    "pitfalls": [
+      "Failing to exclude surreptitious diuretic use, which produces an identical biochemical picture",
+      "Confusing it with Bartter syndrome by not checking urinary calcium and magnesium",
+      "Neglecting magnesium repletion, without which potassium is difficult to correct",
+      "Underestimating arrhythmia risk from combined hypokalaemia and hypomagnesaemia"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "OMIM: Gitelman syndrome (SLC12A3)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong oral magnesium replacement as the cornerstone, since restoring magnesium is usually essential to correcting the hypokalaemia",
+      "Oral potassium supplementation alongside a liberal salt and fluid intake to compensate for renal salt wasting",
+      "Potassium-sparing diuretics such as spironolactone, eplerenone or amiloride to limit renal potassium and magnesium wasting",
+      "Intravenous magnesium and potassium replacement for severe symptomatic depletion presenting with tetany, carpopedal spasm or arrhythmia",
+      "Periodic monitoring of serum electrolytes, with ECG when disturbance is marked, and counselling on salt and fluid maintenance during intercurrent illness",
+      "Confirm with SLC12A3 genetic testing and provide counselling for this autosomal recessive tubulopathy, screening at-risk siblings"
     ]
-   ],
-   "caption": "Overview comparison matrix for gitelman-spectrum salt-losing tubulopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gitelman-variant-tubulopathy-real-image",
-   "title": "Gitelman-spectrum salt-losing tubulopathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "gitelman_variant_tubulopathy-pathway",
+      "title": "Gitelman-spectrum salt-losing tubulopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive salt-losing tubulopathy caused by loss-of-function variants in SLC12A3, which encodes the thiazide-sensitive sodium-chloride cotransporter of the distal convoluted tubule",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypokalaemia or hypomagnesaemia with cardiac arrhythmia or marked QT prolongation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum electrolytes including potassium, magnesium, bicarbonate and calcium, Blood gas or bicarbonate to confirm metabolic alkalosis, Urinary calcium-to-creatinine ratio demonstrating hypocalciuria"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong oral magnesium replacement as the cornerstone, since restoring magnesium is usually essential to correcting the hypokalaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to exclude surreptitious diuretic use, which produces an identical biochemical picture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gitelman-spectrum salt-losing tubulopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gitelman_variant_tubulopathy-matrix",
+      "title": "Gitelman-spectrum salt-losing tubulopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive salt-losing tubulopathy caused by loss-of-function variants in SLC12A3, which encodes the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum electrolytes including potassium, magnesium, bicarbonate and calcium, Blood gas or bicarbonate to confirm metabolic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bartter syndrome, Surreptitious diuretic use or misuse, Chronic vomiting or laxative abuse",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong oral magnesium replacement as the cornerstone, since restoring magnesium is usually essential to correcting the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to exclude surreptitious diuretic use, which produces an identical biochemical picture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gitelman-spectrum salt-losing tubulopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gitelman_variant_tubulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes including potassium, magnesium, bicarbonate and calcium",
+          "cells": [
+            {
+              "text": "Electrolyte profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas or bicarbonate",
+          "cells": [
+            {
+              "text": "Metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Hypocalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary electrolytes and diuretic screen",
+          "cells": [
+            {
+              "text": "Surreptitious diuretic use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Activation of the axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC12A3 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gitelman_variant_tubulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bartter syndrome",
+          "cells": [
+            {
+              "text": "Excluded by urinary calcium and magnesium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypomagnesaemia with hypercalciuria",
+          "cells": [
+            {
+              "text": "Contrasting phenotype with hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surreptitious diuretic use",
+          "cells": [
+            {
+              "text": "Identical biochemical picture; excluded by urine diuretic screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gitelman_variant_tubulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong oral magnesium replacement",
+          "cells": [
+            {
+              "text": "The cornerstone; restoring magnesium is usually essential to correct potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral potassium with liberal salt and fluid",
+          "cells": [
+            {
+              "text": "Compensates for renal salt wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-sparing diuretics",
+          "cells": [
+            {
+              "text": "Spironolactone, eplerenone or amiloride to limit potassium and magnesium wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous replacement",
+          "cells": [
+            {
+              "text": "Severe symptomatic depletion with tetany or carpopedal spasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial electrolytes; ECG when disturbance is marked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid decompensation",
+          "cells": [
+            {
+              "text": "Salt and fluid maintenance during vomiting, diarrhoea or heat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screening of at-risk siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gitelman_variant_tubulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Gitelman-spectrum salt-losing tubulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gitelman-spectrum tubulopathy: salt-losing alkalosis with low magnesium",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypokalaemia, tetany, rhabdomyolysis, QT prolongation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent electrolyte replacement with ECG for arrhythmia or tetany",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes, blood gas, urinary calcium ratio, renin and aldosterone, SLC12A3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC12A3 testing confirm the tubulopathy, with diuretic misuse excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bartter syndrome, diuretic misuse or hypomagnesaemia with hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong oral magnesium replacement as the cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral potassium with liberal salt and fluid intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potassium-sparing diuretics to limit potassium and magnesium wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous replacement for severe symptomatic depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally good long-term prognosis with normal life expectancy in most patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

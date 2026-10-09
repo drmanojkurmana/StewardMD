@@ -331,25 +331,515 @@
       "caption": "Diagnostic and clinical overview matrix for leptospirosis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "leptospirosis-real-image",
-      "title": "Leptospirosis: Diagnostic Microbiological / Smear Examination",
-      "type": "diagram",
-      "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-      "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 171-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Clinical Overview of Leptospirosis",
+      "url": "https://www.cdc.gov/leptospirosis/hcp/clinical-overview/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "CDC Yellow Book, Leptospirosis",
+      "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/leptospirosis.html",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 174-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "LEPTOSPIROSIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical features and tests for leptospirosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Pathogen Detection",
-          "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Usually 5 to 14, range 2 to 30",
+              "range": [
+                2,
+                30
+              ]
+            },
+            {
+              "text": "Ask about floodwater, freshwater or animal urine exposure"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Inflammatory Response",
-          "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+          "parameter": "Acute septicaemic phase",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "About 7 days of fever, calf and back myalgia, headache",
+              "op": "=",
+              "value": 7
+            },
+            {
+              "text": "{{hy:Conjunctival suffusion is characteristic but not pathognomonic}}"
+            }
+          ],
+          "cite": "c4"
         },
         {
-          "label": "Diagnostic Confirmation",
-          "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+          "parameter": "Severe disease",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "5 to 10% develop multiorgan disease",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "Weil's syndrome: jaundice, AKI, haemorrhage"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pulmonary haemorrhage",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Case fatality >50%",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Rare but most lethal form"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Jaundice",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 5 to 10% of patients",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "Usually without fulminant hepatic necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poor prognosis",
+          "cells": [
+            {
+              "text": "Older age, altered mental status, respiratory insufficiency, oliguria"
+            },
+            {
+              "text": "Admit and monitor closely"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "PCR",
+          "cells": [
+            {
+              "text": "Whole blood in week 1, urine after week 1, CSF if meningitis"
+            },
+            {
+              "text": "Positive confirms; negative does not exclude"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Serology timing",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Insensitive up to day 5; rises in week 2",
+              "op": "<=",
+              "value": 5
+            },
+            {
+              "text": "Cannot guide early treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgM screen and MAT",
+          "cells": [
+            {
+              "text": "IgM screen, confirmed by MAT on paired sera"
+            },
+            {
+              "text": "MAT is the reference standard"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Culture",
+          "cells": [
+            {
+              "text": "Slow, insensitive, special media"
+            },
+            {
+              "text": "Not to be used alone"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "LEPTOSPIROSIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic leptospirosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dengue",
+          "cells": [
+            {
+              "text": "Retro-orbital headache shared; incubation 2 to 7 days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrub typhus",
+          "cells": [
+            {
+              "text": "Eschar in about 35%, lymphadenopathy, mite exposure"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Influenza, SARS-CoV-2 and other respiratory viruses",
+          "cells": [
+            {
+              "text": "Fever, headache and myalgia without conjunctival suffusion or renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chikungunya",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral hepatitis",
+          "cells": [
+            {
+              "text": "Leptospiral jaundice is deep but lacks fulminant hepatic necrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Dengue incubation from Tables PDF, Table 196-4. Cells marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "LEPTOSPIROSIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment and prophylaxis of leptospirosis in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Start empirically",
+          "cells": [
+            {
+              "text": "{{hy:As soon as suspected, without waiting for tests}}"
+            },
+            {
+              "text": "Delay worsens outcome"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Mild disease, drug of choice"
+            },
+            {
+              "text": "100 mg PO bid for 7 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Amoxicillin or ampicillin",
+          "cells": [
+            {
+              "text": "Mild disease, alternative"
+            },
+            {
+              "text": "500 mg PO tid (PDF); CDC gives amoxicillin 500 mg q6h, ampicillin 500 to 750 mg q6h for 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Mild disease, alternative"
+            },
+            {
+              "text": "500 mg PO daily for 3 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV penicillin",
+          "cells": [
+            {
+              "text": "Moderate or severe disease, drug of choice"
+            },
+            {
+              "text": "1.5 million units IV or IM q6h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ceftriaxone or cefotaxime",
+          "cells": [
+            {
+              "text": "Moderate or severe disease, alternative"
+            },
+            {
+              "text": "Ceftriaxone 1 g/d IV or cefotaxime 1 g IV q6h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Severe disease"
+            },
+            {
+              "text": "IV fluids, electrolytes, dialysis for oliguric AKI, ventilation for respiratory failure"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Watch for Jarisch-Herxheimer reaction",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "First 24 h of antibiotics"
+            },
+            {
+              "text": "Fever, headache, myalgia; rarely fatal"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Doxycycline chemoprophylaxis",
+          "cells": [
+            {
+              "text": "High-risk short-term exposure"
+            },
+            {
+              "text": "200 mg PO once weekly, from 1 to 2 days before and through exposure; azithromycin 250 mg once or twice weekly alternative"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Amoxicillin and ampicillin frequency differs: Tables PDF gives tid, CDC gives every 6 h."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "LEPTOSPIROSIS-dx-mgmt",
+      "title": "Diagnosis and management of leptospirosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, calf myalgia, conjunctival suffusion after water or animal exposure",
+          "cite": "c4"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Send blood, serum and urine; start antibiotics without waiting",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Illness under 1 week?",
+          "cite": "c4"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole blood PCR",
+          "cite": "c4"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Urine PCR, IgM screen, MAT on paired sera",
+          "cite": "c4"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Jaundice, AKI, bleeding, respiratory distress or altered mentation?",
+          "cite": "c4"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Doxycycline 100 mg bid for 7 days as outpatient",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Admit; IV penicillin or ceftriaxone",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Oliguric renal failure or respiratory failure?",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Dialysis or mechanical ventilation with supportive care",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete course; watch for Jarisch-Herxheimer reaction",
+          "cite": "c4"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
         }
       ]
     }

@@ -1,177 +1,397 @@
 {
- "id": "rectocele",
- "name": "Rectocele",
- "aliases": [
-  "posterior vaginal wall prolapse",
-  "rectovaginal herniation",
-  "proctocele"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal / Anorectal",
- "specialty": "Colorectal surgery / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rectocele is a herniation of the anterior rectal wall into the posterior vaginal wall through a weakened rectovaginal septum, most common in parous women",
-   "Typical symptoms are obstructed defecation, a sensation of incomplete evacuation, vaginal bulging, and the need for vaginal or perineal digitation to empty the rectum",
-   "Small rectoceles are a common incidental finding on imaging in asymptomatic women, so symptoms must correlate with anatomical findings before intervention",
-   "Risk factors include vaginal childbirth, chronic straining, ageing with connective-tissue laxity, prior pelvic surgery, and oestrogen deficiency",
-   "Defecating proctography or dynamic MRI demonstrates the size, barium trapping, and associated pelvic-floor abnormalities such as enterocele or intussusception",
-   "Rectocele frequently coexists with other pelvic-floor disorders, so a global structural and functional assessment is essential rather than treating it in isolation",
-   "First-line treatment is conservative: fibre, stool softening, avoidance of straining, and biofeedback/pelvic-floor physiotherapy",
-   "Surgical repair (transvaginal, transperineal, transanal, or as part of a ventral rectopexy or stapled procedure) is reserved for significant symptomatic rectoceles with demonstrable contrast trapping"
+  "id": "rectocele",
+  "name": "Rectocele",
+  "aliases": [
+    "posterior vaginal wall prolapse",
+    "rectovaginal herniation",
+    "proctocele"
   ],
-  "pathophysiology": "The rectovaginal septum is a fibromuscular layer that separates the rectum from the vagina and supports the anterior rectal wall. Weakening or disruption of this septum and its fascial attachments, most often following vaginal delivery, chronic straining, ageing, or oestrogen deficiency, allows the anterior rectal wall to bulge forward into the posterior vaginal lumen during defecation. As intrarectal pressure rises with straining, stool preferentially fills the outpouching rather than passing through the anal canal, producing trapping of stool, a sensation of incomplete evacuation, and a vicious cycle of increased straining that enlarges the defect. Associated pelvic-floor weakness, perineal descent, and coexisting prolapse of other compartments compound the functional obstruction.",
-  "additionalDifferentials": [
-   "Enterocele or sigmoidocele herniating into the rectovaginal space",
-   "Rectal intussusception or internal rectal prolapse",
-   "Anismus (paradoxical puborectalis contraction) causing obstructed defecation",
-   "Cystocele or uterine/vault prolapse contributing to pelvic-floor symptoms",
-   "Slow-transit constipation",
-   "Anterior mucosal or full-thickness rectal prolapse",
-   "Solitary rectal ulcer syndrome"
-  ],
-  "additionalInvestigations": [
-   "Defecating proctography to assess rectocele size and barium trapping",
-   "Dynamic pelvic-floor MRI to evaluate all three compartments",
-   "Anorectal manometry and balloon expulsion testing for evacuatory function",
-   "Endoanal ultrasound if sphincter injury or incontinence is suspected",
-   "Colonic transit studies where slow-transit constipation is considered",
-   "Examination in the lithotomy and standing positions with straining"
-  ],
-  "redFlags": [
-   "Rectal bleeding, weight loss, or change in bowel habit suggesting neoplasia",
-   "A non-reducing or ulcerated prolapsing mass",
-   "New-onset faecal incontinence or a suspected sphincter defect",
-   "Symptoms disproportionate to a small rectocele, prompting search for another cause",
-   "Signs of coexisting enterocele obstructing the small bowel"
-  ],
-  "prognosis": "Many symptomatic rectoceles improve substantially with conservative measures and biofeedback; surgical repair of well-selected patients with demonstrable contrast trapping gives good functional results, though recurrence and persistent evacuatory symptoms can occur, particularly when other pelvic-floor abnormalities are unaddressed.",
-  "pitfalls": [
-   "Operating on an incidental rectocele that does not correlate with the patient's symptoms",
-   "Overlooking coexisting enterocele, intussusception, or anismus that will limit surgical benefit",
-   "Failing to treat constipation and straining, leading to recurrence",
-   "Attributing obstructed defecation solely to the rectocele when a functional disorder predominates",
-   "Neglecting pelvic-floor physiotherapy before considering surgery"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "International Continence Society and International Urogynecological Association terminology and guidance on pelvic organ prolapse",
-   "Association of Coloproctology of Great Britain and Ireland guidance on obstructed defecation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line conservative management with dietary fibre, fluids, stool softeners and bowel-habit modification to reduce straining",
-   "Pelvic-floor physiotherapy and biofeedback to improve rectal evacuation",
-   "Vaginal pessary support and topical oestrogen where oestrogen deficiency contributes",
-   "Reserve surgical repair (transvaginal, transanal or transperineal) for symptomatic patients with demonstrable contrast trapping after conservative failure",
-   "Confirm that symptoms correlate with anatomy before intervention, as small rectoceles are common incidental findings",
-   "Multidisciplinary assessment of all pelvic-floor compartments and coexisting enterocele or intussusception, with monitoring for recurrence and persistent evacuatory symptoms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rectocele-pathway",
-   "title": "Rectocele: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rectocele is a herniation of the anterior rectal wall into the posterior vaginal wall through a weakened rectovaginal septum, most common in parous women",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rectal bleeding, weight loss, or change in bowel habit suggesting neoplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Defecating proctography to assess rectocele size and barium trapping, Dynamic pelvic-floor MRI to evaluate all three compartments, Anorectal manometry and balloon expulsion testing for evacuatory function"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line conservative management with dietary fibre, fluids, stool softeners and bowel-habit modification to reduce straining"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Operating on an incidental rectocele that does not correlate with the patient's symptoms"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rectocele."
-  }
- ],
- "tables": [
-  {
-   "id": "rectocele-matrix",
-   "title": "Rectocele: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rectocele is a herniation of the anterior rectal wall into the posterior vaginal wall through a weakened rectovaginal septum,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal / Anorectal",
+  "specialty": "Colorectal surgery / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rectocele is a herniation of the anterior rectal wall into the posterior vaginal wall through a weakened rectovaginal septum, most common in parous women",
+      "Typical symptoms are obstructed defecation, a sensation of incomplete evacuation, vaginal bulging, and the need for vaginal or perineal digitation to empty the rectum",
+      "Small rectoceles are a common incidental finding on imaging in asymptomatic women, so symptoms must correlate with anatomical findings before intervention",
+      "Risk factors include vaginal childbirth, chronic straining, ageing with connective-tissue laxity, prior pelvic surgery, and oestrogen deficiency",
+      "Defecating proctography or dynamic MRI demonstrates the size, barium trapping, and associated pelvic-floor abnormalities such as enterocele or intussusception",
+      "Rectocele frequently coexists with other pelvic-floor disorders, so a global structural and functional assessment is essential rather than treating it in isolation",
+      "First-line treatment is conservative: fibre, stool softening, avoidance of straining, and biofeedback/pelvic-floor physiotherapy",
+      "Surgical repair (transvaginal, transperineal, transanal, or as part of a ventral rectopexy or stapled procedure) is reserved for significant symptomatic rectoceles with demonstrable contrast trapping"
     ],
-    [
-     "Key Investigations",
-     "Defecating proctography to assess rectocele size and barium trapping, Dynamic pelvic-floor MRI to evaluate all three",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The rectovaginal septum is a fibromuscular layer that separates the rectum from the vagina and supports the anterior rectal wall. Weakening or disruption of this septum and its fascial attachments, most often following vaginal delivery, chronic straining, ageing, or oestrogen deficiency, allows the anterior rectal wall to bulge forward into the posterior vaginal lumen during defecation. As intrarectal pressure rises with straining, stool preferentially fills the outpouching rather than passing through the anal canal, producing trapping of stool, a sensation of incomplete evacuation, and a vicious cycle of increased straining that enlarges the defect. Associated pelvic-floor weakness, perineal descent, and coexisting prolapse of other compartments compound the functional obstruction.",
+    "additionalDifferentials": [
+      "Enterocele or sigmoidocele herniating into the rectovaginal space",
+      "Rectal intussusception or internal rectal prolapse",
+      "Anismus (paradoxical puborectalis contraction) causing obstructed defecation",
+      "Cystocele or uterine/vault prolapse contributing to pelvic-floor symptoms",
+      "Slow-transit constipation",
+      "Anterior mucosal or full-thickness rectal prolapse",
+      "Solitary rectal ulcer syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Enterocele or sigmoidocele herniating into the rectovaginal space, Rectal intussusception or internal rectal prolapse, Anismus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Defecating proctography to assess rectocele size and barium trapping",
+      "Dynamic pelvic-floor MRI to evaluate all three compartments",
+      "Anorectal manometry and balloon expulsion testing for evacuatory function",
+      "Endoanal ultrasound if sphincter injury or incontinence is suspected",
+      "Colonic transit studies where slow-transit constipation is considered",
+      "Examination in the lithotomy and standing positions with straining"
     ],
-    [
-     "Management Strategy",
-     "First-line conservative management with dietary fibre, fluids, stool softeners and bowel-habit modification to reduce straining",
-     "Core treatment modality"
+    "redFlags": [
+      "Rectal bleeding, weight loss, or change in bowel habit suggesting neoplasia",
+      "A non-reducing or ulcerated prolapsing mass",
+      "New-onset faecal incontinence or a suspected sphincter defect",
+      "Symptoms disproportionate to a small rectocele, prompting search for another cause",
+      "Signs of coexisting enterocele obstructing the small bowel"
     ],
-    [
-     "Clinical Pitfall",
-     "Operating on an incidental rectocele that does not correlate with the patient's symptoms",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many symptomatic rectoceles improve substantially with conservative measures and biofeedback; surgical repair of well-selected patients with demonstrable contrast trapping gives good functional results, though recurrence and persistent evacuatory symptoms can occur, particularly when other pelvic-floor abnormalities are unaddressed.",
+    "pitfalls": [
+      "Operating on an incidental rectocele that does not correlate with the patient's symptoms",
+      "Overlooking coexisting enterocele, intussusception, or anismus that will limit surgical benefit",
+      "Failing to treat constipation and straining, leading to recurrence",
+      "Attributing obstructed defecation solely to the rectocele when a functional disorder predominates",
+      "Neglecting pelvic-floor physiotherapy before considering surgery"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "International Continence Society and International Urogynecological Association terminology and guidance on pelvic organ prolapse",
+      "Association of Coloproctology of Great Britain and Ireland guidance on obstructed defecation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line conservative management with dietary fibre, fluids, stool softeners and bowel-habit modification to reduce straining",
+      "Pelvic-floor physiotherapy and biofeedback to improve rectal evacuation",
+      "Vaginal pessary support and topical oestrogen where oestrogen deficiency contributes",
+      "Reserve surgical repair (transvaginal, transanal or transperineal) for symptomatic patients with demonstrable contrast trapping after conservative failure",
+      "Confirm that symptoms correlate with anatomy before intervention, as small rectoceles are common incidental findings",
+      "Multidisciplinary assessment of all pelvic-floor compartments and coexisting enterocele or intussusception, with monitoring for recurrence and persistent evacuatory symptoms"
     ]
-   ],
-   "caption": "Overview comparison matrix for rectocele."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rectocele-real-image",
-   "title": "Rectocele: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "rectocele-pathway",
+      "title": "Rectocele: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rectocele is a herniation of the anterior rectal wall into the posterior vaginal wall through a weakened rectovaginal septum, most common in parous women",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rectal bleeding, weight loss, or change in bowel habit suggesting neoplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Defecating proctography to assess rectocele size and barium trapping, Dynamic pelvic-floor MRI to evaluate all three compartments, Anorectal manometry and balloon expulsion testing for evacuatory function"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line conservative management with dietary fibre, fluids, stool softeners and bowel-habit modification to reduce straining"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Operating on an incidental rectocele that does not correlate with the patient's symptoms"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rectocele."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rectocele-matrix",
+      "title": "Rectocele: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rectocele is a herniation of the anterior rectal wall into the posterior vaginal wall through a weakened rectovaginal septum,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Defecating proctography to assess rectocele size and barium trapping, Dynamic pelvic-floor MRI to evaluate all three",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Enterocele or sigmoidocele herniating into the rectovaginal space, Rectal intussusception or internal rectal prolapse, Anismus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line conservative management with dietary fibre, fluids, stool softeners and bowel-habit modification to reduce straining",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Operating on an incidental rectocele that does not correlate with the patient's symptoms",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rectocele."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rectocele-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Defecating proctography",
+          "cells": [
+            {
+              "text": "Rectocele size and barium trapping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic pelvic-floor MRI",
+          "cells": [
+            {
+              "text": "All three compartments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry",
+          "cells": [
+            {
+              "text": "Anorectal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectocele-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Enterocele or sigmoidocele",
+          "cells": [
+            {
+              "text": "Herniation into the rectovaginal space"
+            },
+            {
+              "text": "Dynamic pelvic MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectal intussusception or internal rectal prolapse",
+          "cells": [
+            {
+              "text": "Internal rectal prolapse"
+            },
+            {
+              "text": "Defecating proctography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rectocele-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Dietary fibre, fluids, stool softeners and bowel habit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic-floor physiotherapy",
+          "cells": [
+            {
+              "text": "Physiotherapy and biofeedback"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment",
+          "cells": [
+            {
+              "text": "For persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rectocele-dx-mgmt",
+      "title": "Diagnosis and management of Rectocele",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected rectocele: difficult evacuation with a vaginal bulge",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bleeding, weight loss, bowel change, or non-reducing ulcerated mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for suspected neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Defecating proctography; dynamic pelvic MRI; anorectal manometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a rectocele confirmed with other compartment defects assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider enterocele, intussusception or anismus; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dietary fibre, fluids, stool softeners and bowel habit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pelvic-floor physiotherapy and biofeedback",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassessment for persistent symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Colorectal or urogynaecology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

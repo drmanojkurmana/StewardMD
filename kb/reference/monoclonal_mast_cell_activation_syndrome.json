@@ -1,167 +1,445 @@
 {
- "id": "monoclonal_mast_cell_activation_syndrome",
- "name": "Monoclonal mast cell activation syndrome",
- "aliases": [
-  "MMAS"
- ],
- "class": "non_infective",
- "system": "Haematology / Immunology",
- "specialty": "Haematology / Allergy",
- "referenceOnly": true,
- "reference": {
-  "source": "Mastocytosis and mast cell activation literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mast cell activation syndrome in which there is evidence of a clonal mast cell population but insufficient criteria for systemic mastocytosis",
-   "Patients have recurrent episodes of mast cell mediator release, often including anaphylaxis",
-   "Hymenoptera venom anaphylaxis with hypotension is a classic presentation",
-   "Clonality is shown by a KIT D816V mutation and/or aberrant mast cell markers, without meeting full systemic mastocytosis criteria",
-   "It is distinguished from non-clonal (idiopathic or secondary) mast cell activation syndrome by the demonstration of clonality",
-   "Management centres on mediator control, trigger avoidance and anaphylaxis preparedness"
+  "id": "monoclonal_mast_cell_activation_syndrome",
+  "name": "Monoclonal mast cell activation syndrome",
+  "aliases": [
+    "MMAS"
   ],
-  "pathophysiology": "Monoclonal mast cell activation syndrome occupies a middle ground between mast cell activation syndrome and systemic mastocytosis. A clonal mast cell population, frequently harbouring the KIT D816V mutation, is present but the burden and features fall short of the diagnostic threshold for systemic mastocytosis. These clonal mast cells are prone to activation and mediator release, producing episodic symptoms such as flushing, hypotension and anaphylaxis, often with an identifiable trigger such as insect venom.",
-  "additionalDifferentials": [
-   "Systemic mastocytosis",
-   "Non-clonal (idiopathic) mast cell activation syndrome",
-   "Idiopathic anaphylaxis",
-   "Hereditary alpha-tryptasaemia",
-   "Carcinoid syndrome or phaeochromocytoma"
-  ],
-  "additionalInvestigations": [
-   "Serum tryptase, including during and between episodes",
-   "KIT D816V mutation analysis (often on blood or marrow)",
-   "Bone marrow examination with mast cell immunophenotyping",
-   "Assessment against systemic mastocytosis criteria",
-   "Allergy and trigger evaluation, including venom testing"
-  ],
-  "redFlags": [
-   "Recurrent or severe anaphylaxis",
-   "Evolving features suggesting progression to systemic mastocytosis",
-   "Cardiovascular collapse during episodes",
-   "Cytopenias or organ involvement"
-  ],
-  "prognosis": "Prognosis is generally favourable with mediator-directed therapy and anaphylaxis management, though patients remain at risk of severe reactions and require monitoring for progression.",
-  "pitfalls": [
-   "Failing to test for clonality (KIT mutation) in unexplained anaphylaxis",
-   "Not distinguishing it from full systemic mastocytosis",
-   "Overlooking venom allergy as a trigger",
-   "Omitting rescue adrenaline provision"
-  ],
-  "references": [
-   "Mastocytosis clinical guidelines (standard reference)",
-   "Allergy reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Mediator-directed therapy as the foundation, with H1 and H2 antihistamines, a mast cell stabiliser such as sodium cromoglicate and a leukotriene receptor antagonist, escalating to anti-IgE therapy with omalizumab for refractory symptoms",
-   "Identification and avoidance of triggers, notably Hymenoptera venom and other precipitants of mediator release",
-   "Anaphylaxis preparedness with an adrenaline auto-injector, a personalised emergency action plan and patient education",
-   "Venom immunotherapy for Hymenoptera venom anaphylaxis, often continued long term given the underlying clonality",
-   "Monitor serum tryptase and periodically reassess against systemic mastocytosis criteria to detect progression",
-   "Consider KIT-directed therapy and specialist mastocytosis input if the clonal disease progresses, within coordinated allergy and haematology care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "monoclonal_mast_cell_activation_syndrome-pathway",
-   "title": "Monoclonal mast cell activation syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mast cell activation syndrome in which there is evidence of a clonal mast cell population but insufficient criteria for systemic mastocytosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or severe anaphylaxis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum tryptase, including during and between episodes, KIT D816V mutation analysis (often on blood or marrow), Bone marrow examination with mast cell immunophenotyping"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Mediator-directed therapy as the foundation, with H1 and H2 antihistamines, a mast cell stabiliser such as sodium cromoglicate and a leukotriene receptor antagonist, escalating to anti-IgE therapy with omalizumab for"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to test for clonality (KIT mutation) in unexplained anaphylaxis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of monoclonal mast cell activation syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "monoclonal_mast_cell_activation_syndrome-matrix",
-   "title": "Monoclonal mast cell activation syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mast cell activation syndrome in which there is evidence of a clonal mast cell population but insufficient criteria for",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Immunology",
+  "specialty": "Haematology / Allergy",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mastocytosis and mast cell activation literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mast cell activation syndrome in which there is evidence of a clonal mast cell population but insufficient criteria for systemic mastocytosis",
+      "Patients have recurrent episodes of mast cell mediator release, often including anaphylaxis",
+      "Hymenoptera venom anaphylaxis with hypotension is a classic presentation",
+      "Clonality is shown by a KIT D816V mutation and/or aberrant mast cell markers, without meeting full systemic mastocytosis criteria",
+      "It is distinguished from non-clonal (idiopathic or secondary) mast cell activation syndrome by the demonstration of clonality",
+      "Management centres on mediator control, trigger avoidance and anaphylaxis preparedness"
     ],
-    [
-     "Key Investigations",
-     "Serum tryptase, including during and between episodes, KIT D816V mutation analysis (often on blood or marrow), Bone marrow",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Monoclonal mast cell activation syndrome occupies a middle ground between mast cell activation syndrome and systemic mastocytosis. A clonal mast cell population, frequently harbouring the KIT D816V mutation, is present but the burden and features fall short of the diagnostic threshold for systemic mastocytosis. These clonal mast cells are prone to activation and mediator release, producing episodic symptoms such as flushing, hypotension and anaphylaxis, often with an identifiable trigger such as insect venom.",
+    "additionalDifferentials": [
+      "Systemic mastocytosis",
+      "Non-clonal (idiopathic) mast cell activation syndrome",
+      "Idiopathic anaphylaxis",
+      "Hereditary alpha-tryptasaemia",
+      "Carcinoid syndrome or phaeochromocytoma"
     ],
-    [
-     "Primary Differentials",
-     "Systemic mastocytosis, Non-clonal (idiopathic) mast cell activation syndrome, Idiopathic anaphylaxis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum tryptase, including during and between episodes",
+      "KIT D816V mutation analysis (often on blood or marrow)",
+      "Bone marrow examination with mast cell immunophenotyping",
+      "Assessment against systemic mastocytosis criteria",
+      "Allergy and trigger evaluation, including venom testing"
     ],
-    [
-     "Management Strategy",
-     "Mediator-directed therapy as the foundation, with H1 and H2 antihistamines, a mast cell stabiliser such as sodium cromoglicate",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or severe anaphylaxis",
+      "Evolving features suggesting progression to systemic mastocytosis",
+      "Cardiovascular collapse during episodes",
+      "Cytopenias or organ involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to test for clonality (KIT mutation) in unexplained anaphylaxis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally favourable with mediator-directed therapy and anaphylaxis management, though patients remain at risk of severe reactions and require monitoring for progression.",
+    "pitfalls": [
+      "Failing to test for clonality (KIT mutation) in unexplained anaphylaxis",
+      "Not distinguishing it from full systemic mastocytosis",
+      "Overlooking venom allergy as a trigger",
+      "Omitting rescue adrenaline provision"
+    ],
+    "references": [
+      "Mastocytosis clinical guidelines (standard reference)",
+      "Allergy reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Mediator-directed therapy as the foundation, with H1 and H2 antihistamines, a mast cell stabiliser such as sodium cromoglicate and a leukotriene receptor antagonist, escalating to anti-IgE therapy with omalizumab for refractory symptoms",
+      "Identification and avoidance of triggers, notably Hymenoptera venom and other precipitants of mediator release",
+      "Anaphylaxis preparedness with an adrenaline auto-injector, a personalised emergency action plan and patient education",
+      "Venom immunotherapy for Hymenoptera venom anaphylaxis, often continued long term given the underlying clonality",
+      "Monitor serum tryptase and periodically reassess against systemic mastocytosis criteria to detect progression",
+      "Consider KIT-directed therapy and specialist mastocytosis input if the clonal disease progresses, within coordinated allergy and haematology care"
     ]
-   ],
-   "caption": "Overview comparison matrix for monoclonal mast cell activation syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "monoclonal-mast-cell-activation-syndrome-real-image",
-   "title": "Monoclonal mast cell activation syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "monoclonal_mast_cell_activation_syndrome-pathway",
+      "title": "Monoclonal mast cell activation syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mast cell activation syndrome in which there is evidence of a clonal mast cell population but insufficient criteria for systemic mastocytosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or severe anaphylaxis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum tryptase, including during and between episodes, KIT D816V mutation analysis (often on blood or marrow), Bone marrow examination with mast cell immunophenotyping"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Mediator-directed therapy as the foundation, with H1 and H2 antihistamines, a mast cell stabiliser such as sodium cromoglicate and a leukotriene receptor antagonist, escalating to anti-IgE therapy with omalizumab for"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to test for clonality (KIT mutation) in unexplained anaphylaxis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of monoclonal mast cell activation syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "monoclonal_mast_cell_activation_syndrome-matrix",
+      "title": "Monoclonal mast cell activation syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mast cell activation syndrome in which there is evidence of a clonal mast cell population but insufficient criteria for",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum tryptase, including during and between episodes, KIT D816V mutation analysis (often on blood or marrow), Bone marrow",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic mastocytosis, Non-clonal (idiopathic) mast cell activation syndrome, Idiopathic anaphylaxis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Mediator-directed therapy as the foundation, with H1 and H2 antihistamines, a mast cell stabiliser such as sodium cromoglicate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to test for clonality (KIT mutation) in unexplained anaphylaxis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for monoclonal mast cell activation syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mastocytosis and mast cell activation literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "monoclonal_mast_cell_activation_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum tryptase",
+          "cells": [
+            {
+              "text": "During and between episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT D816V mutation analysis",
+          "cells": [
+            {
+              "text": "Shows clonality, often on blood or marrow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow with mast cell immunophenotyping",
+          "cells": [
+            {
+              "text": "Characterises the clone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic mastocytosis criteria",
+          "cells": [
+            {
+              "text": "Distinguishes it from full systemic mastocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy and trigger evaluation",
+          "cells": [
+            {
+              "text": "Includes venom testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monoclonal_mast_cell_activation_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic mastocytosis",
+          "cells": [
+            {
+              "text": "Meets systemic mastocytosis criteria, unlike this syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-clonal mast cell activation syndrome",
+          "cells": [
+            {
+              "text": "No KIT clone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary alpha-tryptasaemia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "monoclonal_mast_cell_activation_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "H1 and H2 antihistamines, mast cell stabiliser, leukotriene antagonist",
+          "cells": [
+            {
+              "text": "Mediator-directed foundation of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Notably Hymenoptera venom"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis preparedness",
+          "cells": [
+            {
+              "text": "Adrenaline auto-injector and personalised action plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venom immunotherapy",
+          "cells": [
+            {
+              "text": "For Hymenoptera venom anaphylaxis, often long term"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tryptase and criteria reassessment",
+          "cells": [
+            {
+              "text": "Detect progression to systemic mastocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KIT-directed therapy",
+          "cells": [
+            {
+              "text": "If clonal disease progresses, with specialist input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "monoclonal_mast_cell_activation_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Monoclonal mast cell activation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained recurrent anaphylaxis or mediator-release episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent severe anaphylaxis, cardiovascular collapse or cytopenias?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat anaphylaxis with adrenaline; urgent allergy and haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tryptase in and out of episodes, KIT D816V, marrow, venom testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KIT clone present without systemic mastocytosis criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider systemic mastocytosis, non-clonal MCAS, idiopathic anaphylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "H1/H2 antihistamines, sodium cromoglicate and leukotriene antagonist",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid triggers; adrenaline auto-injector and action plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Venom immunotherapy for Hymenoptera anaphylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor tryptase; KIT-directed therapy if progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally favourable with mediator therapy; risk of severe reactions persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

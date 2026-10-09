@@ -1,173 +1,480 @@
 {
- "id": "transfusional_iron_overload",
- "name": "Transfusional iron overload",
- "aliases": [
-  "transfusional haemosiderosis",
-  "secondary haemochromatosis",
-  "transfusion iron overload"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / AABB technical manual",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Develops in patients dependent on long-term red-cell transfusion, since the body has no effective route to excrete the iron delivered by each unit",
-   "Common in thalassaemia major, sickle cell disease, myelodysplastic syndromes and other chronic transfusion-dependent anaemias",
-   "Iron accumulates first in the reticuloendothelial system and then in parenchymal organs, causing a secondary haemochromatosis",
-   "Target organs are the heart, liver and endocrine glands, producing cardiomyopathy, cirrhosis, diabetes and hypogonadism",
-   "Serum ferritin is used to monitor iron burden, and cardiac and hepatic magnetic resonance imaging quantifies tissue iron more directly",
-   "Management is iron chelation therapy, with the aim of keeping iron burden below the threshold for organ damage",
-   "Cardiac iron loading is the leading cause of death, so cardiac monitoring is central to surveillance"
+  "id": "transfusional_iron_overload",
+  "name": "Transfusional iron overload",
+  "aliases": [
+    "transfusional haemosiderosis",
+    "secondary haemochromatosis",
+    "transfusion iron overload"
   ],
-  "pathophysiology": "Each unit of transfused red cells delivers a substantial quantity of iron, and because humans lack a regulated pathway for iron excretion, repeated transfusion inexorably expands total body iron. Once transferrin becomes saturated, non-transferrin-bound iron appears in plasma and is taken up by parenchymal cells, where it catalyses the generation of reactive oxygen species. This oxidative injury damages the myocardium, hepatocytes and endocrine tissue, leading over time to cardiomyopathy and arrhythmia, hepatic fibrosis and cirrhosis, and endocrine failure including diabetes and hypogonadism. Coexisting ineffective erythropoiesis in some underlying disorders suppresses hepcidin and further increases dietary iron absorption, compounding the transfusional load.",
-  "additionalDifferentials": [
-   "Hereditary haemochromatosis",
-   "Alcoholic or non-alcoholic fatty liver disease",
-   "Other causes of dilated or restrictive cardiomyopathy",
-   "Endocrine failure from unrelated causes",
-   "Porphyria cutanea tarda with iron loading",
-   "Chronic liver disease from viral hepatitis"
-  ],
-  "additionalInvestigations": [
-   "Serum ferritin trend to estimate iron burden over time",
-   "Transferrin saturation, characteristically high in iron overload",
-   "Cardiac magnetic resonance to quantify myocardial iron",
-   "Hepatic magnetic resonance or, less commonly, biopsy to assess liver iron concentration",
-   "Liver function tests and assessment for fibrosis",
-   "Endocrine screening including glucose, thyroid and gonadal function"
-  ],
-  "redFlags": [
-   "New heart failure or arrhythmia suggesting cardiac iron loading",
-   "Rising ferritin despite chelation indicating inadequate iron control",
-   "Deranged liver function or signs of cirrhosis",
-   "Emerging diabetes or hypogonadism from endocrine iron deposition"
-  ],
-  "prognosis": "With effective chelation and monitoring, organ damage can be prevented or partly reversed and survival is greatly improved, but poor adherence or late intervention leads to progressive cardiac and hepatic disease and premature death.",
-  "pitfalls": [
-   "Delaying chelation until organ damage is already established",
-   "Relying on ferritin alone without imaging to assess cardiac and hepatic iron",
-   "Underestimating cardiac risk, which is the principal cause of mortality",
-   "Poor adherence to chelation going unrecognised during follow-up"
-  ],
-  "references": [
-   "Williams Hematology",
-   "AABB Technical Manual"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Iron chelation is the mainstay, using deferoxamine, deferasirox or deferiprone to remove accumulated iron and keep the burden below the threshold for organ damage",
-   "Intensified or combination chelation for high cardiac iron loading or established iron cardiomyopathy",
-   "Monitor iron burden with serial serum ferritin, transferrin saturation, and cardiac and hepatic magnetic resonance to guide chelation intensity",
-   "Screen for and treat endocrine complications, giving insulin or other therapy for diabetes, sex-hormone replacement for hypogonadism, and thyroid and parathyroid replacement as needed",
-   "Manage iron cardiomyopathy and arrhythmia with cardiology input alongside aggressive chelation",
-   "Reduce the transfusion burden where feasible by optimising treatment of the underlying anaemia",
-   "Support long-term adherence to chelation, the key determinant of preventing progressive cardiac and hepatic disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "transfusional_iron_overload-pathway",
-   "title": "Transfusional iron overload: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Develops in patients dependent on long-term red-cell transfusion, since the body has no effective route to excrete the iron delivered by each unit",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New heart failure or arrhythmia suggesting cardiac iron loading",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum ferritin trend to estimate iron burden over time, Transferrin saturation, characteristically high in iron overload, Cardiac magnetic resonance to quantify myocardial iron"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Iron chelation is the mainstay, using deferoxamine, deferasirox or deferiprone to remove accumulated iron and keep the burden below the threshold for organ damage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying chelation until organ damage is already established"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of transfusional iron overload."
-  }
- ],
- "tables": [
-  {
-   "id": "transfusional_iron_overload-matrix",
-   "title": "Transfusional iron overload: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Develops in patients dependent on long-term red-cell transfusion, since the body has no effective route to excrete the iron",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / AABB technical manual",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Develops in patients dependent on long-term red-cell transfusion, since the body has no effective route to excrete the iron delivered by each unit",
+      "Common in thalassaemia major, sickle cell disease, myelodysplastic syndromes and other chronic transfusion-dependent anaemias",
+      "Iron accumulates first in the reticuloendothelial system and then in parenchymal organs, causing a secondary haemochromatosis",
+      "Target organs are the heart, liver and endocrine glands, producing cardiomyopathy, cirrhosis, diabetes and hypogonadism",
+      "Serum ferritin is used to monitor iron burden, and cardiac and hepatic magnetic resonance imaging quantifies tissue iron more directly",
+      "Management is iron chelation therapy, with the aim of keeping iron burden below the threshold for organ damage",
+      "Cardiac iron loading is the leading cause of death, so cardiac monitoring is central to surveillance"
     ],
-    [
-     "Key Investigations",
-     "Serum ferritin trend to estimate iron burden over time, Transferrin saturation, characteristically high in iron overload, Cardiac",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Each unit of transfused red cells delivers a substantial quantity of iron, and because humans lack a regulated pathway for iron excretion, repeated transfusion inexorably expands total body iron. Once transferrin becomes saturated, non-transferrin-bound iron appears in plasma and is taken up by parenchymal cells, where it catalyses the generation of reactive oxygen species. This oxidative injury damages the myocardium, hepatocytes and endocrine tissue, leading over time to cardiomyopathy and arrhythmia, hepatic fibrosis and cirrhosis, and endocrine failure including diabetes and hypogonadism. Coexisting ineffective erythropoiesis in some underlying disorders suppresses hepcidin and further increases dietary iron absorption, compounding the transfusional load.",
+    "additionalDifferentials": [
+      "Hereditary haemochromatosis",
+      "Alcoholic or non-alcoholic fatty liver disease",
+      "Other causes of dilated or restrictive cardiomyopathy",
+      "Endocrine failure from unrelated causes",
+      "Porphyria cutanea tarda with iron loading",
+      "Chronic liver disease from viral hepatitis"
     ],
-    [
-     "Primary Differentials",
-     "Hereditary haemochromatosis, Alcoholic or non-alcoholic fatty liver disease, Other causes of dilated or restrictive cardiomyopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum ferritin trend to estimate iron burden over time",
+      "Transferrin saturation, characteristically high in iron overload",
+      "Cardiac magnetic resonance to quantify myocardial iron",
+      "Hepatic magnetic resonance or, less commonly, biopsy to assess liver iron concentration",
+      "Liver function tests and assessment for fibrosis",
+      "Endocrine screening including glucose, thyroid and gonadal function"
     ],
-    [
-     "Management Strategy",
-     "Iron chelation is the mainstay, using deferoxamine, deferasirox or deferiprone to remove accumulated iron and keep the burden",
-     "Core treatment modality"
+    "redFlags": [
+      "New heart failure or arrhythmia suggesting cardiac iron loading",
+      "Rising ferritin despite chelation indicating inadequate iron control",
+      "Deranged liver function or signs of cirrhosis",
+      "Emerging diabetes or hypogonadism from endocrine iron deposition"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying chelation until organ damage is already established",
-     "Prevent diagnostic or management error"
+    "prognosis": "With effective chelation and monitoring, organ damage can be prevented or partly reversed and survival is greatly improved, but poor adherence or late intervention leads to progressive cardiac and hepatic disease and premature death.",
+    "pitfalls": [
+      "Delaying chelation until organ damage is already established",
+      "Relying on ferritin alone without imaging to assess cardiac and hepatic iron",
+      "Underestimating cardiac risk, which is the principal cause of mortality",
+      "Poor adherence to chelation going unrecognised during follow-up"
+    ],
+    "references": [
+      "Williams Hematology",
+      "AABB Technical Manual"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Iron chelation is the mainstay, using deferoxamine, deferasirox or deferiprone to remove accumulated iron and keep the burden below the threshold for organ damage",
+      "Intensified or combination chelation for high cardiac iron loading or established iron cardiomyopathy",
+      "Monitor iron burden with serial serum ferritin, transferrin saturation, and cardiac and hepatic magnetic resonance to guide chelation intensity",
+      "Screen for and treat endocrine complications, giving insulin or other therapy for diabetes, sex-hormone replacement for hypogonadism, and thyroid and parathyroid replacement as needed",
+      "Manage iron cardiomyopathy and arrhythmia with cardiology input alongside aggressive chelation",
+      "Reduce the transfusion burden where feasible by optimising treatment of the underlying anaemia",
+      "Support long-term adherence to chelation, the key determinant of preventing progressive cardiac and hepatic disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for transfusional iron overload."
-  }
- ],
- "diagrams": [
-  {
-   "id": "transfusional-iron-overload-real-image",
-   "title": "Transfusional iron overload: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "transfusional_iron_overload-pathway",
+      "title": "Transfusional iron overload: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Develops in patients dependent on long-term red-cell transfusion, since the body has no effective route to excrete the iron delivered by each unit",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New heart failure or arrhythmia suggesting cardiac iron loading",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum ferritin trend to estimate iron burden over time, Transferrin saturation, characteristically high in iron overload, Cardiac magnetic resonance to quantify myocardial iron"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Iron chelation is the mainstay, using deferoxamine, deferasirox or deferiprone to remove accumulated iron and keep the burden below the threshold for organ damage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying chelation until organ damage is already established"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of transfusional iron overload."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "transfusional_iron_overload-matrix",
+      "title": "Transfusional iron overload: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Develops in patients dependent on long-term red-cell transfusion, since the body has no effective route to excrete the iron",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum ferritin trend to estimate iron burden over time, Transferrin saturation, characteristically high in iron overload, Cardiac",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hereditary haemochromatosis, Alcoholic or non-alcoholic fatty liver disease, Other causes of dilated or restrictive cardiomyopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Iron chelation is the mainstay, using deferoxamine, deferasirox or deferiprone to remove accumulated iron and keep the burden",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying chelation until organ damage is already established",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for transfusional iron overload."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / AABB technical manual",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transfusional_iron_overload-dx-mgmt",
+      "title": "Diagnosis and management of Transfusional iron overload",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected transfusional iron overload: long-term transfused patient with rising ferritin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: new heart failure or arrhythmia, or rising ferritin despite chelation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for iron cardiomyopathy and intensified chelation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum ferritin; transferrin saturation; cardiac and hepatic MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show raised myocardial or liver iron with transfusion dependence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemochromatosis, fatty liver disease or porphyria cutanea tarda",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Iron chelation with deferoxamine, deferasirox or deferiprone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensified or combination chelation for cardiac iron",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial ferritin and cardiac and liver MRI to guide chelation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and treat endocrine complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Support long-term chelation adherence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Effective chelation prevents or partly reverses organ damage; cardiac iron drives death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transfusional_iron_overload-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ferritin trend",
+          "cells": [
+            {
+              "text": "Iron burden over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transferrin saturation",
+          "cells": [
+            {
+              "text": "Characteristically high in iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac magnetic resonance",
+          "cells": [
+            {
+              "text": "Myocardial iron"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic magnetic resonance or biopsy",
+          "cells": [
+            {
+              "text": "Liver iron concentration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and fibrosis assessment",
+          "cells": [
+            {
+              "text": "Hepatic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine screen",
+          "cells": [
+            {
+              "text": "Glucose, thyroid and gonadal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusional_iron_overload-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary haemochromatosis",
+          "cells": [
+            {
+              "text": "Iron overload without chronic transfusion dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcoholic or fatty liver disease",
+          "cells": [
+            {
+              "text": "Liver injury without a transfusion history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria cutanea tarda with iron loading",
+          "cells": [
+            {
+              "text": "Skin and porphyrin findings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusional_iron_overload-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Deferoxamine, deferasirox or deferiprone to keep burden below organ-damage threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensified or combination chelation",
+          "cells": [
+            {
+              "text": "High cardiac iron or established iron cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Ferritin, transferrin saturation and cardiac and hepatic MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine treatment",
+          "cells": [
+            {
+              "text": "Insulin for diabetes, sex-hormone replacement, and thyroid or parathyroid replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology input",
+          "cells": [
+            {
+              "text": "Iron cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lower transfusion burden",
+          "cells": [
+            {
+              "text": "Optimise treatment of the underlying anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adherence support",
+          "cells": [
+            {
+              "text": "Key to preventing cardiac and hepatic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

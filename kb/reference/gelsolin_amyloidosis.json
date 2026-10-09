@@ -1,174 +1,741 @@
 {
- "id": "gelsolin_amyloidosis",
- "name": "Gelsolin Amyloidosis (AGel, Finnish Type)",
- "aliases": [
-  "Meretoja syndrome",
-  "Familial amyloidosis, Finnish type",
-  "AGel amyloidosis"
- ],
- "class": "non_infective",
- "system": "Multisystem / Haematology",
- "specialty": "Haematology / Amyloidosis",
- "referenceOnly": true,
- "reference": {
-  "source": "Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "AGel is an autosomal dominant amyloidosis caused by mutations in the gelsolin gene (GSN), classically Asp187Asn, first described in Finland.",
-   "The characteristic clinical triad is corneal lattice dystrophy, cranial neuropathy (especially facial) and cutis laxa.",
-   "Corneal lattice dystrophy is usually the earliest feature, appearing in early adulthood, and may cause visual disturbance and recurrent erosions.",
-   "A slowly progressive facial neuropathy produces a mask-like drooping face, bulbar symptoms and, later, a peripheral polyneuropathy.",
-   "The skin becomes lax and prematurely aged, and blepharochalasis can impair vision.",
-   "Renal and cardiac involvement are usually mild and life expectancy is often near-normal, which distinguishes AGel from most systemic amyloidoses.",
-   "Diagnosis is clinical in affected kindreds and confirmed by GSN sequencing; management is supportive, including ophthalmic and reconstructive surgery."
+  "id": "gelsolin_amyloidosis",
+  "name": "Gelsolin Amyloidosis (AGel, Finnish Type)",
+  "aliases": [
+    "Meretoja syndrome",
+    "Familial amyloidosis, Finnish type",
+    "AGel amyloidosis"
   ],
-  "pathophysiology": "Gelsolin is an actin-binding protein important in cytoskeletal remodelling. Amyloidogenic GSN mutations disrupt calcium binding and expose an abnormal cleavage site, so that aberrant proteolysis generates a fragment that misfolds and forms amyloid fibrils. These deposit preferentially along cranial and peripheral nerves, in the cornea and basement membranes, and in dermal connective tissue, producing the characteristic neuro-ophthalmic and cutaneous phenotype. Visceral deposition is comparatively limited, which explains the relatively benign systemic course, although the disease is nonetheless slowly progressive over decades.",
-  "additionalDifferentials": [
-   "Other causes of corneal lattice dystrophy",
-   "Other cranial neuropathies including sarcoidosis and idiopathic facial palsy",
-   "Other hereditary and acquired peripheral neuropathies",
-   "Cutis laxa of other aetiology",
-   "Other systemic amyloidoses",
-   "Sjögren syndrome for the dry eyes"
-  ],
-  "additionalInvestigations": [
-   "Ophthalmological slit-lamp examination for corneal lattice dystrophy",
-   "GSN gene sequencing",
-   "Nerve conduction studies and clinical neurological assessment",
-   "Skin or other tissue biopsy with Congo red staining and typing if the diagnosis is unclear",
-   "Assessment of renal and cardiac function to gauge systemic involvement",
-   "Family screening and genetic counselling"
-  ],
-  "redFlags": [
-   "Progressive facial weakness accompanying corneal disease",
-   "Corneal erosions threatening vision",
-   "Bulbar symptoms causing swallowing or speech difficulty",
-   "New significant proteinuria or cardiac symptoms suggesting atypical systemic burden"
-  ],
-  "prognosis": "The course is slowly progressive over decades with predominantly neuro-ophthalmic and cutaneous morbidity. Life expectancy is usually near-normal, although quality of life is affected by facial palsy, ocular disease and skin laxity.",
-  "pitfalls": [
-   "Dismissing corneal lattice dystrophy as isolated when it heralds a systemic hereditary disease",
-   "Misdiagnosing the facial neuropathy as idiopathic facial palsy",
-   "Overlooking the family history",
-   "Assuming that all amyloidoses share a poor prognosis and over-treating"
-  ],
-  "references": [
-   "Oxford Textbook of Medicine, chapter on hereditary amyloidosis",
-   "Adams and Victor's Principles of Neurology, section on amyloid neuropathy",
-   "International Society of Amyloidosis nomenclature guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy is established, so management is supportive and organ-directed with a generally favourable systemic outlook",
-   "Ocular care for corneal lattice dystrophy with lubricants for recurrent erosions and corneal grafting for visual failure, though deposits may recur",
-   "Protection of the exposed eye in progressive facial neuropathy, and oculoplastic surgery for blepharochalasis and lid laxity impairing vision",
-   "Symptomatic treatment of the slowly progressive facial and peripheral polyneuropathy, with speech and swallowing support for bulbar involvement",
-   "Periodic assessment of renal and cardiac function to detect the usually mild systemic deposition",
-   "Genetic counselling for autosomal dominant GSN disease and screening of at-risk relatives",
-   "Coordinate ophthalmology, neurology and dermatology input through a specialist amyloidosis service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gelsolin_amyloidosis-pathway",
-   "title": "Gelsolin Amyloidosis (AGel, Finnish Type): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "AGel is an autosomal dominant amyloidosis caused by mutations in the gelsolin gene (GSN), classically Asp187Asn, first described in Finland.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive facial weakness accompanying corneal disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ophthalmological slit-lamp examination for corneal lattice dystrophy, GSN gene sequencing, Nerve conduction studies and clinical neurological assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy is established, so management is supportive and organ-directed with a generally favourable systemic outlook"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing corneal lattice dystrophy as isolated when it heralds a systemic hereditary disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gelsolin amyloidosis (agel, finnish type)."
-  }
- ],
- "tables": [
-  {
-   "id": "gelsolin_amyloidosis-matrix",
-   "title": "Gelsolin Amyloidosis (AGel, Finnish Type): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "AGel is an autosomal dominant amyloidosis caused by mutations in the gelsolin gene (GSN), classically Asp187Asn, first described",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem / Haematology",
+  "specialty": "Haematology / Amyloidosis",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "AGel is an autosomal dominant amyloidosis caused by mutations in the gelsolin gene (GSN), classically Asp187Asn, first described in Finland.",
+      "The characteristic clinical triad is corneal lattice dystrophy, cranial neuropathy (especially facial) and cutis laxa.",
+      "Corneal lattice dystrophy is usually the earliest feature, appearing in early adulthood, and may cause visual disturbance and recurrent erosions.",
+      "A slowly progressive facial neuropathy produces a mask-like drooping face, bulbar symptoms and, later, a peripheral polyneuropathy.",
+      "The skin becomes lax and prematurely aged, and blepharochalasis can impair vision.",
+      "Renal and cardiac involvement are usually mild and life expectancy is often near-normal, which distinguishes AGel from most systemic amyloidoses.",
+      "Diagnosis is clinical in affected kindreds and confirmed by GSN sequencing; management is supportive, including ophthalmic and reconstructive surgery."
     ],
-    [
-     "Key Investigations",
-     "Ophthalmological slit-lamp examination for corneal lattice dystrophy, GSN gene sequencing, Nerve conduction studies and clinical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gelsolin is an actin-binding protein important in cytoskeletal remodelling. Amyloidogenic GSN mutations disrupt calcium binding and expose an abnormal cleavage site, so that aberrant proteolysis generates a fragment that misfolds and forms amyloid fibrils. These deposit preferentially along cranial and peripheral nerves, in the cornea and basement membranes, and in dermal connective tissue, producing the characteristic neuro-ophthalmic and cutaneous phenotype. Visceral deposition is comparatively limited, which explains the relatively benign systemic course, although the disease is nonetheless slowly progressive over decades.",
+    "additionalDifferentials": [
+      "Other causes of corneal lattice dystrophy",
+      "Other cranial neuropathies including sarcoidosis and idiopathic facial palsy",
+      "Other hereditary and acquired peripheral neuropathies",
+      "Cutis laxa of other aetiology",
+      "Other systemic amyloidoses",
+      "Sjögren syndrome for the dry eyes"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of corneal lattice dystrophy, Other cranial neuropathies including sarcoidosis and idiopathic facial palsy, Other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ophthalmological slit-lamp examination for corneal lattice dystrophy",
+      "GSN gene sequencing",
+      "Nerve conduction studies and clinical neurological assessment",
+      "Skin or other tissue biopsy with Congo red staining and typing if the diagnosis is unclear",
+      "Assessment of renal and cardiac function to gauge systemic involvement",
+      "Family screening and genetic counselling"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy is established, so management is supportive and organ-directed with a generally favourable systemic",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive facial weakness accompanying corneal disease",
+      "Corneal erosions threatening vision",
+      "Bulbar symptoms causing swallowing or speech difficulty",
+      "New significant proteinuria or cardiac symptoms suggesting atypical systemic burden"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing corneal lattice dystrophy as isolated when it heralds a systemic hereditary disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is slowly progressive over decades with predominantly neuro-ophthalmic and cutaneous morbidity. Life expectancy is usually near-normal, although quality of life is affected by facial palsy, ocular disease and skin laxity.",
+    "pitfalls": [
+      "Dismissing corneal lattice dystrophy as isolated when it heralds a systemic hereditary disease",
+      "Misdiagnosing the facial neuropathy as idiopathic facial palsy",
+      "Overlooking the family history",
+      "Assuming that all amyloidoses share a poor prognosis and over-treating"
+    ],
+    "references": [
+      "Oxford Textbook of Medicine, chapter on hereditary amyloidosis",
+      "Adams and Victor's Principles of Neurology, section on amyloid neuropathy",
+      "International Society of Amyloidosis nomenclature guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy is established, so management is supportive and organ-directed with a generally favourable systemic outlook",
+      "Ocular care for corneal lattice dystrophy with lubricants for recurrent erosions and corneal grafting for visual failure, though deposits may recur",
+      "Protection of the exposed eye in progressive facial neuropathy, and oculoplastic surgery for blepharochalasis and lid laxity impairing vision",
+      "Symptomatic treatment of the slowly progressive facial and peripheral polyneuropathy, with speech and swallowing support for bulbar involvement",
+      "Periodic assessment of renal and cardiac function to detect the usually mild systemic deposition",
+      "Genetic counselling for autosomal dominant GSN disease and screening of at-risk relatives",
+      "Coordinate ophthalmology, neurology and dermatology input through a specialist amyloidosis service"
     ]
-   ],
-   "caption": "Overview comparison matrix for gelsolin amyloidosis (agel, finnish type)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gelsolin-amyloidosis-real-image",
-   "title": "Gelsolin Amyloidosis (AGel, Finnish Type): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "gelsolin_amyloidosis-pathway",
+      "title": "Gelsolin Amyloidosis (AGel, Finnish Type): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "AGel is an autosomal dominant amyloidosis caused by mutations in the gelsolin gene (GSN), classically Asp187Asn, first described in Finland.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive facial weakness accompanying corneal disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ophthalmological slit-lamp examination for corneal lattice dystrophy, GSN gene sequencing, Nerve conduction studies and clinical neurological assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy is established, so management is supportive and organ-directed with a generally favourable systemic outlook"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing corneal lattice dystrophy as isolated when it heralds a systemic hereditary disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gelsolin amyloidosis (agel, finnish type)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gelsolin_amyloidosis-matrix",
+      "title": "Gelsolin Amyloidosis (AGel, Finnish Type): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "AGel is an autosomal dominant amyloidosis caused by mutations in the gelsolin gene (GSN), classically Asp187Asn, first described",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ophthalmological slit-lamp examination for corneal lattice dystrophy, GSN gene sequencing, Nerve conduction studies and clinical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of corneal lattice dystrophy, Other cranial neuropathies including sarcoidosis and idiopathic facial palsy, Other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy is established, so management is supportive and organ-directed with a generally favourable systemic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing corneal lattice dystrophy as isolated when it heralds a systemic hereditary disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gelsolin amyloidosis (agel, finnish type)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oxford Textbook of Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 112-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gelsolin_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Corneal lattice dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GSN gene sequencing",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and neurological assessment",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with Congo red staining and typing",
+          "cells": [
+            {
+              "text": "Where the diagnosis is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac function assessment",
+          "cells": [
+            {
+              "text": "Systemic involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gelsolin_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Dry eyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic facial palsy",
+          "cells": [
+            {
+              "text": "Facial neuropathy of this disease is mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gelsolin_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive, organ-directed care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; generally favourable systemic course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal care",
+          "cells": [
+            {
+              "text": "Lubricants for recurrent erosions; corneal grafting for visual failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protection of the exposed eye",
+          "cells": [
+            {
+              "text": "Progressive facial neuropathy; oculoplastic surgery for lid laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic neuropathy treatment",
+          "cells": [
+            {
+              "text": "Slowly progressive facial and peripheral polyneuropathy; speech and swallowing support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac assessment",
+          "cells": [
+            {
+              "text": "Periodic, to detect the usually mild systemic deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant GSN disease; screening of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary specialist service",
+          "cells": [
+            {
+              "text": "Ophthalmology, neurology and dermatology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gelsolin_amyloidosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Amyloid fibril proteins and clinical syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Precursor protein",
+        "Clinical syndrome",
+        "Clinical involvement"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic: AL",
+          "cells": [
+            {
+              "text": "Immunoglobulin light chain"
+            },
+            {
+              "text": "Primary or myeloma associated (footnote a)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AH",
+          "cells": [
+            {
+              "text": "Immunoglobulin heavy chain"
+            },
+            {
+              "text": "Primary or myeloma associated (rare)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AA",
+          "cells": [
+            {
+              "text": "Serum amyloid A protein"
+            },
+            {
+              "text": "Secondary, reactive (footnote b)"
+            },
+            {
+              "text": "Renal, any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: Abeta2M",
+          "cells": [
+            {
+              "text": "Beta2-microglobulin"
+            },
+            {
+              "text": "Hemodialysis associated"
+            },
+            {
+              "text": "Synovial membrane, bone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ATTR",
+          "cells": [
+            {
+              "text": "Transthyretin"
+            },
+            {
+              "text": "Familial (mutant); senile systemic (wild type)"
+            },
+            {
+              "text": "Cardiac, peripheral and autonomic nerves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAI",
+          "cells": [
+            {
+              "text": "Apolipoprotein AI"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Hepatic, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAII",
+          "cells": [
+            {
+              "text": "Apolipoprotein AII"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AGel",
+          "cells": [
+            {
+              "text": "Gelsolin"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Corneas, cranial nerves, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AFib",
+          "cells": [
+            {
+              "text": "Fibrinogen A alpha"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALys",
+          "cells": [
+            {
+              "text": "Lysozyme"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALECT2",
+          "cells": [
+            {
+              "text": "Leukocyte chemotactic factor 2"
+            },
+            {
+              "text": "Uncertain (printed as ?)"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: Abeta",
+          "cells": [
+            {
+              "text": "Amyloid beta protein"
+            },
+            {
+              "text": "Alzheimer's disease"
+            },
+            {
+              "text": "Down syndrome (as printed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACys",
+          "cells": [
+            {
+              "text": "Cystatin C"
+            },
+            {
+              "text": "Cerebral amyloid angiopathy"
+            },
+            {
+              "text": "CNS, vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APrP",
+          "cells": [
+            {
+              "text": "Prion protein"
+            },
+            {
+              "text": "Spongiform encephalopathies"
+            },
+            {
+              "text": "CNS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AIAPP",
+          "cells": [
+            {
+              "text": "Islet amyloid polypeptide (amylin)"
+            },
+            {
+              "text": "Diabetes associated"
+            },
+            {
+              "text": "Pancreas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACal",
+          "cells": [
+            {
+              "text": "Calcitonin"
+            },
+            {
+              "text": "Medullary carcinoma of the thyroid"
+            },
+            {
+              "text": "Thyroid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AANF",
+          "cells": [
+            {
+              "text": "Atrial natriuretic factor"
+            },
+            {
+              "text": "Age related"
+            },
+            {
+              "text": "Cardiac atria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APro",
+          "cells": [
+            {
+              "text": "Prolactin"
+            },
+            {
+              "text": "Endocrinopathy"
+            },
+            {
+              "text": "Pituitary"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote letters a and b appear on the AL and AA rows in the source but their text is not printed. The Abeta row layout is as printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gelsolin_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of Gelsolin Amyloidosis (AGel, Finnish Type)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gelsolin amyloidosis: corneal lattice dystrophy with facial neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive facial weakness, corneal erosions, bulbar symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent corneal and eye protection review for threatened vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp examination, GSN sequencing, nerve conduction and biopsy if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does GSN sequencing or Congo red biopsy confirm gelsolin amyloid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other lattice dystrophy, sarcoidosis, Sjogren syndrome or hereditary neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive, organ-directed care; no disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lubricants for erosions; corneal grafting for visual failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Eye protection and oculoplastic surgery for facial neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic renal and cardiac assessment for usually mild systemic deposition",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive over decades; mostly neuro-ophthalmic and cutaneous morbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

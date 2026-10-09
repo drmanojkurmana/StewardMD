@@ -1,172 +1,470 @@
 {
- "id": "thymic_carcinoma",
- "name": "Thymic carcinoma",
- "aliases": [
-  "type C thymoma",
-  "malignant thymic epithelial tumour",
-  "thymic squamous cell carcinoma"
- ],
- "class": "non_infective",
- "system": "Respiratory / Thoracic",
- "specialty": "Respiratory / Thoracic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Shields' General Thoracic Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An aggressive malignant thymic epithelial tumour that is biologically distinct from and behaves far worse than thymoma",
-   "Presents as an anterior mediastinal mass, often with chest pain, cough, breathlessness, or superior vena caval obstruction",
-   "Unlike thymoma, it is rarely associated with myasthenia gravis or other paraneoplastic autoimmune syndromes",
-   "Shows infiltrative growth with a tendency to invade adjacent structures and to metastasise to lymph nodes and distant sites",
-   "Squamous cell carcinoma is the commonest histological subtype, and loss of thymoma-associated markers helps distinguish it pathologically",
-   "Complete surgical resection when feasible offers the best chance of cure and is often combined with radiotherapy and chemotherapy",
-   "Multimodality therapy is frequently required because many tumours are locally advanced or metastatic at diagnosis"
+  "id": "thymic_carcinoma",
+  "name": "Thymic carcinoma",
+  "aliases": [
+    "type C thymoma",
+    "malignant thymic epithelial tumour",
+    "thymic squamous cell carcinoma"
   ],
-  "pathophysiology": "Thymic carcinoma arises from the epithelial cells of the thymus but, unlike thymoma, shows overtly malignant cytological features, loss of the organotypic thymic architecture, and an infiltrative, destructive growth pattern. The tumour cells lose the immature T-lymphocyte-rich background characteristic of thymoma, which underlies both the different immunohistochemical profile and the rarity of associated autoimmune syndromes. It invades local mediastinal structures including the pericardium, great vessels, and lung, and disseminates via lymphatics and the bloodstream, so a substantial proportion present with advanced or metastatic disease.",
-  "additionalDifferentials": [
-   "Thymoma",
-   "Malignant mediastinal germ cell tumour",
-   "Lymphoma involving the anterior mediastinum",
-   "Metastasis to the anterior mediastinum",
-   "Mediastinal extension of lung carcinoma",
-   "Substernal thyroid malignancy"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the thorax to assess the mass and local invasion",
-   "MRI to clarify vascular or pericardial involvement",
-   "PET-CT for staging and detection of nodal and distant metastases",
-   "Core or surgical biopsy with immunohistochemistry to distinguish from thymoma and germ cell tumour",
-   "Serum germ cell tumour markers to exclude a germ cell tumour in the differential"
-  ],
-  "redFlags": [
-   "Superior vena caval obstruction with facial and upper limb swelling",
-   "Invasion of great vessels, pericardium, or airway on imaging",
-   "Distant metastatic disease at presentation",
-   "Rapidly enlarging anterior mediastinal mass with constitutional symptoms"
-  ],
-  "prognosis": "Thymic carcinoma carries a markedly poorer prognosis than thymoma, driven by frequent local invasion and metastasis; completely resected, early-stage disease has the best outcome, while advanced disease has limited survival despite multimodality treatment.",
-  "pitfalls": [
-   "Assuming an anterior mediastinal epithelial tumour is an indolent thymoma without adequate histological assessment",
-   "Expecting myasthenia gravis to be present and being falsely reassured by its absence",
-   "Understaging by omitting PET-CT and missing metastatic disease",
-   "Proceeding to incomplete resection without considering neoadjuvant therapy for locally advanced tumours"
-  ],
-  "references": [
-   "Shields' General Thoracic Surgery",
-   "Murray & Nadel's Textbook of Respiratory Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical resection by radical thymectomy when feasible offers the best chance of cure",
-   "Give adjuvant mediastinal radiotherapy, particularly after incomplete resection or for locally invasive disease",
-   "Use platinum-based combination chemotherapy for advanced, unresectable or metastatic disease, sometimes neoadjuvantly to downstage before surgery",
-   "Manage local complications such as superior vena cava obstruction",
-   "Stage and monitor with contrast CT and PET-CT for nodal and distant metastasis and local recurrence",
-   "Provide palliative and supportive care for advanced or progressive disease",
-   "Coordinate care through a multidisciplinary thoracic oncology team of thoracic surgery, medical oncology and radiation oncology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thymic_carcinoma-pathway",
-   "title": "Thymic carcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An aggressive malignant thymic epithelial tumour that is biologically distinct from and behaves far worse than thymoma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Superior vena caval obstruction with facial and upper limb swelling",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the thorax to assess the mass and local invasion, MRI to clarify vascular or pericardial involvement, PET-CT for staging and detection of nodal and distant metastases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical resection by radical thymectomy when feasible offers the best chance of cure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an anterior mediastinal epithelial tumour is an indolent thymoma without adequate histological assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thymic carcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "thymic_carcinoma-matrix",
-   "title": "Thymic carcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An aggressive malignant thymic epithelial tumour that is biologically distinct from and behaves far worse than thymoma",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Thoracic",
+  "specialty": "Respiratory / Thoracic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Shields' General Thoracic Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An aggressive malignant thymic epithelial tumour that is biologically distinct from and behaves far worse than thymoma",
+      "Presents as an anterior mediastinal mass, often with chest pain, cough, breathlessness, or superior vena caval obstruction",
+      "Unlike thymoma, it is rarely associated with myasthenia gravis or other paraneoplastic autoimmune syndromes",
+      "Shows infiltrative growth with a tendency to invade adjacent structures and to metastasise to lymph nodes and distant sites",
+      "Squamous cell carcinoma is the commonest histological subtype, and loss of thymoma-associated markers helps distinguish it pathologically",
+      "Complete surgical resection when feasible offers the best chance of cure and is often combined with radiotherapy and chemotherapy",
+      "Multimodality therapy is frequently required because many tumours are locally advanced or metastatic at diagnosis"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the thorax to assess the mass and local invasion, MRI to clarify vascular or pericardial involvement,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Thymic carcinoma arises from the epithelial cells of the thymus but, unlike thymoma, shows overtly malignant cytological features, loss of the organotypic thymic architecture, and an infiltrative, destructive growth pattern. The tumour cells lose the immature T-lymphocyte-rich background characteristic of thymoma, which underlies both the different immunohistochemical profile and the rarity of associated autoimmune syndromes. It invades local mediastinal structures including the pericardium, great vessels, and lung, and disseminates via lymphatics and the bloodstream, so a substantial proportion present with advanced or metastatic disease.",
+    "additionalDifferentials": [
+      "Thymoma",
+      "Malignant mediastinal germ cell tumour",
+      "Lymphoma involving the anterior mediastinum",
+      "Metastasis to the anterior mediastinum",
+      "Mediastinal extension of lung carcinoma",
+      "Substernal thyroid malignancy"
     ],
-    [
-     "Primary Differentials",
-     "Thymoma, Malignant mediastinal germ cell tumour, Lymphoma involving the anterior mediastinum",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the thorax to assess the mass and local invasion",
+      "MRI to clarify vascular or pericardial involvement",
+      "PET-CT for staging and detection of nodal and distant metastases",
+      "Core or surgical biopsy with immunohistochemistry to distinguish from thymoma and germ cell tumour",
+      "Serum germ cell tumour markers to exclude a germ cell tumour in the differential"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical resection by radical thymectomy when feasible offers the best chance of cure",
-     "Core treatment modality"
+    "redFlags": [
+      "Superior vena caval obstruction with facial and upper limb swelling",
+      "Invasion of great vessels, pericardium, or airway on imaging",
+      "Distant metastatic disease at presentation",
+      "Rapidly enlarging anterior mediastinal mass with constitutional symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an anterior mediastinal epithelial tumour is an indolent thymoma without adequate histological assessment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Thymic carcinoma carries a markedly poorer prognosis than thymoma, driven by frequent local invasion and metastasis; completely resected, early-stage disease has the best outcome, while advanced disease has limited survival despite multimodality treatment.",
+    "pitfalls": [
+      "Assuming an anterior mediastinal epithelial tumour is an indolent thymoma without adequate histological assessment",
+      "Expecting myasthenia gravis to be present and being falsely reassured by its absence",
+      "Understaging by omitting PET-CT and missing metastatic disease",
+      "Proceeding to incomplete resection without considering neoadjuvant therapy for locally advanced tumours"
+    ],
+    "references": [
+      "Shields' General Thoracic Surgery",
+      "Murray & Nadel's Textbook of Respiratory Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical resection by radical thymectomy when feasible offers the best chance of cure",
+      "Give adjuvant mediastinal radiotherapy, particularly after incomplete resection or for locally invasive disease",
+      "Use platinum-based combination chemotherapy for advanced, unresectable or metastatic disease, sometimes neoadjuvantly to downstage before surgery",
+      "Manage local complications such as superior vena cava obstruction",
+      "Stage and monitor with contrast CT and PET-CT for nodal and distant metastasis and local recurrence",
+      "Provide palliative and supportive care for advanced or progressive disease",
+      "Coordinate care through a multidisciplinary thoracic oncology team of thoracic surgery, medical oncology and radiation oncology"
     ]
-   ],
-   "caption": "Overview comparison matrix for thymic carcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thymic-carcinoma-real-image",
-   "title": "Thymic carcinoma: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "thymic_carcinoma-pathway",
+      "title": "Thymic carcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An aggressive malignant thymic epithelial tumour that is biologically distinct from and behaves far worse than thymoma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Superior vena caval obstruction with facial and upper limb swelling",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the thorax to assess the mass and local invasion, MRI to clarify vascular or pericardial involvement, PET-CT for staging and detection of nodal and distant metastases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical resection by radical thymectomy when feasible offers the best chance of cure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an anterior mediastinal epithelial tumour is an indolent thymoma without adequate histological assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thymic carcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thymic_carcinoma-matrix",
+      "title": "Thymic carcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An aggressive malignant thymic epithelial tumour that is biologically distinct from and behaves far worse than thymoma",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the thorax to assess the mass and local invasion, MRI to clarify vascular or pericardial involvement,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thymoma, Malignant mediastinal germ cell tumour, Lymphoma involving the anterior mediastinum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical resection by radical thymectomy when feasible offers the best chance of cure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an anterior mediastinal epithelial tumour is an indolent thymoma without adequate histological assessment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thymic carcinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Shields' General Thoracic Surgery",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thymic_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Thymic carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thymic carcinoma: anterior mediastinal mass with chest pain or SVC features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: SVC obstruction, great vessel invasion, or distant metastasis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent thoracic oncology review and management of SVC obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT thorax; MRI for vessels; PET-CT for staging; core biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does immunohistochemistry show carcinoma rather than thymoma or germ cell tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thymoma, mediastinal germ cell tumour or lymphoma; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Radical thymectomy when resection is feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant mediastinal radiotherapy after incomplete resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Platinum-based chemotherapy, sometimes neoadjuvant, for advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "PET-CT and contrast CT staging and surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Palliative and supportive care for progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Markedly poorer than thymoma; completely resected early disease has the best outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thymic_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of the thorax",
+          "cells": [
+            {
+              "text": "Mass and local invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Vascular or pericardial involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET-CT",
+          "cells": [
+            {
+              "text": "Nodal and distant metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core or surgical biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Distinguishes from thymoma and germ cell tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum germ cell tumour markers",
+          "cells": [
+            {
+              "text": "Germ cell tumour excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thymic_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thymoma",
+          "cells": [
+            {
+              "text": "Less invasive and rarely metastatic; thymic carcinoma lacks thymoma-associated markers and paraneoplastic syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant mediastinal germ cell tumour",
+          "cells": [
+            {
+              "text": "Excluded by serum germ cell tumour markers and immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma of the anterior mediastinum",
+          "cells": [
+            {
+              "text": "Excluded on biopsy with immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thymic_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radical thymectomy",
+          "cells": [
+            {
+              "text": "Complete surgical resection when feasible; the best chance of cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant mediastinal radiotherapy",
+          "cells": [
+            {
+              "text": "After incomplete resection or locally invasive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum-based chemotherapy",
+          "cells": [
+            {
+              "text": "Advanced, unresectable or metastatic disease; sometimes neoadjuvant to downstage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superior vena cava obstruction care",
+          "cells": [
+            {
+              "text": "Local complication management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging and monitoring",
+          "cells": [
+            {
+              "text": "Contrast CT and PET-CT for metastasis and recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative and supportive care",
+          "cells": [
+            {
+              "text": "Advanced or progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary thoracic oncology",
+          "cells": [
+            {
+              "text": "Surgery, medical oncology and radiation oncology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

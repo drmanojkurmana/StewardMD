@@ -1,173 +1,232 @@
 {
- "id": "bloom_syndrome",
- "name": "Bloom syndrome",
- "aliases": [
-  "BLM",
-  "BLM helicase",
-  "congenital telangiectatic erythema",
-  "Bloom-Torre-Machacek syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Oncology",
- "specialty": "Clinical Genetics / Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in BLM, encoding a RecQ-family DNA helicase",
-   "Marked pre- and postnatal proportionate growth restriction with a characteristically small, narrow face is a defining feature",
-   "A sun-sensitive telangiectatic erythematous rash develops over the face, often in a butterfly distribution, and on other exposed areas",
-   "There is a very high lifetime risk of a broad range of malignancies at unusually young ages, spanning leukaemias, lymphomas and many solid tumours",
-   "Immunodeficiency predisposes to recurrent respiratory and ear infections, and there is a high rate of type 2 diabetes and reduced fertility",
-   "The diagnostic laboratory hallmark is a greatly increased rate of sister chromatid exchange on cytogenetic testing",
-   "There is heightened sensitivity to DNA-damaging agents and ionising radiation, so diagnostic radiation and certain chemotherapies must be used cautiously"
+  "id": "bloom_syndrome",
+  "name": "Bloom syndrome",
+  "aliases": [
+    "BLM",
+    "BLM helicase",
+    "congenital telangiectatic erythema",
+    "Bloom-Torre-Machacek syndrome"
   ],
-  "pathophysiology": "Bloom syndrome is caused by biallelic loss-of-function variants in BLM, which encodes a RecQ-family DNA helicase essential for maintaining genomic stability during DNA replication and repair, particularly in resolving recombination intermediates and stalled replication forks. Loss of BLM function leads to excessive homologous recombination and a striking increase in sister chromatid exchanges, the cytogenetic signature of the disorder. This genomic instability drives the profound cancer predisposition and contributes to the growth failure and other systemic features. The condition is more frequent in the Ashkenazi Jewish population owing to a founder variant.",
-  "additionalDifferentials": [
-   "Fanconi anaemia and other chromosomal-instability syndromes",
-   "Nijmegen breakage syndrome",
-   "Rothmund-Thomson syndrome (RECQL4)",
-   "Cockayne syndrome and other photosensitivity disorders",
-   "Russell-Silver syndrome and other primordial growth-restriction disorders",
-   "Ataxia-telangiectasia"
-  ],
-  "additionalInvestigations": [
-   "Cytogenetic sister chromatid exchange assay demonstrating a markedly elevated exchange rate",
-   "Molecular genetic testing of the BLM gene to confirm biallelic variants",
-   "Full blood count and immunoglobulin levels to assess immunodeficiency",
-   "Fasting glucose and glycaemic testing for diabetes",
-   "Age- and symptom-directed cancer surveillance imaging and endoscopy",
-   "Growth and endocrine assessment"
-  ],
-  "redFlags": [
-   "Symptoms or signs suggesting a new malignancy, which may arise at any site and at a young age",
-   "Recurrent or severe infections indicating significant immunodeficiency",
-   "Unexpected severe toxicity following radiation or DNA-damaging chemotherapy",
-   "Failure to thrive with progressive growth failure in infancy"
-  ],
-  "prognosis": "Life expectancy is significantly reduced, largely because of the exceptionally high and early risk of multiple cancers, which are the leading cause of death. Infections, diabetes and chronic pulmonary disease add to morbidity, and management is supportive with intensive cancer awareness and cautious use of DNA-damaging treatments.",
-  "pitfalls": [
-   "Using standard-dose radiotherapy or DNA-damaging chemotherapy without accounting for the extreme treatment sensitivity",
-   "Attributing early growth restriction to nutritional causes and missing the underlying diagnosis",
-   "Failing to maintain a low threshold for investigating possible malignancy",
-   "Overlooking associated immunodeficiency and diabetes in ongoing care"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "GeneReviews: Bloom Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy exists; care centres on intensive, age-directed cancer surveillance for the leukaemias, lymphomas and solid tumours that arise unusually early",
-   "Use radiotherapy and DNA-damaging (alkylating and radiomimetic) chemotherapy with great caution and dose reduction because of the profound cellular hypersensitivity",
-   "Strict photoprotection with sun avoidance and sunscreen for the sun-sensitive telangiectatic facial rash",
-   "Prompt treatment of recurrent respiratory and ear infections, with assessment and support of the associated immunodeficiency including immunoglobulin therapy where indicated",
-   "Screening for and management of type 2 diabetes, with nutritional support for the growth failure",
-   "Autosomal recessive genetic counselling and family and carrier testing, noting the Ashkenazi Jewish founder variant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bloom_syndrome-pathway",
-   "title": "Bloom syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in BLM, encoding a RecQ-family DNA helicase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptoms or signs suggesting a new malignancy, which may arise at any site and at a young age",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Cytogenetic sister chromatid exchange assay demonstrating a markedly elevated exchange rate, Molecular genetic testing of the BLM gene to confirm biallelic variants, Full blood count and immunoglobulin levels to assess"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy exists; care centres on intensive, age-directed cancer surveillance for the leukaemias, lymphomas and solid tumours that arise unusually early"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Using standard-dose radiotherapy or DNA-damaging chemotherapy without accounting for the extreme treatment sensitivity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bloom syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "bloom_syndrome-matrix",
-   "title": "Bloom syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in BLM, encoding a RecQ-family DNA helicase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Oncology",
+  "specialty": "Clinical Genetics / Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in BLM, encoding a RecQ-family DNA helicase",
+      "Marked pre- and postnatal proportionate growth restriction with a characteristically small, narrow face is a defining feature",
+      "A sun-sensitive telangiectatic erythematous rash develops over the face, often in a butterfly distribution, and on other exposed areas",
+      "There is a very high lifetime risk of a broad range of malignancies at unusually young ages, spanning leukaemias, lymphomas and many solid tumours",
+      "Immunodeficiency predisposes to recurrent respiratory and ear infections, and there is a high rate of type 2 diabetes and reduced fertility",
+      "The diagnostic laboratory hallmark is a greatly increased rate of sister chromatid exchange on cytogenetic testing",
+      "There is heightened sensitivity to DNA-damaging agents and ionising radiation, so diagnostic radiation and certain chemotherapies must be used cautiously"
     ],
-    [
-     "Key Investigations",
-     "Cytogenetic sister chromatid exchange assay demonstrating a markedly elevated exchange rate, Molecular genetic testing of the BLM",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bloom syndrome is caused by biallelic loss-of-function variants in BLM, which encodes a RecQ-family DNA helicase essential for maintaining genomic stability during DNA replication and repair, particularly in resolving recombination intermediates and stalled replication forks. Loss of BLM function leads to excessive homologous recombination and a striking increase in sister chromatid exchanges, the cytogenetic signature of the disorder. This genomic instability drives the profound cancer predisposition and contributes to the growth failure and other systemic features. The condition is more frequent in the Ashkenazi Jewish population owing to a founder variant.",
+    "additionalDifferentials": [
+      "Fanconi anaemia and other chromosomal-instability syndromes",
+      "Nijmegen breakage syndrome",
+      "Rothmund-Thomson syndrome (RECQL4)",
+      "Cockayne syndrome and other photosensitivity disorders",
+      "Russell-Silver syndrome and other primordial growth-restriction disorders",
+      "Ataxia-telangiectasia"
     ],
-    [
-     "Primary Differentials",
-     "Fanconi anaemia and other chromosomal-instability syndromes, Nijmegen breakage syndrome, Rothmund-Thomson syndrome (RECQL4)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Cytogenetic sister chromatid exchange assay demonstrating a markedly elevated exchange rate",
+      "Molecular genetic testing of the BLM gene to confirm biallelic variants",
+      "Full blood count and immunoglobulin levels to assess immunodeficiency",
+      "Fasting glucose and glycaemic testing for diabetes",
+      "Age- and symptom-directed cancer surveillance imaging and endoscopy",
+      "Growth and endocrine assessment"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy exists; care centres on intensive, age-directed cancer surveillance for the leukaemias, lymphomas and",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptoms or signs suggesting a new malignancy, which may arise at any site and at a young age",
+      "Recurrent or severe infections indicating significant immunodeficiency",
+      "Unexpected severe toxicity following radiation or DNA-damaging chemotherapy",
+      "Failure to thrive with progressive growth failure in infancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Using standard-dose radiotherapy or DNA-damaging chemotherapy without accounting for the extreme treatment sensitivity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is significantly reduced, largely because of the exceptionally high and early risk of multiple cancers, which are the leading cause of death. Infections, diabetes and chronic pulmonary disease add to morbidity, and management is supportive with intensive cancer awareness and cautious use of DNA-damaging treatments.",
+    "pitfalls": [
+      "Using standard-dose radiotherapy or DNA-damaging chemotherapy without accounting for the extreme treatment sensitivity",
+      "Attributing early growth restriction to nutritional causes and missing the underlying diagnosis",
+      "Failing to maintain a low threshold for investigating possible malignancy",
+      "Overlooking associated immunodeficiency and diabetes in ongoing care"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "GeneReviews: Bloom Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy exists; care centres on intensive, age-directed cancer surveillance for the leukaemias, lymphomas and solid tumours that arise unusually early",
+      "Use radiotherapy and DNA-damaging (alkylating and radiomimetic) chemotherapy with great caution and dose reduction because of the profound cellular hypersensitivity",
+      "Strict photoprotection with sun avoidance and sunscreen for the sun-sensitive telangiectatic facial rash",
+      "Prompt treatment of recurrent respiratory and ear infections, with assessment and support of the associated immunodeficiency including immunoglobulin therapy where indicated",
+      "Screening for and management of type 2 diabetes, with nutritional support for the growth failure",
+      "Autosomal recessive genetic counselling and family and carrier testing, noting the Ashkenazi Jewish founder variant"
     ]
-   ],
-   "caption": "Overview comparison matrix for bloom syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bloom-syndrome-real-image",
-   "title": "Bloom syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "bloom_syndrome-pathway",
+      "title": "Bloom syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in BLM, encoding a RecQ-family DNA helicase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptoms or signs suggesting a new malignancy, which may arise at any site and at a young age",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Cytogenetic sister chromatid exchange assay demonstrating a markedly elevated exchange rate, Molecular genetic testing of the BLM gene to confirm biallelic variants, Full blood count and immunoglobulin levels to assess"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy exists; care centres on intensive, age-directed cancer surveillance for the leukaemias, lymphomas and solid tumours that arise unusually early"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Using standard-dose radiotherapy or DNA-damaging chemotherapy without accounting for the extreme treatment sensitivity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bloom syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bloom_syndrome-matrix",
+      "title": "Bloom syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive chromosomal-instability disorder caused by biallelic variants in BLM, encoding a RecQ-family DNA helicase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Cytogenetic sister chromatid exchange assay demonstrating a markedly elevated exchange rate, Molecular genetic testing of the BLM",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fanconi anaemia and other chromosomal-instability syndromes, Nijmegen breakage syndrome, Rothmund-Thomson syndrome (RECQL4)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy exists; care centres on intensive, age-directed cancer surveillance for the leukaemias, lymphomas and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Using standard-dose radiotherapy or DNA-damaging chemotherapy without accounting for the extreme treatment sensitivity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bloom syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bloom_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in Bloom syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Cytogenetic sister chromatid exchange assay", "cells": [{"text": "Markedly increased exchange rate; the laboratory hallmark"}], "cite": "c1"},
+        {"parameter": "BLM molecular genetic testing", "cells": [{"text": "Confirms biallelic variants"}], "cite": "c1"},
+        {"parameter": "Full blood count and immunoglobulin levels", "cells": [{"text": "Immunodeficiency"}], "cite": "c1"},
+        {"parameter": "Fasting glucose and glycaemic testing", "cells": [{"text": "Diabetes, which occurs at a high rate"}], "cite": "c1"},
+        {"parameter": "Age- and symptom-directed cancer surveillance", "cells": [{"text": "Malignancy at unusually young ages"}], "cite": "c1"},
+        {"parameter": "Growth and endocrine assessment", "cells": [{"text": "Pre- and postnatal growth restriction"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bloom_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike chromosomal and growth disorders",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Fanconi anaemia and other chromosomal-instability syndromes", "cells": [{"text": "Elevated sister chromatid exchange is the diagnostic hallmark; BLM testing confirms"}], "cite": "c1"},
+        {"parameter": "Primordial growth-restriction disorders", "cells": [{"text": "Growth restriction alone does not establish the diagnosis; the sister chromatid exchange assay and BLM testing do"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bloom_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in Bloom syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Cancer surveillance", "cells": [{"text": "Intensive, age-directed surveillance for early-onset leukaemias, lymphomas and solid tumours"}, {"text": "No disease-specific therapy exists"}], "cite": "c1"},
+        {"parameter": "DNA-damaging treatment", "cells": [{"text": "Radiotherapy and DNA-damaging chemotherapy only with great caution and dose reduction"}, {"text": "Marked cellular hypersensitivity"}], "cite": "c1"},
+        {"parameter": "Photoprotection", "cells": [{"text": "Sun avoidance and sunscreen for the telangiectatic facial rash"}, {"text": "Sun-sensitive rash"}], "cite": "c1"},
+        {"parameter": "Infections and immunodeficiency", "cells": [{"text": "Prompt treatment of respiratory and ear infections; immunoglobulin where indicated"}, {"text": "Immunodeficiency"}], "cite": "c1"},
+        {"parameter": "Diabetes and growth", "cells": [{"text": "Screen and treat type 2 diabetes; nutritional support for growth failure"}, {"text": "High rate of diabetes"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Autosomal recessive counselling, family and carrier testing"}, {"text": "Ashkenazi Jewish founder variant noted"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bloom_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Bloom syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Growth restriction, sun-sensitive telangiectatic facial rash and recurrent infections", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: new malignancy features, severe infections, or severe toxicity to radiation or chemotherapy?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent cancer evaluation; immunoglobulin assessment; reduce DNA-damaging treatment", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Sister chromatid exchange assay; full blood count, immunoglobulins and fasting glucose", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "BLM gene testing for biallelic variants", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Biallelic BLM variants confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Age-directed cancer surveillance; photoprotection; diabetes screening", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider Fanconi anaemia, Nijmegen breakage, RECQL4 disorder or ataxia-telangiectasia", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Use radiotherapy and DNA-damaging chemotherapy with caution; genetic counselling", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Life expectancy reduced mainly by early, multiple cancers", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

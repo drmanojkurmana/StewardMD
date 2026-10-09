@@ -1,173 +1,462 @@
 {
- "id": "phosphoglycerate_kinase_deficiency",
- "name": "Phosphoglycerate kinase deficiency",
- "aliases": [
-  "PGK deficiency",
-  "PGK1 deficiency",
-  "phosphoglycerate kinase 1 deficiency",
-  "glycolytic enzymopathy PGK"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Phosphoglycerate kinase deficiency is an X-linked recessive glycolytic enzymopathy caused by PGK1 variants, mainly affecting males",
-   "It produces a variable combination of chronic non-spherocytic haemolytic anaemia, a metabolic myopathy with exercise intolerance and recurrent rhabdomyolysis, and central nervous system involvement",
-   "CNS features can include intellectual disability, seizures, and stroke-like episodes, and any given patient may have one, two, or all three components",
-   "Because PGK is a core glycolytic enzyme, its deficiency impairs energy production in erythrocytes, muscle, and neurones, explaining the multisystem phenotype",
-   "Exertional myoglobinuria can precipitate acute kidney injury and requires prompt recognition",
-   "Diagnosis rests on reduced PGK enzyme activity in red cells or muscle and confirmatory PGK1 genetic testing",
-   "Management is supportive: avoiding strenuous exertion and rhabdomyolysis triggers, transfusion or folate support for haemolysis, and seizure control as needed"
+  "id": "phosphoglycerate_kinase_deficiency",
+  "name": "Phosphoglycerate kinase deficiency",
+  "aliases": [
+    "PGK deficiency",
+    "PGK1 deficiency",
+    "phosphoglycerate kinase 1 deficiency",
+    "glycolytic enzymopathy PGK"
   ],
-  "pathophysiology": "Phosphoglycerate kinase catalyses an ATP-generating step of glycolysis, converting 1,3-bisphosphoglycerate to 3-phosphoglycerate. PGK1 is X-linked and expressed in almost all tissues, so deficiency impairs glycolytic ATP production broadly. In erythrocytes, which depend on glycolysis for energy, reduced ATP shortens red-cell survival and causes chronic non-spherocytic haemolytic anaemia. In skeletal muscle, impaired glycolysis limits energy during anaerobic exertion, producing exercise intolerance, cramps, and rhabdomyolysis. In the brain, deficient energy metabolism underlies the intellectual impairment, seizures, and stroke-like episodes seen in some patients. The particular combination of features varies with the specific variant.",
-  "additionalDifferentials": [
-   "Other glycolytic enzymopathies (e.g. pyruvate kinase, phosphofructokinase deficiency)",
-   "McArdle disease and other muscle glycogenoses",
-   "Other causes of chronic non-spherocytic haemolytic anaemia (e.g. G6PD deficiency)",
-   "Mitochondrial disorders with myopathy and stroke-like episodes",
-   "Fatty acid oxidation defects causing rhabdomyolysis",
-   "Other X-linked intellectual disability syndromes"
-  ],
-  "additionalInvestigations": [
-   "Phosphoglycerate kinase enzyme activity assay in erythrocytes and/or muscle",
-   "Molecular genetic testing of PGK1",
-   "Full blood count, reticulocytes, and haemolysis markers (bilirubin, LDH, haptoglobin)",
-   "Creatine kinase, with urine myoglobin during episodes of exertional muscle injury",
-   "Brain MRI and EEG where CNS features are present"
-  ],
-  "redFlags": [
-   "Acute rhabdomyolysis with myoglobinuria threatening acute kidney injury",
-   "Severe anaemia requiring transfusion or causing cardiovascular compromise",
-   "Stroke-like episodes or new focal neurological deficit",
-   "Status epilepticus or rapid neurological deterioration"
-  ],
-  "prognosis": "The prognosis varies widely with phenotype; isolated haemolysis or myopathy may be manageable with supportive care, whereas significant CNS involvement carries a worse outlook, and recurrent rhabdomyolysis poses ongoing renal risk.",
-  "pitfalls": [
-   "Attributing exertional muscle symptoms to a glycogenosis without considering a glycolytic enzymopathy",
-   "Missing the diagnosis in a boy with unexplained non-spherocytic haemolytic anaemia",
-   "Failing to counsel on avoidance of rhabdomyolysis triggers and prompt management of myoglobinuria",
-   "Overlooking the X-linked inheritance in genetic counselling of the family"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "GeneReviews: Phosphoglycerate Kinase 1 Deficiency"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid strenuous anaerobic exertion and other triggers of rhabdomyolysis and pace physical activity",
-   "Treat exertional rhabdomyolysis with vigorous intravenous hydration and manage resulting acute kidney injury, with renal replacement if needed",
-   "Support the chronic non-spherocytic haemolytic anaemia with folate supplementation and transfusion during crises, considering splenectomy in selected severe cases",
-   "Manage central nervous system involvement with anticonvulsants and neurorehabilitation for seizures, stroke-like episodes and developmental impairment",
-   "Monitor renal function, creatine kinase and haemolysis markers, and check urine myoglobin during exertional episodes",
-   "Offer genetic counselling for this X-linked disorder with carrier testing of female relatives",
-   "Coordinate care across haematology, metabolic medicine and neurology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phosphoglycerate_kinase_deficiency-pathway",
-   "title": "Phosphoglycerate kinase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Phosphoglycerate kinase deficiency is an X-linked recessive glycolytic enzymopathy caused by PGK1 variants, mainly affecting males",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute rhabdomyolysis with myoglobinuria threatening acute kidney injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Phosphoglycerate kinase enzyme activity assay in erythrocytes and/or muscle, Molecular genetic testing of PGK1, Full blood count, reticulocytes, and haemolysis markers (bilirubin, LDH, haptoglobin)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid strenuous anaerobic exertion and other triggers of rhabdomyolysis and pace physical activity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing exertional muscle symptoms to a glycogenosis without considering a glycolytic enzymopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phosphoglycerate kinase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "phosphoglycerate_kinase_deficiency-matrix",
-   "title": "Phosphoglycerate kinase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Phosphoglycerate kinase deficiency is an X-linked recessive glycolytic enzymopathy caused by PGK1 variants, mainly affecting males",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Phosphoglycerate kinase deficiency is an X-linked recessive glycolytic enzymopathy caused by PGK1 variants, mainly affecting males",
+      "It produces a variable combination of chronic non-spherocytic haemolytic anaemia, a metabolic myopathy with exercise intolerance and recurrent rhabdomyolysis, and central nervous system involvement",
+      "CNS features can include intellectual disability, seizures, and stroke-like episodes, and any given patient may have one, two, or all three components",
+      "Because PGK is a core glycolytic enzyme, its deficiency impairs energy production in erythrocytes, muscle, and neurones, explaining the multisystem phenotype",
+      "Exertional myoglobinuria can precipitate acute kidney injury and requires prompt recognition",
+      "Diagnosis rests on reduced PGK enzyme activity in red cells or muscle and confirmatory PGK1 genetic testing",
+      "Management is supportive: avoiding strenuous exertion and rhabdomyolysis triggers, transfusion or folate support for haemolysis, and seizure control as needed"
     ],
-    [
-     "Key Investigations",
-     "Phosphoglycerate kinase enzyme activity assay in erythrocytes and/or muscle, Molecular genetic testing of PGK1, Full blood count,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phosphoglycerate kinase catalyses an ATP-generating step of glycolysis, converting 1,3-bisphosphoglycerate to 3-phosphoglycerate. PGK1 is X-linked and expressed in almost all tissues, so deficiency impairs glycolytic ATP production broadly. In erythrocytes, which depend on glycolysis for energy, reduced ATP shortens red-cell survival and causes chronic non-spherocytic haemolytic anaemia. In skeletal muscle, impaired glycolysis limits energy during anaerobic exertion, producing exercise intolerance, cramps, and rhabdomyolysis. In the brain, deficient energy metabolism underlies the intellectual impairment, seizures, and stroke-like episodes seen in some patients. The particular combination of features varies with the specific variant.",
+    "additionalDifferentials": [
+      "Other glycolytic enzymopathies (e.g. pyruvate kinase, phosphofructokinase deficiency)",
+      "McArdle disease and other muscle glycogenoses",
+      "Other causes of chronic non-spherocytic haemolytic anaemia (e.g. G6PD deficiency)",
+      "Mitochondrial disorders with myopathy and stroke-like episodes",
+      "Fatty acid oxidation defects causing rhabdomyolysis",
+      "Other X-linked intellectual disability syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Other glycolytic enzymopathies (e.g. pyruvate kinase, phosphofructokinase deficiency), McArdle disease and other muscle",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Phosphoglycerate kinase enzyme activity assay in erythrocytes and/or muscle",
+      "Molecular genetic testing of PGK1",
+      "Full blood count, reticulocytes, and haemolysis markers (bilirubin, LDH, haptoglobin)",
+      "Creatine kinase, with urine myoglobin during episodes of exertional muscle injury",
+      "Brain MRI and EEG where CNS features are present"
     ],
-    [
-     "Management Strategy",
-     "Avoid strenuous anaerobic exertion and other triggers of rhabdomyolysis and pace physical activity",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute rhabdomyolysis with myoglobinuria threatening acute kidney injury",
+      "Severe anaemia requiring transfusion or causing cardiovascular compromise",
+      "Stroke-like episodes or new focal neurological deficit",
+      "Status epilepticus or rapid neurological deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing exertional muscle symptoms to a glycogenosis without considering a glycolytic enzymopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis varies widely with phenotype; isolated haemolysis or myopathy may be manageable with supportive care, whereas significant CNS involvement carries a worse outlook, and recurrent rhabdomyolysis poses ongoing renal risk.",
+    "pitfalls": [
+      "Attributing exertional muscle symptoms to a glycogenosis without considering a glycolytic enzymopathy",
+      "Missing the diagnosis in a boy with unexplained non-spherocytic haemolytic anaemia",
+      "Failing to counsel on avoidance of rhabdomyolysis triggers and prompt management of myoglobinuria",
+      "Overlooking the X-linked inheritance in genetic counselling of the family"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "GeneReviews: Phosphoglycerate Kinase 1 Deficiency"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid strenuous anaerobic exertion and other triggers of rhabdomyolysis and pace physical activity",
+      "Treat exertional rhabdomyolysis with vigorous intravenous hydration and manage resulting acute kidney injury, with renal replacement if needed",
+      "Support the chronic non-spherocytic haemolytic anaemia with folate supplementation and transfusion during crises, considering splenectomy in selected severe cases",
+      "Manage central nervous system involvement with anticonvulsants and neurorehabilitation for seizures, stroke-like episodes and developmental impairment",
+      "Monitor renal function, creatine kinase and haemolysis markers, and check urine myoglobin during exertional episodes",
+      "Offer genetic counselling for this X-linked disorder with carrier testing of female relatives",
+      "Coordinate care across haematology, metabolic medicine and neurology"
     ]
-   ],
-   "caption": "Overview comparison matrix for phosphoglycerate kinase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phosphoglycerate-kinase-deficiency-real-image",
-   "title": "Phosphoglycerate kinase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "phosphoglycerate_kinase_deficiency-pathway",
+      "title": "Phosphoglycerate kinase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Phosphoglycerate kinase deficiency is an X-linked recessive glycolytic enzymopathy caused by PGK1 variants, mainly affecting males",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute rhabdomyolysis with myoglobinuria threatening acute kidney injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Phosphoglycerate kinase enzyme activity assay in erythrocytes and/or muscle, Molecular genetic testing of PGK1, Full blood count, reticulocytes, and haemolysis markers (bilirubin, LDH, haptoglobin)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid strenuous anaerobic exertion and other triggers of rhabdomyolysis and pace physical activity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing exertional muscle symptoms to a glycogenosis without considering a glycolytic enzymopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phosphoglycerate kinase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phosphoglycerate_kinase_deficiency-matrix",
+      "title": "Phosphoglycerate kinase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Phosphoglycerate kinase deficiency is an X-linked recessive glycolytic enzymopathy caused by PGK1 variants, mainly affecting males",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Phosphoglycerate kinase enzyme activity assay in erythrocytes and/or muscle, Molecular genetic testing of PGK1, Full blood count,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other glycolytic enzymopathies (e.g. pyruvate kinase, phosphofructokinase deficiency), McArdle disease and other muscle",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid strenuous anaerobic exertion and other triggers of rhabdomyolysis and pace physical activity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing exertional muscle symptoms to a glycogenosis without considering a glycolytic enzymopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phosphoglycerate kinase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phosphoglycerate_kinase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Phosphoglycerate kinase enzyme activity assay",
+          "cells": [
+            {
+              "text": "Enzyme activity in erythrocytes or muscle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PGK1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocytes and haemolysis markers",
+          "cells": [
+            {
+              "text": "Haemolysis: bilirubin, LDH and haptoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and urine myoglobin during episodes",
+          "cells": [
+            {
+              "text": "Exertional muscle injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and EEG",
+          "cells": [
+            {
+              "text": "CNS features, where present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phosphoglycerate_kinase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other glycolytic enzymopathies",
+          "cells": [
+            {
+              "text": "Confirmed or excluded by PGK enzyme assay and PGK1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fatty acid oxidation defects",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phosphoglycerate_kinase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Avoid strenuous anaerobic exertion and other triggers of rhabdomyolysis; pace activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exertional rhabdomyolysis",
+          "cells": [
+            {
+              "text": "Vigorous intravenous hydration; manage acute kidney injury, with renal replacement where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Folate supplementation and transfusion during crises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS involvement",
+          "cells": [
+            {
+              "text": "Anticonvulsants and neurorehabilitation for seizures, stroke-like episodes and developmental problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, creatine kinase, haemolysis markers and urine myoglobin during exertional episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked disorder; carrier testing of female relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Haematology, metabolic medicine and neurology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phosphoglycerate_kinase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Phosphoglycerate kinase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exertional muscle pain or dark urine, with haemolytic anaemia or neurological features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rhabdomyolysis with myoglobinuria, severe anaemia, stroke-like episodes)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hydration and renal care for rhabdomyolysis threatening kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PGK enzyme assay; PGK1 gene testing; full blood count and haemolysis markers; CK",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does enzyme assay or PGK1 testing confirm phosphoglycerate kinase deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other glycolytic enzymopathies, McArdle disease or a mitochondrial myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid strenuous anaerobic exertion and other rhabdomyolysis triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat exertional rhabdomyolysis with vigorous intravenous hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Folate supplementation and transfusion during haemolytic crises",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticonvulsants and neurorehabilitation for seizures and stroke-like episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor renal function, creatine kinase and haemolysis markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prognosis varies by phenotype; significant CNS involvement carries a worse outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

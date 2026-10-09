@@ -1,176 +1,425 @@
 {
- "id": "metachromatic_variant_leukodystrophy",
- "name": "Multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant",
- "aliases": [
-  "multiple sulfatase deficiency",
-  "MSD",
-  "Austin disease",
-  "SUMF1",
-  "metachromatic-spectrum leukodystrophy variant",
-  "sulfatase-modifying factor 1 deficiency"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurology and inborn-errors-of-metabolism textbooks with peer-reviewed reviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder caused by biallelic variants in SUMF1, encoding the formylglycine-generating enzyme required to activate all sulfatases",
-   "Because every sulfatase is deficient, the phenotype combines metachromatic leukodystrophy with features of several mucopolysaccharidoses and X-linked ichthyosis",
-   "Neurological picture overlaps late-infantile metachromatic leukodystrophy, with regression of milestones, spasticity, and peripheral neuropathy",
-   "Somatic clues include coarse facial features, skeletal dysostosis, organomegaly, and ichthyotic skin, distinguishing it from isolated arylsulfatase A deficiency",
-   "Peripheral demyelinating neuropathy with slowed nerve conduction is a useful supportive finding, mirroring classic metachromatic leukodystrophy",
-   "MRI demonstrates symmetrical, confluent periventricular white-matter signal change, sometimes with a tigroid or leopard-skin sparing pattern within the affected white matter",
-   "Biochemical hallmark is combined deficiency of multiple sulfatases with raised urinary glycosaminoglycans and sulfatides",
-   "Diagnosis is confirmed by demonstrating deficient activity of several sulfatases and by SUMF1 genetic testing; no curative therapy exists"
+  "id": "metachromatic_variant_leukodystrophy",
+  "name": "Multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant",
+  "aliases": [
+    "multiple sulfatase deficiency",
+    "MSD",
+    "Austin disease",
+    "SUMF1",
+    "metachromatic-spectrum leukodystrophy variant",
+    "sulfatase-modifying factor 1 deficiency"
   ],
-  "pathophysiology": "In multiple sulfatase deficiency, biallelic variants in SUMF1 impair the formylglycine-generating enzyme that performs a post-translational modification essential for the catalytic activity of every sulfatase. As a result all sulfatases are simultaneously deficient, so sulfated substrates accumulate across multiple pathways: sulfatides build up in myelin (as in metachromatic leukodystrophy), glycosaminoglycans accumulate (as in mucopolysaccharidoses), and cholesterol sulfate accumulates in skin (as in X-linked ichthyosis). The combined storage produces central and peripheral demyelination alongside the somatic, skeletal, and dermatological features of the overlapping disorders.",
-  "additionalDifferentials": [
-   "Classic metachromatic leukodystrophy from isolated arylsulfatase A deficiency",
-   "Mucopolysaccharidoses (particularly those with neurological involvement)",
-   "Krabbe disease (globoid cell leukodystrophy)",
-   "GM1/GM2 gangliosidoses",
-   "X-linked ichthyosis considered in isolation for the skin findings",
-   "Other late-infantile neurodegenerative regression syndromes"
-  ],
-  "additionalInvestigations": [
-   "Assay of multiple sulfatase activities demonstrating combined deficiency",
-   "Urinary glycosaminoglycan and sulfatide analysis",
-   "Nerve conduction studies to document demyelinating peripheral neuropathy",
-   "Brain MRI to characterise the confluent periventricular leukodystrophy pattern",
-   "SUMF1 molecular genetic testing to confirm the diagnosis"
-  ],
-  "redFlags": [
-   "Rapid developmental regression with loss of previously acquired skills",
-   "Progressive bulbar dysfunction with aspiration risk",
-   "New-onset seizures or status epilepticus",
-   "Airway compromise from combined storage-related upper-airway and skeletal changes"
-  ],
-  "prognosis": "The disorder is progressive with a poor prognosis, especially in neonatal and late-infantile presentations, which typically lead to severe disability and early death; later-onset forms progress more slowly but remain relentless. No disease-modifying treatment is currently available.",
-  "pitfalls": [
-   "Testing only arylsulfatase A and diagnosing isolated metachromatic leukodystrophy while missing the combined deficiency",
-   "Overlooking the somatic and dermatological clues (coarse features, ichthyosis, dysostosis) that point away from an isolated leukodystrophy",
-   "Attributing the neuropathy solely to a central process and not testing nerve conduction",
-   "Failing to recognise the multisystem nature when planning surveillance and supportive care"
-  ],
-  "references": [
-   "GeneReviews / standard inborn-errors-of-metabolism references on Multiple Sulfatase Deficiency",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care as no therapy corrects the combined sulfatase deficiency, directing treatment at the individual manifestations",
-   "Control seizures with antiepileptic drugs and manage spasticity with antispasticity agents and physiotherapy",
-   "Support feeding and nutrition and manage respiratory secretions as neurological regression advances",
-   "Treat the ichthyotic skin with emollients and keratolytic agents",
-   "Undertake surveillance for the mucopolysaccharidosis-type complications, including skeletal, cardiac valve, hearing, ophthalmic, and organomegaly monitoring",
-   "Coordinate multidisciplinary care with early involvement of palliative services",
-   "Offer genetic counselling and family screening given autosomal recessive inheritance of SUMF1 variants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "metachromatic_variant_leukodystrophy-pathway",
-   "title": "Multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder caused by biallelic variants in SUMF1, encoding the formylglycine-generating enzyme required to activate all sulfatases",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid developmental regression with loss of previously acquired skills",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assay of multiple sulfatase activities demonstrating combined deficiency, Urinary glycosaminoglycan and sulfatide analysis, Nerve conduction studies to document demyelinating peripheral neuropathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care as no therapy corrects the combined sulfatase deficiency, directing treatment at the individual manifestations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Testing only arylsulfatase A and diagnosing isolated metachromatic leukodystrophy while missing the combined deficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant."
-  }
- ],
- "tables": [
-  {
-   "id": "metachromatic_variant_leukodystrophy-matrix",
-   "title": "Multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder caused by biallelic variants in SUMF1, encoding the formylglycine-generating enzyme required to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurology and inborn-errors-of-metabolism textbooks with peer-reviewed reviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder caused by biallelic variants in SUMF1, encoding the formylglycine-generating enzyme required to activate all sulfatases",
+      "Because every sulfatase is deficient, the phenotype combines metachromatic leukodystrophy with features of several mucopolysaccharidoses and X-linked ichthyosis",
+      "Neurological picture overlaps late-infantile metachromatic leukodystrophy, with regression of milestones, spasticity, and peripheral neuropathy",
+      "Somatic clues include coarse facial features, skeletal dysostosis, organomegaly, and ichthyotic skin, distinguishing it from isolated arylsulfatase A deficiency",
+      "Peripheral demyelinating neuropathy with slowed nerve conduction is a useful supportive finding, mirroring classic metachromatic leukodystrophy",
+      "MRI demonstrates symmetrical, confluent periventricular white-matter signal change, sometimes with a tigroid or leopard-skin sparing pattern within the affected white matter",
+      "Biochemical hallmark is combined deficiency of multiple sulfatases with raised urinary glycosaminoglycans and sulfatides",
+      "Diagnosis is confirmed by demonstrating deficient activity of several sulfatases and by SUMF1 genetic testing; no curative therapy exists"
     ],
-    [
-     "Key Investigations",
-     "Assay of multiple sulfatase activities demonstrating combined deficiency, Urinary glycosaminoglycan and sulfatide analysis, Nerve",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In multiple sulfatase deficiency, biallelic variants in SUMF1 impair the formylglycine-generating enzyme that performs a post-translational modification essential for the catalytic activity of every sulfatase. As a result all sulfatases are simultaneously deficient, so sulfated substrates accumulate across multiple pathways: sulfatides build up in myelin (as in metachromatic leukodystrophy), glycosaminoglycans accumulate (as in mucopolysaccharidoses), and cholesterol sulfate accumulates in skin (as in X-linked ichthyosis). The combined storage produces central and peripheral demyelination alongside the somatic, skeletal, and dermatological features of the overlapping disorders.",
+    "additionalDifferentials": [
+      "Classic metachromatic leukodystrophy from isolated arylsulfatase A deficiency",
+      "Mucopolysaccharidoses (particularly those with neurological involvement)",
+      "Krabbe disease (globoid cell leukodystrophy)",
+      "GM1/GM2 gangliosidoses",
+      "X-linked ichthyosis considered in isolation for the skin findings",
+      "Other late-infantile neurodegenerative regression syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Classic metachromatic leukodystrophy from isolated arylsulfatase A deficiency, Mucopolysaccharidoses (particularly those with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assay of multiple sulfatase activities demonstrating combined deficiency",
+      "Urinary glycosaminoglycan and sulfatide analysis",
+      "Nerve conduction studies to document demyelinating peripheral neuropathy",
+      "Brain MRI to characterise the confluent periventricular leukodystrophy pattern",
+      "SUMF1 molecular genetic testing to confirm the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care as no therapy corrects the combined sulfatase deficiency, directing treatment at the individual",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid developmental regression with loss of previously acquired skills",
+      "Progressive bulbar dysfunction with aspiration risk",
+      "New-onset seizures or status epilepticus",
+      "Airway compromise from combined storage-related upper-airway and skeletal changes"
     ],
-    [
-     "Clinical Pitfall",
-     "Testing only arylsulfatase A and diagnosing isolated metachromatic leukodystrophy while missing the combined deficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is progressive with a poor prognosis, especially in neonatal and late-infantile presentations, which typically lead to severe disability and early death; later-onset forms progress more slowly but remain relentless. No disease-modifying treatment is currently available.",
+    "pitfalls": [
+      "Testing only arylsulfatase A and diagnosing isolated metachromatic leukodystrophy while missing the combined deficiency",
+      "Overlooking the somatic and dermatological clues (coarse features, ichthyosis, dysostosis) that point away from an isolated leukodystrophy",
+      "Attributing the neuropathy solely to a central process and not testing nerve conduction",
+      "Failing to recognise the multisystem nature when planning surveillance and supportive care"
+    ],
+    "references": [
+      "GeneReviews / standard inborn-errors-of-metabolism references on Multiple Sulfatase Deficiency",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care as no therapy corrects the combined sulfatase deficiency, directing treatment at the individual manifestations",
+      "Control seizures with antiepileptic drugs and manage spasticity with antispasticity agents and physiotherapy",
+      "Support feeding and nutrition and manage respiratory secretions as neurological regression advances",
+      "Treat the ichthyotic skin with emollients and keratolytic agents",
+      "Undertake surveillance for the mucopolysaccharidosis-type complications, including skeletal, cardiac valve, hearing, ophthalmic, and organomegaly monitoring",
+      "Coordinate multidisciplinary care with early involvement of palliative services",
+      "Offer genetic counselling and family screening given autosomal recessive inheritance of SUMF1 variants"
     ]
-   ],
-   "caption": "Overview comparison matrix for multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant."
-  }
- ],
- "diagrams": [
-  {
-   "id": "metachromatic-variant-leukodystrophy-real-image",
-   "title": "Multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "metachromatic_variant_leukodystrophy-pathway",
+      "title": "Multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder caused by biallelic variants in SUMF1, encoding the formylglycine-generating enzyme required to activate all sulfatases",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid developmental regression with loss of previously acquired skills",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assay of multiple sulfatase activities demonstrating combined deficiency, Urinary glycosaminoglycan and sulfatide analysis, Nerve conduction studies to document demyelinating peripheral neuropathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care as no therapy corrects the combined sulfatase deficiency, directing treatment at the individual manifestations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Testing only arylsulfatase A and diagnosing isolated metachromatic leukodystrophy while missing the combined deficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "metachromatic_variant_leukodystrophy-matrix",
+      "title": "Multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder caused by biallelic variants in SUMF1, encoding the formylglycine-generating enzyme required to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assay of multiple sulfatase activities demonstrating combined deficiency, Urinary glycosaminoglycan and sulfatide analysis, Nerve",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic metachromatic leukodystrophy from isolated arylsulfatase A deficiency, Mucopolysaccharidoses (particularly those with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care as no therapy corrects the combined sulfatase deficiency, directing treatment at the individual",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Testing only arylsulfatase A and diagnosing isolated metachromatic leukodystrophy while missing the combined deficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology and inborn-errors-of-metabolism textbooks with peer-reviewed reviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "metachromatic_variant_leukodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Assay of multiple sulfatase activities",
+          "cells": [
+            {
+              "text": "Combined sulfatase deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary glycosaminoglycan and sulfatide analysis",
+          "cells": [
+            {
+              "text": "Storage products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Demyelinating peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Confluent periventricular leukodystrophy pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SUMF1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "SUMF1 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metachromatic_variant_leukodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No therapy corrects combined sulfatase deficiency; treatment is directed at individual manifestations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures and spasticity",
+          "cells": [
+            {
+              "text": "Antiepileptic drugs; antispasticity agents and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and secretions",
+          "cells": [
+            {
+              "text": "Nutrition and management of respiratory secretions as regression advances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ichthyotic skin",
+          "cells": [
+            {
+              "text": "Emollients and keratolytic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucopolysaccharidosis-type surveillance",
+          "cells": [
+            {
+              "text": "Skeletal, cardiac valve, hearing, ophthalmic and organomegaly monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative services",
+          "cells": [
+            {
+              "text": "Early multidisciplinary involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SUMF1 variants; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "metachromatic_variant_leukodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Multiple sulfatase deficiency / metachromatic-spectrum leukodystrophy variant",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Toddler with developmental regression, neuropathy and leukodystrophy on MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bulbar dysfunction, new seizures or airway compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway, aspiration and seizure management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Multiple sulfatase activity assay; urinary GAG and sulfatide; NCS; MRI; SUMF1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is combined sulfatase deficiency confirmed with SUMF1 testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated metachromatic leukodystrophy or a mucopolysaccharidosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care directed at individual manifestations; no therapy corrects the deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiepileptic drugs for seizures; antispasticity agents and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding support and management of respiratory secretions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for mucopolysaccharidosis-type complications; early palliative involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Autosomal recessive inheritance; genetic counselling and family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

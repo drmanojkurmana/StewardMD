@@ -1,175 +1,471 @@
 {
- "id": "pseudo_hurler_polydystrophy",
- "name": "Pseudo-Hurler polydystrophy (mucolipidosis III)",
- "aliases": [
-  "mucolipidosis III",
-  "ML III",
-  "ML III alpha/beta (GNPTAB)",
-  "ML III gamma (GNPTG)",
-  "N-acetylglucosamine-1-phosphotransferase deficiency (partial)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Represents the milder, later-onset counterpart of I-cell disease within the same mannose-6-phosphate targeting pathway",
-   "Results from partial deficiency of GlcNAc-1-phosphotransferase, so lysosomal enzyme mistargeting is incomplete",
-   "Presents in mid-childhood with progressive joint stiffness, particularly of the shoulders and hands, and slowly progressive skeletal changes",
-   "Cognition is normal or only mildly affected, in contrast to the severe course of mucolipidosis II",
-   "Like I-cell disease, plasma lysosomal enzyme activities are elevated while intracellular activities are reduced",
-   "Two genetic forms exist: ML III alpha/beta from GNPTAB variants and ML III gamma from GNPTG variants",
-   "Hip dysplasia, aortic valve involvement, and mild corneal changes can develop over time"
+  "id": "pseudo_hurler_polydystrophy",
+  "name": "Pseudo-Hurler polydystrophy (mucolipidosis III)",
+  "aliases": [
+    "mucolipidosis III",
+    "ML III",
+    "ML III alpha/beta (GNPTAB)",
+    "ML III gamma (GNPTG)",
+    "N-acetylglucosamine-1-phosphotransferase deficiency (partial)"
   ],
-  "pathophysiology": "Pseudo-Hurler polydystrophy is caused by partial deficiency of UDP-N-acetylglucosamine-1-phosphotransferase, the enzyme that generates the mannose-6-phosphate signal directing lysosomal hydrolases to the lysosome. Variants in GNPTAB (alpha/beta subunits, ML III alpha/beta) or GNPTG (gamma subunit, ML III gamma) leave greater residual phosphotransferase function than in mucolipidosis II, so enzyme mistargeting is incomplete and disease is milder and slower. Lysosomal hydrolases are partly secreted rather than delivered intracellularly, giving the same biochemical pattern of high plasma and low cellular enzyme activity, with gradual accumulation of undegraded substrate. The predominant clinical burden is on connective tissue and the skeleton. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Mucolipidosis II (I-cell disease) at the severe end of the pathway",
-   "Attenuated mucopolysaccharidoses such as Scheie or Maroteaux-Lamy",
-   "Juvenile idiopathic arthritis given the joint stiffness",
-   "Multiple epiphyseal dysplasia and other skeletal dysplasias",
-   "Progressive pseudorheumatoid dysplasia",
-   "Other lysosomal storage disorders with slowly progressive arthropathy"
-  ],
-  "additionalInvestigations": [
-   "Plasma or serum assay of multiple lysosomal enzymes showing raised activity",
-   "Cultured fibroblast studies demonstrating reduced intracellular enzyme activity",
-   "GNPTAB and GNPTG gene sequencing to define the subtype",
-   "Skeletal survey and hip imaging for dysplasia",
-   "Echocardiography for valvular involvement",
-   "Slit-lamp examination for corneal changes"
-  ],
-  "redFlags": [
-   "Progressive hip destruction impairing mobility",
-   "Aortic or mitral valve dysfunction",
-   "Cervical spine involvement with instability",
-   "Marked functional decline from advancing joint contractures"
-  ],
-  "prognosis": "The course is slowly progressive, and many patients survive into adulthood; the main long-term burden comes from joint contractures, hip disease, and cardiac valve involvement, which can cause significant disability.",
-  "pitfalls": [
-   "Mistaking early joint stiffness for inflammatory arthritis and delaying metabolic diagnosis",
-   "Assuming normal intellect excludes a lysosomal disorder",
-   "Overlooking the diagnostic pattern of high plasma lysosomal enzyme activity",
-   "Failing to distinguish the milder ML III course from severe ML II"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive multidisciplinary care, as there is no enzyme-replacement or curative therapy for this disorder",
-   "Physiotherapy and occupational therapy to preserve joint mobility and slow the progression of contractures",
-   "Orthopaedic management of progressive hip and joint disease, including joint replacement in adulthood",
-   "Analgesia and mobility aids for joint pain and stiffness",
-   "Cardiac surveillance with periodic echocardiography for valvular involvement, with cardiology referral",
-   "Ophthalmology review for corneal changes, alongside regular skeletal monitoring",
-   "Genetic counselling and family screening for this autosomal recessive condition involving GNPTAB or GNPTG"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pseudo_hurler_polydystrophy-pathway",
-   "title": "Pseudo-Hurler polydystrophy (mucolipidosis III): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Represents the milder, later-onset counterpart of I-cell disease within the same mannose-6-phosphate targeting pathway",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive hip destruction impairing mobility",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma or serum assay of multiple lysosomal enzymes showing raised activity, Cultured fibroblast studies demonstrating reduced intracellular enzyme activity, GNPTAB and GNPTG gene sequencing to define the subtype"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive multidisciplinary care, as there is no enzyme-replacement or curative therapy for this disorder"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking early joint stiffness for inflammatory arthritis and delaying metabolic diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pseudo-hurler polydystrophy (mucolipidosis iii)."
-  }
- ],
- "tables": [
-  {
-   "id": "pseudo_hurler_polydystrophy-matrix",
-   "title": "Pseudo-Hurler polydystrophy (mucolipidosis III): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Represents the milder, later-onset counterpart of I-cell disease within the same mannose-6-phosphate targeting pathway",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Represents the milder, later-onset counterpart of I-cell disease within the same mannose-6-phosphate targeting pathway",
+      "Results from partial deficiency of GlcNAc-1-phosphotransferase, so lysosomal enzyme mistargeting is incomplete",
+      "Presents in mid-childhood with progressive joint stiffness, particularly of the shoulders and hands, and slowly progressive skeletal changes",
+      "Cognition is normal or only mildly affected, in contrast to the severe course of mucolipidosis II",
+      "Like I-cell disease, plasma lysosomal enzyme activities are elevated while intracellular activities are reduced",
+      "Two genetic forms exist: ML III alpha/beta from GNPTAB variants and ML III gamma from GNPTG variants",
+      "Hip dysplasia, aortic valve involvement, and mild corneal changes can develop over time"
     ],
-    [
-     "Key Investigations",
-     "Plasma or serum assay of multiple lysosomal enzymes showing raised activity, Cultured fibroblast studies demonstrating reduced",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pseudo-Hurler polydystrophy is caused by partial deficiency of UDP-N-acetylglucosamine-1-phosphotransferase, the enzyme that generates the mannose-6-phosphate signal directing lysosomal hydrolases to the lysosome. Variants in GNPTAB (alpha/beta subunits, ML III alpha/beta) or GNPTG (gamma subunit, ML III gamma) leave greater residual phosphotransferase function than in mucolipidosis II, so enzyme mistargeting is incomplete and disease is milder and slower. Lysosomal hydrolases are partly secreted rather than delivered intracellularly, giving the same biochemical pattern of high plasma and low cellular enzyme activity, with gradual accumulation of undegraded substrate. The predominant clinical burden is on connective tissue and the skeleton. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Mucolipidosis II (I-cell disease) at the severe end of the pathway",
+      "Attenuated mucopolysaccharidoses such as Scheie or Maroteaux-Lamy",
+      "Juvenile idiopathic arthritis given the joint stiffness",
+      "Multiple epiphyseal dysplasia and other skeletal dysplasias",
+      "Progressive pseudorheumatoid dysplasia",
+      "Other lysosomal storage disorders with slowly progressive arthropathy"
     ],
-    [
-     "Primary Differentials",
-     "Mucolipidosis II (I-cell disease) at the severe end of the pathway, Attenuated mucopolysaccharidoses such as Scheie or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma or serum assay of multiple lysosomal enzymes showing raised activity",
+      "Cultured fibroblast studies demonstrating reduced intracellular enzyme activity",
+      "GNPTAB and GNPTG gene sequencing to define the subtype",
+      "Skeletal survey and hip imaging for dysplasia",
+      "Echocardiography for valvular involvement",
+      "Slit-lamp examination for corneal changes"
     ],
-    [
-     "Management Strategy",
-     "Supportive multidisciplinary care, as there is no enzyme-replacement or curative therapy for this disorder",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive hip destruction impairing mobility",
+      "Aortic or mitral valve dysfunction",
+      "Cervical spine involvement with instability",
+      "Marked functional decline from advancing joint contractures"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking early joint stiffness for inflammatory arthritis and delaying metabolic diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is slowly progressive, and many patients survive into adulthood; the main long-term burden comes from joint contractures, hip disease, and cardiac valve involvement, which can cause significant disability.",
+    "pitfalls": [
+      "Mistaking early joint stiffness for inflammatory arthritis and delaying metabolic diagnosis",
+      "Assuming normal intellect excludes a lysosomal disorder",
+      "Overlooking the diagnostic pattern of high plasma lysosomal enzyme activity",
+      "Failing to distinguish the milder ML III course from severe ML II"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive multidisciplinary care, as there is no enzyme-replacement or curative therapy for this disorder",
+      "Physiotherapy and occupational therapy to preserve joint mobility and slow the progression of contractures",
+      "Orthopaedic management of progressive hip and joint disease, including joint replacement in adulthood",
+      "Analgesia and mobility aids for joint pain and stiffness",
+      "Cardiac surveillance with periodic echocardiography for valvular involvement, with cardiology referral",
+      "Ophthalmology review for corneal changes, alongside regular skeletal monitoring",
+      "Genetic counselling and family screening for this autosomal recessive condition involving GNPTAB or GNPTG"
     ]
-   ],
-   "caption": "Overview comparison matrix for pseudo-hurler polydystrophy (mucolipidosis iii)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pseudo-hurler-polydystrophy-real-image",
-   "title": "Pseudo-Hurler polydystrophy (mucolipidosis III): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pseudo_hurler_polydystrophy-pathway",
+      "title": "Pseudo-Hurler polydystrophy (mucolipidosis III): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Represents the milder, later-onset counterpart of I-cell disease within the same mannose-6-phosphate targeting pathway",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive hip destruction impairing mobility",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma or serum assay of multiple lysosomal enzymes showing raised activity, Cultured fibroblast studies demonstrating reduced intracellular enzyme activity, GNPTAB and GNPTG gene sequencing to define the subtype"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive multidisciplinary care, as there is no enzyme-replacement or curative therapy for this disorder"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking early joint stiffness for inflammatory arthritis and delaying metabolic diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pseudo-hurler polydystrophy (mucolipidosis iii)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pseudo_hurler_polydystrophy-matrix",
+      "title": "Pseudo-Hurler polydystrophy (mucolipidosis III): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Represents the milder, later-onset counterpart of I-cell disease within the same mannose-6-phosphate targeting pathway",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma or serum assay of multiple lysosomal enzymes showing raised activity, Cultured fibroblast studies demonstrating reduced",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mucolipidosis II (I-cell disease) at the severe end of the pathway, Attenuated mucopolysaccharidoses such as Scheie or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive multidisciplinary care, as there is no enzyme-replacement or curative therapy for this disorder",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking early joint stiffness for inflammatory arthritis and delaying metabolic diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pseudo-hurler polydystrophy (mucolipidosis iii)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudo_hurler_polydystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma or serum assay of multiple lysosomal enzymes",
+          "cells": [
+            {
+              "text": "Raised enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultured fibroblast studies",
+          "cells": [
+            {
+              "text": "Reduced intracellular enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNPTAB and GNPTG gene sequencing",
+          "cells": [
+            {
+              "text": "Subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey and hip imaging",
+          "cells": [
+            {
+              "text": "Dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Valvular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Corneal changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudo_hurler_polydystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mucolipidosis II (I-cell disease)",
+          "cells": [
+            {
+              "text": "Severe end of the pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attenuated mucopolysaccharidoses (Scheie, Maroteaux-Lamy)",
+          "cells": [
+            {
+              "text": "Attenuated phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Joint stiffness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudo_hurler_polydystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No enzyme-replacement or curative therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Preserve joint mobility and slow contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Progressive hip and joint disease; joint replacement in adulthood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and aids",
+          "cells": [
+            {
+              "text": "Joint pain and stiffness; mobility aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Periodic echocardiography for valvular involvement; cardiology referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye and skeletal monitoring",
+          "cells": [
+            {
+              "text": "Ophthalmology review for corneal changes; regular skeletal monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive (GNPTAB or GNPTG); family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudo_hurler_polydystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Pseudo-Hurler polydystrophy (mucolipidosis III)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pseudo-Hurler polydystrophy: joint stiffness with skeletal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive hip destruction, valve dysfunction, cervical instability, or marked decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent spine and cardiac review for instability or valve dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lysosomal enzyme assays; fibroblast studies; GNPTAB and GNPTG sequencing; skeletal survey",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do enzyme assays and GNPT gene sequencing confirm the disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mucolipidosis II, attenuated MPS or other skeletal dysplasia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive multidisciplinary care; no enzyme-replacement or curative therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to preserve joint mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic management of progressive hip and joint disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic echocardiography and ophthalmology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and family screening for this autosomal recessive condition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,454 @@
 {
- "id": "autonomic_dysreflexia",
- "name": "Autonomic dysreflexia",
- "aliases": [
-  "autonomic hyperreflexia",
-  "AD",
-  "spinal autonomic dysreflexia"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A life-threatening emergency occurring in patients with spinal-cord injury at or above the sixth thoracic (T6) level",
-   "Triggered by a noxious stimulus below the level of the lesion, most often bladder distension from a blocked catheter or bowel impaction",
-   "Presents with severe paroxysmal hypertension, a pounding headache, and flushing and sweating above the lesion, with pallor, piloerection, and cool skin below it",
-   "Reflex bradycardia and nasal congestion are common, and blurred vision and anxiety may occur",
-   "Uncontrolled hypertension can cause seizures, intracranial haemorrhage, retinal detachment, or death",
-   "Immediate management: sit the patient upright, loosen tight clothing, and urgently identify and remove the triggering stimulus (relieve the bladder or bowel)",
-   "If severe hypertension persists after the trigger is removed, rapid-onset, short-acting antihypertensive agents are used",
-   "Patient and carer education on prevention and early recognition is essential, as episodes commonly recur"
+  "id": "autonomic_dysreflexia",
+  "name": "Autonomic dysreflexia",
+  "aliases": [
+    "autonomic hyperreflexia",
+    "AD",
+    "spinal autonomic dysreflexia"
   ],
-  "pathophysiology": "Autonomic dysreflexia arises when a spinal-cord lesion at or above the sixth thoracic segment disconnects the splanchnic sympathetic outflow from supraspinal inhibitory control. A noxious stimulus below the injury, such as a full bladder, generates afferent impulses that trigger an unmodulated reflex sympathetic discharge below the lesion, producing widespread vasoconstriction and a steep rise in blood pressure. Baroreceptors detect the hypertension and drive compensatory parasympathetic (vagal) outflow, causing bradycardia together with vasodilatation, flushing, and sweating above the level of the lesion. However, descending inhibitory signals cannot cross the injury to switch off the sympathetic storm below it, so the hypertension persists until the offending stimulus is removed.",
-  "additionalDifferentials": [
-   "Phaeochromocytoma",
-   "Pre-eclampsia or eclampsia in pregnancy",
-   "Hypertensive emergency of another cause",
-   "Migraine or cluster headache",
-   "Raised intracranial pressure",
-   "Drug-induced sympathomimetic crisis"
-  ],
-  "additionalInvestigations": [
-   "Immediate and serial blood-pressure and heart-rate monitoring, referenced to the patient's usually low baseline",
-   "Bladder assessment for catheter patency and urinary retention with a bladder scan",
-   "Cautious rectal examination for faecal impaction using topical anaesthetic",
-   "Urinalysis and culture to identify urinary tract infection as a trigger",
-   "Skin survey for pressure injury, ingrown toenail, or other cutaneous triggers",
-   "ECG and, when neurological features are present, brain imaging to exclude intracranial haemorrhage"
-  ],
-  "redFlags": [
-   "Blood pressure rising markedly above the patient's baseline",
-   "Severe headache with neurological signs suggesting intracranial haemorrhage",
-   "Seizures or acute visual loss",
-   "Hypertension persisting despite removal of the presumed trigger"
-  ],
-  "prognosis": "With prompt recognition and removal of the trigger an episode usually resolves quickly, but delayed treatment of the hypertensive surge can cause stroke, seizures, or death; recurrent episodes are common in susceptible patients and warrant preventive strategies.",
-  "pitfalls": [
-   "Laying the patient flat, which raises blood pressure further, instead of sitting them upright",
-   "Failing to look for and relieve a blocked catheter or bowel impaction as the first step",
-   "Missing the diagnosis in a patient whose baseline blood pressure is low, so a 'normal' reading is actually a dangerous surge",
-   "Treating the hypertension pharmacologically without removing the underlying noxious stimulus"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line rescue is postural: sit the patient fully upright and loosen any constrictive clothing or abdominal binder to blunt the hypertensive surge",
-   "Urgently seek and remove the noxious trigger, relieving bladder distension by unblocking, flushing or replacing the catheter and clearing faecal impaction after applying topical local anaesthetic",
-   "If severe hypertension persists once obvious triggers are excluded, give a rapid-onset short-acting antihypertensive such as sublingual glyceryl trinitrate or nifedipine, titrated to the patient's low baseline",
-   "Monitor blood pressure and heart rate continuously against the individual's habitually low baseline until the episode fully settles",
-   "Search for and treat less obvious cutaneous or visceral triggers, including pressure injury, ingrown toenail, tight garments and occult infection",
-   "Prevent recurrence through structured bladder and bowel regimens, meticulous catheter and skin care, and education of the patient and carers with an emergency alert card",
-   "Escalate to emergency care and the spinal-injury team if hypertension is refractory or complicated by seizures, visual loss or suspected intracranial haemorrhage"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "autonomic_dysreflexia-pathway",
-   "title": "Autonomic dysreflexia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A life-threatening emergency occurring in patients with spinal-cord injury at or above the sixth thoracic (T6) level",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Blood pressure rising markedly above the patient's baseline",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Immediate and serial blood-pressure and heart-rate monitoring, referenced to the patient's usually low baseline, Bladder assessment for catheter patency and urinary retention with a bladder scan, Cautious rectal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line rescue is postural: sit the patient fully upright and loosen any constrictive clothing or abdominal binder to blunt the hypertensive surge"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Laying the patient flat, which raises blood pressure further, instead of sitting them upright"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autonomic dysreflexia."
-  }
- ],
- "tables": [
-  {
-   "id": "autonomic_dysreflexia-matrix",
-   "title": "Autonomic dysreflexia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A life-threatening emergency occurring in patients with spinal-cord injury at or above the sixth thoracic (T6) level",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A life-threatening emergency occurring in patients with spinal-cord injury at or above the sixth thoracic (T6) level",
+      "Triggered by a noxious stimulus below the level of the lesion, most often bladder distension from a blocked catheter or bowel impaction",
+      "Presents with severe paroxysmal hypertension, a pounding headache, and flushing and sweating above the lesion, with pallor, piloerection, and cool skin below it",
+      "Reflex bradycardia and nasal congestion are common, and blurred vision and anxiety may occur",
+      "Uncontrolled hypertension can cause seizures, intracranial haemorrhage, retinal detachment, or death",
+      "Immediate management: sit the patient upright, loosen tight clothing, and urgently identify and remove the triggering stimulus (relieve the bladder or bowel)",
+      "If severe hypertension persists after the trigger is removed, rapid-onset, short-acting antihypertensive agents are used",
+      "Patient and carer education on prevention and early recognition is essential, as episodes commonly recur"
     ],
-    [
-     "Key Investigations",
-     "Immediate and serial blood-pressure and heart-rate monitoring, referenced to the patient's usually low baseline, Bladder",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Autonomic dysreflexia arises when a spinal-cord lesion at or above the sixth thoracic segment disconnects the splanchnic sympathetic outflow from supraspinal inhibitory control. A noxious stimulus below the injury, such as a full bladder, generates afferent impulses that trigger an unmodulated reflex sympathetic discharge below the lesion, producing widespread vasoconstriction and a steep rise in blood pressure. Baroreceptors detect the hypertension and drive compensatory parasympathetic (vagal) outflow, causing bradycardia together with vasodilatation, flushing, and sweating above the level of the lesion. However, descending inhibitory signals cannot cross the injury to switch off the sympathetic storm below it, so the hypertension persists until the offending stimulus is removed.",
+    "additionalDifferentials": [
+      "Phaeochromocytoma",
+      "Pre-eclampsia or eclampsia in pregnancy",
+      "Hypertensive emergency of another cause",
+      "Migraine or cluster headache",
+      "Raised intracranial pressure",
+      "Drug-induced sympathomimetic crisis"
     ],
-    [
-     "Primary Differentials",
-     "Phaeochromocytoma, Pre-eclampsia or eclampsia in pregnancy, Hypertensive emergency of another cause",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Immediate and serial blood-pressure and heart-rate monitoring, referenced to the patient's usually low baseline",
+      "Bladder assessment for catheter patency and urinary retention with a bladder scan",
+      "Cautious rectal examination for faecal impaction using topical anaesthetic",
+      "Urinalysis and culture to identify urinary tract infection as a trigger",
+      "Skin survey for pressure injury, ingrown toenail, or other cutaneous triggers",
+      "ECG and, when neurological features are present, brain imaging to exclude intracranial haemorrhage"
     ],
-    [
-     "Management Strategy",
-     "First-line rescue is postural: sit the patient fully upright and loosen any constrictive clothing or abdominal binder to blunt",
-     "Core treatment modality"
+    "redFlags": [
+      "Blood pressure rising markedly above the patient's baseline",
+      "Severe headache with neurological signs suggesting intracranial haemorrhage",
+      "Seizures or acute visual loss",
+      "Hypertension persisting despite removal of the presumed trigger"
     ],
-    [
-     "Clinical Pitfall",
-     "Laying the patient flat, which raises blood pressure further, instead of sitting them upright",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt recognition and removal of the trigger an episode usually resolves quickly, but delayed treatment of the hypertensive surge can cause stroke, seizures, or death; recurrent episodes are common in susceptible patients and warrant preventive strategies.",
+    "pitfalls": [
+      "Laying the patient flat, which raises blood pressure further, instead of sitting them upright",
+      "Failing to look for and relieve a blocked catheter or bowel impaction as the first step",
+      "Missing the diagnosis in a patient whose baseline blood pressure is low, so a 'normal' reading is actually a dangerous surge",
+      "Treating the hypertension pharmacologically without removing the underlying noxious stimulus"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line rescue is postural: sit the patient fully upright and loosen any constrictive clothing or abdominal binder to blunt the hypertensive surge",
+      "Urgently seek and remove the noxious trigger, relieving bladder distension by unblocking, flushing or replacing the catheter and clearing faecal impaction after applying topical local anaesthetic",
+      "If severe hypertension persists once obvious triggers are excluded, give a rapid-onset short-acting antihypertensive such as sublingual glyceryl trinitrate or nifedipine, titrated to the patient's low baseline",
+      "Monitor blood pressure and heart rate continuously against the individual's habitually low baseline until the episode fully settles",
+      "Search for and treat less obvious cutaneous or visceral triggers, including pressure injury, ingrown toenail, tight garments and occult infection",
+      "Prevent recurrence through structured bladder and bowel regimens, meticulous catheter and skin care, and education of the patient and carers with an emergency alert card",
+      "Escalate to emergency care and the spinal-injury team if hypertension is refractory or complicated by seizures, visual loss or suspected intracranial haemorrhage"
     ]
-   ],
-   "caption": "Overview comparison matrix for autonomic dysreflexia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "autonomic-dysreflexia-real-image",
-   "title": "Autonomic dysreflexia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "autonomic_dysreflexia-pathway",
+      "title": "Autonomic dysreflexia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A life-threatening emergency occurring in patients with spinal-cord injury at or above the sixth thoracic (T6) level",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Blood pressure rising markedly above the patient's baseline",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Immediate and serial blood-pressure and heart-rate monitoring, referenced to the patient's usually low baseline, Bladder assessment for catheter patency and urinary retention with a bladder scan, Cautious rectal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line rescue is postural: sit the patient fully upright and loosen any constrictive clothing or abdominal binder to blunt the hypertensive surge"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Laying the patient flat, which raises blood pressure further, instead of sitting them upright"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autonomic dysreflexia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "autonomic_dysreflexia-matrix",
+      "title": "Autonomic dysreflexia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A life-threatening emergency occurring in patients with spinal-cord injury at or above the sixth thoracic (T6) level",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Immediate and serial blood-pressure and heart-rate monitoring, referenced to the patient's usually low baseline, Bladder",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Phaeochromocytoma, Pre-eclampsia or eclampsia in pregnancy, Hypertensive emergency of another cause",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line rescue is postural: sit the patient fully upright and loosen any constrictive clothing or abdominal binder to blunt",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Laying the patient flat, which raises blood pressure further, instead of sitting them upright",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autonomic dysreflexia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autonomic_dysreflexia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate and serial blood pressure and heart rate monitoring",
+          "cells": [
+            {
+              "text": "Referenced to the usually low baseline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder assessment with bladder scan",
+          "cells": [
+            {
+              "text": "Catheter patency and urinary retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious rectal examination",
+          "cells": [
+            {
+              "text": "Faecal impaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and culture",
+          "cells": [
+            {
+              "text": "Urinary tract infection as a trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin survey",
+          "cells": [
+            {
+              "text": "Pressure injury, ingrown toenail and other cutaneous triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and brain imaging when neurological features are present",
+          "cells": [
+            {
+              "text": "Intracranial haemorrhage excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autonomic_dysreflexia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Postural rescue",
+          "cells": [
+            {
+              "text": "Sit fully upright; loosen constrictive clothing or abdominal binder"
+            },
+            {
+              "text": "First-line rescue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger removal",
+          "cells": [
+            {
+              "text": "Unblock, flush or replace the catheter; clear faecal impaction"
+            },
+            {
+              "text": "Bladder distension and impaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid-onset antihypertensive",
+          "cells": [
+            {
+              "text": "Short-acting agent such as sublingual glyceryl trinitrate"
+            },
+            {
+              "text": "Severe hypertension persisting once triggers are excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure and heart rate against the habitually low baseline"
+            },
+            {
+              "text": "Until the episode fully settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Less obvious triggers",
+          "cells": [
+            {
+              "text": "Pressure injury, ingrown toenail, tight garments, occult infection"
+            },
+            {
+              "text": "Search for them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence prevention",
+          "cells": [
+            {
+              "text": "Structured bladder and bowel regimens; catheter and skin care; education"
+            },
+            {
+              "text": "Patient and carers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Emergency care and spinal-injury team"
+            },
+            {
+              "text": "Refractory hypertension or seizures, visual loss or suspected intracranial haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autonomic_dysreflexia-dx-mgmt",
+      "title": "Diagnosis and management of Autonomic dysreflexia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden hypertension with headache and sweating in a patient with spinal injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe headache, seizure or visual loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Sit upright, loosen clothing and seek the trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial BP and HR, bladder scan, rectal examination, urinalysis, skin survey, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Noxious trigger found, such as bladder distension or impaction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove the trigger: unblock catheter or relieve impaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and escalate if BP stays high",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rapid-onset short-acting antihypertensive if hypertension persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor BP and HR until the episode settles",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Structured bladder and bowel regimens to prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Emergency care if refractory or intracranial haemorrhage is suspected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

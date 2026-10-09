@@ -1,174 +1,481 @@
 {
- "id": "telogen_effluvium",
- "name": "Telogen effluvium",
- "aliases": [
-  "TE",
-  "telogen shedding",
-  "acute telogen effluvium",
-  "chronic telogen effluvium"
- ],
- "class": "non_infective",
- "system": "Dermatology / Trichology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Diffuse, non-scarring hair shedding that classically begins around two to three months after a triggering event such as childbirth, severe febrile illness, major surgery, crash dieting, or starting or stopping a drug",
-   "Patients often report alarming quantities of hair on the pillow, in the shower, and on the brush, yet visible baldness is unusual because shedding rarely involves more than about half of the scalp hair",
-   "The hair-pull test is positive with an increased proportion of club (telogen) hairs, and trichoscopy shows numerous empty follicles and short upright regrowing hairs",
-   "Follicular ostia are preserved, confirming a non-scarring process with excellent potential for full regrowth, which distinguishes it from cicatricial alopecias",
-   "Acute forms are self-limiting and settle within a few months once the trigger has passed, whereas chronic telogen effluvium persists beyond six months, often in middle-aged women, and fluctuates",
-   "A careful history covering events in the preceding few months, a drug review, and screening for iron deficiency, thyroid dysfunction and nutritional causes usually identifies the precipitant",
-   "Reassurance about the reversible nature is central, and treating any identified underlying cause such as iron repletion or thyroid correction is the mainstay rather than specific hair therapy"
+  "id": "telogen_effluvium",
+  "name": "Telogen effluvium",
+  "aliases": [
+    "TE",
+    "telogen shedding",
+    "acute telogen effluvium",
+    "chronic telogen effluvium"
   ],
-  "pathophysiology": "Telogen effluvium results from a disturbance of the normal hair cycle in which an abnormally large proportion of follicles are prematurely shifted from the growing (anagen) phase into the resting (telogen) phase. After a latency of roughly two to three months these synchronised telogen hairs are shed as new anagen hairs emerge beneath them. Recognised triggers include physiological stress such as childbirth, febrile illness and major surgery, rapid weight loss, iron and other nutritional deficiency, thyroid disturbance, and numerous drugs. Because the follicles themselves are not destroyed and the ostia remain intact, the process is non-scarring and reverses once the precipitant resolves.",
-  "additionalDifferentials": [
-   "Androgenetic alopecia, which may be unmasked or accelerated by an effluvium",
-   "Alopecia areata, especially the diffuse (incognita) variant",
-   "Anagen effluvium from chemotherapy or toxin exposure",
-   "Early scarring alopecia presenting with shedding",
-   "Diffuse hair loss of systemic disease such as thyroid disorder or lupus",
-   "Nutritional or iron-deficiency related hair loss"
-  ],
-  "additionalInvestigations": [
-   "Hair-pull test to confirm increased telogen shedding",
-   "Trichoscopy to assess follicular ostia, hair-shaft calibre and regrowth",
-   "Full blood count and ferritin to detect iron deficiency",
-   "Thyroid function tests",
-   "Targeted screening for other nutritional causes such as vitamin D or zinc where clinically indicated",
-   "Trichogram or scalp biopsy in uncertain or chronic cases to confirm the telogen ratio and exclude other diagnoses"
-  ],
-  "redFlags": [
-   "Loss of follicular ostia, scaling, or perifollicular erythema suggesting a scarring alopecia rather than an effluvium",
-   "Shedding that continues beyond six months or progresses despite removal of the presumed trigger",
-   "Associated systemic symptoms pointing to occult illness or malignancy",
-   "Patchy rather than diffuse loss suggesting alopecia areata or tinea capitis"
-  ],
-  "prognosis": "Acute telogen effluvium is self-limiting and typically resolves with full regrowth over several months once the trigger has passed; chronic telogen effluvium may fluctuate over years but does not itself cause permanent baldness, although it can unmask underlying androgenetic thinning.",
-  "pitfalls": [
-   "Attributing all diffuse shedding to effluvium and overlooking early androgenetic alopecia or diffuse alopecia areata",
-   "Looking back only to when shedding began rather than two to three months earlier for the true trigger",
-   "Missing a treatable systemic cause such as iron deficiency or thyroid disease",
-   "Reassuring a patient without excluding a scarring process on close scalp examination"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and remove the precipitating trigger such as recent childbirth, febrile illness, surgery, crash dieting or a newly started drug, as the mainstay since shedding reverses once it resolves",
-   "Correct identified nutritional deficiency, replacing iron where ferritin is low and addressing deficiencies such as vitamin D or zinc",
-   "Treat any underlying thyroid dysfunction, since restoring euthyroid status allows the hair cycle to normalise",
-   "Review medication and withdraw or substitute a culprit drug where clinically feasible",
-   "Reassure the patient that the process is non-scarring with excellent regrowth potential, and advise gentle hair care avoiding traction and harsh chemical treatments",
-   "Consider topical minoxidil to encourage regrowth in persistent or chronic telogen effluvium",
-   "Refer to dermatology and reassess with trichoscopy or scalp biopsy if shedding is chronic, uncertain, or unmasking androgenetic thinning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "telogen_effluvium-pathway",
-   "title": "Telogen effluvium: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Diffuse, non-scarring hair shedding that classically begins around two to three months after a triggering event such as childbirth, severe febrile illness, major surgery, crash dieting, or starting or stopping a drug",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Loss of follicular ostia, scaling, or perifollicular erythema suggesting a scarring alopecia rather than an effluvium",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Hair-pull test to confirm increased telogen shedding, Trichoscopy to assess follicular ostia, hair-shaft calibre and regrowth, Full blood count and ferritin to detect iron deficiency"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and remove the precipitating trigger such as recent childbirth, febrile illness, surgery, crash dieting or a newly started drug, as the mainstay since shedding reverses once it resolves"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all diffuse shedding to effluvium and overlooking early androgenetic alopecia or diffuse alopecia areata"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of telogen effluvium."
-  }
- ],
- "tables": [
-  {
-   "id": "telogen_effluvium-matrix",
-   "title": "Telogen effluvium: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Diffuse, non-scarring hair shedding that classically begins around two to three months after a triggering event such as",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Trichology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Diffuse, non-scarring hair shedding that classically begins around two to three months after a triggering event such as childbirth, severe febrile illness, major surgery, crash dieting, or starting or stopping a drug",
+      "Patients often report alarming quantities of hair on the pillow, in the shower, and on the brush, yet visible baldness is unusual because shedding rarely involves more than about half of the scalp hair",
+      "The hair-pull test is positive with an increased proportion of club (telogen) hairs, and trichoscopy shows numerous empty follicles and short upright regrowing hairs",
+      "Follicular ostia are preserved, confirming a non-scarring process with excellent potential for full regrowth, which distinguishes it from cicatricial alopecias",
+      "Acute forms are self-limiting and settle within a few months once the trigger has passed, whereas chronic telogen effluvium persists beyond six months, often in middle-aged women, and fluctuates",
+      "A careful history covering events in the preceding few months, a drug review, and screening for iron deficiency, thyroid dysfunction and nutritional causes usually identifies the precipitant",
+      "Reassurance about the reversible nature is central, and treating any identified underlying cause such as iron repletion or thyroid correction is the mainstay rather than specific hair therapy"
     ],
-    [
-     "Key Investigations",
-     "Hair-pull test to confirm increased telogen shedding, Trichoscopy to assess follicular ostia, hair-shaft calibre and regrowth,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Telogen effluvium results from a disturbance of the normal hair cycle in which an abnormally large proportion of follicles are prematurely shifted from the growing (anagen) phase into the resting (telogen) phase. After a latency of roughly two to three months these synchronised telogen hairs are shed as new anagen hairs emerge beneath them. Recognised triggers include physiological stress such as childbirth, febrile illness and major surgery, rapid weight loss, iron and other nutritional deficiency, thyroid disturbance, and numerous drugs. Because the follicles themselves are not destroyed and the ostia remain intact, the process is non-scarring and reverses once the precipitant resolves.",
+    "additionalDifferentials": [
+      "Androgenetic alopecia, which may be unmasked or accelerated by an effluvium",
+      "Alopecia areata, especially the diffuse (incognita) variant",
+      "Anagen effluvium from chemotherapy or toxin exposure",
+      "Early scarring alopecia presenting with shedding",
+      "Diffuse hair loss of systemic disease such as thyroid disorder or lupus",
+      "Nutritional or iron-deficiency related hair loss"
     ],
-    [
-     "Primary Differentials",
-     "Androgenetic alopecia, which may be unmasked or accelerated by an effluvium, Alopecia areata, especially the diffuse (incognita)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Hair-pull test to confirm increased telogen shedding",
+      "Trichoscopy to assess follicular ostia, hair-shaft calibre and regrowth",
+      "Full blood count and ferritin to detect iron deficiency",
+      "Thyroid function tests",
+      "Targeted screening for other nutritional causes such as vitamin D or zinc where clinically indicated",
+      "Trichogram or scalp biopsy in uncertain or chronic cases to confirm the telogen ratio and exclude other diagnoses"
     ],
-    [
-     "Management Strategy",
-     "Identify and remove the precipitating trigger such as recent childbirth, febrile illness, surgery, crash dieting or a newly",
-     "Core treatment modality"
+    "redFlags": [
+      "Loss of follicular ostia, scaling, or perifollicular erythema suggesting a scarring alopecia rather than an effluvium",
+      "Shedding that continues beyond six months or progresses despite removal of the presumed trigger",
+      "Associated systemic symptoms pointing to occult illness or malignancy",
+      "Patchy rather than diffuse loss suggesting alopecia areata or tinea capitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all diffuse shedding to effluvium and overlooking early androgenetic alopecia or diffuse alopecia areata",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute telogen effluvium is self-limiting and typically resolves with full regrowth over several months once the trigger has passed; chronic telogen effluvium may fluctuate over years but does not itself cause permanent baldness, although it can unmask underlying androgenetic thinning.",
+    "pitfalls": [
+      "Attributing all diffuse shedding to effluvium and overlooking early androgenetic alopecia or diffuse alopecia areata",
+      "Looking back only to when shedding began rather than two to three months earlier for the true trigger",
+      "Missing a treatable systemic cause such as iron deficiency or thyroid disease",
+      "Reassuring a patient without excluding a scarring process on close scalp examination"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and remove the precipitating trigger such as recent childbirth, febrile illness, surgery, crash dieting or a newly started drug, as the mainstay since shedding reverses once it resolves",
+      "Correct identified nutritional deficiency, replacing iron where ferritin is low and addressing deficiencies such as vitamin D or zinc",
+      "Treat any underlying thyroid dysfunction, since restoring euthyroid status allows the hair cycle to normalise",
+      "Review medication and withdraw or substitute a culprit drug where clinically feasible",
+      "Reassure the patient that the process is non-scarring with excellent regrowth potential, and advise gentle hair care avoiding traction and harsh chemical treatments",
+      "Consider topical minoxidil to encourage regrowth in persistent or chronic telogen effluvium",
+      "Refer to dermatology and reassess with trichoscopy or scalp biopsy if shedding is chronic, uncertain, or unmasking androgenetic thinning"
     ]
-   ],
-   "caption": "Overview comparison matrix for telogen effluvium."
-  }
- ],
- "diagrams": [
-  {
-   "id": "telogen-effluvium-real-image",
-   "title": "Telogen effluvium: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "telogen_effluvium-pathway",
+      "title": "Telogen effluvium: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Diffuse, non-scarring hair shedding that classically begins around two to three months after a triggering event such as childbirth, severe febrile illness, major surgery, crash dieting, or starting or stopping a drug",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Loss of follicular ostia, scaling, or perifollicular erythema suggesting a scarring alopecia rather than an effluvium",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Hair-pull test to confirm increased telogen shedding, Trichoscopy to assess follicular ostia, hair-shaft calibre and regrowth, Full blood count and ferritin to detect iron deficiency"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and remove the precipitating trigger such as recent childbirth, febrile illness, surgery, crash dieting or a newly started drug, as the mainstay since shedding reverses once it resolves"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all diffuse shedding to effluvium and overlooking early androgenetic alopecia or diffuse alopecia areata"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of telogen effluvium."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "telogen_effluvium-matrix",
+      "title": "Telogen effluvium: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diffuse, non-scarring hair shedding that classically begins around two to three months after a triggering event such as",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Hair-pull test to confirm increased telogen shedding, Trichoscopy to assess follicular ostia, hair-shaft calibre and regrowth,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Androgenetic alopecia, which may be unmasked or accelerated by an effluvium, Alopecia areata, especially the diffuse (incognita)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and remove the precipitating trigger such as recent childbirth, febrile illness, surgery, crash dieting or a newly",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all diffuse shedding to effluvium and overlooking early androgenetic alopecia or diffuse alopecia areata",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for telogen effluvium."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "telogen_effluvium-dx-mgmt",
+      "title": "Diagnosis and management of Telogen effluvium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected telogen effluvium: diffuse non-scarring shedding 2 to 3 months after a trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: scarring signs, shedding beyond six months, or patchy loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Scalp biopsy and dermatology review to exclude scarring alopecia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hair-pull test; trichoscopy; FBC and ferritin; thyroid function tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does trichoscopy show preserved follicular ostia with increased telogen hairs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider androgenetic alopecia, alopecia areata or anagen effluvium from toxins",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and remove the precipitating trigger, the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replace iron where ferritin is low; correct vitamin D or zinc deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat thyroid dysfunction to normalise the hair cycle",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review and withdraw or substitute a culprit medication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure about reversibility; topical minoxidil if chronic",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute form is self-limiting with regrowth over months; chronic form fluctuates",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "telogen_effluvium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hair-pull test",
+          "cells": [
+            {
+              "text": "Increased telogen shedding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Follicular ostia, hair-shaft calibre and regrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and ferritin",
+          "cells": [
+            {
+              "text": "Iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Thyroid dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted nutritional screen",
+          "cells": [
+            {
+              "text": "Vitamin D or zinc, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichogram or scalp biopsy",
+          "cells": [
+            {
+              "text": "Telogen ratio in uncertain or chronic cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "telogen_effluvium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Androgenetic alopecia",
+          "cells": [
+            {
+              "text": "Effluvium may unmask or accelerate it; look for a thinning pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alopecia areata, diffuse (incognita) variant",
+          "cells": [
+            {
+              "text": "Patchy rather than diffuse loss points to alopecia areata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anagen effluvium from chemotherapy or toxin exposure",
+          "cells": [
+            {
+              "text": "Anagen rather than telogen shedding after a toxic exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "telogen_effluvium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove the precipitating trigger",
+          "cells": [
+            {
+              "text": "Childbirth, febrile illness, surgery, crash dieting or a new drug; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct nutritional deficiency",
+          "cells": [
+            {
+              "text": "Iron where ferritin is low; vitamin D or zinc where deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat thyroid dysfunction",
+          "cells": [
+            {
+              "text": "Restoring euthyroid status allows the hair cycle to normalise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Withdraw or substitute a culprit drug where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and gentle hair care",
+          "cells": [
+            {
+              "text": "Non-scarring; avoid traction and harsh chemical treatments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical minoxidil",
+          "cells": [
+            {
+              "text": "Persistent or chronic telogen effluvium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology referral",
+          "cells": [
+            {
+              "text": "Chronic or uncertain shedding, or unmasked androgenetic thinning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

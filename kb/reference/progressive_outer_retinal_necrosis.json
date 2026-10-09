@@ -1,168 +1,444 @@
 {
- "id": "progressive_outer_retinal_necrosis",
- "name": "Progressive outer retinal necrosis",
- "aliases": [
-  "PORN",
-  "varicella-zoster outer retinal necrosis"
- ],
- "class": "infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Uveitis",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A variant of herpetic (usually varicella-zoster) necrotising retinitis occurring in severely immunocompromised patients, classically advanced HIV",
-   "Distinguished from acute retinal necrosis by minimal or absent intraocular inflammation and by early posterior-pole and outer-retinal involvement",
-   "Multifocal deep retinal opacification spreads rapidly and coalesces, often with early macular involvement",
-   "Retinal vasculitis is typically absent, unlike acute retinal necrosis",
-   "Progression is extremely rapid and the prognosis for vision is poor",
-   "Management combines systemic and intravitreal antivirals with restoration of immune function"
+  "id": "progressive_outer_retinal_necrosis",
+  "name": "Progressive outer retinal necrosis",
+  "aliases": [
+    "PORN",
+    "varicella-zoster outer retinal necrosis"
   ],
-  "pathophysiology": "In the setting of profound cellular immunodeficiency, varicella-zoster virus infects the outer retina, producing rapidly progressive necrosis that begins in the deep retina and posterior pole with little inflammatory response because the immune system cannot mount vitritis or vasculitis. The outer-retinal predilection and blunted inflammation reflect the underlying immunosuppression, and confluent necrosis frequently reaches the macula early, causing severe irreversible visual loss and a high rate of retinal detachment.",
-  "additionalDifferentials": [
-   "Acute retinal necrosis (immunocompetent, prominent vitritis and vasculitis)",
-   "Cytomegalovirus retinitis",
-   "Syphilitic posterior placoid chorioretinitis",
-   "Toxoplasma retinochoroiditis",
-   "Intraocular lymphoma"
-  ],
-  "additionalInvestigations": [
-   "Vitreous or aqueous PCR for varicella-zoster and other herpesviruses",
-   "HIV testing and CD4 count / immune status assessment",
-   "Dilated fundus examination documenting outer-retinal necrosis",
-   "Syphilis and other infective serology to exclude mimics",
-   "Optical coherence tomography and wide-field imaging to track progression"
-  ],
-  "redFlags": [
-   "Rapidly advancing necrosis toward or involving the macula",
-   "Bilateral involvement",
-   "Very low CD4 count or other severe immunosuppression",
-   "Retinal detachment"
-  ],
-  "prognosis": "Prognosis is poor with frequent rapid progression to profound visual loss and retinal detachment; outcomes improve when immune reconstitution is achieved alongside antiviral therapy.",
-  "pitfalls": [
-   "Expecting the vitritis of acute retinal necrosis and dismissing PORN because the eye looks quiet",
-   "Delaying antiviral therapy while awaiting confirmatory tests",
-   "Neglecting to address the underlying immunosuppression",
-   "Missing early macular involvement"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Commence high-dose systemic antiviral therapy directed at varicella-zoster virus, typically intravenous aciclovir combined with ganciclovir or foscarnet, without waiting for PCR confirmation",
-   "Add repeated intravitreal ganciclovir or foscarnet injections to achieve therapeutic intraocular antiviral levels",
-   "Restore immune function by starting or optimising antiretroviral therapy in HIV, or reducing iatrogenic immunosuppression, as this is central to controlling the infection",
-   "Monitor progression with serial dilated fundoscopy, wide-field imaging and optical coherence tomography, watching for macular and peripheral spread",
-   "Refer urgently to vitreoretinal surgery for prophylactic laser demarcation and repair of the frequent rhegmatogenous retinal detachment",
-   "Manage jointly with infectious diseases and HIV physicians and continue oral valaciclovir maintenance to protect the fellow eye and prevent relapse"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_outer_retinal_necrosis-pathway",
-   "title": "Progressive outer retinal necrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A variant of herpetic (usually varicella-zoster) necrotising retinitis occurring in severely immunocompromised patients, classically advanced HIV",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly advancing necrosis toward or involving the macula",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Vitreous or aqueous PCR for varicella-zoster and other herpesviruses, HIV testing and CD4 count / immune status assessment, Dilated fundus examination documenting outer-retinal necrosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Commence high-dose systemic antiviral therapy directed at varicella-zoster virus, typically intravenous aciclovir combined with ganciclovir or foscarnet, without waiting for PCR confirmation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting the vitritis of acute retinal necrosis and dismissing PORN because the eye looks quiet"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive outer retinal necrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_outer_retinal_necrosis-matrix",
-   "title": "Progressive outer retinal necrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A variant of herpetic (usually varicella-zoster) necrotising retinitis occurring in severely immunocompromised patients,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Uveitis",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A variant of herpetic (usually varicella-zoster) necrotising retinitis occurring in severely immunocompromised patients, classically advanced HIV",
+      "Distinguished from acute retinal necrosis by minimal or absent intraocular inflammation and by early posterior-pole and outer-retinal involvement",
+      "Multifocal deep retinal opacification spreads rapidly and coalesces, often with early macular involvement",
+      "Retinal vasculitis is typically absent, unlike acute retinal necrosis",
+      "Progression is extremely rapid and the prognosis for vision is poor",
+      "Management combines systemic and intravitreal antivirals with restoration of immune function"
     ],
-    [
-     "Key Investigations",
-     "Vitreous or aqueous PCR for varicella-zoster and other herpesviruses, HIV testing and CD4 count / immune status assessment,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In the setting of profound cellular immunodeficiency, varicella-zoster virus infects the outer retina, producing rapidly progressive necrosis that begins in the deep retina and posterior pole with little inflammatory response because the immune system cannot mount vitritis or vasculitis. The outer-retinal predilection and blunted inflammation reflect the underlying immunosuppression, and confluent necrosis frequently reaches the macula early, causing severe irreversible visual loss and a high rate of retinal detachment.",
+    "additionalDifferentials": [
+      "Acute retinal necrosis (immunocompetent, prominent vitritis and vasculitis)",
+      "Cytomegalovirus retinitis",
+      "Syphilitic posterior placoid chorioretinitis",
+      "Toxoplasma retinochoroiditis",
+      "Intraocular lymphoma"
     ],
-    [
-     "Primary Differentials",
-     "Acute retinal necrosis (immunocompetent, prominent vitritis and vasculitis), Cytomegalovirus retinitis, Syphilitic posterior",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Vitreous or aqueous PCR for varicella-zoster and other herpesviruses",
+      "HIV testing and CD4 count / immune status assessment",
+      "Dilated fundus examination documenting outer-retinal necrosis",
+      "Syphilis and other infective serology to exclude mimics",
+      "Optical coherence tomography and wide-field imaging to track progression"
     ],
-    [
-     "Management Strategy",
-     "Commence high-dose systemic antiviral therapy directed at varicella-zoster virus, typically intravenous aciclovir combined with",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly advancing necrosis toward or involving the macula",
+      "Bilateral involvement",
+      "Very low CD4 count or other severe immunosuppression",
+      "Retinal detachment"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting the vitritis of acute retinal necrosis and dismissing PORN because the eye looks quiet",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is poor with frequent rapid progression to profound visual loss and retinal detachment; outcomes improve when immune reconstitution is achieved alongside antiviral therapy.",
+    "pitfalls": [
+      "Expecting the vitritis of acute retinal necrosis and dismissing PORN because the eye looks quiet",
+      "Delaying antiviral therapy while awaiting confirmatory tests",
+      "Neglecting to address the underlying immunosuppression",
+      "Missing early macular involvement"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Commence high-dose systemic antiviral therapy directed at varicella-zoster virus, typically intravenous aciclovir combined with ganciclovir or foscarnet, without waiting for PCR confirmation",
+      "Add repeated intravitreal ganciclovir or foscarnet injections to achieve therapeutic intraocular antiviral levels",
+      "Restore immune function by starting or optimising antiretroviral therapy in HIV, or reducing iatrogenic immunosuppression, as this is central to controlling the infection",
+      "Monitor progression with serial dilated fundoscopy, wide-field imaging and optical coherence tomography, watching for macular and peripheral spread",
+      "Refer urgently to vitreoretinal surgery for prophylactic laser demarcation and repair of the frequent rhegmatogenous retinal detachment",
+      "Manage jointly with infectious diseases and HIV physicians and continue oral valaciclovir maintenance to protect the fellow eye and prevent relapse"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive outer retinal necrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-outer-retinal-necrosis-real-image",
-   "title": "Progressive outer retinal necrosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "progressive_outer_retinal_necrosis-pathway",
+      "title": "Progressive outer retinal necrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A variant of herpetic (usually varicella-zoster) necrotising retinitis occurring in severely immunocompromised patients, classically advanced HIV",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly advancing necrosis toward or involving the macula",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Vitreous or aqueous PCR for varicella-zoster and other herpesviruses, HIV testing and CD4 count / immune status assessment, Dilated fundus examination documenting outer-retinal necrosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Commence high-dose systemic antiviral therapy directed at varicella-zoster virus, typically intravenous aciclovir combined with ganciclovir or foscarnet, without waiting for PCR confirmation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting the vitritis of acute retinal necrosis and dismissing PORN because the eye looks quiet"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive outer retinal necrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_outer_retinal_necrosis-matrix",
+      "title": "Progressive outer retinal necrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A variant of herpetic (usually varicella-zoster) necrotising retinitis occurring in severely immunocompromised patients,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Vitreous or aqueous PCR for varicella-zoster and other herpesviruses, HIV testing and CD4 count / immune status assessment,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute retinal necrosis (immunocompetent, prominent vitritis and vasculitis), Cytomegalovirus retinitis, Syphilitic posterior",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Commence high-dose systemic antiviral therapy directed at varicella-zoster virus, typically intravenous aciclovir combined with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting the vitritis of acute retinal necrosis and dismissing PORN because the eye looks quiet",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive outer retinal necrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_outer_retinal_necrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitreous or aqueous PCR for varicella-zoster and other herpesviruses",
+          "cells": [
+            {
+              "text": "Herpesvirus, including varicella-zoster"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and CD4 count",
+          "cells": [
+            {
+              "text": "Immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Outer-retinal necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilis and other infective serology",
+          "cells": [
+            {
+              "text": "Mimics excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography and wide-field imaging",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_outer_retinal_necrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute retinal necrosis (immunocompetent)",
+          "cells": [
+            {
+              "text": "Prominent vitritis and vasculitis"
+            },
+            {
+              "text": "Vitreous PCR for varicella-zoster"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilitic posterior placoid chorioretinitis",
+          "cells": [
+            {
+              "text": "Posterior placoid pattern"
+            },
+            {
+              "text": "Syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_outer_retinal_necrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic antivirals",
+          "cells": [
+            {
+              "text": "High-dose IV aciclovir with ganciclovir or foscarnet, directed at varicella-zoster virus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal antivirals",
+          "cells": [
+            {
+              "text": "Repeated intravitreal ganciclovir or foscarnet injections for therapeutic intraocular levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune function",
+          "cells": [
+            {
+              "text": "Start or optimise antiretroviral therapy in HIV, or reduce iatrogenic immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial dilated fundoscopy, wide-field imaging and OCT for macular and peripheral spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent vitreoretinal referral",
+          "cells": [
+            {
+              "text": "Prophylactic laser demarcation and repair of frequent rhegmatogenous retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint management",
+          "cells": [
+            {
+              "text": "Infectious diseases and HIV physicians; oral valaciclovir maintenance to protect the fellow eye"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_outer_retinal_necrosis-dx-mgmt",
+      "title": "Diagnosis and management of Progressive outer retinal necrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected progressive outer retinal necrosis in a severely immunosuppressed patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Macular involvement, bilateral disease, very low CD4 count, or retinal detachment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vitreoretinal referral and high-dose IV antivirals",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Vitreous or aqueous PCR for VZV and herpesviruses; HIV and CD4; syphilis serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PCR confirm a herpesvirus with syphilis and other mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acute retinal necrosis, CMV retinitis or syphilitic chorioretinitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose IV aciclovir with ganciclovir or foscarnet",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeated intravitreal ganciclovir or foscarnet injections",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Start or optimise antiretroviral therapy; reduce iatrogenic immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent vitreoretinal referral for laser demarcation and retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infectious diseases and HIV care; oral valaciclovir maintenance to protect the fellow eye",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

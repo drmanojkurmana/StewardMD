@@ -1,174 +1,232 @@
 {
- "id": "calciphylaxis",
- "name": "Calciphylaxis (calcific uraemic arteriolopathy)",
- "aliases": [
-  "calcific uraemic arteriolopathy",
-  "CUA",
-  "calcific arteriolopathy"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / KDIGO CKD-MBD guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A life-threatening small-vessel disorder in which calcification of dermal and subcutaneous arterioles causes ischaemia, necrosis, and ulceration",
-   "Occurs most often in patients with end-stage kidney disease on dialysis, but a non-uraemic form also exists",
-   "Presents with exquisitely painful, indurated plaques that evolve into retiform (net-like) purpura and black necrotic ulcers with a firm surrounding rim",
-   "Lesions favour areas of greater adiposity such as the thighs, abdomen, and buttocks, where prognosis is worse than for distal (acral) disease",
-   "Recognised risk factors include disordered calcium-phosphate metabolism and hyperparathyroidism, obesity, diabetes, female sex, warfarin use, and protein C or S deficiency",
-   "Secondary wound infection and sepsis are the leading causes of death, so severe pain out of proportion to visible changes should prompt early suspicion",
-   "Management is multidisciplinary and includes correction of calcium-phosphate imbalance and hyperparathyroidism, sodium thiosulfate, meticulous wound care, analgesia, and avoidance of precipitants such as warfarin"
+  "id": "calciphylaxis",
+  "name": "Calciphylaxis (calcific uraemic arteriolopathy)",
+  "aliases": [
+    "calcific uraemic arteriolopathy",
+    "CUA",
+    "calcific arteriolopathy"
   ],
-  "pathophysiology": "Calciphylaxis is driven by progressive calcification of the media of small dermal and subcutaneous arterioles, accompanied by intimal fibrosis and microthrombosis, which occludes the vessels and causes ischaemic necrosis of skin and fat. In the uraemic form, chronic kidney disease with a deranged calcium-phosphate product, secondary hyperparathyroidism, and reduced levels of circulating calcification inhibitors allow vascular smooth-muscle cells to transform into an osteoblast-like, calcifying phenotype. A hypercoagulable tendency, exacerbated by warfarin's inhibition of vitamin-K-dependent calcification inhibitors, promotes the thrombotic occlusion that completes tissue infarction.",
-  "additionalDifferentials": [
-   "Warfarin-induced skin necrosis",
-   "Cholesterol embolisation",
-   "Vasculitis with cutaneous necrosis",
-   "Antiphospholipid syndrome and other thrombotic microangiopathies",
-   "Necrotising soft-tissue infection",
-   "Peripheral arterial disease with ischaemic ulceration",
-   "Nephrogenic systemic fibrosis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy (used judiciously given ulceration risk) showing medial arteriolar calcification, intimal fibrosis, and thrombosis",
-   "Serum calcium, phosphate, calcium-phosphate product, and parathyroid hormone",
-   "Renal function and dialysis adequacy assessment",
-   "Coagulation studies and screening for protein C or S deficiency and antiphospholipid antibodies",
-   "Review of warfarin and other precipitant medications",
-   "Imaging such as plain radiographs or bone scintigraphy that may reveal soft-tissue vascular calcification"
-  ],
-  "redFlags": [
-   "Rapidly enlarging necrotic ulcers with surrounding cellulitis and systemic sepsis",
-   "Severe pain disproportionate to visible skin changes signalling early disease",
-   "Truncal or proximal (central) lesions carrying a worse prognosis",
-   "Signs of overwhelming infection in an immunocompromised or dialysis-dependent patient"
-  ],
-  "prognosis": "The condition carries high morbidity and mortality, with sepsis from infected necrotic wounds the usual cause of death; central and ulcerated lesions fare worse than distal non-ulcerated disease, though early multidisciplinary intervention can improve outcomes.",
-  "pitfalls": [
-   "Dismissing severe pain before ulceration appears and delaying diagnosis",
-   "Continuing warfarin, which aggravates the disease, when an alternative anticoagulant may be appropriate",
-   "Aggressive debridement or biopsy that can extend non-healing wounds if not carefully weighed",
-   "Failing to address the underlying calcium-phosphate and parathyroid derangement"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "KDIGO clinical practice guidance on CKD-mineral and bone disorder"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the mineral-bone derangement: lower phosphate with non-calcium-based binders, avoid calcium-containing binders and excess vitamin D, and treat hyperparathyroidism with cinacalcet or parathyroidectomy.",
-   "Give intravenous sodium thiosulfate as targeted therapy for the calcific arteriolopathy.",
-   "Stop warfarin and switch to an alternative anticoagulant, and withdraw other precipitants such as calcium and vitamin D loading.",
-   "Optimise dialysis, often intensifying the regimen, in end-stage kidney disease.",
-   "Provide meticulous wound care, surgical debridement where appropriate, and aggressive multimodal analgesia for the severe pain.",
-   "Treat wound infection promptly with antibiotics, recognising sepsis as the leading cause of death.",
-   "Coordinate multidisciplinary care across nephrology, dermatology, wound care, pain and surgical teams."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "calciphylaxis-pathway",
-   "title": "Calciphylaxis (calcific uraemic arteriolopathy): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A life-threatening small-vessel disorder in which calcification of dermal and subcutaneous arterioles causes ischaemia, necrosis, and ulceration",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging necrotic ulcers with surrounding cellulitis and systemic sepsis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy (used judiciously given ulceration risk) showing medial arteriolar calcification, intimal fibrosis, and thrombosis, Serum calcium, phosphate, calcium-phosphate product, and parathyroid hormone, Renal function"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the mineral-bone derangement: lower phosphate with non-calcium-based binders, avoid calcium-containing binders and excess vitamin D, and treat hyperparathyroidism with cinacalcet or parathyroidectomy."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing severe pain before ulceration appears and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of calciphylaxis (calcific uraemic arteriolopathy)."
-  }
- ],
- "tables": [
-  {
-   "id": "calciphylaxis-matrix",
-   "title": "Calciphylaxis (calcific uraemic arteriolopathy): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A life-threatening small-vessel disorder in which calcification of dermal and subcutaneous arterioles causes ischaemia, necrosis,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / KDIGO CKD-MBD guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A life-threatening small-vessel disorder in which calcification of dermal and subcutaneous arterioles causes ischaemia, necrosis, and ulceration",
+      "Occurs most often in patients with end-stage kidney disease on dialysis, but a non-uraemic form also exists",
+      "Presents with exquisitely painful, indurated plaques that evolve into retiform (net-like) purpura and black necrotic ulcers with a firm surrounding rim",
+      "Lesions favour areas of greater adiposity such as the thighs, abdomen, and buttocks, where prognosis is worse than for distal (acral) disease",
+      "Recognised risk factors include disordered calcium-phosphate metabolism and hyperparathyroidism, obesity, diabetes, female sex, warfarin use, and protein C or S deficiency",
+      "Secondary wound infection and sepsis are the leading causes of death, so severe pain out of proportion to visible changes should prompt early suspicion",
+      "Management is multidisciplinary and includes correction of calcium-phosphate imbalance and hyperparathyroidism, sodium thiosulfate, meticulous wound care, analgesia, and avoidance of precipitants such as warfarin"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy (used judiciously given ulceration risk) showing medial arteriolar calcification, intimal fibrosis, and thrombosis,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Calciphylaxis is driven by progressive calcification of the media of small dermal and subcutaneous arterioles, accompanied by intimal fibrosis and microthrombosis, which occludes the vessels and causes ischaemic necrosis of skin and fat. In the uraemic form, chronic kidney disease with a deranged calcium-phosphate product, secondary hyperparathyroidism, and reduced levels of circulating calcification inhibitors allow vascular smooth-muscle cells to transform into an osteoblast-like, calcifying phenotype. A hypercoagulable tendency, exacerbated by warfarin's inhibition of vitamin-K-dependent calcification inhibitors, promotes the thrombotic occlusion that completes tissue infarction.",
+    "additionalDifferentials": [
+      "Warfarin-induced skin necrosis",
+      "Cholesterol embolisation",
+      "Vasculitis with cutaneous necrosis",
+      "Antiphospholipid syndrome and other thrombotic microangiopathies",
+      "Necrotising soft-tissue infection",
+      "Peripheral arterial disease with ischaemic ulceration",
+      "Nephrogenic systemic fibrosis"
     ],
-    [
-     "Primary Differentials",
-     "Warfarin-induced skin necrosis, Cholesterol embolisation, Vasculitis with cutaneous necrosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy (used judiciously given ulceration risk) showing medial arteriolar calcification, intimal fibrosis, and thrombosis",
+      "Serum calcium, phosphate, calcium-phosphate product, and parathyroid hormone",
+      "Renal function and dialysis adequacy assessment",
+      "Coagulation studies and screening for protein C or S deficiency and antiphospholipid antibodies",
+      "Review of warfarin and other precipitant medications",
+      "Imaging such as plain radiographs or bone scintigraphy that may reveal soft-tissue vascular calcification"
     ],
-    [
-     "Management Strategy",
-     "Correct the mineral-bone derangement: lower phosphate with non-calcium-based binders, avoid calcium-containing binders and excess",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging necrotic ulcers with surrounding cellulitis and systemic sepsis",
+      "Severe pain disproportionate to visible skin changes signalling early disease",
+      "Truncal or proximal (central) lesions carrying a worse prognosis",
+      "Signs of overwhelming infection in an immunocompromised or dialysis-dependent patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing severe pain before ulceration appears and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition carries high morbidity and mortality, with sepsis from infected necrotic wounds the usual cause of death; central and ulcerated lesions fare worse than distal non-ulcerated disease, though early multidisciplinary intervention can improve outcomes.",
+    "pitfalls": [
+      "Dismissing severe pain before ulceration appears and delaying diagnosis",
+      "Continuing warfarin, which aggravates the disease, when an alternative anticoagulant may be appropriate",
+      "Aggressive debridement or biopsy that can extend non-healing wounds if not carefully weighed",
+      "Failing to address the underlying calcium-phosphate and parathyroid derangement"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "KDIGO clinical practice guidance on CKD-mineral and bone disorder"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the mineral-bone derangement: lower phosphate with non-calcium-based binders, avoid calcium-containing binders and excess vitamin D, and treat hyperparathyroidism with cinacalcet or parathyroidectomy.",
+      "Give intravenous sodium thiosulfate as targeted therapy for the calcific arteriolopathy.",
+      "Stop warfarin and switch to an alternative anticoagulant, and withdraw other precipitants such as calcium and vitamin D loading.",
+      "Optimise dialysis, often intensifying the regimen, in end-stage kidney disease.",
+      "Provide meticulous wound care, surgical debridement where appropriate, and aggressive multimodal analgesia for the severe pain.",
+      "Treat wound infection promptly with antibiotics, recognising sepsis as the leading cause of death.",
+      "Coordinate multidisciplinary care across nephrology, dermatology, wound care, pain and surgical teams."
     ]
-   ],
-   "caption": "Overview comparison matrix for calciphylaxis (calcific uraemic arteriolopathy)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "calciphylaxis-real-image",
-   "title": "Calciphylaxis (calcific uraemic arteriolopathy): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "calciphylaxis-pathway",
+      "title": "Calciphylaxis (calcific uraemic arteriolopathy): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A life-threatening small-vessel disorder in which calcification of dermal and subcutaneous arterioles causes ischaemia, necrosis, and ulceration",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging necrotic ulcers with surrounding cellulitis and systemic sepsis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy (used judiciously given ulceration risk) showing medial arteriolar calcification, intimal fibrosis, and thrombosis, Serum calcium, phosphate, calcium-phosphate product, and parathyroid hormone, Renal function"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the mineral-bone derangement: lower phosphate with non-calcium-based binders, avoid calcium-containing binders and excess vitamin D, and treat hyperparathyroidism with cinacalcet or parathyroidectomy."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing severe pain before ulceration appears and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of calciphylaxis (calcific uraemic arteriolopathy)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "calciphylaxis-matrix",
+      "title": "Calciphylaxis (calcific uraemic arteriolopathy): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A life-threatening small-vessel disorder in which calcification of dermal and subcutaneous arterioles causes ischaemia, necrosis,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy (used judiciously given ulceration risk) showing medial arteriolar calcification, intimal fibrosis, and thrombosis,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Warfarin-induced skin necrosis, Cholesterol embolisation, Vasculitis with cutaneous necrosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the mineral-bone derangement: lower phosphate with non-calcium-based binders, avoid calcium-containing binders and excess",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing severe pain before ulceration appears and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for calciphylaxis (calcific uraemic arteriolopathy)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / KDIGO CKD-MBD guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "calciphylaxis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in calciphylaxis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Skin biopsy", "cells": [{"text": "Medial arteriolar calcification, intimal fibrosis and thrombosis; used judiciously given ulceration risk"}], "cite": "c1"},
+        {"parameter": "Serum calcium, phosphate, calcium-phosphate product and parathyroid hormone", "cells": [{"text": "Mineral-bone derangement and hyperparathyroidism"}], "cite": "c1"},
+        {"parameter": "Renal function and dialysis adequacy", "cells": [{"text": "End-stage kidney disease context"}], "cite": "c1"},
+        {"parameter": "Coagulation studies and antiphospholipid antibodies", "cells": [{"text": "Protein C or S deficiency; thrombotic tendency"}], "cite": "c1"},
+        {"parameter": "Review of warfarin and other precipitants", "cells": [{"text": "Medication-related risk"}], "cite": "c1"},
+        {"parameter": "Plain radiographs or bone scintigraphy", "cells": [{"text": "Soft-tissue vascular calcification"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "calciphylaxis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of cutaneous necrosis",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Warfarin-induced skin necrosis", "cells": [{"text": "Warfarin use is a recognised calciphylaxis precipitant; the drug history separates the two"}], "cite": "c1"},
+        {"parameter": "Necrotising soft-tissue infection", "cells": [{"text": "Overwhelming infection and sepsis; secondary infection is a leading cause of death in calciphylaxis"}], "cite": "c1"},
+        {"parameter": "Peripheral arterial disease with ischaemic ulceration", "cells": [{"text": "Distal, non-calcific ischaemia; calciphylaxis favours adipose areas such as thighs, abdomen and buttocks"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "calciphylaxis-treatment",
+      "kind": "treatment",
+      "title": "Management options in calciphylaxis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Mineral-bone correction", "cells": [{"text": "Lower phosphate with non-calcium binders; avoid calcium binders and excess vitamin D"}, {"text": "Core measure"}], "cite": "c1"},
+        {"parameter": "Hyperparathyroidism", "cells": [{"text": "Cinacalcet or parathyroidectomy"}, {"text": "Treats the driver"}], "cite": "c1"},
+        {"parameter": "Sodium thiosulfate", "cells": [{"text": "Intravenous, as targeted therapy for the calcific arteriolopathy"}, {"text": "Specialist-led"}], "cite": "c1"},
+        {"parameter": "Precipitant withdrawal", "cells": [{"text": "Stop warfarin and switch to an alternative anticoagulant; withdraw calcium and vitamin D loading"}, {"text": "Modifiable risk"}], "cite": "c1"},
+        {"parameter": "Dialysis optimisation", "cells": [{"text": "Intensified regimen in end-stage kidney disease"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Wound care and analgesia", "cells": [{"text": "Meticulous wound care; debridement where appropriate; multimodal analgesia"}, {"text": "Severe pain"}], "cite": "c1"},
+        {"parameter": "Infection", "cells": [{"text": "Prompt antibiotics for wound infection; recognise sepsis as leading cause of death"}, {"text": "Critical"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary care", "cells": [{"text": "Nephrology, dermatology, wound care, pain and surgery"}, {"text": "Coordinated"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "calciphylaxis-dx-mgmt",
+      "title": "Diagnosis and management of calciphylaxis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Exquisitely painful indurated skin plaques in end-stage kidney disease, evolving to necrotic ulcers", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: infected necrotic ulcers, systemic sepsis, or truncal or proximal lesions?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent antibiotics, surgical and wound review, sepsis management", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Serum calcium, phosphate, PTH; coagulation and antiphospholipid screen; biopsy judiciously", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Calcific arteriolopathy supported by biopsy or biochemistry in a patient with kidney failure?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Correct mineral-bone disorder; stop warfarin; sodium thiosulfate; wound care and analgesia", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Consider warfarin necrosis, infection, peripheral arterial disease or other causes", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "High morbidity and mortality; sepsis the usual cause of death; distal lesions fare better", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

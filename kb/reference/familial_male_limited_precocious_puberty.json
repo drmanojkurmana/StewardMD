@@ -1,176 +1,517 @@
 {
- "id": "familial_male_limited_precocious_puberty",
- "name": "Familial male-limited precocious puberty (testotoxicosis, LHCGR)",
- "aliases": [
-  "testotoxicosis",
-  "familial gonadotropin-independent precocious puberty",
-  "LHCGR-activating precocious puberty",
-  "familial male precocious puberty",
-  "FMPP"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive",
- "specialty": "Paediatric & Reproductive Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A gonadotropin-independent cause of precocious puberty affecting boys, with early virilisation (penile and pubic hair growth, accelerated linear growth) usually apparent in the first few years of life",
-   "Testicular enlargement is typically modest and often disproportionately small for the degree of virilisation, because Leydig cells are activated autonomously without the FSH-driven seminiferous tubule growth of true central puberty",
-   "Serum testosterone is elevated to pubertal levels while basal and GnRH-stimulated luteinising hormone and follicle-stimulating hormone are suppressed, confirming that the process is independent of the hypothalamic-pituitary axis",
-   "Inheritance is autosomal dominant with transmission through affected males or unaffected female carriers; girls carrying the same mutation are clinically unaffected because ovarian steroidogenesis requires both LH and FSH signalling",
-   "Bone age is markedly advanced, threatening premature epiphyseal fusion and compromised adult height if untreated",
-   "Medical management is directed at blocking androgen synthesis and action (an aromatase inhibitor to limit oestrogen-driven bone maturation combined with an androgen-receptor antagonist), rather than the GnRH analogues used for central precocious puberty",
-   "Long-standing peripheral sex-steroid exposure can secondarily activate the hypothalamic-pituitary-gonadal axis, converting the picture into mixed or central precocious puberty that then also responds to GnRH analogue therapy"
+  "id": "familial_male_limited_precocious_puberty",
+  "name": "Familial male-limited precocious puberty (testotoxicosis, LHCGR)",
+  "aliases": [
+    "testotoxicosis",
+    "familial gonadotropin-independent precocious puberty",
+    "LHCGR-activating precocious puberty",
+    "familial male precocious puberty",
+    "FMPP"
   ],
-  "pathophysiology": "Familial male-limited precocious puberty is caused by a germline activating (gain-of-function) mutation of the luteinising hormone/choriogonadotropin receptor (LHCGR) expressed on testicular Leydig cells. The mutant receptor signals constitutively through the cAMP pathway in the absence of ligand, driving autonomous testosterone production and Leydig cell activity that are entirely independent of pituitary gonadotropins. Because ovarian oestrogen synthesis requires cooperative FSH and LH action, isolated LH-receptor activation does not cause precocity in females, explaining the male-limited phenotype. The resulting early androgen exposure produces virilisation and rapid skeletal maturation, and sustained peripheral sex steroids may eventually prime the hypothalamus, superimposing true central precocious puberty.",
-  "additionalDifferentials": [
-   "Central (gonadotropin-dependent) precocious puberty from hypothalamic-pituitary activation",
-   "Congenital adrenal hyperplasia or a virilising adrenal tumour",
-   "Leydig cell tumour of the testis producing androgens",
-   "Human chorionic gonadotropin-secreting tumour (e.g. hepatoblastoma, germ cell tumour) stimulating the LH receptor",
-   "McCune-Albright syndrome with autonomous gonadal activation",
-   "Exogenous androgen exposure"
-  ],
-  "additionalInvestigations": [
-   "Serum testosterone (elevated) with basal LH and FSH (suppressed)",
-   "GnRH (LHRH) stimulation test showing a prepubertal, suppressed gonadotropin response",
-   "Bone-age radiograph of the left hand and wrist to quantify skeletal advancement",
-   "Adrenal androgen profile (17-hydroxyprogesterone, DHEAS, androstenedione) to exclude adrenal causes",
-   "Beta-hCG measurement to exclude an hCG-secreting tumour",
-   "Molecular genetic testing for an activating LHCGR mutation and family screening"
-  ],
-  "redFlags": [
-   "Rapidly advancing bone age threatening early epiphyseal closure and short adult stature",
-   "Signs suggesting an alternative or additional pathology, such as a palpable testicular or abdominal mass",
-   "Very high testosterone with virilisation disproportionate to a familial pattern, prompting a tumour search",
-   "Emergence of significant testicular enlargement suggesting secondary central puberty superimposed on the primary disorder"
-  ],
-  "prognosis": "With early recognition and combined androgen-blocking therapy, virilisation is controlled and skeletal maturation slowed, preserving adult height potential; untreated disease leads to accelerated bone maturation, premature fusion, and compromised final height, though fertility in adulthood is often preserved.",
-  "pitfalls": [
-   "Reaching for GnRH analogues first, which are ineffective in the gonadotropin-independent phase and only help once secondary central puberty develops",
-   "Misreading small testes with marked virilisation as evidence against precocious puberty",
-   "Overlooking the diagnosis in a boy without a clear family history, as de novo mutations occur",
-   "Failing to reassess for superimposed central precocious puberty during follow-up",
-   "Attributing all early virilisation to adrenal causes without a GnRH stimulation test"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Block peripheral androgen action and synthesis using an androgen-receptor antagonist (such as bicalutamide or spironolactone) combined with an aromatase inhibitor to curb oestrogen-driven skeletal maturation",
-   "Consider a steroidogenesis inhibitor such as ketoconazole as an adjunct to suppress autonomous testosterone production",
-   "Monitor growth velocity, bone age and predicted adult height to guide therapy and preserve height potential",
-   "Add a GnRH analogue if sustained androgen exposure superimposes secondary central precocious puberty",
-   "Provide psychological and developmental support for the child and family addressing early virilisation",
-   "Undertake molecular LHCGR testing and genetic counselling, noting female carriers are clinically unaffected but transmit the trait",
-   "Maintain paediatric endocrinology follow-up through puberty with attention to later fertility"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_male_limited_precocious_puberty-pathway",
-   "title": "Familial male-limited precocious puberty (testotoxicosis, LHCGR): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A gonadotropin-independent cause of precocious puberty affecting boys, with early virilisation (penile and pubic hair growth, accelerated linear growth) usually apparent in the first few years of life",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly advancing bone age threatening early epiphyseal closure and short adult stature",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum testosterone (elevated) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation test showing a prepubertal, suppressed gonadotropin response, Bone-age radiograph of the left hand and wrist to quantify skeletal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Block peripheral androgen action and synthesis using an androgen-receptor antagonist (such as bicalutamide or spironolactone) combined with an aromatase inhibitor to curb oestrogen-driven skeletal maturation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reaching for GnRH analogues first, which are ineffective in the gonadotropin-independent phase and only help once secondary central puberty develops"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial male-limited precocious puberty (testotoxicosis, lhcgr)."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_male_limited_precocious_puberty-matrix",
-   "title": "Familial male-limited precocious puberty (testotoxicosis, LHCGR): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A gonadotropin-independent cause of precocious puberty affecting boys, with early virilisation (penile and pubic hair growth,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive",
+  "specialty": "Paediatric & Reproductive Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A gonadotropin-independent cause of precocious puberty affecting boys, with early virilisation (penile and pubic hair growth, accelerated linear growth) usually apparent in the first few years of life",
+      "Testicular enlargement is typically modest and often disproportionately small for the degree of virilisation, because Leydig cells are activated autonomously without the FSH-driven seminiferous tubule growth of true central puberty",
+      "Serum testosterone is elevated to pubertal levels while basal and GnRH-stimulated luteinising hormone and follicle-stimulating hormone are suppressed, confirming that the process is independent of the hypothalamic-pituitary axis",
+      "Inheritance is autosomal dominant with transmission through affected males or unaffected female carriers; girls carrying the same mutation are clinically unaffected because ovarian steroidogenesis requires both LH and FSH signalling",
+      "Bone age is markedly advanced, threatening premature epiphyseal fusion and compromised adult height if untreated",
+      "Medical management is directed at blocking androgen synthesis and action (an aromatase inhibitor to limit oestrogen-driven bone maturation combined with an androgen-receptor antagonist), rather than the GnRH analogues used for central precocious puberty",
+      "Long-standing peripheral sex-steroid exposure can secondarily activate the hypothalamic-pituitary-gonadal axis, converting the picture into mixed or central precocious puberty that then also responds to GnRH analogue therapy"
     ],
-    [
-     "Key Investigations",
-     "Serum testosterone (elevated) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation test showing a prepubertal, suppressed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Familial male-limited precocious puberty is caused by a germline activating (gain-of-function) mutation of the luteinising hormone/choriogonadotropin receptor (LHCGR) expressed on testicular Leydig cells. The mutant receptor signals constitutively through the cAMP pathway in the absence of ligand, driving autonomous testosterone production and Leydig cell activity that are entirely independent of pituitary gonadotropins. Because ovarian oestrogen synthesis requires cooperative FSH and LH action, isolated LH-receptor activation does not cause precocity in females, explaining the male-limited phenotype. The resulting early androgen exposure produces virilisation and rapid skeletal maturation, and sustained peripheral sex steroids may eventually prime the hypothalamus, superimposing true central precocious puberty.",
+    "additionalDifferentials": [
+      "Central (gonadotropin-dependent) precocious puberty from hypothalamic-pituitary activation",
+      "Congenital adrenal hyperplasia or a virilising adrenal tumour",
+      "Leydig cell tumour of the testis producing androgens",
+      "Human chorionic gonadotropin-secreting tumour (e.g. hepatoblastoma, germ cell tumour) stimulating the LH receptor",
+      "McCune-Albright syndrome with autonomous gonadal activation",
+      "Exogenous androgen exposure"
     ],
-    [
-     "Primary Differentials",
-     "Central (gonadotropin-dependent) precocious puberty from hypothalamic-pituitary activation, Congenital adrenal hyperplasia or a",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum testosterone (elevated) with basal LH and FSH (suppressed)",
+      "GnRH (LHRH) stimulation test showing a prepubertal, suppressed gonadotropin response",
+      "Bone-age radiograph of the left hand and wrist to quantify skeletal advancement",
+      "Adrenal androgen profile (17-hydroxyprogesterone, DHEAS, androstenedione) to exclude adrenal causes",
+      "Beta-hCG measurement to exclude an hCG-secreting tumour",
+      "Molecular genetic testing for an activating LHCGR mutation and family screening"
     ],
-    [
-     "Management Strategy",
-     "Block peripheral androgen action and synthesis using an androgen-receptor antagonist (such as bicalutamide or spironolactone)",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly advancing bone age threatening early epiphyseal closure and short adult stature",
+      "Signs suggesting an alternative or additional pathology, such as a palpable testicular or abdominal mass",
+      "Very high testosterone with virilisation disproportionate to a familial pattern, prompting a tumour search",
+      "Emergence of significant testicular enlargement suggesting secondary central puberty superimposed on the primary disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Reaching for GnRH analogues first, which are ineffective in the gonadotropin-independent phase and only help once secondary",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early recognition and combined androgen-blocking therapy, virilisation is controlled and skeletal maturation slowed, preserving adult height potential; untreated disease leads to accelerated bone maturation, premature fusion, and compromised final height, though fertility in adulthood is often preserved.",
+    "pitfalls": [
+      "Reaching for GnRH analogues first, which are ineffective in the gonadotropin-independent phase and only help once secondary central puberty develops",
+      "Misreading small testes with marked virilisation as evidence against precocious puberty",
+      "Overlooking the diagnosis in a boy without a clear family history, as de novo mutations occur",
+      "Failing to reassess for superimposed central precocious puberty during follow-up",
+      "Attributing all early virilisation to adrenal causes without a GnRH stimulation test"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Block peripheral androgen action and synthesis using an androgen-receptor antagonist (such as bicalutamide or spironolactone) combined with an aromatase inhibitor to curb oestrogen-driven skeletal maturation",
+      "Consider a steroidogenesis inhibitor such as ketoconazole as an adjunct to suppress autonomous testosterone production",
+      "Monitor growth velocity, bone age and predicted adult height to guide therapy and preserve height potential",
+      "Add a GnRH analogue if sustained androgen exposure superimposes secondary central precocious puberty",
+      "Provide psychological and developmental support for the child and family addressing early virilisation",
+      "Undertake molecular LHCGR testing and genetic counselling, noting female carriers are clinically unaffected but transmit the trait",
+      "Maintain paediatric endocrinology follow-up through puberty with attention to later fertility"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial male-limited precocious puberty (testotoxicosis, lhcgr)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-male-limited-precocious-puberty-real-image",
-   "title": "Familial male-limited precocious puberty (testotoxicosis, LHCGR): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "familial_male_limited_precocious_puberty-pathway",
+      "title": "Familial male-limited precocious puberty (testotoxicosis, LHCGR): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A gonadotropin-independent cause of precocious puberty affecting boys, with early virilisation (penile and pubic hair growth, accelerated linear growth) usually apparent in the first few years of life",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly advancing bone age threatening early epiphyseal closure and short adult stature",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum testosterone (elevated) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation test showing a prepubertal, suppressed gonadotropin response, Bone-age radiograph of the left hand and wrist to quantify skeletal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Block peripheral androgen action and synthesis using an androgen-receptor antagonist (such as bicalutamide or spironolactone) combined with an aromatase inhibitor to curb oestrogen-driven skeletal maturation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reaching for GnRH analogues first, which are ineffective in the gonadotropin-independent phase and only help once secondary central puberty develops"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial male-limited precocious puberty (testotoxicosis, lhcgr)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_male_limited_precocious_puberty-matrix",
+      "title": "Familial male-limited precocious puberty (testotoxicosis, LHCGR): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A gonadotropin-independent cause of precocious puberty affecting boys, with early virilisation (penile and pubic hair growth,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum testosterone (elevated) with basal LH and FSH (suppressed), GnRH (LHRH) stimulation test showing a prepubertal, suppressed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Central (gonadotropin-dependent) precocious puberty from hypothalamic-pituitary activation, Congenital adrenal hyperplasia or a",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Block peripheral androgen action and synthesis using an androgen-receptor antagonist (such as bicalutamide or spironolactone)",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reaching for GnRH analogues first, which are ineffective in the gonadotropin-independent phase and only help once secondary",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial male-limited precocious puberty (testotoxicosis, lhcgr)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 347-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_male_limited_precocious_puberty-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum testosterone with basal LH and FSH",
+          "cells": [
+            {
+              "text": "Testosterone elevated; gonadotropins suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GnRH stimulation test",
+          "cells": [
+            {
+              "text": "Prepubertal, suppressed gonadotropin response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-age radiograph of the left hand and wrist",
+          "cells": [
+            {
+              "text": "Skeletal advancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal androgen profile (17-hydroxyprogesterone, DHEAS, androstenedione)",
+          "cells": [
+            {
+              "text": "Excludes adrenal causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-hCG measurement",
+          "cells": [
+            {
+              "text": "Excludes an hCG-secreting tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LHCGR molecular testing and family screening",
+          "cells": [
+            {
+              "text": "Activating mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_male_limited_precocious_puberty-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central precocious puberty",
+          "cells": [
+            {
+              "text": "Gonadotropin-dependent; the GnRH test separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia or virilising adrenal tumour",
+          "cells": [
+            {
+              "text": "Adrenal androgen profile excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "hCG-secreting tumour",
+          "cells": [
+            {
+              "text": "Beta-hCG excludes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_male_limited_precocious_puberty-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Androgen-receptor antagonist with aromatase inhibitor",
+          "cells": [
+            {
+              "text": "Bicalutamide or spironolactone with an aromatase inhibitor to block androgen action and synthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroidogenesis inhibitor as adjunct",
+          "cells": [
+            {
+              "text": "Ketoconazole to suppress autonomous testosterone production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and bone-age monitoring",
+          "cells": [
+            {
+              "text": "Predicted adult height guides therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GnRH analogue if secondary central puberty develops",
+          "cells": [
+            {
+              "text": "Added when sustained androgen exposure activates the axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological and developmental support",
+          "cells": [
+            {
+              "text": "Early virilisation affects the child and family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LHCGR testing and genetic counselling",
+          "cells": [
+            {
+              "text": "Female carriers are unaffected but transmit the trait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric endocrinology follow-up",
+          "cells": [
+            {
+              "text": "Through puberty, with attention to later fertility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_male_limited_precocious_puberty-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Differential diagnosis of precocious puberty",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Central (GnRH dependent)",
+          "cells": [
+            {
+              "text": "Idiopathic; CNS tumors (hamartomas, astrocytomas, adenomyomas, gliomas, germinomas); CNS infection; head trauma; iatrogenic (radiation, chemotherapy, surgical); CNS malformation (arachnoid or suprasellar cysts, septo-optic dysplasia, hydrocephalus)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral (GnRH independent)",
+          "cells": [
+            {
+              "text": "Congenital adrenal hyperplasia; estrogen-producing tumors (adrenal, ovarian); gonadotropin or hCG-producing tumors; exogenous exposure to estrogen or androgen; McCune-Albright syndrome; aromatase excess syndrome"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_male_limited_precocious_puberty-dx-mgmt",
+      "title": "Diagnosis and management of Familial male-limited precocious puberty (testotoxicosis, LHCGR)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early virilisation and advanced bone age in a boy, with small testes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (testicular or abdominal mass, very high testosterone, fast bone age)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Paediatric endocrinology review; tumour search for mass or disproportionate virilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Testosterone; LH and FSH; GnRH test; bone age; adrenal profile; beta-hCG; LHCGR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gonadotropin-independent testosterone excess with activating LHCGR variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider central precocious puberty, adrenal cause, Leydig tumour or hCG tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Androgen-receptor antagonist with aromatase inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ketoconazole as adjunct to suppress testosterone production",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor growth velocity, bone age and predicted adult height",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "GnRH analogue if secondary central puberty develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "LHCGR testing and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With early treatment, virilisation is controlled and adult height potential is preserved",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,461 @@
 {
- "id": "superficial_fibromatosis",
- "name": "Superficial fibromatosis",
- "aliases": [
-  "Palmar fibromatosis (Dupuytren disease)",
-  "Plantar fibromatosis (Ledderhose disease)"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Soft tissue",
- "specialty": "Hand surgery / Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Soft Tissue and Bone Tumours / Green's Operative Hand Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign fibroblastic and myofibroblastic proliferation of the palmar (Dupuytren) or plantar (Ledderhose) aponeurosis",
-   "Palmar disease typically affects the ring and little finger rays, progressing from nodules to cords and ultimately a fixed flexion contracture",
-   "It is commonest in older men of Northern European ancestry and is associated with diabetes, alcohol, smoking, antiepileptic use, and manual labour",
-   "Plantar fibromatosis produces firm nodules in the arch of the foot but far less often leads to contracture than its palmar counterpart",
-   "A strong diathesis is suggested by early onset, bilateral disease, knuckle pads (Garrod pads), and coexistent plantar or penile (Peyronie) fibromatosis",
-   "Microscopically there are cellular fascicles of bland myofibroblasts, many showing nuclear beta-catenin expression",
-   "Early or non-contractile disease is managed conservatively, with needle aponeurotomy, collagenase injection, or fasciectomy reserved for functionally limiting contracture",
-   "Recurrence after intervention is common, reflecting the field nature of the disease"
+  "id": "superficial_fibromatosis",
+  "name": "Superficial fibromatosis",
+  "aliases": [
+    "Palmar fibromatosis (Dupuytren disease)",
+    "Plantar fibromatosis (Ledderhose disease)"
   ],
-  "pathophysiology": "Superficial fibromatosis is a benign but locally persistent proliferation of myofibroblasts within the palmar or plantar aponeurosis. The process evolves through a proliferative phase of cellular nodules, an involutional phase in which myofibroblasts align and contract, and a residual phase of dense, relatively acellular collagen forming cords. Myofibroblast contraction, mediated by their smooth muscle-like contractile apparatus and by remodelling of the surrounding collagen, produces the progressive flexion deformity that characterises palmar disease. Dysregulated Wnt and beta-catenin signalling, together with profibrotic growth factors, is implicated in driving the proliferation, and many lesions show nuclear beta-catenin. A genetic predisposition interacts with metabolic and lifestyle factors such as diabetes, alcohol, and smoking, explaining the familial clustering and the recognised disease associations.",
-  "additionalDifferentials": [
-   "Desmoid-type (deep) fibromatosis",
-   "Stenosing tenosynovitis or trigger finger",
-   "Ganglion or tendon sheath cyst",
-   "Giant cell tumour of the tendon sheath",
-   "Callus, plantar fibroma mimics, or foreign body granuloma in the foot",
-   "Epithelioid sarcoma or other soft tissue malignancy in atypical cases"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination including the tabletop test for palmar contracture",
-   "Goniometric measurement of joint contracture to monitor progression",
-   "Ultrasound or MRI to define nodules and cords when the picture is atypical",
-   "Histology in resected specimens to confirm the diagnosis and exclude a deep fibromatosis or sarcoma",
-   "Assessment for associated knuckle pads and plantar or penile involvement",
-   "Screening for associated conditions such as diabetes where clinically indicated"
-  ],
-  "redFlags": [
-   "Rapid growth, pain, or a deep or fixed mass suggesting deep fibromatosis or malignancy",
-   "Severe progressive contracture threatening hand function",
-   "Atypical location or appearance not fitting classic palmar or plantar disease",
-   "Recurrent or aggressive disease after multiple interventions"
-  ],
-  "prognosis": "Superficial fibromatosis is benign and does not metastasise, but it is often progressive and recurrent, and palmar disease in particular can cause substantial functional disability from fixed contracture. Outcome after treatment depends on disease severity and the strength of the underlying diathesis, with recurrence being frequent.",
-  "pitfalls": [
-   "Mistaking a palmar or plantar nodule for a ganglion or a soft tissue sarcoma",
-   "Intervening too early before a functionally significant contracture has developed",
-   "Underestimating the high recurrence rate when counselling patients before surgery",
-   "Failing to recognise a strong diathesis and its implications for prognosis and recurrence"
-  ],
-  "references": [
-   "WHO Classification of Soft Tissue and Bone Tumours",
-   "Green's Operative Hand Surgery",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe mild, non-progressive disease with periodic goniometric assessment, reserving intervention for functionally significant contracture",
-   "Treat progressive palmar (Dupuytren) contracture with percutaneous needle aponeurotomy, collagenase injection or surgical fasciectomy",
-   "Consider radiotherapy in early proliferative nodular disease to slow progression",
-   "Manage plantar (Ledderhose) disease with cushioning orthotics, padding and physiotherapy, reserving surgery for refractory cases",
-   "Provide postprocedural hand therapy and night splinting to maintain extension",
-   "Address associated factors such as diabetes, alcohol and smoking, and counsel on the high recurrence risk where a strong diathesis exists",
-   "Refer to a hand surgeon for assessment when contracture limits function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "superficial_fibromatosis-pathway",
-   "title": "Superficial fibromatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign fibroblastic and myofibroblastic proliferation of the palmar (Dupuytren) or plantar (Ledderhose) aponeurosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, pain, or a deep or fixed mass suggesting deep fibromatosis or malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination including the tabletop test for palmar contracture, Goniometric measurement of joint contracture to monitor progression, Ultrasound or MRI to define nodules and cords when the picture is atypical"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe mild, non-progressive disease with periodic goniometric assessment, reserving intervention for functionally significant contracture"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a palmar or plantar nodule for a ganglion or a soft tissue sarcoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of superficial fibromatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "superficial_fibromatosis-matrix",
-   "title": "Superficial fibromatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign fibroblastic and myofibroblastic proliferation of the palmar (Dupuytren) or plantar (Ledderhose) aponeurosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Soft tissue",
+  "specialty": "Hand surgery / Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Soft Tissue and Bone Tumours / Green's Operative Hand Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign fibroblastic and myofibroblastic proliferation of the palmar (Dupuytren) or plantar (Ledderhose) aponeurosis",
+      "Palmar disease typically affects the ring and little finger rays, progressing from nodules to cords and ultimately a fixed flexion contracture",
+      "It is commonest in older men of Northern European ancestry and is associated with diabetes, alcohol, smoking, antiepileptic use, and manual labour",
+      "Plantar fibromatosis produces firm nodules in the arch of the foot but far less often leads to contracture than its palmar counterpart",
+      "A strong diathesis is suggested by early onset, bilateral disease, knuckle pads (Garrod pads), and coexistent plantar or penile (Peyronie) fibromatosis",
+      "Microscopically there are cellular fascicles of bland myofibroblasts, many showing nuclear beta-catenin expression",
+      "Early or non-contractile disease is managed conservatively, with needle aponeurotomy, collagenase injection, or fasciectomy reserved for functionally limiting contracture",
+      "Recurrence after intervention is common, reflecting the field nature of the disease"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination including the tabletop test for palmar contracture, Goniometric measurement of joint contracture to monitor",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Superficial fibromatosis is a benign but locally persistent proliferation of myofibroblasts within the palmar or plantar aponeurosis. The process evolves through a proliferative phase of cellular nodules, an involutional phase in which myofibroblasts align and contract, and a residual phase of dense, relatively acellular collagen forming cords. Myofibroblast contraction, mediated by their smooth muscle-like contractile apparatus and by remodelling of the surrounding collagen, produces the progressive flexion deformity that characterises palmar disease. Dysregulated Wnt and beta-catenin signalling, together with profibrotic growth factors, is implicated in driving the proliferation, and many lesions show nuclear beta-catenin. A genetic predisposition interacts with metabolic and lifestyle factors such as diabetes, alcohol, and smoking, explaining the familial clustering and the recognised disease associations.",
+    "additionalDifferentials": [
+      "Desmoid-type (deep) fibromatosis",
+      "Stenosing tenosynovitis or trigger finger",
+      "Ganglion or tendon sheath cyst",
+      "Giant cell tumour of the tendon sheath",
+      "Callus, plantar fibroma mimics, or foreign body granuloma in the foot",
+      "Epithelioid sarcoma or other soft tissue malignancy in atypical cases"
     ],
-    [
-     "Primary Differentials",
-     "Desmoid-type (deep) fibromatosis, Stenosing tenosynovitis or trigger finger, Ganglion or tendon sheath cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination including the tabletop test for palmar contracture",
+      "Goniometric measurement of joint contracture to monitor progression",
+      "Ultrasound or MRI to define nodules and cords when the picture is atypical",
+      "Histology in resected specimens to confirm the diagnosis and exclude a deep fibromatosis or sarcoma",
+      "Assessment for associated knuckle pads and plantar or penile involvement",
+      "Screening for associated conditions such as diabetes where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Observe mild, non-progressive disease with periodic goniometric assessment, reserving intervention for functionally significant",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, pain, or a deep or fixed mass suggesting deep fibromatosis or malignancy",
+      "Severe progressive contracture threatening hand function",
+      "Atypical location or appearance not fitting classic palmar or plantar disease",
+      "Recurrent or aggressive disease after multiple interventions"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a palmar or plantar nodule for a ganglion or a soft tissue sarcoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Superficial fibromatosis is benign and does not metastasise, but it is often progressive and recurrent, and palmar disease in particular can cause substantial functional disability from fixed contracture. Outcome after treatment depends on disease severity and the strength of the underlying diathesis, with recurrence being frequent.",
+    "pitfalls": [
+      "Mistaking a palmar or plantar nodule for a ganglion or a soft tissue sarcoma",
+      "Intervening too early before a functionally significant contracture has developed",
+      "Underestimating the high recurrence rate when counselling patients before surgery",
+      "Failing to recognise a strong diathesis and its implications for prognosis and recurrence"
+    ],
+    "references": [
+      "WHO Classification of Soft Tissue and Bone Tumours",
+      "Green's Operative Hand Surgery",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe mild, non-progressive disease with periodic goniometric assessment, reserving intervention for functionally significant contracture",
+      "Treat progressive palmar (Dupuytren) contracture with percutaneous needle aponeurotomy, collagenase injection or surgical fasciectomy",
+      "Consider radiotherapy in early proliferative nodular disease to slow progression",
+      "Manage plantar (Ledderhose) disease with cushioning orthotics, padding and physiotherapy, reserving surgery for refractory cases",
+      "Provide postprocedural hand therapy and night splinting to maintain extension",
+      "Address associated factors such as diabetes, alcohol and smoking, and counsel on the high recurrence risk where a strong diathesis exists",
+      "Refer to a hand surgeon for assessment when contracture limits function"
     ]
-   ],
-   "caption": "Overview comparison matrix for superficial fibromatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "superficial-fibromatosis-real-image",
-   "title": "Superficial fibromatosis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "superficial_fibromatosis-pathway",
+      "title": "Superficial fibromatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign fibroblastic and myofibroblastic proliferation of the palmar (Dupuytren) or plantar (Ledderhose) aponeurosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, pain, or a deep or fixed mass suggesting deep fibromatosis or malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination including the tabletop test for palmar contracture, Goniometric measurement of joint contracture to monitor progression, Ultrasound or MRI to define nodules and cords when the picture is atypical"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe mild, non-progressive disease with periodic goniometric assessment, reserving intervention for functionally significant contracture"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a palmar or plantar nodule for a ganglion or a soft tissue sarcoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of superficial fibromatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "superficial_fibromatosis-matrix",
+      "title": "Superficial fibromatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign fibroblastic and myofibroblastic proliferation of the palmar (Dupuytren) or plantar (Ledderhose) aponeurosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination including the tabletop test for palmar contracture, Goniometric measurement of joint contracture to monitor",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Desmoid-type (deep) fibromatosis, Stenosing tenosynovitis or trigger finger, Ganglion or tendon sheath cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe mild, non-progressive disease with periodic goniometric assessment, reserving intervention for functionally significant",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a palmar or plantar nodule for a ganglion or a soft tissue sarcoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for superficial fibromatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "superficial_fibromatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Tabletop test and clinical examination",
+          "cells": [
+            {
+              "text": "Palmar contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Goniometric measurement",
+          "cells": [
+            {
+              "text": "Joint contracture over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Nodules and cords when atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of resected specimen",
+          "cells": [
+            {
+              "text": "Excludes deep fibromatosis or sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for knuckle pads and plantar or penile disease",
+          "cells": [
+            {
+              "text": "Strong diathesis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superficial_fibromatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Desmoid-type (deep) fibromatosis",
+          "cells": [
+            {
+              "text": "Deep, fixed mass; histology separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stenosing tenosynovitis or trigger finger",
+          "cells": [
+            {
+              "text": "Digital locking rather than cords"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ganglion or tendon sheath cyst",
+          "cells": [
+            {
+              "text": "Cystic swelling rather than fibrous cords"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "superficial_fibromatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation with goniometric assessment",
+          "cells": [
+            {
+              "text": "Mild, non-progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle aponeurotomy, collagenase or fasciectomy",
+          "cells": [
+            {
+              "text": "Progressive palmar contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Early proliferative nodular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cushioning orthotics, padding and physiotherapy",
+          "cells": [
+            {
+              "text": "Plantar disease; surgery for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postprocedural hand therapy and night splinting",
+          "cells": [
+            {
+              "text": "Maintains extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address diabetes, alcohol and smoking",
+          "cells": [
+            {
+              "text": "Associated factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand surgeon referral",
+          "cells": [
+            {
+              "text": "Contracture limits function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "superficial_fibromatosis-dx-mgmt",
+      "title": "Diagnosis and management of Superficial fibromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm palmar nodules progressing to cords and finger contracture: suspected Dupuytren",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, deep fixed mass, severe progressive contracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for a suspected deep fibromatosis or soft tissue sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tabletop test; goniometry; ultrasound or MRI if atypical; histology if resected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are palmar nodules and cords seen, with a contracture on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider trigger finger, ganglion or deep fibromatosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe mild disease and intervene only for functional contracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Needle aponeurotomy, collagenase or fasciectomy for progressive palmar disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radiotherapy in early proliferative nodular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand therapy and night splinting after procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrence is common, reflecting the field nature of the disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

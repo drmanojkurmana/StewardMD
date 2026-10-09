@@ -288,25 +288,963 @@
       "caption": "Diagnostic and clinical overview matrix for brain abscess."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "brain-abscess-real-image",
-      "title": "Brain Abscess: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Brain Abscess",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/brain-infections/brain-abscess",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 381-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 164-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 136-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "BRAIN_ABSCESS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in brain abscess",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Classic triad (headache, fever, focal deficit)",
+          "cells": [
+            {
+              "text": "Present in fewer than half of patients"
+            },
+            {
+              "text": "{{hy:Absence of the triad does not exclude abscess}}"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Headache",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "More than 75% of patients",
+              "op": ">",
+              "value": 75
+            },
+            {
+              "text": "Most common symptom; dull, progressive, refractory"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Fever",
+          "cells": [
+            {
+              "text": "Present in about half at diagnosis"
+            },
+            {
+              "text": "Afebrile course does not rule it out"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Time from symptom onset to presentation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Commonly about 11 to 12 days",
+              "range": [
+                11,
+                12
+              ]
+            },
+            {
+              "text": "Behaves like an expanding mass lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 35%",
+              "value": 35,
+              "op": "="
+            },
+            {
+              "text": "Focal or generalized"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral leukocytosis",
+          "cells": [
+            {
+              "text": "About half of patients"
+            },
+            {
+              "text": "Normal count does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised ESR",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 60%",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Nonspecific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised C-reactive protein",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 80%",
+              "op": "=",
+              "value": 80
+            },
+            {
+              "text": "Most sensitive of the routine markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast MRI with diffusion-weighted imaging",
+          "cells": [
+            {
+              "text": "Ring-enhancing lesion with restricted diffusion (high DWI, low ADC) in the cavity"
+            },
+            {
+              "text": "{{hy:Preferred test; separates abscess from necrotic tumour}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT",
+          "cells": [
+            {
+              "text": "Edematous mass with ring enhancement"
+            },
+            {
+              "text": "Use when MRI is unavailable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lumbar puncture",
+          "cells": [
+            {
+              "text": "Not done"
+            },
+            {
+              "text": "{{hy:Risk of transtentorial herniation; CSF findings nonspecific}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aspirate of abscess",
+          "cells": [
+            {
+              "text": "Gram stain plus aerobic, anaerobic, mycobacterial and fungal cultures"
+            },
+            {
+              "text": "Definitive microbiology; guides targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stage on imaging",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Cerebritis days 1 to 9; capsule from day 10 onward",
+              "range": [
+                1,
+                14
+              ]
+            },
+            {
+              "text": "Ring enhancement appears with early capsule formation (days 10 to 13)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison gives symptom and lab frequencies; Merck gives no frequencies. Glucocorticoids can change the imaging appearance of the capsule."
+    },
+    {
+      "id": "BRAIN_ABSCESS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic brain abscess",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary or metastatic brain tumour",
+          "cells": [
+            {
+              "text": "Main consideration when fever is absent; necrotic core usually lacks restricted diffusion"
+            },
+            {
+              "text": "{{hy:Diffusion-weighted MRI with ADC map}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral infarction or haematoma",
+          "cells": [
+            {
+              "text": "Can resemble abscess on CT or MRI"
+            },
+            {
+              "text": "MRI with diffusion imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subdural empyema",
+          "cells": [
+            {
+              "text": "Extra-axial collection, often from sinusitis"
+            },
+            {
+              "text": "MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial meningitis",
+          "cells": [
+            {
+              "text": "Meningismus prominent; abscess usually lacks it unless ruptured into ventricle"
+            },
+            {
+              "text": "Imaging first, then CSF only if no mass lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral toxoplasmosis",
+          "cells": [
+            {
+              "text": "Ring-enhancing lesions in HIV or other immunocompromised hosts"
+            },
+            {
+              "text": "Serum Toxoplasma IgG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocysticercosis",
+          "cells": [
+            {
+              "text": "New partial seizures; exposure in endemic areas"
+            },
+            {
+              "text": "Enzyme-linked immunotransfer blot and funduscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculoma",
+          "cells": [
+            {
+              "text": "Major cause of focal CNS mass lesions in India and East Asia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute disseminated encephalomyelitis",
+          "cells": [
+            {
+              "text": "Non-infective demyelinating mimic"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral meningoencephalitis",
+          "cells": [
+            {
+              "text": "Diffuse encephalitic picture rather than focal mass"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Separating tests marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "BRAIN_ABSCESS-treatment",
+      "kind": "treatment",
+      "title": "Management of bacterial brain abscess",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent empiric antibiotics",
+          "cells": [
+            {
+              "text": "Septic patients, neurological deterioration or significant mass effect"
+            },
+            {
+              "text": "Do not wait for culture in these patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cefotaxime or ceftriaxone",
+          "cells": [
+            {
+              "text": "Empiric backbone"
+            },
+            {
+              "text": "Source gives no dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add metronidazole",
+          "cells": [
+            {
+              "text": "Bacteroides or anaerobes suspected"
+            },
+            {
+              "text": "Most abscesses are anaerobic or mixed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add vancomycin",
+          "cells": [
+            {
+              "text": "Staphylococcus aureus suspected (trauma, neurosurgery, endocarditis)"
+            },
+            {
+              "text": "Source gives no dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stereotactic aspiration or open drainage",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "{{hy:Most solitary accessible abscesses, especially over 2 cm}}",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Also yields pus for culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotics alone with close imaging",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Abscess under 2 cm",
+              "op": "<",
+              "value": 2
+            },
+            {
+              "text": "Image every 2 to 3 days initially; drain if it enlarges"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotic duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Minimum 4 to 8 weeks",
+              "range": [
+                4,
+                8
+              ]
+            },
+            {
+              "text": "Follow with serial MRI or CT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dexamethasone, short high-dose IV course",
+          "cells": [
+            {
+              "text": "Raised intracranial pressure"
+            },
+            {
+              "text": "Source gives no dose; may alter imaging appearance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Often used to prevent seizures"
+            },
+            {
+              "text": "Seizure risk about 35%; no agent named in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lifelong antimicrobials",
+          "cells": [
+            {
+              "text": "Immunocompromised patients with Toxoplasma or fungal abscess"
+            },
+            {
+              "text": "Suppressive therapy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doses are not given because the sources opened do not state them. Mortality is under 15% in recent series; sequelae in at least 20% of survivors (Harrison)."
+    },
+    {
+      "id": "BRAIN_ABSCESS-treatment-2",
+      "kind": "treatment",
+      "title": "Empirical antibiotics by patient group for bacterial meningitis and focal CNS infection",
+      "rowHeader": "Option",
+      "columns": [
+        "Antibiotic"
+      ],
+      "rows": [
+        {
+          "parameter": "Preterm infants to infants under 1 month",
+          "cells": [
+            {
+              "text": "Ampicillin + cefotaxime"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Infants 1 to 3 months",
+          "cells": [
+            {
+              "text": "Ampicillin + cefotaxime or ceftriaxone"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Immunocompetent children over 3 months and adults under 55",
+          "cells": [
+            {
+              "text": "Cefotaxime, ceftriaxone or cefepime, + vancomycin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Adults over 55, and adults of any age with alcoholism or other debilitating illness",
+          "cells": [
+            {
+              "text": "Ampicillin + cefotaxime, ceftriaxone or cefepime, + vancomycin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hospital-acquired, posttraumatic or postneurosurgery meningitis, neutropenic patients, or impaired cell-mediated immunity",
+          "cells": [
+            {
+              "text": "Ampicillin + ceftazidime or meropenem, + vancomycin"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Footnote (a) was marked on the table title; its text was not shown on the printed page."
+    },
+    {
+      "id": "BRAIN_ABSCESS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Anaerobic human flora by anatomic site",
+      "rowHeader": "Anatomic site",
+      "columns": [
+        "Total bacteria",
+        "Anaerobic/aerobic ratio",
+        "Potential pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral cavity: saliva",
+          "cells": [
+            {
+              "text": "10^8 to 10^9"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Fusobacterium nucleatum, Prevotella melaninogenica, Prevotella oralis group, Bacteroides ureolyticus group, Peptostreptococcus spp. (listed for the oral cavity as a whole)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oral cavity: tooth surface",
+          "cells": [
+            {
+              "text": "10^10 to 10^11"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oral cavity: gingival crevices",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the oral cavity above"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gastrointestinal tract: stomach",
+          "cells": [
+            {
+              "text": "0 to 10^5"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "Bacteroides spp. (principally the B. fragilis group), Prevotella spp., Clostridium spp., Peptostreptococcus spp. (listed for the GI tract as a whole)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gastrointestinal tract: jejunum/ileum",
+          "cells": [
+            {
+              "text": "10^4 to 10^7"
+            },
+            {
+              "text": "1:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gastrointestinal tract: terminal ileum and colon",
+          "cells": [
+            {
+              "text": "10^11 to 10^12"
+            },
+            {
+              "text": "10^3:1"
+            },
+            {
+              "text": "As for the GI tract above"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Female genital tract",
+          "cells": [
+            {
+              "text": "10^7 to 10^9"
+            },
+            {
+              "text": "10:1"
+            },
+            {
+              "text": "Peptostreptococcus spp., Bacteroides spp., Prevotella bivia"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Footnote (a) on total bacteria is not shown on the page."
+    },
+    {
+      "id": "BRAIN_ABSCESS-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Classification of streptococci",
+      "rowHeader": "Lancefield group",
+      "columns": [
+        "Representative species",
+        "Hemolytic pattern",
+        "Typical infections"
+      ],
+      "rows": [
+        {
+          "parameter": "A",
+          "cells": [
+            {
+              "text": "S. pyogenes"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Pharyngitis, impetigo, cellulitis, scarlet fever"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "B",
+          "cells": [
+            {
+              "text": "S. agalactiae"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Neonatal sepsis and meningitis, puerperal infection, urinary tract infection, diabetic ulcer infection, endocarditis"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "C, G",
+          "cells": [
+            {
+              "text": "S. dysgalactiae subsp. equisimilis"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Cellulitis, bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "D: enterococci",
+          "cells": [
+            {
+              "text": "E. faecalis; E. faecium"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Urinary tract infection, nosocomial bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "D: nonenterococci",
+          "cells": [
+            {
+              "text": "S. bovis"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Variable or nongroupable: viridans streptococci",
+          "cells": [
+            {
+              "text": "S. sanguis; S. mitis"
+            },
+            {
+              "text": "Alpha"
+            },
+            {
+              "text": "Endocarditis, dental abscess, brain abscess"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Variable or nongroupable: intermedius or milleri group",
+          "cells": [
+            {
+              "text": "S. intermedius, S. anginosus, S. constellatus"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Brain abscess, visceral abscess"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Variable or nongroupable: anaerobic streptococci",
+          "cells": [
+            {
+              "text": "Peptostreptococcus magnus"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Sinusitis, pneumonia, empyema, brain abscess, liver abscess"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Source footnotes (a) on enterococci and (b) on anaerobic streptococci are not legible in the transcription."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "BRAIN_ABSCESS-dx-mgmt",
+      "title": "Diagnosis and management of brain abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Headache with focal deficit, seizure or altered sensorium, with or without fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Avoid lumbar puncture; get contrast MRI with DWI (CT if MRI unavailable)",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Ring-enhancing lesion with restricted diffusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Evaluate for tumour, infarct or other mimic",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Blood cultures; look for source (ear, sinus, teeth, endocarditis)",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Septic, deteriorating or significant mass effect?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start empiric cefotaxime or ceftriaxone plus metronidazole, add vancomycin if S. aureus",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Solitary accessible abscess over 2 cm?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stereotactic aspiration or excision; culture pus",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics alone; repeat imaging every 2 to 3 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Abscess enlarging on antibiotics?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Dexamethasone if raised ICP; treat seizures",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Continue antibiotics at least 4 to 8 weeks with serial imaging",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
         }
       ]
     }

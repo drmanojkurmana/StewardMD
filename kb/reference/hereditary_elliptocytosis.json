@@ -1,175 +1,480 @@
 {
- "id": "hereditary_elliptocytosis",
- "name": "Hereditary elliptocytosis",
- "aliases": [
-  "HE",
-  "SPTA1",
-  "SPTB",
-  "EPB41",
-  "elliptocytosis"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An inherited red-cell membrane disorder, usually autosomal dominant, caused by defects in the horizontal cytoskeletal proteins that stabilise the membrane skeleton",
-   "The blood film shows numerous elliptical (cigar-shaped) red cells, and the diagnosis is often made incidentally on a routine film",
-   "Most heterozygotes are asymptomatic with little or no haemolysis, so anaemia is frequently absent",
-   "A subset has clinically significant chronic haemolysis, and the severe homozygous or compound-heterozygous variant hereditary pyropoikilocytosis presents in infancy with marked haemolysis and bizarre red-cell fragmentation",
-   "Underlying defects most often involve alpha- or beta-spectrin (SPTA1, SPTB) or protein 4.1 (EPB41), which weaken the horizontal linkages of the membrane skeleton",
-   "Neonates may transiently have more severe haemolysis and hyperbilirubinaemia than they will later in life",
-   "Most patients need no treatment; folate support and, in severe transfusion-dependent haemolysis, splenectomy may be considered"
+  "id": "hereditary_elliptocytosis",
+  "name": "Hereditary elliptocytosis",
+  "aliases": [
+    "HE",
+    "SPTA1",
+    "SPTB",
+    "EPB41",
+    "elliptocytosis"
   ],
-  "pathophysiology": "Hereditary elliptocytosis results from mutations that weaken the horizontal (lateral) protein interactions of the red-cell membrane skeleton, chiefly defects in spectrin self-association (alpha- and beta-spectrin) or in protein 4.1 that impair the spectrin-actin-4.1 junctional complex. The membrane skeleton loses its ability to recover normal shape after the mechanical deformation of circulation, so cells become progressively and permanently elliptical. In more severe forms the destabilised membrane fragments under shear stress, producing poikilocytosis and shortened red-cell survival, with the spleen removing damaged cells and driving the degree of haemolytic anaemia.",
-  "additionalDifferentials": [
-   "Hereditary spherocytosis",
-   "Hereditary pyropoikilocytosis",
-   "Iron deficiency anaemia (which can produce elliptocytes)",
-   "Myelodysplastic syndrome",
-   "Megaloblastic anaemia",
-   "Thalassaemia and other haemoglobinopathies"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and reticulocyte count",
-   "Blood film to quantify elliptocytes and identify poikilocytosis",
-   "Markers of haemolysis including bilirubin, lactate dehydrogenase and haptoglobin",
-   "Direct antiglobulin test to exclude immune haemolysis",
-   "Membrane protein or spectrin studies where the phenotype is severe",
-   "Genetic testing of SPTA1, SPTB and EPB41 in selected cases"
-  ],
-  "redFlags": [
-   "Severe neonatal haemolysis with hyperbilirubinaemia risking kernicterus",
-   "Aplastic crisis, typically with parvovirus B19 infection, causing an abrupt fall in haemoglobin",
-   "Symptomatic anaemia with haemodynamic compromise in severe variants",
-   "Features of pyropoikilocytosis in infancy requiring urgent haematology input"
-  ],
-  "prognosis": "The great majority of people with hereditary elliptocytosis have a normal life expectancy and require no treatment, while the minority with significant haemolysis or the pyropoikilocytosis variant may need folate, transfusion or splenectomy.",
-  "pitfalls": [
-   "Dismissing elliptocytes as artefact without correlating with family history and haemolysis markers",
-   "Overlooking transient severe haemolysis in the neonatal period",
-   "Attributing anaemia entirely to the membrane disorder and missing a superimposed cause such as iron deficiency or an aplastic crisis",
-   "Recommending splenectomy in asymptomatic disease where it is not warranted"
-  ],
-  "references": [
-   "Postgraduate Haematology",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No treatment is needed for the asymptomatic majority with mild or absent haemolysis; provide reassurance and periodic observation",
-   "Folic acid supplementation to support erythropoiesis in those with chronic haemolysis",
-   "Red-cell transfusion for symptomatic anaemia, particularly in severe hereditary pyropoikilocytosis or marked neonatal haemolysis",
-   "Phototherapy or exchange transfusion for neonatal hyperbilirubinaemia",
-   "Splenectomy for severe transfusion-dependent haemolysis, preceded by appropriate vaccination and followed by antibiotic prophylaxis and thromboprophylaxis considerations",
-   "Monitor full blood count and reticulocytes and screen for pigment gallstones, with cholecystectomy where symptomatic",
-   "Genetic counselling for the inherited membrane defect involving SPTA1, SPTB or EPB41"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_elliptocytosis-pathway",
-   "title": "Hereditary elliptocytosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An inherited red-cell membrane disorder, usually autosomal dominant, caused by defects in the horizontal cytoskeletal proteins that stabilise the membrane skeleton",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal haemolysis with hyperbilirubinaemia risking kernicterus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and reticulocyte count, Blood film to quantify elliptocytes and identify poikilocytosis, Markers of haemolysis including bilirubin, lactate dehydrogenase and haptoglobin"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No treatment is needed for the asymptomatic majority with mild or absent haemolysis; provide reassurance and periodic observation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing elliptocytes as artefact without correlating with family history and haemolysis markers"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary elliptocytosis."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_elliptocytosis-matrix",
-   "title": "Hereditary elliptocytosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An inherited red-cell membrane disorder, usually autosomal dominant, caused by defects in the horizontal cytoskeletal proteins",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An inherited red-cell membrane disorder, usually autosomal dominant, caused by defects in the horizontal cytoskeletal proteins that stabilise the membrane skeleton",
+      "The blood film shows numerous elliptical (cigar-shaped) red cells, and the diagnosis is often made incidentally on a routine film",
+      "Most heterozygotes are asymptomatic with little or no haemolysis, so anaemia is frequently absent",
+      "A subset has clinically significant chronic haemolysis, and the severe homozygous or compound-heterozygous variant hereditary pyropoikilocytosis presents in infancy with marked haemolysis and bizarre red-cell fragmentation",
+      "Underlying defects most often involve alpha- or beta-spectrin (SPTA1, SPTB) or protein 4.1 (EPB41), which weaken the horizontal linkages of the membrane skeleton",
+      "Neonates may transiently have more severe haemolysis and hyperbilirubinaemia than they will later in life",
+      "Most patients need no treatment; folate support and, in severe transfusion-dependent haemolysis, splenectomy may be considered"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and reticulocyte count, Blood film to quantify elliptocytes and identify poikilocytosis, Markers of haemolysis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary elliptocytosis results from mutations that weaken the horizontal (lateral) protein interactions of the red-cell membrane skeleton, chiefly defects in spectrin self-association (alpha- and beta-spectrin) or in protein 4.1 that impair the spectrin-actin-4.1 junctional complex. The membrane skeleton loses its ability to recover normal shape after the mechanical deformation of circulation, so cells become progressively and permanently elliptical. In more severe forms the destabilised membrane fragments under shear stress, producing poikilocytosis and shortened red-cell survival, with the spleen removing damaged cells and driving the degree of haemolytic anaemia.",
+    "additionalDifferentials": [
+      "Hereditary spherocytosis",
+      "Hereditary pyropoikilocytosis",
+      "Iron deficiency anaemia (which can produce elliptocytes)",
+      "Myelodysplastic syndrome",
+      "Megaloblastic anaemia",
+      "Thalassaemia and other haemoglobinopathies"
     ],
-    [
-     "Primary Differentials",
-     "Hereditary spherocytosis, Hereditary pyropoikilocytosis, Iron deficiency anaemia (which can produce elliptocytes)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and reticulocyte count",
+      "Blood film to quantify elliptocytes and identify poikilocytosis",
+      "Markers of haemolysis including bilirubin, lactate dehydrogenase and haptoglobin",
+      "Direct antiglobulin test to exclude immune haemolysis",
+      "Membrane protein or spectrin studies where the phenotype is severe",
+      "Genetic testing of SPTA1, SPTB and EPB41 in selected cases"
     ],
-    [
-     "Management Strategy",
-     "No treatment is needed for the asymptomatic majority with mild or absent haemolysis; provide reassurance and periodic observation",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal haemolysis with hyperbilirubinaemia risking kernicterus",
+      "Aplastic crisis, typically with parvovirus B19 infection, causing an abrupt fall in haemoglobin",
+      "Symptomatic anaemia with haemodynamic compromise in severe variants",
+      "Features of pyropoikilocytosis in infancy requiring urgent haematology input"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing elliptocytes as artefact without correlating with family history and haemolysis markers",
-     "Prevent diagnostic or management error"
+    "prognosis": "The great majority of people with hereditary elliptocytosis have a normal life expectancy and require no treatment, while the minority with significant haemolysis or the pyropoikilocytosis variant may need folate, transfusion or splenectomy.",
+    "pitfalls": [
+      "Dismissing elliptocytes as artefact without correlating with family history and haemolysis markers",
+      "Overlooking transient severe haemolysis in the neonatal period",
+      "Attributing anaemia entirely to the membrane disorder and missing a superimposed cause such as iron deficiency or an aplastic crisis",
+      "Recommending splenectomy in asymptomatic disease where it is not warranted"
+    ],
+    "references": [
+      "Postgraduate Haematology",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No treatment is needed for the asymptomatic majority with mild or absent haemolysis; provide reassurance and periodic observation",
+      "Folic acid supplementation to support erythropoiesis in those with chronic haemolysis",
+      "Red-cell transfusion for symptomatic anaemia, particularly in severe hereditary pyropoikilocytosis or marked neonatal haemolysis",
+      "Phototherapy or exchange transfusion for neonatal hyperbilirubinaemia",
+      "Splenectomy for severe transfusion-dependent haemolysis, preceded by appropriate vaccination and followed by antibiotic prophylaxis and thromboprophylaxis considerations",
+      "Monitor full blood count and reticulocytes and screen for pigment gallstones, with cholecystectomy where symptomatic",
+      "Genetic counselling for the inherited membrane defect involving SPTA1, SPTB or EPB41"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary elliptocytosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-elliptocytosis-real-image",
-   "title": "Hereditary elliptocytosis: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "hereditary_elliptocytosis-pathway",
+      "title": "Hereditary elliptocytosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An inherited red-cell membrane disorder, usually autosomal dominant, caused by defects in the horizontal cytoskeletal proteins that stabilise the membrane skeleton",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal haemolysis with hyperbilirubinaemia risking kernicterus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and reticulocyte count, Blood film to quantify elliptocytes and identify poikilocytosis, Markers of haemolysis including bilirubin, lactate dehydrogenase and haptoglobin"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No treatment is needed for the asymptomatic majority with mild or absent haemolysis; provide reassurance and periodic observation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing elliptocytes as artefact without correlating with family history and haemolysis markers"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary elliptocytosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_elliptocytosis-matrix",
+      "title": "Hereditary elliptocytosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An inherited red-cell membrane disorder, usually autosomal dominant, caused by defects in the horizontal cytoskeletal proteins",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and reticulocyte count, Blood film to quantify elliptocytes and identify poikilocytosis, Markers of haemolysis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hereditary spherocytosis, Hereditary pyropoikilocytosis, Iron deficiency anaemia (which can produce elliptocytes)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No treatment is needed for the asymptomatic majority with mild or absent haemolysis; provide reassurance and periodic observation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing elliptocytes as artefact without correlating with family history and haemolysis markers",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary elliptocytosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_elliptocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and reticulocyte count",
+          "cells": [
+            {
+              "text": "Anaemia and reticulocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film",
+          "cells": [
+            {
+              "text": "Elliptocytes and poikilocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin, lactate dehydrogenase and haptoglobin",
+          "cells": [
+            {
+              "text": "Markers of haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Excludes immune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Membrane protein or spectrin studies",
+          "cells": [
+            {
+              "text": "Used where the phenotype is severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPTA1, SPTB and EPB41 genetic testing",
+          "cells": [
+            {
+              "text": "Used in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_elliptocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary pyropoikilocytosis",
+          "cells": [
+            {
+              "text": "Infantile features require urgent haematology input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron deficiency anaemia",
+          "cells": [
+            {
+              "text": "Can also produce elliptocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spherocytosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myelodysplastic syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_elliptocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No treatment",
+          "cells": [
+            {
+              "text": "For the asymptomatic majority with mild or absent haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Supports erythropoiesis in chronic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell transfusion",
+          "cells": [
+            {
+              "text": "Symptomatic anaemia, particularly in severe hereditary pyropoikilocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy or exchange transfusion",
+          "cells": [
+            {
+              "text": "Neonatal hyperbilirubinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Severe transfusion-dependent haemolysis, preceded by appropriate vaccination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Full blood count and reticulocytes; screen for pigment gallstones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Inherited membrane defect involving SPTA1, SPTB or EPB41"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_elliptocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary elliptocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Elliptocytes on blood film with anaemia or haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe neonatal haemolysis, aplastic crisis, symptomatic anaemia or pyropoikilocytosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: phototherapy or exchange transfusion for neonatal jaundice; urgent haematology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full blood count, reticulocytes, blood film; bilirubin, LDH, haptoglobin; DAT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is immune haemolysis excluded by a negative DAT, with elliptocytes confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hereditary spherocytosis, iron deficiency or pyropoikilocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No treatment for the asymptomatic majority with mild or absent haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid for chronic haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Red-cell transfusion for symptomatic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Splenectomy for severe transfusion-dependent haemolysis, after vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild disease needs no treatment; severe cases managed by transfusion or splenectomy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

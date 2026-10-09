@@ -1,174 +1,516 @@
 {
- "id": "bulimia_nervosa",
- "name": "Bulimia nervosa",
- "aliases": [
-  "bulimia",
-  "BN"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by recurrent episodes of binge eating with a sense of loss of control, followed by compensatory behaviours to prevent weight gain",
-   "Compensatory behaviours include self-induced vomiting, laxative or diuretic misuse, fasting, or excessive exercise",
-   "Self-evaluation is unduly influenced by body shape and weight, and patients are typically of normal or near-normal weight, unlike in anorexia nervosa",
-   "Physical signs may include salivary gland enlargement, dental enamel erosion, and Russell's sign (knuckle calluses from self-induced vomiting)",
-   "Purging can cause dangerous electrolyte disturbances such as hypokalaemia and metabolic alkalosis, with risk of cardiac arrhythmia",
-   "First-line treatment is cognitive behavioural therapy adapted for eating disorders; SSRIs (notably fluoxetine) are the pharmacological principle of choice",
-   "Comorbid depression, anxiety, substance use, and impulsivity are common, and suicide risk should be assessed",
-   "Behaviours are often concealed, so specific, non-judgemental enquiry is needed to detect them"
+  "id": "bulimia_nervosa",
+  "name": "Bulimia nervosa",
+  "aliases": [
+    "bulimia",
+    "BN"
   ],
-  "pathophysiology": "Bulimia nervosa involves interacting genetic, temperamental, and sociocultural factors, with dysregulation of serotonergic systems affecting satiety, mood, and impulse control. Dietary restraint promotes binge episodes, and the binge-purge cycle is maintained by both physiological drives and psychological reinforcement, while overvaluation of shape and weight sustains the disorder.",
-  "additionalDifferentials": [
-   "Anorexia nervosa, binge-eating/purging type",
-   "Binge-eating disorder",
-   "Major depressive disorder",
-   "Borderline personality disorder with impulsive eating",
-   "Gastrointestinal causes of vomiting",
-   "Kleine-Levin syndrome and other causes of hyperphagia"
-  ],
-  "additionalInvestigations": [
-   "Electrolytes, particularly potassium, with bicarbonate and chloride to detect metabolic alkalosis",
-   "ECG where electrolyte disturbance or arrhythmia is suspected",
-   "Renal function assessment",
-   "Dental examination for enamel erosion",
-   "Screening for comorbid depression, substance use, and self-harm"
-  ],
-  "redFlags": [
-   "Severe hypokalaemia or other electrolyte disturbance with arrhythmia risk",
-   "Haematemesis or oesophageal tear (Mallory-Weiss or Boerhaave) from forceful vomiting",
-   "Suicidal ideation or self-harm",
-   "Marked dehydration and haemodynamic instability from purging"
-  ],
-  "prognosis": "Bulimia nervosa often has a fluctuating course, but many patients improve substantially with cognitive behavioural therapy. Comorbid substance use, personality disorder, and persistent purging are associated with a more chronic course and greater medical risk.",
-  "pitfalls": [
-   "Assuming a normal body weight excludes serious medical risk from purging",
-   "Missing dangerous hypokalaemia and its arrhythmic potential",
-   "Not asking directly about purging behaviours that patients tend to conceal",
-   "Overlooking comorbid depression and suicide risk",
-   "Failing to offer evidence-based cognitive behavioural therapy"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer cognitive behavioural therapy adapted for eating disorders as the first-line psychological treatment to interrupt the binge-purge cycle and reduce overvaluation of shape and weight",
-   "Consider an SSRI, notably fluoxetine, as the pharmacological option of choice to reduce binge and purge frequency",
-   "Correct and monitor purging-related electrolyte disturbance such as hypokalaemia and metabolic alkalosis, with rehydration and cardiac risk assessment",
-   "Provide dietetic input and nutritional rehabilitation to establish a regular eating pattern and reduce the dietary restraint that drives bingeing",
-   "Arrange dental care and manage physical complications including enamel erosion and salivary gland enlargement",
-   "Screen for and treat comorbid depression, self-harm and substance misuse with ongoing risk assessment",
-   "Use family-based treatment for adolescents and refer to a specialist eating-disorder service",
-   "Escalate to inpatient or intensive care where there is severe electrolyte disturbance, cardiac instability or high suicide risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bulimia_nervosa-pathway",
-   "title": "Bulimia nervosa: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by recurrent episodes of binge eating with a sense of loss of control, followed by compensatory behaviours to prevent weight gain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypokalaemia or other electrolyte disturbance with arrhythmia risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electrolytes, particularly potassium, with bicarbonate and chloride to detect metabolic alkalosis, ECG where electrolyte disturbance or arrhythmia is suspected, Renal function assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer cognitive behavioural therapy adapted for eating disorders as the first-line psychological treatment to interrupt the binge-purge cycle and reduce overvaluation of shape and weight"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal body weight excludes serious medical risk from purging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bulimia nervosa."
-  }
- ],
- "tables": [
-  {
-   "id": "bulimia_nervosa-matrix",
-   "title": "Bulimia nervosa: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by recurrent episodes of binge eating with a sense of loss of control, followed by compensatory behaviours to prevent",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by recurrent episodes of binge eating with a sense of loss of control, followed by compensatory behaviours to prevent weight gain",
+      "Compensatory behaviours include self-induced vomiting, laxative or diuretic misuse, fasting, or excessive exercise",
+      "Self-evaluation is unduly influenced by body shape and weight, and patients are typically of normal or near-normal weight, unlike in anorexia nervosa",
+      "Physical signs may include salivary gland enlargement, dental enamel erosion, and Russell's sign (knuckle calluses from self-induced vomiting)",
+      "Purging can cause dangerous electrolyte disturbances such as hypokalaemia and metabolic alkalosis, with risk of cardiac arrhythmia",
+      "First-line treatment is cognitive behavioural therapy adapted for eating disorders; SSRIs (notably fluoxetine) are the pharmacological principle of choice",
+      "Comorbid depression, anxiety, substance use, and impulsivity are common, and suicide risk should be assessed",
+      "Behaviours are often concealed, so specific, non-judgemental enquiry is needed to detect them"
     ],
-    [
-     "Key Investigations",
-     "Electrolytes, particularly potassium, with bicarbonate and chloride to detect metabolic alkalosis, ECG where electrolyte",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bulimia nervosa involves interacting genetic, temperamental, and sociocultural factors, with dysregulation of serotonergic systems affecting satiety, mood, and impulse control. Dietary restraint promotes binge episodes, and the binge-purge cycle is maintained by both physiological drives and psychological reinforcement, while overvaluation of shape and weight sustains the disorder.",
+    "additionalDifferentials": [
+      "Anorexia nervosa, binge-eating/purging type",
+      "Binge-eating disorder",
+      "Major depressive disorder",
+      "Borderline personality disorder with impulsive eating",
+      "Gastrointestinal causes of vomiting",
+      "Kleine-Levin syndrome and other causes of hyperphagia"
     ],
-    [
-     "Primary Differentials",
-     "Anorexia nervosa, binge-eating/purging type, Binge-eating disorder, Major depressive disorder",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electrolytes, particularly potassium, with bicarbonate and chloride to detect metabolic alkalosis",
+      "ECG where electrolyte disturbance or arrhythmia is suspected",
+      "Renal function assessment",
+      "Dental examination for enamel erosion",
+      "Screening for comorbid depression, substance use, and self-harm"
     ],
-    [
-     "Management Strategy",
-     "Offer cognitive behavioural therapy adapted for eating disorders as the first-line psychological treatment to interrupt the",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypokalaemia or other electrolyte disturbance with arrhythmia risk",
+      "Haematemesis or oesophageal tear (Mallory-Weiss or Boerhaave) from forceful vomiting",
+      "Suicidal ideation or self-harm",
+      "Marked dehydration and haemodynamic instability from purging"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal body weight excludes serious medical risk from purging",
-     "Prevent diagnostic or management error"
+    "prognosis": "Bulimia nervosa often has a fluctuating course, but many patients improve substantially with cognitive behavioural therapy. Comorbid substance use, personality disorder, and persistent purging are associated with a more chronic course and greater medical risk.",
+    "pitfalls": [
+      "Assuming a normal body weight excludes serious medical risk from purging",
+      "Missing dangerous hypokalaemia and its arrhythmic potential",
+      "Not asking directly about purging behaviours that patients tend to conceal",
+      "Overlooking comorbid depression and suicide risk",
+      "Failing to offer evidence-based cognitive behavioural therapy"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer cognitive behavioural therapy adapted for eating disorders as the first-line psychological treatment to interrupt the binge-purge cycle and reduce overvaluation of shape and weight",
+      "Consider an SSRI, notably fluoxetine, as the pharmacological option of choice to reduce binge and purge frequency",
+      "Correct and monitor purging-related electrolyte disturbance such as hypokalaemia and metabolic alkalosis, with rehydration and cardiac risk assessment",
+      "Provide dietetic input and nutritional rehabilitation to establish a regular eating pattern and reduce the dietary restraint that drives bingeing",
+      "Arrange dental care and manage physical complications including enamel erosion and salivary gland enlargement",
+      "Screen for and treat comorbid depression, self-harm and substance misuse with ongoing risk assessment",
+      "Use family-based treatment for adolescents and refer to a specialist eating-disorder service",
+      "Escalate to inpatient or intensive care where there is severe electrolyte disturbance, cardiac instability or high suicide risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for bulimia nervosa."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bulimia-nervosa-real-image",
-   "title": "Bulimia nervosa: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "bulimia_nervosa-pathway",
+      "title": "Bulimia nervosa: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by recurrent episodes of binge eating with a sense of loss of control, followed by compensatory behaviours to prevent weight gain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypokalaemia or other electrolyte disturbance with arrhythmia risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electrolytes, particularly potassium, with bicarbonate and chloride to detect metabolic alkalosis, ECG where electrolyte disturbance or arrhythmia is suspected, Renal function assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer cognitive behavioural therapy adapted for eating disorders as the first-line psychological treatment to interrupt the binge-purge cycle and reduce overvaluation of shape and weight"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal body weight excludes serious medical risk from purging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bulimia nervosa."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bulimia_nervosa-matrix",
+      "title": "Bulimia nervosa: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by recurrent episodes of binge eating with a sense of loss of control, followed by compensatory behaviours to prevent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electrolytes, particularly potassium, with bicarbonate and chloride to detect metabolic alkalosis, ECG where electrolyte",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anorexia nervosa, binge-eating/purging type, Binge-eating disorder, Major depressive disorder",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer cognitive behavioural therapy adapted for eating disorders as the first-line psychological treatment to interrupt the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal body weight excludes serious medical risk from purging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bulimia nervosa."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 79-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bulimia_nervosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in bulimia nervosa",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes, bicarbonate and chloride",
+          "cells": [
+            {
+              "text": "Hypokalaemia and metabolic alkalosis from purging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Where electrolyte disturbance or arrhythmia is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function",
+          "cells": [
+            {
+              "text": "Assessment alongside electrolyte status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental examination",
+          "cells": [
+            {
+              "text": "Enamel erosion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for depression, substance use and self-harm",
+          "cells": [
+            {
+              "text": "Comorbidity and suicide risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bulimia_nervosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike eating and mood disorders",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anorexia nervosa, binge-eating/purging type",
+          "cells": [
+            {
+              "text": "Patients with bulimia are typically of normal or near-normal weight"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Binge-eating disorder",
+          "cells": [
+            {
+              "text": "Bulimia nervosa involves compensatory behaviours such as vomiting, laxative or diuretic misuse, fasting or excessive exercise"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bulimia_nervosa-treatment",
+      "kind": "treatment",
+      "title": "Management options in bulimia nervosa",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Adapted for eating disorders to interrupt the binge-purge cycle"
+            },
+            {
+              "text": "First-line psychological treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SSRI",
+          "cells": [
+            {
+              "text": "Fluoxetine as the pharmacological option of choice"
+            },
+            {
+              "text": "Reduces binge and purge frequency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte correction and monitoring",
+          "cells": [
+            {
+              "text": "Correct hypokalaemia and metabolic alkalosis; rehydration; cardiac risk assessment"
+            },
+            {
+              "text": "Purging-related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietetic input",
+          "cells": [
+            {
+              "text": "Nutritional rehabilitation and a regular eating pattern; reduce dietary restraint"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and physical complications",
+          "cells": [
+            {
+              "text": "Dental care for enamel erosion; management of salivary gland enlargement"
+            },
+            {
+              "text": "Physical signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity and risk",
+          "cells": [
+            {
+              "text": "Screen for and treat depression, self-harm and substance misuse; ongoing risk assessment"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family-based treatment",
+          "cells": [
+            {
+              "text": "For adolescents; specialist eating-disorder service referral"
+            },
+            {
+              "text": "Adolescents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Inpatient or intensive care for severe electrolyte disturbance, cardiac instability or high suicide risk"
+            },
+            {
+              "text": "Severe"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bulimia_nervosa-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic features of bulimia nervosa",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Binge eating",
+          "cells": [
+            {
+              "text": "Recurrent episodes: a large amount of food eaten in a short time with a sense of loss of control"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Compensatory behavior",
+          "cells": [
+            {
+              "text": "Recurrent inappropriate behavior to offset the binge, such as self-induced vomiting"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Frequency",
+          "cells": [
+            {
+              "text": "Both binge eating and compensatory behavior occur at least twice weekly on average for 3 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Body image",
+          "cells": [
+            {
+              "text": "Overconcern with body shape and weight"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bulimia_nervosa-dx-mgmt",
+      "title": "Diagnosis and management of bulimia nervosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent binge eating followed by compensatory behaviours, with shape and weight overvaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: severe electrolyte disturbance, haematemesis, dehydration, or suicidal ideation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent medical assessment; correct electrolytes; risk assessment; inpatient care if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Specific enquiry about purging; electrolytes, renal function, ECG and dental examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Compensatory behaviours present and not better explained by another eating disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cognitive behavioural therapy adapted for eating disorders; nutritional rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider fluoxetine; screen and treat comorbid depression and substance misuse",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider anorexia nervosa, binge-eating disorder or depression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Often fluctuating; many improve substantially with CBT",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

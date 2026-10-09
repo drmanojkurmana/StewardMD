@@ -1,175 +1,484 @@
 {
- "id": "au_kline_syndrome",
- "name": "Au-Kline syndrome (HNRNPK)",
- "aliases": [
-  "AKS",
-  "HNRNPK-related syndrome",
-  "Okamoto syndrome (HNRNPK-related)"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A neurodevelopmental disorder caused by heterozygous loss-of-function variants in HNRNPK",
-   "Developmental delay and intellectual disability accompany marked infantile hypotonia",
-   "A distinctive facial appearance includes downturned corners of the mouth, ptosis, and a long palpebral fissure aperture",
-   "Congenital heart defects and genitourinary anomalies, including renal malformation, are frequently present",
-   "Skeletal features such as craniosynostosis and connective tissue laxity may occur",
-   "Feeding difficulties and, in some, structural brain anomalies are reported",
-   "Most cases are de novo, arising as new dominant variants rather than being inherited",
-   "Diagnosis is established by identifying an HNRNPK variant, usually through exome or panel testing"
+  "id": "au_kline_syndrome",
+  "name": "Au-Kline syndrome (HNRNPK)",
+  "aliases": [
+    "AKS",
+    "HNRNPK-related syndrome",
+    "Okamoto syndrome (HNRNPK-related)"
   ],
-  "pathophysiology": "Au-Kline syndrome is caused by heterozygous loss-of-function variants in HNRNPK, which encodes a heterogeneous nuclear ribonucleoprotein that binds nucleic acids and participates in the regulation of transcription, RNA splicing, messenger RNA stability, and translation. Through these activities HNRNPK influences the expression of many genes during development, and reducing its dosage disrupts the coordinated developmental programmes of the brain, heart, kidneys, and skeleton. The resulting haploinsufficiency produces the intellectual disability, hypotonia, characteristic facial features, and the cardiac, renal, and skeletal anomalies of the syndrome. The condition is inherited in an autosomal dominant manner and typically arises de novo.",
-  "additionalDifferentials": [
-   "Kabuki syndrome, with overlapping facial and developmental features",
-   "Other chromatin and RNA-regulator neurodevelopmental disorders",
-   "Noonan syndrome and related conditions with cardiac and facial features",
-   "Craniosynostosis syndromes of other genetic cause",
-   "Other syndromic causes of hypotonia with intellectual disability",
-   "Copy-number neurodevelopmental syndromes detected on microarray"
-  ],
-  "additionalInvestigations": [
-   "Exome or gene panel testing to identify an HNRNPK variant",
-   "Echocardiography for congenital heart disease",
-   "Renal ultrasound for genitourinary anomalies",
-   "Craniofacial imaging to assess for craniosynostosis",
-   "Developmental assessment and neuroimaging where indicated",
-   "Feeding and growth evaluation in infancy"
-  ],
-  "redFlags": [
-   "Haemodynamically significant congenital heart defect",
-   "Raised intracranial pressure from craniosynostosis",
-   "Renal malformation with impaired function",
-   "Feeding failure with aspiration and faltering growth"
-  ],
-  "prognosis": "Lifespan is generally not markedly shortened, and the outlook is dominated by intellectual disability of variable degree together with the management of any cardiac, renal, and skeletal anomalies; developmental progress is expected with support, and the presence and severity of major structural anomalies principally shape the long-term outcome.",
-  "pitfalls": [
-   "Mislabelling the child as Kabuki syndrome and not pursuing HNRNPK testing",
-   "Overlooking craniosynostosis and its risk of raised intracranial pressure",
-   "Failing to screen for cardiac and renal anomalies at diagnosis",
-   "Assuming inheritance from a parent when most cases are de novo"
-  ],
-  "references": [
-   "GeneReviews: Au-Kline syndrome",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific drug therapy; management centres on early developmental intervention with physiotherapy, occupational and speech and language therapy for hypotonia and developmental delay",
-   "Echocardiographic assessment and cardiology management of congenital heart defects",
-   "Renal tract imaging with nephrology and urology follow-up for genitourinary and renal malformations",
-   "Craniofacial and neurosurgical assessment with surgical correction of craniosynostosis where present",
-   "Feeding and nutritional support in infancy, including nasogastric or gastrostomy feeding for feeding difficulties",
-   "Surveillance of growth, vision and hearing, with neuroimaging for structural brain anomalies as indicated",
-   "Genetic counselling for the family; the condition is autosomal dominant and usually arises de novo",
-   "Multidisciplinary coordination across clinical genetics, paediatrics, cardiology and developmental services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "au_kline_syndrome-pathway",
-   "title": "Au-Kline syndrome (HNRNPK): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A neurodevelopmental disorder caused by heterozygous loss-of-function variants in HNRNPK",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haemodynamically significant congenital heart defect",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Exome or gene panel testing to identify an HNRNPK variant, Echocardiography for congenital heart disease, Renal ultrasound for genitourinary anomalies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific drug therapy; management centres on early developmental intervention with physiotherapy, occupational and speech and language therapy for hypotonia and developmental delay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the child as Kabuki syndrome and not pursuing HNRNPK testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of au-kline syndrome (hnrnpk)."
-  }
- ],
- "tables": [
-  {
-   "id": "au_kline_syndrome-matrix",
-   "title": "Au-Kline syndrome (HNRNPK): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A neurodevelopmental disorder caused by heterozygous loss-of-function variants in HNRNPK",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A neurodevelopmental disorder caused by heterozygous loss-of-function variants in HNRNPK",
+      "Developmental delay and intellectual disability accompany marked infantile hypotonia",
+      "A distinctive facial appearance includes downturned corners of the mouth, ptosis, and a long palpebral fissure aperture",
+      "Congenital heart defects and genitourinary anomalies, including renal malformation, are frequently present",
+      "Skeletal features such as craniosynostosis and connective tissue laxity may occur",
+      "Feeding difficulties and, in some, structural brain anomalies are reported",
+      "Most cases are de novo, arising as new dominant variants rather than being inherited",
+      "Diagnosis is established by identifying an HNRNPK variant, usually through exome or panel testing"
     ],
-    [
-     "Key Investigations",
-     "Exome or gene panel testing to identify an HNRNPK variant, Echocardiography for congenital heart disease, Renal ultrasound for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Au-Kline syndrome is caused by heterozygous loss-of-function variants in HNRNPK, which encodes a heterogeneous nuclear ribonucleoprotein that binds nucleic acids and participates in the regulation of transcription, RNA splicing, messenger RNA stability, and translation. Through these activities HNRNPK influences the expression of many genes during development, and reducing its dosage disrupts the coordinated developmental programmes of the brain, heart, kidneys, and skeleton. The resulting haploinsufficiency produces the intellectual disability, hypotonia, characteristic facial features, and the cardiac, renal, and skeletal anomalies of the syndrome. The condition is inherited in an autosomal dominant manner and typically arises de novo.",
+    "additionalDifferentials": [
+      "Kabuki syndrome, with overlapping facial and developmental features",
+      "Other chromatin and RNA-regulator neurodevelopmental disorders",
+      "Noonan syndrome and related conditions with cardiac and facial features",
+      "Craniosynostosis syndromes of other genetic cause",
+      "Other syndromic causes of hypotonia with intellectual disability",
+      "Copy-number neurodevelopmental syndromes detected on microarray"
     ],
-    [
-     "Primary Differentials",
-     "Kabuki syndrome, with overlapping facial and developmental features, Other chromatin and RNA-regulator neurodevelopmental",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Exome or gene panel testing to identify an HNRNPK variant",
+      "Echocardiography for congenital heart disease",
+      "Renal ultrasound for genitourinary anomalies",
+      "Craniofacial imaging to assess for craniosynostosis",
+      "Developmental assessment and neuroimaging where indicated",
+      "Feeding and growth evaluation in infancy"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific drug therapy; management centres on early developmental intervention with physiotherapy, occupational and",
-     "Core treatment modality"
+    "redFlags": [
+      "Haemodynamically significant congenital heart defect",
+      "Raised intracranial pressure from craniosynostosis",
+      "Renal malformation with impaired function",
+      "Feeding failure with aspiration and faltering growth"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the child as Kabuki syndrome and not pursuing HNRNPK testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lifespan is generally not markedly shortened, and the outlook is dominated by intellectual disability of variable degree together with the management of any cardiac, renal, and skeletal anomalies; developmental progress is expected with support, and the presence and severity of major structural anomalies principally shape the long-term outcome.",
+    "pitfalls": [
+      "Mislabelling the child as Kabuki syndrome and not pursuing HNRNPK testing",
+      "Overlooking craniosynostosis and its risk of raised intracranial pressure",
+      "Failing to screen for cardiac and renal anomalies at diagnosis",
+      "Assuming inheritance from a parent when most cases are de novo"
+    ],
+    "references": [
+      "GeneReviews: Au-Kline syndrome",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific drug therapy; management centres on early developmental intervention with physiotherapy, occupational and speech and language therapy for hypotonia and developmental delay",
+      "Echocardiographic assessment and cardiology management of congenital heart defects",
+      "Renal tract imaging with nephrology and urology follow-up for genitourinary and renal malformations",
+      "Craniofacial and neurosurgical assessment with surgical correction of craniosynostosis where present",
+      "Feeding and nutritional support in infancy, including nasogastric or gastrostomy feeding for feeding difficulties",
+      "Surveillance of growth, vision and hearing, with neuroimaging for structural brain anomalies as indicated",
+      "Genetic counselling for the family; the condition is autosomal dominant and usually arises de novo",
+      "Multidisciplinary coordination across clinical genetics, paediatrics, cardiology and developmental services"
     ]
-   ],
-   "caption": "Overview comparison matrix for au-kline syndrome (hnrnpk)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "au-kline-syndrome-real-image",
-   "title": "Au-Kline syndrome (HNRNPK): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "au_kline_syndrome-pathway",
+      "title": "Au-Kline syndrome (HNRNPK): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A neurodevelopmental disorder caused by heterozygous loss-of-function variants in HNRNPK",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haemodynamically significant congenital heart defect",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Exome or gene panel testing to identify an HNRNPK variant, Echocardiography for congenital heart disease, Renal ultrasound for genitourinary anomalies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific drug therapy; management centres on early developmental intervention with physiotherapy, occupational and speech and language therapy for hypotonia and developmental delay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the child as Kabuki syndrome and not pursuing HNRNPK testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of au-kline syndrome (hnrnpk)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "au_kline_syndrome-matrix",
+      "title": "Au-Kline syndrome (HNRNPK): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A neurodevelopmental disorder caused by heterozygous loss-of-function variants in HNRNPK",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Exome or gene panel testing to identify an HNRNPK variant, Echocardiography for congenital heart disease, Renal ultrasound for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Kabuki syndrome, with overlapping facial and developmental features, Other chromatin and RNA-regulator neurodevelopmental",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific drug therapy; management centres on early developmental intervention with physiotherapy, occupational and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the child as Kabuki syndrome and not pursuing HNRNPK testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for au-kline syndrome (hnrnpk)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "au_kline_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome or gene panel testing",
+          "cells": [
+            {
+              "text": "HNRNPK variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Genitourinary anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial imaging",
+          "cells": [
+            {
+              "text": "Craniosynostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment and neuroimaging",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and growth evaluation in infancy",
+          "cells": [
+            {
+              "text": "Feeding difficulty and growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "au_kline_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kabuki syndrome",
+          "cells": [
+            {
+              "text": "Overlapping facial and developmental features; HNRNPK testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other chromatin and RNA-regulator neurodevelopmental disorders",
+          "cells": [
+            {
+              "text": "Separated by HNRNPK testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "au_kline_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational, speech and language therapy"
+            },
+            {
+              "text": "No disease-specific drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology management",
+          "cells": [
+            {
+              "text": "Echocardiography and management of congenital heart defects"
+            },
+            {
+              "text": "Congenital heart defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and urology follow-up",
+          "cells": [
+            {
+              "text": "Renal tract imaging with nephrology and urology follow-up"
+            },
+            {
+              "text": "Genitourinary and renal malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial and neurosurgical care",
+          "cells": [
+            {
+              "text": "Surgical correction of craniosynostosis"
+            },
+            {
+              "text": "Where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding"
+            },
+            {
+              "text": "Feeding difficulty in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, vision, hearing and neuroimaging surveillance",
+          "cells": [
+            {
+              "text": "Surveillance as indicated"
+            },
+            {
+              "text": "Structural brain anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant condition, usually de novo"
+            },
+            {
+              "text": "Family counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "au_kline_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Au-Kline syndrome (HNRNPK)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neurodevelopmental delay with congenital heart, renal or craniofacial anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Haemodynamically significant heart defect or raised pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiology and neurosurgical review for urgent lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HNRNPK exome or panel testing, echo, renal ultrasound, craniofacial imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "HNRNPK variant confirmed with the phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Early developmental intervention with multidisciplinary care",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical correction of craniosynostosis where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gastrostomy or nasogastric feeding for feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and urology follow-up for renal malformations",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling; the condition usually arises de novo",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

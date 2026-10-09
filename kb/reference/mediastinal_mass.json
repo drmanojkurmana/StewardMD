@@ -1,170 +1,439 @@
 {
- "id": "mediastinal_mass",
- "name": "Mediastinal mass",
- "aliases": [
-  "mediastinal tumour",
-  "paediatric mediastinal mass"
- ],
- "class": "non_infective",
- "system": "Paediatric surgery / Thoracic",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The likely diagnosis is best predicted by which mediastinal compartment is involved, so localisation to the anterior, middle, or posterior mediastinum guides the differential",
-   "Anterior masses often reflect the 'terrible T's', notably lymphoma and germ cell tumours; posterior masses in children are frequently neurogenic tumours such as neuroblastoma",
-   "Middle mediastinal lesions include lymphadenopathy, foregut duplication cysts, and bronchogenic cysts",
-   "Many masses are found incidentally on chest imaging, but they can cause cough, wheeze, stridor, superior vena cava obstruction, or dysphagia through mass effect",
-   "A large anterior mediastinal mass is a serious anaesthetic hazard because it can compress the airway and great vessels, particularly when the child lies supine",
-   "Whenever possible a tissue diagnosis should be obtained by the least invasive and safest route, and general anaesthesia may need to be avoided in high-risk airway compression",
-   "Investigation includes cross-sectional imaging, and, depending on suspected pathology, tumour markers and marrow or nodal sampling",
-   "Neurogenic posterior tumours require spinal imaging to detect intraspinal (dumbbell) extension that may threaten the cord"
+  "id": "mediastinal_mass",
+  "name": "Mediastinal mass",
+  "aliases": [
+    "mediastinal tumour",
+    "paediatric mediastinal mass"
   ],
-  "pathophysiology": "A mediastinal mass is any space-occupying lesion within the mediastinum, and its nature relates strongly to the compartment of origin because different tissues predominate in each. Anterior lesions arise from thymic, lymphoid, germ cell, or thyroid tissue; middle lesions from lymph nodes, the airway, and foregut-derived cysts; and posterior lesions largely from neural tissue along the sympathetic chain. Symptoms result mainly from compression or invasion of adjacent structures such as the trachea, bronchi, great vessels, oesophagus, and spinal cord, and systemic effects may occur with malignant or hormonally active tumours.",
-  "additionalDifferentials": [
-   "Lymphoma (Hodgkin and non-Hodgkin)",
-   "Germ cell tumour (including teratoma)",
-   "Neuroblastoma, ganglioneuroblastoma, or ganglioneuroma",
-   "Foregut duplication or bronchogenic cyst",
-   "Thymic lesions and reactive or infective lymphadenopathy"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph followed by CT or MRI to localise and characterise the mass",
-   "MRI of the spine for posterior masses to assess intraspinal extension",
-   "Tumour markers such as alpha-fetoprotein and beta-hCG for germ cell tumours, and urinary catecholamine metabolites for neuroblastoma",
-   "Tissue sampling by the safest feasible route, with bone marrow examination where relevant",
-   "Airway assessment and echocardiography before anaesthesia in large anterior masses"
-  ],
-  "redFlags": [
-   "A large anterior mediastinal mass causing airway or great-vessel compression, which is a critical anaesthetic emergency and can cause cardiorespiratory collapse under sedation or when supine",
-   "Superior vena cava obstruction with facial swelling, distended veins, and respiratory distress",
-   "Stridor, orthopnoea, or inability to lie flat indicating significant tracheal compression",
-   "Posterior tumour with intraspinal extension threatening spinal cord compression"
-  ],
-  "prognosis": "Prognosis depends entirely on the underlying pathology, ranging from excellent for benign cysts and localised resectable tumours to highly variable outcomes for lymphomas and neuroblastoma, which depend on stage, histology, and biology. Early recognition of airway compromise is critical to avoid procedure-related mortality.",
-  "pitfalls": [
-   "Inducing general anaesthesia in a child with a large anterior mass without assessing airway and cardiovascular compression risk",
-   "Delaying diagnosis of superior vena cava obstruction or airway compromise",
-   "Failing to image the spine in posterior neurogenic tumours and missing cord compression",
-   "Pursuing an invasive biopsy when a diagnosis could be obtained more safely by markers or peripheral sampling"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Bailey & Love's Short Practice of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct definitive treatment by the underlying pathology once identified, with chemotherapy for lymphoma and surgical resection for cysts, neurogenic tumours and teratomas",
-   "Obtain a tissue diagnosis by the least invasive and safest feasible route, using peripheral samples such as bone marrow or effusion cytology where possible",
-   "Assess airway and cardiovascular compression before any sedation, avoiding general anaesthesia in high-risk anterior masses and keeping the child upright",
-   "Manage acute airway and superior vena cava obstruction as emergencies, using positioning and empirical corticosteroids or radiotherapy to shrink a compressing tumour",
-   "Cross-sectional imaging with CT or MRI to localise the compartment and guide the differential, with spinal MRI for posterior masses",
-   "Coordinate care through a paediatric surgery, oncology and anaesthesia multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mediastinal_mass-pathway",
-   "title": "Mediastinal mass: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The likely diagnosis is best predicted by which mediastinal compartment is involved, so localisation to the anterior, middle, or posterior mediastinum guides the differential",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A large anterior mediastinal mass causing airway or great-vessel compression, which is a critical anaesthetic emergency and can cause cardiorespiratory collapse under sedation or when supine",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph followed by CT or MRI to localise and characterise the mass, MRI of the spine for posterior masses to assess intraspinal extension, Tumour markers such as alpha-fetoprotein and beta-hCG for germ cell"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct definitive treatment by the underlying pathology once identified, with chemotherapy for lymphoma and surgical resection for cysts, neurogenic tumours and teratomas"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Inducing general anaesthesia in a child with a large anterior mass without assessing airway and cardiovascular compression risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mediastinal mass."
-  }
- ],
- "tables": [
-  {
-   "id": "mediastinal_mass-matrix",
-   "title": "Mediastinal mass: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The likely diagnosis is best predicted by which mediastinal compartment is involved, so localisation to the anterior, middle, or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric surgery / Thoracic",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The likely diagnosis is best predicted by which mediastinal compartment is involved, so localisation to the anterior, middle, or posterior mediastinum guides the differential",
+      "Anterior masses often reflect the 'terrible T's', notably lymphoma and germ cell tumours; posterior masses in children are frequently neurogenic tumours such as neuroblastoma",
+      "Middle mediastinal lesions include lymphadenopathy, foregut duplication cysts, and bronchogenic cysts",
+      "Many masses are found incidentally on chest imaging, but they can cause cough, wheeze, stridor, superior vena cava obstruction, or dysphagia through mass effect",
+      "A large anterior mediastinal mass is a serious anaesthetic hazard because it can compress the airway and great vessels, particularly when the child lies supine",
+      "Whenever possible a tissue diagnosis should be obtained by the least invasive and safest route, and general anaesthesia may need to be avoided in high-risk airway compression",
+      "Investigation includes cross-sectional imaging, and, depending on suspected pathology, tumour markers and marrow or nodal sampling",
+      "Neurogenic posterior tumours require spinal imaging to detect intraspinal (dumbbell) extension that may threaten the cord"
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph followed by CT or MRI to localise and characterise the mass, MRI of the spine for posterior masses to assess",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A mediastinal mass is any space-occupying lesion within the mediastinum, and its nature relates strongly to the compartment of origin because different tissues predominate in each. Anterior lesions arise from thymic, lymphoid, germ cell, or thyroid tissue; middle lesions from lymph nodes, the airway, and foregut-derived cysts; and posterior lesions largely from neural tissue along the sympathetic chain. Symptoms result mainly from compression or invasion of adjacent structures such as the trachea, bronchi, great vessels, oesophagus, and spinal cord, and systemic effects may occur with malignant or hormonally active tumours.",
+    "additionalDifferentials": [
+      "Lymphoma (Hodgkin and non-Hodgkin)",
+      "Germ cell tumour (including teratoma)",
+      "Neuroblastoma, ganglioneuroblastoma, or ganglioneuroma",
+      "Foregut duplication or bronchogenic cyst",
+      "Thymic lesions and reactive or infective lymphadenopathy"
     ],
-    [
-     "Primary Differentials",
-     "Lymphoma (Hodgkin and non-Hodgkin), Germ cell tumour (including teratoma), Neuroblastoma, ganglioneuroblastoma, or ganglioneuroma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph followed by CT or MRI to localise and characterise the mass",
+      "MRI of the spine for posterior masses to assess intraspinal extension",
+      "Tumour markers such as alpha-fetoprotein and beta-hCG for germ cell tumours, and urinary catecholamine metabolites for neuroblastoma",
+      "Tissue sampling by the safest feasible route, with bone marrow examination where relevant",
+      "Airway assessment and echocardiography before anaesthesia in large anterior masses"
     ],
-    [
-     "Management Strategy",
-     "Direct definitive treatment by the underlying pathology once identified, with chemotherapy for lymphoma and surgical resection",
-     "Core treatment modality"
+    "redFlags": [
+      "A large anterior mediastinal mass causing airway or great-vessel compression, which is a critical anaesthetic emergency and can cause cardiorespiratory collapse under sedation or when supine",
+      "Superior vena cava obstruction with facial swelling, distended veins, and respiratory distress",
+      "Stridor, orthopnoea, or inability to lie flat indicating significant tracheal compression",
+      "Posterior tumour with intraspinal extension threatening spinal cord compression"
     ],
-    [
-     "Clinical Pitfall",
-     "Inducing general anaesthesia in a child with a large anterior mass without assessing airway and cardiovascular compression risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends entirely on the underlying pathology, ranging from excellent for benign cysts and localised resectable tumours to highly variable outcomes for lymphomas and neuroblastoma, which depend on stage, histology, and biology. Early recognition of airway compromise is critical to avoid procedure-related mortality.",
+    "pitfalls": [
+      "Inducing general anaesthesia in a child with a large anterior mass without assessing airway and cardiovascular compression risk",
+      "Delaying diagnosis of superior vena cava obstruction or airway compromise",
+      "Failing to image the spine in posterior neurogenic tumours and missing cord compression",
+      "Pursuing an invasive biopsy when a diagnosis could be obtained more safely by markers or peripheral sampling"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Bailey & Love's Short Practice of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct definitive treatment by the underlying pathology once identified, with chemotherapy for lymphoma and surgical resection for cysts, neurogenic tumours and teratomas",
+      "Obtain a tissue diagnosis by the least invasive and safest feasible route, using peripheral samples such as bone marrow or effusion cytology where possible",
+      "Assess airway and cardiovascular compression before any sedation, avoiding general anaesthesia in high-risk anterior masses and keeping the child upright",
+      "Manage acute airway and superior vena cava obstruction as emergencies, using positioning and empirical corticosteroids or radiotherapy to shrink a compressing tumour",
+      "Cross-sectional imaging with CT or MRI to localise the compartment and guide the differential, with spinal MRI for posterior masses",
+      "Coordinate care through a paediatric surgery, oncology and anaesthesia multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for mediastinal mass."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mediastinal-mass-real-image",
-   "title": "Mediastinal mass: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mediastinal_mass-pathway",
+      "title": "Mediastinal mass: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The likely diagnosis is best predicted by which mediastinal compartment is involved, so localisation to the anterior, middle, or posterior mediastinum guides the differential",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A large anterior mediastinal mass causing airway or great-vessel compression, which is a critical anaesthetic emergency and can cause cardiorespiratory collapse under sedation or when supine",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph followed by CT or MRI to localise and characterise the mass, MRI of the spine for posterior masses to assess intraspinal extension, Tumour markers such as alpha-fetoprotein and beta-hCG for germ cell"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct definitive treatment by the underlying pathology once identified, with chemotherapy for lymphoma and surgical resection for cysts, neurogenic tumours and teratomas"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Inducing general anaesthesia in a child with a large anterior mass without assessing airway and cardiovascular compression risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mediastinal mass."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mediastinal_mass-matrix",
+      "title": "Mediastinal mass: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The likely diagnosis is best predicted by which mediastinal compartment is involved, so localisation to the anterior, middle, or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph followed by CT or MRI to localise and characterise the mass, MRI of the spine for posterior masses to assess",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lymphoma (Hodgkin and non-Hodgkin), Germ cell tumour (including teratoma), Neuroblastoma, ganglioneuroblastoma, or ganglioneuroma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct definitive treatment by the underlying pathology once identified, with chemotherapy for lymphoma and surgical resection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Inducing general anaesthesia in a child with a large anterior mass without assessing airway and cardiovascular compression risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mediastinal mass."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mediastinal_mass-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph followed by CT or MRI",
+          "cells": [
+            {
+              "text": "Localises and characterises the mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the spine for posterior masses",
+          "cells": [
+            {
+              "text": "Intraspinal extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers: alpha-fetoprotein, beta-hCG and urinary catecholamine metabolites",
+          "cells": [
+            {
+              "text": "Germ cell tumours (AFP, beta-hCG); neuroblastoma (catecholamines)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue sampling by the safest feasible route, with bone marrow where relevant",
+          "cells": [
+            {
+              "text": "Tissue diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway assessment and echocardiography before anaesthesia",
+          "cells": [
+            {
+              "text": "Airway and cardiac status before anaesthesia in large anterior masses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mediastinal_mass-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Germ cell tumour (including teratoma)",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein and beta-hCG markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroblastoma, ganglioneuroblastoma or ganglioneuroma",
+          "cells": [
+            {
+              "text": "Urinary catecholamine metabolites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mediastinal_mass-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying pathology",
+          "cells": [
+            {
+              "text": "Chemotherapy for lymphoma; surgical resection for cysts, neurogenic tumours and teratomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Least invasive safe tissue diagnosis",
+          "cells": [
+            {
+              "text": "Peripheral samples such as bone marrow or effusion cytology where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and cardiovascular assessment before sedation",
+          "cells": [
+            {
+              "text": "Avoid general anaesthesia in high-risk anterior masses; keep the child upright"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute airway or SVC obstruction",
+          "cells": [
+            {
+              "text": "Positioning and empirical corticosteroids or radiotherapy to shrink a compressing tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "CT or MRI to localise the compartment; spinal MRI for posterior masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric surgery, oncology and anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mediastinal_mass-dx-mgmt",
+      "title": "Diagnosis and management of Mediastinal mass",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with a mediastinal mass on chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway or great-vessel compression, SVC obstruction or intraspinal extension?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency airway and SVC obstruction care; avoid general anaesthesia in high-risk masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI to localise; tumour markers; airway assessment and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the mass characterised by markers or tissue sampling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Obtain tissue by the least invasive safe route, such as bone marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat by underlying pathology: chemotherapy for lymphoma, resection for teratoma or cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Least invasive, safest feasible tissue diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Keep the child upright; avoid general anaesthesia in high-risk anterior masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Positioning and empirical corticosteroids or radiotherapy for acute compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary paediatric surgery, oncology and anaesthesia care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

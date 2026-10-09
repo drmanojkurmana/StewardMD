@@ -1,173 +1,451 @@
 {
- "id": "conduct_disorder",
- "name": "Conduct disorder",
- "aliases": [
-  "CD"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The disorder is a repetitive and persistent pattern of behaviour in children and adolescents that violates the basic rights of others or major age-appropriate societal norms",
-   "Behaviours cluster into aggression to people and animals, destruction of property, deceitfulness or theft, and serious rule violations such as truancy and running away",
-   "Childhood-onset forms, appearing before adolescence, tend to be more severe and carry a worse prognosis than adolescent-onset forms",
-   "A specifier for limited prosocial emotions, marked by lack of remorse, callousness, and shallow affect, identifies a subgroup with poorer outcomes",
-   "It must be distinguished from oppositional defiant disorder, which involves defiance and irritability without the serious rights-violating behaviours of conduct disorder",
-   "Management is primarily psychosocial, including parent management training, family and multisystemic interventions, and school-based support, with medication reserved for comorbid conditions",
-   "Comorbidity with attention-deficit/hyperactivity disorder, mood and anxiety disorders, learning problems, and substance misuse is common and should be treated",
-   "Early identification and intervention improve outcomes and may reduce progression toward antisocial personality disorder in adulthood"
+  "id": "conduct_disorder",
+  "name": "Conduct disorder",
+  "aliases": [
+    "CD"
   ],
-  "pathophysiology": "Conduct disorder arises from an interaction of genetic and temperamental factors, such as difficult temperament and low behavioural inhibition, with adverse environmental influences including harsh or inconsistent parenting, maltreatment, and socioeconomic adversity. Neurobiological correlates include altered function in circuits underlying emotional processing, reward, and threat appraisal, and blunted autonomic responsiveness, particularly in the callous-unemotional subgroup.",
-  "additionalDifferentials": [
-   "Oppositional defiant disorder",
-   "Attention-deficit/hyperactivity disorder",
-   "Intermittent explosive disorder",
-   "Mood disorder with irritability",
-   "Substance use disorder",
-   "Adjustment disorder in response to a stressor",
-   "Emerging antisocial personality traits in older adolescents"
-  ],
-  "additionalInvestigations": [
-   "Comprehensive developmental, family, and psychosocial history",
-   "Collateral information from school and caregivers",
-   "Screening for comorbid ADHD, mood, anxiety, and learning disorders",
-   "Substance use screening in adolescents",
-   "Assessment of the home environment and any safeguarding concerns"
-  ],
-  "redFlags": [
-   "Serious violence or use of weapons posing danger to others",
-   "Cruelty to people or animals and fire-setting",
-   "Suicidal ideation or self-harm, which can coexist with the disorder",
-   "Signs of abuse, neglect, or exploitation requiring safeguarding action"
-  ],
-  "prognosis": "The course is variable; adolescent-onset conduct disorder often remits by adulthood, whereas childhood-onset and callous-unemotional presentations carry a higher risk of persistence, antisocial personality disorder, substance misuse, and poor social outcomes. Prognosis improves with early, sustained psychosocial intervention, treatment of comorbidities, and a supportive family and school environment.",
-  "pitfalls": [
-   "Confusing oppositional defiant disorder with the more severe conduct disorder",
-   "Missing treatable comorbid ADHD or mood disorder that worsens behaviour",
-   "Relying on medication as a primary treatment rather than psychosocial intervention",
-   "Overlooking safeguarding concerns and adverse home circumstances",
-   "Failing to assess for coexisting suicidality and self-harm"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Deliver parent management training as the first-line, evidence-based intervention to improve parenting practices and reduce coercive interactions",
-   "Provide family-based and multisystemic therapy addressing the child's wider social ecology, alongside school-based support",
-   "Offer the young person cognitive behavioural approaches such as problem-solving, anger management and social-skills training",
-   "Identify and treat comorbid conditions, using stimulants for ADHD and appropriate agents for mood, anxiety or substance misuse",
-   "Reserve pharmacotherapy such as an antipsychotic for severe, persistent aggression as an adjunct, not a substitute, for psychosocial treatment",
-   "Assess the home environment and act on any safeguarding concerns",
-   "Prioritise early, sustained and coordinated intervention, especially in childhood-onset and callous-unemotional presentations that carry a worse prognosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "conduct_disorder-pathway",
-   "title": "Conduct disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The disorder is a repetitive and persistent pattern of behaviour in children and adolescents that violates the basic rights of others or major age-appropriate societal norms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Serious violence or use of weapons posing danger to others",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Comprehensive developmental, family, and psychosocial history, Collateral information from school and caregivers, Screening for comorbid ADHD, mood, anxiety, and learning disorders"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deliver parent management training as the first-line, evidence-based intervention to improve parenting practices and reduce coercive interactions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing oppositional defiant disorder with the more severe conduct disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of conduct disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "conduct_disorder-matrix",
-   "title": "Conduct disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The disorder is a repetitive and persistent pattern of behaviour in children and adolescents that violates the basic rights of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The disorder is a repetitive and persistent pattern of behaviour in children and adolescents that violates the basic rights of others or major age-appropriate societal norms",
+      "Behaviours cluster into aggression to people and animals, destruction of property, deceitfulness or theft, and serious rule violations such as truancy and running away",
+      "Childhood-onset forms, appearing before adolescence, tend to be more severe and carry a worse prognosis than adolescent-onset forms",
+      "A specifier for limited prosocial emotions, marked by lack of remorse, callousness, and shallow affect, identifies a subgroup with poorer outcomes",
+      "It must be distinguished from oppositional defiant disorder, which involves defiance and irritability without the serious rights-violating behaviours of conduct disorder",
+      "Management is primarily psychosocial, including parent management training, family and multisystemic interventions, and school-based support, with medication reserved for comorbid conditions",
+      "Comorbidity with attention-deficit/hyperactivity disorder, mood and anxiety disorders, learning problems, and substance misuse is common and should be treated",
+      "Early identification and intervention improve outcomes and may reduce progression toward antisocial personality disorder in adulthood"
     ],
-    [
-     "Key Investigations",
-     "Comprehensive developmental, family, and psychosocial history, Collateral information from school and caregivers, Screening for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Conduct disorder arises from an interaction of genetic and temperamental factors, such as difficult temperament and low behavioural inhibition, with adverse environmental influences including harsh or inconsistent parenting, maltreatment, and socioeconomic adversity. Neurobiological correlates include altered function in circuits underlying emotional processing, reward, and threat appraisal, and blunted autonomic responsiveness, particularly in the callous-unemotional subgroup.",
+    "additionalDifferentials": [
+      "Oppositional defiant disorder",
+      "Attention-deficit/hyperactivity disorder",
+      "Intermittent explosive disorder",
+      "Mood disorder with irritability",
+      "Substance use disorder",
+      "Adjustment disorder in response to a stressor",
+      "Emerging antisocial personality traits in older adolescents"
     ],
-    [
-     "Primary Differentials",
-     "Oppositional defiant disorder, Attention-deficit/hyperactivity disorder, Intermittent explosive disorder",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Comprehensive developmental, family, and psychosocial history",
+      "Collateral information from school and caregivers",
+      "Screening for comorbid ADHD, mood, anxiety, and learning disorders",
+      "Substance use screening in adolescents",
+      "Assessment of the home environment and any safeguarding concerns"
     ],
-    [
-     "Management Strategy",
-     "Deliver parent management training as the first-line, evidence-based intervention to improve parenting practices and reduce",
-     "Core treatment modality"
+    "redFlags": [
+      "Serious violence or use of weapons posing danger to others",
+      "Cruelty to people or animals and fire-setting",
+      "Suicidal ideation or self-harm, which can coexist with the disorder",
+      "Signs of abuse, neglect, or exploitation requiring safeguarding action"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing oppositional defiant disorder with the more severe conduct disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable; adolescent-onset conduct disorder often remits by adulthood, whereas childhood-onset and callous-unemotional presentations carry a higher risk of persistence, antisocial personality disorder, substance misuse, and poor social outcomes. Prognosis improves with early, sustained psychosocial intervention, treatment of comorbidities, and a supportive family and school environment.",
+    "pitfalls": [
+      "Confusing oppositional defiant disorder with the more severe conduct disorder",
+      "Missing treatable comorbid ADHD or mood disorder that worsens behaviour",
+      "Relying on medication as a primary treatment rather than psychosocial intervention",
+      "Overlooking safeguarding concerns and adverse home circumstances",
+      "Failing to assess for coexisting suicidality and self-harm"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Deliver parent management training as the first-line, evidence-based intervention to improve parenting practices and reduce coercive interactions",
+      "Provide family-based and multisystemic therapy addressing the child's wider social ecology, alongside school-based support",
+      "Offer the young person cognitive behavioural approaches such as problem-solving, anger management and social-skills training",
+      "Identify and treat comorbid conditions, using stimulants for ADHD and appropriate agents for mood, anxiety or substance misuse",
+      "Reserve pharmacotherapy such as an antipsychotic for severe, persistent aggression as an adjunct, not a substitute, for psychosocial treatment",
+      "Assess the home environment and act on any safeguarding concerns",
+      "Prioritise early, sustained and coordinated intervention, especially in childhood-onset and callous-unemotional presentations that carry a worse prognosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for conduct disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "conduct-disorder-real-image",
-   "title": "Conduct disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "conduct_disorder-pathway",
+      "title": "Conduct disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The disorder is a repetitive and persistent pattern of behaviour in children and adolescents that violates the basic rights of others or major age-appropriate societal norms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Serious violence or use of weapons posing danger to others",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Comprehensive developmental, family, and psychosocial history, Collateral information from school and caregivers, Screening for comorbid ADHD, mood, anxiety, and learning disorders"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deliver parent management training as the first-line, evidence-based intervention to improve parenting practices and reduce coercive interactions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing oppositional defiant disorder with the more severe conduct disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of conduct disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "conduct_disorder-matrix",
+      "title": "Conduct disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The disorder is a repetitive and persistent pattern of behaviour in children and adolescents that violates the basic rights of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Comprehensive developmental, family, and psychosocial history, Collateral information from school and caregivers, Screening for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oppositional defiant disorder, Attention-deficit/hyperactivity disorder, Intermittent explosive disorder",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deliver parent management training as the first-line, evidence-based intervention to improve parenting practices and reduce",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing oppositional defiant disorder with the more severe conduct disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for conduct disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "conduct_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Developmental, family and psychosocial history",
+          "cells": [
+            {
+              "text": "Context of conduct symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collateral information from school and caregivers",
+          "cells": [
+            {
+              "text": "Corroborates behaviour across settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for comorbid ADHD, mood, anxiety and learning disorders",
+          "cells": [
+            {
+              "text": "Comorbidity identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance use screening in adolescents",
+          "cells": [
+            {
+              "text": "Substance use identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conduct_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oppositional defiant disorder",
+          "cells": [
+            {
+              "text": "Less severe; conduct disorder involves violence, cruelty or fire-setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attention-deficit/hyperactivity disorder",
+          "cells": [
+            {
+              "text": "Comorbid and treatable; worsens behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mood disorder with irritability",
+          "cells": [
+            {
+              "text": "Treatable comorbid mood disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conduct_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parent management training",
+          "cells": [
+            {
+              "text": "First-line, evidence-based; improves parenting and reduces coercive interactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family-based and multisystemic therapy",
+          "cells": [
+            {
+              "text": "Addresses the wider social ecology; school-based support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural approaches",
+          "cells": [
+            {
+              "text": "Problem-solving, anger management and social-skills training"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid conditions",
+          "cells": [
+            {
+              "text": "Stimulants for ADHD; appropriate agents for mood, anxiety or substance misuse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacotherapy as adjunct",
+          "cells": [
+            {
+              "text": "Antipsychotic for severe, persistent aggression; not a substitute for psychosocial treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safeguarding",
+          "cells": [
+            {
+              "text": "Assess the home environment and act on concerns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early, sustained intervention",
+          "cells": [
+            {
+              "text": "Especially childhood-onset and callous-unemotional presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "conduct_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Conduct disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected conduct disorder: persistent aggression, rule-breaking, or cruelty",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (serious violence, cruelty, fire-setting, suicidality, abuse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent safeguarding and risk assessment; suicide risk review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Developmental and family history; collateral from school; comorbidity screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do history and collateral confirm a persistent conduct pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider oppositional defiant disorder, mood disorder or adjustment disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parent management training as first-line intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Family-based or multisystemic therapy with school support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cognitive behavioural approaches for the young person",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat comorbid ADHD, mood, anxiety or substance misuse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Adolescent-onset often remits by adulthood; childhood-onset carries a worse prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

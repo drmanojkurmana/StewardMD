@@ -301,25 +301,522 @@
       "caption": "Diagnostic and clinical overview matrix for acute pyelonephritis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "pyelonephritis-real-image",
-      "title": "Acute Pyelonephritis: Diagnostic Renal Ultrasonography",
-      "type": "ultrasound",
-      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Colgan, Williams and Johnson, Acute Pyelonephritis in Women, Am Fam Physician 2011",
+      "url": "https://www.aafp.org/pubs/afp/issues/2011/0901/p519.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 285-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PYELONEPHRITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing acute pyelonephritis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Renal Cortex",
-          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+          "parameter": "Fever",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">38.0",
+              "op": ">",
+              "value": 38.0
+            },
+            {
+              "text": "{{hy:Fever separates pyelonephritis from simple cystitis}}; may be absent early or in frail or immunocompromised patients"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Corticomedullary Junction",
-          "description": "Medullary pyramid definition and structural architecture."
+          "parameter": "Flank pain and costovertebral angle tenderness",
+          "cells": [
+            {
+              "text": "Nearly universal"
+            },
+            {
+              "text": "Absence should prompt a search for another diagnosis"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Collecting System",
-          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+          "parameter": "Lower urinary tract symptoms",
+          "cells": [
+            {
+              "text": "Frequency, urgency, dysuria; may or may not precede upper tract symptoms"
+            },
+            {
+              "text": "Supports urinary source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Leukocyte esterase, pyuria, microscopic haematuria; white cell casts"
+            },
+            {
+              "text": "White cell casts point to renal origin but are rarely seen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine culture",
+          "unit": "CFU/mL",
+          "cells": [
+            {
+              "text": ">=10^5",
+              "op": ">=",
+              "value": 100000
+            },
+            {
+              "text": "Send in every suspected case with susceptibility testing; over 95% grow a single gram-negative organism"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood cultures",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Bacteraemia in 15% to 30%",
+              "range": [
+                15,
+                30
+              ]
+            },
+            {
+              "text": "Not routine in uncomplicated cases; draw when admitted or another source is suspected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Expected response to therapy",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "48 to 72",
+              "range": [
+                48,
+                72
+              ]
+            },
+            {
+              "text": "No improvement: image and look for complications or another diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Contrast CT preferred in non-pregnant women; ultrasound or MRI as alternatives"
+            },
+            {
+              "text": "Not needed in most women; men with febrile UTI need upper tract imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fever needing admission",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">39.4",
+              "op": ">",
+              "value": 39.4
+            },
+            {
+              "text": "One of the criteria for hospital treatment"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison describes a severity spectrum, not a formal score. The AFP thresholds are written for non-pregnant women."
+    },
+    {
+      "id": "PYELONEPHRITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute pyelonephritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute cystitis",
+          "cells": [
+            {
+              "text": "Bladder symptoms without fever, rigors or flank pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute prostatitis",
+          "cells": [
+            {
+              "text": "Febrile UTI in a man; enlarged tender prostate, raised PSA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrolithiasis or urinary obstruction",
+          "cells": [
+            {
+              "text": "Colicky flank pain; obstruction shown on imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Papillary necrosis",
+          "cells": [
+            {
+              "text": "Sloughed papilla can obstruct the ureter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Appendicitis, diverticulitis, pancreatitis or abdominal abscess",
+          "cells": [
+            {
+              "text": "Abdominal source of pain and fever"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pelvic inflammatory disease or sexually transmitted infection",
+          "cells": [
+            {
+              "text": "Vaginal discharge should prompt STI testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basal pleural process or pulmonary infarction",
+          "cells": [
+            {
+              "text": "Chest source of flank pain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Herpes zoster, rib fracture or musculoskeletal pain",
+          "cells": [
+            {
+              "text": "Dermatomal rash or local chest wall tenderness"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Splenic abscess or infarct, renal vein thrombosis",
+          "cells": [
+            {
+              "text": "Listed causes of flank pain with costovertebral tenderness"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Sources list these mimics without naming a single separating test, so that column was dropped."
+    },
+    {
+      "id": "PYELONEPHRITIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of acute pyelonephritis in women",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral ciprofloxacin",
+          "cells": [
+            {
+              "text": "{{hy:Outpatient when local fluoroquinolone resistance is 10% or less}}"
+            },
+            {
+              "text": "500 mg twice daily for 7 days, or extended-release 1,000 mg once daily for 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral levofloxacin",
+          "cells": [
+            {
+              "text": "Outpatient when local fluoroquinolone resistance is 10% or less"
+            },
+            {
+              "text": "750 mg once daily for 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Initial IV dose then oral fluoroquinolone",
+          "cells": [
+            {
+              "text": "Local fluoroquinolone resistance over 10%"
+            },
+            {
+              "text": "Ceftriaxone 1 g IV or gentamicin 5 mg/kg IV once"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral trimethoprim-sulfamethoxazole",
+          "cells": [
+            {
+              "text": "Only when the isolate is known to be susceptible"
+            },
+            {
+              "text": "160/800 mg twice daily for 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hospital IV therapy",
+          "cells": [
+            {
+              "text": "Severe illness, sepsis, pregnancy, male sex, vomiting, comorbidity, fever over 39.4 deg C"
+            },
+            {
+              "text": "Ciprofloxacin 400 mg twice daily, ceftriaxone 1 g daily, aminoglycoside 5 mg/kg daily, or imipenem-cilastatin 500 mg every 6 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "All pregnant patients"
+            },
+            {
+              "text": "Admit; start a second- or third-generation cephalosporin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral step-down",
+          "cells": [
+            {
+              "text": "After clinical improvement or susceptibilities known"
+            },
+            {
+              "text": "Same oral regimens as outpatient"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Relief of obstruction or drainage",
+          "cells": [
+            {
+              "text": "Obstruction, papillary necrosis, abscess or emphysematous pyelonephritis"
+            },
+            {
+              "text": "Urology or interventional radiology input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Oral beta-lactams and empirical trimethoprim-sulfamethoxazole are generally avoided because of high resistance. Regimens are from a 2011 review for non-pregnant women; check local resistance and current fluoroquinolone safety advice."
+    },
+    {
+      "id": "PYELONEPHRITIS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Major causes of papillary necrosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Causes",
+          "cells": [
+            {
+              "text": "Analgesic nephropathy; sickle cell nephropathy; diabetes with urinary tract infection; prolonged NSAID use (rare)"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PYELONEPHRITIS-dx-mgmt",
+      "title": "Diagnosis and management of acute pyelonephritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Urinary symptoms with fever, flank pain, rigors or vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urinalysis plus urine culture with susceptibilities",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Sepsis, pregnancy, male, vomiting, comorbidity or fever over 39.4 deg C?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Admit; blood cultures; start IV antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Local fluoroquinolone resistance 10% or less?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oral ciprofloxacin 7 days or levofloxacin 5 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "One IV dose ceftriaxone or gentamicin, then oral fluoroquinolone",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Improving within 48 to 72 hours?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Complete course; no test of cure if symptom free",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat culture and image (CT or ultrasound) for obstruction or abscess",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Drain or relieve obstruction; tailor antibiotics; seek urology input",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
         }
       ]
     }

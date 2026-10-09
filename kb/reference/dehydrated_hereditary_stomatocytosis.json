@@ -1,176 +1,483 @@
 {
- "id": "dehydrated_hereditary_stomatocytosis",
- "name": "Dehydrated hereditary stomatocytosis",
- "aliases": [
-  "hereditary xerocytosis",
-  "xerocytosis",
-  "DHSt"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Postgraduate Haematology (Hoffbrand)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant red cell membrane cation-leak disorder in which red cells are dehydrated (xerocytes), most often from gain-of-function variants in PIEZO1 (a mechanosensitive cation channel) and less commonly KCNN4 (the Gardos channel)",
-   "Causes a compensated or mild to moderate haemolytic anaemia with a characteristically raised MCHC and increased reticulocytes; the film may show few overt stomatocytes but target and desiccated cells",
-   "Iron overload is common and can occur out of proportion to transfusion, sometimes as the presenting problem, mimicking hereditary haemochromatosis",
-   "Perinatal oedema, transient hydrops fetalis or ascites is a recognised feature of PIEZO1-related disease and may resolve spontaneously",
-   "Splenectomy is contraindicated: it does not reliably correct the anaemia and carries a high risk of subsequent venous thromboembolism, including portal and pulmonary thrombosis",
-   "Osmotic fragility is typically decreased because the dehydrated cells resist osmotic lysis, and osmotic gradient ektacytometry shows a characteristic left-shifted curve",
-   "The overlapping and heterogeneous stomatocytosis syndromes require careful characterisation, since management, particularly avoidance of splenectomy, hinges on correct classification"
+  "id": "dehydrated_hereditary_stomatocytosis",
+  "name": "Dehydrated hereditary stomatocytosis",
+  "aliases": [
+    "hereditary xerocytosis",
+    "xerocytosis",
+    "DHSt"
   ],
-  "pathophysiology": "Dehydrated hereditary stomatocytosis is caused by dominant gain-of-function variants in red cell membrane cation channels, chiefly PIEZO1 (a mechanosensitive non-selective cation channel) and occasionally KCNN4 (the calcium-activated Gardos potassium channel). Abnormal channel gating produces a net cation leak in which potassium loss exceeds sodium gain, so intracellular monovalent cation and water content fall and the cell becomes dehydrated with an increased haemoglobin concentration. The resulting rigid, poorly deformable red cells have a shortened lifespan and undergo haemolysis, while disordered iron regulation with relative hepcidin suppression promotes parenchymal iron loading independent of transfusion.",
-  "additionalDifferentials": [
-   "Overhydrated hereditary stomatocytosis and other stomatocytosis variants",
-   "Hereditary spherocytosis and hereditary elliptocytosis",
-   "Hereditary haemochromatosis, when the iron-overload phenotype dominates",
-   "Other causes of a raised MCHC, such as cold agglutinins or sample artefact",
-   "Congenital dyserythropoietic anaemia",
-   "Thalassaemia and other haemoglobinopathies"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with MCHC (raised) and reticulocyte count",
-   "Blood film for stomatocytes, target cells and desiccated forms",
-   "Osmotic gradient ektacytometry, showing a characteristic left-shifted curve where available",
-   "Osmotic fragility, typically decreased",
-   "Iron studies with hepatic iron quantification by MRI (T2* or R2*)",
-   "Molecular testing of PIEZO1 and KCNN4 with family segregation studies",
-   "Exclusion of HFE and other haemochromatosis genes when iron loading dominates"
-  ],
-  "redFlags": [
-   "Perinatal hydrops fetalis, ascites or unexplained oedema",
-   "Progressive iron overload with hepatic or cardiac dysfunction",
-   "Venous or arterial thrombosis, especially after prior splenectomy",
-   "Symptomatic pigment gallstones"
-  ],
-  "prognosis": "The haemolytic anaemia is usually mild and compatible with a normal lifespan, but iron overload and thrombotic complications, particularly after splenectomy, drive long-term morbidity. Outcomes are good when splenectomy is avoided and iron status is monitored and treated.",
-  "pitfalls": [
-   "Performing splenectomy, which is contraindicated and carries a high thrombotic risk",
-   "Misattributing iron overload solely to transfusion or to primary haemochromatosis",
-   "Missing the diagnosis because stomatocytes are sparse on the film",
-   "Confusing it with overhydrated stomatocytosis, which behaves differently",
-   "Overlooking the dominant family history and perinatal oedema as diagnostic clues"
-  ],
-  "references": [
-   "Postgraduate Haematology (Hoffbrand)",
-   "British Society for Haematology guidelines",
-   "Williams Hematology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid splenectomy, which fails to correct the anaemia and markedly increases the risk of venous, portal and pulmonary thrombosis",
-   "Folic acid supplementation to support chronic compensated haemolysis",
-   "Regular monitoring of iron status with hepatic iron quantification, treating iron overload with iron chelation or cautious venesection even in the absence of transfusion",
-   "Reserve red-cell transfusion for symptomatic anaemia, which is usually mild and only infrequently required",
-   "Thromboprophylaxis and a low threshold for investigating venous thromboembolism given the intrinsic prothrombotic tendency",
-   "Foetal and perinatal surveillance for hydrops, effusions or ascites in PIEZO1-related disease, with supportive care as these often resolve spontaneously",
-   "Genetic counselling and molecular testing of PIEZO1 and KCNN4 with family segregation studies, given autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dehydrated_hereditary_stomatocytosis-pathway",
-   "title": "Dehydrated hereditary stomatocytosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant red cell membrane cation-leak disorder in which red cells are dehydrated (xerocytes), most often from gain-of-function variants in PIEZO1 (a mechanosensitive cation channel) and less commonly KCNN4 (the Gardos channel)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Perinatal hydrops fetalis, ascites or unexplained oedema",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with MCHC (raised) and reticulocyte count, Blood film for stomatocytes, target cells and desiccated forms, Osmotic gradient ektacytometry, showing a characteristic left-shifted curve where available"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid splenectomy, which fails to correct the anaemia and markedly increases the risk of venous, portal and pulmonary thrombosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing splenectomy, which is contraindicated and carries a high thrombotic risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dehydrated hereditary stomatocytosis."
-  }
- ],
- "tables": [
-  {
-   "id": "dehydrated_hereditary_stomatocytosis-matrix",
-   "title": "Dehydrated hereditary stomatocytosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant red cell membrane cation-leak disorder in which red cells are dehydrated (xerocytes), most often from",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Postgraduate Haematology (Hoffbrand)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant red cell membrane cation-leak disorder in which red cells are dehydrated (xerocytes), most often from gain-of-function variants in PIEZO1 (a mechanosensitive cation channel) and less commonly KCNN4 (the Gardos channel)",
+      "Causes a compensated or mild to moderate haemolytic anaemia with a characteristically raised MCHC and increased reticulocytes; the film may show few overt stomatocytes but target and desiccated cells",
+      "Iron overload is common and can occur out of proportion to transfusion, sometimes as the presenting problem, mimicking hereditary haemochromatosis",
+      "Perinatal oedema, transient hydrops fetalis or ascites is a recognised feature of PIEZO1-related disease and may resolve spontaneously",
+      "Splenectomy is contraindicated: it does not reliably correct the anaemia and carries a high risk of subsequent venous thromboembolism, including portal and pulmonary thrombosis",
+      "Osmotic fragility is typically decreased because the dehydrated cells resist osmotic lysis, and osmotic gradient ektacytometry shows a characteristic left-shifted curve",
+      "The overlapping and heterogeneous stomatocytosis syndromes require careful characterisation, since management, particularly avoidance of splenectomy, hinges on correct classification"
     ],
-    [
-     "Key Investigations",
-     "Full blood count with MCHC (raised) and reticulocyte count, Blood film for stomatocytes, target cells and desiccated forms,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dehydrated hereditary stomatocytosis is caused by dominant gain-of-function variants in red cell membrane cation channels, chiefly PIEZO1 (a mechanosensitive non-selective cation channel) and occasionally KCNN4 (the calcium-activated Gardos potassium channel). Abnormal channel gating produces a net cation leak in which potassium loss exceeds sodium gain, so intracellular monovalent cation and water content fall and the cell becomes dehydrated with an increased haemoglobin concentration. The resulting rigid, poorly deformable red cells have a shortened lifespan and undergo haemolysis, while disordered iron regulation with relative hepcidin suppression promotes parenchymal iron loading independent of transfusion.",
+    "additionalDifferentials": [
+      "Overhydrated hereditary stomatocytosis and other stomatocytosis variants",
+      "Hereditary spherocytosis and hereditary elliptocytosis",
+      "Hereditary haemochromatosis, when the iron-overload phenotype dominates",
+      "Other causes of a raised MCHC, such as cold agglutinins or sample artefact",
+      "Congenital dyserythropoietic anaemia",
+      "Thalassaemia and other haemoglobinopathies"
     ],
-    [
-     "Primary Differentials",
-     "Overhydrated hereditary stomatocytosis and other stomatocytosis variants, Hereditary spherocytosis and hereditary elliptocytosis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with MCHC (raised) and reticulocyte count",
+      "Blood film for stomatocytes, target cells and desiccated forms",
+      "Osmotic gradient ektacytometry, showing a characteristic left-shifted curve where available",
+      "Osmotic fragility, typically decreased",
+      "Iron studies with hepatic iron quantification by MRI (T2* or R2*)",
+      "Molecular testing of PIEZO1 and KCNN4 with family segregation studies",
+      "Exclusion of HFE and other haemochromatosis genes when iron loading dominates"
     ],
-    [
-     "Management Strategy",
-     "Avoid splenectomy, which fails to correct the anaemia and markedly increases the risk of venous, portal and pulmonary thrombosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Perinatal hydrops fetalis, ascites or unexplained oedema",
+      "Progressive iron overload with hepatic or cardiac dysfunction",
+      "Venous or arterial thrombosis, especially after prior splenectomy",
+      "Symptomatic pigment gallstones"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing splenectomy, which is contraindicated and carries a high thrombotic risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "The haemolytic anaemia is usually mild and compatible with a normal lifespan, but iron overload and thrombotic complications, particularly after splenectomy, drive long-term morbidity. Outcomes are good when splenectomy is avoided and iron status is monitored and treated.",
+    "pitfalls": [
+      "Performing splenectomy, which is contraindicated and carries a high thrombotic risk",
+      "Misattributing iron overload solely to transfusion or to primary haemochromatosis",
+      "Missing the diagnosis because stomatocytes are sparse on the film",
+      "Confusing it with overhydrated stomatocytosis, which behaves differently",
+      "Overlooking the dominant family history and perinatal oedema as diagnostic clues"
+    ],
+    "references": [
+      "Postgraduate Haematology (Hoffbrand)",
+      "British Society for Haematology guidelines",
+      "Williams Hematology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid splenectomy, which fails to correct the anaemia and markedly increases the risk of venous, portal and pulmonary thrombosis",
+      "Folic acid supplementation to support chronic compensated haemolysis",
+      "Regular monitoring of iron status with hepatic iron quantification, treating iron overload with iron chelation or cautious venesection even in the absence of transfusion",
+      "Reserve red-cell transfusion for symptomatic anaemia, which is usually mild and only infrequently required",
+      "Thromboprophylaxis and a low threshold for investigating venous thromboembolism given the intrinsic prothrombotic tendency",
+      "Foetal and perinatal surveillance for hydrops, effusions or ascites in PIEZO1-related disease, with supportive care as these often resolve spontaneously",
+      "Genetic counselling and molecular testing of PIEZO1 and KCNN4 with family segregation studies, given autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for dehydrated hereditary stomatocytosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dehydrated-hereditary-stomatocytosis-real-image",
-   "title": "Dehydrated hereditary stomatocytosis: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "dehydrated_hereditary_stomatocytosis-pathway",
+      "title": "Dehydrated hereditary stomatocytosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant red cell membrane cation-leak disorder in which red cells are dehydrated (xerocytes), most often from gain-of-function variants in PIEZO1 (a mechanosensitive cation channel) and less commonly KCNN4 (the Gardos channel)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Perinatal hydrops fetalis, ascites or unexplained oedema",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with MCHC (raised) and reticulocyte count, Blood film for stomatocytes, target cells and desiccated forms, Osmotic gradient ektacytometry, showing a characteristic left-shifted curve where available"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid splenectomy, which fails to correct the anaemia and markedly increases the risk of venous, portal and pulmonary thrombosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing splenectomy, which is contraindicated and carries a high thrombotic risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dehydrated hereditary stomatocytosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dehydrated_hereditary_stomatocytosis-matrix",
+      "title": "Dehydrated hereditary stomatocytosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant red cell membrane cation-leak disorder in which red cells are dehydrated (xerocytes), most often from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with MCHC (raised) and reticulocyte count, Blood film for stomatocytes, target cells and desiccated forms,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Overhydrated hereditary stomatocytosis and other stomatocytosis variants, Hereditary spherocytosis and hereditary elliptocytosis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid splenectomy, which fails to correct the anaemia and markedly increases the risk of venous, portal and pulmonary thrombosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing splenectomy, which is contraindicated and carries a high thrombotic risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dehydrated hereditary stomatocytosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology (Hoffbrand)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dehydrated_hereditary_stomatocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with MCHC and reticulocyte count",
+          "cells": [
+            {
+              "text": "Raised MCHC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film",
+          "cells": [
+            {
+              "text": "Stomatocytes, target cells and desiccated forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic gradient ektacytometry",
+          "cells": [
+            {
+              "text": "Characteristic left-shifted curve, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic fragility",
+          "cells": [
+            {
+              "text": "Typically decreased"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic iron quantification by MRI",
+          "cells": [
+            {
+              "text": "Progressive iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIEZO1 and KCNN4 molecular testing",
+          "cells": [
+            {
+              "text": "Dominant variants, confirmed by family segregation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dehydrated_hereditary_stomatocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Overhydrated hereditary stomatocytosis",
+          "cells": [
+            {
+              "text": "Behaves differently; a common pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary haemochromatosis",
+          "cells": [
+            {
+              "text": "Iron-overload phenotype dominates; HFE and other genes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold agglutinins or sample artefact",
+          "cells": [
+            {
+              "text": "Other causes of a raised MCHC"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dehydrated_hereditary_stomatocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid splenectomy",
+          "cells": [
+            {
+              "text": "Fails to correct the anaemia and markedly raises thrombosis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Supports chronic compensated haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron monitoring and treatment",
+          "cells": [
+            {
+              "text": "Hepatic iron quantification; chelation or cautious venesection even without transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion",
+          "cells": [
+            {
+              "text": "Reserved for symptomatic anaemia, which is usually mild and infrequently needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboprophylaxis",
+          "cells": [
+            {
+              "text": "Low threshold to investigate venous thromboembolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foetal and perinatal surveillance",
+          "cells": [
+            {
+              "text": "For hydrops, effusions or ascites in PIEZO1-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; PIEZO1 and KCNN4 testing with family studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dehydrated_hereditary_stomatocytosis-dx-mgmt",
+      "title": "Diagnosis and management of Dehydrated hereditary stomatocytosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dehydrated hereditary stomatocytosis: haemolysis with raised MCHC",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (perinatal hydrops, progressive iron overload, thrombosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent thrombosis work-up and management of iron overload with organ dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC with MCHC, film for stomatocytes, ektacytometry, PIEZO1 and KCNN4 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is MCHC raised with stomatocytes and a PIEZO1 or KCNN4 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider overhydrated stomatocytosis, hereditary spherocytosis or haemochromatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid splenectomy; it fails to correct anaemia and raises thrombosis risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid for compensated chronic haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor and treat iron overload with chelation or cautious venesection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thromboprophylaxis with a low threshold to investigate venous thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Transfuse only for symptomatic anaemia; surveil for fetal hydrops",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Haemolysis is usually mild with a normal lifespan; good when splenectomy is avoided",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

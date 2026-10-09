@@ -1,172 +1,431 @@
 {
- "id": "choroideremia",
- "name": "Choroideremia",
- "aliases": [
-  "CHM",
-  "REP1",
-  "Rab escort protein 1 deficiency",
-  "tapetochoroidal dystrophy"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked recessive chorioretinal dystrophy caused by variants in CHM, encoding Rab escort protein 1 (REP1), affecting males",
-   "Presents in boys or young men with night blindness followed by progressive peripheral (ring) visual field constriction",
-   "Fundus shows progressive, scalloped atrophy of the choroid and retinal pigment epithelium, exposing underlying sclera",
-   "Central vision is typically preserved until relatively late, distinguishing it from many macular dystrophies",
-   "Carrier females are usually asymptomatic but characteristically show a patchy, mottled pigmentary fundus from X-inactivation mosaicism",
-   "Autofluorescence and OCT clearly delineate the preserved central island, useful for prognosis and trial monitoring",
-   "It is a leading target for retinal gene therapy given its monogenic X-linked basis"
+  "id": "choroideremia",
+  "name": "Choroideremia",
+  "aliases": [
+    "CHM",
+    "REP1",
+    "Rab escort protein 1 deficiency",
+    "tapetochoroidal dystrophy"
   ],
-  "pathophysiology": "Choroideremia is caused by loss of function of REP1, a protein that escorts Rab GTPases for prenylation, a lipid modification essential for intracellular vesicular trafficking. Although a related protein partly compensates elsewhere, the retinal pigment epithelium, photoreceptors, and choroid are particularly dependent on REP1, so deficiency impairs their vesicle transport and membrane function. This leads to progressive degeneration of the photoreceptor-retinal pigment epithelium-choriocapillaris complex, beginning in the periphery and advancing centrally, with characteristic loss of the choroid exposing bare sclera. The X-linked pattern reflects the gene's location, with mosaic expression producing the milder carrier fundus.",
-  "additionalDifferentials": [
-   "Retinitis pigmentosa (including X-linked forms)",
-   "Gyrate atrophy of the choroid and retina",
-   "Advanced cone-rod or rod-cone dystrophies",
-   "Bietti crystalline dystrophy",
-   "Thioridazine or other toxic chorioretinopathy",
-   "Pathological/degenerative myopia with chorioretinal atrophy"
-  ],
-  "additionalInvestigations": [
-   "CHM molecular genetic testing",
-   "Fundus autofluorescence to map the residual central island and rate of loss",
-   "Optical coherence tomography of macular structure and photoreceptor preservation",
-   "Electroretinography documenting rod-predominant then generalised dysfunction",
-   "Automated perimetry to track peripheral field constriction",
-   "Examination of carrier relatives for the characteristic mottled fundus"
-  ],
-  "redFlags": [
-   "Encroachment of atrophy on the central macular island threatening acuity",
-   "Development of macular oedema or complications compromising residual vision",
-   "Atypical features suggesting an alternative chorioretinal dystrophy"
-  ],
-  "prognosis": "It is a slowly progressive disorder in which night blindness and peripheral field loss advance over decades, with central acuity often preserved until middle age before eventual severe visual impairment; gene therapy trials aim to slow or halt degeneration.",
-  "pitfalls": [
-   "Misdiagnosing it as retinitis pigmentosa and missing the specific X-linked genetic basis and therapeutic implications",
-   "Overlooking the carrier fundus in the mother, which supports the diagnosis and guides counselling",
-   "Assuming poor central vision early, when the central island is usually retained until late",
-   "Failing to consider eligibility for gene-therapy trials in suitable patients"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise that no disease-modifying drug is established and offer enrolment in CHM gene-replacement therapy trials where available",
-   "Provide low-vision rehabilitation, visual aids and support for education, mobility and employment",
-   "Treat complicating cataract and cystoid macular oedema, the latter often with a carbonic anhydrase inhibitor, and correct refractive error",
-   "Monitor progression with fundus autofluorescence, optical coherence tomography, perimetry and electroretinography to follow the preserved central island",
-   "Offer genetic counselling and carrier testing of female relatives, explaining the X-linked recessive inheritance",
-   "Coordinate care across ophthalmology, medical retina, clinical genetics and low-vision services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "choroideremia-pathway",
-   "title": "Choroideremia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked recessive chorioretinal dystrophy caused by variants in CHM, encoding Rab escort protein 1 (REP1), affecting males",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Encroachment of atrophy on the central macular island threatening acuity",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CHM molecular genetic testing, Fundus autofluorescence to map the residual central island and rate of loss, Optical coherence tomography of macular structure and photoreceptor preservation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise that no disease-modifying drug is established and offer enrolment in CHM gene-replacement therapy trials where available"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as retinitis pigmentosa and missing the specific X-linked genetic basis and therapeutic implications"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of choroideremia."
-  }
- ],
- "tables": [
-  {
-   "id": "choroideremia-matrix",
-   "title": "Choroideremia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked recessive chorioretinal dystrophy caused by variants in CHM, encoding Rab escort protein 1 (REP1), affecting males",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked recessive chorioretinal dystrophy caused by variants in CHM, encoding Rab escort protein 1 (REP1), affecting males",
+      "Presents in boys or young men with night blindness followed by progressive peripheral (ring) visual field constriction",
+      "Fundus shows progressive, scalloped atrophy of the choroid and retinal pigment epithelium, exposing underlying sclera",
+      "Central vision is typically preserved until relatively late, distinguishing it from many macular dystrophies",
+      "Carrier females are usually asymptomatic but characteristically show a patchy, mottled pigmentary fundus from X-inactivation mosaicism",
+      "Autofluorescence and OCT clearly delineate the preserved central island, useful for prognosis and trial monitoring",
+      "It is a leading target for retinal gene therapy given its monogenic X-linked basis"
     ],
-    [
-     "Key Investigations",
-     "CHM molecular genetic testing, Fundus autofluorescence to map the residual central island and rate of loss, Optical coherence",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Choroideremia is caused by loss of function of REP1, a protein that escorts Rab GTPases for prenylation, a lipid modification essential for intracellular vesicular trafficking. Although a related protein partly compensates elsewhere, the retinal pigment epithelium, photoreceptors, and choroid are particularly dependent on REP1, so deficiency impairs their vesicle transport and membrane function. This leads to progressive degeneration of the photoreceptor-retinal pigment epithelium-choriocapillaris complex, beginning in the periphery and advancing centrally, with characteristic loss of the choroid exposing bare sclera. The X-linked pattern reflects the gene's location, with mosaic expression producing the milder carrier fundus.",
+    "additionalDifferentials": [
+      "Retinitis pigmentosa (including X-linked forms)",
+      "Gyrate atrophy of the choroid and retina",
+      "Advanced cone-rod or rod-cone dystrophies",
+      "Bietti crystalline dystrophy",
+      "Thioridazine or other toxic chorioretinopathy",
+      "Pathological/degenerative myopia with chorioretinal atrophy"
     ],
-    [
-     "Primary Differentials",
-     "Retinitis pigmentosa (including X-linked forms), Gyrate atrophy of the choroid and retina, Advanced cone-rod or rod-cone",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CHM molecular genetic testing",
+      "Fundus autofluorescence to map the residual central island and rate of loss",
+      "Optical coherence tomography of macular structure and photoreceptor preservation",
+      "Electroretinography documenting rod-predominant then generalised dysfunction",
+      "Automated perimetry to track peripheral field constriction",
+      "Examination of carrier relatives for the characteristic mottled fundus"
     ],
-    [
-     "Management Strategy",
-     "Recognise that no disease-modifying drug is established and offer enrolment in CHM gene-replacement therapy trials where available",
-     "Core treatment modality"
+    "redFlags": [
+      "Encroachment of atrophy on the central macular island threatening acuity",
+      "Development of macular oedema or complications compromising residual vision",
+      "Atypical features suggesting an alternative chorioretinal dystrophy"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as retinitis pigmentosa and missing the specific X-linked genetic basis and therapeutic implications",
-     "Prevent diagnostic or management error"
+    "prognosis": "It is a slowly progressive disorder in which night blindness and peripheral field loss advance over decades, with central acuity often preserved until middle age before eventual severe visual impairment; gene therapy trials aim to slow or halt degeneration.",
+    "pitfalls": [
+      "Misdiagnosing it as retinitis pigmentosa and missing the specific X-linked genetic basis and therapeutic implications",
+      "Overlooking the carrier fundus in the mother, which supports the diagnosis and guides counselling",
+      "Assuming poor central vision early, when the central island is usually retained until late",
+      "Failing to consider eligibility for gene-therapy trials in suitable patients"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise that no disease-modifying drug is established and offer enrolment in CHM gene-replacement therapy trials where available",
+      "Provide low-vision rehabilitation, visual aids and support for education, mobility and employment",
+      "Treat complicating cataract and cystoid macular oedema, the latter often with a carbonic anhydrase inhibitor, and correct refractive error",
+      "Monitor progression with fundus autofluorescence, optical coherence tomography, perimetry and electroretinography to follow the preserved central island",
+      "Offer genetic counselling and carrier testing of female relatives, explaining the X-linked recessive inheritance",
+      "Coordinate care across ophthalmology, medical retina, clinical genetics and low-vision services"
     ]
-   ],
-   "caption": "Overview comparison matrix for choroideremia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "choroideremia-real-image",
-   "title": "Choroideremia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "choroideremia-pathway",
+      "title": "Choroideremia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked recessive chorioretinal dystrophy caused by variants in CHM, encoding Rab escort protein 1 (REP1), affecting males",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Encroachment of atrophy on the central macular island threatening acuity",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CHM molecular genetic testing, Fundus autofluorescence to map the residual central island and rate of loss, Optical coherence tomography of macular structure and photoreceptor preservation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise that no disease-modifying drug is established and offer enrolment in CHM gene-replacement therapy trials where available"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as retinitis pigmentosa and missing the specific X-linked genetic basis and therapeutic implications"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of choroideremia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "choroideremia-matrix",
+      "title": "Choroideremia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked recessive chorioretinal dystrophy caused by variants in CHM, encoding Rab escort protein 1 (REP1), affecting males",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CHM molecular genetic testing, Fundus autofluorescence to map the residual central island and rate of loss, Optical coherence",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Retinitis pigmentosa (including X-linked forms), Gyrate atrophy of the choroid and retina, Advanced cone-rod or rod-cone",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise that no disease-modifying drug is established and offer enrolment in CHM gene-replacement therapy trials where available",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as retinitis pigmentosa and missing the specific X-linked genetic basis and therapeutic implications",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for choroideremia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "choroideremia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CHM molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Maps the residual central island and rate of loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of macular structure",
+          "cells": [
+            {
+              "text": "Photoreceptor preservation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Rod-predominant then generalised dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Automated perimetry",
+          "cells": [
+            {
+              "text": "Peripheral field constriction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choroideremia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene-replacement trials",
+          "cells": [
+            {
+              "text": "Enrolment in CHM gene-replacement therapy trials where available"
+            },
+            {
+              "text": "No established disease-modifying drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support",
+          "cells": [
+            {
+              "text": "Low-vision rehabilitation, visual aids and support for education, mobility and employment"
+            },
+            {
+              "text": "Progressive field loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication treatment",
+          "cells": [
+            {
+              "text": "Treat cataract and cystoid macular oedema, often with a carbonic anhydrase inhibitor; correct refraction"
+            },
+            {
+              "text": "Complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Fundus autofluorescence, OCT, perimetry and electroretinography for the preserved central island"
+            },
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier testing of female relatives; X-linked recessive inheritance"
+            },
+            {
+              "text": "Inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team care",
+          "cells": [
+            {
+              "text": "Ophthalmology, medical retina, clinical genetics and low-vision services"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "choroideremia-dx-mgmt",
+      "title": "Diagnosis and management of Choroideremia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected choroideremia: night blindness then peripheral field constriction in a male",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atrophy encroaching on central island, macular oedema)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: medical retina review for macular oedema or rapid central loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CHM testing, autofluorescence, OCT, electroretinography and perimetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Scalloped chorioretinal atrophy with CHM variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Enrol in gene-replacement trials where available",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check retinitis pigmentosa, gyrate atrophy and Bietti dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-vision rehabilitation and visual aids for education and mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat cataract and cystoid macular oedema; correct refractive error",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor the central island with autofluorescence and OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Carrier testing and counselling for female relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -241,25 +241,987 @@
       "caption": "Diagnostic and clinical overview matrix for chronic kidney disease."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "ckd-real-image",
-      "title": "Chronic kidney disease: Diagnostic Renal Ultrasonography",
-      "type": "ultrasound",
-      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Chronic Kidney Disease",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/chronic-kidney-disease/chronic-kidney-disease",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 280-1 and Table 280-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 36-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 103-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 352-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 47-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c8",
+      "label": "Tables PDF, Table 285-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c9",
+      "label": "Tables PDF, Table 282-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ckd-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and staging chronic kidney disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "eGFR or threshold",
+        "Notes"
+      ],
+      "rows": [
         {
-          "label": "Renal Cortex",
-          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+          "parameter": "Definition",
+          "unit": "mL/min/1.73 m2",
+          "cells": [
+            {
+              "text": "eGFR <60 for >=3 months",
+              "op": "<",
+              "value": 60
+            },
+            {
+              "text": "{{hy:Chronicity needs 3 months; compare old creatinine values}}"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Corticomedullary Junction",
-          "description": "Medullary pyramid definition and structural architecture."
+          "parameter": "Albuminuria",
+          "unit": "mg/g",
+          "cells": [
+            {
+              "text": "ACR >=30",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "Marks kidney damage even with normal eGFR"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Collecting System",
-          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+          "parameter": "Stage 1",
+          "unit": "mL/min/1.73 m2",
+          "cells": [
+            {
+              "text": ">=90",
+              "op": ">=",
+              "value": 90
+            },
+            {
+              "text": "With albuminuria or structural disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 2",
+          "unit": "mL/min/1.73 m2",
+          "cells": [
+            {
+              "text": "60 to 89",
+              "range": [
+                60,
+                89
+              ]
+            },
+            {
+              "text": "Mild reduction"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 3",
+          "unit": "mL/min/1.73 m2",
+          "cells": [
+            {
+              "text": "30 to 59",
+              "range": [
+                30,
+                59
+              ]
+            },
+            {
+              "text": "Merck splits 3a 45 to 59 and 3b 30 to 44"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 4",
+          "unit": "mL/min/1.73 m2",
+          "cells": [
+            {
+              "text": "15 to 29",
+              "range": [
+                15,
+                29
+              ]
+            },
+            {
+              "text": "Start dialysis preparation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 5",
+          "unit": "mL/min/1.73 m2",
+          "cells": [
+            {
+              "text": "<15",
+              "op": "<",
+              "value": 15
+            },
+            {
+              "text": "Kidney failure"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Bilaterally small kidneys"
+            },
+            {
+              "text": "Long-standing CKD; normal size possible in diabetes, amyloid, HIV, PKD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "eGFR equation",
+          "cells": [
+            {
+              "text": "CKD-EPI 2021 creatinine, with cystatin C if available"
+            },
+            {
+              "text": "Valid only in steady state"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperkalaemia, severe",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": ">6",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "Urgent treatment"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Tables PDF also lists a stage 0 (GFR above 90 with risk factors)."
+    },
+    {
+      "id": "ckd-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from or within CKD",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute kidney injury",
+          "cells": [
+            {
+              "text": "{{hy:Recent rise from a known normal baseline; potentially reversible}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute on chronic kidney failure",
+          "cells": [
+            {
+              "text": "Volume loss, infection, obstruction, nephrotoxins or disease flare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic nephropathy",
+          "cells": [
+            {
+              "text": "Commonest cause; albuminuria, retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertensive nephrosclerosis",
+          "cells": [
+            {
+              "text": "Long-standing hypertension, bland sediment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glomerulonephritis",
+          "cells": [
+            {
+              "text": "Haematuria, proteinuria, serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic kidney disease",
+          "cells": [
+            {
+              "text": "Enlarged cystic kidneys, family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple myeloma",
+          "cells": [
+            {
+              "text": "Age >35 with anaemia and normal or high calcium; SPEP and urine electrophoresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive uropathy",
+          "cells": [
+            {
+              "text": "Hydronephrosis on ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ckd-treatment",
+      "kind": "treatment",
+      "title": "Management of chronic kidney disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood pressure control",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Systolic <120 when tolerated",
+              "op": "<",
+              "value": 120
+            },
+            {
+              "text": "Relax in frailty, falls or postural hypotension"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "{{hy:Proteinuric CKD}}"
+            },
+            {
+              "text": "Do not combine; up to about 30% eGFR fall can be tolerated if stable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "Proteinuric CKD with or without diabetes"
+            },
+            {
+              "text": "Not in type 1 diabetes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Finerenone",
+          "cells": [
+            {
+              "text": "Type 2 diabetes with albuminuria despite ACEi/ARB and SGLT2i"
+            },
+            {
+              "text": "eGFR >25 and no hyperkalaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Statin",
+          "cells": [
+            {
+              "text": "Hypercholesterolaemia"
+            },
+            {
+              "text": "Fibrates risk rhabdomyolysis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dietary protein and sodium",
+          "cells": [
+            {
+              "text": "eGFR <60"
+            },
+            {
+              "text": "Protein 0.8 g/kg/day; sodium <2 g/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sodium bicarbonate",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Keep bicarbonate >18",
+              "op": ">",
+              "value": 18
+            },
+            {
+              "text": "1 to 2 g orally twice daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Phosphate restriction and binders",
+          "cells": [
+            {
+              "text": "eGFR <60 with high phosphate"
+            },
+            {
+              "text": "Total calcium intake not above 2000 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Active vitamin D or cinacalcet",
+          "cells": [
+            {
+              "text": "PTH rising or >9 x ULN despite phosphate and vitamin D control"
+            },
+            {
+              "text": "Do not aim to normalise PTH"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Iron replacement",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "TSAT >20% and ferritin >100 ng/mL"
+            },
+            {
+              "text": "Correct before ESA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ESA",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Dialysis patients with Hb <=9 to 10",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "Lowest dose for Hb 10 to 11 g/dL; transfuse only if Hb <8 or symptomatic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dialysis",
+          "unit": "mL/min",
+          "cells": [
+            {
+              "text": "Usually eGFR <=10 (<=15 in diabetes) with symptoms",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "Uraemic symptoms or uncontrolled fluid, K or acidosis; pericarditis is absolute"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early transplant referral",
+          "cells": [
+            {
+              "text": "Advanced CKD"
+            },
+            {
+              "text": "Pre-emptive living-donor transplant gives best outcomes"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Causes of anaemia in CKD in the Tables PDF include EPO deficiency, iron, B12 or folate deficiency, bleeding, hyperparathyroidism and inflammation; check these before ESA."
+    },
+    {
+      "id": "ckd-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs that cause edema",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Nonsteroidal anti-inflammatory drugs",
+          "cells": [
+            {
+              "text": "nonsteroidal anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Antihypertensive agents",
+          "cells": [
+            {
+              "text": "direct vasodilators (hydralazine, clonidine, methyldopa, guanethidine, minoxidil); calcium channel antagonists; alpha-adrenergic antagonists; thiazolidinediones"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Steroid hormones",
+          "cells": [
+            {
+              "text": "glucocorticoids, anabolic steroids, estrogens, progestins"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Cyclosporine",
+          "cells": [
+            {
+              "text": "cyclosporine"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Growth hormone",
+          "cells": [
+            {
+              "text": "growth hormone"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Immunotherapies",
+          "cells": [
+            {
+              "text": "interleukin 2, OKT3 monoclonal antibody"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "ckd-ddx-3",
+      "kind": "ddx",
+      "title": "Hypoproliferative anemias compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Anemia",
+        "MCV (fL)",
+        "Morphology",
+        "Serum iron (SI)",
+        "TIBC",
+        "Saturation (%)",
+        "Serum ferritin (ug/L)",
+        "Iron stores"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Mild to severe"
+            },
+            {
+              "text": "60 to 90"
+            },
+            {
+              "text": "Normo-microcytic"
+            },
+            {
+              "text": "<30"
+            },
+            {
+              "text": "Over 360"
+            },
+            {
+              "text": "<10"
+            },
+            {
+              "text": "<15"
+            },
+            {
+              "text": "0"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Mild"
+            },
+            {
+              "text": "80 to 90"
+            },
+            {
+              "text": "Normocytic"
+            },
+            {
+              "text": "<50"
+            },
+            {
+              "text": "<300"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "30 to 200"
+            },
+            {
+              "text": "2 to 4+"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Renal disease",
+          "cells": [
+            {
+              "text": "Mild to severe"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "Normocytic"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "115 to 150"
+            },
+            {
+              "text": "1 to 4+"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Hypometabolic states",
+          "cells": [
+            {
+              "text": "Mild"
+            },
+            {
+              "text": "90"
+            },
+            {
+              "text": "Normocytic"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "MCV, mean corpuscular volume; SI, serum iron; TIBC, total iron-binding capacity. The ferritin unit prints as ?g/L in the source and is read as ug/L."
+    },
+    {
+      "id": "ckd-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of hyperphosphatemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "I. Impaired renal phosphate excretion: renal insufficiency",
+          "cells": [
+            {
+              "text": "Renal insufficiency"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "I. Hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Developmental; autoimmune; after neck surgery or radiation; activating mutations of the calcium-sensing receptor"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "I. Parathyroid suppression",
+          "cells": [
+            {
+              "text": "Parathyroid-independent hypercalcemia (vitamin D or vitamin A intoxication; sarcoidosis and other granulomatous diseases; immobilization, osteolytic metastases; milk-alkali syndrome); severe hypermagnesemia or hypomagnesemia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "I. Other impaired excretion",
+          "cells": [
+            {
+              "text": "Pseudohypoparathyroidism; acromegaly; tumoral calcinosis; heparin therapy"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "II. Massive extracellular fluid phosphate load: exogenous",
+          "cells": [
+            {
+              "text": "Rapid administration of exogenous phosphate (intravenous, oral, rectal)"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "II. Extensive cellular injury or necrosis",
+          "cells": [
+            {
+              "text": "Crush injuries; rhabdomyolysis; hyperthermia; fulminant hepatitis; cytotoxic therapy; severe hemolytic anemia"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "II. Transcellular phosphate shifts",
+          "cells": [
+            {
+              "text": "Metabolic acidosis; respiratory acidosis"
+            }
+          ],
+          "cite": "c6"
+        }
+      ]
+    },
+    {
+      "id": "ckd-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Causes of high anion-gap metabolic acidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acids and metabolic causes",
+          "cells": [
+            {
+              "text": "Lactic acidosis; ketoacidosis (diabetic, alcoholic, starvation)"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Toxins",
+          "cells": [
+            {
+              "text": "Ethylene glycol; methanol; salicylates; propylene glycol; pyroglutamic acid"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Renal failure",
+          "cells": [
+            {
+              "text": "Acute and chronic"
+            }
+          ],
+          "cite": "c7"
+        }
+      ]
+    },
+    {
+      "id": "ckd-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Major causes of papillary necrosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Causes",
+          "cells": [
+            {
+              "text": "Analgesic nephropathy; sickle cell nephropathy; diabetes with urinary tract infection; prolonged NSAID use (rare)"
+            }
+          ],
+          "cite": "c8"
+        }
+      ]
+    },
+    {
+      "id": "ckd-diagnostic-5",
+      "kind": "diagnostic",
+      "title": "Most common opportunistic infections in renal transplant recipients",
+      "rowHeader": "Period after transplant",
+      "columns": [
+        "Infections"
+      ],
+      "rows": [
+        {
+          "parameter": "Peritransplant (<1 month)",
+          "cells": [
+            {
+              "text": "Wound infections; herpesvirus; oral candidiasis; urinary tract infection"
+            }
+          ],
+          "cite": "c9"
+        },
+        {
+          "parameter": "Early (1 to 6 months)",
+          "cells": [
+            {
+              "text": "Pneumocystis carinii; cytomegalovirus; Legionella; Listeria; hepatitis B; hepatitis C"
+            }
+          ],
+          "cite": "c9"
+        },
+        {
+          "parameter": "Late (>6 months)",
+          "cells": [
+            {
+              "text": "Aspergillus; Nocardia; BK virus (polyoma); herpes zoster; hepatitis B; hepatitis C"
+            }
+          ],
+          "cite": "c9"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ckd-dx-mgmt",
+      "title": "Diagnosis and management of chronic kidney disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Low eGFR or albuminuria",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Persisting >=3 months?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat as AKI; find reversible cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stage by eGFR and ACR; ultrasound; urinalysis",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Active sediment, unexplained cause or kidneys normal size?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Serology, SPEP; consider biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "BP <120, ACEi/ARB, SGLT2i, statin",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage K, bicarbonate, phosphate, PTH, anaemia",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Stage 4 or uraemic complications?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Prepare dialysis and refer for transplant",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor eGFR and ACR",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
         }
       ]
     }

@@ -1,174 +1,483 @@
 {
- "id": "cholesteryl_ester_storage_disease",
- "name": "Cholesteryl ester storage disease",
- "aliases": [
-  "CESD",
-  "LIPA deficiency (late-onset)",
-  "lysosomal acid lipase deficiency, late-onset",
-  "acid cholesteryl ester hydrolase deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Later-onset, less severe form of lysosomal acid lipase (LIPA) deficiency, contrasting with the fulminant infantile Wolman phenotype",
-   "Presents in childhood or adulthood with hepatomegaly, elevated transaminases and progressive hepatic steatosis that can advance to fibrosis and cirrhosis",
-   "Characteristic dyslipidaemia is a mixed pattern with high LDL cholesterol and low HDL cholesterol, mimicking familial hypercholesterolaemia and driving premature atherosclerosis",
-   "Microvesicular and macrovesicular steatosis on liver biopsy can be misread as non-alcoholic fatty liver disease",
-   "A common LIPA splice variant (exon 8 skipping) accounts for many late-onset cases",
-   "Diagnosis is confirmed by low lysosomal acid lipase enzyme activity and LIPA genetic testing",
-   "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) is available, alongside lipid-lowering therapy and monitoring of liver disease"
+  "id": "cholesteryl_ester_storage_disease",
+  "name": "Cholesteryl ester storage disease",
+  "aliases": [
+    "CESD",
+    "LIPA deficiency (late-onset)",
+    "lysosomal acid lipase deficiency, late-onset",
+    "acid cholesteryl ester hydrolase deficiency"
   ],
-  "pathophysiology": "Lysosomal acid lipase hydrolyses cholesteryl esters and triglycerides delivered to the lysosome via receptor-mediated lipoprotein uptake. Partial deficiency in cholesteryl ester storage disease leads to lysosomal accumulation of cholesteryl esters and triglycerides, predominantly in hepatocytes, Kupffer cells, intestinal mucosa and the arterial wall. Reduced release of free cholesterol from the lysosome disturbs cellular cholesterol homeostasis, upregulating endogenous cholesterol synthesis and LDL receptor pathways, which produces the atherogenic dyslipidaemia; progressive hepatic lipid storage causes steatosis, fibrosis and, over time, cirrhosis.",
-  "additionalDifferentials": [
-   "Non-alcoholic fatty liver disease and steatohepatitis",
-   "Familial hypercholesterolaemia and other primary dyslipidaemias",
-   "Wolman disease (severe infantile LIPA deficiency)",
-   "Glycogen storage disorders with hepatomegaly",
-   "Niemann-Pick disease type C and other lipid storage disorders",
-   "Cryptogenic cirrhosis of other cause"
-  ],
-  "additionalInvestigations": [
-   "Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes)",
-   "LIPA molecular genetic testing to confirm the diagnosis",
-   "Fasting lipid profile showing high LDL and low HDL cholesterol",
-   "Liver function tests and liver imaging for steatosis and fibrosis",
-   "Liver biopsy demonstrating lipid-laden hepatocytes and characteristic storage",
-   "Cardiovascular risk assessment for premature atherosclerosis"
-  ],
-  "redFlags": [
-   "Progression to hepatic fibrosis, cirrhosis or portal hypertension",
-   "Premature cardiovascular disease from severe dyslipidaemia",
-   "Rapidly rising transaminases or worsening hepatic function",
-   "Splenomegaly with cytopenias indicating advanced liver disease"
-  ],
-  "prognosis": "The course is variable and slower than Wolman disease, but untreated disease can progress to cirrhosis and accelerated atherosclerosis; enzyme replacement therapy and lipid-lowering treatment can improve hepatic and lipid parameters and alter the natural history.",
-  "pitfalls": [
-   "Labelling the liver disease as non-alcoholic fatty liver disease and missing the enzyme defect",
-   "Attributing the dyslipidaemia solely to familial hypercholesterolaemia",
-   "Failing to test lysosomal acid lipase activity in unexplained hepatomegaly with dyslipidaemia",
-   "Underestimating cardiovascular risk in an apparently mild hepatic presentation"
-  ],
-  "references": [
-   "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Disease-specific treatment is enzyme replacement with sebelipase alfa, recombinant human lysosomal acid lipase",
-   "Treat the atherogenic dyslipidaemia with lipid-lowering therapy such as a statin, with or without ezetimibe",
-   "Advise a low-fat, low-cholesterol diet to reduce hepatic and lipid burden",
-   "Monitor progression of liver disease with liver function tests and imaging or elastography for steatosis and fibrosis",
-   "Assess and manage cardiovascular risk from premature atherosclerosis",
-   "Consider liver transplantation for decompensated cirrhosis, continuing enzyme replacement for the systemic disease",
-   "Provide genetic counselling and family screening given autosomal recessive inheritance, and manage within a metabolic medicine team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cholesteryl_ester_storage_disease-pathway",
-   "title": "Cholesteryl ester storage disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Later-onset, less severe form of lysosomal acid lipase (LIPA) deficiency, contrasting with the fulminant infantile Wolman phenotype",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progression to hepatic fibrosis, cirrhosis or portal hypertension",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes), LIPA molecular genetic testing to confirm the diagnosis, Fasting lipid profile showing high LDL and low HDL cholesterol"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Disease-specific treatment is enzyme replacement with sebelipase alfa, recombinant human lysosomal acid lipase"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the liver disease as non-alcoholic fatty liver disease and missing the enzyme defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cholesteryl ester storage disease."
-  }
- ],
- "tables": [
-  {
-   "id": "cholesteryl_ester_storage_disease-matrix",
-   "title": "Cholesteryl ester storage disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Later-onset, less severe form of lysosomal acid lipase (LIPA) deficiency, contrasting with the fulminant infantile Wolman",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Later-onset, less severe form of lysosomal acid lipase (LIPA) deficiency, contrasting with the fulminant infantile Wolman phenotype",
+      "Presents in childhood or adulthood with hepatomegaly, elevated transaminases and progressive hepatic steatosis that can advance to fibrosis and cirrhosis",
+      "Characteristic dyslipidaemia is a mixed pattern with high LDL cholesterol and low HDL cholesterol, mimicking familial hypercholesterolaemia and driving premature atherosclerosis",
+      "Microvesicular and macrovesicular steatosis on liver biopsy can be misread as non-alcoholic fatty liver disease",
+      "A common LIPA splice variant (exon 8 skipping) accounts for many late-onset cases",
+      "Diagnosis is confirmed by low lysosomal acid lipase enzyme activity and LIPA genetic testing",
+      "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) is available, alongside lipid-lowering therapy and monitoring of liver disease"
     ],
-    [
-     "Key Investigations",
-     "Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes), LIPA molecular genetic testing to confirm the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lysosomal acid lipase hydrolyses cholesteryl esters and triglycerides delivered to the lysosome via receptor-mediated lipoprotein uptake. Partial deficiency in cholesteryl ester storage disease leads to lysosomal accumulation of cholesteryl esters and triglycerides, predominantly in hepatocytes, Kupffer cells, intestinal mucosa and the arterial wall. Reduced release of free cholesterol from the lysosome disturbs cellular cholesterol homeostasis, upregulating endogenous cholesterol synthesis and LDL receptor pathways, which produces the atherogenic dyslipidaemia; progressive hepatic lipid storage causes steatosis, fibrosis and, over time, cirrhosis.",
+    "additionalDifferentials": [
+      "Non-alcoholic fatty liver disease and steatohepatitis",
+      "Familial hypercholesterolaemia and other primary dyslipidaemias",
+      "Wolman disease (severe infantile LIPA deficiency)",
+      "Glycogen storage disorders with hepatomegaly",
+      "Niemann-Pick disease type C and other lipid storage disorders",
+      "Cryptogenic cirrhosis of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Non-alcoholic fatty liver disease and steatohepatitis, Familial hypercholesterolaemia and other primary dyslipidaemias, Wolman",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes)",
+      "LIPA molecular genetic testing to confirm the diagnosis",
+      "Fasting lipid profile showing high LDL and low HDL cholesterol",
+      "Liver function tests and liver imaging for steatosis and fibrosis",
+      "Liver biopsy demonstrating lipid-laden hepatocytes and characteristic storage",
+      "Cardiovascular risk assessment for premature atherosclerosis"
     ],
-    [
-     "Management Strategy",
-     "Disease-specific treatment is enzyme replacement with sebelipase alfa, recombinant human lysosomal acid lipase",
-     "Core treatment modality"
+    "redFlags": [
+      "Progression to hepatic fibrosis, cirrhosis or portal hypertension",
+      "Premature cardiovascular disease from severe dyslipidaemia",
+      "Rapidly rising transaminases or worsening hepatic function",
+      "Splenomegaly with cytopenias indicating advanced liver disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the liver disease as non-alcoholic fatty liver disease and missing the enzyme defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable and slower than Wolman disease, but untreated disease can progress to cirrhosis and accelerated atherosclerosis; enzyme replacement therapy and lipid-lowering treatment can improve hepatic and lipid parameters and alter the natural history.",
+    "pitfalls": [
+      "Labelling the liver disease as non-alcoholic fatty liver disease and missing the enzyme defect",
+      "Attributing the dyslipidaemia solely to familial hypercholesterolaemia",
+      "Failing to test lysosomal acid lipase activity in unexplained hepatomegaly with dyslipidaemia",
+      "Underestimating cardiovascular risk in an apparently mild hepatic presentation"
+    ],
+    "references": [
+      "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Disease-specific treatment is enzyme replacement with sebelipase alfa, recombinant human lysosomal acid lipase",
+      "Treat the atherogenic dyslipidaemia with lipid-lowering therapy such as a statin, with or without ezetimibe",
+      "Advise a low-fat, low-cholesterol diet to reduce hepatic and lipid burden",
+      "Monitor progression of liver disease with liver function tests and imaging or elastography for steatosis and fibrosis",
+      "Assess and manage cardiovascular risk from premature atherosclerosis",
+      "Consider liver transplantation for decompensated cirrhosis, continuing enzyme replacement for the systemic disease",
+      "Provide genetic counselling and family screening given autosomal recessive inheritance, and manage within a metabolic medicine team"
     ]
-   ],
-   "caption": "Overview comparison matrix for cholesteryl ester storage disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cholesteryl-ester-storage-disease-real-image",
-   "title": "Cholesteryl ester storage disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cholesteryl_ester_storage_disease-pathway",
+      "title": "Cholesteryl ester storage disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Later-onset, less severe form of lysosomal acid lipase (LIPA) deficiency, contrasting with the fulminant infantile Wolman phenotype",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progression to hepatic fibrosis, cirrhosis or portal hypertension",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes), LIPA molecular genetic testing to confirm the diagnosis, Fasting lipid profile showing high LDL and low HDL cholesterol"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Disease-specific treatment is enzyme replacement with sebelipase alfa, recombinant human lysosomal acid lipase"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the liver disease as non-alcoholic fatty liver disease and missing the enzyme defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cholesteryl ester storage disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cholesteryl_ester_storage_disease-matrix",
+      "title": "Cholesteryl ester storage disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Later-onset, less severe form of lysosomal acid lipase (LIPA) deficiency, contrasting with the fulminant infantile Wolman",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lysosomal acid lipase enzyme activity assay (dried blood spot or leucocytes), LIPA molecular genetic testing to confirm the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-alcoholic fatty liver disease and steatohepatitis, Familial hypercholesterolaemia and other primary dyslipidaemias, Wolman",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Disease-specific treatment is enzyme replacement with sebelipase alfa, recombinant human lysosomal acid lipase",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the liver disease as non-alcoholic fatty liver disease and missing the enzyme defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cholesteryl ester storage disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cholesteryl_ester_storage_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lysosomal acid lipase enzyme activity assay",
+          "cells": [
+            {
+              "text": "Low activity supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LIPA molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting lipid profile",
+          "cells": [
+            {
+              "text": "High LDL and low HDL cholesterol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and liver imaging",
+          "cells": [
+            {
+              "text": "Steatosis and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Lipid-laden hepatocytes and characteristic storage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholesteryl_ester_storage_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-alcoholic fatty liver disease",
+          "cells": [
+            {
+              "text": "Steatosis on biopsy can be misread as NAFLD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypercholesterolaemia",
+          "cells": [
+            {
+              "text": "High LDL cholesterol mimics this dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wolman disease",
+          "cells": [
+            {
+              "text": "Severe infantile LIPA deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholesteryl_ester_storage_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement therapy",
+          "cells": [
+            {
+              "text": "Sebelipase alfa, recombinant human lysosomal acid lipase"
+            },
+            {
+              "text": "Disease-specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid-lowering therapy",
+          "cells": [
+            {
+              "text": "Statin, with or without ezetimibe"
+            },
+            {
+              "text": "Atherogenic dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diet",
+          "cells": [
+            {
+              "text": "Low-fat, low-cholesterol diet"
+            },
+            {
+              "text": "Hepatic and lipid burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver monitoring",
+          "cells": [
+            {
+              "text": "Liver function tests and imaging or elastography for steatosis and fibrosis"
+            },
+            {
+              "text": "Progression monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk",
+          "cells": [
+            {
+              "text": "Assess and manage cardiovascular risk from premature atherosclerosis"
+            },
+            {
+              "text": "Premature atherosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Consider for decompensated cirrhosis, with enzyme replacement continued"
+            },
+            {
+              "text": "Decompensated cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family screening"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cholesteryl_ester_storage_disease-dx-mgmt",
+      "title": "Diagnosis and management of Cholesteryl ester storage disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cholesteryl ester storage disease: hepatomegaly with high LDL dyslipidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fibrosis or cirrhosis, premature cardiovascular disease, cytopenias)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: hepatology review for advancing fibrosis or portal hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lysosomal acid lipase activity assay, LIPA testing, lipids and liver biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low lipase activity with LIPA variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Enzyme replacement therapy with sebelipase alfa",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check NAFLD, familial hypercholesterolaemia and Wolman disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Statin with or without ezetimibe for atherogenic dyslipidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-fat, low-cholesterol diet to reduce hepatic burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver monitoring with tests, imaging or elastography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Transplant for decompensated cirrhosis, with enzyme replacement continued",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

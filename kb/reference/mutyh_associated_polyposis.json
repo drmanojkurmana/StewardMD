@@ -1,179 +1,486 @@
 {
- "id": "mutyh_associated_polyposis",
- "name": "MUTYH-associated polyposis",
- "aliases": [
-  "MUTYH",
-  "MYH-associated polyposis",
-  "MAP"
- ],
- "class": "non_infective",
- "system": "Oncology / Genetics",
- "specialty": "Medical Genetics / Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by biallelic germline pathogenic variants in MUTYH, and unusually among the hereditary polyposis syndromes it is inherited in an autosomal recessive pattern",
-   "MUTYH encodes a base-excision-repair glycosylase that corrects oxidative DNA damage, so its loss leads to characteristic somatic mutations, notably in the APC and KRAS genes",
-   "Typically presents with attenuated colorectal polyposis of tens to low hundreds of adenomas, though serrated and hyperplastic polyps also occur, with a high colorectal cancer risk",
-   "The phenotype can closely mimic attenuated familial adenomatous polyposis, but the recessive inheritance pattern helps distinguish the two",
-   "Extracolonic features include duodenal adenomas and an increased risk of duodenal and other cancers, so upper gastrointestinal surveillance is warranted",
-   "Management centres on colonoscopic surveillance with polypectomy, with risk-reducing colectomy reserved for uncontrollable polyp burden or cancer",
-   "Two common founder variants account for many cases in populations of European ancestry, but comprehensive gene analysis is needed to detect all pathogenic changes"
+  "id": "mutyh_associated_polyposis",
+  "name": "MUTYH-associated polyposis",
+  "aliases": [
+    "MUTYH",
+    "MYH-associated polyposis",
+    "MAP"
   ],
-  "pathophysiology": "MUTYH encodes a DNA glycosylase that is part of the base-excision-repair system responsible for correcting the mutagenic effects of oxidative DNA damage. When both alleles carry loss-of-function variants, the enzyme can no longer remove adenines misincorporated opposite the oxidised guanine lesion 8-oxoguanine, so characteristic G-to-T transversions accumulate. These mutations preferentially strike growth-regulatory genes such as APC and KRAS, driving adenoma formation through the same adenoma-carcinoma sequence seen in other colorectal polyposis syndromes.",
-  "additionalDifferentials": [
-   "Familial adenomatous polyposis and its attenuated form",
-   "Lynch syndrome",
-   "Serrated polyposis syndrome",
-   "Polymerase proofreading-associated polyposis (POLE/POLD1)",
-   "NTHL1-associated polyposis",
-   "Sporadic multiple adenomas"
-  ],
-  "additionalInvestigations": [
-   "Germline MUTYH sequencing and deletion/duplication analysis to confirm biallelic variants",
-   "Colonoscopy with polypectomy and histological characterisation of polyps",
-   "Upper gastrointestinal endoscopy with duodenal assessment",
-   "APC germline testing to exclude adenomatous polyposis when phenotype overlaps",
-   "Full blood count and iron studies for occult blood loss",
-   "Family testing that considers both parents given recessive inheritance"
-  ],
-  "redFlags": [
-   "A discrete or advanced colorectal lesion suggesting malignancy",
-   "Advanced-histology duodenal adenoma on upper endoscopy",
-   "Iron-deficiency anaemia or overt gastrointestinal bleeding",
-   "Rapid change in polyp burden between surveillance examinations"
-  ],
-  "prognosis": "With regular colonoscopic surveillance and polypectomy the colorectal cancer risk can be substantially reduced, and prognosis is favourable when disease is detected early. Because risk persists lifelong and extends to the duodenum, ongoing surveillance and, where required, surgical management remain important.",
-  "pitfalls": [
-   "Misclassifying the condition as dominant and failing to test both parents and siblings appropriately",
-   "Diagnosing attenuated familial adenomatous polyposis without excluding biallelic MUTYH variants",
-   "Detecting only a single founder variant and wrongly concluding the diagnosis is excluded",
-   "Neglecting upper gastrointestinal surveillance for duodenal disease"
-  ],
-  "references": [
-   "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
-   "NCCN Guidelines: Genetic/Familial High-Risk Assessment - Colorectal"
-  ],
-  "crossLinks": [],
-  "management": [
-   "MAP is a hereditary polyposis syndrome managed by lifelong cancer-risk reduction rather than cytotoxic or targeted cancer therapy",
-   "Attenuated polyposis with a manageable adenoma count is managed with colonoscopic surveillance and polypectomy to clear polyps as they arise",
-   "Polyp burden that cannot be reliably cleared endoscopically, or a confirmed colorectal cancer, warrants consideration of risk-reducing colectomy or proctocolectomy, individualised to polyp distribution, rectal sparing, age, and preference",
-   "Established colorectal cancer in a MAP patient is staged and treated per standard colorectal cancer principles for that stage, including surgical resection with or without adjuvant chemotherapy for node-positive or high-risk disease; no MAP-specific systemic regimen is implied",
-   "Upper gastrointestinal endoscopy with duodenal examination is warranted given the increased duodenal cancer risk",
-   "Advanced-histology duodenal adenomas found on surveillance should prompt closer endoscopic follow-up or endoscopic/surgical resection depending on size and grade",
-   "MAP carries an increased gastric cancer risk alongside other familial syndromes, so gastric screening should be guided by a genetics/GI guideline",
-   "Overall approach follows an escalation ladder: surveillance and polypectomy first, escalating to segmental or extended colectomy when polyp burden outstrips endoscopic control, and to standard-of-stage cancer treatment if invasive cancer develops",
-   "Lifelong colonoscopy at intervals appropriate to prior polyp findings, plus periodic upper endoscopy with duodenal assessment once biallelic MUTYH variants are confirmed",
-   "Monitor for iron-deficiency anaemia and occult gastrointestinal blood loss as possible signals of a missed lesion",
-   "Refer for germline genetic testing and counselling when attenuated adenomatous polyposis is identified, especially with a non-dominant inheritance pattern, since MAP is autosomal recessive and both parents warrant testing",
-   "Refer to a hereditary colorectal cancer or clinical genetics multidisciplinary service for lifelong surveillance coordination, cascade testing of siblings, and reproductive counselling once biallelic pathogenic MUTYH variants are confirmed",
-   "Refer to colorectal surgery when polyp burden becomes endoscopically unmanageable or cancer is found, and to medical oncology for standard-of-stage treatment if invasive cancer is diagnosed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mutyh_associated_polyposis-pathway",
-   "title": "MUTYH-associated polyposis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by biallelic germline pathogenic variants in MUTYH, and unusually among the hereditary polyposis syndromes it is inherited in an autosomal recessive pattern",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A discrete or advanced colorectal lesion suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Germline MUTYH sequencing and deletion/duplication analysis to confirm biallelic variants, Colonoscopy with polypectomy and histological characterisation of polyps, Upper gastrointestinal endoscopy with duodenal assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: MAP is a hereditary polyposis syndrome managed by lifelong cancer-risk reduction rather than cytotoxic or targeted cancer therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying the condition as dominant and failing to test both parents and siblings appropriately"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mutyh-associated polyposis."
-  }
- ],
- "tables": [
-  {
-   "id": "mutyh_associated_polyposis-matrix",
-   "title": "MUTYH-associated polyposis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by biallelic germline pathogenic variants in MUTYH, and unusually among the hereditary polyposis syndromes it is inherited",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Genetics",
+  "specialty": "Medical Genetics / Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by biallelic germline pathogenic variants in MUTYH, and unusually among the hereditary polyposis syndromes it is inherited in an autosomal recessive pattern",
+      "MUTYH encodes a base-excision-repair glycosylase that corrects oxidative DNA damage, so its loss leads to characteristic somatic mutations, notably in the APC and KRAS genes",
+      "Typically presents with attenuated colorectal polyposis of tens to low hundreds of adenomas, though serrated and hyperplastic polyps also occur, with a high colorectal cancer risk",
+      "The phenotype can closely mimic attenuated familial adenomatous polyposis, but the recessive inheritance pattern helps distinguish the two",
+      "Extracolonic features include duodenal adenomas and an increased risk of duodenal and other cancers, so upper gastrointestinal surveillance is warranted",
+      "Management centres on colonoscopic surveillance with polypectomy, with risk-reducing colectomy reserved for uncontrollable polyp burden or cancer",
+      "Two common founder variants account for many cases in populations of European ancestry, but comprehensive gene analysis is needed to detect all pathogenic changes"
     ],
-    [
-     "Key Investigations",
-     "Germline MUTYH sequencing and deletion/duplication analysis to confirm biallelic variants, Colonoscopy with polypectomy and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MUTYH encodes a DNA glycosylase that is part of the base-excision-repair system responsible for correcting the mutagenic effects of oxidative DNA damage. When both alleles carry loss-of-function variants, the enzyme can no longer remove adenines misincorporated opposite the oxidised guanine lesion 8-oxoguanine, so characteristic G-to-T transversions accumulate. These mutations preferentially strike growth-regulatory genes such as APC and KRAS, driving adenoma formation through the same adenoma-carcinoma sequence seen in other colorectal polyposis syndromes.",
+    "additionalDifferentials": [
+      "Familial adenomatous polyposis and its attenuated form",
+      "Lynch syndrome",
+      "Serrated polyposis syndrome",
+      "Polymerase proofreading-associated polyposis (POLE/POLD1)",
+      "NTHL1-associated polyposis",
+      "Sporadic multiple adenomas"
     ],
-    [
-     "Primary Differentials",
-     "Familial adenomatous polyposis and its attenuated form, Lynch syndrome, Serrated polyposis syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Germline MUTYH sequencing and deletion/duplication analysis to confirm biallelic variants",
+      "Colonoscopy with polypectomy and histological characterisation of polyps",
+      "Upper gastrointestinal endoscopy with duodenal assessment",
+      "APC germline testing to exclude adenomatous polyposis when phenotype overlaps",
+      "Full blood count and iron studies for occult blood loss",
+      "Family testing that considers both parents given recessive inheritance"
     ],
-    [
-     "Management Strategy",
-     "MAP is a hereditary polyposis syndrome managed by lifelong cancer-risk reduction rather than cytotoxic or targeted cancer therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "A discrete or advanced colorectal lesion suggesting malignancy",
+      "Advanced-histology duodenal adenoma on upper endoscopy",
+      "Iron-deficiency anaemia or overt gastrointestinal bleeding",
+      "Rapid change in polyp burden between surveillance examinations"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying the condition as dominant and failing to test both parents and siblings appropriately",
-     "Prevent diagnostic or management error"
+    "prognosis": "With regular colonoscopic surveillance and polypectomy the colorectal cancer risk can be substantially reduced, and prognosis is favourable when disease is detected early. Because risk persists lifelong and extends to the duodenum, ongoing surveillance and, where required, surgical management remain important.",
+    "pitfalls": [
+      "Misclassifying the condition as dominant and failing to test both parents and siblings appropriately",
+      "Diagnosing attenuated familial adenomatous polyposis without excluding biallelic MUTYH variants",
+      "Detecting only a single founder variant and wrongly concluding the diagnosis is excluded",
+      "Neglecting upper gastrointestinal surveillance for duodenal disease"
+    ],
+    "references": [
+      "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology",
+      "NCCN Guidelines: Genetic/Familial High-Risk Assessment - Colorectal"
+    ],
+    "crossLinks": [],
+    "management": [
+      "MAP is a hereditary polyposis syndrome managed by lifelong cancer-risk reduction rather than cytotoxic or targeted cancer therapy",
+      "Attenuated polyposis with a manageable adenoma count is managed with colonoscopic surveillance and polypectomy to clear polyps as they arise",
+      "Polyp burden that cannot be reliably cleared endoscopically, or a confirmed colorectal cancer, warrants consideration of risk-reducing colectomy or proctocolectomy, individualised to polyp distribution, rectal sparing, age, and preference",
+      "Established colorectal cancer in a MAP patient is staged and treated per standard colorectal cancer principles for that stage, including surgical resection with or without adjuvant chemotherapy for node-positive or high-risk disease; no MAP-specific systemic regimen is implied",
+      "Upper gastrointestinal endoscopy with duodenal examination is warranted given the increased duodenal cancer risk",
+      "Advanced-histology duodenal adenomas found on surveillance should prompt closer endoscopic follow-up or endoscopic/surgical resection depending on size and grade",
+      "MAP carries an increased gastric cancer risk alongside other familial syndromes, so gastric screening should be guided by a genetics/GI guideline",
+      "Overall approach follows an escalation ladder: surveillance and polypectomy first, escalating to segmental or extended colectomy when polyp burden outstrips endoscopic control, and to standard-of-stage cancer treatment if invasive cancer develops",
+      "Lifelong colonoscopy at intervals appropriate to prior polyp findings, plus periodic upper endoscopy with duodenal assessment once biallelic MUTYH variants are confirmed",
+      "Monitor for iron-deficiency anaemia and occult gastrointestinal blood loss as possible signals of a missed lesion",
+      "Refer for germline genetic testing and counselling when attenuated adenomatous polyposis is identified, especially with a non-dominant inheritance pattern, since MAP is autosomal recessive and both parents warrant testing",
+      "Refer to a hereditary colorectal cancer or clinical genetics multidisciplinary service for lifelong surveillance coordination, cascade testing of siblings, and reproductive counselling once biallelic pathogenic MUTYH variants are confirmed",
+      "Refer to colorectal surgery when polyp burden becomes endoscopically unmanageable or cancer is found, and to medical oncology for standard-of-stage treatment if invasive cancer is diagnosed"
     ]
-   ],
-   "caption": "Overview comparison matrix for mutyh-associated polyposis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mutyh-associated-polyposis-real-image",
-   "title": "MUTYH-associated polyposis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mutyh_associated_polyposis-pathway",
+      "title": "MUTYH-associated polyposis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by biallelic germline pathogenic variants in MUTYH, and unusually among the hereditary polyposis syndromes it is inherited in an autosomal recessive pattern",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A discrete or advanced colorectal lesion suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Germline MUTYH sequencing and deletion/duplication analysis to confirm biallelic variants, Colonoscopy with polypectomy and histological characterisation of polyps, Upper gastrointestinal endoscopy with duodenal assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: MAP is a hereditary polyposis syndrome managed by lifelong cancer-risk reduction rather than cytotoxic or targeted cancer therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying the condition as dominant and failing to test both parents and siblings appropriately"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mutyh-associated polyposis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mutyh_associated_polyposis-matrix",
+      "title": "MUTYH-associated polyposis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by biallelic germline pathogenic variants in MUTYH, and unusually among the hereditary polyposis syndromes it is inherited",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Germline MUTYH sequencing and deletion/duplication analysis to confirm biallelic variants, Colonoscopy with polypectomy and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Familial adenomatous polyposis and its attenuated form, Lynch syndrome, Serrated polyposis syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "MAP is a hereditary polyposis syndrome managed by lifelong cancer-risk reduction rather than cytotoxic or targeted cancer therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying the condition as dominant and failing to test both parents and siblings appropriately",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mutyh-associated polyposis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeVita, Hellman and Rosenberg's Cancer / NCCN genetic/familial guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mutyh_associated_polyposis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline MUTYH sequencing and deletion/duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy with polypectomy and histology",
+          "cells": [
+            {
+              "text": "Characterises polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Duodenal assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "APC germline testing",
+          "cells": [
+            {
+              "text": "Excludes adenomatous polyposis when the phenotype overlaps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Occult blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family testing",
+          "cells": [
+            {
+              "text": "Considers both parents, given recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mutyh_associated_polyposis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial adenomatous polyposis and its attenuated form",
+          "cells": [
+            {
+              "text": "Phenotype can closely mimic attenuated FAP; the recessive inheritance pattern helps distinguish them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lynch syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mutyh_associated_polyposis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong cancer-risk reduction",
+          "cells": [
+            {
+              "text": "Managed without cytotoxic or targeted cancer therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopic surveillance and polypectomy",
+          "cells": [
+            {
+              "text": "For attenuated polyposis with a manageable adenoma count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-reducing colectomy",
+          "cells": [
+            {
+              "text": "When polyp burden cannot be cleared endoscopically or cancer is confirmed; individualised to distribution, rectal sparing, age and preference"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard-of-stage cancer treatment",
+          "cells": [
+            {
+              "text": "If colorectal cancer develops; no MAP-specific systemic regimen is implied"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Duodenal examination given the increased duodenal cancer risk; closer follow-up of advanced duodenal adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric screening",
+          "cells": [
+            {
+              "text": "Guided by a genetics or GI guideline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia and blood loss monitoring",
+          "cells": [
+            {
+              "text": "Possible signal of a missed lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic referral and cascade testing",
+          "cells": [
+            {
+              "text": "Cascade testing of siblings and reproductive counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mutyh_associated_polyposis-dx-mgmt",
+      "title": "Diagnosis and management of MUTYH-associated polyposis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Attenuated colorectal polyposis of tens to low hundreds of adenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (advanced colorectal lesion, advanced duodenal adenoma, anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent colorectal assessment and resection for suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MUTYH sequencing, colonoscopy with polypectomy, upper GI endoscopy, APC testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic pathogenic MUTYH variants confirmed on sequencing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test APC to exclude adenomatous polyposis; reassess the phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Colonoscopic surveillance and polypectomy for a manageable adenoma count",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Upper GI endoscopy with duodenal assessment and follow-up of advanced adenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Risk-reducing colectomy if polyps cannot be cleared endoscopically",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Standard-of-stage cancer treatment if colorectal cancer develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade testing of siblings and reproductive counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Favourable when detected early; risk persists lifelong, extending to the duodenum",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

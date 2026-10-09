@@ -1,173 +1,472 @@
 {
- "id": "osteosarcoma",
- "name": "Osteosarcoma",
- "aliases": [
-  "osteogenic sarcoma",
-  "primary bone sarcoma",
-  "malignant bone tumour"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest primary malignant bone tumour, arising most often in adolescents and young adults around the knee (distal femur and proximal tibia) and proximal humerus",
-   "Presents with progressive deep bone pain, often worse at night and not related to activity, sometimes with a palpable mass, swelling, or a pathological fracture",
-   "Radiographs may show bone destruction, new bone formation, a 'sunburst' spiculated pattern, and periosteal elevation (Codman's triangle)",
-   "Any persistent, unexplained, or night bone pain and swelling in a young person should raise suspicion and prompt urgent imaging rather than reassurance",
-   "Diagnosis requires biopsy, which should be carefully planned, ideally at the treating specialist centre, so as not to compromise later limb-salvage surgery",
-   "Staging with MRI of the whole bone and CT of the chest is essential, as the lungs are the commonest site of metastasis",
-   "Treatment is multidisciplinary, combining chemotherapy with surgical resection (limb salvage where feasible, otherwise amputation), transforming what was once a rapidly fatal disease",
-   "A second peak occurs in older adults, often secondary to Paget's disease or previous irradiation"
+  "id": "osteosarcoma",
+  "name": "Osteosarcoma",
+  "aliases": [
+    "osteogenic sarcoma",
+    "primary bone sarcoma",
+    "malignant bone tumour"
   ],
-  "pathophysiology": "Osteosarcoma is a malignant tumour of mesenchymal cells that produce osteoid or immature bone. It typically arises in the metaphysis of rapidly growing long bones, explaining its predilection for the knee region in adolescence during the growth spurt. The tumour destroys normal bone while laying down disorganised neoplastic osteoid, lifts and stimulates the periosteum, and breaks through the cortex to form a soft-tissue mass. It spreads haematogenously, with a strong tendency to metastasise to the lungs, and micrometastases are often present at diagnosis even when not radiologically evident. Predisposing factors include prior radiation, Paget's disease of bone, and genetic conditions such as hereditary retinoblastoma and Li-Fraumeni syndrome.",
-  "additionalDifferentials": [
-   "Ewing's sarcoma",
-   "Osteomyelitis (can mimic tumour clinically and radiologically)",
-   "Chondrosarcoma",
-   "Metastatic bone disease",
-   "Benign but aggressive lesions (e.g. giant cell tumour, osteoblastoma)",
-   "Aneurysmal bone cyst",
-   "Stress fracture"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs of the affected region as the initial imaging",
-   "MRI of the whole involved bone to define extent, soft-tissue mass, and skip lesions",
-   "CT of the chest to detect pulmonary metastases",
-   "Biopsy (carefully planned at the treating centre) for histological diagnosis",
-   "Bone scan or PET for staging and detection of distant disease, plus baseline bloods including alkaline phosphatase and LDH"
-  ],
-  "redFlags": [
-   "Persistent or night-time bone pain with swelling in a child, adolescent, or young adult requiring urgent specialist referral",
-   "Pathological fracture through a destructive bone lesion",
-   "A biopsy performed outside the treating centre risking tumour contamination and jeopardising limb salvage",
-   "Rapidly enlarging soft-tissue mass over bone"
-  ],
-  "prognosis": "Prognosis depends principally on the presence of metastases at diagnosis and the tumour's response to chemotherapy; with modern combined chemotherapy and surgery many patients with localised, chemosensitive disease achieve long-term survival, whereas metastatic or chemoresistant disease carries a substantially worse outlook.",
-  "pitfalls": [
-   "Dismissing persistent bone pain in a young person as growing pains or a sports injury, delaying diagnosis",
-   "Performing an ill-planned biopsy that contaminates tissue planes and precludes limb salvage",
-   "Confusing osteosarcoma with osteomyelitis and vice versa without adequate imaging and histology",
-   "Failing to stage the chest and missing pulmonary metastases"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Neoadjuvant multi-agent chemotherapy, typically high-dose methotrexate, doxorubicin and cisplatin, before definitive surgery",
-   "Wide surgical resection with limb salvage where feasible, or amputation when adequate margins cannot otherwise be achieved, followed by adjuvant chemotherapy guided by histological necrosis",
-   "Plan the diagnostic biopsy at the treating specialist sarcoma centre so the tract does not compromise later limb-salvage surgery",
-   "Surgically resect pulmonary metastases, since the lungs are the dominant site of spread and metastasectomy can still be curative",
-   "Manage through a specialist bone-sarcoma multidisciplinary team with orthopaedic oncology, medical oncology and radiology",
-   "Long-term surveillance with chest imaging and imaging of the primary site for pulmonary metastasis and local recurrence",
-   "Genetic assessment where hereditary retinoblastoma or Li-Fraumeni syndrome is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "osteosarcoma-pathway",
-   "title": "Osteosarcoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest primary malignant bone tumour, arising most often in adolescents and young adults around the knee (distal femur and proximal tibia) and proximal humerus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent or night-time bone pain with swelling in a child, adolescent, or young adult requiring urgent specialist referral",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs of the affected region as the initial imaging, MRI of the whole involved bone to define extent, soft-tissue mass, and skip lesions, CT of the chest to detect pulmonary metastases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Neoadjuvant multi-agent chemotherapy, typically high-dose methotrexate, doxorubicin and cisplatin, before definitive surgery"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing persistent bone pain in a young person as growing pains or a sports injury, delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of osteosarcoma."
-  }
- ],
- "tables": [
-  {
-   "id": "osteosarcoma-matrix",
-   "title": "Osteosarcoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest primary malignant bone tumour, arising most often in adolescents and young adults around the knee (distal femur and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest primary malignant bone tumour, arising most often in adolescents and young adults around the knee (distal femur and proximal tibia) and proximal humerus",
+      "Presents with progressive deep bone pain, often worse at night and not related to activity, sometimes with a palpable mass, swelling, or a pathological fracture",
+      "Radiographs may show bone destruction, new bone formation, a 'sunburst' spiculated pattern, and periosteal elevation (Codman's triangle)",
+      "Any persistent, unexplained, or night bone pain and swelling in a young person should raise suspicion and prompt urgent imaging rather than reassurance",
+      "Diagnosis requires biopsy, which should be carefully planned, ideally at the treating specialist centre, so as not to compromise later limb-salvage surgery",
+      "Staging with MRI of the whole bone and CT of the chest is essential, as the lungs are the commonest site of metastasis",
+      "Treatment is multidisciplinary, combining chemotherapy with surgical resection (limb salvage where feasible, otherwise amputation), transforming what was once a rapidly fatal disease",
+      "A second peak occurs in older adults, often secondary to Paget's disease or previous irradiation"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs of the affected region as the initial imaging, MRI of the whole involved bone to define extent, soft-tissue",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Osteosarcoma is a malignant tumour of mesenchymal cells that produce osteoid or immature bone. It typically arises in the metaphysis of rapidly growing long bones, explaining its predilection for the knee region in adolescence during the growth spurt. The tumour destroys normal bone while laying down disorganised neoplastic osteoid, lifts and stimulates the periosteum, and breaks through the cortex to form a soft-tissue mass. It spreads haematogenously, with a strong tendency to metastasise to the lungs, and micrometastases are often present at diagnosis even when not radiologically evident. Predisposing factors include prior radiation, Paget's disease of bone, and genetic conditions such as hereditary retinoblastoma and Li-Fraumeni syndrome.",
+    "additionalDifferentials": [
+      "Ewing's sarcoma",
+      "Osteomyelitis (can mimic tumour clinically and radiologically)",
+      "Chondrosarcoma",
+      "Metastatic bone disease",
+      "Benign but aggressive lesions (e.g. giant cell tumour, osteoblastoma)",
+      "Aneurysmal bone cyst",
+      "Stress fracture"
     ],
-    [
-     "Primary Differentials",
-     "Ewing's sarcoma, Osteomyelitis (can mimic tumour clinically and radiologically), Chondrosarcoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs of the affected region as the initial imaging",
+      "MRI of the whole involved bone to define extent, soft-tissue mass, and skip lesions",
+      "CT of the chest to detect pulmonary metastases",
+      "Biopsy (carefully planned at the treating centre) for histological diagnosis",
+      "Bone scan or PET for staging and detection of distant disease, plus baseline bloods including alkaline phosphatase and LDH"
     ],
-    [
-     "Management Strategy",
-     "Neoadjuvant multi-agent chemotherapy, typically high-dose methotrexate, doxorubicin and cisplatin, before definitive surgery",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent or night-time bone pain with swelling in a child, adolescent, or young adult requiring urgent specialist referral",
+      "Pathological fracture through a destructive bone lesion",
+      "A biopsy performed outside the treating centre risking tumour contamination and jeopardising limb salvage",
+      "Rapidly enlarging soft-tissue mass over bone"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing persistent bone pain in a young person as growing pains or a sports injury, delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends principally on the presence of metastases at diagnosis and the tumour's response to chemotherapy; with modern combined chemotherapy and surgery many patients with localised, chemosensitive disease achieve long-term survival, whereas metastatic or chemoresistant disease carries a substantially worse outlook.",
+    "pitfalls": [
+      "Dismissing persistent bone pain in a young person as growing pains or a sports injury, delaying diagnosis",
+      "Performing an ill-planned biopsy that contaminates tissue planes and precludes limb salvage",
+      "Confusing osteosarcoma with osteomyelitis and vice versa without adequate imaging and histology",
+      "Failing to stage the chest and missing pulmonary metastases"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Neoadjuvant multi-agent chemotherapy, typically high-dose methotrexate, doxorubicin and cisplatin, before definitive surgery",
+      "Wide surgical resection with limb salvage where feasible, or amputation when adequate margins cannot otherwise be achieved, followed by adjuvant chemotherapy guided by histological necrosis",
+      "Plan the diagnostic biopsy at the treating specialist sarcoma centre so the tract does not compromise later limb-salvage surgery",
+      "Surgically resect pulmonary metastases, since the lungs are the dominant site of spread and metastasectomy can still be curative",
+      "Manage through a specialist bone-sarcoma multidisciplinary team with orthopaedic oncology, medical oncology and radiology",
+      "Long-term surveillance with chest imaging and imaging of the primary site for pulmonary metastasis and local recurrence",
+      "Genetic assessment where hereditary retinoblastoma or Li-Fraumeni syndrome is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for osteosarcoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "osteosarcoma-real-image",
-   "title": "Osteosarcoma: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "osteosarcoma-pathway",
+      "title": "Osteosarcoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest primary malignant bone tumour, arising most often in adolescents and young adults around the knee (distal femur and proximal tibia) and proximal humerus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent or night-time bone pain with swelling in a child, adolescent, or young adult requiring urgent specialist referral",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs of the affected region as the initial imaging, MRI of the whole involved bone to define extent, soft-tissue mass, and skip lesions, CT of the chest to detect pulmonary metastases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Neoadjuvant multi-agent chemotherapy, typically high-dose methotrexate, doxorubicin and cisplatin, before definitive surgery"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing persistent bone pain in a young person as growing pains or a sports injury, delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of osteosarcoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "osteosarcoma-matrix",
+      "title": "Osteosarcoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest primary malignant bone tumour, arising most often in adolescents and young adults around the knee (distal femur and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs of the affected region as the initial imaging, MRI of the whole involved bone to define extent, soft-tissue",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ewing's sarcoma, Osteomyelitis (can mimic tumour clinically and radiologically), Chondrosarcoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Neoadjuvant multi-agent chemotherapy, typically high-dose methotrexate, doxorubicin and cisplatin, before definitive surgery",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing persistent bone pain in a young person as growing pains or a sports injury, delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for osteosarcoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteosarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs of the affected region",
+          "cells": [
+            {
+              "text": "Bone destruction, new bone formation, sunburst pattern and Codman's triangle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the whole involved bone",
+          "cells": [
+            {
+              "text": "Extent, soft-tissue mass and skip lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy planned at the treating centre",
+          "cells": [
+            {
+              "text": "Histological diagnosis; tract planned for later limb salvage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scan or PET with ALP and LDH",
+          "cells": [
+            {
+              "text": "Distant disease and baseline biochemistry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteosarcoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteomyelitis",
+          "cells": [
+            {
+              "text": "Can mimic tumour clinically and radiologically; histology separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign but aggressive lesions (giant cell tumour, osteoblastoma)",
+          "cells": [
+            {
+              "text": "Histology is needed; these can look aggressive but are benign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteosarcoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neoadjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Typically high-dose methotrexate, doxorubicin and cisplatin before definitive surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide resection with limb salvage",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Where feasible; amputation when adequate margins cannot otherwise be achieved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Guided by histological necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary metastasectomy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Lungs are the dominant site of spread; resection can still be curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist team",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Bone-sarcoma multidisciplinary team with orthopaedic oncology, medical oncology and radiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and genetics",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Chest and primary-site imaging; genetic assessment where hereditary retinoblastoma or Li-Fraumeni is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteosarcoma-dx-mgmt",
+      "title": "Diagnosis and management of Osteosarcoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent night bone pain and swelling near the knee in an adolescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (pathological fracture, rapidly enlarging soft-tissue mass or swelling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist bone sarcoma referral before any biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, MRI of whole bone, CT chest, bone scan or PET, ALP and LDH",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the planned biopsy show a malignant osteoid-producing tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteomyelitis, Ewing sarcoma or a benign aggressive lesion; re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Neoadjuvant chemotherapy, typically high-dose methotrexate, doxorubicin and cisplatin",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wide resection with limb salvage where feasible, or amputation if margins require",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant chemotherapy guided by histological necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Resect pulmonary metastases, as metastasectomy can still be curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Surveillance with chest and primary-site imaging; genetic assessment if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on metastases at diagnosis and chemo response; localised disease often survives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

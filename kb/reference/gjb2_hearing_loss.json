@@ -1,178 +1,474 @@
 {
- "id": "gjb2_hearing_loss",
- "name": "GJB2-related hearing loss",
- "aliases": [
-  "Connexin 26 hearing loss",
-  "DFNB1",
-  "GJB2 deafness"
- ],
- "class": "non_infective",
- "system": "Auditory",
- "specialty": "Audiovestibular medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Otology and audiovestibular references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "GJB2 variants are the single commonest cause of hereditary non-syndromic sensorineural hearing loss, most often inherited as autosomal recessive (locus DFNB1).",
-   "The gene encodes connexin 26, a gap-junction protein in cochlear supporting cells and the stria vascularis that is essential for recycling potassium ions within the endolymph.",
-   "Hearing loss is usually congenital and prelingual, bilateral, symmetrical and sensorineural, ranging from mild to profound, and may be stable or slowly progressive.",
-   "Founder variants differ by population, with a common frameshift (c.35delG) predominating in those of European ancestry and distinct variants in East Asian, Ashkenazi Jewish and other groups.",
-   "Combined GJB2 and GJB6 (connexin 30) testing matters, because large GJB6 deletions can cause disease in trans with a single GJB2 variant.",
-   "Certain dominant GJB2 variants produce syndromic disease with palmoplantar keratoderma and other skin findings, such as the keratitis-ichthyosis-deafness phenotype.",
-   "Vestibular function and inner-ear imaging are typically normal and the auditory nerve is intact, so cochlear implantation yields excellent outcomes.",
-   "Early identification through newborn hearing screening followed by prompt habilitation is critical for speech and language development."
+  "id": "gjb2_hearing_loss",
+  "name": "GJB2-related hearing loss",
+  "aliases": [
+    "Connexin 26 hearing loss",
+    "DFNB1",
+    "GJB2 deafness"
   ],
-  "pathophysiology": "Connexin 26 is a gap-junction protein encoded by GJB2; six connexin subunits assemble into a connexon, and two apposed connexons from neighbouring cells form an intercellular channel. In the cochlea these channels create a syncytial network linking the supporting cells of the organ of Corti with the fibrocytes and cells of the stria vascularis, allowing potassium ions that enter hair cells during mechanotransduction to be recycled back to the endolymph and helping to maintain the endocochlear potential. Loss-of-function biallelic variants disrupt channel assembly or gating, impairing potassium homeostasis and the ionic environment required for hair-cell function, producing sensorineural hearing loss without structural malformation. Because connexin 26 and connexin 30 (GJB6) co-assemble within the same network and their genes lie close together on the same chromosomal region, deletions removing GJB6 or shared regulatory elements can unmask a single GJB2 variant. Certain dominant-negative or gain-of-function variants additionally disturb connexin function in the epidermis, giving the associated keratoderma syndromes and accounting for the phenotypic breadth of GJB2 disease.",
-  "additionalDifferentials": [
-   "Congenital cytomegalovirus infection, the commonest non-genetic congenital hearing loss",
-   "Syndromic sensorineural hearing loss (Pendred, Usher, Waardenburg, Jervell-Lange-Nielsen, branchio-oto-renal)",
-   "Enlarged vestibular aqueduct and other inner-ear malformations",
-   "Mitochondrial hearing loss including aminoglycoside-related susceptibility",
-   "Auditory neuropathy spectrum disorder (e.g. OTOF-related)",
-   "Other non-syndromic deafness loci (e.g. STRC, SLC26A4, TMC1)",
-   "Acquired perinatal causes such as hypoxia, hyperbilirubinaemia and prematurity"
-  ],
-  "additionalInvestigations": [
-   "Newborn hearing screening with otoacoustic emissions and automated auditory brainstem response",
-   "Age-appropriate audiometry and tympanometry to characterise threshold and configuration",
-   "Molecular testing of GJB2 with GJB6 deletion analysis",
-   "Broader genetic panel or exome sequencing if GJB2 testing is negative",
-   "Congenital cytomegalovirus testing, ideally within the neonatal window",
-   "Ophthalmology review and electrocardiography where syndromic causes are considered",
-   "Temporal bone imaging (MRI or CT) prior to cochlear implantation"
-  ],
-  "redFlags": [
-   "Any failed newborn hearing screen requiring prompt diagnostic audiology",
-   "Features suggesting a syndrome, such as goitre, pigmentary or skin changes, visual loss, or renal or cardiac anomalies",
-   "Progressive, fluctuating or markedly asymmetrical loss prompting reconsideration of the diagnosis",
-   "Delayed speech and language milestones indicating inadequate early habilitation"
-  ],
-  "prognosis": "With early diagnosis and habilitation the outlook is very good, and because the auditory nerve is preserved, hearing aids and cochlear implantation typically yield excellent speech and language outcomes. Recessive GJB2 disease is generally non-syndromic with normal life expectancy.",
-  "pitfalls": [
-   "Assuming all congenital sensorineural hearing loss is GJB2-related and omitting congenital cytomegalovirus and syndromic evaluation",
-   "Testing GJB2 alone and missing a GJB6 deletion in trans",
-   "Overlooking dominant GJB2 syndromes with skin involvement",
-   "Delaying habilitation while awaiting genetic results",
-   "Misattributing progressive or asymmetrical loss to GJB2 without re-evaluation"
-  ],
-  "references": [
-   "Otolaryngology reference texts",
-   "Medical genetics reference texts",
-   "Audiovestibular medicine references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no disease-specific drug therapy; management centres on early auditory habilitation with hearing aids fitted to the threshold and configuration",
-   "Cochlear implantation for severe-to-profound loss, which yields excellent speech outcomes because the auditory nerve is preserved",
-   "Early speech and language therapy and communication support, with family choice of listening-and-spoken-language or signing approaches",
-   "Serial audiometry to detect progression and adjust amplification, alongside educational and psychosocial support",
-   "Coordinate care through an audiovestibular and ENT multidisciplinary team with paediatric and educational input",
-   "Offer genetic counselling for this autosomal recessive DFNB1 condition, including combined GJB2 and GJB6 testing and screening of relatives",
-   "Assess for syndromic features in dominant variants, with ophthalmology and dermatology review where a keratitis-ichthyosis-deafness phenotype is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gjb2_hearing_loss-pathway",
-   "title": "GJB2-related hearing loss: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "GJB2 variants are the single commonest cause of hereditary non-syndromic sensorineural hearing loss, most often inherited as autosomal recessive (locus DFNB1).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Any failed newborn hearing screen requiring prompt diagnostic audiology",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Newborn hearing screening with otoacoustic emissions and automated auditory brainstem response, Age-appropriate audiometry and tympanometry to characterise threshold and configuration, Molecular testing of GJB2 with GJB6"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no disease-specific drug therapy; management centres on early auditory habilitation with hearing aids fitted to the threshold and configuration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all congenital sensorineural hearing loss is GJB2-related and omitting congenital cytomegalovirus and syndromic evaluation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gjb2-related hearing loss."
-  }
- ],
- "tables": [
-  {
-   "id": "gjb2_hearing_loss-matrix",
-   "title": "GJB2-related hearing loss: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "GJB2 variants are the single commonest cause of hereditary non-syndromic sensorineural hearing loss, most often inherited as",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Auditory",
+  "specialty": "Audiovestibular medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Otology and audiovestibular references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "GJB2 variants are the single commonest cause of hereditary non-syndromic sensorineural hearing loss, most often inherited as autosomal recessive (locus DFNB1).",
+      "The gene encodes connexin 26, a gap-junction protein in cochlear supporting cells and the stria vascularis that is essential for recycling potassium ions within the endolymph.",
+      "Hearing loss is usually congenital and prelingual, bilateral, symmetrical and sensorineural, ranging from mild to profound, and may be stable or slowly progressive.",
+      "Founder variants differ by population, with a common frameshift (c.35delG) predominating in those of European ancestry and distinct variants in East Asian, Ashkenazi Jewish and other groups.",
+      "Combined GJB2 and GJB6 (connexin 30) testing matters, because large GJB6 deletions can cause disease in trans with a single GJB2 variant.",
+      "Certain dominant GJB2 variants produce syndromic disease with palmoplantar keratoderma and other skin findings, such as the keratitis-ichthyosis-deafness phenotype.",
+      "Vestibular function and inner-ear imaging are typically normal and the auditory nerve is intact, so cochlear implantation yields excellent outcomes.",
+      "Early identification through newborn hearing screening followed by prompt habilitation is critical for speech and language development."
     ],
-    [
-     "Key Investigations",
-     "Newborn hearing screening with otoacoustic emissions and automated auditory brainstem response, Age-appropriate audiometry and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Connexin 26 is a gap-junction protein encoded by GJB2; six connexin subunits assemble into a connexon, and two apposed connexons from neighbouring cells form an intercellular channel. In the cochlea these channels create a syncytial network linking the supporting cells of the organ of Corti with the fibrocytes and cells of the stria vascularis, allowing potassium ions that enter hair cells during mechanotransduction to be recycled back to the endolymph and helping to maintain the endocochlear potential. Loss-of-function biallelic variants disrupt channel assembly or gating, impairing potassium homeostasis and the ionic environment required for hair-cell function, producing sensorineural hearing loss without structural malformation. Because connexin 26 and connexin 30 (GJB6) co-assemble within the same network and their genes lie close together on the same chromosomal region, deletions removing GJB6 or shared regulatory elements can unmask a single GJB2 variant. Certain dominant-negative or gain-of-function variants additionally disturb connexin function in the epidermis, giving the associated keratoderma syndromes and accounting for the phenotypic breadth of GJB2 disease.",
+    "additionalDifferentials": [
+      "Congenital cytomegalovirus infection, the commonest non-genetic congenital hearing loss",
+      "Syndromic sensorineural hearing loss (Pendred, Usher, Waardenburg, Jervell-Lange-Nielsen, branchio-oto-renal)",
+      "Enlarged vestibular aqueduct and other inner-ear malformations",
+      "Mitochondrial hearing loss including aminoglycoside-related susceptibility",
+      "Auditory neuropathy spectrum disorder (e.g. OTOF-related)",
+      "Other non-syndromic deafness loci (e.g. STRC, SLC26A4, TMC1)",
+      "Acquired perinatal causes such as hypoxia, hyperbilirubinaemia and prematurity"
     ],
-    [
-     "Primary Differentials",
-     "Congenital cytomegalovirus infection, the commonest non-genetic congenital hearing loss, Syndromic sensorineural hearing loss",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Newborn hearing screening with otoacoustic emissions and automated auditory brainstem response",
+      "Age-appropriate audiometry and tympanometry to characterise threshold and configuration",
+      "Molecular testing of GJB2 with GJB6 deletion analysis",
+      "Broader genetic panel or exome sequencing if GJB2 testing is negative",
+      "Congenital cytomegalovirus testing, ideally within the neonatal window",
+      "Ophthalmology review and electrocardiography where syndromic causes are considered",
+      "Temporal bone imaging (MRI or CT) prior to cochlear implantation"
     ],
-    [
-     "Management Strategy",
-     "There is no disease-specific drug therapy; management centres on early auditory habilitation with hearing aids fitted to the",
-     "Core treatment modality"
+    "redFlags": [
+      "Any failed newborn hearing screen requiring prompt diagnostic audiology",
+      "Features suggesting a syndrome, such as goitre, pigmentary or skin changes, visual loss, or renal or cardiac anomalies",
+      "Progressive, fluctuating or markedly asymmetrical loss prompting reconsideration of the diagnosis",
+      "Delayed speech and language milestones indicating inadequate early habilitation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all congenital sensorineural hearing loss is GJB2-related and omitting congenital cytomegalovirus and syndromic",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis and habilitation the outlook is very good, and because the auditory nerve is preserved, hearing aids and cochlear implantation typically yield excellent speech and language outcomes. Recessive GJB2 disease is generally non-syndromic with normal life expectancy.",
+    "pitfalls": [
+      "Assuming all congenital sensorineural hearing loss is GJB2-related and omitting congenital cytomegalovirus and syndromic evaluation",
+      "Testing GJB2 alone and missing a GJB6 deletion in trans",
+      "Overlooking dominant GJB2 syndromes with skin involvement",
+      "Delaying habilitation while awaiting genetic results",
+      "Misattributing progressive or asymmetrical loss to GJB2 without re-evaluation"
+    ],
+    "references": [
+      "Otolaryngology reference texts",
+      "Medical genetics reference texts",
+      "Audiovestibular medicine references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no disease-specific drug therapy; management centres on early auditory habilitation with hearing aids fitted to the threshold and configuration",
+      "Cochlear implantation for severe-to-profound loss, which yields excellent speech outcomes because the auditory nerve is preserved",
+      "Early speech and language therapy and communication support, with family choice of listening-and-spoken-language or signing approaches",
+      "Serial audiometry to detect progression and adjust amplification, alongside educational and psychosocial support",
+      "Coordinate care through an audiovestibular and ENT multidisciplinary team with paediatric and educational input",
+      "Offer genetic counselling for this autosomal recessive DFNB1 condition, including combined GJB2 and GJB6 testing and screening of relatives",
+      "Assess for syndromic features in dominant variants, with ophthalmology and dermatology review where a keratitis-ichthyosis-deafness phenotype is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for gjb2-related hearing loss."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gjb2-hearing-loss-real-image",
-   "title": "GJB2-related hearing loss: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "gjb2_hearing_loss-pathway",
+      "title": "GJB2-related hearing loss: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "GJB2 variants are the single commonest cause of hereditary non-syndromic sensorineural hearing loss, most often inherited as autosomal recessive (locus DFNB1).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Any failed newborn hearing screen requiring prompt diagnostic audiology",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Newborn hearing screening with otoacoustic emissions and automated auditory brainstem response, Age-appropriate audiometry and tympanometry to characterise threshold and configuration, Molecular testing of GJB2 with GJB6"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no disease-specific drug therapy; management centres on early auditory habilitation with hearing aids fitted to the threshold and configuration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all congenital sensorineural hearing loss is GJB2-related and omitting congenital cytomegalovirus and syndromic evaluation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gjb2-related hearing loss."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gjb2_hearing_loss-matrix",
+      "title": "GJB2-related hearing loss: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "GJB2 variants are the single commonest cause of hereditary non-syndromic sensorineural hearing loss, most often inherited as",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Newborn hearing screening with otoacoustic emissions and automated auditory brainstem response, Age-appropriate audiometry and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital cytomegalovirus infection, the commonest non-genetic congenital hearing loss, Syndromic sensorineural hearing loss",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no disease-specific drug therapy; management centres on early auditory habilitation with hearing aids fitted to the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all congenital sensorineural hearing loss is GJB2-related and omitting congenital cytomegalovirus and syndromic",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gjb2-related hearing loss."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Otology and audiovestibular references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gjb2_hearing_loss-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn hearing screening with otoacoustic emissions and automated ABR",
+          "cells": [
+            {
+              "text": "Screens for congenital hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and tympanometry",
+          "cells": [
+            {
+              "text": "Threshold and configuration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GJB2 molecular testing with GJB6 deletion analysis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broader genetic panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Used when GJB2 testing is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cytomegalovirus testing",
+          "cells": [
+            {
+              "text": "Within the neonatal window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal bone imaging",
+          "cells": [
+            {
+              "text": "Before cochlear implantation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gjb2_hearing_loss-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital cytomegalovirus infection",
+          "cells": [
+            {
+              "text": "Commonest non-genetic congenital hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic sensorineural hearing loss",
+          "cells": [
+            {
+              "text": "Pendred, Usher, Waardenburg or Jervell-Lange-Nielsen syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enlarged vestibular aqueduct",
+          "cells": [
+            {
+              "text": "Inner-ear malformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gjb2_hearing_loss-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early auditory habilitation",
+          "cells": [
+            {
+              "text": "Hearing aids fitted to the loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "For severe-to-profound loss; excellent speech outcomes because the auditory nerve is preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Communication support; family choice of listening-and-spoken-language or signing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Detects progression and adjusts amplification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Audiovestibular, ENT, paediatric and educational input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DFNB1; combined GJB2 and GJB6 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic feature assessment",
+          "cells": [
+            {
+              "text": "In dominant variants; ophthalmology and dermatology review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gjb2_hearing_loss-dx-mgmt",
+      "title": "Diagnosis and management of GJB2-related hearing loss",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected GJB2-related hearing loss: congenital sensorineural hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (failed newborn screen, syndromic features, progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent diagnostic audiology for any failed newborn hearing screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiometry, GJB2 with GJB6 testing, CMV testing and temporal bone imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do GJB2 and GJB6 testing confirm the diagnosis, with CMV excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital CMV, syndromic hearing loss or enlarged vestibular aqueduct",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early auditory habilitation with hearing aids fitted to the loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cochlear implantation for severe-to-profound loss, with excellent speech outcomes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early speech and language therapy and communication support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial audiometry to detect progression; genetic counselling for DFNB1",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Very good with early diagnosis and habilitation; the auditory nerve is preserved",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

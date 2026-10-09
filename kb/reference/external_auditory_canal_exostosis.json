@@ -1,168 +1,408 @@
 {
- "id": "external_auditory_canal_exostosis",
- "name": "External auditory canal exostoses",
- "aliases": [
-  "surfer's ear",
-  "ear canal exostoses"
- ],
- "class": "non_infective",
- "system": "Ear",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Otolaryngology reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Benign bony outgrowths of the external auditory canal, usually multiple and bilateral, caused by repeated exposure to cold water and wind",
-   "It is strongly associated with cold-water surfing, diving and swimming, hence the term surfer's ear",
-   "Many are asymptomatic, but narrowing predisposes to trapped water, wax impaction and recurrent otitis externa",
-   "Progressive canal occlusion can cause conductive hearing loss",
-   "A solitary bony lesion is more likely an osteoma, which differs in pathology and distribution",
-   "Water precautions slow progression, and surgery is reserved for significant obstruction or recurrent infection"
+  "id": "external_auditory_canal_exostosis",
+  "name": "External auditory canal exostoses",
+  "aliases": [
+    "surfer's ear",
+    "ear canal exostoses"
   ],
-  "pathophysiology": "External auditory canal exostoses are broad-based bony overgrowths arising from the tympanic bone of the canal in response to repeated cold-water and wind exposure. The chronic thermal stimulation is thought to provoke periosteal bone formation, producing progressive concentric narrowing of the bony canal. The narrowed, tortuous canal traps water and cerumen, impairing self-cleaning and predisposing to external ear infection and, when severe, conductive hearing loss.",
-  "additionalDifferentials": [
-   "Osteoma of the ear canal",
-   "Cerumen impaction",
-   "Chronic otitis externa with stenosis",
-   "Fibrous or soft-tissue canal stenosis",
-   "Canal tumour"
-  ],
-  "additionalInvestigations": [
-   "Otoscopy demonstrating the characteristic bony narrowing",
-   "Audiometry if conductive hearing loss is suspected",
-   "History of cold-water exposure",
-   "CT of the temporal bone before surgery to define the bony anatomy",
-   "Assessment for recurrent otitis externa"
-  ],
-  "redFlags": [
-   "Recurrent or severe external ear infection",
-   "Significant conductive hearing loss",
-   "A solitary or atypical mass suggesting osteoma or neoplasm",
-   "Complete canal occlusion"
-  ],
-  "prognosis": "The lesions are benign and slowly progressive; with water precautions and, where needed, surgical canalplasty, symptoms and complications are well controlled.",
-  "pitfalls": [
-   "Confusing multiple exostoses with a solitary osteoma",
-   "Overlooking recurrent otitis externa driven by water trapping",
-   "Not advising ear protection to slow progression",
-   "Underestimating conductive hearing loss from occlusion"
-  ],
-  "references": [
-   "Otolaryngology reference texts (standard reference)",
-   "Otology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Water precautions with well-fitting earplugs and avoidance of cold-water and wind exposure to slow progression",
-   "Aural toileting and microsuction to clear trapped water, wax and debris and restore canal self-cleaning",
-   "Treat recurrent otitis externa with topical antibiotic-steroid drops and keep the canal dry with acidifying/drying agents",
-   "Surgical canalplasty to remove the exostoses for significant canal obstruction, refractory recurrent infection or conductive hearing loss",
-   "Monitor hearing with audiometry when conductive loss is suspected",
-   "Refer to otolaryngology for symptomatic or progressive disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "external_auditory_canal_exostosis-pathway",
-   "title": "External auditory canal exostoses: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Benign bony outgrowths of the external auditory canal, usually multiple and bilateral, caused by repeated exposure to cold water and wind",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or severe external ear infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Otoscopy demonstrating the characteristic bony narrowing, Audiometry if conductive hearing loss is suspected, History of cold-water exposure"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Water precautions with well-fitting earplugs and avoidance of cold-water and wind exposure to slow progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing multiple exostoses with a solitary osteoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of external auditory canal exostoses."
-  }
- ],
- "tables": [
-  {
-   "id": "external_auditory_canal_exostosis-matrix",
-   "title": "External auditory canal exostoses: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Benign bony outgrowths of the external auditory canal, usually multiple and bilateral, caused by repeated exposure to cold water",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Otolaryngology reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Benign bony outgrowths of the external auditory canal, usually multiple and bilateral, caused by repeated exposure to cold water and wind",
+      "It is strongly associated with cold-water surfing, diving and swimming, hence the term surfer's ear",
+      "Many are asymptomatic, but narrowing predisposes to trapped water, wax impaction and recurrent otitis externa",
+      "Progressive canal occlusion can cause conductive hearing loss",
+      "A solitary bony lesion is more likely an osteoma, which differs in pathology and distribution",
+      "Water precautions slow progression, and surgery is reserved for significant obstruction or recurrent infection"
     ],
-    [
-     "Key Investigations",
-     "Otoscopy demonstrating the characteristic bony narrowing, Audiometry if conductive hearing loss is suspected, History of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "External auditory canal exostoses are broad-based bony overgrowths arising from the tympanic bone of the canal in response to repeated cold-water and wind exposure. The chronic thermal stimulation is thought to provoke periosteal bone formation, producing progressive concentric narrowing of the bony canal. The narrowed, tortuous canal traps water and cerumen, impairing self-cleaning and predisposing to external ear infection and, when severe, conductive hearing loss.",
+    "additionalDifferentials": [
+      "Osteoma of the ear canal",
+      "Cerumen impaction",
+      "Chronic otitis externa with stenosis",
+      "Fibrous or soft-tissue canal stenosis",
+      "Canal tumour"
     ],
-    [
-     "Primary Differentials",
-     "Osteoma of the ear canal, Cerumen impaction, Chronic otitis externa with stenosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Otoscopy demonstrating the characteristic bony narrowing",
+      "Audiometry if conductive hearing loss is suspected",
+      "History of cold-water exposure",
+      "CT of the temporal bone before surgery to define the bony anatomy",
+      "Assessment for recurrent otitis externa"
     ],
-    [
-     "Management Strategy",
-     "Water precautions with well-fitting earplugs and avoidance of cold-water and wind exposure to slow progression",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or severe external ear infection",
+      "Significant conductive hearing loss",
+      "A solitary or atypical mass suggesting osteoma or neoplasm",
+      "Complete canal occlusion"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing multiple exostoses with a solitary osteoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "The lesions are benign and slowly progressive; with water precautions and, where needed, surgical canalplasty, symptoms and complications are well controlled.",
+    "pitfalls": [
+      "Confusing multiple exostoses with a solitary osteoma",
+      "Overlooking recurrent otitis externa driven by water trapping",
+      "Not advising ear protection to slow progression",
+      "Underestimating conductive hearing loss from occlusion"
+    ],
+    "references": [
+      "Otolaryngology reference texts (standard reference)",
+      "Otology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Water precautions with well-fitting earplugs and avoidance of cold-water and wind exposure to slow progression",
+      "Aural toileting and microsuction to clear trapped water, wax and debris and restore canal self-cleaning",
+      "Treat recurrent otitis externa with topical antibiotic-steroid drops and keep the canal dry with acidifying/drying agents",
+      "Surgical canalplasty to remove the exostoses for significant canal obstruction, refractory recurrent infection or conductive hearing loss",
+      "Monitor hearing with audiometry when conductive loss is suspected",
+      "Refer to otolaryngology for symptomatic or progressive disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for external auditory canal exostoses."
-  }
- ],
- "diagrams": [
-  {
-   "id": "external-auditory-canal-exostosis-real-image",
-   "title": "External auditory canal exostoses: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "external_auditory_canal_exostosis-pathway",
+      "title": "External auditory canal exostoses: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Benign bony outgrowths of the external auditory canal, usually multiple and bilateral, caused by repeated exposure to cold water and wind",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or severe external ear infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Otoscopy demonstrating the characteristic bony narrowing, Audiometry if conductive hearing loss is suspected, History of cold-water exposure"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Water precautions with well-fitting earplugs and avoidance of cold-water and wind exposure to slow progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing multiple exostoses with a solitary osteoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of external auditory canal exostoses."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "external_auditory_canal_exostosis-matrix",
+      "title": "External auditory canal exostoses: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Benign bony outgrowths of the external auditory canal, usually multiple and bilateral, caused by repeated exposure to cold water",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Otoscopy demonstrating the characteristic bony narrowing, Audiometry if conductive hearing loss is suspected, History of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Osteoma of the ear canal, Cerumen impaction, Chronic otitis externa with stenosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Water precautions with well-fitting earplugs and avoidance of cold-water and wind exposure to slow progression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing multiple exostoses with a solitary osteoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for external auditory canal exostoses."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Otolaryngology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "external_auditory_canal_exostosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Characteristic bony narrowing of the canal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Conductive hearing loss, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of cold-water exposure",
+          "cells": [
+            {
+              "text": "Surfing, diving or swimming"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the temporal bone before surgery",
+          "cells": [
+            {
+              "text": "Bony anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for recurrent otitis externa",
+          "cells": [
+            {
+              "text": "Trapped water and infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "external_auditory_canal_exostosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Water precautions",
+          "cells": [
+            {
+              "text": "Well-fitting earplugs; avoid cold-water and wind exposure to slow progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aural toileting and microsuction",
+          "cells": [
+            {
+              "text": "Clears trapped water, wax and debris"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antibiotic-steroid drops and drying agents",
+          "cells": [
+            {
+              "text": "Recurrent otitis externa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Canalplasty",
+          "cells": [
+            {
+              "text": "Significant canal obstruction, refractory infection or conductive loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Monitors hearing when conductive loss is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otolaryngology referral",
+          "cells": [
+            {
+              "text": "Symptomatic or progressive disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "external_auditory_canal_exostosis-dx-mgmt",
+      "title": "Diagnosis and management of External auditory canal exostoses",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent otitis externa or conductive hearing loss in a swimmer or surfer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe ear infection, conductive loss, solitary mass, canal occlusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Otolaryngology referral; CT of temporal bone if surgery is planned",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy for bony narrowing; audiometry; exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Multiple bony exostoses on otoscopy rather than a solitary mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteoma, cerumen or canal tumour; biopsy or imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Water precautions with earplugs; avoid cold water and wind",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Microsuction to clear trapped water and debris",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical antibiotic-steroid drops for recurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Canalplasty for significant obstruction or conductive loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and slowly progressive; controlled by water precautions and surgery if needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

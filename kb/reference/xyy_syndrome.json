@@ -1,170 +1,374 @@
 {
- "id": "xyy_syndrome",
- "name": "47,XYY syndrome",
- "aliases": [
-  "XYY syndrome",
-  "Jacobs syndrome",
-  "47,XYY",
-  "YY syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Tall stature is the most consistent feature, often with accelerated growth during childhood",
-   "Physical appearance and fertility are usually normal, and many individuals remain undiagnosed",
-   "There is an increased risk of speech and language delay and of learning difficulties, especially with reading",
-   "Higher rates of attention-deficit/hyperactivity, autism spectrum traits, and emotional or behavioural difficulties occur, but the historical link with aggression is outdated and stigmatising",
-   "Motor coordination difficulties and childhood hypotonia are common",
-   "Arises from a paternal second-division meiotic error producing a YY sperm, with no maternal-age effect",
-   "IQ is usually within the normal range but on average slightly lower than that of siblings"
+  "id": "xyy_syndrome",
+  "name": "47,XYY syndrome",
+  "aliases": [
+    "XYY syndrome",
+    "Jacobs syndrome",
+    "47,XYY",
+    "YY syndrome"
   ],
-  "pathophysiology": "47,XYY arises when an error at the second paternal meiotic division produces a sperm carrying two Y chromosomes, giving a male with an extra Y. Additional dosage of Y-linked and pseudoautosomal genes, including growth-related genes in the short-stature homeobox region, is thought to underlie the tall stature, while effects on neurodevelopment produce the associated language, learning, and behavioural profile. Expressivity is very variable and many individuals are only mildly affected.",
-  "additionalDifferentials": [
-   "Familial or constitutional tall stature",
-   "Other sex-chromosome aneuploidies such as 47,XXY and 48,XXYY",
-   "Idiopathic attention-deficit/hyperactivity disorder or autism spectrum disorder",
-   "Developmental language disorder",
-   "Marfan syndrome, for tall stature"
-  ],
-  "additionalInvestigations": [
-   "Karyotype, which is diagnostic",
-   "Chromosomal microarray, which detects the extra Y",
-   "Developmental, speech and language, and educational assessment",
-   "Assessment for attention-deficit/hyperactivity disorder or autism spectrum disorder where indicated",
-   "Growth monitoring"
-  ],
-  "redFlags": [
-   "Significant behavioural or mental-health disturbance needing support",
-   "Marked developmental delay suggesting an additional diagnosis",
-   "Emotional distress in the individual or family after diagnosis, needing counselling"
-  ],
-  "prognosis": "Good, with a normal lifespan and usually normal fertility; most individuals lead independent lives, and neurodevelopmental and educational outcomes improve with early support.",
-  "pitfalls": [
-   "Perpetuating the discredited and stigmatising link with criminality or aggression",
-   "Assuming uniform severity when the phenotype is highly variable",
-   "Overlooking treatable learning and attention difficulties",
-   "Causing undue alarm after an incidental prenatal diagnosis"
-  ],
-  "references": [
-   "GeneReviews",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide early developmental intervention with speech and language therapy for language delay and educational support for learning difficulties, particularly reading",
-   "Screen for and manage ADHD, autism spectrum traits and emotional or behavioural difficulties with behavioural strategies and medication where indicated",
-   "Offer occupational therapy and physiotherapy for motor coordination difficulties and childhood hypotonia",
-   "Monitor growth given the tall stature, providing reassurance that physical development and fertility are usually normal",
-   "Give family counselling that dispels the outdated and stigmatising link with aggression and explains the sporadic paternal meiotic origin with no maternal-age effect and low recurrence risk",
-   "Arrange periodic developmental and educational review, since outcomes improve with early support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "xyy_syndrome-pathway",
-   "title": "47,XYY syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Tall stature is the most consistent feature, often with accelerated growth during childhood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant behavioural or mental-health disturbance needing support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Karyotype, which is diagnostic, Chromosomal microarray, which detects the extra Y, Developmental, speech and language, and educational assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide early developmental intervention with speech and language therapy for language delay and educational support for learning difficulties, particularly reading"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Perpetuating the discredited and stigmatising link with criminality or aggression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of 47,xyy syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "xyy_syndrome-matrix",
-   "title": "47,XYY syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Tall stature is the most consistent feature, often with accelerated growth during childhood",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Tall stature is the most consistent feature, often with accelerated growth during childhood",
+      "Physical appearance and fertility are usually normal, and many individuals remain undiagnosed",
+      "There is an increased risk of speech and language delay and of learning difficulties, especially with reading",
+      "Higher rates of attention-deficit/hyperactivity, autism spectrum traits, and emotional or behavioural difficulties occur, but the historical link with aggression is outdated and stigmatising",
+      "Motor coordination difficulties and childhood hypotonia are common",
+      "Arises from a paternal second-division meiotic error producing a YY sperm, with no maternal-age effect",
+      "IQ is usually within the normal range but on average slightly lower than that of siblings"
     ],
-    [
-     "Key Investigations",
-     "Karyotype, which is diagnostic, Chromosomal microarray, which detects the extra Y, Developmental, speech and language, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "47,XYY arises when an error at the second paternal meiotic division produces a sperm carrying two Y chromosomes, giving a male with an extra Y. Additional dosage of Y-linked and pseudoautosomal genes, including growth-related genes in the short-stature homeobox region, is thought to underlie the tall stature, while effects on neurodevelopment produce the associated language, learning, and behavioural profile. Expressivity is very variable and many individuals are only mildly affected.",
+    "additionalDifferentials": [
+      "Familial or constitutional tall stature",
+      "Other sex-chromosome aneuploidies such as 47,XXY and 48,XXYY",
+      "Idiopathic attention-deficit/hyperactivity disorder or autism spectrum disorder",
+      "Developmental language disorder",
+      "Marfan syndrome, for tall stature"
     ],
-    [
-     "Primary Differentials",
-     "Familial or constitutional tall stature, Other sex-chromosome aneuploidies such as 47,XXY and 48,XXYY, Idiopathic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Karyotype, which is diagnostic",
+      "Chromosomal microarray, which detects the extra Y",
+      "Developmental, speech and language, and educational assessment",
+      "Assessment for attention-deficit/hyperactivity disorder or autism spectrum disorder where indicated",
+      "Growth monitoring"
     ],
-    [
-     "Management Strategy",
-     "Provide early developmental intervention with speech and language therapy for language delay and educational support for learning",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant behavioural or mental-health disturbance needing support",
+      "Marked developmental delay suggesting an additional diagnosis",
+      "Emotional distress in the individual or family after diagnosis, needing counselling"
     ],
-    [
-     "Clinical Pitfall",
-     "Perpetuating the discredited and stigmatising link with criminality or aggression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Good, with a normal lifespan and usually normal fertility; most individuals lead independent lives, and neurodevelopmental and educational outcomes improve with early support.",
+    "pitfalls": [
+      "Perpetuating the discredited and stigmatising link with criminality or aggression",
+      "Assuming uniform severity when the phenotype is highly variable",
+      "Overlooking treatable learning and attention difficulties",
+      "Causing undue alarm after an incidental prenatal diagnosis"
+    ],
+    "references": [
+      "GeneReviews",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide early developmental intervention with speech and language therapy for language delay and educational support for learning difficulties, particularly reading",
+      "Screen for and manage ADHD, autism spectrum traits and emotional or behavioural difficulties with behavioural strategies and medication where indicated",
+      "Offer occupational therapy and physiotherapy for motor coordination difficulties and childhood hypotonia",
+      "Monitor growth given the tall stature, providing reassurance that physical development and fertility are usually normal",
+      "Give family counselling that dispels the outdated and stigmatising link with aggression and explains the sporadic paternal meiotic origin with no maternal-age effect and low recurrence risk",
+      "Arrange periodic developmental and educational review, since outcomes improve with early support"
     ]
-   ],
-   "caption": "Overview comparison matrix for 47,xyy syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "xyy-syndrome-real-image",
-   "title": "47,XYY syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "xyy_syndrome-pathway",
+      "title": "47,XYY syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Tall stature is the most consistent feature, often with accelerated growth during childhood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant behavioural or mental-health disturbance needing support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Karyotype, which is diagnostic, Chromosomal microarray, which detects the extra Y, Developmental, speech and language, and educational assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide early developmental intervention with speech and language therapy for language delay and educational support for learning difficulties, particularly reading"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Perpetuating the discredited and stigmatising link with criminality or aggression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of 47,xyy syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "xyy_syndrome-matrix",
+      "title": "47,XYY syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Tall stature is the most consistent feature, often with accelerated growth during childhood",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Karyotype, which is diagnostic, Chromosomal microarray, which detects the extra Y, Developmental, speech and language, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Familial or constitutional tall stature, Other sex-chromosome aneuploidies such as 47,XXY and 48,XXYY, Idiopathic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide early developmental intervention with speech and language therapy for language delay and educational support for learning",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Perpetuating the discredited and stigmatising link with criminality or aggression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for 47,xyy syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "xyy_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Diagnostic for 47,XYY"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Detects the extra Y"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and speech assessment",
+          "cells": [
+            {
+              "text": "Language delay and learning needs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "xyy_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial or constitutional tall stature",
+          "cells": [
+            {
+              "text": "Tall stature without the chromosome change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other sex-chromosome aneuploidies (47,XXY, 48,XXYY)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "xyy_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Speech and language therapy for language delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational support",
+          "cells": [
+            {
+              "text": "Learning needs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "xyy_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of 47,XYY syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected XYY syndrome: tall stature with developmental or language delay in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (significant behavioural disturbance or marked developmental delay)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent mental health or developmental assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, chromosomal microarray, developmental and speech assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does karyotype confirm 47,XYY?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constitutional tall stature or other sex-chromosome aneuploidy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early developmental intervention with speech and language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Educational support for learning needs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid perpetuating the discredited link with criminality or aggression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Outcome varies widely; early support improves developmental outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

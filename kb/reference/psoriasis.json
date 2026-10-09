@@ -1,174 +1,1042 @@
 {
- "id": "psoriasis",
- "name": "Psoriasis",
- "aliases": [
-  "psoriasis vulgaris",
-  "plaque psoriasis",
-  "chronic plaque psoriasis"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classic lesions are well-demarcated, salmon-pink plaques with adherent silvery scale, favouring extensor surfaces (elbows, knees), scalp, and the lumbosacral region",
-   "Gentle removal of scale may reveal pinpoint bleeding points (Auspitz sign), and new plaques can appear at sites of trauma (Koebner phenomenon)",
-   "Nail changes such as pitting, onycholysis, and oil-drop discolouration are common and support the diagnosis",
-   "Up to a third of patients develop psoriatic arthritis, so ask about joint pain, stiffness, and dactylitis at every review",
-   "Recognise clinical variants: guttate (often post-streptococcal in younger patients), inverse/flexural, pustular, and erythrodermic forms",
-   "Treatment is stepped: topical agents (corticosteroids, vitamin D analogues) for limited disease, phototherapy for widespread involvement, and systemic or biologic immunomodulators for severe or refractory disease",
-   "Screen for and address associated cardiometabolic risk, obesity, and depression, as psoriasis is a systemic inflammatory condition",
-   "Avoid abrupt withdrawal of systemic corticosteroids, which can precipitate a pustular or erythrodermic flare"
+  "id": "psoriasis",
+  "name": "Psoriasis",
+  "aliases": [
+    "psoriasis vulgaris",
+    "plaque psoriasis",
+    "chronic plaque psoriasis"
   ],
-  "pathophysiology": "Psoriasis is a chronic immune-mediated disorder driven by dysregulated activation of the innate and adaptive immune systems, particularly the interleukin-23/T-helper-17 axis and tumour necrosis factor signalling. Activated T cells and dendritic cells release cytokines that drive keratinocyte hyperproliferation and abnormal differentiation, dramatically shortening epidermal turnover time and producing thickened, scaly plaques. Dilated dermal vessels and a neutrophilic and lymphocytic infiltrate account for the erythema and, in pustular variants, sterile collections of neutrophils. A strong polygenic predisposition (including PSORS1/HLA-C associations) interacts with triggers such as infection, trauma, drugs, and stress.",
-  "additionalDifferentials": [
-   "Seborrhoeic dermatitis (especially on the scalp and face)",
-   "Chronic eczema or lichen simplex chronicus",
-   "Tinea corporis or tinea capitis",
-   "Cutaneous T-cell lymphoma (mycosis fungoides)",
-   "Pityriasis rubra pilaris",
-   "Secondary syphilis in atypical guttate-like eruptions"
-  ],
-  "additionalInvestigations": [
-   "Largely a clinical diagnosis; skin biopsy reserved for atypical presentations",
-   "Throat swab or streptococcal serology when guttate psoriasis is suspected",
-   "Joint assessment and imaging when psoriatic arthritis is suspected",
-   "Baseline and monitoring bloods (including liver function and infection screening) before systemic or biologic therapy",
-   "Metabolic screening for cardiovascular risk factors, lipids, and glucose"
-  ],
-  "redFlags": [
-   "Erythroderma with widespread redness, scaling, and impaired thermoregulation requiring urgent care",
-   "Generalised pustular psoriasis with fever and systemic upset",
-   "Rapidly progressive joint destruction or dactylitis suggesting aggressive psoriatic arthritis",
-   "Signs of secondary infection or sepsis in extensive skin breakdown"
-  ],
-  "prognosis": "Psoriasis is a lifelong relapsing-remitting condition; most patients achieve good control with appropriate therapy, but disease severity fluctuates and associated arthritis and cardiometabolic disease influence long-term outcomes.",
-  "pitfalls": [
-   "Mislabelling scalp or flexural psoriasis as seborrhoeic dermatitis or fungal infection",
-   "Overlooking psoriatic arthritis until irreversible joint damage has occurred",
-   "Using potent topical steroids in flexures or on the face without appropriate caution",
-   "Precipitating pustular or erythrodermic flares by withdrawing systemic corticosteroids"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical corticosteroids, vitamin D analogues and their combinations, with emollients and coal tar or salicylic acid, for limited plaque disease",
-   "Phototherapy with narrowband UVB or psoralen-UVA for extensive or refractory plaque and guttate disease",
-   "Conventional systemic agents such as methotrexate, ciclosporin or acitretin for moderate-to-severe disease",
-   "Biologic and targeted therapy directed at tumour necrosis factor, interleukin-17 and the interleukin-12/23 axis, or oral apremilast, for severe or refractory disease",
-   "Actively screen for and treat psoriatic arthritis, and manage cardiometabolic comorbidities including lipids, glucose, weight and smoking",
-   "Identify and address triggers such as streptococcal infection in guttate disease, culprit drugs, skin trauma and stress",
-   "Baseline and ongoing monitoring bloods with infection screening, including latent tuberculosis, before and during systemic or biologic therapy",
-   "Urgent inpatient management and dermatology referral for erythrodermic or generalised pustular psoriasis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "psoriasis-pathway",
-   "title": "Psoriasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic lesions are well-demarcated, salmon-pink plaques with adherent silvery scale, favouring extensor surfaces (elbows, knees), scalp, and the lumbosacral region",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Erythroderma with widespread redness, scaling, and impaired thermoregulation requiring urgent care",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Largely a clinical diagnosis; skin biopsy reserved for atypical presentations, Throat swab or streptococcal serology when guttate psoriasis is suspected, Joint assessment and imaging when psoriatic arthritis is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical corticosteroids, vitamin D analogues and their combinations, with emollients and coal tar or salicylic acid, for limited plaque disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling scalp or flexural psoriasis as seborrhoeic dermatitis or fungal infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of psoriasis."
-  }
- ],
- "tables": [
-  {
-   "id": "psoriasis-matrix",
-   "title": "Psoriasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic lesions are well-demarcated, salmon-pink plaques with adherent silvery scale, favouring extensor surfaces (elbows,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classic lesions are well-demarcated, salmon-pink plaques with adherent silvery scale, favouring extensor surfaces (elbows, knees), scalp, and the lumbosacral region",
+      "Gentle removal of scale may reveal pinpoint bleeding points (Auspitz sign), and new plaques can appear at sites of trauma (Koebner phenomenon)",
+      "Nail changes such as pitting, onycholysis, and oil-drop discolouration are common and support the diagnosis",
+      "Up to a third of patients develop psoriatic arthritis, so ask about joint pain, stiffness, and dactylitis at every review",
+      "Recognise clinical variants: guttate (often post-streptococcal in younger patients), inverse/flexural, pustular, and erythrodermic forms",
+      "Treatment is stepped: topical agents (corticosteroids, vitamin D analogues) for limited disease, phototherapy for widespread involvement, and systemic or biologic immunomodulators for severe or refractory disease",
+      "Screen for and address associated cardiometabolic risk, obesity, and depression, as psoriasis is a systemic inflammatory condition",
+      "Avoid abrupt withdrawal of systemic corticosteroids, which can precipitate a pustular or erythrodermic flare"
     ],
-    [
-     "Key Investigations",
-     "Largely a clinical diagnosis; skin biopsy reserved for atypical presentations, Throat swab or streptococcal serology when guttate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Psoriasis is a chronic immune-mediated disorder driven by dysregulated activation of the innate and adaptive immune systems, particularly the interleukin-23/T-helper-17 axis and tumour necrosis factor signalling. Activated T cells and dendritic cells release cytokines that drive keratinocyte hyperproliferation and abnormal differentiation, dramatically shortening epidermal turnover time and producing thickened, scaly plaques. Dilated dermal vessels and a neutrophilic and lymphocytic infiltrate account for the erythema and, in pustular variants, sterile collections of neutrophils. A strong polygenic predisposition (including PSORS1/HLA-C associations) interacts with triggers such as infection, trauma, drugs, and stress.",
+    "additionalDifferentials": [
+      "Seborrhoeic dermatitis (especially on the scalp and face)",
+      "Chronic eczema or lichen simplex chronicus",
+      "Tinea corporis or tinea capitis",
+      "Cutaneous T-cell lymphoma (mycosis fungoides)",
+      "Pityriasis rubra pilaris",
+      "Secondary syphilis in atypical guttate-like eruptions"
     ],
-    [
-     "Primary Differentials",
-     "Seborrhoeic dermatitis (especially on the scalp and face), Chronic eczema or lichen simplex chronicus, Tinea corporis or tinea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Largely a clinical diagnosis; skin biopsy reserved for atypical presentations",
+      "Throat swab or streptococcal serology when guttate psoriasis is suspected",
+      "Joint assessment and imaging when psoriatic arthritis is suspected",
+      "Baseline and monitoring bloods (including liver function and infection screening) before systemic or biologic therapy",
+      "Metabolic screening for cardiovascular risk factors, lipids, and glucose"
     ],
-    [
-     "Management Strategy",
-     "Topical corticosteroids, vitamin D analogues and their combinations, with emollients and coal tar or salicylic acid, for limited",
-     "Core treatment modality"
+    "redFlags": [
+      "Erythroderma with widespread redness, scaling, and impaired thermoregulation requiring urgent care",
+      "Generalised pustular psoriasis with fever and systemic upset",
+      "Rapidly progressive joint destruction or dactylitis suggesting aggressive psoriatic arthritis",
+      "Signs of secondary infection or sepsis in extensive skin breakdown"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling scalp or flexural psoriasis as seborrhoeic dermatitis or fungal infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Psoriasis is a lifelong relapsing-remitting condition; most patients achieve good control with appropriate therapy, but disease severity fluctuates and associated arthritis and cardiometabolic disease influence long-term outcomes.",
+    "pitfalls": [
+      "Mislabelling scalp or flexural psoriasis as seborrhoeic dermatitis or fungal infection",
+      "Overlooking psoriatic arthritis until irreversible joint damage has occurred",
+      "Using potent topical steroids in flexures or on the face without appropriate caution",
+      "Precipitating pustular or erythrodermic flares by withdrawing systemic corticosteroids"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical corticosteroids, vitamin D analogues and their combinations, with emollients and coal tar or salicylic acid, for limited plaque disease",
+      "Phototherapy with narrowband UVB or psoralen-UVA for extensive or refractory plaque and guttate disease",
+      "Conventional systemic agents such as methotrexate, ciclosporin or acitretin for moderate-to-severe disease",
+      "Biologic and targeted therapy directed at tumour necrosis factor, interleukin-17 and the interleukin-12/23 axis, or oral apremilast, for severe or refractory disease",
+      "Actively screen for and treat psoriatic arthritis, and manage cardiometabolic comorbidities including lipids, glucose, weight and smoking",
+      "Identify and address triggers such as streptococcal infection in guttate disease, culprit drugs, skin trauma and stress",
+      "Baseline and ongoing monitoring bloods with infection screening, including latent tuberculosis, before and during systemic or biologic therapy",
+      "Urgent inpatient management and dermatology referral for erythrodermic or generalised pustular psoriasis"
     ]
-   ],
-   "caption": "Overview comparison matrix for psoriasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "psoriasis-real-image",
-   "title": "Psoriasis: Clinical Dermatology Photograph (Plaque Psoriasis)",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/psoriasis-plaque.jpg?v=kbri3",
-   "caption": "Real clinical photograph showing sharply demarcated erythematous plaques covered by silvery micaceous scales.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythematous Plaques",
-     "description": "Sharply marginated, raised, salmon-pink erythematous cutaneous plaques."
-    },
-    {
-     "label": "Micaceous Scaling",
-     "description": "Thick, layered, silvery-white scales characteristic of accelerated epidermal turnover."
-    },
-    {
-     "label": "Auspitz Phenomenon",
-     "description": "Punctate bleeding upon gentle detachment of adherent scales."
+      "id": "psoriasis-pathway",
+      "title": "Psoriasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic lesions are well-demarcated, salmon-pink plaques with adherent silvery scale, favouring extensor surfaces (elbows, knees), scalp, and the lumbosacral region",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Erythroderma with widespread redness, scaling, and impaired thermoregulation requiring urgent care",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Largely a clinical diagnosis; skin biopsy reserved for atypical presentations, Throat swab or streptococcal serology when guttate psoriasis is suspected, Joint assessment and imaging when psoriatic arthritis is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical corticosteroids, vitamin D analogues and their combinations, with emollients and coal tar or salicylic acid, for limited plaque disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling scalp or flexural psoriasis as seborrhoeic dermatitis or fungal infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of psoriasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "psoriasis-matrix",
+      "title": "Psoriasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic lesions are well-demarcated, salmon-pink plaques with adherent silvery scale, favouring extensor surfaces (elbows,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Largely a clinical diagnosis; skin biopsy reserved for atypical presentations, Throat swab or streptococcal serology when guttate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Seborrhoeic dermatitis (especially on the scalp and face), Chronic eczema or lichen simplex chronicus, Tinea corporis or tinea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical corticosteroids, vitamin D analogues and their combinations, with emollients and coal tar or salicylic acid, for limited",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling scalp or flexural psoriasis as seborrhoeic dermatitis or fungal infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for psoriasis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "psoriasis-real-image",
+      "title": "Psoriasis: Clinical Dermatology Photograph (Plaque Psoriasis)",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/psoriasis-plaque.jpg?v=kbri3",
+      "caption": "Real clinical photograph showing sharply demarcated erythematous plaques covered by silvery micaceous scales.",
+      "annotations": [
+        {
+          "label": "Erythematous Plaques",
+          "description": "Sharply marginated, raised, salmon-pink erythematous cutaneous plaques."
+        },
+        {
+          "label": "Micaceous Scaling",
+          "description": "Thick, layered, silvery-white scales characteristic of accelerated epidermal turnover."
+        },
+        {
+          "label": "Auspitz Phenomenon",
+          "description": "Punctate bleeding upon gentle detachment of adherent scales."
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "psoriasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy, reserved for atypical presentations",
+          "cells": [
+            {
+              "text": "Atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Throat swab or streptococcal serology",
+          "cells": [
+            {
+              "text": "Streptococcal trigger in guttate disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint assessment and imaging",
+          "cells": [
+            {
+              "text": "Psoriatic arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline bloods with liver function and infection screen",
+          "cells": [
+            {
+              "text": "Safety before systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening",
+          "cells": [
+            {
+              "text": "Cardiovascular risk factors, lipids and glucose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "psoriasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Seborrhoeic dermatitis",
+          "cells": [
+            {
+              "text": "Scalp and facial distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary syphilis in atypical guttate-like eruptions",
+          "cells": [
+            {
+              "text": "Atypical guttate-like eruption"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "psoriasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, vitamin D analogues and their combinations, with emollients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "Narrowband UVB or psoralen-UVA for extensive or refractory plaque disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conventional systemic agents",
+          "cells": [
+            {
+              "text": "Methotrexate, ciclosporin or acitretin for moderate to severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biologic and targeted therapy",
+          "cells": [
+            {
+              "text": "Agents directed at TNF, interleukin-17 and related pathways"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriatic arthritis and comorbidity",
+          "cells": [
+            {
+              "text": "Screen for and treat psoriatic arthritis and cardiometabolic comorbidities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triggers",
+          "cells": [
+            {
+              "text": "Address triggers such as streptococcal infection in guttate disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Baseline and ongoing bloods with infection screening, including latent tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent care",
+          "cells": [
+            {
+              "text": "Inpatient management and dermatology referral for erythrodermic or generalised pustular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "psoriasis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "psoriasis-dx-mgmt",
+      "title": "Diagnosis and management of Psoriasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected psoriasis: scaly erythematous plaques, a largely clinical diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Erythroderma, generalised pustular psoriasis with fever, joint destruction, or sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent inpatient and dermatology review for erythroderma or GPP",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment; throat swab if guttate; joints; baseline bloods and infection screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the presentation typical, with mimics such as seborrhoeic dermatitis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy the lesion and consider mimics such as tinea or mycosis fungoides; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical corticosteroids, vitamin D analogues and emollients for mild disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Narrowband UVB or psoralen-UVA for extensive or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Methotrexate, ciclosporin or acitretin for moderate to severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biologic therapy targeting TNF, IL-17 or related pathways",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treat comorbidities and screen for psoriatic arthritis; dermatology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

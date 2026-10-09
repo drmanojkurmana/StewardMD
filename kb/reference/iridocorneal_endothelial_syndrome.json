@@ -1,174 +1,463 @@
 {
- "id": "iridocorneal_endothelial_syndrome",
- "name": "Iridocorneal endothelial (ICE) syndrome",
- "aliases": [
-  "ICE syndrome",
-  "Chandler syndrome",
-  "essential (progressive) iris atrophy",
-  "Cogan-Reese (iris naevus) syndrome"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Cornea",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A spectrum of disorders caused by an abnormal, proliferative corneal endothelium that migrates across the angle and onto the iris",
-   "Typically unilateral and affecting middle-aged women, presenting with corneal oedema, iris changes, or secondary glaucoma",
-   "The three overlapping clinical variants are essential (progressive) iris atrophy, Chandler syndrome, and Cogan-Reese (iris naevus) syndrome",
-   "Essential iris atrophy shows marked iris thinning, hole formation, corectopia (pupil displacement), and pseudopolycoria",
-   "Chandler syndrome is dominated by endothelial change and corneal oedema with relatively mild iris atrophy",
-   "Cogan-Reese syndrome features pigmented iris nodules on the abnormal endothelial-lined membrane",
-   "Specular microscopy shows characteristic ICE cells with a dark-light reversal (epithelial-like) appearance of the endothelium",
-   "Management targets the two main problems: corneal oedema (medical measures then endothelial keratoplasty) and secondary angle-closure glaucoma (medical, laser, or surgical, often with drainage devices)"
+  "id": "iridocorneal_endothelial_syndrome",
+  "name": "Iridocorneal endothelial (ICE) syndrome",
+  "aliases": [
+    "ICE syndrome",
+    "Chandler syndrome",
+    "essential (progressive) iris atrophy",
+    "Cogan-Reese (iris naevus) syndrome"
   ],
-  "pathophysiology": "Iridocorneal endothelial syndrome is characterised by an acquired abnormality of the corneal endothelium, whose cells take on epithelial-like proliferative and migratory behaviour. These abnormal endothelial cells and an accompanying basement-membrane-like layer proliferate across the trabecular meshwork and over the anterior iris surface. Contraction of this membrane produces peripheral anterior synechiae, angle closure, iris stretching with corectopia, iris hole formation, and, in the Cogan-Reese variant, pigmented iris nodules. Blockage of the trabecular meshwork by the membrane and synechiae raises intraocular pressure, causing secondary glaucoma, while endothelial dysfunction leads to corneal oedema. The condition is typically unilateral and slowly progressive.",
-  "additionalDifferentials": [
-   "Posterior polymorphous corneal dystrophy",
-   "Fuchs endothelial dystrophy",
-   "Axenfeld-Rieger syndrome and other anterior segment dysgenesis",
-   "Iris melanoma or naevus",
-   "Peripheral anterior synechiae from chronic angle-closure or uveitis",
-   "Traumatic or surgical iris damage"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination documenting corneal oedema, iris atrophy, corectopia, and nodules",
-   "Specular or confocal microscopy showing abnormal ICE endothelial cells",
-   "Gonioscopy to assess peripheral anterior synechiae and angle closure",
-   "Intraocular pressure measurement and glaucoma assessment with optic nerve and visual field evaluation",
-   "Anterior segment optical coherence tomography or ultrasound biomicroscopy of the angle and iris membrane",
-   "Pachymetry to assess corneal oedema and guide surgical planning"
-  ],
-  "redFlags": [
-   "Progressive secondary glaucoma with optic nerve damage and field loss",
-   "Corneal decompensation with worsening oedema and visual loss",
-   "Rapidly advancing iris destruction and corectopia",
-   "Features suggesting iris melanoma rather than the benign nodules of Cogan-Reese syndrome"
-  ],
-  "prognosis": "The syndrome is slowly progressive and often difficult to control, with secondary glaucoma frequently requiring surgery and a tendency for corneal decompensation over time. Endothelial keratoplasty can restore corneal clarity, but glaucoma commonly limits the long-term visual outcome.",
-  "pitfalls": [
-   "Mistaking ICE syndrome for Fuchs or posterior polymorphous dystrophy, which are usually bilateral",
-   "Underestimating the aggressive, often refractory secondary glaucoma",
-   "Confusing Cogan-Reese iris nodules with iris melanoma",
-   "Attributing unilateral corneal oedema to primary endothelial dystrophy without gonioscopy and specular microscopy"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Cornea by Krachmer, Mannis and Holland"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lower intraocular pressure medically with aqueous suppressants such as topical beta-blockers, carbonic anhydrase inhibitors and alpha-agonists as first-line for the secondary glaucoma",
-   "Proceed to glaucoma surgery, either trabeculectomy with an antimetabolite or a glaucoma drainage device, when medical therapy fails, as it commonly does",
-   "Treat corneal decompensation with endothelial or penetrating keratoplasty to restore clarity",
-   "Relieve symptomatic corneal oedema initially with hypertonic saline drops alongside control of intraocular pressure",
-   "Monitor with intraocular pressure, optic nerve and visual field assessment, specular or confocal microscopy and pachymetry",
-   "Refer for combined glaucoma and corneal subspecialist management given the progressive, often refractory course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "iridocorneal_endothelial_syndrome-pathway",
-   "title": "Iridocorneal endothelial (ICE) syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A spectrum of disorders caused by an abnormal, proliferative corneal endothelium that migrates across the angle and onto the iris",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive secondary glaucoma with optic nerve damage and field loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination documenting corneal oedema, iris atrophy, corectopia, and nodules, Specular or confocal microscopy showing abnormal ICE endothelial cells, Gonioscopy to assess peripheral anterior synechiae and angle"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lower intraocular pressure medically with aqueous suppressants such as topical beta-blockers, carbonic anhydrase inhibitors and alpha-agonists as first-line for the secondary glaucoma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking ICE syndrome for Fuchs or posterior polymorphous dystrophy, which are usually bilateral"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of iridocorneal endothelial (ice) syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "iridocorneal_endothelial_syndrome-matrix",
-   "title": "Iridocorneal endothelial (ICE) syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A spectrum of disorders caused by an abnormal, proliferative corneal endothelium that migrates across the angle and onto the iris",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Cornea",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A spectrum of disorders caused by an abnormal, proliferative corneal endothelium that migrates across the angle and onto the iris",
+      "Typically unilateral and affecting middle-aged women, presenting with corneal oedema, iris changes, or secondary glaucoma",
+      "The three overlapping clinical variants are essential (progressive) iris atrophy, Chandler syndrome, and Cogan-Reese (iris naevus) syndrome",
+      "Essential iris atrophy shows marked iris thinning, hole formation, corectopia (pupil displacement), and pseudopolycoria",
+      "Chandler syndrome is dominated by endothelial change and corneal oedema with relatively mild iris atrophy",
+      "Cogan-Reese syndrome features pigmented iris nodules on the abnormal endothelial-lined membrane",
+      "Specular microscopy shows characteristic ICE cells with a dark-light reversal (epithelial-like) appearance of the endothelium",
+      "Management targets the two main problems: corneal oedema (medical measures then endothelial keratoplasty) and secondary angle-closure glaucoma (medical, laser, or surgical, often with drainage devices)"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination documenting corneal oedema, iris atrophy, corectopia, and nodules, Specular or confocal microscopy showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Iridocorneal endothelial syndrome is characterised by an acquired abnormality of the corneal endothelium, whose cells take on epithelial-like proliferative and migratory behaviour. These abnormal endothelial cells and an accompanying basement-membrane-like layer proliferate across the trabecular meshwork and over the anterior iris surface. Contraction of this membrane produces peripheral anterior synechiae, angle closure, iris stretching with corectopia, iris hole formation, and, in the Cogan-Reese variant, pigmented iris nodules. Blockage of the trabecular meshwork by the membrane and synechiae raises intraocular pressure, causing secondary glaucoma, while endothelial dysfunction leads to corneal oedema. The condition is typically unilateral and slowly progressive.",
+    "additionalDifferentials": [
+      "Posterior polymorphous corneal dystrophy",
+      "Fuchs endothelial dystrophy",
+      "Axenfeld-Rieger syndrome and other anterior segment dysgenesis",
+      "Iris melanoma or naevus",
+      "Peripheral anterior synechiae from chronic angle-closure or uveitis",
+      "Traumatic or surgical iris damage"
     ],
-    [
-     "Primary Differentials",
-     "Posterior polymorphous corneal dystrophy, Fuchs endothelial dystrophy, Axenfeld-Rieger syndrome and other anterior segment",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination documenting corneal oedema, iris atrophy, corectopia, and nodules",
+      "Specular or confocal microscopy showing abnormal ICE endothelial cells",
+      "Gonioscopy to assess peripheral anterior synechiae and angle closure",
+      "Intraocular pressure measurement and glaucoma assessment with optic nerve and visual field evaluation",
+      "Anterior segment optical coherence tomography or ultrasound biomicroscopy of the angle and iris membrane",
+      "Pachymetry to assess corneal oedema and guide surgical planning"
     ],
-    [
-     "Management Strategy",
-     "Lower intraocular pressure medically with aqueous suppressants such as topical beta-blockers, carbonic anhydrase inhibitors and",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive secondary glaucoma with optic nerve damage and field loss",
+      "Corneal decompensation with worsening oedema and visual loss",
+      "Rapidly advancing iris destruction and corectopia",
+      "Features suggesting iris melanoma rather than the benign nodules of Cogan-Reese syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking ICE syndrome for Fuchs or posterior polymorphous dystrophy, which are usually bilateral",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome is slowly progressive and often difficult to control, with secondary glaucoma frequently requiring surgery and a tendency for corneal decompensation over time. Endothelial keratoplasty can restore corneal clarity, but glaucoma commonly limits the long-term visual outcome.",
+    "pitfalls": [
+      "Mistaking ICE syndrome for Fuchs or posterior polymorphous dystrophy, which are usually bilateral",
+      "Underestimating the aggressive, often refractory secondary glaucoma",
+      "Confusing Cogan-Reese iris nodules with iris melanoma",
+      "Attributing unilateral corneal oedema to primary endothelial dystrophy without gonioscopy and specular microscopy"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Cornea by Krachmer, Mannis and Holland"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lower intraocular pressure medically with aqueous suppressants such as topical beta-blockers, carbonic anhydrase inhibitors and alpha-agonists as first-line for the secondary glaucoma",
+      "Proceed to glaucoma surgery, either trabeculectomy with an antimetabolite or a glaucoma drainage device, when medical therapy fails, as it commonly does",
+      "Treat corneal decompensation with endothelial or penetrating keratoplasty to restore clarity",
+      "Relieve symptomatic corneal oedema initially with hypertonic saline drops alongside control of intraocular pressure",
+      "Monitor with intraocular pressure, optic nerve and visual field assessment, specular or confocal microscopy and pachymetry",
+      "Refer for combined glaucoma and corneal subspecialist management given the progressive, often refractory course"
     ]
-   ],
-   "caption": "Overview comparison matrix for iridocorneal endothelial (ice) syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "iridocorneal-endothelial-syndrome-real-image",
-   "title": "Iridocorneal endothelial (ICE) syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "iridocorneal_endothelial_syndrome-pathway",
+      "title": "Iridocorneal endothelial (ICE) syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A spectrum of disorders caused by an abnormal, proliferative corneal endothelium that migrates across the angle and onto the iris",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive secondary glaucoma with optic nerve damage and field loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination documenting corneal oedema, iris atrophy, corectopia, and nodules, Specular or confocal microscopy showing abnormal ICE endothelial cells, Gonioscopy to assess peripheral anterior synechiae and angle"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lower intraocular pressure medically with aqueous suppressants such as topical beta-blockers, carbonic anhydrase inhibitors and alpha-agonists as first-line for the secondary glaucoma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking ICE syndrome for Fuchs or posterior polymorphous dystrophy, which are usually bilateral"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of iridocorneal endothelial (ice) syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "iridocorneal_endothelial_syndrome-matrix",
+      "title": "Iridocorneal endothelial (ICE) syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A spectrum of disorders caused by an abnormal, proliferative corneal endothelium that migrates across the angle and onto the iris",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination documenting corneal oedema, iris atrophy, corectopia, and nodules, Specular or confocal microscopy showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Posterior polymorphous corneal dystrophy, Fuchs endothelial dystrophy, Axenfeld-Rieger syndrome and other anterior segment",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lower intraocular pressure medically with aqueous suppressants such as topical beta-blockers, carbonic anhydrase inhibitors and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking ICE syndrome for Fuchs or posterior polymorphous dystrophy, which are usually bilateral",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for iridocorneal endothelial (ice) syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iridocorneal_endothelial_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Corneal oedema, iris atrophy, corectopia and nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specular or confocal microscopy",
+          "cells": [
+            {
+              "text": "Abnormal ICE endothelial cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Peripheral anterior synechiae and angle closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure, optic nerve and visual field assessment",
+          "cells": [
+            {
+              "text": "Glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment OCT or ultrasound biomicroscopy",
+          "cells": [
+            {
+              "text": "Angle and iris membrane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pachymetry",
+          "cells": [
+            {
+              "text": "Corneal oedema and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iridocorneal_endothelial_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fuchs or posterior polymorphous corneal dystrophy",
+          "cells": [
+            {
+              "text": "Usually bilateral; ICE syndrome is typically unilateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iris melanoma",
+          "cells": [
+            {
+              "text": "Malignant pattern; Cogan-Reese nodules are benign"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "iridocorneal_endothelial_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Medical pressure control",
+          "cells": [
+            {
+              "text": "Topical beta-blockers, carbonic anhydrase inhibitors and alpha-agonists first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma surgery",
+          "cells": [
+            {
+              "text": "Trabeculectomy with antimetabolite or glaucoma drainage device when medical therapy fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal decompensation",
+          "cells": [
+            {
+              "text": "Endothelial or penetrating keratoplasty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic oedema",
+          "cells": [
+            {
+              "text": "Hypertonic saline drops alongside pressure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Intraocular pressure, optic nerve, visual fields, endothelial microscopy and pachymetry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Combined glaucoma and corneal subspecialist management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iridocorneal_endothelial_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Iridocorneal endothelial (ICE) syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unilateral corneal oedema, iris change or secondary glaucoma in a middle-aged woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive glaucoma with nerve damage, corneal decompensation or melanoma features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glaucoma and corneal subspecialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit lamp, specular or confocal microscopy, gonioscopy, pressure, AS-OCT, pachymetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ICE endothelial cells on microscopy with unilateral pattern confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fuchs, posterior polymorphous dystrophy or iris melanoma; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical beta-blockers, carbonic anhydrase inhibitors and alpha-agonists first",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trabeculectomy with antimetabolite or drainage device when drugs fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Keratoplasty for corneal decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hypertonic saline drops for symptomatic oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial pressure, optic nerve, field and endothelial monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progressive, often refractory glaucoma; ongoing combined care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,486 @@
 {
- "id": "childhood_obesity",
- "name": "Childhood Obesity",
- "aliases": [
-  "paediatric obesity",
-  "childhood overweight",
-  "obesity in children and adolescents"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "In children and adolescents obesity is defined using body mass index relative to age- and sex-specific percentiles rather than fixed adult cut-offs, with obesity typically at or above the 95th percentile.",
-   "The vast majority of cases are related to lifestyle and energy balance; a monogenic or endocrine cause is uncommon but should be considered in specific circumstances.",
-   "A tall child growing well who is obese is usually exogenously obese, whereas an obese child who is short or growing poorly raises suspicion of an endocrine or syndromic cause.",
-   "Ask about diet, physical activity, screen time, sleep, family history, and psychosocial factors, as these shape both cause and management.",
-   "Screen for comorbidities including type 2 diabetes, dyslipidaemia, hypertension, non-alcoholic fatty liver disease, and obstructive sleep apnoea.",
-   "Acanthosis nigricans is a clinical clue to insulin resistance and increased type 2 diabetes risk.",
-   "Management centres on sustainable family-based lifestyle change addressing nutrition, activity, sleep, and behaviour rather than short-term restrictive dieting.",
-   "Early-onset severe obesity, particularly with hyperphagia, may suggest a monogenic cause and warrants specialist evaluation."
+  "id": "childhood_obesity",
+  "name": "Childhood Obesity",
+  "aliases": [
+    "paediatric obesity",
+    "childhood overweight",
+    "obesity in children and adolescents"
   ],
-  "pathophysiology": "Childhood obesity results from a chronic positive energy balance in which caloric intake exceeds expenditure, leading to excess adipose tissue. This arises from a complex interplay of genetic susceptibility, dietary patterns, physical inactivity, sleep, and environmental and socioeconomic influences. Expanded and dysfunctional adipose tissue drives insulin resistance, low-grade inflammation, and altered adipokine signalling, which underlie the associated metabolic, hepatic, cardiovascular, and endocrine complications. Rare monogenic and syndromic disorders disrupt central appetite regulation (notably the leptin-melanocortin pathway).",
-  "additionalDifferentials": [
-   "Exogenous (lifestyle-related) obesity",
-   "Hypothyroidism",
-   "Cushing syndrome",
-   "Growth hormone deficiency",
-   "Monogenic obesity (e.g. leptin or MC4R pathway defects)",
-   "Syndromic obesity (e.g. Prader-Willi, Bardet-Biedl syndromes)",
-   "Hypothalamic obesity (e.g. after CNS tumour or its treatment)"
-  ],
-  "additionalInvestigations": [
-   "BMI plotted on age- and sex-specific percentile charts, with blood pressure measurement",
-   "Fasting glucose and/or HbA1c and fasting lipid profile",
-   "Liver function tests and assessment for fatty liver disease",
-   "Thyroid function testing where clinically indicated",
-   "Evaluation for obstructive sleep apnoea when symptoms suggest it",
-   "Genetic or endocrine work-up for early-onset severe or syndromic obesity"
-  ],
-  "redFlags": [
-   "Obesity combined with poor linear growth or short stature suggesting an endocrine cause",
-   "Symptoms of type 2 diabetes such as polyuria, polydipsia, or an incidental very high glucose",
-   "Signs of obstructive sleep apnoea including loud snoring, apnoeic pauses, or daytime somnolence",
-   "Features of Cushing syndrome (central obesity, striae, hypertension, growth deceleration)",
-   "Early-onset severe obesity with extreme hyperphagia suggesting a monogenic disorder",
-   "Hip or knee pain suggesting a slipped capital femoral epiphysis"
-  ],
-  "prognosis": "Childhood obesity frequently persists into adulthood and raises the long-term risk of type 2 diabetes, cardiovascular disease, and other complications; early sustained family-based lifestyle intervention can improve trajectory and reduce comorbidity.",
-  "pitfalls": [
-   "Assuming all obesity is lifestyle-related and missing an endocrine, syndromic, or monogenic cause when growth is impaired",
-   "Failing to screen for comorbidities such as type 2 diabetes, fatty liver, and sleep apnoea",
-   "Focusing on the child alone rather than engaging the whole family in change",
-   "Overlooking psychosocial factors, stigma, and mental health in management"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Family-based lifestyle intervention is the foundation, combining dietary change with reduced energy-dense foods, increased physical activity, less screen time and improved sleep",
-   "Behavioural and psychological support that addresses eating behaviour and psychosocial contributors",
-   "Screen for and manage comorbidities including type 2 diabetes, dyslipidaemia, hypertension, non-alcoholic fatty liver disease and obstructive sleep apnoea",
-   "Pharmacotherapy such as a GLP-1 receptor agonist or orlistat in selected adolescents with severe obesity or significant comorbidity, alongside lifestyle measures",
-   "Bariatric surgery in carefully selected adolescents with severe obesity and complications",
-   "Investigate for a monogenic, endocrine or syndromic cause where obesity is early-onset and severe or accompanied by short stature or poor growth",
-   "Referral to a specialist multidisciplinary weight-management service",
-   "Regular monitoring of BMI percentile, blood pressure and metabolic parameters to track response"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "childhood_obesity-pathway",
-   "title": "Childhood Obesity: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "In children and adolescents obesity is defined using body mass index relative to age- and sex-specific percentiles rather than fixed adult cut-offs, with obesity typically at or above the 95th percentile.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Obesity combined with poor linear growth or short stature suggesting an endocrine cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: BMI plotted on age- and sex-specific percentile charts, with blood pressure measurement, Fasting glucose and/or HbA1c and fasting lipid profile, Liver function tests and assessment for fatty liver disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Family-based lifestyle intervention is the foundation, combining dietary change with reduced energy-dense foods, increased physical activity, less screen time and improved sleep"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all obesity is lifestyle-related and missing an endocrine, syndromic, or monogenic cause when growth is impaired"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of childhood obesity."
-  }
- ],
- "tables": [
-  {
-   "id": "childhood_obesity-matrix",
-   "title": "Childhood Obesity: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "In children and adolescents obesity is defined using body mass index relative to age- and sex-specific percentiles rather than",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "In children and adolescents obesity is defined using body mass index relative to age- and sex-specific percentiles rather than fixed adult cut-offs, with obesity typically at or above the 95th percentile.",
+      "The vast majority of cases are related to lifestyle and energy balance; a monogenic or endocrine cause is uncommon but should be considered in specific circumstances.",
+      "A tall child growing well who is obese is usually exogenously obese, whereas an obese child who is short or growing poorly raises suspicion of an endocrine or syndromic cause.",
+      "Ask about diet, physical activity, screen time, sleep, family history, and psychosocial factors, as these shape both cause and management.",
+      "Screen for comorbidities including type 2 diabetes, dyslipidaemia, hypertension, non-alcoholic fatty liver disease, and obstructive sleep apnoea.",
+      "Acanthosis nigricans is a clinical clue to insulin resistance and increased type 2 diabetes risk.",
+      "Management centres on sustainable family-based lifestyle change addressing nutrition, activity, sleep, and behaviour rather than short-term restrictive dieting.",
+      "Early-onset severe obesity, particularly with hyperphagia, may suggest a monogenic cause and warrants specialist evaluation."
     ],
-    [
-     "Key Investigations",
-     "BMI plotted on age- and sex-specific percentile charts, with blood pressure measurement, Fasting glucose and/or HbA1c and fasting",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Childhood obesity results from a chronic positive energy balance in which caloric intake exceeds expenditure, leading to excess adipose tissue. This arises from a complex interplay of genetic susceptibility, dietary patterns, physical inactivity, sleep, and environmental and socioeconomic influences. Expanded and dysfunctional adipose tissue drives insulin resistance, low-grade inflammation, and altered adipokine signalling, which underlie the associated metabolic, hepatic, cardiovascular, and endocrine complications. Rare monogenic and syndromic disorders disrupt central appetite regulation (notably the leptin-melanocortin pathway).",
+    "additionalDifferentials": [
+      "Exogenous (lifestyle-related) obesity",
+      "Hypothyroidism",
+      "Cushing syndrome",
+      "Growth hormone deficiency",
+      "Monogenic obesity (e.g. leptin or MC4R pathway defects)",
+      "Syndromic obesity (e.g. Prader-Willi, Bardet-Biedl syndromes)",
+      "Hypothalamic obesity (e.g. after CNS tumour or its treatment)"
     ],
-    [
-     "Primary Differentials",
-     "Exogenous (lifestyle-related) obesity, Hypothyroidism, Cushing syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "BMI plotted on age- and sex-specific percentile charts, with blood pressure measurement",
+      "Fasting glucose and/or HbA1c and fasting lipid profile",
+      "Liver function tests and assessment for fatty liver disease",
+      "Thyroid function testing where clinically indicated",
+      "Evaluation for obstructive sleep apnoea when symptoms suggest it",
+      "Genetic or endocrine work-up for early-onset severe or syndromic obesity"
     ],
-    [
-     "Management Strategy",
-     "Family-based lifestyle intervention is the foundation, combining dietary change with reduced energy-dense foods, increased",
-     "Core treatment modality"
+    "redFlags": [
+      "Obesity combined with poor linear growth or short stature suggesting an endocrine cause",
+      "Symptoms of type 2 diabetes such as polyuria, polydipsia, or an incidental very high glucose",
+      "Signs of obstructive sleep apnoea including loud snoring, apnoeic pauses, or daytime somnolence",
+      "Features of Cushing syndrome (central obesity, striae, hypertension, growth deceleration)",
+      "Early-onset severe obesity with extreme hyperphagia suggesting a monogenic disorder",
+      "Hip or knee pain suggesting a slipped capital femoral epiphysis"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all obesity is lifestyle-related and missing an endocrine, syndromic, or monogenic cause when growth is impaired",
-     "Prevent diagnostic or management error"
+    "prognosis": "Childhood obesity frequently persists into adulthood and raises the long-term risk of type 2 diabetes, cardiovascular disease, and other complications; early sustained family-based lifestyle intervention can improve trajectory and reduce comorbidity.",
+    "pitfalls": [
+      "Assuming all obesity is lifestyle-related and missing an endocrine, syndromic, or monogenic cause when growth is impaired",
+      "Failing to screen for comorbidities such as type 2 diabetes, fatty liver, and sleep apnoea",
+      "Focusing on the child alone rather than engaging the whole family in change",
+      "Overlooking psychosocial factors, stigma, and mental health in management"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Family-based lifestyle intervention is the foundation, combining dietary change with reduced energy-dense foods, increased physical activity, less screen time and improved sleep",
+      "Behavioural and psychological support that addresses eating behaviour and psychosocial contributors",
+      "Screen for and manage comorbidities including type 2 diabetes, dyslipidaemia, hypertension, non-alcoholic fatty liver disease and obstructive sleep apnoea",
+      "Pharmacotherapy such as a GLP-1 receptor agonist or orlistat in selected adolescents with severe obesity or significant comorbidity, alongside lifestyle measures",
+      "Bariatric surgery in carefully selected adolescents with severe obesity and complications",
+      "Investigate for a monogenic, endocrine or syndromic cause where obesity is early-onset and severe or accompanied by short stature or poor growth",
+      "Referral to a specialist multidisciplinary weight-management service",
+      "Regular monitoring of BMI percentile, blood pressure and metabolic parameters to track response"
     ]
-   ],
-   "caption": "Overview comparison matrix for childhood obesity."
-  }
- ],
- "diagrams": [
-  {
-   "id": "childhood-obesity-real-image",
-   "title": "Childhood Obesity: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "childhood_obesity-pathway",
+      "title": "Childhood Obesity: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "In children and adolescents obesity is defined using body mass index relative to age- and sex-specific percentiles rather than fixed adult cut-offs, with obesity typically at or above the 95th percentile.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Obesity combined with poor linear growth or short stature suggesting an endocrine cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: BMI plotted on age- and sex-specific percentile charts, with blood pressure measurement, Fasting glucose and/or HbA1c and fasting lipid profile, Liver function tests and assessment for fatty liver disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Family-based lifestyle intervention is the foundation, combining dietary change with reduced energy-dense foods, increased physical activity, less screen time and improved sleep"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all obesity is lifestyle-related and missing an endocrine, syndromic, or monogenic cause when growth is impaired"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of childhood obesity."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "childhood_obesity-matrix",
+      "title": "Childhood Obesity: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "In children and adolescents obesity is defined using body mass index relative to age- and sex-specific percentiles rather than",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "BMI plotted on age- and sex-specific percentile charts, with blood pressure measurement, Fasting glucose and/or HbA1c and fasting",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Exogenous (lifestyle-related) obesity, Hypothyroidism, Cushing syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Family-based lifestyle intervention is the foundation, combining dietary change with reduced energy-dense foods, increased",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all obesity is lifestyle-related and missing an endocrine, syndromic, or monogenic cause when growth is impaired",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for childhood obesity."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "childhood_obesity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "BMI on age- and sex-specific percentile charts, with blood pressure",
+          "cells": [
+            {
+              "text": "Obesity at or above the 95th percentile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose or HbA1c and fasting lipid profile",
+          "cells": [
+            {
+              "text": "Screens for type 2 diabetes and dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Assesses for fatty liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "When symptoms suggest it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "childhood_obesity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cushing syndrome",
+          "cells": [
+            {
+              "text": "Central obesity, striae, hypertension and growth deceleration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monogenic obesity",
+          "cells": [
+            {
+              "text": "Early-onset severe obesity with hyperphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone deficiency",
+          "cells": [
+            {
+              "text": "Short stature or poor linear growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "childhood_obesity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Family-based lifestyle intervention",
+          "cells": [
+            {
+              "text": "Nutrition, activity, less screen time and better sleep"
+            },
+            {
+              "text": "Foundation of management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural and psychological support",
+          "cells": [
+            {
+              "text": "Address eating behaviour and psychosocial contributors"
+            },
+            {
+              "text": "Psychosocial drivers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity screening",
+          "cells": [
+            {
+              "text": "Type 2 diabetes, dyslipidaemia, hypertension, fatty liver and sleep apnoea"
+            },
+            {
+              "text": "Screen and manage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacotherapy",
+          "cells": [
+            {
+              "text": "GLP-1 receptor agonist or orlistat in selected adolescents, with lifestyle measures"
+            },
+            {
+              "text": "Severe obesity or significant comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bariatric surgery",
+          "cells": [
+            {
+              "text": "Carefully selected adolescents with severe obesity and complications"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine or genetic work-up",
+          "cells": [
+            {
+              "text": "Monogenic, endocrine or syndromic evaluation where early-onset severe obesity or short stature"
+            },
+            {
+              "text": "Atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist and monitoring",
+          "cells": [
+            {
+              "text": "Specialist weight-management service; track BMI percentile, blood pressure and metabolic markers"
+            },
+            {
+              "text": "Monitoring response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "childhood_obesity-dx-mgmt",
+      "title": "Diagnosis and management of Childhood Obesity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected childhood obesity: BMI at or above the 95th percentile",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (short stature, Cushingoid features, early severe obesity, SCFE)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: endocrine and genetic evaluation for an endocrine or syndromic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BMI percentile, blood pressure, glucose or HbA1c, lipids and liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Comorbidity screen done and endocrine cause excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Family-based lifestyle intervention on diet, activity, screen time and sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Cushing syndrome, growth hormone deficiency and monogenic obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Behavioural and psychological support for eating and psychosocial drivers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen and treat diabetes, dyslipidaemia, hypertension and fatty liver",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "GLP-1 agonist or orlistat in selected severe cases; bariatric surgery if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist weight-management service with regular BMI and metabolic monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

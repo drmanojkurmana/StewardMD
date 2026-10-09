@@ -1,175 +1,433 @@
 {
- "id": "gastric_angiodysplasia",
- "name": "Gastric angiodysplasia",
- "aliases": [
-  "gastric vascular ectasia",
-  "gastric antral vascular ectasia",
-  "GAVE",
-  "watermelon stomach",
-  "angioectasia"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Vascular ectasias are dilated, thin-walled mucosal and submucosal vessels that appear as flat, red, fern-like or punctate lesions and are a common cause of obscure or occult gastrointestinal bleeding",
-   "Gastric antral vascular ectasia (watermelon stomach) shows red stripes radiating along the antral folds and is distinct from portal hypertensive gastropathy despite sometimes coexisting with cirrhosis",
-   "Most patients present with chronic iron-deficiency anaemia from slow blood loss rather than dramatic haemorrhage",
-   "Associations include chronic kidney disease, aortic stenosis (Heyde syndrome, via acquired von Willebrand factor deficiency), cirrhosis, and connective tissue disease",
-   "Endoscopic ablation, typically with argon plasma coagulation, is the mainstay of treatment and often requires repeated sessions",
-   "In Heyde syndrome, correcting the aortic stenosis by valve replacement can resolve the acquired coagulopathy and the bleeding",
-   "Refractory antral vascular ectasia may be treated with endoscopic band ligation, and diffuse or hereditary lesions may need iron replacement and, occasionally, systemic pharmacotherapy"
+  "id": "gastric_angiodysplasia",
+  "name": "Gastric angiodysplasia",
+  "aliases": [
+    "gastric vascular ectasia",
+    "gastric antral vascular ectasia",
+    "GAVE",
+    "watermelon stomach",
+    "angioectasia"
   ],
-  "pathophysiology": "Angiodysplasia (vascular ectasia) consists of abnormally dilated, tortuous, thin-walled ectatic vessels within the mucosa and submucosa, thought to arise from chronic, low-grade venous obstruction or degenerative vascular changes that promote the formation of arteriovenous communications. In gastric antral vascular ectasia the dilated capillaries are accompanied by fibromuscular hyperplasia and fibrin thrombi in the antral lamina propria, producing the characteristic red stripes. Because these fragile vessels lie superficially, they bleed slowly and recurrently; in Heyde syndrome, high shear across a stenotic aortic valve degrades large von Willebrand factor multimers, adding an acquired bleeding tendency that amplifies blood loss from the ectasias.",
-  "additionalDifferentials": [
-   "Portal hypertensive gastropathy",
-   "Dieulafoy lesion",
-   "Hereditary haemorrhagic telangiectasia",
-   "Gastric or small-bowel varices",
-   "Radiation-induced telangiectasia",
-   "Peptic ulcer disease or erosive gastropathy"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy to identify and characterise the ectasias and distinguish antral vascular ectasia from portal hypertensive gastropathy",
-   "Full blood count and iron studies to quantify chronic blood loss",
-   "Echocardiography to detect aortic stenosis where Heyde syndrome is suspected",
-   "Assessment of renal function and screening for associated connective tissue disease",
-   "Testing for acquired von Willebrand factor deficiency in the appropriate context",
-   "Capsule endoscopy or device-assisted enteroscopy when small-bowel angiodysplasia is suspected"
-  ],
-  "redFlags": [
-   "Transfusion-dependent or recurrent bleeding despite endoscopic therapy",
-   "Overt haemorrhage with haemodynamic instability",
-   "New aortic stenosis with unexplained gastrointestinal bleeding suggesting Heyde syndrome",
-   "Rapidly progressive anaemia"
-  ],
-  "prognosis": "The condition tends to be chronic and recurrent, and although endoscopic ablation controls bleeding in many patients, repeat treatments are frequently needed; in Heyde syndrome, valve replacement can be curative, whereas diffuse or hereditary lesions carry a higher risk of ongoing transfusion dependence.",
-  "pitfalls": [
-   "Confusing antral vascular ectasia with portal hypertensive gastropathy and applying portal-pressure-lowering therapy that does not help",
-   "Overlooking coexisting aortic stenosis and the opportunity to correct Heyde syndrome",
-   "Attributing iron-deficiency anaemia to diet or menstruation and missing occult vascular lesions",
-   "Assuming a single ablation session will be definitive"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Endoscopic ablation, typically with argon plasma coagulation, is the mainstay and often requires repeated sessions",
-   "Correct iron-deficiency anaemia with iron replacement and red-cell transfusion as needed",
-   "Treat Heyde syndrome by replacing the stenotic aortic valve, which can reverse the acquired von Willebrand factor deficiency and stop bleeding",
-   "For diffuse or refractory bleeding, consider antiangiogenic therapy with somatostatin analogues such as octreotide and, in selected cases, thalidomide",
-   "Review and minimise antiplatelet and anticoagulant drugs where bleeding is recurrent",
-   "Manage associated conditions including chronic kidney disease and cirrhosis",
-   "Provide endoscopic surveillance and re-treatment for recurrent lesions and ongoing transfusion requirement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gastric_angiodysplasia-pathway",
-   "title": "Gastric angiodysplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Vascular ectasias are dilated, thin-walled mucosal and submucosal vessels that appear as flat, red, fern-like or punctate lesions and are a common cause of obscure or occult gastrointestinal bleeding",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Transfusion-dependent or recurrent bleeding despite endoscopic therapy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy to identify and characterise the ectasias and distinguish antral vascular ectasia from portal hypertensive gastropathy, Full blood count and iron studies to quantify chronic blood loss,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Endoscopic ablation, typically with argon plasma coagulation, is the mainstay and often requires repeated sessions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing antral vascular ectasia with portal hypertensive gastropathy and applying portal-pressure-lowering therapy that does not help"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gastric angiodysplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "gastric_angiodysplasia-matrix",
-   "title": "Gastric angiodysplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Vascular ectasias are dilated, thin-walled mucosal and submucosal vessels that appear as flat, red, fern-like or punctate lesions",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Vascular ectasias are dilated, thin-walled mucosal and submucosal vessels that appear as flat, red, fern-like or punctate lesions and are a common cause of obscure or occult gastrointestinal bleeding",
+      "Gastric antral vascular ectasia (watermelon stomach) shows red stripes radiating along the antral folds and is distinct from portal hypertensive gastropathy despite sometimes coexisting with cirrhosis",
+      "Most patients present with chronic iron-deficiency anaemia from slow blood loss rather than dramatic haemorrhage",
+      "Associations include chronic kidney disease, aortic stenosis (Heyde syndrome, via acquired von Willebrand factor deficiency), cirrhosis, and connective tissue disease",
+      "Endoscopic ablation, typically with argon plasma coagulation, is the mainstay of treatment and often requires repeated sessions",
+      "In Heyde syndrome, correcting the aortic stenosis by valve replacement can resolve the acquired coagulopathy and the bleeding",
+      "Refractory antral vascular ectasia may be treated with endoscopic band ligation, and diffuse or hereditary lesions may need iron replacement and, occasionally, systemic pharmacotherapy"
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy to identify and characterise the ectasias and distinguish antral vascular ectasia from portal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Angiodysplasia (vascular ectasia) consists of abnormally dilated, tortuous, thin-walled ectatic vessels within the mucosa and submucosa, thought to arise from chronic, low-grade venous obstruction or degenerative vascular changes that promote the formation of arteriovenous communications. In gastric antral vascular ectasia the dilated capillaries are accompanied by fibromuscular hyperplasia and fibrin thrombi in the antral lamina propria, producing the characteristic red stripes. Because these fragile vessels lie superficially, they bleed slowly and recurrently; in Heyde syndrome, high shear across a stenotic aortic valve degrades large von Willebrand factor multimers, adding an acquired bleeding tendency that amplifies blood loss from the ectasias.",
+    "additionalDifferentials": [
+      "Portal hypertensive gastropathy",
+      "Dieulafoy lesion",
+      "Hereditary haemorrhagic telangiectasia",
+      "Gastric or small-bowel varices",
+      "Radiation-induced telangiectasia",
+      "Peptic ulcer disease or erosive gastropathy"
     ],
-    [
-     "Primary Differentials",
-     "Portal hypertensive gastropathy, Dieulafoy lesion, Hereditary haemorrhagic telangiectasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy to identify and characterise the ectasias and distinguish antral vascular ectasia from portal hypertensive gastropathy",
+      "Full blood count and iron studies to quantify chronic blood loss",
+      "Echocardiography to detect aortic stenosis where Heyde syndrome is suspected",
+      "Assessment of renal function and screening for associated connective tissue disease",
+      "Testing for acquired von Willebrand factor deficiency in the appropriate context",
+      "Capsule endoscopy or device-assisted enteroscopy when small-bowel angiodysplasia is suspected"
     ],
-    [
-     "Management Strategy",
-     "Endoscopic ablation, typically with argon plasma coagulation, is the mainstay and often requires repeated sessions",
-     "Core treatment modality"
+    "redFlags": [
+      "Transfusion-dependent or recurrent bleeding despite endoscopic therapy",
+      "Overt haemorrhage with haemodynamic instability",
+      "New aortic stenosis with unexplained gastrointestinal bleeding suggesting Heyde syndrome",
+      "Rapidly progressive anaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing antral vascular ectasia with portal hypertensive gastropathy and applying portal-pressure-lowering therapy that does",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition tends to be chronic and recurrent, and although endoscopic ablation controls bleeding in many patients, repeat treatments are frequently needed; in Heyde syndrome, valve replacement can be curative, whereas diffuse or hereditary lesions carry a higher risk of ongoing transfusion dependence.",
+    "pitfalls": [
+      "Confusing antral vascular ectasia with portal hypertensive gastropathy and applying portal-pressure-lowering therapy that does not help",
+      "Overlooking coexisting aortic stenosis and the opportunity to correct Heyde syndrome",
+      "Attributing iron-deficiency anaemia to diet or menstruation and missing occult vascular lesions",
+      "Assuming a single ablation session will be definitive"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Endoscopic ablation, typically with argon plasma coagulation, is the mainstay and often requires repeated sessions",
+      "Correct iron-deficiency anaemia with iron replacement and red-cell transfusion as needed",
+      "Treat Heyde syndrome by replacing the stenotic aortic valve, which can reverse the acquired von Willebrand factor deficiency and stop bleeding",
+      "For diffuse or refractory bleeding, consider antiangiogenic therapy with somatostatin analogues such as octreotide and, in selected cases, thalidomide",
+      "Review and minimise antiplatelet and anticoagulant drugs where bleeding is recurrent",
+      "Manage associated conditions including chronic kidney disease and cirrhosis",
+      "Provide endoscopic surveillance and re-treatment for recurrent lesions and ongoing transfusion requirement"
     ]
-   ],
-   "caption": "Overview comparison matrix for gastric angiodysplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gastric-angiodysplasia-real-image",
-   "title": "Gastric angiodysplasia: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "gastric_angiodysplasia-pathway",
+      "title": "Gastric angiodysplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Vascular ectasias are dilated, thin-walled mucosal and submucosal vessels that appear as flat, red, fern-like or punctate lesions and are a common cause of obscure or occult gastrointestinal bleeding",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Transfusion-dependent or recurrent bleeding despite endoscopic therapy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy to identify and characterise the ectasias and distinguish antral vascular ectasia from portal hypertensive gastropathy, Full blood count and iron studies to quantify chronic blood loss,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Endoscopic ablation, typically with argon plasma coagulation, is the mainstay and often requires repeated sessions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing antral vascular ectasia with portal hypertensive gastropathy and applying portal-pressure-lowering therapy that does not help"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gastric angiodysplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gastric_angiodysplasia-matrix",
+      "title": "Gastric angiodysplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Vascular ectasias are dilated, thin-walled mucosal and submucosal vessels that appear as flat, red, fern-like or punctate lesions",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy to identify and characterise the ectasias and distinguish antral vascular ectasia from portal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Portal hypertensive gastropathy, Dieulafoy lesion, Hereditary haemorrhagic telangiectasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Endoscopic ablation, typically with argon plasma coagulation, is the mainstay and often requires repeated sessions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing antral vascular ectasia with portal hypertensive gastropathy and applying portal-pressure-lowering therapy that does",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gastric angiodysplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastric_angiodysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Identifies ectasias; distinguishes antral vascular ectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Quantifies chronic blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Aortic stenosis where Heyde syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and connective tissue disease screen",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired von Willebrand factor testing",
+          "cells": [
+            {
+              "text": "In the appropriate context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capsule endoscopy or device-assisted enteroscopy",
+          "cells": [
+            {
+              "text": "Small-bowel angiodysplasia suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_angiodysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic ablation",
+          "cells": [
+            {
+              "text": "Typically argon plasma coagulation, the mainstay; often repeated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron replacement and transfusion",
+          "cells": [
+            {
+              "text": "Iron-deficiency anaemia; red-cell transfusion as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heyde syndrome treatment",
+          "cells": [
+            {
+              "text": "Aortic valve replacement, which can reverse the acquired von Willebrand deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues",
+          "cells": [
+            {
+              "text": "Octreotide-type antiangiogenic therapy for diffuse or refractory bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of antithrombotic drugs",
+          "cells": [
+            {
+              "text": "Minimise antiplatelet and anticoagulant drugs where bleeding recurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated conditions",
+          "cells": [
+            {
+              "text": "Chronic kidney disease and cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic surveillance",
+          "cells": [
+            {
+              "text": "Re-treatment for recurrent lesions and ongoing transfusion need"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastric_angiodysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Gastric angiodysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gastric angiodysplasia: recurrent GI bleeding with iron-deficiency anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (transfusion-dependent bleeding, instability, aortic stenosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent resuscitation and endoscopic haemostasis for overt haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper endoscopy, full blood count, iron studies and echocardiography if Heyde",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do endoscopic findings confirm ectasias rather than portal or ulcer disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider portal hypertensive gastropathy, Dieulafoy lesion or peptic ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic ablation, typically argon plasma coagulation, often repeated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron replacement and red-cell transfusion as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aortic valve replacement for Heyde syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Somatostatin analogue for diffuse or refractory bleeding; minimise antithrombotic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and recurrent; ablation controls bleeding in many, with frequent retreatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

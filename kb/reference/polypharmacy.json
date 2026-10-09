@@ -1,173 +1,462 @@
 {
- "id": "polypharmacy",
- "name": "Polypharmacy",
- "aliases": [
-  "multiple medications",
-  "inappropriate polypharmacy",
-  "medication overload",
-  "deprescribing"
- ],
- "class": "non_infective",
- "system": "Geriatrics / Palliative",
- "specialty": "Geriatrics & Palliative Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Polypharmacy is commonly defined by the concurrent use of five or more medicines, but the clinically important question is whether each drug remains appropriate and beneficial",
-   "Each additional medication increases the risk of adverse drug reactions, drug-drug and drug-disease interactions, and poor adherence",
-   "Prescribing cascades occur when the side effect of one drug is misread as a new problem and treated with another drug rather than by stopping the offending agent",
-   "Age-related changes in pharmacokinetics and pharmacodynamics, particularly reduced renal clearance and heightened CNS sensitivity, amplify drug risks in older adults",
-   "Explicit tools such as the Beers criteria and the STOPP/START criteria help identify potentially inappropriate medications and prescribing omissions",
-   "Anticholinergic burden from multiple drugs contributes to confusion, falls, constipation, and urinary retention and should be tallied and minimised",
-   "Deprescribing is a structured, shared-decision process of tapering or stopping drugs whose harms outweigh benefits, aligned with the patient's goals and life expectancy",
-   "Regular structured medication reconciliation and review, especially at transitions of care, is the key preventive measure"
+  "id": "polypharmacy",
+  "name": "Polypharmacy",
+  "aliases": [
+    "multiple medications",
+    "inappropriate polypharmacy",
+    "medication overload",
+    "deprescribing"
   ],
-  "pathophysiology": "With ageing, reduced lean body mass and total body water, increased fat, declining hepatic metabolism, and especially reduced renal excretion alter drug distribution and clearance, prolonging exposure to many agents and their metabolites. Pharmacodynamic sensitivity also changes, notably increased susceptibility to central nervous system depressants, anticholinergics, and drugs affecting blood pressure. As the number of medications rises, the probability of interactions grows combinatorially, and overlapping adverse effects (sedation, hypotension, anticholinergic load) summate to produce falls, delirium, and functional decline.",
-  "additionalDifferentials": [
-   "Adverse drug reaction masquerading as a new disease",
-   "Prescribing cascade generating apparently new symptoms",
-   "Non-adherence causing apparent treatment failure",
-   "Drug-disease interaction worsening an existing condition",
-   "Delirium or cognitive decline attributable to cumulative drug burden"
-  ],
-  "additionalInvestigations": [
-   "Structured medication reconciliation including over-the-counter drugs, supplements, and herbal products",
-   "Application of explicit criteria such as Beers and STOPP/START during medication review",
-   "Calculation of anticholinergic burden",
-   "Renal function assessment to guide dose adjustment and drug selection",
-   "Review of adherence, including pill counts or pharmacy refill data where available"
-  ],
-  "redFlags": [
-   "New falls, confusion, or delirium temporally linked to a medication change",
-   "Symptoms of drug toxicity such as bradycardia, hypotension, bleeding, or hypoglycaemia",
-   "Multiple sedating or anticholinergic drugs used together",
-   "Unexplained functional or cognitive decline that may be iatrogenic"
-  ],
-  "prognosis": "Inappropriate polypharmacy is associated with increased adverse drug events, hospitalisation, falls, cognitive impairment, and mortality. Thoughtful deprescribing and ongoing medication optimisation can reduce these harms and improve quality of life without compromising the treatment of important conditions.",
-  "pitfalls": [
-   "Adding a drug to treat the side effect of another instead of reassessing the original agent",
-   "Continuing medications indefinitely without reassessing ongoing indication or benefit",
-   "Failing to adjust doses for declining renal function",
-   "Stopping several drugs abruptly and precipitating withdrawal effects rather than tapering",
-   "Overlooking over-the-counter drugs and supplements as sources of interactions"
-  ],
-  "references": [
-   "Hazzard's Geriatric Medicine and Gerontology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Structured medication review with deprescribing of drugs no longer beneficial, guided by explicit tools such as the Beers and STOPP/START criteria",
-   "Recognise and unwind prescribing cascades by stopping the offending agent rather than adding another drug",
-   "Tally and minimise cumulative anticholinergic burden to reduce confusion, falls, constipation and urinary retention",
-   "Adjust drug selection and dosing for age-related reduced renal clearance and heightened central nervous system sensitivity",
-   "Complete medication reconciliation covering over-the-counter, supplement and herbal use, aligned with the patient's goals of care",
-   "Support adherence with simplified regimens and dosing aids, and monitor for withdrawal effects or symptom recurrence after deprescribing",
-   "Involve a pharmacist and the wider multidisciplinary team in ongoing medication optimisation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "polypharmacy-pathway",
-   "title": "Polypharmacy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Polypharmacy is commonly defined by the concurrent use of five or more medicines, but the clinically important question is whether each drug remains appropriate and beneficial",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New falls, confusion, or delirium temporally linked to a medication change",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Structured medication reconciliation including over-the-counter drugs, supplements, and herbal products, Application of explicit criteria such as Beers and STOPP/START during medication review, Calculation of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Structured medication review with deprescribing of drugs no longer beneficial, guided by explicit tools such as the Beers and STOPP/START criteria"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Adding a drug to treat the side effect of another instead of reassessing the original agent"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of polypharmacy."
-  }
- ],
- "tables": [
-  {
-   "id": "polypharmacy-matrix",
-   "title": "Polypharmacy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Polypharmacy is commonly defined by the concurrent use of five or more medicines, but the clinically important question is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Geriatrics / Palliative",
+  "specialty": "Geriatrics & Palliative Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Polypharmacy is commonly defined by the concurrent use of five or more medicines, but the clinically important question is whether each drug remains appropriate and beneficial",
+      "Each additional medication increases the risk of adverse drug reactions, drug-drug and drug-disease interactions, and poor adherence",
+      "Prescribing cascades occur when the side effect of one drug is misread as a new problem and treated with another drug rather than by stopping the offending agent",
+      "Age-related changes in pharmacokinetics and pharmacodynamics, particularly reduced renal clearance and heightened CNS sensitivity, amplify drug risks in older adults",
+      "Explicit tools such as the Beers criteria and the STOPP/START criteria help identify potentially inappropriate medications and prescribing omissions",
+      "Anticholinergic burden from multiple drugs contributes to confusion, falls, constipation, and urinary retention and should be tallied and minimised",
+      "Deprescribing is a structured, shared-decision process of tapering or stopping drugs whose harms outweigh benefits, aligned with the patient's goals and life expectancy",
+      "Regular structured medication reconciliation and review, especially at transitions of care, is the key preventive measure"
     ],
-    [
-     "Key Investigations",
-     "Structured medication reconciliation including over-the-counter drugs, supplements, and herbal products, Application of explicit",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "With ageing, reduced lean body mass and total body water, increased fat, declining hepatic metabolism, and especially reduced renal excretion alter drug distribution and clearance, prolonging exposure to many agents and their metabolites. Pharmacodynamic sensitivity also changes, notably increased susceptibility to central nervous system depressants, anticholinergics, and drugs affecting blood pressure. As the number of medications rises, the probability of interactions grows combinatorially, and overlapping adverse effects (sedation, hypotension, anticholinergic load) summate to produce falls, delirium, and functional decline.",
+    "additionalDifferentials": [
+      "Adverse drug reaction masquerading as a new disease",
+      "Prescribing cascade generating apparently new symptoms",
+      "Non-adherence causing apparent treatment failure",
+      "Drug-disease interaction worsening an existing condition",
+      "Delirium or cognitive decline attributable to cumulative drug burden"
     ],
-    [
-     "Primary Differentials",
-     "Adverse drug reaction masquerading as a new disease, Prescribing cascade generating apparently new symptoms, Non-adherence",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Structured medication reconciliation including over-the-counter drugs, supplements, and herbal products",
+      "Application of explicit criteria such as Beers and STOPP/START during medication review",
+      "Calculation of anticholinergic burden",
+      "Renal function assessment to guide dose adjustment and drug selection",
+      "Review of adherence, including pill counts or pharmacy refill data where available"
     ],
-    [
-     "Management Strategy",
-     "Structured medication review with deprescribing of drugs no longer beneficial, guided by explicit tools such as the Beers and",
-     "Core treatment modality"
+    "redFlags": [
+      "New falls, confusion, or delirium temporally linked to a medication change",
+      "Symptoms of drug toxicity such as bradycardia, hypotension, bleeding, or hypoglycaemia",
+      "Multiple sedating or anticholinergic drugs used together",
+      "Unexplained functional or cognitive decline that may be iatrogenic"
     ],
-    [
-     "Clinical Pitfall",
-     "Adding a drug to treat the side effect of another instead of reassessing the original agent",
-     "Prevent diagnostic or management error"
+    "prognosis": "Inappropriate polypharmacy is associated with increased adverse drug events, hospitalisation, falls, cognitive impairment, and mortality. Thoughtful deprescribing and ongoing medication optimisation can reduce these harms and improve quality of life without compromising the treatment of important conditions.",
+    "pitfalls": [
+      "Adding a drug to treat the side effect of another instead of reassessing the original agent",
+      "Continuing medications indefinitely without reassessing ongoing indication or benefit",
+      "Failing to adjust doses for declining renal function",
+      "Stopping several drugs abruptly and precipitating withdrawal effects rather than tapering",
+      "Overlooking over-the-counter drugs and supplements as sources of interactions"
+    ],
+    "references": [
+      "Hazzard's Geriatric Medicine and Gerontology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Structured medication review with deprescribing of drugs no longer beneficial, guided by explicit tools such as the Beers and STOPP/START criteria",
+      "Recognise and unwind prescribing cascades by stopping the offending agent rather than adding another drug",
+      "Tally and minimise cumulative anticholinergic burden to reduce confusion, falls, constipation and urinary retention",
+      "Adjust drug selection and dosing for age-related reduced renal clearance and heightened central nervous system sensitivity",
+      "Complete medication reconciliation covering over-the-counter, supplement and herbal use, aligned with the patient's goals of care",
+      "Support adherence with simplified regimens and dosing aids, and monitor for withdrawal effects or symptom recurrence after deprescribing",
+      "Involve a pharmacist and the wider multidisciplinary team in ongoing medication optimisation"
     ]
-   ],
-   "caption": "Overview comparison matrix for polypharmacy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "polypharmacy-real-image",
-   "title": "Polypharmacy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "polypharmacy-pathway",
+      "title": "Polypharmacy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Polypharmacy is commonly defined by the concurrent use of five or more medicines, but the clinically important question is whether each drug remains appropriate and beneficial",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New falls, confusion, or delirium temporally linked to a medication change",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Structured medication reconciliation including over-the-counter drugs, supplements, and herbal products, Application of explicit criteria such as Beers and STOPP/START during medication review, Calculation of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Structured medication review with deprescribing of drugs no longer beneficial, guided by explicit tools such as the Beers and STOPP/START criteria"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Adding a drug to treat the side effect of another instead of reassessing the original agent"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of polypharmacy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "polypharmacy-matrix",
+      "title": "Polypharmacy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Polypharmacy is commonly defined by the concurrent use of five or more medicines, but the clinically important question is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Structured medication reconciliation including over-the-counter drugs, supplements, and herbal products, Application of explicit",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Adverse drug reaction masquerading as a new disease, Prescribing cascade generating apparently new symptoms, Non-adherence",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Structured medication review with deprescribing of drugs no longer beneficial, guided by explicit tools such as the Beers and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Adding a drug to treat the side effect of another instead of reassessing the original agent",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for polypharmacy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polypharmacy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Medication reconciliation including OTC drugs, supplements and herbals",
+          "cells": [
+            {
+              "text": "Full drug burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beers and STOPP/START criteria",
+          "cells": [
+            {
+              "text": "Inappropriate prescribing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticholinergic burden",
+          "cells": [
+            {
+              "text": "Cumulative anticholinergic load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function assessment",
+          "cells": [
+            {
+              "text": "Dose adjustment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adherence review (pill counts, refill data)",
+          "cells": [
+            {
+              "text": "Non-adherence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polypharmacy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Adverse drug reaction mimicking new disease",
+          "cells": [
+            {
+              "text": "Symptoms temporally linked to a drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prescribing cascade",
+          "cells": [
+            {
+              "text": "New symptoms treated with further drugs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polypharmacy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Deprescribing",
+          "cells": [
+            {
+              "text": "Stop drugs no longer beneficial, guided by explicit criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prescribing cascades",
+          "cells": [
+            {
+              "text": "Stop the offending agent rather than adding treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticholinergic burden",
+          "cells": [
+            {
+              "text": "Minimise to reduce confusion, falls and constipation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal dosing",
+          "cells": [
+            {
+              "text": "Adjust doses for age-related reduced clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconciliation",
+          "cells": [
+            {
+              "text": "Include over-the-counter, supplement and herbal use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adherence",
+          "cells": [
+            {
+              "text": "Simplified regimens and dosing aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Pharmacist and multidisciplinary medication review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polypharmacy-dx-mgmt",
+      "title": "Diagnosis and management of Polypharmacy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Older patient on multiple medicines with new falls, confusion or decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (drug toxicity, bradycardia, bleeding, hypoglycaemia, sedative combinations)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent medication review for toxicity, bleeding or hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Medication reconciliation; Beers and STOPP criteria; anticholinergic load; renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the review link the presentation to a specific drug or cascade?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-drug causes of falls, confusion or decline; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Deprescribe drugs no longer beneficial, guided by explicit criteria",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop the offending agent in a prescribing cascade rather than adding treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Minimise cumulative anticholinergic burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjust doses for age-related reduced renal clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Simplify regimens and use dosing aids to support adherence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Inappropriate polypharmacy links to adverse events, falls, cognition and mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

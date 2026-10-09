@@ -1,169 +1,458 @@
 {
- "id": "polycythaemia_vera_post_pv_myelofibrosis",
- "name": "Post-polycythaemia vera myelofibrosis",
- "aliases": [
-  "post-PV myelofibrosis",
-  "post-polycythaemic myelofibrosis"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO haematolymphoid classification / haematology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A recognised progression of polycythaemia vera to a myelofibrotic phase with marrow fibrosis",
-   "It is marked by a falling need for venesection, anaemia, progressive splenomegaly and constitutional symptoms",
-   "The blood film shows a leucoerythroblastic picture with teardrop cells",
-   "Diagnostic criteria require established polycythaemia vera plus marrow fibrosis and additional features such as anaemia and splenomegaly",
-   "It resembles primary myelofibrosis clinically and shares the risk of leukaemic transformation",
-   "Management mirrors that of myelofibrosis, including JAK inhibition for symptoms and splenomegaly and transplantation in selected patients"
+  "id": "polycythaemia_vera_post_pv_myelofibrosis",
+  "name": "Post-polycythaemia vera myelofibrosis",
+  "aliases": [
+    "post-PV myelofibrosis",
+    "post-polycythaemic myelofibrosis"
   ],
-  "pathophysiology": "Post-polycythaemia vera myelofibrosis represents clonal evolution of the underlying JAK2-driven myeloproliferative neoplasm. Chronic cytokine release and megakaryocyte proliferation stimulate reactive deposition of reticulin and collagen fibrosis in the marrow, progressively impairing haematopoiesis. As the marrow fails, red cell production falls (so venesection is no longer needed and anaemia develops) and haematopoiesis shifts to the spleen and liver (extramedullary haematopoiesis), causing organomegaly and the leucoerythroblastic blood picture. The disease carries an increased risk of transformation to acute leukaemia.",
-  "additionalDifferentials": [
-   "Primary myelofibrosis",
-   "Post-essential-thrombocythaemia myelofibrosis",
-   "Reactive marrow fibrosis (for example infection, malignancy)",
-   "Myelodysplastic syndrome with fibrosis",
-   "Chronic myeloid leukaemia"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and film for leucoerythroblastic changes and teardrop cells",
-   "Bone marrow trephine demonstrating fibrosis",
-   "JAK2 and driver-mutation status (usually known from prior PV)",
-   "Assessment of spleen size and constitutional symptoms",
-   "Prognostic scoring for myelofibrosis"
-  ],
-  "redFlags": [
-   "Rising blasts indicating transformation to acute leukaemia",
-   "Severe anaemia or thrombocytopenia",
-   "Massive or painful splenomegaly",
-   "Profound constitutional symptoms and weight loss"
-  ],
-  "prognosis": "Transformation to a fibrotic phase generally worsens prognosis compared with polycythaemia vera, with outcomes similar to primary myelofibrosis and a risk of leukaemic transformation; allogeneic transplantation is the only cure.",
-  "pitfalls": [
-   "Attributing the falling haematocrit and anaemia to over-venesection rather than fibrotic transformation",
-   "Confusing it with primary myelofibrosis without the prior PV history",
-   "Missing leukaemic transformation",
-   "Overlooking the need to reassess prognosis and management"
-  ],
-  "references": [
-   "WHO classification of haematolymphoid tumours",
-   "Haematology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Management mirrors primary myelofibrosis and is risk-stratified with a prognostic score to guide intensity",
-   "JAK inhibition with ruxolitinib to reduce symptomatic splenomegaly and constitutional symptoms",
-   "Allogeneic haematopoietic stem cell transplantation, the only curative option, for eligible higher-risk patients",
-   "Manage anaemia with transfusion support and agents such as erythropoiesis-stimulating agents, danazol or immunomodulators, as venesection is no longer required",
-   "Symptom-directed care for splenomegaly, with splenectomy or splenic irradiation in selected refractory cases",
-   "Monitor blood counts and spleen size and surveil for leukaemic transformation",
-   "Supportive care including infection prevention and management of transfusion-related iron overload, within haematology-led multidisciplinary care with transplant assessment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "polycythaemia_vera_post_pv_myelofibrosis-pathway",
-   "title": "Post-polycythaemia vera myelofibrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A recognised progression of polycythaemia vera to a myelofibrotic phase with marrow fibrosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rising blasts indicating transformation to acute leukaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and film for leucoerythroblastic changes and teardrop cells, Bone marrow trephine demonstrating fibrosis, JAK2 and driver-mutation status (usually known from prior PV)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Management mirrors primary myelofibrosis and is risk-stratified with a prognostic score to guide intensity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the falling haematocrit and anaemia to over-venesection rather than fibrotic transformation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of post-polycythaemia vera myelofibrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "polycythaemia_vera_post_pv_myelofibrosis-matrix",
-   "title": "Post-polycythaemia vera myelofibrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A recognised progression of polycythaemia vera to a myelofibrotic phase with marrow fibrosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO haematolymphoid classification / haematology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A recognised progression of polycythaemia vera to a myelofibrotic phase with marrow fibrosis",
+      "It is marked by a falling need for venesection, anaemia, progressive splenomegaly and constitutional symptoms",
+      "The blood film shows a leucoerythroblastic picture with teardrop cells",
+      "Diagnostic criteria require established polycythaemia vera plus marrow fibrosis and additional features such as anaemia and splenomegaly",
+      "It resembles primary myelofibrosis clinically and shares the risk of leukaemic transformation",
+      "Management mirrors that of myelofibrosis, including JAK inhibition for symptoms and splenomegaly and transplantation in selected patients"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and film for leucoerythroblastic changes and teardrop cells, Bone marrow trephine demonstrating fibrosis, JAK2",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Post-polycythaemia vera myelofibrosis represents clonal evolution of the underlying JAK2-driven myeloproliferative neoplasm. Chronic cytokine release and megakaryocyte proliferation stimulate reactive deposition of reticulin and collagen fibrosis in the marrow, progressively impairing haematopoiesis. As the marrow fails, red cell production falls (so venesection is no longer needed and anaemia develops) and haematopoiesis shifts to the spleen and liver (extramedullary haematopoiesis), causing organomegaly and the leucoerythroblastic blood picture. The disease carries an increased risk of transformation to acute leukaemia.",
+    "additionalDifferentials": [
+      "Primary myelofibrosis",
+      "Post-essential-thrombocythaemia myelofibrosis",
+      "Reactive marrow fibrosis (for example infection, malignancy)",
+      "Myelodysplastic syndrome with fibrosis",
+      "Chronic myeloid leukaemia"
     ],
-    [
-     "Primary Differentials",
-     "Primary myelofibrosis, Post-essential-thrombocythaemia myelofibrosis, Reactive marrow fibrosis (for example infection, malignancy)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and film for leucoerythroblastic changes and teardrop cells",
+      "Bone marrow trephine demonstrating fibrosis",
+      "JAK2 and driver-mutation status (usually known from prior PV)",
+      "Assessment of spleen size and constitutional symptoms",
+      "Prognostic scoring for myelofibrosis"
     ],
-    [
-     "Management Strategy",
-     "Management mirrors primary myelofibrosis and is risk-stratified with a prognostic score to guide intensity",
-     "Core treatment modality"
+    "redFlags": [
+      "Rising blasts indicating transformation to acute leukaemia",
+      "Severe anaemia or thrombocytopenia",
+      "Massive or painful splenomegaly",
+      "Profound constitutional symptoms and weight loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the falling haematocrit and anaemia to over-venesection rather than fibrotic transformation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Transformation to a fibrotic phase generally worsens prognosis compared with polycythaemia vera, with outcomes similar to primary myelofibrosis and a risk of leukaemic transformation; allogeneic transplantation is the only cure.",
+    "pitfalls": [
+      "Attributing the falling haematocrit and anaemia to over-venesection rather than fibrotic transformation",
+      "Confusing it with primary myelofibrosis without the prior PV history",
+      "Missing leukaemic transformation",
+      "Overlooking the need to reassess prognosis and management"
+    ],
+    "references": [
+      "WHO classification of haematolymphoid tumours",
+      "Haematology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Management mirrors primary myelofibrosis and is risk-stratified with a prognostic score to guide intensity",
+      "JAK inhibition with ruxolitinib to reduce symptomatic splenomegaly and constitutional symptoms",
+      "Allogeneic haematopoietic stem cell transplantation, the only curative option, for eligible higher-risk patients",
+      "Manage anaemia with transfusion support and agents such as erythropoiesis-stimulating agents, danazol or immunomodulators, as venesection is no longer required",
+      "Symptom-directed care for splenomegaly, with splenectomy or splenic irradiation in selected refractory cases",
+      "Monitor blood counts and spleen size and surveil for leukaemic transformation",
+      "Supportive care including infection prevention and management of transfusion-related iron overload, within haematology-led multidisciplinary care with transplant assessment"
     ]
-   ],
-   "caption": "Overview comparison matrix for post-polycythaemia vera myelofibrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "polycythaemia-vera-post-pv-myelofibrosis-real-image",
-   "title": "Post-polycythaemia vera myelofibrosis: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-pathway",
+      "title": "Post-polycythaemia vera myelofibrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A recognised progression of polycythaemia vera to a myelofibrotic phase with marrow fibrosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rising blasts indicating transformation to acute leukaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and film for leucoerythroblastic changes and teardrop cells, Bone marrow trephine demonstrating fibrosis, JAK2 and driver-mutation status (usually known from prior PV)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Management mirrors primary myelofibrosis and is risk-stratified with a prognostic score to guide intensity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the falling haematocrit and anaemia to over-venesection rather than fibrotic transformation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of post-polycythaemia vera myelofibrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-matrix",
+      "title": "Post-polycythaemia vera myelofibrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A recognised progression of polycythaemia vera to a myelofibrotic phase with marrow fibrosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and film for leucoerythroblastic changes and teardrop cells, Bone marrow trephine demonstrating fibrosis, JAK2",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary myelofibrosis, Post-essential-thrombocythaemia myelofibrosis, Reactive marrow fibrosis (for example infection, malignancy)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Management mirrors primary myelofibrosis and is risk-stratified with a prognostic score to guide intensity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the falling haematocrit and anaemia to over-venesection rather than fibrotic transformation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for post-polycythaemia vera myelofibrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO haematolymphoid classification / haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FBC and film",
+          "cells": [
+            {
+              "text": "Leucoerythroblastic changes and teardrop cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow trephine",
+          "cells": [
+            {
+              "text": "Fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "JAK2 and driver-mutation status",
+          "cells": [
+            {
+              "text": "Usually known from prior PV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spleen size and constitutional symptoms",
+          "cells": [
+            {
+              "text": "Disease burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prognostic scoring",
+          "cells": [
+            {
+              "text": "Myelofibrosis risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-essential-thrombocythaemia myelofibrosis",
+          "cells": [
+            {
+              "text": "Prior essential thrombocythaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive marrow fibrosis",
+          "cells": [
+            {
+              "text": "Infection or malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk-stratified care",
+          "cells": [
+            {
+              "text": "Mirrors primary myelofibrosis; prognostic score guides therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "JAK inhibition",
+          "cells": [
+            {
+              "text": "Ruxolitinib for symptomatic splenomegaly and constitutional symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant",
+          "cells": [
+            {
+              "text": "Allogeneic stem cell transplantation, the only curative option, for eligible patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia",
+          "cells": [
+            {
+              "text": "Transfusion and erythropoiesis-stimulating agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenic care",
+          "cells": [
+            {
+              "text": "Splenectomy or splenic irradiation in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood counts, spleen size and leukaemic transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Infection prevention and transfusion-related care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "polycythaemia_vera_post_pv_myelofibrosis-dx-mgmt",
+      "title": "Diagnosis and management of Post-polycythaemia vera myelofibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known polycythaemia vera with rising spleen size, anaemia or constitutional symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rising blasts, severe anaemia or thrombocytopenia, massive splenomegaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for leukaemic transformation or painful splenomegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; marrow trephine for fibrosis; JAK2 status; spleen size",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does marrow trephine show fibrosis in a patient with known PV?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary myelofibrosis, reactive fibrosis, MDS with fibrosis or CML",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Risk-stratified management with prognostic scoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ruxolitinib to reduce splenomegaly and constitutional symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Allogeneic stem cell transplantation for eligible patients, the only cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Transfusion and erythropoiesis-stimulating agents for anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor blood counts and spleen size for leukaemic transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Fibrotic phase generally worsens prognosis compared with polycythaemia vera",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

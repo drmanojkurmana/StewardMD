@@ -1,172 +1,506 @@
 {
- "id": "amblyopia",
- "name": "Amblyopia",
- "aliases": [
-  "lazy eye",
-  "strabismic amblyopia",
-  "anisometropic amblyopia",
-  "deprivation amblyopia"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Amblyopia is reduced best-corrected visual acuity in one or both eyes due to abnormal visual development, in the absence of a structural cause that fully explains the deficit",
-   "The main types are strabismic (from ocular misalignment), anisometropic or refractive (from unequal or high refractive error), and stimulus deprivation (from media opacity such as congenital cataract or ptosis)",
-   "It develops only during the sensitive period of visual development in early childhood, which is why early detection through vision screening is critical",
-   "It is usually unilateral but can be bilateral, for example with high symmetrical refractive error or bilateral media opacity",
-   "A crowding phenomenon is characteristic, with worse acuity for lines of letters than for single optotypes",
-   "Deprivation amblyopia from causes such as congenital cataract is the most severe and least responsive type and needs urgent treatment",
-   "Management is to correct any refractive error and to treat the underlying cause, then to encourage use of the amblyopic eye with occlusion (patching) or pharmacological penalisation of the better eye",
-   "Treatment is most effective when started young; response diminishes with increasing age although some improvement can still occur in older children"
+  "id": "amblyopia",
+  "name": "Amblyopia",
+  "aliases": [
+    "lazy eye",
+    "strabismic amblyopia",
+    "anisometropic amblyopia",
+    "deprivation amblyopia"
   ],
-  "pathophysiology": "Amblyopia results from abnormal visual experience during the critical period of cortical visual development. When the two eyes receive unequal or degraded input (from misalignment, unequal refractive error, or media opacity), competitive cortical mechanisms favour the better eye and suppress the input from the affected eye. This leads to persistent cortical under-development of that eye's pathway and reduced acuity that is not correctable by optical means alone once the sensitive period has passed, though it remains treatable if addressed early.",
-  "additionalDifferentials": [
-   "Uncorrected refractive error without amblyopia",
-   "Structural ocular disease (e.g. optic nerve or macular pathology) causing reduced vision",
-   "Retinoblastoma or other intraocular tumour presenting with poor vision",
-   "Cortical visual impairment",
-   "Functional (non-organic) visual loss"
-  ],
-  "additionalInvestigations": [
-   "Age-appropriate best-corrected visual acuity testing, ideally with crowded (linear) optotypes",
-   "Cycloplegic refraction to detect anisometropia or significant refractive error",
-   "Cover testing and motility assessment to detect associated strabismus",
-   "Dilated fundus and media examination to exclude a structural or deprivational cause"
-  ],
-  "redFlags": [
-   "An identifiable structural lesion (e.g. cataract, retinoblastoma, optic nerve disease) that could account for reduced vision and must not be attributed to amblyopia alone",
-   "Deprivation amblyopia from congenital cataract or dense media opacity requiring urgent intervention",
-   "Failure of vision to improve with adequate treatment, prompting re-evaluation for organic pathology",
-   "Poor vision persisting beyond the sensitive period with no prior treatment"
-  ],
-  "prognosis": "The prognosis depends on the type of amblyopia and the age at which treatment begins; anisometropic and strabismic amblyopia treated early in childhood often recover good acuity, whereas deprivation amblyopia and late-treated cases have a more guarded outcome. Untreated amblyopia results in lifelong reduced vision in the affected eye and vulnerability if the better eye is later lost.",
-  "pitfalls": [
-   "Diagnosing amblyopia without excluding a structural cause of visual loss",
-   "Delaying treatment beyond the sensitive period when response is greatly reduced",
-   "Failing to prescribe full refractive correction before or alongside occlusion therapy",
-   "Poor compliance with patching leading to treatment failure or reverse amblyopia in the occluded eye"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the underlying cause first, prescribing optical correction for refractive error and removing any deprivational cause such as urgent surgery for congenital cataract",
-   "Prescribe full cycloplegic refractive correction and allow a period of refractive adaptation, which alone may improve acuity",
-   "Treat residual amblyopia by penalising the better eye with occlusion patching to force use of the amblyopic eye",
-   "Use atropine penalisation of the sound eye as an alternative where patching adherence is difficult",
-   "Correct associated strabismus, with surgery where indicated for alignment",
-   "Begin treatment within the sensitive period, monitor acuity and adjust therapy while watching for reverse amblyopia in the treated eye",
-   "Support adherence with family education and maintain ophthalmology follow-up until vision stabilises"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "amblyopia-pathway",
-   "title": "Amblyopia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Amblyopia is reduced best-corrected visual acuity in one or both eyes due to abnormal visual development, in the absence of a structural cause that fully explains the deficit",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An identifiable structural lesion (e.g. cataract, retinoblastoma, optic nerve disease) that could account for reduced vision and must not be attributed to amblyopia alone",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Age-appropriate best-corrected visual acuity testing, ideally with crowded (linear) optotypes, Cycloplegic refraction to detect anisometropia or significant refractive error, Cover testing and motility assessment to detect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the underlying cause first, prescribing optical correction for refractive error and removing any deprivational cause such as urgent surgery for congenital cataract"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing amblyopia without excluding a structural cause of visual loss"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of amblyopia."
-  }
- ],
- "tables": [
-  {
-   "id": "amblyopia-matrix",
-   "title": "Amblyopia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Amblyopia is reduced best-corrected visual acuity in one or both eyes due to abnormal visual development, in the absence of a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Amblyopia is reduced best-corrected visual acuity in one or both eyes due to abnormal visual development, in the absence of a structural cause that fully explains the deficit",
+      "The main types are strabismic (from ocular misalignment), anisometropic or refractive (from unequal or high refractive error), and stimulus deprivation (from media opacity such as congenital cataract or ptosis)",
+      "It develops only during the sensitive period of visual development in early childhood, which is why early detection through vision screening is critical",
+      "It is usually unilateral but can be bilateral, for example with high symmetrical refractive error or bilateral media opacity",
+      "A crowding phenomenon is characteristic, with worse acuity for lines of letters than for single optotypes",
+      "Deprivation amblyopia from causes such as congenital cataract is the most severe and least responsive type and needs urgent treatment",
+      "Management is to correct any refractive error and to treat the underlying cause, then to encourage use of the amblyopic eye with occlusion (patching) or pharmacological penalisation of the better eye",
+      "Treatment is most effective when started young; response diminishes with increasing age although some improvement can still occur in older children"
     ],
-    [
-     "Key Investigations",
-     "Age-appropriate best-corrected visual acuity testing, ideally with crowded (linear) optotypes, Cycloplegic refraction to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Amblyopia results from abnormal visual experience during the critical period of cortical visual development. When the two eyes receive unequal or degraded input (from misalignment, unequal refractive error, or media opacity), competitive cortical mechanisms favour the better eye and suppress the input from the affected eye. This leads to persistent cortical under-development of that eye's pathway and reduced acuity that is not correctable by optical means alone once the sensitive period has passed, though it remains treatable if addressed early.",
+    "additionalDifferentials": [
+      "Uncorrected refractive error without amblyopia",
+      "Structural ocular disease (e.g. optic nerve or macular pathology) causing reduced vision",
+      "Retinoblastoma or other intraocular tumour presenting with poor vision",
+      "Cortical visual impairment",
+      "Functional (non-organic) visual loss"
     ],
-    [
-     "Primary Differentials",
-     "Uncorrected refractive error without amblyopia, Structural ocular disease (e.g. optic nerve or macular pathology) causing reduced",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Age-appropriate best-corrected visual acuity testing, ideally with crowded (linear) optotypes",
+      "Cycloplegic refraction to detect anisometropia or significant refractive error",
+      "Cover testing and motility assessment to detect associated strabismus",
+      "Dilated fundus and media examination to exclude a structural or deprivational cause"
     ],
-    [
-     "Management Strategy",
-     "Correct the underlying cause first, prescribing optical correction for refractive error and removing any deprivational cause such",
-     "Core treatment modality"
+    "redFlags": [
+      "An identifiable structural lesion (e.g. cataract, retinoblastoma, optic nerve disease) that could account for reduced vision and must not be attributed to amblyopia alone",
+      "Deprivation amblyopia from congenital cataract or dense media opacity requiring urgent intervention",
+      "Failure of vision to improve with adequate treatment, prompting re-evaluation for organic pathology",
+      "Poor vision persisting beyond the sensitive period with no prior treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing amblyopia without excluding a structural cause of visual loss",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis depends on the type of amblyopia and the age at which treatment begins; anisometropic and strabismic amblyopia treated early in childhood often recover good acuity, whereas deprivation amblyopia and late-treated cases have a more guarded outcome. Untreated amblyopia results in lifelong reduced vision in the affected eye and vulnerability if the better eye is later lost.",
+    "pitfalls": [
+      "Diagnosing amblyopia without excluding a structural cause of visual loss",
+      "Delaying treatment beyond the sensitive period when response is greatly reduced",
+      "Failing to prescribe full refractive correction before or alongside occlusion therapy",
+      "Poor compliance with patching leading to treatment failure or reverse amblyopia in the occluded eye"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the underlying cause first, prescribing optical correction for refractive error and removing any deprivational cause such as urgent surgery for congenital cataract",
+      "Prescribe full cycloplegic refractive correction and allow a period of refractive adaptation, which alone may improve acuity",
+      "Treat residual amblyopia by penalising the better eye with occlusion patching to force use of the amblyopic eye",
+      "Use atropine penalisation of the sound eye as an alternative where patching adherence is difficult",
+      "Correct associated strabismus, with surgery where indicated for alignment",
+      "Begin treatment within the sensitive period, monitor acuity and adjust therapy while watching for reverse amblyopia in the treated eye",
+      "Support adherence with family education and maintain ophthalmology follow-up until vision stabilises"
     ]
-   ],
-   "caption": "Overview comparison matrix for amblyopia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "amblyopia-real-image",
-   "title": "Amblyopia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "amblyopia-pathway",
+      "title": "Amblyopia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Amblyopia is reduced best-corrected visual acuity in one or both eyes due to abnormal visual development, in the absence of a structural cause that fully explains the deficit",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An identifiable structural lesion (e.g. cataract, retinoblastoma, optic nerve disease) that could account for reduced vision and must not be attributed to amblyopia alone",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Age-appropriate best-corrected visual acuity testing, ideally with crowded (linear) optotypes, Cycloplegic refraction to detect anisometropia or significant refractive error, Cover testing and motility assessment to detect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the underlying cause first, prescribing optical correction for refractive error and removing any deprivational cause such as urgent surgery for congenital cataract"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing amblyopia without excluding a structural cause of visual loss"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of amblyopia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "amblyopia-matrix",
+      "title": "Amblyopia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Amblyopia is reduced best-corrected visual acuity in one or both eyes due to abnormal visual development, in the absence of a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Age-appropriate best-corrected visual acuity testing, ideally with crowded (linear) optotypes, Cycloplegic refraction to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Uncorrected refractive error without amblyopia, Structural ocular disease (e.g. optic nerve or macular pathology) causing reduced",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the underlying cause first, prescribing optical correction for refractive error and removing any deprivational cause such",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing amblyopia without excluding a structural cause of visual loss",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for amblyopia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "amblyopia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Age-appropriate best-corrected visual acuity testing, ideally with crowded optotypes",
+          "cells": [
+            {
+              "text": "Reduced acuity in one or both eyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Anisometropia or significant refractive error"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cover testing and motility assessment",
+          "cells": [
+            {
+              "text": "Associated strabismus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus and media examination",
+          "cells": [
+            {
+              "text": "Excludes structural or deprivational cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amblyopia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Uncorrected refractive error without amblyopia",
+          "cells": [
+            {
+              "text": "Acuity improves with optical correction"
+            },
+            {
+              "text": "Cycloplegic refraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural ocular disease (optic nerve or macular pathology)",
+          "cells": [
+            {
+              "text": "Structural lesion on examination"
+            },
+            {
+              "text": "Fundus examination and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinoblastoma or other intraocular tumour",
+          "cells": [
+            {
+              "text": "Leukocoria or intraocular mass"
+            },
+            {
+              "text": "Fundus examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cortical visual impairment",
+          "cells": [
+            {
+              "text": "Reduced vision with neurological cause"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (non-organic) visual loss",
+          "cells": [
+            {
+              "text": "Inconsistent acuity"
+            },
+            {
+              "text": "Clinical assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amblyopia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical correction for refractive error",
+          "cells": [
+            {
+              "text": "Refractive amblyopia"
+            },
+            {
+              "text": "Correct underlying cause first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery for congenital cataract",
+          "cells": [
+            {
+              "text": "Deprivational amblyopia"
+            },
+            {
+              "text": "Removes deprivation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occlusion patching of the better eye",
+          "cells": [
+            {
+              "text": "Residual amblyopia"
+            },
+            {
+              "text": "Forces use of amblyopic eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atropine penalisation of the sound eye",
+          "cells": [
+            {
+              "text": "Patching adherence difficult"
+            },
+            {
+              "text": "Alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus surgery where indicated",
+          "cells": [
+            {
+              "text": "Misalignment"
+            },
+            {
+              "text": "Alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for reverse amblyopia in the treated eye",
+          "cells": [
+            {
+              "text": "Adverse effect of treatment"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family education and ophthalmology follow-up",
+          "cells": [
+            {
+              "text": "Adherence and stability"
+            },
+            {
+              "text": "Support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "amblyopia-dx-mgmt",
+      "title": "Diagnosis and management of Amblyopia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Reduced best-corrected acuity with misalignment or unequal refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Structural lesion, leukocoria or poor vision not improving with treatment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review; treat cataract or tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acuity testing; cycloplegic refraction; cover test; fundus and media exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Refractive or strabismic amblyopia without structural cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Optical correction and refractive adaptation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review refractive error, structural disease, retinoblastoma and cortical impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occlusion patching of the better eye; atropine as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Strabismus surgery where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor acuity and watch for reverse amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early treatment in childhood gives good acuity in many cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

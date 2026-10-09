@@ -231,25 +231,774 @@
       "caption": "Diagnostic and clinical overview matrix for decompensated cirrhosis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "decomp-cirrhosis-real-image",
-      "title": "Decompensated cirrhosis: Diagnostic Abdominal Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Ascites",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/ascites",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Spontaneous Bacterial Peritonitis",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/spontaneous-bacterial-peritonitis-sbp",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 306-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "decomp_cirrhosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Ascitic fluid and staging tests in decompensated cirrhosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Solid Viscera",
-          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+          "parameter": "SAAG",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": ">=1.1",
+              "op": ">=",
+              "value": 1.1
+            },
+            {
+              "text": "Portal hypertension ascites"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Gastrointestinal Tract",
-          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+          "parameter": "SAAG",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "<1.1",
+              "op": "<",
+              "value": 1.1
+            },
+            {
+              "text": "Non-portal cause: carcinomatosis, TB, pancreatic, nephrotic"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Mesentery & Peritoneum",
-          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+          "parameter": "Ascitic protein with high SAAG",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "<2.5",
+              "op": "<",
+              "value": 2.5
+            },
+            {
+              "text": "Cirrhosis; >=2.5 suggests cardiac or Budd-Chiari"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascitic neutrophils",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": ">250",
+              "op": ">",
+              "value": 250
+            },
+            {
+              "text": "{{hy:Spontaneous bacterial peritonitis}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Secondary peritonitis clues",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Ascitic glucose <50, LDH above serum, mixed flora",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "Perforation or abscess, not SBP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture technique",
+          "cells": [
+            {
+              "text": "Inoculate blood culture bottles at bedside"
+            },
+            {
+              "text": "Raises yield"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HVPG",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": ">=10 marks high decompensation risk",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Clinically significant portal hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ammonia",
+          "cells": [
+            {
+              "text": "Correlates poorly with encephalopathy"
+            },
+            {
+              "text": "Diagnosis of encephalopathy is clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "<125",
+              "op": "<",
+              "value": 125
+            },
+            {
+              "text": "Start fluid restriction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Decompensating events",
+          "cells": [
+            {
+              "text": "Ascites, variceal bleed, encephalopathy, jaundice"
+            },
+            {
+              "text": "Median survival under 2 years after decompensation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "decomp_cirrhosis-ddx",
+      "kind": "ddx",
+      "title": "Other causes of ascites and decompensation mimics",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure or constrictive pericarditis",
+          "cells": [
+            {
+              "text": "High SAAG, protein >=2.5 g/dL, raised pro-BNP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Budd-Chiari syndrome",
+          "cells": [
+            {
+              "text": "High SAAG; hepatic vein thrombosis on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritoneal carcinomatosis",
+          "cells": [
+            {
+              "text": "{{hy:Low SAAG, high protein}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous peritonitis",
+          "cells": [
+            {
+              "text": "Low SAAG, lymphocytic fluid, raised adenosine deaminase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic ascites",
+          "cells": [
+            {
+              "text": "Low SAAG, ascitic amylase >1000"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic syndrome or malnutrition",
+          "cells": [
+            {
+              "text": "Low SAAG from low albumin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary bacterial peritonitis",
+          "cells": [
+            {
+              "text": "Glucose <50, LDH above serum, multiple organisms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "decomp_cirrhosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of decompensated cirrhosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium restriction",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": "2000 mg/day",
+              "op": "<=",
+              "value": 2000
+            },
+            {
+              "text": "First step for ascites"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spironolactone with furosemide",
+          "cells": [
+            {
+              "text": "Ascites"
+            },
+            {
+              "text": "Maximum 400 mg and 160 mg daily; aim weight loss about 0.5 kg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Large-volume paracentesis with albumin",
+          "unit": "L",
+          "cells": [
+            {
+              "text": "Removal >5 L",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "6 to 8 g of 25% albumin per litre removed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TIPS or transplant referral",
+          "cells": [
+            {
+              "text": "Refractory or recurrent ascites"
+            },
+            {
+              "text": "Risk of encephalopathy after TIPS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cefotaxime or ceftriaxone IV",
+          "cells": [
+            {
+              "text": "{{hy:SBP}}"
+            },
+            {
+              "text": "At least 5 days and until ascitic PMN <250"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Albumin in SBP",
+          "cells": [
+            {
+              "text": "SBP"
+            },
+            {
+              "text": "1.5 g/kg day 1 and 1 g/kg day 3 to prevent hepatorenal syndrome"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hold nonselective beta-blocker",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "MAP <65",
+              "op": "<",
+              "value": 65
+            },
+            {
+              "text": "Resume after SBP clears"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Quinolone prophylaxis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "After an SBP episode"
+            },
+            {
+              "text": "Recurrence up to 70% in a year"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lactulose, rifaximin",
+          "cells": [
+            {
+              "text": "Hepatic encephalopathy; find precipitant"
+            },
+            {
+              "text": "Drugs from entry list; doses not stated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Terlipressin and ceftriaxone",
+          "cells": [
+            {
+              "text": "Variceal haemorrhage"
+            },
+            {
+              "text": "Drugs from entry list; antibiotics also lower SBP risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Antibiotic and vasoactive drug doses are not stated in the sources opened."
+    },
+    {
+      "id": "decomp_cirrhosis-treatment-2",
+      "kind": "treatment",
+      "title": "Chronic hepatitis B treatment recommendations",
+      "rowHeader": "Condition",
+      "columns": [
+        "Clinical",
+        "HBV DNA (IU/mL)",
+        "ALT",
+        "Recommendation"
+      ],
+      "rows": [
+        {
+          "parameter": "HBeAg-reactive, no specific clinical stage (b)",
+          "cells": [
+            {
+              "text": "(b)"
+            },
+            {
+              "text": ">2 x 10^4"
+            },
+            {
+              "text": "<2 x ULN (c)"
+            },
+            {
+              "text": "No treatment; monitor. In patients over 40, with family history of hepatocellular carcinoma, and/or ALT persistently at the high end of the twofold range, liver biopsy may help decide on treatment"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-reactive, chronic hepatitis",
+          "cells": [
+            {
+              "text": "Chronic hepatitis"
+            },
+            {
+              "text": ">2 x 10^4 (d)"
+            },
+            {
+              "text": ">2 x ULN (d)"
+            },
+            {
+              "text": "Treat (e)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-reactive, compensated cirrhosis, high DNA",
+          "cells": [
+            {
+              "text": "Compensated cirrhosis"
+            },
+            {
+              "text": ">2 x 10^3"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Treat (e) with oral agents, not PEG IFN"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-reactive, compensated cirrhosis, low DNA",
+          "cells": [
+            {
+              "text": "Compensated cirrhosis"
+            },
+            {
+              "text": "<2 x 10^3"
+            },
+            {
+              "text": "Above ULN"
+            },
+            {
+              "text": "Consider treatment (f)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-reactive, decompensated cirrhosis, DNA detectable",
+          "cells": [
+            {
+              "text": "Decompensated cirrhosis"
+            },
+            {
+              "text": "Detectable"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Treat (e) with oral agents (g), not PEG IFN; refer for liver transplantation"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-reactive, decompensated cirrhosis, DNA undetectable",
+          "cells": [
+            {
+              "text": "Decompensated cirrhosis"
+            },
+            {
+              "text": "Undetectable"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Observe; refer for liver transplantation"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-negative, no specific clinical stage (b)",
+          "cells": [
+            {
+              "text": "(b)"
+            },
+            {
+              "text": "2 x 10^3 or less"
+            },
+            {
+              "text": "ULN or less"
+            },
+            {
+              "text": "Inactive carrier; treatment not necessary"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-negative, chronic hepatitis, lower DNA",
+          "cells": [
+            {
+              "text": "Chronic hepatitis"
+            },
+            {
+              "text": ">10^3"
+            },
+            {
+              "text": "1 to over 2 x ULN (d)"
+            },
+            {
+              "text": "Consider liver biopsy; treat (h) if biopsy shows moderate to severe inflammation or fibrosis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-negative, chronic hepatitis, higher DNA",
+          "cells": [
+            {
+              "text": "Chronic hepatitis"
+            },
+            {
+              "text": ">10^4"
+            },
+            {
+              "text": ">2 x ULN (d)"
+            },
+            {
+              "text": "Treat (h,i)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-negative, compensated cirrhosis, high DNA",
+          "cells": [
+            {
+              "text": "Compensated cirrhosis"
+            },
+            {
+              "text": ">2 x 10^3"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Treat (e) with oral agents, not PEG IFN"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-negative, compensated cirrhosis, low DNA",
+          "cells": [
+            {
+              "text": "Compensated cirrhosis"
+            },
+            {
+              "text": "<2 x 10^3"
+            },
+            {
+              "text": "Above ULN"
+            },
+            {
+              "text": "Consider treatment (f)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-negative, decompensated cirrhosis, DNA detectable",
+          "cells": [
+            {
+              "text": "Decompensated cirrhosis"
+            },
+            {
+              "text": "Detectable"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Treat (h) with oral agents (g), not PEG IFN; refer for liver transplantation"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HBeAg-negative, decompensated cirrhosis, DNA undetectable",
+          "cells": [
+            {
+              "text": "Decompensated cirrhosis"
+            },
+            {
+              "text": "Undetectable"
+            },
+            {
+              "text": "Below or above ULN"
+            },
+            {
+              "text": "Observe; refer for liver transplantation"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Footnotes (a) to (i) were not shown on the printed page. ULN means upper limit of normal."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "decomp_cirrhosis-dx-mgmt",
+      "title": "Assessment and management of decompensated cirrhosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cirrhosis with ascites, bleeding, confusion or jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Find trigger: infection, bleed, drugs, dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Variceal bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Terlipressin, antibiotics, urgent endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Diagnostic paracentesis: cell count, SAAG, culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Neutrophils >250/uL?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cefotaxime or ceftriaxone plus albumin day 1 and 3",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Encephalopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lactulose; treat precipitant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Sodium restriction, diuretics; LVP with albumin if tense",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
         }
       ]
     }

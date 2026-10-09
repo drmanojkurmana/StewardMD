@@ -1,172 +1,441 @@
 {
- "id": "snapping_scapula_syndrome",
- "name": "Snapping scapula syndrome",
- "aliases": [
-  "scapulothoracic bursitis",
-  "snapping scapula",
-  "scapulothoracic crepitus",
-  "washboard syndrome"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Sports & Soft tissue",
- "specialty": "Sports Medicine / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Brukner and Khan's Clinical Sports Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Painful audible or palpable snapping or grating (crepitus) of the scapula on the chest wall during shoulder movement",
-   "Arises at the scapulothoracic articulation, with scapulothoracic bursitis and/or bony or soft-tissue abnormalities at the medial and superomedial scapula",
-   "Often related to overuse in overhead and throwing activities and to scapular dyskinesis and posture",
-   "Causes include inflamed scapulothoracic bursae, muscle atrophy or fibrosis, and bony lesions such as osteochondroma or a prominent superomedial angle",
-   "Examination looks for crepitus, tenderness, scapular winging and dyskinesis",
-   "Imaging (radiographs, CT for bony lesions, MRI or ultrasound for soft tissue and bursae) is used when a structural cause is suspected",
-   "Most cases respond to conservative management with postural and scapular stabilisation rehabilitation, load modification and sometimes bursal injection; surgery is reserved for structural lesions or refractory bursitis"
+  "id": "snapping_scapula_syndrome",
+  "name": "Snapping scapula syndrome",
+  "aliases": [
+    "scapulothoracic bursitis",
+    "snapping scapula",
+    "scapulothoracic crepitus",
+    "washboard syndrome"
   ],
-  "pathophysiology": "The scapula glides over the posterior chest wall at the scapulothoracic articulation, cushioned by bursae. Snapping scapula syndrome arises when this smooth gliding is disturbed, whether by inflamed or fibrotic scapulothoracic bursae, by altered muscle bulk or scarring, or by bony incongruity such as an osteochondroma, a prominent superomedial angle or a malunited rib or scapular fracture. Repetitive overhead loading, scapular dyskinesis and poor posture contribute. The result is symptomatic crepitus and pain as the scapula tracks over the chest wall.",
-  "additionalDifferentials": [
-   "Isolated scapulothoracic bursitis",
-   "Osteochondroma or other bony lesion of the scapula or ribs",
-   "Scapular dyskinesis or muscle imbalance",
-   "Long thoracic or spinal accessory nerve palsy causing scapular winging",
-   "Cervicothoracic referred pain",
-   "Rotator cuff or glenohumeral pathology"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs including tangential scapular views",
-   "CT to define bony lesions such as an osteochondroma or a prominent angle",
-   "MRI or ultrasound to assess the bursae and soft tissues",
-   "Clinical assessment of scapular motion, winging and dyskinesis",
-   "Diagnostic bursal injection where scapulothoracic bursitis is suspected"
-  ],
-  "redFlags": [
-   "Fixed scapular winging suggesting a nerve palsy (long thoracic or spinal accessory)",
-   "A firm mass or rapidly growing lesion suggesting tumour",
-   "Night pain or systemic features suggesting neoplasm or infection",
-   "Progressive neurological deficit"
-  ],
-  "prognosis": "The majority improve with scapular rehabilitation and load management; outcomes are good after excision when a discrete bony lesion is the cause.",
-  "pitfalls": [
-   "Attributing symptomatic crepitus to a benign cause without excluding an osteochondroma or other bony lesion",
-   "Missing a nerve palsy as a cause of associated winging",
-   "Neglecting scapular dyskinesis and posture in rehabilitation",
-   "Rushing to surgery before a trial of conservative care in non-structural cases"
-  ],
-  "references": [
-   "Brukner and Khan's Clinical Sports Medicine",
-   "British Journal of Sports Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line scapular rehabilitation addressing scapular dyskinesis, posture and periscapular muscle strengthening, with load management.",
-   "Non-steroidal anti-inflammatory drugs and corticosteroid injection into a symptomatic scapulothoracic bursa.",
-   "Scapulothoracic bursectomy for bursitis refractory to conservative care.",
-   "Excision of a discrete bony lesion such as an osteochondroma or a prominent superomedial angle, which gives good results.",
-   "Activity modification to reduce repetitive overhead and throwing loads.",
-   "Refer to sports medicine or shoulder surgery for persistent symptoms or a structural cause."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "snapping_scapula_syndrome-pathway",
-   "title": "Snapping scapula syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Painful audible or palpable snapping or grating (crepitus) of the scapula on the chest wall during shoulder movement",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fixed scapular winging suggesting a nerve palsy (long thoracic or spinal accessory)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs including tangential scapular views, CT to define bony lesions such as an osteochondroma or a prominent angle, MRI or ultrasound to assess the bursae and soft tissues"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line scapular rehabilitation addressing scapular dyskinesis, posture and periscapular muscle strengthening, with load management."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing symptomatic crepitus to a benign cause without excluding an osteochondroma or other bony lesion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of snapping scapula syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "snapping_scapula_syndrome-matrix",
-   "title": "Snapping scapula syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Painful audible or palpable snapping or grating (crepitus) of the scapula on the chest wall during shoulder movement",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Sports & Soft tissue",
+  "specialty": "Sports Medicine / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Brukner and Khan's Clinical Sports Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Painful audible or palpable snapping or grating (crepitus) of the scapula on the chest wall during shoulder movement",
+      "Arises at the scapulothoracic articulation, with scapulothoracic bursitis and/or bony or soft-tissue abnormalities at the medial and superomedial scapula",
+      "Often related to overuse in overhead and throwing activities and to scapular dyskinesis and posture",
+      "Causes include inflamed scapulothoracic bursae, muscle atrophy or fibrosis, and bony lesions such as osteochondroma or a prominent superomedial angle",
+      "Examination looks for crepitus, tenderness, scapular winging and dyskinesis",
+      "Imaging (radiographs, CT for bony lesions, MRI or ultrasound for soft tissue and bursae) is used when a structural cause is suspected",
+      "Most cases respond to conservative management with postural and scapular stabilisation rehabilitation, load modification and sometimes bursal injection; surgery is reserved for structural lesions or refractory bursitis"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs including tangential scapular views, CT to define bony lesions such as an osteochondroma or a prominent angle,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The scapula glides over the posterior chest wall at the scapulothoracic articulation, cushioned by bursae. Snapping scapula syndrome arises when this smooth gliding is disturbed, whether by inflamed or fibrotic scapulothoracic bursae, by altered muscle bulk or scarring, or by bony incongruity such as an osteochondroma, a prominent superomedial angle or a malunited rib or scapular fracture. Repetitive overhead loading, scapular dyskinesis and poor posture contribute. The result is symptomatic crepitus and pain as the scapula tracks over the chest wall.",
+    "additionalDifferentials": [
+      "Isolated scapulothoracic bursitis",
+      "Osteochondroma or other bony lesion of the scapula or ribs",
+      "Scapular dyskinesis or muscle imbalance",
+      "Long thoracic or spinal accessory nerve palsy causing scapular winging",
+      "Cervicothoracic referred pain",
+      "Rotator cuff or glenohumeral pathology"
     ],
-    [
-     "Primary Differentials",
-     "Isolated scapulothoracic bursitis, Osteochondroma or other bony lesion of the scapula or ribs, Scapular dyskinesis or muscle",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs including tangential scapular views",
+      "CT to define bony lesions such as an osteochondroma or a prominent angle",
+      "MRI or ultrasound to assess the bursae and soft tissues",
+      "Clinical assessment of scapular motion, winging and dyskinesis",
+      "Diagnostic bursal injection where scapulothoracic bursitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "First-line scapular rehabilitation addressing scapular dyskinesis, posture and periscapular muscle strengthening, with load",
-     "Core treatment modality"
+    "redFlags": [
+      "Fixed scapular winging suggesting a nerve palsy (long thoracic or spinal accessory)",
+      "A firm mass or rapidly growing lesion suggesting tumour",
+      "Night pain or systemic features suggesting neoplasm or infection",
+      "Progressive neurological deficit"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing symptomatic crepitus to a benign cause without excluding an osteochondroma or other bony lesion",
-     "Prevent diagnostic or management error"
+    "prognosis": "The majority improve with scapular rehabilitation and load management; outcomes are good after excision when a discrete bony lesion is the cause.",
+    "pitfalls": [
+      "Attributing symptomatic crepitus to a benign cause without excluding an osteochondroma or other bony lesion",
+      "Missing a nerve palsy as a cause of associated winging",
+      "Neglecting scapular dyskinesis and posture in rehabilitation",
+      "Rushing to surgery before a trial of conservative care in non-structural cases"
+    ],
+    "references": [
+      "Brukner and Khan's Clinical Sports Medicine",
+      "British Journal of Sports Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line scapular rehabilitation addressing scapular dyskinesis, posture and periscapular muscle strengthening, with load management.",
+      "Non-steroidal anti-inflammatory drugs and corticosteroid injection into a symptomatic scapulothoracic bursa.",
+      "Scapulothoracic bursectomy for bursitis refractory to conservative care.",
+      "Excision of a discrete bony lesion such as an osteochondroma or a prominent superomedial angle, which gives good results.",
+      "Activity modification to reduce repetitive overhead and throwing loads.",
+      "Refer to sports medicine or shoulder surgery for persistent symptoms or a structural cause."
     ]
-   ],
-   "caption": "Overview comparison matrix for snapping scapula syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "snapping-scapula-syndrome-real-image",
-   "title": "Snapping scapula syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "snapping_scapula_syndrome-pathway",
+      "title": "Snapping scapula syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Painful audible or palpable snapping or grating (crepitus) of the scapula on the chest wall during shoulder movement",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fixed scapular winging suggesting a nerve palsy (long thoracic or spinal accessory)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs including tangential scapular views, CT to define bony lesions such as an osteochondroma or a prominent angle, MRI or ultrasound to assess the bursae and soft tissues"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line scapular rehabilitation addressing scapular dyskinesis, posture and periscapular muscle strengthening, with load management."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing symptomatic crepitus to a benign cause without excluding an osteochondroma or other bony lesion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of snapping scapula syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "snapping_scapula_syndrome-matrix",
+      "title": "Snapping scapula syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Painful audible or palpable snapping or grating (crepitus) of the scapula on the chest wall during shoulder movement",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs including tangential scapular views, CT to define bony lesions such as an osteochondroma or a prominent angle,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated scapulothoracic bursitis, Osteochondroma or other bony lesion of the scapula or ribs, Scapular dyskinesis or muscle",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line scapular rehabilitation addressing scapular dyskinesis, posture and periscapular muscle strengthening, with load",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing symptomatic crepitus to a benign cause without excluding an osteochondroma or other bony lesion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for snapping scapula syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "snapping_scapula_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs with tangential scapular views",
+          "cells": [
+            {
+              "text": "Bony lesion or prominent superomedial angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Bony lesions such as osteochondroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound",
+          "cells": [
+            {
+              "text": "Bursae and soft tissues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment of scapular motion",
+          "cells": [
+            {
+              "text": "Crepitus, winging and dyskinesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic bursal injection",
+          "cells": [
+            {
+              "text": "Confirms scapulothoracic bursitis when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "snapping_scapula_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteochondroma or other bony lesion of the scapula or ribs",
+          "cells": [
+            {
+              "text": "Discrete bony lesion; excision gives good results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long thoracic or spinal accessory nerve palsy",
+          "cells": [
+            {
+              "text": "Causes fixed scapular winging; a nerve palsy must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "snapping_scapula_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Scapular rehabilitation",
+          "cells": [
+            {
+              "text": "Dyskinesis, posture and periscapular strengthening with load management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs and bursal corticosteroid injection",
+          "cells": [
+            {
+              "text": "For a symptomatic scapulothoracic bursa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scapulothoracic bursectomy",
+          "cells": [
+            {
+              "text": "Bursitis refractory to conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision of bony lesion",
+          "cells": [
+            {
+              "text": "Osteochondroma or prominent superomedial angle; good results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Reduces repetitive overhead and throwing loads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sports medicine or shoulder surgery referral",
+          "cells": [
+            {
+              "text": "Persistent symptoms or a structural cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "snapping_scapula_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Snapping scapula syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful scapular snapping or crepitus on arm movement: suspected snapping scapula",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fixed winging, firm growing mass, night pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for tumour, infection or progressive neurological deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs with tangential views; CT for bone; MRI or ultrasound for bursae",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a bony lesion or scapulothoracic bursitis confirmed on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cervicothoracic pain or rotator cuff pathology; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Scapular rehabilitation with load management",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs and bursal corticosteroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excise a bony lesion such as osteochondroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bursectomy for bursitis refractory to conservative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most respond to conservative care; excision of bony lesions gives good results",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

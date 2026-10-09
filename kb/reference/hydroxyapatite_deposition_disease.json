@@ -1,175 +1,489 @@
 {
- "id": "hydroxyapatite_deposition_disease",
- "name": "Hydroxyapatite deposition disease",
- "aliases": [
-  "HADD",
-  "calcific tendinitis",
-  "apatite deposition disease",
-  "calcific periarthritis",
-  "hydroxyapatite rheumatism"
- ],
- "class": "non_infective",
- "system": "Rheumatology",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hydroxyapatite deposition disease (HADD) is caused by deposition of hydroxyapatite, a basic calcium phosphate crystal, within tendons, bursae, and other periarticular soft tissues",
-   "Its best-known form is calcific tendinitis, most frequently affecting the rotator cuff (especially the supraspinatus) at the shoulder, but also the hip, elbow, wrist, and around the spine (for example longus colli tendinitis)",
-   "Patients may be asymptomatic, have a chronic ache, or suffer acute attacks of severe pain when a deposit becomes inflamed or ruptures into an adjacent bursa during the resorptive phase",
-   "Radiographs show rounded or cloud-like calcific deposits within tendons whose appearance evolves through formative and resorptive phases, and deposits may disappear over time",
-   "It commonly presents in middle age, can be bilateral, and must be distinguished from an avulsion fracture and from tumoral calcinosis",
-   "The crystals are non-birefringent and not seen on standard polarised microscopy, so the diagnosis is largely clinical and radiological",
-   "Management is symptomatic, using rest, anti-inflammatory therapy, physiotherapy, and ultrasound-guided needling (barbotage) or aspiration, with surgery reserved for refractory deposits"
+  "id": "hydroxyapatite_deposition_disease",
+  "name": "Hydroxyapatite deposition disease",
+  "aliases": [
+    "HADD",
+    "calcific tendinitis",
+    "apatite deposition disease",
+    "calcific periarthritis",
+    "hydroxyapatite rheumatism"
   ],
-  "pathophysiology": "Hydroxyapatite crystals are deposited within tendons and periarticular soft tissue, often at sites of relative hypovascularity or altered cell metabolism such as the rotator cuff. The disease progresses through phases: a quiescent formative phase of crystal accumulation followed by a resorptive phase in which the deposit becomes vascularised and crystals are shed, provoking intense inflammation and acute pain. Rupture of a deposit into a neighbouring bursa produces acute calcific bursitis. Over time deposits may resorb completely, which is why the radiographic appearance changes and symptoms often ultimately settle.",
-  "additionalDifferentials": [
-   "Rotator cuff tendinopathy or tear",
-   "Adhesive capsulitis of the shoulder",
-   "Gout or CPP crystal arthritis",
-   "Septic bursitis or arthritis",
-   "Avulsion fracture",
-   "Tumoral calcinosis or soft-tissue calcification from other causes"
-  ],
-  "additionalInvestigations": [
-   "Radiographs to identify and stage the calcific deposits",
-   "Ultrasound to characterise deposits and to guide barbotage or aspiration",
-   "MRI for associated rotator cuff pathology or when the diagnosis is unclear",
-   "Aspiration and analysis of bursal fluid with culture to exclude infection during acute attacks",
-   "Alizarin red staining to suggest calcium-containing crystals, which are non-birefringent on polarised light",
-   "Cross-sectional CT for deep or atypical sites such as retropharyngeal longus colli tendinitis"
-  ],
-  "redFlags": [
-   "Acute severe pain with fever mimicking septic arthritis or bursitis",
-   "Retropharyngeal (longus colli) calcific tendinitis presenting with acute neck pain and dysphagia",
-   "Rapidly destructive joint changes suggesting a BCP-related destructive arthropathy"
-  ],
-  "prognosis": "The natural history is often favourable, with acute episodes settling and deposits frequently resorbing spontaneously; most patients recover with conservative treatment, although some experience recurrent or persistent symptoms requiring intervention.",
-  "pitfalls": [
-   "Mistaking a periarticular calcific deposit for an avulsion fracture",
-   "Treating self-limiting acute calcific tendinitis as infection",
-   "Failing to recognise atypical sites such as retropharyngeal longus colli tendinitis",
-   "Expecting polarised microscopy to reveal the non-birefringent crystals"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Oxford Textbook of Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative management of acute calcific tendinitis with rest, analgesia, and non-steroidal anti-inflammatory drugs",
-   "Physiotherapy to restore range of movement and function",
-   "Ultrasound-guided barbotage (needle aspiration and lavage) of symptomatic deposits",
-   "Local corticosteroid injection into the subacromial space or affected bursa for persistent pain",
-   "Extracorporeal shockwave therapy for chronic or resistant deposits",
-   "Arthroscopic or surgical removal of the deposit for refractory disease",
-   "Aspiration and culture to exclude septic bursitis during a severe acute attack",
-   "Reassurance that the natural history is often self-limiting with spontaneous resorption of deposits"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hydroxyapatite_deposition_disease-pathway",
-   "title": "Hydroxyapatite deposition disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hydroxyapatite deposition disease (HADD) is caused by deposition of hydroxyapatite, a basic calcium phosphate crystal, within tendons, bursae, and other periarticular soft tissues",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe pain with fever mimicking septic arthritis or bursitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Radiographs to identify and stage the calcific deposits, Ultrasound to characterise deposits and to guide barbotage or aspiration, MRI for associated rotator cuff pathology or when the diagnosis is unclear"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative management of acute calcific tendinitis with rest, analgesia, and non-steroidal anti-inflammatory drugs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a periarticular calcific deposit for an avulsion fracture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hydroxyapatite deposition disease."
-  }
- ],
- "tables": [
-  {
-   "id": "hydroxyapatite_deposition_disease-matrix",
-   "title": "Hydroxyapatite deposition disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hydroxyapatite deposition disease (HADD) is caused by deposition of hydroxyapatite, a basic calcium phosphate crystal, within",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hydroxyapatite deposition disease (HADD) is caused by deposition of hydroxyapatite, a basic calcium phosphate crystal, within tendons, bursae, and other periarticular soft tissues",
+      "Its best-known form is calcific tendinitis, most frequently affecting the rotator cuff (especially the supraspinatus) at the shoulder, but also the hip, elbow, wrist, and around the spine (for example longus colli tendinitis)",
+      "Patients may be asymptomatic, have a chronic ache, or suffer acute attacks of severe pain when a deposit becomes inflamed or ruptures into an adjacent bursa during the resorptive phase",
+      "Radiographs show rounded or cloud-like calcific deposits within tendons whose appearance evolves through formative and resorptive phases, and deposits may disappear over time",
+      "It commonly presents in middle age, can be bilateral, and must be distinguished from an avulsion fracture and from tumoral calcinosis",
+      "The crystals are non-birefringent and not seen on standard polarised microscopy, so the diagnosis is largely clinical and radiological",
+      "Management is symptomatic, using rest, anti-inflammatory therapy, physiotherapy, and ultrasound-guided needling (barbotage) or aspiration, with surgery reserved for refractory deposits"
     ],
-    [
-     "Key Investigations",
-     "Radiographs to identify and stage the calcific deposits, Ultrasound to characterise deposits and to guide barbotage or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hydroxyapatite crystals are deposited within tendons and periarticular soft tissue, often at sites of relative hypovascularity or altered cell metabolism such as the rotator cuff. The disease progresses through phases: a quiescent formative phase of crystal accumulation followed by a resorptive phase in which the deposit becomes vascularised and crystals are shed, provoking intense inflammation and acute pain. Rupture of a deposit into a neighbouring bursa produces acute calcific bursitis. Over time deposits may resorb completely, which is why the radiographic appearance changes and symptoms often ultimately settle.",
+    "additionalDifferentials": [
+      "Rotator cuff tendinopathy or tear",
+      "Adhesive capsulitis of the shoulder",
+      "Gout or CPP crystal arthritis",
+      "Septic bursitis or arthritis",
+      "Avulsion fracture",
+      "Tumoral calcinosis or soft-tissue calcification from other causes"
     ],
-    [
-     "Primary Differentials",
-     "Rotator cuff tendinopathy or tear, Adhesive capsulitis of the shoulder, Gout or CPP crystal arthritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Radiographs to identify and stage the calcific deposits",
+      "Ultrasound to characterise deposits and to guide barbotage or aspiration",
+      "MRI for associated rotator cuff pathology or when the diagnosis is unclear",
+      "Aspiration and analysis of bursal fluid with culture to exclude infection during acute attacks",
+      "Alizarin red staining to suggest calcium-containing crystals, which are non-birefringent on polarised light",
+      "Cross-sectional CT for deep or atypical sites such as retropharyngeal longus colli tendinitis"
     ],
-    [
-     "Management Strategy",
-     "Conservative management of acute calcific tendinitis with rest, analgesia, and non-steroidal anti-inflammatory drugs",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe pain with fever mimicking septic arthritis or bursitis",
+      "Retropharyngeal (longus colli) calcific tendinitis presenting with acute neck pain and dysphagia",
+      "Rapidly destructive joint changes suggesting a BCP-related destructive arthropathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a periarticular calcific deposit for an avulsion fracture",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is often favourable, with acute episodes settling and deposits frequently resorbing spontaneously; most patients recover with conservative treatment, although some experience recurrent or persistent symptoms requiring intervention.",
+    "pitfalls": [
+      "Mistaking a periarticular calcific deposit for an avulsion fracture",
+      "Treating self-limiting acute calcific tendinitis as infection",
+      "Failing to recognise atypical sites such as retropharyngeal longus colli tendinitis",
+      "Expecting polarised microscopy to reveal the non-birefringent crystals"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Oxford Textbook of Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative management of acute calcific tendinitis with rest, analgesia, and non-steroidal anti-inflammatory drugs",
+      "Physiotherapy to restore range of movement and function",
+      "Ultrasound-guided barbotage (needle aspiration and lavage) of symptomatic deposits",
+      "Local corticosteroid injection into the subacromial space or affected bursa for persistent pain",
+      "Extracorporeal shockwave therapy for chronic or resistant deposits",
+      "Arthroscopic or surgical removal of the deposit for refractory disease",
+      "Aspiration and culture to exclude septic bursitis during a severe acute attack",
+      "Reassurance that the natural history is often self-limiting with spontaneous resorption of deposits"
     ]
-   ],
-   "caption": "Overview comparison matrix for hydroxyapatite deposition disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hydroxyapatite-deposition-disease-real-image",
-   "title": "Hydroxyapatite deposition disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hydroxyapatite_deposition_disease-pathway",
+      "title": "Hydroxyapatite deposition disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hydroxyapatite deposition disease (HADD) is caused by deposition of hydroxyapatite, a basic calcium phosphate crystal, within tendons, bursae, and other periarticular soft tissues",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe pain with fever mimicking septic arthritis or bursitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Radiographs to identify and stage the calcific deposits, Ultrasound to characterise deposits and to guide barbotage or aspiration, MRI for associated rotator cuff pathology or when the diagnosis is unclear"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative management of acute calcific tendinitis with rest, analgesia, and non-steroidal anti-inflammatory drugs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a periarticular calcific deposit for an avulsion fracture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hydroxyapatite deposition disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hydroxyapatite_deposition_disease-matrix",
+      "title": "Hydroxyapatite deposition disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hydroxyapatite deposition disease (HADD) is caused by deposition of hydroxyapatite, a basic calcium phosphate crystal, within",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Radiographs to identify and stage the calcific deposits, Ultrasound to characterise deposits and to guide barbotage or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rotator cuff tendinopathy or tear, Adhesive capsulitis of the shoulder, Gout or CPP crystal arthritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative management of acute calcific tendinitis with rest, analgesia, and non-steroidal anti-inflammatory drugs",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a periarticular calcific deposit for an avulsion fracture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hydroxyapatite deposition disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydroxyapatite_deposition_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Calcific deposits identified and staged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Deposit characterisation; guides aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Rotator cuff pathology, or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration and analysis of bursal fluid with culture",
+          "cells": [
+            {
+              "text": "Excludes septic bursitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alizarin red staining",
+          "cells": [
+            {
+              "text": "Calcium-containing deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT for deep or atypical sites",
+          "cells": [
+            {
+              "text": "Deep deposits"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydroxyapatite_deposition_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gout or CPP crystal arthritis",
+          "cells": [
+            {
+              "text": "Crystal analysis on aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic bursitis or arthritis",
+          "cells": [
+            {
+              "text": "Culture of aspirate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rotator cuff tear",
+          "cells": [
+            {
+              "text": "Cuff pathology on MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumoral calcinosis or soft-tissue calcification",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydroxyapatite_deposition_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Acute calcific tendinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Restores range of movement and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound-guided barbotage",
+          "cells": [
+            {
+              "text": "Needle aspiration and lavage of the deposit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local corticosteroid injection",
+          "cells": [
+            {
+              "text": "Subacromial space"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extracorporeal shockwave therapy",
+          "cells": [
+            {
+              "text": "Chronic or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic or surgical removal",
+          "cells": [
+            {
+              "text": "Deposit, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration and culture",
+          "cells": [
+            {
+              "text": "Exclude septic bursitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Often self-limiting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydroxyapatite_deposition_disease-dx-mgmt",
+      "title": "Diagnosis and management of Hydroxyapatite deposition disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute painful shoulder with a calcific deposit on radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe pain with fever, retropharyngeal calcific tendinitis, or destructive joint change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude septic bursitis or arthritis by aspiration and culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs; ultrasound; MRI if cuff pathology; aspiration and culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aspiration show calcium-containing deposits without infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider septic bursitis, gout or CPP crystal disease, cuff tear or tumoral calcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care for acute calcific tendinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ultrasound-guided barbotage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Local corticosteroid injection into the subacromial space",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Extracorporeal shockwave for chronic or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often self-limiting; procedures for persistent pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

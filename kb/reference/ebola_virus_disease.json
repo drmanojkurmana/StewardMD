@@ -1,179 +1,742 @@
 {
- "id": "ebola_virus_disease",
- "name": "Ebola virus disease",
- "aliases": [
-  "Ebola",
-  "EVD",
-  "Ebola haemorrhagic fever",
-  "VHF"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A severe viral haemorrhagic fever caused by filoviruses (Ebolavirus), with fruit bats implicated as the likely reservoir and human outbreaks often seeded by contact with infected wildlife or bushmeat",
-   "Human-to-human spread occurs through direct contact with blood or body fluids of symptomatic patients and with contaminated surfaces, and corpses remain highly infectious",
-   "Illness begins abruptly with fever, profound malaise, myalgia, and headache, followed by prominent gastrointestinal symptoms such as vomiting and profuse diarrhoea causing major fluid losses",
-   "Overt haemorrhage occurs in a minority, and much of the mortality is driven by volume depletion, electrolyte disturbance, and shock rather than bleeding alone",
-   "High-quality supportive care with aggressive fluid and electrolyte replacement substantially improves survival, and specific monoclonal antibody therapies are now available",
-   "This is a public health emergency demanding strict isolation, full personal protective equipment, safe and dignified burial practices, and immediate notification to authorities",
-   "Prevention includes vaccination of contacts and at-risk groups (ring vaccination) and rigorous infection-prevention measures in healthcare settings"
+  "id": "ebola_virus_disease",
+  "name": "Ebola virus disease",
+  "aliases": [
+    "Ebola",
+    "EVD",
+    "Ebola haemorrhagic fever",
+    "VHF"
   ],
-  "pathophysiology": "Ebolaviruses are enveloped RNA filoviruses that infect a broad range of cells, including macrophages, dendritic cells, and endothelium, while actively suppressing interferon-based innate immunity. Widespread viral replication drives a massive dysregulated inflammatory and cytokine response, impaired coagulation with disseminated intravascular coagulation, and increased vascular permeability. The combination of capillary leak, huge gastrointestinal fluid losses, and coagulopathy produces intravascular volume depletion, shock, and multi-organ failure, which underlie the high mortality.",
-  "additionalDifferentials": [
-   "Severe malaria",
-   "Typhoid fever",
-   "Other viral haemorrhagic fevers (Lassa, Marburg, CCHF)",
-   "Bacterial sepsis and meningococcaemia",
-   "Severe gastroenteritis with dehydration",
-   "Leptospirosis"
-  ],
-  "infectionMimics": [
-   "Severe malaria",
-   "Typhoid fever",
-   "Marburg and other viral haemorrhagic fevers",
-   "Bacterial sepsis"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR for Ebola viral RNA as the primary diagnostic test, performed under maximal biosafety",
-   "Antigen detection and serology (IgM/IgG) where appropriate",
-   "Malaria testing and other investigations to exclude common endemic causes, done with strict precautions",
-   "Electrolytes, renal and liver function, and coagulation studies to guide supportive care",
-   "All specimen collection and transport coordinated with designated laboratories and public health authorities"
-  ],
-  "redFlags": [
-   "Profuse vomiting and diarrhoea with signs of severe volume depletion and shock",
-   "Bleeding, bruising, or laboratory evidence of disseminated intravascular coagulation",
-   "Confusion, agitation, or other neurological deterioration",
-   "Any suspected case is a public health emergency requiring immediate isolation, full PPE, and notification, given the extreme transmission risk"
-  ],
-  "prognosis": "Untreated Ebola virus disease has historically carried very high case-fatality, but early presentation, intensive supportive care, and specific antibody therapies markedly improve survival; convalescence can be prolonged and survivors may experience persistent symptoms and viral persistence in immune-privileged sites.",
-  "pitfalls": [
-   "Failing to isolate and don appropriate PPE promptly, risking healthcare-associated outbreaks",
-   "Under-resuscitating patients by focusing on bleeding while overlooking massive gastrointestinal fluid losses",
-   "Attributing illness solely to malaria or typhoid in an outbreak or travel context and delaying containment",
-   "Neglecting safe burial practices and contact tracing, which are central to outbreak control"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give specific monoclonal antibody therapy (ansuvimab or the atoltivimab-maftivimab-odesivimab combination) early to improve survival",
-   "Deliver aggressive oral and intravenous fluid resuscitation with electrolyte replacement to counter gastrointestinal losses and hypovolaemic shock, the core of survival",
-   "Provide symptomatic care with antiemetics, antipyretics and analgesia and nutritional support, correcting coagulopathy and supporting failing organs",
-   "Treat concurrent malaria and secondary bacterial infection empirically given endemic co-infection",
-   "Institute strict isolation, full personal protective equipment and safe, dignified burial practices to prevent transmission",
-   "Notify public health authorities immediately, coordinate specimen handling under maximal biosafety, and undertake contact tracing with ring vaccination of contacts",
-   "Arrange survivor follow-up for persistent sequelae and viral persistence in immune-privileged sites such as the eye, central nervous system and semen"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ebola_virus_disease-pathway",
-   "title": "Ebola virus disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A severe viral haemorrhagic fever caused by filoviruses (Ebolavirus), with fruit bats implicated as the likely reservoir and human outbreaks often seeded by contact with infected wildlife or bushmeat",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Profuse vomiting and diarrhoea with signs of severe volume depletion and shock",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR for Ebola viral RNA as the primary diagnostic test, performed under maximal biosafety, Antigen detection and serology (IgM/IgG) where appropriate, Malaria testing and other investigations to exclude common endemic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give specific monoclonal antibody therapy (ansuvimab or the atoltivimab-maftivimab-odesivimab combination) early to improve survival"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to isolate and don appropriate PPE promptly, risking healthcare-associated outbreaks"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ebola virus disease."
-  }
- ],
- "tables": [
-  {
-   "id": "ebola_virus_disease-matrix",
-   "title": "Ebola virus disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A severe viral haemorrhagic fever caused by filoviruses (Ebolavirus), with fruit bats implicated as the likely reservoir and",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A severe viral haemorrhagic fever caused by filoviruses (Ebolavirus), with fruit bats implicated as the likely reservoir and human outbreaks often seeded by contact with infected wildlife or bushmeat",
+      "Human-to-human spread occurs through direct contact with blood or body fluids of symptomatic patients and with contaminated surfaces, and corpses remain highly infectious",
+      "Illness begins abruptly with fever, profound malaise, myalgia, and headache, followed by prominent gastrointestinal symptoms such as vomiting and profuse diarrhoea causing major fluid losses",
+      "Overt haemorrhage occurs in a minority, and much of the mortality is driven by volume depletion, electrolyte disturbance, and shock rather than bleeding alone",
+      "High-quality supportive care with aggressive fluid and electrolyte replacement substantially improves survival, and specific monoclonal antibody therapies are now available",
+      "This is a public health emergency demanding strict isolation, full personal protective equipment, safe and dignified burial practices, and immediate notification to authorities",
+      "Prevention includes vaccination of contacts and at-risk groups (ring vaccination) and rigorous infection-prevention measures in healthcare settings"
     ],
-    [
-     "Key Investigations",
-     "RT-PCR for Ebola viral RNA as the primary diagnostic test, performed under maximal biosafety, Antigen detection and serology",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ebolaviruses are enveloped RNA filoviruses that infect a broad range of cells, including macrophages, dendritic cells, and endothelium, while actively suppressing interferon-based innate immunity. Widespread viral replication drives a massive dysregulated inflammatory and cytokine response, impaired coagulation with disseminated intravascular coagulation, and increased vascular permeability. The combination of capillary leak, huge gastrointestinal fluid losses, and coagulopathy produces intravascular volume depletion, shock, and multi-organ failure, which underlie the high mortality.",
+    "additionalDifferentials": [
+      "Severe malaria",
+      "Typhoid fever",
+      "Other viral haemorrhagic fevers (Lassa, Marburg, CCHF)",
+      "Bacterial sepsis and meningococcaemia",
+      "Severe gastroenteritis with dehydration",
+      "Leptospirosis"
     ],
-    [
-     "Primary Differentials",
-     "Severe malaria, Typhoid fever, Other viral haemorrhagic fevers (Lassa, Marburg, CCHF)",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Severe malaria",
+      "Typhoid fever",
+      "Marburg and other viral haemorrhagic fevers",
+      "Bacterial sepsis"
     ],
-    [
-     "Management Strategy",
-     "Give specific monoclonal antibody therapy (ansuvimab or the atoltivimab-maftivimab-odesivimab combination) early to improve",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "RT-PCR for Ebola viral RNA as the primary diagnostic test, performed under maximal biosafety",
+      "Antigen detection and serology (IgM/IgG) where appropriate",
+      "Malaria testing and other investigations to exclude common endemic causes, done with strict precautions",
+      "Electrolytes, renal and liver function, and coagulation studies to guide supportive care",
+      "All specimen collection and transport coordinated with designated laboratories and public health authorities"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to isolate and don appropriate PPE promptly, risking healthcare-associated outbreaks",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Profuse vomiting and diarrhoea with signs of severe volume depletion and shock",
+      "Bleeding, bruising, or laboratory evidence of disseminated intravascular coagulation",
+      "Confusion, agitation, or other neurological deterioration",
+      "Any suspected case is a public health emergency requiring immediate isolation, full PPE, and notification, given the extreme transmission risk"
+    ],
+    "prognosis": "Untreated Ebola virus disease has historically carried very high case-fatality, but early presentation, intensive supportive care, and specific antibody therapies markedly improve survival; convalescence can be prolonged and survivors may experience persistent symptoms and viral persistence in immune-privileged sites.",
+    "pitfalls": [
+      "Failing to isolate and don appropriate PPE promptly, risking healthcare-associated outbreaks",
+      "Under-resuscitating patients by focusing on bleeding while overlooking massive gastrointestinal fluid losses",
+      "Attributing illness solely to malaria or typhoid in an outbreak or travel context and delaying containment",
+      "Neglecting safe burial practices and contact tracing, which are central to outbreak control"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give specific monoclonal antibody therapy (ansuvimab or the atoltivimab-maftivimab-odesivimab combination) early to improve survival",
+      "Deliver aggressive oral and intravenous fluid resuscitation with electrolyte replacement to counter gastrointestinal losses and hypovolaemic shock, the core of survival",
+      "Provide symptomatic care with antiemetics, antipyretics and analgesia and nutritional support, correcting coagulopathy and supporting failing organs",
+      "Treat concurrent malaria and secondary bacterial infection empirically given endemic co-infection",
+      "Institute strict isolation, full personal protective equipment and safe, dignified burial practices to prevent transmission",
+      "Notify public health authorities immediately, coordinate specimen handling under maximal biosafety, and undertake contact tracing with ring vaccination of contacts",
+      "Arrange survivor follow-up for persistent sequelae and viral persistence in immune-privileged sites such as the eye, central nervous system and semen"
     ]
-   ],
-   "caption": "Overview comparison matrix for ebola virus disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ebola-virus-disease-real-image",
-   "title": "Ebola virus disease: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "ebola_virus_disease-pathway",
+      "title": "Ebola virus disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A severe viral haemorrhagic fever caused by filoviruses (Ebolavirus), with fruit bats implicated as the likely reservoir and human outbreaks often seeded by contact with infected wildlife or bushmeat",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Profuse vomiting and diarrhoea with signs of severe volume depletion and shock",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR for Ebola viral RNA as the primary diagnostic test, performed under maximal biosafety, Antigen detection and serology (IgM/IgG) where appropriate, Malaria testing and other investigations to exclude common endemic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give specific monoclonal antibody therapy (ansuvimab or the atoltivimab-maftivimab-odesivimab combination) early to improve survival"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to isolate and don appropriate PPE promptly, risking healthcare-associated outbreaks"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ebola virus disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ebola_virus_disease-matrix",
+      "title": "Ebola virus disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A severe viral haemorrhagic fever caused by filoviruses (Ebolavirus), with fruit bats implicated as the likely reservoir and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR for Ebola viral RNA as the primary diagnostic test, performed under maximal biosafety, Antigen detection and serology",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Severe malaria, Typhoid fever, Other viral haemorrhagic fevers (Lassa, Marburg, CCHF)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give specific monoclonal antibody therapy (ansuvimab or the atoltivimab-maftivimab-odesivimab combination) early to improve",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to isolate and don appropriate PPE promptly, risking healthcare-associated outbreaks",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ebola virus disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 196-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 221-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ebola_virus_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR for Ebola viral RNA under maximal biosafety",
+          "cells": [
+            {
+              "text": "Ebola viral RNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antigen detection and IgM/IgG serology",
+          "cells": [
+            {
+              "text": "Antigen or antibody response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malaria testing",
+          "cells": [
+            {
+              "text": "Endemic co-infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes, renal and liver function and coagulation",
+          "cells": [
+            {
+              "text": "Severity and supportive care needs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ebola_virus_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe malaria",
+          "cells": [
+            {
+              "text": "Endemic fever with a similar presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typhoid fever",
+          "cells": [
+            {
+              "text": "Fever with gastrointestinal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lassa, Marburg or CCHF",
+          "cells": [
+            {
+              "text": "Other viral haemorrhagic fevers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ebola_virus_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Monoclonal antibody therapy",
+          "cells": [
+            {
+              "text": "Ansuvimab or atoltivimab-maftivimab-odesivimab early to improve survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and electrolyte resuscitation",
+          "cells": [
+            {
+              "text": "Counters gastrointestinal losses and hypovolaemic shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic and organ care",
+          "cells": [
+            {
+              "text": "Antiemetics, antipyretics, nutrition, coagulopathy and failing organs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical treatment",
+          "cells": [
+            {
+              "text": "Malaria and secondary bacterial infection given endemic co-infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation and safe burial",
+          "cells": [
+            {
+              "text": "Strict isolation, full PPE and safe burial practices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health response",
+          "cells": [
+            {
+              "text": "Notification, contact tracing and ring vaccination of contacts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Survivor follow-up",
+          "cells": [
+            {
+              "text": "Sequelae and viral persistence in eye, central nervous system and semen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ebola_virus_disease-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Viral hemorrhagic fever syndromes and their distribution",
+      "rowHeader": "Disease",
+      "columns": [
+        "Incubation period, days",
+        "Case-infection ratio",
+        "Case-fatality rate, %",
+        "Geographic range",
+        "Target population"
+      ],
+      "rows": [
+        {
+          "parameter": "Lassa fever",
+          "cells": [
+            {
+              "text": "5 to 16"
+            },
+            {
+              "text": "Mild infections probably common"
+            },
+            {
+              "text": "15"
+            },
+            {
+              "text": "West Africa"
+            },
+            {
+              "text": "All ages, both sexes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "South American HF",
+          "cells": [
+            {
+              "text": "7 to 14"
+            },
+            {
+              "text": "Most infections (more than half) result in disease"
+            },
+            {
+              "text": "15 to 30"
+            },
+            {
+              "text": "Selected rural areas of Bolivia, Argentina, Venezuela and Brazil"
+            },
+            {
+              "text": "Bolivia: men in the countryside; all ages and both sexes in villages. Argentina: all ages, both sexes; excess exposure and disease in men. Venezuela: all ages, both sexes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rift Valley fever",
+          "cells": [
+            {
+              "text": "2 to 5"
+            },
+            {
+              "text": "About 1:100"
+            },
+            {
+              "text": "About 50"
+            },
+            {
+              "text": "Sub-Saharan Africa, Madagascar, Egypt"
+            },
+            {
+              "text": "All ages, both sexes; more often diagnosed in men; preexisting liver disease may predispose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Crimean-Congo HF",
+          "cells": [
+            {
+              "text": "3 to 12"
+            },
+            {
+              "text": ">=1:5"
+            },
+            {
+              "text": "15 to 30"
+            },
+            {
+              "text": "Africa, Middle East, Turkey, Balkans, southern region of the former Soviet Union, western China"
+            },
+            {
+              "text": "All ages, both sexes; men more exposed in some settings"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HF with renal syndrome",
+          "cells": [
+            {
+              "text": "9 to 35"
+            },
+            {
+              "text": "Hantaan, >1:1.25; Puumala, 1:20"
+            },
+            {
+              "text": "Hantaan, 5 to 15; Puumala, <1"
+            },
+            {
+              "text": "Worldwide, depending on rodent reservoir"
+            },
+            {
+              "text": "Excess of male patients (partly from greater exposure); mainly adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hantavirus pulmonary syndrome",
+          "cells": [
+            {
+              "text": "About 7 to 28"
+            },
+            {
+              "text": "Very high"
+            },
+            {
+              "text": "40 to 50"
+            },
+            {
+              "text": "Americas"
+            },
+            {
+              "text": "Excess of male patients due to some occupational exposure; mainly adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Marburg or Ebola HF",
+          "cells": [
+            {
+              "text": "3 to 16"
+            },
+            {
+              "text": "High"
+            },
+            {
+              "text": "25 to 90"
+            },
+            {
+              "text": "Sub-Saharan Africa"
+            },
+            {
+              "text": "All ages, both sexes; children less exposed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Yellow fever",
+          "cells": [
+            {
+              "text": "3 to 6"
+            },
+            {
+              "text": "1:2 to 1:20"
+            },
+            {
+              "text": "20"
+            },
+            {
+              "text": "Africa, South America"
+            },
+            {
+              "text": "All ages, both sexes; adults more exposed in jungle setting; preexisting flavivirus immunity may cross-protect"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dengue HF/dengue shock syndrome",
+          "cells": [
+            {
+              "text": "2 to 7"
+            },
+            {
+              "text": "Nonimmune, 1:10,000; heterologous immune, 1:100"
+            },
+            {
+              "text": "<1 with supportive treatment"
+            },
+            {
+              "text": "Tropics and subtropics worldwide"
+            },
+            {
+              "text": "Predominantly children; previous heterologous dengue infection predisposes to HF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kyasanur Forest/Omsk HF",
+          "cells": [
+            {
+              "text": "3 to 8"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "0.5 to 10"
+            },
+            {
+              "text": "Mysore State, India / western Siberia"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Source footnote (a) on the Rift Valley fever case-infection ratio is not shown."
+    },
+    {
+      "id": "ebola_virus_disease-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "CDC category A, B and C bioterrorism agents",
+      "rowHeader": "Category",
+      "columns": [
+        "Agents"
+      ],
+      "rows": [
+        {
+          "parameter": "Category A",
+          "cells": [
+            {
+              "text": "Anthrax (Bacillus anthracis); botulism (Clostridium botulinum toxin); plague (Yersinia pestis); smallpox (Variola major); tularemia (Francisella tularensis); viral hemorrhagic fevers: arenaviruses (Lassa, New World: Machupo, Junin, Guanarito and Sabia), Bunyaviridae (Crimean-Congo, Rift Valley), Filoviridae (Ebola, Marburg)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Category B",
+          "cells": [
+            {
+              "text": "Brucellosis (Brucella spp.); epsilon toxin of Clostridium perfringens; food safety threats (for example Salmonella spp., Escherichia coli O157:H7, Shigella); glanders (Burkholderia mallei); melioidosis (B. pseudomallei); psittacosis (Chlamydophila psittaci); Q fever (Coxiella burnetii); ricin toxin from Ricinus communis (castor beans); staphylococcal enterotoxin B; typhus fever (Rickettsia prowazekii); viral encephalitis [alphaviruses, for example Venezuelan, eastern and western equine encephalitis]; water safety threats (for example Vibrio cholerae, Cryptosporidium parvum)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Category C",
+          "cells": [
+            {
+              "text": "Emerging infectious disease threats such as Nipah, hantavirus, SARS coronavirus and pandemic influenza"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ebola_virus_disease-dx-mgmt",
+      "title": "Diagnosis and management of Ebola virus disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Ebola virus disease: fever with haemorrhage in a patient with exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe fluid loss or shock, bleeding or DIC, confusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate isolation, full PPE and public health notification",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR for viral RNA under maximal biosafety; malaria test; electrolytes; coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Ebola viral RNA detected by RT-PCR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider severe malaria, typhoid, other viral haemorrhagic fever or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early monoclonal antibody therapy to improve survival",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive oral and intravenous fluid and electrolyte replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic care and correction of coagulopathy and failing organs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat concurrent malaria and secondary bacterial infection empirically",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Strict isolation, contact tracing and ring vaccination of contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early care and antibodies markedly improve survival; convalescence can be prolonged",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,613 @@
 {
- "id": "pernicious_anemia",
- "name": "Pernicious anaemia",
- "aliases": [
-  "Addison-Biermer anaemia",
-  "autoimmune B12 deficiency",
-  "intrinsic factor deficiency anaemia"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / AABB technical manual",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autoimmune cause of vitamin B12 deficiency resulting from destruction of gastric parietal cells and loss of intrinsic factor",
-   "Produces a macrocytic megaloblastic anaemia, often with a raised mean cell volume, hypersegmented neutrophils and oval macrocytes on the film",
-   "Neurological features include subacute combined degeneration of the cord with paraesthesiae, sensory ataxia and impaired proprioception",
-   "Intrinsic-factor antibodies are specific but insensitive, whereas parietal-cell antibodies are sensitive but less specific",
-   "Autoimmune atrophic gastritis underlies the condition and carries an increased risk of gastric carcinoma and carcinoid tumours",
-   "Associated with other autoimmune conditions such as thyroid disease, vitiligo and type 1 diabetes",
-   "Management is lifelong vitamin B12 replacement, and neurological damage may become irreversible if treatment is delayed",
-   "Giving folate alone to a B12-deficient patient can precipitate or worsen neurological deterioration"
+  "id": "pernicious_anemia",
+  "name": "Pernicious anaemia",
+  "aliases": [
+    "Addison-Biermer anaemia",
+    "autoimmune B12 deficiency",
+    "intrinsic factor deficiency anaemia"
   ],
-  "pathophysiology": "Pernicious anaemia is caused by autoimmune destruction of the gastric mucosa. Immune attack on parietal cells produces atrophic gastritis and abolishes secretion of intrinsic factor, the protein required to bind dietary vitamin B12 and enable its absorption in the terminal ileum. Autoantibodies to intrinsic factor further block this process. The resulting B12 deficiency impairs DNA synthesis in rapidly dividing cells, causing megaloblastic maturation in the marrow with ineffective erythropoiesis and a macrocytic anaemia. Because B12 is also required for myelin metabolism, deficiency damages the dorsal columns and corticospinal tracts, producing subacute combined degeneration. Loss of acid and intrinsic factor secretion also impairs absorption of other nutrients and predisposes to gastric neoplasia.",
-  "additionalDifferentials": [
-   "Dietary vitamin B12 deficiency",
-   "Folate deficiency",
-   "Malabsorption such as coeliac disease or ileal resection",
-   "Myelodysplastic syndrome",
-   "Drug-induced macrocytosis",
-   "Alcohol-related or liver-disease macrocytosis"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film showing macrocytosis and hypersegmented neutrophils",
-   "Serum vitamin B12, typically low, with folate to assess for combined deficiency",
-   "Intrinsic-factor antibodies, highly specific for the diagnosis",
-   "Parietal-cell antibodies, sensitive but less specific",
-   "Markers of ineffective erythropoiesis such as raised lactate dehydrogenase and bilirubin",
-   "Endoscopy and gastric biopsy where atrophic gastritis or neoplasia is suspected"
-  ],
-  "redFlags": [
-   "Neurological signs of subacute combined degeneration requiring prompt replacement",
-   "Severe anaemia with cardiovascular compromise",
-   "Alarm symptoms suggesting gastric carcinoma in a patient with atrophic gastritis",
-   "Pancytopenia from profound megaloblastic marrow failure"
-  ],
-  "prognosis": "Haematological recovery with vitamin B12 replacement is excellent and rapid, but neurological deficits may only partly resolve if treatment is delayed, and lifelong surveillance is needed for the associated risk of gastric malignancy.",
-  "pitfalls": [
-   "Giving folate without B12 and precipitating neurological deterioration",
-   "Excluding the diagnosis on a normal mean cell volume, which can occur with coexisting iron deficiency",
-   "Overlooking neurological features that may precede overt anaemia",
-   "Failing to consider the increased long-term risk of gastric carcinoma"
-  ],
-  "references": [
-   "Williams Hematology",
-   "AABB Technical Manual"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Replace vitamin B12 with parenteral hydroxocobalamin, using an initial loading course followed by lifelong maintenance injections",
-   "Consider high-dose oral cobalamin for maintenance in selected, stable patients",
-   "Correct coexisting folate and iron deficiency, and monitor for hypokalaemia during the early haematological response",
-   "Assess for subacute combined degeneration and treat promptly, as delayed replacement leaves residual neurological deficits",
-   "Undertake endoscopic evaluation and surveillance for gastric carcinoma and carcinoid, given the underlying autoimmune atrophic gastritis",
-   "Screen for associated autoimmune disease such as thyroid disorder, vitiligo and type 1 diabetes",
-   "Monitor the haematological response with reticulocytosis and a normalising full blood count to confirm adequate replacement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pernicious_anemia-pathway",
-   "title": "Pernicious anaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autoimmune cause of vitamin B12 deficiency resulting from destruction of gastric parietal cells and loss of intrinsic factor",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological signs of subacute combined degeneration requiring prompt replacement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film showing macrocytosis and hypersegmented neutrophils, Serum vitamin B12, typically low, with folate to assess for combined deficiency, Intrinsic-factor antibodies, highly specific for the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replace vitamin B12 with parenteral hydroxocobalamin, using an initial loading course followed by lifelong maintenance injections"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving folate without B12 and precipitating neurological deterioration"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pernicious anaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "pernicious_anemia-matrix",
-   "title": "Pernicious anaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autoimmune cause of vitamin B12 deficiency resulting from destruction of gastric parietal cells and loss of intrinsic factor",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / AABB technical manual",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autoimmune cause of vitamin B12 deficiency resulting from destruction of gastric parietal cells and loss of intrinsic factor",
+      "Produces a macrocytic megaloblastic anaemia, often with a raised mean cell volume, hypersegmented neutrophils and oval macrocytes on the film",
+      "Neurological features include subacute combined degeneration of the cord with paraesthesiae, sensory ataxia and impaired proprioception",
+      "Intrinsic-factor antibodies are specific but insensitive, whereas parietal-cell antibodies are sensitive but less specific",
+      "Autoimmune atrophic gastritis underlies the condition and carries an increased risk of gastric carcinoma and carcinoid tumours",
+      "Associated with other autoimmune conditions such as thyroid disease, vitiligo and type 1 diabetes",
+      "Management is lifelong vitamin B12 replacement, and neurological damage may become irreversible if treatment is delayed",
+      "Giving folate alone to a B12-deficient patient can precipitate or worsen neurological deterioration"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film showing macrocytosis and hypersegmented neutrophils, Serum vitamin B12, typically low, with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pernicious anaemia is caused by autoimmune destruction of the gastric mucosa. Immune attack on parietal cells produces atrophic gastritis and abolishes secretion of intrinsic factor, the protein required to bind dietary vitamin B12 and enable its absorption in the terminal ileum. Autoantibodies to intrinsic factor further block this process. The resulting B12 deficiency impairs DNA synthesis in rapidly dividing cells, causing megaloblastic maturation in the marrow with ineffective erythropoiesis and a macrocytic anaemia. Because B12 is also required for myelin metabolism, deficiency damages the dorsal columns and corticospinal tracts, producing subacute combined degeneration. Loss of acid and intrinsic factor secretion also impairs absorption of other nutrients and predisposes to gastric neoplasia.",
+    "additionalDifferentials": [
+      "Dietary vitamin B12 deficiency",
+      "Folate deficiency",
+      "Malabsorption such as coeliac disease or ileal resection",
+      "Myelodysplastic syndrome",
+      "Drug-induced macrocytosis",
+      "Alcohol-related or liver-disease macrocytosis"
     ],
-    [
-     "Primary Differentials",
-     "Dietary vitamin B12 deficiency, Folate deficiency, Malabsorption such as coeliac disease or ileal resection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film showing macrocytosis and hypersegmented neutrophils",
+      "Serum vitamin B12, typically low, with folate to assess for combined deficiency",
+      "Intrinsic-factor antibodies, highly specific for the diagnosis",
+      "Parietal-cell antibodies, sensitive but less specific",
+      "Markers of ineffective erythropoiesis such as raised lactate dehydrogenase and bilirubin",
+      "Endoscopy and gastric biopsy where atrophic gastritis or neoplasia is suspected"
     ],
-    [
-     "Management Strategy",
-     "Replace vitamin B12 with parenteral hydroxocobalamin, using an initial loading course followed by lifelong maintenance injections",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological signs of subacute combined degeneration requiring prompt replacement",
+      "Severe anaemia with cardiovascular compromise",
+      "Alarm symptoms suggesting gastric carcinoma in a patient with atrophic gastritis",
+      "Pancytopenia from profound megaloblastic marrow failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving folate without B12 and precipitating neurological deterioration",
-     "Prevent diagnostic or management error"
+    "prognosis": "Haematological recovery with vitamin B12 replacement is excellent and rapid, but neurological deficits may only partly resolve if treatment is delayed, and lifelong surveillance is needed for the associated risk of gastric malignancy.",
+    "pitfalls": [
+      "Giving folate without B12 and precipitating neurological deterioration",
+      "Excluding the diagnosis on a normal mean cell volume, which can occur with coexisting iron deficiency",
+      "Overlooking neurological features that may precede overt anaemia",
+      "Failing to consider the increased long-term risk of gastric carcinoma"
+    ],
+    "references": [
+      "Williams Hematology",
+      "AABB Technical Manual"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Replace vitamin B12 with parenteral hydroxocobalamin, using an initial loading course followed by lifelong maintenance injections",
+      "Consider high-dose oral cobalamin for maintenance in selected, stable patients",
+      "Correct coexisting folate and iron deficiency, and monitor for hypokalaemia during the early haematological response",
+      "Assess for subacute combined degeneration and treat promptly, as delayed replacement leaves residual neurological deficits",
+      "Undertake endoscopic evaluation and surveillance for gastric carcinoma and carcinoid, given the underlying autoimmune atrophic gastritis",
+      "Screen for associated autoimmune disease such as thyroid disorder, vitiligo and type 1 diabetes",
+      "Monitor the haematological response with reticulocytosis and a normalising full blood count to confirm adequate replacement"
     ]
-   ],
-   "caption": "Overview comparison matrix for pernicious anaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pernicious-anemia-real-image",
-   "title": "Pernicious anaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "pernicious_anemia-pathway",
+      "title": "Pernicious anaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autoimmune cause of vitamin B12 deficiency resulting from destruction of gastric parietal cells and loss of intrinsic factor",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological signs of subacute combined degeneration requiring prompt replacement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film showing macrocytosis and hypersegmented neutrophils, Serum vitamin B12, typically low, with folate to assess for combined deficiency, Intrinsic-factor antibodies, highly specific for the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replace vitamin B12 with parenteral hydroxocobalamin, using an initial loading course followed by lifelong maintenance injections"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving folate without B12 and precipitating neurological deterioration"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pernicious anaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pernicious_anemia-matrix",
+      "title": "Pernicious anaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autoimmune cause of vitamin B12 deficiency resulting from destruction of gastric parietal cells and loss of intrinsic factor",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film showing macrocytosis and hypersegmented neutrophils, Serum vitamin B12, typically low, with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dietary vitamin B12 deficiency, Folate deficiency, Malabsorption such as coeliac disease or ileal resection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replace vitamin B12 with parenteral hydroxocobalamin, using an initial loading course followed by lifelong maintenance injections",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving folate without B12 and precipitating neurological deterioration",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pernicious anaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / AABB technical manual",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 105-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table e37-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pernicious_anemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Macrocytosis and hypersegmented neutrophils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum vitamin B12, with folate",
+          "cells": [
+            {
+              "text": "B12 typically low; folate checked for combined deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrinsic-factor antibodies",
+          "cells": [
+            {
+              "text": "Highly specific for the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parietal-cell antibodies",
+          "cells": [
+            {
+              "text": "Sensitive but less specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactate dehydrogenase and bilirubin",
+          "cells": [
+            {
+              "text": "Markers of ineffective erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy and gastric biopsy",
+          "cells": [
+            {
+              "text": "Atrophic gastritis or neoplasia, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pernicious_anemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral hydroxocobalamin",
+          "cells": [
+            {
+              "text": "Initial loading course, then lifelong maintenance injections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral cobalamin",
+          "cells": [
+            {
+              "text": "High-dose oral maintenance in selected, stable patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct coexisting deficiency",
+          "cells": [
+            {
+              "text": "Folate and iron deficiency; monitor for hypokalaemia in the early response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological assessment",
+          "cells": [
+            {
+              "text": "Assess for subacute combined degeneration and treat promptly; delay leaves residual deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric surveillance",
+          "cells": [
+            {
+              "text": "Endoscopic evaluation and surveillance for gastric carcinoma and carcinoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated autoimmune screen",
+          "cells": [
+            {
+              "text": "Thyroid disorder, vitiligo and type 1 diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Reticulocytosis and a normalising full blood count confirm adequate replacement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pernicious_anemia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of megaloblastic anemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Cobalamin deficiency or abnormal cobalamin metabolism",
+          "cells": [
+            {
+              "text": "See Tables 105-3 and 105-4 of the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Folate deficiency or abnormal folate metabolism",
+          "cells": [
+            {
+              "text": "See Table 105-5 of the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antifolate drug therapy",
+          "cells": [
+            {
+              "text": "For example methotrexate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: leukemia and myelodysplasia",
+          "cells": [
+            {
+              "text": "Some cases of acute myeloid leukemia and myelodysplasia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: DNA synthesis inhibitors",
+          "cells": [
+            {
+              "text": "Cytosine arabinoside, hydroxyurea, 6-mercaptopurine, azidothymidine (AZT)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: orotic aciduria",
+          "cells": [
+            {
+              "text": "Responds to uridine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Independent of cobalamin or folate deficiency, refractory to both: thiamine-responsive",
+          "cells": [
+            {
+              "text": "Thiamine-responsive megaloblastic anemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "pernicious_anemia-ddx",
+      "kind": "ddx",
+      "title": "Schilling test results by cause of cobalamin malabsorption",
+      "rowHeader": "Condition",
+      "columns": [
+        "58Co-Cbl alone",
+        "With intrinsic factor",
+        "With pancreatic enzymes",
+        "After 5 days of antibiotics"
+      ],
+      "rows": [
+        {
+          "parameter": "Pernicious anemia",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ileal disease",
+          "cells": [
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            },
+            {
+              "text": "Reduced"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pernicious_anemia-dx-mgmt",
+      "title": "Diagnosis and management of Pernicious anaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Macrocytic anaemia with neurological symptoms or suspected atrophic gastritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (subacute combined degeneration, severe anaemia, alarm symptoms, pancytopenia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prompt replacement for neurological signs; evaluate gastric alarm symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; serum B12 and folate; intrinsic-factor and parietal-cell antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are intrinsic-factor antibodies positive with low serum B12?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dietary deficiency, folate deficiency, malabsorption or myelodysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Replace B12 with parenteral hydroxocobalamin: loading course, then lifelong injections",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct coexisting folate and iron deficiency; watch for hypokalaemia early on",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess for subacute combined degeneration and treat promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endoscopic surveillance for gastric carcinoma and carcinoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor reticulocytosis and a normalising full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Haematological recovery is rapid; neurological deficits may persist if delayed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

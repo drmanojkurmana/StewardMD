@@ -1,173 +1,422 @@
 {
- "id": "hymenolepiasis",
- "name": "Hymenolepiasis (Hymenolepis nana)",
- "aliases": [
-  "dwarf tapeworm infection",
-  "Hymenolepis nana infection",
-  "Rodentolepis nana infection",
-  "Hymenolepis diminuta infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell/Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hymenolepis nana, the dwarf tapeworm, is the most common human tapeworm worldwide and predominates in children in warm climates with crowding and poor sanitation",
-   "Uniquely among human tapeworms it can complete its entire life cycle within one host and does not require an intermediate host, so eggs passed in stool are directly infective to humans",
-   "This capacity for internal autoinfection allows worm numbers to build up markedly, and heavy burdens produce abdominal pain, diarrhoea, anorexia and, in children, irritability and weight loss",
-   "Light infections are usually asymptomatic and detected incidentally on stool examination",
-   "Diagnosis is by finding the characteristic eggs, which have an inner envelope with polar thickenings bearing filaments, on stool microscopy",
-   "Immunosuppression can permit unusually heavy or persistent infection",
-   "Praziquantel is the treatment of choice and is more effective than older agents against this cestode, with attention to hygiene to limit reinfection"
+  "id": "hymenolepiasis",
+  "name": "Hymenolepiasis (Hymenolepis nana)",
+  "aliases": [
+    "dwarf tapeworm infection",
+    "Hymenolepis nana infection",
+    "Rodentolepis nana infection",
+    "Hymenolepis diminuta infection"
   ],
-  "pathophysiology": "Hymenolepis nana is distinctive because it can complete its cycle entirely within the human intestine. Ingested eggs, or eggs released internally from mature proglottids, hatch and the oncosphere penetrates an intestinal villus to develop into a cysticercoid larva, which then re-enters the lumen and matures into an adult attached to the mucosa. This internal autoinfection lets the worm population expand within a single host without any intermediate stage, so heavy burdens can accumulate, particularly where reinfection from the environment is also ongoing. Mucosal irritation and the metabolic burden of numerous worms underlie the abdominal symptoms and, in children with heavy infection, poor weight gain, while the direct faecal-oral infectivity of the eggs accounts for ready spread in crowded settings.",
-  "additionalDifferentials": [
-   "Other tapeworm infections such as taeniasis and diphyllobothriasis",
-   "Soil-transmitted helminthiases",
-   "Giardiasis and other enteric protozoa",
-   "Irritable bowel syndrome",
-   "Functional abdominal pain in children",
-   "Other causes of childhood failure to thrive"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy for characteristic eggs with polar filaments",
-   "Stool concentration methods to improve detection",
-   "Repeated sampling in light or intermittent infection",
-   "Full blood count including eosinophil count",
-   "Assessment of growth and nutritional status in children",
-   "Consideration of immune status where infection is unusually heavy or persistent"
-  ],
-  "redFlags": [
-   "Heavy symptomatic infection with weight loss in a child",
-   "Unusually severe or persistent infection suggesting immunosuppression",
-   "Failure to clear infection due to ongoing autoinfection or reinfection",
-   "Dehydration from significant diarrhoea"
-  ],
-  "prognosis": "Good; infection responds well to praziquantel, though autoinfection and environmental reinfection can cause persistence or relapse unless treatment and hygiene measures are adequate.",
-  "pitfalls": [
-   "Underestimating the role of internal autoinfection in perpetuating heavy infection",
-   "Using less effective older anthelmintics rather than praziquantel",
-   "Neglecting hygiene and contact measures, allowing reinfection",
-   "Overlooking immunosuppression in unusually heavy or refractory cases"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antihelminthic treatment with praziquantel as first-line therapy, effective against both cysticercoid larvae and adult worms, with niclosamide as an alternative",
-   "Repeated or extended courses to counter internal autoinfection and prevent relapse",
-   "Improved sanitation and hand and food hygiene to interrupt faecal-oral transmission and prevent environmental reinfection",
-   "Treatment of affected household contacts, and consideration of mass drug administration in highly endemic settings",
-   "Nutritional support and monitoring of growth in children with heavy infection and weight loss",
-   "Assessment of immune status where infection is unusually heavy or persistent"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hymenolepiasis-pathway",
-   "title": "Hymenolepiasis (Hymenolepis nana): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hymenolepis nana, the dwarf tapeworm, is the most common human tapeworm worldwide and predominates in children in warm climates with crowding and poor sanitation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Heavy symptomatic infection with weight loss in a child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy for characteristic eggs with polar filaments, Stool concentration methods to improve detection, Repeated sampling in light or intermittent infection"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antihelminthic treatment with praziquantel as first-line therapy, effective against both cysticercoid larvae and adult worms, with niclosamide as an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating the role of internal autoinfection in perpetuating heavy infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hymenolepiasis (hymenolepis nana)."
-  }
- ],
- "tables": [
-  {
-   "id": "hymenolepiasis-matrix",
-   "title": "Hymenolepiasis (Hymenolepis nana): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hymenolepis nana, the dwarf tapeworm, is the most common human tapeworm worldwide and predominates in children in warm climates",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell/Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hymenolepis nana, the dwarf tapeworm, is the most common human tapeworm worldwide and predominates in children in warm climates with crowding and poor sanitation",
+      "Uniquely among human tapeworms it can complete its entire life cycle within one host and does not require an intermediate host, so eggs passed in stool are directly infective to humans",
+      "This capacity for internal autoinfection allows worm numbers to build up markedly, and heavy burdens produce abdominal pain, diarrhoea, anorexia and, in children, irritability and weight loss",
+      "Light infections are usually asymptomatic and detected incidentally on stool examination",
+      "Diagnosis is by finding the characteristic eggs, which have an inner envelope with polar thickenings bearing filaments, on stool microscopy",
+      "Immunosuppression can permit unusually heavy or persistent infection",
+      "Praziquantel is the treatment of choice and is more effective than older agents against this cestode, with attention to hygiene to limit reinfection"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy for characteristic eggs with polar filaments, Stool concentration methods to improve detection, Repeated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hymenolepis nana is distinctive because it can complete its cycle entirely within the human intestine. Ingested eggs, or eggs released internally from mature proglottids, hatch and the oncosphere penetrates an intestinal villus to develop into a cysticercoid larva, which then re-enters the lumen and matures into an adult attached to the mucosa. This internal autoinfection lets the worm population expand within a single host without any intermediate stage, so heavy burdens can accumulate, particularly where reinfection from the environment is also ongoing. Mucosal irritation and the metabolic burden of numerous worms underlie the abdominal symptoms and, in children with heavy infection, poor weight gain, while the direct faecal-oral infectivity of the eggs accounts for ready spread in crowded settings.",
+    "additionalDifferentials": [
+      "Other tapeworm infections such as taeniasis and diphyllobothriasis",
+      "Soil-transmitted helminthiases",
+      "Giardiasis and other enteric protozoa",
+      "Irritable bowel syndrome",
+      "Functional abdominal pain in children",
+      "Other causes of childhood failure to thrive"
     ],
-    [
-     "Primary Differentials",
-     "Other tapeworm infections such as taeniasis and diphyllobothriasis, Soil-transmitted helminthiases, Giardiasis and other enteric",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy for characteristic eggs with polar filaments",
+      "Stool concentration methods to improve detection",
+      "Repeated sampling in light or intermittent infection",
+      "Full blood count including eosinophil count",
+      "Assessment of growth and nutritional status in children",
+      "Consideration of immune status where infection is unusually heavy or persistent"
     ],
-    [
-     "Management Strategy",
-     "Antihelminthic treatment with praziquantel as first-line therapy, effective against both cysticercoid larvae and adult worms,",
-     "Core treatment modality"
+    "redFlags": [
+      "Heavy symptomatic infection with weight loss in a child",
+      "Unusually severe or persistent infection suggesting immunosuppression",
+      "Failure to clear infection due to ongoing autoinfection or reinfection",
+      "Dehydration from significant diarrhoea"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating the role of internal autoinfection in perpetuating heavy infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Good; infection responds well to praziquantel, though autoinfection and environmental reinfection can cause persistence or relapse unless treatment and hygiene measures are adequate.",
+    "pitfalls": [
+      "Underestimating the role of internal autoinfection in perpetuating heavy infection",
+      "Using less effective older anthelmintics rather than praziquantel",
+      "Neglecting hygiene and contact measures, allowing reinfection",
+      "Overlooking immunosuppression in unusually heavy or refractory cases"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antihelminthic treatment with praziquantel as first-line therapy, effective against both cysticercoid larvae and adult worms, with niclosamide as an alternative",
+      "Repeated or extended courses to counter internal autoinfection and prevent relapse",
+      "Improved sanitation and hand and food hygiene to interrupt faecal-oral transmission and prevent environmental reinfection",
+      "Treatment of affected household contacts, and consideration of mass drug administration in highly endemic settings",
+      "Nutritional support and monitoring of growth in children with heavy infection and weight loss",
+      "Assessment of immune status where infection is unusually heavy or persistent"
     ]
-   ],
-   "caption": "Overview comparison matrix for hymenolepiasis (hymenolepis nana)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hymenolepiasis-real-image",
-   "title": "Hymenolepiasis (Hymenolepis nana): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "hymenolepiasis-pathway",
+      "title": "Hymenolepiasis (Hymenolepis nana): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hymenolepis nana, the dwarf tapeworm, is the most common human tapeworm worldwide and predominates in children in warm climates with crowding and poor sanitation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Heavy symptomatic infection with weight loss in a child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy for characteristic eggs with polar filaments, Stool concentration methods to improve detection, Repeated sampling in light or intermittent infection"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antihelminthic treatment with praziquantel as first-line therapy, effective against both cysticercoid larvae and adult worms, with niclosamide as an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating the role of internal autoinfection in perpetuating heavy infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hymenolepiasis (hymenolepis nana)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hymenolepiasis-matrix",
+      "title": "Hymenolepiasis (Hymenolepis nana): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hymenolepis nana, the dwarf tapeworm, is the most common human tapeworm worldwide and predominates in children in warm climates",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy for characteristic eggs with polar filaments, Stool concentration methods to improve detection, Repeated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other tapeworm infections such as taeniasis and diphyllobothriasis, Soil-transmitted helminthiases, Giardiasis and other enteric",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antihelminthic treatment with praziquantel as first-line therapy, effective against both cysticercoid larvae and adult worms,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating the role of internal autoinfection in perpetuating heavy infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hymenolepiasis (hymenolepis nana)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hymenolepiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Characteristic eggs with polar filaments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool concentration methods",
+          "cells": [
+            {
+              "text": "Improved detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated sampling",
+          "cells": [
+            {
+              "text": "Light or intermittent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with eosinophil count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and nutritional status in children",
+          "cells": [
+            {
+              "text": "Nutritional effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "Where infection is unusually severe"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hymenolepiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel",
+          "cells": [
+            {
+              "text": "First-line anthelmintic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated or extended courses",
+          "cells": [
+            {
+              "text": "Counter internal autoinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sanitation and hygiene",
+          "cells": [
+            {
+              "text": "Hand and food hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of household contacts",
+          "cells": [
+            {
+              "text": "Reduces transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Growth monitoring in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune status assessment",
+          "cells": [
+            {
+              "text": "Unusual or persistent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hymenolepiasis-dx-mgmt",
+      "title": "Diagnosis and management of Hymenolepiasis (Hymenolepis nana)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with diarrhoea or weight loss and small eggs with polar filaments in stool",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heavy infection with weight loss, persistent severe infection, or dehydration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: rehydration and nutrition support for dehydration or weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy with concentration; repeated sampling; FBC with eosinophils; growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are Hymenolepis nana eggs seen on repeated stool microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider taeniasis, soil-transmitted helminths, giardiasis or functional pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Praziquantel as first-line anthelmintic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeated or extended courses for autoinfection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sanitation and hand and food hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treatment of household contacts and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infection cleared; reinfection prevented in households",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

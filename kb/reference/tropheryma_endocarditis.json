@@ -1,174 +1,472 @@
 {
- "id": "tropheryma_endocarditis",
- "name": "Tropheryma whipplei endocarditis",
- "aliases": [
-  "Tropheryma whipplei endocarditis",
-  "Whipple endocarditis",
-  "blood-culture-negative endocarditis (Tropheryma whipplei)",
-  "cardiac Whipple disease"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Tropheryma whipplei, the fastidious actinobacterium responsible for classic Whipple disease, which can localise to the heart valves",
-   "It is an important cause of blood-culture-negative endocarditis and should be considered when standard cultures remain sterile",
-   "Unlike classic Whipple disease, cardiac cases often lack the typical gastrointestinal symptoms of diarrhoea, weight loss, and arthralgia",
-   "It characteristically affects previously normal valves and may present insidiously with heart failure rather than the classic stigmata of endocarditis, often without fever",
-   "Blood cultures are negative, so diagnosis depends on examining excised valve tissue with PAS staining and, crucially, PCR for Tropheryma whipplei",
-   "Serology and echocardiographic evidence of valvular vegetation or destruction support the diagnosis alongside molecular confirmation",
-   "Treatment involves prolonged antibiotic therapy, often an initial intravenous agent followed by long-term oral co-trimoxazole, with valve surgery frequently required"
+  "id": "tropheryma_endocarditis",
+  "name": "Tropheryma whipplei endocarditis",
+  "aliases": [
+    "Tropheryma whipplei endocarditis",
+    "Whipple endocarditis",
+    "blood-culture-negative endocarditis (Tropheryma whipplei)",
+    "cardiac Whipple disease"
   ],
-  "pathophysiology": "Tropheryma whipplei is a slow-growing, environmentally acquired actinobacterium that cannot be recovered on routine blood-culture media, which is why the endocarditis it causes is culture-negative. The organism is taken up by macrophages, in which it persists, and a subtle defect in host immune handling is thought to allow chronic infection. In cardiac disease the bacterium colonises heart valves, driving a low-grade inflammatory process that produces valvular vegetations and progressive tissue destruction, frequently on valves that were previously structurally normal. The characteristic histological finding is an accumulation of foamy macrophages containing periodic acid-Schiff-positive material within the valve tissue. Because the illness is indolent and often lacks fever or the gastrointestinal features of classic Whipple disease, it commonly presents late with valvular regurgitation and heart failure.",
-  "additionalDifferentials": [
-   "Other causes of blood-culture-negative endocarditis (Coxiella burnetii, Bartonella species)",
-   "Culture-positive bacterial endocarditis with prior antibiotic exposure",
-   "Non-bacterial thrombotic (marantic) endocarditis",
-   "Libman-Sacks endocarditis and other immune-mediated valvular disease",
-   "Classic Whipple disease with cardiac involvement",
-   "Degenerative valvular disease with heart failure"
-  ],
-  "additionalInvestigations": [
-   "Excised valve tissue examination with PAS staining and PCR for Tropheryma whipplei",
-   "Serology and specific molecular testing on blood where valve tissue is unavailable",
-   "Transthoracic and transoesophageal echocardiography to demonstrate vegetations and valvular damage",
-   "Multiple sets of blood cultures with extended incubation to document culture negativity",
-   "Broad workup for other fastidious causes of culture-negative endocarditis",
-   "Cerebrospinal fluid PCR if central nervous system involvement is suspected, given the risk of neurological Whipple disease"
-  ],
-  "redFlags": [
-   "Progressive heart failure from valvular destruction",
-   "Embolic phenomena or new murmur with sterile blood cultures",
-   "Neurological features suggesting central nervous system involvement",
-   "Haemodynamic deterioration requiring urgent valve surgery"
-  ],
-  "prognosis": "With valve surgery where indicated and prolonged appropriate antibiotics the prognosis is generally favourable, but delayed diagnosis, extensive valvular destruction, or central nervous system involvement worsen the outlook, and relapse can occur if therapy is insufficient.",
-  "pitfalls": [
-   "Failing to consider Tropheryma whipplei in blood-culture-negative endocarditis and omitting valve PCR",
-   "Excluding the diagnosis because classic gastrointestinal symptoms are absent",
-   "Discarding or fixing excised valve tissue in a way that prevents molecular testing",
-   "Using too short a course of antibiotics, risking relapse and neurological disease"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "UpToDate: Whipple disease and Tropheryma whipplei infection"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give prolonged antibiotic therapy, typically induction with a parenteral agent such as ceftriaxone followed by long-term oral co-trimoxazole",
-   "Consider doxycycline combined with hydroxychloroquine as an alternative prolonged regimen with good tissue penetration",
-   "Refer for valve surgery where there is significant valvular destruction, heart failure or persistent infection",
-   "Ensure the regimen penetrates the central nervous system and assess cerebrospinal fluid given the risk of neurological Whipple disease",
-   "Manage heart failure medically alongside definitive antimicrobial treatment",
-   "Arrange prolonged clinical and echocardiographic follow-up to detect relapse, which occurs if therapy is insufficient",
-   "Coordinate infectious diseases, cardiology and cardiac surgery in a multidisciplinary approach"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tropheryma_endocarditis-pathway",
-   "title": "Tropheryma whipplei endocarditis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Tropheryma whipplei, the fastidious actinobacterium responsible for classic Whipple disease, which can localise to the heart valves",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive heart failure from valvular destruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Excised valve tissue examination with PAS staining and PCR for Tropheryma whipplei, Serology and specific molecular testing on blood where valve tissue is unavailable, Transthoracic and transoesophageal echocardiography to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give prolonged antibiotic therapy, typically induction with a parenteral agent such as ceftriaxone followed by long-term oral co-trimoxazole"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to consider Tropheryma whipplei in blood-culture-negative endocarditis and omitting valve PCR"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tropheryma whipplei endocarditis."
-  }
- ],
- "tables": [
-  {
-   "id": "tropheryma_endocarditis-matrix",
-   "title": "Tropheryma whipplei endocarditis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Tropheryma whipplei, the fastidious actinobacterium responsible for classic Whipple disease, which can localise to the",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Tropheryma whipplei, the fastidious actinobacterium responsible for classic Whipple disease, which can localise to the heart valves",
+      "It is an important cause of blood-culture-negative endocarditis and should be considered when standard cultures remain sterile",
+      "Unlike classic Whipple disease, cardiac cases often lack the typical gastrointestinal symptoms of diarrhoea, weight loss, and arthralgia",
+      "It characteristically affects previously normal valves and may present insidiously with heart failure rather than the classic stigmata of endocarditis, often without fever",
+      "Blood cultures are negative, so diagnosis depends on examining excised valve tissue with PAS staining and, crucially, PCR for Tropheryma whipplei",
+      "Serology and echocardiographic evidence of valvular vegetation or destruction support the diagnosis alongside molecular confirmation",
+      "Treatment involves prolonged antibiotic therapy, often an initial intravenous agent followed by long-term oral co-trimoxazole, with valve surgery frequently required"
     ],
-    [
-     "Key Investigations",
-     "Excised valve tissue examination with PAS staining and PCR for Tropheryma whipplei, Serology and specific molecular testing on",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tropheryma whipplei is a slow-growing, environmentally acquired actinobacterium that cannot be recovered on routine blood-culture media, which is why the endocarditis it causes is culture-negative. The organism is taken up by macrophages, in which it persists, and a subtle defect in host immune handling is thought to allow chronic infection. In cardiac disease the bacterium colonises heart valves, driving a low-grade inflammatory process that produces valvular vegetations and progressive tissue destruction, frequently on valves that were previously structurally normal. The characteristic histological finding is an accumulation of foamy macrophages containing periodic acid-Schiff-positive material within the valve tissue. Because the illness is indolent and often lacks fever or the gastrointestinal features of classic Whipple disease, it commonly presents late with valvular regurgitation and heart failure.",
+    "additionalDifferentials": [
+      "Other causes of blood-culture-negative endocarditis (Coxiella burnetii, Bartonella species)",
+      "Culture-positive bacterial endocarditis with prior antibiotic exposure",
+      "Non-bacterial thrombotic (marantic) endocarditis",
+      "Libman-Sacks endocarditis and other immune-mediated valvular disease",
+      "Classic Whipple disease with cardiac involvement",
+      "Degenerative valvular disease with heart failure"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of blood-culture-negative endocarditis (Coxiella burnetii, Bartonella species), Culture-positive bacterial",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Excised valve tissue examination with PAS staining and PCR for Tropheryma whipplei",
+      "Serology and specific molecular testing on blood where valve tissue is unavailable",
+      "Transthoracic and transoesophageal echocardiography to demonstrate vegetations and valvular damage",
+      "Multiple sets of blood cultures with extended incubation to document culture negativity",
+      "Broad workup for other fastidious causes of culture-negative endocarditis",
+      "Cerebrospinal fluid PCR if central nervous system involvement is suspected, given the risk of neurological Whipple disease"
     ],
-    [
-     "Management Strategy",
-     "Give prolonged antibiotic therapy, typically induction with a parenteral agent such as ceftriaxone followed by long-term oral",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive heart failure from valvular destruction",
+      "Embolic phenomena or new murmur with sterile blood cultures",
+      "Neurological features suggesting central nervous system involvement",
+      "Haemodynamic deterioration requiring urgent valve surgery"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to consider Tropheryma whipplei in blood-culture-negative endocarditis and omitting valve PCR",
-     "Prevent diagnostic or management error"
+    "prognosis": "With valve surgery where indicated and prolonged appropriate antibiotics the prognosis is generally favourable, but delayed diagnosis, extensive valvular destruction, or central nervous system involvement worsen the outlook, and relapse can occur if therapy is insufficient.",
+    "pitfalls": [
+      "Failing to consider Tropheryma whipplei in blood-culture-negative endocarditis and omitting valve PCR",
+      "Excluding the diagnosis because classic gastrointestinal symptoms are absent",
+      "Discarding or fixing excised valve tissue in a way that prevents molecular testing",
+      "Using too short a course of antibiotics, risking relapse and neurological disease"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "UpToDate: Whipple disease and Tropheryma whipplei infection"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give prolonged antibiotic therapy, typically induction with a parenteral agent such as ceftriaxone followed by long-term oral co-trimoxazole",
+      "Consider doxycycline combined with hydroxychloroquine as an alternative prolonged regimen with good tissue penetration",
+      "Refer for valve surgery where there is significant valvular destruction, heart failure or persistent infection",
+      "Ensure the regimen penetrates the central nervous system and assess cerebrospinal fluid given the risk of neurological Whipple disease",
+      "Manage heart failure medically alongside definitive antimicrobial treatment",
+      "Arrange prolonged clinical and echocardiographic follow-up to detect relapse, which occurs if therapy is insufficient",
+      "Coordinate infectious diseases, cardiology and cardiac surgery in a multidisciplinary approach"
     ]
-   ],
-   "caption": "Overview comparison matrix for tropheryma whipplei endocarditis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tropheryma-endocarditis-real-image",
-   "title": "Tropheryma whipplei endocarditis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "tropheryma_endocarditis-pathway",
+      "title": "Tropheryma whipplei endocarditis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Tropheryma whipplei, the fastidious actinobacterium responsible for classic Whipple disease, which can localise to the heart valves",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive heart failure from valvular destruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Excised valve tissue examination with PAS staining and PCR for Tropheryma whipplei, Serology and specific molecular testing on blood where valve tissue is unavailable, Transthoracic and transoesophageal echocardiography to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give prolonged antibiotic therapy, typically induction with a parenteral agent such as ceftriaxone followed by long-term oral co-trimoxazole"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to consider Tropheryma whipplei in blood-culture-negative endocarditis and omitting valve PCR"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tropheryma whipplei endocarditis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tropheryma_endocarditis-matrix",
+      "title": "Tropheryma whipplei endocarditis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Tropheryma whipplei, the fastidious actinobacterium responsible for classic Whipple disease, which can localise to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Excised valve tissue examination with PAS staining and PCR for Tropheryma whipplei, Serology and specific molecular testing on",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of blood-culture-negative endocarditis (Coxiella burnetii, Bartonella species), Culture-positive bacterial",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give prolonged antibiotic therapy, typically induction with a parenteral agent such as ceftriaxone followed by long-term oral",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to consider Tropheryma whipplei in blood-culture-negative endocarditis and omitting valve PCR",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tropheryma whipplei endocarditis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tropheryma_endocarditis-dx-mgmt",
+      "title": "Diagnosis and management of Tropheryma whipplei endocarditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Tropheryma endocarditis: culture-negative endocarditis of a normal valve",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive heart failure, embolic events or neurological features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent valve surgery review for haemodynamic deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Valve PCR and PAS staining; extended blood cultures; echo; CSF PCR if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does valve tissue PCR confirm Tropheryma whipplei?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Coxiella or Bartonella endocarditis, marantic endocarditis or Libman-Sacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged antibiotics: ceftriaxone induction, then co-trimoxazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Doxycycline with hydroxychloroquine as an alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Valve surgery for destruction, heart failure or persistent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "CNS-penetrating regimen and CSF assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prolonged clinical and echocardiographic follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally favourable with surgery and prolonged antibiotics; relapse if inadequate",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tropheryma_endocarditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excised valve PAS staining and PCR",
+          "cells": [
+            {
+              "text": "Tropheryma whipplei detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood serology and molecular testing",
+          "cells": [
+            {
+              "text": "When valve tissue is unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic and transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Vegetations and valve damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple blood cultures with extended incubation",
+          "cells": [
+            {
+              "text": "Documents culture negativity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad culture-negative workup",
+          "cells": [
+            {
+              "text": "Other fastidious organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF PCR",
+          "cells": [
+            {
+              "text": "If central nervous system involvement suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tropheryma_endocarditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coxiella burnetii or Bartonella endocarditis",
+          "cells": [
+            {
+              "text": "Other blood-culture-negative organisms; specific serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-bacterial thrombotic endocarditis",
+          "cells": [
+            {
+              "text": "Sterile vegetations without an organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Libman-Sacks endocarditis",
+          "cells": [
+            {
+              "text": "Immune-mediated valve disease rather than infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tropheryma_endocarditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral induction then oral co-trimoxazole",
+          "cells": [
+            {
+              "text": "Ceftriaxone induction, then long-term co-trimoxazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doxycycline with hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Alternative prolonged regimen with tissue penetration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Valve surgery",
+          "cells": [
+            {
+              "text": "Significant destruction, heart failure or persistent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS-penetrating regimen with CSF assessment",
+          "cells": [
+            {
+              "text": "Risk of neurological Whipple disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical heart failure management",
+          "cells": [
+            {
+              "text": "Alongside antimicrobial treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged follow-up",
+          "cells": [
+            {
+              "text": "Detect relapse if therapy is insufficient"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

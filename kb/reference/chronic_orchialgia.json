@@ -1,179 +1,464 @@
 {
- "id": "chronic_orchialgia",
- "name": "Chronic orchialgia",
- "aliases": [
-  "chronic testicular pain",
-  "chronic scrotal pain",
-  "orchialgia",
-  "chronic orchidalgia"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Andrology / Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Chronic orchialgia is intermittent or constant testicular pain lasting three months or more that interferes with daily activity and for which no acute cause is found",
-   "It is frequently non-infective and, in a large proportion of men, no clear structural cause is identified, so it is often idiopathic",
-   "A thorough examination is needed to localise the pain and to exclude a testicular mass, varicocele, epididymal pathology, and hernia",
-   "Referred pain must be considered, as ureteric calculi, inguinal hernia, hip pathology, and nerve entrapment can all present as scrotal pain",
-   "Scrotal ultrasound is commonly performed largely to reassure and to exclude significant pathology rather than because it usually reveals the cause",
-   "Initial management is conservative, with reassurance, supportive underwear, analgesia, anti-inflammatory measures, and treatment of any identifiable contributor",
-   "Neuropathic pain agents and pain-clinic input help selected men, and spermatic cord blocks can be both diagnostic and therapeutic",
-   "Surgery, including microsurgical denervation of the spermatic cord or orchidectomy, is reserved for carefully selected refractory cases after detailed counselling"
+  "id": "chronic_orchialgia",
+  "name": "Chronic orchialgia",
+  "aliases": [
+    "chronic testicular pain",
+    "chronic scrotal pain",
+    "orchialgia",
+    "chronic orchidalgia"
   ],
-  "pathophysiology": "Chronic orchialgia represents a persistent scrotal pain state that in many men cannot be attributed to a single structural lesion. Recognised contributors include previous inflammation or infection, varicocele, spermatocele, prior scrotal or inguinal surgery, and vasectomy, but a substantial proportion is idiopathic. The prevailing understanding is of a neuropathic and centrally sensitised pain process, in which the afferent nerves travelling in the spermatic cord become hypersensitive and pain is amplified within the nervous system, sometimes long after any initial insult has resolved. Referred pain, in which pathology in the ureter, hernia, hip, or lumbar nerves is perceived in the testis owing to shared innervation, is an important and treatable mechanism. Psychological factors and coexisting chronic pelvic pain frequently modulate the experience of pain.",
-  "additionalDifferentials": [
-   "Chronic epididymitis and post-vasectomy pain syndrome",
-   "Varicocele",
-   "Spermatocele or epididymal cyst",
-   "Testicular tumour",
-   "Referred pain from ureteric calculus or inguinal hernia",
-   "Nerve entrapment following inguinal or scrotal surgery",
-   "Musculoskeletal or hip pathology referring to the scrotum"
-  ],
-  "additionalInvestigations": [
-   "Detailed history and examination to localise pain and identify referred sources",
-   "Scrotal ultrasound to exclude a mass, varicocele, or epididymal lesion",
-   "Urine analysis and culture to exclude urinary infection",
-   "Sexually transmitted infection screening where relevant",
-   "Abdominal, inguinal, and musculoskeletal assessment for referred causes",
-   "Diagnostic spermatic cord block to confirm a peripheral pain source",
-   "Cross-sectional imaging where a referred or retroperitoneal cause is suspected"
-  ],
-  "redFlags": [
-   "A discrete or hard testicular mass on examination or imaging",
-   "Sudden severe pain with swelling raising the possibility of torsion",
-   "Systemic features suggesting infection or malignancy",
-   "Associated haematuria or flank pain suggesting a urological cause requiring investigation"
-  ],
-  "prognosis": "The condition is benign but often chronic and difficult to eradicate; many men gain adequate relief with conservative and pain-directed measures, while a smaller group with intractable pain may consider surgery, which offers benefit in selected cases but carries no guarantee of cure.",
-  "pitfalls": [
-   "Attributing all scrotal pain to infection and giving repeated unnecessary antibiotics",
-   "Missing a testicular tumour presenting as chronic pain",
-   "Failing to consider and treat a referred cause such as a ureteric stone or hernia",
-   "Proceeding to orchidectomy without exhausting conservative options and counselling about persistent pain",
-   "Neglecting the neuropathic and psychological components amenable to pain-clinic input"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "European Association of Urology guidelines on chronic pelvic pain",
-   "British Association of Urological Surgeons guidance on scrotal pain"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative first-line care with reassurance, scrotal support and simple analgesia including non-steroidal anti-inflammatory drugs",
-   "Identification and treatment of any specific contributor such as varicocele, epididymal pathology or an infective cause",
-   "Exclusion and treatment of referred sources (ureteric calculi, inguinal hernia, hip pathology or nerve entrapment) presenting as scrotal pain",
-   "Neuropathic pain agents such as tricyclic antidepressants and gabapentinoids for the centrally sensitised component",
-   "Diagnostic spermatic cord block to confirm a peripheral pain source, alongside pelvic floor physiotherapy and psychological support",
-   "Microsurgical spermatic cord denervation in refractory cases, with epididymectomy or orchidectomy reserved as a last resort",
-   "Multidisciplinary chronic pain and andrology referral for intractable pain"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_orchialgia-pathway",
-   "title": "Chronic orchialgia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Chronic orchialgia is intermittent or constant testicular pain lasting three months or more that interferes with daily activity and for which no acute cause is found",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A discrete or hard testicular mass on examination or imaging",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed history and examination to localise pain and identify referred sources, Scrotal ultrasound to exclude a mass, varicocele, or epididymal lesion, Urine analysis and culture to exclude urinary infection"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative first-line care with reassurance, scrotal support and simple analgesia including non-steroidal anti-inflammatory drugs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all scrotal pain to infection and giving repeated unnecessary antibiotics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic orchialgia."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_orchialgia-matrix",
-   "title": "Chronic orchialgia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Chronic orchialgia is intermittent or constant testicular pain lasting three months or more that interferes with daily activity",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Andrology / Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Chronic orchialgia is intermittent or constant testicular pain lasting three months or more that interferes with daily activity and for which no acute cause is found",
+      "It is frequently non-infective and, in a large proportion of men, no clear structural cause is identified, so it is often idiopathic",
+      "A thorough examination is needed to localise the pain and to exclude a testicular mass, varicocele, epididymal pathology, and hernia",
+      "Referred pain must be considered, as ureteric calculi, inguinal hernia, hip pathology, and nerve entrapment can all present as scrotal pain",
+      "Scrotal ultrasound is commonly performed largely to reassure and to exclude significant pathology rather than because it usually reveals the cause",
+      "Initial management is conservative, with reassurance, supportive underwear, analgesia, anti-inflammatory measures, and treatment of any identifiable contributor",
+      "Neuropathic pain agents and pain-clinic input help selected men, and spermatic cord blocks can be both diagnostic and therapeutic",
+      "Surgery, including microsurgical denervation of the spermatic cord or orchidectomy, is reserved for carefully selected refractory cases after detailed counselling"
     ],
-    [
-     "Key Investigations",
-     "Detailed history and examination to localise pain and identify referred sources, Scrotal ultrasound to exclude a mass,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic orchialgia represents a persistent scrotal pain state that in many men cannot be attributed to a single structural lesion. Recognised contributors include previous inflammation or infection, varicocele, spermatocele, prior scrotal or inguinal surgery, and vasectomy, but a substantial proportion is idiopathic. The prevailing understanding is of a neuropathic and centrally sensitised pain process, in which the afferent nerves travelling in the spermatic cord become hypersensitive and pain is amplified within the nervous system, sometimes long after any initial insult has resolved. Referred pain, in which pathology in the ureter, hernia, hip, or lumbar nerves is perceived in the testis owing to shared innervation, is an important and treatable mechanism. Psychological factors and coexisting chronic pelvic pain frequently modulate the experience of pain.",
+    "additionalDifferentials": [
+      "Chronic epididymitis and post-vasectomy pain syndrome",
+      "Varicocele",
+      "Spermatocele or epididymal cyst",
+      "Testicular tumour",
+      "Referred pain from ureteric calculus or inguinal hernia",
+      "Nerve entrapment following inguinal or scrotal surgery",
+      "Musculoskeletal or hip pathology referring to the scrotum"
     ],
-    [
-     "Primary Differentials",
-     "Chronic epididymitis and post-vasectomy pain syndrome, Varicocele, Spermatocele or epididymal cyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed history and examination to localise pain and identify referred sources",
+      "Scrotal ultrasound to exclude a mass, varicocele, or epididymal lesion",
+      "Urine analysis and culture to exclude urinary infection",
+      "Sexually transmitted infection screening where relevant",
+      "Abdominal, inguinal, and musculoskeletal assessment for referred causes",
+      "Diagnostic spermatic cord block to confirm a peripheral pain source",
+      "Cross-sectional imaging where a referred or retroperitoneal cause is suspected"
     ],
-    [
-     "Management Strategy",
-     "Conservative first-line care with reassurance, scrotal support and simple analgesia including non-steroidal anti-inflammatory",
-     "Core treatment modality"
+    "redFlags": [
+      "A discrete or hard testicular mass on examination or imaging",
+      "Sudden severe pain with swelling raising the possibility of torsion",
+      "Systemic features suggesting infection or malignancy",
+      "Associated haematuria or flank pain suggesting a urological cause requiring investigation"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all scrotal pain to infection and giving repeated unnecessary antibiotics",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign but often chronic and difficult to eradicate; many men gain adequate relief with conservative and pain-directed measures, while a smaller group with intractable pain may consider surgery, which offers benefit in selected cases but carries no guarantee of cure.",
+    "pitfalls": [
+      "Attributing all scrotal pain to infection and giving repeated unnecessary antibiotics",
+      "Missing a testicular tumour presenting as chronic pain",
+      "Failing to consider and treat a referred cause such as a ureteric stone or hernia",
+      "Proceeding to orchidectomy without exhausting conservative options and counselling about persistent pain",
+      "Neglecting the neuropathic and psychological components amenable to pain-clinic input"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "European Association of Urology guidelines on chronic pelvic pain",
+      "British Association of Urological Surgeons guidance on scrotal pain"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative first-line care with reassurance, scrotal support and simple analgesia including non-steroidal anti-inflammatory drugs",
+      "Identification and treatment of any specific contributor such as varicocele, epididymal pathology or an infective cause",
+      "Exclusion and treatment of referred sources (ureteric calculi, inguinal hernia, hip pathology or nerve entrapment) presenting as scrotal pain",
+      "Neuropathic pain agents such as tricyclic antidepressants and gabapentinoids for the centrally sensitised component",
+      "Diagnostic spermatic cord block to confirm a peripheral pain source, alongside pelvic floor physiotherapy and psychological support",
+      "Microsurgical spermatic cord denervation in refractory cases, with epididymectomy or orchidectomy reserved as a last resort",
+      "Multidisciplinary chronic pain and andrology referral for intractable pain"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic orchialgia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-orchialgia-real-image",
-   "title": "Chronic orchialgia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "chronic_orchialgia-pathway",
+      "title": "Chronic orchialgia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Chronic orchialgia is intermittent or constant testicular pain lasting three months or more that interferes with daily activity and for which no acute cause is found",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A discrete or hard testicular mass on examination or imaging",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed history and examination to localise pain and identify referred sources, Scrotal ultrasound to exclude a mass, varicocele, or epididymal lesion, Urine analysis and culture to exclude urinary infection"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative first-line care with reassurance, scrotal support and simple analgesia including non-steroidal anti-inflammatory drugs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all scrotal pain to infection and giving repeated unnecessary antibiotics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic orchialgia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_orchialgia-matrix",
+      "title": "Chronic orchialgia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chronic orchialgia is intermittent or constant testicular pain lasting three months or more that interferes with daily activity",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed history and examination to localise pain and identify referred sources, Scrotal ultrasound to exclude a mass,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic epididymitis and post-vasectomy pain syndrome, Varicocele, Spermatocele or epididymal cyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative first-line care with reassurance, scrotal support and simple analgesia including non-steroidal anti-inflammatory",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all scrotal pain to infection and giving repeated unnecessary antibiotics",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic orchialgia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_orchialgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed history and examination",
+          "cells": [
+            {
+              "text": "Localises pain and identifies referred sources"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Excludes mass, varicocele or epididymal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and culture",
+          "cells": [
+            {
+              "text": "Excludes urinary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic spermatic cord block",
+          "cells": [
+            {
+              "text": "Confirms a peripheral pain source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Where a referred or retroperitoneal cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_orchialgia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic epididymitis or post-vasectomy pain syndrome",
+          "cells": [
+            {
+              "text": "Epididymal pain after vasectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Varicocele",
+          "cells": [
+            {
+              "text": "Dilated scrotal veins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referred pain from ureteric calculus or inguinal hernia",
+          "cells": [
+            {
+              "text": "Pain referred to the testis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_orchialgia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance, scrotal support and NSAIDs",
+          "cells": [
+            {
+              "text": "Conservative first-line care"
+            },
+            {
+              "text": "Simple analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any specific contributor",
+          "cells": [
+            {
+              "text": "Varicocele, epididymal pathology or infection"
+            },
+            {
+              "text": "Identified cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat referred source",
+          "cells": [
+            {
+              "text": "Ureteric calculi, inguinal hernia, hip pathology or nerve entrapment"
+            },
+            {
+              "text": "Referred pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricyclic antidepressants or gabapentinoids",
+          "cells": [
+            {
+              "text": "Centrally sensitised component"
+            },
+            {
+              "text": "Neuropathic pain agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsurgical spermatic cord denervation",
+          "cells": [
+            {
+              "text": "Refractory cases only"
+            },
+            {
+              "text": "Epididymectomy or orchidectomy are last resorts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_orchialgia-dx-mgmt",
+      "title": "Diagnosis and management of Chronic orchialgia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic orchialgia: testicular pain persisting three months or more",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hard testicular mass, sudden pain with swelling, systemic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent urology review for torsion or suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History, scrotal ultrasound, urinalysis and culture for referred sources",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Peripheral pain source confirmed by spermatic cord block?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassurance, scrotal support and NSAIDs as first-line care",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check varicocele, epididymitis, referred calculus and inguinal hernia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tricyclic antidepressants or gabapentinoids for centrally sensitised pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any identified contributor, including varicocele or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pelvic floor physiotherapy and psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Microsurgical cord denervation for refractory pain; chronic pain referral",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

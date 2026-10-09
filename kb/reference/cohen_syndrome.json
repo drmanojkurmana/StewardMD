@@ -1,173 +1,413 @@
 {
- "id": "cohen_syndrome",
- "name": "Cohen syndrome",
- "aliases": [
-  "VPS13B-related disorder",
-  "COH1-related syndrome",
-  "Pepper syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A multisystem disorder combining developmental delay, non-progressive intellectual disability, and a cheerful, sociable disposition",
-   "Progressive retinal dystrophy with early-onset myopia and night blindness is a key feature that develops through childhood",
-   "Intermittent isolated neutropenia predisposes to recurrent infections and mouth ulcers but is usually well tolerated",
-   "Truncal obesity develops from mid-childhood despite slender extremities, alongside microcephaly and joint hypermobility",
-   "Characteristic facial features include thick hair and eyebrows, downslanting palpebral fissures, a short philtrum with open-mouth appearance, and prominent upper central incisors",
-   "Caused by biallelic loss-of-function variants in VPS13B (COH1) and inherited in an autosomal recessive manner, with clustering in certain populations",
-   "Diagnosis rests on the clinical pattern supported by molecular confirmation, since features evolve with age and may be incomplete early on"
+  "id": "cohen_syndrome",
+  "name": "Cohen syndrome",
+  "aliases": [
+    "VPS13B-related disorder",
+    "COH1-related syndrome",
+    "Pepper syndrome"
   ],
-  "pathophysiology": "Cohen syndrome is caused by biallelic loss-of-function variants in VPS13B, a large protein localised to the Golgi apparatus that is involved in vesicular transport, membrane lipid handling, and glycosylation. Disruption of intracellular trafficking affects tissues with high secretory and membrane demands, including neurons, the retina, and haematopoietic and adipose tissue, which accounts for the neurodevelopmental impairment, progressive retinal dystrophy, intermittent neutropenia, and the distinctive pattern of truncal obesity with microcephaly.",
-  "additionalDifferentials": [
-   "Bardet-Biedl syndrome",
-   "Prader-Willi syndrome",
-   "Alstrom syndrome",
-   "Mirhosseini-Holmes-Walton syndrome",
-   "Other syndromic retinal dystrophies with intellectual disability",
-   "Congenital neutropenia syndromes"
-  ],
-  "additionalInvestigations": [
-   "VPS13B (COH1) sequencing and deletion/duplication analysis, or an intellectual disability/retinal dystrophy panel",
-   "Chromosomal microarray to exclude copy-number causes",
-   "Ophthalmological assessment including electroretinography for retinal dystrophy and refraction for myopia",
-   "Serial full blood counts to document intermittent neutropenia",
-   "Developmental and neuropsychological assessment",
-   "Growth and metabolic monitoring for evolving truncal obesity"
-  ],
-  "redFlags": [
-   "Serious or recurrent infection during neutropenic episodes",
-   "Rapid visual deterioration requiring ophthalmology input",
-   "Signs of obesity-related metabolic complications",
-   "New neurological deterioration, which is atypical and warrants review"
-  ],
-  "prognosis": "Intellectual disability is non-progressive and many individuals are sociable and function well with support, but vision declines progressively due to the retinal dystrophy. Neutropenia is usually manageable, and life expectancy is generally not markedly reduced with appropriate care.",
-  "pitfalls": [
-   "Expecting the full phenotype in early childhood when retinal and obesity features emerge later",
-   "Overlooking intermittent neutropenia because a single blood count may be normal",
-   "Confusing the disorder with Bardet-Biedl or Prader-Willi syndrome given overlapping obesity and retinal or developmental features",
-   "Missing progressive myopia and retinal dystrophy that need ongoing surveillance"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: Cohen Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy; management is supportive and multidisciplinary with developmental and educational support for the non-progressive intellectual disability",
-   "Ophthalmological care for progressive retinal dystrophy and myopia, with refractive correction, low-vision aids and monitoring by electroretinography",
-   "Monitor intermittent neutropenia with serial full blood counts, treat infections promptly, and consider granulocyte colony-stimulating factor for severe neutropenia or recurrent serious infection",
-   "Weight, dietary and activity management for evolving truncal obesity and metabolic risk",
-   "Physiotherapy and occupational therapy for hypotonia and joint hypermobility",
-   "Dental and oral care given mouth ulcers and characteristic dental features",
-   "Genetic counselling for this autosomal recessive VPS13B (COH1) disorder, with cascade family testing and awareness of population clustering"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cohen_syndrome-pathway",
-   "title": "Cohen syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A multisystem disorder combining developmental delay, non-progressive intellectual disability, and a cheerful, sociable disposition",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Serious or recurrent infection during neutropenic episodes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: VPS13B (COH1) sequencing and deletion/duplication analysis, or an intellectual disability/retinal dystrophy panel, Chromosomal microarray to exclude copy-number causes, Ophthalmological assessment including"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy; management is supportive and multidisciplinary with developmental and educational support for the non-progressive intellectual disability"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting the full phenotype in early childhood when retinal and obesity features emerge later"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cohen syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cohen_syndrome-matrix",
-   "title": "Cohen syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A multisystem disorder combining developmental delay, non-progressive intellectual disability, and a cheerful, sociable",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A multisystem disorder combining developmental delay, non-progressive intellectual disability, and a cheerful, sociable disposition",
+      "Progressive retinal dystrophy with early-onset myopia and night blindness is a key feature that develops through childhood",
+      "Intermittent isolated neutropenia predisposes to recurrent infections and mouth ulcers but is usually well tolerated",
+      "Truncal obesity develops from mid-childhood despite slender extremities, alongside microcephaly and joint hypermobility",
+      "Characteristic facial features include thick hair and eyebrows, downslanting palpebral fissures, a short philtrum with open-mouth appearance, and prominent upper central incisors",
+      "Caused by biallelic loss-of-function variants in VPS13B (COH1) and inherited in an autosomal recessive manner, with clustering in certain populations",
+      "Diagnosis rests on the clinical pattern supported by molecular confirmation, since features evolve with age and may be incomplete early on"
     ],
-    [
-     "Key Investigations",
-     "VPS13B (COH1) sequencing and deletion/duplication analysis, or an intellectual disability/retinal dystrophy panel, Chromosomal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cohen syndrome is caused by biallelic loss-of-function variants in VPS13B, a large protein localised to the Golgi apparatus that is involved in vesicular transport, membrane lipid handling, and glycosylation. Disruption of intracellular trafficking affects tissues with high secretory and membrane demands, including neurons, the retina, and haematopoietic and adipose tissue, which accounts for the neurodevelopmental impairment, progressive retinal dystrophy, intermittent neutropenia, and the distinctive pattern of truncal obesity with microcephaly.",
+    "additionalDifferentials": [
+      "Bardet-Biedl syndrome",
+      "Prader-Willi syndrome",
+      "Alstrom syndrome",
+      "Mirhosseini-Holmes-Walton syndrome",
+      "Other syndromic retinal dystrophies with intellectual disability",
+      "Congenital neutropenia syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Bardet-Biedl syndrome, Prader-Willi syndrome, Alstrom syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "VPS13B (COH1) sequencing and deletion/duplication analysis, or an intellectual disability/retinal dystrophy panel",
+      "Chromosomal microarray to exclude copy-number causes",
+      "Ophthalmological assessment including electroretinography for retinal dystrophy and refraction for myopia",
+      "Serial full blood counts to document intermittent neutropenia",
+      "Developmental and neuropsychological assessment",
+      "Growth and metabolic monitoring for evolving truncal obesity"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy; management is supportive and multidisciplinary with developmental and educational support for the",
-     "Core treatment modality"
+    "redFlags": [
+      "Serious or recurrent infection during neutropenic episodes",
+      "Rapid visual deterioration requiring ophthalmology input",
+      "Signs of obesity-related metabolic complications",
+      "New neurological deterioration, which is atypical and warrants review"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting the full phenotype in early childhood when retinal and obesity features emerge later",
-     "Prevent diagnostic or management error"
+    "prognosis": "Intellectual disability is non-progressive and many individuals are sociable and function well with support, but vision declines progressively due to the retinal dystrophy. Neutropenia is usually manageable, and life expectancy is generally not markedly reduced with appropriate care.",
+    "pitfalls": [
+      "Expecting the full phenotype in early childhood when retinal and obesity features emerge later",
+      "Overlooking intermittent neutropenia because a single blood count may be normal",
+      "Confusing the disorder with Bardet-Biedl or Prader-Willi syndrome given overlapping obesity and retinal or developmental features",
+      "Missing progressive myopia and retinal dystrophy that need ongoing surveillance"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: Cohen Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy; management is supportive and multidisciplinary with developmental and educational support for the non-progressive intellectual disability",
+      "Ophthalmological care for progressive retinal dystrophy and myopia, with refractive correction, low-vision aids and monitoring by electroretinography",
+      "Monitor intermittent neutropenia with serial full blood counts, treat infections promptly, and consider granulocyte colony-stimulating factor for severe neutropenia or recurrent serious infection",
+      "Weight, dietary and activity management for evolving truncal obesity and metabolic risk",
+      "Physiotherapy and occupational therapy for hypotonia and joint hypermobility",
+      "Dental and oral care given mouth ulcers and characteristic dental features",
+      "Genetic counselling for this autosomal recessive VPS13B (COH1) disorder, with cascade family testing and awareness of population clustering"
     ]
-   ],
-   "caption": "Overview comparison matrix for cohen syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cohen-syndrome-real-image",
-   "title": "Cohen syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cohen_syndrome-pathway",
+      "title": "Cohen syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A multisystem disorder combining developmental delay, non-progressive intellectual disability, and a cheerful, sociable disposition",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Serious or recurrent infection during neutropenic episodes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: VPS13B (COH1) sequencing and deletion/duplication analysis, or an intellectual disability/retinal dystrophy panel, Chromosomal microarray to exclude copy-number causes, Ophthalmological assessment including"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy; management is supportive and multidisciplinary with developmental and educational support for the non-progressive intellectual disability"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting the full phenotype in early childhood when retinal and obesity features emerge later"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cohen syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cohen_syndrome-matrix",
+      "title": "Cohen syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A multisystem disorder combining developmental delay, non-progressive intellectual disability, and a cheerful, sociable",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "VPS13B (COH1) sequencing and deletion/duplication analysis, or an intellectual disability/retinal dystrophy panel, Chromosomal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bardet-Biedl syndrome, Prader-Willi syndrome, Alstrom syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy; management is supportive and multidisciplinary with developmental and educational support for the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting the full phenotype in early childhood when retinal and obesity features emerge later",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cohen syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cohen_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmological assessment with electroretinography",
+          "cells": [
+            {
+              "text": "Progressive retinal dystrophy and early-onset myopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial full blood counts",
+          "cells": [
+            {
+              "text": "Intermittent neutropenia, which a single count may miss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and metabolic monitoring",
+          "cells": [
+            {
+              "text": "Evolving truncal obesity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Non-progressive intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cohen_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive multidisciplinary care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy; developmental and educational support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological care",
+          "cells": [
+            {
+              "text": "Refractive correction, low-vision aids and electroretinography monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutropenia monitoring",
+          "cells": [
+            {
+              "text": "Serial full blood counts; prompt infection treatment; G-CSF for severe neutropenia or recurrent serious infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight and metabolic management",
+          "cells": [
+            {
+              "text": "Dietary and activity management for evolving truncal obesity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "For hypotonia and joint hypermobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and oral care",
+          "cells": [
+            {
+              "text": "Mouth ulcers and characteristic dental features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive VPS13B (COH1) disorder; cascade family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cohen_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cohen syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cohen syndrome: intellectual disability, retinal dystrophy, neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (serious infection, rapid visual loss, metabolic complications)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: infection treatment and ophthalmology review for rapid visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "VPS13B sequencing or panel; electroretinography; serial full blood counts",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does VPS13B testing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bardet-Biedl, Prader-Willi and Alstrom syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Serial full blood counts; treat infections; consider G-CSF for severe neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ophthalmological care: refractive correction and low-vision aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Weight, dietary and activity management for truncal obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and dental care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Intellectual disability is non-progressive; vision declines progressively",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,483 @@
 {
- "id": "aromatase_excess_syndrome",
- "name": "Aromatase excess syndrome",
- "aliases": [
-  "familial gynaecomastia",
-  "hereditary aromatase excess",
-  "CYP19A1 gain-of-function",
-  "familial hyperoestrogenism"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive genetics",
- "specialty": "Reproductive Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant disorder of oestrogen overproduction caused by gain-of-function rearrangements at the CYP19A1 locus that drive aromatase overexpression",
-   "Affected males present with prepubertal or peripubertal gynaecomastia, the hallmark feature, sometimes with small testes and reduced fertility",
-   "Excess oestrogen accelerates skeletal maturation, causing an early growth spurt but premature epiphyseal fusion and consequent short adult stature",
-   "Affected females may show macromastia, precocious or accelerated development and menstrual irregularity",
-   "Biochemistry shows elevated oestrogens with a raised oestrogen-to-androgen ratio and often suppressed gonadotropins",
-   "The condition contrasts sharply with aromatase deficiency, in which oestrogen is absent and stature is tall",
-   "Aromatase inhibition is the rational pharmacological approach to reduce oestrogen excess and preserve adult height, alongside management of gynaecomastia"
+  "id": "aromatase_excess_syndrome",
+  "name": "Aromatase excess syndrome",
+  "aliases": [
+    "familial gynaecomastia",
+    "hereditary aromatase excess",
+    "CYP19A1 gain-of-function",
+    "familial hyperoestrogenism"
   ],
-  "pathophysiology": "Aromatase excess syndrome results from heterozygous genomic rearrangements (duplications, deletions or inversions) around CYP19A1 that place the aromatase coding sequence under constitutively active promoters, leading to widespread overexpression of the enzyme. Excess conversion of androgens to oestrogens raises circulating oestrogen levels, producing gynaecomastia in males and accelerated growth in both sexes. Because oestrogen drives epiphyseal maturation, the early growth acceleration is followed by premature fusion of the growth plates and a shortened final height. The oestrogen excess also feeds back on the hypothalamic-pituitary-gonadal axis, contributing to hypogonadism and impaired fertility.",
-  "additionalDifferentials": [
-   "Pubertal (physiological) gynaecomastia",
-   "Klinefelter syndrome",
-   "Oestrogen- or hCG-secreting tumour (testicular, adrenal)",
-   "Drug- or supplement-induced gynaecomastia",
-   "Liver disease or hyperthyroidism causing gynaecomastia",
-   "Peutz-Jeghers syndrome with Sertoli cell tumour"
-  ],
-  "additionalInvestigations": [
-   "Serum oestradiol and oestrone with concurrent androgens to establish a raised oestrogen-to-androgen ratio",
-   "Gonadotropin measurement to assess suppression of the pituitary-gonadal axis",
-   "Molecular and cytogenetic analysis of the CYP19A1 locus for gain-of-function rearrangements",
-   "Bone age radiograph to document accelerated skeletal maturation",
-   "Testicular ultrasound and tumour markers to exclude an oestrogen-secreting tumour",
-   "Adrenal and hepatic imaging or biochemistry when a secondary cause is suspected"
-  ],
-  "redFlags": [
-   "Rapidly progressive gynaecomastia or a testicular mass suggesting an oestrogen-secreting tumour",
-   "Accelerated bone age threatening early epiphyseal closure and short stature",
-   "Signs of an underlying malignancy or systemic disease as an alternative oestrogen source",
-   "Marked psychosocial distress from prominent gynaecomastia"
-  ],
-  "prognosis": "With aromatase inhibition to lower oestrogen, growth potential can be partly preserved and gynaecomastia stabilised, though established breast tissue may require surgical correction. Untreated disease results in short adult stature and persistent gynaecomastia.",
-  "pitfalls": [
-   "Dismissing early gynaecomastia as physiological and missing a familial oestrogen-excess disorder",
-   "Failing to exclude an oestrogen-secreting tumour before attributing symptoms to the syndrome",
-   "Overlooking accelerating bone age until height potential is lost",
-   "Confusing the phenotype with aromatase deficiency, which presents oppositely"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on disorders of sex development"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Aromatase inhibitor therapy is the disease-directed mainstay, lowering oestrogen production to preserve growth potential and limit premature epiphyseal fusion",
-   "Aromatase inhibition also halts progression of gynaecomastia in affected males",
-   "Subcutaneous mastectomy for established gynaecomastia that persists despite medical therapy",
-   "Monitor bone age, growth velocity and predicted final height to time and adjust aromatase inhibition",
-   "Exclude an oestrogen-secreting gonadal or adrenal tumour before attributing the oestrogen excess to the syndrome",
-   "Assess and manage resulting hypogonadism and impaired fertility with andrology and reproductive input",
-   "Offer genetic counselling for this autosomal dominant CYP19A1 rearrangement, with cascade screening of first-degree relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aromatase_excess_syndrome-pathway",
-   "title": "Aromatase excess syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant disorder of oestrogen overproduction caused by gain-of-function rearrangements at the CYP19A1 locus that drive aromatase overexpression",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive gynaecomastia or a testicular mass suggesting an oestrogen-secreting tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum oestradiol and oestrone with concurrent androgens to establish a raised oestrogen-to-androgen ratio, Gonadotropin measurement to assess suppression of the pituitary-gonadal axis, Molecular and cytogenetic analysis of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Aromatase inhibitor therapy is the disease-directed mainstay, lowering oestrogen production to preserve growth potential and limit premature epiphyseal fusion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing early gynaecomastia as physiological and missing a familial oestrogen-excess disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aromatase excess syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "aromatase_excess_syndrome-matrix",
-   "title": "Aromatase excess syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant disorder of oestrogen overproduction caused by gain-of-function rearrangements at the CYP19A1 locus that",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive genetics",
+  "specialty": "Reproductive Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant disorder of oestrogen overproduction caused by gain-of-function rearrangements at the CYP19A1 locus that drive aromatase overexpression",
+      "Affected males present with prepubertal or peripubertal gynaecomastia, the hallmark feature, sometimes with small testes and reduced fertility",
+      "Excess oestrogen accelerates skeletal maturation, causing an early growth spurt but premature epiphyseal fusion and consequent short adult stature",
+      "Affected females may show macromastia, precocious or accelerated development and menstrual irregularity",
+      "Biochemistry shows elevated oestrogens with a raised oestrogen-to-androgen ratio and often suppressed gonadotropins",
+      "The condition contrasts sharply with aromatase deficiency, in which oestrogen is absent and stature is tall",
+      "Aromatase inhibition is the rational pharmacological approach to reduce oestrogen excess and preserve adult height, alongside management of gynaecomastia"
     ],
-    [
-     "Key Investigations",
-     "Serum oestradiol and oestrone with concurrent androgens to establish a raised oestrogen-to-androgen ratio, Gonadotropin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Aromatase excess syndrome results from heterozygous genomic rearrangements (duplications, deletions or inversions) around CYP19A1 that place the aromatase coding sequence under constitutively active promoters, leading to widespread overexpression of the enzyme. Excess conversion of androgens to oestrogens raises circulating oestrogen levels, producing gynaecomastia in males and accelerated growth in both sexes. Because oestrogen drives epiphyseal maturation, the early growth acceleration is followed by premature fusion of the growth plates and a shortened final height. The oestrogen excess also feeds back on the hypothalamic-pituitary-gonadal axis, contributing to hypogonadism and impaired fertility.",
+    "additionalDifferentials": [
+      "Pubertal (physiological) gynaecomastia",
+      "Klinefelter syndrome",
+      "Oestrogen- or hCG-secreting tumour (testicular, adrenal)",
+      "Drug- or supplement-induced gynaecomastia",
+      "Liver disease or hyperthyroidism causing gynaecomastia",
+      "Peutz-Jeghers syndrome with Sertoli cell tumour"
     ],
-    [
-     "Primary Differentials",
-     "Pubertal (physiological) gynaecomastia, Klinefelter syndrome, Oestrogen- or hCG-secreting tumour (testicular, adrenal)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum oestradiol and oestrone with concurrent androgens to establish a raised oestrogen-to-androgen ratio",
+      "Gonadotropin measurement to assess suppression of the pituitary-gonadal axis",
+      "Molecular and cytogenetic analysis of the CYP19A1 locus for gain-of-function rearrangements",
+      "Bone age radiograph to document accelerated skeletal maturation",
+      "Testicular ultrasound and tumour markers to exclude an oestrogen-secreting tumour",
+      "Adrenal and hepatic imaging or biochemistry when a secondary cause is suspected"
     ],
-    [
-     "Management Strategy",
-     "Aromatase inhibitor therapy is the disease-directed mainstay, lowering oestrogen production to preserve growth potential and",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive gynaecomastia or a testicular mass suggesting an oestrogen-secreting tumour",
+      "Accelerated bone age threatening early epiphyseal closure and short stature",
+      "Signs of an underlying malignancy or systemic disease as an alternative oestrogen source",
+      "Marked psychosocial distress from prominent gynaecomastia"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing early gynaecomastia as physiological and missing a familial oestrogen-excess disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "With aromatase inhibition to lower oestrogen, growth potential can be partly preserved and gynaecomastia stabilised, though established breast tissue may require surgical correction. Untreated disease results in short adult stature and persistent gynaecomastia.",
+    "pitfalls": [
+      "Dismissing early gynaecomastia as physiological and missing a familial oestrogen-excess disorder",
+      "Failing to exclude an oestrogen-secreting tumour before attributing symptoms to the syndrome",
+      "Overlooking accelerating bone age until height potential is lost",
+      "Confusing the phenotype with aromatase deficiency, which presents oppositely"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on disorders of sex development"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Aromatase inhibitor therapy is the disease-directed mainstay, lowering oestrogen production to preserve growth potential and limit premature epiphyseal fusion",
+      "Aromatase inhibition also halts progression of gynaecomastia in affected males",
+      "Subcutaneous mastectomy for established gynaecomastia that persists despite medical therapy",
+      "Monitor bone age, growth velocity and predicted final height to time and adjust aromatase inhibition",
+      "Exclude an oestrogen-secreting gonadal or adrenal tumour before attributing the oestrogen excess to the syndrome",
+      "Assess and manage resulting hypogonadism and impaired fertility with andrology and reproductive input",
+      "Offer genetic counselling for this autosomal dominant CYP19A1 rearrangement, with cascade screening of first-degree relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for aromatase excess syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aromatase-excess-syndrome-real-image",
-   "title": "Aromatase excess syndrome: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "aromatase_excess_syndrome-pathway",
+      "title": "Aromatase excess syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant disorder of oestrogen overproduction caused by gain-of-function rearrangements at the CYP19A1 locus that drive aromatase overexpression",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive gynaecomastia or a testicular mass suggesting an oestrogen-secreting tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum oestradiol and oestrone with concurrent androgens to establish a raised oestrogen-to-androgen ratio, Gonadotropin measurement to assess suppression of the pituitary-gonadal axis, Molecular and cytogenetic analysis of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Aromatase inhibitor therapy is the disease-directed mainstay, lowering oestrogen production to preserve growth potential and limit premature epiphyseal fusion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing early gynaecomastia as physiological and missing a familial oestrogen-excess disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aromatase excess syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aromatase_excess_syndrome-matrix",
+      "title": "Aromatase excess syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant disorder of oestrogen overproduction caused by gain-of-function rearrangements at the CYP19A1 locus that",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum oestradiol and oestrone with concurrent androgens to establish a raised oestrogen-to-androgen ratio, Gonadotropin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pubertal (physiological) gynaecomastia, Klinefelter syndrome, Oestrogen- or hCG-secreting tumour (testicular, adrenal)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Aromatase inhibitor therapy is the disease-directed mainstay, lowering oestrogen production to preserve growth potential and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing early gynaecomastia as physiological and missing a familial oestrogen-excess disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aromatase excess syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aromatase_excess_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum oestradiol and oestrone with androgens",
+          "cells": [
+            {
+              "text": "Raised oestrogen-to-androgen ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadotropin measurement",
+          "cells": [
+            {
+              "text": "Suppression of the pituitary-gonadal axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CYP19A1 molecular and cytogenetic analysis",
+          "cells": [
+            {
+              "text": "Gain-of-function rearrangements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age radiograph",
+          "cells": [
+            {
+              "text": "Accelerated skeletal maturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular ultrasound and tumour markers",
+          "cells": [
+            {
+              "text": "Excludes an oestrogen-secreting tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal and hepatic imaging or biochemistry",
+          "cells": [
+            {
+              "text": "When a secondary cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aromatase_excess_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pubertal (physiological) gynaecomastia",
+          "cells": [
+            {
+              "text": "Dismissing early gynaecomastia as physiological misses a familial excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen- or hCG-secreting tumour",
+          "cells": [
+            {
+              "text": "Excluded by testicular ultrasound and tumour markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aromatase_excess_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aromatase inhibitor therapy",
+          "cells": [
+            {
+              "text": "Lowers oestrogen production to preserve growth potential and limit premature epiphyseal closure"
+            },
+            {
+              "text": "Disease-directed mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aromatase inhibition for gynaecomastia",
+          "cells": [
+            {
+              "text": "Halts progression of gynaecomastia in affected males"
+            },
+            {
+              "text": "Progression halted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subcutaneous mastectomy",
+          "cells": [
+            {
+              "text": "For established gynaecomastia that persists despite medical therapy"
+            },
+            {
+              "text": "Persistent gynaecomastia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Bone age, growth velocity and predicted final height"
+            },
+            {
+              "text": "Used to time and adjust aromatase inhibition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude oestrogen-secreting tumour",
+          "cells": [
+            {
+              "text": "Gonadal or adrenal tumour excluded first"
+            },
+            {
+              "text": "Before attributing the excess to the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Andrology and reproductive input",
+          "cells": [
+            {
+              "text": "Hypogonadism and impaired fertility"
+            },
+            {
+              "text": "Assess and manage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant CYP19A1 rearrangement; cascade screening"
+            },
+            {
+              "text": "First-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aromatase_excess_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Aromatase excess syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gynaecomastia with accelerated bone age in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapidly progressive gynaecomastia or a testicular mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of an oestrogen-secreting tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oestradiol, oestrone, androgens, gonadotropins, CYP19A1, bone age, testicular US",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised oestrogen-to-androgen ratio with tumour excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Aromatase inhibitor therapy as disease-directed mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat hormone and imaging tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aromatase inhibition halts gynaecomastia progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Subcutaneous mastectomy if gynaecomastia persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor bone age, growth velocity and predicted final height",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and cascade screening of first-degree relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

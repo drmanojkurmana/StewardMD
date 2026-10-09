@@ -1,174 +1,491 @@
 {
- "id": "ollier_disease",
- "name": "Ollier disease",
- "aliases": [
-  "enchondromatosis",
-  "multiple enchondromatosis",
-  "IDH1",
-  "IDH2",
-  "dyschondroplasia"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-hereditary disorder of multiple enchondromas caused by post-zygotic somatic mosaic variants in IDH1 or IDH2, so it is sporadic rather than inherited",
-   "Enchondromas are intramedullary cartilaginous lesions that characteristically show an asymmetric, often unilateral distribution across the body",
-   "Predominantly affects the metaphyses and diaphyses of the hands, feet and long bones, causing swelling, deformity and limb-length discrepancy",
-   "Radiographs show radiolucent intramedullary lesions with characteristic linear or stippled calcification and cortical expansion",
-   "Pathological fracture through a lesion is a common presentation",
-   "Malignant transformation to chondrosarcoma is a recognised long-term risk, higher than in solitary enchondroma and increasing with lesion number",
-   "Distinguish from multiple hereditary exostoses, where the lesions are surface osteochondromas rather than intramedullary enchondromas"
+  "id": "ollier_disease",
+  "name": "Ollier disease",
+  "aliases": [
+    "enchondromatosis",
+    "multiple enchondromatosis",
+    "IDH1",
+    "IDH2",
+    "dyschondroplasia"
   ],
-  "pathophysiology": "Ollier disease arises from somatic mosaic gain-of-function variants in the isocitrate dehydrogenase genes IDH1 or IDH2, occurring in a subset of cells during development. Mutant IDH enzymes produce the oncometabolite 2-hydroxyglutarate, which disturbs DNA and histone methylation and blocks normal chondrocyte differentiation. Islands of residual growth-plate cartilage persist and continue to proliferate within the medullary cavity as enchondromas rather than being resorbed and replaced by bone. The mosaic origin explains the asymmetric distribution and the absence of vertical transmission.",
-  "additionalDifferentials": [
-   "Multiple hereditary exostoses",
-   "Maffucci syndrome (enchondromatosis with haemangiomas)",
-   "Metachondromatosis",
-   "Fibrous dysplasia",
-   "Solitary enchondroma",
-   "Chondrosarcoma"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey to map the distribution and burden of enchondromas",
-   "MRI of symptomatic or enlarging lesions to assess cartilage and aggressive features",
-   "Consideration of somatic IDH1/IDH2 testing on lesional tissue where diagnosis is uncertain",
-   "Imaging surveillance for change in size, cortical breach or soft-tissue mass",
-   "Biopsy of any lesion with features suspicious for malignant transformation"
-  ],
-  "redFlags": [
-   "New pain or growth of a previously stable lesion suggesting malignant transformation",
-   "Cortical destruction or an associated soft-tissue mass on imaging",
-   "Pathological fracture requiring orthopaedic management",
-   "Rapidly progressive deformity or functional impairment"
-  ],
-  "prognosis": "Prognosis depends on lesion number, size and site; morbidity comes from deformity, limb-length discrepancy and fracture, while the principal serious concern is malignant transformation to chondrosarcoma, warranting lifelong surveillance.",
-  "pitfalls": [
-   "Assuming an inherited disorder and giving incorrect recurrence-risk counselling, when the condition is sporadic and mosaic",
-   "Failing to arrange surveillance for malignant transformation",
-   "Confusing intramedullary enchondromas with the surface osteochondromas of hereditary exostoses",
-   "Missing an associated haemangioma that would reclassify the disorder as Maffucci syndrome"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Orphanet / WHO Classification of Tumours: Enchondromatosis (Ollier disease)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No medical therapy exists for the enchondromas themselves; management combines surveillance with orthopaedic treatment of complications",
-   "Orthopaedic surgery for deformity, pathological fracture and limb-length discrepancy, including curettage and grafting, corrective osteotomy and limb equalisation or lengthening",
-   "Lifelong clinical and imaging surveillance for malignant transformation to chondrosarcoma, prompted by new pain, growth, cortical breach or a soft-tissue mass",
-   "Prompt MRI and biopsy of any lesion with aggressive features, proceeding to wide excision if chondrosarcoma is confirmed",
-   "Baseline skeletal survey to map lesion burden and distribution",
-   "Multidisciplinary care across orthopaedics, radiology and a specialist bone-tumour or sarcoma service",
-   "Reassurance that the disorder is a sporadic somatic-mosaic IDH1/IDH2 condition and not inherited, so routine familial genetic screening is unnecessary"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ollier_disease-pathway",
-   "title": "Ollier disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-hereditary disorder of multiple enchondromas caused by post-zygotic somatic mosaic variants in IDH1 or IDH2, so it is sporadic rather than inherited",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New pain or growth of a previously stable lesion suggesting malignant transformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey to map the distribution and burden of enchondromas, MRI of symptomatic or enlarging lesions to assess cartilage and aggressive features, Consideration of somatic IDH1/IDH2 testing on lesional tissue where"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No medical therapy exists for the enchondromas themselves; management combines surveillance with orthopaedic treatment of complications"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an inherited disorder and giving incorrect recurrence-risk counselling, when the condition is sporadic and mosaic"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ollier disease."
-  }
- ],
- "tables": [
-  {
-   "id": "ollier_disease-matrix",
-   "title": "Ollier disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-hereditary disorder of multiple enchondromas caused by post-zygotic somatic mosaic variants in IDH1 or IDH2, so it is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-hereditary disorder of multiple enchondromas caused by post-zygotic somatic mosaic variants in IDH1 or IDH2, so it is sporadic rather than inherited",
+      "Enchondromas are intramedullary cartilaginous lesions that characteristically show an asymmetric, often unilateral distribution across the body",
+      "Predominantly affects the metaphyses and diaphyses of the hands, feet and long bones, causing swelling, deformity and limb-length discrepancy",
+      "Radiographs show radiolucent intramedullary lesions with characteristic linear or stippled calcification and cortical expansion",
+      "Pathological fracture through a lesion is a common presentation",
+      "Malignant transformation to chondrosarcoma is a recognised long-term risk, higher than in solitary enchondroma and increasing with lesion number",
+      "Distinguish from multiple hereditary exostoses, where the lesions are surface osteochondromas rather than intramedullary enchondromas"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey to map the distribution and burden of enchondromas, MRI of symptomatic or enlarging lesions to assess cartilage",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ollier disease arises from somatic mosaic gain-of-function variants in the isocitrate dehydrogenase genes IDH1 or IDH2, occurring in a subset of cells during development. Mutant IDH enzymes produce the oncometabolite 2-hydroxyglutarate, which disturbs DNA and histone methylation and blocks normal chondrocyte differentiation. Islands of residual growth-plate cartilage persist and continue to proliferate within the medullary cavity as enchondromas rather than being resorbed and replaced by bone. The mosaic origin explains the asymmetric distribution and the absence of vertical transmission.",
+    "additionalDifferentials": [
+      "Multiple hereditary exostoses",
+      "Maffucci syndrome (enchondromatosis with haemangiomas)",
+      "Metachondromatosis",
+      "Fibrous dysplasia",
+      "Solitary enchondroma",
+      "Chondrosarcoma"
     ],
-    [
-     "Primary Differentials",
-     "Multiple hereditary exostoses, Maffucci syndrome (enchondromatosis with haemangiomas), Metachondromatosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey to map the distribution and burden of enchondromas",
+      "MRI of symptomatic or enlarging lesions to assess cartilage and aggressive features",
+      "Consideration of somatic IDH1/IDH2 testing on lesional tissue where diagnosis is uncertain",
+      "Imaging surveillance for change in size, cortical breach or soft-tissue mass",
+      "Biopsy of any lesion with features suspicious for malignant transformation"
     ],
-    [
-     "Management Strategy",
-     "No medical therapy exists for the enchondromas themselves; management combines surveillance with orthopaedic treatment of",
-     "Core treatment modality"
+    "redFlags": [
+      "New pain or growth of a previously stable lesion suggesting malignant transformation",
+      "Cortical destruction or an associated soft-tissue mass on imaging",
+      "Pathological fracture requiring orthopaedic management",
+      "Rapidly progressive deformity or functional impairment"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an inherited disorder and giving incorrect recurrence-risk counselling, when the condition is sporadic and mosaic",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on lesion number, size and site; morbidity comes from deformity, limb-length discrepancy and fracture, while the principal serious concern is malignant transformation to chondrosarcoma, warranting lifelong surveillance.",
+    "pitfalls": [
+      "Assuming an inherited disorder and giving incorrect recurrence-risk counselling, when the condition is sporadic and mosaic",
+      "Failing to arrange surveillance for malignant transformation",
+      "Confusing intramedullary enchondromas with the surface osteochondromas of hereditary exostoses",
+      "Missing an associated haemangioma that would reclassify the disorder as Maffucci syndrome"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Orphanet / WHO Classification of Tumours: Enchondromatosis (Ollier disease)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No medical therapy exists for the enchondromas themselves; management combines surveillance with orthopaedic treatment of complications",
+      "Orthopaedic surgery for deformity, pathological fracture and limb-length discrepancy, including curettage and grafting, corrective osteotomy and limb equalisation or lengthening",
+      "Lifelong clinical and imaging surveillance for malignant transformation to chondrosarcoma, prompted by new pain, growth, cortical breach or a soft-tissue mass",
+      "Prompt MRI and biopsy of any lesion with aggressive features, proceeding to wide excision if chondrosarcoma is confirmed",
+      "Baseline skeletal survey to map lesion burden and distribution",
+      "Multidisciplinary care across orthopaedics, radiology and a specialist bone-tumour or sarcoma service",
+      "Reassurance that the disorder is a sporadic somatic-mosaic IDH1/IDH2 condition and not inherited, so routine familial genetic screening is unnecessary"
     ]
-   ],
-   "caption": "Overview comparison matrix for ollier disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ollier-disease-real-image",
-   "title": "Ollier disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "ollier_disease-pathway",
+      "title": "Ollier disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-hereditary disorder of multiple enchondromas caused by post-zygotic somatic mosaic variants in IDH1 or IDH2, so it is sporadic rather than inherited",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New pain or growth of a previously stable lesion suggesting malignant transformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey to map the distribution and burden of enchondromas, MRI of symptomatic or enlarging lesions to assess cartilage and aggressive features, Consideration of somatic IDH1/IDH2 testing on lesional tissue where"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No medical therapy exists for the enchondromas themselves; management combines surveillance with orthopaedic treatment of complications"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an inherited disorder and giving incorrect recurrence-risk counselling, when the condition is sporadic and mosaic"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ollier disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ollier_disease-matrix",
+      "title": "Ollier disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-hereditary disorder of multiple enchondromas caused by post-zygotic somatic mosaic variants in IDH1 or IDH2, so it is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey to map the distribution and burden of enchondromas, MRI of symptomatic or enlarging lesions to assess cartilage",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Multiple hereditary exostoses, Maffucci syndrome (enchondromatosis with haemangiomas), Metachondromatosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No medical therapy exists for the enchondromas themselves; management combines surveillance with orthopaedic treatment of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an inherited disorder and giving incorrect recurrence-risk counselling, when the condition is sporadic and mosaic",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ollier disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ollier_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Distribution and burden of enchondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of symptomatic or enlarging lesions",
+          "cells": [
+            {
+              "text": "Cartilage and aggressive features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IDH1 and IDH2 testing on lesional tissue",
+          "cells": [
+            {
+              "text": "Somatic variants where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging surveillance",
+          "cells": [
+            {
+              "text": "Change in size, cortical breach or soft-tissue mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of suspicious lesions",
+          "cells": [
+            {
+              "text": "Features suggesting malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ollier_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple hereditary exostoses",
+          "cells": [
+            {
+              "text": "Surface osteochondromas, rather than intramedullary enchondromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maffucci syndrome",
+          "cells": [
+            {
+              "text": "Associated haemangiomas reclassify the disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary enchondroma",
+          "cells": [
+            {
+              "text": "Single lesion; in Ollier disease malignant risk is higher and rises with lesion number"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondrosarcoma",
+          "cells": [
+            {
+              "text": "Cortical destruction or an associated soft-tissue mass on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ollier_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surveillance of enchondromas",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "No medical therapy for the enchondromas themselves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surgery",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Curettage and grafting, corrective osteotomy or limb equalisation for deformity, fracture or limb-length discrepancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance for chondrosarcoma",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Prompted by new pain, growth, cortical breach or a soft-tissue mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI and biopsy of aggressive lesions",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Wide excision if chondrosarcoma is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Orthopaedics, radiology and a bone-tumour or sarcoma service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance on inheritance",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Sporadic somatic-mosaic IDH1/IDH2 condition, so routine familial screening is unnecessary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ollier_disease-dx-mgmt",
+      "title": "Diagnosis and management of Ollier disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple asymmetric enchondromas with limb deformity or pathological fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new pain or growth, cortical destruction, soft-tissue mass or fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: MRI and biopsy of aggressive lesions; sarcoma service referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; MRI of symptomatic lesions; IDH1/IDH2 testing if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do imaging and IDH testing confirm enchondromas without malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hereditary exostoses, Maffucci syndrome or fibrous dysplasia; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No medical therapy; surveillance of the enchondromas themselves",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthopaedic surgery for deformity, fracture or limb-length discrepancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong surveillance for chondrosarcoma: new pain, growth or cortical breach",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wide excision if chondrosarcoma is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassure: sporadic and not inherited, so familial screening is unnecessary",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Deformity and fracture are the morbidity; chondrosarcoma needs lifelong watch",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

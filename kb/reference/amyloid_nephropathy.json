@@ -1,176 +1,817 @@
 {
- "id": "amyloid_nephropathy",
- "name": "Renal amyloidosis (AL/AA)",
- "aliases": [
-  "amyloid nephropathy",
-  "renal amyloidosis",
-  "AL amyloidosis",
-  "AA amyloidosis",
-  "amyloid kidney disease"
- ],
- "class": "non_infective",
- "system": "Renal / Nephrology",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Renal amyloidosis is caused by deposition of misfolded protein as insoluble beta-pleated fibrils, most often AL (monoclonal light chain) or AA (serum amyloid A in chronic inflammation)",
-   "Presents typically with heavy proteinuria and nephrotic syndrome, often with preserved-sized or enlarged kidneys despite renal impairment",
-   "Congo-red staining showing apple-green birefringence under polarised light is the diagnostic hallmark on biopsy",
-   "Amyloid typing (by mass spectrometry or immunohistochemistry) is essential because AL, AA and hereditary forms have entirely different treatments",
-   "AL amyloidosis reflects an underlying plasma-cell clone and demands a paraprotein and free light-chain workup with cardiac assessment",
-   "AA amyloidosis follows chronic inflammatory, infective or autoinflammatory disease, so control of the underlying inflammation is central",
-   "Management is directed at the source: clone-directed therapy for paraprotein-related AL disease and suppression of inflammation for AA disease"
+  "id": "amyloid_nephropathy",
+  "name": "Renal amyloidosis (AL/AA)",
+  "aliases": [
+    "amyloid nephropathy",
+    "renal amyloidosis",
+    "AL amyloidosis",
+    "AA amyloidosis",
+    "amyloid kidney disease"
   ],
-  "pathophysiology": "Amyloidosis is a disorder of protein misfolding in which a precursor protein aggregates into stable, insoluble beta-pleated sheet fibrils that deposit in the extracellular matrix. In AL amyloidosis a clonal plasma-cell population produces monoclonal immunoglobulin light chains prone to misfolding; in AA amyloidosis the acute-phase reactant serum amyloid A is overproduced during chronic inflammation and its cleavage fragments deposit. In the kidney, fibrils accumulate preferentially in the mesangium and glomerular basement membrane, and later in vessel walls and the interstitium, expanding the mesangium and disrupting the filtration barrier to cause progressive proteinuria and renal impairment. The Congo-red-positive deposits are non-branching fibrils on electron microscopy.",
-  "additionalDifferentials": [
-   "Diabetic nodular glomerulosclerosis",
-   "Light chain deposition disease",
-   "Fibrillary glomerulonephritis",
-   "Membranous nephropathy",
-   "Monoclonal immunoglobulin deposition disease",
-   "Focal segmental glomerulosclerosis with heavy proteinuria"
-  ],
-  "additionalInvestigations": [
-   "Renal biopsy with Congo-red staining and polarised microscopy",
-   "Amyloid typing by mass spectrometry or immunohistochemistry",
-   "Serum and urine protein electrophoresis with serum free light chains",
-   "Bone marrow examination for a plasma-cell clone in suspected AL disease",
-   "Cardiac assessment (echocardiography, biomarkers) and search for other organ involvement",
-   "Screening for chronic inflammatory or infective disease and SAA levels in suspected AA disease"
-  ],
-  "redFlags": [
-   "Cardiac involvement with heart failure or arrhythmia, a major determinant of survival in AL disease",
-   "Rapidly worsening renal function or profound nephrotic syndrome",
-   "Newly identified monoclonal protein or plasma-cell dyscrasia",
-   "Autonomic dysfunction, gastrointestinal bleeding or bleeding diathesis suggesting multisystem amyloid"
-  ],
-  "prognosis": "Prognosis depends chiefly on amyloid type and extra-renal involvement, particularly the heart in AL disease, which dominates survival. Reducing the amyloidogenic precursor, whether by clone-directed therapy in AL disease or by controlling inflammation in AA disease, can stabilise or improve organ function, but advanced renal or cardiac deposition carries a poor outlook.",
-  "pitfalls": [
-   "Failing to type the amyloid, leading to inappropriate treatment",
-   "Assuming small kidneys, when amyloid kidneys are often normal or enlarged",
-   "Overlooking cardiac involvement that governs prognosis in AL disease",
-   "Not screening for an underlying plasma-cell clone or chronic inflammatory driver",
-   "Attributing nodular glomerular lesions to diabetes without Congo-red staining"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "Brenner and Rector's The Kidney"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish the amyloid type by tissue typing before treatment, as AL, AA and hereditary forms require entirely different therapy",
-   "Treat AL disease with clone-directed therapy against the plasma-cell clone, such as bortezomib-based regimens with daratumumab, to reduce the amyloidogenic light chain",
-   "Treat AA disease by suppressing the underlying inflammation, using targeted biologics such as interleukin-1 or tumour necrosis factor inhibitors where an autoinflammatory or rheumatic driver is present",
-   "Manage the nephrotic syndrome with renin-angiotensin blockade to reduce proteinuria, and diuretics with salt restriction for oedema",
-   "Monitor renal function, proteinuria and cardiac involvement, and address the thrombotic risk of heavy proteinuria",
-   "Provide renal replacement therapy for progressive failure and consider transplantation once the precursor is controlled",
-   "Manage jointly with nephrology, haematology and cardiology, and arrange genetic counselling if a hereditary form is confirmed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "amyloid_nephropathy-pathway",
-   "title": "Renal amyloidosis (AL/AA): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Renal amyloidosis is caused by deposition of misfolded protein as insoluble beta-pleated fibrils, most often AL (monoclonal light chain) or AA (serum amyloid A in chronic inflammation)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac involvement with heart failure or arrhythmia, a major determinant of survival in AL disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal biopsy with Congo-red staining and polarised microscopy, Amyloid typing by mass spectrometry or immunohistochemistry, Serum and urine protein electrophoresis with serum free light chains"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish the amyloid type by tissue typing before treatment, as AL, AA and hereditary forms require entirely different therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to type the amyloid, leading to inappropriate treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of renal amyloidosis (al/aa)."
-  }
- ],
- "tables": [
-  {
-   "id": "amyloid_nephropathy-matrix",
-   "title": "Renal amyloidosis (AL/AA): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Renal amyloidosis is caused by deposition of misfolded protein as insoluble beta-pleated fibrils, most often AL (monoclonal light",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Nephrology",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Renal amyloidosis is caused by deposition of misfolded protein as insoluble beta-pleated fibrils, most often AL (monoclonal light chain) or AA (serum amyloid A in chronic inflammation)",
+      "Presents typically with heavy proteinuria and nephrotic syndrome, often with preserved-sized or enlarged kidneys despite renal impairment",
+      "Congo-red staining showing apple-green birefringence under polarised light is the diagnostic hallmark on biopsy",
+      "Amyloid typing (by mass spectrometry or immunohistochemistry) is essential because AL, AA and hereditary forms have entirely different treatments",
+      "AL amyloidosis reflects an underlying plasma-cell clone and demands a paraprotein and free light-chain workup with cardiac assessment",
+      "AA amyloidosis follows chronic inflammatory, infective or autoinflammatory disease, so control of the underlying inflammation is central",
+      "Management is directed at the source: clone-directed therapy for paraprotein-related AL disease and suppression of inflammation for AA disease"
     ],
-    [
-     "Key Investigations",
-     "Renal biopsy with Congo-red staining and polarised microscopy, Amyloid typing by mass spectrometry or immunohistochemistry, Serum",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Amyloidosis is a disorder of protein misfolding in which a precursor protein aggregates into stable, insoluble beta-pleated sheet fibrils that deposit in the extracellular matrix. In AL amyloidosis a clonal plasma-cell population produces monoclonal immunoglobulin light chains prone to misfolding; in AA amyloidosis the acute-phase reactant serum amyloid A is overproduced during chronic inflammation and its cleavage fragments deposit. In the kidney, fibrils accumulate preferentially in the mesangium and glomerular basement membrane, and later in vessel walls and the interstitium, expanding the mesangium and disrupting the filtration barrier to cause progressive proteinuria and renal impairment. The Congo-red-positive deposits are non-branching fibrils on electron microscopy.",
+    "additionalDifferentials": [
+      "Diabetic nodular glomerulosclerosis",
+      "Light chain deposition disease",
+      "Fibrillary glomerulonephritis",
+      "Membranous nephropathy",
+      "Monoclonal immunoglobulin deposition disease",
+      "Focal segmental glomerulosclerosis with heavy proteinuria"
     ],
-    [
-     "Primary Differentials",
-     "Diabetic nodular glomerulosclerosis, Light chain deposition disease, Fibrillary glomerulonephritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal biopsy with Congo-red staining and polarised microscopy",
+      "Amyloid typing by mass spectrometry or immunohistochemistry",
+      "Serum and urine protein electrophoresis with serum free light chains",
+      "Bone marrow examination for a plasma-cell clone in suspected AL disease",
+      "Cardiac assessment (echocardiography, biomarkers) and search for other organ involvement",
+      "Screening for chronic inflammatory or infective disease and SAA levels in suspected AA disease"
     ],
-    [
-     "Management Strategy",
-     "Establish the amyloid type by tissue typing before treatment, as AL, AA and hereditary forms require entirely different therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac involvement with heart failure or arrhythmia, a major determinant of survival in AL disease",
+      "Rapidly worsening renal function or profound nephrotic syndrome",
+      "Newly identified monoclonal protein or plasma-cell dyscrasia",
+      "Autonomic dysfunction, gastrointestinal bleeding or bleeding diathesis suggesting multisystem amyloid"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to type the amyloid, leading to inappropriate treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends chiefly on amyloid type and extra-renal involvement, particularly the heart in AL disease, which dominates survival. Reducing the amyloidogenic precursor, whether by clone-directed therapy in AL disease or by controlling inflammation in AA disease, can stabilise or improve organ function, but advanced renal or cardiac deposition carries a poor outlook.",
+    "pitfalls": [
+      "Failing to type the amyloid, leading to inappropriate treatment",
+      "Assuming small kidneys, when amyloid kidneys are often normal or enlarged",
+      "Overlooking cardiac involvement that governs prognosis in AL disease",
+      "Not screening for an underlying plasma-cell clone or chronic inflammatory driver",
+      "Attributing nodular glomerular lesions to diabetes without Congo-red staining"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "Brenner and Rector's The Kidney"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish the amyloid type by tissue typing before treatment, as AL, AA and hereditary forms require entirely different therapy",
+      "Treat AL disease with clone-directed therapy against the plasma-cell clone, such as bortezomib-based regimens with daratumumab, to reduce the amyloidogenic light chain",
+      "Treat AA disease by suppressing the underlying inflammation, using targeted biologics such as interleukin-1 or tumour necrosis factor inhibitors where an autoinflammatory or rheumatic driver is present",
+      "Manage the nephrotic syndrome with renin-angiotensin blockade to reduce proteinuria, and diuretics with salt restriction for oedema",
+      "Monitor renal function, proteinuria and cardiac involvement, and address the thrombotic risk of heavy proteinuria",
+      "Provide renal replacement therapy for progressive failure and consider transplantation once the precursor is controlled",
+      "Manage jointly with nephrology, haematology and cardiology, and arrange genetic counselling if a hereditary form is confirmed"
     ]
-   ],
-   "caption": "Overview comparison matrix for renal amyloidosis (al/aa)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "amyloid-nephropathy-real-image",
-   "title": "Renal amyloidosis (AL/AA): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "amyloid_nephropathy-pathway",
+      "title": "Renal amyloidosis (AL/AA): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Renal amyloidosis is caused by deposition of misfolded protein as insoluble beta-pleated fibrils, most often AL (monoclonal light chain) or AA (serum amyloid A in chronic inflammation)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac involvement with heart failure or arrhythmia, a major determinant of survival in AL disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal biopsy with Congo-red staining and polarised microscopy, Amyloid typing by mass spectrometry or immunohistochemistry, Serum and urine protein electrophoresis with serum free light chains"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish the amyloid type by tissue typing before treatment, as AL, AA and hereditary forms require entirely different therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to type the amyloid, leading to inappropriate treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of renal amyloidosis (al/aa)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "amyloid_nephropathy-matrix",
+      "title": "Renal amyloidosis (AL/AA): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Renal amyloidosis is caused by deposition of misfolded protein as insoluble beta-pleated fibrils, most often AL (monoclonal light",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal biopsy with Congo-red staining and polarised microscopy, Amyloid typing by mass spectrometry or immunohistochemistry, Serum",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Diabetic nodular glomerulosclerosis, Light chain deposition disease, Fibrillary glomerulonephritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish the amyloid type by tissue typing before treatment, as AL, AA and hereditary forms require entirely different therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to type the amyloid, leading to inappropriate treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for renal amyloidosis (al/aa)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 112-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "amyloid_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy with Congo-red staining and polarised microscopy",
+          "cells": [
+            {
+              "text": "Apple-green birefringence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid typing by mass spectrometry or immunohistochemistry",
+          "cells": [
+            {
+              "text": "AL, AA or hereditary type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine protein electrophoresis with serum free light chains",
+          "cells": [
+            {
+              "text": "Monoclonal protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Plasma-cell clone in suspected AL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAA levels and screen for inflammatory or infective disease",
+          "cells": [
+            {
+              "text": "AA amyloidosis driver"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amyloid_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetic nodular glomerulosclerosis",
+          "cells": [
+            {
+              "text": "Diabetic kidney disease"
+            },
+            {
+              "text": "Biopsy and clinical history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Light chain deposition disease",
+          "cells": [
+            {
+              "text": "Light chain deposits without fibrils"
+            },
+            {
+              "text": "Biopsy and immunofixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrillary glomerulonephritis",
+          "cells": [
+            {
+              "text": "Non-Congo-red fibrils"
+            },
+            {
+              "text": "Electron microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Membranous nephropathy",
+          "cells": [
+            {
+              "text": "Nephrotic proteinuria"
+            },
+            {
+              "text": "Biopsy and antibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monoclonal immunoglobulin deposition disease",
+          "cells": [
+            {
+              "text": "Monoclonal deposits"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal segmental glomerulosclerosis",
+          "cells": [
+            {
+              "text": "Heavy proteinuria"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amyloid_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clone-directed therapy with bortezomib-based regimens and daratumumab for AL",
+          "cells": [
+            {
+              "text": "Amyloidogenic light chain"
+            },
+            {
+              "text": "Plasma-cell directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interleukin-1 or tumour necrosis factor inhibitors for AA",
+          "cells": [
+            {
+              "text": "Inflammatory driver"
+            },
+            {
+              "text": "Targeted biologics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renin-angiotensin blockade, diuretics and salt restriction",
+          "cells": [
+            {
+              "text": "Nephrotic syndrome and oedema"
+            },
+            {
+              "text": "Renal management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of renal function, proteinuria and cardiac involvement",
+          "cells": [
+            {
+              "text": "Progression and thrombotic risk"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy and transplantation once precursor controlled",
+          "cells": [
+            {
+              "text": "Progressive renal failure"
+            },
+            {
+              "text": "Timed after precursor control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling if hereditary form confirmed",
+          "cells": [
+            {
+              "text": "Hereditary amyloid"
+            },
+            {
+              "text": "Counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amyloid_nephropathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Amyloid fibril proteins and clinical syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Precursor protein",
+        "Clinical syndrome",
+        "Clinical involvement"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic: AL",
+          "cells": [
+            {
+              "text": "Immunoglobulin light chain"
+            },
+            {
+              "text": "Primary or myeloma associated (footnote a)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AH",
+          "cells": [
+            {
+              "text": "Immunoglobulin heavy chain"
+            },
+            {
+              "text": "Primary or myeloma associated (rare)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AA",
+          "cells": [
+            {
+              "text": "Serum amyloid A protein"
+            },
+            {
+              "text": "Secondary, reactive (footnote b)"
+            },
+            {
+              "text": "Renal, any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: Abeta2M",
+          "cells": [
+            {
+              "text": "Beta2-microglobulin"
+            },
+            {
+              "text": "Hemodialysis associated"
+            },
+            {
+              "text": "Synovial membrane, bone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ATTR",
+          "cells": [
+            {
+              "text": "Transthyretin"
+            },
+            {
+              "text": "Familial (mutant); senile systemic (wild type)"
+            },
+            {
+              "text": "Cardiac, peripheral and autonomic nerves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAI",
+          "cells": [
+            {
+              "text": "Apolipoprotein AI"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Hepatic, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAII",
+          "cells": [
+            {
+              "text": "Apolipoprotein AII"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AGel",
+          "cells": [
+            {
+              "text": "Gelsolin"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Corneas, cranial nerves, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AFib",
+          "cells": [
+            {
+              "text": "Fibrinogen A alpha"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALys",
+          "cells": [
+            {
+              "text": "Lysozyme"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALECT2",
+          "cells": [
+            {
+              "text": "Leukocyte chemotactic factor 2"
+            },
+            {
+              "text": "Uncertain (printed as ?)"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: Abeta",
+          "cells": [
+            {
+              "text": "Amyloid beta protein"
+            },
+            {
+              "text": "Alzheimer's disease"
+            },
+            {
+              "text": "Down syndrome (as printed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACys",
+          "cells": [
+            {
+              "text": "Cystatin C"
+            },
+            {
+              "text": "Cerebral amyloid angiopathy"
+            },
+            {
+              "text": "CNS, vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APrP",
+          "cells": [
+            {
+              "text": "Prion protein"
+            },
+            {
+              "text": "Spongiform encephalopathies"
+            },
+            {
+              "text": "CNS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AIAPP",
+          "cells": [
+            {
+              "text": "Islet amyloid polypeptide (amylin)"
+            },
+            {
+              "text": "Diabetes associated"
+            },
+            {
+              "text": "Pancreas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACal",
+          "cells": [
+            {
+              "text": "Calcitonin"
+            },
+            {
+              "text": "Medullary carcinoma of the thyroid"
+            },
+            {
+              "text": "Thyroid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AANF",
+          "cells": [
+            {
+              "text": "Atrial natriuretic factor"
+            },
+            {
+              "text": "Age related"
+            },
+            {
+              "text": "Cardiac atria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APro",
+          "cells": [
+            {
+              "text": "Prolactin"
+            },
+            {
+              "text": "Endocrinopathy"
+            },
+            {
+              "text": "Pituitary"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote letters a and b appear on the AL and AA rows in the source but their text is not printed. The Abeta row layout is as printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "amyloid_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Renal amyloidosis (AL/AA)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heavy proteinuria or nephrotic syndrome with an enlarged or normal-sized kidney",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, arrhythmia or rapidly worsening renal function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology and nephrology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal biopsy with Congo red; amyloid typing; free light chains; marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Congo-positive amyloid with AL or AA type confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Clone-directed therapy for AL; anti-inflammatory therapy for AA",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review diabetic, light chain and fibrillary glomerulonephritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "RAS blockade and diuretics for nephrotic state",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor renal function, proteinuria and cardiac status",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement therapy or transplant once precursor controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Survival is set by amyloid type and cardiac involvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

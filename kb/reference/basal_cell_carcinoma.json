@@ -1,174 +1,474 @@
 {
- "id": "basal_cell_carcinoma",
- "name": "Basal Cell Carcinoma",
- "aliases": [
-  "BCC",
-  "rodent ulcer",
-  "basal cell cancer"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic nodular type is a slow-growing, pearly or translucent papule with rolled edges, surface telangiectasia, and sometimes central ulceration (the rodent ulcer)",
-   "It is the most common human cancer and arises chiefly on chronically sun-exposed skin, especially the head and neck",
-   "Recognise the main subtypes: nodular, superficial (often a scaly erythematous patch on the trunk), morphoeic/infiltrative (a scar-like indurated plaque with ill-defined margins), and pigmented",
-   "Dermoscopy showing arborising vessels, blue-grey ovoid nests, and leaf-like areas supports the diagnosis",
-   "Although BCC almost never metastasises, it is locally invasive and can cause substantial tissue destruction if neglected, particularly around the eyes, nose, and ears",
-   "Treatment is guided by subtype, size, site, and risk, ranging from surgical excision (with margin-controlled surgery for high-risk facial lesions) to topical or destructive therapies for low-risk superficial disease",
-   "Multiple or early-onset BCCs should prompt consideration of predisposing conditions such as basal cell naevus (Gorlin) syndrome or prior radiation exposure",
-   "Advise lifelong photoprotection and skin surveillance, as a diagnosis of BCC predicts further skin cancers"
+  "id": "basal_cell_carcinoma",
+  "name": "Basal Cell Carcinoma",
+  "aliases": [
+    "BCC",
+    "rodent ulcer",
+    "basal cell cancer"
   ],
-  "pathophysiology": "Basal cell carcinoma is a malignancy of the basal keratinocytes of the epidermis and follicular structures, driven predominantly by ultraviolet-induced DNA damage. Aberrant activation of the Hedgehog signalling pathway, commonly through inactivating mutations in the PTCH1 tumour-suppressor gene or activating changes in SMO, is central to tumour development, alongside UV signature mutations in TP53. The tumour grows as nests of basaloid cells with peripheral palisading and a surrounding fibromyxoid stroma. Its behaviour is locally invasive rather than metastatic, and infiltrative or morphoeic patterns spread with subclinical extension that explains higher recurrence when margins are inadequate.",
-  "additionalDifferentials": [
-   "Squamous cell carcinoma",
-   "Amelanotic or pigmented melanoma (for a pigmented BCC)",
-   "Intradermal or other benign melanocytic naevus",
-   "Sebaceous hyperplasia",
-   "Bowen's disease or a plaque of psoriasis or eczema (for superficial BCC)",
-   "Scar or morphoea (for morphoeic BCC)"
-  ],
-  "additionalInvestigations": [
-   "Diagnostic skin biopsy to confirm the diagnosis and define the histological subtype, which guides treatment",
-   "Dermoscopy as an adjunct to clinical assessment",
-   "Full skin examination for synchronous skin cancers",
-   "Imaging in advanced or deeply infiltrative disease to assess local extension",
-   "Consideration of genetic assessment when multiple lesions occur at a young age"
-  ],
-  "redFlags": [
-   "A non-healing, ulcerating, or bleeding lesion on sun-exposed skin, which is a hallmark of malignancy",
-   "An ill-defined, indurated, scar-like plaque suggesting an infiltrative or morphoeic tumour with deep spread",
-   "Lesions at high-risk facial sites (eyes, nose, ears) where local destruction threatens vital structures",
-   "Numerous or early-onset tumours suggesting an inherited cancer syndrome or prior radiotherapy"
-  ],
-  "prognosis": "The prognosis is excellent because metastasis is exceedingly rare, and appropriately treated tumours are usually cured; however, incompletely excised or high-risk subtypes recur and can cause significant local morbidity, and patients remain at higher lifetime risk of further skin cancers requiring ongoing surveillance.",
-  "pitfalls": [
-   "Mistaking a morphoeic BCC for a scar and underestimating its true extent",
-   "Treating a superficial BCC as eczema or psoriasis and delaying diagnosis",
-   "Choosing a non-surgical or narrow-margin approach for high-risk or recurrent facial tumours",
-   "Failing to arrange ongoing skin surveillance after a first diagnosis"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical excision with predetermined margins as first-line treatment for most tumours",
-   "Margin-controlled Mohs micrographic surgery for high-risk, recurrent or facial lesions with subclinical spread",
-   "Topical imiquimod or fluorouracil, or destructive techniques such as cryotherapy or curettage and cautery, for low-risk superficial disease",
-   "Radiotherapy for patients unsuitable for surgery or as an adjuvant",
-   "Hedgehog pathway inhibitors such as vismodegib or sonidegib for locally advanced or metastatic disease",
-   "Rigorous photoprotection and sun-avoidance advice",
-   "Lifelong skin surveillance for local recurrence and new primary skin cancers",
-   "Multidisciplinary team input for advanced or complex tumours"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "basal_cell_carcinoma-pathway",
-   "title": "Basal Cell Carcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic nodular type is a slow-growing, pearly or translucent papule with rolled edges, surface telangiectasia, and sometimes central ulceration (the rodent ulcer)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A non-healing, ulcerating, or bleeding lesion on sun-exposed skin, which is a hallmark of malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diagnostic skin biopsy to confirm the diagnosis and define the histological subtype, which guides treatment, Dermoscopy as an adjunct to clinical assessment, Full skin examination for synchronous skin cancers"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical excision with predetermined margins as first-line treatment for most tumours"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a morphoeic BCC for a scar and underestimating its true extent"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of basal cell carcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "basal_cell_carcinoma-matrix",
-   "title": "Basal Cell Carcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic nodular type is a slow-growing, pearly or translucent papule with rolled edges, surface telangiectasia, and sometimes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic nodular type is a slow-growing, pearly or translucent papule with rolled edges, surface telangiectasia, and sometimes central ulceration (the rodent ulcer)",
+      "It is the most common human cancer and arises chiefly on chronically sun-exposed skin, especially the head and neck",
+      "Recognise the main subtypes: nodular, superficial (often a scaly erythematous patch on the trunk), morphoeic/infiltrative (a scar-like indurated plaque with ill-defined margins), and pigmented",
+      "Dermoscopy showing arborising vessels, blue-grey ovoid nests, and leaf-like areas supports the diagnosis",
+      "Although BCC almost never metastasises, it is locally invasive and can cause substantial tissue destruction if neglected, particularly around the eyes, nose, and ears",
+      "Treatment is guided by subtype, size, site, and risk, ranging from surgical excision (with margin-controlled surgery for high-risk facial lesions) to topical or destructive therapies for low-risk superficial disease",
+      "Multiple or early-onset BCCs should prompt consideration of predisposing conditions such as basal cell naevus (Gorlin) syndrome or prior radiation exposure",
+      "Advise lifelong photoprotection and skin surveillance, as a diagnosis of BCC predicts further skin cancers"
     ],
-    [
-     "Key Investigations",
-     "Diagnostic skin biopsy to confirm the diagnosis and define the histological subtype, which guides treatment, Dermoscopy as an",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Basal cell carcinoma is a malignancy of the basal keratinocytes of the epidermis and follicular structures, driven predominantly by ultraviolet-induced DNA damage. Aberrant activation of the Hedgehog signalling pathway, commonly through inactivating mutations in the PTCH1 tumour-suppressor gene or activating changes in SMO, is central to tumour development, alongside UV signature mutations in TP53. The tumour grows as nests of basaloid cells with peripheral palisading and a surrounding fibromyxoid stroma. Its behaviour is locally invasive rather than metastatic, and infiltrative or morphoeic patterns spread with subclinical extension that explains higher recurrence when margins are inadequate.",
+    "additionalDifferentials": [
+      "Squamous cell carcinoma",
+      "Amelanotic or pigmented melanoma (for a pigmented BCC)",
+      "Intradermal or other benign melanocytic naevus",
+      "Sebaceous hyperplasia",
+      "Bowen's disease or a plaque of psoriasis or eczema (for superficial BCC)",
+      "Scar or morphoea (for morphoeic BCC)"
     ],
-    [
-     "Primary Differentials",
-     "Squamous cell carcinoma, Amelanotic or pigmented melanoma (for a pigmented BCC), Intradermal or other benign melanocytic naevus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diagnostic skin biopsy to confirm the diagnosis and define the histological subtype, which guides treatment",
+      "Dermoscopy as an adjunct to clinical assessment",
+      "Full skin examination for synchronous skin cancers",
+      "Imaging in advanced or deeply infiltrative disease to assess local extension",
+      "Consideration of genetic assessment when multiple lesions occur at a young age"
     ],
-    [
-     "Management Strategy",
-     "Surgical excision with predetermined margins as first-line treatment for most tumours",
-     "Core treatment modality"
+    "redFlags": [
+      "A non-healing, ulcerating, or bleeding lesion on sun-exposed skin, which is a hallmark of malignancy",
+      "An ill-defined, indurated, scar-like plaque suggesting an infiltrative or morphoeic tumour with deep spread",
+      "Lesions at high-risk facial sites (eyes, nose, ears) where local destruction threatens vital structures",
+      "Numerous or early-onset tumours suggesting an inherited cancer syndrome or prior radiotherapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a morphoeic BCC for a scar and underestimating its true extent",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent because metastasis is exceedingly rare, and appropriately treated tumours are usually cured; however, incompletely excised or high-risk subtypes recur and can cause significant local morbidity, and patients remain at higher lifetime risk of further skin cancers requiring ongoing surveillance.",
+    "pitfalls": [
+      "Mistaking a morphoeic BCC for a scar and underestimating its true extent",
+      "Treating a superficial BCC as eczema or psoriasis and delaying diagnosis",
+      "Choosing a non-surgical or narrow-margin approach for high-risk or recurrent facial tumours",
+      "Failing to arrange ongoing skin surveillance after a first diagnosis"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical excision with predetermined margins as first-line treatment for most tumours",
+      "Margin-controlled Mohs micrographic surgery for high-risk, recurrent or facial lesions with subclinical spread",
+      "Topical imiquimod or fluorouracil, or destructive techniques such as cryotherapy or curettage and cautery, for low-risk superficial disease",
+      "Radiotherapy for patients unsuitable for surgery or as an adjuvant",
+      "Hedgehog pathway inhibitors such as vismodegib or sonidegib for locally advanced or metastatic disease",
+      "Rigorous photoprotection and sun-avoidance advice",
+      "Lifelong skin surveillance for local recurrence and new primary skin cancers",
+      "Multidisciplinary team input for advanced or complex tumours"
     ]
-   ],
-   "caption": "Overview comparison matrix for basal cell carcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "basal-cell-carcinoma-real-image",
-   "title": "Basal Cell Carcinoma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "basal_cell_carcinoma-pathway",
+      "title": "Basal Cell Carcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic nodular type is a slow-growing, pearly or translucent papule with rolled edges, surface telangiectasia, and sometimes central ulceration (the rodent ulcer)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A non-healing, ulcerating, or bleeding lesion on sun-exposed skin, which is a hallmark of malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diagnostic skin biopsy to confirm the diagnosis and define the histological subtype, which guides treatment, Dermoscopy as an adjunct to clinical assessment, Full skin examination for synchronous skin cancers"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical excision with predetermined margins as first-line treatment for most tumours"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a morphoeic BCC for a scar and underestimating its true extent"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of basal cell carcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "basal_cell_carcinoma-matrix",
+      "title": "Basal Cell Carcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic nodular type is a slow-growing, pearly or translucent papule with rolled edges, surface telangiectasia, and sometimes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diagnostic skin biopsy to confirm the diagnosis and define the histological subtype, which guides treatment, Dermoscopy as an",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Squamous cell carcinoma, Amelanotic or pigmented melanoma (for a pigmented BCC), Intradermal or other benign melanocytic naevus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical excision with predetermined margins as first-line treatment for most tumours",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a morphoeic BCC for a scar and underestimating its true extent",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for basal cell carcinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "basal_cell_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diagnostic skin biopsy",
+          "cells": [
+            {
+              "text": "Diagnosis and histological subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Adjunct to clinical assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full skin examination",
+          "cells": [
+            {
+              "text": "Synchronous skin cancers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for advanced or deeply infiltrative disease",
+          "cells": [
+            {
+              "text": "Local extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic assessment for multiple lesions at a young age",
+          "cells": [
+            {
+              "text": "Inherited syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "basal_cell_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Separated by biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pigmented melanoma",
+          "cells": [
+            {
+              "text": "Pigmented BCC mimic; separated by biopsy and dermoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "basal_cell_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical excision with predetermined margins",
+          "cells": [
+            {
+              "text": "First-line for most tumours"
+            },
+            {
+              "text": "Most tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mohs micrographic surgery",
+          "cells": [
+            {
+              "text": "High-risk, recurrent or facial lesions with subclinical spread"
+            },
+            {
+              "text": "High-risk or facial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical imiquimod or fluorouracil",
+          "cells": [
+            {
+              "text": "Low-risk superficial disease"
+            },
+            {
+              "text": "Superficial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Destructive techniques",
+          "cells": [
+            {
+              "text": "Cryotherapy or curettage and cautery for low-risk superficial disease"
+            },
+            {
+              "text": "Low-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Unsuitable for surgery or as an adjuvant"
+            },
+            {
+              "text": "Surgery not suitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hedgehog pathway inhibitors",
+          "cells": [
+            {
+              "text": "Vismodegib or sonidegib for locally advanced or metastatic disease"
+            },
+            {
+              "text": "Advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection and surveillance",
+          "cells": [
+            {
+              "text": "Sun avoidance advice and lifelong skin surveillance"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "basal_cell_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Basal Cell Carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pearly papule or non-healing ulcer on sun-exposed skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Ill-defined indurated plaque or high-risk facial site?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent referral for high-risk facial or infiltrative lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diagnostic skin biopsy, dermoscopy, full skin examination, imaging if advanced",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Histology confirms basal cell carcinoma with subtype defined?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Surgical excision with predetermined margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mohs micrographic surgery for high-risk or recurrent lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical imiquimod or fluorouracil for low-risk superficial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hedgehog pathway inhibitors for locally advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong skin surveillance and photoprotection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

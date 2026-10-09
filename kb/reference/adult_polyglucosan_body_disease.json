@@ -1,176 +1,516 @@
 {
- "id": "adult_polyglucosan_body_disease",
- "name": "Adult polyglucosan body disease (GBE1)",
- "aliases": [
-  "APBD",
-  "glycogen branching enzyme deficiency, adult form",
-  "GBE1-related polyglucosan body disease",
-  "GBE1"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Cognitive & Movement",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents in mid-to-late adulthood with a triad of progressive spastic paraparesis, a length-dependent peripheral neuropathy and early neurogenic bladder dysfunction",
-   "Caused by deficiency of glycogen branching enzyme due to mutations in GBE1, leading to accumulation of poorly branched glycogen as polyglucosan bodies",
-   "Cognitive decline develops in a proportion of patients, adding a dementia component to the motor and bladder features",
-   "Early and prominent urinary symptoms out of proportion to the motor deficit are a useful clinical pointer",
-   "MRI often shows white matter change with involvement of the medulla and spinal cord and marked atrophy",
-   "Reduced branching enzyme activity in leucocytes or fibroblasts and characteristic polyglucosan bodies on nerve biopsy support the diagnosis",
-   "GBE1 genetic testing confirms the diagnosis, and the disorder is over-represented in people of Ashkenazi Jewish ancestry"
+  "id": "adult_polyglucosan_body_disease",
+  "name": "Adult polyglucosan body disease (GBE1)",
+  "aliases": [
+    "APBD",
+    "glycogen branching enzyme deficiency, adult form",
+    "GBE1-related polyglucosan body disease",
+    "GBE1"
   ],
-  "pathophysiology": "Adult polyglucosan body disease results from deficiency of the glycogen branching enzyme encoded by GBE1, which normally introduces branch points into glycogen. Reduced enzyme activity leads to the synthesis of an abnormal, poorly branched, amylopectin-like glycogen that accumulates as intracellular polyglucosan bodies within neurones, glia and peripheral nerves, as well as other tissues. Deposition throughout the central and peripheral nervous systems produces axonal degeneration, demyelination and neuronal dysfunction, manifesting as the characteristic combination of spastic paraparesis, peripheral neuropathy, neurogenic bladder and, in some patients, cognitive impairment.",
-  "additionalDifferentials": [
-   "Hereditary spastic paraparesis",
-   "Amyotrophic lateral sclerosis and other motor neurone disorders",
-   "Subacute combined degeneration from vitamin B12 deficiency",
-   "Multiple sclerosis with progressive myelopathy",
-   "Chronic inflammatory demyelinating polyradiculoneuropathy",
-   "Adrenomyeloneuropathy",
-   "Other leukodystrophies of adult onset"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and spinal cord to characterise white matter change and atrophy",
-   "Nerve conduction studies confirming a predominantly axonal peripheral neuropathy",
-   "Glycogen branching enzyme activity assay in leucocytes or cultured fibroblasts",
-   "GBE1 gene testing to confirm the diagnosis",
-   "Urodynamic assessment to characterise neurogenic bladder dysfunction",
-   "Nerve or other tissue biopsy demonstrating polyglucosan bodies when required"
-  ],
-  "redFlags": [
-   "Rapidly progressive weakness or bulbar involvement inconsistent with the expected slow course",
-   "Recurrent urinary retention or infection from an unrecognised neurogenic bladder",
-   "Falls and immobility from advancing spastic paraparesis",
-   "Cognitive decline raising safety and capacity concerns"
-  ],
-  "prognosis": "The disorder progresses slowly over years, with accumulating gait impairment, bladder dysfunction and, in some, dementia leading to significant disability; management is supportive, targeting spasticity, bladder symptoms and mobility, and genetic counselling is offered.",
-  "pitfalls": [
-   "Attributing early bladder symptoms to a urological cause and missing the underlying neurological disorder",
-   "Confusing the presentation with more common causes of spastic paraparesis without pursuing enzyme or genetic testing",
-   "Failing to consider the diagnosis in patients of Ashkenazi Jewish ancestry with the characteristic triad",
-   "Overlooking peripheral neuropathy when spasticity dominates the clinical picture"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat spasticity with antispasticity agents such as baclofen or tizanidine alongside physiotherapy and stretching",
-   "Manage neurogenic bladder with anticholinergics, timed voiding and intermittent self-catheterisation, guided by urodynamic findings",
-   "Provide gait aids, orthoses, occupational therapy and falls prevention to preserve mobility",
-   "Manage the peripheral neuropathy symptomatically, including neuropathic pain agents and protective foot care",
-   "Support cognition and provide caregiver and psychological support where dementia develops",
-   "Monitor for complications such as recurrent urinary infection, pressure injury and swallowing difficulty over the progressive course",
-   "Offer genetic counselling and GBE1 carrier testing to at-risk relatives given autosomal recessive inheritance",
-   "Coordinate multidisciplinary care across neurology, urology, rehabilitation and specialist nursing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adult_polyglucosan_body_disease-pathway",
-   "title": "Adult polyglucosan body disease (GBE1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents in mid-to-late adulthood with a triad of progressive spastic paraparesis, a length-dependent peripheral neuropathy and early neurogenic bladder dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive weakness or bulbar involvement inconsistent with the expected slow course",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and spinal cord to characterise white matter change and atrophy, Nerve conduction studies confirming a predominantly axonal peripheral neuropathy, Glycogen branching enzyme activity assay in leucocytes or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat spasticity with antispasticity agents such as baclofen or tizanidine alongside physiotherapy and stretching"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing early bladder symptoms to a urological cause and missing the underlying neurological disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of adult polyglucosan body disease (gbe1)."
-  }
- ],
- "tables": [
-  {
-   "id": "adult_polyglucosan_body_disease-matrix",
-   "title": "Adult polyglucosan body disease (GBE1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents in mid-to-late adulthood with a triad of progressive spastic paraparesis, a length-dependent peripheral neuropathy and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Cognitive & Movement",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents in mid-to-late adulthood with a triad of progressive spastic paraparesis, a length-dependent peripheral neuropathy and early neurogenic bladder dysfunction",
+      "Caused by deficiency of glycogen branching enzyme due to mutations in GBE1, leading to accumulation of poorly branched glycogen as polyglucosan bodies",
+      "Cognitive decline develops in a proportion of patients, adding a dementia component to the motor and bladder features",
+      "Early and prominent urinary symptoms out of proportion to the motor deficit are a useful clinical pointer",
+      "MRI often shows white matter change with involvement of the medulla and spinal cord and marked atrophy",
+      "Reduced branching enzyme activity in leucocytes or fibroblasts and characteristic polyglucosan bodies on nerve biopsy support the diagnosis",
+      "GBE1 genetic testing confirms the diagnosis, and the disorder is over-represented in people of Ashkenazi Jewish ancestry"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and spinal cord to characterise white matter change and atrophy, Nerve conduction studies confirming a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Adult polyglucosan body disease results from deficiency of the glycogen branching enzyme encoded by GBE1, which normally introduces branch points into glycogen. Reduced enzyme activity leads to the synthesis of an abnormal, poorly branched, amylopectin-like glycogen that accumulates as intracellular polyglucosan bodies within neurones, glia and peripheral nerves, as well as other tissues. Deposition throughout the central and peripheral nervous systems produces axonal degeneration, demyelination and neuronal dysfunction, manifesting as the characteristic combination of spastic paraparesis, peripheral neuropathy, neurogenic bladder and, in some patients, cognitive impairment.",
+    "additionalDifferentials": [
+      "Hereditary spastic paraparesis",
+      "Amyotrophic lateral sclerosis and other motor neurone disorders",
+      "Subacute combined degeneration from vitamin B12 deficiency",
+      "Multiple sclerosis with progressive myelopathy",
+      "Chronic inflammatory demyelinating polyradiculoneuropathy",
+      "Adrenomyeloneuropathy",
+      "Other leukodystrophies of adult onset"
     ],
-    [
-     "Primary Differentials",
-     "Hereditary spastic paraparesis, Amyotrophic lateral sclerosis and other motor neurone disorders, Subacute combined degeneration",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and spinal cord to characterise white matter change and atrophy",
+      "Nerve conduction studies confirming a predominantly axonal peripheral neuropathy",
+      "Glycogen branching enzyme activity assay in leucocytes or cultured fibroblasts",
+      "GBE1 gene testing to confirm the diagnosis",
+      "Urodynamic assessment to characterise neurogenic bladder dysfunction",
+      "Nerve or other tissue biopsy demonstrating polyglucosan bodies when required"
     ],
-    [
-     "Management Strategy",
-     "Treat spasticity with antispasticity agents such as baclofen or tizanidine alongside physiotherapy and stretching",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive weakness or bulbar involvement inconsistent with the expected slow course",
+      "Recurrent urinary retention or infection from an unrecognised neurogenic bladder",
+      "Falls and immobility from advancing spastic paraparesis",
+      "Cognitive decline raising safety and capacity concerns"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing early bladder symptoms to a urological cause and missing the underlying neurological disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder progresses slowly over years, with accumulating gait impairment, bladder dysfunction and, in some, dementia leading to significant disability; management is supportive, targeting spasticity, bladder symptoms and mobility, and genetic counselling is offered.",
+    "pitfalls": [
+      "Attributing early bladder symptoms to a urological cause and missing the underlying neurological disorder",
+      "Confusing the presentation with more common causes of spastic paraparesis without pursuing enzyme or genetic testing",
+      "Failing to consider the diagnosis in patients of Ashkenazi Jewish ancestry with the characteristic triad",
+      "Overlooking peripheral neuropathy when spasticity dominates the clinical picture"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat spasticity with antispasticity agents such as baclofen or tizanidine alongside physiotherapy and stretching",
+      "Manage neurogenic bladder with anticholinergics, timed voiding and intermittent self-catheterisation, guided by urodynamic findings",
+      "Provide gait aids, orthoses, occupational therapy and falls prevention to preserve mobility",
+      "Manage the peripheral neuropathy symptomatically, including neuropathic pain agents and protective foot care",
+      "Support cognition and provide caregiver and psychological support where dementia develops",
+      "Monitor for complications such as recurrent urinary infection, pressure injury and swallowing difficulty over the progressive course",
+      "Offer genetic counselling and GBE1 carrier testing to at-risk relatives given autosomal recessive inheritance",
+      "Coordinate multidisciplinary care across neurology, urology, rehabilitation and specialist nursing"
     ]
-   ],
-   "caption": "Overview comparison matrix for adult polyglucosan body disease (gbe1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adult-polyglucosan-body-disease-real-image",
-   "title": "Adult polyglucosan body disease (GBE1): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "adult_polyglucosan_body_disease-pathway",
+      "title": "Adult polyglucosan body disease (GBE1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents in mid-to-late adulthood with a triad of progressive spastic paraparesis, a length-dependent peripheral neuropathy and early neurogenic bladder dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive weakness or bulbar involvement inconsistent with the expected slow course",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and spinal cord to characterise white matter change and atrophy, Nerve conduction studies confirming a predominantly axonal peripheral neuropathy, Glycogen branching enzyme activity assay in leucocytes or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat spasticity with antispasticity agents such as baclofen or tizanidine alongside physiotherapy and stretching"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing early bladder symptoms to a urological cause and missing the underlying neurological disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of adult polyglucosan body disease (gbe1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adult_polyglucosan_body_disease-matrix",
+      "title": "Adult polyglucosan body disease (GBE1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents in mid-to-late adulthood with a triad of progressive spastic paraparesis, a length-dependent peripheral neuropathy and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and spinal cord to characterise white matter change and atrophy, Nerve conduction studies confirming a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hereditary spastic paraparesis, Amyotrophic lateral sclerosis and other motor neurone disorders, Subacute combined degeneration",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat spasticity with antispasticity agents such as baclofen or tizanidine alongside physiotherapy and stretching",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing early bladder symptoms to a urological cause and missing the underlying neurological disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for adult polyglucosan body disease (gbe1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adult_polyglucosan_body_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain and spinal cord",
+          "cells": [
+            {
+              "text": "White matter change and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Predominantly axonal neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycogen branching enzyme activity assay in leucocytes or fibroblasts",
+          "cells": [
+            {
+              "text": "Reduced enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GBE1 gene testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urodynamic assessment",
+          "cells": [
+            {
+              "text": "Neurogenic bladder dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve or tissue biopsy when required",
+          "cells": [
+            {
+              "text": "Polyglucosan bodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adult_polyglucosan_body_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary spastic paraparesis",
+          "cells": [
+            {
+              "text": "Progressive spastic paraparesis"
+            },
+            {
+              "text": "GBE1 gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+          "cells": [
+            {
+              "text": "Demyelinating neuropathy"
+            },
+            {
+              "text": "Nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenomyeloneuropathy",
+          "cells": [
+            {
+              "text": "X-linked, with very-long-chain fatty acid accumulation"
+            },
+            {
+              "text": "Very-long-chain fatty acid profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute combined degeneration from vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Posterior column involvement"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adult_polyglucosan_body_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antispasticity agents (baclofen or tizanidine) with physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Spasticity"
+            },
+            {
+              "text": "Alongside physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder care: anticholinergics, timed voiding or self-catheterisation",
+          "cells": [
+            {
+              "text": "Bladder dysfunction"
+            },
+            {
+              "text": "Guided by urodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait aids, orthoses, occupational therapy and falls prevention",
+          "cells": [
+            {
+              "text": "Mobility"
+            },
+            {
+              "text": "Preserves function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents and protective foot care",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive, caregiver and psychological support",
+          "cells": [
+            {
+              "text": "Dementia in some patients"
+            },
+            {
+              "text": "Support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for infection, pressure injury and swallowing difficulty",
+          "cells": [
+            {
+              "text": "Progressive course complications"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and GBE1 carrier testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "At-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adult_polyglucosan_body_disease-dx-mgmt",
+      "title": "Diagnosis and management of Adult polyglucosan body disease (GBE1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mid-life progressive leg stiffness, neuropathy and early bladder symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid weakness, bulbar signs or recurrent retention or infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology and urology review; treat retention or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spine; nerve conduction studies; urodynamics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Predominantly axonal neuropathy with GBE1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Genetic counselling and carrier testing of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review HSP, ALS, CIDP, B12 deficiency and adrenomyeloneuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Baclofen or tizanidine with physiotherapy for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurogenic bladder care: anticholinergics, timed voiding or self-catheterisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gait aids, falls prevention, neuropathic pain agents and foot care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slow progression over years; supportive care targets spasticity and bladder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

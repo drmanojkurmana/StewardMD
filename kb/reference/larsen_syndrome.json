@@ -1,172 +1,479 @@
 {
- "id": "larsen_syndrome",
- "name": "Larsen syndrome",
- "aliases": [
-  "FLNB",
-  "filamin B disorder"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by congenital dislocations of large joints, notably bilateral knee dislocations, together with hip and elbow dislocations and severe talipes",
-   "The dominant form is caused by variants in FLNB encoding filamin B, a cytoskeletal protein regulating chondrocyte function; rarer recessive Larsen-like phenotypes have distinct causes",
-   "A characteristic flat facial appearance with a depressed nasal bridge, prominent forehead, and widely spaced eyes aids recognition",
-   "Hand findings include cylindrical, spatulate fingers and, radiographically, an accessory carpal ossification centre",
-   "Cervical spine abnormalities with kyphosis and instability are a critical hazard that can cause myelopathy and complicate airway management",
-   "Additional features may include cleft palate, hearing loss, and, in some, cardiac and respiratory (tracheomalacia) involvement",
-   "Diagnosis integrates the pattern of congenital joint dislocations and facial features with FLNB molecular testing"
+  "id": "larsen_syndrome",
+  "name": "Larsen syndrome",
+  "aliases": [
+    "FLNB",
+    "filamin B disorder"
   ],
-  "pathophysiology": "Larsen syndrome most often results from dominant variants in FLNB, which encodes filamin B, a cytoskeletal protein that cross-links actin and regulates signalling and mechanical responses in chondrocytes. Disturbed filamin B function alters chondrocyte proliferation and differentiation and the development of joints, ligaments, and the vertebral column. This produces the hallmark congenital large-joint dislocations, ligamentous laxity, cervical spine anomalies, and characteristic craniofacial and hand features. FLNB variants underlie a spectrum of skeletal disorders ranging from Larsen syndrome to more severe atelosteogenesis phenotypes.",
-  "additionalDifferentials": [
-   "Atelosteogenesis (also FLNB-related)",
-   "Arthrogryposis multiplex congenita",
-   "Ehlers-Danlos syndromes with joint instability",
-   "Desbuquois dysplasia",
-   "Otopalatodigital spectrum disorders",
-   "Recessive Larsen-like syndromes"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey documenting joint dislocations, accessory carpal ossification, and spinal anomalies",
-   "Cervical spine imaging including flexion-extension views to assess kyphosis and instability",
-   "FLNB molecular genetic testing to confirm the diagnosis",
-   "Airway and respiratory assessment for tracheomalacia before anaesthesia",
-   "Echocardiography where cardiac involvement is suspected",
-   "Audiological assessment for hearing loss"
-  ],
-  "redFlags": [
-   "Cervical kyphosis or instability with myelopathy, particularly around anaesthesia",
-   "Airway compromise from tracheomalacia or cervical involvement",
-   "Neurological deterioration from spinal cord compression",
-   "Respiratory distress in infancy"
-  ],
-  "prognosis": "With careful orthopaedic and spinal management, intelligence and lifespan are generally normal, but untreated cervical instability can cause devastating neurological injury, and joint dislocations and foot deformity require staged surgical and physiotherapy management.",
-  "pitfalls": [
-   "Overlooking cervical kyphosis and instability, risking cord injury during airway management",
-   "Reducing knee or hip dislocations without recognising the underlying syndrome and its spinal risks",
-   "Failing to assess for tracheomalacia before anaesthesia",
-   "Confusing it with arthrogryposis without appropriate radiographic and genetic evaluation"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying drug exists; the mainstay is staged orthopaedic reduction and surgical stabilisation of the congenital large-joint dislocations (bilateral knees, hips, elbows) with serial casting and soft-tissue release for talipes",
-   "Protect and stabilise the cervical spine, bracing or surgically fusing cervical kyphosis and instability to prevent myelopathy from cord compression",
-   "Plan every anaesthetic as a difficult airway, anticipating cervical instability and tracheomalacia, using fibreoptic and cervical-protection techniques",
-   "Provide supportive physiotherapy and orthotics to maintain joint function, with cleft palate repair and hearing amplification for sensorineural loss",
-   "Undertake surveillance with serial flexion-extension cervical imaging, echocardiography where cardiac involvement is suspected, and periodic audiology",
-   "Coordinate care across clinical genetics, orthopaedic and spinal surgery, ENT, anaesthesia, and cardiology",
-   "Offer genetic counselling for the autosomal dominant FLNB inheritance and screen at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "larsen_syndrome-pathway",
-   "title": "Larsen syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by congenital dislocations of large joints, notably bilateral knee dislocations, together with hip and elbow dislocations and severe talipes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cervical kyphosis or instability with myelopathy, particularly around anaesthesia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey documenting joint dislocations, accessory carpal ossification, and spinal anomalies, Cervical spine imaging including flexion-extension views to assess kyphosis and instability, FLNB molecular genetic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying drug exists; the mainstay is staged orthopaedic reduction and surgical stabilisation of the congenital large-joint dislocations (bilateral knees, hips, elbows) with serial casting and soft-tissue"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking cervical kyphosis and instability, risking cord injury during airway management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of larsen syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "larsen_syndrome-matrix",
-   "title": "Larsen syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by congenital dislocations of large joints, notably bilateral knee dislocations, together with hip and elbow",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by congenital dislocations of large joints, notably bilateral knee dislocations, together with hip and elbow dislocations and severe talipes",
+      "The dominant form is caused by variants in FLNB encoding filamin B, a cytoskeletal protein regulating chondrocyte function; rarer recessive Larsen-like phenotypes have distinct causes",
+      "A characteristic flat facial appearance with a depressed nasal bridge, prominent forehead, and widely spaced eyes aids recognition",
+      "Hand findings include cylindrical, spatulate fingers and, radiographically, an accessory carpal ossification centre",
+      "Cervical spine abnormalities with kyphosis and instability are a critical hazard that can cause myelopathy and complicate airway management",
+      "Additional features may include cleft palate, hearing loss, and, in some, cardiac and respiratory (tracheomalacia) involvement",
+      "Diagnosis integrates the pattern of congenital joint dislocations and facial features with FLNB molecular testing"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey documenting joint dislocations, accessory carpal ossification, and spinal anomalies, Cervical spine imaging",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Larsen syndrome most often results from dominant variants in FLNB, which encodes filamin B, a cytoskeletal protein that cross-links actin and regulates signalling and mechanical responses in chondrocytes. Disturbed filamin B function alters chondrocyte proliferation and differentiation and the development of joints, ligaments, and the vertebral column. This produces the hallmark congenital large-joint dislocations, ligamentous laxity, cervical spine anomalies, and characteristic craniofacial and hand features. FLNB variants underlie a spectrum of skeletal disorders ranging from Larsen syndrome to more severe atelosteogenesis phenotypes.",
+    "additionalDifferentials": [
+      "Atelosteogenesis (also FLNB-related)",
+      "Arthrogryposis multiplex congenita",
+      "Ehlers-Danlos syndromes with joint instability",
+      "Desbuquois dysplasia",
+      "Otopalatodigital spectrum disorders",
+      "Recessive Larsen-like syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Atelosteogenesis (also FLNB-related), Arthrogryposis multiplex congenita, Ehlers-Danlos syndromes with joint instability",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey documenting joint dislocations, accessory carpal ossification, and spinal anomalies",
+      "Cervical spine imaging including flexion-extension views to assess kyphosis and instability",
+      "FLNB molecular genetic testing to confirm the diagnosis",
+      "Airway and respiratory assessment for tracheomalacia before anaesthesia",
+      "Echocardiography where cardiac involvement is suspected",
+      "Audiological assessment for hearing loss"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying drug exists; the mainstay is staged orthopaedic reduction and surgical stabilisation of the congenital",
-     "Core treatment modality"
+    "redFlags": [
+      "Cervical kyphosis or instability with myelopathy, particularly around anaesthesia",
+      "Airway compromise from tracheomalacia or cervical involvement",
+      "Neurological deterioration from spinal cord compression",
+      "Respiratory distress in infancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking cervical kyphosis and instability, risking cord injury during airway management",
-     "Prevent diagnostic or management error"
+    "prognosis": "With careful orthopaedic and spinal management, intelligence and lifespan are generally normal, but untreated cervical instability can cause devastating neurological injury, and joint dislocations and foot deformity require staged surgical and physiotherapy management.",
+    "pitfalls": [
+      "Overlooking cervical kyphosis and instability, risking cord injury during airway management",
+      "Reducing knee or hip dislocations without recognising the underlying syndrome and its spinal risks",
+      "Failing to assess for tracheomalacia before anaesthesia",
+      "Confusing it with arthrogryposis without appropriate radiographic and genetic evaluation"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying drug exists; the mainstay is staged orthopaedic reduction and surgical stabilisation of the congenital large-joint dislocations (bilateral knees, hips, elbows) with serial casting and soft-tissue release for talipes",
+      "Protect and stabilise the cervical spine, bracing or surgically fusing cervical kyphosis and instability to prevent myelopathy from cord compression",
+      "Plan every anaesthetic as a difficult airway, anticipating cervical instability and tracheomalacia, using fibreoptic and cervical-protection techniques",
+      "Provide supportive physiotherapy and orthotics to maintain joint function, with cleft palate repair and hearing amplification for sensorineural loss",
+      "Undertake surveillance with serial flexion-extension cervical imaging, echocardiography where cardiac involvement is suspected, and periodic audiology",
+      "Coordinate care across clinical genetics, orthopaedic and spinal surgery, ENT, anaesthesia, and cardiology",
+      "Offer genetic counselling for the autosomal dominant FLNB inheritance and screen at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for larsen syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "larsen-syndrome-real-image",
-   "title": "Larsen syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "larsen_syndrome-pathway",
+      "title": "Larsen syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by congenital dislocations of large joints, notably bilateral knee dislocations, together with hip and elbow dislocations and severe talipes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cervical kyphosis or instability with myelopathy, particularly around anaesthesia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey documenting joint dislocations, accessory carpal ossification, and spinal anomalies, Cervical spine imaging including flexion-extension views to assess kyphosis and instability, FLNB molecular genetic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying drug exists; the mainstay is staged orthopaedic reduction and surgical stabilisation of the congenital large-joint dislocations (bilateral knees, hips, elbows) with serial casting and soft-tissue"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking cervical kyphosis and instability, risking cord injury during airway management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of larsen syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "larsen_syndrome-matrix",
+      "title": "Larsen syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by congenital dislocations of large joints, notably bilateral knee dislocations, together with hip and elbow",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey documenting joint dislocations, accessory carpal ossification, and spinal anomalies, Cervical spine imaging",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Atelosteogenesis (also FLNB-related), Arthrogryposis multiplex congenita, Ehlers-Danlos syndromes with joint instability",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying drug exists; the mainstay is staged orthopaedic reduction and surgical stabilisation of the congenital",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking cervical kyphosis and instability, risking cord injury during airway management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for larsen syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "larsen_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Joint dislocations, accessory carpal ossification and spinal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine flexion-extension imaging",
+          "cells": [
+            {
+              "text": "Kyphosis and instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FLNB molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and respiratory assessment",
+          "cells": [
+            {
+              "text": "Tracheomalacia, before anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Where cardiac involvement is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "larsen_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atelosteogenesis",
+          "cells": [
+            {
+              "text": "Also FLNB-related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthrogryposis multiplex congenita",
+          "cells": [
+            {
+              "text": "Confused with Larsen without radiographic and genetic evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ehlers-Danlos syndromes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "larsen_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged orthopaedic reduction",
+          "cells": [
+            {
+              "text": "Surgical stabilisation of congenital large-joint dislocations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical stabilisation",
+          "cells": [
+            {
+              "text": "Bracing or surgical fusion of kyphosis and instability, to prevent myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaesthesia planning",
+          "cells": [
+            {
+              "text": "Every anaesthetic planned as a difficult airway, with fibreoptic and cervical-protection techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, orthotics and ENT",
+          "cells": [
+            {
+              "text": "Joint function; cleft palate repair; hearing amplification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial flexion-extension cervical imaging, echocardiography, periodic audiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Genetics, orthopaedic and spinal surgery, ENT, anaesthesia, cardiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant FLNB inheritance; screen at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "larsen_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Larsen syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital large-joint dislocations with flat face and cylindrical fingers",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cervical instability, myelopathy, airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent spinal and airway assessment before any anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, flexion-extension cervical imaging, FLNB testing, airway assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does FLNB testing confirm a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atelosteogenesis, arthrogryposis or Ehlers-Danlos syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Staged orthopaedic reduction and stabilisation of large-joint dislocations",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bracing or fusion of cervical kyphosis to prevent myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Plan every anaesthetic as a difficult airway, with tracheomalacia in mind",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, orthotics, cleft palate repair and hearing amplification",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial cervical imaging, echocardiography and audiology surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Intelligence and lifespan generally normal with careful spinal management",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

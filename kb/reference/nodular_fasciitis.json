@@ -1,176 +1,445 @@
 {
- "id": "nodular_fasciitis",
- "name": "Nodular fasciitis",
- "aliases": [
-  "nodular fasciitis",
-  "pseudosarcomatous fasciitis",
-  "USP6-rearranged nodular fasciitis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Oncology",
- "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign, self-limiting myofibroblastic proliferation that classically grows rapidly over a few weeks, often alarming patients and clinicians",
-   "Most common in young to middle-aged adults, typically in the forearm, trunk or head and neck region",
-   "Usually a small, solitary, sometimes tender subcutaneous or fascial nodule, rarely exceeding a few centimetres",
-   "Harbours a USP6 gene rearrangement, most often fusing MYH9 to USP6, supporting a transient self-limiting neoplastic process",
-   "Histology shows plump myofibroblasts in a loose, myxoid, tissue-culture-like stroma with extravasated red cells and mitoses that can mimic sarcoma",
-   "Despite brisk mitotic activity, atypical mitoses and necrosis are absent, helping to distinguish it from malignancy",
-   "It is self-limiting and may regress, so conservative management or simple excision is curative"
+  "id": "nodular_fasciitis",
+  "name": "Nodular fasciitis",
+  "aliases": [
+    "nodular fasciitis",
+    "pseudosarcomatous fasciitis",
+    "USP6-rearranged nodular fasciitis"
   ],
-  "pathophysiology": "Nodular fasciitis is a benign, transient neoplastic proliferation of myofibroblasts, now understood to be driven by USP6 gene rearrangement most commonly involving an MYH9-USP6 fusion. This fusion places USP6 under an active promoter, producing a self-limited burst of proliferation that characteristically resolves, which explains the rapid growth followed by spontaneous regression. The lesion arises in relation to fascia and is composed of spindled myofibroblasts in a loose myxoid or collagenous background with cleft-like spaces, extravasated erythrocytes and scattered giant cells. Its brisk mitotic activity and cellularity can closely imitate a sarcoma.",
-  "additionalDifferentials": [
-   "Fibrosarcoma and other spindle-cell sarcomas",
-   "Desmoid-type fibromatosis",
-   "Myxofibrosarcoma",
-   "Myxoma",
-   "Inflammatory myofibroblastic tumour",
-   "Dermatofibrosarcoma protuberans"
-  ],
-  "additionalInvestigations": [
-   "Clinical correlation of rapid growth with small size favouring a benign reactive-appearing lesion",
-   "Ultrasound or MRI to define a small superficial fascia-related nodule",
-   "Core or excisional biopsy for histological assessment",
-   "Molecular testing for USP6 rearrangement in diagnostically difficult cases",
-   "Immunohistochemistry showing myofibroblastic differentiation and absence of malignant markers"
-  ],
-  "redFlags": [
-   "Large size or deep location atypical for nodular fasciitis",
-   "Continued growth beyond the expected self-limited course",
-   "Atypical mitoses or necrosis on histology suggesting sarcoma",
-   "Recurrence after complete excision prompting diagnostic review"
-  ],
-  "prognosis": "Nodular fasciitis is benign and self-limiting, frequently regressing spontaneously and cured by simple excision when removed. Recurrence is very rare, and a recurrence should raise doubt about the original diagnosis.",
-  "pitfalls": [
-   "Overdiagnosing sarcoma because of high cellularity and mitotic activity",
-   "Performing wide excision for a lesion that would resolve or needs only simple removal",
-   "Not recognising the characteristic rapid growth of a small lesion as reassuring",
-   "Overlooking USP6 testing when the histology is ambiguous"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the diagnosis histologically before treating, since rapid growth and high mitotic activity can mimic fibrosarcoma or another spindle-cell sarcoma",
-   "Molecular testing for a USP6 rearrangement (commonly MYH9-USP6) can support the diagnosis in ambiguous cases",
-   "No malignant potential and no staged, intent-based oncologic treatment pathway applies, unlike sarcoma",
-   "Once biopsy confirms nodular fasciitis and excludes a sarcoma, simple local excision is curative and reasonable when the diagnosis is uncertain or the lesion is symptomatic",
-   "Observation alone is a reasonable option given the tendency toward spontaneous regression once the diagnosis is secure",
-   "Radical or wide excision with oncologic margins is not indicated and over-resection is a recognized pitfall",
-   "There is no role for chemotherapy, targeted agents, or radiotherapy in this diagnosis",
-   "Surgery, when chosen, should be limited to simple non-radical local excision, either to confirm the diagnosis or remove a symptomatic lesion",
-   "Follow-up after excision can be brief and clinical since recurrence is uncommon",
-   "A recurrence after apparently complete excision should prompt re-review of the original diagnosis rather than escalation of local therapy, since it raises concern for a misdiagnosed sarcoma",
-   "Refer to a soft-tissue pathology or sarcoma service when the picture is atypical, such as a larger lesion, deep location, atypical mitoses, necrosis, or continued growth beyond the expected self-limited course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nodular_fasciitis-pathway",
-   "title": "Nodular fasciitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign, self-limiting myofibroblastic proliferation that classically grows rapidly over a few weeks, often alarming patients and clinicians",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Large size or deep location atypical for nodular fasciitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical correlation of rapid growth with small size favouring a benign reactive-appearing lesion, Ultrasound or MRI to define a small superficial fascia-related nodule, Core or excisional biopsy for histological assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the diagnosis histologically before treating, since rapid growth and high mitotic activity can mimic fibrosarcoma or another spindle-cell sarcoma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overdiagnosing sarcoma because of high cellularity and mitotic activity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nodular fasciitis."
-  }
- ],
- "tables": [
-  {
-   "id": "nodular_fasciitis-matrix",
-   "title": "Nodular fasciitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign, self-limiting myofibroblastic proliferation that classically grows rapidly over a few weeks, often alarming patients",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Oncology",
+  "specialty": "Orthopaedic Oncology / Soft-tissue Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign, self-limiting myofibroblastic proliferation that classically grows rapidly over a few weeks, often alarming patients and clinicians",
+      "Most common in young to middle-aged adults, typically in the forearm, trunk or head and neck region",
+      "Usually a small, solitary, sometimes tender subcutaneous or fascial nodule, rarely exceeding a few centimetres",
+      "Harbours a USP6 gene rearrangement, most often fusing MYH9 to USP6, supporting a transient self-limiting neoplastic process",
+      "Histology shows plump myofibroblasts in a loose, myxoid, tissue-culture-like stroma with extravasated red cells and mitoses that can mimic sarcoma",
+      "Despite brisk mitotic activity, atypical mitoses and necrosis are absent, helping to distinguish it from malignancy",
+      "It is self-limiting and may regress, so conservative management or simple excision is curative"
     ],
-    [
-     "Key Investigations",
-     "Clinical correlation of rapid growth with small size favouring a benign reactive-appearing lesion, Ultrasound or MRI to define a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nodular fasciitis is a benign, transient neoplastic proliferation of myofibroblasts, now understood to be driven by USP6 gene rearrangement most commonly involving an MYH9-USP6 fusion. This fusion places USP6 under an active promoter, producing a self-limited burst of proliferation that characteristically resolves, which explains the rapid growth followed by spontaneous regression. The lesion arises in relation to fascia and is composed of spindled myofibroblasts in a loose myxoid or collagenous background with cleft-like spaces, extravasated erythrocytes and scattered giant cells. Its brisk mitotic activity and cellularity can closely imitate a sarcoma.",
+    "additionalDifferentials": [
+      "Fibrosarcoma and other spindle-cell sarcomas",
+      "Desmoid-type fibromatosis",
+      "Myxofibrosarcoma",
+      "Myxoma",
+      "Inflammatory myofibroblastic tumour",
+      "Dermatofibrosarcoma protuberans"
     ],
-    [
-     "Primary Differentials",
-     "Fibrosarcoma and other spindle-cell sarcomas, Desmoid-type fibromatosis, Myxofibrosarcoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical correlation of rapid growth with small size favouring a benign reactive-appearing lesion",
+      "Ultrasound or MRI to define a small superficial fascia-related nodule",
+      "Core or excisional biopsy for histological assessment",
+      "Molecular testing for USP6 rearrangement in diagnostically difficult cases",
+      "Immunohistochemistry showing myofibroblastic differentiation and absence of malignant markers"
     ],
-    [
-     "Management Strategy",
-     "Confirm the diagnosis histologically before treating, since rapid growth and high mitotic activity can mimic fibrosarcoma or",
-     "Core treatment modality"
+    "redFlags": [
+      "Large size or deep location atypical for nodular fasciitis",
+      "Continued growth beyond the expected self-limited course",
+      "Atypical mitoses or necrosis on histology suggesting sarcoma",
+      "Recurrence after complete excision prompting diagnostic review"
     ],
-    [
-     "Clinical Pitfall",
-     "Overdiagnosing sarcoma because of high cellularity and mitotic activity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Nodular fasciitis is benign and self-limiting, frequently regressing spontaneously and cured by simple excision when removed. Recurrence is very rare, and a recurrence should raise doubt about the original diagnosis.",
+    "pitfalls": [
+      "Overdiagnosing sarcoma because of high cellularity and mitotic activity",
+      "Performing wide excision for a lesion that would resolve or needs only simple removal",
+      "Not recognising the characteristic rapid growth of a small lesion as reassuring",
+      "Overlooking USP6 testing when the histology is ambiguous"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Soft Tissue and Bone Tumours",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the diagnosis histologically before treating, since rapid growth and high mitotic activity can mimic fibrosarcoma or another spindle-cell sarcoma",
+      "Molecular testing for a USP6 rearrangement (commonly MYH9-USP6) can support the diagnosis in ambiguous cases",
+      "No malignant potential and no staged, intent-based oncologic treatment pathway applies, unlike sarcoma",
+      "Once biopsy confirms nodular fasciitis and excludes a sarcoma, simple local excision is curative and reasonable when the diagnosis is uncertain or the lesion is symptomatic",
+      "Observation alone is a reasonable option given the tendency toward spontaneous regression once the diagnosis is secure",
+      "Radical or wide excision with oncologic margins is not indicated and over-resection is a recognized pitfall",
+      "There is no role for chemotherapy, targeted agents, or radiotherapy in this diagnosis",
+      "Surgery, when chosen, should be limited to simple non-radical local excision, either to confirm the diagnosis or remove a symptomatic lesion",
+      "Follow-up after excision can be brief and clinical since recurrence is uncommon",
+      "A recurrence after apparently complete excision should prompt re-review of the original diagnosis rather than escalation of local therapy, since it raises concern for a misdiagnosed sarcoma",
+      "Refer to a soft-tissue pathology or sarcoma service when the picture is atypical, such as a larger lesion, deep location, atypical mitoses, necrosis, or continued growth beyond the expected self-limited course"
     ]
-   ],
-   "caption": "Overview comparison matrix for nodular fasciitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nodular-fasciitis-real-image",
-   "title": "Nodular fasciitis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "nodular_fasciitis-pathway",
+      "title": "Nodular fasciitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign, self-limiting myofibroblastic proliferation that classically grows rapidly over a few weeks, often alarming patients and clinicians",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Large size or deep location atypical for nodular fasciitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical correlation of rapid growth with small size favouring a benign reactive-appearing lesion, Ultrasound or MRI to define a small superficial fascia-related nodule, Core or excisional biopsy for histological assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the diagnosis histologically before treating, since rapid growth and high mitotic activity can mimic fibrosarcoma or another spindle-cell sarcoma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overdiagnosing sarcoma because of high cellularity and mitotic activity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nodular fasciitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nodular_fasciitis-matrix",
+      "title": "Nodular fasciitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign, self-limiting myofibroblastic proliferation that classically grows rapidly over a few weeks, often alarming patients",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical correlation of rapid growth with small size favouring a benign reactive-appearing lesion, Ultrasound or MRI to define a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fibrosarcoma and other spindle-cell sarcomas, Desmoid-type fibromatosis, Myxofibrosarcoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the diagnosis histologically before treating, since rapid growth and high mitotic activity can mimic fibrosarcoma or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overdiagnosing sarcoma because of high cellularity and mitotic activity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nodular fasciitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nodular_fasciitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Histological confirmation before treatment",
+          "cells": [
+            {
+              "text": "Rapid growth and mitoses can mimic sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "USP6 rearrangement testing",
+          "cells": [
+            {
+              "text": "MYH9-USP6 fusion confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Defines a small superficial fascia-related nodule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical review of growth",
+          "cells": [
+            {
+              "text": "Rapid growth over weeks with small size favours a benign lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nodular_fasciitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibrosarcoma or other spindle-cell sarcoma",
+          "cells": [
+            {
+              "text": "Mimicked by high cellularity and mitoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmoid-type fibromatosis",
+          "cells": [
+            {
+              "text": "Infiltrative fibroblastic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myxofibrosarcoma",
+          "cells": [
+            {
+              "text": "Myxoid sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory myofibroblastic tumour",
+          "cells": [
+            {
+              "text": "Myofibroblastic proliferation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatofibrosarcoma protuberans",
+          "cells": [
+            {
+              "text": "Superficial tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nodular_fasciitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple excision",
+          "cells": [
+            {
+              "text": "Curative when removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid wide excision",
+          "cells": [
+            {
+              "text": "Unnecessary for a self-limiting lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Many lesions regress spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review if recurrence",
+          "cells": [
+            {
+              "text": "Recurrence is rare and should prompt re-examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nodular_fasciitis-dx-mgmt",
+      "title": "Diagnosis and management of Nodular fasciitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly growing painful nodule in a fascia or muscle of a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (large or deep size, atypical mitoses, continued growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent histology if sarcoma features on biopsy or imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Histology with mitotic count, USP6 testing, ultrasound or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "USP6-rearranged myofibroblastic proliferation on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fibrosarcoma or other sarcoma; widen the pathology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Histological confirmation before treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple excision for lesions that do not resolve",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Observation where spontaneous regression is expected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review promptly if recurrence occurs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; cure with simple excision, and recurrence is very rare",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

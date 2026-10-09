@@ -1,204 +1,676 @@
 {
- "id": "the_bradyarrhythmias_disorders_of_the",
- "name": "The Bradyarrhythmias: Disorders of the Atrioventricular Node",
- "system": "Cardiovascular",
- "class": "non_infective",
- "chapter": 252,
- "page": 1924,
- "aliases": [
-  "AV block",
-  "Atrioventricular block",
-  "AV conduction block",
-  "Heart block",
-  "Bradyarrhythmia due to AV node disease"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1924",
-  "clinicalPearls": [
-   "The AV node is specialized for slow conduction, creating a delay between atrial and ventricular activation and acting as the electrical gatekeeper to the ventricle; its intrinsic backup pacemaker (escape) rate is roughly 20-60 beats/min, normally overridden by the faster sinus node (60-100 beats/min).",
-   "First-degree AV block means every atrial impulse still conducts but with an abnormally prolonged PR interval (>200 ms); the term block is a misnomer since conduction is delayed, not interrupted.",
-   "Mobitz I (Wenckebach) second-degree block shows progressive PR lengthening before a dropped beat with grouped beating and progressive RR shortening; it is typically within the AV node, hemodynamically stable, and usually does not warrant pacing when asymptomatic.",
-   "Mobitz II second-degree block shows a fixed PR interval before a dropped beat, is usually infranodal with a wider QRS, carries a risk of sudden death from an unreliable escape rhythm, and warrants permanent pacing even without symptoms.",
-   "In 2:1 AV block the ECG cannot reliably distinguish type I from type II; a PR <160 ms with a wide QRS before the conducted beat favors infranodal (type II) block.",
-   "QRS width of the escape rhythm localizes the block: a narrow QRS escape implies block in the AV node or proximal His with a faster, more stable junctional rhythm, whereas a wide QRS escape (without preexisting bundle branch block) implies distal His or bundle branch block and a slower, less reliable rhythm.",
-   "Vagal maneuvers and carotid sinus massage slow AV nodal conduction but may paradoxically improve infranodal conduction, while atropine, isoproterenol, and exercise improve AV nodal conduction but may worsen infranodal conduction - useful for localizing the level of block.",
-   "On the His bundle electrogram, the AH interval (AV nodal conduction) is normally <130 ms and the HV interval (His-Purkinje conduction) is normally <=55 ms; a markedly prolonged HV interval predicts progression to higher-grade block.",
-   "Functional causes of AV block (autonomic, metabolic/endocrine, drug-related) tend to be reversible, whereas most structural causes producing fibrosis are permanent.",
-   "Congenital complete heart block with a narrow QRS typically increases heart rate with exercise, whereas acquired complete heart block (especially wide QRS) does not respond to exercise.",
-   "Acquired persistent AV conduction failure is rare in healthy adults (estimated incidence about 1 per 5000 per year in the U.S.), but becomes much more common with ischemia, aging/fibrosis, or infiltrative disease.",
-   "Idiopathic progressive fibrosis/sclerosis of the conduction system is the most common acquired cause, accounting for roughly 50% of AV block; it often begins in the fourth decade and is accelerated by atherosclerosis, hypertension, and diabetes."
+  "id": "the_bradyarrhythmias_disorders_of_the",
+  "name": "The Bradyarrhythmias: Disorders of the Atrioventricular Node",
+  "system": "Cardiovascular",
+  "class": "non_infective",
+  "chapter": 252,
+  "page": 1924,
+  "aliases": [
+    "AV block",
+    "Atrioventricular block",
+    "AV conduction block",
+    "Heart block",
+    "Bradyarrhythmia due to AV node disease"
   ],
-  "pathophysiology": "AV nodal myocytes sit at a relatively high resting membrane potential (~-60 mV), exhibit slow phase-0 upstrokes mediated by L-type calcium current (with a relative lack of fast sodium current), and show spontaneous phase-4 depolarization, conferring backup automaticity. Weak electrical coupling from sparse gap junctions (predominantly connexin-40) plus increased extracellular volume slows conduction and protects the ventricle. The AV junction comprises a transitional (atrionodal) cell zone showing decremental conduction, the compact node, and the penetrating His bundle; conduction continues through the His, right and left bundle branches, and the fast-conducting Purkinje network (1-3 m/s). Bradycardia and block arise when conduction across this axis is compromised by fibrosis/sclerosis, calcification (Lev, Lenegre disease), ischemia/infarction, infiltrative or inflammatory disease, drugs, heightened vagal tone, or congenital/genetic abnormalities; consequences range from fatigue and syncope to asystolic death if no reliable escape emerges. Functional (autonomic/metabolic/drug) causes are often reversible while structural fibrosis is typically permanent.",
-  "additionalDifferentials": [
-   "Sinus node dysfunction / sinus bradycardia (sick sinus syndrome) as a competing cause of symptomatic bradycardia",
-   "Drug effect (beta blockers, verapamil, diltiazem, digoxin) producing reversible AV conduction slowing",
-   "Heightened vagal tone (sleep, well-conditioned athletes, carotid sinus hypersensitivity, vasovagal/cough/micturition syncope)",
-   "Acute myocardial ischemia/infarction-related conduction block",
-   "Infiltrative cardiomyopathy (sarcoidosis, amyloidosis, hemochromatosis)",
-   "Congenital complete heart block (e.g., maternal lupus)"
-  ],
-  "infectionMimics": [
-   "Lyme carditis (Borrelia burgdorferi) - a common infectious cause of AV block, typically AV-nodal with narrow junctional escape >40 beats/min, usually improving within about a week of antibiotic therapy",
-   "Infective endocarditis with perivalvular abscess - AV block here should prompt urgent surgical consultation",
-   "Viral myocarditis",
-   "Chagas disease",
-   "Toxoplasmosis"
-  ],
-  "nonInfectiousMimics": [
-   "Senile degenerative fibrosis/calcification of the conduction system (Lev disease)",
-   "Lenegre disease (sclerodegenerative distal bundle branch disease in younger patients)",
-   "Aortic (and less commonly mitral) valve annular calcification encroaching on the conduction system",
-   "Cardiac sarcoidosis and amyloidosis",
-   "Autoimmune/rheumatologic disease (SLE, rheumatoid arthritis, mixed connective tissue disease, scleroderma)",
-   "Neuromuscular disease (myotonic dystrophy, Kearns-Sayre syndrome, muscular dystrophies)",
-   "Iatrogenic injury (valve/cardiac surgery, TAVR, septal myectomy/alcohol septal ablation, catheter ablation)",
-   "Hereditary progressive familial heart block (e.g., SCN5A mutations) and lamin A/C cardiomyopathy"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG to classify the degree and pattern of block and assess QRS width/escape rhythm",
-   "Transthoracic echocardiography to assess for structural/valvular disease, ejection fraction, and wall motion",
-   "Advanced imaging (cardiac MRI, CT, FDG-PET, technetium pyrophosphate scanning) for infiltrative disease, especially when block develops at age <=60 years",
-   "Ambulatory/continuous ECG monitoring to correlate symptoms with bradyarrhythmia",
-   "Provocative testing - vagal maneuvers, carotid sinus massage, exercise, atropine, isoproterenol - to localize the level of block",
-   "Invasive electrophysiologic study with His bundle electrogram (AH and HV interval measurement) in syncope with suspected high-grade or infranodal block",
-   "Evaluation for ischemia when clinical suspicion is present"
-  ],
-  "redFlags": [
-   "Wide-complex escape rhythm at a slow rate (e.g., ~30 beats/min) implying infranodal block and an unreliable escape",
-   "Mobitz II second-degree or complete (third-degree) heart block",
-   "Syncope or presyncope attributable to bradycardia",
-   "Markedly prolonged HV interval (>100 ms carries an annual incidence of complete AV block approaching 10%)",
-   "High-grade AV block complicating anterior MI (distal block, wide unstable escape, high mortality)",
-   "New AV block with infective endocarditis suggesting perivalvular abscess",
-   "Alternating bundle branch block or bifascicular/trifascicular block with intermittent third-degree block"
-  ],
-  "prognosis": "Prognosis depends heavily on the level of block. AV-nodal (proximal) block - including Mobitz I and most inferior-MI-related block - tends to have a faster, stable narrow-complex escape and is often reversible with a favorable outcome. Infranodal (distal His-Purkinje) block, Mobitz II, and high-grade block in anterior MI carry unstable wide-complex escape rhythms, higher mortality, and a risk of sudden asystolic death, so pacing is indicated even when asymptomatic. Functional/reversible causes generally resolve; structural fibrotic disease is usually permanent and progressive.",
-  "pitfalls": [
-   "Mislabeling 2:1 AV block as type I when it may be infranodal type II - the surface ECG cannot reliably distinguish them",
-   "Assuming all AV block is benign vagal phenomenon and missing serious infranodal disease that warrants pacing despite absent symptoms",
-   "Overlooking reversible/treatable causes (offending drugs, electrolyte derangement, ischemia, hypothyroidism, sleep apnea, Lyme carditis) before committing to permanent therapy",
-   "Failing to pursue advanced imaging for infiltrative disease (e.g., sarcoidosis) when AV block presents at a younger age (<=60 years)",
-   "Misinterpreting Mobitz I at very short paced cycle lengths as pathologic - it can be a normal physiologic response; it is abnormal at cycle lengths >500 ms (<120 beats/min) without high vagal tone",
-   "Not recognizing that a new perivalvular abscess in endocarditis can present as AV block requiring urgent surgery"
-  ],
-  "severityClassification": "Electrocardiographic grading: First-degree AV block - all atrial impulses conduct but PR is prolonged (>200 ms), delay usually within the AV node. Second-degree AV block - intermittent failure of AV conduction; Type I/Mobitz I/Wenckebach (progressive PR prolongation until a dropped beat, usually AV-nodal) and Type II/Mobitz II (fixed PR before a dropped beat, usually infranodal, often with wide QRS). Third-degree (complete) AV block - complete AV dissociation with a ventricular (escape) rate slower than the atrial rate.",
-  "references": [
-   "Harrison 22e p.1924",
-   "Harrison 22e p.1925",
-   "Harrison 22e p.1926",
-   "Harrison 22e p.1927",
-   "Harrison 22e p.1928",
-   "Harrison 22e p.1929",
-   "Harrison 22e p.1930"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and reverse treatable causes first — withdraw AV-nodal blocking agents (beta-blockers, non-dihydropyridine calcium-channel blockers, digoxin), treat ischaemia, correct electrolyte disturbance and hypothyroidism, and treat Lyme carditis or infiltrative disease",
-   "For acute symptomatic bradycardia give atropine and, if inadequate, a chronotrope such as isoprenaline while arranging temporary transcutaneous or transvenous pacing",
-   "Implant a permanent pacemaker for symptomatic AV block, and for Mobitz II or high-grade/complete infranodal block even when asymptomatic given the unreliable escape rhythm",
-   "Observe asymptomatic first-degree and Mobitz I (Wenckebach) block, which are usually nodal and stable and do not require pacing",
-   "Consider conduction-system (His-bundle or left-bundle-branch) pacing or biventricular pacing where a high ventricular-pacing burden or impaired function is anticipated",
-   "Investigate for underlying structural or infiltrative disease with echocardiography and advanced imaging, particularly when block occurs in younger patients",
-   "Refer to electrophysiology for device implantation and for His-bundle electrogram assessment in unexplained syncope with suspected infranodal block"
-  ]
- },
- "algorithms": [
-  {
-   "id": "the_bradyarrhythmias_disorders_of_the-pathway",
-   "title": "The Bradyarrhythmias: Disorders of the Atrioventricular Node: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The AV node is specialized for slow conduction, creating a delay between atrial and ventricular activation and acting as the electrical gatekeeper to the ventricle; its intrinsic backup pacemaker (escape) rate is roughly 20-60 beats/min,",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Wide-complex escape rhythm at a slow rate (e.g., ~30 beats/min) implying infranodal block and an unreliable escape",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG to classify the degree and pattern of block and assess QRS width/escape rhythm, Transthoracic echocardiography to assess for structural/valvular disease, ejection fraction, and wall motion, Advanced imaging"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and reverse treatable causes first - withdraw AV-nodal blocking agents (beta-blockers, non-dihydropyridine calcium-channel blockers, digoxin), treat ischaemia, correct electrolyte disturbance and"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabeling 2:1 AV block as type I when it may be infranodal type II - the surface ECG cannot reliably distinguish them"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of the bradyarrhythmias: disorders of the atrioventricular node."
-  }
- ],
- "tables": [
-  {
-   "id": "the_bradyarrhythmias_disorders_of_the-matrix",
-   "title": "The Bradyarrhythmias: Disorders of the Atrioventricular Node: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The AV node is specialized for slow conduction, creating a delay between atrial and ventricular activation and acting as the",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1924",
+    "clinicalPearls": [
+      "The AV node is specialized for slow conduction, creating a delay between atrial and ventricular activation and acting as the electrical gatekeeper to the ventricle; its intrinsic backup pacemaker (escape) rate is roughly 20-60 beats/min, normally overridden by the faster sinus node (60-100 beats/min).",
+      "First-degree AV block means every atrial impulse still conducts but with an abnormally prolonged PR interval (>200 ms); the term block is a misnomer since conduction is delayed, not interrupted.",
+      "Mobitz I (Wenckebach) second-degree block shows progressive PR lengthening before a dropped beat with grouped beating and progressive RR shortening; it is typically within the AV node, hemodynamically stable, and usually does not warrant pacing when asymptomatic.",
+      "Mobitz II second-degree block shows a fixed PR interval before a dropped beat, is usually infranodal with a wider QRS, carries a risk of sudden death from an unreliable escape rhythm, and warrants permanent pacing even without symptoms.",
+      "In 2:1 AV block the ECG cannot reliably distinguish type I from type II; a PR <160 ms with a wide QRS before the conducted beat favors infranodal (type II) block.",
+      "QRS width of the escape rhythm localizes the block: a narrow QRS escape implies block in the AV node or proximal His with a faster, more stable junctional rhythm, whereas a wide QRS escape (without preexisting bundle branch block) implies distal His or bundle branch block and a slower, less reliable rhythm.",
+      "Vagal maneuvers and carotid sinus massage slow AV nodal conduction but may paradoxically improve infranodal conduction, while atropine, isoproterenol, and exercise improve AV nodal conduction but may worsen infranodal conduction - useful for localizing the level of block.",
+      "On the His bundle electrogram, the AH interval (AV nodal conduction) is normally <130 ms and the HV interval (His-Purkinje conduction) is normally <=55 ms; a markedly prolonged HV interval predicts progression to higher-grade block.",
+      "Functional causes of AV block (autonomic, metabolic/endocrine, drug-related) tend to be reversible, whereas most structural causes producing fibrosis are permanent.",
+      "Congenital complete heart block with a narrow QRS typically increases heart rate with exercise, whereas acquired complete heart block (especially wide QRS) does not respond to exercise.",
+      "Acquired persistent AV conduction failure is rare in healthy adults (estimated incidence about 1 per 5000 per year in the U.S.), but becomes much more common with ischemia, aging/fibrosis, or infiltrative disease.",
+      "Idiopathic progressive fibrosis/sclerosis of the conduction system is the most common acquired cause, accounting for roughly 50% of AV block; it often begins in the fourth decade and is accelerated by atherosclerosis, hypertension, and diabetes."
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG to classify the degree and pattern of block and assess QRS width/escape rhythm, Transthoracic echocardiography to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "AV nodal myocytes sit at a relatively high resting membrane potential (~-60 mV), exhibit slow phase-0 upstrokes mediated by L-type calcium current (with a relative lack of fast sodium current), and show spontaneous phase-4 depolarization, conferring backup automaticity. Weak electrical coupling from sparse gap junctions (predominantly connexin-40) plus increased extracellular volume slows conduction and protects the ventricle. The AV junction comprises a transitional (atrionodal) cell zone showing decremental conduction, the compact node, and the penetrating His bundle; conduction continues through the His, right and left bundle branches, and the fast-conducting Purkinje network (1-3 m/s). Bradycardia and block arise when conduction across this axis is compromised by fibrosis/sclerosis, calcification (Lev, Lenegre disease), ischemia/infarction, infiltrative or inflammatory disease, drugs, heightened vagal tone, or congenital/genetic abnormalities; consequences range from fatigue and syncope to asystolic death if no reliable escape emerges. Functional (autonomic/metabolic/drug) causes are often reversible while structural fibrosis is typically permanent.",
+    "additionalDifferentials": [
+      "Sinus node dysfunction / sinus bradycardia (sick sinus syndrome) as a competing cause of symptomatic bradycardia",
+      "Drug effect (beta blockers, verapamil, diltiazem, digoxin) producing reversible AV conduction slowing",
+      "Heightened vagal tone (sleep, well-conditioned athletes, carotid sinus hypersensitivity, vasovagal/cough/micturition syncope)",
+      "Acute myocardial ischemia/infarction-related conduction block",
+      "Infiltrative cardiomyopathy (sarcoidosis, amyloidosis, hemochromatosis)",
+      "Congenital complete heart block (e.g., maternal lupus)"
     ],
-    [
-     "Primary Differentials",
-     "Sinus node dysfunction / sinus bradycardia (sick sinus syndrome) as a competing cause of symptomatic bradycardia, Drug effect",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Lyme carditis (Borrelia burgdorferi) - a common infectious cause of AV block, typically AV-nodal with narrow junctional escape >40 beats/min, usually improving within about a week of antibiotic therapy",
+      "Infective endocarditis with perivalvular abscess - AV block here should prompt urgent surgical consultation",
+      "Viral myocarditis",
+      "Chagas disease",
+      "Toxoplasmosis"
     ],
-    [
-     "Management Strategy",
-     "Identify and reverse treatable causes first - withdraw AV-nodal blocking agents (beta-blockers, non-dihydropyridine",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Senile degenerative fibrosis/calcification of the conduction system (Lev disease)",
+      "Lenegre disease (sclerodegenerative distal bundle branch disease in younger patients)",
+      "Aortic (and less commonly mitral) valve annular calcification encroaching on the conduction system",
+      "Cardiac sarcoidosis and amyloidosis",
+      "Autoimmune/rheumatologic disease (SLE, rheumatoid arthritis, mixed connective tissue disease, scleroderma)",
+      "Neuromuscular disease (myotonic dystrophy, Kearns-Sayre syndrome, muscular dystrophies)",
+      "Iatrogenic injury (valve/cardiac surgery, TAVR, septal myectomy/alcohol septal ablation, catheter ablation)",
+      "Hereditary progressive familial heart block (e.g., SCN5A mutations) and lamin A/C cardiomyopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabeling 2:1 AV block as type I when it may be infranodal type II - the surface ECG cannot reliably distinguish them",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "12-lead ECG to classify the degree and pattern of block and assess QRS width/escape rhythm",
+      "Transthoracic echocardiography to assess for structural/valvular disease, ejection fraction, and wall motion",
+      "Advanced imaging (cardiac MRI, CT, FDG-PET, technetium pyrophosphate scanning) for infiltrative disease, especially when block develops at age <=60 years",
+      "Ambulatory/continuous ECG monitoring to correlate symptoms with bradyarrhythmia",
+      "Provocative testing - vagal maneuvers, carotid sinus massage, exercise, atropine, isoproterenol - to localize the level of block",
+      "Invasive electrophysiologic study with His bundle electrogram (AH and HV interval measurement) in syncope with suspected high-grade or infranodal block",
+      "Evaluation for ischemia when clinical suspicion is present"
+    ],
+    "redFlags": [
+      "Wide-complex escape rhythm at a slow rate (e.g., ~30 beats/min) implying infranodal block and an unreliable escape",
+      "Mobitz II second-degree or complete (third-degree) heart block",
+      "Syncope or presyncope attributable to bradycardia",
+      "Markedly prolonged HV interval (>100 ms carries an annual incidence of complete AV block approaching 10%)",
+      "High-grade AV block complicating anterior MI (distal block, wide unstable escape, high mortality)",
+      "New AV block with infective endocarditis suggesting perivalvular abscess",
+      "Alternating bundle branch block or bifascicular/trifascicular block with intermittent third-degree block"
+    ],
+    "prognosis": "Prognosis depends heavily on the level of block. AV-nodal (proximal) block - including Mobitz I and most inferior-MI-related block - tends to have a faster, stable narrow-complex escape and is often reversible with a favorable outcome. Infranodal (distal His-Purkinje) block, Mobitz II, and high-grade block in anterior MI carry unstable wide-complex escape rhythms, higher mortality, and a risk of sudden asystolic death, so pacing is indicated even when asymptomatic. Functional/reversible causes generally resolve; structural fibrotic disease is usually permanent and progressive.",
+    "pitfalls": [
+      "Mislabeling 2:1 AV block as type I when it may be infranodal type II - the surface ECG cannot reliably distinguish them",
+      "Assuming all AV block is benign vagal phenomenon and missing serious infranodal disease that warrants pacing despite absent symptoms",
+      "Overlooking reversible/treatable causes (offending drugs, electrolyte derangement, ischemia, hypothyroidism, sleep apnea, Lyme carditis) before committing to permanent therapy",
+      "Failing to pursue advanced imaging for infiltrative disease (e.g., sarcoidosis) when AV block presents at a younger age (<=60 years)",
+      "Misinterpreting Mobitz I at very short paced cycle lengths as pathologic - it can be a normal physiologic response; it is abnormal at cycle lengths >500 ms (<120 beats/min) without high vagal tone",
+      "Not recognizing that a new perivalvular abscess in endocarditis can present as AV block requiring urgent surgery"
+    ],
+    "severityClassification": "Electrocardiographic grading: First-degree AV block - all atrial impulses conduct but PR is prolonged (>200 ms), delay usually within the AV node. Second-degree AV block - intermittent failure of AV conduction; Type I/Mobitz I/Wenckebach (progressive PR prolongation until a dropped beat, usually AV-nodal) and Type II/Mobitz II (fixed PR before a dropped beat, usually infranodal, often with wide QRS). Third-degree (complete) AV block - complete AV dissociation with a ventricular (escape) rate slower than the atrial rate.",
+    "references": [
+      "Harrison 22e p.1924",
+      "Harrison 22e p.1925",
+      "Harrison 22e p.1926",
+      "Harrison 22e p.1927",
+      "Harrison 22e p.1928",
+      "Harrison 22e p.1929",
+      "Harrison 22e p.1930"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and reverse treatable causes first — withdraw AV-nodal blocking agents (beta-blockers, non-dihydropyridine calcium-channel blockers, digoxin), treat ischaemia, correct electrolyte disturbance and hypothyroidism, and treat Lyme carditis or infiltrative disease",
+      "For acute symptomatic bradycardia give atropine and, if inadequate, a chronotrope such as isoprenaline while arranging temporary transcutaneous or transvenous pacing",
+      "Implant a permanent pacemaker for symptomatic AV block, and for Mobitz II or high-grade/complete infranodal block even when asymptomatic given the unreliable escape rhythm",
+      "Observe asymptomatic first-degree and Mobitz I (Wenckebach) block, which are usually nodal and stable and do not require pacing",
+      "Consider conduction-system (His-bundle or left-bundle-branch) pacing or biventricular pacing where a high ventricular-pacing burden or impaired function is anticipated",
+      "Investigate for underlying structural or infiltrative disease with echocardiography and advanced imaging, particularly when block occurs in younger patients",
+      "Refer to electrophysiology for device implantation and for His-bundle electrogram assessment in unexplained syncope with suspected infranodal block"
     ]
-   ],
-   "caption": "Overview comparison matrix for the bradyarrhythmias: disorders of the atrioventricular node."
-  }
- ],
- "diagrams": [
-  {
-   "id": "the-bradyarrhythmias-disorders-of-the-real-image",
-   "title": "The Bradyarrhythmias: Disorders of the Atrioventricular Node: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "the_bradyarrhythmias_disorders_of_the-pathway",
+      "title": "The Bradyarrhythmias: Disorders of the Atrioventricular Node: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The AV node is specialized for slow conduction, creating a delay between atrial and ventricular activation and acting as the electrical gatekeeper to the ventricle; its intrinsic backup pacemaker (escape) rate is roughly 20-60 beats/min,",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Wide-complex escape rhythm at a slow rate (e.g., ~30 beats/min) implying infranodal block and an unreliable escape",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG to classify the degree and pattern of block and assess QRS width/escape rhythm, Transthoracic echocardiography to assess for structural/valvular disease, ejection fraction, and wall motion, Advanced imaging"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and reverse treatable causes first - withdraw AV-nodal blocking agents (beta-blockers, non-dihydropyridine calcium-channel blockers, digoxin), treat ischaemia, correct electrolyte disturbance and"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabeling 2:1 AV block as type I when it may be infranodal type II - the surface ECG cannot reliably distinguish them"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of the bradyarrhythmias: disorders of the atrioventricular node."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "the_bradyarrhythmias_disorders_of_the-matrix",
+      "title": "The Bradyarrhythmias: Disorders of the Atrioventricular Node: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The AV node is specialized for slow conduction, creating a delay between atrial and ventricular activation and acting as the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG to classify the degree and pattern of block and assess QRS width/escape rhythm, Transthoracic echocardiography to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sinus node dysfunction / sinus bradycardia (sick sinus syndrome) as a competing cause of symptomatic bradycardia, Drug effect",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and reverse treatable causes first - withdraw AV-nodal blocking agents (beta-blockers, non-dihydropyridine",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabeling 2:1 AV block as type I when it may be infranodal type II - the surface ECG cannot reliably distinguish them",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for the bradyarrhythmias: disorders of the atrioventricular node."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Atrioventricular Block",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/atrioventricular-block"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "the_bradyarrhythmias_disorders_of_the-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading atrioventricular block on ECG",
+      "rowHeader": "Criterion",
+      "columns": [
+        "ECG finding",
+        "Level and risk"
+      ],
+      "rows": [
+        {
+          "parameter": "First-degree",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "PR over 0.20 s, every P conducted",
+              "op": ">",
+              "value": 0.2
+            },
+            {
+              "text": "AV node; benign unless PR over 0.3 s causes symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mobitz I (Wenckebach)",
+          "cells": [
+            {
+              "text": "PR lengthens until a P is dropped"
+            },
+            {
+              "text": "Narrow QRS almost always AV nodal; escape 35 to 55/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mobitz I with wide QRS",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "QRS over 0.12 s",
+              "op": ">",
+              "value": 0.12
+            },
+            {
+              "text": "His-Purkinje in 60 to 70%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mobitz II",
+          "cells": [
+            {
+              "text": "Fixed PR with intermittent dropped P"
+            },
+            {
+              "text": "{{hy:Always pathological; infranodal; may suddenly go to complete block}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "2:1 or high-grade block",
+          "cells": [
+            {
+              "text": "Every second or more P blocked"
+            },
+            {
+              "text": "Cannot separate type I from II on surface ECG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complete block, narrow escape",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "Escape 35 to 50/min",
+              "range": [
+                35,
+                50
+              ]
+            },
+            {
+              "text": "Above His bifurcation; reliable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complete block, wide escape",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "Escape 20 to 40/min",
+              "range": [
+                20,
+                40
+              ]
+            },
+            {
+              "text": "Below bifurcation; unreliable, syncope risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HV interval on EP study",
+          "unit": "ms",
+          "cells": [
+            {
+              "text": "Over 100 ms",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "Annual complete block risk near 10%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age 60 or under with new high-grade block",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Up to one third have cardiac sarcoidosis",
+              "op": "<=",
+              "value": 60
+            },
+            {
+              "text": "Cardiac MRI or FDG-PET"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "the_bradyarrhythmias_disorders_of_the-ddx",
+      "kind": "ddx",
+      "title": "Causes and mimics of AV block",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sinus node dysfunction",
+          "cells": [
+            {
+              "text": "Slow P rate rather than blocked P waves"
+            },
+            {
+              "text": "ECG and ambulatory monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug effect",
+          "cells": [
+            {
+              "text": "Beta-blocker, verapamil, diltiazem, digoxin, amiodarone"
+            },
+            {
+              "text": "Withdraw drug and observe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High vagal tone",
+          "cells": [
+            {
+              "text": "Athletes, sleep; Mobitz I improves with exercise"
+            },
+            {
+              "text": "Exercise or atropine response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inferior MI",
+          "cells": [
+            {
+              "text": "Nodal block from vagal tone; resolves in days"
+            },
+            {
+              "text": "ECG, troponin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anterior MI",
+          "cells": [
+            {
+              "text": "Infranodal block, wide unstable escape"
+            },
+            {
+              "text": "ECG; needs transvenous pacing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lyme carditis",
+          "cells": [
+            {
+              "text": "Tick exposure; narrow escape over 40/min; improves on antibiotics"
+            },
+            {
+              "text": "Lyme serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis with root abscess",
+          "cells": [
+            {
+              "text": "New block with valve infection"
+            },
+            {
+              "text": "Echocardiography; urgent surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac sarcoidosis or amyloidosis",
+          "cells": [
+            {
+              "text": "Younger patient or infiltrative features"
+            },
+            {
+              "text": "Cardiac MRI, FDG-PET, pyrophosphate scan"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "the_bradyarrhythmias_disorders_of_the-treatment",
+      "kind": "treatment",
+      "title": "Treating AV block",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop AV-nodal blocking drugs, correct causes",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "Electrolytes, ischaemia, hypothyroidism, Lyme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atropine",
+          "cells": [
+            {
+              "text": "Symptomatic nodal block, inferior MI"
+            },
+            {
+              "text": "Aminophylline also may help in inferior MI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isoprenaline",
+          "cells": [
+            {
+              "text": "Atropine inadequate"
+            },
+            {
+              "text": "Bridge to pacing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transcutaneous then transvenous pacing",
+          "cells": [
+            {
+              "text": "Unstable bradycardia, anterior MI with block"
+            },
+            {
+              "text": "Immediate transvenous pacing in anterior MI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Permanent pacemaker",
+          "cells": [
+            {
+              "text": "Mobitz II, high-grade or complete block without reversible cause"
+            },
+            {
+              "text": "{{hy:Indicated even without symptoms}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Permanent pacemaker",
+          "cells": [
+            {
+              "text": "Symptomatic Mobitz I after transient causes excluded"
+            },
+            {
+              "text": "First-degree block rarely needs pacing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotics for Lyme carditis",
+          "cells": [
+            {
+              "text": "Lyme-related block"
+            },
+            {
+              "text": "Usually improves within about a week"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Atropine and isoprenaline doses were not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "the_bradyarrhythmias_disorders_of_the-dx-mgmt",
+      "title": "Diagnosis and management of atrioventricular block",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bradycardia, syncope or AV block on ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamically unstable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Atropine, isoprenaline, transcutaneous then transvenous pacing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Classify block on 12-lead ECG; check drugs, electrolytes, MI",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reversible cause (drug, Lyme, inferior MI, vagal)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat cause and monitor; pace temporarily if needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Mobitz II, high-grade or complete block?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Permanent pacemaker; image for sarcoid if 60 or under",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Symptoms correlate with bradycardia?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Permanent pacemaker",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "First-degree or Mobitz I: observe",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

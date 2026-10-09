@@ -1,176 +1,436 @@
 {
- "id": "non_arteritic_anterior_ischaemic_optic_neuropathy",
- "name": "non arteritic anterior ischaemic optic neuropathy",
- "aliases": [
-  "NAION",
-  "non-arteritic AION"
- ],
- "class": "non_infective",
- "system": "Ophthalmic",
- "specialty": "Neuro-ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most common acute optic neuropathy in patients over 50; typically painless, sudden, monocular loss often noticed on waking.",
-   "An inferior altitudinal visual field defect is the classic pattern, though any nerve-fibre-bundle defect may occur.",
-   "The structural predisposition is a small, crowded optic disc with a small or absent physiological cup, the so-called disc at risk, best appreciated in the fellow eye.",
-   "Vasculopathic risk factors predominate: hypertension, diabetes mellitus, hyperlipidaemia, obstructive sleep apnoea and nocturnal hypotension.",
-   "At onset the disc shows segmental or diffuse hyperaemic oedema with peripapillary splinter haemorrhages, later resolving to sectoral pallor.",
-   "A relative afferent pupillary defect is present unless there is bilateral or previous fellow-eye involvement.",
-   "There is no proven effective treatment; the essential immediate step is to exclude an arteritic (giant cell arteritis) cause.",
-   "Fellow-eye involvement occurs in a meaningful minority over subsequent years, so vascular risk-factor modification is advised."
+  "id": "non_arteritic_anterior_ischaemic_optic_neuropathy",
+  "name": "non arteritic anterior ischaemic optic neuropathy",
+  "aliases": [
+    "NAION",
+    "non-arteritic AION"
   ],
-  "pathophysiology": "The disorder results from transient hypoperfusion or non-perfusion of the short posterior ciliary arteries supplying the laminar and prelaminar anterior optic nerve head. In a structurally crowded disc with little room for swelling, the initial ischaemic insult produces axonal oedema that raises tissue pressure within the confined scleral canal, creating a compartment-like effect that compresses capillaries and propagates further ischaemia. The process is neither embolic nor inflammatory in most cases, distinguishing it from arteritic and retinal arterial occlusive disease.",
-  "additionalDifferentials": [
-   "Arteritic anterior ischaemic optic neuropathy from giant cell arteritis",
-   "Optic neuritis",
-   "Compressive optic neuropathy",
-   "Diabetic papillopathy",
-   "Central retinal vein occlusion with disc oedema",
-   "Papilloedema from raised intracranial pressure",
-   "Infiltrative optic neuropathy"
-  ],
-  "additionalInvestigations": [
-   "Erythrocyte sedimentation rate, C-reactive protein and platelet count to exclude giant cell arteritis",
-   "Blood pressure assessment including consideration of nocturnal hypotension",
-   "Fasting glucose or glycated haemoglobin and a fasting lipid profile",
-   "Optical coherence tomography of the retinal nerve fibre layer",
-   "Automated perimetry to document the field defect",
-   "Screening for obstructive sleep apnoea where clinically suggested",
-   "Neuroimaging with magnetic resonance imaging if the presentation is atypical"
-  ],
-  "redFlags": [
-   "Symptoms of giant cell arteritis such as jaw claudication, scalp tenderness, new headache or polymyalgia rheumatica",
-   "Pain on eye movement suggesting optic neuritis rather than ischaemia",
-   "Progressive rather than static visual loss suggesting a compressive or infiltrative cause",
-   "Simultaneous bilateral involvement warranting urgent systemic evaluation"
-  ],
-  "prognosis": "Visual acuity commonly stabilises after the acute event and a proportion of patients show modest spontaneous improvement. Recurrence in the same eye is uncommon, but fellow-eye involvement occurs in roughly one in six to one in five patients over several years.",
-  "pitfalls": [
-   "Failing to exclude giant cell arteritis and thereby missing a treatable, sight-threatening arteritic cause",
-   "Misattributing the presentation to optic neuritis in an older vasculopathic patient",
-   "Not screening for obstructive sleep apnoea and modifiable vascular risk factors",
-   "Assuming corticosteroids provide benefit, for which evidence is lacking"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Kanski's Clinical Ophthalmology",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course, Neuro-Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Aggressively modify vasculopathic risk factors — control hypertension, diabetes and hyperlipidaemia with antihypertensives, glucose-lowering therapy and a statin",
-   "Avoid nocturnal hypotension by reviewing antihypertensive timing and cautioning against evening dosing, and advise avoidance of phosphodiesterase-5 inhibitors",
-   "Urgently exclude giant cell arteritis with inflammatory markers before attributing the event to the non-arteritic form, given the sight-threatening fellow-eye risk of untreated arteritis",
-   "Investigate for and treat obstructive sleep apnoea with continuous positive airway pressure where identified",
-   "Provide low-vision rehabilitation and visual aids for the residual altitudinal field defect",
-   "Counsel on the substantial risk of fellow-eye involvement, monitor the second eye, and advise prompt review of any new visual symptoms",
-   "Refer to neuro-ophthalmology for confirmation, OCT and perimetry monitoring, and exclusion of non-arteritic mimics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "non_arteritic_anterior_ischaemic_optic_neuropathy-pathway",
-   "title": "non arteritic anterior ischaemic optic neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most common acute optic neuropathy in patients over 50; typically painless, sudden, monocular loss often noticed on waking.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptoms of giant cell arteritis such as jaw claudication, scalp tenderness, new headache or polymyalgia rheumatica",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Erythrocyte sedimentation rate, C-reactive protein and platelet count to exclude giant cell arteritis, Blood pressure assessment including consideration of nocturnal hypotension, Fasting glucose or glycated haemoglobin and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Aggressively modify vasculopathic risk factors - control hypertension, diabetes and hyperlipidaemia with antihypertensives, glucose-lowering therapy and a statin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to exclude giant cell arteritis and thereby missing a treatable, sight-threatening arteritic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of non arteritic anterior ischaemic optic neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "non_arteritic_anterior_ischaemic_optic_neuropathy-matrix",
-   "title": "non arteritic anterior ischaemic optic neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most common acute optic neuropathy in patients over 50; typically painless, sudden, monocular loss often noticed on waking.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmic",
+  "specialty": "Neuro-ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most common acute optic neuropathy in patients over 50; typically painless, sudden, monocular loss often noticed on waking.",
+      "An inferior altitudinal visual field defect is the classic pattern, though any nerve-fibre-bundle defect may occur.",
+      "The structural predisposition is a small, crowded optic disc with a small or absent physiological cup, the so-called disc at risk, best appreciated in the fellow eye.",
+      "Vasculopathic risk factors predominate: hypertension, diabetes mellitus, hyperlipidaemia, obstructive sleep apnoea and nocturnal hypotension.",
+      "At onset the disc shows segmental or diffuse hyperaemic oedema with peripapillary splinter haemorrhages, later resolving to sectoral pallor.",
+      "A relative afferent pupillary defect is present unless there is bilateral or previous fellow-eye involvement.",
+      "There is no proven effective treatment; the essential immediate step is to exclude an arteritic (giant cell arteritis) cause.",
+      "Fellow-eye involvement occurs in a meaningful minority over subsequent years, so vascular risk-factor modification is advised."
     ],
-    [
-     "Key Investigations",
-     "Erythrocyte sedimentation rate, C-reactive protein and platelet count to exclude giant cell arteritis, Blood pressure assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The disorder results from transient hypoperfusion or non-perfusion of the short posterior ciliary arteries supplying the laminar and prelaminar anterior optic nerve head. In a structurally crowded disc with little room for swelling, the initial ischaemic insult produces axonal oedema that raises tissue pressure within the confined scleral canal, creating a compartment-like effect that compresses capillaries and propagates further ischaemia. The process is neither embolic nor inflammatory in most cases, distinguishing it from arteritic and retinal arterial occlusive disease.",
+    "additionalDifferentials": [
+      "Arteritic anterior ischaemic optic neuropathy from giant cell arteritis",
+      "Optic neuritis",
+      "Compressive optic neuropathy",
+      "Diabetic papillopathy",
+      "Central retinal vein occlusion with disc oedema",
+      "Papilloedema from raised intracranial pressure",
+      "Infiltrative optic neuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Arteritic anterior ischaemic optic neuropathy from giant cell arteritis, Optic neuritis, Compressive optic neuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Erythrocyte sedimentation rate, C-reactive protein and platelet count to exclude giant cell arteritis",
+      "Blood pressure assessment including consideration of nocturnal hypotension",
+      "Fasting glucose or glycated haemoglobin and a fasting lipid profile",
+      "Optical coherence tomography of the retinal nerve fibre layer",
+      "Automated perimetry to document the field defect",
+      "Screening for obstructive sleep apnoea where clinically suggested",
+      "Neuroimaging with magnetic resonance imaging if the presentation is atypical"
     ],
-    [
-     "Management Strategy",
-     "Aggressively modify vasculopathic risk factors - control hypertension, diabetes and hyperlipidaemia with antihypertensives,",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptoms of giant cell arteritis such as jaw claudication, scalp tenderness, new headache or polymyalgia rheumatica",
+      "Pain on eye movement suggesting optic neuritis rather than ischaemia",
+      "Progressive rather than static visual loss suggesting a compressive or infiltrative cause",
+      "Simultaneous bilateral involvement warranting urgent systemic evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to exclude giant cell arteritis and thereby missing a treatable, sight-threatening arteritic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Visual acuity commonly stabilises after the acute event and a proportion of patients show modest spontaneous improvement. Recurrence in the same eye is uncommon, but fellow-eye involvement occurs in roughly one in six to one in five patients over several years.",
+    "pitfalls": [
+      "Failing to exclude giant cell arteritis and thereby missing a treatable, sight-threatening arteritic cause",
+      "Misattributing the presentation to optic neuritis in an older vasculopathic patient",
+      "Not screening for obstructive sleep apnoea and modifiable vascular risk factors",
+      "Assuming corticosteroids provide benefit, for which evidence is lacking"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Kanski's Clinical Ophthalmology",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course, Neuro-Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Aggressively modify vasculopathic risk factors — control hypertension, diabetes and hyperlipidaemia with antihypertensives, glucose-lowering therapy and a statin",
+      "Avoid nocturnal hypotension by reviewing antihypertensive timing and cautioning against evening dosing, and advise avoidance of phosphodiesterase-5 inhibitors",
+      "Urgently exclude giant cell arteritis with inflammatory markers before attributing the event to the non-arteritic form, given the sight-threatening fellow-eye risk of untreated arteritis",
+      "Investigate for and treat obstructive sleep apnoea with continuous positive airway pressure where identified",
+      "Provide low-vision rehabilitation and visual aids for the residual altitudinal field defect",
+      "Counsel on the substantial risk of fellow-eye involvement, monitor the second eye, and advise prompt review of any new visual symptoms",
+      "Refer to neuro-ophthalmology for confirmation, OCT and perimetry monitoring, and exclusion of non-arteritic mimics"
     ]
-   ],
-   "caption": "Overview comparison matrix for non arteritic anterior ischaemic optic neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "non-arteritic-anterior-ischaemic-optic-neuropathy-real-image",
-   "title": "non arteritic anterior ischaemic optic neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "non_arteritic_anterior_ischaemic_optic_neuropathy-pathway",
+      "title": "non arteritic anterior ischaemic optic neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most common acute optic neuropathy in patients over 50; typically painless, sudden, monocular loss often noticed on waking.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptoms of giant cell arteritis such as jaw claudication, scalp tenderness, new headache or polymyalgia rheumatica",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Erythrocyte sedimentation rate, C-reactive protein and platelet count to exclude giant cell arteritis, Blood pressure assessment including consideration of nocturnal hypotension, Fasting glucose or glycated haemoglobin and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Aggressively modify vasculopathic risk factors - control hypertension, diabetes and hyperlipidaemia with antihypertensives, glucose-lowering therapy and a statin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to exclude giant cell arteritis and thereby missing a treatable, sight-threatening arteritic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of non arteritic anterior ischaemic optic neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "non_arteritic_anterior_ischaemic_optic_neuropathy-matrix",
+      "title": "non arteritic anterior ischaemic optic neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most common acute optic neuropathy in patients over 50; typically painless, sudden, monocular loss often noticed on waking.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Erythrocyte sedimentation rate, C-reactive protein and platelet count to exclude giant cell arteritis, Blood pressure assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Arteritic anterior ischaemic optic neuropathy from giant cell arteritis, Optic neuritis, Compressive optic neuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Aggressively modify vasculopathic risk factors - control hypertension, diabetes and hyperlipidaemia with antihypertensives,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to exclude giant cell arteritis and thereby missing a treatable, sight-threatening arteritic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for non arteritic anterior ischaemic optic neuropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "non_arteritic_anterior_ischaemic_optic_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythrocyte sedimentation rate and C-reactive protein",
+          "cells": [
+            {
+              "text": "Excludes giant cell arteritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet count",
+          "cells": [
+            {
+              "text": "Excludes giant cell arteritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure assessment",
+          "cells": [
+            {
+              "text": "Hypotension and vasculopathic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes and lipid assessment",
+          "cells": [
+            {
+              "text": "Vasculopathic risk factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "non_arteritic_anterior_ischaemic_optic_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Arteritic anterior ischaemic optic neuropathy",
+          "cells": [
+            {
+              "text": "Giant cell arteritis; sight-threatening and treatable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic neuritis",
+          "cells": [
+            {
+              "text": "Pain on eye movement favours it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive optic neuropathy",
+          "cells": [
+            {
+              "text": "Progressive loss with a mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic papillopathy",
+          "cells": [
+            {
+              "text": "Diabetic disc swelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "non_arteritic_anterior_ischaemic_optic_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Control vasculopathic risk factors",
+          "cells": [
+            {
+              "text": "Hypertension, diabetes and hyperlipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihypertensives, glucose-lowering therapy and a statin",
+          "cells": [
+            {
+              "text": "Treatment of the risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid nocturnal hypotension",
+          "cells": [
+            {
+              "text": "Reduces perfusion risk to the optic nerve head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor the fellow eye",
+          "cells": [
+            {
+              "text": "Risk of involvement in the other eye"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "non_arteritic_anterior_ischaemic_optic_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of non arteritic anterior ischaemic optic neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless sudden monocular visual loss on waking in a patient over 50",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (jaw claudication, scalp tenderness, polymyalgia, raised ESR)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ESR, CRP and steroid decision if giant cell arteritis is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ESR, CRP, platelets, blood pressure, glucose and lipid profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Arteritis excluded with a vasculopathic risk profile?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as arteritic optic neuropathy; act urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude giant cell arteritis before settling on diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Control hypertension, diabetes and hyperlipidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antihypertensives, glucose-lowering therapy and a statin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid nocturnal hypotension and monitor the fellow eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acuity often stabilises, with modest spontaneous gain; same-eye recurrence is uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,474 @@
 {
- "id": "choriocarcinoma",
- "name": "Choriocarcinoma",
- "aliases": [
-  "gestational choriocarcinoma",
-  "chorionic carcinoma",
-  "chorioepithelioma"
- ],
- "class": "non_infective",
- "system": "Obstetrics and Gynaecology",
- "specialty": "Obstetrics and Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / RCOG and FIGO gestational trophoblastic disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A malignant trophoblastic tumour that most often follows a molar pregnancy but can arise after any pregnancy event, including miscarriage, ectopic, or term delivery",
-   "Persistent or irregular vaginal bleeding after a pregnancy, with a markedly elevated beta-hCG, is the hallmark presentation",
-   "It is highly vascular and prone to early haematogenous spread, classically to the lungs, but also brain, liver, and pelvis",
-   "Presenting features may reflect metastasis, such as haemoptysis, neurological signs, or intraperitoneal bleeding, rather than a gynaecological complaint",
-   "Beta-hCG functions as a sensitive tumour marker for diagnosis, monitoring response, and detecting relapse",
-   "Management is methotrexate-based or multi-agent chemotherapy guided by a validated prognostic scoring system, delivered through a specialist trophoblastic centre",
-   "Even with widespread metastatic disease, cure rates are high with appropriate risk-stratified chemotherapy"
+  "id": "choriocarcinoma",
+  "name": "Choriocarcinoma",
+  "aliases": [
+    "gestational choriocarcinoma",
+    "chorionic carcinoma",
+    "chorioepithelioma"
   ],
-  "pathophysiology": "Choriocarcinoma is a malignant neoplasm of trophoblast composed of sheets of anaplastic cytotrophoblast and syncytiotrophoblast without formed chorionic villi. It arises from residual trophoblastic tissue after a molar or non-molar pregnancy, secreting beta-hCG in proportion to tumour bulk. The tumour destructively invades the myometrium and uterine vasculature, causing haemorrhage, and disseminates early through the bloodstream to distant organs where friable vascular deposits may bleed. Because it is chemosensitive, systemic chemotherapy can eradicate even metastatic disease, with beta-hCG tracking the response.",
-  "additionalDifferentials": [
-   "Persistent or invasive hydatidiform mole",
-   "Placental site trophoblastic tumour",
-   "Epithelioid trophoblastic tumour",
-   "Retained products of conception with exaggerated placental site",
-   "Non-gestational germ cell tumour producing hCG",
-   "Ectopic pregnancy"
-  ],
-  "additionalInvestigations": [
-   "Serial quantitative serum beta-hCG",
-   "Pelvic ultrasound with Doppler to assess uterine mass and vascularity",
-   "Chest imaging to detect pulmonary metastases",
-   "Cross-sectional imaging of brain, liver, and abdomen for staging in high-risk disease",
-   "Full blood count, renal and liver function before chemotherapy",
-   "Histology when tissue is available, though treatment often begins on hCG and imaging"
-  ],
-  "redFlags": [
-   "Haemoptysis or breathlessness suggesting pulmonary metastases",
-   "Headache, seizures, or focal neurology indicating cerebral spread",
-   "Acute intraperitoneal or vaginal haemorrhage from a friable tumour",
-   "Very high beta-hCG with widespread metastatic disease requiring urgent specialist chemotherapy"
-  ],
-  "prognosis": "Gestational choriocarcinoma is one of the most curable solid malignancies; low-risk disease is almost uniformly cured and even high-risk metastatic disease achieves high survival with multi-agent chemotherapy through a specialist centre. Prognosis worsens with late presentation, very high hCG, and brain or liver metastases.",
-  "pitfalls": [
-   "Overlooking abnormal bleeding weeks or months after a normal-appearing pregnancy and not checking beta-hCG",
-   "Attempting biopsy of a highly vascular uterine lesion and precipitating major haemorrhage",
-   "Managing outside a specialist trophoblastic service and undertreating high-risk disease",
-   "Discontinuing chemotherapy or surveillance before beta-hCG has normalised and been sustained"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "RCOG guidance on gestational trophoblastic disease",
-   "FIGO gestational trophoblastic neoplasia staging and scoring"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Refer to a specialist gestational trophoblastic disease centre, with treatment intensity set by a validated prognostic scoring system",
-   "Treat low-risk disease with single-agent chemotherapy such as methotrexate with folinic acid rescue or actinomycin D",
-   "Treat high-risk or metastatic disease with multi-agent chemotherapy such as the EMA-CO regimen",
-   "Track response, guide treatment duration and detect relapse with serial quantitative beta-hCG measurement",
-   "Manage haemorrhagic and metastatic complications, adding radiotherapy or surgery for chemoresistant or bleeding deposits such as cerebral metastases",
-   "Advise reliable contraception throughout treatment and surveillance, avoiding pregnancy until beta-hCG has remained normal for the recommended interval",
-   "Provide prolonged post-treatment beta-hCG surveillance to confirm remission and detect recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "choriocarcinoma-pathway",
-   "title": "Choriocarcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A malignant trophoblastic tumour that most often follows a molar pregnancy but can arise after any pregnancy event, including miscarriage, ectopic, or term delivery",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haemoptysis or breathlessness suggesting pulmonary metastases",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial quantitative serum beta-hCG, Pelvic ultrasound with Doppler to assess uterine mass and vascularity, Chest imaging to detect pulmonary metastases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Refer to a specialist gestational trophoblastic disease centre, with treatment intensity set by a validated prognostic scoring system"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking abnormal bleeding weeks or months after a normal-appearing pregnancy and not checking beta-hCG"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of choriocarcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "choriocarcinoma-matrix",
-   "title": "Choriocarcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A malignant trophoblastic tumour that most often follows a molar pregnancy but can arise after any pregnancy event, including",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics and Gynaecology",
+  "specialty": "Obstetrics and Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / RCOG and FIGO gestational trophoblastic disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A malignant trophoblastic tumour that most often follows a molar pregnancy but can arise after any pregnancy event, including miscarriage, ectopic, or term delivery",
+      "Persistent or irregular vaginal bleeding after a pregnancy, with a markedly elevated beta-hCG, is the hallmark presentation",
+      "It is highly vascular and prone to early haematogenous spread, classically to the lungs, but also brain, liver, and pelvis",
+      "Presenting features may reflect metastasis, such as haemoptysis, neurological signs, or intraperitoneal bleeding, rather than a gynaecological complaint",
+      "Beta-hCG functions as a sensitive tumour marker for diagnosis, monitoring response, and detecting relapse",
+      "Management is methotrexate-based or multi-agent chemotherapy guided by a validated prognostic scoring system, delivered through a specialist trophoblastic centre",
+      "Even with widespread metastatic disease, cure rates are high with appropriate risk-stratified chemotherapy"
     ],
-    [
-     "Key Investigations",
-     "Serial quantitative serum beta-hCG, Pelvic ultrasound with Doppler to assess uterine mass and vascularity, Chest imaging to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Choriocarcinoma is a malignant neoplasm of trophoblast composed of sheets of anaplastic cytotrophoblast and syncytiotrophoblast without formed chorionic villi. It arises from residual trophoblastic tissue after a molar or non-molar pregnancy, secreting beta-hCG in proportion to tumour bulk. The tumour destructively invades the myometrium and uterine vasculature, causing haemorrhage, and disseminates early through the bloodstream to distant organs where friable vascular deposits may bleed. Because it is chemosensitive, systemic chemotherapy can eradicate even metastatic disease, with beta-hCG tracking the response.",
+    "additionalDifferentials": [
+      "Persistent or invasive hydatidiform mole",
+      "Placental site trophoblastic tumour",
+      "Epithelioid trophoblastic tumour",
+      "Retained products of conception with exaggerated placental site",
+      "Non-gestational germ cell tumour producing hCG",
+      "Ectopic pregnancy"
     ],
-    [
-     "Primary Differentials",
-     "Persistent or invasive hydatidiform mole, Placental site trophoblastic tumour, Epithelioid trophoblastic tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial quantitative serum beta-hCG",
+      "Pelvic ultrasound with Doppler to assess uterine mass and vascularity",
+      "Chest imaging to detect pulmonary metastases",
+      "Cross-sectional imaging of brain, liver, and abdomen for staging in high-risk disease",
+      "Full blood count, renal and liver function before chemotherapy",
+      "Histology when tissue is available, though treatment often begins on hCG and imaging"
     ],
-    [
-     "Management Strategy",
-     "Refer to a specialist gestational trophoblastic disease centre, with treatment intensity set by a validated prognostic scoring",
-     "Core treatment modality"
+    "redFlags": [
+      "Haemoptysis or breathlessness suggesting pulmonary metastases",
+      "Headache, seizures, or focal neurology indicating cerebral spread",
+      "Acute intraperitoneal or vaginal haemorrhage from a friable tumour",
+      "Very high beta-hCG with widespread metastatic disease requiring urgent specialist chemotherapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking abnormal bleeding weeks or months after a normal-appearing pregnancy and not checking beta-hCG",
-     "Prevent diagnostic or management error"
+    "prognosis": "Gestational choriocarcinoma is one of the most curable solid malignancies; low-risk disease is almost uniformly cured and even high-risk metastatic disease achieves high survival with multi-agent chemotherapy through a specialist centre. Prognosis worsens with late presentation, very high hCG, and brain or liver metastases.",
+    "pitfalls": [
+      "Overlooking abnormal bleeding weeks or months after a normal-appearing pregnancy and not checking beta-hCG",
+      "Attempting biopsy of a highly vascular uterine lesion and precipitating major haemorrhage",
+      "Managing outside a specialist trophoblastic service and undertreating high-risk disease",
+      "Discontinuing chemotherapy or surveillance before beta-hCG has normalised and been sustained"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "RCOG guidance on gestational trophoblastic disease",
+      "FIGO gestational trophoblastic neoplasia staging and scoring"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Refer to a specialist gestational trophoblastic disease centre, with treatment intensity set by a validated prognostic scoring system",
+      "Treat low-risk disease with single-agent chemotherapy such as methotrexate with folinic acid rescue or actinomycin D",
+      "Treat high-risk or metastatic disease with multi-agent chemotherapy such as the EMA-CO regimen",
+      "Track response, guide treatment duration and detect relapse with serial quantitative beta-hCG measurement",
+      "Manage haemorrhagic and metastatic complications, adding radiotherapy or surgery for chemoresistant or bleeding deposits such as cerebral metastases",
+      "Advise reliable contraception throughout treatment and surveillance, avoiding pregnancy until beta-hCG has remained normal for the recommended interval",
+      "Provide prolonged post-treatment beta-hCG surveillance to confirm remission and detect recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for choriocarcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "choriocarcinoma-real-image",
-   "title": "Choriocarcinoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "choriocarcinoma-pathway",
+      "title": "Choriocarcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A malignant trophoblastic tumour that most often follows a molar pregnancy but can arise after any pregnancy event, including miscarriage, ectopic, or term delivery",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haemoptysis or breathlessness suggesting pulmonary metastases",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial quantitative serum beta-hCG, Pelvic ultrasound with Doppler to assess uterine mass and vascularity, Chest imaging to detect pulmonary metastases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Refer to a specialist gestational trophoblastic disease centre, with treatment intensity set by a validated prognostic scoring system"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking abnormal bleeding weeks or months after a normal-appearing pregnancy and not checking beta-hCG"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of choriocarcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "choriocarcinoma-matrix",
+      "title": "Choriocarcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A malignant trophoblastic tumour that most often follows a molar pregnancy but can arise after any pregnancy event, including",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial quantitative serum beta-hCG, Pelvic ultrasound with Doppler to assess uterine mass and vascularity, Chest imaging to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Persistent or invasive hydatidiform mole, Placental site trophoblastic tumour, Epithelioid trophoblastic tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Refer to a specialist gestational trophoblastic disease centre, with treatment intensity set by a validated prognostic scoring",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking abnormal bleeding weeks or months after a normal-appearing pregnancy and not checking beta-hCG",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for choriocarcinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / RCOG and FIGO gestational trophoblastic disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "choriocarcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial quantitative serum beta-hCG",
+          "cells": [
+            {
+              "text": "Sensitive marker for diagnosis, response and relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Uterine mass and vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of brain, liver and abdomen",
+          "cells": [
+            {
+              "text": "Staging in high-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, renal and liver function",
+          "cells": [
+            {
+              "text": "Baseline before chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choriocarcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Persistent or invasive hydatidiform mole",
+          "cells": [
+            {
+              "text": "Persistent trophoblastic disease after a molar pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-gestational germ cell tumour producing hCG",
+          "cells": [
+            {
+              "text": "Non-gestational origin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choriocarcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Specialist centre referral",
+          "cells": [
+            {
+              "text": "Refer to a gestational trophoblastic disease centre; a validated prognostic score sets intensity"
+            },
+            {
+              "text": "Risk-stratified treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-risk disease",
+          "cells": [
+            {
+              "text": "Single-agent methotrexate with folinic acid rescue, or actinomycin D"
+            },
+            {
+              "text": "Low-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk or metastatic disease",
+          "cells": [
+            {
+              "text": "Multi-agent chemotherapy such as EMA-CO"
+            },
+            {
+              "text": "High-risk or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Serial quantitative beta-hCG to guide duration and detect relapse"
+            },
+            {
+              "text": "Response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "Radiotherapy or surgery for chemoresistant or bleeding deposits, including cerebral metastases"
+            },
+            {
+              "text": "Chemoresistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contraception",
+          "cells": [
+            {
+              "text": "Reliable contraception; avoid pregnancy until beta-hCG has been normal for the recommended interval"
+            },
+            {
+              "text": "During treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-treatment surveillance",
+          "cells": [
+            {
+              "text": "Prolonged beta-hCG surveillance to confirm remission and detect recurrence"
+            },
+            {
+              "text": "Recurrence detection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "choriocarcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Choriocarcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected choriocarcinoma: bleeding after pregnancy with markedly raised beta-hCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemoptysis, neurological signs, intraperitoneal bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist chemotherapy referral; manage haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial beta-hCG, pelvic ultrasound with Doppler, chest and staging imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised beta-hCG with trophoblastic tumour confirmed and staged?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Refer to a specialist trophoblastic centre; prognostic score sets intensity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check invasive mole and non-gestational germ cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Single-agent methotrexate with folinic acid or actinomycin D for low-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multi-agent chemotherapy such as EMA-CO for high-risk or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy or surgery for chemoresistant or bleeding deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prolonged beta-hCG surveillance to confirm remission; contraception meanwhile",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

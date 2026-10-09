@@ -1,174 +1,461 @@
 {
- "id": "schizoaffective_disorder",
- "name": "Schizoaffective disorder",
- "aliases": [
-  "schizoaffective psychosis"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The concept describes an illness in which a major mood episode (depressive or manic) coexists with psychotic symptoms that also meet criteria characteristic of schizophrenia over the same continuous period",
-   "The distinguishing requirement is that delusions or hallucinations must be present for a substantial period in the absence of a prominent mood episode, separating it from mood disorder with psychotic features",
-   "Two subtypes are recognised according to whether the mood disturbance is predominantly bipolar or depressive in nature",
-   "Diagnosis is longitudinal and often provisional, requiring observation over time, because the relative burden of mood and psychotic symptoms determines the label",
-   "Management typically combines an antipsychotic with mood stabilisation or antidepressant treatment guided by the predominant mood pattern",
-   "Suicide risk is significant and should be assessed repeatedly, particularly during depressive phases and following resolution of psychosis",
-   "Exclude substance-induced psychosis and general medical causes, and confirm that psychotic symptoms are not confined to mood episodes",
-   "Psychosocial support, adherence promotion, and long-term follow-up are important because the course is chronic and relapsing"
+  "id": "schizoaffective_disorder",
+  "name": "Schizoaffective disorder",
+  "aliases": [
+    "schizoaffective psychosis"
   ],
-  "pathophysiology": "Schizoaffective disorder is conceptualised as lying on a spectrum between schizophrenia and the mood disorders, sharing neurobiological features with both, including dopaminergic dysregulation implicated in psychosis and monoaminergic and stress-axis disturbances implicated in mood pathology. Genetic vulnerability overlapping with both schizophrenia and bipolar disorder, neurodevelopmental factors, and altered corticolimbic circuitry are thought to contribute.",
-  "additionalDifferentials": [
-   "Schizophrenia",
-   "Bipolar disorder with psychotic features",
-   "Major depressive disorder with psychotic features",
-   "Substance-induced psychotic disorder",
-   "Psychosis due to a general medical condition",
-   "Delusional disorder",
-   "Schizophreniform disorder"
-  ],
-  "additionalInvestigations": [
-   "Longitudinal assessment documenting the temporal relationship of mood and psychotic symptoms",
-   "Structured suicide risk assessment",
-   "Urine drug screen and substance use history",
-   "Baseline metabolic monitoring before and during antipsychotic treatment",
-   "Neuroimaging and medical workup where an organic cause is suspected",
-   "Collateral history to clarify longitudinal course"
-  ],
-  "redFlags": [
-   "Active suicidal or homicidal ideation with plan or intent",
-   "Command hallucinations directing harm to self or others",
-   "Acute manic escalation with dangerous behaviour or impaired judgement",
-   "Catatonia, severe self-neglect, or refusal of food and fluids"
-  ],
-  "prognosis": "The prognosis of schizoaffective disorder is generally intermediate between that of schizophrenia and the mood disorders, tending to be better than schizophrenia but worse than a pure mood disorder. Outcome is more favourable with predominant mood symptoms, good treatment adherence, and strong psychosocial support, and less favourable with prominent persistent psychosis and poor functioning between episodes.",
-  "pitfalls": [
-   "Labelling mood disorder with psychotic features as schizoaffective without evidence of psychosis outside mood episodes",
-   "Underestimating suicide risk during and after psychotic phases",
-   "Neglecting metabolic monitoring during antipsychotic treatment",
-   "Missing substance-induced or medical causes of combined mood and psychotic symptoms",
-   "Making a firm diagnosis prematurely without longitudinal observation"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anchor treatment on an antipsychotic to control psychotic symptoms, reserving clozapine for treatment-resistant illness with the required haematological monitoring",
-   "Add mood-targeted pharmacotherapy — a mood stabiliser such as lithium or an anticonvulsant for the bipolar subtype, or an antidepressant for the depressive subtype",
-   "Provide psychosocial interventions including psychoeducation, cognitive behavioural therapy, family support and supported employment or education",
-   "Assess suicide risk repeatedly, particularly during depressive phases and after resolution of psychosis, escalating to crisis or inpatient care when risk is high",
-   "Monitor weight, glucose, lipids and ECG during antipsychotic treatment and address cardiometabolic and substance-use comorbidity",
-   "Consider electroconvulsive therapy for severe refractory mood episodes, catatonia or high suicide risk",
-   "Support adherence and relapse prevention, considering long-acting injectable antipsychotics, within a coordinated community mental-health team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "schizoaffective_disorder-pathway",
-   "title": "Schizoaffective disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The concept describes an illness in which a major mood episode (depressive or manic) coexists with psychotic symptoms that also meet criteria characteristic of schizophrenia over the same continuous period",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Active suicidal or homicidal ideation with plan or intent",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Longitudinal assessment documenting the temporal relationship of mood and psychotic symptoms, Structured suicide risk assessment, Urine drug screen and substance use history"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anchor treatment on an antipsychotic to control psychotic symptoms, reserving clozapine for treatment-resistant illness with the required haematological monitoring"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling mood disorder with psychotic features as schizoaffective without evidence of psychosis outside mood episodes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of schizoaffective disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "schizoaffective_disorder-matrix",
-   "title": "Schizoaffective disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The concept describes an illness in which a major mood episode (depressive or manic) coexists with psychotic symptoms that also",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The concept describes an illness in which a major mood episode (depressive or manic) coexists with psychotic symptoms that also meet criteria characteristic of schizophrenia over the same continuous period",
+      "The distinguishing requirement is that delusions or hallucinations must be present for a substantial period in the absence of a prominent mood episode, separating it from mood disorder with psychotic features",
+      "Two subtypes are recognised according to whether the mood disturbance is predominantly bipolar or depressive in nature",
+      "Diagnosis is longitudinal and often provisional, requiring observation over time, because the relative burden of mood and psychotic symptoms determines the label",
+      "Management typically combines an antipsychotic with mood stabilisation or antidepressant treatment guided by the predominant mood pattern",
+      "Suicide risk is significant and should be assessed repeatedly, particularly during depressive phases and following resolution of psychosis",
+      "Exclude substance-induced psychosis and general medical causes, and confirm that psychotic symptoms are not confined to mood episodes",
+      "Psychosocial support, adherence promotion, and long-term follow-up are important because the course is chronic and relapsing"
     ],
-    [
-     "Key Investigations",
-     "Longitudinal assessment documenting the temporal relationship of mood and psychotic symptoms, Structured suicide risk assessment,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Schizoaffective disorder is conceptualised as lying on a spectrum between schizophrenia and the mood disorders, sharing neurobiological features with both, including dopaminergic dysregulation implicated in psychosis and monoaminergic and stress-axis disturbances implicated in mood pathology. Genetic vulnerability overlapping with both schizophrenia and bipolar disorder, neurodevelopmental factors, and altered corticolimbic circuitry are thought to contribute.",
+    "additionalDifferentials": [
+      "Schizophrenia",
+      "Bipolar disorder with psychotic features",
+      "Major depressive disorder with psychotic features",
+      "Substance-induced psychotic disorder",
+      "Psychosis due to a general medical condition",
+      "Delusional disorder",
+      "Schizophreniform disorder"
     ],
-    [
-     "Primary Differentials",
-     "Schizophrenia, Bipolar disorder with psychotic features, Major depressive disorder with psychotic features",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Longitudinal assessment documenting the temporal relationship of mood and psychotic symptoms",
+      "Structured suicide risk assessment",
+      "Urine drug screen and substance use history",
+      "Baseline metabolic monitoring before and during antipsychotic treatment",
+      "Neuroimaging and medical workup where an organic cause is suspected",
+      "Collateral history to clarify longitudinal course"
     ],
-    [
-     "Management Strategy",
-     "Anchor treatment on an antipsychotic to control psychotic symptoms, reserving clozapine for treatment-resistant illness with the",
-     "Core treatment modality"
+    "redFlags": [
+      "Active suicidal or homicidal ideation with plan or intent",
+      "Command hallucinations directing harm to self or others",
+      "Acute manic escalation with dangerous behaviour or impaired judgement",
+      "Catatonia, severe self-neglect, or refusal of food and fluids"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling mood disorder with psychotic features as schizoaffective without evidence of psychosis outside mood episodes",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis of schizoaffective disorder is generally intermediate between that of schizophrenia and the mood disorders, tending to be better than schizophrenia but worse than a pure mood disorder. Outcome is more favourable with predominant mood symptoms, good treatment adherence, and strong psychosocial support, and less favourable with prominent persistent psychosis and poor functioning between episodes.",
+    "pitfalls": [
+      "Labelling mood disorder with psychotic features as schizoaffective without evidence of psychosis outside mood episodes",
+      "Underestimating suicide risk during and after psychotic phases",
+      "Neglecting metabolic monitoring during antipsychotic treatment",
+      "Missing substance-induced or medical causes of combined mood and psychotic symptoms",
+      "Making a firm diagnosis prematurely without longitudinal observation"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anchor treatment on an antipsychotic to control psychotic symptoms, reserving clozapine for treatment-resistant illness with the required haematological monitoring",
+      "Add mood-targeted pharmacotherapy — a mood stabiliser such as lithium or an anticonvulsant for the bipolar subtype, or an antidepressant for the depressive subtype",
+      "Provide psychosocial interventions including psychoeducation, cognitive behavioural therapy, family support and supported employment or education",
+      "Assess suicide risk repeatedly, particularly during depressive phases and after resolution of psychosis, escalating to crisis or inpatient care when risk is high",
+      "Monitor weight, glucose, lipids and ECG during antipsychotic treatment and address cardiometabolic and substance-use comorbidity",
+      "Consider electroconvulsive therapy for severe refractory mood episodes, catatonia or high suicide risk",
+      "Support adherence and relapse prevention, considering long-acting injectable antipsychotics, within a coordinated community mental-health team"
     ]
-   ],
-   "caption": "Overview comparison matrix for schizoaffective disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "schizoaffective-disorder-real-image",
-   "title": "Schizoaffective disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "schizoaffective_disorder-pathway",
+      "title": "Schizoaffective disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The concept describes an illness in which a major mood episode (depressive or manic) coexists with psychotic symptoms that also meet criteria characteristic of schizophrenia over the same continuous period",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Active suicidal or homicidal ideation with plan or intent",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Longitudinal assessment documenting the temporal relationship of mood and psychotic symptoms, Structured suicide risk assessment, Urine drug screen and substance use history"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anchor treatment on an antipsychotic to control psychotic symptoms, reserving clozapine for treatment-resistant illness with the required haematological monitoring"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling mood disorder with psychotic features as schizoaffective without evidence of psychosis outside mood episodes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of schizoaffective disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "schizoaffective_disorder-matrix",
+      "title": "Schizoaffective disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The concept describes an illness in which a major mood episode (depressive or manic) coexists with psychotic symptoms that also",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Longitudinal assessment documenting the temporal relationship of mood and psychotic symptoms, Structured suicide risk assessment,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Schizophrenia, Bipolar disorder with psychotic features, Major depressive disorder with psychotic features",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anchor treatment on an antipsychotic to control psychotic symptoms, reserving clozapine for treatment-resistant illness with the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling mood disorder with psychotic features as schizoaffective without evidence of psychosis outside mood episodes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for schizoaffective disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "schizoaffective_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Longitudinal symptom timeline",
+          "cells": [
+            {
+              "text": "Temporal relationship of mood and psychotic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suicide risk assessment",
+          "cells": [
+            {
+              "text": "Structured and repeated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine drug screen and substance history",
+          "cells": [
+            {
+              "text": "Exclude substance cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline metabolic monitoring",
+          "cells": [
+            {
+              "text": "Before and during antipsychotic treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging and medical work-up",
+          "cells": [
+            {
+              "text": "When an organic cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collateral history",
+          "cells": [
+            {
+              "text": "Clarifies longitudinal course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schizoaffective_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bipolar or depressive disorder with psychotic features",
+          "cells": [
+            {
+              "text": "Psychosis occurs only during mood episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schizophrenia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "schizoaffective_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antipsychotic",
+          "cells": [
+            {
+              "text": "Anchor treatment; clozapine for treatment-resistant illness with haematologic monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mood-targeted drugs",
+          "cells": [
+            {
+              "text": "Lithium or anticonvulsant for bipolar subtype; antidepressant for depressive subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial interventions",
+          "cells": [
+            {
+              "text": "Psychoeducation, CBT, family support, supported employment or education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suicide risk assessment",
+          "cells": [
+            {
+              "text": "Repeat, especially in depressive phases; crisis or inpatient care when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiometabolic monitoring",
+          "cells": [
+            {
+              "text": "Weight, glucose, lipids and ECG; address substance use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroconvulsive therapy",
+          "cells": [
+            {
+              "text": "Severe refractory mood episodes, catatonia or high suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse prevention",
+          "cells": [
+            {
+              "text": "Long-acting injectables within a community mental-health team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "schizoaffective_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Schizoaffective disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Psychotic symptoms with prominent mood episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Suicidal or homicidal intent, command hallucinations, dangerous mania or catatonia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency psychiatric assessment; inpatient care and consider ECT",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mood-psychosis timeline, drug screen, metabolic baseline, medical work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do psychotic symptoms persist outside mood episodes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Mood disorder with psychotic features; consider schizophrenia, substance or medical cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antipsychotic as anchor; clozapine if treatment-resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add lithium, anticonvulsant or antidepressant by subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychoeducation, CBT and family support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Metabolic monitoring, long-acting injectable and suicide risk review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis intermediate between schizophrenia and mood disorders",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

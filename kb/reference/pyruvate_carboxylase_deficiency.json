@@ -1,175 +1,404 @@
 {
- "id": "pyruvate_carboxylase_deficiency",
- "name": "Pyruvate carboxylase deficiency",
- "aliases": [
-  "PC deficiency",
-  "PCD",
-  "pyruvate carboxylase enzyme deficiency",
-  "PC gene deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder caused by variants in the PC gene, encoding the biotin-dependent mitochondrial enzyme pyruvate carboxylase",
-   "The enzyme converts pyruvate to oxaloacetate, an anaplerotic step essential for gluconeogenesis, the citric acid cycle and neurotransmitter synthesis",
-   "Presents with lactic acidosis, often accompanied by hypoglycaemia, and a raised lactate-to-pyruvate ratio",
-   "The severe neonatal (type B, often French) form causes overwhelming lactic acidosis, hyperammonaemia, citrullinaemia and early death",
-   "The milder infantile (type A, North American) form causes developmental delay, seizures and recurrent metabolic acidosis with lactic acidaemia",
-   "A characteristic biochemical pattern includes raised lactate, ketones, ammonia, citrulline and lysine with low aspartate",
-   "Anaplerotic therapy and avoidance of fasting form the mainstay of supportive management, but outcomes are generally poor",
-   "Because pyruvate carboxylase is biotin-dependent, it should be distinguished from biotinidase and holocarboxylase synthetase deficiencies"
+  "id": "pyruvate_carboxylase_deficiency",
+  "name": "Pyruvate carboxylase deficiency",
+  "aliases": [
+    "PC deficiency",
+    "PCD",
+    "pyruvate carboxylase enzyme deficiency",
+    "PC gene deficiency"
   ],
-  "pathophysiology": "Pyruvate carboxylase catalyses the ATP-dependent, biotin-requiring carboxylation of pyruvate to oxaloacetate within mitochondria. This reaction replenishes citric acid cycle intermediates (anaplerosis) and provides oxaloacetate for gluconeogenesis and, in the brain, for aspartate and glutamate synthesis. Enzyme deficiency blocks gluconeogenesis, causing fasting hypoglycaemia, and diverts pyruvate towards lactate, producing lactic acidosis with an elevated lactate-to-pyruvate ratio. Depletion of oxaloacetate impairs the malate-aspartate shuttle and urea cycle function, contributing to hyperammonaemia and abnormal amino acids, while cerebral aspartate deficiency disturbs myelination and neurotransmitter metabolism.",
-  "additionalDifferentials": [
-   "Pyruvate dehydrogenase complex deficiency",
-   "Primary mitochondrial respiratory chain disorders",
-   "Multiple carboxylase deficiency (biotinidase or holocarboxylase synthetase deficiency)",
-   "Urea cycle disorders",
-   "Organic acidaemias with secondary lactic acidosis",
-   "Fatty acid oxidation defects presenting with hypoglycaemia"
-  ],
-  "additionalInvestigations": [
-   "Blood lactate, pyruvate and calculated lactate-to-pyruvate ratio",
-   "Plasma amino acids showing raised citrulline, lysine and proline with low aspartate",
-   "Plasma ammonia and blood glucose during metabolic decompensation",
-   "Enzyme activity assay in cultured fibroblasts",
-   "Molecular genetic testing of the PC gene",
-   "Neuroimaging assessing white matter and structural changes"
-  ],
-  "redFlags": [
-   "Severe neonatal lactic acidosis with hyperammonaemia and encephalopathy",
-   "Recurrent hypoglycaemia with metabolic acidosis",
-   "Rapid neurological deterioration during intercurrent illness",
-   "Failure of acidosis to respond to conventional resuscitation"
-  ],
-  "prognosis": "The severe neonatal form carries a very poor prognosis with early death, and even the milder infantile form is usually associated with significant developmental delay and recurrent metabolic crises. Rare attenuated cases with more residual enzyme activity have better outcomes.",
-  "pitfalls": [
-   "Confusing it with pyruvate dehydrogenase deficiency, which typically shows a normal lactate-to-pyruvate ratio",
-   "Missing the diagnosis when lactic acidosis is attributed to sepsis or tissue hypoperfusion",
-   "Overlooking hyperammonaemia and the urea cycle contribution",
-   "Failing to prevent catabolism and fasting, which precipitate crises"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no cure; provide anaplerotic dietary support with a high-carbohydrate intake and avoidance of prolonged fasting through frequent feeds or continuous overnight feeding",
-   "Consider citrate, aspartate or triheptanoin supplementation to replenish citric acid cycle intermediates under metabolic specialist supervision",
-   "Manage acute decompensation with intravenous glucose to reverse hypoglycaemia and support anaplerosis, correction of severe acidosis, and treatment of hyperammonaemia with nitrogen-scavenging agents such as sodium benzoate and, if needed, haemofiltration or dialysis",
-   "Trial biotin, the enzyme cofactor, although a response is not usually seen",
-   "Monitor lactate, ammonia, glucose, plasma amino acids and neurodevelopment",
-   "Coordinate care through a specialist metabolic team with dietetic input",
-   "Offer genetic counselling and family screening for this autosomal recessive PC gene disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pyruvate_carboxylase_deficiency-pathway",
-   "title": "Pyruvate carboxylase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder caused by variants in the PC gene, encoding the biotin-dependent mitochondrial enzyme pyruvate carboxylase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal lactic acidosis with hyperammonaemia and encephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood lactate, pyruvate and calculated lactate-to-pyruvate ratio, Plasma amino acids showing raised citrulline, lysine and proline with low aspartate, Plasma ammonia and blood glucose during metabolic decompensation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no cure; provide anaplerotic dietary support with a high-carbohydrate intake and avoidance of prolonged fasting through frequent feeds or continuous overnight feeding"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with pyruvate dehydrogenase deficiency, which typically shows a normal lactate-to-pyruvate ratio"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pyruvate carboxylase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "pyruvate_carboxylase_deficiency-matrix",
-   "title": "Pyruvate carboxylase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder caused by variants in the PC gene, encoding the biotin-dependent mitochondrial enzyme pyruvate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder caused by variants in the PC gene, encoding the biotin-dependent mitochondrial enzyme pyruvate carboxylase",
+      "The enzyme converts pyruvate to oxaloacetate, an anaplerotic step essential for gluconeogenesis, the citric acid cycle and neurotransmitter synthesis",
+      "Presents with lactic acidosis, often accompanied by hypoglycaemia, and a raised lactate-to-pyruvate ratio",
+      "The severe neonatal (type B, often French) form causes overwhelming lactic acidosis, hyperammonaemia, citrullinaemia and early death",
+      "The milder infantile (type A, North American) form causes developmental delay, seizures and recurrent metabolic acidosis with lactic acidaemia",
+      "A characteristic biochemical pattern includes raised lactate, ketones, ammonia, citrulline and lysine with low aspartate",
+      "Anaplerotic therapy and avoidance of fasting form the mainstay of supportive management, but outcomes are generally poor",
+      "Because pyruvate carboxylase is biotin-dependent, it should be distinguished from biotinidase and holocarboxylase synthetase deficiencies"
     ],
-    [
-     "Key Investigations",
-     "Blood lactate, pyruvate and calculated lactate-to-pyruvate ratio, Plasma amino acids showing raised citrulline, lysine and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pyruvate carboxylase catalyses the ATP-dependent, biotin-requiring carboxylation of pyruvate to oxaloacetate within mitochondria. This reaction replenishes citric acid cycle intermediates (anaplerosis) and provides oxaloacetate for gluconeogenesis and, in the brain, for aspartate and glutamate synthesis. Enzyme deficiency blocks gluconeogenesis, causing fasting hypoglycaemia, and diverts pyruvate towards lactate, producing lactic acidosis with an elevated lactate-to-pyruvate ratio. Depletion of oxaloacetate impairs the malate-aspartate shuttle and urea cycle function, contributing to hyperammonaemia and abnormal amino acids, while cerebral aspartate deficiency disturbs myelination and neurotransmitter metabolism.",
+    "additionalDifferentials": [
+      "Pyruvate dehydrogenase complex deficiency",
+      "Primary mitochondrial respiratory chain disorders",
+      "Multiple carboxylase deficiency (biotinidase or holocarboxylase synthetase deficiency)",
+      "Urea cycle disorders",
+      "Organic acidaemias with secondary lactic acidosis",
+      "Fatty acid oxidation defects presenting with hypoglycaemia"
     ],
-    [
-     "Primary Differentials",
-     "Pyruvate dehydrogenase complex deficiency, Primary mitochondrial respiratory chain disorders, Multiple carboxylase deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood lactate, pyruvate and calculated lactate-to-pyruvate ratio",
+      "Plasma amino acids showing raised citrulline, lysine and proline with low aspartate",
+      "Plasma ammonia and blood glucose during metabolic decompensation",
+      "Enzyme activity assay in cultured fibroblasts",
+      "Molecular genetic testing of the PC gene",
+      "Neuroimaging assessing white matter and structural changes"
     ],
-    [
-     "Management Strategy",
-     "There is no cure; provide anaplerotic dietary support with a high-carbohydrate intake and avoidance of prolonged fasting through",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal lactic acidosis with hyperammonaemia and encephalopathy",
+      "Recurrent hypoglycaemia with metabolic acidosis",
+      "Rapid neurological deterioration during intercurrent illness",
+      "Failure of acidosis to respond to conventional resuscitation"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with pyruvate dehydrogenase deficiency, which typically shows a normal lactate-to-pyruvate ratio",
-     "Prevent diagnostic or management error"
+    "prognosis": "The severe neonatal form carries a very poor prognosis with early death, and even the milder infantile form is usually associated with significant developmental delay and recurrent metabolic crises. Rare attenuated cases with more residual enzyme activity have better outcomes.",
+    "pitfalls": [
+      "Confusing it with pyruvate dehydrogenase deficiency, which typically shows a normal lactate-to-pyruvate ratio",
+      "Missing the diagnosis when lactic acidosis is attributed to sepsis or tissue hypoperfusion",
+      "Overlooking hyperammonaemia and the urea cycle contribution",
+      "Failing to prevent catabolism and fasting, which precipitate crises"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no cure; provide anaplerotic dietary support with a high-carbohydrate intake and avoidance of prolonged fasting through frequent feeds or continuous overnight feeding",
+      "Consider citrate, aspartate or triheptanoin supplementation to replenish citric acid cycle intermediates under metabolic specialist supervision",
+      "Manage acute decompensation with intravenous glucose to reverse hypoglycaemia and support anaplerosis, correction of severe acidosis, and treatment of hyperammonaemia with nitrogen-scavenging agents such as sodium benzoate and, if needed, haemofiltration or dialysis",
+      "Trial biotin, the enzyme cofactor, although a response is not usually seen",
+      "Monitor lactate, ammonia, glucose, plasma amino acids and neurodevelopment",
+      "Coordinate care through a specialist metabolic team with dietetic input",
+      "Offer genetic counselling and family screening for this autosomal recessive PC gene disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for pyruvate carboxylase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pyruvate-carboxylase-deficiency-real-image",
-   "title": "Pyruvate carboxylase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pyruvate_carboxylase_deficiency-pathway",
+      "title": "Pyruvate carboxylase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder caused by variants in the PC gene, encoding the biotin-dependent mitochondrial enzyme pyruvate carboxylase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal lactic acidosis with hyperammonaemia and encephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood lactate, pyruvate and calculated lactate-to-pyruvate ratio, Plasma amino acids showing raised citrulline, lysine and proline with low aspartate, Plasma ammonia and blood glucose during metabolic decompensation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no cure; provide anaplerotic dietary support with a high-carbohydrate intake and avoidance of prolonged fasting through frequent feeds or continuous overnight feeding"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with pyruvate dehydrogenase deficiency, which typically shows a normal lactate-to-pyruvate ratio"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pyruvate carboxylase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pyruvate_carboxylase_deficiency-matrix",
+      "title": "Pyruvate carboxylase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder caused by variants in the PC gene, encoding the biotin-dependent mitochondrial enzyme pyruvate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood lactate, pyruvate and calculated lactate-to-pyruvate ratio, Plasma amino acids showing raised citrulline, lysine and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pyruvate dehydrogenase complex deficiency, Primary mitochondrial respiratory chain disorders, Multiple carboxylase deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no cure; provide anaplerotic dietary support with a high-carbohydrate intake and avoidance of prolonged fasting through",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with pyruvate dehydrogenase deficiency, which typically shows a normal lactate-to-pyruvate ratio",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pyruvate carboxylase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyruvate_carboxylase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood lactate, pyruvate and lactate-to-pyruvate ratio",
+          "cells": [
+            {
+              "text": "Lactic acidosis pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Raised citrulline, lysine and proline; low aspartate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ammonia and blood glucose",
+          "cells": [
+            {
+              "text": "Decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme activity in cultured fibroblasts",
+          "cells": [
+            {
+              "text": "Enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_carboxylase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyruvate dehydrogenase complex deficiency",
+          "cells": [
+            {
+              "text": "Lactic acidosis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple carboxylase deficiency",
+          "cells": [
+            {
+              "text": "Biotinidase or holocarboxylase defect"
+            },
+            {
+              "text": "Enzyme assay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_carboxylase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anaplerotic diet",
+          "cells": [
+            {
+              "text": "High-carbohydrate dietary support; no cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplementation",
+          "cells": [
+            {
+              "text": "Citrate, aspartate or triheptanoin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompensation",
+          "cells": [
+            {
+              "text": "IV glucose to reverse hypoglycaemia during illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyruvate_carboxylase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Pyruvate carboxylase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pyruvate carboxylase deficiency: neonatal lactic acidosis with hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe acidosis with hyperammonaemia, recurrent hypoglycaemia, or neurological decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent IV glucose and metabolic review for decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lactate and pyruvate ratio; plasma amino acids; ammonia; fibroblast enzyme assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is raised citrulline with low aspartate confirmed by enzyme assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PDH deficiency or respiratory chain disorders; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anaplerotic high-carbohydrate dietary support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Citrate, aspartate or triheptanoin supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV glucose to reverse hypoglycaemia during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Specialist metabolic follow-up; no cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

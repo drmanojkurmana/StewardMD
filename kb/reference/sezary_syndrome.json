@@ -1,179 +1,484 @@
 {
- "id": "sezary_syndrome",
- "name": "Sezary syndrome",
- "aliases": [
-  "SS",
-  "leukaemic cutaneous T-cell lymphoma",
-  "erythrodermic mycosis fungoides variant",
-  "Sezary-Lutzner syndrome",
-  "CD4+/CD7-negative circulating Sezary-cell lymphoma"
- ],
- "class": "non_infective",
- "system": "Oncology / Haematologic malignancy",
- "specialty": "Haematology / Haemato-oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Haematolymphoid Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by the triad of erythroderma, generalised lymphadenopathy, and clonal neoplastic T-cells (Sezary cells) in skin, lymph nodes, and peripheral blood",
-   "Regarded as the leukaemic and more aggressive counterpart of mycosis fungoides, though usually considered a distinct entity arising de novo",
-   "Patients typically have intense pruritus, scaling, palmoplantar hyperkeratosis, ectropion, and alopecia, and are prone to skin infection",
-   "Sezary cells are mature CD4-positive memory T-cells with cerebriform nuclei, characteristically showing loss of pan-T-cell antigens such as CD7 and CD26",
-   "Diagnosis requires demonstrating a significant circulating clonal T-cell burden, for example by an elevated Sezary cell count or CD4-skewed ratio, matching the skin clone",
-   "Immune dysregulation increases susceptibility to infection, a major cause of death",
-   "Treatment favours skin-directed and immunomodulatory approaches such as extracorporeal photopheresis, retinoids, and interferon, escalating to systemic therapy as needed"
+  "id": "sezary_syndrome",
+  "name": "Sezary syndrome",
+  "aliases": [
+    "SS",
+    "leukaemic cutaneous T-cell lymphoma",
+    "erythrodermic mycosis fungoides variant",
+    "Sezary-Lutzner syndrome",
+    "CD4+/CD7-negative circulating Sezary-cell lymphoma"
   ],
-  "pathophysiology": "Sezary syndrome is a leukaemic form of cutaneous T-cell lymphoma in which malignant mature CD4-positive memory T-cells with characteristic cerebriform (Sezary) nuclei circulate in the blood and infiltrate the skin and lymph nodes. Loss of normal T-cell surface antigens and skin-homing receptor expression allows widespread cutaneous seeding, producing erythroderma. The expanding neoplastic clone disrupts normal T-cell function and cytokine balance, causing profound pruritus and immune dysregulation that predisposes to recurrent infection. Progressive disease can transform to large-cell morphology with a more aggressive behaviour.",
-  "additionalDifferentials": [
-   "Erythrodermic mycosis fungoides",
-   "Benign (reactive) erythroderma from eczema, psoriasis, or drug reaction",
-   "Idiopathic erythroderma",
-   "Adult T-cell leukaemia/lymphoma with skin involvement",
-   "Actinic reticuloid and other pseudolymphomatous conditions",
-   "Other peripheral T-cell lymphomas with erythroderma"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with immunohistochemistry for T-cell markers",
-   "Peripheral blood flow cytometry for CD4/CD8 ratio and loss of CD7 and CD26",
-   "Sezary cell count and quantification of the circulating clonal burden",
-   "Matched T-cell receptor clonality studies on blood and skin",
-   "Lymph node evaluation and cross-sectional imaging for staging",
-   "Assessment for infection and monitoring of the skin barrier"
-  ],
-  "redFlags": [
-   "Sepsis arising from a compromised, erythrodermic skin barrier",
-   "Large-cell transformation with rapidly enlarging tumours",
-   "Progressive lymphadenopathy or visceral involvement",
-   "Severe metabolic disturbance from extensive skin failure (fluid loss, thermoregulatory compromise)"
-  ],
-  "prognosis": "Sezary syndrome is generally aggressive with a guarded long-term outlook; disease burden, large-cell transformation, and infective complications drive mortality, though immunomodulatory therapy can provide meaningful disease control.",
-  "pitfalls": [
-   "Attributing chronic erythroderma to benign dermatitis and missing the underlying lymphoma",
-   "Failing to demonstrate a matched circulating clone required for diagnosis",
-   "Underestimating infection risk from the failing skin barrier",
-   "Not recognising large-cell transformation that changes prognosis and treatment"
-  ],
-  "references": [
-   "WHO Classification of Haematolymphoid Tumours",
-   "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Refer all confirmed or suspected cases to a specialized cutaneous lymphoma or hemato-oncology center given the complexity of staging and treatment options.",
-   "Base treatment intensity on stage and extent of skin, blood, nodal, and visceral involvement rather than a single fixed protocol; most patients need systemic and immunomodulatory therapy given the circulating clonal burden inherent to Sezary syndrome.",
-   "Use skin-directed measures such as topical corticosteroids for symptom control, and total-skin electron beam therapy for erythrodermic disease or palliation.",
-   "Consider extracorporeal photopheresis as a mainstay for patients with significant blood involvement, often combined with bexarotene and or interferon-alfa, and consider combining photopheresis with total-skin electron beam therapy for improved outcomes in erythrodermic patients.",
-   "Consider systemic agents including interferon-alfa, oral bexarotene (monitoring for lipid elevation and thyroid suppression), mogamulizumab (an anti-CCR4 antibody preferred specifically for Sezary syndrome given strong clearance of circulating leukemic cells), histone deacetylase inhibitors, and brentuximab vedotin when CD30 expression is present.",
-   "Reserve denileukin diftitox and alemtuzumab for relapsed or refractory disease when better-tolerated antibody-based options are not suitable.",
-   "Prefer single-agent cytotoxic chemotherapy over multi-agent regimens for advanced refractory disease, reserving combination chemotherapy for extensive adenopathy, visceral involvement, or need for rapid disease control.",
-   "Evaluate transplant-eligible patients, particularly younger patients with aggressive relapsed or refractory disease, for allogeneic hematopoietic stem cell transplantation, the only approach reported to offer durable, potentially curative control.",
-   "Monitor serially with skin disease assessment, circulating Sezary cell counts, and imaging at initial staging and follow-up for nodal or visceral progression, with biopsy of enlarged nodes.",
-   "Perform bone marrow assessment in advanced disease or when hematologic function is compromised, and watch closely for large-cell transformation and infection given profound immunosuppression and skin-barrier compromise.",
-   "Refer promptly for infection management, since immunosuppression and skin-barrier failure are major drivers of morbidity and mortality."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sezary_syndrome-pathway",
-   "title": "Sezary syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by the triad of erythroderma, generalised lymphadenopathy, and clonal neoplastic T-cells (Sezary cells) in skin, lymph nodes, and peripheral blood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sepsis arising from a compromised, erythrodermic skin barrier",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with immunohistochemistry for T-cell markers, Peripheral blood flow cytometry for CD4/CD8 ratio and loss of CD7 and CD26, Sezary cell count and quantification of the circulating clonal burden"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Refer all confirmed or suspected cases to a specialized cutaneous lymphoma or hemato-oncology center given the complexity of staging and treatment options."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing chronic erythroderma to benign dermatitis and missing the underlying lymphoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sezary syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "sezary_syndrome-matrix",
-   "title": "Sezary syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by the triad of erythroderma, generalised lymphadenopathy, and clonal neoplastic T-cells (Sezary cells) in skin, lymph",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Haematologic malignancy",
+  "specialty": "Haematology / Haemato-oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Haematolymphoid Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by the triad of erythroderma, generalised lymphadenopathy, and clonal neoplastic T-cells (Sezary cells) in skin, lymph nodes, and peripheral blood",
+      "Regarded as the leukaemic and more aggressive counterpart of mycosis fungoides, though usually considered a distinct entity arising de novo",
+      "Patients typically have intense pruritus, scaling, palmoplantar hyperkeratosis, ectropion, and alopecia, and are prone to skin infection",
+      "Sezary cells are mature CD4-positive memory T-cells with cerebriform nuclei, characteristically showing loss of pan-T-cell antigens such as CD7 and CD26",
+      "Diagnosis requires demonstrating a significant circulating clonal T-cell burden, for example by an elevated Sezary cell count or CD4-skewed ratio, matching the skin clone",
+      "Immune dysregulation increases susceptibility to infection, a major cause of death",
+      "Treatment favours skin-directed and immunomodulatory approaches such as extracorporeal photopheresis, retinoids, and interferon, escalating to systemic therapy as needed"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with immunohistochemistry for T-cell markers, Peripheral blood flow cytometry for CD4/CD8 ratio and loss of CD7 and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sezary syndrome is a leukaemic form of cutaneous T-cell lymphoma in which malignant mature CD4-positive memory T-cells with characteristic cerebriform (Sezary) nuclei circulate in the blood and infiltrate the skin and lymph nodes. Loss of normal T-cell surface antigens and skin-homing receptor expression allows widespread cutaneous seeding, producing erythroderma. The expanding neoplastic clone disrupts normal T-cell function and cytokine balance, causing profound pruritus and immune dysregulation that predisposes to recurrent infection. Progressive disease can transform to large-cell morphology with a more aggressive behaviour.",
+    "additionalDifferentials": [
+      "Erythrodermic mycosis fungoides",
+      "Benign (reactive) erythroderma from eczema, psoriasis, or drug reaction",
+      "Idiopathic erythroderma",
+      "Adult T-cell leukaemia/lymphoma with skin involvement",
+      "Actinic reticuloid and other pseudolymphomatous conditions",
+      "Other peripheral T-cell lymphomas with erythroderma"
     ],
-    [
-     "Primary Differentials",
-     "Erythrodermic mycosis fungoides, Benign (reactive) erythroderma from eczema, psoriasis, or drug reaction, Idiopathic erythroderma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with immunohistochemistry for T-cell markers",
+      "Peripheral blood flow cytometry for CD4/CD8 ratio and loss of CD7 and CD26",
+      "Sezary cell count and quantification of the circulating clonal burden",
+      "Matched T-cell receptor clonality studies on blood and skin",
+      "Lymph node evaluation and cross-sectional imaging for staging",
+      "Assessment for infection and monitoring of the skin barrier"
     ],
-    [
-     "Management Strategy",
-     "Refer all confirmed or suspected cases to a specialized cutaneous lymphoma or hemato-oncology center given the complexity of",
-     "Core treatment modality"
+    "redFlags": [
+      "Sepsis arising from a compromised, erythrodermic skin barrier",
+      "Large-cell transformation with rapidly enlarging tumours",
+      "Progressive lymphadenopathy or visceral involvement",
+      "Severe metabolic disturbance from extensive skin failure (fluid loss, thermoregulatory compromise)"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing chronic erythroderma to benign dermatitis and missing the underlying lymphoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Sezary syndrome is generally aggressive with a guarded long-term outlook; disease burden, large-cell transformation, and infective complications drive mortality, though immunomodulatory therapy can provide meaningful disease control.",
+    "pitfalls": [
+      "Attributing chronic erythroderma to benign dermatitis and missing the underlying lymphoma",
+      "Failing to demonstrate a matched circulating clone required for diagnosis",
+      "Underestimating infection risk from the failing skin barrier",
+      "Not recognising large-cell transformation that changes prognosis and treatment"
+    ],
+    "references": [
+      "WHO Classification of Haematolymphoid Tumours",
+      "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Refer all confirmed or suspected cases to a specialized cutaneous lymphoma or hemato-oncology center given the complexity of staging and treatment options.",
+      "Base treatment intensity on stage and extent of skin, blood, nodal, and visceral involvement rather than a single fixed protocol; most patients need systemic and immunomodulatory therapy given the circulating clonal burden inherent to Sezary syndrome.",
+      "Use skin-directed measures such as topical corticosteroids for symptom control, and total-skin electron beam therapy for erythrodermic disease or palliation.",
+      "Consider extracorporeal photopheresis as a mainstay for patients with significant blood involvement, often combined with bexarotene and or interferon-alfa, and consider combining photopheresis with total-skin electron beam therapy for improved outcomes in erythrodermic patients.",
+      "Consider systemic agents including interferon-alfa, oral bexarotene (monitoring for lipid elevation and thyroid suppression), mogamulizumab (an anti-CCR4 antibody preferred specifically for Sezary syndrome given strong clearance of circulating leukemic cells), histone deacetylase inhibitors, and brentuximab vedotin when CD30 expression is present.",
+      "Reserve denileukin diftitox and alemtuzumab for relapsed or refractory disease when better-tolerated antibody-based options are not suitable.",
+      "Prefer single-agent cytotoxic chemotherapy over multi-agent regimens for advanced refractory disease, reserving combination chemotherapy for extensive adenopathy, visceral involvement, or need for rapid disease control.",
+      "Evaluate transplant-eligible patients, particularly younger patients with aggressive relapsed or refractory disease, for allogeneic hematopoietic stem cell transplantation, the only approach reported to offer durable, potentially curative control.",
+      "Monitor serially with skin disease assessment, circulating Sezary cell counts, and imaging at initial staging and follow-up for nodal or visceral progression, with biopsy of enlarged nodes.",
+      "Perform bone marrow assessment in advanced disease or when hematologic function is compromised, and watch closely for large-cell transformation and infection given profound immunosuppression and skin-barrier compromise.",
+      "Refer promptly for infection management, since immunosuppression and skin-barrier failure are major drivers of morbidity and mortality."
     ]
-   ],
-   "caption": "Overview comparison matrix for sezary syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sezary-syndrome-real-image",
-   "title": "Sezary syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "sezary_syndrome-pathway",
+      "title": "Sezary syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by the triad of erythroderma, generalised lymphadenopathy, and clonal neoplastic T-cells (Sezary cells) in skin, lymph nodes, and peripheral blood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sepsis arising from a compromised, erythrodermic skin barrier",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with immunohistochemistry for T-cell markers, Peripheral blood flow cytometry for CD4/CD8 ratio and loss of CD7 and CD26, Sezary cell count and quantification of the circulating clonal burden"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Refer all confirmed or suspected cases to a specialized cutaneous lymphoma or hemato-oncology center given the complexity of staging and treatment options."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing chronic erythroderma to benign dermatitis and missing the underlying lymphoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sezary syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sezary_syndrome-matrix",
+      "title": "Sezary syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by the triad of erythroderma, generalised lymphadenopathy, and clonal neoplastic T-cells (Sezary cells) in skin, lymph",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with immunohistochemistry for T-cell markers, Peripheral blood flow cytometry for CD4/CD8 ratio and loss of CD7 and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Erythrodermic mycosis fungoides, Benign (reactive) erythroderma from eczema, psoriasis, or drug reaction, Idiopathic erythroderma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Refer all confirmed or suspected cases to a specialized cutaneous lymphoma or hemato-oncology center given the complexity of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing chronic erythroderma to benign dermatitis and missing the underlying lymphoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sezary syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sezary_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "T-cell markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood flow cytometry",
+          "cells": [
+            {
+              "text": "CD4/CD8 ratio and loss of CD7 and CD26"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sezary cell count",
+          "cells": [
+            {
+              "text": "Quantifies circulating clonal burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell receptor clonality, blood and skin",
+          "cells": [
+            {
+              "text": "A matched clone is required for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymph node evaluation and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection assessment and skin barrier monitoring",
+          "cells": [
+            {
+              "text": "Sepsis risk from erythroderma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sezary_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythrodermic mycosis fungoides",
+          "cells": [
+            {
+              "text": "Sezary is the leukaemic, more aggressive counterpart, usually a distinct de novo entity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign erythroderma (eczema, psoriasis, drug reaction)",
+          "cells": [
+            {
+              "text": "Chronic erythroderma wrongly attributed to dermatitis; biopsy and blood clone differ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adult T-cell leukaemia/lymphoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sezary_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Cutaneous lymphoma or haemato-oncology centre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stage-based treatment",
+          "cells": [
+            {
+              "text": "Intensity by skin, blood, nodal and visceral involvement; most need systemic and immunomodulatory therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin-directed therapy",
+          "cells": [
+            {
+              "text": "Topical corticosteroids; total-skin electron beam therapy for erythrodermic disease or palliation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extracorporeal photopheresis",
+          "cells": [
+            {
+              "text": "Mainstay with significant blood involvement; often with bexarotene and/or interferon-alfa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic agents",
+          "cells": [
+            {
+              "text": "Interferon-alfa, bexarotene, mogamulizumab, histone deacetylase inhibitors, brentuximab vedotin if CD30 positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapsed or refractory disease",
+          "cells": [
+            {
+              "text": "Denileukin diftitox or alemtuzumab; single-agent chemotherapy preferred over multi-agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Younger patients with aggressive disease; only approach with durable control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and infection management",
+          "cells": [
+            {
+              "text": "Sezary counts, imaging, node biopsy; prompt infection treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sezary_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sezary syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Erythroderma with intense itch and lymphadenopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sepsis, large-cell transformation, progressive nodes or visceral disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat infection urgently; cutaneous lymphoma centre; marrow and node assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy; blood flow cytometry (CD4:CD8, CD7, CD26); matched TCR clonality; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Circulating clonal T-cells match the skin clone?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as benign erythroderma, erythrodermic mycosis fungoides or other lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Refer to a cutaneous lymphoma or haemato-oncology centre",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Extracorporeal photopheresis with bexarotene and/or interferon-alfa",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mogamulizumab or other systemic agents; skin-directed therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allogeneic stem cell transplant for suitable aggressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Aggressive with a guarded outlook; therapy can give disease control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

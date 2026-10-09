@@ -1,177 +1,486 @@
 {
- "id": "autism_spectrum_disorder",
- "name": "Autism Spectrum Disorder",
- "aliases": [
-  "ASD",
-  "autism",
-  "autistic spectrum disorder",
-  "pervasive developmental disorder"
- ],
- "class": "non_infective",
- "system": "Neurodevelopmental",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A neurodevelopmental disorder defined by persistent deficits in social communication and interaction together with restricted, repetitive patterns of behaviour, interests, or activities.",
-   "Symptoms are present from early development, though they may become fully apparent only when social demands exceed the child's capacities.",
-   "It is more frequently diagnosed in boys and shows a strong genetic contribution, with increased recurrence risk in siblings.",
-   "Early signs include reduced eye contact, limited joint attention and pointing, absent or delayed social smiling, and lack of response to name.",
-   "Repetitive behaviours may include hand-flapping, lining up objects, insistence on routines, and unusual sensory responses.",
-   "Diagnosis is clinical and based on developmental history and structured observation rather than a laboratory test.",
-   "Routine developmental surveillance and autism-specific screening in toddlerhood aid early identification.",
-   "Early intensive behavioural and educational intervention improves functional outcomes.",
-   "Common co-occurring conditions include intellectual disability, ADHD, anxiety, epilepsy, sleep problems, and gastrointestinal symptoms, and no evidence links vaccines to autism."
+  "id": "autism_spectrum_disorder",
+  "name": "Autism Spectrum Disorder",
+  "aliases": [
+    "ASD",
+    "autism",
+    "autistic spectrum disorder",
+    "pervasive developmental disorder"
   ],
-  "pathophysiology": "Autism arises from atypical early brain development influenced by a strong and heterogeneous genetic basis, including many single-gene syndromes, copy number variants, and polygenic risk, interacting with prenatal and perinatal factors. These influences alter neuronal connectivity, synaptic function, and the balance of excitation and inhibition during critical periods, affecting circuits underlying social cognition, language, and behavioural flexibility. No single mechanism or biomarker accounts for all cases, reflecting the disorder's biological heterogeneity.",
-  "additionalDifferentials": [
-   "Global developmental delay or intellectual disability",
-   "Isolated language disorder or hearing impairment",
-   "Attention-deficit/hyperactivity disorder",
-   "Social (pragmatic) communication disorder",
-   "Anxiety disorders and selective mutism",
-   "Rett syndrome and other genetic or metabolic syndromes",
-   "Severe early deprivation or attachment disorder"
-  ],
-  "additionalInvestigations": [
-   "Formal audiology assessment to exclude hearing loss",
-   "Structured diagnostic observation and developmental history",
-   "Genetic evaluation (chromosomal microarray, fragile X testing, targeted panels)",
-   "Assessment of cognitive and adaptive functioning",
-   "Screening for co-occurring conditions such as epilepsy or sleep disorders",
-   "Metabolic testing when clinical features suggest an inborn error"
-  ],
-  "redFlags": [
-   "Regression or loss of previously acquired language or social skills",
-   "Absence of babbling, pointing, or other gestures by around 12 months",
-   "No single words by 16 months or no two-word phrases by 24 months",
-   "Seizures or focal neurological signs suggesting an underlying disorder",
-   "Concern for self-injurious behaviour or safety"
-  ],
-  "prognosis": "Outcomes vary widely; language ability and cognitive level are important predictors, and early intervention improves adaptive functioning, though most individuals have lifelong needs requiring ongoing support.",
-  "pitfalls": [
-   "Attributing early social and language concerns to shyness and delaying referral",
-   "Failing to test hearing before attributing delay to autism",
-   "Overlooking treatable co-occurring conditions such as epilepsy, anxiety, or sleep disturbance",
-   "Assuming intellectual ability from verbal fluency alone"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early structured behavioural and educational intervention (applied behavioural approaches, speech and language therapy, occupational therapy) as the mainstay to improve social communication and adaptive function",
-   "No pharmacotherapy for core features; antipsychotic agents such as risperidone or aripiprazole may be used for severe irritability or aggression",
-   "Identify and treat co-occurring conditions including epilepsy, sleep disorder, anxiety and attention-deficit hyperactivity disorder",
-   "Family education, parent-mediated intervention and practical social support",
-   "Multidisciplinary paediatric, psychology, therapy and educational input with an individualised education plan",
-   "Genetic evaluation and counselling given the strong heritable contribution and increased sibling recurrence risk",
-   "Planning for transition to adult services and long-term support needs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "autism_spectrum_disorder-pathway",
-   "title": "Autism Spectrum Disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A neurodevelopmental disorder defined by persistent deficits in social communication and interaction together with restricted, repetitive patterns of behaviour, interests, or activities.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Regression or loss of previously acquired language or social skills",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Formal audiology assessment to exclude hearing loss, Structured diagnostic observation and developmental history, Genetic evaluation (chromosomal microarray, fragile X testing, targeted panels)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early structured behavioural and educational intervention (applied behavioural approaches, speech and language therapy, occupational therapy) as the mainstay to improve social communication and adaptive function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing early social and language concerns to shyness and delaying referral"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autism spectrum disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "autism_spectrum_disorder-matrix",
-   "title": "Autism Spectrum Disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A neurodevelopmental disorder defined by persistent deficits in social communication and interaction together with restricted,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurodevelopmental",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A neurodevelopmental disorder defined by persistent deficits in social communication and interaction together with restricted, repetitive patterns of behaviour, interests, or activities.",
+      "Symptoms are present from early development, though they may become fully apparent only when social demands exceed the child's capacities.",
+      "It is more frequently diagnosed in boys and shows a strong genetic contribution, with increased recurrence risk in siblings.",
+      "Early signs include reduced eye contact, limited joint attention and pointing, absent or delayed social smiling, and lack of response to name.",
+      "Repetitive behaviours may include hand-flapping, lining up objects, insistence on routines, and unusual sensory responses.",
+      "Diagnosis is clinical and based on developmental history and structured observation rather than a laboratory test.",
+      "Routine developmental surveillance and autism-specific screening in toddlerhood aid early identification.",
+      "Early intensive behavioural and educational intervention improves functional outcomes.",
+      "Common co-occurring conditions include intellectual disability, ADHD, anxiety, epilepsy, sleep problems, and gastrointestinal symptoms, and no evidence links vaccines to autism."
     ],
-    [
-     "Key Investigations",
-     "Formal audiology assessment to exclude hearing loss, Structured diagnostic observation and developmental history, Genetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Autism arises from atypical early brain development influenced by a strong and heterogeneous genetic basis, including many single-gene syndromes, copy number variants, and polygenic risk, interacting with prenatal and perinatal factors. These influences alter neuronal connectivity, synaptic function, and the balance of excitation and inhibition during critical periods, affecting circuits underlying social cognition, language, and behavioural flexibility. No single mechanism or biomarker accounts for all cases, reflecting the disorder's biological heterogeneity.",
+    "additionalDifferentials": [
+      "Global developmental delay or intellectual disability",
+      "Isolated language disorder or hearing impairment",
+      "Attention-deficit/hyperactivity disorder",
+      "Social (pragmatic) communication disorder",
+      "Anxiety disorders and selective mutism",
+      "Rett syndrome and other genetic or metabolic syndromes",
+      "Severe early deprivation or attachment disorder"
     ],
-    [
-     "Primary Differentials",
-     "Global developmental delay or intellectual disability, Isolated language disorder or hearing impairment,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Formal audiology assessment to exclude hearing loss",
+      "Structured diagnostic observation and developmental history",
+      "Genetic evaluation (chromosomal microarray, fragile X testing, targeted panels)",
+      "Assessment of cognitive and adaptive functioning",
+      "Screening for co-occurring conditions such as epilepsy or sleep disorders",
+      "Metabolic testing when clinical features suggest an inborn error"
     ],
-    [
-     "Management Strategy",
-     "Early structured behavioural and educational intervention (applied behavioural approaches, speech and language therapy,",
-     "Core treatment modality"
+    "redFlags": [
+      "Regression or loss of previously acquired language or social skills",
+      "Absence of babbling, pointing, or other gestures by around 12 months",
+      "No single words by 16 months or no two-word phrases by 24 months",
+      "Seizures or focal neurological signs suggesting an underlying disorder",
+      "Concern for self-injurious behaviour or safety"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing early social and language concerns to shyness and delaying referral",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes vary widely; language ability and cognitive level are important predictors, and early intervention improves adaptive functioning, though most individuals have lifelong needs requiring ongoing support.",
+    "pitfalls": [
+      "Attributing early social and language concerns to shyness and delaying referral",
+      "Failing to test hearing before attributing delay to autism",
+      "Overlooking treatable co-occurring conditions such as epilepsy, anxiety, or sleep disturbance",
+      "Assuming intellectual ability from verbal fluency alone"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early structured behavioural and educational intervention (applied behavioural approaches, speech and language therapy, occupational therapy) as the mainstay to improve social communication and adaptive function",
+      "No pharmacotherapy for core features; antipsychotic agents such as risperidone or aripiprazole may be used for severe irritability or aggression",
+      "Identify and treat co-occurring conditions including epilepsy, sleep disorder, anxiety and attention-deficit hyperactivity disorder",
+      "Family education, parent-mediated intervention and practical social support",
+      "Multidisciplinary paediatric, psychology, therapy and educational input with an individualised education plan",
+      "Genetic evaluation and counselling given the strong heritable contribution and increased sibling recurrence risk",
+      "Planning for transition to adult services and long-term support needs"
     ]
-   ],
-   "caption": "Overview comparison matrix for autism spectrum disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "autism-spectrum-disorder-real-image",
-   "title": "Autism Spectrum Disorder: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "autism_spectrum_disorder-pathway",
+      "title": "Autism Spectrum Disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A neurodevelopmental disorder defined by persistent deficits in social communication and interaction together with restricted, repetitive patterns of behaviour, interests, or activities.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Regression or loss of previously acquired language or social skills",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Formal audiology assessment to exclude hearing loss, Structured diagnostic observation and developmental history, Genetic evaluation (chromosomal microarray, fragile X testing, targeted panels)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early structured behavioural and educational intervention (applied behavioural approaches, speech and language therapy, occupational therapy) as the mainstay to improve social communication and adaptive function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing early social and language concerns to shyness and delaying referral"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autism spectrum disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "autism_spectrum_disorder-matrix",
+      "title": "Autism Spectrum Disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A neurodevelopmental disorder defined by persistent deficits in social communication and interaction together with restricted,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Formal audiology assessment to exclude hearing loss, Structured diagnostic observation and developmental history, Genetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Global developmental delay or intellectual disability, Isolated language disorder or hearing impairment,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early structured behavioural and educational intervention (applied behavioural approaches, speech and language therapy,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing early social and language concerns to shyness and delaying referral",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autism spectrum disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autism_spectrum_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Formal audiology assessment",
+          "cells": [
+            {
+              "text": "Excludes hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured diagnostic observation and developmental history",
+          "cells": [
+            {
+              "text": "Diagnostic observation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation: chromosomal microarray, fragile X testing, targeted panels",
+          "cells": [
+            {
+              "text": "Genetic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of cognitive and adaptive functioning",
+          "cells": [
+            {
+              "text": "Cognitive and adaptive function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for co-occurring epilepsy or sleep disorders",
+          "cells": [
+            {
+              "text": "Co-occurring conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic testing",
+          "cells": [
+            {
+              "text": "When clinical features suggest an inborn error"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autism_spectrum_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Global developmental delay or intellectual disability",
+          "cells": [
+            {
+              "text": "Separated by cognitive and adaptive assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated language disorder or hearing impairment",
+          "cells": [
+            {
+              "text": "Excluded by formal audiology assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autism_spectrum_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early structured behavioural and educational intervention",
+          "cells": [
+            {
+              "text": "Applied behavioural approaches, speech and language therapy, occupational therapy"
+            },
+            {
+              "text": "Early intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacotherapy for severe irritability",
+          "cells": [
+            {
+              "text": "Risperidone or aripiprazole"
+            },
+            {
+              "text": "No drug for core features; only severe irritability or aggression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat co-occurring conditions",
+          "cells": [
+            {
+              "text": "Epilepsy, sleep disorder, anxiety, attention-deficit hyperactivity disorder"
+            },
+            {
+              "text": "Co-occurring conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family support",
+          "cells": [
+            {
+              "text": "Parent education, parent-mediated intervention and practical social support"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Paediatric, psychology, therapy and educational input with an individualised education plan"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation and counselling",
+          "cells": [
+            {
+              "text": "Heritable contribution and sibling recurrence risk"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transition planning",
+          "cells": [
+            {
+              "text": "Adult services and long-term support"
+            },
+            {
+              "text": "Long-term needs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autism_spectrum_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Autism Spectrum Disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Social communication and language delay with restricted behaviour in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Regression or loss of language and social skills?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent developmental review for regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Audiology, diagnostic observation, microarray and fragile X testing, cognitive assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hearing normal and developmental profile consistent with autism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Early structured behavioural and educational intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat hearing and genetic tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Speech and language and occupational therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Risperidone or aripiprazole only for severe irritability or aggression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat epilepsy, sleep disorder, anxiety and ADHD",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Family support and transition planning to adult services",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

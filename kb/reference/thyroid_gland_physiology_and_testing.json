@@ -1,188 +1,669 @@
 {
- "id": "thyroid_gland_physiology_and_testing",
- "name": "Thyroid Gland Physiology and Testing",
- "system": "Endocrine",
- "class": "non_infective",
- "chapter": 394,
- "page": 3020,
- "aliases": [
-  "Thyroid axis physiology",
-  "Thyroid function testing",
-  "HPT axis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.3020",
-  "clinicalPearls": [
-   "TSH is the single most useful physiologic marker of thyroid hormone action; because of its long plasma half-life (~50 min) a single measurement reliably reflects circulating levels (p.3021).",
-   "A normal TSH essentially excludes a primary thyroid abnormality, so the logical first step in evaluation is to determine whether TSH is suppressed, normal, or elevated (p.3026).",
-   "Primary hyperthyroidism produces a low/suppressed TSH and primary hypothyroidism produces an elevated TSH because thyroid hormone exerts dominant negative feedback on TSH gene expression (p.3021, p.3026).",
-   "TSH is a glycoprotein with an alpha subunit shared with LH, FSH, and hCG and a unique beta subunit; the structurally similar hCG weakly stimulates the TSH-R, lowering TSH in the first trimester of pregnancy (p.3021, p.3024).",
-   "T4 is secreted in roughly 15-fold excess over T3 and acts largely as a prohormone, being converted peripherally to the more potent T3 by deiodinases (p.3023-3024).",
-   "Nuclear thyroid hormone receptors silence target genes when unliganded by binding co-repressors, so hormone deficiency causes both loss of stimulation and active gene repression, giving deficiency a more profound effect than receptor gene deletion (p.3025).",
-   "About 5-15% of euthyroid women and up to 2% of euthyroid men carry thyroid (anti-TPO) antibodies and are at increased risk of future thyroid dysfunction; nearly all autoimmune hypothyroid patients and up to 80% of Graves' patients have TPO antibodies (p.3026).",
-   "Functioning (hot) thyroid nodules are almost never malignant and do not require fine-needle aspiration, whereas non-functioning (cold) nodules carry a ~5-10% malignancy risk (p.3026-3027).",
-   "Serum thyroglobulin is elevated in all forms of thyrotoxicosis except factitious thyrotoxicosis (exogenous hormone), and its principal clinical use is surveillance after thyroidectomy/radioablation for thyroid cancer (p.3026).",
-   "After total thyroidectomy and radioablation for thyroid cancer, thyroglobulin should be <0.2 ng/mL in the absence of anti-Tg antibodies; a measurable level suggests incomplete ablation or recurrence (p.3026)."
+  "id": "thyroid_gland_physiology_and_testing",
+  "name": "Thyroid Gland Physiology and Testing",
+  "system": "Endocrine",
+  "class": "non_infective",
+  "chapter": 394,
+  "page": 3020,
+  "aliases": [
+    "Thyroid axis physiology",
+    "Thyroid function testing",
+    "HPT axis"
   ],
-  "pathophysiology": "The hypothalamic-pituitary-thyroid axis is a classic endocrine feedback loop. Hypothalamic TRH stimulates pituitary thyrotrope production of TSH, which binds the TSH-R (a Gs-coupled seven-transmembrane GPCR) on the basolateral surface of thyroid follicular cells, activating adenylyl cyclase/cAMP and phospholipase C to drive gland growth and hormone synthesis. Iodide is actively trapped by the sodium-iodide symporter (NIS), transported apically via pendrin, and oxidized/organified onto tyrosyl residues of thyroglobulin by thyroid peroxidase using DUOX-generated hydrogen peroxide; iodotyrosines are coupled to form T4 and T3, which are released after lysosomal proteolysis of reabsorbed thyroglobulin. Circulating hormone is largely protein-bound (TBG, transthyretin, albumin) with only the small unbound fraction biologically available; deiodinases (types I, II, III) regulate peripheral conversion of T4 to active T3 or inactivating reverse T3. T3 acts mainly through nuclear receptors TRalpha and TRbeta, which heterodimerize with RXR on thyroid response elements, exchanging co-repressors for co-activators upon ligand binding. Thyroid hormones feed back, predominantly via TRbeta2 in hypothalamus and pituitary, to suppress TRH and TSH, establishing the axis set point.",
-  "additionalDifferentials": [
-   "Euthyroid hyperthyroxinemia (familial dysalbuminemic hyperthyroxinemia, TBG excess, transthyretin variants) with elevated total but normal free T4/T3",
-   "Resistance to thyroid hormone (TRbeta mutation) with high free T4/T3 and inappropriately normal/elevated TSH",
-   "TSH-secreting pituitary adenoma causing inappropriate TSH with high thyroid hormones",
-   "Sick euthyroid (nonthyroidal illness) syndrome altering TSH and T4-to-T3 conversion",
-   "MCT8 transporter mutation (X-linked) with low T4, high T3, high TSH and psychomotor retardation"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "TBG excess from estrogen (pregnancy, oral contraceptives, tamoxifen) raising total T4/T3 while free hormone stays normal",
-   "TBG deficiency (X-linked) lowering total T4/T3 with normal free levels and euthyroid state",
-   "Biotin supplement interference falsely lowering TSH and falsely raising T4/T3 in biotinylated assays",
-   "Drugs displacing hormone from binding proteins (salicylates, salsalate) or impairing T4-to-T3 conversion (propranolol, amiodarone, glucocorticoids, propylthiouracil, oral contrast agents)"
-  ],
-  "additionalInvestigations": [
-   "Sensitive third-generation TSH immunoradiometric assay (detects to <=0.01 mIU/L) as the screening test",
-   "Free (unbound) T4 by immunoassay or equilibrium dialysis; free T3 when TSH is suppressed but free T4 is normal (to detect T3 toxicosis)",
-   "Anti-TPO (and anti-thyroglobulin) antibodies for autoimmune thyroid disease",
-   "TRAb / thyroid-stimulating immunoglobulin assay for Graves' disease and to predict fetal/neonatal thyrotoxicosis",
-   "Serum thyroglobulin for thyroiditis and post-thyroidectomy cancer surveillance",
-   "Radioiodine (123I/131I) uptake and thyroid scan, or 99mTc pertechnetate imaging, to define etiology of thyrotoxicosis",
-   "Thyroid ultrasound (10-12 MHz) with risk-stratification systems (TI-RADS) and ultrasound-guided fine-needle aspiration for nodules"
-  ],
-  "redFlags": [
-   "Retrosternal goiter causing venous distention and dyspnea on raising the arms (Pemberton's sign)",
-   "Suspicious sonographic nodule features (hypoechoic solid nodule, irregular margins, punctate echogenic microcalcifications) with >90% cancer risk",
-   "Cervical or supraclavicular lymphadenopathy on thyroid examination suggesting malignancy",
-   "High maternal TRAb/TSI (>3x upper limit of normal) in the third trimester predicting fetal/neonatal thyrotoxicosis",
-   "Untreated maternal/neonatal hypothyroidism in iodine-deficient regions risking cretinism (intellectual disability, growth retardation)"
-  ],
-  "prognosis": "Most physiologic and binding-protein variants (TBG abnormalities, familial dysalbuminemic hyperthyroxinemia, classic TRbeta resistance) are benign and require no treatment once recognized, the main goal being avoidance of inappropriate therapy. Early thyroid hormone replacement in congenital hypothyroidism prevents severe developmental abnormality, whereas untreated iodine deficiency in early life causes irreversible cretinism and even mild deficiency can subtly reduce IQ.",
-  "pitfalls": [
-   "Treating low total T4 in TBG deficiency: attempts to normalize total T4 cause thyrotoxicosis and are futile due to rapid clearance.",
-   "Relying on TSH alone in suspected hypothalamic-pituitary (secondary) hypothyroidism, where TSH is inappropriately low-to-normal for a low T4; free T4 must also be measured.",
-   "Failing to stop biotin supplements >=2 days before testing, leading to falsely low TSH and falsely high T4/T3.",
-   "Missing T3 toxicosis (2-5% of cases) if only free T4 is checked when TSH is suppressed.",
-   "Misinterpreting transiently low TSH (0.01-0.1 mIU/L) of early pregnancy, recent hyperthyroidism treatment, or glucocorticoid/dopamine therapy as true thyrotoxicosis.",
-   "Performing fine-needle aspiration on a hot/functioning nodule, which is almost never malignant; scintigraphy should precede biopsy when TSH is subnormal.",
-   "Confusing thyroid hormone resistance or a TSH-secreting adenoma with simple primary hyperthyroidism because of elevated hormones with non-suppressed TSH."
-  ],
-  "severityClassification": "Not applicable as a discrete disease; thyroid status is categorized biochemically by TSH and free hormone levels into euthyroid, subclinical hypo-/hyperthyroidism (abnormal TSH with normal free hormones), and overt hypo-/hyperthyroidism (abnormal TSH with abnormal free hormones), with trimester-specific reference ranges applied in pregnancy.",
-  "references": [
-   "Harrison 22e p.3020",
-   "Harrison 22e p.3021",
-   "Harrison 22e p.3022",
-   "Harrison 22e p.3023",
-   "Harrison 22e p.3024",
-   "Harrison 22e p.3025",
-   "Harrison 22e p.3026",
-   "Harrison 22e p.3027"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use serum thyroid-stimulating hormone as the first-line test, reserving free thyroxine and free triiodothyronine to confirm and characterise abnormal results",
-   "Once recognised, leave benign euthyroid variants such as thyroxine-binding globulin abnormalities and familial dysalbuminaemic hyperthyroxinaemia untreated, since therapy is inappropriate and harmful",
-   "Distinguish inappropriate-TSH pictures such as thyroid hormone resistance from a thyrotropin-secreting adenoma before committing to treatment, using antibody, alpha-subunit and dynamic testing with imaging",
-   "Interpret results in physiological and clinical context, allowing for the hCG-driven fall in TSH in early pregnancy and the changes of non-thyroidal illness",
-   "Ensure early levothyroxine replacement where congenital hypothyroidism is detected, to protect neurodevelopment",
-   "Refer discordant or unexplained results to endocrinology for specialist interpretation and genetic evaluation"
-  ]
- },
- "algorithms": [
-  {
-   "id": "thyroid_gland_physiology_and_testing-pathway",
-   "title": "Thyroid Gland Physiology and Testing: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "TSH is the single most useful physiologic marker of thyroid hormone action; because of its long plasma half-life (~50 min) a single measurement reliably reflects circulating levels (p.3021).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Retrosternal goiter causing venous distention and dyspnea on raising the arms (Pemberton's sign)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Sensitive third-generation TSH immunoradiometric assay (detects to <=0.01 mIU/L) as the screening test, Free (unbound) T4 by immunoassay or equilibrium dialysis; free T3 when TSH is suppressed but free T4 is normal (to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use serum thyroid-stimulating hormone as the first-line test, reserving free thyroxine and free triiodothyronine to confirm and characterise abnormal results"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating low total T4 in TBG deficiency: attempts to normalize total T4 cause thyrotoxicosis and are futile due to rapid clearance."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thyroid gland physiology and testing."
-  }
- ],
- "tables": [
-  {
-   "id": "thyroid_gland_physiology_and_testing-matrix",
-   "title": "Thyroid Gland Physiology and Testing: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "TSH is the single most useful physiologic marker of thyroid hormone action; because of its long plasma half-life (~50 min) a",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.3020",
+    "clinicalPearls": [
+      "TSH is the single most useful physiologic marker of thyroid hormone action; because of its long plasma half-life (~50 min) a single measurement reliably reflects circulating levels (p.3021).",
+      "A normal TSH essentially excludes a primary thyroid abnormality, so the logical first step in evaluation is to determine whether TSH is suppressed, normal, or elevated (p.3026).",
+      "Primary hyperthyroidism produces a low/suppressed TSH and primary hypothyroidism produces an elevated TSH because thyroid hormone exerts dominant negative feedback on TSH gene expression (p.3021, p.3026).",
+      "TSH is a glycoprotein with an alpha subunit shared with LH, FSH, and hCG and a unique beta subunit; the structurally similar hCG weakly stimulates the TSH-R, lowering TSH in the first trimester of pregnancy (p.3021, p.3024).",
+      "T4 is secreted in roughly 15-fold excess over T3 and acts largely as a prohormone, being converted peripherally to the more potent T3 by deiodinases (p.3023-3024).",
+      "Nuclear thyroid hormone receptors silence target genes when unliganded by binding co-repressors, so hormone deficiency causes both loss of stimulation and active gene repression, giving deficiency a more profound effect than receptor gene deletion (p.3025).",
+      "About 5-15% of euthyroid women and up to 2% of euthyroid men carry thyroid (anti-TPO) antibodies and are at increased risk of future thyroid dysfunction; nearly all autoimmune hypothyroid patients and up to 80% of Graves' patients have TPO antibodies (p.3026).",
+      "Functioning (hot) thyroid nodules are almost never malignant and do not require fine-needle aspiration, whereas non-functioning (cold) nodules carry a ~5-10% malignancy risk (p.3026-3027).",
+      "Serum thyroglobulin is elevated in all forms of thyrotoxicosis except factitious thyrotoxicosis (exogenous hormone), and its principal clinical use is surveillance after thyroidectomy/radioablation for thyroid cancer (p.3026).",
+      "After total thyroidectomy and radioablation for thyroid cancer, thyroglobulin should be <0.2 ng/mL in the absence of anti-Tg antibodies; a measurable level suggests incomplete ablation or recurrence (p.3026)."
     ],
-    [
-     "Key Investigations",
-     "Sensitive third-generation TSH immunoradiometric assay (detects to <=0.01 mIU/L) as the screening test, Free (unbound) T4 by",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The hypothalamic-pituitary-thyroid axis is a classic endocrine feedback loop. Hypothalamic TRH stimulates pituitary thyrotrope production of TSH, which binds the TSH-R (a Gs-coupled seven-transmembrane GPCR) on the basolateral surface of thyroid follicular cells, activating adenylyl cyclase/cAMP and phospholipase C to drive gland growth and hormone synthesis. Iodide is actively trapped by the sodium-iodide symporter (NIS), transported apically via pendrin, and oxidized/organified onto tyrosyl residues of thyroglobulin by thyroid peroxidase using DUOX-generated hydrogen peroxide; iodotyrosines are coupled to form T4 and T3, which are released after lysosomal proteolysis of reabsorbed thyroglobulin. Circulating hormone is largely protein-bound (TBG, transthyretin, albumin) with only the small unbound fraction biologically available; deiodinases (types I, II, III) regulate peripheral conversion of T4 to active T3 or inactivating reverse T3. T3 acts mainly through nuclear receptors TRalpha and TRbeta, which heterodimerize with RXR on thyroid response elements, exchanging co-repressors for co-activators upon ligand binding. Thyroid hormones feed back, predominantly via TRbeta2 in hypothalamus and pituitary, to suppress TRH and TSH, establishing the axis set point.",
+    "additionalDifferentials": [
+      "Euthyroid hyperthyroxinemia (familial dysalbuminemic hyperthyroxinemia, TBG excess, transthyretin variants) with elevated total but normal free T4/T3",
+      "Resistance to thyroid hormone (TRbeta mutation) with high free T4/T3 and inappropriately normal/elevated TSH",
+      "TSH-secreting pituitary adenoma causing inappropriate TSH with high thyroid hormones",
+      "Sick euthyroid (nonthyroidal illness) syndrome altering TSH and T4-to-T3 conversion",
+      "MCT8 transporter mutation (X-linked) with low T4, high T3, high TSH and psychomotor retardation"
     ],
-    [
-     "Primary Differentials",
-     "Euthyroid hyperthyroxinemia (familial dysalbuminemic hyperthyroxinemia, TBG excess, transthyretin variants) with elevated total",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "TBG excess from estrogen (pregnancy, oral contraceptives, tamoxifen) raising total T4/T3 while free hormone stays normal",
+      "TBG deficiency (X-linked) lowering total T4/T3 with normal free levels and euthyroid state",
+      "Biotin supplement interference falsely lowering TSH and falsely raising T4/T3 in biotinylated assays",
+      "Drugs displacing hormone from binding proteins (salicylates, salsalate) or impairing T4-to-T3 conversion (propranolol, amiodarone, glucocorticoids, propylthiouracil, oral contrast agents)"
     ],
-    [
-     "Management Strategy",
-     "Use serum thyroid-stimulating hormone as the first-line test, reserving free thyroxine and free triiodothyronine to confirm and",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Sensitive third-generation TSH immunoradiometric assay (detects to <=0.01 mIU/L) as the screening test",
+      "Free (unbound) T4 by immunoassay or equilibrium dialysis; free T3 when TSH is suppressed but free T4 is normal (to detect T3 toxicosis)",
+      "Anti-TPO (and anti-thyroglobulin) antibodies for autoimmune thyroid disease",
+      "TRAb / thyroid-stimulating immunoglobulin assay for Graves' disease and to predict fetal/neonatal thyrotoxicosis",
+      "Serum thyroglobulin for thyroiditis and post-thyroidectomy cancer surveillance",
+      "Radioiodine (123I/131I) uptake and thyroid scan, or 99mTc pertechnetate imaging, to define etiology of thyrotoxicosis",
+      "Thyroid ultrasound (10-12 MHz) with risk-stratification systems (TI-RADS) and ultrasound-guided fine-needle aspiration for nodules"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating low total T4 in TBG deficiency: attempts to normalize total T4 cause thyrotoxicosis and are futile due to rapid",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Retrosternal goiter causing venous distention and dyspnea on raising the arms (Pemberton's sign)",
+      "Suspicious sonographic nodule features (hypoechoic solid nodule, irregular margins, punctate echogenic microcalcifications) with >90% cancer risk",
+      "Cervical or supraclavicular lymphadenopathy on thyroid examination suggesting malignancy",
+      "High maternal TRAb/TSI (>3x upper limit of normal) in the third trimester predicting fetal/neonatal thyrotoxicosis",
+      "Untreated maternal/neonatal hypothyroidism in iodine-deficient regions risking cretinism (intellectual disability, growth retardation)"
+    ],
+    "prognosis": "Most physiologic and binding-protein variants (TBG abnormalities, familial dysalbuminemic hyperthyroxinemia, classic TRbeta resistance) are benign and require no treatment once recognized, the main goal being avoidance of inappropriate therapy. Early thyroid hormone replacement in congenital hypothyroidism prevents severe developmental abnormality, whereas untreated iodine deficiency in early life causes irreversible cretinism and even mild deficiency can subtly reduce IQ.",
+    "pitfalls": [
+      "Treating low total T4 in TBG deficiency: attempts to normalize total T4 cause thyrotoxicosis and are futile due to rapid clearance.",
+      "Relying on TSH alone in suspected hypothalamic-pituitary (secondary) hypothyroidism, where TSH is inappropriately low-to-normal for a low T4; free T4 must also be measured.",
+      "Failing to stop biotin supplements >=2 days before testing, leading to falsely low TSH and falsely high T4/T3.",
+      "Missing T3 toxicosis (2-5% of cases) if only free T4 is checked when TSH is suppressed.",
+      "Misinterpreting transiently low TSH (0.01-0.1 mIU/L) of early pregnancy, recent hyperthyroidism treatment, or glucocorticoid/dopamine therapy as true thyrotoxicosis.",
+      "Performing fine-needle aspiration on a hot/functioning nodule, which is almost never malignant; scintigraphy should precede biopsy when TSH is subnormal.",
+      "Confusing thyroid hormone resistance or a TSH-secreting adenoma with simple primary hyperthyroidism because of elevated hormones with non-suppressed TSH."
+    ],
+    "severityClassification": "Not applicable as a discrete disease; thyroid status is categorized biochemically by TSH and free hormone levels into euthyroid, subclinical hypo-/hyperthyroidism (abnormal TSH with normal free hormones), and overt hypo-/hyperthyroidism (abnormal TSH with abnormal free hormones), with trimester-specific reference ranges applied in pregnancy.",
+    "references": [
+      "Harrison 22e p.3020",
+      "Harrison 22e p.3021",
+      "Harrison 22e p.3022",
+      "Harrison 22e p.3023",
+      "Harrison 22e p.3024",
+      "Harrison 22e p.3025",
+      "Harrison 22e p.3026",
+      "Harrison 22e p.3027"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use serum thyroid-stimulating hormone as the first-line test, reserving free thyroxine and free triiodothyronine to confirm and characterise abnormal results",
+      "Once recognised, leave benign euthyroid variants such as thyroxine-binding globulin abnormalities and familial dysalbuminaemic hyperthyroxinaemia untreated, since therapy is inappropriate and harmful",
+      "Distinguish inappropriate-TSH pictures such as thyroid hormone resistance from a thyrotropin-secreting adenoma before committing to treatment, using antibody, alpha-subunit and dynamic testing with imaging",
+      "Interpret results in physiological and clinical context, allowing for the hCG-driven fall in TSH in early pregnancy and the changes of non-thyroidal illness",
+      "Ensure early levothyroxine replacement where congenital hypothyroidism is detected, to protect neurodevelopment",
+      "Refer discordant or unexplained results to endocrinology for specialist interpretation and genetic evaluation"
     ]
-   ],
-   "caption": "Overview comparison matrix for thyroid gland physiology and testing."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thyroid-gland-physiology-and-testing-real-image",
-   "title": "Thyroid Gland Physiology and Testing: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "thyroid_gland_physiology_and_testing-pathway",
+      "title": "Thyroid Gland Physiology and Testing: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "TSH is the single most useful physiologic marker of thyroid hormone action; because of its long plasma half-life (~50 min) a single measurement reliably reflects circulating levels (p.3021).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Retrosternal goiter causing venous distention and dyspnea on raising the arms (Pemberton's sign)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Sensitive third-generation TSH immunoradiometric assay (detects to <=0.01 mIU/L) as the screening test, Free (unbound) T4 by immunoassay or equilibrium dialysis; free T3 when TSH is suppressed but free T4 is normal (to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use serum thyroid-stimulating hormone as the first-line test, reserving free thyroxine and free triiodothyronine to confirm and characterise abnormal results"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating low total T4 in TBG deficiency: attempts to normalize total T4 cause thyrotoxicosis and are futile due to rapid clearance."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thyroid gland physiology and testing."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thyroid_gland_physiology_and_testing-matrix",
+      "title": "Thyroid Gland Physiology and Testing: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "TSH is the single most useful physiologic marker of thyroid hormone action; because of its long plasma half-life (~50 min) a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Sensitive third-generation TSH immunoradiometric assay (detects to <=0.01 mIU/L) as the screening test, Free (unbound) T4 by",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Euthyroid hyperthyroxinemia (familial dysalbuminemic hyperthyroxinemia, TBG excess, transthyretin variants) with elevated total",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use serum thyroid-stimulating hormone as the first-line test, reserving free thyroxine and free triiodothyronine to confirm and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating low total T4 in TBG deficiency: attempts to normalize total T4 cause thyrotoxicosis and are futile due to rapid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thyroid gland physiology and testing."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Overview of Thyroid Function",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/overview-of-thyroid-function"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroid_gland_physiology_and_testing-diagnostic",
+      "kind": "diagnostic",
+      "title": "Interpreting thyroid function tests",
+      "rowHeader": "Criterion",
+      "columns": [
+        "TSH",
+        "Free T4",
+        "T3"
+      ],
+      "rows": [
+        {
+          "parameter": "Overt hyperthyroidism",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": "High"
+            },
+            {
+              "text": "High"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "T3 toxicosis",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "High; 2 to 5% of thyrotoxicosis",
+              "range": [
+                2,
+                5
+              ]
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subclinical hyperthyroidism",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Primary hypothyroidism",
+          "cells": [
+            {
+              "text": "High"
+            },
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Low or normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subclinical hypothyroidism",
+          "cells": [
+            {
+              "text": "High"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Central (pituitary) hypothyroidism",
+          "cells": [
+            {
+              "text": "{{hy:Low or normal, inappropriately}}"
+            },
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Low or normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Euthyroid sick syndrome",
+          "cells": [
+            {
+              "text": "Normal, low or high"
+            },
+            {
+              "text": "Normal or low"
+            },
+            {
+              "text": "Low"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resistance to thyroid hormone or TSH adenoma",
+          "cells": [
+            {
+              "text": "Normal or high (inappropriate)"
+            },
+            {
+              "text": "High"
+            },
+            {
+              "text": "High"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TBG excess (oestrogen, pregnancy)",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal (total T4 high)"
+            },
+            {
+              "text": "Total T3 high"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Third-generation TSH assays detect down to 0.01 mIU/L. Stop biotin at least 2 days before testing (Harrison). Use local reference intervals."
+    },
+    {
+      "id": "thyroid_gland_physiology_and_testing-ddx",
+      "kind": "ddx",
+      "title": "Look-alike test patterns",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial dysalbuminaemic hyperthyroxinaemia",
+          "cells": [
+            {
+              "text": "High total T4, normal free T4, euthyroid"
+            },
+            {
+              "text": "Free T4 by equilibrium dialysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TBG deficiency",
+          "cells": [
+            {
+              "text": "Low total T4 with normal free T4"
+            },
+            {
+              "text": "Free T4; do not treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biotin interference",
+          "cells": [
+            {
+              "text": "Falsely low TSH and high T4, T3"
+            },
+            {
+              "text": "Repeat after stopping biotin 2 days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoid or dopamine effect",
+          "cells": [
+            {
+              "text": "Low TSH in sick patients"
+            },
+            {
+              "text": "Repeat after recovery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early pregnancy",
+          "cells": [
+            {
+              "text": "Transient TSH 0.01 to 0.1 mIU/L from hCG",
+              "range": [
+                0.01,
+                0.1
+              ]
+            },
+            {
+              "text": "Trimester-specific ranges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenytoin or high-dose aspirin",
+          "cells": [
+            {
+              "text": "Displace T4, spuriously low total T4"
+            },
+            {
+              "text": "Free T4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroiditis vs Graves",
+          "cells": [
+            {
+              "text": "Both thyrotoxic"
+            },
+            {
+              "text": "Low vs high radioiodine uptake; TRAb"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_gland_physiology_and_testing-treatment",
+      "kind": "treatment",
+      "title": "Acting on thyroid test results",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH as first test",
+          "cells": [
+            {
+              "text": "Screening and most follow-up"
+            },
+            {
+              "text": "Normal TSH excludes primary hypo- or hyperthyroidism"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Free T4 with TSH",
+          "cells": [
+            {
+              "text": "Suspected pituitary or hypothalamic disease"
+            },
+            {
+              "text": "TSH alone misses central hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Free T3",
+          "cells": [
+            {
+              "text": "Suppressed TSH with normal free T4"
+            },
+            {
+              "text": "Detects T3 toxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TPO antibodies",
+          "cells": [
+            {
+              "text": "Suspected autoimmune thyroiditis"
+            },
+            {
+              "text": "Present in almost all Hashimoto"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TRAb or TSI",
+          "cells": [
+            {
+              "text": "Graves disease; pregnancy"
+            },
+            {
+              "text": "Over 3x ULN in third trimester predicts neonatal thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iodine-123 uptake and scan",
+          "cells": [
+            {
+              "text": "Cause of thyrotoxicosis"
+            },
+            {
+              "text": "High in Graves, low in thyroiditis or iodine excess"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroglobulin",
+          "cells": [
+            {
+              "text": "Surveillance after thyroidectomy for cancer"
+            },
+            {
+              "text": "Check thyroglobulin antibodies, which interfere"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No treatment",
+          "cells": [
+            {
+              "text": "TBG abnormality, dysalbuminaemia"
+            },
+            {
+              "text": "{{hy:Treating a binding-protein abnormality is harmful}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroid_gland_physiology_and_testing-dx-mgmt",
+      "title": "Diagnosis and management of thyroid function testing",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thyroid dysfunction",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pituitary or hypothalamic disease suspected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Measure TSH and free T4 together",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Measure TSH",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "TSH normal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Primary thyroid disease excluded",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "TSH low?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Free T4, then free T3 if free T4 normal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Thyrotoxicosis: TRAb and radioiodine uptake for cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Free T4 and TPO antibodies",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Primary or subclinical hypothyroidism by free T4",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

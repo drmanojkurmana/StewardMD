@@ -1,175 +1,489 @@
 {
- "id": "hemophilia_a",
- "name": "Haemophilia A (factor VIII)",
- "aliases": [
-  "haemophilia A",
-  "factor VIII deficiency",
-  "F8",
-  "classic haemophilia"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked recessive deficiency of coagulation factor VIII from mutations in F8, so it predominantly affects males while females are usually carriers",
-   "Bleeding is of the coagulation-factor type: recurrent haemarthroses, deep muscle haematomas and prolonged bleeding after trauma or surgery rather than mucocutaneous petechiae",
-   "Clinical severity is graded by residual factor VIII activity into severe, moderate and mild disease, and recurrent joint bleeds lead to chronic haemophilic arthropathy",
-   "The screening pattern is a prolonged activated partial thromboplastin time with a normal prothrombin time and normal platelet count",
-   "A mixing study that corrects points to factor deficiency, and a specific factor VIII assay confirms the diagnosis and severity",
-   "A major complication of treatment is the development of neutralising alloantibodies (inhibitors) against factor VIII, which should be suspected when bleeding stops responding to replacement",
-   "Management uses factor VIII replacement or non-factor haemostatic therapies, desmopressin for some milder cases, and antifibrinolytics, with prophylaxis to prevent joint damage in severe disease"
+  "id": "hemophilia_a",
+  "name": "Haemophilia A (factor VIII)",
+  "aliases": [
+    "haemophilia A",
+    "factor VIII deficiency",
+    "F8",
+    "classic haemophilia"
   ],
-  "pathophysiology": "Haemophilia A is caused by mutations in F8 on the X chromosome that reduce the activity of coagulation factor VIII, a cofactor that greatly accelerates factor IXa-mediated activation of factor X within the intrinsic tenase complex. Without adequate factor VIII the propagation phase of coagulation is impaired, so thrombin generation on the platelet surface is markedly reduced and the fibrin clot forms slowly and is unstable. Because the initial platelet plug still forms, bleeding is typically delayed and occurs into joints and deep tissues; repeated haemarthroses cause synovial inflammation and progressive destructive arthropathy.",
-  "additionalDifferentials": [
-   "Haemophilia B (factor IX deficiency)",
-   "Von Willebrand disease (which lowers factor VIII secondarily)",
-   "Acquired haemophilia from factor VIII autoantibodies",
-   "Other intrinsic-pathway factor deficiencies (XI, XII)",
-   "Vitamin K deficiency or anticoagulant effect",
-   "Disseminated intravascular coagulation"
-  ],
-  "additionalInvestigations": [
-   "Activated partial thromboplastin time, prothrombin time and platelet count",
-   "Mixing study to distinguish factor deficiency from an inhibitor",
-   "Factor VIII activity assay to confirm diagnosis and grade severity",
-   "Von Willebrand factor studies to exclude von Willebrand disease",
-   "Factor VIII inhibitor (Bethesda) assay when response to replacement is poor",
-   "F8 genetic testing including the intron 22 inversion, for diagnosis and carrier detection"
-  ],
-  "redFlags": [
-   "Intracranial haemorrhage, which may follow minor or no recognised trauma",
-   "Airway-threatening neck, throat or retropharyngeal bleeding",
-   "Compartment syndrome from an expanding muscle haematoma",
-   "Loss of response to factor replacement suggesting an inhibitor"
-  ],
-  "prognosis": "With prophylactic replacement or modern non-factor therapies most patients achieve near-normal life expectancy and greatly reduced joint damage, but inhibitor development and established arthropathy remain important sources of morbidity.",
-  "pitfalls": [
-   "Missing von Willebrand disease as the reason for a low factor VIII level",
-   "Overlooking an inhibitor when bleeding fails to respond to appropriate replacement",
-   "Giving intramuscular injections or arterial punctures that provoke deep bleeding",
-   "Delaying treatment of a suspected head bleed to await imaging or laboratory confirmation"
-  ],
-  "references": [
-   "Postgraduate Haematology",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prevent bleeds with prophylactic factor VIII replacement or the subcutaneous bispecific antibody emicizumab, and treat acute bleeds with factor VIII concentrate",
-   "Use desmopressin to raise endogenous factor VIII in mild disease, and add an antifibrinolytic such as tranexamic acid for mucosal or dental bleeding",
-   "Consider adeno-associated-virus gene therapy in eligible adults to achieve durable endogenous factor VIII expression",
-   "Manage inhibitors with immune tolerance induction and control bleeding with bypassing agents such as recombinant activated factor VII or activated prothrombin complex concentrate",
-   "Support joint health with physiotherapy and avoid intramuscular injections and NSAIDs that aggravate bleeding",
-   "Monitor factor levels, screen periodically for inhibitors, and assess joint status for early arthropathy",
-   "Manage through a specialist haemophilia treatment centre with multidisciplinary input",
-   "Offer genetic counselling and carrier testing to female relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hemophilia_a-pathway",
-   "title": "Haemophilia A (factor VIII): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked recessive deficiency of coagulation factor VIII from mutations in F8, so it predominantly affects males while females are usually carriers",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intracranial haemorrhage, which may follow minor or no recognised trauma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Activated partial thromboplastin time, prothrombin time and platelet count, Mixing study to distinguish factor deficiency from an inhibitor, Factor VIII activity assay to confirm diagnosis and grade severity"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevent bleeds with prophylactic factor VIII replacement or the subcutaneous bispecific antibody emicizumab, and treat acute bleeds with factor VIII concentrate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing von Willebrand disease as the reason for a low factor VIII level"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of haemophilia a (factor viii)."
-  }
- ],
- "tables": [
-  {
-   "id": "hemophilia_a-matrix",
-   "title": "Haemophilia A (factor VIII): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked recessive deficiency of coagulation factor VIII from mutations in F8, so it predominantly affects males while females",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked recessive deficiency of coagulation factor VIII from mutations in F8, so it predominantly affects males while females are usually carriers",
+      "Bleeding is of the coagulation-factor type: recurrent haemarthroses, deep muscle haematomas and prolonged bleeding after trauma or surgery rather than mucocutaneous petechiae",
+      "Clinical severity is graded by residual factor VIII activity into severe, moderate and mild disease, and recurrent joint bleeds lead to chronic haemophilic arthropathy",
+      "The screening pattern is a prolonged activated partial thromboplastin time with a normal prothrombin time and normal platelet count",
+      "A mixing study that corrects points to factor deficiency, and a specific factor VIII assay confirms the diagnosis and severity",
+      "A major complication of treatment is the development of neutralising alloantibodies (inhibitors) against factor VIII, which should be suspected when bleeding stops responding to replacement",
+      "Management uses factor VIII replacement or non-factor haemostatic therapies, desmopressin for some milder cases, and antifibrinolytics, with prophylaxis to prevent joint damage in severe disease"
     ],
-    [
-     "Key Investigations",
-     "Activated partial thromboplastin time, prothrombin time and platelet count, Mixing study to distinguish factor deficiency from an",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Haemophilia A is caused by mutations in F8 on the X chromosome that reduce the activity of coagulation factor VIII, a cofactor that greatly accelerates factor IXa-mediated activation of factor X within the intrinsic tenase complex. Without adequate factor VIII the propagation phase of coagulation is impaired, so thrombin generation on the platelet surface is markedly reduced and the fibrin clot forms slowly and is unstable. Because the initial platelet plug still forms, bleeding is typically delayed and occurs into joints and deep tissues; repeated haemarthroses cause synovial inflammation and progressive destructive arthropathy.",
+    "additionalDifferentials": [
+      "Haemophilia B (factor IX deficiency)",
+      "Von Willebrand disease (which lowers factor VIII secondarily)",
+      "Acquired haemophilia from factor VIII autoantibodies",
+      "Other intrinsic-pathway factor deficiencies (XI, XII)",
+      "Vitamin K deficiency or anticoagulant effect",
+      "Disseminated intravascular coagulation"
     ],
-    [
-     "Primary Differentials",
-     "Haemophilia B (factor IX deficiency), Von Willebrand disease (which lowers factor VIII secondarily), Acquired haemophilia from",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Activated partial thromboplastin time, prothrombin time and platelet count",
+      "Mixing study to distinguish factor deficiency from an inhibitor",
+      "Factor VIII activity assay to confirm diagnosis and grade severity",
+      "Von Willebrand factor studies to exclude von Willebrand disease",
+      "Factor VIII inhibitor (Bethesda) assay when response to replacement is poor",
+      "F8 genetic testing including the intron 22 inversion, for diagnosis and carrier detection"
     ],
-    [
-     "Management Strategy",
-     "Prevent bleeds with prophylactic factor VIII replacement or the subcutaneous bispecific antibody emicizumab, and treat acute",
-     "Core treatment modality"
+    "redFlags": [
+      "Intracranial haemorrhage, which may follow minor or no recognised trauma",
+      "Airway-threatening neck, throat or retropharyngeal bleeding",
+      "Compartment syndrome from an expanding muscle haematoma",
+      "Loss of response to factor replacement suggesting an inhibitor"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing von Willebrand disease as the reason for a low factor VIII level",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prophylactic replacement or modern non-factor therapies most patients achieve near-normal life expectancy and greatly reduced joint damage, but inhibitor development and established arthropathy remain important sources of morbidity.",
+    "pitfalls": [
+      "Missing von Willebrand disease as the reason for a low factor VIII level",
+      "Overlooking an inhibitor when bleeding fails to respond to appropriate replacement",
+      "Giving intramuscular injections or arterial punctures that provoke deep bleeding",
+      "Delaying treatment of a suspected head bleed to await imaging or laboratory confirmation"
+    ],
+    "references": [
+      "Postgraduate Haematology",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prevent bleeds with prophylactic factor VIII replacement or the subcutaneous bispecific antibody emicizumab, and treat acute bleeds with factor VIII concentrate",
+      "Use desmopressin to raise endogenous factor VIII in mild disease, and add an antifibrinolytic such as tranexamic acid for mucosal or dental bleeding",
+      "Consider adeno-associated-virus gene therapy in eligible adults to achieve durable endogenous factor VIII expression",
+      "Manage inhibitors with immune tolerance induction and control bleeding with bypassing agents such as recombinant activated factor VII or activated prothrombin complex concentrate",
+      "Support joint health with physiotherapy and avoid intramuscular injections and NSAIDs that aggravate bleeding",
+      "Monitor factor levels, screen periodically for inhibitors, and assess joint status for early arthropathy",
+      "Manage through a specialist haemophilia treatment centre with multidisciplinary input",
+      "Offer genetic counselling and carrier testing to female relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for haemophilia a (factor viii)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hemophilia-a-real-image",
-   "title": "Haemophilia A (factor VIII): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "hemophilia_a-pathway",
+      "title": "Haemophilia A (factor VIII): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked recessive deficiency of coagulation factor VIII from mutations in F8, so it predominantly affects males while females are usually carriers",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intracranial haemorrhage, which may follow minor or no recognised trauma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Activated partial thromboplastin time, prothrombin time and platelet count, Mixing study to distinguish factor deficiency from an inhibitor, Factor VIII activity assay to confirm diagnosis and grade severity"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevent bleeds with prophylactic factor VIII replacement or the subcutaneous bispecific antibody emicizumab, and treat acute bleeds with factor VIII concentrate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing von Willebrand disease as the reason for a low factor VIII level"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of haemophilia a (factor viii)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hemophilia_a-matrix",
+      "title": "Haemophilia A (factor VIII): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked recessive deficiency of coagulation factor VIII from mutations in F8, so it predominantly affects males while females",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Activated partial thromboplastin time, prothrombin time and platelet count, Mixing study to distinguish factor deficiency from an",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Haemophilia B (factor IX deficiency), Von Willebrand disease (which lowers factor VIII secondarily), Acquired haemophilia from",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevent bleeds with prophylactic factor VIII replacement or the subcutaneous bispecific antibody emicizumab, and treat acute",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing von Willebrand disease as the reason for a low factor VIII level",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for haemophilia a (factor viii)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemophilia_a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Activated partial thromboplastin time, prothrombin time and platelet count",
+          "cells": [
+            {
+              "text": "Prolonged aPTT with normal prothrombin time is the screening pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study",
+          "cells": [
+            {
+              "text": "Corrects with factor deficiency; does not correct with an inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII activity assay",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and grades severity by residual activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand factor studies",
+          "cells": [
+            {
+              "text": "Excludes von Willebrand disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII inhibitor (Bethesda) assay",
+          "cells": [
+            {
+              "text": "Used when response to replacement is poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F8 genetic testing, including the intron 22 inversion",
+          "cells": [
+            {
+              "text": "Diagnosis and carrier detection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemophilia_a-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "Lowers factor VIII secondarily"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophilia B",
+          "cells": [
+            {
+              "text": "Clinically indistinguishable; a specific factor assay separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired haemophilia",
+          "cells": [
+            {
+              "text": "Caused by factor VIII autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K deficiency or anticoagulant effect",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemophilia_a-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylactic factor VIII replacement",
+          "cells": [
+            {
+              "text": "Prevents bleeds; a subcutaneous bispecific antibody is an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Raises endogenous factor VIII in mild disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytic agent",
+          "cells": [
+            {
+              "text": "Adjunct to haemostasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene therapy",
+          "cells": [
+            {
+              "text": "Adeno-associated-virus gene therapy in eligible adults, for sustained endogenous factor VIII"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhibitor management",
+          "cells": [
+            {
+              "text": "Immune tolerance induction; bypassing agents to control bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint health",
+          "cells": [
+            {
+              "text": "Physiotherapy; avoid intramuscular injections and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Factor levels, periodic inhibitor screening and joint status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care and genetic counselling",
+          "cells": [
+            {
+              "text": "Haemophilia treatment centre; carrier testing for female relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemophilia_a-dx-mgmt",
+      "title": "Diagnosis and management of Haemophilia A (factor VIII)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged aPTT with normal prothrombin time, with bleeding in a male",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intracranial, airway or compartment bleeding, or loss of response to replacement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent replacement for intracranial, airway or compartment bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "aPTT, PT, mixing study; factor VIII activity; inhibitor (Bethesda) assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is factor VIII activity low, with von Willebrand disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider haemophilia B, von Willebrand disease or acquired haemophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylactic factor VIII replacement or subcutaneous bispecific antibody",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Desmopressin in mild disease to raise endogenous factor VIII",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immune tolerance induction and bypassing agents for inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy; avoid intramuscular injections and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bleeds prevented and joints protected through specialist haemophilia care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

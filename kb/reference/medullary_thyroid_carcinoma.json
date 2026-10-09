@@ -1,173 +1,431 @@
 {
- "id": "medullary_thyroid_carcinoma",
- "name": "Medullary thyroid carcinoma",
- "aliases": [
-  "MTC",
-  "medullary carcinoma of thyroid",
-  "C-cell carcinoma"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology / Endocrine Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Arises from calcitonin-secreting parafollicular C cells rather than follicular epithelium, so it does not concentrate iodine and radioactive iodine therapy is ineffective",
-   "Serum calcitonin is the key tumour marker for diagnosis and follow-up, with carcinoembryonic antigen (CEA) as a complementary marker; both track tumour burden",
-   "Occurs sporadically or as part of hereditary MEN2 syndromes, so a germline RET mutation should be sought in every patient and appropriate family screening offered",
-   "Cytology shows dispersed spindle or plasmacytoid cells with amyloid stroma derived from calcitonin, and immunostaining is positive for calcitonin",
-   "Diarrhoea or flushing may occur with advanced disease owing to high circulating calcitonin and related peptides",
-   "Total thyroidectomy with central and often lateral nodal clearance is the mainstay, as the tumour spreads early to cervical nodes and the disease is not radioiodine-avid",
-   "RET and multikinase inhibitors are used in progressive or metastatic disease, and selective RET inhibitors are effective where a RET alteration is present"
+  "id": "medullary_thyroid_carcinoma",
+  "name": "Medullary thyroid carcinoma",
+  "aliases": [
+    "MTC",
+    "medullary carcinoma of thyroid",
+    "C-cell carcinoma"
   ],
-  "pathophysiology": "Medullary thyroid carcinoma is a neuroendocrine tumour of the parafollicular C cells, which normally secrete calcitonin. Because it does not originate from follicular epithelium, it neither takes up iodine nor produces thyroglobulin, so calcitonin and CEA serve as its markers and radioactive iodine has no role. Sporadic tumours and the hereditary MEN2 syndromes are both driven by activating RET proto-oncogene mutations; germline RET mutations cause the familial forms and, in MEN2, associate with phaeochromocytoma and, in MEN2A, primary hyperparathyroidism. The tumour deposits amyloid derived from calcitonin and metastasises early to regional cervical lymph nodes.",
-  "additionalDifferentials": [
-   "Papillary or follicular thyroid carcinoma",
-   "Anaplastic thyroid carcinoma",
-   "Primary thyroid lymphoma",
-   "Parathyroid tumour presenting as a neck mass",
-   "Metastasis or neuroendocrine tumour involving the thyroid",
-   "Benign thyroid nodule"
-  ],
-  "additionalInvestigations": [
-   "Serum calcitonin and carcinoembryonic antigen as diagnostic and monitoring markers",
-   "Germline RET mutation testing with genetic counselling and family screening",
-   "Biochemical exclusion of phaeochromocytoma (plasma or urinary metanephrines) before any surgery",
-   "Serum calcium and PTH to screen for associated primary hyperparathyroidism in MEN2A",
-   "Neck ultrasound with fine-needle aspiration and calcitonin immunostaining",
-   "Cross-sectional imaging and functional imaging to stage nodal and distant disease when calcitonin is markedly elevated"
-  ],
-  "redFlags": [
-   "Coexisting phaeochromocytoma, which must be identified and treated before thyroid surgery to avoid intraoperative crisis",
-   "Very high calcitonin with secretory diarrhoea or flushing indicating extensive metastatic disease",
-   "Rapidly rising calcitonin or CEA doubling times signalling aggressive progression",
-   "Airway or recurrent laryngeal nerve involvement from bulky local disease"
-  ],
-  "prognosis": "Outcome depends heavily on stage: node-negative disease confined to the thyroid can be cured surgically, whereas extensive nodal or distant metastasis and short calcitonin/CEA doubling times predict poorer survival.",
-  "pitfalls": [
-   "Proceeding to thyroid surgery without first excluding a phaeochromocytoma in a potential MEN2 patient",
-   "Forgetting germline RET testing, thereby missing an inherited syndrome and the chance for family screening",
-   "Expecting benefit from radioactive iodine, which is ineffective as C cells do not concentrate iodine",
-   "Attributing chronic diarrhoea to gastrointestinal causes and overlooking a calcitonin-secreting tumour"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "WHO Classification of Endocrine and Neuroendocrine Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Total thyroidectomy with central and, where indicated, lateral cervical lymph node dissection as the surgical mainstay",
-   "Exclude and treat any phaeochromocytoma first with alpha-adrenergic blockade and adrenalectomy before thyroid surgery",
-   "Lifelong levothyroxine replacement postoperatively, noting the tumour is not radioiodine-avid",
-   "RET-selective inhibitors such as selpercatinib or pralsetinib, or multikinase inhibitors such as cabozantinib or vandetanib, for progressive advanced or metastatic disease",
-   "Serial calcitonin and carcinoembryonic antigen with doubling-time assessment to detect residual or recurrent disease",
-   "Manage hormone-mediated diarrhoea and flushing with antidiarrhoeals and somatostatin analogues in advanced disease",
-   "Germline RET testing with genetic counselling, cascade family screening, prophylactic thyroidectomy in gene carriers and surveillance for hyperparathyroidism in MEN2A"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "medullary_thyroid_carcinoma-pathway",
-   "title": "Medullary thyroid carcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Arises from calcitonin-secreting parafollicular C cells rather than follicular epithelium, so it does not concentrate iodine and radioactive iodine therapy is ineffective",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Coexisting phaeochromocytoma, which must be identified and treated before thyroid surgery to avoid intraoperative crisis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum calcitonin and carcinoembryonic antigen as diagnostic and monitoring markers, Germline RET mutation testing with genetic counselling and family screening, Biochemical exclusion of phaeochromocytoma (plasma or urinary"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Total thyroidectomy with central and, where indicated, lateral cervical lymph node dissection as the surgical mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Proceeding to thyroid surgery without first excluding a phaeochromocytoma in a potential MEN2 patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of medullary thyroid carcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "medullary_thyroid_carcinoma-matrix",
-   "title": "Medullary thyroid carcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Arises from calcitonin-secreting parafollicular C cells rather than follicular epithelium, so it does not concentrate iodine and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology / Endocrine Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Arises from calcitonin-secreting parafollicular C cells rather than follicular epithelium, so it does not concentrate iodine and radioactive iodine therapy is ineffective",
+      "Serum calcitonin is the key tumour marker for diagnosis and follow-up, with carcinoembryonic antigen (CEA) as a complementary marker; both track tumour burden",
+      "Occurs sporadically or as part of hereditary MEN2 syndromes, so a germline RET mutation should be sought in every patient and appropriate family screening offered",
+      "Cytology shows dispersed spindle or plasmacytoid cells with amyloid stroma derived from calcitonin, and immunostaining is positive for calcitonin",
+      "Diarrhoea or flushing may occur with advanced disease owing to high circulating calcitonin and related peptides",
+      "Total thyroidectomy with central and often lateral nodal clearance is the mainstay, as the tumour spreads early to cervical nodes and the disease is not radioiodine-avid",
+      "RET and multikinase inhibitors are used in progressive or metastatic disease, and selective RET inhibitors are effective where a RET alteration is present"
     ],
-    [
-     "Key Investigations",
-     "Serum calcitonin and carcinoembryonic antigen as diagnostic and monitoring markers, Germline RET mutation testing with genetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Medullary thyroid carcinoma is a neuroendocrine tumour of the parafollicular C cells, which normally secrete calcitonin. Because it does not originate from follicular epithelium, it neither takes up iodine nor produces thyroglobulin, so calcitonin and CEA serve as its markers and radioactive iodine has no role. Sporadic tumours and the hereditary MEN2 syndromes are both driven by activating RET proto-oncogene mutations; germline RET mutations cause the familial forms and, in MEN2, associate with phaeochromocytoma and, in MEN2A, primary hyperparathyroidism. The tumour deposits amyloid derived from calcitonin and metastasises early to regional cervical lymph nodes.",
+    "additionalDifferentials": [
+      "Papillary or follicular thyroid carcinoma",
+      "Anaplastic thyroid carcinoma",
+      "Primary thyroid lymphoma",
+      "Parathyroid tumour presenting as a neck mass",
+      "Metastasis or neuroendocrine tumour involving the thyroid",
+      "Benign thyroid nodule"
     ],
-    [
-     "Primary Differentials",
-     "Papillary or follicular thyroid carcinoma, Anaplastic thyroid carcinoma, Primary thyroid lymphoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum calcitonin and carcinoembryonic antigen as diagnostic and monitoring markers",
+      "Germline RET mutation testing with genetic counselling and family screening",
+      "Biochemical exclusion of phaeochromocytoma (plasma or urinary metanephrines) before any surgery",
+      "Serum calcium and PTH to screen for associated primary hyperparathyroidism in MEN2A",
+      "Neck ultrasound with fine-needle aspiration and calcitonin immunostaining",
+      "Cross-sectional imaging and functional imaging to stage nodal and distant disease when calcitonin is markedly elevated"
     ],
-    [
-     "Management Strategy",
-     "Total thyroidectomy with central and, where indicated, lateral cervical lymph node dissection as the surgical mainstay",
-     "Core treatment modality"
+    "redFlags": [
+      "Coexisting phaeochromocytoma, which must be identified and treated before thyroid surgery to avoid intraoperative crisis",
+      "Very high calcitonin with secretory diarrhoea or flushing indicating extensive metastatic disease",
+      "Rapidly rising calcitonin or CEA doubling times signalling aggressive progression",
+      "Airway or recurrent laryngeal nerve involvement from bulky local disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Proceeding to thyroid surgery without first excluding a phaeochromocytoma in a potential MEN2 patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends heavily on stage: node-negative disease confined to the thyroid can be cured surgically, whereas extensive nodal or distant metastasis and short calcitonin/CEA doubling times predict poorer survival.",
+    "pitfalls": [
+      "Proceeding to thyroid surgery without first excluding a phaeochromocytoma in a potential MEN2 patient",
+      "Forgetting germline RET testing, thereby missing an inherited syndrome and the chance for family screening",
+      "Expecting benefit from radioactive iodine, which is ineffective as C cells do not concentrate iodine",
+      "Attributing chronic diarrhoea to gastrointestinal causes and overlooking a calcitonin-secreting tumour"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "WHO Classification of Endocrine and Neuroendocrine Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Total thyroidectomy with central and, where indicated, lateral cervical lymph node dissection as the surgical mainstay",
+      "Exclude and treat any phaeochromocytoma first with alpha-adrenergic blockade and adrenalectomy before thyroid surgery",
+      "Lifelong levothyroxine replacement postoperatively, noting the tumour is not radioiodine-avid",
+      "RET-selective inhibitors such as selpercatinib or pralsetinib, or multikinase inhibitors such as cabozantinib or vandetanib, for progressive advanced or metastatic disease",
+      "Serial calcitonin and carcinoembryonic antigen with doubling-time assessment to detect residual or recurrent disease",
+      "Manage hormone-mediated diarrhoea and flushing with antidiarrhoeals and somatostatin analogues in advanced disease",
+      "Germline RET testing with genetic counselling, cascade family screening, prophylactic thyroidectomy in gene carriers and surveillance for hyperparathyroidism in MEN2A"
     ]
-   ],
-   "caption": "Overview comparison matrix for medullary thyroid carcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "medullary-thyroid-carcinoma-real-image",
-   "title": "Medullary thyroid carcinoma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "medullary_thyroid_carcinoma-pathway",
+      "title": "Medullary thyroid carcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Arises from calcitonin-secreting parafollicular C cells rather than follicular epithelium, so it does not concentrate iodine and radioactive iodine therapy is ineffective",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Coexisting phaeochromocytoma, which must be identified and treated before thyroid surgery to avoid intraoperative crisis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum calcitonin and carcinoembryonic antigen as diagnostic and monitoring markers, Germline RET mutation testing with genetic counselling and family screening, Biochemical exclusion of phaeochromocytoma (plasma or urinary"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Total thyroidectomy with central and, where indicated, lateral cervical lymph node dissection as the surgical mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Proceeding to thyroid surgery without first excluding a phaeochromocytoma in a potential MEN2 patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of medullary thyroid carcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "medullary_thyroid_carcinoma-matrix",
+      "title": "Medullary thyroid carcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Arises from calcitonin-secreting parafollicular C cells rather than follicular epithelium, so it does not concentrate iodine and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum calcitonin and carcinoembryonic antigen as diagnostic and monitoring markers, Germline RET mutation testing with genetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Papillary or follicular thyroid carcinoma, Anaplastic thyroid carcinoma, Primary thyroid lymphoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Total thyroidectomy with central and, where indicated, lateral cervical lymph node dissection as the surgical mainstay",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Proceeding to thyroid surgery without first excluding a phaeochromocytoma in a potential MEN2 patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for medullary thyroid carcinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "medullary_thyroid_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcitonin and carcinoembryonic antigen",
+          "cells": [
+            {
+              "text": "Diagnostic and monitoring markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline RET mutation testing",
+          "cells": [
+            {
+              "text": "RET mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical exclusion of phaeochromocytoma (metanephrines)",
+          "cells": [
+            {
+              "text": "Phaeochromocytoma excluded before any surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium and PTH",
+          "cells": [
+            {
+              "text": "Primary hyperparathyroidism in MEN2A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound with fine-needle aspiration and calcitonin immunostaining",
+          "cells": [
+            {
+              "text": "Neck lesion; calcitonin immunostaining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional and functional imaging",
+          "cells": [
+            {
+              "text": "Nodal and distant disease, when calcitonin is markedly elevated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "medullary_thyroid_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Total thyroidectomy with lymph node dissection",
+          "cells": [
+            {
+              "text": "Central and, where indicated, lateral cervical nodes; the surgical mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma first",
+          "cells": [
+            {
+              "text": "Alpha-adrenergic blockade and adrenalectomy before thyroid surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "Lifelong postoperative replacement; the tumour is not radioiodine-avid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RET-selective or multikinase inhibitors",
+          "cells": [
+            {
+              "text": "Selpercatinib or pralsetinib; cabozantinib or vandetanib; for progressive advanced or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial calcitonin and CEA",
+          "cells": [
+            {
+              "text": "Doubling-time assessment for residual or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone-mediated diarrhoea and flushing",
+          "cells": [
+            {
+              "text": "Antidiarrhoeals and somatostatin analogues in advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline RET testing",
+          "cells": [
+            {
+              "text": "Genetic counselling, cascade screening, prophylactic thyroidectomy in carriers, hyperparathyroidism surveillance in MEN2A"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "medullary_thyroid_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Medullary thyroid carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thyroid nodule with raised calcitonin; suspected medullary thyroid carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Phaeochromocytoma, airway involvement, or rapidly rising calcitonin or CEA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude and treat phaeochromocytoma before any thyroid surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcitonin and CEA; neck ultrasound with FNA; metanephrines; calcium and PTH",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is calcitonin immunostaining positive on fine-needle aspiration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider papillary, follicular or anaplastic carcinoma or other thyroid lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Total thyroidectomy with central and, where indicated, lateral node dissection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Alpha-blockade and adrenalectomy for phaeochromocytoma before thyroid surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong levothyroxine after surgery; the tumour is not radioiodine-avid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "RET-selective or multikinase inhibitors for progressive advanced or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial calcitonin and CEA; germline RET testing with family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,464 @@
 {
- "id": "tibial_torsion",
- "name": "Tibial torsion",
- "aliases": [
-  "internal tibial torsion",
-  "external tibial torsion",
-  "tibial version",
-  "medial tibial torsion"
- ],
- "class": "non_infective",
- "system": "Paediatric orthopaedics",
- "specialty": "Paediatric Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Internal tibial torsion is the commonest cause of in-toeing in toddlers and typically becomes apparent when the child begins to walk",
-   "The deformity is assessed on the rotational profile by the thigh-foot angle and the transmalleolar axis, with the child prone and the knee flexed",
-   "Tibial torsion normally shifts outward with growth, so mild internal torsion in infancy corrects to a modest external value by later childhood",
-   "The condition is usually physiological, frequently bilateral or asymmetrical, and resolves spontaneously without treatment in the great majority",
-   "Reassurance and observation are the mainstays, and passive stretching, special shoes, braces, and night splints have not been shown to alter the natural history",
-   "External tibial torsion is less common, tends to worsen with growth, and may contribute to patellofemoral maladjustment or an out-toeing gait",
-   "Surgical derotation osteotomy is reserved for the rare severe, persistent, and functionally significant deformity in an older child"
+  "id": "tibial_torsion",
+  "name": "Tibial torsion",
+  "aliases": [
+    "internal tibial torsion",
+    "external tibial torsion",
+    "tibial version",
+    "medial tibial torsion"
   ],
-  "pathophysiology": "Tibial torsion describes the normal axial rotation of the tibia between the knee and ankle, which in fetal life is internally rotated and gradually rotates externally through infancy and childhood as part of normal skeletal development. Persistence of the immature internally rotated pattern produces internal tibial torsion and an in-toeing gait, while excessive external rotation produces external torsion and out-toeing. It represents a variation of normal maturation influenced by intrauterine positioning and sleeping or sitting postures rather than a structural disease, and the growing bone remodels along the physiological path in the overwhelming majority of children.",
-  "additionalDifferentials": [
-   "Increased femoral anteversion as an alternative cause of in-toeing",
-   "Metatarsus adductus producing in-toeing at the level of the foot",
-   "Residual clubfoot deformity",
-   "External tibial torsion or femoral retroversion causing out-toeing",
-   "Neuromuscular gait abnormality such as cerebral palsy",
-   "Blount disease or other tibial deformity mimicking torsional malalignment"
-  ],
-  "additionalInvestigations": [
-   "Full rotational profile assessment including thigh-foot angle and transmalleolar axis",
-   "Foot progression angle observed during gait",
-   "Assessment of hip rotation to exclude a coexisting femoral cause",
-   "Examination of the feet for metatarsus adductus or other deformity",
-   "Standing lower-limb radiographs only when angular deformity or a pathological cause is suspected",
-   "Computed tomography rotational study reserved for surgical planning in severe cases"
-  ],
-  "redFlags": [
-   "Progressive worsening rather than the expected spontaneous improvement",
-   "Marked asymmetry between the two limbs",
-   "Associated pain, limp, or functional limitation",
-   "Short stature, disproportion, or other features suggesting a skeletal dysplasia or metabolic bone disease",
-   "Neurological signs indicating an underlying neuromuscular disorder"
-  ],
-  "prognosis": "The natural history is overwhelmingly benign, with internal tibial torsion resolving spontaneously in almost all children as the tibia derotates with growth, and lasting functional or arthritic consequences are not expected.",
-  "pitfalls": [
-   "Prescribing braces, special shoes, or night splints that do not change the natural course and burden the family",
-   "Failing to complete a full rotational profile and thereby missing a coexisting femoral cause",
-   "Reassuring without follow-up when the deformity is progressive or asymmetrical",
-   "Attributing a pathological angular deformity such as Blount disease to simple torsion",
-   "Recommending surgery before the natural resolution that occurs with skeletal growth has been allowed"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Staheli LT, rotational problems of the lower extremity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure families and observe, as internal tibial torsion is physiological and resolves spontaneously in almost all children as the tibia derotates with growth",
-   "Avoid braces, night splints, special shoes and passive stretching, which do not alter the natural history",
-   "Monitor the rotational profile (thigh-foot angle and transmalleolar axis) over serial visits to confirm expected external derotation",
-   "Reserve derotational tibial osteotomy for the rare severe, persistent deformity causing functional or cosmetic problems in an older child",
-   "Follow external tibial torsion more closely, as it tends to worsen with growth and may contribute to patellofemoral maladjustment",
-   "Refer atypical, markedly asymmetrical, worsening or pathological cases to paediatric orthopaedics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tibial_torsion-pathway",
-   "title": "Tibial torsion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Internal tibial torsion is the commonest cause of in-toeing in toddlers and typically becomes apparent when the child begins to walk",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive worsening rather than the expected spontaneous improvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full rotational profile assessment including thigh-foot angle and transmalleolar axis, Foot progression angle observed during gait, Assessment of hip rotation to exclude a coexisting femoral cause"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure families and observe, as internal tibial torsion is physiological and resolves spontaneously in almost all children as the tibia derotates with growth"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing braces, special shoes, or night splints that do not change the natural course and burden the family"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tibial torsion."
-  }
- ],
- "tables": [
-  {
-   "id": "tibial_torsion-matrix",
-   "title": "Tibial torsion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Internal tibial torsion is the commonest cause of in-toeing in toddlers and typically becomes apparent when the child begins to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric orthopaedics",
+  "specialty": "Paediatric Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Internal tibial torsion is the commonest cause of in-toeing in toddlers and typically becomes apparent when the child begins to walk",
+      "The deformity is assessed on the rotational profile by the thigh-foot angle and the transmalleolar axis, with the child prone and the knee flexed",
+      "Tibial torsion normally shifts outward with growth, so mild internal torsion in infancy corrects to a modest external value by later childhood",
+      "The condition is usually physiological, frequently bilateral or asymmetrical, and resolves spontaneously without treatment in the great majority",
+      "Reassurance and observation are the mainstays, and passive stretching, special shoes, braces, and night splints have not been shown to alter the natural history",
+      "External tibial torsion is less common, tends to worsen with growth, and may contribute to patellofemoral maladjustment or an out-toeing gait",
+      "Surgical derotation osteotomy is reserved for the rare severe, persistent, and functionally significant deformity in an older child"
     ],
-    [
-     "Key Investigations",
-     "Full rotational profile assessment including thigh-foot angle and transmalleolar axis, Foot progression angle observed during",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tibial torsion describes the normal axial rotation of the tibia between the knee and ankle, which in fetal life is internally rotated and gradually rotates externally through infancy and childhood as part of normal skeletal development. Persistence of the immature internally rotated pattern produces internal tibial torsion and an in-toeing gait, while excessive external rotation produces external torsion and out-toeing. It represents a variation of normal maturation influenced by intrauterine positioning and sleeping or sitting postures rather than a structural disease, and the growing bone remodels along the physiological path in the overwhelming majority of children.",
+    "additionalDifferentials": [
+      "Increased femoral anteversion as an alternative cause of in-toeing",
+      "Metatarsus adductus producing in-toeing at the level of the foot",
+      "Residual clubfoot deformity",
+      "External tibial torsion or femoral retroversion causing out-toeing",
+      "Neuromuscular gait abnormality such as cerebral palsy",
+      "Blount disease or other tibial deformity mimicking torsional malalignment"
     ],
-    [
-     "Primary Differentials",
-     "Increased femoral anteversion as an alternative cause of in-toeing, Metatarsus adductus producing in-toeing at the level of the",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full rotational profile assessment including thigh-foot angle and transmalleolar axis",
+      "Foot progression angle observed during gait",
+      "Assessment of hip rotation to exclude a coexisting femoral cause",
+      "Examination of the feet for metatarsus adductus or other deformity",
+      "Standing lower-limb radiographs only when angular deformity or a pathological cause is suspected",
+      "Computed tomography rotational study reserved for surgical planning in severe cases"
     ],
-    [
-     "Management Strategy",
-     "Reassure families and observe, as internal tibial torsion is physiological and resolves spontaneously in almost all children as",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive worsening rather than the expected spontaneous improvement",
+      "Marked asymmetry between the two limbs",
+      "Associated pain, limp, or functional limitation",
+      "Short stature, disproportion, or other features suggesting a skeletal dysplasia or metabolic bone disease",
+      "Neurological signs indicating an underlying neuromuscular disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing braces, special shoes, or night splints that do not change the natural course and burden the family",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is overwhelmingly benign, with internal tibial torsion resolving spontaneously in almost all children as the tibia derotates with growth, and lasting functional or arthritic consequences are not expected.",
+    "pitfalls": [
+      "Prescribing braces, special shoes, or night splints that do not change the natural course and burden the family",
+      "Failing to complete a full rotational profile and thereby missing a coexisting femoral cause",
+      "Reassuring without follow-up when the deformity is progressive or asymmetrical",
+      "Attributing a pathological angular deformity such as Blount disease to simple torsion",
+      "Recommending surgery before the natural resolution that occurs with skeletal growth has been allowed"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Staheli LT, rotational problems of the lower extremity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure families and observe, as internal tibial torsion is physiological and resolves spontaneously in almost all children as the tibia derotates with growth",
+      "Avoid braces, night splints, special shoes and passive stretching, which do not alter the natural history",
+      "Monitor the rotational profile (thigh-foot angle and transmalleolar axis) over serial visits to confirm expected external derotation",
+      "Reserve derotational tibial osteotomy for the rare severe, persistent deformity causing functional or cosmetic problems in an older child",
+      "Follow external tibial torsion more closely, as it tends to worsen with growth and may contribute to patellofemoral maladjustment",
+      "Refer atypical, markedly asymmetrical, worsening or pathological cases to paediatric orthopaedics"
     ]
-   ],
-   "caption": "Overview comparison matrix for tibial torsion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tibial-torsion-real-image",
-   "title": "Tibial torsion: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "tibial_torsion-pathway",
+      "title": "Tibial torsion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Internal tibial torsion is the commonest cause of in-toeing in toddlers and typically becomes apparent when the child begins to walk",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive worsening rather than the expected spontaneous improvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full rotational profile assessment including thigh-foot angle and transmalleolar axis, Foot progression angle observed during gait, Assessment of hip rotation to exclude a coexisting femoral cause"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure families and observe, as internal tibial torsion is physiological and resolves spontaneously in almost all children as the tibia derotates with growth"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing braces, special shoes, or night splints that do not change the natural course and burden the family"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tibial torsion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tibial_torsion-matrix",
+      "title": "Tibial torsion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Internal tibial torsion is the commonest cause of in-toeing in toddlers and typically becomes apparent when the child begins to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full rotational profile assessment including thigh-foot angle and transmalleolar axis, Foot progression angle observed during",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Increased femoral anteversion as an alternative cause of in-toeing, Metatarsus adductus producing in-toeing at the level of the",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure families and observe, as internal tibial torsion is physiological and resolves spontaneously in almost all children as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing braces, special shoes, or night splints that do not change the natural course and burden the family",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tibial torsion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tibial_torsion-dx-mgmt",
+      "title": "Diagnosis and management of Tibial torsion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tibial torsion: in-toeing gait in a toddler or child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progressive worsening, marked asymmetry, pain, or short stature?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric orthopaedic review for suspected pathological deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rotational profile: thigh-foot angle and transmalleolar axis; hip rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the profile show internal tibial torsion with a normal femur?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider femoral anteversion, metatarsus adductus or Blount disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and observe; physiological torsion resolves with growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid braces, night splints and special shoes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial rotational profile to confirm derotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor external torsion, which can worsen with growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Derotational osteotomy only for rare severe persistent deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign; internal tibial torsion resolves spontaneously in almost all children",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tibial_torsion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thigh-foot angle and transmalleolar axis",
+          "cells": [
+            {
+              "text": "Rotational profile with the child prone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot progression angle during gait",
+          "cells": [
+            {
+              "text": "In-toeing or out-toeing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip rotation assessment",
+          "cells": [
+            {
+              "text": "Coexisting femoral cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot examination",
+          "cells": [
+            {
+              "text": "Metatarsus adductus or other deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standing lower-limb radiographs",
+          "cells": [
+            {
+              "text": "Only when angular deformity or pathological cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tibial_torsion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Increased femoral anteversion",
+          "cells": [
+            {
+              "text": "Femoral rather than tibial rotation; full rotational profile separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metatarsus adductus",
+          "cells": [
+            {
+              "text": "In-toeing at the level of the foot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blount disease",
+          "cells": [
+            {
+              "text": "Pathological angular tibial deformity that is not simple torsion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tibial_torsion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Internal tibial torsion is physiological and resolves with growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid braces and splints",
+          "cells": [
+            {
+              "text": "Night splints, special shoes and stretching do not alter the course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial rotational profile",
+          "cells": [
+            {
+              "text": "Confirms expected external derotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Derotational osteotomy",
+          "cells": [
+            {
+              "text": "Rare severe, persistent deformity in an older child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closer follow-up of external torsion",
+          "cells": [
+            {
+              "text": "Tends to worsen with growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric orthopaedic referral",
+          "cells": [
+            {
+              "text": "Atypical, asymmetrical, worsening or pathological cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

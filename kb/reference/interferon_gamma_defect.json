@@ -1,173 +1,471 @@
 {
- "id": "interferon_gamma_defect",
- "name": "Interferon-gamma pathway defect",
- "aliases": [
-  "MSMD",
-  "Mendelian susceptibility to mycobacterial disease",
-  "IFN-gamma/IL-12 axis defect"
- ],
- "class": "non_infective",
- "system": "Immunology",
- "specialty": "Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / standard immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defects of the interferon-gamma/IL-12 axis cause Mendelian susceptibility to mycobacterial disease (MSMD), a selective vulnerability to weakly virulent mycobacteria",
-   "Affected individuals develop disseminated infection with environmental (non-tuberculous) mycobacteria and with the BCG vaccine strain, as well as an increased risk of severe tuberculosis and salmonellosis",
-   "The underlying problem is failure of the cytokine circuit by which macrophages and T/NK cells communicate to control intracellular pathogens, involving genes such as IFNGR1, IFNGR2, IL12B, IL12RB1, and STAT1",
-   "IL-12 produced by macrophages normally drives lymphocytes to secrete interferon-gamma, which in turn activates macrophages to kill intracellular organisms; breaking this loop cripples defence against mycobacteria",
-   "The clinical severity depends on the specific defect, ranging from complete interferon-gamma receptor deficiency with severe early disseminated disease to partial defects with milder, more localised infection",
-   "Because the immune defect is narrow, patients are typically not broadly susceptible to the wide range of pathogens seen in combined immunodeficiencies",
-   "Complete receptor defects respond poorly to interferon-gamma therapy, whereas partial or IL-12-axis defects may benefit from adjunctive interferon-gamma alongside prolonged antimycobacterial treatment",
-   "Haematopoietic stem cell transplantation is considered for severe complete defects, though outcomes can be challenging"
+  "id": "interferon_gamma_defect",
+  "name": "Interferon-gamma pathway defect",
+  "aliases": [
+    "MSMD",
+    "Mendelian susceptibility to mycobacterial disease",
+    "IFN-gamma/IL-12 axis defect"
   ],
-  "pathophysiology": "This group of disorders disrupts the interferon-gamma-dependent axis that controls intracellular pathogens. Following ingestion of mycobacteria, macrophages secrete IL-12, which acts on T cells and natural killer cells (via the IL-12 receptor) to induce production of interferon-gamma. Interferon-gamma then signals through its receptor and the JAK-STAT1 pathway to activate macrophages, enhancing their capacity to kill ingested organisms and to form protective granulomas. Mutations at any point in this circuit, in the interferon-gamma receptor chains, IL-12 or its receptor, or STAT1, impair macrophage activation and granuloma formation, leaving weakly virulent mycobacteria and Salmonella able to disseminate. The narrow, well-defined nature of the defect explains the characteristic selective infection susceptibility.",
-  "additionalDifferentials": [
-   "HIV/AIDS and other causes of acquired T-cell deficiency with mycobacterial disease",
-   "Severe combined immunodeficiency and combined immunodeficiencies",
-   "Chronic granulomatous disease",
-   "Anti-interferon-gamma autoantibody syndrome (an acquired phenocopy)",
-   "Disseminated tuberculosis or non-tuberculous mycobacterial infection in an immunocompetent host"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing of the IL-12/interferon-gamma axis (IFNGR1, IFNGR2, IL12B, IL12RB1, STAT1 and related genes)",
-   "Functional assays of interferon-gamma production and receptor signalling",
-   "Flow cytometry for interferon-gamma receptor expression",
-   "Cultures and molecular identification of mycobacterial and Salmonella species",
-   "Testing for anti-interferon-gamma autoantibodies to exclude the acquired phenocopy",
-   "Imaging to define the extent of disseminated infection"
-  ],
-  "redFlags": [
-   "Disseminated mycobacterial or salmonella infection requiring urgent diagnosis and prolonged therapy",
-   "Disseminated BCG infection following vaccination (BCG and other live vaccines must be avoided)",
-   "Severe complete interferon-gamma receptor deficiency presenting with overwhelming early infection",
-   "Recurrent or unusually severe intracellular infection prompting immunological evaluation"
-  ],
-  "prognosis": "Prognosis depends heavily on the molecular defect: complete interferon-gamma receptor deficiency carries a poor outlook with severe, recurrent disseminated disease that responds poorly to cytokine therapy, whereas partial receptor and IL-12-axis defects often have a much better prognosis with prolonged antimycobacterial treatment and, where appropriate, adjunctive interferon-gamma.",
-  "pitfalls": [
-   "Administering BCG or other live vaccines before recognising the defect, risking disseminated vaccine-strain infection",
-   "Stopping antimycobacterial therapy too early, since prolonged and sometimes lifelong treatment may be needed",
-   "Assuming a broad immunodeficiency and missing the selective nature of the defect",
-   "Overlooking the acquired anti-interferon-gamma autoantibody syndrome as a phenocopy in adults",
-   "Expecting interferon-gamma therapy to help in complete receptor deficiency"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat mycobacterial and Salmonella infections with prolonged, targeted combination antimicrobial therapy, often continued long term",
-   "Give adjunctive recombinant interferon-gamma in partial receptor and IL-12-axis defects that retain interferon-gamma responsiveness",
-   "Consider haematopoietic stem cell transplantation for complete interferon-gamma receptor deficiency, which responds poorly to cytokine therapy",
-   "Avoid live BCG and other live vaccines, and counsel on avoiding environmental mycobacterial exposure",
-   "Use long-term antimycobacterial prophylaxis to prevent recurrent disseminated infection",
-   "Provide genetic counselling and family screening for these inherited defects, distinguishing them from the acquired anti-interferon-gamma autoantibody phenocopy",
-   "Manage jointly with clinical immunology and infectious diseases, with imaging surveillance for disseminated infection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "interferon_gamma_defect-pathway",
-   "title": "Interferon-gamma pathway defect: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defects of the interferon-gamma/IL-12 axis cause Mendelian susceptibility to mycobacterial disease (MSMD), a selective vulnerability to weakly virulent mycobacteria",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disseminated mycobacterial or salmonella infection requiring urgent diagnosis and prolonged therapy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing of the IL-12/interferon-gamma axis (IFNGR1, IFNGR2, IL12B, IL12RB1, STAT1 and related genes), Functional assays of interferon-gamma production and receptor signalling, Flow cytometry for interferon-gamma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat mycobacterial and Salmonella infections with prolonged, targeted combination antimicrobial therapy, often continued long term"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Administering BCG or other live vaccines before recognising the defect, risking disseminated vaccine-strain infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of interferon-gamma pathway defect."
-  }
- ],
- "tables": [
-  {
-   "id": "interferon_gamma_defect-matrix",
-   "title": "Interferon-gamma pathway defect: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defects of the interferon-gamma/IL-12 axis cause Mendelian susceptibility to mycobacterial disease (MSMD), a selective",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology",
+  "specialty": "Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / standard immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defects of the interferon-gamma/IL-12 axis cause Mendelian susceptibility to mycobacterial disease (MSMD), a selective vulnerability to weakly virulent mycobacteria",
+      "Affected individuals develop disseminated infection with environmental (non-tuberculous) mycobacteria and with the BCG vaccine strain, as well as an increased risk of severe tuberculosis and salmonellosis",
+      "The underlying problem is failure of the cytokine circuit by which macrophages and T/NK cells communicate to control intracellular pathogens, involving genes such as IFNGR1, IFNGR2, IL12B, IL12RB1, and STAT1",
+      "IL-12 produced by macrophages normally drives lymphocytes to secrete interferon-gamma, which in turn activates macrophages to kill intracellular organisms; breaking this loop cripples defence against mycobacteria",
+      "The clinical severity depends on the specific defect, ranging from complete interferon-gamma receptor deficiency with severe early disseminated disease to partial defects with milder, more localised infection",
+      "Because the immune defect is narrow, patients are typically not broadly susceptible to the wide range of pathogens seen in combined immunodeficiencies",
+      "Complete receptor defects respond poorly to interferon-gamma therapy, whereas partial or IL-12-axis defects may benefit from adjunctive interferon-gamma alongside prolonged antimycobacterial treatment",
+      "Haematopoietic stem cell transplantation is considered for severe complete defects, though outcomes can be challenging"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing of the IL-12/interferon-gamma axis (IFNGR1, IFNGR2, IL12B, IL12RB1, STAT1 and related genes), Functional assays",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "This group of disorders disrupts the interferon-gamma-dependent axis that controls intracellular pathogens. Following ingestion of mycobacteria, macrophages secrete IL-12, which acts on T cells and natural killer cells (via the IL-12 receptor) to induce production of interferon-gamma. Interferon-gamma then signals through its receptor and the JAK-STAT1 pathway to activate macrophages, enhancing their capacity to kill ingested organisms and to form protective granulomas. Mutations at any point in this circuit, in the interferon-gamma receptor chains, IL-12 or its receptor, or STAT1, impair macrophage activation and granuloma formation, leaving weakly virulent mycobacteria and Salmonella able to disseminate. The narrow, well-defined nature of the defect explains the characteristic selective infection susceptibility.",
+    "additionalDifferentials": [
+      "HIV/AIDS and other causes of acquired T-cell deficiency with mycobacterial disease",
+      "Severe combined immunodeficiency and combined immunodeficiencies",
+      "Chronic granulomatous disease",
+      "Anti-interferon-gamma autoantibody syndrome (an acquired phenocopy)",
+      "Disseminated tuberculosis or non-tuberculous mycobacterial infection in an immunocompetent host"
     ],
-    [
-     "Primary Differentials",
-     "HIV/AIDS and other causes of acquired T-cell deficiency with mycobacterial disease, Severe combined immunodeficiency and combined",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing of the IL-12/interferon-gamma axis (IFNGR1, IFNGR2, IL12B, IL12RB1, STAT1 and related genes)",
+      "Functional assays of interferon-gamma production and receptor signalling",
+      "Flow cytometry for interferon-gamma receptor expression",
+      "Cultures and molecular identification of mycobacterial and Salmonella species",
+      "Testing for anti-interferon-gamma autoantibodies to exclude the acquired phenocopy",
+      "Imaging to define the extent of disseminated infection"
     ],
-    [
-     "Management Strategy",
-     "Treat mycobacterial and Salmonella infections with prolonged, targeted combination antimicrobial therapy, often continued long",
-     "Core treatment modality"
+    "redFlags": [
+      "Disseminated mycobacterial or salmonella infection requiring urgent diagnosis and prolonged therapy",
+      "Disseminated BCG infection following vaccination (BCG and other live vaccines must be avoided)",
+      "Severe complete interferon-gamma receptor deficiency presenting with overwhelming early infection",
+      "Recurrent or unusually severe intracellular infection prompting immunological evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Administering BCG or other live vaccines before recognising the defect, risking disseminated vaccine-strain infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends heavily on the molecular defect: complete interferon-gamma receptor deficiency carries a poor outlook with severe, recurrent disseminated disease that responds poorly to cytokine therapy, whereas partial receptor and IL-12-axis defects often have a much better prognosis with prolonged antimycobacterial treatment and, where appropriate, adjunctive interferon-gamma.",
+    "pitfalls": [
+      "Administering BCG or other live vaccines before recognising the defect, risking disseminated vaccine-strain infection",
+      "Stopping antimycobacterial therapy too early, since prolonged and sometimes lifelong treatment may be needed",
+      "Assuming a broad immunodeficiency and missing the selective nature of the defect",
+      "Overlooking the acquired anti-interferon-gamma autoantibody syndrome as a phenocopy in adults",
+      "Expecting interferon-gamma therapy to help in complete receptor deficiency"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat mycobacterial and Salmonella infections with prolonged, targeted combination antimicrobial therapy, often continued long term",
+      "Give adjunctive recombinant interferon-gamma in partial receptor and IL-12-axis defects that retain interferon-gamma responsiveness",
+      "Consider haematopoietic stem cell transplantation for complete interferon-gamma receptor deficiency, which responds poorly to cytokine therapy",
+      "Avoid live BCG and other live vaccines, and counsel on avoiding environmental mycobacterial exposure",
+      "Use long-term antimycobacterial prophylaxis to prevent recurrent disseminated infection",
+      "Provide genetic counselling and family screening for these inherited defects, distinguishing them from the acquired anti-interferon-gamma autoantibody phenocopy",
+      "Manage jointly with clinical immunology and infectious diseases, with imaging surveillance for disseminated infection"
     ]
-   ],
-   "caption": "Overview comparison matrix for interferon-gamma pathway defect."
-  }
- ],
- "diagrams": [
-  {
-   "id": "interferon-gamma-defect-real-image",
-   "title": "Interferon-gamma pathway defect: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "interferon_gamma_defect-pathway",
+      "title": "Interferon-gamma pathway defect: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defects of the interferon-gamma/IL-12 axis cause Mendelian susceptibility to mycobacterial disease (MSMD), a selective vulnerability to weakly virulent mycobacteria",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disseminated mycobacterial or salmonella infection requiring urgent diagnosis and prolonged therapy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing of the IL-12/interferon-gamma axis (IFNGR1, IFNGR2, IL12B, IL12RB1, STAT1 and related genes), Functional assays of interferon-gamma production and receptor signalling, Flow cytometry for interferon-gamma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat mycobacterial and Salmonella infections with prolonged, targeted combination antimicrobial therapy, often continued long term"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Administering BCG or other live vaccines before recognising the defect, risking disseminated vaccine-strain infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of interferon-gamma pathway defect."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "interferon_gamma_defect-matrix",
+      "title": "Interferon-gamma pathway defect: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defects of the interferon-gamma/IL-12 axis cause Mendelian susceptibility to mycobacterial disease (MSMD), a selective",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing of the IL-12/interferon-gamma axis (IFNGR1, IFNGR2, IL12B, IL12RB1, STAT1 and related genes), Functional assays",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "HIV/AIDS and other causes of acquired T-cell deficiency with mycobacterial disease, Severe combined immunodeficiency and combined",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat mycobacterial and Salmonella infections with prolonged, targeted combination antimicrobial therapy, often continued long",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Administering BCG or other live vaccines before recognising the defect, risking disseminated vaccine-strain infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for interferon-gamma pathway defect."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "interferon_gamma_defect-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing of IFNGR1, IFNGR2, IL12B, IL12RB1 and STAT1",
+          "cells": [
+            {
+              "text": "Causal variant in the IL-12 and interferon-gamma axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional assays of interferon-gamma production and signalling",
+          "cells": [
+            {
+              "text": "Functional defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for interferon-gamma receptor",
+          "cells": [
+            {
+              "text": "Receptor expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures and molecular identification",
+          "cells": [
+            {
+              "text": "Mycobacterial and Salmonella species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-interferon-gamma autoantibody testing",
+          "cells": [
+            {
+              "text": "Acquired phenocopy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Extent of disseminated infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interferon_gamma_defect-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "HIV and other acquired T-cell deficiency",
+          "cells": [
+            {
+              "text": "Acquired rather than selective defect; HIV testing needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe combined immunodeficiency",
+          "cells": [
+            {
+              "text": "Broad immunodeficiency rather than selective mycobacterial susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-interferon-gamma autoantibody syndrome",
+          "cells": [
+            {
+              "text": "Acquired phenocopy, mainly in adults"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "interferon_gamma_defect-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted antimicrobials",
+          "cells": [
+            {
+              "text": "Prolonged combination therapy, often long term"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant interferon-gamma",
+          "cells": [
+            {
+              "text": "Partial receptor and IL-12-axis defects with residual responsiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplantation",
+          "cells": [
+            {
+              "text": "Considered for complete receptor deficiency, which responds poorly to cytokine therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccine and exposure advice",
+          "cells": [
+            {
+              "text": "Avoid live BCG and other live vaccines; avoid environmental mycobacteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Long-term antimycobacterial prophylaxis against recurrent disseminated infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Genetic counselling and family screening; distinguish from autoantibody phenocopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "interferon_gamma_defect-dx-mgmt",
+      "title": "Diagnosis and management of Interferon-gamma pathway defect",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Disseminated mycobacterial or Salmonella infection, or BCG disease after vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe early infection in complete receptor deficiency or disseminated BCG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent culture-directed therapy; stop live vaccines; transplant discussion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IFN-gamma axis genetics, functional assays, receptor flow, cultures, antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Defect confirmed by genetics or function, with autoantibodies excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired autoantibody or HIV; repeat tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged targeted combination antimicrobial therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recombinant interferon-gamma for partial defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transplant considered for complete receptor deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid live BCG and live vaccines; long-term prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong infection risk; prolonged therapy and immunology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

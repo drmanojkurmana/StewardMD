@@ -1,173 +1,451 @@
 {
- "id": "spinocerebellar_ataxia_type_10",
- "name": "Spinocerebellar ataxia type 10 (ATXN10, with epilepsy)",
- "aliases": [
-  "SCA10",
-  "ATXN10 ATTCT pentanucleotide repeat expansion",
-  "cerebellar ataxia with seizures"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant cerebellar ataxia notable for its association with epilepsy, most often generalised tonic-clonic or complex partial seizures",
-   "Caused by a large intronic ATTCT pentanucleotide repeat expansion in ATXN10, unlike the CAG trinucleotide SCAs",
-   "Reported predominantly in individuals of Latin American (Amerindian) ancestry, an important clue in a patient with ataxia and seizures",
-   "Progressive gait and limb ataxia with dysarthria and nystagmus is the core neurological syndrome",
-   "Seizures may appear at or after the onset of ataxia and can be a prominent management issue",
-   "The expansion is very large and unstable, and anticipation may be seen across generations",
-   "MRI typically shows cerebellar atrophy",
-   "Care combines supportive ataxia management with appropriate anti-seizure therapy"
+  "id": "spinocerebellar_ataxia_type_10",
+  "name": "Spinocerebellar ataxia type 10 (ATXN10, with epilepsy)",
+  "aliases": [
+    "SCA10",
+    "ATXN10 ATTCT pentanucleotide repeat expansion",
+    "cerebellar ataxia with seizures"
   ],
-  "pathophysiology": "SCA10 is caused by a markedly expanded ATTCT pentanucleotide repeat located within an intron of ATXN10. Because it is non-coding, the disorder is attributed to an RNA-mediated toxic gain-of-function in which the expanded repeat transcript sequesters RNA-binding proteins and disrupts normal RNA processing, rather than to a polyglutamine protein. This leads to Purkinje cell and cerebellar cortical degeneration and, through mechanisms that remain incompletely understood, a lowered seizure threshold in many patients. The large, unstable expansion accounts for variable repeat size, anticipation and the strong founder effect observed in Amerindian-derived populations.",
-  "additionalDifferentials": [
-   "Other autosomal dominant spinocerebellar ataxias, particularly SCA2 which can also feature seizures",
-   "Dentatorubral-pallidoluysian atrophy (ataxia with epilepsy and other features)",
-   "Progressive myoclonic epilepsy syndromes",
-   "Mitochondrial disorders combining ataxia and seizures",
-   "Coeliac or other immune-mediated ataxia",
-   "Sporadic adult-onset idiopathic cerebellar ataxia"
-  ],
-  "additionalInvestigations": [
-   "Targeted ATXN10 ATTCT repeat-expansion analysis",
-   "Electroencephalography to characterise seizure type and guide therapy",
-   "MRI brain to document cerebellar atrophy and exclude structural lesions",
-   "Broad SCA repeat-expansion panel when ATXN10 testing is negative",
-   "Nerve conduction studies to assess for associated neuropathy",
-   "Screening for acquired ataxia causes when the picture is atypical"
-  ],
-  "redFlags": [
-   "Status epilepticus or poorly controlled seizures requiring urgent management",
-   "Rapid neurological deterioration suggesting an alternative or superimposed process",
-   "Prominent myoclonus and cognitive decline raising suspicion of a progressive myoclonic epilepsy",
-   "New focal deficits indicating a structural lesion rather than SCA10 alone"
-  ],
-  "prognosis": "SCA10 generally progresses slowly over years to decades; seizure control is achievable in most patients and, when adequate, ataxia remains the main determinant of long-term disability. Prognosis is more guarded in those with frequent seizures or additional systemic features.",
-  "pitfalls": [
-   "Ordering only CAG-based SCA panels and missing the pentanucleotide ATXN10 expansion",
-   "Overlooking ancestry as a diagnostic clue in a patient with combined ataxia and epilepsy",
-   "Attributing seizures to an unrelated epilepsy syndrome and delaying genetic diagnosis",
-   "Assuming all dominant SCAs share the same molecular mechanism when counselling about recurrence"
-  ],
-  "references": [
-   "GeneReviews: Spinocerebellar Ataxia Type 10",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control seizures with antiepileptic drug therapy tailored to generalised tonic-clonic and complex partial seizures and guided by EEG",
-   "Provide symptomatic ataxia care with physiotherapy, occupational therapy, gait aids and speech and language therapy, as no disease-modifying treatment exists",
-   "Manage swallowing safety with assessment and diet modification as bulbar features develop",
-   "Monitor progression of ataxia and seizure frequency, adjusting antiepileptics to maintain adequate control",
-   "Coordinate care between neurology and epilepsy services, and note Latin American Amerindian ancestry when evaluating the family",
-   "Offer genetic counselling for autosomal dominant inheritance, the unstable expansion and anticipation across generations"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_10-pathway",
-   "title": "Spinocerebellar ataxia type 10 (ATXN10, with epilepsy): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant cerebellar ataxia notable for its association with epilepsy, most often generalised tonic-clonic or complex partial seizures",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Status epilepticus or poorly controlled seizures requiring urgent management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted ATXN10 ATTCT repeat-expansion analysis, Electroencephalography to characterise seizure type and guide therapy, MRI brain to document cerebellar atrophy and exclude structural lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control seizures with antiepileptic drug therapy tailored to generalised tonic-clonic and complex partial seizures and guided by EEG"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Ordering only CAG-based SCA panels and missing the pentanucleotide ATXN10 expansion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 10 (atxn10, with epilepsy)."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_10-matrix",
-   "title": "Spinocerebellar ataxia type 10 (ATXN10, with epilepsy): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant cerebellar ataxia notable for its association with epilepsy, most often generalised tonic-clonic or complex",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant cerebellar ataxia notable for its association with epilepsy, most often generalised tonic-clonic or complex partial seizures",
+      "Caused by a large intronic ATTCT pentanucleotide repeat expansion in ATXN10, unlike the CAG trinucleotide SCAs",
+      "Reported predominantly in individuals of Latin American (Amerindian) ancestry, an important clue in a patient with ataxia and seizures",
+      "Progressive gait and limb ataxia with dysarthria and nystagmus is the core neurological syndrome",
+      "Seizures may appear at or after the onset of ataxia and can be a prominent management issue",
+      "The expansion is very large and unstable, and anticipation may be seen across generations",
+      "MRI typically shows cerebellar atrophy",
+      "Care combines supportive ataxia management with appropriate anti-seizure therapy"
     ],
-    [
-     "Key Investigations",
-     "Targeted ATXN10 ATTCT repeat-expansion analysis, Electroencephalography to characterise seizure type and guide therapy, MRI brain",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA10 is caused by a markedly expanded ATTCT pentanucleotide repeat located within an intron of ATXN10. Because it is non-coding, the disorder is attributed to an RNA-mediated toxic gain-of-function in which the expanded repeat transcript sequesters RNA-binding proteins and disrupts normal RNA processing, rather than to a polyglutamine protein. This leads to Purkinje cell and cerebellar cortical degeneration and, through mechanisms that remain incompletely understood, a lowered seizure threshold in many patients. The large, unstable expansion accounts for variable repeat size, anticipation and the strong founder effect observed in Amerindian-derived populations.",
+    "additionalDifferentials": [
+      "Other autosomal dominant spinocerebellar ataxias, particularly SCA2 which can also feature seizures",
+      "Dentatorubral-pallidoluysian atrophy (ataxia with epilepsy and other features)",
+      "Progressive myoclonic epilepsy syndromes",
+      "Mitochondrial disorders combining ataxia and seizures",
+      "Coeliac or other immune-mediated ataxia",
+      "Sporadic adult-onset idiopathic cerebellar ataxia"
     ],
-    [
-     "Primary Differentials",
-     "Other autosomal dominant spinocerebellar ataxias, particularly SCA2 which can also feature seizures, Dentatorubral-pallidoluysian",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted ATXN10 ATTCT repeat-expansion analysis",
+      "Electroencephalography to characterise seizure type and guide therapy",
+      "MRI brain to document cerebellar atrophy and exclude structural lesions",
+      "Broad SCA repeat-expansion panel when ATXN10 testing is negative",
+      "Nerve conduction studies to assess for associated neuropathy",
+      "Screening for acquired ataxia causes when the picture is atypical"
     ],
-    [
-     "Management Strategy",
-     "Control seizures with antiepileptic drug therapy tailored to generalised tonic-clonic and complex partial seizures and guided by",
-     "Core treatment modality"
+    "redFlags": [
+      "Status epilepticus or poorly controlled seizures requiring urgent management",
+      "Rapid neurological deterioration suggesting an alternative or superimposed process",
+      "Prominent myoclonus and cognitive decline raising suspicion of a progressive myoclonic epilepsy",
+      "New focal deficits indicating a structural lesion rather than SCA10 alone"
     ],
-    [
-     "Clinical Pitfall",
-     "Ordering only CAG-based SCA panels and missing the pentanucleotide ATXN10 expansion",
-     "Prevent diagnostic or management error"
+    "prognosis": "SCA10 generally progresses slowly over years to decades; seizure control is achievable in most patients and, when adequate, ataxia remains the main determinant of long-term disability. Prognosis is more guarded in those with frequent seizures or additional systemic features.",
+    "pitfalls": [
+      "Ordering only CAG-based SCA panels and missing the pentanucleotide ATXN10 expansion",
+      "Overlooking ancestry as a diagnostic clue in a patient with combined ataxia and epilepsy",
+      "Attributing seizures to an unrelated epilepsy syndrome and delaying genetic diagnosis",
+      "Assuming all dominant SCAs share the same molecular mechanism when counselling about recurrence"
+    ],
+    "references": [
+      "GeneReviews: Spinocerebellar Ataxia Type 10",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control seizures with antiepileptic drug therapy tailored to generalised tonic-clonic and complex partial seizures and guided by EEG",
+      "Provide symptomatic ataxia care with physiotherapy, occupational therapy, gait aids and speech and language therapy, as no disease-modifying treatment exists",
+      "Manage swallowing safety with assessment and diet modification as bulbar features develop",
+      "Monitor progression of ataxia and seizure frequency, adjusting antiepileptics to maintain adequate control",
+      "Coordinate care between neurology and epilepsy services, and note Latin American Amerindian ancestry when evaluating the family",
+      "Offer genetic counselling for autosomal dominant inheritance, the unstable expansion and anticipation across generations"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 10 (atxn10, with epilepsy)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-10-real-image",
-   "title": "Spinocerebellar ataxia type 10 (ATXN10, with epilepsy): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia_type_10-pathway",
+      "title": "Spinocerebellar ataxia type 10 (ATXN10, with epilepsy): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant cerebellar ataxia notable for its association with epilepsy, most often generalised tonic-clonic or complex partial seizures",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Status epilepticus or poorly controlled seizures requiring urgent management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted ATXN10 ATTCT repeat-expansion analysis, Electroencephalography to characterise seizure type and guide therapy, MRI brain to document cerebellar atrophy and exclude structural lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control seizures with antiepileptic drug therapy tailored to generalised tonic-clonic and complex partial seizures and guided by EEG"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Ordering only CAG-based SCA panels and missing the pentanucleotide ATXN10 expansion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 10 (atxn10, with epilepsy)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_10-matrix",
+      "title": "Spinocerebellar ataxia type 10 (ATXN10, with epilepsy): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant cerebellar ataxia notable for its association with epilepsy, most often generalised tonic-clonic or complex",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted ATXN10 ATTCT repeat-expansion analysis, Electroencephalography to characterise seizure type and guide therapy, MRI brain",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other autosomal dominant spinocerebellar ataxias, particularly SCA2 which can also feature seizures, Dentatorubral-pallidoluysian",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control seizures with antiepileptic drug therapy tailored to generalised tonic-clonic and complex partial seizures and guided by",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Ordering only CAG-based SCA panels and missing the pentanucleotide ATXN10 expansion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 10 (atxn10, with epilepsy)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_10-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ATXN10 ATTCT repeat-expansion analysis",
+          "cells": [
+            {
+              "text": "Pentanucleotide expansion, which is diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Seizure type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy; structural lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad SCA repeat-expansion panel",
+          "cells": [
+            {
+              "text": "When ATXN10 testing is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for acquired causes",
+          "cells": [
+            {
+              "text": "When the picture is atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_10-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinocerebellar ataxia type 2",
+          "cells": [
+            {
+              "text": "Another dominant SCA that can also feature seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive myoclonic epilepsy syndromes",
+          "cells": [
+            {
+              "text": "Prominent myoclonus and cognitive decline suggest this"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_10-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure therapy",
+          "cells": [
+            {
+              "text": "Tailored to generalised tonic-clonic and complex partial seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ataxia care",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy, gait aids and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow safety",
+          "cells": [
+            {
+              "text": "Assessment and diet modification as bulbar features develop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Ataxia progression and seizure frequency; antiepileptics adjusted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Neurology and epilepsy services; Latin American ancestry noted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant, unstable expansion, and anticipation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_10-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 10 (ATXN10, with epilepsy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cerebellar ataxia with seizures, possibly Latin American ancestry: suspected SCA10",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (status epilepticus, rapid decline, myoclonus with cognitive decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of status epilepticus or poorly controlled seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATXN10 ATTCT expansion testing; EEG; brain MRI; broad SCA panel if negative",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the ATXN10 pentanucleotide expansion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SCA2, progressive myoclonic epilepsy or mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiepileptic drugs tailored to seizure type",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and gait aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Swallow assessment and diet modification as bulbar features develop",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurology and epilepsy coordination; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ataxia and seizures both progress and both need ongoing management",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

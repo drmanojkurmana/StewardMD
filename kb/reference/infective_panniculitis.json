@@ -1,177 +1,475 @@
 {
- "id": "infective_panniculitis",
- "name": "infective panniculitis",
- "aliases": [
-  "infectious panniculitis",
-  "septic panniculitis"
- ],
- "class": "infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Weedon's Skin Pathology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An inflammation of subcutaneous fat caused directly by microbial infection, encompassing bacterial, mycobacterial, fungal and, rarely, parasitic organisms.",
-   "It should be suspected when panniculitis is accompanied by fever, systemic upset, immunosuppression, ulceration, abscess formation or a suppurative, draining quality.",
-   "Immunocompromised patients (including those on biologics, chemotherapy or corticosteroids, and diabetics) are at particular risk and may show atypical or opportunistic organisms.",
-   "Histology characteristically shows a mixed septal and lobular panniculitis with neutrophils, sometimes suppuration, necrosis and, in mycobacterial or fungal disease, granulomas.",
-   "Special stains (Gram, Ziehl-Neelsen, PAS, Grocott) and, crucially, tissue culture of a deep biopsy are needed because organisms may be sparse.",
-   "So-called bottom-heavy inflammation, deep dermal and subcutaneous extension, vascular proliferation and interstitial neutrophils are histological clues that favour an infective cause.",
-   "Empirical broad-spectrum antimicrobial therapy may be required in the septic patient while cultures are pending, then narrowed to the identified organism.",
-   "A deep incisional biopsy sent for both histology and microbiology, rather than a superficial punch, is the single most useful diagnostic step."
+  "id": "infective_panniculitis",
+  "name": "infective panniculitis",
+  "aliases": [
+    "infectious panniculitis",
+    "septic panniculitis"
   ],
-  "pathophysiology": "Infective panniculitis arises when micro-organisms reach the subcutaneous fat, either by direct inoculation through trauma or injection, by contiguous spread from overlying skin or deeper structures, or haematogenously in bacteraemic or immunocompromised hosts. Microbial proliferation and released enzymes and toxins damage adipocytes and vasculature, and the host mounts a predominantly neutrophilic and, for intracellular organisms such as mycobacteria and fungi, granulomatous inflammatory response. Fat necrosis, abscess formation and septal and lobular inflammation follow. The pattern and intensity of the reaction depend on the organism and the immune competence of the host, so immunosuppressed patients may show attenuated inflammation yet abundant organisms.",
-  "additionalDifferentials": [
-   "erythema nodosum",
-   "erythema induratum / nodular vasculitis",
-   "pancreatic panniculitis",
-   "lupus panniculitis",
-   "traumatic panniculitis",
-   "factitial panniculitis",
-   "subcutaneous panniculitis-like T-cell lymphoma"
-  ],
-  "additionalInvestigations": [
-   "deep incisional biopsy for histopathology with special stains (Gram, Ziehl-Neelsen, PAS, Grocott)",
-   "tissue culture for bacteria, mycobacteria and fungi from a deep specimen",
-   "blood cultures and inflammatory markers",
-   "full blood count and assessment of immune status (including HIV testing where relevant)",
-   "imaging (ultrasound or MRI) to define the extent of deep infection or abscess",
-   "polymerase chain reaction or molecular assays for fastidious organisms",
-   "review of injections, travel, animal exposure and immunosuppressive therapy"
-  ],
-  "redFlags": [
-   "sepsis with fever, hypotension or rapidly spreading induration",
-   "necrotising soft-tissue infection requiring urgent surgical debridement",
-   "immunosuppression with atypical or disseminated infection",
-   "fluctuance, discharge or abscess formation requiring drainage",
-   "failure to improve on empirical antibiotics, suggesting mycobacterial, fungal or resistant organisms"
-  ],
-  "prognosis": "Prognosis depends on the organism, host immune status and timeliness of treatment; most immunocompetent patients recover fully with appropriate antimicrobial therapy, whereas deep, necrotising or opportunistic infections in immunocompromised hosts carry appreciable morbidity and mortality.",
-  "pitfalls": [
-   "Treating an infective panniculitis as a sterile inflammatory panniculitis with immunosuppression, worsening the infection.",
-   "Relying on a superficial biopsy that misses deep organisms and yields negative cultures.",
-   "Omitting tissue culture and special stains when only routine histology is requested.",
-   "Underestimating atypical organisms in immunocompromised patients.",
-   "Missing an evolving necrotising infection that requires surgical rather than purely medical management."
-  ],
-  "references": [
-   "Weedon's Skin Pathology, current edition",
-   "Rook's Textbook of Dermatology, current edition",
-   "Fitzpatrick's Dermatology in General Medicine, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the cultured organism: empirical broad-spectrum antibacterials pending deep tissue culture, narrowed to targeted therapy, with prolonged multidrug antimycobacterial regimens for mycobacterial disease and systemic antifungals (azole or amphotericin-based agents) for fungal panniculitis",
-   "Drain and debride abscesses and necrotic subcutaneous fat surgically, with repeated exploration where suppuration persists",
-   "Provide supportive wound care, analgesia and management of systemic sepsis",
-   "Address host immunosuppression: review and reduce corticosteroids, biologics or chemotherapy where feasible, optimise glycaemic control in diabetics and treat underlying HIV",
-   "Undertake urgent surgical exploration with broad empirical antimicrobial cover for necrotising or rapidly progressive deep infection",
-   "Coordinate prolonged, organism-directed treatment across dermatology, infectious diseases, microbiology and surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "infective_panniculitis-pathway",
-   "title": "infective panniculitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An inflammation of subcutaneous fat caused directly by microbial infection, encompassing bacterial, mycobacterial, fungal and, rarely, parasitic organisms.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: sepsis with fever, hypotension or rapidly spreading induration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: deep incisional biopsy for histopathology with special stains (Gram, Ziehl-Neelsen, PAS, Grocott), tissue culture for bacteria, mycobacteria and fungi from a deep specimen, blood cultures and inflammatory markers"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the cultured organism: empirical broad-spectrum antibacterials pending deep tissue culture, narrowed to targeted therapy, with prolonged multidrug antimycobacterial regimens for mycobacterial"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating an infective panniculitis as a sterile inflammatory panniculitis with immunosuppression, worsening the infection."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of infective panniculitis."
-  }
- ],
- "tables": [
-  {
-   "id": "infective_panniculitis-matrix",
-   "title": "infective panniculitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An inflammation of subcutaneous fat caused directly by microbial infection, encompassing bacterial, mycobacterial, fungal and,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Weedon's Skin Pathology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An inflammation of subcutaneous fat caused directly by microbial infection, encompassing bacterial, mycobacterial, fungal and, rarely, parasitic organisms.",
+      "It should be suspected when panniculitis is accompanied by fever, systemic upset, immunosuppression, ulceration, abscess formation or a suppurative, draining quality.",
+      "Immunocompromised patients (including those on biologics, chemotherapy or corticosteroids, and diabetics) are at particular risk and may show atypical or opportunistic organisms.",
+      "Histology characteristically shows a mixed septal and lobular panniculitis with neutrophils, sometimes suppuration, necrosis and, in mycobacterial or fungal disease, granulomas.",
+      "Special stains (Gram, Ziehl-Neelsen, PAS, Grocott) and, crucially, tissue culture of a deep biopsy are needed because organisms may be sparse.",
+      "So-called bottom-heavy inflammation, deep dermal and subcutaneous extension, vascular proliferation and interstitial neutrophils are histological clues that favour an infective cause.",
+      "Empirical broad-spectrum antimicrobial therapy may be required in the septic patient while cultures are pending, then narrowed to the identified organism.",
+      "A deep incisional biopsy sent for both histology and microbiology, rather than a superficial punch, is the single most useful diagnostic step."
     ],
-    [
-     "Key Investigations",
-     "deep incisional biopsy for histopathology with special stains (Gram, Ziehl-Neelsen, PAS, Grocott), tissue culture for bacteria,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infective panniculitis arises when micro-organisms reach the subcutaneous fat, either by direct inoculation through trauma or injection, by contiguous spread from overlying skin or deeper structures, or haematogenously in bacteraemic or immunocompromised hosts. Microbial proliferation and released enzymes and toxins damage adipocytes and vasculature, and the host mounts a predominantly neutrophilic and, for intracellular organisms such as mycobacteria and fungi, granulomatous inflammatory response. Fat necrosis, abscess formation and septal and lobular inflammation follow. The pattern and intensity of the reaction depend on the organism and the immune competence of the host, so immunosuppressed patients may show attenuated inflammation yet abundant organisms.",
+    "additionalDifferentials": [
+      "erythema nodosum",
+      "erythema induratum / nodular vasculitis",
+      "pancreatic panniculitis",
+      "lupus panniculitis",
+      "traumatic panniculitis",
+      "factitial panniculitis",
+      "subcutaneous panniculitis-like T-cell lymphoma"
     ],
-    [
-     "Primary Differentials",
-     "erythema nodosum, erythema induratum / nodular vasculitis, pancreatic panniculitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "deep incisional biopsy for histopathology with special stains (Gram, Ziehl-Neelsen, PAS, Grocott)",
+      "tissue culture for bacteria, mycobacteria and fungi from a deep specimen",
+      "blood cultures and inflammatory markers",
+      "full blood count and assessment of immune status (including HIV testing where relevant)",
+      "imaging (ultrasound or MRI) to define the extent of deep infection or abscess",
+      "polymerase chain reaction or molecular assays for fastidious organisms",
+      "review of injections, travel, animal exposure and immunosuppressive therapy"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the cultured organism: empirical broad-spectrum antibacterials pending deep tissue culture, narrowed to",
-     "Core treatment modality"
+    "redFlags": [
+      "sepsis with fever, hypotension or rapidly spreading induration",
+      "necrotising soft-tissue infection requiring urgent surgical debridement",
+      "immunosuppression with atypical or disseminated infection",
+      "fluctuance, discharge or abscess formation requiring drainage",
+      "failure to improve on empirical antibiotics, suggesting mycobacterial, fungal or resistant organisms"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating an infective panniculitis as a sterile inflammatory panniculitis with immunosuppression, worsening the infection.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the organism, host immune status and timeliness of treatment; most immunocompetent patients recover fully with appropriate antimicrobial therapy, whereas deep, necrotising or opportunistic infections in immunocompromised hosts carry appreciable morbidity and mortality.",
+    "pitfalls": [
+      "Treating an infective panniculitis as a sterile inflammatory panniculitis with immunosuppression, worsening the infection.",
+      "Relying on a superficial biopsy that misses deep organisms and yields negative cultures.",
+      "Omitting tissue culture and special stains when only routine histology is requested.",
+      "Underestimating atypical organisms in immunocompromised patients.",
+      "Missing an evolving necrotising infection that requires surgical rather than purely medical management."
+    ],
+    "references": [
+      "Weedon's Skin Pathology, current edition",
+      "Rook's Textbook of Dermatology, current edition",
+      "Fitzpatrick's Dermatology in General Medicine, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the cultured organism: empirical broad-spectrum antibacterials pending deep tissue culture, narrowed to targeted therapy, with prolonged multidrug antimycobacterial regimens for mycobacterial disease and systemic antifungals (azole or amphotericin-based agents) for fungal panniculitis",
+      "Drain and debride abscesses and necrotic subcutaneous fat surgically, with repeated exploration where suppuration persists",
+      "Provide supportive wound care, analgesia and management of systemic sepsis",
+      "Address host immunosuppression: review and reduce corticosteroids, biologics or chemotherapy where feasible, optimise glycaemic control in diabetics and treat underlying HIV",
+      "Undertake urgent surgical exploration with broad empirical antimicrobial cover for necrotising or rapidly progressive deep infection",
+      "Coordinate prolonged, organism-directed treatment across dermatology, infectious diseases, microbiology and surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for infective panniculitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "infective-panniculitis-real-image",
-   "title": "infective panniculitis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "infective_panniculitis-pathway",
+      "title": "infective panniculitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An inflammation of subcutaneous fat caused directly by microbial infection, encompassing bacterial, mycobacterial, fungal and, rarely, parasitic organisms.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: sepsis with fever, hypotension or rapidly spreading induration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: deep incisional biopsy for histopathology with special stains (Gram, Ziehl-Neelsen, PAS, Grocott), tissue culture for bacteria, mycobacteria and fungi from a deep specimen, blood cultures and inflammatory markers"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the cultured organism: empirical broad-spectrum antibacterials pending deep tissue culture, narrowed to targeted therapy, with prolonged multidrug antimycobacterial regimens for mycobacterial"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating an infective panniculitis as a sterile inflammatory panniculitis with immunosuppression, worsening the infection."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of infective panniculitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "infective_panniculitis-matrix",
+      "title": "infective panniculitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An inflammation of subcutaneous fat caused directly by microbial infection, encompassing bacterial, mycobacterial, fungal and,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "deep incisional biopsy for histopathology with special stains (Gram, Ziehl-Neelsen, PAS, Grocott), tissue culture for bacteria,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "erythema nodosum, erythema induratum / nodular vasculitis, pancreatic panniculitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the cultured organism: empirical broad-spectrum antibacterials pending deep tissue culture, narrowed to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating an infective panniculitis as a sterile inflammatory panniculitis with immunosuppression, worsening the infection.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for infective panniculitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Weedon's Skin Pathology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infective_panniculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep incisional biopsy with special stains",
+          "cells": [
+            {
+              "text": "Gram, Ziehl-Neelsen, PAS and Grocott stains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep tissue culture",
+          "cells": [
+            {
+              "text": "Bacteria, mycobacteria and fungi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Systemic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and immune status including HIV",
+          "cells": [
+            {
+              "text": "Host immunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Extent of deep infection or abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR or molecular assays",
+          "cells": [
+            {
+              "text": "Fastidious organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure history",
+          "cells": [
+            {
+              "text": "Injections, travel, animal exposure and immunosuppressive therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infective_panniculitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythema nodosum",
+          "cells": [
+            {
+              "text": "Sterile; no fever, ulceration, abscess or suppuration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lupus panniculitis",
+          "cells": [
+            {
+              "text": "Sterile; no fever, ulceration, abscess or suppuration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infective_panniculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical then targeted antibacterials",
+          "cells": [
+            {
+              "text": "Broad-spectrum cover pending deep culture, then narrowed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterial disease",
+          "cells": [
+            {
+              "text": "Prolonged multidrug antimycobacterial regimens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal panniculitis",
+          "cells": [
+            {
+              "text": "Systemic azole or amphotericin-based agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Drain and debride abscesses and necrotic subcutaneous fat, repeating exploration if suppuration persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Wound care, analgesia and management of systemic sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Host immunity",
+          "cells": [
+            {
+              "text": "Reduce corticosteroids, biologics or chemotherapy where feasible; control glycaemia; treat HIV"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infective_panniculitis-dx-mgmt",
+      "title": "Diagnosis and management of infective panniculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender subcutaneous nodules or plaques with fever, ulceration or abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sepsis, necrotising infection, rapid spread or failure to improve on antibiotics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical debridement with broad empirical antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep incisional biopsy with special stains, deep culture, blood cultures, imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organism identified on deep culture or PCR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mycobacterial or fungal infection; repeat deep sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Narrow antibacterial therapy to the cultured organism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prolonged multidrug antimycobacterial therapy for mycobacteria",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic azole or amphotericin for fungal panniculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drain and debride abscesses and necrotic fat",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reduce immunosuppression and treat underlying HIV or diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Organism-directed treatment with surgical source control; relapse monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

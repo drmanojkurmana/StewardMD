@@ -1,173 +1,433 @@
 {
- "id": "nocturnal_enuresis",
- "name": "Nocturnal Enuresis",
- "aliases": [
-  "bedwetting",
-  "nighttime wetting",
-  "sleep enuresis"
- ],
- "class": "non_infective",
- "system": "Genitourinary",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Nocturnal enuresis is involuntary voiding during sleep in a child old enough to be expected to have night-time bladder control, generally around five years and older.",
-   "It is classified as primary when the child has never achieved a sustained period of night-time dryness and secondary when wetting returns after at least six months of dryness.",
-   "Monosymptomatic enuresis involves night-time wetting alone, whereas non-monosymptomatic enuresis is accompanied by daytime lower urinary tract symptoms such as urgency, frequency, or daytime wetting.",
-   "Common contributing factors include a family history, delayed maturation of arousal and bladder control, reduced overnight bladder capacity, and relative overnight excess of urine production.",
-   "Most primary monosymptomatic enuresis is not caused by serious disease, and evaluation is mainly history, examination, and urinalysis to exclude infection and glycosuria.",
-   "Secondary enuresis or associated daytime symptoms warrant closer evaluation for causes such as urinary tract infection, constipation, diabetes, or psychosocial stress.",
-   "First-line management emphasises reassurance, education, and behavioural measures, with the enuresis alarm being the most effective long-term intervention for motivated families.",
-   "Constipation frequently coexists and, when treated, wetting often improves, so bowel habits should always be assessed."
+  "id": "nocturnal_enuresis",
+  "name": "Nocturnal Enuresis",
+  "aliases": [
+    "bedwetting",
+    "nighttime wetting",
+    "sleep enuresis"
   ],
-  "pathophysiology": "Night-time continence depends on the balance between overnight urine production, bladder storage capacity, and the ability to either suppress bladder contractions during sleep or wake in response to a full bladder. Enuresis arises when this balance fails: some children produce a relatively large volume of urine at night, some have a smaller functional bladder capacity or overactive bladder, and many have a high arousal threshold so a full or contracting bladder does not wake them. These factors, strongly influenced by genetic predisposition and developmental maturation, often coexist. Constipation can reduce functional bladder capacity and provoke bladder overactivity, and secondary enuresis may reflect an acquired medical or psychosocial trigger.",
-  "additionalDifferentials": [
-   "Urinary tract infection",
-   "Constipation with secondary bladder dysfunction",
-   "Diabetes mellitus or diabetes insipidus",
-   "Overactive bladder or other daytime voiding dysfunction",
-   "Obstructive sleep apnoea",
-   "Psychosocial stressors (particularly in secondary enuresis)"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis to screen for infection and glucosuria",
-   "Assessment of bowel habits for constipation",
-   "Bladder diary of daytime symptoms and voiding pattern",
-   "Blood glucose if polyuria or other features suggest diabetes",
-   "Renal or bladder imaging only when structural or neurological pathology is suspected"
-  ],
-  "redFlags": [
-   "New-onset (secondary) enuresis with weight loss, polyuria, or polydipsia",
-   "Daytime incontinence, straining, or a poor urinary stream",
-   "Recurrent urinary tract infections",
-   "Neurological signs or spinal abnormalities",
-   "Significant behavioural change or evidence of psychosocial distress or abuse"
-  ],
-  "prognosis": "Primary monosymptomatic enuresis has a high rate of spontaneous resolution with age, and treatment can accelerate dryness; the outlook is generally excellent, though relapses can occur and cases with daytime symptoms may need more prolonged management.",
-  "pitfalls": [
-   "Treating the child punitively or blaming the child for an involuntary problem",
-   "Overlooking coexisting constipation as a contributor",
-   "Failing to distinguish monosymptomatic from non-monosymptomatic enuresis before choosing therapy",
-   "Missing an underlying cause of secondary enuresis such as infection or diabetes"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide education, reassurance and lifestyle measures, including sensible daytime fluids, avoidance of caffeine-containing drinks and voiding before sleep",
-   "Identify and treat constipation and any urinary tract infection first, as these commonly drive wetting",
-   "Offer an enuresis alarm as first-line active treatment for motivated children and families with monosymptomatic enuresis",
-   "Use desmopressin where rapid or short-term dryness is needed or an alarm is unsuitable, targeting the overnight excess of urine production",
-   "Add an anticholinergic such as oxybutynin for overactive-bladder features or non-monosymptomatic enuresis",
-   "Manage accompanying daytime lower urinary tract symptoms and provide psychological support where wetting causes distress",
-   "Investigate and refer secondary or treatment-resistant cases for causes such as diabetes or structural or neurological pathology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nocturnal_enuresis-pathway",
-   "title": "Nocturnal Enuresis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Nocturnal enuresis is involuntary voiding during sleep in a child old enough to be expected to have night-time bladder control, generally around five years and older.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New-onset (secondary) enuresis with weight loss, polyuria, or polydipsia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis to screen for infection and glucosuria, Assessment of bowel habits for constipation, Bladder diary of daytime symptoms and voiding pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide education, reassurance and lifestyle measures, including sensible daytime fluids, avoidance of caffeine-containing drinks and voiding before sleep"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the child punitively or blaming the child for an involuntary problem"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nocturnal enuresis."
-  }
- ],
- "tables": [
-  {
-   "id": "nocturnal_enuresis-matrix",
-   "title": "Nocturnal Enuresis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Nocturnal enuresis is involuntary voiding during sleep in a child old enough to be expected to have night-time bladder control,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Nocturnal enuresis is involuntary voiding during sleep in a child old enough to be expected to have night-time bladder control, generally around five years and older.",
+      "It is classified as primary when the child has never achieved a sustained period of night-time dryness and secondary when wetting returns after at least six months of dryness.",
+      "Monosymptomatic enuresis involves night-time wetting alone, whereas non-monosymptomatic enuresis is accompanied by daytime lower urinary tract symptoms such as urgency, frequency, or daytime wetting.",
+      "Common contributing factors include a family history, delayed maturation of arousal and bladder control, reduced overnight bladder capacity, and relative overnight excess of urine production.",
+      "Most primary monosymptomatic enuresis is not caused by serious disease, and evaluation is mainly history, examination, and urinalysis to exclude infection and glycosuria.",
+      "Secondary enuresis or associated daytime symptoms warrant closer evaluation for causes such as urinary tract infection, constipation, diabetes, or psychosocial stress.",
+      "First-line management emphasises reassurance, education, and behavioural measures, with the enuresis alarm being the most effective long-term intervention for motivated families.",
+      "Constipation frequently coexists and, when treated, wetting often improves, so bowel habits should always be assessed."
     ],
-    [
-     "Key Investigations",
-     "Urinalysis to screen for infection and glucosuria, Assessment of bowel habits for constipation, Bladder diary of daytime symptoms",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Night-time continence depends on the balance between overnight urine production, bladder storage capacity, and the ability to either suppress bladder contractions during sleep or wake in response to a full bladder. Enuresis arises when this balance fails: some children produce a relatively large volume of urine at night, some have a smaller functional bladder capacity or overactive bladder, and many have a high arousal threshold so a full or contracting bladder does not wake them. These factors, strongly influenced by genetic predisposition and developmental maturation, often coexist. Constipation can reduce functional bladder capacity and provoke bladder overactivity, and secondary enuresis may reflect an acquired medical or psychosocial trigger.",
+    "additionalDifferentials": [
+      "Urinary tract infection",
+      "Constipation with secondary bladder dysfunction",
+      "Diabetes mellitus or diabetes insipidus",
+      "Overactive bladder or other daytime voiding dysfunction",
+      "Obstructive sleep apnoea",
+      "Psychosocial stressors (particularly in secondary enuresis)"
     ],
-    [
-     "Primary Differentials",
-     "Urinary tract infection, Constipation with secondary bladder dysfunction, Diabetes mellitus or diabetes insipidus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis to screen for infection and glucosuria",
+      "Assessment of bowel habits for constipation",
+      "Bladder diary of daytime symptoms and voiding pattern",
+      "Blood glucose if polyuria or other features suggest diabetes",
+      "Renal or bladder imaging only when structural or neurological pathology is suspected"
     ],
-    [
-     "Management Strategy",
-     "Provide education, reassurance and lifestyle measures, including sensible daytime fluids, avoidance of caffeine-containing drinks",
-     "Core treatment modality"
+    "redFlags": [
+      "New-onset (secondary) enuresis with weight loss, polyuria, or polydipsia",
+      "Daytime incontinence, straining, or a poor urinary stream",
+      "Recurrent urinary tract infections",
+      "Neurological signs or spinal abnormalities",
+      "Significant behavioural change or evidence of psychosocial distress or abuse"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the child punitively or blaming the child for an involuntary problem",
-     "Prevent diagnostic or management error"
+    "prognosis": "Primary monosymptomatic enuresis has a high rate of spontaneous resolution with age, and treatment can accelerate dryness; the outlook is generally excellent, though relapses can occur and cases with daytime symptoms may need more prolonged management.",
+    "pitfalls": [
+      "Treating the child punitively or blaming the child for an involuntary problem",
+      "Overlooking coexisting constipation as a contributor",
+      "Failing to distinguish monosymptomatic from non-monosymptomatic enuresis before choosing therapy",
+      "Missing an underlying cause of secondary enuresis such as infection or diabetes"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide education, reassurance and lifestyle measures, including sensible daytime fluids, avoidance of caffeine-containing drinks and voiding before sleep",
+      "Identify and treat constipation and any urinary tract infection first, as these commonly drive wetting",
+      "Offer an enuresis alarm as first-line active treatment for motivated children and families with monosymptomatic enuresis",
+      "Use desmopressin where rapid or short-term dryness is needed or an alarm is unsuitable, targeting the overnight excess of urine production",
+      "Add an anticholinergic such as oxybutynin for overactive-bladder features or non-monosymptomatic enuresis",
+      "Manage accompanying daytime lower urinary tract symptoms and provide psychological support where wetting causes distress",
+      "Investigate and refer secondary or treatment-resistant cases for causes such as diabetes or structural or neurological pathology"
     ]
-   ],
-   "caption": "Overview comparison matrix for nocturnal enuresis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nocturnal-enuresis-real-image",
-   "title": "Nocturnal Enuresis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "nocturnal_enuresis-pathway",
+      "title": "Nocturnal Enuresis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Nocturnal enuresis is involuntary voiding during sleep in a child old enough to be expected to have night-time bladder control, generally around five years and older.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New-onset (secondary) enuresis with weight loss, polyuria, or polydipsia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis to screen for infection and glucosuria, Assessment of bowel habits for constipation, Bladder diary of daytime symptoms and voiding pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide education, reassurance and lifestyle measures, including sensible daytime fluids, avoidance of caffeine-containing drinks and voiding before sleep"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the child punitively or blaming the child for an involuntary problem"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nocturnal enuresis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nocturnal_enuresis-matrix",
+      "title": "Nocturnal Enuresis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Nocturnal enuresis is involuntary voiding during sleep in a child old enough to be expected to have night-time bladder control,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis to screen for infection and glucosuria, Assessment of bowel habits for constipation, Bladder diary of daytime symptoms",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Urinary tract infection, Constipation with secondary bladder dysfunction, Diabetes mellitus or diabetes insipidus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide education, reassurance and lifestyle measures, including sensible daytime fluids, avoidance of caffeine-containing drinks",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the child punitively or blaming the child for an involuntary problem",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nocturnal enuresis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nocturnal_enuresis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Infection and glucosuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel habit assessment",
+          "cells": [
+            {
+              "text": "Constipation as a contributor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder diary",
+          "cells": [
+            {
+              "text": "Daytime voiding pattern and symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "When polyuria or polydipsia is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nocturnal_enuresis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary tract infection",
+          "cells": [
+            {
+              "text": "Causes secondary enuresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constipation with secondary bladder dysfunction",
+          "cells": [
+            {
+              "text": "Common and treatable contributor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes mellitus or diabetes insipidus",
+          "cells": [
+            {
+              "text": "Polyuria with weight loss or polydipsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overactive bladder",
+          "cells": [
+            {
+              "text": "Daytime voiding dysfunction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nocturnal_enuresis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Education and reassurance",
+          "cells": [
+            {
+              "text": "Child is not to blame"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and caffeine advice",
+          "cells": [
+            {
+              "text": "Sensible daytime fluids; avoid caffeine-containing drinks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voiding before sleep",
+          "cells": [
+            {
+              "text": "Simple behavioural measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat constipation",
+          "cells": [
+            {
+              "text": "Can resolve secondary symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nocturnal_enuresis-dx-mgmt",
+      "title": "Diagnosis and management of Nocturnal Enuresis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Involuntary night-time wetting in a child of about five years or older",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new onset, weight loss, polyuria, daytime symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent work-up for diabetes or infection if red flags are present",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, bowel assessment, bladder diary, blood glucose if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Primary monosymptomatic enuresis with no red flags?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infection, constipation or diabetes; treat and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Education, reassurance and lifestyle measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sensible daytime fluids and no caffeine-containing drinks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Voiding before sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent outlook; spontaneous resolution with age is common, treatment speeds dryness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

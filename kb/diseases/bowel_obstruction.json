@@ -205,25 +205,505 @@
       "caption": "Diagnostic and clinical overview matrix for bowel obstruction."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "bowel-obstruction-real-image",
-      "title": "Bowel obstruction: Diagnostic Abdominal Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Intestinal Obstruction",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/intestinal-obstruction",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bowel_obstruction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising bowel obstruction and strangulation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Solid Viscera",
-          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+          "parameter": "Small bowel symptoms",
+          "cells": [
+            {
+              "text": "Early periumbilical cramps, vomiting, obstipation"
+            },
+            {
+              "text": "Partial obstruction may still pass diarrhoea"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Gastrointestinal Tract",
-          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+          "parameter": "Large bowel symptoms",
+          "cells": [
+            {
+              "text": "Gradual constipation, distension; vomiting late"
+            },
+            {
+              "text": "Lower cramps"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Mesentery & Peritoneum",
-          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+          "parameter": "Bowel sounds",
+          "cells": [
+            {
+              "text": "High-pitched hyperactive in simple obstruction"
+            },
+            {
+              "text": "Normal sounds do not exclude strangulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strangulation frequency",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Nearly 25% of small bowel obstructions"
+            },
+            {
+              "text": "Mostly hernia, volvulus, intussusception"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Strangulation signs",
+          "cells": [
+            {
+              "text": "Steady severe pain, tenderness, silent abdomen, shock, oliguria"
+            },
+            {
+              "text": "{{hy:Gangrene can develop within 6 h}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "WBC and acidosis",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "May mean strangulation; can be absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plain films",
+          "cells": [
+            {
+              "text": "Ladder of dilated loops, air-fluid levels"
+            },
+            {
+              "text": "May be absent in proximal or closed-loop obstruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumatosis intestinalis",
+          "cells": [
+            {
+              "text": "Gas in bowel wall"
+            },
+            {
+              "text": "Gangrene"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Caecal diameter",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">=13 cm",
+              "op": ">=",
+              "value": 13
+            },
+            {
+              "text": "High perforation risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Dilated proximal bowel with collapsed distal bowel"
+            },
+            {
+              "text": "Preferred when need for surgery unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast enema",
+          "cells": [
+            {
+              "text": "Bird-beak at the twist"
+            },
+            {
+              "text": "Volvulus; avoid oral barium if colonic obstruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Electrolytes",
+          "cells": [
+            {
+              "text": "Low sodium and potassium after vomiting"
+            },
+            {
+              "text": "Guide replacement"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "bowel_obstruction-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic mechanical bowel obstruction",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Paralytic ileus",
+          "cells": [
+            {
+              "text": "{{hy:Absent bowel sounds; pain rarely colicky}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonic pseudo-obstruction (Ogilvie)",
+          "cells": [
+            {
+              "text": "Colonic dilatation without a mechanical lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal impaction or severe constipation",
+          "cells": [
+            {
+              "text": "Hard stool on examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute mesenteric ischaemia",
+          "cells": [
+            {
+              "text": "Pain out of proportion to findings in a vascular patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria or lead colic",
+          "cells": [
+            {
+              "text": "Severe hyperperistaltic pain without obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic ketoacidosis",
+          "cells": [
+            {
+              "text": "Pain settles with metabolic correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric outlet obstruction",
+          "cells": [
+            {
+              "text": "Vomiting of old food hours after eating"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bowel_obstruction-treatment",
+      "kind": "treatment",
+      "title": "Management of bowel obstruction",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nasogastric suction, IV fluids, urinary catheter",
+          "cells": [
+            {
+              "text": "{{hy:All patients}}"
+            },
+            {
+              "text": "0.9% saline or Ringer lactate; replace Na and K by results; involve a surgeon"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Suspected bowel ischaemia"
+            },
+            {
+              "text": "For example cefoxitin or cefotetan before surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early laparotomy",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Complete small bowel obstruction or strangulation"
+            },
+            {
+              "text": "May delay 2 to 3 h to resuscitate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nonoperative trial",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Partial or adhesive obstruction without peritoneal signs"
+            },
+            {
+              "text": "About 85% of partial obstructions resolve; operate if persistent or ischaemic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endoscopic or rectal tube decompression",
+          "cells": [
+            {
+              "text": "Sigmoid volvulus"
+            },
+            {
+              "text": "Resect later; recurrence almost inevitable otherwise"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resection or caecopexy",
+          "cells": [
+            {
+              "text": "Caecal volvulus"
+            },
+            {
+              "text": "Caecopexy in frail patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resection with or without stoma",
+          "cells": [
+            {
+              "text": "Obstructing colon cancer"
+            },
+            {
+              "text": "Stenting debated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Analgesia and antiemetic",
+          "cells": [
+            {
+              "text": "Symptom relief"
+            },
+            {
+              "text": "Morphine and ondansetron in entry drug list; doses not stated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bowel_obstruction-dx-mgmt",
+      "title": "Diagnosis and management of bowel obstruction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Colicky pain, vomiting, distension, no flatus",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "NG suction, IV fluids, electrolytes; surgical review",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Plain films or CT",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Strangulation, perforation or peritonitis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Antibiotics and emergency surgery",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Sigmoid volvulus?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Endoscopic decompression, later resection",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Complete obstruction?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Early laparotomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nonoperative trial for partial or adhesive obstruction",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Resolving?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue conservative care",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n9",
+          "label": "No"
         }
       ]
     }

@@ -1,174 +1,490 @@
 {
- "id": "swyer_syndrome",
- "name": "Swyer syndrome (46,XY complete gonadal dysgenesis)",
- "aliases": [
-  "46,XY complete gonadal dysgenesis",
-  "XY pure gonadal dysgenesis",
-  "46,XY CGD",
-  "XY female"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive genetics",
- "specialty": "Reproductive Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A 46,XY individual with an entirely female phenotype, normal or tall stature, unambiguous female external genitalia and a normally formed uterus and vagina",
-   "Bilateral streak gonads produce neither testosterone nor anti-mullerian hormone, so mullerian structures persist and no virilisation occurs",
-   "Typically presents with primary amenorrhoea and absent or arrested pubertal development in an otherwise phenotypically female adolescent",
-   "About 15 to 20 per cent of cases are caused by loss-of-function variants in the SRY gene, with other cases involving genes such as NR5A1, MAP3K1, DHH and duplications affecting the ovarian-determining pathway",
-   "Streak gonads carrying Y-chromosome material carry a substantial risk of gonadoblastoma and dysgerminoma, so gonadectomy of the dysgenetic gonads is recommended",
-   "Oestrogen and progestogen replacement is needed to induce and maintain secondary sexual characteristics and protect bone health",
-   "Because the uterus is present, pregnancy through oocyte donation and assisted reproduction is possible after hormonal preparation"
+  "id": "swyer_syndrome",
+  "name": "Swyer syndrome (46,XY complete gonadal dysgenesis)",
+  "aliases": [
+    "46,XY complete gonadal dysgenesis",
+    "XY pure gonadal dysgenesis",
+    "46,XY CGD",
+    "XY female"
   ],
-  "pathophysiology": "In Swyer syndrome the karyotype is 46,XY but the bipotential gonad fails to differentiate into a testis, resulting in fibrous streak gonads. This failure of testis determination most often reflects disruption of the SRY gene or of downstream sex-determining transcription factors. Without functioning Sertoli cells there is no anti-mullerian hormone, so the mullerian ducts develop into a uterus, cervix and upper vagina; without Leydig cell testosterone the wolffian ducts regress and the external genitalia default to a female pattern. The streak gonads retain Y-derived germ cell material, which predisposes to malignant germ cell tumours, chiefly gonadoblastoma and dysgerminoma.",
-  "additionalDifferentials": [
-   "Complete androgen insensitivity syndrome (absent uterus, testes present)",
-   "46,XX gonadal dysgenesis",
-   "Turner syndrome and its mosaic forms",
-   "Mullerian agenesis (Mayer-Rokitansky-Kuster-Hauser)",
-   "Congenital hypogonadotropic hypogonadism",
-   "Ovotesticular disorder of sex development"
-  ],
-  "additionalInvestigations": [
-   "Peripheral blood karyotype with SRY analysis and, where indicated, gene panel testing (NR5A1, MAP3K1, DHH)",
-   "Serum gonadotropins showing hypergonadotropic hypogonadism with low oestradiol",
-   "Pelvic ultrasound or MRI to confirm a uterus and characterise streak gonads",
-   "Tumour markers and imaging surveillance for germ cell malignancy in retained gonads",
-   "Bone mineral density assessment given oestrogen deficiency",
-   "Histological examination of removed gonadal tissue"
-  ],
-  "redFlags": [
-   "A palpable or radiologically enlarging gonadal mass suggesting gonadoblastoma or dysgerminoma",
-   "Signs of virilisation, which would suggest an alternative diagnosis or a hormonally active tumour",
-   "Severe osteoporosis or fragility fracture from untreated oestrogen deficiency",
-   "Delayed diagnosis leaving Y-bearing gonads in situ into adulthood"
-  ],
-  "prognosis": "With timely gonadectomy of the dysgenetic gonads and appropriate hormone replacement, individuals have a good long-term outlook and can achieve pregnancy via oocyte donation. The main threat is malignant transformation of retained Y-bearing streak gonads, which is largely preventable with early gonadectomy.",
-  "pitfalls": [
-   "Mislabelling the condition as simple delayed puberty and missing the karyotype",
-   "Leaving dysgenetic gonads with Y material in place and overlooking tumour risk",
-   "Confusing it with androgen insensitivity, in which no uterus is present",
-   "Neglecting bone protection and psychological support during hormone induction"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on disorders of sex development"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform gonadectomy of the dysgenetic streak gonads to eliminate the substantial risk of gonadoblastoma and dysgerminoma from retained Y-bearing tissue",
-   "Induce puberty with oestrogen and then maintain secondary sexual characteristics with combined oestrogen and progestogen replacement, the progestogen protecting the retained uterus",
-   "Offer assisted reproduction through oocyte or embryo donation, as the uterus is present and can support pregnancy",
-   "Monitor and protect bone health with bone mineral density assessment given oestrogen deficiency",
-   "Provide psychological support and address disclosure and identity issues",
-   "Offer genetic counselling and consider testing for SRY and related gene variants",
-   "Manage through a multidisciplinary team of reproductive endocrinology, gynaecology, clinical genetics and psychology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "swyer_syndrome-pathway",
-   "title": "Swyer syndrome (46,XY complete gonadal dysgenesis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A 46,XY individual with an entirely female phenotype, normal or tall stature, unambiguous female external genitalia and a normally formed uterus and vagina",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A palpable or radiologically enlarging gonadal mass suggesting gonadoblastoma or dysgerminoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Peripheral blood karyotype with SRY analysis and, where indicated, gene panel testing (NR5A1, MAP3K1, DHH), Serum gonadotropins showing hypergonadotropic hypogonadism with low oestradiol, Pelvic ultrasound or MRI to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform gonadectomy of the dysgenetic streak gonads to eliminate the substantial risk of gonadoblastoma and dysgerminoma from retained Y-bearing tissue"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the condition as simple delayed puberty and missing the karyotype"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of swyer syndrome (46,xy complete gonadal dysgenesis)."
-  }
- ],
- "tables": [
-  {
-   "id": "swyer_syndrome-matrix",
-   "title": "Swyer syndrome (46,XY complete gonadal dysgenesis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A 46,XY individual with an entirely female phenotype, normal or tall stature, unambiguous female external genitalia and a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive genetics",
+  "specialty": "Reproductive Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A 46,XY individual with an entirely female phenotype, normal or tall stature, unambiguous female external genitalia and a normally formed uterus and vagina",
+      "Bilateral streak gonads produce neither testosterone nor anti-mullerian hormone, so mullerian structures persist and no virilisation occurs",
+      "Typically presents with primary amenorrhoea and absent or arrested pubertal development in an otherwise phenotypically female adolescent",
+      "About 15 to 20 per cent of cases are caused by loss-of-function variants in the SRY gene, with other cases involving genes such as NR5A1, MAP3K1, DHH and duplications affecting the ovarian-determining pathway",
+      "Streak gonads carrying Y-chromosome material carry a substantial risk of gonadoblastoma and dysgerminoma, so gonadectomy of the dysgenetic gonads is recommended",
+      "Oestrogen and progestogen replacement is needed to induce and maintain secondary sexual characteristics and protect bone health",
+      "Because the uterus is present, pregnancy through oocyte donation and assisted reproduction is possible after hormonal preparation"
     ],
-    [
-     "Key Investigations",
-     "Peripheral blood karyotype with SRY analysis and, where indicated, gene panel testing (NR5A1, MAP3K1, DHH), Serum gonadotropins",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In Swyer syndrome the karyotype is 46,XY but the bipotential gonad fails to differentiate into a testis, resulting in fibrous streak gonads. This failure of testis determination most often reflects disruption of the SRY gene or of downstream sex-determining transcription factors. Without functioning Sertoli cells there is no anti-mullerian hormone, so the mullerian ducts develop into a uterus, cervix and upper vagina; without Leydig cell testosterone the wolffian ducts regress and the external genitalia default to a female pattern. The streak gonads retain Y-derived germ cell material, which predisposes to malignant germ cell tumours, chiefly gonadoblastoma and dysgerminoma.",
+    "additionalDifferentials": [
+      "Complete androgen insensitivity syndrome (absent uterus, testes present)",
+      "46,XX gonadal dysgenesis",
+      "Turner syndrome and its mosaic forms",
+      "Mullerian agenesis (Mayer-Rokitansky-Kuster-Hauser)",
+      "Congenital hypogonadotropic hypogonadism",
+      "Ovotesticular disorder of sex development"
     ],
-    [
-     "Primary Differentials",
-     "Complete androgen insensitivity syndrome (absent uterus, testes present), 46,XX gonadal dysgenesis, Turner syndrome and its",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Peripheral blood karyotype with SRY analysis and, where indicated, gene panel testing (NR5A1, MAP3K1, DHH)",
+      "Serum gonadotropins showing hypergonadotropic hypogonadism with low oestradiol",
+      "Pelvic ultrasound or MRI to confirm a uterus and characterise streak gonads",
+      "Tumour markers and imaging surveillance for germ cell malignancy in retained gonads",
+      "Bone mineral density assessment given oestrogen deficiency",
+      "Histological examination of removed gonadal tissue"
     ],
-    [
-     "Management Strategy",
-     "Perform gonadectomy of the dysgenetic streak gonads to eliminate the substantial risk of gonadoblastoma and dysgerminoma from",
-     "Core treatment modality"
+    "redFlags": [
+      "A palpable or radiologically enlarging gonadal mass suggesting gonadoblastoma or dysgerminoma",
+      "Signs of virilisation, which would suggest an alternative diagnosis or a hormonally active tumour",
+      "Severe osteoporosis or fragility fracture from untreated oestrogen deficiency",
+      "Delayed diagnosis leaving Y-bearing gonads in situ into adulthood"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the condition as simple delayed puberty and missing the karyotype",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely gonadectomy of the dysgenetic gonads and appropriate hormone replacement, individuals have a good long-term outlook and can achieve pregnancy via oocyte donation. The main threat is malignant transformation of retained Y-bearing streak gonads, which is largely preventable with early gonadectomy.",
+    "pitfalls": [
+      "Mislabelling the condition as simple delayed puberty and missing the karyotype",
+      "Leaving dysgenetic gonads with Y material in place and overlooking tumour risk",
+      "Confusing it with androgen insensitivity, in which no uterus is present",
+      "Neglecting bone protection and psychological support during hormone induction"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on disorders of sex development"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform gonadectomy of the dysgenetic streak gonads to eliminate the substantial risk of gonadoblastoma and dysgerminoma from retained Y-bearing tissue",
+      "Induce puberty with oestrogen and then maintain secondary sexual characteristics with combined oestrogen and progestogen replacement, the progestogen protecting the retained uterus",
+      "Offer assisted reproduction through oocyte or embryo donation, as the uterus is present and can support pregnancy",
+      "Monitor and protect bone health with bone mineral density assessment given oestrogen deficiency",
+      "Provide psychological support and address disclosure and identity issues",
+      "Offer genetic counselling and consider testing for SRY and related gene variants",
+      "Manage through a multidisciplinary team of reproductive endocrinology, gynaecology, clinical genetics and psychology"
     ]
-   ],
-   "caption": "Overview comparison matrix for swyer syndrome (46,xy complete gonadal dysgenesis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "swyer-syndrome-real-image",
-   "title": "Swyer syndrome (46,XY complete gonadal dysgenesis): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "swyer_syndrome-pathway",
+      "title": "Swyer syndrome (46,XY complete gonadal dysgenesis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A 46,XY individual with an entirely female phenotype, normal or tall stature, unambiguous female external genitalia and a normally formed uterus and vagina",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A palpable or radiologically enlarging gonadal mass suggesting gonadoblastoma or dysgerminoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Peripheral blood karyotype with SRY analysis and, where indicated, gene panel testing (NR5A1, MAP3K1, DHH), Serum gonadotropins showing hypergonadotropic hypogonadism with low oestradiol, Pelvic ultrasound or MRI to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform gonadectomy of the dysgenetic streak gonads to eliminate the substantial risk of gonadoblastoma and dysgerminoma from retained Y-bearing tissue"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the condition as simple delayed puberty and missing the karyotype"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of swyer syndrome (46,xy complete gonadal dysgenesis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "swyer_syndrome-matrix",
+      "title": "Swyer syndrome (46,XY complete gonadal dysgenesis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A 46,XY individual with an entirely female phenotype, normal or tall stature, unambiguous female external genitalia and a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Peripheral blood karyotype with SRY analysis and, where indicated, gene panel testing (NR5A1, MAP3K1, DHH), Serum gonadotropins",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Complete androgen insensitivity syndrome (absent uterus, testes present), 46,XX gonadal dysgenesis, Turner syndrome and its",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform gonadectomy of the dysgenetic streak gonads to eliminate the substantial risk of gonadoblastoma and dysgerminoma from",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the condition as simple delayed puberty and missing the karyotype",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for swyer syndrome (46,xy complete gonadal dysgenesis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "swyer_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Swyer syndrome (46,XY complete gonadal dysgenesis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Swyer syndrome: 46,XY female with primary amenorrhoea and no puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (gonadal mass, virilisation, or severe osteoporosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation of a gonadal mass for gonadoblastoma or dysgerminoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype with SRY analysis; gonadotropins; pelvic ultrasound or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the karyotype 46,XY with a uterus and streak gonads?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider androgen insensitivity, 46,XX gonadal dysgenesis or Turner syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gonadectomy of dysgenetic streak gonads to remove tumour risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oestrogen induction of puberty, then combined oestrogen and progestogen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bone mineral density assessment and bone protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assisted reproduction with oocyte donation, as the uterus is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Psychological support and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good long-term outlook with timely gonadectomy and hormone replacement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "swyer_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral blood karyotype with SRY analysis",
+          "cells": [
+            {
+              "text": "46,XY karyotype; SRY loss-of-function variants in about 15 to 20 per cent of cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel testing (NR5A1, MAP3K1, DHH)",
+          "cells": [
+            {
+              "text": "Other causes of the phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum gonadotropins and oestradiol",
+          "cells": [
+            {
+              "text": "Hypergonadotropic hypogonadism with low oestradiol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Uterus present; characterises the streak gonads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers and imaging surveillance",
+          "cells": [
+            {
+              "text": "Germ cell malignancy in retained gonads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone mineral density assessment",
+          "cells": [
+            {
+              "text": "Effect of oestrogen deficiency on bone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "swyer_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete androgen insensitivity syndrome",
+          "cells": [
+            {
+              "text": "No uterus is present in androgen insensitivity; a uterus is present in Swyer syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mullerian agenesis",
+          "cells": [
+            {
+              "text": "Uterus is absent; pelvic imaging confirms a uterus in Swyer syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Turner syndrome and its mosaic forms",
+          "cells": [
+            {
+              "text": "Karyotype is 46,XY in Swyer syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "46,XX gonadal dysgenesis",
+          "cells": [
+            {
+              "text": "Karyotype is 46,XX rather than 46,XY"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "swyer_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gonadectomy of streak gonads",
+          "cells": [
+            {
+              "text": "Removes the risk of gonadoblastoma and dysgerminoma from retained Y-bearing tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen induction of puberty",
+          "cells": [
+            {
+              "text": "Then combined oestrogen and progestogen to maintain secondary sexual characteristics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progestogen for the uterus",
+          "cells": [
+            {
+              "text": "Protects the retained uterus during replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assisted reproduction",
+          "cells": [
+            {
+              "text": "Oocyte or embryo donation, as the uterus is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health",
+          "cells": [
+            {
+              "text": "Bone mineral density assessment given oestrogen deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Disclosure and identity issues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Consider SRY and related gene variant testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

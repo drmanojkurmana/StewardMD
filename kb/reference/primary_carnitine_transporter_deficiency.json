@@ -1,176 +1,472 @@
 {
- "id": "primary_carnitine_transporter_deficiency",
- "name": "Primary carnitine transporter deficiency",
- "aliases": [
-  "systemic primary carnitine deficiency",
-  "SLC22A5 deficiency",
-  "OCTN2 deficiency",
-  "carnitine uptake defect",
-  "CUD"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive defect of the SLC22A5-encoded OCTN2 plasma-membrane carnitine transporter, impairing carnitine uptake into cells and its reabsorption by the renal tubule",
-   "Renal carnitine wasting causes very low plasma total and free carnitine and intracellular carnitine depletion",
-   "Presentations include infantile hypoketotic hypoglycaemia with hepatic dysfunction, and childhood cardiomyopathy with skeletal myopathy",
-   "Some individuals (including mothers detected through a positive newborn screen in their infant) are asymptomatic yet at risk of arrhythmia or sudden death",
-   "Newborn screening hallmark is a markedly low free carnitine (C0), which may also reflect maternal deficiency detected via the baby",
-   "The disorder is highly responsive to carnitine supplementation, which reverses cardiomyopathy and prevents crises when adherence is maintained",
-   "Lifelong carnitine replacement and avoidance of prolonged fasting are the mainstays of management"
+  "id": "primary_carnitine_transporter_deficiency",
+  "name": "Primary carnitine transporter deficiency",
+  "aliases": [
+    "systemic primary carnitine deficiency",
+    "SLC22A5 deficiency",
+    "OCTN2 deficiency",
+    "carnitine uptake defect",
+    "CUD"
   ],
-  "pathophysiology": "OCTN2 is a high-affinity sodium-dependent carnitine transporter expressed in heart, muscle, kidney and other tissues, responsible for cellular carnitine uptake and renal tubular reabsorption. Loss of function causes urinary carnitine loss and systemic carnitine depletion, so long-chain fatty acids cannot be shuttled into mitochondria for beta-oxidation because carnitine, the obligatory carrier, is lacking. The resulting energy deficit affects the heart and skeletal muscle, producing cardiomyopathy and myopathy, and impairs hepatic ketogenesis during fasting, causing hypoketotic hypoglycaemia; unlike downstream oxidation defects, the block is due to substrate (carnitine) deficiency rather than a defective enzyme.",
-  "additionalDifferentials": [
-   "Secondary carnitine deficiency from other fatty-acid oxidation or organic acid disorders",
-   "Carnitine palmitoyltransferase and translocase deficiencies",
-   "Primary dilated cardiomyopathy of other cause",
-   "Reye-like illness and other causes of infantile hypoglycaemia",
-   "Dietary carnitine deficiency or renal Fanconi syndrome causing carnitine loss",
-   "Mitochondrial disorders presenting with cardiomyopathy and myopathy"
-  ],
-  "additionalInvestigations": [
-   "Plasma total and free carnitine (markedly reduced)",
-   "Newborn screening acylcarnitine profile with very low free carnitine (C0)",
-   "Urine carnitine to demonstrate renal carnitine wasting with a low reabsorption fraction",
-   "Echocardiography and ECG to detect cardiomyopathy and arrhythmia",
-   "SLC22A5 molecular genetic testing for confirmation",
-   "Fibroblast carnitine transport study where genotype is inconclusive, and testing of the mother when a neonate screens positive"
-  ],
-  "redFlags": [
-   "Cardiomyopathy with heart failure or arrhythmia",
-   "Hypoketotic hypoglycaemia with encephalopathy in infancy",
-   "Family history of sudden cardiac death or an affected mother identified through the infant",
-   "Rapid clinical deterioration during fasting or intercurrent illness"
-  ],
-  "prognosis": "Prognosis is generally excellent with early diagnosis and consistent carnitine supplementation, which reverses cardiac and muscle disease; the main risks are arrhythmia and sudden death in untreated or non-adherent individuals.",
-  "pitfalls": [
-   "Failing to distinguish primary transporter deficiency from secondary carnitine depletion",
-   "Not testing the mother when a newborn screens with low free carnitine",
-   "Interrupting carnitine supplementation, risking recurrence of cardiomyopathy",
-   "Overlooking asymptomatic adults who remain at risk of sudden cardiac events"
-  ],
-  "references": [
-   "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide lifelong oral L-carnitine supplementation as the definitive treatment, reversing cardiomyopathy and preventing hypoglycaemic crises",
-   "Avoid fasting and maintain regular feeding, with an emergency high-carbohydrate regimen during illness",
-   "Treat intercurrent illness with intravenous dextrose to prevent hypoketotic hypoglycaemia",
-   "Perform serial echocardiography and electrocardiography to monitor for cardiomyopathy and arrhythmia",
-   "Monitor plasma free carnitine and reinforce adherence to prevent sudden cardiac events",
-   "Offer genetic counselling and sibling screening for this autosomal recessive disorder, and test the mother of a screen-positive neonate",
-   "Supply sick-day rules and emergency documentation",
-   "Follow up jointly with metabolic medicine and cardiology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_carnitine_transporter_deficiency-pathway",
-   "title": "Primary carnitine transporter deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive defect of the SLC22A5-encoded OCTN2 plasma-membrane carnitine transporter, impairing carnitine uptake into cells and its reabsorption by the renal tubule",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiomyopathy with heart failure or arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma total and free carnitine (markedly reduced), Newborn screening acylcarnitine profile with very low free carnitine (C0), Urine carnitine to demonstrate renal carnitine wasting with a low reabsorption fraction"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide lifelong oral L-carnitine supplementation as the definitive treatment, reversing cardiomyopathy and preventing hypoglycaemic crises"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish primary transporter deficiency from secondary carnitine depletion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary carnitine transporter deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_carnitine_transporter_deficiency-matrix",
-   "title": "Primary carnitine transporter deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive defect of the SLC22A5-encoded OCTN2 plasma-membrane carnitine transporter, impairing carnitine uptake into",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive defect of the SLC22A5-encoded OCTN2 plasma-membrane carnitine transporter, impairing carnitine uptake into cells and its reabsorption by the renal tubule",
+      "Renal carnitine wasting causes very low plasma total and free carnitine and intracellular carnitine depletion",
+      "Presentations include infantile hypoketotic hypoglycaemia with hepatic dysfunction, and childhood cardiomyopathy with skeletal myopathy",
+      "Some individuals (including mothers detected through a positive newborn screen in their infant) are asymptomatic yet at risk of arrhythmia or sudden death",
+      "Newborn screening hallmark is a markedly low free carnitine (C0), which may also reflect maternal deficiency detected via the baby",
+      "The disorder is highly responsive to carnitine supplementation, which reverses cardiomyopathy and prevents crises when adherence is maintained",
+      "Lifelong carnitine replacement and avoidance of prolonged fasting are the mainstays of management"
     ],
-    [
-     "Key Investigations",
-     "Plasma total and free carnitine (markedly reduced), Newborn screening acylcarnitine profile with very low free carnitine (C0),",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "OCTN2 is a high-affinity sodium-dependent carnitine transporter expressed in heart, muscle, kidney and other tissues, responsible for cellular carnitine uptake and renal tubular reabsorption. Loss of function causes urinary carnitine loss and systemic carnitine depletion, so long-chain fatty acids cannot be shuttled into mitochondria for beta-oxidation because carnitine, the obligatory carrier, is lacking. The resulting energy deficit affects the heart and skeletal muscle, producing cardiomyopathy and myopathy, and impairs hepatic ketogenesis during fasting, causing hypoketotic hypoglycaemia; unlike downstream oxidation defects, the block is due to substrate (carnitine) deficiency rather than a defective enzyme.",
+    "additionalDifferentials": [
+      "Secondary carnitine deficiency from other fatty-acid oxidation or organic acid disorders",
+      "Carnitine palmitoyltransferase and translocase deficiencies",
+      "Primary dilated cardiomyopathy of other cause",
+      "Reye-like illness and other causes of infantile hypoglycaemia",
+      "Dietary carnitine deficiency or renal Fanconi syndrome causing carnitine loss",
+      "Mitochondrial disorders presenting with cardiomyopathy and myopathy"
     ],
-    [
-     "Primary Differentials",
-     "Secondary carnitine deficiency from other fatty-acid oxidation or organic acid disorders, Carnitine palmitoyltransferase and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma total and free carnitine (markedly reduced)",
+      "Newborn screening acylcarnitine profile with very low free carnitine (C0)",
+      "Urine carnitine to demonstrate renal carnitine wasting with a low reabsorption fraction",
+      "Echocardiography and ECG to detect cardiomyopathy and arrhythmia",
+      "SLC22A5 molecular genetic testing for confirmation",
+      "Fibroblast carnitine transport study where genotype is inconclusive, and testing of the mother when a neonate screens positive"
     ],
-    [
-     "Management Strategy",
-     "Provide lifelong oral L-carnitine supplementation as the definitive treatment, reversing cardiomyopathy and preventing",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiomyopathy with heart failure or arrhythmia",
+      "Hypoketotic hypoglycaemia with encephalopathy in infancy",
+      "Family history of sudden cardiac death or an affected mother identified through the infant",
+      "Rapid clinical deterioration during fasting or intercurrent illness"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish primary transporter deficiency from secondary carnitine depletion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally excellent with early diagnosis and consistent carnitine supplementation, which reverses cardiac and muscle disease; the main risks are arrhythmia and sudden death in untreated or non-adherent individuals.",
+    "pitfalls": [
+      "Failing to distinguish primary transporter deficiency from secondary carnitine depletion",
+      "Not testing the mother when a newborn screens with low free carnitine",
+      "Interrupting carnitine supplementation, risking recurrence of cardiomyopathy",
+      "Overlooking asymptomatic adults who remain at risk of sudden cardiac events"
+    ],
+    "references": [
+      "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide lifelong oral L-carnitine supplementation as the definitive treatment, reversing cardiomyopathy and preventing hypoglycaemic crises",
+      "Avoid fasting and maintain regular feeding, with an emergency high-carbohydrate regimen during illness",
+      "Treat intercurrent illness with intravenous dextrose to prevent hypoketotic hypoglycaemia",
+      "Perform serial echocardiography and electrocardiography to monitor for cardiomyopathy and arrhythmia",
+      "Monitor plasma free carnitine and reinforce adherence to prevent sudden cardiac events",
+      "Offer genetic counselling and sibling screening for this autosomal recessive disorder, and test the mother of a screen-positive neonate",
+      "Supply sick-day rules and emergency documentation",
+      "Follow up jointly with metabolic medicine and cardiology"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary carnitine transporter deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-carnitine-transporter-deficiency-real-image",
-   "title": "Primary carnitine transporter deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "primary_carnitine_transporter_deficiency-pathway",
+      "title": "Primary carnitine transporter deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive defect of the SLC22A5-encoded OCTN2 plasma-membrane carnitine transporter, impairing carnitine uptake into cells and its reabsorption by the renal tubule",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiomyopathy with heart failure or arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma total and free carnitine (markedly reduced), Newborn screening acylcarnitine profile with very low free carnitine (C0), Urine carnitine to demonstrate renal carnitine wasting with a low reabsorption fraction"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide lifelong oral L-carnitine supplementation as the definitive treatment, reversing cardiomyopathy and preventing hypoglycaemic crises"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish primary transporter deficiency from secondary carnitine depletion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary carnitine transporter deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_carnitine_transporter_deficiency-matrix",
+      "title": "Primary carnitine transporter deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive defect of the SLC22A5-encoded OCTN2 plasma-membrane carnitine transporter, impairing carnitine uptake into",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma total and free carnitine (markedly reduced), Newborn screening acylcarnitine profile with very low free carnitine (C0),",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary carnitine deficiency from other fatty-acid oxidation or organic acid disorders, Carnitine palmitoyltransferase and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide lifelong oral L-carnitine supplementation as the definitive treatment, reversing cardiomyopathy and preventing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish primary transporter deficiency from secondary carnitine depletion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary carnitine transporter deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_carnitine_transporter_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma total and free carnitine",
+          "cells": [
+            {
+              "text": "Markedly reduced carnitine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Very low free carnitine (C0)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine carnitine",
+          "cells": [
+            {
+              "text": "Renal carnitine wasting with a low reabsorption fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC22A5 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibroblast carnitine transport study",
+          "cells": [
+            {
+              "text": "Where genotype is inconclusive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_carnitine_transporter_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary carnitine deficiency from other fatty-acid-oxidation or organic acid disorders",
+          "cells": [
+            {
+              "text": "Carnitine deficiency secondary to another metabolic disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary carnitine deficiency or renal Fanconi syndrome",
+          "cells": [
+            {
+              "text": "Renal carnitine wasting on urine carnitine testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_carnitine_transporter_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong oral L-carnitine",
+          "cells": [
+            {
+              "text": "Definitive treatment; reverses cardiomyopathy and prevents hypoglycaemic crises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid fasting",
+          "cells": [
+            {
+              "text": "Regular feeding, with a high-carbohydrate regimen during illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intercurrent illness",
+          "cells": [
+            {
+              "text": "Intravenous dextrose to prevent hypoketotic hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "Serial echocardiography and electrocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma free carnitine",
+          "cells": [
+            {
+              "text": "Monitor and reinforce adherence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Sibling screening; test the mother of a screen-positive neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day rules",
+          "cells": [
+            {
+              "text": "Supply emergency documentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Metabolic medicine and cardiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_carnitine_transporter_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Primary carnitine transporter deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected carnitine transporter deficiency: low plasma and free carnitine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiomyopathy, hypoketotic hypoglycaemia with encephalopathy, or fasting decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac assessment and IV dextrose for decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma and urine carnitine; newborn profile; echo and ECG; SLC22A5 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do carnitine studies and SLC22A5 testing confirm the transporter defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secondary carnitine deficiency or renal carnitine loss; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong oral L-carnitine as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid fasting; regular feeds and a high-carbohydrate regimen in illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous dextrose during intercurrent illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography and ECG for cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Metabolic medicine and cardiology follow-up; genetic counselling and sibling screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

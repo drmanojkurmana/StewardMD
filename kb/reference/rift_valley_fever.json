@@ -1,175 +1,406 @@
 {
- "id": "rift_valley_fever",
- "name": "Rift Valley fever",
- "aliases": [
-  "RVF",
-  "Rift Valley fever virus infection",
-  "enzootic hepatitis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mosquito-borne phlebovirus zoonosis of sub-Saharan Africa and the Arabian Peninsula, with epizootics in livestock heralding human outbreaks, often after heavy rainfall and flooding",
-   "Humans are most often infected through direct contact with the blood or tissues of infected animals (abattoir workers, herders, veterinarians) as well as by mosquito bites",
-   "Most infections are a self-limiting influenza-like febrile illness, but a minority develop severe disease with haemorrhagic fever, hepatitis, encephalitis, or retinitis",
-   "A characteristic delayed ocular complication is macular or paramacular retinitis that can cause permanent visual loss weeks after the acute illness",
-   "The haemorrhagic form features jaundice, mucosal bleeding, and hepatic necrosis and carries a high mortality",
-   "Management is supportive; there is no licensed specific antiviral, and ribavirin has been considered in some settings for other viral haemorrhagic fevers but is not established for Rift Valley fever",
-   "Diagnosis uses RT-PCR and serology (IgM/IgG), and laboratory handling requires enhanced biosafety because of aerosol infectivity"
+  "id": "rift_valley_fever",
+  "name": "Rift Valley fever",
+  "aliases": [
+    "RVF",
+    "Rift Valley fever virus infection",
+    "enzootic hepatitis"
   ],
-  "pathophysiology": "Rift Valley fever virus is transmitted by infected mosquitoes and by direct contact with aerosols or fluids from viraemic animals during slaughter or handling. After entry the virus replicates widely and is markedly hepatotropic, producing hepatocellular necrosis. Severe disease reflects a combination of direct viral injury, cytokine-driven vascular dysfunction, and coagulopathy, leading to haemorrhage, hepatic failure, or central nervous system and retinal involvement. Immune-mediated inflammation contributes to the delayed retinitis and encephalitic complications.",
-  "additionalDifferentials": [
-   "Malaria",
-   "Leptospirosis",
-   "Viral hepatitis",
-   "Other viral haemorrhagic fevers such as Crimean-Congo haemorrhagic fever or Ebola virus disease",
-   "Q fever and other zoonotic febrile illnesses",
-   "Dengue and other arboviral fevers"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR on blood for viral RNA in the acute viraemic phase",
-   "Serology for Rift Valley fever IgM and IgG antibodies",
-   "Liver function tests to detect hepatitis and hepatic necrosis",
-   "Full blood count and coagulation studies to assess for haemorrhagic disease",
-   "Ophthalmological examination for retinitis in patients with visual symptoms",
-   "Lumbar puncture and neuroimaging when encephalitis is suspected"
-  ],
-  "redFlags": [
-   "Jaundice with mucosal or gastrointestinal bleeding indicating the haemorrhagic form",
-   "Rapidly rising transaminases signalling fulminant hepatitis",
-   "Altered consciousness or focal neurological signs of encephalitis",
-   "Sudden visual loss from retinitis",
-   "Shock or disseminated intravascular coagulation"
-  ],
-  "prognosis": "The great majority recover fully from the uncomplicated febrile illness, but the haemorrhagic and encephalitic forms carry substantial mortality, and retinitis may leave permanent visual impairment.",
-  "pitfalls": [
-   "Assuming a benign course when severe hepatic, haemorrhagic, or neurological disease can develop in a minority",
-   "Failing to recognise delayed retinitis presenting weeks after apparent recovery",
-   "Inadequate biosafety precautions given aerosol transmissibility in the laboratory and abattoir setting",
-   "Overlooking the animal-contact or outbreak history in endemic regions",
-   "Confusing early disease with malaria and delaying appropriate isolation and diagnostics"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "World Health Organization Rift Valley fever fact sheet and guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive care as there is no licensed specific antiviral, with fluid, electrolyte and organ support for the febrile illness",
-   "Intensive management of the haemorrhagic form, correcting coagulopathy and transfusing blood products, with support for hepatic failure",
-   "Supportive neurological care and airway protection for the encephalitic form",
-   "Ophthalmological review and corticosteroid consideration for the delayed macular retinitis threatening vision",
-   "Infection prevention with barrier precautions when handling blood and body fluids, given aerosol and contact transmission",
-   "Personal protection for abattoir workers, herders and veterinarians, supported by livestock vaccination and mosquito vector control",
-   "Public-health and veterinary coordination during epizootics that herald human outbreaks"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rift_valley_fever-pathway",
-   "title": "Rift Valley fever: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mosquito-borne phlebovirus zoonosis of sub-Saharan Africa and the Arabian Peninsula, with epizootics in livestock heralding human outbreaks, often after heavy rainfall and flooding",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Jaundice with mucosal or gastrointestinal bleeding indicating the haemorrhagic form",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR on blood for viral RNA in the acute viraemic phase, Serology for Rift Valley fever IgM and IgG antibodies, Liver function tests to detect hepatitis and hepatic necrosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care as there is no licensed specific antiviral, with fluid, electrolyte and organ support for the febrile illness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a benign course when severe hepatic, haemorrhagic, or neurological disease can develop in a minority"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rift valley fever."
-  }
- ],
- "tables": [
-  {
-   "id": "rift_valley_fever-matrix",
-   "title": "Rift Valley fever: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mosquito-borne phlebovirus zoonosis of sub-Saharan Africa and the Arabian Peninsula, with epizootics in livestock heralding",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mosquito-borne phlebovirus zoonosis of sub-Saharan Africa and the Arabian Peninsula, with epizootics in livestock heralding human outbreaks, often after heavy rainfall and flooding",
+      "Humans are most often infected through direct contact with the blood or tissues of infected animals (abattoir workers, herders, veterinarians) as well as by mosquito bites",
+      "Most infections are a self-limiting influenza-like febrile illness, but a minority develop severe disease with haemorrhagic fever, hepatitis, encephalitis, or retinitis",
+      "A characteristic delayed ocular complication is macular or paramacular retinitis that can cause permanent visual loss weeks after the acute illness",
+      "The haemorrhagic form features jaundice, mucosal bleeding, and hepatic necrosis and carries a high mortality",
+      "Management is supportive; there is no licensed specific antiviral, and ribavirin has been considered in some settings for other viral haemorrhagic fevers but is not established for Rift Valley fever",
+      "Diagnosis uses RT-PCR and serology (IgM/IgG), and laboratory handling requires enhanced biosafety because of aerosol infectivity"
     ],
-    [
-     "Key Investigations",
-     "RT-PCR on blood for viral RNA in the acute viraemic phase, Serology for Rift Valley fever IgM and IgG antibodies, Liver function",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rift Valley fever virus is transmitted by infected mosquitoes and by direct contact with aerosols or fluids from viraemic animals during slaughter or handling. After entry the virus replicates widely and is markedly hepatotropic, producing hepatocellular necrosis. Severe disease reflects a combination of direct viral injury, cytokine-driven vascular dysfunction, and coagulopathy, leading to haemorrhage, hepatic failure, or central nervous system and retinal involvement. Immune-mediated inflammation contributes to the delayed retinitis and encephalitic complications.",
+    "additionalDifferentials": [
+      "Malaria",
+      "Leptospirosis",
+      "Viral hepatitis",
+      "Other viral haemorrhagic fevers such as Crimean-Congo haemorrhagic fever or Ebola virus disease",
+      "Q fever and other zoonotic febrile illnesses",
+      "Dengue and other arboviral fevers"
     ],
-    [
-     "Primary Differentials",
-     "Malaria, Leptospirosis, Viral hepatitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "RT-PCR on blood for viral RNA in the acute viraemic phase",
+      "Serology for Rift Valley fever IgM and IgG antibodies",
+      "Liver function tests to detect hepatitis and hepatic necrosis",
+      "Full blood count and coagulation studies to assess for haemorrhagic disease",
+      "Ophthalmological examination for retinitis in patients with visual symptoms",
+      "Lumbar puncture and neuroimaging when encephalitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Supportive care as there is no licensed specific antiviral, with fluid, electrolyte and organ support for the febrile illness",
-     "Core treatment modality"
+    "redFlags": [
+      "Jaundice with mucosal or gastrointestinal bleeding indicating the haemorrhagic form",
+      "Rapidly rising transaminases signalling fulminant hepatitis",
+      "Altered consciousness or focal neurological signs of encephalitis",
+      "Sudden visual loss from retinitis",
+      "Shock or disseminated intravascular coagulation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a benign course when severe hepatic, haemorrhagic, or neurological disease can develop in a minority",
-     "Prevent diagnostic or management error"
+    "prognosis": "The great majority recover fully from the uncomplicated febrile illness, but the haemorrhagic and encephalitic forms carry substantial mortality, and retinitis may leave permanent visual impairment.",
+    "pitfalls": [
+      "Assuming a benign course when severe hepatic, haemorrhagic, or neurological disease can develop in a minority",
+      "Failing to recognise delayed retinitis presenting weeks after apparent recovery",
+      "Inadequate biosafety precautions given aerosol transmissibility in the laboratory and abattoir setting",
+      "Overlooking the animal-contact or outbreak history in endemic regions",
+      "Confusing early disease with malaria and delaying appropriate isolation and diagnostics"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "World Health Organization Rift Valley fever fact sheet and guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive care as there is no licensed specific antiviral, with fluid, electrolyte and organ support for the febrile illness",
+      "Intensive management of the haemorrhagic form, correcting coagulopathy and transfusing blood products, with support for hepatic failure",
+      "Supportive neurological care and airway protection for the encephalitic form",
+      "Ophthalmological review and corticosteroid consideration for the delayed macular retinitis threatening vision",
+      "Infection prevention with barrier precautions when handling blood and body fluids, given aerosol and contact transmission",
+      "Personal protection for abattoir workers, herders and veterinarians, supported by livestock vaccination and mosquito vector control",
+      "Public-health and veterinary coordination during epizootics that herald human outbreaks"
     ]
-   ],
-   "caption": "Overview comparison matrix for rift valley fever."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rift-valley-fever-real-image",
-   "title": "Rift Valley fever: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "rift_valley_fever-pathway",
+      "title": "Rift Valley fever: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mosquito-borne phlebovirus zoonosis of sub-Saharan Africa and the Arabian Peninsula, with epizootics in livestock heralding human outbreaks, often after heavy rainfall and flooding",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Jaundice with mucosal or gastrointestinal bleeding indicating the haemorrhagic form",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR on blood for viral RNA in the acute viraemic phase, Serology for Rift Valley fever IgM and IgG antibodies, Liver function tests to detect hepatitis and hepatic necrosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care as there is no licensed specific antiviral, with fluid, electrolyte and organ support for the febrile illness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a benign course when severe hepatic, haemorrhagic, or neurological disease can develop in a minority"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rift valley fever."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rift_valley_fever-matrix",
+      "title": "Rift Valley fever: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mosquito-borne phlebovirus zoonosis of sub-Saharan Africa and the Arabian Peninsula, with epizootics in livestock heralding",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR on blood for viral RNA in the acute viraemic phase, Serology for Rift Valley fever IgM and IgG antibodies, Liver function",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Malaria, Leptospirosis, Viral hepatitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care as there is no licensed specific antiviral, with fluid, electrolyte and organ support for the febrile illness",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a benign course when severe hepatic, haemorrhagic, or neurological disease can develop in a minority",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rift valley fever."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rift_valley_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR on blood",
+          "cells": [
+            {
+              "text": "Viral RNA in the acute viraemic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rift Valley fever IgM and IgG serology",
+          "cells": [
+            {
+              "text": "Antibody response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Hepatitis and hepatic necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation studies",
+          "cells": [
+            {
+              "text": "Haemorrhagic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Retinitis, in patients with visual symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rift_valley_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No licensed specific antiviral; fluid, electrolyte and organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhagic form",
+          "cells": [
+            {
+              "text": "Correct coagulopathy, transfuse blood products and support hepatic failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Encephalitic form",
+          "cells": [
+            {
+              "text": "Supportive neurological care and airway protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinitis",
+          "cells": [
+            {
+              "text": "Ophthalmological review; corticosteroids considered for delayed macular retinitis threatening vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Barrier precautions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rift_valley_fever-dx-mgmt",
+      "title": "Diagnosis and management of Rift Valley fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Febrile illness with hepatitis, bleeding or neurological signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bleeding, fulminant hepatitis, encephalitis, vision loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent organ support for shock, DIC or fulminant hepatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR in the viraemic phase, IgM and IgG serology, liver tests, coagulation, eye exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is Rift Valley fever confirmed by RT-PCR or serology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider malaria, leptospirosis, viral hepatitis or other viral haemorrhagic fevers",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive fluid, electrolyte and organ support; no licensed antiviral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct coagulopathy and transfuse for the haemorrhagic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway protection and neurological care for encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmological review; consider corticosteroids for threatening retinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Haemorrhagic, hepatic and encephalitic forms each need intensive organ support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

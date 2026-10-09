@@ -1,175 +1,500 @@
 {
- "id": "powassan_virus_infection",
- "name": "Powassan virus encephalitis",
- "aliases": [
-  "Powassan virus infection",
-  "POWV infection",
-  "deer tick virus infection",
-  "Powassan encephalitis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A North American and Russian Far East flavivirus in the tick-borne encephalitis serocomplex, transmitted by Ixodes ticks, with the deer-tick lineage sharing the vector of Lyme disease",
-   "Transmission can occur very rapidly after tick attachment, often within minutes to hours, unlike the longer attachment needed to transmit Lyme borreliosis",
-   "Many infections are asymptomatic, but neuroinvasive disease presents with encephalitis, meningitis, or meningoencephalitis, sometimes after a nonspecific febrile prodrome",
-   "Magnetic resonance imaging may show involvement of the thalami, basal ganglia, brainstem, and cerebellum, similar to other tick-borne encephalitis serocomplex viruses",
-   "Because it shares the Ixodes vector, co-infection with Lyme disease, anaplasmosis, or babesiosis should be considered",
-   "There is no specific antiviral or licensed vaccine; management is intensive supportive care, and prevention relies on tick-bite avoidance",
-   "Diagnosis is primarily serological (IgM in serum and cerebrospinal fluid), as viraemia is often brief by the time neurological disease appears"
+  "id": "powassan_virus_infection",
+  "name": "Powassan virus encephalitis",
+  "aliases": [
+    "Powassan virus infection",
+    "POWV infection",
+    "deer tick virus infection",
+    "Powassan encephalitis"
   ],
-  "pathophysiology": "Powassan virus is inoculated during the bite of an infected Ixodes tick, and its presence in tick salivary glands allows unusually rapid transmission. After local replication and viraemia, which frequently produces only mild or unnoticed symptoms, the virus can cross into the central nervous system in susceptible hosts. There it infects neurons and triggers an inflammatory response, with a predilection for deep grey-matter structures, brainstem, and cerebellum, causing encephalitis with the potential for severe neuronal injury and lasting deficits. As with related flaviviruses, the antibody response is usually detectable by the neurological phase, underpinning serological diagnosis.",
-  "additionalDifferentials": [
-   "Herpes simplex virus encephalitis",
-   "West Nile virus neuroinvasive disease",
-   "Eastern equine encephalitis",
-   "Lyme neuroborreliosis",
-   "Bacterial meningoencephalitis",
-   "Autoimmune encephalitis"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid IgM serology for Powassan virus",
-   "Cerebrospinal fluid analysis showing lymphocytic pleocytosis and raised protein",
-   "Magnetic resonance imaging of the brain for deep grey-matter, brainstem, and cerebellar involvement",
-   "RT-PCR on cerebrospinal fluid or blood early in disease, recognising limited sensitivity",
-   "Testing for co-transmitted Ixodes-borne infections such as Lyme disease, anaplasmosis, and babesiosis",
-   "Testing to exclude herpes simplex encephalitis"
-  ],
-  "redFlags": [
-   "Declining consciousness or coma",
-   "Seizures or status epilepticus",
-   "Brainstem or cerebellar signs",
-   "Focal neurological deficits with characteristic deep grey-matter lesions on imaging",
-   "Respiratory compromise from brainstem involvement"
-  ],
-  "prognosis": "Neuroinvasive Powassan virus disease carries appreciable mortality, and a large proportion of survivors are left with long-term neurological sequelae such as cognitive impairment, weakness, or recurrent headaches.",
-  "pitfalls": [
-   "Assuming prolonged tick attachment is required, since Powassan virus can transmit rapidly",
-   "Delaying empirical aciclovir for possible herpes simplex encephalitis pending arboviral results",
-   "Failing to test for co-infecting Ixodes-borne pathogens",
-   "Relying on molecular testing when serology is usually the diagnostic modality",
-   "Overlooking the tick-exposure history in endemic areas"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "CDC guidance on Powassan virus disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific antiviral therapy or licensed vaccine exists; management is intensive supportive neurocritical care",
-   "Manage raised intracranial pressure, control seizures with antiepileptic drugs, and provide airway protection and ventilatory support in severe encephalitis",
-   "Give empirical aciclovir until herpes simplex encephalitis is excluded",
-   "Treat co-transmitted Ixodes-borne infections empirically where suspected, such as doxycycline for Lyme disease or anaplasmosis",
-   "Neurorehabilitation, physiotherapy and cognitive support for long-term neurological sequelae",
-   "Prevention through tick-bite avoidance, protective clothing, repellents and prompt tick removal"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "powassan_virus_infection-pathway",
-   "title": "Powassan virus encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A North American and Russian Far East flavivirus in the tick-borne encephalitis serocomplex, transmitted by Ixodes ticks, with the deer-tick lineage sharing the vector of Lyme disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Declining consciousness or coma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid IgM serology for Powassan virus, Cerebrospinal fluid analysis showing lymphocytic pleocytosis and raised protein, Magnetic resonance imaging of the brain for deep grey-matter, brainstem, and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific antiviral therapy or licensed vaccine exists; management is intensive supportive neurocritical care"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming prolonged tick attachment is required, since Powassan virus can transmit rapidly"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of powassan virus encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "powassan_virus_infection-matrix",
-   "title": "Powassan virus encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A North American and Russian Far East flavivirus in the tick-borne encephalitis serocomplex, transmitted by Ixodes ticks, with",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A North American and Russian Far East flavivirus in the tick-borne encephalitis serocomplex, transmitted by Ixodes ticks, with the deer-tick lineage sharing the vector of Lyme disease",
+      "Transmission can occur very rapidly after tick attachment, often within minutes to hours, unlike the longer attachment needed to transmit Lyme borreliosis",
+      "Many infections are asymptomatic, but neuroinvasive disease presents with encephalitis, meningitis, or meningoencephalitis, sometimes after a nonspecific febrile prodrome",
+      "Magnetic resonance imaging may show involvement of the thalami, basal ganglia, brainstem, and cerebellum, similar to other tick-borne encephalitis serocomplex viruses",
+      "Because it shares the Ixodes vector, co-infection with Lyme disease, anaplasmosis, or babesiosis should be considered",
+      "There is no specific antiviral or licensed vaccine; management is intensive supportive care, and prevention relies on tick-bite avoidance",
+      "Diagnosis is primarily serological (IgM in serum and cerebrospinal fluid), as viraemia is often brief by the time neurological disease appears"
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid IgM serology for Powassan virus, Cerebrospinal fluid analysis showing lymphocytic pleocytosis and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Powassan virus is inoculated during the bite of an infected Ixodes tick, and its presence in tick salivary glands allows unusually rapid transmission. After local replication and viraemia, which frequently produces only mild or unnoticed symptoms, the virus can cross into the central nervous system in susceptible hosts. There it infects neurons and triggers an inflammatory response, with a predilection for deep grey-matter structures, brainstem, and cerebellum, causing encephalitis with the potential for severe neuronal injury and lasting deficits. As with related flaviviruses, the antibody response is usually detectable by the neurological phase, underpinning serological diagnosis.",
+    "additionalDifferentials": [
+      "Herpes simplex virus encephalitis",
+      "West Nile virus neuroinvasive disease",
+      "Eastern equine encephalitis",
+      "Lyme neuroborreliosis",
+      "Bacterial meningoencephalitis",
+      "Autoimmune encephalitis"
     ],
-    [
-     "Primary Differentials",
-     "Herpes simplex virus encephalitis, West Nile virus neuroinvasive disease, Eastern equine encephalitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid IgM serology for Powassan virus",
+      "Cerebrospinal fluid analysis showing lymphocytic pleocytosis and raised protein",
+      "Magnetic resonance imaging of the brain for deep grey-matter, brainstem, and cerebellar involvement",
+      "RT-PCR on cerebrospinal fluid or blood early in disease, recognising limited sensitivity",
+      "Testing for co-transmitted Ixodes-borne infections such as Lyme disease, anaplasmosis, and babesiosis",
+      "Testing to exclude herpes simplex encephalitis"
     ],
-    [
-     "Management Strategy",
-     "No specific antiviral therapy or licensed vaccine exists; management is intensive supportive neurocritical care",
-     "Core treatment modality"
+    "redFlags": [
+      "Declining consciousness or coma",
+      "Seizures or status epilepticus",
+      "Brainstem or cerebellar signs",
+      "Focal neurological deficits with characteristic deep grey-matter lesions on imaging",
+      "Respiratory compromise from brainstem involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming prolonged tick attachment is required, since Powassan virus can transmit rapidly",
-     "Prevent diagnostic or management error"
+    "prognosis": "Neuroinvasive Powassan virus disease carries appreciable mortality, and a large proportion of survivors are left with long-term neurological sequelae such as cognitive impairment, weakness, or recurrent headaches.",
+    "pitfalls": [
+      "Assuming prolonged tick attachment is required, since Powassan virus can transmit rapidly",
+      "Delaying empirical aciclovir for possible herpes simplex encephalitis pending arboviral results",
+      "Failing to test for co-infecting Ixodes-borne pathogens",
+      "Relying on molecular testing when serology is usually the diagnostic modality",
+      "Overlooking the tick-exposure history in endemic areas"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "CDC guidance on Powassan virus disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific antiviral therapy or licensed vaccine exists; management is intensive supportive neurocritical care",
+      "Manage raised intracranial pressure, control seizures with antiepileptic drugs, and provide airway protection and ventilatory support in severe encephalitis",
+      "Give empirical aciclovir until herpes simplex encephalitis is excluded",
+      "Treat co-transmitted Ixodes-borne infections empirically where suspected, such as doxycycline for Lyme disease or anaplasmosis",
+      "Neurorehabilitation, physiotherapy and cognitive support for long-term neurological sequelae",
+      "Prevention through tick-bite avoidance, protective clothing, repellents and prompt tick removal"
     ]
-   ],
-   "caption": "Overview comparison matrix for powassan virus encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "powassan-virus-infection-real-image",
-   "title": "Powassan virus encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "powassan_virus_infection-pathway",
+      "title": "Powassan virus encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A North American and Russian Far East flavivirus in the tick-borne encephalitis serocomplex, transmitted by Ixodes ticks, with the deer-tick lineage sharing the vector of Lyme disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Declining consciousness or coma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid IgM serology for Powassan virus, Cerebrospinal fluid analysis showing lymphocytic pleocytosis and raised protein, Magnetic resonance imaging of the brain for deep grey-matter, brainstem, and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific antiviral therapy or licensed vaccine exists; management is intensive supportive neurocritical care"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming prolonged tick attachment is required, since Powassan virus can transmit rapidly"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of powassan virus encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "powassan_virus_infection-matrix",
+      "title": "Powassan virus encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A North American and Russian Far East flavivirus in the tick-borne encephalitis serocomplex, transmitted by Ixodes ticks, with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid IgM serology for Powassan virus, Cerebrospinal fluid analysis showing lymphocytic pleocytosis and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpes simplex virus encephalitis, West Nile virus neuroinvasive disease, Eastern equine encephalitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific antiviral therapy or licensed vaccine exists; management is intensive supportive neurocritical care",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming prolonged tick attachment is required, since Powassan virus can transmit rapidly",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for powassan virus encephalitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "powassan_virus_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF IgM serology for Powassan virus",
+          "cells": [
+            {
+              "text": "Specific antibody response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Lymphocytic pleocytosis and raised protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Deep grey-matter, brainstem and cerebellar involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RT-PCR on CSF or blood",
+          "cells": [
+            {
+              "text": "Early disease, with limited sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tick-borne co-infection testing",
+          "cells": [
+            {
+              "text": "Lyme disease and anaplasmosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex encephalitis testing",
+          "cells": [
+            {
+              "text": "Excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "powassan_virus_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex virus encephalitis",
+          "cells": [
+            {
+              "text": "Temporal lobe involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "West Nile virus neuroinvasive disease",
+          "cells": [
+            {
+              "text": "Mosquito-borne flavivirus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eastern equine encephalitis",
+          "cells": [
+            {
+              "text": "Mosquito-borne alphavirus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme neuroborreliosis",
+          "cells": [
+            {
+              "text": "Tick-borne bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial meningoencephalitis",
+          "cells": [
+            {
+              "text": "Purulent CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune encephalitis",
+          "cells": [
+            {
+              "text": "Antibody-mediated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "powassan_virus_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No specific antiviral or licensed vaccine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Manage and control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical aciclovir",
+          "cells": [
+            {
+              "text": "Until herpes simplex encephalitis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-infection treatment",
+          "cells": [
+            {
+              "text": "Empirical doxycycline where tick-borne co-infection suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and cognitive support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Tick-bite avoidance, clothing and repellents"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "powassan_virus_infection-dx-mgmt",
+      "title": "Diagnosis and management of Powassan virus encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Encephalitis after a tick bite in an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (declining consciousness, seizures, brainstem signs, respiratory compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ICU review for coma, seizures or respiratory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum and CSF IgM; CSF analysis; MRI brain; RT-PCR; herpes simplex testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does IgM serology or CSF testing confirm Powassan virus infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider herpes simplex encephalitis, Lyme neuroborreliosis or bacterial meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care, as no specific antiviral exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage raised intracranial pressure and control seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Give empirical aciclovir until herpes simplex encephalitis is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat co-transmitted tick-borne infections empirically where suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurorehabilitation and cognitive support for long-term deficits",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Appreciable mortality, and many survivors have lasting neurological deficits",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -194,25 +194,542 @@
       "caption": "Diagnostic and clinical overview matrix for thyroid storm."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "thyroid-storm-real-image",
-      "title": "Thyroid storm: Diagnostic Endocrine Cross-Sectional Imaging",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hyperthyroidism",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/hyperthyroidism",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "MDCalc, Burch-Wartofsky Point Scale",
+      "url": "https://www.mdcalc.com/calc/3816/burch-wartofsky-point-scale-bwps-thyrotoxicosis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thyroid_storm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Thyroid storm: biochemistry and Burch-Wartofsky Point Scale",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Points or interpretation"
+      ],
+      "rows": [
         {
-          "label": "Gland Morphology",
-          "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+          "parameter": "TSH",
+          "cells": [
+            {
+              "text": "Suppressed"
+            },
+            {
+              "text": "Best first test; high or detectable only with TSH-secreting adenoma or hormone resistance"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Focal Lesions",
-          "description": "Nodularity, adenoma attenuation, and washout dynamics."
+          "parameter": "Free T4 and T3",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Check T3 if free T4 is normal with low TSH (T3 toxicosis, 2 to 5% of cases)"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Surrounding Structures",
-          "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+          "parameter": "Temperature",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "37.2 to 37.7: 5; 37.8 to 38.2: 10; 38.3 to 38.8: 15; 38.9 to 39.2: 20; 39.3 to 39.9: 25; 40 or more: 30"
+            },
+            {
+              "text": "Under 37.2 scores 0"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CNS effects",
+          "cells": [
+            {
+              "text": "Agitation 10; delirium, psychosis or extreme lethargy 20; seizure or coma 30"
+            },
+            {
+              "text": "Absent scores 0"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "GI-hepatic dysfunction",
+          "cells": [
+            {
+              "text": "Diarrhoea, vomiting or abdominal pain 10; unexplained jaundice 20"
+            },
+            {
+              "text": "Absent scores 0"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Heart rate",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "90 to 109: 5; 110 to 119: 10; 120 to 129: 15; 130 to 139: 20; 140 or more: 25"
+            },
+            {
+              "text": "Under 90 scores 0"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Pedal oedema 5; bibasal crackles 10; pulmonary oedema 15"
+            },
+            {
+              "text": "Absent scores 0"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Atrial fibrillation",
+          "cells": [
+            {
+              "text": "Present 10",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Absent scores 0"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Precipitating event",
+          "cells": [
+            {
+              "text": "Present 10",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Infection, surgery, trauma, DKA, radioiodine in untreated disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "BWPS total",
+          "cells": [
+            {
+              "text": "45 or more",
+              "op": ">=",
+              "value": 45
+            },
+            {
+              "text": "{{hy:Highly suggestive of storm; aggressive ICU management}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "BWPS total",
+          "cells": [
+            {
+              "text": "25 to 44",
+              "range": [
+                25,
+                44
+              ]
+            },
+            {
+              "text": "Impending storm; thionamide, symptom control, monitoring"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "BWPS total",
+          "cells": [
+            {
+              "text": "Under 25",
+              "op": "<",
+              "value": 25
+            },
+            {
+              "text": "Storm unlikely; look for other thyrotoxicosis causes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other labs",
+          "cells": [
+            {
+              "text": "Raised bilirubin, liver enzymes, ferritin; microcytic anaemia; low platelets"
+            },
+            {
+              "text": "May accompany thyrotoxicosis and confuse the picture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Use the score only after biochemical thyrotoxicosis is confirmed. Merck gives no scoring system and treats storm as a clinical diagnosis; the BWPS cutoffs come from MDCalc."
+    },
+    {
+      "id": "thyroid_storm-ddx",
+      "kind": "ddx",
+      "title": "Causes of thyrotoxicosis to separate from Graves storm",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Graves disease",
+          "cells": [
+            {
+              "text": "Goitre, exophthalmos, dermopathy; commonest cause"
+            },
+            {
+              "text": "TSH receptor antibody; diffuse high iodine uptake"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Toxic multinodular goitre or hot nodule",
+          "cells": [
+            {
+              "text": "No autoimmune features; usually does not remit"
+            },
+            {
+              "text": "Focal high uptake on iodine-123 scan"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroiditis (subacute, silent, Hashimoto)",
+          "cells": [
+            {
+              "text": "Tender gland possible; hyperthyroid phase then hypothyroid"
+            },
+            {
+              "text": "{{hy:Low radioiodine uptake}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyrotoxicosis factitia",
+          "cells": [
+            {
+              "text": "Overingestion of thyroid hormone"
+            },
+            {
+              "text": "Low uptake with low or low-normal thyroglobulin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Iodine excess or drugs (amiodarone, contrast, checkpoint inhibitors)",
+          "cells": [
+            {
+              "text": "Recent exposure"
+            },
+            {
+              "text": "Low uptake; drug history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "hCG-mediated (molar pregnancy, hyperemesis)",
+          "cells": [
+            {
+              "text": "Pregnancy-related or trophoblastic disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TSH-secreting pituitary adenoma",
+          "cells": [
+            {
+              "text": "TSH high or inappropriately detectable"
+            },
+            {
+              "text": "TSH with free T4"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "thyroid_storm-treatment",
+      "kind": "treatment",
+      "title": "Thyroid storm treatment",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Propylthiouracil",
+          "cells": [
+            {
+              "text": "First, before iodine"
+            },
+            {
+              "text": "600 mg orally, then 200 to 400 mg every 6 to 8 hours; preferred as it also blocks T4 to T3 conversion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Iodine",
+          "cells": [
+            {
+              "text": "{{hy:At least 1 hour after the thionamide}}"
+            },
+            {
+              "text": "SSKI 5 drops (0.25 mL) every 6 hours, or Lugol 2% 4 to 8 drops every 6 to 8 hours, or sodium iodide 1 g IV slowly over 24 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Propranolol",
+          "cells": [
+            {
+              "text": "Adrenergic control"
+            },
+            {
+              "text": "60 to 80 mg orally every 4 to 6 hours, or 0.5 to 1 mg IV over 10 to 15 minutes every 4 hours; esmolol is an alternative; titrate carefully"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoid",
+          "cells": [
+            {
+              "text": "All patients in storm"
+            },
+            {
+              "text": "Hydrocortisone 100 mg IV every 8 hours or dexamethasone 2 mg IV every 6 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Throughout"
+            },
+            {
+              "text": "IV dextrose, fluids and electrolytes, cooling, paracetamol; avoid aspirin (raises free T4)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Treat precipitant",
+          "cells": [
+            {
+              "text": "Infection, surgery, DKA, stroke, trauma"
+            },
+            {
+              "text": "Search actively"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Definitive therapy",
+          "cells": [
+            {
+              "text": "After crisis is controlled"
+            },
+            {
+              "text": "Radioiodine ablation or surgery"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thyroid_storm-dx-mgmt",
+      "title": "Diagnosis and management of thyroid storm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, tachycardia, agitation or delirium, GI upset in known or suspected hyperthyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Send TSH, free T4, T3; look for a precipitant",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "TSH suppressed with raised T4 or T3?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Thyrotoxicosis unlikely; seek another cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Score Burch-Wartofsky Point Scale",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "BWPS score?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Under 25: storm unlikely; work up cause of thyrotoxicosis",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "25 to 44: thionamide, symptom control, close monitoring",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "45 or more: ICU; propylthiouracil first",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Iodine at least 1 hour after thionamide",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Propranolol, hydrocortisone, fluids, cooling; treat precipitant",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Plan radioiodine or surgery once controlled",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Under 25"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "25 to 44"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "45 or more"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
         }
       ]
     }

@@ -1,182 +1,494 @@
 {
- "id": "primary_cns_lymphoma",
- "name": "Primary CNS lymphoma",
- "aliases": [
-  "PCNSL",
-  "primary central nervous system lymphoma",
-  "primary diffuse large B-cell lymphoma of the CNS",
-  "primary intraocular/cerebral lymphoma",
-  "CD20+ MYD88-mutated CNS large B-cell lymphoma"
- ],
- "class": "non_infective",
- "system": "Oncology / Haematologic malignancy",
- "specialty": "Haematology / Haemato-oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Haematolymphoid Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An aggressive extranodal lymphoma confined to the brain, spinal cord, leptomeninges, or eyes without systemic disease at diagnosis",
-   "Presents with focal neurological deficits, cognitive or personality change, raised intracranial pressure, or seizures, and around a fifth have ocular involvement",
-   "Most cases are diffuse large B-cell lymphomas, frequently harbouring MYD88 and CD79B mutations",
-   "In immunocompetent patients tumours are usually Epstein-Barr virus-negative, whereas immunodeficiency-associated (e.g. HIV or post-transplant) cases are typically EBV-driven",
-   "Imaging characteristically shows homogeneously enhancing periventricular lesions that are markedly diffusion-restricting",
-   "Corticosteroids can rapidly shrink lesions and obscure histology, so biopsy should ideally precede steroids where safe",
-   "Treatment centres on high-dose methotrexate-based combination chemotherapy, often with rituximab, sometimes consolidated by autologous transplantation, with radiotherapy used selectively because of neurotoxicity"
+  "id": "primary_cns_lymphoma",
+  "name": "Primary CNS lymphoma",
+  "aliases": [
+    "PCNSL",
+    "primary central nervous system lymphoma",
+    "primary diffuse large B-cell lymphoma of the CNS",
+    "primary intraocular/cerebral lymphoma",
+    "CD20+ MYD88-mutated CNS large B-cell lymphoma"
   ],
-  "pathophysiology": "Primary central nervous system lymphoma is an aggressive B-cell neoplasm, usually of diffuse large B-cell type, that arises within and remains confined to the central nervous system and eyes. The malignant cells are typically of activated B-cell origin and characteristically carry mutations activating B-cell receptor and toll-like receptor signalling, such as MYD88 and CD79B. Tumour cells cluster around blood vessels within the brain parenchyma, and how the clone becomes restricted to this immune-privileged site remains incompletely understood. In immunodeficient hosts, impaired surveillance allows Epstein-Barr virus to drive transformation, accounting for the EBV positivity seen in that setting.",
-  "additionalDifferentials": [
-   "High-grade glioma such as glioblastoma",
-   "Cerebral toxoplasmosis (particularly in HIV infection)",
-   "Cerebral metastasis or abscess",
-   "Demyelinating disease such as a tumefactive multiple sclerosis lesion",
-   "Neurosarcoidosis or other inflammatory CNS disease",
-   "Secondary CNS involvement by systemic lymphoma"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced MRI of the brain and whole neuraxis",
-   "Stereotactic brain biopsy (ideally before corticosteroids) with immunohistochemistry",
-   "Cerebrospinal fluid cytology and flow cytometry, with clonality studies",
-   "Slit-lamp examination and vitreous sampling to assess ocular involvement",
-   "HIV testing and EBV studies on tissue or cerebrospinal fluid",
-   "Systemic staging (PET-CT, bone marrow, and in men testicular assessment) to confirm disease is CNS-limited"
-  ],
-  "redFlags": [
-   "Rapidly rising intracranial pressure or impending herniation",
-   "Progressive obtundation or new focal deficits",
-   "Status epilepticus",
-   "Leptomeningeal or ocular dissemination requiring additional directed therapy"
-  ],
-  "prognosis": "Untreated disease is rapidly fatal, but high-dose methotrexate-based regimens achieve remission in many patients; older age, poor performance status, and treatment-related neurotoxicity limit long-term outcomes, and relapse is common.",
-  "pitfalls": [
-   "Giving corticosteroids before biopsy, which can transiently dissolve the tumour and render histology non-diagnostic",
-   "Mistaking lesions for glioma, demyelination, or, in HIV, toxoplasmosis",
-   "Failing to examine the eyes and cerebrospinal fluid for occult involvement",
-   "Omitting systemic staging and thereby misclassifying secondary CNS lymphoma as primary"
-  ],
-  "references": [
-   "WHO Classification of Haematolymphoid Tumours",
-   "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid corticosteroids before biopsy where possible since steroids can shrink the tumour and obscure histopathologic diagnosis, unless mass effect or impending herniation requires urgent treatment",
-   "Diagnose via stereotactic brain biopsy, using CSF molecular markers only to raise suspicion when the lesion is not surgically accessible",
-   "Stage with brain MRI, CSF cytology and flow cytometry, slit-lamp ophthalmologic evaluation, and systemic imaging plus testicular ultrasound in men and bone marrow evaluation to exclude disease outside the CNS",
-   "Assess baseline fitness, cognition, and organ function before selecting treatment",
-   "Reserve surgery for diagnostic biopsy or for debulking large lesions causing acute mass effect, since routine resection has no established survival benefit and carries neurologic risk",
-   "Triage patients by fitness into three groups, those fit for intensive immunochemotherapy with transplant consolidation, those fit only for high-dose methotrexate-based immunochemotherapy without transplant, and those fit only for palliative care",
-   "Base induction in fit patients on high-dose methotrexate, typically combined with cytarabine, an alkylating agent, and or an anti-CD20 monoclonal antibody, recognising that rituximab's benefit is supported by mixed evidence rather than uniformly proven",
-   "After induction response in fit patients, consolidate with high-dose chemotherapy and autologous stem-cell transplant or reduced-dose whole-brain radiotherapy, favouring transplant-based approaches where feasible for better cognitive preservation, and deferring radiotherapy to relapse when an active nontransplant consolidation is used instead",
-   "In elderly or less fit patients, use methotrexate-based induction when organ function and fitness allow, favour oral alkylating agents combined with methotrexate, defer whole-brain radiotherapy to relapse given higher neurotoxicity risk, and consider maintenance therapy after response",
-   "Reserve transplant-based consolidation in older patients for carefully selected fit individuals up to around age 70",
-   "Avoid focal radiation or radiosurgery given the infiltrative, often multifocal nature of the disease, and reserve whole-brain radiotherapy alone for patients unfit for chemotherapy",
-   "Manage ocular involvement, present in roughly a fifth of patients, with intravitreal chemotherapy or ocular radiotherapy",
-   "Perform regular surveillance neuroimaging after treatment given the frequency of relapse, and assess response using the disease's dedicated criteria combining imaging, corticosteroid dose, ophthalmologic findings, and CSF cytology",
-   "For relapsed or refractory disease, prioritise clinical trial enrollment, and otherwise consider rechallenge with methotrexate-based therapy, transplant in previously untransplanted fit patients, or whole-brain radiotherapy in patients who have not yet received it, while managing suspected or confirmed cases within a combined haemato-oncology and neuro-oncology multidisciplinary team from diagnosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_cns_lymphoma-pathway",
-   "title": "Primary CNS lymphoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An aggressive extranodal lymphoma confined to the brain, spinal cord, leptomeninges, or eyes without systemic disease at diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly rising intracranial pressure or impending herniation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced MRI of the brain and whole neuraxis, Stereotactic brain biopsy (ideally before corticosteroids) with immunohistochemistry, Cerebrospinal fluid cytology and flow cytometry, with clonality studies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid corticosteroids before biopsy where possible since steroids can shrink the tumour and obscure histopathologic diagnosis, unless mass effect or impending herniation requires urgent treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving corticosteroids before biopsy, which can transiently dissolve the tumour and render histology non-diagnostic"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary cns lymphoma."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_cns_lymphoma-matrix",
-   "title": "Primary CNS lymphoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An aggressive extranodal lymphoma confined to the brain, spinal cord, leptomeninges, or eyes without systemic disease at diagnosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Haematologic malignancy",
+  "specialty": "Haematology / Haemato-oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Haematolymphoid Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An aggressive extranodal lymphoma confined to the brain, spinal cord, leptomeninges, or eyes without systemic disease at diagnosis",
+      "Presents with focal neurological deficits, cognitive or personality change, raised intracranial pressure, or seizures, and around a fifth have ocular involvement",
+      "Most cases are diffuse large B-cell lymphomas, frequently harbouring MYD88 and CD79B mutations",
+      "In immunocompetent patients tumours are usually Epstein-Barr virus-negative, whereas immunodeficiency-associated (e.g. HIV or post-transplant) cases are typically EBV-driven",
+      "Imaging characteristically shows homogeneously enhancing periventricular lesions that are markedly diffusion-restricting",
+      "Corticosteroids can rapidly shrink lesions and obscure histology, so biopsy should ideally precede steroids where safe",
+      "Treatment centres on high-dose methotrexate-based combination chemotherapy, often with rituximab, sometimes consolidated by autologous transplantation, with radiotherapy used selectively because of neurotoxicity"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced MRI of the brain and whole neuraxis, Stereotactic brain biopsy (ideally before corticosteroids) with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary central nervous system lymphoma is an aggressive B-cell neoplasm, usually of diffuse large B-cell type, that arises within and remains confined to the central nervous system and eyes. The malignant cells are typically of activated B-cell origin and characteristically carry mutations activating B-cell receptor and toll-like receptor signalling, such as MYD88 and CD79B. Tumour cells cluster around blood vessels within the brain parenchyma, and how the clone becomes restricted to this immune-privileged site remains incompletely understood. In immunodeficient hosts, impaired surveillance allows Epstein-Barr virus to drive transformation, accounting for the EBV positivity seen in that setting.",
+    "additionalDifferentials": [
+      "High-grade glioma such as glioblastoma",
+      "Cerebral toxoplasmosis (particularly in HIV infection)",
+      "Cerebral metastasis or abscess",
+      "Demyelinating disease such as a tumefactive multiple sclerosis lesion",
+      "Neurosarcoidosis or other inflammatory CNS disease",
+      "Secondary CNS involvement by systemic lymphoma"
     ],
-    [
-     "Primary Differentials",
-     "High-grade glioma such as glioblastoma, Cerebral toxoplasmosis (particularly in HIV infection), Cerebral metastasis or abscess",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced MRI of the brain and whole neuraxis",
+      "Stereotactic brain biopsy (ideally before corticosteroids) with immunohistochemistry",
+      "Cerebrospinal fluid cytology and flow cytometry, with clonality studies",
+      "Slit-lamp examination and vitreous sampling to assess ocular involvement",
+      "HIV testing and EBV studies on tissue or cerebrospinal fluid",
+      "Systemic staging (PET-CT, bone marrow, and in men testicular assessment) to confirm disease is CNS-limited"
     ],
-    [
-     "Management Strategy",
-     "Avoid corticosteroids before biopsy where possible since steroids can shrink the tumour and obscure histopathologic diagnosis,",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly rising intracranial pressure or impending herniation",
+      "Progressive obtundation or new focal deficits",
+      "Status epilepticus",
+      "Leptomeningeal or ocular dissemination requiring additional directed therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving corticosteroids before biopsy, which can transiently dissolve the tumour and render histology non-diagnostic",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disease is rapidly fatal, but high-dose methotrexate-based regimens achieve remission in many patients; older age, poor performance status, and treatment-related neurotoxicity limit long-term outcomes, and relapse is common.",
+    "pitfalls": [
+      "Giving corticosteroids before biopsy, which can transiently dissolve the tumour and render histology non-diagnostic",
+      "Mistaking lesions for glioma, demyelination, or, in HIV, toxoplasmosis",
+      "Failing to examine the eyes and cerebrospinal fluid for occult involvement",
+      "Omitting systemic staging and thereby misclassifying secondary CNS lymphoma as primary"
+    ],
+    "references": [
+      "WHO Classification of Haematolymphoid Tumours",
+      "Swerdlow SH et al. WHO monograph on lymphoid neoplasms"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid corticosteroids before biopsy where possible since steroids can shrink the tumour and obscure histopathologic diagnosis, unless mass effect or impending herniation requires urgent treatment",
+      "Diagnose via stereotactic brain biopsy, using CSF molecular markers only to raise suspicion when the lesion is not surgically accessible",
+      "Stage with brain MRI, CSF cytology and flow cytometry, slit-lamp ophthalmologic evaluation, and systemic imaging plus testicular ultrasound in men and bone marrow evaluation to exclude disease outside the CNS",
+      "Assess baseline fitness, cognition, and organ function before selecting treatment",
+      "Reserve surgery for diagnostic biopsy or for debulking large lesions causing acute mass effect, since routine resection has no established survival benefit and carries neurologic risk",
+      "Triage patients by fitness into three groups, those fit for intensive immunochemotherapy with transplant consolidation, those fit only for high-dose methotrexate-based immunochemotherapy without transplant, and those fit only for palliative care",
+      "Base induction in fit patients on high-dose methotrexate, typically combined with cytarabine, an alkylating agent, and or an anti-CD20 monoclonal antibody, recognising that rituximab's benefit is supported by mixed evidence rather than uniformly proven",
+      "After induction response in fit patients, consolidate with high-dose chemotherapy and autologous stem-cell transplant or reduced-dose whole-brain radiotherapy, favouring transplant-based approaches where feasible for better cognitive preservation, and deferring radiotherapy to relapse when an active nontransplant consolidation is used instead",
+      "In elderly or less fit patients, use methotrexate-based induction when organ function and fitness allow, favour oral alkylating agents combined with methotrexate, defer whole-brain radiotherapy to relapse given higher neurotoxicity risk, and consider maintenance therapy after response",
+      "Reserve transplant-based consolidation in older patients for carefully selected fit individuals up to around age 70",
+      "Avoid focal radiation or radiosurgery given the infiltrative, often multifocal nature of the disease, and reserve whole-brain radiotherapy alone for patients unfit for chemotherapy",
+      "Manage ocular involvement, present in roughly a fifth of patients, with intravitreal chemotherapy or ocular radiotherapy",
+      "Perform regular surveillance neuroimaging after treatment given the frequency of relapse, and assess response using the disease's dedicated criteria combining imaging, corticosteroid dose, ophthalmologic findings, and CSF cytology",
+      "For relapsed or refractory disease, prioritise clinical trial enrollment, and otherwise consider rechallenge with methotrexate-based therapy, transplant in previously untransplanted fit patients, or whole-brain radiotherapy in patients who have not yet received it, while managing suspected or confirmed cases within a combined haemato-oncology and neuro-oncology multidisciplinary team from diagnosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary cns lymphoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-cns-lymphoma-real-image",
-   "title": "Primary CNS lymphoma: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "primary_cns_lymphoma-pathway",
+      "title": "Primary CNS lymphoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An aggressive extranodal lymphoma confined to the brain, spinal cord, leptomeninges, or eyes without systemic disease at diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly rising intracranial pressure or impending herniation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced MRI of the brain and whole neuraxis, Stereotactic brain biopsy (ideally before corticosteroids) with immunohistochemistry, Cerebrospinal fluid cytology and flow cytometry, with clonality studies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid corticosteroids before biopsy where possible since steroids can shrink the tumour and obscure histopathologic diagnosis, unless mass effect or impending herniation requires urgent treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving corticosteroids before biopsy, which can transiently dissolve the tumour and render histology non-diagnostic"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary cns lymphoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_cns_lymphoma-matrix",
+      "title": "Primary CNS lymphoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An aggressive extranodal lymphoma confined to the brain, spinal cord, leptomeninges, or eyes without systemic disease at diagnosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced MRI of the brain and whole neuraxis, Stereotactic brain biopsy (ideally before corticosteroids) with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "High-grade glioma such as glioblastoma, Cerebral toxoplasmosis (particularly in HIV infection), Cerebral metastasis or abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid corticosteroids before biopsy where possible since steroids can shrink the tumour and obscure histopathologic diagnosis,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving corticosteroids before biopsy, which can transiently dissolve the tumour and render histology non-diagnostic",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary cns lymphoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Haematolymphoid Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_cns_lymphoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced MRI of the brain and whole neuraxis",
+          "cells": [
+            {
+              "text": "Extent of brain and neuraxis disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereotactic brain biopsy with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Histological diagnosis, ideally before corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF cytology and flow cytometry with clonality studies",
+          "cells": [
+            {
+              "text": "Cytology, flow cytometry and clonality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination and vitreous sampling",
+          "cells": [
+            {
+              "text": "Ocular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and EBV studies",
+          "cells": [
+            {
+              "text": "HIV and EBV association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic staging (PET-CT, bone marrow, testicular assessment in men)",
+          "cells": [
+            {
+              "text": "Whether disease is CNS-limited"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cns_lymphoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral toxoplasmosis",
+          "cells": [
+            {
+              "text": "HIV infection"
+            },
+            {
+              "text": "HIV testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary CNS involvement by systemic lymphoma",
+          "cells": [
+            {
+              "text": "Disease outside the CNS on systemic staging"
+            },
+            {
+              "text": "Systemic staging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cns_lymphoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Steroid timing",
+          "cells": [
+            {
+              "text": "Avoid corticosteroids before biopsy where possible, as they can obscure the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnosis",
+          "cells": [
+            {
+              "text": "Stereotactic brain biopsy; CSF markers only raise suspicion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fitness assessment",
+          "cells": [
+            {
+              "text": "Baseline fitness, cognition and organ function before choosing treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Induction in fit patients",
+          "cells": [
+            {
+              "text": "High-dose methotrexate, typically with cytarabine, an alkylating agent and or an anti-CD20 antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Consolidation in fit patients",
+          "cells": [
+            {
+              "text": "High-dose chemotherapy with autologous stem-cell transplant, or reduced-dose whole-brain radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Less fit or elderly patients",
+          "cells": [
+            {
+              "text": "Methotrexate-based induction when organ function allows; oral alkylating agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal radiation",
+          "cells": [
+            {
+              "text": "Avoid focal radiation or radiosurgery given infiltrative, often multifocal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular involvement",
+          "cells": [
+            {
+              "text": "Intravitreal chemotherapy or ocular radiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse or refractory disease",
+          "cells": [
+            {
+              "text": "Clinical trial enrolment first; otherwise methotrexate-based rechallenge or transplant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_cns_lymphoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary CNS lymphoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary CNS lymphoma: progressive focal or encephalopathic brain disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised intracranial pressure, obtundation, status epilepticus or ocular spread?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical and oncology review for raised pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI of brain and neuraxis; CSF cytology; systemic staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does stereotactic biopsy confirm lymphoma with CNS-limited disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider glioma, toxoplasmosis or metastasis; repeat diagnostic biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stereotactic biopsy, ideally before corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Assess fitness, cognition and organ function to select therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fit: high-dose methotrexate with cytarabine, then consolidation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Less fit: methotrexate-based induction or oral alkylating agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance imaging after treatment; trials or rechallenge for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

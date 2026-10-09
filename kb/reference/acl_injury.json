@@ -1,176 +1,471 @@
 {
- "id": "acl_injury",
- "name": "Anterior cruciate ligament injury",
- "aliases": [
-  "ACL rupture",
-  "ACL tear",
-  "anterior cruciate ligament injury",
-  "anterior cruciate ligament rupture",
-  "anterior cruciate ligament sprain",
-  "cruciate ligament injury"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically follows a non-contact pivoting, twisting, or deceleration injury, often in sport, with the patient reporting a 'pop' and rapid swelling of the knee",
-   "A tense, blood-filled effusion (haemarthrosis) developing within hours of injury strongly suggests an ACL rupture (or other significant intra-articular injury)",
-   "The Lachman test is the most sensitive clinical examination; the anterior drawer and pivot-shift tests also demonstrate anterior tibial translation and rotational instability",
-   "MRI confirms the diagnosis and, importantly, identifies associated meniscal tears, collateral ligament injury, and bone bruising",
-   "Symptomatic instability with the knee 'giving way' during turning or pivoting is the key indication for reconstruction",
-   "Management is individualised: reconstruction (usually with a tendon graft) is favoured for young, active, or pivoting-sport patients, while rehabilitation-led treatment suits lower-demand individuals",
-   "Rehabilitation to restore quadriceps strength and neuromuscular control is essential whether or not surgery is performed",
-   "Untreated instability predisposes to recurrent meniscal tears and secondary osteoarthritis over time"
+  "id": "acl_injury",
+  "name": "Anterior cruciate ligament injury",
+  "aliases": [
+    "ACL rupture",
+    "ACL tear",
+    "anterior cruciate ligament injury",
+    "anterior cruciate ligament rupture",
+    "anterior cruciate ligament sprain",
+    "cruciate ligament injury"
   ],
-  "pathophysiology": "The anterior cruciate ligament runs from the posterior femoral intercondylar notch to the anterior tibial plateau and is the principal restraint to anterior translation of the tibia and a key stabiliser against rotational and pivoting forces. Sudden deceleration, landing, or a valgus-external rotation force with the foot planted overloads the ligament, causing partial or complete rupture, frequently near its femoral origin. Because the ligament is intra-articular and vascular, rupture produces a rapid haemarthrosis. The ACL has poor intrinsic healing capacity, so complete tears generally do not reunite. Persistent instability increases shear on the menisci and articular cartilage, accelerating degenerative change.",
-  "additionalDifferentials": [
-   "Meniscal tear",
-   "Collateral (medial or lateral) ligament injury",
-   "Posterior cruciate ligament injury",
-   "Patellar dislocation",
-   "Osteochondral fracture or tibial spine avulsion",
-   "Knee dislocation with multiligament injury",
-   "Extensor mechanism rupture"
-  ],
-  "additionalInvestigations": [
-   "MRI of the knee to confirm the tear and detect associated meniscal, chondral, and ligamentous injury",
-   "Clinical stability testing (Lachman, anterior drawer, pivot-shift)",
-   "Plain radiographs to exclude fracture, including a Segond fracture as an indirect sign",
-   "Aspiration of a tense haemarthrosis for symptom relief and diagnostic information where appropriate",
-   "Assessment for associated multiligament injury if a knee dislocation is suspected"
-  ],
-  "redFlags": [
-   "Features of knee dislocation with multiligament injury requiring urgent vascular and neurological assessment (risk to the popliteal artery and peroneal nerve)",
-   "A locked knee suggesting a displaced bucket-handle meniscal tear needing prompt treatment",
-   "Signs of neurovascular compromise after significant knee trauma",
-   "Open injury or associated fracture"
-  ],
-  "prognosis": "Outcomes depend on activity demands and associated injuries; reconstruction restores stability and enables return to pivoting sport in most, while appropriately selected patients do well with rehabilitation alone, but chronic instability and untreated meniscal damage increase the long-term risk of osteoarthritis regardless of treatment.",
-  "pitfalls": [
-   "Missing an ACL rupture by not recognising the significance of an acute haemarthrosis",
-   "Failing to identify associated meniscal or collateral ligament injury",
-   "Overlooking a knee dislocation that has spontaneously reduced, with its vascular risk",
-   "Proceeding to surgery on a stiff, poorly rehabilitated knee, increasing the risk of postoperative stiffness"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initial management with rest, ice, compression and elevation, analgesia, and aspiration of a tense haemarthrosis for symptom relief",
-   "Early structured physiotherapy to restore range of motion, quadriceps and hamstring strength and neuromuscular control",
-   "Arthroscopic ligament reconstruction with a tendon graft for young, active or pivoting-sport patients and for symptomatic instability with giving way",
-   "Rehabilitation-led non-operative management for lower-demand patients, with bracing and activity modification",
-   "Identify and treat associated meniscal, chondral and collateral ligament injuries at the same time",
-   "Graduated, criteria-based return to sport after reconstruction with ongoing neuromuscular prevention training",
-   "Orthopaedic referral, with urgent assessment if a knee dislocation or multiligament injury is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acl_injury-pathway",
-   "title": "Anterior cruciate ligament injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically follows a non-contact pivoting, twisting, or deceleration injury, often in sport, with the patient reporting a 'pop' and rapid swelling of the knee",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of knee dislocation with multiligament injury requiring urgent vascular and neurological assessment (risk to the popliteal artery and peroneal nerve)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the knee to confirm the tear and detect associated meniscal, chondral, and ligamentous injury, Clinical stability testing (Lachman, anterior drawer, pivot-shift), Plain radiographs to exclude fracture, including a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initial management with rest, ice, compression and elevation, analgesia, and aspiration of a tense haemarthrosis for symptom relief"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing an ACL rupture by not recognising the significance of an acute haemarthrosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anterior cruciate ligament injury."
-  }
- ],
- "tables": [
-  {
-   "id": "acl_injury-matrix",
-   "title": "Anterior cruciate ligament injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically follows a non-contact pivoting, twisting, or deceleration injury, often in sport, with the patient reporting a 'pop'",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically follows a non-contact pivoting, twisting, or deceleration injury, often in sport, with the patient reporting a 'pop' and rapid swelling of the knee",
+      "A tense, blood-filled effusion (haemarthrosis) developing within hours of injury strongly suggests an ACL rupture (or other significant intra-articular injury)",
+      "The Lachman test is the most sensitive clinical examination; the anterior drawer and pivot-shift tests also demonstrate anterior tibial translation and rotational instability",
+      "MRI confirms the diagnosis and, importantly, identifies associated meniscal tears, collateral ligament injury, and bone bruising",
+      "Symptomatic instability with the knee 'giving way' during turning or pivoting is the key indication for reconstruction",
+      "Management is individualised: reconstruction (usually with a tendon graft) is favoured for young, active, or pivoting-sport patients, while rehabilitation-led treatment suits lower-demand individuals",
+      "Rehabilitation to restore quadriceps strength and neuromuscular control is essential whether or not surgery is performed",
+      "Untreated instability predisposes to recurrent meniscal tears and secondary osteoarthritis over time"
     ],
-    [
-     "Key Investigations",
-     "MRI of the knee to confirm the tear and detect associated meniscal, chondral, and ligamentous injury, Clinical stability testing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The anterior cruciate ligament runs from the posterior femoral intercondylar notch to the anterior tibial plateau and is the principal restraint to anterior translation of the tibia and a key stabiliser against rotational and pivoting forces. Sudden deceleration, landing, or a valgus-external rotation force with the foot planted overloads the ligament, causing partial or complete rupture, frequently near its femoral origin. Because the ligament is intra-articular and vascular, rupture produces a rapid haemarthrosis. The ACL has poor intrinsic healing capacity, so complete tears generally do not reunite. Persistent instability increases shear on the menisci and articular cartilage, accelerating degenerative change.",
+    "additionalDifferentials": [
+      "Meniscal tear",
+      "Collateral (medial or lateral) ligament injury",
+      "Posterior cruciate ligament injury",
+      "Patellar dislocation",
+      "Osteochondral fracture or tibial spine avulsion",
+      "Knee dislocation with multiligament injury",
+      "Extensor mechanism rupture"
     ],
-    [
-     "Primary Differentials",
-     "Meniscal tear, Collateral (medial or lateral) ligament injury, Posterior cruciate ligament injury",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the knee to confirm the tear and detect associated meniscal, chondral, and ligamentous injury",
+      "Clinical stability testing (Lachman, anterior drawer, pivot-shift)",
+      "Plain radiographs to exclude fracture, including a Segond fracture as an indirect sign",
+      "Aspiration of a tense haemarthrosis for symptom relief and diagnostic information where appropriate",
+      "Assessment for associated multiligament injury if a knee dislocation is suspected"
     ],
-    [
-     "Management Strategy",
-     "Initial management with rest, ice, compression and elevation, analgesia, and aspiration of a tense haemarthrosis for symptom",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of knee dislocation with multiligament injury requiring urgent vascular and neurological assessment (risk to the popliteal artery and peroneal nerve)",
+      "A locked knee suggesting a displaced bucket-handle meniscal tear needing prompt treatment",
+      "Signs of neurovascular compromise after significant knee trauma",
+      "Open injury or associated fracture"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing an ACL rupture by not recognising the significance of an acute haemarthrosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes depend on activity demands and associated injuries; reconstruction restores stability and enables return to pivoting sport in most, while appropriately selected patients do well with rehabilitation alone, but chronic instability and untreated meniscal damage increase the long-term risk of osteoarthritis regardless of treatment.",
+    "pitfalls": [
+      "Missing an ACL rupture by not recognising the significance of an acute haemarthrosis",
+      "Failing to identify associated meniscal or collateral ligament injury",
+      "Overlooking a knee dislocation that has spontaneously reduced, with its vascular risk",
+      "Proceeding to surgery on a stiff, poorly rehabilitated knee, increasing the risk of postoperative stiffness"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initial management with rest, ice, compression and elevation, analgesia, and aspiration of a tense haemarthrosis for symptom relief",
+      "Early structured physiotherapy to restore range of motion, quadriceps and hamstring strength and neuromuscular control",
+      "Arthroscopic ligament reconstruction with a tendon graft for young, active or pivoting-sport patients and for symptomatic instability with giving way",
+      "Rehabilitation-led non-operative management for lower-demand patients, with bracing and activity modification",
+      "Identify and treat associated meniscal, chondral and collateral ligament injuries at the same time",
+      "Graduated, criteria-based return to sport after reconstruction with ongoing neuromuscular prevention training",
+      "Orthopaedic referral, with urgent assessment if a knee dislocation or multiligament injury is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for anterior cruciate ligament injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acl-injury-real-image",
-   "title": "Anterior cruciate ligament injury: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "acl_injury-pathway",
+      "title": "Anterior cruciate ligament injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically follows a non-contact pivoting, twisting, or deceleration injury, often in sport, with the patient reporting a 'pop' and rapid swelling of the knee",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of knee dislocation with multiligament injury requiring urgent vascular and neurological assessment (risk to the popliteal artery and peroneal nerve)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the knee to confirm the tear and detect associated meniscal, chondral, and ligamentous injury, Clinical stability testing (Lachman, anterior drawer, pivot-shift), Plain radiographs to exclude fracture, including a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initial management with rest, ice, compression and elevation, analgesia, and aspiration of a tense haemarthrosis for symptom relief"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing an ACL rupture by not recognising the significance of an acute haemarthrosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anterior cruciate ligament injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acl_injury-matrix",
+      "title": "Anterior cruciate ligament injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically follows a non-contact pivoting, twisting, or deceleration injury, often in sport, with the patient reporting a 'pop'",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the knee to confirm the tear and detect associated meniscal, chondral, and ligamentous injury, Clinical stability testing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Meniscal tear, Collateral (medial or lateral) ligament injury, Posterior cruciate ligament injury",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initial management with rest, ice, compression and elevation, analgesia, and aspiration of a tense haemarthrosis for symptom",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing an ACL rupture by not recognising the significance of an acute haemarthrosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anterior cruciate ligament injury."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acl_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the knee",
+          "cells": [
+            {
+              "text": "Confirms the tear; shows meniscal, chondral and ligament injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lachman, anterior drawer and pivot-shift tests",
+          "cells": [
+            {
+              "text": "Anterior tibial translation and rotational instability; Lachman most sensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Excludes fracture; Segond fracture as an indirect sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration of a tense haemarthrosis",
+          "cells": [
+            {
+              "text": "Symptom relief and diagnostic information"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for multiligament injury",
+          "cells": [
+            {
+              "text": "When knee dislocation is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acl_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Meniscal tear",
+          "cells": [
+            {
+              "text": "A locked knee suggests a displaced bucket-handle tear"
+            },
+            {
+              "text": "MRI of the knee"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Knee dislocation with multiligament injury",
+          "cells": [
+            {
+              "text": "Multiligament injury with neurovascular risk"
+            },
+            {
+              "text": "Urgent vascular and neurological assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acl_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rest, ice, compression, elevation and analgesia",
+          "cells": [
+            {
+              "text": "Initial management"
+            },
+            {
+              "text": "Aspirate a tense haemarthrosis for symptom relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early structured physiotherapy",
+          "cells": [
+            {
+              "text": "Restores range of motion and strength"
+            },
+            {
+              "text": "Quadriceps, hamstrings and neuromuscular control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic reconstruction with tendon graft",
+          "cells": [
+            {
+              "text": "Young, active or pivoting-sport patients; symptomatic giving way"
+            },
+            {
+              "text": "Surgical option for instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation-led non-operative management",
+          "cells": [
+            {
+              "text": "Lower-demand patients"
+            },
+            {
+              "text": "Bracing and activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat associated meniscal, chondral and collateral injuries",
+          "cells": [
+            {
+              "text": "Injuries found with the ACL tear"
+            },
+            {
+              "text": "Addressed at the same time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Criteria-based return to sport",
+          "cells": [
+            {
+              "text": "After reconstruction"
+            },
+            {
+              "text": "With neuromuscular prevention training"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acl_injury-dx-mgmt",
+      "title": "Diagnosis and management of Anterior cruciate ligament injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Non-contact pivoting injury with a pop and rapid knee swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Knee dislocation, neurovascular compromise or locked knee?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular and neurological assessment; orthopaedic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Knee MRI, Lachman, anterior drawer, pivot-shift and radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ACL rupture confirmed on MRI and stability testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Rest, ice, compression; aspirate tense haemarthrosis if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review meniscal, collateral, PCL, patellar and osteochondral injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early structured physiotherapy for motion, strength and control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Arthroscopic reconstruction with tendon graft for active patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat associated meniscal and chondral injuries at the same time",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Criteria-based return to sport after reconstruction, with prevention training",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

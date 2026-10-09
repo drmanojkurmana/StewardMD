@@ -1,172 +1,459 @@
 {
- "id": "endomyocardial_fibrosis",
- "name": "Endomyocardial fibrosis",
- "aliases": [
-  "EMF",
-  "Davies disease",
-  "tropical endomyocardial fibrosis"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease / restrictive cardiomyopathy literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A major cause of restrictive cardiomyopathy in tropical and subtropical regions, especially equatorial Africa",
-   "Dense fibrosis of the ventricular endocardium and inflow tracts restricts filling and distorts the valves",
-   "Right-sided disease causes prominent ascites, raised venous pressure, and hepatomegaly, sometimes out of proportion to peripheral oedema",
-   "Left-sided disease produces pulmonary congestion and mitral regurgitation from fibrosis of the subvalvular apparatus",
-   "Apical obliteration by fibrosis and thrombus is characteristic on imaging",
-   "It sits within the hypereosinophilic spectrum, and Loffler endocarditis is regarded as an earlier active phase",
-   "Management is largely supportive, with surgical endocardial resection and valve repair in selected advanced cases"
+  "id": "endomyocardial_fibrosis",
+  "name": "Endomyocardial fibrosis",
+  "aliases": [
+    "EMF",
+    "Davies disease",
+    "tropical endomyocardial fibrosis"
   ],
-  "pathophysiology": "Endomyocardial fibrosis is characterised by progressive fibrous thickening of the endocardium of one or both ventricular apices and inflow regions. It is widely linked to the toxic effects of eosinophil granule proteins, so that an initial eosinophilic and inflammatory phase, exemplified by Loffler endocarditis, evolves into a burnt-out fibrotic stage. The rigid fibrotic endocardium and overlying mural thrombus obliterate the ventricular apices, impair diastolic filling to produce restrictive physiology, and tether the atrioventricular valves, causing regurgitation and progressive heart failure.",
-  "additionalDifferentials": [
-   "Constrictive pericarditis",
-   "Cardiac amyloidosis and other infiltrative cardiomyopathies",
-   "Loffler endocarditis in its active eosinophilic phase",
-   "Carcinoid heart disease",
-   "Hypertrophic cardiomyopathy with restrictive physiology",
-   "Chronic rheumatic valvular disease"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography showing apical obliteration, endocardial thickening, and atrioventricular valve involvement",
-   "Cardiac MRI to characterise fibrosis and thrombus with late enhancement",
-   "Full blood count and eosinophil assessment to identify a hypereosinophilic driver",
-   "ECG demonstrating conduction and repolarisation abnormalities",
-   "Cardiac catheterisation showing restrictive filling and, when needed, endomyocardial biopsy"
-  ],
-  "redFlags": [
-   "Progressive heart failure with intractable ascites",
-   "Systemic embolism from apical mural thrombus",
-   "Severe atrioventricular valve regurgitation",
-   "Haemodynamic compromise from restrictive physiology"
-  ],
-  "prognosis": "Advanced endomyocardial fibrosis carries a poor prognosis with progressive heart failure, and outcomes in the fibrotic stage are limited; surgery may improve symptoms in selected patients but operative risk is significant.",
-  "pitfalls": [
-   "Confusing it with constrictive pericarditis, which is surgically curable",
-   "Missing an underlying hypereosinophilic disorder in the active phase",
-   "Overlooking apical thrombus and the resulting embolic risk",
-   "Attributing isolated right-sided features to primary liver disease"
-  ],
-  "references": [
-   "Braunwald's Heart Disease",
-   "ESC guidance on cardiomyopathies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In the early active eosinophilic (Loffler) phase, treat the hypereosinophilia with corticosteroids and, where indicated, further cytoreductive or targeted therapy to limit progression to fibrosis",
-   "Manage the resulting restrictive heart failure with diuretics for congestion and control of atrial arrhythmia",
-   "Give anticoagulation for mural thrombus and to reduce thromboembolic risk",
-   "Consider surgical endocardial decortication with atrioventricular valve repair or replacement in selected advanced cases to relieve restriction",
-   "Monitor disease activity and complications with serial echocardiography and eosinophil counts",
-   "Manage conduction disease and arrhythmia, considering device therapy where indicated",
-   "Refer to cardiology and cardiothoracic surgery, and evaluate advanced or refractory disease for transplantation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "endomyocardial_fibrosis-pathway",
-   "title": "Endomyocardial fibrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A major cause of restrictive cardiomyopathy in tropical and subtropical regions, especially equatorial Africa",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive heart failure with intractable ascites",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography showing apical obliteration, endocardial thickening, and atrioventricular valve involvement, Cardiac MRI to characterise fibrosis and thrombus with late enhancement, Full blood count and eosinophil"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In the early active eosinophilic (Loffler) phase, treat the hypereosinophilia with corticosteroids and, where indicated, further cytoreductive or targeted therapy to limit progression to fibrosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with constrictive pericarditis, which is surgically curable"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of endomyocardial fibrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "endomyocardial_fibrosis-matrix",
-   "title": "Endomyocardial fibrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A major cause of restrictive cardiomyopathy in tropical and subtropical regions, especially equatorial Africa",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease / restrictive cardiomyopathy literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A major cause of restrictive cardiomyopathy in tropical and subtropical regions, especially equatorial Africa",
+      "Dense fibrosis of the ventricular endocardium and inflow tracts restricts filling and distorts the valves",
+      "Right-sided disease causes prominent ascites, raised venous pressure, and hepatomegaly, sometimes out of proportion to peripheral oedema",
+      "Left-sided disease produces pulmonary congestion and mitral regurgitation from fibrosis of the subvalvular apparatus",
+      "Apical obliteration by fibrosis and thrombus is characteristic on imaging",
+      "It sits within the hypereosinophilic spectrum, and Loffler endocarditis is regarded as an earlier active phase",
+      "Management is largely supportive, with surgical endocardial resection and valve repair in selected advanced cases"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography showing apical obliteration, endocardial thickening, and atrioventricular valve involvement, Cardiac MRI to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Endomyocardial fibrosis is characterised by progressive fibrous thickening of the endocardium of one or both ventricular apices and inflow regions. It is widely linked to the toxic effects of eosinophil granule proteins, so that an initial eosinophilic and inflammatory phase, exemplified by Loffler endocarditis, evolves into a burnt-out fibrotic stage. The rigid fibrotic endocardium and overlying mural thrombus obliterate the ventricular apices, impair diastolic filling to produce restrictive physiology, and tether the atrioventricular valves, causing regurgitation and progressive heart failure.",
+    "additionalDifferentials": [
+      "Constrictive pericarditis",
+      "Cardiac amyloidosis and other infiltrative cardiomyopathies",
+      "Loffler endocarditis in its active eosinophilic phase",
+      "Carcinoid heart disease",
+      "Hypertrophic cardiomyopathy with restrictive physiology",
+      "Chronic rheumatic valvular disease"
     ],
-    [
-     "Primary Differentials",
-     "Constrictive pericarditis, Cardiac amyloidosis and other infiltrative cardiomyopathies, Loffler endocarditis in its active",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography showing apical obliteration, endocardial thickening, and atrioventricular valve involvement",
+      "Cardiac MRI to characterise fibrosis and thrombus with late enhancement",
+      "Full blood count and eosinophil assessment to identify a hypereosinophilic driver",
+      "ECG demonstrating conduction and repolarisation abnormalities",
+      "Cardiac catheterisation showing restrictive filling and, when needed, endomyocardial biopsy"
     ],
-    [
-     "Management Strategy",
-     "In the early active eosinophilic (Loffler) phase, treat the hypereosinophilia with corticosteroids and, where indicated, further",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive heart failure with intractable ascites",
+      "Systemic embolism from apical mural thrombus",
+      "Severe atrioventricular valve regurgitation",
+      "Haemodynamic compromise from restrictive physiology"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with constrictive pericarditis, which is surgically curable",
-     "Prevent diagnostic or management error"
+    "prognosis": "Advanced endomyocardial fibrosis carries a poor prognosis with progressive heart failure, and outcomes in the fibrotic stage are limited; surgery may improve symptoms in selected patients but operative risk is significant.",
+    "pitfalls": [
+      "Confusing it with constrictive pericarditis, which is surgically curable",
+      "Missing an underlying hypereosinophilic disorder in the active phase",
+      "Overlooking apical thrombus and the resulting embolic risk",
+      "Attributing isolated right-sided features to primary liver disease"
+    ],
+    "references": [
+      "Braunwald's Heart Disease",
+      "ESC guidance on cardiomyopathies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In the early active eosinophilic (Loffler) phase, treat the hypereosinophilia with corticosteroids and, where indicated, further cytoreductive or targeted therapy to limit progression to fibrosis",
+      "Manage the resulting restrictive heart failure with diuretics for congestion and control of atrial arrhythmia",
+      "Give anticoagulation for mural thrombus and to reduce thromboembolic risk",
+      "Consider surgical endocardial decortication with atrioventricular valve repair or replacement in selected advanced cases to relieve restriction",
+      "Monitor disease activity and complications with serial echocardiography and eosinophil counts",
+      "Manage conduction disease and arrhythmia, considering device therapy where indicated",
+      "Refer to cardiology and cardiothoracic surgery, and evaluate advanced or refractory disease for transplantation"
     ]
-   ],
-   "caption": "Overview comparison matrix for endomyocardial fibrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "endomyocardial-fibrosis-real-image",
-   "title": "Endomyocardial fibrosis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "endomyocardial_fibrosis-pathway",
+      "title": "Endomyocardial fibrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A major cause of restrictive cardiomyopathy in tropical and subtropical regions, especially equatorial Africa",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive heart failure with intractable ascites",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography showing apical obliteration, endocardial thickening, and atrioventricular valve involvement, Cardiac MRI to characterise fibrosis and thrombus with late enhancement, Full blood count and eosinophil"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In the early active eosinophilic (Loffler) phase, treat the hypereosinophilia with corticosteroids and, where indicated, further cytoreductive or targeted therapy to limit progression to fibrosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with constrictive pericarditis, which is surgically curable"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of endomyocardial fibrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "endomyocardial_fibrosis-matrix",
+      "title": "Endomyocardial fibrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A major cause of restrictive cardiomyopathy in tropical and subtropical regions, especially equatorial Africa",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography showing apical obliteration, endocardial thickening, and atrioventricular valve involvement, Cardiac MRI to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Constrictive pericarditis, Cardiac amyloidosis and other infiltrative cardiomyopathies, Loffler endocarditis in its active",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In the early active eosinophilic (Loffler) phase, treat the hypereosinophilia with corticosteroids and, where indicated, further",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with constrictive pericarditis, which is surgically curable",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for endomyocardial fibrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease / restrictive cardiomyopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "endomyocardial_fibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Apical obliteration, endocardial thickening and atrioventricular valve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Fibrosis and thrombus with late enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and eosinophil assessment",
+          "cells": [
+            {
+              "text": "Identifies a hypereosinophilic driver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Conduction and repolarisation abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Restrictive filling; endomyocardial biopsy when needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endomyocardial_fibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Loffler endocarditis",
+          "cells": [
+            {
+              "text": "Earlier active eosinophilic phase of the same spectrum; treated with corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Surgically curable, so it must not be confused with this condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endomyocardial_fibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids in the active phase",
+          "cells": [
+            {
+              "text": "Treats hypereosinophilia in early Loffler phase to limit progression to fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytoreductive or targeted therapy",
+          "cells": [
+            {
+              "text": "Where indicated, in the active eosinophilic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics and arrhythmia control",
+          "cells": [
+            {
+              "text": "Congestion and atrial arrhythmia from restrictive heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Mural thrombus and thromboembolic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical endocardial decortication with valve repair",
+          "cells": [
+            {
+              "text": "Selected advanced cases to relieve restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Device therapy",
+          "cells": [
+            {
+              "text": "Conduction disease and arrhythmia where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial echocardiography and eosinophil counts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and transplantation",
+          "cells": [
+            {
+              "text": "Cardiology and cardiothoracic surgery; transplant evaluation for advanced or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "endomyocardial_fibrosis-dx-mgmt",
+      "title": "Diagnosis and management of Endomyocardial fibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Restrictive heart failure, ascites or raised venous pressure with apical fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intractable failure, systemic embolism, severe AV regurgitation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer urgently to cardiology and cardiothoracic surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography for apical obliteration; cardiac MRI for fibrosis and thrombus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Active eosinophilic (Loffler) phase with hypereosinophilia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constrictive pericarditis and other infiltrative cardiomyopathies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids and cytoreductive therapy in the active eosinophilic phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diuretics for congestion and control of atrial arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulation for mural thrombus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider endocardial decortication with valve repair in selected advanced cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial echocardiography; transplant evaluation for refractory disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

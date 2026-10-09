@@ -1,168 +1,446 @@
 {
- "id": "frosted_branch_angiitis",
- "name": "Frosted branch angiitis",
- "aliases": [
-  "acute frosted retinal periphlebitis"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Uveitis",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina / uveitis literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A striking retinal vasculitis in which widespread perivascular sheathing gives the vessels a translucent 'frosted branch' appearance resembling frost on a tree",
-   "It is a clinical sign rather than a single disease and may be idiopathic or secondary to infection, autoimmune disease or lymphoma",
-   "The idiopathic form often affects otherwise healthy children and young adults with acute bilateral visual loss",
-   "Secondary causes include herpesviruses, cytomegalovirus, toxoplasma, syphilis and systemic vasculitis, which must be actively excluded",
-   "Vascular sheathing predominantly involves the veins but arteries may also be affected",
-   "The idiopathic form generally responds well to corticosteroids, whereas secondary forms need the underlying cause treated"
+  "id": "frosted_branch_angiitis",
+  "name": "Frosted branch angiitis",
+  "aliases": [
+    "acute frosted retinal periphlebitis"
   ],
-  "pathophysiology": "Frosted branch angiitis reflects intense perivascular inflammation of the retinal vessels, thought in the idiopathic form to be an immune-mediated hypersensitivity response, sometimes following a viral illness. Dense inflammatory cuffing of the vessel walls produces the characteristic sheathing, with associated vascular leakage, macular oedema and, in severe cases, ischaemia. When secondary, the vasculitis is driven by direct infection or by a systemic inflammatory or neoplastic process affecting the retinal vasculature.",
-  "additionalDifferentials": [
-   "Cytomegalovirus retinitis with vascular sheathing",
-   "Acute retinal necrosis",
-   "Behcet retinal vasculitis",
-   "Systemic lupus or other autoimmune retinal vasculitis",
-   "Intraocular lymphoma"
-  ],
-  "additionalInvestigations": [
-   "Fluorescein angiography to map leakage, occlusion and ischaemia",
-   "Infective screen including herpesviruses, cytomegalovirus, toxoplasma and syphilis",
-   "Autoimmune and systemic vasculitis workup",
-   "Optical coherence tomography for macular oedema",
-   "Consideration of intraocular sampling if masquerade is suspected"
-  ],
-  "redFlags": [
-   "Evidence of an infective cause requiring specific therapy before steroids",
-   "Severe retinal ischaemia or neovascularisation",
-   "Features suggesting lymphoma masquerade",
-   "Profound or progressive bilateral visual loss"
-  ],
-  "prognosis": "Visual prognosis is often good in the idiopathic corticosteroid-responsive form, but outcomes in secondary disease depend on the underlying cause and on complications such as ischaemia and macular oedema.",
-  "pitfalls": [
-   "Treating with corticosteroids before excluding infection",
-   "Assuming it is always idiopathic and missing lymphoma or systemic vasculitis",
-   "Overlooking the fellow eye in apparently unilateral cases",
-   "Failing to monitor for ischaemic complications"
-  ],
-  "references": [
-   "Ryan's Retina",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Systemic corticosteroids as the mainstay for the idiopathic immune-mediated form, to which it usually responds well",
-   "Directed treatment of any secondary cause, with antivirals for herpesviruses and cytomegalovirus, anti-toxoplasma therapy, or treatment of syphilis, and appropriate antimicrobial cover before immunosuppression when infection is possible",
-   "Immunosuppressive therapy for underlying systemic vasculitis or autoimmune disease, and treatment of lymphoma where a masquerade is identified",
-   "Management of macular oedema and monitoring for retinal ischaemia and neovascular complications",
-   "Fluorescein angiography and optical coherence tomography surveillance of vascular leakage, occlusion and macular oedema during treatment",
-   "Multidisciplinary input from uveitis specialists and physicians to identify and treat the underlying cause",
-   "Follow-up to taper corticosteroids and detect recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "frosted_branch_angiitis-pathway",
-   "title": "Frosted branch angiitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A striking retinal vasculitis in which widespread perivascular sheathing gives the vessels a translucent 'frosted branch' appearance resembling frost on a tree",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Evidence of an infective cause requiring specific therapy before steroids",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fluorescein angiography to map leakage, occlusion and ischaemia, Infective screen including herpesviruses, cytomegalovirus, toxoplasma and syphilis, Autoimmune and systemic vasculitis workup"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Systemic corticosteroids as the mainstay for the idiopathic immune-mediated form, to which it usually responds well"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating with corticosteroids before excluding infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of frosted branch angiitis."
-  }
- ],
- "tables": [
-  {
-   "id": "frosted_branch_angiitis-matrix",
-   "title": "Frosted branch angiitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A striking retinal vasculitis in which widespread perivascular sheathing gives the vessels a translucent 'frosted branch'",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Uveitis",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina / uveitis literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A striking retinal vasculitis in which widespread perivascular sheathing gives the vessels a translucent 'frosted branch' appearance resembling frost on a tree",
+      "It is a clinical sign rather than a single disease and may be idiopathic or secondary to infection, autoimmune disease or lymphoma",
+      "The idiopathic form often affects otherwise healthy children and young adults with acute bilateral visual loss",
+      "Secondary causes include herpesviruses, cytomegalovirus, toxoplasma, syphilis and systemic vasculitis, which must be actively excluded",
+      "Vascular sheathing predominantly involves the veins but arteries may also be affected",
+      "The idiopathic form generally responds well to corticosteroids, whereas secondary forms need the underlying cause treated"
     ],
-    [
-     "Key Investigations",
-     "Fluorescein angiography to map leakage, occlusion and ischaemia, Infective screen including herpesviruses, cytomegalovirus,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Frosted branch angiitis reflects intense perivascular inflammation of the retinal vessels, thought in the idiopathic form to be an immune-mediated hypersensitivity response, sometimes following a viral illness. Dense inflammatory cuffing of the vessel walls produces the characteristic sheathing, with associated vascular leakage, macular oedema and, in severe cases, ischaemia. When secondary, the vasculitis is driven by direct infection or by a systemic inflammatory or neoplastic process affecting the retinal vasculature.",
+    "additionalDifferentials": [
+      "Cytomegalovirus retinitis with vascular sheathing",
+      "Acute retinal necrosis",
+      "Behcet retinal vasculitis",
+      "Systemic lupus or other autoimmune retinal vasculitis",
+      "Intraocular lymphoma"
     ],
-    [
-     "Primary Differentials",
-     "Cytomegalovirus retinitis with vascular sheathing, Acute retinal necrosis, Behcet retinal vasculitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fluorescein angiography to map leakage, occlusion and ischaemia",
+      "Infective screen including herpesviruses, cytomegalovirus, toxoplasma and syphilis",
+      "Autoimmune and systemic vasculitis workup",
+      "Optical coherence tomography for macular oedema",
+      "Consideration of intraocular sampling if masquerade is suspected"
     ],
-    [
-     "Management Strategy",
-     "Systemic corticosteroids as the mainstay for the idiopathic immune-mediated form, to which it usually responds well",
-     "Core treatment modality"
+    "redFlags": [
+      "Evidence of an infective cause requiring specific therapy before steroids",
+      "Severe retinal ischaemia or neovascularisation",
+      "Features suggesting lymphoma masquerade",
+      "Profound or progressive bilateral visual loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating with corticosteroids before excluding infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Visual prognosis is often good in the idiopathic corticosteroid-responsive form, but outcomes in secondary disease depend on the underlying cause and on complications such as ischaemia and macular oedema.",
+    "pitfalls": [
+      "Treating with corticosteroids before excluding infection",
+      "Assuming it is always idiopathic and missing lymphoma or systemic vasculitis",
+      "Overlooking the fellow eye in apparently unilateral cases",
+      "Failing to monitor for ischaemic complications"
+    ],
+    "references": [
+      "Ryan's Retina",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Systemic corticosteroids as the mainstay for the idiopathic immune-mediated form, to which it usually responds well",
+      "Directed treatment of any secondary cause, with antivirals for herpesviruses and cytomegalovirus, anti-toxoplasma therapy, or treatment of syphilis, and appropriate antimicrobial cover before immunosuppression when infection is possible",
+      "Immunosuppressive therapy for underlying systemic vasculitis or autoimmune disease, and treatment of lymphoma where a masquerade is identified",
+      "Management of macular oedema and monitoring for retinal ischaemia and neovascular complications",
+      "Fluorescein angiography and optical coherence tomography surveillance of vascular leakage, occlusion and macular oedema during treatment",
+      "Multidisciplinary input from uveitis specialists and physicians to identify and treat the underlying cause",
+      "Follow-up to taper corticosteroids and detect recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for frosted branch angiitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "frosted-branch-angiitis-real-image",
-   "title": "Frosted branch angiitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "frosted_branch_angiitis-pathway",
+      "title": "Frosted branch angiitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A striking retinal vasculitis in which widespread perivascular sheathing gives the vessels a translucent 'frosted branch' appearance resembling frost on a tree",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Evidence of an infective cause requiring specific therapy before steroids",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fluorescein angiography to map leakage, occlusion and ischaemia, Infective screen including herpesviruses, cytomegalovirus, toxoplasma and syphilis, Autoimmune and systemic vasculitis workup"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Systemic corticosteroids as the mainstay for the idiopathic immune-mediated form, to which it usually responds well"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating with corticosteroids before excluding infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of frosted branch angiitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "frosted_branch_angiitis-matrix",
+      "title": "Frosted branch angiitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A striking retinal vasculitis in which widespread perivascular sheathing gives the vessels a translucent 'frosted branch'",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fluorescein angiography to map leakage, occlusion and ischaemia, Infective screen including herpesviruses, cytomegalovirus,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cytomegalovirus retinitis with vascular sheathing, Acute retinal necrosis, Behcet retinal vasculitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Systemic corticosteroids as the mainstay for the idiopathic immune-mediated form, to which it usually responds well",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating with corticosteroids before excluding infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for frosted branch angiitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / uveitis literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frosted_branch_angiitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Maps leakage, occlusion and ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective screen",
+          "cells": [
+            {
+              "text": "Herpesviruses, cytomegalovirus, toxoplasma and syphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and systemic vasculitis workup",
+          "cells": [
+            {
+              "text": "Screens for systemic vasculitis or autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular sampling",
+          "cells": [
+            {
+              "text": "If masquerade is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frosted_branch_angiitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cytomegalovirus retinitis",
+          "cells": [
+            {
+              "text": "Vascular sheathing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular lymphoma",
+          "cells": [
+            {
+              "text": "Features suggesting lymphoma masquerade; sampling if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frosted_branch_angiitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay for the idiopathic immune-mediated form, which usually responds well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of secondary causes",
+          "cells": [
+            {
+              "text": "Antivirals for herpesviruses and cytomegalovirus; anti-toxoplasma therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression for systemic disease",
+          "cells": [
+            {
+              "text": "For underlying systemic vasculitis or autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma treatment",
+          "cells": [
+            {
+              "text": "Where lymphoma is masquerading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macular oedema and ischaemia monitoring",
+          "cells": [
+            {
+              "text": "Watches for retinal ischaemia and neovascular complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial angiography and OCT",
+          "cells": [
+            {
+              "text": "Surveillance of leakage, occlusion and macular oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Uveitis specialists and physicians to treat the underlying cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frosted_branch_angiitis-dx-mgmt",
+      "title": "Diagnosis and management of Frosted branch angiitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected frosted branch angiitis: retinal vasculitis on fundus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infective cause, severe ischaemia, lymphoma features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat any infective cause before starting steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluorescein angiography, infective screen and vasculitis workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a secondary infective or systemic cause excluded on screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess for secondary causes such as infection, lymphoma or vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids, the mainstay for the idiopathic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antivirals or anti-toxoplasma therapy for a secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression for systemic vasculitis or autoimmune disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor macular oedema and retinal ischaemia with angiography and OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good visual prognosis in idiopathic steroid-responsive form; secondary disease varies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

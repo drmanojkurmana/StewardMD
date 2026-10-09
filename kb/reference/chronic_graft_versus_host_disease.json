@@ -1,178 +1,475 @@
 {
- "id": "chronic_graft_versus_host_disease",
- "name": "Chronic graft-versus-host disease",
- "aliases": [
-  "chronic GVHD",
-  "cGVHD",
-  "chronic graft-vs-host disease"
- ],
- "class": "non_infective",
- "system": "Immunology / Transplantation",
- "specialty": "Transplantation",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard haematopoietic cell transplantation and transplant immunology reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Develops later after allogeneic transplantation and is characterised by fibrosis and features resembling autoimmune connective-tissue disease rather than the acute inflammatory pattern",
-   "Diagnosis now rests on characteristic clinical features regardless of the interval since transplant, and it may overlap with persisting acute disease",
-   "Skin manifestations range from lichen-planus-like eruptions to sclerodermatous change with tightening, fibrosis, and restricted movement",
-   "Sicca features are common, with dry eyes and a dry mouth accompanied by oral lichenoid change and ulceration",
-   "Multiple organs may be affected, including the lungs with bronchiolitis obliterans, the liver, the gut and oesophagus, the joints and fascia, and the genital mucosa",
-   "Prior acute graft-versus-host disease is the strongest risk factor, and the condition is a leading cause of late morbidity and non-relapse mortality",
-   "Management is prolonged immunosuppression combining corticosteroids with calcineurin inhibitors and steroid-sparing agents, alongside organ-specific supportive care",
-   "Vigilant infection prophylaxis is essential because prolonged immunosuppression and functional asplenia markedly increase infection risk"
+  "id": "chronic_graft_versus_host_disease",
+  "name": "Chronic graft-versus-host disease",
+  "aliases": [
+    "chronic GVHD",
+    "cGVHD",
+    "chronic graft-vs-host disease"
   ],
-  "pathophysiology": "Alloreactive donor T cells, together with dysregulated B-cell responses and autoantibody formation, sustain chronic immune-mediated inflammation. Damage to the thymus impairs the development of tolerance, allowing autoreactive and alloreactive clones to persist. Ongoing inflammation drives progressive tissue fibrosis across multiple organs, producing a phenotype that resembles scleroderma and other autoimmune connective-tissue diseases rather than the acute epithelial injury of acute graft-versus-host disease.",
-  "additionalDifferentials": [
-   "Scleroderma or systemic sclerosis and other connective-tissue diseases",
-   "Sicca syndrome from other causes",
-   "Drug-induced skin or mucosal reactions",
-   "Respiratory infection mimicking bronchiolitis obliterans",
-   "Underlying disease relapse",
-   "Nutritional deficiency causing skin and mucosal change",
-   "Late radiation or chemotherapy-related toxicity"
-  ],
-  "additionalInvestigations": [
-   "Clinical scoring of organ involvement to establish the diagnosis and grade severity",
-   "Skin or mucosal biopsy in atypical presentations",
-   "Pulmonary function tests and imaging for suspected bronchiolitis obliterans",
-   "Ophthalmic assessment including tear-production testing for ocular sicca",
-   "Liver function tests with biopsy where needed",
-   "Oesophageal and gut evaluation for strictures or dysmotility",
-   "Screening for and monitoring of opportunistic infection"
-  ],
-  "redFlags": [
-   "New airflow obstruction or bronchiolitis obliterans indicating serious pulmonary disease",
-   "Progressive sclerosis with joint contractures and impaired function",
-   "Severe weight loss and malnutrition from gut or oesophageal involvement",
-   "Serious or recurrent infection during immunosuppression",
-   "Features suggesting disease relapse or a secondary malignancy"
-  ],
-  "prognosis": "The course is variable: limited disease may resolve, whereas extensive sclerodermatous or pulmonary disease causes long-term disability and contributes to non-relapse mortality; an associated graft-versus-tumour effect can reduce the risk of underlying disease relapse.",
-  "pitfalls": [
-   "Waiting for an arbitrary time cut-off rather than diagnosing on characteristic features",
-   "Missing bronchiolitis obliterans because early lung disease is often asymptomatic",
-   "Neglecting infection prophylaxis during prolonged immunosuppression",
-   "Under-treating ocular and oral sicca and allowing avoidable complications",
-   "Overlooking the increased risk of secondary malignancy on long-term follow-up"
-  ],
-  "references": [
-   "Consensus diagnostic and scoring criteria for chronic graft-versus-host disease",
-   "Standard haematopoietic cell transplantation reference texts",
-   "Transplant immunology reference literature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Systemic corticosteroids, often combined with a calcineurin inhibitor, as first-line immunosuppression",
-   "Second-line therapy for steroid-refractory disease using ruxolitinib, extracorporeal photopheresis, ibrutinib, mycophenolate or rituximab",
-   "Organ-directed treatment including topical corticosteroids and calcineurin inhibitors for cutaneous and oral disease, ocular lubricants for sicca, and inhaled therapy for bronchiolitis obliterans",
-   "Infection prophylaxis against bacteria, fungi, viruses and Pneumocystis during prolonged immunosuppression",
-   "Surveillance and supportive care for organ complications, with pulmonary function monitoring, physiotherapy for sclerosis and fasciitis, and nutritional and ophthalmic support",
-   "Multidisciplinary transplant, dermatology, ophthalmology and respiratory input, with a slow immunosuppression taper guided by response"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_graft_versus_host_disease-pathway",
-   "title": "Chronic graft-versus-host disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Develops later after allogeneic transplantation and is characterised by fibrosis and features resembling autoimmune connective-tissue disease rather than the acute inflammatory pattern",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New airflow obstruction or bronchiolitis obliterans indicating serious pulmonary disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical scoring of organ involvement to establish the diagnosis and grade severity, Skin or mucosal biopsy in atypical presentations, Pulmonary function tests and imaging for suspected bronchiolitis obliterans"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Systemic corticosteroids, often combined with a calcineurin inhibitor, as first-line immunosuppression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Waiting for an arbitrary time cut-off rather than diagnosing on characteristic features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic graft-versus-host disease."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_graft_versus_host_disease-matrix",
-   "title": "Chronic graft-versus-host disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Develops later after allogeneic transplantation and is characterised by fibrosis and features resembling autoimmune",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Transplantation",
+  "specialty": "Transplantation",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard haematopoietic cell transplantation and transplant immunology reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Develops later after allogeneic transplantation and is characterised by fibrosis and features resembling autoimmune connective-tissue disease rather than the acute inflammatory pattern",
+      "Diagnosis now rests on characteristic clinical features regardless of the interval since transplant, and it may overlap with persisting acute disease",
+      "Skin manifestations range from lichen-planus-like eruptions to sclerodermatous change with tightening, fibrosis, and restricted movement",
+      "Sicca features are common, with dry eyes and a dry mouth accompanied by oral lichenoid change and ulceration",
+      "Multiple organs may be affected, including the lungs with bronchiolitis obliterans, the liver, the gut and oesophagus, the joints and fascia, and the genital mucosa",
+      "Prior acute graft-versus-host disease is the strongest risk factor, and the condition is a leading cause of late morbidity and non-relapse mortality",
+      "Management is prolonged immunosuppression combining corticosteroids with calcineurin inhibitors and steroid-sparing agents, alongside organ-specific supportive care",
+      "Vigilant infection prophylaxis is essential because prolonged immunosuppression and functional asplenia markedly increase infection risk"
     ],
-    [
-     "Key Investigations",
-     "Clinical scoring of organ involvement to establish the diagnosis and grade severity, Skin or mucosal biopsy in atypical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Alloreactive donor T cells, together with dysregulated B-cell responses and autoantibody formation, sustain chronic immune-mediated inflammation. Damage to the thymus impairs the development of tolerance, allowing autoreactive and alloreactive clones to persist. Ongoing inflammation drives progressive tissue fibrosis across multiple organs, producing a phenotype that resembles scleroderma and other autoimmune connective-tissue diseases rather than the acute epithelial injury of acute graft-versus-host disease.",
+    "additionalDifferentials": [
+      "Scleroderma or systemic sclerosis and other connective-tissue diseases",
+      "Sicca syndrome from other causes",
+      "Drug-induced skin or mucosal reactions",
+      "Respiratory infection mimicking bronchiolitis obliterans",
+      "Underlying disease relapse",
+      "Nutritional deficiency causing skin and mucosal change",
+      "Late radiation or chemotherapy-related toxicity"
     ],
-    [
-     "Primary Differentials",
-     "Scleroderma or systemic sclerosis and other connective-tissue diseases, Sicca syndrome from other causes, Drug-induced skin or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical scoring of organ involvement to establish the diagnosis and grade severity",
+      "Skin or mucosal biopsy in atypical presentations",
+      "Pulmonary function tests and imaging for suspected bronchiolitis obliterans",
+      "Ophthalmic assessment including tear-production testing for ocular sicca",
+      "Liver function tests with biopsy where needed",
+      "Oesophageal and gut evaluation for strictures or dysmotility",
+      "Screening for and monitoring of opportunistic infection"
     ],
-    [
-     "Management Strategy",
-     "Systemic corticosteroids, often combined with a calcineurin inhibitor, as first-line immunosuppression",
-     "Core treatment modality"
+    "redFlags": [
+      "New airflow obstruction or bronchiolitis obliterans indicating serious pulmonary disease",
+      "Progressive sclerosis with joint contractures and impaired function",
+      "Severe weight loss and malnutrition from gut or oesophageal involvement",
+      "Serious or recurrent infection during immunosuppression",
+      "Features suggesting disease relapse or a secondary malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Waiting for an arbitrary time cut-off rather than diagnosing on characteristic features",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable: limited disease may resolve, whereas extensive sclerodermatous or pulmonary disease causes long-term disability and contributes to non-relapse mortality; an associated graft-versus-tumour effect can reduce the risk of underlying disease relapse.",
+    "pitfalls": [
+      "Waiting for an arbitrary time cut-off rather than diagnosing on characteristic features",
+      "Missing bronchiolitis obliterans because early lung disease is often asymptomatic",
+      "Neglecting infection prophylaxis during prolonged immunosuppression",
+      "Under-treating ocular and oral sicca and allowing avoidable complications",
+      "Overlooking the increased risk of secondary malignancy on long-term follow-up"
+    ],
+    "references": [
+      "Consensus diagnostic and scoring criteria for chronic graft-versus-host disease",
+      "Standard haematopoietic cell transplantation reference texts",
+      "Transplant immunology reference literature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Systemic corticosteroids, often combined with a calcineurin inhibitor, as first-line immunosuppression",
+      "Second-line therapy for steroid-refractory disease using ruxolitinib, extracorporeal photopheresis, ibrutinib, mycophenolate or rituximab",
+      "Organ-directed treatment including topical corticosteroids and calcineurin inhibitors for cutaneous and oral disease, ocular lubricants for sicca, and inhaled therapy for bronchiolitis obliterans",
+      "Infection prophylaxis against bacteria, fungi, viruses and Pneumocystis during prolonged immunosuppression",
+      "Surveillance and supportive care for organ complications, with pulmonary function monitoring, physiotherapy for sclerosis and fasciitis, and nutritional and ophthalmic support",
+      "Multidisciplinary transplant, dermatology, ophthalmology and respiratory input, with a slow immunosuppression taper guided by response"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic graft-versus-host disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-graft-versus-host-disease-real-image",
-   "title": "Chronic graft-versus-host disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "chronic_graft_versus_host_disease-pathway",
+      "title": "Chronic graft-versus-host disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Develops later after allogeneic transplantation and is characterised by fibrosis and features resembling autoimmune connective-tissue disease rather than the acute inflammatory pattern",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New airflow obstruction or bronchiolitis obliterans indicating serious pulmonary disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical scoring of organ involvement to establish the diagnosis and grade severity, Skin or mucosal biopsy in atypical presentations, Pulmonary function tests and imaging for suspected bronchiolitis obliterans"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Systemic corticosteroids, often combined with a calcineurin inhibitor, as first-line immunosuppression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Waiting for an arbitrary time cut-off rather than diagnosing on characteristic features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic graft-versus-host disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_graft_versus_host_disease-matrix",
+      "title": "Chronic graft-versus-host disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Develops later after allogeneic transplantation and is characterised by fibrosis and features resembling autoimmune",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical scoring of organ involvement to establish the diagnosis and grade severity, Skin or mucosal biopsy in atypical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Scleroderma or systemic sclerosis and other connective-tissue diseases, Sicca syndrome from other causes, Drug-induced skin or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Systemic corticosteroids, often combined with a calcineurin inhibitor, as first-line immunosuppression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Waiting for an arbitrary time cut-off rather than diagnosing on characteristic features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic graft-versus-host disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard haematopoietic cell transplantation and transplant immunology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_graft_versus_host_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical scoring of organ involvement",
+          "cells": [
+            {
+              "text": "Establishes the diagnosis and grades severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin or mucosal biopsy",
+          "cells": [
+            {
+              "text": "Atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests and imaging",
+          "cells": [
+            {
+              "text": "Suspected bronchiolitis obliterans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic assessment with tear-production testing",
+          "cells": [
+            {
+              "text": "Ocular sicca"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal and gut evaluation",
+          "cells": [
+            {
+              "text": "Strictures or dysmotility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_graft_versus_host_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Scleroderma or systemic sclerosis",
+          "cells": [
+            {
+              "text": "Sclerodermatous skin change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory infection",
+          "cells": [
+            {
+              "text": "Mimics bronchiolitis obliterans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying disease relapse",
+          "cells": [
+            {
+              "text": "Relapse rather than chronic graft-versus-host disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_graft_versus_host_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids with calcineurin inhibitor",
+          "cells": [
+            {
+              "text": "First-line immunosuppression"
+            },
+            {
+              "text": "Systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line therapy",
+          "cells": [
+            {
+              "text": "Ruxolitinib, extracorporeal photopheresis, ibrutinib, mycophenolate or rituximab"
+            },
+            {
+              "text": "Steroid-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-directed treatment",
+          "cells": [
+            {
+              "text": "Topical corticosteroids and calcineurin inhibitors for skin and oral disease; ocular lubricants; inhaled therapy for bronchiolitis obliterans"
+            },
+            {
+              "text": "Organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis",
+          "cells": [
+            {
+              "text": "Prophylaxis against bacteria, fungi, viruses and Pneumocystis"
+            },
+            {
+              "text": "Prolonged immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ surveillance",
+          "cells": [
+            {
+              "text": "Pulmonary function monitoring, physiotherapy for sclerosis, nutrition and ophthalmic support"
+            },
+            {
+              "text": "Organ complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Transplant, dermatology, ophthalmology and respiratory input; slow immunosuppression taper"
+            },
+            {
+              "text": "Response-guided taper"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_graft_versus_host_disease-dx-mgmt",
+      "title": "Diagnosis and management of Chronic graft-versus-host disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic graft-versus-host disease: sclerosis, sicca or airflow obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bronchiolitis obliterans, progressive sclerosis, serious infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent transplant and respiratory review for airflow obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Organ scoring, skin or mucosal biopsy, lung function and eye tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Chronic graft-versus-host features with organ involvement confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids with a calcineurin inhibitor as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check scleroderma, respiratory infection and disease relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ruxolitinib, photopheresis or other second-line agents for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical therapy for skin and mouth; inhaled therapy for bronchiolitis obliterans",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prophylaxis against bacteria, fungi, viruses and Pneumocystis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slow immunosuppression taper guided by response",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

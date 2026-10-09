@@ -1,176 +1,454 @@
 {
- "id": "subacute_combined_degeneration",
- "name": "Subacute combined degeneration of the spinal cord",
- "aliases": [
-  "SCD",
-  "SACD",
-  "subacute combined degeneration",
-  "B12 myelopathy"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by vitamin B12 (cobalamin) deficiency, which preferentially damages the dorsal columns and lateral corticospinal tracts of the spinal cord",
-   "Typically presents with symmetrical distal paraesthesiae, loss of vibration and joint-position sense, and a progressive spastic-ataxic gait",
-   "Combines upper motor neuron signs (spasticity, extensor plantars) with impaired proprioception and sometimes absent ankle reflexes, giving a mixed picture",
-   "Neuropsychiatric features such as cognitive slowing, irritability, or depression may accompany or precede the myelopathy",
-   "Serum B12 can be borderline or normal, so raised methylmalonic acid and homocysteine are more sensitive markers of tissue deficiency",
-   "Common causes include pernicious anaemia, malabsorption, strict vegan diet, gastric surgery, and prolonged nitrous oxide exposure",
-   "Early replacement of B12 can halt and partially reverse deficits; delayed treatment risks permanent disability",
-   "Macrocytic anaemia may be absent, so neurological disease can occur without haematological changes"
+  "id": "subacute_combined_degeneration",
+  "name": "Subacute combined degeneration of the spinal cord",
+  "aliases": [
+    "SCD",
+    "SACD",
+    "subacute combined degeneration",
+    "B12 myelopathy"
   ],
-  "pathophysiology": "Vitamin B12 is a cofactor for methionine synthase and methylmalonyl-CoA mutase. Deficiency impairs myelin synthesis and maintenance, leading to vacuolar demyelination and axonal degeneration that begins in the dorsal columns and later involves the lateral (corticospinal) columns, hence the term 'combined'. Nitrous oxide irreversibly oxidises the cobalt core of cobalamin and can precipitate the disorder in those with marginal stores. The pathology accounts for the combination of sensory ataxia from posterior column loss and spasticity from corticospinal tract involvement.",
-  "additionalDifferentials": [
-   "Copper deficiency myelopathy (clinically near-identical picture)",
-   "Multiple sclerosis and other demyelinating myelopathy",
-   "Compressive cervical myelopathy or spondylotic myelopathy",
-   "Tabes dorsalis and other causes of sensory ataxia",
-   "Hereditary spastic paraplegia",
-   "HTLV-1 associated myelopathy"
-  ],
-  "additionalInvestigations": [
-   "Serum vitamin B12 with methylmalonic acid and homocysteine when B12 is borderline",
-   "Full blood count and blood film for macrocytosis and hypersegmented neutrophils",
-   "Intrinsic factor and parietal cell antibodies to identify pernicious anaemia",
-   "MRI of the spine showing high T2 signal in the dorsal columns (inverted V or dot sign)",
-   "Serum copper and caeruloplasmin to exclude copper deficiency mimicking the syndrome",
-   "Nerve conduction studies if a coexisting peripheral neuropathy is suspected"
-  ],
-  "redFlags": [
-   "Rapidly progressive myelopathy causing gait failure or sphincter disturbance",
-   "Recent or repeated nitrous oxide use with acute neurological decline",
-   "Severe anaemia or pancytopenia requiring urgent evaluation",
-   "Coexisting cognitive decline suggesting advanced or long-standing deficiency"
-  ],
-  "prognosis": "Recovery depends on how early replacement begins; symptoms present for less than a few months often improve substantially, whereas long-standing deficits may only stabilise, leaving residual sensory ataxia or spasticity.",
-  "pitfalls": [
-   "Relying on a normal serum B12 and missing functional deficiency demonstrable by methylmalonic acid",
-   "Assuming anaemia must be present, thereby overlooking purely neurological presentations",
-   "Failing to ask about recreational or repeated medical nitrous oxide exposure",
-   "Overlooking copper deficiency, which produces an indistinguishable myelopathy",
-   "Attributing spastic-ataxic gait solely to spondylosis and delaying B12 assessment"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Urgent vitamin B12 (hydroxocobalamin) replacement, initially by the parenteral route, started promptly to halt progression",
-   "Long-term maintenance cobalamin therapy, lifelong where the cause is pernicious anaemia or irreversible malabsorption",
-   "Identify and treat the underlying cause: pernicious anaemia, malabsorption, gastric surgery or dietary deficiency, with dietary advice or supplementation",
-   "Stop ongoing nitrous oxide exposure, which precipitates and worsens the disorder",
-   "Correct coexisting folate and iron deficiency, but replace B12 first to avoid precipitating neurological deterioration",
-   "Rehabilitation with physiotherapy and occupational therapy for residual sensory ataxia and spasticity, with falls prevention",
-   "Monitor the haematological and neurological response, escalating promptly since earlier treatment predicts better recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subacute_combined_degeneration-pathway",
-   "title": "Subacute combined degeneration of the spinal cord: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by vitamin B12 (cobalamin) deficiency, which preferentially damages the dorsal columns and lateral corticospinal tracts of the spinal cord",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive myelopathy causing gait failure or sphincter disturbance",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum vitamin B12 with methylmalonic acid and homocysteine when B12 is borderline, Full blood count and blood film for macrocytosis and hypersegmented neutrophils, Intrinsic factor and parietal cell antibodies to identify"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Urgent vitamin B12 (hydroxocobalamin) replacement, initially by the parenteral route, started promptly to halt progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on a normal serum B12 and missing functional deficiency demonstrable by methylmalonic acid"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of subacute combined degeneration of the spinal cord."
-  }
- ],
- "tables": [
-  {
-   "id": "subacute_combined_degeneration-matrix",
-   "title": "Subacute combined degeneration of the spinal cord: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by vitamin B12 (cobalamin) deficiency, which preferentially damages the dorsal columns and lateral corticospinal tracts of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by vitamin B12 (cobalamin) deficiency, which preferentially damages the dorsal columns and lateral corticospinal tracts of the spinal cord",
+      "Typically presents with symmetrical distal paraesthesiae, loss of vibration and joint-position sense, and a progressive spastic-ataxic gait",
+      "Combines upper motor neuron signs (spasticity, extensor plantars) with impaired proprioception and sometimes absent ankle reflexes, giving a mixed picture",
+      "Neuropsychiatric features such as cognitive slowing, irritability, or depression may accompany or precede the myelopathy",
+      "Serum B12 can be borderline or normal, so raised methylmalonic acid and homocysteine are more sensitive markers of tissue deficiency",
+      "Common causes include pernicious anaemia, malabsorption, strict vegan diet, gastric surgery, and prolonged nitrous oxide exposure",
+      "Early replacement of B12 can halt and partially reverse deficits; delayed treatment risks permanent disability",
+      "Macrocytic anaemia may be absent, so neurological disease can occur without haematological changes"
     ],
-    [
-     "Key Investigations",
-     "Serum vitamin B12 with methylmalonic acid and homocysteine when B12 is borderline, Full blood count and blood film for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vitamin B12 is a cofactor for methionine synthase and methylmalonyl-CoA mutase. Deficiency impairs myelin synthesis and maintenance, leading to vacuolar demyelination and axonal degeneration that begins in the dorsal columns and later involves the lateral (corticospinal) columns, hence the term 'combined'. Nitrous oxide irreversibly oxidises the cobalt core of cobalamin and can precipitate the disorder in those with marginal stores. The pathology accounts for the combination of sensory ataxia from posterior column loss and spasticity from corticospinal tract involvement.",
+    "additionalDifferentials": [
+      "Copper deficiency myelopathy (clinically near-identical picture)",
+      "Multiple sclerosis and other demyelinating myelopathy",
+      "Compressive cervical myelopathy or spondylotic myelopathy",
+      "Tabes dorsalis and other causes of sensory ataxia",
+      "Hereditary spastic paraplegia",
+      "HTLV-1 associated myelopathy"
     ],
-    [
-     "Primary Differentials",
-     "Copper deficiency myelopathy (clinically near-identical picture), Multiple sclerosis and other demyelinating myelopathy,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum vitamin B12 with methylmalonic acid and homocysteine when B12 is borderline",
+      "Full blood count and blood film for macrocytosis and hypersegmented neutrophils",
+      "Intrinsic factor and parietal cell antibodies to identify pernicious anaemia",
+      "MRI of the spine showing high T2 signal in the dorsal columns (inverted V or dot sign)",
+      "Serum copper and caeruloplasmin to exclude copper deficiency mimicking the syndrome",
+      "Nerve conduction studies if a coexisting peripheral neuropathy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Urgent vitamin B12 (hydroxocobalamin) replacement, initially by the parenteral route, started promptly to halt progression",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive myelopathy causing gait failure or sphincter disturbance",
+      "Recent or repeated nitrous oxide use with acute neurological decline",
+      "Severe anaemia or pancytopenia requiring urgent evaluation",
+      "Coexisting cognitive decline suggesting advanced or long-standing deficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on a normal serum B12 and missing functional deficiency demonstrable by methylmalonic acid",
-     "Prevent diagnostic or management error"
+    "prognosis": "Recovery depends on how early replacement begins; symptoms present for less than a few months often improve substantially, whereas long-standing deficits may only stabilise, leaving residual sensory ataxia or spasticity.",
+    "pitfalls": [
+      "Relying on a normal serum B12 and missing functional deficiency demonstrable by methylmalonic acid",
+      "Assuming anaemia must be present, thereby overlooking purely neurological presentations",
+      "Failing to ask about recreational or repeated medical nitrous oxide exposure",
+      "Overlooking copper deficiency, which produces an indistinguishable myelopathy",
+      "Attributing spastic-ataxic gait solely to spondylosis and delaying B12 assessment"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Urgent vitamin B12 (hydroxocobalamin) replacement, initially by the parenteral route, started promptly to halt progression",
+      "Long-term maintenance cobalamin therapy, lifelong where the cause is pernicious anaemia or irreversible malabsorption",
+      "Identify and treat the underlying cause: pernicious anaemia, malabsorption, gastric surgery or dietary deficiency, with dietary advice or supplementation",
+      "Stop ongoing nitrous oxide exposure, which precipitates and worsens the disorder",
+      "Correct coexisting folate and iron deficiency, but replace B12 first to avoid precipitating neurological deterioration",
+      "Rehabilitation with physiotherapy and occupational therapy for residual sensory ataxia and spasticity, with falls prevention",
+      "Monitor the haematological and neurological response, escalating promptly since earlier treatment predicts better recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for subacute combined degeneration of the spinal cord."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subacute-combined-degeneration-real-image",
-   "title": "Subacute combined degeneration of the spinal cord: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "subacute_combined_degeneration-pathway",
+      "title": "Subacute combined degeneration of the spinal cord: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by vitamin B12 (cobalamin) deficiency, which preferentially damages the dorsal columns and lateral corticospinal tracts of the spinal cord",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive myelopathy causing gait failure or sphincter disturbance",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum vitamin B12 with methylmalonic acid and homocysteine when B12 is borderline, Full blood count and blood film for macrocytosis and hypersegmented neutrophils, Intrinsic factor and parietal cell antibodies to identify"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Urgent vitamin B12 (hydroxocobalamin) replacement, initially by the parenteral route, started promptly to halt progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on a normal serum B12 and missing functional deficiency demonstrable by methylmalonic acid"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of subacute combined degeneration of the spinal cord."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subacute_combined_degeneration-matrix",
+      "title": "Subacute combined degeneration of the spinal cord: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by vitamin B12 (cobalamin) deficiency, which preferentially damages the dorsal columns and lateral corticospinal tracts of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum vitamin B12 with methylmalonic acid and homocysteine when B12 is borderline, Full blood count and blood film for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Copper deficiency myelopathy (clinically near-identical picture), Multiple sclerosis and other demyelinating myelopathy,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Urgent vitamin B12 (hydroxocobalamin) replacement, initially by the parenteral route, started promptly to halt progression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a normal serum B12 and missing functional deficiency demonstrable by methylmalonic acid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for subacute combined degeneration of the spinal cord."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subacute_combined_degeneration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum B12 with methylmalonic acid and homocysteine",
+          "cells": [
+            {
+              "text": "Functional deficiency when B12 is borderline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Macrocytosis and hypersegmented neutrophils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrinsic factor and parietal cell antibodies",
+          "cells": [
+            {
+              "text": "Pernicious anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the spine",
+          "cells": [
+            {
+              "text": "High T2 signal in the dorsal columns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum copper and caeruloplasmin",
+          "cells": [
+            {
+              "text": "Copper deficiency mimic excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Coexisting peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_combined_degeneration-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Copper deficiency myelopathy",
+          "cells": [
+            {
+              "text": "A near-identical picture; copper testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive cervical or spondylotic myelopathy",
+          "cells": [
+            {
+              "text": "Imaging distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacute_combined_degeneration-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent hydroxocobalamin replacement",
+          "cells": [
+            {
+              "text": "Initially parenteral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term maintenance cobalamin",
+          "cells": [
+            {
+              "text": "Lifelong where the cause is irreversible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of the underlying cause",
+          "cells": [
+            {
+              "text": "Pernicious anaemia, malabsorption or diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop nitrous oxide exposure",
+          "cells": [
+            {
+              "text": "Precipitates and worsens the myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folate and iron correction",
+          "cells": [
+            {
+              "text": "After B12 is replaced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy for residual deficits"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subacute_combined_degeneration-dx-mgmt",
+      "title": "Diagnosis and management of Subacute combined degeneration of the spinal cord",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Distal paraesthesia, vibration loss and spasticity: suspected B12 myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid myelopathy, nitrous oxide exposure, severe anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent B12 replacement and haematology review for severe anaemia or rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum B12, MMA and homocysteine; FBC and film; intrinsic factor antibodies; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is B12 deficiency confirmed by raised MMA with dorsal column signal on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider copper deficiency, compressive myelopathy or MS; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent parenteral hydroxocobalamin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong maintenance cobalamin where the cause is irreversible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Identify and treat the cause, such as pernicious anaemia or malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stop nitrous oxide exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early replacement can halt and partly reverse deficits; delay risks permanent damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

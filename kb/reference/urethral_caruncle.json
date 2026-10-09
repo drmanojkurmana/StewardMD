@@ -1,172 +1,441 @@
 {
- "id": "urethral_caruncle",
- "name": "Urethral caruncle",
- "aliases": [
-  "caruncle of the urethra",
-  "urethral meatus caruncle",
-  "distal urethral polyp"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign, fleshy, reddish polypoid lesion at the posterior (dorsal) edge of the external urethral meatus",
-   "Overwhelmingly a condition of postmenopausal women, linked to oestrogen deficiency and atrophy of the urethral and vaginal tissues",
-   "Often asymptomatic and found incidentally, but may cause spotting or bleeding, dysuria, local discomfort, or pain on contact",
-   "Usually small and soft, and the diagnosis is clinical on inspection of the meatus",
-   "The main concern is distinguishing it from urethral carcinoma or prolapsed urethral mucosa, especially if the lesion is firm, irregular, ulcerated, or enlarging",
-   "Topical oestrogen and conservative measures suffice for most; surgical excision is reserved for large, symptomatic, or diagnostically uncertain lesions, with biopsy if malignancy is suspected",
-   "Recurrence can occur, and any atypical lesion should undergo histological examination"
+  "id": "urethral_caruncle",
+  "name": "Urethral caruncle",
+  "aliases": [
+    "caruncle of the urethra",
+    "urethral meatus caruncle",
+    "distal urethral polyp"
   ],
-  "pathophysiology": "Urethral caruncles are thought to arise from oestrogen withdrawal after the menopause, which renders the distal urethral and periurethral mucosa atrophic and prone to eversion or prolapse at the meatus. The exposed tissue becomes chronically inflamed and vascular, forming a soft polypoid nodule composed of loose connective tissue, inflammatory cells, and a rich vascular network covered by transitional or squamous epithelium. The lesion is benign, but because it can bleed, ulcerate, and mimic malignancy, atypical examples warrant biopsy.",
-  "additionalDifferentials": [
-   "Urethral carcinoma",
-   "Urethral mucosal prolapse",
-   "Urethral diverticulum",
-   "Periurethral cyst or abscess",
-   "Condyloma or other meatal lesion",
-   "Prolapsed ureterocele (rare)"
-  ],
-  "additionalInvestigations": [
-   "Careful clinical examination of the meatus",
-   "Biopsy or excision histology when features are atypical",
-   "Urinalysis and urine culture",
-   "Cystourethroscopy if intraluminal pathology is suspected",
-   "MRI or examination under anaesthesia for suspicious lesions"
-  ],
-  "redFlags": [
-   "A firm, irregular, indurated, or ulcerated lesion",
-   "Rapid growth",
-   "Persistent bleeding",
-   "Associated inguinal lymphadenopathy",
-   "Failure to respond to topical oestrogen"
-  ],
-  "prognosis": "Benign with an excellent prognosis; symptoms usually settle with conservative or topical oestrogen treatment, though caruncles may recur, and rare atypical lesions require exclusion of malignancy.",
-  "pitfalls": [
-   "Assuming any meatal lesion is a benign caruncle and missing a urethral carcinoma",
-   "Excising without histology when the features are atypical",
-   "Overlooking a treatable underlying oestrogen deficiency amenable to topical therapy",
-   "Confusing it with circumferential urethral mucosal prolapse, which is managed differently"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Blandy's Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer first-line topical oestrogen cream to reverse the postmenopausal urethral atrophy that underlies the lesion",
-   "Advise conservative measures such as sitz baths, good local hygiene and topical emollients for symptomatic relief",
-   "Treat any associated local infection or inflammation",
-   "Reserve surgical excision with ligation or cautery of the base for large, persistently bleeding, symptomatic, or diagnostically uncertain caruncles",
-   "Perform biopsy to exclude urethral carcinoma when the lesion is firm, irregular, ulcerated, or enlarging",
-   "Review for recurrence, reinforcing maintenance topical oestrogen where appropriate"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "urethral_caruncle-pathway",
-   "title": "Urethral caruncle: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign, fleshy, reddish polypoid lesion at the posterior (dorsal) edge of the external urethral meatus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A firm, irregular, indurated, or ulcerated lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful clinical examination of the meatus, Biopsy or excision histology when features are atypical, Urinalysis and urine culture"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer first-line topical oestrogen cream to reverse the postmenopausal urethral atrophy that underlies the lesion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming any meatal lesion is a benign caruncle and missing a urethral carcinoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of urethral caruncle."
-  }
- ],
- "tables": [
-  {
-   "id": "urethral_caruncle-matrix",
-   "title": "Urethral caruncle: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign, fleshy, reddish polypoid lesion at the posterior (dorsal) edge of the external urethral meatus",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign, fleshy, reddish polypoid lesion at the posterior (dorsal) edge of the external urethral meatus",
+      "Overwhelmingly a condition of postmenopausal women, linked to oestrogen deficiency and atrophy of the urethral and vaginal tissues",
+      "Often asymptomatic and found incidentally, but may cause spotting or bleeding, dysuria, local discomfort, or pain on contact",
+      "Usually small and soft, and the diagnosis is clinical on inspection of the meatus",
+      "The main concern is distinguishing it from urethral carcinoma or prolapsed urethral mucosa, especially if the lesion is firm, irregular, ulcerated, or enlarging",
+      "Topical oestrogen and conservative measures suffice for most; surgical excision is reserved for large, symptomatic, or diagnostically uncertain lesions, with biopsy if malignancy is suspected",
+      "Recurrence can occur, and any atypical lesion should undergo histological examination"
     ],
-    [
-     "Key Investigations",
-     "Careful clinical examination of the meatus, Biopsy or excision histology when features are atypical, Urinalysis and urine culture",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Urethral caruncles are thought to arise from oestrogen withdrawal after the menopause, which renders the distal urethral and periurethral mucosa atrophic and prone to eversion or prolapse at the meatus. The exposed tissue becomes chronically inflamed and vascular, forming a soft polypoid nodule composed of loose connective tissue, inflammatory cells, and a rich vascular network covered by transitional or squamous epithelium. The lesion is benign, but because it can bleed, ulcerate, and mimic malignancy, atypical examples warrant biopsy.",
+    "additionalDifferentials": [
+      "Urethral carcinoma",
+      "Urethral mucosal prolapse",
+      "Urethral diverticulum",
+      "Periurethral cyst or abscess",
+      "Condyloma or other meatal lesion",
+      "Prolapsed ureterocele (rare)"
     ],
-    [
-     "Primary Differentials",
-     "Urethral carcinoma, Urethral mucosal prolapse, Urethral diverticulum",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful clinical examination of the meatus",
+      "Biopsy or excision histology when features are atypical",
+      "Urinalysis and urine culture",
+      "Cystourethroscopy if intraluminal pathology is suspected",
+      "MRI or examination under anaesthesia for suspicious lesions"
     ],
-    [
-     "Management Strategy",
-     "Offer first-line topical oestrogen cream to reverse the postmenopausal urethral atrophy that underlies the lesion",
-     "Core treatment modality"
+    "redFlags": [
+      "A firm, irregular, indurated, or ulcerated lesion",
+      "Rapid growth",
+      "Persistent bleeding",
+      "Associated inguinal lymphadenopathy",
+      "Failure to respond to topical oestrogen"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming any meatal lesion is a benign caruncle and missing a urethral carcinoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign with an excellent prognosis; symptoms usually settle with conservative or topical oestrogen treatment, though caruncles may recur, and rare atypical lesions require exclusion of malignancy.",
+    "pitfalls": [
+      "Assuming any meatal lesion is a benign caruncle and missing a urethral carcinoma",
+      "Excising without histology when the features are atypical",
+      "Overlooking a treatable underlying oestrogen deficiency amenable to topical therapy",
+      "Confusing it with circumferential urethral mucosal prolapse, which is managed differently"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Blandy's Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer first-line topical oestrogen cream to reverse the postmenopausal urethral atrophy that underlies the lesion",
+      "Advise conservative measures such as sitz baths, good local hygiene and topical emollients for symptomatic relief",
+      "Treat any associated local infection or inflammation",
+      "Reserve surgical excision with ligation or cautery of the base for large, persistently bleeding, symptomatic, or diagnostically uncertain caruncles",
+      "Perform biopsy to exclude urethral carcinoma when the lesion is firm, irregular, ulcerated, or enlarging",
+      "Review for recurrence, reinforcing maintenance topical oestrogen where appropriate"
     ]
-   ],
-   "caption": "Overview comparison matrix for urethral caruncle."
-  }
- ],
- "diagrams": [
-  {
-   "id": "urethral-caruncle-real-image",
-   "title": "Urethral caruncle: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "urethral_caruncle-pathway",
+      "title": "Urethral caruncle: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign, fleshy, reddish polypoid lesion at the posterior (dorsal) edge of the external urethral meatus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A firm, irregular, indurated, or ulcerated lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful clinical examination of the meatus, Biopsy or excision histology when features are atypical, Urinalysis and urine culture"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer first-line topical oestrogen cream to reverse the postmenopausal urethral atrophy that underlies the lesion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming any meatal lesion is a benign caruncle and missing a urethral carcinoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of urethral caruncle."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "urethral_caruncle-matrix",
+      "title": "Urethral caruncle: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign, fleshy, reddish polypoid lesion at the posterior (dorsal) edge of the external urethral meatus",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful clinical examination of the meatus, Biopsy or excision histology when features are atypical, Urinalysis and urine culture",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Urethral carcinoma, Urethral mucosal prolapse, Urethral diverticulum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer first-line topical oestrogen cream to reverse the postmenopausal urethral atrophy that underlies the lesion",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any meatal lesion is a benign caruncle and missing a urethral carcinoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for urethral caruncle."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urethral_caruncle-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Careful clinical examination of the meatus",
+          "cells": [
+            {
+              "text": "Small, soft, reddish polypoid lesion at the dorsal meatal edge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy or excision histology",
+          "cells": [
+            {
+              "text": "Used when features are atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and urine culture",
+          "cells": [
+            {
+              "text": "Associated infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystourethroscopy",
+          "cells": [
+            {
+              "text": "Intraluminal pathology, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethral_caruncle-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urethral carcinoma",
+          "cells": [
+            {
+              "text": "Firm, irregular, indurated or ulcerated lesion, or rapid growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral diverticulum",
+          "cells": [
+            {
+              "text": "Tender anterior vaginal wall mass that may express pus or urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Condyloma or other meatal lesion",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethral_caruncle-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical oestrogen cream",
+          "cells": [
+            {
+              "text": "First-line; reverses postmenopausal urethral atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative measures",
+          "cells": [
+            {
+              "text": "Sitz baths, local hygiene and topical emollients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat local infection",
+          "cells": [
+            {
+              "text": "Any associated infection or inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Large, persistently bleeding, symptomatic or diagnostically uncertain lesions; ligation or cautery of the base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Firm, irregular, ulcerated or enlarging lesion, to exclude urethral carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence review",
+          "cells": [
+            {
+              "text": "Maintenance topical oestrogen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urethral_caruncle-dx-mgmt",
+      "title": "Diagnosis and management of Urethral caruncle",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected urethral caruncle: small reddish meatal lesion in a postmenopausal woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (firm or ulcerated lesion, rapid growth or persistent bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy to exclude urethral carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Meatal examination; urinalysis and culture; cystourethroscopy if intraluminal",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion small and soft, without atypical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy or excision histology to exclude urethral carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "First-line topical oestrogen cream to reverse urethral atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sitz baths, local hygiene and emollients for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any associated local infection or inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excision with ligation or cautery of the base for large or bleeding lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually benign; recurrence is managed with maintenance topical oestrogen",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

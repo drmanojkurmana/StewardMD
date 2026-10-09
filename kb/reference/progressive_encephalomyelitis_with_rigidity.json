@@ -1,177 +1,474 @@
 {
- "id": "progressive_encephalomyelitis_with_rigidity",
- "name": "Progressive Encephalomyelitis with Rigidity and Myoclonus (PERM)",
- "aliases": [
-  "PERM",
-  "Progressive encephalomyelitis with rigidity"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A severe variant at the extreme end of the stiff-person spectrum, combining axial and limb rigidity with brainstem, autonomic and long-tract involvement.",
-   "Presents subacutely with painful muscle stiffness and spasms, prominent stimulus-sensitive and spontaneous myoclonus, and exaggerated startle.",
-   "Brainstem features distinguish it from classic stiff-person syndrome: ophthalmoplegia, nystagmus, dysarthria, dysphagia and gaze palsies.",
-   "Dysautonomia is common and potentially fatal, with labile blood pressure, arrhythmia, hyperhidrosis and thermoregulatory instability.",
-   "Most cases are associated with glycine receptor antibodies; a subset carry anti-GAD or amphiphysin antibodies, the latter flagging paraneoplastic disease.",
-   "A paraneoplastic search is essential, particularly for breast carcinoma, thymoma, lymphoma and small cell lung cancer.",
-   "Electromyography shows continuous motor unit activity with co-contraction of agonists and antagonists, and startle studies show exaggerated responses.",
-   "Immunotherapy often produces marked improvement, contrasting with the historically poor outcome of untreated disease, so early recognition is vital."
+  "id": "progressive_encephalomyelitis_with_rigidity",
+  "name": "Progressive Encephalomyelitis with Rigidity and Myoclonus (PERM)",
+  "aliases": [
+    "PERM",
+    "Progressive encephalomyelitis with rigidity"
   ],
-  "pathophysiology": "Progressive encephalomyelitis with rigidity and myoclonus is an autoimmune disorder of central nervous system inhibitory neurotransmission affecting the spinal cord and brainstem. In the majority of patients, antibodies target the alpha-1 subunit of the glycine receptor, a key inhibitory receptor concentrated in spinal and brainstem interneurons; a further group harbour antibodies against glutamic acid decarboxylase, the enzyme synthesising the inhibitory transmitter GABA, and a smaller paraneoplastic group carry amphiphysin antibodies. Loss of glycinergic and GABAergic inhibition removes the normal restraint on alpha motor neurons and interneuronal circuits, producing continuous involuntary firing that manifests as simultaneous co-contraction of agonist and antagonist muscles, giving the characteristic rigidity, superimposed painful spasms, myoclonus and pathologically enhanced startle. Because the brainstem is involved, cranial nerve nuclei and central autonomic pathways are also affected, accounting for oculomotor disturbance, bulbar dysfunction and the dangerous dysautonomia. Pathologically there is perivascular lymphocytic inflammation and neuronal loss in the grey matter of the cord and brainstem. The glycine receptor antibodies are considered directly pathogenic and their frequent responsiveness to immunotherapy, together with paraneoplastic associations in a proportion of cases, firmly establishes the disorder as antibody-mediated autoimmunity.",
-  "additionalDifferentials": [
-   "Classic stiff-person syndrome and its focal variants",
-   "Tetanus",
-   "Neuromyotonia and other peripheral hyperexcitability syndromes",
-   "Serotonin syndrome or neuroleptic malignant syndrome",
-   "Hereditary and acquired hyperekplexia",
-   "Brainstem encephalitis of other autoimmune or infective cause",
-   "Strychnine poisoning"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid glycine receptor, anti-GAD and amphiphysin antibody testing",
-   "Electromyography demonstrating continuous motor unit activity and agonist-antagonist co-contraction",
-   "Cerebrospinal fluid analysis for pleocytosis, oligoclonal bands and inflammatory markers",
-   "Whole-body cross-sectional imaging and tumour markers to screen for underlying malignancy",
-   "Brain and spinal cord MRI to identify inflammatory change and exclude structural mimics",
-   "Startle reflex and exaggerated acoustic startle neurophysiology studies",
-   "Autonomic function testing where dysautonomia is suspected"
-  ],
-  "redFlags": [
-   "Autonomic instability with labile blood pressure or cardiac arrhythmia",
-   "Laryngospasm, bulbar dysfunction or respiratory muscle involvement threatening the airway",
-   "Rapidly progressive rigidity with hyperthermia",
-   "Features suggesting an underlying tumour such as weight loss or a palpable mass",
-   "Reduced consciousness or seizures indicating widespread encephalitis"
-  ],
-  "prognosis": "Untreated disease historically progressed to severe disability or death, but early and sustained immunotherapy frequently yields substantial recovery. Prognosis is worse when dysautonomia is severe or when an underlying malignancy is not identified and treated.",
-  "pitfalls": [
-   "Misdiagnosing the condition as tetanus or a functional disorder and delaying immunotherapy",
-   "Failing to test for glycine receptor antibodies when only anti-GAD is considered",
-   "Overlooking an occult tumour and thereby missing a paraneoplastic driver",
-   "Underestimating life-threatening dysautonomia and respiratory compromise",
-   "Attributing rigidity solely to a primary movement disorder and omitting antibody testing"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology (standard reference)",
-   "Bradley and Daroff's Neurology in Clinical Practice (standard reference)",
-   "Autoimmune neurology consensus literature (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line immunotherapy with corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove pathogenic glycine-receptor and related antibodies",
-   "Escalation to second-line immunosuppression such as rituximab or cyclophosphamide in refractory or relapsing disease",
-   "Symptomatic control of rigidity, spasms and myoclonus with GABAergic agents such as benzodiazepines and baclofen",
-   "Detect and treat life-threatening dysautonomia in a high-dependency or critical care setting, with cardiac rhythm, blood pressure and temperature monitoring and ventilatory and swallowing support as needed",
-   "Screen for and treat an underlying malignancy, particularly breast carcinoma, thymoma, lymphoma and small cell lung cancer, especially with amphiphysin antibodies",
-   "Multidisciplinary neurology and immunology care with rehabilitation, physiotherapy and long-term relapse surveillance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_encephalomyelitis_with_rigidity-pathway",
-   "title": "Progressive Encephalomyelitis with Rigidity and Myoclonus (PERM): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A severe variant at the extreme end of the stiff-person spectrum, combining axial and limb rigidity with brainstem, autonomic and long-tract involvement.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Autonomic instability with labile blood pressure or cardiac arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid glycine receptor, anti-GAD and amphiphysin antibody testing, Electromyography demonstrating continuous motor unit activity and agonist-antagonist co-contraction, Cerebrospinal fluid analysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line immunotherapy with corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove pathogenic glycine-receptor and related antibodies"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the condition as tetanus or a functional disorder and delaying immunotherapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive encephalomyelitis with rigidity and myoclonus (perm)."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_encephalomyelitis_with_rigidity-matrix",
-   "title": "Progressive Encephalomyelitis with Rigidity and Myoclonus (PERM): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A severe variant at the extreme end of the stiff-person spectrum, combining axial and limb rigidity with brainstem, autonomic and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A severe variant at the extreme end of the stiff-person spectrum, combining axial and limb rigidity with brainstem, autonomic and long-tract involvement.",
+      "Presents subacutely with painful muscle stiffness and spasms, prominent stimulus-sensitive and spontaneous myoclonus, and exaggerated startle.",
+      "Brainstem features distinguish it from classic stiff-person syndrome: ophthalmoplegia, nystagmus, dysarthria, dysphagia and gaze palsies.",
+      "Dysautonomia is common and potentially fatal, with labile blood pressure, arrhythmia, hyperhidrosis and thermoregulatory instability.",
+      "Most cases are associated with glycine receptor antibodies; a subset carry anti-GAD or amphiphysin antibodies, the latter flagging paraneoplastic disease.",
+      "A paraneoplastic search is essential, particularly for breast carcinoma, thymoma, lymphoma and small cell lung cancer.",
+      "Electromyography shows continuous motor unit activity with co-contraction of agonists and antagonists, and startle studies show exaggerated responses.",
+      "Immunotherapy often produces marked improvement, contrasting with the historically poor outcome of untreated disease, so early recognition is vital."
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid glycine receptor, anti-GAD and amphiphysin antibody testing, Electromyography demonstrating",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Progressive encephalomyelitis with rigidity and myoclonus is an autoimmune disorder of central nervous system inhibitory neurotransmission affecting the spinal cord and brainstem. In the majority of patients, antibodies target the alpha-1 subunit of the glycine receptor, a key inhibitory receptor concentrated in spinal and brainstem interneurons; a further group harbour antibodies against glutamic acid decarboxylase, the enzyme synthesising the inhibitory transmitter GABA, and a smaller paraneoplastic group carry amphiphysin antibodies. Loss of glycinergic and GABAergic inhibition removes the normal restraint on alpha motor neurons and interneuronal circuits, producing continuous involuntary firing that manifests as simultaneous co-contraction of agonist and antagonist muscles, giving the characteristic rigidity, superimposed painful spasms, myoclonus and pathologically enhanced startle. Because the brainstem is involved, cranial nerve nuclei and central autonomic pathways are also affected, accounting for oculomotor disturbance, bulbar dysfunction and the dangerous dysautonomia. Pathologically there is perivascular lymphocytic inflammation and neuronal loss in the grey matter of the cord and brainstem. The glycine receptor antibodies are considered directly pathogenic and their frequent responsiveness to immunotherapy, together with paraneoplastic associations in a proportion of cases, firmly establishes the disorder as antibody-mediated autoimmunity.",
+    "additionalDifferentials": [
+      "Classic stiff-person syndrome and its focal variants",
+      "Tetanus",
+      "Neuromyotonia and other peripheral hyperexcitability syndromes",
+      "Serotonin syndrome or neuroleptic malignant syndrome",
+      "Hereditary and acquired hyperekplexia",
+      "Brainstem encephalitis of other autoimmune or infective cause",
+      "Strychnine poisoning"
     ],
-    [
-     "Primary Differentials",
-     "Classic stiff-person syndrome and its focal variants, Tetanus, Neuromyotonia and other peripheral hyperexcitability syndromes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid glycine receptor, anti-GAD and amphiphysin antibody testing",
+      "Electromyography demonstrating continuous motor unit activity and agonist-antagonist co-contraction",
+      "Cerebrospinal fluid analysis for pleocytosis, oligoclonal bands and inflammatory markers",
+      "Whole-body cross-sectional imaging and tumour markers to screen for underlying malignancy",
+      "Brain and spinal cord MRI to identify inflammatory change and exclude structural mimics",
+      "Startle reflex and exaggerated acoustic startle neurophysiology studies",
+      "Autonomic function testing where dysautonomia is suspected"
     ],
-    [
-     "Management Strategy",
-     "First-line immunotherapy with corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove pathogenic",
-     "Core treatment modality"
+    "redFlags": [
+      "Autonomic instability with labile blood pressure or cardiac arrhythmia",
+      "Laryngospasm, bulbar dysfunction or respiratory muscle involvement threatening the airway",
+      "Rapidly progressive rigidity with hyperthermia",
+      "Features suggesting an underlying tumour such as weight loss or a palpable mass",
+      "Reduced consciousness or seizures indicating widespread encephalitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the condition as tetanus or a functional disorder and delaying immunotherapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disease historically progressed to severe disability or death, but early and sustained immunotherapy frequently yields substantial recovery. Prognosis is worse when dysautonomia is severe or when an underlying malignancy is not identified and treated.",
+    "pitfalls": [
+      "Misdiagnosing the condition as tetanus or a functional disorder and delaying immunotherapy",
+      "Failing to test for glycine receptor antibodies when only anti-GAD is considered",
+      "Overlooking an occult tumour and thereby missing a paraneoplastic driver",
+      "Underestimating life-threatening dysautonomia and respiratory compromise",
+      "Attributing rigidity solely to a primary movement disorder and omitting antibody testing"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology (standard reference)",
+      "Bradley and Daroff's Neurology in Clinical Practice (standard reference)",
+      "Autoimmune neurology consensus literature (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line immunotherapy with corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove pathogenic glycine-receptor and related antibodies",
+      "Escalation to second-line immunosuppression such as rituximab or cyclophosphamide in refractory or relapsing disease",
+      "Symptomatic control of rigidity, spasms and myoclonus with GABAergic agents such as benzodiazepines and baclofen",
+      "Detect and treat life-threatening dysautonomia in a high-dependency or critical care setting, with cardiac rhythm, blood pressure and temperature monitoring and ventilatory and swallowing support as needed",
+      "Screen for and treat an underlying malignancy, particularly breast carcinoma, thymoma, lymphoma and small cell lung cancer, especially with amphiphysin antibodies",
+      "Multidisciplinary neurology and immunology care with rehabilitation, physiotherapy and long-term relapse surveillance"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive encephalomyelitis with rigidity and myoclonus (perm)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-encephalomyelitis-with-rigidity-real-image",
-   "title": "Progressive Encephalomyelitis with Rigidity and Myoclonus (PERM): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "progressive_encephalomyelitis_with_rigidity-pathway",
+      "title": "Progressive Encephalomyelitis with Rigidity and Myoclonus (PERM): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A severe variant at the extreme end of the stiff-person spectrum, combining axial and limb rigidity with brainstem, autonomic and long-tract involvement.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Autonomic instability with labile blood pressure or cardiac arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid glycine receptor, anti-GAD and amphiphysin antibody testing, Electromyography demonstrating continuous motor unit activity and agonist-antagonist co-contraction, Cerebrospinal fluid analysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line immunotherapy with corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove pathogenic glycine-receptor and related antibodies"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the condition as tetanus or a functional disorder and delaying immunotherapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive encephalomyelitis with rigidity and myoclonus (perm)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_encephalomyelitis_with_rigidity-matrix",
+      "title": "Progressive Encephalomyelitis with Rigidity and Myoclonus (PERM): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A severe variant at the extreme end of the stiff-person spectrum, combining axial and limb rigidity with brainstem, autonomic and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid glycine receptor, anti-GAD and amphiphysin antibody testing, Electromyography demonstrating",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic stiff-person syndrome and its focal variants, Tetanus, Neuromyotonia and other peripheral hyperexcitability syndromes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line immunotherapy with corticosteroids combined with intravenous immunoglobulin or plasma exchange to remove pathogenic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the condition as tetanus or a functional disorder and delaying immunotherapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive encephalomyelitis with rigidity and myoclonus (perm)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_encephalomyelitis_with_rigidity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF glycine receptor, anti-GAD and amphiphysin antibodies",
+          "cells": [
+            {
+              "text": "Autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Continuous motor unit activity and agonist-antagonist co-contraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Pleocytosis, oligoclonal bands and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body cross-sectional imaging and tumour markers",
+          "cells": [
+            {
+              "text": "Underlying malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain and spinal cord MRI",
+          "cells": [
+            {
+              "text": "Inflammatory change and structural mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Startle reflex studies",
+          "cells": [
+            {
+              "text": "Exaggerated acoustic startle"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_encephalomyelitis_with_rigidity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary and acquired hyperekplexia",
+          "cells": [
+            {
+              "text": "Exaggerated acoustic startle"
+            },
+            {
+              "text": "Startle reflex studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brainstem encephalitis of other autoimmune or infective cause",
+          "cells": [
+            {
+              "text": "Reduced consciousness or seizures from widespread encephalitis"
+            },
+            {
+              "text": "Brain and spinal cord MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic stiff-person syndrome and focal variants",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Antibody testing (anti-GAD)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_encephalomyelitis_with_rigidity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids with IVIG or plasma exchange to remove pathogenic glycine-receptor and related antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunosuppression",
+          "cells": [
+            {
+              "text": "Rituximab or cyclophosphamide for refractory or relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic control",
+          "cells": [
+            {
+              "text": "GABAergic agents such as benzodiazepines and baclofen for rigidity, spasms and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysautonomia",
+          "cells": [
+            {
+              "text": "High-dependency or critical care with cardiac rhythm, blood pressure and temperature monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying malignancy",
+          "cells": [
+            {
+              "text": "Screen for and treat, particularly breast carcinoma, thymoma, lymphoma and small cell lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Multidisciplinary neurology and immunology care with rehabilitation and relapse surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_encephalomyelitis_with_rigidity-dx-mgmt",
+      "title": "Diagnosis and management of Progressive Encephalomyelitis with Rigidity and Myoclonus (PERM)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PERM: progressive rigidity with myoclonus and encephalomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Autonomic instability, laryngospasm, hyperthermia, or reduced consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: high-dependency care for dysautonomia or airway threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glycine receptor, GAD and amphiphysin antibodies; EMG; CSF; MRI; whole-body imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do antibodies and EMG co-contraction fit PERM with mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider stiff-person syndrome, serotonin syndrome or other mimics; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids with IVIG or plasma exchange as first-line immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rituximab or cyclophosphamide for refractory or relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Benzodiazepines and baclofen for rigidity, spasms and myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for malignancy, particularly breast carcinoma, thymoma or lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurology and immunology care with rehabilitation and relapse surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

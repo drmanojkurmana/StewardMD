@@ -1,176 +1,434 @@
 {
- "id": "mitochondrial_trifunctional_protein_deficiency",
- "name": "Mitochondrial trifunctional protein deficiency",
- "aliases": [
-  "MTP deficiency",
-  "TFP deficiency",
-  "HADHA deficiency",
-  "HADHB deficiency",
-  "long-chain 3-hydroxyacyl-CoA dehydrogenase (LCHAD) deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive defect of the mitochondrial trifunctional protein (HADHA/HADHB genes) that carries out three steps of long-chain fatty-acid beta-oxidation; isolated LCHAD deficiency is a common subtype",
-   "Presents across a spectrum from severe neonatal cardiomyopathy and hypoketotic hypoglycaemia to a milder later-onset phenotype with episodic rhabdomyolysis and a progressive peripheral neuropathy",
-   "Fasting or intercurrent illness precipitates hypoketotic hypoglycaemia, liver dysfunction and metabolic decompensation",
-   "LCHAD deficiency is distinctively associated with a progressive pigmentary retinopathy and peripheral neuropathy not usually seen in other fatty-acid oxidation defects",
-   "Carrying an affected fetus is linked to maternal HELLP syndrome and acute fatty liver of pregnancy, so a maternal obstetric history is an important clue",
-   "Blood acylcarnitines show elevated long-chain hydroxyacylcarnitines, detectable on newborn screening",
-   "Management centres on avoidance of fasting, a low long-chain-fat diet with medium-chain triglyceride substitution, and prompt glucose during catabolic stress"
+  "id": "mitochondrial_trifunctional_protein_deficiency",
+  "name": "Mitochondrial trifunctional protein deficiency",
+  "aliases": [
+    "MTP deficiency",
+    "TFP deficiency",
+    "HADHA deficiency",
+    "HADHB deficiency",
+    "long-chain 3-hydroxyacyl-CoA dehydrogenase (LCHAD) deficiency"
   ],
-  "pathophysiology": "The mitochondrial trifunctional protein is a hetero-octamer of alpha (HADHA) and beta (HADHB) subunits that performs the last three enzymatic steps of long-chain fatty-acid beta-oxidation: long-chain enoyl-CoA hydratase, long-chain 3-hydroxyacyl-CoA dehydrogenase (LCHAD) and long-chain 3-ketoacyl-CoA thiolase activities. Deficiency blocks energy production from long-chain fats, so during fasting or illness tissues cannot generate adequate ATP or ketones, producing hypoketotic hypoglycaemia and accumulation of toxic long-chain hydroxyacyl intermediates. These intermediates injure the heart, skeletal muscle, liver, peripheral nerves and retina. Reduced fatty-acid oxidation in the fetus and placenta also underlies the associated maternal liver disease of pregnancy.",
-  "additionalDifferentials": [
-   "Very-long-chain acyl-CoA dehydrogenase (VLCAD) deficiency",
-   "Carnitine palmitoyltransferase II deficiency",
-   "Other long-chain fatty-acid oxidation disorders",
-   "Primary dilated or hypertrophic cardiomyopathy",
-   "Inherited causes of recurrent rhabdomyolysis",
-   "Mitochondrial respiratory chain disorders",
-   "Hereditary sensorimotor neuropathies"
-  ],
-  "additionalInvestigations": [
-   "Plasma acylcarnitine profile showing elevated long-chain 3-hydroxyacylcarnitines",
-   "Blood glucose, ketones and free fatty acids during acute episodes to demonstrate hypoketotic hypoglycaemia",
-   "Creatine kinase and myoglobinuria assessment during suspected rhabdomyolysis",
-   "Echocardiography and ECG to evaluate cardiomyopathy and arrhythmia",
-   "Ophthalmological review and nerve conduction studies for retinopathy and neuropathy",
-   "HADHA/HADHB molecular genetic testing to confirm the diagnosis"
-  ],
-  "redFlags": [
-   "Neonatal cardiomyopathy with hypoketotic hypoglycaemia and collapse",
-   "Acute rhabdomyolysis with risk of renal impairment during illness or exertion",
-   "Arrhythmia or cardiac decompensation during metabolic crises",
-   "Maternal HELLP syndrome or acute fatty liver of pregnancy prompting evaluation of the infant"
-  ],
-  "prognosis": "The severe neonatal cardiomyopathic form carries high mortality, whereas milder phenotypes may be managed with diet and fasting avoidance; however, progressive retinopathy and peripheral neuropathy can cause long-term morbidity even with good metabolic control.",
-  "pitfalls": [
-   "Missing hypoketotic hypoglycaemia by not measuring ketones alongside glucose",
-   "Failing to consider the diagnosis in a mother with HELLP or acute fatty liver of pregnancy",
-   "Overlooking the evolving retinopathy and neuropathy that distinguish LCHAD/MTP deficiency",
-   "Allowing prolonged fasting or high long-chain-fat intake that precipitates decompensation"
-  ],
-  "references": [
-   "Scriver's OMMBID: Disorders of Mitochondrial Fatty Acid Oxidation",
-   "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Dietary therapy is the mainstay: a low long-chain-fat diet supplemented with medium-chain triglycerides that bypass the enzyme block, together with a high complex-carbohydrate intake",
-   "Strict avoidance of fasting with frequent feeds and an emergency regimen of extra carbohydrate during intercurrent illness, and intravenous dextrose when oral intake fails",
-   "Docosahexaenoic acid supplementation to slow the LCHAD-associated pigmentary retinopathy, with carnitine used cautiously only if deficient",
-   "Prompt treatment of acute rhabdomyolysis with intravenous fluids and hydration to protect renal function",
-   "Cardiac surveillance with echocardiography and ECG and heart-failure or arrhythmia treatment for the cardiomyopathic form",
-   "Regular ophthalmological review for retinopathy and nerve conduction studies for peripheral neuropathy",
-   "Multidisciplinary metabolic team follow-up with a specialist dietitian, autosomal recessive genetic counselling with newborn screening and family testing, and awareness of the maternal risk of HELLP and acute fatty liver of pregnancy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mitochondrial_trifunctional_protein_deficiency-pathway",
-   "title": "Mitochondrial trifunctional protein deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive defect of the mitochondrial trifunctional protein (HADHA/HADHB genes) that carries out three steps of long-chain fatty-acid beta-oxidation; isolated LCHAD deficiency is a common subtype",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal cardiomyopathy with hypoketotic hypoglycaemia and collapse",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma acylcarnitine profile showing elevated long-chain 3-hydroxyacylcarnitines, Blood glucose, ketones and free fatty acids during acute episodes to demonstrate hypoketotic hypoglycaemia, Creatine kinase and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Dietary therapy is the mainstay: a low long-chain-fat diet supplemented with medium-chain triglycerides that bypass the enzyme block, together with a high complex-carbohydrate intake"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing hypoketotic hypoglycaemia by not measuring ketones alongside glucose"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mitochondrial trifunctional protein deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "mitochondrial_trifunctional_protein_deficiency-matrix",
-   "title": "Mitochondrial trifunctional protein deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive defect of the mitochondrial trifunctional protein (HADHA/HADHB genes) that carries out three steps of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive defect of the mitochondrial trifunctional protein (HADHA/HADHB genes) that carries out three steps of long-chain fatty-acid beta-oxidation; isolated LCHAD deficiency is a common subtype",
+      "Presents across a spectrum from severe neonatal cardiomyopathy and hypoketotic hypoglycaemia to a milder later-onset phenotype with episodic rhabdomyolysis and a progressive peripheral neuropathy",
+      "Fasting or intercurrent illness precipitates hypoketotic hypoglycaemia, liver dysfunction and metabolic decompensation",
+      "LCHAD deficiency is distinctively associated with a progressive pigmentary retinopathy and peripheral neuropathy not usually seen in other fatty-acid oxidation defects",
+      "Carrying an affected fetus is linked to maternal HELLP syndrome and acute fatty liver of pregnancy, so a maternal obstetric history is an important clue",
+      "Blood acylcarnitines show elevated long-chain hydroxyacylcarnitines, detectable on newborn screening",
+      "Management centres on avoidance of fasting, a low long-chain-fat diet with medium-chain triglyceride substitution, and prompt glucose during catabolic stress"
     ],
-    [
-     "Key Investigations",
-     "Plasma acylcarnitine profile showing elevated long-chain 3-hydroxyacylcarnitines, Blood glucose, ketones and free fatty acids",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The mitochondrial trifunctional protein is a hetero-octamer of alpha (HADHA) and beta (HADHB) subunits that performs the last three enzymatic steps of long-chain fatty-acid beta-oxidation: long-chain enoyl-CoA hydratase, long-chain 3-hydroxyacyl-CoA dehydrogenase (LCHAD) and long-chain 3-ketoacyl-CoA thiolase activities. Deficiency blocks energy production from long-chain fats, so during fasting or illness tissues cannot generate adequate ATP or ketones, producing hypoketotic hypoglycaemia and accumulation of toxic long-chain hydroxyacyl intermediates. These intermediates injure the heart, skeletal muscle, liver, peripheral nerves and retina. Reduced fatty-acid oxidation in the fetus and placenta also underlies the associated maternal liver disease of pregnancy.",
+    "additionalDifferentials": [
+      "Very-long-chain acyl-CoA dehydrogenase (VLCAD) deficiency",
+      "Carnitine palmitoyltransferase II deficiency",
+      "Other long-chain fatty-acid oxidation disorders",
+      "Primary dilated or hypertrophic cardiomyopathy",
+      "Inherited causes of recurrent rhabdomyolysis",
+      "Mitochondrial respiratory chain disorders",
+      "Hereditary sensorimotor neuropathies"
     ],
-    [
-     "Primary Differentials",
-     "Very-long-chain acyl-CoA dehydrogenase (VLCAD) deficiency, Carnitine palmitoyltransferase II deficiency, Other long-chain",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma acylcarnitine profile showing elevated long-chain 3-hydroxyacylcarnitines",
+      "Blood glucose, ketones and free fatty acids during acute episodes to demonstrate hypoketotic hypoglycaemia",
+      "Creatine kinase and myoglobinuria assessment during suspected rhabdomyolysis",
+      "Echocardiography and ECG to evaluate cardiomyopathy and arrhythmia",
+      "Ophthalmological review and nerve conduction studies for retinopathy and neuropathy",
+      "HADHA/HADHB molecular genetic testing to confirm the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Dietary therapy is the mainstay: a low long-chain-fat diet supplemented with medium-chain triglycerides that bypass the enzyme",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal cardiomyopathy with hypoketotic hypoglycaemia and collapse",
+      "Acute rhabdomyolysis with risk of renal impairment during illness or exertion",
+      "Arrhythmia or cardiac decompensation during metabolic crises",
+      "Maternal HELLP syndrome or acute fatty liver of pregnancy prompting evaluation of the infant"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing hypoketotic hypoglycaemia by not measuring ketones alongside glucose",
-     "Prevent diagnostic or management error"
+    "prognosis": "The severe neonatal cardiomyopathic form carries high mortality, whereas milder phenotypes may be managed with diet and fasting avoidance; however, progressive retinopathy and peripheral neuropathy can cause long-term morbidity even with good metabolic control.",
+    "pitfalls": [
+      "Missing hypoketotic hypoglycaemia by not measuring ketones alongside glucose",
+      "Failing to consider the diagnosis in a mother with HELLP or acute fatty liver of pregnancy",
+      "Overlooking the evolving retinopathy and neuropathy that distinguish LCHAD/MTP deficiency",
+      "Allowing prolonged fasting or high long-chain-fat intake that precipitates decompensation"
+    ],
+    "references": [
+      "Scriver's OMMBID: Disorders of Mitochondrial Fatty Acid Oxidation",
+      "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Dietary therapy is the mainstay: a low long-chain-fat diet supplemented with medium-chain triglycerides that bypass the enzyme block, together with a high complex-carbohydrate intake",
+      "Strict avoidance of fasting with frequent feeds and an emergency regimen of extra carbohydrate during intercurrent illness, and intravenous dextrose when oral intake fails",
+      "Docosahexaenoic acid supplementation to slow the LCHAD-associated pigmentary retinopathy, with carnitine used cautiously only if deficient",
+      "Prompt treatment of acute rhabdomyolysis with intravenous fluids and hydration to protect renal function",
+      "Cardiac surveillance with echocardiography and ECG and heart-failure or arrhythmia treatment for the cardiomyopathic form",
+      "Regular ophthalmological review for retinopathy and nerve conduction studies for peripheral neuropathy",
+      "Multidisciplinary metabolic team follow-up with a specialist dietitian, autosomal recessive genetic counselling with newborn screening and family testing, and awareness of the maternal risk of HELLP and acute fatty liver of pregnancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for mitochondrial trifunctional protein deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mitochondrial-trifunctional-protein-deficiency-real-image",
-   "title": "Mitochondrial trifunctional protein deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mitochondrial_trifunctional_protein_deficiency-pathway",
+      "title": "Mitochondrial trifunctional protein deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive defect of the mitochondrial trifunctional protein (HADHA/HADHB genes) that carries out three steps of long-chain fatty-acid beta-oxidation; isolated LCHAD deficiency is a common subtype",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal cardiomyopathy with hypoketotic hypoglycaemia and collapse",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma acylcarnitine profile showing elevated long-chain 3-hydroxyacylcarnitines, Blood glucose, ketones and free fatty acids during acute episodes to demonstrate hypoketotic hypoglycaemia, Creatine kinase and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Dietary therapy is the mainstay: a low long-chain-fat diet supplemented with medium-chain triglycerides that bypass the enzyme block, together with a high complex-carbohydrate intake"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing hypoketotic hypoglycaemia by not measuring ketones alongside glucose"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mitochondrial trifunctional protein deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mitochondrial_trifunctional_protein_deficiency-matrix",
+      "title": "Mitochondrial trifunctional protein deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive defect of the mitochondrial trifunctional protein (HADHA/HADHB genes) that carries out three steps of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma acylcarnitine profile showing elevated long-chain 3-hydroxyacylcarnitines, Blood glucose, ketones and free fatty acids",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Very-long-chain acyl-CoA dehydrogenase (VLCAD) deficiency, Carnitine palmitoyltransferase II deficiency, Other long-chain",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Dietary therapy is the mainstay: a low long-chain-fat diet supplemented with medium-chain triglycerides that bypass the enzyme",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing hypoketotic hypoglycaemia by not measuring ketones alongside glucose",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mitochondrial trifunctional protein deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mitochondrial_trifunctional_protein_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Elevated long-chain 3-hydroxyacylcarnitines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, ketones and free fatty acids during acute episodes",
+          "cells": [
+            {
+              "text": "Hypoketotic hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and myoglobinuria assessment",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Retinopathy and neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HADHA and HADHB molecular genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mitochondrial_trifunctional_protein_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary therapy",
+          "cells": [
+            {
+              "text": "Low long-chain-fat diet with medium-chain triglycerides that bypass the enzyme block, and high complex carbohydrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid fasting",
+          "cells": [
+            {
+              "text": "Frequent feeds and an emergency extra-carbohydrate regimen; IV dextrose when oral intake fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Docosahexaenoic acid",
+          "cells": [
+            {
+              "text": "To slow LCHAD-associated pigmentary retinopathy; carnitine only if deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhabdomyolysis",
+          "cells": [
+            {
+              "text": "Prompt intravenous fluids to protect renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and ECG; heart-failure or arrhythmia treatment for the cardiomyopathic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye and nerve review",
+          "cells": [
+            {
+              "text": "Ophthalmology and nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic team and counselling",
+          "cells": [
+            {
+              "text": "Dietitian, autosomal recessive counselling, newborn screening, family testing; maternal HELLP risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mitochondrial_trifunctional_protein_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Mitochondrial trifunctional protein deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant or child with hypoketotic hypoglycaemia, cardiomyopathy or rhabdomyolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiomyopathy with collapse, rhabdomyolysis, arrhythmia in crises, or maternal HELLP?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent IV dextrose for hypoglycaemia; IV fluids for rhabdomyolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acylcarnitine profile; glucose and ketones; CK; echo; HADHA and HADHB",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a HADHA or HADHB variant confirmed with raised long-chain 3-hydroxyacylcarnitines?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider VLCAD or CPT II deficiency or other fatty acid oxidation disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low long-chain-fat diet with MCT supplementation and high complex carbohydrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid fasting; emergency extra-carbohydrate regimen; IV dextrose when oral intake fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "DHA supplementation to slow LCHAD-associated retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Echocardiography, ECG and heart-failure or arrhythmia treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Metabolic team follow-up; autosomal recessive counselling; maternal HELLP risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,168 +1,468 @@
 {
- "id": "opioid_induced_constipation",
- "name": "Opioid-induced constipation",
- "aliases": [
-  "OIC"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology / Palliative medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Gastroenterology and palliative care references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Constipation that develops or worsens on starting or increasing opioid therapy, with hard stools, straining and incomplete evacuation",
-   "Unlike many opioid effects, it does not reliably diminish with continued use (little tolerance develops)",
-   "It is a very common and often under-treated adverse effect that limits opioid therapy and quality of life",
-   "It is a component of the broader opioid-induced bowel dysfunction, which also includes reflux, bloating and cramping",
-   "Stimulant and osmotic laxatives are used first-line, with peripherally acting mu-opioid receptor antagonists for refractory cases",
-   "It is distinct from narcotic bowel syndrome, in which the problem is worsening pain rather than constipation"
+  "id": "opioid_induced_constipation",
+  "name": "Opioid-induced constipation",
+  "aliases": [
+    "OIC"
   ],
-  "pathophysiology": "Opioid-induced constipation results from opioid action on mu-opioid receptors in the enteric nervous system of the gut wall. This reduces propulsive peristalsis, increases non-propulsive tone and fluid absorption, and impairs the defecatory reflex, producing hard, infrequent stools and difficult evacuation. Because these peripheral gut receptors do not develop the tolerance seen with central analgesic effects, the constipation tends to persist throughout opioid therapy. Peripherally acting antagonists relieve it by blocking these gut receptors without reversing central analgesia.",
-  "additionalDifferentials": [
-   "Functional constipation",
-   "Dyssynergic defecation",
-   "Secondary constipation (hypothyroidism, hypercalcaemia)",
-   "Bowel obstruction",
-   "Other drug-induced constipation"
-  ],
-  "additionalInvestigations": [
-   "Clinical history linking constipation to opioid use",
-   "Assessment of stool pattern and abdominal and rectal examination",
-   "Exclusion of obstruction and metabolic causes where indicated",
-   "Review of the full medication list for other constipating drugs",
-   "Assessment of response to laxatives before escalating therapy"
-  ],
-  "redFlags": [
-   "Features suggesting bowel obstruction or faecal impaction with overflow",
-   "Severe abdominal pain or distension",
-   "Rectal bleeding or weight loss",
-   "Failure to respond to appropriate laxative therapy"
-  ],
-  "prognosis": "With appropriate laxatives and, where needed, peripherally acting antagonists, constipation is usually controllable, allowing continued analgesia; it persists as long as opioids are taken.",
-  "pitfalls": [
-   "Failing to co-prescribe laxatives when starting opioids",
-   "Expecting tolerance to the constipating effect to develop",
-   "Confusing it with narcotic bowel syndrome",
-   "Missing faecal impaction with overflow diarrhoea"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Palliative care references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start stimulant and osmotic laxatives such as senna and macrogol first-line, given prophylactically at the outset of opioid therapy",
-   "Add a peripherally acting mu-opioid receptor antagonist such as naloxegol, methylnaltrexone or naldemedine for laxative-refractory cases, relieving constipation without reversing central analgesia",
-   "Consider opioid rotation or a combination oxycodone-naloxone preparation where symptoms persist",
-   "Advise non-pharmacological measures including adequate fluid intake, mobility and dietary fibre as tolerated",
-   "Review the medication list and reduce other constipating drugs",
-   "Exclude bowel obstruction and faecal impaction before escalating therapy",
-   "Reassess response and adjust the bowel regimen continuously, as tolerance to this effect does not develop while opioids are continued"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "opioid_induced_constipation-pathway",
-   "title": "Opioid-induced constipation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Constipation that develops or worsens on starting or increasing opioid therapy, with hard stools, straining and incomplete evacuation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting bowel obstruction or faecal impaction with overflow",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical history linking constipation to opioid use, Assessment of stool pattern and abdominal and rectal examination, Exclusion of obstruction and metabolic causes where indicated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start stimulant and osmotic laxatives such as senna and macrogol first-line, given prophylactically at the outset of opioid therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to co-prescribe laxatives when starting opioids"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of opioid-induced constipation."
-  }
- ],
- "tables": [
-  {
-   "id": "opioid_induced_constipation-matrix",
-   "title": "Opioid-induced constipation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Constipation that develops or worsens on starting or increasing opioid therapy, with hard stools, straining and incomplete",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology / Palliative medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Gastroenterology and palliative care references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Constipation that develops or worsens on starting or increasing opioid therapy, with hard stools, straining and incomplete evacuation",
+      "Unlike many opioid effects, it does not reliably diminish with continued use (little tolerance develops)",
+      "It is a very common and often under-treated adverse effect that limits opioid therapy and quality of life",
+      "It is a component of the broader opioid-induced bowel dysfunction, which also includes reflux, bloating and cramping",
+      "Stimulant and osmotic laxatives are used first-line, with peripherally acting mu-opioid receptor antagonists for refractory cases",
+      "It is distinct from narcotic bowel syndrome, in which the problem is worsening pain rather than constipation"
     ],
-    [
-     "Key Investigations",
-     "Clinical history linking constipation to opioid use, Assessment of stool pattern and abdominal and rectal examination, Exclusion",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Opioid-induced constipation results from opioid action on mu-opioid receptors in the enteric nervous system of the gut wall. This reduces propulsive peristalsis, increases non-propulsive tone and fluid absorption, and impairs the defecatory reflex, producing hard, infrequent stools and difficult evacuation. Because these peripheral gut receptors do not develop the tolerance seen with central analgesic effects, the constipation tends to persist throughout opioid therapy. Peripherally acting antagonists relieve it by blocking these gut receptors without reversing central analgesia.",
+    "additionalDifferentials": [
+      "Functional constipation",
+      "Dyssynergic defecation",
+      "Secondary constipation (hypothyroidism, hypercalcaemia)",
+      "Bowel obstruction",
+      "Other drug-induced constipation"
     ],
-    [
-     "Primary Differentials",
-     "Functional constipation, Dyssynergic defecation, Secondary constipation (hypothyroidism, hypercalcaemia)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical history linking constipation to opioid use",
+      "Assessment of stool pattern and abdominal and rectal examination",
+      "Exclusion of obstruction and metabolic causes where indicated",
+      "Review of the full medication list for other constipating drugs",
+      "Assessment of response to laxatives before escalating therapy"
     ],
-    [
-     "Management Strategy",
-     "Start stimulant and osmotic laxatives such as senna and macrogol first-line, given prophylactically at the outset of opioid",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting bowel obstruction or faecal impaction with overflow",
+      "Severe abdominal pain or distension",
+      "Rectal bleeding or weight loss",
+      "Failure to respond to appropriate laxative therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to co-prescribe laxatives when starting opioids",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate laxatives and, where needed, peripherally acting antagonists, constipation is usually controllable, allowing continued analgesia; it persists as long as opioids are taken.",
+    "pitfalls": [
+      "Failing to co-prescribe laxatives when starting opioids",
+      "Expecting tolerance to the constipating effect to develop",
+      "Confusing it with narcotic bowel syndrome",
+      "Missing faecal impaction with overflow diarrhoea"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Palliative care references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start stimulant and osmotic laxatives such as senna and macrogol first-line, given prophylactically at the outset of opioid therapy",
+      "Add a peripherally acting mu-opioid receptor antagonist such as naloxegol, methylnaltrexone or naldemedine for laxative-refractory cases, relieving constipation without reversing central analgesia",
+      "Consider opioid rotation or a combination oxycodone-naloxone preparation where symptoms persist",
+      "Advise non-pharmacological measures including adequate fluid intake, mobility and dietary fibre as tolerated",
+      "Review the medication list and reduce other constipating drugs",
+      "Exclude bowel obstruction and faecal impaction before escalating therapy",
+      "Reassess response and adjust the bowel regimen continuously, as tolerance to this effect does not develop while opioids are continued"
     ]
-   ],
-   "caption": "Overview comparison matrix for opioid-induced constipation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "opioid-induced-constipation-real-image",
-   "title": "Opioid-induced constipation: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "opioid_induced_constipation-pathway",
+      "title": "Opioid-induced constipation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Constipation that develops or worsens on starting or increasing opioid therapy, with hard stools, straining and incomplete evacuation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting bowel obstruction or faecal impaction with overflow",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical history linking constipation to opioid use, Assessment of stool pattern and abdominal and rectal examination, Exclusion of obstruction and metabolic causes where indicated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start stimulant and osmotic laxatives such as senna and macrogol first-line, given prophylactically at the outset of opioid therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to co-prescribe laxatives when starting opioids"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of opioid-induced constipation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "opioid_induced_constipation-matrix",
+      "title": "Opioid-induced constipation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Constipation that develops or worsens on starting or increasing opioid therapy, with hard stools, straining and incomplete",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical history linking constipation to opioid use, Assessment of stool pattern and abdominal and rectal examination, Exclusion",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Functional constipation, Dyssynergic defecation, Secondary constipation (hypothyroidism, hypercalcaemia)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start stimulant and osmotic laxatives such as senna and macrogol first-line, given prophylactically at the outset of opioid",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to co-prescribe laxatives when starting opioids",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for opioid-induced constipation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Gastroenterology and palliative care references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "opioid_induced_constipation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History linking constipation to opioid use",
+          "cells": [
+            {
+              "text": "Onset or worsening on starting or increasing opioids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool pattern and abdominal and rectal examination",
+          "cells": [
+            {
+              "text": "Hard stools, straining and incomplete evacuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of obstruction and metabolic causes",
+          "cells": [
+            {
+              "text": "Needed where indicated before escalating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of other constipating drugs",
+          "cells": [
+            {
+              "text": "Medication list review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to laxatives",
+          "cells": [
+            {
+              "text": "Assessed before escalating therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_induced_constipation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bowel obstruction",
+          "cells": [
+            {
+              "text": "Severe abdominal pain, distension or obstructive features; must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Narcotic bowel syndrome",
+          "cells": [
+            {
+              "text": "Worsening pain rather than constipation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_induced_constipation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stimulant and osmotic laxatives",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Senna and macrogol, given prophylactically at the start of opioid therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripherally acting mu-opioid antagonists",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Naloxegol, methylnaltrexone or naldemedine for laxative-refractory cases; central analgesia is not reversed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opioid rotation or combination",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Rotation, or oxycodone-naloxone, where symptoms persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-pharmacological measures",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Adequate fluids, mobility and dietary fibre as tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of other drugs",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Reduce other constipating medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude obstruction and impaction",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Before escalating therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous reassessment",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Tolerance to the constipating effect does not develop while opioids continue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "opioid_induced_constipation-dx-mgmt",
+      "title": "Diagnosis and management of Opioid-induced constipation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Constipation starting or worsening after opioid therapy began or was increased",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (obstruction, impaction with overflow, rectal bleeding or weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude bowel obstruction or impaction; urgent surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History of opioid link, abdominal and rectal examination, medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is opioid-induced constipation confirmed, with no obstruction on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider functional constipation, dyssynergic defecation or secondary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Senna and macrogol started prophylactically with opioid therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Naloxegol, methylnaltrexone or naldemedine for laxative-refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Opioid rotation or oxycodone-naloxone if symptoms persist",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Fluids, mobility and fibre; reduce other constipating drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually controllable with laxatives and antagonists; persists while opioids continue",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

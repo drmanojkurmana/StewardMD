@@ -1,174 +1,445 @@
 {
- "id": "central_core_disease",
- "name": "Central core disease",
- "aliases": [
-  "CCD",
-  "RYR1-related myopathy",
-  "central core myopathy",
-  "RYR1"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuromuscular Disorders reference texts / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents in infancy or early childhood with hypotonia, delayed motor milestones and predominantly proximal, often static or slowly progressive weakness",
-   "Caused most often by variants in the ryanodine receptor gene RYR1, usually inherited in an autosomal dominant pattern although recessive forms occur",
-   "Muscle biopsy hallmark is central, well-demarcated cores running along the length of type 1 fibres that lack oxidative enzyme staining on NADH, SDH and cytochrome oxidase reactions",
-   "There is a strong and clinically critical association with susceptibility to malignant hyperthermia, so anaesthetic history is essential",
-   "Orthopaedic complications such as congenital hip dislocation, scoliosis and foot deformity are common and may dominate the picture",
-   "Bulbar and respiratory involvement is usually milder than in other congenital myopathies but should still be monitored",
-   "Creatine kinase is typically normal or only mildly raised, which helps distinguish it from dystrophies"
+  "id": "central_core_disease",
+  "name": "Central core disease",
+  "aliases": [
+    "CCD",
+    "RYR1-related myopathy",
+    "central core myopathy",
+    "RYR1"
   ],
-  "pathophysiology": "Central core disease is a congenital myopathy most commonly resulting from variants in RYR1, which encodes the skeletal muscle ryanodine receptor calcium-release channel of the sarcoplasmic reticulum. Abnormal channel function disturbs excitation-contraction coupling and calcium handling, and over time regions of affected fibres lose mitochondria and oxidative enzyme activity, producing the characteristic amorphous central cores. The same channel dysfunction underlies the linked risk of malignant hyperthermia, in which volatile anaesthetics and depolarising muscle relaxants trigger uncontrolled calcium release, hypermetabolism and rhabdomyolysis. Predominant involvement of type 1 fibres accounts for the proximal, often relatively non-progressive weakness.",
-  "additionalDifferentials": [
-   "Nemaline myopathy",
-   "Centronuclear/myotubular myopathy",
-   "Congenital muscular dystrophy",
-   "Spinal muscular atrophy",
-   "Multiminicore disease (RYR1/SEPN1 related)",
-   "Congenital myasthenic syndrome"
-  ],
-  "additionalInvestigations": [
-   "Muscle biopsy with oxidative enzyme histochemistry to demonstrate central cores in type 1 fibres",
-   "Targeted or panel genetic testing including RYR1 sequencing and copy-number analysis",
-   "Serum creatine kinase, usually normal or mildly elevated",
-   "Nerve conduction studies and electromyography to exclude neurogenic and other myopathic causes",
-   "Baseline and serial respiratory function testing and orthopaedic assessment for scoliosis and hip dysplasia",
-   "Contracture/in-vitro contracture testing or genetic counselling regarding malignant hyperthermia susceptibility"
-  ],
-  "redFlags": [
-   "History of anaesthetic complications or family history of malignant hyperthermia",
-   "Declining respiratory function or nocturnal hypoventilation",
-   "Rapidly progressive scoliosis compromising ventilation",
-   "Feeding or swallowing difficulty with aspiration risk in infants"
-  ],
-  "prognosis": "Weakness is often static or only slowly progressive and many affected individuals achieve independent ambulation, though orthopaedic and, less commonly, respiratory complications may require ongoing management. The dominant lifelong risk is malignant hyperthermia during anaesthesia, which is preventable with appropriate precautions.",
-  "pitfalls": [
-   "Administering triggering anaesthetic agents without recognising malignant hyperthermia susceptibility",
-   "Assuming a normal creatine kinase excludes a significant myopathy",
-   "Overlooking cores because oxidative enzyme stains were not performed on biopsy",
-   "Attributing static weakness purely to an orthopaedic problem and missing the underlying myopathy"
-  ],
-  "references": [
-   "Emery-Dreifuss / Dubowitz Muscle Disorders in Childhood",
-   "OMIM: Central core disease (RYR1)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Strict avoidance of malignant hyperthermia triggers, using a trigger-free anaesthetic technique that omits volatile agents and depolarising muscle relaxants",
-   "Malignant hyperthermia alert documentation and ready availability of dantrolene, with active cooling for any crisis",
-   "Physiotherapy and occupational therapy to maintain strength, mobility and function",
-   "Orthopaedic management of scoliosis, congenital hip dislocation and foot deformities",
-   "Baseline and serial respiratory function monitoring with support where weakness affects breathing",
-   "Genetic counselling and family screening for RYR1 variants, noting predominantly autosomal dominant with rarer recessive inheritance",
-   "Multidisciplinary neuromuscular follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "central_core_disease-pathway",
-   "title": "Central core disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents in infancy or early childhood with hypotonia, delayed motor milestones and predominantly proximal, often static or slowly progressive weakness",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: History of anaesthetic complications or family history of malignant hyperthermia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Muscle biopsy with oxidative enzyme histochemistry to demonstrate central cores in type 1 fibres, Targeted or panel genetic testing including RYR1 sequencing and copy-number analysis, Serum creatine kinase, usually normal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Strict avoidance of malignant hyperthermia triggers, using a trigger-free anaesthetic technique that omits volatile agents and depolarising muscle relaxants"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Administering triggering anaesthetic agents without recognising malignant hyperthermia susceptibility"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of central core disease."
-  }
- ],
- "tables": [
-  {
-   "id": "central_core_disease-matrix",
-   "title": "Central core disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents in infancy or early childhood with hypotonia, delayed motor milestones and predominantly proximal, often",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuromuscular Disorders reference texts / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents in infancy or early childhood with hypotonia, delayed motor milestones and predominantly proximal, often static or slowly progressive weakness",
+      "Caused most often by variants in the ryanodine receptor gene RYR1, usually inherited in an autosomal dominant pattern although recessive forms occur",
+      "Muscle biopsy hallmark is central, well-demarcated cores running along the length of type 1 fibres that lack oxidative enzyme staining on NADH, SDH and cytochrome oxidase reactions",
+      "There is a strong and clinically critical association with susceptibility to malignant hyperthermia, so anaesthetic history is essential",
+      "Orthopaedic complications such as congenital hip dislocation, scoliosis and foot deformity are common and may dominate the picture",
+      "Bulbar and respiratory involvement is usually milder than in other congenital myopathies but should still be monitored",
+      "Creatine kinase is typically normal or only mildly raised, which helps distinguish it from dystrophies"
     ],
-    [
-     "Key Investigations",
-     "Muscle biopsy with oxidative enzyme histochemistry to demonstrate central cores in type 1 fibres, Targeted or panel genetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Central core disease is a congenital myopathy most commonly resulting from variants in RYR1, which encodes the skeletal muscle ryanodine receptor calcium-release channel of the sarcoplasmic reticulum. Abnormal channel function disturbs excitation-contraction coupling and calcium handling, and over time regions of affected fibres lose mitochondria and oxidative enzyme activity, producing the characteristic amorphous central cores. The same channel dysfunction underlies the linked risk of malignant hyperthermia, in which volatile anaesthetics and depolarising muscle relaxants trigger uncontrolled calcium release, hypermetabolism and rhabdomyolysis. Predominant involvement of type 1 fibres accounts for the proximal, often relatively non-progressive weakness.",
+    "additionalDifferentials": [
+      "Nemaline myopathy",
+      "Centronuclear/myotubular myopathy",
+      "Congenital muscular dystrophy",
+      "Spinal muscular atrophy",
+      "Multiminicore disease (RYR1/SEPN1 related)",
+      "Congenital myasthenic syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Nemaline myopathy, Centronuclear/myotubular myopathy, Congenital muscular dystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Muscle biopsy with oxidative enzyme histochemistry to demonstrate central cores in type 1 fibres",
+      "Targeted or panel genetic testing including RYR1 sequencing and copy-number analysis",
+      "Serum creatine kinase, usually normal or mildly elevated",
+      "Nerve conduction studies and electromyography to exclude neurogenic and other myopathic causes",
+      "Baseline and serial respiratory function testing and orthopaedic assessment for scoliosis and hip dysplasia",
+      "Contracture/in-vitro contracture testing or genetic counselling regarding malignant hyperthermia susceptibility"
     ],
-    [
-     "Management Strategy",
-     "Strict avoidance of malignant hyperthermia triggers, using a trigger-free anaesthetic technique that omits volatile agents and",
-     "Core treatment modality"
+    "redFlags": [
+      "History of anaesthetic complications or family history of malignant hyperthermia",
+      "Declining respiratory function or nocturnal hypoventilation",
+      "Rapidly progressive scoliosis compromising ventilation",
+      "Feeding or swallowing difficulty with aspiration risk in infants"
     ],
-    [
-     "Clinical Pitfall",
-     "Administering triggering anaesthetic agents without recognising malignant hyperthermia susceptibility",
-     "Prevent diagnostic or management error"
+    "prognosis": "Weakness is often static or only slowly progressive and many affected individuals achieve independent ambulation, though orthopaedic and, less commonly, respiratory complications may require ongoing management. The dominant lifelong risk is malignant hyperthermia during anaesthesia, which is preventable with appropriate precautions.",
+    "pitfalls": [
+      "Administering triggering anaesthetic agents without recognising malignant hyperthermia susceptibility",
+      "Assuming a normal creatine kinase excludes a significant myopathy",
+      "Overlooking cores because oxidative enzyme stains were not performed on biopsy",
+      "Attributing static weakness purely to an orthopaedic problem and missing the underlying myopathy"
+    ],
+    "references": [
+      "Emery-Dreifuss / Dubowitz Muscle Disorders in Childhood",
+      "OMIM: Central core disease (RYR1)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Strict avoidance of malignant hyperthermia triggers, using a trigger-free anaesthetic technique that omits volatile agents and depolarising muscle relaxants",
+      "Malignant hyperthermia alert documentation and ready availability of dantrolene, with active cooling for any crisis",
+      "Physiotherapy and occupational therapy to maintain strength, mobility and function",
+      "Orthopaedic management of scoliosis, congenital hip dislocation and foot deformities",
+      "Baseline and serial respiratory function monitoring with support where weakness affects breathing",
+      "Genetic counselling and family screening for RYR1 variants, noting predominantly autosomal dominant with rarer recessive inheritance",
+      "Multidisciplinary neuromuscular follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for central core disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "central-core-disease-real-image",
-   "title": "Central core disease: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "central_core_disease-pathway",
+      "title": "Central core disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents in infancy or early childhood with hypotonia, delayed motor milestones and predominantly proximal, often static or slowly progressive weakness",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: History of anaesthetic complications or family history of malignant hyperthermia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Muscle biopsy with oxidative enzyme histochemistry to demonstrate central cores in type 1 fibres, Targeted or panel genetic testing including RYR1 sequencing and copy-number analysis, Serum creatine kinase, usually normal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Strict avoidance of malignant hyperthermia triggers, using a trigger-free anaesthetic technique that omits volatile agents and depolarising muscle relaxants"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Administering triggering anaesthetic agents without recognising malignant hyperthermia susceptibility"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of central core disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "central_core_disease-matrix",
+      "title": "Central core disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents in infancy or early childhood with hypotonia, delayed motor milestones and predominantly proximal, often",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Muscle biopsy with oxidative enzyme histochemistry to demonstrate central cores in type 1 fibres, Targeted or panel genetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nemaline myopathy, Centronuclear/myotubular myopathy, Congenital muscular dystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Strict avoidance of malignant hyperthermia triggers, using a trigger-free anaesthetic technique that omits volatile agents and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Administering triggering anaesthetic agents without recognising malignant hyperthermia susceptibility",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for central core disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular Disorders reference texts / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_core_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Muscle biopsy with oxidative enzyme histochemistry",
+          "cells": [
+            {
+              "text": "Central cores in type 1 fibres that lack oxidative enzyme staining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted or panel genetic testing including RYR1",
+          "cells": [
+            {
+              "text": "Sequencing and copy-number analysis for RYR1 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Usually normal or mildly raised; helps distinguish from dystrophies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Excludes neurogenic and other myopathic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function testing and orthopaedic assessment",
+          "cells": [
+            {
+              "text": "Serial monitoring of breathing, scoliosis and hip dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_core_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger-free anaesthesia",
+          "cells": [
+            {
+              "text": "Omit volatile agents and depolarising muscle relaxants"
+            },
+            {
+              "text": "Malignant hyperthermia susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant hyperthermia readiness",
+          "cells": [
+            {
+              "text": "Alert documentation and ready dantrolene, with active cooling for any crisis"
+            },
+            {
+              "text": "Crisis preparedness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Maintain strength, mobility and function"
+            },
+            {
+              "text": "Function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Scoliosis, congenital hip dislocation and foot deformities"
+            },
+            {
+              "text": "Common complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Baseline and serial respiratory function monitoring, with support where needed"
+            },
+            {
+              "text": "Where weakness affects breathing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "RYR1 testing and family screening"
+            },
+            {
+              "text": "Predominantly autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular follow-up",
+          "cells": [
+            {
+              "text": "Multidisciplinary neuromuscular follow-up"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_core_disease-dx-mgmt",
+      "title": "Diagnosis and management of Central core disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central core disease: infant hypotonia with proximal weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (anaesthetic complication, declining breathing, rapid scoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: avoid triggers; respiratory support and urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Muscle biopsy with oxidative stains; RYR1 testing; creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Central cores in type 1 fibres with a RYR1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Trigger-free anaesthetic technique without volatile agents or depolarising relaxants",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check nemaline, centronuclear myopathy and congenital dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Malignant hyperthermia alert and dantrolene availability",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to maintain function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic care for scoliosis, hip dislocation and foot deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often static or slowly progressive; malignant hyperthermia is the main lifelong risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

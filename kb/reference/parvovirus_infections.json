@@ -1,186 +1,605 @@
 {
- "id": "parvovirus_infections",
- "name": "Parvovirus Infections",
- "system": "Infectious Diseases (Hematologic/Multisystem viral infection)",
- "class": "infective",
- "chapter": 202,
- "page": 1522,
- "aliases": [
-  "Parvovirus B19 infection",
-  "B19V infection",
-  "Erythema infectiosum",
-  "Fifth disease",
-  "Slapped-cheek disease",
-  "Human bocavirus infection"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1522",
-  "clinicalPearls": [
-   "Parvovirus B19 (B19V) has a narrow tropism for erythroid progenitor cells in the bone marrow, which underlies most of its clinical effects on red cell production.",
-   "Most B19V infections are asymptomatic or cause only a mild nonspecific illness; the characteristic disease, erythema infectiosum (fifth disease, slapped-cheek disease), occurs mainly in children 3-12 years old.",
-   "Transmission is primarily respiratory and occurs before the onset of rash or arthralgia; once the rash appears the child is no longer infectious and can return to school.",
-   "In adults the classic slapped-cheek appearance is usually absent; instead they often present with arthralgia, with or without a macular rash.",
-   "Arthropathy occurs in roughly 50% of infected adults, is more common in women, tends to be symmetrical and involves small joints of the hands (sometimes ankles, knees, wrists), and can mimic rheumatoid arthritis with detectable rheumatoid factor.",
-   "In patients dependent on rapid red cell turnover (hemolytic disorders, hemoglobinopathies, red cell enzymopathies, autoimmune hemolytic anemia), B19V is the predominant cause of transient aplastic crisis (TAC).",
-   "Bone marrow in TAC and pure red cell aplasia shows characteristic giant pronormoblasts with absent or scarce erythroid precursors; in a sickle-cell patient, reticulocytopenia with acute worsening anemia is diagnostic without marrow examination.",
-   "Chronic B19V infection causing pure red cell aplasia (PRCA)/persistent anemia is a treatable cause of anemia in immunocompromised hosts and is important to recognize because effective immunoglobulin therapy exists.",
-   "Individuals genetically lacking the blood group P antigen (globoside) are naturally resistant to B19V infection because that antigen is a required receptor.",
-   "Detection of B19V DNA in tissue by PCR alone does not establish causation, since viral DNA can persist in healthy tissues for decades; quantitative PCR and serologic correlation are needed.",
-   "Human bocavirus 1 (HBoV1) is a separate human parvovirus causing upper and lower respiratory tract infection in young children (peak ~2 years) and infecting nearly all children before age 5.",
-   "An immune-mediated rash can appear in chronically infected immunocompromised patients after immunoglobulin administration, due to antigen-antibody complexes in skin."
+  "id": "parvovirus_infections",
+  "name": "Parvovirus Infections",
+  "system": "Infectious Diseases (Hematologic/Multisystem viral infection)",
+  "class": "infective",
+  "chapter": 202,
+  "page": 1522,
+  "aliases": [
+    "Parvovirus B19 infection",
+    "B19V infection",
+    "Erythema infectiosum",
+    "Fifth disease",
+    "Slapped-cheek disease",
+    "Human bocavirus infection"
   ],
-  "pathophysiology": "B19V is a small nonenveloped single-stranded DNA virus (genus Erythroparvovirus) that replicates in erythroid progenitor cells. Cell entry depends on the unknown primary receptor recognized by VP1u and, at a later step, the blood group P antigen (globoside); people lacking P antigen are naturally resistant. Infection produces high-titer viremia (up to ~10^12-10^14 particles/mL at the peak) and virus-induced cytotoxicity that halts red cell production. In immunocompetent hosts with normal hematopoiesis the arrest of erythropoiesis is transient with only a minimal fall in hemoglobin, resolving as neutralizing antibody is produced. In hosts with increased erythropoiesis (e.g., hemolytic anemia) the same arrest precipitates a transient aplastic crisis; in those who fail to mount neutralizing antibody (immunocompromised hosts or the fetus) lytic infection persists and chronic anemia/PRCA develops. The classic rash and arthropathy of erythema infectiosum are immune-mediated, beginning 2-3 weeks after infection as the IgM response peaks. B19V can also enter nonpermissive cells (B cells, monocytes, endothelial cells) by antibody-dependent enhancement and persist as DNA for life in many tissues (heart, liver, kidney, synovium, brain, bone), generally without disease.",
-  "additionalDifferentials": [
-   "Other viral exanthems (B19V rash is difficult to distinguish clinically; laboratory confirmation is advised when a definite diagnosis is needed, such as in pregnancy)",
-   "Rheumatoid arthritis (B19V polyarthropathy can mimic it, and rheumatoid factor may be present)",
-   "Other causes of nonimmune hydrops fetalis",
-   "Other causes of transient aplastic crisis or red cell aplasia"
-  ],
-  "infectionMimics": [
-   "Other respiratory viral infections (for HBoV1, which presents like other viral RTIs with fever, cough, wheezing)",
-   "Co-infection with Plasmodium has been suggested to contribute to severe anemia in young children with malaria"
-  ],
-  "nonInfectiousMimics": [
-   "Rheumatoid arthritis (clinical and serologic overlap with B19V polyarthropathy syndrome)",
-   "Idiopathic thrombocytopenic purpura (B19V can be associated with thrombocytopenia)"
-  ],
-  "additionalInvestigations": [
-   "B19V IgM by indirect enzyme immunoassay - detectable at the time of rash in erythema infectiosum and by the third day of TAC; may persist about 3 months or longer",
-   "B19V IgG - detectable by the seventh day of illness and persists for life, marking immunity; seroconversion or a fourfold or greater rise on paired sera taken 2 weeks apart is diagnostic of acute infection",
-   "IgG avidity testing and epitope-type-specific (ETS) EIA to distinguish acute from past infection",
-   "B19V DNA by PCR in serum (or amniotic fluid), with quantitative PCR preferred because low-level DNA can persist for months to years even in healthy people",
-   "Bone marrow examination showing giant pronormoblasts and absent/scant erythroid precursors in TAC or PRCA",
-   "In suspected fetal infection: maternal serology in exposed seronegative mothers, with regular monitoring if positive, and PCR of amniotic fluid or tissue"
-  ],
-  "redFlags": [
-   "Severe to life-threatening anemia with a low reticulocyte count in a patient with a known hemolytic disorder (transient aplastic crisis)",
-   "Persistent anemia with reticulocytopenia and extremely high serum B19V DNA titers in an immunocompromised patient (pure red cell aplasia)",
-   "Maternal B19V infection before gestational week 20, given the risk of fetal loss and hydrops fetalis",
-   "Nonimmune hydrops fetalis with gross edema and severe fetal anemia (B19V causes an estimated 10-20% of such cases)",
-   "Hemophagocytic syndrome occasionally precipitated by B19V"
-  ],
-  "prognosis": "Most B19V infections are self-limited. Erythema infectiosum and B19V-associated arthropathy generally resolve spontaneously, though joint symptoms may recur for weeks to months. Transient aplastic crisis is, by definition, transient: anemia resolves once cytopathic infection of erythroid progenitors ceases, and lifelong immunity follows. Chronic anemia/PRCA in immunocompromised hosts is treatable and can be cured or ameliorated with immunoglobulin. Risk of fetal loss is highest (excess risk roughly 9%) when maternal infection occurs before gestational week 20 and is very low thereafter; most fetal infections resolve spontaneously, B19V does not appear to be teratogenic, and rare reports of eye damage, CNS abnormalities, and congenital anemia exist.",
-  "pitfalls": [
-   "Interpreting tissue B19V DNA detected by PCR as proof of active disease - viral DNA persists in healthy tissues for decades, so PCR alone in tissue should not establish a B19V etiology.",
-   "Presence of B19V DNA in synovium does not prove a causal role in arthritis, since healthy individuals also harbor viral DNA in synovia.",
-   "In TAC and chronic infection, classic immune-mediated symptoms (rash, arthralgia) are often absent, making the diagnosis easy to miss in immunocompromised or hemolytic patients.",
-   "Relying on qualitative PCR for HBoV1 in respiratory secretions can misattribute etiology, since HBoV1 DNA may persist for weeks to months after acute infection.",
-   "Serology may be negative or only weakly positive in immunodeficient patients with PRCA, so quantitative serum DNA is needed."
-  ],
-  "severityClassification": "Clinical spectrum of B19V infection (per Table 202-1): fifth disease in healthy children (IgM and IgG positive, viral load >10^4 IU/mL); polyarthropathy syndrome in healthy adults; transient aplastic crisis in patients with increased erythropoiesis (often >10^12 IU/mL, rapidly decreasing); persistent anemia/pure red cell aplasia in immunodeficient or immunosuppressed patients (often >10^12 IU/mL, typically >10^6 untreated); and hydrops fetalis/congenital anemia in fetuses of mothers infected before 20 weeks.",
-  "references": [
-   "Harrison 22e p.1522",
-   "Harrison 22e p.1523",
-   "Harrison 22e p.1524",
-   "Harrison 22e p.1525"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the typical self-limited illness of erythema infectiosum and arthropathy with supportive care and NSAIDs for joint symptoms",
-   "Provide red-cell transfusion support during transient aplastic crisis in patients with haemolytic disorders until erythropoiesis resumes",
-   "Give intravenous immunoglobulin for chronic pure red cell aplasia in immunocompromised patients, alongside reduction of immunosuppression where possible",
-   "Monitor and transfuse the affected foetus in congenital infection, using ultrasound and middle cerebral artery Doppler to guide intrauterine transfusion for hydrops",
-   "Institute droplet precautions to protect vulnerable contacts, noting that patients with aplastic crisis or chronic infection remain infectious whereas those with erythema infectiosum are not once the rash appears",
-   "Follow full blood count and reticulocytes to confirm haematological recovery"
-  ]
- },
- "algorithms": [
-  {
-   "id": "parvovirus_infections-pathway",
-   "title": "Parvovirus Infections: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Parvovirus B19 (B19V) has a narrow tropism for erythroid progenitor cells in the bone marrow, which underlies most of its clinical effects on red cell production.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe to life-threatening anemia with a low reticulocyte count in a patient with a known hemolytic disorder (transient aplastic crisis)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: B19V IgM by indirect enzyme immunoassay - detectable at the time of rash in erythema infectiosum and by the third day of TAC; may persist about 3 months or longer, B19V IgG - detectable by the seventh day of illness and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the typical self-limited illness of erythema infectiosum and arthropathy with supportive care and NSAIDs for joint symptoms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting tissue B19V DNA detected by PCR as proof of active disease - viral DNA persists in healthy tissues for decades, so PCR alone in tissue should not establish a B19V etiology."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of parvovirus infections."
-  }
- ],
- "tables": [
-  {
-   "id": "parvovirus_infections-matrix",
-   "title": "Parvovirus Infections: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Parvovirus B19 (B19V) has a narrow tropism for erythroid progenitor cells in the bone marrow, which underlies most of its",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1522",
+    "clinicalPearls": [
+      "Parvovirus B19 (B19V) has a narrow tropism for erythroid progenitor cells in the bone marrow, which underlies most of its clinical effects on red cell production.",
+      "Most B19V infections are asymptomatic or cause only a mild nonspecific illness; the characteristic disease, erythema infectiosum (fifth disease, slapped-cheek disease), occurs mainly in children 3-12 years old.",
+      "Transmission is primarily respiratory and occurs before the onset of rash or arthralgia; once the rash appears the child is no longer infectious and can return to school.",
+      "In adults the classic slapped-cheek appearance is usually absent; instead they often present with arthralgia, with or without a macular rash.",
+      "Arthropathy occurs in roughly 50% of infected adults, is more common in women, tends to be symmetrical and involves small joints of the hands (sometimes ankles, knees, wrists), and can mimic rheumatoid arthritis with detectable rheumatoid factor.",
+      "In patients dependent on rapid red cell turnover (hemolytic disorders, hemoglobinopathies, red cell enzymopathies, autoimmune hemolytic anemia), B19V is the predominant cause of transient aplastic crisis (TAC).",
+      "Bone marrow in TAC and pure red cell aplasia shows characteristic giant pronormoblasts with absent or scarce erythroid precursors; in a sickle-cell patient, reticulocytopenia with acute worsening anemia is diagnostic without marrow examination.",
+      "Chronic B19V infection causing pure red cell aplasia (PRCA)/persistent anemia is a treatable cause of anemia in immunocompromised hosts and is important to recognize because effective immunoglobulin therapy exists.",
+      "Individuals genetically lacking the blood group P antigen (globoside) are naturally resistant to B19V infection because that antigen is a required receptor.",
+      "Detection of B19V DNA in tissue by PCR alone does not establish causation, since viral DNA can persist in healthy tissues for decades; quantitative PCR and serologic correlation are needed.",
+      "Human bocavirus 1 (HBoV1) is a separate human parvovirus causing upper and lower respiratory tract infection in young children (peak ~2 years) and infecting nearly all children before age 5.",
+      "An immune-mediated rash can appear in chronically infected immunocompromised patients after immunoglobulin administration, due to antigen-antibody complexes in skin."
     ],
-    [
-     "Key Investigations",
-     "B19V IgM by indirect enzyme immunoassay - detectable at the time of rash in erythema infectiosum and by the third day of TAC; may",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "B19V is a small nonenveloped single-stranded DNA virus (genus Erythroparvovirus) that replicates in erythroid progenitor cells. Cell entry depends on the unknown primary receptor recognized by VP1u and, at a later step, the blood group P antigen (globoside); people lacking P antigen are naturally resistant. Infection produces high-titer viremia (up to ~10^12-10^14 particles/mL at the peak) and virus-induced cytotoxicity that halts red cell production. In immunocompetent hosts with normal hematopoiesis the arrest of erythropoiesis is transient with only a minimal fall in hemoglobin, resolving as neutralizing antibody is produced. In hosts with increased erythropoiesis (e.g., hemolytic anemia) the same arrest precipitates a transient aplastic crisis; in those who fail to mount neutralizing antibody (immunocompromised hosts or the fetus) lytic infection persists and chronic anemia/PRCA develops. The classic rash and arthropathy of erythema infectiosum are immune-mediated, beginning 2-3 weeks after infection as the IgM response peaks. B19V can also enter nonpermissive cells (B cells, monocytes, endothelial cells) by antibody-dependent enhancement and persist as DNA for life in many tissues (heart, liver, kidney, synovium, brain, bone), generally without disease.",
+    "additionalDifferentials": [
+      "Other viral exanthems (B19V rash is difficult to distinguish clinically; laboratory confirmation is advised when a definite diagnosis is needed, such as in pregnancy)",
+      "Rheumatoid arthritis (B19V polyarthropathy can mimic it, and rheumatoid factor may be present)",
+      "Other causes of nonimmune hydrops fetalis",
+      "Other causes of transient aplastic crisis or red cell aplasia"
     ],
-    [
-     "Primary Differentials",
-     "Other viral exanthems (B19V rash is difficult to distinguish clinically; laboratory confirmation is advised when a definite",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Other respiratory viral infections (for HBoV1, which presents like other viral RTIs with fever, cough, wheezing)",
+      "Co-infection with Plasmodium has been suggested to contribute to severe anemia in young children with malaria"
     ],
-    [
-     "Management Strategy",
-     "Manage the typical self-limited illness of erythema infectiosum and arthropathy with supportive care and NSAIDs for joint symptoms",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Rheumatoid arthritis (clinical and serologic overlap with B19V polyarthropathy syndrome)",
+      "Idiopathic thrombocytopenic purpura (B19V can be associated with thrombocytopenia)"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting tissue B19V DNA detected by PCR as proof of active disease - viral DNA persists in healthy tissues for decades, so",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "B19V IgM by indirect enzyme immunoassay - detectable at the time of rash in erythema infectiosum and by the third day of TAC; may persist about 3 months or longer",
+      "B19V IgG - detectable by the seventh day of illness and persists for life, marking immunity; seroconversion or a fourfold or greater rise on paired sera taken 2 weeks apart is diagnostic of acute infection",
+      "IgG avidity testing and epitope-type-specific (ETS) EIA to distinguish acute from past infection",
+      "B19V DNA by PCR in serum (or amniotic fluid), with quantitative PCR preferred because low-level DNA can persist for months to years even in healthy people",
+      "Bone marrow examination showing giant pronormoblasts and absent/scant erythroid precursors in TAC or PRCA",
+      "In suspected fetal infection: maternal serology in exposed seronegative mothers, with regular monitoring if positive, and PCR of amniotic fluid or tissue"
+    ],
+    "redFlags": [
+      "Severe to life-threatening anemia with a low reticulocyte count in a patient with a known hemolytic disorder (transient aplastic crisis)",
+      "Persistent anemia with reticulocytopenia and extremely high serum B19V DNA titers in an immunocompromised patient (pure red cell aplasia)",
+      "Maternal B19V infection before gestational week 20, given the risk of fetal loss and hydrops fetalis",
+      "Nonimmune hydrops fetalis with gross edema and severe fetal anemia (B19V causes an estimated 10-20% of such cases)",
+      "Hemophagocytic syndrome occasionally precipitated by B19V"
+    ],
+    "prognosis": "Most B19V infections are self-limited. Erythema infectiosum and B19V-associated arthropathy generally resolve spontaneously, though joint symptoms may recur for weeks to months. Transient aplastic crisis is, by definition, transient: anemia resolves once cytopathic infection of erythroid progenitors ceases, and lifelong immunity follows. Chronic anemia/PRCA in immunocompromised hosts is treatable and can be cured or ameliorated with immunoglobulin. Risk of fetal loss is highest (excess risk roughly 9%) when maternal infection occurs before gestational week 20 and is very low thereafter; most fetal infections resolve spontaneously, B19V does not appear to be teratogenic, and rare reports of eye damage, CNS abnormalities, and congenital anemia exist.",
+    "pitfalls": [
+      "Interpreting tissue B19V DNA detected by PCR as proof of active disease - viral DNA persists in healthy tissues for decades, so PCR alone in tissue should not establish a B19V etiology.",
+      "Presence of B19V DNA in synovium does not prove a causal role in arthritis, since healthy individuals also harbor viral DNA in synovia.",
+      "In TAC and chronic infection, classic immune-mediated symptoms (rash, arthralgia) are often absent, making the diagnosis easy to miss in immunocompromised or hemolytic patients.",
+      "Relying on qualitative PCR for HBoV1 in respiratory secretions can misattribute etiology, since HBoV1 DNA may persist for weeks to months after acute infection.",
+      "Serology may be negative or only weakly positive in immunodeficient patients with PRCA, so quantitative serum DNA is needed."
+    ],
+    "severityClassification": "Clinical spectrum of B19V infection (per Table 202-1): fifth disease in healthy children (IgM and IgG positive, viral load >10^4 IU/mL); polyarthropathy syndrome in healthy adults; transient aplastic crisis in patients with increased erythropoiesis (often >10^12 IU/mL, rapidly decreasing); persistent anemia/pure red cell aplasia in immunodeficient or immunosuppressed patients (often >10^12 IU/mL, typically >10^6 untreated); and hydrops fetalis/congenital anemia in fetuses of mothers infected before 20 weeks.",
+    "references": [
+      "Harrison 22e p.1522",
+      "Harrison 22e p.1523",
+      "Harrison 22e p.1524",
+      "Harrison 22e p.1525"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the typical self-limited illness of erythema infectiosum and arthropathy with supportive care and NSAIDs for joint symptoms",
+      "Provide red-cell transfusion support during transient aplastic crisis in patients with haemolytic disorders until erythropoiesis resumes",
+      "Give intravenous immunoglobulin for chronic pure red cell aplasia in immunocompromised patients, alongside reduction of immunosuppression where possible",
+      "Monitor and transfuse the affected foetus in congenital infection, using ultrasound and middle cerebral artery Doppler to guide intrauterine transfusion for hydrops",
+      "Institute droplet precautions to protect vulnerable contacts, noting that patients with aplastic crisis or chronic infection remain infectious whereas those with erythema infectiosum are not once the rash appears",
+      "Follow full blood count and reticulocytes to confirm haematological recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for parvovirus infections."
-  }
- ],
- "diagrams": [
-  {
-   "id": "parvovirus-infections-real-image",
-   "title": "Parvovirus Infections: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "parvovirus_infections-pathway",
+      "title": "Parvovirus Infections: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Parvovirus B19 (B19V) has a narrow tropism for erythroid progenitor cells in the bone marrow, which underlies most of its clinical effects on red cell production.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe to life-threatening anemia with a low reticulocyte count in a patient with a known hemolytic disorder (transient aplastic crisis)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: B19V IgM by indirect enzyme immunoassay - detectable at the time of rash in erythema infectiosum and by the third day of TAC; may persist about 3 months or longer, B19V IgG - detectable by the seventh day of illness and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the typical self-limited illness of erythema infectiosum and arthropathy with supportive care and NSAIDs for joint symptoms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting tissue B19V DNA detected by PCR as proof of active disease - viral DNA persists in healthy tissues for decades, so PCR alone in tissue should not establish a B19V etiology."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of parvovirus infections."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "parvovirus_infections-matrix",
+      "title": "Parvovirus Infections: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Parvovirus B19 (B19V) has a narrow tropism for erythroid progenitor cells in the bone marrow, which underlies most of its",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "B19V IgM by indirect enzyme immunoassay - detectable at the time of rash in erythema infectiosum and by the third day of TAC; may",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other viral exanthems (B19V rash is difficult to distinguish clinically; laboratory confirmation is advised when a definite",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the typical self-limited illness of erythema infectiosum and arthropathy with supportive care and NSAIDs for joint symptoms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting tissue B19V DNA detected by PCR as proof of active disease - viral DNA persists in healthy tissues for decades, so",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for parvovirus infections."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 184-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "SMFM, Human Parvovirus B19 in Pregnancy",
+      "kind": "web",
+      "url": "https://www.smfm.org/parvovirus-b19"
+    },
+    {
+      "id": "c4",
+      "label": "CDC, Parvovirus B19 in Pregnancy",
+      "kind": "web",
+      "url": "https://www.cdc.gov/parvovirus-b19/about/parvovirus-b19-in-pregnancy.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parvovirus_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Laboratory pattern by parvovirus B19 syndrome",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antibodies",
+        "B19 DNA"
+      ],
+      "rows": [
+        {
+          "parameter": "Fifth disease (healthy children)",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "IgM positive, IgG positive"
+            },
+            {
+              "text": "PCR positive, quantitative over 10^3 IU/mL",
+              "op": ">",
+              "value": 1000
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Polyarthropathy (healthy adults, more often women)",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "IgM positive within 3 months of onset, IgG positive"
+            },
+            {
+              "text": "PCR positive, quantitative over 10^3 IU/mL",
+              "op": ">",
+              "value": 1000
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transient aplastic crisis (high red cell turnover)",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "IgM and IgG negative or positive"
+            },
+            {
+              "text": "Often over 10^12 IU/mL, falls rapidly",
+              "op": ">",
+              "value": 1000000000000.0
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Persistent anemia or pure red cell aplasia (immunodeficient)",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "{{hy:Negative or weakly positive, so use quantitative DNA}}"
+            },
+            {
+              "text": "Often over 10^12 IU/mL; over 10^6 if untreated",
+              "op": ">",
+              "value": 1000000.0
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydrops fetalis or congenital anemia (fetus under 20 weeks)",
+          "cells": [
+            {
+              "text": "IgM negative or positive, IgG positive"
+            },
+            {
+              "text": "PCR positive in amniotic fluid or tissue"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paired sera 2 weeks apart",
+          "cells": [
+            {
+              "text": "Seroconversion or fourfold IgG rise means acute infection"
+            },
+            {
+              "text": "IgG appears by day 7 and lasts for life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow",
+          "cells": [
+            {
+              "text": "Giant pronormoblasts, absent erythroid precursors"
+            },
+            {
+              "text": "Seen in aplastic crisis and red cell aplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 184-1 gives a fifth disease viral load over 10^3 IU/mL; the entry severity text cites over 10^4 IU/mL. Low-level DNA persists for months to years, so qualitative PCR alone does not prove acute infection."
+    },
+    {
+      "id": "parvovirus_infections-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic parvovirus B19 disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other viral exanthems (rubella, measles, enterovirus)",
+          "cells": [
+            {
+              "text": "Rash patterns overlap; slapped cheek favors B19"
+            },
+            {
+              "text": "B19 IgM and specific serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Symmetric small-joint arthritis, may have RF"
+            },
+            {
+              "text": "B19 IgM; B19 arthritis resolves in weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of aplastic crisis or red cell aplasia",
+          "cells": [
+            {
+              "text": "Drugs, thymoma, other marrow failure"
+            },
+            {
+              "text": "Quantitative B19 DNA, marrow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of nonimmune hydrops",
+          "cells": [
+            {
+              "text": "Chromosomal, cardiac, other infections"
+            },
+            {
+              "text": "Amniotic fluid B19 PCR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "B19 can lower platelets"
+            },
+            {
+              "text": "B19 serology and PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parvovirus_infections-treatment",
+      "kind": "treatment",
+      "title": "Managing parvovirus B19 infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care, NSAIDs",
+          "cells": [
+            {
+              "text": "Fifth disease and arthropathy"
+            },
+            {
+              "text": "Self-limited; joint symptoms can recur for weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red cell transfusion",
+          "cells": [
+            {
+              "text": "Transient aplastic crisis in hemolytic disorders"
+            },
+            {
+              "text": "Until erythropoiesis returns"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "IV immunoglobulin",
+          "cells": [
+            {
+              "text": "Chronic red cell aplasia in immunocompromised patients"
+            },
+            {
+              "text": "Reduce immunosuppression where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal monitoring",
+          "cells": [
+            {
+              "text": "Maternal infection or exposure in pregnancy"
+            },
+            {
+              "text": "Serial ultrasound and MCA Doppler for fetal anemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrauterine transfusion",
+          "cells": [
+            {
+              "text": "Severe fetal anemia or hydrops"
+            },
+            {
+              "text": "Highest fetal risk with infection before 20 weeks (excess loss about 9%)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology in pregnancy",
+          "cells": [
+            {
+              "text": "Compatible symptoms, confirmed exposure, suspected fetal anemia"
+            },
+            {
+              "text": "Routine immunity screening not recommended"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Droplet precautions",
+          "cells": [
+            {
+              "text": "Aplastic crisis or chronic infection"
+            },
+            {
+              "text": "Children with rash are no longer infectious"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parvovirus_infections-dx-mgmt",
+      "title": "Diagnosis and management of parvovirus B19 infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slapped-cheek rash, arthralgia, anemia with low reticulocytes, or exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pregnant?",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "IgG and IgM serology",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "IgM positive or seroconversion?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Immune or not infected; nonimmune: watch for symptoms",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Serial ultrasound and MCA Doppler; intrauterine transfusion if severe anemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Hemolytic disorder or immunocompromised with anemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Quantitative B19 DNA and reticulocyte count",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Immunocompromised with persistent aplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "IVIG, reduce immunosuppression, droplet precautions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Transfuse until marrow recovers; droplet precautions",
+          "cite": "c4"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Supportive care and NSAIDs; return to school once rash appears",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

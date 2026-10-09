@@ -1,174 +1,1153 @@
 {
- "id": "narcolepsy",
- "name": "Narcolepsy",
- "aliases": [
-  "narcolepsy type 1",
-  "narcolepsy type 2",
-  "hypocretin deficiency syndrome",
-  "Gelineau syndrome"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Cardinal feature is excessive daytime sleepiness with irresistible sleep attacks, often accompanied by a classic tetrad that also includes cataplexy, sleep paralysis, and hypnagogic hallucinations",
-   "Cataplexy, sudden transient loss of muscle tone triggered by emotion such as laughter, is highly specific and defines narcolepsy type 1",
-   "The disorder reflects intrusion of REM-sleep phenomena into wakefulness, explaining cataplexy, dream-like hallucinations, and sleep paralysis",
-   "Narcolepsy type 1 is associated with low or undetectable cerebrospinal fluid hypocretin (orexin) and a strong link to the HLA-DQB1*06:02 allele",
-   "Diagnosis is supported by overnight polysomnography followed by a multiple sleep latency test showing short sleep latency and multiple sleep-onset REM periods",
-   "Management combines scheduled naps and sleep hygiene with wake-promoting agents for sleepiness and specific therapy for cataplexy",
-   "Onset is typically in adolescence or young adulthood and the condition is frequently under-recognised for years",
-   "Secondary narcolepsy can follow hypothalamic lesions, so consider imaging when there are atypical features or focal signs"
+  "id": "narcolepsy",
+  "name": "Narcolepsy",
+  "aliases": [
+    "narcolepsy type 1",
+    "narcolepsy type 2",
+    "hypocretin deficiency syndrome",
+    "Gelineau syndrome"
   ],
-  "pathophysiology": "Narcolepsy type 1 results from selective loss of hypocretin (orexin)-producing neurons in the lateral hypothalamus, most likely through an autoimmune process in genetically susceptible individuals carrying HLA-DQB1*06:02. Hypocretin normally stabilises wakefulness and suppresses inappropriate REM sleep; its deficiency destabilises the sleep-wake switch, producing daytime sleepiness and the intrusion of REM features such as cataplexy into wakefulness. Type 2 has preserved hypocretin levels and a less well-defined mechanism.",
-  "additionalDifferentials": [
-   "Obstructive sleep apnoea and other causes of fragmented sleep",
-   "Insufficient sleep syndrome",
-   "Idiopathic hypersomnia",
-   "Circadian rhythm sleep disorders",
-   "Syncope or seizures mistaken for cataplexy",
-   "Depression and medication-related sedation"
-  ],
-  "additionalInvestigations": [
-   "Overnight polysomnography followed by a multiple sleep latency test",
-   "HLA typing for DQB1*06:02 as a supportive marker",
-   "Cerebrospinal fluid hypocretin (orexin) measurement in selected cases",
-   "MRI of the brain when secondary narcolepsy from a hypothalamic lesion is suspected",
-   "Sleep diaries and actigraphy to exclude insufficient sleep and circadian disorders"
-  ],
-  "redFlags": [
-   "New hypersomnolence with focal neurological signs or endocrine disturbance suggesting a hypothalamic mass",
-   "Severe sleep attacks endangering driving or operating machinery",
-   "Status cataplecticus with prolonged, near-continuous cataplexy",
-   "Abrupt withdrawal of anticataplectic therapy precipitating rebound cataplexy"
-  ],
-  "prognosis": "Narcolepsy is a lifelong disorder, but symptoms can usually be controlled well enough with treatment and behavioural measures to allow good function. It carries important safety implications for driving and work, and untreated disease significantly impairs quality of life, mood, and daytime performance.",
-  "pitfalls": [
-   "Attributing chronic sleepiness to lifestyle or depression and delaying diagnosis for years",
-   "Missing cataplexy because patients do not volunteer it or it is mistaken for syncope or seizures",
-   "Failing to screen for and address driving and occupational safety risks",
-   "Overlooking a secondary hypothalamic cause in atypical or late-onset presentations"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Combine behavioural measures as first-line treatment of sleepiness, with scheduled daytime naps, a regular sleep schedule and good sleep hygiene",
-   "Treat excessive daytime sleepiness with wake-promoting agents such as modafinil, armodafinil, solriamfetol or pitolisant, or with stimulants such as methylphenidate or amfetamines",
-   "Treat cataplexy and other REM-intrusion symptoms with sodium oxybate, pitolisant or antidepressants with anticataplectic effect such as SNRIs, SSRIs or tricyclics",
-   "Counsel on driving and occupational safety and manage the hazard of untreated sleep attacks",
-   "Screen for and manage comorbid mood disorder and disrupted nocturnal sleep",
-   "Confirm the diagnosis and subtype with overnight polysomnography and multiple sleep latency testing, referring to a sleep-medicine specialist",
-   "Provide long-term follow-up with treatment titration and patient support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "narcolepsy-pathway",
-   "title": "Narcolepsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Cardinal feature is excessive daytime sleepiness with irresistible sleep attacks, often accompanied by a classic tetrad that also includes cataplexy, sleep paralysis, and hypnagogic hallucinations",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New hypersomnolence with focal neurological signs or endocrine disturbance suggesting a hypothalamic mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Overnight polysomnography followed by a multiple sleep latency test, HLA typing for DQB1*06:02 as a supportive marker, Cerebrospinal fluid hypocretin (orexin) measurement in selected cases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Combine behavioural measures as first-line treatment of sleepiness, with scheduled daytime naps, a regular sleep schedule and good sleep hygiene"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing chronic sleepiness to lifestyle or depression and delaying diagnosis for years"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of narcolepsy."
-  }
- ],
- "tables": [
-  {
-   "id": "narcolepsy-matrix",
-   "title": "Narcolepsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Cardinal feature is excessive daytime sleepiness with irresistible sleep attacks, often accompanied by a classic tetrad that also",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Cardinal feature is excessive daytime sleepiness with irresistible sleep attacks, often accompanied by a classic tetrad that also includes cataplexy, sleep paralysis, and hypnagogic hallucinations",
+      "Cataplexy, sudden transient loss of muscle tone triggered by emotion such as laughter, is highly specific and defines narcolepsy type 1",
+      "The disorder reflects intrusion of REM-sleep phenomena into wakefulness, explaining cataplexy, dream-like hallucinations, and sleep paralysis",
+      "Narcolepsy type 1 is associated with low or undetectable cerebrospinal fluid hypocretin (orexin) and a strong link to the HLA-DQB1*06:02 allele",
+      "Diagnosis is supported by overnight polysomnography followed by a multiple sleep latency test showing short sleep latency and multiple sleep-onset REM periods",
+      "Management combines scheduled naps and sleep hygiene with wake-promoting agents for sleepiness and specific therapy for cataplexy",
+      "Onset is typically in adolescence or young adulthood and the condition is frequently under-recognised for years",
+      "Secondary narcolepsy can follow hypothalamic lesions, so consider imaging when there are atypical features or focal signs"
     ],
-    [
-     "Key Investigations",
-     "Overnight polysomnography followed by a multiple sleep latency test, HLA typing for DQB1*06:02 as a supportive marker,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Narcolepsy type 1 results from selective loss of hypocretin (orexin)-producing neurons in the lateral hypothalamus, most likely through an autoimmune process in genetically susceptible individuals carrying HLA-DQB1*06:02. Hypocretin normally stabilises wakefulness and suppresses inappropriate REM sleep; its deficiency destabilises the sleep-wake switch, producing daytime sleepiness and the intrusion of REM features such as cataplexy into wakefulness. Type 2 has preserved hypocretin levels and a less well-defined mechanism.",
+    "additionalDifferentials": [
+      "Obstructive sleep apnoea and other causes of fragmented sleep",
+      "Insufficient sleep syndrome",
+      "Idiopathic hypersomnia",
+      "Circadian rhythm sleep disorders",
+      "Syncope or seizures mistaken for cataplexy",
+      "Depression and medication-related sedation"
     ],
-    [
-     "Primary Differentials",
-     "Obstructive sleep apnoea and other causes of fragmented sleep, Insufficient sleep syndrome, Idiopathic hypersomnia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Overnight polysomnography followed by a multiple sleep latency test",
+      "HLA typing for DQB1*06:02 as a supportive marker",
+      "Cerebrospinal fluid hypocretin (orexin) measurement in selected cases",
+      "MRI of the brain when secondary narcolepsy from a hypothalamic lesion is suspected",
+      "Sleep diaries and actigraphy to exclude insufficient sleep and circadian disorders"
     ],
-    [
-     "Management Strategy",
-     "Combine behavioural measures as first-line treatment of sleepiness, with scheduled daytime naps, a regular sleep schedule and",
-     "Core treatment modality"
+    "redFlags": [
+      "New hypersomnolence with focal neurological signs or endocrine disturbance suggesting a hypothalamic mass",
+      "Severe sleep attacks endangering driving or operating machinery",
+      "Status cataplecticus with prolonged, near-continuous cataplexy",
+      "Abrupt withdrawal of anticataplectic therapy precipitating rebound cataplexy"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing chronic sleepiness to lifestyle or depression and delaying diagnosis for years",
-     "Prevent diagnostic or management error"
+    "prognosis": "Narcolepsy is a lifelong disorder, but symptoms can usually be controlled well enough with treatment and behavioural measures to allow good function. It carries important safety implications for driving and work, and untreated disease significantly impairs quality of life, mood, and daytime performance.",
+    "pitfalls": [
+      "Attributing chronic sleepiness to lifestyle or depression and delaying diagnosis for years",
+      "Missing cataplexy because patients do not volunteer it or it is mistaken for syncope or seizures",
+      "Failing to screen for and address driving and occupational safety risks",
+      "Overlooking a secondary hypothalamic cause in atypical or late-onset presentations"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Combine behavioural measures as first-line treatment of sleepiness, with scheduled daytime naps, a regular sleep schedule and good sleep hygiene",
+      "Treat excessive daytime sleepiness with wake-promoting agents such as modafinil, armodafinil, solriamfetol or pitolisant, or with stimulants such as methylphenidate or amfetamines",
+      "Treat cataplexy and other REM-intrusion symptoms with sodium oxybate, pitolisant or antidepressants with anticataplectic effect such as SNRIs, SSRIs or tricyclics",
+      "Counsel on driving and occupational safety and manage the hazard of untreated sleep attacks",
+      "Screen for and manage comorbid mood disorder and disrupted nocturnal sleep",
+      "Confirm the diagnosis and subtype with overnight polysomnography and multiple sleep latency testing, referring to a sleep-medicine specialist",
+      "Provide long-term follow-up with treatment titration and patient support"
     ]
-   ],
-   "caption": "Overview comparison matrix for narcolepsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "narcolepsy-real-image",
-   "title": "Narcolepsy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "narcolepsy-pathway",
+      "title": "Narcolepsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Cardinal feature is excessive daytime sleepiness with irresistible sleep attacks, often accompanied by a classic tetrad that also includes cataplexy, sleep paralysis, and hypnagogic hallucinations",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New hypersomnolence with focal neurological signs or endocrine disturbance suggesting a hypothalamic mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Overnight polysomnography followed by a multiple sleep latency test, HLA typing for DQB1*06:02 as a supportive marker, Cerebrospinal fluid hypocretin (orexin) measurement in selected cases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Combine behavioural measures as first-line treatment of sleepiness, with scheduled daytime naps, a regular sleep schedule and good sleep hygiene"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing chronic sleepiness to lifestyle or depression and delaying diagnosis for years"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of narcolepsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "narcolepsy-matrix",
+      "title": "Narcolepsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cardinal feature is excessive daytime sleepiness with irresistible sleep attacks, often accompanied by a classic tetrad that also",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Overnight polysomnography followed by a multiple sleep latency test, HLA typing for DQB1*06:02 as a supportive marker,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Obstructive sleep apnoea and other causes of fragmented sleep, Insufficient sleep syndrome, Idiopathic hypersomnia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Combine behavioural measures as first-line treatment of sleepiness, with scheduled daytime naps, a regular sleep schedule and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing chronic sleepiness to lifestyle or depression and delaying diagnosis for years",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for narcolepsy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 265-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "narcolepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Overnight polysomnography followed by multiple sleep latency test",
+          "cells": [
+            {
+              "text": "Short sleep latency and multiple sleep-onset REM periods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA typing for DQB1*06:02",
+          "cells": [
+            {
+              "text": "Supportive marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid hypocretin (orexin) measurement",
+          "cells": [
+            {
+              "text": "Low or undetectable in narcolepsy type 1; selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "When secondary narcolepsy from a hypothalamic lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep diaries and actigraphy",
+          "cells": [
+            {
+              "text": "Excludes insufficient sleep and circadian disorders"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Obstructive sleep apnoea and other causes of fragmented sleep",
+          "cells": [
+            {
+              "text": "Fragmented sleep is a cause of sleepiness that must be excluded first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circadian rhythm sleep disorders",
+          "cells": [
+            {
+              "text": "Excluded with sleep diaries and actigraphy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syncope or seizures mistaken for cataplexy",
+          "cells": [
+            {
+              "text": "Cataplexy is often missed or mistaken for these"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression",
+          "cells": [
+            {
+              "text": "Attributing chronic sleepiness to depression delays the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural measures",
+          "cells": [
+            {
+              "text": "First-line for sleepiness: scheduled daytime naps, regular sleep schedule and sleep hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wake-promoting agents",
+          "cells": [
+            {
+              "text": "Modafinil, armodafinil, solriamfetol or pitolisant; or stimulants such as methylphenidate or amfetamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticataplectic therapy",
+          "cells": [
+            {
+              "text": "Sodium oxybate, pitolisant, or antidepressants with anticataplectic effect such as SNRIs, SSRIs or tricyclics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Driving and occupational safety",
+          "cells": [
+            {
+              "text": "Counselling on the hazard of untreated sleep attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbid mood and sleep",
+          "cells": [
+            {
+              "text": "Screen for and manage mood disorder and disrupted nocturnal sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist confirmation",
+          "cells": [
+            {
+              "text": "Polysomnography and multiple sleep latency testing under sleep-medicine care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Treatment titration and patient support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "narcolepsy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    },
+    {
+      "id": "narcolepsy-ddx-2",
+      "kind": "ddx",
+      "title": "Clinical indicators in the sleepy patient",
+      "rowHeader": "Condition",
+      "columns": [
+        "Age of onset (years)",
+        "Cataplexy",
+        "Night sleep: duration",
+        "Night sleep: awakenings",
+        "Night sleep: snoring",
+        "Night sleep: morning drunkenness",
+        "Daytime naps: frequency",
+        "Daytime naps: time of day",
+        "Daytime naps: duration"
+      ],
+      "rows": [
+        {
+          "parameter": "OSAHS",
+          "cells": [
+            {
+              "text": "35-60"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Yes, loud"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Usually few"
+            },
+            {
+              "text": "Afternoon/evening"
+            },
+            {
+              "text": "<1 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "10-30"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Many"
+            },
+            {
+              "text": "Afternoon/evening"
+            },
+            {
+              "text": "<1 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IHS",
+          "cells": [
+            {
+              "text": "10-30"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Long"
+            },
+            {
+              "text": "Rare"
+            },
+            {
+              "text": "Occasional"
+            },
+            {
+              "text": "Common"
+            },
+            {
+              "text": "Few"
+            },
+            {
+              "text": "Morning"
+            },
+            {
+              "text": ">1 h"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "OSAHS, obstructive sleep apnea/hypopnea syndrome; IHS, idiopathic hypersomnolence."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "narcolepsy-dx-mgmt",
+      "title": "Diagnosis and management of Narcolepsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Excessive daytime sleepiness with sleep attacks, possibly cataplexy or sleep paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (focal signs, endocrine disturbance, cataplexy with falls)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "MRI for a hypothalamic lesion if atypical; counsel on driving safety",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Polysomnography with MSLT, HLA DQB1*06:02, CSF hypocretin where selected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Short sleep latency with multiple sleep-onset REM periods on MSLT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exclude sleep apnoea, insufficient sleep and circadian disorders; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Behavioural measures first: scheduled naps, regular sleep schedule, sleep hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Wake-promoting agents such as modafinil, solriamfetol or pitolisant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium oxybate, pitolisant or anticataplectic antidepressants for cataplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on driving and occupational safety; manage comorbid mood disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong, but usually controllable with treatment; safety and quality of life at stake",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

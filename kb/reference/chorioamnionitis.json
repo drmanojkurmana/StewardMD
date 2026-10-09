@@ -1,177 +1,477 @@
 {
- "id": "chorioamnionitis",
- "name": "Chorioamnionitis",
- "aliases": [
-  "intra-amniotic infection",
-  "amnionitis",
-  "intrauterine infection",
-  "triple I"
- ],
- "class": "infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Chorioamnionitis is inflammation or infection of the fetal membranes and amniotic fluid, most often from ascending organisms from the lower genital tract",
-   "It is strongly associated with prolonged rupture of membranes, prolonged labour, repeated vaginal examinations, and preterm labour",
-   "Clinical diagnosis is suggested by maternal fever combined with features such as maternal or fetal tachycardia, uterine tenderness, and purulent or foul-smelling amniotic fluid",
-   "Infection is typically polymicrobial, involving genital tract flora including anaerobes, group B streptococcus, and enteric organisms",
-   "Management centres on prompt broad-spectrum antibiotics and expediting delivery, as the infection will not resolve while the pregnancy continues",
-   "It is an important cause of maternal sepsis and can lead to postpartum endometritis, wound infection, and, rarely, septic shock",
-   "For the neonate it raises the risk of early-onset sepsis, pneumonia, and, particularly in preterm infants, neurological injury and cerebral palsy",
-   "Delivery does not preclude ongoing infection, so mother and baby require continued observation and treatment after birth"
+  "id": "chorioamnionitis",
+  "name": "Chorioamnionitis",
+  "aliases": [
+    "intra-amniotic infection",
+    "amnionitis",
+    "intrauterine infection",
+    "triple I"
   ],
-  "pathophysiology": "Chorioamnionitis most commonly results from ascent of bacteria from the vagina and cervix into the normally sterile amniotic cavity, particularly once the membranes are ruptured or the cervix is dilated. The organisms provoke a maternal and fetal inflammatory response with release of cytokines and prostaglandins that can precipitate or accelerate labour. Inflammation of the membranes, cord, and placenta may compromise the fetus directly through infection and indirectly through the fetal inflammatory response syndrome, which is implicated in preterm birth and neurological injury. Less commonly infection reaches the cavity haematogenously or via invasive procedures.",
-  "additionalDifferentials": [
-   "Maternal fever from another source such as urinary tract infection or respiratory infection",
-   "Epidural-associated maternal pyrexia without infection",
-   "Placental abruption causing uterine tenderness",
-   "Preterm labour without infection",
-   "Viral illness in pregnancy",
-   "Appendicitis or other intra-abdominal infection"
-  ],
-  "additionalInvestigations": [
-   "Maternal observations including temperature, heart rate, and continuous fetal heart rate monitoring",
-   "Full blood count and inflammatory markers such as C-reactive protein",
-   "Blood cultures and cultures of genital tract and amniotic fluid where feasible",
-   "Amniocentesis for Gram stain, glucose, and culture in selected preterm cases",
-   "Placental and membrane histology and culture after delivery to confirm the diagnosis",
-   "Screening for group B streptococcus and other genital pathogens"
-  ],
-  "redFlags": [
-   "Features of maternal sepsis such as high fever, tachycardia, hypotension, or confusion requiring urgent resuscitation and delivery",
-   "Non-reassuring or abnormal fetal heart rate patterns indicating fetal compromise",
-   "Foul-smelling or purulent amniotic fluid with significant uterine tenderness",
-   "Failure to improve despite antibiotics, suggesting the need to expedite delivery",
-   "Signs of neonatal sepsis after birth requiring immediate paediatric assessment"
-  ],
-  "prognosis": "With prompt antibiotics and timely delivery most mothers recover fully, though the condition carries risks of postpartum infection, haemorrhage from uterine atony, and rarely septic shock. Neonatal outcome depends on gestation and the severity of the fetal inflammatory response; term infants generally do well with treatment, whereas preterm infants exposed to intrauterine infection face higher risks of sepsis and long-term neurodevelopmental impairment.",
-  "pitfalls": [
-   "Attributing maternal fever solely to an epidural and missing intra-amniotic infection",
-   "Delaying delivery while attempting to treat the infection conservatively",
-   "Underestimating the risk of maternal sepsis and uterine atony after delivery",
-   "Failing to alert the neonatal team to the risk of early-onset neonatal sepsis",
-   "Overlooking anaerobic and polymicrobial cover in the choice of antibiotics"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start prompt broad-spectrum intravenous antibiotics covering ascending genital flora — a penicillin combined with an aminoglycoside and anaerobic cover such as metronidazole or clindamycin",
-   "Expedite delivery, since the infection will not resolve while the pregnancy continues, with mode guided by obstetric conditions and foetal status",
-   "Give supportive sepsis care with antipyretics, intravenous fluids and oxygen, guided by continuous maternal observation and foetal heart-rate monitoring",
-   "Continue antibiotics into the postpartum period, particularly after caesarean, to prevent endometritis",
-   "Arrange neonatal team attendance at delivery and paediatric evaluation of the newborn for early-onset sepsis",
-   "Monitor for and manage maternal complications including uterine atony with postpartum haemorrhage and wound infection",
-   "Escalate to critical care when maternal sepsis progresses to septic shock or organ dysfunction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chorioamnionitis-pathway",
-   "title": "Chorioamnionitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Chorioamnionitis is inflammation or infection of the fetal membranes and amniotic fluid, most often from ascending organisms from the lower genital tract",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of maternal sepsis such as high fever, tachycardia, hypotension, or confusion requiring urgent resuscitation and delivery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Maternal observations including temperature, heart rate, and continuous fetal heart rate monitoring, Full blood count and inflammatory markers such as C-reactive protein, Blood cultures and cultures of genital tract and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start prompt broad-spectrum intravenous antibiotics covering ascending genital flora - a penicillin combined with an aminoglycoside and anaerobic cover such as metronidazole or clindamycin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing maternal fever solely to an epidural and missing intra-amniotic infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chorioamnionitis."
-  }
- ],
- "tables": [
-  {
-   "id": "chorioamnionitis-matrix",
-   "title": "Chorioamnionitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Chorioamnionitis is inflammation or infection of the fetal membranes and amniotic fluid, most often from ascending organisms from",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Chorioamnionitis is inflammation or infection of the fetal membranes and amniotic fluid, most often from ascending organisms from the lower genital tract",
+      "It is strongly associated with prolonged rupture of membranes, prolonged labour, repeated vaginal examinations, and preterm labour",
+      "Clinical diagnosis is suggested by maternal fever combined with features such as maternal or fetal tachycardia, uterine tenderness, and purulent or foul-smelling amniotic fluid",
+      "Infection is typically polymicrobial, involving genital tract flora including anaerobes, group B streptococcus, and enteric organisms",
+      "Management centres on prompt broad-spectrum antibiotics and expediting delivery, as the infection will not resolve while the pregnancy continues",
+      "It is an important cause of maternal sepsis and can lead to postpartum endometritis, wound infection, and, rarely, septic shock",
+      "For the neonate it raises the risk of early-onset sepsis, pneumonia, and, particularly in preterm infants, neurological injury and cerebral palsy",
+      "Delivery does not preclude ongoing infection, so mother and baby require continued observation and treatment after birth"
     ],
-    [
-     "Key Investigations",
-     "Maternal observations including temperature, heart rate, and continuous fetal heart rate monitoring, Full blood count and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chorioamnionitis most commonly results from ascent of bacteria from the vagina and cervix into the normally sterile amniotic cavity, particularly once the membranes are ruptured or the cervix is dilated. The organisms provoke a maternal and fetal inflammatory response with release of cytokines and prostaglandins that can precipitate or accelerate labour. Inflammation of the membranes, cord, and placenta may compromise the fetus directly through infection and indirectly through the fetal inflammatory response syndrome, which is implicated in preterm birth and neurological injury. Less commonly infection reaches the cavity haematogenously or via invasive procedures.",
+    "additionalDifferentials": [
+      "Maternal fever from another source such as urinary tract infection or respiratory infection",
+      "Epidural-associated maternal pyrexia without infection",
+      "Placental abruption causing uterine tenderness",
+      "Preterm labour without infection",
+      "Viral illness in pregnancy",
+      "Appendicitis or other intra-abdominal infection"
     ],
-    [
-     "Primary Differentials",
-     "Maternal fever from another source such as urinary tract infection or respiratory infection, Epidural-associated maternal pyrexia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Maternal observations including temperature, heart rate, and continuous fetal heart rate monitoring",
+      "Full blood count and inflammatory markers such as C-reactive protein",
+      "Blood cultures and cultures of genital tract and amniotic fluid where feasible",
+      "Amniocentesis for Gram stain, glucose, and culture in selected preterm cases",
+      "Placental and membrane histology and culture after delivery to confirm the diagnosis",
+      "Screening for group B streptococcus and other genital pathogens"
     ],
-    [
-     "Management Strategy",
-     "Start prompt broad-spectrum intravenous antibiotics covering ascending genital flora - a penicillin combined with an",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of maternal sepsis such as high fever, tachycardia, hypotension, or confusion requiring urgent resuscitation and delivery",
+      "Non-reassuring or abnormal fetal heart rate patterns indicating fetal compromise",
+      "Foul-smelling or purulent amniotic fluid with significant uterine tenderness",
+      "Failure to improve despite antibiotics, suggesting the need to expedite delivery",
+      "Signs of neonatal sepsis after birth requiring immediate paediatric assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing maternal fever solely to an epidural and missing intra-amniotic infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt antibiotics and timely delivery most mothers recover fully, though the condition carries risks of postpartum infection, haemorrhage from uterine atony, and rarely septic shock. Neonatal outcome depends on gestation and the severity of the fetal inflammatory response; term infants generally do well with treatment, whereas preterm infants exposed to intrauterine infection face higher risks of sepsis and long-term neurodevelopmental impairment.",
+    "pitfalls": [
+      "Attributing maternal fever solely to an epidural and missing intra-amniotic infection",
+      "Delaying delivery while attempting to treat the infection conservatively",
+      "Underestimating the risk of maternal sepsis and uterine atony after delivery",
+      "Failing to alert the neonatal team to the risk of early-onset neonatal sepsis",
+      "Overlooking anaerobic and polymicrobial cover in the choice of antibiotics"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start prompt broad-spectrum intravenous antibiotics covering ascending genital flora — a penicillin combined with an aminoglycoside and anaerobic cover such as metronidazole or clindamycin",
+      "Expedite delivery, since the infection will not resolve while the pregnancy continues, with mode guided by obstetric conditions and foetal status",
+      "Give supportive sepsis care with antipyretics, intravenous fluids and oxygen, guided by continuous maternal observation and foetal heart-rate monitoring",
+      "Continue antibiotics into the postpartum period, particularly after caesarean, to prevent endometritis",
+      "Arrange neonatal team attendance at delivery and paediatric evaluation of the newborn for early-onset sepsis",
+      "Monitor for and manage maternal complications including uterine atony with postpartum haemorrhage and wound infection",
+      "Escalate to critical care when maternal sepsis progresses to septic shock or organ dysfunction"
     ]
-   ],
-   "caption": "Overview comparison matrix for chorioamnionitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chorioamnionitis-real-image",
-   "title": "Chorioamnionitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "chorioamnionitis-pathway",
+      "title": "Chorioamnionitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Chorioamnionitis is inflammation or infection of the fetal membranes and amniotic fluid, most often from ascending organisms from the lower genital tract",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of maternal sepsis such as high fever, tachycardia, hypotension, or confusion requiring urgent resuscitation and delivery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Maternal observations including temperature, heart rate, and continuous fetal heart rate monitoring, Full blood count and inflammatory markers such as C-reactive protein, Blood cultures and cultures of genital tract and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start prompt broad-spectrum intravenous antibiotics covering ascending genital flora - a penicillin combined with an aminoglycoside and anaerobic cover such as metronidazole or clindamycin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing maternal fever solely to an epidural and missing intra-amniotic infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chorioamnionitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chorioamnionitis-matrix",
+      "title": "Chorioamnionitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chorioamnionitis is inflammation or infection of the fetal membranes and amniotic fluid, most often from ascending organisms from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Maternal observations including temperature, heart rate, and continuous fetal heart rate monitoring, Full blood count and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Maternal fever from another source such as urinary tract infection or respiratory infection, Epidural-associated maternal pyrexia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start prompt broad-spectrum intravenous antibiotics covering ascending genital flora - a penicillin combined with an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing maternal fever solely to an epidural and missing intra-amniotic infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chorioamnionitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chorioamnionitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Maternal temperature and continuous fetal heart rate monitoring",
+          "cells": [
+            {
+              "text": "Maternal fever with maternal or fetal tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and C-reactive protein",
+          "cells": [
+            {
+              "text": "Inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and genital or amniotic fluid cultures",
+          "cells": [
+            {
+              "text": "Organism identification where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amniocentesis for Gram stain, glucose and culture",
+          "cells": [
+            {
+              "text": "Selected preterm cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Placental and membrane histology and culture after delivery",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chorioamnionitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidural-associated pyrexia",
+          "cells": [
+            {
+              "text": "Pyrexia without infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Placental abruption",
+          "cells": [
+            {
+              "text": "Uterine tenderness with bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chorioamnionitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Intravenous penicillin with an aminoglycoside and anaerobic cover such as metronidazole or clindamycin"
+            },
+            {
+              "text": "Ascending genital flora"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expedite delivery",
+          "cells": [
+            {
+              "text": "Mode guided by obstetric conditions and fetal status"
+            },
+            {
+              "text": "Infection does not resolve while pregnancy continues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis support",
+          "cells": [
+            {
+              "text": "Antipyretics, intravenous fluids and oxygen with continuous monitoring"
+            },
+            {
+              "text": "Maternal sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum antibiotics",
+          "cells": [
+            {
+              "text": "Continue antibiotics after delivery, particularly after caesarean"
+            },
+            {
+              "text": "Prevents endometritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal assessment",
+          "cells": [
+            {
+              "text": "Neonatal team at delivery and paediatric evaluation for early-onset sepsis"
+            },
+            {
+              "text": "Neonatal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication monitoring",
+          "cells": [
+            {
+              "text": "Uterine atony, postpartum haemorrhage and wound infection"
+            },
+            {
+              "text": "Maternal complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care escalation",
+          "cells": [
+            {
+              "text": "Escalate to critical care for septic shock or organ dysfunction"
+            },
+            {
+              "text": "Progressive sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chorioamnionitis-dx-mgmt",
+      "title": "Diagnosis and management of Chorioamnionitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chorioamnionitis: maternal fever with tachycardia and uterine tenderness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (maternal sepsis, abnormal fetal heart rate, foul fluid, no response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent resuscitation and expedited delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Maternal observation, fetal monitoring, full blood count, CRP and cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever with tachycardia or foul amniotic fluid, other sources excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Broad-spectrum intravenous antibiotics with anaerobic cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check epidural pyrexia, urinary infection and placental abruption",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Expedite delivery; the infection does not resolve while pregnancy continues",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sepsis care with fluids, antipyretics and oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continue antibiotics after delivery, particularly after caesarean",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neonatal evaluation for early-onset sepsis; monitor for postpartum haemorrhage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

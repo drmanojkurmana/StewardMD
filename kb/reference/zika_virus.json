@@ -1,178 +1,391 @@
 {
- "id": "zika_virus",
- "name": "Zika virus infection",
- "aliases": [
-  "ZIKV",
-  "Zika fever",
-  "Zika virus disease"
- ],
- "class": "infective",
- "system": "Infectious / Tropical",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mosquito-borne flavivirus spread chiefly by Aedes aegypti and Aedes albopictus, the same vectors as dengue and chikungunya",
-   "Most infections are asymptomatic or mild; when symptomatic, features include low-grade fever, maculopapular rash, arthralgia and notably non-purulent conjunctivitis",
-   "The major clinical concern is congenital infection: maternal Zika in pregnancy can cause microcephaly and a broader congenital Zika syndrome",
-   "It is also associated with Guillain-Barre syndrome as a post-infectious complication",
-   "Beyond mosquito bites, sexual and vertical transmission are recognised, which influences counselling and prevention",
-   "India has reported local outbreaks, so it should be considered alongside dengue and chikungunya in febrile patients with rash",
-   "Management is supportive; there is no specific antiviral therapy or licensed vaccine",
-   "Diagnosis uses RT-PCR in blood and urine during acute viraemia, with serology complicated by cross-reactivity among flaviviruses"
+  "id": "zika_virus",
+  "name": "Zika virus infection",
+  "aliases": [
+    "ZIKV",
+    "Zika fever",
+    "Zika virus disease"
   ],
-  "pathophysiology": "Zika virus is an RNA flavivirus that, after inoculation by an Aedes mosquito, replicates in dendritic cells and spreads via lymphatics and blood. It has particular tropism for neural progenitor cells, which underlies its ability to disrupt fetal brain development when it crosses the placenta, producing microcephaly and other structural anomalies. Immune-mediated mechanisms, including molecular mimicry, are implicated in the associated Guillain-Barre syndrome. The virus can persist in immune-privileged sites such as semen, enabling sexual transmission.",
-  "additionalDifferentials": [
-   "Dengue fever",
-   "Chikungunya",
-   "Measles and rubella",
-   "Parvovirus B19 infection",
-   "Leptospirosis",
-   "Other flaviviral febrile illnesses"
-  ],
-  "infectionMimics": [
-   "Drug reaction with rash",
-   "Acute rheumatological illness with arthralgia and rash",
-   "Enteroviral exanthem"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR of serum and urine during the acute viraemic phase",
-   "Zika IgM serology with confirmatory neutralisation testing given flavivirus cross-reactivity",
-   "Fetal ultrasound surveillance in infected pregnant women",
-   "Concurrent testing for dengue and chikungunya in co-endemic settings",
-   "Nerve conduction studies if Guillain-Barre syndrome is suspected"
-  ],
-  "redFlags": [
-   "Infection or exposure during pregnancy, given risk of severe congenital malformation",
-   "Progressive ascending weakness suggesting Guillain-Barre syndrome and possible respiratory failure",
-   "Features overlapping with dengue warning signs that require exclusion of severe dengue",
-   "Neurological deterioration warranting urgent evaluation"
-  ],
-  "prognosis": "In non-pregnant adults the illness is usually mild and self-limiting with full recovery. The serious burden lies in adverse pregnancy and neonatal outcomes from congenital infection and in Guillain-Barre syndrome, which can cause prolonged disability or, rarely, death.",
-  "pitfalls": [
-   "Assuming a dengue-like febrile rash illness cannot be Zika in co-endemic regions",
-   "Failing to counsel about sexual transmission and pregnancy risk after exposure",
-   "Over-relying on serology alone given cross-reactivity with other flaviviruses",
-   "Missing evolving Guillain-Barre syndrome in a recently infected patient"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage with supportive care of rest, fluids and paracetamol for fever and pain, as there is no specific antiviral",
-   "Avoid aspirin and NSAIDs until dengue is excluded, given the co-endemic bleeding risk",
-   "Prevent transmission through mosquito-bite avoidance and vector control, and advise barrier contraception given sexual transmission",
-   "Counsel on pregnancy planning and provide foetal ultrasound surveillance in infected pregnant women for congenital Zika syndrome",
-   "Recognise and manage Guillain-Barre syndrome with intravenous immunoglobulin or plasma exchange and respiratory monitoring and support",
-   "Test concurrently for dengue and chikungunya in co-endemic settings and notify public health authorities",
-   "Provide neonatal assessment and long-term developmental follow-up of infants with congenital infection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "zika_virus-pathway",
-   "title": "Zika virus infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mosquito-borne flavivirus spread chiefly by Aedes aegypti and Aedes albopictus, the same vectors as dengue and chikungunya",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Infection or exposure during pregnancy, given risk of severe congenital malformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR of serum and urine during the acute viraemic phase, Zika IgM serology with confirmatory neutralisation testing given flavivirus cross-reactivity, Fetal ultrasound surveillance in infected pregnant women"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage with supportive care of rest, fluids and paracetamol for fever and pain, as there is no specific antiviral"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a dengue-like febrile rash illness cannot be Zika in co-endemic regions"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of zika virus infection."
-  }
- ],
- "tables": [
-  {
-   "id": "zika_virus-matrix",
-   "title": "Zika virus infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mosquito-borne flavivirus spread chiefly by Aedes aegypti and Aedes albopictus, the same vectors as dengue and chikungunya",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious / Tropical",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mosquito-borne flavivirus spread chiefly by Aedes aegypti and Aedes albopictus, the same vectors as dengue and chikungunya",
+      "Most infections are asymptomatic or mild; when symptomatic, features include low-grade fever, maculopapular rash, arthralgia and notably non-purulent conjunctivitis",
+      "The major clinical concern is congenital infection: maternal Zika in pregnancy can cause microcephaly and a broader congenital Zika syndrome",
+      "It is also associated with Guillain-Barre syndrome as a post-infectious complication",
+      "Beyond mosquito bites, sexual and vertical transmission are recognised, which influences counselling and prevention",
+      "India has reported local outbreaks, so it should be considered alongside dengue and chikungunya in febrile patients with rash",
+      "Management is supportive; there is no specific antiviral therapy or licensed vaccine",
+      "Diagnosis uses RT-PCR in blood and urine during acute viraemia, with serology complicated by cross-reactivity among flaviviruses"
     ],
-    [
-     "Key Investigations",
-     "RT-PCR of serum and urine during the acute viraemic phase, Zika IgM serology with confirmatory neutralisation testing given",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Zika virus is an RNA flavivirus that, after inoculation by an Aedes mosquito, replicates in dendritic cells and spreads via lymphatics and blood. It has particular tropism for neural progenitor cells, which underlies its ability to disrupt fetal brain development when it crosses the placenta, producing microcephaly and other structural anomalies. Immune-mediated mechanisms, including molecular mimicry, are implicated in the associated Guillain-Barre syndrome. The virus can persist in immune-privileged sites such as semen, enabling sexual transmission.",
+    "additionalDifferentials": [
+      "Dengue fever",
+      "Chikungunya",
+      "Measles and rubella",
+      "Parvovirus B19 infection",
+      "Leptospirosis",
+      "Other flaviviral febrile illnesses"
     ],
-    [
-     "Primary Differentials",
-     "Dengue fever, Chikungunya, Measles and rubella",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Drug reaction with rash",
+      "Acute rheumatological illness with arthralgia and rash",
+      "Enteroviral exanthem"
     ],
-    [
-     "Management Strategy",
-     "Manage with supportive care of rest, fluids and paracetamol for fever and pain, as there is no specific antiviral",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "RT-PCR of serum and urine during the acute viraemic phase",
+      "Zika IgM serology with confirmatory neutralisation testing given flavivirus cross-reactivity",
+      "Fetal ultrasound surveillance in infected pregnant women",
+      "Concurrent testing for dengue and chikungunya in co-endemic settings",
+      "Nerve conduction studies if Guillain-Barre syndrome is suspected"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a dengue-like febrile rash illness cannot be Zika in co-endemic regions",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Infection or exposure during pregnancy, given risk of severe congenital malformation",
+      "Progressive ascending weakness suggesting Guillain-Barre syndrome and possible respiratory failure",
+      "Features overlapping with dengue warning signs that require exclusion of severe dengue",
+      "Neurological deterioration warranting urgent evaluation"
+    ],
+    "prognosis": "In non-pregnant adults the illness is usually mild and self-limiting with full recovery. The serious burden lies in adverse pregnancy and neonatal outcomes from congenital infection and in Guillain-Barre syndrome, which can cause prolonged disability or, rarely, death.",
+    "pitfalls": [
+      "Assuming a dengue-like febrile rash illness cannot be Zika in co-endemic regions",
+      "Failing to counsel about sexual transmission and pregnancy risk after exposure",
+      "Over-relying on serology alone given cross-reactivity with other flaviviruses",
+      "Missing evolving Guillain-Barre syndrome in a recently infected patient"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage with supportive care of rest, fluids and paracetamol for fever and pain, as there is no specific antiviral",
+      "Avoid aspirin and NSAIDs until dengue is excluded, given the co-endemic bleeding risk",
+      "Prevent transmission through mosquito-bite avoidance and vector control, and advise barrier contraception given sexual transmission",
+      "Counsel on pregnancy planning and provide foetal ultrasound surveillance in infected pregnant women for congenital Zika syndrome",
+      "Recognise and manage Guillain-Barre syndrome with intravenous immunoglobulin or plasma exchange and respiratory monitoring and support",
+      "Test concurrently for dengue and chikungunya in co-endemic settings and notify public health authorities",
+      "Provide neonatal assessment and long-term developmental follow-up of infants with congenital infection"
     ]
-   ],
-   "caption": "Overview comparison matrix for zika virus infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "zika-virus-real-image",
-   "title": "Zika virus infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "zika_virus-pathway",
+      "title": "Zika virus infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mosquito-borne flavivirus spread chiefly by Aedes aegypti and Aedes albopictus, the same vectors as dengue and chikungunya",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Infection or exposure during pregnancy, given risk of severe congenital malformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR of serum and urine during the acute viraemic phase, Zika IgM serology with confirmatory neutralisation testing given flavivirus cross-reactivity, Fetal ultrasound surveillance in infected pregnant women"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage with supportive care of rest, fluids and paracetamol for fever and pain, as there is no specific antiviral"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a dengue-like febrile rash illness cannot be Zika in co-endemic regions"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of zika virus infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "zika_virus-matrix",
+      "title": "Zika virus infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mosquito-borne flavivirus spread chiefly by Aedes aegypti and Aedes albopictus, the same vectors as dengue and chikungunya",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR of serum and urine during the acute viraemic phase, Zika IgM serology with confirmatory neutralisation testing given",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dengue fever, Chikungunya, Measles and rubella",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage with supportive care of rest, fluids and paracetamol for fever and pain, as there is no specific antiviral",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a dengue-like febrile rash illness cannot be Zika in co-endemic regions",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for zika virus infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "zika_virus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR of serum and urine in the viraemic phase",
+          "cells": [
+            {
+              "text": "Acute Zika virus RNA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zika IgM serology with confirmatory neutralisation",
+          "cells": [
+            {
+              "text": "Recent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zika_virus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dengue fever",
+          "cells": [
+            {
+              "text": "Co-endemic; Zika rash and arthralgia can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chikungunya",
+          "cells": [
+            {
+              "text": "Arthralgia with rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles and rubella",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parvovirus B19 infection",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zika_virus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Rest, fluids and paracetamol; no specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy counselling and fetal surveillance",
+          "cells": [
+            {
+              "text": "Exposure in pregnancy carries malformation risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "zika_virus-dx-mgmt",
+      "title": "Diagnosis and management of Zika virus infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Zika virus infection: febrile rash illness with arthralgia or conjunctivitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infection or exposure in pregnancy, or progressive ascending weakness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric review for pregnancy exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR of serum and urine, Zika IgM with neutralisation confirmation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does RT-PCR or confirmatory serology show Zika virus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dengue, chikungunya or other febrile rash illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with rest, fluids and paracetamol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fetal surveillance for pregnancy exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Counselling on pregnancy and mosquito avoidance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Usually mild; pregnancy exposure carries serious congenital risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

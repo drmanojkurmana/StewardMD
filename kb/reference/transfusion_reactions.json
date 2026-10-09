@@ -1,213 +1,962 @@
 {
- "id": "transfusion_reactions",
- "name": "Transfusion Reactions",
- "system": "Hematology / Transfusion",
- "class": "non_infective",
- "chapter": 118,
- "page": 901,
- "aliases": [
-  "hemolytic transfusion reaction",
-  "TRALI",
-  "TACO"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.901",
-  "clinicalPearls": [
-   "Acute immune-mediated haemolytic reactions occur when recipient preformed antibodies lyse transfused donor RBCs, during or up to 24 h after transfusion; anti-A/anti-B antibodies cause most of the most severe (potentially fatal) reactions, though alloantibodies against Rh, Kell, and Duffy antigens can also cause severe haemolysis (Harrison 22e p.906).",
-   "The most dramatic acute haemolytic reactions are usually caused by a failure in product or patient identification, erroneous blood grouping, or unidentified recipient anti-RBC alloimmunisation - i.e. a clerical/identification error (Harrison 22e p.906).",
-   "Acute haemolytic reactions may present with hypotension, tachypnoea, tachycardia, fever (rise of 1-2 degrees C), chills, chest and back/flank pain, haemoglobinuria, and haemoglobinemia; in the most severe cases DIC, acute renal failure, shock, and death may occur (Harrison 22e p.906).",
-   "RED FLAG: when an adverse reaction is suspected the transfusion must be STOPPED, the recipient's clinical status assessed, and supportive care initiated; a thorough clerical check is crucial to prevent a possible second misidentified transfusion (Harrison 22e p.908).",
-   "Management of acute immune haemolytic reaction is mainly supportive: prompt interruption of transfusion, biological workup, vigorous isotonic saline hydration with diuretics to maintain urine output; may require forced alkaline diuresis, electrolyte correction, and pressor support, and in DIC with bleeding, platelet/plasma/cryoprecipitate or fibrinogen (Harrison 22e p.908).",
-   "Diagnosis of transfusion-associated haemolysis relies on persistent/worsening anaemia, depleted haptoglobin, haemoglobinemia and haemoglobinuria, and elevated LDH and unconjugated bilirubin; the direct antiglobulin test (DAT/direct Coombs) is most often positive, as is the indirect antiglobulin test (IAT) (Harrison 22e p.908).",
-   "Delayed haemolytic reactions present with icterus and persisting or worsening anaemia and result from an anamnestic response in previously sensitised patients who had a negative alloantibody screen at transfusion (low antibody levels); the alloantibody becomes detectable 1-2 weeks after transfusion (Harrison 22e p.906).",
-   "FNHTR (febrile non-haemolytic transfusion reaction) is the most frequent reaction to cellular components (up to 300 per 100,000), characterised by chills, rigors and a rise of at least 1 degree C, caused by proinflammatory cytokines in the component or recipient antibodies against donor antigens; it is a diagnosis of exclusion once infection and haemolysis are ruled out (Harrison 22e p.911).",
-   "Leukocyte reduction (especially prestorage) can prevent FNHTR; premedication with antipyretics has generally proven ineffective and may mask relevant clinical symptoms (Harrison 22e p.911).",
-   "Most allergic transfusion reactions are mild (rash, pruritus, urticaria, localised oedema) and relate to plasma proteins; rarely they are severe/anaphylactic with bronchospasm, respiratory distress, hypotension, nausea, vomiting and shock - anaphylaxis can occur after only a few millilitres of component (Harrison 22e p.911).",
-   "TRALI is characterised by occurrence or worsening of hypoxia and NONcardiogenic pulmonary oedema with bilateral interstitial infiltrates on chest x-ray during or within 6 h of transfusion (delayed cases up to 72 h); it is among the most common causes of transfusion-related fatalities and treatment is supportive only (Harrison 22e p.911).",
-   "TRALI usually results from donor plasma containing high-titre anti-HLA class II antibodies binding recipient cognate antigen (anti-HLA class I and anti-HNA antibodies may also be involved); a cytokine/chemokine-mediated mechanism without HLA interaction can also occur (Harrison 22e p.911).",
-   "TACO (transfusion-associated circulatory overload) is common and underrecognised and is now the main cause of transfusion-related death since TRALI risk was mitigated; it presents with dyspnoea, hypoxia, bilateral and predominantly ALVEOLAR infiltrates on chest x-ray, frequent systolic hypertension, and elevated BNP (fever may also occur) (Harrison 22e p.912).",
-   "TRALI vs TACO distinction: TRALI gives noncardiogenic oedema with predominantly interstitial infiltrates within 6 h, whereas TACO is volume overload with predominantly alveolar infiltrates (within 12 h), systolic hypertension and elevated BNP; TACO risk factors include older age, renal failure, preexisting fluid overload, cardiac dysfunction, large transfusion volume and excessive transfusion rate (Harrison 22e p.911-912).",
-   "Transfusion-related GVHD is extremely rare but fatal in over 90% of cases; mediated by engrafted donor T lymphocytes in a recipient unable to reject them, it presents 5-10 days post-transfusion with cytopenia, fever, characteristic skin rash, diarrhoea and liver function abnormalities, and is prevented by irradiation (minimum 25 Gy) of cellular components in at-risk patients (Harrison 22e p.911).",
-   "Transfusion-transmitted bacterial infection remains a significant concern, notably with platelet concentrates stored at room temperature; some gram-negatives such as Yersinia grow at 4 degrees C and can contaminate RBC units - recipients may develop abrupt fever and chills deteriorating to septic shock, DIC and death, and after culture sampling broad-spectrum antibiotics should be started promptly (Harrison 22e p.913).",
-   "Iron overload: each RBC concentrate contains 200-250 mg of iron; in frequently transfused recipients untreated accumulation impairs endocrine, hepatic and cardiac function (death may occur from cardiac failure or arrhythmia), assessed by serum ferritin, MRI and liver biopsy, and prevented/treated by monitoring and iron chelation (Harrison 22e p.912).",
-   "Acute hypotensive transfusion reactions are an abrupt drop in systolic blood pressure of more than 30 mmHg early after starting transfusion that resolves once transfusion is stopped; they are more likely in patients taking ACE inhibitors (impaired bradykinin metabolism) and the same product should NOT be restarted (Harrison 22e p.912)."
+  "id": "transfusion_reactions",
+  "name": "Transfusion Reactions",
+  "system": "Hematology / Transfusion",
+  "class": "non_infective",
+  "chapter": 118,
+  "page": 901,
+  "aliases": [
+    "hemolytic transfusion reaction",
+    "TRALI",
+    "TACO"
   ],
-  "pathophysiology": "Adverse reactions to blood components arise via immune or nonimmune mechanisms. Immune-mediated acute haemolysis occurs when recipient preformed antibodies (anti-A/anti-B IgM/IgG, or alloantibodies to Rh, Kell, Duffy) lyse transfused donor RBCs, with complement activation; ABO incompatibility classically results from clerical/identification error. Delayed haemolysis reflects an anamnestic alloantibody response (neoformed allogeneic IgG, C3b-mediated opsonisation and ADCC-mediated phagocytosis) detectable 1-2 weeks later. FNHTR is driven by proinflammatory cytokines accumulated in the component or recipient antibodies against donor leukocyte antigens. Allergic/anaphylactic reactions relate to plasma proteins and soluble mediators triggering histamine/serotonin release (IgA-deficient recipients may react to IgA). TRALI results from donor anti-HLA (class II, also class I) or anti-HNA antibodies binding recipient antigen, or cytokine/chemokine priming, causing neutrophil aggregation in pulmonary vasculature and release of inflammatory mediators producing noncardiogenic pulmonary oedema. TACO is hydrostatic circulatory overload from excessive volume/rate relative to cardiac/renal reserve. Transfusion-associated GVHD is mediated by engrafted donor T lymphocytes attacking host HLA antigens. (Harrison 22e p.906-912)",
-  "additionalDifferentials": [
-   "Febrile non-haemolytic transfusion reaction (diagnosis of exclusion once infection and haemolysis excluded)",
-   "Acute immune-mediated haemolytic transfusion reaction (ABO/clerical error)",
-   "Delayed haemolytic transfusion reaction (anamnestic alloantibody response)",
-   "Hyperhaemolytic transfusion reaction in haemoglobinopathy/sickle cell disease (bystander haemolysis)",
-   "Allergic / anaphylactic transfusion reaction",
-   "TRALI (transfusion-related acute lung injury)",
-   "TACO (transfusion-associated circulatory overload)",
-   "Transfusion-transmitted bacterial infection / septic transfusion reaction",
-   "Transfusion-associated graft-versus-host disease",
-   "Posttransfusion purpura",
-   "Acute hypotensive transfusion reaction (bradykinin-related, ACE inhibitor)"
-  ],
-  "infectionMimics": [
-   "Transfusion-transmitted bacterial contamination/sepsis presenting with abrupt fever, chills, septic shock and DIC can mimic an acute haemolytic reaction (fever over 2 degrees C is a warning sign favouring bacterial contamination/haemolysis)",
-   "Septic shock from a contaminated component can mimic anaphylactic or haemolytic shock"
-  ],
-  "nonInfectiousMimics": [
-   "TRALI may be difficult to distinguish from other causes of hypoxia, particularly circulatory overload (TACO)",
-   "G6PD/enzymatic RBC defects and underlying haemolytic conditions exacerbated by transfusion can mimic immune-mediated haemolytic transfusion reaction",
-   "Hyperhaemolysis in sickle cell disease can mimic and be exacerbated by transfusion"
-  ],
-  "additionalInvestigations": [
-   "Direct antiglobulin test (DAT / direct Coombs) detecting immunoglobulin and possibly complement (C3d) on recipient RBCs",
-   "Indirect antiglobulin test (IAT / indirect Coombs) detecting anti-RBC alloantibody in serum, with antibody elution to identify the culprit alloantibody",
-   "Plasma haptoglobin (depleted), LDH and unconjugated bilirubin (elevated), haemoglobinemia and haemoglobinuria",
-   "Repeat ABO determination and thorough clerical check; alloantibody screen and crossmatch",
-   "Bacterial culture of the component and recipient before starting broad-spectrum antibiotics when bacterial contamination suspected",
-   "Chest x-ray (bilateral interstitial infiltrates in TRALI; predominantly alveolar infiltrates in TACO) and brain natriuretic peptide (elevated in TACO)",
-   "Serum ferritin, MRI and liver biopsy to assess iron overload in frequently transfused patients",
-   "Test for IgA deficiency in patients with anaphylactic or repeated allergic reactions"
-  ],
-  "redFlags": [
-   "STOP the transfusion immediately when any adverse reaction is suspected",
-   "Fever, flank/back pain and haemoglobinuria suggesting acute haemolytic (ABO-incompatible) reaction - perform an urgent clerical/identification check to prevent a second misidentified transfusion",
-   "Hypotension (systolic drop of at least 30 mmHg) - haemolytic, anaphylactic or septic shock",
-   "Dyspnoea within 6 h (TRALI) or within 12 h (TACO) of transfusion",
-   "Temperature rise over 2 degrees C - favours transfusion-transmitted bacterial infection or haemolysis",
-   "Rash over two-thirds of body within 5 minutes with dyspnoea and shock - anaphylaxis",
-   "Development of DIC, acute renal failure or shock during/after transfusion"
-  ],
-  "prognosis": "Most adverse reactions are non-life-threatening, though serious reactions can present with mild symptoms. An average of ~37 transfusion-associated fatalities (possible-to-definite imputability) were reported yearly to the FDA between 2017-2021 among ~15 million transfused components, with leading causes of death being TACO (32%), TRALI (21%), haemolysis (21%) and microbial contamination (13%). Acute haemolysis is often self-limiting but can be fatal (DIC, acute renal failure, shock). Transfusion-associated GVHD is fatal in over 90% of cases and highly resistant to treatment. (Harrison 22e p.906-911)",
-  "pitfalls": [
-   "Premedication with antipyretics for FNHTR is generally ineffective and may mask relevant clinical warning symptoms",
-   "FNHTR must not be diagnosed until infection and haemolysis are excluded",
-   "Failing to perform a clerical/identification check risks a second misidentified (incompatible) transfusion",
-   "TRALI and TACO are easily confused; both cause hypoxia and bilateral infiltrates - TACO is now the leading cause of transfusion death and is underrecognised",
-   "In acute hypotensive reactions the same blood product should not be restarted; consider switching ACE inhibitor for patients needing further transfusion",
-   "Delayed haemolytic reactions occur despite a negative pretransfusion alloantibody screen (low antibody levels) - icterus and worsening anaemia 1-2 weeks later",
-   "Iron overload is frequently underreported in chronically transfused patients",
-   "Further RBC transfusion in hyperhaemolytic reaction (sickle cell disease) typically exacerbates ongoing haemolysis"
-  ],
-  "severityClassification": "Warning-sign based recognition of transfusion adverse reactions (Harrison Table 118-5): fever of at least 38 degrees C (rise of 1-2 degrees C within 4 h favours FNHTR or TRALI; rise over 2 degrees C favours bacterial infection/haemolysis); hypotension (systolic drop of at least 30 mmHg) suggesting haemolytic, anaphylactic or septic shock; dyspnoea (TRALI within 6 h, TACO within 12 h, severe allergy within 4 h); haemoglobinuria (intravascular haemolysis); rash (minor allergy if under two-thirds body, severe if over two-thirds, anaphylaxis if with dyspnoea/shock within 5 min); icterus (delayed haemolysis); rash/diarrhoea/fever 2 days-6 weeks (GVHD); gum bleeding/purpura 5-12 days (posttransfusion purpura). Reactions are also categorised as immune-mediated vs nonimmunologic, and by timing (acute vs delayed). (Harrison 22e p.908)",
-  "references": [
-   "Harrison 22e p.901",
-   "Harrison 22e p.906",
-   "Harrison 22e p.908",
-   "Harrison 22e p.911",
-   "Harrison 22e p.912",
-   "Harrison 22e p.913",
-   "Delaney M et al: Transfusion reactions: Prevention, diagnosis, and treatment",
-   "Panch SR et al: Hemolytic transfusion reactions. N Engl J Med"
-  ],
-  "crossLinks": [
-   "anaphylaxis",
-   "hemolytic_anemia",
-   "ards"
-  ],
-  "management": [
-   "Stop the transfusion immediately at any suspected reaction, maintain venous access, and perform a rigorous clerical and identity check to prevent a second misidentified transfusion",
-   "For acute haemolytic reactions give vigorous isotonic saline to maintain urine output with diuretics as needed, support blood pressure with vasopressors, and correct electrolytes",
-   "Manage haemolysis-associated disseminated intravascular coagulation with platelets, plasma, cryoprecipitate or fibrinogen when there is bleeding",
-   "Treat febrile non-haemolytic reactions with antipyretics after excluding haemolysis, and allergic reactions with antihistamines, escalating to adrenaline and corticosteroids for anaphylaxis",
-   "When bacterial contamination is suspected, culture the component and recipient and start broad-spectrum antibiotics",
-   "Send diagnostic samples including direct and indirect antiglobulin tests, repeat ABO grouping and crossmatch, and report to the transfusion service",
-   "Prevent recurrence with appropriate component selection using leucoreduced units, washed or IgA-deficient components for IgA-deficient recipients, and premedication where indicated"
-  ]
- },
- "algorithms": [
-  {
-   "id": "transfusion_reactions-pathway",
-   "title": "Transfusion Reactions: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Acute immune-mediated haemolytic reactions occur when recipient preformed antibodies lyse transfused donor RBCs, during or up to 24 h after transfusion; anti-A/anti-B antibodies cause most of the most severe (potentially fatal) reactions,",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: STOP the transfusion immediately when any adverse reaction is suspected",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Direct antiglobulin test (DAT / direct Coombs) detecting immunoglobulin and possibly complement (C3d) on recipient RBCs, Indirect antiglobulin test (IAT / indirect Coombs) detecting anti-RBC alloantibody in serum, with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stop the transfusion immediately at any suspected reaction, maintain venous access, and perform a rigorous clerical and identity check to prevent a second misidentified transfusion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Premedication with antipyretics for FNHTR is generally ineffective and may mask relevant clinical warning symptoms"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of transfusion reactions."
-  }
- ],
- "tables": [
-  {
-   "id": "transfusion_reactions-matrix",
-   "title": "Transfusion Reactions: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Acute immune-mediated haemolytic reactions occur when recipient preformed antibodies lyse transfused donor RBCs, during or up to",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.901",
+    "clinicalPearls": [
+      "Acute immune-mediated haemolytic reactions occur when recipient preformed antibodies lyse transfused donor RBCs, during or up to 24 h after transfusion; anti-A/anti-B antibodies cause most of the most severe (potentially fatal) reactions, though alloantibodies against Rh, Kell, and Duffy antigens can also cause severe haemolysis (Harrison 22e p.906).",
+      "The most dramatic acute haemolytic reactions are usually caused by a failure in product or patient identification, erroneous blood grouping, or unidentified recipient anti-RBC alloimmunisation - i.e. a clerical/identification error (Harrison 22e p.906).",
+      "Acute haemolytic reactions may present with hypotension, tachypnoea, tachycardia, fever (rise of 1-2 degrees C), chills, chest and back/flank pain, haemoglobinuria, and haemoglobinemia; in the most severe cases DIC, acute renal failure, shock, and death may occur (Harrison 22e p.906).",
+      "RED FLAG: when an adverse reaction is suspected the transfusion must be STOPPED, the recipient's clinical status assessed, and supportive care initiated; a thorough clerical check is crucial to prevent a possible second misidentified transfusion (Harrison 22e p.908).",
+      "Management of acute immune haemolytic reaction is mainly supportive: prompt interruption of transfusion, biological workup, vigorous isotonic saline hydration with diuretics to maintain urine output; may require forced alkaline diuresis, electrolyte correction, and pressor support, and in DIC with bleeding, platelet/plasma/cryoprecipitate or fibrinogen (Harrison 22e p.908).",
+      "Diagnosis of transfusion-associated haemolysis relies on persistent/worsening anaemia, depleted haptoglobin, haemoglobinemia and haemoglobinuria, and elevated LDH and unconjugated bilirubin; the direct antiglobulin test (DAT/direct Coombs) is most often positive, as is the indirect antiglobulin test (IAT) (Harrison 22e p.908).",
+      "Delayed haemolytic reactions present with icterus and persisting or worsening anaemia and result from an anamnestic response in previously sensitised patients who had a negative alloantibody screen at transfusion (low antibody levels); the alloantibody becomes detectable 1-2 weeks after transfusion (Harrison 22e p.906).",
+      "FNHTR (febrile non-haemolytic transfusion reaction) is the most frequent reaction to cellular components (up to 300 per 100,000), characterised by chills, rigors and a rise of at least 1 degree C, caused by proinflammatory cytokines in the component or recipient antibodies against donor antigens; it is a diagnosis of exclusion once infection and haemolysis are ruled out (Harrison 22e p.911).",
+      "Leukocyte reduction (especially prestorage) can prevent FNHTR; premedication with antipyretics has generally proven ineffective and may mask relevant clinical symptoms (Harrison 22e p.911).",
+      "Most allergic transfusion reactions are mild (rash, pruritus, urticaria, localised oedema) and relate to plasma proteins; rarely they are severe/anaphylactic with bronchospasm, respiratory distress, hypotension, nausea, vomiting and shock - anaphylaxis can occur after only a few millilitres of component (Harrison 22e p.911).",
+      "TRALI is characterised by occurrence or worsening of hypoxia and NONcardiogenic pulmonary oedema with bilateral interstitial infiltrates on chest x-ray during or within 6 h of transfusion (delayed cases up to 72 h); it is among the most common causes of transfusion-related fatalities and treatment is supportive only (Harrison 22e p.911).",
+      "TRALI usually results from donor plasma containing high-titre anti-HLA class II antibodies binding recipient cognate antigen (anti-HLA class I and anti-HNA antibodies may also be involved); a cytokine/chemokine-mediated mechanism without HLA interaction can also occur (Harrison 22e p.911).",
+      "TACO (transfusion-associated circulatory overload) is common and underrecognised and is now the main cause of transfusion-related death since TRALI risk was mitigated; it presents with dyspnoea, hypoxia, bilateral and predominantly ALVEOLAR infiltrates on chest x-ray, frequent systolic hypertension, and elevated BNP (fever may also occur) (Harrison 22e p.912).",
+      "TRALI vs TACO distinction: TRALI gives noncardiogenic oedema with predominantly interstitial infiltrates within 6 h, whereas TACO is volume overload with predominantly alveolar infiltrates (within 12 h), systolic hypertension and elevated BNP; TACO risk factors include older age, renal failure, preexisting fluid overload, cardiac dysfunction, large transfusion volume and excessive transfusion rate (Harrison 22e p.911-912).",
+      "Transfusion-related GVHD is extremely rare but fatal in over 90% of cases; mediated by engrafted donor T lymphocytes in a recipient unable to reject them, it presents 5-10 days post-transfusion with cytopenia, fever, characteristic skin rash, diarrhoea and liver function abnormalities, and is prevented by irradiation (minimum 25 Gy) of cellular components in at-risk patients (Harrison 22e p.911).",
+      "Transfusion-transmitted bacterial infection remains a significant concern, notably with platelet concentrates stored at room temperature; some gram-negatives such as Yersinia grow at 4 degrees C and can contaminate RBC units - recipients may develop abrupt fever and chills deteriorating to septic shock, DIC and death, and after culture sampling broad-spectrum antibiotics should be started promptly (Harrison 22e p.913).",
+      "Iron overload: each RBC concentrate contains 200-250 mg of iron; in frequently transfused recipients untreated accumulation impairs endocrine, hepatic and cardiac function (death may occur from cardiac failure or arrhythmia), assessed by serum ferritin, MRI and liver biopsy, and prevented/treated by monitoring and iron chelation (Harrison 22e p.912).",
+      "Acute hypotensive transfusion reactions are an abrupt drop in systolic blood pressure of more than 30 mmHg early after starting transfusion that resolves once transfusion is stopped; they are more likely in patients taking ACE inhibitors (impaired bradykinin metabolism) and the same product should NOT be restarted (Harrison 22e p.912)."
     ],
-    [
-     "Key Investigations",
-     "Direct antiglobulin test (DAT / direct Coombs) detecting immunoglobulin and possibly complement (C3d) on recipient RBCs, Indirect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Adverse reactions to blood components arise via immune or nonimmune mechanisms. Immune-mediated acute haemolysis occurs when recipient preformed antibodies (anti-A/anti-B IgM/IgG, or alloantibodies to Rh, Kell, Duffy) lyse transfused donor RBCs, with complement activation; ABO incompatibility classically results from clerical/identification error. Delayed haemolysis reflects an anamnestic alloantibody response (neoformed allogeneic IgG, C3b-mediated opsonisation and ADCC-mediated phagocytosis) detectable 1-2 weeks later. FNHTR is driven by proinflammatory cytokines accumulated in the component or recipient antibodies against donor leukocyte antigens. Allergic/anaphylactic reactions relate to plasma proteins and soluble mediators triggering histamine/serotonin release (IgA-deficient recipients may react to IgA). TRALI results from donor anti-HLA (class II, also class I) or anti-HNA antibodies binding recipient antigen, or cytokine/chemokine priming, causing neutrophil aggregation in pulmonary vasculature and release of inflammatory mediators producing noncardiogenic pulmonary oedema. TACO is hydrostatic circulatory overload from excessive volume/rate relative to cardiac/renal reserve. Transfusion-associated GVHD is mediated by engrafted donor T lymphocytes attacking host HLA antigens. (Harrison 22e p.906-912)",
+    "additionalDifferentials": [
+      "Febrile non-haemolytic transfusion reaction (diagnosis of exclusion once infection and haemolysis excluded)",
+      "Acute immune-mediated haemolytic transfusion reaction (ABO/clerical error)",
+      "Delayed haemolytic transfusion reaction (anamnestic alloantibody response)",
+      "Hyperhaemolytic transfusion reaction in haemoglobinopathy/sickle cell disease (bystander haemolysis)",
+      "Allergic / anaphylactic transfusion reaction",
+      "TRALI (transfusion-related acute lung injury)",
+      "TACO (transfusion-associated circulatory overload)",
+      "Transfusion-transmitted bacterial infection / septic transfusion reaction",
+      "Transfusion-associated graft-versus-host disease",
+      "Posttransfusion purpura",
+      "Acute hypotensive transfusion reaction (bradykinin-related, ACE inhibitor)"
     ],
-    [
-     "Primary Differentials",
-     "Febrile non-haemolytic transfusion reaction (diagnosis of exclusion once infection and haemolysis excluded), Acute",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Transfusion-transmitted bacterial contamination/sepsis presenting with abrupt fever, chills, septic shock and DIC can mimic an acute haemolytic reaction (fever over 2 degrees C is a warning sign favouring bacterial contamination/haemolysis)",
+      "Septic shock from a contaminated component can mimic anaphylactic or haemolytic shock"
     ],
-    [
-     "Management Strategy",
-     "Stop the transfusion immediately at any suspected reaction, maintain venous access, and perform a rigorous clerical and identity",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "TRALI may be difficult to distinguish from other causes of hypoxia, particularly circulatory overload (TACO)",
+      "G6PD/enzymatic RBC defects and underlying haemolytic conditions exacerbated by transfusion can mimic immune-mediated haemolytic transfusion reaction",
+      "Hyperhaemolysis in sickle cell disease can mimic and be exacerbated by transfusion"
     ],
-    [
-     "Clinical Pitfall",
-     "Premedication with antipyretics for FNHTR is generally ineffective and may mask relevant clinical warning symptoms",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Direct antiglobulin test (DAT / direct Coombs) detecting immunoglobulin and possibly complement (C3d) on recipient RBCs",
+      "Indirect antiglobulin test (IAT / indirect Coombs) detecting anti-RBC alloantibody in serum, with antibody elution to identify the culprit alloantibody",
+      "Plasma haptoglobin (depleted), LDH and unconjugated bilirubin (elevated), haemoglobinemia and haemoglobinuria",
+      "Repeat ABO determination and thorough clerical check; alloantibody screen and crossmatch",
+      "Bacterial culture of the component and recipient before starting broad-spectrum antibiotics when bacterial contamination suspected",
+      "Chest x-ray (bilateral interstitial infiltrates in TRALI; predominantly alveolar infiltrates in TACO) and brain natriuretic peptide (elevated in TACO)",
+      "Serum ferritin, MRI and liver biopsy to assess iron overload in frequently transfused patients",
+      "Test for IgA deficiency in patients with anaphylactic or repeated allergic reactions"
+    ],
+    "redFlags": [
+      "STOP the transfusion immediately when any adverse reaction is suspected",
+      "Fever, flank/back pain and haemoglobinuria suggesting acute haemolytic (ABO-incompatible) reaction - perform an urgent clerical/identification check to prevent a second misidentified transfusion",
+      "Hypotension (systolic drop of at least 30 mmHg) - haemolytic, anaphylactic or septic shock",
+      "Dyspnoea within 6 h (TRALI) or within 12 h (TACO) of transfusion",
+      "Temperature rise over 2 degrees C - favours transfusion-transmitted bacterial infection or haemolysis",
+      "Rash over two-thirds of body within 5 minutes with dyspnoea and shock - anaphylaxis",
+      "Development of DIC, acute renal failure or shock during/after transfusion"
+    ],
+    "prognosis": "Most adverse reactions are non-life-threatening, though serious reactions can present with mild symptoms. An average of ~37 transfusion-associated fatalities (possible-to-definite imputability) were reported yearly to the FDA between 2017-2021 among ~15 million transfused components, with leading causes of death being TACO (32%), TRALI (21%), haemolysis (21%) and microbial contamination (13%). Acute haemolysis is often self-limiting but can be fatal (DIC, acute renal failure, shock). Transfusion-associated GVHD is fatal in over 90% of cases and highly resistant to treatment. (Harrison 22e p.906-911)",
+    "pitfalls": [
+      "Premedication with antipyretics for FNHTR is generally ineffective and may mask relevant clinical warning symptoms",
+      "FNHTR must not be diagnosed until infection and haemolysis are excluded",
+      "Failing to perform a clerical/identification check risks a second misidentified (incompatible) transfusion",
+      "TRALI and TACO are easily confused; both cause hypoxia and bilateral infiltrates - TACO is now the leading cause of transfusion death and is underrecognised",
+      "In acute hypotensive reactions the same blood product should not be restarted; consider switching ACE inhibitor for patients needing further transfusion",
+      "Delayed haemolytic reactions occur despite a negative pretransfusion alloantibody screen (low antibody levels) - icterus and worsening anaemia 1-2 weeks later",
+      "Iron overload is frequently underreported in chronically transfused patients",
+      "Further RBC transfusion in hyperhaemolytic reaction (sickle cell disease) typically exacerbates ongoing haemolysis"
+    ],
+    "severityClassification": "Warning-sign based recognition of transfusion adverse reactions (Harrison Table 118-5): fever of at least 38 degrees C (rise of 1-2 degrees C within 4 h favours FNHTR or TRALI; rise over 2 degrees C favours bacterial infection/haemolysis); hypotension (systolic drop of at least 30 mmHg) suggesting haemolytic, anaphylactic or septic shock; dyspnoea (TRALI within 6 h, TACO within 12 h, severe allergy within 4 h); haemoglobinuria (intravascular haemolysis); rash (minor allergy if under two-thirds body, severe if over two-thirds, anaphylaxis if with dyspnoea/shock within 5 min); icterus (delayed haemolysis); rash/diarrhoea/fever 2 days-6 weeks (GVHD); gum bleeding/purpura 5-12 days (posttransfusion purpura). Reactions are also categorised as immune-mediated vs nonimmunologic, and by timing (acute vs delayed). (Harrison 22e p.908)",
+    "references": [
+      "Harrison 22e p.901",
+      "Harrison 22e p.906",
+      "Harrison 22e p.908",
+      "Harrison 22e p.911",
+      "Harrison 22e p.912",
+      "Harrison 22e p.913",
+      "Delaney M et al: Transfusion reactions: Prevention, diagnosis, and treatment",
+      "Panch SR et al: Hemolytic transfusion reactions. N Engl J Med"
+    ],
+    "crossLinks": [
+      "anaphylaxis",
+      "hemolytic_anemia",
+      "ards"
+    ],
+    "management": [
+      "Stop the transfusion immediately at any suspected reaction, maintain venous access, and perform a rigorous clerical and identity check to prevent a second misidentified transfusion",
+      "For acute haemolytic reactions give vigorous isotonic saline to maintain urine output with diuretics as needed, support blood pressure with vasopressors, and correct electrolytes",
+      "Manage haemolysis-associated disseminated intravascular coagulation with platelets, plasma, cryoprecipitate or fibrinogen when there is bleeding",
+      "Treat febrile non-haemolytic reactions with antipyretics after excluding haemolysis, and allergic reactions with antihistamines, escalating to adrenaline and corticosteroids for anaphylaxis",
+      "When bacterial contamination is suspected, culture the component and recipient and start broad-spectrum antibiotics",
+      "Send diagnostic samples including direct and indirect antiglobulin tests, repeat ABO grouping and crossmatch, and report to the transfusion service",
+      "Prevent recurrence with appropriate component selection using leucoreduced units, washed or IgA-deficient components for IgA-deficient recipients, and premedication where indicated"
     ]
-   ],
-   "caption": "Overview comparison matrix for transfusion reactions."
-  }
- ],
- "diagrams": [
-  {
-   "id": "transfusion-reactions-real-image",
-   "title": "Transfusion Reactions: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "transfusion_reactions-pathway",
+      "title": "Transfusion Reactions: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Acute immune-mediated haemolytic reactions occur when recipient preformed antibodies lyse transfused donor RBCs, during or up to 24 h after transfusion; anti-A/anti-B antibodies cause most of the most severe (potentially fatal) reactions,",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: STOP the transfusion immediately when any adverse reaction is suspected",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Direct antiglobulin test (DAT / direct Coombs) detecting immunoglobulin and possibly complement (C3d) on recipient RBCs, Indirect antiglobulin test (IAT / indirect Coombs) detecting anti-RBC alloantibody in serum, with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stop the transfusion immediately at any suspected reaction, maintain venous access, and perform a rigorous clerical and identity check to prevent a second misidentified transfusion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Premedication with antipyretics for FNHTR is generally ineffective and may mask relevant clinical warning symptoms"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of transfusion reactions."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "transfusion_reactions-matrix",
+      "title": "Transfusion Reactions: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acute immune-mediated haemolytic reactions occur when recipient preformed antibodies lyse transfused donor RBCs, during or up to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Direct antiglobulin test (DAT / direct Coombs) detecting immunoglobulin and possibly complement (C3d) on recipient RBCs, Indirect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Febrile non-haemolytic transfusion reaction (diagnosis of exclusion once infection and haemolysis excluded), Acute",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stop the transfusion immediately at any suspected reaction, maintain venous access, and perform a rigorous clerical and identity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Premedication with antipyretics for FNHTR is generally ineffective and may mask relevant clinical warning symptoms",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for transfusion reactions."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Complications of Transfusion",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/transfusion-medicine/complications-of-transfusion"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 106-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 113-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transfusion_reactions-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising transfusion reactions",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Timing",
+        "Key findings"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute haemolytic",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Usually within 1 h of starting",
+              "op": "<=",
+              "value": 1
+            },
+            {
+              "text": "Fever, flank pain, hypotension, haemoglobinuria; DAT positive, low haptoglobin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Febrile non-haemolytic",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "During or after"
+            },
+            {
+              "text": "Temperature rise of 1 C or more; most common reaction",
+              "op": ">=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fever rise over 2 C",
+          "cells": [
+            {
+              "text": "Any time"
+            },
+            {
+              "text": "Favours bacterial contamination or haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic or anaphylactic",
+          "cells": [
+            {
+              "text": "During or right after"
+            },
+            {
+              "text": "Urticaria; anaphylaxis with IgA deficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TRALI",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Dyspnoea within 6 h",
+              "op": "<=",
+              "value": 6
+            },
+            {
+              "text": "Hypoxaemia, non-cardiogenic oedema; avoid diuretics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TACO",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Dyspnoea within 12 h",
+              "op": "<=",
+              "value": 12
+            },
+            {
+              "text": "Heart failure signs; elderly, cardiac or renal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypotension",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Systolic drop of 30 mm Hg or more",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "Haemolytic, anaphylactic or septic shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed haemolytic",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "1 to 4 weeks after",
+              "range": [
+                1,
+                4
+              ]
+            },
+            {
+              "text": "Falling Hb, positive DAT, mild jaundice"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TA-GVHD",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "4 to 30 days after",
+              "range": [
+                4,
+                30
+              ]
+            },
+            {
+              "text": "Rash, diarrhoea, liver injury, pancytopenia; over 90% mortality"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-transfusion purpura",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Platelets fall 4 to 14 days after",
+              "range": [
+                4,
+                14
+              ]
+            },
+            {
+              "text": "Treat with IVIG"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck calls acute haemolysis the commonest cause of transfusion death in one place and TACO the commonest cause reported to the FDA in another; Harrison names TACO the leading cause. Both statements kept."
+    },
+    {
+      "id": "transfusion_reactions-ddx",
+      "kind": "ddx",
+      "title": "Separating transfusion reactions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute haemolytic vs febrile non-haemolytic",
+          "cells": [
+            {
+              "text": "Haemoglobinuria, hypotension, flank pain"
+            },
+            {
+              "text": "Clerical check, DAT, haptoglobin, LDH"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TRALI vs TACO",
+          "cells": [
+            {
+              "text": "TACO has volume overload and heart failure signs"
+            },
+            {
+              "text": "Clinical volume status, chest radiograph"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bacterial contamination vs haemolysis",
+          "cells": [
+            {
+              "text": "Fever over 2 C, septic shock; platelets highest risk"
+            },
+            {
+              "text": "Culture product and patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis vs allergic",
+          "cells": [
+            {
+              "text": "Dyspnoea or shock with rash"
+            },
+            {
+              "text": "Clinical; IgA deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying haemolytic disease (G6PD, sickle hyperhaemolysis)",
+          "cells": [
+            {
+              "text": "Haemolysis not from alloantibody"
+            },
+            {
+              "text": "DAT, G6PD assay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_reactions-treatment",
+      "kind": "treatment",
+      "title": "Treating transfusion reactions",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop transfusion, keep line open, clerical check",
+          "cells": [
+            {
+              "text": "Any suspected reaction"
+            },
+            {
+              "text": "{{hy:Never restart the same unit}}; return unit and samples"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV saline plus furosemide",
+          "unit": "mL/h",
+          "cells": [
+            {
+              "text": "Acute haemolytic reaction"
+            },
+            {
+              "text": "Keep urine over 100 mL/h for 24 h; furosemide 40 to 80 mg IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose dopamine",
+          "cells": [
+            {
+              "text": "Haemolytic shock needing pressor"
+            },
+            {
+              "text": "2 to 5 mcg/kg/min; avoid epinephrine, norepinephrine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acetaminophen",
+          "cells": [
+            {
+              "text": "Febrile non-haemolytic"
+            },
+            {
+              "text": "Leukoreduced components if recurrent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diphenhydramine; hydrocortisone",
+          "cells": [
+            {
+              "text": "Allergic reaction"
+            },
+            {
+              "text": "50 mg; hydrocortisone 100 to 200 mg IV if moderate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epinephrine",
+          "cells": [
+            {
+              "text": "Anaphylaxis"
+            },
+            {
+              "text": "0.5 mL of 1:1000 SC plus saline; washed or IgA-deficient products later"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive ventilation, no diuretic",
+          "cells": [
+            {
+              "text": "TRALI"
+            },
+            {
+              "text": "Report to blood bank"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop, furosemide 20 to 40 mg IV",
+          "cells": [
+            {
+              "text": "TACO"
+            },
+            {
+              "text": "Slow infusion and prophylactic diuretic in high risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Calcium gluconate",
+          "cells": [
+            {
+              "text": "Citrate hypocalcaemia in massive transfusion"
+            },
+            {
+              "text": "10 mL of 10% over 10 min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Irradiated products",
+          "cells": [
+            {
+              "text": "Prevent TA-GVHD in immunocompromised or relative donors"
+            },
+            {
+              "text": "No effective treatment once established"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_reactions-ddx-2",
+      "kind": "ddx",
+      "title": "Predominantly intravascular hemolysis situations",
+      "rowHeader": "Condition",
+      "columns": [
+        "Onset/time course",
+        "Main mechanism",
+        "Appropriate diagnostic procedure",
+        "Comments"
+      ],
+      "rows": [
+        {
+          "parameter": "Mismatched blood transfusion",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Nearly always ABO incompatibility"
+            },
+            {
+              "text": "Repeat cross-match"
+            },
+            {
+              "text": "None printed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paroxysmal nocturnal hemoglobinuria (PNH)",
+          "cells": [
+            {
+              "text": "Chronic with acute exacerbations"
+            },
+            {
+              "text": "Complement-mediated destruction of CD59-negative red cells"
+            },
+            {
+              "text": "Flow cytometry to display a CD59-negative red cell population"
+            },
+            {
+              "text": "Exacerbations due to complement activation through any pathway"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paroxysmal cold hemoglobinuria (PCH)",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Immune lysis of normal red cells"
+            },
+            {
+              "text": "Test for Donath-Landsteiner antibody"
+            },
+            {
+              "text": "Often triggered by viral infection"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Septicemia",
+          "cells": [
+            {
+              "text": "Very acute"
+            },
+            {
+              "text": "Exotoxins produced by Clostridium perfringens"
+            },
+            {
+              "text": "Blood cultures"
+            },
+            {
+              "text": "Other organisms may be responsible"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Microangiopathic",
+          "cells": [
+            {
+              "text": "Acute or chronic"
+            },
+            {
+              "text": "Red cell fragmentation"
+            },
+            {
+              "text": "Red cell morphology on blood smear"
+            },
+            {
+              "text": "Causes range from endothelial damage to hemangioma to leaky prosthetic heart valve"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "March hemoglobinuria",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Mechanical destruction"
+            },
+            {
+              "text": "Targeted history taking"
+            },
+            {
+              "text": "None printed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Favism",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Destruction of the older fraction of G6PD-deficient red cells"
+            },
+            {
+              "text": "G6PD assay"
+            },
+            {
+              "text": "Triggered by a large dish of fava beans, but infection or a drug can be the trigger instead"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "transfusion_reactions-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Characteristics of selected blood components",
+      "rowHeader": "Component",
+      "columns": [
+        "Volume, mL",
+        "Content",
+        "Clinical response"
+      ],
+      "rows": [
+        {
+          "parameter": "PRBC",
+          "cells": [
+            {
+              "text": "180-200"
+            },
+            {
+              "text": "Red cells with variable leukocyte content and a small amount of plasma"
+            },
+            {
+              "text": "Raises hemoglobin by 10 g/L and hematocrit by 3%"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Platelets (random donor unit)",
+          "cells": [
+            {
+              "text": "50-70"
+            },
+            {
+              "text": "5.5 x 10^10 per random-donor unit"
+            },
+            {
+              "text": "Raises platelet count by 5000-10,000/uL"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Platelets (single-donor apheresis product)",
+          "cells": [
+            {
+              "text": "200-400"
+            },
+            {
+              "text": ">=3 x 10^11 per single-donor apheresis product"
+            },
+            {
+              "text": "Corrected count increment >=10 x 10^9/L within 1 h and >=7.5 x 10^9/L within 24 h after transfusion"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "FFP",
+          "cells": [
+            {
+              "text": "200-250"
+            },
+            {
+              "text": "Plasma proteins: coagulation factors, proteins C and S, antithrombin"
+            },
+            {
+              "text": "Raises coagulation factors by about 2%"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Cryoprecipitate",
+          "cells": [
+            {
+              "text": "10-15"
+            },
+            {
+              "text": "Cold-insoluble plasma proteins: fibrinogen, factor VIII, vWF"
+            },
+            {
+              "text": "Used as topical fibrin glue; also supplies 80 IU of factor VIII"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The PDF prints the platelet component as two rows; the second row has no component label and is read here as the apheresis product (CCI = corrected count increment)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transfusion_reactions-dx-mgmt",
+      "title": "Diagnosis and management of transfusion reactions",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New symptom during or after transfusion",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Isolated local urticaria and itch only?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Antihistamine; stopping not required",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stop transfusion, saline line, check ID, notify blood bank",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypotension, flank pain or haemoglobinuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Acute haemolysis: saline, furosemide, DAT; culture if sepsis",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Dyspnoea and hypoxia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Volume overload signs?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "TACO: furosemide, heart failure care",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "TRALI: oxygen or ventilation, no diuretic",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Wheeze, angioedema or shock with rash?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Anaphylaxis: epinephrine, saline",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Febrile non-haemolytic: acetaminophen after excluding haemolysis",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

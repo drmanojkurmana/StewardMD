@@ -1,174 +1,452 @@
 {
- "id": "d_2_hydroxyglutaric_aciduria",
- "name": "D-2-hydroxyglutaric aciduria",
- "aliases": [
-  "D-2-HGA",
-  "D2HGDH deficiency",
-  "IDH2-related D-2-HGA"
- ],
- "class": "non_infective",
- "system": "Metabolic / nervous system",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Metabolic medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Two genetically distinct forms: type I from biallelic D2HGDH mutations (autosomal recessive) and type II from a de novo gain-of-function IDH2 mutation (dominant); type II tends to be more severe.",
-   "Typical presentation is in infancy with developmental delay, hypotonia, epilepsy or epileptic encephalopathy, and, especially in type II, cardiomyopathy.",
-   "The same neomorphic IDH2 mutations drive gliomas and acute myeloid leukaemia as somatic events; here they occur in the germline/de novo and D-2-hydroxyglutarate behaves as an oncometabolite.",
-   "Urine organic acid analysis shows raised 2-hydroxyglutarate, but chiral (enantiomer) separation is essential to distinguish the D form from the L form and the combined D,L form.",
-   "Brain MRI may show subependymal pseudocysts, enlarged ventricles and delayed cerebral maturation with abnormal gyration and myelination.",
-   "Diagnosis is confirmed by quantifying the D-enantiomer in body fluids and by sequencing D2HGDH and IDH2; plasma and cerebrospinal fluid can also be tested.",
-   "Management is largely supportive with seizure control and cardiac surveillance; riboflavin and other measures have been tried without robust proven benefit."
+  "id": "d_2_hydroxyglutaric_aciduria",
+  "name": "D-2-hydroxyglutaric aciduria",
+  "aliases": [
+    "D-2-HGA",
+    "D2HGDH deficiency",
+    "IDH2-related D-2-HGA"
   ],
-  "pathophysiology": "D-2-hydroxyglutaric aciduria results from accumulation of D-2-hydroxyglutarate in body fluids and brain. Type I is caused by biallelic loss-of-function mutations in D2HGDH, encoding D-2-hydroxyglutarate dehydrogenase, which normally oxidises D-2-hydroxyglutarate back to 2-oxoglutarate (alpha-ketoglutarate). Type II is caused by a heterozygous de novo gain-of-function mutation in IDH2, the mitochondrial isocitrate dehydrogenase, typically at an arginine residue (R140), conferring a neomorphic activity that reduces alpha-ketoglutarate to D-2-hydroxyglutarate. The accumulated D-2-hydroxyglutarate acts as an oncometabolite, competitively inhibiting alpha-ketoglutarate-dependent dioxygenases including histone and DNA demethylases and prolyl hydroxylases, thereby disturbing epigenetic regulation, hypoxia signalling and cellular metabolism, which underlies the neurological and cardiac phenotype.",
-  "additionalDifferentials": [
-   "L-2-hydroxyglutaric aciduria",
-   "Combined D,L-2-hydroxyglutaric aciduria (SLC25A1 / mitochondrial citrate carrier deficiency)",
-   "Glutaric aciduria type I and other organic acidurias",
-   "Mitochondrial encephalopathies",
-   "Other causes of neonatal or infantile epileptic encephalopathy",
-   "Metabolic cardiomyopathies (e.g. Barth syndrome, fatty acid oxidation defects)"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acid analysis with chiral separation of 2-hydroxyglutarate enantiomers",
-   "Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification",
-   "Molecular testing of D2HGDH and IDH2",
-   "Brain MRI",
-   "Echocardiography and ECG for cardiomyopathy and arrhythmia",
-   "Electroencephalography",
-   "Enzyme activity or functional assays where available"
-  ],
-  "redFlags": [
-   "New or worsening cardiomyopathy or signs of heart failure",
-   "Status epilepticus or medically refractory seizures",
-   "Rapid neurological regression",
-   "Feeding difficulty with faltering growth"
-  ],
-  "prognosis": "Outcome is variable: type I ranges from mild to severe, whereas type II is generally more severe with early cardiomyopathy and higher mortality. No curative therapy exists, and prognosis is determined mainly by the degree of neurological and cardiac involvement.",
-  "pitfalls": [
-   "Failing to perform chiral separation, so D- and L-enantiomers are not distinguished.",
-   "Assuming autosomal recessive inheritance in all cases and missing de novo dominant IDH2 disease, which changes recurrence-risk counselling.",
-   "Overlooking cardiomyopathy, which can be life-threatening, particularly in type II.",
-   "Attributing modest biochemical elevations to other organic acidurias without enantiomer-specific testing."
-  ],
-  "references": [
-   "Inherited metabolic disease reference texts",
-   "Organic aciduria clinical guidelines",
-   "Paediatric neurology references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Coordinate care through a metabolic medicine service; no curative therapy exists, so treatment is supportive and directed at the neurological and cardiac manifestations",
-   "Control seizures and epileptic encephalopathy with antiepileptic drugs selected for the seizure type and guided by EEG",
-   "Manage cardiomyopathy, particularly in the more severe type II, with standard heart-failure pharmacotherapy alongside surveillance echocardiography and ECG for arrhythmia",
-   "Provide developmental support with physiotherapy, occupational therapy and feeding or nutritional input for hypotonia and delay",
-   "Offer genetic counselling that distinguishes autosomal recessive type I (biallelic D2HGDH) from the de novo dominant IDH2 gain-of-function type II, with family testing as appropriate",
-   "Escalate promptly for cardiac decompensation, arrhythmia or status epilepticus"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "d_2_hydroxyglutaric_aciduria-pathway",
-   "title": "D-2-hydroxyglutaric aciduria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Two genetically distinct forms: type I from biallelic D2HGDH mutations (autosomal recessive) and type II from a de novo gain-of-function IDH2 mutation (dominant); type II tends to be more severe.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or worsening cardiomyopathy or signs of heart failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acid analysis with chiral separation of 2-hydroxyglutarate enantiomers, Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification, Molecular testing of D2HGDH and IDH2"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Coordinate care through a metabolic medicine service; no curative therapy exists, so treatment is supportive and directed at the neurological and cardiac manifestations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to perform chiral separation, so D- and L-enantiomers are not distinguished."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of d-2-hydroxyglutaric aciduria."
-  }
- ],
- "tables": [
-  {
-   "id": "d_2_hydroxyglutaric_aciduria-matrix",
-   "title": "D-2-hydroxyglutaric aciduria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Two genetically distinct forms: type I from biallelic D2HGDH mutations (autosomal recessive) and type II from a de novo",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / nervous system",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Metabolic medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Two genetically distinct forms: type I from biallelic D2HGDH mutations (autosomal recessive) and type II from a de novo gain-of-function IDH2 mutation (dominant); type II tends to be more severe.",
+      "Typical presentation is in infancy with developmental delay, hypotonia, epilepsy or epileptic encephalopathy, and, especially in type II, cardiomyopathy.",
+      "The same neomorphic IDH2 mutations drive gliomas and acute myeloid leukaemia as somatic events; here they occur in the germline/de novo and D-2-hydroxyglutarate behaves as an oncometabolite.",
+      "Urine organic acid analysis shows raised 2-hydroxyglutarate, but chiral (enantiomer) separation is essential to distinguish the D form from the L form and the combined D,L form.",
+      "Brain MRI may show subependymal pseudocysts, enlarged ventricles and delayed cerebral maturation with abnormal gyration and myelination.",
+      "Diagnosis is confirmed by quantifying the D-enantiomer in body fluids and by sequencing D2HGDH and IDH2; plasma and cerebrospinal fluid can also be tested.",
+      "Management is largely supportive with seizure control and cardiac surveillance; riboflavin and other measures have been tried without robust proven benefit."
     ],
-    [
-     "Key Investigations",
-     "Urine organic acid analysis with chiral separation of 2-hydroxyglutarate enantiomers, Plasma and cerebrospinal fluid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "D-2-hydroxyglutaric aciduria results from accumulation of D-2-hydroxyglutarate in body fluids and brain. Type I is caused by biallelic loss-of-function mutations in D2HGDH, encoding D-2-hydroxyglutarate dehydrogenase, which normally oxidises D-2-hydroxyglutarate back to 2-oxoglutarate (alpha-ketoglutarate). Type II is caused by a heterozygous de novo gain-of-function mutation in IDH2, the mitochondrial isocitrate dehydrogenase, typically at an arginine residue (R140), conferring a neomorphic activity that reduces alpha-ketoglutarate to D-2-hydroxyglutarate. The accumulated D-2-hydroxyglutarate acts as an oncometabolite, competitively inhibiting alpha-ketoglutarate-dependent dioxygenases including histone and DNA demethylases and prolyl hydroxylases, thereby disturbing epigenetic regulation, hypoxia signalling and cellular metabolism, which underlies the neurological and cardiac phenotype.",
+    "additionalDifferentials": [
+      "L-2-hydroxyglutaric aciduria",
+      "Combined D,L-2-hydroxyglutaric aciduria (SLC25A1 / mitochondrial citrate carrier deficiency)",
+      "Glutaric aciduria type I and other organic acidurias",
+      "Mitochondrial encephalopathies",
+      "Other causes of neonatal or infantile epileptic encephalopathy",
+      "Metabolic cardiomyopathies (e.g. Barth syndrome, fatty acid oxidation defects)"
     ],
-    [
-     "Primary Differentials",
-     "L-2-hydroxyglutaric aciduria, Combined D,L-2-hydroxyglutaric aciduria (SLC25A1 / mitochondrial citrate carrier deficiency),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acid analysis with chiral separation of 2-hydroxyglutarate enantiomers",
+      "Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification",
+      "Molecular testing of D2HGDH and IDH2",
+      "Brain MRI",
+      "Echocardiography and ECG for cardiomyopathy and arrhythmia",
+      "Electroencephalography",
+      "Enzyme activity or functional assays where available"
     ],
-    [
-     "Management Strategy",
-     "Coordinate care through a metabolic medicine service; no curative therapy exists, so treatment is supportive and directed at the",
-     "Core treatment modality"
+    "redFlags": [
+      "New or worsening cardiomyopathy or signs of heart failure",
+      "Status epilepticus or medically refractory seizures",
+      "Rapid neurological regression",
+      "Feeding difficulty with faltering growth"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to perform chiral separation, so D- and L-enantiomers are not distinguished.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable: type I ranges from mild to severe, whereas type II is generally more severe with early cardiomyopathy and higher mortality. No curative therapy exists, and prognosis is determined mainly by the degree of neurological and cardiac involvement.",
+    "pitfalls": [
+      "Failing to perform chiral separation, so D- and L-enantiomers are not distinguished.",
+      "Assuming autosomal recessive inheritance in all cases and missing de novo dominant IDH2 disease, which changes recurrence-risk counselling.",
+      "Overlooking cardiomyopathy, which can be life-threatening, particularly in type II.",
+      "Attributing modest biochemical elevations to other organic acidurias without enantiomer-specific testing."
+    ],
+    "references": [
+      "Inherited metabolic disease reference texts",
+      "Organic aciduria clinical guidelines",
+      "Paediatric neurology references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Coordinate care through a metabolic medicine service; no curative therapy exists, so treatment is supportive and directed at the neurological and cardiac manifestations",
+      "Control seizures and epileptic encephalopathy with antiepileptic drugs selected for the seizure type and guided by EEG",
+      "Manage cardiomyopathy, particularly in the more severe type II, with standard heart-failure pharmacotherapy alongside surveillance echocardiography and ECG for arrhythmia",
+      "Provide developmental support with physiotherapy, occupational therapy and feeding or nutritional input for hypotonia and delay",
+      "Offer genetic counselling that distinguishes autosomal recessive type I (biallelic D2HGDH) from the de novo dominant IDH2 gain-of-function type II, with family testing as appropriate",
+      "Escalate promptly for cardiac decompensation, arrhythmia or status epilepticus"
     ]
-   ],
-   "caption": "Overview comparison matrix for d-2-hydroxyglutaric aciduria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "d-2-hydroxyglutaric-aciduria-real-image",
-   "title": "D-2-hydroxyglutaric aciduria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "d_2_hydroxyglutaric_aciduria-pathway",
+      "title": "D-2-hydroxyglutaric aciduria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Two genetically distinct forms: type I from biallelic D2HGDH mutations (autosomal recessive) and type II from a de novo gain-of-function IDH2 mutation (dominant); type II tends to be more severe.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or worsening cardiomyopathy or signs of heart failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acid analysis with chiral separation of 2-hydroxyglutarate enantiomers, Plasma and cerebrospinal fluid 2-hydroxyglutarate quantification, Molecular testing of D2HGDH and IDH2"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Coordinate care through a metabolic medicine service; no curative therapy exists, so treatment is supportive and directed at the neurological and cardiac manifestations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to perform chiral separation, so D- and L-enantiomers are not distinguished."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of d-2-hydroxyglutaric aciduria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "d_2_hydroxyglutaric_aciduria-matrix",
+      "title": "D-2-hydroxyglutaric aciduria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Two genetically distinct forms: type I from biallelic D2HGDH mutations (autosomal recessive) and type II from a de novo",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acid analysis with chiral separation of 2-hydroxyglutarate enantiomers, Plasma and cerebrospinal fluid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "L-2-hydroxyglutaric aciduria, Combined D,L-2-hydroxyglutaric aciduria (SLC25A1 / mitochondrial citrate carrier deficiency),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Coordinate care through a metabolic medicine service; no curative therapy exists, so treatment is supportive and directed at the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to perform chiral separation, so D- and L-enantiomers are not distinguished.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for d-2-hydroxyglutaric aciduria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "d_2_hydroxyglutaric_aciduria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids with chiral separation",
+          "cells": [
+            {
+              "text": "D and L enantiomers separated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma and CSF 2-hydroxyglutarate",
+          "cells": [
+            {
+              "text": "Levels quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D2HGDH and IDH2 molecular testing",
+          "cells": [
+            {
+              "text": "Causative gene and subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and EEG",
+          "cells": [
+            {
+              "text": "Neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "d_2_hydroxyglutaric_aciduria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "L-2-hydroxyglutaric aciduria",
+          "cells": [
+            {
+              "text": "Chiral separation distinguishes the enantiomer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined D,L-2-hydroxyglutaric aciduria",
+          "cells": [
+            {
+              "text": "Both enantiomers raised; SLC25A1 link"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic cardiomyopathies such as Barth syndrome",
+          "cells": [
+            {
+              "text": "Named cardiac look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "d_2_hydroxyglutaric_aciduria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Metabolic medicine co-ordination",
+          "cells": [
+            {
+              "text": "Supportive care; no curative therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure drugs",
+          "cells": [
+            {
+              "text": "Chosen for seizure type and guided by EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Especially in the more severe type II; surveillance echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and feeding support",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive type I versus de novo dominant IDH2 type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt escalation",
+          "cells": [
+            {
+              "text": "Cardiac decompensation, arrhythmia or status epilepticus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "d_2_hydroxyglutaric_aciduria-dx-mgmt",
+      "title": "Diagnosis and management of D-2-hydroxyglutaric aciduria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected D-2-hydroxyglutaric aciduria: epilepsy, neurological decline or cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (worsening cardiomyopathy, status epilepticus, rapid regression)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac and seizure management for decompensation or status",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chiral urine organic acids; plasma and CSF levels; D2HGDH and IDH2; echo; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does chiral separation show predominant D-2-hydroxyglutarate with gene confirmation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider L-2-HGA, combined D,L-2-HGA or other organic acidurias",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiseizure drugs chosen for seizure type and guided by EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Standard heart-failure therapy and echo surveillance, especially in type II",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and feeding support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling distinguishing recessive type I from dominant IDH2 type II",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Variable; type II is generally more severe with early cardiomyopathy and higher mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

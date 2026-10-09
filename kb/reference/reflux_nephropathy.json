@@ -1,168 +1,388 @@
 {
- "id": "reflux_nephropathy",
- "name": "Reflux nephropathy",
- "aliases": [
-  "chronic pyelonephritis with reflux",
-  "vesicoureteric reflux nephropathy"
- ],
- "class": "non_infective",
- "system": "Renal / Genitourinary",
- "specialty": "Nephrology / Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Nephrology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Renal scarring resulting from vesicoureteric reflux, typically with childhood urinary tract infections",
-   "It is an important cause of chronic kidney disease and of hypertension in children and young adults",
-   "Characteristic imaging shows focal cortical scars overlying dilated calyces, often at the poles",
-   "It may present with hypertension, proteinuria, recurrent infections or incidentally reduced renal function",
-   "Established scarring is irreversible, so prevention and early detection are key",
-   "Management focuses on blood pressure and proteinuria control and prevention of further infection and scarring"
+  "id": "reflux_nephropathy",
+  "name": "Reflux nephropathy",
+  "aliases": [
+    "chronic pyelonephritis with reflux",
+    "vesicoureteric reflux nephropathy"
   ],
-  "pathophysiology": "Reflux nephropathy develops when vesicoureteric reflux, particularly with intrarenal reflux and urinary infection during early childhood, damages the renal parenchyma and produces focal scarring. The scars disrupt nephrons and, once a critical amount of renal mass is affected, trigger hyperfiltration injury in the remaining nephrons, causing progressive proteinuria, glomerulosclerosis and declining function. Activation of the renin-angiotensin system contributes to the associated hypertension, which further accelerates renal injury.",
-  "additionalDifferentials": [
-   "Chronic pyelonephritis without reflux",
-   "Other causes of chronic kidney disease with scarring",
-   "Obstructive uropathy",
-   "Renal dysplasia or hypoplasia",
-   "Analgesic or other tubulointerstitial nephropathy"
-  ],
-  "additionalInvestigations": [
-   "Renal ultrasound and DMSA scintigraphy for scarring",
-   "Assessment of blood pressure, proteinuria and renal function",
-   "Micturating cystourethrography where active reflux is investigated",
-   "Urinalysis and culture for infection",
-   "Long-term monitoring of renal function"
-  ],
-  "redFlags": [
-   "Progressive chronic kidney disease",
-   "Difficult-to-control hypertension",
-   "Significant proteinuria",
-   "Recurrent pyelonephritis causing new scarring"
-  ],
-  "prognosis": "Prognosis depends on the extent of scarring; limited disease may remain stable, but extensive bilateral scarring can progress to end-stage kidney disease, especially with uncontrolled hypertension or proteinuria.",
-  "pitfalls": [
-   "Failing to control hypertension and proteinuria that drive progression",
-   "Attributing the scarring purely to infection without recognising reflux",
-   "Overlooking reflux nephropathy as a cause of young-adult hypertension",
-   "Missing ongoing preventable urinary infections"
-  ],
-  "references": [
-   "Nephrology reference texts (standard reference)",
-   "Paediatric nephrology references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to control hypertension and reduce proteinuria and hyperfiltration injury",
-   "Achieve rigorous blood-pressure control to slow progression of chronic kidney disease",
-   "Prevent and promptly treat urinary tract infection to limit further scarring, with antibiotic prophylaxis in selected children",
-   "Consider endoscopic treatment or ureteric reimplantation for vesicoureteric reflux in selected cases",
-   "Undertake long-term monitoring of renal function, proteinuria and blood pressure",
-   "Manage progression towards end-stage disease with metabolic and dietary measures and timely renal-replacement planning, with nephrology and urology input and family screening given the familial tendency of vesicoureteric reflux"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "reflux_nephropathy-pathway",
-   "title": "Reflux nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Renal scarring resulting from vesicoureteric reflux, typically with childhood urinary tract infections",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive chronic kidney disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal ultrasound and DMSA scintigraphy for scarring, Assessment of blood pressure, proteinuria and renal function, Micturating cystourethrography where active reflux is investigated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to control hypertension and reduce proteinuria and hyperfiltration injury"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to control hypertension and proteinuria that drive progression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of reflux nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "reflux_nephropathy-matrix",
-   "title": "Reflux nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Renal scarring resulting from vesicoureteric reflux, typically with childhood urinary tract infections",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genitourinary",
+  "specialty": "Nephrology / Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nephrology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Renal scarring resulting from vesicoureteric reflux, typically with childhood urinary tract infections",
+      "It is an important cause of chronic kidney disease and of hypertension in children and young adults",
+      "Characteristic imaging shows focal cortical scars overlying dilated calyces, often at the poles",
+      "It may present with hypertension, proteinuria, recurrent infections or incidentally reduced renal function",
+      "Established scarring is irreversible, so prevention and early detection are key",
+      "Management focuses on blood pressure and proteinuria control and prevention of further infection and scarring"
     ],
-    [
-     "Key Investigations",
-     "Renal ultrasound and DMSA scintigraphy for scarring, Assessment of blood pressure, proteinuria and renal function, Micturating",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Reflux nephropathy develops when vesicoureteric reflux, particularly with intrarenal reflux and urinary infection during early childhood, damages the renal parenchyma and produces focal scarring. The scars disrupt nephrons and, once a critical amount of renal mass is affected, trigger hyperfiltration injury in the remaining nephrons, causing progressive proteinuria, glomerulosclerosis and declining function. Activation of the renin-angiotensin system contributes to the associated hypertension, which further accelerates renal injury.",
+    "additionalDifferentials": [
+      "Chronic pyelonephritis without reflux",
+      "Other causes of chronic kidney disease with scarring",
+      "Obstructive uropathy",
+      "Renal dysplasia or hypoplasia",
+      "Analgesic or other tubulointerstitial nephropathy"
     ],
-    [
-     "Primary Differentials",
-     "Chronic pyelonephritis without reflux, Other causes of chronic kidney disease with scarring, Obstructive uropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal ultrasound and DMSA scintigraphy for scarring",
+      "Assessment of blood pressure, proteinuria and renal function",
+      "Micturating cystourethrography where active reflux is investigated",
+      "Urinalysis and culture for infection",
+      "Long-term monitoring of renal function"
     ],
-    [
-     "Management Strategy",
-     "Use renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to control hypertension and reduce",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive chronic kidney disease",
+      "Difficult-to-control hypertension",
+      "Significant proteinuria",
+      "Recurrent pyelonephritis causing new scarring"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to control hypertension and proteinuria that drive progression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the extent of scarring; limited disease may remain stable, but extensive bilateral scarring can progress to end-stage kidney disease, especially with uncontrolled hypertension or proteinuria.",
+    "pitfalls": [
+      "Failing to control hypertension and proteinuria that drive progression",
+      "Attributing the scarring purely to infection without recognising reflux",
+      "Overlooking reflux nephropathy as a cause of young-adult hypertension",
+      "Missing ongoing preventable urinary infections"
+    ],
+    "references": [
+      "Nephrology reference texts (standard reference)",
+      "Paediatric nephrology references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to control hypertension and reduce proteinuria and hyperfiltration injury",
+      "Achieve rigorous blood-pressure control to slow progression of chronic kidney disease",
+      "Prevent and promptly treat urinary tract infection to limit further scarring, with antibiotic prophylaxis in selected children",
+      "Consider endoscopic treatment or ureteric reimplantation for vesicoureteric reflux in selected cases",
+      "Undertake long-term monitoring of renal function, proteinuria and blood pressure",
+      "Manage progression towards end-stage disease with metabolic and dietary measures and timely renal-replacement planning, with nephrology and urology input and family screening given the familial tendency of vesicoureteric reflux"
     ]
-   ],
-   "caption": "Overview comparison matrix for reflux nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "reflux-nephropathy-real-image",
-   "title": "Reflux nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "reflux_nephropathy-pathway",
+      "title": "Reflux nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Renal scarring resulting from vesicoureteric reflux, typically with childhood urinary tract infections",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive chronic kidney disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal ultrasound and DMSA scintigraphy for scarring, Assessment of blood pressure, proteinuria and renal function, Micturating cystourethrography where active reflux is investigated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to control hypertension and reduce proteinuria and hyperfiltration injury"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to control hypertension and proteinuria that drive progression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of reflux nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "reflux_nephropathy-matrix",
+      "title": "Reflux nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Renal scarring resulting from vesicoureteric reflux, typically with childhood urinary tract infections",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal ultrasound and DMSA scintigraphy for scarring, Assessment of blood pressure, proteinuria and renal function, Micturating",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic pyelonephritis without reflux, Other causes of chronic kidney disease with scarring, Obstructive uropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to control hypertension and reduce",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to control hypertension and proteinuria that drive progression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for reflux nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "reflux_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal ultrasound and DMSA scintigraphy",
+          "cells": [
+            {
+              "text": "Renal scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure, proteinuria and renal function",
+          "cells": [
+            {
+              "text": "Hypertension and proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micturating cystourethrogram",
+          "cells": [
+            {
+              "text": "Reflux"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reflux_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic pyelonephritis without reflux",
+          "cells": [
+            {
+              "text": "Scarring without reflux"
+            },
+            {
+              "text": "MCUG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive uropathy",
+          "cells": [
+            {
+              "text": "Obstruction"
+            },
+            {
+              "text": "Renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "reflux_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "RAS blockade",
+          "cells": [
+            {
+              "text": "ACE inhibitor or angiotensin-receptor blocker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure",
+          "cells": [
+            {
+              "text": "Rigorous control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urological care",
+          "cells": [
+            {
+              "text": "Management of reflux and recurrent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "reflux_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of Reflux nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected reflux nephropathy: renal scarring with reflux history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive CKD, resistant hypertension, proteinuria, or recurrent pyelonephritis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: nephrology review for progressive CKD",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal ultrasound and DMSA; blood pressure and proteinuria; MCUG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is reflux confirmed with scarring on DMSA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic pyelonephritis without reflux or obstruction; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACE inhibitor or ARB blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rigorous blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urological management of reflux and recurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Nephrology follow-up for progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

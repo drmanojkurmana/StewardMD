@@ -1,175 +1,464 @@
 {
- "id": "transient_neonatal_diabetes_mellitus",
- "name": "Transient neonatal diabetes mellitus",
- "aliases": [
-  "TNDM",
-  "6q24-related neonatal diabetes",
-  "Transient neonatal diabetes"
- ],
- "class": "non_infective",
- "system": "Endocrine / Monogenic",
- "specialty": "Paediatric endocrinology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Monogenic diabetes references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Insulin-requiring diabetes appears in early infancy but remits, usually within the first months of life, distinguishing it clinically from the permanent forms.",
-   "The commonest cause is overexpression of the imprinted 6q24 locus (PLAGL1/ZAC and HYMAI), through paternal uniparental disomy, paternal duplication, or loss of maternal methylation.",
-   "Remission is not cure: a substantial proportion relapse with diabetes later in childhood or around puberty, so lifelong follow-up is essential.",
-   "Macroglossia and umbilical hernia are recognised clues in 6q24-related disease and help separate it from other neonatal diabetes.",
-   "Potassium-channel mutations (KCNJ11, ABCC8) can also produce a transient course, and these cases may respond to sulfonylureas at presentation and relapse.",
-   "Marked intrauterine growth restriction reflects deficient foetal insulin, mirroring the permanent forms.",
-   "A generalised imprinting disturbance (for example ZFP57-related) can accompany maternal hypomethylation and cause additional features."
+  "id": "transient_neonatal_diabetes_mellitus",
+  "name": "Transient neonatal diabetes mellitus",
+  "aliases": [
+    "TNDM",
+    "6q24-related neonatal diabetes",
+    "Transient neonatal diabetes"
   ],
-  "pathophysiology": "Transient neonatal diabetes is dominated by disturbance of an imprinted region on chromosome 6q24 that normally shows monoallelic paternal expression. Excess dosage of the transcription factor PLAGL1 (ZAC) together with HYMAI, arising from paternal uniparental disomy of chromosome 6, paternal duplication of the 6q24 segment, or loss of methylation on the maternal allele, impairs the developmental regulation of insulin secretion during a critical perinatal window. Insulin deficiency during this period causes hyperglycaemia and poor growth, but as beta-cell regulation matures the requirement for exogenous insulin falls and diabetes remits. Because the underlying epigenetic or dosage lesion persists, beta-cell reserve remains vulnerable, and physiological stress or the insulin resistance of puberty can precipitate relapse. A minority of cases instead reflect activating potassium-channel mutations that transiently impair insulin release. Maternal hypomethylation may extend beyond 6q24 to other imprinted loci, producing a multilocus imprinting disturbance with a broader phenotype.",
-  "additionalDifferentials": [
-   "Permanent neonatal diabetes mellitus (non-remitting monogenic disease)",
-   "Beckwith-Wiedemann spectrum where macroglossia and overgrowth predominate",
-   "Potassium-channel neonatal diabetes with a transient presentation",
-   "Stress or iatrogenic hyperglycaemia in the sick or preterm neonate",
-   "Small-for-gestational-age infants with transient glucose dysregulation",
-   "Early autoimmune diabetes presenting in later infancy"
-  ],
-  "additionalInvestigations": [
-   "Methylation-specific analysis of the 6q24 differentially methylated region",
-   "Testing for paternal uniparental disomy of chromosome 6 and 6q24 duplication",
-   "Sequencing of KCNJ11 and ABCC8 to identify transient channel forms",
-   "Serum C-peptide with paired glucose to gauge residual beta-cell function",
-   "Islet autoantibody panel to exclude autoimmune diabetes",
-   "Serial glucose monitoring through remission and structured follow-up for relapse"
-  ],
-  "redFlags": [
-   "Dehydration or ketoacidosis at initial presentation despite the usually milder course",
-   "Failure to thrive with persistent hyperglycaemia in early infancy",
-   "Return of hyperglycaemic symptoms in later childhood or adolescence indicating relapse",
-   "Features suggesting a wider imprinting disorder beyond isolated diabetes"
-  ],
-  "prognosis": "Neonatal diabetes typically remits within the first year with good short-term outcomes, but relapse later in childhood or at puberty is common and may require renewed treatment. Long-term prognosis is favourable when relapse is anticipated and managed, though lifelong metabolic surveillance is warranted.",
-  "pitfalls": [
-   "Regarding remission as permanent cure and discharging the child from follow-up.",
-   "Failing to counsel families that diabetes frequently returns around puberty.",
-   "Not distinguishing 6q24 disease from potassium-channel forms, which alters treatment options.",
-   "Attributing macroglossia and umbilical hernia to an unrelated overgrowth syndrome.",
-   "Assuming a benign transient course means genetic confirmation is unnecessary."
-  ],
-  "references": [
-   "Paediatric endocrinology reference texts",
-   "International consensus guidance on monogenic and neonatal diabetes",
-   "Clinical genetics reference resources on imprinting disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Insulin replacement during the hyperglycaemic phase by continuous subcutaneous or intravenous insulin infusion, titrated to glycaemia and weaned as beta-cell function matures and diabetes remits",
-   "Trial of an oral sulfonylurea where a KCNJ11 or ABCC8 potassium-channel mutation is identified, as these transient forms may respond and permit insulin withdrawal",
-   "Optimise nutrition to correct the intrauterine growth restriction, with careful fluid and electrolyte balance in the neonatal period",
-   "Confirm the molecular basis (6q24 methylation defect, paternal uniparental disomy or duplication, or a channel gene) and involve clinical genetics with family counselling",
-   "Continuous glucose monitoring through remission, with C-peptide and paired glucose to gauge residual beta-cell reserve",
-   "Lifelong metabolic surveillance because remission is not cure, anticipating relapse in later childhood and around puberty",
-   "Reintroduce glucose-lowering therapy promptly at relapse and involve paediatric endocrinology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "transient_neonatal_diabetes_mellitus-pathway",
-   "title": "Transient neonatal diabetes mellitus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Insulin-requiring diabetes appears in early infancy but remits, usually within the first months of life, distinguishing it clinically from the permanent forms.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Dehydration or ketoacidosis at initial presentation despite the usually milder course",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Methylation-specific analysis of the 6q24 differentially methylated region, Testing for paternal uniparental disomy of chromosome 6 and 6q24 duplication, Sequencing of KCNJ11 and ABCC8 to identify transient channel forms"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Insulin replacement during the hyperglycaemic phase by continuous subcutaneous or intravenous insulin infusion, titrated to glycaemia and weaned as beta-cell function matures and diabetes remits"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regarding remission as permanent cure and discharging the child from follow-up."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of transient neonatal diabetes mellitus."
-  }
- ],
- "tables": [
-  {
-   "id": "transient_neonatal_diabetes_mellitus-matrix",
-   "title": "Transient neonatal diabetes mellitus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Insulin-requiring diabetes appears in early infancy but remits, usually within the first months of life, distinguishing it",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Monogenic",
+  "specialty": "Paediatric endocrinology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Monogenic diabetes references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Insulin-requiring diabetes appears in early infancy but remits, usually within the first months of life, distinguishing it clinically from the permanent forms.",
+      "The commonest cause is overexpression of the imprinted 6q24 locus (PLAGL1/ZAC and HYMAI), through paternal uniparental disomy, paternal duplication, or loss of maternal methylation.",
+      "Remission is not cure: a substantial proportion relapse with diabetes later in childhood or around puberty, so lifelong follow-up is essential.",
+      "Macroglossia and umbilical hernia are recognised clues in 6q24-related disease and help separate it from other neonatal diabetes.",
+      "Potassium-channel mutations (KCNJ11, ABCC8) can also produce a transient course, and these cases may respond to sulfonylureas at presentation and relapse.",
+      "Marked intrauterine growth restriction reflects deficient foetal insulin, mirroring the permanent forms.",
+      "A generalised imprinting disturbance (for example ZFP57-related) can accompany maternal hypomethylation and cause additional features."
     ],
-    [
-     "Key Investigations",
-     "Methylation-specific analysis of the 6q24 differentially methylated region, Testing for paternal uniparental disomy of chromosome",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Transient neonatal diabetes is dominated by disturbance of an imprinted region on chromosome 6q24 that normally shows monoallelic paternal expression. Excess dosage of the transcription factor PLAGL1 (ZAC) together with HYMAI, arising from paternal uniparental disomy of chromosome 6, paternal duplication of the 6q24 segment, or loss of methylation on the maternal allele, impairs the developmental regulation of insulin secretion during a critical perinatal window. Insulin deficiency during this period causes hyperglycaemia and poor growth, but as beta-cell regulation matures the requirement for exogenous insulin falls and diabetes remits. Because the underlying epigenetic or dosage lesion persists, beta-cell reserve remains vulnerable, and physiological stress or the insulin resistance of puberty can precipitate relapse. A minority of cases instead reflect activating potassium-channel mutations that transiently impair insulin release. Maternal hypomethylation may extend beyond 6q24 to other imprinted loci, producing a multilocus imprinting disturbance with a broader phenotype.",
+    "additionalDifferentials": [
+      "Permanent neonatal diabetes mellitus (non-remitting monogenic disease)",
+      "Beckwith-Wiedemann spectrum where macroglossia and overgrowth predominate",
+      "Potassium-channel neonatal diabetes with a transient presentation",
+      "Stress or iatrogenic hyperglycaemia in the sick or preterm neonate",
+      "Small-for-gestational-age infants with transient glucose dysregulation",
+      "Early autoimmune diabetes presenting in later infancy"
     ],
-    [
-     "Primary Differentials",
-     "Permanent neonatal diabetes mellitus (non-remitting monogenic disease), Beckwith-Wiedemann spectrum where macroglossia and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Methylation-specific analysis of the 6q24 differentially methylated region",
+      "Testing for paternal uniparental disomy of chromosome 6 and 6q24 duplication",
+      "Sequencing of KCNJ11 and ABCC8 to identify transient channel forms",
+      "Serum C-peptide with paired glucose to gauge residual beta-cell function",
+      "Islet autoantibody panel to exclude autoimmune diabetes",
+      "Serial glucose monitoring through remission and structured follow-up for relapse"
     ],
-    [
-     "Management Strategy",
-     "Insulin replacement during the hyperglycaemic phase by continuous subcutaneous or intravenous insulin infusion, titrated to",
-     "Core treatment modality"
+    "redFlags": [
+      "Dehydration or ketoacidosis at initial presentation despite the usually milder course",
+      "Failure to thrive with persistent hyperglycaemia in early infancy",
+      "Return of hyperglycaemic symptoms in later childhood or adolescence indicating relapse",
+      "Features suggesting a wider imprinting disorder beyond isolated diabetes"
     ],
-    [
-     "Clinical Pitfall",
-     "Regarding remission as permanent cure and discharging the child from follow-up.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Neonatal diabetes typically remits within the first year with good short-term outcomes, but relapse later in childhood or at puberty is common and may require renewed treatment. Long-term prognosis is favourable when relapse is anticipated and managed, though lifelong metabolic surveillance is warranted.",
+    "pitfalls": [
+      "Regarding remission as permanent cure and discharging the child from follow-up.",
+      "Failing to counsel families that diabetes frequently returns around puberty.",
+      "Not distinguishing 6q24 disease from potassium-channel forms, which alters treatment options.",
+      "Attributing macroglossia and umbilical hernia to an unrelated overgrowth syndrome.",
+      "Assuming a benign transient course means genetic confirmation is unnecessary."
+    ],
+    "references": [
+      "Paediatric endocrinology reference texts",
+      "International consensus guidance on monogenic and neonatal diabetes",
+      "Clinical genetics reference resources on imprinting disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Insulin replacement during the hyperglycaemic phase by continuous subcutaneous or intravenous insulin infusion, titrated to glycaemia and weaned as beta-cell function matures and diabetes remits",
+      "Trial of an oral sulfonylurea where a KCNJ11 or ABCC8 potassium-channel mutation is identified, as these transient forms may respond and permit insulin withdrawal",
+      "Optimise nutrition to correct the intrauterine growth restriction, with careful fluid and electrolyte balance in the neonatal period",
+      "Confirm the molecular basis (6q24 methylation defect, paternal uniparental disomy or duplication, or a channel gene) and involve clinical genetics with family counselling",
+      "Continuous glucose monitoring through remission, with C-peptide and paired glucose to gauge residual beta-cell reserve",
+      "Lifelong metabolic surveillance because remission is not cure, anticipating relapse in later childhood and around puberty",
+      "Reintroduce glucose-lowering therapy promptly at relapse and involve paediatric endocrinology"
     ]
-   ],
-   "caption": "Overview comparison matrix for transient neonatal diabetes mellitus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "transient-neonatal-diabetes-mellitus-real-image",
-   "title": "Transient neonatal diabetes mellitus: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "transient_neonatal_diabetes_mellitus-pathway",
+      "title": "Transient neonatal diabetes mellitus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Insulin-requiring diabetes appears in early infancy but remits, usually within the first months of life, distinguishing it clinically from the permanent forms.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Dehydration or ketoacidosis at initial presentation despite the usually milder course",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Methylation-specific analysis of the 6q24 differentially methylated region, Testing for paternal uniparental disomy of chromosome 6 and 6q24 duplication, Sequencing of KCNJ11 and ABCC8 to identify transient channel forms"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Insulin replacement during the hyperglycaemic phase by continuous subcutaneous or intravenous insulin infusion, titrated to glycaemia and weaned as beta-cell function matures and diabetes remits"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regarding remission as permanent cure and discharging the child from follow-up."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of transient neonatal diabetes mellitus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "transient_neonatal_diabetes_mellitus-matrix",
+      "title": "Transient neonatal diabetes mellitus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Insulin-requiring diabetes appears in early infancy but remits, usually within the first months of life, distinguishing it",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Methylation-specific analysis of the 6q24 differentially methylated region, Testing for paternal uniparental disomy of chromosome",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Permanent neonatal diabetes mellitus (non-remitting monogenic disease), Beckwith-Wiedemann spectrum where macroglossia and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Insulin replacement during the hyperglycaemic phase by continuous subcutaneous or intravenous insulin infusion, titrated to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regarding remission as permanent cure and discharging the child from follow-up.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for transient neonatal diabetes mellitus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Monogenic diabetes references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transient_neonatal_diabetes_mellitus-dx-mgmt",
+      "title": "Diagnosis and management of Transient neonatal diabetes mellitus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected transient neonatal diabetes: insulin-requiring hyperglycaemia in early infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: ketoacidosis at presentation, or relapse of hyperglycaemia in childhood?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent insulin for ketoacidosis or persistent hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "6q24 methylation analysis; UPD or duplication testing; KCNJ11 and ABCC8",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does 6q24 testing or a channel variant explain the transient diabetes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider permanent neonatal diabetes or autoimmune diabetes; re-test",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Insulin infusion during the hyperglycaemic phase, weaned as remission occurs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of sulfonylurea where a KCNJ11 or ABCC8 variant is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutrition and fluid balance for growth restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic testing and family counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong surveillance for relapse around puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually remits in the first year; relapse later in childhood is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transient_neonatal_diabetes_mellitus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Methylation analysis of 6q24",
+          "cells": [
+            {
+              "text": "Imprinted region defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for paternal UPD6 or 6q24 duplication",
+          "cells": [
+            {
+              "text": "Genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KCNJ11 and ABCC8 sequencing",
+          "cells": [
+            {
+              "text": "Transient channel forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum C-peptide with paired glucose",
+          "cells": [
+            {
+              "text": "Residual beta-cell function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Islet autoantibody panel",
+          "cells": [
+            {
+              "text": "Autoimmune diabetes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transient_neonatal_diabetes_mellitus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Permanent neonatal diabetes",
+          "cells": [
+            {
+              "text": "Does not remit; transient course separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beckwith-Wiedemann spectrum",
+          "cells": [
+            {
+              "text": "Macroglossia and overgrowth predominate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-channel neonatal diabetes with transient presentation",
+          "cells": [
+            {
+              "text": "May respond to sulfonylureas; genetic testing identifies it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transient_neonatal_diabetes_mellitus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Insulin during the hyperglycaemic phase",
+          "cells": [
+            {
+              "text": "Infusion titrated to glycaemia; weaned as remission occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral sulfonylurea",
+          "cells": [
+            {
+              "text": "Where a KCNJ11 or ABCC8 variant is identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and fluid balance",
+          "cells": [
+            {
+              "text": "Correct growth restriction with careful electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular and genetic counselling",
+          "cells": [
+            {
+              "text": "6q24 defect, UPD or channel gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous glucose monitoring",
+          "cells": [
+            {
+              "text": "Through remission, with C-peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Remission is not cure; relapse at puberty is common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

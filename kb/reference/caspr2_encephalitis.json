@@ -1,175 +1,434 @@
 {
- "id": "caspr2_encephalitis",
- "name": "CASPR2 antibody encephalitis",
- "aliases": [
-  "anti-CASPR2 encephalitis",
-  "contactin-associated protein-like 2 antibody disease",
-  "VGKC-complex (CASPR2) syndrome",
-  "Morvan syndrome (CASPR2-associated)"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuroimmunology",
- "specialty": "Neurology / Neuroimmunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The phenotype spans central and peripheral nervous system involvement, from limbic encephalitis to peripheral nerve hyperexcitability",
-   "Peripheral hyperexcitability manifests as neuromyotonia — muscle twitching, cramps, stiffness, and myokymia — often with neuropathic pain",
-   "Morvan syndrome combines neuromyotonia, dysautonomia, severe insomnia (agrypnia excitata), and fluctuating encephalopathy",
-   "Antibodies target contactin-associated protein-like 2 (CASPR2), a component of the former voltage-gated potassium channel complex",
-   "Weight loss, dysautonomia, and neuropathic pain are frequent accompanying features",
-   "CASPR2 disease carries a stronger association with thymoma than LGI1 disease, so mediastinal imaging is important",
-   "Treatment follows autoimmune encephalitis principles with first-line corticosteroids, intravenous immunoglobulin or plasma exchange, and rituximab for refractory cases, alongside tumour removal where present"
+  "id": "caspr2_encephalitis",
+  "name": "CASPR2 antibody encephalitis",
+  "aliases": [
+    "anti-CASPR2 encephalitis",
+    "contactin-associated protein-like 2 antibody disease",
+    "VGKC-complex (CASPR2) syndrome",
+    "Morvan syndrome (CASPR2-associated)"
   ],
-  "pathophysiology": "Antibodies bind contactin-associated protein-like 2 (CASPR2), a cell-adhesion protein clustered at the juxtaparanodal region of myelinated axons and within the hippocampus, where it organises voltage-gated potassium channels. Loss of CASPR2 function reduces potassium-channel clustering and raises axonal and neuronal excitability, generating peripheral neuromyotonia and, centrally, limbic hyperexcitability and encephalopathy. The combined central and peripheral distribution of the antigen explains the wide clinical spectrum, and in a subset the immune response is driven by an underlying thymoma.",
-  "additionalDifferentials": [
-   "LGI1 and other surface-antigen limbic encephalitides",
-   "Isaacs syndrome (acquired neuromyotonia) of other cause",
-   "Stiff-person spectrum disorders",
-   "Motor neuron disease with cramp-fasciculation",
-   "Paraneoplastic encephalomyelitis",
-   "Fatal familial or other causes of severe insomnia"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid testing for CASPR2 antibodies",
-   "Nerve conduction studies and electromyography for neuromyotonic and myokymic discharges",
-   "MRI of the brain to assess for limbic involvement",
-   "Mediastinal CT to screen for thymoma",
-   "Autonomic function assessment where dysautonomia is prominent",
-   "Cerebrospinal fluid analysis to exclude infection and assess inflammation"
-  ],
-  "redFlags": [
-   "Severe dysautonomia with cardiovascular instability",
-   "Intractable insomnia and fluctuating encephalopathy of Morvan syndrome",
-   "Rapidly progressive cognitive decline or seizures",
-   "Identification of a thymoma requiring surgical management"
-  ],
-  "prognosis": "Many patients respond well to immunotherapy and tumour treatment, though recovery of neuropathic pain and dysautonomia can lag. Morvan syndrome and thymoma-associated disease may follow a more severe or relapsing course.",
-  "pitfalls": [
-   "Attributing neuromyotonia to a primary muscle disorder and missing the autoimmune basis",
-   "Overlooking thymoma screening",
-   "Interpreting insomnia and behavioural change as psychiatric rather than encephalopathic",
-   "Assuming central and peripheral features cannot coexist in one disorder"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Continuum: Autoimmune Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange",
-   "Escalation to second-line immunosuppression such as rituximab or cyclophosphamide in refractory disease",
-   "Screening for and resection of an underlying thymoma",
-   "Symptomatic control of peripheral nerve hyperexcitability and neuropathic pain with membrane-stabilising agents such as carbamazepine or gabapentinoids",
-   "Management of dysautonomia and severe insomnia, particularly in Morvan syndrome",
-   "Monitoring for relapse with clinical review and antibody testing",
-   "Multidisciplinary neurology, neuroimmunology and, where thymoma is present, thoracic surgery input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "caspr2_encephalitis-pathway",
-   "title": "CASPR2 antibody encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The phenotype spans central and peripheral nervous system involvement, from limbic encephalitis to peripheral nerve hyperexcitability",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe dysautonomia with cardiovascular instability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid testing for CASPR2 antibodies, Nerve conduction studies and electromyography for neuromyotonic and myokymic discharges, MRI of the brain to assess for limbic involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing neuromyotonia to a primary muscle disorder and missing the autoimmune basis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of caspr2 antibody encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "caspr2_encephalitis-matrix",
-   "title": "CASPR2 antibody encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The phenotype spans central and peripheral nervous system involvement, from limbic encephalitis to peripheral nerve",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuroimmunology",
+  "specialty": "Neurology / Neuroimmunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The phenotype spans central and peripheral nervous system involvement, from limbic encephalitis to peripheral nerve hyperexcitability",
+      "Peripheral hyperexcitability manifests as neuromyotonia — muscle twitching, cramps, stiffness, and myokymia — often with neuropathic pain",
+      "Morvan syndrome combines neuromyotonia, dysautonomia, severe insomnia (agrypnia excitata), and fluctuating encephalopathy",
+      "Antibodies target contactin-associated protein-like 2 (CASPR2), a component of the former voltage-gated potassium channel complex",
+      "Weight loss, dysautonomia, and neuropathic pain are frequent accompanying features",
+      "CASPR2 disease carries a stronger association with thymoma than LGI1 disease, so mediastinal imaging is important",
+      "Treatment follows autoimmune encephalitis principles with first-line corticosteroids, intravenous immunoglobulin or plasma exchange, and rituximab for refractory cases, alongside tumour removal where present"
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid testing for CASPR2 antibodies, Nerve conduction studies and electromyography for neuromyotonic and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Antibodies bind contactin-associated protein-like 2 (CASPR2), a cell-adhesion protein clustered at the juxtaparanodal region of myelinated axons and within the hippocampus, where it organises voltage-gated potassium channels. Loss of CASPR2 function reduces potassium-channel clustering and raises axonal and neuronal excitability, generating peripheral neuromyotonia and, centrally, limbic hyperexcitability and encephalopathy. The combined central and peripheral distribution of the antigen explains the wide clinical spectrum, and in a subset the immune response is driven by an underlying thymoma.",
+    "additionalDifferentials": [
+      "LGI1 and other surface-antigen limbic encephalitides",
+      "Isaacs syndrome (acquired neuromyotonia) of other cause",
+      "Stiff-person spectrum disorders",
+      "Motor neuron disease with cramp-fasciculation",
+      "Paraneoplastic encephalomyelitis",
+      "Fatal familial or other causes of severe insomnia"
     ],
-    [
-     "Primary Differentials",
-     "LGI1 and other surface-antigen limbic encephalitides, Isaacs syndrome (acquired neuromyotonia) of other cause, Stiff-person",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid testing for CASPR2 antibodies",
+      "Nerve conduction studies and electromyography for neuromyotonic and myokymic discharges",
+      "MRI of the brain to assess for limbic involvement",
+      "Mediastinal CT to screen for thymoma",
+      "Autonomic function assessment where dysautonomia is prominent",
+      "Cerebrospinal fluid analysis to exclude infection and assess inflammation"
     ],
-    [
-     "Management Strategy",
-     "First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe dysautonomia with cardiovascular instability",
+      "Intractable insomnia and fluctuating encephalopathy of Morvan syndrome",
+      "Rapidly progressive cognitive decline or seizures",
+      "Identification of a thymoma requiring surgical management"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing neuromyotonia to a primary muscle disorder and missing the autoimmune basis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients respond well to immunotherapy and tumour treatment, though recovery of neuropathic pain and dysautonomia can lag. Morvan syndrome and thymoma-associated disease may follow a more severe or relapsing course.",
+    "pitfalls": [
+      "Attributing neuromyotonia to a primary muscle disorder and missing the autoimmune basis",
+      "Overlooking thymoma screening",
+      "Interpreting insomnia and behavioural change as psychiatric rather than encephalopathic",
+      "Assuming central and peripheral features cannot coexist in one disorder"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Continuum: Autoimmune Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange",
+      "Escalation to second-line immunosuppression such as rituximab or cyclophosphamide in refractory disease",
+      "Screening for and resection of an underlying thymoma",
+      "Symptomatic control of peripheral nerve hyperexcitability and neuropathic pain with membrane-stabilising agents such as carbamazepine or gabapentinoids",
+      "Management of dysautonomia and severe insomnia, particularly in Morvan syndrome",
+      "Monitoring for relapse with clinical review and antibody testing",
+      "Multidisciplinary neurology, neuroimmunology and, where thymoma is present, thoracic surgery input"
     ]
-   ],
-   "caption": "Overview comparison matrix for caspr2 antibody encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "caspr2-encephalitis-real-image",
-   "title": "CASPR2 antibody encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "caspr2_encephalitis-pathway",
+      "title": "CASPR2 antibody encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The phenotype spans central and peripheral nervous system involvement, from limbic encephalitis to peripheral nerve hyperexcitability",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe dysautonomia with cardiovascular instability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid testing for CASPR2 antibodies, Nerve conduction studies and electromyography for neuromyotonic and myokymic discharges, MRI of the brain to assess for limbic involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing neuromyotonia to a primary muscle disorder and missing the autoimmune basis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of caspr2 antibody encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "caspr2_encephalitis-matrix",
+      "title": "CASPR2 antibody encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The phenotype spans central and peripheral nervous system involvement, from limbic encephalitis to peripheral nerve",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid testing for CASPR2 antibodies, Nerve conduction studies and electromyography for neuromyotonic and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "LGI1 and other surface-antigen limbic encephalitides, Isaacs syndrome (acquired neuromyotonia) of other cause, Stiff-person",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing neuromyotonia to a primary muscle disorder and missing the autoimmune basis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for caspr2 antibody encephalitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "caspr2_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF CASPR2 antibody testing",
+          "cells": [
+            {
+              "text": "Antibodies target contactin-associated protein-like 2 (CASPR2)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Neuromyotonic and myokymic discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Limbic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mediastinal CT",
+          "cells": [
+            {
+              "text": "Screens for thymoma; stronger association with CASPR2 disease than LGI1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Excludes infection and assesses inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "caspr2_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin and/or plasma exchange"
+            },
+            {
+              "text": "Autoimmune encephalitis principles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunosuppression",
+          "cells": [
+            {
+              "text": "Rituximab or cyclophosphamide"
+            },
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thymoma screening and resection",
+          "cells": [
+            {
+              "text": "Screen for and resect an underlying thymoma"
+            },
+            {
+              "text": "Where a thymoma is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromyotonia and neuropathic pain",
+          "cells": [
+            {
+              "text": "Membrane-stabilising agents such as carbamazepine or gabapentinoids"
+            },
+            {
+              "text": "Peripheral nerve hyperexcitability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysautonomia and insomnia",
+          "cells": [
+            {
+              "text": "Manage dysautonomia and severe insomnia"
+            },
+            {
+              "text": "Particularly in Morvan syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse monitoring",
+          "cells": [
+            {
+              "text": "Clinical review and antibody testing"
+            },
+            {
+              "text": "Ongoing surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "caspr2_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of CASPR2 antibody encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CASPR2 encephalitis: limbic features with neuromyotonia or dysautonomia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe dysautonomia, intractable insomnia, rapid decline, thymoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: dysautonomia with cardiovascular instability; thoracic surgery review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CASPR2 antibodies in serum and CSF; EMG, MRI brain and mediastinal CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CASPR2 antibodies with limbic or neuromyotonic features confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "First-line corticosteroids, intravenous immunoglobulin and/or plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check LGI1 encephalitis, Isaacs syndrome and paraneoplastic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Carbamazepine or gabapentinoid for neuromyotonia and neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Resect thymoma when present; rituximab for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage dysautonomia and severe insomnia, especially in Morvan syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many respond well; Morvan syndrome and thymoma-associated disease may relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

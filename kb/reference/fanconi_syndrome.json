@@ -1,173 +1,480 @@
 {
- "id": "fanconi_syndrome",
- "name": "Fanconi syndrome",
- "aliases": [
-  "renal Fanconi syndrome",
-  "proximal tubular dysfunction syndrome",
-  "De Toni-Debre-Fanconi syndrome"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / KDIGO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Fanconi syndrome is a generalised defect of proximal tubular reabsorption, so multiple solutes normally reclaimed there are lost into the urine at once",
-   "The hallmark laboratory picture combines glycosuria with normal blood glucose, phosphaturia with hypophosphataemia, aminoaciduria, uricosuria, and a proximal (type 2) renal tubular acidosis",
-   "Phosphate and vitamin D handling are disturbed, producing metabolic bone disease that presents as rickets in children and osteomalacia in adults",
-   "In children the commonest cause is inherited cystinosis, whereas in adults acquired causes such as drugs, heavy metals, and monoclonal light chains predominate",
-   "Bicarbonate wasting causes a hyperchloraemic metabolic acidosis, and potassium wasting frequently leads to hypokalaemia",
-   "Recognising the full constellation is important because finding one abnormality (e.g. isolated glycosuria) should prompt a search for the others",
-   "Treatment is directed at the underlying cause where possible, together with replacement of the wasted solutes: alkali, phosphate, potassium, and active vitamin D as needed"
+  "id": "fanconi_syndrome",
+  "name": "Fanconi syndrome",
+  "aliases": [
+    "renal Fanconi syndrome",
+    "proximal tubular dysfunction syndrome",
+    "De Toni-Debre-Fanconi syndrome"
   ],
-  "pathophysiology": "Fanconi syndrome results from global dysfunction of the proximal convoluted tubule, the segment responsible for reabsorbing the bulk of filtered glucose, amino acids, phosphate, uric acid, bicarbonate, and low-molecular-weight proteins. When proximal transport fails, all of these are wasted in the urine, giving the characteristic combination of glycosuria with euglycaemia, generalised aminoaciduria, hypophosphataemia, hypouricaemia, proximal renal tubular acidosis from bicarbonate loss, and tubular proteinuria. Impaired proximal conversion of vitamin D and phosphate depletion drive the bone disease. Underlying mechanisms include inherited defects of tubular transporters or metabolism (such as cystinosis or Wilson disease), toxic injury from drugs and heavy metals, and deposition of filtered monoclonal light chains, all of which impair the energy-dependent transport machinery of the proximal tubule.",
-  "additionalDifferentials": [
-   "Isolated proximal renal tubular acidosis without full Fanconi features",
-   "Diabetes mellitus with glycosuria from hyperglycaemia",
-   "Primary hypophosphataemic rickets",
-   "Multiple myeloma or other plasma cell dyscrasia",
-   "Heavy metal or drug-induced tubular toxicity",
-   "Chronic interstitial nephritis"
-  ],
-  "additionalInvestigations": [
-   "Paired urine and blood glucose to demonstrate glycosuria despite normal glycaemia",
-   "Serum and urine phosphate, potassium, bicarbonate, and uric acid to document tubular wasting",
-   "Urine amino acid screen and low-molecular-weight (tubular) protein measurement",
-   "Serum and urine protein electrophoresis with free light chains to exclude a plasma cell disorder in adults",
-   "Assessment for underlying causes such as cystinosis, Wilson disease, or nephrotoxic drug exposure",
-   "Bone imaging or biochemistry when rickets or osteomalacia is suspected"
-  ],
-  "redFlags": [
-   "Severe hypophosphataemia causing muscle weakness or respiratory compromise",
-   "Progressive metabolic bone disease with fractures or deformity",
-   "Evidence of an underlying plasma cell dyscrasia in an adult",
-   "Declining glomerular filtration suggesting progression of the causative disease"
-  ],
-  "prognosis": "Outlook depends on the cause: reversible drug- or toxin-induced Fanconi syndrome may resolve when the offending agent is removed, while inherited forms such as cystinosis and light-chain-related disease can progress to chronic kidney failure. Early replacement therapy prevents or lessens the associated bone disease and growth impairment.",
-  "pitfalls": [
-   "Dismissing glycosuria as diabetes without checking blood glucose or looking for other tubular losses",
-   "Missing an underlying paraproteinaemia in an adult presenting with proximal tubular dysfunction",
-   "Undertreating the bone disease by giving phosphate without adequate active vitamin D",
-   "Failing to review the medication list for a reversible tubulotoxic drug"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "KDIGO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause by withdrawing the offending nephrotoxic drug or heavy metal, giving cysteamine for cystinosis, copper chelation or zinc for Wilson disease, or treating an underlying plasma cell disorder",
-   "Replace urinary phosphate losses with oral phosphate supplements to treat the metabolic bone disease",
-   "Correct the proximal renal tubular acidosis with alkali therapy such as bicarbonate or citrate, often in substantial replacement quantities",
-   "Replace potassium and other wasted electrolytes and ensure adequate hydration",
-   "Treat rickets or osteomalacia with active vitamin D metabolites alongside phosphate replacement",
-   "Monitor renal function, electrolytes and bone health to detect progression to chronic kidney disease",
-   "Refer to nephrology and, according to aetiology, to haematology or metabolic specialists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fanconi_syndrome-pathway",
-   "title": "Fanconi syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Fanconi syndrome is a generalised defect of proximal tubular reabsorption, so multiple solutes normally reclaimed there are lost into the urine at once",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypophosphataemia causing muscle weakness or respiratory compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Paired urine and blood glucose to demonstrate glycosuria despite normal glycaemia, Serum and urine phosphate, potassium, bicarbonate, and uric acid to document tubular wasting, Urine amino acid screen and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause by withdrawing the offending nephrotoxic drug or heavy metal, giving cysteamine for cystinosis, copper chelation or zinc for Wilson disease, or treating an underlying plasma cell"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing glycosuria as diabetes without checking blood glucose or looking for other tubular losses"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fanconi syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "fanconi_syndrome-matrix",
-   "title": "Fanconi syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Fanconi syndrome is a generalised defect of proximal tubular reabsorption, so multiple solutes normally reclaimed there are lost",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / KDIGO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Fanconi syndrome is a generalised defect of proximal tubular reabsorption, so multiple solutes normally reclaimed there are lost into the urine at once",
+      "The hallmark laboratory picture combines glycosuria with normal blood glucose, phosphaturia with hypophosphataemia, aminoaciduria, uricosuria, and a proximal (type 2) renal tubular acidosis",
+      "Phosphate and vitamin D handling are disturbed, producing metabolic bone disease that presents as rickets in children and osteomalacia in adults",
+      "In children the commonest cause is inherited cystinosis, whereas in adults acquired causes such as drugs, heavy metals, and monoclonal light chains predominate",
+      "Bicarbonate wasting causes a hyperchloraemic metabolic acidosis, and potassium wasting frequently leads to hypokalaemia",
+      "Recognising the full constellation is important because finding one abnormality (e.g. isolated glycosuria) should prompt a search for the others",
+      "Treatment is directed at the underlying cause where possible, together with replacement of the wasted solutes: alkali, phosphate, potassium, and active vitamin D as needed"
     ],
-    [
-     "Key Investigations",
-     "Paired urine and blood glucose to demonstrate glycosuria despite normal glycaemia, Serum and urine phosphate, potassium,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fanconi syndrome results from global dysfunction of the proximal convoluted tubule, the segment responsible for reabsorbing the bulk of filtered glucose, amino acids, phosphate, uric acid, bicarbonate, and low-molecular-weight proteins. When proximal transport fails, all of these are wasted in the urine, giving the characteristic combination of glycosuria with euglycaemia, generalised aminoaciduria, hypophosphataemia, hypouricaemia, proximal renal tubular acidosis from bicarbonate loss, and tubular proteinuria. Impaired proximal conversion of vitamin D and phosphate depletion drive the bone disease. Underlying mechanisms include inherited defects of tubular transporters or metabolism (such as cystinosis or Wilson disease), toxic injury from drugs and heavy metals, and deposition of filtered monoclonal light chains, all of which impair the energy-dependent transport machinery of the proximal tubule.",
+    "additionalDifferentials": [
+      "Isolated proximal renal tubular acidosis without full Fanconi features",
+      "Diabetes mellitus with glycosuria from hyperglycaemia",
+      "Primary hypophosphataemic rickets",
+      "Multiple myeloma or other plasma cell dyscrasia",
+      "Heavy metal or drug-induced tubular toxicity",
+      "Chronic interstitial nephritis"
     ],
-    [
-     "Primary Differentials",
-     "Isolated proximal renal tubular acidosis without full Fanconi features, Diabetes mellitus with glycosuria from hyperglycaemia,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Paired urine and blood glucose to demonstrate glycosuria despite normal glycaemia",
+      "Serum and urine phosphate, potassium, bicarbonate, and uric acid to document tubular wasting",
+      "Urine amino acid screen and low-molecular-weight (tubular) protein measurement",
+      "Serum and urine protein electrophoresis with free light chains to exclude a plasma cell disorder in adults",
+      "Assessment for underlying causes such as cystinosis, Wilson disease, or nephrotoxic drug exposure",
+      "Bone imaging or biochemistry when rickets or osteomalacia is suspected"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause by withdrawing the offending nephrotoxic drug or heavy metal, giving cysteamine for",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypophosphataemia causing muscle weakness or respiratory compromise",
+      "Progressive metabolic bone disease with fractures or deformity",
+      "Evidence of an underlying plasma cell dyscrasia in an adult",
+      "Declining glomerular filtration suggesting progression of the causative disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing glycosuria as diabetes without checking blood glucose or looking for other tubular losses",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook depends on the cause: reversible drug- or toxin-induced Fanconi syndrome may resolve when the offending agent is removed, while inherited forms such as cystinosis and light-chain-related disease can progress to chronic kidney failure. Early replacement therapy prevents or lessens the associated bone disease and growth impairment.",
+    "pitfalls": [
+      "Dismissing glycosuria as diabetes without checking blood glucose or looking for other tubular losses",
+      "Missing an underlying paraproteinaemia in an adult presenting with proximal tubular dysfunction",
+      "Undertreating the bone disease by giving phosphate without adequate active vitamin D",
+      "Failing to review the medication list for a reversible tubulotoxic drug"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "KDIGO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause by withdrawing the offending nephrotoxic drug or heavy metal, giving cysteamine for cystinosis, copper chelation or zinc for Wilson disease, or treating an underlying plasma cell disorder",
+      "Replace urinary phosphate losses with oral phosphate supplements to treat the metabolic bone disease",
+      "Correct the proximal renal tubular acidosis with alkali therapy such as bicarbonate or citrate, often in substantial replacement quantities",
+      "Replace potassium and other wasted electrolytes and ensure adequate hydration",
+      "Treat rickets or osteomalacia with active vitamin D metabolites alongside phosphate replacement",
+      "Monitor renal function, electrolytes and bone health to detect progression to chronic kidney disease",
+      "Refer to nephrology and, according to aetiology, to haematology or metabolic specialists"
     ]
-   ],
-   "caption": "Overview comparison matrix for fanconi syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fanconi-syndrome-real-image",
-   "title": "Fanconi syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "fanconi_syndrome-pathway",
+      "title": "Fanconi syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Fanconi syndrome is a generalised defect of proximal tubular reabsorption, so multiple solutes normally reclaimed there are lost into the urine at once",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypophosphataemia causing muscle weakness or respiratory compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Paired urine and blood glucose to demonstrate glycosuria despite normal glycaemia, Serum and urine phosphate, potassium, bicarbonate, and uric acid to document tubular wasting, Urine amino acid screen and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause by withdrawing the offending nephrotoxic drug or heavy metal, giving cysteamine for cystinosis, copper chelation or zinc for Wilson disease, or treating an underlying plasma cell"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing glycosuria as diabetes without checking blood glucose or looking for other tubular losses"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fanconi syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fanconi_syndrome-matrix",
+      "title": "Fanconi syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Fanconi syndrome is a generalised defect of proximal tubular reabsorption, so multiple solutes normally reclaimed there are lost",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Paired urine and blood glucose to demonstrate glycosuria despite normal glycaemia, Serum and urine phosphate, potassium,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated proximal renal tubular acidosis without full Fanconi features, Diabetes mellitus with glycosuria from hyperglycaemia,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause by withdrawing the offending nephrotoxic drug or heavy metal, giving cysteamine for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing glycosuria as diabetes without checking blood glucose or looking for other tubular losses",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fanconi syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fanconi_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired urine and blood glucose",
+          "cells": [
+            {
+              "text": "Glycosuria despite normal blood glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine phosphate, potassium, bicarbonate and uric acid",
+          "cells": [
+            {
+              "text": "Tubular wasting of solutes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine amino acid screen and low-molecular-weight proteinuria",
+          "cells": [
+            {
+              "text": "Generalised proximal tubular dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine protein electrophoresis with free light chains",
+          "cells": [
+            {
+              "text": "Plasma cell disorder in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for cystinosis, Wilson disease or nephrotoxic drugs",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone imaging or biochemistry",
+          "cells": [
+            {
+              "text": "Rickets or osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fanconi_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetes mellitus with glycosuria",
+          "cells": [
+            {
+              "text": "Glycosuria with hyperglycaemia; blood glucose separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple myeloma or other plasma cell dyscrasia",
+          "cells": [
+            {
+              "text": "Adult proximal tubular dysfunction needs paraprotein screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hypophosphataemic rickets",
+          "cells": [
+            {
+              "text": "Phosphate wasting without the full tubulopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fanconi_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw nephrotoxic drug or treat heavy metal exposure",
+          "cells": [
+            {
+              "text": "Cysteamine for cystinosis; copper chelation for Wilson disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral phosphate supplements",
+          "cells": [
+            {
+              "text": "Treats metabolic bone disease from urinary phosphate loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alkali therapy",
+          "cells": [
+            {
+              "text": "Bicarbonate or citrate for proximal renal tubular acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium and electrolyte replacement with hydration",
+          "cells": [
+            {
+              "text": "Wasted electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active vitamin D with phosphate",
+          "cells": [
+            {
+              "text": "Rickets or osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and bone monitoring",
+          "cells": [
+            {
+              "text": "Progression to chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology and aetiology-directed specialist referral",
+          "cells": [
+            {
+              "text": "Haematology or metabolic specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fanconi_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Fanconi syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Glycosuria with normal blood glucose, hypophosphataemia or hypokalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe hypophosphataemia, progressive bone disease, paraprotein, falling GFR)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat severe hypophosphataemia; haematology review for adult paraprotein",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired glucose; urine phosphate, potassium, bicarbonate; amino acids; SPEP and FLC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Generalised proximal tubular losses with an identified cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated proximal RTA, diabetes or primary hypophosphataemic rickets",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the offending nephrotoxic drug or treat the heavy metal",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral phosphate for metabolic bone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alkali therapy for proximal renal tubular acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Electrolyte replacement and hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Active vitamin D with phosphate for rickets or osteomalacia",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Reversible drug- or toxin-induced forms may resolve when the agent is removed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

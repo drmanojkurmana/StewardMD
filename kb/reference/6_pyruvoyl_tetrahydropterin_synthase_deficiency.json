@@ -1,173 +1,467 @@
 {
- "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency",
- "name": "6-pyruvoyl-tetrahydropterin synthase deficiency",
- "aliases": [
-  "PTPS deficiency",
-  "PTS gene deficiency",
-  "BH4 deficiency (PTPS type)",
-  "tetrahydrobiopterin-deficient hyperphenylalaninaemia (PTPS)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive defect of tetrahydrobiopterin (BH4) synthesis caused by PTS mutations; it is the most common cause of BH4-deficient hyperphenylalaninaemia",
-   "It presents as hyperphenylalaninaemia detected on newborn screening but, unlike classic phenylketonuria, dietary phenylalanine restriction alone does not prevent neurological deterioration because central monoamine synthesis is also impaired",
-   "BH4 is the cofactor for phenylalanine hydroxylase as well as tyrosine and tryptophan hydroxylases, so deficiency causes both elevated phenylalanine and reduced dopamine and serotonin",
-   "Untreated infants develop progressive encephalopathy with dystonia, hypotonia or hypertonia, oculogyric crises, seizures, and developmental delay despite phenylalanine control",
-   "Management combines BH4 (cofactor) supplementation to lower phenylalanine with levodopa and a serotonin precursor to replace the deficient neurotransmitters, sometimes with folinic acid",
-   "Every infant with hyperphenylalaninaemia should be evaluated for a BH4 defect (pterin profile and dihydropteridine reductase activity) so that treatable cofactor and neurotransmitter deficiencies are not missed"
+  "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency",
+  "name": "6-pyruvoyl-tetrahydropterin synthase deficiency",
+  "aliases": [
+    "PTPS deficiency",
+    "PTS gene deficiency",
+    "BH4 deficiency (PTPS type)",
+    "tetrahydrobiopterin-deficient hyperphenylalaninaemia (PTPS)"
   ],
-  "pathophysiology": "6-pyruvoyl-tetrahydropterin synthase catalyses the second step of tetrahydrobiopterin (BH4) biosynthesis. Biallelic PTS mutations reduce BH4, the obligatory cofactor for phenylalanine hydroxylase, tyrosine hydroxylase, and tryptophan hydroxylase. Consequently phenylalanine accumulates (hyperphenylalaninaemia) while central synthesis of dopamine and serotonin falls. The dual insult explains why treating the amino-acid abnormality alone is insufficient: the neurotransmitter deficiency drives a progressive movement disorder and encephalopathy. The pterin profile shows raised neopterin with low biopterin, reflecting the enzymatic block, and this pattern helps distinguish it from other BH4 defects.",
-  "additionalDifferentials": [
-   "Classic phenylketonuria (phenylalanine hydroxylase deficiency)",
-   "Dihydropteridine reductase deficiency (BH4 recycling defect)",
-   "GTP cyclohydrolase I deficiency",
-   "Sepiapterin reductase deficiency",
-   "Tyrosine hydroxylase deficiency",
-   "Other neurotransmitter disorders causing infantile dystonia and encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Urine and blood pterin profile showing raised neopterin with low biopterin",
-   "Dihydropteridine reductase activity assay (normal, to exclude the recycling defect)",
-   "Blood phenylalanine and a BH4 loading test demonstrating phenylalanine lowering",
-   "PTS gene sequencing to confirm the diagnosis",
-   "Cerebrospinal fluid neurotransmitter metabolites (low homovanillic and 5-hydroxyindoleacetic acid)",
-   "Developmental and neurological assessment with EEG if seizures occur"
-  ],
-  "redFlags": [
-   "Neurological deterioration despite adequate phenylalanine control, indicating an untreated cofactor/neurotransmitter defect",
-   "Progressive dystonia, oculogyric crises, or seizures in an infant with hyperphenylalaninaemia",
-   "Failure to screen a hyperphenylalaninaemic newborn for a BH4 disorder",
-   "Feeding and swallowing difficulty from evolving encephalopathy"
-  ],
-  "prognosis": "With early and combined treatment (cofactor supplementation plus neurotransmitter precursors) neurological outcome can be good, but delayed or incomplete therapy leads to persistent movement disorder, cognitive impairment, and disability. Lifelong specialist metabolic follow-up is required.",
-  "pitfalls": [
-   "Treating a raised phenylalanine as classic phenylketonuria without excluding a BH4 defect",
-   "Relying on phenylalanine restriction alone and neglecting the neurotransmitter deficiency",
-   "Not measuring pterins and dihydropteridine reductase activity to subtype the disorder",
-   "Under-dosing or delaying neurotransmitter-precursor therapy while focusing on amino-acid control"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Tetrahydrobiopterin cofactor supplementation with sapropterin as the mainstay to correct the hyperphenylalaninaemia, since dietary phenylalanine restriction alone does not prevent neurological deterioration.",
-   "Central neurotransmitter replacement with levodopa combined with a dopa-decarboxylase inhibitor and a serotonin precursor to restore dopamine and serotonin.",
-   "Folinic acid supplementation as an adjunct to support central folate metabolism.",
-   "Symptomatic management of the movement disorder, dystonia and any seizures.",
-   "Monitoring of blood phenylalanine, cerebrospinal fluid neurotransmitter metabolites and developmental and neurological progress.",
-   "Lifelong specialist metabolic and neurology follow-up as part of multidisciplinary care.",
-   "Genetic counselling for this autosomal recessive disorder, with confirmatory PTS testing and family screening."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-pathway",
-   "title": "6-pyruvoyl-tetrahydropterin synthase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive defect of tetrahydrobiopterin (BH4) synthesis caused by PTS mutations; it is the most common cause of BH4-deficient hyperphenylalaninaemia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological deterioration despite adequate phenylalanine control, indicating an untreated cofactor/neurotransmitter defect",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine and blood pterin profile showing raised neopterin with low biopterin, Dihydropteridine reductase activity assay (normal, to exclude the recycling defect), Blood phenylalanine and a BH4 loading test demonstrating"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Tetrahydrobiopterin cofactor supplementation with sapropterin as the mainstay to correct the hyperphenylalaninaemia, since dietary phenylalanine restriction alone does not prevent neurological deterioration."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a raised phenylalanine as classic phenylketonuria without excluding a BH4 defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of 6-pyruvoyl-tetrahydropterin synthase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-matrix",
-   "title": "6-pyruvoyl-tetrahydropterin synthase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive defect of tetrahydrobiopterin (BH4) synthesis caused by PTS mutations; it is the most common cause of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive defect of tetrahydrobiopterin (BH4) synthesis caused by PTS mutations; it is the most common cause of BH4-deficient hyperphenylalaninaemia",
+      "It presents as hyperphenylalaninaemia detected on newborn screening but, unlike classic phenylketonuria, dietary phenylalanine restriction alone does not prevent neurological deterioration because central monoamine synthesis is also impaired",
+      "BH4 is the cofactor for phenylalanine hydroxylase as well as tyrosine and tryptophan hydroxylases, so deficiency causes both elevated phenylalanine and reduced dopamine and serotonin",
+      "Untreated infants develop progressive encephalopathy with dystonia, hypotonia or hypertonia, oculogyric crises, seizures, and developmental delay despite phenylalanine control",
+      "Management combines BH4 (cofactor) supplementation to lower phenylalanine with levodopa and a serotonin precursor to replace the deficient neurotransmitters, sometimes with folinic acid",
+      "Every infant with hyperphenylalaninaemia should be evaluated for a BH4 defect (pterin profile and dihydropteridine reductase activity) so that treatable cofactor and neurotransmitter deficiencies are not missed"
     ],
-    [
-     "Key Investigations",
-     "Urine and blood pterin profile showing raised neopterin with low biopterin, Dihydropteridine reductase activity assay (normal, to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "6-pyruvoyl-tetrahydropterin synthase catalyses the second step of tetrahydrobiopterin (BH4) biosynthesis. Biallelic PTS mutations reduce BH4, the obligatory cofactor for phenylalanine hydroxylase, tyrosine hydroxylase, and tryptophan hydroxylase. Consequently phenylalanine accumulates (hyperphenylalaninaemia) while central synthesis of dopamine and serotonin falls. The dual insult explains why treating the amino-acid abnormality alone is insufficient: the neurotransmitter deficiency drives a progressive movement disorder and encephalopathy. The pterin profile shows raised neopterin with low biopterin, reflecting the enzymatic block, and this pattern helps distinguish it from other BH4 defects.",
+    "additionalDifferentials": [
+      "Classic phenylketonuria (phenylalanine hydroxylase deficiency)",
+      "Dihydropteridine reductase deficiency (BH4 recycling defect)",
+      "GTP cyclohydrolase I deficiency",
+      "Sepiapterin reductase deficiency",
+      "Tyrosine hydroxylase deficiency",
+      "Other neurotransmitter disorders causing infantile dystonia and encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Classic phenylketonuria (phenylalanine hydroxylase deficiency), Dihydropteridine reductase deficiency (BH4 recycling defect), GTP",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine and blood pterin profile showing raised neopterin with low biopterin",
+      "Dihydropteridine reductase activity assay (normal, to exclude the recycling defect)",
+      "Blood phenylalanine and a BH4 loading test demonstrating phenylalanine lowering",
+      "PTS gene sequencing to confirm the diagnosis",
+      "Cerebrospinal fluid neurotransmitter metabolites (low homovanillic and 5-hydroxyindoleacetic acid)",
+      "Developmental and neurological assessment with EEG if seizures occur"
     ],
-    [
-     "Management Strategy",
-     "Tetrahydrobiopterin cofactor supplementation with sapropterin as the mainstay to correct the hyperphenylalaninaemia, since",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological deterioration despite adequate phenylalanine control, indicating an untreated cofactor/neurotransmitter defect",
+      "Progressive dystonia, oculogyric crises, or seizures in an infant with hyperphenylalaninaemia",
+      "Failure to screen a hyperphenylalaninaemic newborn for a BH4 disorder",
+      "Feeding and swallowing difficulty from evolving encephalopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a raised phenylalanine as classic phenylketonuria without excluding a BH4 defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early and combined treatment (cofactor supplementation plus neurotransmitter precursors) neurological outcome can be good, but delayed or incomplete therapy leads to persistent movement disorder, cognitive impairment, and disability. Lifelong specialist metabolic follow-up is required.",
+    "pitfalls": [
+      "Treating a raised phenylalanine as classic phenylketonuria without excluding a BH4 defect",
+      "Relying on phenylalanine restriction alone and neglecting the neurotransmitter deficiency",
+      "Not measuring pterins and dihydropteridine reductase activity to subtype the disorder",
+      "Under-dosing or delaying neurotransmitter-precursor therapy while focusing on amino-acid control"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Tetrahydrobiopterin cofactor supplementation with sapropterin as the mainstay to correct the hyperphenylalaninaemia, since dietary phenylalanine restriction alone does not prevent neurological deterioration.",
+      "Central neurotransmitter replacement with levodopa combined with a dopa-decarboxylase inhibitor and a serotonin precursor to restore dopamine and serotonin.",
+      "Folinic acid supplementation as an adjunct to support central folate metabolism.",
+      "Symptomatic management of the movement disorder, dystonia and any seizures.",
+      "Monitoring of blood phenylalanine, cerebrospinal fluid neurotransmitter metabolites and developmental and neurological progress.",
+      "Lifelong specialist metabolic and neurology follow-up as part of multidisciplinary care.",
+      "Genetic counselling for this autosomal recessive disorder, with confirmatory PTS testing and family screening."
     ]
-   ],
-   "caption": "Overview comparison matrix for 6-pyruvoyl-tetrahydropterin synthase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "6-pyruvoyl-tetrahydropterin-synthase-deficiency-real-image",
-   "title": "6-pyruvoyl-tetrahydropterin synthase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-pathway",
+      "title": "6-pyruvoyl-tetrahydropterin synthase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive defect of tetrahydrobiopterin (BH4) synthesis caused by PTS mutations; it is the most common cause of BH4-deficient hyperphenylalaninaemia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological deterioration despite adequate phenylalanine control, indicating an untreated cofactor/neurotransmitter defect",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine and blood pterin profile showing raised neopterin with low biopterin, Dihydropteridine reductase activity assay (normal, to exclude the recycling defect), Blood phenylalanine and a BH4 loading test demonstrating"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Tetrahydrobiopterin cofactor supplementation with sapropterin as the mainstay to correct the hyperphenylalaninaemia, since dietary phenylalanine restriction alone does not prevent neurological deterioration."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a raised phenylalanine as classic phenylketonuria without excluding a BH4 defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of 6-pyruvoyl-tetrahydropterin synthase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-matrix",
+      "title": "6-pyruvoyl-tetrahydropterin synthase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive defect of tetrahydrobiopterin (BH4) synthesis caused by PTS mutations; it is the most common cause of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine and blood pterin profile showing raised neopterin with low biopterin, Dihydropteridine reductase activity assay (normal, to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic phenylketonuria (phenylalanine hydroxylase deficiency), Dihydropteridine reductase deficiency (BH4 recycling defect), GTP",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Tetrahydrobiopterin cofactor supplementation with sapropterin as the mainstay to correct the hyperphenylalaninaemia, since",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a raised phenylalanine as classic phenylketonuria without excluding a BH4 defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for 6-pyruvoyl-tetrahydropterin synthase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine and blood pterin profile",
+          "cells": [
+            {
+              "text": "Raised neopterin with low biopterin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dihydropteridine reductase activity assay",
+          "cells": [
+            {
+              "text": "Normal, excluding the recycling defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood phenylalanine with BH4 loading test",
+          "cells": [
+            {
+              "text": "Phenylalanine lowering after loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PTS gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF neurotransmitter metabolites",
+          "cells": [
+            {
+              "text": "Low homovanillic and 5-hydroxyindoleacetic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological assessment, EEG if seizures",
+          "cells": [
+            {
+              "text": "Neurological and developmental status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic phenylketonuria",
+          "cells": [
+            {
+              "text": "Dietary phenylalanine restriction alone prevents neurological deterioration"
+            },
+            {
+              "text": "Pterin profile excludes a BH4 defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dihydropteridine reductase deficiency",
+          "cells": [
+            {
+              "text": "BH4 recycling defect"
+            },
+            {
+              "text": "DHPR activity assay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose"
+      ],
+      "rows": [
+        {
+          "parameter": "Tetrahydrobiopterin supplementation with sapropterin",
+          "cells": [
+            {
+              "text": "Mainstay to correct hyperphenylalaninaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa with a dopa-decarboxylase inhibitor and a serotonin precursor",
+          "cells": [
+            {
+              "text": "Restores dopamine and serotonin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folinic acid",
+          "cells": [
+            {
+              "text": "Adjunct supporting central folate metabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment of dystonia and seizures",
+          "cells": [
+            {
+              "text": "Movement disorder and seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of phenylalanine, CSF neurotransmitters and development",
+          "cells": [
+            {
+              "text": "Tracks treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong specialist metabolic and neurology follow-up",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; PTS testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of 6-pyruvoyl-tetrahydropterin synthase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperphenylalaninaemia on newborn screen with dystonia or oculogyric crises",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological deterioration despite phenylalanine control?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate for BH4 defect work-up; diet alone is not enough",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine and blood pterins, DHPR activity and BH4 loading test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised neopterin, low biopterin and normal DHPR confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Sequence PTS and start sapropterin (BH4 cofactor) replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials: classic PKU, DHPR and GTP cyclohydrolase I",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levodopa with a dopa-decarboxylase inhibitor and serotonin precursor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Folinic acid adjunct; treat dystonia and seizures symptomatically",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor phenylalanine, CSF neurotransmitters and development",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early combined treatment gives good outcome; delay causes lasting disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -230,5 +230,512 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Subarachnoid Hemorrhage",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/stroke/subarachnoid-hemorrhage-sah",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "emDOCs summary of Neurocritical Care Society aSAH guideline, 2023",
+      "url": "https://www.emdocs.net/neurocritical-care-society-aneurysmal-sah-guidelines/",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "MedlinePlus, Nimodipine drug information",
+      "url": "https://medlineplus.gov/druginfo/meds/a689010.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sah-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and grading subarachnoid haemorrhage",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Headache onset",
+          "cells": [
+            {
+              "text": "Abrupt, thunderclap onset"
+            },
+            {
+              "text": "{{hy:Sudden onset matters more than severity}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient loss of consciousness at onset",
+          "cells": [
+            {
+              "text": "Nearly half of patients"
+            },
+            {
+              "text": "Reflects abrupt ICP rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-contrast CT within 6 h",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Within 6 h of onset",
+              "op": "<=",
+              "value": 6
+            },
+            {
+              "text": "Very high sensitivity; negative CT with normal exam and no anaemia needs no further test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-contrast CT within 72 h",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Detects over 95% of cases",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Sensitivity falls with time from ictus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture",
+          "cells": [
+            {
+              "text": "Numerous RBCs not falling across tubes, xanthochromia, raised pressure"
+            },
+            {
+              "text": "Use when CT negative or unavailable; avoid if raised ICP suspected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Xanthochromia timing",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Appears at 6 to 12 h, peaks about 48 h, lasts 1 to 4 weeks",
+              "range": [
+                6,
+                12
+              ]
+            },
+            {
+              "text": "Very early LP may miss it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vessel imaging",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "CTA or 4-vessel angiography; multiple aneurysms in up to 20%"
+            },
+            {
+              "text": "Catheter angiography is gold standard"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hunt-Hess grade",
+          "cells": [
+            {
+              "text": "1 (minimal headache) to 5 (coma, posturing)",
+              "range": [
+                1,
+                5
+              ]
+            },
+            {
+              "text": "Higher grade predicts worse outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "WFNS grade",
+          "cells": [
+            {
+              "text": "1 (GCS 15, no motor deficit) to 5 (GCS 3 to 6)",
+              "range": [
+                1,
+                5
+              ]
+            },
+            {
+              "text": "Based on GCS and motor deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modified Fisher CT grade",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Grade 0 to 4; vasospasm risk 0% to about 40%",
+              "range": [
+                0,
+                40
+              ]
+            },
+            {
+              "text": "Thick blood (1 mm or more) and intraventricular blood raise risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "ST changes, long QT, peaked or deep T inversion"
+            },
+            {
+              "text": "Neurogenic; troponin rise common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sah-ddx",
+      "kind": "ddx",
+      "title": "Causes of thunderclap headache and SAH mimics",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Reversible cerebral vasoconstriction syndrome",
+          "cells": [
+            {
+              "text": "Recurrent thunderclap headaches; many otherwise unexplained cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervicocephalic arterial dissection",
+          "cells": [
+            {
+              "text": "Thunderclap headache with neck pain; vessel imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral venous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Thunderclap headache cause; venous imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruptured arteriovenous malformation",
+          "cells": [
+            {
+              "text": "Blood mainly intraparenchymal, not basal cisterns; vasospasm rare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perimesencephalic (non-aneurysmal) SAH",
+          "cells": [
+            {
+              "text": "Blood confined to perimesencephalic cisterns; angiogram normal; benign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic lumbar puncture",
+          "cells": [
+            {
+              "text": "RBC count falls across sequential tubes; no xanthochromia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "sah-treatment",
+      "kind": "treatment",
+      "title": "Management of aneurysmal SAH",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transfer to a comprehensive stroke or aSAH centre",
+          "cells": [
+            {
+              "text": "All confirmed aSAH"
+            },
+            {
+              "text": "Bed rest, stool softeners"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secure the aneurysm (coiling or clipping)",
+          "cells": [
+            {
+              "text": "{{hy:Early, most within 24 h}}"
+            },
+            {
+              "text": "Rebleeding most often within 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood pressure control (IV nicardipine)",
+          "cells": [
+            {
+              "text": "MAP over 130 or SBP over 160 mm Hg"
+            },
+            {
+              "text": "Maintain MAP 70 to 130, SBP 120 to 185 mm Hg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral nimodipine",
+          "cells": [
+            {
+              "text": "All aSAH, start within 96 h"
+            },
+            {
+              "text": "Usually every 4 h for 21 days; never give intravenously"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Euvolaemia",
+          "cells": [
+            {
+              "text": "Throughout"
+            },
+            {
+              "text": "Avoid hypervolaemia; do not fluid-restrict for hyponatraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventricular drain",
+          "cells": [
+            {
+              "text": "Acute hydrocephalus"
+            },
+            {
+              "text": "Consider with clinical signs"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antifibrinolytics, anticoagulants, antiplatelets",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Antifibrinolytics do not improve outcome"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Monitor for delayed cerebral ischaemia",
+          "cells": [
+            {
+              "text": "Days 4 to 14"
+            },
+            {
+              "text": "Transcranial Doppler, daily sodium, CT perfusion if deficit"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Blood pressure: Merck gives treatment thresholds (MAP over 130 or SBP over 160 mm Hg), while the 2023 Neurocritical Care Society guideline finds insufficient evidence for a specific pre-securing target. Vasospasm window: Merck 72 h to 10 days; Harrison 4 to 14 days. The nimodipine mg dose was not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sah-dx-mgmt",
+      "title": "Diagnosis and management of subarachnoid haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden severe (thunderclap) headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urgent non-contrast CT head",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Blood on CT?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "CT within 6 h, normal exam, no anaemia?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "SAH effectively excluded; consider other thunderclap causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lumbar puncture for RBCs and xanthochromia",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Xanthochromia or non-clearing RBCs?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CTA or 4-vessel angiography; grade with Hunt-Hess or WFNS",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transfer to aSAH centre; BP control, oral nimodipine, euvolaemia",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Secure aneurysm early, usually within 24 h",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor for vasospasm, hydrocephalus, hyponatraemia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Aneurysm found"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
   ]
 }

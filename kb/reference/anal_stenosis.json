@@ -1,177 +1,529 @@
 {
- "id": "anal_stenosis",
- "name": "Anal stenosis",
- "aliases": [
-  "anal stricture",
-  "anal canal narrowing"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal / Anorectal",
- "specialty": "Colorectal surgery / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Anal stenosis is pathological narrowing of the anal canal with loss of its normal elasticity, most often an anatomical (cicatricial) narrowing due to fibrous scar replacing pliable anoderm",
-   "The commonest cause is overzealous excisional haemorrhoidectomy with excessive removal of anoderm; other causes include chronic fissure, inflammatory bowel disease, radiation, trauma, and chronic laxative-associated changes",
-   "Typical symptoms are difficult and painful defecation, thin or pencil-like stools, straining, incomplete evacuation, and bleeding from mucosal splitting",
-   "A functional narrowing due to sphincter spasm (as in chronic fissure) must be distinguished from true anatomical stenosis with fibrosis, as management differs",
-   "Severity is graded by the calibre achievable on examination and whether an examining finger or instrument passes; examination may require anaesthesia",
-   "Mild stenosis often responds to stool bulking, softeners, and dilatation; moderate to severe fibrotic stenosis requires operative correction",
-   "Surgical options include internal sphincterotomy for a tight functional element and anoplasty with advancement or island flaps to introduce healthy tissue and widen the canal",
-   "Inflammatory or neoplastic causes must be excluded by biopsy before attributing stenosis to benign scarring, particularly when there is no clear surgical history"
+  "id": "anal_stenosis",
+  "name": "Anal stenosis",
+  "aliases": [
+    "anal stricture",
+    "anal canal narrowing"
   ],
-  "pathophysiology": "Anal stenosis results from replacement of the elastic, pliable anoderm and mucosa of the anal canal by inelastic fibrous scar, or from fixed narrowing due to inflammatory or neoplastic infiltration. After excisional haemorrhoidectomy or other anal surgery, excessive removal of anoderm leaves broad raw areas that heal by scar contracture, drawing the canal into a rigid, narrowed ring. Chronic anal fissure, Crohn disease, tuberculosis, radiation injury, and chronic dermatoses similarly provoke fibrosis and loss of compliance. The narrowed, non-distensible canal obstructs the passage of stool, causing straining, painful defecation, and mucosal splitting; secondary constipation and stool withholding compound the problem, and any residual sphincter spasm further reduces the effective luminal calibre.",
-  "additionalDifferentials": [
-   "Functional anal narrowing from chronic fissure with sphincter spasm",
-   "Anorectal Crohn disease with stricturing",
-   "Anal or low rectal carcinoma causing luminal narrowing",
-   "Radiation proctitis or radiation-induced stricture",
-   "Post-inflammatory stricture from lymphogranuloma venereum or other infection",
-   "Congenital anal stenosis in younger patients",
-   "Rectal stricture from ischaemia or anastomotic scarring"
-  ],
-  "additionalInvestigations": [
-   "Careful inspection and gentle digital examination to assess calibre and pliability",
-   "Examination under anaesthesia when pain precludes adequate assessment",
-   "Proctosigmoidoscopy to inspect above the stenosis",
-   "Biopsy of the narrowed segment to exclude Crohn disease, infection, or malignancy",
-   "Endoanal ultrasound or pelvic MRI where the cause or extent is unclear",
-   "Assessment of sphincter function and continence before planning surgery"
-  ],
-  "redFlags": [
-   "An indurated or ulcerated stricture suggesting malignancy",
-   "Stenosis without prior anal surgery, prompting a search for inflammatory or neoplastic causes",
-   "Progressive obstruction or inability to pass stool",
-   "Associated fistula, abscess, or perianal Crohn features",
-   "Bleeding or discharge disproportionate to a benign scar"
-  ],
-  "prognosis": "Mild anal stenosis often responds well to conservative measures and dilatation, while moderate to severe fibrotic stenosis generally requires anoplasty, which gives good results in experienced hands; outcomes are poorer and recurrence more likely when the underlying cause, such as Crohn disease or radiation, is ongoing.",
-  "pitfalls": [
-   "Confusing a functional spasm-related narrowing with true fibrotic stenosis and mismanaging it",
-   "Attempting forceful dilatation of dense fibrotic stenosis, causing tearing and incontinence",
-   "Failing to biopsy an atypical stricture and missing Crohn disease or malignancy",
-   "Performing sphincterotomy alone when tissue deficiency requires flap anoplasty",
-   "Removing too much anoderm at the index haemorrhoid operation, which is the commonest preventable cause"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Association of Coloproctology of Great Britain and Ireland guidance on benign anorectal disease",
-   "Standard coloproctology reference texts on anoplasty and anal stenosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Distinguish functional narrowing from sphincter spasm from true anatomical fibrotic stenosis, as management differs",
-   "Treat mild stenosis conservatively with stool bulking agents, softeners, adequate fibre and gentle dilatation",
-   "Relax a functional spasm-related narrowing with a topical internal-sphincter relaxant",
-   "Correct moderate to severe fibrotic stenosis surgically with anoplasty using flap techniques",
-   "Treat any underlying cause such as Crohn disease or radiation injury, which worsens outcome and recurrence",
-   "Biopsy the narrowed segment to exclude Crohn disease, infection or malignancy",
-   "Assess sphincter function and continence before planning operative correction"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anal_stenosis-pathway",
-   "title": "Anal stenosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Anal stenosis is pathological narrowing of the anal canal with loss of its normal elasticity, most often an anatomical (cicatricial) narrowing due to fibrous scar replacing pliable anoderm",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An indurated or ulcerated stricture suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful inspection and gentle digital examination to assess calibre and pliability, Examination under anaesthesia when pain precludes adequate assessment, Proctosigmoidoscopy to inspect above the stenosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Distinguish functional narrowing from sphincter spasm from true anatomical fibrotic stenosis, as management differs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a functional spasm-related narrowing with true fibrotic stenosis and mismanaging it"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anal stenosis."
-  }
- ],
- "tables": [
-  {
-   "id": "anal_stenosis-matrix",
-   "title": "Anal stenosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Anal stenosis is pathological narrowing of the anal canal with loss of its normal elasticity, most often an anatomical",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal / Anorectal",
+  "specialty": "Colorectal surgery / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Anal stenosis is pathological narrowing of the anal canal with loss of its normal elasticity, most often an anatomical (cicatricial) narrowing due to fibrous scar replacing pliable anoderm",
+      "The commonest cause is overzealous excisional haemorrhoidectomy with excessive removal of anoderm; other causes include chronic fissure, inflammatory bowel disease, radiation, trauma, and chronic laxative-associated changes",
+      "Typical symptoms are difficult and painful defecation, thin or pencil-like stools, straining, incomplete evacuation, and bleeding from mucosal splitting",
+      "A functional narrowing due to sphincter spasm (as in chronic fissure) must be distinguished from true anatomical stenosis with fibrosis, as management differs",
+      "Severity is graded by the calibre achievable on examination and whether an examining finger or instrument passes; examination may require anaesthesia",
+      "Mild stenosis often responds to stool bulking, softeners, and dilatation; moderate to severe fibrotic stenosis requires operative correction",
+      "Surgical options include internal sphincterotomy for a tight functional element and anoplasty with advancement or island flaps to introduce healthy tissue and widen the canal",
+      "Inflammatory or neoplastic causes must be excluded by biopsy before attributing stenosis to benign scarring, particularly when there is no clear surgical history"
     ],
-    [
-     "Key Investigations",
-     "Careful inspection and gentle digital examination to assess calibre and pliability, Examination under anaesthesia when pain",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Anal stenosis results from replacement of the elastic, pliable anoderm and mucosa of the anal canal by inelastic fibrous scar, or from fixed narrowing due to inflammatory or neoplastic infiltration. After excisional haemorrhoidectomy or other anal surgery, excessive removal of anoderm leaves broad raw areas that heal by scar contracture, drawing the canal into a rigid, narrowed ring. Chronic anal fissure, Crohn disease, tuberculosis, radiation injury, and chronic dermatoses similarly provoke fibrosis and loss of compliance. The narrowed, non-distensible canal obstructs the passage of stool, causing straining, painful defecation, and mucosal splitting; secondary constipation and stool withholding compound the problem, and any residual sphincter spasm further reduces the effective luminal calibre.",
+    "additionalDifferentials": [
+      "Functional anal narrowing from chronic fissure with sphincter spasm",
+      "Anorectal Crohn disease with stricturing",
+      "Anal or low rectal carcinoma causing luminal narrowing",
+      "Radiation proctitis or radiation-induced stricture",
+      "Post-inflammatory stricture from lymphogranuloma venereum or other infection",
+      "Congenital anal stenosis in younger patients",
+      "Rectal stricture from ischaemia or anastomotic scarring"
     ],
-    [
-     "Primary Differentials",
-     "Functional anal narrowing from chronic fissure with sphincter spasm, Anorectal Crohn disease with stricturing, Anal or low rectal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful inspection and gentle digital examination to assess calibre and pliability",
+      "Examination under anaesthesia when pain precludes adequate assessment",
+      "Proctosigmoidoscopy to inspect above the stenosis",
+      "Biopsy of the narrowed segment to exclude Crohn disease, infection, or malignancy",
+      "Endoanal ultrasound or pelvic MRI where the cause or extent is unclear",
+      "Assessment of sphincter function and continence before planning surgery"
     ],
-    [
-     "Management Strategy",
-     "Distinguish functional narrowing from sphincter spasm from true anatomical fibrotic stenosis, as management differs",
-     "Core treatment modality"
+    "redFlags": [
+      "An indurated or ulcerated stricture suggesting malignancy",
+      "Stenosis without prior anal surgery, prompting a search for inflammatory or neoplastic causes",
+      "Progressive obstruction or inability to pass stool",
+      "Associated fistula, abscess, or perianal Crohn features",
+      "Bleeding or discharge disproportionate to a benign scar"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a functional spasm-related narrowing with true fibrotic stenosis and mismanaging it",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mild anal stenosis often responds well to conservative measures and dilatation, while moderate to severe fibrotic stenosis generally requires anoplasty, which gives good results in experienced hands; outcomes are poorer and recurrence more likely when the underlying cause, such as Crohn disease or radiation, is ongoing.",
+    "pitfalls": [
+      "Confusing a functional spasm-related narrowing with true fibrotic stenosis and mismanaging it",
+      "Attempting forceful dilatation of dense fibrotic stenosis, causing tearing and incontinence",
+      "Failing to biopsy an atypical stricture and missing Crohn disease or malignancy",
+      "Performing sphincterotomy alone when tissue deficiency requires flap anoplasty",
+      "Removing too much anoderm at the index haemorrhoid operation, which is the commonest preventable cause"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Association of Coloproctology of Great Britain and Ireland guidance on benign anorectal disease",
+      "Standard coloproctology reference texts on anoplasty and anal stenosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Distinguish functional narrowing from sphincter spasm from true anatomical fibrotic stenosis, as management differs",
+      "Treat mild stenosis conservatively with stool bulking agents, softeners, adequate fibre and gentle dilatation",
+      "Relax a functional spasm-related narrowing with a topical internal-sphincter relaxant",
+      "Correct moderate to severe fibrotic stenosis surgically with anoplasty using flap techniques",
+      "Treat any underlying cause such as Crohn disease or radiation injury, which worsens outcome and recurrence",
+      "Biopsy the narrowed segment to exclude Crohn disease, infection or malignancy",
+      "Assess sphincter function and continence before planning operative correction"
     ]
-   ],
-   "caption": "Overview comparison matrix for anal stenosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anal-stenosis-real-image",
-   "title": "Anal stenosis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "anal_stenosis-pathway",
+      "title": "Anal stenosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Anal stenosis is pathological narrowing of the anal canal with loss of its normal elasticity, most often an anatomical (cicatricial) narrowing due to fibrous scar replacing pliable anoderm",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An indurated or ulcerated stricture suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful inspection and gentle digital examination to assess calibre and pliability, Examination under anaesthesia when pain precludes adequate assessment, Proctosigmoidoscopy to inspect above the stenosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Distinguish functional narrowing from sphincter spasm from true anatomical fibrotic stenosis, as management differs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a functional spasm-related narrowing with true fibrotic stenosis and mismanaging it"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anal stenosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anal_stenosis-matrix",
+      "title": "Anal stenosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Anal stenosis is pathological narrowing of the anal canal with loss of its normal elasticity, most often an anatomical",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful inspection and gentle digital examination to assess calibre and pliability, Examination under anaesthesia when pain",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Functional anal narrowing from chronic fissure with sphincter spasm, Anorectal Crohn disease with stricturing, Anal or low rectal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Distinguish functional narrowing from sphincter spasm from true anatomical fibrotic stenosis, as management differs",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a functional spasm-related narrowing with true fibrotic stenosis and mismanaging it",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anal stenosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anal_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Inspection and gentle digital examination of calibre and pliability",
+          "cells": [
+            {
+              "text": "Fibrotic narrowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Pain precludes assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proctosigmoidoscopy above the stenosis",
+          "cells": [
+            {
+              "text": "Proximal pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of the narrowed segment",
+          "cells": [
+            {
+              "text": "Crohn disease, infection or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoanal ultrasound or pelvic MRI",
+          "cells": [
+            {
+              "text": "Cause and extent unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sphincter function and continence assessment",
+          "cells": [
+            {
+              "text": "Before surgical planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional narrowing from chronic fissure with sphincter spasm",
+          "cells": [
+            {
+              "text": "Spasm without fibrosis"
+            },
+            {
+              "text": "Examination under anaesthesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal Crohn disease with stricturing",
+          "cells": [
+            {
+              "text": "Stricture without prior surgery"
+            },
+            {
+              "text": "Biopsy and endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal or low rectal carcinoma",
+          "cells": [
+            {
+              "text": "Indurated narrowing"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiation proctitis or radiation-induced stricture",
+          "cells": [
+            {
+              "text": "Prior pelvic radiotherapy"
+            },
+            {
+              "text": "History and endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-inflammatory stricture from lymphogranuloma venereum",
+          "cells": [
+            {
+              "text": "Infective history"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital anal stenosis",
+          "cells": [
+            {
+              "text": "Younger patient"
+            },
+            {
+              "text": "Clinical review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool bulking agents, softeners, fibre and gentle dilatation",
+          "cells": [
+            {
+              "text": "Mild stenosis"
+            },
+            {
+              "text": "Conservative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical internal-sphincter relaxant",
+          "cells": [
+            {
+              "text": "Spasm-related narrowing"
+            },
+            {
+              "text": "Functional component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anoplasty with flap techniques",
+          "cells": [
+            {
+              "text": "Moderate to severe fibrotic stenosis"
+            },
+            {
+              "text": "Surgical correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of underlying Crohn disease or radiation injury",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            },
+            {
+              "text": "Improves outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of the narrowed segment",
+          "cells": [
+            {
+              "text": "Exclusion of Crohn, infection or malignancy"
+            },
+            {
+              "text": "Diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continence assessment before operative correction",
+          "cells": [
+            {
+              "text": "Sphincter function"
+            },
+            {
+              "text": "Pre-operative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anal_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of Anal stenosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Narrow painful defaecation with pencil-thin stools and straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Indurated or ulcerated stricture, or stenosis without prior anal surgery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent colorectal review if malignancy suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Digital examination; EUA if needed; proctoscopy; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fibrotic stenosis after surgery, not spasm alone?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Bulking agents, softeners and gentle dilatation for mild cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review fissure spasm, Crohn, carcinoma and radiation stricture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical sphincter relaxant for functional component",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anoplasty with flap for moderate to severe fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat Crohn or radiation injury as the underlying cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild cases respond; poorer results when underlying cause persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,178 +1,244 @@
 {
- "id": "bladder_pain_syndrome",
- "name": "Bladder pain syndrome",
- "aliases": [
-  "Interstitial cystitis",
-  "Painful bladder syndrome",
-  "IC/BPS"
- ],
- "class": "non_infective",
- "system": "Genitourinary",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Bladder pain syndrome is chronic pelvic pain, pressure or discomfort perceived to relate to the bladder, accompanied by urinary frequency and urgency, in the absence of infection or other identifiable cause.",
-   "The defining feature that distinguishes it from overactive bladder is pain or discomfort that worsens with bladder filling and is relieved, at least transiently, by voiding.",
-   "It is a diagnosis of exclusion requiring confident elimination of infection, malignancy, carcinoma in situ, stones and other treatable pelvic pathology.",
-   "Cystoscopy with hydrodistension identifies a phenotype with Hunner lesions, which behaves differently and responds to lesion-directed treatment, distinct from the non-Hunner phenotype.",
-   "Glomerulations after hydrodistension are non-specific and are not sufficient alone to confirm the diagnosis.",
-   "It frequently overlaps with other chronic pain and functional conditions such as fibromyalgia, irritable bowel syndrome and chronic pelvic pain, favouring a multidisciplinary approach.",
-   "Management is stepwise: education, dietary and stress modification, pelvic floor physical therapy and oral agents, escalating to intravesical therapy, and reserving major surgery for refractory disease.",
-   "Long courses of empirical antibiotics are inappropriate once infection has been excluded and should be avoided."
+  "id": "bladder_pain_syndrome",
+  "name": "Bladder pain syndrome",
+  "aliases": [
+    "Interstitial cystitis",
+    "Painful bladder syndrome",
+    "IC/BPS"
   ],
-  "pathophysiology": "Bladder pain syndrome is understood as a multifactorial disorder rather than a single disease, with several interacting mechanisms proposed. A defective urothelial glycosaminoglycan layer is thought to increase urothelial permeability, allowing urinary potassium and other solutes to penetrate the bladder wall and irritate sensory nerves and detrusor muscle. Mast cell activation and neurogenic inflammation amplify the response, while peripheral and central sensitisation of afferent pathways lowers the pain threshold and helps explain the frequent overlap with other chronic pain syndromes. In the Hunner lesion phenotype there is a distinct picture of localised chronic inflammation with epithelial denudation and a dense inflammatory infiltrate. Reduced functional bladder capacity, autoimmune and microvascular contributions, and psychosocial factors that modulate pain perception are also implicated. No single mechanism accounts for all cases, and the clinical presentation reflects a combination of bladder-centred and systemic processes.",
-  "additionalDifferentials": [
-   "Recurrent or chronic urinary tract infection",
-   "Carcinoma in situ of the bladder",
-   "Overactive bladder without pain",
-   "Endometriosis and other gynaecological pelvic pain",
-   "Bladder calculus or foreign body",
-   "Radiation or ketamine-associated cystitis",
-   "Pelvic floor myofascial pain and chronic pelvic pain syndrome"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis and culture, including tests for fastidious organisms where indicated",
-   "Urine cytology to help exclude carcinoma in situ",
-   "Frequency-volume bladder diary documenting small voided volumes",
-   "Cystoscopy with hydrodistension to identify Hunner lesions and capacity",
-   "Bladder biopsy where malignancy or Hunner lesion needs confirmation",
-   "Validated symptom and pain questionnaires",
-   "Pelvic imaging or gynaecological assessment to exclude other pelvic pathology"
-  ],
-  "redFlags": [
-   "Visible haematuria requiring exclusion of malignancy",
-   "Positive or suspicious urine cytology suggesting carcinoma in situ",
-   "A history of pelvic irradiation or ketamine use pointing to a specific cystitis",
-   "Sterile pyuria that may indicate genitourinary tuberculosis",
-   "Rapidly worsening symptoms or systemic features atypical for the syndrome"
-  ],
-  "prognosis": "Bladder pain syndrome is typically chronic and relapsing, and most patients require ongoing, individualised management rather than achieving cure; symptom control and preserved quality of life are realistic goals. The Hunner lesion phenotype often responds well to lesion-directed treatment, whereas widespread central sensitisation predicts a more refractory course.",
-  "pitfalls": [
-   "Diagnosing the syndrome without adequately excluding infection, malignancy and carcinoma in situ",
-   "Missing a treatable Hunner lesion by omitting cystoscopy in a patient with persistent pain",
-   "Over-relying on non-specific glomerulations to confirm the diagnosis",
-   "Prescribing repeated empirical antibiotic courses after infection has been excluded",
-   "Neglecting pelvic floor dysfunction and coexisting chronic pain conditions that need concurrent treatment"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology, current edition",
-   "European Association of Urology Guidelines on chronic pelvic pain",
-   "American Urological Association Guideline on interstitial cystitis / bladder pain syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "A stepwise, phenotype-directed approach beginning with conservative measures — dietary modification, bladder training, stress management and pelvic-floor physiotherapy",
-   "Oral agents such as amitriptyline, pentosan polysulfate or antihistamines for symptom control",
-   "Intravesical instillation therapy, for example lidocaine, dimethyl sulfoxide or glycosaminoglycan-replacement agents, for refractory bladder symptoms",
-   "Lesion-directed treatment of Hunner lesions by fulguration, resection or intralesional corticosteroid injection",
-   "Escalate refractory disease to neuromodulation, intradetrusor botulinum toxin, immunomodulation with ciclosporin, or rarely reconstructive or cystectomy surgery",
-   "Manage overlapping chronic pain and functional conditions and analgesia within a multidisciplinary framework"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bladder_pain_syndrome-pathway",
-   "title": "Bladder pain syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Bladder pain syndrome is chronic pelvic pain, pressure or discomfort perceived to relate to the bladder, accompanied by urinary frequency and urgency, in the absence of infection or other identifiable cause.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Visible haematuria requiring exclusion of malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis and culture, including tests for fastidious organisms where indicated, Urine cytology to help exclude carcinoma in situ, Frequency-volume bladder diary documenting small voided volumes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: A stepwise, phenotype-directed approach beginning with conservative measures - dietary modification, bladder training, stress management and pelvic-floor physiotherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing the syndrome without adequately excluding infection, malignancy and carcinoma in situ"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bladder pain syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "bladder_pain_syndrome-matrix",
-   "title": "Bladder pain syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Bladder pain syndrome is chronic pelvic pain, pressure or discomfort perceived to relate to the bladder, accompanied by urinary",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Bladder pain syndrome is chronic pelvic pain, pressure or discomfort perceived to relate to the bladder, accompanied by urinary frequency and urgency, in the absence of infection or other identifiable cause.",
+      "The defining feature that distinguishes it from overactive bladder is pain or discomfort that worsens with bladder filling and is relieved, at least transiently, by voiding.",
+      "It is a diagnosis of exclusion requiring confident elimination of infection, malignancy, carcinoma in situ, stones and other treatable pelvic pathology.",
+      "Cystoscopy with hydrodistension identifies a phenotype with Hunner lesions, which behaves differently and responds to lesion-directed treatment, distinct from the non-Hunner phenotype.",
+      "Glomerulations after hydrodistension are non-specific and are not sufficient alone to confirm the diagnosis.",
+      "It frequently overlaps with other chronic pain and functional conditions such as fibromyalgia, irritable bowel syndrome and chronic pelvic pain, favouring a multidisciplinary approach.",
+      "Management is stepwise: education, dietary and stress modification, pelvic floor physical therapy and oral agents, escalating to intravesical therapy, and reserving major surgery for refractory disease.",
+      "Long courses of empirical antibiotics are inappropriate once infection has been excluded and should be avoided."
     ],
-    [
-     "Key Investigations",
-     "Urinalysis and culture, including tests for fastidious organisms where indicated, Urine cytology to help exclude carcinoma in",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bladder pain syndrome is understood as a multifactorial disorder rather than a single disease, with several interacting mechanisms proposed. A defective urothelial glycosaminoglycan layer is thought to increase urothelial permeability, allowing urinary potassium and other solutes to penetrate the bladder wall and irritate sensory nerves and detrusor muscle. Mast cell activation and neurogenic inflammation amplify the response, while peripheral and central sensitisation of afferent pathways lowers the pain threshold and helps explain the frequent overlap with other chronic pain syndromes. In the Hunner lesion phenotype there is a distinct picture of localised chronic inflammation with epithelial denudation and a dense inflammatory infiltrate. Reduced functional bladder capacity, autoimmune and microvascular contributions, and psychosocial factors that modulate pain perception are also implicated. No single mechanism accounts for all cases, and the clinical presentation reflects a combination of bladder-centred and systemic processes.",
+    "additionalDifferentials": [
+      "Recurrent or chronic urinary tract infection",
+      "Carcinoma in situ of the bladder",
+      "Overactive bladder without pain",
+      "Endometriosis and other gynaecological pelvic pain",
+      "Bladder calculus or foreign body",
+      "Radiation or ketamine-associated cystitis",
+      "Pelvic floor myofascial pain and chronic pelvic pain syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Recurrent or chronic urinary tract infection, Carcinoma in situ of the bladder, Overactive bladder without pain",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis and culture, including tests for fastidious organisms where indicated",
+      "Urine cytology to help exclude carcinoma in situ",
+      "Frequency-volume bladder diary documenting small voided volumes",
+      "Cystoscopy with hydrodistension to identify Hunner lesions and capacity",
+      "Bladder biopsy where malignancy or Hunner lesion needs confirmation",
+      "Validated symptom and pain questionnaires",
+      "Pelvic imaging or gynaecological assessment to exclude other pelvic pathology"
     ],
-    [
-     "Management Strategy",
-     "A stepwise, phenotype-directed approach beginning with conservative measures - dietary modification, bladder training, stress",
-     "Core treatment modality"
+    "redFlags": [
+      "Visible haematuria requiring exclusion of malignancy",
+      "Positive or suspicious urine cytology suggesting carcinoma in situ",
+      "A history of pelvic irradiation or ketamine use pointing to a specific cystitis",
+      "Sterile pyuria that may indicate genitourinary tuberculosis",
+      "Rapidly worsening symptoms or systemic features atypical for the syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing the syndrome without adequately excluding infection, malignancy and carcinoma in situ",
-     "Prevent diagnostic or management error"
+    "prognosis": "Bladder pain syndrome is typically chronic and relapsing, and most patients require ongoing, individualised management rather than achieving cure; symptom control and preserved quality of life are realistic goals. The Hunner lesion phenotype often responds well to lesion-directed treatment, whereas widespread central sensitisation predicts a more refractory course.",
+    "pitfalls": [
+      "Diagnosing the syndrome without adequately excluding infection, malignancy and carcinoma in situ",
+      "Missing a treatable Hunner lesion by omitting cystoscopy in a patient with persistent pain",
+      "Over-relying on non-specific glomerulations to confirm the diagnosis",
+      "Prescribing repeated empirical antibiotic courses after infection has been excluded",
+      "Neglecting pelvic floor dysfunction and coexisting chronic pain conditions that need concurrent treatment"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology, current edition",
+      "European Association of Urology Guidelines on chronic pelvic pain",
+      "American Urological Association Guideline on interstitial cystitis / bladder pain syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "A stepwise, phenotype-directed approach beginning with conservative measures — dietary modification, bladder training, stress management and pelvic-floor physiotherapy",
+      "Oral agents such as amitriptyline, pentosan polysulfate or antihistamines for symptom control",
+      "Intravesical instillation therapy, for example lidocaine, dimethyl sulfoxide or glycosaminoglycan-replacement agents, for refractory bladder symptoms",
+      "Lesion-directed treatment of Hunner lesions by fulguration, resection or intralesional corticosteroid injection",
+      "Escalate refractory disease to neuromodulation, intradetrusor botulinum toxin, immunomodulation with ciclosporin, or rarely reconstructive or cystectomy surgery",
+      "Manage overlapping chronic pain and functional conditions and analgesia within a multidisciplinary framework"
     ]
-   ],
-   "caption": "Overview comparison matrix for bladder pain syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bladder-pain-syndrome-real-image",
-   "title": "Bladder pain syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "bladder_pain_syndrome-pathway",
+      "title": "Bladder pain syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Bladder pain syndrome is chronic pelvic pain, pressure or discomfort perceived to relate to the bladder, accompanied by urinary frequency and urgency, in the absence of infection or other identifiable cause.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Visible haematuria requiring exclusion of malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis and culture, including tests for fastidious organisms where indicated, Urine cytology to help exclude carcinoma in situ, Frequency-volume bladder diary documenting small voided volumes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: A stepwise, phenotype-directed approach beginning with conservative measures - dietary modification, bladder training, stress management and pelvic-floor physiotherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing the syndrome without adequately excluding infection, malignancy and carcinoma in situ"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bladder pain syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bladder_pain_syndrome-matrix",
+      "title": "Bladder pain syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Bladder pain syndrome is chronic pelvic pain, pressure or discomfort perceived to relate to the bladder, accompanied by urinary",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis and culture, including tests for fastidious organisms where indicated, Urine cytology to help exclude carcinoma in",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Recurrent or chronic urinary tract infection, Carcinoma in situ of the bladder, Overactive bladder without pain",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "A stepwise, phenotype-directed approach beginning with conservative measures - dietary modification, bladder training, stress",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing the syndrome without adequately excluding infection, malignancy and carcinoma in situ",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bladder pain syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bladder_pain_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in bladder pain syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Urinalysis and culture", "cells": [{"text": "Excludes infection, including fastidious organisms where indicated"}], "cite": "c1"},
+        {"parameter": "Urine cytology", "cells": [{"text": "Helps exclude carcinoma in situ"}], "cite": "c1"},
+        {"parameter": "Frequency-volume bladder diary", "cells": [{"text": "Small voided volumes"}], "cite": "c1"},
+        {"parameter": "Cystoscopy with hydrodistension", "cells": [{"text": "Hunner lesions and bladder capacity"}], "cite": "c1"},
+        {"parameter": "Bladder biopsy", "cells": [{"text": "Where malignancy or a Hunner lesion needs confirmation"}], "cite": "c1"},
+        {"parameter": "Symptom and pain questionnaires", "cells": [{"text": "Validated symptom and pain scores"}], "cite": "c1"},
+        {"parameter": "Pelvic imaging or gynaecological assessment", "cells": [{"text": "Excludes other pelvic pathology"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bladder_pain_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of bladder-related pain",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Overactive bladder without pain", "cells": [{"text": "Pain that worsens with filling and eases on voiding distinguishes this syndrome"}], "cite": "c1"},
+        {"parameter": "Carcinoma in situ of the bladder", "cells": [{"text": "Excluded by urine cytology and biopsy before the diagnosis is made"}], "cite": "c1"},
+        {"parameter": "Endometriosis and other gynaecological pelvic pain", "cells": [{"text": "Excluded by pelvic imaging or gynaecological assessment"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bladder_pain_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in bladder pain syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Conservative measures", "cells": [{"text": "Dietary modification, bladder training, stress management and pelvic-floor physiotherapy"}, {"text": "First step of a stepwise approach"}], "cite": "c1"},
+        {"parameter": "Oral agents", "cells": [{"text": "Amitriptyline, pentosan polysulfate or antihistamines"}, {"text": "Symptom control"}], "cite": "c1"},
+        {"parameter": "Intravesical therapy", "cells": [{"text": "Lidocaine, dimethyl sulfoxide or glycosaminoglycan-replacement agents"}, {"text": "For refractory bladder symptoms"}], "cite": "c1"},
+        {"parameter": "Hunner lesion treatment", "cells": [{"text": "Fulguration, resection or intralesional corticosteroid injection"}, {"text": "Lesion-directed"}], "cite": "c1"},
+        {"parameter": "Refractory disease", "cells": [{"text": "Neuromodulation, intradetrusor botulinum toxin or ciclosporin; rarely reconstructive surgery or cystectomy"}, {"text": "Reserved for refractory disease"}], "cite": "c1"},
+        {"parameter": "Overlapping chronic pain", "cells": [{"text": "Analgesia and management of overlapping chronic pain within a multidisciplinary framework"}, {"text": "Multidisciplinary"}], "cite": "c1"},
+        {"parameter": "Antibiotics", "cells": [{"text": "Avoid repeated empirical antibiotic courses once infection is excluded"}, {"text": "Inappropriate for this syndrome"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bladder_pain_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of bladder pain syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Chronic bladder pain with frequency and urgency, worse on filling and eased by voiding", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: haematuria, suspicious cytology, ketamine or pelvic irradiation, or sterile pyuria?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: exclude carcinoma in situ, tuberculosis and specific cystitis", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Urinalysis and culture; urine cytology; frequency-volume diary", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Cystoscopy with hydrodistension for Hunner lesions and capacity", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Infection, malignancy and other pelvic causes excluded?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Conservative care, pelvic-floor physiotherapy and oral agents such as amitriptyline", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: treat the identified cause such as infection, malignancy or endometriosis", "cite": "c1"},
+        {"id": "n9", "type": "decision", "text": "Symptoms controlled on stepwise treatment?", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Symptom control with ongoing individualised care", "cite": "c1"},
+        {"id": "n11", "type": "action", "text": "Intravesical therapy or Hunner lesion-directed treatment", "cite": "c1"},
+        {"id": "n12", "type": "outcome", "text": "Refractory disease may need neuromodulation or botulinum toxin", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Yes"},
+        {"from": "n9", "to": "n11", "label": "No"},
+        {"from": "n11", "to": "n12", "label": "Next"}
+      ]
+    }
+  ]
 }

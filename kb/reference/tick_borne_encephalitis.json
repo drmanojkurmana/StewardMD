@@ -1,176 +1,474 @@
 {
- "id": "tick_borne_encephalitis",
- "name": "Tick-borne encephalitis",
- "aliases": [
-  "TBE",
-  "tick-borne encephalitis virus infection",
-  "TBEV infection",
-  "Central European encephalitis",
-  "Russian spring-summer encephalitis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A flavivirus transmitted by Ixodes ticks across endemic parts of Europe and Asia, with European, Siberian, and Far Eastern subtypes of differing severity",
-   "The illness is classically biphasic: an initial viraemic flu-like phase, a symptom-free interval of about a week, then a second neurological phase with meningitis, encephalitis, or myelitis",
-   "An important additional route is consumption of unpasteurised milk or dairy products from infected goats, sheep, or cattle (alimentary transmission)",
-   "The Far Eastern subtype tends to cause more severe monophasic disease with higher mortality and sequelae, while the European subtype more often shows the classic biphasic pattern",
-   "Neurological sequelae such as cognitive impairment, ataxia, and flaccid paralysis (especially of the shoulder girdle) can be long-lasting",
-   "There is no specific antiviral; management is supportive, and an effective inactivated vaccine is the mainstay of prevention for residents and travellers to endemic areas",
-   "Diagnosis is usually serological (IgM and IgG in serum and cerebrospinal fluid), as viraemia and detectable RNA have often cleared by the neurological phase"
+  "id": "tick_borne_encephalitis",
+  "name": "Tick-borne encephalitis",
+  "aliases": [
+    "TBE",
+    "tick-borne encephalitis virus infection",
+    "TBEV infection",
+    "Central European encephalitis",
+    "Russian spring-summer encephalitis"
   ],
-  "pathophysiology": "Tick-borne encephalitis virus is inoculated during the bite of an infected Ixodes tick, or ingested in unpasteurised dairy products. It first replicates locally and in regional lymph nodes, producing the initial viraemic phase with nonspecific febrile symptoms. In a proportion of patients the virus subsequently crosses the blood-brain barrier and infects neurons, particularly in the brainstem, cerebellum, and anterior horns of the spinal cord, provoking an inflammatory meningoencephalitis or myelitis. By the time neurological disease appears, viraemia has typically resolved and the host antibody response is detectable, which is why diagnosis is largely serological.",
-  "additionalDifferentials": [
-   "Herpes simplex virus and other viral encephalitides",
-   "Bacterial meningitis or meningoencephalitis",
-   "Lyme neuroborreliosis (also Ixodes-transmitted)",
-   "Enteroviral meningitis",
-   "West Nile virus and other flaviviral neuroinvasive disease",
-   "Guillain-Barre syndrome when flaccid paralysis predominates"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid IgM and IgG serology for tick-borne encephalitis virus",
-   "Cerebrospinal fluid analysis showing lymphocytic pleocytosis and raised protein",
-   "Magnetic resonance imaging of the brain and spinal cord for thalamic, cerebellar, brainstem, or anterior-horn involvement",
-   "RT-PCR on blood during the early viraemic phase, recognising it is often negative by the neurological phase",
-   "Testing for co-transmitted Lyme borreliosis given shared Ixodes vectors",
-   "Electrophysiology when myelitis or peripheral involvement is suspected"
-  ],
-  "redFlags": [
-   "Declining consciousness or brainstem signs indicating severe encephalitis",
-   "Flaccid limb or respiratory-muscle weakness from myelitis",
-   "Seizures or status epilepticus",
-   "Rapidly progressive monophasic course suggesting a more severe viral subtype",
-   "Signs of raised intracranial pressure"
-  ],
-  "prognosis": "Many patients recover fully, but a substantial minority, especially with the Siberian or Far Eastern subtypes or with encephalitic or myelitic involvement, are left with persistent neurological sequelae, and mortality is highest with the Far Eastern subtype.",
-  "pitfalls": [
-   "Discharging a patient during the afebrile interval and missing the second neurological phase",
-   "Relying on RT-PCR in the neurological phase, when serology is the appropriate test",
-   "Overlooking alimentary transmission from unpasteurised dairy products",
-   "Failing to consider co-infection with Lyme borreliosis from the same tick exposure",
-   "Not offering vaccination to at-risk residents and travellers as prevention"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "World Health Organization tick-borne encephalitis position paper"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care, since there is no specific antiviral, with analgesia, antipyretics and fluid and electrolyte management",
-   "Prevent disease with the inactivated tick-borne encephalitis vaccine for residents of and travellers to endemic areas, alongside tick-bite avoidance and avoiding unpasteurised dairy products",
-   "Manage severe encephalitic or myelitic disease in critical care, with ventilatory support for bulbar or respiratory involvement and control of raised intracranial pressure and seizures",
-   "Monitor neurological status, swallowing and airway safety through the illness",
-   "Arrange neurorehabilitation for lasting sequelae such as cognitive impairment, ataxia and flaccid paralysis",
-   "Test for co-transmitted Lyme borreliosis given the shared Ixodes vector, and treat if confirmed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tick_borne_encephalitis-pathway",
-   "title": "Tick-borne encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A flavivirus transmitted by Ixodes ticks across endemic parts of Europe and Asia, with European, Siberian, and Far Eastern subtypes of differing severity",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Declining consciousness or brainstem signs indicating severe encephalitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid IgM and IgG serology for tick-borne encephalitis virus, Cerebrospinal fluid analysis showing lymphocytic pleocytosis and raised protein, Magnetic resonance imaging of the brain and spinal cord"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care, since there is no specific antiviral, with analgesia, antipyretics and fluid and electrolyte management"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Discharging a patient during the afebrile interval and missing the second neurological phase"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tick-borne encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "tick_borne_encephalitis-matrix",
-   "title": "Tick-borne encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A flavivirus transmitted by Ixodes ticks across endemic parts of Europe and Asia, with European, Siberian, and Far Eastern",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A flavivirus transmitted by Ixodes ticks across endemic parts of Europe and Asia, with European, Siberian, and Far Eastern subtypes of differing severity",
+      "The illness is classically biphasic: an initial viraemic flu-like phase, a symptom-free interval of about a week, then a second neurological phase with meningitis, encephalitis, or myelitis",
+      "An important additional route is consumption of unpasteurised milk or dairy products from infected goats, sheep, or cattle (alimentary transmission)",
+      "The Far Eastern subtype tends to cause more severe monophasic disease with higher mortality and sequelae, while the European subtype more often shows the classic biphasic pattern",
+      "Neurological sequelae such as cognitive impairment, ataxia, and flaccid paralysis (especially of the shoulder girdle) can be long-lasting",
+      "There is no specific antiviral; management is supportive, and an effective inactivated vaccine is the mainstay of prevention for residents and travellers to endemic areas",
+      "Diagnosis is usually serological (IgM and IgG in serum and cerebrospinal fluid), as viraemia and detectable RNA have often cleared by the neurological phase"
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid IgM and IgG serology for tick-borne encephalitis virus, Cerebrospinal fluid analysis showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tick-borne encephalitis virus is inoculated during the bite of an infected Ixodes tick, or ingested in unpasteurised dairy products. It first replicates locally and in regional lymph nodes, producing the initial viraemic phase with nonspecific febrile symptoms. In a proportion of patients the virus subsequently crosses the blood-brain barrier and infects neurons, particularly in the brainstem, cerebellum, and anterior horns of the spinal cord, provoking an inflammatory meningoencephalitis or myelitis. By the time neurological disease appears, viraemia has typically resolved and the host antibody response is detectable, which is why diagnosis is largely serological.",
+    "additionalDifferentials": [
+      "Herpes simplex virus and other viral encephalitides",
+      "Bacterial meningitis or meningoencephalitis",
+      "Lyme neuroborreliosis (also Ixodes-transmitted)",
+      "Enteroviral meningitis",
+      "West Nile virus and other flaviviral neuroinvasive disease",
+      "Guillain-Barre syndrome when flaccid paralysis predominates"
     ],
-    [
-     "Primary Differentials",
-     "Herpes simplex virus and other viral encephalitides, Bacterial meningitis or meningoencephalitis, Lyme neuroborreliosis (also",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid IgM and IgG serology for tick-borne encephalitis virus",
+      "Cerebrospinal fluid analysis showing lymphocytic pleocytosis and raised protein",
+      "Magnetic resonance imaging of the brain and spinal cord for thalamic, cerebellar, brainstem, or anterior-horn involvement",
+      "RT-PCR on blood during the early viraemic phase, recognising it is often negative by the neurological phase",
+      "Testing for co-transmitted Lyme borreliosis given shared Ixodes vectors",
+      "Electrophysiology when myelitis or peripheral involvement is suspected"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care, since there is no specific antiviral, with analgesia, antipyretics and fluid and electrolyte management",
-     "Core treatment modality"
+    "redFlags": [
+      "Declining consciousness or brainstem signs indicating severe encephalitis",
+      "Flaccid limb or respiratory-muscle weakness from myelitis",
+      "Seizures or status epilepticus",
+      "Rapidly progressive monophasic course suggesting a more severe viral subtype",
+      "Signs of raised intracranial pressure"
     ],
-    [
-     "Clinical Pitfall",
-     "Discharging a patient during the afebrile interval and missing the second neurological phase",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients recover fully, but a substantial minority, especially with the Siberian or Far Eastern subtypes or with encephalitic or myelitic involvement, are left with persistent neurological sequelae, and mortality is highest with the Far Eastern subtype.",
+    "pitfalls": [
+      "Discharging a patient during the afebrile interval and missing the second neurological phase",
+      "Relying on RT-PCR in the neurological phase, when serology is the appropriate test",
+      "Overlooking alimentary transmission from unpasteurised dairy products",
+      "Failing to consider co-infection with Lyme borreliosis from the same tick exposure",
+      "Not offering vaccination to at-risk residents and travellers as prevention"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "World Health Organization tick-borne encephalitis position paper"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care, since there is no specific antiviral, with analgesia, antipyretics and fluid and electrolyte management",
+      "Prevent disease with the inactivated tick-borne encephalitis vaccine for residents of and travellers to endemic areas, alongside tick-bite avoidance and avoiding unpasteurised dairy products",
+      "Manage severe encephalitic or myelitic disease in critical care, with ventilatory support for bulbar or respiratory involvement and control of raised intracranial pressure and seizures",
+      "Monitor neurological status, swallowing and airway safety through the illness",
+      "Arrange neurorehabilitation for lasting sequelae such as cognitive impairment, ataxia and flaccid paralysis",
+      "Test for co-transmitted Lyme borreliosis given the shared Ixodes vector, and treat if confirmed"
     ]
-   ],
-   "caption": "Overview comparison matrix for tick-borne encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tick-borne-encephalitis-real-image",
-   "title": "Tick-borne encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "tick_borne_encephalitis-pathway",
+      "title": "Tick-borne encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A flavivirus transmitted by Ixodes ticks across endemic parts of Europe and Asia, with European, Siberian, and Far Eastern subtypes of differing severity",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Declining consciousness or brainstem signs indicating severe encephalitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid IgM and IgG serology for tick-borne encephalitis virus, Cerebrospinal fluid analysis showing lymphocytic pleocytosis and raised protein, Magnetic resonance imaging of the brain and spinal cord"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care, since there is no specific antiviral, with analgesia, antipyretics and fluid and electrolyte management"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Discharging a patient during the afebrile interval and missing the second neurological phase"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tick-borne encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tick_borne_encephalitis-matrix",
+      "title": "Tick-borne encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A flavivirus transmitted by Ixodes ticks across endemic parts of Europe and Asia, with European, Siberian, and Far Eastern",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid IgM and IgG serology for tick-borne encephalitis virus, Cerebrospinal fluid analysis showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpes simplex virus and other viral encephalitides, Bacterial meningitis or meningoencephalitis, Lyme neuroborreliosis (also",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care, since there is no specific antiviral, with analgesia, antipyretics and fluid and electrolyte management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Discharging a patient during the afebrile interval and missing the second neurological phase",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tick-borne encephalitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / WHO guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tick_borne_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Tick-borne encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tick-borne encephalitis: biphasic febrile illness after a tick bite",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: falling consciousness, respiratory weakness, or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent critical care for encephalitis with bulbar or respiratory involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum and CSF IgM and IgG; CSF analysis; brain and spinal MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do serology and CSF show tick-borne encephalitis virus infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Lyme neuroborreliosis, HSV encephalitis or Guillain-Barre syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care, as there is no specific antiviral",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inactivated tick-borne encephalitis vaccine for at-risk people",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Critical care with ventilatory support for bulbar or respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurorehabilitation for cognitive impairment, ataxia and paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Test for and treat co-transmitted Lyme borreliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many recover fully; Far Eastern subtype carries higher mortality and sequelae",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tick_borne_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF IgM and IgG serology",
+          "cells": [
+            {
+              "text": "Tick-borne encephalitis virus antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Lymphocytic pleocytosis and raised protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and spinal cord",
+          "cells": [
+            {
+              "text": "Thalamic, cerebellar, brainstem or anterior horn involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RT-PCR on blood in the early viraemic phase",
+          "cells": [
+            {
+              "text": "Often negative by the neurological phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme borreliosis testing",
+          "cells": [
+            {
+              "text": "Co-transmitted infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiology",
+          "cells": [
+            {
+              "text": "Myelitis or peripheral involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tick_borne_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lyme neuroborreliosis",
+          "cells": [
+            {
+              "text": "Also Ixodes-transmitted; co-infection is tested for"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Flaccid paralysis predominates; CSF and electrophysiology help separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "West Nile virus and other flaviviral disease",
+          "cells": [
+            {
+              "text": "Related flavivirus neuroinvasive disease; serology distinguishes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tick_borne_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No specific antiviral; analgesia, antipyretics, fluid and electrolytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inactivated vaccine",
+          "cells": [
+            {
+              "text": "Residents of and travellers to endemic areas; tick avoidance; no unpasteurised dairy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care for severe disease",
+          "cells": [
+            {
+              "text": "Ventilation for bulbar or respiratory involvement; raised pressure and seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and airway monitoring",
+          "cells": [
+            {
+              "text": "Swallowing and airway safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Cognitive impairment, ataxia and flaccid paralysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme co-infection treatment",
+          "cells": [
+            {
+              "text": "Tested for and treated if confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

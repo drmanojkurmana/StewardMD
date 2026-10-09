@@ -1,177 +1,466 @@
 {
- "id": "dejerine_sottas_syndrome",
- "name": "Dejerine-Sottas syndrome",
- "aliases": [
-  "Dejerine-Sottas neuropathy",
-  "CMT3",
-  "HMSN III",
-  "hypertrophic neuropathy of infancy"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary neuropathy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Severe, early-onset hypertrophic demyelinating neuropathy of infancy or early childhood, historically termed HMSN III or CMT3.",
-   "A phenotypic severity label rather than a single gene: it arises from mutations in PMP22, MPZ, EGR2 or PRX, inherited as dominant de novo changes or as recessive disease.",
-   "Nerve conduction velocities are extremely slow, markedly lower than in typical CMT1.",
-   "Peripheral nerves are often palpably enlarged, and biopsy shows onion-bulb formations with hypomyelination.",
-   "Delayed motor milestones, severe distal and proximal weakness, sensory ataxia and generalised areflexia are characteristic.",
-   "Skeletal complications are prominent, including pes cavus, scoliosis and joint contractures; pupillary abnormalities are sometimes seen.",
-   "At its most severe it overlaps with congenital hypomyelinating neuropathy."
+  "id": "dejerine_sottas_syndrome",
+  "name": "Dejerine-Sottas syndrome",
+  "aliases": [
+    "Dejerine-Sottas neuropathy",
+    "CMT3",
+    "HMSN III",
+    "hypertrophic neuropathy of infancy"
   ],
-  "pathophysiology": "Dejerine-Sottas syndrome denotes the severe end of the hereditary demyelinating neuropathy spectrum and results from mutations in genes essential for peripheral myelin. The recognised causes are PMP22 (peripheral myelin protein 22), MPZ (myelin protein zero, P0), EGR2 (early growth response 2, a transcription factor that drives the Schwann cell myelination programme) and PRX (periaxin, required for the stability of mature myelin). Dominant de novo point mutations or biallelic recessive mutations in these genes severely disrupt the formation and maintenance of compact myelin, so that Schwann cells cannot myelinate normally. Repeated cycles of demyelination and attempted remyelination generate concentric onion-bulb whorls and nerve hypertrophy, while the profound loss of myelin produces the extreme slowing of conduction and the severe, early clinical deficit.",
-  "additionalDifferentials": [
-   "Congenital hypomyelinating neuropathy",
-   "CMT1 subtypes (milder demyelinating disease)",
-   "Autosomal recessive CMT4 subtypes",
-   "Refsum disease",
-   "Metachromatic leukodystrophy and Krabbe disease with infantile neuropathy",
-   "Infantile chronic inflammatory demyelinating polyradiculoneuropathy",
-   "Congenital muscular dystrophy with hypotonia"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies and electromyography documenting markedly slowed velocities",
-   "Targeted gene panel covering PMP22, MPZ, EGR2 and PRX",
-   "Cerebrospinal fluid protein if an inflammatory neuropathy is being considered",
-   "Sural nerve biopsy showing onion bulbs and hypomyelination when genetics are inconclusive",
-   "Nerve ultrasound or MRI to demonstrate nerve hypertrophy",
-   "Ophthalmology and spinal assessment for associated deformity"
-  ],
-  "redFlags": [
-   "Respiratory muscle involvement or ventilatory compromise",
-   "Bulbar dysfunction with swallowing or airway difficulty",
-   "Rapid deterioration suggesting a superimposed acquired inflammatory neuropathy",
-   "Profound early hypotonia with feeding failure in infancy"
-  ],
-  "prognosis": "Dejerine-Sottas syndrome causes severe, slowly progressive disability, with many affected individuals requiring walking aids or a wheelchair; life expectancy varies and is largely determined by the degree of respiratory involvement.",
-  "pitfalls": [
-   "Misdiagnosing the disorder as chronic inflammatory demyelinating polyradiculoneuropathy and giving prolonged immunotherapy.",
-   "Assuming a single causative gene rather than testing the full relevant panel.",
-   "Underestimating skeletal and respiratory complications that drive long-term morbidity.",
-   "Conflating this severe phenotype with milder CMT1 and giving falsely reassuring counselling."
-  ],
-  "references": [
-   "Charcot-Marie-Tooth hereditary neuropathy overview (clinical genetics reference)",
-   "Peripheral neuropathy (Dyck and Thomas)",
-   "Adams and Victor's principles of neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive management only, as no disease-modifying drug exists, with physiotherapy to maintain strength and prevent contractures",
-   "Orthoses, footwear adaptation and mobility aids to compensate for severe distal and proximal weakness, areflexia and sensory ataxia",
-   "Orthopaedic management of pes cavus, scoliosis and joint contractures, including corrective surgery where indicated",
-   "Neuropathic and musculoskeletal pain control with neuropathic agents, avoiding neurotoxic drugs such as vincristine",
-   "Ophthalmological review for pupillary abnormalities and spinal assessment for deformity",
-   "Respiratory monitoring, as the long-term outlook is largely determined by respiratory involvement",
-   "Multidisciplinary neuromuscular and rehabilitation team care",
-   "Genetic counselling with targeted testing of PMP22, MPZ, EGR2 and PRX and family screening, noting dominant de novo or recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dejerine_sottas_syndrome-pathway",
-   "title": "Dejerine-Sottas syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Severe, early-onset hypertrophic demyelinating neuropathy of infancy or early childhood, historically termed HMSN III or CMT3.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory muscle involvement or ventilatory compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies and electromyography documenting markedly slowed velocities, Targeted gene panel covering PMP22, MPZ, EGR2 and PRX, Cerebrospinal fluid protein if an inflammatory neuropathy is being considered"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive management only, as no disease-modifying drug exists, with physiotherapy to maintain strength and prevent contractures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the disorder as chronic inflammatory demyelinating polyradiculoneuropathy and giving prolonged immunotherapy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dejerine-sottas syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "dejerine_sottas_syndrome-matrix",
-   "title": "Dejerine-Sottas syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Severe, early-onset hypertrophic demyelinating neuropathy of infancy or early childhood, historically termed HMSN III or CMT3.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary neuropathy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Severe, early-onset hypertrophic demyelinating neuropathy of infancy or early childhood, historically termed HMSN III or CMT3.",
+      "A phenotypic severity label rather than a single gene: it arises from mutations in PMP22, MPZ, EGR2 or PRX, inherited as dominant de novo changes or as recessive disease.",
+      "Nerve conduction velocities are extremely slow, markedly lower than in typical CMT1.",
+      "Peripheral nerves are often palpably enlarged, and biopsy shows onion-bulb formations with hypomyelination.",
+      "Delayed motor milestones, severe distal and proximal weakness, sensory ataxia and generalised areflexia are characteristic.",
+      "Skeletal complications are prominent, including pes cavus, scoliosis and joint contractures; pupillary abnormalities are sometimes seen.",
+      "At its most severe it overlaps with congenital hypomyelinating neuropathy."
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies and electromyography documenting markedly slowed velocities, Targeted gene panel covering PMP22, MPZ,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dejerine-Sottas syndrome denotes the severe end of the hereditary demyelinating neuropathy spectrum and results from mutations in genes essential for peripheral myelin. The recognised causes are PMP22 (peripheral myelin protein 22), MPZ (myelin protein zero, P0), EGR2 (early growth response 2, a transcription factor that drives the Schwann cell myelination programme) and PRX (periaxin, required for the stability of mature myelin). Dominant de novo point mutations or biallelic recessive mutations in these genes severely disrupt the formation and maintenance of compact myelin, so that Schwann cells cannot myelinate normally. Repeated cycles of demyelination and attempted remyelination generate concentric onion-bulb whorls and nerve hypertrophy, while the profound loss of myelin produces the extreme slowing of conduction and the severe, early clinical deficit.",
+    "additionalDifferentials": [
+      "Congenital hypomyelinating neuropathy",
+      "CMT1 subtypes (milder demyelinating disease)",
+      "Autosomal recessive CMT4 subtypes",
+      "Refsum disease",
+      "Metachromatic leukodystrophy and Krabbe disease with infantile neuropathy",
+      "Infantile chronic inflammatory demyelinating polyradiculoneuropathy",
+      "Congenital muscular dystrophy with hypotonia"
     ],
-    [
-     "Primary Differentials",
-     "Congenital hypomyelinating neuropathy, CMT1 subtypes (milder demyelinating disease), Autosomal recessive CMT4 subtypes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies and electromyography documenting markedly slowed velocities",
+      "Targeted gene panel covering PMP22, MPZ, EGR2 and PRX",
+      "Cerebrospinal fluid protein if an inflammatory neuropathy is being considered",
+      "Sural nerve biopsy showing onion bulbs and hypomyelination when genetics are inconclusive",
+      "Nerve ultrasound or MRI to demonstrate nerve hypertrophy",
+      "Ophthalmology and spinal assessment for associated deformity"
     ],
-    [
-     "Management Strategy",
-     "Supportive management only, as no disease-modifying drug exists, with physiotherapy to maintain strength and prevent contractures",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory muscle involvement or ventilatory compromise",
+      "Bulbar dysfunction with swallowing or airway difficulty",
+      "Rapid deterioration suggesting a superimposed acquired inflammatory neuropathy",
+      "Profound early hypotonia with feeding failure in infancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the disorder as chronic inflammatory demyelinating polyradiculoneuropathy and giving prolonged immunotherapy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Dejerine-Sottas syndrome causes severe, slowly progressive disability, with many affected individuals requiring walking aids or a wheelchair; life expectancy varies and is largely determined by the degree of respiratory involvement.",
+    "pitfalls": [
+      "Misdiagnosing the disorder as chronic inflammatory demyelinating polyradiculoneuropathy and giving prolonged immunotherapy.",
+      "Assuming a single causative gene rather than testing the full relevant panel.",
+      "Underestimating skeletal and respiratory complications that drive long-term morbidity.",
+      "Conflating this severe phenotype with milder CMT1 and giving falsely reassuring counselling."
+    ],
+    "references": [
+      "Charcot-Marie-Tooth hereditary neuropathy overview (clinical genetics reference)",
+      "Peripheral neuropathy (Dyck and Thomas)",
+      "Adams and Victor's principles of neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive management only, as no disease-modifying drug exists, with physiotherapy to maintain strength and prevent contractures",
+      "Orthoses, footwear adaptation and mobility aids to compensate for severe distal and proximal weakness, areflexia and sensory ataxia",
+      "Orthopaedic management of pes cavus, scoliosis and joint contractures, including corrective surgery where indicated",
+      "Neuropathic and musculoskeletal pain control with neuropathic agents, avoiding neurotoxic drugs such as vincristine",
+      "Ophthalmological review for pupillary abnormalities and spinal assessment for deformity",
+      "Respiratory monitoring, as the long-term outlook is largely determined by respiratory involvement",
+      "Multidisciplinary neuromuscular and rehabilitation team care",
+      "Genetic counselling with targeted testing of PMP22, MPZ, EGR2 and PRX and family screening, noting dominant de novo or recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for dejerine-sottas syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dejerine-sottas-syndrome-real-image",
-   "title": "Dejerine-Sottas syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "dejerine_sottas_syndrome-pathway",
+      "title": "Dejerine-Sottas syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Severe, early-onset hypertrophic demyelinating neuropathy of infancy or early childhood, historically termed HMSN III or CMT3.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory muscle involvement or ventilatory compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies and electromyography documenting markedly slowed velocities, Targeted gene panel covering PMP22, MPZ, EGR2 and PRX, Cerebrospinal fluid protein if an inflammatory neuropathy is being considered"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive management only, as no disease-modifying drug exists, with physiotherapy to maintain strength and prevent contractures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the disorder as chronic inflammatory demyelinating polyradiculoneuropathy and giving prolonged immunotherapy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dejerine-sottas syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dejerine_sottas_syndrome-matrix",
+      "title": "Dejerine-Sottas syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Severe, early-onset hypertrophic demyelinating neuropathy of infancy or early childhood, historically termed HMSN III or CMT3.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies and electromyography documenting markedly slowed velocities, Targeted gene panel covering PMP22, MPZ,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital hypomyelinating neuropathy, CMT1 subtypes (milder demyelinating disease), Autosomal recessive CMT4 subtypes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive management only, as no disease-modifying drug exists, with physiotherapy to maintain strength and prevent contractures",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the disorder as chronic inflammatory demyelinating polyradiculoneuropathy and giving prolonged immunotherapy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dejerine-sottas syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dejerine_sottas_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Markedly slowed velocities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted gene panel for PMP22, MPZ, EGR2 and PRX",
+          "cells": [
+            {
+              "text": "Myelin gene variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid protein",
+          "cells": [
+            {
+              "text": "Used when an inflammatory neuropathy is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sural nerve biopsy",
+          "cells": [
+            {
+              "text": "Onion bulbs and hypomyelination when genetics are inconclusive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Nerve hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dejerine_sottas_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic inflammatory demyelinating polyneuropathy",
+          "cells": [
+            {
+              "text": "Misdiagnosis leads to prolonged immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot-Marie-Tooth type 1 subtypes",
+          "cells": [
+            {
+              "text": "Milder disease; conflating them gives falsely reassuring counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dejerine_sottas_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No disease-modifying drug; physiotherapy for strength and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and mobility aids",
+          "cells": [
+            {
+              "text": "Compensate for severe distal and proximal weakness, areflexia and sensory ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Pes cavus, scoliosis and contractures, with corrective surgery where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain control",
+          "cells": [
+            {
+              "text": "Neuropathic agents; avoid vincristine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic and spinal review",
+          "cells": [
+            {
+              "text": "Pupillary abnormalities and spinal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Long-term outlook is largely determined by respiratory involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Dominant de novo or recessive inheritance; targeted testing and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dejerine_sottas_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Dejerine-Sottas syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dejerine-Sottas syndrome: profound early hypotonia and feeding failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ventilatory or bulbar compromise, rapid deterioration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and respiratory assessment; check for superimposed inflammatory neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction and EMG; targeted PMP22, MPZ, EGR2 and PRX gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the targeted gene panel show a causative myelin gene variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypomyelinating neuropathy, CMT1, CMT4 or leukodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy to maintain strength and prevent contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthoses, footwear and mobility aids for distal and proximal weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic management of pes cavus, scoliosis and contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Respiratory monitoring, which largely determines long-term outlook",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with targeted testing and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe, slowly progressive disability; life expectancy set by respiratory involvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

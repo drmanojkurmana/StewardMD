@@ -1,171 +1,440 @@
 {
- "id": "massive_ovarian_edema",
- "name": "Massive ovarian oedema",
- "aliases": [
-  "massive ovarian edema",
-  "massive oedema of the ovary",
-  "ovarian stromal oedema"
- ],
- "class": "non_infective",
- "system": "Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard gynaecology reference textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, benign condition of young women and adolescents in which one ovary becomes markedly enlarged by stromal oedema",
-   "It is thought to result from partial or intermittent torsion around the mesovarium that obstructs venous and lymphatic drainage while sparing arterial inflow",
-   "Presentation is with pelvic or abdominal pain and a palpable mass, closely mimicking ovarian torsion or a neoplasm",
-   "Imaging shows a diffusely enlarged, oedematous ovary, often with follicles displaced to the periphery and central stromal oedema",
-   "Magnetic resonance imaging demonstrates a strikingly oedematous stroma that is high in signal on T2-weighted sequences",
-   "Tumour markers are usually normal, which helps to distinguish it from a true ovarian neoplasm",
-   "Fertility-sparing surgery, such as detorsion with ovarian fixation, is preferred over oophorectomy in these young patients"
+  "id": "massive_ovarian_edema",
+  "name": "Massive ovarian oedema",
+  "aliases": [
+    "massive ovarian edema",
+    "massive oedema of the ovary",
+    "ovarian stromal oedema"
   ],
-  "pathophysiology": "Partial or intermittent torsion of the ovary about its vascular pedicle in the mesovarium obstructs the lower-pressure venous and lymphatic outflow while the arterial supply continues to fill the organ. Fluid therefore accumulates within the ovarian stroma, producing progressive, sometimes massive, oedematous enlargement of the ovary. The resulting mass can closely resemble a neoplasm both clinically and radiologically, yet the underlying process is benign and potentially reversible if recognised and treated conservatively.",
-  "additionalDifferentials": [
-   "Ovarian torsion",
-   "Ovarian neoplasm such as a fibroma",
-   "Ovarian fibromatosis",
-   "Tubo-ovarian abscess",
-   "Metastatic ovarian tumour",
-   "Lymphomatous involvement of the ovary"
-  ],
-  "additionalInvestigations": [
-   "Transvaginal or transabdominal ultrasound with Doppler showing an enlarged ovary with peripheral follicles",
-   "Magnetic resonance imaging demonstrating stromal oedema with high T2 signal",
-   "Tumour markers, which are typically normal and help exclude malignancy",
-   "Assessment of arterial and venous flow to evaluate the degree of torsion",
-   "Histological examination if the ovary is removed, confirming stromal oedema without neoplasia"
-  ],
-  "redFlags": [
-   "Complete torsion with compromised ovarian viability",
-   "Inability to exclude malignancy, risking unnecessary oophorectomy",
-   "Bilateral involvement",
-   "Acute severe pain with signs of an ischaemic ovary"
-  ],
-  "prognosis": "The condition is benign with a good prognosis; ovary-sparing surgery preserves ovarian function and fertility, and outcomes are excellent when the diagnosis is recognised before radical surgery is undertaken.",
-  "pitfalls": [
-   "Performing an unnecessary oophorectomy in a young woman by mistaking oedema for a tumour",
-   "Failing to consider fertility preservation when planning surgery",
-   "Overlooking intermittent torsion as the underlying mechanism",
-   "Not recognising the characteristic imaging appearance of stromal oedema"
-  ],
-  "references": [
-   "Standard gynaecology reference textbook",
-   "Peer-reviewed gynaecology clinical reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Ovary-sparing surgery (detorsion with wedge resection or biopsy) to preserve ovarian function and fertility, avoiding unnecessary oophorectomy",
-   "Intra-operative frozen-section histology to confirm the benign oedematous process and exclude neoplasm before deciding the extent of surgery",
-   "Oophoropexy (fixation) to reduce the risk of recurrent torsion, given intermittent torsion as the underlying mechanism",
-   "Analgesia and supportive care for the acute pelvic pain",
-   "Postoperative imaging follow-up to confirm resolution and monitor ovarian recovery",
-   "Refer to gynaecology, with fertility-preservation counselling in young women and adolescents"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "massive_ovarian_edema-pathway",
-   "title": "Massive ovarian oedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, benign condition of young women and adolescents in which one ovary becomes markedly enlarged by stromal oedema",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Complete torsion with compromised ovarian viability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transvaginal or transabdominal ultrasound with Doppler showing an enlarged ovary with peripheral follicles, Magnetic resonance imaging demonstrating stromal oedema with high T2 signal, Tumour markers, which are typically"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Ovary-sparing surgery (detorsion with wedge resection or biopsy) to preserve ovarian function and fertility, avoiding unnecessary oophorectomy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing an unnecessary oophorectomy in a young woman by mistaking oedema for a tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of massive ovarian oedema."
-  }
- ],
- "tables": [
-  {
-   "id": "massive_ovarian_edema-matrix",
-   "title": "Massive ovarian oedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, benign condition of young women and adolescents in which one ovary becomes markedly enlarged by stromal oedema",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard gynaecology reference textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, benign condition of young women and adolescents in which one ovary becomes markedly enlarged by stromal oedema",
+      "It is thought to result from partial or intermittent torsion around the mesovarium that obstructs venous and lymphatic drainage while sparing arterial inflow",
+      "Presentation is with pelvic or abdominal pain and a palpable mass, closely mimicking ovarian torsion or a neoplasm",
+      "Imaging shows a diffusely enlarged, oedematous ovary, often with follicles displaced to the periphery and central stromal oedema",
+      "Magnetic resonance imaging demonstrates a strikingly oedematous stroma that is high in signal on T2-weighted sequences",
+      "Tumour markers are usually normal, which helps to distinguish it from a true ovarian neoplasm",
+      "Fertility-sparing surgery, such as detorsion with ovarian fixation, is preferred over oophorectomy in these young patients"
     ],
-    [
-     "Key Investigations",
-     "Transvaginal or transabdominal ultrasound with Doppler showing an enlarged ovary with peripheral follicles, Magnetic resonance",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Partial or intermittent torsion of the ovary about its vascular pedicle in the mesovarium obstructs the lower-pressure venous and lymphatic outflow while the arterial supply continues to fill the organ. Fluid therefore accumulates within the ovarian stroma, producing progressive, sometimes massive, oedematous enlargement of the ovary. The resulting mass can closely resemble a neoplasm both clinically and radiologically, yet the underlying process is benign and potentially reversible if recognised and treated conservatively.",
+    "additionalDifferentials": [
+      "Ovarian torsion",
+      "Ovarian neoplasm such as a fibroma",
+      "Ovarian fibromatosis",
+      "Tubo-ovarian abscess",
+      "Metastatic ovarian tumour",
+      "Lymphomatous involvement of the ovary"
     ],
-    [
-     "Primary Differentials",
-     "Ovarian torsion, Ovarian neoplasm such as a fibroma, Ovarian fibromatosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transvaginal or transabdominal ultrasound with Doppler showing an enlarged ovary with peripheral follicles",
+      "Magnetic resonance imaging demonstrating stromal oedema with high T2 signal",
+      "Tumour markers, which are typically normal and help exclude malignancy",
+      "Assessment of arterial and venous flow to evaluate the degree of torsion",
+      "Histological examination if the ovary is removed, confirming stromal oedema without neoplasia"
     ],
-    [
-     "Management Strategy",
-     "Ovary-sparing surgery (detorsion with wedge resection or biopsy) to preserve ovarian function and fertility, avoiding unnecessary",
-     "Core treatment modality"
+    "redFlags": [
+      "Complete torsion with compromised ovarian viability",
+      "Inability to exclude malignancy, risking unnecessary oophorectomy",
+      "Bilateral involvement",
+      "Acute severe pain with signs of an ischaemic ovary"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing an unnecessary oophorectomy in a young woman by mistaking oedema for a tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign with a good prognosis; ovary-sparing surgery preserves ovarian function and fertility, and outcomes are excellent when the diagnosis is recognised before radical surgery is undertaken.",
+    "pitfalls": [
+      "Performing an unnecessary oophorectomy in a young woman by mistaking oedema for a tumour",
+      "Failing to consider fertility preservation when planning surgery",
+      "Overlooking intermittent torsion as the underlying mechanism",
+      "Not recognising the characteristic imaging appearance of stromal oedema"
+    ],
+    "references": [
+      "Standard gynaecology reference textbook",
+      "Peer-reviewed gynaecology clinical reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Ovary-sparing surgery (detorsion with wedge resection or biopsy) to preserve ovarian function and fertility, avoiding unnecessary oophorectomy",
+      "Intra-operative frozen-section histology to confirm the benign oedematous process and exclude neoplasm before deciding the extent of surgery",
+      "Oophoropexy (fixation) to reduce the risk of recurrent torsion, given intermittent torsion as the underlying mechanism",
+      "Analgesia and supportive care for the acute pelvic pain",
+      "Postoperative imaging follow-up to confirm resolution and monitor ovarian recovery",
+      "Refer to gynaecology, with fertility-preservation counselling in young women and adolescents"
     ]
-   ],
-   "caption": "Overview comparison matrix for massive ovarian oedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "massive-ovarian-edema-real-image",
-   "title": "Massive ovarian oedema: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "massive_ovarian_edema-pathway",
+      "title": "Massive ovarian oedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, benign condition of young women and adolescents in which one ovary becomes markedly enlarged by stromal oedema",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Complete torsion with compromised ovarian viability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transvaginal or transabdominal ultrasound with Doppler showing an enlarged ovary with peripheral follicles, Magnetic resonance imaging demonstrating stromal oedema with high T2 signal, Tumour markers, which are typically"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Ovary-sparing surgery (detorsion with wedge resection or biopsy) to preserve ovarian function and fertility, avoiding unnecessary oophorectomy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing an unnecessary oophorectomy in a young woman by mistaking oedema for a tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of massive ovarian oedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "massive_ovarian_edema-matrix",
+      "title": "Massive ovarian oedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, benign condition of young women and adolescents in which one ovary becomes markedly enlarged by stromal oedema",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transvaginal or transabdominal ultrasound with Doppler showing an enlarged ovary with peripheral follicles, Magnetic resonance",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ovarian torsion, Ovarian neoplasm such as a fibroma, Ovarian fibromatosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Ovary-sparing surgery (detorsion with wedge resection or biopsy) to preserve ovarian function and fertility, avoiding unnecessary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing an unnecessary oophorectomy in a young woman by mistaking oedema for a tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for massive ovarian oedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "massive_ovarian_edema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Enlarged ovary with peripheral follicles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnetic resonance imaging",
+          "cells": [
+            {
+              "text": "Stromal oedema with high T2 signal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers",
+          "cells": [
+            {
+              "text": "Typically normal; helps exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial and venous flow assessment",
+          "cells": [
+            {
+              "text": "Degree of torsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological examination if the ovary is removed",
+          "cells": [
+            {
+              "text": "Stromal oedema without neoplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_ovarian_edema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ovarian torsion",
+          "cells": [
+            {
+              "text": "Complete torsion compromises ovarian viability; flow assessment grades the torsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian neoplasm such as fibroma",
+          "cells": [
+            {
+              "text": "Malignancy cannot be excluded; frozen-section histology confirms benign oedema"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "massive_ovarian_edema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ovary-sparing surgery",
+          "cells": [
+            {
+              "text": "Detorsion with wedge resection or biopsy, preserving function and fertility; avoids unnecessary oophorectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-operative frozen section",
+          "cells": [
+            {
+              "text": "Confirms the benign oedematous process and excludes neoplasm before deciding extent of surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oophoropexy",
+          "cells": [
+            {
+              "text": "Fixation to reduce recurrent torsion, given intermittent torsion as the mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and supportive care",
+          "cells": [
+            {
+              "text": "Acute pelvic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative imaging",
+          "cells": [
+            {
+              "text": "Confirms resolution and monitors ovarian recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecology referral",
+          "cells": [
+            {
+              "text": "Fertility-preservation counselling in young women and adolescents"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "massive_ovarian_edema-dx-mgmt",
+      "title": "Diagnosis and management of Massive ovarian oedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute pelvic pain with an enlarged ovary and peripheral follicles on ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Complete torsion, ischaemic ovary, bilateral disease or malignancy not excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgery: detorsion with an ovary-sparing approach and frozen section",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler ultrasound for flow and degree of torsion; MRI; tumour markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show stromal oedema with high T2 signal and normal tumour markers?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ovarian neoplasm such as fibroma; histology before any oophorectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ovary-sparing detorsion with wedge resection or biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intra-operative frozen section to confirm benign oedema and exclude neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oophoropexy to reduce the risk of recurrent torsion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Postoperative imaging to confirm resolution; fertility counselling if young",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ovarian function and fertility preserved; unnecessary oophorectomy avoided",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

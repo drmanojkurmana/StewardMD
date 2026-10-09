@@ -1,178 +1,472 @@
 {
- "id": "primary_cutaneous_amyloidosis",
- "name": "primary cutaneous amyloidosis",
- "aliases": [
-  "primary localised cutaneous amyloidosis",
-  "lichen amyloidosis",
-  "macular amyloidosis"
- ],
- "class": "non_infective",
- "system": "Skin / Integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Weedon's Skin Pathology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Amyloid deposition confined to the skin without systemic or visceral involvement, distinct from systemic amyloidosis",
-   "Lichen amyloidosis presents as intensely pruritic, hyperkeratotic, brownish papules that coalesce into rippled plaques, classically on the shins and extensor legs",
-   "Macular amyloidosis produces rippled or reticulate greyish-brown hyperpigmentation, typically over the interscapular back, often linked to chronic friction from towels or brushes",
-   "In the keratinic (lichen and macular) forms the amyloid is derived from degenerate epidermal keratinocytes, staining for cytokeratins, and is closely tied to chronic scratching and friction",
-   "Nodular amyloidosis is different: it is a localised AL-type deposit produced by a clonal population of cutaneous plasma cells and carries a small risk of progression to systemic amyloidosis, warranting follow-up",
-   "Familial primary cutaneous amyloidosis is associated with variants in OSMR and IL31RA, and lichen or macular amyloidosis may occur in multiple endocrine neoplasia type 2A",
-   "Management focuses on breaking the itch-scratch cycle with topical corticosteroids, antipruritics and phototherapy, since persistent friction perpetuates the deposition"
+  "id": "primary_cutaneous_amyloidosis",
+  "name": "primary cutaneous amyloidosis",
+  "aliases": [
+    "primary localised cutaneous amyloidosis",
+    "lichen amyloidosis",
+    "macular amyloidosis"
   ],
-  "pathophysiology": "Primary cutaneous amyloidosis involves extracellular deposition of amyloid restricted to the dermis. In the common keratinic forms (lichen and macular amyloidosis), chronic friction and scratching are thought to cause apoptosis (filamentous degeneration) of basal keratinocytes; the resulting keratin fragments are converted into amyloid within the papillary dermis, which is why the deposits stain for cytokeratins and the disorder is perpetuated by the itch-scratch cycle. Genetic susceptibility, including variants in the oncostatin M receptor (OSMR) and interleukin-31 receptor (IL31RA) in familial disease, contributes in some patients. Nodular amyloidosis differs fundamentally, arising from local production of immunoglobulin light-chain (AL) amyloid by a clonal infiltrate of cutaneous plasma cells.",
-  "additionalDifferentials": [
-   "Lichen simplex chronicus and prurigo nodularis",
-   "Hypertrophic lichen planus",
-   "Post-inflammatory hyperpigmentation and other pigmentary disorders in macular disease",
-   "Colloid milium",
-   "Systemic amyloidosis with cutaneous deposits",
-   "Notalgia paraesthetica with secondary amyloid",
-   "Nodular basal cell carcinoma or adnexal tumour in the nodular form"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with Congo red staining showing apple-green birefringence under polarised light",
-   "Immunohistochemistry for cytokeratins to identify keratin-derived amyloid in the keratinic forms",
-   "Serum and urine protein electrophoresis and immunofixation, particularly for nodular amyloidosis to exclude systemic disease",
-   "Serum free light chains where AL amyloid is suspected",
-   "Assessment for multiple endocrine neoplasia type 2A when there is a suggestive family history",
-   "Long-term monitoring of nodular amyloidosis for progression to systemic amyloidosis"
-  ],
-  "redFlags": [
-   "Features of systemic amyloidosis such as macroglossia, cardiac or renal involvement or a monoclonal paraprotein",
-   "Nodular lesions with a demonstrable clonal plasma cell population or paraproteinaemia",
-   "Rapidly changing or ulcerating nodules suggesting an alternative neoplasm",
-   "Associated symptoms suggesting multiple endocrine neoplasia type 2A"
-  ],
-  "prognosis": "Primary cutaneous amyloidosis is benign and does not itself shorten life, but the keratinic forms tend to be chronic and troublesome because of persistent pruritus. Nodular amyloidosis is usually localised yet requires surveillance, as a minority progress to systemic amyloidosis.",
-  "pitfalls": [
-   "Assuming all cutaneous amyloid is benign and failing to investigate and monitor the nodular form for systemic progression",
-   "Not recognising that persistent scratching and friction drive and perpetuate the keratinic forms",
-   "Missing an associated systemic amyloidosis when cutaneous deposits are in fact secondary",
-   "Overlooking the association of lichen and macular amyloidosis with multiple endocrine neoplasia type 2A",
-   "Attributing interscapular pigmentation to post-inflammatory change without considering macular amyloidosis"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Weedon's Skin Pathology"
-  ],
-  "crossLinks": [
-   "colloid_milium",
-   "cutaneous_calcinosis"
-  ],
-  "management": [
-   "Break the itch-scratch cycle with topical or intralesional corticosteroids and antipruritics including topical agents and antihistamines",
-   "Use emollients and advise avoidance of friction from towels and brushes that perpetuate the keratinic forms",
-   "Consider phototherapy with ultraviolet B, or topical or systemic retinoids, for refractory lichen and macular disease",
-   "Manage nodular amyloidosis with surgical excision or laser and maintain long-term surveillance for progression to systemic amyloidosis using protein electrophoresis and free light chains",
-   "Screen for multiple endocrine neoplasia type 2A when the family history or features are suggestive",
-   "Offer genetic counselling in familial disease associated with OSMR and IL31RA variants",
-   "Provide ongoing dermatology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_cutaneous_amyloidosis-pathway",
-   "title": "primary cutaneous amyloidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Amyloid deposition confined to the skin without systemic or visceral involvement, distinct from systemic amyloidosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of systemic amyloidosis such as macroglossia, cardiac or renal involvement or a monoclonal paraprotein",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with Congo red staining showing apple-green birefringence under polarised light, Immunohistochemistry for cytokeratins to identify keratin-derived amyloid in the keratinic forms, Serum and urine protein"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Break the itch-scratch cycle with topical or intralesional corticosteroids and antipruritics including topical agents and antihistamines"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all cutaneous amyloid is benign and failing to investigate and monitor the nodular form for systemic progression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary cutaneous amyloidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_cutaneous_amyloidosis-matrix",
-   "title": "primary cutaneous amyloidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Amyloid deposition confined to the skin without systemic or visceral involvement, distinct from systemic amyloidosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Weedon's Skin Pathology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Amyloid deposition confined to the skin without systemic or visceral involvement, distinct from systemic amyloidosis",
+      "Lichen amyloidosis presents as intensely pruritic, hyperkeratotic, brownish papules that coalesce into rippled plaques, classically on the shins and extensor legs",
+      "Macular amyloidosis produces rippled or reticulate greyish-brown hyperpigmentation, typically over the interscapular back, often linked to chronic friction from towels or brushes",
+      "In the keratinic (lichen and macular) forms the amyloid is derived from degenerate epidermal keratinocytes, staining for cytokeratins, and is closely tied to chronic scratching and friction",
+      "Nodular amyloidosis is different: it is a localised AL-type deposit produced by a clonal population of cutaneous plasma cells and carries a small risk of progression to systemic amyloidosis, warranting follow-up",
+      "Familial primary cutaneous amyloidosis is associated with variants in OSMR and IL31RA, and lichen or macular amyloidosis may occur in multiple endocrine neoplasia type 2A",
+      "Management focuses on breaking the itch-scratch cycle with topical corticosteroids, antipruritics and phototherapy, since persistent friction perpetuates the deposition"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with Congo red staining showing apple-green birefringence under polarised light, Immunohistochemistry for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary cutaneous amyloidosis involves extracellular deposition of amyloid restricted to the dermis. In the common keratinic forms (lichen and macular amyloidosis), chronic friction and scratching are thought to cause apoptosis (filamentous degeneration) of basal keratinocytes; the resulting keratin fragments are converted into amyloid within the papillary dermis, which is why the deposits stain for cytokeratins and the disorder is perpetuated by the itch-scratch cycle. Genetic susceptibility, including variants in the oncostatin M receptor (OSMR) and interleukin-31 receptor (IL31RA) in familial disease, contributes in some patients. Nodular amyloidosis differs fundamentally, arising from local production of immunoglobulin light-chain (AL) amyloid by a clonal infiltrate of cutaneous plasma cells.",
+    "additionalDifferentials": [
+      "Lichen simplex chronicus and prurigo nodularis",
+      "Hypertrophic lichen planus",
+      "Post-inflammatory hyperpigmentation and other pigmentary disorders in macular disease",
+      "Colloid milium",
+      "Systemic amyloidosis with cutaneous deposits",
+      "Notalgia paraesthetica with secondary amyloid",
+      "Nodular basal cell carcinoma or adnexal tumour in the nodular form"
     ],
-    [
-     "Primary Differentials",
-     "Lichen simplex chronicus and prurigo nodularis, Hypertrophic lichen planus, Post-inflammatory hyperpigmentation and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with Congo red staining showing apple-green birefringence under polarised light",
+      "Immunohistochemistry for cytokeratins to identify keratin-derived amyloid in the keratinic forms",
+      "Serum and urine protein electrophoresis and immunofixation, particularly for nodular amyloidosis to exclude systemic disease",
+      "Serum free light chains where AL amyloid is suspected",
+      "Assessment for multiple endocrine neoplasia type 2A when there is a suggestive family history",
+      "Long-term monitoring of nodular amyloidosis for progression to systemic amyloidosis"
     ],
-    [
-     "Management Strategy",
-     "Break the itch-scratch cycle with topical or intralesional corticosteroids and antipruritics including topical agents and",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of systemic amyloidosis such as macroglossia, cardiac or renal involvement or a monoclonal paraprotein",
+      "Nodular lesions with a demonstrable clonal plasma cell population or paraproteinaemia",
+      "Rapidly changing or ulcerating nodules suggesting an alternative neoplasm",
+      "Associated symptoms suggesting multiple endocrine neoplasia type 2A"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all cutaneous amyloid is benign and failing to investigate and monitor the nodular form for systemic progression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Primary cutaneous amyloidosis is benign and does not itself shorten life, but the keratinic forms tend to be chronic and troublesome because of persistent pruritus. Nodular amyloidosis is usually localised yet requires surveillance, as a minority progress to systemic amyloidosis.",
+    "pitfalls": [
+      "Assuming all cutaneous amyloid is benign and failing to investigate and monitor the nodular form for systemic progression",
+      "Not recognising that persistent scratching and friction drive and perpetuate the keratinic forms",
+      "Missing an associated systemic amyloidosis when cutaneous deposits are in fact secondary",
+      "Overlooking the association of lichen and macular amyloidosis with multiple endocrine neoplasia type 2A",
+      "Attributing interscapular pigmentation to post-inflammatory change without considering macular amyloidosis"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Weedon's Skin Pathology"
+    ],
+    "crossLinks": [
+      "colloid_milium",
+      "cutaneous_calcinosis"
+    ],
+    "management": [
+      "Break the itch-scratch cycle with topical or intralesional corticosteroids and antipruritics including topical agents and antihistamines",
+      "Use emollients and advise avoidance of friction from towels and brushes that perpetuate the keratinic forms",
+      "Consider phototherapy with ultraviolet B, or topical or systemic retinoids, for refractory lichen and macular disease",
+      "Manage nodular amyloidosis with surgical excision or laser and maintain long-term surveillance for progression to systemic amyloidosis using protein electrophoresis and free light chains",
+      "Screen for multiple endocrine neoplasia type 2A when the family history or features are suggestive",
+      "Offer genetic counselling in familial disease associated with OSMR and IL31RA variants",
+      "Provide ongoing dermatology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary cutaneous amyloidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-cutaneous-amyloidosis-real-image",
-   "title": "primary cutaneous amyloidosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "primary_cutaneous_amyloidosis-pathway",
+      "title": "primary cutaneous amyloidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Amyloid deposition confined to the skin without systemic or visceral involvement, distinct from systemic amyloidosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of systemic amyloidosis such as macroglossia, cardiac or renal involvement or a monoclonal paraprotein",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with Congo red staining showing apple-green birefringence under polarised light, Immunohistochemistry for cytokeratins to identify keratin-derived amyloid in the keratinic forms, Serum and urine protein"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Break the itch-scratch cycle with topical or intralesional corticosteroids and antipruritics including topical agents and antihistamines"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all cutaneous amyloid is benign and failing to investigate and monitor the nodular form for systemic progression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary cutaneous amyloidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_cutaneous_amyloidosis-matrix",
+      "title": "primary cutaneous amyloidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Amyloid deposition confined to the skin without systemic or visceral involvement, distinct from systemic amyloidosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with Congo red staining showing apple-green birefringence under polarised light, Immunohistochemistry for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lichen simplex chronicus and prurigo nodularis, Hypertrophic lichen planus, Post-inflammatory hyperpigmentation and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Break the itch-scratch cycle with topical or intralesional corticosteroids and antipruritics including topical agents and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all cutaneous amyloid is benign and failing to investigate and monitor the nodular form for systemic progression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary cutaneous amyloidosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Weedon's Skin Pathology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_cutaneous_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with Congo red staining",
+          "cells": [
+            {
+              "text": "Apple-green birefringence under polarised light"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for cytokeratins",
+          "cells": [
+            {
+              "text": "Keratin-derived amyloid in the keratinic forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and urine protein electrophoresis and immunofixation",
+          "cells": [
+            {
+              "text": "Systemic disease, particularly in nodular amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains",
+          "cells": [
+            {
+              "text": "AL amyloid, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for multiple endocrine neoplasia type 2A",
+          "cells": [
+            {
+              "text": "Suggestive family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring of nodular amyloidosis",
+          "cells": [
+            {
+              "text": "Progression to systemic amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cutaneous_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic amyloidosis with cutaneous deposits",
+          "cells": [
+            {
+              "text": "Macroglossia, cardiac or renal involvement, or monoclonal paraprotein"
+            },
+            {
+              "text": "Serum and urine electrophoresis; free light chains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodular basal cell carcinoma or adnexal tumour",
+          "cells": [
+            {
+              "text": "Rapidly changing or ulcerating nodules"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cutaneous_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Break the itch-scratch cycle",
+          "cells": [
+            {
+              "text": "Topical or intralesional corticosteroids and antipruritics, including antihistamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and friction avoidance",
+          "cells": [
+            {
+              "text": "Avoid friction from towels and brushes that perpetuate keratinic forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy or retinoids",
+          "cells": [
+            {
+              "text": "Ultraviolet B, or topical or systemic retinoids, for refractory lichen and macular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodular amyloidosis",
+          "cells": [
+            {
+              "text": "Surgical excision or laser, with long-term surveillance for systemic progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEN 2A screening",
+          "cells": [
+            {
+              "text": "When the family history or features are suggestive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Familial disease associated with OSMR and IL31RA variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Ongoing dermatology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_cutaneous_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of primary cutaneous amyloidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary cutaneous amyloidosis: pruritic keratinic or nodular skin lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Macroglossia, cardiac or renal involvement, paraprotein, or ulcerating nodules?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: systemic amyloid and haematology review; exclude neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with Congo red; cytokeratin staining; serum and urine electrophoresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show amyloid with apple-green birefringence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lichen simplex chronicus, prurigo or neoplasm; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids and antipruritics to break the itch-scratch cycle",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and avoidance of friction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "UVB or retinoids for refractory lichen and macular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical excision or laser for nodular amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term surveillance for progression to systemic amyloidosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

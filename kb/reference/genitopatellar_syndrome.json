@@ -1,175 +1,462 @@
 {
- "id": "genitopatellar_syndrome",
- "name": "Genitopatellar syndrome",
- "aliases": [
-  "GTPTS",
-  "KAT6B-related genitopatellar syndrome",
-  "genital anomalies-absent patellae syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nature Reviews chromatinopathy literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by truncating variants in KAT6B (MYST4/MORF), a histone acetyltransferase closely related to KAT6A, with the position of the variant within the gene shaping whether the genitopatellar or SBBYSS phenotype results",
-   "The defining combination is absent or hypoplastic patellae, external genital anomalies and flexion contractures of the hips and knees",
-   "Genital findings include cryptorchidism and scrotal hypoplasia in boys and clitoromegaly in girls",
-   "Renal anomalies, particularly cystic or hydronephrotic kidneys, are frequent and require imaging",
-   "Microcephaly, agenesis or hypoplasia of the corpus callosum and intellectual disability are typical of the neurological phenotype",
-   "Compared with the allelic Say-Barber-Biesecker-Young-Simpson syndrome, genitopatellar syndrome lacks the prominent blepharophimosis and mask-like face but shares patellar involvement",
-   "Diagnosis rests on molecular confirmation of a KAT6B variant, with careful correlation of variant location and clinical features"
+  "id": "genitopatellar_syndrome",
+  "name": "Genitopatellar syndrome",
+  "aliases": [
+    "GTPTS",
+    "KAT6B-related genitopatellar syndrome",
+    "genital anomalies-absent patellae syndrome"
   ],
-  "pathophysiology": "KAT6B encodes a MYST-family lysine acetyltransferase that acetylates histone H3, promoting a chromatin environment permissive for transcription of developmental target genes. Truncating variants clustered in particular regions of the gene are thought to generate proteins that disturb this acetylation-dependent gene regulation in a manner specific to the genitopatellar presentation, in contrast to variants elsewhere that produce the SBBYSS phenotype. The consequent misregulation of developmental programmes affects patterning of the limbs and patellae, the genitourinary tract and the brain, giving rise to the characteristic skeletal, genital, renal and neurological features.",
-  "additionalDifferentials": [
-   "Say-Barber-Biesecker-Young-Simpson syndrome (allelic KAT6B disorder)",
-   "Nail-patella syndrome (LMX1B)",
-   "Small patella syndrome (TBX4)",
-   "Ellis-van Creveld syndrome",
-   "Meier-Gorlin syndrome",
-   "Other syndromic causes of patellar aplasia with genital anomalies",
-   "Fetal akinesia sequence with contractures"
-  ],
-  "additionalInvestigations": [
-   "Exome or genome sequencing to identify KAT6B variants with attention to variant location",
-   "Renal ultrasound to detect cystic kidneys and hydronephrosis",
-   "Knee imaging to confirm absent or hypoplastic patellae",
-   "Brain MRI to assess the corpus callosum and other structural anomalies",
-   "Echocardiography for associated cardiac defects",
-   "Endocrine and genital assessment including evaluation for cryptorchidism",
-   "Neurodevelopmental assessment"
-  ],
-  "redFlags": [
-   "Significant renal impairment from cystic or obstructive kidney disease",
-   "Airway or feeding compromise in the neonatal period",
-   "Severe joint contractures limiting function",
-   "Cardiac defects requiring intervention"
-  ],
-  "prognosis": "Outlook is determined largely by the severity of renal and central nervous system involvement; intellectual disability is common and often moderate to severe, and orthopaedic and urological problems typically require long-term multidisciplinary management, while renal disease can be the principal threat to health.",
-  "pitfalls": [
-   "Failing to distinguish genitopatellar syndrome from the allelic SBBYSS phenotype, which alters counselling and expectations",
-   "Overlooking renal cysts or obstruction that can progress to impairment",
-   "Attributing patellar aplasia to nail-patella syndrome without genetic testing",
-   "Missing corpus callosum anomalies that inform the neurological prognosis"
-  ],
-  "references": [
-   "GeneReviews — KAT6B-Related Disorders (Genitopatellar Syndrome and SBBYSS)",
-   "Nature Reviews — histone acetyltransferases in development and disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy exists, so management is supportive and coordinated across multiple specialties",
-   "Renal ultrasound surveillance and urological management of cystic and hydronephrotic kidneys, which can be the principal threat to survival",
-   "Orthopaedic and physiotherapy management of absent or hypoplastic patellae and of hip and knee flexion contractures",
-   "Assessment and surgical management of genital anomalies, including orchidopexy for cryptorchidism, with endocrine input",
-   "Neurodevelopmental support for intellectual disability, with brain MRI to define corpus callosum and other structural anomalies",
-   "Echocardiographic assessment for associated cardiac defects, and feeding and respiratory support in infancy",
-   "Genetic counselling for the KAT6B disorder, which usually arises as a de novo variant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "genitopatellar_syndrome-pathway",
-   "title": "Genitopatellar syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by truncating variants in KAT6B (MYST4/MORF), a histone acetyltransferase closely related to KAT6A, with the position of the variant within the gene shaping whether the genitopatellar or SBBYSS phenotype results",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant renal impairment from cystic or obstructive kidney disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Exome or genome sequencing to identify KAT6B variants with attention to variant location, Renal ultrasound to detect cystic kidneys and hydronephrosis, Knee imaging to confirm absent or hypoplastic patellae"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy exists, so management is supportive and coordinated across multiple specialties"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish genitopatellar syndrome from the allelic SBBYSS phenotype, which alters counselling and expectations"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of genitopatellar syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "genitopatellar_syndrome-matrix",
-   "title": "Genitopatellar syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by truncating variants in KAT6B (MYST4/MORF), a histone acetyltransferase closely related to KAT6A, with the position of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nature Reviews chromatinopathy literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by truncating variants in KAT6B (MYST4/MORF), a histone acetyltransferase closely related to KAT6A, with the position of the variant within the gene shaping whether the genitopatellar or SBBYSS phenotype results",
+      "The defining combination is absent or hypoplastic patellae, external genital anomalies and flexion contractures of the hips and knees",
+      "Genital findings include cryptorchidism and scrotal hypoplasia in boys and clitoromegaly in girls",
+      "Renal anomalies, particularly cystic or hydronephrotic kidneys, are frequent and require imaging",
+      "Microcephaly, agenesis or hypoplasia of the corpus callosum and intellectual disability are typical of the neurological phenotype",
+      "Compared with the allelic Say-Barber-Biesecker-Young-Simpson syndrome, genitopatellar syndrome lacks the prominent blepharophimosis and mask-like face but shares patellar involvement",
+      "Diagnosis rests on molecular confirmation of a KAT6B variant, with careful correlation of variant location and clinical features"
     ],
-    [
-     "Key Investigations",
-     "Exome or genome sequencing to identify KAT6B variants with attention to variant location, Renal ultrasound to detect cystic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "KAT6B encodes a MYST-family lysine acetyltransferase that acetylates histone H3, promoting a chromatin environment permissive for transcription of developmental target genes. Truncating variants clustered in particular regions of the gene are thought to generate proteins that disturb this acetylation-dependent gene regulation in a manner specific to the genitopatellar presentation, in contrast to variants elsewhere that produce the SBBYSS phenotype. The consequent misregulation of developmental programmes affects patterning of the limbs and patellae, the genitourinary tract and the brain, giving rise to the characteristic skeletal, genital, renal and neurological features.",
+    "additionalDifferentials": [
+      "Say-Barber-Biesecker-Young-Simpson syndrome (allelic KAT6B disorder)",
+      "Nail-patella syndrome (LMX1B)",
+      "Small patella syndrome (TBX4)",
+      "Ellis-van Creveld syndrome",
+      "Meier-Gorlin syndrome",
+      "Other syndromic causes of patellar aplasia with genital anomalies",
+      "Fetal akinesia sequence with contractures"
     ],
-    [
-     "Primary Differentials",
-     "Say-Barber-Biesecker-Young-Simpson syndrome (allelic KAT6B disorder), Nail-patella syndrome (LMX1B), Small patella syndrome (TBX4)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Exome or genome sequencing to identify KAT6B variants with attention to variant location",
+      "Renal ultrasound to detect cystic kidneys and hydronephrosis",
+      "Knee imaging to confirm absent or hypoplastic patellae",
+      "Brain MRI to assess the corpus callosum and other structural anomalies",
+      "Echocardiography for associated cardiac defects",
+      "Endocrine and genital assessment including evaluation for cryptorchidism",
+      "Neurodevelopmental assessment"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy exists, so management is supportive and coordinated across multiple specialties",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant renal impairment from cystic or obstructive kidney disease",
+      "Airway or feeding compromise in the neonatal period",
+      "Severe joint contractures limiting function",
+      "Cardiac defects requiring intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish genitopatellar syndrome from the allelic SBBYSS phenotype, which alters counselling and expectations",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook is determined largely by the severity of renal and central nervous system involvement; intellectual disability is common and often moderate to severe, and orthopaedic and urological problems typically require long-term multidisciplinary management, while renal disease can be the principal threat to health.",
+    "pitfalls": [
+      "Failing to distinguish genitopatellar syndrome from the allelic SBBYSS phenotype, which alters counselling and expectations",
+      "Overlooking renal cysts or obstruction that can progress to impairment",
+      "Attributing patellar aplasia to nail-patella syndrome without genetic testing",
+      "Missing corpus callosum anomalies that inform the neurological prognosis"
+    ],
+    "references": [
+      "GeneReviews — KAT6B-Related Disorders (Genitopatellar Syndrome and SBBYSS)",
+      "Nature Reviews — histone acetyltransferases in development and disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy exists, so management is supportive and coordinated across multiple specialties",
+      "Renal ultrasound surveillance and urological management of cystic and hydronephrotic kidneys, which can be the principal threat to survival",
+      "Orthopaedic and physiotherapy management of absent or hypoplastic patellae and of hip and knee flexion contractures",
+      "Assessment and surgical management of genital anomalies, including orchidopexy for cryptorchidism, with endocrine input",
+      "Neurodevelopmental support for intellectual disability, with brain MRI to define corpus callosum and other structural anomalies",
+      "Echocardiographic assessment for associated cardiac defects, and feeding and respiratory support in infancy",
+      "Genetic counselling for the KAT6B disorder, which usually arises as a de novo variant"
     ]
-   ],
-   "caption": "Overview comparison matrix for genitopatellar syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "genitopatellar-syndrome-real-image",
-   "title": "Genitopatellar syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "genitopatellar_syndrome-pathway",
+      "title": "Genitopatellar syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by truncating variants in KAT6B (MYST4/MORF), a histone acetyltransferase closely related to KAT6A, with the position of the variant within the gene shaping whether the genitopatellar or SBBYSS phenotype results",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant renal impairment from cystic or obstructive kidney disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Exome or genome sequencing to identify KAT6B variants with attention to variant location, Renal ultrasound to detect cystic kidneys and hydronephrosis, Knee imaging to confirm absent or hypoplastic patellae"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy exists, so management is supportive and coordinated across multiple specialties"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish genitopatellar syndrome from the allelic SBBYSS phenotype, which alters counselling and expectations"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of genitopatellar syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "genitopatellar_syndrome-matrix",
+      "title": "Genitopatellar syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by truncating variants in KAT6B (MYST4/MORF), a histone acetyltransferase closely related to KAT6A, with the position of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Exome or genome sequencing to identify KAT6B variants with attention to variant location, Renal ultrasound to detect cystic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Say-Barber-Biesecker-Young-Simpson syndrome (allelic KAT6B disorder), Nail-patella syndrome (LMX1B), Small patella syndrome (TBX4)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy exists, so management is supportive and coordinated across multiple specialties",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish genitopatellar syndrome from the allelic SBBYSS phenotype, which alters counselling and expectations",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for genitopatellar syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nature Reviews chromatinopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "genitopatellar_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome or genome sequencing for KAT6B variants",
+          "cells": [
+            {
+              "text": "KAT6B variants, with attention to location"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Cystic kidneys and hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Knee imaging",
+          "cells": [
+            {
+              "text": "Absent or hypoplastic patellae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Corpus callosum and other structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Associated cardiac defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine and genital assessment",
+          "cells": [
+            {
+              "text": "Cryptorchidism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "genitopatellar_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Say-Barber-Biesecker-Young-Simpson syndrome",
+          "cells": [
+            {
+              "text": "Allelic KAT6B disorder that changes counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other syndromic patellar aplasia",
+          "cells": [
+            {
+              "text": "Patellar aplasia with genital anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "genitopatellar_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive, coordinated care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound surveillance and urology",
+          "cells": [
+            {
+              "text": "Cystic and hydronephrotic kidneys"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and physiotherapy care",
+          "cells": [
+            {
+              "text": "Absent or hypoplastic patellae; hip and knee flexion contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genital anomaly care",
+          "cells": [
+            {
+              "text": "Orchidopexy for cryptorchidism, with endocrine input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Intellectual disability; brain MRI for corpus callosum anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and feeding support",
+          "cells": [
+            {
+              "text": "Echocardiography; feeding and respiratory support in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually a de novo KAT6B variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "genitopatellar_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Genitopatellar syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected genitopatellar syndrome: absent patellae with genital anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (renal impairment, neonatal airway or feeding compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for neonatal airway or feeding compromise, or renal impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "KAT6B sequencing, renal ultrasound, knee imaging, brain MRI and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does KAT6B sequencing confirm the diagnosis, with SBBYSS considered?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SBBYSS, nail-patella syndrome, small patella syndrome or Meier-Gorlin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Renal ultrasound surveillance and urology for cystic or hydronephrotic kidneys",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthopaedic and physiotherapy care for patellae and flexion contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orchidopexy for cryptorchidism, with endocrine input",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurodevelopmental support and brain MRI to define structural anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on renal and CNS severity; intellectual disability is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

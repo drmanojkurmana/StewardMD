@@ -1,177 +1,541 @@
 {
- "id": "anal_skin_tag",
- "name": "Anal skin tag",
- "aliases": [
-  "perianal skin tag",
-  "fibroepithelial anal polyp",
-  "sentinel tag"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal / Anorectal",
- "specialty": "Colorectal surgery / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An anal skin tag is a benign, soft, fibrovascular projection of perianal skin, usually asymptomatic and found incidentally on examination",
-   "Tags commonly arise as residua of a previously thrombosed external haemorrhoid, at the site of a healed anal fissure (the sentinel tag/pile), or after anorectal surgery",
-   "The chief symptoms, when present, are hygiene difficulty, pruritus ani, and irritation rather than pain or bleeding",
-   "A skin tag associated with a chronic anal fissure typically sits at the posterior midline distal to the fissure and signals the underlying fissure rather than being the primary problem",
-   "Large, irregular, indurated, or multiple oedematous tags should raise suspicion of Crohn disease, in which characteristic oedematous violaceous tags occur",
-   "Management is usually reassurance; excision is offered only for troublesome hygiene, persistent irritation, or diagnostic uncertainty",
-   "Excision should be conservative to avoid wound complications and anal stenosis, and any underlying fissure or Crohn disease must be addressed",
-   "Histology should be examined after excision to exclude condylomata, intraepithelial neoplasia, or other pathology when appearances are atypical"
+  "id": "anal_skin_tag",
+  "name": "Anal skin tag",
+  "aliases": [
+    "perianal skin tag",
+    "fibroepithelial anal polyp",
+    "sentinel tag"
   ],
-  "pathophysiology": "Anal skin tags are composed of fibrous and vascular connective tissue covered by squamous epithelium of the anal margin. They most often form when the oedema and stretching of an acute external haemorrhoidal thrombosis resolve, leaving redundant, fibrosed perianal skin. Alternatively, the chronic inflammation and induration of a longstanding anal fissure produce a sentinel tag at the distal fissure margin, or postoperative scarring and healing after anorectal procedures leave residual folds. In Crohn disease, transmural inflammation and lymphatic obstruction generate characteristically oedematous, often broad-based perianal tags. The tags themselves have no malignant potential but can impair local hygiene and provoke secondary irritation and pruritus.",
-  "additionalDifferentials": [
-   "External haemorrhoid or residual thrombosed haemorrhoid",
-   "Anal condylomata acuminata (viral warts)",
-   "Hypertrophied anal papilla protruding at the anal verge",
-   "Crohn disease-associated perianal tags",
-   "Anal intraepithelial neoplasia or anal squamous carcinoma",
-   "Molluscum contagiosum or other perianal skin lesion",
-   "Prolapsing haemorrhoid or mucosal prolapse"
-  ],
-  "additionalInvestigations": [
-   "Careful inspection and digital rectal examination of the perianal region",
-   "Proctoscopy to assess for associated haemorrhoids or fissure",
-   "Examination under anaesthesia where a chronic fissure or Crohn disease is suspected",
-   "Histopathological examination of any excised or atypical lesion",
-   "Assessment for Crohn disease (bowel symptoms, endoscopy, imaging) when tags are oedematous or multiple",
-   "Testing for human papillomavirus-associated disease where warts or neoplasia are suspected"
-  ],
-  "redFlags": [
-   "Induration, ulceration, or irregularity suggesting anal neoplasia",
-   "Multiple oedematous or violaceous tags suggesting Crohn disease",
-   "Associated bleeding, discharge, or a non-healing perianal wound",
-   "Rapid growth or change in a previously stable lesion",
-   "Coexisting perianal fistula or abscess"
-  ],
-  "prognosis": "Anal skin tags are benign with no malignant potential; they cause no harm and often need no treatment, though when excised for symptoms they heal well provided any underlying fissure or Crohn disease is managed, and can recur if the underlying cause persists.",
-  "pitfalls": [
-   "Excising a sentinel tag without recognising and treating the underlying chronic anal fissure",
-   "Aggressive or circumferential excision leading to painful wounds or anal stenosis",
-   "Excising oedematous tags in undiagnosed Crohn disease, risking non-healing wounds",
-   "Mistaking condylomata or a neoplastic lesion for a simple skin tag and omitting histology",
-   "Offering surgery for asymptomatic tags where reassurance would suffice"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Association of Coloproctology of Great Britain and Ireland guidance on benign anal conditions",
-   "Standard coloproctology reference texts on perianal disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the patient, as anal skin tags are benign with no malignant potential and often need no treatment",
-   "Advise gentle perianal hygiene and measures to relieve pruritus and local irritation",
-   "Treat the underlying cause such as a chronic fissure or haemorrhoids rather than the tag alone",
-   "Reserve excision for troublesome hygiene difficulty, persistent irritation or diagnostic uncertainty",
-   "Investigate and manage Crohn disease where tags are oedematous, broad-based or multiple, avoiding aggressive excision given poor healing",
-   "Send any excised or atypical lesion for histological examination"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anal_skin_tag-pathway",
-   "title": "Anal skin tag: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An anal skin tag is a benign, soft, fibrovascular projection of perianal skin, usually asymptomatic and found incidentally on examination",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Induration, ulceration, or irregularity suggesting anal neoplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful inspection and digital rectal examination of the perianal region, Proctoscopy to assess for associated haemorrhoids or fissure, Examination under anaesthesia where a chronic fissure or Crohn disease is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the patient, as anal skin tags are benign with no malignant potential and often need no treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excising a sentinel tag without recognising and treating the underlying chronic anal fissure"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anal skin tag."
-  }
- ],
- "tables": [
-  {
-   "id": "anal_skin_tag-matrix",
-   "title": "Anal skin tag: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An anal skin tag is a benign, soft, fibrovascular projection of perianal skin, usually asymptomatic and found incidentally on",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal / Anorectal",
+  "specialty": "Colorectal surgery / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An anal skin tag is a benign, soft, fibrovascular projection of perianal skin, usually asymptomatic and found incidentally on examination",
+      "Tags commonly arise as residua of a previously thrombosed external haemorrhoid, at the site of a healed anal fissure (the sentinel tag/pile), or after anorectal surgery",
+      "The chief symptoms, when present, are hygiene difficulty, pruritus ani, and irritation rather than pain or bleeding",
+      "A skin tag associated with a chronic anal fissure typically sits at the posterior midline distal to the fissure and signals the underlying fissure rather than being the primary problem",
+      "Large, irregular, indurated, or multiple oedematous tags should raise suspicion of Crohn disease, in which characteristic oedematous violaceous tags occur",
+      "Management is usually reassurance; excision is offered only for troublesome hygiene, persistent irritation, or diagnostic uncertainty",
+      "Excision should be conservative to avoid wound complications and anal stenosis, and any underlying fissure or Crohn disease must be addressed",
+      "Histology should be examined after excision to exclude condylomata, intraepithelial neoplasia, or other pathology when appearances are atypical"
     ],
-    [
-     "Key Investigations",
-     "Careful inspection and digital rectal examination of the perianal region, Proctoscopy to assess for associated haemorrhoids or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Anal skin tags are composed of fibrous and vascular connective tissue covered by squamous epithelium of the anal margin. They most often form when the oedema and stretching of an acute external haemorrhoidal thrombosis resolve, leaving redundant, fibrosed perianal skin. Alternatively, the chronic inflammation and induration of a longstanding anal fissure produce a sentinel tag at the distal fissure margin, or postoperative scarring and healing after anorectal procedures leave residual folds. In Crohn disease, transmural inflammation and lymphatic obstruction generate characteristically oedematous, often broad-based perianal tags. The tags themselves have no malignant potential but can impair local hygiene and provoke secondary irritation and pruritus.",
+    "additionalDifferentials": [
+      "External haemorrhoid or residual thrombosed haemorrhoid",
+      "Anal condylomata acuminata (viral warts)",
+      "Hypertrophied anal papilla protruding at the anal verge",
+      "Crohn disease-associated perianal tags",
+      "Anal intraepithelial neoplasia or anal squamous carcinoma",
+      "Molluscum contagiosum or other perianal skin lesion",
+      "Prolapsing haemorrhoid or mucosal prolapse"
     ],
-    [
-     "Primary Differentials",
-     "External haemorrhoid or residual thrombosed haemorrhoid, Anal condylomata acuminata (viral warts), Hypertrophied anal papilla",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful inspection and digital rectal examination of the perianal region",
+      "Proctoscopy to assess for associated haemorrhoids or fissure",
+      "Examination under anaesthesia where a chronic fissure or Crohn disease is suspected",
+      "Histopathological examination of any excised or atypical lesion",
+      "Assessment for Crohn disease (bowel symptoms, endoscopy, imaging) when tags are oedematous or multiple",
+      "Testing for human papillomavirus-associated disease where warts or neoplasia are suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassure the patient, as anal skin tags are benign with no malignant potential and often need no treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Induration, ulceration, or irregularity suggesting anal neoplasia",
+      "Multiple oedematous or violaceous tags suggesting Crohn disease",
+      "Associated bleeding, discharge, or a non-healing perianal wound",
+      "Rapid growth or change in a previously stable lesion",
+      "Coexisting perianal fistula or abscess"
     ],
-    [
-     "Clinical Pitfall",
-     "Excising a sentinel tag without recognising and treating the underlying chronic anal fissure",
-     "Prevent diagnostic or management error"
+    "prognosis": "Anal skin tags are benign with no malignant potential; they cause no harm and often need no treatment, though when excised for symptoms they heal well provided any underlying fissure or Crohn disease is managed, and can recur if the underlying cause persists.",
+    "pitfalls": [
+      "Excising a sentinel tag without recognising and treating the underlying chronic anal fissure",
+      "Aggressive or circumferential excision leading to painful wounds or anal stenosis",
+      "Excising oedematous tags in undiagnosed Crohn disease, risking non-healing wounds",
+      "Mistaking condylomata or a neoplastic lesion for a simple skin tag and omitting histology",
+      "Offering surgery for asymptomatic tags where reassurance would suffice"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Association of Coloproctology of Great Britain and Ireland guidance on benign anal conditions",
+      "Standard coloproctology reference texts on perianal disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the patient, as anal skin tags are benign with no malignant potential and often need no treatment",
+      "Advise gentle perianal hygiene and measures to relieve pruritus and local irritation",
+      "Treat the underlying cause such as a chronic fissure or haemorrhoids rather than the tag alone",
+      "Reserve excision for troublesome hygiene difficulty, persistent irritation or diagnostic uncertainty",
+      "Investigate and manage Crohn disease where tags are oedematous, broad-based or multiple, avoiding aggressive excision given poor healing",
+      "Send any excised or atypical lesion for histological examination"
     ]
-   ],
-   "caption": "Overview comparison matrix for anal skin tag."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anal-skin-tag-real-image",
-   "title": "Anal skin tag: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "anal_skin_tag-pathway",
+      "title": "Anal skin tag: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An anal skin tag is a benign, soft, fibrovascular projection of perianal skin, usually asymptomatic and found incidentally on examination",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Induration, ulceration, or irregularity suggesting anal neoplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful inspection and digital rectal examination of the perianal region, Proctoscopy to assess for associated haemorrhoids or fissure, Examination under anaesthesia where a chronic fissure or Crohn disease is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the patient, as anal skin tags are benign with no malignant potential and often need no treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excising a sentinel tag without recognising and treating the underlying chronic anal fissure"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anal skin tag."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anal_skin_tag-matrix",
+      "title": "Anal skin tag: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An anal skin tag is a benign, soft, fibrovascular projection of perianal skin, usually asymptomatic and found incidentally on",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful inspection and digital rectal examination of the perianal region, Proctoscopy to assess for associated haemorrhoids or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "External haemorrhoid or residual thrombosed haemorrhoid, Anal condylomata acuminata (viral warts), Hypertrophied anal papilla",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the patient, as anal skin tags are benign with no malignant potential and often need no treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excising a sentinel tag without recognising and treating the underlying chronic anal fissure",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anal skin tag."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anal_skin_tag-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Careful inspection and digital rectal examination of the perianal region",
+          "cells": [
+            {
+              "text": "Tag morphology and underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proctoscopy",
+          "cells": [
+            {
+              "text": "Haemorrhoids or fissure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Chronic fissure or Crohn disease suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of any excised or atypical lesion",
+          "cells": [
+            {
+              "text": "Exclusion of neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn disease assessment when tags are oedematous or multiple",
+          "cells": [
+            {
+              "text": "Crohn disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HPV-associated disease testing where warts or neoplasia suspected",
+          "cells": [
+            {
+              "text": "HPV-associated lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_skin_tag-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "External or residual thrombosed haemorrhoid",
+          "cells": [
+            {
+              "text": "Prior thrombosed haemorrhoid"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal condylomata acuminata",
+          "cells": [
+            {
+              "text": "Viral wart"
+            },
+            {
+              "text": "Inspection and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophied anal papilla",
+          "cells": [
+            {
+              "text": "Papilla at the verge"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn disease-associated perianal tags",
+          "cells": [
+            {
+              "text": "Oedematous or multiple tags"
+            },
+            {
+              "text": "Crohn workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal intraepithelial neoplasia or squamous carcinoma",
+          "cells": [
+            {
+              "text": "Induration or ulceration"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molluscum contagiosum or other perianal skin lesion",
+          "cells": [
+            {
+              "text": "Skin lesion"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolapsing haemorrhoid or mucosal prolapse",
+          "cells": [
+            {
+              "text": "Prolapse on straining"
+            },
+            {
+              "text": "Proctoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_skin_tag-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance, as tags are benign",
+          "cells": [
+            {
+              "text": "Benign lesion"
+            },
+            {
+              "text": "Often no treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle perianal hygiene and pruritus measures",
+          "cells": [
+            {
+              "text": "Hygiene difficulty and irritation"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of the underlying chronic fissure or haemorrhoids",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            },
+            {
+              "text": "Treat the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision for troublesome hygiene, irritation or diagnostic uncertainty",
+          "cells": [
+            {
+              "text": "Symptomatic tag"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of Crohn disease where tags are oedematous or broad-based",
+          "cells": [
+            {
+              "text": "Crohn disease"
+            },
+            {
+              "text": "Avoids aggressive excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histological examination of excised lesions",
+          "cells": [
+            {
+              "text": "Atypical lesion"
+            },
+            {
+              "text": "Pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anal_skin_tag-dx-mgmt",
+      "title": "Diagnosis and management of Anal skin tag",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Soft perianal skin tag, often incidental, sometimes with itch or hygiene problems",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Induration, ulceration, multiple oedematous tags or bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent colorectal review if neoplasia or Crohn suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Perianal inspection and DRE; proctoscopy; EUA if fissure suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Benign tag with an underlying fissure or haemorrhoid identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassure; hygiene and pruritus measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review condylomata, papilla, Crohn tags and neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the underlying fissure or haemorrhoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excise only if troublesome or uncertain; send for histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Investigate Crohn disease if tags are multiple or broad-based",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with no malignant potential; recurs if underlying cause persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

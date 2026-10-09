@@ -253,25 +253,582 @@
       "caption": "Diagnostic and clinical overview matrix for acute bronchitis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "acute-bronchitis-real-image",
-      "title": "Acute Bronchitis: Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Outpatient Clinical Care for Adults, 2024",
+      "url": "https://www.cdc.gov/antibiotic-use/hcp/clinical-care/adult-outpatient.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Kinkade and Long, Acute Bronchitis, Am Fam Physician 2016",
+      "url": "https://www.aafp.org/pubs/afp/issues/2016/1001/p560.html",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "CDC, Pertussis Clinical Care, 2025",
+      "url": "https://www.cdc.gov/pertussis/hcp/clinical-care/index.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ACUTE_BRONCHITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing acute bronchitis and screening for pneumonia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Cough duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Under 3 weeks",
+              "op": "<",
+              "value": 3
+            },
+            {
+              "text": "Dry or productive cough with no clinical or radiographic pneumonia"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "Typical course of cough",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "About 2 to 3 weeks, pooled estimate 18 days",
+              "range": [
+                2,
+                3
+              ]
+            },
+            {
+              "text": "Explain this expected course to the patient"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "Heart rate",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": ">=100",
+              "op": ">=",
+              "value": 100
+            },
+            {
+              "text": "Abnormal vital sign; evaluate for pneumonia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Respiratory rate",
+          "unit": "breaths/min",
+          "cells": [
+            {
+              "text": ">=24",
+              "op": ">=",
+              "value": 24
+            },
+            {
+              "text": "Abnormal vital sign; evaluate for pneumonia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral temperature",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">=38",
+              "op": ">=",
+              "value": 38
+            },
+            {
+              "text": "Abnormal vital sign; evaluate for pneumonia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest examination",
+          "cells": [
+            {
+              "text": "Focal consolidation, egophony or fremitus"
+            },
+            {
+              "text": "{{hy:Points to pneumonia; consider chest imaging}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sputum colour",
+          "cells": [
+            {
+              "text": "Coloured sputum"
+            },
+            {
+              "text": "Does not indicate bacterial infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest x-ray",
+          "cells": [
+            {
+              "text": "Not needed when vital signs and lung exam are normal"
+            },
+            {
+              "text": "Consider when pneumonia is suspected"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial cause",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Found in 1% to 10% of cases",
+              "range": [
+                1,
+                10
+              ]
+            },
+            {
+              "text": "Most cases are viral"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Leukocytosis",
+          "cells": [
+            {
+              "text": "About 20% of patients"
+            },
+            {
+              "text": "Routine blood tests usually not indicated"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Age over 75 years",
+          "cells": [
+            {
+              "text": "Fever and tachycardia may be absent"
+            },
+            {
+              "text": "Pneumonia signs can be subtle"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Fever threshold differs by source: CDC uses oral temperature >=38 deg C, the 2016 AFP review uses >37.8 deg C (>100 deg F). Diagnosis is clinical; no single test confirms bronchitis."
+    },
+    {
+      "id": "ACUTE_BRONCHITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute bronchitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Community-acquired pneumonia",
+          "cells": [
+            {
+              "text": "Tachycardia, tachypnoea, fever, hypoxia or focal consolidation signs"
+            },
+            {
+              "text": "{{hy:Chest x-ray showing a new infiltrate}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pertussis",
+          "cells": [
+            {
+              "text": "Cough over 2 weeks with paroxysms, whoop, post-tussive vomiting or known exposure"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Common cold or upper respiratory infection",
+          "cells": [
+            {
+              "text": "Early symptoms may be indistinguishable; self-limited"
+            },
+            {
+              "text": "Clinical course"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Acute coronary syndrome or heart failure",
+          "cells": [
+            {
+              "text": "Exertional dyspnoea, chest heaviness, relief with rest"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Dyspnoea, especially exertional, or chest pain"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exacerbation of COPD or asthma",
+          "cells": [
+            {
+              "text": "Known chronic lung disease; bronchitis is defined without it"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "GERD, postnasal drip, ACE-inhibitor cough",
+          "cells": [
+            {
+              "text": "Cough without infective features; check drug list, reflux and nasal symptoms"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy or tuberculosis",
+          "cells": [
+            {
+              "text": "Haemoptysis, weight loss or cough persisting beyond a few weeks"
+            },
+            {
+              "text": "Chest x-ray"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Best-test cells marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "ACUTE_BRONCHITIS-treatment",
+      "kind": "treatment",
+      "title": "Management of acute bronchitis in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No antibiotic, with explanation",
+          "cells": [
+            {
+              "text": "{{hy:All uncomplicated cases}}"
+            },
+            {
+              "text": "Antibiotics shortened cough by about half a day; number needed to harm 5"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "No antibiotic regardless of cough duration",
+          "cells": [
+            {
+              "text": "Uncomplicated bronchitis with a long or intense cough"
+            },
+            {
+              "text": "Cough duration alone does not justify antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Delayed antibiotic prescription",
+          "cells": [
+            {
+              "text": "When a patient strongly expects antibiotics"
+            },
+            {
+              "text": "Reduces antibiotic use; satisfaction 87% versus 92% with immediate"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dextromethorphan",
+          "cells": [
+            {
+              "text": "Bothersome cough"
+            },
+            {
+              "text": "30 mg reduced cough counts by 19% to 36% versus placebo"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Guaifenesin",
+          "cells": [
+            {
+              "text": "Bothersome cough"
+            },
+            {
+              "text": "Some benefit in a Cochrane review"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Codeine",
+          "cells": [
+            {
+              "text": "Listed by CDC among cough suppressants"
+            },
+            {
+              "text": "Evidence for symptomatic therapies is limited"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "First-generation antihistamine or decongestant",
+          "cells": [
+            {
+              "text": "Diphenhydramine or phenylephrine for symptom relief"
+            },
+            {
+              "text": "Evidence for symptomatic therapies is limited"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inhaled beta2 agonist",
+          "cells": [
+            {
+              "text": "Only when wheeze is present"
+            },
+            {
+              "text": "Avoid routine use"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Honey",
+          "cells": [
+            {
+              "text": "Children older than 1 year"
+            },
+            {
+              "text": "Reasonable for cough relief"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Macrolide (azithromycin, clarithromycin or erythromycin)",
+          "cells": [
+            {
+              "text": "Suspected or confirmed pertussis"
+            },
+            {
+              "text": "Start within 3 weeks of cough onset; TMP-SMX if macrolide resistance"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Sources conflict on codeine: CDC lists it, the 2016 AFP review found no benefit in two studies and does not recommend it. Pertussis antibiotic doses were not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ACUTE_BRONCHITIS-dx-mgmt",
+      "title": "Diagnosis and management of acute bronchitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult with acute cough under 3 weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Exertional dyspnoea, chest heaviness, haemoptysis or weight loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Not simple bronchitis: evaluate cardiac, thromboembolic or malignant cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "HR >=100, RR >=24, temp >=38 deg C or focal chest signs?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Chest x-ray to look for pneumonia",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "New infiltrate on x-ray?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Manage as pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Cough over 2 weeks with paroxysms, whoop, post-tussive vomiting or exposure?",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Treat suspected pertussis with a macrolide, ideally within 3 weeks of onset",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diagnose acute bronchitis; no antibiotic; explain 2 to 3 week course",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Symptom relief: dextromethorphan or guaifenesin; beta2 agonist only if wheeze",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limited illness; reassess if cough persists beyond a few weeks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
         }
       ]
     }

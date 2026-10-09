@@ -1,175 +1,783 @@
 {
- "id": "aortic_regurgitation",
- "name": "Aortic Regurgitation",
- "system": "Cardiology",
- "class": "non_infective",
- "chapter": 273,
- "page": 2043,
- "aliases": [
-  "AR",
-  "aortic insufficiency"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2043-2047",
-  "clinicalPearls": [
-   "Chronic severe AR can have a long latent period, with patients remaining relatively asymptomatic for 10-15 years; exertional dyspnea is usually the first symptom of diminished cardiac reserve, followed by orthopnea and paroxysmal nocturnal dyspnea (p.2044).",
-   "A wide arterial pulse pressure (systolic hypertension plus low diastolic pressure) is characteristic of chronic severe AR, producing peripheral signs such as the water-hammer (Corrigan's) pulse, Quincke's capillary pulsations, Traube's pistol-shot femoral sounds, and Duroziez's sign (p.2043-2044).",
-   "The murmur of chronic AR is a high-pitched, blowing, decrescendo diastolic murmur heard best in the third intercostal space along the left sternal border; it is best appreciated with the patient sitting up, leaning forward, breath held in forced expiration (p.2044).",
-   "A diastolic murmur louder along the right sternal border suggests AR caused by aneurysmal dilation of the aortic root rather than primary valvular disease (p.2044).",
-   "The Austin Flint murmur is a soft, low-pitched rumbling mid-to-late diastolic murmur in severe AR, probably from diastolic displacement of the anterior mitral leaflet by the regurgitant stream; it is NOT associated with hemodynamically significant mitral obstruction (p.2044).",
-   "Anginal chest pain can occur in severe AR even without coronary artery disease and even in younger patients, may occur at rest, and often responds poorly to sublingual nitroglycerin (p.2044).",
-   "On echocardiography, a rapid high-frequency diastolic fluttering of the anterior mitral leaflet, produced by the impact of the regurgitant jet, is a characteristic finding (p.2044).",
-   "Auscultatory features of AR are intensified by sustained handgrip, which augments systemic vascular resistance and increases LV afterload (p.2044).",
-   "In acute severe AR, the elevated LV end-diastolic pressure leads to early (premature) closure of the mitral valve, a soft S1, and a soft, short early diastolic murmur (p.2044)."
+  "id": "aortic_regurgitation",
+  "name": "Aortic Regurgitation",
+  "system": "Cardiology",
+  "class": "non_infective",
+  "chapter": 273,
+  "page": 2043,
+  "aliases": [
+    "AR",
+    "aortic insufficiency"
   ],
-  "pathophysiology": "The total LV stroke volume (effective forward stroke volume plus regurgitant volume) is increased; in severe AR the regurgitant volume may equal the effective forward stroke volume. Unlike MR, the entire LV stroke volume is ejected into the high-pressure aorta. The major compensation is an increase in LV end-diastolic volume (increased preload); dilation and eccentric hypertrophy allow a larger stroke volume without increased myofibril shortening, so severe AR can occur with a normal effective forward stroke volume and normal LVEF together with elevated LV end-diastolic pressure and volume. By Laplace's law LV dilation increases systolic wall tension, so chronic AR is a state of both increased preload and afterload. Adaptive measures eventually fail; deterioration of LV function often precedes symptom onset. Considerable LV wall thickening occurs and hearts can weigh >1000 g. The reverse aorta-to-LV diastolic pressure gradient decreases through diastole, accounting for the decrescendo murmur. In acute severe AR the LV is unprepared for the volume load, compliance is normal or reduced, diastolic pressures rise rapidly (occasionally >40 mmHg), and the reversed pressure gradient closes the mitral valve prematurely. Myocardial ischemia may occur because of elevated oxygen demand (LV dilation, hypertrophy, increased systolic tension) combined with reduced coronary perfusion (most coronary flow is diastolic, when aortic pressure is low), affecting particularly the subendocardium even without epicardial CAD (p.2043-2044).",
-  "additionalDifferentials": [
-   "Aortic stenosis (a mid-systolic ejection murmur and systolic thrill are frequently audible in isolated AR and do not necessarily signify coexisting AS)",
-   "Combined aortic stenosis and aortic regurgitation (coexistence of hemodynamically significant AS with AR occurs almost exclusively in rheumatic or congenital disease)",
-   "Mitral regurgitation (contrasted hemodynamically; severe AR can also coexist with MR)"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [],
-  "additionalInvestigations": [
-   "ECG: LV hypertrophy signs in chronic severe AR, with ST-segment depression and T-wave inversion in leads I, aVL, V5, V6 ('LV strain'); left axis deviation and/or QRS prolongation may be present (p.2044)",
-   "Transthoracic echocardiography (TTE): cornerstone of longitudinal follow-up; assesses LV size/function and cause/severity of AR; LV global longitudinal strain (GLS) by speckle tracking may detect systolic dysfunction before EF falls (p.2044)",
-   "Color flow Doppler: with severe AR the central jet width exceeds 65% of the LV outflow tract, regurgitant volume >=60 mL/beat, regurgitant fraction >=50%, and there is diastolic flow reversal in the proximal descending thoracic aorta; continuous-wave Doppler shows rapid deceleration time in acute severe AR (p.2044)",
-   "Transesophageal echocardiography (TEE): detailed anatomic assessment of valve, root, and portions of the aorta (p.2044)",
-   "Cardiac magnetic resonance (CMR): accurate LV volumes and aortic size/contour when TTE is limited; can screen for increased LV interstitial (extracellular volume fraction) and replacement fibrosis (late gadolinium enhancement) (p.2044)",
-   "Cardiac CT: detailed assessment of aortic valve, root, and thoracic aortic anatomy; coronary CT angiography can provide preoperative coronary information (p.2044-2045)",
-   "Chest X-ray: downward and leftward apex displacement, posterior LV displacement encroaching on the spine, and possible aneurysmal aortic dilation when root disease is the cause (less sensitive than echo/CMR/CT for root/ascending aortic enlargement) (p.2045)",
-   "Cardiac catheterization with contrast aortography: confirms magnitude of regurgitation and LV status when needed; coronary angiography routinely before surgery in those at coronary risk (p.2045)"
-  ],
-  "redFlags": [
-   "Acute severe AR (as in infective endocarditis, aortic dissection, or trauma): the LV cannot dilate enough to maintain stroke volume, LV diastolic pressure rises rapidly with marked LA and PA wedge pressure elevation, and pulmonary edema and/or cardiogenic shock may develop rapidly - a surgical emergency requiring operation usually within 24 h (prompt 24-48 h surgery may be lifesaving) (p.2044, p.2046-2047).",
-   "Acute severe AR may show only slight widening of pulse pressure and invariably presents with tachycardia (heart rate increases to preserve cardiac output), unlike the wide pulse pressure of chronic AR (p.2044).",
-   "In acute severe AR, intra-aortic balloon counterpulsation is contraindicated and beta blockers are best avoided (p.2045).",
-   "Onset of symptoms or LV systolic dysfunction in chronic severe AR is an indication for surgery (p.2045)."
-  ],
-  "prognosis": "Operative and late mortality risks depend largely on disease stage and myocardial function at operation. Overall operative mortality for isolated AVR for pure AR is ~1-2%; the risk doubles when aortic surgery is added. Patients with marked cardiac enlargement and established LV dysfunction have an operative mortality of ~5-10% and a late mortality of ~3-5% per year from LV failure despite technically satisfactory operation; nonetheless, because of the very poor prognosis with medical management, even patients with advanced LV systolic dysfunction should be considered for operation. If surgery is delayed too long (>1 year from onset of symptoms or LV dysfunction), it often does not restore normal LV size and function (p.2046-2047).",
-  "pitfalls": [
-   "Sphygmomanometer diastolic pressure can be hard to read because systolic sounds may persist with the cuff fully deflated; the muffling point (Korotkoff phase IV) corresponds reasonably to true intra-arterial diastolic pressure (p.2044).",
-   "As chronic AR progresses and LV end-diastolic pressure rises, the arterial diastolic pressure may actually rise (aortic diastolic pressure cannot fall below LV end-diastolic pressure), so a less-wide pulse pressure does not exclude severe disease (p.2044).",
-   "A mid-systolic ejection murmur and systolic thrill in isolated AR can be loud without signifying aortic valve obstruction and do not necessarily indicate coexisting AS (p.2044).",
-   "Deterioration of LV function often precedes the development of symptoms, so waiting for symptoms risks irreversible dysfunction; serial noninvasive follow-up is essential to time surgery (p.2043-2044, p.2046).",
-   "Transcatheter aortic valve implantation (TAVI) is NOT recommended for patients with severe AR who are surgical candidates (technical success limited by annular dilation and paucity of valvular/annular calcium) (p.2046)."
-  ],
-  "severityClassification": "Severe AR is characterized by central jet width >65% of the LV outflow tract on color Doppler, vena contracta >0.6 cm, regurgitant volume >=60 mL/beat, regurgitant fraction >=50%, effective regurgitant orifice >=0.3 cm2, and holodiastolic flow reversal in the proximal descending thoracic aorta. AHA/ACC staging (per Fig. 273-2): asymptomatic (Stage C, with C2 denoting LV dysfunction EF <=55%) versus symptomatic (Stage D). Surgical thresholds for asymptomatic severe AR include LVEF <55%, LV end-systolic dimension >50 mm (>25 mm/m2), or LV end-diastolic dimension >65 mm on serial studies (p.2044, p.2046).",
-  "references": [
-   "Harrison 22e p.2043-2047"
-  ],
-  "crossLinks": [
-   "aortic_dissection",
-   "IE",
-   "heart_failure"
-  ],
-  "management": [
-   "Refer for aortic valve replacement or repair once chronic severe regurgitation causes symptoms, left ventricular dysfunction or progressive dilatation, adding aortic root replacement when the root is aneurysmal",
-   "Control hypertension and afterload with vasodilators such as ACE inhibitors, ARBs or dihydropyridine calcium-channel blockers in symptomatic patients or those unfit for surgery",
-   "Manage acute severe regurgitation as a surgical emergency, supporting the circulation with vasodilators and inotropes while avoiding intra-aortic balloon counterpulsation and negative chronotropes",
-   "Treat associated heart failure with diuretics and guideline-directed medical therapy",
-   "Where an aortopathy underlies the lesion, such as Marfan syndrome, slow root dilatation with a beta-blocker or ARB and maintain dental and skin hygiene to reduce endocarditis risk",
-   "Undertake serial transthoracic echocardiographic surveillance of left ventricular size and function, using strain imaging or cardiac MRI to detect early dysfunction",
-   "Plan the timing and mode of intervention through a specialist heart-valve multidisciplinary team"
-  ]
- },
- "algorithms": [
-  {
-   "id": "aortic_regurgitation-pathway",
-   "title": "Aortic Regurgitation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Chronic severe AR can have a long latent period, with patients remaining relatively asymptomatic for 10-15 years; exertional dyspnea is usually the first symptom of diminished cardiac reserve, followed by orthopnea and paroxysmal nocturnal",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe AR (as in infective endocarditis, aortic dissection, or trauma): the LV cannot dilate enough to maintain stroke volume, LV diastolic pressure rises rapidly with marked LA and PA wedge pressure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: ECG: LV hypertrophy signs in chronic severe AR, with ST-segment depression and T-wave inversion in leads I, aVL, V5, V6 ('LV strain'); left axis deviation and/or QRS prolongation may be present (p.2044), Transthoracic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Refer for aortic valve replacement or repair once chronic severe regurgitation causes symptoms, left ventricular dysfunction or progressive dilatation, adding aortic root replacement when the root is aneurysmal"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Sphygmomanometer diastolic pressure can be hard to read because systolic sounds may persist with the cuff fully deflated; the muffling point (Korotkoff phase IV) corresponds reasonably to true intra-arterial"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aortic regurgitation."
-  }
- ],
- "tables": [
-  {
-   "id": "aortic_regurgitation-matrix",
-   "title": "Aortic Regurgitation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Chronic severe AR can have a long latent period, with patients remaining relatively asymptomatic for 10-15 years; exertional",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2043-2047",
+    "clinicalPearls": [
+      "Chronic severe AR can have a long latent period, with patients remaining relatively asymptomatic for 10-15 years; exertional dyspnea is usually the first symptom of diminished cardiac reserve, followed by orthopnea and paroxysmal nocturnal dyspnea (p.2044).",
+      "A wide arterial pulse pressure (systolic hypertension plus low diastolic pressure) is characteristic of chronic severe AR, producing peripheral signs such as the water-hammer (Corrigan's) pulse, Quincke's capillary pulsations, Traube's pistol-shot femoral sounds, and Duroziez's sign (p.2043-2044).",
+      "The murmur of chronic AR is a high-pitched, blowing, decrescendo diastolic murmur heard best in the third intercostal space along the left sternal border; it is best appreciated with the patient sitting up, leaning forward, breath held in forced expiration (p.2044).",
+      "A diastolic murmur louder along the right sternal border suggests AR caused by aneurysmal dilation of the aortic root rather than primary valvular disease (p.2044).",
+      "The Austin Flint murmur is a soft, low-pitched rumbling mid-to-late diastolic murmur in severe AR, probably from diastolic displacement of the anterior mitral leaflet by the regurgitant stream; it is NOT associated with hemodynamically significant mitral obstruction (p.2044).",
+      "Anginal chest pain can occur in severe AR even without coronary artery disease and even in younger patients, may occur at rest, and often responds poorly to sublingual nitroglycerin (p.2044).",
+      "On echocardiography, a rapid high-frequency diastolic fluttering of the anterior mitral leaflet, produced by the impact of the regurgitant jet, is a characteristic finding (p.2044).",
+      "Auscultatory features of AR are intensified by sustained handgrip, which augments systemic vascular resistance and increases LV afterload (p.2044).",
+      "In acute severe AR, the elevated LV end-diastolic pressure leads to early (premature) closure of the mitral valve, a soft S1, and a soft, short early diastolic murmur (p.2044)."
     ],
-    [
-     "Key Investigations",
-     "ECG: LV hypertrophy signs in chronic severe AR, with ST-segment depression and T-wave inversion in leads I, aVL, V5, V6 ('LV",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The total LV stroke volume (effective forward stroke volume plus regurgitant volume) is increased; in severe AR the regurgitant volume may equal the effective forward stroke volume. Unlike MR, the entire LV stroke volume is ejected into the high-pressure aorta. The major compensation is an increase in LV end-diastolic volume (increased preload); dilation and eccentric hypertrophy allow a larger stroke volume without increased myofibril shortening, so severe AR can occur with a normal effective forward stroke volume and normal LVEF together with elevated LV end-diastolic pressure and volume. By Laplace's law LV dilation increases systolic wall tension, so chronic AR is a state of both increased preload and afterload. Adaptive measures eventually fail; deterioration of LV function often precedes symptom onset. Considerable LV wall thickening occurs and hearts can weigh >1000 g. The reverse aorta-to-LV diastolic pressure gradient decreases through diastole, accounting for the decrescendo murmur. In acute severe AR the LV is unprepared for the volume load, compliance is normal or reduced, diastolic pressures rise rapidly (occasionally >40 mmHg), and the reversed pressure gradient closes the mitral valve prematurely. Myocardial ischemia may occur because of elevated oxygen demand (LV dilation, hypertrophy, increased systolic tension) combined with reduced coronary perfusion (most coronary flow is diastolic, when aortic pressure is low), affecting particularly the subendocardium even without epicardial CAD (p.2043-2044).",
+    "additionalDifferentials": [
+      "Aortic stenosis (a mid-systolic ejection murmur and systolic thrill are frequently audible in isolated AR and do not necessarily signify coexisting AS)",
+      "Combined aortic stenosis and aortic regurgitation (coexistence of hemodynamically significant AS with AR occurs almost exclusively in rheumatic or congenital disease)",
+      "Mitral regurgitation (contrasted hemodynamically; severe AR can also coexist with MR)"
     ],
-    [
-     "Primary Differentials",
-     "Aortic stenosis (a mid-systolic ejection murmur and systolic thrill are frequently audible in isolated AR and do not necessarily",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [],
+    "additionalInvestigations": [
+      "ECG: LV hypertrophy signs in chronic severe AR, with ST-segment depression and T-wave inversion in leads I, aVL, V5, V6 ('LV strain'); left axis deviation and/or QRS prolongation may be present (p.2044)",
+      "Transthoracic echocardiography (TTE): cornerstone of longitudinal follow-up; assesses LV size/function and cause/severity of AR; LV global longitudinal strain (GLS) by speckle tracking may detect systolic dysfunction before EF falls (p.2044)",
+      "Color flow Doppler: with severe AR the central jet width exceeds 65% of the LV outflow tract, regurgitant volume >=60 mL/beat, regurgitant fraction >=50%, and there is diastolic flow reversal in the proximal descending thoracic aorta; continuous-wave Doppler shows rapid deceleration time in acute severe AR (p.2044)",
+      "Transesophageal echocardiography (TEE): detailed anatomic assessment of valve, root, and portions of the aorta (p.2044)",
+      "Cardiac magnetic resonance (CMR): accurate LV volumes and aortic size/contour when TTE is limited; can screen for increased LV interstitial (extracellular volume fraction) and replacement fibrosis (late gadolinium enhancement) (p.2044)",
+      "Cardiac CT: detailed assessment of aortic valve, root, and thoracic aortic anatomy; coronary CT angiography can provide preoperative coronary information (p.2044-2045)",
+      "Chest X-ray: downward and leftward apex displacement, posterior LV displacement encroaching on the spine, and possible aneurysmal aortic dilation when root disease is the cause (less sensitive than echo/CMR/CT for root/ascending aortic enlargement) (p.2045)",
+      "Cardiac catheterization with contrast aortography: confirms magnitude of regurgitation and LV status when needed; coronary angiography routinely before surgery in those at coronary risk (p.2045)"
     ],
-    [
-     "Management Strategy",
-     "Refer for aortic valve replacement or repair once chronic severe regurgitation causes symptoms, left ventricular dysfunction or",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe AR (as in infective endocarditis, aortic dissection, or trauma): the LV cannot dilate enough to maintain stroke volume, LV diastolic pressure rises rapidly with marked LA and PA wedge pressure elevation, and pulmonary edema and/or cardiogenic shock may develop rapidly - a surgical emergency requiring operation usually within 24 h (prompt 24-48 h surgery may be lifesaving) (p.2044, p.2046-2047).",
+      "Acute severe AR may show only slight widening of pulse pressure and invariably presents with tachycardia (heart rate increases to preserve cardiac output), unlike the wide pulse pressure of chronic AR (p.2044).",
+      "In acute severe AR, intra-aortic balloon counterpulsation is contraindicated and beta blockers are best avoided (p.2045).",
+      "Onset of symptoms or LV systolic dysfunction in chronic severe AR is an indication for surgery (p.2045)."
     ],
-    [
-     "Clinical Pitfall",
-     "Sphygmomanometer diastolic pressure can be hard to read because systolic sounds may persist with the cuff fully deflated; the",
-     "Prevent diagnostic or management error"
+    "prognosis": "Operative and late mortality risks depend largely on disease stage and myocardial function at operation. Overall operative mortality for isolated AVR for pure AR is ~1-2%; the risk doubles when aortic surgery is added. Patients with marked cardiac enlargement and established LV dysfunction have an operative mortality of ~5-10% and a late mortality of ~3-5% per year from LV failure despite technically satisfactory operation; nonetheless, because of the very poor prognosis with medical management, even patients with advanced LV systolic dysfunction should be considered for operation. If surgery is delayed too long (>1 year from onset of symptoms or LV dysfunction), it often does not restore normal LV size and function (p.2046-2047).",
+    "pitfalls": [
+      "Sphygmomanometer diastolic pressure can be hard to read because systolic sounds may persist with the cuff fully deflated; the muffling point (Korotkoff phase IV) corresponds reasonably to true intra-arterial diastolic pressure (p.2044).",
+      "As chronic AR progresses and LV end-diastolic pressure rises, the arterial diastolic pressure may actually rise (aortic diastolic pressure cannot fall below LV end-diastolic pressure), so a less-wide pulse pressure does not exclude severe disease (p.2044).",
+      "A mid-systolic ejection murmur and systolic thrill in isolated AR can be loud without signifying aortic valve obstruction and do not necessarily indicate coexisting AS (p.2044).",
+      "Deterioration of LV function often precedes the development of symptoms, so waiting for symptoms risks irreversible dysfunction; serial noninvasive follow-up is essential to time surgery (p.2043-2044, p.2046).",
+      "Transcatheter aortic valve implantation (TAVI) is NOT recommended for patients with severe AR who are surgical candidates (technical success limited by annular dilation and paucity of valvular/annular calcium) (p.2046)."
+    ],
+    "severityClassification": "Severe AR is characterized by central jet width >65% of the LV outflow tract on color Doppler, vena contracta >0.6 cm, regurgitant volume >=60 mL/beat, regurgitant fraction >=50%, effective regurgitant orifice >=0.3 cm2, and holodiastolic flow reversal in the proximal descending thoracic aorta. AHA/ACC staging (per Fig. 273-2): asymptomatic (Stage C, with C2 denoting LV dysfunction EF <=55%) versus symptomatic (Stage D). Surgical thresholds for asymptomatic severe AR include LVEF <55%, LV end-systolic dimension >50 mm (>25 mm/m2), or LV end-diastolic dimension >65 mm on serial studies (p.2044, p.2046).",
+    "references": [
+      "Harrison 22e p.2043-2047"
+    ],
+    "crossLinks": [
+      "aortic_dissection",
+      "IE",
+      "heart_failure"
+    ],
+    "management": [
+      "Refer for aortic valve replacement or repair once chronic severe regurgitation causes symptoms, left ventricular dysfunction or progressive dilatation, adding aortic root replacement when the root is aneurysmal",
+      "Control hypertension and afterload with vasodilators such as ACE inhibitors, ARBs or dihydropyridine calcium-channel blockers in symptomatic patients or those unfit for surgery",
+      "Manage acute severe regurgitation as a surgical emergency, supporting the circulation with vasodilators and inotropes while avoiding intra-aortic balloon counterpulsation and negative chronotropes",
+      "Treat associated heart failure with diuretics and guideline-directed medical therapy",
+      "Where an aortopathy underlies the lesion, such as Marfan syndrome, slow root dilatation with a beta-blocker or ARB and maintain dental and skin hygiene to reduce endocarditis risk",
+      "Undertake serial transthoracic echocardiographic surveillance of left ventricular size and function, using strain imaging or cardiac MRI to detect early dysfunction",
+      "Plan the timing and mode of intervention through a specialist heart-valve multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for aortic regurgitation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aortic-regurgitation-real-image",
-   "title": "Aortic Regurgitation: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "aortic_regurgitation-pathway",
+      "title": "Aortic Regurgitation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Chronic severe AR can have a long latent period, with patients remaining relatively asymptomatic for 10-15 years; exertional dyspnea is usually the first symptom of diminished cardiac reserve, followed by orthopnea and paroxysmal nocturnal",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe AR (as in infective endocarditis, aortic dissection, or trauma): the LV cannot dilate enough to maintain stroke volume, LV diastolic pressure rises rapidly with marked LA and PA wedge pressure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: ECG: LV hypertrophy signs in chronic severe AR, with ST-segment depression and T-wave inversion in leads I, aVL, V5, V6 ('LV strain'); left axis deviation and/or QRS prolongation may be present (p.2044), Transthoracic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Refer for aortic valve replacement or repair once chronic severe regurgitation causes symptoms, left ventricular dysfunction or progressive dilatation, adding aortic root replacement when the root is aneurysmal"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Sphygmomanometer diastolic pressure can be hard to read because systolic sounds may persist with the cuff fully deflated; the muffling point (Korotkoff phase IV) corresponds reasonably to true intra-arterial"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aortic regurgitation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aortic_regurgitation-matrix",
+      "title": "Aortic Regurgitation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chronic severe AR can have a long latent period, with patients remaining relatively asymptomatic for 10-15 years; exertional",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "ECG: LV hypertrophy signs in chronic severe AR, with ST-segment depression and T-wave inversion in leads I, aVL, V5, V6 ('LV",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Aortic stenosis (a mid-systolic ejection murmur and systolic thrill are frequently audible in isolated AR and do not necessarily",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Refer for aortic valve replacement or repair once chronic severe regurgitation causes symptoms, left ventricular dysfunction or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Sphygmomanometer diastolic pressure can be hard to read because systolic sounds may persist with the cuff fully deflated; the",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aortic regurgitation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Aortic Regurgitation",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/valvular-disorders/aortic-regurgitation",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 247-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 230-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aortic_regurgitation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Echo criteria for severe aortic regurgitation and key signs",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Severe AR value",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Central jet width",
+          "unit": "% of LVOT",
+          "cells": [
+            {
+              "text": ">65%",
+              "op": ">",
+              "value": 65
+            },
+            {
+              "text": "Colour Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vena contracta",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">0.6",
+              "op": ">",
+              "value": 0.6
+            },
+            {
+              "text": "Colour Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regurgitant volume",
+          "unit": "mL/beat",
+          "cells": [
+            {
+              "text": ">=60",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "Quantitative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regurgitant fraction",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">=50",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Quantitative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Effective regurgitant orifice",
+          "unit": "cm2",
+          "cells": [
+            {
+              "text": ">=0.3",
+              "op": ">=",
+              "value": 0.3
+            },
+            {
+              "text": "Quantitative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Descending aorta flow",
+          "cells": [
+            {
+              "text": "{{hy:Holodiastolic flow reversal}}"
+            },
+            {
+              "text": "Proximal descending thoracic aorta"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Murmur",
+          "cells": [
+            {
+              "text": "High-pitched blowing decrescendo diastolic, left sternal border, sitting forward in expiration"
+            },
+            {
+              "text": "Louder at right sternal border suggests root disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse pressure",
+          "cells": [
+            {
+              "text": "Wide in chronic severe AR"
+            },
+            {
+              "text": "Acute AR: only slight widening with tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Austin Flint murmur",
+          "cells": [
+            {
+              "text": "Low-pitched mid to late diastolic rumble"
+            },
+            {
+              "text": "Not true mitral stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "LVH with lateral strain pattern"
+            },
+            {
+              "text": "Supports chronic volume overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "LV volumes, aorta, fibrosis"
+            },
+            {
+              "text": "When echo is limited"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aortic_regurgitation-ddx",
+      "kind": "ddx",
+      "title": "Causes and look-alikes of aortic regurgitation",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic dissection (acute AR)",
+          "cells": [
+            {
+              "text": "{{hy:Sudden AR with chest pain; surgical emergency}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infective endocarditis",
+          "cells": [
+            {
+              "text": "Acute or chronic AR with fever and vegetations"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bicuspid valve or degenerative root disease",
+          "cells": [
+            {
+              "text": "Commonest chronic adult causes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aortic root aneurysm, Marfan or Ehlers-Danlos",
+          "cells": [
+            {
+              "text": "Murmur louder at right sternal border"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatic heart disease",
+          "cells": [
+            {
+              "text": "Often combined AS and AR, mitral involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic stenosis",
+          "cells": [
+            {
+              "text": "Systolic ejection murmur in AR alone does not mean AS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitral regurgitation",
+          "cells": [
+            {
+              "text": "Pansystolic apical murmur; can coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory aortitis (spondyloarthropathy, Takayasu, giant cell arteritis, syphilis)",
+          "cells": [
+            {
+              "text": "Rare causes with systemic features"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "aortic_regurgitation-treatment",
+      "kind": "treatment",
+      "title": "Management of aortic regurgitation",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic valve replacement or repair",
+          "cells": [
+            {
+              "text": "{{hy:Severe AR with symptoms}}"
+            },
+            {
+              "text": "Operative mortality about 1 to 2% for isolated AVR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Valve surgery for LV dysfunction",
+          "cells": [
+            {
+              "text": "Severe AR with LVEF <=55%, LVESD >50 mm or >25 mm/m2",
+              "op": "<=",
+              "value": 55
+            },
+            {
+              "text": "Surgery even if asymptomatic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Valve surgery for progressive change",
+          "cells": [
+            {
+              "text": "3 serial studies: LVEF falling to 55 to 60% or LVEDD >65 mm"
+            },
+            {
+              "text": "Consider before irreversible dysfunction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ascending aorta replacement",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Diameter >55 (lower in Marfan or bicuspid with risk)",
+              "op": ">",
+              "value": 55
+            },
+            {
+              "text": ">=45 mm if surgery done for other reasons"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Emergency surgery",
+          "cells": [
+            {
+              "text": "Acute severe AR"
+            },
+            {
+              "text": "Usually within 24 h; avoid balloon pump and beta blockers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasodilators (ACE inhibitor, ARB, dihydropyridine CCB)",
+          "cells": [
+            {
+              "text": "Hypertension, or symptomatic patients unfit for surgery"
+            },
+            {
+              "text": "ARBs may slow root dilation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Heart failure, especially if not operable"
+            },
+            {
+              "text": "Beta blockers with caution"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo surveillance",
+          "cells": [
+            {
+              "text": "Severe AR not meeting surgery criteria"
+            },
+            {
+              "text": "Every 6 to 12 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TAVI",
+          "cells": [
+            {
+              "text": "Not recommended for surgical candidates"
+            },
+            {
+              "text": "Annular dilation and little calcium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aortic_regurgitation-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of systolic hypertension with wide pulse pressure",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Decreased vascular compliance",
+          "cells": [
+            {
+              "text": "Arteriosclerosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Increased cardiac output",
+          "cells": [
+            {
+              "text": "Aortic regurgitation; thyrotoxicosis; hyperkinetic heart syndrome; fever; arteriovenous fistula; patent ductus arteriosus"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "aortic_regurgitation-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Indications for cardiac catheterization and coronary angiography",
+      "rowHeader": "Condition",
+      "columns": [
+        "Indications"
+      ],
+      "rows": [
+        {
+          "parameter": "Coronary artery disease, asymptomatic or symptomatic",
+          "cells": [
+            {
+              "text": "High risk for adverse outcome on noninvasive testing; sudden cardiac death; sustained (>30 sc) monomorphic ventricular tachycardia; nonsustained (<30 sc) polymorphic ventricular tachycardia"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Coronary artery disease, symptomatic",
+          "cells": [
+            {
+              "text": "Canadian Cardiology Society class III or IV angina on medical therapy; unstable angina at high or intermediate risk; chest-pain syndrome of unclear cause with equivocal noninvasive tests"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Acute myocardial infarction",
+          "cells": [
+            {
+              "text": "Reperfusion with primary percutaneous coronary intervention; persistent or recurrent ischemia; severe pulmonary edema; cardiogenic shock or hemodynamic instability; mechanical complications, mitral regurgitation, ventricular septal defect"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Valvular heart disease",
+          "cells": [
+            {
+              "text": "Suspected valve disease in symptomatic patients (dyspnea, angina, heart failure, syncope); infective endocarditis with coronary embolization; asymptomatic aortic regurgitation with cardiac enlargement or decreased ejection fraction; pre-valve surgery in older patients with coronary artery disease risk factors"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Congestive heart failure",
+          "cells": [
+            {
+              "text": "New onset with angina or suspected undiagnosed coronary artery disease"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Congenital heart disease",
+          "cells": [
+            {
+              "text": "Before surgical correction when symptoms or noninvasive testing suggest coronary disease; suspicion of congenital coronary anomalies; forms of congenital heart disease associated with coronary anomalies"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pericardial disease",
+          "cells": [
+            {
+              "text": "Symptomatic patients with suspected cardiac tamponade or constrictive pericarditis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Cardiac transplantation",
+          "cells": [
+            {
+              "text": "Preoperative and postsurgical evaluation"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Other conditions",
+          "cells": [
+            {
+              "text": "Hypertrophic cardiomyopathy with angina; diseases of the aorta when knowledge of coronary involvement is needed for management"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Printed 'sc' is kept as in the source."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aortic_regurgitation-dx-mgmt",
+      "title": "Diagnosis and management of aortic regurgitation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diastolic murmur, wide pulse pressure or dilated LV",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute presentation: pulmonary oedema or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Urgent echo; look for dissection or endocarditis",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Emergency valve surgery; no balloon pump",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Transthoracic echo: severity, LV size and EF, aorta",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Severe AR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Echo follow-up; control blood pressure",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Symptoms, LVEF <=55% or LVESD >50 mm?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aortic valve replacement or repair, root surgery if dilated",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Echo every 6 to 12 months; vasodilator if hypertensive",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

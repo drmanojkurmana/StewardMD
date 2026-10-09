@@ -1,174 +1,499 @@
 {
- "id": "acquired_ichthyosis",
- "name": "acquired ichthyosis",
- "aliases": [
-  "ichthyosis acquisita",
-  "acquired ichthyosis vulgaris"
- ],
- "class": "non_infective",
- "system": "Integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as generalised, symmetrical fine adherent scaling resembling ichthyosis vulgaris but with onset in adolescence or adulthood and no family history.",
-   "Extensor surfaces of the limbs and the trunk are typically involved while the flexures are spared; scales are fine and white to brown with a rhomboidal fish-scale pattern.",
-   "The classic paraneoplastic association is Hodgkin lymphoma; non-Hodgkin lymphoma, mycosis fungoides, multiple myeloma and some solid tumours (breast, lung) are also reported.",
-   "Numerous non-malignant causes must be excluded, including sarcoidosis, HIV, leprosy, hypothyroidism, chronic renal failure, malnutrition and drugs (nicotinic acid, statins, cimetidine, clofazimine).",
-   "When paraneoplastic, the ichthyosis tends to parallel tumour activity and may improve with successful treatment of the underlying lymphoma.",
-   "Palmoplantar keratoderma and keratosis pilaris-like follicular changes may accompany the scaling.",
-   "New-onset ichthyosis in an adult warrants exclusion of lymphoma, particularly with lymphadenopathy, night sweats or weight loss."
+  "id": "acquired_ichthyosis",
+  "name": "acquired ichthyosis",
+  "aliases": [
+    "ichthyosis acquisita",
+    "acquired ichthyosis vulgaris"
   ],
-  "pathophysiology": "Acquired ichthyosis results from disordered keratinocyte differentiation and desquamation producing retention hyperkeratosis. In lymphoproliferative disease, cytokine-driven alterations in epidermal lipid synthesis and stratum corneum cohesion are implicated, and disturbances of vitamin A and essential fatty acid metabolism have been proposed. Reduced or absent keratohyalin (granular layer) with compact orthohyperkeratosis mirrors the histology of inherited ichthyosis vulgaris. In non-malignant cases, systemic disease, drugs or nutritional deficiency similarly impair normal corneocyte shedding, yielding clinically indistinguishable scaling.",
-  "additionalDifferentials": [
-   "Inherited ichthyosis vulgaris (childhood onset, positive family history)",
-   "Xerosis and asteatotic eczema",
-   "Hypothyroidism-related dry skin",
-   "Sarcoidosis with ichthyosiform change",
-   "Drug-induced ichthyosis",
-   "Nutritional deficiency (essential fatty acids, vitamin A)",
-   "HIV-associated acquired ichthyosis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing compact hyperkeratosis with a reduced or absent granular layer",
-   "CT of chest, abdomen and pelvis with lymph node assessment for lymphoma",
-   "Excisional lymph node biopsy where lymphadenopathy is present",
-   "Full blood count, ESR and LDH",
-   "Thyroid function tests",
-   "HIV serology",
-   "Renal function and nutritional/lipid assessment"
-  ],
-  "redFlags": [
-   "New generalised ichthyosis in an adult without a family history",
-   "Associated lymphadenopathy, hepatosplenomegaly or B symptoms",
-   "Rapidly progressive scaling with weight loss",
-   "Coexisting pruritus and night sweats"
-  ],
-  "prognosis": "Prognosis depends on the underlying cause; when associated with Hodgkin lymphoma the skin often improves with effective chemotherapy and outcome follows that of the treated malignancy.",
-  "pitfalls": [
-   "Dismissing adult-onset scaling as simple xerosis",
-   "Failing to distinguish acquired from inherited ichthyosis by age of onset and family history",
-   "Overlooking non-malignant causes such as HIV, sarcoidosis and drugs",
-   "Not re-evaluating for lymphoma when the scaling recurs"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying cause — chemotherapy for associated Hodgkin lymphoma, or correction of hypothyroidism, HIV, sarcoidosis or malnutrition",
-   "Skin-directed care with emollients and keratolytics such as urea, lactic acid and salicylic acid to reduce scaling",
-   "Topical or systemic retinoids for extensive or refractory scaling",
-   "Withdraw implicated drugs such as nicotinic acid, statins, cimetidine or clofazimine where these are causative",
-   "Dermatology and haematology multidisciplinary review, as paraneoplastic ichthyosis parallels tumour activity",
-   "Monitor the skin as a marker of underlying disease response or relapse"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acquired_ichthyosis-pathway",
-   "title": "acquired ichthyosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as generalised, symmetrical fine adherent scaling resembling ichthyosis vulgaris but with onset in adolescence or adulthood and no family history.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New generalised ichthyosis in an adult without a family history",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing compact hyperkeratosis with a reduced or absent granular layer, CT of chest, abdomen and pelvis with lymph node assessment for lymphoma, Excisional lymph node biopsy where lymphadenopathy is present"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying cause - chemotherapy for associated Hodgkin lymphoma, or correction of hypothyroidism, HIV, sarcoidosis or malnutrition"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing adult-onset scaling as simple xerosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acquired ichthyosis."
-  }
- ],
- "tables": [
-  {
-   "id": "acquired_ichthyosis-matrix",
-   "title": "acquired ichthyosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as generalised, symmetrical fine adherent scaling resembling ichthyosis vulgaris but with onset in adolescence or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as generalised, symmetrical fine adherent scaling resembling ichthyosis vulgaris but with onset in adolescence or adulthood and no family history.",
+      "Extensor surfaces of the limbs and the trunk are typically involved while the flexures are spared; scales are fine and white to brown with a rhomboidal fish-scale pattern.",
+      "The classic paraneoplastic association is Hodgkin lymphoma; non-Hodgkin lymphoma, mycosis fungoides, multiple myeloma and some solid tumours (breast, lung) are also reported.",
+      "Numerous non-malignant causes must be excluded, including sarcoidosis, HIV, leprosy, hypothyroidism, chronic renal failure, malnutrition and drugs (nicotinic acid, statins, cimetidine, clofazimine).",
+      "When paraneoplastic, the ichthyosis tends to parallel tumour activity and may improve with successful treatment of the underlying lymphoma.",
+      "Palmoplantar keratoderma and keratosis pilaris-like follicular changes may accompany the scaling.",
+      "New-onset ichthyosis in an adult warrants exclusion of lymphoma, particularly with lymphadenopathy, night sweats or weight loss."
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing compact hyperkeratosis with a reduced or absent granular layer, CT of chest, abdomen and pelvis with lymph",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acquired ichthyosis results from disordered keratinocyte differentiation and desquamation producing retention hyperkeratosis. In lymphoproliferative disease, cytokine-driven alterations in epidermal lipid synthesis and stratum corneum cohesion are implicated, and disturbances of vitamin A and essential fatty acid metabolism have been proposed. Reduced or absent keratohyalin (granular layer) with compact orthohyperkeratosis mirrors the histology of inherited ichthyosis vulgaris. In non-malignant cases, systemic disease, drugs or nutritional deficiency similarly impair normal corneocyte shedding, yielding clinically indistinguishable scaling.",
+    "additionalDifferentials": [
+      "Inherited ichthyosis vulgaris (childhood onset, positive family history)",
+      "Xerosis and asteatotic eczema",
+      "Hypothyroidism-related dry skin",
+      "Sarcoidosis with ichthyosiform change",
+      "Drug-induced ichthyosis",
+      "Nutritional deficiency (essential fatty acids, vitamin A)",
+      "HIV-associated acquired ichthyosis"
     ],
-    [
-     "Primary Differentials",
-     "Inherited ichthyosis vulgaris (childhood onset, positive family history), Xerosis and asteatotic eczema, Hypothyroidism-related",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing compact hyperkeratosis with a reduced or absent granular layer",
+      "CT of chest, abdomen and pelvis with lymph node assessment for lymphoma",
+      "Excisional lymph node biopsy where lymphadenopathy is present",
+      "Full blood count, ESR and LDH",
+      "Thyroid function tests",
+      "HIV serology",
+      "Renal function and nutritional/lipid assessment"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying cause - chemotherapy for associated Hodgkin lymphoma, or correction of hypothyroidism, HIV, sarcoidosis or",
-     "Core treatment modality"
+    "redFlags": [
+      "New generalised ichthyosis in an adult without a family history",
+      "Associated lymphadenopathy, hepatosplenomegaly or B symptoms",
+      "Rapidly progressive scaling with weight loss",
+      "Coexisting pruritus and night sweats"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing adult-onset scaling as simple xerosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the underlying cause; when associated with Hodgkin lymphoma the skin often improves with effective chemotherapy and outcome follows that of the treated malignancy.",
+    "pitfalls": [
+      "Dismissing adult-onset scaling as simple xerosis",
+      "Failing to distinguish acquired from inherited ichthyosis by age of onset and family history",
+      "Overlooking non-malignant causes such as HIV, sarcoidosis and drugs",
+      "Not re-evaluating for lymphoma when the scaling recurs"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying cause — chemotherapy for associated Hodgkin lymphoma, or correction of hypothyroidism, HIV, sarcoidosis or malnutrition",
+      "Skin-directed care with emollients and keratolytics such as urea, lactic acid and salicylic acid to reduce scaling",
+      "Topical or systemic retinoids for extensive or refractory scaling",
+      "Withdraw implicated drugs such as nicotinic acid, statins, cimetidine or clofazimine where these are causative",
+      "Dermatology and haematology multidisciplinary review, as paraneoplastic ichthyosis parallels tumour activity",
+      "Monitor the skin as a marker of underlying disease response or relapse"
     ]
-   ],
-   "caption": "Overview comparison matrix for acquired ichthyosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acquired-ichthyosis-real-image",
-   "title": "acquired ichthyosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acquired_ichthyosis-pathway",
+      "title": "acquired ichthyosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as generalised, symmetrical fine adherent scaling resembling ichthyosis vulgaris but with onset in adolescence or adulthood and no family history.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New generalised ichthyosis in an adult without a family history",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing compact hyperkeratosis with a reduced or absent granular layer, CT of chest, abdomen and pelvis with lymph node assessment for lymphoma, Excisional lymph node biopsy where lymphadenopathy is present"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying cause - chemotherapy for associated Hodgkin lymphoma, or correction of hypothyroidism, HIV, sarcoidosis or malnutrition"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing adult-onset scaling as simple xerosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acquired ichthyosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acquired_ichthyosis-matrix",
+      "title": "acquired ichthyosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as generalised, symmetrical fine adherent scaling resembling ichthyosis vulgaris but with onset in adolescence or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing compact hyperkeratosis with a reduced or absent granular layer, CT of chest, abdomen and pelvis with lymph",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inherited ichthyosis vulgaris (childhood onset, positive family history), Xerosis and asteatotic eczema, Hypothyroidism-related",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying cause - chemotherapy for associated Hodgkin lymphoma, or correction of hypothyroidism, HIV, sarcoidosis or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing adult-onset scaling as simple xerosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acquired ichthyosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_ichthyosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Compact hyperkeratosis with a reduced or absent granular layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of chest, abdomen and pelvis with lymph node assessment",
+          "cells": [
+            {
+              "text": "Lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional lymph node biopsy",
+          "cells": [
+            {
+              "text": "Tissue diagnosis where lymphadenopathy is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, ESR and LDH",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Hypothyroidism as a cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV serology",
+          "cells": [
+            {
+              "text": "HIV-associated cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and nutritional or lipid assessment",
+          "cells": [
+            {
+              "text": "Chronic renal failure and malnutrition as causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_ichthyosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Inherited ichthyosis vulgaris",
+          "cells": [
+            {
+              "text": "Childhood onset with a family history"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional deficiency (essential fatty acids, vitamin A)",
+          "cells": [
+            {
+              "text": "Deficiency of essential fatty acids or vitamin A"
+            },
+            {
+              "text": "Nutritional assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV-associated acquired ichthyosis",
+          "cells": [
+            {
+              "text": "HIV infection"
+            },
+            {
+              "text": "HIV serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_ichthyosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Chemotherapy for Hodgkin lymphoma, or correction of hypothyroidism, HIV, sarcoidosis or malnutrition"
+            },
+            {
+              "text": "Paraneoplastic or secondary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and keratolytics (urea, lactic acid, salicylic acid)",
+          "cells": [
+            {
+              "text": "Reduces scaling"
+            },
+            {
+              "text": "Skin-directed care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or systemic retinoids",
+          "cells": [
+            {
+              "text": "Extensive or refractory scaling"
+            },
+            {
+              "text": "Topical or systemic route"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw implicated drugs",
+          "cells": [
+            {
+              "text": "Causative drugs such as nicotinic acid, statins, cimetidine or clofazimine"
+            },
+            {
+              "text": "Where they are causative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and haematology review",
+          "cells": [
+            {
+              "text": "Paraneoplastic ichthyosis parallels tumour activity"
+            },
+            {
+              "text": "Multidisciplinary review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor the skin",
+          "cells": [
+            {
+              "text": "Marker of disease response or relapse"
+            },
+            {
+              "text": "Tracks underlying disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_ichthyosis-dx-mgmt",
+      "title": "Diagnosis and management of acquired ichthyosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New generalised fine scaling in an adult with no family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Lymphadenopathy, hepatosplenomegaly, B symptoms or weight loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review; lymph node biopsy and CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy and CT chest, abdomen and pelvis with lymph node assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lymphoma confirmed on lymph node or CT assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chemotherapy for Hodgkin lymphoma; treat the underlying disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Screen for hypothyroidism, HIV, sarcoidosis, malnutrition and drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and keratolytics (urea, lactic acid, salicylic acid)",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw implicated drugs such as nicotinic acid or clofazimine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical or systemic retinoids for extensive or refractory scaling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis follows the treated cause; skin often improves with lymphoma care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

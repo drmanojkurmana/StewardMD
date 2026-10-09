@@ -1,186 +1,1249 @@
 {
- "id": "AUTOIMMUNE_HEPATITIS",
- "name": "Autoimmune hepatitis",
- "system": "Hepatology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "autoimmune hepatitis",
-  "AIH",
-  "lupoid hepatitis",
-  "chronic active hepatitis (autoimmune)",
-  "autoimmune chronic hepatitis"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Consider AIH in any patient with unexplained acute or chronic hepatocellular injury, especially young to middle-aged women, but it can occur at any age and in either sex.",
-   "Presentation is highly variable, from asymptomatic transaminase elevation to fulminant acute liver failure or established cirrhosis at diagnosis.",
-   "Marked hypergammaglobulinemia (especially elevated IgG) out of proportion to the degree of liver injury is a classic clue.",
-   "Two broad serologic patterns exist: type 1 (ANA and/or anti-smooth-muscle antibody positive) and type 2 (anti-LKM1 positive, more common in children).",
-   "Concurrent autoimmune conditions (autoimmune thyroiditis, type 1 diabetes, celiac disease, ulcerative colitis) support the diagnosis.",
-   "Liver biopsy showing interface hepatitis with a dense plasma cell infiltrate is characteristic and helps confirm diagnosis and grade severity.",
-   "A dramatic biochemical response to immunosuppressive therapy is itself supportive of the diagnosis and is used as a diagnostic criterion when the picture is ambiguous.",
-   "Overlap syndromes with primary biliary cholangitis or primary sclerosing cholangitis occur and should be considered when cholestatic features coexist."
+  "id": "AUTOIMMUNE_HEPATITIS",
+  "name": "Autoimmune hepatitis",
+  "system": "Hepatology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "autoimmune hepatitis",
+    "AIH",
+    "lupoid hepatitis",
+    "chronic active hepatitis (autoimmune)",
+    "autoimmune chronic hepatitis"
   ],
-  "pathophysiology": "AIH results from a breakdown in immune self-tolerance leading to T-cell-mediated attack on hepatocytes in a genetically susceptible host, often triggered by an environmental factor such as a viral infection or drug exposure. Autoantibody production (ANA, anti-smooth-muscle antibody, or anti-LKM1) accompanies the T-cell-driven injury but is thought to be a marker rather than the primary mediator of hepatocyte damage. Chronic interface hepatitis with ongoing necroinflammation can progress to fibrosis and cirrhosis if untreated.",
-  "additionalDifferentials": [
-   "Drug-induced liver injury",
-   "Viral hepatitis (acute or chronic hepatitis B or C)",
-   "Wilson disease",
-   "Primary biliary cholangitis",
-   "Primary sclerosing cholangitis",
-   "Nonalcoholic steatohepatitis"
-  ],
-  "infectionMimics": [
-   "Acute viral hepatitis A, B, C, or E",
-   "Epstein-Barr virus or cytomegalovirus hepatitis"
-  ],
-  "nonInfectiousMimics": [
-   "Drug-induced or toxin-induced hepatitis",
-   "Wilson disease",
-   "Alpha-1 antitrypsin deficiency",
-   "Nonalcoholic fatty liver disease/steatohepatitis",
-   "Primary biliary cholangitis and primary sclerosing cholangitis overlap"
-  ],
-  "additionalInvestigations": [
-   "ANA and anti-smooth-muscle antibody — supports type 1 AIH diagnosis",
-   "Anti-LKM1 antibody — supports type 2 AIH, more typical in pediatric cases",
-   "Serum IgG level — characteristic hypergammaglobulinemia aids diagnosis and monitoring",
-   "Liver biopsy — confirms interface hepatitis and plasma cell infiltrate, stages fibrosis",
-   "Viral hepatitis serologies (hepatitis B and C) — exclude viral etiology",
-   "Ceruloplasmin and copper studies — exclude Wilson disease, especially in younger patients",
-   "Alkaline phosphatase and antimitochondrial antibody — screen for overlap with primary biliary cholangitis",
-   "Standardized AIH scoring system (simplified diagnostic criteria) — integrates autoantibodies, IgG, histology, and viral exclusion"
-  ],
-  "redFlags": [
-   "Acute presentation with coagulopathy or encephalopathy suggesting evolution to acute liver failure",
-   "Jaundice with rapidly rising bilirubin and synthetic dysfunction",
-   "Evidence of established cirrhosis or portal hypertension at initial presentation",
-   "Lack of biochemical response after an adequate trial of immunosuppression, raising concern for an alternate or overlapping diagnosis",
-   "Signs of decompensation (ascites, variceal bleeding) warranting hepatology and transplant center referral"
-  ],
-  "pitfalls": [
-   "Attributing transaminase elevation solely to another cause (e.g., fatty liver or medication) without considering AIH, delaying treatment",
-   "Relying on autoantibody titers alone; seronegative AIH exists, and titers do not reliably track disease activity",
-   "Missing an overlap syndrome with cholestatic liver disease when only hepatocellular pattern is evaluated",
-   "Discontinuing therapy too early without confirming sustained biochemical and histologic remission, risking relapse"
-  ],
-  "prognosis": "With timely immunosuppressive treatment, most patients achieve biochemical remission and have a favorable long-term prognosis, though relapse after treatment withdrawal is common and many require long-term maintenance therapy. Untreated or refractory disease can progress to cirrhosis, liver failure, and the need for liver transplantation.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Autoimmune Hepatitis chapter (Chronic Hepatitis section)"
-  ],
-  "crossLinks": [
-   "PRIMARY_BILIARY_CHOLANGITIS",
-   "PRIMARY_SCLEROSING_CHOLANGITIS"
-  ],
-  "management": [
-   "Induction of remission with corticosteroids such as prednisolone, commonly combined with azathioprine, using budesonide as a steroid alternative in non-cirrhotic disease.",
-   "Maintenance immunosuppression, typically azathioprine with steroid tapering, and second-line mycophenolate mofetil or tacrolimus for intolerance or refractory disease.",
-   "Thiopurine methyltransferase testing before azathioprine, with monitoring of liver function and serum IgG to confirm and sustain biochemical remission.",
-   "Bone protection and vaccination before and during long-term immunosuppression.",
-   "Surveillance for cirrhosis and its complications, including variceal screening and hepatocellular carcinoma monitoring.",
-   "Liver transplantation for decompensated cirrhosis, acute liver failure or refractory disease.",
-   "Multidisciplinary hepatology care with monitoring for relapse after any treatment withdrawal."
-  ]
- },
- "algorithms": [
-  {
-   "id": "autoimmune_hepatitis-pathway",
-   "title": "Autoimmune hepatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Consider AIH in any patient with unexplained acute or chronic hepatocellular injury, especially young to middle-aged women, but it can occur at any age and in either sex.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute presentation with coagulopathy or encephalopathy suggesting evolution to acute liver failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: ANA and anti-smooth-muscle antibody - supports type 1 AIH diagnosis, Anti-LKM1 antibody - supports type 2 AIH, more typical in pediatric cases, Serum IgG level - characteristic hypergammaglobulinemia aids diagnosis and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induction of remission with corticosteroids such as prednisolone, commonly combined with azathioprine, using budesonide as a steroid alternative in non-cirrhotic disease."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing transaminase elevation solely to another cause (e.g., fatty liver or medication) without considering AIH, delaying treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autoimmune hepatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "autoimmune_hepatitis-matrix",
-   "title": "Autoimmune hepatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Consider AIH in any patient with unexplained acute or chronic hepatocellular injury, especially young to middle-aged women, but",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Consider AIH in any patient with unexplained acute or chronic hepatocellular injury, especially young to middle-aged women, but it can occur at any age and in either sex.",
+      "Presentation is highly variable, from asymptomatic transaminase elevation to fulminant acute liver failure or established cirrhosis at diagnosis.",
+      "Marked hypergammaglobulinemia (especially elevated IgG) out of proportion to the degree of liver injury is a classic clue.",
+      "Two broad serologic patterns exist: type 1 (ANA and/or anti-smooth-muscle antibody positive) and type 2 (anti-LKM1 positive, more common in children).",
+      "Concurrent autoimmune conditions (autoimmune thyroiditis, type 1 diabetes, celiac disease, ulcerative colitis) support the diagnosis.",
+      "Liver biopsy showing interface hepatitis with a dense plasma cell infiltrate is characteristic and helps confirm diagnosis and grade severity.",
+      "A dramatic biochemical response to immunosuppressive therapy is itself supportive of the diagnosis and is used as a diagnostic criterion when the picture is ambiguous.",
+      "Overlap syndromes with primary biliary cholangitis or primary sclerosing cholangitis occur and should be considered when cholestatic features coexist."
     ],
-    [
-     "Key Investigations",
-     "ANA and anti-smooth-muscle antibody - supports type 1 AIH diagnosis, Anti-LKM1 antibody - supports type 2 AIH, more typical in",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "AIH results from a breakdown in immune self-tolerance leading to T-cell-mediated attack on hepatocytes in a genetically susceptible host, often triggered by an environmental factor such as a viral infection or drug exposure. Autoantibody production (ANA, anti-smooth-muscle antibody, or anti-LKM1) accompanies the T-cell-driven injury but is thought to be a marker rather than the primary mediator of hepatocyte damage. Chronic interface hepatitis with ongoing necroinflammation can progress to fibrosis and cirrhosis if untreated.",
+    "additionalDifferentials": [
+      "Drug-induced liver injury",
+      "Viral hepatitis (acute or chronic hepatitis B or C)",
+      "Wilson disease",
+      "Primary biliary cholangitis",
+      "Primary sclerosing cholangitis",
+      "Nonalcoholic steatohepatitis"
     ],
-    [
-     "Primary Differentials",
-     "Drug-induced liver injury, Viral hepatitis (acute or chronic hepatitis B or C), Wilson disease",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Acute viral hepatitis A, B, C, or E",
+      "Epstein-Barr virus or cytomegalovirus hepatitis"
     ],
-    [
-     "Management Strategy",
-     "Induction of remission with corticosteroids such as prednisolone, commonly combined with azathioprine, using budesonide as a",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Drug-induced or toxin-induced hepatitis",
+      "Wilson disease",
+      "Alpha-1 antitrypsin deficiency",
+      "Nonalcoholic fatty liver disease/steatohepatitis",
+      "Primary biliary cholangitis and primary sclerosing cholangitis overlap"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing transaminase elevation solely to another cause (e.g., fatty liver or medication) without considering AIH, delaying",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "ANA and anti-smooth-muscle antibody — supports type 1 AIH diagnosis",
+      "Anti-LKM1 antibody — supports type 2 AIH, more typical in pediatric cases",
+      "Serum IgG level — characteristic hypergammaglobulinemia aids diagnosis and monitoring",
+      "Liver biopsy — confirms interface hepatitis and plasma cell infiltrate, stages fibrosis",
+      "Viral hepatitis serologies (hepatitis B and C) — exclude viral etiology",
+      "Ceruloplasmin and copper studies — exclude Wilson disease, especially in younger patients",
+      "Alkaline phosphatase and antimitochondrial antibody — screen for overlap with primary biliary cholangitis",
+      "Standardized AIH scoring system (simplified diagnostic criteria) — integrates autoantibodies, IgG, histology, and viral exclusion"
+    ],
+    "redFlags": [
+      "Acute presentation with coagulopathy or encephalopathy suggesting evolution to acute liver failure",
+      "Jaundice with rapidly rising bilirubin and synthetic dysfunction",
+      "Evidence of established cirrhosis or portal hypertension at initial presentation",
+      "Lack of biochemical response after an adequate trial of immunosuppression, raising concern for an alternate or overlapping diagnosis",
+      "Signs of decompensation (ascites, variceal bleeding) warranting hepatology and transplant center referral"
+    ],
+    "pitfalls": [
+      "Attributing transaminase elevation solely to another cause (e.g., fatty liver or medication) without considering AIH, delaying treatment",
+      "Relying on autoantibody titers alone; seronegative AIH exists, and titers do not reliably track disease activity",
+      "Missing an overlap syndrome with cholestatic liver disease when only hepatocellular pattern is evaluated",
+      "Discontinuing therapy too early without confirming sustained biochemical and histologic remission, risking relapse"
+    ],
+    "prognosis": "With timely immunosuppressive treatment, most patients achieve biochemical remission and have a favorable long-term prognosis, though relapse after treatment withdrawal is common and many require long-term maintenance therapy. Untreated or refractory disease can progress to cirrhosis, liver failure, and the need for liver transplantation.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Autoimmune Hepatitis chapter (Chronic Hepatitis section)"
+    ],
+    "crossLinks": [
+      "PRIMARY_BILIARY_CHOLANGITIS",
+      "PRIMARY_SCLEROSING_CHOLANGITIS"
+    ],
+    "management": [
+      "Induction of remission with corticosteroids such as prednisolone, commonly combined with azathioprine, using budesonide as a steroid alternative in non-cirrhotic disease.",
+      "Maintenance immunosuppression, typically azathioprine with steroid tapering, and second-line mycophenolate mofetil or tacrolimus for intolerance or refractory disease.",
+      "Thiopurine methyltransferase testing before azathioprine, with monitoring of liver function and serum IgG to confirm and sustain biochemical remission.",
+      "Bone protection and vaccination before and during long-term immunosuppression.",
+      "Surveillance for cirrhosis and its complications, including variceal screening and hepatocellular carcinoma monitoring.",
+      "Liver transplantation for decompensated cirrhosis, acute liver failure or refractory disease.",
+      "Multidisciplinary hepatology care with monitoring for relapse after any treatment withdrawal."
     ]
-   ],
-   "caption": "Overview comparison matrix for autoimmune hepatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "autoimmune-hepatitis-real-image",
-   "title": "Autoimmune hepatitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "autoimmune_hepatitis-pathway",
+      "title": "Autoimmune hepatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Consider AIH in any patient with unexplained acute or chronic hepatocellular injury, especially young to middle-aged women, but it can occur at any age and in either sex.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute presentation with coagulopathy or encephalopathy suggesting evolution to acute liver failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: ANA and anti-smooth-muscle antibody - supports type 1 AIH diagnosis, Anti-LKM1 antibody - supports type 2 AIH, more typical in pediatric cases, Serum IgG level - characteristic hypergammaglobulinemia aids diagnosis and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induction of remission with corticosteroids such as prednisolone, commonly combined with azathioprine, using budesonide as a steroid alternative in non-cirrhotic disease."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing transaminase elevation solely to another cause (e.g., fatty liver or medication) without considering AIH, delaying treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autoimmune hepatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "autoimmune_hepatitis-matrix",
+      "title": "Autoimmune hepatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Consider AIH in any patient with unexplained acute or chronic hepatocellular injury, especially young to middle-aged women, but",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "ANA and anti-smooth-muscle antibody - supports type 1 AIH diagnosis, Anti-LKM1 antibody - supports type 2 AIH, more typical in",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Drug-induced liver injury, Viral hepatitis (acute or chronic hepatitis B or C), Wilson disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induction of remission with corticosteroids such as prednisolone, commonly combined with azathioprine, using budesonide as a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing transaminase elevation solely to another cause (e.g., fatty liver or medication) without considering AIH, delaying",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autoimmune hepatitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Clinical management of autoimmune hepatitis (review), 2019",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6826525/",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 306-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "AUTOIMMUNE_HEPATITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Simplified IAIHG criteria for autoimmune hepatitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Cut-off",
+        "Points"
+      ],
+      "rows": [
+        {
+          "parameter": "ANA or SMA",
+          "cells": [
+            {
+              "text": "Titre 1:40 or more"
+            },
+            {
+              "text": "1",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ANA or SMA",
+          "cells": [
+            {
+              "text": "Titre 1:80 or more"
+            },
+            {
+              "text": "2",
+              "op": "=",
+              "value": 2
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-LKM1",
+          "cells": [
+            {
+              "text": "1:40 or more"
+            },
+            {
+              "text": "2",
+              "op": "=",
+              "value": 2
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-SLA/LP",
+          "cells": [
+            {
+              "text": "Any titre"
+            },
+            {
+              "text": "2 (antibody points capped at 2 in total)",
+              "op": "=",
+              "value": 2
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IgG",
+          "cells": [
+            {
+              "text": "Above upper limit of normal, or above 1.1 times ULN"
+            },
+            {
+              "text": "1, or 2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver histology",
+          "cells": [
+            {
+              "text": "Atypical, compatible, or typical (hepatitis required)"
+            },
+            {
+              "text": "0, 1, or 2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No viral hepatitis",
+          "cells": [
+            {
+              "text": "Yes or no"
+            },
+            {
+              "text": "2 or 0"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total score",
+          "cells": [
+            {
+              "text": "{{hy:6 = probable AIH; 7 or more = definite AIH}}"
+            },
+            {
+              "text": "Probable 6, definite 7 or more",
+              "op": ">=",
+              "value": 6
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibody pattern by type",
+          "cells": [
+            {
+              "text": "Type I ANA (homogeneous); type II anti-LKM1; anti-SLA also described"
+            },
+            {
+              "text": "Hyperglobulinaemia typical"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Up to 30% have cirrhosis at diagnosis."
+    },
+    {
+      "id": "AUTOIMMUNE_HEPATITIS-ddx",
+      "kind": "ddx",
+      "title": "Chronic hepatitis: separating autoimmune hepatitis from look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Diagnostic test",
+        "Autoantibodies"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic hepatitis B",
+          "cells": [
+            {
+              "text": "HBsAg, IgG anti-HBc, HBeAg, HBV DNA"
+            },
+            {
+              "text": "Uncommon"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic hepatitis C",
+          "cells": [
+            {
+              "text": "Anti-HCV, HCV RNA"
+            },
+            {
+              "text": "{{hy:Anti-LKM1 can occur, mimicking type II AIH}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic hepatitis D",
+          "cells": [
+            {
+              "text": "Anti-HDV, HDV RNA, HBsAg, IgG anti-HBc"
+            },
+            {
+              "text": "Anti-LKM3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drug-associated hepatitis",
+          "cells": [
+            {
+              "text": "Drug history; improves on withdrawal"
+            },
+            {
+              "text": "Uncommon"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cryptogenic chronic hepatitis",
+          "cells": [
+            {
+              "text": "All tests negative"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Steatohepatitis",
+          "cells": [
+            {
+              "text": "Metabolic risk; atypical histology for AIH"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PBC or PSC (variant syndromes)",
+          "cells": [
+            {
+              "text": "Cholestatic pattern; AMA or cholangiography"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Young patient; low ceruloplasmin"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Autoantibody cells marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "AUTOIMMUNE_HEPATITIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of autoimmune hepatitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Prednisolone",
+          "cells": [
+            {
+              "text": "{{hy:Induction}}"
+            },
+            {
+              "text": "0.5 to 1 mg/kg/day, then taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Budesonide",
+          "cells": [
+            {
+              "text": "Induction alternative without cirrhosis"
+            },
+            {
+              "text": "9 mg/day; contraindicated in cirrhosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azathioprine",
+          "cells": [
+            {
+              "text": "Maintenance, started 2 to 4 weeks after steroids"
+            },
+            {
+              "text": "50 mg/day rising to 1 to 2 mg/kg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mycophenolate mofetil",
+          "cells": [
+            {
+              "text": "Second line, azathioprine intolerance or failure"
+            },
+            {
+              "text": "1000 to 2000 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tacrolimus or ciclosporin",
+          "cells": [
+            {
+              "text": "Third line, refractory disease"
+            },
+            {
+              "text": "Response 27% to 94%; watch nephrotoxicity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treatment duration",
+          "cells": [
+            {
+              "text": "At least 2 years after normal transaminases and IgG"
+            },
+            {
+              "text": "Relapse in up to 90% after stopping; biopsy before withdrawal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Acute liver failure or end-stage disease"
+            },
+            {
+              "text": "Refer early to a transplant centre"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "AUTOIMMUNE_HEPATITIS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "AUTOIMMUNE_HEPATITIS-dx-mgmt",
+      "title": "Diagnosis and management of autoimmune hepatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised transaminases or acute hepatitis without clear cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Viral serology, ANA, SMA, anti-LKM1, IgG, drug history",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Viral or drug cause found?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat viral hepatitis or withdraw the drug",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Liver biopsy and simplified score",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Score 6 or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Reconsider PBC, PSC, steatohepatitis, Wilson disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Cirrhosis present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prednisolone 0.5 to 1 mg/kg/day",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Budesonide 9 mg/day or prednisolone",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Add azathioprine after 2 to 4 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Normal transaminases and IgG?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "action",
+          "text": "Second line: mycophenolate, then calcineurin inhibitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Maintain at least 2 years in remission; monitor for relapse",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "Yes"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

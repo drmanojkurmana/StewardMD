@@ -1,180 +1,477 @@
 {
- "id": "chronic_mesenteric_ischaemia",
- "name": "Chronic mesenteric ischaemia",
- "aliases": [
-  "Chronic mesenteric arterial insufficiency",
-  "Intestinal angina",
-  "abdominal angina",
-  "chronic mesenteric ischemia",
-  "intestinal angina"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic triad is postprandial abdominal pain (intestinal angina), fear of eating (sitophobia) and weight loss.",
-   "Almost always caused by atherosclerotic stenosis or occlusion of two or more of the three mesenteric vessels (coeliac, superior mesenteric and inferior mesenteric arteries) because of rich collateralisation.",
-   "Predominantly affects older women who smoke and have widespread atherosclerosis.",
-   "Pain characteristically begins within about 15 to 30 minutes of eating and is disproportionate to examination findings.",
-   "Weight loss stems from reduced intake because of food fear rather than malabsorption, and can closely mimic malignancy.",
-   "Duplex ultrasound is a useful screening test; CT angiography confirms the diagnosis and plans revascularisation.",
-   "Endovascular angioplasty and stenting is now first-line revascularisation for most patients, with open bypass or endarterectomy reserved for complex disease or endovascular failure.",
-   "Untreated disease can progress to acute-on-chronic mesenteric ischaemia and bowel infarction."
+  "id": "chronic_mesenteric_ischaemia",
+  "name": "Chronic mesenteric ischaemia",
+  "aliases": [
+    "Chronic mesenteric arterial insufficiency",
+    "Intestinal angina",
+    "abdominal angina",
+    "chronic mesenteric ischemia",
+    "intestinal angina"
   ],
-  "pathophysiology": "Progressive atherosclerotic narrowing of the ostia of the coeliac axis and superior mesenteric artery reduces splanchnic blood flow. Because of the extensive collateral network, including the pancreaticoduodenal arcades and the marginal artery of Drummond with the arc of Riolan, symptoms usually develop only when at least two of the three main vessels are critically diseased. After eating, splanchnic oxygen demand rises but the stenotic vessels cannot augment flow, producing a supply-demand mismatch and ischaemic visceral pain, with blood effectively diverted from the intestinal to the gastric circulation. Chronic ischaemia impairs mucosal integrity, and acute thrombosis of a critical vessel precipitates transmural infarction. Non-atherosclerotic causes include median arcuate ligament compression, vasculitis and fibromuscular dysplasia.",
-  "additionalDifferentials": [
-   "Peptic ulcer disease or gastritis",
-   "Chronic pancreatitis",
-   "Biliary colic or cholecystitis",
-   "Intra-abdominal malignancy such as gastric or pancreatic cancer causing weight loss",
-   "Median arcuate ligament syndrome",
-   "Functional or irritable bowel disorders",
-   "Mesenteric vasculitis"
-  ],
-  "additionalInvestigations": [
-   "Mesenteric duplex ultrasound with fasting and postprandial velocities",
-   "CT angiography of the mesenteric vessels",
-   "MR angiography as an alternative",
-   "Catheter angiography with a lateral aortogram, often with intervention",
-   "Upper gastrointestinal endoscopy and cross-sectional imaging to exclude malignancy or ulceration",
-   "Nutritional assessment and baseline blood tests",
-   "Screening for vasculitis where the presentation is atypical"
-  ],
-  "redFlags": [
-   "Sudden severe constant abdominal pain, or pain out of proportion, signalling acute-on-chronic ischaemia or infarction.",
-   "Peritonism, lactic acidosis or a rising white cell count.",
-   "Gastrointestinal bleeding or bloody diarrhoea.",
-   "Rapid, profound weight loss and malnutrition.",
-   "Haemodynamic instability."
-  ],
-  "prognosis": "Successful revascularisation relieves symptoms, restores weight and prevents progression to infarction in the great majority, whereas untreated disease risks acute mesenteric infarction with very high mortality. Endovascular treatment carries lower perioperative morbidity but higher restenosis than open repair, mandating surveillance.",
-  "pitfalls": [
-   "Attributing weight loss and pain to occult malignancy and pursuing an exhaustive negative work-up while missing the vascular cause.",
-   "Assuming single-vessel stenosis explains symptoms when disease of at least two vessels or specific superior mesenteric artery involvement is usually required.",
-   "Delaying revascularisation until acute infarction supervenes.",
-   "Overlooking median arcuate ligament compression in younger patients.",
-   "Providing inadequate surveillance after stenting and missing restenosis."
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "European Society for Vascular Surgery clinical practice guidelines on the management of mesenteric ischaemia",
-   "Oxford Textbook of Vascular Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Revascularisation as definitive treatment by endovascular angioplasty and stenting, or by surgical bypass or endarterectomy, to relieve intestinal angina and prevent infarction",
-   "Cardiovascular risk-factor modification with smoking cessation, antiplatelet therapy and statin treatment",
-   "Nutritional support and repletion for weight loss and malnutrition before and after intervention",
-   "Emergency surgical management of the acute-on-chronic presentation with bowel infarction",
-   "Exclusion of malignancy and other causes of weight loss through endoscopy and cross-sectional imaging",
-   "Duplex surveillance of stent and graft patency given the restenosis risk after endovascular treatment, under vascular surgery care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_mesenteric_ischaemia-pathway",
-   "title": "Chronic mesenteric ischaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic triad is postprandial abdominal pain (intestinal angina), fear of eating (sitophobia) and weight loss.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden severe constant abdominal pain, or pain out of proportion, signalling acute-on-chronic ischaemia or infarction.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Mesenteric duplex ultrasound with fasting and postprandial velocities, CT angiography of the mesenteric vessels, MR angiography as an alternative"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Revascularisation as definitive treatment by endovascular angioplasty and stenting, or by surgical bypass or endarterectomy, to relieve intestinal angina and prevent infarction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing weight loss and pain to occult malignancy and pursuing an exhaustive negative work-up while missing the vascular cause."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic mesenteric ischaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_mesenteric_ischaemia-matrix",
-   "title": "Chronic mesenteric ischaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic triad is postprandial abdominal pain (intestinal angina), fear of eating (sitophobia) and weight loss.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic triad is postprandial abdominal pain (intestinal angina), fear of eating (sitophobia) and weight loss.",
+      "Almost always caused by atherosclerotic stenosis or occlusion of two or more of the three mesenteric vessels (coeliac, superior mesenteric and inferior mesenteric arteries) because of rich collateralisation.",
+      "Predominantly affects older women who smoke and have widespread atherosclerosis.",
+      "Pain characteristically begins within about 15 to 30 minutes of eating and is disproportionate to examination findings.",
+      "Weight loss stems from reduced intake because of food fear rather than malabsorption, and can closely mimic malignancy.",
+      "Duplex ultrasound is a useful screening test; CT angiography confirms the diagnosis and plans revascularisation.",
+      "Endovascular angioplasty and stenting is now first-line revascularisation for most patients, with open bypass or endarterectomy reserved for complex disease or endovascular failure.",
+      "Untreated disease can progress to acute-on-chronic mesenteric ischaemia and bowel infarction."
     ],
-    [
-     "Key Investigations",
-     "Mesenteric duplex ultrasound with fasting and postprandial velocities, CT angiography of the mesenteric vessels, MR angiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Progressive atherosclerotic narrowing of the ostia of the coeliac axis and superior mesenteric artery reduces splanchnic blood flow. Because of the extensive collateral network, including the pancreaticoduodenal arcades and the marginal artery of Drummond with the arc of Riolan, symptoms usually develop only when at least two of the three main vessels are critically diseased. After eating, splanchnic oxygen demand rises but the stenotic vessels cannot augment flow, producing a supply-demand mismatch and ischaemic visceral pain, with blood effectively diverted from the intestinal to the gastric circulation. Chronic ischaemia impairs mucosal integrity, and acute thrombosis of a critical vessel precipitates transmural infarction. Non-atherosclerotic causes include median arcuate ligament compression, vasculitis and fibromuscular dysplasia.",
+    "additionalDifferentials": [
+      "Peptic ulcer disease or gastritis",
+      "Chronic pancreatitis",
+      "Biliary colic or cholecystitis",
+      "Intra-abdominal malignancy such as gastric or pancreatic cancer causing weight loss",
+      "Median arcuate ligament syndrome",
+      "Functional or irritable bowel disorders",
+      "Mesenteric vasculitis"
     ],
-    [
-     "Primary Differentials",
-     "Peptic ulcer disease or gastritis, Chronic pancreatitis, Biliary colic or cholecystitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Mesenteric duplex ultrasound with fasting and postprandial velocities",
+      "CT angiography of the mesenteric vessels",
+      "MR angiography as an alternative",
+      "Catheter angiography with a lateral aortogram, often with intervention",
+      "Upper gastrointestinal endoscopy and cross-sectional imaging to exclude malignancy or ulceration",
+      "Nutritional assessment and baseline blood tests",
+      "Screening for vasculitis where the presentation is atypical"
     ],
-    [
-     "Management Strategy",
-     "Revascularisation as definitive treatment by endovascular angioplasty and stenting, or by surgical bypass or endarterectomy, to",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden severe constant abdominal pain, or pain out of proportion, signalling acute-on-chronic ischaemia or infarction.",
+      "Peritonism, lactic acidosis or a rising white cell count.",
+      "Gastrointestinal bleeding or bloody diarrhoea.",
+      "Rapid, profound weight loss and malnutrition.",
+      "Haemodynamic instability."
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing weight loss and pain to occult malignancy and pursuing an exhaustive negative work-up while missing the vascular",
-     "Prevent diagnostic or management error"
+    "prognosis": "Successful revascularisation relieves symptoms, restores weight and prevents progression to infarction in the great majority, whereas untreated disease risks acute mesenteric infarction with very high mortality. Endovascular treatment carries lower perioperative morbidity but higher restenosis than open repair, mandating surveillance.",
+    "pitfalls": [
+      "Attributing weight loss and pain to occult malignancy and pursuing an exhaustive negative work-up while missing the vascular cause.",
+      "Assuming single-vessel stenosis explains symptoms when disease of at least two vessels or specific superior mesenteric artery involvement is usually required.",
+      "Delaying revascularisation until acute infarction supervenes.",
+      "Overlooking median arcuate ligament compression in younger patients.",
+      "Providing inadequate surveillance after stenting and missing restenosis."
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "European Society for Vascular Surgery clinical practice guidelines on the management of mesenteric ischaemia",
+      "Oxford Textbook of Vascular Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Revascularisation as definitive treatment by endovascular angioplasty and stenting, or by surgical bypass or endarterectomy, to relieve intestinal angina and prevent infarction",
+      "Cardiovascular risk-factor modification with smoking cessation, antiplatelet therapy and statin treatment",
+      "Nutritional support and repletion for weight loss and malnutrition before and after intervention",
+      "Emergency surgical management of the acute-on-chronic presentation with bowel infarction",
+      "Exclusion of malignancy and other causes of weight loss through endoscopy and cross-sectional imaging",
+      "Duplex surveillance of stent and graft patency given the restenosis risk after endovascular treatment, under vascular surgery care"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic mesenteric ischaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-mesenteric-ischaemia-real-image",
-   "title": "Chronic mesenteric ischaemia: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "chronic_mesenteric_ischaemia-pathway",
+      "title": "Chronic mesenteric ischaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic triad is postprandial abdominal pain (intestinal angina), fear of eating (sitophobia) and weight loss.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden severe constant abdominal pain, or pain out of proportion, signalling acute-on-chronic ischaemia or infarction.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Mesenteric duplex ultrasound with fasting and postprandial velocities, CT angiography of the mesenteric vessels, MR angiography as an alternative"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Revascularisation as definitive treatment by endovascular angioplasty and stenting, or by surgical bypass or endarterectomy, to relieve intestinal angina and prevent infarction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing weight loss and pain to occult malignancy and pursuing an exhaustive negative work-up while missing the vascular cause."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic mesenteric ischaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_mesenteric_ischaemia-matrix",
+      "title": "Chronic mesenteric ischaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad is postprandial abdominal pain (intestinal angina), fear of eating (sitophobia) and weight loss.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Mesenteric duplex ultrasound with fasting and postprandial velocities, CT angiography of the mesenteric vessels, MR angiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peptic ulcer disease or gastritis, Chronic pancreatitis, Biliary colic or cholecystitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Revascularisation as definitive treatment by endovascular angioplasty and stenting, or by surgical bypass or endarterectomy, to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing weight loss and pain to occult malignancy and pursuing an exhaustive negative work-up while missing the vascular",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic mesenteric ischaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_mesenteric_ischaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mesenteric duplex ultrasound with fasting and postprandial velocities",
+          "cells": [
+            {
+              "text": "Screening for stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT angiography of the mesenteric vessels",
+          "cells": [
+            {
+              "text": "Confirms diagnosis and plans revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography with lateral aortogram",
+          "cells": [
+            {
+              "text": "Often with intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Excludes malignancy or ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment and baseline blood tests",
+          "cells": [
+            {
+              "text": "Malnutrition and weight loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_mesenteric_ischaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peptic ulcer disease or gastritis",
+          "cells": [
+            {
+              "text": "Epigastric pain without postprandial pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-abdominal malignancy",
+          "cells": [
+            {
+              "text": "Gastric or pancreatic cancer causing weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Median arcuate ligament syndrome",
+          "cells": [
+            {
+              "text": "Compression of the coeliac axis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_mesenteric_ischaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Revascularisation",
+          "cells": [
+            {
+              "text": "Endovascular angioplasty and stenting; surgical bypass or endarterectomy for complex disease"
+            },
+            {
+              "text": "Relieves intestinal angina and prevents infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factor modification",
+          "cells": [
+            {
+              "text": "Smoking cessation, antiplatelet therapy and statin"
+            },
+            {
+              "text": "Atherosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Nutritional repletion before and after intervention"
+            },
+            {
+              "text": "Weight loss and malnutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-on-chronic presentation",
+          "cells": [
+            {
+              "text": "Emergency surgical management for bowel infarction"
+            },
+            {
+              "text": "Acute-on-chronic ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude malignancy",
+          "cells": [
+            {
+              "text": "Endoscopy and cross-sectional imaging for other causes of weight loss"
+            },
+            {
+              "text": "Weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stent surveillance",
+          "cells": [
+            {
+              "text": "Duplex surveillance of stent and graft patency"
+            },
+            {
+              "text": "Restenosis after endovascular treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_mesenteric_ischaemia-dx-mgmt",
+      "title": "Diagnosis and management of Chronic mesenteric ischaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic mesenteric ischaemia: postprandial pain, food fear and weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe constant pain, peritonism, bleeding, lactic acidosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency surgical review for acute-on-chronic ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mesenteric duplex, then CT angiography; endoscopy to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Stenosis of two or more mesenteric vessels confirmed on angiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Smoking cessation, antiplatelet therapy and statin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check peptic disease, pancreatic disease and median arcuate ligament syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nutritional repletion before and after revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endovascular angioplasty and stenting as first-line revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical bypass or endarterectomy for complex disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Duplex surveillance for restenosis after endovascular treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

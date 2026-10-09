@@ -1,178 +1,1193 @@
 {
- "id": "juvenile_sjogren_syndrome",
- "name": "Juvenile Sjogren syndrome",
- "aliases": [
-  "childhood Sjogren syndrome",
-  "paediatric Sjogren syndrome",
-  "juvenile Sjögren syndrome",
-  "juvenile sicca syndrome"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Paediatrics",
- "specialty": "Paediatric Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
-   "Recurrent bilateral parotid gland swelling (parotitis) is a common and sometimes presenting feature in children, more so than the classic sicca symptoms",
-   "Dry eyes and dry mouth (sicca) may be underreported by children, so a low threshold for objective testing is needed",
-   "Extraglandular manifestations include arthralgia, arthritis, renal tubular acidosis, cytopenias and neurological involvement",
-   "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody, rheumatoid factor and polyclonal hypergammaglobulinaemia support the diagnosis",
-   "There is a long-term, though low in childhood, risk of B-cell lymphoma, warranting attention to persistent glandular enlargement",
-   "Management is largely supportive for sicca symptoms, with immunosuppression reserved for significant systemic involvement"
+  "id": "juvenile_sjogren_syndrome",
+  "name": "Juvenile Sjogren syndrome",
+  "aliases": [
+    "childhood Sjogren syndrome",
+    "paediatric Sjogren syndrome",
+    "juvenile Sjögren syndrome",
+    "juvenile sicca syndrome"
   ],
-  "pathophysiology": "Juvenile Sjogren syndrome is characterised by lymphocytic infiltration of exocrine glands, chiefly the salivary and lacrimal glands, driven by autoreactive T and B cells. Glandular epithelial activation, type I interferon signalling and B-cell hyperactivity lead to progressive glandular dysfunction and the production of autoantibodies such as anti-Ro/SSA and anti-La/SSB. Chronic B-cell stimulation underlies the hypergammaglobulinaemia and the long-term predisposition to lymphoma, while immune complex and interferon-driven inflammation account for extraglandular features affecting joints, kidneys, blood and the nervous system.",
-  "additionalDifferentials": [
-   "Recurrent juvenile parotitis (idiopathic)",
-   "Viral parotitis (e.g. mumps, Epstein-Barr virus, HIV) and other infective sialadenitis",
-   "Systemic lupus erythematosus and other overlapping connective tissue disease",
-   "Sarcoidosis",
-   "IgG4-related disease",
-   "Lymphoma or other glandular neoplasm",
-   "Cystic fibrosis-related sialadenopathy"
-  ],
-  "additionalInvestigations": [
-   "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor",
-   "Immunoglobulin levels looking for polyclonal hypergammaglobulinaemia",
-   "Objective ocular testing (e.g. Schirmer test and ocular surface staining)",
-   "Salivary gland ultrasound and, where indicated, minor salivary gland biopsy",
-   "Renal function and urinalysis to detect tubular acidosis",
-   "Full blood count for cytopenias",
-   "Inflammatory markers and complement levels"
-  ],
-  "redFlags": [
-   "Persistent unilateral or hard glandular enlargement raising concern for lymphoma",
-   "Renal tubular acidosis with electrolyte disturbance",
-   "Neurological involvement such as myelopathy or neuropathy",
-   "Significant cytopenias or vasculitic features"
-  ],
-  "prognosis": "Childhood disease is often dominated by recurrent parotitis and may follow a relatively indolent glandular course, but systemic involvement and the lifelong, if low, lymphoma risk require ongoing surveillance. Sicca symptoms tend to persist and can affect dental and ocular health over time.",
-  "pitfalls": [
-   "Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process",
-   "Relying on adult sicca-based criteria when children present with glandular swelling instead",
-   "Overlooking renal tubular acidosis and its metabolic consequences",
-   "Neglecting dental and ocular preventive care",
-   "Failing to investigate persistent asymmetrical glandular enlargement for lymphoma"
-  ],
-  "references": [
-   "Textbook of Pediatric Rheumatology",
-   "Proposed criteria for childhood Sjogren syndrome",
-   "ACR-EULAR classification criteria for Sjogren syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues alongside intensive dental caries prevention",
-   "Use hydroxychloroquine for arthralgia, fatigue and mucocutaneous features",
-   "Add corticosteroids with further immunosuppression or rituximab for significant extraglandular disease",
-   "Detect and treat renal tubular acidosis with alkali replacement and monitor for cytopenias",
-   "Treat recurrent parotitis supportively and evaluate persistent or asymmetrical glandular enlargement for B-cell lymphoma",
-   "Maintain long-term surveillance for systemic involvement and the low but lifelong lymphoma risk",
-   "Coordinate multidisciplinary paediatric rheumatology, ophthalmology and dental care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "juvenile_sjogren_syndrome-pathway",
-   "title": "Juvenile Sjogren syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent unilateral or hard glandular enlargement raising concern for lymphoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor, Immunoglobulin levels looking for polyclonal hypergammaglobulinaemia, Objective ocular testing (e.g. Schirmer test and ocular surface"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues alongside intensive dental caries prevention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of juvenile sjogren syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "juvenile_sjogren_syndrome-matrix",
-   "title": "Juvenile Sjogren syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Paediatrics",
+  "specialty": "Paediatric Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
+      "Recurrent bilateral parotid gland swelling (parotitis) is a common and sometimes presenting feature in children, more so than the classic sicca symptoms",
+      "Dry eyes and dry mouth (sicca) may be underreported by children, so a low threshold for objective testing is needed",
+      "Extraglandular manifestations include arthralgia, arthritis, renal tubular acidosis, cytopenias and neurological involvement",
+      "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody, rheumatoid factor and polyclonal hypergammaglobulinaemia support the diagnosis",
+      "There is a long-term, though low in childhood, risk of B-cell lymphoma, warranting attention to persistent glandular enlargement",
+      "Management is largely supportive for sicca symptoms, with immunosuppression reserved for significant systemic involvement"
     ],
-    [
-     "Key Investigations",
-     "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor, Immunoglobulin levels looking for polyclonal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Juvenile Sjogren syndrome is characterised by lymphocytic infiltration of exocrine glands, chiefly the salivary and lacrimal glands, driven by autoreactive T and B cells. Glandular epithelial activation, type I interferon signalling and B-cell hyperactivity lead to progressive glandular dysfunction and the production of autoantibodies such as anti-Ro/SSA and anti-La/SSB. Chronic B-cell stimulation underlies the hypergammaglobulinaemia and the long-term predisposition to lymphoma, while immune complex and interferon-driven inflammation account for extraglandular features affecting joints, kidneys, blood and the nervous system.",
+    "additionalDifferentials": [
+      "Recurrent juvenile parotitis (idiopathic)",
+      "Viral parotitis (e.g. mumps, Epstein-Barr virus, HIV) and other infective sialadenitis",
+      "Systemic lupus erythematosus and other overlapping connective tissue disease",
+      "Sarcoidosis",
+      "IgG4-related disease",
+      "Lymphoma or other glandular neoplasm",
+      "Cystic fibrosis-related sialadenopathy"
     ],
-    [
-     "Primary Differentials",
-     "Recurrent juvenile parotitis (idiopathic), Viral parotitis (e.g. mumps, Epstein-Barr virus, HIV) and other infective",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor",
+      "Immunoglobulin levels looking for polyclonal hypergammaglobulinaemia",
+      "Objective ocular testing (e.g. Schirmer test and ocular surface staining)",
+      "Salivary gland ultrasound and, where indicated, minor salivary gland biopsy",
+      "Renal function and urinalysis to detect tubular acidosis",
+      "Full blood count for cytopenias",
+      "Inflammatory markers and complement levels"
     ],
-    [
-     "Management Strategy",
-     "Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent unilateral or hard glandular enlargement raising concern for lymphoma",
+      "Renal tubular acidosis with electrolyte disturbance",
+      "Neurological involvement such as myelopathy or neuropathy",
+      "Significant cytopenias or vasculitic features"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process",
-     "Prevent diagnostic or management error"
+    "prognosis": "Childhood disease is often dominated by recurrent parotitis and may follow a relatively indolent glandular course, but systemic involvement and the lifelong, if low, lymphoma risk require ongoing surveillance. Sicca symptoms tend to persist and can affect dental and ocular health over time.",
+    "pitfalls": [
+      "Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process",
+      "Relying on adult sicca-based criteria when children present with glandular swelling instead",
+      "Overlooking renal tubular acidosis and its metabolic consequences",
+      "Neglecting dental and ocular preventive care",
+      "Failing to investigate persistent asymmetrical glandular enlargement for lymphoma"
+    ],
+    "references": [
+      "Textbook of Pediatric Rheumatology",
+      "Proposed criteria for childhood Sjogren syndrome",
+      "ACR-EULAR classification criteria for Sjogren syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues alongside intensive dental caries prevention",
+      "Use hydroxychloroquine for arthralgia, fatigue and mucocutaneous features",
+      "Add corticosteroids with further immunosuppression or rituximab for significant extraglandular disease",
+      "Detect and treat renal tubular acidosis with alkali replacement and monitor for cytopenias",
+      "Treat recurrent parotitis supportively and evaluate persistent or asymmetrical glandular enlargement for B-cell lymphoma",
+      "Maintain long-term surveillance for systemic involvement and the low but lifelong lymphoma risk",
+      "Coordinate multidisciplinary paediatric rheumatology, ophthalmology and dental care"
     ]
-   ],
-   "caption": "Overview comparison matrix for juvenile sjogren syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "juvenile-sjogren-syndrome-real-image",
-   "title": "Juvenile Sjogren syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "juvenile_sjogren_syndrome-pathway",
+      "title": "Juvenile Sjogren syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent unilateral or hard glandular enlargement raising concern for lymphoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor, Immunoglobulin levels looking for polyclonal hypergammaglobulinaemia, Objective ocular testing (e.g. Schirmer test and ocular surface"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues alongside intensive dental caries prevention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of juvenile sjogren syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "juvenile_sjogren_syndrome-matrix",
+      "title": "Juvenile Sjogren syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor, Immunoglobulin levels looking for polyclonal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Recurrent juvenile parotitis (idiopathic), Viral parotitis (e.g. mumps, Epstein-Barr virus, HIV) and other infective",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for juvenile sjogren syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "juvenile_sjogren_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-Ro/SSA and anti-La/SSB, ANA and rheumatoid factor",
+          "cells": [
+            {
+              "text": "Autoantibody profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels",
+          "cells": [
+            {
+              "text": "Polyclonal hypergammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schirmer test and ocular surface staining",
+          "cells": [
+            {
+              "text": "Objective dry eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salivary gland ultrasound and minor salivary gland biopsy",
+          "cells": [
+            {
+              "text": "Gland assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Tubular acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and complement",
+          "cells": [
+            {
+              "text": "Disease activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_sjogren_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral parotitis (mumps, Epstein-Barr virus, HIV)",
+          "cells": [
+            {
+              "text": "Infective sialadenitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma or glandular neoplasm",
+          "cells": [
+            {
+              "text": "Persistent unilateral or hard glandular enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent juvenile parotitis (idiopathic)",
+          "cells": [
+            {
+              "text": "Recurrent parotid swelling without autoimmune features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_sjogren_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ocular care",
+          "cells": [
+            {
+              "text": "Lubricating artificial tears and ocular surface protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Saliva and teeth",
+          "cells": [
+            {
+              "text": "Sialogogues and intensive dental caries prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Arthralgia, fatigue and mucocutaneous features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extraglandular disease",
+          "cells": [
+            {
+              "text": "Corticosteroids, further immunosuppression or rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular acidosis",
+          "cells": [
+            {
+              "text": "Alkali replacement and monitoring for cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parotitis and lymphoma",
+          "cells": [
+            {
+              "text": "Supportive care; evaluate persistent asymmetrical enlargement for B-cell lymphoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_sjogren_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    },
+    {
+      "id": "juvenile_sjogren_syndrome-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "ANA patterns, target antigens and clinical correlates",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antigen identified",
+        "Clinical correlate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse",
+          "cells": [
+            {
+              "text": "Deoxyribonucleoprotein, histones"
+            },
+            {
+              "text": "Nonspecific; drug-induced lupus, lupus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Peripheral (rim)",
+          "cells": [
+            {
+              "text": "ds-DNA"
+            },
+            {
+              "text": "50% of SLE (specific)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: U1-RNP",
+          "cells": [
+            {
+              "text": "U1-RNP"
+            },
+            {
+              "text": "Up to 90% of MCTD"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: Sm",
+          "cells": [
+            {
+              "text": "Sm"
+            },
+            {
+              "text": "30% of SLE (specific)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: Ro (SS-A)",
+          "cells": [
+            {
+              "text": "Ro (SS-A)"
+            },
+            {
+              "text": "Sjogren's 60%, subacute cutaneous lupus, neonatal lupus, ANA-negative lupus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: La (SS-B)",
+          "cells": [
+            {
+              "text": "La (SS-B)"
+            },
+            {
+              "text": "50% of Sjogren's, 15% of lupus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: Scl-70",
+          "cells": [
+            {
+              "text": "Scl-70"
+            },
+            {
+              "text": "40% of diffuse scleroderma"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: PM-1",
+          "cells": [
+            {
+              "text": "PM-1"
+            },
+            {
+              "text": "Polymyositis, dermatomyositis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Speckled: Jo-1",
+          "cells": [
+            {
+              "text": "Jo-1"
+            },
+            {
+              "text": "Polymyositis with pneumonitis and arthritis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nucleolar",
+          "cells": [
+            {
+              "text": "RNA polymerase I, others"
+            },
+            {
+              "text": "40% of progressive systemic sclerosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Centromere",
+          "cells": [
+            {
+              "text": "Kinetochore"
+            },
+            {
+              "text": "75% of CREST (limited scleroderma)"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "juvenile_sjogren_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Juvenile Sjogren syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent bilateral parotid swelling in a child, with or without dry eyes or mouth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Persistent unilateral or hard gland enlargement, tubular acidosis or cytopenias?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy or imaging for lymphoma; renal and haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-Ro, anti-La, ANA, RF, immunoglobulins, Schirmer test, gland ultrasound, urine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Autoantibody-positive exocrinopathy with objective dryness confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider viral, sarcoid or IgG4 parotitis; repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Artificial tears and ocular protection; sialogogues for saliva",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hydroxychloroquine for arthralgia, fatigue and skin features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids, immunosuppression or rituximab for extraglandular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Alkali replacement for tubular acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Dental caries prevention and lifelong lymphoma surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong management of dryness and systemic surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

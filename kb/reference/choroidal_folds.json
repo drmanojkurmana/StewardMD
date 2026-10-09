@@ -1,172 +1,481 @@
 {
- "id": "choroidal_folds",
- "name": "Choroidal folds",
- "aliases": [
-  "chorioretinal folds",
-  "choroidal striae"
- ],
- "class": "non_infective",
- "system": "Special senses / Eye (choroid and retinal pigment epithelium)",
- "specialty": "Ophthalmology / Medical retina",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Parallel grooves or striae involving the choroid, Bruch's membrane and retinal pigment epithelium, seen as alternating light and dark bands, usually horizontal, at the posterior pole",
-   "Arise from mechanical compression or shortening of the posterior wall of the eye; recognised causes include orbital mass lesions, thyroid eye disease, posterior scleritis, ocular hypotony, raised intracranial pressure with papilloedema, choroidal tumours and hyperopia",
-   "Idiopathic choroidal folds occur typically in hyperopic middle-aged men, are often bilateral and may be accompanied by disc oedema and a short axial length",
-   "On fluorescein angiography the crests appear hyperfluorescent, from stretched thinned RPE, and the troughs hypofluorescent, giving alternating bright and dark lines; OCT shows undulation of the RPE-Bruch's-choroid complex",
-   "New-onset unilateral folds, particularly with proptosis, a hyperopic shift or disc swelling, warrant orbital and neuro-imaging to exclude a retrobulbar mass or posterior scleritis",
-   "Inner retinal folds and choroidal folds may coexist or occur separately; distinguishing them helps localise the underlying cause",
-   "Management is directed at the underlying cause; longstanding idiopathic folds are usually stable and asymptomatic, although a hyperopic shift or mild distortion may occur"
+  "id": "choroidal_folds",
+  "name": "Choroidal folds",
+  "aliases": [
+    "chorioretinal folds",
+    "choroidal striae"
   ],
-  "pathophysiology": "Choroidal folds arise when the outer coats of the eye, namely the sclera, choroid, Bruch's membrane and retinal pigment epithelium, are compressed, thickened or rendered redundant, throwing the choroid and overlying RPE into a series of parallel undulations. Any process that shortens or indents the posterior globe or expands the choroid may be responsible. Orbital masses and thyroid orbitopathy compress the globe, posterior scleritis inflames and thickens the sclera and choroid, hypotony allows the eye wall to collapse and fold, and raised intracranial pressure transmitted along the optic nerve sheath produces peripapillary folds with disc oedema. In idiopathic cases a short, thick sclera in a hyperopic eye is implicated. The crest of each fold has stretched, thinned RPE while the trough has heaped RPE, which produces the characteristic angiographic pattern.",
-  "additionalDifferentials": [
-   "Inner retinal folds from an epiretinal membrane or hypotony",
-   "Angioid streaks (breaks in Bruch's membrane with a different, radiating pattern)",
-   "Posterior scleritis",
-   "Orbital or choroidal tumour indenting the globe",
-   "Thyroid eye disease",
-   "Papilloedema from raised intracranial pressure",
-   "Ocular hypotony following surgery, over-filtration or a wound leak"
-  ],
-  "additionalInvestigations": [
-   "OCT showing undulation of the RPE-Bruch's-choroid complex and any subretinal fluid",
-   "Fundus fluorescein angiography demonstrating alternating hyper- and hypofluorescent bands",
-   "B-scan ultrasonography for posterior scleritis (T-sign), choroidal mass or scleral thickening",
-   "Orbital and brain imaging with CT or MRI where an orbital mass or raised intracranial pressure is suspected",
-   "Refraction to detect a hyperopic shift together with measurement of axial length",
-   "Measurement of intraocular pressure to identify hypotony, with thyroid function and orbital assessment where indicated"
-  ],
-  "redFlags": [
-   "New unilateral folds with proptosis or a hyperopic shift suggesting an orbital or retrobulbar mass",
-   "Pain, especially on eye movement, accompanying folds and suggesting posterior scleritis",
-   "Associated disc swelling raising the possibility of raised intracranial pressure",
-   "Hypotony with a shallow anterior chamber or a bleb leak after surgery"
-  ],
-  "prognosis": "Idiopathic and longstanding choroidal folds are usually stable and visually insignificant. When secondary, the outcome depends on the underlying cause, and the folds may resolve if that cause, such as hypotony, an orbital mass or scleritis, is treated, although longstanding RPE changes can persist.",
-  "pitfalls": [
-   "Dismissing new choroidal folds as idiopathic without imaging to exclude an orbital mass or posterior scleritis",
-   "Confusing choroidal folds with angioid streaks",
-   "Missing hypotony as a cause after glaucoma surgery or trauma",
-   "Overlooking associated papilloedema and raised intracranial pressure"
-  ],
-  "references": [
-   "Ryan's Retina",
-   "Kanski's Clinical Ophthalmology: A Systematic Approach"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying cause, since the folds themselves need no specific therapy — orbital decompression or tumour treatment for thyroid eye disease and orbital masses, corticosteroid immunosuppression for posterior scleritis, and correction of ocular hypotony",
-   "Lower raised intracranial pressure where papilloedema is responsible, through weight reduction, carbonic anhydrase inhibition and neurosurgical cerebrospinal fluid diversion when needed",
-   "Reassure and observe idiopathic folds in hyperopic patients, providing refractive correction for the hyperopic error",
-   "Exclude a retrobulbar mass or posterior scleritis with orbital and brain imaging in new-onset unilateral folds, especially with proptosis or disc swelling",
-   "Monitor visual acuity, refraction and fold morphology with optical coherence tomography over time",
-   "Coordinate care across ophthalmology, neurology, endocrinology and orbital surgery according to the underlying cause"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "choroidal_folds-pathway",
-   "title": "Choroidal folds: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Parallel grooves or striae involving the choroid, Bruch's membrane and retinal pigment epithelium, seen as alternating light and dark bands, usually horizontal, at the posterior pole",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New unilateral folds with proptosis or a hyperopic shift suggesting an orbital or retrobulbar mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: OCT showing undulation of the RPE-Bruch's-choroid complex and any subretinal fluid, Fundus fluorescein angiography demonstrating alternating hyper- and hypofluorescent bands, B-scan ultrasonography for posterior scleritis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying cause, since the folds themselves need no specific therapy - orbital decompression or tumour treatment for thyroid eye disease and orbital masses, corticosteroid immunosuppression for"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing new choroidal folds as idiopathic without imaging to exclude an orbital mass or posterior scleritis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of choroidal folds."
-  }
- ],
- "tables": [
-  {
-   "id": "choroidal_folds-matrix",
-   "title": "Choroidal folds: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Parallel grooves or striae involving the choroid, Bruch's membrane and retinal pigment epithelium, seen as alternating light and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Special senses / Eye (choroid and retinal pigment epithelium)",
+  "specialty": "Ophthalmology / Medical retina",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Parallel grooves or striae involving the choroid, Bruch's membrane and retinal pigment epithelium, seen as alternating light and dark bands, usually horizontal, at the posterior pole",
+      "Arise from mechanical compression or shortening of the posterior wall of the eye; recognised causes include orbital mass lesions, thyroid eye disease, posterior scleritis, ocular hypotony, raised intracranial pressure with papilloedema, choroidal tumours and hyperopia",
+      "Idiopathic choroidal folds occur typically in hyperopic middle-aged men, are often bilateral and may be accompanied by disc oedema and a short axial length",
+      "On fluorescein angiography the crests appear hyperfluorescent, from stretched thinned RPE, and the troughs hypofluorescent, giving alternating bright and dark lines; OCT shows undulation of the RPE-Bruch's-choroid complex",
+      "New-onset unilateral folds, particularly with proptosis, a hyperopic shift or disc swelling, warrant orbital and neuro-imaging to exclude a retrobulbar mass or posterior scleritis",
+      "Inner retinal folds and choroidal folds may coexist or occur separately; distinguishing them helps localise the underlying cause",
+      "Management is directed at the underlying cause; longstanding idiopathic folds are usually stable and asymptomatic, although a hyperopic shift or mild distortion may occur"
     ],
-    [
-     "Key Investigations",
-     "OCT showing undulation of the RPE-Bruch's-choroid complex and any subretinal fluid, Fundus fluorescein angiography demonstrating",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Choroidal folds arise when the outer coats of the eye, namely the sclera, choroid, Bruch's membrane and retinal pigment epithelium, are compressed, thickened or rendered redundant, throwing the choroid and overlying RPE into a series of parallel undulations. Any process that shortens or indents the posterior globe or expands the choroid may be responsible. Orbital masses and thyroid orbitopathy compress the globe, posterior scleritis inflames and thickens the sclera and choroid, hypotony allows the eye wall to collapse and fold, and raised intracranial pressure transmitted along the optic nerve sheath produces peripapillary folds with disc oedema. In idiopathic cases a short, thick sclera in a hyperopic eye is implicated. The crest of each fold has stretched, thinned RPE while the trough has heaped RPE, which produces the characteristic angiographic pattern.",
+    "additionalDifferentials": [
+      "Inner retinal folds from an epiretinal membrane or hypotony",
+      "Angioid streaks (breaks in Bruch's membrane with a different, radiating pattern)",
+      "Posterior scleritis",
+      "Orbital or choroidal tumour indenting the globe",
+      "Thyroid eye disease",
+      "Papilloedema from raised intracranial pressure",
+      "Ocular hypotony following surgery, over-filtration or a wound leak"
     ],
-    [
-     "Primary Differentials",
-     "Inner retinal folds from an epiretinal membrane or hypotony, Angioid streaks (breaks in Bruch's membrane with a different,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "OCT showing undulation of the RPE-Bruch's-choroid complex and any subretinal fluid",
+      "Fundus fluorescein angiography demonstrating alternating hyper- and hypofluorescent bands",
+      "B-scan ultrasonography for posterior scleritis (T-sign), choroidal mass or scleral thickening",
+      "Orbital and brain imaging with CT or MRI where an orbital mass or raised intracranial pressure is suspected",
+      "Refraction to detect a hyperopic shift together with measurement of axial length",
+      "Measurement of intraocular pressure to identify hypotony, with thyroid function and orbital assessment where indicated"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying cause, since the folds themselves need no specific therapy - orbital decompression or tumour",
-     "Core treatment modality"
+    "redFlags": [
+      "New unilateral folds with proptosis or a hyperopic shift suggesting an orbital or retrobulbar mass",
+      "Pain, especially on eye movement, accompanying folds and suggesting posterior scleritis",
+      "Associated disc swelling raising the possibility of raised intracranial pressure",
+      "Hypotony with a shallow anterior chamber or a bleb leak after surgery"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing new choroidal folds as idiopathic without imaging to exclude an orbital mass or posterior scleritis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Idiopathic and longstanding choroidal folds are usually stable and visually insignificant. When secondary, the outcome depends on the underlying cause, and the folds may resolve if that cause, such as hypotony, an orbital mass or scleritis, is treated, although longstanding RPE changes can persist.",
+    "pitfalls": [
+      "Dismissing new choroidal folds as idiopathic without imaging to exclude an orbital mass or posterior scleritis",
+      "Confusing choroidal folds with angioid streaks",
+      "Missing hypotony as a cause after glaucoma surgery or trauma",
+      "Overlooking associated papilloedema and raised intracranial pressure"
+    ],
+    "references": [
+      "Ryan's Retina",
+      "Kanski's Clinical Ophthalmology: A Systematic Approach"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying cause, since the folds themselves need no specific therapy — orbital decompression or tumour treatment for thyroid eye disease and orbital masses, corticosteroid immunosuppression for posterior scleritis, and correction of ocular hypotony",
+      "Lower raised intracranial pressure where papilloedema is responsible, through weight reduction, carbonic anhydrase inhibition and neurosurgical cerebrospinal fluid diversion when needed",
+      "Reassure and observe idiopathic folds in hyperopic patients, providing refractive correction for the hyperopic error",
+      "Exclude a retrobulbar mass or posterior scleritis with orbital and brain imaging in new-onset unilateral folds, especially with proptosis or disc swelling",
+      "Monitor visual acuity, refraction and fold morphology with optical coherence tomography over time",
+      "Coordinate care across ophthalmology, neurology, endocrinology and orbital surgery according to the underlying cause"
     ]
-   ],
-   "caption": "Overview comparison matrix for choroidal folds."
-  }
- ],
- "diagrams": [
-  {
-   "id": "choroidal-folds-real-image",
-   "title": "Choroidal folds: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "choroidal_folds-pathway",
+      "title": "Choroidal folds: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Parallel grooves or striae involving the choroid, Bruch's membrane and retinal pigment epithelium, seen as alternating light and dark bands, usually horizontal, at the posterior pole",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New unilateral folds with proptosis or a hyperopic shift suggesting an orbital or retrobulbar mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: OCT showing undulation of the RPE-Bruch's-choroid complex and any subretinal fluid, Fundus fluorescein angiography demonstrating alternating hyper- and hypofluorescent bands, B-scan ultrasonography for posterior scleritis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying cause, since the folds themselves need no specific therapy - orbital decompression or tumour treatment for thyroid eye disease and orbital masses, corticosteroid immunosuppression for"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing new choroidal folds as idiopathic without imaging to exclude an orbital mass or posterior scleritis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of choroidal folds."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "choroidal_folds-matrix",
+      "title": "Choroidal folds: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Parallel grooves or striae involving the choroid, Bruch's membrane and retinal pigment epithelium, seen as alternating light and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "OCT showing undulation of the RPE-Bruch's-choroid complex and any subretinal fluid, Fundus fluorescein angiography demonstrating",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inner retinal folds from an epiretinal membrane or hypotony, Angioid streaks (breaks in Bruch's membrane with a different,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying cause, since the folds themselves need no specific therapy - orbital decompression or tumour",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing new choroidal folds as idiopathic without imaging to exclude an orbital mass or posterior scleritis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for choroidal folds."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "choroidal_folds-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "OCT",
+          "cells": [
+            {
+              "text": "Undulation of the RPE-Bruch's-choroid complex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus fluorescein angiography",
+          "cells": [
+            {
+              "text": "Alternating hyper- and hypofluorescent bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Posterior scleritis (T-sign), choroidal mass or scleral thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orbital and brain imaging",
+          "cells": [
+            {
+              "text": "Orbital mass or raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction and axial length",
+          "cells": [
+            {
+              "text": "Hyperopic shift and short axial length"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choroidal_folds-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Angioid streaks",
+          "cells": [
+            {
+              "text": "Breaks in Bruch's membrane with a radiating pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior scleritis",
+          "cells": [
+            {
+              "text": "Pain, especially on eye movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Papilloedema",
+          "cells": [
+            {
+              "text": "Associated disc swelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choroidal_folds-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Orbital decompression or tumour treatment for thyroid eye disease and orbital mass"
+            },
+            {
+              "text": "Folds need no specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleritis",
+          "cells": [
+            {
+              "text": "Corticosteroid immunosuppression for posterior scleritis"
+            },
+            {
+              "text": "Posterior scleritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypotony correction",
+          "cells": [
+            {
+              "text": "Correct ocular hypotony"
+            },
+            {
+              "text": "Hypotony"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Weight reduction, carbonic anhydrase inhibition and neurosurgical CSF diversion when needed"
+            },
+            {
+              "text": "Papilloedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Observe idiopathic folds in hyperopic patients; refractive correction"
+            },
+            {
+              "text": "Idiopathic folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Exclude retrobulbar mass or posterior scleritis in new unilateral folds"
+            },
+            {
+              "text": "New-onset unilateral folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Visual acuity, refraction and OCT over time"
+            },
+            {
+              "text": "Fold morphology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "choroidal_folds-dx-mgmt",
+      "title": "Diagnosis and management of Choroidal folds",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected choroidal folds: parallel posterior pole striae on fundus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new unilateral folds with proptosis, pain on movement, disc swelling)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent orbital and neuro-imaging; scleritis review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "OCT, fluorescein angiography, B-scan ultrasound and refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Undulating RPE-Bruch's-choroid complex with a defined underlying cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the underlying cause; the folds themselves need no specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check angioid streaks, posterior scleritis and papilloedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for posterior scleritis; correct hypotony",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lower raised intracranial pressure where papilloedema is responsible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure and observe idiopathic folds; refractive correction for hyperopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor vision and fold morphology with OCT over time",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

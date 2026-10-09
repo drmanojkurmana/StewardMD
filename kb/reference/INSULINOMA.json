@@ -1,183 +1,583 @@
 {
- "id": "INSULINOMA",
- "name": "Insulinoma",
- "system": "Endocrinology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "Insulinoma",
-  "Beta-cell tumor",
-  "Islet cell tumor",
-  "Pancreatic neuroendocrine tumor - insulin secreting",
-  "Insulin-secreting pNET",
-  "Whipple triad tumor",
-  "Nesidioblastosis (adult, related entity)"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Presents with Whipple triad: symptoms of neuroglycopenia/adrenergic surge, documented hypoglycemia, and relief with glucose intake.",
-   "Neuroglycopenic symptoms (confusion, behavioral change, visual disturbance, seizure, coma) often dominate and can mimic a primary neuropsychiatric or seizure disorder.",
-   "Fasting-induced hypoglycemia is classic, but symptoms can also occur postprandially or with exertion in some patients.",
-   "Most insulinomas are small (<2 cm), solitary, benign, and confined to the pancreas; only a minority are malignant or multiple.",
-   "Multiple or recurrent insulinomas should raise suspicion for MEN1 syndrome, especially in younger patients or with a family history.",
-   "Weight gain is common because patients learn to eat frequently to avoid symptomatic hypoglycemia.",
-   "Diagnosis rests on a supervised fasting study demonstrating inappropriately elevated insulin and C-peptide during hypoglycemia, not just cross-sectional imaging.",
-   "Localization can be difficult since many tumors are very small; a negative scan does not exclude the diagnosis."
+  "id": "INSULINOMA",
+  "name": "Insulinoma",
+  "system": "Endocrinology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "Insulinoma",
+    "Beta-cell tumor",
+    "Islet cell tumor",
+    "Pancreatic neuroendocrine tumor - insulin secreting",
+    "Insulin-secreting pNET",
+    "Whipple triad tumor",
+    "Nesidioblastosis (adult, related entity)"
   ],
-  "pathophysiology": "Insulinoma is a neuroendocrine tumor arising from pancreatic beta cells that autonomously secretes insulin independent of glucose feedback regulation. This unregulated insulin release drives glucose into tissues and suppresses hepatic glucose output, producing hypoglycemia. The resulting fall in plasma glucose triggers counter-regulatory adrenergic activation and, when severe or prolonged, neuroglycopenia due to inadequate glucose delivery to the brain. Most tumors are sporadic and benign, but a subset occurs in the context of multiple endocrine neoplasia type 1.",
-  "additionalDifferentials": [
-   "Factitious or surreptitious insulin/sulfonylurea administration",
-   "Non-islet cell tumor hypoglycemia (IGF-2-secreting mesenchymal or epithelial tumors)",
-   "Post-bariatric surgery hyperinsulinemic hypoglycemia / nesidioblastosis",
-   "Adrenal insufficiency",
-   "Autoimmune insulin (Hirata) syndrome or insulin receptor autoantibodies",
-   "Severe hepatic failure or sepsis-related hypoglycemia"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Reactive (postprandial) hypoglycemia",
-   "Alcohol-induced hypoglycemia",
-   "Adrenal insufficiency",
-   "Hypopituitarism",
-   "Factitious hypoglycemia from exogenous insulin or sulfonylureas"
-  ],
-  "additionalInvestigations": [
-   "72-hour supervised fasting test — reference standard to document Whipple triad with paired glucose, insulin, C-peptide, and proinsulin",
-   "Plasma insulin and C-peptide during hypoglycemia — inappropriately elevated levels confirm endogenous hyperinsulinemia",
-   "Sulfonylurea/meglitinide screen — excludes factitious hypoglycemia from oral secretagogues",
-   "Insulin antibody testing — helps exclude autoimmune insulin syndrome or exogenous insulin use",
-   "Contrast-enhanced CT or MRI of pancreas — initial anatomic localization of tumor",
-   "Endoscopic ultrasound — high sensitivity for small intrapancreatic lesions not seen on cross-sectional imaging",
-   "Somatostatin-receptor or GLP-1 receptor based functional imaging — localizes lesion when anatomic imaging is negative",
-   "Genetic/family screening for MEN1 — indicated when tumors are multiple, recurrent, or early-onset"
-  ],
-  "redFlags": [
-   "Severe neuroglycopenia with seizure, coma, or altered mental status requiring urgent glucose correction",
-   "Recurrent or multifocal tumors suggesting MEN1 and need for broader endocrine screening",
-   "Imaging or biochemical features suggesting malignant insulinoma with metastatic potential",
-   "Hypoglycemia unresponsive to standard glucose repletion, suggesting an alternative or coexisting cause",
-   "Signs of another MEN1-associated tumor (parathyroid, pituitary) in a patient with insulinoma"
-  ],
-  "pitfalls": [
-   "Relying on a single random glucose or insulin level instead of a supervised fasting protocol, leading to missed or false diagnosis.",
-   "Failing to exclude factitious hypoglycemia (exogenous insulin/sulfonylurea) before pursuing extensive tumor imaging.",
-   "Assuming a negative CT/MRI excludes insulinoma, when small tumors frequently require endoscopic ultrasound or functional imaging for localization.",
-   "Overlooking the possibility of MEN1 in patients with multiple or recurrent insulinomas, delaying appropriate family and genetic evaluation."
-  ],
-  "prognosis": "Most insulinomas are benign and solitary, and surgical resection is curative in the large majority of cases. Malignant or MEN1-associated multifocal disease carries a less favorable outlook and requires longer-term surveillance.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Hypoglycemia and Pancreatic Neuroendocrine Tumors chapters"
-  ],
-  "crossLinks": [
-   "hypoglycemia"
-  ],
-  "management": [
-   "Cure most tumours with surgical resection — enucleation or partial pancreatectomy — after accurate preoperative localisation",
-   "Treat acute hypoglycaemia with oral or intravenous glucose and prevent it with frequent small carbohydrate-containing meals",
-   "Control hypoglycaemia medically before surgery or in unresectable disease with diazoxide, adding a somatostatin analogue such as octreotide or lanreotide where appropriate",
-   "For malignant or metastatic disease, use cytoreductive surgery, targeted agents such as everolimus or sunitinib, and peptide receptor radionuclide therapy",
-   "Screen for MEN1 in multifocal, recurrent, or young patients and offer genetic counselling and family testing when confirmed",
-   "Provide long-term surveillance for recurrence in malignant or MEN1-associated multifocal disease"
-  ]
- },
- "algorithms": [
-  {
-   "id": "insulinoma-pathway",
-   "title": "Insulinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with Whipple triad: symptoms of neuroglycopenia/adrenergic surge, documented hypoglycemia, and relief with glucose intake.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neuroglycopenia with seizure, coma, or altered mental status requiring urgent glucose correction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 72-hour supervised fasting test - reference standard to document Whipple triad with paired glucose, insulin, C-peptide, and proinsulin, Plasma insulin and C-peptide during hypoglycemia - inappropriately elevated levels"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cure most tumours with surgical resection - enucleation or partial pancreatectomy - after accurate preoperative localisation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on a single random glucose or insulin level instead of a supervised fasting protocol, leading to missed or false diagnosis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of insulinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "insulinoma-matrix",
-   "title": "Insulinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with Whipple triad: symptoms of neuroglycopenia/adrenergic surge, documented hypoglycemia, and relief with glucose",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Presents with Whipple triad: symptoms of neuroglycopenia/adrenergic surge, documented hypoglycemia, and relief with glucose intake.",
+      "Neuroglycopenic symptoms (confusion, behavioral change, visual disturbance, seizure, coma) often dominate and can mimic a primary neuropsychiatric or seizure disorder.",
+      "Fasting-induced hypoglycemia is classic, but symptoms can also occur postprandially or with exertion in some patients.",
+      "Most insulinomas are small (<2 cm), solitary, benign, and confined to the pancreas; only a minority are malignant or multiple.",
+      "Multiple or recurrent insulinomas should raise suspicion for MEN1 syndrome, especially in younger patients or with a family history.",
+      "Weight gain is common because patients learn to eat frequently to avoid symptomatic hypoglycemia.",
+      "Diagnosis rests on a supervised fasting study demonstrating inappropriately elevated insulin and C-peptide during hypoglycemia, not just cross-sectional imaging.",
+      "Localization can be difficult since many tumors are very small; a negative scan does not exclude the diagnosis."
     ],
-    [
-     "Key Investigations",
-     "72-hour supervised fasting test - reference standard to document Whipple triad with paired glucose, insulin, C-peptide, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Insulinoma is a neuroendocrine tumor arising from pancreatic beta cells that autonomously secretes insulin independent of glucose feedback regulation. This unregulated insulin release drives glucose into tissues and suppresses hepatic glucose output, producing hypoglycemia. The resulting fall in plasma glucose triggers counter-regulatory adrenergic activation and, when severe or prolonged, neuroglycopenia due to inadequate glucose delivery to the brain. Most tumors are sporadic and benign, but a subset occurs in the context of multiple endocrine neoplasia type 1.",
+    "additionalDifferentials": [
+      "Factitious or surreptitious insulin/sulfonylurea administration",
+      "Non-islet cell tumor hypoglycemia (IGF-2-secreting mesenchymal or epithelial tumors)",
+      "Post-bariatric surgery hyperinsulinemic hypoglycemia / nesidioblastosis",
+      "Adrenal insufficiency",
+      "Autoimmune insulin (Hirata) syndrome or insulin receptor autoantibodies",
+      "Severe hepatic failure or sepsis-related hypoglycemia"
     ],
-    [
-     "Primary Differentials",
-     "Factitious or surreptitious insulin/sulfonylurea administration, Non-islet cell tumor hypoglycemia (IGF-2-secreting mesenchymal",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Reactive (postprandial) hypoglycemia",
+      "Alcohol-induced hypoglycemia",
+      "Adrenal insufficiency",
+      "Hypopituitarism",
+      "Factitious hypoglycemia from exogenous insulin or sulfonylureas"
     ],
-    [
-     "Management Strategy",
-     "Cure most tumours with surgical resection - enucleation or partial pancreatectomy - after accurate preoperative localisation",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "72-hour supervised fasting test — reference standard to document Whipple triad with paired glucose, insulin, C-peptide, and proinsulin",
+      "Plasma insulin and C-peptide during hypoglycemia — inappropriately elevated levels confirm endogenous hyperinsulinemia",
+      "Sulfonylurea/meglitinide screen — excludes factitious hypoglycemia from oral secretagogues",
+      "Insulin antibody testing — helps exclude autoimmune insulin syndrome or exogenous insulin use",
+      "Contrast-enhanced CT or MRI of pancreas — initial anatomic localization of tumor",
+      "Endoscopic ultrasound — high sensitivity for small intrapancreatic lesions not seen on cross-sectional imaging",
+      "Somatostatin-receptor or GLP-1 receptor based functional imaging — localizes lesion when anatomic imaging is negative",
+      "Genetic/family screening for MEN1 — indicated when tumors are multiple, recurrent, or early-onset"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on a single random glucose or insulin level instead of a supervised fasting protocol, leading to missed or false",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Severe neuroglycopenia with seizure, coma, or altered mental status requiring urgent glucose correction",
+      "Recurrent or multifocal tumors suggesting MEN1 and need for broader endocrine screening",
+      "Imaging or biochemical features suggesting malignant insulinoma with metastatic potential",
+      "Hypoglycemia unresponsive to standard glucose repletion, suggesting an alternative or coexisting cause",
+      "Signs of another MEN1-associated tumor (parathyroid, pituitary) in a patient with insulinoma"
+    ],
+    "pitfalls": [
+      "Relying on a single random glucose or insulin level instead of a supervised fasting protocol, leading to missed or false diagnosis.",
+      "Failing to exclude factitious hypoglycemia (exogenous insulin/sulfonylurea) before pursuing extensive tumor imaging.",
+      "Assuming a negative CT/MRI excludes insulinoma, when small tumors frequently require endoscopic ultrasound or functional imaging for localization.",
+      "Overlooking the possibility of MEN1 in patients with multiple or recurrent insulinomas, delaying appropriate family and genetic evaluation."
+    ],
+    "prognosis": "Most insulinomas are benign and solitary, and surgical resection is curative in the large majority of cases. Malignant or MEN1-associated multifocal disease carries a less favorable outlook and requires longer-term surveillance.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Hypoglycemia and Pancreatic Neuroendocrine Tumors chapters"
+    ],
+    "crossLinks": [
+      "hypoglycemia"
+    ],
+    "management": [
+      "Cure most tumours with surgical resection — enucleation or partial pancreatectomy — after accurate preoperative localisation",
+      "Treat acute hypoglycaemia with oral or intravenous glucose and prevent it with frequent small carbohydrate-containing meals",
+      "Control hypoglycaemia medically before surgery or in unresectable disease with diazoxide, adding a somatostatin analogue such as octreotide or lanreotide where appropriate",
+      "For malignant or metastatic disease, use cytoreductive surgery, targeted agents such as everolimus or sunitinib, and peptide receptor radionuclide therapy",
+      "Screen for MEN1 in multifocal, recurrent, or young patients and offer genetic counselling and family testing when confirmed",
+      "Provide long-term surveillance for recurrence in malignant or MEN1-associated multifocal disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for insulinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "insulinoma-real-image",
-   "title": "Insulinoma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "insulinoma-pathway",
+      "title": "Insulinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with Whipple triad: symptoms of neuroglycopenia/adrenergic surge, documented hypoglycemia, and relief with glucose intake.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neuroglycopenia with seizure, coma, or altered mental status requiring urgent glucose correction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 72-hour supervised fasting test - reference standard to document Whipple triad with paired glucose, insulin, C-peptide, and proinsulin, Plasma insulin and C-peptide during hypoglycemia - inappropriately elevated levels"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cure most tumours with surgical resection - enucleation or partial pancreatectomy - after accurate preoperative localisation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on a single random glucose or insulin level instead of a supervised fasting protocol, leading to missed or false diagnosis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of insulinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "insulinoma-matrix",
+      "title": "Insulinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with Whipple triad: symptoms of neuroglycopenia/adrenergic surge, documented hypoglycemia, and relief with glucose",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "72-hour supervised fasting test - reference standard to document Whipple triad with paired glucose, insulin, C-peptide, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Factitious or surreptitious insulin/sulfonylurea administration, Non-islet cell tumor hypoglycemia (IGF-2-secreting mesenchymal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cure most tumours with surgical resection - enucleation or partial pancreatectomy - after accurate preoperative localisation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a single random glucose or insulin level instead of a supervised fasting protocol, leading to missed or false",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for insulinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Insulinoma",
+      "url": "https://www.merckmanuals.com/professional/oncology/gastrointestinal-and-pancreatic-neuroendocrine-tumors-nets/insulinoma",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "INSULINOMA-diagnostic",
+      "kind": "diagnostic",
+      "title": "Biochemical diagnosis of insulinoma",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Whipple triad",
+          "cells": [
+            {
+              "text": "Fasting symptoms, low glucose at the time, relief with carbohydrate"
+            },
+            {
+              "text": "Establishes true hypoglycaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supervised fast",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "48 to 72; 98% develop symptoms within 48"
+            },
+            {
+              "text": "70% to 80% within 24 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucose to trigger insulin sample",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Below 55 with symptoms, or below 40 without",
+              "op": "<",
+              "value": 55
+            },
+            {
+              "text": "Draw insulin, C-peptide, proinsulin together"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Insulin",
+          "unit": "mcU/mL",
+          "cells": [
+            {
+              "text": "Above 6",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "{{hy:Inappropriately high insulin during hypoglycaemia}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Insulin to glucose ratio",
+          "cells": [
+            {
+              "text": "Above 0.3 (mcU/mL per mg/dL)",
+              "op": ">",
+              "value": 0.3
+            },
+            {
+              "text": "Insulin-mediated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C-peptide",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "0.6 or more",
+              "op": ">=",
+              "value": 0.6
+            },
+            {
+              "text": "Low in exogenous insulin use"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Proinsulin",
+          "unit": "pmol/L",
+          "cells": [
+            {
+              "text": "5 or more",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Endogenous source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity above 90",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Preferred localisation; CT not useful"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignancy and MEN1",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10 malignant; about 10 in MEN1"
+            },
+            {
+              "text": "MEN1 tumours present in the 20s and are often multiple"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "INSULINOMA-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of hyperinsulinaemic hypoglycaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Surreptitious insulin use",
+          "cells": [
+            {
+              "text": "{{hy:High insulin but low C-peptide and proinsulin}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sulfonylurea ingestion",
+          "cells": [
+            {
+              "text": "Positive sulfonylurea or meglitinide screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-insulinoma pancreatogenous hypoglycaemia or post-bariatric",
+          "cells": [
+            {
+              "text": "Postprandial rather than fasting episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin autoimmune hypoglycaemia",
+          "cells": [
+            {
+              "text": "Insulin antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric or neurologic disorder",
+          "cells": [
+            {
+              "text": "Episodic confusion or behaviour change without documented hypoglycaemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "INSULINOMA-treatment",
+      "kind": "treatment",
+      "title": "Treatment of insulinoma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enucleation",
+          "cells": [
+            {
+              "text": "{{hy:Small superficial single tumour}}"
+            },
+            {
+              "text": "Overall surgical cure about 90%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Distal subtotal pancreatectomy",
+          "cells": [
+            {
+              "text": "Large or deep body or tail lesions, or multiple tumours"
+            },
+            {
+              "text": "MEN1 often multiple"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pancreatoduodenectomy",
+          "cells": [
+            {
+              "text": "Resectable malignant tumour in the head"
+            },
+            {
+              "text": "Whipple procedure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diazoxide",
+          "cells": [
+            {
+              "text": "Unresectable or awaiting surgery"
+            },
+            {
+              "text": "Give with a natriuretic diuretic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Octreotide or lanreotide",
+          "cells": [
+            {
+              "text": "Diazoxide-refractory hypoglycaemia"
+            },
+            {
+              "text": "Variable effect"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Streptozotocin with 5-fluorouracil",
+          "cells": [
+            {
+              "text": "Metastatic disease"
+            },
+            {
+              "text": "Response about 60%, up to 2 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Everolimus, sunitinib, temozolomide regimens",
+          "cells": [
+            {
+              "text": "Metastatic disease"
+            },
+            {
+              "text": "No doses in source"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "INSULINOMA-dx-mgmt",
+      "title": "Diagnosis and management of insulinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fasting neuroglycopenic episodes in a well-appearing adult",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Supervised 48 to 72 hour fast",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Glucose below 55 mg/dL with symptoms?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Insulinoma essentially excluded",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Insulin above 6, C-peptide 0.6 or more, proinsulin 5 or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Low C-peptide: consider surreptitious insulin",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude sulfonylurea; localise with endoscopic ultrasound",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Resectable?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Enucleation or pancreatectomy; cure about 90%",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Diazoxide, somatostatin analogue, systemic therapy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

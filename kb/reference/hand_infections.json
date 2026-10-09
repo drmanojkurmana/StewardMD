@@ -1,178 +1,492 @@
 {
- "id": "hand_infections",
- "name": "Hand infections",
- "aliases": [
-  "hand infection",
-  "felon",
-  "paronychia",
-  "flexor tenosynovitis",
-  "web space abscess"
- ],
- "class": "infective",
- "system": "Plastic / Reconstructive",
- "specialty": "Plastic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Grabb & Smith's Plastic Surgery / standard references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Common hand infections include paronychia (nail fold), felon (pulp space of the fingertip), web space and deep palmar space abscesses, and pyogenic flexor tenosynovitis, each with characteristic anatomy",
-   "Staphylococcus aureus and streptococci are the usual pathogens, but bite wounds, aquatic exposure, and immunocompromise broaden the range to include anaerobes and atypical organisms",
-   "Pyogenic flexor tenosynovitis is a surgical emergency recognised by Kanavel's signs: fusiform swelling of the finger, semiflexed resting posture, tenderness along the flexor sheath, and pain on passive extension",
-   "Human bite injuries over the knuckle (fight bite) frequently penetrate the joint and extensor mechanism and are notorious for serious deep infection if underestimated",
-   "Early localised infections may settle with elevation, splinting, and antibiotics, but established abscesses and closed-space infections require prompt incision and drainage",
-   "A felon is a closed-space infection of the fingertip pulp that can raise pressure enough to threaten the tissue and requires timely drainage",
-   "Delayed or inadequate treatment of deep hand infection risks tendon necrosis, stiffness, spread along fascial planes, and permanent loss of function",
-   "Elevation, splinting in a safe position, and early mobilisation once infection is controlled help preserve hand function"
+  "id": "hand_infections",
+  "name": "Hand infections",
+  "aliases": [
+    "hand infection",
+    "felon",
+    "paronychia",
+    "flexor tenosynovitis",
+    "web space abscess"
   ],
-  "pathophysiology": "Hand infections usually follow inoculation of bacteria through a break in the skin from trauma, bites, splinters, or nail-care injury. The hand's compartmentalised anatomy - closed pulp spaces, synovial flexor sheaths, web spaces, and deep palmar spaces - confines infection under pressure and allows it to track along defined planes. Rising pressure within closed spaces impairs perfusion and can cause tissue and tendon necrosis. In pyogenic flexor tenosynovitis, pus within the closed synovial sheath compromises the gliding surface and blood supply of the flexor tendon, leading to adhesions and stiffness if not decompressed. Bite wounds introduce mixed oral flora deep into tissues and joints.",
-  "additionalDifferentials": [
-   "Acute gout or pseudogout of the hand",
-   "Herpetic whitlow (viral, should not be incised)",
-   "Inflammatory or crystal arthropathy",
-   "Foreign body reaction or retained foreign body",
-   "Acute calcific tendinitis",
-   "Complex regional pain syndrome or reactive swelling"
-  ],
-  "additionalInvestigations": [
-   "Inflammatory markers and white cell count to gauge severity",
-   "Wound and intraoperative cultures, including for anaerobes and atypical organisms when exposure suggests",
-   "Plain radiographs to detect foreign body, gas, retained tooth fragment, or osteomyelitis",
-   "Blood cultures if systemic sepsis is present",
-   "Ultrasound to identify collections or fluid within the flexor sheath",
-   "Joint aspiration and crystal analysis when gout or septic arthritis is considered"
-  ],
-  "redFlags": [
-   "Pyogenic flexor tenosynovitis with Kanavel's signs requiring urgent surgical decompression",
-   "Fight bite over a knuckle with possible joint or extensor tendon penetration",
-   "Rapidly spreading infection, crepitus, or systemic sepsis suggesting necrotising infection",
-   "Deep palmar space abscess or infection tracking proximally along fascial planes",
-   "Signs of tissue necrosis or compartment involvement"
-  ],
-  "prognosis": "Superficial infections such as early paronychia treated promptly usually resolve fully. Deep and closed-space infections carry a higher risk of stiffness, contracture, and functional loss, and outcome is closely tied to how quickly drainage and appropriate antibiotics are provided. Untreated flexor sheath and deep space infections can lead to tendon necrosis, amputation, or long-term disability.",
-  "pitfalls": [
-   "Underestimating a fight bite and closing or under-treating a wound that has penetrated the joint",
-   "Incising a herpetic whitlow, which worsens the viral infection",
-   "Delaying surgical drainage of pyogenic flexor tenosynovitis while relying on antibiotics alone",
-   "Missing a retained foreign body as the source of persistent infection",
-   "Failing to elevate and splint, leading to persistent oedema and stiffness",
-   "Overlooking gout or crystal arthropathy masquerading as infection"
-  ],
-  "references": [
-   "Grabb & Smith's Plastic Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Empirical antibiotics covering Staphylococcus aureus and streptococci with an anti-staphylococcal penicillin or cephalosporin, broadened with a beta-lactam/beta-lactamase inhibitor to cover oral anaerobes for human and animal bite wounds",
-   "Prompt incision and drainage of established closed-space collections such as felon, paronychia, and web-space or deep palmar space abscesses",
-   "Emergency surgical decompression and irrigation of the flexor sheath for pyogenic flexor tenosynovitis to preserve tendon gliding",
-   "Elevation, splinting in the position of function, and analgesia, with early localised infection often settling on antibiotics and these measures alone",
-   "Formal exploration, irrigation and open management of fight-bite wounds over the knuckle, with tetanus prophylaxis and inspection of the joint and extensor mechanism",
-   "Add meticillin-resistant Staphylococcus aureus cover where risk factors exist and atypical or anaerobic cover after aquatic or bite exposure",
-   "Hand therapy and serial functional review to limit stiffness and contracture, escalating to theatre if infection spreads or fails to settle"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hand_infections-pathway",
-   "title": "Hand infections: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Common hand infections include paronychia (nail fold), felon (pulp space of the fingertip), web space and deep palmar space abscesses, and pyogenic flexor tenosynovitis, each with characteristic anatomy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Pyogenic flexor tenosynovitis with Kanavel's signs requiring urgent surgical decompression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Inflammatory markers and white cell count to gauge severity, Wound and intraoperative cultures, including for anaerobes and atypical organisms when exposure suggests, Plain radiographs to detect foreign body, gas, retained"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Empirical antibiotics covering Staphylococcus aureus and streptococci with an anti-staphylococcal penicillin or cephalosporin, broadened with a beta-lactam/beta-lactamase inhibitor to cover oral anaerobes for human and"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating a fight bite and closing or under-treating a wound that has penetrated the joint"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hand infections."
-  }
- ],
- "tables": [
-  {
-   "id": "hand_infections-matrix",
-   "title": "Hand infections: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Common hand infections include paronychia (nail fold), felon (pulp space of the fingertip), web space and deep palmar space",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Plastic / Reconstructive",
+  "specialty": "Plastic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Grabb & Smith's Plastic Surgery / standard references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Common hand infections include paronychia (nail fold), felon (pulp space of the fingertip), web space and deep palmar space abscesses, and pyogenic flexor tenosynovitis, each with characteristic anatomy",
+      "Staphylococcus aureus and streptococci are the usual pathogens, but bite wounds, aquatic exposure, and immunocompromise broaden the range to include anaerobes and atypical organisms",
+      "Pyogenic flexor tenosynovitis is a surgical emergency recognised by Kanavel's signs: fusiform swelling of the finger, semiflexed resting posture, tenderness along the flexor sheath, and pain on passive extension",
+      "Human bite injuries over the knuckle (fight bite) frequently penetrate the joint and extensor mechanism and are notorious for serious deep infection if underestimated",
+      "Early localised infections may settle with elevation, splinting, and antibiotics, but established abscesses and closed-space infections require prompt incision and drainage",
+      "A felon is a closed-space infection of the fingertip pulp that can raise pressure enough to threaten the tissue and requires timely drainage",
+      "Delayed or inadequate treatment of deep hand infection risks tendon necrosis, stiffness, spread along fascial planes, and permanent loss of function",
+      "Elevation, splinting in a safe position, and early mobilisation once infection is controlled help preserve hand function"
     ],
-    [
-     "Key Investigations",
-     "Inflammatory markers and white cell count to gauge severity, Wound and intraoperative cultures, including for anaerobes and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hand infections usually follow inoculation of bacteria through a break in the skin from trauma, bites, splinters, or nail-care injury. The hand's compartmentalised anatomy - closed pulp spaces, synovial flexor sheaths, web spaces, and deep palmar spaces - confines infection under pressure and allows it to track along defined planes. Rising pressure within closed spaces impairs perfusion and can cause tissue and tendon necrosis. In pyogenic flexor tenosynovitis, pus within the closed synovial sheath compromises the gliding surface and blood supply of the flexor tendon, leading to adhesions and stiffness if not decompressed. Bite wounds introduce mixed oral flora deep into tissues and joints.",
+    "additionalDifferentials": [
+      "Acute gout or pseudogout of the hand",
+      "Herpetic whitlow (viral, should not be incised)",
+      "Inflammatory or crystal arthropathy",
+      "Foreign body reaction or retained foreign body",
+      "Acute calcific tendinitis",
+      "Complex regional pain syndrome or reactive swelling"
     ],
-    [
-     "Primary Differentials",
-     "Acute gout or pseudogout of the hand, Herpetic whitlow (viral, should not be incised), Inflammatory or crystal arthropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Inflammatory markers and white cell count to gauge severity",
+      "Wound and intraoperative cultures, including for anaerobes and atypical organisms when exposure suggests",
+      "Plain radiographs to detect foreign body, gas, retained tooth fragment, or osteomyelitis",
+      "Blood cultures if systemic sepsis is present",
+      "Ultrasound to identify collections or fluid within the flexor sheath",
+      "Joint aspiration and crystal analysis when gout or septic arthritis is considered"
     ],
-    [
-     "Management Strategy",
-     "Empirical antibiotics covering Staphylococcus aureus and streptococci with an anti-staphylococcal penicillin or cephalosporin,",
-     "Core treatment modality"
+    "redFlags": [
+      "Pyogenic flexor tenosynovitis with Kanavel's signs requiring urgent surgical decompression",
+      "Fight bite over a knuckle with possible joint or extensor tendon penetration",
+      "Rapidly spreading infection, crepitus, or systemic sepsis suggesting necrotising infection",
+      "Deep palmar space abscess or infection tracking proximally along fascial planes",
+      "Signs of tissue necrosis or compartment involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating a fight bite and closing or under-treating a wound that has penetrated the joint",
-     "Prevent diagnostic or management error"
+    "prognosis": "Superficial infections such as early paronychia treated promptly usually resolve fully. Deep and closed-space infections carry a higher risk of stiffness, contracture, and functional loss, and outcome is closely tied to how quickly drainage and appropriate antibiotics are provided. Untreated flexor sheath and deep space infections can lead to tendon necrosis, amputation, or long-term disability.",
+    "pitfalls": [
+      "Underestimating a fight bite and closing or under-treating a wound that has penetrated the joint",
+      "Incising a herpetic whitlow, which worsens the viral infection",
+      "Delaying surgical drainage of pyogenic flexor tenosynovitis while relying on antibiotics alone",
+      "Missing a retained foreign body as the source of persistent infection",
+      "Failing to elevate and splint, leading to persistent oedema and stiffness",
+      "Overlooking gout or crystal arthropathy masquerading as infection"
+    ],
+    "references": [
+      "Grabb & Smith's Plastic Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Empirical antibiotics covering Staphylococcus aureus and streptococci with an anti-staphylococcal penicillin or cephalosporin, broadened with a beta-lactam/beta-lactamase inhibitor to cover oral anaerobes for human and animal bite wounds",
+      "Prompt incision and drainage of established closed-space collections such as felon, paronychia, and web-space or deep palmar space abscesses",
+      "Emergency surgical decompression and irrigation of the flexor sheath for pyogenic flexor tenosynovitis to preserve tendon gliding",
+      "Elevation, splinting in the position of function, and analgesia, with early localised infection often settling on antibiotics and these measures alone",
+      "Formal exploration, irrigation and open management of fight-bite wounds over the knuckle, with tetanus prophylaxis and inspection of the joint and extensor mechanism",
+      "Add meticillin-resistant Staphylococcus aureus cover where risk factors exist and atypical or anaerobic cover after aquatic or bite exposure",
+      "Hand therapy and serial functional review to limit stiffness and contracture, escalating to theatre if infection spreads or fails to settle"
     ]
-   ],
-   "caption": "Overview comparison matrix for hand infections."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hand-infections-real-image",
-   "title": "Hand infections: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "hand_infections-pathway",
+      "title": "Hand infections: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Common hand infections include paronychia (nail fold), felon (pulp space of the fingertip), web space and deep palmar space abscesses, and pyogenic flexor tenosynovitis, each with characteristic anatomy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Pyogenic flexor tenosynovitis with Kanavel's signs requiring urgent surgical decompression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Inflammatory markers and white cell count to gauge severity, Wound and intraoperative cultures, including for anaerobes and atypical organisms when exposure suggests, Plain radiographs to detect foreign body, gas, retained"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Empirical antibiotics covering Staphylococcus aureus and streptococci with an anti-staphylococcal penicillin or cephalosporin, broadened with a beta-lactam/beta-lactamase inhibitor to cover oral anaerobes for human and"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating a fight bite and closing or under-treating a wound that has penetrated the joint"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hand infections."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hand_infections-matrix",
+      "title": "Hand infections: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Common hand infections include paronychia (nail fold), felon (pulp space of the fingertip), web space and deep palmar space",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Inflammatory markers and white cell count to gauge severity, Wound and intraoperative cultures, including for anaerobes and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute gout or pseudogout of the hand, Herpetic whitlow (viral, should not be incised), Inflammatory or crystal arthropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Empirical antibiotics covering Staphylococcus aureus and streptococci with an anti-staphylococcal penicillin or cephalosporin,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating a fight bite and closing or under-treating a wound that has penetrated the joint",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hand infections."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grabb & Smith's Plastic Surgery / standard references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hand_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Inflammatory markers and white cell count",
+          "cells": [
+            {
+              "text": "Gauge severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and intraoperative cultures",
+          "cells": [
+            {
+              "text": "Organisms, including anaerobes when exposure suggests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Foreign body, gas, retained tooth fragment or osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Used if systemic sepsis is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Collections or fluid within the flexor sheath"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint aspiration and crystal analysis",
+          "cells": [
+            {
+              "text": "Used when gout or septic arthritis is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_infections-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute gout or pseudogout of the hand",
+          "cells": [
+            {
+              "text": "Crystal analysis on joint aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpetic whitlow",
+          "cells": [
+            {
+              "text": "Viral infection that should not be incised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foreign body reaction or retained foreign body",
+          "cells": [
+            {
+              "text": "Detected on plain radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute calcific tendinitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complex regional pain syndrome or reactive swelling",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_infections-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical antibiotics",
+          "cells": [
+            {
+              "text": "Cover Staphylococcus aureus and streptococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incision and drainage",
+          "cells": [
+            {
+              "text": "Established closed-space collections such as felon, paronychia, web space or deep palmar abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency flexor sheath decompression",
+          "cells": [
+            {
+              "text": "Pyogenic flexor tenosynovitis, to preserve tendon function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elevation, splinting and analgesia",
+          "cells": [
+            {
+              "text": "Early localised infection, often settling on antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fight-bite wounds",
+          "cells": [
+            {
+              "text": "Formal exploration, irrigation and open management, with tetanus prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional cover",
+          "cells": [
+            {
+              "text": "MRSA cover where risk factors exist; atypical or anaerobic cover after aquatic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Limits stiffness and contracture; theatre if infection spreads"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hand_infections-dx-mgmt",
+      "title": "Diagnosis and management of Hand infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hand infection: finger swelling, pain, or a fight bite over a knuckle",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Kanavel's signs, fight bite, spreading infection, sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency decompression for flexor tenosynovitis or necrotising infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inflammatory markers, cultures, radiographs; ultrasound for flexor sheath collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is there an established closed-space collection such as a felon or paronychia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider herpetic whitlow, gout, foreign body or calcific tendinitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical antibiotics covering Staphylococcus aureus and streptococci",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Incision and drainage of felon, paronychia or deep space abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Elevation, splinting and analgesia for early localised infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand therapy and serial review to limit stiffness and contracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Infection controlled; function preserved with hand therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

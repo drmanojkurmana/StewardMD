@@ -1,175 +1,555 @@
 {
- "id": "parvovirus_b19_infection",
- "name": "Parvovirus B19 infection",
- "aliases": [
-  "erythrovirus B19",
-  "fifth disease",
-  "erythema infectiosum",
-  "slapped cheek disease",
-  "B19V infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by human parvovirus B19, which has a strong tropism for erythroid progenitor cells via the P antigen (globoside) receptor",
-   "In children it classically causes erythema infectiosum (fifth disease) with a slapped-cheek facial rash followed by a lacy reticular exanthem on the limbs",
-   "In adults, particularly women, it often presents as a symmetrical peripheral arthropathy that can mimic early rheumatoid arthritis",
-   "In patients with chronic haemolysis, such as sickle cell disease or hereditary spherocytosis, it precipitates transient aplastic crisis by arresting red-cell production",
-   "In immunocompromised hosts persistent infection produces chronic pure red cell aplasia with anaemia and reticulocytopenia",
-   "Infection during pregnancy can cross the placenta and cause foetal anaemia, high-output cardiac failure, and non-immune hydrops fetalis or foetal loss",
-   "Diagnosis uses B19 IgM and IgG serology in the immunocompetent, and quantitative B19 DNA PCR in immunocompromised or aplastic patients where antibody responses are unreliable",
-   "Persistent infection and pure red cell aplasia respond to intravenous immunoglobulin, which supplies neutralising antibody, while aplastic crisis may need red-cell transfusion"
+  "id": "parvovirus_b19_infection",
+  "name": "Parvovirus B19 infection",
+  "aliases": [
+    "erythrovirus B19",
+    "fifth disease",
+    "erythema infectiosum",
+    "slapped cheek disease",
+    "B19V infection"
   ],
-  "pathophysiology": "Parvovirus B19 is a small non-enveloped DNA virus transmitted by respiratory droplets, transfusion, and vertically across the placenta. It binds the P blood-group antigen (globoside) expressed on erythroid precursors and infects and lyses them, transiently halting red-cell production in the marrow. In healthy people the resulting brief drop in reticulocytes is clinically silent, and the rash and arthropathy that follow are immune-complex mediated as antibody develops. Where red-cell survival is already shortened by chronic haemolysis, this pause in erythropoiesis causes an abrupt fall in haemoglobin (aplastic crisis). When neutralising antibody cannot be generated, as in immunosuppression, infection persists and causes chronic pure red cell aplasia. In the foetus the combination of a short red-cell lifespan and rapid erythroid expansion makes severe anaemia, cardiac failure, and hydrops possible.",
-  "additionalDifferentials": [
-   "Rubella and measles",
-   "Other viral exanthems including enteroviral and roseola rashes",
-   "Early rheumatoid arthritis or other inflammatory polyarthropathy",
-   "Systemic lupus erythematosus",
-   "Other causes of aplastic crisis or acquired pure red cell aplasia",
-   "Immune (idiopathic) causes of non-immune hydrops fetalis"
-  ],
-  "additionalInvestigations": [
-   "Parvovirus B19 IgM and IgG serology in immunocompetent patients",
-   "Quantitative B19 DNA PCR from blood or marrow in immunocompromised or aplastic patients",
-   "Full blood count and reticulocyte count to detect anaemia and erythroid suppression",
-   "Bone marrow examination showing giant pronormoblasts and erythroid hypoplasia in persistent infection",
-   "Maternal serology and foetal ultrasound with middle cerebral artery Doppler for suspected congenital infection",
-   "Direct antiglobulin test and haemolysis screen to characterise underlying haemolytic disorder"
-  ],
-  "redFlags": [
-   "Abrupt severe anaemia with reticulocytopenia in a patient with chronic haemolysis (aplastic crisis)",
-   "Progressive anaemia in an immunocompromised patient suggesting persistent infection",
-   "Foetal hydrops, ascites, or abnormal Doppler indicating severe foetal anaemia",
-   "Signs of high-output cardiac failure from profound anaemia"
-  ],
-  "prognosis": "Most immunocompetent infections are self-limiting with full recovery, arthropathy usually resolving over weeks to months; aplastic crisis recovers as immunity develops, immunoglobulin usually corrects persistent red cell aplasia, and foetal outcome depends on gestation and timely intrauterine transfusion.",
-  "pitfalls": [
-   "Assuming a patient is no longer infectious once the rash appears, when contagiousness is greatest before the exanthem",
-   "Relying on IgM serology in immunocompromised patients who may not mount an antibody response, missing the need for DNA PCR",
-   "Overlooking parvovirus as a cause of unexplained anaemia or reticulocytopenia after transplantation",
-   "Failing to consider B19 in non-immune hydrops fetalis or new symmetrical polyarthropathy"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "UpToDate: Clinical manifestations and diagnosis of human parvovirus B19 infection"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat immunocompetent infection supportively, using NSAIDs for the immune-complex arthropathy, as the illness is self-limiting",
-   "Support transient aplastic crisis with red-cell transfusion until endogenous erythropoiesis recovers",
-   "Treat persistent pure red cell aplasia in immunocompromised hosts with intravenous immunoglobulin and reduce immunosuppression where feasible",
-   "In maternal infection, monitor the foetus with serial ultrasound and middle cerebral artery Doppler, arranging intrauterine transfusion for foetal anaemia or hydrops",
-   "Apply infection-control precautions to protect pregnant, immunosuppressed, and chronically haemolytic contacts, recognising that patients in aplastic crisis remain infectious",
-   "Monitor full blood count and reticulocyte count to track anaemia and marrow recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "parvovirus_b19_infection-pathway",
-   "title": "Parvovirus B19 infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by human parvovirus B19, which has a strong tropism for erythroid progenitor cells via the P antigen (globoside) receptor",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Abrupt severe anaemia with reticulocytopenia in a patient with chronic haemolysis (aplastic crisis)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Parvovirus B19 IgM and IgG serology in immunocompetent patients, Quantitative B19 DNA PCR from blood or marrow in immunocompromised or aplastic patients, Full blood count and reticulocyte count to detect anaemia and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat immunocompetent infection supportively, using NSAIDs for the immune-complex arthropathy, as the illness is self-limiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a patient is no longer infectious once the rash appears, when contagiousness is greatest before the exanthem"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of parvovirus b19 infection."
-  }
- ],
- "tables": [
-  {
-   "id": "parvovirus_b19_infection-matrix",
-   "title": "Parvovirus B19 infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by human parvovirus B19, which has a strong tropism for erythroid progenitor cells via the P antigen (globoside) receptor",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by human parvovirus B19, which has a strong tropism for erythroid progenitor cells via the P antigen (globoside) receptor",
+      "In children it classically causes erythema infectiosum (fifth disease) with a slapped-cheek facial rash followed by a lacy reticular exanthem on the limbs",
+      "In adults, particularly women, it often presents as a symmetrical peripheral arthropathy that can mimic early rheumatoid arthritis",
+      "In patients with chronic haemolysis, such as sickle cell disease or hereditary spherocytosis, it precipitates transient aplastic crisis by arresting red-cell production",
+      "In immunocompromised hosts persistent infection produces chronic pure red cell aplasia with anaemia and reticulocytopenia",
+      "Infection during pregnancy can cross the placenta and cause foetal anaemia, high-output cardiac failure, and non-immune hydrops fetalis or foetal loss",
+      "Diagnosis uses B19 IgM and IgG serology in the immunocompetent, and quantitative B19 DNA PCR in immunocompromised or aplastic patients where antibody responses are unreliable",
+      "Persistent infection and pure red cell aplasia respond to intravenous immunoglobulin, which supplies neutralising antibody, while aplastic crisis may need red-cell transfusion"
     ],
-    [
-     "Key Investigations",
-     "Parvovirus B19 IgM and IgG serology in immunocompetent patients, Quantitative B19 DNA PCR from blood or marrow in",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Parvovirus B19 is a small non-enveloped DNA virus transmitted by respiratory droplets, transfusion, and vertically across the placenta. It binds the P blood-group antigen (globoside) expressed on erythroid precursors and infects and lyses them, transiently halting red-cell production in the marrow. In healthy people the resulting brief drop in reticulocytes is clinically silent, and the rash and arthropathy that follow are immune-complex mediated as antibody develops. Where red-cell survival is already shortened by chronic haemolysis, this pause in erythropoiesis causes an abrupt fall in haemoglobin (aplastic crisis). When neutralising antibody cannot be generated, as in immunosuppression, infection persists and causes chronic pure red cell aplasia. In the foetus the combination of a short red-cell lifespan and rapid erythroid expansion makes severe anaemia, cardiac failure, and hydrops possible.",
+    "additionalDifferentials": [
+      "Rubella and measles",
+      "Other viral exanthems including enteroviral and roseola rashes",
+      "Early rheumatoid arthritis or other inflammatory polyarthropathy",
+      "Systemic lupus erythematosus",
+      "Other causes of aplastic crisis or acquired pure red cell aplasia",
+      "Immune (idiopathic) causes of non-immune hydrops fetalis"
     ],
-    [
-     "Primary Differentials",
-     "Rubella and measles, Other viral exanthems including enteroviral and roseola rashes, Early rheumatoid arthritis or other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Parvovirus B19 IgM and IgG serology in immunocompetent patients",
+      "Quantitative B19 DNA PCR from blood or marrow in immunocompromised or aplastic patients",
+      "Full blood count and reticulocyte count to detect anaemia and erythroid suppression",
+      "Bone marrow examination showing giant pronormoblasts and erythroid hypoplasia in persistent infection",
+      "Maternal serology and foetal ultrasound with middle cerebral artery Doppler for suspected congenital infection",
+      "Direct antiglobulin test and haemolysis screen to characterise underlying haemolytic disorder"
     ],
-    [
-     "Management Strategy",
-     "Treat immunocompetent infection supportively, using NSAIDs for the immune-complex arthropathy, as the illness is self-limiting",
-     "Core treatment modality"
+    "redFlags": [
+      "Abrupt severe anaemia with reticulocytopenia in a patient with chronic haemolysis (aplastic crisis)",
+      "Progressive anaemia in an immunocompromised patient suggesting persistent infection",
+      "Foetal hydrops, ascites, or abnormal Doppler indicating severe foetal anaemia",
+      "Signs of high-output cardiac failure from profound anaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a patient is no longer infectious once the rash appears, when contagiousness is greatest before the exanthem",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most immunocompetent infections are self-limiting with full recovery, arthropathy usually resolving over weeks to months; aplastic crisis recovers as immunity develops, immunoglobulin usually corrects persistent red cell aplasia, and foetal outcome depends on gestation and timely intrauterine transfusion.",
+    "pitfalls": [
+      "Assuming a patient is no longer infectious once the rash appears, when contagiousness is greatest before the exanthem",
+      "Relying on IgM serology in immunocompromised patients who may not mount an antibody response, missing the need for DNA PCR",
+      "Overlooking parvovirus as a cause of unexplained anaemia or reticulocytopenia after transplantation",
+      "Failing to consider B19 in non-immune hydrops fetalis or new symmetrical polyarthropathy"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "UpToDate: Clinical manifestations and diagnosis of human parvovirus B19 infection"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat immunocompetent infection supportively, using NSAIDs for the immune-complex arthropathy, as the illness is self-limiting",
+      "Support transient aplastic crisis with red-cell transfusion until endogenous erythropoiesis recovers",
+      "Treat persistent pure red cell aplasia in immunocompromised hosts with intravenous immunoglobulin and reduce immunosuppression where feasible",
+      "In maternal infection, monitor the foetus with serial ultrasound and middle cerebral artery Doppler, arranging intrauterine transfusion for foetal anaemia or hydrops",
+      "Apply infection-control precautions to protect pregnant, immunosuppressed, and chronically haemolytic contacts, recognising that patients in aplastic crisis remain infectious",
+      "Monitor full blood count and reticulocyte count to track anaemia and marrow recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for parvovirus b19 infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "parvovirus-b19-infection-real-image",
-   "title": "Parvovirus B19 infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "parvovirus_b19_infection-pathway",
+      "title": "Parvovirus B19 infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by human parvovirus B19, which has a strong tropism for erythroid progenitor cells via the P antigen (globoside) receptor",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Abrupt severe anaemia with reticulocytopenia in a patient with chronic haemolysis (aplastic crisis)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Parvovirus B19 IgM and IgG serology in immunocompetent patients, Quantitative B19 DNA PCR from blood or marrow in immunocompromised or aplastic patients, Full blood count and reticulocyte count to detect anaemia and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat immunocompetent infection supportively, using NSAIDs for the immune-complex arthropathy, as the illness is self-limiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a patient is no longer infectious once the rash appears, when contagiousness is greatest before the exanthem"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of parvovirus b19 infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "parvovirus_b19_infection-matrix",
+      "title": "Parvovirus B19 infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by human parvovirus B19, which has a strong tropism for erythroid progenitor cells via the P antigen (globoside) receptor",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Parvovirus B19 IgM and IgG serology in immunocompetent patients, Quantitative B19 DNA PCR from blood or marrow in",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rubella and measles, Other viral exanthems including enteroviral and roseola rashes, Early rheumatoid arthritis or other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat immunocompetent infection supportively, using NSAIDs for the immune-complex arthropathy, as the illness is self-limiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a patient is no longer infectious once the rash appears, when contagiousness is greatest before the exanthem",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for parvovirus b19 infection."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 184-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parvovirus_b19_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Parvovirus B19 IgM and IgG serology",
+          "cells": [
+            {
+              "text": "Acute infection in immunocompetent patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative B19 DNA PCR",
+          "cells": [
+            {
+              "text": "Immunocompromised or aplastic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and reticulocyte count",
+          "cells": [
+            {
+              "text": "Anaemia and erythroid suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Giant pronormoblasts in persistent infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parvovirus_b19_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other viral exanthems",
+          "cells": [
+            {
+              "text": "Rubella, measles, enteroviral and roseola rashes; serology separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Symmetric adult arthropathy; serology and self-limiting course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parvovirus_b19_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care and NSAIDs",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Self-limiting infection; NSAIDs for immune-complex arthropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red cell transfusion",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "For transient aplastic crisis until erythropoiesis recovers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For persistent aplasia in immunocompromised hosts; reduce immunosuppression where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foetal management",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Intrauterine transfusion for severe foetal anaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parvovirus_b19_infection-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diseases associated with parvovirus B19 infection and diagnostic tests",
+      "rowHeader": "Disease",
+      "columns": [
+        "Host(s)",
+        "IgM",
+        "IgG",
+        "PCR",
+        "Quantitative PCR"
+      ],
+      "rows": [
+        {
+          "parameter": "Fifth disease",
+          "cells": [
+            {
+              "text": "Healthy children"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": ">10^3 IU/mL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Polyarthropathy syndrome",
+          "cells": [
+            {
+              "text": "Healthy adults (more often women)"
+            },
+            {
+              "text": "Positive within 3 months of onset"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": ">10^3 IU/mL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transient aplastic crisis",
+          "cells": [
+            {
+              "text": "Patients with increased erythropoiesis"
+            },
+            {
+              "text": "Negative or positive"
+            },
+            {
+              "text": "Negative or positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Often >10^12 IU/mL, but rapidly decreases"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Persistent anemia/pure red-cell aplasia",
+          "cells": [
+            {
+              "text": "Immunodeficient or immunocompetent patients"
+            },
+            {
+              "text": "Negative or weakly positive"
+            },
+            {
+              "text": "Negative or weakly positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Often >10^12 IU/mL, but should be >10^6 in the absence of treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydrops fetalis/congenital anemia",
+          "cells": [
+            {
+              "text": "Fetus (<20 weeks)"
+            },
+            {
+              "text": "Negative or positive"
+            },
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Positive in amniotic fluid or tissue"
+            },
+            {
+              "text": "Not applicable"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parvovirus_b19_infection-dx-mgmt",
+      "title": "Diagnosis and management of Parvovirus B19 infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slapped-cheek rash or symmetric arthralgia, or abrupt anaemia in chronic haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (aplastic crisis, persistent anaemia or foetal hydrops)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent transfusion for severe anaemia or foetal referral for hydrops",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "B19 IgM and IgG, DNA PCR if immunocompromised, FBC, reticulocytes, marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is parvovirus B19 confirmed by serology or DNA PCR, with other causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rubella, measles, enteroviral rash, rheumatoid arthritis or SLE",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care and NSAIDs for self-limiting infection with arthropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Red cell transfusion for transient aplastic crisis until recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous immunoglobulin for persistent aplasia in immunocompromised hosts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intrauterine transfusion for severe foetal anaemia, per foetal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Immunocompetent infection self-limiting; foetal outcome depends on gestation and timing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

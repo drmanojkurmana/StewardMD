@@ -1,175 +1,464 @@
 {
- "id": "transaldolase_deficiency",
- "name": "Transaldolase deficiency",
- "aliases": [
-  "TALDO deficiency",
-  "TALDO1 deficiency",
-  "transaldolase 1 deficiency",
-  "pentose phosphate pathway transaldolase defect"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive defect of transaldolase (TALDO1 gene) in the non-oxidative branch of the pentose phosphate pathway, leading to accumulation of polyols and seven-carbon sugars",
-   "Often presents in the neonatal or antenatal period with hepatosplenomegaly, liver dysfunction, coagulopathy and thrombocytopenia, sometimes with hydrops",
-   "A multisystem disorder that can include dysmorphic features, cutis laxa or skin changes, cardiac and renal anomalies, and anaemia",
-   "Urine polyol analysis shows elevated erythritol, arabitol and ribitol, and characteristic seven-carbon sugars such as sedoheptulose and its derivatives",
-   "Progressive liver disease with fibrosis or cirrhosis is a major feature, and hepatocellular carcinoma has been reported",
-   "There is no specific enzyme-replacement therapy, so management is supportive with monitoring of hepatic, renal, haematological and cardiac function, and antioxidant approaches have been explored",
-   "Diagnosis relies on the urinary polyol/sugar pattern with confirmatory TALDO1 molecular testing"
+  "id": "transaldolase_deficiency",
+  "name": "Transaldolase deficiency",
+  "aliases": [
+    "TALDO deficiency",
+    "TALDO1 deficiency",
+    "transaldolase 1 deficiency",
+    "pentose phosphate pathway transaldolase defect"
   ],
-  "pathophysiology": "Transaldolase catalyses a reversible step in the non-oxidative branch of the pentose phosphate pathway that interconverts sugar phosphates and links the pathway with glycolysis. Its deficiency disrupts the balance of pentose phosphate intermediates, causing accumulation of polyols (such as erythritol, arabitol and ribitol) and seven-carbon sugars (including sedoheptulose). The disturbed pathway is thought to increase oxidative stress and impair regeneration of reducing equivalents, contributing to progressive injury of the liver, kidneys, heart and blood cells. The result is a multisystem disorder dominated by hepatosplenomegaly, hepatic fibrosis, coagulopathy and cytopenias, often evident from birth.",
-  "additionalDifferentials": [
-   "Congenital disorders of glycosylation",
-   "Neonatal haemochromatosis and other neonatal liver failure syndromes",
-   "Congenital infections causing hepatosplenomegaly (TORCH)",
-   "Other pentose phosphate pathway defects (ribose-5-phosphate isomerase deficiency)",
-   "Cutis laxa syndromes with systemic involvement",
-   "Mitochondrial hepatopathies",
-   "Tyrosinaemia type I and other metabolic liver diseases"
-  ],
-  "additionalInvestigations": [
-   "Urine polyol analysis for erythritol, arabitol and ribitol",
-   "Urine and body-fluid sugar analysis for sedoheptulose and seven-carbon sugar derivatives",
-   "Liver function tests, coagulation profile and full blood count",
-   "Abdominal imaging to assess hepatosplenomegaly and hepatic architecture",
-   "Renal and cardiac assessment for associated anomalies",
-   "TALDO1 molecular genetic testing to confirm the diagnosis"
-  ],
-  "redFlags": [
-   "Neonatal liver failure with coagulopathy or bleeding",
-   "Hydrops fetalis or severe antenatal hepatosplenomegaly",
-   "Progressive hepatic fibrosis or signs suggesting hepatocellular carcinoma",
-   "Multisystem deterioration with cardiac or renal failure"
-  ],
-  "prognosis": "The disorder is variable but often serious, with progressive liver disease, coagulopathy and multisystem involvement; some individuals survive into later childhood or adulthood while others succumb to neonatal liver failure or complications such as hepatocellular carcinoma.",
-  "pitfalls": [
-   "Overlooking transaldolase deficiency in neonatal liver failure by not requesting urinary polyol analysis",
-   "Attributing hepatosplenomegaly and cytopenias solely to congenital infection",
-   "Failing to monitor for evolving hepatic fibrosis and hepatocellular carcinoma over time",
-   "Missing associated renal, cardiac or dysmorphic features that point to a multisystem metabolic disorder"
-  ],
-  "references": [
-   "Scriver's OMMBID: Disorders of the Pentose Phosphate Pathway",
-   "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Understand there is no enzyme-replacement or curative therapy, so management is supportive across affected organs, with antioxidant approaches such as N-acetylcysteine explored experimentally",
-   "Manage progressive liver disease by correcting coagulopathy with vitamin K and clotting-factor support, treating complications of fibrosis and cirrhosis, and considering liver transplantation for end-stage failure",
-   "Support the haematological features with transfusion for symptomatic anaemia and thrombocytopenia",
-   "Surveillance for hepatocellular carcinoma with alpha-fetoprotein and liver imaging given the recognised malignant risk",
-   "Monitor renal and cardiac function for associated anomalies and treat them symptomatically",
-   "Genetic counselling for this autosomal recessive TALDO1 disorder, with carrier testing and family screening",
-   "Coordinate care through metabolic medicine and clinical genetics with multidisciplinary organ-specific input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "transaldolase_deficiency-pathway",
-   "title": "Transaldolase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive defect of transaldolase (TALDO1 gene) in the non-oxidative branch of the pentose phosphate pathway, leading to accumulation of polyols and seven-carbon sugars",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal liver failure with coagulopathy or bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine polyol analysis for erythritol, arabitol and ribitol, Urine and body-fluid sugar analysis for sedoheptulose and seven-carbon sugar derivatives, Liver function tests, coagulation profile and full blood count"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Understand there is no enzyme-replacement or curative therapy, so management is supportive across affected organs, with antioxidant approaches such as N-acetylcysteine explored experimentally"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking transaldolase deficiency in neonatal liver failure by not requesting urinary polyol analysis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of transaldolase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "transaldolase_deficiency-matrix",
-   "title": "Transaldolase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive defect of transaldolase (TALDO1 gene) in the non-oxidative branch of the pentose phosphate pathway, leading",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive defect of transaldolase (TALDO1 gene) in the non-oxidative branch of the pentose phosphate pathway, leading to accumulation of polyols and seven-carbon sugars",
+      "Often presents in the neonatal or antenatal period with hepatosplenomegaly, liver dysfunction, coagulopathy and thrombocytopenia, sometimes with hydrops",
+      "A multisystem disorder that can include dysmorphic features, cutis laxa or skin changes, cardiac and renal anomalies, and anaemia",
+      "Urine polyol analysis shows elevated erythritol, arabitol and ribitol, and characteristic seven-carbon sugars such as sedoheptulose and its derivatives",
+      "Progressive liver disease with fibrosis or cirrhosis is a major feature, and hepatocellular carcinoma has been reported",
+      "There is no specific enzyme-replacement therapy, so management is supportive with monitoring of hepatic, renal, haematological and cardiac function, and antioxidant approaches have been explored",
+      "Diagnosis relies on the urinary polyol/sugar pattern with confirmatory TALDO1 molecular testing"
     ],
-    [
-     "Key Investigations",
-     "Urine polyol analysis for erythritol, arabitol and ribitol, Urine and body-fluid sugar analysis for sedoheptulose and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Transaldolase catalyses a reversible step in the non-oxidative branch of the pentose phosphate pathway that interconverts sugar phosphates and links the pathway with glycolysis. Its deficiency disrupts the balance of pentose phosphate intermediates, causing accumulation of polyols (such as erythritol, arabitol and ribitol) and seven-carbon sugars (including sedoheptulose). The disturbed pathway is thought to increase oxidative stress and impair regeneration of reducing equivalents, contributing to progressive injury of the liver, kidneys, heart and blood cells. The result is a multisystem disorder dominated by hepatosplenomegaly, hepatic fibrosis, coagulopathy and cytopenias, often evident from birth.",
+    "additionalDifferentials": [
+      "Congenital disorders of glycosylation",
+      "Neonatal haemochromatosis and other neonatal liver failure syndromes",
+      "Congenital infections causing hepatosplenomegaly (TORCH)",
+      "Other pentose phosphate pathway defects (ribose-5-phosphate isomerase deficiency)",
+      "Cutis laxa syndromes with systemic involvement",
+      "Mitochondrial hepatopathies",
+      "Tyrosinaemia type I and other metabolic liver diseases"
     ],
-    [
-     "Primary Differentials",
-     "Congenital disorders of glycosylation, Neonatal haemochromatosis and other neonatal liver failure syndromes, Congenital",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine polyol analysis for erythritol, arabitol and ribitol",
+      "Urine and body-fluid sugar analysis for sedoheptulose and seven-carbon sugar derivatives",
+      "Liver function tests, coagulation profile and full blood count",
+      "Abdominal imaging to assess hepatosplenomegaly and hepatic architecture",
+      "Renal and cardiac assessment for associated anomalies",
+      "TALDO1 molecular genetic testing to confirm the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Understand there is no enzyme-replacement or curative therapy, so management is supportive across affected organs, with",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal liver failure with coagulopathy or bleeding",
+      "Hydrops fetalis or severe antenatal hepatosplenomegaly",
+      "Progressive hepatic fibrosis or signs suggesting hepatocellular carcinoma",
+      "Multisystem deterioration with cardiac or renal failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking transaldolase deficiency in neonatal liver failure by not requesting urinary polyol analysis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is variable but often serious, with progressive liver disease, coagulopathy and multisystem involvement; some individuals survive into later childhood or adulthood while others succumb to neonatal liver failure or complications such as hepatocellular carcinoma.",
+    "pitfalls": [
+      "Overlooking transaldolase deficiency in neonatal liver failure by not requesting urinary polyol analysis",
+      "Attributing hepatosplenomegaly and cytopenias solely to congenital infection",
+      "Failing to monitor for evolving hepatic fibrosis and hepatocellular carcinoma over time",
+      "Missing associated renal, cardiac or dysmorphic features that point to a multisystem metabolic disorder"
+    ],
+    "references": [
+      "Scriver's OMMBID: Disorders of the Pentose Phosphate Pathway",
+      "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Understand there is no enzyme-replacement or curative therapy, so management is supportive across affected organs, with antioxidant approaches such as N-acetylcysteine explored experimentally",
+      "Manage progressive liver disease by correcting coagulopathy with vitamin K and clotting-factor support, treating complications of fibrosis and cirrhosis, and considering liver transplantation for end-stage failure",
+      "Support the haematological features with transfusion for symptomatic anaemia and thrombocytopenia",
+      "Surveillance for hepatocellular carcinoma with alpha-fetoprotein and liver imaging given the recognised malignant risk",
+      "Monitor renal and cardiac function for associated anomalies and treat them symptomatically",
+      "Genetic counselling for this autosomal recessive TALDO1 disorder, with carrier testing and family screening",
+      "Coordinate care through metabolic medicine and clinical genetics with multidisciplinary organ-specific input"
     ]
-   ],
-   "caption": "Overview comparison matrix for transaldolase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "transaldolase-deficiency-real-image",
-   "title": "Transaldolase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "transaldolase_deficiency-pathway",
+      "title": "Transaldolase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive defect of transaldolase (TALDO1 gene) in the non-oxidative branch of the pentose phosphate pathway, leading to accumulation of polyols and seven-carbon sugars",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal liver failure with coagulopathy or bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine polyol analysis for erythritol, arabitol and ribitol, Urine and body-fluid sugar analysis for sedoheptulose and seven-carbon sugar derivatives, Liver function tests, coagulation profile and full blood count"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Understand there is no enzyme-replacement or curative therapy, so management is supportive across affected organs, with antioxidant approaches such as N-acetylcysteine explored experimentally"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking transaldolase deficiency in neonatal liver failure by not requesting urinary polyol analysis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of transaldolase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "transaldolase_deficiency-matrix",
+      "title": "Transaldolase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive defect of transaldolase (TALDO1 gene) in the non-oxidative branch of the pentose phosphate pathway, leading",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine polyol analysis for erythritol, arabitol and ribitol, Urine and body-fluid sugar analysis for sedoheptulose and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital disorders of glycosylation, Neonatal haemochromatosis and other neonatal liver failure syndromes, Congenital",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Understand there is no enzyme-replacement or curative therapy, so management is supportive across affected organs, with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking transaldolase deficiency in neonatal liver failure by not requesting urinary polyol analysis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for transaldolase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "transaldolase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Transaldolase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected transaldolase deficiency: neonatal liver disease with cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: neonatal liver failure with bleeding, hydrops, or multisystem decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent coagulation correction and transfusion support for bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary polyol and seven-carbon sugar analysis; liver and coagulation tests; TALDO1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does urine show elevated polyols with sedoheptulose and TALDO1 variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider TORCH infection, tyrosinaemia or other neonatal liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care across affected organs; no curative therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vitamin K and clotting-factor support for coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transfusion for symptomatic anaemia and thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Alpha-fetoprotein and imaging surveillance for hepatocellular carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Liver transplantation for end-stage failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable and often serious; neonatal liver failure or later HCC can be fatal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "transaldolase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine polyol analysis",
+          "cells": [
+            {
+              "text": "Erythritol, arabitol and ribitol elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine sugar analysis",
+          "cells": [
+            {
+              "text": "Sedoheptulose and seven-carbon sugar derivatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function, coagulation and FBC",
+          "cells": [
+            {
+              "text": "Hepatic dysfunction, coagulopathy and cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal imaging",
+          "cells": [
+            {
+              "text": "Hepatosplenomegaly and hepatic architecture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TALDO1 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transaldolase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital infections such as TORCH",
+          "cells": [
+            {
+              "text": "Hepatosplenomegaly and cytopenias; urinary polyol analysis separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ribose-5-phosphate isomerase deficiency",
+          "cells": [
+            {
+              "text": "Another pentose phosphate pathway defect; sugar pattern differs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tyrosinaemia type I",
+          "cells": [
+            {
+              "text": "Metabolic liver disease; amino acid and succinylacetone testing separate it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "transaldolase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive organ-based care",
+          "cells": [
+            {
+              "text": "No enzyme-replacement or curative therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulopathy correction",
+          "cells": [
+            {
+              "text": "Vitamin K and clotting-factor support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "End-stage liver failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological support",
+          "cells": [
+            {
+              "text": "Transfusion for symptomatic anaemia and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatocellular carcinoma surveillance",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein and liver imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; carrier and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

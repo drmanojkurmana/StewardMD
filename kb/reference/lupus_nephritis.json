@@ -1,175 +1,562 @@
 {
- "id": "lupus_nephritis",
- "name": "Lupus nephritis",
- "aliases": [
-  "LN",
-  "SLE nephritis",
-  "systemic lupus erythematosus nephritis"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / KDIGO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Lupus nephritis is renal involvement in systemic lupus erythematosus and is a major determinant of morbidity and long-term outcome in the disease",
-   "It can present across a spectrum from asymptomatic urinary abnormalities to nephrotic syndrome or rapidly progressive nephritic disease",
-   "Kidney biopsy is the cornerstone of assessment, classifying disease into histological classes that directly guide the intensity of treatment",
-   "The proliferative classes (particularly diffuse involvement) carry the greatest risk of progression and generally require intensive immunosuppression",
-   "Low complement levels and rising anti-double-stranded DNA antibodies often accompany active renal disease and can herald flares",
-   "Screening urinalysis and quantification of proteinuria at intervals is essential in all lupus patients because early nephritis is frequently silent",
-   "Treatment is divided into an induction phase to control active inflammation and a maintenance phase to prevent relapse, alongside general measures such as blood pressure control and reduction of proteinuria",
-   "Antiphospholipid antibodies can cause a thrombotic microangiopathy that contributes to renal injury independent of immune-complex nephritis"
+  "id": "lupus_nephritis",
+  "name": "Lupus nephritis",
+  "aliases": [
+    "LN",
+    "SLE nephritis",
+    "systemic lupus erythematosus nephritis"
   ],
-  "pathophysiology": "Lupus nephritis results from deposition of immune complexes and autoantibodies within the glomerulus, driving complement activation and inflammatory injury. Circulating and in-situ immune complexes, including those containing anti-DNA antibodies, localise in the mesangium, subendothelial, and subepithelial regions, and the site of deposition largely determines the clinical and histological pattern. Subendothelial and mesangial deposits provoke inflammatory, proliferative lesions with a nephritic picture, whereas predominantly subepithelial (membranous) deposits produce heavy proteinuria with less inflammation. Complement consumption, cytokine release, and recruitment of inflammatory cells damage the glomerular capillaries, and in severe forms crescents develop. Chronic activity leads to glomerulosclerosis, tubulointerstitial scarring, and progressive loss of function. Concurrent antiphospholipid antibodies may add a thrombotic microangiopathic component.",
-  "additionalDifferentials": [
-   "Primary membranous nephropathy",
-   "Other immune-complex glomerulonephritides",
-   "ANCA-associated or anti-GBM crescentic disease",
-   "Thrombotic microangiopathy from antiphospholipid syndrome",
-   "Drug-induced lupus-like nephritis",
-   "Mixed connective tissue disease with renal involvement"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis with microscopy and quantification of proteinuria",
-   "Serum complement (C3 and C4) and anti-double-stranded DNA antibody titres",
-   "Full autoimmune panel including antinuclear and antiphospholipid antibodies",
-   "Kidney biopsy for histological class, activity, and chronicity indices",
-   "Serial renal function and blood pressure monitoring",
-   "Assessment for infection and other organ involvement before immunosuppression"
-  ],
-  "redFlags": [
-   "Rapidly rising creatinine with an active nephritic sediment suggesting proliferative or crescentic disease",
-   "Nephrotic-range proteinuria with hypoalbuminaemia and oedema",
-   "Features of thrombotic microangiopathy such as haemolysis and thrombocytopenia",
-   "Signs of severe extrarenal lupus or infection complicating immunosuppression"
-  ],
-  "prognosis": "Outcome has improved substantially with modern immunosuppression, but proliferative lupus nephritis still carries a meaningful risk of progression to end-stage kidney disease, especially with delayed treatment, high chronicity on biopsy, persistent proteinuria, or frequent relapses. Adherence, blood pressure control, and reduction of proteinuria strongly influence long-term renal survival.",
-  "pitfalls": [
-   "Relying on serology alone without biopsy to determine the class and intensity of treatment",
-   "Missing silent early nephritis by not performing regular urinalysis in lupus patients",
-   "Overlooking antiphospholipid-related thrombotic microangiopathy as a cause of worsening function",
-   "Stopping maintenance therapy prematurely and precipitating a relapse"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "KDIGO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Biopsy-class-guided immunosuppression, with induction using glucocorticoids plus mycophenolate mofetil or cyclophosphamide for proliferative disease",
-   "Add-on belimumab or the calcineurin inhibitor voclosporin to intensify induction and spare glucocorticoids",
-   "Maintenance immunosuppression with mycophenolate or azathioprine to prevent relapse",
-   "Background hydroxychloroquine in all patients, with renin-angiotensin system blockade to reduce proteinuria and control blood pressure",
-   "Monitor complement levels, anti-double-stranded DNA titres, urinalysis, quantified proteinuria and renal function to detect flares early",
-   "Treat rapidly progressive crescentic disease with pulsed intravenous methylprednisolone",
-   "Refer to nephrology and plan renal replacement therapy or transplantation for progression to end-stage kidney disease",
-   "General protection with vaccination, bone and cardiovascular risk reduction, and pregnancy planning given teratogenic agents"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lupus_nephritis-pathway",
-   "title": "Lupus nephritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Lupus nephritis is renal involvement in systemic lupus erythematosus and is a major determinant of morbidity and long-term outcome in the disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly rising creatinine with an active nephritic sediment suggesting proliferative or crescentic disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis with microscopy and quantification of proteinuria, Serum complement (C3 and C4) and anti-double-stranded DNA antibody titres, Full autoimmune panel including antinuclear and antiphospholipid antibodies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Biopsy-class-guided immunosuppression, with induction using glucocorticoids plus mycophenolate mofetil or cyclophosphamide for proliferative disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on serology alone without biopsy to determine the class and intensity of treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lupus nephritis."
-  }
- ],
- "tables": [
-  {
-   "id": "lupus_nephritis-matrix",
-   "title": "Lupus nephritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Lupus nephritis is renal involvement in systemic lupus erythematosus and is a major determinant of morbidity and long-term",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / KDIGO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Lupus nephritis is renal involvement in systemic lupus erythematosus and is a major determinant of morbidity and long-term outcome in the disease",
+      "It can present across a spectrum from asymptomatic urinary abnormalities to nephrotic syndrome or rapidly progressive nephritic disease",
+      "Kidney biopsy is the cornerstone of assessment, classifying disease into histological classes that directly guide the intensity of treatment",
+      "The proliferative classes (particularly diffuse involvement) carry the greatest risk of progression and generally require intensive immunosuppression",
+      "Low complement levels and rising anti-double-stranded DNA antibodies often accompany active renal disease and can herald flares",
+      "Screening urinalysis and quantification of proteinuria at intervals is essential in all lupus patients because early nephritis is frequently silent",
+      "Treatment is divided into an induction phase to control active inflammation and a maintenance phase to prevent relapse, alongside general measures such as blood pressure control and reduction of proteinuria",
+      "Antiphospholipid antibodies can cause a thrombotic microangiopathy that contributes to renal injury independent of immune-complex nephritis"
     ],
-    [
-     "Key Investigations",
-     "Urinalysis with microscopy and quantification of proteinuria, Serum complement (C3 and C4) and anti-double-stranded DNA antibody",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lupus nephritis results from deposition of immune complexes and autoantibodies within the glomerulus, driving complement activation and inflammatory injury. Circulating and in-situ immune complexes, including those containing anti-DNA antibodies, localise in the mesangium, subendothelial, and subepithelial regions, and the site of deposition largely determines the clinical and histological pattern. Subendothelial and mesangial deposits provoke inflammatory, proliferative lesions with a nephritic picture, whereas predominantly subepithelial (membranous) deposits produce heavy proteinuria with less inflammation. Complement consumption, cytokine release, and recruitment of inflammatory cells damage the glomerular capillaries, and in severe forms crescents develop. Chronic activity leads to glomerulosclerosis, tubulointerstitial scarring, and progressive loss of function. Concurrent antiphospholipid antibodies may add a thrombotic microangiopathic component.",
+    "additionalDifferentials": [
+      "Primary membranous nephropathy",
+      "Other immune-complex glomerulonephritides",
+      "ANCA-associated or anti-GBM crescentic disease",
+      "Thrombotic microangiopathy from antiphospholipid syndrome",
+      "Drug-induced lupus-like nephritis",
+      "Mixed connective tissue disease with renal involvement"
     ],
-    [
-     "Primary Differentials",
-     "Primary membranous nephropathy, Other immune-complex glomerulonephritides, ANCA-associated or anti-GBM crescentic disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis with microscopy and quantification of proteinuria",
+      "Serum complement (C3 and C4) and anti-double-stranded DNA antibody titres",
+      "Full autoimmune panel including antinuclear and antiphospholipid antibodies",
+      "Kidney biopsy for histological class, activity, and chronicity indices",
+      "Serial renal function and blood pressure monitoring",
+      "Assessment for infection and other organ involvement before immunosuppression"
     ],
-    [
-     "Management Strategy",
-     "Biopsy-class-guided immunosuppression, with induction using glucocorticoids plus mycophenolate mofetil or cyclophosphamide for",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly rising creatinine with an active nephritic sediment suggesting proliferative or crescentic disease",
+      "Nephrotic-range proteinuria with hypoalbuminaemia and oedema",
+      "Features of thrombotic microangiopathy such as haemolysis and thrombocytopenia",
+      "Signs of severe extrarenal lupus or infection complicating immunosuppression"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on serology alone without biopsy to determine the class and intensity of treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome has improved substantially with modern immunosuppression, but proliferative lupus nephritis still carries a meaningful risk of progression to end-stage kidney disease, especially with delayed treatment, high chronicity on biopsy, persistent proteinuria, or frequent relapses. Adherence, blood pressure control, and reduction of proteinuria strongly influence long-term renal survival.",
+    "pitfalls": [
+      "Relying on serology alone without biopsy to determine the class and intensity of treatment",
+      "Missing silent early nephritis by not performing regular urinalysis in lupus patients",
+      "Overlooking antiphospholipid-related thrombotic microangiopathy as a cause of worsening function",
+      "Stopping maintenance therapy prematurely and precipitating a relapse"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "KDIGO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Biopsy-class-guided immunosuppression, with induction using glucocorticoids plus mycophenolate mofetil or cyclophosphamide for proliferative disease",
+      "Add-on belimumab or the calcineurin inhibitor voclosporin to intensify induction and spare glucocorticoids",
+      "Maintenance immunosuppression with mycophenolate or azathioprine to prevent relapse",
+      "Background hydroxychloroquine in all patients, with renin-angiotensin system blockade to reduce proteinuria and control blood pressure",
+      "Monitor complement levels, anti-double-stranded DNA titres, urinalysis, quantified proteinuria and renal function to detect flares early",
+      "Treat rapidly progressive crescentic disease with pulsed intravenous methylprednisolone",
+      "Refer to nephrology and plan renal replacement therapy or transplantation for progression to end-stage kidney disease",
+      "General protection with vaccination, bone and cardiovascular risk reduction, and pregnancy planning given teratogenic agents"
     ]
-   ],
-   "caption": "Overview comparison matrix for lupus nephritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lupus-nephritis-real-image",
-   "title": "Lupus nephritis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "lupus_nephritis-pathway",
+      "title": "Lupus nephritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Lupus nephritis is renal involvement in systemic lupus erythematosus and is a major determinant of morbidity and long-term outcome in the disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly rising creatinine with an active nephritic sediment suggesting proliferative or crescentic disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis with microscopy and quantification of proteinuria, Serum complement (C3 and C4) and anti-double-stranded DNA antibody titres, Full autoimmune panel including antinuclear and antiphospholipid antibodies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Biopsy-class-guided immunosuppression, with induction using glucocorticoids plus mycophenolate mofetil or cyclophosphamide for proliferative disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on serology alone without biopsy to determine the class and intensity of treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lupus nephritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lupus_nephritis-matrix",
+      "title": "Lupus nephritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Lupus nephritis is renal involvement in systemic lupus erythematosus and is a major determinant of morbidity and long-term",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis with microscopy and quantification of proteinuria, Serum complement (C3 and C4) and anti-double-stranded DNA antibody",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary membranous nephropathy, Other immune-complex glomerulonephritides, ANCA-associated or anti-GBM crescentic disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Biopsy-class-guided immunosuppression, with induction using glucocorticoids plus mycophenolate mofetil or cyclophosphamide for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on serology alone without biopsy to determine the class and intensity of treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lupus nephritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 283-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lupus_nephritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis with microscopy and proteinuria quantification",
+          "cells": [
+            {
+              "text": "Silent early nephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement C3 and C4, anti-dsDNA titres",
+          "cells": [
+            {
+              "text": "Active renal disease and flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibodies",
+          "cells": [
+            {
+              "text": "Thrombotic microangiopathy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney biopsy for class and activity indices",
+          "cells": [
+            {
+              "text": "Guides intensity of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and extrarenal screen before immunosuppression",
+          "cells": [
+            {
+              "text": "Safety before treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lupus_nephritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary membranous nephropathy",
+          "cells": [
+            {
+              "text": "Distinguished on biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA-associated or anti-GBM crescentic disease",
+          "cells": [
+            {
+              "text": "Crescentic disease; serology and biopsy separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid thrombotic microangiopathy",
+          "cells": [
+            {
+              "text": "Haemolysis and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced lupus-like nephritis",
+          "cells": [
+            {
+              "text": "Drug exposure history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lupus_nephritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Induction immunosuppression",
+          "cells": [
+            {
+              "text": "Glucocorticoids with mycophenolate or cyclophosphamide for proliferative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Add-on agents",
+          "cells": [
+            {
+              "text": "Belimumab or voclosporin to intensify induction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Mycophenolate or azathioprine to prevent relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Background therapy",
+          "cells": [
+            {
+              "text": "Hydroxychloroquine and renin-angiotensin blockade for proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crescentic disease",
+          "cells": [
+            {
+              "text": "Pulsed intravenous methylprednisolone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression",
+          "cells": [
+            {
+              "text": "Nephrology referral; renal replacement or transplantation planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lupus_nephritis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Lupus nephritis classes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Name",
+        "Description"
+      ],
+      "rows": [
+        {
+          "parameter": "Class I",
+          "cells": [
+            {
+              "text": "Minimal mesangial"
+            },
+            {
+              "text": "Normal histology with mesangial deposits"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Class II",
+          "cells": [
+            {
+              "text": "Mesangial proliferation"
+            },
+            {
+              "text": "Mesangial hypercellularity with expansion of the mesangial matrix"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Class III",
+          "cells": [
+            {
+              "text": "Focal nephritis"
+            },
+            {
+              "text": "Focal endocapillary with or without extracapillary proliferation, focal subendothelial immune deposits and mild mesangial expansion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Class IV",
+          "cells": [
+            {
+              "text": "Diffuse nephritis"
+            },
+            {
+              "text": "Diffuse endocapillary with or without extracapillary proliferation, diffuse subendothelial immune deposits and mesangial alterations"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Class V",
+          "cells": [
+            {
+              "text": "Membranous nephritis"
+            },
+            {
+              "text": "Thickened basement membranes with diffuse subepithelial immune deposits; may occur with class III or IV lesions and is sometimes called mixed membranous and proliferative nephritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Class VI",
+          "cells": [
+            {
+              "text": "Sclerotic nephritis"
+            },
+            {
+              "text": "Global sclerosis of nearly all glomerular capillaries"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lupus_nephritis-dx-mgmt",
+      "title": "Diagnosis and management of Lupus nephritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lupus patient with proteinuria, haematuria or rising creatinine on urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising creatinine, nephrotic range proteinuria, TMA features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent nephrology review and pulsed steroids if crescentic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, complement, anti-dsDNA, antiphospholipid tests, kidney biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm lupus nephritis with its histological class?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ANCA or anti-GBM disease, membranous nephropathy or drug effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Class-guided induction with steroids and mycophenolate or cyclophosphamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Belimumab or voclosporin to intensify induction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintenance mycophenolate or azathioprine to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hydroxychloroquine and renin-angiotensin blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to nephrology for progression to end-stage kidney disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Improved with modern immunosuppression; proliferative disease still progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,483 @@
 {
- "id": "thrombocytopenia_radioulnar_synostosis",
- "name": "Amegakaryocytic thrombocytopenia with radioulnar synostosis (MECOM/HOXA11)",
- "aliases": [
-  "ATRUS",
-  "MECOM",
-  "HOXA11",
-  "amegakaryocytic thrombocytopenia with radio-ulnar synostosis",
-  "EVI1"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / Nathan and Oski",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare congenital marrow-failure disorder combining amegakaryocytic thrombocytopenia with proximal radioulnar synostosis (bony fusion limiting forearm rotation)",
-   "Caused by mutations in MECOM (EVI1) in most cases, or in HOXA11 in some families",
-   "Presents in infancy with thrombocytopenia and bleeding, often with limited pronation and supination of the forearm",
-   "The bone marrow characteristically shows reduced or absent megakaryocytes",
-   "There is a tendency for the cytopenia to progress to broader bone-marrow failure (aplastic anaemia) over time",
-   "Additional features can include clinodactyly, sensorineural hearing loss, and cardiac or renal anomalies",
-   "Allogeneic haematopoietic stem-cell transplantation is the definitive treatment for evolving marrow failure",
-   "Diagnosis integrates the skeletal anomaly, marrow findings, and genetic testing of MECOM and HOXA11"
+  "id": "thrombocytopenia_radioulnar_synostosis",
+  "name": "Amegakaryocytic thrombocytopenia with radioulnar synostosis (MECOM/HOXA11)",
+  "aliases": [
+    "ATRUS",
+    "MECOM",
+    "HOXA11",
+    "amegakaryocytic thrombocytopenia with radio-ulnar synostosis",
+    "EVI1"
   ],
-  "pathophysiology": "MECOM (EVI1) and HOXA11 encode transcriptional regulators critical for haematopoietic stem-cell maintenance and megakaryocyte development, and MECOM also has roles in limb patterning. Pathogenic mutations impair the transcriptional programme that sustains stem-cell self-renewal and megakaryopoiesis, producing amegakaryocytic thrombocytopenia that may extend to trilineage marrow failure. The overlapping developmental role in the upper limb explains the associated proximal radioulnar synostosis, linking the haematological and skeletal manifestations to disruption of shared regulatory pathways.",
-  "additionalDifferentials": [
-   "Congenital amegakaryocytic thrombocytopenia (MPL mutations)",
-   "Thrombocytopenia-absent radius (TAR) syndrome",
-   "Fanconi anaemia and other inherited bone-marrow failure syndromes",
-   "Diamond-Blackfan anaemia (when broader cytopenias are considered)",
-   "Radioulnar synostosis without haematological disease",
-   "Acquired aplastic anaemia"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and film documenting thrombocytopenia and any additional cytopenias",
-   "Bone marrow aspirate and trephine showing reduced or absent megakaryocytes",
-   "Forearm and elbow radiographs to demonstrate proximal radioulnar synostosis",
-   "Genetic testing of MECOM and HOXA11",
-   "Audiological, cardiac, and renal assessment for associated anomalies",
-   "Cytogenetics and marrow surveillance for evolving failure or clonal change"
-  ],
-  "redFlags": [
-   "Progression from isolated thrombocytopenia to pancytopenia indicating evolving marrow failure",
-   "Severe bleeding from profound thrombocytopenia",
-   "Emergence of clonal cytogenetic abnormalities or dysplasia",
-   "Signs of an associated anomaly such as significant cardiac or renal dysfunction"
-  ],
-  "prognosis": "Outlook is determined by progression to marrow failure; with vigilant monitoring and timely allogeneic stem-cell transplantation, outcomes can be good, whereas untreated evolving aplasia carries substantial risk.",
-  "pitfalls": [
-   "Attributing the thrombocytopenia to immune causes and overlooking the skeletal clue of limited forearm rotation",
-   "Failing to anticipate and monitor for progression to full marrow failure",
-   "Not screening for associated cardiac, renal, and hearing abnormalities",
-   "Missing the diagnosis when radioulnar synostosis is subtle or not actively sought"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Allogeneic haematopoietic stem-cell transplantation is the definitive treatment for progressive marrow failure",
-   "Support bleeding and thrombocytopenia with platelet transfusion and give red cell transfusion as trilineage marrow failure evolves",
-   "Undertake regular full blood count and bone marrow surveillance, including cytogenetics, for progression to aplasia or clonal change",
-   "Provide orthopaedic and occupational-therapy management of the proximal radioulnar synostosis that limits forearm rotation",
-   "Assess and manage associated sensorineural hearing loss and cardiac or renal anomalies",
-   "Offer genetic counselling and family testing for MECOM (EVI1) or HOXA11 variants",
-   "Refer early to a bone-marrow-failure and transplant centre and escalate at the first signs of evolving trilineage failure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thrombocytopenia_radioulnar_synostosis-pathway",
-   "title": "Amegakaryocytic thrombocytopenia with radioulnar synostosis (MECOM/HOXA11): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare congenital marrow-failure disorder combining amegakaryocytic thrombocytopenia with proximal radioulnar synostosis (bony fusion limiting forearm rotation)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progression from isolated thrombocytopenia to pancytopenia indicating evolving marrow failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and film documenting thrombocytopenia and any additional cytopenias, Bone marrow aspirate and trephine showing reduced or absent megakaryocytes, Forearm and elbow radiographs to demonstrate proximal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Allogeneic haematopoietic stem-cell transplantation is the definitive treatment for progressive marrow failure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the thrombocytopenia to immune causes and overlooking the skeletal clue of limited forearm rotation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of amegakaryocytic thrombocytopenia with radioulnar synostosis (mecom/hoxa11)."
-  }
- ],
- "tables": [
-  {
-   "id": "thrombocytopenia_radioulnar_synostosis-matrix",
-   "title": "Amegakaryocytic thrombocytopenia with radioulnar synostosis (MECOM/HOXA11): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare congenital marrow-failure disorder combining amegakaryocytic thrombocytopenia with proximal radioulnar synostosis (bony",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / Nathan and Oski",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare congenital marrow-failure disorder combining amegakaryocytic thrombocytopenia with proximal radioulnar synostosis (bony fusion limiting forearm rotation)",
+      "Caused by mutations in MECOM (EVI1) in most cases, or in HOXA11 in some families",
+      "Presents in infancy with thrombocytopenia and bleeding, often with limited pronation and supination of the forearm",
+      "The bone marrow characteristically shows reduced or absent megakaryocytes",
+      "There is a tendency for the cytopenia to progress to broader bone-marrow failure (aplastic anaemia) over time",
+      "Additional features can include clinodactyly, sensorineural hearing loss, and cardiac or renal anomalies",
+      "Allogeneic haematopoietic stem-cell transplantation is the definitive treatment for evolving marrow failure",
+      "Diagnosis integrates the skeletal anomaly, marrow findings, and genetic testing of MECOM and HOXA11"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and film documenting thrombocytopenia and any additional cytopenias, Bone marrow aspirate and trephine showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MECOM (EVI1) and HOXA11 encode transcriptional regulators critical for haematopoietic stem-cell maintenance and megakaryocyte development, and MECOM also has roles in limb patterning. Pathogenic mutations impair the transcriptional programme that sustains stem-cell self-renewal and megakaryopoiesis, producing amegakaryocytic thrombocytopenia that may extend to trilineage marrow failure. The overlapping developmental role in the upper limb explains the associated proximal radioulnar synostosis, linking the haematological and skeletal manifestations to disruption of shared regulatory pathways.",
+    "additionalDifferentials": [
+      "Congenital amegakaryocytic thrombocytopenia (MPL mutations)",
+      "Thrombocytopenia-absent radius (TAR) syndrome",
+      "Fanconi anaemia and other inherited bone-marrow failure syndromes",
+      "Diamond-Blackfan anaemia (when broader cytopenias are considered)",
+      "Radioulnar synostosis without haematological disease",
+      "Acquired aplastic anaemia"
     ],
-    [
-     "Primary Differentials",
-     "Congenital amegakaryocytic thrombocytopenia (MPL mutations), Thrombocytopenia-absent radius (TAR) syndrome, Fanconi anaemia and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and film documenting thrombocytopenia and any additional cytopenias",
+      "Bone marrow aspirate and trephine showing reduced or absent megakaryocytes",
+      "Forearm and elbow radiographs to demonstrate proximal radioulnar synostosis",
+      "Genetic testing of MECOM and HOXA11",
+      "Audiological, cardiac, and renal assessment for associated anomalies",
+      "Cytogenetics and marrow surveillance for evolving failure or clonal change"
     ],
-    [
-     "Management Strategy",
-     "Allogeneic haematopoietic stem-cell transplantation is the definitive treatment for progressive marrow failure",
-     "Core treatment modality"
+    "redFlags": [
+      "Progression from isolated thrombocytopenia to pancytopenia indicating evolving marrow failure",
+      "Severe bleeding from profound thrombocytopenia",
+      "Emergence of clonal cytogenetic abnormalities or dysplasia",
+      "Signs of an associated anomaly such as significant cardiac or renal dysfunction"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the thrombocytopenia to immune causes and overlooking the skeletal clue of limited forearm rotation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook is determined by progression to marrow failure; with vigilant monitoring and timely allogeneic stem-cell transplantation, outcomes can be good, whereas untreated evolving aplasia carries substantial risk.",
+    "pitfalls": [
+      "Attributing the thrombocytopenia to immune causes and overlooking the skeletal clue of limited forearm rotation",
+      "Failing to anticipate and monitor for progression to full marrow failure",
+      "Not screening for associated cardiac, renal, and hearing abnormalities",
+      "Missing the diagnosis when radioulnar synostosis is subtle or not actively sought"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Allogeneic haematopoietic stem-cell transplantation is the definitive treatment for progressive marrow failure",
+      "Support bleeding and thrombocytopenia with platelet transfusion and give red cell transfusion as trilineage marrow failure evolves",
+      "Undertake regular full blood count and bone marrow surveillance, including cytogenetics, for progression to aplasia or clonal change",
+      "Provide orthopaedic and occupational-therapy management of the proximal radioulnar synostosis that limits forearm rotation",
+      "Assess and manage associated sensorineural hearing loss and cardiac or renal anomalies",
+      "Offer genetic counselling and family testing for MECOM (EVI1) or HOXA11 variants",
+      "Refer early to a bone-marrow-failure and transplant centre and escalate at the first signs of evolving trilineage failure"
     ]
-   ],
-   "caption": "Overview comparison matrix for amegakaryocytic thrombocytopenia with radioulnar synostosis (mecom/hoxa11)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thrombocytopenia-radioulnar-synostosis-real-image",
-   "title": "Amegakaryocytic thrombocytopenia with radioulnar synostosis (MECOM/HOXA11): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "thrombocytopenia_radioulnar_synostosis-pathway",
+      "title": "Amegakaryocytic thrombocytopenia with radioulnar synostosis (MECOM/HOXA11): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare congenital marrow-failure disorder combining amegakaryocytic thrombocytopenia with proximal radioulnar synostosis (bony fusion limiting forearm rotation)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progression from isolated thrombocytopenia to pancytopenia indicating evolving marrow failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and film documenting thrombocytopenia and any additional cytopenias, Bone marrow aspirate and trephine showing reduced or absent megakaryocytes, Forearm and elbow radiographs to demonstrate proximal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Allogeneic haematopoietic stem-cell transplantation is the definitive treatment for progressive marrow failure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the thrombocytopenia to immune causes and overlooking the skeletal clue of limited forearm rotation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of amegakaryocytic thrombocytopenia with radioulnar synostosis (mecom/hoxa11)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thrombocytopenia_radioulnar_synostosis-matrix",
+      "title": "Amegakaryocytic thrombocytopenia with radioulnar synostosis (MECOM/HOXA11): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare congenital marrow-failure disorder combining amegakaryocytic thrombocytopenia with proximal radioulnar synostosis (bony",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and film documenting thrombocytopenia and any additional cytopenias, Bone marrow aspirate and trephine showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital amegakaryocytic thrombocytopenia (MPL mutations), Thrombocytopenia-absent radius (TAR) syndrome, Fanconi anaemia and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Allogeneic haematopoietic stem-cell transplantation is the definitive treatment for progressive marrow failure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the thrombocytopenia to immune causes and overlooking the skeletal clue of limited forearm rotation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for amegakaryocytic thrombocytopenia with radioulnar synostosis (mecom/hoxa11)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thrombocytopenia_radioulnar_synostosis-dx-mgmt",
+      "title": "Diagnosis and management of Amegakaryocytic thrombocytopenia with radioulnar synostosis (MECOM/HOXA11)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected amegakaryocytic thrombocytopenia with radioulnar synostosis in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: progression to pancytopenia, severe bleeding, or clonal change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent transfusion and transplant centre referral for evolving marrow failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood count and film; marrow for megakaryocytes; forearm radiographs; MECOM testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MECOM or HOXA11 variants confirm the marrow and skeletal findings?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider MPL-related thrombocytopenia, TAR syndrome or Fanconi anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Allogeneic stem cell transplant for progressive marrow failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Platelet transfusion for bleeding and red cell transfusion as failure evolves",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Regular blood count and marrow surveillance with cytogenetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic management of forearm rotation limitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing for MECOM or HOXA11",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome depends on progression to marrow failure; timely transplant gives good results",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thrombocytopenia_radioulnar_synostosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Thrombocytopenia and any additional cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine",
+          "cells": [
+            {
+              "text": "Reduced or absent megakaryocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forearm and elbow radiographs",
+          "cells": [
+            {
+              "text": "Proximal radioulnar synostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MECOM and HOXA11 genetic testing",
+          "cells": [
+            {
+              "text": "Pathogenic variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological, cardiac and renal assessment",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetics and marrow surveillance",
+          "cells": [
+            {
+              "text": "Evolving failure or clonal change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombocytopenia_radioulnar_synostosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital amegakaryocytic thrombocytopenia (MPL)",
+          "cells": [
+            {
+              "text": "Thrombocytopenia without radioulnar synostosis; MPL testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombocytopenia-absent radius syndrome",
+          "cells": [
+            {
+              "text": "Radial aplasia with preserved thumbs, not proximal fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioulnar synostosis without haematological disease",
+          "cells": [
+            {
+              "text": "Blood counts and marrow examination exclude haematological disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thrombocytopenia_radioulnar_synostosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Allogeneic stem cell transplant",
+          "cells": [
+            {
+              "text": "Definitive treatment for progressive marrow failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet and red cell transfusion",
+          "cells": [
+            {
+              "text": "Bleeding, and as trilineage failure evolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marrow and blood count surveillance",
+          "cells": [
+            {
+              "text": "Progression to aplasia or clonal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and occupational therapy",
+          "cells": [
+            {
+              "text": "Proximal radioulnar synostosis limiting forearm rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing, cardiac and renal assessment",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "MECOM or HOXA11 variants; family testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early referral",
+          "cells": [
+            {
+              "text": "Bone-marrow-failure and transplant centre"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

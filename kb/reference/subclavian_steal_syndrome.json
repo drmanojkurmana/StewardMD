@@ -1,172 +1,450 @@
 {
- "id": "subclavian_steal_syndrome",
- "name": "Subclavian steal syndrome",
- "aliases": [
-  "subclavian steal syndrome",
-  "subclavian steal phenomenon",
-  "vertebral-subclavian steal"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard vascular surgery and neurology reference texts and cerebrovascular consensus guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by proximal subclavian (or innominate) artery stenosis or occlusion, so blood is drawn in reverse down the ipsilateral vertebral artery to supply the arm, at the expense of the posterior cerebral circulation",
-   "Classically presents with arm claudication and posterior-circulation (vertebrobasilar) symptoms such as dizziness, vertigo, visual disturbance or syncope, provoked by exercising the affected arm",
-   "A hallmark examination finding is a significant inter-arm systolic blood pressure difference, with the lower pressure on the affected side",
-   "The affected arm may also have a weaker or delayed radial pulse and a supraclavicular bruit",
-   "It is far more common on the left, reflecting the higher frequency of proximal left subclavian atherosclerosis",
-   "The reversed vertebral flow (steal) is often an asymptomatic imaging finding; the term syndrome is reserved for when it produces symptoms",
-   "Treatment addresses the proximal lesion with revascularisation (endovascular angioplasty and stenting, or surgical bypass or transposition) alongside atherosclerotic risk reduction"
+  "id": "subclavian_steal_syndrome",
+  "name": "Subclavian steal syndrome",
+  "aliases": [
+    "subclavian steal syndrome",
+    "subclavian steal phenomenon",
+    "vertebral-subclavian steal"
   ],
-  "pathophysiology": "A stenosis or occlusion of the subclavian artery proximal to the origin of the vertebral artery lowers pressure in the distal subclavian segment. During arm exercise, demand in the limb increases and the pressure gradient reverses flow in the ipsilateral vertebral artery, so blood is siphoned retrogradely from the basilar and contralateral vertebral system into the arm. This diversion can transiently reduce perfusion of the posterior cerebral circulation, producing vertebrobasilar symptoms, while the arm experiences exertional ischaemia. The underlying lesion is usually atherosclerotic, though large-vessel arteritis, prior surgery or congenital anomalies can be responsible.",
-  "additionalDifferentials": [
-   "Vertebrobasilar insufficiency from intrinsic posterior circulation atherosclerosis",
-   "Vestibular or inner-ear causes of vertigo",
-   "Cardiac arrhythmia or other causes of syncope",
-   "Thoracic outlet syndrome causing arm symptoms",
-   "Carotid territory transient ischaemic attack",
-   "Large-vessel vasculitis (e.g. Takayasu arteritis)"
-  ],
-  "additionalInvestigations": [
-   "Bilateral arm blood pressure measurement to document an inter-arm gradient",
-   "Duplex ultrasound of the vertebral and subclavian arteries demonstrating reversed vertebral flow",
-   "CT or MR angiography of the aortic arch and great vessels to localise the proximal lesion",
-   "Catheter angiography when intervention is planned",
-   "Provocative arm-exercise testing to reproduce symptoms and flow reversal",
-   "Assessment for large-vessel arteritis when atherosclerosis is not the obvious cause"
-  ],
-  "redFlags": [
-   "Recurrent syncope or focal neurological deficits from posterior-circulation hypoperfusion",
-   "Symptoms in the context of a prior coronary bypass using the internal mammary artery (coronary-subclavian steal causing angina)",
-   "Features suggesting large-vessel vasculitis such as systemic symptoms in a younger patient",
-   "Severe arm ischaemia or evidence of distal embolisation"
-  ],
-  "prognosis": "Asymptomatic subclavian steal is generally benign and often needs no intervention, while symptomatic disease usually responds well to revascularisation with relief of arm and neurological symptoms; long-term outlook is largely determined by the burden of underlying atherosclerotic disease.",
-  "pitfalls": [
-   "Measuring blood pressure in only one arm and missing the diagnostic inter-arm gradient",
-   "Attributing dizziness to purely vestibular causes without considering vertebrobasilar steal",
-   "Overlooking coronary-subclavian steal in a patient with an internal mammary artery graft",
-   "Failing to consider large-vessel arteritis as an alternative to atherosclerosis"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "Consensus guidance on extracranial cerebrovascular disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage asymptomatic reversed vertebral flow expectantly, as it generally needs no intervention beyond surveillance",
-   "Best medical therapy with vascular risk-factor modification: antiplatelet agent, statin, blood-pressure and diabetes control, and smoking cessation",
-   "Revascularise symptomatic disease, with endovascular angioplasty and stenting of the proximal subclavian lesion as first-line intervention",
-   "Surgical bypass such as carotid-subclavian bypass where endovascular treatment is unsuitable or fails",
-   "Investigate and treat large-vessel arteritis, including immunosuppression, when it is the underlying cause rather than atherosclerosis",
-   "Monitor the inter-arm blood-pressure gradient and symptoms and refer to a vascular specialist for intervention planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subclavian_steal_syndrome-pathway",
-   "title": "Subclavian steal syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by proximal subclavian (or innominate) artery stenosis or occlusion, so blood is drawn in reverse down the ipsilateral vertebral artery to supply the arm, at the expense of the posterior cerebral circulation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent syncope or focal neurological deficits from posterior-circulation hypoperfusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bilateral arm blood pressure measurement to document an inter-arm gradient, Duplex ultrasound of the vertebral and subclavian arteries demonstrating reversed vertebral flow, CT or MR angiography of the aortic arch and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage asymptomatic reversed vertebral flow expectantly, as it generally needs no intervention beyond surveillance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Measuring blood pressure in only one arm and missing the diagnostic inter-arm gradient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of subclavian steal syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "subclavian_steal_syndrome-matrix",
-   "title": "Subclavian steal syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by proximal subclavian (or innominate) artery stenosis or occlusion, so blood is drawn in reverse down the ipsilateral",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard vascular surgery and neurology reference texts and cerebrovascular consensus guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by proximal subclavian (or innominate) artery stenosis or occlusion, so blood is drawn in reverse down the ipsilateral vertebral artery to supply the arm, at the expense of the posterior cerebral circulation",
+      "Classically presents with arm claudication and posterior-circulation (vertebrobasilar) symptoms such as dizziness, vertigo, visual disturbance or syncope, provoked by exercising the affected arm",
+      "A hallmark examination finding is a significant inter-arm systolic blood pressure difference, with the lower pressure on the affected side",
+      "The affected arm may also have a weaker or delayed radial pulse and a supraclavicular bruit",
+      "It is far more common on the left, reflecting the higher frequency of proximal left subclavian atherosclerosis",
+      "The reversed vertebral flow (steal) is often an asymptomatic imaging finding; the term syndrome is reserved for when it produces symptoms",
+      "Treatment addresses the proximal lesion with revascularisation (endovascular angioplasty and stenting, or surgical bypass or transposition) alongside atherosclerotic risk reduction"
     ],
-    [
-     "Key Investigations",
-     "Bilateral arm blood pressure measurement to document an inter-arm gradient, Duplex ultrasound of the vertebral and subclavian",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A stenosis or occlusion of the subclavian artery proximal to the origin of the vertebral artery lowers pressure in the distal subclavian segment. During arm exercise, demand in the limb increases and the pressure gradient reverses flow in the ipsilateral vertebral artery, so blood is siphoned retrogradely from the basilar and contralateral vertebral system into the arm. This diversion can transiently reduce perfusion of the posterior cerebral circulation, producing vertebrobasilar symptoms, while the arm experiences exertional ischaemia. The underlying lesion is usually atherosclerotic, though large-vessel arteritis, prior surgery or congenital anomalies can be responsible.",
+    "additionalDifferentials": [
+      "Vertebrobasilar insufficiency from intrinsic posterior circulation atherosclerosis",
+      "Vestibular or inner-ear causes of vertigo",
+      "Cardiac arrhythmia or other causes of syncope",
+      "Thoracic outlet syndrome causing arm symptoms",
+      "Carotid territory transient ischaemic attack",
+      "Large-vessel vasculitis (e.g. Takayasu arteritis)"
     ],
-    [
-     "Primary Differentials",
-     "Vertebrobasilar insufficiency from intrinsic posterior circulation atherosclerosis, Vestibular or inner-ear causes of vertigo,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bilateral arm blood pressure measurement to document an inter-arm gradient",
+      "Duplex ultrasound of the vertebral and subclavian arteries demonstrating reversed vertebral flow",
+      "CT or MR angiography of the aortic arch and great vessels to localise the proximal lesion",
+      "Catheter angiography when intervention is planned",
+      "Provocative arm-exercise testing to reproduce symptoms and flow reversal",
+      "Assessment for large-vessel arteritis when atherosclerosis is not the obvious cause"
     ],
-    [
-     "Management Strategy",
-     "Manage asymptomatic reversed vertebral flow expectantly, as it generally needs no intervention beyond surveillance",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent syncope or focal neurological deficits from posterior-circulation hypoperfusion",
+      "Symptoms in the context of a prior coronary bypass using the internal mammary artery (coronary-subclavian steal causing angina)",
+      "Features suggesting large-vessel vasculitis such as systemic symptoms in a younger patient",
+      "Severe arm ischaemia or evidence of distal embolisation"
     ],
-    [
-     "Clinical Pitfall",
-     "Measuring blood pressure in only one arm and missing the diagnostic inter-arm gradient",
-     "Prevent diagnostic or management error"
+    "prognosis": "Asymptomatic subclavian steal is generally benign and often needs no intervention, while symptomatic disease usually responds well to revascularisation with relief of arm and neurological symptoms; long-term outlook is largely determined by the burden of underlying atherosclerotic disease.",
+    "pitfalls": [
+      "Measuring blood pressure in only one arm and missing the diagnostic inter-arm gradient",
+      "Attributing dizziness to purely vestibular causes without considering vertebrobasilar steal",
+      "Overlooking coronary-subclavian steal in a patient with an internal mammary artery graft",
+      "Failing to consider large-vessel arteritis as an alternative to atherosclerosis"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "Consensus guidance on extracranial cerebrovascular disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage asymptomatic reversed vertebral flow expectantly, as it generally needs no intervention beyond surveillance",
+      "Best medical therapy with vascular risk-factor modification: antiplatelet agent, statin, blood-pressure and diabetes control, and smoking cessation",
+      "Revascularise symptomatic disease, with endovascular angioplasty and stenting of the proximal subclavian lesion as first-line intervention",
+      "Surgical bypass such as carotid-subclavian bypass where endovascular treatment is unsuitable or fails",
+      "Investigate and treat large-vessel arteritis, including immunosuppression, when it is the underlying cause rather than atherosclerosis",
+      "Monitor the inter-arm blood-pressure gradient and symptoms and refer to a vascular specialist for intervention planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for subclavian steal syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subclavian-steal-syndrome-real-image",
-   "title": "Subclavian steal syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "subclavian_steal_syndrome-pathway",
+      "title": "Subclavian steal syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by proximal subclavian (or innominate) artery stenosis or occlusion, so blood is drawn in reverse down the ipsilateral vertebral artery to supply the arm, at the expense of the posterior cerebral circulation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent syncope or focal neurological deficits from posterior-circulation hypoperfusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bilateral arm blood pressure measurement to document an inter-arm gradient, Duplex ultrasound of the vertebral and subclavian arteries demonstrating reversed vertebral flow, CT or MR angiography of the aortic arch and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage asymptomatic reversed vertebral flow expectantly, as it generally needs no intervention beyond surveillance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Measuring blood pressure in only one arm and missing the diagnostic inter-arm gradient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of subclavian steal syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subclavian_steal_syndrome-matrix",
+      "title": "Subclavian steal syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by proximal subclavian (or innominate) artery stenosis or occlusion, so blood is drawn in reverse down the ipsilateral",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bilateral arm blood pressure measurement to document an inter-arm gradient, Duplex ultrasound of the vertebral and subclavian",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vertebrobasilar insufficiency from intrinsic posterior circulation atherosclerosis, Vestibular or inner-ear causes of vertigo,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage asymptomatic reversed vertebral flow expectantly, as it generally needs no intervention beyond surveillance",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Measuring blood pressure in only one arm and missing the diagnostic inter-arm gradient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for subclavian steal syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard vascular surgery and neurology reference texts and cerebrovascular consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subclavian_steal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral arm blood pressure",
+          "cells": [
+            {
+              "text": "Inter-arm gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasound of vertebral and subclavian arteries",
+          "cells": [
+            {
+              "text": "Reversed vertebral flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography of the aortic arch",
+          "cells": [
+            {
+              "text": "Localises the proximal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography",
+          "cells": [
+            {
+              "text": "When intervention is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Provocative arm-exercise testing",
+          "cells": [
+            {
+              "text": "Reproduces symptoms and flow reversal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for large-vessel arteritis",
+          "cells": [
+            {
+              "text": "When atherosclerosis is not the cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subclavian_steal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thoracic outlet syndrome",
+          "cells": [
+            {
+              "text": "Arm symptoms without flow reversal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takayasu arteritis",
+          "cells": [
+            {
+              "text": "Large-vessel vasculitis with systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subclavian_steal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Asymptomatic reversed vertebral flow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical therapy and risk-factor modification",
+          "cells": [
+            {
+              "text": "Antiplatelet therapy and vascular risk control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovascular angioplasty and stenting",
+          "cells": [
+            {
+              "text": "Symptomatic disease with suitable anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid-subclavian bypass",
+          "cells": [
+            {
+              "text": "Where endovascular treatment is unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of arteritis",
+          "cells": [
+            {
+              "text": "Immunosuppression where large-vessel vasculitis is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Inter-arm gradient and symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subclavian_steal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Subclavian steal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arm claudication with posterior symptoms and BP gradient: suspected subclavian steal",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (syncope or focal deficit, prior bypass, systemic vasculitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular review for arm ischaemia or posterior circulation events",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bilateral arm pressures; duplex of vertebral and subclavian; CTA or MRA of arch",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an inter-arm systolic gradient with reversed vertebral flow confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider thoracic outlet syndrome or vertebrobasilar disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management of asymptomatic reversed flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiplatelet therapy and risk-factor modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endovascular angioplasty and stenting for symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Carotid-subclavian bypass where endovascular treatment is unsuitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Asymptomatic reversed flow is often benign; symptomatic lesions need revascularisation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

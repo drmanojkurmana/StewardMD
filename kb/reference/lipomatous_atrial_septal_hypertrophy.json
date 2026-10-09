@@ -1,171 +1,469 @@
 {
- "id": "lipomatous_atrial_septal_hypertrophy",
- "name": "Lipomatous hypertrophy of the atrial septum",
- "aliases": [
-  "LHIS",
-  "lipomatous hypertrophy of the interatrial septum",
-  "lipomatous atrial septal hypertrophy"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign, non-encapsulated deposition of mature and brown fat within the interatrial septum, distinct from a true encapsulated lipoma",
-   "Characteristically produces a dumbbell or bilobed thickening that spares the fossa ovalis, giving a waisted appearance",
-   "Commoner with increasing age and obesity and usually discovered incidentally on echocardiography or cross-sectional imaging",
-   "Most cases are asymptomatic, but very bulky deposits can encroach on the atrium or the region of the sinus node and provoke atrial arrhythmias",
-   "The brown-fat component is metabolically active and can be FDG-avid on positron emission tomography, a benign appearance that must not be misread as tumour",
-   "Cardiac MRI and CT confirm the fatty nature and the typical fossa-sparing shape, distinguishing it from a mass or thrombus",
-   "No treatment is needed for asymptomatic disease; intervention is reserved for the rare case causing significant obstruction or refractory arrhythmia"
+  "id": "lipomatous_atrial_septal_hypertrophy",
+  "name": "Lipomatous hypertrophy of the atrial septum",
+  "aliases": [
+    "LHIS",
+    "lipomatous hypertrophy of the interatrial septum",
+    "lipomatous atrial septal hypertrophy"
   ],
-  "pathophysiology": "Lipomatous hypertrophy of the atrial septum is an overgrowth of adipose tissue, including metabolically active brown fat, within the interatrial septum. Because the fossa ovalis contains little fat, it is characteristically spared, so the deposit expands the muscular septum above and below it to create the classic dumbbell shape. The tissue is hyperplastic rather than neoplastic, which explains its benign course, but the brown-fat element takes up glucose and can appear avid on FDG imaging, mimicking malignancy. Extensive deposits may bulge into the right atrium, interfere with the adjacent conduction tissue, and predispose to supraventricular arrhythmias.",
-  "additionalDifferentials": [
-   "Cardiac lipoma (encapsulated)",
-   "Atrial myxoma or other cardiac tumour",
-   "Atrial septal aneurysm",
-   "Interatrial thrombus",
-   "Metastatic deposit to the atrial septum",
-   "Amyloid or other infiltrative septal thickening"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography showing echobright septal thickening that spares the fossa ovalis",
-   "Transoesophageal echocardiography for clearer characterisation of the septal mass",
-   "Cardiac MRI with fat-suppression sequences to confirm the adipose nature",
-   "Cardiac CT demonstrating fat density and the typical dumbbell morphology",
-   "Recognition of benign FDG uptake on positron emission tomography to avoid misdiagnosis as tumour"
-  ],
-  "redFlags": [
-   "Very bulky deposits causing right atrial inflow obstruction or superior vena cava compromise",
-   "Refractory atrial arrhythmias attributable to the septal infiltration",
-   "Imaging features atypical for fat that raise concern for a true neoplasm",
-   "Rapid growth prompting reassessment of the benign diagnosis"
-  ],
-  "prognosis": "The condition is benign and generally carries an excellent prognosis, with most patients remaining asymptomatic and requiring only reassurance and recognition of its characteristic imaging appearance.",
-  "pitfalls": [
-   "Misinterpreting benign FDG avidity as malignancy and pursuing unnecessary biopsy or surgery",
-   "Confusing the deposit with an atrial tumour or thrombus",
-   "Failing to note the characteristic sparing of the fossa ovalis that confirms the diagnosis",
-   "Attributing unrelated symptoms to an incidental, asymptomatic septal deposit"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "Cardiovascular imaging references on cardiac masses"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance with no active treatment for the typical asymptomatic incidental finding",
-   "Confirm the benign fatty nature with cardiac MRI using fat-suppression sequences or cardiac CT to exclude a true tumour or thrombus",
-   "Recognise benign FDG-avid brown fat on positron emission tomography to avoid misdiagnosis as malignancy and unnecessary biopsy or intervention",
-   "Treat supraventricular and atrial arrhythmias, when bulky deposits provoke them, with standard rate or rhythm control and antiarrhythmic therapy",
-   "Reserve surgical resection for the rare cases causing significant right atrial obstruction or refractory arrhythmia",
-   "Provide periodic imaging follow-up for very bulky deposits that encroach on the atrium or the region of the sinus node"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lipomatous_atrial_septal_hypertrophy-pathway",
-   "title": "Lipomatous hypertrophy of the atrial septum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign, non-encapsulated deposition of mature and brown fat within the interatrial septum, distinct from a true encapsulated lipoma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Very bulky deposits causing right atrial inflow obstruction or superior vena cava compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography showing echobright septal thickening that spares the fossa ovalis, Transoesophageal echocardiography for clearer characterisation of the septal mass, Cardiac MRI with fat-suppression"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance with no active treatment for the typical asymptomatic incidental finding"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting benign FDG avidity as malignancy and pursuing unnecessary biopsy or surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lipomatous hypertrophy of the atrial septum."
-  }
- ],
- "tables": [
-  {
-   "id": "lipomatous_atrial_septal_hypertrophy-matrix",
-   "title": "Lipomatous hypertrophy of the atrial septum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign, non-encapsulated deposition of mature and brown fat within the interatrial septum, distinct from a true encapsulated",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign, non-encapsulated deposition of mature and brown fat within the interatrial septum, distinct from a true encapsulated lipoma",
+      "Characteristically produces a dumbbell or bilobed thickening that spares the fossa ovalis, giving a waisted appearance",
+      "Commoner with increasing age and obesity and usually discovered incidentally on echocardiography or cross-sectional imaging",
+      "Most cases are asymptomatic, but very bulky deposits can encroach on the atrium or the region of the sinus node and provoke atrial arrhythmias",
+      "The brown-fat component is metabolically active and can be FDG-avid on positron emission tomography, a benign appearance that must not be misread as tumour",
+      "Cardiac MRI and CT confirm the fatty nature and the typical fossa-sparing shape, distinguishing it from a mass or thrombus",
+      "No treatment is needed for asymptomatic disease; intervention is reserved for the rare case causing significant obstruction or refractory arrhythmia"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography showing echobright septal thickening that spares the fossa ovalis, Transoesophageal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lipomatous hypertrophy of the atrial septum is an overgrowth of adipose tissue, including metabolically active brown fat, within the interatrial septum. Because the fossa ovalis contains little fat, it is characteristically spared, so the deposit expands the muscular septum above and below it to create the classic dumbbell shape. The tissue is hyperplastic rather than neoplastic, which explains its benign course, but the brown-fat element takes up glucose and can appear avid on FDG imaging, mimicking malignancy. Extensive deposits may bulge into the right atrium, interfere with the adjacent conduction tissue, and predispose to supraventricular arrhythmias.",
+    "additionalDifferentials": [
+      "Cardiac lipoma (encapsulated)",
+      "Atrial myxoma or other cardiac tumour",
+      "Atrial septal aneurysm",
+      "Interatrial thrombus",
+      "Metastatic deposit to the atrial septum",
+      "Amyloid or other infiltrative septal thickening"
     ],
-    [
-     "Primary Differentials",
-     "Cardiac lipoma (encapsulated), Atrial myxoma or other cardiac tumour, Atrial septal aneurysm",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography showing echobright septal thickening that spares the fossa ovalis",
+      "Transoesophageal echocardiography for clearer characterisation of the septal mass",
+      "Cardiac MRI with fat-suppression sequences to confirm the adipose nature",
+      "Cardiac CT demonstrating fat density and the typical dumbbell morphology",
+      "Recognition of benign FDG uptake on positron emission tomography to avoid misdiagnosis as tumour"
     ],
-    [
-     "Management Strategy",
-     "Reassurance with no active treatment for the typical asymptomatic incidental finding",
-     "Core treatment modality"
+    "redFlags": [
+      "Very bulky deposits causing right atrial inflow obstruction or superior vena cava compromise",
+      "Refractory atrial arrhythmias attributable to the septal infiltration",
+      "Imaging features atypical for fat that raise concern for a true neoplasm",
+      "Rapid growth prompting reassessment of the benign diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting benign FDG avidity as malignancy and pursuing unnecessary biopsy or surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and generally carries an excellent prognosis, with most patients remaining asymptomatic and requiring only reassurance and recognition of its characteristic imaging appearance.",
+    "pitfalls": [
+      "Misinterpreting benign FDG avidity as malignancy and pursuing unnecessary biopsy or surgery",
+      "Confusing the deposit with an atrial tumour or thrombus",
+      "Failing to note the characteristic sparing of the fossa ovalis that confirms the diagnosis",
+      "Attributing unrelated symptoms to an incidental, asymptomatic septal deposit"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "Cardiovascular imaging references on cardiac masses"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance with no active treatment for the typical asymptomatic incidental finding",
+      "Confirm the benign fatty nature with cardiac MRI using fat-suppression sequences or cardiac CT to exclude a true tumour or thrombus",
+      "Recognise benign FDG-avid brown fat on positron emission tomography to avoid misdiagnosis as malignancy and unnecessary biopsy or intervention",
+      "Treat supraventricular and atrial arrhythmias, when bulky deposits provoke them, with standard rate or rhythm control and antiarrhythmic therapy",
+      "Reserve surgical resection for the rare cases causing significant right atrial obstruction or refractory arrhythmia",
+      "Provide periodic imaging follow-up for very bulky deposits that encroach on the atrium or the region of the sinus node"
     ]
-   ],
-   "caption": "Overview comparison matrix for lipomatous hypertrophy of the atrial septum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lipomatous-atrial-septal-hypertrophy-real-image",
-   "title": "Lipomatous hypertrophy of the atrial septum: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "lipomatous_atrial_septal_hypertrophy-pathway",
+      "title": "Lipomatous hypertrophy of the atrial septum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign, non-encapsulated deposition of mature and brown fat within the interatrial septum, distinct from a true encapsulated lipoma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Very bulky deposits causing right atrial inflow obstruction or superior vena cava compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography showing echobright septal thickening that spares the fossa ovalis, Transoesophageal echocardiography for clearer characterisation of the septal mass, Cardiac MRI with fat-suppression"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance with no active treatment for the typical asymptomatic incidental finding"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting benign FDG avidity as malignancy and pursuing unnecessary biopsy or surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lipomatous hypertrophy of the atrial septum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lipomatous_atrial_septal_hypertrophy-matrix",
+      "title": "Lipomatous hypertrophy of the atrial septum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign, non-encapsulated deposition of mature and brown fat within the interatrial septum, distinct from a true encapsulated",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography showing echobright septal thickening that spares the fossa ovalis, Transoesophageal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cardiac lipoma (encapsulated), Atrial myxoma or other cardiac tumour, Atrial septal aneurysm",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance with no active treatment for the typical asymptomatic incidental finding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting benign FDG avidity as malignancy and pursuing unnecessary biopsy or surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lipomatous hypertrophy of the atrial septum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lipomatous_atrial_septal_hypertrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Echobright septal thickening that spares the fossa ovalis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Clearer characterisation of the septal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI with fat suppression",
+          "cells": [
+            {
+              "text": "Confirms the adipose nature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT",
+          "cells": [
+            {
+              "text": "Fat density and dumbbell morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Benign brown-fat uptake; avoids misdiagnosis as tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipomatous_atrial_septal_hypertrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac lipoma (encapsulated)",
+          "cells": [
+            {
+              "text": "Encapsulated, unlike this non-encapsulated deposit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial myxoma",
+          "cells": [
+            {
+              "text": "A tumour rather than fat; the fossa-sparing shape helps separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interatrial thrombus",
+          "cells": [
+            {
+              "text": "Thrombus rather than fat on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic deposit to the atrial septum",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lipomatous_atrial_septal_hypertrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Typical asymptomatic incidental finding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-suppression cardiac MRI or CT",
+          "cells": [
+            {
+              "text": "Confirms the fatty nature; excludes tumour or thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recognise FDG-avid brown fat",
+          "cells": [
+            {
+              "text": "Avoids unnecessary biopsy or intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmia",
+          "cells": [
+            {
+              "text": "Standard rate or rhythm control and antiarrhythmics where bulky deposits provoke them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Rare cases with significant right atrial obstruction or refractory arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging follow-up",
+          "cells": [
+            {
+              "text": "Very bulky deposits that encroach on the atrium or sinus node region"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lipomatous_atrial_septal_hypertrophy-dx-mgmt",
+      "title": "Diagnosis and management of Lipomatous hypertrophy of the atrial septum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental interatrial septal thickening on echo, sparing the fossa ovalis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bulky deposit obstructing inflow, refractory arrhythmia, rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: cardiac surgical review for obstruction or refractory arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo, TOE, fat-suppression cardiac MRI or CT, FDG-PET awareness",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MRI or CT confirm fat density with fossa ovalis sparing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atrial myxoma, interatrial thrombus or infiltrative septal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance for the typical asymptomatic finding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat provoked arrhythmias with standard rate or rhythm control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Recognise benign FDG-avid brown fat to avoid unnecessary biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical resection only for significant obstruction or refractory arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Periodic imaging follow-up for very bulky deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with an excellent prognosis; most patients remain asymptomatic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

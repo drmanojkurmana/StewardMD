@@ -1,204 +1,700 @@
 {
- "id": "gynecologic_malignancies",
- "name": "Gynecologic Malignancies",
- "system": "Reproductive (Female Genital Tract)",
- "class": "non_infective",
- "chapter": 94,
- "page": 709,
- "aliases": [
-  "ovarian cancer",
-  "fallopian tube cancer",
-  "cervical cancer",
-  "endometrial cancer",
-  "uterine cancer",
-  "gestational trophoblastic disease",
-  "hydatidiform mole",
-  "choriocarcinoma"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.709",
-  "clinicalPearls": [
-   "Epithelial tumors are the most common ovarian neoplasm; ovarian cancers are split into indolent type 1 (low-grade, KRAS/BRAF/PTEN/PIK3CA mutations) and aggressive type 2 high-grade serous cancers, the latter driven by TP53 loss (about 95%) and BRCA1/2 dysfunction, with growing evidence that many high-grade serous cancers actually originate in the fallopian tube epithelium.",
-   "Germline BRCA1/2 testing is recommended for all incident epithelial ovarian cancers; lifetime ovarian cancer risk is roughly 39 to 63 percent for BRCA1 and 16.5 to 27 percent for BRCA2, and risk-reducing salpingo-oophorectomy after childbearing (ideally before age 40) is highly protective and also lowers subsequent breast cancer risk by about 50 percent.",
-   "About 70 percent of ovarian cancer patients present at stage III; a markedly elevated serum CA-125 (shed MUC16) is characteristic but not specific, and PET is generally not required for evaluation.",
-   "Bilateral ovarian masses from metastatic mucin-secreting gastrointestinal cancers are termed Krukenberg tumors; metastatic disease to the ovary also arises from colon, appendix, stomach, and breast primaries, so other malignancies must be considered in the workup.",
-   "High-risk HPV infection (especially types 16 and 18, also 31, 33, 35, 52, 58) is the primary initiating event in the vast majority of invasive cervical cancers; viral E6 and E7 proteins inactivate p53 and RB respectively, but full transformation requires additional acquired mutations over years.",
-   "Cervical cancer staging is fundamentally clinical: stage I confined to cervix, stage II into upper vagina/paracervical tissue, stage III to lower vagina or pelvic sidewall, stage IV invading bladder/rectum or distant; MRI better estimates uterine and paracervical soft-tissue extension while CT detects hydronephrosis indicating sidewall disease.",
-   "Endometrioid endometrial adenocarcinoma is the most common gynecologic malignancy in the United States; unopposed estrogen exposure is the principal risk factor, so obesity, postmenopausal estrogen therapy, estrogen-producing tumors, and tamoxifen (weakly estrogenic in uterine epithelium) all increase risk while progestins are protective.",
-   "Most women with uterine corpus cancer present with postmenopausal bleeding (or atypical intermenstrual bleeding premenopausally), leading to early-stage detection and high cure rates; about 75 percent are stage I.",
-   "Routine microsatellite instability (MSI) testing of all endometrial cancers is now standard, because MSI/mismatch-repair-deficient tumors that recur or present advanced are likely to respond to PD-1/PD-L1 immune checkpoint therapy.",
-   "Gestational trophoblastic disease spans benign hydatidiform mole to choriocarcinoma; complete moles are diploid with entirely paternal genetic material (uniparental disomy, no fetal development), while partial moles are triploid (egg fertilized by two sperm) and may show early fetal development.",
-   "Trophoblastic disease is exquisitely chemosensitive and monitored by serial serum beta-hCG; even very advanced disease is almost uniformly curable when managed by an expert.",
-   "Gardasil-9 protects against HPV types 6, 11, 16, 18, 31, 33, 45, 52, and 58; vaccination before sexual activity dramatically lowers high-risk infection and dysplasia, but vaccinated women remain at residual risk and still need Pap screening."
+  "id": "gynecologic_malignancies",
+  "name": "Gynecologic Malignancies",
+  "system": "Reproductive (Female Genital Tract)",
+  "class": "non_infective",
+  "chapter": 94,
+  "page": 709,
+  "aliases": [
+    "ovarian cancer",
+    "fallopian tube cancer",
+    "cervical cancer",
+    "endometrial cancer",
+    "uterine cancer",
+    "gestational trophoblastic disease",
+    "hydatidiform mole",
+    "choriocarcinoma"
   ],
-  "pathophysiology": "Ovarian cancer arises from epithelial, stromal/sex-cord, or germ cell lineages; high-grade (type 2) serous cancers begin in fallopian tube epithelium with BRCA1/2 loss and TP53 mutation producing intraepithelial cancer, then shed and disseminate across the peritoneum aided by MUC16 expression and mesothelin binding, whereas indolent type 1 cancers carry KRAS/BRAF/PTEN/PIK3CA mutations. Cervical cancer follows persistent high-risk HPV infection near the cervical transformation zone, where viral E6/E7 inactivate p53 and RB to immortalize epithelium; HPV genome integration plus APOBEC-pattern mutagenesis and further hits drive progression from dysplasia to invasive squamous cell carcinoma or adenocarcinoma. Endometrial type 1 (endometrioid) cancers are driven by relative estrogen excess unopposed by progesterone, with secondary PI3K mutation or PTEN loss; type 2 (serous, clear cell) cancers show TP53 loss and behave like high-grade serous ovarian cancer. Gestational trophoblastic neoplasia results from outgrowth/persistence of placental trophoblast, with complete moles being androgenetic diploid tumors and partial moles triploid.",
-  "additionalDifferentials": [
-   "Benign adnexal mass or functional ovarian cyst",
-   "Endometriosis / endometrioma",
-   "Pelvic inflammatory disease and tubo-ovarian abscess",
-   "Uterine leiomyoma (fibroid) versus leiomyosarcoma",
-   "Metastatic gastrointestinal or breast cancer to the ovary (Krukenberg tumor)",
-   "Normal intrauterine or ectopic pregnancy versus molar pregnancy",
-   "Cervicitis or benign cervical polyp versus invasive cervical carcinoma",
-   "Dysfunctional or anovulatory uterine bleeding versus endometrial carcinoma"
-  ],
-  "infectionMimics": [
-   "Pelvic inflammatory disease / tubo-ovarian abscess mimicking an adnexal malignancy",
-   "HPV-related cervicitis or low-grade transient HPV infection mimicking high-grade cervical dysplasia"
-  ],
-  "nonInfectiousMimics": [
-   "Benign ovarian cysts and borderline (low malignant potential) tumors mimicking invasive ovarian cancer",
-   "Uterine leiomyomas mimicking sarcoma",
-   "Endometriosis mimicking peritoneal carcinomatosis",
-   "Meigs syndrome (ovarian fibroma with ascites and hydrothorax) mimicking metastatic ovarian cancer"
-  ],
-  "additionalInvestigations": [
-   "Serum CA-125 (and HE-4, mesothelin) for ovarian cancer; trends used to monitor relapse",
-   "Transvaginal/pelvic ultrasonography to characterize adnexal masses; CT for carcinomatosis and adenopathy",
-   "Serum and serial beta-hCG (and AFP) for germ cell and gestational trophoblastic tumors",
-   "Pap (cytology) smear plus HPV PCR testing for cervical screening",
-   "Endometrial biopsy for postmenopausal or abnormal bleeding",
-   "MRI for cervical uterine/paracervical extension; CT for hydronephrosis",
-   "Germline BRCA1/2 and Lynch syndrome (MSH2, MLH1, MSH6, PMS1, PMS2) testing; tumor microsatellite instability and homologous recombination deficiency testing"
-  ],
-  "redFlags": [
-   "Rapidly increasing abdominal girth from ascites with nausea, early satiety, bloating, and abdominal pain suggesting advanced ovarian cancer",
-   "Postmenopausal vaginal bleeding (must exclude endometrial carcinoma)",
-   "Postcoital or intermenstrual bleeding or foul/persistent discharge suggesting cervical cancer",
-   "Flank pain/hydronephrosis or sacral/pelvic nerve pain indicating advanced cervical pelvic sidewall disease",
-   "Persistent or rising beta-hCG after molar evacuation indicating persistent gestational trophoblastic disease",
-   "Preeclampsia/eclampsia, hyperthyroidism, or very high beta-hCG in pregnancy raising concern for molar pregnancy",
-   "Acute pelvic pain from ovarian torsion, intratumoral hemorrhage, or rupture"
-  ],
-  "prognosis": "Ovarian epithelial cancer 5-year survival correlates strongly with stage: roughly 90 to 95 percent stage I, 70 to 80 percent stage II, 25 to 40 percent stage III, and 10 to 15 percent stage IV; prognosis improves with lower histologic grade and BRCA1/2 germline mutation, and complete (R0) cytoreduction yields median survival beyond 60 months versus 28 to 42 months with macroscopic residual disease. Endometrial cancer is usually localized (about 75 percent stage I) with high cure; cervical cancer 5-year survival declines from about 85 percent (stage I) to roughly 7 percent (stage IV). Borderline (low malignant potential) ovarian tumors and ovarian germ cell tumors (including dysgerminoma) are highly curable. Gestational trophoblastic disease is almost uniformly curable, with single-agent therapy curing about 90 percent of low-risk cases.",
-  "pitfalls": [
-   "Nonspecific GI symptoms (bloating, early satiety, change in bowel/urinary pattern) of ovarian cancer are frequently dismissed until late stages",
-   "Needle biopsy of an adnexal mass is contraindicated because it risks seeding malignant cells into the peritoneal cavity",
-   "HPV-negative cervical cancers (more common in older women, with KRAS/ARID1A/PTEN mutations) may behave differently",
-   "Endocervical canal or glandular cervical lesions may be invisible on inspection and missed by Pap smear",
-   "Adding HPV PCR increases sensitivity but lowers specificity, flagging many transient infections needing no intervention",
-   "Minimally invasive surgery for early cervical cancer gives inferior outcomes compared with open hysterectomy",
-   "Suboptimally debulked ovarian cancer (residual >1 cm) derives very little benefit from surgery",
-   "Late relapse (>2 years) of germ cell tumors tends to be chemoresistant and is best approached surgically"
-  ],
-  "severityClassification": "Staging per Table 94-1: Ovarian - I confined to ovary (88-95%), II confined to pelvic organs (70-80%), III intra-abdominal spread to omentum/diaphragm/nodes (20-40%), IV spread outside abdominal cavity/parenchymal/pleural (10-20%); most present as stage IIIC (bulky intraperitoneal or positive nodes). Endometrial - I confined to corpus (>90%), II corpus and cervix (~75%), III outside uterus but within true pelvis (45-60%), IV beyond true pelvis or bladder/rectum (~20%). Cervix - 0 carcinoma in situ (100%), I confined to uterus (85%), II beyond uterus not to pelvic wall (65%), III to pelvic wall and/or lower third vagina or hydronephrosis (35%), IV invading bladder/rectal mucosa or beyond true pelvis (7%). Gestational trophoblastic disease is risk-stratified (low/intermediate/high) by scoring algorithms guiding single- versus multiagent therapy.",
-  "references": [
-   "Harrison 22e p.709",
-   "Harrison 22e p.710",
-   "Harrison 22e p.711",
-   "Harrison 22e p.712",
-   "Harrison 22e p.713",
-   "Harrison 22e p.714",
-   "Harrison 22e p.715"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For ovarian cancer, perform cytoreductive debulking surgery aiming for complete (R0) resection combined with platinum-taxane chemotherapy using carboplatin and paclitaxel, with neoadjuvant chemotherapy considered for bulky advanced disease",
-   "Give maintenance therapy with PARP inhibitors, particularly for BRCA-mutated or homologous-recombination-deficient tumours, and add the anti-angiogenic agent bevacizumab in selected cases",
-   "For cervical cancer, use stage-directed treatment with radical hysterectomy for early disease and concurrent cisplatin-based chemoradiotherapy with brachytherapy for locally advanced disease, alongside HPV vaccination and screening for prevention",
-   "For endometrial cancer, perform total hysterectomy with bilateral salpingo-oophorectomy and surgical staging, adding adjuvant radiotherapy, chemotherapy or hormonal therapy according to risk",
-   "Perform germline BRCA1/2 and mismatch-repair or Lynch testing to guide targeted therapy such as PARP inhibitors and immune checkpoint inhibitors and to inform risk-reducing salpingo-oophorectomy",
-   "Monitor treatment response and relapse with serum CA-125 trends and cross-sectional imaging, and integrate palliative and symptom-directed care for advanced disease",
-   "Coordinate multidisciplinary gynae-oncology management with genetic counselling and family risk assessment"
-  ]
- },
- "algorithms": [
-  {
-   "id": "gynecologic_malignancies-pathway",
-   "title": "Gynecologic Malignancies: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Epithelial tumors are the most common ovarian neoplasm; ovarian cancers are split into indolent type 1 (low-grade, KRAS/BRAF/PTEN/PIK3CA mutations) and aggressive type 2 high-grade serous cancers, the latter driven by TP53 loss (about 95%)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly increasing abdominal girth from ascites with nausea, early satiety, bloating, and abdominal pain suggesting advanced ovarian cancer",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum CA-125 (and HE-4, mesothelin) for ovarian cancer; trends used to monitor relapse, Transvaginal/pelvic ultrasonography to characterize adnexal masses; CT for carcinomatosis and adenopathy, Serum and serial beta-hCG"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For ovarian cancer, perform cytoreductive debulking surgery aiming for complete (R0) resection combined with platinum-taxane chemotherapy using carboplatin and paclitaxel, with neoadjuvant chemotherapy considered for"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Nonspecific GI symptoms (bloating, early satiety, change in bowel/urinary pattern) of ovarian cancer are frequently dismissed until late stages"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gynecologic malignancies."
-  }
- ],
- "tables": [
-  {
-   "id": "gynecologic_malignancies-matrix",
-   "title": "Gynecologic Malignancies: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Epithelial tumors are the most common ovarian neoplasm; ovarian cancers are split into indolent type 1 (low-grade,",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.709",
+    "clinicalPearls": [
+      "Epithelial tumors are the most common ovarian neoplasm; ovarian cancers are split into indolent type 1 (low-grade, KRAS/BRAF/PTEN/PIK3CA mutations) and aggressive type 2 high-grade serous cancers, the latter driven by TP53 loss (about 95%) and BRCA1/2 dysfunction, with growing evidence that many high-grade serous cancers actually originate in the fallopian tube epithelium.",
+      "Germline BRCA1/2 testing is recommended for all incident epithelial ovarian cancers; lifetime ovarian cancer risk is roughly 39 to 63 percent for BRCA1 and 16.5 to 27 percent for BRCA2, and risk-reducing salpingo-oophorectomy after childbearing (ideally before age 40) is highly protective and also lowers subsequent breast cancer risk by about 50 percent.",
+      "About 70 percent of ovarian cancer patients present at stage III; a markedly elevated serum CA-125 (shed MUC16) is characteristic but not specific, and PET is generally not required for evaluation.",
+      "Bilateral ovarian masses from metastatic mucin-secreting gastrointestinal cancers are termed Krukenberg tumors; metastatic disease to the ovary also arises from colon, appendix, stomach, and breast primaries, so other malignancies must be considered in the workup.",
+      "High-risk HPV infection (especially types 16 and 18, also 31, 33, 35, 52, 58) is the primary initiating event in the vast majority of invasive cervical cancers; viral E6 and E7 proteins inactivate p53 and RB respectively, but full transformation requires additional acquired mutations over years.",
+      "Cervical cancer staging is fundamentally clinical: stage I confined to cervix, stage II into upper vagina/paracervical tissue, stage III to lower vagina or pelvic sidewall, stage IV invading bladder/rectum or distant; MRI better estimates uterine and paracervical soft-tissue extension while CT detects hydronephrosis indicating sidewall disease.",
+      "Endometrioid endometrial adenocarcinoma is the most common gynecologic malignancy in the United States; unopposed estrogen exposure is the principal risk factor, so obesity, postmenopausal estrogen therapy, estrogen-producing tumors, and tamoxifen (weakly estrogenic in uterine epithelium) all increase risk while progestins are protective.",
+      "Most women with uterine corpus cancer present with postmenopausal bleeding (or atypical intermenstrual bleeding premenopausally), leading to early-stage detection and high cure rates; about 75 percent are stage I.",
+      "Routine microsatellite instability (MSI) testing of all endometrial cancers is now standard, because MSI/mismatch-repair-deficient tumors that recur or present advanced are likely to respond to PD-1/PD-L1 immune checkpoint therapy.",
+      "Gestational trophoblastic disease spans benign hydatidiform mole to choriocarcinoma; complete moles are diploid with entirely paternal genetic material (uniparental disomy, no fetal development), while partial moles are triploid (egg fertilized by two sperm) and may show early fetal development.",
+      "Trophoblastic disease is exquisitely chemosensitive and monitored by serial serum beta-hCG; even very advanced disease is almost uniformly curable when managed by an expert.",
+      "Gardasil-9 protects against HPV types 6, 11, 16, 18, 31, 33, 45, 52, and 58; vaccination before sexual activity dramatically lowers high-risk infection and dysplasia, but vaccinated women remain at residual risk and still need Pap screening."
     ],
-    [
-     "Key Investigations",
-     "Serum CA-125 (and HE-4, mesothelin) for ovarian cancer; trends used to monitor relapse, Transvaginal/pelvic ultrasonography to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ovarian cancer arises from epithelial, stromal/sex-cord, or germ cell lineages; high-grade (type 2) serous cancers begin in fallopian tube epithelium with BRCA1/2 loss and TP53 mutation producing intraepithelial cancer, then shed and disseminate across the peritoneum aided by MUC16 expression and mesothelin binding, whereas indolent type 1 cancers carry KRAS/BRAF/PTEN/PIK3CA mutations. Cervical cancer follows persistent high-risk HPV infection near the cervical transformation zone, where viral E6/E7 inactivate p53 and RB to immortalize epithelium; HPV genome integration plus APOBEC-pattern mutagenesis and further hits drive progression from dysplasia to invasive squamous cell carcinoma or adenocarcinoma. Endometrial type 1 (endometrioid) cancers are driven by relative estrogen excess unopposed by progesterone, with secondary PI3K mutation or PTEN loss; type 2 (serous, clear cell) cancers show TP53 loss and behave like high-grade serous ovarian cancer. Gestational trophoblastic neoplasia results from outgrowth/persistence of placental trophoblast, with complete moles being androgenetic diploid tumors and partial moles triploid.",
+    "additionalDifferentials": [
+      "Benign adnexal mass or functional ovarian cyst",
+      "Endometriosis / endometrioma",
+      "Pelvic inflammatory disease and tubo-ovarian abscess",
+      "Uterine leiomyoma (fibroid) versus leiomyosarcoma",
+      "Metastatic gastrointestinal or breast cancer to the ovary (Krukenberg tumor)",
+      "Normal intrauterine or ectopic pregnancy versus molar pregnancy",
+      "Cervicitis or benign cervical polyp versus invasive cervical carcinoma",
+      "Dysfunctional or anovulatory uterine bleeding versus endometrial carcinoma"
     ],
-    [
-     "Primary Differentials",
-     "Benign adnexal mass or functional ovarian cyst, Endometriosis / endometrioma, Pelvic inflammatory disease and tubo-ovarian abscess",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Pelvic inflammatory disease / tubo-ovarian abscess mimicking an adnexal malignancy",
+      "HPV-related cervicitis or low-grade transient HPV infection mimicking high-grade cervical dysplasia"
     ],
-    [
-     "Management Strategy",
-     "For ovarian cancer, perform cytoreductive debulking surgery aiming for complete (R0) resection combined with platinum-taxane",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Benign ovarian cysts and borderline (low malignant potential) tumors mimicking invasive ovarian cancer",
+      "Uterine leiomyomas mimicking sarcoma",
+      "Endometriosis mimicking peritoneal carcinomatosis",
+      "Meigs syndrome (ovarian fibroma with ascites and hydrothorax) mimicking metastatic ovarian cancer"
     ],
-    [
-     "Clinical Pitfall",
-     "Nonspecific GI symptoms (bloating, early satiety, change in bowel/urinary pattern) of ovarian cancer are frequently dismissed",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Serum CA-125 (and HE-4, mesothelin) for ovarian cancer; trends used to monitor relapse",
+      "Transvaginal/pelvic ultrasonography to characterize adnexal masses; CT for carcinomatosis and adenopathy",
+      "Serum and serial beta-hCG (and AFP) for germ cell and gestational trophoblastic tumors",
+      "Pap (cytology) smear plus HPV PCR testing for cervical screening",
+      "Endometrial biopsy for postmenopausal or abnormal bleeding",
+      "MRI for cervical uterine/paracervical extension; CT for hydronephrosis",
+      "Germline BRCA1/2 and Lynch syndrome (MSH2, MLH1, MSH6, PMS1, PMS2) testing; tumor microsatellite instability and homologous recombination deficiency testing"
+    ],
+    "redFlags": [
+      "Rapidly increasing abdominal girth from ascites with nausea, early satiety, bloating, and abdominal pain suggesting advanced ovarian cancer",
+      "Postmenopausal vaginal bleeding (must exclude endometrial carcinoma)",
+      "Postcoital or intermenstrual bleeding or foul/persistent discharge suggesting cervical cancer",
+      "Flank pain/hydronephrosis or sacral/pelvic nerve pain indicating advanced cervical pelvic sidewall disease",
+      "Persistent or rising beta-hCG after molar evacuation indicating persistent gestational trophoblastic disease",
+      "Preeclampsia/eclampsia, hyperthyroidism, or very high beta-hCG in pregnancy raising concern for molar pregnancy",
+      "Acute pelvic pain from ovarian torsion, intratumoral hemorrhage, or rupture"
+    ],
+    "prognosis": "Ovarian epithelial cancer 5-year survival correlates strongly with stage: roughly 90 to 95 percent stage I, 70 to 80 percent stage II, 25 to 40 percent stage III, and 10 to 15 percent stage IV; prognosis improves with lower histologic grade and BRCA1/2 germline mutation, and complete (R0) cytoreduction yields median survival beyond 60 months versus 28 to 42 months with macroscopic residual disease. Endometrial cancer is usually localized (about 75 percent stage I) with high cure; cervical cancer 5-year survival declines from about 85 percent (stage I) to roughly 7 percent (stage IV). Borderline (low malignant potential) ovarian tumors and ovarian germ cell tumors (including dysgerminoma) are highly curable. Gestational trophoblastic disease is almost uniformly curable, with single-agent therapy curing about 90 percent of low-risk cases.",
+    "pitfalls": [
+      "Nonspecific GI symptoms (bloating, early satiety, change in bowel/urinary pattern) of ovarian cancer are frequently dismissed until late stages",
+      "Needle biopsy of an adnexal mass is contraindicated because it risks seeding malignant cells into the peritoneal cavity",
+      "HPV-negative cervical cancers (more common in older women, with KRAS/ARID1A/PTEN mutations) may behave differently",
+      "Endocervical canal or glandular cervical lesions may be invisible on inspection and missed by Pap smear",
+      "Adding HPV PCR increases sensitivity but lowers specificity, flagging many transient infections needing no intervention",
+      "Minimally invasive surgery for early cervical cancer gives inferior outcomes compared with open hysterectomy",
+      "Suboptimally debulked ovarian cancer (residual >1 cm) derives very little benefit from surgery",
+      "Late relapse (>2 years) of germ cell tumors tends to be chemoresistant and is best approached surgically"
+    ],
+    "severityClassification": "Staging per Table 94-1: Ovarian - I confined to ovary (88-95%), II confined to pelvic organs (70-80%), III intra-abdominal spread to omentum/diaphragm/nodes (20-40%), IV spread outside abdominal cavity/parenchymal/pleural (10-20%); most present as stage IIIC (bulky intraperitoneal or positive nodes). Endometrial - I confined to corpus (>90%), II corpus and cervix (~75%), III outside uterus but within true pelvis (45-60%), IV beyond true pelvis or bladder/rectum (~20%). Cervix - 0 carcinoma in situ (100%), I confined to uterus (85%), II beyond uterus not to pelvic wall (65%), III to pelvic wall and/or lower third vagina or hydronephrosis (35%), IV invading bladder/rectal mucosa or beyond true pelvis (7%). Gestational trophoblastic disease is risk-stratified (low/intermediate/high) by scoring algorithms guiding single- versus multiagent therapy.",
+    "references": [
+      "Harrison 22e p.709",
+      "Harrison 22e p.710",
+      "Harrison 22e p.711",
+      "Harrison 22e p.712",
+      "Harrison 22e p.713",
+      "Harrison 22e p.714",
+      "Harrison 22e p.715"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For ovarian cancer, perform cytoreductive debulking surgery aiming for complete (R0) resection combined with platinum-taxane chemotherapy using carboplatin and paclitaxel, with neoadjuvant chemotherapy considered for bulky advanced disease",
+      "Give maintenance therapy with PARP inhibitors, particularly for BRCA-mutated or homologous-recombination-deficient tumours, and add the anti-angiogenic agent bevacizumab in selected cases",
+      "For cervical cancer, use stage-directed treatment with radical hysterectomy for early disease and concurrent cisplatin-based chemoradiotherapy with brachytherapy for locally advanced disease, alongside HPV vaccination and screening for prevention",
+      "For endometrial cancer, perform total hysterectomy with bilateral salpingo-oophorectomy and surgical staging, adding adjuvant radiotherapy, chemotherapy or hormonal therapy according to risk",
+      "Perform germline BRCA1/2 and mismatch-repair or Lynch testing to guide targeted therapy such as PARP inhibitors and immune checkpoint inhibitors and to inform risk-reducing salpingo-oophorectomy",
+      "Monitor treatment response and relapse with serum CA-125 trends and cross-sectional imaging, and integrate palliative and symptom-directed care for advanced disease",
+      "Coordinate multidisciplinary gynae-oncology management with genetic counselling and family risk assessment"
     ]
-   ],
-   "caption": "Overview comparison matrix for gynecologic malignancies."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gynecologic-malignancies-real-image",
-   "title": "Gynecologic Malignancies: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "gynecologic_malignancies-pathway",
+      "title": "Gynecologic Malignancies: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Epithelial tumors are the most common ovarian neoplasm; ovarian cancers are split into indolent type 1 (low-grade, KRAS/BRAF/PTEN/PIK3CA mutations) and aggressive type 2 high-grade serous cancers, the latter driven by TP53 loss (about 95%)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly increasing abdominal girth from ascites with nausea, early satiety, bloating, and abdominal pain suggesting advanced ovarian cancer",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum CA-125 (and HE-4, mesothelin) for ovarian cancer; trends used to monitor relapse, Transvaginal/pelvic ultrasonography to characterize adnexal masses; CT for carcinomatosis and adenopathy, Serum and serial beta-hCG"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For ovarian cancer, perform cytoreductive debulking surgery aiming for complete (R0) resection combined with platinum-taxane chemotherapy using carboplatin and paclitaxel, with neoadjuvant chemotherapy considered for"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Nonspecific GI symptoms (bloating, early satiety, change in bowel/urinary pattern) of ovarian cancer are frequently dismissed until late stages"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gynecologic malignancies."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gynecologic_malignancies-matrix",
+      "title": "Gynecologic Malignancies: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Epithelial tumors are the most common ovarian neoplasm; ovarian cancers are split into indolent type 1 (low-grade,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum CA-125 (and HE-4, mesothelin) for ovarian cancer; trends used to monitor relapse, Transvaginal/pelvic ultrasonography to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Benign adnexal mass or functional ovarian cyst, Endometriosis / endometrioma, Pelvic inflammatory disease and tubo-ovarian abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For ovarian cancer, perform cytoreductive debulking surgery aiming for complete (R0) resection combined with platinum-taxane",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Nonspecific GI symptoms (bloating, early satiety, change in bowel/urinary pattern) of ovarian cancer are frequently dismissed",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gynecologic malignancies."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "WHO fact sheet, Cervical cancer",
+      "kind": "web",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/cervical-cancer"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gynecologic_malignancies-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging gynecologic cancers",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Cervical screening start (WHO)",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Age 30; age 25 with HIV",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "HPV test every 5 to 10 years; 3 to 5 years with HIV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ovarian cancer stage at presentation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 70% present at stage III",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "CA-125 high but not specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adnexal mass work-up",
+          "cells": [
+            {
+              "text": "Transvaginal ultrasound, CT, CA-125"
+            },
+            {
+              "text": "{{hy:Never needle-biopsy an adnexal mass (peritoneal seeding)}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRCA1 lifetime ovarian risk",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 39 to 63%",
+              "range": [
+                39,
+                63
+              ]
+            },
+            {
+              "text": "Test germline BRCA1/2 in every epithelial ovarian cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postmenopausal bleeding",
+          "cells": [
+            {
+              "text": "Endometrial biopsy"
+            },
+            {
+              "text": "About 75% of endometrial cancers are stage I"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial tumour MSI or MMR testing",
+          "cells": [
+            {
+              "text": "Done routinely"
+            },
+            {
+              "text": "Flags Lynch syndrome and checkpoint-inhibitor response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical staging",
+          "cells": [
+            {
+              "text": "Clinical; MRI for paracervical spread, CT for hydronephrosis"
+            },
+            {
+              "text": "Stage III includes sidewall or hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molar pregnancy",
+          "cells": [
+            {
+              "text": "Complete mole diploid paternal; partial mole triploid"
+            },
+            {
+              "text": "Serial beta-hCG to monitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian 5-year survival by stage",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Stage I 90 to 95%, stage IV 10 to 15%",
+              "range": [
+                10,
+                95
+              ]
+            },
+            {
+              "text": "R0 cytoreduction improves survival"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gynecologic_malignancies-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes for gynecologic malignancy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional or benign ovarian cyst",
+          "cells": [
+            {
+              "text": "Simple cyst, normal CA-125"
+            },
+            {
+              "text": "Repeat ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometriosis or endometrioma",
+          "cells": [
+            {
+              "text": "Cyclical pain; can mimic carcinomatosis"
+            },
+            {
+              "text": "Ultrasound, laparoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tubo-ovarian abscess",
+          "cells": [
+            {
+              "text": "Fever, pelvic tenderness"
+            },
+            {
+              "text": "Ultrasound, response to antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Krukenberg tumour",
+          "cells": [
+            {
+              "text": "Bilateral ovarian masses from GI or breast primary"
+            },
+            {
+              "text": "Endoscopy and histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meigs syndrome",
+          "cells": [
+            {
+              "text": "Ovarian fibroma with ascites and pleural effusion"
+            },
+            {
+              "text": "Histology; effusions resolve after resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leiomyoma",
+          "cells": [
+            {
+              "text": "Benign fibroid; sarcoma rare"
+            },
+            {
+              "text": "Imaging and histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anovulatory uterine bleeding",
+          "cells": [
+            {
+              "text": "Premenopausal irregular bleeding"
+            },
+            {
+              "text": "Endometrial biopsy when risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervicitis or polyp",
+          "cells": [
+            {
+              "text": "Inflamed or benign lesion"
+            },
+            {
+              "text": "HPV test, cytology, colposcopic biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gynecologic_malignancies-treatment",
+      "kind": "treatment",
+      "title": "Treating gynecologic cancers",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "HPV vaccination",
+          "cells": [
+            {
+              "text": "Girls aged 9 to 14"
+            },
+            {
+              "text": "One or two doses; two or three if immunocompromised"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Screen-and-treat precancer",
+          "cells": [
+            {
+              "text": "HPV-positive cervical precancer"
+            },
+            {
+              "text": "Thermal ablation, cryotherapy, LEEP or cone biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radical hysterectomy",
+          "cells": [
+            {
+              "text": "Early cervical cancer"
+            },
+            {
+              "text": "Open surgery outperforms minimally invasive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cisplatin chemoradiation with brachytherapy",
+          "cells": [
+            {
+              "text": "Locally advanced cervical cancer"
+            },
+            {
+              "text": "Stage-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytoreductive surgery plus carboplatin and paclitaxel",
+          "cells": [
+            {
+              "text": "Ovarian cancer"
+            },
+            {
+              "text": "{{hy:Aim for no residual disease (R0)}}; neoadjuvant chemo for bulky disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PARP inhibitor maintenance",
+          "cells": [
+            {
+              "text": "BRCA-mutated or HRD ovarian cancer"
+            },
+            {
+              "text": "Bevacizumab in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hysterectomy with BSO and staging",
+          "cells": [
+            {
+              "text": "Endometrial cancer"
+            },
+            {
+              "text": "Adjuvant radiation, chemo or hormones by risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PD-1 or PD-L1 inhibitor",
+          "cells": [
+            {
+              "text": "MSI-high or MMR-deficient advanced endometrial cancer"
+            },
+            {
+              "text": "Based on routine MSI testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy for trophoblastic disease",
+          "cells": [
+            {
+              "text": "Persistent or rising beta-hCG"
+            },
+            {
+              "text": "Single agent cures about 90% of low-risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-reducing salpingo-oophorectomy",
+          "cells": [
+            {
+              "text": "BRCA carriers after childbearing, ideally before 40"
+            },
+            {
+              "text": "Halves later breast cancer risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gynecologic_malignancies-dx-mgmt",
+      "title": "Diagnosis and management of gynecologic malignancies",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pelvic mass, abnormal bleeding, abnormal screen, or abnormal hCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Main presentation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Ultrasound, CT, CA-125; no needle biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Surgery for staging and debulking, platinum-taxane, BRCA test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Endometrial biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Hysterectomy with BSO and staging; MSI testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "HPV test, colposcopy and biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Invasive cancer on biopsy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Treat precancer by ablation or LEEP",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Stage with MRI and CT; surgery or chemoradiation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Evacuate mole; serial beta-hCG, chemo if persistent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Adnexal mass"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "Postmenopausal bleeding"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "Abnormal cervix or screen"
+        },
+        {
+          "from": "n2",
+          "to": "n11",
+          "label": "Molar pregnancy"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

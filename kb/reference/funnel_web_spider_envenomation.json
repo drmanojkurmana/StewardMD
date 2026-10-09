@@ -1,175 +1,415 @@
 {
- "id": "funnel_web_spider_envenomation",
- "name": "Funnel-web spider envenomation",
- "aliases": [
-  "Australian funnel-web spider bite",
-  "Atrax envenomation",
-  "Hadronyche envenomation"
- ],
- "class": "non_infective",
- "system": "Envenomation / Toxicology",
- "specialty": "Toxicology / Emergency medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical toxinology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Australian funnel-web spiders of the genera Atrax and Hadronyche, with the Sydney funnel-web among the most dangerous spiders to humans.",
-   "Venom of the male Sydney funnel-web is disproportionately potent, and wandering males in the warmer months account for most severe bites.",
-   "The active toxins, the delta-hexatoxins, delay inactivation of voltage-gated sodium channels, triggering a storm of autonomic and neuromuscular excitation.",
-   "The clinical picture is a combined cholinergic and adrenergic surge — profuse salivation, lacrimation, sweating, piloerection, muscle fasciculation, hypertension and tachycardia.",
-   "Life-threatening features include acute pulmonary oedema, severe hypertension followed by hypotension, arrhythmia and raised intracranial pressure.",
-   "Primates, including humans, are uniquely sensitive, whereas many other mammals tolerate the venom — a consequence of species-specific channel binding.",
-   "Pressure immobilisation bandaging with splinting of the bitten limb is the recommended first aid to slow venom spread.",
-   "A specific funnel-web spider antivenom is highly effective and has made deaths rare since its introduction."
+  "id": "funnel_web_spider_envenomation",
+  "name": "Funnel-web spider envenomation",
+  "aliases": [
+    "Australian funnel-web spider bite",
+    "Atrax envenomation",
+    "Hadronyche envenomation"
   ],
-  "pathophysiology": "The clinically important components are the delta-hexatoxins (historically termed robustoxin and versutoxin), small peptides that bind voltage-gated sodium channels and slow their inactivation. Affected neuronal membranes remain depolarised and fire repetitively and spontaneously, driving massive release of acetylcholine at somatic and autonomic synapses and of catecholamines from adrenergic nerve terminals and the adrenal medulla. The result is a biphasic syndrome: an early excitatory phase dominated by simultaneous cholinergic and adrenergic overactivity, followed in severe cases by a later phase of autonomic exhaustion with hypotension. Pulmonary oedema reflects a combination of the catecholamine surge and increased pulmonary capillary permeability. Non-primate mammals are relatively resistant because their sodium channels bind the toxin poorly, which explains the striking species selectivity of the venom.",
-  "additionalDifferentials": [
-   "Other spider envenomations, including mouse spider bites that may respond to the same antivenom",
-   "Scorpion envenomation",
-   "Organophosphate or carbamate poisoning with cholinergic crisis",
-   "Sympathomimetic drug toxicity",
-   "Serotonin syndrome",
-   "Thyroid storm",
-   "Phaeochromocytoma crisis"
-  ],
-  "additionalInvestigations": [
-   "Continuous cardiac monitoring and serial electrocardiography",
-   "Arterial blood gas analysis",
-   "Serum electrolytes and renal function",
-   "Serum creatine kinase",
-   "Chest radiograph to detect pulmonary oedema",
-   "Coagulation studies"
-  ],
-  "redFlags": [
-   "Fasciculation of the tongue, lips or limbs",
-   "Profuse salivation and lacrimation",
-   "Pulmonary oedema or respiratory distress",
-   "Severe hypertension or depressed level of consciousness"
-  ],
-  "prognosis": "Untreated systemic envenomation can be rapidly fatal, but with prompt pressure immobilisation, supportive care and antivenom the outlook is excellent and recovery is usually complete; deaths have become very rare since antivenom became available.",
-  "pitfalls": [
-   "Removing the pressure immobilisation bandage before the patient reaches definitive care.",
-   "Underestimating how quickly severe envenomation can evolve, sometimes within minutes.",
-   "Failing to have antivenom and resuscitation facilities prepared before symptoms escalate.",
-   "Dismissing the bite because the spider was misidentified as harmless."
-  ],
-  "references": [
-   "Clinical toxinology references",
-   "Envenomation management guidelines",
-   "Emergency medicine references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate first aid with pressure immobilisation bandaging and splinting of the bitten limb, keeping the patient still to slow venom entry",
-   "Administer funnel-web spider (Atrax/Hadronyche) antivenom for any features of systemic envenomation, repeated until the toxidrome resolves",
-   "Continuous cardiac and respiratory monitoring with serial electrocardiography in a high-dependency or intensive care setting",
-   "Supportive control of the cholinergic surge with atropine for secretions, and management of the early severe hypertension followed by the later hypotensive phase with fluids and vasopressors",
-   "Treat acute pulmonary oedema with oxygen and positive-pressure ventilation, protecting the airway as required",
-   "Early involvement of a clinical toxicologist or poisons centre and intensive care for airway support and management of raised intracranial pressure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "funnel_web_spider_envenomation-pathway",
-   "title": "Funnel-web spider envenomation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Australian funnel-web spiders of the genera Atrax and Hadronyche, with the Sydney funnel-web among the most dangerous spiders to humans.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fasciculation of the tongue, lips or limbs",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Continuous cardiac monitoring and serial electrocardiography, Arterial blood gas analysis, Serum electrolytes and renal function"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate first aid with pressure immobilisation bandaging and splinting of the bitten limb, keeping the patient still to slow venom entry"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Removing the pressure immobilisation bandage before the patient reaches definitive care."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of funnel-web spider envenomation."
-  }
- ],
- "tables": [
-  {
-   "id": "funnel_web_spider_envenomation-matrix",
-   "title": "Funnel-web spider envenomation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Australian funnel-web spiders of the genera Atrax and Hadronyche, with the Sydney funnel-web among the most dangerous",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Envenomation / Toxicology",
+  "specialty": "Toxicology / Emergency medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical toxinology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Australian funnel-web spiders of the genera Atrax and Hadronyche, with the Sydney funnel-web among the most dangerous spiders to humans.",
+      "Venom of the male Sydney funnel-web is disproportionately potent, and wandering males in the warmer months account for most severe bites.",
+      "The active toxins, the delta-hexatoxins, delay inactivation of voltage-gated sodium channels, triggering a storm of autonomic and neuromuscular excitation.",
+      "The clinical picture is a combined cholinergic and adrenergic surge — profuse salivation, lacrimation, sweating, piloerection, muscle fasciculation, hypertension and tachycardia.",
+      "Life-threatening features include acute pulmonary oedema, severe hypertension followed by hypotension, arrhythmia and raised intracranial pressure.",
+      "Primates, including humans, are uniquely sensitive, whereas many other mammals tolerate the venom — a consequence of species-specific channel binding.",
+      "Pressure immobilisation bandaging with splinting of the bitten limb is the recommended first aid to slow venom spread.",
+      "A specific funnel-web spider antivenom is highly effective and has made deaths rare since its introduction."
     ],
-    [
-     "Key Investigations",
-     "Continuous cardiac monitoring and serial electrocardiography, Arterial blood gas analysis, Serum electrolytes and renal function",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The clinically important components are the delta-hexatoxins (historically termed robustoxin and versutoxin), small peptides that bind voltage-gated sodium channels and slow their inactivation. Affected neuronal membranes remain depolarised and fire repetitively and spontaneously, driving massive release of acetylcholine at somatic and autonomic synapses and of catecholamines from adrenergic nerve terminals and the adrenal medulla. The result is a biphasic syndrome: an early excitatory phase dominated by simultaneous cholinergic and adrenergic overactivity, followed in severe cases by a later phase of autonomic exhaustion with hypotension. Pulmonary oedema reflects a combination of the catecholamine surge and increased pulmonary capillary permeability. Non-primate mammals are relatively resistant because their sodium channels bind the toxin poorly, which explains the striking species selectivity of the venom.",
+    "additionalDifferentials": [
+      "Other spider envenomations, including mouse spider bites that may respond to the same antivenom",
+      "Scorpion envenomation",
+      "Organophosphate or carbamate poisoning with cholinergic crisis",
+      "Sympathomimetic drug toxicity",
+      "Serotonin syndrome",
+      "Thyroid storm",
+      "Phaeochromocytoma crisis"
     ],
-    [
-     "Primary Differentials",
-     "Other spider envenomations, including mouse spider bites that may respond to the same antivenom, Scorpion envenomation,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Continuous cardiac monitoring and serial electrocardiography",
+      "Arterial blood gas analysis",
+      "Serum electrolytes and renal function",
+      "Serum creatine kinase",
+      "Chest radiograph to detect pulmonary oedema",
+      "Coagulation studies"
     ],
-    [
-     "Management Strategy",
-     "Immediate first aid with pressure immobilisation bandaging and splinting of the bitten limb, keeping the patient still to slow",
-     "Core treatment modality"
+    "redFlags": [
+      "Fasciculation of the tongue, lips or limbs",
+      "Profuse salivation and lacrimation",
+      "Pulmonary oedema or respiratory distress",
+      "Severe hypertension or depressed level of consciousness"
     ],
-    [
-     "Clinical Pitfall",
-     "Removing the pressure immobilisation bandage before the patient reaches definitive care.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated systemic envenomation can be rapidly fatal, but with prompt pressure immobilisation, supportive care and antivenom the outlook is excellent and recovery is usually complete; deaths have become very rare since antivenom became available.",
+    "pitfalls": [
+      "Removing the pressure immobilisation bandage before the patient reaches definitive care.",
+      "Underestimating how quickly severe envenomation can evolve, sometimes within minutes.",
+      "Failing to have antivenom and resuscitation facilities prepared before symptoms escalate.",
+      "Dismissing the bite because the spider was misidentified as harmless."
+    ],
+    "references": [
+      "Clinical toxinology references",
+      "Envenomation management guidelines",
+      "Emergency medicine references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate first aid with pressure immobilisation bandaging and splinting of the bitten limb, keeping the patient still to slow venom entry",
+      "Administer funnel-web spider (Atrax/Hadronyche) antivenom for any features of systemic envenomation, repeated until the toxidrome resolves",
+      "Continuous cardiac and respiratory monitoring with serial electrocardiography in a high-dependency or intensive care setting",
+      "Supportive control of the cholinergic surge with atropine for secretions, and management of the early severe hypertension followed by the later hypotensive phase with fluids and vasopressors",
+      "Treat acute pulmonary oedema with oxygen and positive-pressure ventilation, protecting the airway as required",
+      "Early involvement of a clinical toxicologist or poisons centre and intensive care for airway support and management of raised intracranial pressure"
     ]
-   ],
-   "caption": "Overview comparison matrix for funnel-web spider envenomation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "funnel-web-spider-envenomation-real-image",
-   "title": "Funnel-web spider envenomation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "funnel_web_spider_envenomation-pathway",
+      "title": "Funnel-web spider envenomation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Australian funnel-web spiders of the genera Atrax and Hadronyche, with the Sydney funnel-web among the most dangerous spiders to humans.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fasciculation of the tongue, lips or limbs",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Continuous cardiac monitoring and serial electrocardiography, Arterial blood gas analysis, Serum electrolytes and renal function"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate first aid with pressure immobilisation bandaging and splinting of the bitten limb, keeping the patient still to slow venom entry"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Removing the pressure immobilisation bandage before the patient reaches definitive care."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of funnel-web spider envenomation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "funnel_web_spider_envenomation-matrix",
+      "title": "Funnel-web spider envenomation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Australian funnel-web spiders of the genera Atrax and Hadronyche, with the Sydney funnel-web among the most dangerous",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Continuous cardiac monitoring and serial electrocardiography, Arterial blood gas analysis, Serum electrolytes and renal function",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other spider envenomations, including mouse spider bites that may respond to the same antivenom, Scorpion envenomation,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate first aid with pressure immobilisation bandaging and splinting of the bitten limb, keeping the patient still to slow",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Removing the pressure immobilisation bandage before the patient reaches definitive care.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for funnel-web spider envenomation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical toxinology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "funnel_web_spider_envenomation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous cardiac monitoring and serial ECG",
+          "cells": [
+            {
+              "text": "Serial cardiac assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas analysis",
+          "cells": [
+            {
+              "text": "Respiratory status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes and renal function",
+          "cells": [
+            {
+              "text": "Electrolyte and renal status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Detects pulmonary oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies",
+          "cells": [
+            {
+              "text": "Coagulation status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "funnel_web_spider_envenomation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First aid: pressure immobilisation",
+          "cells": [
+            {
+              "text": "Bandage and splint the bitten limb; keep the patient still"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Funnel-web antivenom",
+          "cells": [
+            {
+              "text": "For any features of systemic envenomation, repeated until toxicity resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiac and respiratory monitoring",
+          "cells": [
+            {
+              "text": "Serial ECG in a high-dependency or intensive care setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atropine",
+          "cells": [
+            {
+              "text": "For cholinergic secretions; management of early severe hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary oedema",
+          "cells": [
+            {
+              "text": "Oxygen and positive-pressure ventilation; protect the airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicology and intensive care",
+          "cells": [
+            {
+              "text": "Early involvement of a clinical toxicologist or poisons centre"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "funnel_web_spider_envenomation-dx-mgmt",
+      "title": "Diagnosis and management of Funnel-web spider envenomation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected funnel-web envenomation: bite with fasciculation or salivation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fasciculation, pulmonary oedema, depressed consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Give funnel-web antivenom for systemic envenomation; start intensive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial ECG, blood gas, electrolytes, renal function and chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are there systemic features of envenomation on monitoring?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue monitoring; consider mouse spider bite or other cholinergic poisoning",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pressure immobilisation bandaging and splinting; keep the patient still",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Funnel-web antivenom for systemic envenomation, repeated until toxicity resolves",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continuous cardiac and respiratory monitoring in intensive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Atropine for secretions; manage early severe hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rapidly fatal untreated; with prompt first aid and antivenom the outlook is excellent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

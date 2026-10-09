@@ -1,173 +1,441 @@
 {
- "id": "acinic_cell_carcinoma",
- "name": "Acinic cell carcinoma",
- "aliases": [
-  "Acinic cell adenocarcinoma"
- ],
- "class": "non_infective",
- "system": "Head and neck / Salivary glands",
- "specialty": "Head and neck surgery / Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Head and Neck Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A malignant epithelial tumour showing serous acinar differentiation, with cytoplasmic zymogen granules, most often arising in the parotid.",
-   "It is generally low-grade and is one of the commoner salivary malignancies of childhood and young adults, with a female predominance.",
-   "Occasional bilateral parotid involvement is described, an unusual feature among salivary malignancies.",
-   "Recurrent activation of the transcription factor NR4A3, through enhancer hijacking, is a characteristic molecular event and can be demonstrated by immunohistochemistry.",
-   "Tumour cells are typically DOG1 positive with an apical or membranous pattern, and the zymogen granules are periodic-acid-Schiff positive and diastase resistant.",
-   "Architectural patterns include solid, microcystic, follicular and papillary-cystic, the last of which can be misread as a benign cyst.",
-   "High-grade transformation (dedifferentiation) is the most important adverse event and markedly worsens the outlook.",
-   "Distinction from secretory carcinoma is essential; secretory carcinoma lacks true zymogen granules, is DOG1 negative and carries an ETV6 fusion."
+  "id": "acinic_cell_carcinoma",
+  "name": "Acinic cell carcinoma",
+  "aliases": [
+    "Acinic cell adenocarcinoma"
   ],
-  "pathophysiology": "Acinic cell carcinoma arises from cells committed to serous acinar differentiation, recapitulating the zymogen-granule-producing acinar cells of normal salivary tissue. A recurrent structural rearrangement repositions a strong enhancer adjacent to the NR4A3 gene, driving marked overexpression of this nuclear receptor transcription factor and promoting tumour cell proliferation. The neoplastic cells retain the capacity to synthesise serous secretory (zymogen) granules, which underlies both the histological appearance and the periodic-acid-Schiff staining, and they are arranged in solid, microcystic, follicular or papillary-cystic patterns. Although most tumours behave in a low-grade fashion, a subset undergoes high-grade transformation with loss of acinar differentiation, increased mitotic activity, necrosis and a greatly increased propensity for nodal and distant spread.",
-  "additionalDifferentials": [
-   "Secretory carcinoma (mammary analogue)",
-   "Normal or hyperplastic acinar tissue",
-   "Oncocytoma and oncocytic carcinoma",
-   "Mucoepidermoid carcinoma",
-   "Cystadenoma or cystadenocarcinoma",
-   "Metastatic clear-cell renal cell carcinoma"
-  ],
-  "additionalInvestigations": [
-   "Fine-needle aspiration cytology, recognising its known limitations for this tumour",
-   "Core or excisional biopsy for definitive histology",
-   "Immunohistochemistry including DOG1 and NR4A3",
-   "Molecular testing for NR4A3, and for ETV6 to exclude secretory carcinoma",
-   "MRI of the primary and ultrasound or CT of the neck for staging",
-   "Cross-sectional or functional imaging where high-grade transformation is suspected"
-  ],
-  "redFlags": [
-   "Features of high-grade transformation such as necrosis, marked pleomorphism and high mitotic count",
-   "Rapid growth or new pain",
-   "Facial nerve weakness or palsy",
-   "Cervical nodal disease",
-   "Evidence of distant metastasis"
-  ],
-  "prognosis": "Prognosis is generally favourable for conventional low-grade tumours managed with complete excision. High-grade transformation substantially worsens survival, and late local recurrence or metastasis can occur, so prolonged follow-up is advised.",
-  "pitfalls": [
-   "Misclassifying secretory carcinoma as acinic cell carcinoma and missing a targetable fusion",
-   "Underestimating or failing to sample areas of high-grade transformation",
-   "Mistaking a low-grade tumour for benign or normal acinar tissue on cytology",
-   "Achieving inadequate surgical margins because of an infiltrative edge"
-  ],
-  "references": [
-   "WHO Classification of Head and Neck Tumours",
-   "Gnepp's Diagnostic Surgical Pathology of the Head and Neck",
-   "Cummings Otolaryngology: Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision as the mainstay, typically parotidectomy with preservation of the facial nerve where oncologically feasible",
-   "Neck dissection for clinically or radiologically involved nodes or in high-grade disease",
-   "Adjuvant radiotherapy for high-grade transformation, incomplete resection, positive margins or other adverse features",
-   "Prolonged clinical and imaging surveillance given the risk of late local recurrence and metastasis",
-   "Consider systemic therapy or clinical-trial enrolment for unresectable, recurrent or metastatic disease, recognising its limited chemosensitivity",
-   "Multidisciplinary head-and-neck team management spanning surgery, pathology and oncology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acinic_cell_carcinoma-pathway",
-   "title": "Acinic cell carcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A malignant epithelial tumour showing serous acinar differentiation, with cytoplasmic zymogen granules, most often arising in the parotid.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of high-grade transformation such as necrosis, marked pleomorphism and high mitotic count",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fine-needle aspiration cytology, recognising its known limitations for this tumour, Core or excisional biopsy for definitive histology, Immunohistochemistry including DOG1 and NR4A3"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision as the mainstay, typically parotidectomy with preservation of the facial nerve where oncologically feasible"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying secretory carcinoma as acinic cell carcinoma and missing a targetable fusion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acinic cell carcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "acinic_cell_carcinoma-matrix",
-   "title": "Acinic cell carcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A malignant epithelial tumour showing serous acinar differentiation, with cytoplasmic zymogen granules, most often arising in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Head and neck / Salivary glands",
+  "specialty": "Head and neck surgery / Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Head and Neck Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A malignant epithelial tumour showing serous acinar differentiation, with cytoplasmic zymogen granules, most often arising in the parotid.",
+      "It is generally low-grade and is one of the commoner salivary malignancies of childhood and young adults, with a female predominance.",
+      "Occasional bilateral parotid involvement is described, an unusual feature among salivary malignancies.",
+      "Recurrent activation of the transcription factor NR4A3, through enhancer hijacking, is a characteristic molecular event and can be demonstrated by immunohistochemistry.",
+      "Tumour cells are typically DOG1 positive with an apical or membranous pattern, and the zymogen granules are periodic-acid-Schiff positive and diastase resistant.",
+      "Architectural patterns include solid, microcystic, follicular and papillary-cystic, the last of which can be misread as a benign cyst.",
+      "High-grade transformation (dedifferentiation) is the most important adverse event and markedly worsens the outlook.",
+      "Distinction from secretory carcinoma is essential; secretory carcinoma lacks true zymogen granules, is DOG1 negative and carries an ETV6 fusion."
     ],
-    [
-     "Key Investigations",
-     "Fine-needle aspiration cytology, recognising its known limitations for this tumour, Core or excisional biopsy for definitive",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acinic cell carcinoma arises from cells committed to serous acinar differentiation, recapitulating the zymogen-granule-producing acinar cells of normal salivary tissue. A recurrent structural rearrangement repositions a strong enhancer adjacent to the NR4A3 gene, driving marked overexpression of this nuclear receptor transcription factor and promoting tumour cell proliferation. The neoplastic cells retain the capacity to synthesise serous secretory (zymogen) granules, which underlies both the histological appearance and the periodic-acid-Schiff staining, and they are arranged in solid, microcystic, follicular or papillary-cystic patterns. Although most tumours behave in a low-grade fashion, a subset undergoes high-grade transformation with loss of acinar differentiation, increased mitotic activity, necrosis and a greatly increased propensity for nodal and distant spread.",
+    "additionalDifferentials": [
+      "Secretory carcinoma (mammary analogue)",
+      "Normal or hyperplastic acinar tissue",
+      "Oncocytoma and oncocytic carcinoma",
+      "Mucoepidermoid carcinoma",
+      "Cystadenoma or cystadenocarcinoma",
+      "Metastatic clear-cell renal cell carcinoma"
     ],
-    [
-     "Primary Differentials",
-     "Secretory carcinoma (mammary analogue), Normal or hyperplastic acinar tissue, Oncocytoma and oncocytic carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fine-needle aspiration cytology, recognising its known limitations for this tumour",
+      "Core or excisional biopsy for definitive histology",
+      "Immunohistochemistry including DOG1 and NR4A3",
+      "Molecular testing for NR4A3, and for ETV6 to exclude secretory carcinoma",
+      "MRI of the primary and ultrasound or CT of the neck for staging",
+      "Cross-sectional or functional imaging where high-grade transformation is suspected"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision as the mainstay, typically parotidectomy with preservation of the facial nerve where oncologically",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of high-grade transformation such as necrosis, marked pleomorphism and high mitotic count",
+      "Rapid growth or new pain",
+      "Facial nerve weakness or palsy",
+      "Cervical nodal disease",
+      "Evidence of distant metastasis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying secretory carcinoma as acinic cell carcinoma and missing a targetable fusion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally favourable for conventional low-grade tumours managed with complete excision. High-grade transformation substantially worsens survival, and late local recurrence or metastasis can occur, so prolonged follow-up is advised.",
+    "pitfalls": [
+      "Misclassifying secretory carcinoma as acinic cell carcinoma and missing a targetable fusion",
+      "Underestimating or failing to sample areas of high-grade transformation",
+      "Mistaking a low-grade tumour for benign or normal acinar tissue on cytology",
+      "Achieving inadequate surgical margins because of an infiltrative edge"
+    ],
+    "references": [
+      "WHO Classification of Head and Neck Tumours",
+      "Gnepp's Diagnostic Surgical Pathology of the Head and Neck",
+      "Cummings Otolaryngology: Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision as the mainstay, typically parotidectomy with preservation of the facial nerve where oncologically feasible",
+      "Neck dissection for clinically or radiologically involved nodes or in high-grade disease",
+      "Adjuvant radiotherapy for high-grade transformation, incomplete resection, positive margins or other adverse features",
+      "Prolonged clinical and imaging surveillance given the risk of late local recurrence and metastasis",
+      "Consider systemic therapy or clinical-trial enrolment for unresectable, recurrent or metastatic disease, recognising its limited chemosensitivity",
+      "Multidisciplinary head-and-neck team management spanning surgery, pathology and oncology"
     ]
-   ],
-   "caption": "Overview comparison matrix for acinic cell carcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acinic-cell-carcinoma-real-image",
-   "title": "Acinic cell carcinoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acinic_cell_carcinoma-pathway",
+      "title": "Acinic cell carcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A malignant epithelial tumour showing serous acinar differentiation, with cytoplasmic zymogen granules, most often arising in the parotid.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of high-grade transformation such as necrosis, marked pleomorphism and high mitotic count",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fine-needle aspiration cytology, recognising its known limitations for this tumour, Core or excisional biopsy for definitive histology, Immunohistochemistry including DOG1 and NR4A3"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision as the mainstay, typically parotidectomy with preservation of the facial nerve where oncologically feasible"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying secretory carcinoma as acinic cell carcinoma and missing a targetable fusion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acinic cell carcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acinic_cell_carcinoma-matrix",
+      "title": "Acinic cell carcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A malignant epithelial tumour showing serous acinar differentiation, with cytoplasmic zymogen granules, most often arising in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fine-needle aspiration cytology, recognising its known limitations for this tumour, Core or excisional biopsy for definitive",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secretory carcinoma (mammary analogue), Normal or hyperplastic acinar tissue, Oncocytoma and oncocytic carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision as the mainstay, typically parotidectomy with preservation of the facial nerve where oncologically",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying secretory carcinoma as acinic cell carcinoma and missing a targetable fusion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acinic cell carcinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Head and Neck Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acinic_cell_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fine-needle aspiration cytology",
+          "cells": [
+            {
+              "text": "Known limitations for this tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core or excisional biopsy",
+          "cells": [
+            {
+              "text": "Definitive histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for DOG1 and NR4A3",
+          "cells": [
+            {
+              "text": "Immunohistochemical markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for NR4A3 and ETV6",
+          "cells": [
+            {
+              "text": "NR4A3 activation; ETV6 excludes secretory carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the primary and ultrasound or CT of the neck",
+          "cells": [
+            {
+              "text": "Staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional or functional imaging",
+          "cells": [
+            {
+              "text": "Suspected high-grade transformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acinic_cell_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision, typically parotidectomy",
+          "cells": [
+            {
+              "text": "Mainstay of treatment"
+            },
+            {
+              "text": "Facial nerve preserved where oncologically feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck dissection",
+          "cells": [
+            {
+              "text": "Involved nodes or high-grade disease"
+            },
+            {
+              "text": "Clinically or radiologically involved nodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "High-grade transformation, incomplete resection or positive margins"
+            },
+            {
+              "text": "Other adverse features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged clinical and imaging surveillance",
+          "cells": [
+            {
+              "text": "Late local recurrence and metastasis"
+            },
+            {
+              "text": "Long follow-up advised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy or clinical-trial enrolment",
+          "cells": [
+            {
+              "text": "Unresectable, recurrent or metastatic disease"
+            },
+            {
+              "text": "Limited chemosensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary head-and-neck team",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            },
+            {
+              "text": "Surgery, pathology and oncology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acinic_cell_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Acinic cell carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slow-growing parotid mass with serous acinar features on cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "High-grade features, facial palsy, nodal disease or metastasis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncology review and staging for high-grade disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FNA or biopsy for histology; DOG1 and NR4A3 immunohistochemistry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "NR4A3 activation found and ETV6 fusion absent?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "MRI of the primary and neck imaging for staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review secretory carcinoma and other parotid lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Complete excision, typically parotidectomy with facial nerve preservation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neck dissection for involved nodes or high-grade disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for high-grade, incomplete or positive-margin disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good for excised low-grade tumours; long follow-up for late recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

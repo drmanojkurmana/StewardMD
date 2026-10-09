@@ -1,185 +1,713 @@
 {
- "id": "liver_transplantation",
- "name": "Liver Transplantation",
- "system": "Gastrointestinal / Hepatobiliary",
- "class": "non_infective",
- "chapter": 356,
- "page": 2718,
- "aliases": [
-  "Orthotopic liver transplantation",
-  "OLT",
-  "Hepatic allograft transplantation",
-  "Living-donor liver transplantation"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.2718",
-  "clinicalPearls": [
-   "Orthotopic transplantation (native liver removed, donor organ placed in the same anatomic site) is the preferred and technically most advanced approach; 1-year survival has risen from roughly 30% in the 1970s to over 90% today, attributed more to better patient selection and timing than to technical or immunologic advances alone.",
-   "Optimal timing matters: the disease should be advanced enough that medical options are exhausted, yet the procedure performed early enough to allow success. Better pretransplant clinical status predicts higher posttransplant survival.",
-   "Allocation of deceased-donor organs is driven by the MELD score (bilirubin, albumin, sodium, creatinine, INR, plus a female adjustment), a continuous scale from 6 to 40 in which higher values indicate greater illness severity; it replaced the older Child-Turcotte-Pugh-based scheme and reduced waiting-list mortality.",
-   "Status 1 (highest priority) is reserved for acute liver failure and for early posttransplant catastrophes such as primary graft nonfunction and hepatic artery thrombosis, superseding the MELD score.",
-   "Liver recipients with MELD scores below 15 have higher posttransplant mortality than comparable patients who remain on the waiting list, so transplant at very low MELD offers limited benefit.",
-   "HLA tissue typing is NOT required for liver transplantation, and preformed cytotoxic HLA antibodies do not preclude the procedure; ABO compatibility and organ size are the key matching considerations.",
-   "Tacrolimus has supplanted cyclosporine as primary immunosuppression; it is 10-100 times more potent, but nephrotoxicity and neurotoxicity (tremor, seizures, hallucinations, psychosis, coma) are its principal adverse effects. Cyclosporine and tacrolimus should not be combined because of overlapping nephrotoxicity.",
-   "Both calcineurin inhibitors are metabolized by cytochrome P450 IIIA: enzyme inducers (phenytoin, phenobarbital, carbamazepine, rifampin) lower drug levels, while inhibitors (azoles, macrolides, verapamil, diltiazem, ritonavir) raise them.",
-   "Sirolimus is avoided early posttransplant because it impairs wound healing and is associated with increased hepatic artery thrombosis in the first 30 days; its antiproliferative effect makes it attractive in recipients with prior or current malignancy such as HCC.",
-   "Infection timing follows a predictable pattern: conventional postoperative infections (pneumonia, wound, urinary, line, intraabdominal) dominate the first month, after which opportunistic pathogens (CMV, herpesviruses, Aspergillus, Candida, Cryptococcus, mycobacteria, Pneumocystis, Toxoplasma, Nocardia, Legionella, Listeria) predominate as immunosuppression takes its toll.",
-   "Long-term HBIg prophylaxis transformed transplantation for chronic hepatitis B; without prophylaxis hepatitis B almost always recurs, but indefinite/long-term HBIg (often combined with high-barrier oral antivirals such as entecavir or tenofovir) reduces reinfection and mortality, yielding outcomes indistinguishable from non-HBV indications.",
-   "Direct-acting antiviral (DAA) agents against HCV have markedly improved both pre- and posttransplant outcomes, allowing pretransplant clearance of viremia (sometimes delaying or obviating transplant) and high sustained virologic response rates in allograft HCV infection."
+  "id": "liver_transplantation",
+  "name": "Liver Transplantation",
+  "system": "Gastrointestinal / Hepatobiliary",
+  "class": "non_infective",
+  "chapter": 356,
+  "page": 2718,
+  "aliases": [
+    "Orthotopic liver transplantation",
+    "OLT",
+    "Hepatic allograft transplantation",
+    "Living-donor liver transplantation"
   ],
-  "pathophysiology": "End-stage liver disease produces portal hypertension, coagulopathy (prolonged prothrombin time, thrombocytopenia), and a hyperdynamic high-cardiac-output circulatory state; transplantation replaces the failing organ and rapidly reverses the hyperdynamic state. The graft is vulnerable to immunologic and ischemic injury. Acute cellular rejection arises 1-2 weeks postoperatively from a T-cell-mediated response, with histology showing a mixed portal infiltrate, bile duct injury, and endothelialitis. Chronic rejection produces progressive cholestasis, vascular lesions (intimal fibrosis, subintimal foam cells, fibrinoid necrosis), and ductopenia (vanishing bile duct syndrome). Calcineurin inhibitors act on the calcium-dependent T-cell signal transduction pathway to block lymphokine (IL-2/3/4, TNF-alpha) gene activation. Ischemic injury during harvesting underlies primary graft nonfunction; preservation in University of Wisconsin solution (rich in lactobionate and raffinose) extends tolerable cold-ischemic time. ABO-mismatched grafts (e.g., group O liver into a group A or B recipient) can cause transient passenger-lymphocyte autoimmune hemolytic anemia that resolves once recipient marrow repopulates the graft.",
-  "additionalDifferentials": [
-   "Posttransplant graft dysfunction: rejection vs biliary obstruction vs primary graft nonfunction vs vascular compromise (portal vein or hepatic artery thrombosis) vs drug hepatotoxicity vs recurrent primary disease vs viral hepatitis/CMV — these are clinically and biochemically difficult to distinguish, often requiring biliary imaging and percutaneous liver biopsy.",
-   "Recurrent primary biliary cholangitis vs chronic rejection (histologically nearly indistinguishable; a florid inflammatory bile duct lesion favors recurrent PBC but is not specific).",
-   "Recurrent autoimmune hepatitis or sclerosing cholangitis vs rejection or posttransplant bile duct injury."
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [],
-  "additionalInvestigations": [
-   "MELD/MELD-Na/MELD-3.0 score calculation (bilirubin, albumin, sodium, creatinine, INR) for allocation and prognosis; PELD for children under 12.",
-   "Serum bilirubin and aminotransferases — most reliable, though nonspecific, indicators of allograft rejection.",
-   "Percutaneous liver biopsy and radiographic visualization of the biliary tree to differentiate causes of graft dysfunction.",
-   "Donor screening: hemodynamic stability, oxygenation, absence of infection/abdominal trauma/hepatic dysfunction; serologic testing for HBV, HCV, HIV (infected organs now used selectively with matching and informed consent).",
-   "Recipient cardiopulmonary evaluation (especially age >70) to exclude ischemic cardiac disease; assessment of pulmonary artery pressure and intrapulmonary shunting.",
-   "anti-HBs titer monitoring (threshold ~100 mIU/mL) to guide HBIg dosing in hepatitis B recipients."
-  ],
-  "redFlags": [
-   "Acute liver failure with impending cerebral edema — a transplant emergency requiring rapid donor identification before life-threatening complications set in.",
-   "Fever, right upper quadrant pain, and falling bile pigment/volume with rising bilirubin and aminotransferases — suggest acute allograft rejection.",
-   "Fibrosing cholestatic hepatitis (marked hyperbilirubinemia and prolonged prothrombin time out of proportion to modest aminotransferase rises) in recurrent hepatitis B — rapidly progressive liver failure.",
-   "Postoperative intraperitoneal bleeding raising intraabdominal pressure and reducing renal blood flow — reversible with laparotomy to evacuate clot and ligate the bleeding site.",
-   "New opportunistic infection beyond the first postoperative month in an immunosuppressed host demands prompt recognition and treatment.",
-   "Severe portopulmonary hypertension (mean pulmonary artery pressure >35 mmHg) or severe hypoxemia from right-to-left intrapulmonary shunts (PO2 <50 mmHg) — relative contraindications signaling high operative risk."
-  ],
-  "prognosis": "One-year survival is now about 85-90%, and 5-year survival exceeds 60%. Outcome correlates strongly with pretransplant status: patients still working or only partially disabled achieve roughly >85% 1-year survival; those needing continuous in-hospital care about 70%; those requiring ICU life support about 50%. High pretransplant disease severity (MELD >25) and high-risk features (malignancy, fulminant hepatitis, age >65, concurrent renal failure, respirator dependence, portal vein thrombosis, prior portacaval shunt or multiple right-upper-quadrant operations) reduce survival to about 60% at 1 year and 35% at 5 years. Survival after retransplantation for primary graft nonfunction is about 50%. Failures within the first 3 months are mainly technical, infectious, or hemorrhagic; later failures stem from infection, rejection, or recurrent disease (malignancy, viral hepatitis, return to alcohol use). Renal failure (18% at 5 years, 25% at 10 years) and cardiovascular disease are leading causes of late mortality.",
-  "pitfalls": [
-   "Treating acute rejection with pulse glucocorticoids in HCV-infected recipients risks triggering severe recurrent allograft hepatitis C (though DAAs now mitigate this concern).",
-   "Cyclosporine and tacrolimus must not be co-administered because of overlapping nephrotoxicity and because tacrolimus reduces cyclosporine clearance.",
-   "Prior extensive biliary/hepatobiliary surgery complicates transplantation and is a relative contraindication, so biliary diversion has been largely abandoned in sclerosing cholangitis candidates.",
-   "Cholangiocarcinoma recurs almost invariably; only highly selected stage I/II patients after neoadjuvant chemoradiation should be considered.",
-   "Eradicating HCV before transplant can lower the MELD score and paradoxically reduce allocation priority in patients who still need a graft for ongoing decompensation.",
-   "Advanced age alone is no longer an absolute contraindication, but in patients over 70 a thorough cardiac and comorbidity workup is mandatory.",
-   "Relying on short-term (2 months or less) HBIg, preoperative vaccination, or interferon alone is ineffective for preventing hepatitis B recurrence; long-term prophylaxis is required."
-  ],
-  "severityClassification": "Allocation and prognosis use the Model for End-Stage Liver Disease (MELD) score, a continuous scale from 6 to 40 (values above 40 counted as 40) derived from serum bilirubin, albumin, sodium, creatinine, and INR with a female adjustment; higher scores indicate greater illness severity. Variants include MELD-Na (2016) and MELD-3.0 (2023). PELD is used for candidates under 12. Status 1 (acute liver failure, primary graft nonfunction, hepatic artery thrombosis) supersedes MELD. The older Child-Turcotte-Pugh score (encephalopathy, ascites, bilirubin, albumin, prothrombin time) has been replaced for allocation. MELD exception points are granted (e.g., for HCC) via the National Liver Review Board.",
-  "references": [
-   "Harrison 22e p.2718",
-   "Harrison 22e p.2719",
-   "Harrison 22e p.2720",
-   "Harrison 22e p.2721",
-   "Harrison 22e p.2722",
-   "Harrison 22e p.2723",
-   "Harrison 22e p.2724",
-   "Harrison 22e p.2725"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Maintain lifelong immunosuppression with a calcineurin inhibitor (tacrolimus or ciclosporin) backbone, usually with an antiproliferative such as mycophenolate and tapering corticosteroids",
-   "Treat acute cellular rejection with pulsed corticosteroids, escalating to antithymocyte globulin for steroid-resistant rejection",
-   "Provide infection prophylaxis against opportunistic organisms, including cover for Pneumocystis, cytomegalovirus and fungal disease",
-   "Prevent recurrent disease, using hepatitis B immunoglobulin with antiviral therapy for HBV and direct-acting antivirals for HCV",
-   "Surveil for vascular and biliary complications (hepatic artery thrombosis, biliary strictures) and investigate graft dysfunction with biochemistry, imaging and liver biopsy",
-   "Monitor long term for immunosuppression-related harms such as renal impairment, metabolic syndrome and malignancy, and manage cardiovascular risk",
-   "Prioritise listing by MELD-based allocation and manage throughout within a specialist transplant multidisciplinary team"
-  ]
- },
- "algorithms": [
-  {
-   "id": "liver_transplantation-pathway",
-   "title": "Liver Transplantation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Orthotopic transplantation (native liver removed, donor organ placed in the same anatomic site) is the preferred and technically most advanced approach; 1-year survival has risen from roughly 30% in the 1970s to over 90% today, attributed",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute liver failure with impending cerebral edema - a transplant emergency requiring rapid donor identification before life-threatening complications set in.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MELD/MELD-Na/MELD-3.0 score calculation (bilirubin, albumin, sodium, creatinine, INR) for allocation and prognosis; PELD for children under 12., Serum bilirubin and aminotransferases - most reliable, though nonspecific,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Maintain lifelong immunosuppression with a calcineurin inhibitor (tacrolimus or ciclosporin) backbone, usually with an antiproliferative such as mycophenolate and tapering corticosteroids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating acute rejection with pulse glucocorticoids in HCV-infected recipients risks triggering severe recurrent allograft hepatitis C (though DAAs now mitigate this concern)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of liver transplantation."
-  }
- ],
- "tables": [
-  {
-   "id": "liver_transplantation-matrix",
-   "title": "Liver Transplantation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Orthotopic transplantation (native liver removed, donor organ placed in the same anatomic site) is the preferred and technically",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2718",
+    "clinicalPearls": [
+      "Orthotopic transplantation (native liver removed, donor organ placed in the same anatomic site) is the preferred and technically most advanced approach; 1-year survival has risen from roughly 30% in the 1970s to over 90% today, attributed more to better patient selection and timing than to technical or immunologic advances alone.",
+      "Optimal timing matters: the disease should be advanced enough that medical options are exhausted, yet the procedure performed early enough to allow success. Better pretransplant clinical status predicts higher posttransplant survival.",
+      "Allocation of deceased-donor organs is driven by the MELD score (bilirubin, albumin, sodium, creatinine, INR, plus a female adjustment), a continuous scale from 6 to 40 in which higher values indicate greater illness severity; it replaced the older Child-Turcotte-Pugh-based scheme and reduced waiting-list mortality.",
+      "Status 1 (highest priority) is reserved for acute liver failure and for early posttransplant catastrophes such as primary graft nonfunction and hepatic artery thrombosis, superseding the MELD score.",
+      "Liver recipients with MELD scores below 15 have higher posttransplant mortality than comparable patients who remain on the waiting list, so transplant at very low MELD offers limited benefit.",
+      "HLA tissue typing is NOT required for liver transplantation, and preformed cytotoxic HLA antibodies do not preclude the procedure; ABO compatibility and organ size are the key matching considerations.",
+      "Tacrolimus has supplanted cyclosporine as primary immunosuppression; it is 10-100 times more potent, but nephrotoxicity and neurotoxicity (tremor, seizures, hallucinations, psychosis, coma) are its principal adverse effects. Cyclosporine and tacrolimus should not be combined because of overlapping nephrotoxicity.",
+      "Both calcineurin inhibitors are metabolized by cytochrome P450 IIIA: enzyme inducers (phenytoin, phenobarbital, carbamazepine, rifampin) lower drug levels, while inhibitors (azoles, macrolides, verapamil, diltiazem, ritonavir) raise them.",
+      "Sirolimus is avoided early posttransplant because it impairs wound healing and is associated with increased hepatic artery thrombosis in the first 30 days; its antiproliferative effect makes it attractive in recipients with prior or current malignancy such as HCC.",
+      "Infection timing follows a predictable pattern: conventional postoperative infections (pneumonia, wound, urinary, line, intraabdominal) dominate the first month, after which opportunistic pathogens (CMV, herpesviruses, Aspergillus, Candida, Cryptococcus, mycobacteria, Pneumocystis, Toxoplasma, Nocardia, Legionella, Listeria) predominate as immunosuppression takes its toll.",
+      "Long-term HBIg prophylaxis transformed transplantation for chronic hepatitis B; without prophylaxis hepatitis B almost always recurs, but indefinite/long-term HBIg (often combined with high-barrier oral antivirals such as entecavir or tenofovir) reduces reinfection and mortality, yielding outcomes indistinguishable from non-HBV indications.",
+      "Direct-acting antiviral (DAA) agents against HCV have markedly improved both pre- and posttransplant outcomes, allowing pretransplant clearance of viremia (sometimes delaying or obviating transplant) and high sustained virologic response rates in allograft HCV infection."
     ],
-    [
-     "Key Investigations",
-     "MELD/MELD-Na/MELD-3.0 score calculation (bilirubin, albumin, sodium, creatinine, INR) for allocation and prognosis; PELD for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "End-stage liver disease produces portal hypertension, coagulopathy (prolonged prothrombin time, thrombocytopenia), and a hyperdynamic high-cardiac-output circulatory state; transplantation replaces the failing organ and rapidly reverses the hyperdynamic state. The graft is vulnerable to immunologic and ischemic injury. Acute cellular rejection arises 1-2 weeks postoperatively from a T-cell-mediated response, with histology showing a mixed portal infiltrate, bile duct injury, and endothelialitis. Chronic rejection produces progressive cholestasis, vascular lesions (intimal fibrosis, subintimal foam cells, fibrinoid necrosis), and ductopenia (vanishing bile duct syndrome). Calcineurin inhibitors act on the calcium-dependent T-cell signal transduction pathway to block lymphokine (IL-2/3/4, TNF-alpha) gene activation. Ischemic injury during harvesting underlies primary graft nonfunction; preservation in University of Wisconsin solution (rich in lactobionate and raffinose) extends tolerable cold-ischemic time. ABO-mismatched grafts (e.g., group O liver into a group A or B recipient) can cause transient passenger-lymphocyte autoimmune hemolytic anemia that resolves once recipient marrow repopulates the graft.",
+    "additionalDifferentials": [
+      "Posttransplant graft dysfunction: rejection vs biliary obstruction vs primary graft nonfunction vs vascular compromise (portal vein or hepatic artery thrombosis) vs drug hepatotoxicity vs recurrent primary disease vs viral hepatitis/CMV — these are clinically and biochemically difficult to distinguish, often requiring biliary imaging and percutaneous liver biopsy.",
+      "Recurrent primary biliary cholangitis vs chronic rejection (histologically nearly indistinguishable; a florid inflammatory bile duct lesion favors recurrent PBC but is not specific).",
+      "Recurrent autoimmune hepatitis or sclerosing cholangitis vs rejection or posttransplant bile duct injury."
     ],
-    [
-     "Primary Differentials",
-     "Posttransplant graft dysfunction: rejection vs biliary obstruction vs primary graft nonfunction vs vascular compromise (portal",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [],
+    "additionalInvestigations": [
+      "MELD/MELD-Na/MELD-3.0 score calculation (bilirubin, albumin, sodium, creatinine, INR) for allocation and prognosis; PELD for children under 12.",
+      "Serum bilirubin and aminotransferases — most reliable, though nonspecific, indicators of allograft rejection.",
+      "Percutaneous liver biopsy and radiographic visualization of the biliary tree to differentiate causes of graft dysfunction.",
+      "Donor screening: hemodynamic stability, oxygenation, absence of infection/abdominal trauma/hepatic dysfunction; serologic testing for HBV, HCV, HIV (infected organs now used selectively with matching and informed consent).",
+      "Recipient cardiopulmonary evaluation (especially age >70) to exclude ischemic cardiac disease; assessment of pulmonary artery pressure and intrapulmonary shunting.",
+      "anti-HBs titer monitoring (threshold ~100 mIU/mL) to guide HBIg dosing in hepatitis B recipients."
     ],
-    [
-     "Management Strategy",
-     "Maintain lifelong immunosuppression with a calcineurin inhibitor (tacrolimus or ciclosporin) backbone, usually with an",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute liver failure with impending cerebral edema — a transplant emergency requiring rapid donor identification before life-threatening complications set in.",
+      "Fever, right upper quadrant pain, and falling bile pigment/volume with rising bilirubin and aminotransferases — suggest acute allograft rejection.",
+      "Fibrosing cholestatic hepatitis (marked hyperbilirubinemia and prolonged prothrombin time out of proportion to modest aminotransferase rises) in recurrent hepatitis B — rapidly progressive liver failure.",
+      "Postoperative intraperitoneal bleeding raising intraabdominal pressure and reducing renal blood flow — reversible with laparotomy to evacuate clot and ligate the bleeding site.",
+      "New opportunistic infection beyond the first postoperative month in an immunosuppressed host demands prompt recognition and treatment.",
+      "Severe portopulmonary hypertension (mean pulmonary artery pressure >35 mmHg) or severe hypoxemia from right-to-left intrapulmonary shunts (PO2 <50 mmHg) — relative contraindications signaling high operative risk."
     ],
-    [
-     "Clinical Pitfall",
-     "Treating acute rejection with pulse glucocorticoids in HCV-infected recipients risks triggering severe recurrent allograft",
-     "Prevent diagnostic or management error"
+    "prognosis": "One-year survival is now about 85-90%, and 5-year survival exceeds 60%. Outcome correlates strongly with pretransplant status: patients still working or only partially disabled achieve roughly >85% 1-year survival; those needing continuous in-hospital care about 70%; those requiring ICU life support about 50%. High pretransplant disease severity (MELD >25) and high-risk features (malignancy, fulminant hepatitis, age >65, concurrent renal failure, respirator dependence, portal vein thrombosis, prior portacaval shunt or multiple right-upper-quadrant operations) reduce survival to about 60% at 1 year and 35% at 5 years. Survival after retransplantation for primary graft nonfunction is about 50%. Failures within the first 3 months are mainly technical, infectious, or hemorrhagic; later failures stem from infection, rejection, or recurrent disease (malignancy, viral hepatitis, return to alcohol use). Renal failure (18% at 5 years, 25% at 10 years) and cardiovascular disease are leading causes of late mortality.",
+    "pitfalls": [
+      "Treating acute rejection with pulse glucocorticoids in HCV-infected recipients risks triggering severe recurrent allograft hepatitis C (though DAAs now mitigate this concern).",
+      "Cyclosporine and tacrolimus must not be co-administered because of overlapping nephrotoxicity and because tacrolimus reduces cyclosporine clearance.",
+      "Prior extensive biliary/hepatobiliary surgery complicates transplantation and is a relative contraindication, so biliary diversion has been largely abandoned in sclerosing cholangitis candidates.",
+      "Cholangiocarcinoma recurs almost invariably; only highly selected stage I/II patients after neoadjuvant chemoradiation should be considered.",
+      "Eradicating HCV before transplant can lower the MELD score and paradoxically reduce allocation priority in patients who still need a graft for ongoing decompensation.",
+      "Advanced age alone is no longer an absolute contraindication, but in patients over 70 a thorough cardiac and comorbidity workup is mandatory.",
+      "Relying on short-term (2 months or less) HBIg, preoperative vaccination, or interferon alone is ineffective for preventing hepatitis B recurrence; long-term prophylaxis is required."
+    ],
+    "severityClassification": "Allocation and prognosis use the Model for End-Stage Liver Disease (MELD) score, a continuous scale from 6 to 40 (values above 40 counted as 40) derived from serum bilirubin, albumin, sodium, creatinine, and INR with a female adjustment; higher scores indicate greater illness severity. Variants include MELD-Na (2016) and MELD-3.0 (2023). PELD is used for candidates under 12. Status 1 (acute liver failure, primary graft nonfunction, hepatic artery thrombosis) supersedes MELD. The older Child-Turcotte-Pugh score (encephalopathy, ascites, bilirubin, albumin, prothrombin time) has been replaced for allocation. MELD exception points are granted (e.g., for HCC) via the National Liver Review Board.",
+    "references": [
+      "Harrison 22e p.2718",
+      "Harrison 22e p.2719",
+      "Harrison 22e p.2720",
+      "Harrison 22e p.2721",
+      "Harrison 22e p.2722",
+      "Harrison 22e p.2723",
+      "Harrison 22e p.2724",
+      "Harrison 22e p.2725"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Maintain lifelong immunosuppression with a calcineurin inhibitor (tacrolimus or ciclosporin) backbone, usually with an antiproliferative such as mycophenolate and tapering corticosteroids",
+      "Treat acute cellular rejection with pulsed corticosteroids, escalating to antithymocyte globulin for steroid-resistant rejection",
+      "Provide infection prophylaxis against opportunistic organisms, including cover for Pneumocystis, cytomegalovirus and fungal disease",
+      "Prevent recurrent disease, using hepatitis B immunoglobulin with antiviral therapy for HBV and direct-acting antivirals for HCV",
+      "Surveil for vascular and biliary complications (hepatic artery thrombosis, biliary strictures) and investigate graft dysfunction with biochemistry, imaging and liver biopsy",
+      "Monitor long term for immunosuppression-related harms such as renal impairment, metabolic syndrome and malignancy, and manage cardiovascular risk",
+      "Prioritise listing by MELD-based allocation and manage throughout within a specialist transplant multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for liver transplantation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "liver-transplantation-real-image",
-   "title": "Liver Transplantation: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "liver_transplantation-pathway",
+      "title": "Liver Transplantation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Orthotopic transplantation (native liver removed, donor organ placed in the same anatomic site) is the preferred and technically most advanced approach; 1-year survival has risen from roughly 30% in the 1970s to over 90% today, attributed",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute liver failure with impending cerebral edema - a transplant emergency requiring rapid donor identification before life-threatening complications set in.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MELD/MELD-Na/MELD-3.0 score calculation (bilirubin, albumin, sodium, creatinine, INR) for allocation and prognosis; PELD for children under 12., Serum bilirubin and aminotransferases - most reliable, though nonspecific,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Maintain lifelong immunosuppression with a calcineurin inhibitor (tacrolimus or ciclosporin) backbone, usually with an antiproliferative such as mycophenolate and tapering corticosteroids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating acute rejection with pulse glucocorticoids in HCV-infected recipients risks triggering severe recurrent allograft hepatitis C (though DAAs now mitigate this concern)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of liver transplantation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "liver_transplantation-matrix",
+      "title": "Liver Transplantation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Orthotopic transplantation (native liver removed, donor organ placed in the same anatomic site) is the preferred and technically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MELD/MELD-Na/MELD-3.0 score calculation (bilirubin, albumin, sodium, creatinine, INR) for allocation and prognosis; PELD for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Posttransplant graft dysfunction: rejection vs biliary obstruction vs primary graft nonfunction vs vascular compromise (portal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Maintain lifelong immunosuppression with a calcineurin inhibitor (tacrolimus or ciclosporin) backbone, usually with an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating acute rejection with pulse glucocorticoids in HCV-infected recipients risks triggering severe recurrent allograft",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for liver transplantation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Liver Transplantation",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/immunology-allergic-disorders/transplantation/liver-transplantation"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 132-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "liver_transplantation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Selection and listing criteria for liver transplantation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "MELD score range",
+          "cells": [
+            {
+              "text": "6 to 40",
+              "range": [
+                6,
+                40
+              ]
+            },
+            {
+              "text": "Bilirubin, albumin, sodium, creatinine, INR, sex; MELD 3.0 from age 12"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral threshold",
+          "cells": [
+            {
+              "text": "MELD 15 or more",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "{{hy:Below 15, transplant mortality exceeds waiting-list mortality}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Status 1",
+          "cells": [
+            {
+              "text": "Acute liver failure, primary graft nonfunction, hepatic artery thrombosis"
+            },
+            {
+              "text": "Supersedes MELD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milan criteria for HCC",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "One tumour under 5 cm, or up to 3 each under 3 cm",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "No vascular invasion or spread; downstaging allowed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Portopulmonary hypertension",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Mean PA pressure above 35 mmHg",
+              "op": ">",
+              "value": 35
+            },
+            {
+              "text": "High operative risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatopulmonary hypoxaemia",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "PaO2 below 50 mmHg",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "Severe shunting raises risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute liver failure, cerebral contraindication",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Sustained ICP above 50 mmHg or CPP below 40 mmHg",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Contraindication"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other contraindications",
+          "cells": [
+            {
+              "text": "Uncontrolled sepsis, extrahepatic cancer, active substance use, severe cardiopulmonary disease"
+            },
+            {
+              "text": "Also poor adherence or support"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Matching",
+          "cells": [
+            {
+              "text": "ABO compatibility and size"
+            },
+            {
+              "text": "HLA typing not required"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "liver_transplantation-ddx",
+      "kind": "ddx",
+      "title": "Causes of graft dysfunction after liver transplantation",
+      "rowHeader": "Condition",
+      "columns": [
+        "Typical timing and clue",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary nonfunction",
+          "cells": [
+            {
+              "text": "First days; 3 to 6% of grafts",
+              "range": [
+                3,
+                6
+              ]
+            },
+            {
+              "text": "Clinical; urgent relisting as Status 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hepatic artery or portal vein thrombosis",
+          "cells": [
+            {
+              "text": "Early; 6 to 9% of grafts"
+            },
+            {
+              "text": "Doppler ultrasound"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute T-cell mediated rejection",
+          "cells": [
+            {
+              "text": "First 3 months; fever, RUQ pain, rising bilirubin and enzymes"
+            },
+            {
+              "text": "{{hy:Liver biopsy}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biliary leak or stricture",
+          "cells": [
+            {
+              "text": "Early leak; strictures are commonest late graft failure cause"
+            },
+            {
+              "text": "Cholangiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CMV or other viral hepatitis",
+          "cells": [
+            {
+              "text": "1 to 4 months; fever with marrow suppression"
+            },
+            {
+              "text": "CMV PCR and biopsy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Calcineurin inhibitor toxicity",
+          "cells": [
+            {
+              "text": "High drug levels, renal and neuro toxicity"
+            },
+            {
+              "text": "Trough levels"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Recurrent primary disease",
+          "cells": [
+            {
+              "text": "HCV, HBV, PBC, PSC or AIH returning"
+            },
+            {
+              "text": "Serology, viral load, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritonitis",
+          "cells": [
+            {
+              "text": "Early after liver transplant"
+            },
+            {
+              "text": "Paracentesis and imaging"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "liver_transplantation-treatment",
+      "kind": "treatment",
+      "title": "Management after liver transplantation",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Induction",
+          "cells": [
+            {
+              "text": "Day of transplant"
+            },
+            {
+              "text": "Basiliximab or thymoglobulin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maintenance immunosuppression",
+          "cells": [
+            {
+              "text": "All recipients"
+            },
+            {
+              "text": "Tacrolimus or cyclosporine plus mycophenolate and tapering steroids; never combine two calcineurin inhibitors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "mTOR inhibitor",
+          "cells": [
+            {
+              "text": "Renal sparing or prior HCC, after about 1 month"
+            },
+            {
+              "text": "Avoid early: wound healing and hepatic artery thrombosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute cellular rejection",
+          "cells": [
+            {
+              "text": "Biopsy-proven TCMR"
+            },
+            {
+              "text": "IV glucocorticoids, antithymocyte globulin if steroid-resistant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibody-mediated rejection",
+          "cells": [
+            {
+              "text": "Donor-specific antibodies"
+            },
+            {
+              "text": "Plasma exchange, IVIG, rituximab"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Recurrent hepatitis C",
+          "cells": [
+            {
+              "text": "Treat within 2 weeks"
+            },
+            {
+              "text": "Glecaprevir-pibrentasvir or sofosbuvir-velpatasvir for 12 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hepatitis B prophylaxis",
+          "cells": [
+            {
+              "text": "HBV recipients"
+            },
+            {
+              "text": "Long-term HBIg with antiviral; recurrence about 1%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infection prophylaxis",
+          "cells": [
+            {
+              "text": "All recipients"
+            },
+            {
+              "text": "Pneumocystis, CMV and fungal cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug interactions",
+          "cells": [
+            {
+              "text": "Azoles, macrolides, diltiazem raise CNI levels; rifampin, phenytoin lower them"
+            },
+            {
+              "text": "Check troughs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives no immunosuppressant doses; regimens vary by centre."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "liver_transplantation-dx-mgmt",
+      "title": "Diagnosis and management of liver transplantation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Advanced liver disease, acute liver failure or HCC",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute liver failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "List as Status 1; urgent evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calculate MELD; HCC staging by Milan criteria",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MELD 15 or more, or HCC within Milan?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Medical care; reassess MELD over time",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Absolute contraindication present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Not a candidate; palliative or medical care",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "List; transplant when ABO and size matched graft available",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Induction then CNI, mycophenolate, steroid taper",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Rising bilirubin or enzymes after transplant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Doppler, cholangiography, CNI levels, biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Long-term surveillance for infection, renal and metabolic harm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

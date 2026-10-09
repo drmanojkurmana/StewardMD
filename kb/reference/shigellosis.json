@@ -1,193 +1,565 @@
 {
- "id": "shigellosis",
- "name": "Shigellosis",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 172,
- "page": 1322,
- "aliases": [
-  "bacillary dysentery"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "1322-1325",
-  "clinicalPearls": [
-   "Classic dysentery is a syndrome of fever, intestinal cramps, and frequent passage of small, bloody, mucopurulent stools; tenesmus is characteristic (p.1322).",
-   "Shigella has a very low infectious dose; experimental infection of volunteers occurs with as few as ~100 CFU, accounting for high attack rates in day-care centers (33-73%) and high secondary attack rates among family members (26-33%) (p.1322).",
-   "Spread is primarily fecal-oral via hand carriage; the organism survives gastric passage owing to acid resistance, and can also be transmitted sexually (p.1322-1323).",
-   "Shigellosis typically evolves through four phases: incubation (usually 1-4 days, up to 8), watery diarrhea, dysentery, and a postinfectious phase (p.1323).",
-   "Dysentery reflects invasion of the colonic mucosa, producing acute colitis mainly involving the distal colon and rectum, with uninterrupted small-volume bloody mucopurulent stools, tenesmus, and cramps (p.1323).",
-   "Of the four species, S. flexneri predominates in least-developed areas while S. sonnei is more common in industrialized/emerging economies; S. dysenteriae type 1 (Shiga-toxin producer) drives the most severe epidemic disease (p.1322).",
-   "With effective antibiotics, clinical improvement occurs within ~48 h, with fewer complications, shorter symptoms, and clearance of Shigella from stool; in the US every culture-confirmed case is recommended for treatment because of transmissibility (p.1324).",
-   "Reactive arthritis (arthritis, ocular inflammation, urethritis) can develop weeks to months after infection, almost exclusively after S. flexneri and in HLA-B27-positive patients (about 3% of S. flexneri infections) (p.1323-1324)."
+  "id": "shigellosis",
+  "name": "Shigellosis",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 172,
+  "page": 1322,
+  "aliases": [
+    "bacillary dysentery"
   ],
-  "pathophysiology": "Pathogenicity is governed by a ~214-kb virulence plasmid encoding a type III secretion system that injects effectors into host cells. After acid-resistant passage through the stomach, bacteria invade colonic epithelium either directly at crypt openings or after crossing M cells over mucosal lymphoid follicles; they induce apoptosis of resident macrophages, drive cytoskeletal uptake, lyse the containing vacuole to reach the cytosol, then spread cell-to-cell using actin-based motility. A massive cytokine-driven influx of polymorphonuclear leukocytes destabilizes the epithelial barrier and produces the acute colitis of shigellosis. Early watery diarrhea is attributed to combined enterotoxin (ShET-1) action and mucosal inflammation. In S. dysenteriae type 1, Shiga toxin (an A1-B5 toxin binding globotriaosylceramide and inhibiting protein synthesis via 28S rRNA N-glycosidase activity) is translocated into the circulation and, by acting on renal target cells, can cause hemolytic-uremic syndrome (p.1322-1323).",
-  "additionalDifferentials": [
-   "Salmonella infection",
-   "Campylobacter jejuni infection",
-   "Clostridium difficile colitis",
-   "Yersinia enterocolitica infection",
-   "Entamoeba histolytica (amebic dysentery)",
-   "Inflammatory bowel disease (first flare of Crohn's disease or ulcerative colitis), particularly in industrialized countries",
-   "Enteroinvasive E. coli (can cause a shigellosis-like dysentery)"
-  ],
-  "infectionMimics": [
-   "Salmonellosis",
-   "Campylobacter jejuni enteritis",
-   "Clostridium difficile colitis",
-   "Yersinia enterocolitica enterocolitis",
-   "Amebic dysentery (Entamoeba histolytica)",
-   "Enteroinvasive E. coli dysentery",
-   "Enterohemorrhagic E. coli (EHEC) infection (predominant cause of HUS in industrialized countries)"
-  ],
-  "nonInfectiousMimics": [
-   "Inflammatory bowel disease - Crohn's disease",
-   "Inflammatory bowel disease - ulcerative colitis"
-  ],
-  "additionalInvestigations": [
-   "Stool culture is the gold standard; sample the bloody/mucopurulent portion directly, or use rectal swabs (highest yield in the acute phase).",
-   "Because Shigella is fragile and dies during transport, use a holding medium (buffered glycerol saline or Cary-Blair) with prompt inoculation onto isolation media.",
-   "Use multiple media to raise yield: nonselective (bromocresol-purple lactose), low-selectivity (MacConkey, eosin-methylene blue), and high-selectivity (Hektoen, Salmonella-Shigella, or xylose-lysine-deoxycholate agar).",
-   "Microscopy of stool smears: bacterial enteroinvasive infection (including shigellosis) shows high PMN counts per field, whereas E. histolytica shows erythrophagocytic trophozoites with very few PMNs.",
-   "Identify shigellae as non-lactose-fermenting colonies that are glucose-positive (usually no gas), lactose-negative, H2S-negative, and nonmotile; confirm serogroup by slide agglutination.",
-   "Blood cultures are positive in fewer than 5% of cases but should be obtained when there is a clinical picture of severe sepsis.",
-   "Abdominal x-ray when toxic megacolon is suspected (transverse colon dilation, thumbprinting, loss of haustra, pseudopolyps; pneumoperitoneum if perforated).",
-   "In HUS: full blood count and smear (schizocytes), platelets, LDH, free hemoglobin, reticulocytes, creatinine; Coombs test (HUS is Coombs-negative).",
-   "PCR for Shigella virulence genes or mass spectrometry are available but not yet standardized for global use."
-  ],
-  "redFlags": [
-   "Nonbloody diarrhea, moderate-to-severe dehydration, bacteremia, absence of fever, abdominal tenderness, and rectal prolapse are risk factors for death in clinically severe cases.",
-   "Altered consciousness (seizures, delirium, coma), especially in children under 5, carries a poor prognosis.",
-   "Abdominal distention and tenderness suggesting toxic megacolon, with or without peritonitis.",
-   "Pallor, asthenia, irritability, oliguria, increasing edema, or mucosal bleeding heralding hemolytic-uremic syndrome (most often after several days of diarrhea).",
-   "Fever persisting beyond 48-72 h in toxic megacolon raises the possibility of local perforation or abscess.",
-   "Severe, unusual manifestations such as meningitis in the absence of serious malnutrition may indicate an inborn innate-immune defect (e.g., IRAK-4 deficiency) and warrant genetic investigation."
-  ],
-  "prognosis": "Most episodes are self-limited and resolve without treatment within about 1 week; with appropriate therapy recovery occurs within a few days to a week, usually without sequelae. Acute life-threatening complications occur most often in children under 5 (especially the malnourished) and the elderly. In HUS, acute renal failure occurs in 55-70% of cases but renal function recovers in most (up to ~70%). S. dysenteriae type 1 epidemics historically caused high mortality. Shigellosis is a major contributor to stunted growth among children in endemic regions because of the exudative enteropathy and anorexia it causes.",
-  "pitfalls": [
-   "Avoid antimotility agents in bloody diarrhea: they have been implicated in prolonged fever in shigellosis, are suspected of increasing the risk of toxic megacolon, and were implicated in HUS in children with EHEC infection.",
-   "Because shigellosis often manifests only as watery diarrhea, systematic attempts to isolate Shigella are necessary - a watery presentation does not exclude the diagnosis.",
-   "Shigella is fragile and commonly disappears during transport with changes in temperature and pH; failure to use a holding medium and prompt inoculation leads to false-negative cultures.",
-   "Negative initial blood cultures do not exclude shigellosis (positive in fewer than 5% of cases).",
-   "Predisposing factors for toxic megacolon - hypokalemia and use of opioids, anticholinergics, loperamide, psyllium seeds, and antidepressants - should be sought and addressed.",
-   "In HUS, oral rehydration solutions and potassium-rich nutrition must be discontinued (water restriction is required), in contrast to routine rehydration management.",
-   "Bacteriologic proof in mild adult cases often arrives only after symptoms have resolved, so empiric decisions cannot await culture in fragile patients."
-  ],
-  "severityClassification": "Harrison does not provide a formal grading scale. Severity is described as depending on infecting serotype and, more importantly, on host age, immunologic and nutritional status. The clinical course is staged in four phases (incubation, watery diarrhea, dysentery, postinfectious). Severe/complicated disease is recognized by markers of poor outcome (nonbloody diarrhea, moderate-to-severe dehydration, bacteremia, absence of fever, abdominal tenderness, rectal prolapse, altered consciousness) and by major complications: intestinal (toxic megacolon, perforation, rectal prolapse), metabolic (hypoglycemia, hyponatremia, dehydration), and HUS (in S. dysenteriae type 1).",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22nd edition, Chapter 172: Shigellosis (Sansonetti PJ, Bergounioux J), pp.1322-1325.",
-   "Kotloff KL et al. The incidence, aetiology, and adverse clinical consequences of less severe diarrhoeal episodes among infants and children residing in low-income and middle-income countries (GEMS follow-on). Lancet Glob Health 7:E568, 2019.",
-   "WHO. Guidelines for the control of shigellosis, including epidemics due to Shigella dysenteriae type 1.",
-   "Niyogi SK. Shigellosis. J Microbiol 43:133, 2005."
-  ],
-  "crossLinks": [],
-  "management": [
-   "Oral rehydration with fluid and electrolyte correction as the foundation of care",
-   "Empirical antibiotics for moderate-to-severe or dysenteric disease, guided by local resistance, typically a fluoroquinolone or azithromycin, with ceftriaxone as an alternative",
-   "Narrow antibiotic therapy to susceptibility once stool culture and sensitivities return",
-   "Avoid antimotility agents, which may worsen invasive colitis and prolong illness",
-   "Strict hand hygiene, isolation, and infection-control measures given the low infectious dose and faecal-oral spread, with exclusion from food-handling and childcare until clear",
-   "Monitor for complications, especially in young children and the malnourished, including haemolytic uraemic syndrome with Shiga-toxin-producing S. dysenteriae type 1",
-   "Notify public health and manage outbreaks",
-   "Escalate for severe sepsis, profound dehydration, or complications"
-  ]
- },
- "algorithms": [
-  {
-   "id": "shigellosis-pathway",
-   "title": "Shigellosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic dysentery is a syndrome of fever, intestinal cramps, and frequent passage of small, bloody, mucopurulent stools; tenesmus is characteristic (p.1322).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Nonbloody diarrhea, moderate-to-severe dehydration, bacteremia, absence of fever, abdominal tenderness, and rectal prolapse are risk factors for death in clinically severe cases.",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool culture is the gold standard; sample the bloody/mucopurulent portion directly, or use rectal swabs (highest yield in the acute phase)., Because Shigella is fragile and dies during transport, use a holding medium"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Oral rehydration with fluid and electrolyte correction as the foundation of care"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Avoid antimotility agents in bloody diarrhea: they have been implicated in prolonged fever in shigellosis, are suspected of increasing the risk of toxic megacolon, and were implicated in HUS in children with EHEC"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of shigellosis."
-  }
- ],
- "tables": [
-  {
-   "id": "shigellosis-matrix",
-   "title": "Shigellosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic dysentery is a syndrome of fever, intestinal cramps, and frequent passage of small, bloody, mucopurulent stools; tenesmus",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "1322-1325",
+    "clinicalPearls": [
+      "Classic dysentery is a syndrome of fever, intestinal cramps, and frequent passage of small, bloody, mucopurulent stools; tenesmus is characteristic (p.1322).",
+      "Shigella has a very low infectious dose; experimental infection of volunteers occurs with as few as ~100 CFU, accounting for high attack rates in day-care centers (33-73%) and high secondary attack rates among family members (26-33%) (p.1322).",
+      "Spread is primarily fecal-oral via hand carriage; the organism survives gastric passage owing to acid resistance, and can also be transmitted sexually (p.1322-1323).",
+      "Shigellosis typically evolves through four phases: incubation (usually 1-4 days, up to 8), watery diarrhea, dysentery, and a postinfectious phase (p.1323).",
+      "Dysentery reflects invasion of the colonic mucosa, producing acute colitis mainly involving the distal colon and rectum, with uninterrupted small-volume bloody mucopurulent stools, tenesmus, and cramps (p.1323).",
+      "Of the four species, S. flexneri predominates in least-developed areas while S. sonnei is more common in industrialized/emerging economies; S. dysenteriae type 1 (Shiga-toxin producer) drives the most severe epidemic disease (p.1322).",
+      "With effective antibiotics, clinical improvement occurs within ~48 h, with fewer complications, shorter symptoms, and clearance of Shigella from stool; in the US every culture-confirmed case is recommended for treatment because of transmissibility (p.1324).",
+      "Reactive arthritis (arthritis, ocular inflammation, urethritis) can develop weeks to months after infection, almost exclusively after S. flexneri and in HLA-B27-positive patients (about 3% of S. flexneri infections) (p.1323-1324)."
     ],
-    [
-     "Key Investigations",
-     "Stool culture is the gold standard; sample the bloody/mucopurulent portion directly, or use rectal swabs (highest yield in the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pathogenicity is governed by a ~214-kb virulence plasmid encoding a type III secretion system that injects effectors into host cells. After acid-resistant passage through the stomach, bacteria invade colonic epithelium either directly at crypt openings or after crossing M cells over mucosal lymphoid follicles; they induce apoptosis of resident macrophages, drive cytoskeletal uptake, lyse the containing vacuole to reach the cytosol, then spread cell-to-cell using actin-based motility. A massive cytokine-driven influx of polymorphonuclear leukocytes destabilizes the epithelial barrier and produces the acute colitis of shigellosis. Early watery diarrhea is attributed to combined enterotoxin (ShET-1) action and mucosal inflammation. In S. dysenteriae type 1, Shiga toxin (an A1-B5 toxin binding globotriaosylceramide and inhibiting protein synthesis via 28S rRNA N-glycosidase activity) is translocated into the circulation and, by acting on renal target cells, can cause hemolytic-uremic syndrome (p.1322-1323).",
+    "additionalDifferentials": [
+      "Salmonella infection",
+      "Campylobacter jejuni infection",
+      "Clostridium difficile colitis",
+      "Yersinia enterocolitica infection",
+      "Entamoeba histolytica (amebic dysentery)",
+      "Inflammatory bowel disease (first flare of Crohn's disease or ulcerative colitis), particularly in industrialized countries",
+      "Enteroinvasive E. coli (can cause a shigellosis-like dysentery)"
     ],
-    [
-     "Primary Differentials",
-     "Salmonella infection, Campylobacter jejuni infection, Clostridium difficile colitis",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Salmonellosis",
+      "Campylobacter jejuni enteritis",
+      "Clostridium difficile colitis",
+      "Yersinia enterocolitica enterocolitis",
+      "Amebic dysentery (Entamoeba histolytica)",
+      "Enteroinvasive E. coli dysentery",
+      "Enterohemorrhagic E. coli (EHEC) infection (predominant cause of HUS in industrialized countries)"
     ],
-    [
-     "Management Strategy",
-     "Oral rehydration with fluid and electrolyte correction as the foundation of care",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Inflammatory bowel disease - Crohn's disease",
+      "Inflammatory bowel disease - ulcerative colitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Avoid antimotility agents in bloody diarrhea: they have been implicated in prolonged fever in shigellosis, are suspected of",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Stool culture is the gold standard; sample the bloody/mucopurulent portion directly, or use rectal swabs (highest yield in the acute phase).",
+      "Because Shigella is fragile and dies during transport, use a holding medium (buffered glycerol saline or Cary-Blair) with prompt inoculation onto isolation media.",
+      "Use multiple media to raise yield: nonselective (bromocresol-purple lactose), low-selectivity (MacConkey, eosin-methylene blue), and high-selectivity (Hektoen, Salmonella-Shigella, or xylose-lysine-deoxycholate agar).",
+      "Microscopy of stool smears: bacterial enteroinvasive infection (including shigellosis) shows high PMN counts per field, whereas E. histolytica shows erythrophagocytic trophozoites with very few PMNs.",
+      "Identify shigellae as non-lactose-fermenting colonies that are glucose-positive (usually no gas), lactose-negative, H2S-negative, and nonmotile; confirm serogroup by slide agglutination.",
+      "Blood cultures are positive in fewer than 5% of cases but should be obtained when there is a clinical picture of severe sepsis.",
+      "Abdominal x-ray when toxic megacolon is suspected (transverse colon dilation, thumbprinting, loss of haustra, pseudopolyps; pneumoperitoneum if perforated).",
+      "In HUS: full blood count and smear (schizocytes), platelets, LDH, free hemoglobin, reticulocytes, creatinine; Coombs test (HUS is Coombs-negative).",
+      "PCR for Shigella virulence genes or mass spectrometry are available but not yet standardized for global use."
+    ],
+    "redFlags": [
+      "Nonbloody diarrhea, moderate-to-severe dehydration, bacteremia, absence of fever, abdominal tenderness, and rectal prolapse are risk factors for death in clinically severe cases.",
+      "Altered consciousness (seizures, delirium, coma), especially in children under 5, carries a poor prognosis.",
+      "Abdominal distention and tenderness suggesting toxic megacolon, with or without peritonitis.",
+      "Pallor, asthenia, irritability, oliguria, increasing edema, or mucosal bleeding heralding hemolytic-uremic syndrome (most often after several days of diarrhea).",
+      "Fever persisting beyond 48-72 h in toxic megacolon raises the possibility of local perforation or abscess.",
+      "Severe, unusual manifestations such as meningitis in the absence of serious malnutrition may indicate an inborn innate-immune defect (e.g., IRAK-4 deficiency) and warrant genetic investigation."
+    ],
+    "prognosis": "Most episodes are self-limited and resolve without treatment within about 1 week; with appropriate therapy recovery occurs within a few days to a week, usually without sequelae. Acute life-threatening complications occur most often in children under 5 (especially the malnourished) and the elderly. In HUS, acute renal failure occurs in 55-70% of cases but renal function recovers in most (up to ~70%). S. dysenteriae type 1 epidemics historically caused high mortality. Shigellosis is a major contributor to stunted growth among children in endemic regions because of the exudative enteropathy and anorexia it causes.",
+    "pitfalls": [
+      "Avoid antimotility agents in bloody diarrhea: they have been implicated in prolonged fever in shigellosis, are suspected of increasing the risk of toxic megacolon, and were implicated in HUS in children with EHEC infection.",
+      "Because shigellosis often manifests only as watery diarrhea, systematic attempts to isolate Shigella are necessary - a watery presentation does not exclude the diagnosis.",
+      "Shigella is fragile and commonly disappears during transport with changes in temperature and pH; failure to use a holding medium and prompt inoculation leads to false-negative cultures.",
+      "Negative initial blood cultures do not exclude shigellosis (positive in fewer than 5% of cases).",
+      "Predisposing factors for toxic megacolon - hypokalemia and use of opioids, anticholinergics, loperamide, psyllium seeds, and antidepressants - should be sought and addressed.",
+      "In HUS, oral rehydration solutions and potassium-rich nutrition must be discontinued (water restriction is required), in contrast to routine rehydration management.",
+      "Bacteriologic proof in mild adult cases often arrives only after symptoms have resolved, so empiric decisions cannot await culture in fragile patients."
+    ],
+    "severityClassification": "Harrison does not provide a formal grading scale. Severity is described as depending on infecting serotype and, more importantly, on host age, immunologic and nutritional status. The clinical course is staged in four phases (incubation, watery diarrhea, dysentery, postinfectious). Severe/complicated disease is recognized by markers of poor outcome (nonbloody diarrhea, moderate-to-severe dehydration, bacteremia, absence of fever, abdominal tenderness, rectal prolapse, altered consciousness) and by major complications: intestinal (toxic megacolon, perforation, rectal prolapse), metabolic (hypoglycemia, hyponatremia, dehydration), and HUS (in S. dysenteriae type 1).",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22nd edition, Chapter 172: Shigellosis (Sansonetti PJ, Bergounioux J), pp.1322-1325.",
+      "Kotloff KL et al. The incidence, aetiology, and adverse clinical consequences of less severe diarrhoeal episodes among infants and children residing in low-income and middle-income countries (GEMS follow-on). Lancet Glob Health 7:E568, 2019.",
+      "WHO. Guidelines for the control of shigellosis, including epidemics due to Shigella dysenteriae type 1.",
+      "Niyogi SK. Shigellosis. J Microbiol 43:133, 2005."
+    ],
+    "crossLinks": [],
+    "management": [
+      "Oral rehydration with fluid and electrolyte correction as the foundation of care",
+      "Empirical antibiotics for moderate-to-severe or dysenteric disease, guided by local resistance, typically a fluoroquinolone or azithromycin, with ceftriaxone as an alternative",
+      "Narrow antibiotic therapy to susceptibility once stool culture and sensitivities return",
+      "Avoid antimotility agents, which may worsen invasive colitis and prolong illness",
+      "Strict hand hygiene, isolation, and infection-control measures given the low infectious dose and faecal-oral spread, with exclusion from food-handling and childcare until clear",
+      "Monitor for complications, especially in young children and the malnourished, including haemolytic uraemic syndrome with Shiga-toxin-producing S. dysenteriae type 1",
+      "Notify public health and manage outbreaks",
+      "Escalate for severe sepsis, profound dehydration, or complications"
     ]
-   ],
-   "caption": "Overview comparison matrix for shigellosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "shigellosis-real-image",
-   "title": "Shigellosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "shigellosis-pathway",
+      "title": "Shigellosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic dysentery is a syndrome of fever, intestinal cramps, and frequent passage of small, bloody, mucopurulent stools; tenesmus is characteristic (p.1322).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Nonbloody diarrhea, moderate-to-severe dehydration, bacteremia, absence of fever, abdominal tenderness, and rectal prolapse are risk factors for death in clinically severe cases.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool culture is the gold standard; sample the bloody/mucopurulent portion directly, or use rectal swabs (highest yield in the acute phase)., Because Shigella is fragile and dies during transport, use a holding medium"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Oral rehydration with fluid and electrolyte correction as the foundation of care"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Avoid antimotility agents in bloody diarrhea: they have been implicated in prolonged fever in shigellosis, are suspected of increasing the risk of toxic megacolon, and were implicated in HUS in children with EHEC"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of shigellosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "shigellosis-matrix",
+      "title": "Shigellosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic dysentery is a syndrome of fever, intestinal cramps, and frequent passage of small, bloody, mucopurulent stools; tenesmus",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool culture is the gold standard; sample the bloody/mucopurulent portion directly, or use rectal swabs (highest yield in the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Salmonella infection, Campylobacter jejuni infection, Clostridium difficile colitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Oral rehydration with fluid and electrolyte correction as the foundation of care",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Avoid antimotility agents in bloody diarrhea: they have been implicated in prolonged fever in shigellosis, are suspected of",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for shigellosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Shigellosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/shigellosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "shigellosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing shigellosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Dysentery",
+          "cells": [
+            {
+              "text": "Fever, cramps, tenesmus, small bloody mucopurulent stools"
+            },
+            {
+              "text": "Classic picture; may start as watery diarrhea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious dose",
+          "unit": "CFU",
+          "cells": [
+            {
+              "text": "About 100 organisms",
+              "op": "=",
+              "value": 100
+            },
+            {
+              "text": "High attack rates in day care (33 to 73%) and households (26 to 33%)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Food sources",
+          "cells": [
+            {
+              "text": "Potato or egg salad, lettuce, raw vegetables"
+            },
+            {
+              "text": "Incubation over 16 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stool culture",
+          "cells": [
+            {
+              "text": "Gold standard; sample bloody mucus or rectal swab"
+            },
+            {
+              "text": "{{hy:Use transport medium; Shigella dies in transit}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Many neutrophils and red cells"
+            },
+            {
+              "text": "Supports invasive colitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poor-prognosis markers",
+          "cells": [
+            {
+              "text": "Moderate to severe dehydration, bacteremia, no fever, abdominal tenderness, rectal prolapse, altered consciousness"
+            },
+            {
+              "text": "Admit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Susceptibility testing",
+          "cells": [
+            {
+              "text": "Common resistance to ampicillin, TMP-SMX, tetracycline; XDR strains rising"
+            },
+            {
+              "text": "Guides therapy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "shigellosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic shigellosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Enterohemorrhagic E. coli",
+          "cells": [
+            {
+              "text": "Bloody diarrhea with little fever, HUS"
+            },
+            {
+              "text": "Shiga toxin testing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Campylobacter enteritis",
+          "cells": [
+            {
+              "text": "Poultry or raw milk; inflammatory diarrhea"
+            },
+            {
+              "text": "Stool culture or PCR"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nontyphoidal salmonellosis",
+          "cells": [
+            {
+              "text": "Eggs and poultry; less tenesmus"
+            },
+            {
+              "text": "Stool culture"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Amebic dysentery",
+          "cells": [
+            {
+              "text": "Gradual onset, less fever, travel"
+            },
+            {
+              "text": "E. histolytica antigen or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vibrio parahaemolyticus",
+          "cells": [
+            {
+              "text": "Seafood, dysentery"
+            },
+            {
+              "text": "Stool culture on TCBS"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Chronic or relapsing course"
+            },
+            {
+              "text": "Colonoscopy and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C. difficile colitis",
+          "cells": [
+            {
+              "text": "Recent antibiotics"
+            },
+            {
+              "text": "C. difficile toxin or PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "shigellosis-treatment",
+      "kind": "treatment",
+      "title": "Treating shigellosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral rehydration and electrolytes",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Foundation of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciprofloxacin or another fluoroquinolone, or azithromycin",
+          "cells": [
+            {
+              "text": "Adults with moderate or severe disease, elderly, immunocompromised"
+            },
+            {
+              "text": "Choose by local resistance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin orally or ceftriaxone IV",
+          "cells": [
+            {
+              "text": "Children"
+            },
+            {
+              "text": "Ceftriaxone also for severe adult disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carbapenem with ID advice",
+          "cells": [
+            {
+              "text": "Extensively drug-resistant Shigella"
+            },
+            {
+              "text": "Guided by susceptibility"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No antimotility agents",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "{{hy:Can worsen invasive colitis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand hygiene and exclusion",
+          "cells": [
+            {
+              "text": "Cases, food handlers, day-care staff"
+            },
+            {
+              "text": "Low infectious dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor for complications",
+          "cells": [
+            {
+              "text": "Children with S. dysenteriae type 1"
+            },
+            {
+              "text": "HUS about 7 days after onset; reactive arthritis in HLA-B27"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "shigellosis-dx-mgmt",
+      "title": "Diagnosis and management of shigellosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bloody mucoid diarrhea with fever and tenesmus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Stool culture in transport medium; assess hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe disease, dehydration or poor-prognosis signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Admit; IV fluids; ceftriaxone; watch for HUS and toxic megacolon",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Child, elderly, immunocompromised or moderate illness?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Oral azithromycin or fluoroquinolone; adjust to susceptibility",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Oral rehydration; hygiene; no antimotility drugs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

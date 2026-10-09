@@ -261,25 +261,670 @@
       "caption": "Diagnostic and clinical overview matrix for cns tuberculosis (tb meningitis)."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "cns-tb-real-image",
-      "title": "CNS Tuberculosis (TB Meningitis): Diagnostic Chest Radiograph",
-      "type": "xray",
-      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ATS/CDC/IDSA guideline, Treatment of drug-susceptible tuberculosis, 2016",
+      "url": "https://academic.oup.com/cid/article/63/7/e147/2196792",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Extrapulmonary Tuberculosis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/mycobacteria/extrapulmonary-tuberculosis-tb",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 165-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CNS_TB-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing tuberculous meningitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Parenchyma & Airspaces",
-          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+          "parameter": "Tempo of illness",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Subacute, evolving over 1 to 2 weeks after a prodrome",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "Longer course than bacterial meningitis"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Bronchovascular Tree",
-          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+          "parameter": "Cranial nerve palsy",
+          "cells": [
+            {
+              "text": "Ocular nerves most often"
+            },
+            {
+              "text": "Basal meningeal involvement"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Pleural Margins",
-          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+          "parameter": "CSF glucose",
+          "unit": "% of serum",
+          "cells": [
+            {
+              "text": "<50% of serum glucose with raised protein",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "{{hy:Very suggestive with lymphocytic pleocytosis}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CSF cell type",
+          "cells": [
+            {
+              "text": "Lymphocytic; may be neutrophilic early"
+            },
+            {
+              "text": "Any single CSF parameter can be normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF AFB smear",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 10% to 40% of adults",
+              "range": [
+                10,
+                40
+              ]
+            },
+            {
+              "text": "Send the last tube or any pellicle clot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF mycobacterial culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 50% to 80%; takes 4 to 8 weeks",
+              "range": [
+                50,
+                80
+              ]
+            },
+            {
+              "text": "Gold standard but slow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF Xpert MTB/RIF or Ultra",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity up to 80%",
+              "op": "<=",
+              "value": 80
+            },
+            {
+              "text": "{{hy:Preferred first test; negative does not exclude}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NAAT specificity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">95",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Positive result almost always confirms TB"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chest x-ray",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Old pulmonary lesion or miliary pattern in more than half",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Supports diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI brain",
+          "cells": [
+            {
+              "text": "Hydrocephalus, basal cistern or ependymal enhancement; ring lesions suggest tuberculoma"
+            },
+            {
+              "text": "Tuberculoma needs biopsy to confirm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical stage",
+          "cells": [
+            {
+              "text": "1: clear sensorium, abnormal CSF; 2: drowsy or stuporous with focal signs; 3: coma"
+            },
+            {
+              "text": "Outcome worsens with later stage"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "CNS_TB-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic tuberculous meningitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cryptococcal meningitis",
+          "cells": [
+            {
+              "text": "Lymphocytic CSF with low glucose, often in HIV"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histoplasma or Coccidioides meningitis",
+          "cells": [
+            {
+              "text": "Subacute fungal meningitis in endemic areas"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Listeria meningoencephalitis",
+          "cells": [
+            {
+              "text": "Low CSF glucose; older or immunocompromised"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partially treated or early bacterial meningitis",
+          "cells": [
+            {
+              "text": "Early TB CSF can be neutrophilic"
+            },
+            {
+              "text": "Repeat lumbar puncture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral meningitis (mumps, LCMV, HSV-2, VZV, enterovirus)",
+          "cells": [
+            {
+              "text": "Occasionally low CSF glucose"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosyphilis",
+          "cells": [
+            {
+              "text": "Chronic meningitis picture"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neoplastic meningitis or neurosarcoidosis",
+          "cells": [
+            {
+              "text": "Non-infective lymphocytic, low-glucose CSF"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Separating tests marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "CNS_TB-treatment",
+      "kind": "treatment",
+      "title": "Treatment of drug-susceptible tuberculous meningitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empiric anti-TB therapy",
+          "cells": [
+            {
+              "text": "{{hy:High clinical suspicion, without waiting for culture}}"
+            },
+            {
+              "text": "Smear yield is low and culture slow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isoniazid, rifampin, pyrazinamide, ethambutol",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Intensive phase, 2 months",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Source gives no doses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isoniazid and rifampin",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Continuation for 7 to 10 months",
+              "range": [
+                7,
+                10
+              ]
+            },
+            {
+              "text": "Total about 9 to 12 months; optimal length undefined"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dexamethasone or prednisolone",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "All patients; tapered over 6 to 8 weeks",
+              "range": [
+                6,
+                8
+              ]
+            },
+            {
+              "text": "Strong recommendation; benefit unclear in HIV in one trial"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Repeat lumbar punctures",
+          "cells": [
+            {
+              "text": "Early in therapy"
+            },
+            {
+              "text": "Follow CSF cells, glucose and protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antiretroviral therapy timing",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "HIV with TB meningitis: not in first 8 weeks",
+              "op": ">=",
+              "value": 8
+            },
+            {
+              "text": "Exception to early ART for other TB"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Neurological sequelae occur in about 25% of treated cases, mostly when diagnosis was delayed (Harrison). Merck states total meningeal treatment of 9 to 12 months, matching 2 plus 7 to 10 months."
+    },
+    {
+      "id": "CNS_TB-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Risk factors for active tuberculosis after infection",
+      "rowHeader": "Factor",
+      "columns": [
+        "Relative risk/odds"
+      ],
+      "rows": [
+        {
+          "parameter": "Recent infection (<1 year)",
+          "cells": [
+            {
+              "text": "12.9"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Fibrotic lesions (spontaneously healed)",
+          "cells": [
+            {
+              "text": "2 to 20"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "HIV infection",
+          "cells": [
+            {
+              "text": "21 to >30"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Silicosis",
+          "cells": [
+            {
+              "text": "30"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Chronic renal failure/hemodialysis",
+          "cells": [
+            {
+              "text": "10 to 25"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Diabetes",
+          "cells": [
+            {
+              "text": "2 to 4"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "IV drug use",
+          "cells": [
+            {
+              "text": "10 to 30"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Immunosuppressive treatment",
+          "cells": [
+            {
+              "text": "10"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Gastrectomy",
+          "cells": [
+            {
+              "text": "2 to 5"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Jejunoileal bypass",
+          "cells": [
+            {
+              "text": "30 to 60"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Posttransplantation period (renal, cardiac)",
+          "cells": [
+            {
+              "text": "20 to 70"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Tobacco smoking",
+          "cells": [
+            {
+              "text": "2 to 3"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Malnutrition and severe underweight",
+          "cells": [
+            {
+              "text": "2"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "HIV, silicosis, renal failure, diabetes, IV drug use, immunosuppressive treatment, gastrectomy, jejunoileal bypass and transplantation are grouped under comorbidity in the source. Footnote (a) on the risk measure is not legible."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CNS_TB-dx-mgmt",
+      "title": "Diagnosis and management of tuberculous meningitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute headache, fever, altered mentation or cranial nerve palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CT or MRI brain for hydrocephalus, basal enhancement, tuberculoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Lumbar puncture: cells, protein, glucose, AFB smear, Xpert, culture",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Lymphocytic CSF with glucose under 50% of serum and high protein?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Pursue other causes; repeat LP if suspicion persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Xpert positive or strong clinical suspicion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Workup for fungal, Listeria, neoplastic or other mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start HRZE for 2 months plus tapering corticosteroid",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "HIV positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Delay ART until after the first 8 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Repeat LPs early; watch for hydrocephalus and infarcts",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue isoniazid and rifampin 7 to 10 more months",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "If safe"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
         }
       ]
     }

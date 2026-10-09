@@ -1,174 +1,470 @@
 {
- "id": "sengers_syndrome",
- "name": "Sengers syndrome",
- "aliases": [
-  "Cataract-hypertrophic cardiomyopathy-mitochondrial myopathy",
-  "AGK deficiency",
-  "Acylglycerol kinase deficiency",
-  "AGK"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Mitochondrial Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews mitochondrial disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The defining combination is congenital cataracts, hypertrophic cardiomyopathy, skeletal (mitochondrial) myopathy and exercise intolerance with lactic acidosis",
-   "It is an autosomal recessive nuclear disorder caused by mutations in AGK, encoding acylglycerol kinase, a mitochondrial protein involved in lipid metabolism and mitochondrial protein import",
-   "Congenital or early cataracts are a consistent and often presenting feature that should prompt cardiac evaluation",
-   "Lactate rises markedly with exertion despite normal cognition, and the myopathy causes hypotonia and fatigue",
-   "The hypertrophic cardiomyopathy is the principal determinant of prognosis and can cause heart failure or arrhythmia",
-   "A severe neonatal form presents early with profound cardiomyopathy and lactic acidosis, while a milder form allows survival into adulthood",
-   "Care is supportive with cataract surgery, cardiac management and avoidance of mitochondrial toxins; intellect is typically preserved"
+  "id": "sengers_syndrome",
+  "name": "Sengers syndrome",
+  "aliases": [
+    "Cataract-hypertrophic cardiomyopathy-mitochondrial myopathy",
+    "AGK deficiency",
+    "Acylglycerol kinase deficiency",
+    "AGK"
   ],
-  "pathophysiology": "Sengers syndrome is caused by recessive loss-of-function mutations in AGK, which encodes acylglycerol kinase. This mitochondrial enzyme phosphorylates monoacylglycerol and diacylglycerol and also functions as a component of the TIM22 carrier import machinery that inserts certain proteins, including the adenine nucleotide translocator, into the inner mitochondrial membrane. Loss of AGK disturbs mitochondrial membrane lipid composition and impairs import of key carriers, secondarily compromising oxidative phosphorylation and ATP export. Tissues with high and sustained energy demand, notably cardiac and skeletal muscle, and the metabolically specialised lens are preferentially affected, giving the cardiomyopathy, myopathy and cataracts.",
-  "additionalDifferentials": [
-   "Other mitochondrial cardiomyopathies and Barth syndrome",
-   "Infantile Pompe disease and other metabolic cardiomyopathies",
-   "Sarcomeric (genetic) hypertrophic cardiomyopathy without metabolic features",
-   "Congenital cataract syndromes of other cause",
-   "Congenital myopathies and myasthenic syndromes",
-   "Other combined oxidative phosphorylation deficiency disorders"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography and ECG to detect and monitor hypertrophic cardiomyopathy and arrhythmia",
-   "Resting and post-exercise blood lactate",
-   "Ophthalmological examination for congenital or early cataract",
-   "AGK molecular genetic testing",
-   "Skeletal muscle biopsy for histology and respiratory-chain enzymology",
-   "Creatine kinase and assessment of the myopathy"
-  ],
-  "redFlags": [
-   "Decompensated hypertrophic cardiomyopathy or heart failure",
-   "Life-threatening arrhythmia",
-   "Severe neonatal lactic acidosis with cardiorespiratory compromise",
-   "Rapid clinical deterioration during intercurrent illness or metabolic stress"
-  ],
-  "prognosis": "Prognosis is bimodal: the severe neonatal form usually causes death in infancy from cardiomyopathy and lactic acidosis, whereas the milder form permits survival into adulthood with cataract, myopathy and manageable cardiac disease, cardiac status being the main prognostic factor.",
-  "pitfalls": [
-   "Treating congenital cataracts in isolation without evaluating the heart, thereby missing the cardiomyopathy",
-   "Attributing the hypertrophic cardiomyopathy to a sarcomeric cause and overlooking a metabolic origin",
-   "Assuming cognitive impairment, when intellect is characteristically preserved",
-   "Exposing patients to mitochondrial toxins that can worsen the energy deficit"
-  ],
-  "references": [
-   "OMIM: Sengers Syndrome",
-   "GeneReviews: mitochondrial disease overview"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive management of this AGK-related mitochondrial disorder, for which no curative therapy exists",
-   "Arrange surgical extraction of congenital cataracts to preserve vision and support development",
-   "Treat the hypertrophic cardiomyopathy and any arrhythmia with heart failure and antiarrhythmic therapy, the principal determinant of prognosis",
-   "Avoid prolonged fasting and metabolic stressors, and manage exercise intolerance and lactic acidosis with graded activity and carbohydrate support",
-   "Undertake surveillance with serial echocardiography, ECG, and resting and post-exercise lactate monitoring",
-   "Coordinate multidisciplinary care across metabolic or mitochondrial medicine, cardiology, and ophthalmology",
-   "Offer genetic counselling and family screening for this autosomal recessive condition, including reproductive options"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sengers_syndrome-pathway",
-   "title": "Sengers syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The defining combination is congenital cataracts, hypertrophic cardiomyopathy, skeletal (mitochondrial) myopathy and exercise intolerance with lactic acidosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Decompensated hypertrophic cardiomyopathy or heart failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography and ECG to detect and monitor hypertrophic cardiomyopathy and arrhythmia, Resting and post-exercise blood lactate, Ophthalmological examination for congenital or early cataract"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive management of this AGK-related mitochondrial disorder, for which no curative therapy exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating congenital cataracts in isolation without evaluating the heart, thereby missing the cardiomyopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sengers syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "sengers_syndrome-matrix",
-   "title": "Sengers syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The defining combination is congenital cataracts, hypertrophic cardiomyopathy, skeletal (mitochondrial) myopathy and exercise",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Mitochondrial Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews mitochondrial disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The defining combination is congenital cataracts, hypertrophic cardiomyopathy, skeletal (mitochondrial) myopathy and exercise intolerance with lactic acidosis",
+      "It is an autosomal recessive nuclear disorder caused by mutations in AGK, encoding acylglycerol kinase, a mitochondrial protein involved in lipid metabolism and mitochondrial protein import",
+      "Congenital or early cataracts are a consistent and often presenting feature that should prompt cardiac evaluation",
+      "Lactate rises markedly with exertion despite normal cognition, and the myopathy causes hypotonia and fatigue",
+      "The hypertrophic cardiomyopathy is the principal determinant of prognosis and can cause heart failure or arrhythmia",
+      "A severe neonatal form presents early with profound cardiomyopathy and lactic acidosis, while a milder form allows survival into adulthood",
+      "Care is supportive with cataract surgery, cardiac management and avoidance of mitochondrial toxins; intellect is typically preserved"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography and ECG to detect and monitor hypertrophic cardiomyopathy and arrhythmia, Resting and post-exercise blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sengers syndrome is caused by recessive loss-of-function mutations in AGK, which encodes acylglycerol kinase. This mitochondrial enzyme phosphorylates monoacylglycerol and diacylglycerol and also functions as a component of the TIM22 carrier import machinery that inserts certain proteins, including the adenine nucleotide translocator, into the inner mitochondrial membrane. Loss of AGK disturbs mitochondrial membrane lipid composition and impairs import of key carriers, secondarily compromising oxidative phosphorylation and ATP export. Tissues with high and sustained energy demand, notably cardiac and skeletal muscle, and the metabolically specialised lens are preferentially affected, giving the cardiomyopathy, myopathy and cataracts.",
+    "additionalDifferentials": [
+      "Other mitochondrial cardiomyopathies and Barth syndrome",
+      "Infantile Pompe disease and other metabolic cardiomyopathies",
+      "Sarcomeric (genetic) hypertrophic cardiomyopathy without metabolic features",
+      "Congenital cataract syndromes of other cause",
+      "Congenital myopathies and myasthenic syndromes",
+      "Other combined oxidative phosphorylation deficiency disorders"
     ],
-    [
-     "Primary Differentials",
-     "Other mitochondrial cardiomyopathies and Barth syndrome, Infantile Pompe disease and other metabolic cardiomyopathies, Sarcomeric",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography and ECG to detect and monitor hypertrophic cardiomyopathy and arrhythmia",
+      "Resting and post-exercise blood lactate",
+      "Ophthalmological examination for congenital or early cataract",
+      "AGK molecular genetic testing",
+      "Skeletal muscle biopsy for histology and respiratory-chain enzymology",
+      "Creatine kinase and assessment of the myopathy"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive management of this AGK-related mitochondrial disorder, for which no curative therapy exists",
-     "Core treatment modality"
+    "redFlags": [
+      "Decompensated hypertrophic cardiomyopathy or heart failure",
+      "Life-threatening arrhythmia",
+      "Severe neonatal lactic acidosis with cardiorespiratory compromise",
+      "Rapid clinical deterioration during intercurrent illness or metabolic stress"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating congenital cataracts in isolation without evaluating the heart, thereby missing the cardiomyopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is bimodal: the severe neonatal form usually causes death in infancy from cardiomyopathy and lactic acidosis, whereas the milder form permits survival into adulthood with cataract, myopathy and manageable cardiac disease, cardiac status being the main prognostic factor.",
+    "pitfalls": [
+      "Treating congenital cataracts in isolation without evaluating the heart, thereby missing the cardiomyopathy",
+      "Attributing the hypertrophic cardiomyopathy to a sarcomeric cause and overlooking a metabolic origin",
+      "Assuming cognitive impairment, when intellect is characteristically preserved",
+      "Exposing patients to mitochondrial toxins that can worsen the energy deficit"
+    ],
+    "references": [
+      "OMIM: Sengers Syndrome",
+      "GeneReviews: mitochondrial disease overview"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive management of this AGK-related mitochondrial disorder, for which no curative therapy exists",
+      "Arrange surgical extraction of congenital cataracts to preserve vision and support development",
+      "Treat the hypertrophic cardiomyopathy and any arrhythmia with heart failure and antiarrhythmic therapy, the principal determinant of prognosis",
+      "Avoid prolonged fasting and metabolic stressors, and manage exercise intolerance and lactic acidosis with graded activity and carbohydrate support",
+      "Undertake surveillance with serial echocardiography, ECG, and resting and post-exercise lactate monitoring",
+      "Coordinate multidisciplinary care across metabolic or mitochondrial medicine, cardiology, and ophthalmology",
+      "Offer genetic counselling and family screening for this autosomal recessive condition, including reproductive options"
     ]
-   ],
-   "caption": "Overview comparison matrix for sengers syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sengers-syndrome-real-image",
-   "title": "Sengers syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sengers_syndrome-pathway",
+      "title": "Sengers syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The defining combination is congenital cataracts, hypertrophic cardiomyopathy, skeletal (mitochondrial) myopathy and exercise intolerance with lactic acidosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Decompensated hypertrophic cardiomyopathy or heart failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography and ECG to detect and monitor hypertrophic cardiomyopathy and arrhythmia, Resting and post-exercise blood lactate, Ophthalmological examination for congenital or early cataract"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive management of this AGK-related mitochondrial disorder, for which no curative therapy exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating congenital cataracts in isolation without evaluating the heart, thereby missing the cardiomyopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sengers syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sengers_syndrome-matrix",
+      "title": "Sengers syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The defining combination is congenital cataracts, hypertrophic cardiomyopathy, skeletal (mitochondrial) myopathy and exercise",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography and ECG to detect and monitor hypertrophic cardiomyopathy and arrhythmia, Resting and post-exercise blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other mitochondrial cardiomyopathies and Barth syndrome, Infantile Pompe disease and other metabolic cardiomyopathies, Sarcomeric",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive management of this AGK-related mitochondrial disorder, for which no curative therapy exists",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating congenital cataracts in isolation without evaluating the heart, thereby missing the cardiomyopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sengers syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews mitochondrial disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sengers_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography and ECG",
+          "cells": [
+            {
+              "text": "Hypertrophic cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resting and post-exercise blood lactate",
+          "cells": [
+            {
+              "text": "Marked rise with exertion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Congenital or early cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AGK molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the AGK-related disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal muscle biopsy",
+          "cells": [
+            {
+              "text": "Histology and respiratory-chain enzymology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Assesses the myopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sengers_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other mitochondrial cardiomyopathies and Barth syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcomeric hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Lacks the metabolic features of cataract, myopathy and lactic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cataract syndromes of other cause",
+          "cells": [
+            {
+              "text": "Cataract with cardiomyopathy should prompt cardiac evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sengers_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No curative therapy for this AGK-related mitochondrial disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cataract extraction",
+          "cells": [
+            {
+              "text": "Surgical removal of congenital cataracts to preserve vision and support development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac treatment",
+          "cells": [
+            {
+              "text": "Heart failure and antiarrhythmic therapy; cardiomyopathy is the main prognostic factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic stress avoidance",
+          "cells": [
+            {
+              "text": "Avoid prolonged fasting; graded activity and carbohydrate support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial echocardiography, ECG and resting and post-exercise lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Mitochondrial medicine, cardiology and ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening and reproductive options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sengers_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Sengers syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital cataract, hypertrophic cardiomyopathy, myopathy, exertional lactic acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, arrhythmia or severe neonatal lactic acidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology and metabolic care for decompensation or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography, ECG, resting and post-exercise lactate, creatine kinase, AGK testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does AGK testing confirm biallelic variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider muscle biopsy for respiratory-chain defects or Barth and other cardiomyopathies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Extract congenital cataracts surgically",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Heart failure and antiarrhythmic therapy for the cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid fasting and mitochondrial toxins; graded activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echocardiography, ECG, lactate; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe neonatal form often fatal in infancy; milder form survives to adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,370 @@
 {
- "id": "writer_cramp",
- "name": "Writer's cramp",
- "aliases": [
-  "graphospasm",
-  "mogigraphia",
-  "task-specific focal hand dystonia",
-  "writer's cramp",
-  "writers cramp",
-  "writing dystonia"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The prototypical task-specific focal hand dystonia, provoked specifically by writing",
-   "Abnormal posturing or cramping of the hand and forearm develops shortly after beginning to write and impairs legibility",
-   "The same hand performs other manual tasks normally, at least initially, which is the hallmark of task specificity",
-   "Classified as simple when confined to writing and dystonic (complex) when other manual tasks become affected",
-   "Excessive gripping of the pen with abnormal wrist or finger postures is characteristic",
-   "It typically begins in adulthood and may be more frequent in those who write extensively",
-   "Some patients adapt by writing with the other hand, which can occasionally develop dystonia in turn"
+  "id": "writer_cramp",
+  "name": "Writer's cramp",
+  "aliases": [
+    "graphospasm",
+    "mogigraphia",
+    "task-specific focal hand dystonia",
+    "writer's cramp",
+    "writers cramp",
+    "writing dystonia"
   ],
-  "pathophysiology": "Writer's cramp reflects maladaptive sensorimotor plasticity and deficient inhibition within the motor system, in which repetitive, highly practised writing drives abnormal cortical reorganisation and blurring of the cortical representation of the fingers. Impaired integration of sensory feedback with motor commands leads to excessive co-contraction of agonist and antagonist muscles during the specific act of writing, producing the abnormal posture. The task specificity reflects the focal, activity-dependent nature of this reorganisation.",
-  "additionalDifferentials": [
-   "Other task-specific dystonias such as musician's dystonia",
-   "Overuse injury, tendinopathy or repetitive strain",
-   "Peripheral nerve entrapment such as median or ulnar neuropathy",
-   "Essential tremor affecting handwriting",
-   "Functional (psychogenic) movement disorder",
-   "Early generalising or secondary dystonia"
-  ],
-  "additionalInvestigations": [
-   "Observation of the patient writing to characterise the posture and confirm task specificity",
-   "Surface electromyography demonstrating co-contraction during writing",
-   "Nerve conduction studies to exclude entrapment neuropathy",
-   "MRI where a secondary or structural cause is suspected",
-   "Copper studies and genetic testing in younger patients or those with additional features",
-   "Assessment over time for spread of the dystonia to other tasks"
-  ],
-  "redFlags": [
-   "Posturing at rest or during many tasks, suggesting generalisation or a secondary cause",
-   "Sensory loss, weakness or wasting indicating a neuropathic or compressive lesion",
-   "Young onset with other neurological features suggesting an inherited dystonia",
-   "Features of Wilson's disease in a younger patient"
-  ],
-  "prognosis": "Writer's cramp is usually chronic and spontaneous remission is uncommon; however, it is not dangerous and function can generally be maintained. Botulinum toxin injection tailored to the overactive muscles is the most effective treatment, with adjuncts including writing aids, technique modification and sometimes switching hands. Some patients manage well with practical adaptations alone.",
-  "pitfalls": [
-   "Labelling the problem as psychological or as simple writer's fatigue",
-   "Not watching the patient write, which is essential to the diagnosis",
-   "Overlooking entrapment neuropathy or a musculoskeletal cause",
-   "Assuming the dystonia will remain confined to writing"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice, current edition",
-   "Fahn and Jankovic, Principles and Practice of Movement Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Botulinum toxin injection tailored to the overactive forearm and hand muscles is the most effective treatment for this task-specific focal dystonia",
-   "Adaptive strategies including writing aids, a modified or broadened pen grip, altered posture and switching to typing or voice dictation",
-   "Motor retraining, physiotherapy and use of sensory tricks to reduce the abnormal co-contraction",
-   "Oral agents such as anticholinergics as adjuncts, recognising their limited and variable benefit",
-   "Attention to writing ergonomics and reduction of provoking task load",
-   "Neurology referral, with exclusion of a secondary cause including Wilson's disease through copper studies in younger patients or those with additional neurological features"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "writer_cramp-pathway",
-   "title": "Writer's cramp: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The prototypical task-specific focal hand dystonia, provoked specifically by writing",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Posturing at rest or during many tasks, suggesting generalisation or a secondary cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Observation of the patient writing to characterise the posture and confirm task specificity, Surface electromyography demonstrating co-contraction during writing, Nerve conduction studies to exclude entrapment neuropathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Botulinum toxin injection tailored to the overactive forearm and hand muscles is the most effective treatment for this task-specific focal dystonia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the problem as psychological or as simple writer's fatigue"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of writer's cramp."
-  }
- ],
- "tables": [
-  {
-   "id": "writer_cramp-matrix",
-   "title": "Writer's cramp: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The prototypical task-specific focal hand dystonia, provoked specifically by writing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The prototypical task-specific focal hand dystonia, provoked specifically by writing",
+      "Abnormal posturing or cramping of the hand and forearm develops shortly after beginning to write and impairs legibility",
+      "The same hand performs other manual tasks normally, at least initially, which is the hallmark of task specificity",
+      "Classified as simple when confined to writing and dystonic (complex) when other manual tasks become affected",
+      "Excessive gripping of the pen with abnormal wrist or finger postures is characteristic",
+      "It typically begins in adulthood and may be more frequent in those who write extensively",
+      "Some patients adapt by writing with the other hand, which can occasionally develop dystonia in turn"
     ],
-    [
-     "Key Investigations",
-     "Observation of the patient writing to characterise the posture and confirm task specificity, Surface electromyography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Writer's cramp reflects maladaptive sensorimotor plasticity and deficient inhibition within the motor system, in which repetitive, highly practised writing drives abnormal cortical reorganisation and blurring of the cortical representation of the fingers. Impaired integration of sensory feedback with motor commands leads to excessive co-contraction of agonist and antagonist muscles during the specific act of writing, producing the abnormal posture. The task specificity reflects the focal, activity-dependent nature of this reorganisation.",
+    "additionalDifferentials": [
+      "Other task-specific dystonias such as musician's dystonia",
+      "Overuse injury, tendinopathy or repetitive strain",
+      "Peripheral nerve entrapment such as median or ulnar neuropathy",
+      "Essential tremor affecting handwriting",
+      "Functional (psychogenic) movement disorder",
+      "Early generalising or secondary dystonia"
     ],
-    [
-     "Primary Differentials",
-     "Other task-specific dystonias such as musician's dystonia, Overuse injury, tendinopathy or repetitive strain, Peripheral nerve",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Observation of the patient writing to characterise the posture and confirm task specificity",
+      "Surface electromyography demonstrating co-contraction during writing",
+      "Nerve conduction studies to exclude entrapment neuropathy",
+      "MRI where a secondary or structural cause is suspected",
+      "Copper studies and genetic testing in younger patients or those with additional features",
+      "Assessment over time for spread of the dystonia to other tasks"
     ],
-    [
-     "Management Strategy",
-     "Botulinum toxin injection tailored to the overactive forearm and hand muscles is the most effective treatment for this",
-     "Core treatment modality"
+    "redFlags": [
+      "Posturing at rest or during many tasks, suggesting generalisation or a secondary cause",
+      "Sensory loss, weakness or wasting indicating a neuropathic or compressive lesion",
+      "Young onset with other neurological features suggesting an inherited dystonia",
+      "Features of Wilson's disease in a younger patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the problem as psychological or as simple writer's fatigue",
-     "Prevent diagnostic or management error"
+    "prognosis": "Writer's cramp is usually chronic and spontaneous remission is uncommon; however, it is not dangerous and function can generally be maintained. Botulinum toxin injection tailored to the overactive muscles is the most effective treatment, with adjuncts including writing aids, technique modification and sometimes switching hands. Some patients manage well with practical adaptations alone.",
+    "pitfalls": [
+      "Labelling the problem as psychological or as simple writer's fatigue",
+      "Not watching the patient write, which is essential to the diagnosis",
+      "Overlooking entrapment neuropathy or a musculoskeletal cause",
+      "Assuming the dystonia will remain confined to writing"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice, current edition",
+      "Fahn and Jankovic, Principles and Practice of Movement Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Botulinum toxin injection tailored to the overactive forearm and hand muscles is the most effective treatment for this task-specific focal dystonia",
+      "Adaptive strategies including writing aids, a modified or broadened pen grip, altered posture and switching to typing or voice dictation",
+      "Motor retraining, physiotherapy and use of sensory tricks to reduce the abnormal co-contraction",
+      "Oral agents such as anticholinergics as adjuncts, recognising their limited and variable benefit",
+      "Attention to writing ergonomics and reduction of provoking task load",
+      "Neurology referral, with exclusion of a secondary cause including Wilson's disease through copper studies in younger patients or those with additional neurological features"
     ]
-   ],
-   "caption": "Overview comparison matrix for writer's cramp."
-  }
- ],
- "diagrams": [
-  {
-   "id": "writer-cramp-real-image",
-   "title": "Writer's cramp: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "writer_cramp-pathway",
+      "title": "Writer's cramp: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The prototypical task-specific focal hand dystonia, provoked specifically by writing",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Posturing at rest or during many tasks, suggesting generalisation or a secondary cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Observation of the patient writing to characterise the posture and confirm task specificity, Surface electromyography demonstrating co-contraction during writing, Nerve conduction studies to exclude entrapment neuropathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Botulinum toxin injection tailored to the overactive forearm and hand muscles is the most effective treatment for this task-specific focal dystonia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the problem as psychological or as simple writer's fatigue"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of writer's cramp."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "writer_cramp-matrix",
+      "title": "Writer's cramp: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The prototypical task-specific focal hand dystonia, provoked specifically by writing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Observation of the patient writing to characterise the posture and confirm task specificity, Surface electromyography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other task-specific dystonias such as musician's dystonia, Overuse injury, tendinopathy or repetitive strain, Peripheral nerve",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Botulinum toxin injection tailored to the overactive forearm and hand muscles is the most effective treatment for this",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the problem as psychological or as simple writer's fatigue",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for writer's cramp."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "writer_cramp-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation of the patient writing",
+          "cells": [
+            {
+              "text": "Posture and task specificity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surface electromyography",
+          "cells": [
+            {
+              "text": "Overactive forearm and hand muscles"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "writer_cramp-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Musician's dystonia and other task-specific dystonias",
+          "cells": [
+            {
+              "text": "Other task-specific dystonias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overuse injury, tendinopathy or repetitive strain",
+          "cells": [
+            {
+              "text": "Pain without abnormal posturing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "writer_cramp-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin injection",
+          "cells": [
+            {
+              "text": "Tailored to the overactive forearm and hand muscles; most effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watch the patient write",
+          "cells": [
+            {
+              "text": "Before diagnosis, to confirm task specificity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "writer_cramp-dx-mgmt",
+      "title": "Diagnosis and management of Writer's cramp",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected writer's cramp: abnormal hand posturing when writing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (posturing at rest, weakness or sensory loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for generalised dystonia or secondary cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Observation of writing, surface electromyography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is posturing confirmed as task specific on observation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider overuse injury or generalised or secondary dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Botulinum toxin injection tailored to forearm and hand muscles",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid labelling as psychological or simple fatigue",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Watch the patient write before diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Botulinum toxin is the most effective treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

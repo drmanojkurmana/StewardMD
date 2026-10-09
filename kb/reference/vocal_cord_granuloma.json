@@ -1,172 +1,409 @@
 {
- "id": "vocal_cord_granuloma",
- "name": "Vocal fold granuloma",
- "aliases": [
-  "vocal cord granuloma",
-  "laryngeal granuloma",
-  "contact granuloma",
-  "intubation granuloma"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Laryngology",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characteristically arises posteriorly over the vocal process of the arytenoid, where the overlying mucosa is thin and closely applied to cartilage",
-   "The main drivers are laryngopharyngeal reflux, chronic throat clearing or cough, and mucosal trauma from endotracheal intubation",
-   "Presents with a globus sensation, throat discomfort or odynophonia, chronic throat clearing, and mild hoarseness",
-   "Often unilateral but may be bilateral or 'kissing' when the contralateral process is also traumatised",
-   "First-line management targets the cause with antireflux measures and voice therapy to reduce hard glottal attack and throat clearing",
-   "Surgical excision is reserved for persistent, enlarging, or airway-compromising lesions because recurrence after surgery alone is common",
-   "Malignancy is rare in this location but a lesion that fails to settle warrants biopsy to exclude neoplasia"
+  "id": "vocal_cord_granuloma",
+  "name": "Vocal fold granuloma",
+  "aliases": [
+    "vocal cord granuloma",
+    "laryngeal granuloma",
+    "contact granuloma",
+    "intubation granuloma",
+    "Vocal process granuloma",
+    "vocal_process_granuloma",
+    "arytenoid granuloma",
+    "posterior glottic granuloma",
+    "contact ulcer granuloma",
+    "post-intubation vocal process granuloma"
   ],
-  "pathophysiology": "A vocal fold (contact or vocal process) granuloma is an inflammatory reparative response rather than a true tumour. Mechanical trauma to the thin mucosa overlying the arytenoid vocal process, from forceful vocal contact, chronic cough or throat clearing, or an endotracheal tube, denudes the epithelium and exposes perichondrium. Acid and pepsin refluxing to the posterior larynx impair healing and perpetuate mucosal injury, so exuberant granulation tissue forms. Because the insult is ongoing, granulomas frequently recur unless the underlying reflux and phonotraumatic behaviours are corrected.",
-  "additionalDifferentials": [
-   "Vocal fold polyp",
-   "Laryngeal papilloma",
-   "Rheumatoid nodule or vasculitic lesion of the larynx",
-   "Chondroma of the arytenoid",
-   "Tuberculous or fungal laryngeal granuloma",
-   "Posterior glottic malignancy"
-  ],
-  "additionalInvestigations": [
-   "Flexible fibreoptic laryngoscopy to localise the lesion over the vocal process",
-   "Videostroboscopy to assess vocal fold vibration and closure",
-   "Assessment for laryngopharyngeal reflux, including symptom indices where available",
-   "Speech and language therapy voice evaluation for hard glottal attack",
-   "Biopsy of persistent or atypical lesions to exclude malignancy or specific granulomatous disease"
-  ],
-  "redFlags": [
-   "A lesion that continues to enlarge despite adequate antireflux and voice measures",
-   "Impaired vocal fold or arytenoid mobility",
-   "Airway compromise from a large or bilateral posterior lesion",
-   "Systemic features suggesting vasculitis, tuberculosis, or malignancy"
-  ],
-  "prognosis": "Many granulomas resolve slowly with medical and behavioural treatment, though this can take months; recurrence is frequent if reflux and phonotrauma are not controlled, whereas long-term outcomes are good once the underlying causes are addressed.",
-  "pitfalls": [
-   "Proceeding straight to excision without controlling reflux and vocal behaviour, inviting recurrence",
-   "Attributing all posterior lesions to reflux and missing an underlying malignancy or systemic disease",
-   "Failing to recognise recent intubation as a precipitating cause",
-   "Impatience with the naturally slow resolution of granulomas, prompting unnecessary surgery"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antireflux therapy with a proton pump inhibitor and reflux-precaution lifestyle measures to allow mucosal healing",
-   "Voice therapy to reduce hard glottal attack and habitual throat clearing that perpetuate the lesion",
-   "Treat any contributing chronic cough that drives repeated mucosal trauma",
-   "Botulinum toxin injection to reduce forceful vocal-process contact in refractory cases",
-   "Reserve surgical excision for persistent, enlarging or airway-compromising lesions, or when biopsy is needed, recognising the high recurrence if the cause is uncontrolled",
-   "ENT laryngology and speech therapy referral with monitoring for recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vocal_cord_granuloma-pathway",
-   "title": "Vocal fold granuloma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characteristically arises posteriorly over the vocal process of the arytenoid, where the overlying mucosa is thin and closely applied to cartilage",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A lesion that continues to enlarge despite adequate antireflux and voice measures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flexible fibreoptic laryngoscopy to localise the lesion over the vocal process, Videostroboscopy to assess vocal fold vibration and closure, Assessment for laryngopharyngeal reflux, including symptom indices where available"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antireflux therapy with a proton pump inhibitor and reflux-precaution lifestyle measures to allow mucosal healing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Proceeding straight to excision without controlling reflux and vocal behaviour, inviting recurrence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vocal fold granuloma."
-  }
- ],
- "tables": [
-  {
-   "id": "vocal_cord_granuloma-matrix",
-   "title": "Vocal fold granuloma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characteristically arises posteriorly over the vocal process of the arytenoid, where the overlying mucosa is thin and closely",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Laryngology",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characteristically arises posteriorly over the vocal process of the arytenoid, where the overlying mucosa is thin and closely applied to cartilage",
+      "The main drivers are laryngopharyngeal reflux, chronic throat clearing or cough, and mucosal trauma from endotracheal intubation",
+      "Presents with a globus sensation, throat discomfort or odynophonia, chronic throat clearing, and mild hoarseness",
+      "Often unilateral but may be bilateral or 'kissing' when the contralateral process is also traumatised",
+      "First-line management targets the cause with antireflux measures and voice therapy to reduce hard glottal attack and throat clearing",
+      "Surgical excision is reserved for persistent, enlarging, or airway-compromising lesions because recurrence after surgery alone is common",
+      "Malignancy is rare in this location but a lesion that fails to settle warrants biopsy to exclude neoplasia"
     ],
-    [
-     "Key Investigations",
-     "Flexible fibreoptic laryngoscopy to localise the lesion over the vocal process, Videostroboscopy to assess vocal fold vibration",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A vocal fold (contact or vocal process) granuloma is an inflammatory reparative response rather than a true tumour. Mechanical trauma to the thin mucosa overlying the arytenoid vocal process, from forceful vocal contact, chronic cough or throat clearing, or an endotracheal tube, denudes the epithelium and exposes perichondrium. Acid and pepsin refluxing to the posterior larynx impair healing and perpetuate mucosal injury, so exuberant granulation tissue forms. Because the insult is ongoing, granulomas frequently recur unless the underlying reflux and phonotraumatic behaviours are corrected.",
+    "additionalDifferentials": [
+      "Vocal fold polyp",
+      "Laryngeal papilloma",
+      "Rheumatoid nodule or vasculitic lesion of the larynx",
+      "Chondroma of the arytenoid",
+      "Tuberculous or fungal laryngeal granuloma",
+      "Posterior glottic malignancy"
     ],
-    [
-     "Primary Differentials",
-     "Vocal fold polyp, Laryngeal papilloma, Rheumatoid nodule or vasculitic lesion of the larynx",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flexible fibreoptic laryngoscopy to localise the lesion over the vocal process",
+      "Videostroboscopy to assess vocal fold vibration and closure",
+      "Assessment for laryngopharyngeal reflux, including symptom indices where available",
+      "Speech and language therapy voice evaluation for hard glottal attack",
+      "Biopsy of persistent or atypical lesions to exclude malignancy or specific granulomatous disease"
     ],
-    [
-     "Management Strategy",
-     "Antireflux therapy with a proton pump inhibitor and reflux-precaution lifestyle measures to allow mucosal healing",
-     "Core treatment modality"
+    "redFlags": [
+      "A lesion that continues to enlarge despite adequate antireflux and voice measures",
+      "Impaired vocal fold or arytenoid mobility",
+      "Airway compromise from a large or bilateral posterior lesion",
+      "Systemic features suggesting vasculitis, tuberculosis, or malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Proceeding straight to excision without controlling reflux and vocal behaviour, inviting recurrence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many granulomas resolve slowly with medical and behavioural treatment, though this can take months; recurrence is frequent if reflux and phonotrauma are not controlled, whereas long-term outcomes are good once the underlying causes are addressed.",
+    "pitfalls": [
+      "Proceeding straight to excision without controlling reflux and vocal behaviour, inviting recurrence",
+      "Attributing all posterior lesions to reflux and missing an underlying malignancy or systemic disease",
+      "Failing to recognise recent intubation as a precipitating cause",
+      "Impatience with the naturally slow resolution of granulomas, prompting unnecessary surgery"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antireflux therapy with a proton pump inhibitor and reflux-precaution lifestyle measures to allow mucosal healing",
+      "Voice therapy to reduce hard glottal attack and habitual throat clearing that perpetuate the lesion",
+      "Treat any contributing chronic cough that drives repeated mucosal trauma",
+      "Botulinum toxin injection to reduce forceful vocal-process contact in refractory cases",
+      "Reserve surgical excision for persistent, enlarging or airway-compromising lesions, or when biopsy is needed, recognising the high recurrence if the cause is uncontrolled",
+      "ENT laryngology and speech therapy referral with monitoring for recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for vocal fold granuloma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vocal-cord-granuloma-real-image",
-   "title": "Vocal fold granuloma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vocal_cord_granuloma-pathway",
+      "title": "Vocal fold granuloma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characteristically arises posteriorly over the vocal process of the arytenoid, where the overlying mucosa is thin and closely applied to cartilage",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A lesion that continues to enlarge despite adequate antireflux and voice measures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flexible fibreoptic laryngoscopy to localise the lesion over the vocal process, Videostroboscopy to assess vocal fold vibration and closure, Assessment for laryngopharyngeal reflux, including symptom indices where available"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antireflux therapy with a proton pump inhibitor and reflux-precaution lifestyle measures to allow mucosal healing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Proceeding straight to excision without controlling reflux and vocal behaviour, inviting recurrence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vocal fold granuloma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vocal_cord_granuloma-matrix",
+      "title": "Vocal fold granuloma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characteristically arises posteriorly over the vocal process of the arytenoid, where the overlying mucosa is thin and closely",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flexible fibreoptic laryngoscopy to localise the lesion over the vocal process, Videostroboscopy to assess vocal fold vibration",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vocal fold polyp, Laryngeal papilloma, Rheumatoid nodule or vasculitic lesion of the larynx",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antireflux therapy with a proton pump inhibitor and reflux-precaution lifestyle measures to allow mucosal healing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Proceeding straight to excision without controlling reflux and vocal behaviour, inviting recurrence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vocal fold granuloma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vocal_cord_granuloma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible fibreoptic laryngoscopy",
+          "cells": [
+            {
+              "text": "Lesion over the vocal process of the arytenoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Videostroboscopy",
+          "cells": [
+            {
+              "text": "Vocal fold vibration and closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for laryngopharyngeal reflux",
+          "cells": [
+            {
+              "text": "Principal driver"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vocal_cord_granuloma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vocal fold polyp",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngeal papilloma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid nodule or vasculitic lesion of the larynx",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior glottic malignancy",
+          "cells": [
+            {
+              "text": "Lesion that fails to settle with reflux and voice measures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vocal_cord_granuloma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "Antireflux therapy to allow mucosal healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflux precautions",
+          "cells": [
+            {
+              "text": "Lifestyle measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Voice therapy",
+          "cells": [
+            {
+              "text": "Reduces hard glottal attack and habitual throat clearing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vocal_cord_granuloma-dx-mgmt",
+      "title": "Diagnosis and management of Vocal fold granuloma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vocal cord granuloma: posterior laryngeal lesion with hoarseness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (enlarging lesion, impaired mobility or airway compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for airway compromise or impaired arytenoid mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Flexible laryngoscopy over the vocal process, videostroboscopy, reflux assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the lesion resolve with antireflux and voice treatment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy or excision to exclude malignancy or other laryngeal lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Proton pump inhibitor and reflux precautions to allow mucosal healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Voice therapy to reduce hard glottal attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excision only after reflux and voice behaviour are controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Controlling reflux and voice behaviour limits recurrence after excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

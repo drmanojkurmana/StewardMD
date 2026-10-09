@@ -1,174 +1,220 @@
 {
- "id": "carney_complex",
- "name": "Carney complex",
- "aliases": [
-  "CNC",
-  "PRKAR1A",
-  "LAMB syndrome",
-  "NAME syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Oncology",
- "specialty": "Clinical Genetics / Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant multiple neoplasia and lentiginosis syndrome most commonly caused by germline inactivating variants in the PRKAR1A tumour-suppressor gene",
-   "Characteristic skin findings include spotty pigmentation (lentigines) with a typical distribution around the lips, eyes and genital region, and blue naevi",
-   "Cardiac myxomas can arise in any chamber and at multiple sites, carrying risk of embolism, obstruction and sudden death, and may recur after resection",
-   "Endocrine tumours include primary pigmented nodular adrenocortical disease causing ACTH-independent Cushing syndrome, and growth hormone-secreting pituitary tumours",
-   "Large-cell calcifying Sertoli cell tumours of the testis and thyroid nodules or tumours are recognised features",
-   "Psammomatous melanotic schwannoma is a distinctive associated tumour",
-   "PRKAR1A encodes a regulatory subunit of protein kinase A, so its loss increases cyclic-AMP-dependent signalling and drives tumour formation, particularly in endocrine tissues"
+  "id": "carney_complex",
+  "name": "Carney complex",
+  "aliases": [
+    "CNC",
+    "PRKAR1A",
+    "LAMB syndrome",
+    "NAME syndrome"
   ],
-  "pathophysiology": "Carney complex most often results from germline inactivating variants in PRKAR1A, which encodes the type 1-alpha regulatory subunit of protein kinase A. This subunit normally restrains the catalytic activity of protein kinase A; its loss leads to unregulated cyclic-AMP-dependent protein kinase A signalling. Overactive protein kinase A signalling promotes proliferation in hormonally responsive and other susceptible tissues, explaining the endocrine tumours, myxomas, pigmented skin lesions and schwannomas. Tumour development follows a tumour-suppressor mechanism with a somatic second hit. A minority of cases involve other loci, and some show genetic heterogeneity.",
-  "additionalDifferentials": [
-   "Sporadic cardiac myxoma",
-   "McCune-Albright syndrome with endocrine hyperfunction and pigmentation",
-   "Peutz-Jeghers syndrome and other lentiginosis syndromes",
-   "LEOPARD/Noonan syndrome with multiple lentigines",
-   "Multiple endocrine neoplasia syndromes",
-   "Isolated Cushing syndrome from other adrenal or pituitary causes"
-  ],
-  "additionalInvestigations": [
-   "Germline molecular genetic testing of PRKAR1A including deletion/duplication analysis",
-   "Transthoracic echocardiography for cardiac myxomas, repeated on surveillance",
-   "Biochemical assessment for Cushing syndrome (including cortisol dynamics) and growth hormone/IGF-1 for acromegaly",
-   "Adrenal and pituitary imaging when endocrine hyperfunction is detected",
-   "Thyroid ultrasound and testicular ultrasound for characteristic tumours",
-   "Dermatological examination and documentation of lentigines and blue naevi"
-  ],
-  "redFlags": [
-   "Symptoms of embolism, syncope or heart failure suggesting a cardiac myxoma",
-   "Signs of Cushing syndrome from primary pigmented nodular adrenocortical disease",
-   "Recurrence of cardiac myxoma after previous surgical removal",
-   "New neurological deficit suggesting psammomatous melanotic schwannoma or embolic stroke"
-  ],
-  "prognosis": "Cardiac myxomas are the leading cause of mortality through embolic events, obstruction and surgical risk, and can recur, so lifelong cardiac surveillance is essential. With regular monitoring and timely surgery for tumours, overall outlook is improved, though endocrine and other tumours require ongoing management.",
-  "pitfalls": [
-   "Treating a cardiac myxoma as an isolated sporadic lesion and not screening for recurrence or the wider syndrome",
-   "Missing subtle spotty pigmentation that would point to the diagnosis",
-   "Overlooking ACTH-independent Cushing syndrome from primary pigmented nodular adrenocortical disease",
-   "Failing to arrange echocardiographic surveillance and genetic testing of relatives"
-  ],
-  "references": [
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "GeneReviews: Carney Complex"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Excise cardiac myxomas surgically, recognising that they may be multiple, arise in any chamber and recur after resection",
-   "Treat ACTH-independent Cushing syndrome from primary pigmented nodular adrenocortical disease, usually by bilateral adrenalectomy, and growth-hormone-secreting pituitary tumours by surgery with somatostatin analogues",
-   "Manage large-cell calcifying Sertoli cell tumours and thyroid tumours surgically as indicated",
-   "Undertake lifelong cardiac surveillance with regular echocardiography, given the dominant embolic and obstructive risk from myxomas",
-   "Provide ongoing biochemical and imaging surveillance for endocrine tumours",
-   "Coordinate multidisciplinary cardiac, endocrine and dermatological care",
-   "Offer PRKAR1A genetic testing, counselling and cascade screening of relatives, given autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "carney_complex-pathway",
-   "title": "Carney complex: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant multiple neoplasia and lentiginosis syndrome most commonly caused by germline inactivating variants in the PRKAR1A tumour-suppressor gene",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptoms of embolism, syncope or heart failure suggesting a cardiac myxoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Germline molecular genetic testing of PRKAR1A including deletion/duplication analysis, Transthoracic echocardiography for cardiac myxomas, repeated on surveillance, Biochemical assessment for Cushing syndrome (including"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Excise cardiac myxomas surgically, recognising that they may be multiple, arise in any chamber and recur after resection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a cardiac myxoma as an isolated sporadic lesion and not screening for recurrence or the wider syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of carney complex."
-  }
- ],
- "tables": [
-  {
-   "id": "carney_complex-matrix",
-   "title": "Carney complex: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant multiple neoplasia and lentiginosis syndrome most commonly caused by germline inactivating variants in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Oncology",
+  "specialty": "Clinical Genetics / Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant multiple neoplasia and lentiginosis syndrome most commonly caused by germline inactivating variants in the PRKAR1A tumour-suppressor gene",
+      "Characteristic skin findings include spotty pigmentation (lentigines) with a typical distribution around the lips, eyes and genital region, and blue naevi",
+      "Cardiac myxomas can arise in any chamber and at multiple sites, carrying risk of embolism, obstruction and sudden death, and may recur after resection",
+      "Endocrine tumours include primary pigmented nodular adrenocortical disease causing ACTH-independent Cushing syndrome, and growth hormone-secreting pituitary tumours",
+      "Large-cell calcifying Sertoli cell tumours of the testis and thyroid nodules or tumours are recognised features",
+      "Psammomatous melanotic schwannoma is a distinctive associated tumour",
+      "PRKAR1A encodes a regulatory subunit of protein kinase A, so its loss increases cyclic-AMP-dependent signalling and drives tumour formation, particularly in endocrine tissues"
     ],
-    [
-     "Key Investigations",
-     "Germline molecular genetic testing of PRKAR1A including deletion/duplication analysis, Transthoracic echocardiography for cardiac",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Carney complex most often results from germline inactivating variants in PRKAR1A, which encodes the type 1-alpha regulatory subunit of protein kinase A. This subunit normally restrains the catalytic activity of protein kinase A; its loss leads to unregulated cyclic-AMP-dependent protein kinase A signalling. Overactive protein kinase A signalling promotes proliferation in hormonally responsive and other susceptible tissues, explaining the endocrine tumours, myxomas, pigmented skin lesions and schwannomas. Tumour development follows a tumour-suppressor mechanism with a somatic second hit. A minority of cases involve other loci, and some show genetic heterogeneity.",
+    "additionalDifferentials": [
+      "Sporadic cardiac myxoma",
+      "McCune-Albright syndrome with endocrine hyperfunction and pigmentation",
+      "Peutz-Jeghers syndrome and other lentiginosis syndromes",
+      "LEOPARD/Noonan syndrome with multiple lentigines",
+      "Multiple endocrine neoplasia syndromes",
+      "Isolated Cushing syndrome from other adrenal or pituitary causes"
     ],
-    [
-     "Primary Differentials",
-     "Sporadic cardiac myxoma, McCune-Albright syndrome with endocrine hyperfunction and pigmentation, Peutz-Jeghers syndrome and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Germline molecular genetic testing of PRKAR1A including deletion/duplication analysis",
+      "Transthoracic echocardiography for cardiac myxomas, repeated on surveillance",
+      "Biochemical assessment for Cushing syndrome (including cortisol dynamics) and growth hormone/IGF-1 for acromegaly",
+      "Adrenal and pituitary imaging when endocrine hyperfunction is detected",
+      "Thyroid ultrasound and testicular ultrasound for characteristic tumours",
+      "Dermatological examination and documentation of lentigines and blue naevi"
     ],
-    [
-     "Management Strategy",
-     "Excise cardiac myxomas surgically, recognising that they may be multiple, arise in any chamber and recur after resection",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptoms of embolism, syncope or heart failure suggesting a cardiac myxoma",
+      "Signs of Cushing syndrome from primary pigmented nodular adrenocortical disease",
+      "Recurrence of cardiac myxoma after previous surgical removal",
+      "New neurological deficit suggesting psammomatous melanotic schwannoma or embolic stroke"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a cardiac myxoma as an isolated sporadic lesion and not screening for recurrence or the wider syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cardiac myxomas are the leading cause of mortality through embolic events, obstruction and surgical risk, and can recur, so lifelong cardiac surveillance is essential. With regular monitoring and timely surgery for tumours, overall outlook is improved, though endocrine and other tumours require ongoing management.",
+    "pitfalls": [
+      "Treating a cardiac myxoma as an isolated sporadic lesion and not screening for recurrence or the wider syndrome",
+      "Missing subtle spotty pigmentation that would point to the diagnosis",
+      "Overlooking ACTH-independent Cushing syndrome from primary pigmented nodular adrenocortical disease",
+      "Failing to arrange echocardiographic surveillance and genetic testing of relatives"
+    ],
+    "references": [
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "GeneReviews: Carney Complex"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Excise cardiac myxomas surgically, recognising that they may be multiple, arise in any chamber and recur after resection",
+      "Treat ACTH-independent Cushing syndrome from primary pigmented nodular adrenocortical disease, usually by bilateral adrenalectomy, and growth-hormone-secreting pituitary tumours by surgery with somatostatin analogues",
+      "Manage large-cell calcifying Sertoli cell tumours and thyroid tumours surgically as indicated",
+      "Undertake lifelong cardiac surveillance with regular echocardiography, given the dominant embolic and obstructive risk from myxomas",
+      "Provide ongoing biochemical and imaging surveillance for endocrine tumours",
+      "Coordinate multidisciplinary cardiac, endocrine and dermatological care",
+      "Offer PRKAR1A genetic testing, counselling and cascade screening of relatives, given autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for carney complex."
-  }
- ],
- "diagrams": [
-  {
-   "id": "carney-complex-real-image",
-   "title": "Carney complex: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "carney_complex-pathway",
+      "title": "Carney complex: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant multiple neoplasia and lentiginosis syndrome most commonly caused by germline inactivating variants in the PRKAR1A tumour-suppressor gene",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptoms of embolism, syncope or heart failure suggesting a cardiac myxoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Germline molecular genetic testing of PRKAR1A including deletion/duplication analysis, Transthoracic echocardiography for cardiac myxomas, repeated on surveillance, Biochemical assessment for Cushing syndrome (including"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Excise cardiac myxomas surgically, recognising that they may be multiple, arise in any chamber and recur after resection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a cardiac myxoma as an isolated sporadic lesion and not screening for recurrence or the wider syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of carney complex."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "carney_complex-matrix",
+      "title": "Carney complex: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant multiple neoplasia and lentiginosis syndrome most commonly caused by germline inactivating variants in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Germline molecular genetic testing of PRKAR1A including deletion/duplication analysis, Transthoracic echocardiography for cardiac",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sporadic cardiac myxoma, McCune-Albright syndrome with endocrine hyperfunction and pigmentation, Peutz-Jeghers syndrome and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Excise cardiac myxomas surgically, recognising that they may be multiple, arise in any chamber and recur after resection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a cardiac myxoma as an isolated sporadic lesion and not screening for recurrence or the wider syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for carney complex."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carney_complex-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in Carney complex",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "PRKAR1A germline testing with deletion and duplication analysis", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "Transthoracic echocardiography", "cells": [{"text": "Cardiac myxomas; repeated on surveillance"}], "cite": "c1"},
+        {"parameter": "Cortisol dynamics and growth hormone or IGF-1", "cells": [{"text": "Cushing syndrome; acromegaly"}], "cite": "c1"},
+        {"parameter": "Adrenal and pituitary imaging", "cells": [{"text": "When endocrine hyperfunction is detected"}], "cite": "c1"},
+        {"parameter": "Thyroid and testicular ultrasound", "cells": [{"text": "Characteristic tumours"}], "cite": "c1"},
+        {"parameter": "Dermatological examination", "cells": [{"text": "Lentigines and blue naevi"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "carney_complex-treatment",
+      "kind": "treatment",
+      "title": "Management options in Carney complex",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Cardiac myxoma excision", "cells": [{"text": "Surgical excision; may be multiple, arise in any chamber and recur"}, {"text": "Surveillance needed"}], "cite": "c1"},
+        {"parameter": "Primary pigmented nodular adrenocortical disease", "cells": [{"text": "Usually bilateral adrenalectomy for ACTH-independent Cushing syndrome"}, {"text": "Surgical"}], "cite": "c1"},
+        {"parameter": "Growth-hormone-secreting pituitary tumour", "cells": [{"text": "Surgery with somatostatin analogues"}, {"text": "Acromegaly"}], "cite": "c1"},
+        {"parameter": "Testicular and thyroid tumours", "cells": [{"text": "Surgical management of large-cell calcifying Sertoli cell tumours and thyroid tumours as indicated"}, {"text": "As indicated"}], "cite": "c1"},
+        {"parameter": "Cardiac surveillance", "cells": [{"text": "Lifelong regular echocardiography for embolic and obstructive risk"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Endocrine surveillance", "cells": [{"text": "Biochemical and imaging surveillance for endocrine tumours"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary care", "cells": [{"text": "Cardiac, endocrine and dermatological teams"}, {"text": "Coordinated"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "PRKAR1A testing, counselling and cascade screening; autosomal dominant"}, {"text": "Family"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carney_complex-dx-mgmt",
+      "title": "Diagnosis and management of Carney complex",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Cardiac myxoma, lentigines or Cushing syndrome in a young patient", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: embolism, syncope, heart failure, or signs of Cushing syndrome?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent cardiac and endocrine review; myxoma excision if present", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Echocardiography; cortisol and GH or IGF-1 testing; skin examination; PRKAR1A testing", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Pathogenic PRKAR1A variant confirmed?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Lifelong cardiac and endocrine surveillance; treat endocrine tumours; family screening", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Consider sporadic myxoma, McCune-Albright, Peutz-Jeghers or other lentiginosis syndromes", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Multisystem tumour predisposition requiring lifelong surveillance", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -1,173 +1,229 @@
 {
- "id": "calcific_tendinitis",
- "name": "Calcific tendinitis",
- "aliases": [
-  "calcific tendinopathy",
-  "rotator cuff calcification",
-  "hydroxyapatite deposition disease",
-  "calcifying tendinitis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Sports & Soft tissue",
- "specialty": "Sports Medicine / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Brukner and Khan's Clinical Sports Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deposition of calcium hydroxyapatite crystals within a tendon, most often the supraspinatus of the rotator cuff",
-   "May be asymptomatic and found incidentally, or cause a chronic ache during the formative and resting phases",
-   "The resorptive phase produces acute, severe, often disabling shoulder pain as the deposit softens and is reabsorbed",
-   "Distinct from wear-related degenerative cuff tendinopathy, although the two can coexist",
-   "Radiographs and ultrasound readily demonstrate the deposit and help track its evolution",
-   "Many deposits resolve spontaneously, so initial management is conservative with analgesia and activity modification",
-   "Ultrasound-guided barbotage (needle aspiration and lavage of the calcium) is effective for persistent symptomatic deposits",
-   "Extracorporeal shockwave therapy can promote resorption and relieve symptoms in resistant cases"
+  "id": "calcific_tendinitis",
+  "name": "Calcific tendinitis",
+  "aliases": [
+    "calcific tendinopathy",
+    "rotator cuff calcification",
+    "hydroxyapatite deposition disease",
+    "calcifying tendinitis"
   ],
-  "pathophysiology": "Calcific tendinitis results from deposition of calcium hydroxyapatite crystals within tendon substance, classically the rotator cuff. The process is described as passing through phases: a precalcific phase, a formative phase in which chalk-like calcium accumulates within fibrocartilaginous metaplastic tissue, a resorptive phase in which the deposit softens to a toothpaste-like consistency and is reabsorbed by a vascular and cellular response, and a post-calcific healing phase. The resorptive phase is associated with the most intense pain, owing to raised intratendinous pressure and surrounding inflammation. Because it is a crystal-deposition process, it is distinct from an overload-related degenerative tendinosis.",
-  "additionalDifferentials": [
-   "Rotator cuff tendinopathy or tear",
-   "Subacromial bursitis",
-   "Adhesive capsulitis",
-   "Septic arthritis or septic bursitis of the shoulder in an acute severe presentation",
-   "Acromioclavicular joint pathology",
-   "Gout or pseudogout (crystal arthropathy)"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs to locate, size and characterise the calcific deposit",
-   "Ultrasound to confirm the deposit, assess its consistency and guide intervention",
-   "MRI where a cuff tear or other pathology is suspected",
-   "Clinical assessment of the disease phase from the symptom pattern",
-   "Inflammatory markers if septic arthritis or bursitis is a consideration"
-  ],
-  "redFlags": [
-   "Fever with a hot, swollen joint suggesting septic arthritis rather than a resorptive flare",
-   "Rapidly worsening pain with systemic upset requiring exclusion of infection",
-   "Neurovascular compromise of the limb",
-   "Failure to improve, raising suspicion of an alternative diagnosis such as a tear"
-  ],
-  "prognosis": "The natural history is often favourable, with many deposits resorbing spontaneously and symptoms settling; barbotage and shockwave help resistant cases, and only a minority require surgery.",
-  "pitfalls": [
-   "Mistaking an intensely painful resorptive flare for septic arthritis, or the reverse",
-   "Assuming an incidental calcific deposit is necessarily the cause of a patient's pain",
-   "Over-investigating what is often self-limiting disease",
-   "Delaying targeted treatment such as barbotage or shockwave in persistent, disabling cases"
-  ],
-  "references": [
-   "Brukner and Khan's Clinical Sports Medicine",
-   "British Journal of Sports Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin with conservative care: analgesia, anti-inflammatory medication, activity modification and physiotherapy, as many deposits resorb spontaneously.",
-   "Offer a subacromial corticosteroid injection to control pain, particularly during the acutely painful resorptive phase.",
-   "Use ultrasound-guided barbotage (needling and lavage) for symptomatic deposits resistant to conservative treatment.",
-   "Consider extracorporeal shockwave therapy for persistent formative-phase deposits.",
-   "Reserve arthroscopic surgical removal for deposits refractory to all other measures.",
-   "Track the deposit and its evolution with radiographs or ultrasound to guide escalation."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "calcific_tendinitis-pathway",
-   "title": "Calcific tendinitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deposition of calcium hydroxyapatite crystals within a tendon, most often the supraspinatus of the rotator cuff",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fever with a hot, swollen joint suggesting septic arthritis rather than a resorptive flare",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs to locate, size and characterise the calcific deposit, Ultrasound to confirm the deposit, assess its consistency and guide intervention, MRI where a cuff tear or other pathology is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin with conservative care: analgesia, anti-inflammatory medication, activity modification and physiotherapy, as many deposits resorb spontaneously."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking an intensely painful resorptive flare for septic arthritis, or the reverse"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of calcific tendinitis."
-  }
- ],
- "tables": [
-  {
-   "id": "calcific_tendinitis-matrix",
-   "title": "Calcific tendinitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deposition of calcium hydroxyapatite crystals within a tendon, most often the supraspinatus of the rotator cuff",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Sports & Soft tissue",
+  "specialty": "Sports Medicine / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Brukner and Khan's Clinical Sports Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deposition of calcium hydroxyapatite crystals within a tendon, most often the supraspinatus of the rotator cuff",
+      "May be asymptomatic and found incidentally, or cause a chronic ache during the formative and resting phases",
+      "The resorptive phase produces acute, severe, often disabling shoulder pain as the deposit softens and is reabsorbed",
+      "Distinct from wear-related degenerative cuff tendinopathy, although the two can coexist",
+      "Radiographs and ultrasound readily demonstrate the deposit and help track its evolution",
+      "Many deposits resolve spontaneously, so initial management is conservative with analgesia and activity modification",
+      "Ultrasound-guided barbotage (needle aspiration and lavage of the calcium) is effective for persistent symptomatic deposits",
+      "Extracorporeal shockwave therapy can promote resorption and relieve symptoms in resistant cases"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs to locate, size and characterise the calcific deposit, Ultrasound to confirm the deposit, assess its",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Calcific tendinitis results from deposition of calcium hydroxyapatite crystals within tendon substance, classically the rotator cuff. The process is described as passing through phases: a precalcific phase, a formative phase in which chalk-like calcium accumulates within fibrocartilaginous metaplastic tissue, a resorptive phase in which the deposit softens to a toothpaste-like consistency and is reabsorbed by a vascular and cellular response, and a post-calcific healing phase. The resorptive phase is associated with the most intense pain, owing to raised intratendinous pressure and surrounding inflammation. Because it is a crystal-deposition process, it is distinct from an overload-related degenerative tendinosis.",
+    "additionalDifferentials": [
+      "Rotator cuff tendinopathy or tear",
+      "Subacromial bursitis",
+      "Adhesive capsulitis",
+      "Septic arthritis or septic bursitis of the shoulder in an acute severe presentation",
+      "Acromioclavicular joint pathology",
+      "Gout or pseudogout (crystal arthropathy)"
     ],
-    [
-     "Primary Differentials",
-     "Rotator cuff tendinopathy or tear, Subacromial bursitis, Adhesive capsulitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs to locate, size and characterise the calcific deposit",
+      "Ultrasound to confirm the deposit, assess its consistency and guide intervention",
+      "MRI where a cuff tear or other pathology is suspected",
+      "Clinical assessment of the disease phase from the symptom pattern",
+      "Inflammatory markers if septic arthritis or bursitis is a consideration"
     ],
-    [
-     "Management Strategy",
-     "Begin with conservative care: analgesia, anti-inflammatory medication, activity modification and physiotherapy, as many deposits",
-     "Core treatment modality"
+    "redFlags": [
+      "Fever with a hot, swollen joint suggesting septic arthritis rather than a resorptive flare",
+      "Rapidly worsening pain with systemic upset requiring exclusion of infection",
+      "Neurovascular compromise of the limb",
+      "Failure to improve, raising suspicion of an alternative diagnosis such as a tear"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking an intensely painful resorptive flare for septic arthritis, or the reverse",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is often favourable, with many deposits resorbing spontaneously and symptoms settling; barbotage and shockwave help resistant cases, and only a minority require surgery.",
+    "pitfalls": [
+      "Mistaking an intensely painful resorptive flare for septic arthritis, or the reverse",
+      "Assuming an incidental calcific deposit is necessarily the cause of a patient's pain",
+      "Over-investigating what is often self-limiting disease",
+      "Delaying targeted treatment such as barbotage or shockwave in persistent, disabling cases"
+    ],
+    "references": [
+      "Brukner and Khan's Clinical Sports Medicine",
+      "British Journal of Sports Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin with conservative care: analgesia, anti-inflammatory medication, activity modification and physiotherapy, as many deposits resorb spontaneously.",
+      "Offer a subacromial corticosteroid injection to control pain, particularly during the acutely painful resorptive phase.",
+      "Use ultrasound-guided barbotage (needling and lavage) for symptomatic deposits resistant to conservative treatment.",
+      "Consider extracorporeal shockwave therapy for persistent formative-phase deposits.",
+      "Reserve arthroscopic surgical removal for deposits refractory to all other measures.",
+      "Track the deposit and its evolution with radiographs or ultrasound to guide escalation."
     ]
-   ],
-   "caption": "Overview comparison matrix for calcific tendinitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "calcific-tendinitis-real-image",
-   "title": "Calcific tendinitis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "calcific_tendinitis-pathway",
+      "title": "Calcific tendinitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deposition of calcium hydroxyapatite crystals within a tendon, most often the supraspinatus of the rotator cuff",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fever with a hot, swollen joint suggesting septic arthritis rather than a resorptive flare",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs to locate, size and characterise the calcific deposit, Ultrasound to confirm the deposit, assess its consistency and guide intervention, MRI where a cuff tear or other pathology is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin with conservative care: analgesia, anti-inflammatory medication, activity modification and physiotherapy, as many deposits resorb spontaneously."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking an intensely painful resorptive flare for septic arthritis, or the reverse"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of calcific tendinitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "calcific_tendinitis-matrix",
+      "title": "Calcific tendinitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deposition of calcium hydroxyapatite crystals within a tendon, most often the supraspinatus of the rotator cuff",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs to locate, size and characterise the calcific deposit, Ultrasound to confirm the deposit, assess its",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rotator cuff tendinopathy or tear, Subacromial bursitis, Adhesive capsulitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin with conservative care: analgesia, anti-inflammatory medication, activity modification and physiotherapy, as many deposits",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking an intensely painful resorptive flare for septic arthritis, or the reverse",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for calcific tendinitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "calcific_tendinitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in calcific tendinitis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Plain radiographs", "cells": [{"text": "Location, size and character of the calcific deposit"}], "cite": "c1"},
+        {"parameter": "Ultrasound", "cells": [{"text": "Confirms the deposit and its consistency; guides intervention"}], "cite": "c1"},
+        {"parameter": "MRI", "cells": [{"text": "Where a cuff tear or other pathology is suspected"}], "cite": "c1"},
+        {"parameter": "Symptom pattern", "cells": [{"text": "Clinical assessment of the disease phase"}], "cite": "c1"},
+        {"parameter": "Inflammatory markers", "cells": [{"text": "If septic arthritis or bursitis is a consideration"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "calcific_tendinitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike shoulder pain syndromes",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Septic arthritis or septic bursitis of the shoulder", "cells": [{"text": "Fever with a hot, swollen joint rather than a resorptive flare"}], "cite": "c1"},
+        {"parameter": "Rotator cuff tear", "cells": [{"text": "Failure to improve prompts MRI to look for a tear"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "calcific_tendinitis-treatment",
+      "kind": "treatment",
+      "title": "Management options in calcific tendinitis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Conservative care", "cells": [{"text": "Analgesia, anti-inflammatory medication, activity modification and physiotherapy"}, {"text": "First-line; many deposits resorb spontaneously"}], "cite": "c1"},
+        {"parameter": "Subacromial corticosteroid injection", "cells": [{"text": "Pain control, particularly in the resorptive phase"}, {"text": "Acutely painful flare"}], "cite": "c1"},
+        {"parameter": "Ultrasound-guided barbotage", "cells": [{"text": "Needling and lavage of the calcium for symptomatic deposits resistant to conservative care"}, {"text": "Persistent symptoms"}], "cite": "c1"},
+        {"parameter": "Extracorporeal shockwave therapy", "cells": [{"text": "Persistent formative-phase deposits; can promote resorption"}, {"text": "Resistant cases"}], "cite": "c1"},
+        {"parameter": "Arthroscopic removal", "cells": [{"text": "Deposits refractory to all other measures"}, {"text": "Last resort"}], "cite": "c1"},
+        {"parameter": "Serial imaging", "cells": [{"text": "Track the deposit and its evolution with radiographs or ultrasound"}, {"text": "Guides escalation"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "calcific_tendinitis-dx-mgmt",
+      "title": "Diagnosis and management of calcific tendinitis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Shoulder pain, often acutely severe, with a calcific deposit on imaging", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: fever with a hot swollen joint, systemic upset, or neurovascular compromise?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: exclude septic arthritis urgently; inflammatory markers; orthopaedic review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Radiographs and ultrasound to characterise the deposit; MRI if tear suspected", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Symptoms persist despite conservative treatment?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Analgesia, anti-inflammatories, physiotherapy; subacromial steroid for flare", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Ultrasound-guided barbotage or shockwave therapy", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Most settle with conservative care as the deposit resorbs", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Persistent deposits respond to barbotage or shockwave; surgery rarely needed", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "No"},
+        {"from": "n5", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -1,175 +1,444 @@
 {
- "id": "syringobulbia",
- "name": "Syringobulbia",
- "aliases": [
-  "brainstem syrinx",
-  "medullary syrinx",
-  "bulbar syringomyelia"
- ],
- "class": "non_infective",
- "system": "Nervous system / Spinal cord and brainstem",
- "specialty": "Neurology / Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A fluid-filled cavity within the brainstem, usually the medulla, most often representing rostral extension of a cervical syringomyelia along the tegmentum rather than an isolated lesion",
-   "Involvement of the lower cranial nerve nuclei produces dysphagia, dysarthria, palatal and pharyngeal weakness, and tongue wasting with fasciculation, so the picture can superficially resemble a bulbar motor syndrome",
-   "Damage to the descending spinal tract and nucleus of the trigeminal nerve gives a dissociated facial sensory loss in an onion-skin or balaclava distribution, a highly suggestive sign",
-   "Nystagmus, particularly downbeat, together with vertigo and oscillopsia reflects involvement of vestibular connections and the medial longitudinal fasciculus",
-   "An ipsilateral Horner syndrome may occur from interruption of descending sympathetic fibres in the brainstem",
-   "The disorder is strongly associated with Chiari I malformation and obstruction of cerebrospinal fluid flow at the foramen magnum, and less often with trauma or intramedullary tumour",
-   "MRI of the brain and whole spine is the investigation of choice and typically shows the brainstem cavity in continuity with a cervical cord syrinx",
-   "Progressive bulbar involvement threatens the airway through aspiration, vocal cord palsy and central respiratory disturbance, so surveillance of swallowing and breathing is essential"
+  "id": "syringobulbia",
+  "name": "Syringobulbia",
+  "aliases": [
+    "brainstem syrinx",
+    "medullary syrinx",
+    "bulbar syringomyelia"
   ],
-  "pathophysiology": "Syringobulbia is a slit-like, gliosis-lined cavity within the brainstem, most commonly dissecting through the medullary tegmentum, and in the majority of cases it is continuous with a cervical cord syrinx. It is thought to arise from disordered cerebrospinal fluid dynamics at the craniovertebral junction, classically in association with a Chiari I malformation, which alters pressure gradients and drives fluid into and along the neuraxis. As the cavity enlarges it disrupts adjacent structures, including the nuclei and intramedullary fibres of the glossopharyngeal, vagus and hypoglossal nerves, the spinal tract and nucleus of the trigeminal nerve, descending sympathetic pathways, the medial longitudinal fasciculus and vestibular connections, producing the characteristic constellation of bulbar, sensory, oculomotor and autonomic signs.",
-  "additionalDifferentials": [
-   "Brainstem glioma or other intrinsic brainstem tumour",
-   "Lateral medullary (Wallenberg) syndrome",
-   "Bulbar-onset motor neurone disease",
-   "Multiple sclerosis with brainstem demyelination",
-   "Foramen magnum or craniovertebral junction tumour",
-   "Brainstem cavernoma or other vascular malformation"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and whole spine with contrast to define the brainstem cavity and any continuous cord syrinx",
-   "Cine phase-contrast (CSF flow) MRI at the craniovertebral junction to assess for obstruction and a Chiari I malformation",
-   "Dedicated imaging of the craniovertebral junction and skull base to identify structural causes",
-   "Videofluoroscopic or fibreoptic swallowing assessment to quantify aspiration risk",
-   "Laryngoscopy to evaluate vocal cord and palatal function",
-   "Overnight oximetry or polysomnography where central sleep-disordered breathing is suspected"
-  ],
-  "redFlags": [
-   "Progressive bulbar dysfunction with clinical or objective evidence of aspiration",
-   "Stridor or vocal cord paralysis, or symptoms of central sleep apnoea suggesting respiratory compromise",
-   "Rapid neurological deterioration indicating cavity expansion",
-   "New or worsening brainstem signs in a patient with known syringomyelia"
-  ],
-  "prognosis": "The course is usually slowly progressive over years, and treatment directed at the underlying cause, such as posterior fossa decompression for Chiari I malformation, may arrest or partially reverse deficits. Established bulbar and cranial nerve deficits often persist, and advanced disease carries a risk of life-threatening aspiration and respiratory compromise.",
-  "pitfalls": [
-   "Attributing tongue wasting and bulbar weakness to motor neurone disease without imaging the brainstem and cervical cord",
-   "Failing to recognise the onion-skin facial sensory loss as a localising trigeminal tract sign",
-   "Overlooking an associated Chiari I malformation or craniovertebral junction abnormality that is amenable to treatment",
-   "Not imaging the whole neuraxis and thereby missing a continuous cervical syrinx",
-   "Underestimating occult central sleep-disordered breathing and aspiration risk"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Youmans and Winn Neurological Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Neurosurgical treatment of the underlying craniovertebral abnormality, typically posterior fossa decompression for Chiari I malformation, to restore cerebrospinal fluid flow and arrest cavity progression",
-   "Syrinx drainage or shunting when a symptomatic cavity persists or enlarges despite decompression",
-   "Swallowing assessment with texture modification, safe-swallow strategies, and enteral feeding when aspiration risk is high",
-   "Speech and language therapy for dysarthria and palatopharyngeal weakness",
-   "Surveillance for central sleep-disordered breathing with ventilatory support where hypoventilation develops",
-   "Protective measures for dissociated facial sensory loss and monitoring of vocal cord function by laryngoscopy",
-   "Serial MRI surveillance with multidisciplinary follow-up across neurosurgery, neurology, ENT and respiratory teams"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "syringobulbia-pathway",
-   "title": "Syringobulbia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A fluid-filled cavity within the brainstem, usually the medulla, most often representing rostral extension of a cervical syringomyelia along the tegmentum rather than an isolated lesion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive bulbar dysfunction with clinical or objective evidence of aspiration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and whole spine with contrast to define the brainstem cavity and any continuous cord syrinx, Cine phase-contrast (CSF flow) MRI at the craniovertebral junction to assess for obstruction and a Chiari I"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Neurosurgical treatment of the underlying craniovertebral abnormality, typically posterior fossa decompression for Chiari I malformation, to restore cerebrospinal fluid flow and arrest cavity progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing tongue wasting and bulbar weakness to motor neurone disease without imaging the brainstem and cervical cord"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of syringobulbia."
-  }
- ],
- "tables": [
-  {
-   "id": "syringobulbia-matrix",
-   "title": "Syringobulbia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A fluid-filled cavity within the brainstem, usually the medulla, most often representing rostral extension of a cervical",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Spinal cord and brainstem",
+  "specialty": "Neurology / Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A fluid-filled cavity within the brainstem, usually the medulla, most often representing rostral extension of a cervical syringomyelia along the tegmentum rather than an isolated lesion",
+      "Involvement of the lower cranial nerve nuclei produces dysphagia, dysarthria, palatal and pharyngeal weakness, and tongue wasting with fasciculation, so the picture can superficially resemble a bulbar motor syndrome",
+      "Damage to the descending spinal tract and nucleus of the trigeminal nerve gives a dissociated facial sensory loss in an onion-skin or balaclava distribution, a highly suggestive sign",
+      "Nystagmus, particularly downbeat, together with vertigo and oscillopsia reflects involvement of vestibular connections and the medial longitudinal fasciculus",
+      "An ipsilateral Horner syndrome may occur from interruption of descending sympathetic fibres in the brainstem",
+      "The disorder is strongly associated with Chiari I malformation and obstruction of cerebrospinal fluid flow at the foramen magnum, and less often with trauma or intramedullary tumour",
+      "MRI of the brain and whole spine is the investigation of choice and typically shows the brainstem cavity in continuity with a cervical cord syrinx",
+      "Progressive bulbar involvement threatens the airway through aspiration, vocal cord palsy and central respiratory disturbance, so surveillance of swallowing and breathing is essential"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and whole spine with contrast to define the brainstem cavity and any continuous cord syrinx, Cine phase-contrast",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Syringobulbia is a slit-like, gliosis-lined cavity within the brainstem, most commonly dissecting through the medullary tegmentum, and in the majority of cases it is continuous with a cervical cord syrinx. It is thought to arise from disordered cerebrospinal fluid dynamics at the craniovertebral junction, classically in association with a Chiari I malformation, which alters pressure gradients and drives fluid into and along the neuraxis. As the cavity enlarges it disrupts adjacent structures, including the nuclei and intramedullary fibres of the glossopharyngeal, vagus and hypoglossal nerves, the spinal tract and nucleus of the trigeminal nerve, descending sympathetic pathways, the medial longitudinal fasciculus and vestibular connections, producing the characteristic constellation of bulbar, sensory, oculomotor and autonomic signs.",
+    "additionalDifferentials": [
+      "Brainstem glioma or other intrinsic brainstem tumour",
+      "Lateral medullary (Wallenberg) syndrome",
+      "Bulbar-onset motor neurone disease",
+      "Multiple sclerosis with brainstem demyelination",
+      "Foramen magnum or craniovertebral junction tumour",
+      "Brainstem cavernoma or other vascular malformation"
     ],
-    [
-     "Primary Differentials",
-     "Brainstem glioma or other intrinsic brainstem tumour, Lateral medullary (Wallenberg) syndrome, Bulbar-onset motor neurone disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and whole spine with contrast to define the brainstem cavity and any continuous cord syrinx",
+      "Cine phase-contrast (CSF flow) MRI at the craniovertebral junction to assess for obstruction and a Chiari I malformation",
+      "Dedicated imaging of the craniovertebral junction and skull base to identify structural causes",
+      "Videofluoroscopic or fibreoptic swallowing assessment to quantify aspiration risk",
+      "Laryngoscopy to evaluate vocal cord and palatal function",
+      "Overnight oximetry or polysomnography where central sleep-disordered breathing is suspected"
     ],
-    [
-     "Management Strategy",
-     "Neurosurgical treatment of the underlying craniovertebral abnormality, typically posterior fossa decompression for Chiari I",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive bulbar dysfunction with clinical or objective evidence of aspiration",
+      "Stridor or vocal cord paralysis, or symptoms of central sleep apnoea suggesting respiratory compromise",
+      "Rapid neurological deterioration indicating cavity expansion",
+      "New or worsening brainstem signs in a patient with known syringomyelia"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing tongue wasting and bulbar weakness to motor neurone disease without imaging the brainstem and cervical cord",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is usually slowly progressive over years, and treatment directed at the underlying cause, such as posterior fossa decompression for Chiari I malformation, may arrest or partially reverse deficits. Established bulbar and cranial nerve deficits often persist, and advanced disease carries a risk of life-threatening aspiration and respiratory compromise.",
+    "pitfalls": [
+      "Attributing tongue wasting and bulbar weakness to motor neurone disease without imaging the brainstem and cervical cord",
+      "Failing to recognise the onion-skin facial sensory loss as a localising trigeminal tract sign",
+      "Overlooking an associated Chiari I malformation or craniovertebral junction abnormality that is amenable to treatment",
+      "Not imaging the whole neuraxis and thereby missing a continuous cervical syrinx",
+      "Underestimating occult central sleep-disordered breathing and aspiration risk"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Youmans and Winn Neurological Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Neurosurgical treatment of the underlying craniovertebral abnormality, typically posterior fossa decompression for Chiari I malformation, to restore cerebrospinal fluid flow and arrest cavity progression",
+      "Syrinx drainage or shunting when a symptomatic cavity persists or enlarges despite decompression",
+      "Swallowing assessment with texture modification, safe-swallow strategies, and enteral feeding when aspiration risk is high",
+      "Speech and language therapy for dysarthria and palatopharyngeal weakness",
+      "Surveillance for central sleep-disordered breathing with ventilatory support where hypoventilation develops",
+      "Protective measures for dissociated facial sensory loss and monitoring of vocal cord function by laryngoscopy",
+      "Serial MRI surveillance with multidisciplinary follow-up across neurosurgery, neurology, ENT and respiratory teams"
     ]
-   ],
-   "caption": "Overview comparison matrix for syringobulbia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "syringobulbia-real-image",
-   "title": "Syringobulbia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "syringobulbia-pathway",
+      "title": "Syringobulbia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A fluid-filled cavity within the brainstem, usually the medulla, most often representing rostral extension of a cervical syringomyelia along the tegmentum rather than an isolated lesion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive bulbar dysfunction with clinical or objective evidence of aspiration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and whole spine with contrast to define the brainstem cavity and any continuous cord syrinx, Cine phase-contrast (CSF flow) MRI at the craniovertebral junction to assess for obstruction and a Chiari I"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Neurosurgical treatment of the underlying craniovertebral abnormality, typically posterior fossa decompression for Chiari I malformation, to restore cerebrospinal fluid flow and arrest cavity progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing tongue wasting and bulbar weakness to motor neurone disease without imaging the brainstem and cervical cord"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of syringobulbia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "syringobulbia-matrix",
+      "title": "Syringobulbia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A fluid-filled cavity within the brainstem, usually the medulla, most often representing rostral extension of a cervical",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and whole spine with contrast to define the brainstem cavity and any continuous cord syrinx, Cine phase-contrast",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Brainstem glioma or other intrinsic brainstem tumour, Lateral medullary (Wallenberg) syndrome, Bulbar-onset motor neurone disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Neurosurgical treatment of the underlying craniovertebral abnormality, typically posterior fossa decompression for Chiari I",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing tongue wasting and bulbar weakness to motor neurone disease without imaging the brainstem and cervical cord",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for syringobulbia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "syringobulbia-dx-mgmt",
+      "title": "Diagnosis and management of Syringobulbia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected syringobulbia: bulbar dysfunction with dissociated facial sensory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aspiration, stridor or cord palsy, or central apnoea)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and aspiration assessment with neurosurgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and whole spine; CSF flow MRI at the craniovertebral junction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show a brainstem cavity continuous with a cervical syrinx?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bulbar-onset MND, brainstem glioma or multiple sclerosis; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Posterior fossa decompression for Chiari I malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Syrinx drainage or shunting if a symptomatic cavity persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Swallowing assessment, texture modification and enteral feeding if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Speech and language therapy for dysarthria",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Ventilatory support where central hypoventilation develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive; decompression may arrest or partly reverse deficits",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "syringobulbia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain and whole spine with contrast",
+          "cells": [
+            {
+              "text": "Brainstem cavity and any continuous cervical cord syrinx"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cine phase-contrast CSF flow MRI",
+          "cells": [
+            {
+              "text": "Obstruction and Chiari I malformation at the craniovertebral junction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the craniovertebral junction and skull base",
+          "cells": [
+            {
+              "text": "Structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Videofluoroscopic or fibreoptic swallowing assessment",
+          "cells": [
+            {
+              "text": "Quantifies aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Vocal cord and palatal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overnight oximetry or polysomnography",
+          "cells": [
+            {
+              "text": "Central sleep-disordered breathing, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syringobulbia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Decompression of the craniovertebral abnormality",
+          "cells": [
+            {
+              "text": "Posterior fossa decompression for Chiari I malformation to restore CSF flow and arrest cavity progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syrinx drainage or shunting",
+          "cells": [
+            {
+              "text": "Symptomatic cavity that persists or enlarges despite decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallowing management",
+          "cells": [
+            {
+              "text": "Texture modification, safe-swallow strategies, and enteral feeding when aspiration risk is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Dysarthria and palatopharyngeal weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilatory support",
+          "cells": [
+            {
+              "text": "Central sleep-disordered breathing, where hypoventilation develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protection and laryngoscopic monitoring",
+          "cells": [
+            {
+              "text": "Dissociated facial sensory loss; vocal cord function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial MRI and multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Neurosurgery, neurology, ENT and respiratory teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

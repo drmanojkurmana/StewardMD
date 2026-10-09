@@ -229,25 +229,554 @@
       "caption": "Diagnostic and clinical overview matrix for drug-induced / toxic hepatitis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "toxic-hepatitis-real-image",
-      "title": "Drug-induced / toxic hepatitis: Diagnostic Abdominal Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Liver Injury Caused by Drugs",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/drugs-and-the-liver/liver-injury-caused-by-drugs",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Acetaminophen Poisoning",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/poisoning/acetaminophen-poisoning",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 306-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "toxic_hepatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Drug-induced liver injury: pattern, significance and paracetamol thresholds",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Solid Viscera",
-          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+          "parameter": "R value (ALT/ALP, each as multiple of ULN)",
+          "cells": [
+            {
+              "text": "Over 5",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Hepatocellular injury"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Gastrointestinal Tract",
-          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+          "parameter": "R value",
+          "cells": [
+            {
+              "text": "2 to 5",
+              "range": [
+                2,
+                5
+              ]
+            },
+            {
+              "text": "Mixed injury"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Mesentery & Peritoneum",
-          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+          "parameter": "R value",
+          "cells": [
+            {
+              "text": "Under 2",
+              "op": "<",
+              "value": 2
+            },
+            {
+              "text": "Cholestatic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALT or AST",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Over 5 on 2 occasions at least 24 h apart",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Clinically significant DILI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Alkaline phosphatase",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Over 2 on 2 occasions",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Clinically significant DILI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total bilirubin",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Over 2.5 with raised enzymes",
+              "op": ">",
+              "value": 2.5
+            },
+            {
+              "text": "Clinically significant DILI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "INR",
+          "cells": [
+            {
+              "text": "Over 1.5 with raised enzymes",
+              "op": ">",
+              "value": 1.5
+            },
+            {
+              "text": "Clinically significant DILI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hy's law",
+          "cells": [
+            {
+              "text": "Jaundice with hepatocellular injury"
+            },
+            {
+              "text": "{{hy:About 1 in 10 progresses to acute liver failure}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paracetamol acute ingestion",
+          "unit": "mg/kg",
+          "cells": [
+            {
+              "text": "150 or more in 24 h",
+              "op": ">=",
+              "value": 150
+            },
+            {
+              "text": "Potentially toxic; about 7.5 to 10 g in adults"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paracetamol level at 4 h",
+          "unit": "mcg/mL",
+          "cells": [
+            {
+              "text": "150 or less, no symptoms",
+              "op": "<=",
+              "value": 150
+            },
+            {
+              "text": "Hepatotoxicity very unlikely; higher levels need NAC"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paracetamol level at 4 h",
+          "unit": "mcg/mL",
+          "cells": [
+            {
+              "text": "Over 300",
+              "op": ">",
+              "value": 300
+            },
+            {
+              "text": "Predicts severe injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paracetamol injury pattern",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": "Aminotransferases often over 10,000 with low bilirubin",
+              "op": ">",
+              "value": 10000
+            },
+            {
+              "text": "Suspect paracetamol even without overdose history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial lactate after resuscitation",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Over 3.5 after initial fluids, or over 3 after full resuscitation"
+            },
+            {
+              "text": "Poor prognosis; likely transplant need"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "DILI is a diagnosis of exclusion; RUCAM, DILIN expert opinion or RECAM support causality. In chronic alcohol use the toxic paracetamol dose may fall to about 2 g."
+    },
+    {
+      "id": "toxic_hepatitis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic drug-induced liver injury",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute viral hepatitis",
+          "cells": [
+            {
+              "text": "Isoniazid or ciprofloxacin injury can look identical clinically and on biopsy"
+            },
+            {
+              "text": "Hepatitis A, B, C serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune hepatitis",
+          "cells": [
+            {
+              "text": "Hyperglobulinaemia; nitrofurantoin, minocycline, hydralazine, methyldopa mimic it"
+            },
+            {
+              "text": "ANA (homogeneous), anti-LKM1, anti-SLA"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Alcohol-associated hepatitis",
+          "cells": [
+            {
+              "text": "Alcohol history; amiodarone gives a pseudoalcoholic picture"
+            },
+            {
+              "text": "Liver biopsy if unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary obstruction",
+          "cells": [
+            {
+              "text": "Cholestatic pattern without a drug link"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sclerosing cholangitis-like injury",
+          "cells": [
+            {
+              "text": "After chemotherapy or long-term ketamine"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adaptation to drug",
+          "cells": [
+            {
+              "text": "Mild transient enzyme rise with isoniazid, valproate, phenytoin, statins"
+            },
+            {
+              "text": "Resolves despite continued use"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "toxic_hepatitis-treatment",
+      "kind": "treatment",
+      "title": "Management of drug-induced liver injury",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop the suspected drug",
+          "cells": [
+            {
+              "text": "{{hy:ALT over 5x ULN, or over 3x ULN with symptoms}}"
+            },
+            {
+              "text": "Early withdrawal usually leads to recovery; never rechallenge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Paracetamol toxicity likely by dose or level; best within 8 h, still give after 24 h"
+            },
+            {
+              "text": "150 mg/kg over 15 min, then 50 mg/kg over 4 h, then 100 mg/kg over 16 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Alternative to IV, equally effective"
+            },
+            {
+              "text": "140 mg/kg load, then 70 mg/kg every 4 h for 17 doses"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stopping NAC",
+          "cells": [
+            {
+              "text": "All met"
+            },
+            {
+              "text": "Paracetamol under 10 mcg/mL, INR under 2.0, transaminases normal or down 50% from peak, patient well"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Activated charcoal",
+          "cells": [
+            {
+              "text": "Paracetamol may still be in the gut"
+            },
+            {
+              "text": "Adjunct to NAC"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Haemodialysis",
+          "cells": [
+            {
+              "text": "Paracetamol 900 mcg/mL or more with altered mentation or acidosis"
+            },
+            {
+              "text": "In addition to NAC"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "DRESS or autoimmune-like injury (minocycline, checkpoint inhibitors)"
+            },
+            {
+              "text": "May help"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Specialist and transplant referral",
+          "cells": [
+            {
+              "text": "Hepatocellular jaundice with impaired synthetic function, or liver failure"
+            },
+            {
+              "text": "Transplant may be needed"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "toxic_hepatitis-dx-mgmt",
+      "title": "Diagnosis and management of drug-induced liver injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised liver enzymes or jaundice with drug, herb or supplement exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Full exposure history; paracetamol level; viral and autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Paracetamol toxicity possible by dose or level?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Start N-acetylcysteine; charcoal if still in gut",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Calculate R value to classify pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "ALT over 5x ULN, or over 3x ULN with symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Possible adaptation; continue with monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop suspected drug; do not rechallenge",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Jaundice, INR over 1.5 or encephalopathy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hepatology referral; assess for transplant",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor until tests recover; report the reaction",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
         }
       ]
     }

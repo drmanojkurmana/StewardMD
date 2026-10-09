@@ -1,171 +1,420 @@
 {
- "id": "metachromatic_leukodystrophy",
- "name": "Metachromatic leukodystrophy",
- "aliases": [
-  "MLD",
-  "arylsulfatase A deficiency",
-  "sulfatide lipidosis"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive leukodystrophy caused by deficiency of the enzyme arylsulfatase A, leading to accumulation of sulfatides and progressive demyelination of central and peripheral nervous systems",
-   "The late-infantile form is most common, presenting in the second year with gait disturbance, weakness, and loss of previously acquired motor skills",
-   "Peripheral neuropathy with depressed or absent deep tendon reflexes is characteristic and can accompany central signs",
-   "Juvenile and adult forms present later, often with behavioural change, cognitive decline, or psychiatric symptoms before motor deterioration",
-   "MRI shows symmetrical confluent white matter signal change, sometimes with a tigroid or leopard-skin pattern of spared perivascular regions",
-   "Elevated cerebrospinal fluid protein and slowed nerve conduction reflect the demyelinating process",
-   "A rare subset is due to deficiency of the sphingolipid activator protein saposin B rather than the enzyme itself",
-   "Haematopoietic stem cell transplantation and, in selected presymptomatic patients, gene therapy may modify the course, while established neurological damage is not reversed"
+  "id": "metachromatic_leukodystrophy",
+  "name": "Metachromatic leukodystrophy",
+  "aliases": [
+    "MLD",
+    "arylsulfatase A deficiency",
+    "sulfatide lipidosis"
   ],
-  "pathophysiology": "Metachromatic leukodystrophy results from biallelic pathogenic variants in ARSA, encoding the lysosomal enzyme arylsulfatase A, which desulfates sulfatide (cerebroside sulfate). Deficient activity causes sulfatides to accumulate within lysosomes of myelin-forming cells (oligodendrocytes and Schwann cells) and other tissues. The accumulated sulfatide is toxic to myelin-producing cells, driving progressive demyelination of the central and peripheral nervous system and the resulting motor, cognitive, and neuropathic decline. Stored material stains metachromatically, giving the disease its name.",
-  "additionalDifferentials": [
-   "Krabbe disease",
-   "Other leukodystrophies such as X-linked adrenoleukodystrophy",
-   "GM1 and GM2 gangliosidoses",
-   "Acquired demyelinating disorders",
-   "Multiple sulfatase deficiency"
-  ],
-  "additionalInvestigations": [
-   "Assay of arylsulfatase A enzyme activity, interpreted with awareness of pseudodeficiency alleles",
-   "ARSA molecular genetic testing to confirm the diagnosis",
-   "Urinary sulfatide measurement to support diagnosis",
-   "Brain MRI to characterise white matter involvement",
-   "Nerve conduction studies and cerebrospinal fluid protein assessment"
-  ],
-  "redFlags": [
-   "Progressive loss of motor milestones in a previously well toddler",
-   "Combined central and peripheral neurological signs",
-   "Rapid cognitive or psychiatric deterioration in older patients",
-   "Feeding and swallowing difficulty with aspiration risk"
-  ],
-  "prognosis": "The late-infantile form progresses rapidly to severe disability and death within a few years of onset. Juvenile and adult forms progress more slowly and variably. Presymptomatic or very early treatment with stem cell transplantation or gene therapy offers the best chance of altering the course, but symptomatic disease responds poorly.",
-  "pitfalls": [
-   "Being misled by pseudodeficiency alleles that lower measured enzyme activity without causing disease",
-   "Attributing early behavioural or psychiatric changes in adults to a primary psychiatric disorder",
-   "Missing the peripheral neuropathy that helps distinguish it from other leukodystrophies",
-   "Delaying assessment for disease-modifying therapy until symptoms are advanced"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer disease-modifying therapy to presymptomatic or very early patients: autologous ex-vivo ARSA gene-corrected haematopoietic stem cell gene therapy (atidarsagene autotemcel) or allogeneic haematopoietic stem cell transplantation in slower-progressing juvenile and adult forms",
-   "Manage spasticity with antispasticity agents such as baclofen supplemented by botulinum toxin, alongside physiotherapy and positioning",
-   "Control seizures with antiepileptic drugs and treat neuropathic pain and dystonia",
-   "Provide feeding support with gastrostomy, secretion management, and respiratory care as bulbar and motor function decline",
-   "Undertake surveillance with serial brain MRI, developmental and neurological review, and monitoring for gallbladder disease",
-   "Coordinate care through a metabolic, neurology, rehabilitation, and palliative care multidisciplinary team",
-   "Offer genetic counselling and test at-risk siblings for ARSA variants and enzyme deficiency, since presymptomatic identification enables curative early treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "metachromatic_leukodystrophy-pathway",
-   "title": "Metachromatic leukodystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive leukodystrophy caused by deficiency of the enzyme arylsulfatase A, leading to accumulation of sulfatides and progressive demyelination of central and peripheral nervous systems",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive loss of motor milestones in a previously well toddler",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assay of arylsulfatase A enzyme activity, interpreted with awareness of pseudodeficiency alleles, ARSA molecular genetic testing to confirm the diagnosis, Urinary sulfatide measurement to support diagnosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer disease-modifying therapy to presymptomatic or very early patients: autologous ex-vivo ARSA gene-corrected haematopoietic stem cell gene therapy (atidarsagene autotemcel) or allogeneic haematopoietic stem cell"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Being misled by pseudodeficiency alleles that lower measured enzyme activity without causing disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of metachromatic leukodystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "metachromatic_leukodystrophy-matrix",
-   "title": "Metachromatic leukodystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive leukodystrophy caused by deficiency of the enzyme arylsulfatase A, leading to accumulation of sulfatides",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive leukodystrophy caused by deficiency of the enzyme arylsulfatase A, leading to accumulation of sulfatides and progressive demyelination of central and peripheral nervous systems",
+      "The late-infantile form is most common, presenting in the second year with gait disturbance, weakness, and loss of previously acquired motor skills",
+      "Peripheral neuropathy with depressed or absent deep tendon reflexes is characteristic and can accompany central signs",
+      "Juvenile and adult forms present later, often with behavioural change, cognitive decline, or psychiatric symptoms before motor deterioration",
+      "MRI shows symmetrical confluent white matter signal change, sometimes with a tigroid or leopard-skin pattern of spared perivascular regions",
+      "Elevated cerebrospinal fluid protein and slowed nerve conduction reflect the demyelinating process",
+      "A rare subset is due to deficiency of the sphingolipid activator protein saposin B rather than the enzyme itself",
+      "Haematopoietic stem cell transplantation and, in selected presymptomatic patients, gene therapy may modify the course, while established neurological damage is not reversed"
     ],
-    [
-     "Key Investigations",
-     "Assay of arylsulfatase A enzyme activity, interpreted with awareness of pseudodeficiency alleles, ARSA molecular genetic testing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Metachromatic leukodystrophy results from biallelic pathogenic variants in ARSA, encoding the lysosomal enzyme arylsulfatase A, which desulfates sulfatide (cerebroside sulfate). Deficient activity causes sulfatides to accumulate within lysosomes of myelin-forming cells (oligodendrocytes and Schwann cells) and other tissues. The accumulated sulfatide is toxic to myelin-producing cells, driving progressive demyelination of the central and peripheral nervous system and the resulting motor, cognitive, and neuropathic decline. Stored material stains metachromatically, giving the disease its name.",
+    "additionalDifferentials": [
+      "Krabbe disease",
+      "Other leukodystrophies such as X-linked adrenoleukodystrophy",
+      "GM1 and GM2 gangliosidoses",
+      "Acquired demyelinating disorders",
+      "Multiple sulfatase deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Krabbe disease, Other leukodystrophies such as X-linked adrenoleukodystrophy, GM1 and GM2 gangliosidoses",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assay of arylsulfatase A enzyme activity, interpreted with awareness of pseudodeficiency alleles",
+      "ARSA molecular genetic testing to confirm the diagnosis",
+      "Urinary sulfatide measurement to support diagnosis",
+      "Brain MRI to characterise white matter involvement",
+      "Nerve conduction studies and cerebrospinal fluid protein assessment"
     ],
-    [
-     "Management Strategy",
-     "Offer disease-modifying therapy to presymptomatic or very early patients: autologous ex-vivo ARSA gene-corrected haematopoietic",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive loss of motor milestones in a previously well toddler",
+      "Combined central and peripheral neurological signs",
+      "Rapid cognitive or psychiatric deterioration in older patients",
+      "Feeding and swallowing difficulty with aspiration risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Being misled by pseudodeficiency alleles that lower measured enzyme activity without causing disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "The late-infantile form progresses rapidly to severe disability and death within a few years of onset. Juvenile and adult forms progress more slowly and variably. Presymptomatic or very early treatment with stem cell transplantation or gene therapy offers the best chance of altering the course, but symptomatic disease responds poorly.",
+    "pitfalls": [
+      "Being misled by pseudodeficiency alleles that lower measured enzyme activity without causing disease",
+      "Attributing early behavioural or psychiatric changes in adults to a primary psychiatric disorder",
+      "Missing the peripheral neuropathy that helps distinguish it from other leukodystrophies",
+      "Delaying assessment for disease-modifying therapy until symptoms are advanced"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer disease-modifying therapy to presymptomatic or very early patients: autologous ex-vivo ARSA gene-corrected haematopoietic stem cell gene therapy (atidarsagene autotemcel) or allogeneic haematopoietic stem cell transplantation in slower-progressing juvenile and adult forms",
+      "Manage spasticity with antispasticity agents such as baclofen supplemented by botulinum toxin, alongside physiotherapy and positioning",
+      "Control seizures with antiepileptic drugs and treat neuropathic pain and dystonia",
+      "Provide feeding support with gastrostomy, secretion management, and respiratory care as bulbar and motor function decline",
+      "Undertake surveillance with serial brain MRI, developmental and neurological review, and monitoring for gallbladder disease",
+      "Coordinate care through a metabolic, neurology, rehabilitation, and palliative care multidisciplinary team",
+      "Offer genetic counselling and test at-risk siblings for ARSA variants and enzyme deficiency, since presymptomatic identification enables curative early treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for metachromatic leukodystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "metachromatic-leukodystrophy-real-image",
-   "title": "Metachromatic leukodystrophy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "metachromatic_leukodystrophy-pathway",
+      "title": "Metachromatic leukodystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive leukodystrophy caused by deficiency of the enzyme arylsulfatase A, leading to accumulation of sulfatides and progressive demyelination of central and peripheral nervous systems",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive loss of motor milestones in a previously well toddler",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assay of arylsulfatase A enzyme activity, interpreted with awareness of pseudodeficiency alleles, ARSA molecular genetic testing to confirm the diagnosis, Urinary sulfatide measurement to support diagnosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer disease-modifying therapy to presymptomatic or very early patients: autologous ex-vivo ARSA gene-corrected haematopoietic stem cell gene therapy (atidarsagene autotemcel) or allogeneic haematopoietic stem cell"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Being misled by pseudodeficiency alleles that lower measured enzyme activity without causing disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of metachromatic leukodystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "metachromatic_leukodystrophy-matrix",
+      "title": "Metachromatic leukodystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive leukodystrophy caused by deficiency of the enzyme arylsulfatase A, leading to accumulation of sulfatides",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assay of arylsulfatase A enzyme activity, interpreted with awareness of pseudodeficiency alleles, ARSA molecular genetic testing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Krabbe disease, Other leukodystrophies such as X-linked adrenoleukodystrophy, GM1 and GM2 gangliosidoses",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer disease-modifying therapy to presymptomatic or very early patients: autologous ex-vivo ARSA gene-corrected haematopoietic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Being misled by pseudodeficiency alleles that lower measured enzyme activity without causing disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for metachromatic leukodystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard metabolic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "metachromatic_leukodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Arylsulfatase A enzyme activity assay",
+          "cells": [
+            {
+              "text": "Enzyme activity; pseudodeficiency alleles considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ARSA molecular genetic testing",
+          "cells": [
+            {
+              "text": "ARSA variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary sulfatide measurement",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "White matter involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and CSF protein assessment",
+          "cells": [
+            {
+              "text": "Demyelinating neuropathy; CSF protein"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "metachromatic_leukodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Disease-modifying gene therapy or transplant",
+          "cells": [
+            {
+              "text": "Presymptomatic or very early patients: atidarsagene autotemcel or allogeneic transplant in slower-progressing juvenile disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity",
+          "cells": [
+            {
+              "text": "Baclofen supplemented by botulinum toxin, with physiotherapy and positioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures, pain and dystonia",
+          "cells": [
+            {
+              "text": "Antiepileptic drugs; treatment of neuropathic pain and dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and respiratory support",
+          "cells": [
+            {
+              "text": "Gastrostomy, secretion management and respiratory care as function declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial brain MRI, neurological review, and monitoring for gallbladder disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Metabolic, neurology, rehabilitation and palliative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Test at-risk siblings; presymptomatic identification enables early treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "metachromatic_leukodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Metachromatic leukodystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Toddler with loss of motor milestones and combined central and peripheral signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bulbar dysfunction with aspiration, cognitive decline in older patients, or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nutrition and aspiration assessment; respiratory support as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ARSA enzyme assay, ARSA genetic testing, urinary sulfatide, brain MRI, NCS, CSF protein",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ARSA deficiency confirmed by enzyme assay and genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider multiple sulfatase deficiency, Krabbe disease or X-linked adrenoleukodystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gene-corrected stem cell therapy or transplant for presymptomatic or very early patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Baclofen with botulinum toxin for spasticity, with physiotherapy and positioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiepileptic drugs for seizures; treat neuropathic pain and dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gastrostomy, secretion management and respiratory care as function declines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial MRI and multidisciplinary care; test at-risk siblings for early treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

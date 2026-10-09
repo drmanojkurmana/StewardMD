@@ -1,171 +1,422 @@
 {
- "id": "trench_foot",
- "name": "Trench foot (non-freezing cold injury)",
- "aliases": [
-  "non-freezing cold injury",
-  "NFCI",
-  "cold immersion foot"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency & Wilderness Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-freezing cold injury caused by prolonged exposure of the feet to cold, wet conditions, classically described in soldiers standing in cold water-filled trenches",
-   "Develops at temperatures above freezing, so tissue does not freeze; the injury is from sustained cold and damp rather than ice crystal formation",
-   "Early on the foot is cold, numb, pale, and often swollen; on rewarming it becomes hyperaemic, red, painful, and may blister",
-   "A characteristic biphasic course of initial anaesthesia followed by a painful hyperaemic phase is typical",
-   "Management is gradual rewarming, keeping the foot dry, elevation, meticulous foot care, and analgesia for the painful phase",
-   "Prevention centres on keeping feet dry and warm, regularly changing wet socks, and avoiding constrictive footwear",
-   "Severe or repeated injury can leave long-term cold sensitivity, chronic pain, and sensory disturbance"
+  "id": "trench_foot",
+  "name": "Trench foot (non-freezing cold injury)",
+  "aliases": [
+    "non-freezing cold injury",
+    "NFCI",
+    "cold immersion foot"
   ],
-  "pathophysiology": "Trench foot follows prolonged exposure of tissue to cold, wet conditions without freezing. Sustained cold-induced vasoconstriction reduces perfusion, and the combination of hypoxia, endothelial injury, and alternating vasoconstriction and reperfusion damages nerves, small vessels, and soft tissue. Because temperatures remain above freezing there is no ice crystal formation, distinguishing it from frostbite; instead the injury is a microvascular and neural insult that, when severe, can progress to tissue necrosis and leaves the characteristic biphasic clinical course of numb ischaemia followed by a painful hyperaemic reperfusion phase.",
-  "additionalDifferentials": [
-   "Frostbite (a true freezing injury)",
-   "Immersion foot from warm-water exposure",
-   "Chilblains (pernio)",
-   "Cellulitis or other soft tissue infection",
-   "Peripheral vascular disease with critical ischaemia",
-   "Compartment syndrome after prolonged immobility"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from history of prolonged cold, wet exposure and characteristic foot findings",
-   "Assessment of peripheral pulses, capillary refill, and neurological (sensory) function",
-   "Skin and soft tissue examination for blistering, necrosis, or secondary infection",
-   "Inflammatory markers and wound swabs if secondary infection is suspected",
-   "Vascular imaging where an alternative ischaemic cause is considered"
-  ],
-  "redFlags": [
-   "Tissue necrosis, deep blistering, or evidence of secondary infection",
-   "Features suggesting a true freezing injury (frostbite) requiring different management",
-   "Signs of systemic infection or sepsis from an infected wound",
-   "Severe, persistent pain or sensory loss suggesting significant nerve injury"
-  ],
-  "prognosis": "Mild cases recover over days to weeks with rewarming and foot care, but moderate to severe non-freezing cold injury may leave prolonged cold hypersensitivity, chronic neuropathic pain, and sensory deficits that can persist for months or longer.",
-  "pitfalls": [
-   "Confusing trench foot with frostbite and mismanaging the rewarming approach",
-   "Applying rapid or excessive direct heat, worsening reperfusion injury",
-   "Underestimating the painful hyperaemic phase and providing inadequate analgesia",
-   "Neglecting preventive foot care, allowing recurrence"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Bove and Davis' Diving Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Gradual rewarming with the foot kept dry, warm and elevated, avoiding rapid heat or rubbing",
-   "Meticulous foot and wound care with monitoring for blistering, tissue necrosis and secondary infection",
-   "Analgesia for the painful hyperaemic reperfusion phase, including agents for neuropathic pain",
-   "Treat secondary soft-tissue infection with antibiotics guided by wound swabs where it develops",
-   "Prevention through keeping the feet dry and warm, regularly changing wet socks and avoiding constrictive footwear",
-   "Recognise and manage chronic sequelae such as persistent cold hypersensitivity and neuropathic pain, with specialist referral for severe or non-healing injury"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trench_foot-pathway",
-   "title": "Trench foot (non-freezing cold injury): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-freezing cold injury caused by prolonged exposure of the feet to cold, wet conditions, classically described in soldiers standing in cold water-filled trenches",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Tissue necrosis, deep blistering, or evidence of secondary infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from history of prolonged cold, wet exposure and characteristic foot findings, Assessment of peripheral pulses, capillary refill, and neurological (sensory) function, Skin and soft tissue examination for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Gradual rewarming with the foot kept dry, warm and elevated, avoiding rapid heat or rubbing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing trench foot with frostbite and mismanaging the rewarming approach"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trench foot (non-freezing cold injury)."
-  }
- ],
- "tables": [
-  {
-   "id": "trench_foot-matrix",
-   "title": "Trench foot (non-freezing cold injury): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-freezing cold injury caused by prolonged exposure of the feet to cold, wet conditions, classically described in soldiers",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency & Wilderness Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-freezing cold injury caused by prolonged exposure of the feet to cold, wet conditions, classically described in soldiers standing in cold water-filled trenches",
+      "Develops at temperatures above freezing, so tissue does not freeze; the injury is from sustained cold and damp rather than ice crystal formation",
+      "Early on the foot is cold, numb, pale, and often swollen; on rewarming it becomes hyperaemic, red, painful, and may blister",
+      "A characteristic biphasic course of initial anaesthesia followed by a painful hyperaemic phase is typical",
+      "Management is gradual rewarming, keeping the foot dry, elevation, meticulous foot care, and analgesia for the painful phase",
+      "Prevention centres on keeping feet dry and warm, regularly changing wet socks, and avoiding constrictive footwear",
+      "Severe or repeated injury can leave long-term cold sensitivity, chronic pain, and sensory disturbance"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from history of prolonged cold, wet exposure and characteristic foot findings, Assessment of peripheral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trench foot follows prolonged exposure of tissue to cold, wet conditions without freezing. Sustained cold-induced vasoconstriction reduces perfusion, and the combination of hypoxia, endothelial injury, and alternating vasoconstriction and reperfusion damages nerves, small vessels, and soft tissue. Because temperatures remain above freezing there is no ice crystal formation, distinguishing it from frostbite; instead the injury is a microvascular and neural insult that, when severe, can progress to tissue necrosis and leaves the characteristic biphasic clinical course of numb ischaemia followed by a painful hyperaemic reperfusion phase.",
+    "additionalDifferentials": [
+      "Frostbite (a true freezing injury)",
+      "Immersion foot from warm-water exposure",
+      "Chilblains (pernio)",
+      "Cellulitis or other soft tissue infection",
+      "Peripheral vascular disease with critical ischaemia",
+      "Compartment syndrome after prolonged immobility"
     ],
-    [
-     "Primary Differentials",
-     "Frostbite (a true freezing injury), Immersion foot from warm-water exposure, Chilblains (pernio)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from history of prolonged cold, wet exposure and characteristic foot findings",
+      "Assessment of peripheral pulses, capillary refill, and neurological (sensory) function",
+      "Skin and soft tissue examination for blistering, necrosis, or secondary infection",
+      "Inflammatory markers and wound swabs if secondary infection is suspected",
+      "Vascular imaging where an alternative ischaemic cause is considered"
     ],
-    [
-     "Management Strategy",
-     "Gradual rewarming with the foot kept dry, warm and elevated, avoiding rapid heat or rubbing",
-     "Core treatment modality"
+    "redFlags": [
+      "Tissue necrosis, deep blistering, or evidence of secondary infection",
+      "Features suggesting a true freezing injury (frostbite) requiring different management",
+      "Signs of systemic infection or sepsis from an infected wound",
+      "Severe, persistent pain or sensory loss suggesting significant nerve injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing trench foot with frostbite and mismanaging the rewarming approach",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mild cases recover over days to weeks with rewarming and foot care, but moderate to severe non-freezing cold injury may leave prolonged cold hypersensitivity, chronic neuropathic pain, and sensory deficits that can persist for months or longer.",
+    "pitfalls": [
+      "Confusing trench foot with frostbite and mismanaging the rewarming approach",
+      "Applying rapid or excessive direct heat, worsening reperfusion injury",
+      "Underestimating the painful hyperaemic phase and providing inadequate analgesia",
+      "Neglecting preventive foot care, allowing recurrence"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Bove and Davis' Diving Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Gradual rewarming with the foot kept dry, warm and elevated, avoiding rapid heat or rubbing",
+      "Meticulous foot and wound care with monitoring for blistering, tissue necrosis and secondary infection",
+      "Analgesia for the painful hyperaemic reperfusion phase, including agents for neuropathic pain",
+      "Treat secondary soft-tissue infection with antibiotics guided by wound swabs where it develops",
+      "Prevention through keeping the feet dry and warm, regularly changing wet socks and avoiding constrictive footwear",
+      "Recognise and manage chronic sequelae such as persistent cold hypersensitivity and neuropathic pain, with specialist referral for severe or non-healing injury"
     ]
-   ],
-   "caption": "Overview comparison matrix for trench foot (non-freezing cold injury)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trench-foot-real-image",
-   "title": "Trench foot (non-freezing cold injury): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "trench_foot-pathway",
+      "title": "Trench foot (non-freezing cold injury): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-freezing cold injury caused by prolonged exposure of the feet to cold, wet conditions, classically described in soldiers standing in cold water-filled trenches",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Tissue necrosis, deep blistering, or evidence of secondary infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from history of prolonged cold, wet exposure and characteristic foot findings, Assessment of peripheral pulses, capillary refill, and neurological (sensory) function, Skin and soft tissue examination for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Gradual rewarming with the foot kept dry, warm and elevated, avoiding rapid heat or rubbing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing trench foot with frostbite and mismanaging the rewarming approach"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trench foot (non-freezing cold injury)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trench_foot-matrix",
+      "title": "Trench foot (non-freezing cold injury): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-freezing cold injury caused by prolonged exposure of the feet to cold, wet conditions, classically described in soldiers",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from history of prolonged cold, wet exposure and characteristic foot findings, Assessment of peripheral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Frostbite (a true freezing injury), Immersion foot from warm-water exposure, Chilblains (pernio)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Gradual rewarming with the foot kept dry, warm and elevated, avoiding rapid heat or rubbing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing trench foot with frostbite and mismanaging the rewarming approach",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trench foot (non-freezing cold injury)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trench_foot-dx-mgmt",
+      "title": "Diagnosis and management of Trench foot (non-freezing cold injury)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trench foot: cold, numb, swollen foot after prolonged wet exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: tissue necrosis, deep blistering, or sepsis from a wound?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical and infection review for necrosis or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History of cold wet exposure; pulses, sensation and skin examination; markers if infected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the foot show non-freezing cold injury after prolonged wet exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider frostbite, immersion foot, chilblains or critical ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gradual rewarming with the foot kept dry, warm and elevated",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Meticulous foot and wound care",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia for the painful reperfusion phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antibiotics guided by swabs for secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Prevention by keeping feet dry and changing wet socks",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Mild cases recover in days to weeks; severe injury can leave lasting sensory change",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trench_foot-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history of prolonged cold, wet exposure",
+          "cells": [
+            {
+              "text": "Characteristic foot findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulses, capillary refill and sensation",
+          "cells": [
+            {
+              "text": "Vascular and nerve function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and soft tissue examination",
+          "cells": [
+            {
+              "text": "Blistering, necrosis or infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and wound swabs",
+          "cells": [
+            {
+              "text": "Secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "Alternative ischaemic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trench_foot-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Gradual rewarming",
+          "cells": [
+            {
+              "text": "Foot kept dry, warm and elevated; avoid rapid heat or rubbing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot and wound care",
+          "cells": [
+            {
+              "text": "Monitor blistering, necrosis and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia for the hyperaemic phase",
+          "cells": [
+            {
+              "text": "Including neuropathic pain agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for infection",
+          "cells": [
+            {
+              "text": "Guided by wound swabs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Dry and warm feet, changing wet socks, avoiding constrictive footwear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic sequelae",
+          "cells": [
+            {
+              "text": "Cold hypersensitivity and neuropathic pain; specialist referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

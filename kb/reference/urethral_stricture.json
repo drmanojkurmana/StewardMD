@@ -1,177 +1,446 @@
 {
- "id": "urethral_stricture",
- "name": "Urethral stricture",
- "aliases": [
-  "urethral stenosis",
-  "urethral narrowing",
-  "stricture urethra"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A urethral stricture is a fibrotic narrowing of the urethral lumen, largely a condition of the male anterior urethra, presenting with obstructive voiding symptoms such as a weak, splayed, or spraying stream, straining, and incomplete emptying",
-   "Common causes include prior instrumentation or catheterisation, straddle and pelvic trauma, infection (historically gonococcal urethritis), and lichen sclerosus affecting the meatus and distal urethra",
-   "Symptoms overlap with prostatic obstruction, but a young man or a history of trauma, catheterisation, or urethritis should raise suspicion of stricture",
-   "Uroflowmetry classically shows a prolonged, low, plateau-shaped flow curve, and retrograde urethrography with voiding studies defines the site, length, and number of strictures",
-   "Complications include recurrent urinary infection, bladder stones, diverticula, and, in longstanding severe disease, back-pressure effects on the upper tracts and acute retention",
-   "Management principles depend on stricture length and location: dilatation or internal urethrotomy for short strictures, and urethroplasty for longer, recurrent, or complex disease, which offers the most durable cure",
-   "Repeated dilatation or urethrotomy for recurrent strictures tends to fail and may worsen fibrosis, so early referral for reconstructive urethroplasty is preferred in appropriate cases",
-   "Meatal or distal strictures should prompt evaluation for lichen sclerosus"
+  "id": "urethral_stricture",
+  "name": "Urethral stricture",
+  "aliases": [
+    "urethral stenosis",
+    "urethral narrowing",
+    "stricture urethra"
   ],
-  "pathophysiology": "A urethral stricture is the result of scarring within the corpus spongiosum (spongiofibrosis) and urethral epithelium following injury or inflammation. Trauma, infection, instrumentation, or inflammatory disease such as lichen sclerosus provokes healing by fibrosis, which contracts and narrows the lumen. The narrowed segment increases outflow resistance, causing high-pressure voiding, turbulent flow, and incomplete emptying. Persistent obstruction leads to proximal urethral dilatation, bladder wall changes, stasis with infection and stone formation, and in severe cases upper tract dilatation and retention.",
-  "additionalDifferentials": [
-   "Benign prostatic hyperplasia / bladder outlet obstruction",
-   "Bladder neck stenosis or contracture",
-   "Prostate cancer",
-   "Meatal stenosis",
-   "Neurogenic bladder",
-   "Urethral or periurethral tumour",
-   "Detrusor underactivity"
-  ],
-  "additionalInvestigations": [
-   "Uroflowmetry demonstrating a low, plateau-shaped flow pattern",
-   "Retrograde urethrography with voiding cystourethrography to localise and measure the stricture",
-   "Flexible urethroscopy to inspect the stricture directly",
-   "Urinalysis and culture for associated infection",
-   "Post-void residual and renal tract ultrasound to assess retention and upper tracts",
-   "Assessment for lichen sclerosus in distal or meatal strictures"
-  ],
-  "redFlags": [
-   "Acute urinary retention from a tight stricture, a urological emergency requiring urgent drainage",
-   "Obstructive uropathy with upper tract dilatation and renal impairment",
-   "Recurrent urinary infection, periurethral abscess, or urethral fistula",
-   "Failure of a difficult catheterisation, which should prompt suprapubic drainage rather than forceful attempts",
-   "Suspicion of urethral malignancy in an atypical or non-healing stricture"
-  ],
-  "prognosis": "Short strictures may respond to dilatation or urethrotomy but recurrence is common; urethroplasty provides high long-term success for suitable strictures, whereas complex, recurrent, or lichen sclerosus-associated disease can require staged or repeated reconstruction.",
-  "pitfalls": [
-   "Attributing obstructive symptoms to the prostate in a younger man and missing a stricture",
-   "Repeated dilatation or urethrotomy for recurrent strictures, worsening scarring and delaying definitive repair",
-   "Forcing a urethral catheter through a stricture, risking false passage and injury",
-   "Overlooking lichen sclerosus in distal strictures",
-   "Failing to assess the upper tracts and renal function in longstanding obstruction"
-  ],
-  "references": [
-   "Smith & Tanagho's General Urology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat short strictures with urethral dilatation or direct-vision internal urethrotomy, counselling that recurrence after these procedures is common",
-   "Offer urethroplasty (excision and primary anastomosis, or buccal mucosal graft or flap repair) for long, recurrent, or complex strictures as the most durable cure",
-   "Treat meatal and distal lichen sclerosus with potent topical corticosteroids and use graft rather than local skin in reconstruction",
-   "Relieve acute urinary retention with a suprapubic catheter when urethral access is not possible",
-   "Treat associated urinary infection and bladder stones and address back-pressure effects on the upper tracts",
-   "Consider intermittent self-dilatation in selected patients to maintain luminal patency",
-   "Monitor outcome with uroflowmetry, post-void residual measurement and symptom review, with upper-tract surveillance in severe disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "urethral_stricture-pathway",
-   "title": "Urethral stricture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A urethral stricture is a fibrotic narrowing of the urethral lumen, largely a condition of the male anterior urethra, presenting with obstructive voiding symptoms such as a weak, splayed, or spraying stream, straining, and incomplete",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute urinary retention from a tight stricture, a urological emergency requiring urgent drainage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Uroflowmetry demonstrating a low, plateau-shaped flow pattern, Retrograde urethrography with voiding cystourethrography to localise and measure the stricture, Flexible urethroscopy to inspect the stricture directly"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat short strictures with urethral dilatation or direct-vision internal urethrotomy, counselling that recurrence after these procedures is common"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing obstructive symptoms to the prostate in a younger man and missing a stricture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of urethral stricture."
-  }
- ],
- "tables": [
-  {
-   "id": "urethral_stricture-matrix",
-   "title": "Urethral stricture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A urethral stricture is a fibrotic narrowing of the urethral lumen, largely a condition of the male anterior urethra, presenting",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A urethral stricture is a fibrotic narrowing of the urethral lumen, largely a condition of the male anterior urethra, presenting with obstructive voiding symptoms such as a weak, splayed, or spraying stream, straining, and incomplete emptying",
+      "Common causes include prior instrumentation or catheterisation, straddle and pelvic trauma, infection (historically gonococcal urethritis), and lichen sclerosus affecting the meatus and distal urethra",
+      "Symptoms overlap with prostatic obstruction, but a young man or a history of trauma, catheterisation, or urethritis should raise suspicion of stricture",
+      "Uroflowmetry classically shows a prolonged, low, plateau-shaped flow curve, and retrograde urethrography with voiding studies defines the site, length, and number of strictures",
+      "Complications include recurrent urinary infection, bladder stones, diverticula, and, in longstanding severe disease, back-pressure effects on the upper tracts and acute retention",
+      "Management principles depend on stricture length and location: dilatation or internal urethrotomy for short strictures, and urethroplasty for longer, recurrent, or complex disease, which offers the most durable cure",
+      "Repeated dilatation or urethrotomy for recurrent strictures tends to fail and may worsen fibrosis, so early referral for reconstructive urethroplasty is preferred in appropriate cases",
+      "Meatal or distal strictures should prompt evaluation for lichen sclerosus"
     ],
-    [
-     "Key Investigations",
-     "Uroflowmetry demonstrating a low, plateau-shaped flow pattern, Retrograde urethrography with voiding cystourethrography to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A urethral stricture is the result of scarring within the corpus spongiosum (spongiofibrosis) and urethral epithelium following injury or inflammation. Trauma, infection, instrumentation, or inflammatory disease such as lichen sclerosus provokes healing by fibrosis, which contracts and narrows the lumen. The narrowed segment increases outflow resistance, causing high-pressure voiding, turbulent flow, and incomplete emptying. Persistent obstruction leads to proximal urethral dilatation, bladder wall changes, stasis with infection and stone formation, and in severe cases upper tract dilatation and retention.",
+    "additionalDifferentials": [
+      "Benign prostatic hyperplasia / bladder outlet obstruction",
+      "Bladder neck stenosis or contracture",
+      "Prostate cancer",
+      "Meatal stenosis",
+      "Neurogenic bladder",
+      "Urethral or periurethral tumour",
+      "Detrusor underactivity"
     ],
-    [
-     "Primary Differentials",
-     "Benign prostatic hyperplasia / bladder outlet obstruction, Bladder neck stenosis or contracture, Prostate cancer",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Uroflowmetry demonstrating a low, plateau-shaped flow pattern",
+      "Retrograde urethrography with voiding cystourethrography to localise and measure the stricture",
+      "Flexible urethroscopy to inspect the stricture directly",
+      "Urinalysis and culture for associated infection",
+      "Post-void residual and renal tract ultrasound to assess retention and upper tracts",
+      "Assessment for lichen sclerosus in distal or meatal strictures"
     ],
-    [
-     "Management Strategy",
-     "Treat short strictures with urethral dilatation or direct-vision internal urethrotomy, counselling that recurrence after these",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute urinary retention from a tight stricture, a urological emergency requiring urgent drainage",
+      "Obstructive uropathy with upper tract dilatation and renal impairment",
+      "Recurrent urinary infection, periurethral abscess, or urethral fistula",
+      "Failure of a difficult catheterisation, which should prompt suprapubic drainage rather than forceful attempts",
+      "Suspicion of urethral malignancy in an atypical or non-healing stricture"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing obstructive symptoms to the prostate in a younger man and missing a stricture",
-     "Prevent diagnostic or management error"
+    "prognosis": "Short strictures may respond to dilatation or urethrotomy but recurrence is common; urethroplasty provides high long-term success for suitable strictures, whereas complex, recurrent, or lichen sclerosus-associated disease can require staged or repeated reconstruction.",
+    "pitfalls": [
+      "Attributing obstructive symptoms to the prostate in a younger man and missing a stricture",
+      "Repeated dilatation or urethrotomy for recurrent strictures, worsening scarring and delaying definitive repair",
+      "Forcing a urethral catheter through a stricture, risking false passage and injury",
+      "Overlooking lichen sclerosus in distal strictures",
+      "Failing to assess the upper tracts and renal function in longstanding obstruction"
+    ],
+    "references": [
+      "Smith & Tanagho's General Urology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat short strictures with urethral dilatation or direct-vision internal urethrotomy, counselling that recurrence after these procedures is common",
+      "Offer urethroplasty (excision and primary anastomosis, or buccal mucosal graft or flap repair) for long, recurrent, or complex strictures as the most durable cure",
+      "Treat meatal and distal lichen sclerosus with potent topical corticosteroids and use graft rather than local skin in reconstruction",
+      "Relieve acute urinary retention with a suprapubic catheter when urethral access is not possible",
+      "Treat associated urinary infection and bladder stones and address back-pressure effects on the upper tracts",
+      "Consider intermittent self-dilatation in selected patients to maintain luminal patency",
+      "Monitor outcome with uroflowmetry, post-void residual measurement and symptom review, with upper-tract surveillance in severe disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for urethral stricture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "urethral-stricture-real-image",
-   "title": "Urethral stricture: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "urethral_stricture-pathway",
+      "title": "Urethral stricture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A urethral stricture is a fibrotic narrowing of the urethral lumen, largely a condition of the male anterior urethra, presenting with obstructive voiding symptoms such as a weak, splayed, or spraying stream, straining, and incomplete",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute urinary retention from a tight stricture, a urological emergency requiring urgent drainage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Uroflowmetry demonstrating a low, plateau-shaped flow pattern, Retrograde urethrography with voiding cystourethrography to localise and measure the stricture, Flexible urethroscopy to inspect the stricture directly"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat short strictures with urethral dilatation or direct-vision internal urethrotomy, counselling that recurrence after these procedures is common"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing obstructive symptoms to the prostate in a younger man and missing a stricture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of urethral stricture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "urethral_stricture-matrix",
+      "title": "Urethral stricture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A urethral stricture is a fibrotic narrowing of the urethral lumen, largely a condition of the male anterior urethra, presenting",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Uroflowmetry demonstrating a low, plateau-shaped flow pattern, Retrograde urethrography with voiding cystourethrography to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Benign prostatic hyperplasia / bladder outlet obstruction, Bladder neck stenosis or contracture, Prostate cancer",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat short strictures with urethral dilatation or direct-vision internal urethrotomy, counselling that recurrence after these",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing obstructive symptoms to the prostate in a younger man and missing a stricture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for urethral stricture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "urethral_stricture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Uroflowmetry",
+          "cells": [
+            {
+              "text": "Prolonged, low, plateau-shaped flow curve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retrograde urethrography with voiding cystourethrography",
+          "cells": [
+            {
+              "text": "Localises and measures the stricture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible urethroscopy",
+          "cells": [
+            {
+              "text": "Direct inspection of the stricture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-void residual and renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Retention and upper tract dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for lichen sclerosus",
+          "cells": [
+            {
+              "text": "Distal or meatal strictures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethral_stricture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign prostatic hyperplasia",
+          "cells": [
+            {
+              "text": "Obstructive symptoms overlap; a young man or prior trauma, catheter or urethritis favours stricture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder neck stenosis or contracture",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostate cancer",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "urethral_stricture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urethral dilatation or direct-vision urethrotomy",
+          "cells": [
+            {
+              "text": "Short strictures; repeated procedures can worsen scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethroplasty",
+          "cells": [
+            {
+              "text": "Long, recurrent or complex strictures; excision with anastomosis or buccal mucosal graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potent topical corticosteroids",
+          "cells": [
+            {
+              "text": "Meatal and distal lichen sclerosus; graft rather than local skin in reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suprapubic catheter",
+          "cells": [
+            {
+              "text": "Acute urinary retention when urethral access is not possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and stone treatment",
+          "cells": [
+            {
+              "text": "Associated urinary infection, bladder stones and back-pressure effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "urethral_stricture-dx-mgmt",
+      "title": "Diagnosis and management of Urethral stricture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected urethral stricture: obstructive voiding after catheter, trauma or urethritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute retention, upper tract dilatation or urethral fistula)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent suprapubic catheter if urethral access is not possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Uroflowmetry, retrograde urethrography with VCUG, urethroscopy, post-void residual",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does uroflowmetry show a low, plateau-shaped curve with a localised stricture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider prostate obstruction, bladder neck stenosis or neurogenic bladder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urethral dilatation or direct-vision internal urethrotomy for short strictures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urethroplasty for long, recurrent or complex strictures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Potent topical steroids for lichen sclerosus, with graft-based reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat infection and stones; address back-pressure effects",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Repeated dilatation can worsen scarring; definitive repair suits complex disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

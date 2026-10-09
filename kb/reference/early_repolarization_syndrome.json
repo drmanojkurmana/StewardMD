@@ -1,176 +1,474 @@
 {
- "id": "early_repolarization_syndrome",
- "name": "Early repolarisation syndrome",
- "aliases": [
-  "ERS",
-  "J-wave syndrome",
-  "early repolarisation syndrome",
-  "early repolarization pattern with arrhythmia",
-  "early repolarization syndrome"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Genetics",
- "specialty": "Cardiology / Inherited Cardiac Conditions",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard cardiology and inherited cardiac conditions references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by an early repolarisation ECG pattern (J-point elevation or notching/slurring at the QRS-ST junction) in the inferior and/or lateral leads together with documented ventricular arrhythmia or resuscitated cardiac arrest",
-   "The early repolarisation ECG pattern alone is common and usually benign; the syndrome label requires an associated malignant arrhythmic event",
-   "Considered one of the J-wave syndromes, sharing mechanistic overlap with Brugada syndrome",
-   "Higher-risk features include marked J-point elevation, a horizontal or descending ST segment, and inferior or global lead distribution",
-   "Typically presents in young to middle-aged adults, often men, with syncope or aborted sudden death, sometimes during sleep or at rest",
-   "Most cases are sporadic, but familial clustering occurs and variants in cardiac ion-channel genes have been described in a minority",
-   "Diagnosis is one of exclusion after structural heart disease and other channelopathies have been ruled out"
+  "id": "early_repolarization_syndrome",
+  "name": "Early repolarisation syndrome",
+  "aliases": [
+    "ERS",
+    "J-wave syndrome",
+    "early repolarisation syndrome",
+    "early repolarization pattern with arrhythmia",
+    "early repolarization syndrome"
   ],
-  "pathophysiology": "Early repolarisation syndrome is thought to arise from heterogeneity in the early phases of the ventricular action potential, particularly an accentuated transient outward potassium current relative to inward currents in the epicardium. This creates a voltage gradient across the ventricular wall that produces the characteristic J-point elevation on the ECG and, when pronounced, favours phase-2 re-entry and closely coupled ventricular ectopy that can trigger polymorphic ventricular tachycardia or ventricular fibrillation. The tendency is modulated by autonomic tone, explaining events at rest or during sleep. A subset of patients carry variants in genes controlling these ionic currents, placing the disorder among the inherited J-wave syndromes, though for most individuals no single causal gene is identified.",
-  "additionalDifferentials": [
-   "Benign early repolarisation pattern without arrhythmia",
-   "Brugada syndrome",
-   "Acute pericarditis (diffuse ST elevation)",
-   "Acute myocardial ischaemia or infarction",
-   "Idiopathic ventricular fibrillation",
-   "Hypothermia (Osborn J waves)"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG characterising J-point elevation morphology and distribution",
-   "Ambulatory and event monitoring to capture arrhythmia",
-   "Echocardiography and cardiac MRI to exclude structural disease",
-   "Coronary assessment to exclude ischaemia in appropriate patients",
-   "Genetic testing and family screening in selected high-risk or familial cases",
-   "Exclusion of other channelopathies including drug-provocation testing where indicated"
-  ],
-  "redFlags": [
-   "Resuscitated cardiac arrest or documented polymorphic ventricular tachycardia/fibrillation",
-   "Unexplained syncope with a high-risk early repolarisation pattern",
-   "Family history of sudden unexplained death at a young age",
-   "Marked J-point elevation with a horizontal or descending ST segment"
-  ],
-  "prognosis": "The isolated ECG pattern carries a very low absolute risk, whereas the full syndrome with a prior malignant arrhythmic event confers a meaningful risk of recurrence; risk stratification and secondary prevention, including defibrillator therapy in survivors of cardiac arrest, guide outcome.",
-  "pitfalls": [
-   "Labelling every early repolarisation ECG pattern as dangerous and causing undue alarm",
-   "Missing higher-risk morphological features when assessing an early repolarisation ECG",
-   "Confusing the pattern with pericarditis or ischaemia",
-   "Failing to exclude structural disease and other channelopathies before diagnosing the syndrome"
-  ],
-  "references": [
-   "ESC guidelines on ventricular arrhythmias and prevention of sudden cardiac death",
-   "Braunwald's Heart Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Implant a cardioverter-defibrillator for secondary prevention in survivors of aborted sudden death or documented ventricular arrhythmia",
-   "Infuse isoprenaline for acute electrical storm and use quinidine for chronic arrhythmia suppression",
-   "Consider catheter ablation targeting triggering ventricular ectopy for refractory arrhythmia",
-   "Risk-stratify using ECG features such as marked J-point elevation, a horizontal or descending ST segment and inferior or global lead distribution",
-   "Reassure and avoid overtreating the common benign isolated early repolarisation pattern",
-   "Offer genetic testing and cascade family screening in high-risk or familial cases",
-   "Exclude structural disease, ischaemia and other channelopathies, including drug-provocation testing where indicated",
-   "Refer to a specialist inherited cardiac conditions clinic"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "early_repolarization_syndrome-pathway",
-   "title": "Early repolarisation syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by an early repolarisation ECG pattern (J-point elevation or notching/slurring at the QRS-ST junction) in the inferior and/or lateral leads together with documented ventricular arrhythmia or resuscitated cardiac arrest",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Resuscitated cardiac arrest or documented polymorphic ventricular tachycardia/fibrillation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG characterising J-point elevation morphology and distribution, Ambulatory and event monitoring to capture arrhythmia, Echocardiography and cardiac MRI to exclude structural disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Implant a cardioverter-defibrillator for secondary prevention in survivors of aborted sudden death or documented ventricular arrhythmia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling every early repolarisation ECG pattern as dangerous and causing undue alarm"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of early repolarisation syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "early_repolarization_syndrome-matrix",
-   "title": "Early repolarisation syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by an early repolarisation ECG pattern (J-point elevation or notching/slurring at the QRS-ST junction) in the inferior",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Genetics",
+  "specialty": "Cardiology / Inherited Cardiac Conditions",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard cardiology and inherited cardiac conditions references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by an early repolarisation ECG pattern (J-point elevation or notching/slurring at the QRS-ST junction) in the inferior and/or lateral leads together with documented ventricular arrhythmia or resuscitated cardiac arrest",
+      "The early repolarisation ECG pattern alone is common and usually benign; the syndrome label requires an associated malignant arrhythmic event",
+      "Considered one of the J-wave syndromes, sharing mechanistic overlap with Brugada syndrome",
+      "Higher-risk features include marked J-point elevation, a horizontal or descending ST segment, and inferior or global lead distribution",
+      "Typically presents in young to middle-aged adults, often men, with syncope or aborted sudden death, sometimes during sleep or at rest",
+      "Most cases are sporadic, but familial clustering occurs and variants in cardiac ion-channel genes have been described in a minority",
+      "Diagnosis is one of exclusion after structural heart disease and other channelopathies have been ruled out"
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG characterising J-point elevation morphology and distribution, Ambulatory and event monitoring to capture arrhythmia,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Early repolarisation syndrome is thought to arise from heterogeneity in the early phases of the ventricular action potential, particularly an accentuated transient outward potassium current relative to inward currents in the epicardium. This creates a voltage gradient across the ventricular wall that produces the characteristic J-point elevation on the ECG and, when pronounced, favours phase-2 re-entry and closely coupled ventricular ectopy that can trigger polymorphic ventricular tachycardia or ventricular fibrillation. The tendency is modulated by autonomic tone, explaining events at rest or during sleep. A subset of patients carry variants in genes controlling these ionic currents, placing the disorder among the inherited J-wave syndromes, though for most individuals no single causal gene is identified.",
+    "additionalDifferentials": [
+      "Benign early repolarisation pattern without arrhythmia",
+      "Brugada syndrome",
+      "Acute pericarditis (diffuse ST elevation)",
+      "Acute myocardial ischaemia or infarction",
+      "Idiopathic ventricular fibrillation",
+      "Hypothermia (Osborn J waves)"
     ],
-    [
-     "Primary Differentials",
-     "Benign early repolarisation pattern without arrhythmia, Brugada syndrome, Acute pericarditis (diffuse ST elevation)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG characterising J-point elevation morphology and distribution",
+      "Ambulatory and event monitoring to capture arrhythmia",
+      "Echocardiography and cardiac MRI to exclude structural disease",
+      "Coronary assessment to exclude ischaemia in appropriate patients",
+      "Genetic testing and family screening in selected high-risk or familial cases",
+      "Exclusion of other channelopathies including drug-provocation testing where indicated"
     ],
-    [
-     "Management Strategy",
-     "Implant a cardioverter-defibrillator for secondary prevention in survivors of aborted sudden death or documented ventricular",
-     "Core treatment modality"
+    "redFlags": [
+      "Resuscitated cardiac arrest or documented polymorphic ventricular tachycardia/fibrillation",
+      "Unexplained syncope with a high-risk early repolarisation pattern",
+      "Family history of sudden unexplained death at a young age",
+      "Marked J-point elevation with a horizontal or descending ST segment"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling every early repolarisation ECG pattern as dangerous and causing undue alarm",
-     "Prevent diagnostic or management error"
+    "prognosis": "The isolated ECG pattern carries a very low absolute risk, whereas the full syndrome with a prior malignant arrhythmic event confers a meaningful risk of recurrence; risk stratification and secondary prevention, including defibrillator therapy in survivors of cardiac arrest, guide outcome.",
+    "pitfalls": [
+      "Labelling every early repolarisation ECG pattern as dangerous and causing undue alarm",
+      "Missing higher-risk morphological features when assessing an early repolarisation ECG",
+      "Confusing the pattern with pericarditis or ischaemia",
+      "Failing to exclude structural disease and other channelopathies before diagnosing the syndrome"
+    ],
+    "references": [
+      "ESC guidelines on ventricular arrhythmias and prevention of sudden cardiac death",
+      "Braunwald's Heart Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Implant a cardioverter-defibrillator for secondary prevention in survivors of aborted sudden death or documented ventricular arrhythmia",
+      "Infuse isoprenaline for acute electrical storm and use quinidine for chronic arrhythmia suppression",
+      "Consider catheter ablation targeting triggering ventricular ectopy for refractory arrhythmia",
+      "Risk-stratify using ECG features such as marked J-point elevation, a horizontal or descending ST segment and inferior or global lead distribution",
+      "Reassure and avoid overtreating the common benign isolated early repolarisation pattern",
+      "Offer genetic testing and cascade family screening in high-risk or familial cases",
+      "Exclude structural disease, ischaemia and other channelopathies, including drug-provocation testing where indicated",
+      "Refer to a specialist inherited cardiac conditions clinic"
     ]
-   ],
-   "caption": "Overview comparison matrix for early repolarisation syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "early-repolarization-syndrome-real-image",
-   "title": "Early repolarisation syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "early_repolarization_syndrome-pathway",
+      "title": "Early repolarisation syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by an early repolarisation ECG pattern (J-point elevation or notching/slurring at the QRS-ST junction) in the inferior and/or lateral leads together with documented ventricular arrhythmia or resuscitated cardiac arrest",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Resuscitated cardiac arrest or documented polymorphic ventricular tachycardia/fibrillation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG characterising J-point elevation morphology and distribution, Ambulatory and event monitoring to capture arrhythmia, Echocardiography and cardiac MRI to exclude structural disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Implant a cardioverter-defibrillator for secondary prevention in survivors of aborted sudden death or documented ventricular arrhythmia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling every early repolarisation ECG pattern as dangerous and causing undue alarm"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of early repolarisation syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "early_repolarization_syndrome-matrix",
+      "title": "Early repolarisation syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by an early repolarisation ECG pattern (J-point elevation or notching/slurring at the QRS-ST junction) in the inferior",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG characterising J-point elevation morphology and distribution, Ambulatory and event monitoring to capture arrhythmia,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Benign early repolarisation pattern without arrhythmia, Brugada syndrome, Acute pericarditis (diffuse ST elevation)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Implant a cardioverter-defibrillator for secondary prevention in survivors of aborted sudden death or documented ventricular",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling every early repolarisation ECG pattern as dangerous and causing undue alarm",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for early repolarisation syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard cardiology and inherited cardiac conditions references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "early_repolarization_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "J-point elevation morphology and distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory and event monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia capture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Structural disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary assessment",
+          "cells": [
+            {
+              "text": "Ischaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and drug-provocation testing",
+          "cells": [
+            {
+              "text": "Other channelopathies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "early_repolarization_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brugada syndrome",
+          "cells": [
+            {
+              "text": "Different ECG morphology and channelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pericarditis",
+          "cells": [
+            {
+              "text": "Diffuse ST elevation from inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothermia (Osborn J waves)",
+          "cells": [
+            {
+              "text": "Temperature-related J waves"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "early_repolarization_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Secondary prevention after aborted sudden death or documented arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute electrical storm",
+          "cells": [
+            {
+              "text": "Isoprenaline infusion; quinidine for chronic suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "cells": [
+            {
+              "text": "Triggering ventricular ectopy in refractory arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Marked J-point elevation, horizontal or descending ST segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign pattern",
+          "cells": [
+            {
+              "text": "Reassure and avoid overtreatment of the isolated pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and family screening",
+          "cells": [
+            {
+              "text": "High-risk or familial cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Inherited cardiac conditions clinic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "early_repolarization_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Early repolarisation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected early repolarisation syndrome: J-point elevation on ECG with syncope or arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (resuscitated arrest, polymorphic VT, family sudden death)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardioverter-defibrillator assessment after aborted sudden death",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG morphology; ambulatory monitoring; echo and MRI; coronary assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a high-risk J-point pattern with arrhythmia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Benign isolated pattern: reassure; consider Brugada, pericarditis or ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cardioverter-defibrillator for survivors of aborted sudden death",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Isoprenaline for acute electrical storm; quinidine for chronic suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Risk-stratify by J-point height and ST segment shape",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure and avoid overtreating the isolated benign pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic testing and cascade screening in high-risk or familial cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Isolated pattern carries very low risk; arrest survivors carry recurrence risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,423 @@
 {
- "id": "hookworm_infection",
- "name": "Hookworm infection (Ancylostoma/Necator)",
- "aliases": [
-  "ancylostomiasis",
-  "necatoriasis",
-  "Ancylostoma duodenale infection",
-  "Necator americanus infection",
-  "uncinariasis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell/Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hookworm infection is caused mainly by Necator americanus and Ancylostoma duodenale, soil-transmitted nematodes and a leading cause of iron-deficiency anaemia in the tropics",
-   "Infective larvae in warm, moist soil penetrate intact skin, classically the feet, producing a localised itchy papulovesicular rash known as ground itch",
-   "Migrating larvae passing through the lungs can cause a transient cough and wheeze with pulmonary eosinophilia (Loeffler syndrome)",
-   "Adult worms attach to the small-intestinal mucosa and feed on blood, and the chronic intestinal blood loss produces microcytic hypochromic anaemia and hypoproteinaemia proportional to worm burden",
-   "Heavy infection in children can impair growth, development and cognition, while in pregnancy it worsens maternal anaemia",
-   "Diagnosis is by finding the characteristic thin-shelled eggs on stool microscopy, with concentration or quantitative techniques used to estimate burden",
-   "Albendazole or mebendazole is the mainstay of treatment, alongside iron replacement to correct anaemia"
+  "id": "hookworm_infection",
+  "name": "Hookworm infection (Ancylostoma/Necator)",
+  "aliases": [
+    "ancylostomiasis",
+    "necatoriasis",
+    "Ancylostoma duodenale infection",
+    "Necator americanus infection",
+    "uncinariasis"
   ],
-  "pathophysiology": "Hookworm eggs passed in faeces hatch in warm, moist soil into infective filariform larvae that penetrate the skin, enter the circulation and are carried to the lungs. There they break into the alveoli, ascend the airways, are swallowed, and mature into adults that attach to the small-intestinal mucosa. Using cutting plates or teeth, the adults erode mucosal capillaries and ingest blood, while anticoagulant secretions promote continued oozing from the attachment site. The resulting chronic gastrointestinal blood and protein loss depletes iron stores, causing microcytic hypochromic anaemia and hypoalbuminaemia with oedema when the burden is heavy and dietary iron intake is poor; larval migration through skin and lung accounts for the earlier cutaneous and pulmonary manifestations.",
-  "additionalDifferentials": [
-   "Other soil-transmitted helminthiases such as ascariasis and trichuriasis",
-   "Strongyloidiasis",
-   "Iron-deficiency anaemia from other causes of chronic blood loss",
-   "Schistosomiasis",
-   "Coeliac disease and other malabsorptive states",
-   "Peptic ulcer disease or other gastrointestinal bleeding"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy for characteristic hookworm eggs",
-   "Faecal egg quantification such as Kato-Katz to estimate worm burden",
-   "Full blood count and film showing microcytic hypochromic anaemia",
-   "Iron studies including ferritin",
-   "Serum albumin to assess protein loss",
-   "Full blood count for peripheral eosinophilia during larval migration"
-  ],
-  "redFlags": [
-   "Severe symptomatic anaemia with cardiac decompensation",
-   "Heavy infection in a young child with growth or developmental impairment",
-   "Anaemia in pregnancy with risk to mother and fetus",
-   "Marked hypoproteinaemia with oedema"
-  ],
-  "prognosis": "Excellent with anthelmintic treatment and iron replacement; anaemia and protein loss are reversible, though reinfection is common in endemic areas without improved sanitation and footwear.",
-  "pitfalls": [
-   "Correcting iron-deficiency anaemia without seeking and treating the underlying hookworm burden",
-   "Overlooking the diagnosis in returning travellers with unexplained eosinophilia",
-   "Assuming a single deworming dose confers lasting protection where reinfection is ongoing",
-   "Missing coexisting soil-transmitted helminths"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give anthelmintic therapy with a benzimidazole such as albendazole or mebendazole to eradicate the adult worms",
-   "Correct iron-deficiency anaemia with oral or parenteral iron replacement and ensure adequate protein and nutrition",
-   "Confirm cure of heavy or symptomatic infection with follow-up stool examination",
-   "In pregnancy, treat maternal anaemia and give anthelmintics per local guidance after the first trimester",
-   "Prevent reinfection through footwear, sanitation and hygiene, with community mass deworming in endemic areas",
-   "Manage severe symptomatic anaemia with blood transfusion where haemodynamically indicated, alongside iron replacement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hookworm_infection-pathway",
-   "title": "Hookworm infection (Ancylostoma/Necator): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hookworm infection is caused mainly by Necator americanus and Ancylostoma duodenale, soil-transmitted nematodes and a leading cause of iron-deficiency anaemia in the tropics",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe symptomatic anaemia with cardiac decompensation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy for characteristic hookworm eggs, Faecal egg quantification such as Kato-Katz to estimate worm burden, Full blood count and film showing microcytic hypochromic anaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give anthelmintic therapy with a benzimidazole such as albendazole or mebendazole to eradicate the adult worms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Correcting iron-deficiency anaemia without seeking and treating the underlying hookworm burden"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hookworm infection (ancylostoma/necator)."
-  }
- ],
- "tables": [
-  {
-   "id": "hookworm_infection-matrix",
-   "title": "Hookworm infection (Ancylostoma/Necator): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hookworm infection is caused mainly by Necator americanus and Ancylostoma duodenale, soil-transmitted nematodes and a leading",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell/Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hookworm infection is caused mainly by Necator americanus and Ancylostoma duodenale, soil-transmitted nematodes and a leading cause of iron-deficiency anaemia in the tropics",
+      "Infective larvae in warm, moist soil penetrate intact skin, classically the feet, producing a localised itchy papulovesicular rash known as ground itch",
+      "Migrating larvae passing through the lungs can cause a transient cough and wheeze with pulmonary eosinophilia (Loeffler syndrome)",
+      "Adult worms attach to the small-intestinal mucosa and feed on blood, and the chronic intestinal blood loss produces microcytic hypochromic anaemia and hypoproteinaemia proportional to worm burden",
+      "Heavy infection in children can impair growth, development and cognition, while in pregnancy it worsens maternal anaemia",
+      "Diagnosis is by finding the characteristic thin-shelled eggs on stool microscopy, with concentration or quantitative techniques used to estimate burden",
+      "Albendazole or mebendazole is the mainstay of treatment, alongside iron replacement to correct anaemia"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy for characteristic hookworm eggs, Faecal egg quantification such as Kato-Katz to estimate worm burden, Full",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hookworm eggs passed in faeces hatch in warm, moist soil into infective filariform larvae that penetrate the skin, enter the circulation and are carried to the lungs. There they break into the alveoli, ascend the airways, are swallowed, and mature into adults that attach to the small-intestinal mucosa. Using cutting plates or teeth, the adults erode mucosal capillaries and ingest blood, while anticoagulant secretions promote continued oozing from the attachment site. The resulting chronic gastrointestinal blood and protein loss depletes iron stores, causing microcytic hypochromic anaemia and hypoalbuminaemia with oedema when the burden is heavy and dietary iron intake is poor; larval migration through skin and lung accounts for the earlier cutaneous and pulmonary manifestations.",
+    "additionalDifferentials": [
+      "Other soil-transmitted helminthiases such as ascariasis and trichuriasis",
+      "Strongyloidiasis",
+      "Iron-deficiency anaemia from other causes of chronic blood loss",
+      "Schistosomiasis",
+      "Coeliac disease and other malabsorptive states",
+      "Peptic ulcer disease or other gastrointestinal bleeding"
     ],
-    [
-     "Primary Differentials",
-     "Other soil-transmitted helminthiases such as ascariasis and trichuriasis, Strongyloidiasis, Iron-deficiency anaemia from other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy for characteristic hookworm eggs",
+      "Faecal egg quantification such as Kato-Katz to estimate worm burden",
+      "Full blood count and film showing microcytic hypochromic anaemia",
+      "Iron studies including ferritin",
+      "Serum albumin to assess protein loss",
+      "Full blood count for peripheral eosinophilia during larval migration"
     ],
-    [
-     "Management Strategy",
-     "Give anthelmintic therapy with a benzimidazole such as albendazole or mebendazole to eradicate the adult worms",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe symptomatic anaemia with cardiac decompensation",
+      "Heavy infection in a young child with growth or developmental impairment",
+      "Anaemia in pregnancy with risk to mother and fetus",
+      "Marked hypoproteinaemia with oedema"
     ],
-    [
-     "Clinical Pitfall",
-     "Correcting iron-deficiency anaemia without seeking and treating the underlying hookworm burden",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent with anthelmintic treatment and iron replacement; anaemia and protein loss are reversible, though reinfection is common in endemic areas without improved sanitation and footwear.",
+    "pitfalls": [
+      "Correcting iron-deficiency anaemia without seeking and treating the underlying hookworm burden",
+      "Overlooking the diagnosis in returning travellers with unexplained eosinophilia",
+      "Assuming a single deworming dose confers lasting protection where reinfection is ongoing",
+      "Missing coexisting soil-transmitted helminths"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give anthelmintic therapy with a benzimidazole such as albendazole or mebendazole to eradicate the adult worms",
+      "Correct iron-deficiency anaemia with oral or parenteral iron replacement and ensure adequate protein and nutrition",
+      "Confirm cure of heavy or symptomatic infection with follow-up stool examination",
+      "In pregnancy, treat maternal anaemia and give anthelmintics per local guidance after the first trimester",
+      "Prevent reinfection through footwear, sanitation and hygiene, with community mass deworming in endemic areas",
+      "Manage severe symptomatic anaemia with blood transfusion where haemodynamically indicated, alongside iron replacement"
     ]
-   ],
-   "caption": "Overview comparison matrix for hookworm infection (ancylostoma/necator)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hookworm-infection-real-image",
-   "title": "Hookworm infection (Ancylostoma/Necator): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "hookworm_infection-pathway",
+      "title": "Hookworm infection (Ancylostoma/Necator): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hookworm infection is caused mainly by Necator americanus and Ancylostoma duodenale, soil-transmitted nematodes and a leading cause of iron-deficiency anaemia in the tropics",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe symptomatic anaemia with cardiac decompensation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy for characteristic hookworm eggs, Faecal egg quantification such as Kato-Katz to estimate worm burden, Full blood count and film showing microcytic hypochromic anaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give anthelmintic therapy with a benzimidazole such as albendazole or mebendazole to eradicate the adult worms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Correcting iron-deficiency anaemia without seeking and treating the underlying hookworm burden"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hookworm infection (ancylostoma/necator)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hookworm_infection-matrix",
+      "title": "Hookworm infection (Ancylostoma/Necator): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hookworm infection is caused mainly by Necator americanus and Ancylostoma duodenale, soil-transmitted nematodes and a leading",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy for characteristic hookworm eggs, Faecal egg quantification such as Kato-Katz to estimate worm burden, Full",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other soil-transmitted helminthiases such as ascariasis and trichuriasis, Strongyloidiasis, Iron-deficiency anaemia from other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give anthelmintic therapy with a benzimidazole such as albendazole or mebendazole to eradicate the adult worms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Correcting iron-deficiency anaemia without seeking and treating the underlying hookworm burden",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hookworm infection (ancylostoma/necator)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hookworm_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Characteristic hookworm eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal egg quantification such as Kato-Katz",
+          "cells": [
+            {
+              "text": "Egg burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Microcytic hypochromic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies including ferritin",
+          "cells": [
+            {
+              "text": "Iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin",
+          "cells": [
+            {
+              "text": "Protein loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral eosinophil count",
+          "cells": [
+            {
+              "text": "Eosinophilia during larval migration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hookworm_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzimidazole anthelmintic",
+          "cells": [
+            {
+              "text": "Such as albendazole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron replacement",
+          "cells": [
+            {
+              "text": "Iron-deficiency anaemia, oral or parenteral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cure confirmation",
+          "cells": [
+            {
+              "text": "Follow-up stool examination, for heavy or symptomatic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Treat maternal anaemia and give anthelmintic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reinfection prevention",
+          "cells": [
+            {
+              "text": "Footwear, sanitation and hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe symptomatic anaemia",
+          "cells": [
+            {
+              "text": "Blood transfusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hookworm_infection-dx-mgmt",
+      "title": "Diagnosis and management of Hookworm infection (Ancylostoma/Necator)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anaemia with eosinophilia and hookworm eggs in stool",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe anaemia with heart failure, anaemia in pregnancy, or oedema from low albumin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: transfusion and cardiac support for decompensation; obstetric care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy and Kato-Katz; FBC and film; iron studies; serum albumin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are hookworm eggs found and iron-deficiency anaemia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ascariasis, strongyloidiasis, schistosomiasis, coeliac disease or peptic ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benzimidazole anthelmintic such as albendazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron replacement for iron-deficiency anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Follow-up stool examination to confirm cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prevention of reinfection with footwear and sanitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cure and anaemia correction; reinfection prevented",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

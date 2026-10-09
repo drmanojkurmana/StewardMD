@@ -1,172 +1,472 @@
 {
- "id": "atopic_dermatitis",
- "name": "Atopic dermatitis",
- "aliases": [
-  "atopic eczema",
-  "eczema",
-  "infantile eczema"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as an intensely itchy, chronic, relapsing dermatitis; itch is the cardinal symptom and often precedes visible changes",
-   "Distribution shifts with age: face and extensor surfaces in infants, flexural creases (antecubital and popliteal fossae) in older children and adults",
-   "Look for supporting features such as dry skin (xerosis), keratosis pilaris, and a personal or family history of atopy (asthma, allergic rhinitis)",
-   "The disease reflects impaired skin barrier plus immune dysregulation, so consistent emollient use is the foundation of every management plan",
-   "Flares are treated with topical corticosteroids of potency matched to site and severity, or with topical calcineurin inhibitors on delicate areas",
-   "Sudden worsening with weeping, crusting, or painful clustered vesicles suggests bacterial superinfection or eczema herpeticum, which needs prompt antiviral treatment",
-   "Identify and reduce trigger exposure (soaps, heat, sweat, aeroallergens, stress) and consider phototherapy or systemic immunomodulators for severe refractory disease"
+  "id": "atopic_dermatitis",
+  "name": "Atopic dermatitis",
+  "aliases": [
+    "atopic eczema",
+    "eczema",
+    "infantile eczema"
   ],
-  "pathophysiology": "Atopic dermatitis arises from the interplay of a defective epidermal barrier and a skewed type-2 immune response. Loss-of-function variants in the filaggrin gene and reduced barrier lipids increase transepidermal water loss and allow penetration of allergens and microbes. This drives activation of type-2 cytokines (including interleukins 4, 13, and 31) that promote inflammation, further barrier breakdown, and the sensation of itch. Scratching perpetuates an itch-scratch cycle, causing lichenification, and the barrier defect predisposes to colonisation and infection with Staphylococcus aureus and herpes simplex virus.",
-  "additionalDifferentials": [
-   "Allergic or irritant contact dermatitis",
-   "Seborrhoeic dermatitis",
-   "Scabies (especially with generalised itch)",
-   "Psoriasis",
-   "Cutaneous T-cell lymphoma in adult-onset recalcitrant disease",
-   "Immunodeficiency-associated dermatitis in infants with failure to thrive"
-  ],
-  "additionalInvestigations": [
-   "Primarily a clinical diagnosis based on morphology, distribution, and history",
-   "Bacterial swabs when infection or antibiotic resistance is suspected",
-   "Viral swab or PCR when eczema herpeticum is considered",
-   "Allergy testing (specific IgE or patch testing) only when a specific trigger is clinically suspected",
-   "Skin biopsy in atypical or treatment-resistant cases to exclude other diagnoses"
-  ],
-  "redFlags": [
-   "Eczema herpeticum: rapidly spreading painful monomorphic vesicles or punched-out erosions with systemic upset",
-   "Extensive secondary bacterial infection or signs of sepsis",
-   "Erythroderma with widespread inflammation and impaired thermoregulation",
-   "Failure to thrive or recurrent severe infection suggesting underlying immunodeficiency"
-  ],
-  "prognosis": "Many children improve substantially or clear by adolescence, but a proportion have persistent or adult-onset disease; a relapsing course is typical and long-term control depends on barrier maintenance and trigger avoidance.",
-  "pitfalls": [
-   "Under-treating flares with insufficiently potent topical steroids while over-worrying about steroid side effects",
-   "Neglecting regular generous emollient use, the cornerstone of maintenance",
-   "Missing eczema herpeticum and treating it as a routine bacterial flare",
-   "Attributing all disease to food allergy and pursuing unnecessary elimination diets"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish liberal, regular emollient use as the foundation of every plan to restore the epidermal barrier, alongside avoidance of soaps, irritants and identified triggers",
-   "Treat flares with topical corticosteroids of potency matched to site and severity, using topical calcineurin inhibitors (tacrolimus or pimecrolimus) on the face, flexures and other delicate areas",
-   "Adopt proactive maintenance therapy to flare-prone sites and consider wet-wrap dressings and measures to break the itch-scratch cycle, including bedtime sedating antihistamines for sleep",
-   "Escalate moderate-to-severe disease to narrowband ultraviolet B phototherapy, systemic immunosuppression (ciclosporin, methotrexate or azathioprine) or targeted biologic and small-molecule therapy such as anti-interleukin-4/13 dupilumab or Janus kinase inhibitors",
-   "Treat bacterial superinfection with anti-staphylococcal antibiotics, and manage suspected eczema herpeticum urgently with systemic aciclovir",
-   "Refer to dermatology for refractory or diagnostically uncertain disease and arrange allergy assessment where a specific trigger is suspected",
-   "Educate patients and carers on emollient technique, corticosteroid safety and the relapsing course to support long-term adherence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "atopic_dermatitis-pathway",
-   "title": "Atopic dermatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as an intensely itchy, chronic, relapsing dermatitis; itch is the cardinal symptom and often precedes visible changes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Eczema herpeticum: rapidly spreading painful monomorphic vesicles or punched-out erosions with systemic upset",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Primarily a clinical diagnosis based on morphology, distribution, and history, Bacterial swabs when infection or antibiotic resistance is suspected, Viral swab or PCR when eczema herpeticum is considered"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish liberal, regular emollient use as the foundation of every plan to restore the epidermal barrier, alongside avoidance of soaps, irritants and identified triggers"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Under-treating flares with insufficiently potent topical steroids while over-worrying about steroid side effects"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of atopic dermatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "atopic_dermatitis-matrix",
-   "title": "Atopic dermatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as an intensely itchy, chronic, relapsing dermatitis; itch is the cardinal symptom and often precedes visible changes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as an intensely itchy, chronic, relapsing dermatitis; itch is the cardinal symptom and often precedes visible changes",
+      "Distribution shifts with age: face and extensor surfaces in infants, flexural creases (antecubital and popliteal fossae) in older children and adults",
+      "Look for supporting features such as dry skin (xerosis), keratosis pilaris, and a personal or family history of atopy (asthma, allergic rhinitis)",
+      "The disease reflects impaired skin barrier plus immune dysregulation, so consistent emollient use is the foundation of every management plan",
+      "Flares are treated with topical corticosteroids of potency matched to site and severity, or with topical calcineurin inhibitors on delicate areas",
+      "Sudden worsening with weeping, crusting, or painful clustered vesicles suggests bacterial superinfection or eczema herpeticum, which needs prompt antiviral treatment",
+      "Identify and reduce trigger exposure (soaps, heat, sweat, aeroallergens, stress) and consider phototherapy or systemic immunomodulators for severe refractory disease"
     ],
-    [
-     "Key Investigations",
-     "Primarily a clinical diagnosis based on morphology, distribution, and history, Bacterial swabs when infection or antibiotic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Atopic dermatitis arises from the interplay of a defective epidermal barrier and a skewed type-2 immune response. Loss-of-function variants in the filaggrin gene and reduced barrier lipids increase transepidermal water loss and allow penetration of allergens and microbes. This drives activation of type-2 cytokines (including interleukins 4, 13, and 31) that promote inflammation, further barrier breakdown, and the sensation of itch. Scratching perpetuates an itch-scratch cycle, causing lichenification, and the barrier defect predisposes to colonisation and infection with Staphylococcus aureus and herpes simplex virus.",
+    "additionalDifferentials": [
+      "Allergic or irritant contact dermatitis",
+      "Seborrhoeic dermatitis",
+      "Scabies (especially with generalised itch)",
+      "Psoriasis",
+      "Cutaneous T-cell lymphoma in adult-onset recalcitrant disease",
+      "Immunodeficiency-associated dermatitis in infants with failure to thrive"
     ],
-    [
-     "Primary Differentials",
-     "Allergic or irritant contact dermatitis, Seborrhoeic dermatitis, Scabies (especially with generalised itch)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Primarily a clinical diagnosis based on morphology, distribution, and history",
+      "Bacterial swabs when infection or antibiotic resistance is suspected",
+      "Viral swab or PCR when eczema herpeticum is considered",
+      "Allergy testing (specific IgE or patch testing) only when a specific trigger is clinically suspected",
+      "Skin biopsy in atypical or treatment-resistant cases to exclude other diagnoses"
     ],
-    [
-     "Management Strategy",
-     "Establish liberal, regular emollient use as the foundation of every plan to restore the epidermal barrier, alongside avoidance of",
-     "Core treatment modality"
+    "redFlags": [
+      "Eczema herpeticum: rapidly spreading painful monomorphic vesicles or punched-out erosions with systemic upset",
+      "Extensive secondary bacterial infection or signs of sepsis",
+      "Erythroderma with widespread inflammation and impaired thermoregulation",
+      "Failure to thrive or recurrent severe infection suggesting underlying immunodeficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Under-treating flares with insufficiently potent topical steroids while over-worrying about steroid side effects",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many children improve substantially or clear by adolescence, but a proportion have persistent or adult-onset disease; a relapsing course is typical and long-term control depends on barrier maintenance and trigger avoidance.",
+    "pitfalls": [
+      "Under-treating flares with insufficiently potent topical steroids while over-worrying about steroid side effects",
+      "Neglecting regular generous emollient use, the cornerstone of maintenance",
+      "Missing eczema herpeticum and treating it as a routine bacterial flare",
+      "Attributing all disease to food allergy and pursuing unnecessary elimination diets"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish liberal, regular emollient use as the foundation of every plan to restore the epidermal barrier, alongside avoidance of soaps, irritants and identified triggers",
+      "Treat flares with topical corticosteroids of potency matched to site and severity, using topical calcineurin inhibitors (tacrolimus or pimecrolimus) on the face, flexures and other delicate areas",
+      "Adopt proactive maintenance therapy to flare-prone sites and consider wet-wrap dressings and measures to break the itch-scratch cycle, including bedtime sedating antihistamines for sleep",
+      "Escalate moderate-to-severe disease to narrowband ultraviolet B phototherapy, systemic immunosuppression (ciclosporin, methotrexate or azathioprine) or targeted biologic and small-molecule therapy such as anti-interleukin-4/13 dupilumab or Janus kinase inhibitors",
+      "Treat bacterial superinfection with anti-staphylococcal antibiotics, and manage suspected eczema herpeticum urgently with systemic aciclovir",
+      "Refer to dermatology for refractory or diagnostically uncertain disease and arrange allergy assessment where a specific trigger is suspected",
+      "Educate patients and carers on emollient technique, corticosteroid safety and the relapsing course to support long-term adherence"
     ]
-   ],
-   "caption": "Overview comparison matrix for atopic dermatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "atopic-dermatitis-real-image",
-   "title": "Atopic dermatitis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "atopic_dermatitis-pathway",
+      "title": "Atopic dermatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as an intensely itchy, chronic, relapsing dermatitis; itch is the cardinal symptom and often precedes visible changes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Eczema herpeticum: rapidly spreading painful monomorphic vesicles or punched-out erosions with systemic upset",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Primarily a clinical diagnosis based on morphology, distribution, and history, Bacterial swabs when infection or antibiotic resistance is suspected, Viral swab or PCR when eczema herpeticum is considered"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish liberal, regular emollient use as the foundation of every plan to restore the epidermal barrier, alongside avoidance of soaps, irritants and identified triggers"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Under-treating flares with insufficiently potent topical steroids while over-worrying about steroid side effects"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of atopic dermatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "atopic_dermatitis-matrix",
+      "title": "Atopic dermatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as an intensely itchy, chronic, relapsing dermatitis; itch is the cardinal symptom and often precedes visible changes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Primarily a clinical diagnosis based on morphology, distribution, and history, Bacterial swabs when infection or antibiotic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Allergic or irritant contact dermatitis, Seborrhoeic dermatitis, Scabies (especially with generalised itch)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish liberal, regular emollient use as the foundation of every plan to restore the epidermal barrier, alongside avoidance of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Under-treating flares with insufficiently potent topical steroids while over-worrying about steroid side effects",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for atopic dermatitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atopic_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from morphology, distribution and history",
+          "cells": [
+            {
+              "text": "Morphology, distribution and history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial swabs",
+          "cells": [
+            {
+              "text": "When infection or antibiotic resistance is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral swab or PCR",
+          "cells": [
+            {
+              "text": "When eczema herpeticum is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy testing (specific IgE or patch testing)",
+          "cells": [
+            {
+              "text": "Only when a specific trigger is clinically suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Atypical or treatment-resistant cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atopic_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Scabies",
+          "cells": [
+            {
+              "text": "Especially with generalised itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous T-cell lymphoma",
+          "cells": [
+            {
+              "text": "Atypical or treatment-resistant disease; biopsy excludes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atopic_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emollients",
+          "cells": [
+            {
+              "text": "Liberal, regular use to restore the epidermal barrier"
+            },
+            {
+              "text": "Foundation of every plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Potency matched to site and severity"
+            },
+            {
+              "text": "Flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Tacrolimus or pimecrolimus"
+            },
+            {
+              "text": "Alternative to corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proactive maintenance",
+          "cells": [
+            {
+              "text": "Flare-prone sites; wet-wrap dressings; breaking the itch-scratch cycle"
+            },
+            {
+              "text": "Maintenance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Narrowband UVB; ciclosporin, methotrexate or azathioprine"
+            },
+            {
+              "text": "Moderate-to-severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection management",
+          "cells": [
+            {
+              "text": "Anti-staphylococcal antibiotics; systemic aciclovir for eczema herpeticum"
+            },
+            {
+              "text": "Superinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and allergy referral",
+          "cells": [
+            {
+              "text": "Refractory or uncertain disease; allergy assessment for suspected triggers"
+            },
+            {
+              "text": "Referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atopic_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of Atopic dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Itchy eczematous eruption with a relapsing course",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Eczema herpeticum or extensive secondary infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic aciclovir for suspected eczema herpeticum",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; swabs for infection; allergy testing only if trigger suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clinical diagnosis made with mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Liberal emollients plus topical corticosteroid or calcineurin inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Proactive maintenance and wet-wrap for flare-prone sites",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Narrowband UVB or systemic immunosuppression for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anti-staphylococcal antibiotics for superinfection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Patient education on emollients, steroid safety and relapsing course",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

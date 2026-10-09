@@ -1,172 +1,461 @@
 {
- "id": "hypochondroplasia",
- "name": "Hypochondroplasia",
- "aliases": [
-  "FGFR3",
-  "HCH"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A milder FGFR3-related skeletal dysplasia that phenotypically resembles a subtle form of achondroplasia and is often not recognised until mid-childhood",
-   "Features include mildly disproportionate short stature with predominantly rhizomelic to mesomelic limb shortening, stocky build, and mild lumbar lordosis",
-   "Craniofacial features are much less marked than in achondroplasia, and macrocephaly and frontal bossing are mild or absent",
-   "Caused by autosomal dominant gain-of-function variants in FGFR3, distinct from and generally milder than the achondroplasia variant",
-   "Radiographs show mild long-bone shortening, squared ilia, and characteristically failure of the lumbar interpedicular distance to widen caudally, though changes can be subtle",
-   "A proportion of patients have learning difficulties or epilepsy, particularly those with certain variants",
-   "Confirmation is by FGFR3 molecular testing, as radiographic and clinical overlap with normal variation and other dysplasias can be considerable"
+  "id": "hypochondroplasia",
+  "name": "Hypochondroplasia",
+  "aliases": [
+    "FGFR3",
+    "HCH"
   ],
-  "pathophysiology": "Hypochondroplasia results from activating variants in FGFR3, the same receptor implicated in achondroplasia, but the substitutions produce a lesser degree of constitutive signalling. Excess FGFR3 activity again inhibits growth-plate chondrocyte proliferation and endochondral ossification, but the milder biochemical effect yields a correspondingly milder skeletal phenotype with less pronounced disproportion and craniofacial change than achondroplasia.",
-  "additionalDifferentials": [
-   "Achondroplasia",
-   "SHOX-related short stature and Leri-Weill dyschondrosteosis",
-   "Idiopathic short stature",
-   "Pseudoachondroplasia",
-   "Spondyloepiphyseal dysplasia (milder forms)",
-   "Familial short stature"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey looking for the lumbar interpedicular pattern, squared ilia, and mild long-bone shortening",
-   "FGFR3 molecular genetic testing to confirm the diagnosis and distinguish from achondroplasia",
-   "Assessment of body proportions and serial growth charting",
-   "SHOX gene testing when disproportion is predominantly mesomelic and FGFR3 testing is negative",
-   "Neurodevelopmental assessment where learning difficulty or seizures are present",
-   "Spinal imaging if symptomatic canal narrowing is suspected in adulthood"
-  ],
-  "redFlags": [
-   "Seizures or developmental regression prompting neuroimaging and neurology review",
-   "Symptomatic lumbar spinal stenosis in adulthood",
-   "Disproportion more severe than expected, prompting reconsideration of the diagnosis",
-   "Progressive spinal deformity"
-  ],
-  "prognosis": "Most individuals have a normal lifespan and only mild reduction in adult height, functioning well without major complications. A minority experience learning difficulties, epilepsy, or symptomatic spinal stenosis in later life.",
-  "pitfalls": [
-   "Dismissing the diagnosis because features are mild, leading to delayed recognition",
-   "Confusing it with achondroplasia given the shared gene and overlapping appearance",
-   "Interpreting subtle radiographs as normal",
-   "Failing to consider SHOX-related conditions in the differential of mild disproportion"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide multidisciplinary supportive care through skeletal dysplasia, orthopaedic and paediatric services, as there is no established curative drug therapy",
-   "Chart growth serially and manage disproportionate short stature, reserving limb-lengthening surgery for selected cases",
-   "Undertake orthopaedic surveillance and manage genu varum or valgum and lumbar lordosis, with decompressive surgery if symptomatic spinal stenosis causes neurological compromise",
-   "Assess neurodevelopment and treat learning difficulties or epilepsy where present, using antiseizure medication as indicated",
-   "Monitor for symptomatic spinal canal narrowing in later life and image the spine if claudication or myelopathy is suspected",
-   "Offer genetic counselling for this autosomal dominant FGFR3 disorder, including reproductive risk",
-   "Escalate to neurosurgical or spinal review for progressive neurological signs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypochondroplasia-pathway",
-   "title": "Hypochondroplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A milder FGFR3-related skeletal dysplasia that phenotypically resembles a subtle form of achondroplasia and is often not recognised until mid-childhood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Seizures or developmental regression prompting neuroimaging and neurology review",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey looking for the lumbar interpedicular pattern, squared ilia, and mild long-bone shortening, FGFR3 molecular genetic testing to confirm the diagnosis and distinguish from achondroplasia, Assessment of body"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide multidisciplinary supportive care through skeletal dysplasia, orthopaedic and paediatric services, as there is no established curative drug therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing the diagnosis because features are mild, leading to delayed recognition"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypochondroplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "hypochondroplasia-matrix",
-   "title": "Hypochondroplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A milder FGFR3-related skeletal dysplasia that phenotypically resembles a subtle form of achondroplasia and is often not",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A milder FGFR3-related skeletal dysplasia that phenotypically resembles a subtle form of achondroplasia and is often not recognised until mid-childhood",
+      "Features include mildly disproportionate short stature with predominantly rhizomelic to mesomelic limb shortening, stocky build, and mild lumbar lordosis",
+      "Craniofacial features are much less marked than in achondroplasia, and macrocephaly and frontal bossing are mild or absent",
+      "Caused by autosomal dominant gain-of-function variants in FGFR3, distinct from and generally milder than the achondroplasia variant",
+      "Radiographs show mild long-bone shortening, squared ilia, and characteristically failure of the lumbar interpedicular distance to widen caudally, though changes can be subtle",
+      "A proportion of patients have learning difficulties or epilepsy, particularly those with certain variants",
+      "Confirmation is by FGFR3 molecular testing, as radiographic and clinical overlap with normal variation and other dysplasias can be considerable"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey looking for the lumbar interpedicular pattern, squared ilia, and mild long-bone shortening, FGFR3 molecular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hypochondroplasia results from activating variants in FGFR3, the same receptor implicated in achondroplasia, but the substitutions produce a lesser degree of constitutive signalling. Excess FGFR3 activity again inhibits growth-plate chondrocyte proliferation and endochondral ossification, but the milder biochemical effect yields a correspondingly milder skeletal phenotype with less pronounced disproportion and craniofacial change than achondroplasia.",
+    "additionalDifferentials": [
+      "Achondroplasia",
+      "SHOX-related short stature and Leri-Weill dyschondrosteosis",
+      "Idiopathic short stature",
+      "Pseudoachondroplasia",
+      "Spondyloepiphyseal dysplasia (milder forms)",
+      "Familial short stature"
     ],
-    [
-     "Primary Differentials",
-     "Achondroplasia, SHOX-related short stature and Leri-Weill dyschondrosteosis, Idiopathic short stature",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey looking for the lumbar interpedicular pattern, squared ilia, and mild long-bone shortening",
+      "FGFR3 molecular genetic testing to confirm the diagnosis and distinguish from achondroplasia",
+      "Assessment of body proportions and serial growth charting",
+      "SHOX gene testing when disproportion is predominantly mesomelic and FGFR3 testing is negative",
+      "Neurodevelopmental assessment where learning difficulty or seizures are present",
+      "Spinal imaging if symptomatic canal narrowing is suspected in adulthood"
     ],
-    [
-     "Management Strategy",
-     "Provide multidisciplinary supportive care through skeletal dysplasia, orthopaedic and paediatric services, as there is no",
-     "Core treatment modality"
+    "redFlags": [
+      "Seizures or developmental regression prompting neuroimaging and neurology review",
+      "Symptomatic lumbar spinal stenosis in adulthood",
+      "Disproportion more severe than expected, prompting reconsideration of the diagnosis",
+      "Progressive spinal deformity"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing the diagnosis because features are mild, leading to delayed recognition",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most individuals have a normal lifespan and only mild reduction in adult height, functioning well without major complications. A minority experience learning difficulties, epilepsy, or symptomatic spinal stenosis in later life.",
+    "pitfalls": [
+      "Dismissing the diagnosis because features are mild, leading to delayed recognition",
+      "Confusing it with achondroplasia given the shared gene and overlapping appearance",
+      "Interpreting subtle radiographs as normal",
+      "Failing to consider SHOX-related conditions in the differential of mild disproportion"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide multidisciplinary supportive care through skeletal dysplasia, orthopaedic and paediatric services, as there is no established curative drug therapy",
+      "Chart growth serially and manage disproportionate short stature, reserving limb-lengthening surgery for selected cases",
+      "Undertake orthopaedic surveillance and manage genu varum or valgum and lumbar lordosis, with decompressive surgery if symptomatic spinal stenosis causes neurological compromise",
+      "Assess neurodevelopment and treat learning difficulties or epilepsy where present, using antiseizure medication as indicated",
+      "Monitor for symptomatic spinal canal narrowing in later life and image the spine if claudication or myelopathy is suspected",
+      "Offer genetic counselling for this autosomal dominant FGFR3 disorder, including reproductive risk",
+      "Escalate to neurosurgical or spinal review for progressive neurological signs"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypochondroplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypochondroplasia-real-image",
-   "title": "Hypochondroplasia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "hypochondroplasia-pathway",
+      "title": "Hypochondroplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A milder FGFR3-related skeletal dysplasia that phenotypically resembles a subtle form of achondroplasia and is often not recognised until mid-childhood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Seizures or developmental regression prompting neuroimaging and neurology review",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey looking for the lumbar interpedicular pattern, squared ilia, and mild long-bone shortening, FGFR3 molecular genetic testing to confirm the diagnosis and distinguish from achondroplasia, Assessment of body"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide multidisciplinary supportive care through skeletal dysplasia, orthopaedic and paediatric services, as there is no established curative drug therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing the diagnosis because features are mild, leading to delayed recognition"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypochondroplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypochondroplasia-matrix",
+      "title": "Hypochondroplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A milder FGFR3-related skeletal dysplasia that phenotypically resembles a subtle form of achondroplasia and is often not",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey looking for the lumbar interpedicular pattern, squared ilia, and mild long-bone shortening, FGFR3 molecular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Achondroplasia, SHOX-related short stature and Leri-Weill dyschondrosteosis, Idiopathic short stature",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide multidisciplinary supportive care through skeletal dysplasia, orthopaedic and paediatric services, as there is no",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing the diagnosis because features are mild, leading to delayed recognition",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypochondroplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypochondroplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Lumbar interpedicular narrowing, squared ilia and mild long-bone shortening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FGFR3 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms diagnosis and distinguishes from achondroplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Body proportions and growth charting",
+          "cells": [
+            {
+              "text": "Disproportion and growth over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SHOX gene testing",
+          "cells": [
+            {
+              "text": "Used when disproportion is mesomelic and FGFR3 testing is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental assessment",
+          "cells": [
+            {
+              "text": "Learning difficulty or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal imaging",
+          "cells": [
+            {
+              "text": "Symptomatic canal narrowing in adulthood"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypochondroplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Achondroplasia",
+          "cells": [
+            {
+              "text": "Shares FGFR3; craniofacial features much less marked in hypochondroplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SHOX-related short stature (Leri-Weill dyschondrosteosis)",
+          "cells": [
+            {
+              "text": "Predominantly mesomelic disproportion with FGFR3 testing negative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypochondroplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary supportive care",
+          "cells": [
+            {
+              "text": "Skeletal dysplasia, orthopaedic and paediatric services; no established curative drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth management",
+          "cells": [
+            {
+              "text": "Serial growth charting; limb-lengthening surgery in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surveillance",
+          "cells": [
+            {
+              "text": "Genu varum or valgum and lumbar lordosis; decompressive surgery if symptomatic stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopment and seizures",
+          "cells": [
+            {
+              "text": "Assess and treat learning difficulty or epilepsy where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal monitoring",
+          "cells": [
+            {
+              "text": "Image the spine if claudication or myelopathy is suspected in later life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant FGFR3 disorder, including reproductive risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypochondroplasia-dx-mgmt",
+      "title": "Diagnosis and management of Hypochondroplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mildly disproportionate short stature with rhizomelic or mesomelic shortening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizures, regression, progressive spinal deformity or neurological signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neuroimaging, neurology review and neurosurgical or spinal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, FGFR3 testing, growth charting, SHOX testing if FGFR3 negative",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FGFR3 variant confirmed, with achondroplasia distinguished?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SHOX-related or other short stature; repeat assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multidisciplinary supportive care; no curative drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Serial growth charting and limb-lengthening surgery in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic surveillance and decompression if spinal stenosis is symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess and treat learning difficulty or epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for autosomal dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong supportive care with spinal and neurodevelopmental monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

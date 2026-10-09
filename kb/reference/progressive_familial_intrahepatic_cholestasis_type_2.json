@@ -1,176 +1,470 @@
 {
- "id": "progressive_familial_intrahepatic_cholestasis_type_2",
- "name": "Progressive Familial Intrahepatic Cholestasis Type 2",
- "aliases": [
-  "PFIC2",
-  "BSEP deficiency",
-  "ABCB11 deficiency"
- ],
- "class": "non_infective",
- "system": "Hepatology / Inherited cholestasis",
- "specialty": "Hepatology / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Inherited cholestasis references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive low-GGT cholestasis caused by ABCB11 mutations encoding BSEP, the principal canalicular bile salt export pump; because expression is essentially liver-restricted, there are no extrahepatic features, in contrast with PFIC1.",
-   "Onset is typically neonatal and progression is more rapid than PFIC1, often with giant-cell hepatitis on biopsy.",
-   "Serum bile acids are markedly elevated with a disproportionately low GGT, and alpha-fetoprotein may be raised.",
-   "There is a substantial risk of hepatocellular carcinoma and cholangiocarcinoma in early childhood, so tumour surveillance with imaging and alpha-fetoprotein monitoring is essential.",
-   "Vitamin K-dependent coagulopathy and bleeding can be the presenting feature before jaundice is recognised.",
-   "Absent or reduced canalicular BSEP on immunohistochemistry supports the diagnosis, though some missense variants retain partial function and milder phenotypes.",
-   "Allelic disorders include the milder episodic benign recurrent intrahepatic cholestasis type 2 (BRIC2) and a contribution to intrahepatic cholestasis of pregnancy.",
-   "After transplantation, alloimmune disease from anti-BSEP antibodies can produce a cholestatic picture mimicking disease recurrence in the graft."
+  "id": "progressive_familial_intrahepatic_cholestasis_type_2",
+  "name": "Progressive Familial Intrahepatic Cholestasis Type 2",
+  "aliases": [
+    "PFIC2",
+    "BSEP deficiency",
+    "ABCB11 deficiency"
   ],
-  "pathophysiology": "ABCB11 encodes BSEP, an ATP-binding cassette transporter that is the rate-limiting canalicular pump for secretion of monovalent bile salts into bile. Loss of function prevents export of bile acids, so they accumulate within hepatocytes, producing cholestatic injury, giant-cell transformation and progressive fibrosis; the severe reduction in biliary bile acids also impairs micelle formation and fat absorption. Because BSEP is expressed almost exclusively in hepatocytes, the disease is confined to the liver, distinguishing it from PFIC1. The sustained intracellular exposure to cytotoxic bile acids underlies a markedly increased risk of malignant transformation to hepatocellular carcinoma and cholangiocarcinoma even in infancy, with genotype broadly correlating with severity, residual transporter function and cancer risk.",
-  "additionalDifferentials": [
-   "PFIC type 1 (ATP8B1/FIC1 deficiency) — low GGT with extrahepatic diarrhoea and deafness",
-   "PFIC type 3 (ABCB4/MDR3 deficiency) — high GGT",
-   "TJP2 deficiency",
-   "Inborn errors of bile acid synthesis",
-   "Neonatal haemochromatosis (gestational alloimmune liver disease)",
-   "Biliary atresia",
-   "Alagille syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum total bile acids with paired serum GGT (low or normal)",
-   "Serum alpha-fetoprotein for baseline and surveillance",
-   "Molecular genetic testing of ABCB11",
-   "Liver biopsy with BSEP immunostaining and assessment for giant-cell hepatitis",
-   "Liver ultrasound and cross-sectional imaging for tumour surveillance",
-   "Coagulation profile and fat-soluble vitamin levels"
-  ],
-  "redFlags": [
-   "Coagulopathy or bleeding at presentation from vitamin K deficiency",
-   "Rising alpha-fetoprotein or a focal liver lesion suggesting malignancy",
-   "Rapid progression to cirrhosis within the first years of life",
-   "Hepatic decompensation with ascites or variceal bleeding"
-  ],
-  "prognosis": "Disease often progresses rapidly to cirrhosis within the first years of life and carries a high childhood risk of hepatobiliary malignancy. Biliary diversion helps some children and transplantation is usually curative for the liver disease, but antibody-mediated recurrence can occur.",
-  "pitfalls": [
-   "Reading a low or normal GGT as reassuring against severe cholestasis",
-   "Failing to institute malignancy surveillance despite young age",
-   "Missing a bleeding tendency that reflects fat-soluble vitamin malabsorption",
-   "Assuming transplantation removes all risk while overlooking alloimmune BSEP recurrence"
-  ],
-  "references": [
-   "Paediatric hepatology reference texts",
-   "Inherited cholestasis clinical guidelines",
-   "Clinical genetics of liver disease references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Ileal bile acid transporter inhibitors such as odevixibat or maralixibat to interrupt bile acid recycling and reduce pruritus and hepatocellular bile acid injury",
-   "Antipruritic therapy with rifampicin and bile acid sequestrants, with ursodeoxycholic acid as an adjunct",
-   "Fat-soluble vitamin supplementation including vitamin K to correct coagulopathy, plus medium-chain-triglyceride nutritional support",
-   "Surgical biliary diversion for symptom control and disease modification in suitable children",
-   "Intensive hepatobiliary malignancy surveillance from early childhood with alpha-fetoprotein and liver ultrasound and cross-sectional imaging",
-   "Liver transplantation for end-stage disease or malignancy, with awareness of antibody-mediated BSEP recurrence in the graft",
-   "Genetic counselling and cascade family testing for this autosomal recessive ABCB11 disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_familial_intrahepatic_cholestasis_type_2-pathway",
-   "title": "Progressive Familial Intrahepatic Cholestasis Type 2: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive low-GGT cholestasis caused by ABCB11 mutations encoding BSEP, the principal canalicular bile salt export pump; because expression is essentially liver-restricted, there are no extrahepatic features, in contrast with",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Coagulopathy or bleeding at presentation from vitamin K deficiency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum total bile acids with paired serum GGT (low or normal), Serum alpha-fetoprotein for baseline and surveillance, Molecular genetic testing of ABCB11"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Ileal bile acid transporter inhibitors such as odevixibat or maralixibat to interrupt bile acid recycling and reduce pruritus and hepatocellular bile acid injury"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reading a low or normal GGT as reassuring against severe cholestasis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive familial intrahepatic cholestasis type 2."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_familial_intrahepatic_cholestasis_type_2-matrix",
-   "title": "Progressive Familial Intrahepatic Cholestasis Type 2: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive low-GGT cholestasis caused by ABCB11 mutations encoding BSEP, the principal canalicular bile salt export",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatology / Inherited cholestasis",
+  "specialty": "Hepatology / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Inherited cholestasis references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive low-GGT cholestasis caused by ABCB11 mutations encoding BSEP, the principal canalicular bile salt export pump; because expression is essentially liver-restricted, there are no extrahepatic features, in contrast with PFIC1.",
+      "Onset is typically neonatal and progression is more rapid than PFIC1, often with giant-cell hepatitis on biopsy.",
+      "Serum bile acids are markedly elevated with a disproportionately low GGT, and alpha-fetoprotein may be raised.",
+      "There is a substantial risk of hepatocellular carcinoma and cholangiocarcinoma in early childhood, so tumour surveillance with imaging and alpha-fetoprotein monitoring is essential.",
+      "Vitamin K-dependent coagulopathy and bleeding can be the presenting feature before jaundice is recognised.",
+      "Absent or reduced canalicular BSEP on immunohistochemistry supports the diagnosis, though some missense variants retain partial function and milder phenotypes.",
+      "Allelic disorders include the milder episodic benign recurrent intrahepatic cholestasis type 2 (BRIC2) and a contribution to intrahepatic cholestasis of pregnancy.",
+      "After transplantation, alloimmune disease from anti-BSEP antibodies can produce a cholestatic picture mimicking disease recurrence in the graft."
     ],
-    [
-     "Key Investigations",
-     "Serum total bile acids with paired serum GGT (low or normal), Serum alpha-fetoprotein for baseline and surveillance, Molecular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ABCB11 encodes BSEP, an ATP-binding cassette transporter that is the rate-limiting canalicular pump for secretion of monovalent bile salts into bile. Loss of function prevents export of bile acids, so they accumulate within hepatocytes, producing cholestatic injury, giant-cell transformation and progressive fibrosis; the severe reduction in biliary bile acids also impairs micelle formation and fat absorption. Because BSEP is expressed almost exclusively in hepatocytes, the disease is confined to the liver, distinguishing it from PFIC1. The sustained intracellular exposure to cytotoxic bile acids underlies a markedly increased risk of malignant transformation to hepatocellular carcinoma and cholangiocarcinoma even in infancy, with genotype broadly correlating with severity, residual transporter function and cancer risk.",
+    "additionalDifferentials": [
+      "PFIC type 1 (ATP8B1/FIC1 deficiency) — low GGT with extrahepatic diarrhoea and deafness",
+      "PFIC type 3 (ABCB4/MDR3 deficiency) — high GGT",
+      "TJP2 deficiency",
+      "Inborn errors of bile acid synthesis",
+      "Neonatal haemochromatosis (gestational alloimmune liver disease)",
+      "Biliary atresia",
+      "Alagille syndrome"
     ],
-    [
-     "Primary Differentials",
-     "PFIC type 1 (ATP8B1/FIC1 deficiency) - low GGT with extrahepatic diarrhoea and deafness, PFIC type 3 (ABCB4/MDR3 deficiency) -",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum total bile acids with paired serum GGT (low or normal)",
+      "Serum alpha-fetoprotein for baseline and surveillance",
+      "Molecular genetic testing of ABCB11",
+      "Liver biopsy with BSEP immunostaining and assessment for giant-cell hepatitis",
+      "Liver ultrasound and cross-sectional imaging for tumour surveillance",
+      "Coagulation profile and fat-soluble vitamin levels"
     ],
-    [
-     "Management Strategy",
-     "Ileal bile acid transporter inhibitors such as odevixibat or maralixibat to interrupt bile acid recycling and reduce pruritus and",
-     "Core treatment modality"
+    "redFlags": [
+      "Coagulopathy or bleeding at presentation from vitamin K deficiency",
+      "Rising alpha-fetoprotein or a focal liver lesion suggesting malignancy",
+      "Rapid progression to cirrhosis within the first years of life",
+      "Hepatic decompensation with ascites or variceal bleeding"
     ],
-    [
-     "Clinical Pitfall",
-     "Reading a low or normal GGT as reassuring against severe cholestasis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Disease often progresses rapidly to cirrhosis within the first years of life and carries a high childhood risk of hepatobiliary malignancy. Biliary diversion helps some children and transplantation is usually curative for the liver disease, but antibody-mediated recurrence can occur.",
+    "pitfalls": [
+      "Reading a low or normal GGT as reassuring against severe cholestasis",
+      "Failing to institute malignancy surveillance despite young age",
+      "Missing a bleeding tendency that reflects fat-soluble vitamin malabsorption",
+      "Assuming transplantation removes all risk while overlooking alloimmune BSEP recurrence"
+    ],
+    "references": [
+      "Paediatric hepatology reference texts",
+      "Inherited cholestasis clinical guidelines",
+      "Clinical genetics of liver disease references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Ileal bile acid transporter inhibitors such as odevixibat or maralixibat to interrupt bile acid recycling and reduce pruritus and hepatocellular bile acid injury",
+      "Antipruritic therapy with rifampicin and bile acid sequestrants, with ursodeoxycholic acid as an adjunct",
+      "Fat-soluble vitamin supplementation including vitamin K to correct coagulopathy, plus medium-chain-triglyceride nutritional support",
+      "Surgical biliary diversion for symptom control and disease modification in suitable children",
+      "Intensive hepatobiliary malignancy surveillance from early childhood with alpha-fetoprotein and liver ultrasound and cross-sectional imaging",
+      "Liver transplantation for end-stage disease or malignancy, with awareness of antibody-mediated BSEP recurrence in the graft",
+      "Genetic counselling and cascade family testing for this autosomal recessive ABCB11 disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis type 2."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-familial-intrahepatic-cholestasis-type-2-real-image",
-   "title": "Progressive Familial Intrahepatic Cholestasis Type 2: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-pathway",
+      "title": "Progressive Familial Intrahepatic Cholestasis Type 2: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive low-GGT cholestasis caused by ABCB11 mutations encoding BSEP, the principal canalicular bile salt export pump; because expression is essentially liver-restricted, there are no extrahepatic features, in contrast with",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Coagulopathy or bleeding at presentation from vitamin K deficiency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum total bile acids with paired serum GGT (low or normal), Serum alpha-fetoprotein for baseline and surveillance, Molecular genetic testing of ABCB11"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Ileal bile acid transporter inhibitors such as odevixibat or maralixibat to interrupt bile acid recycling and reduce pruritus and hepatocellular bile acid injury"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reading a low or normal GGT as reassuring against severe cholestasis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive familial intrahepatic cholestasis type 2."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-matrix",
+      "title": "Progressive Familial Intrahepatic Cholestasis Type 2: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive low-GGT cholestasis caused by ABCB11 mutations encoding BSEP, the principal canalicular bile salt export",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum total bile acids with paired serum GGT (low or normal), Serum alpha-fetoprotein for baseline and surveillance, Molecular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "PFIC type 1 (ATP8B1/FIC1 deficiency) - low GGT with extrahepatic diarrhoea and deafness, PFIC type 3 (ABCB4/MDR3 deficiency) -",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Ileal bile acid transporter inhibitors such as odevixibat or maralixibat to interrupt bile acid recycling and reduce pruritus and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reading a low or normal GGT as reassuring against severe cholestasis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis type 2."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited cholestasis references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum total bile acids with paired serum GGT",
+          "cells": [
+            {
+              "text": "Markedly raised bile acids with low or normal GGT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Baseline and surveillance level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of ABCB11",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy with BSEP immunostaining",
+          "cells": [
+            {
+              "text": "BSEP expression and giant-cell hepatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver ultrasound and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Tumour surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile and fat-soluble vitamin levels",
+          "cells": [
+            {
+              "text": "Coagulation and fat-soluble vitamin status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "PFIC type 1 (ATP8B1/FIC1 deficiency)",
+          "cells": [
+            {
+              "text": "Extrahepatic diarrhoea and deafness"
+            },
+            {
+              "text": "ATP8B1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFIC type 3 (ABCB4/MDR3 deficiency)",
+          "cells": [
+            {
+              "text": "High GGT"
+            },
+            {
+              "text": "Serum GGT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ileal bile acid transporter inhibitors",
+          "cells": [
+            {
+              "text": "Odevixibat or maralixibat to interrupt bile acid recycling and reduce pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipruritics and ursodeoxycholic acid",
+          "cells": [
+            {
+              "text": "Rifampicin and bile acid sequestrants, with ursodeoxycholic acid as adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamins and nutrition",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamins including vitamin K; medium-chain-triglyceride support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical biliary diversion",
+          "cells": [
+            {
+              "text": "Symptom control and disease modification in suitable children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein, liver ultrasound and cross-sectional imaging from early childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "End-stage disease or malignancy, with awareness of antibody-mediated BSEP recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ABCB11 disorder; cascade family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Progressive Familial Intrahepatic Cholestasis Type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PFIC type 2 (ABCB11): raised bile acids with low or normal GGT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bleeding from vitamin K deficiency, rising AFP or liver lesion, or decompensation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for decompensation, bleeding or suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bile acids and GGT; ABCB11 testing; biopsy with BSEP staining; AFP; liver imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an ABCB11 defect confirmed with PFIC types 1 and 3 excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PFIC type 1, type 3 or biliary atresia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Odevixibat or maralixibat to interrupt bile acid recycling",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rifampicin and bile acid sequestrants, with ursodeoxycholic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vitamin K and fat-soluble vitamin supplementation; MCT nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver transplantation for end-stage disease or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hepatobiliary malignancy surveillance from early childhood with AFP and imaging",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

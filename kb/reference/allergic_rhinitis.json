@@ -1,173 +1,516 @@
 {
- "id": "allergic_rhinitis",
- "name": "Allergic rhinitis",
- "aliases": [
-  "hay fever",
-  "seasonal allergic rhinitis",
-  "perennial allergic rhinitis",
-  "allergic rhinosinusitis"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An IgE-mediated hypersensitivity of the nasal mucosa presenting with sneezing, watery rhinorrhoea, nasal itching and congestion",
-   "Often classified as seasonal (pollen-driven) or perennial (dust mite, animal dander, mould), and by severity and effect on quality of life",
-   "Commonly associated with allergic conjunctivitis, asthma and eczema as part of the atopic spectrum",
-   "Examination typically reveals pale, boggy, oedematous nasal mucosa with clear secretions, and children may show an allergic salute crease and allergic shiners",
-   "Diagnosis is largely clinical, supported by skin prick testing or specific IgE assays to identify triggers",
-   "Management principles begin with allergen avoidance and saline measures, then intranasal corticosteroids and antihistamines according to severity",
-   "Poorly controlled disease contributes to sinusitis, otitis media with effusion, sleep disturbance and reduced school or work performance",
-   "Immunotherapy may be considered for confirmed single-allergen sensitivity that is inadequately controlled by standard therapy"
+  "id": "allergic_rhinitis",
+  "name": "Allergic rhinitis",
+  "aliases": [
+    "hay fever",
+    "seasonal allergic rhinitis",
+    "perennial allergic rhinitis",
+    "allergic rhinosinusitis"
   ],
-  "pathophysiology": "Allergic rhinitis is an IgE-mediated inflammatory response of the nasal mucosa to inhaled allergens. On re-exposure, allergen cross-links IgE bound to mast cells, triggering an early-phase release of histamine and other mediators that produce sneezing, itching, rhinorrhoea and congestion within minutes. A late-phase reaction, driven by recruited eosinophils, basophils and T cells, sustains mucosal inflammation and congestion hours later and heightens nasal reactivity. Chronic inflammation causes mucosal oedema and hyperresponsiveness, and shared airway inflammation links the condition to asthma.",
-  "additionalDifferentials": [
-   "Non-allergic (vasomotor) rhinitis",
-   "Infective rhinitis or rhinosinusitis",
-   "Rhinitis medicamentosa from overuse of decongestant sprays",
-   "Nasal polyps",
-   "Structural causes such as deviated nasal septum",
-   "Hormonal or drug-induced rhinitis"
-  ],
-  "additionalInvestigations": [
-   "Anterior rhinoscopy and nasal endoscopy to assess mucosa and exclude polyps",
-   "Skin prick testing to identify causative allergens",
-   "Serum allergen-specific IgE testing where skin testing is unsuitable",
-   "Nasal smear for eosinophils in selected cases",
-   "Assessment for coexisting asthma and sinus disease"
-  ],
-  "redFlags": [
-   "Unilateral nasal symptoms, bleeding or a mass suggesting a tumour or foreign body",
-   "Progressive obstruction with facial pain and purulent discharge indicating complicated sinusitis",
-   "Anosmia or orbital or visual symptoms requiring further evaluation",
-   "Symptoms of poorly controlled coexisting asthma"
-  ],
-  "prognosis": "Allergic rhinitis is generally a chronic but benign condition; with allergen avoidance and appropriate pharmacotherapy most patients achieve good symptom control, though it may persist for years and contribute to comorbidities.",
-  "pitfalls": [
-   "Missing coexisting asthma that needs concurrent treatment",
-   "Encouraging prolonged use of topical decongestants leading to rebound rhinitis",
-   "Attributing unilateral or bloodstained symptoms to allergy rather than investigating for tumour or foreign body",
-   "Underusing intranasal corticosteroids, the most effective agents, in moderate to severe disease"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin with allergen avoidance and nasal saline irrigation to reduce mucosal exposure and symptoms",
-   "Use intranasal corticosteroids as the mainstay for moderate-to-severe or persistent symptoms",
-   "Add oral or intranasal antihistamines for sneezing, itching and rhinorrhoea, using an intranasal antihistamine and corticosteroid combination when control is inadequate",
-   "Consider a leukotriene receptor antagonist, particularly where asthma coexists",
-   "Treat associated allergic conjunctivitis with ocular antihistamines or mast-cell stabilisers and coordinate asthma management",
-   "Refer for allergen immunotherapy, subcutaneous or sublingual, in confirmed refractory single-allergen disease",
-   "Refer to ENT or allergy services for diagnostic uncertainty, nasal polyps or treatment failure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "allergic_rhinitis-pathway",
-   "title": "Allergic rhinitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An IgE-mediated hypersensitivity of the nasal mucosa presenting with sneezing, watery rhinorrhoea, nasal itching and congestion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unilateral nasal symptoms, bleeding or a mass suggesting a tumour or foreign body",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anterior rhinoscopy and nasal endoscopy to assess mucosa and exclude polyps, Skin prick testing to identify causative allergens, Serum allergen-specific IgE testing where skin testing is unsuitable"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin with allergen avoidance and nasal saline irrigation to reduce mucosal exposure and symptoms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing coexisting asthma that needs concurrent treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of allergic rhinitis."
-  }
- ],
- "tables": [
-  {
-   "id": "allergic_rhinitis-matrix",
-   "title": "Allergic rhinitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An IgE-mediated hypersensitivity of the nasal mucosa presenting with sneezing, watery rhinorrhoea, nasal itching and congestion",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An IgE-mediated hypersensitivity of the nasal mucosa presenting with sneezing, watery rhinorrhoea, nasal itching and congestion",
+      "Often classified as seasonal (pollen-driven) or perennial (dust mite, animal dander, mould), and by severity and effect on quality of life",
+      "Commonly associated with allergic conjunctivitis, asthma and eczema as part of the atopic spectrum",
+      "Examination typically reveals pale, boggy, oedematous nasal mucosa with clear secretions, and children may show an allergic salute crease and allergic shiners",
+      "Diagnosis is largely clinical, supported by skin prick testing or specific IgE assays to identify triggers",
+      "Management principles begin with allergen avoidance and saline measures, then intranasal corticosteroids and antihistamines according to severity",
+      "Poorly controlled disease contributes to sinusitis, otitis media with effusion, sleep disturbance and reduced school or work performance",
+      "Immunotherapy may be considered for confirmed single-allergen sensitivity that is inadequately controlled by standard therapy"
     ],
-    [
-     "Key Investigations",
-     "Anterior rhinoscopy and nasal endoscopy to assess mucosa and exclude polyps, Skin prick testing to identify causative allergens,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Allergic rhinitis is an IgE-mediated inflammatory response of the nasal mucosa to inhaled allergens. On re-exposure, allergen cross-links IgE bound to mast cells, triggering an early-phase release of histamine and other mediators that produce sneezing, itching, rhinorrhoea and congestion within minutes. A late-phase reaction, driven by recruited eosinophils, basophils and T cells, sustains mucosal inflammation and congestion hours later and heightens nasal reactivity. Chronic inflammation causes mucosal oedema and hyperresponsiveness, and shared airway inflammation links the condition to asthma.",
+    "additionalDifferentials": [
+      "Non-allergic (vasomotor) rhinitis",
+      "Infective rhinitis or rhinosinusitis",
+      "Rhinitis medicamentosa from overuse of decongestant sprays",
+      "Nasal polyps",
+      "Structural causes such as deviated nasal septum",
+      "Hormonal or drug-induced rhinitis"
     ],
-    [
-     "Primary Differentials",
-     "Non-allergic (vasomotor) rhinitis, Infective rhinitis or rhinosinusitis, Rhinitis medicamentosa from overuse of decongestant",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anterior rhinoscopy and nasal endoscopy to assess mucosa and exclude polyps",
+      "Skin prick testing to identify causative allergens",
+      "Serum allergen-specific IgE testing where skin testing is unsuitable",
+      "Nasal smear for eosinophils in selected cases",
+      "Assessment for coexisting asthma and sinus disease"
     ],
-    [
-     "Management Strategy",
-     "Begin with allergen avoidance and nasal saline irrigation to reduce mucosal exposure and symptoms",
-     "Core treatment modality"
+    "redFlags": [
+      "Unilateral nasal symptoms, bleeding or a mass suggesting a tumour or foreign body",
+      "Progressive obstruction with facial pain and purulent discharge indicating complicated sinusitis",
+      "Anosmia or orbital or visual symptoms requiring further evaluation",
+      "Symptoms of poorly controlled coexisting asthma"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing coexisting asthma that needs concurrent treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Allergic rhinitis is generally a chronic but benign condition; with allergen avoidance and appropriate pharmacotherapy most patients achieve good symptom control, though it may persist for years and contribute to comorbidities.",
+    "pitfalls": [
+      "Missing coexisting asthma that needs concurrent treatment",
+      "Encouraging prolonged use of topical decongestants leading to rebound rhinitis",
+      "Attributing unilateral or bloodstained symptoms to allergy rather than investigating for tumour or foreign body",
+      "Underusing intranasal corticosteroids, the most effective agents, in moderate to severe disease"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin with allergen avoidance and nasal saline irrigation to reduce mucosal exposure and symptoms",
+      "Use intranasal corticosteroids as the mainstay for moderate-to-severe or persistent symptoms",
+      "Add oral or intranasal antihistamines for sneezing, itching and rhinorrhoea, using an intranasal antihistamine and corticosteroid combination when control is inadequate",
+      "Consider a leukotriene receptor antagonist, particularly where asthma coexists",
+      "Treat associated allergic conjunctivitis with ocular antihistamines or mast-cell stabilisers and coordinate asthma management",
+      "Refer for allergen immunotherapy, subcutaneous or sublingual, in confirmed refractory single-allergen disease",
+      "Refer to ENT or allergy services for diagnostic uncertainty, nasal polyps or treatment failure"
     ]
-   ],
-   "caption": "Overview comparison matrix for allergic rhinitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "allergic-rhinitis-real-image",
-   "title": "Allergic rhinitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "allergic_rhinitis-pathway",
+      "title": "Allergic rhinitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An IgE-mediated hypersensitivity of the nasal mucosa presenting with sneezing, watery rhinorrhoea, nasal itching and congestion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unilateral nasal symptoms, bleeding or a mass suggesting a tumour or foreign body",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anterior rhinoscopy and nasal endoscopy to assess mucosa and exclude polyps, Skin prick testing to identify causative allergens, Serum allergen-specific IgE testing where skin testing is unsuitable"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin with allergen avoidance and nasal saline irrigation to reduce mucosal exposure and symptoms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing coexisting asthma that needs concurrent treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of allergic rhinitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "allergic_rhinitis-matrix",
+      "title": "Allergic rhinitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An IgE-mediated hypersensitivity of the nasal mucosa presenting with sneezing, watery rhinorrhoea, nasal itching and congestion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anterior rhinoscopy and nasal endoscopy to assess mucosa and exclude polyps, Skin prick testing to identify causative allergens,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-allergic (vasomotor) rhinitis, Infective rhinitis or rhinosinusitis, Rhinitis medicamentosa from overuse of decongestant",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin with allergen avoidance and nasal saline irrigation to reduce mucosal exposure and symptoms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing coexisting asthma that needs concurrent treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for allergic rhinitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "allergic_rhinitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anterior rhinoscopy and nasal endoscopy",
+          "cells": [
+            {
+              "text": "Mucosal appearance and polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin prick testing",
+          "cells": [
+            {
+              "text": "Causative allergens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum allergen-specific IgE where skin testing is unsuitable",
+          "cells": [
+            {
+              "text": "Sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal smear for eosinophils in selected cases",
+          "cells": [
+            {
+              "text": "Eosinophilic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for coexisting asthma and sinus disease",
+          "cells": [
+            {
+              "text": "Comorbidity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "allergic_rhinitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-allergic (vasomotor) rhinitis",
+          "cells": [
+            {
+              "text": "No sensitisation on testing"
+            },
+            {
+              "text": "Skin prick testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective rhinitis or rhinosinusitis",
+          "cells": [
+            {
+              "text": "Purulent discharge or facial pain"
+            },
+            {
+              "text": "Clinical review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhinitis medicamentosa",
+          "cells": [
+            {
+              "text": "Overuse of decongestant sprays"
+            },
+            {
+              "text": "Medication history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal polyps",
+          "cells": [
+            {
+              "text": "Polyps on endoscopy"
+            },
+            {
+              "text": "Nasal endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deviated nasal septum",
+          "cells": [
+            {
+              "text": "Structural obstruction"
+            },
+            {
+              "text": "Rhinoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "allergic_rhinitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergen avoidance and nasal saline irrigation",
+          "cells": [
+            {
+              "text": "Reduces mucosal exposure"
+            },
+            {
+              "text": "First step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intranasal corticosteroids",
+          "cells": [
+            {
+              "text": "Moderate-to-severe or persistent symptoms"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral or intranasal antihistamines, or an intranasal antihistamine and corticosteroid combination",
+          "cells": [
+            {
+              "text": "Sneezing, itching and rhinorrhoea"
+            },
+            {
+              "text": "Combination if control inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leukotriene receptor antagonist",
+          "cells": [
+            {
+              "text": "Coexisting asthma"
+            },
+            {
+              "text": "Consider when asthma coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular antihistamines or mast-cell stabilisers",
+          "cells": [
+            {
+              "text": "Allergic conjunctivitis"
+            },
+            {
+              "text": "Coordinate asthma management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergen immunotherapy, subcutaneous or sublingual",
+          "cells": [
+            {
+              "text": "Refractory single-allergen disease"
+            },
+            {
+              "text": "Specialist referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT or allergy referral",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty, polyps or treatment failure"
+            },
+            {
+              "text": "Referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "allergic_rhinitis-dx-mgmt",
+      "title": "Diagnosis and management of Allergic rhinitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sneezing, watery rhinorrhoea and itching with nasal congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Unilateral symptoms, bleeding, mass or purulent discharge?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ENT review for mass or suspected tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rhinoscopy and endoscopy; skin prick or specific IgE; asthma check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sensitisation confirmed with typical seasonal or perennial pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Allergen avoidance and nasal saline irrigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review non-allergic rhinitis, infection, polyps and septal deviation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intranasal corticosteroids for persistent symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antihistamines; leukotriene antagonist if asthma coexists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ocular treatment for conjunctivitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic but benign; good control with treatment and avoidance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

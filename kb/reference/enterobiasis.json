@@ -1,174 +1,434 @@
 {
- "id": "enterobiasis",
- "name": "Enterobiasis (pinworm)",
- "aliases": [
-  "pinworm infection",
-  "threadworm infection",
-  "Enterobius vermicularis infection",
-  "oxyuriasis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell/Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Enterobiasis is caused by the pinworm Enterobius vermicularis and is the commonest helminth infection in temperate regions, particularly among school-age children",
-   "The cardinal symptom is nocturnal perianal and perineal itching, caused by the gravid female migrating to the anus at night to deposit eggs on the perianal skin",
-   "Transmission is faecal-oral via ingestion of eggs, readily spread within households and institutions by contaminated hands, bedding and fomites, and autoinfection sustains the cycle",
-   "Eggs are not usually found in stool; the perianal cellulose tape (sticky tape) test applied in the early morning is the diagnostic method of choice",
-   "The eggs are characteristically oval and flattened on one side, and adult worms may occasionally be seen at the anus",
-   "In girls, aberrant migration can rarely cause vulvovaginitis or involvement of the genital tract",
-   "Treatment with pyrantel, albendazole or mebendazole is given with a repeat dose after about two weeks and treatment of household contacts, alongside hygiene measures"
+  "id": "enterobiasis",
+  "name": "Enterobiasis (pinworm)",
+  "aliases": [
+    "pinworm infection",
+    "threadworm infection",
+    "Enterobius vermicularis infection",
+    "oxyuriasis"
   ],
-  "pathophysiology": "Enterobius vermicularis is a small white nematode whose adults inhabit the caecum and adjacent colon. At night the gravid female migrates through the anus and deposits large numbers of sticky eggs on the perianal skin, which become infective within hours. Scratching in response to the intense pruritus contaminates the fingers, and eggs are then transferred to the mouth, to others, or onto bedding and surfaces; ingested eggs hatch and mature in the intestine. This ready autoinfection and person-to-person transmission explain the tendency to recur and to affect whole households. The disease is generally benign, with pruritus reflecting the local irritant and inflammatory response to egg deposition rather than tissue invasion.",
-  "additionalDifferentials": [
-   "Perianal dermatitis or eczema",
-   "Candidal or other perianal skin infection",
-   "Haemorrhoids or anal fissure",
-   "Vulvovaginitis from other causes",
-   "Other causes of pruritus ani",
-   "Lichen sclerosus"
-  ],
-  "additionalInvestigations": [
-   "Perianal cellulose tape test in the early morning for eggs",
-   "Repeated tape testing on consecutive mornings to improve yield",
-   "Direct inspection of the perianal region for adult worms",
-   "Microscopy of subungual scrapings in selected cases",
-   "Stool microscopy, recognising it has low sensitivity for this infection",
-   "Assessment of household contacts when recurrence occurs"
-  ],
-  "redFlags": [
-   "Persistent recurrence despite treatment suggesting ongoing reinfection within the household",
-   "Genitourinary or pelvic symptoms from aberrant worm migration",
-   "Secondary bacterial infection of excoriated perianal skin",
-   "Marked sleep disturbance and distress in a child"
-  ],
-  "prognosis": "Excellent; infection is benign and readily cured, though reinfection is common and eradication depends on treating close contacts and maintaining hygiene.",
-  "pitfalls": [
-   "Relying on stool microscopy, which usually misses the diagnosis, instead of the tape test",
-   "Treating the index case alone and omitting household contacts",
-   "Failing to give the recommended repeat dose, allowing relapse from autoinfection",
-   "Overlooking pinworm as a cause of paediatric vulvovaginitis"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give first-line antihelminthic treatment with a benzimidazole such as mebendazole or albendazole, or pyrantel pamoate as an alternative",
-   "Repeat the anthelmintic dose after an interval to eliminate worms maturing from surviving eggs",
-   "Treat the whole household and close contacts simultaneously to interrupt autoinfection and reinfection",
-   "Reinforce hygiene measures including handwashing, keeping nails short, discouraging scratching, and morning washing of the perianal area",
-   "Launder bedding, nightclothes and towels and clean surfaces to remove environmental eggs",
-   "Manage recurrence by re-treating contacts and reinforcing hygiene rather than assuming drug failure",
-   "Use antihelminthics with caution in pregnancy, weighing timing and severity of infection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "enterobiasis-pathway",
-   "title": "Enterobiasis (pinworm): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Enterobiasis is caused by the pinworm Enterobius vermicularis and is the commonest helminth infection in temperate regions, particularly among school-age children",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent recurrence despite treatment suggesting ongoing reinfection within the household",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Perianal cellulose tape test in the early morning for eggs, Repeated tape testing on consecutive mornings to improve yield, Direct inspection of the perianal region for adult worms"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give first-line antihelminthic treatment with a benzimidazole such as mebendazole or albendazole, or pyrantel pamoate as an alternative"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on stool microscopy, which usually misses the diagnosis, instead of the tape test"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of enterobiasis (pinworm)."
-  }
- ],
- "tables": [
-  {
-   "id": "enterobiasis-matrix",
-   "title": "Enterobiasis (pinworm): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Enterobiasis is caused by the pinworm Enterobius vermicularis and is the commonest helminth infection in temperate regions,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell/Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Enterobiasis is caused by the pinworm Enterobius vermicularis and is the commonest helminth infection in temperate regions, particularly among school-age children",
+      "The cardinal symptom is nocturnal perianal and perineal itching, caused by the gravid female migrating to the anus at night to deposit eggs on the perianal skin",
+      "Transmission is faecal-oral via ingestion of eggs, readily spread within households and institutions by contaminated hands, bedding and fomites, and autoinfection sustains the cycle",
+      "Eggs are not usually found in stool; the perianal cellulose tape (sticky tape) test applied in the early morning is the diagnostic method of choice",
+      "The eggs are characteristically oval and flattened on one side, and adult worms may occasionally be seen at the anus",
+      "In girls, aberrant migration can rarely cause vulvovaginitis or involvement of the genital tract",
+      "Treatment with pyrantel, albendazole or mebendazole is given with a repeat dose after about two weeks and treatment of household contacts, alongside hygiene measures"
     ],
-    [
-     "Key Investigations",
-     "Perianal cellulose tape test in the early morning for eggs, Repeated tape testing on consecutive mornings to improve yield,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Enterobius vermicularis is a small white nematode whose adults inhabit the caecum and adjacent colon. At night the gravid female migrates through the anus and deposits large numbers of sticky eggs on the perianal skin, which become infective within hours. Scratching in response to the intense pruritus contaminates the fingers, and eggs are then transferred to the mouth, to others, or onto bedding and surfaces; ingested eggs hatch and mature in the intestine. This ready autoinfection and person-to-person transmission explain the tendency to recur and to affect whole households. The disease is generally benign, with pruritus reflecting the local irritant and inflammatory response to egg deposition rather than tissue invasion.",
+    "additionalDifferentials": [
+      "Perianal dermatitis or eczema",
+      "Candidal or other perianal skin infection",
+      "Haemorrhoids or anal fissure",
+      "Vulvovaginitis from other causes",
+      "Other causes of pruritus ani",
+      "Lichen sclerosus"
     ],
-    [
-     "Primary Differentials",
-     "Perianal dermatitis or eczema, Candidal or other perianal skin infection, Haemorrhoids or anal fissure",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Perianal cellulose tape test in the early morning for eggs",
+      "Repeated tape testing on consecutive mornings to improve yield",
+      "Direct inspection of the perianal region for adult worms",
+      "Microscopy of subungual scrapings in selected cases",
+      "Stool microscopy, recognising it has low sensitivity for this infection",
+      "Assessment of household contacts when recurrence occurs"
     ],
-    [
-     "Management Strategy",
-     "Give first-line antihelminthic treatment with a benzimidazole such as mebendazole or albendazole, or pyrantel pamoate as an",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent recurrence despite treatment suggesting ongoing reinfection within the household",
+      "Genitourinary or pelvic symptoms from aberrant worm migration",
+      "Secondary bacterial infection of excoriated perianal skin",
+      "Marked sleep disturbance and distress in a child"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on stool microscopy, which usually misses the diagnosis, instead of the tape test",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent; infection is benign and readily cured, though reinfection is common and eradication depends on treating close contacts and maintaining hygiene.",
+    "pitfalls": [
+      "Relying on stool microscopy, which usually misses the diagnosis, instead of the tape test",
+      "Treating the index case alone and omitting household contacts",
+      "Failing to give the recommended repeat dose, allowing relapse from autoinfection",
+      "Overlooking pinworm as a cause of paediatric vulvovaginitis"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give first-line antihelminthic treatment with a benzimidazole such as mebendazole or albendazole, or pyrantel pamoate as an alternative",
+      "Repeat the anthelmintic dose after an interval to eliminate worms maturing from surviving eggs",
+      "Treat the whole household and close contacts simultaneously to interrupt autoinfection and reinfection",
+      "Reinforce hygiene measures including handwashing, keeping nails short, discouraging scratching, and morning washing of the perianal area",
+      "Launder bedding, nightclothes and towels and clean surfaces to remove environmental eggs",
+      "Manage recurrence by re-treating contacts and reinforcing hygiene rather than assuming drug failure",
+      "Use antihelminthics with caution in pregnancy, weighing timing and severity of infection"
     ]
-   ],
-   "caption": "Overview comparison matrix for enterobiasis (pinworm)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "enterobiasis-real-image",
-   "title": "Enterobiasis (pinworm): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "enterobiasis-pathway",
+      "title": "Enterobiasis (pinworm): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Enterobiasis is caused by the pinworm Enterobius vermicularis and is the commonest helminth infection in temperate regions, particularly among school-age children",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent recurrence despite treatment suggesting ongoing reinfection within the household",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Perianal cellulose tape test in the early morning for eggs, Repeated tape testing on consecutive mornings to improve yield, Direct inspection of the perianal region for adult worms"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give first-line antihelminthic treatment with a benzimidazole such as mebendazole or albendazole, or pyrantel pamoate as an alternative"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on stool microscopy, which usually misses the diagnosis, instead of the tape test"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of enterobiasis (pinworm)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "enterobiasis-matrix",
+      "title": "Enterobiasis (pinworm): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Enterobiasis is caused by the pinworm Enterobius vermicularis and is the commonest helminth infection in temperate regions,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Perianal cellulose tape test in the early morning for eggs, Repeated tape testing on consecutive mornings to improve yield,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Perianal dermatitis or eczema, Candidal or other perianal skin infection, Haemorrhoids or anal fissure",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give first-line antihelminthic treatment with a benzimidazole such as mebendazole or albendazole, or pyrantel pamoate as an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on stool microscopy, which usually misses the diagnosis, instead of the tape test",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for enterobiasis (pinworm)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "enterobiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Perianal cellulose tape test, early morning",
+          "cells": [
+            {
+              "text": "Eggs; the diagnostic test of choice, since eggs are not usually found in stool"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated tape testing on consecutive mornings",
+          "cells": [
+            {
+              "text": "Improves the yield of the tape test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct perianal inspection",
+          "cells": [
+            {
+              "text": "Adult worms, which may occasionally be seen at the anus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual scrapings",
+          "cells": [
+            {
+              "text": "Considered in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Low sensitivity; usually misses the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enterobiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line benzimidazole",
+          "cells": [
+            {
+              "text": "Mebendazole or albendazole; pyrantel pamoate as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat dose",
+          "cells": [
+            {
+              "text": "Given after about two weeks, to clear worms maturing from surviving eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat household contacts",
+          "cells": [
+            {
+              "text": "Simultaneously, to interrupt autoinfection and reinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hygiene measures",
+          "cells": [
+            {
+              "text": "Handwashing, short nails, discouraging scratching, morning washing of the perianal area"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Environmental cleaning",
+          "cells": [
+            {
+              "text": "Launder bedding, nightclothes and towels; clean surfaces"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence",
+          "cells": [
+            {
+              "text": "Re-treat contacts and reinforce hygiene rather than assuming drug failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Antihelminthics used with caution; weigh timing and severity of infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "enterobiasis-dx-mgmt",
+      "title": "Diagnosis and management of Enterobiasis (pinworm)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nocturnal perianal itching in a child or household member",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (recurrence despite treatment, genitourinary symptoms, secondary infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for genitourinary involvement and secondary bacterial skin infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Early-morning perianal cellulose tape test, repeated on consecutive mornings",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Eggs seen on the tape test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stool microscopy is insensitive; repeat tape testing or consider other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benzimidazole first line: mebendazole or albendazole; pyrantel as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeat the dose after about two weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat household contacts at the same time",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hygiene: handwashing, short nails, no scratching, morning perianal washing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Launder bedding, nightclothes and towels to remove environmental eggs",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign and readily cured; eradication depends on treating contacts",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

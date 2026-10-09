@@ -1,178 +1,466 @@
 {
- "id": "anti_glycine_receptor_encephalitis",
- "name": "Anti-glycine receptor encephalitis",
- "aliases": [
-  "Glycine receptor antibody disease",
-  "Anti-GlyR encephalomyelitis",
-  "GlyR-associated PERM"
- ],
- "class": "non_infective",
- "system": "Neurology / Autoimmune encephalitis",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuro-immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic presentation is progressive encephalomyelitis with rigidity and myoclonus (PERM), combining axial and limb rigidity, painful spasms and exaggerated startle.",
-   "Brainstem involvement produces oculomotor disturbance, gaze abnormalities, dysphagia and life-threatening autonomic instability and respiratory failure.",
-   "It overlaps with the stiff-person spectrum but tends to be more widespread and to feature prominent brainstem and myoclonic components.",
-   "Exaggerated startle and stimulus-sensitive spasms reflect loss of glycinergic inhibition in the brainstem and spinal cord.",
-   "Most cases are non-paraneoplastic, though thymoma, lymphoma and other tumours occur and justify screening.",
-   "Anti-GAD antibodies may coexist and should be tested, as the stiff-person spectrum overlaps clinically.",
-   "The condition is frequently and often dramatically responsive to immunotherapy, making early recognition important.",
-   "Autonomic and respiratory crises can be fatal, so patients may need critical-care monitoring during the acute phase."
+  "id": "anti_glycine_receptor_encephalitis",
+  "name": "Anti-glycine receptor encephalitis",
+  "aliases": [
+    "Glycine receptor antibody disease",
+    "Anti-GlyR encephalomyelitis",
+    "GlyR-associated PERM"
   ],
-  "pathophysiology": "The glycine receptor is a ligand-gated chloride channel that mediates fast inhibitory neurotransmission, predominantly in the brainstem and spinal cord, where glycinergic interneurons control motor tone, reflexes and startle. Pathogenic IgG antibodies, chiefly IgG1, bind the extracellular domain of the receptor's alpha-1 subunit and cause antigenic cross-linking and internalisation of surface receptors, reducing glycinergic inhibitory transmission. The resulting disinhibition of spinal and brainstem motor circuits produces the rigidity, painful spasms, stimulus-sensitive myoclonus and exaggerated startle that define the PERM phenotype, while brainstem involvement generates oculomotor, bulbar and autonomic dysfunction. Because injury arises largely from reversible receptor down-regulation rather than fixed neuronal loss, the disorder is typically immunotherapy-responsive. Although usually idiopathic, a minority are paraneoplastic, with tumours such as thymoma and lymphoma breaking tolerance; frequent coexistence with anti-GAD antibodies reflects shared involvement of inhibitory (GABAergic and glycinergic) pathways within the stiff-person spectrum.",
-  "additionalDifferentials": [
-   "Stiff-person syndrome and variants associated with anti-GAD antibodies",
-   "Anti-DPPX encephalitis with hyperexcitability",
-   "Tetanus and strychnine poisoning",
-   "Hereditary hyperekplexia",
-   "Neuromyotonia and other peripheral hyperexcitability syndromes",
-   "Paraneoplastic brainstem encephalitis",
-   "Spinal cord or brainstem inflammatory or structural lesions"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid cell-based assay for glycine receptor IgG",
-   "Testing for coexisting anti-GAD and other relevant antibodies",
-   "Screening for thymoma, lymphoma and other tumours with cross-sectional imaging",
-   "Brain and spinal cord MRI",
-   "Electromyography demonstrating continuous motor unit activity and co-contraction",
-   "Cerebrospinal fluid analysis with oligoclonal bands and infection exclusion",
-   "Autonomic and respiratory monitoring during acute deterioration"
-  ],
-  "redFlags": [
-   "Autonomic instability or respiratory compromise requiring critical-care support",
-   "Severe stimulus-sensitive spasms and rigidity impairing ventilation",
-   "Rapidly progressive brainstem signs including dysphagia and gaze disturbance",
-   "Identification of an underlying tumour",
-   "Falls or injury from sudden startle-induced spasms"
-  ],
-  "prognosis": "Anti-glycine receptor disease is frequently and often markedly responsive to immunotherapy, and many patients recover substantially, though relapses occur and severe autonomic or respiratory crises can be fatal in the acute phase. Prognosis is influenced by any underlying malignancy.",
-  "pitfalls": [
-   "Mistaking the presentation for tetanus, strychnine poisoning or a primary anxiety disorder",
-   "Failing to test for coexisting anti-GAD antibodies within the stiff-person spectrum",
-   "Underestimating the risk of fatal autonomic and respiratory crises",
-   "Omitting tumour screening despite most cases being non-paraneoplastic",
-   "Delaying immunotherapy in a highly treatable condition while awaiting confirmation"
-  ],
-  "references": [
-   "Standard neurology and neuro-immunology textbooks",
-   "Autoimmune encephalitis and stiff-person spectrum consensus guidance",
-   "Peer-reviewed neuro-immunology reference reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, which frequently produces marked improvement, escalating to rituximab in resistant cases",
-   "Symptomatic GABA-enhancing therapy with benzodiazepines and baclofen to control rigidity, spasms and startle",
-   "Intensive-care management of autonomic instability and respiratory failure during acute crises",
-   "Screen for and treat an associated thymoma, lymphoma or other tumour",
-   "Test for coexisting anti-GAD antibodies given the stiff-person-spectrum overlap",
-   "Maintenance immunotherapy and relapse surveillance with multidisciplinary follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anti_glycine_receptor_encephalitis-pathway",
-   "title": "Anti-glycine receptor encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic presentation is progressive encephalomyelitis with rigidity and myoclonus (PERM), combining axial and limb rigidity, painful spasms and exaggerated startle.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Autonomic instability or respiratory compromise requiring critical-care support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid cell-based assay for glycine receptor IgG, Testing for coexisting anti-GAD and other relevant antibodies, Screening for thymoma, lymphoma and other tumours with cross-sectional imaging"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, which frequently produces marked improvement, escalating to rituximab in resistant cases"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the presentation for tetanus, strychnine poisoning or a primary anxiety disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anti-glycine receptor encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "anti_glycine_receptor_encephalitis-matrix",
-   "title": "Anti-glycine receptor encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic presentation is progressive encephalomyelitis with rigidity and myoclonus (PERM), combining axial and limb rigidity,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Autoimmune encephalitis",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuro-immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic presentation is progressive encephalomyelitis with rigidity and myoclonus (PERM), combining axial and limb rigidity, painful spasms and exaggerated startle.",
+      "Brainstem involvement produces oculomotor disturbance, gaze abnormalities, dysphagia and life-threatening autonomic instability and respiratory failure.",
+      "It overlaps with the stiff-person spectrum but tends to be more widespread and to feature prominent brainstem and myoclonic components.",
+      "Exaggerated startle and stimulus-sensitive spasms reflect loss of glycinergic inhibition in the brainstem and spinal cord.",
+      "Most cases are non-paraneoplastic, though thymoma, lymphoma and other tumours occur and justify screening.",
+      "Anti-GAD antibodies may coexist and should be tested, as the stiff-person spectrum overlaps clinically.",
+      "The condition is frequently and often dramatically responsive to immunotherapy, making early recognition important.",
+      "Autonomic and respiratory crises can be fatal, so patients may need critical-care monitoring during the acute phase."
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid cell-based assay for glycine receptor IgG, Testing for coexisting anti-GAD and other relevant",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The glycine receptor is a ligand-gated chloride channel that mediates fast inhibitory neurotransmission, predominantly in the brainstem and spinal cord, where glycinergic interneurons control motor tone, reflexes and startle. Pathogenic IgG antibodies, chiefly IgG1, bind the extracellular domain of the receptor's alpha-1 subunit and cause antigenic cross-linking and internalisation of surface receptors, reducing glycinergic inhibitory transmission. The resulting disinhibition of spinal and brainstem motor circuits produces the rigidity, painful spasms, stimulus-sensitive myoclonus and exaggerated startle that define the PERM phenotype, while brainstem involvement generates oculomotor, bulbar and autonomic dysfunction. Because injury arises largely from reversible receptor down-regulation rather than fixed neuronal loss, the disorder is typically immunotherapy-responsive. Although usually idiopathic, a minority are paraneoplastic, with tumours such as thymoma and lymphoma breaking tolerance; frequent coexistence with anti-GAD antibodies reflects shared involvement of inhibitory (GABAergic and glycinergic) pathways within the stiff-person spectrum.",
+    "additionalDifferentials": [
+      "Stiff-person syndrome and variants associated with anti-GAD antibodies",
+      "Anti-DPPX encephalitis with hyperexcitability",
+      "Tetanus and strychnine poisoning",
+      "Hereditary hyperekplexia",
+      "Neuromyotonia and other peripheral hyperexcitability syndromes",
+      "Paraneoplastic brainstem encephalitis",
+      "Spinal cord or brainstem inflammatory or structural lesions"
     ],
-    [
-     "Primary Differentials",
-     "Stiff-person syndrome and variants associated with anti-GAD antibodies, Anti-DPPX encephalitis with hyperexcitability, Tetanus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid cell-based assay for glycine receptor IgG",
+      "Testing for coexisting anti-GAD and other relevant antibodies",
+      "Screening for thymoma, lymphoma and other tumours with cross-sectional imaging",
+      "Brain and spinal cord MRI",
+      "Electromyography demonstrating continuous motor unit activity and co-contraction",
+      "Cerebrospinal fluid analysis with oligoclonal bands and infection exclusion",
+      "Autonomic and respiratory monitoring during acute deterioration"
     ],
-    [
-     "Management Strategy",
-     "Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, which frequently produces marked improvement,",
-     "Core treatment modality"
+    "redFlags": [
+      "Autonomic instability or respiratory compromise requiring critical-care support",
+      "Severe stimulus-sensitive spasms and rigidity impairing ventilation",
+      "Rapidly progressive brainstem signs including dysphagia and gaze disturbance",
+      "Identification of an underlying tumour",
+      "Falls or injury from sudden startle-induced spasms"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the presentation for tetanus, strychnine poisoning or a primary anxiety disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Anti-glycine receptor disease is frequently and often markedly responsive to immunotherapy, and many patients recover substantially, though relapses occur and severe autonomic or respiratory crises can be fatal in the acute phase. Prognosis is influenced by any underlying malignancy.",
+    "pitfalls": [
+      "Mistaking the presentation for tetanus, strychnine poisoning or a primary anxiety disorder",
+      "Failing to test for coexisting anti-GAD antibodies within the stiff-person spectrum",
+      "Underestimating the risk of fatal autonomic and respiratory crises",
+      "Omitting tumour screening despite most cases being non-paraneoplastic",
+      "Delaying immunotherapy in a highly treatable condition while awaiting confirmation"
+    ],
+    "references": [
+      "Standard neurology and neuro-immunology textbooks",
+      "Autoimmune encephalitis and stiff-person spectrum consensus guidance",
+      "Peer-reviewed neuro-immunology reference reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, which frequently produces marked improvement, escalating to rituximab in resistant cases",
+      "Symptomatic GABA-enhancing therapy with benzodiazepines and baclofen to control rigidity, spasms and startle",
+      "Intensive-care management of autonomic instability and respiratory failure during acute crises",
+      "Screen for and treat an associated thymoma, lymphoma or other tumour",
+      "Test for coexisting anti-GAD antibodies given the stiff-person-spectrum overlap",
+      "Maintenance immunotherapy and relapse surveillance with multidisciplinary follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for anti-glycine receptor encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anti-glycine-receptor-encephalitis-real-image",
-   "title": "Anti-glycine receptor encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "anti_glycine_receptor_encephalitis-pathway",
+      "title": "Anti-glycine receptor encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic presentation is progressive encephalomyelitis with rigidity and myoclonus (PERM), combining axial and limb rigidity, painful spasms and exaggerated startle.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Autonomic instability or respiratory compromise requiring critical-care support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid cell-based assay for glycine receptor IgG, Testing for coexisting anti-GAD and other relevant antibodies, Screening for thymoma, lymphoma and other tumours with cross-sectional imaging"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, which frequently produces marked improvement, escalating to rituximab in resistant cases"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the presentation for tetanus, strychnine poisoning or a primary anxiety disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anti-glycine receptor encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anti_glycine_receptor_encephalitis-matrix",
+      "title": "Anti-glycine receptor encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic presentation is progressive encephalomyelitis with rigidity and myoclonus (PERM), combining axial and limb rigidity,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid cell-based assay for glycine receptor IgG, Testing for coexisting anti-GAD and other relevant",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Stiff-person syndrome and variants associated with anti-GAD antibodies, Anti-DPPX encephalitis with hyperexcitability, Tetanus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, which frequently produces marked improvement,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the presentation for tetanus, strychnine poisoning or a primary anxiety disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anti-glycine receptor encephalitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_glycine_receptor_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF glycine receptor IgG assay",
+          "cells": [
+            {
+              "text": "Antibody confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for anti-GAD and other antibodies",
+          "cells": [
+            {
+              "text": "Stiff-person-spectrum overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging for thymoma, lymphoma or other tumours",
+          "cells": [
+            {
+              "text": "Occult tumour screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Continuous motor unit activity and co-contraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Oligoclonal bands; infection excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_glycine_receptor_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Stiff-person syndrome with anti-GAD antibodies",
+          "cells": [
+            {
+              "text": "Coexisting anti-GAD antibodies are tested for"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetanus or strychnine poisoning",
+          "cells": [
+            {
+              "text": "The presentation can be mistaken for these"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_glycine_receptor_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin or plasma exchange"
+            },
+            {
+              "text": "Frequently marked improvement; rituximab for resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GABA-enhancing therapy",
+          "cells": [
+            {
+              "text": "Benzodiazepines and baclofen"
+            },
+            {
+              "text": "Rigidity, spasms and startle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive-care management",
+          "cells": [
+            {
+              "text": "Autonomic instability and respiratory failure"
+            },
+            {
+              "text": "Acute crises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour screening and treatment",
+          "cells": [
+            {
+              "text": "Thymoma, lymphoma or other tumour"
+            },
+            {
+              "text": "Screen and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-GAD testing",
+          "cells": [
+            {
+              "text": "Coexisting anti-GAD antibodies"
+            },
+            {
+              "text": "Stiff-person-spectrum overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance immunotherapy",
+          "cells": [
+            {
+              "text": "Relapse surveillance with multidisciplinary follow-up"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_glycine_receptor_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Anti-glycine receptor encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stimulus-sensitive spasms, rigidity and exaggerated startle",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Autonomic instability or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Critical-care support for autonomic instability and respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glycine receptor IgG, anti-GAD testing, tumour imaging, MRI, EMG, CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Glycine receptor IgG confirmed on serum or CSF assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids, IVIG or plasma exchange; often marked improvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat antibody testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzodiazepines and baclofen for rigidity, spasms and startle",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for and treat thymoma, lymphoma or other tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Test for coexisting anti-GAD; escalate to rituximab if resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Maintenance immunotherapy and relapse surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

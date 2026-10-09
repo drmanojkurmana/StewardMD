@@ -1,173 +1,532 @@
 {
- "id": "autosomal_dominant_lateral_temporal_epilepsy",
- "name": "Autosomal dominant lateral temporal epilepsy",
- "aliases": [
-  "ADLTE",
-  "autosomal dominant partial epilepsy with auditory features",
-  "ADPEAF",
-  "LGI1-related epilepsy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant focal epilepsy most often caused by variants in LGI1, a secreted neuronal protein that regulates synaptic transmission and excitability in the lateral temporal cortex",
-   "The characteristic feature is focal seizures with prominent auditory auras, such as buzzing, ringing or distortion of sounds",
-   "Some patients experience receptive aphasic auras, and seizures may be triggered by specific sounds in a subset of families",
-   "Onset is typically in adolescence or early adulthood and seizures are usually infrequent and readily controlled",
-   "The germline LGI1 variants of this inherited epilepsy are distinct from the acquired anti-LGI1 autoimmune limbic encephalitis, though both implicate the same protein",
-   "Brain MRI is usually normal, and interictal EEG may show few or subtle lateral temporal abnormalities",
-   "A family history of auditory or aphasic auras is a strong pointer to the diagnosis and should prompt genetic testing"
+  "id": "autosomal_dominant_lateral_temporal_epilepsy",
+  "name": "Autosomal dominant lateral temporal epilepsy",
+  "aliases": [
+    "ADLTE",
+    "autosomal dominant partial epilepsy with auditory features",
+    "ADPEAF",
+    "LGI1-related epilepsy"
   ],
-  "pathophysiology": "Autosomal dominant lateral temporal epilepsy is most commonly caused by loss-of-function variants in LGI1, which encodes leucine-rich glioma-inactivated protein 1, a secreted protein that bridges presynaptic and postsynaptic membranes through interactions with ADAM proteins and helps regulate synaptic excitability and network maturation in the lateral temporal neocortex. Reduced functional LGI1 destabilises excitatory-inhibitory balance in these auditory association regions, generating focal seizures with characteristic auditory or language auras. Notably, the same protein is the target of autoantibodies in an acquired limbic encephalitis, illustrating how genetic and immune disruption of one synaptic protein can each produce epilepsy.",
-  "additionalDifferentials": [
-   "Mesial temporal lobe epilepsy with hippocampal sclerosis",
-   "Anti-LGI1 autoimmune limbic encephalitis",
-   "Structural lateral temporal lesion (tumour, dysplasia)",
-   "Migraine with auditory or sensory aura",
-   "Primary tinnitus or otological disorder",
-   "Psychogenic non-epileptic events"
-  ],
-  "additionalInvestigations": [
-   "LGI1 molecular genetic testing",
-   "Brain MRI, typically normal, to exclude structural temporal lesions",
-   "Electroencephalography focusing on the lateral temporal region",
-   "Detailed family history documenting auditory or aphasic auras",
-   "Autoimmune antibody testing (including anti-LGI1) where an acquired encephalitis is possible",
-   "Audiological assessment to exclude a primary auditory cause"
-  ],
-  "redFlags": [
-   "Subacute cognitive decline, confusion or hyponatraemia suggesting autoimmune LGI1 encephalitis rather than inherited epilepsy",
-   "Progressive focal deficit or abnormal MRI indicating a structural lesion",
-   "Frequent or drug-resistant seizures requiring reassessment",
-   "New behavioural or memory disturbance warranting autoimmune workup"
-  ],
-  "prognosis": "Inherited LGI1-related lateral temporal epilepsy is generally benign, with infrequent focal seizures that usually respond well to antiseizure medication and normal cognition between events. This contrasts with the acquired anti-LGI1 encephalitis, which is a more serious condition requiring immunotherapy.",
-  "pitfalls": [
-   "Confusing the benign inherited epilepsy with acquired anti-LGI1 limbic encephalitis, which needs urgent immunotherapy",
-   "Dismissing auditory auras as tinnitus or a psychological symptom",
-   "Assuming a normal MRI excludes a diagnosis when the condition is typically imaging-negative",
-   "Overlooking a familial pattern of auditory or aphasic auras that supports the diagnosis"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "ILAE classification and epilepsy syndrome resources"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control focal seizures with antiseizure medication, typically a sodium-channel agent such as carbamazepine or lamotrigine, or levetiracetam",
-   "Because seizures are infrequent and usually easily controlled, aim for monotherapy at the lowest effective dose",
-   "Give seizure-safety advice and, in families with sound-triggered reflex seizures, counsel avoidance of the identified auditory trigger",
-   "Confirm the germline LGI1 diagnosis and actively exclude acquired anti-LGI1 limbic encephalitis, which instead requires immunotherapy",
-   "Provide genetic counselling and offer evaluation of relatives, given autosomal dominant inheritance with incomplete penetrance",
-   "Maintain neurology follow-up and reassess the diagnosis if seizures become drug-resistant or cognition deteriorates"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "autosomal_dominant_lateral_temporal_epilepsy-pathway",
-   "title": "Autosomal dominant lateral temporal epilepsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant focal epilepsy most often caused by variants in LGI1, a secreted neuronal protein that regulates synaptic transmission and excitability in the lateral temporal cortex",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Subacute cognitive decline, confusion or hyponatraemia suggesting autoimmune LGI1 encephalitis rather than inherited epilepsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: LGI1 molecular genetic testing, Brain MRI, typically normal, to exclude structural temporal lesions, Electroencephalography focusing on the lateral temporal region"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control focal seizures with antiseizure medication, typically a sodium-channel agent such as carbamazepine or lamotrigine, or levetiracetam"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the benign inherited epilepsy with acquired anti-LGI1 limbic encephalitis, which needs urgent immunotherapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autosomal dominant lateral temporal epilepsy."
-  }
- ],
- "tables": [
-  {
-   "id": "autosomal_dominant_lateral_temporal_epilepsy-matrix",
-   "title": "Autosomal dominant lateral temporal epilepsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant focal epilepsy most often caused by variants in LGI1, a secreted neuronal protein that regulates synaptic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant focal epilepsy most often caused by variants in LGI1, a secreted neuronal protein that regulates synaptic transmission and excitability in the lateral temporal cortex",
+      "The characteristic feature is focal seizures with prominent auditory auras, such as buzzing, ringing or distortion of sounds",
+      "Some patients experience receptive aphasic auras, and seizures may be triggered by specific sounds in a subset of families",
+      "Onset is typically in adolescence or early adulthood and seizures are usually infrequent and readily controlled",
+      "The germline LGI1 variants of this inherited epilepsy are distinct from the acquired anti-LGI1 autoimmune limbic encephalitis, though both implicate the same protein",
+      "Brain MRI is usually normal, and interictal EEG may show few or subtle lateral temporal abnormalities",
+      "A family history of auditory or aphasic auras is a strong pointer to the diagnosis and should prompt genetic testing"
     ],
-    [
-     "Key Investigations",
-     "LGI1 molecular genetic testing, Brain MRI, typically normal, to exclude structural temporal lesions, Electroencephalography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Autosomal dominant lateral temporal epilepsy is most commonly caused by loss-of-function variants in LGI1, which encodes leucine-rich glioma-inactivated protein 1, a secreted protein that bridges presynaptic and postsynaptic membranes through interactions with ADAM proteins and helps regulate synaptic excitability and network maturation in the lateral temporal neocortex. Reduced functional LGI1 destabilises excitatory-inhibitory balance in these auditory association regions, generating focal seizures with characteristic auditory or language auras. Notably, the same protein is the target of autoantibodies in an acquired limbic encephalitis, illustrating how genetic and immune disruption of one synaptic protein can each produce epilepsy.",
+    "additionalDifferentials": [
+      "Mesial temporal lobe epilepsy with hippocampal sclerosis",
+      "Anti-LGI1 autoimmune limbic encephalitis",
+      "Structural lateral temporal lesion (tumour, dysplasia)",
+      "Migraine with auditory or sensory aura",
+      "Primary tinnitus or otological disorder",
+      "Psychogenic non-epileptic events"
     ],
-    [
-     "Primary Differentials",
-     "Mesial temporal lobe epilepsy with hippocampal sclerosis, Anti-LGI1 autoimmune limbic encephalitis, Structural lateral temporal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "LGI1 molecular genetic testing",
+      "Brain MRI, typically normal, to exclude structural temporal lesions",
+      "Electroencephalography focusing on the lateral temporal region",
+      "Detailed family history documenting auditory or aphasic auras",
+      "Autoimmune antibody testing (including anti-LGI1) where an acquired encephalitis is possible",
+      "Audiological assessment to exclude a primary auditory cause"
     ],
-    [
-     "Management Strategy",
-     "Control focal seizures with antiseizure medication, typically a sodium-channel agent such as carbamazepine or lamotrigine, or",
-     "Core treatment modality"
+    "redFlags": [
+      "Subacute cognitive decline, confusion or hyponatraemia suggesting autoimmune LGI1 encephalitis rather than inherited epilepsy",
+      "Progressive focal deficit or abnormal MRI indicating a structural lesion",
+      "Frequent or drug-resistant seizures requiring reassessment",
+      "New behavioural or memory disturbance warranting autoimmune workup"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the benign inherited epilepsy with acquired anti-LGI1 limbic encephalitis, which needs urgent immunotherapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Inherited LGI1-related lateral temporal epilepsy is generally benign, with infrequent focal seizures that usually respond well to antiseizure medication and normal cognition between events. This contrasts with the acquired anti-LGI1 encephalitis, which is a more serious condition requiring immunotherapy.",
+    "pitfalls": [
+      "Confusing the benign inherited epilepsy with acquired anti-LGI1 limbic encephalitis, which needs urgent immunotherapy",
+      "Dismissing auditory auras as tinnitus or a psychological symptom",
+      "Assuming a normal MRI excludes a diagnosis when the condition is typically imaging-negative",
+      "Overlooking a familial pattern of auditory or aphasic auras that supports the diagnosis"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "ILAE classification and epilepsy syndrome resources"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control focal seizures with antiseizure medication, typically a sodium-channel agent such as carbamazepine or lamotrigine, or levetiracetam",
+      "Because seizures are infrequent and usually easily controlled, aim for monotherapy at the lowest effective dose",
+      "Give seizure-safety advice and, in families with sound-triggered reflex seizures, counsel avoidance of the identified auditory trigger",
+      "Confirm the germline LGI1 diagnosis and actively exclude acquired anti-LGI1 limbic encephalitis, which instead requires immunotherapy",
+      "Provide genetic counselling and offer evaluation of relatives, given autosomal dominant inheritance with incomplete penetrance",
+      "Maintain neurology follow-up and reassess the diagnosis if seizures become drug-resistant or cognition deteriorates"
     ]
-   ],
-   "caption": "Overview comparison matrix for autosomal dominant lateral temporal epilepsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "autosomal-dominant-lateral-temporal-epilepsy-real-image",
-   "title": "Autosomal dominant lateral temporal epilepsy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-pathway",
+      "title": "Autosomal dominant lateral temporal epilepsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant focal epilepsy most often caused by variants in LGI1, a secreted neuronal protein that regulates synaptic transmission and excitability in the lateral temporal cortex",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Subacute cognitive decline, confusion or hyponatraemia suggesting autoimmune LGI1 encephalitis rather than inherited epilepsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: LGI1 molecular genetic testing, Brain MRI, typically normal, to exclude structural temporal lesions, Electroencephalography focusing on the lateral temporal region"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control focal seizures with antiseizure medication, typically a sodium-channel agent such as carbamazepine or lamotrigine, or levetiracetam"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the benign inherited epilepsy with acquired anti-LGI1 limbic encephalitis, which needs urgent immunotherapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autosomal dominant lateral temporal epilepsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-matrix",
+      "title": "Autosomal dominant lateral temporal epilepsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant focal epilepsy most often caused by variants in LGI1, a secreted neuronal protein that regulates synaptic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "LGI1 molecular genetic testing, Brain MRI, typically normal, to exclude structural temporal lesions, Electroencephalography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mesial temporal lobe epilepsy with hippocampal sclerosis, Anti-LGI1 autoimmune limbic encephalitis, Structural lateral temporal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control focal seizures with antiseizure medication, typically a sodium-channel agent such as carbamazepine or lamotrigine, or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the benign inherited epilepsy with acquired anti-LGI1 limbic encephalitis, which needs urgent immunotherapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autosomal dominant lateral temporal epilepsy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 369-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "LGI1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Germline LGI1 diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Typically normal; excludes structural temporal lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography focused on the lateral temporal region",
+          "cells": [
+            {
+              "text": "Lateral temporal focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed family history of auditory or aphasic auras",
+          "cells": [
+            {
+              "text": "Auditory or aphasic auras"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune antibody testing including anti-LGI1",
+          "cells": [
+            {
+              "text": "Where acquired encephalitis is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Excludes a primary auditory cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mesial temporal lobe epilepsy with hippocampal sclerosis",
+          "cells": [
+            {
+              "text": "Mesial rather than lateral temporal focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-LGI1 autoimmune limbic encephalitis",
+          "cells": [
+            {
+              "text": "Subacute cognitive decline, confusion or hyponatraemia point to it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Sodium-channel agents such as carbamazepine or lamotrigine, or levetiracetam"
+            },
+            {
+              "text": "Focal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monotherapy at the lowest effective dose",
+          "cells": [
+            {
+              "text": "Seizures are infrequent and usually easily controlled"
+            },
+            {
+              "text": "Lowest effective dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure-safety and trigger advice",
+          "cells": [
+            {
+              "text": "Counsel avoidance of the identified auditory trigger"
+            },
+            {
+              "text": "Sound-triggered reflex seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude acquired encephalitis",
+          "cells": [
+            {
+              "text": "Anti-LGI1 limbic encephalitis needs immunotherapy"
+            },
+            {
+              "text": "Distinguish from germline LGI1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant with incomplete penetrance; evaluation of relatives"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology follow-up",
+          "cells": [
+            {
+              "text": "Reassess if seizures become drug-resistant or cognition deteriorates"
+            },
+            {
+              "text": "Reassessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Mesial temporal lobe epilepsy features",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Findings"
+      ],
+      "rows": [
+        {
+          "parameter": "History",
+          "cells": [
+            {
+              "text": "febrile seizures in childhood; family history of epilepsy; early onset; generalized seizures rare; seizures may remit and reappear; often intractable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clinical observations",
+          "cells": [
+            {
+              "text": "common aura; behavioral arrest or stare; complex automatisms; unilateral posturing; postictal disorientation; memory loss; dysphasia if focus is in the dominant hemisphere"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Laboratory studies",
+          "cells": [
+            {
+              "text": "unilateral or bilateral anterior temporal spikes on EEG; hypometabolism on interictal PET; hypoperfusion on interictal SPECT; material-specific memory deficits on intracranial amobarbital (Wada) test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRI findings",
+          "cells": [
+            {
+              "text": "small hippocampus with increased T2 signal; small temporal lobe; enlarged temporal horn"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pathologic findings",
+          "cells": [
+            {
+              "text": "highly selective loss of specific cell populations within the hippocampus in most cases"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Abbreviations: EEG, electroencephalogram; PET, positron emission tomography; SPECT, single photon emission computed tomography."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal dominant lateral temporal epilepsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief focal seizures with auditory or aphasic auras and a family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Subacute cognitive decline, confusion or hyponatraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Test for acquired anti-LGI1 encephalitis; start immunotherapy if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LGI1 testing, MRI, lateral temporal EEG, audiology, antibody testing if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Germline LGI1 variant confirmed with no acquired encephalitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antiseizure monotherapy with carbamazepine, lamotrigine or levetiracetam",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and treat any acquired encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trigger avoidance for sound-triggered seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Genetic counselling and evaluation of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassess if seizures become drug-resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurology follow-up with genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

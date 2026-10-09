@@ -1,177 +1,477 @@
 {
- "id": "chrome_ulcers",
- "name": "chrome ulcers",
- "aliases": [
-  "chrome holes",
-  "chromate ulcers"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "occupational medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Punched-out, painless ulcers with rolled or undermined edges and a hard-crusted base, arising at sites of skin trauma exposed to hexavalent chromium, classically over the dorsa of hands, fingers, forearms and around the nail folds.",
-   "The nasal septum is the other characteristic site: chromate exposure produces septal ulceration that may progress to painless perforation, so always examine the nose in any worker with chrome ulcers.",
-   "Hexavalent chromium (chromate, dichromate) is the corrosive, ulcerogenic and sensitising species; trivalent chromium is far less toxic to skin, which is central to understanding both prevention and substitution.",
-   "Classic exposures include electroplating, chrome tanning of leather, chromate pigment and dye manufacture, welding of stainless steel, and cement/anti-corrosion work.",
-   "A pre-existing break in the skin (cut, abrasion, cuticle tear) is usually the portal; intact skin is relatively resistant, so minor wounds must be covered before chromate work.",
-   "Ulcers are indolent and slow to heal while exposure continues but typically heal with atrophic or depressed scars once contact ceases and the wound is protected.",
-   "Chrome ulceration reflects direct corrosive injury and is distinct from chromate allergic contact dermatitis, although a worker may have both; patch testing to potassium dichromate helps identify concurrent sensitisation.",
-   "Prevention hinges on barrier protection, prompt wound care, substitution to trivalent formulations where feasible, and reducing airborne and surface chromate contamination."
+  "id": "chrome_ulcers",
+  "name": "chrome ulcers",
+  "aliases": [
+    "chrome holes",
+    "chromate ulcers"
   ],
-  "pathophysiology": "Hexavalent chromium compounds are strong oxidising agents that penetrate skin readily, particularly through breaches in the epidermal barrier. On contact with tissue they are reduced to trivalent chromium, generating reactive intermediates and free radicals that produce direct cytotoxic and corrosive coagulative necrosis of keratinocytes and dermal tissue. This yields a localised, sharply demarcated area of tissue destruction — the chrome ulcer — with a necrotic base and surrounding reactive changes. Because chromate is not appreciably painful and impairs the local inflammatory and healing response, ulcers enlarge and persist while exposure continues. The same oxidative injury on the nasal mucosa causes septal ulceration and perforation. Separately, chromium can act as a hapten binding tissue proteins to drive a delayed (type IV) hypersensitivity, but the ulcer itself is a toxic-corrosive rather than immunological lesion.",
-  "additionalDifferentials": [
-   "chromate allergic contact dermatitis",
-   "pyoderma gangrenosum",
-   "cutaneous anthrax or ecthyma (infective ulcer)",
-   "traumatic or factitious ulcer",
-   "squamous cell carcinoma or other ulcerated neoplasm",
-   "vasculitic or ischaemic ulcer",
-   "atypical mycobacterial or deep fungal ulcer"
-  ],
-  "additionalInvestigations": [
-   "detailed occupational and exposure history with workplace hygiene assessment",
-   "clinical examination of hands, forearms and nasal septum for coexisting lesions",
-   "patch testing to potassium dichromate to detect concurrent chromium sensitisation",
-   "swab of the ulcer base for microbiology to exclude secondary or primary infection",
-   "skin biopsy if the ulcer is atypical, non-healing or malignancy is suspected",
-   "environmental and biological monitoring of chromium (air sampling, urinary chromium)",
-   "assessment of surface and airborne hexavalent chromium contamination in the workplace"
-  ],
-  "redFlags": [
-   "nasal septal ulceration or perforation indicating significant mucosal chromate exposure",
-   "non-healing or expanding ulcer with atypical margins raising concern for malignancy",
-   "clinical signs of secondary infection such as spreading cellulitis or systemic upset",
-   "multiple or recurrent ulcers signalling ongoing uncontrolled workplace exposure",
-   "features suggesting systemic chromate toxicity or coexisting respiratory disease"
-  ],
-  "prognosis": "Individual ulcers usually heal with atrophic or depressed scarring once chromate contact ceases and the wound is protected, though healing is slow. Continued exposure leads to recurrent, persistent lesions and risks nasal septal perforation, so the outlook depends on effective exposure control.",
-  "pitfalls": [
-   "Mistaking a painless chrome ulcer for a trivial wound and allowing exposure to continue.",
-   "Failing to examine the nasal septum and missing early ulceration or perforation.",
-   "Confusing the corrosive ulcer with chromate allergic dermatitis and omitting patch testing when both may coexist.",
-   "Attributing a non-healing ulcer solely to chromium and overlooking malignant transformation or infection.",
-   "Neglecting workplace hygiene and colleagues, so that source control and case-finding are incomplete."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Adams' Occupational Skin Disease, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Remove the worker from further hexavalent chromium exposure and decontaminate the skin promptly, as ulcers will not heal while contact continues",
-   "Provide wound care with debridement of the necrotic base, occlusive dressings and protection of the healing ulcer",
-   "Prevent recurrence through workplace controls — substituting trivalent for hexavalent chromium, engineering controls, protective gloves and covering any skin break before chromate work",
-   "Examine the nasal septum and manage chromate-induced septal ulceration or perforation",
-   "Treat secondary bacterial infection of the ulcer with appropriate antibiotics when present",
-   "Perform patch testing to potassium dichromate and manage any coexisting allergic contact dermatitis",
-   "Refer to occupational health for workplace hygiene assessment and biological and environmental chromium monitoring across the workforce"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chrome_ulcers-pathway",
-   "title": "chrome ulcers: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Punched-out, painless ulcers with rolled or undermined edges and a hard-crusted base, arising at sites of skin trauma exposed to hexavalent chromium, classically over the dorsa of hands, fingers, forearms and around the nail folds.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: nasal septal ulceration or perforation indicating significant mucosal chromate exposure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: detailed occupational and exposure history with workplace hygiene assessment, clinical examination of hands, forearms and nasal septum for coexisting lesions, patch testing to potassium dichromate to detect concurrent"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Remove the worker from further hexavalent chromium exposure and decontaminate the skin promptly, as ulcers will not heal while contact continues"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a painless chrome ulcer for a trivial wound and allowing exposure to continue."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chrome ulcers."
-  }
- ],
- "tables": [
-  {
-   "id": "chrome_ulcers-matrix",
-   "title": "chrome ulcers: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Punched-out, painless ulcers with rolled or undermined edges and a hard-crusted base, arising at sites of skin trauma exposed to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "occupational medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Punched-out, painless ulcers with rolled or undermined edges and a hard-crusted base, arising at sites of skin trauma exposed to hexavalent chromium, classically over the dorsa of hands, fingers, forearms and around the nail folds.",
+      "The nasal septum is the other characteristic site: chromate exposure produces septal ulceration that may progress to painless perforation, so always examine the nose in any worker with chrome ulcers.",
+      "Hexavalent chromium (chromate, dichromate) is the corrosive, ulcerogenic and sensitising species; trivalent chromium is far less toxic to skin, which is central to understanding both prevention and substitution.",
+      "Classic exposures include electroplating, chrome tanning of leather, chromate pigment and dye manufacture, welding of stainless steel, and cement/anti-corrosion work.",
+      "A pre-existing break in the skin (cut, abrasion, cuticle tear) is usually the portal; intact skin is relatively resistant, so minor wounds must be covered before chromate work.",
+      "Ulcers are indolent and slow to heal while exposure continues but typically heal with atrophic or depressed scars once contact ceases and the wound is protected.",
+      "Chrome ulceration reflects direct corrosive injury and is distinct from chromate allergic contact dermatitis, although a worker may have both; patch testing to potassium dichromate helps identify concurrent sensitisation.",
+      "Prevention hinges on barrier protection, prompt wound care, substitution to trivalent formulations where feasible, and reducing airborne and surface chromate contamination."
     ],
-    [
-     "Key Investigations",
-     "detailed occupational and exposure history with workplace hygiene assessment, clinical examination of hands, forearms and nasal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hexavalent chromium compounds are strong oxidising agents that penetrate skin readily, particularly through breaches in the epidermal barrier. On contact with tissue they are reduced to trivalent chromium, generating reactive intermediates and free radicals that produce direct cytotoxic and corrosive coagulative necrosis of keratinocytes and dermal tissue. This yields a localised, sharply demarcated area of tissue destruction — the chrome ulcer — with a necrotic base and surrounding reactive changes. Because chromate is not appreciably painful and impairs the local inflammatory and healing response, ulcers enlarge and persist while exposure continues. The same oxidative injury on the nasal mucosa causes septal ulceration and perforation. Separately, chromium can act as a hapten binding tissue proteins to drive a delayed (type IV) hypersensitivity, but the ulcer itself is a toxic-corrosive rather than immunological lesion.",
+    "additionalDifferentials": [
+      "chromate allergic contact dermatitis",
+      "pyoderma gangrenosum",
+      "cutaneous anthrax or ecthyma (infective ulcer)",
+      "traumatic or factitious ulcer",
+      "squamous cell carcinoma or other ulcerated neoplasm",
+      "vasculitic or ischaemic ulcer",
+      "atypical mycobacterial or deep fungal ulcer"
     ],
-    [
-     "Primary Differentials",
-     "chromate allergic contact dermatitis, pyoderma gangrenosum, cutaneous anthrax or ecthyma (infective ulcer)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "detailed occupational and exposure history with workplace hygiene assessment",
+      "clinical examination of hands, forearms and nasal septum for coexisting lesions",
+      "patch testing to potassium dichromate to detect concurrent chromium sensitisation",
+      "swab of the ulcer base for microbiology to exclude secondary or primary infection",
+      "skin biopsy if the ulcer is atypical, non-healing or malignancy is suspected",
+      "environmental and biological monitoring of chromium (air sampling, urinary chromium)",
+      "assessment of surface and airborne hexavalent chromium contamination in the workplace"
     ],
-    [
-     "Management Strategy",
-     "Remove the worker from further hexavalent chromium exposure and decontaminate the skin promptly, as ulcers will not heal while",
-     "Core treatment modality"
+    "redFlags": [
+      "nasal septal ulceration or perforation indicating significant mucosal chromate exposure",
+      "non-healing or expanding ulcer with atypical margins raising concern for malignancy",
+      "clinical signs of secondary infection such as spreading cellulitis or systemic upset",
+      "multiple or recurrent ulcers signalling ongoing uncontrolled workplace exposure",
+      "features suggesting systemic chromate toxicity or coexisting respiratory disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a painless chrome ulcer for a trivial wound and allowing exposure to continue.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Individual ulcers usually heal with atrophic or depressed scarring once chromate contact ceases and the wound is protected, though healing is slow. Continued exposure leads to recurrent, persistent lesions and risks nasal septal perforation, so the outlook depends on effective exposure control.",
+    "pitfalls": [
+      "Mistaking a painless chrome ulcer for a trivial wound and allowing exposure to continue.",
+      "Failing to examine the nasal septum and missing early ulceration or perforation.",
+      "Confusing the corrosive ulcer with chromate allergic dermatitis and omitting patch testing when both may coexist.",
+      "Attributing a non-healing ulcer solely to chromium and overlooking malignant transformation or infection.",
+      "Neglecting workplace hygiene and colleagues, so that source control and case-finding are incomplete."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Adams' Occupational Skin Disease, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Remove the worker from further hexavalent chromium exposure and decontaminate the skin promptly, as ulcers will not heal while contact continues",
+      "Provide wound care with debridement of the necrotic base, occlusive dressings and protection of the healing ulcer",
+      "Prevent recurrence through workplace controls — substituting trivalent for hexavalent chromium, engineering controls, protective gloves and covering any skin break before chromate work",
+      "Examine the nasal septum and manage chromate-induced septal ulceration or perforation",
+      "Treat secondary bacterial infection of the ulcer with appropriate antibiotics when present",
+      "Perform patch testing to potassium dichromate and manage any coexisting allergic contact dermatitis",
+      "Refer to occupational health for workplace hygiene assessment and biological and environmental chromium monitoring across the workforce"
     ]
-   ],
-   "caption": "Overview comparison matrix for chrome ulcers."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chrome-ulcers-real-image",
-   "title": "chrome ulcers: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "chrome_ulcers-pathway",
+      "title": "chrome ulcers: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Punched-out, painless ulcers with rolled or undermined edges and a hard-crusted base, arising at sites of skin trauma exposed to hexavalent chromium, classically over the dorsa of hands, fingers, forearms and around the nail folds.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: nasal septal ulceration or perforation indicating significant mucosal chromate exposure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: detailed occupational and exposure history with workplace hygiene assessment, clinical examination of hands, forearms and nasal septum for coexisting lesions, patch testing to potassium dichromate to detect concurrent"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Remove the worker from further hexavalent chromium exposure and decontaminate the skin promptly, as ulcers will not heal while contact continues"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a painless chrome ulcer for a trivial wound and allowing exposure to continue."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chrome ulcers."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chrome_ulcers-matrix",
+      "title": "chrome ulcers: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Punched-out, painless ulcers with rolled or undermined edges and a hard-crusted base, arising at sites of skin trauma exposed to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "detailed occupational and exposure history with workplace hygiene assessment, clinical examination of hands, forearms and nasal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "chromate allergic contact dermatitis, pyoderma gangrenosum, cutaneous anthrax or ecthyma (infective ulcer)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Remove the worker from further hexavalent chromium exposure and decontaminate the skin promptly, as ulcers will not heal while",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a painless chrome ulcer for a trivial wound and allowing exposure to continue.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chrome ulcers."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chrome_ulcers-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed occupational and exposure history with workplace hygiene assessment",
+          "cells": [
+            {
+              "text": "Links ulcers to hexavalent chromium exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical examination of hands, forearms and nasal septum",
+          "cells": [
+            {
+              "text": "Coexisting lesions, including septal ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing to potassium dichromate",
+          "cells": [
+            {
+              "text": "Concurrent chromium sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab of the ulcer base for microbiology",
+          "cells": [
+            {
+              "text": "Secondary or primary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Atypical, non-healing ulcers or suspected malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chrome_ulcers-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromate allergic contact dermatitis",
+          "cells": [
+            {
+              "text": "Allergic rather than corrosive; patch test positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Non-healing or expanding ulcer with atypical margins"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chrome_ulcers-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove exposure and decontaminate",
+          "cells": [
+            {
+              "text": "Remove from further hexavalent chromium exposure; decontaminate the skin promptly"
+            },
+            {
+              "text": "Ulcers will not heal while contact continues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Debridement of necrotic base, occlusive dressings and protection of the healing ulcer"
+            },
+            {
+              "text": "Healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevent recurrence",
+          "cells": [
+            {
+              "text": "Substitute trivalent chromium, engineering controls, protective gloves, cover skin breaks"
+            },
+            {
+              "text": "Workplace controls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal septum",
+          "cells": [
+            {
+              "text": "Examine and manage chromate-induced septal ulceration or perforation"
+            },
+            {
+              "text": "Septal ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary infection",
+          "cells": [
+            {
+              "text": "Appropriate antibiotics when infection is present"
+            },
+            {
+              "text": "Infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "Potassium dichromate patch testing; manage coexisting allergic dermatitis"
+            },
+            {
+              "text": "Sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health",
+          "cells": [
+            {
+              "text": "Workplace hygiene assessment and biological and environmental chromium monitoring"
+            },
+            {
+              "text": "Workforce protection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chrome_ulcers-dx-mgmt",
+      "title": "Diagnosis and management of chrome ulcers",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chrome ulcers: painless punched-out ulcers on hands in a chrome worker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (septal ulceration, non-healing or expanding ulcer, infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for malignancy or systemic chromate toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Occupational history, nasal and hand examination, patch testing, swab",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Punched-out hexavalent chromium ulcers with exposure history confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove from exposure and decontaminate the skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check chromate allergic dermatitis, pyoderma gangrenosum and squamous carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Debridement, occlusive dressings and protection of the healing ulcer",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Substitute trivalent chromium and use gloves; cover skin breaks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage chromate-induced septal ulceration or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ulcers heal with atrophic scars once exposure stops and wound is protected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

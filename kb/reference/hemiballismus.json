@@ -1,172 +1,459 @@
 {
- "id": "hemiballismus",
- "name": "Hemiballismus",
- "aliases": [
-  "hemiballism",
-  "ballism",
-  "hemichorea-hemiballismus"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by involuntary, large-amplitude, flinging movements affecting the limbs on one side of the body",
-   "Classically caused by a lesion of the contralateral subthalamic nucleus, most often a small vascular event",
-   "Movements arise proximally from the shoulder and hip and can be violent enough to cause injury or exhaustion",
-   "Hemiballismus and hemichorea form a continuum and frequently coexist in the same patient",
-   "In older patients stroke is the leading cause, while non-ketotic hyperglycaemia is an important and reversible cause",
-   "Movements characteristically diminish or disappear during sleep",
-   "Many vascular cases improve spontaneously over weeks to months"
+  "id": "hemiballismus",
+  "name": "Hemiballismus",
+  "aliases": [
+    "hemiballism",
+    "ballism",
+    "hemichorea-hemiballismus"
   ],
-  "pathophysiology": "Hemiballismus results from disruption of the basal ganglia motor circuit, classically through a lesion of the subthalamic nucleus contralateral to the affected side. Loss of the normal excitatory drive from the subthalamic nucleus to the globus pallidus interna reduces inhibitory basal ganglia outflow, thereby disinhibiting thalamocortical projections and releasing the violent, involuntary proximal movements. Vascular lesions are the commonest cause, but any process damaging the subthalamic nucleus or its connections, including metabolic, neoplastic, infective and inflammatory insults, may be responsible.",
-  "additionalDifferentials": [
-   "Hemichorea of other cause",
-   "Focal motor seizures",
-   "Limb-shaking transient ischaemic attacks",
-   "Dystonic or myoclonic movement disorders",
-   "Functional (psychogenic) movement disorder",
-   "Drug-induced dyskinesia"
-  ],
-  "additionalInvestigations": [
-   "MRI brain to identify a contralateral subthalamic or striatal lesion",
-   "Blood glucose and ketones to detect non-ketotic hyperglycaemia",
-   "Vascular risk factor assessment and stroke work-up",
-   "Screening for neoplastic, structural or inflammatory lesions where imaging is atypical",
-   "Metabolic and autoimmune screen in younger patients or atypical presentations",
-   "HIV testing where clinically relevant, as it is a recognised cause"
-  ],
-  "redFlags": [
-   "Movements severe enough to cause self-injury, rhabdomyolysis or exhaustion",
-   "Reduced consciousness or additional focal deficits suggesting extensive stroke",
-   "Very high blood glucose indicating a hyperglycaemic emergency",
-   "Rapid progression suggesting a neoplastic or inflammatory lesion"
-  ],
-  "prognosis": "The outlook is often favourable, particularly for vascular hemiballismus, which frequently settles spontaneously over weeks to months; hyperglycaemia-related cases usually improve once glucose is controlled. Symptomatic treatment with dopamine-receptor blocking or VMAT2-modulating agents can reduce disabling movements. Persistent, intractable cases are uncommon and may occasionally warrant consideration of functional neurosurgery.",
-  "pitfalls": [
-   "Failing to check blood glucose, thereby missing reversible non-ketotic hyperglycaemic hemiballismus",
-   "Assuming a functional cause and overlooking an underlying stroke",
-   "Neglecting measures to prevent injury and exhaustion from violent movements",
-   "Overlooking the need for secondary stroke prevention once a vascular cause is confirmed"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice, current edition",
-   "Fahn and Jankovic, Principles and Practice of Movement Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying cause: correct non-ketotic hyperglycaemia with glycaemic control, which is often reversible, and manage acute stroke with secondary-prevention measures",
-   "Suppress the involuntary movements symptomatically with dopamine-receptor-blocking agents such as haloperidol or risperidone, or a VMAT2-modulating agent such as tetrabenazine",
-   "Provide supportive care to prevent self-injury and exhaustion, with limb padding and attention to hydration and nutrition during violent movements",
-   "Reserve functional neurosurgery such as deep brain stimulation or pallidotomy for severe, disabling and drug-refractory cases",
-   "Undertake a vascular risk-factor and stroke work-up, and screen for metabolic, neoplastic, inflammatory and HIV-related causes where imaging is atypical",
-   "Refer to neurology and anticipate spontaneous improvement over weeks to months in vascular cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hemiballismus-pathway",
-   "title": "Hemiballismus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by involuntary, large-amplitude, flinging movements affecting the limbs on one side of the body",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Movements severe enough to cause self-injury, rhabdomyolysis or exhaustion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain to identify a contralateral subthalamic or striatal lesion, Blood glucose and ketones to detect non-ketotic hyperglycaemia, Vascular risk factor assessment and stroke work-up"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying cause: correct non-ketotic hyperglycaemia with glycaemic control, which is often reversible, and manage acute stroke with secondary-prevention measures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to check blood glucose, thereby missing reversible non-ketotic hyperglycaemic hemiballismus"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hemiballismus."
-  }
- ],
- "tables": [
-  {
-   "id": "hemiballismus-matrix",
-   "title": "Hemiballismus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by involuntary, large-amplitude, flinging movements affecting the limbs on one side of the body",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by involuntary, large-amplitude, flinging movements affecting the limbs on one side of the body",
+      "Classically caused by a lesion of the contralateral subthalamic nucleus, most often a small vascular event",
+      "Movements arise proximally from the shoulder and hip and can be violent enough to cause injury or exhaustion",
+      "Hemiballismus and hemichorea form a continuum and frequently coexist in the same patient",
+      "In older patients stroke is the leading cause, while non-ketotic hyperglycaemia is an important and reversible cause",
+      "Movements characteristically diminish or disappear during sleep",
+      "Many vascular cases improve spontaneously over weeks to months"
     ],
-    [
-     "Key Investigations",
-     "MRI brain to identify a contralateral subthalamic or striatal lesion, Blood glucose and ketones to detect non-ketotic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hemiballismus results from disruption of the basal ganglia motor circuit, classically through a lesion of the subthalamic nucleus contralateral to the affected side. Loss of the normal excitatory drive from the subthalamic nucleus to the globus pallidus interna reduces inhibitory basal ganglia outflow, thereby disinhibiting thalamocortical projections and releasing the violent, involuntary proximal movements. Vascular lesions are the commonest cause, but any process damaging the subthalamic nucleus or its connections, including metabolic, neoplastic, infective and inflammatory insults, may be responsible.",
+    "additionalDifferentials": [
+      "Hemichorea of other cause",
+      "Focal motor seizures",
+      "Limb-shaking transient ischaemic attacks",
+      "Dystonic or myoclonic movement disorders",
+      "Functional (psychogenic) movement disorder",
+      "Drug-induced dyskinesia"
     ],
-    [
-     "Primary Differentials",
-     "Hemichorea of other cause, Focal motor seizures, Limb-shaking transient ischaemic attacks",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain to identify a contralateral subthalamic or striatal lesion",
+      "Blood glucose and ketones to detect non-ketotic hyperglycaemia",
+      "Vascular risk factor assessment and stroke work-up",
+      "Screening for neoplastic, structural or inflammatory lesions where imaging is atypical",
+      "Metabolic and autoimmune screen in younger patients or atypical presentations",
+      "HIV testing where clinically relevant, as it is a recognised cause"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying cause: correct non-ketotic hyperglycaemia with glycaemic control, which is often reversible, and manage",
-     "Core treatment modality"
+    "redFlags": [
+      "Movements severe enough to cause self-injury, rhabdomyolysis or exhaustion",
+      "Reduced consciousness or additional focal deficits suggesting extensive stroke",
+      "Very high blood glucose indicating a hyperglycaemic emergency",
+      "Rapid progression suggesting a neoplastic or inflammatory lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to check blood glucose, thereby missing reversible non-ketotic hyperglycaemic hemiballismus",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is often favourable, particularly for vascular hemiballismus, which frequently settles spontaneously over weeks to months; hyperglycaemia-related cases usually improve once glucose is controlled. Symptomatic treatment with dopamine-receptor blocking or VMAT2-modulating agents can reduce disabling movements. Persistent, intractable cases are uncommon and may occasionally warrant consideration of functional neurosurgery.",
+    "pitfalls": [
+      "Failing to check blood glucose, thereby missing reversible non-ketotic hyperglycaemic hemiballismus",
+      "Assuming a functional cause and overlooking an underlying stroke",
+      "Neglecting measures to prevent injury and exhaustion from violent movements",
+      "Overlooking the need for secondary stroke prevention once a vascular cause is confirmed"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice, current edition",
+      "Fahn and Jankovic, Principles and Practice of Movement Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying cause: correct non-ketotic hyperglycaemia with glycaemic control, which is often reversible, and manage acute stroke with secondary-prevention measures",
+      "Suppress the involuntary movements symptomatically with dopamine-receptor-blocking agents such as haloperidol or risperidone, or a VMAT2-modulating agent such as tetrabenazine",
+      "Provide supportive care to prevent self-injury and exhaustion, with limb padding and attention to hydration and nutrition during violent movements",
+      "Reserve functional neurosurgery such as deep brain stimulation or pallidotomy for severe, disabling and drug-refractory cases",
+      "Undertake a vascular risk-factor and stroke work-up, and screen for metabolic, neoplastic, inflammatory and HIV-related causes where imaging is atypical",
+      "Refer to neurology and anticipate spontaneous improvement over weeks to months in vascular cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for hemiballismus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hemiballismus-real-image",
-   "title": "Hemiballismus: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hemiballismus-pathway",
+      "title": "Hemiballismus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by involuntary, large-amplitude, flinging movements affecting the limbs on one side of the body",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Movements severe enough to cause self-injury, rhabdomyolysis or exhaustion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain to identify a contralateral subthalamic or striatal lesion, Blood glucose and ketones to detect non-ketotic hyperglycaemia, Vascular risk factor assessment and stroke work-up"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying cause: correct non-ketotic hyperglycaemia with glycaemic control, which is often reversible, and manage acute stroke with secondary-prevention measures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to check blood glucose, thereby missing reversible non-ketotic hyperglycaemic hemiballismus"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hemiballismus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hemiballismus-matrix",
+      "title": "Hemiballismus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by involuntary, large-amplitude, flinging movements affecting the limbs on one side of the body",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain to identify a contralateral subthalamic or striatal lesion, Blood glucose and ketones to detect non-ketotic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hemichorea of other cause, Focal motor seizures, Limb-shaking transient ischaemic attacks",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying cause: correct non-ketotic hyperglycaemia with glycaemic control, which is often reversible, and manage",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to check blood glucose, thereby missing reversible non-ketotic hyperglycaemic hemiballismus",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hemiballismus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemiballismus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Contralateral subthalamic or striatal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and ketones",
+          "cells": [
+            {
+              "text": "Non-ketotic hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular risk factor and stroke work-up",
+          "cells": [
+            {
+              "text": "Vascular cause, the commonest in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for neoplastic, structural or inflammatory lesions",
+          "cells": [
+            {
+              "text": "Used where imaging is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and autoimmune screen",
+          "cells": [
+            {
+              "text": "Younger patients or atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing",
+          "cells": [
+            {
+              "text": "Recognised cause, where clinically relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemiballismus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hemichorea of other cause",
+          "cells": [
+            {
+              "text": "Hemiballismus and hemichorea form a continuum and often coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced dyskinesia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (psychogenic) movement disorder",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hemiballismus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Correct non-ketotic hyperglycaemia with glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopamine-receptor-blocking agents",
+          "cells": [
+            {
+              "text": "Symptomatic suppression of the involuntary movements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Limb padding; prevent self-injury and exhaustion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional neurosurgery",
+          "cells": [
+            {
+              "text": "Deep brain stimulation or pallidotomy for severe, disabling disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular and screening work-up",
+          "cells": [
+            {
+              "text": "Vascular risk-factor and stroke work-up; screen for metabolic, neoplastic and inflammatory causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral",
+          "cells": [
+            {
+              "text": "Vascular cases often improve spontaneously over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemiballismus-dx-mgmt",
+      "title": "Diagnosis and management of Hemiballismus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Violent unilateral flinging limb movements, often in an older patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Self-injury, reduced consciousness or very high blood glucose present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat hyperglycaemia and protect from self-injury; urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain for subthalamic or striatal lesion; glucose and ketones; stroke work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a contralateral subthalamic or striatal lesion identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Screen for neoplastic, inflammatory, metabolic or autoimmune causes; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying cause, such as non-ketotic hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dopamine-receptor-blocking agents to suppress the movements",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Limb padding and support to prevent self-injury and exhaustion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Deep brain stimulation or pallidotomy for severe, disabling cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vascular cases often improve over weeks to months; the cause is treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

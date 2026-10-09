@@ -1,172 +1,479 @@
 {
- "id": "acute_retinal_necrosis",
- "name": "Acute retinal necrosis",
- "aliases": [
-  "ARN",
-  "herpetic necrotising retinitis",
-  "Kirisawa uveitis"
- ],
- "class": "infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Uveitis",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A fulminant herpesvirus retinitis, most often caused by varicella-zoster virus or herpes simplex virus, occurring in immunocompetent as well as immunocompromised people",
-   "Presents with a painful red eye, floaters and reducing vision, with prominent anterior and vitreous inflammation",
-   "The hallmark is one or more discrete peripheral areas of full-thickness retinal necrosis that spread circumferentially and coalesce",
-   "An occlusive retinal arteritis is characteristic and helps distinguish it from other retinitides",
-   "Rhegmatogenous retinal detachment from multiple necrotic breaks is the leading cause of severe visual loss",
-   "Prompt systemic antiviral therapy, sometimes with intravitreal antiviral supplementation, is central to management",
-   "The fellow eye is at risk, so timely diagnosis and treatment aim to protect both eyes"
+  "id": "acute_retinal_necrosis",
+  "name": "Acute retinal necrosis",
+  "aliases": [
+    "ARN",
+    "herpetic necrotising retinitis",
+    "Kirisawa uveitis"
   ],
-  "pathophysiology": "Reactivation or primary infection with varicella-zoster or herpes simplex virus produces a necrotising retinitis with an occlusive vasculitis of the retinal arterioles. Viral replication in the outer and inner retina causes rapidly enlarging areas of full-thickness necrosis, while the accompanying vasculitis compounds ischaemic damage. As the inflammation resolves the necrotic retina becomes atrophic and develops multiple breaks at the junction of necrotic and healthy retina, predisposing to rhegmatogenous detachment; vitreous inflammation and traction add to the detachment risk.",
-  "additionalDifferentials": [
-   "Cytomegalovirus retinitis (indolent, minimal vitritis, immunocompromised)",
-   "Progressive outer retinal necrosis",
-   "Toxoplasma retinochoroiditis",
-   "Syphilitic or tuberculous chorioretinitis",
-   "Behcet or other non-infective occlusive retinal vasculitis",
-   "Intraocular lymphoma masquerade"
-  ],
-  "additionalInvestigations": [
-   "Aqueous or vitreous sampling for viral PCR (HSV, VZV, CMV)",
-   "Dilated fundus examination documenting the extent of necrosis and vasculitis",
-   "Serology and workup to exclude syphilis, tuberculosis and toxoplasma mimics",
-   "Assessment of immune status where relevant",
-   "Wide-field imaging and optical coherence tomography to monitor progression"
-  ],
-  "redFlags": [
-   "Rapidly enlarging retinitis threatening the macula or optic nerve",
-   "New retinal breaks or detachment",
-   "Involvement or symptoms in the fellow eye",
-   "Optic neuropathy with acute severe visual loss"
-  ],
-  "prognosis": "Visual outcome is guarded, dominated by the high rate of retinal detachment and by optic nerve or macular involvement; early antiviral treatment reduces fellow-eye disease and severe complications.",
-  "pitfalls": [
-   "Mistaking early ARN for idiopathic anterior uveitis and delaying antiviral therapy",
-   "Attributing the picture to CMV retinitis, which is indolent with little vitritis",
-   "Underestimating the fellow-eye risk",
-   "Failing to anticipate and monitor for retinal detachment"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "American Uveitis Society diagnostic criteria for acute retinal necrosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Commence prompt systemic antiviral therapy with intravenous or high-bioavailability oral aciclovir, valaciclovir or famciclovir directed at varicella-zoster and herpes simplex virus",
-   "Supplement with intravitreal antiviral injection such as foscarnet or ganciclovir in severe, posterior or rapidly progressive disease",
-   "Add a systemic corticosteroid once antiviral cover is established to dampen the vitritis and occlusive retinal arteritis, sometimes with antiplatelet aspirin",
-   "Arrange prophylactic laser retinopexy at the junction of necrotic and healthy retina and urgent vitreoretinal surgery for rhegmatogenous retinal detachment",
-   "Monitor with serial dilated fundoscopy, wide-field imaging and optical coherence tomography for progression and detachment, watching the fellow eye closely",
-   "Continue prolonged oral antiviral prophylaxis after the acute phase to reduce fellow-eye involvement",
-   "Refer promptly to a uveitis and vitreoretinal service and assess immune status to guide the intensity and duration of therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_retinal_necrosis-pathway",
-   "title": "Acute retinal necrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A fulminant herpesvirus retinitis, most often caused by varicella-zoster virus or herpes simplex virus, occurring in immunocompetent as well as immunocompromised people",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging retinitis threatening the macula or optic nerve",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Aqueous or vitreous sampling for viral PCR (HSV, VZV, CMV), Dilated fundus examination documenting the extent of necrosis and vasculitis, Serology and workup to exclude syphilis, tuberculosis and toxoplasma mimics"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Commence prompt systemic antiviral therapy with intravenous or high-bioavailability oral aciclovir, valaciclovir or famciclovir directed at varicella-zoster and herpes simplex virus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking early ARN for idiopathic anterior uveitis and delaying antiviral therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute retinal necrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_retinal_necrosis-matrix",
-   "title": "Acute retinal necrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A fulminant herpesvirus retinitis, most often caused by varicella-zoster virus or herpes simplex virus, occurring in",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Uveitis",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A fulminant herpesvirus retinitis, most often caused by varicella-zoster virus or herpes simplex virus, occurring in immunocompetent as well as immunocompromised people",
+      "Presents with a painful red eye, floaters and reducing vision, with prominent anterior and vitreous inflammation",
+      "The hallmark is one or more discrete peripheral areas of full-thickness retinal necrosis that spread circumferentially and coalesce",
+      "An occlusive retinal arteritis is characteristic and helps distinguish it from other retinitides",
+      "Rhegmatogenous retinal detachment from multiple necrotic breaks is the leading cause of severe visual loss",
+      "Prompt systemic antiviral therapy, sometimes with intravitreal antiviral supplementation, is central to management",
+      "The fellow eye is at risk, so timely diagnosis and treatment aim to protect both eyes"
     ],
-    [
-     "Key Investigations",
-     "Aqueous or vitreous sampling for viral PCR (HSV, VZV, CMV), Dilated fundus examination documenting the extent of necrosis and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Reactivation or primary infection with varicella-zoster or herpes simplex virus produces a necrotising retinitis with an occlusive vasculitis of the retinal arterioles. Viral replication in the outer and inner retina causes rapidly enlarging areas of full-thickness necrosis, while the accompanying vasculitis compounds ischaemic damage. As the inflammation resolves the necrotic retina becomes atrophic and develops multiple breaks at the junction of necrotic and healthy retina, predisposing to rhegmatogenous detachment; vitreous inflammation and traction add to the detachment risk.",
+    "additionalDifferentials": [
+      "Cytomegalovirus retinitis (indolent, minimal vitritis, immunocompromised)",
+      "Progressive outer retinal necrosis",
+      "Toxoplasma retinochoroiditis",
+      "Syphilitic or tuberculous chorioretinitis",
+      "Behcet or other non-infective occlusive retinal vasculitis",
+      "Intraocular lymphoma masquerade"
     ],
-    [
-     "Primary Differentials",
-     "Cytomegalovirus retinitis (indolent, minimal vitritis, immunocompromised), Progressive outer retinal necrosis, Toxoplasma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Aqueous or vitreous sampling for viral PCR (HSV, VZV, CMV)",
+      "Dilated fundus examination documenting the extent of necrosis and vasculitis",
+      "Serology and workup to exclude syphilis, tuberculosis and toxoplasma mimics",
+      "Assessment of immune status where relevant",
+      "Wide-field imaging and optical coherence tomography to monitor progression"
     ],
-    [
-     "Management Strategy",
-     "Commence prompt systemic antiviral therapy with intravenous or high-bioavailability oral aciclovir, valaciclovir or famciclovir",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging retinitis threatening the macula or optic nerve",
+      "New retinal breaks or detachment",
+      "Involvement or symptoms in the fellow eye",
+      "Optic neuropathy with acute severe visual loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking early ARN for idiopathic anterior uveitis and delaying antiviral therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Visual outcome is guarded, dominated by the high rate of retinal detachment and by optic nerve or macular involvement; early antiviral treatment reduces fellow-eye disease and severe complications.",
+    "pitfalls": [
+      "Mistaking early ARN for idiopathic anterior uveitis and delaying antiviral therapy",
+      "Attributing the picture to CMV retinitis, which is indolent with little vitritis",
+      "Underestimating the fellow-eye risk",
+      "Failing to anticipate and monitor for retinal detachment"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "American Uveitis Society diagnostic criteria for acute retinal necrosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Commence prompt systemic antiviral therapy with intravenous or high-bioavailability oral aciclovir, valaciclovir or famciclovir directed at varicella-zoster and herpes simplex virus",
+      "Supplement with intravitreal antiviral injection such as foscarnet or ganciclovir in severe, posterior or rapidly progressive disease",
+      "Add a systemic corticosteroid once antiviral cover is established to dampen the vitritis and occlusive retinal arteritis, sometimes with antiplatelet aspirin",
+      "Arrange prophylactic laser retinopexy at the junction of necrotic and healthy retina and urgent vitreoretinal surgery for rhegmatogenous retinal detachment",
+      "Monitor with serial dilated fundoscopy, wide-field imaging and optical coherence tomography for progression and detachment, watching the fellow eye closely",
+      "Continue prolonged oral antiviral prophylaxis after the acute phase to reduce fellow-eye involvement",
+      "Refer promptly to a uveitis and vitreoretinal service and assess immune status to guide the intensity and duration of therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute retinal necrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-retinal-necrosis-real-image",
-   "title": "Acute retinal necrosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acute_retinal_necrosis-pathway",
+      "title": "Acute retinal necrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A fulminant herpesvirus retinitis, most often caused by varicella-zoster virus or herpes simplex virus, occurring in immunocompetent as well as immunocompromised people",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging retinitis threatening the macula or optic nerve",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Aqueous or vitreous sampling for viral PCR (HSV, VZV, CMV), Dilated fundus examination documenting the extent of necrosis and vasculitis, Serology and workup to exclude syphilis, tuberculosis and toxoplasma mimics"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Commence prompt systemic antiviral therapy with intravenous or high-bioavailability oral aciclovir, valaciclovir or famciclovir directed at varicella-zoster and herpes simplex virus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking early ARN for idiopathic anterior uveitis and delaying antiviral therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute retinal necrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_retinal_necrosis-matrix",
+      "title": "Acute retinal necrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A fulminant herpesvirus retinitis, most often caused by varicella-zoster virus or herpes simplex virus, occurring in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Aqueous or vitreous sampling for viral PCR (HSV, VZV, CMV), Dilated fundus examination documenting the extent of necrosis and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cytomegalovirus retinitis (indolent, minimal vitritis, immunocompromised), Progressive outer retinal necrosis, Toxoplasma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Commence prompt systemic antiviral therapy with intravenous or high-bioavailability oral aciclovir, valaciclovir or famciclovir",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking early ARN for idiopathic anterior uveitis and delaying antiviral therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute retinal necrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_retinal_necrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Aqueous or vitreous PCR for HSV, VZV and CMV",
+          "cells": [
+            {
+              "text": "Viral aetiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Extent of necrosis and vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for syphilis, tuberculosis and toxoplasma",
+          "cells": [
+            {
+              "text": "Excludes mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of immune status",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wide-field imaging and optical coherence tomography",
+          "cells": [
+            {
+              "text": "Monitors progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_retinal_necrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cytomegalovirus retinitis",
+          "cells": [
+            {
+              "text": "Indolent, minimal vitritis, immunocompromised"
+            },
+            {
+              "text": "Vitreous PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilitic or tuberculous chorioretinitis",
+          "cells": [
+            {
+              "text": "Infective placoid or necrotising disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_retinal_necrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic antiviral therapy (IV aciclovir, valaciclovir or famciclovir)",
+          "cells": [
+            {
+              "text": "Varicella-zoster and herpes simplex virus"
+            },
+            {
+              "text": "Prompt start"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal foscarnet or ganciclovir",
+          "cells": [
+            {
+              "text": "Severe, posterior or rapidly progressive disease"
+            },
+            {
+              "text": "Supplements systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroid once antiviral cover is established",
+          "cells": [
+            {
+              "text": "Vitritis and occlusive retinal arteritis"
+            },
+            {
+              "text": "Antiplatelet aspirin sometimes added"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic laser retinopexy and urgent vitreoretinal surgery",
+          "cells": [
+            {
+              "text": "Retinal detachment"
+            },
+            {
+              "text": "Laser at the necrosis border"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial fundoscopy, wide-field imaging and OCT",
+          "cells": [
+            {
+              "text": "Progression and detachment"
+            },
+            {
+              "text": "Watch the fellow eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged oral antiviral prophylaxis",
+          "cells": [
+            {
+              "text": "Fellow-eye involvement"
+            },
+            {
+              "text": "After the acute phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uveitis and vitreoretinal referral with immune status assessment",
+          "cells": [
+            {
+              "text": "Intensity and duration of therapy"
+            },
+            {
+              "text": "Specialist service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_retinal_necrosis-dx-mgmt",
+      "title": "Diagnosis and management of Acute retinal necrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful red eye, floaters and falling vision with anterior inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Macula or optic nerve threatened, or new retinal detachment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vitreoretinal review; surgery if detached",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aqueous or vitreous PCR for HSV, VZV and CMV; fundus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Viral PCR positive with syphilis, TB and toxoplasma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start IV aciclovir or valaciclovir; steroids once antiviral cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review CMV retinitis, PORN, toxoplasma and Behcet disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravitreal foscarnet or ganciclovir in severe or posterior disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prophylactic laser retinopexy at the necrosis border",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial fundoscopy and OCT; prolonged oral antiviral prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Guarded vision; detachment common; early antiviral lowers fellow-eye disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

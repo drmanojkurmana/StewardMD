@@ -1,175 +1,473 @@
 {
- "id": "familial_cold_autoinflammatory_syndrome",
- "name": "familial cold autoinflammatory syndrome",
- "aliases": [
-  "FCAS",
-  "familial cold urticaria",
-  "NLRP3-associated CAPS (mild)"
- ],
- "class": "non_infective",
- "system": "Immunological",
- "specialty": "Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Middleton's Allergy: Principles and Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Mildest phenotype of the cryopyrin-associated periodic syndrome spectrum, usually caused by autosomal dominant gain-of-function NLRP3 variants; a clinically similar NLRP12-associated form (sometimes termed FCAS2) is also recognised.",
-   "Attacks follow generalised environmental cold exposure rather than direct local contact, typically after a delay of an hour or two, and are often reproducible.",
-   "Episodes are brief, commonly settling within a day, and comprise a cold-induced urticaria-like rash, fever, chills, arthralgia, conjunctivitis and headache.",
-   "Unlike acquired cold contact urticaria, the local ice-cube provocation test is negative because it is systemic cooling, not local contact, that provokes symptoms.",
-   "Symptoms tend to be worse in the evening and can be triggered by air-conditioned or refrigerated environments as well as outdoor cold.",
-   "Sensorineural hearing loss and amyloidosis are uncommon at this mild end but overlap with Muckle-Wells syndrome can occur, so surveillance remains prudent.",
-   "Interleukin-1 blockade is highly effective for troublesome disease, alongside practical avoidance of cold exposure.",
-   "Acute-phase reactants rise during a cold-provoked attack and can help confirm a systemic inflammatory response."
+  "id": "familial_cold_autoinflammatory_syndrome",
+  "name": "familial cold autoinflammatory syndrome",
+  "aliases": [
+    "FCAS",
+    "familial cold urticaria",
+    "NLRP3-associated CAPS (mild)"
   ],
-  "pathophysiology": "Gain-of-function NLRP3 variants lower the activation threshold of the cryopyrin inflammasome, which in this phenotype is triggered by a fall in temperature. Cold-induced assembly of the inflammasome activates caspase-1, driving maturation and release of interleukin-1 beta and interleukin-18 and producing a self-limiting burst of neutrophil-rich systemic inflammation. Because the underlying molecular lesion is shared with the more severe cryopyrin-associated syndromes, the mechanism and treatment response mirror those conditions, differing chiefly in the milder degree of constitutive activation and the requirement for a cold stimulus.",
-  "additionalDifferentials": [
-   "Acquired cold contact urticaria",
-   "Muckle-Wells syndrome",
-   "Neonatal-onset multisystem inflammatory disease",
-   "Cryoglobulinaemia and cryofibrinogenaemia",
-   "Chronic spontaneous urticaria",
-   "Other hereditary recurrent fevers such as familial Mediterranean fever"
-  ],
-  "additionalInvestigations": [
-   "NLRP3 gene analysis, with NLRP12 testing where the phenotype fits but NLRP3 is negative",
-   "Generalised (evaporative) cold provocation with monitoring of symptoms and inflammatory markers",
-   "Local ice-cube contact test to distinguish from acquired cold urticaria",
-   "Acute-phase reactants measured before and after cold challenge",
-   "Skin biopsy showing a neutrophilic urticarial dermatosis",
-   "Baseline audiometry to detect any overlap with Muckle-Wells syndrome"
-  ],
-  "redFlags": [
-   "Emerging sensorineural hearing loss suggesting progression towards a more severe cryopyrin-associated phenotype",
-   "Proteinuria raising the possibility of AA amyloidosis",
-   "Neurological features such as chronic headache or papilloedema that are atypical for the mild phenotype",
-   "Persistently raised inflammatory markers between cold-provoked attacks"
-  ],
-  "prognosis": "The prognosis is generally favourable, with cold avoidance and interleukin-1 blockade providing effective control and a low risk of the amyloidosis seen at the severe end of the spectrum. Quality of life can nonetheless be significantly affected in cold climates without treatment.",
-  "pitfalls": [
-   "Confusing the condition with acquired cold contact urticaria and being misled by a negative local ice-cube test",
-   "Expecting immediate rather than delayed symptom onset after cold exposure",
-   "Assuming a negative NLRP3 result excludes the diagnosis without considering NLRP12-associated disease",
-   "Neglecting audiological and renal surveillance because the phenotype appears mild"
-  ],
-  "references": [
-   "Middleton's Allergy: Principles and Practice (current edition)",
-   "SHARE recommendations for the management of autoinflammatory diseases",
-   "Firestein & Kelley's Textbook of Rheumatology (current edition)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Interleukin-1 blockade with anakinra, canakinumab or rilonacept as the disease-specific therapy for frequent or severe attacks",
-   "Avoidance of generalised cold exposure, including air-conditioned and refrigerated environments, as the first-line preventive measure",
-   "Non-steroidal anti-inflammatory drugs for symptomatic relief of arthralgia and fever during milder attacks",
-   "Surveillance for AA amyloidosis with periodic urinalysis for proteinuria and renal monitoring",
-   "Baseline and periodic audiometry to detect sensorineural hearing loss overlapping with Muckle-Wells syndrome",
-   "Genetic counselling with NLRP3, or NLRP12, testing and family screening given autosomal dominant inheritance",
-   "Specialist immunology or rheumatology follow-up to track inflammatory markers and escalate to interleukin-1 blockade if amyloidosis risk emerges"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_cold_autoinflammatory_syndrome-pathway",
-   "title": "familial cold autoinflammatory syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Mildest phenotype of the cryopyrin-associated periodic syndrome spectrum, usually caused by autosomal dominant gain-of-function NLRP3 variants; a clinically similar NLRP12-associated form (sometimes termed FCAS2) is also recognised.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emerging sensorineural hearing loss suggesting progression towards a more severe cryopyrin-associated phenotype",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: NLRP3 gene analysis, with NLRP12 testing where the phenotype fits but NLRP3 is negative, Generalised (evaporative) cold provocation with monitoring of symptoms and inflammatory markers, Local ice-cube contact test to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Interleukin-1 blockade with anakinra, canakinumab or rilonacept as the disease-specific therapy for frequent or severe attacks"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the condition with acquired cold contact urticaria and being misled by a negative local ice-cube test"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial cold autoinflammatory syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_cold_autoinflammatory_syndrome-matrix",
-   "title": "familial cold autoinflammatory syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Mildest phenotype of the cryopyrin-associated periodic syndrome spectrum, usually caused by autosomal dominant gain-of-function",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunological",
+  "specialty": "Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Middleton's Allergy: Principles and Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Mildest phenotype of the cryopyrin-associated periodic syndrome spectrum, usually caused by autosomal dominant gain-of-function NLRP3 variants; a clinically similar NLRP12-associated form (sometimes termed FCAS2) is also recognised.",
+      "Attacks follow generalised environmental cold exposure rather than direct local contact, typically after a delay of an hour or two, and are often reproducible.",
+      "Episodes are brief, commonly settling within a day, and comprise a cold-induced urticaria-like rash, fever, chills, arthralgia, conjunctivitis and headache.",
+      "Unlike acquired cold contact urticaria, the local ice-cube provocation test is negative because it is systemic cooling, not local contact, that provokes symptoms.",
+      "Symptoms tend to be worse in the evening and can be triggered by air-conditioned or refrigerated environments as well as outdoor cold.",
+      "Sensorineural hearing loss and amyloidosis are uncommon at this mild end but overlap with Muckle-Wells syndrome can occur, so surveillance remains prudent.",
+      "Interleukin-1 blockade is highly effective for troublesome disease, alongside practical avoidance of cold exposure.",
+      "Acute-phase reactants rise during a cold-provoked attack and can help confirm a systemic inflammatory response."
     ],
-    [
-     "Key Investigations",
-     "NLRP3 gene analysis, with NLRP12 testing where the phenotype fits but NLRP3 is negative, Generalised (evaporative) cold",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gain-of-function NLRP3 variants lower the activation threshold of the cryopyrin inflammasome, which in this phenotype is triggered by a fall in temperature. Cold-induced assembly of the inflammasome activates caspase-1, driving maturation and release of interleukin-1 beta and interleukin-18 and producing a self-limiting burst of neutrophil-rich systemic inflammation. Because the underlying molecular lesion is shared with the more severe cryopyrin-associated syndromes, the mechanism and treatment response mirror those conditions, differing chiefly in the milder degree of constitutive activation and the requirement for a cold stimulus.",
+    "additionalDifferentials": [
+      "Acquired cold contact urticaria",
+      "Muckle-Wells syndrome",
+      "Neonatal-onset multisystem inflammatory disease",
+      "Cryoglobulinaemia and cryofibrinogenaemia",
+      "Chronic spontaneous urticaria",
+      "Other hereditary recurrent fevers such as familial Mediterranean fever"
     ],
-    [
-     "Primary Differentials",
-     "Acquired cold contact urticaria, Muckle-Wells syndrome, Neonatal-onset multisystem inflammatory disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "NLRP3 gene analysis, with NLRP12 testing where the phenotype fits but NLRP3 is negative",
+      "Generalised (evaporative) cold provocation with monitoring of symptoms and inflammatory markers",
+      "Local ice-cube contact test to distinguish from acquired cold urticaria",
+      "Acute-phase reactants measured before and after cold challenge",
+      "Skin biopsy showing a neutrophilic urticarial dermatosis",
+      "Baseline audiometry to detect any overlap with Muckle-Wells syndrome"
     ],
-    [
-     "Management Strategy",
-     "Interleukin-1 blockade with anakinra, canakinumab or rilonacept as the disease-specific therapy for frequent or severe attacks",
-     "Core treatment modality"
+    "redFlags": [
+      "Emerging sensorineural hearing loss suggesting progression towards a more severe cryopyrin-associated phenotype",
+      "Proteinuria raising the possibility of AA amyloidosis",
+      "Neurological features such as chronic headache or papilloedema that are atypical for the mild phenotype",
+      "Persistently raised inflammatory markers between cold-provoked attacks"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the condition with acquired cold contact urticaria and being misled by a negative local ice-cube test",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally favourable, with cold avoidance and interleukin-1 blockade providing effective control and a low risk of the amyloidosis seen at the severe end of the spectrum. Quality of life can nonetheless be significantly affected in cold climates without treatment.",
+    "pitfalls": [
+      "Confusing the condition with acquired cold contact urticaria and being misled by a negative local ice-cube test",
+      "Expecting immediate rather than delayed symptom onset after cold exposure",
+      "Assuming a negative NLRP3 result excludes the diagnosis without considering NLRP12-associated disease",
+      "Neglecting audiological and renal surveillance because the phenotype appears mild"
+    ],
+    "references": [
+      "Middleton's Allergy: Principles and Practice (current edition)",
+      "SHARE recommendations for the management of autoinflammatory diseases",
+      "Firestein & Kelley's Textbook of Rheumatology (current edition)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Interleukin-1 blockade with anakinra, canakinumab or rilonacept as the disease-specific therapy for frequent or severe attacks",
+      "Avoidance of generalised cold exposure, including air-conditioned and refrigerated environments, as the first-line preventive measure",
+      "Non-steroidal anti-inflammatory drugs for symptomatic relief of arthralgia and fever during milder attacks",
+      "Surveillance for AA amyloidosis with periodic urinalysis for proteinuria and renal monitoring",
+      "Baseline and periodic audiometry to detect sensorineural hearing loss overlapping with Muckle-Wells syndrome",
+      "Genetic counselling with NLRP3, or NLRP12, testing and family screening given autosomal dominant inheritance",
+      "Specialist immunology or rheumatology follow-up to track inflammatory markers and escalate to interleukin-1 blockade if amyloidosis risk emerges"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial cold autoinflammatory syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-cold-autoinflammatory-syndrome-real-image",
-   "title": "familial cold autoinflammatory syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "familial_cold_autoinflammatory_syndrome-pathway",
+      "title": "familial cold autoinflammatory syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Mildest phenotype of the cryopyrin-associated periodic syndrome spectrum, usually caused by autosomal dominant gain-of-function NLRP3 variants; a clinically similar NLRP12-associated form (sometimes termed FCAS2) is also recognised.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emerging sensorineural hearing loss suggesting progression towards a more severe cryopyrin-associated phenotype",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: NLRP3 gene analysis, with NLRP12 testing where the phenotype fits but NLRP3 is negative, Generalised (evaporative) cold provocation with monitoring of symptoms and inflammatory markers, Local ice-cube contact test to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Interleukin-1 blockade with anakinra, canakinumab or rilonacept as the disease-specific therapy for frequent or severe attacks"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the condition with acquired cold contact urticaria and being misled by a negative local ice-cube test"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial cold autoinflammatory syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_cold_autoinflammatory_syndrome-matrix",
+      "title": "familial cold autoinflammatory syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Mildest phenotype of the cryopyrin-associated periodic syndrome spectrum, usually caused by autosomal dominant gain-of-function",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "NLRP3 gene analysis, with NLRP12 testing where the phenotype fits but NLRP3 is negative, Generalised (evaporative) cold",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acquired cold contact urticaria, Muckle-Wells syndrome, Neonatal-onset multisystem inflammatory disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Interleukin-1 blockade with anakinra, canakinumab or rilonacept as the disease-specific therapy for frequent or severe attacks",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the condition with acquired cold contact urticaria and being misled by a negative local ice-cube test",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial cold autoinflammatory syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Middleton's Allergy: Principles and Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_cold_autoinflammatory_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "NLRP3 gene analysis, with NLRP12 if NLRP3 is negative",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised (evaporative) cold provocation",
+          "cells": [
+            {
+              "text": "Symptoms and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local ice-cube contact test",
+          "cells": [
+            {
+              "text": "Negative here; separates it from acquired cold urticaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants before and after cold challenge",
+          "cells": [
+            {
+              "text": "Systemic inflammatory response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Neutrophilic urticarial dermatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline audiometry",
+          "cells": [
+            {
+              "text": "Overlap with Muckle-Wells syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_cold_autoinflammatory_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired cold contact urticaria",
+          "cells": [
+            {
+              "text": "The local ice-cube test is negative in this syndrome, unlike acquired cold urticaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muckle-Wells syndrome",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss and amyloidosis can overlap; audiometry is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_cold_autoinflammatory_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Anakinra, canakinumab or rilonacept for frequent or severe attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of generalised cold exposure",
+          "cells": [
+            {
+              "text": "First-line preventive measure, including air-conditioned and refrigerated environments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Relief of arthralgia and fever in milder attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AA amyloidosis surveillance",
+          "cells": [
+            {
+              "text": "Periodic urinalysis for proteinuria and renal monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Baseline and periodic, for sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "NLRP3 or NLRP12 testing and family screening; autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunology or rheumatology follow-up",
+          "cells": [
+            {
+              "text": "Escalate to interleukin-1 blockade if amyloidosis risk emerges"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_cold_autoinflammatory_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of familial cold autoinflammatory syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Urticarial rash, fever and arthralgia after generalised cold exposure, hours later",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hearing loss, proteinuria, atypical neurological features, raised markers)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immunology review; renal assessment for proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NLRP3 testing; cold provocation with markers; local ice-cube test; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic cold provocation triggers attacks, with a negative local ice test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired cold urticaria, cryoglobulinaemia or Muckle-Wells syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade for frequent or severe attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid generalised cold exposure as first-line prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "NSAIDs for arthralgia and fever in milder attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urinalysis and renal monitoring for AA amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Audiometry and genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally favourable; cold avoidance and interleukin-1 blockade give effective control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

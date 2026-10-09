@@ -1,175 +1,446 @@
 {
- "id": "cerebrotendinous_xanthomatosis",
- "name": "Cerebrotendinous xanthomatosis",
- "aliases": [
-  "CTX",
-  "sterol 27-hydroxylase deficiency",
-  "CYP27A1 deficiency",
-  "cholestanolosis"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive defect of bile acid synthesis caused by deficiency of the mitochondrial enzyme sterol 27-hydroxylase (CYP27A1)",
-   "The block impairs bile acid production and diverts cholesterol to cholestanol, which accumulates in the brain, tendons and other tissues",
-   "A highly treatable but frequently missed cause of progressive neurological decline; early diagnosis is critical to prevent irreversible damage",
-   "The classic triad comprises tendon xanthomata (especially the Achilles tendon), early-onset (juvenile) bilateral cataracts and progressive neuropsychiatric and cerebellar dysfunction",
-   "Early clues in childhood include neonatal cholestasis, intractable or chronic diarrhoea and learning difficulty, preceding the neurological syndrome",
-   "The biochemical hallmark is raised plasma cholestanol with normal or low cholesterol and increased urinary bile alcohols",
-   "Treatment is replacement with chenodeoxycholic acid, which suppresses abnormal synthesis and can halt or improve disease if started early; a statin may be added"
+  "id": "cerebrotendinous_xanthomatosis",
+  "name": "Cerebrotendinous xanthomatosis",
+  "aliases": [
+    "CTX",
+    "sterol 27-hydroxylase deficiency",
+    "CYP27A1 deficiency",
+    "cholestanolosis"
   ],
-  "pathophysiology": "Cerebrotendinous xanthomatosis is caused by deficiency of sterol 27-hydroxylase, an enzyme in the mitochondrial pathway of bile acid synthesis from cholesterol. Loss of this step reduces production of the primary bile acid chenodeoxycholic acid, removing the normal negative feedback on the rate-limiting enzyme of bile acid synthesis and driving overproduction of bile acid intermediates. These intermediates are shunted into cholestanol and bile alcohols, which accumulate in tissues. Deposition of cholestanol and cholesterol in the central nervous system, tendons and lens produces the characteristic xanthomata, cataracts and progressive neurodegeneration. Replacing the deficient bile acid restores feedback inhibition and reduces the toxic accumulation.",
-  "additionalDifferentials": [
-   "Familial hypercholesterolaemia with tendon xanthomata",
-   "Sitosterolaemia (xanthomata with a plant-sterol defect)",
-   "Other hereditary spastic paraplegias and cerebellar ataxias",
-   "Multiple sclerosis or other progressive neuroinflammatory disease",
-   "Early-onset dementia or leukodystrophy of other cause",
-   "Neonatal cholestasis from other bile acid synthesis defects"
-  ],
-  "additionalInvestigations": [
-   "Plasma cholestanol concentration (characteristically raised)",
-   "Urinary bile alcohol analysis",
-   "Molecular genetic testing of the CYP27A1 gene",
-   "Magnetic resonance imaging of the brain, which may show cerebellar and dentate nucleus changes",
-   "Slit-lamp examination for juvenile cataract and clinical assessment of tendon xanthomata",
-   "Lipid profile, noting cholesterol may be normal or low despite xanthomata"
-  ],
-  "redFlags": [
-   "Progressive cognitive, psychiatric or cerebellar decline in a young person with tendon xanthomata",
-   "Early-onset bilateral cataracts in a child or young adult",
-   "Neonatal cholestasis or intractable childhood diarrhoea of unknown cause",
-   "Delay in starting bile acid replacement, risking irreversible neurological damage"
-  ],
-  "prognosis": "If chenodeoxycholic acid replacement is started before significant neurological damage, progression can be halted and some deficits improve, giving a good outlook; late diagnosis after established neurodegeneration carries a poorer prognosis with irreversible disability.",
-  "pitfalls": [
-   "Assuming tendon xanthomata always indicate familial hypercholesterolaemia, since cholesterol is often normal here",
-   "Missing the diagnosis during the early non-neurological phase (cholestasis, diarrhoea, cataract)",
-   "Overlooking juvenile cataract as an early diagnostic clue",
-   "Delaying treatment while awaiting genetic confirmation, forfeiting a treatable window",
-   "Failing to screen and counsel at-risk relatives given the recessive inheritance"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Replace the deficient bile acid with chenodeoxycholic acid as the specific treatment, restoring feedback inhibition and lowering cholestanol, starting early to halt progression",
-   "Consider an HMG-CoA reductase inhibitor as an adjunct to further reduce cholestanol synthesis",
-   "Offer cataract surgery for visually significant juvenile cataracts",
-   "Manage neuropsychiatric and cerebellar features symptomatically, with antiseizure medication and rehabilitation",
-   "Monitor plasma cholestanol and neurological status to gauge treatment response",
-   "Offer genetic counselling for autosomal recessive CYP27A1 inheritance and screen and treat presymptomatic relatives",
-   "Refer to metabolic medicine and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cerebrotendinous_xanthomatosis-pathway",
-   "title": "Cerebrotendinous xanthomatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive defect of bile acid synthesis caused by deficiency of the mitochondrial enzyme sterol 27-hydroxylase (CYP27A1)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive cognitive, psychiatric or cerebellar decline in a young person with tendon xanthomata",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma cholestanol concentration (characteristically raised), Urinary bile alcohol analysis, Molecular genetic testing of the CYP27A1 gene"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replace the deficient bile acid with chenodeoxycholic acid as the specific treatment, restoring feedback inhibition and lowering cholestanol, starting early to halt progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming tendon xanthomata always indicate familial hypercholesterolaemia, since cholesterol is often normal here"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cerebrotendinous xanthomatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cerebrotendinous_xanthomatosis-matrix",
-   "title": "Cerebrotendinous xanthomatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive defect of bile acid synthesis caused by deficiency of the mitochondrial enzyme sterol 27-hydroxylase (CYP27A1)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive defect of bile acid synthesis caused by deficiency of the mitochondrial enzyme sterol 27-hydroxylase (CYP27A1)",
+      "The block impairs bile acid production and diverts cholesterol to cholestanol, which accumulates in the brain, tendons and other tissues",
+      "A highly treatable but frequently missed cause of progressive neurological decline; early diagnosis is critical to prevent irreversible damage",
+      "The classic triad comprises tendon xanthomata (especially the Achilles tendon), early-onset (juvenile) bilateral cataracts and progressive neuropsychiatric and cerebellar dysfunction",
+      "Early clues in childhood include neonatal cholestasis, intractable or chronic diarrhoea and learning difficulty, preceding the neurological syndrome",
+      "The biochemical hallmark is raised plasma cholestanol with normal or low cholesterol and increased urinary bile alcohols",
+      "Treatment is replacement with chenodeoxycholic acid, which suppresses abnormal synthesis and can halt or improve disease if started early; a statin may be added"
     ],
-    [
-     "Key Investigations",
-     "Plasma cholestanol concentration (characteristically raised), Urinary bile alcohol analysis, Molecular genetic testing of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cerebrotendinous xanthomatosis is caused by deficiency of sterol 27-hydroxylase, an enzyme in the mitochondrial pathway of bile acid synthesis from cholesterol. Loss of this step reduces production of the primary bile acid chenodeoxycholic acid, removing the normal negative feedback on the rate-limiting enzyme of bile acid synthesis and driving overproduction of bile acid intermediates. These intermediates are shunted into cholestanol and bile alcohols, which accumulate in tissues. Deposition of cholestanol and cholesterol in the central nervous system, tendons and lens produces the characteristic xanthomata, cataracts and progressive neurodegeneration. Replacing the deficient bile acid restores feedback inhibition and reduces the toxic accumulation.",
+    "additionalDifferentials": [
+      "Familial hypercholesterolaemia with tendon xanthomata",
+      "Sitosterolaemia (xanthomata with a plant-sterol defect)",
+      "Other hereditary spastic paraplegias and cerebellar ataxias",
+      "Multiple sclerosis or other progressive neuroinflammatory disease",
+      "Early-onset dementia or leukodystrophy of other cause",
+      "Neonatal cholestasis from other bile acid synthesis defects"
     ],
-    [
-     "Primary Differentials",
-     "Familial hypercholesterolaemia with tendon xanthomata, Sitosterolaemia (xanthomata with a plant-sterol defect), Other hereditary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma cholestanol concentration (characteristically raised)",
+      "Urinary bile alcohol analysis",
+      "Molecular genetic testing of the CYP27A1 gene",
+      "Magnetic resonance imaging of the brain, which may show cerebellar and dentate nucleus changes",
+      "Slit-lamp examination for juvenile cataract and clinical assessment of tendon xanthomata",
+      "Lipid profile, noting cholesterol may be normal or low despite xanthomata"
     ],
-    [
-     "Management Strategy",
-     "Replace the deficient bile acid with chenodeoxycholic acid as the specific treatment, restoring feedback inhibition and lowering",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive cognitive, psychiatric or cerebellar decline in a young person with tendon xanthomata",
+      "Early-onset bilateral cataracts in a child or young adult",
+      "Neonatal cholestasis or intractable childhood diarrhoea of unknown cause",
+      "Delay in starting bile acid replacement, risking irreversible neurological damage"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming tendon xanthomata always indicate familial hypercholesterolaemia, since cholesterol is often normal here",
-     "Prevent diagnostic or management error"
+    "prognosis": "If chenodeoxycholic acid replacement is started before significant neurological damage, progression can be halted and some deficits improve, giving a good outlook; late diagnosis after established neurodegeneration carries a poorer prognosis with irreversible disability.",
+    "pitfalls": [
+      "Assuming tendon xanthomata always indicate familial hypercholesterolaemia, since cholesterol is often normal here",
+      "Missing the diagnosis during the early non-neurological phase (cholestasis, diarrhoea, cataract)",
+      "Overlooking juvenile cataract as an early diagnostic clue",
+      "Delaying treatment while awaiting genetic confirmation, forfeiting a treatable window",
+      "Failing to screen and counsel at-risk relatives given the recessive inheritance"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Replace the deficient bile acid with chenodeoxycholic acid as the specific treatment, restoring feedback inhibition and lowering cholestanol, starting early to halt progression",
+      "Consider an HMG-CoA reductase inhibitor as an adjunct to further reduce cholestanol synthesis",
+      "Offer cataract surgery for visually significant juvenile cataracts",
+      "Manage neuropsychiatric and cerebellar features symptomatically, with antiseizure medication and rehabilitation",
+      "Monitor plasma cholestanol and neurological status to gauge treatment response",
+      "Offer genetic counselling for autosomal recessive CYP27A1 inheritance and screen and treat presymptomatic relatives",
+      "Refer to metabolic medicine and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for cerebrotendinous xanthomatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cerebrotendinous-xanthomatosis-real-image",
-   "title": "Cerebrotendinous xanthomatosis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cerebrotendinous_xanthomatosis-pathway",
+      "title": "Cerebrotendinous xanthomatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive defect of bile acid synthesis caused by deficiency of the mitochondrial enzyme sterol 27-hydroxylase (CYP27A1)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive cognitive, psychiatric or cerebellar decline in a young person with tendon xanthomata",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma cholestanol concentration (characteristically raised), Urinary bile alcohol analysis, Molecular genetic testing of the CYP27A1 gene"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replace the deficient bile acid with chenodeoxycholic acid as the specific treatment, restoring feedback inhibition and lowering cholestanol, starting early to halt progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming tendon xanthomata always indicate familial hypercholesterolaemia, since cholesterol is often normal here"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cerebrotendinous xanthomatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cerebrotendinous_xanthomatosis-matrix",
+      "title": "Cerebrotendinous xanthomatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive defect of bile acid synthesis caused by deficiency of the mitochondrial enzyme sterol 27-hydroxylase (CYP27A1)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma cholestanol concentration (characteristically raised), Urinary bile alcohol analysis, Molecular genetic testing of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Familial hypercholesterolaemia with tendon xanthomata, Sitosterolaemia (xanthomata with a plant-sterol defect), Other hereditary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replace the deficient bile acid with chenodeoxycholic acid as the specific treatment, restoring feedback inhibition and lowering",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming tendon xanthomata always indicate familial hypercholesterolaemia, since cholesterol is often normal here",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cerebrotendinous xanthomatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cerebrotendinous_xanthomatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma cholestanol",
+          "cells": [
+            {
+              "text": "Characteristically raised, with normal or low cholesterol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary bile alcohol analysis",
+          "cells": [
+            {
+              "text": "Increased urinary bile alcohols"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of CYP27A1",
+          "cells": [
+            {
+              "text": "Molecular confirmation of the deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "May show cerebellar and dentate nucleus changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Juvenile cataract"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebrotendinous_xanthomatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Chenodeoxycholic acid",
+          "cells": [
+            {
+              "text": "Replaces the deficient bile acid, restoring feedback and lowering cholestanol; start early"
+            },
+            {
+              "text": "Specific treatment that can halt progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HMG-CoA reductase inhibitor",
+          "cells": [
+            {
+              "text": "Adjunct to further reduce cholestanol synthesis"
+            },
+            {
+              "text": "Adjunct therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cataract surgery",
+          "cells": [
+            {
+              "text": "For visually significant juvenile cataracts"
+            },
+            {
+              "text": "Juvenile cataract"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic neuropsychiatric care",
+          "cells": [
+            {
+              "text": "Antiseizure medication and rehabilitation"
+            },
+            {
+              "text": "Neuropsychiatric and cerebellar features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Plasma cholestanol and neurological status"
+            },
+            {
+              "text": "Gauges treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive CYP27A1 counselling; screen and treat presymptomatic relatives"
+            },
+            {
+              "text": "Recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Metabolic medicine and clinical genetics"
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cerebrotendinous_xanthomatosis-dx-mgmt",
+      "title": "Diagnosis and management of Cerebrotendinous xanthomatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cerebrotendinous xanthomatosis: tendon xanthomata with neurological decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive cerebellar decline, juvenile cataract, cholestasis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent metabolic review; delay risks irreversible neurological damage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma cholestanol, urinary bile alcohols, CYP27A1 testing and brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised cholestanol with normal or low cholesterol confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chenodeoxycholic acid replacement, started early to halt progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check familial hypercholesterolaemia, sitosterolaemia and spastic paraplegias",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "HMG-CoA reductase inhibitor as an adjunct to lower cholestanol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cataract surgery for visually significant juvenile cataract",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor cholestanol and neurology; screen presymptomatic relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good outlook if treated before neurodegeneration; late diagnosis carries disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

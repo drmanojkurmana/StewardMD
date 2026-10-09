@@ -1,170 +1,450 @@
 {
- "id": "idiopathic_guttate_hypomelanosis",
- "name": "Idiopathic guttate hypomelanosis",
- "aliases": [
-  "IGH",
-  "guttate hypomelanosis",
-  "leukopathia symmetrica progressiva"
- ],
- "class": "non_infective",
- "system": "Dermatology / Pigmentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Multiple small (a few millimetres), discrete, sharply defined porcelain-white macules, most numerous on the sun-exposed extensor forearms and shins",
-   "Prevalence and lesion number increase with age and cumulative sun exposure, making it very common in the elderly",
-   "Lesions are asymptomatic, remain stable and do not coalesce, unlike vitiligo",
-   "Essentially a clinical diagnosis; dermoscopy shows well-defined hypopigmented patches and biopsy is rarely needed",
-   "Reduced but not absent melanocytes and melanin distinguish it from the complete pigment loss of vitiligo",
-   "On Wood lamp the macules are off-white rather than the chalky, sharply fluorescent white of vitiligo",
-   "Largely a cosmetic concern; photoprotection may limit progression and most cases need no treatment"
+  "id": "idiopathic_guttate_hypomelanosis",
+  "name": "Idiopathic guttate hypomelanosis",
+  "aliases": [
+    "IGH",
+    "guttate hypomelanosis",
+    "leukopathia symmetrica progressiva"
   ],
-  "pathophysiology": "Idiopathic guttate hypomelanosis reflects a localised reduction in the number and activity of epidermal melanocytes with decreased melanin production, so pigment is diminished rather than absent. Cumulative ultraviolet exposure and skin ageing are the principal contributors, with a possible genetic predisposition. The result is scattered focal areas of reduced epidermal melanisation on chronically photodamaged skin.",
-  "additionalDifferentials": [
-   "Vitiligo",
-   "Pityriasis (tinea) versicolor",
-   "Guttate morphoea or lichen sclerosus",
-   "Hypopigmented post-inflammatory change",
-   "Progressive macular hypomelanosis",
-   "Post-traumatic or scar-related leukoderma"
-  ],
-  "additionalInvestigations": [
-   "Wood-lamp examination to compare with the chalky white of vitiligo",
-   "Dermoscopy of representative macules",
-   "Potassium hydroxide microscopy to exclude pityriasis versicolor",
-   "Assessment of cumulative sun exposure and photodamage",
-   "Skin biopsy only when the diagnosis is genuinely uncertain"
-  ],
-  "redFlags": [
-   "Rapidly spreading or coalescing depigmentation that should prompt reconsideration of vitiligo",
-   "Associated cutaneous sclerosis or atrophy suggesting lichen sclerosus or morphoea",
-   "New scaling or symptomatic lesions suggesting an alternative diagnosis"
-  ],
-  "prognosis": "The condition is benign, stable and permanent, with individual macules persisting indefinitely; it carries no health risk and is purely a cosmetic issue.",
-  "pitfalls": [
-   "Confusing the stable small macules with early vitiligo",
-   "Subjecting patients to unnecessary or aggressive treatment",
-   "Missing pityriasis versicolor as an alternative cause of hypopigmentation",
-   "Attributing spreading depigmentation to idiopathic guttate hypomelanosis"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that the condition is benign, stable and carries no health risk, so treatment is optional and purely cosmetic",
-   "Advise sun protection with broad-spectrum sunscreen and photoprotective measures to limit the cumulative ultraviolet damage that drives new lesions",
-   "Confirm the clinical diagnosis and distinguish it from vitiligo and pityriasis versicolor using Wood-lamp examination and dermoscopy, reserving biopsy for genuine uncertainty",
-   "Offer cosmetic camouflage for the porcelain-white macules where appearance is a concern",
-   "Consider topical calcineurin inhibitors or retinoids, or localised procedures such as superficial cryotherapy, dermabrasion, fractional laser or targeted phototherapy, counselling on limited and variable benefit",
-   "Refer to dermatology only for diagnostic uncertainty or persistent cosmetic concern"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "idiopathic_guttate_hypomelanosis-pathway",
-   "title": "Idiopathic guttate hypomelanosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Multiple small (a few millimetres), discrete, sharply defined porcelain-white macules, most numerous on the sun-exposed extensor forearms and shins",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly spreading or coalescing depigmentation that should prompt reconsideration of vitiligo",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Wood-lamp examination to compare with the chalky white of vitiligo, Dermoscopy of representative macules, Potassium hydroxide microscopy to exclude pityriasis versicolor"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that the condition is benign, stable and carries no health risk, so treatment is optional and purely cosmetic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the stable small macules with early vitiligo"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of idiopathic guttate hypomelanosis."
-  }
- ],
- "tables": [
-  {
-   "id": "idiopathic_guttate_hypomelanosis-matrix",
-   "title": "Idiopathic guttate hypomelanosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Multiple small (a few millimetres), discrete, sharply defined porcelain-white macules, most numerous on the sun-exposed extensor",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Pigmentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Multiple small (a few millimetres), discrete, sharply defined porcelain-white macules, most numerous on the sun-exposed extensor forearms and shins",
+      "Prevalence and lesion number increase with age and cumulative sun exposure, making it very common in the elderly",
+      "Lesions are asymptomatic, remain stable and do not coalesce, unlike vitiligo",
+      "Essentially a clinical diagnosis; dermoscopy shows well-defined hypopigmented patches and biopsy is rarely needed",
+      "Reduced but not absent melanocytes and melanin distinguish it from the complete pigment loss of vitiligo",
+      "On Wood lamp the macules are off-white rather than the chalky, sharply fluorescent white of vitiligo",
+      "Largely a cosmetic concern; photoprotection may limit progression and most cases need no treatment"
     ],
-    [
-     "Key Investigations",
-     "Wood-lamp examination to compare with the chalky white of vitiligo, Dermoscopy of representative macules, Potassium hydroxide",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Idiopathic guttate hypomelanosis reflects a localised reduction in the number and activity of epidermal melanocytes with decreased melanin production, so pigment is diminished rather than absent. Cumulative ultraviolet exposure and skin ageing are the principal contributors, with a possible genetic predisposition. The result is scattered focal areas of reduced epidermal melanisation on chronically photodamaged skin.",
+    "additionalDifferentials": [
+      "Vitiligo",
+      "Pityriasis (tinea) versicolor",
+      "Guttate morphoea or lichen sclerosus",
+      "Hypopigmented post-inflammatory change",
+      "Progressive macular hypomelanosis",
+      "Post-traumatic or scar-related leukoderma"
     ],
-    [
-     "Primary Differentials",
-     "Vitiligo, Pityriasis (tinea) versicolor, Guttate morphoea or lichen sclerosus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Wood-lamp examination to compare with the chalky white of vitiligo",
+      "Dermoscopy of representative macules",
+      "Potassium hydroxide microscopy to exclude pityriasis versicolor",
+      "Assessment of cumulative sun exposure and photodamage",
+      "Skin biopsy only when the diagnosis is genuinely uncertain"
     ],
-    [
-     "Management Strategy",
-     "Reassure that the condition is benign, stable and carries no health risk, so treatment is optional and purely cosmetic",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly spreading or coalescing depigmentation that should prompt reconsideration of vitiligo",
+      "Associated cutaneous sclerosis or atrophy suggesting lichen sclerosus or morphoea",
+      "New scaling or symptomatic lesions suggesting an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the stable small macules with early vitiligo",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign, stable and permanent, with individual macules persisting indefinitely; it carries no health risk and is purely a cosmetic issue.",
+    "pitfalls": [
+      "Confusing the stable small macules with early vitiligo",
+      "Subjecting patients to unnecessary or aggressive treatment",
+      "Missing pityriasis versicolor as an alternative cause of hypopigmentation",
+      "Attributing spreading depigmentation to idiopathic guttate hypomelanosis"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that the condition is benign, stable and carries no health risk, so treatment is optional and purely cosmetic",
+      "Advise sun protection with broad-spectrum sunscreen and photoprotective measures to limit the cumulative ultraviolet damage that drives new lesions",
+      "Confirm the clinical diagnosis and distinguish it from vitiligo and pityriasis versicolor using Wood-lamp examination and dermoscopy, reserving biopsy for genuine uncertainty",
+      "Offer cosmetic camouflage for the porcelain-white macules where appearance is a concern",
+      "Consider topical calcineurin inhibitors or retinoids, or localised procedures such as superficial cryotherapy, dermabrasion, fractional laser or targeted phototherapy, counselling on limited and variable benefit",
+      "Refer to dermatology only for diagnostic uncertainty or persistent cosmetic concern"
     ]
-   ],
-   "caption": "Overview comparison matrix for idiopathic guttate hypomelanosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "idiopathic-guttate-hypomelanosis-real-image",
-   "title": "Idiopathic guttate hypomelanosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "idiopathic_guttate_hypomelanosis-pathway",
+      "title": "Idiopathic guttate hypomelanosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Multiple small (a few millimetres), discrete, sharply defined porcelain-white macules, most numerous on the sun-exposed extensor forearms and shins",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly spreading or coalescing depigmentation that should prompt reconsideration of vitiligo",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Wood-lamp examination to compare with the chalky white of vitiligo, Dermoscopy of representative macules, Potassium hydroxide microscopy to exclude pityriasis versicolor"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that the condition is benign, stable and carries no health risk, so treatment is optional and purely cosmetic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the stable small macules with early vitiligo"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of idiopathic guttate hypomelanosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "idiopathic_guttate_hypomelanosis-matrix",
+      "title": "Idiopathic guttate hypomelanosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Multiple small (a few millimetres), discrete, sharply defined porcelain-white macules, most numerous on the sun-exposed extensor",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Wood-lamp examination to compare with the chalky white of vitiligo, Dermoscopy of representative macules, Potassium hydroxide",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vitiligo, Pityriasis (tinea) versicolor, Guttate morphoea or lichen sclerosus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that the condition is benign, stable and carries no health risk, so treatment is optional and purely cosmetic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the stable small macules with early vitiligo",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for idiopathic guttate hypomelanosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "idiopathic_guttate_hypomelanosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Compares with the chalky white of vitiligo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy of representative macules",
+          "cells": [
+            {
+              "text": "Pattern of small discrete macules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium hydroxide microscopy",
+          "cells": [
+            {
+              "text": "Excludes pityriasis versicolor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of cumulative sun exposure",
+          "cells": [
+            {
+              "text": "Photodamage that drives new lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Only when the diagnosis is genuinely uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_guttate_hypomelanosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitiligo",
+          "cells": [
+            {
+              "text": "Lesions coalesce and spread; this condition does not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pityriasis versicolor",
+          "cells": [
+            {
+              "text": "Excluded by potassium hydroxide microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guttate morphoea or lichen sclerosus",
+          "cells": [
+            {
+              "text": "Cutaneous sclerosis or atrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_guttate_hypomelanosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, stable and carries no health risk; treatment is optional and cosmetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sun protection",
+          "cells": [
+            {
+              "text": "Broad-spectrum sunscreen to limit ultraviolet damage that drives new lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic camouflage",
+          "cells": [
+            {
+              "text": "Where appearance is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or localised treatment",
+          "cells": [
+            {
+              "text": "Calcineurin inhibitor or retinoid, cryotherapy, dermabrasion, fractional laser or phototherapy; benefit limited and variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Only for diagnostic uncertainty or persistent cosmetic concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "idiopathic_guttate_hypomelanosis-dx-mgmt",
+      "title": "Diagnosis and management of Idiopathic guttate hypomelanosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple small porcelain-white macules on sun-exposed forearms and shins",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Coalescing or spreading depigmentation, sclerosis or new symptomatic scaling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reconsider vitiligo, morphoea or lichen sclerosus; dermatology referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wood's lamp, dermoscopy, potassium hydroxide microscopy for pityriasis versicolor",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Stable small macules without coalescence, and mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vitiligo or pityriasis versicolor; biopsy if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign, stable, no health risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum sunscreen to limit new lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cosmetic camouflage where appearance concerns",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical treatment or localised procedures, with limited benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer only for uncertainty or persistent cosmetic concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Stable benign condition; treatment optional and cosmetic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

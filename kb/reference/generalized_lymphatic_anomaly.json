@@ -1,175 +1,471 @@
 {
- "id": "generalized_lymphatic_anomaly",
- "name": "Generalised lymphatic anomaly",
- "aliases": [
-  "GLA",
-  "generalized lymphatic anomaly",
-  "lymphangiomatosis"
- ],
- "class": "non_infective",
- "system": "Vascular anomalies / Dermatology",
- "specialty": "Vascular Anomalies",
- "referenceOnly": true,
- "reference": {
-  "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A multifocal lymphatic malformation affecting multiple tissues and organs, categorised among the complex lymphatic anomalies in the ISSVA framework",
-   "Common sites include bone, spleen, mediastinum, lungs and soft tissue, and disease is often diffuse rather than focal",
-   "Bony involvement typically produces well-defined lytic lesions that, unlike Gorham-Stout disease, tend not to show progressive cortical destruction",
-   "Thoracic disease may cause chylothorax, pericardial effusion and respiratory compromise",
-   "It generally lacks the aggressive consumptive coagulopathy and haemorrhagic pleural fluid that characterise kaposiform lymphangiomatosis",
-   "Diagnosis rests on imaging distribution, histology showing abnormal lymphatic channels, and correlation within a multidisciplinary vascular anomalies service",
-   "Somatic activating variants in the PIK3CA pathway are described in many complex lymphatic anomalies",
-   "Sirolimus is a mainstay of medical therapy for symptomatic or progressive disease, supported by supportive management of effusions"
+  "id": "generalized_lymphatic_anomaly",
+  "name": "Generalised lymphatic anomaly",
+  "aliases": [
+    "GLA",
+    "generalized lymphatic anomaly",
+    "lymphangiomatosis"
   ],
-  "pathophysiology": "Generalised lymphatic anomaly is a diffuse malformation of the lymphatic system in which abnormal, dilated lymphatic channels proliferate through multiple organs and tissues, characteristically involving bone, spleen and the thorax. It is a slow-flow lymphatic malformation rather than a tumour, and somatic activating variants in the PIK3CA-AKT-mTOR signalling pathway are implicated in many cases. Involvement of the thoracic lymphatics can lead to chylous effusions, while widespread visceral and skeletal disease produces the multiorgan picture; the bony lesions are typically non-progressive in contrast to Gorham-Stout disease.",
-  "additionalDifferentials": [
-   "Gorham-Stout disease (progressive osteolysis, vanishing bone)",
-   "Kaposiform lymphangiomatosis (aggressive, coagulopathy, haemorrhagic effusions)",
-   "Central conducting lymphatic anomaly",
-   "Localised (focal) lymphatic malformation",
-   "Metastatic malignancy or histiocytosis with multifocal lytic bone lesions",
-   "Multifocal venous or venolymphatic malformation"
-  ],
-  "additionalInvestigations": [
-   "Whole-body or targeted MRI to map soft-tissue, splenic and thoracic involvement",
-   "Plain radiographs and CT to characterise lytic bone lesions",
-   "Chest imaging and analysis of pleural or pericardial fluid for chyle",
-   "Biopsy with lymphatic markers (e.g. D2-40/podoplanin) for histological confirmation",
-   "Coagulation profile to distinguish from kaposiform lymphangiomatosis",
-   "Genetic analysis of PIK3CA-pathway variants where available"
-  ],
-  "redFlags": [
-   "Respiratory distress from chylothorax or large pericardial effusion",
-   "Rapidly accumulating or recurrent chylous effusions",
-   "Pathological fracture from extensive bony disease",
-   "Features suggesting transformation to a more aggressive lymphatic anomaly",
-   "Cardiorespiratory compromise from mediastinal involvement"
-  ],
-  "prognosis": "Prognosis varies with the extent and site of disease; limited disease may remain stable, but extensive thoracic or visceral involvement with recurrent chylous effusions carries greater morbidity. Response to sirolimus is often favourable, though the condition is generally chronic and requires long-term surveillance.",
-  "pitfalls": [
-   "Confusing it with Gorham-Stout disease and misjudging the risk of progressive osteolysis",
-   "Failing to check coagulation and thereby overlooking a diagnosis of kaposiform lymphangiomatosis",
-   "Underestimating thoracic involvement and the risk of chylous effusions",
-   "Attempting extensive surgery of diffuse disease rather than medical control"
-  ],
-  "references": [
-   "ISSVA Classification of Vascular Anomalies",
-   "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Medical therapy with the mTOR inhibitor sirolimus, targeting the implicated PIK3CA-AKT-mTOR pathway, to reduce lesion burden and effusions",
-   "Management of chylous effusions with a low-fat, medium-chain-triglyceride diet, drainage and pleurodesis or thoracic duct intervention for persistent leaks",
-   "Interventional sclerotherapy or surgical debulking for symptomatic or compressive focal lesions",
-   "Bone-directed treatment including bisphosphonates for painful or structurally significant lytic skeletal lesions",
-   "Respiratory support for pericardial or pleural disease causing cardiorespiratory compromise, with a coagulation profile to distinguish it from kaposiform lymphangiomatosis",
-   "Long-term surveillance imaging given the chronic course, monitoring visceral, splenic and thoracic involvement",
-   "Manage within a specialist multidisciplinary vascular anomalies service, with molecular analysis of PIK3CA-pathway variants to guide targeted therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "generalized_lymphatic_anomaly-pathway",
-   "title": "Generalised lymphatic anomaly: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A multifocal lymphatic malformation affecting multiple tissues and organs, categorised among the complex lymphatic anomalies in the ISSVA framework",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory distress from chylothorax or large pericardial effusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Whole-body or targeted MRI to map soft-tissue, splenic and thoracic involvement, Plain radiographs and CT to characterise lytic bone lesions, Chest imaging and analysis of pleural or pericardial fluid for chyle"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Medical therapy with the mTOR inhibitor sirolimus, targeting the implicated PIK3CA-AKT-mTOR pathway, to reduce lesion burden and effusions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with Gorham-Stout disease and misjudging the risk of progressive osteolysis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of generalised lymphatic anomaly."
-  }
- ],
- "tables": [
-  {
-   "id": "generalized_lymphatic_anomaly-matrix",
-   "title": "Generalised lymphatic anomaly: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A multifocal lymphatic malformation affecting multiple tissues and organs, categorised among the complex lymphatic anomalies in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular anomalies / Dermatology",
+  "specialty": "Vascular Anomalies",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A multifocal lymphatic malformation affecting multiple tissues and organs, categorised among the complex lymphatic anomalies in the ISSVA framework",
+      "Common sites include bone, spleen, mediastinum, lungs and soft tissue, and disease is often diffuse rather than focal",
+      "Bony involvement typically produces well-defined lytic lesions that, unlike Gorham-Stout disease, tend not to show progressive cortical destruction",
+      "Thoracic disease may cause chylothorax, pericardial effusion and respiratory compromise",
+      "It generally lacks the aggressive consumptive coagulopathy and haemorrhagic pleural fluid that characterise kaposiform lymphangiomatosis",
+      "Diagnosis rests on imaging distribution, histology showing abnormal lymphatic channels, and correlation within a multidisciplinary vascular anomalies service",
+      "Somatic activating variants in the PIK3CA pathway are described in many complex lymphatic anomalies",
+      "Sirolimus is a mainstay of medical therapy for symptomatic or progressive disease, supported by supportive management of effusions"
     ],
-    [
-     "Key Investigations",
-     "Whole-body or targeted MRI to map soft-tissue, splenic and thoracic involvement, Plain radiographs and CT to characterise lytic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Generalised lymphatic anomaly is a diffuse malformation of the lymphatic system in which abnormal, dilated lymphatic channels proliferate through multiple organs and tissues, characteristically involving bone, spleen and the thorax. It is a slow-flow lymphatic malformation rather than a tumour, and somatic activating variants in the PIK3CA-AKT-mTOR signalling pathway are implicated in many cases. Involvement of the thoracic lymphatics can lead to chylous effusions, while widespread visceral and skeletal disease produces the multiorgan picture; the bony lesions are typically non-progressive in contrast to Gorham-Stout disease.",
+    "additionalDifferentials": [
+      "Gorham-Stout disease (progressive osteolysis, vanishing bone)",
+      "Kaposiform lymphangiomatosis (aggressive, coagulopathy, haemorrhagic effusions)",
+      "Central conducting lymphatic anomaly",
+      "Localised (focal) lymphatic malformation",
+      "Metastatic malignancy or histiocytosis with multifocal lytic bone lesions",
+      "Multifocal venous or venolymphatic malformation"
     ],
-    [
-     "Primary Differentials",
-     "Gorham-Stout disease (progressive osteolysis, vanishing bone), Kaposiform lymphangiomatosis (aggressive, coagulopathy,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Whole-body or targeted MRI to map soft-tissue, splenic and thoracic involvement",
+      "Plain radiographs and CT to characterise lytic bone lesions",
+      "Chest imaging and analysis of pleural or pericardial fluid for chyle",
+      "Biopsy with lymphatic markers (e.g. D2-40/podoplanin) for histological confirmation",
+      "Coagulation profile to distinguish from kaposiform lymphangiomatosis",
+      "Genetic analysis of PIK3CA-pathway variants where available"
     ],
-    [
-     "Management Strategy",
-     "Medical therapy with the mTOR inhibitor sirolimus, targeting the implicated PIK3CA-AKT-mTOR pathway, to reduce lesion burden and",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory distress from chylothorax or large pericardial effusion",
+      "Rapidly accumulating or recurrent chylous effusions",
+      "Pathological fracture from extensive bony disease",
+      "Features suggesting transformation to a more aggressive lymphatic anomaly",
+      "Cardiorespiratory compromise from mediastinal involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with Gorham-Stout disease and misjudging the risk of progressive osteolysis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies with the extent and site of disease; limited disease may remain stable, but extensive thoracic or visceral involvement with recurrent chylous effusions carries greater morbidity. Response to sirolimus is often favourable, though the condition is generally chronic and requires long-term surveillance.",
+    "pitfalls": [
+      "Confusing it with Gorham-Stout disease and misjudging the risk of progressive osteolysis",
+      "Failing to check coagulation and thereby overlooking a diagnosis of kaposiform lymphangiomatosis",
+      "Underestimating thoracic involvement and the risk of chylous effusions",
+      "Attempting extensive surgery of diffuse disease rather than medical control"
+    ],
+    "references": [
+      "ISSVA Classification of Vascular Anomalies",
+      "Mulliken and Young's Vascular Anomalies: Haemangiomas and Malformations"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Medical therapy with the mTOR inhibitor sirolimus, targeting the implicated PIK3CA-AKT-mTOR pathway, to reduce lesion burden and effusions",
+      "Management of chylous effusions with a low-fat, medium-chain-triglyceride diet, drainage and pleurodesis or thoracic duct intervention for persistent leaks",
+      "Interventional sclerotherapy or surgical debulking for symptomatic or compressive focal lesions",
+      "Bone-directed treatment including bisphosphonates for painful or structurally significant lytic skeletal lesions",
+      "Respiratory support for pericardial or pleural disease causing cardiorespiratory compromise, with a coagulation profile to distinguish it from kaposiform lymphangiomatosis",
+      "Long-term surveillance imaging given the chronic course, monitoring visceral, splenic and thoracic involvement",
+      "Manage within a specialist multidisciplinary vascular anomalies service, with molecular analysis of PIK3CA-pathway variants to guide targeted therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for generalised lymphatic anomaly."
-  }
- ],
- "diagrams": [
-  {
-   "id": "generalized-lymphatic-anomaly-real-image",
-   "title": "Generalised lymphatic anomaly: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "generalized_lymphatic_anomaly-pathway",
+      "title": "Generalised lymphatic anomaly: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A multifocal lymphatic malformation affecting multiple tissues and organs, categorised among the complex lymphatic anomalies in the ISSVA framework",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory distress from chylothorax or large pericardial effusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Whole-body or targeted MRI to map soft-tissue, splenic and thoracic involvement, Plain radiographs and CT to characterise lytic bone lesions, Chest imaging and analysis of pleural or pericardial fluid for chyle"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Medical therapy with the mTOR inhibitor sirolimus, targeting the implicated PIK3CA-AKT-mTOR pathway, to reduce lesion burden and effusions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with Gorham-Stout disease and misjudging the risk of progressive osteolysis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of generalised lymphatic anomaly."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "generalized_lymphatic_anomaly-matrix",
+      "title": "Generalised lymphatic anomaly: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A multifocal lymphatic malformation affecting multiple tissues and organs, categorised among the complex lymphatic anomalies in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Whole-body or targeted MRI to map soft-tissue, splenic and thoracic involvement, Plain radiographs and CT to characterise lytic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gorham-Stout disease (progressive osteolysis, vanishing bone), Kaposiform lymphangiomatosis (aggressive, coagulopathy,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Medical therapy with the mTOR inhibitor sirolimus, targeting the implicated PIK3CA-AKT-mTOR pathway, to reduce lesion burden and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with Gorham-Stout disease and misjudging the risk of progressive osteolysis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for generalised lymphatic anomaly."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "generalized_lymphatic_anomaly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Whole-body or targeted MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue, splenic and thoracic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs and CT",
+          "cells": [
+            {
+              "text": "Characterises lytic bone lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and pleural or pericardial fluid analysis",
+          "cells": [
+            {
+              "text": "Chyle in pleural or pericardial fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with lymphatic markers (D2-40 or podoplanin)",
+          "cells": [
+            {
+              "text": "Histological confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile",
+          "cells": [
+            {
+              "text": "Distinguishes from kaposiform lymphangiomatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIK3CA-pathway genetic analysis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_lymphatic_anomaly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gorham-Stout disease",
+          "cells": [
+            {
+              "text": "Progressive osteolysis, or vanishing bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kaposiform lymphangiomatosis",
+          "cells": [
+            {
+              "text": "Coagulopathy and haemorrhagic effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic malignancy or histiocytosis",
+          "cells": [
+            {
+              "text": "Multifocal lytic bone lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "generalized_lymphatic_anomaly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sirolimus",
+          "cells": [
+            {
+              "text": "mTOR inhibitor targeting the PIK3CA-AKT-mTOR pathway to reduce lesion burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chylous effusion management",
+          "cells": [
+            {
+              "text": "Low-fat, medium-chain-triglyceride diet, drainage, pleurodesis or thoracic duct intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sclerotherapy or surgical debulking",
+          "cells": [
+            {
+              "text": "Symptomatic or compressive focal lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonates",
+          "cells": [
+            {
+              "text": "Painful or structurally significant lytic bone lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Pericardial or pleural disease causing cardiorespiratory compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging",
+          "cells": [
+            {
+              "text": "Visceral, splenic and thoracic involvement over the chronic course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist vascular anomalies service",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "generalized_lymphatic_anomaly-dx-mgmt",
+      "title": "Diagnosis and management of Generalised lymphatic anomaly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected generalised lymphatic anomaly: multifocal lytic bone and lymphatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (chylothorax, large pericardial effusion, pathological fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and respiratory support for chylous or pericardial compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Whole-body MRI, bone CT, chest imaging, lymphatic-marker biopsy and coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does lymphatic-marker biopsy with normal coagulation confirm this anomaly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gorham-Stout disease, kaposiform lymphangiomatosis or metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sirolimus, an mTOR inhibitor, to reduce lesion burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-fat, MCT diet, drainage and pleurodesis or duct intervention for chylous effusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sclerotherapy or surgical debulking for symptomatic focal lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bisphosphonates for painful or structurally significant lytic bone lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies with extent and site; limited disease may remain stable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

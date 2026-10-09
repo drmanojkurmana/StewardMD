@@ -1,176 +1,472 @@
 {
- "id": "nasolacrimal_duct_obstruction",
- "name": "Congenital nasolacrimal duct obstruction",
- "aliases": [
-  "CNLDO",
-  "congenital dacryostenosis",
-  "blocked tear duct",
-  "nasolacrimal duct obstruction"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Strabismus & Oculoplastics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest cause of persistent watering (epiphora) and mucopurulent discharge in infants, usually from birth or the first weeks of life",
-   "Most often results from a persistent membrane at the distal duct (valve of Hasner)",
-   "The majority resolve spontaneously within the first year of life",
-   "Lacrimal sac massage (Crigler technique) and lid hygiene form first-line conservative care, with topical antibiotics reserved for secondary infection",
-   "Regurgitation of mucoid material on pressure over the lacrimal sac supports the diagnosis",
-   "Probing of the nasolacrimal duct is considered when symptoms persist beyond about the first year, with syringing, intubation, or balloon dacryoplasty for refractory cases",
-   "A tense bluish swelling at the medial canthus in a neonate suggests a dacryocele, which may become infected",
-   "Acute dacryocystitis, a red tender medial canthal swelling with systemic upset, is an important complication requiring prompt treatment"
+  "id": "nasolacrimal_duct_obstruction",
+  "name": "Congenital nasolacrimal duct obstruction",
+  "aliases": [
+    "CNLDO",
+    "congenital dacryostenosis",
+    "blocked tear duct",
+    "nasolacrimal duct obstruction"
   ],
-  "pathophysiology": "During development the nasolacrimal drainage system canalises from the eye toward the nose, and the last segment to open is the distal duct at the valve of Hasner. Failure of this membrane to perforate produces a functional obstruction so that tears and mucus cannot drain, causing epiphora and stagnation within the sac that predisposes to secondary infection. Retained secretions may distend the sac to form a dacryocele, and bacterial colonisation can progress to acute dacryocystitis, occasionally with surrounding cellulitis.",
-  "additionalDifferentials": [
-   "Congenital or infantile glaucoma with tearing, photophobia, and corneal enlargement",
-   "Conjunctivitis, infective or allergic",
-   "Ophthalmia neonatorum",
-   "Corneal epithelial disease or foreign body",
-   "Punctal or canalicular agenesis or atresia",
-   "Epiblepharon or entropion causing reflex tearing",
-   "Dacryocele or lacrimal sac mucocele"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment with the fluorescein dye disappearance test",
-   "Examination for lacrimal sac regurgitation on digital pressure",
-   "Measurement of corneal diameter and intraocular pressure to exclude congenital glaucoma",
-   "Nasal endoscopy in complex or revision cases",
-   "Dacryocystography or dacryoscintigraphy in atypical or older children to define the level of obstruction",
-   "Microbiological swab of discharge if acute dacryocystitis is suspected"
-  ],
-  "redFlags": [
-   "Corneal enlargement, cloudiness, or photophobia suggesting congenital glaucoma rather than simple duct obstruction",
-   "Acute dacryocystitis with a red, tender, swollen medial canthus and systemic illness",
-   "An expanding tense dacryocele, especially if it causes respiratory difficulty in a neonate",
-   "Orbital cellulitis with proptosis, restricted eye movements, and systemic toxicity"
-  ],
-  "prognosis": "The outlook is excellent, with most cases resolving spontaneously during the first year; probing is highly successful when required, and only a minority need intubation, balloon dilatation, or dacryocystorhinostomy.",
-  "pitfalls": [
-   "Mistaking congenital glaucoma for simple duct obstruction and missing sight-threatening disease",
-   "Repeatedly treating with topical antibiotics without addressing the underlying obstruction",
-   "Delaying management of acute dacryocystitis or an infected dacryocele",
-   "Failing to recognise a neonatal dacryocele that compromises nasal breathing"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Royal College of Ophthalmologists guidance on congenital nasolacrimal duct obstruction"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line conservative care with lacrimal sac massage (Crigler technique) and lid hygiene, with parental reassurance that most cases resolve spontaneously within the first year",
-   "Topical antibiotics reserved for secondary conjunctivitis or mucopurulent discharge",
-   "Systemic antibiotics and prompt ophthalmological review for acute dacryocystitis or periorbital cellulitis",
-   "Nasolacrimal duct probing when symptoms persist beyond about the first year of life",
-   "Syringing, silicone intubation or balloon dacryoplasty for probing failures or recurrent obstruction",
-   "Dacryocystorhinostomy for refractory obstruction",
-   "Referral to paediatric ophthalmology, with exclusion of congenital glaucoma when watering is atypical"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nasolacrimal_duct_obstruction-pathway",
-   "title": "Congenital nasolacrimal duct obstruction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest cause of persistent watering (epiphora) and mucopurulent discharge in infants, usually from birth or the first weeks of life",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Corneal enlargement, cloudiness, or photophobia suggesting congenital glaucoma rather than simple duct obstruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment with the fluorescein dye disappearance test, Examination for lacrimal sac regurgitation on digital pressure, Measurement of corneal diameter and intraocular pressure to exclude congenital glaucoma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line conservative care with lacrimal sac massage (Crigler technique) and lid hygiene, with parental reassurance that most cases resolve spontaneously within the first year"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking congenital glaucoma for simple duct obstruction and missing sight-threatening disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital nasolacrimal duct obstruction."
-  }
- ],
- "tables": [
-  {
-   "id": "nasolacrimal_duct_obstruction-matrix",
-   "title": "Congenital nasolacrimal duct obstruction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest cause of persistent watering (epiphora) and mucopurulent discharge in infants, usually from birth or the first",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Strabismus & Oculoplastics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest cause of persistent watering (epiphora) and mucopurulent discharge in infants, usually from birth or the first weeks of life",
+      "Most often results from a persistent membrane at the distal duct (valve of Hasner)",
+      "The majority resolve spontaneously within the first year of life",
+      "Lacrimal sac massage (Crigler technique) and lid hygiene form first-line conservative care, with topical antibiotics reserved for secondary infection",
+      "Regurgitation of mucoid material on pressure over the lacrimal sac supports the diagnosis",
+      "Probing of the nasolacrimal duct is considered when symptoms persist beyond about the first year, with syringing, intubation, or balloon dacryoplasty for refractory cases",
+      "A tense bluish swelling at the medial canthus in a neonate suggests a dacryocele, which may become infected",
+      "Acute dacryocystitis, a red tender medial canthal swelling with systemic upset, is an important complication requiring prompt treatment"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment with the fluorescein dye disappearance test, Examination for lacrimal sac regurgitation on digital pressure,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During development the nasolacrimal drainage system canalises from the eye toward the nose, and the last segment to open is the distal duct at the valve of Hasner. Failure of this membrane to perforate produces a functional obstruction so that tears and mucus cannot drain, causing epiphora and stagnation within the sac that predisposes to secondary infection. Retained secretions may distend the sac to form a dacryocele, and bacterial colonisation can progress to acute dacryocystitis, occasionally with surrounding cellulitis.",
+    "additionalDifferentials": [
+      "Congenital or infantile glaucoma with tearing, photophobia, and corneal enlargement",
+      "Conjunctivitis, infective or allergic",
+      "Ophthalmia neonatorum",
+      "Corneal epithelial disease or foreign body",
+      "Punctal or canalicular agenesis or atresia",
+      "Epiblepharon or entropion causing reflex tearing",
+      "Dacryocele or lacrimal sac mucocele"
     ],
-    [
-     "Primary Differentials",
-     "Congenital or infantile glaucoma with tearing, photophobia, and corneal enlargement, Conjunctivitis, infective or allergic,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment with the fluorescein dye disappearance test",
+      "Examination for lacrimal sac regurgitation on digital pressure",
+      "Measurement of corneal diameter and intraocular pressure to exclude congenital glaucoma",
+      "Nasal endoscopy in complex or revision cases",
+      "Dacryocystography or dacryoscintigraphy in atypical or older children to define the level of obstruction",
+      "Microbiological swab of discharge if acute dacryocystitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "First-line conservative care with lacrimal sac massage (Crigler technique) and lid hygiene, with parental reassurance that most",
-     "Core treatment modality"
+    "redFlags": [
+      "Corneal enlargement, cloudiness, or photophobia suggesting congenital glaucoma rather than simple duct obstruction",
+      "Acute dacryocystitis with a red, tender, swollen medial canthus and systemic illness",
+      "An expanding tense dacryocele, especially if it causes respiratory difficulty in a neonate",
+      "Orbital cellulitis with proptosis, restricted eye movements, and systemic toxicity"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking congenital glaucoma for simple duct obstruction and missing sight-threatening disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is excellent, with most cases resolving spontaneously during the first year; probing is highly successful when required, and only a minority need intubation, balloon dilatation, or dacryocystorhinostomy.",
+    "pitfalls": [
+      "Mistaking congenital glaucoma for simple duct obstruction and missing sight-threatening disease",
+      "Repeatedly treating with topical antibiotics without addressing the underlying obstruction",
+      "Delaying management of acute dacryocystitis or an infected dacryocele",
+      "Failing to recognise a neonatal dacryocele that compromises nasal breathing"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Royal College of Ophthalmologists guidance on congenital nasolacrimal duct obstruction"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line conservative care with lacrimal sac massage (Crigler technique) and lid hygiene, with parental reassurance that most cases resolve spontaneously within the first year",
+      "Topical antibiotics reserved for secondary conjunctivitis or mucopurulent discharge",
+      "Systemic antibiotics and prompt ophthalmological review for acute dacryocystitis or periorbital cellulitis",
+      "Nasolacrimal duct probing when symptoms persist beyond about the first year of life",
+      "Syringing, silicone intubation or balloon dacryoplasty for probing failures or recurrent obstruction",
+      "Dacryocystorhinostomy for refractory obstruction",
+      "Referral to paediatric ophthalmology, with exclusion of congenital glaucoma when watering is atypical"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital nasolacrimal duct obstruction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nasolacrimal-duct-obstruction-real-image",
-   "title": "Congenital nasolacrimal duct obstruction: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "nasolacrimal_duct_obstruction-pathway",
+      "title": "Congenital nasolacrimal duct obstruction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest cause of persistent watering (epiphora) and mucopurulent discharge in infants, usually from birth or the first weeks of life",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Corneal enlargement, cloudiness, or photophobia suggesting congenital glaucoma rather than simple duct obstruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment with the fluorescein dye disappearance test, Examination for lacrimal sac regurgitation on digital pressure, Measurement of corneal diameter and intraocular pressure to exclude congenital glaucoma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line conservative care with lacrimal sac massage (Crigler technique) and lid hygiene, with parental reassurance that most cases resolve spontaneously within the first year"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking congenital glaucoma for simple duct obstruction and missing sight-threatening disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital nasolacrimal duct obstruction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nasolacrimal_duct_obstruction-matrix",
+      "title": "Congenital nasolacrimal duct obstruction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest cause of persistent watering (epiphora) and mucopurulent discharge in infants, usually from birth or the first",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment with the fluorescein dye disappearance test, Examination for lacrimal sac regurgitation on digital pressure,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital or infantile glaucoma with tearing, photophobia, and corneal enlargement, Conjunctivitis, infective or allergic,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line conservative care with lacrimal sac massage (Crigler technique) and lid hygiene, with parental reassurance that most",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking congenital glaucoma for simple duct obstruction and missing sight-threatening disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital nasolacrimal duct obstruction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nasolacrimal_duct_obstruction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluorescein dye disappearance test",
+          "cells": [
+            {
+              "text": "Assessment of tear drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for lacrimal sac regurgitation on digital pressure",
+          "cells": [
+            {
+              "text": "Mucoid regurgitation supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal diameter and intraocular pressure",
+          "cells": [
+            {
+              "text": "Excludes congenital glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal endoscopy",
+          "cells": [
+            {
+              "text": "Complex or revision cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dacryocystography or dacryoscintigraphy",
+          "cells": [
+            {
+              "text": "Level of obstruction in atypical or older children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological swab of discharge",
+          "cells": [
+            {
+              "text": "When acute dacryocystitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nasolacrimal_duct_obstruction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital or infantile glaucoma",
+          "cells": [
+            {
+              "text": "Corneal enlargement, cloudiness or photophobia suggests glaucoma rather than duct obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dacryocele or lacrimal sac mucocele",
+          "cells": [
+            {
+              "text": "A tense bluish swelling at the medial canthus in a neonate suggests a dacryocele"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nasolacrimal_duct_obstruction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lacrimal sac massage and lid hygiene",
+          "cells": [
+            {
+              "text": "First-line conservative care (Crigler technique)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Most cases resolve spontaneously within the first year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical antibiotics",
+          "cells": [
+            {
+              "text": "Reserved for secondary conjunctivitis or mucopurulent discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic antibiotics",
+          "cells": [
+            {
+              "text": "For acute dacryocystitis or periorbital cellulitis, with prompt ophthalmological review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasolacrimal duct probing",
+          "cells": [
+            {
+              "text": "When symptoms persist beyond about the first year of life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syringing, intubation or balloon dacryoplasty",
+          "cells": [
+            {
+              "text": "For probing failure or recurrent obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dacryocystorhinostomy",
+          "cells": [
+            {
+              "text": "For refractory obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric ophthalmology referral",
+          "cells": [
+            {
+              "text": "Exclude congenital glaucoma when watering is atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nasolacrimal_duct_obstruction-dx-mgmt",
+      "title": "Diagnosis and management of Congenital nasolacrimal duct obstruction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent watering and mucopurulent discharge in an infant from birth or early weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (corneal enlargement, photophobia, red tender medial canthus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology; exclude glaucoma; systemic antibiotics for acute dacryocystitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dye disappearance test, sac regurgitation, corneal diameter and IOP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mucoid regurgitation on sac pressure, with glaucoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Examine for congenital glaucoma or another cause of watering; refer",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lacrimal sac massage (Crigler technique) and lid hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure: most resolve spontaneously within the first year",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Probing when symptoms persist beyond about the first year",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dacryocystorhinostomy for refractory obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent outlook; most resolve in the first year and probing is highly successful",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

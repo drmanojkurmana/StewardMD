@@ -1,179 +1,477 @@
 {
- "id": "detrusor_sphincter_dyssynergia",
- "name": "Detrusor sphincter dyssynergia",
- "aliases": [
-  "DSD",
-  "Detrusor-external sphincter dyssynergia",
-  "Vesicosphincteric dyssynergia"
- ],
- "class": "non_infective",
- "system": "Genitourinary",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Detrusor sphincter dyssynergia is the involuntary contraction of the external urethral sphincter during a detrusor contraction, producing functional outlet obstruction, and is a hallmark of suprasacral spinal cord pathology.",
-   "It arises from a lesion between the pontine micturition centre and the sacral cord, most commonly spinal cord injury, multiple sclerosis, transverse myelitis or myelomeningocele; a lesion above the pons does not cause it.",
-   "The dangerous consequence is sustained high detrusor storage and voiding pressure, which threatens the upper tracts with vesicoureteric reflux, hydronephrosis and renal failure.",
-   "Diagnosis is made by video-urodynamics showing simultaneous detrusor contraction and increased external sphincter electromyographic activity with a characteristic obstructed flow pattern.",
-   "Symptoms overlap with mechanical obstruction: hesitancy, interrupted or staccato flow, incomplete emptying and recurrent infection, so urodynamic confirmation is essential before treatment.",
-   "Management prioritises conversion of a high-pressure system to a safe low-pressure reservoir, commonly with clean intermittent catheterisation combined with detrusor pressure-lowering therapy.",
-   "Chemical relaxation of the sphincter with botulinum toxin, or pharmacological or surgical outlet reduction, may be used, and afferent-modulating neuromodulation is emerging in selected patients.",
-   "Lifelong upper tract surveillance is mandatory because renal deterioration can progress silently despite apparently adequate bladder emptying."
+  "id": "detrusor_sphincter_dyssynergia",
+  "name": "Detrusor sphincter dyssynergia",
+  "aliases": [
+    "DSD",
+    "Detrusor-external sphincter dyssynergia",
+    "Vesicosphincteric dyssynergia"
   ],
-  "pathophysiology": "Normal voiding requires coordinated relaxation of the external urethral sphincter at the moment the detrusor contracts, an interaction organised by the pontine micturition centre. When a neurological lesion interrupts the pathways between the pons and the sacral spinal cord, this coordination is lost: the sacral reflex arcs mediating detrusor contraction and sphincter activity become dissociated, so the external sphincter contracts involuntarily during detrusor contraction rather than relaxing. The bladder therefore contracts against a closed or intermittently closing outlet, generating high intravesical pressure with poor and inefficient urine flow. Sustained elevation of storage and voiding pressures produces detrusor wall thickening and reduced compliance, promotes vesicoureteric reflux and impedes ureteric drainage, ultimately endangering renal function. The severity and pattern correlate with the level and completeness of the underlying cord lesion.",
-  "additionalDifferentials": [
-   "Anatomical bladder outlet obstruction (benign prostatic obstruction, urethral stricture)",
-   "Primary bladder neck obstruction / dysfunction",
-   "Fowler's syndrome (impaired sphincter relaxation in young women)",
-   "Dysfunctional voiding in neurologically intact patients",
-   "Detrusor underactivity or acontractile bladder",
-   "Non-relaxing pelvic floor dysfunction",
-   "Learned or behavioural voiding dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Video-urodynamics with external sphincter electromyography",
-   "Renal function tests and serial upper tract ultrasound",
-   "MRI of the spinal cord or brain to define the neurological lesion",
-   "Post-void residual measurement",
-   "Cystoscopy to exclude structural outlet obstruction",
-   "Isotope renography to assess differential function and drainage",
-   "Urine culture given the high infection risk"
-  ],
-  "redFlags": [
-   "Rising serum creatinine or new hydronephrosis on surveillance imaging",
-   "High detrusor storage or voiding pressure with poor compliance on urodynamics",
-   "Vesicoureteric reflux, especially high grade",
-   "Recurrent febrile urinary infection or urosepsis",
-   "Autonomic dysreflexia triggered by bladder distension in high spinal lesions"
-  ],
-  "prognosis": "With early urodynamic diagnosis and a management strategy that maintains low storage and voiding pressures, most patients preserve renal function and avoid serious upper tract damage. Untreated or poorly controlled detrusor sphincter dyssynergia carries a substantial long-term risk of progressive renal impairment and recurrent sepsis.",
-  "pitfalls": [
-   "Attributing obstructive symptoms to prostatic enlargement and offering outlet surgery without recognising the neurological dyssynergia",
-   "Relying on symptoms or flow rate alone rather than video-urodynamics to confirm the diagnosis",
-   "Focusing on continence while neglecting the high storage pressures that threaten the kidneys",
-   "Failing to arrange lifelong upper tract surveillance in a neurological bladder",
-   "Overlooking autonomic dysreflexia as a life-threatening consequence of bladder distension in cervical or high thoracic lesions"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology, current edition",
-   "European Association of Urology Guidelines on neuro-urology",
-   "International Continence Society standardisation of terminology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Convert the high-pressure bladder to a safe low-pressure reservoir with clean intermittent catheterisation combined with detrusor pressure-lowering therapy using antimuscarinics or a beta-3 agonist",
-   "Intradetrusor botulinum toxin for refractory detrusor overactivity and high storage pressure",
-   "Reduce outlet resistance with alpha-blockers, sphincteric botulinum toxin injection, or endoscopic sphincterotomy or a urethral stent in selected men",
-   "Treat and prevent recurrent urinary tract infection",
-   "Protect the upper tracts with surveillance renal ultrasound, renal function testing and repeat urodynamics",
-   "Treat the underlying neurological cause such as multiple sclerosis or spinal cord injury alongside the relevant neurology team",
-   "Consider urinary diversion or augmentation cystoplasty for refractory high-pressure disease threatening the kidneys, escalating on evidence of hydronephrosis, reflux or deteriorating renal function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "detrusor_sphincter_dyssynergia-pathway",
-   "title": "Detrusor sphincter dyssynergia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Detrusor sphincter dyssynergia is the involuntary contraction of the external urethral sphincter during a detrusor contraction, producing functional outlet obstruction, and is a hallmark of suprasacral spinal cord pathology.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rising serum creatinine or new hydronephrosis on surveillance imaging",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Video-urodynamics with external sphincter electromyography, Renal function tests and serial upper tract ultrasound, MRI of the spinal cord or brain to define the neurological lesion"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Convert the high-pressure bladder to a safe low-pressure reservoir with clean intermittent catheterisation combined with detrusor pressure-lowering therapy using antimuscarinics or a beta-3 agonist"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing obstructive symptoms to prostatic enlargement and offering outlet surgery without recognising the neurological dyssynergia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of detrusor sphincter dyssynergia."
-  }
- ],
- "tables": [
-  {
-   "id": "detrusor_sphincter_dyssynergia-matrix",
-   "title": "Detrusor sphincter dyssynergia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Detrusor sphincter dyssynergia is the involuntary contraction of the external urethral sphincter during a detrusor contraction,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Detrusor sphincter dyssynergia is the involuntary contraction of the external urethral sphincter during a detrusor contraction, producing functional outlet obstruction, and is a hallmark of suprasacral spinal cord pathology.",
+      "It arises from a lesion between the pontine micturition centre and the sacral cord, most commonly spinal cord injury, multiple sclerosis, transverse myelitis or myelomeningocele; a lesion above the pons does not cause it.",
+      "The dangerous consequence is sustained high detrusor storage and voiding pressure, which threatens the upper tracts with vesicoureteric reflux, hydronephrosis and renal failure.",
+      "Diagnosis is made by video-urodynamics showing simultaneous detrusor contraction and increased external sphincter electromyographic activity with a characteristic obstructed flow pattern.",
+      "Symptoms overlap with mechanical obstruction: hesitancy, interrupted or staccato flow, incomplete emptying and recurrent infection, so urodynamic confirmation is essential before treatment.",
+      "Management prioritises conversion of a high-pressure system to a safe low-pressure reservoir, commonly with clean intermittent catheterisation combined with detrusor pressure-lowering therapy.",
+      "Chemical relaxation of the sphincter with botulinum toxin, or pharmacological or surgical outlet reduction, may be used, and afferent-modulating neuromodulation is emerging in selected patients.",
+      "Lifelong upper tract surveillance is mandatory because renal deterioration can progress silently despite apparently adequate bladder emptying."
     ],
-    [
-     "Key Investigations",
-     "Video-urodynamics with external sphincter electromyography, Renal function tests and serial upper tract ultrasound, MRI of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Normal voiding requires coordinated relaxation of the external urethral sphincter at the moment the detrusor contracts, an interaction organised by the pontine micturition centre. When a neurological lesion interrupts the pathways between the pons and the sacral spinal cord, this coordination is lost: the sacral reflex arcs mediating detrusor contraction and sphincter activity become dissociated, so the external sphincter contracts involuntarily during detrusor contraction rather than relaxing. The bladder therefore contracts against a closed or intermittently closing outlet, generating high intravesical pressure with poor and inefficient urine flow. Sustained elevation of storage and voiding pressures produces detrusor wall thickening and reduced compliance, promotes vesicoureteric reflux and impedes ureteric drainage, ultimately endangering renal function. The severity and pattern correlate with the level and completeness of the underlying cord lesion.",
+    "additionalDifferentials": [
+      "Anatomical bladder outlet obstruction (benign prostatic obstruction, urethral stricture)",
+      "Primary bladder neck obstruction / dysfunction",
+      "Fowler's syndrome (impaired sphincter relaxation in young women)",
+      "Dysfunctional voiding in neurologically intact patients",
+      "Detrusor underactivity or acontractile bladder",
+      "Non-relaxing pelvic floor dysfunction",
+      "Learned or behavioural voiding dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "Anatomical bladder outlet obstruction (benign prostatic obstruction, urethral stricture), Primary bladder neck obstruction /",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Video-urodynamics with external sphincter electromyography",
+      "Renal function tests and serial upper tract ultrasound",
+      "MRI of the spinal cord or brain to define the neurological lesion",
+      "Post-void residual measurement",
+      "Cystoscopy to exclude structural outlet obstruction",
+      "Isotope renography to assess differential function and drainage",
+      "Urine culture given the high infection risk"
     ],
-    [
-     "Management Strategy",
-     "Convert the high-pressure bladder to a safe low-pressure reservoir with clean intermittent catheterisation combined with detrusor",
-     "Core treatment modality"
+    "redFlags": [
+      "Rising serum creatinine or new hydronephrosis on surveillance imaging",
+      "High detrusor storage or voiding pressure with poor compliance on urodynamics",
+      "Vesicoureteric reflux, especially high grade",
+      "Recurrent febrile urinary infection or urosepsis",
+      "Autonomic dysreflexia triggered by bladder distension in high spinal lesions"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing obstructive symptoms to prostatic enlargement and offering outlet surgery without recognising the neurological",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early urodynamic diagnosis and a management strategy that maintains low storage and voiding pressures, most patients preserve renal function and avoid serious upper tract damage. Untreated or poorly controlled detrusor sphincter dyssynergia carries a substantial long-term risk of progressive renal impairment and recurrent sepsis.",
+    "pitfalls": [
+      "Attributing obstructive symptoms to prostatic enlargement and offering outlet surgery without recognising the neurological dyssynergia",
+      "Relying on symptoms or flow rate alone rather than video-urodynamics to confirm the diagnosis",
+      "Focusing on continence while neglecting the high storage pressures that threaten the kidneys",
+      "Failing to arrange lifelong upper tract surveillance in a neurological bladder",
+      "Overlooking autonomic dysreflexia as a life-threatening consequence of bladder distension in cervical or high thoracic lesions"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology, current edition",
+      "European Association of Urology Guidelines on neuro-urology",
+      "International Continence Society standardisation of terminology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Convert the high-pressure bladder to a safe low-pressure reservoir with clean intermittent catheterisation combined with detrusor pressure-lowering therapy using antimuscarinics or a beta-3 agonist",
+      "Intradetrusor botulinum toxin for refractory detrusor overactivity and high storage pressure",
+      "Reduce outlet resistance with alpha-blockers, sphincteric botulinum toxin injection, or endoscopic sphincterotomy or a urethral stent in selected men",
+      "Treat and prevent recurrent urinary tract infection",
+      "Protect the upper tracts with surveillance renal ultrasound, renal function testing and repeat urodynamics",
+      "Treat the underlying neurological cause such as multiple sclerosis or spinal cord injury alongside the relevant neurology team",
+      "Consider urinary diversion or augmentation cystoplasty for refractory high-pressure disease threatening the kidneys, escalating on evidence of hydronephrosis, reflux or deteriorating renal function"
     ]
-   ],
-   "caption": "Overview comparison matrix for detrusor sphincter dyssynergia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "detrusor-sphincter-dyssynergia-real-image",
-   "title": "Detrusor sphincter dyssynergia: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "detrusor_sphincter_dyssynergia-pathway",
+      "title": "Detrusor sphincter dyssynergia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Detrusor sphincter dyssynergia is the involuntary contraction of the external urethral sphincter during a detrusor contraction, producing functional outlet obstruction, and is a hallmark of suprasacral spinal cord pathology.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rising serum creatinine or new hydronephrosis on surveillance imaging",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Video-urodynamics with external sphincter electromyography, Renal function tests and serial upper tract ultrasound, MRI of the spinal cord or brain to define the neurological lesion"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Convert the high-pressure bladder to a safe low-pressure reservoir with clean intermittent catheterisation combined with detrusor pressure-lowering therapy using antimuscarinics or a beta-3 agonist"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing obstructive symptoms to prostatic enlargement and offering outlet surgery without recognising the neurological dyssynergia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of detrusor sphincter dyssynergia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "detrusor_sphincter_dyssynergia-matrix",
+      "title": "Detrusor sphincter dyssynergia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Detrusor sphincter dyssynergia is the involuntary contraction of the external urethral sphincter during a detrusor contraction,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Video-urodynamics with external sphincter electromyography, Renal function tests and serial upper tract ultrasound, MRI of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anatomical bladder outlet obstruction (benign prostatic obstruction, urethral stricture), Primary bladder neck obstruction /",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Convert the high-pressure bladder to a safe low-pressure reservoir with clean intermittent catheterisation combined with detrusor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing obstructive symptoms to prostatic enlargement and offering outlet surgery without recognising the neurological",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for detrusor sphincter dyssynergia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "detrusor_sphincter_dyssynergia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Video-urodynamics with external sphincter EMG",
+          "cells": [
+            {
+              "text": "Confirms dyssynergia; symptoms or flow rate alone do not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and serial upper tract ultrasound",
+          "cells": [
+            {
+              "text": "Upper tract damage and hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy",
+          "cells": [
+            {
+              "text": "Structural outlet obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isotope renography",
+          "cells": [
+            {
+              "text": "Differential function and drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the spinal cord or brain",
+          "cells": [
+            {
+              "text": "The neurological lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "detrusor_sphincter_dyssynergia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anatomical bladder outlet obstruction",
+          "cells": [
+            {
+              "text": "Prostatic enlargement; outlet surgery offered without recognising dyssynergia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fowler's syndrome",
+          "cells": [
+            {
+              "text": "Impaired sphincter relaxation in young women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysfunctional voiding in neurologically intact patients",
+          "cells": [
+            {
+              "text": "No neurological lesion on examination or imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "detrusor_sphincter_dyssynergia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Clean intermittent catheterisation",
+          "cells": [
+            {
+              "text": "Converts the bladder to a low-pressure reservoir, with antimuscarinics or a beta-3 agonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intradetrusor botulinum toxin",
+          "cells": [
+            {
+              "text": "Refractory detrusor overactivity and high storage pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Outlet resistance reduction",
+          "cells": [
+            {
+              "text": "Alpha-blockers, sphincteric botulinum toxin, sphincterotomy or urethral stent in selected men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent urinary tract infection",
+          "cells": [
+            {
+              "text": "Treat and prevent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper tract protection",
+          "cells": [
+            {
+              "text": "Surveillance renal ultrasound, renal function and repeat urodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying neurological cause",
+          "cells": [
+            {
+              "text": "Treated with the neurology team, for example in multiple sclerosis or spinal cord injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diversion or augmentation",
+          "cells": [
+            {
+              "text": "Refractory high-pressure disease threatening the kidneys"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "detrusor_sphincter_dyssynergia-dx-mgmt",
+      "title": "Diagnosis and management of Detrusor sphincter dyssynergia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected detrusor sphincter dyssynergia: neurogenic bladder with high pressures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising creatinine, hydronephrosis, high-grade reflux, urosepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat urosepsis or hydronephrosis and check for autonomic dysreflexia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-urodynamics with external sphincter EMG; renal function; upper tract ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does video-urodynamics confirm dyssynergia with high storage pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider anatomical outlet obstruction, Fowler's syndrome or detrusor underactivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clean intermittent catheterisation with an antimuscarinic or beta-3 agonist",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intradetrusor botulinum toxin for refractory high storage pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alpha-blockers or sphincter botulinum toxin to reduce outlet resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat and prevent recurrent urinary tract infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Upper tract surveillance with ultrasound, renal function and urodynamics",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With early diagnosis and low pressures most preserve renal function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

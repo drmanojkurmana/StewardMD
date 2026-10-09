@@ -1,174 +1,472 @@
 {
- "id": "infantile_colic",
- "name": "Infantile Colic",
- "aliases": [
-  "colic",
-  "excessive infant crying",
-  "baby colic"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Infantile colic describes recurrent, prolonged episodes of inconsolable crying and fussiness in an otherwise healthy, well-fed, and thriving young infant.",
-   "It is often characterised by the rule of threes: crying for more than about three hours a day, on more than three days a week, for more than three weeks, though clinical judgement matters more than strict criteria.",
-   "Episodes commonly cluster in the late afternoon and evening and may be accompanied by drawing up of the legs, a flushed face, and clenched fists.",
-   "It is a diagnosis of exclusion, established when a careful history and thorough examination reveal no underlying organic cause and growth is normal.",
-   "Typical onset is in the first few weeks of life, with peak intensity around six weeks and spontaneous resolution by around three to four months of age.",
-   "The cause is not fully understood and is likely multifactorial, involving normal developmental crying, gut and feeding factors, and infant-caregiver interaction.",
-   "Management centres on parental reassurance, education about the benign and self-limiting nature, soothing techniques, and support for exhausted caregivers.",
-   "Because the crying is intense and distressing, clinicians should assess caregiver stress and coping and be alert to the risk of frustration-related harm such as abusive head trauma."
+  "id": "infantile_colic",
+  "name": "Infantile Colic",
+  "aliases": [
+    "colic",
+    "excessive infant crying",
+    "baby colic"
   ],
-  "pathophysiology": "Infantile colic does not have a single established mechanism and is best understood as excessive crying at the upper end of the normal developmental crying curve, which peaks in early infancy. Proposed contributors include transient gastrointestinal factors such as immature motility, gas, or feeding-related discomfort, alterations in the gut microbiome, cow's milk protein sensitivity in a subset of infants, heightened infant sensitivity or difficult temperament, and stress within the infant-caregiver relationship. In most infants no pathological process is identified, and the self-limited course paralleling normal maturation supports a developmental rather than a disease-based explanation.",
-  "additionalDifferentials": [
-   "Cow's milk protein allergy",
-   "Gastro-oesophageal reflux disease",
-   "Infection (including urinary tract infection or otitis media)",
-   "Feeding difficulties or underfeeding",
-   "Incarcerated hernia, intussusception, or other acute abdominal cause",
-   "Corneal abrasion, hair tourniquet, or other occult source of pain"
-  ],
-  "additionalInvestigations": [
-   "Thorough history and full physical examination (colic is clinical and one of exclusion)",
-   "Growth assessment to confirm normal weight gain",
-   "Targeted tests only if history or examination suggests an organic cause",
-   "Trial of maternal or infant dietary modification when cow's milk protein allergy is suspected",
-   "Urinalysis if infection is a concern"
-  ],
-  "redFlags": [
-   "Poor weight gain or failure to thrive",
-   "Fever or signs of systemic illness",
-   "Vomiting (especially bilious), blood in stool, or abdominal distension",
-   "Lethargy, abnormal tone, or an unwell appearance",
-   "Signs of possible non-accidental injury or a caregiver at breaking point"
-  ],
-  "prognosis": "Infantile colic is benign and self-limiting, resolving spontaneously by around three to four months of age in most infants, with no adverse effect on long-term growth or development.",
-  "pitfalls": [
-   "Labelling crying as colic without excluding organic causes or confirming normal growth",
-   "Missing a serious acute condition such as intussusception or infection presenting as excessive crying",
-   "Overmedicalising a benign condition or making unnecessary formula changes",
-   "Neglecting caregiver distress and the associated risk of abusive head trauma"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and educate caregivers that colic is benign, self-limiting and resolves by around three to four months, validating that they are not at fault",
-   "Teach soothing and settling techniques such as holding, rhythmic rocking, gentle motion, swaddling and reducing overstimulation",
-   "Optimise feeding technique with attention to winding and burping and avoidance of overfeeding or air swallowing",
-   "Trial a time-limited empirical exclusion of cow's milk protein, using maternal dairy elimination if breastfeeding or an extensively hydrolysed formula, only where cow's milk protein allergy is suspected",
-   "Monitor growth and weight gain to confirm normal thriving and help exclude an organic cause",
-   "Support parental wellbeing and screen for carer exhaustion and low mood, given the risk of abusive head trauma when frustration peaks",
-   "Safety-net with clear advice to seek review for red-flag features such as fever, vomiting, poor feeding, blood in stool or faltering growth",
-   "Avoid ineffective or unproven remedies and unnecessary medication such as anticholinergics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "infantile_colic-pathway",
-   "title": "Infantile Colic: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Infantile colic describes recurrent, prolonged episodes of inconsolable crying and fussiness in an otherwise healthy, well-fed, and thriving young infant.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Poor weight gain or failure to thrive",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thorough history and full physical examination (colic is clinical and one of exclusion), Growth assessment to confirm normal weight gain, Targeted tests only if history or examination suggests an organic cause"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and educate caregivers that colic is benign, self-limiting and resolves by around three to four months, validating that they are not at fault"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling crying as colic without excluding organic causes or confirming normal growth"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of infantile colic."
-  }
- ],
- "tables": [
-  {
-   "id": "infantile_colic-matrix",
-   "title": "Infantile Colic: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Infantile colic describes recurrent, prolonged episodes of inconsolable crying and fussiness in an otherwise healthy, well-fed,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Infantile colic describes recurrent, prolonged episodes of inconsolable crying and fussiness in an otherwise healthy, well-fed, and thriving young infant.",
+      "It is often characterised by the rule of threes: crying for more than about three hours a day, on more than three days a week, for more than three weeks, though clinical judgement matters more than strict criteria.",
+      "Episodes commonly cluster in the late afternoon and evening and may be accompanied by drawing up of the legs, a flushed face, and clenched fists.",
+      "It is a diagnosis of exclusion, established when a careful history and thorough examination reveal no underlying organic cause and growth is normal.",
+      "Typical onset is in the first few weeks of life, with peak intensity around six weeks and spontaneous resolution by around three to four months of age.",
+      "The cause is not fully understood and is likely multifactorial, involving normal developmental crying, gut and feeding factors, and infant-caregiver interaction.",
+      "Management centres on parental reassurance, education about the benign and self-limiting nature, soothing techniques, and support for exhausted caregivers.",
+      "Because the crying is intense and distressing, clinicians should assess caregiver stress and coping and be alert to the risk of frustration-related harm such as abusive head trauma."
     ],
-    [
-     "Key Investigations",
-     "Thorough history and full physical examination (colic is clinical and one of exclusion), Growth assessment to confirm normal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infantile colic does not have a single established mechanism and is best understood as excessive crying at the upper end of the normal developmental crying curve, which peaks in early infancy. Proposed contributors include transient gastrointestinal factors such as immature motility, gas, or feeding-related discomfort, alterations in the gut microbiome, cow's milk protein sensitivity in a subset of infants, heightened infant sensitivity or difficult temperament, and stress within the infant-caregiver relationship. In most infants no pathological process is identified, and the self-limited course paralleling normal maturation supports a developmental rather than a disease-based explanation.",
+    "additionalDifferentials": [
+      "Cow's milk protein allergy",
+      "Gastro-oesophageal reflux disease",
+      "Infection (including urinary tract infection or otitis media)",
+      "Feeding difficulties or underfeeding",
+      "Incarcerated hernia, intussusception, or other acute abdominal cause",
+      "Corneal abrasion, hair tourniquet, or other occult source of pain"
     ],
-    [
-     "Primary Differentials",
-     "Cow's milk protein allergy, Gastro-oesophageal reflux disease, Infection (including urinary tract infection or otitis media)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thorough history and full physical examination (colic is clinical and one of exclusion)",
+      "Growth assessment to confirm normal weight gain",
+      "Targeted tests only if history or examination suggests an organic cause",
+      "Trial of maternal or infant dietary modification when cow's milk protein allergy is suspected",
+      "Urinalysis if infection is a concern"
     ],
-    [
-     "Management Strategy",
-     "Reassure and educate caregivers that colic is benign, self-limiting and resolves by around three to four months, validating that",
-     "Core treatment modality"
+    "redFlags": [
+      "Poor weight gain or failure to thrive",
+      "Fever or signs of systemic illness",
+      "Vomiting (especially bilious), blood in stool, or abdominal distension",
+      "Lethargy, abnormal tone, or an unwell appearance",
+      "Signs of possible non-accidental injury or a caregiver at breaking point"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling crying as colic without excluding organic causes or confirming normal growth",
-     "Prevent diagnostic or management error"
+    "prognosis": "Infantile colic is benign and self-limiting, resolving spontaneously by around three to four months of age in most infants, with no adverse effect on long-term growth or development.",
+    "pitfalls": [
+      "Labelling crying as colic without excluding organic causes or confirming normal growth",
+      "Missing a serious acute condition such as intussusception or infection presenting as excessive crying",
+      "Overmedicalising a benign condition or making unnecessary formula changes",
+      "Neglecting caregiver distress and the associated risk of abusive head trauma"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and educate caregivers that colic is benign, self-limiting and resolves by around three to four months, validating that they are not at fault",
+      "Teach soothing and settling techniques such as holding, rhythmic rocking, gentle motion, swaddling and reducing overstimulation",
+      "Optimise feeding technique with attention to winding and burping and avoidance of overfeeding or air swallowing",
+      "Trial a time-limited empirical exclusion of cow's milk protein, using maternal dairy elimination if breastfeeding or an extensively hydrolysed formula, only where cow's milk protein allergy is suspected",
+      "Monitor growth and weight gain to confirm normal thriving and help exclude an organic cause",
+      "Support parental wellbeing and screen for carer exhaustion and low mood, given the risk of abusive head trauma when frustration peaks",
+      "Safety-net with clear advice to seek review for red-flag features such as fever, vomiting, poor feeding, blood in stool or faltering growth",
+      "Avoid ineffective or unproven remedies and unnecessary medication such as anticholinergics"
     ]
-   ],
-   "caption": "Overview comparison matrix for infantile colic."
-  }
- ],
- "diagrams": [
-  {
-   "id": "infantile-colic-real-image",
-   "title": "Infantile Colic: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "infantile_colic-pathway",
+      "title": "Infantile Colic: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Infantile colic describes recurrent, prolonged episodes of inconsolable crying and fussiness in an otherwise healthy, well-fed, and thriving young infant.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Poor weight gain or failure to thrive",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thorough history and full physical examination (colic is clinical and one of exclusion), Growth assessment to confirm normal weight gain, Targeted tests only if history or examination suggests an organic cause"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and educate caregivers that colic is benign, self-limiting and resolves by around three to four months, validating that they are not at fault"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling crying as colic without excluding organic causes or confirming normal growth"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of infantile colic."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "infantile_colic-matrix",
+      "title": "Infantile Colic: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Infantile colic describes recurrent, prolonged episodes of inconsolable crying and fussiness in an otherwise healthy, well-fed,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thorough history and full physical examination (colic is clinical and one of exclusion), Growth assessment to confirm normal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cow's milk protein allergy, Gastro-oesophageal reflux disease, Infection (including urinary tract infection or otitis media)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and educate caregivers that colic is benign, self-limiting and resolves by around three to four months, validating that",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling crying as colic without excluding organic causes or confirming normal growth",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for infantile colic."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infantile_colic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History and full physical examination",
+          "cells": [
+            {
+              "text": "Colic is a clinical diagnosis of exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth assessment",
+          "cells": [
+            {
+              "text": "Normal weight gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted tests",
+          "cells": [
+            {
+              "text": "Only when history or examination suggests an organic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary modification trial",
+          "cells": [
+            {
+              "text": "Cow's milk protein allergy suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Infection concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_colic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cow's milk protein allergy",
+          "cells": [
+            {
+              "text": "Responds to a time-limited elimination trial"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "Regurgitation with poor weight gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intussusception or incarcerated hernia",
+          "cells": [
+            {
+              "text": "Bilious vomiting, distension or lethargy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection, including urinary tract infection",
+          "cells": [
+            {
+              "text": "Fever or systemic illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infantile_colic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and self-limiting; resolves by around three to four months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soothing techniques",
+          "cells": [
+            {
+              "text": "Holding, rhythmic rocking, gentle motion, swaddling; reduce overstimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding technique",
+          "cells": [
+            {
+              "text": "Winding and burping; avoid overfeeding and air swallowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Time-limited exclusion",
+          "cells": [
+            {
+              "text": "Cow's milk protein exclusion only where allergy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Confirms normal thriving and helps exclude an organic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caregiver support",
+          "cells": [
+            {
+              "text": "Screen for carer exhaustion and low mood; safety-netting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infantile_colic-dx-mgmt",
+      "title": "Diagnosis and management of Infantile Colic",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged inconsolable crying in a well-fed, thriving infant, often in the evening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Poor weight gain, fever, bilious vomiting, blood in stool or lethargy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric assessment for infection, intussusception or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full history and examination, growth assessment, urinalysis if infection concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thriving infant with no organic cause identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate the organic cause identified",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign, self-limiting, resolves by three to four months",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Soothing: holding, rocking, swaddling, less overstimulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding technique: winding, avoid overfeeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Time-limited cow's milk exclusion only if allergy suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Support caregivers; screen for carer distress",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign; resolves by about three to four months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

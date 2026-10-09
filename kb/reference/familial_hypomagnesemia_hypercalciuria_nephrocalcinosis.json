@@ -1,177 +1,484 @@
 {
- "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis",
- "name": "FHHNC (CLDN16/CLDN19)",
- "aliases": [
-  "FHHNC",
-  "familial hypomagnesaemia with hypercalciuria and nephrocalcinosis",
-  "CLDN16",
-  "CLDN19",
-  "claudin-16 deficiency",
-  "claudin-19 deficiency",
-  "paracellin-1 deficiency"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive tubulopathy caused by variants in CLDN16 (paracellin-1) or CLDN19, tight-junction claudins of the thick ascending limb",
-   "Defined by the triad of renal magnesium wasting causing hypomagnesaemia, hypercalciuria, and bilateral nephrocalcinosis",
-   "Unlike most hypomagnesaemic tubulopathies, urinary calcium excretion is high rather than low, driving stone formation and calcium deposition",
-   "A distinguishing feature is progression to chronic kidney disease, often reaching kidney failure in adolescence or early adulthood",
-   "CLDN19 disease additionally causes ocular abnormalities such as severe myopia, nystagmus, and macular colobomata",
-   "Management focuses on magnesium supplementation, measures to reduce hypercalciuria (such as thiazide diuretics and generous fluids), and monitoring of renal function",
-   "Suspect FHHNC in a child with recurrent stones or nephrocalcinosis, hypomagnesaemia, and hypercalciuria, and confirm with CLDN16/CLDN19 testing"
+  "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis",
+  "name": "FHHNC (CLDN16/CLDN19)",
+  "aliases": [
+    "FHHNC",
+    "familial hypomagnesaemia with hypercalciuria and nephrocalcinosis",
+    "CLDN16",
+    "CLDN19",
+    "claudin-16 deficiency",
+    "claudin-19 deficiency",
+    "paracellin-1 deficiency"
   ],
-  "pathophysiology": "In the thick ascending limb of the loop of Henle, magnesium and calcium are reabsorbed passively through the paracellular pathway, driven by a lumen-positive transepithelial voltage. Claudin-16 and claudin-19 form the tight-junction complex that creates this selective divalent-cation channel. Loss-of-function variants abolish paracellular magnesium and calcium reabsorption, so both ions are lost in the urine, producing hypomagnesaemia and hypercalciuria. The persistently high urinary calcium precipitates as nephrocalcinosis and stones, and chronic interstitial injury from calcium deposition, together with the primary transport defect, drives progressive decline in glomerular filtration towards kidney failure. Claudin-19 is also expressed in the eye, accounting for the ocular manifestations of that subtype.",
-  "additionalDifferentials": [
-   "Gitelman syndrome",
-   "Isolated dominant hypomagnesaemia (FXYD2)",
-   "Distal renal tubular acidosis with nephrocalcinosis",
-   "Primary hyperoxaluria",
-   "Dent disease and other causes of hypercalciuric nephrolithiasis",
-   "Idiopathic hypercalciuria"
-  ],
-  "additionalInvestigations": [
-   "Serum magnesium and calcium with fractional excretion of magnesium confirming renal loss",
-   "24-hour or spot urinary calcium demonstrating hypercalciuria",
-   "Renal ultrasound documenting medullary nephrocalcinosis and stones",
-   "Serial estimated glomerular filtration rate to track progression",
-   "Ophthalmological assessment where CLDN19 disease is suspected",
-   "CLDN16 and CLDN19 gene sequencing"
-  ],
-  "redFlags": [
-   "Rising creatinine indicating progression to chronic kidney disease",
-   "Obstructing calculi or recurrent urinary tract infection",
-   "Symptomatic hypomagnesaemia with tetany or seizures",
-   "Rapidly worsening vision in CLDN19 disease"
-  ],
-  "prognosis": "The outlook is guarded because of the strong tendency to progressive chronic kidney disease, with many patients reaching kidney failure by early adulthood; magnesium supplementation corrects symptoms but does not halt renal decline, and CLDN19 disease carries additional visual morbidity.",
-  "pitfalls": [
-   "Confusing FHHNC with Gitelman syndrome, which shows hypocalciuria rather than hypercalciuria",
-   "Assuming magnesium replacement will prevent progression to renal failure",
-   "Overlooking nephrocalcinosis on imaging in a child investigated for hypomagnesaemia",
-   "Failing to arrange ophthalmological review when CLDN19 is implicated"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "OMIM entry for FHHNC"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide chronic oral magnesium replacement for renal magnesium wasting, titrated to symptom control rather than full biochemical normalisation",
-   "Use thiazide diuretics with high fluid intake and citrate or alkali supplementation to reduce hypercalciuria and slow nephrocalcinosis",
-   "Institute nephroprotective management of declining glomerular filtration, including blood-pressure and proteinuria control and avoidance of nephrotoxins",
-   "Give parenteral magnesium for acute neuromuscular manifestations such as tetany or seizures",
-   "Arrange ophthalmological review where CLDN19 disease is suspected, monitoring severe myopia and macular disease",
-   "Offer renal replacement therapy or transplantation for kidney failure, which cures the intrinsic tubular transport defect",
-   "Provide genetic counselling with CLDN16 and CLDN19 sequencing and screening of siblings, given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-pathway",
-   "title": "FHHNC (CLDN16/CLDN19): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive tubulopathy caused by variants in CLDN16 (paracellin-1) or CLDN19, tight-junction claudins of the thick ascending limb",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rising creatinine indicating progression to chronic kidney disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum magnesium and calcium with fractional excretion of magnesium confirming renal loss, 24-hour or spot urinary calcium demonstrating hypercalciuria, Renal ultrasound documenting medullary nephrocalcinosis and stones"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide chronic oral magnesium replacement for renal magnesium wasting, titrated to symptom control rather than full biochemical normalisation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing FHHNC with Gitelman syndrome, which shows hypocalciuria rather than hypercalciuria"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fhhnc (cldn16/cldn19)."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-matrix",
-   "title": "FHHNC (CLDN16/CLDN19): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive tubulopathy caused by variants in CLDN16 (paracellin-1) or CLDN19, tight-junction claudins of the thick",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive tubulopathy caused by variants in CLDN16 (paracellin-1) or CLDN19, tight-junction claudins of the thick ascending limb",
+      "Defined by the triad of renal magnesium wasting causing hypomagnesaemia, hypercalciuria, and bilateral nephrocalcinosis",
+      "Unlike most hypomagnesaemic tubulopathies, urinary calcium excretion is high rather than low, driving stone formation and calcium deposition",
+      "A distinguishing feature is progression to chronic kidney disease, often reaching kidney failure in adolescence or early adulthood",
+      "CLDN19 disease additionally causes ocular abnormalities such as severe myopia, nystagmus, and macular colobomata",
+      "Management focuses on magnesium supplementation, measures to reduce hypercalciuria (such as thiazide diuretics and generous fluids), and monitoring of renal function",
+      "Suspect FHHNC in a child with recurrent stones or nephrocalcinosis, hypomagnesaemia, and hypercalciuria, and confirm with CLDN16/CLDN19 testing"
     ],
-    [
-     "Key Investigations",
-     "Serum magnesium and calcium with fractional excretion of magnesium confirming renal loss, 24-hour or spot urinary calcium",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In the thick ascending limb of the loop of Henle, magnesium and calcium are reabsorbed passively through the paracellular pathway, driven by a lumen-positive transepithelial voltage. Claudin-16 and claudin-19 form the tight-junction complex that creates this selective divalent-cation channel. Loss-of-function variants abolish paracellular magnesium and calcium reabsorption, so both ions are lost in the urine, producing hypomagnesaemia and hypercalciuria. The persistently high urinary calcium precipitates as nephrocalcinosis and stones, and chronic interstitial injury from calcium deposition, together with the primary transport defect, drives progressive decline in glomerular filtration towards kidney failure. Claudin-19 is also expressed in the eye, accounting for the ocular manifestations of that subtype.",
+    "additionalDifferentials": [
+      "Gitelman syndrome",
+      "Isolated dominant hypomagnesaemia (FXYD2)",
+      "Distal renal tubular acidosis with nephrocalcinosis",
+      "Primary hyperoxaluria",
+      "Dent disease and other causes of hypercalciuric nephrolithiasis",
+      "Idiopathic hypercalciuria"
     ],
-    [
-     "Primary Differentials",
-     "Gitelman syndrome, Isolated dominant hypomagnesaemia (FXYD2), Distal renal tubular acidosis with nephrocalcinosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum magnesium and calcium with fractional excretion of magnesium confirming renal loss",
+      "24-hour or spot urinary calcium demonstrating hypercalciuria",
+      "Renal ultrasound documenting medullary nephrocalcinosis and stones",
+      "Serial estimated glomerular filtration rate to track progression",
+      "Ophthalmological assessment where CLDN19 disease is suspected",
+      "CLDN16 and CLDN19 gene sequencing"
     ],
-    [
-     "Management Strategy",
-     "Provide chronic oral magnesium replacement for renal magnesium wasting, titrated to symptom control rather than full biochemical",
-     "Core treatment modality"
+    "redFlags": [
+      "Rising creatinine indicating progression to chronic kidney disease",
+      "Obstructing calculi or recurrent urinary tract infection",
+      "Symptomatic hypomagnesaemia with tetany or seizures",
+      "Rapidly worsening vision in CLDN19 disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing FHHNC with Gitelman syndrome, which shows hypocalciuria rather than hypercalciuria",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook is guarded because of the strong tendency to progressive chronic kidney disease, with many patients reaching kidney failure by early adulthood; magnesium supplementation corrects symptoms but does not halt renal decline, and CLDN19 disease carries additional visual morbidity.",
+    "pitfalls": [
+      "Confusing FHHNC with Gitelman syndrome, which shows hypocalciuria rather than hypercalciuria",
+      "Assuming magnesium replacement will prevent progression to renal failure",
+      "Overlooking nephrocalcinosis on imaging in a child investigated for hypomagnesaemia",
+      "Failing to arrange ophthalmological review when CLDN19 is implicated"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "OMIM entry for FHHNC"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide chronic oral magnesium replacement for renal magnesium wasting, titrated to symptom control rather than full biochemical normalisation",
+      "Use thiazide diuretics with high fluid intake and citrate or alkali supplementation to reduce hypercalciuria and slow nephrocalcinosis",
+      "Institute nephroprotective management of declining glomerular filtration, including blood-pressure and proteinuria control and avoidance of nephrotoxins",
+      "Give parenteral magnesium for acute neuromuscular manifestations such as tetany or seizures",
+      "Arrange ophthalmological review where CLDN19 disease is suspected, monitoring severe myopia and macular disease",
+      "Offer renal replacement therapy or transplantation for kidney failure, which cures the intrinsic tubular transport defect",
+      "Provide genetic counselling with CLDN16 and CLDN19 sequencing and screening of siblings, given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for fhhnc (cldn16/cldn19)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-hypomagnesemia-hypercalciuria-nephrocalcinosis-real-image",
-   "title": "FHHNC (CLDN16/CLDN19): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-pathway",
+      "title": "FHHNC (CLDN16/CLDN19): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive tubulopathy caused by variants in CLDN16 (paracellin-1) or CLDN19, tight-junction claudins of the thick ascending limb",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rising creatinine indicating progression to chronic kidney disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum magnesium and calcium with fractional excretion of magnesium confirming renal loss, 24-hour or spot urinary calcium demonstrating hypercalciuria, Renal ultrasound documenting medullary nephrocalcinosis and stones"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide chronic oral magnesium replacement for renal magnesium wasting, titrated to symptom control rather than full biochemical normalisation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing FHHNC with Gitelman syndrome, which shows hypocalciuria rather than hypercalciuria"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fhhnc (cldn16/cldn19)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-matrix",
+      "title": "FHHNC (CLDN16/CLDN19): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive tubulopathy caused by variants in CLDN16 (paracellin-1) or CLDN19, tight-junction claudins of the thick",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum magnesium and calcium with fractional excretion of magnesium confirming renal loss, 24-hour or spot urinary calcium",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gitelman syndrome, Isolated dominant hypomagnesaemia (FXYD2), Distal renal tubular acidosis with nephrocalcinosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide chronic oral magnesium replacement for renal magnesium wasting, titrated to symptom control rather than full biochemical",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing FHHNC with Gitelman syndrome, which shows hypocalciuria rather than hypercalciuria",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fhhnc (cldn16/cldn19)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum magnesium and calcium with fractional excretion of magnesium",
+          "cells": [
+            {
+              "text": "Confirms renal loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour or spot urinary calcium",
+          "cells": [
+            {
+              "text": "Hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Medullary nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial estimated GFR",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Where CLDN19 disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CLDN16 and CLDN19 gene sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated dominant hypomagnesaemia (FXYD2)",
+          "cells": [
+            {
+              "text": "A dominant pattern rather than this recessive tubulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal renal tubular acidosis with nephrocalcinosis",
+          "cells": [
+            {
+              "text": "Listed in the differential of nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic hypercalciuria",
+          "cells": [
+            {
+              "text": "Hypercalciuric stones without renal magnesium wasting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic oral magnesium replacement",
+          "cells": [
+            {
+              "text": "Titrated to symptom control rather than full normalisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiazide diuretics with high fluid intake and citrate or alkali",
+          "cells": [
+            {
+              "text": "Reduces hypercalciuria and slows nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephroprotective management",
+          "cells": [
+            {
+              "text": "Blood-pressure and proteinuria control; avoidance of nephrotoxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral magnesium",
+          "cells": [
+            {
+              "text": "Acute tetany or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "CLDN19 disease: severe myopia and macular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement or transplantation",
+          "cells": [
+            {
+              "text": "For kidney failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and sibling screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_hypomagnesemia_hypercalciuria_nephrocalcinosis-dx-mgmt",
+      "title": "Diagnosis and management of FHHNC (CLDN16/CLDN19)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with recurrent stones or nephrocalcinosis, hypomagnesaemia and hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rising creatinine, obstructing calculi, tetany, rapidly worsening vision)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Parenteral magnesium for symptomatic hypomagnesaemia; nephrology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Magnesium with FEMg; urinary calcium; renal ultrasound; serial GFR; CLDN16 and CLDN19",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypercalciuria with nephrocalcinosis and biallelic CLDN16 or CLDN19 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gitelman syndrome, FXYD2 disease or primary hyperoxaluria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Chronic oral magnesium replacement titrated to symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thiazides with high fluid intake and citrate or alkali",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nephroprotective management of declining GFR",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmological review where CLDN19 disease is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and sibling screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Guarded; progressive kidney disease usual, with kidney failure in adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

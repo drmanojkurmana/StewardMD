@@ -1,177 +1,464 @@
 {
- "id": "spontaneous_intracranial_hypotension",
- "name": "Spontaneous intracranial hypotension",
- "aliases": [
-  "spontaneous spinal CSF leak",
-  "low CSF pressure headache",
-  "CSF hypovolaemia syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by a non-iatrogenic spinal cerebrospinal fluid (CSF) leak leading to low CSF volume, and an important, treatable secondary cause of headache",
-   "The hallmark is an orthostatic headache that develops or worsens within minutes of standing or sitting and is relieved by lying flat, although the postural pattern can become less obvious over time",
-   "Associated symptoms include neck stiffness and pain, nausea, tinnitus, muffled hearing or aural fullness, photophobia, dizziness and interscapular pain",
-   "Underlying causes include a dural tear (often from a calcified disc or osteophyte), a meningeal diverticulum, or a CSF-venous fistula, and connective tissue disorders such as Marfan and Ehlers-Danlos syndromes predispose",
-   "Contrast-enhanced brain MRI classically shows diffuse smooth pachymeningeal enhancement, brain sagging, venous distension, subdural fluid collections and pituitary engorgement, summarised by the SEEPS mnemonic",
-   "Lumbar puncture opening pressure is often low but may be normal, so diagnosis rests on the clinical picture together with imaging rather than pressure measurement alone",
-   "Spinal imaging with CT or MR myelography, and dynamic or digital subtraction myelography, is used to localise the leak and in particular to detect a CSF-venous fistula",
-   "First-line treatment is conservative with bed rest, hydration and caffeine, followed by epidural blood patch, with targeted patching, fibrin glue or surgical or endovascular repair for refractory or localised leaks"
+  "id": "spontaneous_intracranial_hypotension",
+  "name": "Spontaneous intracranial hypotension",
+  "aliases": [
+    "spontaneous spinal CSF leak",
+    "low CSF pressure headache",
+    "CSF hypovolaemia syndrome"
   ],
-  "pathophysiology": "A breach in the spinal dura allows CSF to escape into the epidural space or to drain into a vein as a CSF-venous fistula, reducing CSF volume. Because the cranium is a closed space, loss of CSF buoyancy allows the brain to descend, placing traction on pain-sensitive dura, bridging veins and cranial nerves and generating the headache and associated symptoms. In accordance with the Monro-Kellie doctrine, which holds that total intracranial volume is fixed, compensatory venous and dural engorgement produces the pachymeningeal enhancement, venous distension and pituitary enlargement seen on imaging. Low CSF volume, rather than pressure alone, is the key abnormality.",
-  "additionalDifferentials": [
-   "Post-dural-puncture (iatrogenic) low-pressure headache",
-   "Postural orthostatic tachycardia syndrome and other orthostatic intolerance",
-   "Migraine and tension-type headache",
-   "Cervicogenic headache",
-   "Meningitis or meningeal carcinomatosis as other causes of dural enhancement",
-   "Subdural haematoma, which may itself be a complication",
-   "Cerebral venous sinus thrombosis or raised intracranial pressure, which produce the opposite postural pattern"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced brain MRI for pachymeningeal enhancement, brain sagging, subdural collections and pituitary engorgement",
-   "Spinal MRI for extradural CSF collections and dilated nerve root sleeves",
-   "CT myelography or dynamic or digital subtraction myelography to localise the leak or a CSF-venous fistula",
-   "Lumbar puncture with opening pressure, which may be low or normal, and CSF analysis if infection or inflammation is considered",
-   "Heavily T2-weighted spinal imaging to help detect a CSF leak",
-   "Assessment for an underlying connective tissue disorder"
-  ],
-  "redFlags": [
-   "Deteriorating consciousness, a new focal deficit or seizures, which may indicate subdural haematoma or severe brain sagging",
-   "Features suggesting infection such as fever and meningism with systemic upset",
-   "Rapidly evolving brainstem signs from marked brain descent, which is a neurosurgical emergency",
-   "Development of a large or bilateral subdural haematoma",
-   "Thunderclap onset requiring exclusion of subarachnoid haemorrhage and other causes"
-  ],
-  "prognosis": "Many patients improve with conservative measures or one or more epidural blood patches, and outcomes are generally good once the leak is treated. A subset have refractory leaks, particularly CSF-venous fistulas, requiring targeted or surgical intervention, and untreated severe cases can rarely progress to brain sagging with serious neurological deterioration.",
-  "pitfalls": [
-   "Excluding the diagnosis because the lumbar puncture opening pressure is normal, which it often is",
-   "Misinterpreting diffuse pachymeningeal enhancement as meningitis or carcinomatosis",
-   "Not recognising that a longstanding leak may lose its clear postural character",
-   "Overlooking a CSF-venous fistula, which is missed by conventional myelography and needs a dynamic or lateral decubitus technique",
-   "Attributing an associated subdural haematoma to trauma and draining it without treating the underlying CSF leak"
-  ],
-  "references": [
-   "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initial conservative management with bed rest, oral and intravenous hydration and caffeine to help restore CSF volume and relieve the orthostatic headache",
-   "Epidural blood patch as the mainstay when conservative measures fail, repeated as needed to seal the spinal CSF leak",
-   "Targeted percutaneous fibrin sealant, transvenous embolisation of a CSF-venous fistula, or surgical repair of a dural tear or meningeal diverticulum in refractory cases",
-   "Localise the leak with CT or dynamic/digital subtraction myelography before targeted intervention",
-   "Analgesia and antiemetics for symptomatic relief of headache, nausea and associated symptoms",
-   "Monitor for rebound intracranial hypertension after leak closure and for complications such as subdural haematoma from brain sagging",
-   "Assess and manage underlying connective tissue disorders such as Marfan and Ehlers-Danlos syndromes, with neurology and neurosurgery referral for refractory disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spontaneous_intracranial_hypotension-pathway",
-   "title": "Spontaneous intracranial hypotension: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by a non-iatrogenic spinal cerebrospinal fluid (CSF) leak leading to low CSF volume, and an important, treatable secondary cause of headache",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Deteriorating consciousness, a new focal deficit or seizures, which may indicate subdural haematoma or severe brain sagging",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced brain MRI for pachymeningeal enhancement, brain sagging, subdural collections and pituitary engorgement, Spinal MRI for extradural CSF collections and dilated nerve root sleeves, CT myelography or dynamic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initial conservative management with bed rest, oral and intravenous hydration and caffeine to help restore CSF volume and relieve the orthostatic headache"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis because the lumbar puncture opening pressure is normal, which it often is"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spontaneous intracranial hypotension."
-  }
- ],
- "tables": [
-  {
-   "id": "spontaneous_intracranial_hypotension-matrix",
-   "title": "Spontaneous intracranial hypotension: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by a non-iatrogenic spinal cerebrospinal fluid (CSF) leak leading to low CSF volume, and an important, treatable secondary",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by a non-iatrogenic spinal cerebrospinal fluid (CSF) leak leading to low CSF volume, and an important, treatable secondary cause of headache",
+      "The hallmark is an orthostatic headache that develops or worsens within minutes of standing or sitting and is relieved by lying flat, although the postural pattern can become less obvious over time",
+      "Associated symptoms include neck stiffness and pain, nausea, tinnitus, muffled hearing or aural fullness, photophobia, dizziness and interscapular pain",
+      "Underlying causes include a dural tear (often from a calcified disc or osteophyte), a meningeal diverticulum, or a CSF-venous fistula, and connective tissue disorders such as Marfan and Ehlers-Danlos syndromes predispose",
+      "Contrast-enhanced brain MRI classically shows diffuse smooth pachymeningeal enhancement, brain sagging, venous distension, subdural fluid collections and pituitary engorgement, summarised by the SEEPS mnemonic",
+      "Lumbar puncture opening pressure is often low but may be normal, so diagnosis rests on the clinical picture together with imaging rather than pressure measurement alone",
+      "Spinal imaging with CT or MR myelography, and dynamic or digital subtraction myelography, is used to localise the leak and in particular to detect a CSF-venous fistula",
+      "First-line treatment is conservative with bed rest, hydration and caffeine, followed by epidural blood patch, with targeted patching, fibrin glue or surgical or endovascular repair for refractory or localised leaks"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced brain MRI for pachymeningeal enhancement, brain sagging, subdural collections and pituitary engorgement, Spinal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A breach in the spinal dura allows CSF to escape into the epidural space or to drain into a vein as a CSF-venous fistula, reducing CSF volume. Because the cranium is a closed space, loss of CSF buoyancy allows the brain to descend, placing traction on pain-sensitive dura, bridging veins and cranial nerves and generating the headache and associated symptoms. In accordance with the Monro-Kellie doctrine, which holds that total intracranial volume is fixed, compensatory venous and dural engorgement produces the pachymeningeal enhancement, venous distension and pituitary enlargement seen on imaging. Low CSF volume, rather than pressure alone, is the key abnormality.",
+    "additionalDifferentials": [
+      "Post-dural-puncture (iatrogenic) low-pressure headache",
+      "Postural orthostatic tachycardia syndrome and other orthostatic intolerance",
+      "Migraine and tension-type headache",
+      "Cervicogenic headache",
+      "Meningitis or meningeal carcinomatosis as other causes of dural enhancement",
+      "Subdural haematoma, which may itself be a complication",
+      "Cerebral venous sinus thrombosis or raised intracranial pressure, which produce the opposite postural pattern"
     ],
-    [
-     "Primary Differentials",
-     "Post-dural-puncture (iatrogenic) low-pressure headache, Postural orthostatic tachycardia syndrome and other orthostatic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced brain MRI for pachymeningeal enhancement, brain sagging, subdural collections and pituitary engorgement",
+      "Spinal MRI for extradural CSF collections and dilated nerve root sleeves",
+      "CT myelography or dynamic or digital subtraction myelography to localise the leak or a CSF-venous fistula",
+      "Lumbar puncture with opening pressure, which may be low or normal, and CSF analysis if infection or inflammation is considered",
+      "Heavily T2-weighted spinal imaging to help detect a CSF leak",
+      "Assessment for an underlying connective tissue disorder"
     ],
-    [
-     "Management Strategy",
-     "Initial conservative management with bed rest, oral and intravenous hydration and caffeine to help restore CSF volume and relieve",
-     "Core treatment modality"
+    "redFlags": [
+      "Deteriorating consciousness, a new focal deficit or seizures, which may indicate subdural haematoma or severe brain sagging",
+      "Features suggesting infection such as fever and meningism with systemic upset",
+      "Rapidly evolving brainstem signs from marked brain descent, which is a neurosurgical emergency",
+      "Development of a large or bilateral subdural haematoma",
+      "Thunderclap onset requiring exclusion of subarachnoid haemorrhage and other causes"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis because the lumbar puncture opening pressure is normal, which it often is",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients improve with conservative measures or one or more epidural blood patches, and outcomes are generally good once the leak is treated. A subset have refractory leaks, particularly CSF-venous fistulas, requiring targeted or surgical intervention, and untreated severe cases can rarely progress to brain sagging with serious neurological deterioration.",
+    "pitfalls": [
+      "Excluding the diagnosis because the lumbar puncture opening pressure is normal, which it often is",
+      "Misinterpreting diffuse pachymeningeal enhancement as meningitis or carcinomatosis",
+      "Not recognising that a longstanding leak may lose its clear postural character",
+      "Overlooking a CSF-venous fistula, which is missed by conventional myelography and needs a dynamic or lateral decubitus technique",
+      "Attributing an associated subdural haematoma to trauma and draining it without treating the underlying CSF leak"
+    ],
+    "references": [
+      "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initial conservative management with bed rest, oral and intravenous hydration and caffeine to help restore CSF volume and relieve the orthostatic headache",
+      "Epidural blood patch as the mainstay when conservative measures fail, repeated as needed to seal the spinal CSF leak",
+      "Targeted percutaneous fibrin sealant, transvenous embolisation of a CSF-venous fistula, or surgical repair of a dural tear or meningeal diverticulum in refractory cases",
+      "Localise the leak with CT or dynamic/digital subtraction myelography before targeted intervention",
+      "Analgesia and antiemetics for symptomatic relief of headache, nausea and associated symptoms",
+      "Monitor for rebound intracranial hypertension after leak closure and for complications such as subdural haematoma from brain sagging",
+      "Assess and manage underlying connective tissue disorders such as Marfan and Ehlers-Danlos syndromes, with neurology and neurosurgery referral for refractory disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for spontaneous intracranial hypotension."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spontaneous-intracranial-hypotension-real-image",
-   "title": "Spontaneous intracranial hypotension: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spontaneous_intracranial_hypotension-pathway",
+      "title": "Spontaneous intracranial hypotension: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by a non-iatrogenic spinal cerebrospinal fluid (CSF) leak leading to low CSF volume, and an important, treatable secondary cause of headache",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Deteriorating consciousness, a new focal deficit or seizures, which may indicate subdural haematoma or severe brain sagging",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced brain MRI for pachymeningeal enhancement, brain sagging, subdural collections and pituitary engorgement, Spinal MRI for extradural CSF collections and dilated nerve root sleeves, CT myelography or dynamic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initial conservative management with bed rest, oral and intravenous hydration and caffeine to help restore CSF volume and relieve the orthostatic headache"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis because the lumbar puncture opening pressure is normal, which it often is"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spontaneous intracranial hypotension."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spontaneous_intracranial_hypotension-matrix",
+      "title": "Spontaneous intracranial hypotension: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by a non-iatrogenic spinal cerebrospinal fluid (CSF) leak leading to low CSF volume, and an important, treatable secondary",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced brain MRI for pachymeningeal enhancement, brain sagging, subdural collections and pituitary engorgement, Spinal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Post-dural-puncture (iatrogenic) low-pressure headache, Postural orthostatic tachycardia syndrome and other orthostatic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initial conservative management with bed rest, oral and intravenous hydration and caffeine to help restore CSF volume and relieve",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis because the lumbar puncture opening pressure is normal, which it often is",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spontaneous intracranial hypotension."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spontaneous_intracranial_hypotension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced brain MRI",
+          "cells": [
+            {
+              "text": "Pachymeningeal enhancement and brain sagging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal MRI",
+          "cells": [
+            {
+              "text": "Extradural CSF collections and dilated nerve root sleeves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or dynamic digital subtraction myelography",
+          "cells": [
+            {
+              "text": "Localises the CSF leak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture with opening pressure",
+          "cells": [
+            {
+              "text": "Pressure may be low or normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heavily T2-weighted spinal imaging",
+          "cells": [
+            {
+              "text": "CSF leak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for connective tissue disorder",
+          "cells": [
+            {
+              "text": "Predisposition to dural tear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spontaneous_intracranial_hypotension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-dural puncture (iatrogenic) low-pressure headache",
+          "cells": [
+            {
+              "text": "Recent lumbar puncture; history clarifies the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postural orthostatic tachycardia syndrome",
+          "cells": [
+            {
+              "text": "Orthostatic intolerance without a CSF leak"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spontaneous_intracranial_hypotension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Bed rest, hydration and caffeine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural blood patch",
+          "cells": [
+            {
+              "text": "Mainstay when conservative measures fail; may be repeated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted fibrin sealant or transvenous embolisation",
+          "cells": [
+            {
+              "text": "CSF-venous fistula"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leak localisation before treatment",
+          "cells": [
+            {
+              "text": "CT or dynamic myelography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and antiemetics",
+          "cells": [
+            {
+              "text": "Headache, nausea and associated symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for rebound intracranial hypertension",
+          "cells": [
+            {
+              "text": "After leak closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of connective tissue disorder",
+          "cells": [
+            {
+              "text": "Such as Marfan or Ehlers-Danlos syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spontaneous_intracranial_hypotension-dx-mgmt",
+      "title": "Diagnosis and management of Spontaneous intracranial hypotension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Orthostatic headache that worsens upright: suspected intracranial hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (falling consciousness, focal deficit, brainstem signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for brainstem signs or subdural haematoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast brain MRI; spinal MRI; CT or DSA myelography; opening pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do MRI findings and leak localisation confirm a CSF leak?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider post-dural puncture headache, POTS or migraine; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care: bed rest, hydration and caffeine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Epidural blood patch as the mainstay if conservative care fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Targeted fibrin sealant or transvenous embolisation for CSF-venous fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for rebound intracranial hypertension after closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Persistent leaks need leak localisation and targeted repair",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,521 @@
 {
- "id": "functional_tremor",
- "name": "Functional tremor",
- "aliases": [
-  "psychogenic tremor",
-  "functional movement disorder - tremor",
-  "dissociative tremor"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest functional movement disorder, often of sudden onset that is maximal at onset with a fluctuating, variable course",
-   "Distractibility is characteristic: the tremor lessens or disappears when attention is diverted to a complex motor or cognitive task",
-   "Entrainment is a key positive sign, in which copying a rhythmic tapping movement with the other limb shifts the tremor to match that frequency, or the copied movement cannot be performed",
-   "Variability in frequency, amplitude, direction, and distribution over time argues against an organic tremor",
-   "A 'whack-a-mole' phenomenon may occur, in which restraining the tremor in one limb makes it appear elsewhere",
-   "A coactivation sign, with increased tone from co-contraction of antagonist muscles at tremor onset, is often present",
-   "Diagnosis is clinical and positive; accelerometry with entrainment testing can support it",
-   "Management is multidisciplinary: specialist physiotherapy for functional movement disorders, psychological therapy such as CBT, and a clear explanation"
+  "id": "functional_tremor",
+  "name": "Functional tremor",
+  "aliases": [
+    "psychogenic tremor",
+    "functional movement disorder - tremor",
+    "dissociative tremor"
   ],
-  "pathophysiology": "Functional tremor is a functional movement disorder in which involuntary oscillatory movements arise from abnormal, self-generated motor activity that the patient does not consciously control. Neurophysiological studies suggest the movements share mechanisms with normal voluntary movement, for example they can entrain to an externally paced rhythm and may be preceded by a readiness (Bereitschafts) potential, yet the patient experiences them as involuntary, reflecting a disturbed sense of agency and abnormal attentional focus. As with other functional neurological symptoms, predisposing, precipitating, and perpetuating biopsychosocial factors contribute, and the tremor's variability and distractibility reflect intact underlying motor pathways that are being accessed abnormally.",
-  "additionalDifferentials": [
-   "Essential tremor",
-   "Parkinsonian rest tremor",
-   "Enhanced physiological tremor from anxiety, thyrotoxicosis, or drugs",
-   "Dystonic tremor",
-   "Cerebellar (intention) tremor",
-   "Drug-induced or toxic tremor"
-  ],
-  "additionalInvestigations": [
-   "Bedside examination for distractibility, entrainment, and variability",
-   "Accelerometry and surface EMG with entrainment and loading tasks in specialist centres",
-   "Thyroid function tests and a drug review to exclude enhanced physiological tremor",
-   "MRI or dopamine transporter (DaT) imaging only where an organic parkinsonian or structural cause is genuinely suspected",
-   "Assessment for psychological comorbidity and precipitants",
-   "Avoidance of unnecessary repeated investigation"
-  ],
-  "redFlags": [
-   "Coexisting fixed neurological signs suggesting a structural or degenerative disorder",
-   "Features of parkinsonism such as bradykinesia and rigidity warranting further assessment",
-   "Rapid progression or systemic illness",
-   "Persistent diagnostic uncertainty requiring movement-disorder specialist review"
-  ],
-  "prognosis": "Functional tremor can improve substantially, particularly with early diagnosis and specialist functional-movement physiotherapy combined with psychological therapy, but long duration and entrenched illness beliefs are associated with a poorer, more persistent course.",
-  "pitfalls": [
-   "Diagnosing by exclusion rather than demonstrating positive signs such as entrainment and distractibility",
-   "Mislabelling an organic tremor as functional, or the reverse",
-   "Failing to exclude thyrotoxicosis, drugs, or other reversible causes of enhanced tremor",
-   "Delaying referral to specialist multidisciplinary rehabilitation"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide a clear, positive explanation of the diagnosis using the entrainment and distractibility signs",
-   "Specialist functional-movement physiotherapy using motor-retraining and attention-diversion techniques",
-   "Psychological therapy such as cognitive behavioural therapy for perpetuating factors",
-   "Treat comorbid mood, anxiety and pain",
-   "Avoid ineffective antiparkinsonian and antitremor drugs and unnecessary repeated investigation",
-   "Multidisciplinary rehabilitation, escalating to specialist functional-disorder services for refractory cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "functional_tremor-pathway",
-   "title": "Functional tremor: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest functional movement disorder, often of sudden onset that is maximal at onset with a fluctuating, variable course",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Coexisting fixed neurological signs suggesting a structural or degenerative disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bedside examination for distractibility, entrainment, and variability, Accelerometry and surface EMG with entrainment and loading tasks in specialist centres, Thyroid function tests and a drug review to exclude enhanced"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide a clear, positive explanation of the diagnosis using the entrainment and distractibility signs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing by exclusion rather than demonstrating positive signs such as entrainment and distractibility"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of functional tremor."
-  }
- ],
- "tables": [
-  {
-   "id": "functional_tremor-matrix",
-   "title": "Functional tremor: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest functional movement disorder, often of sudden onset that is maximal at onset with a fluctuating, variable course",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest functional movement disorder, often of sudden onset that is maximal at onset with a fluctuating, variable course",
+      "Distractibility is characteristic: the tremor lessens or disappears when attention is diverted to a complex motor or cognitive task",
+      "Entrainment is a key positive sign, in which copying a rhythmic tapping movement with the other limb shifts the tremor to match that frequency, or the copied movement cannot be performed",
+      "Variability in frequency, amplitude, direction, and distribution over time argues against an organic tremor",
+      "A 'whack-a-mole' phenomenon may occur, in which restraining the tremor in one limb makes it appear elsewhere",
+      "A coactivation sign, with increased tone from co-contraction of antagonist muscles at tremor onset, is often present",
+      "Diagnosis is clinical and positive; accelerometry with entrainment testing can support it",
+      "Management is multidisciplinary: specialist physiotherapy for functional movement disorders, psychological therapy such as CBT, and a clear explanation"
     ],
-    [
-     "Key Investigations",
-     "Bedside examination for distractibility, entrainment, and variability, Accelerometry and surface EMG with entrainment and loading",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Functional tremor is a functional movement disorder in which involuntary oscillatory movements arise from abnormal, self-generated motor activity that the patient does not consciously control. Neurophysiological studies suggest the movements share mechanisms with normal voluntary movement, for example they can entrain to an externally paced rhythm and may be preceded by a readiness (Bereitschafts) potential, yet the patient experiences them as involuntary, reflecting a disturbed sense of agency and abnormal attentional focus. As with other functional neurological symptoms, predisposing, precipitating, and perpetuating biopsychosocial factors contribute, and the tremor's variability and distractibility reflect intact underlying motor pathways that are being accessed abnormally.",
+    "additionalDifferentials": [
+      "Essential tremor",
+      "Parkinsonian rest tremor",
+      "Enhanced physiological tremor from anxiety, thyrotoxicosis, or drugs",
+      "Dystonic tremor",
+      "Cerebellar (intention) tremor",
+      "Drug-induced or toxic tremor"
     ],
-    [
-     "Primary Differentials",
-     "Essential tremor, Parkinsonian rest tremor, Enhanced physiological tremor from anxiety, thyrotoxicosis, or drugs",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bedside examination for distractibility, entrainment, and variability",
+      "Accelerometry and surface EMG with entrainment and loading tasks in specialist centres",
+      "Thyroid function tests and a drug review to exclude enhanced physiological tremor",
+      "MRI or dopamine transporter (DaT) imaging only where an organic parkinsonian or structural cause is genuinely suspected",
+      "Assessment for psychological comorbidity and precipitants",
+      "Avoidance of unnecessary repeated investigation"
     ],
-    [
-     "Management Strategy",
-     "Provide a clear, positive explanation of the diagnosis using the entrainment and distractibility signs",
-     "Core treatment modality"
+    "redFlags": [
+      "Coexisting fixed neurological signs suggesting a structural or degenerative disorder",
+      "Features of parkinsonism such as bradykinesia and rigidity warranting further assessment",
+      "Rapid progression or systemic illness",
+      "Persistent diagnostic uncertainty requiring movement-disorder specialist review"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing by exclusion rather than demonstrating positive signs such as entrainment and distractibility",
-     "Prevent diagnostic or management error"
+    "prognosis": "Functional tremor can improve substantially, particularly with early diagnosis and specialist functional-movement physiotherapy combined with psychological therapy, but long duration and entrenched illness beliefs are associated with a poorer, more persistent course.",
+    "pitfalls": [
+      "Diagnosing by exclusion rather than demonstrating positive signs such as entrainment and distractibility",
+      "Mislabelling an organic tremor as functional, or the reverse",
+      "Failing to exclude thyrotoxicosis, drugs, or other reversible causes of enhanced tremor",
+      "Delaying referral to specialist multidisciplinary rehabilitation"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide a clear, positive explanation of the diagnosis using the entrainment and distractibility signs",
+      "Specialist functional-movement physiotherapy using motor-retraining and attention-diversion techniques",
+      "Psychological therapy such as cognitive behavioural therapy for perpetuating factors",
+      "Treat comorbid mood, anxiety and pain",
+      "Avoid ineffective antiparkinsonian and antitremor drugs and unnecessary repeated investigation",
+      "Multidisciplinary rehabilitation, escalating to specialist functional-disorder services for refractory cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for functional tremor."
-  }
- ],
- "diagrams": [
-  {
-   "id": "functional-tremor-real-image",
-   "title": "Functional tremor: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "functional_tremor-pathway",
+      "title": "Functional tremor: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest functional movement disorder, often of sudden onset that is maximal at onset with a fluctuating, variable course",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Coexisting fixed neurological signs suggesting a structural or degenerative disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bedside examination for distractibility, entrainment, and variability, Accelerometry and surface EMG with entrainment and loading tasks in specialist centres, Thyroid function tests and a drug review to exclude enhanced"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide a clear, positive explanation of the diagnosis using the entrainment and distractibility signs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing by exclusion rather than demonstrating positive signs such as entrainment and distractibility"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of functional tremor."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "functional_tremor-matrix",
+      "title": "Functional tremor: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest functional movement disorder, often of sudden onset that is maximal at onset with a fluctuating, variable course",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bedside examination for distractibility, entrainment, and variability, Accelerometry and surface EMG with entrainment and loading",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Essential tremor, Parkinsonian rest tremor, Enhanced physiological tremor from anxiety, thyrotoxicosis, or drugs",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide a clear, positive explanation of the diagnosis using the entrainment and distractibility signs",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing by exclusion rather than demonstrating positive signs such as entrainment and distractibility",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for functional tremor."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 372-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "functional_tremor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bedside examination for distractibility, entrainment and variability",
+          "cells": [
+            {
+              "text": "Positive functional signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accelerometry and surface EMG with entrainment and loading tasks",
+          "cells": [
+            {
+              "text": "Characterises tremor with entrainment and loading tasks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests and drug review",
+          "cells": [
+            {
+              "text": "Excludes enhanced physiological tremor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or dopamine transporter imaging",
+          "cells": [
+            {
+              "text": "Only where an organic parkinsonian or structural cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for psychological comorbidity and precipitants",
+          "cells": [
+            {
+              "text": "Comorbidity and precipitants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_tremor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Enhanced physiological tremor (anxiety, thyrotoxicosis, drugs)",
+          "cells": [
+            {
+              "text": "Excluded by thyroid tests and drug review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinsonian rest tremor",
+          "cells": [
+            {
+              "text": "Bradykinesia and rigidity warrant further assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced or toxic tremor",
+          "cells": [
+            {
+              "text": "Identified on drug review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_tremor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Positive explanation",
+          "cells": [
+            {
+              "text": "Clear diagnosis using entrainment and distractibility signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional-movement physiotherapy",
+          "cells": [
+            {
+              "text": "Motor retraining and attention-diversion techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Perpetuating factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid symptoms",
+          "cells": [
+            {
+              "text": "Mood, anxiety and pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid ineffective drugs and repeated investigation",
+          "cells": [
+            {
+              "text": "Antiparkinsonian and antitremor drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Escalation to specialist functional-disorder services for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "functional_tremor-ddx-2",
+      "kind": "ddx",
+      "title": "Hyperkinetic movement disorders defined",
+      "rowHeader": "Condition",
+      "columns": [
+        "Definition"
+      ],
+      "rows": [
+        {
+          "parameter": "Tremor",
+          "cells": [
+            {
+              "text": "Rhythmic oscillation of a body part from intermittent muscle contractions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystonia",
+          "cells": [
+            {
+              "text": "Involuntary patterned, sustained or repeated muscle contractions, often twisting, with abnormal posture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Athetosis",
+          "cells": [
+            {
+              "text": "Slow, distal, writhing involuntary movements, tending to affect the arms and hands"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chorea",
+          "cells": [
+            {
+              "text": "Rapid, semipurposeful, graceful, dance-like nonpatterned involuntary movements of distal or proximal muscles"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myoclonus",
+          "cells": [
+            {
+              "text": "Sudden, brief (under 100 ms), jerk-like, arrhythmic muscle twitches"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tic",
+          "cells": [
+            {
+              "text": "Brief, repeated, stereotyped muscle contractions, often suppressible; simple (one muscle group) or complex (range of motor activities)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "functional_tremor-dx-mgmt",
+      "title": "Diagnosis and management of Functional tremor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected functional tremor: tremor with positive signs on examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fixed neurological signs, parkinsonism, rapid progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Movement-disorder specialist review for parkinsonism or rapid progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bedside examination for entrainment and distractibility; thyroid tests and drug review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are entrainment and distractibility present, with enhanced tremor excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider essential, parkinsonian, dystonic or cerebellar tremor; repeat assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clear, positive explanation using entrainment and distractibility signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Functional-movement physiotherapy with motor retraining",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cognitive behavioural therapy for perpetuating factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid ineffective antiparkinsonian and antitremor drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Can improve substantially, especially with early diagnosis and combined therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

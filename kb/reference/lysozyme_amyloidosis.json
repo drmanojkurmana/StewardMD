@@ -1,174 +1,752 @@
 {
- "id": "lysozyme_amyloidosis",
- "name": "Lysozyme Amyloidosis (ALys)",
- "aliases": [
-  "ALys amyloidosis",
-  "Hereditary lysozyme amyloidosis"
- ],
- "class": "non_infective",
- "system": "Multisystem / Haematology",
- "specialty": "Haematology / Amyloidosis",
- "referenceOnly": true,
- "reference": {
-  "source": "Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
-   "It is characteristically multi-visceral, with prominent involvement of the kidney, liver, spleen and gastrointestinal tract.",
-   "Spontaneous and potentially life-threatening haemorrhage is a hallmark, with reports of hepatic and splenic rupture and gastrointestinal bleeding.",
-   "Sicca symptoms of dry eyes and mouth and cutaneous petechiae are recognised features.",
-   "Renal involvement is common but often slowly progressive, with nephrotic syndrome developing over years.",
-   "Cardiac and neurological involvement are typically mild or absent, which helps distinguish ALys from ATTR.",
-   "Diagnosis rests on tissue typing and LYZ sequencing; there is no specific antifibril therapy, so management is supportive and directed at complications."
+  "id": "lysozyme_amyloidosis",
+  "name": "Lysozyme Amyloidosis (ALys)",
+  "aliases": [
+    "ALys amyloidosis",
+    "Hereditary lysozyme amyloidosis"
   ],
-  "pathophysiology": "Lysozyme is a bacteriolytic enzyme secreted by macrophages, Paneth cells and various epithelia. Amyloidogenic variants destabilise the folded protein, promoting partial unfolding, aggregation and deposition of lysozyme-derived amyloid fibrils in the extracellular matrix of viscera. Deposition is widespread but shows particular avidity for the gastrointestinal tract, liver, spleen and kidney, where infiltration weakens tissue integrity and predisposes to haemorrhage and organ dysfunction. Because lysozyme is produced by many cell types, the amyloid source cannot be removed by transplantation of a single organ, and deposition continues over decades in a slowly progressive fashion.",
-  "additionalDifferentials": [
-   "AL (immunoglobulin light-chain) amyloidosis",
-   "Other hereditary amyloidoses (fibrinogen, apolipoprotein A-I, transthyretin)",
-   "AA amyloidosis",
-   "Other causes of gastrointestinal bleeding or hepatosplenomegaly",
-   "Sjögren syndrome for the sicca features",
-   "Other causes of nephrotic syndrome"
-  ],
-  "additionalInvestigations": [
-   "Biopsy of affected tissue (gut, liver or kidney) with Congo red staining",
-   "Amyloid typing by mass spectrometry or immunohistochemistry",
-   "LYZ gene sequencing",
-   "Cross-sectional imaging of the liver and spleen to assess size and rupture risk",
-   "Renal function and quantified proteinuria",
-   "Full blood count and clotting studies given the bleeding risk",
-   "Serum free light chains and immunofixation to exclude AL amyloidosis"
-  ],
-  "redFlags": [
-   "Acute abdominal pain with haemodynamic compromise suggesting hepatic or splenic rupture",
-   "Gastrointestinal haemorrhage",
-   "Rapidly enlarging liver or spleen",
-   "Progressive proteinuria and renal decline"
-  ],
-  "prognosis": "The disorder is generally slowly progressive, with survival often measured in decades, but life-threatening visceral haemorrhage from organ rupture is the principal cause of acute mortality.",
-  "pitfalls": [
-   "Mistyping as AL amyloidosis and exposing patients to chemotherapy",
-   "Underestimating the risk of spontaneous organ rupture",
-   "Attributing sicca symptoms to Sjögren syndrome without considering amyloid",
-   "Relying on single-organ transplantation to remove the amyloid source"
-  ],
-  "references": [
-   "Oxford Textbook of Medicine, chapter on hereditary amyloidosis",
-   "Williams Hematology, chapter on amyloidosis",
-   "International Society of Amyloidosis nomenclature guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely supportive and surveillance-based",
-   "Vigilant management of spontaneous visceral haemorrhage from hepatic or splenic rupture and gastrointestinal bleeding, with resuscitation, correction of coagulopathy, and interventional radiological embolisation or surgery",
-   "Manage renal involvement with renin-angiotensin blockade for proteinuria and nephrotic syndrome, progressing to renal replacement therapy as disease advances",
-   "Surveillance cross-sectional imaging of liver and spleen for organomegaly and rupture risk, with advice to avoid contact sports and abdominal trauma",
-   "Symptomatic treatment of sicca symptoms with ocular lubricants and saliva substitutes",
-   "Multidisciplinary care through a specialist amyloidosis centre spanning haematology, nephrology and gastroenterology",
-   "Genetic counselling and family screening given autosomal dominant LYZ inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lysozyme_amyloidosis-pathway",
-   "title": "Lysozyme Amyloidosis (ALys): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute abdominal pain with haemodynamic compromise suggesting hepatic or splenic rupture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Biopsy of affected tissue (gut, liver or kidney) with Congo red staining, Amyloid typing by mass spectrometry or immunohistochemistry, LYZ gene sequencing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely supportive and surveillance-based"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistyping as AL amyloidosis and exposing patients to chemotherapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lysozyme amyloidosis (alys)."
-  }
- ],
- "tables": [
-  {
-   "id": "lysozyme_amyloidosis-matrix",
-   "title": "Lysozyme Amyloidosis (ALys): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem / Haematology",
+  "specialty": "Haematology / Amyloidosis",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
+      "It is characteristically multi-visceral, with prominent involvement of the kidney, liver, spleen and gastrointestinal tract.",
+      "Spontaneous and potentially life-threatening haemorrhage is a hallmark, with reports of hepatic and splenic rupture and gastrointestinal bleeding.",
+      "Sicca symptoms of dry eyes and mouth and cutaneous petechiae are recognised features.",
+      "Renal involvement is common but often slowly progressive, with nephrotic syndrome developing over years.",
+      "Cardiac and neurological involvement are typically mild or absent, which helps distinguish ALys from ATTR.",
+      "Diagnosis rests on tissue typing and LYZ sequencing; there is no specific antifibril therapy, so management is supportive and directed at complications."
     ],
-    [
-     "Key Investigations",
-     "Biopsy of affected tissue (gut, liver or kidney) with Congo red staining, Amyloid typing by mass spectrometry or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lysozyme is a bacteriolytic enzyme secreted by macrophages, Paneth cells and various epithelia. Amyloidogenic variants destabilise the folded protein, promoting partial unfolding, aggregation and deposition of lysozyme-derived amyloid fibrils in the extracellular matrix of viscera. Deposition is widespread but shows particular avidity for the gastrointestinal tract, liver, spleen and kidney, where infiltration weakens tissue integrity and predisposes to haemorrhage and organ dysfunction. Because lysozyme is produced by many cell types, the amyloid source cannot be removed by transplantation of a single organ, and deposition continues over decades in a slowly progressive fashion.",
+    "additionalDifferentials": [
+      "AL (immunoglobulin light-chain) amyloidosis",
+      "Other hereditary amyloidoses (fibrinogen, apolipoprotein A-I, transthyretin)",
+      "AA amyloidosis",
+      "Other causes of gastrointestinal bleeding or hepatosplenomegaly",
+      "Sjögren syndrome for the sicca features",
+      "Other causes of nephrotic syndrome"
     ],
-    [
-     "Primary Differentials",
-     "AL (immunoglobulin light-chain) amyloidosis, Other hereditary amyloidoses (fibrinogen, apolipoprotein A-I, transthyretin), AA",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Biopsy of affected tissue (gut, liver or kidney) with Congo red staining",
+      "Amyloid typing by mass spectrometry or immunohistochemistry",
+      "LYZ gene sequencing",
+      "Cross-sectional imaging of the liver and spleen to assess size and rupture risk",
+      "Renal function and quantified proteinuria",
+      "Full blood count and clotting studies given the bleeding risk",
+      "Serum free light chains and immunofixation to exclude AL amyloidosis"
     ],
-    [
-     "Management Strategy",
-     "No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute abdominal pain with haemodynamic compromise suggesting hepatic or splenic rupture",
+      "Gastrointestinal haemorrhage",
+      "Rapidly enlarging liver or spleen",
+      "Progressive proteinuria and renal decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistyping as AL amyloidosis and exposing patients to chemotherapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is generally slowly progressive, with survival often measured in decades, but life-threatening visceral haemorrhage from organ rupture is the principal cause of acute mortality.",
+    "pitfalls": [
+      "Mistyping as AL amyloidosis and exposing patients to chemotherapy",
+      "Underestimating the risk of spontaneous organ rupture",
+      "Attributing sicca symptoms to Sjögren syndrome without considering amyloid",
+      "Relying on single-organ transplantation to remove the amyloid source"
+    ],
+    "references": [
+      "Oxford Textbook of Medicine, chapter on hereditary amyloidosis",
+      "Williams Hematology, chapter on amyloidosis",
+      "International Society of Amyloidosis nomenclature guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely supportive and surveillance-based",
+      "Vigilant management of spontaneous visceral haemorrhage from hepatic or splenic rupture and gastrointestinal bleeding, with resuscitation, correction of coagulopathy, and interventional radiological embolisation or surgery",
+      "Manage renal involvement with renin-angiotensin blockade for proteinuria and nephrotic syndrome, progressing to renal replacement therapy as disease advances",
+      "Surveillance cross-sectional imaging of liver and spleen for organomegaly and rupture risk, with advice to avoid contact sports and abdominal trauma",
+      "Symptomatic treatment of sicca symptoms with ocular lubricants and saliva substitutes",
+      "Multidisciplinary care through a specialist amyloidosis centre spanning haematology, nephrology and gastroenterology",
+      "Genetic counselling and family screening given autosomal dominant LYZ inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for lysozyme amyloidosis (alys)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lysozyme-amyloidosis-real-image",
-   "title": "Lysozyme Amyloidosis (ALys): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "lysozyme_amyloidosis-pathway",
+      "title": "Lysozyme Amyloidosis (ALys): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute abdominal pain with haemodynamic compromise suggesting hepatic or splenic rupture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Biopsy of affected tissue (gut, liver or kidney) with Congo red staining, Amyloid typing by mass spectrometry or immunohistochemistry, LYZ gene sequencing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely supportive and surveillance-based"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistyping as AL amyloidosis and exposing patients to chemotherapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lysozyme amyloidosis (alys)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lysozyme_amyloidosis-matrix",
+      "title": "Lysozyme Amyloidosis (ALys): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ALys is a rare autosomal dominant amyloidosis caused by mutations in the lysozyme gene (LYZ).",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Biopsy of affected tissue (gut, liver or kidney) with Congo red staining, Amyloid typing by mass spectrometry or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "AL (immunoglobulin light-chain) amyloidosis, Other hereditary amyloidoses (fibrinogen, apolipoprotein A-I, transthyretin), AA",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No single-organ transplant removes the amyloid source, as lysozyme is produced by many cell types, so management is largely",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistyping as AL amyloidosis and exposing patients to chemotherapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lysozyme amyloidosis (alys)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oxford Textbook of Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 112-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lysozyme_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy of gut, liver or kidney with Congo red",
+          "cells": [
+            {
+              "text": "Amyloid deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid typing by mass spectrometry or immunohistochemistry",
+          "cells": [
+            {
+              "text": "Lysozyme type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LYZ gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains and immunofixation",
+          "cells": [
+            {
+              "text": "AL amyloidosis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of liver and spleen",
+          "cells": [
+            {
+              "text": "Size and rupture risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lysozyme_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "AL amyloidosis",
+          "cells": [
+            {
+              "text": "Light-chain typing; avoids chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other hereditary amyloidoses",
+          "cells": [
+            {
+              "text": "Different precursor protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AA amyloidosis",
+          "cells": [
+            {
+              "text": "Inflammatory background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Sicca features; amyloid must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lysozyme_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No single-organ transplant removes the amyloid source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visceral haemorrhage",
+          "cells": [
+            {
+              "text": "Resuscitation and correction of coagulopathy for rupture or bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal involvement",
+          "cells": [
+            {
+              "text": "Renin-angiotensin blockade; renal replacement as disease advances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging",
+          "cells": [
+            {
+              "text": "Liver and spleen; avoid contact sports and abdominal trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sicca symptoms",
+          "cells": [
+            {
+              "text": "Ocular lubricants and saliva substitutes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lysozyme_amyloidosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Amyloid fibril proteins and clinical syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Precursor protein",
+        "Clinical syndrome",
+        "Clinical involvement"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic: AL",
+          "cells": [
+            {
+              "text": "Immunoglobulin light chain"
+            },
+            {
+              "text": "Primary or myeloma associated (footnote a)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AH",
+          "cells": [
+            {
+              "text": "Immunoglobulin heavy chain"
+            },
+            {
+              "text": "Primary or myeloma associated (rare)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AA",
+          "cells": [
+            {
+              "text": "Serum amyloid A protein"
+            },
+            {
+              "text": "Secondary, reactive (footnote b)"
+            },
+            {
+              "text": "Renal, any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: Abeta2M",
+          "cells": [
+            {
+              "text": "Beta2-microglobulin"
+            },
+            {
+              "text": "Hemodialysis associated"
+            },
+            {
+              "text": "Synovial membrane, bone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ATTR",
+          "cells": [
+            {
+              "text": "Transthyretin"
+            },
+            {
+              "text": "Familial (mutant); senile systemic (wild type)"
+            },
+            {
+              "text": "Cardiac, peripheral and autonomic nerves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAI",
+          "cells": [
+            {
+              "text": "Apolipoprotein AI"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Hepatic, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAII",
+          "cells": [
+            {
+              "text": "Apolipoprotein AII"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AGel",
+          "cells": [
+            {
+              "text": "Gelsolin"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Corneas, cranial nerves, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AFib",
+          "cells": [
+            {
+              "text": "Fibrinogen A alpha"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALys",
+          "cells": [
+            {
+              "text": "Lysozyme"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALECT2",
+          "cells": [
+            {
+              "text": "Leukocyte chemotactic factor 2"
+            },
+            {
+              "text": "Uncertain (printed as ?)"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: Abeta",
+          "cells": [
+            {
+              "text": "Amyloid beta protein"
+            },
+            {
+              "text": "Alzheimer's disease"
+            },
+            {
+              "text": "Down syndrome (as printed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACys",
+          "cells": [
+            {
+              "text": "Cystatin C"
+            },
+            {
+              "text": "Cerebral amyloid angiopathy"
+            },
+            {
+              "text": "CNS, vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APrP",
+          "cells": [
+            {
+              "text": "Prion protein"
+            },
+            {
+              "text": "Spongiform encephalopathies"
+            },
+            {
+              "text": "CNS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AIAPP",
+          "cells": [
+            {
+              "text": "Islet amyloid polypeptide (amylin)"
+            },
+            {
+              "text": "Diabetes associated"
+            },
+            {
+              "text": "Pancreas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACal",
+          "cells": [
+            {
+              "text": "Calcitonin"
+            },
+            {
+              "text": "Medullary carcinoma of the thyroid"
+            },
+            {
+              "text": "Thyroid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AANF",
+          "cells": [
+            {
+              "text": "Atrial natriuretic factor"
+            },
+            {
+              "text": "Age related"
+            },
+            {
+              "text": "Cardiac atria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APro",
+          "cells": [
+            {
+              "text": "Prolactin"
+            },
+            {
+              "text": "Endocrinopathy"
+            },
+            {
+              "text": "Pituitary"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote letters a and b appear on the AL and AA rows in the source but their text is not printed. The Abeta row layout is as printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lysozyme_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of Lysozyme Amyloidosis (ALys)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multi-organ amyloid with nephrotic proteinuria, sicca symptoms or spontaneous bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute abdomen, haemodynamic compromise or GI bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical and haematology review for organ rupture or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tissue biopsy with Congo red, amyloid typing, LYZ sequencing, free light chains",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is lysozyme amyloid confirmed with AL amyloidosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider AL, AA or other hereditary amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resuscitate and manage spontaneous visceral haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Renin-angiotensin blockade for proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Renal replacement as kidney function declines",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Imaging surveillance of liver and spleen for rupture risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Specialist amyloidosis centre care and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive over decades; visceral haemorrhage is the main acute cause of death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,194 +1,760 @@
 {
- "id": "enterococcal_infections",
- "name": "Enterococcal Infections",
- "system": "Infectious Diseases (multisystem)",
- "class": "infective",
- "chapter": 154,
- "page": 1215,
- "aliases": [
-  "Enterococcus faecalis infection",
-  "Enterococcus faecium infection",
-  "VRE infection",
-  "Vancomycin-resistant enterococcal infection"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1215",
-  "clinicalPearls": [
-   "Two species cause the overwhelming majority of human enterococcal disease: E. faecalis (still predominant in nosocomial isolates) and E. faecium (now roughly one-third of species-identified infections and the far more resistant, harder-to-treat species).",
-   "Enterococci are gram-positive cocci appearing as single cells, diplococci, or short chains; they were historically grouped with streptococci but reclassified as a distinct genus on the basis of DNA hybridization and 16S rRNA sequencing.",
-   "Distinguishing laboratory features: hydrolysis of esculin in 40% bile salts, growth at 6.5% salt and at 46 degrees C, and PYR hydrolysis (the latter helping separate enterococci from the S. gallolyticus/S. bovis group and Leuconostoc).",
-   "Urinary tract infection is the most common enterococcal infection and is typically nosocomial, linked to indwelling catheters, instrumentation, or genitourinary anatomic abnormalities; removal of the catheter alone may eradicate the organism without antibiotics.",
-   "Enterococci rank second after staphylococci as agents of central line-associated bacteremia in the United States and are the third most common overall isolates from hospital-associated infections (after E. coli and staphylococci).",
-   "Enterococci are an important cause of community- and healthcare-associated endocarditis (second after staphylococci in healthcare-associated cases), with the gut or genitourinary tract the presumed bacteremic source; E. faecalis is the leading cause of endocarditis after transcatheter aortic valve implantation (TAVI).",
-   "Typical enterococcal endocarditis is subacute (fever, weight loss, malaise, murmur) in elderly debilitated men; classic peripheral stigmata such as petechiae, Osler's nodes, and Roth's spots occur in only a minority.",
-   "VRE gut colonization is the critical step preceding invasive enterococcal disease; colonized patients can carry the organism for prolonged periods (sometimes more than a year) and are more likely to develop Enterococcus-related illness such as bacteremia.",
-   "Two meta-analyses found that VRE infection independently increases the risk of death compared with infection by a glycopeptide-susceptible strain, irrespective of the patient's clinical status.",
-   "E. faecium isolation from blood is associated with worse outcomes and higher mortality than other enterococcal species, largely reflecting more frequent vancomycin and ampicillin resistance and consequently fewer therapeutic options.",
-   "Enterococci are normal large-bowel commensals (usually less than 1% of the gut microbiota); antibiotics that are biliary-excreted and broad-spectrum (e.g., certain cephalosporins and anti-anaerobic agents) promote heavy gut overgrowth, the key precursor to infection.",
-   "Enterococcal cytolysin (a heterodimeric toxin of some E. faecalis strains) can lyse human and equine but not ovine RBCs as well as neutrophils and macrophages, which is why routine ovine/bovine RBC agar usually reports these strains as nonhemolytic."
+  "id": "enterococcal_infections",
+  "name": "Enterococcal Infections",
+  "system": "Infectious Diseases (multisystem)",
+  "class": "infective",
+  "chapter": 154,
+  "page": 1215,
+  "aliases": [
+    "Enterococcus faecalis infection",
+    "Enterococcus faecium infection",
+    "VRE infection",
+    "Vancomycin-resistant enterococcal infection"
   ],
-  "pathophysiology": "Enterococci are intestinal symbionts that become pathogens when host barriers and colonization resistance are disrupted, most often in hospitalized or chronically ill patients. A higher level of gut colonization is the pivotal step in pathogenesis: suppression of gastric acid, degradation of the protective mucin layer, altered carbon-source availability (e.g., lactose favoring outgrowth, depletion of fructose by Olsenella reducing VRE burden), and especially antibiotic exposure all increase enteric burden. Antibiotic disruption of commensal gram-negative bacteria reduces lipopolysaccharide-driven, NF-kappaB/Toll-like-receptor-mediated production of the antimicrobial lectin RegIIIgamma and of bacteriocins/lantibiotics from organisms such as Blautia producta, impairing clearance of VRE. Three groups of virulence factors are described: (1) secreted factors including hemolysin/cytolysin, the gelatinase and serine proteases (which degrade host tissue and immune components), and a newly described pore-forming toxin Epx targeting HLA class 1; (2) surface components/adhesins (aggregation substance, the collagen adhesins Ace/Acm, pili, Esp, and other MSCRAMM-like proteins) mediating attachment to collagen, fibronectin, and fibrinogen and to biofilm/host tissue; and (3) less-characterized factors such as the stress protein Gls24 (bile-salt resistance, endocarditis), hylEfm-containing transferable plasmids that enhance gut colonization, and the oxidative-stress regulator AsrR. From colonized gut, prostate, intravascular devices, biliary/intraabdominal foci, wounds, or the urinary tract, enterococci enter the bloodstream and can seed heart valves, meninges, bone, and other sites. Genomic plasticity (recombination of core chromosomal DNA plus a malleable accessory genome of plasmids, phages, and mobile elements) drives rising resistance, concentrated in hospital-associated E. faecium clade A, which frequently lacks a functional CRISPR-Cas defense and carries high-expressing PBP5 alleles.",
-  "additionalDifferentials": [
-   "Streptococcal infection (especially viridans streptococci and the S. gallolyticus/S. bovis group) presenting as bacteremia or subacute endocarditis",
-   "Staphylococcal device-associated bacteremia and endocarditis",
-   "Polymicrobial intraabdominal or pelvic infection with enteric gram-negative bacilli and anaerobes",
-   "Coagulase-negative staphylococci or diphtheroids as causes of indolent prosthetic-device infection"
-  ],
-  "infectionMimics": [
-   "Viridans streptococcal subacute endocarditis (similar indolent fever, malaise, murmur)",
-   "S. gallolyticus (S. bovis) bacteremia/endocarditis associated with colonic pathology",
-   "Coagulase-negative staphylococcal catheter-associated or prosthetic-valve infection",
-   "Other catheter-associated bloodstream infections producing fever in a hospitalized patient"
-  ],
-  "nonInfectiousMimics": [
-   "Asymptomatic bacteriuria/colonization in a chronically catheterized patient (versus true UTI)",
-   "Enterococcal isolation from intraabdominal or surgical-wound specimens representing colonization rather than true infection",
-   "Noninfectious causes of fever and inflammation in the critically ill (e.g., postoperative inflammation)"
-  ],
-  "additionalInvestigations": [
-   "Blood cultures (enterococcal bacteremia is frequently device- or gut-related and may be polymicrobial when the GI tract is the source)",
-   "Quantitative urine culture (>=10^5 CFU/mL) with urinary leukocytes plus systemic or local signs to distinguish UTI from colonization; consider a catheterized specimen to confirm",
-   "Echocardiography to evaluate for endocarditis; the DENOVA clinical scoring system can help decide which bacteremic patients need echo",
-   "CSF analysis in suspected meningitis: neutrophil-predominant pleocytosis (average ~500/microL), protein usually >100 mg/dL, glucose decreased (average ~28 mg/dL); Gram's stain positive in about half, with high CSF culture yield",
-   "Species identification (E. faecalis vs E. faecium) and susceptibility testing including ampicillin, vancomycin, and high-level aminoglycoside resistance",
-   "Detection of vanA/vanB genes to confirm vancomycin resistance",
-   "Imaging for deep foci (perinephric/splenic/lung/liver/skin abscesses, vertebral osteomyelitis/spondylodiscitis) when bacteremia is persistent or recurrent"
-  ],
-  "redFlags": [
-   "Persistent or recurrent enterococcal bacteremia, suggesting endocarditis or an undrained deep focus (e.g., chronic prostatitis, abscess)",
-   "New or changing cardiac murmur with heart failure in enterococcal bacteremia, signaling endocarditis with valve involvement",
-   "E. faecium or VRE bloodstream isolate, predicting higher mortality and limited treatment options",
-   "Meningitis after neurosurgery, shunt, CNS trauma, or CSF leak with neutrophilic CSF pleocytosis and low glucose",
-   "Enterococcal bacteremia or meningitis in an immunocompromised patient, which has been linked to Strongyloides stercoralis hyperinfection syndrome",
-   "Neonatal enterococcal sepsis (often late-onset), especially with prematurity, low birth weight, indwelling devices, or recent abdominal surgery",
-   "Infection of prosthetic material/hardware where biofilm reduces antimicrobial efficacy and hardware removal may be required"
-  ],
-  "prognosis": "Outcome depends heavily on species, resistance, and host comorbidity. Patients with enterococcal bacteremia are typically chronically ill, long-hospitalized, and previously treated with multiple antibiotics. E. faecium bacteremia carries worse outcomes and higher mortality than other species, largely because of widespread vancomycin and ampicillin resistance; VRE infection independently raises mortality relative to glycopeptide-susceptible strains. For E. faecalis endocarditis, relapse risk is higher with antibiotics alone (about 2-11%) than after surgery (0-3%) and may occur up to a year after treatment. Heart failure is a common endocarditis complication, and valve replacement may be critical for cure when multidrug-resistant organisms or major complications are present. After hospital discharge, gut VRE carriage clears at a median of 2-4 months in patients without ongoing risk factors (continued antibiotics, long-term care residence, hemodialysis).",
-  "pitfalls": [
-   "Treating enterococcal growth from urine, intraabdominal samples, or surgical wounds as true infection when it often represents colonization, particularly in chronically catheterized or critically ill patients.",
-   "Failing to recognize that cephalosporins lack reliable anti-enterococcal activity, so empiric cephalosporin-based regimens leave enterococci uncovered.",
-   "Misclassifying E. faecalis as nonhemolytic when some strains carry an acquired hemolysin/cytolysin that lyses human/equine/rabbit RBCs (not the ovine/bovine RBCs in standard plates).",
-   "Confusing enterococci with the S. gallolyticus (S. bovis) group or Leuconostoc; PYR hydrolysis aids differentiation.",
-   "Underestimating chronic enterococcal prostatitis as an occult source of recurrent bacteremia, especially after urologic manipulation, where the most active agents penetrate prostatic tissue poorly.",
-   "Overlooking the markedly different resistance profiles and management implications of E. faecium versus E. faecalis.",
-   "Not pursuing echocardiography in enterococcal bacteremia where endocarditis risk is real (DENOVA scoring can guide this decision)."
-  ],
-  "severityClassification": "No single formal severity grading scale for enterococcal infection is given. Severity is stratified clinically by syndrome and resistance: localized/device-related infections (e.g., catheter-associated UTI or bacteremia, often resolved by source removal) are least severe, whereas endovascular infection (endocarditis), meningitis, and multidrug-resistant E. faecium/VRE bloodstream infection represent severe disease. High APACHE (Acute Physiology and Chronic Health Evaluation) scores are noted as a risk factor associated with VRE colonization and persistence. Endocarditis severity is influenced by heart failure, multidrug resistance, and the need for valve replacement.",
-  "references": [
-   "Harrison 22e p.1215",
-   "Harrison 22e p.1216",
-   "Harrison 22e p.1217",
-   "Harrison 22e p.1218",
-   "Harrison 22e p.1219"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For susceptible E. faecalis, treat with ampicillin or amoxicillin as the agent of choice, using penicillin-based therapy",
-   "For endocarditis and other serious infection, use synergistic combination therapy such as ampicillin plus ceftriaxone, or a penicillin with an aminoglycoside where there is no high-level aminoglycoside resistance",
-   "For vancomycin-resistant E. faecium, use linezolid or daptomycin guided by susceptibilities",
-   "Achieve source control by removing or replacing infected urinary catheters and central venous lines, as catheter removal alone may clear enterococcal bacteriuria",
-   "Obtain echocardiography to detect endocarditis and extend treatment duration accordingly",
-   "Tailor therapy to species identification and susceptibility, including ampicillin, vancomycin and high-level aminoglycoside resistance testing",
-   "Apply antimicrobial stewardship and infection-control measures to limit vancomycin-resistant enterococcal colonisation and spread"
-  ]
- },
- "algorithms": [
-  {
-   "id": "enterococcal_infections-pathway",
-   "title": "Enterococcal Infections: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Two species cause the overwhelming majority of human enterococcal disease: E. faecalis (still predominant in nosocomial isolates) and E. faecium (now roughly one-third of species-identified infections and the far more resistant,",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent or recurrent enterococcal bacteremia, suggesting endocarditis or an undrained deep focus (e.g., chronic prostatitis, abscess)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood cultures (enterococcal bacteremia is frequently device- or gut-related and may be polymicrobial when the GI tract is the source), Quantitative urine culture (>=10^5 CFU/mL) with urinary leukocytes plus systemic or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For susceptible E. faecalis, treat with ampicillin or amoxicillin as the agent of choice, using penicillin-based therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating enterococcal growth from urine, intraabdominal samples, or surgical wounds as true infection when it often represents colonization, particularly in chronically catheterized or critically ill patients."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of enterococcal infections."
-  }
- ],
- "tables": [
-  {
-   "id": "enterococcal_infections-matrix",
-   "title": "Enterococcal Infections: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Two species cause the overwhelming majority of human enterococcal disease: E. faecalis (still predominant in nosocomial isolates)",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1215",
+    "clinicalPearls": [
+      "Two species cause the overwhelming majority of human enterococcal disease: E. faecalis (still predominant in nosocomial isolates) and E. faecium (now roughly one-third of species-identified infections and the far more resistant, harder-to-treat species).",
+      "Enterococci are gram-positive cocci appearing as single cells, diplococci, or short chains; they were historically grouped with streptococci but reclassified as a distinct genus on the basis of DNA hybridization and 16S rRNA sequencing.",
+      "Distinguishing laboratory features: hydrolysis of esculin in 40% bile salts, growth at 6.5% salt and at 46 degrees C, and PYR hydrolysis (the latter helping separate enterococci from the S. gallolyticus/S. bovis group and Leuconostoc).",
+      "Urinary tract infection is the most common enterococcal infection and is typically nosocomial, linked to indwelling catheters, instrumentation, or genitourinary anatomic abnormalities; removal of the catheter alone may eradicate the organism without antibiotics.",
+      "Enterococci rank second after staphylococci as agents of central line-associated bacteremia in the United States and are the third most common overall isolates from hospital-associated infections (after E. coli and staphylococci).",
+      "Enterococci are an important cause of community- and healthcare-associated endocarditis (second after staphylococci in healthcare-associated cases), with the gut or genitourinary tract the presumed bacteremic source; E. faecalis is the leading cause of endocarditis after transcatheter aortic valve implantation (TAVI).",
+      "Typical enterococcal endocarditis is subacute (fever, weight loss, malaise, murmur) in elderly debilitated men; classic peripheral stigmata such as petechiae, Osler's nodes, and Roth's spots occur in only a minority.",
+      "VRE gut colonization is the critical step preceding invasive enterococcal disease; colonized patients can carry the organism for prolonged periods (sometimes more than a year) and are more likely to develop Enterococcus-related illness such as bacteremia.",
+      "Two meta-analyses found that VRE infection independently increases the risk of death compared with infection by a glycopeptide-susceptible strain, irrespective of the patient's clinical status.",
+      "E. faecium isolation from blood is associated with worse outcomes and higher mortality than other enterococcal species, largely reflecting more frequent vancomycin and ampicillin resistance and consequently fewer therapeutic options.",
+      "Enterococci are normal large-bowel commensals (usually less than 1% of the gut microbiota); antibiotics that are biliary-excreted and broad-spectrum (e.g., certain cephalosporins and anti-anaerobic agents) promote heavy gut overgrowth, the key precursor to infection.",
+      "Enterococcal cytolysin (a heterodimeric toxin of some E. faecalis strains) can lyse human and equine but not ovine RBCs as well as neutrophils and macrophages, which is why routine ovine/bovine RBC agar usually reports these strains as nonhemolytic."
     ],
-    [
-     "Key Investigations",
-     "Blood cultures (enterococcal bacteremia is frequently device- or gut-related and may be polymicrobial when the GI tract is the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Enterococci are intestinal symbionts that become pathogens when host barriers and colonization resistance are disrupted, most often in hospitalized or chronically ill patients. A higher level of gut colonization is the pivotal step in pathogenesis: suppression of gastric acid, degradation of the protective mucin layer, altered carbon-source availability (e.g., lactose favoring outgrowth, depletion of fructose by Olsenella reducing VRE burden), and especially antibiotic exposure all increase enteric burden. Antibiotic disruption of commensal gram-negative bacteria reduces lipopolysaccharide-driven, NF-kappaB/Toll-like-receptor-mediated production of the antimicrobial lectin RegIIIgamma and of bacteriocins/lantibiotics from organisms such as Blautia producta, impairing clearance of VRE. Three groups of virulence factors are described: (1) secreted factors including hemolysin/cytolysin, the gelatinase and serine proteases (which degrade host tissue and immune components), and a newly described pore-forming toxin Epx targeting HLA class 1; (2) surface components/adhesins (aggregation substance, the collagen adhesins Ace/Acm, pili, Esp, and other MSCRAMM-like proteins) mediating attachment to collagen, fibronectin, and fibrinogen and to biofilm/host tissue; and (3) less-characterized factors such as the stress protein Gls24 (bile-salt resistance, endocarditis), hylEfm-containing transferable plasmids that enhance gut colonization, and the oxidative-stress regulator AsrR. From colonized gut, prostate, intravascular devices, biliary/intraabdominal foci, wounds, or the urinary tract, enterococci enter the bloodstream and can seed heart valves, meninges, bone, and other sites. Genomic plasticity (recombination of core chromosomal DNA plus a malleable accessory genome of plasmids, phages, and mobile elements) drives rising resistance, concentrated in hospital-associated E. faecium clade A, which frequently lacks a functional CRISPR-Cas defense and carries high-expressing PBP5 alleles.",
+    "additionalDifferentials": [
+      "Streptococcal infection (especially viridans streptococci and the S. gallolyticus/S. bovis group) presenting as bacteremia or subacute endocarditis",
+      "Staphylococcal device-associated bacteremia and endocarditis",
+      "Polymicrobial intraabdominal or pelvic infection with enteric gram-negative bacilli and anaerobes",
+      "Coagulase-negative staphylococci or diphtheroids as causes of indolent prosthetic-device infection"
     ],
-    [
-     "Primary Differentials",
-     "Streptococcal infection (especially viridans streptococci and the S. gallolyticus/S. bovis group) presenting as bacteremia or",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Viridans streptococcal subacute endocarditis (similar indolent fever, malaise, murmur)",
+      "S. gallolyticus (S. bovis) bacteremia/endocarditis associated with colonic pathology",
+      "Coagulase-negative staphylococcal catheter-associated or prosthetic-valve infection",
+      "Other catheter-associated bloodstream infections producing fever in a hospitalized patient"
     ],
-    [
-     "Management Strategy",
-     "For susceptible E. faecalis, treat with ampicillin or amoxicillin as the agent of choice, using penicillin-based therapy",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Asymptomatic bacteriuria/colonization in a chronically catheterized patient (versus true UTI)",
+      "Enterococcal isolation from intraabdominal or surgical-wound specimens representing colonization rather than true infection",
+      "Noninfectious causes of fever and inflammation in the critically ill (e.g., postoperative inflammation)"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating enterococcal growth from urine, intraabdominal samples, or surgical wounds as true infection when it often represents",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Blood cultures (enterococcal bacteremia is frequently device- or gut-related and may be polymicrobial when the GI tract is the source)",
+      "Quantitative urine culture (>=10^5 CFU/mL) with urinary leukocytes plus systemic or local signs to distinguish UTI from colonization; consider a catheterized specimen to confirm",
+      "Echocardiography to evaluate for endocarditis; the DENOVA clinical scoring system can help decide which bacteremic patients need echo",
+      "CSF analysis in suspected meningitis: neutrophil-predominant pleocytosis (average ~500/microL), protein usually >100 mg/dL, glucose decreased (average ~28 mg/dL); Gram's stain positive in about half, with high CSF culture yield",
+      "Species identification (E. faecalis vs E. faecium) and susceptibility testing including ampicillin, vancomycin, and high-level aminoglycoside resistance",
+      "Detection of vanA/vanB genes to confirm vancomycin resistance",
+      "Imaging for deep foci (perinephric/splenic/lung/liver/skin abscesses, vertebral osteomyelitis/spondylodiscitis) when bacteremia is persistent or recurrent"
+    ],
+    "redFlags": [
+      "Persistent or recurrent enterococcal bacteremia, suggesting endocarditis or an undrained deep focus (e.g., chronic prostatitis, abscess)",
+      "New or changing cardiac murmur with heart failure in enterococcal bacteremia, signaling endocarditis with valve involvement",
+      "E. faecium or VRE bloodstream isolate, predicting higher mortality and limited treatment options",
+      "Meningitis after neurosurgery, shunt, CNS trauma, or CSF leak with neutrophilic CSF pleocytosis and low glucose",
+      "Enterococcal bacteremia or meningitis in an immunocompromised patient, which has been linked to Strongyloides stercoralis hyperinfection syndrome",
+      "Neonatal enterococcal sepsis (often late-onset), especially with prematurity, low birth weight, indwelling devices, or recent abdominal surgery",
+      "Infection of prosthetic material/hardware where biofilm reduces antimicrobial efficacy and hardware removal may be required"
+    ],
+    "prognosis": "Outcome depends heavily on species, resistance, and host comorbidity. Patients with enterococcal bacteremia are typically chronically ill, long-hospitalized, and previously treated with multiple antibiotics. E. faecium bacteremia carries worse outcomes and higher mortality than other species, largely because of widespread vancomycin and ampicillin resistance; VRE infection independently raises mortality relative to glycopeptide-susceptible strains. For E. faecalis endocarditis, relapse risk is higher with antibiotics alone (about 2-11%) than after surgery (0-3%) and may occur up to a year after treatment. Heart failure is a common endocarditis complication, and valve replacement may be critical for cure when multidrug-resistant organisms or major complications are present. After hospital discharge, gut VRE carriage clears at a median of 2-4 months in patients without ongoing risk factors (continued antibiotics, long-term care residence, hemodialysis).",
+    "pitfalls": [
+      "Treating enterococcal growth from urine, intraabdominal samples, or surgical wounds as true infection when it often represents colonization, particularly in chronically catheterized or critically ill patients.",
+      "Failing to recognize that cephalosporins lack reliable anti-enterococcal activity, so empiric cephalosporin-based regimens leave enterococci uncovered.",
+      "Misclassifying E. faecalis as nonhemolytic when some strains carry an acquired hemolysin/cytolysin that lyses human/equine/rabbit RBCs (not the ovine/bovine RBCs in standard plates).",
+      "Confusing enterococci with the S. gallolyticus (S. bovis) group or Leuconostoc; PYR hydrolysis aids differentiation.",
+      "Underestimating chronic enterococcal prostatitis as an occult source of recurrent bacteremia, especially after urologic manipulation, where the most active agents penetrate prostatic tissue poorly.",
+      "Overlooking the markedly different resistance profiles and management implications of E. faecium versus E. faecalis.",
+      "Not pursuing echocardiography in enterococcal bacteremia where endocarditis risk is real (DENOVA scoring can guide this decision)."
+    ],
+    "severityClassification": "No single formal severity grading scale for enterococcal infection is given. Severity is stratified clinically by syndrome and resistance: localized/device-related infections (e.g., catheter-associated UTI or bacteremia, often resolved by source removal) are least severe, whereas endovascular infection (endocarditis), meningitis, and multidrug-resistant E. faecium/VRE bloodstream infection represent severe disease. High APACHE (Acute Physiology and Chronic Health Evaluation) scores are noted as a risk factor associated with VRE colonization and persistence. Endocarditis severity is influenced by heart failure, multidrug resistance, and the need for valve replacement.",
+    "references": [
+      "Harrison 22e p.1215",
+      "Harrison 22e p.1216",
+      "Harrison 22e p.1217",
+      "Harrison 22e p.1218",
+      "Harrison 22e p.1219"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For susceptible E. faecalis, treat with ampicillin or amoxicillin as the agent of choice, using penicillin-based therapy",
+      "For endocarditis and other serious infection, use synergistic combination therapy such as ampicillin plus ceftriaxone, or a penicillin with an aminoglycoside where there is no high-level aminoglycoside resistance",
+      "For vancomycin-resistant E. faecium, use linezolid or daptomycin guided by susceptibilities",
+      "Achieve source control by removing or replacing infected urinary catheters and central venous lines, as catheter removal alone may clear enterococcal bacteriuria",
+      "Obtain echocardiography to detect endocarditis and extend treatment duration accordingly",
+      "Tailor therapy to species identification and susceptibility, including ampicillin, vancomycin and high-level aminoglycoside resistance testing",
+      "Apply antimicrobial stewardship and infection-control measures to limit vancomycin-resistant enterococcal colonisation and spread"
     ]
-   ],
-   "caption": "Overview comparison matrix for enterococcal infections."
-  }
- ],
- "diagrams": [
-  {
-   "id": "enterococcal-infections-real-image",
-   "title": "Enterococcal Infections: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "enterococcal_infections-pathway",
+      "title": "Enterococcal Infections: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Two species cause the overwhelming majority of human enterococcal disease: E. faecalis (still predominant in nosocomial isolates) and E. faecium (now roughly one-third of species-identified infections and the far more resistant,",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent or recurrent enterococcal bacteremia, suggesting endocarditis or an undrained deep focus (e.g., chronic prostatitis, abscess)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood cultures (enterococcal bacteremia is frequently device- or gut-related and may be polymicrobial when the GI tract is the source), Quantitative urine culture (>=10^5 CFU/mL) with urinary leukocytes plus systemic or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For susceptible E. faecalis, treat with ampicillin or amoxicillin as the agent of choice, using penicillin-based therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating enterococcal growth from urine, intraabdominal samples, or surgical wounds as true infection when it often represents colonization, particularly in chronically catheterized or critically ill patients."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of enterococcal infections."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "enterococcal_infections-matrix",
+      "title": "Enterococcal Infections: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Two species cause the overwhelming majority of human enterococcal disease: E. faecalis (still predominant in nosocomial isolates)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood cultures (enterococcal bacteremia is frequently device- or gut-related and may be polymicrobial when the GI tract is the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Streptococcal infection (especially viridans streptococci and the S. gallolyticus/S. bovis group) presenting as bacteremia or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For susceptible E. faecalis, treat with ampicillin or amoxicillin as the agent of choice, using penicillin-based therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating enterococcal growth from urine, intraabdominal samples, or surgical wounds as true infection when it often represents",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for enterococcal infections."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Enterococcal Infections",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-positive-cocci/enterococcal-infections",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 136-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "enterococcal_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of enterococcal infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Gram stain",
+          "cells": [
+            {
+              "text": "Gram-positive cocci, singly, in pairs or short chains"
+            },
+            {
+              "text": "Catalase-negative; group D antisera reactive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bile esculin and salt tolerance",
+          "cells": [
+            {
+              "text": "Hydrolyses esculin in 40% bile; grows in 6.5% NaCl and at 46 degrees C"
+            },
+            {
+              "text": "Separates enterococci from most streptococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PYR test",
+          "cells": [
+            {
+              "text": "{{hy:PYR-positive}}"
+            },
+            {
+              "text": "Separates from S. gallolyticus (S. bovis) group and Leuconostoc"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative urine culture",
+          "unit": "CFU/mL",
+          "cells": [
+            {
+              "text": ">=10^5 with pyuria and symptoms or signs",
+              "op": ">=",
+              "value": 100000
+            },
+            {
+              "text": "Without these, often catheter colonisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Often device or gut source; may be polymicrobial"
+            },
+            {
+              "text": "Persistent bacteraemia suggests endocarditis or deep focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Look for endocarditis in bacteraemia"
+            },
+            {
+              "text": "DENOVA score helps select who needs echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF in meningitis",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Neutrophil pleocytosis, average about 500"
+            },
+            {
+              "text": "Protein usually >100 mg/dL; glucose low (average about 28 mg/dL); Gram stain positive in about half"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species ID and susceptibility",
+          "cells": [
+            {
+              "text": "E. faecalis vs E. faecium; ampicillin, vancomycin, high-level aminoglycoside resistance"
+            },
+            {
+              "text": "vanA or vanB genes confirm vancomycin resistance; MALDI-TOF or PCR for rapid ID"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enterococcal_infections-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of enterococcal infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viridans streptococcal endocarditis",
+          "cells": [
+            {
+              "text": "Similar subacute fever, malaise, murmur"
+            },
+            {
+              "text": "Blood culture speciation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S. gallolyticus (S. bovis) bacteraemia",
+          "cells": [
+            {
+              "text": "Group D streptococcus linked to colonic pathology"
+            },
+            {
+              "text": "PYR test negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal device bacteraemia or endocarditis",
+          "cells": [
+            {
+              "text": "Catheter or prosthetic-valve infection"
+            },
+            {
+              "text": "Blood culture speciation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymicrobial intra-abdominal infection",
+          "cells": [
+            {
+              "text": "Enteric gram-negatives and anaerobes with enterococci"
+            },
+            {
+              "text": "Cultures of drained material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter colonisation or asymptomatic bacteriuria",
+          "cells": [
+            {
+              "text": "No pyuria, symptoms or systemic signs"
+            },
+            {
+              "text": "Catheterised specimen after catheter change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enterococcal_infections-treatment",
+      "kind": "treatment",
+      "title": "Treatment of enterococcal infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ampicillin or amoxicillin",
+          "cells": [
+            {
+              "text": "{{hy:Agent of choice for susceptible E. faecalis}}; uncomplicated UTI"
+            },
+            {
+              "text": "Single agent enough for UTI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ampicillin plus ceftriaxone",
+          "cells": [
+            {
+              "text": "E. faecalis endocarditis, or when aminoglycoside cannot be used"
+            },
+            {
+              "text": "Synergistic double beta-lactam"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cell wall-active agent plus gentamicin or streptomycin",
+          "cells": [
+            {
+              "text": "Endocarditis without high-level aminoglycoside resistance"
+            },
+            {
+              "text": "Bactericidal synergy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Linezolid, tedizolid or daptomycin",
+          "cells": [
+            {
+              "text": "VRE (mainly E. faecium) if susceptible"
+            },
+            {
+              "text": "Guided by susceptibility testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oritavancin, tigecycline, eravacycline, chloramphenicol",
+          "cells": [
+            {
+              "text": "VRE alternatives with in vitro activity"
+            },
+            {
+              "text": "Quinupristin-dalfopristin no longer recommended"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitrofurantoin or fosfomycin",
+          "cells": [
+            {
+              "text": "Cystitis, including VRE cystitis"
+            },
+            {
+              "text": "Lower urinary tract only"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Infected urinary catheter, central line or hardware"
+            },
+            {
+              "text": "Catheter removal alone may clear bacteriuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Cephalosporins alone lack reliable enterococcal activity. Trimethoprim-sulfamethoxazole may fail despite in vitro susceptibility. Doses are not stated in the cited sources."
+    },
+    {
+      "id": "enterococcal_infections-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Classification of streptococci",
+      "rowHeader": "Lancefield group",
+      "columns": [
+        "Representative species",
+        "Hemolytic pattern",
+        "Typical infections"
+      ],
+      "rows": [
+        {
+          "parameter": "A",
+          "cells": [
+            {
+              "text": "S. pyogenes"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Pharyngitis, impetigo, cellulitis, scarlet fever"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "B",
+          "cells": [
+            {
+              "text": "S. agalactiae"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Neonatal sepsis and meningitis, puerperal infection, urinary tract infection, diabetic ulcer infection, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "C, G",
+          "cells": [
+            {
+              "text": "S. dysgalactiae subsp. equisimilis"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Cellulitis, bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "D: enterococci",
+          "cells": [
+            {
+              "text": "E. faecalis; E. faecium"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Urinary tract infection, nosocomial bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "D: nonenterococci",
+          "cells": [
+            {
+              "text": "S. bovis"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: viridans streptococci",
+          "cells": [
+            {
+              "text": "S. sanguis; S. mitis"
+            },
+            {
+              "text": "Alpha"
+            },
+            {
+              "text": "Endocarditis, dental abscess, brain abscess"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: intermedius or milleri group",
+          "cells": [
+            {
+              "text": "S. intermedius, S. anginosus, S. constellatus"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Brain abscess, visceral abscess"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: anaerobic streptococci",
+          "cells": [
+            {
+              "text": "Peptostreptococcus magnus"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Sinusitis, pneumonia, empyema, brain abscess, liver abscess"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Source footnotes (a) on enterococci and (b) on anaerobic streptococci are not legible in the transcription."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "enterococcal_infections-dx-mgmt",
+      "title": "Diagnosis and management of enterococcal infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Enterococcus isolated from urine, blood or sterile site",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Signs of true infection rather than colonisation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Colonisation: no antibiotic; change or remove catheter",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Speciate and test ampicillin, vancomycin, high-level aminoglycoside",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bacteraemia present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove lines; echocardiography guided by DENOVA score",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Endocarditis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ampicillin plus ceftriaxone, or beta-lactam plus aminoglycoside",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Ampicillin and vancomycin resistant (VRE)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Linezolid, tedizolid or daptomycin per susceptibility",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Ampicillin or amoxicillin; cystitis may use nitrofurantoin or fosfomycin",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Complete course; image for deep focus if bacteraemia persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

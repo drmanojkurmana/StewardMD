@@ -1,177 +1,233 @@
 {
- "id": "breast_hamartoma",
- "name": "Breast hamartoma",
- "aliases": [
-  "Fibroadenolipoma",
-  "Lipofibroadenoma",
-  "Adenolipoma"
- ],
- "class": "non_infective",
- "system": "Breast",
- "specialty": "Breast surgery / Radiology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Breast Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign, well-circumscribed overgrowth of disorganised but otherwise normal breast tissue, comprising glandular, fibrous and adipose elements.",
-   "Often presents as a soft, mobile, painless mass or as an incidental screening finding, most commonly in women in their fourth to fifth decade.",
-   "The mammographic appearance is characteristic: an encapsulated lesion containing both fat and soft-tissue density, described as a 'breast within a breast'.",
-   "A thin radiolucent capsule separating the lesion from surrounding tissue supports the diagnosis.",
-   "Because it contains all normal breast constituents, core biopsy can appear deceptively 'normal', making radiological correlation essential.",
-   "Proportions of fat, fibrous stroma and glandular tissue vary, giving rise to the synonyms fibroadenolipoma and adenolipoma.",
-   "Treatment is reassurance for typical asymptomatic lesions, with excision reserved for large, symptomatic or diagnostically uncertain masses.",
-   "Multiple hamartomas, particularly with mucocutaneous features, should prompt consideration of Cowden syndrome."
+  "id": "breast_hamartoma",
+  "name": "Breast hamartoma",
+  "aliases": [
+    "Fibroadenolipoma",
+    "Lipofibroadenoma",
+    "Adenolipoma"
   ],
-  "pathophysiology": "A breast hamartoma is a developmental, tumour-like malformation rather than a true neoplasm, arising from the localised disorganised proliferation of the mature tissue elements normally present in the breast. Ducts, lobules, fibrous stroma and mature adipose tissue are haphazardly arranged within a thin pseudocapsule that demarcates the lesion from adjacent parenchyma. Because the constituent tissues are cytologically normal, the hamartoma behaves as a slowly enlarging, well-defined mass. Its recognition rests largely on the interplay of fatty and glandular densities on imaging, since histology of a small sample may be indistinguishable from ordinary breast tissue.",
-  "additionalDifferentials": [
-   "Fibroadenoma",
-   "Lipoma",
-   "Phyllodes tumour",
-   "Galactocoele",
-   "Pseudoangiomatous stromal hyperplasia",
-   "Well-circumscribed carcinoma",
-   "Fibrocystic change forming a mass"
-  ],
-  "additionalInvestigations": [
-   "Mammography to demonstrate the mixed-density encapsulated lesion",
-   "Breast ultrasound to assess the heterogeneous circumscribed mass",
-   "Core needle biopsy with radiological-pathological correlation",
-   "Breast MRI for large or atypical lesions",
-   "Excisional biopsy when the diagnosis is uncertain",
-   "Assessment for features of Cowden syndrome if multiple lesions",
-   "Interval imaging to confirm stability"
-  ],
-  "redFlags": [
-   "Rapid or asymmetric enlargement of a previously stable mass",
-   "Suspicious microcalcification or an intralesional solid nodule",
-   "Skin tethering, nipple retraction or fixity",
-   "Discordance between benign biopsy and suspicious imaging",
-   "Multiple hamartomas with mucocutaneous stigmata of Cowden syndrome"
-  ],
-  "prognosis": "Breast hamartoma is benign with an excellent prognosis, and simple excision is curative when required. Malignancy arising within a hamartoma is rare and generally reflects an incidental coexisting lesion rather than transformation of the hamartoma itself.",
-  "pitfalls": [
-   "Interpreting deceptively 'normal' core biopsy tissue as a benign result without imaging correlation",
-   "Mistaking a hamartoma for a simple fibroadenoma or lipoma",
-   "Overlooking an incidental carcinoma developing within the lesion",
-   "Failing to recognise the 'breast within a breast' mammographic sign",
-   "Missing the link between multiple hamartomas and Cowden syndrome"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Breast Tumours (current edition)",
-   "Standard textbook of breast imaging on circumscribed masses",
-   "National guidance on assessment of benign breast lesions"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the diagnosis on mammography showing the characteristic encapsulated mixed fat and soft-tissue 'breast within a breast' appearance, with radiological-pathological correlation because core biopsy may appear deceptively normal",
-   "Reassure and observe asymptomatic, radiologically typical lesions",
-   "Offer surgical excision for large, symptomatic, enlarging, or diagnostically uncertain masses, which is curative",
-   "Arrange interval imaging surveillance for conservatively managed lesions",
-   "Assess for Cowden syndrome and consider genetic referral when hamartomas are multiple or syndromic features are present"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "breast_hamartoma-pathway",
-   "title": "Breast hamartoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign, well-circumscribed overgrowth of disorganised but otherwise normal breast tissue, comprising glandular, fibrous and adipose elements.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid or asymmetric enlargement of a previously stable mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Mammography to demonstrate the mixed-density encapsulated lesion, Breast ultrasound to assess the heterogeneous circumscribed mass, Core needle biopsy with radiological-pathological correlation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the diagnosis on mammography showing the characteristic encapsulated mixed fat and soft-tissue 'breast within a breast' appearance, with radiological-pathological correlation because core biopsy may appear"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting deceptively 'normal' core biopsy tissue as a benign result without imaging correlation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of breast hamartoma."
-  }
- ],
- "tables": [
-  {
-   "id": "breast_hamartoma-matrix",
-   "title": "Breast hamartoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign, well-circumscribed overgrowth of disorganised but otherwise normal breast tissue, comprising glandular, fibrous and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Breast",
+  "specialty": "Breast surgery / Radiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Breast Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign, well-circumscribed overgrowth of disorganised but otherwise normal breast tissue, comprising glandular, fibrous and adipose elements.",
+      "Often presents as a soft, mobile, painless mass or as an incidental screening finding, most commonly in women in their fourth to fifth decade.",
+      "The mammographic appearance is characteristic: an encapsulated lesion containing both fat and soft-tissue density, described as a 'breast within a breast'.",
+      "A thin radiolucent capsule separating the lesion from surrounding tissue supports the diagnosis.",
+      "Because it contains all normal breast constituents, core biopsy can appear deceptively 'normal', making radiological correlation essential.",
+      "Proportions of fat, fibrous stroma and glandular tissue vary, giving rise to the synonyms fibroadenolipoma and adenolipoma.",
+      "Treatment is reassurance for typical asymptomatic lesions, with excision reserved for large, symptomatic or diagnostically uncertain masses.",
+      "Multiple hamartomas, particularly with mucocutaneous features, should prompt consideration of Cowden syndrome."
     ],
-    [
-     "Key Investigations",
-     "Mammography to demonstrate the mixed-density encapsulated lesion, Breast ultrasound to assess the heterogeneous circumscribed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A breast hamartoma is a developmental, tumour-like malformation rather than a true neoplasm, arising from the localised disorganised proliferation of the mature tissue elements normally present in the breast. Ducts, lobules, fibrous stroma and mature adipose tissue are haphazardly arranged within a thin pseudocapsule that demarcates the lesion from adjacent parenchyma. Because the constituent tissues are cytologically normal, the hamartoma behaves as a slowly enlarging, well-defined mass. Its recognition rests largely on the interplay of fatty and glandular densities on imaging, since histology of a small sample may be indistinguishable from ordinary breast tissue.",
+    "additionalDifferentials": [
+      "Fibroadenoma",
+      "Lipoma",
+      "Phyllodes tumour",
+      "Galactocoele",
+      "Pseudoangiomatous stromal hyperplasia",
+      "Well-circumscribed carcinoma",
+      "Fibrocystic change forming a mass"
     ],
-    [
-     "Primary Differentials",
-     "Fibroadenoma, Lipoma, Phyllodes tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Mammography to demonstrate the mixed-density encapsulated lesion",
+      "Breast ultrasound to assess the heterogeneous circumscribed mass",
+      "Core needle biopsy with radiological-pathological correlation",
+      "Breast MRI for large or atypical lesions",
+      "Excisional biopsy when the diagnosis is uncertain",
+      "Assessment for features of Cowden syndrome if multiple lesions",
+      "Interval imaging to confirm stability"
     ],
-    [
-     "Management Strategy",
-     "Confirm the diagnosis on mammography showing the characteristic encapsulated mixed fat and soft-tissue 'breast within a breast'",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid or asymmetric enlargement of a previously stable mass",
+      "Suspicious microcalcification or an intralesional solid nodule",
+      "Skin tethering, nipple retraction or fixity",
+      "Discordance between benign biopsy and suspicious imaging",
+      "Multiple hamartomas with mucocutaneous stigmata of Cowden syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting deceptively 'normal' core biopsy tissue as a benign result without imaging correlation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Breast hamartoma is benign with an excellent prognosis, and simple excision is curative when required. Malignancy arising within a hamartoma is rare and generally reflects an incidental coexisting lesion rather than transformation of the hamartoma itself.",
+    "pitfalls": [
+      "Interpreting deceptively 'normal' core biopsy tissue as a benign result without imaging correlation",
+      "Mistaking a hamartoma for a simple fibroadenoma or lipoma",
+      "Overlooking an incidental carcinoma developing within the lesion",
+      "Failing to recognise the 'breast within a breast' mammographic sign",
+      "Missing the link between multiple hamartomas and Cowden syndrome"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Breast Tumours (current edition)",
+      "Standard textbook of breast imaging on circumscribed masses",
+      "National guidance on assessment of benign breast lesions"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the diagnosis on mammography showing the characteristic encapsulated mixed fat and soft-tissue 'breast within a breast' appearance, with radiological-pathological correlation because core biopsy may appear deceptively normal",
+      "Reassure and observe asymptomatic, radiologically typical lesions",
+      "Offer surgical excision for large, symptomatic, enlarging, or diagnostically uncertain masses, which is curative",
+      "Arrange interval imaging surveillance for conservatively managed lesions",
+      "Assess for Cowden syndrome and consider genetic referral when hamartomas are multiple or syndromic features are present"
     ]
-   ],
-   "caption": "Overview comparison matrix for breast hamartoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "breast-hamartoma-real-image",
-   "title": "Breast hamartoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "breast_hamartoma-pathway",
+      "title": "Breast hamartoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign, well-circumscribed overgrowth of disorganised but otherwise normal breast tissue, comprising glandular, fibrous and adipose elements.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid or asymmetric enlargement of a previously stable mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Mammography to demonstrate the mixed-density encapsulated lesion, Breast ultrasound to assess the heterogeneous circumscribed mass, Core needle biopsy with radiological-pathological correlation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the diagnosis on mammography showing the characteristic encapsulated mixed fat and soft-tissue 'breast within a breast' appearance, with radiological-pathological correlation because core biopsy may appear"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting deceptively 'normal' core biopsy tissue as a benign result without imaging correlation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of breast hamartoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "breast_hamartoma-matrix",
+      "title": "Breast hamartoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign, well-circumscribed overgrowth of disorganised but otherwise normal breast tissue, comprising glandular, fibrous and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Mammography to demonstrate the mixed-density encapsulated lesion, Breast ultrasound to assess the heterogeneous circumscribed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fibroadenoma, Lipoma, Phyllodes tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the diagnosis on mammography showing the characteristic encapsulated mixed fat and soft-tissue 'breast within a breast'",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting deceptively 'normal' core biopsy tissue as a benign result without imaging correlation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for breast hamartoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Breast Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "breast_hamartoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in breast hamartoma",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Mammography", "cells": [{"text": "Encapsulated lesion with mixed fat and soft-tissue density; breast within a breast"}], "cite": "c1"},
+        {"parameter": "Breast ultrasound", "cells": [{"text": "Heterogeneous, circumscribed mass"}], "cite": "c1"},
+        {"parameter": "Core needle biopsy", "cells": [{"text": "Normal-appearing tissue; needs radiological-pathological correlation"}], "cite": "c1"},
+        {"parameter": "Breast MRI", "cells": [{"text": "Large or atypical lesions"}], "cite": "c1"},
+        {"parameter": "Excisional biopsy", "cells": [{"text": "Uncertain diagnosis"}], "cite": "c1"},
+        {"parameter": "Assessment for Cowden syndrome features", "cells": [{"text": "Multiple lesions with mucocutaneous stigmata"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "breast_hamartoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike breast masses",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Lipoma", "cells": [{"text": "Fat only; a hamartoma also contains glandular and fibrous elements, seen as mixed density"}], "cite": "c1"},
+        {"parameter": "Well-circumscribed carcinoma", "cells": [{"text": "Suspicious microcalcification or an intralesional solid nodule"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "breast_hamartoma-treatment",
+      "kind": "treatment",
+      "title": "Management options in breast hamartoma",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "Typical asymptomatic lesions"}, {"text": "Conservative"}], "cite": "c1"},
+        {"parameter": "Surgical excision", "cells": [{"text": "Large, symptomatic, enlarging or diagnostically uncertain masses"}, {"text": "Curative"}], "cite": "c1"},
+        {"parameter": "Interval imaging", "cells": [{"text": "Surveillance of conservatively managed lesions"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Cowden syndrome assessment", "cells": [{"text": "Genetic referral when hamartomas are multiple or syndromic features are present"}, {"text": "Multiple lesions"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "breast_hamartoma-dx-mgmt",
+      "title": "Diagnosis and management of breast hamartoma",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Soft, mobile, painless breast mass or incidental screening finding", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: rapid or asymmetric enlargement, suspicious microcalcification, skin tethering, or discordant biopsy?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: image-guided biopsy with radiological-pathological correlation; excision if uncertain", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Mammography for encapsulated mixed fat and soft-tissue lesion; breast ultrasound", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Radiologically typical and asymptomatic?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Reassure and arrange interval imaging", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Core biopsy or excision for uncertain, large or symptomatic lesion", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Assess for Cowden syndrome if multiple lesions; genetic referral", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Benign with excellent prognosis; excision is curative", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

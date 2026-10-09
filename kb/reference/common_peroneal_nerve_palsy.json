@@ -1,174 +1,450 @@
 {
- "id": "common_peroneal_nerve_palsy",
- "name": "common peroneal nerve palsy",
- "aliases": [
-  "common fibular neuropathy",
-  "fibular neck palsy",
-  "peroneal nerve entrapment"
- ],
- "class": "non_infective",
- "system": "Nervous system / Peripheral nervous system",
- "specialty": "Neurology / Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest compressive mononeuropathy of the lower limb, typically injured where the nerve winds superficially around the fibular neck, presenting with foot drop and a high-stepping gait",
-   "Weak ankle dorsiflexion and toe extension (deep peroneal) and weak foot eversion (superficial peroneal) are found, with sensory loss over the dorsum of the foot and the lateral lower leg",
-   "Ankle inversion (tibialis posterior) and plantarflexion are preserved, which distinguishes a peroneal lesion from an L5 radiculopathy or a sciatic or lumbosacral plexus lesion",
-   "Common precipitants include habitual leg crossing, prolonged squatting or kneeling, rapid weight loss ('slimmer's palsy'), tight plaster casts or boots, and malpositioning during anaesthesia or bed rest",
-   "A tibialis anterior that is weaker than tibialis posterior, with a positive Tinel sign at the fibular neck, favours a peroneal lesion over an L5 root lesion",
-   "Structural causes such as an intraneural or extraneural ganglion, a Baker cyst, nerve sheath tumour or trauma should be excluded, particularly when onset is painful or progressive",
-   "Management centres on removing external compression, an ankle-foot orthosis to correct foot drop and prevent contracture, physiotherapy, and surgical decompression or excision when a structural lesion is identified"
+  "id": "common_peroneal_nerve_palsy",
+  "name": "common peroneal nerve palsy",
+  "aliases": [
+    "common fibular neuropathy",
+    "fibular neck palsy",
+    "peroneal nerve entrapment"
   ],
-  "pathophysiology": "The common peroneal (fibular) nerve is the lateral division of the sciatic nerve, carrying predominantly L4-S1 fibres. After separating in the popliteal fossa it curves around the lateral aspect of the fibular neck, where it lies superficially against bone with little protective soft tissue before dividing into the deep peroneal nerve (ankle and toe dorsiflexors, first dorsal web-space sensation) and the superficial peroneal nerve (evertors, dorsal foot sensation). This superficial, tethered course over rigid bone makes it highly vulnerable to external compression, stretch during knee flexion and inversion injury, and to focal masses such as ganglia. Injury produces focal demyelination with conduction block in mild cases and axonal loss in severe or prolonged compression, manifesting as weakness of dorsiflexion, toe extension and eversion with corresponding sensory loss.",
-  "additionalDifferentials": [
-   "L5 radiculopathy",
-   "Sciatic neuropathy (peroneal division preferentially affected)",
-   "Lumbosacral plexopathy",
-   "Motor neurone disease presenting with foot drop",
-   "Distal peripheral polyneuropathy",
-   "Anterior compartment syndrome or tibialis anterior tendon rupture"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies seeking conduction block or slowing across the fibular head",
-   "Needle electromyography comparing peroneal-innervated with tibial-innervated and other L5 muscles to exclude a root lesion",
-   "High-resolution ultrasound of the nerve at the fibular neck to detect a ganglion or focal enlargement",
-   "MRI of the knee and proximal leg when a structural or intraneural cystic lesion is suspected",
-   "Lumbar spine imaging if L5 radiculopathy remains a competing diagnosis",
-   "Screening for diabetes or systemic neuropathy in atypical or bilateral cases"
-  ],
-  "redFlags": [
-   "Painful or rapidly progressive foot drop suggesting a mass, intraneural ganglion or inflammatory neuropathy",
-   "Weakness extending beyond the peroneal distribution (for example weak inversion or plantarflexion) indicating a sciatic, plexus or root lesion",
-   "Bilateral foot drop raising concern for polyneuropathy or motor neurone disease",
-   "Calf swelling, tense compartment or severe disproportionate pain suggesting compartment syndrome"
-  ],
-  "prognosis": "Neuropraxic palsies from transient compression usually recover over weeks to a few months once the precipitant is removed, and an ankle-foot orthosis maintains function in the interim. Lesions with substantial axonal loss or an unresected structural cause recover more slowly and less completely, and may leave a persistent foot drop.",
-  "pitfalls": [
-   "Confusing a peroneal palsy with L5 radiculopathy by failing to test ankle inversion and plantarflexion",
-   "Missing an intraneural ganglion or nerve sheath tumour in painful or recurrent presentations",
-   "Attributing foot drop solely to positioning while overlooking a persisting structural cause",
-   "Not fitting an ankle-foot orthosis early, allowing an equinus contracture to develop",
-   "Overlooking a proximal sciatic lesion in which the peroneal division is selectively vulnerable"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Stewart's Focal Peripheral Neuropathies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relieve the source of compression - avoid habitual leg crossing, pad the fibular neck, and remove tight casts or boots",
-   "Ankle-foot orthosis to correct foot drop and maintain a functional gait during recovery",
-   "Physiotherapy to preserve ankle range of motion and strengthen the dorsiflexors and evertors",
-   "Surgical decompression, excision of a compressing ganglion or nerve repair where a structural or progressive lesion is identified",
-   "Nerve conduction studies and electromyography to localise the lesion, gauge axonal loss and monitor recovery",
-   "Address systemic contributors such as diabetes and counsel patients undergoing rapid weight loss",
-   "Refer to neurology or peripheral-nerve surgery when there is no recovery or significant axonal injury"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "common_peroneal_nerve_palsy-pathway",
-   "title": "common peroneal nerve palsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest compressive mononeuropathy of the lower limb, typically injured where the nerve winds superficially around the fibular neck, presenting with foot drop and a high-stepping gait",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Painful or rapidly progressive foot drop suggesting a mass, intraneural ganglion or inflammatory neuropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies seeking conduction block or slowing across the fibular head, Needle electromyography comparing peroneal-innervated with tibial-innervated and other L5 muscles to exclude a root lesion,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve the source of compression - avoid habitual leg crossing, pad the fibular neck, and remove tight casts or boots"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a peroneal palsy with L5 radiculopathy by failing to test ankle inversion and plantarflexion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of common peroneal nerve palsy."
-  }
- ],
- "tables": [
-  {
-   "id": "common_peroneal_nerve_palsy-matrix",
-   "title": "common peroneal nerve palsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest compressive mononeuropathy of the lower limb, typically injured where the nerve winds superficially around the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Peripheral nervous system",
+  "specialty": "Neurology / Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest compressive mononeuropathy of the lower limb, typically injured where the nerve winds superficially around the fibular neck, presenting with foot drop and a high-stepping gait",
+      "Weak ankle dorsiflexion and toe extension (deep peroneal) and weak foot eversion (superficial peroneal) are found, with sensory loss over the dorsum of the foot and the lateral lower leg",
+      "Ankle inversion (tibialis posterior) and plantarflexion are preserved, which distinguishes a peroneal lesion from an L5 radiculopathy or a sciatic or lumbosacral plexus lesion",
+      "Common precipitants include habitual leg crossing, prolonged squatting or kneeling, rapid weight loss ('slimmer's palsy'), tight plaster casts or boots, and malpositioning during anaesthesia or bed rest",
+      "A tibialis anterior that is weaker than tibialis posterior, with a positive Tinel sign at the fibular neck, favours a peroneal lesion over an L5 root lesion",
+      "Structural causes such as an intraneural or extraneural ganglion, a Baker cyst, nerve sheath tumour or trauma should be excluded, particularly when onset is painful or progressive",
+      "Management centres on removing external compression, an ankle-foot orthosis to correct foot drop and prevent contracture, physiotherapy, and surgical decompression or excision when a structural lesion is identified"
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies seeking conduction block or slowing across the fibular head, Needle electromyography comparing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The common peroneal (fibular) nerve is the lateral division of the sciatic nerve, carrying predominantly L4-S1 fibres. After separating in the popliteal fossa it curves around the lateral aspect of the fibular neck, where it lies superficially against bone with little protective soft tissue before dividing into the deep peroneal nerve (ankle and toe dorsiflexors, first dorsal web-space sensation) and the superficial peroneal nerve (evertors, dorsal foot sensation). This superficial, tethered course over rigid bone makes it highly vulnerable to external compression, stretch during knee flexion and inversion injury, and to focal masses such as ganglia. Injury produces focal demyelination with conduction block in mild cases and axonal loss in severe or prolonged compression, manifesting as weakness of dorsiflexion, toe extension and eversion with corresponding sensory loss.",
+    "additionalDifferentials": [
+      "L5 radiculopathy",
+      "Sciatic neuropathy (peroneal division preferentially affected)",
+      "Lumbosacral plexopathy",
+      "Motor neurone disease presenting with foot drop",
+      "Distal peripheral polyneuropathy",
+      "Anterior compartment syndrome or tibialis anterior tendon rupture"
     ],
-    [
-     "Primary Differentials",
-     "L5 radiculopathy, Sciatic neuropathy (peroneal division preferentially affected), Lumbosacral plexopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies seeking conduction block or slowing across the fibular head",
+      "Needle electromyography comparing peroneal-innervated with tibial-innervated and other L5 muscles to exclude a root lesion",
+      "High-resolution ultrasound of the nerve at the fibular neck to detect a ganglion or focal enlargement",
+      "MRI of the knee and proximal leg when a structural or intraneural cystic lesion is suspected",
+      "Lumbar spine imaging if L5 radiculopathy remains a competing diagnosis",
+      "Screening for diabetes or systemic neuropathy in atypical or bilateral cases"
     ],
-    [
-     "Management Strategy",
-     "Relieve the source of compression - avoid habitual leg crossing, pad the fibular neck, and remove tight casts or boots",
-     "Core treatment modality"
+    "redFlags": [
+      "Painful or rapidly progressive foot drop suggesting a mass, intraneural ganglion or inflammatory neuropathy",
+      "Weakness extending beyond the peroneal distribution (for example weak inversion or plantarflexion) indicating a sciatic, plexus or root lesion",
+      "Bilateral foot drop raising concern for polyneuropathy or motor neurone disease",
+      "Calf swelling, tense compartment or severe disproportionate pain suggesting compartment syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a peroneal palsy with L5 radiculopathy by failing to test ankle inversion and plantarflexion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Neuropraxic palsies from transient compression usually recover over weeks to a few months once the precipitant is removed, and an ankle-foot orthosis maintains function in the interim. Lesions with substantial axonal loss or an unresected structural cause recover more slowly and less completely, and may leave a persistent foot drop.",
+    "pitfalls": [
+      "Confusing a peroneal palsy with L5 radiculopathy by failing to test ankle inversion and plantarflexion",
+      "Missing an intraneural ganglion or nerve sheath tumour in painful or recurrent presentations",
+      "Attributing foot drop solely to positioning while overlooking a persisting structural cause",
+      "Not fitting an ankle-foot orthosis early, allowing an equinus contracture to develop",
+      "Overlooking a proximal sciatic lesion in which the peroneal division is selectively vulnerable"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Stewart's Focal Peripheral Neuropathies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relieve the source of compression - avoid habitual leg crossing, pad the fibular neck, and remove tight casts or boots",
+      "Ankle-foot orthosis to correct foot drop and maintain a functional gait during recovery",
+      "Physiotherapy to preserve ankle range of motion and strengthen the dorsiflexors and evertors",
+      "Surgical decompression, excision of a compressing ganglion or nerve repair where a structural or progressive lesion is identified",
+      "Nerve conduction studies and electromyography to localise the lesion, gauge axonal loss and monitor recovery",
+      "Address systemic contributors such as diabetes and counsel patients undergoing rapid weight loss",
+      "Refer to neurology or peripheral-nerve surgery when there is no recovery or significant axonal injury"
     ]
-   ],
-   "caption": "Overview comparison matrix for common peroneal nerve palsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "common-peroneal-nerve-palsy-real-image",
-   "title": "common peroneal nerve palsy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "common_peroneal_nerve_palsy-pathway",
+      "title": "common peroneal nerve palsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest compressive mononeuropathy of the lower limb, typically injured where the nerve winds superficially around the fibular neck, presenting with foot drop and a high-stepping gait",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Painful or rapidly progressive foot drop suggesting a mass, intraneural ganglion or inflammatory neuropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies seeking conduction block or slowing across the fibular head, Needle electromyography comparing peroneal-innervated with tibial-innervated and other L5 muscles to exclude a root lesion,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve the source of compression - avoid habitual leg crossing, pad the fibular neck, and remove tight casts or boots"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a peroneal palsy with L5 radiculopathy by failing to test ankle inversion and plantarflexion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of common peroneal nerve palsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "common_peroneal_nerve_palsy-matrix",
+      "title": "common peroneal nerve palsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest compressive mononeuropathy of the lower limb, typically injured where the nerve winds superficially around the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies seeking conduction block or slowing across the fibular head, Needle electromyography comparing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "L5 radiculopathy, Sciatic neuropathy (peroneal division preferentially affected), Lumbosacral plexopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve the source of compression - avoid habitual leg crossing, pad the fibular neck, and remove tight casts or boots",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a peroneal palsy with L5 radiculopathy by failing to test ankle inversion and plantarflexion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for common peroneal nerve palsy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "common_peroneal_nerve_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Conduction block or slowing across the fibular head"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Needle EMG of peroneal and other L5 muscles",
+          "cells": [
+            {
+              "text": "Root lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution ultrasound at the fibular neck",
+          "cells": [
+            {
+              "text": "Ganglion or focal nerve enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of knee and proximal leg",
+          "cells": [
+            {
+              "text": "Structural or intraneural cystic lesion, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "common_peroneal_nerve_palsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "L5 radiculopathy",
+          "cells": [
+            {
+              "text": "Weak inversion or plantarflexion points to a broader lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sciatic neuropathy",
+          "cells": [
+            {
+              "text": "Weakness beyond the peroneal distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor neurone disease",
+          "cells": [
+            {
+              "text": "Bilateral foot drop raises concern for MND"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior compartment syndrome",
+          "cells": [
+            {
+              "text": "Calf swelling, tense compartment or disproportionate pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "common_peroneal_nerve_palsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relieve compression",
+          "cells": [
+            {
+              "text": "Avoid habitual leg crossing; pad the fibular neck; remove tight casts or boots"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthosis",
+          "cells": [
+            {
+              "text": "Corrects foot drop and maintains a functional gait during recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Preserve ankle range; strengthen dorsiflexors and evertors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Excision of a compressing ganglion or nerve repair for a structural or progressive lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrodiagnostic monitoring",
+          "cells": [
+            {
+              "text": "Localise the lesion, gauge axonal loss and monitor recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic contributors",
+          "cells": [
+            {
+              "text": "Address diabetes; counsel patients undergoing rapid weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Neurology or peripheral-nerve surgery if no recovery or significant axonal injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "common_peroneal_nerve_palsy-dx-mgmt",
+      "title": "Diagnosis and management of common peroneal nerve palsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected common peroneal nerve palsy: foot drop after fibular head compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (painful progressive drop, wider weakness, bilateral drop)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging and surgical or neurology review for a mass or compartment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies; L5 EMG comparison; fibular neck ultrasound; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does conduction study localise a lesion to the fibular head?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider L5 radiculopathy, motor neurone disease or distal polyneuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relieve compression: avoid leg crossing, pad the fibular neck",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthosis and physiotherapy during recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical decompression for structural or progressive lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Neuropraxic palsies usually recover over weeks to months once the precipitant is removed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

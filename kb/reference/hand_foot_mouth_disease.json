@@ -1,176 +1,601 @@
 {
- "id": "hand_foot_mouth_disease",
- "name": "Hand, foot and mouth disease",
- "aliases": [
-  "HFMD",
-  "coxsackievirus exanthem",
-  "enteroviral vesicular stomatitis"
- ],
- "class": "infective",
- "system": "Infectious / Tropical",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common, usually self-limiting enteroviral illness of young children caused most often by Coxsackievirus A16 and Enterovirus 71",
-   "Characterised by fever with painful oral vesicles/ulcers and a vesicular rash on the hands, feet and often the buttocks",
-   "Spreads readily by faecal-oral and respiratory routes and by contact with vesicle fluid, causing outbreaks in creches and schools",
-   "Enterovirus 71 in particular can cause severe neurological complications such as brainstem encephalitis, aseptic meningitis and acute flaccid paralysis",
-   "Management is supportive, focused on hydration and pain relief for painful oral lesions; antibiotics have no role",
-   "Poor oral intake from painful mouth ulcers is the commonest reason for medical attention and can lead to dehydration in small children",
-   "Diagnosis is usually clinical, with PCR or viral culture reserved for severe or atypical cases",
-   "Good hand hygiene and exclusion of unwell children help limit institutional spread"
+  "id": "hand_foot_mouth_disease",
+  "name": "Hand, foot and mouth disease",
+  "aliases": [
+    "HFMD",
+    "coxsackievirus exanthem",
+    "enteroviral vesicular stomatitis"
   ],
-  "pathophysiology": "Non-polio enteroviruses (notably Coxsackievirus A16 and Enterovirus 71) enter via the gastrointestinal or respiratory tract, replicate in lymphoid tissue of the pharynx and gut, and produce a viraemia that seeds the skin and oral mucosa, giving the characteristic vesicular enanthem and exanthem. Enterovirus 71 has neurotropic potential and can invade the central nervous system, particularly the brainstem, producing the severe neurological syndromes and, rarely, neurogenic pulmonary oedema and cardiorespiratory collapse.",
-  "additionalDifferentials": [
-   "Herpetic gingivostomatitis",
-   "Herpangina",
-   "Varicella (chickenpox)",
-   "Aphthous stomatitis",
-   "Erythema multiforme",
-   "Contact or vesicular dermatitis"
-  ],
-  "infectionMimics": [
-   "Stevens-Johnson syndrome / drug eruption",
-   "Kawasaki disease in a febrile child with mucocutaneous findings",
-   "Immunobullous disorders"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis in typical cases without laboratory testing",
-   "Enterovirus PCR from throat, vesicle or stool samples in severe or atypical disease",
-   "CSF examination if meningitis or encephalitis is suspected",
-   "Assessment of hydration status, especially in young children"
-  ],
-  "redFlags": [
-   "Lethargy, persistent vomiting, ataxia or myoclonic jerks suggesting Enterovirus 71 neurological involvement",
-   "Signs of severe dehydration from inability to drink",
-   "Respiratory distress or circulatory collapse indicating brainstem/cardiopulmonary complications",
-   "Seizures or rapidly declining consciousness"
-  ],
-  "prognosis": "The overwhelming majority of cases resolve within a week to ten days without sequelae. A small subset, particularly Enterovirus 71 infections in young children, develop serious neurological or cardiopulmonary complications that can be fatal or leave lasting deficits.",
-  "pitfalls": [
-   "Prescribing antibiotics for what is a self-limiting viral illness",
-   "Underestimating dehydration risk from painful oral ulcers in toddlers",
-   "Missing early neurological warning signs of Enterovirus 71 disease",
-   "Confusing severe or atypical rashes with drug reactions or varicella"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive care as the mainstay, with adequate hydration and simple analgesia and antipyretics for fever and painful oral lesions",
-   "Topical oral analgesic or barrier preparations to ease mouth ulcers and maintain oral intake",
-   "Avoid antibiotics, which have no role, and reserve antivirals for severe enteroviral complications",
-   "Infection control with hand hygiene, avoidance of contact with vesicle fluid and exclusion from childcare during the infectious period",
-   "Monitor hydration status closely in young children, with a low threshold for rehydration when oral intake is poor",
-   "Recognise and urgently escalate Enterovirus 71 neurological complications such as brainstem encephalitis, aseptic meningitis and acute flaccid paralysis, and cardiopulmonary deterioration, to hospital or intensive care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hand_foot_mouth_disease-pathway",
-   "title": "Hand, foot and mouth disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common, usually self-limiting enteroviral illness of young children caused most often by Coxsackievirus A16 and Enterovirus 71",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Lethargy, persistent vomiting, ataxia or myoclonic jerks suggesting Enterovirus 71 neurological involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis in typical cases without laboratory testing, Enterovirus PCR from throat, vesicle or stool samples in severe or atypical disease, CSF examination if meningitis or encephalitis is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care as the mainstay, with adequate hydration and simple analgesia and antipyretics for fever and painful oral lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing antibiotics for what is a self-limiting viral illness"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hand, foot and mouth disease."
-  }
- ],
- "tables": [
-  {
-   "id": "hand_foot_mouth_disease-matrix",
-   "title": "Hand, foot and mouth disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common, usually self-limiting enteroviral illness of young children caused most often by Coxsackievirus A16 and Enterovirus 71",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious / Tropical",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common, usually self-limiting enteroviral illness of young children caused most often by Coxsackievirus A16 and Enterovirus 71",
+      "Characterised by fever with painful oral vesicles/ulcers and a vesicular rash on the hands, feet and often the buttocks",
+      "Spreads readily by faecal-oral and respiratory routes and by contact with vesicle fluid, causing outbreaks in creches and schools",
+      "Enterovirus 71 in particular can cause severe neurological complications such as brainstem encephalitis, aseptic meningitis and acute flaccid paralysis",
+      "Management is supportive, focused on hydration and pain relief for painful oral lesions; antibiotics have no role",
+      "Poor oral intake from painful mouth ulcers is the commonest reason for medical attention and can lead to dehydration in small children",
+      "Diagnosis is usually clinical, with PCR or viral culture reserved for severe or atypical cases",
+      "Good hand hygiene and exclusion of unwell children help limit institutional spread"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis in typical cases without laboratory testing, Enterovirus PCR from throat, vesicle or stool samples in severe",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Non-polio enteroviruses (notably Coxsackievirus A16 and Enterovirus 71) enter via the gastrointestinal or respiratory tract, replicate in lymphoid tissue of the pharynx and gut, and produce a viraemia that seeds the skin and oral mucosa, giving the characteristic vesicular enanthem and exanthem. Enterovirus 71 has neurotropic potential and can invade the central nervous system, particularly the brainstem, producing the severe neurological syndromes and, rarely, neurogenic pulmonary oedema and cardiorespiratory collapse.",
+    "additionalDifferentials": [
+      "Herpetic gingivostomatitis",
+      "Herpangina",
+      "Varicella (chickenpox)",
+      "Aphthous stomatitis",
+      "Erythema multiforme",
+      "Contact or vesicular dermatitis"
     ],
-    [
-     "Primary Differentials",
-     "Herpetic gingivostomatitis, Herpangina, Varicella (chickenpox)",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Stevens-Johnson syndrome / drug eruption",
+      "Kawasaki disease in a febrile child with mucocutaneous findings",
+      "Immunobullous disorders"
     ],
-    [
-     "Management Strategy",
-     "Supportive care as the mainstay, with adequate hydration and simple analgesia and antipyretics for fever and painful oral lesions",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Clinical diagnosis in typical cases without laboratory testing",
+      "Enterovirus PCR from throat, vesicle or stool samples in severe or atypical disease",
+      "CSF examination if meningitis or encephalitis is suspected",
+      "Assessment of hydration status, especially in young children"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing antibiotics for what is a self-limiting viral illness",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Lethargy, persistent vomiting, ataxia or myoclonic jerks suggesting Enterovirus 71 neurological involvement",
+      "Signs of severe dehydration from inability to drink",
+      "Respiratory distress or circulatory collapse indicating brainstem/cardiopulmonary complications",
+      "Seizures or rapidly declining consciousness"
+    ],
+    "prognosis": "The overwhelming majority of cases resolve within a week to ten days without sequelae. A small subset, particularly Enterovirus 71 infections in young children, develop serious neurological or cardiopulmonary complications that can be fatal or leave lasting deficits.",
+    "pitfalls": [
+      "Prescribing antibiotics for what is a self-limiting viral illness",
+      "Underestimating dehydration risk from painful oral ulcers in toddlers",
+      "Missing early neurological warning signs of Enterovirus 71 disease",
+      "Confusing severe or atypical rashes with drug reactions or varicella"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive care as the mainstay, with adequate hydration and simple analgesia and antipyretics for fever and painful oral lesions",
+      "Topical oral analgesic or barrier preparations to ease mouth ulcers and maintain oral intake",
+      "Avoid antibiotics, which have no role, and reserve antivirals for severe enteroviral complications",
+      "Infection control with hand hygiene, avoidance of contact with vesicle fluid and exclusion from childcare during the infectious period",
+      "Monitor hydration status closely in young children, with a low threshold for rehydration when oral intake is poor",
+      "Recognise and urgently escalate Enterovirus 71 neurological complications such as brainstem encephalitis, aseptic meningitis and acute flaccid paralysis, and cardiopulmonary deterioration, to hospital or intensive care"
     ]
-   ],
-   "caption": "Overview comparison matrix for hand, foot and mouth disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hand-foot-mouth-disease-real-image",
-   "title": "Hand, foot and mouth disease: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "hand_foot_mouth_disease-pathway",
+      "title": "Hand, foot and mouth disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common, usually self-limiting enteroviral illness of young children caused most often by Coxsackievirus A16 and Enterovirus 71",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Lethargy, persistent vomiting, ataxia or myoclonic jerks suggesting Enterovirus 71 neurological involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis in typical cases without laboratory testing, Enterovirus PCR from throat, vesicle or stool samples in severe or atypical disease, CSF examination if meningitis or encephalitis is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care as the mainstay, with adequate hydration and simple analgesia and antipyretics for fever and painful oral lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing antibiotics for what is a self-limiting viral illness"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hand, foot and mouth disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hand_foot_mouth_disease-matrix",
+      "title": "Hand, foot and mouth disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common, usually self-limiting enteroviral illness of young children caused most often by Coxsackievirus A16 and Enterovirus 71",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis in typical cases without laboratory testing, Enterovirus PCR from throat, vesicle or stool samples in severe",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpetic gingivostomatitis, Herpangina, Varicella (chickenpox)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care as the mainstay, with adequate hydration and simple analgesia and antipyretics for fever and painful oral lesions",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing antibiotics for what is a self-limiting viral illness",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hand, foot and mouth disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 191-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hand_foot_mouth_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Typical presentation: fever, painful oral lesions and a vesicular rash on the hands and feet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enterovirus PCR from throat, vesicle or stool",
+          "cells": [
+            {
+              "text": "Used in severe or atypical disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF examination",
+          "cells": [
+            {
+              "text": "Used if meningitis or encephalitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration status",
+          "cells": [
+            {
+              "text": "Assessed, especially in young children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_foot_mouth_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kawasaki disease",
+          "cells": [
+            {
+              "text": "Febrile child with mucocutaneous findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stevens-Johnson syndrome or drug eruption",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpetic gingivostomatitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpangina",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_foot_mouth_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Hydration, simple analgesia and antipyretics for fever and painful oral lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical oral analgesic or barrier preparations",
+          "cells": [
+            {
+              "text": "Ease mouth ulcers and maintain oral intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antibiotics",
+          "cells": [
+            {
+              "text": "No role in this illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antivirals",
+          "cells": [
+            {
+              "text": "Reserved for severe enteroviral complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Hand hygiene, avoiding contact with vesicle fluid, and exclusion from childcare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor hydration",
+          "cells": [
+            {
+              "text": "Low threshold for rehydration when oral intake is poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalate neurological complications",
+          "cells": [
+            {
+              "text": "Enterovirus 71 brainstem encephalitis or aseptic meningitis, urgently"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hand_foot_mouth_disease-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Manifestations commonly associated with enterovirus serotypes",
+      "rowHeader": "Manifestation",
+      "columns": [
+        "Coxsackievirus",
+        "Echovirus (E) and enterovirus (Ent)"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute hemorrhagic conjunctivitis",
+          "cells": [
+            {
+              "text": "A24"
+            },
+            {
+              "text": "E70"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aseptic meningitis",
+          "cells": [
+            {
+              "text": "A2, 4, 7, 9, 10; B1 to 5"
+            },
+            {
+              "text": "E4, 6, 7, 9, 11, 13, 16, 18, 19, 30, 33; Ent70, 71"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Encephalitis",
+          "cells": [
+            {
+              "text": "A9; B1 to 5"
+            },
+            {
+              "text": "E3, 4, 6, 7, 9, 11, 18, 25, 30; Ent71"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exanthem",
+          "cells": [
+            {
+              "text": "A4, 5, 9, 10, 16; B1, 3 to 5"
+            },
+            {
+              "text": "E4 to 7, 9, 11, 16 to 19, 25, 30; Ent71"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Generalized disease of the newborn",
+          "cells": [
+            {
+              "text": "B1 to 5"
+            },
+            {
+              "text": "E4 to 6, 7, 9, 11, 14, 16, 18, 19"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hand-foot-and-mouth disease",
+          "cells": [
+            {
+              "text": "A5, 7, 9, 10, 16; B1, 2, 5"
+            },
+            {
+              "text": "Ent71"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Herpangina",
+          "cells": [
+            {
+              "text": "A1 to 10, 16, 22; B1 to 5"
+            },
+            {
+              "text": "E6, 9, 11, 16, 17, 25, 30; Ent71"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myocarditis, pericarditis",
+          "cells": [
+            {
+              "text": "A4, 9, 16; B1 to 5"
+            },
+            {
+              "text": "E6, 9, 11, 22"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paralysis",
+          "cells": [
+            {
+              "text": "A4, 7, 9; B1 to 5"
+            },
+            {
+              "text": "E2 to 4, 6, 7, 9, 11, 18, 30; Ent70, 71"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pleurodynia",
+          "cells": [
+            {
+              "text": "A1, 2, 4, 6, 9, 10, 16; B1 to 6"
+            },
+            {
+              "text": "E1 to 3, 6, 7, 9, 11, 12, 14, 16, 19, 24, 25, 30"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "A9, 16; B1 to 5"
+            },
+            {
+              "text": "E6, 7, 9, 11, 12, 19, 20, 30; Ent68, 71"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hand_foot_mouth_disease-dx-mgmt",
+      "title": "Diagnosis and management of Hand, foot and mouth disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with painful oral vesicles and a vesicular rash on hands and feet",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (lethargy, ataxia, myoclonus, seizures, respiratory distress)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate urgently for Enterovirus 71 neurological or cardiopulmonary complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; enterovirus PCR if severe or atypical; CSF if meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the illness typical, with adequate oral intake and no dehydration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Assess hydration, consider CSF and PCR, rehydrate; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care: hydration, analgesia and antipyretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical oral analgesic or barrier preparations for mouth ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid antibiotics; hand hygiene and exclusion from childcare",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Usually self-limiting; recovery with supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

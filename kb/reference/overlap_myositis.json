@@ -1,178 +1,653 @@
 {
- "id": "overlap_myositis",
- "name": "overlap myositis",
- "aliases": [
-  "overlap syndrome myositis",
-  "connective-tissue-disease-associated myositis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Inflammatory myopathy arising alongside another defined connective tissue disease, or defined by an overlap-associated autoantibody, rather than as isolated myositis.",
-   "The antisynthetase syndrome is a key subset, marked by anti-Jo-1 or other anti-tRNA-synthetase antibodies (anti-PL-7, anti-PL-12, anti-EJ, anti-OJ, anti-KS).",
-   "Its clinical cluster comprises myositis, interstitial lung disease, non-erosive arthritis, Raynaud phenomenon, mechanic's hands and fever, though not all features are present together.",
-   "Anti-PM/Scl antibodies define a scleroderma-myositis overlap with sclerodactyly, Raynaud and calcinosis, and generally carry a favourable, steroid-responsive course.",
-   "Anti-U1-RNP points to mixed connective tissue disease, while anti-Ku indicates another overlap phenotype.",
-   "Muscle weakness is often milder than in classic polymyositis or dermatomyositis, and creatine kinase may be only modestly raised.",
-   "Interstitial lung disease is the principal driver of morbidity and mortality and can be the presenting or dominant feature.",
-   "There is a female predominance and a chronic relapsing course requiring long-term immunosuppression."
+  "id": "overlap_myositis",
+  "name": "overlap myositis",
+  "aliases": [
+    "overlap syndrome myositis",
+    "connective-tissue-disease-associated myositis"
   ],
-  "pathophysiology": "Overlap myositis is an autoimmune inflammatory myopathy that occurs within the immune dysregulation of a broader connective tissue disease and is closely linked to specific autoantibodies. In the antisynthetase syndrome, antibodies target aminoacyl-tRNA synthetases, and it is proposed that these enzymes, upregulated and exposed in regenerating muscle and injured lung epithelium, act as autoantigens that sustain a self-amplifying response involving both antibody and T-cell mechanisms. Anti-PM/Scl and anti-U1-RNP overlaps share features of scleroderma and lupus-spectrum disease, with vasculopathy, complement activation and cytokine-driven fibrosis contributing to the muscle, skin and lung manifestations.",
-  "additionalDifferentials": [
-   "Isolated polymyositis or dermatomyositis",
-   "Immune-mediated necrotising myopathy",
-   "Inclusion body myositis",
-   "Systemic sclerosis with primary myopathy",
-   "Systemic lupus erythematosus myositis",
-   "Drug-induced or hypothyroid myopathy",
-   "Fibromyalgia and steroid myopathy"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase and muscle enzymes",
-   "Extended myositis and overlap antibody panel (anti-Jo-1 and other synthetases, anti-PM/Scl, anti-U1-RNP, anti-Ku)",
-   "Antinuclear and extractable-nuclear-antigen antibodies",
-   "High-resolution CT of the chest and pulmonary function tests with gas transfer",
-   "Nailfold capillaroscopy",
-   "Electromyography and muscle MRI or biopsy",
-   "Echocardiography to assess for pulmonary hypertension"
-  ],
-  "redFlags": [
-   "Progressive breathlessness or rapidly progressive interstitial lung disease",
-   "Pulmonary hypertension",
-   "Dysphagia with aspiration risk",
-   "Features suggesting an underlying malignancy",
-   "New cardiac symptoms"
-  ],
-  "prognosis": "Outcome is variable and largely determined by the presence and severity of interstitial lung disease; anti-PM/Scl overlap is relatively favourable, whereas some antisynthetase phenotypes carry a poorer prognosis. The disease typically follows a chronic relapsing course needing sustained immunosuppression.",
-  "pitfalls": [
-   "Overlooking interstitial lung disease, which may dominate the presentation while muscle symptoms are mild.",
-   "Attributing arthritis solely to rheumatoid disease and missing the overlap.",
-   "Missing overlap antibodies when only a limited myositis panel is requested.",
-   "Underestimating disease when creatine kinase is normal or only mildly elevated.",
-   "Failing to reassess for pulmonary hypertension over time."
-  ],
-  "references": [
-   "EULAR/ACR classification criteria for idiopathic inflammatory myopathies",
-   "European Neuromuscular Centre (ENMC) workshop reports on antisynthetase and overlap myositis",
-   "Firestein & Kelley's Textbook of Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce disease control with corticosteroids as first-line immunosuppression for the inflammatory myopathy",
-   "Add a steroid-sparing immunosuppressant such as methotrexate, azathioprine or mycophenolate mofetil for maintenance and to limit steroid toxicity",
-   "Treat significant interstitial lung disease more aggressively with agents such as mycophenolate, cyclophosphamide or rituximab, since lung involvement drives prognosis",
-   "Use intravenous immunoglobulin for refractory or severe myositis",
-   "Manage Raynaud phenomenon with cold avoidance and a calcium-channel blocker, and provide physiotherapy and skin care for mechanic's hands and arthritis",
-   "Monitor creatine kinase, pulmonary function with gas transfer, and high-resolution CT to track myositis and lung-disease activity",
-   "Coordinate rheumatology, respiratory and physiotherapy input, escalating for rapidly progressive interstitial lung disease or respiratory compromise"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "overlap_myositis-pathway",
-   "title": "overlap myositis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Inflammatory myopathy arising alongside another defined connective tissue disease, or defined by an overlap-associated autoantibody, rather than as isolated myositis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive breathlessness or rapidly progressive interstitial lung disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase and muscle enzymes, Extended myositis and overlap antibody panel (anti-Jo-1 and other synthetases, anti-PM/Scl, anti-U1-RNP, anti-Ku), Antinuclear and extractable-nuclear-antigen antibodies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce disease control with corticosteroids as first-line immunosuppression for the inflammatory myopathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking interstitial lung disease, which may dominate the presentation while muscle symptoms are mild."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of overlap myositis."
-  }
- ],
- "tables": [
-  {
-   "id": "overlap_myositis-matrix",
-   "title": "overlap myositis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Inflammatory myopathy arising alongside another defined connective tissue disease, or defined by an overlap-associated",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Inflammatory myopathy arising alongside another defined connective tissue disease, or defined by an overlap-associated autoantibody, rather than as isolated myositis.",
+      "The antisynthetase syndrome is a key subset, marked by anti-Jo-1 or other anti-tRNA-synthetase antibodies (anti-PL-7, anti-PL-12, anti-EJ, anti-OJ, anti-KS).",
+      "Its clinical cluster comprises myositis, interstitial lung disease, non-erosive arthritis, Raynaud phenomenon, mechanic's hands and fever, though not all features are present together.",
+      "Anti-PM/Scl antibodies define a scleroderma-myositis overlap with sclerodactyly, Raynaud and calcinosis, and generally carry a favourable, steroid-responsive course.",
+      "Anti-U1-RNP points to mixed connective tissue disease, while anti-Ku indicates another overlap phenotype.",
+      "Muscle weakness is often milder than in classic polymyositis or dermatomyositis, and creatine kinase may be only modestly raised.",
+      "Interstitial lung disease is the principal driver of morbidity and mortality and can be the presenting or dominant feature.",
+      "There is a female predominance and a chronic relapsing course requiring long-term immunosuppression."
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase and muscle enzymes, Extended myositis and overlap antibody panel (anti-Jo-1 and other synthetases,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Overlap myositis is an autoimmune inflammatory myopathy that occurs within the immune dysregulation of a broader connective tissue disease and is closely linked to specific autoantibodies. In the antisynthetase syndrome, antibodies target aminoacyl-tRNA synthetases, and it is proposed that these enzymes, upregulated and exposed in regenerating muscle and injured lung epithelium, act as autoantigens that sustain a self-amplifying response involving both antibody and T-cell mechanisms. Anti-PM/Scl and anti-U1-RNP overlaps share features of scleroderma and lupus-spectrum disease, with vasculopathy, complement activation and cytokine-driven fibrosis contributing to the muscle, skin and lung manifestations.",
+    "additionalDifferentials": [
+      "Isolated polymyositis or dermatomyositis",
+      "Immune-mediated necrotising myopathy",
+      "Inclusion body myositis",
+      "Systemic sclerosis with primary myopathy",
+      "Systemic lupus erythematosus myositis",
+      "Drug-induced or hypothyroid myopathy",
+      "Fibromyalgia and steroid myopathy"
     ],
-    [
-     "Primary Differentials",
-     "Isolated polymyositis or dermatomyositis, Immune-mediated necrotising myopathy, Inclusion body myositis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase and muscle enzymes",
+      "Extended myositis and overlap antibody panel (anti-Jo-1 and other synthetases, anti-PM/Scl, anti-U1-RNP, anti-Ku)",
+      "Antinuclear and extractable-nuclear-antigen antibodies",
+      "High-resolution CT of the chest and pulmonary function tests with gas transfer",
+      "Nailfold capillaroscopy",
+      "Electromyography and muscle MRI or biopsy",
+      "Echocardiography to assess for pulmonary hypertension"
     ],
-    [
-     "Management Strategy",
-     "Induce disease control with corticosteroids as first-line immunosuppression for the inflammatory myopathy",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive breathlessness or rapidly progressive interstitial lung disease",
+      "Pulmonary hypertension",
+      "Dysphagia with aspiration risk",
+      "Features suggesting an underlying malignancy",
+      "New cardiac symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking interstitial lung disease, which may dominate the presentation while muscle symptoms are mild.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable and largely determined by the presence and severity of interstitial lung disease; anti-PM/Scl overlap is relatively favourable, whereas some antisynthetase phenotypes carry a poorer prognosis. The disease typically follows a chronic relapsing course needing sustained immunosuppression.",
+    "pitfalls": [
+      "Overlooking interstitial lung disease, which may dominate the presentation while muscle symptoms are mild.",
+      "Attributing arthritis solely to rheumatoid disease and missing the overlap.",
+      "Missing overlap antibodies when only a limited myositis panel is requested.",
+      "Underestimating disease when creatine kinase is normal or only mildly elevated.",
+      "Failing to reassess for pulmonary hypertension over time."
+    ],
+    "references": [
+      "EULAR/ACR classification criteria for idiopathic inflammatory myopathies",
+      "European Neuromuscular Centre (ENMC) workshop reports on antisynthetase and overlap myositis",
+      "Firestein & Kelley's Textbook of Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce disease control with corticosteroids as first-line immunosuppression for the inflammatory myopathy",
+      "Add a steroid-sparing immunosuppressant such as methotrexate, azathioprine or mycophenolate mofetil for maintenance and to limit steroid toxicity",
+      "Treat significant interstitial lung disease more aggressively with agents such as mycophenolate, cyclophosphamide or rituximab, since lung involvement drives prognosis",
+      "Use intravenous immunoglobulin for refractory or severe myositis",
+      "Manage Raynaud phenomenon with cold avoidance and a calcium-channel blocker, and provide physiotherapy and skin care for mechanic's hands and arthritis",
+      "Monitor creatine kinase, pulmonary function with gas transfer, and high-resolution CT to track myositis and lung-disease activity",
+      "Coordinate rheumatology, respiratory and physiotherapy input, escalating for rapidly progressive interstitial lung disease or respiratory compromise"
     ]
-   ],
-   "caption": "Overview comparison matrix for overlap myositis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "overlap-myositis-real-image",
-   "title": "overlap myositis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "overlap_myositis-pathway",
+      "title": "overlap myositis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Inflammatory myopathy arising alongside another defined connective tissue disease, or defined by an overlap-associated autoantibody, rather than as isolated myositis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive breathlessness or rapidly progressive interstitial lung disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase and muscle enzymes, Extended myositis and overlap antibody panel (anti-Jo-1 and other synthetases, anti-PM/Scl, anti-U1-RNP, anti-Ku), Antinuclear and extractable-nuclear-antigen antibodies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce disease control with corticosteroids as first-line immunosuppression for the inflammatory myopathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking interstitial lung disease, which may dominate the presentation while muscle symptoms are mild."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of overlap myositis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "overlap_myositis-matrix",
+      "title": "overlap myositis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Inflammatory myopathy arising alongside another defined connective tissue disease, or defined by an overlap-associated",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase and muscle enzymes, Extended myositis and overlap antibody panel (anti-Jo-1 and other synthetases,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated polymyositis or dermatomyositis, Immune-mediated necrotising myopathy, Inclusion body myositis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce disease control with corticosteroids as first-line immunosuppression for the inflammatory myopathy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking interstitial lung disease, which may dominate the presentation while muscle symptoms are mild.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for overlap myositis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "overlap_myositis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase and muscle enzymes",
+          "cells": [
+            {
+              "text": "Muscle injury and inflammatory activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended myositis and overlap antibody panel",
+          "cells": [
+            {
+              "text": "Antisynthetase, anti-PM/Scl, anti-U1-RNP and anti-Ku antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear and extractable nuclear antigen antibodies",
+          "cells": [
+            {
+              "text": "Overlap-associated autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT and pulmonary function with gas transfer",
+          "cells": [
+            {
+              "text": "Interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nailfold capillaroscopy",
+          "cells": [
+            {
+              "text": "Capillary changes in connective tissue overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography and muscle MRI or biopsy",
+          "cells": [
+            {
+              "text": "Myopathic pattern and inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_myositis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated polymyositis or dermatomyositis",
+          "cells": [
+            {
+              "text": "Lacks overlap-associated antibodies and connective tissue features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "A distinct myopathy without overlap antibodies or connective tissue features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic sclerosis with primary myopathy",
+          "cells": [
+            {
+              "text": "Scleroderma features with myopathy; anti-PM/Scl overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_myositis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "First-line immunosuppression for the inflammatory myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing maintenance",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Methotrexate, azathioprine or mycophenolate mofetil to limit steroid toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Significant interstitial lung disease",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Mycophenolate, cyclophosphamide or rituximab, since lung involvement drives prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or severe myositis",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Intravenous immunoglobulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raynaud and skin care",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Cold avoidance and a calcium-channel blocker; physiotherapy and skin care for mechanic's hands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Creatine kinase, pulmonary function with gas transfer and high-resolution CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "overlap_myositis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "ANA patterns, target antigens and clinical correlates",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antigen identified",
+        "Clinical correlate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse",
+          "cells": [
+            {
+              "text": "Deoxyribonucleoprotein, histones"
+            },
+            {
+              "text": "Nonspecific; drug-induced lupus, lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral (rim)",
+          "cells": [
+            {
+              "text": "ds-DNA"
+            },
+            {
+              "text": "50% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: U1-RNP",
+          "cells": [
+            {
+              "text": "U1-RNP"
+            },
+            {
+              "text": "Up to 90% of MCTD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Sm",
+          "cells": [
+            {
+              "text": "Sm"
+            },
+            {
+              "text": "30% of SLE (specific)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Ro (SS-A)",
+          "cells": [
+            {
+              "text": "Ro (SS-A)"
+            },
+            {
+              "text": "Sjogren's 60%, subacute cutaneous lupus, neonatal lupus, ANA-negative lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: La (SS-B)",
+          "cells": [
+            {
+              "text": "La (SS-B)"
+            },
+            {
+              "text": "50% of Sjogren's, 15% of lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Scl-70",
+          "cells": [
+            {
+              "text": "Scl-70"
+            },
+            {
+              "text": "40% of diffuse scleroderma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: PM-1",
+          "cells": [
+            {
+              "text": "PM-1"
+            },
+            {
+              "text": "Polymyositis, dermatomyositis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled: Jo-1",
+          "cells": [
+            {
+              "text": "Jo-1"
+            },
+            {
+              "text": "Polymyositis with pneumonitis and arthritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nucleolar",
+          "cells": [
+            {
+              "text": "RNA polymerase I, others"
+            },
+            {
+              "text": "40% of progressive systemic sclerosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Centromere",
+          "cells": [
+            {
+              "text": "Kinetochore"
+            },
+            {
+              "text": "75% of CREST (limited scleroderma)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "overlap_myositis-dx-mgmt",
+      "title": "Diagnosis and management of overlap myositis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Myositis with breathlessness, arthritis or Raynaud phenomenon and overlap features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive lung disease, pulmonary hypertension or dysphagia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent pulmonary and immunosuppression review for rapidly progressive ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK, extended myositis antibodies, HRCT, gas transfer, echo, EMG or muscle MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do overlap antibodies and CK support overlap myositis, with ILD assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated myositis, inclusion body myositis or systemic sclerosis myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids as first-line immunosuppression for the inflammatory myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate, azathioprine or mycophenolate as steroid-sparing maintenance",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mycophenolate, cyclophosphamide or rituximab for significant interstitial lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous immunoglobulin for refractory or severe myositis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Raynaud measures with a calcium-channel blocker; skin care for mechanic's hands",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Variable and driven by lung involvement; chronic and relapsing, needs sustained treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

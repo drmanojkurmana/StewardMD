@@ -1,175 +1,462 @@
 {
- "id": "gray_baby_syndrome",
- "name": "Gray baby syndrome (chloramphenicol)",
- "aliases": [
-  "grey baby syndrome",
-  "chloramphenicol toxicity in neonates",
-  "chloramphenicol grey syndrome",
-  "neonatal chloramphenicol toxicity"
- ],
- "class": "non_infective",
- "system": "Clinical pharmacology / Toxicology",
- "specialty": "Clinical Pharmacology",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A potentially fatal toxic reaction to chloramphenicol occurring predominantly in neonates, especially preterm infants",
-   "Features develop over hours to days and include vomiting, poor feeding, abdominal distension, hypothermia and a characteristic ashen-grey skin colour",
-   "Progresses to hypotension, cyanosis, cardiovascular collapse and metabolic acidosis",
-   "The syndrome results from accumulation of chloramphenicol due to immature hepatic glucuronidation and reduced renal excretion in the newborn",
-   "Prevention relies on avoiding chloramphenicol where possible in neonates and, when unavoidable, using reduced dosing with drug-level monitoring",
-   "Management is immediate cessation of the drug and aggressive supportive care of the circulation and acidosis",
-   "Extracorporeal removal (for example haemoperfusion or exchange transfusion) may be considered in severe accumulation",
-   "Older children and adults can also develop toxicity if hepatic metabolism is overwhelmed by excessive dosing"
+  "id": "gray_baby_syndrome",
+  "name": "Gray baby syndrome (chloramphenicol)",
+  "aliases": [
+    "grey baby syndrome",
+    "chloramphenicol toxicity in neonates",
+    "chloramphenicol grey syndrome",
+    "neonatal chloramphenicol toxicity"
   ],
-  "pathophysiology": "Chloramphenicol is normally inactivated by hepatic conjugation with glucuronic acid and the conjugate is excreted renally. Neonates, particularly premature infants, have immature UDP-glucuronosyltransferase activity and reduced glomerular filtration, so unconjugated drug accumulates to toxic concentrations. High levels impair mitochondrial oxidative phosphorylation and electron transport, reducing cellular energy production, especially in the myocardium and vasculature. The result is myocardial depression, loss of vascular tone, hypotension, tissue hypoxia and lactic (metabolic) acidosis, producing the grey, cyanotic, hypotensive infant. The syndrome is therefore a pharmacokinetic accumulation phenomenon rather than an idiosyncratic or immune reaction.",
-  "additionalDifferentials": [
-   "Neonatal sepsis and septic shock",
-   "Congenital cardiac disease with circulatory collapse",
-   "Inborn errors of metabolism presenting with acidosis",
-   "Necrotising enterocolitis",
-   "Other drug toxicities in the neonate",
-   "Hypoxic-ischaemic injury"
-  ],
-  "additionalInvestigations": [
-   "Chloramphenicol serum concentration and therapeutic drug monitoring",
-   "Arterial blood gas for metabolic acidosis and lactate",
-   "Full blood count (chloramphenicol also causes marrow suppression)",
-   "Renal and liver function tests",
-   "Blood cultures and septic screen to exclude infection",
-   "Continuous cardiovascular monitoring"
-  ],
-  "redFlags": [
-   "Ashen-grey skin with hypotension and poor perfusion",
-   "Progressive metabolic acidosis and rising lactate",
-   "Hypothermia and cardiovascular collapse",
-   "Apnoea or respiratory failure"
-  ],
-  "prognosis": "The syndrome carries a high mortality once cardiovascular collapse is established, but early recognition, drug withdrawal and supportive care improve survival. Prevention through cautious neonatal use and monitoring is far more effective than treatment.",
-  "pitfalls": [
-   "Using standard weight-based dosing without accounting for immature neonatal metabolism",
-   "Attributing the deterioration to sepsis alone and continuing the drug",
-   "Failing to monitor chloramphenicol levels when its use is unavoidable",
-   "Overlooking the concurrent risk of dose-related bone marrow suppression"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stop chloramphenicol immediately, as the syndrome results from toxic drug accumulation",
-   "Support the failing circulation with fluid resuscitation and inotropic or vasopressor agents for hypotension and cardiovascular collapse",
-   "Correct the metabolic (lactic) acidosis and provide oxygen and ventilatory support as needed",
-   "Consider enhanced elimination with exchange transfusion or charcoal haemoperfusion to remove drug in severe toxicity",
-   "Monitor serum chloramphenicol concentrations, arterial blood gases and lactate, and the full blood count for accompanying marrow suppression, with continuous cardiovascular monitoring",
-   "Prevent recurrence by avoiding chloramphenicol in neonates where possible and, when unavoidable, using reduced dosing with therapeutic drug monitoring",
-   "Manage in a neonatal intensive care setting"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gray_baby_syndrome-pathway",
-   "title": "Gray baby syndrome (chloramphenicol): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A potentially fatal toxic reaction to chloramphenicol occurring predominantly in neonates, especially preterm infants",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ashen-grey skin with hypotension and poor perfusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chloramphenicol serum concentration and therapeutic drug monitoring, Arterial blood gas for metabolic acidosis and lactate, Full blood count (chloramphenicol also causes marrow suppression)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stop chloramphenicol immediately, as the syndrome results from toxic drug accumulation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Using standard weight-based dosing without accounting for immature neonatal metabolism"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gray baby syndrome (chloramphenicol)."
-  }
- ],
- "tables": [
-  {
-   "id": "gray_baby_syndrome-matrix",
-   "title": "Gray baby syndrome (chloramphenicol): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A potentially fatal toxic reaction to chloramphenicol occurring predominantly in neonates, especially preterm infants",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Clinical pharmacology / Toxicology",
+  "specialty": "Clinical Pharmacology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A potentially fatal toxic reaction to chloramphenicol occurring predominantly in neonates, especially preterm infants",
+      "Features develop over hours to days and include vomiting, poor feeding, abdominal distension, hypothermia and a characteristic ashen-grey skin colour",
+      "Progresses to hypotension, cyanosis, cardiovascular collapse and metabolic acidosis",
+      "The syndrome results from accumulation of chloramphenicol due to immature hepatic glucuronidation and reduced renal excretion in the newborn",
+      "Prevention relies on avoiding chloramphenicol where possible in neonates and, when unavoidable, using reduced dosing with drug-level monitoring",
+      "Management is immediate cessation of the drug and aggressive supportive care of the circulation and acidosis",
+      "Extracorporeal removal (for example haemoperfusion or exchange transfusion) may be considered in severe accumulation",
+      "Older children and adults can also develop toxicity if hepatic metabolism is overwhelmed by excessive dosing"
     ],
-    [
-     "Key Investigations",
-     "Chloramphenicol serum concentration and therapeutic drug monitoring, Arterial blood gas for metabolic acidosis and lactate, Full",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chloramphenicol is normally inactivated by hepatic conjugation with glucuronic acid and the conjugate is excreted renally. Neonates, particularly premature infants, have immature UDP-glucuronosyltransferase activity and reduced glomerular filtration, so unconjugated drug accumulates to toxic concentrations. High levels impair mitochondrial oxidative phosphorylation and electron transport, reducing cellular energy production, especially in the myocardium and vasculature. The result is myocardial depression, loss of vascular tone, hypotension, tissue hypoxia and lactic (metabolic) acidosis, producing the grey, cyanotic, hypotensive infant. The syndrome is therefore a pharmacokinetic accumulation phenomenon rather than an idiosyncratic or immune reaction.",
+    "additionalDifferentials": [
+      "Neonatal sepsis and septic shock",
+      "Congenital cardiac disease with circulatory collapse",
+      "Inborn errors of metabolism presenting with acidosis",
+      "Necrotising enterocolitis",
+      "Other drug toxicities in the neonate",
+      "Hypoxic-ischaemic injury"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal sepsis and septic shock, Congenital cardiac disease with circulatory collapse, Inborn errors of metabolism presenting",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chloramphenicol serum concentration and therapeutic drug monitoring",
+      "Arterial blood gas for metabolic acidosis and lactate",
+      "Full blood count (chloramphenicol also causes marrow suppression)",
+      "Renal and liver function tests",
+      "Blood cultures and septic screen to exclude infection",
+      "Continuous cardiovascular monitoring"
     ],
-    [
-     "Management Strategy",
-     "Stop chloramphenicol immediately, as the syndrome results from toxic drug accumulation",
-     "Core treatment modality"
+    "redFlags": [
+      "Ashen-grey skin with hypotension and poor perfusion",
+      "Progressive metabolic acidosis and rising lactate",
+      "Hypothermia and cardiovascular collapse",
+      "Apnoea or respiratory failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Using standard weight-based dosing without accounting for immature neonatal metabolism",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome carries a high mortality once cardiovascular collapse is established, but early recognition, drug withdrawal and supportive care improve survival. Prevention through cautious neonatal use and monitoring is far more effective than treatment.",
+    "pitfalls": [
+      "Using standard weight-based dosing without accounting for immature neonatal metabolism",
+      "Attributing the deterioration to sepsis alone and continuing the drug",
+      "Failing to monitor chloramphenicol levels when its use is unavoidable",
+      "Overlooking the concurrent risk of dose-related bone marrow suppression"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stop chloramphenicol immediately, as the syndrome results from toxic drug accumulation",
+      "Support the failing circulation with fluid resuscitation and inotropic or vasopressor agents for hypotension and cardiovascular collapse",
+      "Correct the metabolic (lactic) acidosis and provide oxygen and ventilatory support as needed",
+      "Consider enhanced elimination with exchange transfusion or charcoal haemoperfusion to remove drug in severe toxicity",
+      "Monitor serum chloramphenicol concentrations, arterial blood gases and lactate, and the full blood count for accompanying marrow suppression, with continuous cardiovascular monitoring",
+      "Prevent recurrence by avoiding chloramphenicol in neonates where possible and, when unavoidable, using reduced dosing with therapeutic drug monitoring",
+      "Manage in a neonatal intensive care setting"
     ]
-   ],
-   "caption": "Overview comparison matrix for gray baby syndrome (chloramphenicol)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gray-baby-syndrome-real-image",
-   "title": "Gray baby syndrome (chloramphenicol): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "gray_baby_syndrome-pathway",
+      "title": "Gray baby syndrome (chloramphenicol): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A potentially fatal toxic reaction to chloramphenicol occurring predominantly in neonates, especially preterm infants",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ashen-grey skin with hypotension and poor perfusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chloramphenicol serum concentration and therapeutic drug monitoring, Arterial blood gas for metabolic acidosis and lactate, Full blood count (chloramphenicol also causes marrow suppression)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stop chloramphenicol immediately, as the syndrome results from toxic drug accumulation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Using standard weight-based dosing without accounting for immature neonatal metabolism"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gray baby syndrome (chloramphenicol)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gray_baby_syndrome-matrix",
+      "title": "Gray baby syndrome (chloramphenicol): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A potentially fatal toxic reaction to chloramphenicol occurring predominantly in neonates, especially preterm infants",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chloramphenicol serum concentration and therapeutic drug monitoring, Arterial blood gas for metabolic acidosis and lactate, Full",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal sepsis and septic shock, Congenital cardiac disease with circulatory collapse, Inborn errors of metabolism presenting",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stop chloramphenicol immediately, as the syndrome results from toxic drug accumulation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Using standard weight-based dosing without accounting for immature neonatal metabolism",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gray baby syndrome (chloramphenicol)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gray_baby_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chloramphenicol serum concentration",
+          "cells": [
+            {
+              "text": "Drug level and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Marrow suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and liver function tests",
+          "cells": [
+            {
+              "text": "Organ function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and septic screen",
+          "cells": [
+            {
+              "text": "Excludes infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiovascular monitoring",
+          "cells": [
+            {
+              "text": "Circulatory status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gray_baby_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal sepsis and septic shock",
+          "cells": [
+            {
+              "text": "Shares the circulatory collapse picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cardiac disease with circulatory collapse",
+          "cells": [
+            {
+              "text": "Circulatory collapse in the neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inborn errors of metabolism with acidosis",
+          "cells": [
+            {
+              "text": "Acidosis in the neonate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gray_baby_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop chloramphenicol",
+          "cells": [
+            {
+              "text": "Syndrome results from toxic accumulation of the drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circulatory support",
+          "cells": [
+            {
+              "text": "Fluid resuscitation with inotropes or vasopressors for hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acidosis and oxygenation",
+          "cells": [
+            {
+              "text": "Correct lactic acidosis; oxygen and ventilatory support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enhanced elimination",
+          "cells": [
+            {
+              "text": "Exchange transfusion or charcoal haemoperfusion in severe toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Chloramphenicol levels, blood gases, lactate and full blood count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Avoid chloramphenicol in neonates where possible; reduced dosing when unavoidable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gray_baby_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Gray baby syndrome (chloramphenicol)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected grey baby syndrome: chloramphenicol-treated neonate with grey skin and collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (grey skin with hypotension, rising lactate, apnoea)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stop chloramphenicol and start circulatory support immediately",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chloramphenicol level, blood gas, lactate, full blood count and blood cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the chloramphenicol level raised in a neonate with circulatory collapse?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neonatal sepsis, congenital heart disease or an inborn metabolic error",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop chloramphenicol immediately",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fluid resuscitation with inotropes or vasopressors for hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct lactic acidosis with oxygen and ventilatory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exchange transfusion or charcoal haemoperfusion in severe toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "High mortality once collapse is established; early withdrawal and support improve outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

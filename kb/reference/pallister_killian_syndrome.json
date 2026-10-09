@@ -1,177 +1,476 @@
 {
- "id": "pallister_killian_syndrome",
- "name": "Pallister-Killian syndrome",
- "aliases": [
-  "PKS",
-  "tetrasomy 12p mosaicism",
-  "isochromosome 12p syndrome",
-  "Pallister mosaic syndrome",
-  "Killian-Teschler-Nicola syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by mosaic tetrasomy of the short arm of chromosome 12, usually from a supernumerary isochromosome 12p present in only a proportion of cells",
-   "A characteristic pattern of pigmentary skin anomalies (streaks of hyper- and hypopigmentation) and localised areas of alopecia, along with a coarse face, may develop over time",
-   "Facial features include a high forehead with frontotemporal balding, sparse eyebrows and eyelashes, hypertelorism, a short nose with anteverted nares and a long philtrum",
-   "Profound hypotonia, severe intellectual disability and epilepsy are typical",
-   "Diaphragmatic hernia, congenital heart disease and other malformations are recognised associations",
-   "Because the isochromosome is often absent from blood lymphocytes with age, skin fibroblast analysis or buccal sampling is the preferred diagnostic tissue",
-   "Recurrence risk is generally low as the abnormality is sporadic and mosaic"
+  "id": "pallister_killian_syndrome",
+  "name": "Pallister-Killian syndrome",
+  "aliases": [
+    "PKS",
+    "tetrasomy 12p mosaicism",
+    "isochromosome 12p syndrome",
+    "Pallister mosaic syndrome",
+    "Killian-Teschler-Nicola syndrome"
   ],
-  "pathophysiology": "Pallister-Killian syndrome results from mosaic tetrasomy 12p, most often due to a supernumerary isochromosome composed of two copies of the short arm of chromosome 12, giving four copies of 12p in affected cells. The extra genetic material causes an imbalance of dosage-sensitive genes during development. Because the isochromosome is unstable and tends to be lost from rapidly dividing tissues such as blood, the mosaicism is often confined to fibroblasts and other tissues, which accounts for the diagnostic difficulty and the tissue-dependent detection.",
-  "additionalDifferentials": [
-   "Fryns syndrome",
-   "Killian-Pallister mimics with pigmentary mosaicism",
-   "Ullrich-Turner and other chromosomal aneuploidies",
-   "Cornelia de Lange syndrome",
-   "Simpson-Golabi-Behmel syndrome",
-   "Congenital diaphragmatic hernia of other genetic cause"
-  ],
-  "additionalInvestigations": [
-   "Chromosomal analysis or microarray on skin fibroblasts or buccal cells rather than blood, to detect the mosaic isochromosome",
-   "FISH for 12p to confirm tetrasomy and estimate the mosaic fraction",
-   "Prenatal detection via amniocentesis or chorionic villus sampling when suspected antenatally",
-   "Echocardiography for congenital heart disease",
-   "Imaging to detect diaphragmatic hernia and other structural anomalies",
-   "Electroencephalography and neuroimaging for seizures"
-  ],
-  "redFlags": [
-   "Respiratory distress at birth from congenital diaphragmatic hernia",
-   "Undiagnosed congenital heart disease causing cardiorespiratory compromise",
-   "Refractory seizures",
-   "Severe feeding difficulty with aspiration and failure to thrive"
-  ],
-  "prognosis": "Outcome is variable and correlates with the tissue distribution of the mosaicism; many affected children have profound intellectual disability and significant medical needs, and severe cases with diaphragmatic hernia have high early mortality. Those surviving infancy generally live into childhood or beyond with major disability.",
-  "pitfalls": [
-   "Excluding the diagnosis on a normal blood karyotype because the isochromosome is lost from lymphocytes",
-   "Failing to test fibroblasts or buccal cells, the tissues most likely to reveal the mosaic",
-   "Attributing the pigmentary changes to an unrelated skin disorder",
-   "Underestimating the risk of associated diaphragmatic hernia and cardiac anomalies"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics",
-   "OMIM / GeneReviews: Pallister-Killian syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Neonatal surgical repair of congenital diaphragmatic hernia and other structural anomalies, with respiratory support",
-   "Anti-seizure medication for epilepsy guided by EEG",
-   "Management of profound hypotonia and feeding difficulty with physiotherapy, feeding support and gastrostomy where needed",
-   "Cardiology review and treatment of congenital heart disease",
-   "Developmental support, communication aids and specialist education for severe intellectual disability",
-   "Ophthalmology, audiology and dermatology surveillance for associated anomalies",
-   "Genetic counselling with confirmatory testing on skin fibroblasts or buccal cells, as the mosaic isochromosome is often absent from blood",
-   "Multidisciplinary coordination and family support given the significant medical needs"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pallister_killian_syndrome-pathway",
-   "title": "Pallister-Killian syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by mosaic tetrasomy of the short arm of chromosome 12, usually from a supernumerary isochromosome 12p present in only a proportion of cells",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory distress at birth from congenital diaphragmatic hernia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chromosomal analysis or microarray on skin fibroblasts or buccal cells rather than blood, to detect the mosaic isochromosome, FISH for 12p to confirm tetrasomy and estimate the mosaic fraction, Prenatal detection via"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Neonatal surgical repair of congenital diaphragmatic hernia and other structural anomalies, with respiratory support"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis on a normal blood karyotype because the isochromosome is lost from lymphocytes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pallister-killian syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "pallister_killian_syndrome-matrix",
-   "title": "Pallister-Killian syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by mosaic tetrasomy of the short arm of chromosome 12, usually from a supernumerary isochromosome 12p present in only a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by mosaic tetrasomy of the short arm of chromosome 12, usually from a supernumerary isochromosome 12p present in only a proportion of cells",
+      "A characteristic pattern of pigmentary skin anomalies (streaks of hyper- and hypopigmentation) and localised areas of alopecia, along with a coarse face, may develop over time",
+      "Facial features include a high forehead with frontotemporal balding, sparse eyebrows and eyelashes, hypertelorism, a short nose with anteverted nares and a long philtrum",
+      "Profound hypotonia, severe intellectual disability and epilepsy are typical",
+      "Diaphragmatic hernia, congenital heart disease and other malformations are recognised associations",
+      "Because the isochromosome is often absent from blood lymphocytes with age, skin fibroblast analysis or buccal sampling is the preferred diagnostic tissue",
+      "Recurrence risk is generally low as the abnormality is sporadic and mosaic"
     ],
-    [
-     "Key Investigations",
-     "Chromosomal analysis or microarray on skin fibroblasts or buccal cells rather than blood, to detect the mosaic isochromosome,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pallister-Killian syndrome results from mosaic tetrasomy 12p, most often due to a supernumerary isochromosome composed of two copies of the short arm of chromosome 12, giving four copies of 12p in affected cells. The extra genetic material causes an imbalance of dosage-sensitive genes during development. Because the isochromosome is unstable and tends to be lost from rapidly dividing tissues such as blood, the mosaicism is often confined to fibroblasts and other tissues, which accounts for the diagnostic difficulty and the tissue-dependent detection.",
+    "additionalDifferentials": [
+      "Fryns syndrome",
+      "Killian-Pallister mimics with pigmentary mosaicism",
+      "Ullrich-Turner and other chromosomal aneuploidies",
+      "Cornelia de Lange syndrome",
+      "Simpson-Golabi-Behmel syndrome",
+      "Congenital diaphragmatic hernia of other genetic cause"
     ],
-    [
-     "Primary Differentials",
-     "Fryns syndrome, Killian-Pallister mimics with pigmentary mosaicism, Ullrich-Turner and other chromosomal aneuploidies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chromosomal analysis or microarray on skin fibroblasts or buccal cells rather than blood, to detect the mosaic isochromosome",
+      "FISH for 12p to confirm tetrasomy and estimate the mosaic fraction",
+      "Prenatal detection via amniocentesis or chorionic villus sampling when suspected antenatally",
+      "Echocardiography for congenital heart disease",
+      "Imaging to detect diaphragmatic hernia and other structural anomalies",
+      "Electroencephalography and neuroimaging for seizures"
     ],
-    [
-     "Management Strategy",
-     "Neonatal surgical repair of congenital diaphragmatic hernia and other structural anomalies, with respiratory support",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory distress at birth from congenital diaphragmatic hernia",
+      "Undiagnosed congenital heart disease causing cardiorespiratory compromise",
+      "Refractory seizures",
+      "Severe feeding difficulty with aspiration and failure to thrive"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis on a normal blood karyotype because the isochromosome is lost from lymphocytes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable and correlates with the tissue distribution of the mosaicism; many affected children have profound intellectual disability and significant medical needs, and severe cases with diaphragmatic hernia have high early mortality. Those surviving infancy generally live into childhood or beyond with major disability.",
+    "pitfalls": [
+      "Excluding the diagnosis on a normal blood karyotype because the isochromosome is lost from lymphocytes",
+      "Failing to test fibroblasts or buccal cells, the tissues most likely to reveal the mosaic",
+      "Attributing the pigmentary changes to an unrelated skin disorder",
+      "Underestimating the risk of associated diaphragmatic hernia and cardiac anomalies"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics",
+      "OMIM / GeneReviews: Pallister-Killian syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Neonatal surgical repair of congenital diaphragmatic hernia and other structural anomalies, with respiratory support",
+      "Anti-seizure medication for epilepsy guided by EEG",
+      "Management of profound hypotonia and feeding difficulty with physiotherapy, feeding support and gastrostomy where needed",
+      "Cardiology review and treatment of congenital heart disease",
+      "Developmental support, communication aids and specialist education for severe intellectual disability",
+      "Ophthalmology, audiology and dermatology surveillance for associated anomalies",
+      "Genetic counselling with confirmatory testing on skin fibroblasts or buccal cells, as the mosaic isochromosome is often absent from blood",
+      "Multidisciplinary coordination and family support given the significant medical needs"
     ]
-   ],
-   "caption": "Overview comparison matrix for pallister-killian syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pallister-killian-syndrome-real-image",
-   "title": "Pallister-Killian syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pallister_killian_syndrome-pathway",
+      "title": "Pallister-Killian syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by mosaic tetrasomy of the short arm of chromosome 12, usually from a supernumerary isochromosome 12p present in only a proportion of cells",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory distress at birth from congenital diaphragmatic hernia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chromosomal analysis or microarray on skin fibroblasts or buccal cells rather than blood, to detect the mosaic isochromosome, FISH for 12p to confirm tetrasomy and estimate the mosaic fraction, Prenatal detection via"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Neonatal surgical repair of congenital diaphragmatic hernia and other structural anomalies, with respiratory support"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis on a normal blood karyotype because the isochromosome is lost from lymphocytes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pallister-killian syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pallister_killian_syndrome-matrix",
+      "title": "Pallister-Killian syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by mosaic tetrasomy of the short arm of chromosome 12, usually from a supernumerary isochromosome 12p present in only a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chromosomal analysis or microarray on skin fibroblasts or buccal cells rather than blood, to detect the mosaic isochromosome,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fryns syndrome, Killian-Pallister mimics with pigmentary mosaicism, Ullrich-Turner and other chromosomal aneuploidies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Neonatal surgical repair of congenital diaphragmatic hernia and other structural anomalies, with respiratory support",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis on a normal blood karyotype because the isochromosome is lost from lymphocytes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pallister-killian syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pallister_killian_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosome analysis on fibroblasts or buccal cells",
+          "cells": [
+            {
+              "text": "Mosaic isochromosome 12p, which blood often misses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH for 12p",
+          "cells": [
+            {
+              "text": "Tetrasomy and the mosaic fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for diaphragmatic hernia",
+          "cells": [
+            {
+              "text": "Structural anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and neuroimaging",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pallister_killian_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fryns syndrome",
+          "cells": [
+            {
+              "text": "Diaphragmatic hernia also occurs; karyotype and 12p FISH separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ullrich-Turner and other aneuploidies",
+          "cells": [
+            {
+              "text": "Blood karyotype is usually normal here; the mosaic is in skin and fibroblasts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pallister_killian_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal surgery",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Repair of congenital diaphragmatic hernia with respiratory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-seizure medication",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Guided by EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and tone",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Physiotherapy, feeding support and gastrostomy for hypotonia and aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Review and treatment of congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Communication aids and specialist education for severe intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Confirmation on fibroblasts or buccal cells, as the isochromosome is often absent from blood"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pallister_killian_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Pallister-Killian syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Coarse face, pigmentary streaks, hypotonia and epilepsy in a newborn or infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (respiratory distress from hernia, refractory seizures or aspiration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neonatal surgery and respiratory support for diaphragmatic hernia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype or microarray on fibroblasts or buccal cells, 12p FISH, echo, imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is mosaic tetrasomy 12p found in fibroblasts or buccal cells?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fryns syndrome, Ullrich-Turner or other chromosomal mimics; retest",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Neonatal surgical repair of diaphragmatic hernia, with respiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anti-seizure medication guided by EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, feeding support and gastrostomy for hypotonia and aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiology review and treatment of congenital heart disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with confirmatory testing on fibroblasts or buccal cells",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Varies with tissue mosaicism; severe cases with hernia carry high early mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

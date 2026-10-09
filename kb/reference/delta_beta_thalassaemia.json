@@ -1,177 +1,592 @@
 {
- "id": "delta_beta_thalassaemia",
- "name": "Delta-beta thalassaemia",
- "aliases": [
-  "δβ-thalassaemia",
-  "Delta beta thalassaemia"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Haematology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Large deletions in the beta-globin gene cluster remove both the delta and beta genes, so neither HbA2 nor HbA is produced normally from the affected chromosome.",
-   "Compensatory gamma-chain output rises, producing the characteristic raised fetal haemoglobin (HbF).",
-   "In heterozygous (trait) form the HbA2 is normal or low — the key feature separating it from beta-thalassaemia trait, in which HbA2 is raised.",
-   "Homozygotes typically show a thalassaemia intermedia picture, milder than beta-thalassaemia major, because the abundant HbF is protective.",
-   "The blood film shows microcytic, hypochromic red cells with the changes of thalassaemia.",
-   "Distinguish from hereditary persistence of fetal haemoglobin, where HbF distribution is pancellular and there is little or no anaemia or microcytosis.",
-   "Hb Lepore, arising from a delta-beta fusion gene, produces a similar clinical picture and should be considered.",
-   "The cellular distribution of HbF (heterocellular versus pancellular) on Kleihauer testing or flow cytometry helps classify the disorder."
+  "id": "delta_beta_thalassaemia",
+  "name": "Delta-beta thalassaemia",
+  "aliases": [
+    "δβ-thalassaemia",
+    "Delta beta thalassaemia"
   ],
-  "pathophysiology": "The beta-globin gene cluster on chromosome 11 contains, in order, the embryonic, fetal (Gg and Ag), delta and beta genes under the control of the locus control region. In delta-beta thalassaemia, large deletions remove both the delta and beta genes, and often part of the gamma region, abolishing delta- and beta-chain synthesis from the affected chromosome. Loss of beta-chain production creates the imbalance of globin chains and the ineffective erythropoiesis typical of thalassaemia, but the same deletions also remove regulatory elements that normally silence the gamma genes after birth, so gamma-chain synthesis persists and rises. The resulting abundant HbF (a2g2) partly compensates for the missing HbA (a2b2), which is why homozygotes have a comparatively mild intermedia phenotype and heterozygotes are usually only mildly affected. Because the delta gene is also deleted, HbA2 (a2d2) is not increased, distinguishing the trait from classical beta-thalassaemia trait.",
-  "additionalDifferentials": [
-   "Beta-thalassaemia trait (raised HbA2) and beta-thalassaemia intermedia or major",
-   "Hereditary persistence of fetal haemoglobin",
-   "Hb Lepore syndromes",
-   "Iron deficiency anaemia (microcytic, but with distinct HbF and HbA2 patterns)",
-   "Other conditions with raised HbF such as some acquired marrow disorders and juvenile myelomonocytic leukaemia",
-   "Alpha-thalassaemia",
-   "Compound inheritance with sickle cell disease, which modifies severity"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film showing microcytosis and hypochromia",
-   "Haemoglobin electrophoresis or high-performance liquid chromatography quantifying HbF, HbA2 and HbA",
-   "Kleihauer test or flow cytometry to assess the cellular distribution of HbF",
-   "Iron studies and ferritin to exclude coexisting iron deficiency",
-   "DNA analysis of the beta-globin cluster for deletions and for Hb Lepore",
-   "Family studies with parental haemoglobin analysis",
-   "Reticulocyte count"
-  ],
-  "redFlags": [
-   "Marked anaemia or transfusion dependence suggesting a more severe genotype or compound inheritance",
-   "Features of iron overload despite limited or no transfusion, as seen in intermedia phenotypes",
-   "Growth failure or skeletal changes in a child implying more severe thalassaemia",
-   "Symptomatic anaemia developing during pregnancy or intercurrent illness",
-   "Progressive splenomegaly with worsening cytopenias"
-  ],
-  "prognosis": "Generally favourable — heterozygotes are only mildly affected and homozygotes usually follow a thalassaemia intermedia course; the main long-term concern is iron overload, particularly where transfusion or increased gastrointestinal iron absorption occurs.",
-  "pitfalls": [
-   "Misdiagnosing the trait as beta-thalassaemia trait; the normal or low HbA2 is the discriminator.",
-   "Confusing it with hereditary persistence of fetal haemoglobin without checking HbF cellular distribution and red-cell indices.",
-   "Overlooking coexisting iron deficiency, which can alter the HbA2 and HbF picture.",
-   "Prescribing unnecessary long-term iron for a microcytosis that is not due to iron deficiency.",
-   "Failing to offer genetic counselling and partner testing to assess antenatal risk."
-  ],
-  "references": [
-   "Standard haematology reference texts",
-   "Haemoglobinopathy diagnosis and screening guidelines",
-   "Thalassaemia management consensus statements"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific treatment is needed for the mild heterozygous (trait) form beyond recognition and reassurance",
-   "Folic acid supplementation to support the increased erythropoiesis of the homozygous thalassaemia intermedia phenotype",
-   "Selective, intermittent red-cell transfusion for symptomatic anaemia, growth failure or during physiological stress, avoiding unnecessary transfusion",
-   "Monitor for iron overload from increased gastrointestinal absorption or transfusion, treating with iron chelation and hepatic iron surveillance",
-   "Avoid inappropriate iron supplementation by distinguishing the disorder from iron deficiency, while correcting genuine coexisting iron deficiency",
-   "Genetic counselling with partner testing and preconception or prenatal counselling given heritable inheritance, ensuring accurate distinction from beta-thalassaemia trait and hereditary persistence of foetal haemoglobin"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "delta_beta_thalassaemia-pathway",
-   "title": "Delta-beta thalassaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Large deletions in the beta-globin gene cluster remove both the delta and beta genes, so neither HbA2 nor HbA is produced normally from the affected chromosome.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked anaemia or transfusion dependence suggesting a more severe genotype or compound inheritance",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film showing microcytosis and hypochromia, Haemoglobin electrophoresis or high-performance liquid chromatography quantifying HbF, HbA2 and HbA, Kleihauer test or flow cytometry to assess the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific treatment is needed for the mild heterozygous (trait) form beyond recognition and reassurance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the trait as beta-thalassaemia trait; the normal or low HbA2 is the discriminator."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of delta-beta thalassaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "delta_beta_thalassaemia-matrix",
-   "title": "Delta-beta thalassaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Large deletions in the beta-globin gene cluster remove both the delta and beta genes, so neither HbA2 nor HbA is produced",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Haematology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Large deletions in the beta-globin gene cluster remove both the delta and beta genes, so neither HbA2 nor HbA is produced normally from the affected chromosome.",
+      "Compensatory gamma-chain output rises, producing the characteristic raised fetal haemoglobin (HbF).",
+      "In heterozygous (trait) form the HbA2 is normal or low — the key feature separating it from beta-thalassaemia trait, in which HbA2 is raised.",
+      "Homozygotes typically show a thalassaemia intermedia picture, milder than beta-thalassaemia major, because the abundant HbF is protective.",
+      "The blood film shows microcytic, hypochromic red cells with the changes of thalassaemia.",
+      "Distinguish from hereditary persistence of fetal haemoglobin, where HbF distribution is pancellular and there is little or no anaemia or microcytosis.",
+      "Hb Lepore, arising from a delta-beta fusion gene, produces a similar clinical picture and should be considered.",
+      "The cellular distribution of HbF (heterocellular versus pancellular) on Kleihauer testing or flow cytometry helps classify the disorder."
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film showing microcytosis and hypochromia, Haemoglobin electrophoresis or high-performance liquid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The beta-globin gene cluster on chromosome 11 contains, in order, the embryonic, fetal (Gg and Ag), delta and beta genes under the control of the locus control region. In delta-beta thalassaemia, large deletions remove both the delta and beta genes, and often part of the gamma region, abolishing delta- and beta-chain synthesis from the affected chromosome. Loss of beta-chain production creates the imbalance of globin chains and the ineffective erythropoiesis typical of thalassaemia, but the same deletions also remove regulatory elements that normally silence the gamma genes after birth, so gamma-chain synthesis persists and rises. The resulting abundant HbF (a2g2) partly compensates for the missing HbA (a2b2), which is why homozygotes have a comparatively mild intermedia phenotype and heterozygotes are usually only mildly affected. Because the delta gene is also deleted, HbA2 (a2d2) is not increased, distinguishing the trait from classical beta-thalassaemia trait.",
+    "additionalDifferentials": [
+      "Beta-thalassaemia trait (raised HbA2) and beta-thalassaemia intermedia or major",
+      "Hereditary persistence of fetal haemoglobin",
+      "Hb Lepore syndromes",
+      "Iron deficiency anaemia (microcytic, but with distinct HbF and HbA2 patterns)",
+      "Other conditions with raised HbF such as some acquired marrow disorders and juvenile myelomonocytic leukaemia",
+      "Alpha-thalassaemia",
+      "Compound inheritance with sickle cell disease, which modifies severity"
     ],
-    [
-     "Primary Differentials",
-     "Beta-thalassaemia trait (raised HbA2) and beta-thalassaemia intermedia or major, Hereditary persistence of fetal haemoglobin, Hb",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film showing microcytosis and hypochromia",
+      "Haemoglobin electrophoresis or high-performance liquid chromatography quantifying HbF, HbA2 and HbA",
+      "Kleihauer test or flow cytometry to assess the cellular distribution of HbF",
+      "Iron studies and ferritin to exclude coexisting iron deficiency",
+      "DNA analysis of the beta-globin cluster for deletions and for Hb Lepore",
+      "Family studies with parental haemoglobin analysis",
+      "Reticulocyte count"
     ],
-    [
-     "Management Strategy",
-     "No specific treatment is needed for the mild heterozygous (trait) form beyond recognition and reassurance",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked anaemia or transfusion dependence suggesting a more severe genotype or compound inheritance",
+      "Features of iron overload despite limited or no transfusion, as seen in intermedia phenotypes",
+      "Growth failure or skeletal changes in a child implying more severe thalassaemia",
+      "Symptomatic anaemia developing during pregnancy or intercurrent illness",
+      "Progressive splenomegaly with worsening cytopenias"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the trait as beta-thalassaemia trait; the normal or low HbA2 is the discriminator.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generally favourable — heterozygotes are only mildly affected and homozygotes usually follow a thalassaemia intermedia course; the main long-term concern is iron overload, particularly where transfusion or increased gastrointestinal iron absorption occurs.",
+    "pitfalls": [
+      "Misdiagnosing the trait as beta-thalassaemia trait; the normal or low HbA2 is the discriminator.",
+      "Confusing it with hereditary persistence of fetal haemoglobin without checking HbF cellular distribution and red-cell indices.",
+      "Overlooking coexisting iron deficiency, which can alter the HbA2 and HbF picture.",
+      "Prescribing unnecessary long-term iron for a microcytosis that is not due to iron deficiency.",
+      "Failing to offer genetic counselling and partner testing to assess antenatal risk."
+    ],
+    "references": [
+      "Standard haematology reference texts",
+      "Haemoglobinopathy diagnosis and screening guidelines",
+      "Thalassaemia management consensus statements"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific treatment is needed for the mild heterozygous (trait) form beyond recognition and reassurance",
+      "Folic acid supplementation to support the increased erythropoiesis of the homozygous thalassaemia intermedia phenotype",
+      "Selective, intermittent red-cell transfusion for symptomatic anaemia, growth failure or during physiological stress, avoiding unnecessary transfusion",
+      "Monitor for iron overload from increased gastrointestinal absorption or transfusion, treating with iron chelation and hepatic iron surveillance",
+      "Avoid inappropriate iron supplementation by distinguishing the disorder from iron deficiency, while correcting genuine coexisting iron deficiency",
+      "Genetic counselling with partner testing and preconception or prenatal counselling given heritable inheritance, ensuring accurate distinction from beta-thalassaemia trait and hereditary persistence of foetal haemoglobin"
     ]
-   ],
-   "caption": "Overview comparison matrix for delta-beta thalassaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "delta-beta-thalassaemia-real-image",
-   "title": "Delta-beta thalassaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "delta_beta_thalassaemia-pathway",
+      "title": "Delta-beta thalassaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Large deletions in the beta-globin gene cluster remove both the delta and beta genes, so neither HbA2 nor HbA is produced normally from the affected chromosome.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked anaemia or transfusion dependence suggesting a more severe genotype or compound inheritance",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film showing microcytosis and hypochromia, Haemoglobin electrophoresis or high-performance liquid chromatography quantifying HbF, HbA2 and HbA, Kleihauer test or flow cytometry to assess the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific treatment is needed for the mild heterozygous (trait) form beyond recognition and reassurance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the trait as beta-thalassaemia trait; the normal or low HbA2 is the discriminator."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of delta-beta thalassaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "delta_beta_thalassaemia-matrix",
+      "title": "Delta-beta thalassaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Large deletions in the beta-globin gene cluster remove both the delta and beta genes, so neither HbA2 nor HbA is produced",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film showing microcytosis and hypochromia, Haemoglobin electrophoresis or high-performance liquid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Beta-thalassaemia trait (raised HbA2) and beta-thalassaemia intermedia or major, Hereditary persistence of fetal haemoglobin, Hb",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific treatment is needed for the mild heterozygous (trait) form beyond recognition and reassurance",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the trait as beta-thalassaemia trait; the normal or low HbA2 is the discriminator.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for delta-beta thalassaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 103-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "delta_beta_thalassaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Microcytosis and hypochromia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin electrophoresis or HPLC",
+          "cells": [
+            {
+              "text": "Quantifies HbF, HbA2 and HbA; normal or low HbA2 discriminates from beta trait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kleihauer test or flow cytometry",
+          "cells": [
+            {
+              "text": "Cellular distribution of HbF; separates it from hereditary persistence of fetal haemoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies and ferritin",
+          "cells": [
+            {
+              "text": "Coexisting iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DNA analysis of the beta-globin cluster",
+          "cells": [
+            {
+              "text": "Deletions and Hb Lepore"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delta_beta_thalassaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-thalassaemia trait",
+          "cells": [
+            {
+              "text": "Raised HbA2; delta-beta shows normal or low HbA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary persistence of fetal haemoglobin",
+          "cells": [
+            {
+              "text": "Checked by HbF cellular distribution and red-cell indices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron deficiency anaemia",
+          "cells": [
+            {
+              "text": "Coexisting iron deficiency alters the HbA2 and HbF picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hb Lepore syndromes",
+          "cells": [
+            {
+              "text": "Identified on beta-globin cluster DNA analysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delta_beta_thalassaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mild heterozygous form",
+          "cells": [
+            {
+              "text": "No specific treatment beyond recognition and reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Supports increased erythropoiesis in the intermedia phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective transfusion",
+          "cells": [
+            {
+              "text": "For symptomatic anaemia, growth failure or physiological stress; avoid unnecessary transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron overload monitoring",
+          "cells": [
+            {
+              "text": "Chelation and hepatic iron surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid inappropriate iron",
+          "cells": [
+            {
+              "text": "Treat only genuine coexisting iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Partner testing and preconception or prenatal counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delta_beta_thalassaemia-ddx-2",
+      "kind": "ddx",
+      "title": "Microcytic anemia: iron deficiency, inflammation, thalassemia, sideroblastic anemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Smear",
+        "Serum iron (SI)",
+        "TIBC",
+        "Percent saturation",
+        "Ferritin (ug/L)",
+        "Hemoglobin pattern on electrophoresis"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Micro/hypochromic"
+            },
+            {
+              "text": "<30"
+            },
+            {
+              "text": "Over 360"
+            },
+            {
+              "text": "<10"
+            },
+            {
+              "text": "<15"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Normal to micro/hypochromic"
+            },
+            {
+              "text": "<50"
+            },
+            {
+              "text": "<300"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "30 to 200"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thalassemia",
+          "cells": [
+            {
+              "text": "Micro/hypochromic with targeting"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Abnormal with beta thalassemia; can be normal with alpha thalassemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sideroblastic anemia",
+          "cells": [
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "delta_beta_thalassaemia-dx-mgmt",
+      "title": "Diagnosis and management of Delta-beta thalassaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected delta-beta thalassaemia: microcytosis with normal or low HbA2",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (transfusion dependence, growth failure, progressive splenomegaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for a severe genotype and worsening cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; HPLC for HbF and HbA2; Kleihauer test; beta-globin DNA analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are HbA2 normal or low with a deletion in the beta-globin cluster?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider beta trait, hereditary persistence of fetal haemoglobin or iron deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recognise and reassure the mild heterozygous form; no specific treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid for the homozygous intermedia phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Selective transfusion for symptomatic anaemia, growth failure or stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor and chelate iron overload; avoid unnecessary iron",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with partner testing and prenatal options",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Heterozygotes mildly affected; homozygotes follow intermedia course; iron overload key",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

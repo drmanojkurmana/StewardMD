@@ -1,169 +1,557 @@
 {
- "id": "chronic_mountain_sickness",
- "name": "Chronic mountain sickness",
- "aliases": [
-  "Monge disease",
-  "chronic high-altitude polycythaemia"
- ],
- "class": "non_infective",
- "system": "Respiratory / Haematology / Cardiovascular",
- "specialty": "High-altitude medicine / Respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "High-altitude medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
-   "Symptoms include headache, dizziness, breathlessness, sleep disturbance, cyanosis and mental slowing",
-   "Marked polycythaemia raises blood viscosity and predisposes to thrombosis and pulmonary hypertension",
-   "Over time it can progress to pulmonary hypertension and right heart failure (cor pulmonale)",
-   "It is distinguished from acute altitude illness by its chronic course in acclimatised long-term dwellers",
-   "Descent to lower altitude is the most effective treatment, with phlebotomy and respiratory stimulants as adjuncts"
+  "id": "chronic_mountain_sickness",
+  "name": "Chronic mountain sickness",
+  "aliases": [
+    "Monge disease",
+    "chronic high-altitude polycythaemia"
   ],
-  "pathophysiology": "Chronic mountain sickness develops in some long-term high-altitude residents who lose adequate ventilatory and other adaptations, leading to accentuated hypoxaemia. The chronic hypoxia drives excessive erythropoietin-mediated red-cell production, producing severe polycythaemia that increases blood viscosity and impairs oxygen delivery. Sustained hypoxic pulmonary vasoconstriction and vascular remodelling cause pulmonary hypertension, which ultimately strains the right heart. The combination of hypoxaemia, hyperviscosity and pulmonary hypertension underlies the symptoms and complications.",
-  "additionalDifferentials": [
-   "Secondary polycythaemia from chronic lung or cardiac disease",
-   "Polycythaemia vera",
-   "Obstructive sleep apnoea with hypoxaemia",
-   "High-altitude pulmonary hypertension",
-   "Chronic obstructive pulmonary disease"
-  ],
-  "additionalInvestigations": [
-   "Full blood count documenting excessive erythrocytosis",
-   "Oxygen saturation and arterial blood gas showing hypoxaemia",
-   "Echocardiography for pulmonary hypertension and right heart function",
-   "Assessment for coexisting sleep-disordered breathing or lung disease",
-   "Exclusion of primary polycythaemia where appropriate"
-  ],
-  "redFlags": [
-   "Signs of right heart failure or severe pulmonary hypertension",
-   "Thrombotic complications",
-   "Very high haematocrit with hyperviscosity symptoms",
-   "Progressive cognitive or functional decline"
-  ],
-  "prognosis": "Symptoms and erythrocytosis typically improve substantially with descent; if residence at altitude continues, progression to pulmonary hypertension and right heart failure worsens the outlook.",
-  "pitfalls": [
-   "Attributing the polycythaemia to a primary haematological disorder",
-   "Overlooking coexisting sleep apnoea worsening hypoxaemia",
-   "Relying on phlebotomy without addressing altitude exposure",
-   "Missing early pulmonary hypertension"
-  ],
-  "references": [
-   "High-altitude medicine references (standard reference)",
-   "Respiratory medicine reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the erythrocytosis",
-   "Isovolaemic venesection (phlebotomy) to reduce excessive red-cell mass and blood viscosity when descent is not feasible",
-   "Respiratory stimulant therapy with acetazolamide to enhance ventilation, improve oxygenation and lower the haematocrit",
-   "Supplemental oxygen, particularly nocturnal, to counter hypoxaemia and blunt erythropoietin-driven erythrocytosis",
-   "Treatment of pulmonary hypertension and right heart strain, with pulmonary vasodilators where cor pulmonale develops",
-   "Identification and treatment of coexisting sleep-disordered breathing and chronic lung disease that aggravate hypoxaemia",
-   "Surveillance with serial full blood count, oximetry or arterial blood gases and echocardiography for progression to pulmonary hypertension, with high-altitude and respiratory specialist referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_mountain_sickness-pathway",
-   "title": "Chronic mountain sickness: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of right heart failure or severe pulmonary hypertension",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count documenting excessive erythrocytosis, Oxygen saturation and arterial blood gas showing hypoxaemia, Echocardiography for pulmonary hypertension and right heart function"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the erythrocytosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the polycythaemia to a primary haematological disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic mountain sickness."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_mountain_sickness-matrix",
-   "title": "Chronic mountain sickness: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Haematology / Cardiovascular",
+  "specialty": "High-altitude medicine / Respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "High-altitude medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
+      "Symptoms include headache, dizziness, breathlessness, sleep disturbance, cyanosis and mental slowing",
+      "Marked polycythaemia raises blood viscosity and predisposes to thrombosis and pulmonary hypertension",
+      "Over time it can progress to pulmonary hypertension and right heart failure (cor pulmonale)",
+      "It is distinguished from acute altitude illness by its chronic course in acclimatised long-term dwellers",
+      "Descent to lower altitude is the most effective treatment, with phlebotomy and respiratory stimulants as adjuncts"
     ],
-    [
-     "Key Investigations",
-     "Full blood count documenting excessive erythrocytosis, Oxygen saturation and arterial blood gas showing hypoxaemia,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic mountain sickness develops in some long-term high-altitude residents who lose adequate ventilatory and other adaptations, leading to accentuated hypoxaemia. The chronic hypoxia drives excessive erythropoietin-mediated red-cell production, producing severe polycythaemia that increases blood viscosity and impairs oxygen delivery. Sustained hypoxic pulmonary vasoconstriction and vascular remodelling cause pulmonary hypertension, which ultimately strains the right heart. The combination of hypoxaemia, hyperviscosity and pulmonary hypertension underlies the symptoms and complications.",
+    "additionalDifferentials": [
+      "Secondary polycythaemia from chronic lung or cardiac disease",
+      "Polycythaemia vera",
+      "Obstructive sleep apnoea with hypoxaemia",
+      "High-altitude pulmonary hypertension",
+      "Chronic obstructive pulmonary disease"
     ],
-    [
-     "Primary Differentials",
-     "Secondary polycythaemia from chronic lung or cardiac disease, Polycythaemia vera, Obstructive sleep apnoea with hypoxaemia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count documenting excessive erythrocytosis",
+      "Oxygen saturation and arterial blood gas showing hypoxaemia",
+      "Echocardiography for pulmonary hypertension and right heart function",
+      "Assessment for coexisting sleep-disordered breathing or lung disease",
+      "Exclusion of primary polycythaemia where appropriate"
     ],
-    [
-     "Management Strategy",
-     "Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of right heart failure or severe pulmonary hypertension",
+      "Thrombotic complications",
+      "Very high haematocrit with hyperviscosity symptoms",
+      "Progressive cognitive or functional decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the polycythaemia to a primary haematological disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms and erythrocytosis typically improve substantially with descent; if residence at altitude continues, progression to pulmonary hypertension and right heart failure worsens the outlook.",
+    "pitfalls": [
+      "Attributing the polycythaemia to a primary haematological disorder",
+      "Overlooking coexisting sleep apnoea worsening hypoxaemia",
+      "Relying on phlebotomy without addressing altitude exposure",
+      "Missing early pulmonary hypertension"
+    ],
+    "references": [
+      "High-altitude medicine references (standard reference)",
+      "Respiratory medicine reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the erythrocytosis",
+      "Isovolaemic venesection (phlebotomy) to reduce excessive red-cell mass and blood viscosity when descent is not feasible",
+      "Respiratory stimulant therapy with acetazolamide to enhance ventilation, improve oxygenation and lower the haematocrit",
+      "Supplemental oxygen, particularly nocturnal, to counter hypoxaemia and blunt erythropoietin-driven erythrocytosis",
+      "Treatment of pulmonary hypertension and right heart strain, with pulmonary vasodilators where cor pulmonale develops",
+      "Identification and treatment of coexisting sleep-disordered breathing and chronic lung disease that aggravate hypoxaemia",
+      "Surveillance with serial full blood count, oximetry or arterial blood gases and echocardiography for progression to pulmonary hypertension, with high-altitude and respiratory specialist referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic mountain sickness."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-mountain-sickness-real-image",
-   "title": "Chronic mountain sickness: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "chronic_mountain_sickness-pathway",
+      "title": "Chronic mountain sickness: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of right heart failure or severe pulmonary hypertension",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count documenting excessive erythrocytosis, Oxygen saturation and arterial blood gas showing hypoxaemia, Echocardiography for pulmonary hypertension and right heart function"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the erythrocytosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the polycythaemia to a primary haematological disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic mountain sickness."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_mountain_sickness-matrix",
+      "title": "Chronic mountain sickness: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A syndrome of excessive erythrocytosis and severe hypoxaemia in long-term residents of high altitude",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count documenting excessive erythrocytosis, Oxygen saturation and arterial blood gas showing hypoxaemia,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary polycythaemia from chronic lung or cardiac disease, Polycythaemia vera, Obstructive sleep apnoea with hypoxaemia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relocation to lower altitude, the single most effective intervention, reversing hypoxaemia and driving regression of the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the polycythaemia to a primary haematological disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic mountain sickness."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "High-altitude medicine references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 108-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_mountain_sickness-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Excessive erythrocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen saturation and arterial blood gas",
+          "cells": [
+            {
+              "text": "Hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension and right heart function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for sleep-disordered breathing or lung disease",
+          "cells": [
+            {
+              "text": "Coexisting causes of hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of primary polycythaemia",
+          "cells": [
+            {
+              "text": "Where appropriate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_mountain_sickness-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary polycythaemia from chronic lung or cardiac disease",
+          "cells": [
+            {
+              "text": "Chronic cardiopulmonary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycythaemia vera",
+          "cells": [
+            {
+              "text": "Primary clonal erythrocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea with hypoxaemia",
+          "cells": [
+            {
+              "text": "Sleep-related hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_mountain_sickness-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Descent to lower altitude",
+          "cells": [
+            {
+              "text": "Most effective intervention; reverses hypoxaemia and erythrocytosis"
+            },
+            {
+              "text": "Single most effective intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isovolaemic phlebotomy",
+          "cells": [
+            {
+              "text": "Reduces red-cell mass and blood viscosity when descent is not feasible"
+            },
+            {
+              "text": "Descent not feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetazolamide",
+          "cells": [
+            {
+              "text": "Respiratory stimulant to enhance ventilation and lower haematocrit"
+            },
+            {
+              "text": "Adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplemental oxygen",
+          "cells": [
+            {
+              "text": "Particularly nocturnal oxygen"
+            },
+            {
+              "text": "Counters hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension care",
+          "cells": [
+            {
+              "text": "Pulmonary vasodilators where cor pulmonale develops"
+            },
+            {
+              "text": "Right heart strain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting conditions",
+          "cells": [
+            {
+              "text": "Treat sleep-disordered breathing and chronic lung disease"
+            },
+            {
+              "text": "Aggravating causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Serial full blood count, oximetry and echocardiography; specialist referral"
+            },
+            {
+              "text": "Progression to pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_mountain_sickness-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of erythrocytosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relative erythrocytosis",
+          "cells": [
+            {
+              "text": "Hemoconcentration secondary to dehydration, diuretics, ethanol abuse, androgens or tobacco abuse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Absolute: hypoxia",
+          "cells": [
+            {
+              "text": "Carbon monoxide intoxication; high oxygen-affinity hemoglobin; high altitude; pulmonary disease; right to left cardiac or vascular shunts; sleep apnea syndrome; hepatopulmonary syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Absolute: renal disease",
+          "cells": [
+            {
+              "text": "Renal artery stenosis; focal sclerosing or membranous glomerulonephritis; postrenal transplantation; renal cysts; Bartter's syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Absolute: tumors",
+          "cells": [
+            {
+              "text": "Hypernephroma; hepatoma; cerebellar hemangioblastoma; uterine myoma; adrenal tumors; meningioma; pheochromocytoma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Absolute: drugs",
+          "cells": [
+            {
+              "text": "Androgens; recombinant erythropoietin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Absolute: familial (normal hemoglobin function)",
+          "cells": [
+            {
+              "text": "Erythropoietin receptor mutation; VHL mutations (Chuvash polycythemia); 2,3-BPG mutation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Absolute: polycythemia vera",
+          "cells": [
+            {
+              "text": "Listed as a category with no sub-items"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_mountain_sickness-dx-mgmt",
+      "title": "Diagnosis and management of Chronic mountain sickness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic mountain sickness: long-term high-altitude resident, breathless",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (right heart failure, thrombosis, hyperviscosity, cognitive decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiorespiratory review for right heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full blood count, arterial gases, oximetry and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Excessive erythrocytosis with chronic hypoxaemia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Descent to lower altitude as the most effective treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check secondary polycythaemia, polycythaemia vera and sleep apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Isovolaemic phlebotomy where descent is not feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acetazolamide and supplemental oxygen, particularly nocturnal",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pulmonary vasodilators where cor pulmonale develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial surveillance for progression to pulmonary hypertension",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

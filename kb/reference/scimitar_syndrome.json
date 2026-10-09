@@ -1,174 +1,452 @@
 {
- "id": "scimitar_syndrome",
- "name": "Scimitar syndrome",
- "aliases": [
-  "pulmonary venolobar syndrome",
-  "congenital pulmonary venolobar syndrome",
-  "hypogenetic lung syndrome",
-  "scimitar sign"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A form of partial anomalous pulmonary venous return in which right pulmonary venous drainage curves down to the inferior vena cava or right atrium",
-   "The curved vascular shadow paralleling the right heart border on the chest radiograph resembles a Turkish sword, giving the scimitar sign",
-   "Commonly accompanied by hypoplasia of the right lung, dextroposition of the heart and anomalous systemic arterial supply from the aorta to the affected lung",
-   "The anomalous vein produces a left-to-right shunt, and severity relates to shunt volume and any associated pulmonary hypertension",
-   "An infantile form presents with heart failure and pulmonary hypertension, whereas an adult form is often found incidentally or with recurrent infection",
-   "Associated cardiac defects, particularly atrial septal defect, are frequent and influence management",
-   "Repair options include baffling or reimplanting the anomalous vein and occluding the aberrant systemic arterial supply, guided by symptoms and shunt size"
+  "id": "scimitar_syndrome",
+  "name": "Scimitar syndrome",
+  "aliases": [
+    "pulmonary venolobar syndrome",
+    "congenital pulmonary venolobar syndrome",
+    "hypogenetic lung syndrome",
+    "scimitar sign"
   ],
-  "pathophysiology": "Scimitar syndrome is part of the pulmonary venolobar spectrum arising from abnormal development of the right lung bud and its venous drainage. All or part of the right lung drains anomalously through a scimitar-shaped vein into the inferior vena cava, right atrium, portal or hepatic veins rather than the left atrium, creating a left-to-right shunt. The affected lung is typically hypoplastic, pulling the heart rightward, and often receives an anomalous systemic arterial supply directly from the descending aorta, which adds a further left-to-right contribution and can cause pulmonary hypertension in the affected segment. The overall haemodynamic burden depends on the volume of anomalous flow, the aberrant arterial supply and any associated shunt lesions.",
-  "additionalDifferentials": [
-   "Isolated partial anomalous pulmonary venous return",
-   "Pulmonary sequestration",
-   "Atrial septal defect with unexplained right heart dilatation",
-   "Congenital pulmonary hypoplasia of other cause",
-   "Pulmonary arteriovenous malformation",
-   "Right lung agenesis or aplasia"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph to identify the scimitar shadow, lung hypoplasia and cardiac dextroposition",
-   "Echocardiography to assess shunt, right heart loading and associated defects",
-   "CT or MR angiography to delineate the anomalous vein, aberrant arterial supply and lung anatomy",
-   "Cardiac catheterisation with angiography to quantify the shunt and map the systemic arterial supply",
-   "Perfusion or ventilation imaging to assess function of the affected lung",
-   "Electrocardiogram for evidence of right heart volume loading"
-  ],
-  "redFlags": [
-   "Infantile presentation with heart failure and severe pulmonary hypertension",
-   "Recurrent pulmonary infection or haemoptysis from the anomalous segment",
-   "Progressive right heart dilatation from a large shunt",
-   "Signs of a large aberrant aortic supply causing pulmonary overcirculation"
-  ],
-  "prognosis": "The adult form is often well tolerated with a good outlook, while the infantile form with pulmonary hypertension and associated defects has a more guarded prognosis; surgical repair can be complicated by scimitar vein stenosis.",
-  "pitfalls": [
-   "Missing the anomalous systemic arterial supply, which can cause pulmonary overcirculation if left untreated",
-   "Assuming an isolated atrial septal defect and overlooking the anomalous venous drainage",
-   "Underappreciating pulmonary hypertension confined to the affected lung",
-   "Failing to recognise postoperative scimitar vein stenosis as a cause of persistent symptoms"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the infantile form with heart-failure therapy using diuretics and afterload reduction and treat associated pulmonary hypertension while planning intervention",
-   "Occlude any anomalous aortopulmonary systemic arterial supply by catheter embolisation to reduce left-to-right shunting",
-   "Offer surgical repair by rerouting or reimplanting the scimitar vein to the left atrium for a haemodynamically significant shunt, and repair associated defects such as an atrial septal defect",
-   "Treat and prevent recurrent lower respiratory infection in the hypoplastic lung, considering resection of a non-functioning segment where infection recurs",
-   "Observe small, asymptomatic adult-form shunts, which are often well tolerated",
-   "Monitor after repair for scimitar vein stenosis and residual pulmonary hypertension",
-   "Coordinate care through congenital cardiology and cardiothoracic surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scimitar_syndrome-pathway",
-   "title": "Scimitar syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A form of partial anomalous pulmonary venous return in which right pulmonary venous drainage curves down to the inferior vena cava or right atrium",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Infantile presentation with heart failure and severe pulmonary hypertension",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph to identify the scimitar shadow, lung hypoplasia and cardiac dextroposition, Echocardiography to assess shunt, right heart loading and associated defects, CT or MR angiography to delineate the anomalous"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the infantile form with heart-failure therapy using diuretics and afterload reduction and treat associated pulmonary hypertension while planning intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the anomalous systemic arterial supply, which can cause pulmonary overcirculation if left untreated"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scimitar syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "scimitar_syndrome-matrix",
-   "title": "Scimitar syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A form of partial anomalous pulmonary venous return in which right pulmonary venous drainage curves down to the inferior vena",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A form of partial anomalous pulmonary venous return in which right pulmonary venous drainage curves down to the inferior vena cava or right atrium",
+      "The curved vascular shadow paralleling the right heart border on the chest radiograph resembles a Turkish sword, giving the scimitar sign",
+      "Commonly accompanied by hypoplasia of the right lung, dextroposition of the heart and anomalous systemic arterial supply from the aorta to the affected lung",
+      "The anomalous vein produces a left-to-right shunt, and severity relates to shunt volume and any associated pulmonary hypertension",
+      "An infantile form presents with heart failure and pulmonary hypertension, whereas an adult form is often found incidentally or with recurrent infection",
+      "Associated cardiac defects, particularly atrial septal defect, are frequent and influence management",
+      "Repair options include baffling or reimplanting the anomalous vein and occluding the aberrant systemic arterial supply, guided by symptoms and shunt size"
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph to identify the scimitar shadow, lung hypoplasia and cardiac dextroposition, Echocardiography to assess shunt,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scimitar syndrome is part of the pulmonary venolobar spectrum arising from abnormal development of the right lung bud and its venous drainage. All or part of the right lung drains anomalously through a scimitar-shaped vein into the inferior vena cava, right atrium, portal or hepatic veins rather than the left atrium, creating a left-to-right shunt. The affected lung is typically hypoplastic, pulling the heart rightward, and often receives an anomalous systemic arterial supply directly from the descending aorta, which adds a further left-to-right contribution and can cause pulmonary hypertension in the affected segment. The overall haemodynamic burden depends on the volume of anomalous flow, the aberrant arterial supply and any associated shunt lesions.",
+    "additionalDifferentials": [
+      "Isolated partial anomalous pulmonary venous return",
+      "Pulmonary sequestration",
+      "Atrial septal defect with unexplained right heart dilatation",
+      "Congenital pulmonary hypoplasia of other cause",
+      "Pulmonary arteriovenous malformation",
+      "Right lung agenesis or aplasia"
     ],
-    [
-     "Primary Differentials",
-     "Isolated partial anomalous pulmonary venous return, Pulmonary sequestration, Atrial septal defect with unexplained right heart",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph to identify the scimitar shadow, lung hypoplasia and cardiac dextroposition",
+      "Echocardiography to assess shunt, right heart loading and associated defects",
+      "CT or MR angiography to delineate the anomalous vein, aberrant arterial supply and lung anatomy",
+      "Cardiac catheterisation with angiography to quantify the shunt and map the systemic arterial supply",
+      "Perfusion or ventilation imaging to assess function of the affected lung",
+      "Electrocardiogram for evidence of right heart volume loading"
     ],
-    [
-     "Management Strategy",
-     "Manage the infantile form with heart-failure therapy using diuretics and afterload reduction and treat associated pulmonary",
-     "Core treatment modality"
+    "redFlags": [
+      "Infantile presentation with heart failure and severe pulmonary hypertension",
+      "Recurrent pulmonary infection or haemoptysis from the anomalous segment",
+      "Progressive right heart dilatation from a large shunt",
+      "Signs of a large aberrant aortic supply causing pulmonary overcirculation"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the anomalous systemic arterial supply, which can cause pulmonary overcirculation if left untreated",
-     "Prevent diagnostic or management error"
+    "prognosis": "The adult form is often well tolerated with a good outlook, while the infantile form with pulmonary hypertension and associated defects has a more guarded prognosis; surgical repair can be complicated by scimitar vein stenosis.",
+    "pitfalls": [
+      "Missing the anomalous systemic arterial supply, which can cause pulmonary overcirculation if left untreated",
+      "Assuming an isolated atrial septal defect and overlooking the anomalous venous drainage",
+      "Underappreciating pulmonary hypertension confined to the affected lung",
+      "Failing to recognise postoperative scimitar vein stenosis as a cause of persistent symptoms"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the infantile form with heart-failure therapy using diuretics and afterload reduction and treat associated pulmonary hypertension while planning intervention",
+      "Occlude any anomalous aortopulmonary systemic arterial supply by catheter embolisation to reduce left-to-right shunting",
+      "Offer surgical repair by rerouting or reimplanting the scimitar vein to the left atrium for a haemodynamically significant shunt, and repair associated defects such as an atrial septal defect",
+      "Treat and prevent recurrent lower respiratory infection in the hypoplastic lung, considering resection of a non-functioning segment where infection recurs",
+      "Observe small, asymptomatic adult-form shunts, which are often well tolerated",
+      "Monitor after repair for scimitar vein stenosis and residual pulmonary hypertension",
+      "Coordinate care through congenital cardiology and cardiothoracic surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for scimitar syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scimitar-syndrome-real-image",
-   "title": "Scimitar syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "scimitar_syndrome-pathway",
+      "title": "Scimitar syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A form of partial anomalous pulmonary venous return in which right pulmonary venous drainage curves down to the inferior vena cava or right atrium",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Infantile presentation with heart failure and severe pulmonary hypertension",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph to identify the scimitar shadow, lung hypoplasia and cardiac dextroposition, Echocardiography to assess shunt, right heart loading and associated defects, CT or MR angiography to delineate the anomalous"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the infantile form with heart-failure therapy using diuretics and afterload reduction and treat associated pulmonary hypertension while planning intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the anomalous systemic arterial supply, which can cause pulmonary overcirculation if left untreated"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scimitar syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scimitar_syndrome-matrix",
+      "title": "Scimitar syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A form of partial anomalous pulmonary venous return in which right pulmonary venous drainage curves down to the inferior vena",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph to identify the scimitar shadow, lung hypoplasia and cardiac dextroposition, Echocardiography to assess shunt,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated partial anomalous pulmonary venous return, Pulmonary sequestration, Atrial septal defect with unexplained right heart",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the infantile form with heart-failure therapy using diuretics and afterload reduction and treat associated pulmonary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the anomalous systemic arterial supply, which can cause pulmonary overcirculation if left untreated",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scimitar syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scimitar_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Scimitar shadow, lung hypoplasia and cardiac dextroposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Shunt, right heart loading and associated defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Anomalous vein, aberrant arterial supply and lung anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation with angiography",
+          "cells": [
+            {
+              "text": "Quantifies shunt and maps systemic arterial supply"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perfusion or ventilation imaging",
+          "cells": [
+            {
+              "text": "Function of the affected lung"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Right heart volume loading"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scimitar_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atrial septal defect",
+          "cells": [
+            {
+              "text": "Overlooking the anomalous venous drainage when assuming an isolated ASD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary sequestration",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scimitar_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart-failure therapy for infants",
+          "cells": [
+            {
+              "text": "Diuretics and afterload reduction; treat pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter embolisation",
+          "cells": [
+            {
+              "text": "Occlude anomalous aortopulmonary systemic arterial supply"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Reroute or reimplant the scimitar vein to the left atrium for significant shunt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection control",
+          "cells": [
+            {
+              "text": "Treat recurrent infection; consider resecting a non-functioning segment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small asymptomatic adult-form shunts are often well tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-repair monitoring",
+          "cells": [
+            {
+              "text": "Scimitar vein stenosis and residual pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scimitar_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Scimitar syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Scimitar sign on chest radiograph with right lung hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Infant heart failure with pulmonary hypertension, or haemoptysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Heart-failure therapy and urgent congenital cardiology and surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography, then CT or MR angiography; catheter study if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Anomalous vein and any aortopulmonary supply delineated with a significant shunt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observe small asymptomatic shunt with follow-up imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Embolise anomalous systemic arterial supply",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reroute scimitar vein to the left atrium for a significant shunt",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat recurrent lower respiratory infection in hypoplastic lung",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for vein stenosis and residual pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Adult form good outlook; infantile form with pulmonary hypertension is guarded",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

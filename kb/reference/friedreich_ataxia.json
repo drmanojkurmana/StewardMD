@@ -1,175 +1,917 @@
 {
- "id": "friedreich_ataxia",
- "name": "Friedreich ataxia",
- "aliases": [
-  "FRDA",
-  "Friedreich's ataxia",
-  "FXN GAA repeat expansion",
-  "frataxin deficiency"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuromuscular Disorders reference texts / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common inherited ataxia, autosomal recessive and caused by a homozygous GAA trinucleotide repeat expansion in the first intron of the frataxin gene (FXN)",
-   "Typically presents before adulthood with progressive gait and limb ataxia, dysarthria, and early loss of lower-limb reflexes combined with upgoing plantar responses",
-   "There is prominent loss of joint position and vibration sense reflecting large-fibre sensory neuropathy and dorsal column involvement",
-   "Hypertrophic cardiomyopathy is a key systemic feature and a leading cause of death, so cardiac surveillance is essential",
-   "Diabetes mellitus or impaired glucose tolerance develops in a substantial minority",
-   "Skeletal deformities such as scoliosis and pes cavus, and optic atrophy or hearing loss, are common associated findings",
-   "Longer GAA expansions generally correlate with earlier onset and more severe disease"
+  "id": "friedreich_ataxia",
+  "name": "Friedreich ataxia",
+  "aliases": [
+    "FRDA",
+    "Friedreich's ataxia",
+    "FXN GAA repeat expansion",
+    "frataxin deficiency"
   ],
-  "pathophysiology": "Friedreich ataxia is an autosomal recessive disorder caused most often by a large homozygous GAA repeat expansion in the first intron of FXN, which silences transcription and reduces levels of frataxin, a mitochondrial protein involved in iron-sulfur cluster biogenesis and iron handling. Frataxin deficiency impairs mitochondrial energy metabolism and leads to intramitochondrial iron accumulation and oxidative stress. The consequent degeneration affects dorsal root ganglia, dorsal columns, spinocerebellar and corticospinal tracts and the cerebellar dentate nucleus, producing the mixed sensory ataxic and pyramidal syndrome, while mitochondrial dysfunction in cardiac and pancreatic tissue accounts for the hypertrophic cardiomyopathy and diabetes.",
-  "additionalDifferentials": [
-   "Other autosomal recessive cerebellar ataxias (e.g. ataxia with vitamin E deficiency)",
-   "Spinocerebellar ataxias (dominant repeat expansions)",
-   "Charcot-Marie-Tooth disease and other hereditary neuropathies",
-   "Vitamin B12 deficiency with subacute combined degeneration",
-   "Ataxia-telangiectasia",
-   "Mitochondrial disorders"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for the FXN GAA repeat expansion, which is diagnostic",
-   "Echocardiography and electrocardiography to detect hypertrophic cardiomyopathy and arrhythmia",
-   "Nerve conduction studies showing an axonal sensory neuropathy with reduced or absent sensory potentials",
-   "Fasting glucose and glycated haemoglobin to screen for diabetes",
-   "MRI showing cervical spinal cord atrophy with relatively preserved cerebellum early on",
-   "Assessment for scoliosis, foot deformity, vision and hearing"
-  ],
-  "redFlags": [
-   "Symptoms or signs of heart failure, syncope or significant arrhythmia",
-   "Rapidly progressive cardiac dysfunction on surveillance imaging",
-   "New hyperglycaemia or diabetic decompensation",
-   "Respiratory compromise from severe progressive scoliosis"
-  ],
-  "prognosis": "Friedreich ataxia is progressive, with most affected individuals losing independent ambulation within one to two decades of onset; cardiomyopathy and its complications are the principal determinants of reduced life expectancy, though there is considerable variability related to repeat length.",
-  "pitfalls": [
-   "Neglecting cardiac surveillance, given that cardiomyopathy is a major cause of mortality",
-   "Being misled by the combination of absent reflexes with extensor plantar responses and missing the diagnosis",
-   "Failing to screen for and manage diabetes",
-   "Attributing scoliosis and foot deformity to orthopaedic causes alone"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "OMIM: Friedreich ataxia (FXN)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Disease-directed therapy with the Nrf2 activator omaveloxolone to slow neurological progression where available and appropriate",
-   "Multidisciplinary rehabilitation with physiotherapy, occupational therapy and speech-language therapy for ataxia, dysarthria and functional decline, plus mobility aids",
-   "Cardiac surveillance with regular echocardiography and electrocardiography, and treatment of hypertrophic cardiomyopathy, heart failure and arrhythmia",
-   "Screening for and management of diabetes mellitus and impaired glucose tolerance",
-   "Orthopaedic management of scoliosis and pes cavus, including bracing or corrective surgery",
-   "Ophthalmology and audiology review for optic atrophy and hearing loss, with appropriate aids",
-   "Genetic counselling for the autosomal recessive FXN disorder, with carrier testing and reproductive options",
-   "Escalation to specialist cardiology for signs of heart failure, syncope or significant arrhythmia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "friedreich_ataxia-pathway",
-   "title": "Friedreich ataxia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common inherited ataxia, autosomal recessive and caused by a homozygous GAA trinucleotide repeat expansion in the first intron of the frataxin gene (FXN)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptoms or signs of heart failure, syncope or significant arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for the FXN GAA repeat expansion, which is diagnostic, Echocardiography and electrocardiography to detect hypertrophic cardiomyopathy and arrhythmia, Nerve conduction studies showing an axonal sensory"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Disease-directed therapy with the Nrf2 activator omaveloxolone to slow neurological progression where available and appropriate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Neglecting cardiac surveillance, given that cardiomyopathy is a major cause of mortality"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of friedreich ataxia."
-  }
- ],
- "tables": [
-  {
-   "id": "friedreich_ataxia-matrix",
-   "title": "Friedreich ataxia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common inherited ataxia, autosomal recessive and caused by a homozygous GAA trinucleotide repeat expansion in the first",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuromuscular Disorders reference texts / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common inherited ataxia, autosomal recessive and caused by a homozygous GAA trinucleotide repeat expansion in the first intron of the frataxin gene (FXN)",
+      "Typically presents before adulthood with progressive gait and limb ataxia, dysarthria, and early loss of lower-limb reflexes combined with upgoing plantar responses",
+      "There is prominent loss of joint position and vibration sense reflecting large-fibre sensory neuropathy and dorsal column involvement",
+      "Hypertrophic cardiomyopathy is a key systemic feature and a leading cause of death, so cardiac surveillance is essential",
+      "Diabetes mellitus or impaired glucose tolerance develops in a substantial minority",
+      "Skeletal deformities such as scoliosis and pes cavus, and optic atrophy or hearing loss, are common associated findings",
+      "Longer GAA expansions generally correlate with earlier onset and more severe disease"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for the FXN GAA repeat expansion, which is diagnostic, Echocardiography and electrocardiography to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Friedreich ataxia is an autosomal recessive disorder caused most often by a large homozygous GAA repeat expansion in the first intron of FXN, which silences transcription and reduces levels of frataxin, a mitochondrial protein involved in iron-sulfur cluster biogenesis and iron handling. Frataxin deficiency impairs mitochondrial energy metabolism and leads to intramitochondrial iron accumulation and oxidative stress. The consequent degeneration affects dorsal root ganglia, dorsal columns, spinocerebellar and corticospinal tracts and the cerebellar dentate nucleus, producing the mixed sensory ataxic and pyramidal syndrome, while mitochondrial dysfunction in cardiac and pancreatic tissue accounts for the hypertrophic cardiomyopathy and diabetes.",
+    "additionalDifferentials": [
+      "Other autosomal recessive cerebellar ataxias (e.g. ataxia with vitamin E deficiency)",
+      "Spinocerebellar ataxias (dominant repeat expansions)",
+      "Charcot-Marie-Tooth disease and other hereditary neuropathies",
+      "Vitamin B12 deficiency with subacute combined degeneration",
+      "Ataxia-telangiectasia",
+      "Mitochondrial disorders"
     ],
-    [
-     "Primary Differentials",
-     "Other autosomal recessive cerebellar ataxias (e.g. ataxia with vitamin E deficiency), Spinocerebellar ataxias (dominant repeat",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for the FXN GAA repeat expansion, which is diagnostic",
+      "Echocardiography and electrocardiography to detect hypertrophic cardiomyopathy and arrhythmia",
+      "Nerve conduction studies showing an axonal sensory neuropathy with reduced or absent sensory potentials",
+      "Fasting glucose and glycated haemoglobin to screen for diabetes",
+      "MRI showing cervical spinal cord atrophy with relatively preserved cerebellum early on",
+      "Assessment for scoliosis, foot deformity, vision and hearing"
     ],
-    [
-     "Management Strategy",
-     "Disease-directed therapy with the Nrf2 activator omaveloxolone to slow neurological progression where available and appropriate",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptoms or signs of heart failure, syncope or significant arrhythmia",
+      "Rapidly progressive cardiac dysfunction on surveillance imaging",
+      "New hyperglycaemia or diabetic decompensation",
+      "Respiratory compromise from severe progressive scoliosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Neglecting cardiac surveillance, given that cardiomyopathy is a major cause of mortality",
-     "Prevent diagnostic or management error"
+    "prognosis": "Friedreich ataxia is progressive, with most affected individuals losing independent ambulation within one to two decades of onset; cardiomyopathy and its complications are the principal determinants of reduced life expectancy, though there is considerable variability related to repeat length.",
+    "pitfalls": [
+      "Neglecting cardiac surveillance, given that cardiomyopathy is a major cause of mortality",
+      "Being misled by the combination of absent reflexes with extensor plantar responses and missing the diagnosis",
+      "Failing to screen for and manage diabetes",
+      "Attributing scoliosis and foot deformity to orthopaedic causes alone"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "OMIM: Friedreich ataxia (FXN)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Disease-directed therapy with the Nrf2 activator omaveloxolone to slow neurological progression where available and appropriate",
+      "Multidisciplinary rehabilitation with physiotherapy, occupational therapy and speech-language therapy for ataxia, dysarthria and functional decline, plus mobility aids",
+      "Cardiac surveillance with regular echocardiography and electrocardiography, and treatment of hypertrophic cardiomyopathy, heart failure and arrhythmia",
+      "Screening for and management of diabetes mellitus and impaired glucose tolerance",
+      "Orthopaedic management of scoliosis and pes cavus, including bracing or corrective surgery",
+      "Ophthalmology and audiology review for optic atrophy and hearing loss, with appropriate aids",
+      "Genetic counselling for the autosomal recessive FXN disorder, with carrier testing and reproductive options",
+      "Escalation to specialist cardiology for signs of heart failure, syncope or significant arrhythmia"
     ]
-   ],
-   "caption": "Overview comparison matrix for friedreich ataxia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "friedreich-ataxia-real-image",
-   "title": "Friedreich ataxia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "friedreich_ataxia-pathway",
+      "title": "Friedreich ataxia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common inherited ataxia, autosomal recessive and caused by a homozygous GAA trinucleotide repeat expansion in the first intron of the frataxin gene (FXN)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptoms or signs of heart failure, syncope or significant arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for the FXN GAA repeat expansion, which is diagnostic, Echocardiography and electrocardiography to detect hypertrophic cardiomyopathy and arrhythmia, Nerve conduction studies showing an axonal sensory"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Disease-directed therapy with the Nrf2 activator omaveloxolone to slow neurological progression where available and appropriate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Neglecting cardiac surveillance, given that cardiomyopathy is a major cause of mortality"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of friedreich ataxia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "friedreich_ataxia-matrix",
+      "title": "Friedreich ataxia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common inherited ataxia, autosomal recessive and caused by a homozygous GAA trinucleotide repeat expansion in the first",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for the FXN GAA repeat expansion, which is diagnostic, Echocardiography and electrocardiography to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other autosomal recessive cerebellar ataxias (e.g. ataxia with vitamin E deficiency), Spinocerebellar ataxias (dominant repeat",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Disease-directed therapy with the Nrf2 activator omaveloxolone to slow neurological progression where available and appropriate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Neglecting cardiac surveillance, given that cardiomyopathy is a major cause of mortality",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for friedreich ataxia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular Disorders reference texts / OMIM",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 24-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 61-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "friedreich_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing for FXN GAA repeat expansion",
+          "cells": [
+            {
+              "text": "Diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and electrocardiography",
+          "cells": [
+            {
+              "text": "Detects hypertrophic cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Axonal sensory neuropathy with reduced or absent sensory potentials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and glycated haemoglobin",
+          "cells": [
+            {
+              "text": "Screens for diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the spine and cerebellum",
+          "cells": [
+            {
+              "text": "Cervical spinal cord atrophy with relatively preserved cerebellum early on"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for scoliosis, foot deformity, vision and hearing",
+          "cells": [
+            {
+              "text": "Associated complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "friedreich_ataxia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin B12 deficiency with subacute combined degeneration",
+          "cells": [
+            {
+              "text": "Treatable mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinocerebellar ataxias",
+          "cells": [
+            {
+              "text": "Dominant repeat expansions, unlike the recessive disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "friedreich_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Omaveloxolone",
+          "cells": [
+            {
+              "text": "Nrf2 activator to slow neurological progression where available and appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech-language therapy for ataxia, dysarthria and decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Regular echocardiography and ECG; treats cardiomyopathy, heart failure and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes screening and management",
+          "cells": [
+            {
+              "text": "Includes impaired glucose tolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Scoliosis and pes cavus; bracing or corrective surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and audiology",
+          "cells": [
+            {
+              "text": "Optic atrophy and hearing loss, with appropriate aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive FXN disorder; carrier testing and reproductive options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist cardiology escalation",
+          "cells": [
+            {
+              "text": "For heart failure, syncope or significant arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "friedreich_ataxia-ddx-2",
+      "kind": "ddx",
+      "title": "Cerebellar ataxia versus sensory ataxia versus frontal gait",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Cerebellar ataxia",
+        "Sensory ataxia",
+        "Frontal gait"
+      ],
+      "rows": [
+        {
+          "parameter": "Base of support",
+          "cells": [
+            {
+              "text": "Wide-based"
+            },
+            {
+              "text": "Narrow base, looks down"
+            },
+            {
+              "text": "Wide-based"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Velocity",
+          "cells": [
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Slow"
+            },
+            {
+              "text": "Very slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stride",
+          "cells": [
+            {
+              "text": "Irregular, lurching"
+            },
+            {
+              "text": "Regular with path deviation"
+            },
+            {
+              "text": "Short, shuffling"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Romberg",
+          "cells": [
+            {
+              "text": "+/-"
+            },
+            {
+              "text": "Unsteady, falls"
+            },
+            {
+              "text": "+/-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heel to shin",
+          "cells": [
+            {
+              "text": "Abnormal"
+            },
+            {
+              "text": "+/-"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Initiation",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Hesitant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Turns",
+          "cells": [
+            {
+              "text": "Unsteady"
+            },
+            {
+              "text": "+/-"
+            },
+            {
+              "text": "Hesitant, multistep"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Postural instability",
+          "cells": [
+            {
+              "text": "+"
+            },
+            {
+              "text": "+++"
+            },
+            {
+              "text": "++++; poor postural synergies when rising from a chair"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Falls",
+          "cells": [
+            {
+              "text": "Late event"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "Frequent"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "friedreich_ataxia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Selected trinucleotide repeat disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Locus",
+        "Repeat",
+        "Triplet length (normal/disease)",
+        "Inheritance",
+        "Gene product"
+      ],
+      "rows": [
+        {
+          "parameter": "X-chromosomal spinobulbar muscular atrophy (SBMA)",
+          "cells": [
+            {
+              "text": "Xq11-q12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "11-34/40-62"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "Androgen receptor"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXA)",
+          "cells": [
+            {
+              "text": "Xq27.3"
+            },
+            {
+              "text": "CGG"
+            },
+            {
+              "text": "6-50/200-300"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-1 protein"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXE)",
+          "cells": [
+            {
+              "text": "Xq28"
+            },
+            {
+              "text": "GCC"
+            },
+            {
+              "text": "6-25/>200"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-2 protein"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dystrophia myotonica (DM)",
+          "cells": [
+            {
+              "text": "19q13.2-q13.3"
+            },
+            {
+              "text": "CTG"
+            },
+            {
+              "text": "5-30/200-1000"
+            },
+            {
+              "text": "AD, variable penetrance"
+            },
+            {
+              "text": "Myotonin protein kinase"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Huntington's disease (HD)",
+          "cells": [
+            {
+              "text": "4p16.3"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-34/37-180"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Huntingtin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia type 1 (SCA1)",
+          "cells": [
+            {
+              "text": "6p21.3-21.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-39/40-88"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "SCA2",
+          "cells": [
+            {
+              "text": "12q24.1"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "15-31/34-400"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 2"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "SCA3; Machado-Joseph disease (MD)",
+          "cells": [
+            {
+              "text": "14q21"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "13-36/55-86"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "SCA6 (CACNA1A)",
+          "cells": [
+            {
+              "text": "19p13.1-13.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-16/20-33"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Alpha 1A voltage-dependent L-type calcium channel"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "SCA7",
+          "cells": [
+            {
+              "text": "3p21.1-p12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-19/37 to >300"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 7"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "SCA12",
+          "cells": [
+            {
+              "text": "5q31"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-26/66-78"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Protein phosphatase 2A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dentorubral pallidoluysian atrophy (DRPLA)",
+          "cells": [
+            {
+              "text": "12p"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "7-23/49-75"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Atrophin 1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Friedreich ataxia (FRDA1)",
+          "cells": [
+            {
+              "text": "9q13-21"
+            },
+            {
+              "text": "GAA"
+            },
+            {
+              "text": "7-22/200-900"
+            },
+            {
+              "text": "AR"
+            },
+            {
+              "text": "Frataxin"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "friedreich_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of Friedreich ataxia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Friedreich ataxia: progressive ataxia with absent reflexes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (heart failure, syncope, significant arrhythmia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to specialist cardiology for heart failure, syncope or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FXN GAA repeat testing, echocardiography, ECG, nerve conduction, spinal MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does FXN GAA repeat expansion testing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider B12 deficiency, spinocerebellar ataxia or hereditary neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Omaveloxolone to slow neurological progression where available",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multidisciplinary rehabilitation for ataxia, dysarthria and functional decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Regular cardiac surveillance; treat cardiomyopathy and arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diabetes screening; orthopaedic care for scoliosis and pes cavus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive; most lose independent walking within one to two decades",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

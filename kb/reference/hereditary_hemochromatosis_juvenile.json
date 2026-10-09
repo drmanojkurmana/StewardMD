@@ -1,177 +1,473 @@
 {
- "id": "hereditary_hemochromatosis_juvenile",
- "name": "Juvenile hereditary haemochromatosis",
- "aliases": [
-  "juvenile haemochromatosis",
-  "type 2 haemochromatosis",
-  "HJV-related haemochromatosis",
-  "hemojuvelin deficiency",
-  "HAMP-related haemochromatosis",
-  "hepcidin deficiency",
-  "HFE2"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive iron-overload disorder that presents far earlier and more aggressively than classic HFE haemochromatosis, typically in the second or third decade",
-   "Caused by biallelic mutations in HJV (hemojuvelin, type 2A) or, less commonly, HAMP (hepcidin, type 2B), both of which cripple hepcidin signalling",
-   "Hypogonadotrophic hypogonadism and cardiomyopathy dominate the early picture, whereas hepatic cirrhosis and diabetes tend to appear later than in adult-onset disease",
-   "Markedly raised transferrin saturation and ferritin are the biochemical hallmarks, often more extreme than in HFE disease",
-   "Cardiac failure and arrhythmia are the leading causes of early death and demand a low threshold for cardiac assessment",
-   "Diagnosis rests on transferrin saturation, ferritin, and confirmatory HJV/HAMP genetic testing, with hepatic iron quantification by MRI where needed",
-   "Aggressive iron depletion by phlebotomy (with iron chelation when phlebotomy is not tolerated) can reverse or prevent organ damage if started early"
+  "id": "hereditary_hemochromatosis_juvenile",
+  "name": "Juvenile hereditary haemochromatosis",
+  "aliases": [
+    "juvenile haemochromatosis",
+    "type 2 haemochromatosis",
+    "HJV-related haemochromatosis",
+    "hemojuvelin deficiency",
+    "HAMP-related haemochromatosis",
+    "hepcidin deficiency",
+    "HFE2"
   ],
-  "pathophysiology": "Juvenile haemochromatosis arises from loss-of-function mutations that abolish the hepcidin axis governing systemic iron balance. Hemojuvelin, encoded by HJV, is a co-receptor that amplifies bone morphogenetic protein signalling to drive hepatic hepcidin production; HAMP encodes hepcidin itself. When either is defective, hepcidin is deficient, so ferroportin on enterocytes and macrophages is not degraded, and iron floods unrestrained into the circulation. The resulting non-transferrin-bound iron is deposited in the heart, endocrine organs, and liver, generating oxidative injury. Because the defect strikes the master iron-regulatory hormone directly and completely, overload accumulates much faster than in the partial HFE phenotype, explaining the early and severe cardiac and endocrine disease.",
-  "additionalDifferentials": [
-   "Classic HFE-related (type 1) hereditary haemochromatosis",
-   "Transferrin receptor 2 (TFR2, type 3) haemochromatosis",
-   "Ferroportin disease (SLC40A1, type 4)",
-   "Transfusional (secondary) iron overload from chronic anaemias",
-   "Aceruloplasminaemia and atransferrinaemia",
-   "Non-alcoholic fatty liver disease with hyperferritinaemia"
-  ],
-  "additionalInvestigations": [
-   "Fasting transferrin saturation and serum ferritin as first-line iron studies",
-   "HJV and HAMP molecular genetic testing to confirm the subtype",
-   "Hepatic MRI (R2/T2*) to quantify liver iron non-invasively",
-   "Cardiac MRI T2* and echocardiography to assess myocardial iron and function",
-   "Endocrine screen including gonadotrophins, sex steroids, and glucose tolerance",
-   "Liver function tests and fibrosis assessment, with biopsy reserved for uncertain cases"
-  ],
-  "redFlags": [
-   "Heart failure, conduction disturbance, or arrhythmia indicating myocardial iron loading",
-   "Rapidly rising ferritin with very high transferrin saturation in a young patient",
-   "Signs of hypogonadism or new diabetes in adolescence or early adulthood",
-   "Evidence of hepatic decompensation or emerging hepatocellular carcinoma"
-  ],
-  "prognosis": "Untreated juvenile haemochromatosis carries a poor outlook, with cardiac failure driving early mortality, but timely and sustained iron depletion can prevent or reverse much of the organ damage and greatly improve survival.",
-  "pitfalls": [
-   "Attributing severe iron overload in a young patient to lifestyle or HFE disease and missing HJV/HAMP mutations",
-   "Overlooking early cardiomyopathy because liver disease has not yet become prominent",
-   "Relying on ferritin alone, which is an acute-phase reactant, without transferrin saturation and genetics",
-   "Delaying vigorous phlebotomy while awaiting organ complications rather than pre-empting them"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Aggressive therapeutic phlebotomy (venesection) to deplete iron stores is the mainstay of treatment",
-   "Iron chelation with deferoxamine, deferasirox or deferiprone where phlebotomy is not tolerated or in severe cardiac iron loading, sometimes combined with venesection",
-   "Urgent cardiac assessment and management of iron cardiomyopathy and arrhythmia, the leading cause of early death, with intensified iron removal",
-   "Hormone replacement for hypogonadotrophic hypogonadism and management of diabetes mellitus where present",
-   "Advise avoidance of iron and vitamin C supplements and excess alcohol, with dietary guidance",
-   "Monitor transferrin saturation and ferritin to guide venesection, with hepatic and cardiac MRI T2* surveillance of tissue iron",
-   "Genetic counselling and family screening for HJV and HAMP variants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_hemochromatosis_juvenile-pathway",
-   "title": "Juvenile hereditary haemochromatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive iron-overload disorder that presents far earlier and more aggressively than classic HFE haemochromatosis, typically in the second or third decade",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Heart failure, conduction disturbance, or arrhythmia indicating myocardial iron loading",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting transferrin saturation and serum ferritin as first-line iron studies, HJV and HAMP molecular genetic testing to confirm the subtype, Hepatic MRI (R2/T2*) to quantify liver iron non-invasively"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Aggressive therapeutic phlebotomy (venesection) to deplete iron stores is the mainstay of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing severe iron overload in a young patient to lifestyle or HFE disease and missing HJV/HAMP mutations"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of juvenile hereditary haemochromatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_hemochromatosis_juvenile-matrix",
-   "title": "Juvenile hereditary haemochromatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive iron-overload disorder that presents far earlier and more aggressively than classic HFE haemochromatosis,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive iron-overload disorder that presents far earlier and more aggressively than classic HFE haemochromatosis, typically in the second or third decade",
+      "Caused by biallelic mutations in HJV (hemojuvelin, type 2A) or, less commonly, HAMP (hepcidin, type 2B), both of which cripple hepcidin signalling",
+      "Hypogonadotrophic hypogonadism and cardiomyopathy dominate the early picture, whereas hepatic cirrhosis and diabetes tend to appear later than in adult-onset disease",
+      "Markedly raised transferrin saturation and ferritin are the biochemical hallmarks, often more extreme than in HFE disease",
+      "Cardiac failure and arrhythmia are the leading causes of early death and demand a low threshold for cardiac assessment",
+      "Diagnosis rests on transferrin saturation, ferritin, and confirmatory HJV/HAMP genetic testing, with hepatic iron quantification by MRI where needed",
+      "Aggressive iron depletion by phlebotomy (with iron chelation when phlebotomy is not tolerated) can reverse or prevent organ damage if started early"
     ],
-    [
-     "Key Investigations",
-     "Fasting transferrin saturation and serum ferritin as first-line iron studies, HJV and HAMP molecular genetic testing to confirm",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Juvenile haemochromatosis arises from loss-of-function mutations that abolish the hepcidin axis governing systemic iron balance. Hemojuvelin, encoded by HJV, is a co-receptor that amplifies bone morphogenetic protein signalling to drive hepatic hepcidin production; HAMP encodes hepcidin itself. When either is defective, hepcidin is deficient, so ferroportin on enterocytes and macrophages is not degraded, and iron floods unrestrained into the circulation. The resulting non-transferrin-bound iron is deposited in the heart, endocrine organs, and liver, generating oxidative injury. Because the defect strikes the master iron-regulatory hormone directly and completely, overload accumulates much faster than in the partial HFE phenotype, explaining the early and severe cardiac and endocrine disease.",
+    "additionalDifferentials": [
+      "Classic HFE-related (type 1) hereditary haemochromatosis",
+      "Transferrin receptor 2 (TFR2, type 3) haemochromatosis",
+      "Ferroportin disease (SLC40A1, type 4)",
+      "Transfusional (secondary) iron overload from chronic anaemias",
+      "Aceruloplasminaemia and atransferrinaemia",
+      "Non-alcoholic fatty liver disease with hyperferritinaemia"
     ],
-    [
-     "Primary Differentials",
-     "Classic HFE-related (type 1) hereditary haemochromatosis, Transferrin receptor 2 (TFR2, type 3) haemochromatosis, Ferroportin",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting transferrin saturation and serum ferritin as first-line iron studies",
+      "HJV and HAMP molecular genetic testing to confirm the subtype",
+      "Hepatic MRI (R2/T2*) to quantify liver iron non-invasively",
+      "Cardiac MRI T2* and echocardiography to assess myocardial iron and function",
+      "Endocrine screen including gonadotrophins, sex steroids, and glucose tolerance",
+      "Liver function tests and fibrosis assessment, with biopsy reserved for uncertain cases"
     ],
-    [
-     "Management Strategy",
-     "Aggressive therapeutic phlebotomy (venesection) to deplete iron stores is the mainstay of treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Heart failure, conduction disturbance, or arrhythmia indicating myocardial iron loading",
+      "Rapidly rising ferritin with very high transferrin saturation in a young patient",
+      "Signs of hypogonadism or new diabetes in adolescence or early adulthood",
+      "Evidence of hepatic decompensation or emerging hepatocellular carcinoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing severe iron overload in a young patient to lifestyle or HFE disease and missing HJV/HAMP mutations",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated juvenile haemochromatosis carries a poor outlook, with cardiac failure driving early mortality, but timely and sustained iron depletion can prevent or reverse much of the organ damage and greatly improve survival.",
+    "pitfalls": [
+      "Attributing severe iron overload in a young patient to lifestyle or HFE disease and missing HJV/HAMP mutations",
+      "Overlooking early cardiomyopathy because liver disease has not yet become prominent",
+      "Relying on ferritin alone, which is an acute-phase reactant, without transferrin saturation and genetics",
+      "Delaying vigorous phlebotomy while awaiting organ complications rather than pre-empting them"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Aggressive therapeutic phlebotomy (venesection) to deplete iron stores is the mainstay of treatment",
+      "Iron chelation with deferoxamine, deferasirox or deferiprone where phlebotomy is not tolerated or in severe cardiac iron loading, sometimes combined with venesection",
+      "Urgent cardiac assessment and management of iron cardiomyopathy and arrhythmia, the leading cause of early death, with intensified iron removal",
+      "Hormone replacement for hypogonadotrophic hypogonadism and management of diabetes mellitus where present",
+      "Advise avoidance of iron and vitamin C supplements and excess alcohol, with dietary guidance",
+      "Monitor transferrin saturation and ferritin to guide venesection, with hepatic and cardiac MRI T2* surveillance of tissue iron",
+      "Genetic counselling and family screening for HJV and HAMP variants"
     ]
-   ],
-   "caption": "Overview comparison matrix for juvenile hereditary haemochromatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-hemochromatosis-juvenile-real-image",
-   "title": "Juvenile hereditary haemochromatosis: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "hereditary_hemochromatosis_juvenile-pathway",
+      "title": "Juvenile hereditary haemochromatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive iron-overload disorder that presents far earlier and more aggressively than classic HFE haemochromatosis, typically in the second or third decade",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Heart failure, conduction disturbance, or arrhythmia indicating myocardial iron loading",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting transferrin saturation and serum ferritin as first-line iron studies, HJV and HAMP molecular genetic testing to confirm the subtype, Hepatic MRI (R2/T2*) to quantify liver iron non-invasively"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Aggressive therapeutic phlebotomy (venesection) to deplete iron stores is the mainstay of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing severe iron overload in a young patient to lifestyle or HFE disease and missing HJV/HAMP mutations"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of juvenile hereditary haemochromatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_hemochromatosis_juvenile-matrix",
+      "title": "Juvenile hereditary haemochromatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive iron-overload disorder that presents far earlier and more aggressively than classic HFE haemochromatosis,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting transferrin saturation and serum ferritin as first-line iron studies, HJV and HAMP molecular genetic testing to confirm",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic HFE-related (type 1) hereditary haemochromatosis, Transferrin receptor 2 (TFR2, type 3) haemochromatosis, Ferroportin",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Aggressive therapeutic phlebotomy (venesection) to deplete iron stores is the mainstay of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing severe iron overload in a young patient to lifestyle or HFE disease and missing HJV/HAMP mutations",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for juvenile hereditary haemochromatosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_hemochromatosis_juvenile-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting transferrin saturation and serum ferritin",
+          "cells": [
+            {
+              "text": "Markedly raised; biochemical hallmarks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HJV and HAMP molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic MRI (R2/T2*)",
+          "cells": [
+            {
+              "text": "Quantifies liver iron non-invasively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI T2* and echocardiography",
+          "cells": [
+            {
+              "text": "Myocardial iron and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine screen (gonadotrophins, sex steroids, glucose tolerance)",
+          "cells": [
+            {
+              "text": "Hypogonadotrophic hypogonadism and diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and fibrosis assessment",
+          "cells": [
+            {
+              "text": "Biopsy reserved for uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hemochromatosis_juvenile-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transfusional (secondary) iron overload",
+          "cells": [
+            {
+              "text": "Arises from chronic anaemia or transfusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic HFE-related haemochromatosis (type 1)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transferrin receptor 2 haemochromatosis (type 3)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_hemochromatosis_juvenile-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic phlebotomy",
+          "cells": [
+            {
+              "text": "Mainstay, to deplete iron stores"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Deferoxamine, deferasirox or deferiprone where phlebotomy is not feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent cardiac assessment",
+          "cells": [
+            {
+              "text": "Iron cardiomyopathy and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement and diabetes care",
+          "cells": [
+            {
+              "text": "Hypogonadotrophic hypogonadism; diabetes management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle advice",
+          "cells": [
+            {
+              "text": "Avoid iron and vitamin C supplements and excess alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Transferrin saturation and ferritin to guide venesection; hepatic and cardiac review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "HJV and HAMP variants and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_hemochromatosis_juvenile-dx-mgmt",
+      "title": "Diagnosis and management of Juvenile hereditary haemochromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early hypogonadism, diabetes or heart failure with very high ferritin and iron saturation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, arrhythmia, decompensated liver disease or rapidly rising ferritin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac assessment for iron cardiomyopathy and arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin saturation and ferritin; HJV and HAMP testing; cardiac and liver MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are HJV or HAMP variants confirmed, with secondary iron overload excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HFE, TFR2, ferroportin disease or transfusional iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Therapeutic phlebotomy to deplete iron stores, the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron chelation where phlebotomy is not feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hormone replacement for hypogonadism and management of diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid iron and vitamin C supplements and excess alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Iron stores reduced; cardiac and endocrine complications managed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

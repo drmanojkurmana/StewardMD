@@ -1,175 +1,462 @@
 {
- "id": "sea_snake_envenomation",
- "name": "Sea snake envenomation",
- "aliases": [
-  "sea snake bite",
-  "Hydrophiinae envenomation",
-  "Enhydrina schistosa bite",
-  "marine snake envenomation"
- ],
- "class": "non_infective",
- "system": "Toxicology / Envenomation",
- "specialty": "Clinical Toxicology / Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sea snakes are elapids whose bites are often painless with minimal local reaction, so the severity can be underestimated",
-   "Systemic effects are delayed, typically appearing after 30 minutes to several hours, so a bite requires prolonged observation",
-   "Venom is both neurotoxic (descending flaccid paralysis) and myotoxic, producing muscle pain, stiffness and rhabdomyolysis",
-   "Rhabdomyolysis leads to myoglobinuria, hyperkalaemia and acute kidney injury, which are major causes of death",
-   "Ptosis, bulbar and respiratory muscle weakness signal neurotoxicity and mandate airway and ventilation readiness",
-   "Pressure immobilisation is appropriate as first aid for these neurotoxic elapid bites to slow venom spread",
-   "Species-appropriate (sea snake or, where used, tiger snake) antivenom is the definitive treatment for systemic envenomation"
+  "id": "sea_snake_envenomation",
+  "name": "Sea snake envenomation",
+  "aliases": [
+    "sea snake bite",
+    "Hydrophiinae envenomation",
+    "Enhydrina schistosa bite",
+    "marine snake envenomation"
   ],
-  "pathophysiology": "Sea snake venom contains post-synaptic and pre-synaptic neurotoxins that block neuromuscular transmission, producing a descending flaccid paralysis of cranial, bulbar and respiratory muscles similar to terrestrial elapids. Potent myotoxins additionally damage skeletal muscle, causing pain, stiffness and rhabdomyolysis with release of myoglobin and potassium. Myoglobinuria can precipitate acute kidney injury, and hyperkalaemia poses a direct cardiac threat. Local tissue effects are typically minimal, which can mask the seriousness of the systemic envenomation.",
-  "additionalDifferentials": [
-   "Terrestrial elapid envenomation",
-   "Primary neuromuscular disorder (myasthenic or Guillain-Barre-type presentation)",
-   "Other cause of rhabdomyolysis",
-   "Marine fish spine envenomation",
-   "Electrolyte disturbance causing weakness",
-   "Non-envenoming (dry) bite with anxiety"
-  ],
-  "additionalInvestigations": [
-   "Creatine kinase and serial trends for myotoxicity",
-   "Serum potassium and continuous cardiac monitoring for hyperkalaemia",
-   "Renal function and urinalysis for myoglobinuria and acute kidney injury",
-   "Serial forced vital capacity or spirometry for neurotoxic respiratory decline",
-   "Coagulation studies to help distinguish from procoagulant terrestrial snakes",
-   "Electrocardiography"
-  ],
-  "redFlags": [
-   "Progressive bulbar or respiratory muscle weakness",
-   "Rising creatine kinase with hyperkalaemia",
-   "Myoglobinuria or oliguria indicating acute kidney injury",
-   "Cardiac arrhythmia from electrolyte disturbance",
-   "Delayed presentation with evolving systemic features"
-  ],
-  "prognosis": "With early pressure immobilisation, timely antivenom, ventilatory support and management of rhabdomyolysis and hyperkalaemia, recovery is usually complete. Delay increases the risk of fatal respiratory failure, hyperkalaemic cardiac arrest or renal failure.",
-  "pitfalls": [
-   "Underestimating a painless bite and discharging before delayed neurotoxicity and myotoxicity are excluded",
-   "Missing hyperkalaemia from rhabdomyolysis, risking cardiac arrest",
-   "Failing to protect the airway as bulbar and respiratory weakness progress",
-   "Applying arterial tourniquets or wound incision instead of appropriate pressure immobilisation"
-  ],
-  "references": [
-   "WHO Guidelines for the management of snakebite envenoming",
-   "Goldfrank's Toxicologic Emergencies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Apply pressure immobilisation as first aid to slow venom spread",
-   "Administer specific sea snake or appropriate polyvalent antivenom as the definitive treatment for systemic envenomation",
-   "Provide airway protection and mechanical ventilation for progressive bulbar and respiratory paralysis",
-   "Give intravenous fluids to manage rhabdomyolysis and myoglobinuria and protect renal function, with renal replacement therapy if acute kidney injury supervenes",
-   "Treat hyperkalaemia and maintain continuous cardiac monitoring",
-   "Observe for a prolonged period given delayed systemic effects, with serial neurological assessment and creatine kinase trends",
-   "Escalate to critical care for ventilatory failure or refractory hyperkalaemia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sea_snake_envenomation-pathway",
-   "title": "Sea snake envenomation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sea snakes are elapids whose bites are often painless with minimal local reaction, so the severity can be underestimated",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive bulbar or respiratory muscle weakness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Creatine kinase and serial trends for myotoxicity, Serum potassium and continuous cardiac monitoring for hyperkalaemia, Renal function and urinalysis for myoglobinuria and acute kidney injury"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Apply pressure immobilisation as first aid to slow venom spread"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating a painless bite and discharging before delayed neurotoxicity and myotoxicity are excluded"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sea snake envenomation."
-  }
- ],
- "tables": [
-  {
-   "id": "sea_snake_envenomation-matrix",
-   "title": "Sea snake envenomation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sea snakes are elapids whose bites are often painless with minimal local reaction, so the severity can be underestimated",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Envenomation",
+  "specialty": "Clinical Toxicology / Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sea snakes are elapids whose bites are often painless with minimal local reaction, so the severity can be underestimated",
+      "Systemic effects are delayed, typically appearing after 30 minutes to several hours, so a bite requires prolonged observation",
+      "Venom is both neurotoxic (descending flaccid paralysis) and myotoxic, producing muscle pain, stiffness and rhabdomyolysis",
+      "Rhabdomyolysis leads to myoglobinuria, hyperkalaemia and acute kidney injury, which are major causes of death",
+      "Ptosis, bulbar and respiratory muscle weakness signal neurotoxicity and mandate airway and ventilation readiness",
+      "Pressure immobilisation is appropriate as first aid for these neurotoxic elapid bites to slow venom spread",
+      "Species-appropriate (sea snake or, where used, tiger snake) antivenom is the definitive treatment for systemic envenomation"
     ],
-    [
-     "Key Investigations",
-     "Creatine kinase and serial trends for myotoxicity, Serum potassium and continuous cardiac monitoring for hyperkalaemia, Renal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sea snake venom contains post-synaptic and pre-synaptic neurotoxins that block neuromuscular transmission, producing a descending flaccid paralysis of cranial, bulbar and respiratory muscles similar to terrestrial elapids. Potent myotoxins additionally damage skeletal muscle, causing pain, stiffness and rhabdomyolysis with release of myoglobin and potassium. Myoglobinuria can precipitate acute kidney injury, and hyperkalaemia poses a direct cardiac threat. Local tissue effects are typically minimal, which can mask the seriousness of the systemic envenomation.",
+    "additionalDifferentials": [
+      "Terrestrial elapid envenomation",
+      "Primary neuromuscular disorder (myasthenic or Guillain-Barre-type presentation)",
+      "Other cause of rhabdomyolysis",
+      "Marine fish spine envenomation",
+      "Electrolyte disturbance causing weakness",
+      "Non-envenoming (dry) bite with anxiety"
     ],
-    [
-     "Primary Differentials",
-     "Terrestrial elapid envenomation, Primary neuromuscular disorder (myasthenic or Guillain-Barre-type presentation), Other cause of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Creatine kinase and serial trends for myotoxicity",
+      "Serum potassium and continuous cardiac monitoring for hyperkalaemia",
+      "Renal function and urinalysis for myoglobinuria and acute kidney injury",
+      "Serial forced vital capacity or spirometry for neurotoxic respiratory decline",
+      "Coagulation studies to help distinguish from procoagulant terrestrial snakes",
+      "Electrocardiography"
     ],
-    [
-     "Management Strategy",
-     "Apply pressure immobilisation as first aid to slow venom spread",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive bulbar or respiratory muscle weakness",
+      "Rising creatine kinase with hyperkalaemia",
+      "Myoglobinuria or oliguria indicating acute kidney injury",
+      "Cardiac arrhythmia from electrolyte disturbance",
+      "Delayed presentation with evolving systemic features"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating a painless bite and discharging before delayed neurotoxicity and myotoxicity are excluded",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early pressure immobilisation, timely antivenom, ventilatory support and management of rhabdomyolysis and hyperkalaemia, recovery is usually complete. Delay increases the risk of fatal respiratory failure, hyperkalaemic cardiac arrest or renal failure.",
+    "pitfalls": [
+      "Underestimating a painless bite and discharging before delayed neurotoxicity and myotoxicity are excluded",
+      "Missing hyperkalaemia from rhabdomyolysis, risking cardiac arrest",
+      "Failing to protect the airway as bulbar and respiratory weakness progress",
+      "Applying arterial tourniquets or wound incision instead of appropriate pressure immobilisation"
+    ],
+    "references": [
+      "WHO Guidelines for the management of snakebite envenoming",
+      "Goldfrank's Toxicologic Emergencies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Apply pressure immobilisation as first aid to slow venom spread",
+      "Administer specific sea snake or appropriate polyvalent antivenom as the definitive treatment for systemic envenomation",
+      "Provide airway protection and mechanical ventilation for progressive bulbar and respiratory paralysis",
+      "Give intravenous fluids to manage rhabdomyolysis and myoglobinuria and protect renal function, with renal replacement therapy if acute kidney injury supervenes",
+      "Treat hyperkalaemia and maintain continuous cardiac monitoring",
+      "Observe for a prolonged period given delayed systemic effects, with serial neurological assessment and creatine kinase trends",
+      "Escalate to critical care for ventilatory failure or refractory hyperkalaemia"
     ]
-   ],
-   "caption": "Overview comparison matrix for sea snake envenomation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sea-snake-envenomation-real-image",
-   "title": "Sea snake envenomation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sea_snake_envenomation-pathway",
+      "title": "Sea snake envenomation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sea snakes are elapids whose bites are often painless with minimal local reaction, so the severity can be underestimated",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive bulbar or respiratory muscle weakness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Creatine kinase and serial trends for myotoxicity, Serum potassium and continuous cardiac monitoring for hyperkalaemia, Renal function and urinalysis for myoglobinuria and acute kidney injury"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Apply pressure immobilisation as first aid to slow venom spread"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating a painless bite and discharging before delayed neurotoxicity and myotoxicity are excluded"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sea snake envenomation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sea_snake_envenomation-matrix",
+      "title": "Sea snake envenomation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sea snakes are elapids whose bites are often painless with minimal local reaction, so the severity can be underestimated",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Creatine kinase and serial trends for myotoxicity, Serum potassium and continuous cardiac monitoring for hyperkalaemia, Renal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Terrestrial elapid envenomation, Primary neuromuscular disorder (myasthenic or Guillain-Barre-type presentation), Other cause of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Apply pressure immobilisation as first aid to slow venom spread",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating a painless bite and discharging before delayed neurotoxicity and myotoxicity are excluded",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sea snake envenomation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sea_snake_envenomation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Creatine kinase with serial trends",
+          "cells": [
+            {
+              "text": "Myotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium with cardiac monitoring",
+          "cells": [
+            {
+              "text": "Hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and urinalysis",
+          "cells": [
+            {
+              "text": "Myoglobinuria and acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial forced vital capacity or spirometry",
+          "cells": [
+            {
+              "text": "Neurotoxic respiratory decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies",
+          "cells": [
+            {
+              "text": "Helps distinguish from procoagulant terrestrial snakes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sea_snake_envenomation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Terrestrial elapid envenomation",
+          "cells": [
+            {
+              "text": "Coagulation studies help separate it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary neuromuscular disorder",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sea_snake_envenomation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pressure immobilisation",
+          "cells": [
+            {
+              "text": "First aid to slow venom spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antivenom",
+          "cells": [
+            {
+              "text": "Sea snake or appropriate polyvalent, definitive for systemic envenomation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and ventilation",
+          "cells": [
+            {
+              "text": "For progressive bulbar and respiratory paralysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV fluids",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis and myoglobinuria; renal replacement therapy if AKI severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia care",
+          "cells": [
+            {
+              "text": "Treat and keep continuous cardiac monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged observation",
+          "cells": [
+            {
+              "text": "Serial neurological assessment and CK trends"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care escalation",
+          "cells": [
+            {
+              "text": "Ventilatory failure or refractory hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sea_snake_envenomation-dx-mgmt",
+      "title": "Diagnosis and management of Sea snake envenomation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sea snake bite, often painless: observe for delayed myotoxicity and paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bulbar or respiratory weakness, rising CK, hyperkalaemia or myoglobinuria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Antivenom, airway protection, treat hyperkalaemia, critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK trend, potassium, renal function, spirometry, ECG, coagulation studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Systemic neurotoxic or myotoxic envenomation evident?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prolonged observation; do not discharge until delayed effects excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Apply pressure immobilisation first aid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Give sea snake or polyvalent antivenom",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ventilate for respiratory paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "IV fluids for rhabdomyolysis; treat hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually complete recovery with timely antivenom and supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

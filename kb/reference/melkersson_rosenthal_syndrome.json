@@ -1,174 +1,461 @@
 {
- "id": "melkersson_rosenthal_syndrome",
- "name": "Melkersson-Rosenthal syndrome",
- "aliases": [
-  "MRS",
-  "orofacial granulomatosis with facial palsy",
-  "Miescher cheilitis (monosymptomatic form)"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Neurology",
- "specialty": "Otolaryngology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically a triad of recurrent orofacial oedema, recurrent (often alternating) peripheral facial nerve palsy, and a fissured (scrotal/plicated) tongue, though the complete triad is uncommon",
-   "Most patients present with only one or two features, and the lip swelling (granulomatous cheilitis of Miescher) is frequently the first and most persistent sign",
-   "Facial swelling is typically non-pitting, painless, and initially transient but tends to become firm and permanent with recurrent attacks",
-   "Lip biopsy may show non-caseating granulomas, but a normal histology does not exclude the diagnosis",
-   "The condition sits within the spectrum of orofacial granulomatosis and can overlap with Crohn disease and sarcoidosis, which should be considered particularly in younger patients",
-   "Facial palsy may precede, accompany, or follow the swelling and can be recurrent, mimicking repeated Bell palsy",
-   "Management is largely supportive and anti-inflammatory (intralesional or systemic corticosteroids); refractory persistent lip swelling may be reduced with reduction cheiloplasty"
+  "id": "melkersson_rosenthal_syndrome",
+  "name": "Melkersson-Rosenthal syndrome",
+  "aliases": [
+    "MRS",
+    "orofacial granulomatosis with facial palsy",
+    "Miescher cheilitis (monosymptomatic form)"
   ],
-  "pathophysiology": "The syndrome is characterised by non-caseating granulomatous inflammation affecting the orofacial soft tissues, with lymphoedema and perivascular granulomas obstructing lymphatic drainage and producing recurrent, eventually persistent, oedema. The facial nerve is thought to be compromised by granulomatous or oedematous swelling within its bony canal, producing lower motor neurone palsy that may recur. The underlying trigger is unclear but is presumed to be an aberrant delayed-type immune response, possibly to dietary, dental, or microbial antigens, and the disorder overlaps mechanistically with other granulomatous conditions such as Crohn disease and sarcoidosis. The fissured tongue is regarded as a developmental/constitutional feature associated with the syndrome rather than a granulomatous lesion.",
-  "additionalDifferentials": [
-   "Angio-oedema (allergic, hereditary, or ACE-inhibitor related)",
-   "Orofacial granulomatosis secondary to Crohn disease",
-   "Sarcoidosis",
-   "Contact or allergic cheilitis",
-   "Cheilitis glandularis",
-   "Recurrent isolated Bell palsy",
-   "Cutaneous or oral lymphoma infiltration"
-  ],
-  "additionalInvestigations": [
-   "Labial or oral mucosal biopsy seeking non-caseating granulomas",
-   "Faecal calprotectin, and gastrointestinal endoscopy where Crohn disease is suspected",
-   "Serum angiotensin-converting enzyme and chest imaging to screen for sarcoidosis",
-   "Patch testing and dietary/allergen assessment for contactants such as cinnamon and benzoates",
-   "C1 esterase inhibitor level and complement studies to exclude hereditary angio-oedema",
-   "MRI of the facial nerve if palsy is atypical or fails to recover"
-  ],
-  "redFlags": [
-   "Systemic features (weight loss, chronic diarrhoea, respiratory symptoms) suggesting Crohn disease or sarcoidosis",
-   "Progressive or incomplete recovery of facial palsy raising concern for a compressive or neoplastic lesion",
-   "Rapidly evolving airway or tongue swelling suggesting angio-oedema rather than granulomatous oedema",
-   "Unilateral fixed mass rather than diffuse recurrent swelling"
-  ],
-  "prognosis": "The course is chronic and relapsing; early oedema is transient but repeated attacks can lead to permanent disfiguring lip swelling. Facial palsy often recovers but may be incomplete after recurrent episodes. The syndrome itself is benign, though associated systemic granulomatous disease influences the overall outlook.",
-  "pitfalls": [
-   "Misdiagnosing recurrent orofacial oedema as allergic angio-oedema and treating only with antihistamines",
-   "Assuming a normal lip biopsy excludes the diagnosis, since granulomas are patchy",
-   "Overlooking underlying Crohn disease or sarcoidosis, especially in children and young adults",
-   "Treating recurrent facial palsy as simple Bell palsy without recognising the wider syndrome",
-   "Attributing the fissured tongue to poor hygiene rather than a syndromic feature"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce the granulomatous orofacial swelling with corticosteroids given intralesionally or systemically",
-   "Use steroid-sparing immunomodulators such as clofazimine, methotrexate or a TNF-alpha inhibitor for persistent or refractory disease",
-   "Investigate for and treat overlapping Crohn disease and sarcoidosis within the orofacial granulomatosis spectrum",
-   "Undertake dietary exclusion and avoidance of implicated contactants such as cinnamon and benzoates identified on patch testing",
-   "Provide supportive facial-palsy care with eye protection, and consider reduction cheiloplasty or facial-nerve decompression for disfiguring persistent swelling",
-   "Coordinate multidisciplinary oral medicine, neurology, gastroenterology and dermatology input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "melkersson_rosenthal_syndrome-pathway",
-   "title": "Melkersson-Rosenthal syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically a triad of recurrent orofacial oedema, recurrent (often alternating) peripheral facial nerve palsy, and a fissured (scrotal/plicated) tongue, though the complete triad is uncommon",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Systemic features (weight loss, chronic diarrhoea, respiratory symptoms) suggesting Crohn disease or sarcoidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Labial or oral mucosal biopsy seeking non-caseating granulomas, Faecal calprotectin, and gastrointestinal endoscopy where Crohn disease is suspected, Serum angiotensin-converting enzyme and chest imaging to screen for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce the granulomatous orofacial swelling with corticosteroids given intralesionally or systemically"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing recurrent orofacial oedema as allergic angio-oedema and treating only with antihistamines"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of melkersson-rosenthal syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "melkersson_rosenthal_syndrome-matrix",
-   "title": "Melkersson-Rosenthal syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically a triad of recurrent orofacial oedema, recurrent (often alternating) peripheral facial nerve palsy, and a fissured",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Neurology",
+  "specialty": "Otolaryngology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically a triad of recurrent orofacial oedema, recurrent (often alternating) peripheral facial nerve palsy, and a fissured (scrotal/plicated) tongue, though the complete triad is uncommon",
+      "Most patients present with only one or two features, and the lip swelling (granulomatous cheilitis of Miescher) is frequently the first and most persistent sign",
+      "Facial swelling is typically non-pitting, painless, and initially transient but tends to become firm and permanent with recurrent attacks",
+      "Lip biopsy may show non-caseating granulomas, but a normal histology does not exclude the diagnosis",
+      "The condition sits within the spectrum of orofacial granulomatosis and can overlap with Crohn disease and sarcoidosis, which should be considered particularly in younger patients",
+      "Facial palsy may precede, accompany, or follow the swelling and can be recurrent, mimicking repeated Bell palsy",
+      "Management is largely supportive and anti-inflammatory (intralesional or systemic corticosteroids); refractory persistent lip swelling may be reduced with reduction cheiloplasty"
     ],
-    [
-     "Key Investigations",
-     "Labial or oral mucosal biopsy seeking non-caseating granulomas, Faecal calprotectin, and gastrointestinal endoscopy where Crohn",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The syndrome is characterised by non-caseating granulomatous inflammation affecting the orofacial soft tissues, with lymphoedema and perivascular granulomas obstructing lymphatic drainage and producing recurrent, eventually persistent, oedema. The facial nerve is thought to be compromised by granulomatous or oedematous swelling within its bony canal, producing lower motor neurone palsy that may recur. The underlying trigger is unclear but is presumed to be an aberrant delayed-type immune response, possibly to dietary, dental, or microbial antigens, and the disorder overlaps mechanistically with other granulomatous conditions such as Crohn disease and sarcoidosis. The fissured tongue is regarded as a developmental/constitutional feature associated with the syndrome rather than a granulomatous lesion.",
+    "additionalDifferentials": [
+      "Angio-oedema (allergic, hereditary, or ACE-inhibitor related)",
+      "Orofacial granulomatosis secondary to Crohn disease",
+      "Sarcoidosis",
+      "Contact or allergic cheilitis",
+      "Cheilitis glandularis",
+      "Recurrent isolated Bell palsy",
+      "Cutaneous or oral lymphoma infiltration"
     ],
-    [
-     "Primary Differentials",
-     "Angio-oedema (allergic, hereditary, or ACE-inhibitor related), Orofacial granulomatosis secondary to Crohn disease, Sarcoidosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Labial or oral mucosal biopsy seeking non-caseating granulomas",
+      "Faecal calprotectin, and gastrointestinal endoscopy where Crohn disease is suspected",
+      "Serum angiotensin-converting enzyme and chest imaging to screen for sarcoidosis",
+      "Patch testing and dietary/allergen assessment for contactants such as cinnamon and benzoates",
+      "C1 esterase inhibitor level and complement studies to exclude hereditary angio-oedema",
+      "MRI of the facial nerve if palsy is atypical or fails to recover"
     ],
-    [
-     "Management Strategy",
-     "Reduce the granulomatous orofacial swelling with corticosteroids given intralesionally or systemically",
-     "Core treatment modality"
+    "redFlags": [
+      "Systemic features (weight loss, chronic diarrhoea, respiratory symptoms) suggesting Crohn disease or sarcoidosis",
+      "Progressive or incomplete recovery of facial palsy raising concern for a compressive or neoplastic lesion",
+      "Rapidly evolving airway or tongue swelling suggesting angio-oedema rather than granulomatous oedema",
+      "Unilateral fixed mass rather than diffuse recurrent swelling"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing recurrent orofacial oedema as allergic angio-oedema and treating only with antihistamines",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is chronic and relapsing; early oedema is transient but repeated attacks can lead to permanent disfiguring lip swelling. Facial palsy often recovers but may be incomplete after recurrent episodes. The syndrome itself is benign, though associated systemic granulomatous disease influences the overall outlook.",
+    "pitfalls": [
+      "Misdiagnosing recurrent orofacial oedema as allergic angio-oedema and treating only with antihistamines",
+      "Assuming a normal lip biopsy excludes the diagnosis, since granulomas are patchy",
+      "Overlooking underlying Crohn disease or sarcoidosis, especially in children and young adults",
+      "Treating recurrent facial palsy as simple Bell palsy without recognising the wider syndrome",
+      "Attributing the fissured tongue to poor hygiene rather than a syndromic feature"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce the granulomatous orofacial swelling with corticosteroids given intralesionally or systemically",
+      "Use steroid-sparing immunomodulators such as clofazimine, methotrexate or a TNF-alpha inhibitor for persistent or refractory disease",
+      "Investigate for and treat overlapping Crohn disease and sarcoidosis within the orofacial granulomatosis spectrum",
+      "Undertake dietary exclusion and avoidance of implicated contactants such as cinnamon and benzoates identified on patch testing",
+      "Provide supportive facial-palsy care with eye protection, and consider reduction cheiloplasty or facial-nerve decompression for disfiguring persistent swelling",
+      "Coordinate multidisciplinary oral medicine, neurology, gastroenterology and dermatology input"
     ]
-   ],
-   "caption": "Overview comparison matrix for melkersson-rosenthal syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "melkersson-rosenthal-syndrome-real-image",
-   "title": "Melkersson-Rosenthal syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "melkersson_rosenthal_syndrome-pathway",
+      "title": "Melkersson-Rosenthal syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically a triad of recurrent orofacial oedema, recurrent (often alternating) peripheral facial nerve palsy, and a fissured (scrotal/plicated) tongue, though the complete triad is uncommon",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Systemic features (weight loss, chronic diarrhoea, respiratory symptoms) suggesting Crohn disease or sarcoidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Labial or oral mucosal biopsy seeking non-caseating granulomas, Faecal calprotectin, and gastrointestinal endoscopy where Crohn disease is suspected, Serum angiotensin-converting enzyme and chest imaging to screen for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce the granulomatous orofacial swelling with corticosteroids given intralesionally or systemically"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing recurrent orofacial oedema as allergic angio-oedema and treating only with antihistamines"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of melkersson-rosenthal syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "melkersson_rosenthal_syndrome-matrix",
+      "title": "Melkersson-Rosenthal syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically a triad of recurrent orofacial oedema, recurrent (often alternating) peripheral facial nerve palsy, and a fissured",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Labial or oral mucosal biopsy seeking non-caseating granulomas, Faecal calprotectin, and gastrointestinal endoscopy where Crohn",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Angio-oedema (allergic, hereditary, or ACE-inhibitor related), Orofacial granulomatosis secondary to Crohn disease, Sarcoidosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce the granulomatous orofacial swelling with corticosteroids given intralesionally or systemically",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing recurrent orofacial oedema as allergic angio-oedema and treating only with antihistamines",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for melkersson-rosenthal syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "melkersson_rosenthal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Labial or oral mucosal biopsy",
+          "cells": [
+            {
+              "text": "Non-caseating granulomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal calprotectin and GI endoscopy, if Crohn disease is suspected",
+          "cells": [
+            {
+              "text": "Crohn disease, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum angiotensin-converting enzyme and chest imaging",
+          "cells": [
+            {
+              "text": "Sarcoidosis screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing and dietary and allergen assessment",
+          "cells": [
+            {
+              "text": "Contactants such as cinnamon and benzoates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1 esterase inhibitor level and complement studies",
+          "cells": [
+            {
+              "text": "Hereditary angio-oedema excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the facial nerve, if palsy is atypical or fails to recover",
+          "cells": [
+            {
+              "text": "Atypical or non-recovering palsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "melkersson_rosenthal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Angio-oedema (allergic, hereditary or ACE-inhibitor related)",
+          "cells": [
+            {
+              "text": "Rapidly evolving airway or tongue swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orofacial granulomatosis secondary to Crohn disease",
+          "cells": [
+            {
+              "text": "Systemic features such as weight loss or chronic diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Respiratory symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "melkersson_rosenthal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Intralesional or systemic, to reduce granulomatous orofacial swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunomodulators",
+          "cells": [
+            {
+              "text": "Clofazimine, methotrexate or a TNF-alpha inhibitor for persistent or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat overlapping Crohn disease or sarcoidosis",
+          "cells": [
+            {
+              "text": "Within the orofacial granulomatosis spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contactant avoidance",
+          "cells": [
+            {
+              "text": "Dietary exclusion of implicated contactants such as cinnamon and benzoates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial palsy care",
+          "cells": [
+            {
+              "text": "Eye protection; reduction cheiloplasty or facial-nerve decompression for disfiguring persistent swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Oral medicine, neurology, gastroenterology and dermatology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "melkersson_rosenthal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Melkersson-Rosenthal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent orofacial swelling with facial nerve palsy; suspected Melkersson-Rosenthal",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Airway or tongue swelling, progressive palsy, or Crohn or sarcoidosis features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment for rapid angio-oedema; exclude a compressive lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mucosal biopsy, ACE, calprotectin, patch testing, C1 esterase inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are non-caseating granulomas seen on mucosal biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider angio-oedema, Crohn disease or sarcoidosis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids, intralesional or systemic, for granulomatous orofacial swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Clofazimine, methotrexate or a TNF-alpha inhibitor for persistent or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietary exclusion of implicated contactants such as cinnamon and benzoates",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Eye protection for palsy; cheiloplasty or nerve decompression for disfiguring swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary oral medicine, neurology, gastroenterology and dermatology care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,435 @@
 {
- "id": "venezuelan_equine_encephalitis",
- "name": "Venezuelan equine encephalitis",
- "aliases": [
-  "VEE",
-  "Venezuelan equine encephalitis virus infection",
-  "VEEV infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mosquito-borne alphavirus of Central and South America and occasionally the southern United States, with rodents as enzootic reservoirs and epizootic strains amplified in horses",
-   "In contrast to eastern equine encephalitis, most human infections cause a self-limiting acute febrile illness with headache, myalgia, and prostration rather than encephalitis",
-   "A minority, particularly children, develop neuroinvasive disease with seizures and encephalitis; overall mortality is much lower than for eastern equine encephalitis",
-   "Large epizootics in horses, which suffer high mortality and amplify the virus, typically precede and predict human outbreaks",
-   "The virus is highly infectious as an aerosol, making it a recognised laboratory-acquired infection hazard requiring enhanced biosafety",
-   "Management is supportive with no licensed specific antiviral; equine vaccination and mosquito control are central to outbreak prevention",
-   "Diagnosis uses RT-PCR early and serology (IgM) thereafter, interpreted with the mosquito-exposure and equine-outbreak history"
+  "id": "venezuelan_equine_encephalitis",
+  "name": "Venezuelan equine encephalitis",
+  "aliases": [
+    "VEE",
+    "Venezuelan equine encephalitis virus infection",
+    "VEEV infection"
   ],
-  "pathophysiology": "Venezuelan equine encephalitis virus circulates in enzootic cycles between rodents and mosquitoes, while epizootic variants replicate to high titres in horses that serve as amplifying hosts and drive outbreaks. Following a mosquito bite the virus replicates in lymphoid tissue and produces viraemia, giving rise to a systemic febrile illness. Neuroinvasion occurs in a subset of patients, with the virus infecting neurons and provoking inflammation, but central nervous system involvement is less frequent and generally less devastating than in eastern equine encephalitis. Its efficient aerosol infectivity accounts for the laboratory-acquired infection risk.",
-  "additionalDifferentials": [
-   "Dengue and other arboviral febrile illnesses",
-   "Other equine encephalitides (eastern and western equine encephalitis)",
-   "Influenza and nonspecific viral febrile illness",
-   "Bacterial or viral meningoencephalitis",
-   "Malaria in co-endemic regions",
-   "Leptospirosis"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR on blood for viral RNA during the acute viraemic phase",
-   "Serum and cerebrospinal fluid IgM serology",
-   "Full blood count often showing leucopenia",
-   "Cerebrospinal fluid analysis when encephalitis is suspected",
-   "Neuroimaging in patients with neurological features",
-   "Testing to exclude co-endemic febrile illnesses such as dengue and malaria"
-  ],
-  "redFlags": [
-   "Seizures or declining consciousness signalling neuroinvasive disease, especially in children",
-   "Focal neurological deficits",
-   "Signs of raised intracranial pressure",
-   "Rapid clinical deterioration during an active equine epizootic",
-   "Laboratory exposure raising concern for aerosol-acquired infection"
-  ],
-  "prognosis": "Most patients recover fully from the febrile illness; neuroinvasive disease is uncommon and carries a lower fatality than eastern equine encephalitis, though children with encephalitis may have neurological sequelae.",
-  "pitfalls": [
-   "Assuming encephalitis is the usual presentation when most cases are a self-limiting febrile illness",
-   "Neglecting aerosol biosafety precautions in the laboratory",
-   "Overlooking the predictive value of concurrent equine outbreaks",
-   "Failing to distinguish it from dengue and other co-endemic arboviral fevers",
-   "Underestimating neuroinvasive risk in paediatric patients"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "CDC guidance on Venezuelan equine encephalitis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care with antipyretics, analgesia, rehydration and rest, as there is no licensed specific antiviral",
-   "Manage neuroinvasive disease with anticonvulsants for seizures, control of raised intracranial pressure and intensive-care support",
-   "Reduce mosquito exposure with repellents, protective clothing and bed nets, and implement community vector control",
-   "Interrupt transmission through equine vaccination and veterinary control of the amplifying host",
-   "Observe enhanced biosafety precautions given the high aerosol infectivity and laboratory-acquisition risk",
-   "Exclude and treat co-endemic febrile illnesses such as dengue and malaria",
-   "Notify public health authorities and support outbreak-control measures"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "venezuelan_equine_encephalitis-pathway",
-   "title": "Venezuelan equine encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mosquito-borne alphavirus of Central and South America and occasionally the southern United States, with rodents as enzootic reservoirs and epizootic strains amplified in horses",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Seizures or declining consciousness signalling neuroinvasive disease, especially in children",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR on blood for viral RNA during the acute viraemic phase, Serum and cerebrospinal fluid IgM serology, Full blood count often showing leucopenia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care with antipyretics, analgesia, rehydration and rest, as there is no licensed specific antiviral"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming encephalitis is the usual presentation when most cases are a self-limiting febrile illness"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of venezuelan equine encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "venezuelan_equine_encephalitis-matrix",
-   "title": "Venezuelan equine encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mosquito-borne alphavirus of Central and South America and occasionally the southern United States, with rodents as enzootic",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mosquito-borne alphavirus of Central and South America and occasionally the southern United States, with rodents as enzootic reservoirs and epizootic strains amplified in horses",
+      "In contrast to eastern equine encephalitis, most human infections cause a self-limiting acute febrile illness with headache, myalgia, and prostration rather than encephalitis",
+      "A minority, particularly children, develop neuroinvasive disease with seizures and encephalitis; overall mortality is much lower than for eastern equine encephalitis",
+      "Large epizootics in horses, which suffer high mortality and amplify the virus, typically precede and predict human outbreaks",
+      "The virus is highly infectious as an aerosol, making it a recognised laboratory-acquired infection hazard requiring enhanced biosafety",
+      "Management is supportive with no licensed specific antiviral; equine vaccination and mosquito control are central to outbreak prevention",
+      "Diagnosis uses RT-PCR early and serology (IgM) thereafter, interpreted with the mosquito-exposure and equine-outbreak history"
     ],
-    [
-     "Key Investigations",
-     "RT-PCR on blood for viral RNA during the acute viraemic phase, Serum and cerebrospinal fluid IgM serology, Full blood count often",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Venezuelan equine encephalitis virus circulates in enzootic cycles between rodents and mosquitoes, while epizootic variants replicate to high titres in horses that serve as amplifying hosts and drive outbreaks. Following a mosquito bite the virus replicates in lymphoid tissue and produces viraemia, giving rise to a systemic febrile illness. Neuroinvasion occurs in a subset of patients, with the virus infecting neurons and provoking inflammation, but central nervous system involvement is less frequent and generally less devastating than in eastern equine encephalitis. Its efficient aerosol infectivity accounts for the laboratory-acquired infection risk.",
+    "additionalDifferentials": [
+      "Dengue and other arboviral febrile illnesses",
+      "Other equine encephalitides (eastern and western equine encephalitis)",
+      "Influenza and nonspecific viral febrile illness",
+      "Bacterial or viral meningoencephalitis",
+      "Malaria in co-endemic regions",
+      "Leptospirosis"
     ],
-    [
-     "Primary Differentials",
-     "Dengue and other arboviral febrile illnesses, Other equine encephalitides (eastern and western equine encephalitis), Influenza",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "RT-PCR on blood for viral RNA during the acute viraemic phase",
+      "Serum and cerebrospinal fluid IgM serology",
+      "Full blood count often showing leucopenia",
+      "Cerebrospinal fluid analysis when encephalitis is suspected",
+      "Neuroimaging in patients with neurological features",
+      "Testing to exclude co-endemic febrile illnesses such as dengue and malaria"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care with antipyretics, analgesia, rehydration and rest, as there is no licensed specific antiviral",
-     "Core treatment modality"
+    "redFlags": [
+      "Seizures or declining consciousness signalling neuroinvasive disease, especially in children",
+      "Focal neurological deficits",
+      "Signs of raised intracranial pressure",
+      "Rapid clinical deterioration during an active equine epizootic",
+      "Laboratory exposure raising concern for aerosol-acquired infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming encephalitis is the usual presentation when most cases are a self-limiting febrile illness",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients recover fully from the febrile illness; neuroinvasive disease is uncommon and carries a lower fatality than eastern equine encephalitis, though children with encephalitis may have neurological sequelae.",
+    "pitfalls": [
+      "Assuming encephalitis is the usual presentation when most cases are a self-limiting febrile illness",
+      "Neglecting aerosol biosafety precautions in the laboratory",
+      "Overlooking the predictive value of concurrent equine outbreaks",
+      "Failing to distinguish it from dengue and other co-endemic arboviral fevers",
+      "Underestimating neuroinvasive risk in paediatric patients"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "CDC guidance on Venezuelan equine encephalitis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care with antipyretics, analgesia, rehydration and rest, as there is no licensed specific antiviral",
+      "Manage neuroinvasive disease with anticonvulsants for seizures, control of raised intracranial pressure and intensive-care support",
+      "Reduce mosquito exposure with repellents, protective clothing and bed nets, and implement community vector control",
+      "Interrupt transmission through equine vaccination and veterinary control of the amplifying host",
+      "Observe enhanced biosafety precautions given the high aerosol infectivity and laboratory-acquisition risk",
+      "Exclude and treat co-endemic febrile illnesses such as dengue and malaria",
+      "Notify public health authorities and support outbreak-control measures"
     ]
-   ],
-   "caption": "Overview comparison matrix for venezuelan equine encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "venezuelan-equine-encephalitis-real-image",
-   "title": "Venezuelan equine encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "venezuelan_equine_encephalitis-pathway",
+      "title": "Venezuelan equine encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mosquito-borne alphavirus of Central and South America and occasionally the southern United States, with rodents as enzootic reservoirs and epizootic strains amplified in horses",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Seizures or declining consciousness signalling neuroinvasive disease, especially in children",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR on blood for viral RNA during the acute viraemic phase, Serum and cerebrospinal fluid IgM serology, Full blood count often showing leucopenia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care with antipyretics, analgesia, rehydration and rest, as there is no licensed specific antiviral"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming encephalitis is the usual presentation when most cases are a self-limiting febrile illness"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of venezuelan equine encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "venezuelan_equine_encephalitis-matrix",
+      "title": "Venezuelan equine encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mosquito-borne alphavirus of Central and South America and occasionally the southern United States, with rodents as enzootic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR on blood for viral RNA during the acute viraemic phase, Serum and cerebrospinal fluid IgM serology, Full blood count often",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dengue and other arboviral febrile illnesses, Other equine encephalitides (eastern and western equine encephalitis), Influenza",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care with antipyretics, analgesia, rehydration and rest, as there is no licensed specific antiviral",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming encephalitis is the usual presentation when most cases are a self-limiting febrile illness",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for venezuelan equine encephalitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "venezuelan_equine_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR on blood for viral RNA",
+          "cells": [
+            {
+              "text": "Acute viraemic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and CSF IgM serology",
+          "cells": [
+            {
+              "text": "Recent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Leucopenia is often seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "When encephalitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Patients with neurological features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venezuelan_equine_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dengue and other arboviral febrile illness",
+          "cells": [
+            {
+              "text": "Co-endemic febrile arboviruses must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eastern or western equine encephalitis",
+          "cells": [
+            {
+              "text": "Other equine encephalitides with different course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malaria in co-endemic regions",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "venezuelan_equine_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics, analgesia, rehydration and rest; no licensed specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroinvasive disease management",
+          "cells": [
+            {
+              "text": "Anticonvulsants, control of raised intracranial pressure and intensive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mosquito exposure reduction",
+          "cells": [
+            {
+              "text": "Repellents and protective clothing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "venezuelan_equine_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Venezuelan equine encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Venezuelan equine encephalitis: febrile illness after travel to endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, declining consciousness or focal deficits)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuro-intensive care for neuroinvasive disease with seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR on blood, serum and CSF IgM, FBC, CSF analysis, neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does RT-PCR or IgM confirm a Venezuelan equine encephalitis virus infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dengue, malaria or other encephalitis; test for co-endemic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with antipyretics, rehydration and rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsants and control of raised intracranial pressure for neuroinvasive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensive care support for severe neurological involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repellents and protective clothing to reduce exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most infections are self-limiting febrile illness; a minority develop encephalitis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

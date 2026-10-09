@@ -1,173 +1,462 @@
 {
- "id": "deviated_nasal_septum",
- "name": "Deviated nasal septum",
- "aliases": [
-  "DNS",
-  "nasal septal deviation",
-  "septal deviation"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A deviated septum is a displacement of the bony or cartilaginous nasal septum from the midline and is extremely common, often asymptomatic",
-   "It may be developmental (from differential growth of the septum and palate) or acquired following nasal trauma, sometimes at birth",
-   "The dominant symptom is nasal obstruction, which may be unilateral or, with an S-shaped deviation, affect both sides",
-   "Deviations take various forms including a spur, a C- or S-shaped bend, or dislocation of the caudal septum into the vestibule",
-   "A prominent spur can press on the lateral wall and trigger headache or referred facial pain, and can contribute to recurrent epistaxis over the exposed area",
-   "Septal deviation predisposes to sinus drainage problems and recurrent sinusitis and can worsen snoring and obstructive symptoms",
-   "Diagnosis rests on anterior rhinoscopy and nasal endoscopy, decongesting the mucosa to distinguish a structural deviation from turbinate hypertrophy",
-   "Symptomatic deviation is corrected surgically by septoplasty (or submucous resection), often with turbinate reduction, while asymptomatic deviation needs no treatment"
+  "id": "deviated_nasal_septum",
+  "name": "Deviated nasal septum",
+  "aliases": [
+    "DNS",
+    "nasal septal deviation",
+    "septal deviation"
   ],
-  "pathophysiology": "The nasal septum is formed by the septal cartilage, the perpendicular plate of the ethmoid and the vomer, meeting the maxillary and palatine crests. Deviation arises when these components grow at differing rates or are displaced by trauma, so the septum buckles or angulates away from the midline. The deviation narrows the airway on the concave side and may obstruct the osteomeatal complex, impairing sinus ventilation and mucociliary drainage. Compensatory hypertrophy of the turbinate on the wider side can paradoxically cause obstruction there as well. Mucosa stretched over a spur becomes dry and prone to bleeding, and contact between the deviated septum and the lateral nasal wall can generate pressure-referred headache.",
-  "additionalDifferentials": [
-   "Inferior turbinate hypertrophy",
-   "Nasal polyps",
-   "Chronic rhinosinusitis",
-   "Allergic or non-allergic rhinitis with mucosal congestion",
-   "Nasal valve collapse",
-   "Adenoid hypertrophy (particularly in children)",
-   "Intranasal mass or tumour causing unilateral obstruction"
-  ],
-  "additionalInvestigations": [
-   "Anterior rhinoscopy after decongestion to assess the septum and turbinates",
-   "Nasal endoscopy for a full view of the posterior septum and osteomeatal complex",
-   "CT of the paranasal sinuses when sinus disease or surgery is planned",
-   "Assessment of nasal airflow and, where indicated, allergy testing to identify a mucosal component",
-   "Photographic and functional assessment if external nasal deformity coexists"
-  ],
-  "redFlags": [
-   "Strictly unilateral obstruction with blood-stained discharge suggesting a tumour rather than simple deviation",
-   "A septal swelling after trauma suggesting a septal haematoma or abscess needing urgent drainage",
-   "Progressive external deformity, crusting or perforation raising concern for granulomatous or destructive disease",
-   "Persistent facial pain or visual symptoms suggesting significant sinus complication"
-  ],
-  "prognosis": "Septoplasty relieves obstruction and associated symptoms in most patients with good long-term results, though some residual deviation or persistent turbinate-related congestion may remain; untreated symptomatic deviation can perpetuate sinus problems and sleep-disordered breathing.",
-  "pitfalls": [
-   "Attributing all nasal obstruction to the septum while overlooking turbinate hypertrophy, polyps or allergy",
-   "Operating on an asymptomatic deviation found incidentally",
-   "Missing a septal haematoma after trauma, risking cartilage necrosis and saddle deformity",
-   "Failing to examine after decongestion, which distinguishes structural from mucosal obstruction"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat any contributing mucosal or allergic component with intranasal corticosteroids, antihistamines and saline irrigation",
-   "Short-term topical decongestants for temporary relief, avoiding prolonged use to prevent rebound congestion",
-   "Septoplasty to straighten the deviated septum for significant persistent obstruction unresponsive to medical measures",
-   "Concurrent turbinate reduction where compensatory turbinate hypertrophy contributes to obstruction",
-   "Manage associated recurrent sinusitis and treat epistaxis arising from exposed mucosal spurs",
-   "Septorhinoplasty when an external nasal deformity coexists with the deviation",
-   "Refer to ENT for surgical assessment, escalating if recurrent sinusitis or sleep-disordered breathing persists"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "deviated_nasal_septum-pathway",
-   "title": "Deviated nasal septum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A deviated septum is a displacement of the bony or cartilaginous nasal septum from the midline and is extremely common, often asymptomatic",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Strictly unilateral obstruction with blood-stained discharge suggesting a tumour rather than simple deviation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anterior rhinoscopy after decongestion to assess the septum and turbinates, Nasal endoscopy for a full view of the posterior septum and osteomeatal complex, CT of the paranasal sinuses when sinus disease or surgery is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat any contributing mucosal or allergic component with intranasal corticosteroids, antihistamines and saline irrigation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all nasal obstruction to the septum while overlooking turbinate hypertrophy, polyps or allergy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of deviated nasal septum."
-  }
- ],
- "tables": [
-  {
-   "id": "deviated_nasal_septum-matrix",
-   "title": "Deviated nasal septum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A deviated septum is a displacement of the bony or cartilaginous nasal septum from the midline and is extremely common, often",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A deviated septum is a displacement of the bony or cartilaginous nasal septum from the midline and is extremely common, often asymptomatic",
+      "It may be developmental (from differential growth of the septum and palate) or acquired following nasal trauma, sometimes at birth",
+      "The dominant symptom is nasal obstruction, which may be unilateral or, with an S-shaped deviation, affect both sides",
+      "Deviations take various forms including a spur, a C- or S-shaped bend, or dislocation of the caudal septum into the vestibule",
+      "A prominent spur can press on the lateral wall and trigger headache or referred facial pain, and can contribute to recurrent epistaxis over the exposed area",
+      "Septal deviation predisposes to sinus drainage problems and recurrent sinusitis and can worsen snoring and obstructive symptoms",
+      "Diagnosis rests on anterior rhinoscopy and nasal endoscopy, decongesting the mucosa to distinguish a structural deviation from turbinate hypertrophy",
+      "Symptomatic deviation is corrected surgically by septoplasty (or submucous resection), often with turbinate reduction, while asymptomatic deviation needs no treatment"
     ],
-    [
-     "Key Investigations",
-     "Anterior rhinoscopy after decongestion to assess the septum and turbinates, Nasal endoscopy for a full view of the posterior",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The nasal septum is formed by the septal cartilage, the perpendicular plate of the ethmoid and the vomer, meeting the maxillary and palatine crests. Deviation arises when these components grow at differing rates or are displaced by trauma, so the septum buckles or angulates away from the midline. The deviation narrows the airway on the concave side and may obstruct the osteomeatal complex, impairing sinus ventilation and mucociliary drainage. Compensatory hypertrophy of the turbinate on the wider side can paradoxically cause obstruction there as well. Mucosa stretched over a spur becomes dry and prone to bleeding, and contact between the deviated septum and the lateral nasal wall can generate pressure-referred headache.",
+    "additionalDifferentials": [
+      "Inferior turbinate hypertrophy",
+      "Nasal polyps",
+      "Chronic rhinosinusitis",
+      "Allergic or non-allergic rhinitis with mucosal congestion",
+      "Nasal valve collapse",
+      "Adenoid hypertrophy (particularly in children)",
+      "Intranasal mass or tumour causing unilateral obstruction"
     ],
-    [
-     "Primary Differentials",
-     "Inferior turbinate hypertrophy, Nasal polyps, Chronic rhinosinusitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anterior rhinoscopy after decongestion to assess the septum and turbinates",
+      "Nasal endoscopy for a full view of the posterior septum and osteomeatal complex",
+      "CT of the paranasal sinuses when sinus disease or surgery is planned",
+      "Assessment of nasal airflow and, where indicated, allergy testing to identify a mucosal component",
+      "Photographic and functional assessment if external nasal deformity coexists"
     ],
-    [
-     "Management Strategy",
-     "Treat any contributing mucosal or allergic component with intranasal corticosteroids, antihistamines and saline irrigation",
-     "Core treatment modality"
+    "redFlags": [
+      "Strictly unilateral obstruction with blood-stained discharge suggesting a tumour rather than simple deviation",
+      "A septal swelling after trauma suggesting a septal haematoma or abscess needing urgent drainage",
+      "Progressive external deformity, crusting or perforation raising concern for granulomatous or destructive disease",
+      "Persistent facial pain or visual symptoms suggesting significant sinus complication"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all nasal obstruction to the septum while overlooking turbinate hypertrophy, polyps or allergy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Septoplasty relieves obstruction and associated symptoms in most patients with good long-term results, though some residual deviation or persistent turbinate-related congestion may remain; untreated symptomatic deviation can perpetuate sinus problems and sleep-disordered breathing.",
+    "pitfalls": [
+      "Attributing all nasal obstruction to the septum while overlooking turbinate hypertrophy, polyps or allergy",
+      "Operating on an asymptomatic deviation found incidentally",
+      "Missing a septal haematoma after trauma, risking cartilage necrosis and saddle deformity",
+      "Failing to examine after decongestion, which distinguishes structural from mucosal obstruction"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat any contributing mucosal or allergic component with intranasal corticosteroids, antihistamines and saline irrigation",
+      "Short-term topical decongestants for temporary relief, avoiding prolonged use to prevent rebound congestion",
+      "Septoplasty to straighten the deviated septum for significant persistent obstruction unresponsive to medical measures",
+      "Concurrent turbinate reduction where compensatory turbinate hypertrophy contributes to obstruction",
+      "Manage associated recurrent sinusitis and treat epistaxis arising from exposed mucosal spurs",
+      "Septorhinoplasty when an external nasal deformity coexists with the deviation",
+      "Refer to ENT for surgical assessment, escalating if recurrent sinusitis or sleep-disordered breathing persists"
     ]
-   ],
-   "caption": "Overview comparison matrix for deviated nasal septum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "deviated-nasal-septum-real-image",
-   "title": "Deviated nasal septum: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "deviated_nasal_septum-pathway",
+      "title": "Deviated nasal septum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A deviated septum is a displacement of the bony or cartilaginous nasal septum from the midline and is extremely common, often asymptomatic",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Strictly unilateral obstruction with blood-stained discharge suggesting a tumour rather than simple deviation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anterior rhinoscopy after decongestion to assess the septum and turbinates, Nasal endoscopy for a full view of the posterior septum and osteomeatal complex, CT of the paranasal sinuses when sinus disease or surgery is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat any contributing mucosal or allergic component with intranasal corticosteroids, antihistamines and saline irrigation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all nasal obstruction to the septum while overlooking turbinate hypertrophy, polyps or allergy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of deviated nasal septum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "deviated_nasal_septum-matrix",
+      "title": "Deviated nasal septum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A deviated septum is a displacement of the bony or cartilaginous nasal septum from the midline and is extremely common, often",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anterior rhinoscopy after decongestion to assess the septum and turbinates, Nasal endoscopy for a full view of the posterior",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inferior turbinate hypertrophy, Nasal polyps, Chronic rhinosinusitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat any contributing mucosal or allergic component with intranasal corticosteroids, antihistamines and saline irrigation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all nasal obstruction to the septum while overlooking turbinate hypertrophy, polyps or allergy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for deviated nasal septum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "deviated_nasal_septum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anterior rhinoscopy after decongestion",
+          "cells": [
+            {
+              "text": "Septum and turbinates; decongestion separates structural from mucosal obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal endoscopy",
+          "cells": [
+            {
+              "text": "Posterior septum and osteomeatal complex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the paranasal sinuses",
+          "cells": [
+            {
+              "text": "Sinus disease, when sinus surgery is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal airflow and allergy testing",
+          "cells": [
+            {
+              "text": "A mucosal or allergic component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deviated_nasal_septum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inferior turbinate hypertrophy or nasal polyps",
+          "cells": [
+            {
+              "text": "Overlooked when all obstruction is attributed to the septum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intranasal tumour",
+          "cells": [
+            {
+              "text": "Strictly unilateral obstruction with blood-stained discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septal haematoma or abscess",
+          "cells": [
+            {
+              "text": "Septal swelling after trauma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deviated_nasal_septum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intranasal corticosteroids, antihistamines and saline",
+          "cells": [
+            {
+              "text": "For a contributing mucosal or allergic component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-term topical decongestants",
+          "cells": [
+            {
+              "text": "Temporary relief only, to avoid rebound congestion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septoplasty",
+          "cells": [
+            {
+              "text": "Significant persistent obstruction unresponsive to medical measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Turbinate reduction",
+          "cells": [
+            {
+              "text": "Where compensatory turbinate hypertrophy contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinusitis and epistaxis",
+          "cells": [
+            {
+              "text": "Manage recurrent sinusitis; treat epistaxis from exposed mucosal spurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septorhinoplasty",
+          "cells": [
+            {
+              "text": "When an external nasal deformity coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT referral",
+          "cells": [
+            {
+              "text": "Escalate for recurrent sinusitis or sleep-disordered breathing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "deviated_nasal_septum-dx-mgmt",
+      "title": "Diagnosis and management of Deviated nasal septum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected deviated nasal septum: unilateral or persistent nasal obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (blood-stained unilateral discharge, septal swelling after trauma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage of a septal haematoma or abscess after trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anterior rhinoscopy after decongestion; nasal endoscopy; sinus CT if surgery planned",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does obstruction persist after decongestion, showing a structural cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the mucosal cause: allergy, turbinates or polyps; consider tumour if unilateral",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intranasal corticosteroids, antihistamines and saline for mucosal or allergic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short-term topical decongestants only, to avoid rebound congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Septoplasty for significant obstruction unresponsive to medical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Turbinate reduction where compensatory hypertrophy contributes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Septorhinoplasty when an external nasal deformity coexists",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Septoplasty relieves obstruction in most with good long-term results",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,453 @@
 {
- "id": "corrosive_ingestion",
- "name": "Corrosive ingestion",
- "aliases": [
-  "caustic ingestion",
-  "acid ingestion",
-  "alkali ingestion",
-  "corrosive poisoning"
- ],
- "class": "non_infective",
- "system": "Toxicology / Environmental",
- "specialty": "Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Alkalis typically cause liquefactive necrosis with deep, penetrating oesophageal injury, whereas acids cause coagulative necrosis that more often damages the stomach",
-   "The absence of visible oral or oropharyngeal burns does not exclude significant oesophageal or gastric injury",
-   "Early features include drooling, odynophagia, dysphagia, retrosternal or epigastric pain, and stridor if the airway is involved",
-   "Do not induce emesis, give neutralising agents, or attempt gastric lavage, as these can worsen tissue injury and increase the risk of perforation and aspiration",
-   "Activated charcoal is not useful and obscures endoscopic assessment, so it should be avoided",
-   "Early upper GI endoscopy (usually within the first day, once the patient is stable) is used to grade injury depth and guide management and prognosis",
-   "Immediate airway assessment is critical, as laryngeal oedema can cause rapid airway compromise requiring early intubation or a surgical airway",
-   "Late complications include oesophageal and gastric outlet strictures and an increased long-term risk of oesophageal carcinoma"
+  "id": "corrosive_ingestion",
+  "name": "Corrosive ingestion",
+  "aliases": [
+    "caustic ingestion",
+    "acid ingestion",
+    "alkali ingestion",
+    "corrosive poisoning"
   ],
-  "pathophysiology": "Corrosive agents produce tissue destruction on contact. Strong alkalis (e.g. lye, drain cleaner) cause liquefactive necrosis, saponifying fats and dissolving proteins, allowing deep penetration and full-thickness oesophageal injury with risk of perforation and mediastinitis. Strong acids cause coagulative necrosis with eschar formation that can limit depth of penetration but tends to pool in and damage the stomach, risking gastric perforation and peritonitis. Injury severity depends on the agent, concentration, volume, and contact time. Healing of deep circumferential burns leads to fibrosis and stricture, and chronic injury raises long-term malignancy risk.",
-  "additionalDifferentials": [
-   "Foreign body ingestion",
-   "Thermal or scald injury to the upper aerodigestive tract",
-   "Acute epiglottitis or other airway infection",
-   "Peptic ulcer disease or spontaneous oesophageal perforation",
-   "Pill oesophagitis"
-  ],
-  "additionalInvestigations": [
-   "Early upper GI endoscopy to grade mucosal injury",
-   "Erect chest and abdominal imaging to detect free air or mediastinal air",
-   "CT of the chest and abdomen to assess transmural injury and perforation",
-   "Arterial blood gas and lactate as markers of tissue necrosis",
-   "Full blood count, electrolytes, and group and save in case surgery is needed"
-  ],
-  "redFlags": [
-   "Stridor, hoarseness, or respiratory distress indicating airway involvement",
-   "Severe chest, back, or abdominal pain suggesting oesophageal or gastric perforation",
-   "Signs of mediastinitis or peritonitis",
-   "Haemodynamic instability, metabolic acidosis, or rising lactate",
-   "Subcutaneous emphysema or free air on imaging"
-  ],
-  "prognosis": "Minor mucosal injury usually heals well, but deep circumferential burns commonly progress to strictures needing repeated dilatation or surgery, and full-thickness injury with perforation carries high mortality; survivors have a lifelong increased risk of oesophageal cancer.",
-  "pitfalls": [
-   "Assuming a normal mouth excludes serious oesophageal or gastric damage",
-   "Attempting to neutralise the corrosive or induce vomiting, which aggravates injury",
-   "Giving activated charcoal, which is ineffective and hinders endoscopy",
-   "Delaying airway management in a patient with evolving laryngeal oedema"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/national toxicology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate airway assessment and protection, with early intubation for stridor or laryngeal oedema, and keep the patient nil by mouth",
-   "Avoid emesis, neutralising agents, gastric lavage and activated charcoal, all of which worsen tissue injury and obscure endoscopy",
-   "Resuscitate with intravenous fluids and provide adequate analgesia",
-   "Perform early upper GI endoscopy once stabilised to grade mucosal injury depth and guide management and prognosis",
-   "Give a proton pump inhibitor for acid suppression, and broad-spectrum intravenous antibiotics only if perforation or mediastinitis is suspected",
-   "Obtain urgent surgical referral for perforation, mediastinitis or peritonitis, with oesophagectomy or gastrectomy as indicated",
-   "Treat resulting strictures with repeated endoscopic dilatation, and provide nutritional support during recovery",
-   "Enrol survivors of deep injury in long-term endoscopic surveillance for oesophageal carcinoma"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "corrosive_ingestion-pathway",
-   "title": "Corrosive ingestion: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Alkalis typically cause liquefactive necrosis with deep, penetrating oesophageal injury, whereas acids cause coagulative necrosis that more often damages the stomach",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Stridor, hoarseness, or respiratory distress indicating airway involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Early upper GI endoscopy to grade mucosal injury, Erect chest and abdominal imaging to detect free air or mediastinal air, CT of the chest and abdomen to assess transmural injury and perforation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate airway assessment and protection, with early intubation for stridor or laryngeal oedema, and keep the patient nil by mouth"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal mouth excludes serious oesophageal or gastric damage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of corrosive ingestion."
-  }
- ],
- "tables": [
-  {
-   "id": "corrosive_ingestion-matrix",
-   "title": "Corrosive ingestion: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Alkalis typically cause liquefactive necrosis with deep, penetrating oesophageal injury, whereas acids cause coagulative necrosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Environmental",
+  "specialty": "Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Alkalis typically cause liquefactive necrosis with deep, penetrating oesophageal injury, whereas acids cause coagulative necrosis that more often damages the stomach",
+      "The absence of visible oral or oropharyngeal burns does not exclude significant oesophageal or gastric injury",
+      "Early features include drooling, odynophagia, dysphagia, retrosternal or epigastric pain, and stridor if the airway is involved",
+      "Do not induce emesis, give neutralising agents, or attempt gastric lavage, as these can worsen tissue injury and increase the risk of perforation and aspiration",
+      "Activated charcoal is not useful and obscures endoscopic assessment, so it should be avoided",
+      "Early upper GI endoscopy (usually within the first day, once the patient is stable) is used to grade injury depth and guide management and prognosis",
+      "Immediate airway assessment is critical, as laryngeal oedema can cause rapid airway compromise requiring early intubation or a surgical airway",
+      "Late complications include oesophageal and gastric outlet strictures and an increased long-term risk of oesophageal carcinoma"
     ],
-    [
-     "Key Investigations",
-     "Early upper GI endoscopy to grade mucosal injury, Erect chest and abdominal imaging to detect free air or mediastinal air, CT of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Corrosive agents produce tissue destruction on contact. Strong alkalis (e.g. lye, drain cleaner) cause liquefactive necrosis, saponifying fats and dissolving proteins, allowing deep penetration and full-thickness oesophageal injury with risk of perforation and mediastinitis. Strong acids cause coagulative necrosis with eschar formation that can limit depth of penetration but tends to pool in and damage the stomach, risking gastric perforation and peritonitis. Injury severity depends on the agent, concentration, volume, and contact time. Healing of deep circumferential burns leads to fibrosis and stricture, and chronic injury raises long-term malignancy risk.",
+    "additionalDifferentials": [
+      "Foreign body ingestion",
+      "Thermal or scald injury to the upper aerodigestive tract",
+      "Acute epiglottitis or other airway infection",
+      "Peptic ulcer disease or spontaneous oesophageal perforation",
+      "Pill oesophagitis"
     ],
-    [
-     "Primary Differentials",
-     "Foreign body ingestion, Thermal or scald injury to the upper aerodigestive tract, Acute epiglottitis or other airway infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Early upper GI endoscopy to grade mucosal injury",
+      "Erect chest and abdominal imaging to detect free air or mediastinal air",
+      "CT of the chest and abdomen to assess transmural injury and perforation",
+      "Arterial blood gas and lactate as markers of tissue necrosis",
+      "Full blood count, electrolytes, and group and save in case surgery is needed"
     ],
-    [
-     "Management Strategy",
-     "Immediate airway assessment and protection, with early intubation for stridor or laryngeal oedema, and keep the patient nil by",
-     "Core treatment modality"
+    "redFlags": [
+      "Stridor, hoarseness, or respiratory distress indicating airway involvement",
+      "Severe chest, back, or abdominal pain suggesting oesophageal or gastric perforation",
+      "Signs of mediastinitis or peritonitis",
+      "Haemodynamic instability, metabolic acidosis, or rising lactate",
+      "Subcutaneous emphysema or free air on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal mouth excludes serious oesophageal or gastric damage",
-     "Prevent diagnostic or management error"
+    "prognosis": "Minor mucosal injury usually heals well, but deep circumferential burns commonly progress to strictures needing repeated dilatation or surgery, and full-thickness injury with perforation carries high mortality; survivors have a lifelong increased risk of oesophageal cancer.",
+    "pitfalls": [
+      "Assuming a normal mouth excludes serious oesophageal or gastric damage",
+      "Attempting to neutralise the corrosive or induce vomiting, which aggravates injury",
+      "Giving activated charcoal, which is ineffective and hinders endoscopy",
+      "Delaying airway management in a patient with evolving laryngeal oedema"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/national toxicology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate airway assessment and protection, with early intubation for stridor or laryngeal oedema, and keep the patient nil by mouth",
+      "Avoid emesis, neutralising agents, gastric lavage and activated charcoal, all of which worsen tissue injury and obscure endoscopy",
+      "Resuscitate with intravenous fluids and provide adequate analgesia",
+      "Perform early upper GI endoscopy once stabilised to grade mucosal injury depth and guide management and prognosis",
+      "Give a proton pump inhibitor for acid suppression, and broad-spectrum intravenous antibiotics only if perforation or mediastinitis is suspected",
+      "Obtain urgent surgical referral for perforation, mediastinitis or peritonitis, with oesophagectomy or gastrectomy as indicated",
+      "Treat resulting strictures with repeated endoscopic dilatation, and provide nutritional support during recovery",
+      "Enrol survivors of deep injury in long-term endoscopic surveillance for oesophageal carcinoma"
     ]
-   ],
-   "caption": "Overview comparison matrix for corrosive ingestion."
-  }
- ],
- "diagrams": [
-  {
-   "id": "corrosive-ingestion-real-image",
-   "title": "Corrosive ingestion: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "corrosive_ingestion-pathway",
+      "title": "Corrosive ingestion: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Alkalis typically cause liquefactive necrosis with deep, penetrating oesophageal injury, whereas acids cause coagulative necrosis that more often damages the stomach",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Stridor, hoarseness, or respiratory distress indicating airway involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Early upper GI endoscopy to grade mucosal injury, Erect chest and abdominal imaging to detect free air or mediastinal air, CT of the chest and abdomen to assess transmural injury and perforation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate airway assessment and protection, with early intubation for stridor or laryngeal oedema, and keep the patient nil by mouth"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal mouth excludes serious oesophageal or gastric damage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of corrosive ingestion."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "corrosive_ingestion-matrix",
+      "title": "Corrosive ingestion: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Alkalis typically cause liquefactive necrosis with deep, penetrating oesophageal injury, whereas acids cause coagulative necrosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Early upper GI endoscopy to grade mucosal injury, Erect chest and abdominal imaging to detect free air or mediastinal air, CT of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Foreign body ingestion, Thermal or scald injury to the upper aerodigestive tract, Acute epiglottitis or other airway infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate airway assessment and protection, with early intubation for stridor or laryngeal oedema, and keep the patient nil by",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal mouth excludes serious oesophageal or gastric damage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for corrosive ingestion."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "corrosive_ingestion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Early upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Mucosal injury graded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect chest and abdominal imaging",
+          "cells": [
+            {
+              "text": "Free air or mediastinal air"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of chest and abdomen",
+          "cells": [
+            {
+              "text": "Transmural injury and perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Tissue necrosis markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "corrosive_ingestion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Foreign body ingestion",
+          "cells": [
+            {
+              "text": "Named look-alike of oesophageal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute epiglottitis or airway infection",
+          "cells": [
+            {
+              "text": "Named look-alike with airway symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spontaneous oesophageal perforation",
+          "cells": [
+            {
+              "text": "Named perforation look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "corrosive_ingestion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway protection",
+          "cells": [
+            {
+              "text": "Early intubation for stridor or laryngeal oedema; nil by mouth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid emesis and neutralisation",
+          "cells": [
+            {
+              "text": "Neutralising agents, lavage and activated charcoal worsen injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resuscitation and analgesia",
+          "cells": [
+            {
+              "text": "IV fluids and adequate analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early endoscopy",
+          "cells": [
+            {
+              "text": "Once stabilised, to grade depth and guide management and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid suppression and antibiotics",
+          "cells": [
+            {
+              "text": "PPI; broad-spectrum IV antibiotics only if perforation or mediastinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "Perforation, mediastinitis or peritonitis; oesophagectomy or gastrectomy as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strictures and surveillance",
+          "cells": [
+            {
+              "text": "Repeated endoscopic dilatation; long-term surveillance for carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "corrosive_ingestion-dx-mgmt",
+      "title": "Diagnosis and management of Corrosive ingestion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected corrosive ingestion: caustic exposure with oral or throat pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (stridor, perforation pain, mediastinitis, shock, rising lactate)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment; early intubation for airway involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Early endoscopy; erect imaging for free air; CT; arterial gas and lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does endoscopy grade the injury as superficial or deep?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider foreign body, scald injury or pill oesophagitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Airway protection and nil by mouth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid emesis, neutralising agents and lavage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV fluids and analgesia; PPI for acid suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent surgical review for perforation; dilatation for strictures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Minor injury heals well; deep circumferential injury often causes strictures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

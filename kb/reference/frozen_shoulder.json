@@ -1,173 +1,469 @@
 {
- "id": "frozen_shoulder",
- "name": "Frozen shoulder",
- "aliases": [
-  "adhesive capsulitis",
-  "shoulder contracture",
-  "periarthritis of the shoulder"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by painful, progressive global restriction of shoulder movement with the hallmark loss of passive external rotation, distinguishing it from rotator cuff disease",
-   "The condition typically evolves through overlapping phases: a painful freezing phase, a stiff frozen phase, and a gradual thawing phase of recovery",
-   "It most often affects middle-aged patients and is strongly associated with diabetes mellitus, which also predicts a more resistant course",
-   "May be primary (idiopathic) or secondary to trauma, immobilisation, or shoulder surgery",
-   "Diagnosis is clinical; radiographs are typically normal and mainly serve to exclude other causes such as arthritis or a locked posterior dislocation",
-   "Management is largely supportive: analgesia, maintaining movement, physiotherapy, and reassurance about eventual improvement",
-   "Intra-articular corticosteroid injection can help pain and stiffness, particularly in the early painful phase",
-   "Refractory cases may be treated with capsular hydrodilatation, manipulation under anaesthesia, or arthroscopic capsular release"
+  "id": "frozen_shoulder",
+  "name": "Frozen shoulder",
+  "aliases": [
+    "adhesive capsulitis",
+    "shoulder contracture",
+    "periarthritis of the shoulder"
   ],
-  "pathophysiology": "Frozen shoulder involves inflammation and progressive fibrosis of the glenohumeral joint capsule, particularly the rotator interval and coracohumeral ligament. Fibroblastic proliferation and contracture thicken and tighten the capsule, reducing the intra-articular volume and mechanically limiting movement, with external rotation lost first and most severely. The initial inflammatory, hypervascular stage is painful; as the capsule matures into dense fibrous tissue the pain lessens but stiffness dominates; finally the capsule gradually remodels and mobility returns. The strong association with diabetes and certain endocrine and metabolic states points to a systemic predisposition to abnormal fibrosis.",
-  "additionalDifferentials": [
-   "Rotator cuff tear or tendinopathy",
-   "Glenohumeral or acromioclavicular osteoarthritis",
-   "Calcific tendinitis",
-   "Posterior shoulder dislocation (locked)",
-   "Subacromial impingement or bursitis",
-   "Referred pain from the cervical spine",
-   "Septic arthritis (if acute, hot, and systemically unwell)"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment demonstrating global restriction with markedly reduced passive external rotation",
-   "Plain shoulder radiographs to exclude arthritis, dislocation, or bony lesions",
-   "Blood glucose or HbA1c given the association with diabetes",
-   "MRI or ultrasound if a rotator cuff tear or other structural lesion is suspected",
-   "Thyroid function tests where clinically indicated"
-  ],
-  "redFlags": [
-   "Constitutional symptoms or a mass suggesting tumour rather than capsulitis",
-   "Hot, swollen, systemically unwell shoulder raising concern for septic arthritis",
-   "History of significant trauma with fixed internal rotation suggesting a missed posterior dislocation",
-   "Rapidly progressive neurological symptoms pointing to an alternative diagnosis"
-  ],
-  "prognosis": "Frozen shoulder is usually self-limiting, with most patients recovering good function over one to three years, though some, particularly those with diabetes, are left with residual stiffness; interventions can shorten symptoms and relieve pain but recovery is generally slow.",
-  "pitfalls": [
-   "Confusing it with a rotator cuff tear by not testing passive external rotation",
-   "Forcing painful manipulation during the acute inflammatory phase, worsening symptoms",
-   "Missing an underlying posterior dislocation or arthritis by omitting radiographs",
-   "Overlooking undiagnosed diabetes in a patient presenting with adhesive capsulitis"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Analgesia with paracetamol and non-steroidal anti-inflammatory drugs to control pain during the inflammatory freezing phase",
-   "Intra-articular corticosteroid injection to reduce capsular inflammation and pain, most useful in the early painful stage",
-   "Physiotherapy with supervised stretching and range-of-motion exercises, targeting recovery of the lost external rotation",
-   "Hydrodilatation (arthrographic capsular distension) as an option for persistent stiffness",
-   "Optimise glycaemic control in diabetic patients, who tend to follow a more resistant course",
-   "Reserve manipulation under anaesthesia or arthroscopic capsular release for refractory, disabling disease",
-   "Reassure regarding the generally self-limiting course while monitoring functional recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "frozen_shoulder-pathway",
-   "title": "Frozen shoulder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by painful, progressive global restriction of shoulder movement with the hallmark loss of passive external rotation, distinguishing it from rotator cuff disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Constitutional symptoms or a mass suggesting tumour rather than capsulitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment demonstrating global restriction with markedly reduced passive external rotation, Plain shoulder radiographs to exclude arthritis, dislocation, or bony lesions, Blood glucose or HbA1c given the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Analgesia with paracetamol and non-steroidal anti-inflammatory drugs to control pain during the inflammatory freezing phase"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with a rotator cuff tear by not testing passive external rotation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of frozen shoulder."
-  }
- ],
- "tables": [
-  {
-   "id": "frozen_shoulder-matrix",
-   "title": "Frozen shoulder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by painful, progressive global restriction of shoulder movement with the hallmark loss of passive external",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by painful, progressive global restriction of shoulder movement with the hallmark loss of passive external rotation, distinguishing it from rotator cuff disease",
+      "The condition typically evolves through overlapping phases: a painful freezing phase, a stiff frozen phase, and a gradual thawing phase of recovery",
+      "It most often affects middle-aged patients and is strongly associated with diabetes mellitus, which also predicts a more resistant course",
+      "May be primary (idiopathic) or secondary to trauma, immobilisation, or shoulder surgery",
+      "Diagnosis is clinical; radiographs are typically normal and mainly serve to exclude other causes such as arthritis or a locked posterior dislocation",
+      "Management is largely supportive: analgesia, maintaining movement, physiotherapy, and reassurance about eventual improvement",
+      "Intra-articular corticosteroid injection can help pain and stiffness, particularly in the early painful phase",
+      "Refractory cases may be treated with capsular hydrodilatation, manipulation under anaesthesia, or arthroscopic capsular release"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment demonstrating global restriction with markedly reduced passive external rotation, Plain shoulder radiographs",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Frozen shoulder involves inflammation and progressive fibrosis of the glenohumeral joint capsule, particularly the rotator interval and coracohumeral ligament. Fibroblastic proliferation and contracture thicken and tighten the capsule, reducing the intra-articular volume and mechanically limiting movement, with external rotation lost first and most severely. The initial inflammatory, hypervascular stage is painful; as the capsule matures into dense fibrous tissue the pain lessens but stiffness dominates; finally the capsule gradually remodels and mobility returns. The strong association with diabetes and certain endocrine and metabolic states points to a systemic predisposition to abnormal fibrosis.",
+    "additionalDifferentials": [
+      "Rotator cuff tear or tendinopathy",
+      "Glenohumeral or acromioclavicular osteoarthritis",
+      "Calcific tendinitis",
+      "Posterior shoulder dislocation (locked)",
+      "Subacromial impingement or bursitis",
+      "Referred pain from the cervical spine",
+      "Septic arthritis (if acute, hot, and systemically unwell)"
     ],
-    [
-     "Primary Differentials",
-     "Rotator cuff tear or tendinopathy, Glenohumeral or acromioclavicular osteoarthritis, Calcific tendinitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment demonstrating global restriction with markedly reduced passive external rotation",
+      "Plain shoulder radiographs to exclude arthritis, dislocation, or bony lesions",
+      "Blood glucose or HbA1c given the association with diabetes",
+      "MRI or ultrasound if a rotator cuff tear or other structural lesion is suspected",
+      "Thyroid function tests where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Analgesia with paracetamol and non-steroidal anti-inflammatory drugs to control pain during the inflammatory freezing phase",
-     "Core treatment modality"
+    "redFlags": [
+      "Constitutional symptoms or a mass suggesting tumour rather than capsulitis",
+      "Hot, swollen, systemically unwell shoulder raising concern for septic arthritis",
+      "History of significant trauma with fixed internal rotation suggesting a missed posterior dislocation",
+      "Rapidly progressive neurological symptoms pointing to an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with a rotator cuff tear by not testing passive external rotation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Frozen shoulder is usually self-limiting, with most patients recovering good function over one to three years, though some, particularly those with diabetes, are left with residual stiffness; interventions can shorten symptoms and relieve pain but recovery is generally slow.",
+    "pitfalls": [
+      "Confusing it with a rotator cuff tear by not testing passive external rotation",
+      "Forcing painful manipulation during the acute inflammatory phase, worsening symptoms",
+      "Missing an underlying posterior dislocation or arthritis by omitting radiographs",
+      "Overlooking undiagnosed diabetes in a patient presenting with adhesive capsulitis"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Analgesia with paracetamol and non-steroidal anti-inflammatory drugs to control pain during the inflammatory freezing phase",
+      "Intra-articular corticosteroid injection to reduce capsular inflammation and pain, most useful in the early painful stage",
+      "Physiotherapy with supervised stretching and range-of-motion exercises, targeting recovery of the lost external rotation",
+      "Hydrodilatation (arthrographic capsular distension) as an option for persistent stiffness",
+      "Optimise glycaemic control in diabetic patients, who tend to follow a more resistant course",
+      "Reserve manipulation under anaesthesia or arthroscopic capsular release for refractory, disabling disease",
+      "Reassure regarding the generally self-limiting course while monitoring functional recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for frozen shoulder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "frozen-shoulder-real-image",
-   "title": "Frozen shoulder: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "frozen_shoulder-pathway",
+      "title": "Frozen shoulder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by painful, progressive global restriction of shoulder movement with the hallmark loss of passive external rotation, distinguishing it from rotator cuff disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Constitutional symptoms or a mass suggesting tumour rather than capsulitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment demonstrating global restriction with markedly reduced passive external rotation, Plain shoulder radiographs to exclude arthritis, dislocation, or bony lesions, Blood glucose or HbA1c given the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Analgesia with paracetamol and non-steroidal anti-inflammatory drugs to control pain during the inflammatory freezing phase"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with a rotator cuff tear by not testing passive external rotation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of frozen shoulder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "frozen_shoulder-matrix",
+      "title": "Frozen shoulder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by painful, progressive global restriction of shoulder movement with the hallmark loss of passive external",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment demonstrating global restriction with markedly reduced passive external rotation, Plain shoulder radiographs",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rotator cuff tear or tendinopathy, Glenohumeral or acromioclavicular osteoarthritis, Calcific tendinitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Analgesia with paracetamol and non-steroidal anti-inflammatory drugs to control pain during the inflammatory freezing phase",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with a rotator cuff tear by not testing passive external rotation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for frozen shoulder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frozen_shoulder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of passive external rotation",
+          "cells": [
+            {
+              "text": "Global restriction, with markedly reduced passive external rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain shoulder radiographs",
+          "cells": [
+            {
+              "text": "Excludes arthritis, dislocation or bony lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose or HbA1c",
+          "cells": [
+            {
+              "text": "Association with diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or ultrasound",
+          "cells": [
+            {
+              "text": "When a rotator cuff tear or other structural lesion is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frozen_shoulder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rotator cuff tear or tendinopathy",
+          "cells": [
+            {
+              "text": "Separated by testing passive external rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior shoulder dislocation (locked)",
+          "cells": [
+            {
+              "text": "Fixed internal rotation after significant trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "Hot, swollen, systemically unwell shoulder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour",
+          "cells": [
+            {
+              "text": "Constitutional symptoms or a mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frozen_shoulder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia with paracetamol and NSAIDs",
+          "cells": [
+            {
+              "text": "Pain during the inflammatory freezing phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular corticosteroid injection",
+          "cells": [
+            {
+              "text": "Reduces capsular inflammation and pain; most useful in the early painful stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy with supervised stretching",
+          "cells": [
+            {
+              "text": "Targets recovery of lost external rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrodilatation",
+          "cells": [
+            {
+              "text": "Option for persistent stiffness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "Diabetic patients tend to follow a more resistant course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manipulation under anaesthesia or arthroscopic release",
+          "cells": [
+            {
+              "text": "Reserved for refractory, disabling disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Generally self-limiting; monitor functional recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frozen_shoulder-dx-mgmt",
+      "title": "Diagnosis and management of Frozen shoulder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected frozen shoulder: global restriction with reduced passive external rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hot joint, mass, fixed internal rotation after trauma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for a hot, swollen, systemically unwell joint: septic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Shoulder radiographs, HbA1c, and MRI or ultrasound if a cuff tear is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is passive external rotation globally restricted, with cuff tear excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cuff tear, osteoarthritis, calcific tendinitis or cervical referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Analgesia with paracetamol and NSAIDs during the freezing phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intra-articular corticosteroid injection, most useful early",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supervised physiotherapy stretching to recover external rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manipulation under anaesthesia or arthroscopic release if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually self-limiting; most recover good function over one to three years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

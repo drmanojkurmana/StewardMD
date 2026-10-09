@@ -1,176 +1,492 @@
 {
- "id": "dent_disease_2",
- "name": "Dent disease 2",
- "aliases": [
-  "Dent-2",
-  "OCRL"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Nephrology and clinical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked recessive proximal tubulopathy caused by OCRL variants, the same gene responsible for Lowe (oculocerebrorenal) syndrome.",
-   "Represents the milder end of the OCRL phenotypic spectrum, combining a Dent-like renal picture with subtle extrarenal features.",
-   "Low-molecular-weight proteinuria, for example of beta-2-microglobulin, retinol-binding protein and alpha-1-microglobulin, is the biochemical hallmark.",
-   "Hypercalciuria with nephrocalcinosis and/or nephrolithiasis is common, alongside variable features of generalised proximal tubular dysfunction.",
-   "Mild extrarenal features may include subclinical lens opacities, mild intellectual impairment, hypotonia and modestly raised muscle enzymes, distinguishing Dent 2 from CLCN5-related Dent disease 1.",
-   "Progressive chronic kidney disease may develop, with a proportion of males reaching end-stage in adulthood.",
-   "Female carriers are usually asymptomatic or have only mild low-molecular-weight proteinuria.",
-   "OCRL accounts for a minority of Dent disease; most cases are CLCN5-related Dent disease 1."
+  "id": "dent_disease_2",
+  "name": "Dent disease 2",
+  "aliases": [
+    "Dent-2",
+    "OCRL"
   ],
-  "pathophysiology": "OCRL on chromosome Xq26.1 encodes OCRL-1, a phosphatidylinositol 4,5-bisphosphate 5-phosphatase that localises to the Golgi apparatus, endosomes and the primary cilium and regulates membrane trafficking and the actin cytoskeleton, functions that are critical to the endocytic machinery of the renal proximal tubule. Loss of enzyme function disturbs the megalin-cubilin receptor-mediated endocytosis by which the proximal tubule reclaims filtered low-molecular-weight proteins, producing the characteristic low-molecular-weight proteinuria together with hypercalciuria and broader proximal tubular dysfunction. The severity depends on the specific variant and its effect on the protein: hypomorphic OCRL variants, often affecting particular domains, cause the comparatively mild renal-predominant Dent disease 2, whereas more damaging variants produce the full oculocerebrorenal syndrome of Lowe with congenital cataracts, neurological impairment and tubulopathy.",
-  "additionalDifferentials": [
-   "Dent disease 1 (CLCN5)",
-   "Lowe (oculocerebrorenal) syndrome, the severe OCRL end of the spectrum",
-   "Other causes of renal Fanconi syndrome (cystinosis, Wilson disease, tyrosinaemia, galactosaemia, mitochondrial cytopathies)",
-   "Idiopathic hypercalciuria and other hereditary hypercalciuric nephrolithiasis",
-   "Familial hypomagnesaemia with hypercalciuria and nephrocalcinosis (CLDN16, CLDN19)",
-   "Bartter syndrome",
-   "Glomerular proteinuric disease and nephrotic syndrome, which may be wrongly suspected because of the proteinuria"
-  ],
-  "additionalInvestigations": [
-   "Quantification of low-molecular-weight proteinuria (beta-2-microglobulin, retinol-binding protein, alpha-1-microglobulin)",
-   "Urinary calcium excretion, as a calcium-to-creatinine ratio or timed collection",
-   "Renal ultrasound for nephrocalcinosis and stones",
-   "Serum creatinine and estimated glomerular filtration rate",
-   "Urinalysis for glycosuria, aminoaciduria and phosphaturia",
-   "Slit-lamp examination for lens opacities and measurement of serum muscle enzymes",
-   "Molecular genetic testing of OCRL, with CLCN5 testing to distinguish Dent disease 1"
-  ],
-  "redFlags": [
-   "Declining renal function",
-   "Symptomatic nephrolithiasis or urinary tract obstruction",
-   "Bone disease or rickets from phosphate wasting",
-   "Growth failure in a child"
-  ],
-  "prognosis": "The course is slowly progressive; a proportion of affected males develop end-stage renal disease in adulthood, while the extrarenal features remain milder than those of Lowe syndrome.",
-  "pitfalls": [
-   "Low-molecular-weight proteinuria may be misread as glomerular proteinuria, prompting inappropriate immunosuppression.",
-   "The disorder may be mislabelled as idiopathic hypercalciuria or nephrotic syndrome.",
-   "Absence of a family history does not exclude it, given carrier mothers and de novo variants.",
-   "The subtle extrarenal features that separate Dent 2 from Dent 1 are easily missed."
-  ],
-  "references": [
-   "Standard paediatric and adult nephrology texts",
-   "Clinical genetics reference texts",
-   "Reviews of the Dent disease spectrum"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy; reduce hypercalciuria with thiazide diuretics and maintain generous hydration to limit nephrocalcinosis and stone formation",
-   "Replace proximal tubular losses of phosphate, potassium and alkali and treat metabolic bone disease with vitamin D and phosphate supplementation",
-   "Slow chronic kidney disease progression with blood-pressure control and avoidance of nephrotoxins",
-   "Surveillance with serial kidney function, low-molecular-weight proteinuria, urinary calcium and renal ultrasound",
-   "Slit-lamp ophthalmology review for lens opacities and monitoring of mild neurodevelopmental and muscle involvement that distinguish the OCRL phenotype",
-   "Provide renal replacement therapy and transplantation for kidney failure with nephrology multidisciplinary input",
-   "Offer X-linked genetic counselling and screen at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dent_disease_2-pathway",
-   "title": "Dent disease 2: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked recessive proximal tubulopathy caused by OCRL variants, the same gene responsible for Lowe (oculocerebrorenal) syndrome.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Declining renal function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Quantification of low-molecular-weight proteinuria (beta-2-microglobulin, retinol-binding protein, alpha-1-microglobulin), Urinary calcium excretion, as a calcium-to-creatinine ratio or timed collection, Renal ultrasound"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy; reduce hypercalciuria with thiazide diuretics and maintain generous hydration to limit nephrocalcinosis and stone formation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Low-molecular-weight proteinuria may be misread as glomerular proteinuria, prompting inappropriate immunosuppression."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dent disease 2."
-  }
- ],
- "tables": [
-  {
-   "id": "dent_disease_2-matrix",
-   "title": "Dent disease 2: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked recessive proximal tubulopathy caused by OCRL variants, the same gene responsible for Lowe (oculocerebrorenal) syndrome.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nephrology and clinical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked recessive proximal tubulopathy caused by OCRL variants, the same gene responsible for Lowe (oculocerebrorenal) syndrome.",
+      "Represents the milder end of the OCRL phenotypic spectrum, combining a Dent-like renal picture with subtle extrarenal features.",
+      "Low-molecular-weight proteinuria, for example of beta-2-microglobulin, retinol-binding protein and alpha-1-microglobulin, is the biochemical hallmark.",
+      "Hypercalciuria with nephrocalcinosis and/or nephrolithiasis is common, alongside variable features of generalised proximal tubular dysfunction.",
+      "Mild extrarenal features may include subclinical lens opacities, mild intellectual impairment, hypotonia and modestly raised muscle enzymes, distinguishing Dent 2 from CLCN5-related Dent disease 1.",
+      "Progressive chronic kidney disease may develop, with a proportion of males reaching end-stage in adulthood.",
+      "Female carriers are usually asymptomatic or have only mild low-molecular-weight proteinuria.",
+      "OCRL accounts for a minority of Dent disease; most cases are CLCN5-related Dent disease 1."
     ],
-    [
-     "Key Investigations",
-     "Quantification of low-molecular-weight proteinuria (beta-2-microglobulin, retinol-binding protein, alpha-1-microglobulin),",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "OCRL on chromosome Xq26.1 encodes OCRL-1, a phosphatidylinositol 4,5-bisphosphate 5-phosphatase that localises to the Golgi apparatus, endosomes and the primary cilium and regulates membrane trafficking and the actin cytoskeleton, functions that are critical to the endocytic machinery of the renal proximal tubule. Loss of enzyme function disturbs the megalin-cubilin receptor-mediated endocytosis by which the proximal tubule reclaims filtered low-molecular-weight proteins, producing the characteristic low-molecular-weight proteinuria together with hypercalciuria and broader proximal tubular dysfunction. The severity depends on the specific variant and its effect on the protein: hypomorphic OCRL variants, often affecting particular domains, cause the comparatively mild renal-predominant Dent disease 2, whereas more damaging variants produce the full oculocerebrorenal syndrome of Lowe with congenital cataracts, neurological impairment and tubulopathy.",
+    "additionalDifferentials": [
+      "Dent disease 1 (CLCN5)",
+      "Lowe (oculocerebrorenal) syndrome, the severe OCRL end of the spectrum",
+      "Other causes of renal Fanconi syndrome (cystinosis, Wilson disease, tyrosinaemia, galactosaemia, mitochondrial cytopathies)",
+      "Idiopathic hypercalciuria and other hereditary hypercalciuric nephrolithiasis",
+      "Familial hypomagnesaemia with hypercalciuria and nephrocalcinosis (CLDN16, CLDN19)",
+      "Bartter syndrome",
+      "Glomerular proteinuric disease and nephrotic syndrome, which may be wrongly suspected because of the proteinuria"
     ],
-    [
-     "Primary Differentials",
-     "Dent disease 1 (CLCN5), Lowe (oculocerebrorenal) syndrome, the severe OCRL end of the spectrum, Other causes of renal Fanconi",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Quantification of low-molecular-weight proteinuria (beta-2-microglobulin, retinol-binding protein, alpha-1-microglobulin)",
+      "Urinary calcium excretion, as a calcium-to-creatinine ratio or timed collection",
+      "Renal ultrasound for nephrocalcinosis and stones",
+      "Serum creatinine and estimated glomerular filtration rate",
+      "Urinalysis for glycosuria, aminoaciduria and phosphaturia",
+      "Slit-lamp examination for lens opacities and measurement of serum muscle enzymes",
+      "Molecular genetic testing of OCRL, with CLCN5 testing to distinguish Dent disease 1"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy; reduce hypercalciuria with thiazide diuretics and maintain generous hydration to limit",
-     "Core treatment modality"
+    "redFlags": [
+      "Declining renal function",
+      "Symptomatic nephrolithiasis or urinary tract obstruction",
+      "Bone disease or rickets from phosphate wasting",
+      "Growth failure in a child"
     ],
-    [
-     "Clinical Pitfall",
-     "Low-molecular-weight proteinuria may be misread as glomerular proteinuria, prompting inappropriate immunosuppression.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is slowly progressive; a proportion of affected males develop end-stage renal disease in adulthood, while the extrarenal features remain milder than those of Lowe syndrome.",
+    "pitfalls": [
+      "Low-molecular-weight proteinuria may be misread as glomerular proteinuria, prompting inappropriate immunosuppression.",
+      "The disorder may be mislabelled as idiopathic hypercalciuria or nephrotic syndrome.",
+      "Absence of a family history does not exclude it, given carrier mothers and de novo variants.",
+      "The subtle extrarenal features that separate Dent 2 from Dent 1 are easily missed."
+    ],
+    "references": [
+      "Standard paediatric and adult nephrology texts",
+      "Clinical genetics reference texts",
+      "Reviews of the Dent disease spectrum"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy; reduce hypercalciuria with thiazide diuretics and maintain generous hydration to limit nephrocalcinosis and stone formation",
+      "Replace proximal tubular losses of phosphate, potassium and alkali and treat metabolic bone disease with vitamin D and phosphate supplementation",
+      "Slow chronic kidney disease progression with blood-pressure control and avoidance of nephrotoxins",
+      "Surveillance with serial kidney function, low-molecular-weight proteinuria, urinary calcium and renal ultrasound",
+      "Slit-lamp ophthalmology review for lens opacities and monitoring of mild neurodevelopmental and muscle involvement that distinguish the OCRL phenotype",
+      "Provide renal replacement therapy and transplantation for kidney failure with nephrology multidisciplinary input",
+      "Offer X-linked genetic counselling and screen at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for dent disease 2."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dent-disease-2-real-image",
-   "title": "Dent disease 2: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "dent_disease_2-pathway",
+      "title": "Dent disease 2: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked recessive proximal tubulopathy caused by OCRL variants, the same gene responsible for Lowe (oculocerebrorenal) syndrome.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Declining renal function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Quantification of low-molecular-weight proteinuria (beta-2-microglobulin, retinol-binding protein, alpha-1-microglobulin), Urinary calcium excretion, as a calcium-to-creatinine ratio or timed collection, Renal ultrasound"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy; reduce hypercalciuria with thiazide diuretics and maintain generous hydration to limit nephrocalcinosis and stone formation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Low-molecular-weight proteinuria may be misread as glomerular proteinuria, prompting inappropriate immunosuppression."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dent disease 2."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dent_disease_2-matrix",
+      "title": "Dent disease 2: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked recessive proximal tubulopathy caused by OCRL variants, the same gene responsible for Lowe (oculocerebrorenal) syndrome.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Quantification of low-molecular-weight proteinuria (beta-2-microglobulin, retinol-binding protein, alpha-1-microglobulin),",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dent disease 1 (CLCN5), Lowe (oculocerebrorenal) syndrome, the severe OCRL end of the spectrum, Other causes of renal Fanconi",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy; reduce hypercalciuria with thiazide diuretics and maintain generous hydration to limit",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Low-molecular-weight proteinuria may be misread as glomerular proteinuria, prompting inappropriate immunosuppression.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dent disease 2."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dent_disease_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-molecular-weight proteinuria (beta-2-microglobulin, retinol-binding protein, alpha-1-microglobulin)",
+          "cells": [
+            {
+              "text": "Tubular proteinuria, not glomerular"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium excretion",
+          "cells": [
+            {
+              "text": "Hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for glycosuria, aminoaciduria and phosphaturia",
+          "cells": [
+            {
+              "text": "Proximal tubular losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination and serum muscle enzymes",
+          "cells": [
+            {
+              "text": "Lens opacities; muscle involvement in the OCRL phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of OCRL, with CLCN5",
+          "cells": [
+            {
+              "text": "OCRL variant; CLCN5 distinguishes Dent disease 1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dent_disease_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dent disease 1 (CLCN5)",
+          "cells": [
+            {
+              "text": "Separated by CLCN5 testing and subtle extrarenal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lowe syndrome",
+          "cells": [
+            {
+              "text": "Severe OCRL end of the spectrum; extrarenal features more marked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glomerular proteinuric disease and nephrotic syndrome",
+          "cells": [
+            {
+              "text": "Tubular proteinuria is misread as glomerular"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic hypercalciuria",
+          "cells": [
+            {
+              "text": "Mislabelling the disorder; the proteinuria pattern separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dent_disease_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thiazide diuretics and hydration",
+          "cells": [
+            {
+              "text": "Reduce hypercalciuria; generous hydration to limit nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replace tubular losses",
+          "cells": [
+            {
+              "text": "Phosphate, potassium and alkali; vitamin D and phosphate for bone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slowing CKD progression",
+          "cells": [
+            {
+              "text": "Blood-pressure control and avoidance of nephrotoxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Kidney function, low-molecular-weight proteinuria, urinary calcium and ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp and neurodevelopmental review",
+          "cells": [
+            {
+              "text": "Lens opacities; mild neurodevelopmental and muscle involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "For kidney failure, with nephrology input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked; screen at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dent_disease_2-dx-mgmt",
+      "title": "Diagnosis and management of Dent disease 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dent disease 2: tubular proteinuria, hypercalciuria and nephrocalcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (declining kidney function, obstruction, rickets or growth failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review for obstruction or declining kidney function",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Low-molecular-weight proteinuria, urinary calcium, ultrasound; OCRL and CLCN5 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an OCRL variant found with CLCN5 excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Dent disease 1, glomerular disease, Lowe syndrome or idiopathic hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Thiazide diuretics and generous hydration to limit hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replace phosphate, potassium and alkali; vitamin D for bone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Blood-pressure control and avoidance of nephrotoxins to slow CKD",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Slit-lamp review and neurodevelopmental monitoring for the OCRL phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Renal replacement therapy and transplant for kidney failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slowly progressive; a proportion of males reach end-stage renal disease in adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

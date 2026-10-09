@@ -1,202 +1,719 @@
 {
- "id": "tumors_of_the_liver_and",
- "name": "Tumors of the Liver and Biliary Tree",
- "system": "Hepatobiliary / Oncology",
- "class": "non_infective",
- "chapter": 87,
- "page": 659,
- "aliases": [
-  "Hepatocellular carcinoma",
-  "HCC",
-  "Cholangiocarcinoma",
-  "Gallbladder cancer",
-  "Liver cancer",
-  "Hepatic tumors",
-  "Biliary tract cancer"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.659-670",
-  "clinicalPearls": [
-   "Liver cancer is the sixth most common cancer worldwide and the third leading cause of cancer-related death; hepatocellular carcinoma (HCC) makes up about 85% of primary liver cancers, intrahepatic cholangiocarcinoma about 10%, with rarer entities including fibrolamellar HCC, mixed HCC-iCCA, epithelioid hemangioendothelioma, and pediatric hepatoblastoma (Harrison 22e p.659).",
-   "Cirrhosis of any cause is the dominant risk factor for HCC; about one-third of cirrhotic patients develop HCC over their lifetime, with an annual risk of roughly 3-8% in HBV- or HCV-related cirrhosis and a lower 1-2% per year in cirrhosis from alcohol, metabolic dysfunction-associated steatohepatitis (MASH), alpha-1-antitrypsin deficiency, autoimmune hepatitis, Wilson's disease, and cholestatic disorders (Harrison 22e p.659-660).",
-   "HBV accounts for roughly 50% of HCC cases globally (about 60% in Asia and Africa, about 20% in the West) and can cause tumors via insertional mutagenesis; importantly, 25-30% of MASH-associated HCCs arise in the absence of cirrhosis (Harrison 22e p.660).",
-   "HCC has a strong male preponderance (male-to-female ratio about 2.5:1) and incidence peaks at 65-70 years, though it presents earlier (40-50 years) in populations with vertical HBV transmission (Harrison 22e p.659).",
-   "The radiologic hallmark of HCC on four-phase CT or dynamic contrast-enhanced MRI is arterial-phase contrast uptake with washout in the portal venous or delayed phase, a pattern with about 95-100% specificity that can make biopsy unnecessary in cirrhotic patients (Harrison 22e p.661).",
-   "The Barcelona Clinic Liver Cancer (BCLC) system is the most accepted staging scheme; the TNM staging system is NOT used in HCC because it does not capture liver function and performance status, the key prognostic variables (Harrison 22e p.662-664).",
-   "Cholangiocarcinoma is the second most common primary liver cancer and is classified by location into intrahepatic (iCCA, ~20-30%), perihilar (pCCA, ~50-60%), and distal (dCCA, ~20-30%); perihilar and distal forms together are termed extrahepatic cholangiocarcinoma (Harrison 22e p.667).",
-   "FGFR2 fusions and IDH1/2 mutations occur mostly in iCCA, whereas ERBB2/3 amplifications and SMAD4 aberrations characterize extrahepatic cholangiocarcinoma; up to about 40% of iCCAs carry a targetable mutation (Harrison 22e p.667).",
-   "Acute painless jaundice occurs in about 90% of perihilar cholangiocarcinoma patients, while roughly 10% present with cholangitis; distal cholangiocarcinoma can be hard to distinguish from early pancreatic cancer (Harrison 22e p.668-669).",
-   "Gallbladder cancer is the most common biliary tract malignancy worldwide, has a female-to-male ratio of about 3:1, and cholelithiasis is the major risk factor though fewer than 1% of patients with gallstones develop it; gallbladder polyps 10 mm or larger carry transformation risk (Harrison 22e p.669-670).",
-   "Fibrolamellar HCC typically affects children and young adults (10-30 years) without underlying liver disease, carries the PRKACA-DNAJB1 fusion oncogene in 80-100% of cases, and has a better prognosis than conventional HCC (Harrison 22e p.670).",
-   "Hepatic (hepatocellular) adenomas occur predominantly in women aged 35-40 (female-to-male ratio ~10:1), are linked to oral contraceptive use in women and anabolic androgenic steroid use in male bodybuilders, and carry risk of hemorrhage and malignant transformation, particularly when larger than 5 cm (Harrison 22e p.670)."
+  "id": "tumors_of_the_liver_and",
+  "name": "Tumors of the Liver and Biliary Tree",
+  "system": "Hepatobiliary / Oncology",
+  "class": "non_infective",
+  "chapter": 87,
+  "page": 659,
+  "aliases": [
+    "Hepatocellular carcinoma",
+    "HCC",
+    "Cholangiocarcinoma",
+    "Gallbladder cancer",
+    "Liver cancer",
+    "Hepatic tumors",
+    "Biliary tract cancer"
   ],
-  "pathophysiology": "HCC develops through a multistep process beginning with precancerous low-grade dysplastic nodules that progress to high-grade dysplastic nodules and then early HCC; adult hepatocytes are the principal cell of origin, either transforming directly or de-differentiating into precursor cells, with progenitor cells contributing in a subset. It is a prototypical inflammation-associated cancer in which oxidative stress and the immune microenvironment of chronically damaged liver drive mutation. Tumors accumulate roughly 40-60 somatic alterations, of which 4-8 are driver genes; the leading drivers are TERT promoter mutations (~56%), TP53 (~27%), and CTNNB1 (~26%), all currently non-actionable. Aflatoxin B1 produces a characteristic TP53 R249S hotspot mutation. Only about 20-25% of HCCs carry an actionable mutation. Two molecular subclasses exist: a proliferative class (poor outcome, HBV-related, AFP overexpression, Ras/mTOR/IGF activation) and a nonproliferative class (often CTNNB1-mutated, better outcome). Intrahepatic cholangiocarcinoma arises from adult cholangiocytes, transdifferentiated hepatocytes, or progenitor-cholangiocyte precursors, whereas extrahepatic cholangiocarcinoma arises from biliary epithelium and peribiliary glands. Hepatic adenomas are clonal proliferations from single-gene driver mutations (e.g., CTNNB1, HNF1A inactivation, inflammatory or Hedgehog pathway activation), and focal nodular hyperplasia is a polyclonal hepatocellular proliferation secondary to an arterial malformation (Harrison 22e p.660-670).",
-  "additionalDifferentials": [
-   "Low-grade and high-grade dysplastic nodules versus early HCC in a cirrhotic liver",
-   "Intrahepatic cholangiocarcinoma versus metastatic adenocarcinoma (colorectal, breast, lung) versus mixed HCC-iCCA",
-   "Distal cholangiocarcinoma versus early pancreatic cancer",
-   "Benign liver lesions: hemangioma, focal nodular hyperplasia, hepatocellular adenoma",
-   "Mixed HCC-iCCA and cholangiolocellular carcinoma",
-   "IgG4-associated cholangiopathy mimicking cholangiocarcinoma stricture"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Hepatic hemangioma",
-   "Focal nodular hyperplasia",
-   "Hepatocellular adenoma",
-   "Dysplastic regenerative nodules in cirrhosis",
-   "Metastatic adenocarcinoma to the liver"
-  ],
-  "additionalInvestigations": [
-   "Six-monthly abdominal ultrasound with serum alpha-fetoprotein (AFP) for HCC surveillance in high-risk cirrhotic patients (sensitivity ~65%, specificity >90%)",
-   "Four-phase contrast-enhanced CT or dynamic/gadoxetic-enhanced MRI for noninvasive HCC diagnosis using the arterial uptake/washout hallmark",
-   "LI-RADS categorization of liver nodules (LI-RADS-5 ~95% probability HCC; LI-RADS-4 ~60-70%; LI-RADS-1 0%)",
-   "Liver biopsy with hepatopathologist review when noncirrhotic, atypical imaging, or LI-RADS-4; supportive stains GPC3, glutamine synthetase, HSP70, clathrin heavy chain (2 of 4 positive is highly specific for HCC); a negative biopsy does NOT exclude HCC",
-   "CA 19-9 (prognostic at cutoffs ~100-129 U/mL for cholangiocarcinoma but poor for early diagnosis, sensitivity/specificity ~60%)",
-   "MRI/MRCP and chest-abdomen CT and PET for cholangiocarcinoma staging; PET helps detect occult lymph node metastasis",
-   "Endoscopic retrograde cholangiography with brushing cytology plus FISH for polysomy in perihilar/distal cholangiocarcinoma (FISH raises cytology sensitivity from ~20% to ~40%); serum IgG4 to exclude IgG4 cholangiopathy",
-   "Child-Pugh score (bilirubin, albumin, prothrombin time, ascites, encephalopathy) and ECOG performance status for prognostic assessment"
-  ],
-  "redFlags": [
-   "Symptomatic HCC (malaise, weight loss, anorexia, abdominal discomfort, or signs of liver dysfunction) indicates advanced disease with median survival under 1 year",
-   "Macrovascular (portal, hepatic, or branch vein) invasion, lymph node involvement, or extrahepatic spread denotes advanced BCLC C disease",
-   "Child-Pugh class C / severe liver dysfunction (BCLC D)",
-   "Rising or markedly elevated AFP (>=20 ng/mL prompting imaging; >=400 ng/dL highly suspicious but not diagnostic)",
-   "Painless jaundice or cholangitis suggesting biliary tract malignancy",
-   "Hepatic adenoma larger than 5 cm (hemorrhage and malignant transformation risk); active adenoma bleeding"
-  ],
-  "prognosis": "Prognosis depends on stage, tumor burden, liver function, and performance status. About 40% of HCC patients are diagnosed at BCLC stage 0 or A and are eligible for potentially curative resection, transplantation, or ablation, with median overall survival beyond 5 years (up to ~10 years after transplantation). Optimal surgical resection candidates have 5-year survival of 60-70% (35-55% in suboptimal candidates); RFA achieves ~60% 5-year survival; liver transplantation within Milan criteria yields 70-80% 5-year survival with ~10-15% recurrence at 5 years. Intermediate-stage (BCLC B) untreated natural history is about 16 months, improved to ~25-30 months with TACE. Symptomatic/advanced disease has median survival under 1 year; end-stage (BCLC D) survival is about 3-6 months. Cholangiocarcinoma overall carries a 5-year survival of about 10%; resectable iCCA single tumors have median survival ~40-50 months. Gallbladder cancer 5-year survival ranges 60-90% in resected localized disease but only ~10-12 months median in advanced disease. Fibrolamellar HCC has better prognosis (median ~70 months after resection). Hepatoblastoma overall 5-year survival is ~70% (50-90% by PRETEXT stage); notably, low AFP (<100 ng/mL) indicates poor prognosis in hepatoblastoma, opposite to HCC.",
-  "pitfalls": [
-   "A negative liver biopsy does NOT exclude HCC; sensitivity falls below 50% for tumors 1-2 cm, and a second biopsy is advised if findings are inconclusive or the lesion grows/changes enhancement",
-   "Nodules under 1 cm are unlikely to be HCC and are difficult to diagnose; short-interval ultrasound follow-up (every 3-4 months) is recommended rather than immediate biopsy",
-   "PET and contrast-enhanced ultrasound perform poorly for early HCC diagnosis and are not recommended as primary diagnostic tools",
-   "An AFP of >=400 ng/dL is highly suspicious but NOT diagnostic of HCC by guidelines",
-   "TNM staging should NOT be applied to HCC because it omits liver function and performance status",
-   "About 25-30% of MASH-related HCCs occur without cirrhosis, so absence of cirrhosis does not exclude HCC in this group",
-   "Surveillance is generally NOT recommended in advanced (Child-Pugh C) cirrhosis since curative therapy is precluded, except for liver transplant waiting-list patients",
-   "Liver biopsy carries a ~2-3% risk of complications including tumor seeding and bleeding"
-  ],
-  "severityClassification": "Hepatocellular carcinoma is staged by the Barcelona Clinic Liver Cancer (BCLC) system into five stages: very early (BCLC 0, single nodule <=2 cm, Child-Pugh A, ECOG 0), early (BCLC A, single or up to three nodules <=3 cm, Child-Pugh A-B, ECOG 0), intermediate (BCLC B, multinodular, Child-Pugh A-B, ECOG 0), advanced (BCLC C, portal/macrovascular invasion, N1 or M1, or ECOG 1-2), and terminal (BCLC D, Child-Pugh C or ECOG >2). Liver function is graded by the Child-Pugh score (classes A-C) and performance by ECOG. Milan criteria (single tumor <=5 cm, or up to three nodules each <=3 cm, no macrovascular invasion or extrahepatic spread) define transplant eligibility. Cholangiocarcinoma is classified anatomically into intrahepatic, perihilar, and distal subtypes; hepatoblastoma uses the PRETEXT (Pretreatment Extent of Tumor) classification (Harrison 22e p.661-669).",
-  "references": [
-   "Harrison 22e p.659",
-   "Harrison 22e p.660",
-   "Harrison 22e p.661",
-   "Harrison 22e p.662",
-   "Harrison 22e p.663",
-   "Harrison 22e p.664",
-   "Harrison 22e p.667",
-   "Harrison 22e p.668",
-   "Harrison 22e p.669",
-   "Harrison 22e p.670"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stage-directed treatment using the Barcelona Clinic Liver Cancer framework, with surgical resection, liver transplantation or local ablation for early-stage hepatocellular carcinoma",
-   "Transarterial chemoembolisation for intermediate-stage, liver-confined disease",
-   "Systemic therapy for advanced hepatocellular carcinoma, either combination immunotherapy (atezolizumab with bevacizumab) or multikinase inhibitors such as sorafenib or lenvatinib",
-   "Treatment of the underlying liver disease and its cause, including antiviral therapy for hepatitis B or C and alcohol cessation, with management of cirrhosis and portal hypertension",
-   "Surgical resection with lymphadenectomy and gemcitabine-based chemotherapy for cholangiocarcinoma, with endoscopic biliary drainage or stenting for obstructive jaundice",
-   "Regular surveillance ultrasound with serum alpha-fetoprotein in at-risk cirrhotic patients to detect tumours at a curable stage",
-   "Hepatobiliary multidisciplinary team management with best supportive and palliative care where appropriate"
-  ]
- },
- "algorithms": [
-  {
-   "id": "tumors_of_the_liver_and-pathway",
-   "title": "Tumors of the Liver and Biliary Tree: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Liver cancer is the sixth most common cancer worldwide and the third leading cause of cancer-related death; hepatocellular carcinoma (HCC) makes up about 85% of primary liver cancers, intrahepatic cholangiocarcinoma about 10%, with rarer",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic HCC (malaise, weight loss, anorexia, abdominal discomfort, or signs of liver dysfunction) indicates advanced disease with median survival under 1 year",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Six-monthly abdominal ultrasound with serum alpha-fetoprotein (AFP) for HCC surveillance in high-risk cirrhotic patients (sensitivity ~65%, specificity >90%), Four-phase contrast-enhanced CT or dynamic/gadoxetic-enhanced"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stage-directed treatment using the Barcelona Clinic Liver Cancer framework, with surgical resection, liver transplantation or local ablation for early-stage hepatocellular carcinoma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: A negative liver biopsy does NOT exclude HCC; sensitivity falls below 50% for tumors 1-2 cm, and a second biopsy is advised if findings are inconclusive or the lesion grows/changes enhancement"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tumors of the liver and biliary tree."
-  }
- ],
- "tables": [
-  {
-   "id": "tumors_of_the_liver_and-matrix",
-   "title": "Tumors of the Liver and Biliary Tree: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Liver cancer is the sixth most common cancer worldwide and the third leading cause of cancer-related death; hepatocellular",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.659-670",
+    "clinicalPearls": [
+      "Liver cancer is the sixth most common cancer worldwide and the third leading cause of cancer-related death; hepatocellular carcinoma (HCC) makes up about 85% of primary liver cancers, intrahepatic cholangiocarcinoma about 10%, with rarer entities including fibrolamellar HCC, mixed HCC-iCCA, epithelioid hemangioendothelioma, and pediatric hepatoblastoma (Harrison 22e p.659).",
+      "Cirrhosis of any cause is the dominant risk factor for HCC; about one-third of cirrhotic patients develop HCC over their lifetime, with an annual risk of roughly 3-8% in HBV- or HCV-related cirrhosis and a lower 1-2% per year in cirrhosis from alcohol, metabolic dysfunction-associated steatohepatitis (MASH), alpha-1-antitrypsin deficiency, autoimmune hepatitis, Wilson's disease, and cholestatic disorders (Harrison 22e p.659-660).",
+      "HBV accounts for roughly 50% of HCC cases globally (about 60% in Asia and Africa, about 20% in the West) and can cause tumors via insertional mutagenesis; importantly, 25-30% of MASH-associated HCCs arise in the absence of cirrhosis (Harrison 22e p.660).",
+      "HCC has a strong male preponderance (male-to-female ratio about 2.5:1) and incidence peaks at 65-70 years, though it presents earlier (40-50 years) in populations with vertical HBV transmission (Harrison 22e p.659).",
+      "The radiologic hallmark of HCC on four-phase CT or dynamic contrast-enhanced MRI is arterial-phase contrast uptake with washout in the portal venous or delayed phase, a pattern with about 95-100% specificity that can make biopsy unnecessary in cirrhotic patients (Harrison 22e p.661).",
+      "The Barcelona Clinic Liver Cancer (BCLC) system is the most accepted staging scheme; the TNM staging system is NOT used in HCC because it does not capture liver function and performance status, the key prognostic variables (Harrison 22e p.662-664).",
+      "Cholangiocarcinoma is the second most common primary liver cancer and is classified by location into intrahepatic (iCCA, ~20-30%), perihilar (pCCA, ~50-60%), and distal (dCCA, ~20-30%); perihilar and distal forms together are termed extrahepatic cholangiocarcinoma (Harrison 22e p.667).",
+      "FGFR2 fusions and IDH1/2 mutations occur mostly in iCCA, whereas ERBB2/3 amplifications and SMAD4 aberrations characterize extrahepatic cholangiocarcinoma; up to about 40% of iCCAs carry a targetable mutation (Harrison 22e p.667).",
+      "Acute painless jaundice occurs in about 90% of perihilar cholangiocarcinoma patients, while roughly 10% present with cholangitis; distal cholangiocarcinoma can be hard to distinguish from early pancreatic cancer (Harrison 22e p.668-669).",
+      "Gallbladder cancer is the most common biliary tract malignancy worldwide, has a female-to-male ratio of about 3:1, and cholelithiasis is the major risk factor though fewer than 1% of patients with gallstones develop it; gallbladder polyps 10 mm or larger carry transformation risk (Harrison 22e p.669-670).",
+      "Fibrolamellar HCC typically affects children and young adults (10-30 years) without underlying liver disease, carries the PRKACA-DNAJB1 fusion oncogene in 80-100% of cases, and has a better prognosis than conventional HCC (Harrison 22e p.670).",
+      "Hepatic (hepatocellular) adenomas occur predominantly in women aged 35-40 (female-to-male ratio ~10:1), are linked to oral contraceptive use in women and anabolic androgenic steroid use in male bodybuilders, and carry risk of hemorrhage and malignant transformation, particularly when larger than 5 cm (Harrison 22e p.670)."
     ],
-    [
-     "Key Investigations",
-     "Six-monthly abdominal ultrasound with serum alpha-fetoprotein (AFP) for HCC surveillance in high-risk cirrhotic patients",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "HCC develops through a multistep process beginning with precancerous low-grade dysplastic nodules that progress to high-grade dysplastic nodules and then early HCC; adult hepatocytes are the principal cell of origin, either transforming directly or de-differentiating into precursor cells, with progenitor cells contributing in a subset. It is a prototypical inflammation-associated cancer in which oxidative stress and the immune microenvironment of chronically damaged liver drive mutation. Tumors accumulate roughly 40-60 somatic alterations, of which 4-8 are driver genes; the leading drivers are TERT promoter mutations (~56%), TP53 (~27%), and CTNNB1 (~26%), all currently non-actionable. Aflatoxin B1 produces a characteristic TP53 R249S hotspot mutation. Only about 20-25% of HCCs carry an actionable mutation. Two molecular subclasses exist: a proliferative class (poor outcome, HBV-related, AFP overexpression, Ras/mTOR/IGF activation) and a nonproliferative class (often CTNNB1-mutated, better outcome). Intrahepatic cholangiocarcinoma arises from adult cholangiocytes, transdifferentiated hepatocytes, or progenitor-cholangiocyte precursors, whereas extrahepatic cholangiocarcinoma arises from biliary epithelium and peribiliary glands. Hepatic adenomas are clonal proliferations from single-gene driver mutations (e.g., CTNNB1, HNF1A inactivation, inflammatory or Hedgehog pathway activation), and focal nodular hyperplasia is a polyclonal hepatocellular proliferation secondary to an arterial malformation (Harrison 22e p.660-670).",
+    "additionalDifferentials": [
+      "Low-grade and high-grade dysplastic nodules versus early HCC in a cirrhotic liver",
+      "Intrahepatic cholangiocarcinoma versus metastatic adenocarcinoma (colorectal, breast, lung) versus mixed HCC-iCCA",
+      "Distal cholangiocarcinoma versus early pancreatic cancer",
+      "Benign liver lesions: hemangioma, focal nodular hyperplasia, hepatocellular adenoma",
+      "Mixed HCC-iCCA and cholangiolocellular carcinoma",
+      "IgG4-associated cholangiopathy mimicking cholangiocarcinoma stricture"
     ],
-    [
-     "Primary Differentials",
-     "Low-grade and high-grade dysplastic nodules versus early HCC in a cirrhotic liver, Intrahepatic cholangiocarcinoma versus",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Hepatic hemangioma",
+      "Focal nodular hyperplasia",
+      "Hepatocellular adenoma",
+      "Dysplastic regenerative nodules in cirrhosis",
+      "Metastatic adenocarcinoma to the liver"
     ],
-    [
-     "Management Strategy",
-     "Stage-directed treatment using the Barcelona Clinic Liver Cancer framework, with surgical resection, liver transplantation or",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Six-monthly abdominal ultrasound with serum alpha-fetoprotein (AFP) for HCC surveillance in high-risk cirrhotic patients (sensitivity ~65%, specificity >90%)",
+      "Four-phase contrast-enhanced CT or dynamic/gadoxetic-enhanced MRI for noninvasive HCC diagnosis using the arterial uptake/washout hallmark",
+      "LI-RADS categorization of liver nodules (LI-RADS-5 ~95% probability HCC; LI-RADS-4 ~60-70%; LI-RADS-1 0%)",
+      "Liver biopsy with hepatopathologist review when noncirrhotic, atypical imaging, or LI-RADS-4; supportive stains GPC3, glutamine synthetase, HSP70, clathrin heavy chain (2 of 4 positive is highly specific for HCC); a negative biopsy does NOT exclude HCC",
+      "CA 19-9 (prognostic at cutoffs ~100-129 U/mL for cholangiocarcinoma but poor for early diagnosis, sensitivity/specificity ~60%)",
+      "MRI/MRCP and chest-abdomen CT and PET for cholangiocarcinoma staging; PET helps detect occult lymph node metastasis",
+      "Endoscopic retrograde cholangiography with brushing cytology plus FISH for polysomy in perihilar/distal cholangiocarcinoma (FISH raises cytology sensitivity from ~20% to ~40%); serum IgG4 to exclude IgG4 cholangiopathy",
+      "Child-Pugh score (bilirubin, albumin, prothrombin time, ascites, encephalopathy) and ECOG performance status for prognostic assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "A negative liver biopsy does NOT exclude HCC; sensitivity falls below 50% for tumors 1-2 cm, and a second biopsy is advised if",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Symptomatic HCC (malaise, weight loss, anorexia, abdominal discomfort, or signs of liver dysfunction) indicates advanced disease with median survival under 1 year",
+      "Macrovascular (portal, hepatic, or branch vein) invasion, lymph node involvement, or extrahepatic spread denotes advanced BCLC C disease",
+      "Child-Pugh class C / severe liver dysfunction (BCLC D)",
+      "Rising or markedly elevated AFP (>=20 ng/mL prompting imaging; >=400 ng/dL highly suspicious but not diagnostic)",
+      "Painless jaundice or cholangitis suggesting biliary tract malignancy",
+      "Hepatic adenoma larger than 5 cm (hemorrhage and malignant transformation risk); active adenoma bleeding"
+    ],
+    "prognosis": "Prognosis depends on stage, tumor burden, liver function, and performance status. About 40% of HCC patients are diagnosed at BCLC stage 0 or A and are eligible for potentially curative resection, transplantation, or ablation, with median overall survival beyond 5 years (up to ~10 years after transplantation). Optimal surgical resection candidates have 5-year survival of 60-70% (35-55% in suboptimal candidates); RFA achieves ~60% 5-year survival; liver transplantation within Milan criteria yields 70-80% 5-year survival with ~10-15% recurrence at 5 years. Intermediate-stage (BCLC B) untreated natural history is about 16 months, improved to ~25-30 months with TACE. Symptomatic/advanced disease has median survival under 1 year; end-stage (BCLC D) survival is about 3-6 months. Cholangiocarcinoma overall carries a 5-year survival of about 10%; resectable iCCA single tumors have median survival ~40-50 months. Gallbladder cancer 5-year survival ranges 60-90% in resected localized disease but only ~10-12 months median in advanced disease. Fibrolamellar HCC has better prognosis (median ~70 months after resection). Hepatoblastoma overall 5-year survival is ~70% (50-90% by PRETEXT stage); notably, low AFP (<100 ng/mL) indicates poor prognosis in hepatoblastoma, opposite to HCC.",
+    "pitfalls": [
+      "A negative liver biopsy does NOT exclude HCC; sensitivity falls below 50% for tumors 1-2 cm, and a second biopsy is advised if findings are inconclusive or the lesion grows/changes enhancement",
+      "Nodules under 1 cm are unlikely to be HCC and are difficult to diagnose; short-interval ultrasound follow-up (every 3-4 months) is recommended rather than immediate biopsy",
+      "PET and contrast-enhanced ultrasound perform poorly for early HCC diagnosis and are not recommended as primary diagnostic tools",
+      "An AFP of >=400 ng/dL is highly suspicious but NOT diagnostic of HCC by guidelines",
+      "TNM staging should NOT be applied to HCC because it omits liver function and performance status",
+      "About 25-30% of MASH-related HCCs occur without cirrhosis, so absence of cirrhosis does not exclude HCC in this group",
+      "Surveillance is generally NOT recommended in advanced (Child-Pugh C) cirrhosis since curative therapy is precluded, except for liver transplant waiting-list patients",
+      "Liver biopsy carries a ~2-3% risk of complications including tumor seeding and bleeding"
+    ],
+    "severityClassification": "Hepatocellular carcinoma is staged by the Barcelona Clinic Liver Cancer (BCLC) system into five stages: very early (BCLC 0, single nodule <=2 cm, Child-Pugh A, ECOG 0), early (BCLC A, single or up to three nodules <=3 cm, Child-Pugh A-B, ECOG 0), intermediate (BCLC B, multinodular, Child-Pugh A-B, ECOG 0), advanced (BCLC C, portal/macrovascular invasion, N1 or M1, or ECOG 1-2), and terminal (BCLC D, Child-Pugh C or ECOG >2). Liver function is graded by the Child-Pugh score (classes A-C) and performance by ECOG. Milan criteria (single tumor <=5 cm, or up to three nodules each <=3 cm, no macrovascular invasion or extrahepatic spread) define transplant eligibility. Cholangiocarcinoma is classified anatomically into intrahepatic, perihilar, and distal subtypes; hepatoblastoma uses the PRETEXT (Pretreatment Extent of Tumor) classification (Harrison 22e p.661-669).",
+    "references": [
+      "Harrison 22e p.659",
+      "Harrison 22e p.660",
+      "Harrison 22e p.661",
+      "Harrison 22e p.662",
+      "Harrison 22e p.663",
+      "Harrison 22e p.664",
+      "Harrison 22e p.667",
+      "Harrison 22e p.668",
+      "Harrison 22e p.669",
+      "Harrison 22e p.670"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stage-directed treatment using the Barcelona Clinic Liver Cancer framework, with surgical resection, liver transplantation or local ablation for early-stage hepatocellular carcinoma",
+      "Transarterial chemoembolisation for intermediate-stage, liver-confined disease",
+      "Systemic therapy for advanced hepatocellular carcinoma, either combination immunotherapy (atezolizumab with bevacizumab) or multikinase inhibitors such as sorafenib or lenvatinib",
+      "Treatment of the underlying liver disease and its cause, including antiviral therapy for hepatitis B or C and alcohol cessation, with management of cirrhosis and portal hypertension",
+      "Surgical resection with lymphadenectomy and gemcitabine-based chemotherapy for cholangiocarcinoma, with endoscopic biliary drainage or stenting for obstructive jaundice",
+      "Regular surveillance ultrasound with serum alpha-fetoprotein in at-risk cirrhotic patients to detect tumours at a curable stage",
+      "Hepatobiliary multidisciplinary team management with best supportive and palliative care where appropriate"
     ]
-   ],
-   "caption": "Overview comparison matrix for tumors of the liver and biliary tree."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tumors-of-the-liver-and-real-image",
-   "title": "Tumors of the Liver and Biliary Tree: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "tumors_of_the_liver_and-pathway",
+      "title": "Tumors of the Liver and Biliary Tree: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Liver cancer is the sixth most common cancer worldwide and the third leading cause of cancer-related death; hepatocellular carcinoma (HCC) makes up about 85% of primary liver cancers, intrahepatic cholangiocarcinoma about 10%, with rarer",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic HCC (malaise, weight loss, anorexia, abdominal discomfort, or signs of liver dysfunction) indicates advanced disease with median survival under 1 year",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Six-monthly abdominal ultrasound with serum alpha-fetoprotein (AFP) for HCC surveillance in high-risk cirrhotic patients (sensitivity ~65%, specificity >90%), Four-phase contrast-enhanced CT or dynamic/gadoxetic-enhanced"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stage-directed treatment using the Barcelona Clinic Liver Cancer framework, with surgical resection, liver transplantation or local ablation for early-stage hepatocellular carcinoma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: A negative liver biopsy does NOT exclude HCC; sensitivity falls below 50% for tumors 1-2 cm, and a second biopsy is advised if findings are inconclusive or the lesion grows/changes enhancement"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tumors of the liver and biliary tree."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tumors_of_the_liver_and-matrix",
+      "title": "Tumors of the Liver and Biliary Tree: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Liver cancer is the sixth most common cancer worldwide and the third leading cause of cancer-related death; hepatocellular",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Six-monthly abdominal ultrasound with serum alpha-fetoprotein (AFP) for HCC surveillance in high-risk cirrhotic patients",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Low-grade and high-grade dysplastic nodules versus early HCC in a cirrhotic liver, Intrahepatic cholangiocarcinoma versus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stage-directed treatment using the Barcelona Clinic Liver Cancer framework, with surgical resection, liver transplantation or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "A negative liver biopsy does NOT exclude HCC; sensitivity falls below 50% for tumors 1-2 cm, and a second biopsy is advised if",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tumors of the liver and biliary tree."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hepatocellular Carcinoma",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/liver-masses-and-granulomas/hepatocellular-carcinoma"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tumors_of_the_liver_and-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging liver and biliary tumours",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Ultrasound plus AFP every 6 months in cirrhosis or long-standing HBV"
+            },
+            {
+              "text": "Sensitivity about 65%, specificity over 90%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiphase CT or MRI",
+          "cells": [
+            {
+              "text": "Arterial hyperenhancement with delayed washout, capsule, growth"
+            },
+            {
+              "text": "{{hy:Diagnostic of HCC in cirrhosis without biopsy}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LI-RADS 5",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 95% probability of HCC",
+              "op": "=",
+              "value": 95
+            },
+            {
+              "text": "Treat as HCC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LI-RADS 4",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 60 to 70% probability",
+              "range": [
+                60,
+                70
+              ]
+            },
+            {
+              "text": "Biopsy or repeat imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodule under 1 cm",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Under 1 cm",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Ultrasound every 3 to 4 months, not biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AFP",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Over 400 ng/mL in 40 to 65% of HCC",
+              "op": ">",
+              "value": 400
+            },
+            {
+              "text": "Suspicious but not diagnostic; 20 or more prompts imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BCLC 0 and A",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Single nodule 2 cm or less (0); up to 3 nodules 3 cm or less (A)",
+              "op": "<=",
+              "value": 3
+            },
+            {
+              "text": "Curative options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCLC B, C, D",
+          "cells": [
+            {
+              "text": "Multinodular (B); vascular invasion or spread (C); Child-Pugh C (D)"
+            },
+            {
+              "text": "TACE, systemic, supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milan criteria",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Single tumour under 5 cm, or up to 3 tumours 3 cm or less",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Transplant candidacy; AFP under 500"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison text gives the AFP cut-off as 400 ng/dL; Merck gives 400 ng/mL. Merck unit shown. Biopsy sensitivity falls below 50% for 1 to 2 cm tumours (Harrison)."
+    },
+    {
+      "id": "tumors_of_the_liver_and-ddx",
+      "kind": "ddx",
+      "title": "Lesions that mimic hepatobiliary cancer",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemangioma",
+          "cells": [
+            {
+              "text": "Benign vascular lesion"
+            },
+            {
+              "text": "Contrast CT or MRI pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal nodular hyperplasia",
+          "cells": [
+            {
+              "text": "Benign, non-cirrhotic liver"
+            },
+            {
+              "text": "MRI with gadoxetate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatocellular adenoma",
+          "cells": [
+            {
+              "text": "Over 5 cm risks bleeding or malignancy"
+            },
+            {
+              "text": "MRI, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysplastic nodule in cirrhosis",
+          "cells": [
+            {
+              "text": "Lacks full HCC enhancement pattern"
+            },
+            {
+              "text": "Biopsy with GPC3, glutamine synthetase, HSP70"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic adenocarcinoma",
+          "cells": [
+            {
+              "text": "Colorectal, breast, lung primary"
+            },
+            {
+              "text": "Biopsy with immunostains, search for primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related cholangiopathy",
+          "cells": [
+            {
+              "text": "Stricture mimicking cholangiocarcinoma"
+            },
+            {
+              "text": "Serum IgG4, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early pancreatic cancer",
+          "cells": [
+            {
+              "text": "Mimics distal cholangiocarcinoma"
+            },
+            {
+              "text": "EUS, CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumors_of_the_liver_and-treatment",
+      "kind": "treatment",
+      "title": "Treating hepatocellular carcinoma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Single tumour, no vascular invasion, no portal hypertension"
+            },
+            {
+              "text": "5-year survival over 60%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Within Milan criteria"
+            },
+            {
+              "text": "Potentially curative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radiofrequency ablation",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Small tumours"
+            },
+            {
+              "text": "Potentially curative under 2 cm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TACE or Y-90 radioembolisation",
+          "cells": [
+            {
+              "text": "Intermediate stage (BCLC B), or bridge to transplant"
+            },
+            {
+              "text": "Palliation, slows growth"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atezolizumab plus bevacizumab",
+          "cells": [
+            {
+              "text": "Advanced HCC, first line"
+            },
+            {
+              "text": "{{hy:Band varices first (bleeding risk)}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Durvalumab plus tremelimumab",
+          "cells": [
+            {
+              "text": "Advanced HCC when bevacizumab unsuitable"
+            },
+            {
+              "text": "First-line alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lenvatinib or sorafenib",
+          "cells": [
+            {
+              "text": "Advanced HCC alternative"
+            },
+            {
+              "text": "Sorafenib largely replaced"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat underlying liver disease",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "Antivirals for HBV or HCV, stop alcohol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Best supportive care",
+          "cells": [
+            {
+              "text": "BCLC D"
+            },
+            {
+              "text": "Median survival under 1 year when symptomatic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tumors_of_the_liver_and-dx-mgmt",
+      "title": "Diagnosis and management of hepatocellular carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Liver nodule on surveillance or rising AFP",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Nodule 1 cm or larger?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Repeat ultrasound every 3 to 4 months",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Multiphase CT or MRI, LI-RADS",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "LI-RADS 5 (arterial enhancement plus washout)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy or repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stage with BCLC, Child-Pugh, ECOG; chest CT",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "BCLC 0 or A?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Resection, transplant within Milan, or ablation",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "BCLC B (liver-confined, multinodular)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "TACE or radioembolisation",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "BCLC C with preserved liver function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Atezolizumab-bevacizumab or durvalumab-tremelimumab",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "BCLC D: supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

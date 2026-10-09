@@ -1,173 +1,525 @@
 {
- "id": "anaplastic_thyroid_carcinoma",
- "name": "Anaplastic thyroid carcinoma",
- "aliases": [
-  "ATC",
-  "undifferentiated thyroid carcinoma",
-  "anaplastic carcinoma of thyroid"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology / Endocrine Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "One of the most aggressive human malignancies, typically presenting in elderly patients as a rapidly enlarging, hard, fixed neck mass over weeks",
-   "Airway compromise is the dominant early threat, with stridor, dyspnoea, dysphagia, and hoarseness from tracheal and recurrent laryngeal nerve involvement",
-   "Often arises through dedifferentiation of a pre-existing differentiated thyroid carcinoma or long-standing goitre, frequently accumulating TP53 and TERT promoter mutations",
-   "Histology shows undifferentiated spindle, giant, or epithelioid cells with brisk mitoses and necrosis, losing thyroid differentiation markers so it does not concentrate iodine",
-   "Because it is not iodine-avid, radioactive iodine is ineffective and management centres on urgent airway assessment, tissue diagnosis, and multimodal therapy",
-   "All cases are considered stage IV by convention given the near-universal advanced behaviour at diagnosis",
-   "BRAF V600E-mutated tumours may respond to targeted BRAF-directed therapy, so molecular testing should be expedited"
+  "id": "anaplastic_thyroid_carcinoma",
+  "name": "Anaplastic thyroid carcinoma",
+  "aliases": [
+    "ATC",
+    "undifferentiated thyroid carcinoma",
+    "anaplastic carcinoma of thyroid"
   ],
-  "pathophysiology": "Anaplastic thyroid carcinoma is an undifferentiated malignancy of follicular-cell origin that has lost the features of differentiated thyroid cancer, including iodine uptake and thyroglobulin production. It commonly evolves from a pre-existing papillary or follicular carcinoma or a long-standing goitre through progressive genetic hits, characteristically TP53 inactivation and TERT promoter mutations superimposed on earlier BRAF or RAS alterations. The result is a highly proliferative, invasive tumour that rapidly infiltrates the trachea, oesophagus, strap muscles, and great vessels of the neck and disseminates widely, so local airway obstruction and distant metastasis appear early.",
-  "additionalDifferentials": [
-   "Primary thyroid lymphoma",
-   "Poorly differentiated thyroid carcinoma",
-   "Medullary thyroid carcinoma",
-   "Sarcoma of the neck",
-   "Metastatic carcinoma to the thyroid",
-   "Riedel (invasive fibrous) thyroiditis"
-  ],
-  "additionalInvestigations": [
-   "Urgent airway assessment including flexible laryngoscopy and cross-sectional imaging of the neck and thorax",
-   "Core or open biopsy for definitive tissue diagnosis when aspiration is inconclusive",
-   "Immunohistochemistry to distinguish it from lymphoma, medullary carcinoma, and metastases",
-   "Expedited molecular testing including BRAF V600E to identify targetable disease",
-   "Staging cross-sectional or functional imaging to define distant metastasis",
-   "Serum calcium and thyroid function as part of baseline assessment"
-  ],
-  "redFlags": [
-   "Impending airway obstruction with stridor or dyspnoea requiring emergency airway evaluation",
-   "Rapidly enlarging fixed neck mass in an elderly patient",
-   "New hoarseness or dysphagia indicating invasion of the recurrent laryngeal nerve or oesophagus",
-   "Widespread distant metastases at presentation"
-  ],
-  "prognosis": "Prognosis is dismal, with median survival typically only a few months; occasional patients with resectable, intrathyroidal disease or a targetable mutation such as BRAF V600E may survive longer with multimodal treatment.",
-  "pitfalls": [
-   "Delaying airway assessment while awaiting a full diagnostic work-up in a patient with a rapidly growing mass",
-   "Mistaking anaplastic carcinoma for lymphoma, which has a very different and far more favourable treatment, without immunohistochemistry",
-   "Expecting benefit from radioactive iodine in a tumour that no longer concentrates iodine",
-   "Omitting rapid BRAF testing and thereby missing an opportunity for targeted therapy"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "WHO Classification of Endocrine and Neuroendocrine Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Assess and secure the airway urgently, considering tracheostomy, as airway compromise is the dominant early threat",
-   "Obtain expedited molecular testing and give targeted therapy such as dabrafenib with trametinib where a BRAF V600E mutation is present",
-   "Pursue multimodal treatment with surgical resection for intrathyroidal resectable disease combined with external beam radiotherapy and systemic chemotherapy",
-   "Recognise that radioactive iodine is ineffective because the tumour is not iodine-avid",
-   "Consider immune checkpoint inhibition in appropriate patients",
-   "Involve palliative care early and undertake advance care planning given the poor prognosis",
-   "Manage urgently within a thyroid cancer multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anaplastic_thyroid_carcinoma-pathway",
-   "title": "Anaplastic thyroid carcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "One of the most aggressive human malignancies, typically presenting in elderly patients as a rapidly enlarging, hard, fixed neck mass over weeks",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Impending airway obstruction with stridor or dyspnoea requiring emergency airway evaluation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urgent airway assessment including flexible laryngoscopy and cross-sectional imaging of the neck and thorax, Core or open biopsy for definitive tissue diagnosis when aspiration is inconclusive, Immunohistochemistry to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Assess and secure the airway urgently, considering tracheostomy, as airway compromise is the dominant early threat"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying airway assessment while awaiting a full diagnostic work-up in a patient with a rapidly growing mass"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anaplastic thyroid carcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "anaplastic_thyroid_carcinoma-matrix",
-   "title": "Anaplastic thyroid carcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "One of the most aggressive human malignancies, typically presenting in elderly patients as a rapidly enlarging, hard, fixed neck",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology / Endocrine Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "One of the most aggressive human malignancies, typically presenting in elderly patients as a rapidly enlarging, hard, fixed neck mass over weeks",
+      "Airway compromise is the dominant early threat, with stridor, dyspnoea, dysphagia, and hoarseness from tracheal and recurrent laryngeal nerve involvement",
+      "Often arises through dedifferentiation of a pre-existing differentiated thyroid carcinoma or long-standing goitre, frequently accumulating TP53 and TERT promoter mutations",
+      "Histology shows undifferentiated spindle, giant, or epithelioid cells with brisk mitoses and necrosis, losing thyroid differentiation markers so it does not concentrate iodine",
+      "Because it is not iodine-avid, radioactive iodine is ineffective and management centres on urgent airway assessment, tissue diagnosis, and multimodal therapy",
+      "All cases are considered stage IV by convention given the near-universal advanced behaviour at diagnosis",
+      "BRAF V600E-mutated tumours may respond to targeted BRAF-directed therapy, so molecular testing should be expedited"
     ],
-    [
-     "Key Investigations",
-     "Urgent airway assessment including flexible laryngoscopy and cross-sectional imaging of the neck and thorax, Core or open biopsy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Anaplastic thyroid carcinoma is an undifferentiated malignancy of follicular-cell origin that has lost the features of differentiated thyroid cancer, including iodine uptake and thyroglobulin production. It commonly evolves from a pre-existing papillary or follicular carcinoma or a long-standing goitre through progressive genetic hits, characteristically TP53 inactivation and TERT promoter mutations superimposed on earlier BRAF or RAS alterations. The result is a highly proliferative, invasive tumour that rapidly infiltrates the trachea, oesophagus, strap muscles, and great vessels of the neck and disseminates widely, so local airway obstruction and distant metastasis appear early.",
+    "additionalDifferentials": [
+      "Primary thyroid lymphoma",
+      "Poorly differentiated thyroid carcinoma",
+      "Medullary thyroid carcinoma",
+      "Sarcoma of the neck",
+      "Metastatic carcinoma to the thyroid",
+      "Riedel (invasive fibrous) thyroiditis"
     ],
-    [
-     "Primary Differentials",
-     "Primary thyroid lymphoma, Poorly differentiated thyroid carcinoma, Medullary thyroid carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urgent airway assessment including flexible laryngoscopy and cross-sectional imaging of the neck and thorax",
+      "Core or open biopsy for definitive tissue diagnosis when aspiration is inconclusive",
+      "Immunohistochemistry to distinguish it from lymphoma, medullary carcinoma, and metastases",
+      "Expedited molecular testing including BRAF V600E to identify targetable disease",
+      "Staging cross-sectional or functional imaging to define distant metastasis",
+      "Serum calcium and thyroid function as part of baseline assessment"
     ],
-    [
-     "Management Strategy",
-     "Assess and secure the airway urgently, considering tracheostomy, as airway compromise is the dominant early threat",
-     "Core treatment modality"
+    "redFlags": [
+      "Impending airway obstruction with stridor or dyspnoea requiring emergency airway evaluation",
+      "Rapidly enlarging fixed neck mass in an elderly patient",
+      "New hoarseness or dysphagia indicating invasion of the recurrent laryngeal nerve or oesophagus",
+      "Widespread distant metastases at presentation"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying airway assessment while awaiting a full diagnostic work-up in a patient with a rapidly growing mass",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is dismal, with median survival typically only a few months; occasional patients with resectable, intrathyroidal disease or a targetable mutation such as BRAF V600E may survive longer with multimodal treatment.",
+    "pitfalls": [
+      "Delaying airway assessment while awaiting a full diagnostic work-up in a patient with a rapidly growing mass",
+      "Mistaking anaplastic carcinoma for lymphoma, which has a very different and far more favourable treatment, without immunohistochemistry",
+      "Expecting benefit from radioactive iodine in a tumour that no longer concentrates iodine",
+      "Omitting rapid BRAF testing and thereby missing an opportunity for targeted therapy"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "WHO Classification of Endocrine and Neuroendocrine Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Assess and secure the airway urgently, considering tracheostomy, as airway compromise is the dominant early threat",
+      "Obtain expedited molecular testing and give targeted therapy such as dabrafenib with trametinib where a BRAF V600E mutation is present",
+      "Pursue multimodal treatment with surgical resection for intrathyroidal resectable disease combined with external beam radiotherapy and systemic chemotherapy",
+      "Recognise that radioactive iodine is ineffective because the tumour is not iodine-avid",
+      "Consider immune checkpoint inhibition in appropriate patients",
+      "Involve palliative care early and undertake advance care planning given the poor prognosis",
+      "Manage urgently within a thyroid cancer multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for anaplastic thyroid carcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anaplastic-thyroid-carcinoma-real-image",
-   "title": "Anaplastic thyroid carcinoma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "anaplastic_thyroid_carcinoma-pathway",
+      "title": "Anaplastic thyroid carcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "One of the most aggressive human malignancies, typically presenting in elderly patients as a rapidly enlarging, hard, fixed neck mass over weeks",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Impending airway obstruction with stridor or dyspnoea requiring emergency airway evaluation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urgent airway assessment including flexible laryngoscopy and cross-sectional imaging of the neck and thorax, Core or open biopsy for definitive tissue diagnosis when aspiration is inconclusive, Immunohistochemistry to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Assess and secure the airway urgently, considering tracheostomy, as airway compromise is the dominant early threat"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying airway assessment while awaiting a full diagnostic work-up in a patient with a rapidly growing mass"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anaplastic thyroid carcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anaplastic_thyroid_carcinoma-matrix",
+      "title": "Anaplastic thyroid carcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "One of the most aggressive human malignancies, typically presenting in elderly patients as a rapidly enlarging, hard, fixed neck",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urgent airway assessment including flexible laryngoscopy and cross-sectional imaging of the neck and thorax, Core or open biopsy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary thyroid lymphoma, Poorly differentiated thyroid carcinoma, Medullary thyroid carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Assess and secure the airway urgently, considering tracheostomy, as airway compromise is the dominant early threat",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying airway assessment while awaiting a full diagnostic work-up in a patient with a rapidly growing mass",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anaplastic thyroid carcinoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anaplastic_thyroid_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible laryngoscopy and cross-sectional imaging of neck and thorax",
+          "cells": [
+            {
+              "text": "Airway and extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core or open biopsy",
+          "cells": [
+            {
+              "text": "Definitive tissue diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "Distinguishes lymphoma, medullary carcinoma and metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E testing",
+          "cells": [
+            {
+              "text": "Targetable mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "Distant metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium and thyroid function",
+          "cells": [
+            {
+              "text": "Baseline assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anaplastic_thyroid_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary thyroid lymphoma",
+          "cells": [
+            {
+              "text": "Lymphoid infiltrate"
+            },
+            {
+              "text": "Immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poorly differentiated thyroid carcinoma",
+          "cells": [
+            {
+              "text": "Intermediate differentiation"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medullary thyroid carcinoma",
+          "cells": [
+            {
+              "text": "Neuroendocrine markers"
+            },
+            {
+              "text": "Immunohistochemistry and calcitonin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoma of the neck",
+          "cells": [
+            {
+              "text": "Spindle-cell neck mass"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic carcinoma to the thyroid",
+          "cells": [
+            {
+              "text": "Known primary elsewhere"
+            },
+            {
+              "text": "Immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riedel thyroiditis",
+          "cells": [
+            {
+              "text": "Fibrous invasive thyroid process"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anaplastic_thyroid_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent airway securing, considering tracheostomy",
+          "cells": [
+            {
+              "text": "Airway compromise"
+            },
+            {
+              "text": "Dominant early threat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dabrafenib with trametinib",
+          "cells": [
+            {
+              "text": "BRAF V600E mutation"
+            },
+            {
+              "text": "Targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection with external beam radiotherapy and systemic chemotherapy",
+          "cells": [
+            {
+              "text": "Resectable intrathyroidal disease"
+            },
+            {
+              "text": "Multimodal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioactive iodine is ineffective",
+          "cells": [
+            {
+              "text": "Tumour not iodine-avid"
+            },
+            {
+              "text": "Not used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune checkpoint inhibition",
+          "cells": [
+            {
+              "text": "Appropriate patients"
+            },
+            {
+              "text": "Consider"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early palliative care and advance care planning",
+          "cells": [
+            {
+              "text": "Poor prognosis"
+            },
+            {
+              "text": "Early involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anaplastic_thyroid_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Anaplastic thyroid carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly enlarging hard fixed neck mass in an elderly patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stridor, dyspnoea, dysphagia, hoarseness or distant metastases?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment; consider tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy; neck and chest imaging; core biopsy; BRAF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Undifferentiated tumour confirmed on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Secure the airway; BRAF V600E-directed therapy if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review lymphoma, medullary carcinoma and metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multimodal treatment for resectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radioiodine is not used; tumour is not iodine-avid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early palliative care and advance care planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Median survival only months; BRAF or resectable disease may do better",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

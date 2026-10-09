@@ -1,178 +1,411 @@
 {
- "id": "von_gierke_disease",
- "name": "Von Gierke disease (glycogen storage disease type I)",
- "aliases": [
-  "glycogen storage disease type I",
-  "GSD I",
-  "glucose-6-phosphatase deficiency",
-  "G6PC deficiency",
-  "SLC37A4 deficiency",
-  "GSD Ia",
-  "GSD Ib"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from glucose-6-phosphatase deficiency (G6PC) and type Ib from a defect in the glucose-6-phosphate transporter (SLC37A4)",
-   "Presents in infancy with severe fasting hypoglycaemia, marked hepatomegaly, and a doll-like facies with truncal adiposity",
-   "The biochemical hallmark is fasting hypoglycaemia accompanied by lactic acidosis, hyperuricaemia, and hyperlipidaemia (raised triglycerides and cholesterol)",
-   "Type Ib additionally causes neutropenia and impaired neutrophil function, predisposing to recurrent infections and inflammatory bowel-like disease",
-   "Long-term complications include hepatic adenomas (with malignant potential), nephropathy with proteinuria, gout, growth retardation, and osteopenia",
-   "Cornerstone of management is maintaining euglycaemia with frequent feeds and uncooked cornstarch therapy while restricting galactose and fructose",
-   "Lactate can serve as an alternative cerebral fuel, which may partly protect the brain during hypoglycaemic episodes"
+  "id": "von_gierke_disease",
+  "name": "Von Gierke disease (glycogen storage disease type I)",
+  "aliases": [
+    "glycogen storage disease type I",
+    "GSD I",
+    "glucose-6-phosphatase deficiency",
+    "G6PC deficiency",
+    "SLC37A4 deficiency",
+    "GSD Ia",
+    "GSD Ib"
   ],
-  "pathophysiology": "Glycogen storage disease type I is caused by deficiency of the glucose-6-phosphatase system, which catalyses the final common step releasing free glucose from glucose-6-phosphate in both glycogenolysis and gluconeogenesis. In type Ia the catalytic enzyme glucose-6-phosphatase is deficient, whereas in type Ib the microsomal transporter that moves glucose-6-phosphate into the endoplasmic reticulum is defective. As a result the liver, kidney, and intestine cannot release glucose during fasting, causing profound hypoglycaemia. Accumulating glucose-6-phosphate is diverted into glycolysis and the pentose phosphate and lipogenic pathways, generating excess lactate, uric acid, and triglycerides, while glycogen and fat accumulate in the liver and kidney. In type Ib, impaired glucose-6-phosphate transport also disturbs neutrophil function, producing neutropenia.",
-  "additionalDifferentials": [
-   "Other hepatic glycogen storage diseases (types III, VI, IX)",
-   "Fructose-1,6-bisphosphatase deficiency and other gluconeogenesis defects",
-   "Hereditary fructose intolerance and galactosaemia",
-   "Fatty acid oxidation disorders causing fasting hypoglycaemia",
-   "Hyperinsulinism",
-   "Organic acidaemias with lactic acidosis"
-  ],
-  "additionalInvestigations": [
-   "Blood glucose, lactate, uric acid, and lipid profile during controlled fasting",
-   "Liver ultrasonography and surveillance imaging for hepatic adenomas",
-   "Renal function tests and urinalysis for proteinuria and microalbuminuria",
-   "Full blood count for neutropenia in suspected type Ib",
-   "Molecular genetic testing of G6PC and SLC37A4",
-   "Bone densitometry for osteopenia in longstanding disease"
-  ],
-  "redFlags": [
-   "Severe symptomatic hypoglycaemia with seizures or reduced consciousness",
-   "Severe lactic acidosis during metabolic decompensation",
-   "Rapidly enlarging or bleeding hepatic adenoma or features suggesting malignant transformation",
-   "Serious infection or gut inflammation in neutropenic type Ib patients"
-  ],
-  "prognosis": "With meticulous dietary control to maintain euglycaemia, most patients survive into adulthood with good outcomes; long-term risks of hepatic adenoma with malignant potential, progressive nephropathy, and, in type Ib, infective complications remain the major determinants of prognosis.",
-  "pitfalls": [
-   "Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch",
-   "Overlooking neutropenia and its complications in type Ib",
-   "Missing surveillance for hepatic adenoma and renal disease during long-term follow-up",
-   "Giving galactose- or fructose-containing feeds that worsen the metabolic derangement"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous nasogastric or gastrostomy glucose feeds in infancy",
-   "Restrict galactose and fructose and provide a complex-carbohydrate-based diet to limit lactate and lipid generation, guided by a metabolic dietitian",
-   "Treat metabolic sequelae: allopurinol for hyperuricaemia and gout, lipid-lowering therapy with statins or fibrates for hyperlipidaemia, and citrate supplementation for nephrolithiasis",
-   "In type Ib, correct neutropenia and neutrophil dysfunction with granulocyte colony-stimulating factor and treat the inflammatory-bowel-like disease",
-   "Give prompt intravenous dextrose during intercurrent illness, vomiting or hypoglycaemia to avert acute metabolic decompensation and lactic acidosis",
-   "Structured surveillance with serial hepatic imaging for adenomas, renal function and urinary protein monitoring with an ACE inhibitor for proteinuric nephropathy, and bone densitometry for osteopenia",
-   "Refer for liver transplantation for hepatic adenoma with malignant transformation or intractable metabolic control, and offer renal transplantation for end-stage nephropathy",
-   "Provide genetic counselling for autosomal recessive inheritance with testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "von_gierke_disease-pathway",
-   "title": "Von Gierke disease (glycogen storage disease type I): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from glucose-6-phosphatase deficiency (G6PC) and type Ib from a defect in the glucose-6-phosphate transporter (SLC37A4)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe symptomatic hypoglycaemia with seizures or reduced consciousness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood glucose, lactate, uric acid, and lipid profile during controlled fasting, Liver ultrasonography and surveillance imaging for hepatic adenomas, Renal function tests and urinalysis for proteinuria and microalbuminuria"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous nasogastric or gastrostomy glucose feeds in infancy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of von gierke disease (glycogen storage disease type i)."
-  }
- ],
- "tables": [
-  {
-   "id": "von_gierke_disease-matrix",
-   "title": "Von Gierke disease (glycogen storage disease type I): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from glucose-6-phosphatase deficiency (G6PC) and type Ib from a defect in the glucose-6-phosphate transporter (SLC37A4)",
+      "Presents in infancy with severe fasting hypoglycaemia, marked hepatomegaly, and a doll-like facies with truncal adiposity",
+      "The biochemical hallmark is fasting hypoglycaemia accompanied by lactic acidosis, hyperuricaemia, and hyperlipidaemia (raised triglycerides and cholesterol)",
+      "Type Ib additionally causes neutropenia and impaired neutrophil function, predisposing to recurrent infections and inflammatory bowel-like disease",
+      "Long-term complications include hepatic adenomas (with malignant potential), nephropathy with proteinuria, gout, growth retardation, and osteopenia",
+      "Cornerstone of management is maintaining euglycaemia with frequent feeds and uncooked cornstarch therapy while restricting galactose and fructose",
+      "Lactate can serve as an alternative cerebral fuel, which may partly protect the brain during hypoglycaemic episodes"
     ],
-    [
-     "Key Investigations",
-     "Blood glucose, lactate, uric acid, and lipid profile during controlled fasting, Liver ultrasonography and surveillance imaging",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glycogen storage disease type I is caused by deficiency of the glucose-6-phosphatase system, which catalyses the final common step releasing free glucose from glucose-6-phosphate in both glycogenolysis and gluconeogenesis. In type Ia the catalytic enzyme glucose-6-phosphatase is deficient, whereas in type Ib the microsomal transporter that moves glucose-6-phosphate into the endoplasmic reticulum is defective. As a result the liver, kidney, and intestine cannot release glucose during fasting, causing profound hypoglycaemia. Accumulating glucose-6-phosphate is diverted into glycolysis and the pentose phosphate and lipogenic pathways, generating excess lactate, uric acid, and triglycerides, while glycogen and fat accumulate in the liver and kidney. In type Ib, impaired glucose-6-phosphate transport also disturbs neutrophil function, producing neutropenia.",
+    "additionalDifferentials": [
+      "Other hepatic glycogen storage diseases (types III, VI, IX)",
+      "Fructose-1,6-bisphosphatase deficiency and other gluconeogenesis defects",
+      "Hereditary fructose intolerance and galactosaemia",
+      "Fatty acid oxidation disorders causing fasting hypoglycaemia",
+      "Hyperinsulinism",
+      "Organic acidaemias with lactic acidosis"
     ],
-    [
-     "Primary Differentials",
-     "Other hepatic glycogen storage diseases (types III, VI, IX), Fructose-1,6-bisphosphatase deficiency and other gluconeogenesis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood glucose, lactate, uric acid, and lipid profile during controlled fasting",
+      "Liver ultrasonography and surveillance imaging for hepatic adenomas",
+      "Renal function tests and urinalysis for proteinuria and microalbuminuria",
+      "Full blood count for neutropenia in suspected type Ib",
+      "Molecular genetic testing of G6PC and SLC37A4",
+      "Bone densitometry for osteopenia in longstanding disease"
     ],
-    [
-     "Management Strategy",
-     "Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe symptomatic hypoglycaemia with seizures or reduced consciousness",
+      "Severe lactic acidosis during metabolic decompensation",
+      "Rapidly enlarging or bleeding hepatic adenoma or features suggesting malignant transformation",
+      "Serious infection or gut inflammation in neutropenic type Ib patients"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch",
-     "Prevent diagnostic or management error"
+    "prognosis": "With meticulous dietary control to maintain euglycaemia, most patients survive into adulthood with good outcomes; long-term risks of hepatic adenoma with malignant potential, progressive nephropathy, and, in type Ib, infective complications remain the major determinants of prognosis.",
+    "pitfalls": [
+      "Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch",
+      "Overlooking neutropenia and its complications in type Ib",
+      "Missing surveillance for hepatic adenoma and renal disease during long-term follow-up",
+      "Giving galactose- or fructose-containing feeds that worsen the metabolic derangement"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous nasogastric or gastrostomy glucose feeds in infancy",
+      "Restrict galactose and fructose and provide a complex-carbohydrate-based diet to limit lactate and lipid generation, guided by a metabolic dietitian",
+      "Treat metabolic sequelae: allopurinol for hyperuricaemia and gout, lipid-lowering therapy with statins or fibrates for hyperlipidaemia, and citrate supplementation for nephrolithiasis",
+      "In type Ib, correct neutropenia and neutrophil dysfunction with granulocyte colony-stimulating factor and treat the inflammatory-bowel-like disease",
+      "Give prompt intravenous dextrose during intercurrent illness, vomiting or hypoglycaemia to avert acute metabolic decompensation and lactic acidosis",
+      "Structured surveillance with serial hepatic imaging for adenomas, renal function and urinary protein monitoring with an ACE inhibitor for proteinuric nephropathy, and bone densitometry for osteopenia",
+      "Refer for liver transplantation for hepatic adenoma with malignant transformation or intractable metabolic control, and offer renal transplantation for end-stage nephropathy",
+      "Provide genetic counselling for autosomal recessive inheritance with testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for von gierke disease (glycogen storage disease type i)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "von-gierke-disease-real-image",
-   "title": "Von Gierke disease (glycogen storage disease type I): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "von_gierke_disease-pathway",
+      "title": "Von Gierke disease (glycogen storage disease type I): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from glucose-6-phosphatase deficiency (G6PC) and type Ib from a defect in the glucose-6-phosphate transporter (SLC37A4)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe symptomatic hypoglycaemia with seizures or reduced consciousness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood glucose, lactate, uric acid, and lipid profile during controlled fasting, Liver ultrasonography and surveillance imaging for hepatic adenomas, Renal function tests and urinalysis for proteinuria and microalbuminuria"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous nasogastric or gastrostomy glucose feeds in infancy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of von gierke disease (glycogen storage disease type i)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "von_gierke_disease-matrix",
+      "title": "Von Gierke disease (glycogen storage disease type I): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder of the terminal step of gluconeogenesis and glycogenolysis; type Ia results from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood glucose, lactate, uric acid, and lipid profile during controlled fasting, Liver ultrasonography and surveillance imaging",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other hepatic glycogen storage diseases (types III, VI, IX), Fructose-1,6-bisphosphatase deficiency and other gluconeogenesis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Maintain euglycaemia as the cornerstone: frequent daytime carbohydrate feeds with uncooked cornstarch, plus overnight continuous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to prevent nocturnal hypoglycaemia by omitting overnight feeding or cornstarch",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for von gierke disease (glycogen storage disease type i)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "von_gierke_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood glucose, lactate, uric acid and lipids during controlled fasting",
+          "cells": [
+            {
+              "text": "Fasting hypoglycaemia, lactic acidosis, hyperuricaemia and hyperlipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver ultrasound and surveillance imaging",
+          "cells": [
+            {
+              "text": "Hepatic adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "von_gierke_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other hepatic glycogen storage diseases (types III, VI, IX)",
+          "cells": [
+            {
+              "text": "Hepatomegaly with different enzyme defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fructose-1,6-bisphosphatase deficiency",
+          "cells": [
+            {
+              "text": "Gluconeogenesis defect with hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary fructose intolerance",
+          "cells": [
+            {
+              "text": "Hypoglycaemia after fructose; galactose and fructose restriction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "von_gierke_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Frequent daytime carbohydrate feeds",
+          "cells": [
+            {
+              "text": "Uncooked cornstarch with overnight continuous nasogastric feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restrict galactose and fructose",
+          "cells": [
+            {
+              "text": "Dietary restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for adenomas",
+          "cells": [
+            {
+              "text": "Liver imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "von_gierke_disease-dx-mgmt",
+      "title": "Diagnosis and management of Von Gierke disease (glycogen storage disease type I)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected von Gierke disease: fasting hypoglycaemia with hepatomegaly in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypoglycaemia with seizures, lactic acidosis or liver mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucose correction for hypoglycaemia with seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting glucose, lactate, uric acid, lipids, liver ultrasound, renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does controlled fasting show hypoglycaemia with lactic acidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other glycogen storage or gluconeogenesis defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Frequent daytime carbohydrate feeds with uncooked cornstarch",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Overnight continuous feeding to prevent nocturnal hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restrict galactose and fructose in the diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver surveillance for hepatic adenomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Euglycaemia controls most features; adenomas and neutropenia need surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

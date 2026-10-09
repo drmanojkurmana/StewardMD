@@ -1,175 +1,475 @@
 {
- "id": "apol1_nephropathy",
- "name": "APOL1-associated nephropathy",
- "aliases": [
-  "APOL1 nephropathy",
-  "APOL1 kidney disease",
-  "apolipoprotein L1 nephropathy",
-  "APOL1 high-risk genotype nephropathy"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard nephrology and clinical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Driven by two renal-risk variants (G1 and G2) in APOL1 that are common in people of West African ancestry",
-   "A high-risk genotype means two risk alleles (any combination of G1 and G2); it substantially raises the risk of several kidney diseases",
-   "Associated phenotypes include focal segmental glomerulosclerosis, HIV-associated nephropathy, hypertension-attributed CKD, and more rapid CKD progression",
-   "Inheritance behaves recessively for kidney risk, but most people with two risk alleles never develop kidney disease, indicating that a 'second hit' is usually required",
-   "The variants persist at high frequency because a single copy confers protection against African trypanosomiasis (sleeping sickness)",
-   "Recognising APOL1 risk has implications for living kidney donation and for donor-derived graft outcomes",
-   "Genotyping identifies risk but does not by itself diagnose active kidney disease, which still needs clinical and, where appropriate, histological assessment"
+  "id": "apol1_nephropathy",
+  "name": "APOL1-associated nephropathy",
+  "aliases": [
+    "APOL1 nephropathy",
+    "APOL1 kidney disease",
+    "apolipoprotein L1 nephropathy",
+    "APOL1 high-risk genotype nephropathy"
   ],
-  "pathophysiology": "APOL1 encodes apolipoprotein L1, a circulating and intracellular protein that also confers innate immunity against certain trypanosomes. The G1 and G2 coding variants alter the protein so that, in the presence of a second environmental or genetic stressor (such as interferon-driven inflammation from viral infection), APOL1 becomes toxic to kidney cells, particularly podocytes. This injury drives podocyte dysfunction and loss, producing focal segmental glomerulosclerosis, collapsing glomerulopathy and progressive glomerular and interstitial scarring. Because injury generally requires a two-hit process, the high-risk genotype increases susceptibility and accelerates progression rather than being sufficient alone to cause disease.",
-  "additionalDifferentials": [
-   "Primary (idiopathic) focal segmental glomerulosclerosis",
-   "Hypertensive nephrosclerosis of other cause",
-   "HIV-associated nephropathy without APOL1 risk genotype",
-   "Diabetic kidney disease",
-   "Other genetic podocytopathies (for example NPHS1/NPHS2)",
-   "Membranous nephropathy and other glomerular diseases"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis and urine protein-to-creatinine or albumin-to-creatinine ratio to quantify proteinuria",
-   "Serum creatinine with eGFR trajectory over time",
-   "Blood pressure assessment given the hypertension-linked phenotype",
-   "Kidney biopsy where the pattern of glomerular disease needs clarification",
-   "APOL1 genotyping (G1 and G2) in appropriate clinical and donor-evaluation contexts",
-   "Screening for secondary triggers such as HIV and other relevant viral infections"
-  ],
-  "redFlags": [
-   "Nephrotic-range proteinuria with rapidly declining renal function",
-   "Collapsing glomerulopathy on biopsy, often with an interferon-associated trigger",
-   "Accelerated CKD progression despite blood pressure control",
-   "Deteriorating graft function in a kidney from a high-risk-genotype donor"
-  ],
-  "prognosis": "The high-risk genotype is linked to earlier onset and faster progression of kidney disease, but penetrance is incomplete and many carriers retain normal kidney function; outcome depends heavily on the presence of a second injurious trigger and on control of blood pressure and proteinuria.",
-  "pitfalls": [
-   "Treating APOL1 genotype as diagnostic of disease rather than a susceptibility factor",
-   "Neglecting the impact of the genotype on living-donor evaluation and counselling",
-   "Assuming a Mendelian dominant pattern rather than the recessive-acting two-hit model",
-   "Overlooking a treatable second hit such as viral infection driving collapsing disease"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "KDIGO / peer-reviewed reviews on APOL1 kidney disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control blood pressure and proteinuria with renin-angiotensin system blockade using an ACE inhibitor or angiotensin-receptor blocker",
-   "Add an SGLT2 inhibitor for additional renoprotection in proteinuric chronic kidney disease",
-   "Identify and treat the second hit, including antiretroviral therapy for HIV-associated nephropathy and control of interferon-driven viral triggers",
-   "Use biopsy-guided corticosteroid immunosuppression where a treatable focal segmental or collapsing glomerulosclerosis lesion is demonstrated",
-   "Monitor eGFR trajectory and urine protein-to-creatinine ratio with regular blood-pressure surveillance for progression",
-   "Refer to nephrology and consider enrolment in trials of APOL1-targeted inhibitor therapy",
-   "Plan renal replacement therapy and transplant assessment as chronic kidney disease advances",
-   "Provide genetic counselling and APOL1 genotyping in living-donor evaluation and family assessment given West African ancestry and recessive kidney-risk inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "apol1_nephropathy-pathway",
-   "title": "APOL1-associated nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Driven by two renal-risk variants (G1 and G2) in APOL1 that are common in people of West African ancestry",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Nephrotic-range proteinuria with rapidly declining renal function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis and urine protein-to-creatinine or albumin-to-creatinine ratio to quantify proteinuria, Serum creatinine with eGFR trajectory over time, Blood pressure assessment given the hypertension-linked phenotype"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control blood pressure and proteinuria with renin-angiotensin system blockade using an ACE inhibitor or angiotensin-receptor blocker"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating APOL1 genotype as diagnostic of disease rather than a susceptibility factor"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of apol1-associated nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "apol1_nephropathy-matrix",
-   "title": "APOL1-associated nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Driven by two renal-risk variants (G1 and G2) in APOL1 that are common in people of West African ancestry",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard nephrology and clinical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Driven by two renal-risk variants (G1 and G2) in APOL1 that are common in people of West African ancestry",
+      "A high-risk genotype means two risk alleles (any combination of G1 and G2); it substantially raises the risk of several kidney diseases",
+      "Associated phenotypes include focal segmental glomerulosclerosis, HIV-associated nephropathy, hypertension-attributed CKD, and more rapid CKD progression",
+      "Inheritance behaves recessively for kidney risk, but most people with two risk alleles never develop kidney disease, indicating that a 'second hit' is usually required",
+      "The variants persist at high frequency because a single copy confers protection against African trypanosomiasis (sleeping sickness)",
+      "Recognising APOL1 risk has implications for living kidney donation and for donor-derived graft outcomes",
+      "Genotyping identifies risk but does not by itself diagnose active kidney disease, which still needs clinical and, where appropriate, histological assessment"
     ],
-    [
-     "Key Investigations",
-     "Urinalysis and urine protein-to-creatinine or albumin-to-creatinine ratio to quantify proteinuria, Serum creatinine with eGFR",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "APOL1 encodes apolipoprotein L1, a circulating and intracellular protein that also confers innate immunity against certain trypanosomes. The G1 and G2 coding variants alter the protein so that, in the presence of a second environmental or genetic stressor (such as interferon-driven inflammation from viral infection), APOL1 becomes toxic to kidney cells, particularly podocytes. This injury drives podocyte dysfunction and loss, producing focal segmental glomerulosclerosis, collapsing glomerulopathy and progressive glomerular and interstitial scarring. Because injury generally requires a two-hit process, the high-risk genotype increases susceptibility and accelerates progression rather than being sufficient alone to cause disease.",
+    "additionalDifferentials": [
+      "Primary (idiopathic) focal segmental glomerulosclerosis",
+      "Hypertensive nephrosclerosis of other cause",
+      "HIV-associated nephropathy without APOL1 risk genotype",
+      "Diabetic kidney disease",
+      "Other genetic podocytopathies (for example NPHS1/NPHS2)",
+      "Membranous nephropathy and other glomerular diseases"
     ],
-    [
-     "Primary Differentials",
-     "Primary (idiopathic) focal segmental glomerulosclerosis, Hypertensive nephrosclerosis of other cause, HIV-associated nephropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis and urine protein-to-creatinine or albumin-to-creatinine ratio to quantify proteinuria",
+      "Serum creatinine with eGFR trajectory over time",
+      "Blood pressure assessment given the hypertension-linked phenotype",
+      "Kidney biopsy where the pattern of glomerular disease needs clarification",
+      "APOL1 genotyping (G1 and G2) in appropriate clinical and donor-evaluation contexts",
+      "Screening for secondary triggers such as HIV and other relevant viral infections"
     ],
-    [
-     "Management Strategy",
-     "Control blood pressure and proteinuria with renin-angiotensin system blockade using an ACE inhibitor or angiotensin-receptor",
-     "Core treatment modality"
+    "redFlags": [
+      "Nephrotic-range proteinuria with rapidly declining renal function",
+      "Collapsing glomerulopathy on biopsy, often with an interferon-associated trigger",
+      "Accelerated CKD progression despite blood pressure control",
+      "Deteriorating graft function in a kidney from a high-risk-genotype donor"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating APOL1 genotype as diagnostic of disease rather than a susceptibility factor",
-     "Prevent diagnostic or management error"
+    "prognosis": "The high-risk genotype is linked to earlier onset and faster progression of kidney disease, but penetrance is incomplete and many carriers retain normal kidney function; outcome depends heavily on the presence of a second injurious trigger and on control of blood pressure and proteinuria.",
+    "pitfalls": [
+      "Treating APOL1 genotype as diagnostic of disease rather than a susceptibility factor",
+      "Neglecting the impact of the genotype on living-donor evaluation and counselling",
+      "Assuming a Mendelian dominant pattern rather than the recessive-acting two-hit model",
+      "Overlooking a treatable second hit such as viral infection driving collapsing disease"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "KDIGO / peer-reviewed reviews on APOL1 kidney disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control blood pressure and proteinuria with renin-angiotensin system blockade using an ACE inhibitor or angiotensin-receptor blocker",
+      "Add an SGLT2 inhibitor for additional renoprotection in proteinuric chronic kidney disease",
+      "Identify and treat the second hit, including antiretroviral therapy for HIV-associated nephropathy and control of interferon-driven viral triggers",
+      "Use biopsy-guided corticosteroid immunosuppression where a treatable focal segmental or collapsing glomerulosclerosis lesion is demonstrated",
+      "Monitor eGFR trajectory and urine protein-to-creatinine ratio with regular blood-pressure surveillance for progression",
+      "Refer to nephrology and consider enrolment in trials of APOL1-targeted inhibitor therapy",
+      "Plan renal replacement therapy and transplant assessment as chronic kidney disease advances",
+      "Provide genetic counselling and APOL1 genotyping in living-donor evaluation and family assessment given West African ancestry and recessive kidney-risk inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for apol1-associated nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "apol1-nephropathy-real-image",
-   "title": "APOL1-associated nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "apol1_nephropathy-pathway",
+      "title": "APOL1-associated nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Driven by two renal-risk variants (G1 and G2) in APOL1 that are common in people of West African ancestry",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Nephrotic-range proteinuria with rapidly declining renal function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis and urine protein-to-creatinine or albumin-to-creatinine ratio to quantify proteinuria, Serum creatinine with eGFR trajectory over time, Blood pressure assessment given the hypertension-linked phenotype"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control blood pressure and proteinuria with renin-angiotensin system blockade using an ACE inhibitor or angiotensin-receptor blocker"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating APOL1 genotype as diagnostic of disease rather than a susceptibility factor"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of apol1-associated nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "apol1_nephropathy-matrix",
+      "title": "APOL1-associated nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Driven by two renal-risk variants (G1 and G2) in APOL1 that are common in people of West African ancestry",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis and urine protein-to-creatinine or albumin-to-creatinine ratio to quantify proteinuria, Serum creatinine with eGFR",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary (idiopathic) focal segmental glomerulosclerosis, Hypertensive nephrosclerosis of other cause, HIV-associated nephropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control blood pressure and proteinuria with renin-angiotensin system blockade using an ACE inhibitor or angiotensin-receptor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating APOL1 genotype as diagnostic of disease rather than a susceptibility factor",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for apol1-associated nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard nephrology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "apol1_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and urine protein-to-creatinine or albumin-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Quantifies proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine with eGFR trajectory",
+          "cells": [
+            {
+              "text": "Trajectory over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney biopsy",
+          "cells": [
+            {
+              "text": "Clarifies the pattern of glomerular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "APOL1 genotyping (G1 and G2)",
+          "cells": [
+            {
+              "text": "In appropriate clinical and donor-evaluation contexts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for HIV and other viral triggers",
+          "cells": [
+            {
+              "text": "Secondary triggers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apol1_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary (idiopathic) focal segmental glomerulosclerosis",
+          "cells": [
+            {
+              "text": "APOL1 genotype is a susceptibility factor, not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertensive nephrosclerosis of other cause",
+          "cells": [
+            {
+              "text": "Blood pressure assessed given the hypertension-linked phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apol1_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Renin-angiotensin system blockade",
+          "cells": [
+            {
+              "text": "ACE inhibitor or angiotensin-receptor blocker"
+            },
+            {
+              "text": "Controls blood pressure and proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "Added for renoprotection"
+            },
+            {
+              "text": "Proteinuric chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the second hit",
+          "cells": [
+            {
+              "text": "Antiretroviral therapy for HIV-associated nephropathy; control interferon-driven viral triggers"
+            },
+            {
+              "text": "Identify and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid immunosuppression",
+          "cells": [
+            {
+              "text": "Biopsy-guided, for treatable focal segmental or collapsing lesion"
+            },
+            {
+              "text": "Only where demonstrated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "eGFR trajectory, urine protein-to-creatinine ratio, blood pressure"
+            },
+            {
+              "text": "Regular surveillance for progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement and transplant planning",
+          "cells": [
+            {
+              "text": "As chronic kidney disease advances"
+            },
+            {
+              "text": "Transplant assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "APOL1 genotyping in living-donor evaluation and family assessment"
+            },
+            {
+              "text": "West African ancestry; recessive kidney disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "apol1_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of APOL1-associated nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proteinuric kidney disease in a person of West African ancestry",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Nephrotic-range proteinuria with falling renal function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review for rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine protein ratio, creatinine trend, kidney biopsy, APOL1 genotype, HIV screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biopsy shows FSGS or collapsing glomerulopathy with APOL1 risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Biopsy-guided corticosteroid immunosuppression for a treatable lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy or genotyping",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ACE inhibitor or ARB for blood pressure and proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add SGLT2 inhibitor; treat HIV or viral second hit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor eGFR and proteinuria; plan transplant assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progression to renal replacement therapy as CKD advances",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

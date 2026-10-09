@@ -1,175 +1,473 @@
 {
- "id": "dyskeratosis_congenita",
- "name": "Dyskeratosis congenita",
- "aliases": [
-  "DKC1",
-  "TERT",
-  "TERC",
-  "telomere biology disorder",
-  "Zinsser-Cole-Engman syndrome"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A telomere biology disorder caused by variants in telomere maintenance genes (e.g. DKC1, TERT, TERC, TINF2), with X-linked, autosomal dominant, and recessive forms",
-   "Classic mucocutaneous triad: reticulate skin hyperpigmentation, nail dystrophy, and oral leukoplakia",
-   "Bone marrow failure is the leading cause of early mortality and may present as cytopenias or aplastic anaemia",
-   "Markedly increased risk of myelodysplasia, leukaemia, and mucosal squamous cell carcinomas",
-   "Pulmonary fibrosis and hepatic disease are important non-haematological complications",
-   "The severe infantile variant Hoyeraal-Hreidarsson syndrome adds cerebellar hypoplasia and immunodeficiency",
-   "Very short telomeres for age (measured by flow-FISH) strongly support the diagnosis alongside gene testing"
+  "id": "dyskeratosis_congenita",
+  "name": "Dyskeratosis congenita",
+  "aliases": [
+    "DKC1",
+    "TERT",
+    "TERC",
+    "telomere biology disorder",
+    "Zinsser-Cole-Engman syndrome"
   ],
-  "pathophysiology": "Dyskeratosis congenita is caused by defects in the telomere maintenance machinery, including the telomerase enzyme complex and shelterin proteins that protect chromosome ends. Inadequate telomere maintenance leads to accelerated telomere shortening, so highly proliferative tissues such as bone marrow, skin, mucosa, and lung exhaust their replicative capacity prematurely. Cells undergo senescence or apoptosis, producing the progressive stem-cell failure that underlies bone marrow failure, mucocutaneous changes, and organ fibrosis. Genomic instability from dysfunctional telomeres also explains the heightened predisposition to haematological and epithelial malignancies.",
-  "additionalDifferentials": [
-   "Fanconi anaemia and other inherited bone marrow failure syndromes",
-   "Acquired aplastic anaemia",
-   "Idiopathic pulmonary fibrosis of other cause",
-   "Poikiloderma syndromes (e.g. Rothmund-Thomson)",
-   "Graft-versus-host disease (mucocutaneous mimicry)",
-   "Pachyonychia congenita (nail and oral involvement)"
-  ],
-  "additionalInvestigations": [
-   "Telomere length measurement by flow-FISH in leucocyte subsets",
-   "Molecular genetic testing of telomere biology disorder genes",
-   "Full blood count and bone marrow examination for cytopenias and marrow failure",
-   "Pulmonary function tests and imaging for interstitial lung disease",
-   "Liver function and imaging for hepatic involvement",
-   "Surveillance examination of oral and mucosal surfaces for premalignant change"
-  ],
-  "redFlags": [
-   "Progressive pancytopenia or evolving bone marrow failure",
-   "Features of myelodysplasia or acute leukaemia",
-   "Non-healing or indurated oral leukoplakia suggesting squamous carcinoma",
-   "Progressive dyspnoea from pulmonary fibrosis"
-  ],
-  "prognosis": "Prognosis is guarded and shortened, dominated by bone marrow failure, malignancy, and pulmonary or hepatic fibrosis; haematopoietic stem cell transplantation can address marrow failure but does not remove the ongoing cancer and organ-fibrosis risks, so lifelong surveillance is essential.",
-  "pitfalls": [
-   "Treating apparent acquired aplastic anaemia without recognising an underlying telomere disorder, which alters transplant conditioning",
-   "Using standard-intensity chemotherapy or radiotherapy that is poorly tolerated in these patients",
-   "Overlooking pulmonary and hepatic complications by focusing only on skin and marrow",
-   "Failing to screen at-risk relatives given variable inheritance and anticipation"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer haematopoietic stem cell transplantation for bone marrow failure, using reduced-intensity conditioning to limit toxicity in telomere-defective tissues",
-   "Consider androgen therapy such as danazol or oxymetholone to stimulate haematopoiesis and delay transfusion dependence where transplant is not immediate",
-   "Provide supportive haematological care with judicious transfusion and infection prophylaxis, minimising transfusion exposure before transplant",
-   "Undertake regular malignancy surveillance, including examination of oral and mucosal surfaces for squamous cell carcinoma and monitoring for myelodysplasia and leukaemia",
-   "Monitor and manage pulmonary fibrosis and hepatic disease, and avoid marrow-, lung- and DNA-damaging exposures given genomic instability",
-   "Offer genetic counselling and telomere-length and molecular testing to relatives, screening potential family donors before transplant",
-   "Coordinate multidisciplinary care across haematology, dermatology, dentistry, respiratory and hepatology with specialist telomere-disorder input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dyskeratosis_congenita-pathway",
-   "title": "Dyskeratosis congenita: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A telomere biology disorder caused by variants in telomere maintenance genes (e.g. DKC1, TERT, TERC, TINF2), with X-linked, autosomal dominant, and recessive forms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive pancytopenia or evolving bone marrow failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Telomere length measurement by flow-FISH in leucocyte subsets, Molecular genetic testing of telomere biology disorder genes, Full blood count and bone marrow examination for cytopenias and marrow failure"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer haematopoietic stem cell transplantation for bone marrow failure, using reduced-intensity conditioning to limit toxicity in telomere-defective tissues"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating apparent acquired aplastic anaemia without recognising an underlying telomere disorder, which alters transplant conditioning"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dyskeratosis congenita."
-  }
- ],
- "tables": [
-  {
-   "id": "dyskeratosis_congenita-matrix",
-   "title": "Dyskeratosis congenita: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A telomere biology disorder caused by variants in telomere maintenance genes (e.g. DKC1, TERT, TERC, TINF2), with X-linked,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A telomere biology disorder caused by variants in telomere maintenance genes (e.g. DKC1, TERT, TERC, TINF2), with X-linked, autosomal dominant, and recessive forms",
+      "Classic mucocutaneous triad: reticulate skin hyperpigmentation, nail dystrophy, and oral leukoplakia",
+      "Bone marrow failure is the leading cause of early mortality and may present as cytopenias or aplastic anaemia",
+      "Markedly increased risk of myelodysplasia, leukaemia, and mucosal squamous cell carcinomas",
+      "Pulmonary fibrosis and hepatic disease are important non-haematological complications",
+      "The severe infantile variant Hoyeraal-Hreidarsson syndrome adds cerebellar hypoplasia and immunodeficiency",
+      "Very short telomeres for age (measured by flow-FISH) strongly support the diagnosis alongside gene testing"
     ],
-    [
-     "Key Investigations",
-     "Telomere length measurement by flow-FISH in leucocyte subsets, Molecular genetic testing of telomere biology disorder genes, Full",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dyskeratosis congenita is caused by defects in the telomere maintenance machinery, including the telomerase enzyme complex and shelterin proteins that protect chromosome ends. Inadequate telomere maintenance leads to accelerated telomere shortening, so highly proliferative tissues such as bone marrow, skin, mucosa, and lung exhaust their replicative capacity prematurely. Cells undergo senescence or apoptosis, producing the progressive stem-cell failure that underlies bone marrow failure, mucocutaneous changes, and organ fibrosis. Genomic instability from dysfunctional telomeres also explains the heightened predisposition to haematological and epithelial malignancies.",
+    "additionalDifferentials": [
+      "Fanconi anaemia and other inherited bone marrow failure syndromes",
+      "Acquired aplastic anaemia",
+      "Idiopathic pulmonary fibrosis of other cause",
+      "Poikiloderma syndromes (e.g. Rothmund-Thomson)",
+      "Graft-versus-host disease (mucocutaneous mimicry)",
+      "Pachyonychia congenita (nail and oral involvement)"
     ],
-    [
-     "Primary Differentials",
-     "Fanconi anaemia and other inherited bone marrow failure syndromes, Acquired aplastic anaemia, Idiopathic pulmonary fibrosis of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Telomere length measurement by flow-FISH in leucocyte subsets",
+      "Molecular genetic testing of telomere biology disorder genes",
+      "Full blood count and bone marrow examination for cytopenias and marrow failure",
+      "Pulmonary function tests and imaging for interstitial lung disease",
+      "Liver function and imaging for hepatic involvement",
+      "Surveillance examination of oral and mucosal surfaces for premalignant change"
     ],
-    [
-     "Management Strategy",
-     "Offer haematopoietic stem cell transplantation for bone marrow failure, using reduced-intensity conditioning to limit toxicity in",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive pancytopenia or evolving bone marrow failure",
+      "Features of myelodysplasia or acute leukaemia",
+      "Non-healing or indurated oral leukoplakia suggesting squamous carcinoma",
+      "Progressive dyspnoea from pulmonary fibrosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating apparent acquired aplastic anaemia without recognising an underlying telomere disorder, which alters transplant",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is guarded and shortened, dominated by bone marrow failure, malignancy, and pulmonary or hepatic fibrosis; haematopoietic stem cell transplantation can address marrow failure but does not remove the ongoing cancer and organ-fibrosis risks, so lifelong surveillance is essential.",
+    "pitfalls": [
+      "Treating apparent acquired aplastic anaemia without recognising an underlying telomere disorder, which alters transplant conditioning",
+      "Using standard-intensity chemotherapy or radiotherapy that is poorly tolerated in these patients",
+      "Overlooking pulmonary and hepatic complications by focusing only on skin and marrow",
+      "Failing to screen at-risk relatives given variable inheritance and anticipation"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer haematopoietic stem cell transplantation for bone marrow failure, using reduced-intensity conditioning to limit toxicity in telomere-defective tissues",
+      "Consider androgen therapy such as danazol or oxymetholone to stimulate haematopoiesis and delay transfusion dependence where transplant is not immediate",
+      "Provide supportive haematological care with judicious transfusion and infection prophylaxis, minimising transfusion exposure before transplant",
+      "Undertake regular malignancy surveillance, including examination of oral and mucosal surfaces for squamous cell carcinoma and monitoring for myelodysplasia and leukaemia",
+      "Monitor and manage pulmonary fibrosis and hepatic disease, and avoid marrow-, lung- and DNA-damaging exposures given genomic instability",
+      "Offer genetic counselling and telomere-length and molecular testing to relatives, screening potential family donors before transplant",
+      "Coordinate multidisciplinary care across haematology, dermatology, dentistry, respiratory and hepatology with specialist telomere-disorder input"
     ]
-   ],
-   "caption": "Overview comparison matrix for dyskeratosis congenita."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dyskeratosis-congenita-real-image",
-   "title": "Dyskeratosis congenita: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "dyskeratosis_congenita-pathway",
+      "title": "Dyskeratosis congenita: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A telomere biology disorder caused by variants in telomere maintenance genes (e.g. DKC1, TERT, TERC, TINF2), with X-linked, autosomal dominant, and recessive forms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive pancytopenia or evolving bone marrow failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Telomere length measurement by flow-FISH in leucocyte subsets, Molecular genetic testing of telomere biology disorder genes, Full blood count and bone marrow examination for cytopenias and marrow failure"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer haematopoietic stem cell transplantation for bone marrow failure, using reduced-intensity conditioning to limit toxicity in telomere-defective tissues"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating apparent acquired aplastic anaemia without recognising an underlying telomere disorder, which alters transplant conditioning"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dyskeratosis congenita."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dyskeratosis_congenita-matrix",
+      "title": "Dyskeratosis congenita: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A telomere biology disorder caused by variants in telomere maintenance genes (e.g. DKC1, TERT, TERC, TINF2), with X-linked,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Telomere length measurement by flow-FISH in leucocyte subsets, Molecular genetic testing of telomere biology disorder genes, Full",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fanconi anaemia and other inherited bone marrow failure syndromes, Acquired aplastic anaemia, Idiopathic pulmonary fibrosis of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer haematopoietic stem cell transplantation for bone marrow failure, using reduced-intensity conditioning to limit toxicity in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating apparent acquired aplastic anaemia without recognising an underlying telomere disorder, which alters transplant",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dyskeratosis congenita."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dyskeratosis_congenita-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Telomere length measurement by flow-FISH in leucocyte subsets",
+          "cells": [
+            {
+              "text": "Short telomeres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of telomere biology disorder genes",
+          "cells": [
+            {
+              "text": "Telomere biology gene variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and bone marrow examination",
+          "cells": [
+            {
+              "text": "Cytopenias and marrow failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests and imaging",
+          "cells": [
+            {
+              "text": "Interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance examination of oral and mucosal surfaces",
+          "cells": [
+            {
+              "text": "Premalignant oral change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyskeratosis_congenita-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fanconi anaemia and other inherited marrow failure",
+          "cells": [
+            {
+              "text": "Inherited marrow failure without telomere defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired aplastic anaemia",
+          "cells": [
+            {
+              "text": "Mistaken for acquired disease without telomere testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pachyonychia congenita",
+          "cells": [
+            {
+              "text": "Nail and oral involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dyskeratosis_congenita-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "For marrow failure, with reduced-intensity conditioning to limit toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen therapy",
+          "cells": [
+            {
+              "text": "Danazol or oxymetholone to stimulate haematopoiesis where transplant is not immediate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive haematological care",
+          "cells": [
+            {
+              "text": "Judicious transfusion and infection prophylaxis; minimise transfusion before transplant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Oral and mucosal examination; myelodysplasia and leukaemia monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung and liver monitoring",
+          "cells": [
+            {
+              "text": "Fibrosis and hepatic disease; avoid marrow, lung and DNA-damaging exposures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "Telomere length and molecular testing for relatives; donor screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Haematology, dermatology, dentistry, respiratory and hepatology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dyskeratosis_congenita-dx-mgmt",
+      "title": "Diagnosis and management of Dyskeratosis congenita",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dyskeratosis congenita: nail dystrophy, skin pigment change and marrow failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive pancytopenia, myelodysplasia, indurated oral leukoplakia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for evolving marrow failure or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Flow-FISH telomere length; telomere gene panel; FBC and marrow; lung and liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are short telomeres or a telomere gene variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fanconi anaemia, acquired aplastic anaemia or pachyonychia congenita",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Haematopoietic stem cell transplant with reduced-intensity conditioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Danazol or oxymetholone to delay transfusion dependence if transplant is not immediate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Judicious transfusion and infection prophylaxis before transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral and mucosal surveillance for squamous cell carcinoma and myelodysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and telomere testing for relatives and potential donors",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Guarded; marrow failure and malignancy dominate; transplant treats marrow failure only",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,461 @@
 {
- "id": "cervical_spondylosis",
- "name": "Cervical spondylosis",
- "aliases": [
-  "cervical degenerative disc disease",
-  "cervical osteoarthritis",
-  "cervical spondylotic myelopathy",
-  "cervical radiculopathy"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Age-related degeneration of the cervical discs and facet joints causing neck pain, stiffness, and sometimes referred occipital headache; it is extremely common and often asymptomatic on imaging",
-   "Nerve-root compression by osteophytes or disc material produces radiculopathy with dermatomal arm pain, sensory change, weakness, and reflex loss, most often at C5/6 and C6/7",
-   "Cord compression from a narrowed canal produces cervical spondylotic myelopathy, the most important complication, which can develop insidiously",
-   "Myelopathy is suggested by gait disturbance, clumsy hands, loss of dexterity, and upper motor neuron signs (hyperreflexia, Hoffmann's sign, extensor plantars, sometimes bladder involvement)",
-   "Most patients with axial neck pain or radiculopathy improve with conservative measures such as analgesia, activity modification, and physiotherapy",
-   "MRI is the investigation of choice to demonstrate cord and root compression when myelopathy or persistent radiculopathy is suspected",
-   "Progressive myelopathy is an indication for surgical decompression to halt deterioration, since established cord damage recovers poorly",
-   "Radiographic degenerative change correlates poorly with symptoms, so imaging findings must be interpreted alongside the clinical picture"
+  "id": "cervical_spondylosis",
+  "name": "Cervical spondylosis",
+  "aliases": [
+    "cervical degenerative disc disease",
+    "cervical osteoarthritis",
+    "cervical spondylotic myelopathy",
+    "cervical radiculopathy"
   ],
-  "pathophysiology": "With ageing the cervical intervertebral discs lose height and hydration, transferring load to the facet and uncovertebral joints, which develop osteophytes. These bony spurs, together with disc bulging, ligamentum flavum thickening, and reduced canal diameter, encroach on the neural foramina and spinal canal. Foraminal narrowing compresses nerve roots to cause radiculopathy, while central canal stenosis compresses the spinal cord, producing myelopathy through direct pressure and impaired vascular supply. Dynamic factors during neck movement can aggravate cord compression. The degenerative process is gradual, and neurological compromise may accumulate slowly before becoming clinically apparent.",
-  "additionalDifferentials": [
-   "Cervical disc prolapse",
-   "Peripheral nerve entrapment (e.g. carpal or cubital tunnel syndrome)",
-   "Brachial plexopathy or thoracic outlet syndrome",
-   "Motor neuron disease and other neurodegenerative conditions",
-   "Multiple sclerosis or intramedullary cord lesion",
-   "Shoulder pathology (rotator cuff disease) referring pain to the arm",
-   "Spinal tumour or infection"
-  ],
-  "additionalInvestigations": [
-   "MRI of the cervical spine to assess cord and root compression",
-   "Plain cervical radiographs (including flexion/extension views) for alignment and degenerative change",
-   "Nerve conduction studies and electromyography to distinguish radiculopathy from peripheral entrapment",
-   "CT for detailed bony anatomy when MRI is contraindicated or surgery is planned",
-   "Neurological examination for upper and lower limb signs of myelopathy"
-  ],
-  "redFlags": [
-   "Signs of cervical myelopathy (gait disturbance, hand clumsiness, hyperreflexia, sphincter dysfunction) requiring urgent specialist assessment",
-   "Rapidly progressive neurological deficit",
-   "Features suggesting infection or malignancy (fever, weight loss, night pain, cancer history)",
-   "Acute deterioration after neck trauma in a spondylotic, stenotic spine"
-  ],
-  "prognosis": "Axial neck pain and radiculopathy usually follow a fluctuating but generally benign course with conservative care; cervical spondylotic myelopathy tends to progress in a stepwise manner, and while surgery can arrest decline, neurological recovery of established deficits is often incomplete, making timely intervention important.",
-  "pitfalls": [
-   "Missing early myelopathy by attributing gait or hand-function changes to age or arthritis",
-   "Over-relying on degenerative radiographic findings that are common and often asymptomatic",
-   "Delaying decompression in progressive myelopathy until irreversible cord damage occurs",
-   "Aggressive manipulation of a stenotic, myelopathic cervical spine"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat axial neck pain with simple analgesia and non-steroidal anti-inflammatory drugs, reserving neuropathic agents for radicular symptoms",
-   "Promote activity modification, postural advice and a physiotherapy programme of neck mobilising, strengthening and range-of-motion exercises",
-   "Consider a fluoroscopically-guided nerve-root or facet-joint corticosteroid injection for persistent radicular pain",
-   "Screen at each review for cervical spondylotic myelopathy by examining for gait disturbance, hand clumsiness and upper motor neurone signs",
-   "Refer for spinal surgical assessment when radiculopathy is refractory or when myelopathy is suspected",
-   "Arrange decompressive surgery for progressive myelopathy or disabling radiculopathy that is unresponsive to conservative care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cervical_spondylosis-pathway",
-   "title": "Cervical spondylosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Age-related degeneration of the cervical discs and facet joints causing neck pain, stiffness, and sometimes referred occipital headache; it is extremely common and often asymptomatic on imaging",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of cervical myelopathy (gait disturbance, hand clumsiness, hyperreflexia, sphincter dysfunction) requiring urgent specialist assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the cervical spine to assess cord and root compression, Plain cervical radiographs (including flexion/extension views) for alignment and degenerative change, Nerve conduction studies and electromyography to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat axial neck pain with simple analgesia and non-steroidal anti-inflammatory drugs, reserving neuropathic agents for radicular symptoms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing early myelopathy by attributing gait or hand-function changes to age or arthritis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cervical spondylosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cervical_spondylosis-matrix",
-   "title": "Cervical spondylosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Age-related degeneration of the cervical discs and facet joints causing neck pain, stiffness, and sometimes referred occipital",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Age-related degeneration of the cervical discs and facet joints causing neck pain, stiffness, and sometimes referred occipital headache; it is extremely common and often asymptomatic on imaging",
+      "Nerve-root compression by osteophytes or disc material produces radiculopathy with dermatomal arm pain, sensory change, weakness, and reflex loss, most often at C5/6 and C6/7",
+      "Cord compression from a narrowed canal produces cervical spondylotic myelopathy, the most important complication, which can develop insidiously",
+      "Myelopathy is suggested by gait disturbance, clumsy hands, loss of dexterity, and upper motor neuron signs (hyperreflexia, Hoffmann's sign, extensor plantars, sometimes bladder involvement)",
+      "Most patients with axial neck pain or radiculopathy improve with conservative measures such as analgesia, activity modification, and physiotherapy",
+      "MRI is the investigation of choice to demonstrate cord and root compression when myelopathy or persistent radiculopathy is suspected",
+      "Progressive myelopathy is an indication for surgical decompression to halt deterioration, since established cord damage recovers poorly",
+      "Radiographic degenerative change correlates poorly with symptoms, so imaging findings must be interpreted alongside the clinical picture"
     ],
-    [
-     "Key Investigations",
-     "MRI of the cervical spine to assess cord and root compression, Plain cervical radiographs (including flexion/extension views) for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "With ageing the cervical intervertebral discs lose height and hydration, transferring load to the facet and uncovertebral joints, which develop osteophytes. These bony spurs, together with disc bulging, ligamentum flavum thickening, and reduced canal diameter, encroach on the neural foramina and spinal canal. Foraminal narrowing compresses nerve roots to cause radiculopathy, while central canal stenosis compresses the spinal cord, producing myelopathy through direct pressure and impaired vascular supply. Dynamic factors during neck movement can aggravate cord compression. The degenerative process is gradual, and neurological compromise may accumulate slowly before becoming clinically apparent.",
+    "additionalDifferentials": [
+      "Cervical disc prolapse",
+      "Peripheral nerve entrapment (e.g. carpal or cubital tunnel syndrome)",
+      "Brachial plexopathy or thoracic outlet syndrome",
+      "Motor neuron disease and other neurodegenerative conditions",
+      "Multiple sclerosis or intramedullary cord lesion",
+      "Shoulder pathology (rotator cuff disease) referring pain to the arm",
+      "Spinal tumour or infection"
     ],
-    [
-     "Primary Differentials",
-     "Cervical disc prolapse, Peripheral nerve entrapment (e.g. carpal or cubital tunnel syndrome), Brachial plexopathy or thoracic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the cervical spine to assess cord and root compression",
+      "Plain cervical radiographs (including flexion/extension views) for alignment and degenerative change",
+      "Nerve conduction studies and electromyography to distinguish radiculopathy from peripheral entrapment",
+      "CT for detailed bony anatomy when MRI is contraindicated or surgery is planned",
+      "Neurological examination for upper and lower limb signs of myelopathy"
     ],
-    [
-     "Management Strategy",
-     "Treat axial neck pain with simple analgesia and non-steroidal anti-inflammatory drugs, reserving neuropathic agents for radicular",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of cervical myelopathy (gait disturbance, hand clumsiness, hyperreflexia, sphincter dysfunction) requiring urgent specialist assessment",
+      "Rapidly progressive neurological deficit",
+      "Features suggesting infection or malignancy (fever, weight loss, night pain, cancer history)",
+      "Acute deterioration after neck trauma in a spondylotic, stenotic spine"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing early myelopathy by attributing gait or hand-function changes to age or arthritis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Axial neck pain and radiculopathy usually follow a fluctuating but generally benign course with conservative care; cervical spondylotic myelopathy tends to progress in a stepwise manner, and while surgery can arrest decline, neurological recovery of established deficits is often incomplete, making timely intervention important.",
+    "pitfalls": [
+      "Missing early myelopathy by attributing gait or hand-function changes to age or arthritis",
+      "Over-relying on degenerative radiographic findings that are common and often asymptomatic",
+      "Delaying decompression in progressive myelopathy until irreversible cord damage occurs",
+      "Aggressive manipulation of a stenotic, myelopathic cervical spine"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat axial neck pain with simple analgesia and non-steroidal anti-inflammatory drugs, reserving neuropathic agents for radicular symptoms",
+      "Promote activity modification, postural advice and a physiotherapy programme of neck mobilising, strengthening and range-of-motion exercises",
+      "Consider a fluoroscopically-guided nerve-root or facet-joint corticosteroid injection for persistent radicular pain",
+      "Screen at each review for cervical spondylotic myelopathy by examining for gait disturbance, hand clumsiness and upper motor neurone signs",
+      "Refer for spinal surgical assessment when radiculopathy is refractory or when myelopathy is suspected",
+      "Arrange decompressive surgery for progressive myelopathy or disabling radiculopathy that is unresponsive to conservative care"
     ]
-   ],
-   "caption": "Overview comparison matrix for cervical spondylosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cervical-spondylosis-real-image",
-   "title": "Cervical spondylosis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "cervical_spondylosis-pathway",
+      "title": "Cervical spondylosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Age-related degeneration of the cervical discs and facet joints causing neck pain, stiffness, and sometimes referred occipital headache; it is extremely common and often asymptomatic on imaging",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of cervical myelopathy (gait disturbance, hand clumsiness, hyperreflexia, sphincter dysfunction) requiring urgent specialist assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the cervical spine to assess cord and root compression, Plain cervical radiographs (including flexion/extension views) for alignment and degenerative change, Nerve conduction studies and electromyography to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat axial neck pain with simple analgesia and non-steroidal anti-inflammatory drugs, reserving neuropathic agents for radicular symptoms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing early myelopathy by attributing gait or hand-function changes to age or arthritis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cervical spondylosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cervical_spondylosis-matrix",
+      "title": "Cervical spondylosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Age-related degeneration of the cervical discs and facet joints causing neck pain, stiffness, and sometimes referred occipital",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the cervical spine to assess cord and root compression, Plain cervical radiographs (including flexion/extension views) for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cervical disc prolapse, Peripheral nerve entrapment (e.g. carpal or cubital tunnel syndrome), Brachial plexopathy or thoracic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat axial neck pain with simple analgesia and non-steroidal anti-inflammatory drugs, reserving neuropathic agents for radicular",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing early myelopathy by attributing gait or hand-function changes to age or arthritis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cervical spondylosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cervical_spondylosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the cervical spine",
+          "cells": [
+            {
+              "text": "Shows cord and root compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain cervical radiographs including flexion and extension views",
+          "cells": [
+            {
+              "text": "Alignment and degenerative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Distinguishes radiculopathy from peripheral entrapment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Detailed bony anatomy when MRI is contraindicated or surgery is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination of upper and lower limbs",
+          "cells": [
+            {
+              "text": "Signs of myelopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cervical_spondylosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Shoulder pathology such as rotator cuff disease",
+          "cells": [
+            {
+              "text": "Refers pain to the arm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal tumour or infection",
+          "cells": [
+            {
+              "text": "Fever, weight loss, night pain or cancer history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cervical_spondylosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia and NSAIDs",
+          "cells": [
+            {
+              "text": "Simple analgesia and NSAIDs for axial neck pain"
+            },
+            {
+              "text": "Neuropathic agents reserved for radicular symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity and physiotherapy",
+          "cells": [
+            {
+              "text": "Postural advice, activity modification, neck mobilising, strengthening and range-of-motion exercises"
+            },
+            {
+              "text": "Physiotherapy programme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "Fluoroscopically guided nerve-root or facet-joint injection"
+            },
+            {
+              "text": "Persistent radicular pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myelopathy screening",
+          "cells": [
+            {
+              "text": "Examine gait, hand clumsiness and upper motor neurone signs at each review"
+            },
+            {
+              "text": "Early detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal surgical referral",
+          "cells": [
+            {
+              "text": "Refer when radiculopathy is refractory or myelopathy is suspected"
+            },
+            {
+              "text": "Refractory or suspected myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompressive surgery",
+          "cells": [
+            {
+              "text": "For progressive myelopathy or disabling radiculopathy unresponsive to conservative care"
+            },
+            {
+              "text": "Progressive or disabling disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cervical_spondylosis-dx-mgmt",
+      "title": "Diagnosis and management of Cervical spondylosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cervical spondylosis: neck pain, stiffness or radicular arm symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (myelopathy, rapid deficit, fever or weight loss, neck trauma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist assessment for myelopathy, infection or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cervical MRI, flexion-extension radiographs, EMG and neurological examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cord or root compression on MRI matching the clinical level confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Simple analgesia and NSAIDs for axial neck pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check rotator cuff disease, spinal tumour and peripheral entrapment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, postural advice and neck strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nerve-root or facet-joint corticosteroid injection for persistent radicular pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen each review for myelopathy; refer to spinal surgery if suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Decompressive surgery for progressive myelopathy or disabling radiculopathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

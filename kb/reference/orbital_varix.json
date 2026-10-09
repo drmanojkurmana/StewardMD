@@ -1,167 +1,455 @@
 {
- "id": "orbital_varix",
- "name": "Orbital varix",
- "aliases": [
-  "orbital venous varix"
- ],
- "class": "non_infective",
- "system": "Eye / Orbit and adnexa",
- "specialty": "Ophthalmology / Oculoplastics",
- "referenceOnly": true,
- "reference": {
-  "source": "Orbital disease references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A distensible venous malformation of the orbit that enlarges with raised venous pressure",
-   "The hallmark is positional or Valsalva-induced proptosis, appearing or worsening on bending, straining or the Valsalva manoeuvre",
-   "It may be asymptomatic or cause intermittent proptosis, pain and, occasionally, acute thrombosis or haemorrhage",
-   "Imaging with the patient performing Valsalva, or in a dependent position, demonstrates the distending lesion",
-   "Enophthalmos can occur when the varix is decompressed and the orbit is at rest",
-   "Many are observed, with intervention reserved for significant symptoms, thrombosis or visual compromise"
+  "id": "orbital_varix",
+  "name": "Orbital varix",
+  "aliases": [
+    "orbital venous varix"
   ],
-  "pathophysiology": "An orbital varix is a low-flow venous malformation consisting of dilated, thin-walled venous channels that communicate with the orbital venous system. Because these channels distend under increased venous pressure, manoeuvres that raise it (bending forward, straining, Valsalva) cause the varix to fill and produce proptosis, which reverses at rest. Stagnation within the malformation predisposes to thrombosis, and thin vessel walls can bleed, causing acute pain and proptosis; chronic changes may leave enophthalmos from orbital fat atrophy.",
-  "additionalDifferentials": [
-   "Orbital lymphatic malformation (lymphangioma)",
-   "Arteriovenous or carotid-cavernous fistula",
-   "Other orbital vascular lesions",
-   "Orbital tumour causing proptosis",
-   "Thyroid eye disease"
-  ],
-  "additionalInvestigations": [
-   "CT or MRI with and without Valsalva or in a dependent position",
-   "Assessment of positional proptosis clinically",
-   "Imaging to detect phleboliths and to exclude a fistula",
-   "Evaluation of optic nerve function if compromise is suspected",
-   "Vascular imaging where a high-flow lesion must be excluded"
-  ],
-  "redFlags": [
-   "Acute painful proptosis suggesting thrombosis or haemorrhage",
-   "Optic nerve compromise with visual loss",
-   "Rapid enlargement",
-   "Features suggesting a high-flow vascular lesion"
-  ],
-  "prognosis": "Most orbital varices are benign and can be observed; complications such as thrombosis or haemorrhage are usually self-limiting, and intervention for symptomatic lesions carries a risk of significant bleeding.",
-  "pitfalls": [
-   "Missing the diagnosis by imaging only at rest without a distending manoeuvre",
-   "Confusing it with a lymphatic malformation or a fistula",
-   "Overlooking acute thrombosis or haemorrhage as a cause of sudden proptosis",
-   "Underestimating the bleeding risk of surgical intervention"
-  ],
-  "references": [
-   "Rootman Orbital Disease (standard reference)",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe asymptomatic or minimally symptomatic lesions, which is the mainstay of care",
-   "Reserve intervention for significant symptoms, recurrent thrombosis, disfiguring proptosis or visual compromise, using surgical excision or endovascular embolisation and sclerotherapy",
-   "Provide supportive management with analgesia for acute thrombosis or haemorrhage, which is usually self-limiting",
-   "Monitor optic nerve function and vision when compression is a concern",
-   "Characterise and follow the lesion with Valsalva or dependent-position imaging, excluding a high-flow vascular malformation",
-   "Refer to oculoplastic and interventional or vascular specialists for treatment planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "orbital_varix-pathway",
-   "title": "Orbital varix: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A distensible venous malformation of the orbit that enlarges with raised venous pressure",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute painful proptosis suggesting thrombosis or haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT or MRI with and without Valsalva or in a dependent position, Assessment of positional proptosis clinically, Imaging to detect phleboliths and to exclude a fistula"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe asymptomatic or minimally symptomatic lesions, which is the mainstay of care"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis by imaging only at rest without a distending manoeuvre"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of orbital varix."
-  }
- ],
- "tables": [
-  {
-   "id": "orbital_varix-matrix",
-   "title": "Orbital varix: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A distensible venous malformation of the orbit that enlarges with raised venous pressure",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Orbit and adnexa",
+  "specialty": "Ophthalmology / Oculoplastics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Orbital disease references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A distensible venous malformation of the orbit that enlarges with raised venous pressure",
+      "The hallmark is positional or Valsalva-induced proptosis, appearing or worsening on bending, straining or the Valsalva manoeuvre",
+      "It may be asymptomatic or cause intermittent proptosis, pain and, occasionally, acute thrombosis or haemorrhage",
+      "Imaging with the patient performing Valsalva, or in a dependent position, demonstrates the distending lesion",
+      "Enophthalmos can occur when the varix is decompressed and the orbit is at rest",
+      "Many are observed, with intervention reserved for significant symptoms, thrombosis or visual compromise"
     ],
-    [
-     "Key Investigations",
-     "CT or MRI with and without Valsalva or in a dependent position, Assessment of positional proptosis clinically, Imaging to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An orbital varix is a low-flow venous malformation consisting of dilated, thin-walled venous channels that communicate with the orbital venous system. Because these channels distend under increased venous pressure, manoeuvres that raise it (bending forward, straining, Valsalva) cause the varix to fill and produce proptosis, which reverses at rest. Stagnation within the malformation predisposes to thrombosis, and thin vessel walls can bleed, causing acute pain and proptosis; chronic changes may leave enophthalmos from orbital fat atrophy.",
+    "additionalDifferentials": [
+      "Orbital lymphatic malformation (lymphangioma)",
+      "Arteriovenous or carotid-cavernous fistula",
+      "Other orbital vascular lesions",
+      "Orbital tumour causing proptosis",
+      "Thyroid eye disease"
     ],
-    [
-     "Primary Differentials",
-     "Orbital lymphatic malformation (lymphangioma), Arteriovenous or carotid-cavernous fistula, Other orbital vascular lesions",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT or MRI with and without Valsalva or in a dependent position",
+      "Assessment of positional proptosis clinically",
+      "Imaging to detect phleboliths and to exclude a fistula",
+      "Evaluation of optic nerve function if compromise is suspected",
+      "Vascular imaging where a high-flow lesion must be excluded"
     ],
-    [
-     "Management Strategy",
-     "Observe asymptomatic or minimally symptomatic lesions, which is the mainstay of care",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute painful proptosis suggesting thrombosis or haemorrhage",
+      "Optic nerve compromise with visual loss",
+      "Rapid enlargement",
+      "Features suggesting a high-flow vascular lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis by imaging only at rest without a distending manoeuvre",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most orbital varices are benign and can be observed; complications such as thrombosis or haemorrhage are usually self-limiting, and intervention for symptomatic lesions carries a risk of significant bleeding.",
+    "pitfalls": [
+      "Missing the diagnosis by imaging only at rest without a distending manoeuvre",
+      "Confusing it with a lymphatic malformation or a fistula",
+      "Overlooking acute thrombosis or haemorrhage as a cause of sudden proptosis",
+      "Underestimating the bleeding risk of surgical intervention"
+    ],
+    "references": [
+      "Rootman Orbital Disease (standard reference)",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe asymptomatic or minimally symptomatic lesions, which is the mainstay of care",
+      "Reserve intervention for significant symptoms, recurrent thrombosis, disfiguring proptosis or visual compromise, using surgical excision or endovascular embolisation and sclerotherapy",
+      "Provide supportive management with analgesia for acute thrombosis or haemorrhage, which is usually self-limiting",
+      "Monitor optic nerve function and vision when compression is a concern",
+      "Characterise and follow the lesion with Valsalva or dependent-position imaging, excluding a high-flow vascular malformation",
+      "Refer to oculoplastic and interventional or vascular specialists for treatment planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for orbital varix."
-  }
- ],
- "diagrams": [
-  {
-   "id": "orbital-varix-real-image",
-   "title": "Orbital varix: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "orbital_varix-pathway",
+      "title": "Orbital varix: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A distensible venous malformation of the orbit that enlarges with raised venous pressure",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute painful proptosis suggesting thrombosis or haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT or MRI with and without Valsalva or in a dependent position, Assessment of positional proptosis clinically, Imaging to detect phleboliths and to exclude a fistula"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe asymptomatic or minimally symptomatic lesions, which is the mainstay of care"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis by imaging only at rest without a distending manoeuvre"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of orbital varix."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "orbital_varix-matrix",
+      "title": "Orbital varix: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A distensible venous malformation of the orbit that enlarges with raised venous pressure",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT or MRI with and without Valsalva or in a dependent position, Assessment of positional proptosis clinically, Imaging to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Orbital lymphatic malformation (lymphangioma), Arteriovenous or carotid-cavernous fistula, Other orbital vascular lesions",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe asymptomatic or minimally symptomatic lesions, which is the mainstay of care",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis by imaging only at rest without a distending manoeuvre",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for orbital varix."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Orbital disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "orbital_varix-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT or MRI with Valsalva or dependent position",
+          "cells": [
+            {
+              "text": "Distending lesion when venous pressure is raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment of positional proptosis",
+          "cells": [
+            {
+              "text": "Proptosis that changes with bending or straining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for phleboliths and fistula",
+          "cells": [
+            {
+              "text": "Phleboliths; a fistula is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic nerve function assessment",
+          "cells": [
+            {
+              "text": "Compression, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "A high-flow lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_varix-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orbital lymphatic malformation",
+          "cells": [
+            {
+              "text": "Positional or Valsalva-induced proptosis is typical of a varix"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arteriovenous or carotid-cavernous fistula",
+          "cells": [
+            {
+              "text": "A high-flow lesion, which must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "orbital_varix-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Mainstay for asymptomatic or minimally symptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intervention for significant disease",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Surgical excision or endovascular embolisation and sclerotherapy for significant symptoms, recurrent thrombosis, disfiguring proptosis or visual compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for acute events",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Analgesia for acute thrombosis or haemorrhage, which is usually self-limiting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic nerve monitoring",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Vision and optic nerve function where compression is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Characterise and follow",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Valsalva or dependent-position imaging; exclude a high-flow malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Oculoplastic and interventional or vascular specialists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "orbital_varix-dx-mgmt",
+      "title": "Diagnosis and management of Orbital varix",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Positional proptosis that worsens on bending, straining or Valsalva",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute painful proptosis, optic nerve compromise or rapid enlargement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for thrombosis, haemorrhage or optic nerve compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT or MRI with Valsalva or dependent position; check for phleboliths and fistula",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a distensible venous lesion, with high-flow malformation excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lymphatic malformation, fistula, orbital tumour or thyroid eye disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic or minimally symptomatic lesions, the mainstay of care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Excision or endovascular embolisation and sclerotherapy for significant symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia for acute thrombosis or haemorrhage, which is usually self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor optic nerve function and vision where compression is a concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mostly benign and observed; intervention carries a risk of significant bleeding",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

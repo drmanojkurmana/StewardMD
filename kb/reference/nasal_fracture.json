@@ -1,174 +1,461 @@
 {
- "id": "nasal_fracture",
- "name": "Nasal fracture",
- "aliases": [
-  "fractured nose",
-  "broken nose",
-  "nasal bone fracture"
- ],
- "class": "non_infective",
- "system": "Plastic / Reconstructive",
- "specialty": "Plastic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Grabb & Smith's Plastic Surgery / standard references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The nasal bones are the most commonly fractured facial bones, and the diagnosis is largely clinical, based on deformity, swelling, epistaxis, tenderness, and mobility or crepitus of the nasal bridge",
-   "Plain radiographs add little to management, so imaging is reserved for suspicion of associated injuries such as naso-orbito-ethmoid or midface fractures",
-   "The nose should be examined internally with a speculum to exclude a septal haematoma, which is the key finding not to miss",
-   "A septal haematoma requires prompt drainage because untreated it can cause septal cartilage necrosis, perforation, and a saddle-nose deformity",
-   "It is important to establish the pre-injury shape of the nose, often with a photograph, to judge post-traumatic deformity accurately",
-   "Reduction, when needed, is best performed either within the first few hours before swelling develops or after several days once swelling subsides but before the fracture sets, generally within about two weeks",
-   "Persistent deformity or nasal obstruction after healing may need later formal septorhinoplasty rather than early manipulation",
-   "Clear rhinorrhoea after nasal trauma should raise concern for a CSF leak from an associated skull base or cribriform injury"
+  "id": "nasal_fracture",
+  "name": "Nasal fracture",
+  "aliases": [
+    "fractured nose",
+    "broken nose",
+    "nasal bone fracture"
   ],
-  "pathophysiology": "The prominent, relatively thin nasal bones and the cartilaginous septum are readily displaced by frontal or lateral trauma. Lateral forces tend to displace the nasal bones to one side, while frontal impact can flatten and splay the bones and buckle the septum. Bleeding into the subperichondrial space of the septum forms a septal haematoma, which strips the perichondrium from the cartilage and deprives it of its blood supply; the resulting ischaemia and any superimposed infection can destroy the cartilage, leading to septal perforation and loss of dorsal support (saddle deformity). Higher-energy injuries may extend into the naso-orbito-ethmoid region or the skull base.",
-  "additionalDifferentials": [
-   "Naso-orbito-ethmoid fracture",
-   "Septal haematoma or septal fracture without nasal bone fracture",
-   "Nasal soft tissue contusion without fracture",
-   "Associated midface (Le Fort) or orbital fracture",
-   "Pre-existing nasal deformity mistaken for acute injury",
-   "Frontal sinus or skull base fracture with CSF leak"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination for external deformity, mobility, and airflow",
-   "Internal nasal examination with a speculum to exclude septal haematoma",
-   "Pre-injury photographs to assess the original nasal shape",
-   "CT when naso-orbito-ethmoid, midface, or skull base injury is suspected",
-   "Assessment for CSF rhinorrhoea if clear nasal discharge follows the injury"
-  ],
-  "redFlags": [
-   "Septal haematoma requiring urgent drainage to prevent cartilage necrosis",
-   "Clear rhinorrhoea suggesting a CSF leak from skull base or cribriform injury",
-   "Telecanthus, medial canthal disruption, or features of a naso-orbito-ethmoid fracture",
-   "Uncontrolled epistaxis or signs of a more extensive midface fracture"
-  ],
-  "prognosis": "Most isolated nasal fractures heal well, and timely closed reduction gives good cosmetic and functional results in many patients. A proportion are left with residual deformity or nasal obstruction that may require later septorhinoplasty. The main preventable adverse outcome is the saddle-nose deformity and septal perforation that follow an undrained septal haematoma.",
-  "pitfalls": [
-   "Failing to examine the septum and missing a septal haematoma",
-   "Relying on plain radiographs, which rarely change management",
-   "Attempting reduction during peak swelling, giving an inaccurate result",
-   "Delaying reduction beyond the window in which the fracture can be manipulated",
-   "Overlooking an associated naso-orbito-ethmoid or skull base injury",
-   "Not documenting the pre-injury appearance, leading to unrealistic expectations"
-  ],
-  "references": [
-   "Grabb & Smith's Plastic Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Exclude and urgently drain a septal haematoma, the key finding not to miss, to prevent cartilage necrosis and saddle-nose deformity",
-   "Provide initial care with control of epistaxis, analgesia and reduction of swelling, and establish the pre-injury nasal shape with a photograph",
-   "Perform closed reduction of displaced fractures within the appropriate window, either before swelling develops or after it subsides but before the fracture sets, reserving open reduction or septorhinoplasty for complex or late deformity",
-   "Reserve CT imaging for suspected associated naso-orbito-ethmoid, midface or skull-base injury, and assess for CSF rhinorrhoea if clear discharge follows",
-   "Manage isolated fractures without routine radiographs, since the diagnosis is clinical",
-   "Consider antibiotic cover after septal haematoma drainage or when there is an associated open injury",
-   "Arrange ENT or plastic surgery follow-up to assess residual deformity or nasal obstruction, with later septorhinoplasty if needed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nasal_fracture-pathway",
-   "title": "Nasal fracture: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The nasal bones are the most commonly fractured facial bones, and the diagnosis is largely clinical, based on deformity, swelling, epistaxis, tenderness, and mobility or crepitus of the nasal bridge",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Septal haematoma requiring urgent drainage to prevent cartilage necrosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination for external deformity, mobility, and airflow, Internal nasal examination with a speculum to exclude septal haematoma, Pre-injury photographs to assess the original nasal shape"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Exclude and urgently drain a septal haematoma, the key finding not to miss, to prevent cartilage necrosis and saddle-nose deformity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to examine the septum and missing a septal haematoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nasal fracture."
-  }
- ],
- "tables": [
-  {
-   "id": "nasal_fracture-matrix",
-   "title": "Nasal fracture: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The nasal bones are the most commonly fractured facial bones, and the diagnosis is largely clinical, based on deformity,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Plastic / Reconstructive",
+  "specialty": "Plastic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Grabb & Smith's Plastic Surgery / standard references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The nasal bones are the most commonly fractured facial bones, and the diagnosis is largely clinical, based on deformity, swelling, epistaxis, tenderness, and mobility or crepitus of the nasal bridge",
+      "Plain radiographs add little to management, so imaging is reserved for suspicion of associated injuries such as naso-orbito-ethmoid or midface fractures",
+      "The nose should be examined internally with a speculum to exclude a septal haematoma, which is the key finding not to miss",
+      "A septal haematoma requires prompt drainage because untreated it can cause septal cartilage necrosis, perforation, and a saddle-nose deformity",
+      "It is important to establish the pre-injury shape of the nose, often with a photograph, to judge post-traumatic deformity accurately",
+      "Reduction, when needed, is best performed either within the first few hours before swelling develops or after several days once swelling subsides but before the fracture sets, generally within about two weeks",
+      "Persistent deformity or nasal obstruction after healing may need later formal septorhinoplasty rather than early manipulation",
+      "Clear rhinorrhoea after nasal trauma should raise concern for a CSF leak from an associated skull base or cribriform injury"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination for external deformity, mobility, and airflow, Internal nasal examination with a speculum to exclude septal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The prominent, relatively thin nasal bones and the cartilaginous septum are readily displaced by frontal or lateral trauma. Lateral forces tend to displace the nasal bones to one side, while frontal impact can flatten and splay the bones and buckle the septum. Bleeding into the subperichondrial space of the septum forms a septal haematoma, which strips the perichondrium from the cartilage and deprives it of its blood supply; the resulting ischaemia and any superimposed infection can destroy the cartilage, leading to septal perforation and loss of dorsal support (saddle deformity). Higher-energy injuries may extend into the naso-orbito-ethmoid region or the skull base.",
+    "additionalDifferentials": [
+      "Naso-orbito-ethmoid fracture",
+      "Septal haematoma or septal fracture without nasal bone fracture",
+      "Nasal soft tissue contusion without fracture",
+      "Associated midface (Le Fort) or orbital fracture",
+      "Pre-existing nasal deformity mistaken for acute injury",
+      "Frontal sinus or skull base fracture with CSF leak"
     ],
-    [
-     "Primary Differentials",
-     "Naso-orbito-ethmoid fracture, Septal haematoma or septal fracture without nasal bone fracture, Nasal soft tissue contusion",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination for external deformity, mobility, and airflow",
+      "Internal nasal examination with a speculum to exclude septal haematoma",
+      "Pre-injury photographs to assess the original nasal shape",
+      "CT when naso-orbito-ethmoid, midface, or skull base injury is suspected",
+      "Assessment for CSF rhinorrhoea if clear nasal discharge follows the injury"
     ],
-    [
-     "Management Strategy",
-     "Exclude and urgently drain a septal haematoma, the key finding not to miss, to prevent cartilage necrosis and saddle-nose",
-     "Core treatment modality"
+    "redFlags": [
+      "Septal haematoma requiring urgent drainage to prevent cartilage necrosis",
+      "Clear rhinorrhoea suggesting a CSF leak from skull base or cribriform injury",
+      "Telecanthus, medial canthal disruption, or features of a naso-orbito-ethmoid fracture",
+      "Uncontrolled epistaxis or signs of a more extensive midface fracture"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to examine the septum and missing a septal haematoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most isolated nasal fractures heal well, and timely closed reduction gives good cosmetic and functional results in many patients. A proportion are left with residual deformity or nasal obstruction that may require later septorhinoplasty. The main preventable adverse outcome is the saddle-nose deformity and septal perforation that follow an undrained septal haematoma.",
+    "pitfalls": [
+      "Failing to examine the septum and missing a septal haematoma",
+      "Relying on plain radiographs, which rarely change management",
+      "Attempting reduction during peak swelling, giving an inaccurate result",
+      "Delaying reduction beyond the window in which the fracture can be manipulated",
+      "Overlooking an associated naso-orbito-ethmoid or skull base injury",
+      "Not documenting the pre-injury appearance, leading to unrealistic expectations"
+    ],
+    "references": [
+      "Grabb & Smith's Plastic Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Exclude and urgently drain a septal haematoma, the key finding not to miss, to prevent cartilage necrosis and saddle-nose deformity",
+      "Provide initial care with control of epistaxis, analgesia and reduction of swelling, and establish the pre-injury nasal shape with a photograph",
+      "Perform closed reduction of displaced fractures within the appropriate window, either before swelling develops or after it subsides but before the fracture sets, reserving open reduction or septorhinoplasty for complex or late deformity",
+      "Reserve CT imaging for suspected associated naso-orbito-ethmoid, midface or skull-base injury, and assess for CSF rhinorrhoea if clear discharge follows",
+      "Manage isolated fractures without routine radiographs, since the diagnosis is clinical",
+      "Consider antibiotic cover after septal haematoma drainage or when there is an associated open injury",
+      "Arrange ENT or plastic surgery follow-up to assess residual deformity or nasal obstruction, with later septorhinoplasty if needed"
     ]
-   ],
-   "caption": "Overview comparison matrix for nasal fracture."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nasal-fracture-real-image",
-   "title": "Nasal fracture: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "nasal_fracture-pathway",
+      "title": "Nasal fracture: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The nasal bones are the most commonly fractured facial bones, and the diagnosis is largely clinical, based on deformity, swelling, epistaxis, tenderness, and mobility or crepitus of the nasal bridge",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Septal haematoma requiring urgent drainage to prevent cartilage necrosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination for external deformity, mobility, and airflow, Internal nasal examination with a speculum to exclude septal haematoma, Pre-injury photographs to assess the original nasal shape"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Exclude and urgently drain a septal haematoma, the key finding not to miss, to prevent cartilage necrosis and saddle-nose deformity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to examine the septum and missing a septal haematoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nasal fracture."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nasal_fracture-matrix",
+      "title": "Nasal fracture: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The nasal bones are the most commonly fractured facial bones, and the diagnosis is largely clinical, based on deformity,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination for external deformity, mobility, and airflow, Internal nasal examination with a speculum to exclude septal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Naso-orbito-ethmoid fracture, Septal haematoma or septal fracture without nasal bone fracture, Nasal soft tissue contusion",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Exclude and urgently drain a septal haematoma, the key finding not to miss, to prevent cartilage necrosis and saddle-nose",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to examine the septum and missing a septal haematoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nasal fracture."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grabb & Smith's Plastic Surgery / standard references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nasal_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination for deformity, mobility and airflow",
+          "cells": [
+            {
+              "text": "Diagnosis is largely clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Internal speculum examination of the septum",
+          "cells": [
+            {
+              "text": "Septal haematoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-injury photographs",
+          "cells": [
+            {
+              "text": "Original nasal shape for judging deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Naso-orbito-ethmoid, midface or skull base injury when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for CSF rhinorrhoea",
+          "cells": [
+            {
+              "text": "Clear nasal discharge after injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nasal_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Naso-orbito-ethmoid fracture",
+          "cells": [
+            {
+              "text": "Telecanthus and medial canthal disruption point toward it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septal haematoma without nasal bone fracture",
+          "cells": [
+            {
+              "text": "Found only on internal speculum examination; needs urgent drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frontal sinus or skull base fracture with CSF leak",
+          "cells": [
+            {
+              "text": "Clear rhinorrhoea after nasal trauma raises concern for a CSF leak"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nasal_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Drain septal haematoma",
+          "cells": [
+            {
+              "text": "Urgent drainage to prevent cartilage necrosis and saddle-nose deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Initial care",
+          "cells": [
+            {
+              "text": "Epistaxis control, analgesia and reduction of swelling; photograph the pre-injury shape"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closed reduction",
+          "cells": [
+            {
+              "text": "Within the appropriate window, before swelling or after it subsides but before the fracture sets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted CT",
+          "cells": [
+            {
+              "text": "For suspected naso-orbito-ethmoid, midface or skull base injury; assess for CSF rhinorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No routine radiographs",
+          "cells": [
+            {
+              "text": "Isolated fractures are managed on clinical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic cover",
+          "cells": [
+            {
+              "text": "Considered after septal haematoma drainage or with an open injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT or plastic follow-up",
+          "cells": [
+            {
+              "text": "Residual deformity or obstruction; septorhinoplasty if needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nasal_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Nasal fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nasal trauma with bridge deformity, swelling, epistaxis and mobile or tender bones",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (septal haematoma, clear rhinorrhoea, telecanthus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage of septal haematoma; CT if naso-orbito-ethmoid or skull base injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Speculum examination of the septum, pre-injury photographs, CT if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Septal haematoma excluded on speculum examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Drain the septal haematoma urgently, then re-examine the fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Control epistaxis, analgesia and swelling; photograph the pre-injury shape",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Closed reduction within the window before the fracture sets",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CT only for suspected naso-orbito-ethmoid, midface or skull base injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "ENT or plastic follow-up; septorhinoplasty for residual deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most isolated fractures heal well; an undrained septal haematoma causes saddle nose",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,462 @@
 {
- "id": "malignant_acanthosis_nigricans",
- "name": "malignant acanthosis nigricans",
- "aliases": [
-  "paraneoplastic acanthosis nigricans",
-  "acanthosis nigricans maligna"
- ],
- "class": "non_infective",
- "system": "Integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Abrupt onset and rapid extension of symmetrical velvety, hyperpigmented plaques in flexures (neck, axillae, groin) in a non-obese, often older adult should prompt an urgent malignancy search.",
-   "Overwhelmingly associated with intra-abdominal adenocarcinoma; gastric carcinoma accounts for the majority, with pancreatic, colorectal, hepatobiliary and ovarian primaries also reported.",
-   "Mucosal and mucocutaneous involvement (oral cavity, lips, conjunctiva, anogenital) and periorbital or palmar disease are far more frequent than in the benign obesity-related form.",
-   "Commonly coexists with other paraneoplastic signs, notably tripe palms (palmar acanthosis) and the sign of Leser-Trelat, reflecting a shared growth-factor mechanism.",
-   "Pruritus is frequently marked, in contrast to the largely asymptomatic insulin-resistance-associated variant.",
-   "The eruption may precede, accompany or follow diagnosis of the tumour and characteristically parallels the malignancy, regressing with successful treatment and recurring with relapse.",
-   "Weight loss rather than obesity, together with rapid progression over weeks to months, helps distinguish it clinically from the common benign insulin-resistance type."
+  "id": "malignant_acanthosis_nigricans",
+  "name": "malignant acanthosis nigricans",
+  "aliases": [
+    "paraneoplastic acanthosis nigricans",
+    "acanthosis nigricans maligna"
   ],
-  "pathophysiology": "Malignant acanthosis nigricans is thought to arise from tumour-secreted growth factors that stimulate epidermal proliferation. Transforming growth factor alpha (TGF-alpha), which is structurally similar to epidermal growth factor and binds the epidermal growth factor receptor on keratinocytes, is considered central, with contributions from fibroblast growth factor and insulin-like growth factor 1. This drives keratinocyte and fibroblast hyperproliferation producing papillomatosis and hyperkeratosis, while relatively modest increases in melanin account for the hyperpigmented appearance. The parallel course with tumour burden supports a humoral, growth-factor-mediated aetiology rather than local insulin-receptor activation as seen in benign disease.",
-  "additionalDifferentials": [
-   "Benign obesity/insulin-resistance-related acanthosis nigricans",
-   "Drug-induced acanthosis nigricans (nicotinic acid, systemic corticosteroids, oestrogens, protease inhibitors)",
-   "Confluent and reticulated papillomatosis of Gougerot-Carteaud",
-   "Endocrinopathy-associated acanthosis nigricans (HAIR-AN syndrome, acromegaly, Cushing syndrome)",
-   "Dowling-Degos disease",
-   "Pellagra and other nutritional dermatoses affecting flexures",
-   "Terra firma-forme dermatosis / retention hyperkeratosis"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy with biopsy, given the leading association with gastric adenocarcinoma",
-   "CT of chest, abdomen and pelvis to identify an occult primary and to stage disease",
-   "Tumour markers as directed by suspected primary (CEA, CA 19-9, CA-125)",
-   "Skin biopsy demonstrating papillomatosis and hyperkeratosis with minimal hyperpigmentation",
-   "Fasting glucose, HbA1c and insulin to exclude insulin-resistance-related disease",
-   "Colonoscopy and faecal occult blood testing when a lower gastrointestinal primary is suspected",
-   "PET-CT when conventional imaging is unrevealing"
-  ],
-  "redFlags": [
-   "New extensive acanthosis nigricans in a non-obese adult over 40",
-   "Rapid progression with mucosal involvement and unexplained weight loss",
-   "Concurrent tripe palms or eruptive seborrhoeic keratoses",
-   "Marked pruritus with associated systemic symptoms"
-  ],
-  "prognosis": "The prognosis reflects the underlying malignancy, which is frequently an advanced, aggressive adenocarcinoma with short median survival. Cutaneous lesions may improve or regress following effective tumour treatment.",
-  "pitfalls": [
-   "Attributing new acanthosis nigricans to obesity and missing an underlying tumour",
-   "Failing to examine the mucosae and palms or to look for the sign of Leser-Trelat",
-   "Assuming a normal initial endoscopy excludes malignancy when clinical suspicion is high",
-   "Overlooking recurrence of the skin signs as a marker of tumour relapse"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Urgent identification and treatment of the underlying malignancy, most often an intra-abdominal adenocarcinoma, since the eruption characteristically regresses with successful tumour control",
-   "Symptomatic skin care with emollients and keratolytics such as topical retinoids, salicylic acid or vitamin D analogues to reduce the velvety hyperkeratotic plaques",
-   "Antipruritic measures for the often marked itch, which is more prominent than in the benign insulin-resistance-related form",
-   "Use the cutaneous course as a clinical marker, since recurrence of lesions may herald tumour relapse",
-   "Coordinate care between oncology and dermatology, with palliative and supportive input given the frequently advanced malignancy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "malignant_acanthosis_nigricans-pathway",
-   "title": "malignant acanthosis nigricans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Abrupt onset and rapid extension of symmetrical velvety, hyperpigmented plaques in flexures (neck, axillae, groin) in a non-obese, often older adult should prompt an urgent malignancy search.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New extensive acanthosis nigricans in a non-obese adult over 40",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy with biopsy, given the leading association with gastric adenocarcinoma, CT of chest, abdomen and pelvis to identify an occult primary and to stage disease, Tumour markers as directed by"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Urgent identification and treatment of the underlying malignancy, most often an intra-abdominal adenocarcinoma, since the eruption characteristically regresses with successful tumour control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing new acanthosis nigricans to obesity and missing an underlying tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of malignant acanthosis nigricans."
-  }
- ],
- "tables": [
-  {
-   "id": "malignant_acanthosis_nigricans-matrix",
-   "title": "malignant acanthosis nigricans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Abrupt onset and rapid extension of symmetrical velvety, hyperpigmented plaques in flexures (neck, axillae, groin) in a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Abrupt onset and rapid extension of symmetrical velvety, hyperpigmented plaques in flexures (neck, axillae, groin) in a non-obese, often older adult should prompt an urgent malignancy search.",
+      "Overwhelmingly associated with intra-abdominal adenocarcinoma; gastric carcinoma accounts for the majority, with pancreatic, colorectal, hepatobiliary and ovarian primaries also reported.",
+      "Mucosal and mucocutaneous involvement (oral cavity, lips, conjunctiva, anogenital) and periorbital or palmar disease are far more frequent than in the benign obesity-related form.",
+      "Commonly coexists with other paraneoplastic signs, notably tripe palms (palmar acanthosis) and the sign of Leser-Trelat, reflecting a shared growth-factor mechanism.",
+      "Pruritus is frequently marked, in contrast to the largely asymptomatic insulin-resistance-associated variant.",
+      "The eruption may precede, accompany or follow diagnosis of the tumour and characteristically parallels the malignancy, regressing with successful treatment and recurring with relapse.",
+      "Weight loss rather than obesity, together with rapid progression over weeks to months, helps distinguish it clinically from the common benign insulin-resistance type."
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy with biopsy, given the leading association with gastric adenocarcinoma, CT of chest, abdomen and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Malignant acanthosis nigricans is thought to arise from tumour-secreted growth factors that stimulate epidermal proliferation. Transforming growth factor alpha (TGF-alpha), which is structurally similar to epidermal growth factor and binds the epidermal growth factor receptor on keratinocytes, is considered central, with contributions from fibroblast growth factor and insulin-like growth factor 1. This drives keratinocyte and fibroblast hyperproliferation producing papillomatosis and hyperkeratosis, while relatively modest increases in melanin account for the hyperpigmented appearance. The parallel course with tumour burden supports a humoral, growth-factor-mediated aetiology rather than local insulin-receptor activation as seen in benign disease.",
+    "additionalDifferentials": [
+      "Benign obesity/insulin-resistance-related acanthosis nigricans",
+      "Drug-induced acanthosis nigricans (nicotinic acid, systemic corticosteroids, oestrogens, protease inhibitors)",
+      "Confluent and reticulated papillomatosis of Gougerot-Carteaud",
+      "Endocrinopathy-associated acanthosis nigricans (HAIR-AN syndrome, acromegaly, Cushing syndrome)",
+      "Dowling-Degos disease",
+      "Pellagra and other nutritional dermatoses affecting flexures",
+      "Terra firma-forme dermatosis / retention hyperkeratosis"
     ],
-    [
-     "Primary Differentials",
-     "Benign obesity/insulin-resistance-related acanthosis nigricans, Drug-induced acanthosis nigricans (nicotinic acid, systemic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy with biopsy, given the leading association with gastric adenocarcinoma",
+      "CT of chest, abdomen and pelvis to identify an occult primary and to stage disease",
+      "Tumour markers as directed by suspected primary (CEA, CA 19-9, CA-125)",
+      "Skin biopsy demonstrating papillomatosis and hyperkeratosis with minimal hyperpigmentation",
+      "Fasting glucose, HbA1c and insulin to exclude insulin-resistance-related disease",
+      "Colonoscopy and faecal occult blood testing when a lower gastrointestinal primary is suspected",
+      "PET-CT when conventional imaging is unrevealing"
     ],
-    [
-     "Management Strategy",
-     "Urgent identification and treatment of the underlying malignancy, most often an intra-abdominal adenocarcinoma, since the",
-     "Core treatment modality"
+    "redFlags": [
+      "New extensive acanthosis nigricans in a non-obese adult over 40",
+      "Rapid progression with mucosal involvement and unexplained weight loss",
+      "Concurrent tripe palms or eruptive seborrhoeic keratoses",
+      "Marked pruritus with associated systemic symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing new acanthosis nigricans to obesity and missing an underlying tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis reflects the underlying malignancy, which is frequently an advanced, aggressive adenocarcinoma with short median survival. Cutaneous lesions may improve or regress following effective tumour treatment.",
+    "pitfalls": [
+      "Attributing new acanthosis nigricans to obesity and missing an underlying tumour",
+      "Failing to examine the mucosae and palms or to look for the sign of Leser-Trelat",
+      "Assuming a normal initial endoscopy excludes malignancy when clinical suspicion is high",
+      "Overlooking recurrence of the skin signs as a marker of tumour relapse"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Urgent identification and treatment of the underlying malignancy, most often an intra-abdominal adenocarcinoma, since the eruption characteristically regresses with successful tumour control",
+      "Symptomatic skin care with emollients and keratolytics such as topical retinoids, salicylic acid or vitamin D analogues to reduce the velvety hyperkeratotic plaques",
+      "Antipruritic measures for the often marked itch, which is more prominent than in the benign insulin-resistance-related form",
+      "Use the cutaneous course as a clinical marker, since recurrence of lesions may herald tumour relapse",
+      "Coordinate care between oncology and dermatology, with palliative and supportive input given the frequently advanced malignancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for malignant acanthosis nigricans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "malignant-acanthosis-nigricans-real-image",
-   "title": "malignant acanthosis nigricans: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "malignant_acanthosis_nigricans-pathway",
+      "title": "malignant acanthosis nigricans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Abrupt onset and rapid extension of symmetrical velvety, hyperpigmented plaques in flexures (neck, axillae, groin) in a non-obese, often older adult should prompt an urgent malignancy search.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New extensive acanthosis nigricans in a non-obese adult over 40",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy with biopsy, given the leading association with gastric adenocarcinoma, CT of chest, abdomen and pelvis to identify an occult primary and to stage disease, Tumour markers as directed by"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Urgent identification and treatment of the underlying malignancy, most often an intra-abdominal adenocarcinoma, since the eruption characteristically regresses with successful tumour control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing new acanthosis nigricans to obesity and missing an underlying tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of malignant acanthosis nigricans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "malignant_acanthosis_nigricans-matrix",
+      "title": "malignant acanthosis nigricans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Abrupt onset and rapid extension of symmetrical velvety, hyperpigmented plaques in flexures (neck, axillae, groin) in a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy with biopsy, given the leading association with gastric adenocarcinoma, CT of chest, abdomen and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Benign obesity/insulin-resistance-related acanthosis nigricans, Drug-induced acanthosis nigricans (nicotinic acid, systemic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Urgent identification and treatment of the underlying malignancy, most often an intra-abdominal adenocarcinoma, since the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing new acanthosis nigricans to obesity and missing an underlying tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for malignant acanthosis nigricans."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "malignant_acanthosis_nigricans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Gastric adenocarcinoma, the leading association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Occult primary and staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers as directed",
+          "cells": [
+            {
+              "text": "CEA, CA 19-9 or CA-125 by suspected site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Papillomatosis and hyperkeratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose, HbA1c and insulin",
+          "cells": [
+            {
+              "text": "Insulin-resistance disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_acanthosis_nigricans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign insulin-resistance acanthosis nigricans",
+          "cells": [
+            {
+              "text": "Obesity and little pruritus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced acanthosis nigricans",
+          "cells": [
+            {
+              "text": "Nicotinic acid, corticosteroids, oestrogens or protease inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confluent and reticulated papillomatosis",
+          "cells": [
+            {
+              "text": "Different pattern and distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrinopathy-associated acanthosis",
+          "cells": [
+            {
+              "text": "Acromegaly, Cushing syndrome or HAIR-AN"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "malignant_acanthosis_nigricans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the malignancy",
+          "cells": [
+            {
+              "text": "Urgent identification and treatment; skin lesions often regress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care",
+          "cells": [
+            {
+              "text": "Emollients and keratolytics such as topical retinoids or salicylic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pruritus",
+          "cells": [
+            {
+              "text": "Antipruritic measures for marked itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marker of relapse",
+          "cells": [
+            {
+              "text": "Recurrence of skin signs may herald tumour relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Oncology and dermatology, with palliative support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "malignant_acanthosis_nigricans-dx-mgmt",
+      "title": "Diagnosis and management of malignant acanthosis nigricans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapid onset of velvety plaques in the flexures of a non-obese adult over 40",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (mucosal disease, weight loss or tripe palms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent gastroenterology and oncology review for occult malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper GI endoscopy with biopsy, CT chest abdomen pelvis, tumour markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an occult adenocarcinoma found on staging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider benign insulin-resistance acanthosis or drug-induced change",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent treatment of the underlying malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and keratolytics for the skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antipruritic measures for marked itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Use skin recurrence as a marker of tumour relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Oncology and dermatology co-management with palliative input",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often an advanced adenocarcinoma; skin may regress with tumour control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,465 @@
 {
- "id": "juvenile_pagets_disease",
- "name": "Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B)",
- "aliases": [
-  "idiopathic hyperphosphatasia",
-  "familial idiopathic hyperphosphatasia",
-  "hereditary hyperphosphatasia",
-  "osteoprotegerin deficiency",
-  "JPD"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal recessive disorder caused by loss-of-function mutations in TNFRSF11B, the gene encoding osteoprotegerin",
-   "Loss of osteoprotegerin removes inhibition of the RANK-RANKL pathway, driving grossly accelerated bone turnover throughout the skeleton",
-   "Presents in infancy or early childhood with bone pain, fractures, progressive long-bone bowing, and enlargement and deformity of the skull",
-   "Markedly elevated serum alkaline phosphatase and other bone turnover markers reflect the very high remodelling rate",
-   "Progressive deafness is common, and skull expansion can raise concern for cranial nerve compromise",
-   "Unlike classic adult Paget disease it is generalised rather than focal and manifests in childhood",
-   "Antiresorptive therapy with bisphosphonates can suppress the excessive turnover and improve symptoms and deformity"
+  "id": "juvenile_pagets_disease",
+  "name": "Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B)",
+  "aliases": [
+    "idiopathic hyperphosphatasia",
+    "familial idiopathic hyperphosphatasia",
+    "hereditary hyperphosphatasia",
+    "osteoprotegerin deficiency",
+    "JPD"
   ],
-  "pathophysiology": "Juvenile Paget disease is caused by biallelic inactivating mutations in TNFRSF11B, which encodes osteoprotegerin, a decoy receptor that normally binds RANKL and prevents it from activating RANK on osteoclast precursors. Without functional osteoprotegerin, RANKL signalling is unopposed, leading to greatly increased osteoclast formation and activity. Coupled to this is a compensatory surge in osteoblastic bone formation, so the skeleton undergoes extremely rapid but disorganised remodelling. The resulting woven, mechanically weak bone produces widespread deformity, bowing, fractures, and skull enlargement, and the very high turnover is mirrored by strikingly raised alkaline phosphatase.",
-  "additionalDifferentials": [
-   "Classic (adult) Paget disease of bone",
-   "Osteogenesis imperfecta",
-   "Fibrous dysplasia",
-   "Rickets and osteomalacia",
-   "Hyperphosphatasia with mental retardation syndrome",
-   "Other high-turnover metabolic bone disorders of childhood"
-  ],
-  "additionalInvestigations": [
-   "Serum alkaline phosphatase and additional bone turnover markers",
-   "Serum calcium, phosphate, and vitamin D to characterise mineral status",
-   "Plain radiographs showing generalised osteopenia or sclerosis, bowing, and skull thickening",
-   "Genetic testing for TNFRSF11B mutations",
-   "Audiological assessment for hearing loss",
-   "Cranial imaging when skull-base involvement or neurological features are present"
-  ],
-  "redFlags": [
-   "Progressive hearing loss or cranial neuropathy from skull involvement",
-   "Recurrent fractures and rapidly worsening bony deformity",
-   "Signs of raised intracranial pressure from skull expansion",
-   "Retinal or vascular calcification and cardiovascular complications reported in some forms"
-  ],
-  "prognosis": "Untreated disease causes progressive deforming bone disease, fractures, and deafness with substantial disability, but antiresorptive therapy can markedly reduce turnover and improve the clinical course, making early diagnosis important.",
-  "pitfalls": [
-   "Confusing the generalised childhood disease with focal adult Paget disease",
-   "Overlooking early hearing loss that warrants audiological follow-up",
-   "Attributing the very high alkaline phosphatase to liver disease rather than bone turnover",
-   "Delaying antiresorptive treatment that can alter the disease trajectory"
-  ],
-  "references": [
-   "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
-   "GeneReviews / peer-reviewed reviews of juvenile Paget disease (idiopathic hyperphosphatasia)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress the grossly accelerated bone turnover with antiresorptive bisphosphonate therapy as the mainstay of treatment",
-   "Ensure adequate calcium and vitamin D repletion to support mineralisation during antiresorptive therapy",
-   "Monitor treatment response with serial alkaline phosphatase and other bone turnover markers",
-   "Provide orthopaedic management of fractures, long-bone bowing and deformity",
-   "Undertake audiological assessment and provide hearing aids for progressive deafness",
-   "Perform cranial and skull-base surveillance for nerve compromise from skull expansion",
-   "Offer physiotherapy and mobility support to preserve function",
-   "Arrange autosomal recessive genetic counselling and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "juvenile_pagets_disease-pathway",
-   "title": "Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal recessive disorder caused by loss-of-function mutations in TNFRSF11B, the gene encoding osteoprotegerin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive hearing loss or cranial neuropathy from skull involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum alkaline phosphatase and additional bone turnover markers, Serum calcium, phosphate, and vitamin D to characterise mineral status, Plain radiographs showing generalised osteopenia or sclerosis, bowing, and skull"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress the grossly accelerated bone turnover with antiresorptive bisphosphonate therapy as the mainstay of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the generalised childhood disease with focal adult Paget disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of juvenile paget disease (idiopathic hyperphosphatasia, tnfrsf11b)."
-  }
- ],
- "tables": [
-  {
-   "id": "juvenile_pagets_disease-matrix",
-   "title": "Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal recessive disorder caused by loss-of-function mutations in TNFRSF11B, the gene encoding osteoprotegerin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal recessive disorder caused by loss-of-function mutations in TNFRSF11B, the gene encoding osteoprotegerin",
+      "Loss of osteoprotegerin removes inhibition of the RANK-RANKL pathway, driving grossly accelerated bone turnover throughout the skeleton",
+      "Presents in infancy or early childhood with bone pain, fractures, progressive long-bone bowing, and enlargement and deformity of the skull",
+      "Markedly elevated serum alkaline phosphatase and other bone turnover markers reflect the very high remodelling rate",
+      "Progressive deafness is common, and skull expansion can raise concern for cranial nerve compromise",
+      "Unlike classic adult Paget disease it is generalised rather than focal and manifests in childhood",
+      "Antiresorptive therapy with bisphosphonates can suppress the excessive turnover and improve symptoms and deformity"
     ],
-    [
-     "Key Investigations",
-     "Serum alkaline phosphatase and additional bone turnover markers, Serum calcium, phosphate, and vitamin D to characterise mineral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Juvenile Paget disease is caused by biallelic inactivating mutations in TNFRSF11B, which encodes osteoprotegerin, a decoy receptor that normally binds RANKL and prevents it from activating RANK on osteoclast precursors. Without functional osteoprotegerin, RANKL signalling is unopposed, leading to greatly increased osteoclast formation and activity. Coupled to this is a compensatory surge in osteoblastic bone formation, so the skeleton undergoes extremely rapid but disorganised remodelling. The resulting woven, mechanically weak bone produces widespread deformity, bowing, fractures, and skull enlargement, and the very high turnover is mirrored by strikingly raised alkaline phosphatase.",
+    "additionalDifferentials": [
+      "Classic (adult) Paget disease of bone",
+      "Osteogenesis imperfecta",
+      "Fibrous dysplasia",
+      "Rickets and osteomalacia",
+      "Hyperphosphatasia with mental retardation syndrome",
+      "Other high-turnover metabolic bone disorders of childhood"
     ],
-    [
-     "Primary Differentials",
-     "Classic (adult) Paget disease of bone, Osteogenesis imperfecta, Fibrous dysplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum alkaline phosphatase and additional bone turnover markers",
+      "Serum calcium, phosphate, and vitamin D to characterise mineral status",
+      "Plain radiographs showing generalised osteopenia or sclerosis, bowing, and skull thickening",
+      "Genetic testing for TNFRSF11B mutations",
+      "Audiological assessment for hearing loss",
+      "Cranial imaging when skull-base involvement or neurological features are present"
     ],
-    [
-     "Management Strategy",
-     "Suppress the grossly accelerated bone turnover with antiresorptive bisphosphonate therapy as the mainstay of treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive hearing loss or cranial neuropathy from skull involvement",
+      "Recurrent fractures and rapidly worsening bony deformity",
+      "Signs of raised intracranial pressure from skull expansion",
+      "Retinal or vascular calcification and cardiovascular complications reported in some forms"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the generalised childhood disease with focal adult Paget disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disease causes progressive deforming bone disease, fractures, and deafness with substantial disability, but antiresorptive therapy can markedly reduce turnover and improve the clinical course, making early diagnosis important.",
+    "pitfalls": [
+      "Confusing the generalised childhood disease with focal adult Paget disease",
+      "Overlooking early hearing loss that warrants audiological follow-up",
+      "Attributing the very high alkaline phosphatase to liver disease rather than bone turnover",
+      "Delaying antiresorptive treatment that can alter the disease trajectory"
+    ],
+    "references": [
+      "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+      "GeneReviews / peer-reviewed reviews of juvenile Paget disease (idiopathic hyperphosphatasia)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress the grossly accelerated bone turnover with antiresorptive bisphosphonate therapy as the mainstay of treatment",
+      "Ensure adequate calcium and vitamin D repletion to support mineralisation during antiresorptive therapy",
+      "Monitor treatment response with serial alkaline phosphatase and other bone turnover markers",
+      "Provide orthopaedic management of fractures, long-bone bowing and deformity",
+      "Undertake audiological assessment and provide hearing aids for progressive deafness",
+      "Perform cranial and skull-base surveillance for nerve compromise from skull expansion",
+      "Offer physiotherapy and mobility support to preserve function",
+      "Arrange autosomal recessive genetic counselling and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for juvenile paget disease (idiopathic hyperphosphatasia, tnfrsf11b)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "juvenile-pagets-disease-real-image",
-   "title": "Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "juvenile_pagets_disease-pathway",
+      "title": "Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal recessive disorder caused by loss-of-function mutations in TNFRSF11B, the gene encoding osteoprotegerin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive hearing loss or cranial neuropathy from skull involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum alkaline phosphatase and additional bone turnover markers, Serum calcium, phosphate, and vitamin D to characterise mineral status, Plain radiographs showing generalised osteopenia or sclerosis, bowing, and skull"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress the grossly accelerated bone turnover with antiresorptive bisphosphonate therapy as the mainstay of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the generalised childhood disease with focal adult Paget disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of juvenile paget disease (idiopathic hyperphosphatasia, tnfrsf11b)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "juvenile_pagets_disease-matrix",
+      "title": "Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal recessive disorder caused by loss-of-function mutations in TNFRSF11B, the gene encoding osteoprotegerin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum alkaline phosphatase and additional bone turnover markers, Serum calcium, phosphate, and vitamin D to characterise mineral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic (adult) Paget disease of bone, Osteogenesis imperfecta, Fibrous dysplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress the grossly accelerated bone turnover with antiresorptive bisphosphonate therapy as the mainstay of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the generalised childhood disease with focal adult Paget disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for juvenile paget disease (idiopathic hyperphosphatasia, tnfrsf11b)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "juvenile_pagets_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum alkaline phosphatase and bone turnover markers",
+          "cells": [
+            {
+              "text": "Grossly raised bone turnover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate and vitamin D",
+          "cells": [
+            {
+              "text": "Mineral status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Generalised osteopenia or sclerosis, bowing and skull thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNFRSF11B genetic testing",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial imaging",
+          "cells": [
+            {
+              "text": "Skull-base involvement when present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_pagets_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic adult Paget disease of bone",
+          "cells": [
+            {
+              "text": "Focal, adult-onset disease rather than generalised childhood disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperphosphatasia with intellectual disability",
+          "cells": [
+            {
+              "text": "Persistently raised alkaline phosphatase with intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_pagets_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiresorptive therapy",
+          "cells": [
+            {
+              "text": "Bisphosphonate as mainstay to suppress accelerated bone turnover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mineralisation",
+          "cells": [
+            {
+              "text": "Calcium and vitamin D repletion during antiresorptive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response",
+          "cells": [
+            {
+              "text": "Serial alkaline phosphatase and bone turnover markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeleton",
+          "cells": [
+            {
+              "text": "Orthopaedic care for fractures, long-bone bowing and deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and skull",
+          "cells": [
+            {
+              "text": "Audiology and hearing aids; cranial surveillance for nerve compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Function and counselling",
+          "cells": [
+            {
+              "text": "Physiotherapy; autosomal recessive genetic counselling and family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "juvenile_pagets_disease-dx-mgmt",
+      "title": "Diagnosis and management of Juvenile Paget disease (idiopathic hyperphosphatasia, TNFRSF11B)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bone pain, fractures and limb bowing with skull enlargement in infancy or childhood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive hearing loss, cranial neuropathy, raised intracranial pressure or fractures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent skull-base and neurology imaging; ENT review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ALP, bone turnover markers, calcium, phosphate, vitamin D, radiographs, TNFRSF11B",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic TNFRSF11B variant with grossly raised bone turnover?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adult-type Paget disease, osteogenesis imperfecta or hyperphosphatasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiresorptive bisphosphonate as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Calcium and vitamin D repletion during therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial alkaline phosphatase and turnover markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic care for fractures and bowing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Audiology, hearing aids and cranial surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Treatment can alter the course; monitor hearing and skull complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

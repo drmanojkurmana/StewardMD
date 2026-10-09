@@ -1,176 +1,461 @@
 {
- "id": "ciliated_hepatic_foregut_cyst",
- "name": "ciliated hepatic foregut cyst",
- "aliases": [
-  "CHFC",
-  "ciliated foregut cyst of the liver"
- ],
- "class": "non_infective",
- "system": "Hepatobiliary",
- "specialty": "Hepatobiliary Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Ciliated hepatic foregut cysts are rare, usually solitary lesions that characteristically lie in segment IV of the left lobe in a subcapsular position.",
-   "The wall shows four distinctive layers: an inner ciliated pseudostratified columnar epithelium, subepithelial connective tissue, one or more smooth muscle layers, and an outer fibrous capsule.",
-   "They share an embryological origin with bronchogenic and oesophageal cysts, arising from a detached remnant of the embryonic foregut.",
-   "Most are small and asymptomatic, discovered incidentally on imaging or at operation for another reason.",
-   "The presence of a smooth muscle layer and ciliated lining distinguishes them histologically from simple hepatic cysts.",
-   "Unlike most benign hepatic cysts, they carry a recognised potential for malignant transformation to squamous cell carcinoma.",
-   "Enlargement, solid or mural components, or wall thickening should raise concern for malignant change.",
-   "Excision is advocated for larger or symptomatic lesions and where the diagnosis is uncertain or malignancy cannot be excluded."
+  "id": "ciliated_hepatic_foregut_cyst",
+  "name": "ciliated hepatic foregut cyst",
+  "aliases": [
+    "CHFC",
+    "ciliated foregut cyst of the liver"
   ],
-  "pathophysiology": "The ciliated hepatic foregut cyst is believed to originate from an aberrant detached bud of the embryonic foregut, the same anlage that gives rise to the tracheobronchial tree and oesophagus, which becomes incorporated into the developing liver. This shared derivation explains the histological resemblance to bronchogenic cysts, notably the ciliated respiratory-type epithelium and the muscular wall. The characteristic four-layered wall comprises ciliated pseudostratified columnar epithelium overlying loose subepithelial connective tissue, a smooth muscle coat, and an outer fibrous capsule. The lesion is typically unilocular and contains mucoid or serous fluid. Chronic epithelial irritation is thought to underlie the well-documented, though uncommon, progression through squamous metaplasia to squamous cell carcinoma, which accounts for the interest in definitive excision.",
-  "additionalDifferentials": [
-   "simple hepatic cyst",
-   "hydatid cyst",
-   "mucinous cystic neoplasm (biliary cystadenoma)",
-   "hepatic abscess",
-   "cystic metastasis",
-   "intrahepatic bronchogenic cyst",
-   "Caroli disease"
-  ],
-  "additionalInvestigations": [
-   "abdominal ultrasound to characterise the subcapsular cyst",
-   "contrast-enhanced CT of the liver",
-   "MRI for soft-tissue characterisation and surgical planning",
-   "histopathology with immunohistochemistry to confirm the ciliated foregut lining",
-   "serology to exclude hydatid disease where relevant",
-   "assessment for solid components suggesting malignant transformation"
-  ],
-  "redFlags": [
-   "rapid interval growth of a previously stable cyst",
-   "solid, papillary, or mural nodular components on imaging",
-   "irregular wall thickening",
-   "features suggesting squamous cell carcinoma transformation",
-   "new symptoms such as pain or a palpable mass in a previously silent lesion"
-  ],
-  "prognosis": "Prognosis is excellent for benign lesions treated by complete excision. Malignant transformation to squamous cell carcinoma, though uncommon, markedly worsens the outlook.",
-  "pitfalls": [
-   "dismissing the lesion as a simple hepatic cyst and overlooking its malignant potential",
-   "confusing it with a mucinous cystic neoplasm and mismanaging accordingly",
-   "relying on aspiration cytology, which is often non-diagnostic and risks spillage",
-   "failing to recognise the characteristic segment IV subcapsular location",
-   "inadequate histological sampling that misses focal malignant change"
-  ],
-  "references": [
-   "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
-   "MacSween's Pathology of the Liver",
-   "Sherlock's Diseases of the Liver and Biliary System"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision of the cyst as definitive treatment, given the recognised potential for malignant transformation to squamous cell carcinoma",
-   "Histopathological confirmation of the four-layered ciliated foregut lining with immunohistochemistry",
-   "Consideration of imaging surveillance for a small, incidentally found asymptomatic lesion when resection is deferred",
-   "Vigilance on imaging for solid or mural components suggesting malignant change",
-   "Referral to a hepatobiliary surgical service for assessment and operative planning",
-   "Post-resection follow-up to confirm cure and detect recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ciliated_hepatic_foregut_cyst-pathway",
-   "title": "ciliated hepatic foregut cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Ciliated hepatic foregut cysts are rare, usually solitary lesions that characteristically lie in segment IV of the left lobe in a subcapsular position.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rapid interval growth of a previously stable cyst",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: abdominal ultrasound to characterise the subcapsular cyst, contrast-enhanced CT of the liver, MRI for soft-tissue characterisation and surgical planning"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision of the cyst as definitive treatment, given the recognised potential for malignant transformation to squamous cell carcinoma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: dismissing the lesion as a simple hepatic cyst and overlooking its malignant potential"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ciliated hepatic foregut cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "ciliated_hepatic_foregut_cyst-matrix",
-   "title": "ciliated hepatic foregut cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Ciliated hepatic foregut cysts are rare, usually solitary lesions that characteristically lie in segment IV of the left lobe in a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatobiliary",
+  "specialty": "Hepatobiliary Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Ciliated hepatic foregut cysts are rare, usually solitary lesions that characteristically lie in segment IV of the left lobe in a subcapsular position.",
+      "The wall shows four distinctive layers: an inner ciliated pseudostratified columnar epithelium, subepithelial connective tissue, one or more smooth muscle layers, and an outer fibrous capsule.",
+      "They share an embryological origin with bronchogenic and oesophageal cysts, arising from a detached remnant of the embryonic foregut.",
+      "Most are small and asymptomatic, discovered incidentally on imaging or at operation for another reason.",
+      "The presence of a smooth muscle layer and ciliated lining distinguishes them histologically from simple hepatic cysts.",
+      "Unlike most benign hepatic cysts, they carry a recognised potential for malignant transformation to squamous cell carcinoma.",
+      "Enlargement, solid or mural components, or wall thickening should raise concern for malignant change.",
+      "Excision is advocated for larger or symptomatic lesions and where the diagnosis is uncertain or malignancy cannot be excluded."
     ],
-    [
-     "Key Investigations",
-     "abdominal ultrasound to characterise the subcapsular cyst, contrast-enhanced CT of the liver, MRI for soft-tissue",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The ciliated hepatic foregut cyst is believed to originate from an aberrant detached bud of the embryonic foregut, the same anlage that gives rise to the tracheobronchial tree and oesophagus, which becomes incorporated into the developing liver. This shared derivation explains the histological resemblance to bronchogenic cysts, notably the ciliated respiratory-type epithelium and the muscular wall. The characteristic four-layered wall comprises ciliated pseudostratified columnar epithelium overlying loose subepithelial connective tissue, a smooth muscle coat, and an outer fibrous capsule. The lesion is typically unilocular and contains mucoid or serous fluid. Chronic epithelial irritation is thought to underlie the well-documented, though uncommon, progression through squamous metaplasia to squamous cell carcinoma, which accounts for the interest in definitive excision.",
+    "additionalDifferentials": [
+      "simple hepatic cyst",
+      "hydatid cyst",
+      "mucinous cystic neoplasm (biliary cystadenoma)",
+      "hepatic abscess",
+      "cystic metastasis",
+      "intrahepatic bronchogenic cyst",
+      "Caroli disease"
     ],
-    [
-     "Primary Differentials",
-     "simple hepatic cyst, hydatid cyst, mucinous cystic neoplasm (biliary cystadenoma)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "abdominal ultrasound to characterise the subcapsular cyst",
+      "contrast-enhanced CT of the liver",
+      "MRI for soft-tissue characterisation and surgical planning",
+      "histopathology with immunohistochemistry to confirm the ciliated foregut lining",
+      "serology to exclude hydatid disease where relevant",
+      "assessment for solid components suggesting malignant transformation"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision of the cyst as definitive treatment, given the recognised potential for malignant transformation to",
-     "Core treatment modality"
+    "redFlags": [
+      "rapid interval growth of a previously stable cyst",
+      "solid, papillary, or mural nodular components on imaging",
+      "irregular wall thickening",
+      "features suggesting squamous cell carcinoma transformation",
+      "new symptoms such as pain or a palpable mass in a previously silent lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "dismissing the lesion as a simple hepatic cyst and overlooking its malignant potential",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent for benign lesions treated by complete excision. Malignant transformation to squamous cell carcinoma, though uncommon, markedly worsens the outlook.",
+    "pitfalls": [
+      "dismissing the lesion as a simple hepatic cyst and overlooking its malignant potential",
+      "confusing it with a mucinous cystic neoplasm and mismanaging accordingly",
+      "relying on aspiration cytology, which is often non-diagnostic and risks spillage",
+      "failing to recognise the characteristic segment IV subcapsular location",
+      "inadequate histological sampling that misses focal malignant change"
+    ],
+    "references": [
+      "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
+      "MacSween's Pathology of the Liver",
+      "Sherlock's Diseases of the Liver and Biliary System"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision of the cyst as definitive treatment, given the recognised potential for malignant transformation to squamous cell carcinoma",
+      "Histopathological confirmation of the four-layered ciliated foregut lining with immunohistochemistry",
+      "Consideration of imaging surveillance for a small, incidentally found asymptomatic lesion when resection is deferred",
+      "Vigilance on imaging for solid or mural components suggesting malignant change",
+      "Referral to a hepatobiliary surgical service for assessment and operative planning",
+      "Post-resection follow-up to confirm cure and detect recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for ciliated hepatic foregut cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ciliated-hepatic-foregut-cyst-real-image",
-   "title": "ciliated hepatic foregut cyst: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "ciliated_hepatic_foregut_cyst-pathway",
+      "title": "ciliated hepatic foregut cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Ciliated hepatic foregut cysts are rare, usually solitary lesions that characteristically lie in segment IV of the left lobe in a subcapsular position.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rapid interval growth of a previously stable cyst",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: abdominal ultrasound to characterise the subcapsular cyst, contrast-enhanced CT of the liver, MRI for soft-tissue characterisation and surgical planning"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision of the cyst as definitive treatment, given the recognised potential for malignant transformation to squamous cell carcinoma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: dismissing the lesion as a simple hepatic cyst and overlooking its malignant potential"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ciliated hepatic foregut cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ciliated_hepatic_foregut_cyst-matrix",
+      "title": "ciliated hepatic foregut cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Ciliated hepatic foregut cysts are rare, usually solitary lesions that characteristically lie in segment IV of the left lobe in a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "abdominal ultrasound to characterise the subcapsular cyst, contrast-enhanced CT of the liver, MRI for soft-tissue",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "simple hepatic cyst, hydatid cyst, mucinous cystic neoplasm (biliary cystadenoma)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision of the cyst as definitive treatment, given the recognised potential for malignant transformation to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "dismissing the lesion as a simple hepatic cyst and overlooking its malignant potential",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ciliated hepatic foregut cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ciliated_hepatic_foregut_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Characterises the subcapsular cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT of the liver",
+          "cells": [
+            {
+              "text": "Lesion characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue characterisation and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Confirms the ciliated foregut lining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for hydatid disease",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ciliated_hepatic_foregut_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple hepatic cyst",
+          "cells": [
+            {
+              "text": "Lacks ciliated lining and smooth muscle layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydatid cyst",
+          "cells": [
+            {
+              "text": "Parasitic cyst; excluded by serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucinous cystic neoplasm (biliary cystadenoma)",
+          "cells": [
+            {
+              "text": "Biliary cystadenoma, a distinct lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ciliated_hepatic_foregut_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Definitive treatment given potential for squamous carcinoma"
+            },
+            {
+              "text": "Recognised malignant potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathological confirmation",
+          "cells": [
+            {
+              "text": "Four-layered ciliated foregut lining with immunohistochemistry"
+            },
+            {
+              "text": "Confirms diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging surveillance",
+          "cells": [
+            {
+              "text": "Small incidental asymptomatic lesion when resection is deferred"
+            },
+            {
+              "text": "Deferred resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary surgical referral",
+          "cells": [
+            {
+              "text": "Assessment and operative planning"
+            },
+            {
+              "text": "Referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-resection follow-up",
+          "cells": [
+            {
+              "text": "Confirms cure and detects recurrence"
+            },
+            {
+              "text": "Follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ciliated_hepatic_foregut_cyst-dx-mgmt",
+      "title": "Diagnosis and management of ciliated hepatic foregut cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ciliated hepatic foregut cyst: subcapsular solitary cyst, left lobe segment IV",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, solid or mural component, wall thickening)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent hepatobiliary referral for suspected squamous transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound, contrast CT, MRI and serology to exclude hydatid disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Solid or mural component or wall thickening on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Complete surgical excision as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check simple cyst, hydatid cyst, biliary cystadenoma and abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Imaging surveillance only for a small incidental asymptomatic cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histopathology with immunohistochemistry to confirm the lining",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hepatobiliary surgical referral for operative planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Post-resection follow-up to confirm cure and detect recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

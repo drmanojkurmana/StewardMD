@@ -1,188 +1,738 @@
 {
- "id": "acute_lymphoid_leukemia",
- "name": "Acute Lymphoid Leukemia",
- "system": "Hematologic/Oncologic",
- "class": "non_infective",
- "chapter": 111,
- "page": 844,
- "aliases": [
-  "Acute Lymphoblastic Leukemia",
-  "ALL"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.844",
-  "clinicalPearls": [
-   "In ALL the malignant clone arises from hematopoietic progenitors in marrow or lymphatic tissue, producing immature nonfunctioning blasts; marrow infiltration causes anemia, granulocytopenia, and thrombocytopenia, so fatigue, infection, and hemorrhage (rather than tumor bulk) are usually the presenting complaints.",
-   "Tumor-bulk features such as lymphadenopathy, hepatosplenomegaly from leukemic infiltration, and CNS involvement (meningeosis leukemica) may occur but are less often the reason a patient first seeks care.",
-   "ALL is the most frequent neoplasm of childhood with an early peak at age 3-4 years; in adults the incidence ranges from about 0.7 to 1.8 per 100,000 per year, higher in adolescents/young adults and rising again in the elderly.",
-   "The WBC count is normal or reduced in roughly 40% of patients, and in about 8% no circulating blasts are seen, so automated counters may fail to flag the diagnosis; only about 16% present with WBC above 100 x 10^9/L.",
-   "Bone marrow is typically heavily packed, with more than 90% blasts in about 70% of patients and near-absent normal hematopoiesis; a biopsy is essential to confirm acute leukemia and distinguish ALL from AML.",
-   "Immunophenotyping is the principal tool for subclassification: more than 70% of adult ALL is B-lineage (common ALL being most frequent, CD10+), while about 25% is T-lineage (all express CD7 and cytoplasmic/surface CD3).",
-   "An immunologic marker is considered positive when more than 20% of cells stain with the monoclonal antibody.",
-   "Philadelphia chromosome-positive ALL (t(9;22), BCR-ABL1) is seen in roughly half of elderly B-lineage patients; subtype frequencies shift substantially with age.",
-   "Minimal residual disease detected by flow cytometry, RT-qPCR for clonal Ig/TCR rearrangements or fusion transcripts (limit ~0.1-0.001%, lower with NGS/ddPCR) is the most important prognostic factor during therapy; patient-specific markers should be banked from diagnostic marrow.",
-   "Achieving a molecular complete remission after induction predicts disease-free survival around 70% versus under 40% for MRD-positive patients, the single most relevant independent prognostic factor in both pediatric and adult ALL.",
-   "Mature B-ALL (Burkitt leukemia, ~3-4% of adults) expresses surface IgM, shows L3 morphology, and has short relapse kinetics (up to ~1-1.5 years) with frequent organ and CNS involvement.",
-   "Down syndrome carries a roughly 20-fold increased leukemia risk (ALL predominating in childhood, AML at older age), and other congenital disorders raising risk include Klinefelter, Fanconi anemia, Bloom syndrome, ataxia-telangiectasia, and neurofibromatosis."
+  "id": "acute_lymphoid_leukemia",
+  "name": "Acute Lymphoid Leukemia",
+  "system": "Hematologic/Oncologic",
+  "class": "non_infective",
+  "chapter": 111,
+  "page": 844,
+  "aliases": [
+    "Acute Lymphoblastic Leukemia",
+    "ALL"
   ],
-  "pathophysiology": "Malignant transformation of lymphoid progenitor cells in the bone marrow or lymphatic system produces a clone of immature, nonfunctioning lymphoblasts. Progressive marrow infiltration crowds out normal hematopoiesis, yielding anemia, neutropenia, and thrombocytopenia. Blasts may also infiltrate lymph nodes, liver, spleen, mediastinum, and the central nervous system (a pharmacologic sanctuary site). Subtypes correspond to arrest at defined stages of B-cell or T-cell differentiation and carry characteristic cytogenetic/molecular lesions such as t(9;22)/BCR-ABL1, t(4;11)/MLL-AF4, t(1;19)/PBX-E2A, and t(8;14) in mature B-ALL, as well as newer entities including early T-precursor (ETP) ALL and Ph-like (BCR-ABL1-like) ALL driven by IKZF1 deletion, CRLF2 overexpression, and tyrosine kinase-activating rearrangements (ABL1, JAK2, PDGFRB).",
-  "additionalDifferentials": [
-   "Acute myeloid leukemia (distinguished by marrow biopsy, cytochemistry, and immunophenotype)",
-   "Biphenotypic/mixed-phenotype acute leukemia (markers of both lymphoid and myeloid lineages on the same cells)",
-   "Bilineage leukemia (two separate blast populations, lymphoid and myeloid)",
-   "Lymphoblastic lymphoma (e.g., precursor T- or B-lymphoblastic lymphoma)",
-   "Chronic myeloid leukemia in lymphoid blast crisis",
-   "Aplastic anemia or other marrow failure presenting with pancytopenia"
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Acute myeloid leukemia",
-   "Lymphoblastic lymphoma with marrow involvement",
-   "Marrow failure syndromes presenting as pancytopenia"
-  ],
-  "additionalInvestigations": [
-   "Peripheral blood count with Wright-Giemsa-stained differential smear at presentation",
-   "Bone marrow aspirate and biopsy for morphology, immunophenotype, cytogenetics, and molecular markers",
-   "Cytochemical stains and immunologic marker panel to assign B- versus T-lineage",
-   "Standard cytogenetics, FISH, and RT-PCR to detect t(9;22)/BCR-ABL1, t(4;11)/MLL, t(1;19)/PBX-E2A and other entities",
-   "Gene expression profiling, SNP array, array-CGH, and next-generation sequencing to identify ETP-ALL and Ph-like ALL",
-   "Lumbar puncture with CSF examination for CNS leukemia (diagnostic if >=5 cells/uL or blasts on morphology)",
-   "MRD assessment by flow cytometry or RT-qPCR/NGS/ddPCR with collection of patient-specific markers at diagnosis"
-  ],
-  "redFlags": [
-   "Platelet count below 20 x 10^9/L, signaling high bleeding risk",
-   "Neutropenia with neutrophils below 0.5 x 10^9/L, signaling high infection risk",
-   "Hemoglobin below 7-8 g/dL (present in nearly one-third of patients)",
-   "Hyperleukocytosis (WBC above 100 x 10^9/L), more common in t(4;11) and T-ALL",
-   "CNS involvement at diagnosis (5-10% overall, higher in mature B-ALL and T-ALL)",
-   "Large mediastinal mass in T-ALL (frequent, up to ~60%) with potential airway/vascular compromise",
-   "Risk of tumor lysis syndrome at treatment initiation given high tumor burden"
-  ],
-  "prognosis": "Outcome is strongly age-dependent, with cure rates around 90% in children falling to under 10% in elderly or frail patients. Prognostic stratification rests on age, WBC count at diagnosis, immunophenotype, cytogenetic/genetic lesions, and especially MRD response: molecular complete remission after induction predicts disease-free survival near 70% versus under 40% if MRD-positive. The greatest relapse risk is within the first 2 years and is much lower after 5 years. Relapse kinetics vary by subtype, being short (up to ~1-1.5 years) in mature B-ALL, intermediate (~3-4 years) in T-ALL, and prolonged (up to 5-7 years) in common ALL. CNS relapse, usually accompanied by marrow involvement, carries a dismal outcome.",
-  "pitfalls": [
-   "Because the WBC is normal or low in about 40% of patients and roughly 8% have no circulating blasts, automated blood counts may miss the diagnosis; a manual smear and marrow biopsy are required.",
-   "Failing to bank diagnostic marrow for patient-specific markers compromises later MRD follow-up.",
-   "Assuming an MRD-negative result guarantees cure: 20-30% of MRD-negative adults still relapse, attributable to loss of assay sensitivity, evolving subclones, or extramedullary disease.",
-   "Performing lumbar puncture without an adequate platelet count (>20 x 10^9/L) or in the presence of clinical hemorrhage; potentially seeded blasts should be addressed with intrathecal therapy at the first tap.",
-   "Overlooking that L1/L2 FAB morphology has no clinical bearing while only L3 morphology indicates mature B-ALL.",
-   "Misclassifying Ph-like ALL as Ph-positive: Ph-like ALL is BCR-ABL1 negative despite similar genetic lesions and requires molecular testing to identify."
-  ],
-  "severityClassification": "Lineage/immunophenotypic subtyping (EGIL-type) divides ALL into B-lineage (pro-B, common, pre-B, mature B/Burkitt) and T-lineage (early/ETP, cortical-thymic, mature) categories. MRD-based response categories (Harrison Table 111-3) include complete hematologic remission (<5% marrow blasts), complete molecular remission/MRD negativity (<=0.01%, i.e. <=1 leukemic cell in 10,000 marrow cells), molecular failure/MRD positivity (>0.01% with hematologic remission), molecular relapse, and hematologic relapse (>5% blasts in marrow or blood). Risk stratification assigns standard-risk patients (no risk factors) versus high-risk patients (one or more of advanced age, high WBC, adverse immunophenotype, or adverse cytogenetic/genetic lesions).",
-  "references": [
-   "Harrison 22e p.844",
-   "Harrison 22e p.845",
-   "Harrison 22e p.846",
-   "Harrison 22e p.847"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Multi-agent induction, consolidation, and maintenance chemotherapy as the backbone of treatment",
-   "Central-nervous-system-directed prophylaxis with intrathecal chemotherapy, and cranial irradiation in selected cases, given the CNS sanctuary site",
-   "Addition of a BCR-ABL1 tyrosine kinase inhibitor such as imatinib or dasatinib for Philadelphia-chromosome-positive disease",
-   "Immunotherapy with blinatumomab, inotuzumab ozogamicin, or CAR-T cells for relapsed or refractory disease",
-   "Allogeneic haematopoietic stem cell transplantation for high-risk or measurable-residual-disease-positive patients",
-   "Tumour lysis syndrome prophylaxis with hydration and allopurinol or rasburicase, plus transfusion and antimicrobial support during cytopenias",
-   "Serial measurable residual disease monitoring to guide risk stratification and treatment intensity",
-   "Management within a specialist haemato-oncology multidisciplinary team"
-  ]
- },
- "algorithms": [
-  {
-   "id": "acute_lymphoid_leukemia-pathway",
-   "title": "Acute Lymphoid Leukemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "In ALL the malignant clone arises from hematopoietic progenitors in marrow or lymphatic tissue, producing immature nonfunctioning blasts; marrow infiltration causes anemia, granulocytopenia, and thrombocytopenia, so fatigue, infection, and",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Platelet count below 20 x 10^9/L, signaling high bleeding risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Peripheral blood count with Wright-Giemsa-stained differential smear at presentation, Bone marrow aspirate and biopsy for morphology, immunophenotype, cytogenetics, and molecular markers, Cytochemical stains and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Multi-agent induction, consolidation, and maintenance chemotherapy as the backbone of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Because the WBC is normal or low in about 40% of patients and roughly 8% have no circulating blasts, automated blood counts may miss the diagnosis; a manual smear and marrow biopsy are required."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute lymphoid leukemia."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_lymphoid_leukemia-matrix",
-   "title": "Acute Lymphoid Leukemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "In ALL the malignant clone arises from hematopoietic progenitors in marrow or lymphatic tissue, producing immature nonfunctioning",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.844",
+    "clinicalPearls": [
+      "In ALL the malignant clone arises from hematopoietic progenitors in marrow or lymphatic tissue, producing immature nonfunctioning blasts; marrow infiltration causes anemia, granulocytopenia, and thrombocytopenia, so fatigue, infection, and hemorrhage (rather than tumor bulk) are usually the presenting complaints.",
+      "Tumor-bulk features such as lymphadenopathy, hepatosplenomegaly from leukemic infiltration, and CNS involvement (meningeosis leukemica) may occur but are less often the reason a patient first seeks care.",
+      "ALL is the most frequent neoplasm of childhood with an early peak at age 3-4 years; in adults the incidence ranges from about 0.7 to 1.8 per 100,000 per year, higher in adolescents/young adults and rising again in the elderly.",
+      "The WBC count is normal or reduced in roughly 40% of patients, and in about 8% no circulating blasts are seen, so automated counters may fail to flag the diagnosis; only about 16% present with WBC above 100 x 10^9/L.",
+      "Bone marrow is typically heavily packed, with more than 90% blasts in about 70% of patients and near-absent normal hematopoiesis; a biopsy is essential to confirm acute leukemia and distinguish ALL from AML.",
+      "Immunophenotyping is the principal tool for subclassification: more than 70% of adult ALL is B-lineage (common ALL being most frequent, CD10+), while about 25% is T-lineage (all express CD7 and cytoplasmic/surface CD3).",
+      "An immunologic marker is considered positive when more than 20% of cells stain with the monoclonal antibody.",
+      "Philadelphia chromosome-positive ALL (t(9;22), BCR-ABL1) is seen in roughly half of elderly B-lineage patients; subtype frequencies shift substantially with age.",
+      "Minimal residual disease detected by flow cytometry, RT-qPCR for clonal Ig/TCR rearrangements or fusion transcripts (limit ~0.1-0.001%, lower with NGS/ddPCR) is the most important prognostic factor during therapy; patient-specific markers should be banked from diagnostic marrow.",
+      "Achieving a molecular complete remission after induction predicts disease-free survival around 70% versus under 40% for MRD-positive patients, the single most relevant independent prognostic factor in both pediatric and adult ALL.",
+      "Mature B-ALL (Burkitt leukemia, ~3-4% of adults) expresses surface IgM, shows L3 morphology, and has short relapse kinetics (up to ~1-1.5 years) with frequent organ and CNS involvement.",
+      "Down syndrome carries a roughly 20-fold increased leukemia risk (ALL predominating in childhood, AML at older age), and other congenital disorders raising risk include Klinefelter, Fanconi anemia, Bloom syndrome, ataxia-telangiectasia, and neurofibromatosis."
     ],
-    [
-     "Key Investigations",
-     "Peripheral blood count with Wright-Giemsa-stained differential smear at presentation, Bone marrow aspirate and biopsy for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Malignant transformation of lymphoid progenitor cells in the bone marrow or lymphatic system produces a clone of immature, nonfunctioning lymphoblasts. Progressive marrow infiltration crowds out normal hematopoiesis, yielding anemia, neutropenia, and thrombocytopenia. Blasts may also infiltrate lymph nodes, liver, spleen, mediastinum, and the central nervous system (a pharmacologic sanctuary site). Subtypes correspond to arrest at defined stages of B-cell or T-cell differentiation and carry characteristic cytogenetic/molecular lesions such as t(9;22)/BCR-ABL1, t(4;11)/MLL-AF4, t(1;19)/PBX-E2A, and t(8;14) in mature B-ALL, as well as newer entities including early T-precursor (ETP) ALL and Ph-like (BCR-ABL1-like) ALL driven by IKZF1 deletion, CRLF2 overexpression, and tyrosine kinase-activating rearrangements (ABL1, JAK2, PDGFRB).",
+    "additionalDifferentials": [
+      "Acute myeloid leukemia (distinguished by marrow biopsy, cytochemistry, and immunophenotype)",
+      "Biphenotypic/mixed-phenotype acute leukemia (markers of both lymphoid and myeloid lineages on the same cells)",
+      "Bilineage leukemia (two separate blast populations, lymphoid and myeloid)",
+      "Lymphoblastic lymphoma (e.g., precursor T- or B-lymphoblastic lymphoma)",
+      "Chronic myeloid leukemia in lymphoid blast crisis",
+      "Aplastic anemia or other marrow failure presenting with pancytopenia"
     ],
-    [
-     "Primary Differentials",
-     "Acute myeloid leukemia (distinguished by marrow biopsy, cytochemistry, and immunophenotype), Biphenotypic/mixed-phenotype acute",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Acute myeloid leukemia",
+      "Lymphoblastic lymphoma with marrow involvement",
+      "Marrow failure syndromes presenting as pancytopenia"
     ],
-    [
-     "Management Strategy",
-     "Multi-agent induction, consolidation, and maintenance chemotherapy as the backbone of treatment",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Peripheral blood count with Wright-Giemsa-stained differential smear at presentation",
+      "Bone marrow aspirate and biopsy for morphology, immunophenotype, cytogenetics, and molecular markers",
+      "Cytochemical stains and immunologic marker panel to assign B- versus T-lineage",
+      "Standard cytogenetics, FISH, and RT-PCR to detect t(9;22)/BCR-ABL1, t(4;11)/MLL, t(1;19)/PBX-E2A and other entities",
+      "Gene expression profiling, SNP array, array-CGH, and next-generation sequencing to identify ETP-ALL and Ph-like ALL",
+      "Lumbar puncture with CSF examination for CNS leukemia (diagnostic if >=5 cells/uL or blasts on morphology)",
+      "MRD assessment by flow cytometry or RT-qPCR/NGS/ddPCR with collection of patient-specific markers at diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Because the WBC is normal or low in about 40% of patients and roughly 8% have no circulating blasts, automated blood counts may",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Platelet count below 20 x 10^9/L, signaling high bleeding risk",
+      "Neutropenia with neutrophils below 0.5 x 10^9/L, signaling high infection risk",
+      "Hemoglobin below 7-8 g/dL (present in nearly one-third of patients)",
+      "Hyperleukocytosis (WBC above 100 x 10^9/L), more common in t(4;11) and T-ALL",
+      "CNS involvement at diagnosis (5-10% overall, higher in mature B-ALL and T-ALL)",
+      "Large mediastinal mass in T-ALL (frequent, up to ~60%) with potential airway/vascular compromise",
+      "Risk of tumor lysis syndrome at treatment initiation given high tumor burden"
+    ],
+    "prognosis": "Outcome is strongly age-dependent, with cure rates around 90% in children falling to under 10% in elderly or frail patients. Prognostic stratification rests on age, WBC count at diagnosis, immunophenotype, cytogenetic/genetic lesions, and especially MRD response: molecular complete remission after induction predicts disease-free survival near 70% versus under 40% if MRD-positive. The greatest relapse risk is within the first 2 years and is much lower after 5 years. Relapse kinetics vary by subtype, being short (up to ~1-1.5 years) in mature B-ALL, intermediate (~3-4 years) in T-ALL, and prolonged (up to 5-7 years) in common ALL. CNS relapse, usually accompanied by marrow involvement, carries a dismal outcome.",
+    "pitfalls": [
+      "Because the WBC is normal or low in about 40% of patients and roughly 8% have no circulating blasts, automated blood counts may miss the diagnosis; a manual smear and marrow biopsy are required.",
+      "Failing to bank diagnostic marrow for patient-specific markers compromises later MRD follow-up.",
+      "Assuming an MRD-negative result guarantees cure: 20-30% of MRD-negative adults still relapse, attributable to loss of assay sensitivity, evolving subclones, or extramedullary disease.",
+      "Performing lumbar puncture without an adequate platelet count (>20 x 10^9/L) or in the presence of clinical hemorrhage; potentially seeded blasts should be addressed with intrathecal therapy at the first tap.",
+      "Overlooking that L1/L2 FAB morphology has no clinical bearing while only L3 morphology indicates mature B-ALL.",
+      "Misclassifying Ph-like ALL as Ph-positive: Ph-like ALL is BCR-ABL1 negative despite similar genetic lesions and requires molecular testing to identify."
+    ],
+    "severityClassification": "Lineage/immunophenotypic subtyping (EGIL-type) divides ALL into B-lineage (pro-B, common, pre-B, mature B/Burkitt) and T-lineage (early/ETP, cortical-thymic, mature) categories. MRD-based response categories (Harrison Table 111-3) include complete hematologic remission (<5% marrow blasts), complete molecular remission/MRD negativity (<=0.01%, i.e. <=1 leukemic cell in 10,000 marrow cells), molecular failure/MRD positivity (>0.01% with hematologic remission), molecular relapse, and hematologic relapse (>5% blasts in marrow or blood). Risk stratification assigns standard-risk patients (no risk factors) versus high-risk patients (one or more of advanced age, high WBC, adverse immunophenotype, or adverse cytogenetic/genetic lesions).",
+    "references": [
+      "Harrison 22e p.844",
+      "Harrison 22e p.845",
+      "Harrison 22e p.846",
+      "Harrison 22e p.847"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Multi-agent induction, consolidation, and maintenance chemotherapy as the backbone of treatment",
+      "Central-nervous-system-directed prophylaxis with intrathecal chemotherapy, and cranial irradiation in selected cases, given the CNS sanctuary site",
+      "Addition of a BCR-ABL1 tyrosine kinase inhibitor such as imatinib or dasatinib for Philadelphia-chromosome-positive disease",
+      "Immunotherapy with blinatumomab, inotuzumab ozogamicin, or CAR-T cells for relapsed or refractory disease",
+      "Allogeneic haematopoietic stem cell transplantation for high-risk or measurable-residual-disease-positive patients",
+      "Tumour lysis syndrome prophylaxis with hydration and allopurinol or rasburicase, plus transfusion and antimicrobial support during cytopenias",
+      "Serial measurable residual disease monitoring to guide risk stratification and treatment intensity",
+      "Management within a specialist haemato-oncology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute lymphoid leukemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-lymphoid-leukemia-real-image",
-   "title": "Acute Lymphoid Leukemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "acute_lymphoid_leukemia-pathway",
+      "title": "Acute Lymphoid Leukemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "In ALL the malignant clone arises from hematopoietic progenitors in marrow or lymphatic tissue, producing immature nonfunctioning blasts; marrow infiltration causes anemia, granulocytopenia, and thrombocytopenia, so fatigue, infection, and",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Platelet count below 20 x 10^9/L, signaling high bleeding risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Peripheral blood count with Wright-Giemsa-stained differential smear at presentation, Bone marrow aspirate and biopsy for morphology, immunophenotype, cytogenetics, and molecular markers, Cytochemical stains and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Multi-agent induction, consolidation, and maintenance chemotherapy as the backbone of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Because the WBC is normal or low in about 40% of patients and roughly 8% have no circulating blasts, automated blood counts may miss the diagnosis; a manual smear and marrow biopsy are required."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute lymphoid leukemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_lymphoid_leukemia-matrix",
+      "title": "Acute Lymphoid Leukemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "In ALL the malignant clone arises from hematopoietic progenitors in marrow or lymphatic tissue, producing immature nonfunctioning",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Peripheral blood count with Wright-Giemsa-stained differential smear at presentation, Bone marrow aspirate and biopsy for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute myeloid leukemia (distinguished by marrow biopsy, cytochemistry, and immunophenotype), Biphenotypic/mixed-phenotype acute",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Multi-agent induction, consolidation, and maintenance chemotherapy as the backbone of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Because the WBC is normal or low in about 40% of patients and roughly 8% have no circulating blasts, automated blood counts may",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute lymphoid leukemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Lymphoblastic Leukemia",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/leukemias/acute-lymphoblastic-leukemia-all",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table e21-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_lymphoid_leukemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and risk assessment in acute lymphoblastic leukaemia",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Marrow lymphoblasts",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20 or more of nucleated cells",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "{{hy:Defines ALL; mainly extramedullary disease is lymphoma}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Immunophenotype",
+          "cells": [
+            {
+              "text": "TdT positive; CD19, CD20, CD22 for B; CD3 for T"
+            },
+            {
+              "text": "Assigns lineage; Auer rods never seen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "t(9;22) BCR::ABL1",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Adults 25, children 5"
+            },
+            {
+              "text": "Poor prognosis; add a TKI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High hyperdiploidy or t(12;21)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Children 25 and 20 to 25"
+            },
+            {
+              "text": "Favourable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Favourable age and WBC",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Age 3 to 9 years; WBC below 25,000 (below 50,000 in children)",
+              "op": "<",
+              "value": 25000
+            },
+            {
+              "text": "Standard risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CSF",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "5 or more cells or blasts on cytology",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "CNS leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete remission",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Marrow blasts below 5, ANC above 1000/uL, platelets above 100,000/uL",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "No transfusion need"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRD negativity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Below 0.01 to 0.1 leukaemic cells, assay dependent"
+            },
+            {
+              "text": "Most important prognostic factor in remission"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tumour lysis labs",
+          "cells": [
+            {
+              "text": "High urate, phosphate, potassium, LDH; low calcium"
+            },
+            {
+              "text": "Check at presentation"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "acute_lymphoid_leukemia-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of acute lymphoblastic leukaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute myeloid leukaemia",
+          "cells": [
+            {
+              "text": "{{hy:Auer rods; myeloid markers on immunophenotype}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mixed-phenotype acute leukaemia",
+          "cells": [
+            {
+              "text": "Lymphoid and myeloid markers on the same cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoblastic lymphoma",
+          "cells": [
+            {
+              "text": "Mainly extramedullary disease, marrow blasts below 20%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CML in lymphoid blast crisis",
+          "cells": [
+            {
+              "text": "Prior chronic phase; BCR::ABL1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aplastic anaemia",
+          "cells": [
+            {
+              "text": "Pancytopenia with hypocellular marrow, no blasts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Atypical lymphocytes; can cause cytopenias"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vitamin B12 or folate deficiency",
+          "cells": [
+            {
+              "text": "Megaloblastic pancytopenia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "acute_lymphoid_leukemia-treatment",
+      "kind": "treatment",
+      "title": "Treatment of acute lymphoblastic leukaemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Induction: glucocorticoid, vincristine, anthracycline",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "All patients",
+              "range": [
+                4,
+                6
+              ]
+            },
+            {
+              "text": "4 to 6 weeks; remission 95% or more in children, 70% to 90% in adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CNS prophylaxis",
+          "cells": [
+            {
+              "text": "{{hy:From induction through all phases}}"
+            },
+            {
+              "text": "Intrathecal methotrexate, cytarabine, hydrocortisone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Consolidation and intensification",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "After remission",
+              "range": [
+                6,
+                8
+              ]
+            },
+            {
+              "text": "6 to 8 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maintenance",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "After consolidation",
+              "range": [
+                2.5,
+                3
+              ]
+            },
+            {
+              "text": "Daily mercaptopurine, weekly methotrexate, monthly vincristine and steroid pulses; total 2.5 to 3 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Imatinib or dasatinib",
+          "cells": [
+            {
+              "text": "Philadelphia-positive ALL"
+            },
+            {
+              "text": "With chemotherapy or steroids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blinatumomab",
+          "cells": [
+            {
+              "text": "Consolidation in Ph-negative B-ALL; relapsed or refractory disease"
+            },
+            {
+              "text": "3-year survival 85% vs 68% added to chemotherapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inotuzumab ozogamicin or CAR-T",
+          "cells": [
+            {
+              "text": "Relapsed or refractory B-ALL"
+            },
+            {
+              "text": "Inotuzumab carries veno-occlusive disease risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplant",
+          "cells": [
+            {
+              "text": "High-risk, MRD-positive or relapsed disease"
+            },
+            {
+              "text": "Rarely over 65 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Platelets below 10,000/uL; Hb below 7 to 8 g/dL; neutropenic fever"
+            },
+            {
+              "text": "Transfuse; broad-spectrum antibiotics; rasburicase not in G6PD deficiency"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Over 90% of children have 5-year disease-free survival; under 50% of adults achieve long-term survival."
+    },
+    {
+      "id": "acute_lymphoid_leukemia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Conditions associated with a dry tap",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Share of dry taps"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic carcinoma infiltration",
+          "cells": [
+            {
+              "text": "17%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic myeloid leukemia",
+          "cells": [
+            {
+              "text": "15%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myelofibrosis",
+          "cells": [
+            {
+              "text": "14%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hairy cell leukemia",
+          "cells": [
+            {
+              "text": "10%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Acute leukemia",
+          "cells": [
+            {
+              "text": "10%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lymphomas, Hodgkin's disease",
+          "cells": [
+            {
+              "text": "9%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Normal marrow",
+          "cells": [
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Dry taps occur in about 4% of aspiration attempts."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_lymphoid_leukemia-dx-mgmt",
+      "title": "Diagnosis and management of acute lymphoblastic leukaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cytopenias, bone pain, nodes or blasts on blood film",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Marrow with immunophenotype, cytogenetics, molecular tests",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Lymphoblasts 20% or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider lymphoma, AML or marrow failure",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Tumour lysis prophylaxis; lumbar puncture; cardiac baseline",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Philadelphia chromosome positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Induction plus TKI",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multi-agent induction with CNS prophylaxis",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "MRD negative remission?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Consolidation then maintenance to 2.5 to 3 years",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Blinatumomab, inotuzumab or CAR-T, then allogeneic transplant",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

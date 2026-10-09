@@ -1,174 +1,443 @@
 {
- "id": "uric_acid_nephrolithiasis",
- "name": "Uric acid nephrolithiasis",
- "aliases": [
-  "uric acid stones",
-  "uric acid kidney stones",
-  "urate stones",
-  "uric acid urolithiasis"
- ],
- "class": "non_infective",
- "system": "Renal / Nephrology",
- "specialty": "Nephrology / Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Radiolucent stones that are invisible on plain radiographs but are readily seen on non-contrast CT, where they are of low density",
-   "The single most important factor is a persistently acidic urine, which favours the insoluble undissociated uric acid over soluble urate",
-   "Strongly associated with gout, the metabolic syndrome, insulin resistance, type 2 diabetes and obesity",
-   "Other contributors include a high purine intake, chronic diarrhoea with volume depletion, and states of rapid cell turnover such as tumour lysis or myeloproliferative disease",
-   "Urine microscopy may show rhomboid or rosette-shaped urate crystals in a characteristically acidic urine",
-   "Unlike most stones, established uric acid stones can often be dissolved medically rather than removed surgically",
-   "Management centres on urinary alkalinisation with potassium citrate to raise the urine pH toward neutral, a generous fluid intake, and allopurinol where hyperuricosuria persists",
-   "Reducing dietary purine and treating the underlying metabolic syndrome are important adjuncts"
+  "id": "uric_acid_nephrolithiasis",
+  "name": "Uric acid nephrolithiasis",
+  "aliases": [
+    "uric acid stones",
+    "uric acid kidney stones",
+    "urate stones",
+    "uric acid urolithiasis"
   ],
-  "pathophysiology": "Uric acid, the end product of purine metabolism, exists as a soluble ionised urate form and a relatively insoluble undissociated uric acid form, and the balance between them is governed chiefly by urine pH. Below a pH of about 5.5 the poorly soluble undissociated form predominates and precipitates. Patients with uric acid stones characteristically have an unduly acidic urine, frequently because insulin resistance impairs renal ammonium excretion, together with a low urine volume and, in some, hyperuricosuria from gout, high purine intake or rapid cell turnover. The combination of low pH, concentrated urine and increased urate delivery drives crystallisation.",
-  "additionalDifferentials": [
-   "Calcium oxalate stones",
-   "Xanthine or 2,8-dihydroxyadenine stones, which are also radiolucent",
-   "Radiolucent matrix stones",
-   "A sloughed papilla mimicking a filling defect",
-   "Urothelial tumour producing a radiolucent filling defect",
-   "Blood clot within the collecting system"
-  ],
-  "additionalInvestigations": [
-   "Non-contrast CT, noting the characteristically low density of a uric acid stone",
-   "Repeated fresh urine pH measurement, which is typically persistently acidic",
-   "24-hour urine for volume, uric acid, pH and citrate",
-   "Serum urate and a metabolic screen for diabetes and insulin resistance",
-   "Analysis of any retrieved stone",
-   "Full blood count and urate where myeloproliferative disease or tumour lysis is suspected"
-  ],
-  "redFlags": [
-   "Obstruction with superimposed infection and sepsis",
-   "Acute kidney injury from massive urate crystal deposition, as in tumour lysis syndrome",
-   "A rapidly enlarging stone burden in the context of a myeloproliferative disorder"
-  ],
-  "prognosis": "Uric acid stones respond well to urinary alkalinisation and can often be dissolved without surgery; long-term recurrence is low provided the urine pH and volume are maintained and the underlying metabolic disorder is addressed.",
-  "pitfalls": [
-   "Assuming a normal plain radiograph excludes a stone, since uric acid stones are radiolucent",
-   "Over-alkalinising the urine, which risks precipitating calcium phosphate stones",
-   "Failing to recognise and treat the underlying metabolic syndrome and insulin resistance",
-   "Introducing allopurinol during an acute gout flare without appropriate cover"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology (Feehally et al.)",
-   "Campbell-Walsh-Wein Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Alkalinise the urine with potassium citrate (or sodium bicarbonate) to shift the balance towards soluble urate, which can dissolve existing stones without surgery",
-   "Increase fluid intake to maintain a high, dilute urine output and reduce crystallisation",
-   "Lower urate production with allopurinol (a xanthine oxidase inhibitor) in patients with hyperuricosuria, gout, or high cell turnover",
-   "Advise dietary reduction of purine and animal-protein intake, weight loss, and treatment of the associated insulin resistance and metabolic syndrome",
-   "Manage acute renal colic with analgesia and medical expulsive therapy, and correct volume depletion from chronic diarrhoea",
-   "Reserve ureteroscopy, lithotripsy or percutaneous nephrolithotomy for obstructing, infected, or non-dissolving stones",
-   "Monitor with serial urine pH, 24-hour urine chemistry and stone analysis to confirm response and prevent recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "uric_acid_nephrolithiasis-pathway",
-   "title": "Uric acid nephrolithiasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Radiolucent stones that are invisible on plain radiographs but are readily seen on non-contrast CT, where they are of low density",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Obstruction with superimposed infection and sepsis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Non-contrast CT, noting the characteristically low density of a uric acid stone, Repeated fresh urine pH measurement, which is typically persistently acidic, 24-hour urine for volume, uric acid, pH and citrate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Alkalinise the urine with potassium citrate (or sodium bicarbonate) to shift the balance towards soluble urate, which can dissolve existing stones without surgery"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal plain radiograph excludes a stone, since uric acid stones are radiolucent"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of uric acid nephrolithiasis."
-  }
- ],
- "tables": [
-  {
-   "id": "uric_acid_nephrolithiasis-matrix",
-   "title": "Uric acid nephrolithiasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Radiolucent stones that are invisible on plain radiographs but are readily seen on non-contrast CT, where they are of low density",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Nephrology",
+  "specialty": "Nephrology / Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Radiolucent stones that are invisible on plain radiographs but are readily seen on non-contrast CT, where they are of low density",
+      "The single most important factor is a persistently acidic urine, which favours the insoluble undissociated uric acid over soluble urate",
+      "Strongly associated with gout, the metabolic syndrome, insulin resistance, type 2 diabetes and obesity",
+      "Other contributors include a high purine intake, chronic diarrhoea with volume depletion, and states of rapid cell turnover such as tumour lysis or myeloproliferative disease",
+      "Urine microscopy may show rhomboid or rosette-shaped urate crystals in a characteristically acidic urine",
+      "Unlike most stones, established uric acid stones can often be dissolved medically rather than removed surgically",
+      "Management centres on urinary alkalinisation with potassium citrate to raise the urine pH toward neutral, a generous fluid intake, and allopurinol where hyperuricosuria persists",
+      "Reducing dietary purine and treating the underlying metabolic syndrome are important adjuncts"
     ],
-    [
-     "Key Investigations",
-     "Non-contrast CT, noting the characteristically low density of a uric acid stone, Repeated fresh urine pH measurement, which is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Uric acid, the end product of purine metabolism, exists as a soluble ionised urate form and a relatively insoluble undissociated uric acid form, and the balance between them is governed chiefly by urine pH. Below a pH of about 5.5 the poorly soluble undissociated form predominates and precipitates. Patients with uric acid stones characteristically have an unduly acidic urine, frequently because insulin resistance impairs renal ammonium excretion, together with a low urine volume and, in some, hyperuricosuria from gout, high purine intake or rapid cell turnover. The combination of low pH, concentrated urine and increased urate delivery drives crystallisation.",
+    "additionalDifferentials": [
+      "Calcium oxalate stones",
+      "Xanthine or 2,8-dihydroxyadenine stones, which are also radiolucent",
+      "Radiolucent matrix stones",
+      "A sloughed papilla mimicking a filling defect",
+      "Urothelial tumour producing a radiolucent filling defect",
+      "Blood clot within the collecting system"
     ],
-    [
-     "Primary Differentials",
-     "Calcium oxalate stones, Xanthine or 2,8-dihydroxyadenine stones, which are also radiolucent, Radiolucent matrix stones",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Non-contrast CT, noting the characteristically low density of a uric acid stone",
+      "Repeated fresh urine pH measurement, which is typically persistently acidic",
+      "24-hour urine for volume, uric acid, pH and citrate",
+      "Serum urate and a metabolic screen for diabetes and insulin resistance",
+      "Analysis of any retrieved stone",
+      "Full blood count and urate where myeloproliferative disease or tumour lysis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Alkalinise the urine with potassium citrate (or sodium bicarbonate) to shift the balance towards soluble urate, which can",
-     "Core treatment modality"
+    "redFlags": [
+      "Obstruction with superimposed infection and sepsis",
+      "Acute kidney injury from massive urate crystal deposition, as in tumour lysis syndrome",
+      "A rapidly enlarging stone burden in the context of a myeloproliferative disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal plain radiograph excludes a stone, since uric acid stones are radiolucent",
-     "Prevent diagnostic or management error"
+    "prognosis": "Uric acid stones respond well to urinary alkalinisation and can often be dissolved without surgery; long-term recurrence is low provided the urine pH and volume are maintained and the underlying metabolic disorder is addressed.",
+    "pitfalls": [
+      "Assuming a normal plain radiograph excludes a stone, since uric acid stones are radiolucent",
+      "Over-alkalinising the urine, which risks precipitating calcium phosphate stones",
+      "Failing to recognise and treat the underlying metabolic syndrome and insulin resistance",
+      "Introducing allopurinol during an acute gout flare without appropriate cover"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology (Feehally et al.)",
+      "Campbell-Walsh-Wein Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Alkalinise the urine with potassium citrate (or sodium bicarbonate) to shift the balance towards soluble urate, which can dissolve existing stones without surgery",
+      "Increase fluid intake to maintain a high, dilute urine output and reduce crystallisation",
+      "Lower urate production with allopurinol (a xanthine oxidase inhibitor) in patients with hyperuricosuria, gout, or high cell turnover",
+      "Advise dietary reduction of purine and animal-protein intake, weight loss, and treatment of the associated insulin resistance and metabolic syndrome",
+      "Manage acute renal colic with analgesia and medical expulsive therapy, and correct volume depletion from chronic diarrhoea",
+      "Reserve ureteroscopy, lithotripsy or percutaneous nephrolithotomy for obstructing, infected, or non-dissolving stones",
+      "Monitor with serial urine pH, 24-hour urine chemistry and stone analysis to confirm response and prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for uric acid nephrolithiasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "uric-acid-nephrolithiasis-real-image",
-   "title": "Uric acid nephrolithiasis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "uric_acid_nephrolithiasis-pathway",
+      "title": "Uric acid nephrolithiasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Radiolucent stones that are invisible on plain radiographs but are readily seen on non-contrast CT, where they are of low density",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Obstruction with superimposed infection and sepsis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Non-contrast CT, noting the characteristically low density of a uric acid stone, Repeated fresh urine pH measurement, which is typically persistently acidic, 24-hour urine for volume, uric acid, pH and citrate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Alkalinise the urine with potassium citrate (or sodium bicarbonate) to shift the balance towards soluble urate, which can dissolve existing stones without surgery"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal plain radiograph excludes a stone, since uric acid stones are radiolucent"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of uric acid nephrolithiasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "uric_acid_nephrolithiasis-matrix",
+      "title": "Uric acid nephrolithiasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Radiolucent stones that are invisible on plain radiographs but are readily seen on non-contrast CT, where they are of low density",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Non-contrast CT, noting the characteristically low density of a uric acid stone, Repeated fresh urine pH measurement, which is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Calcium oxalate stones, Xanthine or 2,8-dihydroxyadenine stones, which are also radiolucent, Radiolucent matrix stones",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Alkalinise the urine with potassium citrate (or sodium bicarbonate) to shift the balance towards soluble urate, which can",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal plain radiograph excludes a stone, since uric acid stones are radiolucent",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for uric acid nephrolithiasis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "uric_acid_nephrolithiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Characteristically low-density radiolucent stone, invisible on plain radiograph"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated fresh urine pH",
+          "cells": [
+            {
+              "text": "Persistently acidic urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urine for volume, uric acid, pH and citrate",
+          "cells": [
+            {
+              "text": "Urine volume and urate and citrate excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate and metabolic screen",
+          "cells": [
+            {
+              "text": "Diabetes and insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analysis of any retrieved stone",
+          "cells": [
+            {
+              "text": "Stone composition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uric_acid_nephrolithiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium oxalate stones",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xanthine or 2,8-dihydroxyadenine stones",
+          "cells": [
+            {
+              "text": "Also radiolucent; stone analysis separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial tumour producing a filling defect",
+          "cells": [
+            {
+              "text": "Radiolucent filling defect; needs exclusion before attributing it to stone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "uric_acid_nephrolithiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary alkalinisation",
+          "cells": [
+            {
+              "text": "Potassium citrate or sodium bicarbonate, shifting urate towards its soluble form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High fluid intake",
+          "cells": [
+            {
+              "text": "High, dilute urine output to reduce crystallisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allopurinol",
+          "cells": [
+            {
+              "text": "Lowers urate production in hyperuricosuria, gout or high cell turnover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diet and weight",
+          "cells": [
+            {
+              "text": "Reduce purine and animal-protein intake; lose weight; treat insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute obstruction or infection",
+          "cells": [
+            {
+              "text": "Drainage and treatment of infected obstruction; sepsis is a red flag"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "uric_acid_nephrolithiasis-dx-mgmt",
+      "title": "Diagnosis and management of Uric acid nephrolithiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected uric acid stone: radiolucent stone with persistently acidic urine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (obstruction with infection, or urate nephropathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and sepsis management for obstruction with infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Non-contrast CT, repeated urine pH, 24-hour urine, serum urate, stone analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does stone analysis or CT confirm a uric acid stone?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider calcium oxalate stone or urothelial tumour; reassess the filling defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Alkalinise urine with potassium citrate or bicarbonate to dissolve the stone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Increase fluid intake to maintain high, dilute urine output",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Allopurinol for hyperuricosuria, gout or high cell turnover",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dietary purine reduction, weight loss and treatment of insulin resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stones can dissolve with alkalinisation; over-alkalinising risks calcium phosphate stones",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

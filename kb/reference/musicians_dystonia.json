@@ -1,168 +1,446 @@
 {
- "id": "musicians_dystonia",
- "name": "Musician's dystonia",
- "aliases": [
-  "musician's focal dystonia",
-  "task-specific dystonia in musicians"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A task-specific focal dystonia causing loss of voluntary control of highly trained movements while playing an instrument",
-   "It typically affects the hand in instrumentalists or the embouchure (mouth and facial muscles) in wind and brass players",
-   "Symptoms appear during skilled playing but not during ordinary use of the same body part",
-   "It usually develops in dedicated professional or serious amateur musicians after years of intensive practice",
-   "There is no weakness or sensory loss, and pain is characteristically absent, distinguishing it from overuse injury",
-   "Management includes retraining, technique modification and, for some, botulinum toxin, though outcomes are variable"
+  "id": "musicians_dystonia",
+  "name": "Musician's dystonia",
+  "aliases": [
+    "musician's focal dystonia",
+    "task-specific dystonia in musicians"
   ],
-  "pathophysiology": "Musician's dystonia is a task-specific dystonia attributed to maladaptive cortical plasticity from prolonged, highly repetitive skilled practice, producing blurred or overlapping cortical representations of the involved digits or muscles and reduced inhibitory control. This abnormal sensorimotor organisation disrupts the finely tuned motor programmes required for the specific musical task, so involuntary co-contraction and posturing emerge selectively during playing. A predisposition, sometimes with a family history of dystonia, interacts with intensive practice to trigger the disorder.",
-  "additionalDifferentials": [
-   "Writer's cramp and other task-specific dystonias",
-   "Overuse or repetitive strain injury",
-   "Peripheral nerve entrapment",
-   "Essential tremor affecting performance",
-   "Functional (psychogenic) movement disorder"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from task-specific loss of control during playing",
-   "Examination to exclude weakness, sensory loss and nerve entrapment",
-   "Observation or recording of the patient playing the instrument",
-   "Nerve conduction studies if entrapment is suspected",
-   "MRI of the brain only if a secondary cause is suggested"
-  ],
-  "redFlags": [
-   "Weakness, wasting or sensory loss pointing to a peripheral nerve lesion",
-   "Spread of dystonia beyond the task",
-   "Pain as a dominant feature suggesting overuse injury",
-   "Additional neurological signs suggesting generalised dystonia"
-  ],
-  "prognosis": "The disorder is often persistent and can be career-threatening for professional musicians, though technique retraining and selected treatments improve function in some; complete resolution is uncommon.",
-  "pitfalls": [
-   "Misattributing symptoms to overuse injury and delaying diagnosis",
-   "Overlooking peripheral nerve entrapment as a mimic",
-   "Failing to observe the patient actually playing",
-   "Underestimating the psychological and occupational impact"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Movement Disorders textbook (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Sensorimotor retraining and technique modification, altering fingering, instrument ergonomics and practice patterns, as the primary approach",
-   "Botulinum toxin injection into the overactive muscles in selected patients to reduce involuntary co-contraction",
-   "Trial of oral anticholinergic agents such as trihexyphenidyl in some cases, with variable benefit",
-   "Prolonged rest from the triggering task with graded reintroduction and sensory-motor retuning strategies",
-   "Reassure that there is no weakness, sensory loss or pain, and exclude nerve entrapment and overuse injury",
-   "Refer to a movement-disorder neurologist and, where available, a performing-arts medicine service, recognising outcomes are variable"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "musicians_dystonia-pathway",
-   "title": "Musician's dystonia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A task-specific focal dystonia causing loss of voluntary control of highly trained movements while playing an instrument",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Weakness, wasting or sensory loss pointing to a peripheral nerve lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from task-specific loss of control during playing, Examination to exclude weakness, sensory loss and nerve entrapment, Observation or recording of the patient playing the instrument"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Sensorimotor retraining and technique modification, altering fingering, instrument ergonomics and practice patterns, as the primary approach"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misattributing symptoms to overuse injury and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of musician's dystonia."
-  }
- ],
- "tables": [
-  {
-   "id": "musicians_dystonia-matrix",
-   "title": "Musician's dystonia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A task-specific focal dystonia causing loss of voluntary control of highly trained movements while playing an instrument",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A task-specific focal dystonia causing loss of voluntary control of highly trained movements while playing an instrument",
+      "It typically affects the hand in instrumentalists or the embouchure (mouth and facial muscles) in wind and brass players",
+      "Symptoms appear during skilled playing but not during ordinary use of the same body part",
+      "It usually develops in dedicated professional or serious amateur musicians after years of intensive practice",
+      "There is no weakness or sensory loss, and pain is characteristically absent, distinguishing it from overuse injury",
+      "Management includes retraining, technique modification and, for some, botulinum toxin, though outcomes are variable"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from task-specific loss of control during playing, Examination to exclude weakness, sensory loss and nerve",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Musician's dystonia is a task-specific dystonia attributed to maladaptive cortical plasticity from prolonged, highly repetitive skilled practice, producing blurred or overlapping cortical representations of the involved digits or muscles and reduced inhibitory control. This abnormal sensorimotor organisation disrupts the finely tuned motor programmes required for the specific musical task, so involuntary co-contraction and posturing emerge selectively during playing. A predisposition, sometimes with a family history of dystonia, interacts with intensive practice to trigger the disorder.",
+    "additionalDifferentials": [
+      "Writer's cramp and other task-specific dystonias",
+      "Overuse or repetitive strain injury",
+      "Peripheral nerve entrapment",
+      "Essential tremor affecting performance",
+      "Functional (psychogenic) movement disorder"
     ],
-    [
-     "Primary Differentials",
-     "Writer's cramp and other task-specific dystonias, Overuse or repetitive strain injury, Peripheral nerve entrapment",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from task-specific loss of control during playing",
+      "Examination to exclude weakness, sensory loss and nerve entrapment",
+      "Observation or recording of the patient playing the instrument",
+      "Nerve conduction studies if entrapment is suspected",
+      "MRI of the brain only if a secondary cause is suggested"
     ],
-    [
-     "Management Strategy",
-     "Sensorimotor retraining and technique modification, altering fingering, instrument ergonomics and practice patterns, as the",
-     "Core treatment modality"
+    "redFlags": [
+      "Weakness, wasting or sensory loss pointing to a peripheral nerve lesion",
+      "Spread of dystonia beyond the task",
+      "Pain as a dominant feature suggesting overuse injury",
+      "Additional neurological signs suggesting generalised dystonia"
     ],
-    [
-     "Clinical Pitfall",
-     "Misattributing symptoms to overuse injury and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is often persistent and can be career-threatening for professional musicians, though technique retraining and selected treatments improve function in some; complete resolution is uncommon.",
+    "pitfalls": [
+      "Misattributing symptoms to overuse injury and delaying diagnosis",
+      "Overlooking peripheral nerve entrapment as a mimic",
+      "Failing to observe the patient actually playing",
+      "Underestimating the psychological and occupational impact"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Movement Disorders textbook (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Sensorimotor retraining and technique modification, altering fingering, instrument ergonomics and practice patterns, as the primary approach",
+      "Botulinum toxin injection into the overactive muscles in selected patients to reduce involuntary co-contraction",
+      "Trial of oral anticholinergic agents such as trihexyphenidyl in some cases, with variable benefit",
+      "Prolonged rest from the triggering task with graded reintroduction and sensory-motor retuning strategies",
+      "Reassure that there is no weakness, sensory loss or pain, and exclude nerve entrapment and overuse injury",
+      "Refer to a movement-disorder neurologist and, where available, a performing-arts medicine service, recognising outcomes are variable"
     ]
-   ],
-   "caption": "Overview comparison matrix for musician's dystonia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "musicians-dystonia-real-image",
-   "title": "Musician's dystonia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "musicians_dystonia-pathway",
+      "title": "Musician's dystonia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A task-specific focal dystonia causing loss of voluntary control of highly trained movements while playing an instrument",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Weakness, wasting or sensory loss pointing to a peripheral nerve lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from task-specific loss of control during playing, Examination to exclude weakness, sensory loss and nerve entrapment, Observation or recording of the patient playing the instrument"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Sensorimotor retraining and technique modification, altering fingering, instrument ergonomics and practice patterns, as the primary approach"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misattributing symptoms to overuse injury and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of musician's dystonia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "musicians_dystonia-matrix",
+      "title": "Musician's dystonia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A task-specific focal dystonia causing loss of voluntary control of highly trained movements while playing an instrument",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from task-specific loss of control during playing, Examination to exclude weakness, sensory loss and nerve",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Writer's cramp and other task-specific dystonias, Overuse or repetitive strain injury, Peripheral nerve entrapment",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Sensorimotor retraining and technique modification, altering fingering, instrument ergonomics and practice patterns, as the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misattributing symptoms to overuse injury and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for musician's dystonia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / movement disorder literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "musicians_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from task-specific loss of control",
+          "cells": [
+            {
+              "text": "Loss of control only while playing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for weakness, sensory loss and entrapment",
+          "cells": [
+            {
+              "text": "Excludes a peripheral nerve lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation or recording of playing",
+          "cells": [
+            {
+              "text": "Shows the task-specific pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "If entrapment is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Only if a secondary cause is suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "musicians_dystonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Writer's cramp and other task-specific dystonias",
+          "cells": [
+            {
+              "text": "Also task-specific; here the trigger is skilled playing of an instrument"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overuse or repetitive strain injury",
+          "cells": [
+            {
+              "text": "Pain is characteristically absent here; dominant pain points to overuse injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral nerve entrapment",
+          "cells": [
+            {
+              "text": "Weakness, wasting or sensory loss point to a nerve lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "musicians_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sensorimotor retraining and technique modification",
+          "cells": [
+            {
+              "text": "Primary approach: fingering, instrument ergonomics and practice patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Injected into overactive muscles in selected patients to reduce co-contraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral anticholinergic agents",
+          "cells": [
+            {
+              "text": "Trihexyphenidyl in some cases, with variable benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged rest and graded return",
+          "cells": [
+            {
+              "text": "Rest from the trigger, then graded reintroduction with sensory-motor retuning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and exclusion",
+          "cells": [
+            {
+              "text": "No weakness, sensory loss or pain; exclude nerve entrapment and overuse injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Movement-disorder neurologist and performing-arts medicine service; outcomes are variable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "musicians_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Musician's dystonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Loss of control of a trained movement only while playing an instrument",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weakness or sensory loss, spread beyond the task, dominant pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for peripheral nerve lesion; refer to a movement-disorder neurologist",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine for weakness, sensory loss and entrapment; observe the patient playing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Task-specific loss of control with no weakness, sensory loss or pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider overuse injury or nerve entrapment; nerve conduction studies if suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sensorimotor retraining, technique and instrument ergonomics as first line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Botulinum toxin into overactive muscles in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trial of trihexyphenidyl in some cases, with variable benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prolonged rest from the trigger, then graded reintroduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often persistent and can be career-threatening; complete resolution is uncommon",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

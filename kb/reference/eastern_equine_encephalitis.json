@@ -1,176 +1,517 @@
 {
- "id": "eastern_equine_encephalitis",
- "name": "Eastern equine encephalitis",
- "aliases": [
-  "EEE",
-  "eastern equine encephalitis virus infection",
-  "EEEV infection",
-  "sleeping sickness (equine)"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to humans and horses via bridge-vector mosquitoes near freshwater swamps",
-   "Most infections are asymptomatic or febrile, but eastern equine encephalitis produces the most severe of the arboviral encephalitides in North America with very high mortality among those with neuroinvasive disease",
-   "Neuroinvasive illness presents with high fever, headache, vomiting, seizures, and rapidly progressive obtundation, often after a brief prodrome",
-   "Young children and older adults are at greatest risk of severe disease and neurological sequelae",
-   "Magnetic resonance imaging characteristically shows lesions in the basal ganglia and thalami, which can help differentiate it from other encephalitides",
-   "There is no specific antiviral or licensed human vaccine; management is intensive supportive and neuroprotective care with seizure and intracranial pressure control",
-   "Diagnosis rests on cerebrospinal fluid and serum serology (IgM) and, where available, molecular testing, alongside a summer mosquito-exposure history"
+  "id": "eastern_equine_encephalitis",
+  "name": "Eastern equine encephalitis",
+  "aliases": [
+    "EEE",
+    "eastern equine encephalitis virus infection",
+    "EEEV infection",
+    "sleeping sickness (equine)"
   ],
-  "pathophysiology": "Eastern equine encephalitis virus cycles between passerine birds and ornithophilic mosquitoes in freshwater swamp habitats, with bridge-vector mosquitoes transmitting to incidental hosts such as humans and horses that do not sustain transmission. After a bite, viral replication and viraemia can be followed by neuroinvasion across the blood-brain barrier. In the central nervous system the virus causes widespread neuronal infection, intense inflammation, and vasculitis, with a predilection for deep grey-matter structures, producing severe oedema and neuronal destruction that underlie the high fatality and neurological sequelae.",
-  "additionalDifferentials": [
-   "Herpes simplex virus encephalitis",
-   "West Nile virus neuroinvasive disease",
-   "Other arboviral encephalitides such as St Louis or La Crosse encephalitis",
-   "Bacterial meningoencephalitis",
-   "Autoimmune or paraneoplastic encephalitis",
-   "Acute disseminated encephalomyelitis"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus",
-   "Cerebrospinal fluid analysis typically showing pleocytosis and raised protein",
-   "Magnetic resonance imaging of the brain looking for basal ganglia and thalamic involvement",
-   "Molecular testing (RT-PCR) on cerebrospinal fluid where available, recognising limited sensitivity late in disease",
-   "Electroencephalography to characterise seizure activity and encephalopathy",
-   "Testing to exclude treatable causes, particularly herpes simplex virus"
-  ],
-  "redFlags": [
-   "Rapidly declining consciousness or coma",
-   "Status epilepticus or recurrent seizures",
-   "Signs of raised intracranial pressure",
-   "Focal neurological deficits with basal ganglia or thalamic lesions on imaging",
-   "Extremes of age with neuroinvasive disease"
-  ],
-  "prognosis": "Neuroinvasive eastern equine encephalitis carries one of the highest case-fatality rates of the arboviral encephalitides, and many survivors are left with significant long-term neurological disability.",
-  "pitfalls": [
-   "Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results",
-   "Relying on molecular testing alone, since RT-PCR sensitivity in cerebrospinal fluid is limited and serology is often required",
-   "Underestimating rapid deterioration and delaying intensive care admission",
-   "Overlooking the summer mosquito-exposure history in swampy endemic regions",
-   "Failing to recognise characteristic deep grey-matter imaging findings"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "CDC guidance on eastern equine encephalitis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection and mechanical ventilation for the obtunded patient",
-   "Control seizures with benzodiazepines acutely and loading with an antiseizure agent, treating status epilepticus aggressively",
-   "Manage raised intracranial pressure and cerebral oedema with head elevation, osmotic therapy (hypertonic saline or mannitol) and neuroprotective measures",
-   "Give empirical aciclovir until herpes simplex encephalitis is excluded, given the overlapping presentation",
-   "Maintain fluid and electrolyte balance, prevent aspiration, and treat secondary infection and other intensive care complications",
-   "Manage jointly with neurology and infectious diseases in an intensive care setting, and arrange neurorehabilitation for survivors with disability",
-   "Counsel on mosquito-bite avoidance and vector control for prevention, and notify public health authorities"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eastern_equine_encephalitis-pathway",
-   "title": "Eastern equine encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to humans and horses via bridge-vector mosquitoes near freshwater swamps",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly declining consciousness or coma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus, Cerebrospinal fluid analysis typically showing pleocytosis and raised protein, Magnetic resonance imaging of the brain looking for basal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection and mechanical ventilation for the obtunded patient"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eastern equine encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "eastern_equine_encephalitis-matrix",
-   "title": "Eastern equine encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to humans and horses via bridge-vector mosquitoes near freshwater swamps",
+      "Most infections are asymptomatic or febrile, but eastern equine encephalitis produces the most severe of the arboviral encephalitides in North America with very high mortality among those with neuroinvasive disease",
+      "Neuroinvasive illness presents with high fever, headache, vomiting, seizures, and rapidly progressive obtundation, often after a brief prodrome",
+      "Young children and older adults are at greatest risk of severe disease and neurological sequelae",
+      "Magnetic resonance imaging characteristically shows lesions in the basal ganglia and thalami, which can help differentiate it from other encephalitides",
+      "There is no specific antiviral or licensed human vaccine; management is intensive supportive and neuroprotective care with seizure and intracranial pressure control",
+      "Diagnosis rests on cerebrospinal fluid and serum serology (IgM) and, where available, molecular testing, alongside a summer mosquito-exposure history"
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus, Cerebrospinal fluid analysis typically showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Eastern equine encephalitis virus cycles between passerine birds and ornithophilic mosquitoes in freshwater swamp habitats, with bridge-vector mosquitoes transmitting to incidental hosts such as humans and horses that do not sustain transmission. After a bite, viral replication and viraemia can be followed by neuroinvasion across the blood-brain barrier. In the central nervous system the virus causes widespread neuronal infection, intense inflammation, and vasculitis, with a predilection for deep grey-matter structures, producing severe oedema and neuronal destruction that underlie the high fatality and neurological sequelae.",
+    "additionalDifferentials": [
+      "Herpes simplex virus encephalitis",
+      "West Nile virus neuroinvasive disease",
+      "Other arboviral encephalitides such as St Louis or La Crosse encephalitis",
+      "Bacterial meningoencephalitis",
+      "Autoimmune or paraneoplastic encephalitis",
+      "Acute disseminated encephalomyelitis"
     ],
-    [
-     "Primary Differentials",
-     "Herpes simplex virus encephalitis, West Nile virus neuroinvasive disease, Other arboviral encephalitides such as St Louis or La",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus",
+      "Cerebrospinal fluid analysis typically showing pleocytosis and raised protein",
+      "Magnetic resonance imaging of the brain looking for basal ganglia and thalamic involvement",
+      "Molecular testing (RT-PCR) on cerebrospinal fluid where available, recognising limited sensitivity late in disease",
+      "Electroencephalography to characterise seizure activity and encephalopathy",
+      "Testing to exclude treatable causes, particularly herpes simplex virus"
     ],
-    [
-     "Management Strategy",
-     "No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly declining consciousness or coma",
+      "Status epilepticus or recurrent seizures",
+      "Signs of raised intracranial pressure",
+      "Focal neurological deficits with basal ganglia or thalamic lesions on imaging",
+      "Extremes of age with neuroinvasive disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results",
-     "Prevent diagnostic or management error"
+    "prognosis": "Neuroinvasive eastern equine encephalitis carries one of the highest case-fatality rates of the arboviral encephalitides, and many survivors are left with significant long-term neurological disability.",
+    "pitfalls": [
+      "Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results",
+      "Relying on molecular testing alone, since RT-PCR sensitivity in cerebrospinal fluid is limited and serology is often required",
+      "Underestimating rapid deterioration and delaying intensive care admission",
+      "Overlooking the summer mosquito-exposure history in swampy endemic regions",
+      "Failing to recognise characteristic deep grey-matter imaging findings"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "CDC guidance on eastern equine encephalitis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection and mechanical ventilation for the obtunded patient",
+      "Control seizures with benzodiazepines acutely and loading with an antiseizure agent, treating status epilepticus aggressively",
+      "Manage raised intracranial pressure and cerebral oedema with head elevation, osmotic therapy (hypertonic saline or mannitol) and neuroprotective measures",
+      "Give empirical aciclovir until herpes simplex encephalitis is excluded, given the overlapping presentation",
+      "Maintain fluid and electrolyte balance, prevent aspiration, and treat secondary infection and other intensive care complications",
+      "Manage jointly with neurology and infectious diseases in an intensive care setting, and arrange neurorehabilitation for survivors with disability",
+      "Counsel on mosquito-bite avoidance and vector control for prevention, and notify public health authorities"
     ]
-   ],
-   "caption": "Overview comparison matrix for eastern equine encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eastern-equine-encephalitis-real-image",
-   "title": "Eastern equine encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "eastern_equine_encephalitis-pathway",
+      "title": "Eastern equine encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to humans and horses via bridge-vector mosquitoes near freshwater swamps",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly declining consciousness or coma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus, Cerebrospinal fluid analysis typically showing pleocytosis and raised protein, Magnetic resonance imaging of the brain looking for basal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection and mechanical ventilation for the obtunded patient"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eastern equine encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eastern_equine_encephalitis-matrix",
+      "title": "Eastern equine encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mosquito-borne alphavirus of eastern North America maintained in a bird reservoir with Culiseta mosquitoes, spilling over to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid IgM serology for eastern equine encephalitis virus, Cerebrospinal fluid analysis typically showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpes simplex virus encephalitis, West Nile virus neuroinvasive disease, Other arboviral encephalitides such as St Louis or La",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific antiviral or licensed vaccine exists; the mainstay is intensive supportive neurocritical care with airway protection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying empirical aciclovir for possible herpes simplex encephalitis while awaiting arboviral results",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eastern equine encephalitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / CDC guidance",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 221-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eastern_equine_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF IgM serology for eastern equine encephalitis virus",
+          "cells": [
+            {
+              "text": "Viral antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Pleocytosis and raised protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Basal ganglia and thalamic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF RT-PCR",
+          "cells": [
+            {
+              "text": "Limited sensitivity late in disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizure activity and encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eastern_equine_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex virus encephalitis",
+          "cells": [
+            {
+              "text": "Treatable cause that must be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "West Nile virus neuroinvasive disease",
+          "cells": [
+            {
+              "text": "Other arboviral encephalitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial meningoencephalitis",
+          "cells": [
+            {
+              "text": "Bacterial infection in CSF"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eastern_equine_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive neurocritical care",
+          "cells": [
+            {
+              "text": "Airway protection and mechanical ventilation; no specific antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure control",
+          "cells": [
+            {
+              "text": "Benzodiazepines, then loading with an antiseizure agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Head elevation and osmotic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical aciclovir",
+          "cells": [
+            {
+              "text": "Until herpes simplex encephalitis is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluids and infection care",
+          "cells": [
+            {
+              "text": "Electrolytes, aspiration prevention and secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "For survivors with disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Mosquito-bite avoidance; vector control; public health notification"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eastern_equine_encephalitis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "CDC category A, B and C bioterrorism agents",
+      "rowHeader": "Category",
+      "columns": [
+        "Agents"
+      ],
+      "rows": [
+        {
+          "parameter": "Category A",
+          "cells": [
+            {
+              "text": "Anthrax (Bacillus anthracis); botulism (Clostridium botulinum toxin); plague (Yersinia pestis); smallpox (Variola major); tularemia (Francisella tularensis); viral hemorrhagic fevers: arenaviruses (Lassa, New World: Machupo, Junin, Guanarito and Sabia), Bunyaviridae (Crimean-Congo, Rift Valley), Filoviridae (Ebola, Marburg)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Category B",
+          "cells": [
+            {
+              "text": "Brucellosis (Brucella spp.); epsilon toxin of Clostridium perfringens; food safety threats (for example Salmonella spp., Escherichia coli O157:H7, Shigella); glanders (Burkholderia mallei); melioidosis (B. pseudomallei); psittacosis (Chlamydophila psittaci); Q fever (Coxiella burnetii); ricin toxin from Ricinus communis (castor beans); staphylococcal enterotoxin B; typhus fever (Rickettsia prowazekii); viral encephalitis [alphaviruses, for example Venezuelan, eastern and western equine encephalitis]; water safety threats (for example Vibrio cholerae, Cryptosporidium parvum)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Category C",
+          "cells": [
+            {
+              "text": "Emerging infectious disease threats such as Nipah, hantavirus, SARS coronavirus and pandemic influenza"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eastern_equine_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Eastern equine encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected eastern equine encephalitis: fever with rapidly declining consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (coma, status epilepticus, raised pressure, basal ganglia lesions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intensive care with airway protection and empirical aciclovir",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IgM serology in serum and CSF; CSF analysis; MRI for basal ganglia; EEG; PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is arboviral IgM positive with deep grey-matter involvement on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider herpes simplex encephalitis, West Nile virus or bacterial meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive supportive care with airway protection and ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzodiazepines then antiseizure loading for status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Head elevation and osmotic therapy for raised intracranial pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Empirical aciclovir until herpes simplex encephalitis is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurorehabilitation for survivors and public health notification",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Very high case-fatality among arboviral encephalitides; survivors often disabled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

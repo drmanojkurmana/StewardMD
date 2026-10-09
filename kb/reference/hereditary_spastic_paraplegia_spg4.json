@@ -1,173 +1,469 @@
 {
- "id": "hereditary_spastic_paraplegia_spg4",
- "name": "Hereditary spastic paraplegia SPG4 (SPAST)",
- "aliases": [
-  "SPG4",
-  "SPAST-related hereditary spastic paraplegia",
-  "spastin-associated HSP",
-  "autosomal dominant pure HSP"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "SPG4, caused by heterozygous SPAST variants encoding spastin, is the commonest cause of autosomal dominant hereditary spastic paraplegia and typically presents as a pure phenotype",
-   "The core picture is an insidiously progressive spastic paraparesis with lower-limb hyperreflexia, extensor plantar responses, and spasticity that usually exceeds weakness",
-   "Bladder urgency and mild dorsal-column sensory changes in the feet are common, whereas the upper limbs are relatively spared",
-   "Age at onset is highly variable even within a family, ranging from early childhood to late adulthood, with earlier-onset cases sometimes progressing more slowly",
-   "A minority develop complicating features such as cognitive decline or thin corpus callosum, blurring the pure/complicated boundary",
-   "Management is symptomatic, centring on antispasticity therapy, physiotherapy, and bladder care; disease-modifying treatment is not available",
-   "Genetic confirmation and counselling are important because of dominant inheritance with incomplete penetrance and marked intrafamilial variability"
+  "id": "hereditary_spastic_paraplegia_spg4",
+  "name": "Hereditary spastic paraplegia SPG4 (SPAST)",
+  "aliases": [
+    "SPG4",
+    "SPAST-related hereditary spastic paraplegia",
+    "spastin-associated HSP",
+    "autosomal dominant pure HSP"
   ],
-  "pathophysiology": "Hereditary spastic paraplegias are a group of disorders defined by length-dependent, retrograde degeneration of the longest corticospinal tract axons, producing the characteristic lower-limb-predominant spasticity. In SPG4 the SPAST gene encodes spastin, a microtubule-severing ATPase important for axonal transport, microtubule dynamics, and endoplasmic reticulum shaping. Loss-of-function or dominant-negative variants impair these functions, and the demanding metabolic and transport requirements of very long motor axons make their distal segments preferentially vulnerable, so the fibres supplying the legs degenerate first.",
-  "additionalDifferentials": [
-   "Other genetic forms of hereditary spastic paraplegia (e.g. SPG3A, SPG7, SPG11)",
-   "Primary lateral sclerosis and other motor neurone disorders",
-   "Cervical or thoracic myelopathy from compression or structural lesion",
-   "Multiple sclerosis and other demyelinating myelopathy",
-   "Dopa-responsive dystonia mimicking spastic gait in children",
-   "Vitamin B12 deficiency or copper-deficiency myelopathy"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and whole spine to exclude structural, demyelinating, or compressive causes",
-   "Targeted or panel-based genetic testing for SPAST and other HSP genes, including dosage analysis for exonic deletions/duplications",
-   "Serum vitamin B12, copper, and very-long-chain fatty acids to exclude treatable or metabolic mimics",
-   "Nerve conduction studies and EMG to assess for a peripheral component or alternative diagnoses",
-   "Urodynamic assessment where bladder symptoms are prominent"
-  ],
-  "redFlags": [
-   "Rapid progression or prominent weakness out of keeping with a pure spastic paraparesis, suggesting an alternative diagnosis",
-   "New sensory level, back pain, or sphincter loss indicating a compressive or inflammatory myelopathy",
-   "Marked bulbar, cognitive, or upper-limb involvement pointing to a complicated or non-HSP disorder",
-   "Asymmetry or fasciculations raising concern for motor neurone disease"
-  ],
-  "prognosis": "SPG4 is slowly progressive over decades; many people remain ambulant with aids, and life expectancy is generally normal, although mobility and bladder function decline gradually and disability accrues with longer disease duration.",
-  "pitfalls": [
-   "Attributing a treatable compressive or nutritional myelopathy to HSP without imaging and bloods",
-   "Assuming a negative family history excludes SPG4 given incomplete penetrance and de novo variants",
-   "Overlooking bladder dysfunction and its impact on quality of life",
-   "Expecting a uniform onset age within a family when intrafamilial variability is wide"
-  ],
-  "references": [
-   "GeneReviews: Spastic Paraplegia 4 (SPAST)",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Symptomatic antispasticity therapy with oral baclofen or tizanidine, escalating to intrathecal baclofen for severe refractory lower-limb spasticity",
-   "Botulinum toxin injection for focal spasticity restricting gait",
-   "Regular physiotherapy, stretching and provision of orthoses and walking aids to preserve ambulation and prevent contractures",
-   "Bladder care for urgency with antimuscarinic therapy and urodynamic assessment",
-   "Surveillance for progressive gait decline, contractures and, in a minority, cognitive change or thin corpus callosum",
-   "Genetic counselling for autosomal dominant inheritance with highly variable age at onset, offering predictive testing to relatives",
-   "Multidisciplinary neurology, physiotherapy, occupational therapy and continence services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_spastic_paraplegia_spg4-pathway",
-   "title": "Hereditary spastic paraplegia SPG4 (SPAST): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "SPG4, caused by heterozygous SPAST variants encoding spastin, is the commonest cause of autosomal dominant hereditary spastic paraplegia and typically presents as a pure phenotype",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid progression or prominent weakness out of keeping with a pure spastic paraparesis, suggesting an alternative diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and whole spine to exclude structural, demyelinating, or compressive causes, Targeted or panel-based genetic testing for SPAST and other HSP genes, including dosage analysis for exonic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Symptomatic antispasticity therapy with oral baclofen or tizanidine, escalating to intrathecal baclofen for severe refractory lower-limb spasticity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a treatable compressive or nutritional myelopathy to HSP without imaging and bloods"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary spastic paraplegia spg4 (spast)."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_spastic_paraplegia_spg4-matrix",
-   "title": "Hereditary spastic paraplegia SPG4 (SPAST): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "SPG4, caused by heterozygous SPAST variants encoding spastin, is the commonest cause of autosomal dominant hereditary spastic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "SPG4, caused by heterozygous SPAST variants encoding spastin, is the commonest cause of autosomal dominant hereditary spastic paraplegia and typically presents as a pure phenotype",
+      "The core picture is an insidiously progressive spastic paraparesis with lower-limb hyperreflexia, extensor plantar responses, and spasticity that usually exceeds weakness",
+      "Bladder urgency and mild dorsal-column sensory changes in the feet are common, whereas the upper limbs are relatively spared",
+      "Age at onset is highly variable even within a family, ranging from early childhood to late adulthood, with earlier-onset cases sometimes progressing more slowly",
+      "A minority develop complicating features such as cognitive decline or thin corpus callosum, blurring the pure/complicated boundary",
+      "Management is symptomatic, centring on antispasticity therapy, physiotherapy, and bladder care; disease-modifying treatment is not available",
+      "Genetic confirmation and counselling are important because of dominant inheritance with incomplete penetrance and marked intrafamilial variability"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and whole spine to exclude structural, demyelinating, or compressive causes, Targeted or panel-based genetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary spastic paraplegias are a group of disorders defined by length-dependent, retrograde degeneration of the longest corticospinal tract axons, producing the characteristic lower-limb-predominant spasticity. In SPG4 the SPAST gene encodes spastin, a microtubule-severing ATPase important for axonal transport, microtubule dynamics, and endoplasmic reticulum shaping. Loss-of-function or dominant-negative variants impair these functions, and the demanding metabolic and transport requirements of very long motor axons make their distal segments preferentially vulnerable, so the fibres supplying the legs degenerate first.",
+    "additionalDifferentials": [
+      "Other genetic forms of hereditary spastic paraplegia (e.g. SPG3A, SPG7, SPG11)",
+      "Primary lateral sclerosis and other motor neurone disorders",
+      "Cervical or thoracic myelopathy from compression or structural lesion",
+      "Multiple sclerosis and other demyelinating myelopathy",
+      "Dopa-responsive dystonia mimicking spastic gait in children",
+      "Vitamin B12 deficiency or copper-deficiency myelopathy"
     ],
-    [
-     "Primary Differentials",
-     "Other genetic forms of hereditary spastic paraplegia (e.g. SPG3A, SPG7, SPG11), Primary lateral sclerosis and other motor neurone",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and whole spine to exclude structural, demyelinating, or compressive causes",
+      "Targeted or panel-based genetic testing for SPAST and other HSP genes, including dosage analysis for exonic deletions/duplications",
+      "Serum vitamin B12, copper, and very-long-chain fatty acids to exclude treatable or metabolic mimics",
+      "Nerve conduction studies and EMG to assess for a peripheral component or alternative diagnoses",
+      "Urodynamic assessment where bladder symptoms are prominent"
     ],
-    [
-     "Management Strategy",
-     "Symptomatic antispasticity therapy with oral baclofen or tizanidine, escalating to intrathecal baclofen for severe refractory",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid progression or prominent weakness out of keeping with a pure spastic paraparesis, suggesting an alternative diagnosis",
+      "New sensory level, back pain, or sphincter loss indicating a compressive or inflammatory myelopathy",
+      "Marked bulbar, cognitive, or upper-limb involvement pointing to a complicated or non-HSP disorder",
+      "Asymmetry or fasciculations raising concern for motor neurone disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a treatable compressive or nutritional myelopathy to HSP without imaging and bloods",
-     "Prevent diagnostic or management error"
+    "prognosis": "SPG4 is slowly progressive over decades; many people remain ambulant with aids, and life expectancy is generally normal, although mobility and bladder function decline gradually and disability accrues with longer disease duration.",
+    "pitfalls": [
+      "Attributing a treatable compressive or nutritional myelopathy to HSP without imaging and bloods",
+      "Assuming a negative family history excludes SPG4 given incomplete penetrance and de novo variants",
+      "Overlooking bladder dysfunction and its impact on quality of life",
+      "Expecting a uniform onset age within a family when intrafamilial variability is wide"
+    ],
+    "references": [
+      "GeneReviews: Spastic Paraplegia 4 (SPAST)",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Symptomatic antispasticity therapy with oral baclofen or tizanidine, escalating to intrathecal baclofen for severe refractory lower-limb spasticity",
+      "Botulinum toxin injection for focal spasticity restricting gait",
+      "Regular physiotherapy, stretching and provision of orthoses and walking aids to preserve ambulation and prevent contractures",
+      "Bladder care for urgency with antimuscarinic therapy and urodynamic assessment",
+      "Surveillance for progressive gait decline, contractures and, in a minority, cognitive change or thin corpus callosum",
+      "Genetic counselling for autosomal dominant inheritance with highly variable age at onset, offering predictive testing to relatives",
+      "Multidisciplinary neurology, physiotherapy, occupational therapy and continence services"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary spastic paraplegia spg4 (spast)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-spastic-paraplegia-spg4-real-image",
-   "title": "Hereditary spastic paraplegia SPG4 (SPAST): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hereditary_spastic_paraplegia_spg4-pathway",
+      "title": "Hereditary spastic paraplegia SPG4 (SPAST): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "SPG4, caused by heterozygous SPAST variants encoding spastin, is the commonest cause of autosomal dominant hereditary spastic paraplegia and typically presents as a pure phenotype",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid progression or prominent weakness out of keeping with a pure spastic paraparesis, suggesting an alternative diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and whole spine to exclude structural, demyelinating, or compressive causes, Targeted or panel-based genetic testing for SPAST and other HSP genes, including dosage analysis for exonic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Symptomatic antispasticity therapy with oral baclofen or tizanidine, escalating to intrathecal baclofen for severe refractory lower-limb spasticity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a treatable compressive or nutritional myelopathy to HSP without imaging and bloods"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary spastic paraplegia spg4 (spast)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg4-matrix",
+      "title": "Hereditary spastic paraplegia SPG4 (SPAST): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "SPG4, caused by heterozygous SPAST variants encoding spastin, is the commonest cause of autosomal dominant hereditary spastic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and whole spine to exclude structural, demyelinating, or compressive causes, Targeted or panel-based genetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other genetic forms of hereditary spastic paraplegia (e.g. SPG3A, SPG7, SPG11), Primary lateral sclerosis and other motor neurone",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Symptomatic antispasticity therapy with oral baclofen or tizanidine, escalating to intrathecal baclofen for severe refractory",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a treatable compressive or nutritional myelopathy to HSP without imaging and bloods",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary spastic paraplegia spg4 (spast)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg4-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of brain and whole spine",
+          "cells": [
+            {
+              "text": "Excludes structural and demyelinating causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPAST and other HSP gene testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12, copper and very-long-chain fatty acids",
+          "cells": [
+            {
+              "text": "Excludes acquired mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Peripheral component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urodynamic assessment",
+          "cells": [
+            {
+              "text": "Bladder symptoms, where prominent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg4-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary lateral sclerosis and other motor neurone disorders",
+          "cells": [
+            {
+              "text": "Asymmetry or fasciculations raise concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical or thoracic myelopathy from compression",
+          "cells": [
+            {
+              "text": "Sensory level, back pain or sphincter loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopa-responsive dystonia",
+          "cells": [
+            {
+              "text": "Mimics spastic gait in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 or copper-deficiency myelopathy",
+          "cells": [
+            {
+              "text": "Acquired myelopathy, excluded by blood testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg4-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral baclofen or tizanidine",
+          "cells": [
+            {
+              "text": "Symptomatic antispasticity therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Focal spasticity restricting gait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, stretching, orthoses and walking aids",
+          "cells": [
+            {
+              "text": "Maintains mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimuscarinic therapy for urgency",
+          "cells": [
+            {
+              "text": "With urodynamic assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Progressive gait decline and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance with highly variable expression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neurology",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and continence care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg4-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary spastic paraplegia SPG4 (SPAST)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive lower-limb spasticity with a dominant family history and pure form",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid progression, sensory level, back pain or sphincter loss, bulbar or cognitive signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent MRI for compressive myelopathy or motor neurone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spine; SPAST genetic testing; B12, copper, VLCFA; nerve studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a SPAST variant confirmed, with compressive and acquired causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SPG3A, SPG31, primary lateral sclerosis, dopa-responsive dystonia or myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral baclofen or tizanidine for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Botulinum toxin for focal spasticity restricting gait",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, stretching, orthoses and walking aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antimuscarinic therapy for urgency, with urodynamic assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms managed; gait and contracture surveillance; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

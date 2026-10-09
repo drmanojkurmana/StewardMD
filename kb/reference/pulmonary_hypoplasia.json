@@ -1,177 +1,483 @@
 {
- "id": "pulmonary_hypoplasia",
- "name": "pulmonary hypoplasia",
- "aliases": [
-  "lung hypoplasia",
-  "pulmonary hypodysplasia"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Neonatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Avery's Diseases of the Newborn",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as incomplete development of the lung with a reduced number of airway generations, alveoli and pulmonary vessels, giving an abnormally low lung weight and volume for body size.",
-   "Primary (isolated) hypoplasia is rare; the majority of cases are secondary to an identifiable intrathoracic or extrathoracic cause.",
-   "Major secondary mechanisms include thoracic space restriction (congenital diaphragmatic hernia, effusion or hydrops, masses), oligohydramnios (renal agenesis or Potter sequence, prolonged rupture of membranes), thoracic cage constraint (skeletal dysplasias, neuromuscular disease) and reduced foetal breathing movements.",
-   "Normal lung growth requires adequate amniotic fluid volume, sufficient intrathoracic space and regular foetal breathing movements, particularly during the canalicular and saccular stages.",
-   "Affected neonates typically present with respiratory distress from birth, are difficult to ventilate and are prone to air leaks such as pneumothorax.",
-   "Persistent pulmonary hypertension of the newborn frequently coexists because the pulmonary vascular bed is both reduced in number and abnormally muscularised.",
-   "Antenatal predictors of severity in congenital diaphragmatic hernia include the lung-to-head ratio and the degree of liver herniation on ultrasound and foetal MRI.",
-   "Management is supportive with lung-protective ventilation, pulmonary vasodilators and treatment of the underlying cause, with extracorporeal support reserved for selected severe cases."
+  "id": "pulmonary_hypoplasia",
+  "name": "pulmonary hypoplasia",
+  "aliases": [
+    "lung hypoplasia",
+    "pulmonary hypodysplasia"
   ],
-  "pathophysiology": "Normal lung growth depends on sufficient intrathoracic space, an appropriate volume of amniotic and intrapulmonary fluid maintaining distending pressure, and regular foetal breathing movements; interference with any of these during the critical canalicular and saccular phases arrests branching morphogenesis and alveolarisation. Space-occupying lesions and effusions compress the developing lung, oligohydramnios removes the distending fluid pressure and allows lung liquid to drain, and thoracic or neuromuscular constraint prevents the mechanical stretch that drives growth. The result is a lung with fewer bronchial divisions, fewer and simplified alveoli, and a diminished, abnormally muscularised vascular bed that predisposes to hypoxaemia and pulmonary hypertension after birth.",
-  "additionalDifferentials": [
-   "Respiratory distress syndrome from surfactant deficiency",
-   "Congenital diaphragmatic hernia (both cause and differential)",
-   "Persistent pulmonary hypertension of the newborn",
-   "Congenital pneumonia or sepsis",
-   "Meconium aspiration syndrome",
-   "Alveolar capillary dysplasia with misalignment of pulmonary veins",
-   "Congenital surfactant protein deficiencies"
-  ],
-  "additionalInvestigations": [
-   "Antenatal ultrasound with lung-to-head ratio and amniotic fluid assessment",
-   "Foetal MRI for lung volume estimation",
-   "Chest radiograph noting a small bell-shaped thorax and low lung volumes",
-   "Echocardiography to assess pulmonary hypertension and associated cardiac anomalies",
-   "Arterial blood gas and pre- and post-ductal saturation monitoring",
-   "Renal ultrasound and genetic or karyotype testing to identify the underlying cause",
-   "Post-mortem lung weight-to-body-weight ratio and radial alveolar count where applicable"
-  ],
-  "redFlags": [
-   "Severe refractory hypoxaemia and hypercapnia unresponsive to escalating support",
-   "Suprasystemic pulmonary hypertension with right ventricular failure",
-   "Recurrent or tension pneumothorax",
-   "Inability to achieve adequate ventilation despite optimal settings, suggesting severe hypoplasia"
-  ],
-  "prognosis": "Outcome depends chiefly on the severity of hypoplasia and its underlying cause: severe bilateral disease, as in Potter sequence, is frequently fatal, whereas milder secondary hypoplasia may improve with postnatal lung growth.",
-  "pitfalls": [
-   "Attributing neonatal respiratory failure solely to surfactant deficiency and missing underlying hypoplasia.",
-   "Underestimating the contribution of pulmonary hypertension to hypoxaemia.",
-   "Using aggressive ventilation that causes barotrauma in small, non-compliant lungs.",
-   "Failing to search for the underlying renal, skeletal or diaphragmatic cause once hypoplasia is recognised.",
-   "Providing over-optimistic counselling before severity has been fully assessed."
-  ],
-  "references": [
-   "Avery's Diseases of the Newborn",
-   "Nelson Textbook of Paediatrics",
-   "Fetal and Neonatal Physiology (Polin)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide gentle, lung-protective mechanical ventilation from birth to support gas exchange while minimising barotrauma and the high risk of air leak such as pneumothorax",
-   "Treat coexisting persistent pulmonary hypertension of the newborn with inhaled nitric oxide and other pulmonary vasodilators, with surfactant where indicated",
-   "Address the underlying cause, including surgical repair of congenital diaphragmatic hernia or drainage of a compressing effusion",
-   "Escalate refractory hypoxaemic respiratory failure to extracorporeal membrane oxygenation in suitable infants",
-   "Monitor pre- and post-ductal saturations and arterial blood gases, and support nutrition and fluid balance",
-   "Manage within a neonatal intensive care and paediatric surgical multidisciplinary team",
-   "Offer genetic counselling and family screening where an inherited cause such as renal agenesis or a skeletal dysplasia is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_hypoplasia-pathway",
-   "title": "pulmonary hypoplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as incomplete development of the lung with a reduced number of airway generations, alveoli and pulmonary vessels, giving an abnormally low lung weight and volume for body size.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe refractory hypoxaemia and hypercapnia unresponsive to escalating support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antenatal ultrasound with lung-to-head ratio and amniotic fluid assessment, Foetal MRI for lung volume estimation, Chest radiograph noting a small bell-shaped thorax and low lung volumes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide gentle, lung-protective mechanical ventilation from birth to support gas exchange while minimising barotrauma and the high risk of air leak such as pneumothorax"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing neonatal respiratory failure solely to surfactant deficiency and missing underlying hypoplasia."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary hypoplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_hypoplasia-matrix",
-   "title": "pulmonary hypoplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as incomplete development of the lung with a reduced number of airway generations, alveoli and pulmonary vessels, giving",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Neonatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Avery's Diseases of the Newborn",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as incomplete development of the lung with a reduced number of airway generations, alveoli and pulmonary vessels, giving an abnormally low lung weight and volume for body size.",
+      "Primary (isolated) hypoplasia is rare; the majority of cases are secondary to an identifiable intrathoracic or extrathoracic cause.",
+      "Major secondary mechanisms include thoracic space restriction (congenital diaphragmatic hernia, effusion or hydrops, masses), oligohydramnios (renal agenesis or Potter sequence, prolonged rupture of membranes), thoracic cage constraint (skeletal dysplasias, neuromuscular disease) and reduced foetal breathing movements.",
+      "Normal lung growth requires adequate amniotic fluid volume, sufficient intrathoracic space and regular foetal breathing movements, particularly during the canalicular and saccular stages.",
+      "Affected neonates typically present with respiratory distress from birth, are difficult to ventilate and are prone to air leaks such as pneumothorax.",
+      "Persistent pulmonary hypertension of the newborn frequently coexists because the pulmonary vascular bed is both reduced in number and abnormally muscularised.",
+      "Antenatal predictors of severity in congenital diaphragmatic hernia include the lung-to-head ratio and the degree of liver herniation on ultrasound and foetal MRI.",
+      "Management is supportive with lung-protective ventilation, pulmonary vasodilators and treatment of the underlying cause, with extracorporeal support reserved for selected severe cases."
     ],
-    [
-     "Key Investigations",
-     "Antenatal ultrasound with lung-to-head ratio and amniotic fluid assessment, Foetal MRI for lung volume estimation, Chest",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Normal lung growth depends on sufficient intrathoracic space, an appropriate volume of amniotic and intrapulmonary fluid maintaining distending pressure, and regular foetal breathing movements; interference with any of these during the critical canalicular and saccular phases arrests branching morphogenesis and alveolarisation. Space-occupying lesions and effusions compress the developing lung, oligohydramnios removes the distending fluid pressure and allows lung liquid to drain, and thoracic or neuromuscular constraint prevents the mechanical stretch that drives growth. The result is a lung with fewer bronchial divisions, fewer and simplified alveoli, and a diminished, abnormally muscularised vascular bed that predisposes to hypoxaemia and pulmonary hypertension after birth.",
+    "additionalDifferentials": [
+      "Respiratory distress syndrome from surfactant deficiency",
+      "Congenital diaphragmatic hernia (both cause and differential)",
+      "Persistent pulmonary hypertension of the newborn",
+      "Congenital pneumonia or sepsis",
+      "Meconium aspiration syndrome",
+      "Alveolar capillary dysplasia with misalignment of pulmonary veins",
+      "Congenital surfactant protein deficiencies"
     ],
-    [
-     "Primary Differentials",
-     "Respiratory distress syndrome from surfactant deficiency, Congenital diaphragmatic hernia (both cause and differential),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antenatal ultrasound with lung-to-head ratio and amniotic fluid assessment",
+      "Foetal MRI for lung volume estimation",
+      "Chest radiograph noting a small bell-shaped thorax and low lung volumes",
+      "Echocardiography to assess pulmonary hypertension and associated cardiac anomalies",
+      "Arterial blood gas and pre- and post-ductal saturation monitoring",
+      "Renal ultrasound and genetic or karyotype testing to identify the underlying cause",
+      "Post-mortem lung weight-to-body-weight ratio and radial alveolar count where applicable"
     ],
-    [
-     "Management Strategy",
-     "Provide gentle, lung-protective mechanical ventilation from birth to support gas exchange while minimising barotrauma and the",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe refractory hypoxaemia and hypercapnia unresponsive to escalating support",
+      "Suprasystemic pulmonary hypertension with right ventricular failure",
+      "Recurrent or tension pneumothorax",
+      "Inability to achieve adequate ventilation despite optimal settings, suggesting severe hypoplasia"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing neonatal respiratory failure solely to surfactant deficiency and missing underlying hypoplasia.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends chiefly on the severity of hypoplasia and its underlying cause: severe bilateral disease, as in Potter sequence, is frequently fatal, whereas milder secondary hypoplasia may improve with postnatal lung growth.",
+    "pitfalls": [
+      "Attributing neonatal respiratory failure solely to surfactant deficiency and missing underlying hypoplasia.",
+      "Underestimating the contribution of pulmonary hypertension to hypoxaemia.",
+      "Using aggressive ventilation that causes barotrauma in small, non-compliant lungs.",
+      "Failing to search for the underlying renal, skeletal or diaphragmatic cause once hypoplasia is recognised.",
+      "Providing over-optimistic counselling before severity has been fully assessed."
+    ],
+    "references": [
+      "Avery's Diseases of the Newborn",
+      "Nelson Textbook of Paediatrics",
+      "Fetal and Neonatal Physiology (Polin)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide gentle, lung-protective mechanical ventilation from birth to support gas exchange while minimising barotrauma and the high risk of air leak such as pneumothorax",
+      "Treat coexisting persistent pulmonary hypertension of the newborn with inhaled nitric oxide and other pulmonary vasodilators, with surfactant where indicated",
+      "Address the underlying cause, including surgical repair of congenital diaphragmatic hernia or drainage of a compressing effusion",
+      "Escalate refractory hypoxaemic respiratory failure to extracorporeal membrane oxygenation in suitable infants",
+      "Monitor pre- and post-ductal saturations and arterial blood gases, and support nutrition and fluid balance",
+      "Manage within a neonatal intensive care and paediatric surgical multidisciplinary team",
+      "Offer genetic counselling and family screening where an inherited cause such as renal agenesis or a skeletal dysplasia is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary hypoplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-hypoplasia-real-image",
-   "title": "pulmonary hypoplasia: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pulmonary_hypoplasia-pathway",
+      "title": "pulmonary hypoplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as incomplete development of the lung with a reduced number of airway generations, alveoli and pulmonary vessels, giving an abnormally low lung weight and volume for body size.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe refractory hypoxaemia and hypercapnia unresponsive to escalating support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antenatal ultrasound with lung-to-head ratio and amniotic fluid assessment, Foetal MRI for lung volume estimation, Chest radiograph noting a small bell-shaped thorax and low lung volumes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide gentle, lung-protective mechanical ventilation from birth to support gas exchange while minimising barotrauma and the high risk of air leak such as pneumothorax"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing neonatal respiratory failure solely to surfactant deficiency and missing underlying hypoplasia."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary hypoplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_hypoplasia-matrix",
+      "title": "pulmonary hypoplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as incomplete development of the lung with a reduced number of airway generations, alveoli and pulmonary vessels, giving",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antenatal ultrasound with lung-to-head ratio and amniotic fluid assessment, Foetal MRI for lung volume estimation, Chest",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Respiratory distress syndrome from surfactant deficiency, Congenital diaphragmatic hernia (both cause and differential),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide gentle, lung-protective mechanical ventilation from birth to support gas exchange while minimising barotrauma and the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing neonatal respiratory failure solely to surfactant deficiency and missing underlying hypoplasia.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary hypoplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Avery's Diseases of the Newborn",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pulmonary_hypoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal ultrasound with lung-to-head ratio",
+          "cells": [
+            {
+              "text": "Lung size and fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foetal MRI",
+          "cells": [
+            {
+              "text": "Lung volume"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Small bell-shaped thorax and low lung volumes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension and cardiac anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABG and pre- and post-ductal saturations",
+          "cells": [
+            {
+              "text": "Oxygenation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and genetic or karyotype testing",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_hypoplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory distress syndrome",
+          "cells": [
+            {
+              "text": "Surfactant deficiency"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital diaphragmatic hernia",
+          "cells": [
+            {
+              "text": "Diaphragmatic hernia"
+            },
+            {
+              "text": "Antenatal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent pulmonary hypertension of the newborn",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension of the newborn"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pulmonary_hypoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ventilation",
+          "cells": [
+            {
+              "text": "Gentle, lung-protective mechanical ventilation from birth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled nitric oxide",
+          "cells": [
+            {
+              "text": "For coexisting persistent pulmonary hypertension of the newborn"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cause",
+          "cells": [
+            {
+              "text": "Surgical repair of congenital diaphragmatic hernia and treatment of the underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECMO",
+          "cells": [
+            {
+              "text": "For refractory hypoxaemic respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Pre- and post-ductal saturations, arterial blood gases and nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Neonatal intensive care and paediatric surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Counselling and family screening where an inherited cause is found"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pulmonary_hypoplasia-dx-mgmt",
+      "title": "Diagnosis and management of pulmonary hypoplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pulmonary hypoplasia: small lungs with low volumes at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Refractory hypoxaemia, suprasystemic PH with RV failure, or tension pneumothorax?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: ECMO for refractory hypoxaemic respiratory failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antenatal ultrasound and MRI for lung volume; CXR; echo; ABG; genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are low lung volumes on imaging, with other causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider RDS, diaphragmatic hernia or PPHN; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gentle lung-protective ventilation from birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Inhaled nitric oxide for coexisting PPHN",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical repair of diaphragmatic hernia where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate refractory hypoxaemia to ECMO",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neonatal intensive care and paediatric surgical team; counselling for inherited causes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

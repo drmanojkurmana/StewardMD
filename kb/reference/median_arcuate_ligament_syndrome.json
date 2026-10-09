@@ -1,174 +1,461 @@
 {
- "id": "median_arcuate_ligament_syndrome",
- "name": "Median arcuate ligament syndrome (Dunbar)",
- "aliases": [
-  "MALS",
-  "Dunbar syndrome",
-  "coeliac artery compression syndrome",
-  "coeliac axis compression syndrome"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically presents with postprandial epigastric pain, food-fear-related weight loss, and sometimes an epigastric bruit that varies with respiration",
-   "Caused by extrinsic compression of the coeliac axis (and often its neural plexus) by a low-lying median arcuate ligament",
-   "Compression is typically worse in expiration, when the coeliac artery is drawn upward against the ligament",
-   "It is a diagnosis of exclusion, requiring careful evaluation for other causes of chronic abdominal pain",
-   "Duplex ultrasound with respiratory manoeuvres shows increased coeliac artery velocities that worsen on expiration",
-   "Cross-sectional angiography demonstrates the characteristic focal hooked narrowing of the proximal coeliac artery",
-   "Definitive treatment is ligament release (often laparoscopic or robotic) to decompress the artery and coeliac plexus"
+  "id": "median_arcuate_ligament_syndrome",
+  "name": "Median arcuate ligament syndrome (Dunbar)",
+  "aliases": [
+    "MALS",
+    "Dunbar syndrome",
+    "coeliac artery compression syndrome",
+    "coeliac axis compression syndrome"
   ],
-  "pathophysiology": "In median arcuate ligament syndrome, a low-lying or hypertrophied median arcuate ligament (the fibrous arch connecting the diaphragmatic crura) compresses the proximal coeliac artery and the surrounding coeliac neural plexus. The compression is dynamic, tightening during expiration as the artery rides upward. Symptoms are attributed both to a degree of foregut ischaemia or flow limitation and, importantly, to irritation of the compressed coeliac plexus, which may explain the disproportionate, meal-related pain despite generally rich collateral mesenteric circulation.",
-  "additionalDifferentials": [
-   "Chronic mesenteric ischaemia from atherosclerotic disease",
-   "Peptic ulcer disease",
-   "Chronic pancreatitis",
-   "Biliary colic or gallbladder disease",
-   "Functional dyspepsia or other functional gut-brain disorders",
-   "Superior mesenteric artery syndrome"
-  ],
-  "additionalInvestigations": [
-   "Mesenteric duplex ultrasound with inspiratory and expiratory measurements of coeliac velocities",
-   "CT or MR angiography to show the hooked coeliac stenosis and exclude other pathology",
-   "Upper endoscopy to exclude peptic disease",
-   "Cross-sectional abdominal imaging to evaluate pancreas and biliary tree",
-   "Coeliac plexus block as a diagnostic and prognostic manoeuvre in selected patients"
-  ],
-  "redFlags": [
-   "Weight loss and food avoidance raising concern for malignancy or true mesenteric ischaemia",
-   "Acute severe abdominal pain suggesting an alternative vascular emergency",
-   "Persistent symptoms after other causes have been excluded",
-   "Signs of gastrointestinal bleeding pointing to another diagnosis"
-  ],
-  "prognosis": "Outcomes after ligament release are variable but often favourable in carefully selected patients, particularly younger patients with classic postprandial pain and confirmed dynamic compression; symptom persistence can occur when the diagnosis is misapplied.",
-  "pitfalls": [
-   "Diagnosing MALS from an incidental coeliac indentation on imaging in an asymptomatic patient",
-   "Failing to perform respiratory-phase imaging to demonstrate dynamic compression",
-   "Overlooking other treatable causes of chronic abdominal pain before intervention",
-   "Attributing all postoperative symptom relief to arterial rather than neural decompression"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Rutherford's Vascular Surgery and Endovascular Therapy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the diagnosis by excluding other causes of chronic abdominal pain before intervention, as it is a diagnosis of exclusion",
-   "Surgical division (release) of the median arcuate ligament to decompress the coeliac axis, by laparoscopic, robotic or open approach, as the definitive treatment",
-   "Coeliac plexus neurolysis or ganglionectomy at the time of release to address the neurogenic component of the pain",
-   "Coeliac artery revascularisation with angioplasty and stenting or bypass grafting where a fixed residual stenosis persists after ligament release",
-   "Nutritional support and dietary optimisation to reverse food-fear-related weight loss",
-   "Coeliac plexus block as a diagnostic and prognostic step and for symptomatic relief in selected patients",
-   "Manage through a multidisciplinary vascular surgery, gastroenterology and pain team, reserving surgery for carefully selected patients",
-   "Postoperative duplex surveillance of coeliac flow with monitoring for symptom recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "median_arcuate_ligament_syndrome-pathway",
-   "title": "Median arcuate ligament syndrome (Dunbar): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically presents with postprandial epigastric pain, food-fear-related weight loss, and sometimes an epigastric bruit that varies with respiration",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Weight loss and food avoidance raising concern for malignancy or true mesenteric ischaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Mesenteric duplex ultrasound with inspiratory and expiratory measurements of coeliac velocities, CT or MR angiography to show the hooked coeliac stenosis and exclude other pathology, Upper endoscopy to exclude peptic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the diagnosis by excluding other causes of chronic abdominal pain before intervention, as it is a diagnosis of exclusion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing MALS from an incidental coeliac indentation on imaging in an asymptomatic patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of median arcuate ligament syndrome (dunbar)."
-  }
- ],
- "tables": [
-  {
-   "id": "median_arcuate_ligament_syndrome-matrix",
-   "title": "Median arcuate ligament syndrome (Dunbar): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically presents with postprandial epigastric pain, food-fear-related weight loss, and sometimes an epigastric bruit that",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically presents with postprandial epigastric pain, food-fear-related weight loss, and sometimes an epigastric bruit that varies with respiration",
+      "Caused by extrinsic compression of the coeliac axis (and often its neural plexus) by a low-lying median arcuate ligament",
+      "Compression is typically worse in expiration, when the coeliac artery is drawn upward against the ligament",
+      "It is a diagnosis of exclusion, requiring careful evaluation for other causes of chronic abdominal pain",
+      "Duplex ultrasound with respiratory manoeuvres shows increased coeliac artery velocities that worsen on expiration",
+      "Cross-sectional angiography demonstrates the characteristic focal hooked narrowing of the proximal coeliac artery",
+      "Definitive treatment is ligament release (often laparoscopic or robotic) to decompress the artery and coeliac plexus"
     ],
-    [
-     "Key Investigations",
-     "Mesenteric duplex ultrasound with inspiratory and expiratory measurements of coeliac velocities, CT or MR angiography to show the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In median arcuate ligament syndrome, a low-lying or hypertrophied median arcuate ligament (the fibrous arch connecting the diaphragmatic crura) compresses the proximal coeliac artery and the surrounding coeliac neural plexus. The compression is dynamic, tightening during expiration as the artery rides upward. Symptoms are attributed both to a degree of foregut ischaemia or flow limitation and, importantly, to irritation of the compressed coeliac plexus, which may explain the disproportionate, meal-related pain despite generally rich collateral mesenteric circulation.",
+    "additionalDifferentials": [
+      "Chronic mesenteric ischaemia from atherosclerotic disease",
+      "Peptic ulcer disease",
+      "Chronic pancreatitis",
+      "Biliary colic or gallbladder disease",
+      "Functional dyspepsia or other functional gut-brain disorders",
+      "Superior mesenteric artery syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Chronic mesenteric ischaemia from atherosclerotic disease, Peptic ulcer disease, Chronic pancreatitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Mesenteric duplex ultrasound with inspiratory and expiratory measurements of coeliac velocities",
+      "CT or MR angiography to show the hooked coeliac stenosis and exclude other pathology",
+      "Upper endoscopy to exclude peptic disease",
+      "Cross-sectional abdominal imaging to evaluate pancreas and biliary tree",
+      "Coeliac plexus block as a diagnostic and prognostic manoeuvre in selected patients"
     ],
-    [
-     "Management Strategy",
-     "Confirm the diagnosis by excluding other causes of chronic abdominal pain before intervention, as it is a diagnosis of exclusion",
-     "Core treatment modality"
+    "redFlags": [
+      "Weight loss and food avoidance raising concern for malignancy or true mesenteric ischaemia",
+      "Acute severe abdominal pain suggesting an alternative vascular emergency",
+      "Persistent symptoms after other causes have been excluded",
+      "Signs of gastrointestinal bleeding pointing to another diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing MALS from an incidental coeliac indentation on imaging in an asymptomatic patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes after ligament release are variable but often favourable in carefully selected patients, particularly younger patients with classic postprandial pain and confirmed dynamic compression; symptom persistence can occur when the diagnosis is misapplied.",
+    "pitfalls": [
+      "Diagnosing MALS from an incidental coeliac indentation on imaging in an asymptomatic patient",
+      "Failing to perform respiratory-phase imaging to demonstrate dynamic compression",
+      "Overlooking other treatable causes of chronic abdominal pain before intervention",
+      "Attributing all postoperative symptom relief to arterial rather than neural decompression"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Rutherford's Vascular Surgery and Endovascular Therapy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the diagnosis by excluding other causes of chronic abdominal pain before intervention, as it is a diagnosis of exclusion",
+      "Surgical division (release) of the median arcuate ligament to decompress the coeliac axis, by laparoscopic, robotic or open approach, as the definitive treatment",
+      "Coeliac plexus neurolysis or ganglionectomy at the time of release to address the neurogenic component of the pain",
+      "Coeliac artery revascularisation with angioplasty and stenting or bypass grafting where a fixed residual stenosis persists after ligament release",
+      "Nutritional support and dietary optimisation to reverse food-fear-related weight loss",
+      "Coeliac plexus block as a diagnostic and prognostic step and for symptomatic relief in selected patients",
+      "Manage through a multidisciplinary vascular surgery, gastroenterology and pain team, reserving surgery for carefully selected patients",
+      "Postoperative duplex surveillance of coeliac flow with monitoring for symptom recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for median arcuate ligament syndrome (dunbar)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "median-arcuate-ligament-syndrome-real-image",
-   "title": "Median arcuate ligament syndrome (Dunbar): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "median_arcuate_ligament_syndrome-pathway",
+      "title": "Median arcuate ligament syndrome (Dunbar): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically presents with postprandial epigastric pain, food-fear-related weight loss, and sometimes an epigastric bruit that varies with respiration",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Weight loss and food avoidance raising concern for malignancy or true mesenteric ischaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Mesenteric duplex ultrasound with inspiratory and expiratory measurements of coeliac velocities, CT or MR angiography to show the hooked coeliac stenosis and exclude other pathology, Upper endoscopy to exclude peptic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the diagnosis by excluding other causes of chronic abdominal pain before intervention, as it is a diagnosis of exclusion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing MALS from an incidental coeliac indentation on imaging in an asymptomatic patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of median arcuate ligament syndrome (dunbar)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "median_arcuate_ligament_syndrome-matrix",
+      "title": "Median arcuate ligament syndrome (Dunbar): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically presents with postprandial epigastric pain, food-fear-related weight loss, and sometimes an epigastric bruit that",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Mesenteric duplex ultrasound with inspiratory and expiratory measurements of coeliac velocities, CT or MR angiography to show the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic mesenteric ischaemia from atherosclerotic disease, Peptic ulcer disease, Chronic pancreatitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the diagnosis by excluding other causes of chronic abdominal pain before intervention, as it is a diagnosis of exclusion",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing MALS from an incidental coeliac indentation on imaging in an asymptomatic patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for median arcuate ligament syndrome (dunbar)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "median_arcuate_ligament_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mesenteric duplex with inspiratory and expiratory coeliac velocities",
+          "cells": [
+            {
+              "text": "Coeliac velocities, inspiratory and expiratory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Hooked coeliac stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Peptic disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of the pancreas and biliary tree",
+          "cells": [
+            {
+              "text": "Pancreas and biliary tree"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac plexus block",
+          "cells": [
+            {
+              "text": "Diagnostic and prognostic response, in selected patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "median_arcuate_ligament_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Pancreas assessed on cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary colic or gallbladder disease",
+          "cells": [
+            {
+              "text": "Biliary tree assessed on cross-sectional imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "median_arcuate_ligament_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exclude other causes first",
+          "cells": [
+            {
+              "text": "Diagnosis of exclusion, made before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical release of the median arcuate ligament",
+          "cells": [
+            {
+              "text": "Laparoscopic, robotic or open; definitive treatment decompressing the coeliac axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac plexus neurolysis or ganglionectomy",
+          "cells": [
+            {
+              "text": "At release, for the neurogenic component of pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac artery revascularisation",
+          "cells": [
+            {
+              "text": "Angioplasty and stenting or bypass for a fixed residual stenosis after release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Reverses food-fear-related weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac plexus block",
+          "cells": [
+            {
+              "text": "Diagnostic, prognostic and symptomatic relief in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Vascular surgery, gastroenterology and pain team; surgery reserved for selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative duplex surveillance",
+          "cells": [
+            {
+              "text": "Coeliac flow and recurrence of symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "median_arcuate_ligament_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Median arcuate ligament syndrome (Dunbar)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Food avoidance, weight loss and chronic abdominal pain; suspected MALS",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Features of malignancy, true mesenteric ischaemia or GI bleeding present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for mesenteric ischaemia, malignancy or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mesenteric duplex (inspiratory and expiratory coeliac velocities); CT or MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a hooked coeliac stenosis confirmed on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic mesenteric ischaemia, peptic ulcer or pancreatitis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude other causes of chronic abdominal pain before intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical release of the median arcuate ligament as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Coeliac plexus neurolysis at release for the neurogenic pain component",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Revascularisation for a fixed residual coeliac stenosis after release",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Nutritional support; postoperative duplex surveillance for recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

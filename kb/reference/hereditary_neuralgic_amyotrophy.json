@@ -1,174 +1,470 @@
 {
- "id": "hereditary_neuralgic_amyotrophy",
- "name": "Hereditary neuralgic amyotrophy (SEPT9)",
- "aliases": [
-  "HNA",
-  "familial brachial plexus neuropathy",
-  "hereditary brachial plexus neuropathy",
-  "SEPT9-related neuralgic amyotrophy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Neuropsychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant disorder causing recurrent attacks of painful brachial plexus neuropathy, the inherited counterpart of idiopathic Parsonage-Turner syndrome",
-   "Caused by mutations in the SEPT9 gene on chromosome 17q, with variable penetrance within families",
-   "Attacks feature acute severe shoulder-girdle pain followed by patchy weakness and wasting, often recurring over a lifetime",
-   "Onset is frequently earlier than the idiopathic form, sometimes in childhood or early adulthood",
-   "Episodes are often precipitated by triggers such as infection, immunisation, pregnancy or the puerperium, exertion, or surgery",
-   "Some patients show subtle dysmorphic features such as hypotelorism, epicanthal folds, or a cleft palate, and attacks may affect nerves beyond the brachial plexus",
-   "Management mirrors neuralgic amyotrophy, with analgesia and physiotherapy, corticosteroids or immunotherapy in selected attacks, and genetic counselling"
+  "id": "hereditary_neuralgic_amyotrophy",
+  "name": "Hereditary neuralgic amyotrophy (SEPT9)",
+  "aliases": [
+    "HNA",
+    "familial brachial plexus neuropathy",
+    "hereditary brachial plexus neuropathy",
+    "SEPT9-related neuralgic amyotrophy"
   ],
-  "pathophysiology": "Hereditary neuralgic amyotrophy is caused by autosomal dominant mutations (or duplications) affecting the SEPT9 gene, which encodes a septin protein involved in cytoskeletal organisation, cell division, and axonal structure. The resulting susceptibility renders peripheral nerves, particularly those of the brachial plexus, vulnerable to recurrent immune-mediated inflammatory attacks, frequently unmasked by environmental or physiological triggers. As in the idiopathic form, episodes involve multifocal inflammation and axonal damage of individual nerve fascicles, producing the characteristic pattern of severe early pain followed by patchy weakness and atrophy. The genetic predisposition explains the recurrent, familial, and sometimes early-onset nature of the attacks, and the associated dysmorphic features reflect the developmental role of the septin protein.",
-  "additionalDifferentials": [
-   "Idiopathic neuralgic amyotrophy (Parsonage-Turner syndrome)",
-   "Hereditary neuropathy with liability to pressure palsies (PMP22)",
-   "Cervical radiculopathy",
-   "Compressive or neoplastic brachial plexopathy",
-   "Chronic inflammatory demyelinating polyneuropathy",
-   "Vasculitic mononeuritis multiplex"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for SEPT9 mutations",
-   "Electromyography and nerve conduction studies documenting patchy axonal plexopathy",
-   "MRI of the brachial plexus and affected muscles showing inflammation and denervation",
-   "Detailed family history and pedigree assessment",
-   "Bloods to exclude alternative inflammatory or infective causes during an attack",
-   "MRI cervical spine to exclude structural radiculopathy"
-  ],
-  "redFlags": [
-   "Frequent recurrent attacks causing cumulative disability",
-   "Phrenic nerve involvement with respiratory compromise",
-   "Onset in childhood raising the need for genetic counselling",
-   "Progressive weakness between attacks suggesting an alternative diagnosis"
-  ],
-  "prognosis": "Individual attacks generally recover over months, similar to the idiopathic form, but the recurrent nature can lead to cumulative weakness and disability over time; genetic counselling is important given autosomal dominant inheritance.",
-  "pitfalls": [
-   "Failing to recognise a familial pattern and missing the hereditary diagnosis",
-   "Not offering genetic testing and counselling to at-risk relatives",
-   "Attributing recurrent episodes to a compressive or musculoskeletal cause",
-   "Overlooking associated dysmorphic features that support the diagnosis",
-   "Assuming immunotherapy prevents future genetically driven attacks"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the acute attack with early aggressive analgesia for severe neuropathic pain, combining opioids with adjuncts such as gabapentinoids or amitriptyline",
-   "Consider a short early course of oral corticosteroids during an acute attack, which may shorten the pain phase and hasten recovery",
-   "Provide physiotherapy and occupational therapy for shoulder-girdle weakness, focusing on scapular stabilisation and prevention of contracture during the recovery phase",
-   "Counsel on trigger avoidance and heightened vigilance around infection, immunisation, strenuous exertion, surgery and the pregnancy or puerperal period",
-   "Monitor for cumulative weakness and residual deficits after recurrent attacks, considering nerve or tendon reconstructive surgery for persistent functional loss",
-   "Offer genetic counselling for autosomal dominant SEPT9 inheritance with assessment of at-risk family members"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_neuralgic_amyotrophy-pathway",
-   "title": "Hereditary neuralgic amyotrophy (SEPT9): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant disorder causing recurrent attacks of painful brachial plexus neuropathy, the inherited counterpart of idiopathic Parsonage-Turner syndrome",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Frequent recurrent attacks causing cumulative disability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for SEPT9 mutations, Electromyography and nerve conduction studies documenting patchy axonal plexopathy, MRI of the brachial plexus and affected muscles showing inflammation and denervation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the acute attack with early aggressive analgesia for severe neuropathic pain, combining opioids with adjuncts such as gabapentinoids or amitriptyline"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise a familial pattern and missing the hereditary diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary neuralgic amyotrophy (sept9)."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_neuralgic_amyotrophy-matrix",
-   "title": "Hereditary neuralgic amyotrophy (SEPT9): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant disorder causing recurrent attacks of painful brachial plexus neuropathy, the inherited counterpart of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Neuropsychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant disorder causing recurrent attacks of painful brachial plexus neuropathy, the inherited counterpart of idiopathic Parsonage-Turner syndrome",
+      "Caused by mutations in the SEPT9 gene on chromosome 17q, with variable penetrance within families",
+      "Attacks feature acute severe shoulder-girdle pain followed by patchy weakness and wasting, often recurring over a lifetime",
+      "Onset is frequently earlier than the idiopathic form, sometimes in childhood or early adulthood",
+      "Episodes are often precipitated by triggers such as infection, immunisation, pregnancy or the puerperium, exertion, or surgery",
+      "Some patients show subtle dysmorphic features such as hypotelorism, epicanthal folds, or a cleft palate, and attacks may affect nerves beyond the brachial plexus",
+      "Management mirrors neuralgic amyotrophy, with analgesia and physiotherapy, corticosteroids or immunotherapy in selected attacks, and genetic counselling"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for SEPT9 mutations, Electromyography and nerve conduction studies documenting patchy axonal plexopathy, MRI of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary neuralgic amyotrophy is caused by autosomal dominant mutations (or duplications) affecting the SEPT9 gene, which encodes a septin protein involved in cytoskeletal organisation, cell division, and axonal structure. The resulting susceptibility renders peripheral nerves, particularly those of the brachial plexus, vulnerable to recurrent immune-mediated inflammatory attacks, frequently unmasked by environmental or physiological triggers. As in the idiopathic form, episodes involve multifocal inflammation and axonal damage of individual nerve fascicles, producing the characteristic pattern of severe early pain followed by patchy weakness and atrophy. The genetic predisposition explains the recurrent, familial, and sometimes early-onset nature of the attacks, and the associated dysmorphic features reflect the developmental role of the septin protein.",
+    "additionalDifferentials": [
+      "Idiopathic neuralgic amyotrophy (Parsonage-Turner syndrome)",
+      "Hereditary neuropathy with liability to pressure palsies (PMP22)",
+      "Cervical radiculopathy",
+      "Compressive or neoplastic brachial plexopathy",
+      "Chronic inflammatory demyelinating polyneuropathy",
+      "Vasculitic mononeuritis multiplex"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic neuralgic amyotrophy (Parsonage-Turner syndrome), Hereditary neuropathy with liability to pressure palsies (PMP22),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for SEPT9 mutations",
+      "Electromyography and nerve conduction studies documenting patchy axonal plexopathy",
+      "MRI of the brachial plexus and affected muscles showing inflammation and denervation",
+      "Detailed family history and pedigree assessment",
+      "Bloods to exclude alternative inflammatory or infective causes during an attack",
+      "MRI cervical spine to exclude structural radiculopathy"
     ],
-    [
-     "Management Strategy",
-     "Treat the acute attack with early aggressive analgesia for severe neuropathic pain, combining opioids with adjuncts such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Frequent recurrent attacks causing cumulative disability",
+      "Phrenic nerve involvement with respiratory compromise",
+      "Onset in childhood raising the need for genetic counselling",
+      "Progressive weakness between attacks suggesting an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise a familial pattern and missing the hereditary diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Individual attacks generally recover over months, similar to the idiopathic form, but the recurrent nature can lead to cumulative weakness and disability over time; genetic counselling is important given autosomal dominant inheritance.",
+    "pitfalls": [
+      "Failing to recognise a familial pattern and missing the hereditary diagnosis",
+      "Not offering genetic testing and counselling to at-risk relatives",
+      "Attributing recurrent episodes to a compressive or musculoskeletal cause",
+      "Overlooking associated dysmorphic features that support the diagnosis",
+      "Assuming immunotherapy prevents future genetically driven attacks"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the acute attack with early aggressive analgesia for severe neuropathic pain, combining opioids with adjuncts such as gabapentinoids or amitriptyline",
+      "Consider a short early course of oral corticosteroids during an acute attack, which may shorten the pain phase and hasten recovery",
+      "Provide physiotherapy and occupational therapy for shoulder-girdle weakness, focusing on scapular stabilisation and prevention of contracture during the recovery phase",
+      "Counsel on trigger avoidance and heightened vigilance around infection, immunisation, strenuous exertion, surgery and the pregnancy or puerperal period",
+      "Monitor for cumulative weakness and residual deficits after recurrent attacks, considering nerve or tendon reconstructive surgery for persistent functional loss",
+      "Offer genetic counselling for autosomal dominant SEPT9 inheritance with assessment of at-risk family members"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary neuralgic amyotrophy (sept9)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-neuralgic-amyotrophy-real-image",
-   "title": "Hereditary neuralgic amyotrophy (SEPT9): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hereditary_neuralgic_amyotrophy-pathway",
+      "title": "Hereditary neuralgic amyotrophy (SEPT9): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant disorder causing recurrent attacks of painful brachial plexus neuropathy, the inherited counterpart of idiopathic Parsonage-Turner syndrome",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Frequent recurrent attacks causing cumulative disability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for SEPT9 mutations, Electromyography and nerve conduction studies documenting patchy axonal plexopathy, MRI of the brachial plexus and affected muscles showing inflammation and denervation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the acute attack with early aggressive analgesia for severe neuropathic pain, combining opioids with adjuncts such as gabapentinoids or amitriptyline"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise a familial pattern and missing the hereditary diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary neuralgic amyotrophy (sept9)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_neuralgic_amyotrophy-matrix",
+      "title": "Hereditary neuralgic amyotrophy (SEPT9): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant disorder causing recurrent attacks of painful brachial plexus neuropathy, the inherited counterpart of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for SEPT9 mutations, Electromyography and nerve conduction studies documenting patchy axonal plexopathy, MRI of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic neuralgic amyotrophy (Parsonage-Turner syndrome), Hereditary neuropathy with liability to pressure palsies (PMP22),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the acute attack with early aggressive analgesia for severe neuropathic pain, combining opioids with adjuncts such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise a familial pattern and missing the hereditary diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary neuralgic amyotrophy (sept9)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_neuralgic_amyotrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SEPT9 genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Patchy axonal plexopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brachial plexus and affected muscles",
+          "cells": [
+            {
+              "text": "Inflammation and denervation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed family history and pedigree",
+          "cells": [
+            {
+              "text": "Autosomal dominant pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods during an attack",
+          "cells": [
+            {
+              "text": "Excludes alternative inflammatory or infective causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the cervical spine",
+          "cells": [
+            {
+              "text": "Excludes structural radiculopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_neuralgic_amyotrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic neuralgic amyotrophy (Parsonage-Turner syndrome)",
+          "cells": [
+            {
+              "text": "Hereditary form is often earlier in onset, sometimes in childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical radiculopathy",
+          "cells": [
+            {
+              "text": "Excluded by MRI of the cervical spine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary neuropathy with liability to pressure palsies",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compressive or neoplastic brachial plexopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_neuralgic_amyotrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early aggressive analgesia",
+          "cells": [
+            {
+              "text": "Severe neuropathic pain during an acute attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short early course of oral corticosteroids",
+          "cells": [
+            {
+              "text": "During an acute attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Shoulder-girdle weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Infection, immunisation and pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Cumulative weakness and residual deficits after recurrent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant SEPT9 inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_neuralgic_amyotrophy-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary neuralgic amyotrophy (SEPT9)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden severe shoulder-girdle pain, then patchy arm weakness and wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Frequent attacks with cumulative disability, phrenic involvement or progressive weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: respiratory assessment for phrenic nerve involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SEPT9 testing; EMG and nerve conduction; MRI of brachial plexus and cervical spine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a SEPT9 variant confirmed, with structural radiculopathy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic neuralgic amyotrophy or another plexopathy or neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early aggressive analgesia for severe neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short early course of oral corticosteroids during an acute attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for shoulder-girdle weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trigger avoidance: infection, immunisation and pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks managed with analgesia and rehabilitation; residual deficit monitored",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

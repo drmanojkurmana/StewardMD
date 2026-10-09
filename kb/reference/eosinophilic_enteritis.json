@@ -1,176 +1,483 @@
 {
- "id": "eosinophilic_enteritis",
- "name": "Eosinophilic enteritis",
- "aliases": [
-  "Eosinophilic enteropathy",
-  "Eosinophilic gastroenteritis (small-bowel)"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Eosinophilic infiltration of the small bowel, part of the eosinophilic gastrointestinal disorders and frequently overlapping with gastric involvement as eosinophilic gastroenteritis.",
-   "The Klein depth classification applies: mucosal disease causes malabsorption, diarrhoea, protein-losing enteropathy and iron deficiency; muscular disease causes obstruction; serosal disease causes eosinophilic ascites.",
-   "Malabsorption and weight loss are prominent with mucosal involvement.",
-   "Peripheral eosinophilia is common and atopy is frequent.",
-   "Diagnosis rests on small-bowel biopsies (which may need enteroscopy or capsule endoscopy) showing excess eosinophils after excluding secondary causes.",
-   "Parasitic infection such as Strongyloides, Anisakis or hookworm is a key mimic and must be excluded.",
-   "Corticosteroids are the mainstay, with dietary elimination in selected cases.",
-   "Patchy, deep or transmural disease may be missed on standard mucosal biopsy."
+  "id": "eosinophilic_enteritis",
+  "name": "Eosinophilic enteritis",
+  "aliases": [
+    "Eosinophilic enteropathy",
+    "Eosinophilic gastroenteritis (small-bowel)"
   ],
-  "pathophysiology": "Eosinophilic enteritis reflects antigen-driven Th2 inflammation of the small intestine, with interleukin-5 and interleukin-13-mediated recruitment of eosinophils whose degranulation injures the mucosa and deeper layers. Mucosal infiltration disrupts the absorptive surface and enteric barrier, causing malabsorption and protein loss; muscular involvement thickens and stiffens the bowel wall producing subacute obstruction; and serosal involvement generates eosinophil-rich ascites. Food allergens and an atopic diathesis are frequently implicated.",
-  "additionalDifferentials": [
-   "Parasitic infestation (Strongyloides, Anisakis, hookworm)",
-   "Coeliac disease",
-   "Crohn's disease",
-   "Hypereosinophilic syndrome with bowel involvement",
-   "Eosinophilic granulomatosis with polyangiitis",
-   "Small-bowel lymphoma or other malignancy",
-   "Drug-induced enteropathy"
-  ],
-  "additionalInvestigations": [
-   "Device-assisted enteroscopy or capsule endoscopy with small-bowel biopsies",
-   "Full blood count with eosinophil count",
-   "Stool microscopy and Strongyloides serology",
-   "Coeliac serology (tissue transglutaminase IgA) with total IgA",
-   "Serum albumin and markers of protein-losing enteropathy",
-   "CT or MR enterography for wall thickening, obstruction or ascites",
-   "ANCA and connective tissue screen where vasculitis is suspected"
-  ],
-  "redFlags": [
-   "Small-bowel obstruction from muscular disease",
-   "Severe malabsorption with weight loss and hypoalbuminaemia",
-   "Gastrointestinal haemorrhage",
-   "Features suggesting lymphoma or systemic vasculitis"
-  ],
-  "prognosis": "Eosinophilic enteritis often responds well to corticosteroids with symptomatic and histological improvement, but relapse is common and some patients require long-term immunomodulation or dietary therapy.",
-  "pitfalls": [
-   "Missing patchy or deep (muscular or serosal) disease with superficial biopsies alone",
-   "Failing to exclude Strongyloides before immunosuppression",
-   "Confusing the picture with coeliac disease or Crohn's disease",
-   "Attributing the eosinophilia to the bowel while overlooking systemic hypereosinophilic syndrome"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Oxford Textbook of Medicine",
-   "International consensus nomenclature for eosinophilic gastrointestinal diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Corticosteroids, with systemic prednisolone or targeted budesonide, as first-line therapy to induce remission",
-   "Dietary elimination therapy, empirical or allergy-guided and amino-acid based in severe cases, as a steroid-sparing option",
-   "Exclude and treat parasitic mimics such as Strongyloides, Anisakis and hookworm before immunosuppression",
-   "Nutritional support with correction of iron deficiency, hypoalbuminaemia and protein-losing enteropathy",
-   "Steroid-sparing immunomodulators or anti-IL-5 biologics for frequently relapsing or steroid-dependent disease",
-   "Manage subacute obstruction from muscular disease and eosinophilic ascites, conservatively where possible",
-   "Monitor symptoms and small-bowel histology with gastroenterology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eosinophilic_enteritis-pathway",
-   "title": "Eosinophilic enteritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Eosinophilic infiltration of the small bowel, part of the eosinophilic gastrointestinal disorders and frequently overlapping with gastric involvement as eosinophilic gastroenteritis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Small-bowel obstruction from muscular disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Device-assisted enteroscopy or capsule endoscopy with small-bowel biopsies, Full blood count with eosinophil count, Stool microscopy and Strongyloides serology"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Corticosteroids, with systemic prednisolone or targeted budesonide, as first-line therapy to induce remission"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing patchy or deep (muscular or serosal) disease with superficial biopsies alone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eosinophilic enteritis."
-  }
- ],
- "tables": [
-  {
-   "id": "eosinophilic_enteritis-matrix",
-   "title": "Eosinophilic enteritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Eosinophilic infiltration of the small bowel, part of the eosinophilic gastrointestinal disorders and frequently overlapping with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Eosinophilic infiltration of the small bowel, part of the eosinophilic gastrointestinal disorders and frequently overlapping with gastric involvement as eosinophilic gastroenteritis.",
+      "The Klein depth classification applies: mucosal disease causes malabsorption, diarrhoea, protein-losing enteropathy and iron deficiency; muscular disease causes obstruction; serosal disease causes eosinophilic ascites.",
+      "Malabsorption and weight loss are prominent with mucosal involvement.",
+      "Peripheral eosinophilia is common and atopy is frequent.",
+      "Diagnosis rests on small-bowel biopsies (which may need enteroscopy or capsule endoscopy) showing excess eosinophils after excluding secondary causes.",
+      "Parasitic infection such as Strongyloides, Anisakis or hookworm is a key mimic and must be excluded.",
+      "Corticosteroids are the mainstay, with dietary elimination in selected cases.",
+      "Patchy, deep or transmural disease may be missed on standard mucosal biopsy."
     ],
-    [
-     "Key Investigations",
-     "Device-assisted enteroscopy or capsule endoscopy with small-bowel biopsies, Full blood count with eosinophil count, Stool",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Eosinophilic enteritis reflects antigen-driven Th2 inflammation of the small intestine, with interleukin-5 and interleukin-13-mediated recruitment of eosinophils whose degranulation injures the mucosa and deeper layers. Mucosal infiltration disrupts the absorptive surface and enteric barrier, causing malabsorption and protein loss; muscular involvement thickens and stiffens the bowel wall producing subacute obstruction; and serosal involvement generates eosinophil-rich ascites. Food allergens and an atopic diathesis are frequently implicated.",
+    "additionalDifferentials": [
+      "Parasitic infestation (Strongyloides, Anisakis, hookworm)",
+      "Coeliac disease",
+      "Crohn's disease",
+      "Hypereosinophilic syndrome with bowel involvement",
+      "Eosinophilic granulomatosis with polyangiitis",
+      "Small-bowel lymphoma or other malignancy",
+      "Drug-induced enteropathy"
     ],
-    [
-     "Primary Differentials",
-     "Parasitic infestation (Strongyloides, Anisakis, hookworm), Coeliac disease, Crohn's disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Device-assisted enteroscopy or capsule endoscopy with small-bowel biopsies",
+      "Full blood count with eosinophil count",
+      "Stool microscopy and Strongyloides serology",
+      "Coeliac serology (tissue transglutaminase IgA) with total IgA",
+      "Serum albumin and markers of protein-losing enteropathy",
+      "CT or MR enterography for wall thickening, obstruction or ascites",
+      "ANCA and connective tissue screen where vasculitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Corticosteroids, with systemic prednisolone or targeted budesonide, as first-line therapy to induce remission",
-     "Core treatment modality"
+    "redFlags": [
+      "Small-bowel obstruction from muscular disease",
+      "Severe malabsorption with weight loss and hypoalbuminaemia",
+      "Gastrointestinal haemorrhage",
+      "Features suggesting lymphoma or systemic vasculitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing patchy or deep (muscular or serosal) disease with superficial biopsies alone",
-     "Prevent diagnostic or management error"
+    "prognosis": "Eosinophilic enteritis often responds well to corticosteroids with symptomatic and histological improvement, but relapse is common and some patients require long-term immunomodulation or dietary therapy.",
+    "pitfalls": [
+      "Missing patchy or deep (muscular or serosal) disease with superficial biopsies alone",
+      "Failing to exclude Strongyloides before immunosuppression",
+      "Confusing the picture with coeliac disease or Crohn's disease",
+      "Attributing the eosinophilia to the bowel while overlooking systemic hypereosinophilic syndrome"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Oxford Textbook of Medicine",
+      "International consensus nomenclature for eosinophilic gastrointestinal diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Corticosteroids, with systemic prednisolone or targeted budesonide, as first-line therapy to induce remission",
+      "Dietary elimination therapy, empirical or allergy-guided and amino-acid based in severe cases, as a steroid-sparing option",
+      "Exclude and treat parasitic mimics such as Strongyloides, Anisakis and hookworm before immunosuppression",
+      "Nutritional support with correction of iron deficiency, hypoalbuminaemia and protein-losing enteropathy",
+      "Steroid-sparing immunomodulators or anti-IL-5 biologics for frequently relapsing or steroid-dependent disease",
+      "Manage subacute obstruction from muscular disease and eosinophilic ascites, conservatively where possible",
+      "Monitor symptoms and small-bowel histology with gastroenterology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for eosinophilic enteritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eosinophilic-enteritis-real-image",
-   "title": "Eosinophilic enteritis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "eosinophilic_enteritis-pathway",
+      "title": "Eosinophilic enteritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Eosinophilic infiltration of the small bowel, part of the eosinophilic gastrointestinal disorders and frequently overlapping with gastric involvement as eosinophilic gastroenteritis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Small-bowel obstruction from muscular disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Device-assisted enteroscopy or capsule endoscopy with small-bowel biopsies, Full blood count with eosinophil count, Stool microscopy and Strongyloides serology"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Corticosteroids, with systemic prednisolone or targeted budesonide, as first-line therapy to induce remission"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing patchy or deep (muscular or serosal) disease with superficial biopsies alone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eosinophilic enteritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eosinophilic_enteritis-matrix",
+      "title": "Eosinophilic enteritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Eosinophilic infiltration of the small bowel, part of the eosinophilic gastrointestinal disorders and frequently overlapping with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Device-assisted enteroscopy or capsule endoscopy with small-bowel biopsies, Full blood count with eosinophil count, Stool",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Parasitic infestation (Strongyloides, Anisakis, hookworm), Coeliac disease, Crohn's disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Corticosteroids, with systemic prednisolone or targeted budesonide, as first-line therapy to induce remission",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing patchy or deep (muscular or serosal) disease with superficial biopsies alone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eosinophilic enteritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilic_enteritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Device-assisted enteroscopy or capsule endoscopy with small-bowel biopsies",
+          "cells": [
+            {
+              "text": "Excess eosinophils on small-bowel biopsy after exclusion of other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with eosinophil count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia, which is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy and Strongyloides serology",
+          "cells": [
+            {
+              "text": "Parasitic mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology (tissue transglutaminase IgA) with total IgA",
+          "cells": [
+            {
+              "text": "Coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin and markers of protein-losing enteropathy",
+          "cells": [
+            {
+              "text": "Hypoalbuminaemia and protein loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR enterography",
+          "cells": [
+            {
+              "text": "Wall thickening, obstruction or ascites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA and connective tissue screen",
+          "cells": [
+            {
+              "text": "Vasculitis, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_enteritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parasitic infestation (Strongyloides, Anisakis, hookworm)",
+          "cells": [
+            {
+              "text": "Key mimic; must be excluded before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Confused with eosinophilic enteritis; coeliac serology is part of the workup"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_enteritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Systemic prednisolone or targeted budesonide, first-line to induce remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary elimination",
+          "cells": [
+            {
+              "text": "Empirical or allergy-guided, amino-acid based in severe cases; a steroid-sparing option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude parasitic mimics before immunosuppression",
+          "cells": [
+            {
+              "text": "Strongyloides, Anisakis and hookworm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Correction of iron deficiency, hypoalbuminaemia and protein-losing enteropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunomodulators or anti-IL-5 biologics",
+          "cells": [
+            {
+              "text": "Frequently relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstruction and ascites",
+          "cells": [
+            {
+              "text": "Subacute obstruction from muscular disease and eosinophilic ascites, managed conservatively where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Symptoms and small-bowel histology with gastroenterology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilic_enteritis-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilic enteritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Malabsorption, weight loss or diarrhoea with suspected small-bowel eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (obstruction, severe malabsorption, haemorrhage, lymphoma or vasculitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess obstruction and haemorrhage; evaluate for lymphoma or systemic vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Enteroscopy or capsule endoscopy with small-bowel biopsies; Strongyloides serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Excess small-bowel eosinophils after parasites and coeliac excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-biopsy more deeply; consider Crohn's disease, lymphoma or drug injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids (prednisolone or budesonide) to induce remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude Strongyloides, Anisakis and hookworm before immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietary elimination as a steroid-sparing option",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct iron deficiency and protein loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Steroid-sparing immunomodulators or anti-IL-5 for relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Responds well to corticosteroids; relapse is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

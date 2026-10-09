@@ -1,176 +1,472 @@
 {
- "id": "mody_type_2",
- "name": "Maturity-Onset Diabetes of the Young Type 2 (GCK-MODY)",
- "aliases": [
-  "GCK-MODY",
-  "MODY2",
-  "Glucokinase MODY"
- ],
- "class": "non_infective",
- "system": "Endocrine / Monogenic diabetes",
- "specialty": "Endocrinology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Endocrinology and clinical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by heterozygous inactivating variants in GCK, which encodes glucokinase, the beta-cell glucose sensor; inheritance is autosomal dominant with near-complete penetrance.",
-   "Produces mild, stable, non-progressive fasting hyperglycaemia present from birth rather than diabetes that worsens over time.",
-   "The glucose increment during an oral glucose tolerance test is characteristically small because the defect resets the glucose set-point rather than abolishing insulin secretion.",
-   "HbA1c is typically only mildly raised and remains stable across decades, distinguishing it from progressive forms of MODY.",
-   "Most non-pregnant patients require no pharmacological treatment; diet and lifestyle suffice and drugs rarely improve the fasting level.",
-   "Microvascular and macrovascular complications are uncommon, so aggressive glucose-lowering is generally unnecessary and unhelpful.",
-   "In pregnancy, management hinges on whether the fetus has inherited the mutation: an unaffected fetus of an affected mother may overgrow and may warrant maternal treatment.",
-   "Frequently discovered incidentally on routine screening, in pregnancy, or during family testing rather than through symptomatic presentation."
+  "id": "mody_type_2",
+  "name": "Maturity-Onset Diabetes of the Young Type 2 (GCK-MODY)",
+  "aliases": [
+    "GCK-MODY",
+    "MODY2",
+    "Glucokinase MODY"
   ],
-  "pathophysiology": "MODY2 results from heterozygous loss-of-function mutations in GCK, the gene encoding glucokinase (hexokinase IV). Glucokinase catalyses the rate-limiting phosphorylation of glucose in the pancreatic beta cell and hepatocyte and functions as the principal glucose sensor that couples ambient glucose concentration to insulin secretion. A partial reduction in glucokinase activity raises the threshold at which glucose triggers insulin release, effectively resetting the glucostat to a higher level; the beta cell still secretes insulin appropriately, but only once a slightly higher glucose concentration is reached. The consequence is a modest, lifelong elevation of fasting glucose that is tightly regulated and does not progress, because the underlying secretory machinery and beta-cell mass are intact. Reduced hepatic glucokinase activity also blunts postprandial glycogen synthesis, contributing to the small glucose excursion after a carbohydrate load. Because regulation around the new set-point remains physiological, chronic hyperglycaemia is mild and the long-term risk of diabetic complications is low. Rare biallelic inactivating mutations instead cause permanent neonatal diabetes, while activating GCK mutations cause congenital hyperinsulinism, illustrating the gene's dose-dependent role.",
-  "additionalDifferentials": [
-   "Impaired fasting glucose or early type 2 diabetes mellitus",
-   "HNF1A-MODY and HNF4A-MODY, which are progressive and treatment-responsive rather than stable",
-   "Gestational diabetes mellitus when first detected in pregnancy",
-   "Type 1 diabetes mellitus (autoantibody positive) when hyperglycaemia is mistakenly thought significant",
-   "Stress or steroid-induced hyperglycaemia",
-   "Laboratory artefact or non-fasting sampling causing apparent hyperglycaemia"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of GCK, typically within a MODY panel",
-   "Fasting plasma glucose demonstrating mild, stable elevation",
-   "Oral glucose tolerance test showing a characteristically small glucose increment",
-   "Serial HbA1c confirming a persistently mild and stable value over time",
-   "Pancreatic autoantibodies to exclude autoimmune diabetes",
-   "Fetal growth ultrasound surveillance in affected pregnancies",
-   "Family screening of first-degree relatives with fasting glucose"
-  ],
-  "redFlags": [
-   "HbA1c or fasting glucose rising well beyond the expected mild range, suggesting a coexisting second cause of diabetes",
-   "Development of significant microvascular complications, which is atypical and warrants re-evaluation",
-   "Fetal macrosomia in an affected mother carrying an unaffected fetus, indicating need for maternal glucose management",
-   "Symptomatic osmotic symptoms such as marked polyuria or polydipsia, which are inconsistent with isolated GCK-MODY"
-  ],
-  "prognosis": "Excellent: fasting hyperglycaemia is mild and stable lifelong, treatment is usually unnecessary outside pregnancy, and the risk of clinically significant diabetic complications is low. Correct genetic diagnosis spares patients unnecessary medication, monitoring and insurance implications.",
-  "pitfalls": [
-   "Escalating glucose-lowering therapy in pursuit of normoglycaemia, which is ineffective and exposes patients to hypoglycaemia and side effects",
-   "Misdiagnosing the condition as type 1 or type 2 diabetes and applying inappropriate lifelong treatment",
-   "In pregnancy, treating the mother without considering fetal genotype, risking impaired fetal growth if the fetus is also affected",
-   "Assuming the mild hyperglycaemia will inevitably progress and over-monitoring the patient",
-   "Overlooking the strongly hereditary pattern and failing to test and reassure relatives"
-  ],
-  "references": [
-   "Standard endocrinology reference texts",
-   "International monogenic diabetes clinical guidelines",
-   "Clinical genetics reference sources"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise that most non-pregnant patients need no glucose-lowering drugs and manage with diet and lifestyle alone",
-   "Avoid unnecessary pharmacotherapy, monitoring and the diagnostic label burden once GCK-MODY is genetically confirmed",
-   "In pregnancy, guide treatment by foetal genotype, considering insulin if an unaffected foetus shows accelerated growth but withholding intensive treatment if the foetus is affected",
-   "Undertake foetal growth ultrasound surveillance in affected pregnancies",
-   "Reassure patients that microvascular and macrovascular complication risk is low and aggressive glucose-lowering is unhelpful",
-   "Provide genetic counselling and family glucose and genetic screening for autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mody_type_2-pathway",
-   "title": "Maturity-Onset Diabetes of the Young Type 2 (GCK-MODY): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by heterozygous inactivating variants in GCK, which encodes glucokinase, the beta-cell glucose sensor; inheritance is autosomal dominant with near-complete penetrance.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: HbA1c or fasting glucose rising well beyond the expected mild range, suggesting a coexisting second cause of diabetes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of GCK, typically within a MODY panel, Fasting plasma glucose demonstrating mild, stable elevation, Oral glucose tolerance test showing a characteristically small glucose increment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise that most non-pregnant patients need no glucose-lowering drugs and manage with diet and lifestyle alone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Escalating glucose-lowering therapy in pursuit of normoglycaemia, which is ineffective and exposes patients to hypoglycaemia and side effects"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of maturity-onset diabetes of the young type 2 (gck-mody)."
-  }
- ],
- "tables": [
-  {
-   "id": "mody_type_2-matrix",
-   "title": "Maturity-Onset Diabetes of the Young Type 2 (GCK-MODY): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by heterozygous inactivating variants in GCK, which encodes glucokinase, the beta-cell glucose sensor; inheritance is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Monogenic diabetes",
+  "specialty": "Endocrinology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Endocrinology and clinical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by heterozygous inactivating variants in GCK, which encodes glucokinase, the beta-cell glucose sensor; inheritance is autosomal dominant with near-complete penetrance.",
+      "Produces mild, stable, non-progressive fasting hyperglycaemia present from birth rather than diabetes that worsens over time.",
+      "The glucose increment during an oral glucose tolerance test is characteristically small because the defect resets the glucose set-point rather than abolishing insulin secretion.",
+      "HbA1c is typically only mildly raised and remains stable across decades, distinguishing it from progressive forms of MODY.",
+      "Most non-pregnant patients require no pharmacological treatment; diet and lifestyle suffice and drugs rarely improve the fasting level.",
+      "Microvascular and macrovascular complications are uncommon, so aggressive glucose-lowering is generally unnecessary and unhelpful.",
+      "In pregnancy, management hinges on whether the fetus has inherited the mutation: an unaffected fetus of an affected mother may overgrow and may warrant maternal treatment.",
+      "Frequently discovered incidentally on routine screening, in pregnancy, or during family testing rather than through symptomatic presentation."
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of GCK, typically within a MODY panel, Fasting plasma glucose demonstrating mild, stable elevation,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MODY2 results from heterozygous loss-of-function mutations in GCK, the gene encoding glucokinase (hexokinase IV). Glucokinase catalyses the rate-limiting phosphorylation of glucose in the pancreatic beta cell and hepatocyte and functions as the principal glucose sensor that couples ambient glucose concentration to insulin secretion. A partial reduction in glucokinase activity raises the threshold at which glucose triggers insulin release, effectively resetting the glucostat to a higher level; the beta cell still secretes insulin appropriately, but only once a slightly higher glucose concentration is reached. The consequence is a modest, lifelong elevation of fasting glucose that is tightly regulated and does not progress, because the underlying secretory machinery and beta-cell mass are intact. Reduced hepatic glucokinase activity also blunts postprandial glycogen synthesis, contributing to the small glucose excursion after a carbohydrate load. Because regulation around the new set-point remains physiological, chronic hyperglycaemia is mild and the long-term risk of diabetic complications is low. Rare biallelic inactivating mutations instead cause permanent neonatal diabetes, while activating GCK mutations cause congenital hyperinsulinism, illustrating the gene's dose-dependent role.",
+    "additionalDifferentials": [
+      "Impaired fasting glucose or early type 2 diabetes mellitus",
+      "HNF1A-MODY and HNF4A-MODY, which are progressive and treatment-responsive rather than stable",
+      "Gestational diabetes mellitus when first detected in pregnancy",
+      "Type 1 diabetes mellitus (autoantibody positive) when hyperglycaemia is mistakenly thought significant",
+      "Stress or steroid-induced hyperglycaemia",
+      "Laboratory artefact or non-fasting sampling causing apparent hyperglycaemia"
     ],
-    [
-     "Primary Differentials",
-     "Impaired fasting glucose or early type 2 diabetes mellitus, HNF1A-MODY and HNF4A-MODY, which are progressive and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of GCK, typically within a MODY panel",
+      "Fasting plasma glucose demonstrating mild, stable elevation",
+      "Oral glucose tolerance test showing a characteristically small glucose increment",
+      "Serial HbA1c confirming a persistently mild and stable value over time",
+      "Pancreatic autoantibodies to exclude autoimmune diabetes",
+      "Fetal growth ultrasound surveillance in affected pregnancies",
+      "Family screening of first-degree relatives with fasting glucose"
     ],
-    [
-     "Management Strategy",
-     "Recognise that most non-pregnant patients need no glucose-lowering drugs and manage with diet and lifestyle alone",
-     "Core treatment modality"
+    "redFlags": [
+      "HbA1c or fasting glucose rising well beyond the expected mild range, suggesting a coexisting second cause of diabetes",
+      "Development of significant microvascular complications, which is atypical and warrants re-evaluation",
+      "Fetal macrosomia in an affected mother carrying an unaffected fetus, indicating need for maternal glucose management",
+      "Symptomatic osmotic symptoms such as marked polyuria or polydipsia, which are inconsistent with isolated GCK-MODY"
     ],
-    [
-     "Clinical Pitfall",
-     "Escalating glucose-lowering therapy in pursuit of normoglycaemia, which is ineffective and exposes patients to hypoglycaemia and",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent: fasting hyperglycaemia is mild and stable lifelong, treatment is usually unnecessary outside pregnancy, and the risk of clinically significant diabetic complications is low. Correct genetic diagnosis spares patients unnecessary medication, monitoring and insurance implications.",
+    "pitfalls": [
+      "Escalating glucose-lowering therapy in pursuit of normoglycaemia, which is ineffective and exposes patients to hypoglycaemia and side effects",
+      "Misdiagnosing the condition as type 1 or type 2 diabetes and applying inappropriate lifelong treatment",
+      "In pregnancy, treating the mother without considering fetal genotype, risking impaired fetal growth if the fetus is also affected",
+      "Assuming the mild hyperglycaemia will inevitably progress and over-monitoring the patient",
+      "Overlooking the strongly hereditary pattern and failing to test and reassure relatives"
+    ],
+    "references": [
+      "Standard endocrinology reference texts",
+      "International monogenic diabetes clinical guidelines",
+      "Clinical genetics reference sources"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise that most non-pregnant patients need no glucose-lowering drugs and manage with diet and lifestyle alone",
+      "Avoid unnecessary pharmacotherapy, monitoring and the diagnostic label burden once GCK-MODY is genetically confirmed",
+      "In pregnancy, guide treatment by foetal genotype, considering insulin if an unaffected foetus shows accelerated growth but withholding intensive treatment if the foetus is affected",
+      "Undertake foetal growth ultrasound surveillance in affected pregnancies",
+      "Reassure patients that microvascular and macrovascular complication risk is low and aggressive glucose-lowering is unhelpful",
+      "Provide genetic counselling and family glucose and genetic screening for autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for maturity-onset diabetes of the young type 2 (gck-mody)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mody-type-2-real-image",
-   "title": "Maturity-Onset Diabetes of the Young Type 2 (GCK-MODY): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "mody_type_2-pathway",
+      "title": "Maturity-Onset Diabetes of the Young Type 2 (GCK-MODY): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by heterozygous inactivating variants in GCK, which encodes glucokinase, the beta-cell glucose sensor; inheritance is autosomal dominant with near-complete penetrance.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: HbA1c or fasting glucose rising well beyond the expected mild range, suggesting a coexisting second cause of diabetes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of GCK, typically within a MODY panel, Fasting plasma glucose demonstrating mild, stable elevation, Oral glucose tolerance test showing a characteristically small glucose increment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise that most non-pregnant patients need no glucose-lowering drugs and manage with diet and lifestyle alone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Escalating glucose-lowering therapy in pursuit of normoglycaemia, which is ineffective and exposes patients to hypoglycaemia and side effects"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of maturity-onset diabetes of the young type 2 (gck-mody)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mody_type_2-matrix",
+      "title": "Maturity-Onset Diabetes of the Young Type 2 (GCK-MODY): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by heterozygous inactivating variants in GCK, which encodes glucokinase, the beta-cell glucose sensor; inheritance is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of GCK, typically within a MODY panel, Fasting plasma glucose demonstrating mild, stable elevation,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Impaired fasting glucose or early type 2 diabetes mellitus, HNF1A-MODY and HNF4A-MODY, which are progressive and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise that most non-pregnant patients need no glucose-lowering drugs and manage with diet and lifestyle alone",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Escalating glucose-lowering therapy in pursuit of normoglycaemia, which is ineffective and exposes patients to hypoglycaemia and",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for maturity-onset diabetes of the young type 2 (gck-mody)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mody_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of GCK",
+          "cells": [
+            {
+              "text": "GCK variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting plasma glucose",
+          "cells": [
+            {
+              "text": "Mild, stable elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral glucose tolerance test",
+          "cells": [
+            {
+              "text": "Small glucose increment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial HbA1c",
+          "cells": [
+            {
+              "text": "Persistently mild, stable value"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic autoantibodies",
+          "cells": [
+            {
+              "text": "Autoimmune diabetes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal growth ultrasound surveillance in affected pregnancies",
+          "cells": [
+            {
+              "text": "Fetal growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening of first-degree relatives with fasting glucose",
+          "cells": [
+            {
+              "text": "Relatives' fasting glucose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "HNF1A-MODY and HNF4A-MODY",
+          "cells": [
+            {
+              "text": "Progressive and treatment-responsive rather than stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gestational diabetes mellitus",
+          "cells": [
+            {
+              "text": "First detected in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "Autoantibody positive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diet and lifestyle",
+          "cells": [
+            {
+              "text": "Most non-pregnant patients need no glucose-lowering drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary treatment",
+          "cells": [
+            {
+              "text": "Drugs, monitoring and diagnostic labels once genetically confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy guided by fetal genotype",
+          "cells": [
+            {
+              "text": "Insulin if an unaffected fetus shows accelerated growth; withhold intensive treatment if affected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal growth surveillance",
+          "cells": [
+            {
+              "text": "Ultrasound in affected pregnancies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Low complication risk; aggressive glucose-lowering is unhelpful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and family screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant; glucose and genetic screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mody_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Maturity-Onset Diabetes of the Young Type 2 (GCK-MODY)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mild, stable fasting hyperglycaemia found on routine testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rising HbA1c, microvascular complications, fetal macrosomia or osmotic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Re-evaluate for a second cause of diabetes; obstetric review if pregnant",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GCK testing; fasting glucose; OGTT; serial HbA1c; pancreatic autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a GCK variant confirmed with a stable, mild glucose pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider HNF1A or HNF4A-MODY, type 1 diabetes or gestational diabetes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Diet and lifestyle alone for most non-pregnant patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid unnecessary drugs, monitoring and diagnostic labels once confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "In pregnancy, guide treatment by fetal genotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ultrasound fetal growth surveillance in affected pregnancies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reassurance on low complication risk; family glucose and genetic screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

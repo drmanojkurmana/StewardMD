@@ -1,178 +1,373 @@
 {
- "id": "zap70_deficiency",
- "name": "ZAP70 deficiency",
- "aliases": [
-  "ZAP70",
-  "zeta-chain associated protein kinase 70 deficiency",
-  "selective CD8 lymphopenia",
-  "combined immunodeficiency with normal CD4 and absent CD8"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A combined immunodeficiency that typically presents in infancy with recurrent and opportunistic infection despite a normal or even elevated total lymphocyte count",
-   "The signature immunophenotype is a selective absence of CD8 T cells with normal numbers of CD4 T cells that are nonetheless functionally defective",
-   "The circulating CD4 T cells fail to proliferate or respond to T-cell-receptor stimulation, so the defect is functional as well as numerical",
-   "Because it can present with a normal lymphocyte count, it may be missed on newborn TREC screening in some cases and requires flow-cytometric confirmation",
-   "B-cell numbers are usually normal but antibody responses are impaired owing to the lack of effective T-cell help",
-   "Autoimmune and immune dysregulatory features, including eczema and autoimmune cytopenias, can occur",
-   "Inheritance is autosomal recessive from biallelic loss-of-function variants in ZAP70",
-   "Allogeneic haematopoietic stem cell transplantation is curative and is the definitive treatment"
+  "id": "zap70_deficiency",
+  "name": "ZAP70 deficiency",
+  "aliases": [
+    "ZAP70",
+    "zeta-chain associated protein kinase 70 deficiency",
+    "selective CD8 lymphopenia",
+    "combined immunodeficiency with normal CD4 and absent CD8"
   ],
-  "pathophysiology": "ZAP70 (zeta-chain associated protein kinase of 70 kDa) is a tyrosine kinase that couples the engaged T-cell receptor to downstream signalling and is essential for the positive selection of thymocytes. Its deficiency blocks the selection and export of CD8 single-positive T cells, so peripheral CD8 cells are essentially absent, while CD4 T cells are selected and reach the circulation in normal numbers but cannot signal properly through the receptor and are therefore non-functional. The absent cytotoxic compartment and the functionally paralysed CD4 cells together produce a combined immunodeficiency with impaired cellular immunity and, through defective T-cell help, poor antibody responses.",
-  "additionalDifferentials": [
-   "Severe combined immunodeficiency of other genotype",
-   "MHC class I deficiency (TAP defects) causing CD8 lymphopenia",
-   "Idiopathic CD4 lymphopenia",
-   "Other T-cell receptor signalling defects (e.g. LCK, CD3 chain defects)",
-   "DiGeorge syndrome",
-   "HIV infection"
-  ],
-  "additionalInvestigations": [
-   "Lymphocyte subsets showing absent CD8 T cells with normal CD4 counts",
-   "Lymphocyte proliferation assays to mitogens and antigens demonstrating poor responses",
-   "Flow cytometry or western blot for ZAP70 protein expression",
-   "Serum immunoglobulins and specific antibody responses",
-   "T-cell receptor excision circle (TREC) newborn screening result",
-   "ZAP70 gene sequencing for biallelic loss-of-function variants"
-  ],
-  "redFlags": [
-   "Opportunistic infection such as Pneumocystis pneumonia in an infant with a normal lymphocyte count",
-   "Failure to thrive with persistent or severe infection",
-   "Signs of graft-versus-host disease from non-irradiated blood products",
-   "Complications following live vaccination",
-   "Severe autoimmune cytopenia"
-  ],
-  "prognosis": "Without treatment the condition is fatal in early childhood from infection, but allogeneic haematopoietic stem cell transplantation, particularly when performed early, is curative and offers an excellent chance of long-term immune reconstitution.",
-  "pitfalls": [
-   "Being falsely reassured by a normal total lymphocyte count and not measuring subsets",
-   "Overlooking the functional CD4 defect because CD4 numbers appear normal",
-   "Confusing the CD8 lymphopenia with an MHC class I (TAP) defect without protein or genetic testing",
-   "Giving live vaccines or non-irradiated blood products before diagnosis",
-   "Delaying referral for transplantation"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Allogeneic haematopoietic stem cell transplantation is the definitive curative therapy and should be undertaken early, before infective damage accrues",
-   "Give anti-infective prophylaxis with co-trimoxazole against Pneumocystis plus antifungal and antiviral cover, and treat intercurrent infections aggressively",
-   "Provide immunoglobulin replacement therapy for the impaired antibody responses",
-   "Avoid live vaccines and use only irradiated, CMV-safe, leucodepleted blood products to prevent transfusion-associated graft-versus-host disease",
-   "Manage immune-dysregulatory features such as eczema and autoimmune cytopenias",
-   "Monitor for infection and growth and, around transplantation, immune reconstitution",
-   "Offer genetic counselling and family testing for the biallelic ZAP70 loss-of-function variants, with carrier and prenatal options",
-   "Refer promptly to a specialist immunology and transplant centre"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "zap70_deficiency-pathway",
-   "title": "ZAP70 deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A combined immunodeficiency that typically presents in infancy with recurrent and opportunistic infection despite a normal or even elevated total lymphocyte count",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Opportunistic infection such as Pneumocystis pneumonia in an infant with a normal lymphocyte count",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lymphocyte subsets showing absent CD8 T cells with normal CD4 counts, Lymphocyte proliferation assays to mitogens and antigens demonstrating poor responses, Flow cytometry or western blot for ZAP70 protein expression"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Allogeneic haematopoietic stem cell transplantation is the definitive curative therapy and should be undertaken early, before infective damage accrues"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Being falsely reassured by a normal total lymphocyte count and not measuring subsets"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of zap70 deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "zap70_deficiency-matrix",
-   "title": "ZAP70 deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A combined immunodeficiency that typically presents in infancy with recurrent and opportunistic infection despite a normal or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A combined immunodeficiency that typically presents in infancy with recurrent and opportunistic infection despite a normal or even elevated total lymphocyte count",
+      "The signature immunophenotype is a selective absence of CD8 T cells with normal numbers of CD4 T cells that are nonetheless functionally defective",
+      "The circulating CD4 T cells fail to proliferate or respond to T-cell-receptor stimulation, so the defect is functional as well as numerical",
+      "Because it can present with a normal lymphocyte count, it may be missed on newborn TREC screening in some cases and requires flow-cytometric confirmation",
+      "B-cell numbers are usually normal but antibody responses are impaired owing to the lack of effective T-cell help",
+      "Autoimmune and immune dysregulatory features, including eczema and autoimmune cytopenias, can occur",
+      "Inheritance is autosomal recessive from biallelic loss-of-function variants in ZAP70",
+      "Allogeneic haematopoietic stem cell transplantation is curative and is the definitive treatment"
     ],
-    [
-     "Key Investigations",
-     "Lymphocyte subsets showing absent CD8 T cells with normal CD4 counts, Lymphocyte proliferation assays to mitogens and antigens",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ZAP70 (zeta-chain associated protein kinase of 70 kDa) is a tyrosine kinase that couples the engaged T-cell receptor to downstream signalling and is essential for the positive selection of thymocytes. Its deficiency blocks the selection and export of CD8 single-positive T cells, so peripheral CD8 cells are essentially absent, while CD4 T cells are selected and reach the circulation in normal numbers but cannot signal properly through the receptor and are therefore non-functional. The absent cytotoxic compartment and the functionally paralysed CD4 cells together produce a combined immunodeficiency with impaired cellular immunity and, through defective T-cell help, poor antibody responses.",
+    "additionalDifferentials": [
+      "Severe combined immunodeficiency of other genotype",
+      "MHC class I deficiency (TAP defects) causing CD8 lymphopenia",
+      "Idiopathic CD4 lymphopenia",
+      "Other T-cell receptor signalling defects (e.g. LCK, CD3 chain defects)",
+      "DiGeorge syndrome",
+      "HIV infection"
     ],
-    [
-     "Primary Differentials",
-     "Severe combined immunodeficiency of other genotype, MHC class I deficiency (TAP defects) causing CD8 lymphopenia, Idiopathic CD4",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lymphocyte subsets showing absent CD8 T cells with normal CD4 counts",
+      "Lymphocyte proliferation assays to mitogens and antigens demonstrating poor responses",
+      "Flow cytometry or western blot for ZAP70 protein expression",
+      "Serum immunoglobulins and specific antibody responses",
+      "T-cell receptor excision circle (TREC) newborn screening result",
+      "ZAP70 gene sequencing for biallelic loss-of-function variants"
     ],
-    [
-     "Management Strategy",
-     "Allogeneic haematopoietic stem cell transplantation is the definitive curative therapy and should be undertaken early, before",
-     "Core treatment modality"
+    "redFlags": [
+      "Opportunistic infection such as Pneumocystis pneumonia in an infant with a normal lymphocyte count",
+      "Failure to thrive with persistent or severe infection",
+      "Signs of graft-versus-host disease from non-irradiated blood products",
+      "Complications following live vaccination",
+      "Severe autoimmune cytopenia"
     ],
-    [
-     "Clinical Pitfall",
-     "Being falsely reassured by a normal total lymphocyte count and not measuring subsets",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without treatment the condition is fatal in early childhood from infection, but allogeneic haematopoietic stem cell transplantation, particularly when performed early, is curative and offers an excellent chance of long-term immune reconstitution.",
+    "pitfalls": [
+      "Being falsely reassured by a normal total lymphocyte count and not measuring subsets",
+      "Overlooking the functional CD4 defect because CD4 numbers appear normal",
+      "Confusing the CD8 lymphopenia with an MHC class I (TAP) defect without protein or genetic testing",
+      "Giving live vaccines or non-irradiated blood products before diagnosis",
+      "Delaying referral for transplantation"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Allogeneic haematopoietic stem cell transplantation is the definitive curative therapy and should be undertaken early, before infective damage accrues",
+      "Give anti-infective prophylaxis with co-trimoxazole against Pneumocystis plus antifungal and antiviral cover, and treat intercurrent infections aggressively",
+      "Provide immunoglobulin replacement therapy for the impaired antibody responses",
+      "Avoid live vaccines and use only irradiated, CMV-safe, leucodepleted blood products to prevent transfusion-associated graft-versus-host disease",
+      "Manage immune-dysregulatory features such as eczema and autoimmune cytopenias",
+      "Monitor for infection and growth and, around transplantation, immune reconstitution",
+      "Offer genetic counselling and family testing for the biallelic ZAP70 loss-of-function variants, with carrier and prenatal options",
+      "Refer promptly to a specialist immunology and transplant centre"
     ]
-   ],
-   "caption": "Overview comparison matrix for zap70 deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "zap70-deficiency-real-image",
-   "title": "ZAP70 deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "zap70_deficiency-pathway",
+      "title": "ZAP70 deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A combined immunodeficiency that typically presents in infancy with recurrent and opportunistic infection despite a normal or even elevated total lymphocyte count",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Opportunistic infection such as Pneumocystis pneumonia in an infant with a normal lymphocyte count",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lymphocyte subsets showing absent CD8 T cells with normal CD4 counts, Lymphocyte proliferation assays to mitogens and antigens demonstrating poor responses, Flow cytometry or western blot for ZAP70 protein expression"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Allogeneic haematopoietic stem cell transplantation is the definitive curative therapy and should be undertaken early, before infective damage accrues"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Being falsely reassured by a normal total lymphocyte count and not measuring subsets"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of zap70 deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "zap70_deficiency-matrix",
+      "title": "ZAP70 deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A combined immunodeficiency that typically presents in infancy with recurrent and opportunistic infection despite a normal or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lymphocyte subsets showing absent CD8 T cells with normal CD4 counts, Lymphocyte proliferation assays to mitogens and antigens",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Severe combined immunodeficiency of other genotype, MHC class I deficiency (TAP defects) causing CD8 lymphopenia, Idiopathic CD4",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Allogeneic haematopoietic stem cell transplantation is the definitive curative therapy and should be undertaken early, before",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Being falsely reassured by a normal total lymphocyte count and not measuring subsets",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for zap70 deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "zap70_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Absent CD8 T cells with normal CD4 counts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte proliferation assays",
+          "cells": [
+            {
+              "text": "Reduced response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zap70_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe combined immunodeficiency of other genotype",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MHC class I deficiency (TAP defects)",
+          "cells": [
+            {
+              "text": "CD8 T-cell deficiency with different genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "zap70_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Allogeneic haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive curative therapy, undertaken early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis",
+          "cells": [
+            {
+              "text": "Opportunistic infection such as Pneumocystis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "zap70_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of ZAP70 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ZAP-70 deficiency: recurrent or opportunistic infection in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Pneumocystis pneumonia or serious opportunistic infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment and prophylaxis for opportunistic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphocyte subset enumeration, proliferation assays, ZAP70 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are CD8 T cells absent with normal CD4 counts?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other combined immunodeficiency or MHC class I defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early allogeneic stem cell transplantation as definitive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Infection prophylaxis until transplantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not rely on a normal total lymphocyte count; measure subsets",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Transplantation is curative; untreated disease is often fatal in infancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

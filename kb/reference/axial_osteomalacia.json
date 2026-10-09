@@ -1,172 +1,469 @@
 {
- "id": "axial_osteomalacia",
- "name": "Axial osteomalacia",
- "aliases": [
-  "axial osteomalacia",
-  "atypical axial osteomalacia",
-  "sporadic axial osteomalacia"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Primer on the Metabolic Bone Diseases / Resnick Diagnosis of Bone and Joint Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare sporadic osteomalacia that characteristically affects the axial skeleton (spine and pelvis) while largely sparing the appendicular skeleton",
-   "Typically presents in middle-aged or older men with chronic, dull axial (usually cervical or lumbar) pain that is often mild relative to the imaging findings",
-   "Radiographs show a coarsened, disorganised trabecular pattern in the spine and pelvis resembling a coarse trabeculation, without the diffuse deformity of generalised osteomalacia",
-   "In contrast to classic osteomalacia, serum calcium, phosphate, and vitamin D metabolites are typically normal, so it is not a deficiency state",
-   "Alkaline phosphatase may be normal or mildly elevated, and there are no Looser zones or widespread fractures",
-   "Bone biopsy confirms osteomalacia with excess unmineralised osteoid, distinguishing it from other coarse-trabecular osteopathies",
-   "The course is usually benign and non-progressive, so management is largely reassurance and symptomatic analgesia rather than the vitamin D and phosphate used in deficiency osteomalacia"
+  "id": "axial_osteomalacia",
+  "name": "Axial osteomalacia",
+  "aliases": [
+    "axial osteomalacia",
+    "atypical axial osteomalacia",
+    "sporadic axial osteomalacia"
   ],
-  "pathophysiology": "Axial osteomalacia is a mineralisation defect confined mainly to the axial skeleton, in which osteoblasts produce osteoid that mineralises slowly, leaving excess unmineralised matrix demonstrable on undecalcified bone biopsy with tetracycline labelling. Unlike the common forms of osteomalacia, it is not caused by vitamin D deficiency, phosphate wasting, or hypophosphatasia, and the mineral-regulating biochemistry is characteristically normal. The underlying cause is unknown, and it appears to reflect an intrinsic, possibly localised osteoblast dysfunction rather than a systemic hormonal abnormality. Because mineral homeostasis is intact, the disease tends to remain limited and stable, producing the coarse axial trabecular pattern and modest symptoms without the progressive deformity and fractures of systemic osteomalacia.",
-  "additionalDifferentials": [
-   "Vitamin D or phosphate deficiency osteomalacia",
-   "Fibrogenesis imperfecta ossium",
-   "Paget disease of the spine or pelvis",
-   "Osteoporosis with vertebral change",
-   "Ankylosing spondylitis or other inflammatory spondyloarthropathy",
-   "Metastatic or myelomatous marrow infiltration"
-  ],
-  "additionalInvestigations": [
-   "Radiographs of the spine and pelvis showing coarse trabeculation with axial predominance",
-   "Serum calcium, phosphate, alkaline phosphatase, and parathyroid hormone (usually normal)",
-   "Vitamin D metabolites to exclude deficiency osteomalacia",
-   "Bone biopsy demonstrating osteomalacic excess osteoid where confirmation is needed",
-   "Protein electrophoresis to exclude myeloma when the pattern is atypical",
-   "Bone scintigraphy or cross-sectional imaging to distinguish from Paget disease and metastases"
-  ],
-  "redFlags": [
-   "Rapidly progressive or severe pain out of keeping with the usually benign course",
-   "New neurological deficit suggesting an alternative spinal pathology",
-   "Biochemical abnormalities pointing to a treatable systemic osteomalacia instead",
-   "Features suggesting malignancy or Paget disease rather than axial osteomalacia"
-  ],
-  "prognosis": "The condition is generally benign and non-progressive, with stable symptoms over long follow-up; because it does not stem from a correctable deficiency, expectations should focus on symptom control rather than radiographic reversal.",
-  "pitfalls": [
-   "Treating with vitamin D and phosphate as though it were deficiency osteomalacia, which is ineffective here",
-   "Misreading the coarse axial trabeculae as Paget disease or metastatic infiltration",
-   "Overlooking the normal mineral biochemistry that separates it from systemic osteomalacia",
-   "Escalating investigation or therapy for what is usually a stable, benign disorder"
-  ],
-  "references": [
-   "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism",
-   "Resnick's Diagnosis of Bone and Joint Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific corrective therapy exists, so management centres on symptom control with simple analgesia for the axial cervical or lumbar pain",
-   "Confirm the patient is vitamin D and calcium replete and treat any coexisting deficiency osteomalacia, while recognising this will not reverse the intrinsic mineralisation defect",
-   "Use physiotherapy, postural advice and a graded exercise programme to help axial symptoms",
-   "Reassure the patient that the condition is benign and non-progressive, framing expectations around symptom control rather than radiographic improvement",
-   "Review periodically to confirm biochemical and clinical stability",
-   "Re-investigate to exclude mimics such as myeloma, Paget disease or metastases if symptoms or imaging change"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "axial_osteomalacia-pathway",
-   "title": "Axial osteomalacia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare sporadic osteomalacia that characteristically affects the axial skeleton (spine and pelvis) while largely sparing the appendicular skeleton",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or severe pain out of keeping with the usually benign course",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Radiographs of the spine and pelvis showing coarse trabeculation with axial predominance, Serum calcium, phosphate, alkaline phosphatase, and parathyroid hormone (usually normal), Vitamin D metabolites to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific corrective therapy exists, so management centres on symptom control with simple analgesia for the axial cervical or lumbar pain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating with vitamin D and phosphate as though it were deficiency osteomalacia, which is ineffective here"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of axial osteomalacia."
-  }
- ],
- "tables": [
-  {
-   "id": "axial_osteomalacia-matrix",
-   "title": "Axial osteomalacia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare sporadic osteomalacia that characteristically affects the axial skeleton (spine and pelvis) while largely sparing the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Primer on the Metabolic Bone Diseases / Resnick Diagnosis of Bone and Joint Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare sporadic osteomalacia that characteristically affects the axial skeleton (spine and pelvis) while largely sparing the appendicular skeleton",
+      "Typically presents in middle-aged or older men with chronic, dull axial (usually cervical or lumbar) pain that is often mild relative to the imaging findings",
+      "Radiographs show a coarsened, disorganised trabecular pattern in the spine and pelvis resembling a coarse trabeculation, without the diffuse deformity of generalised osteomalacia",
+      "In contrast to classic osteomalacia, serum calcium, phosphate, and vitamin D metabolites are typically normal, so it is not a deficiency state",
+      "Alkaline phosphatase may be normal or mildly elevated, and there are no Looser zones or widespread fractures",
+      "Bone biopsy confirms osteomalacia with excess unmineralised osteoid, distinguishing it from other coarse-trabecular osteopathies",
+      "The course is usually benign and non-progressive, so management is largely reassurance and symptomatic analgesia rather than the vitamin D and phosphate used in deficiency osteomalacia"
     ],
-    [
-     "Key Investigations",
-     "Radiographs of the spine and pelvis showing coarse trabeculation with axial predominance, Serum calcium, phosphate, alkaline",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Axial osteomalacia is a mineralisation defect confined mainly to the axial skeleton, in which osteoblasts produce osteoid that mineralises slowly, leaving excess unmineralised matrix demonstrable on undecalcified bone biopsy with tetracycline labelling. Unlike the common forms of osteomalacia, it is not caused by vitamin D deficiency, phosphate wasting, or hypophosphatasia, and the mineral-regulating biochemistry is characteristically normal. The underlying cause is unknown, and it appears to reflect an intrinsic, possibly localised osteoblast dysfunction rather than a systemic hormonal abnormality. Because mineral homeostasis is intact, the disease tends to remain limited and stable, producing the coarse axial trabecular pattern and modest symptoms without the progressive deformity and fractures of systemic osteomalacia.",
+    "additionalDifferentials": [
+      "Vitamin D or phosphate deficiency osteomalacia",
+      "Fibrogenesis imperfecta ossium",
+      "Paget disease of the spine or pelvis",
+      "Osteoporosis with vertebral change",
+      "Ankylosing spondylitis or other inflammatory spondyloarthropathy",
+      "Metastatic or myelomatous marrow infiltration"
     ],
-    [
-     "Primary Differentials",
-     "Vitamin D or phosphate deficiency osteomalacia, Fibrogenesis imperfecta ossium, Paget disease of the spine or pelvis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Radiographs of the spine and pelvis showing coarse trabeculation with axial predominance",
+      "Serum calcium, phosphate, alkaline phosphatase, and parathyroid hormone (usually normal)",
+      "Vitamin D metabolites to exclude deficiency osteomalacia",
+      "Bone biopsy demonstrating osteomalacic excess osteoid where confirmation is needed",
+      "Protein electrophoresis to exclude myeloma when the pattern is atypical",
+      "Bone scintigraphy or cross-sectional imaging to distinguish from Paget disease and metastases"
     ],
-    [
-     "Management Strategy",
-     "No specific corrective therapy exists, so management centres on symptom control with simple analgesia for the axial cervical or",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or severe pain out of keeping with the usually benign course",
+      "New neurological deficit suggesting an alternative spinal pathology",
+      "Biochemical abnormalities pointing to a treatable systemic osteomalacia instead",
+      "Features suggesting malignancy or Paget disease rather than axial osteomalacia"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating with vitamin D and phosphate as though it were deficiency osteomalacia, which is ineffective here",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is generally benign and non-progressive, with stable symptoms over long follow-up; because it does not stem from a correctable deficiency, expectations should focus on symptom control rather than radiographic reversal.",
+    "pitfalls": [
+      "Treating with vitamin D and phosphate as though it were deficiency osteomalacia, which is ineffective here",
+      "Misreading the coarse axial trabeculae as Paget disease or metastatic infiltration",
+      "Overlooking the normal mineral biochemistry that separates it from systemic osteomalacia",
+      "Escalating investigation or therapy for what is usually a stable, benign disorder"
+    ],
+    "references": [
+      "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism",
+      "Resnick's Diagnosis of Bone and Joint Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific corrective therapy exists, so management centres on symptom control with simple analgesia for the axial cervical or lumbar pain",
+      "Confirm the patient is vitamin D and calcium replete and treat any coexisting deficiency osteomalacia, while recognising this will not reverse the intrinsic mineralisation defect",
+      "Use physiotherapy, postural advice and a graded exercise programme to help axial symptoms",
+      "Reassure the patient that the condition is benign and non-progressive, framing expectations around symptom control rather than radiographic improvement",
+      "Review periodically to confirm biochemical and clinical stability",
+      "Re-investigate to exclude mimics such as myeloma, Paget disease or metastases if symptoms or imaging change"
     ]
-   ],
-   "caption": "Overview comparison matrix for axial osteomalacia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "axial-osteomalacia-real-image",
-   "title": "Axial osteomalacia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "axial_osteomalacia-pathway",
+      "title": "Axial osteomalacia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare sporadic osteomalacia that characteristically affects the axial skeleton (spine and pelvis) while largely sparing the appendicular skeleton",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or severe pain out of keeping with the usually benign course",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Radiographs of the spine and pelvis showing coarse trabeculation with axial predominance, Serum calcium, phosphate, alkaline phosphatase, and parathyroid hormone (usually normal), Vitamin D metabolites to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific corrective therapy exists, so management centres on symptom control with simple analgesia for the axial cervical or lumbar pain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating with vitamin D and phosphate as though it were deficiency osteomalacia, which is ineffective here"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of axial osteomalacia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "axial_osteomalacia-matrix",
+      "title": "Axial osteomalacia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare sporadic osteomalacia that characteristically affects the axial skeleton (spine and pelvis) while largely sparing the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Radiographs of the spine and pelvis showing coarse trabeculation with axial predominance, Serum calcium, phosphate, alkaline",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vitamin D or phosphate deficiency osteomalacia, Fibrogenesis imperfecta ossium, Paget disease of the spine or pelvis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific corrective therapy exists, so management centres on symptom control with simple analgesia for the axial cervical or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating with vitamin D and phosphate as though it were deficiency osteomalacia, which is ineffective here",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for axial osteomalacia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases / Resnick Diagnosis of Bone and Joint Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "axial_osteomalacia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs of the spine and pelvis",
+          "cells": [
+            {
+              "text": "Coarse trabeculation with axial predominance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate, alkaline phosphatase and PTH",
+          "cells": [
+            {
+              "text": "Usually normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin D metabolites",
+          "cells": [
+            {
+              "text": "Excludes deficiency osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone biopsy",
+          "cells": [
+            {
+              "text": "Excess osteoid, where confirmation is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein electrophoresis",
+          "cells": [
+            {
+              "text": "Excludes myeloma when the pattern is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy or cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Distinguishes from Paget disease and metastases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "axial_osteomalacia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitamin D or phosphate deficiency osteomalacia",
+          "cells": [
+            {
+              "text": "Vitamin D and phosphate treatment is ineffective here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paget disease of the spine or pelvis",
+          "cells": [
+            {
+              "text": "Distinguished by bone scintigraphy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "axial_osteomalacia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No corrective therapy",
+          "cells": [
+            {
+              "text": "Symptom control with simple analgesia for axial pain"
+            },
+            {
+              "text": "No corrective therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replete vitamin D and calcium",
+          "cells": [
+            {
+              "text": "Treat any coexisting deficiency"
+            },
+            {
+              "text": "Will not reverse the condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and graded exercise",
+          "cells": [
+            {
+              "text": "Postural advice and graded exercise programme"
+            },
+            {
+              "text": "Axial symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and non-progressive course"
+            },
+            {
+              "text": "Expectations focused on symptom control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic review",
+          "cells": [
+            {
+              "text": "Biochemical and clinical stability"
+            },
+            {
+              "text": "Ongoing review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-investigation",
+          "cells": [
+            {
+              "text": "Exclude myeloma, Paget disease or metastases if symptoms or imaging change"
+            },
+            {
+              "text": "On change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "axial_osteomalacia-dx-mgmt",
+      "title": "Diagnosis and management of Axial osteomalacia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Axial pain in the spine or pelvis with coarse trabeculation on radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapidly progressive pain or new neurological deficit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Re-investigate for myeloma, Paget disease or metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Spine and pelvis radiographs, calcium, PTH, vitamin D metabolites, electrophoresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biochemistry normal and vitamin D replete, with mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Symptom control with analgesia and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and re-investigate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy and graded exercise for axial symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassurance about the benign, non-progressive course",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Replete vitamin D and calcium only if deficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Periodic review of biochemical and clinical stability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,462 @@
 {
- "id": "chronic_pelvic_pain_syndrome",
- "name": "Chronic pelvic pain syndrome (chronic prostatitis, NIH category III)",
- "aliases": [
-  "chronic prostatitis",
-  "CP/CPPS",
-  "NIH category III prostatitis",
-  "chronic nonbacterial prostatitis",
-  "prostatodynia"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "NIH category III prostatitis: chronic pelvic pain present for at least three of the previous six months in the absence of a demonstrable urinary tract infection",
-   "Pain is typically felt in the perineum, suprapubic area, penis, testes, or lower back, and is often accompanied by ejaculatory or post-ejaculatory discomfort",
-   "Lower urinary tract symptoms such as frequency, urgency, hesitancy, and a sense of incomplete emptying, along with sexual dysfunction, commonly coexist and reduce quality of life",
-   "Subdivided into IIIA (inflammatory, with leucocytes in expressed prostatic secretions, semen, or post-massage urine) and IIIB (non-inflammatory, with no leucocytes)",
-   "By definition standard bacterial cultures are negative, distinguishing it from acute (category I) and chronic bacterial (category II) prostatitis",
-   "Best assessed with a validated symptom score such as the NIH Chronic Prostatitis Symptom Index, and understood as a multifactorial disorder with pelvic-floor, neuropathic, and psychosocial contributions",
-   "Management is multimodal and phenotype-directed (for example the UPOINT approach) - pelvic-floor physiotherapy, neuromodulatory and analgesic strategies, alpha-blockers, and attention to anxiety or depression - rather than repeated antibiotic courses"
+  "id": "chronic_pelvic_pain_syndrome",
+  "name": "Chronic pelvic pain syndrome (chronic prostatitis, NIH category III)",
+  "aliases": [
+    "chronic prostatitis",
+    "CP/CPPS",
+    "NIH category III prostatitis",
+    "chronic nonbacterial prostatitis",
+    "prostatodynia"
   ],
-  "pathophysiology": "Chronic pelvic pain syndrome is a heterogeneous condition with no single identifiable cause. Proposed and frequently overlapping mechanisms include an initial infective or inflammatory insult that triggers ongoing neurogenic inflammation, pelvic-floor muscle dysfunction and spasm, central sensitisation of pain pathways, autoimmune or chemical inflammation from reflux of urine into the prostatic ducts, and psychological stress that amplifies symptom perception. Because cultures are negative and the disorder spans several systems, it is best conceptualised as a chronic pain syndrome centred on the pelvis rather than a simple prostatic infection, which underpins the move away from antibiotics towards multimodal, phenotype-directed therapy.",
-  "additionalDifferentials": [
-   "Chronic bacterial prostatitis (category II)",
-   "Interstitial cystitis / bladder pain syndrome",
-   "Benign prostatic enlargement with lower urinary tract symptoms",
-   "Urethral stricture",
-   "Pudendal neuralgia",
-   "Pelvic-floor dysfunction",
-   "Prostate or bladder malignancy"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis with mid-stream urine culture",
-   "Lower urinary tract localisation using pre- and post-prostatic-massage specimens (Meares-Stamey or two-glass test)",
-   "NIH Chronic Prostatitis Symptom Index questionnaire",
-   "Uroflowmetry and post-void residual measurement",
-   "Sexually transmitted infection screening, including urethral swab or nucleic acid amplification testing",
-   "PSA where appropriate, and cystoscopy or imaging to exclude other pathology"
-  ],
-  "redFlags": [
-   "Visible haematuria",
-   "PSA elevation or an abnormal prostate on examination",
-   "Systemic features suggesting acute bacterial prostatitis or a prostatic abscess",
-   "Unexplained weight loss",
-   "Neurological deficit or saddle anaesthesia"
-  ],
-  "prognosis": "A chronic, often relapsing-remitting condition; symptoms fluctuate and can be frustrating, but many men improve substantially with a tailored multimodal programme, although a subset have persistent symptoms.",
-  "pitfalls": [
-   "Prescribing repeated prolonged antibiotic courses when cultures are negative and there is no bacterial infection",
-   "Overlooking pelvic-floor muscle dysfunction and the value of physiotherapy",
-   "Ignoring the psychosocial dimension of anxiety, depression, and catastrophising that strongly influences outcome",
-   "Missing an alternative diagnosis such as bladder pain syndrome or, rarely, malignancy"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "EAU Guidelines on Chronic Pelvic Pain"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Phenotype-directed multimodal therapy (guided by the UPOINT framework) rather than reliance on antibiotics",
-   "Alpha-adrenergic blockers to relieve lower urinary tract and voiding symptoms",
-   "Pelvic floor physiotherapy and myofascial release for pelvic-floor muscle dysfunction and spasm",
-   "Neuropathic pain agents such as tricyclic antidepressants and gabapentinoids for the pain component",
-   "A limited trial of anti-inflammatory or phytotherapeutic agents such as quercetin or pollen extract, reserving antibiotics for genuine diagnostic uncertainty",
-   "Psychological support and cognitive behavioural therapy to address stress and symptom amplification",
-   "Symptom tracking with the NIH Chronic Prostatitis Symptom Index and referral to a specialist chronic pelvic pain service for refractory cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_pelvic_pain_syndrome-pathway",
-   "title": "Chronic pelvic pain syndrome (chronic prostatitis, NIH category III): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "NIH category III prostatitis: chronic pelvic pain present for at least three of the previous six months in the absence of a demonstrable urinary tract infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Visible haematuria",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis with mid-stream urine culture, Lower urinary tract localisation using pre- and post-prostatic-massage specimens (Meares-Stamey or two-glass test), NIH Chronic Prostatitis Symptom Index questionnaire"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Phenotype-directed multimodal therapy (guided by the UPOINT framework) rather than reliance on antibiotics"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing repeated prolonged antibiotic courses when cultures are negative and there is no bacterial infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic pelvic pain syndrome (chronic prostatitis, nih category iii)."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_pelvic_pain_syndrome-matrix",
-   "title": "Chronic pelvic pain syndrome (chronic prostatitis, NIH category III): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "NIH category III prostatitis: chronic pelvic pain present for at least three of the previous six months in the absence of a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "NIH category III prostatitis: chronic pelvic pain present for at least three of the previous six months in the absence of a demonstrable urinary tract infection",
+      "Pain is typically felt in the perineum, suprapubic area, penis, testes, or lower back, and is often accompanied by ejaculatory or post-ejaculatory discomfort",
+      "Lower urinary tract symptoms such as frequency, urgency, hesitancy, and a sense of incomplete emptying, along with sexual dysfunction, commonly coexist and reduce quality of life",
+      "Subdivided into IIIA (inflammatory, with leucocytes in expressed prostatic secretions, semen, or post-massage urine) and IIIB (non-inflammatory, with no leucocytes)",
+      "By definition standard bacterial cultures are negative, distinguishing it from acute (category I) and chronic bacterial (category II) prostatitis",
+      "Best assessed with a validated symptom score such as the NIH Chronic Prostatitis Symptom Index, and understood as a multifactorial disorder with pelvic-floor, neuropathic, and psychosocial contributions",
+      "Management is multimodal and phenotype-directed (for example the UPOINT approach) - pelvic-floor physiotherapy, neuromodulatory and analgesic strategies, alpha-blockers, and attention to anxiety or depression - rather than repeated antibiotic courses"
     ],
-    [
-     "Key Investigations",
-     "Urinalysis with mid-stream urine culture, Lower urinary tract localisation using pre- and post-prostatic-massage specimens",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic pelvic pain syndrome is a heterogeneous condition with no single identifiable cause. Proposed and frequently overlapping mechanisms include an initial infective or inflammatory insult that triggers ongoing neurogenic inflammation, pelvic-floor muscle dysfunction and spasm, central sensitisation of pain pathways, autoimmune or chemical inflammation from reflux of urine into the prostatic ducts, and psychological stress that amplifies symptom perception. Because cultures are negative and the disorder spans several systems, it is best conceptualised as a chronic pain syndrome centred on the pelvis rather than a simple prostatic infection, which underpins the move away from antibiotics towards multimodal, phenotype-directed therapy.",
+    "additionalDifferentials": [
+      "Chronic bacterial prostatitis (category II)",
+      "Interstitial cystitis / bladder pain syndrome",
+      "Benign prostatic enlargement with lower urinary tract symptoms",
+      "Urethral stricture",
+      "Pudendal neuralgia",
+      "Pelvic-floor dysfunction",
+      "Prostate or bladder malignancy"
     ],
-    [
-     "Primary Differentials",
-     "Chronic bacterial prostatitis (category II), Interstitial cystitis / bladder pain syndrome, Benign prostatic enlargement with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis with mid-stream urine culture",
+      "Lower urinary tract localisation using pre- and post-prostatic-massage specimens (Meares-Stamey or two-glass test)",
+      "NIH Chronic Prostatitis Symptom Index questionnaire",
+      "Uroflowmetry and post-void residual measurement",
+      "Sexually transmitted infection screening, including urethral swab or nucleic acid amplification testing",
+      "PSA where appropriate, and cystoscopy or imaging to exclude other pathology"
     ],
-    [
-     "Management Strategy",
-     "Phenotype-directed multimodal therapy (guided by the UPOINT framework) rather than reliance on antibiotics",
-     "Core treatment modality"
+    "redFlags": [
+      "Visible haematuria",
+      "PSA elevation or an abnormal prostate on examination",
+      "Systemic features suggesting acute bacterial prostatitis or a prostatic abscess",
+      "Unexplained weight loss",
+      "Neurological deficit or saddle anaesthesia"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing repeated prolonged antibiotic courses when cultures are negative and there is no bacterial infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "A chronic, often relapsing-remitting condition; symptoms fluctuate and can be frustrating, but many men improve substantially with a tailored multimodal programme, although a subset have persistent symptoms.",
+    "pitfalls": [
+      "Prescribing repeated prolonged antibiotic courses when cultures are negative and there is no bacterial infection",
+      "Overlooking pelvic-floor muscle dysfunction and the value of physiotherapy",
+      "Ignoring the psychosocial dimension of anxiety, depression, and catastrophising that strongly influences outcome",
+      "Missing an alternative diagnosis such as bladder pain syndrome or, rarely, malignancy"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "EAU Guidelines on Chronic Pelvic Pain"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Phenotype-directed multimodal therapy (guided by the UPOINT framework) rather than reliance on antibiotics",
+      "Alpha-adrenergic blockers to relieve lower urinary tract and voiding symptoms",
+      "Pelvic floor physiotherapy and myofascial release for pelvic-floor muscle dysfunction and spasm",
+      "Neuropathic pain agents such as tricyclic antidepressants and gabapentinoids for the pain component",
+      "A limited trial of anti-inflammatory or phytotherapeutic agents such as quercetin or pollen extract, reserving antibiotics for genuine diagnostic uncertainty",
+      "Psychological support and cognitive behavioural therapy to address stress and symptom amplification",
+      "Symptom tracking with the NIH Chronic Prostatitis Symptom Index and referral to a specialist chronic pelvic pain service for refractory cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic pelvic pain syndrome (chronic prostatitis, nih category iii)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-pelvic-pain-syndrome-real-image",
-   "title": "Chronic pelvic pain syndrome (chronic prostatitis, NIH category III): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "chronic_pelvic_pain_syndrome-pathway",
+      "title": "Chronic pelvic pain syndrome (chronic prostatitis, NIH category III): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "NIH category III prostatitis: chronic pelvic pain present for at least three of the previous six months in the absence of a demonstrable urinary tract infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Visible haematuria",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis with mid-stream urine culture, Lower urinary tract localisation using pre- and post-prostatic-massage specimens (Meares-Stamey or two-glass test), NIH Chronic Prostatitis Symptom Index questionnaire"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Phenotype-directed multimodal therapy (guided by the UPOINT framework) rather than reliance on antibiotics"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing repeated prolonged antibiotic courses when cultures are negative and there is no bacterial infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic pelvic pain syndrome (chronic prostatitis, nih category iii)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_pelvic_pain_syndrome-matrix",
+      "title": "Chronic pelvic pain syndrome (chronic prostatitis, NIH category III): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "NIH category III prostatitis: chronic pelvic pain present for at least three of the previous six months in the absence of a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis with mid-stream urine culture, Lower urinary tract localisation using pre- and post-prostatic-massage specimens",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic bacterial prostatitis (category II), Interstitial cystitis / bladder pain syndrome, Benign prostatic enlargement with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Phenotype-directed multimodal therapy (guided by the UPOINT framework) rather than reliance on antibiotics",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing repeated prolonged antibiotic courses when cultures are negative and there is no bacterial infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic pelvic pain syndrome (chronic prostatitis, nih category iii)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_pelvic_pain_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis with mid-stream urine culture",
+          "cells": [
+            {
+              "text": "Excludes bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre- and post-massage specimens (Meares-Stamey or two-glass test)",
+          "cells": [
+            {
+              "text": "Localises the source of inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NIH Chronic Prostatitis Symptom Index",
+          "cells": [
+            {
+              "text": "Quantifies symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uroflowmetry and post-void residual",
+          "cells": [
+            {
+              "text": "Voiding function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexually transmitted infection screening",
+          "cells": [
+            {
+              "text": "Urethral swab or nucleic acid amplification testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_pelvic_pain_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic bacterial prostatitis (category II)",
+          "cells": [
+            {
+              "text": "Positive bacterial culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interstitial cystitis or bladder pain syndrome",
+          "cells": [
+            {
+              "text": "Bladder pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign prostatic enlargement",
+          "cells": [
+            {
+              "text": "Lower urinary tract symptoms with an enlarged prostate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_pelvic_pain_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Alpha-adrenergic blockers",
+          "cells": [
+            {
+              "text": "Relieve lower urinary tract and voiding symptoms"
+            },
+            {
+              "text": "Voiding symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic floor physiotherapy and myofascial release",
+          "cells": [
+            {
+              "text": "Pelvic floor muscle dysfunction and spasm"
+            },
+            {
+              "text": "Pelvic floor dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricyclic antidepressants or gabapentinoids",
+          "cells": [
+            {
+              "text": "Pain component"
+            },
+            {
+              "text": "Neuropathic pain agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Stress and symptom amplification"
+            },
+            {
+              "text": "Psychological support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics only for genuine diagnostic uncertainty",
+          "cells": [
+            {
+              "text": "Not repeated courses"
+            },
+            {
+              "text": "Avoid repeated courses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_pelvic_pain_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Chronic pelvic pain syndrome (chronic prostatitis, NIH category III)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic pelvic pain syndrome: pelvic pain for 3 of the last 6 months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (visible haematuria, raised PSA, abscess features, neuro deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent urology review for abscess or suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis, culture, localisation specimens, symptom index and uroflowmetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bacterial infection excluded on culture and localisation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Phenotype-directed therapy guided by the UPOINT framework",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check bacterial prostatitis, bladder pain syndrome and urethral stricture",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Alpha-blockers for voiding symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pelvic floor physiotherapy and neuropathic agents for pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychological support and cognitive behavioural therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Track symptoms with NIH index; specialist referral for refractory cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

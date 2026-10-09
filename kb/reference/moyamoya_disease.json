@@ -1,173 +1,442 @@
 {
- "id": "moyamoya_disease",
- "name": "Moyamoya disease",
- "aliases": [
-  "moyamoya arteriopathy",
-  "spontaneous occlusion of the circle of Willis",
-  "RNF213-associated moyamoya"
- ],
- "class": "non_infective",
- "system": "Nervous system / Cerebrovascular",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / cerebrovascular surgery literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Progressive stenosis and occlusion of the terminal internal carotid arteries and proximal circle of Willis",
-   "A fragile network of dilated basal collateral vessels produces the characteristic angiographic puff of smoke appearance",
-   "Bimodal presentation: children typically present with ischaemia and adults may present with intracranial haemorrhage from fragile collaterals",
-   "Hyperventilation, as with crying in children, can precipitate transient ischaemic symptoms by lowering carbon dioxide",
-   "The RNF213 susceptibility variant is strongly associated, particularly in East Asian populations",
-   "Moyamoya syndrome describes the same angiographic pattern secondary to conditions such as sickle cell disease, neurofibromatosis, or prior radiation",
-   "Surgical revascularisation to augment collateral flow is the mainstay of definitive treatment"
+  "id": "moyamoya_disease",
+  "name": "Moyamoya disease",
+  "aliases": [
+    "moyamoya arteriopathy",
+    "spontaneous occlusion of the circle of Willis",
+    "RNF213-associated moyamoya"
   ],
-  "pathophysiology": "Moyamoya disease is a chronic, progressive, non-atherosclerotic, non-inflammatory steno-occlusive arteriopathy of the distal internal carotid arteries and their proximal branches. Intimal thickening from smooth muscle cell proliferation and luminal narrowing reduce anterior circulation flow, prompting the growth of fragile lenticulostriate and leptomeningeal collateral networks that give the smoky angiographic appearance. These collaterals are prone to ischaemic failure and, being thin-walled and under haemodynamic stress, to rupture and haemorrhage. Genetic susceptibility, notably RNF213 variants, underlies many idiopathic cases.",
-  "additionalDifferentials": [
-   "Atherosclerotic intracranial stenosis",
-   "Intracranial vasculitis or primary angiitis of the CNS",
-   "Sickle cell cerebral vasculopathy",
-   "Reversible cerebral vasoconstriction syndrome",
-   "Radiation-induced arteriopathy",
-   "Fibromuscular dysplasia affecting intracranial vessels"
-  ],
-  "additionalInvestigations": [
-   "Digital subtraction angiography as the gold standard to demonstrate steno-occlusion and collateral networks",
-   "MRI and MR angiography showing basal collaterals and ischaemic or haemorrhagic lesions",
-   "Cerebral perfusion and vascular reserve studies to guide revascularisation",
-   "Testing for secondary causes such as sickle cell disease and RNF213 genotyping where appropriate",
-   "Assessment for associated conditions like neurofibromatosis or prior cranial irradiation"
-  ],
-  "redFlags": [
-   "Intracranial haemorrhage from rupture of fragile collateral vessels",
-   "Recurrent transient ischaemic attacks or completed strokes",
-   "Ischaemic symptoms provoked by hyperventilation, especially in children",
-   "Rapid clinical or angiographic progression"
-  ],
-  "prognosis": "Untreated moyamoya tends to progress with recurrent ischaemic or haemorrhagic events and cumulative neurological deficit; surgical revascularisation can reduce stroke risk and stabilise the disease, though outcome depends on the stage at diagnosis.",
-  "pitfalls": [
-   "Mistaking the arteriopathy for atherosclerosis and withholding revascularisation assessment",
-   "Aggressive blood pressure lowering that compromises collateral-dependent perfusion",
-   "Overlooking secondary causes when labelling the pattern as idiopathic disease",
-   "Failing to protect against hypocapnia during anaesthesia, which can precipitate ischaemia"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical revascularisation, by direct superficial-temporal-to-middle-cerebral-artery bypass or indirect procedures such as encephaloduroarteriosynangiosis, is the definitive treatment to restore perfusion and reduce stroke risk",
-   "Give antiplatelet therapy such as aspirin to reduce ischaemic events in the ischaemic-predominant form",
-   "Avoid precipitants of ischaemia including hyperventilation, hypotension, hypocapnia and dehydration, and maintain euvolaemia and normocapnia in the perioperative period",
-   "Identify and treat secondary (moyamoya syndrome) causes, for example transfusion for sickle cell disease",
-   "Provide stroke rehabilitation with physiotherapy, occupational and speech therapy after ischaemic or haemorrhagic events",
-   "Monitor with serial angiographic and cerebral perfusion imaging for disease progression",
-   "Consider RNF213 genotyping and counselling, particularly in East Asian patients, and assess relatives",
-   "Escalate urgently for new transient ischaemic attacks, stroke or intracranial haemorrhage"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "moyamoya_disease-pathway",
-   "title": "Moyamoya disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Progressive stenosis and occlusion of the terminal internal carotid arteries and proximal circle of Willis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intracranial haemorrhage from rupture of fragile collateral vessels",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Digital subtraction angiography as the gold standard to demonstrate steno-occlusion and collateral networks, MRI and MR angiography showing basal collaterals and ischaemic or haemorrhagic lesions, Cerebral perfusion and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical revascularisation, by direct superficial-temporal-to-middle-cerebral-artery bypass or indirect procedures such as encephaloduroarteriosynangiosis, is the definitive treatment to restore perfusion and reduce"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the arteriopathy for atherosclerosis and withholding revascularisation assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of moyamoya disease."
-  }
- ],
- "tables": [
-  {
-   "id": "moyamoya_disease-matrix",
-   "title": "Moyamoya disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Progressive stenosis and occlusion of the terminal internal carotid arteries and proximal circle of Willis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Cerebrovascular",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / cerebrovascular surgery literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Progressive stenosis and occlusion of the terminal internal carotid arteries and proximal circle of Willis",
+      "A fragile network of dilated basal collateral vessels produces the characteristic angiographic puff of smoke appearance",
+      "Bimodal presentation: children typically present with ischaemia and adults may present with intracranial haemorrhage from fragile collaterals",
+      "Hyperventilation, as with crying in children, can precipitate transient ischaemic symptoms by lowering carbon dioxide",
+      "The RNF213 susceptibility variant is strongly associated, particularly in East Asian populations",
+      "Moyamoya syndrome describes the same angiographic pattern secondary to conditions such as sickle cell disease, neurofibromatosis, or prior radiation",
+      "Surgical revascularisation to augment collateral flow is the mainstay of definitive treatment"
     ],
-    [
-     "Key Investigations",
-     "Digital subtraction angiography as the gold standard to demonstrate steno-occlusion and collateral networks, MRI and MR",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Moyamoya disease is a chronic, progressive, non-atherosclerotic, non-inflammatory steno-occlusive arteriopathy of the distal internal carotid arteries and their proximal branches. Intimal thickening from smooth muscle cell proliferation and luminal narrowing reduce anterior circulation flow, prompting the growth of fragile lenticulostriate and leptomeningeal collateral networks that give the smoky angiographic appearance. These collaterals are prone to ischaemic failure and, being thin-walled and under haemodynamic stress, to rupture and haemorrhage. Genetic susceptibility, notably RNF213 variants, underlies many idiopathic cases.",
+    "additionalDifferentials": [
+      "Atherosclerotic intracranial stenosis",
+      "Intracranial vasculitis or primary angiitis of the CNS",
+      "Sickle cell cerebral vasculopathy",
+      "Reversible cerebral vasoconstriction syndrome",
+      "Radiation-induced arteriopathy",
+      "Fibromuscular dysplasia affecting intracranial vessels"
     ],
-    [
-     "Primary Differentials",
-     "Atherosclerotic intracranial stenosis, Intracranial vasculitis or primary angiitis of the CNS, Sickle cell cerebral vasculopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Digital subtraction angiography as the gold standard to demonstrate steno-occlusion and collateral networks",
+      "MRI and MR angiography showing basal collaterals and ischaemic or haemorrhagic lesions",
+      "Cerebral perfusion and vascular reserve studies to guide revascularisation",
+      "Testing for secondary causes such as sickle cell disease and RNF213 genotyping where appropriate",
+      "Assessment for associated conditions like neurofibromatosis or prior cranial irradiation"
     ],
-    [
-     "Management Strategy",
-     "Surgical revascularisation, by direct superficial-temporal-to-middle-cerebral-artery bypass or indirect procedures such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Intracranial haemorrhage from rupture of fragile collateral vessels",
+      "Recurrent transient ischaemic attacks or completed strokes",
+      "Ischaemic symptoms provoked by hyperventilation, especially in children",
+      "Rapid clinical or angiographic progression"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the arteriopathy for atherosclerosis and withholding revascularisation assessment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated moyamoya tends to progress with recurrent ischaemic or haemorrhagic events and cumulative neurological deficit; surgical revascularisation can reduce stroke risk and stabilise the disease, though outcome depends on the stage at diagnosis.",
+    "pitfalls": [
+      "Mistaking the arteriopathy for atherosclerosis and withholding revascularisation assessment",
+      "Aggressive blood pressure lowering that compromises collateral-dependent perfusion",
+      "Overlooking secondary causes when labelling the pattern as idiopathic disease",
+      "Failing to protect against hypocapnia during anaesthesia, which can precipitate ischaemia"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical revascularisation, by direct superficial-temporal-to-middle-cerebral-artery bypass or indirect procedures such as encephaloduroarteriosynangiosis, is the definitive treatment to restore perfusion and reduce stroke risk",
+      "Give antiplatelet therapy such as aspirin to reduce ischaemic events in the ischaemic-predominant form",
+      "Avoid precipitants of ischaemia including hyperventilation, hypotension, hypocapnia and dehydration, and maintain euvolaemia and normocapnia in the perioperative period",
+      "Identify and treat secondary (moyamoya syndrome) causes, for example transfusion for sickle cell disease",
+      "Provide stroke rehabilitation with physiotherapy, occupational and speech therapy after ischaemic or haemorrhagic events",
+      "Monitor with serial angiographic and cerebral perfusion imaging for disease progression",
+      "Consider RNF213 genotyping and counselling, particularly in East Asian patients, and assess relatives",
+      "Escalate urgently for new transient ischaemic attacks, stroke or intracranial haemorrhage"
     ]
-   ],
-   "caption": "Overview comparison matrix for moyamoya disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "moyamoya-disease-real-image",
-   "title": "Moyamoya disease: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "moyamoya_disease-pathway",
+      "title": "Moyamoya disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Progressive stenosis and occlusion of the terminal internal carotid arteries and proximal circle of Willis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intracranial haemorrhage from rupture of fragile collateral vessels",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Digital subtraction angiography as the gold standard to demonstrate steno-occlusion and collateral networks, MRI and MR angiography showing basal collaterals and ischaemic or haemorrhagic lesions, Cerebral perfusion and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical revascularisation, by direct superficial-temporal-to-middle-cerebral-artery bypass or indirect procedures such as encephaloduroarteriosynangiosis, is the definitive treatment to restore perfusion and reduce"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the arteriopathy for atherosclerosis and withholding revascularisation assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of moyamoya disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "moyamoya_disease-matrix",
+      "title": "Moyamoya disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Progressive stenosis and occlusion of the terminal internal carotid arteries and proximal circle of Willis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Digital subtraction angiography as the gold standard to demonstrate steno-occlusion and collateral networks, MRI and MR",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Atherosclerotic intracranial stenosis, Intracranial vasculitis or primary angiitis of the CNS, Sickle cell cerebral vasculopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical revascularisation, by direct superficial-temporal-to-middle-cerebral-artery bypass or indirect procedures such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the arteriopathy for atherosclerosis and withholding revascularisation assessment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for moyamoya disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / cerebrovascular surgery literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "moyamoya_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Digital subtraction angiography",
+          "cells": [
+            {
+              "text": "Gold standard: steno-occlusion and collateral networks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI and MR angiography",
+          "cells": [
+            {
+              "text": "Basal collaterals; ischaemic or haemorrhagic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral perfusion and vascular reserve studies",
+          "cells": [
+            {
+              "text": "Guide revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell testing and RNF213 genotyping",
+          "cells": [
+            {
+              "text": "Secondary causes and genetic risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "moyamoya_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atherosclerotic intracranial stenosis",
+          "cells": [
+            {
+              "text": "Mistaking the arteriopathy for atherosclerosis withholds revascularisation assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial vasculitis or primary CNS angiitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell cerebral vasculopathy",
+          "cells": [
+            {
+              "text": "Secondary moyamoya; transfusion treats the cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "moyamoya_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical revascularisation",
+          "cells": [
+            {
+              "text": "Direct superficial temporal to middle cerebral artery bypass or indirect procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Aspirin to reduce ischaemic events in the ischaemic-predominant form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid ischaemic precipitants",
+          "cells": [
+            {
+              "text": "Hyperventilation, hypotension, hypocapnia, dehydration; keep euvolaemia and normocapnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat secondary causes",
+          "cells": [
+            {
+              "text": "For example transfusion for sickle cell disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial angiographic and perfusion imaging",
+          "cells": [
+            {
+              "text": "Monitor progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "moyamoya_disease-dx-mgmt",
+      "title": "Diagnosis and management of Moyamoya disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent TIAs or stroke, often provoked by hyperventilation, especially in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intracranial haemorrhage, new TIAs or stroke, or rapid progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical and stroke care; avoid hypotension and hypocapnia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Digital subtraction angiography, MRI/MRA, perfusion and vascular reserve studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Steno-occlusion with basal collaterals confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider atherosclerosis, vasculitis, sickle cell vasculopathy, RCVS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Assess for direct or indirect surgical revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspirin in ischaemic-predominant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid hyperventilation, hypotension, hypocapnia and dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat secondary causes; RNF213 counselling; stroke rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated disease progresses; revascularisation can reduce further events",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

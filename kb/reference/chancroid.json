@@ -1,176 +1,694 @@
 {
- "id": "chancroid",
- "name": "Chancroid",
- "aliases": [
-  "soft chancre",
-  "Haemophilus ducreyi infection",
-  "ulcus molle"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A sexually transmitted cause of genital ulceration produced by the Gram-negative coccobacillus Haemophilus ducreyi, now uncommon but still important in the differential of genital ulcer disease",
-   "The ulcer is typically painful, non-indurated (soft) with a ragged undermined edge and a purulent base, contrasting with the painless firm ulcer of primary syphilis",
-   "Tender, often unilateral inguinal lymphadenopathy that may become fluctuant and suppurate into a bubo is characteristic",
-   "The combination of one or more painful genital ulcers with suppurative inguinal nodes strongly suggests chancroid",
-   "Culture requires special enriched media and is insensitive, so diagnosis is often clinical after excluding syphilis and herpes; molecular testing is most reliable where available",
-   "Because genital ulcer disease facilitates HIV transmission, testing for HIV and syphilis is essential, with follow-up serology as needed",
-   "Treatment uses recommended antibiotics such as a macrolide, ceftriaxone or a fluoroquinolone, and fluctuant buboes may require needle aspiration or incision"
+  "id": "chancroid",
+  "name": "Chancroid",
+  "aliases": [
+    "soft chancre",
+    "Haemophilus ducreyi infection",
+    "ulcus molle"
   ],
-  "pathophysiology": "Haemophilus ducreyi enters through breaks in genital epithelium during sexual contact. It secretes a cytolethal distending toxin and other virulence factors that cause keratinocyte and epithelial cell damage, producing a necrotic, ulcerative lesion with a neutrophil-rich inflammatory infiltrate. The organism resists phagocytic killing and provokes a suppurative regional lymphadenitis. The disrupted mucocutaneous barrier and inflammatory milieu markedly enhance the risk of HIV acquisition and shedding, linking chancroid epidemiologically to HIV spread.",
-  "additionalDifferentials": [
-   "Primary syphilis (painless indurated chancre)",
-   "Genital herpes simplex ulceration",
-   "Lymphogranuloma venereum",
-   "Granuloma inguinale (donovanosis)",
-   "Traumatic or fixed drug eruption ulcer"
-  ],
-  "infectionMimics": [
-   "Syphilitic chancre",
-   "Herpes simplex virus genital ulcers",
-   "Lymphogranuloma venereum with inguinal buboes",
-   "Donovanosis with beefy granulomatous ulcers"
-  ],
-  "additionalInvestigations": [
-   "Dark-field microscopy and syphilis serology to exclude primary syphilis",
-   "HSV PCR or culture from the ulcer to exclude herpes",
-   "Nucleic acid amplification or PCR for Haemophilus ducreyi where available",
-   "Gram stain and special culture media (low sensitivity) if molecular testing unavailable",
-   "HIV testing at presentation and on follow-up"
-  ],
-  "redFlags": [
-   "Rapidly enlarging or fluctuant bubo threatening rupture and needing drainage",
-   "Coexisting HIV infection, which impairs healing and alters treatment response",
-   "Failure of ulcers to heal after appropriate therapy, prompting reconsideration of the diagnosis",
-   "Extensive tissue destruction or secondary bacterial superinfection"
-  ],
-  "prognosis": "With appropriate antibiotic therapy ulcers heal over one to two weeks and buboes resolve, though large nodes may need aspiration and healing is slower in people with HIV; untreated disease causes progressive ulceration and scarring.",
-  "pitfalls": [
-   "Assuming a painful ulcer excludes syphilis or coinfection, when mixed infections occur",
-   "Incising a bubo when aspiration through healthy skin is preferred to avoid sinus formation",
-   "Relying on insensitive culture and missing the diagnosis",
-   "Neglecting partner notification and HIV screening"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/NTEP guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with an effective antimicrobial such as azithromycin, ceftriaxone, ciprofloxacin or erythromycin to eradicate Haemophilus ducreyi",
-   "Aspirate or incise and drain fluctuant buboes to relieve symptoms and prevent spontaneous rupture",
-   "Provide analgesia and local wound care for the genital ulceration",
-   "Test for co-existing sexually transmitted infections, including HIV and syphilis, with follow-up serology, given that genital ulcer disease facilitates HIV transmission",
-   "Review shortly after starting treatment to confirm clinical improvement, expecting slower healing in people living with HIV",
-   "Trace, notify and treat recent sexual partners and advise abstinence until lesions have healed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chancroid-pathway",
-   "title": "Chancroid: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A sexually transmitted cause of genital ulceration produced by the Gram-negative coccobacillus Haemophilus ducreyi, now uncommon but still important in the differential of genital ulcer disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging or fluctuant bubo threatening rupture and needing drainage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dark-field microscopy and syphilis serology to exclude primary syphilis, HSV PCR or culture from the ulcer to exclude herpes, Nucleic acid amplification or PCR for Haemophilus ducreyi where available"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with an effective antimicrobial such as azithromycin, ceftriaxone, ciprofloxacin or erythromycin to eradicate Haemophilus ducreyi"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a painful ulcer excludes syphilis or coinfection, when mixed infections occur"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chancroid."
-  }
- ],
- "tables": [
-  {
-   "id": "chancroid-matrix",
-   "title": "Chancroid: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A sexually transmitted cause of genital ulceration produced by the Gram-negative coccobacillus Haemophilus ducreyi, now uncommon",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A sexually transmitted cause of genital ulceration produced by the Gram-negative coccobacillus Haemophilus ducreyi, now uncommon but still important in the differential of genital ulcer disease",
+      "The ulcer is typically painful, non-indurated (soft) with a ragged undermined edge and a purulent base, contrasting with the painless firm ulcer of primary syphilis",
+      "Tender, often unilateral inguinal lymphadenopathy that may become fluctuant and suppurate into a bubo is characteristic",
+      "The combination of one or more painful genital ulcers with suppurative inguinal nodes strongly suggests chancroid",
+      "Culture requires special enriched media and is insensitive, so diagnosis is often clinical after excluding syphilis and herpes; molecular testing is most reliable where available",
+      "Because genital ulcer disease facilitates HIV transmission, testing for HIV and syphilis is essential, with follow-up serology as needed",
+      "Treatment uses recommended antibiotics such as a macrolide, ceftriaxone or a fluoroquinolone, and fluctuant buboes may require needle aspiration or incision"
     ],
-    [
-     "Key Investigations",
-     "Dark-field microscopy and syphilis serology to exclude primary syphilis, HSV PCR or culture from the ulcer to exclude herpes,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Haemophilus ducreyi enters through breaks in genital epithelium during sexual contact. It secretes a cytolethal distending toxin and other virulence factors that cause keratinocyte and epithelial cell damage, producing a necrotic, ulcerative lesion with a neutrophil-rich inflammatory infiltrate. The organism resists phagocytic killing and provokes a suppurative regional lymphadenitis. The disrupted mucocutaneous barrier and inflammatory milieu markedly enhance the risk of HIV acquisition and shedding, linking chancroid epidemiologically to HIV spread.",
+    "additionalDifferentials": [
+      "Primary syphilis (painless indurated chancre)",
+      "Genital herpes simplex ulceration",
+      "Lymphogranuloma venereum",
+      "Granuloma inguinale (donovanosis)",
+      "Traumatic or fixed drug eruption ulcer"
     ],
-    [
-     "Primary Differentials",
-     "Primary syphilis (painless indurated chancre), Genital herpes simplex ulceration, Lymphogranuloma venereum",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Syphilitic chancre",
+      "Herpes simplex virus genital ulcers",
+      "Lymphogranuloma venereum with inguinal buboes",
+      "Donovanosis with beefy granulomatous ulcers"
     ],
-    [
-     "Management Strategy",
-     "Treat with an effective antimicrobial such as azithromycin, ceftriaxone, ciprofloxacin or erythromycin to eradicate Haemophilus",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Dark-field microscopy and syphilis serology to exclude primary syphilis",
+      "HSV PCR or culture from the ulcer to exclude herpes",
+      "Nucleic acid amplification or PCR for Haemophilus ducreyi where available",
+      "Gram stain and special culture media (low sensitivity) if molecular testing unavailable",
+      "HIV testing at presentation and on follow-up"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a painful ulcer excludes syphilis or coinfection, when mixed infections occur",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Rapidly enlarging or fluctuant bubo threatening rupture and needing drainage",
+      "Coexisting HIV infection, which impairs healing and alters treatment response",
+      "Failure of ulcers to heal after appropriate therapy, prompting reconsideration of the diagnosis",
+      "Extensive tissue destruction or secondary bacterial superinfection"
+    ],
+    "prognosis": "With appropriate antibiotic therapy ulcers heal over one to two weeks and buboes resolve, though large nodes may need aspiration and healing is slower in people with HIV; untreated disease causes progressive ulceration and scarring.",
+    "pitfalls": [
+      "Assuming a painful ulcer excludes syphilis or coinfection, when mixed infections occur",
+      "Incising a bubo when aspiration through healthy skin is preferred to avoid sinus formation",
+      "Relying on insensitive culture and missing the diagnosis",
+      "Neglecting partner notification and HIV screening"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/NTEP guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with an effective antimicrobial such as azithromycin, ceftriaxone, ciprofloxacin or erythromycin to eradicate Haemophilus ducreyi",
+      "Aspirate or incise and drain fluctuant buboes to relieve symptoms and prevent spontaneous rupture",
+      "Provide analgesia and local wound care for the genital ulceration",
+      "Test for co-existing sexually transmitted infections, including HIV and syphilis, with follow-up serology, given that genital ulcer disease facilitates HIV transmission",
+      "Review shortly after starting treatment to confirm clinical improvement, expecting slower healing in people living with HIV",
+      "Trace, notify and treat recent sexual partners and advise abstinence until lesions have healed"
     ]
-   ],
-   "caption": "Overview comparison matrix for chancroid."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chancroid-real-image",
-   "title": "Chancroid: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "chancroid-pathway",
+      "title": "Chancroid: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A sexually transmitted cause of genital ulceration produced by the Gram-negative coccobacillus Haemophilus ducreyi, now uncommon but still important in the differential of genital ulcer disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging or fluctuant bubo threatening rupture and needing drainage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dark-field microscopy and syphilis serology to exclude primary syphilis, HSV PCR or culture from the ulcer to exclude herpes, Nucleic acid amplification or PCR for Haemophilus ducreyi where available"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with an effective antimicrobial such as azithromycin, ceftriaxone, ciprofloxacin or erythromycin to eradicate Haemophilus ducreyi"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a painful ulcer excludes syphilis or coinfection, when mixed infections occur"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chancroid."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chancroid-matrix",
+      "title": "Chancroid: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A sexually transmitted cause of genital ulceration produced by the Gram-negative coccobacillus Haemophilus ducreyi, now uncommon",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dark-field microscopy and syphilis serology to exclude primary syphilis, HSV PCR or culture from the ulcer to exclude herpes,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary syphilis (painless indurated chancre), Genital herpes simplex ulceration, Lymphogranuloma venereum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with an effective antimicrobial such as azithromycin, ceftriaxone, ciprofloxacin or erythromycin to eradicate Haemophilus",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a painful ulcer excludes syphilis or coinfection, when mixed infections occur",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chancroid."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 130-7",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chancroid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dark-field microscopy and syphilis serology",
+          "cells": [
+            {
+              "text": "Excludes primary syphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HSV PCR or culture from the ulcer",
+          "cells": [
+            {
+              "text": "Excludes herpes simplex ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nucleic acid amplification for Haemophilus ducreyi",
+          "cells": [
+            {
+              "text": "Most reliable where available; culture is insensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain and special culture media",
+          "cells": [
+            {
+              "text": "Low sensitivity; used if molecular testing is unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing",
+          "cells": [
+            {
+              "text": "At presentation and on follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chancroid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary (syphilitic) chancre",
+          "cells": [
+            {
+              "text": "Painless, firm, indurated ulcer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Donovanosis",
+          "cells": [
+            {
+              "text": "Beefy granulomatous ulcers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chancroid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antimicrobial treatment",
+          "cells": [
+            {
+              "text": "Azithromycin, ceftriaxone, ciprofloxacin or erythromycin"
+            },
+            {
+              "text": "Eradicates Haemophilus ducreyi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bubo management",
+          "cells": [
+            {
+              "text": "Aspirate or incise and drain fluctuant buboes"
+            },
+            {
+              "text": "Relieves symptoms and prevents spontaneous rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and local wound care",
+          "cells": [
+            {
+              "text": "Analgesia and local care of the genital ulceration"
+            },
+            {
+              "text": "Symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting STI screening",
+          "cells": [
+            {
+              "text": "Test for HIV and syphilis with follow-up serology"
+            },
+            {
+              "text": "Genital ulcer disease facilitates HIV transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early review",
+          "cells": [
+            {
+              "text": "Review shortly after treatment"
+            },
+            {
+              "text": "Slower healing expected in people living with HIV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Partner management",
+          "cells": [
+            {
+              "text": "Trace, notify and treat recent sexual partners; abstain until healed"
+            },
+            {
+              "text": "Prevents onward transmission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chancroid-ddx-2",
+      "kind": "ddx",
+      "title": "Clinical features of genital ulcers",
+      "rowHeader": "Feature",
+      "columns": [
+        "Syphilis",
+        "Herpes",
+        "Chancroid",
+        "Lymphogranuloma venereum",
+        "Donovanosis"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation period",
+          "cells": [
+            {
+              "text": "9 to 90 days"
+            },
+            {
+              "text": "2 to 7 days"
+            },
+            {
+              "text": "1 to 14 days"
+            },
+            {
+              "text": "3 days to 6 weeks"
+            },
+            {
+              "text": "1 to 4 weeks (up to 6 months)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early primary lesions",
+          "cells": [
+            {
+              "text": "Papule"
+            },
+            {
+              "text": "Vesicle"
+            },
+            {
+              "text": "Pustule"
+            },
+            {
+              "text": "Papule, pustule or vesicle"
+            },
+            {
+              "text": "Papule"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Number of lesions",
+          "cells": [
+            {
+              "text": "Usually one"
+            },
+            {
+              "text": "Multiple"
+            },
+            {
+              "text": "Usually multiple, may coalesce"
+            },
+            {
+              "text": "Usually one; often not detected, despite lymphadenopathy"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diameter",
+          "cells": [
+            {
+              "text": "5 to 15 mm"
+            },
+            {
+              "text": "1 to 2 mm"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "2 to 10 mm"
+            },
+            {
+              "text": "Variable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Edges",
+          "cells": [
+            {
+              "text": "Sharply demarcated, elevated, round or oval"
+            },
+            {
+              "text": "Erythematous"
+            },
+            {
+              "text": "Undermined, ragged, irregular"
+            },
+            {
+              "text": "Elevated, round or oval"
+            },
+            {
+              "text": "Elevated, irregular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Depth",
+          "cells": [
+            {
+              "text": "Superficial or deep"
+            },
+            {
+              "text": "Superficial"
+            },
+            {
+              "text": "Excavated"
+            },
+            {
+              "text": "Superficial or deep"
+            },
+            {
+              "text": "Elevated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Base",
+          "cells": [
+            {
+              "text": "Smooth, nonpurulent, relatively nonvascular"
+            },
+            {
+              "text": "Serous, erythematous, nonvascular"
+            },
+            {
+              "text": "Purulent, bleeds easily"
+            },
+            {
+              "text": "Variable, nonvascular"
+            },
+            {
+              "text": "Red and velvety, bleeds readily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Induration",
+          "cells": [
+            {
+              "text": "Firm"
+            },
+            {
+              "text": "None"
+            },
+            {
+              "text": "Soft"
+            },
+            {
+              "text": "Occasionally firm"
+            },
+            {
+              "text": "Firm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pain",
+          "cells": [
+            {
+              "text": "Uncommon"
+            },
+            {
+              "text": "Frequently tender"
+            },
+            {
+              "text": "Usually very tender"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Uncommon"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphadenopathy",
+          "cells": [
+            {
+              "text": "Firm, nontender, bilateral"
+            },
+            {
+              "text": "Firm, tender, often bilateral with the initial episode"
+            },
+            {
+              "text": "Tender, may suppurate, loculated, usually unilateral"
+            },
+            {
+              "text": "Tender, may suppurate, loculated, usually unilateral"
+            },
+            {
+              "text": "None; pseudobuboes"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chancroid-dx-mgmt",
+      "title": "Diagnosis and management of Chancroid",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chancroid: painful soft genital ulcer with tender suppurative inguinal nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapidly enlarging or fluctuant bubo, HIV, failure to heal)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: drain fluctuant bubo; reconsider diagnosis if not healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exclude syphilis and herpes; Haemophilus ducreyi testing; HIV test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Painful soft ulcer with suppurative nodes, syphilis and herpes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Azithromycin, ceftriaxone, ciprofloxacin or erythromycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check primary syphilis, herpes, lymphogranuloma venereum and donovanosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspirate or incise fluctuant buboes to prevent rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Test for HIV and syphilis; follow-up serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Review after treatment; trace and treat recent partners",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Review response; slower healing expected in people living with HIV",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,193 +1,605 @@
 {
- "id": "rubella_german_measles",
- "name": "Rubella (German Measles)",
- "system": "Infectious Diseases (viral exanthem / congenital infection)",
- "class": "infective",
- "chapter": 212,
- "page": 1643,
- "aliases": [
-  "German measles",
-  "three-day measles",
-  "Rubivirus infection",
-  "Congenital rubella syndrome",
-  "CRS"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1643",
-  "clinicalPearls": [
-   "Caused by rubella virus, an enveloped single-stranded positive-sense RNA virus of the Matonaviridae family (genus Rubivirus); only a single antigenic type exists and humans are the only known reservoir (Harrison 22e p.1643).",
-   "Acquired rubella typically presents as a mild generalized maculopapular rash lasting up to about 3 days, but as many as roughly half of infections are subclinical or occur without a rash (Harrison 22e p.1643).",
-   "Incubation period averages 14 days (range about 12-23 days); in older children and adults a 1- to 5-day prodrome of low-grade fever, malaise, and upper respiratory symptoms may precede the rash, whereas in young children rash is often the first sign (Harrison 22e p.1643).",
-   "Occipital and postauricular lymphadenopathy is characteristic and may appear during the second week after exposure (Harrison 22e p.1643).",
-   "Arthralgia and arthritis are common complications in infected adults, particularly women; thrombocytopenia and encephalitis are less common (Harrison 22e p.1643).",
-   "Persons with acquired rubella may shed virus from about 7 days before rash onset to roughly 5-7 days afterward, and both clinical and subclinical infections are considered contagious (Harrison 22e p.1643).",
-   "The most serious consequence is congenital rubella syndrome (CRS), which results from maternal infection during pregnancy, especially the first trimester; the classic triad is cataracts, hearing impairment, and heart defects (Harrison 22e p.1644).",
-   "Hearing impairment is the single most common defect of CRS, and the classic complete triad is seen in only about 10% of CRS infants (Harrison 22e p.1644).",
-   "Maternal infection within the first 10 weeks of gestation carries roughly a 90% risk of delivering an infant with CRS; risk declines later in pregnancy and fetal defects are rare after about 16 weeks, though sensorineural hearing deficit can still occur with infection up to about 20 weeks (Harrison 22e p.1644-1645).",
-   "Infants with CRS can shed large quantities of virus (notably from throat secretions and urine) for up to 1 year, so only rubella-immune individuals should care for them (Harrison 22e p.1643).",
-   "Reinfection with rubella virus, although uncommon, is possible and may produce detectable IgM antibodies (Harrison 22e p.1644).",
-   "Rubella is no longer endemic in the United States (endemic transmission interrupted by 2001), but importations and sporadic cases continue, so vigilance is warranted in adults migrating from or returning from areas without rubella control (Harrison 22e p.1643)."
+  "id": "rubella_german_measles",
+  "name": "Rubella (German Measles)",
+  "system": "Infectious Diseases (viral exanthem / congenital infection)",
+  "class": "infective",
+  "chapter": 212,
+  "page": 1643,
+  "aliases": [
+    "German measles",
+    "three-day measles",
+    "Rubivirus infection",
+    "Congenital rubella syndrome",
+    "CRS"
   ],
-  "pathophysiology": "Rubella virus spreads person to person via respiratory droplets. After primary implantation and replication in the nasopharynx it spreads to regional lymph nodes, followed by viremia. In pregnant women the viremia frequently infects the placenta; placental replication can then seed fetal organs. In the infected fetus nearly all organs may be involved, and the hallmark is a chronic infection that persists throughout intrauterine development and for up to 1 year after birth. Tissue effects of rubella virus range from no obvious impact to cell destruction. The pathology of postnatal (acquired) rubella is limited because the disease is mild, whereas the pathology of CRS is well defined even though its pathogenesis remains poorly delineated (Harrison 22e p.1643).",
-  "additionalDifferentials": [
-   "Measles (rubeola)",
-   "Scarlet fever",
-   "Roseola (exanthem subitum)",
-   "Toxoplasmosis",
-   "Fifth disease (erythema infectiosum / parvovirus B19)",
-   "Zika virus infection",
-   "Other febrile illnesses with suboccipital and postauricular lymphadenopathy"
-  ],
-  "infectionMimics": [
-   "Measles (rubeola)",
-   "Roseola",
-   "Fifth disease (parvovirus B19)",
-   "Toxoplasmosis",
-   "Zika virus infection",
-   "For CRS: other intrauterine (TORCH) infections such as cytomegalovirus and toxoplasmosis producing nonspecific neonatal findings"
-  ],
-  "nonInfectiousMimics": [
-   "Scarlet fever (toxin-mediated streptococcal exanthem clinically similar to rubella)",
-   "Other drug or hypersensitivity maculopapular eruptions"
-  ],
-  "additionalInvestigations": [
-   "Serology: rubella IgM in an acute-phase serum specimen, or a fourfold rise in IgG titer between acute- and convalescent-phase sera; IgM-capture ELISA is regarded as most accurate (Harrison 22e p.1644).",
-   "Timing of paired sera: acute specimen within 7-10 days of illness onset, convalescent specimen about 14-21 days later; repeat IgM testing if an early specimen (before day 5 after rash) is negative (Harrison 22e p.1644).",
-   "IgG avidity testing to distinguish primary infection (low-avidity antibodies, recent infection) from reinfection (mature high-avidity IgG indicating infection at least ~2 months earlier); especially useful in pregnant women to assess CRS risk (Harrison 22e p.1644).",
-   "RT-PCR for viral RNA detection (preferred from nasopharyngeal swab; throat swab or urine acceptable), collected as soon as possible after onset, ideally 1-3 days and no later than 7 days; virus isolation by culture also possible (Harrison 22e p.1644).",
-   "CRS confirmation: serum IgM (normally present up to ~6 months, sometimes up to 1 year; may be absent at birth and require retesting at 1 month), and persistence of rubella IgG beyond the expected decline of passively transferred maternal antibody (titer not declining at the expected twofold-per-month rate); RT-PCR/culture of nasopharyngeal, throat, or urine specimens, most likely positive within the first 6 months (Harrison 22e p.1644).",
-   "Routine prenatal screening for rubella IgG; a positive IgG indicates immunity (Harrison 22e p.1644-1645)."
-  ],
-  "redFlags": [
-   "Maternal rubella infection during the first trimester (highest risk of CRS, up to ~90% within the first 10 weeks of gestation) (Harrison 22e p.1644).",
-   "A susceptible pregnant woman with exposure to or symptoms of a rubella-like illness, requiring IgM testing and low-avidity IgG confirmation (Harrison 22e p.1645).",
-   "A neonate with cataracts, hearing impairment, congenital heart defects, or 'blueberry muffin' purpura suggestive of CRS (Harrison 22e p.1644).",
-   "Encephalitis or significant thrombocytopenia complicating acquired rubella (Harrison 22e p.1643).",
-   "An index case of CRS in a nosocomial or congregate setting, given prolonged viral shedding and outbreak potential (Harrison 22e p.1643)."
-  ],
-  "prognosis": "Acquired rubella is generally a mild, self-limited illness; the rash usually resolves within about 3 days, and serious complications such as encephalitis and thrombocytopenia are uncommon. The major prognostic concern is congenital infection: maternal infection in early pregnancy may lead to miscarriage, fetal death, premature delivery, or live birth with severe and often permanent defects (eyes, ears, heart, and CNS). Permanent CRS manifestations include deafness, congenital heart defects, cataracts and other eye defects, microcephaly, and neurodevelopmental sequelae, whereas manifestations such as hepatosplenomegaly, thrombocytopenic purpura, and adenopathy are transient. Immunity following infection or a single dose of rubella-containing vaccine (seroconversion in >=95%) is considered long-term and probably lifelong (Harrison 22e p.1644-1645).",
-  "pitfalls": [
-   "Relying on clinical diagnosis is unreliable because rubella mimics many rash illnesses, has varied presentations, and is frequently subclinical or mild; laboratory confirmation is the only reliable way to confirm acute disease (Harrison 22e p.1644).",
-   "A negative rubella IgM drawn before day 5 after rash onset does not exclude infection and should be repeated (Harrison 22e p.1644).",
-   "Rubella IgM testing is not recommended in pregnant women without a history of illness or contact with a rubella-like illness because of the risk of false-positive results (Harrison 22e p.1645).",
-   "An infant with suspected CRS who tests IgM-negative shortly after birth should be retested at 1 month, since IgM may not yet be detectable (Harrison 22e p.1644).",
-   "Worldwide rubella case counts are likely underestimated because disease is often mild, care may not be sought, cases may go unrecognized or unreported, and some countries detect cases only through measles surveillance (Harrison 22e p.1643).",
-   "Live attenuated rubella-containing vaccine should not be given to women known to be pregnant, and pregnancy should be avoided for 28 days after vaccination; however, inadvertent vaccination during pregnancy is not ordinarily a reason to consider termination, as no CRS occurred among ~3000 such pregnancies followed (Harrison 22e p.1645)."
-  ],
-  "severityClassification": "No formal severity grading system is described. Clinically, infection is categorized by host and timing: subclinical/mild acquired rubella; symptomatic acquired rubella (rash with possible arthralgia/arthritis, rarely thrombocytopenia or encephalitis); congenital rubella virus infection without apparent signs; and congenital rubella syndrome (CRS) with transient versus permanent manifestations, where fetal risk is greatest with maternal infection in the first 10 weeks of gestation (~90%) and declines markedly after ~16 weeks (Harrison 22e p.1644-1645).",
-  "references": [
-   "Harrison 22e p.1643",
-   "Harrison 22e p.1644",
-   "Harrison 22e p.1645",
-   "Harrison 22e p.1646"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Supportive care for acquired rubella with antipyretics and analgesia or NSAIDs for fever and arthralgia/arthritis, as no specific antiviral therapy exists",
-   "Respiratory droplet isolation of cases, with exclusion from work or school, to limit spread, keeping cases away from pregnant women",
-   "Notification to public health authorities as a notifiable disease, with contact tracing",
-   "Prevention through MMR immunisation, ensuring women of childbearing age are immune before pregnancy, noting the live vaccine is contraindicated during pregnancy",
-   "In pregnancy, confirming immunity by IgG screening, counselling on congenital rubella syndrome risk after early-gestation infection, and referral to foetal medicine",
-   "Multidisciplinary supportive management and surveillance (cardiac, ophthalmological, audiological and developmental) for infants with congenital rubella syndrome"
-  ]
- },
- "algorithms": [
-  {
-   "id": "rubella_german_measles-pathway",
-   "title": "Rubella (German Measles): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by rubella virus, an enveloped single-stranded positive-sense RNA virus of the Matonaviridae family (genus Rubivirus); only a single antigenic type exists and humans are the only known reservoir (Harrison 22e p.1643).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Maternal rubella infection during the first trimester (highest risk of CRS, up to ~90% within the first 10 weeks of gestation) (Harrison 22e p.1644).",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serology: rubella IgM in an acute-phase serum specimen, or a fourfold rise in IgG titer between acute- and convalescent-phase sera; IgM-capture ELISA is regarded as most accurate (Harrison 22e p.1644)., Timing of paired"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Supportive care for acquired rubella with antipyretics and analgesia or NSAIDs for fever and arthralgia/arthritis, as no specific antiviral therapy exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on clinical diagnosis is unreliable because rubella mimics many rash illnesses, has varied presentations, and is frequently subclinical or mild; laboratory confirmation is the only reliable way to confirm"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rubella (german measles)."
-  }
- ],
- "tables": [
-  {
-   "id": "rubella_german_measles-matrix",
-   "title": "Rubella (German Measles): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by rubella virus, an enveloped single-stranded positive-sense RNA virus of the Matonaviridae family (genus Rubivirus);",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1643",
+    "clinicalPearls": [
+      "Caused by rubella virus, an enveloped single-stranded positive-sense RNA virus of the Matonaviridae family (genus Rubivirus); only a single antigenic type exists and humans are the only known reservoir (Harrison 22e p.1643).",
+      "Acquired rubella typically presents as a mild generalized maculopapular rash lasting up to about 3 days, but as many as roughly half of infections are subclinical or occur without a rash (Harrison 22e p.1643).",
+      "Incubation period averages 14 days (range about 12-23 days); in older children and adults a 1- to 5-day prodrome of low-grade fever, malaise, and upper respiratory symptoms may precede the rash, whereas in young children rash is often the first sign (Harrison 22e p.1643).",
+      "Occipital and postauricular lymphadenopathy is characteristic and may appear during the second week after exposure (Harrison 22e p.1643).",
+      "Arthralgia and arthritis are common complications in infected adults, particularly women; thrombocytopenia and encephalitis are less common (Harrison 22e p.1643).",
+      "Persons with acquired rubella may shed virus from about 7 days before rash onset to roughly 5-7 days afterward, and both clinical and subclinical infections are considered contagious (Harrison 22e p.1643).",
+      "The most serious consequence is congenital rubella syndrome (CRS), which results from maternal infection during pregnancy, especially the first trimester; the classic triad is cataracts, hearing impairment, and heart defects (Harrison 22e p.1644).",
+      "Hearing impairment is the single most common defect of CRS, and the classic complete triad is seen in only about 10% of CRS infants (Harrison 22e p.1644).",
+      "Maternal infection within the first 10 weeks of gestation carries roughly a 90% risk of delivering an infant with CRS; risk declines later in pregnancy and fetal defects are rare after about 16 weeks, though sensorineural hearing deficit can still occur with infection up to about 20 weeks (Harrison 22e p.1644-1645).",
+      "Infants with CRS can shed large quantities of virus (notably from throat secretions and urine) for up to 1 year, so only rubella-immune individuals should care for them (Harrison 22e p.1643).",
+      "Reinfection with rubella virus, although uncommon, is possible and may produce detectable IgM antibodies (Harrison 22e p.1644).",
+      "Rubella is no longer endemic in the United States (endemic transmission interrupted by 2001), but importations and sporadic cases continue, so vigilance is warranted in adults migrating from or returning from areas without rubella control (Harrison 22e p.1643)."
     ],
-    [
-     "Key Investigations",
-     "Serology: rubella IgM in an acute-phase serum specimen, or a fourfold rise in IgG titer between acute- and convalescent-phase",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rubella virus spreads person to person via respiratory droplets. After primary implantation and replication in the nasopharynx it spreads to regional lymph nodes, followed by viremia. In pregnant women the viremia frequently infects the placenta; placental replication can then seed fetal organs. In the infected fetus nearly all organs may be involved, and the hallmark is a chronic infection that persists throughout intrauterine development and for up to 1 year after birth. Tissue effects of rubella virus range from no obvious impact to cell destruction. The pathology of postnatal (acquired) rubella is limited because the disease is mild, whereas the pathology of CRS is well defined even though its pathogenesis remains poorly delineated (Harrison 22e p.1643).",
+    "additionalDifferentials": [
+      "Measles (rubeola)",
+      "Scarlet fever",
+      "Roseola (exanthem subitum)",
+      "Toxoplasmosis",
+      "Fifth disease (erythema infectiosum / parvovirus B19)",
+      "Zika virus infection",
+      "Other febrile illnesses with suboccipital and postauricular lymphadenopathy"
     ],
-    [
-     "Primary Differentials",
-     "Measles (rubeola), Scarlet fever, Roseola (exanthem subitum)",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Measles (rubeola)",
+      "Roseola",
+      "Fifth disease (parvovirus B19)",
+      "Toxoplasmosis",
+      "Zika virus infection",
+      "For CRS: other intrauterine (TORCH) infections such as cytomegalovirus and toxoplasmosis producing nonspecific neonatal findings"
     ],
-    [
-     "Management Strategy",
-     "Supportive care for acquired rubella with antipyretics and analgesia or NSAIDs for fever and arthralgia/arthritis, as no specific",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Scarlet fever (toxin-mediated streptococcal exanthem clinically similar to rubella)",
+      "Other drug or hypersensitivity maculopapular eruptions"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on clinical diagnosis is unreliable because rubella mimics many rash illnesses, has varied presentations, and is",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Serology: rubella IgM in an acute-phase serum specimen, or a fourfold rise in IgG titer between acute- and convalescent-phase sera; IgM-capture ELISA is regarded as most accurate (Harrison 22e p.1644).",
+      "Timing of paired sera: acute specimen within 7-10 days of illness onset, convalescent specimen about 14-21 days later; repeat IgM testing if an early specimen (before day 5 after rash) is negative (Harrison 22e p.1644).",
+      "IgG avidity testing to distinguish primary infection (low-avidity antibodies, recent infection) from reinfection (mature high-avidity IgG indicating infection at least ~2 months earlier); especially useful in pregnant women to assess CRS risk (Harrison 22e p.1644).",
+      "RT-PCR for viral RNA detection (preferred from nasopharyngeal swab; throat swab or urine acceptable), collected as soon as possible after onset, ideally 1-3 days and no later than 7 days; virus isolation by culture also possible (Harrison 22e p.1644).",
+      "CRS confirmation: serum IgM (normally present up to ~6 months, sometimes up to 1 year; may be absent at birth and require retesting at 1 month), and persistence of rubella IgG beyond the expected decline of passively transferred maternal antibody (titer not declining at the expected twofold-per-month rate); RT-PCR/culture of nasopharyngeal, throat, or urine specimens, most likely positive within the first 6 months (Harrison 22e p.1644).",
+      "Routine prenatal screening for rubella IgG; a positive IgG indicates immunity (Harrison 22e p.1644-1645)."
+    ],
+    "redFlags": [
+      "Maternal rubella infection during the first trimester (highest risk of CRS, up to ~90% within the first 10 weeks of gestation) (Harrison 22e p.1644).",
+      "A susceptible pregnant woman with exposure to or symptoms of a rubella-like illness, requiring IgM testing and low-avidity IgG confirmation (Harrison 22e p.1645).",
+      "A neonate with cataracts, hearing impairment, congenital heart defects, or 'blueberry muffin' purpura suggestive of CRS (Harrison 22e p.1644).",
+      "Encephalitis or significant thrombocytopenia complicating acquired rubella (Harrison 22e p.1643).",
+      "An index case of CRS in a nosocomial or congregate setting, given prolonged viral shedding and outbreak potential (Harrison 22e p.1643)."
+    ],
+    "prognosis": "Acquired rubella is generally a mild, self-limited illness; the rash usually resolves within about 3 days, and serious complications such as encephalitis and thrombocytopenia are uncommon. The major prognostic concern is congenital infection: maternal infection in early pregnancy may lead to miscarriage, fetal death, premature delivery, or live birth with severe and often permanent defects (eyes, ears, heart, and CNS). Permanent CRS manifestations include deafness, congenital heart defects, cataracts and other eye defects, microcephaly, and neurodevelopmental sequelae, whereas manifestations such as hepatosplenomegaly, thrombocytopenic purpura, and adenopathy are transient. Immunity following infection or a single dose of rubella-containing vaccine (seroconversion in >=95%) is considered long-term and probably lifelong (Harrison 22e p.1644-1645).",
+    "pitfalls": [
+      "Relying on clinical diagnosis is unreliable because rubella mimics many rash illnesses, has varied presentations, and is frequently subclinical or mild; laboratory confirmation is the only reliable way to confirm acute disease (Harrison 22e p.1644).",
+      "A negative rubella IgM drawn before day 5 after rash onset does not exclude infection and should be repeated (Harrison 22e p.1644).",
+      "Rubella IgM testing is not recommended in pregnant women without a history of illness or contact with a rubella-like illness because of the risk of false-positive results (Harrison 22e p.1645).",
+      "An infant with suspected CRS who tests IgM-negative shortly after birth should be retested at 1 month, since IgM may not yet be detectable (Harrison 22e p.1644).",
+      "Worldwide rubella case counts are likely underestimated because disease is often mild, care may not be sought, cases may go unrecognized or unreported, and some countries detect cases only through measles surveillance (Harrison 22e p.1643).",
+      "Live attenuated rubella-containing vaccine should not be given to women known to be pregnant, and pregnancy should be avoided for 28 days after vaccination; however, inadvertent vaccination during pregnancy is not ordinarily a reason to consider termination, as no CRS occurred among ~3000 such pregnancies followed (Harrison 22e p.1645)."
+    ],
+    "severityClassification": "No formal severity grading system is described. Clinically, infection is categorized by host and timing: subclinical/mild acquired rubella; symptomatic acquired rubella (rash with possible arthralgia/arthritis, rarely thrombocytopenia or encephalitis); congenital rubella virus infection without apparent signs; and congenital rubella syndrome (CRS) with transient versus permanent manifestations, where fetal risk is greatest with maternal infection in the first 10 weeks of gestation (~90%) and declines markedly after ~16 weeks (Harrison 22e p.1644-1645).",
+    "references": [
+      "Harrison 22e p.1643",
+      "Harrison 22e p.1644",
+      "Harrison 22e p.1645",
+      "Harrison 22e p.1646"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Supportive care for acquired rubella with antipyretics and analgesia or NSAIDs for fever and arthralgia/arthritis, as no specific antiviral therapy exists",
+      "Respiratory droplet isolation of cases, with exclusion from work or school, to limit spread, keeping cases away from pregnant women",
+      "Notification to public health authorities as a notifiable disease, with contact tracing",
+      "Prevention through MMR immunisation, ensuring women of childbearing age are immune before pregnancy, noting the live vaccine is contraindicated during pregnancy",
+      "In pregnancy, confirming immunity by IgG screening, counselling on congenital rubella syndrome risk after early-gestation infection, and referral to foetal medicine",
+      "Multidisciplinary supportive management and surveillance (cardiac, ophthalmological, audiological and developmental) for infants with congenital rubella syndrome"
     ]
-   ],
-   "caption": "Overview comparison matrix for rubella (german measles)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rubella-german-measles-real-image",
-   "title": "Rubella (German Measles): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "rubella_german_measles-pathway",
+      "title": "Rubella (German Measles): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by rubella virus, an enveloped single-stranded positive-sense RNA virus of the Matonaviridae family (genus Rubivirus); only a single antigenic type exists and humans are the only known reservoir (Harrison 22e p.1643).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Maternal rubella infection during the first trimester (highest risk of CRS, up to ~90% within the first 10 weeks of gestation) (Harrison 22e p.1644).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serology: rubella IgM in an acute-phase serum specimen, or a fourfold rise in IgG titer between acute- and convalescent-phase sera; IgM-capture ELISA is regarded as most accurate (Harrison 22e p.1644)., Timing of paired"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Supportive care for acquired rubella with antipyretics and analgesia or NSAIDs for fever and arthralgia/arthritis, as no specific antiviral therapy exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on clinical diagnosis is unreliable because rubella mimics many rash illnesses, has varied presentations, and is frequently subclinical or mild; laboratory confirmation is the only reliable way to confirm"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rubella (german measles)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rubella_german_measles-matrix",
+      "title": "Rubella (German Measles): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by rubella virus, an enveloped single-stranded positive-sense RNA virus of the Matonaviridae family (genus Rubivirus);",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serology: rubella IgM in an acute-phase serum specimen, or a fourfold rise in IgG titer between acute- and convalescent-phase",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Measles (rubeola), Scarlet fever, Roseola (exanthem subitum)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Supportive care for acquired rubella with antipyretics and analgesia or NSAIDs for fever and arthralgia/arthritis, as no specific",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on clinical diagnosis is unreliable because rubella mimics many rash illnesses, has varied presentations, and is",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rubella (german measles)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Rubella Clinical Overview",
+      "kind": "web",
+      "url": "https://www.cdc.gov/rubella/hcp/clinical-overview/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 193-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rubella_german_measles-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing rubella and congenital rubella",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "12 to 23 days; mean 14 (Harrison) or 17 (CDC)",
+              "range": [
+                12,
+                23
+              ]
+            },
+            {
+              "text": "Prodrome 1 to 5 days in adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rash",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Starts on face, generalized in 24 h, lasts median 3 days",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "text": "With postauricular and suboccipital nodes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subclinical infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "25 to 50%",
+              "range": [
+                25,
+                50
+              ]
+            },
+            {
+              "text": "Clinical diagnosis unreliable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infectious period",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "7 days before to 7 days after rash",
+              "op": "=",
+              "value": 7
+            },
+            {
+              "text": "Most contagious as rash erupts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rubella IgM or fourfold IgG rise",
+          "cells": [
+            {
+              "text": "IgM capture ELISA most accurate"
+            },
+            {
+              "text": "Repeat IgM if negative before day 5 of rash"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of throat or nasopharyngeal swab or urine",
+          "cells": [
+            {
+              "text": "Confirms acute infection"
+            },
+            {
+              "text": "Use with serology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IgG avidity",
+          "cells": [
+            {
+              "text": "Low avidity means recent primary infection"
+            },
+            {
+              "text": "Key in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRS risk by gestation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to about 90% if infected in first 10 weeks",
+              "op": "<=",
+              "value": 90
+            },
+            {
+              "text": "{{hy:Risk falls sharply after about 16 weeks}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRS permanent features",
+          "cells": [
+            {
+              "text": "Deafness, PDA and pulmonary artery stenosis, cataract, glaucoma, retinopathy, microcephaly, developmental delay"
+            },
+            {
+              "text": "Transient: hepatosplenomegaly, blueberry muffin purpura, hemolysis, IUGR, meningoencephalitis"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Mean incubation: Harrison gives 14 days, CDC 17 days; both give a 12 to 23 day range."
+    },
+    {
+      "id": "rubella_german_measles-ddx",
+      "kind": "ddx",
+      "title": "Rash illnesses that mimic rubella",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Measles",
+          "cells": [
+            {
+              "text": "High fever, cough, coryza, conjunctivitis, Koplik spots"
+            },
+            {
+              "text": "Measles IgM or PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parvovirus B19",
+          "cells": [
+            {
+              "text": "Slapped cheek, lacy rash, arthralgia"
+            },
+            {
+              "text": "B19 IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Roseola",
+          "cells": [
+            {
+              "text": "Rash after fever resolves in infants"
+            },
+            {
+              "text": "Clinical, HHV-6 serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scarlet fever",
+          "cells": [
+            {
+              "text": "Sandpaper rash, strawberry tongue, pharyngitis"
+            },
+            {
+              "text": "Throat culture, ASO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Zika virus",
+          "cells": [
+            {
+              "text": "Travel, conjunctivitis, arthralgia"
+            },
+            {
+              "text": "Zika PCR or IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug eruption",
+          "cells": [
+            {
+              "text": "New drug exposure"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other TORCH infections in newborn",
+          "cells": [
+            {
+              "text": "CMV, toxoplasmosis with similar neonatal signs"
+            },
+            {
+              "text": "Specific IgM, PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "rubella_german_measles-treatment",
+      "kind": "treatment",
+      "title": "Managing rubella",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Acquired rubella"
+            },
+            {
+              "text": "Antipyretics, NSAIDs for arthralgia; no antiviral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation",
+          "cells": [
+            {
+              "text": "Cases"
+            },
+            {
+              "text": "7 days after rash onset; keep from pregnant women"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Notification and contact tracing",
+          "cells": [
+            {
+              "text": "Every case"
+            },
+            {
+              "text": "Exclude non-immune contacts in outbreaks for 23 days after last rash"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serology and counselling",
+          "cells": [
+            {
+              "text": "Exposed or symptomatic pregnant woman"
+            },
+            {
+              "text": "IgM with avidity; counsel on CRS risk by gestation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MMR vaccination",
+          "cells": [
+            {
+              "text": "Children (2 doses), non-immune adults"
+            },
+            {
+              "text": "Live vaccine; not in pregnancy; vaccinate postpartum"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CRS multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Infected infants"
+            },
+            {
+              "text": "Hearing, eye, heart care; infants shed virus for months"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rubella_german_measles-dx-mgmt",
+      "title": "Diagnosis and management of rubella",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mild fever, maculopapular rash and posterior cervical nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Rubella IgM and PCR; isolate for 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Pregnant patient or pregnant contact?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IgM with IgG avidity to confirm primary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Primary infection confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Counsel on CRS risk by gestational age; fetal follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Reassure; vaccinate after delivery if non-immune",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Supportive care, notify public health, check contacts",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

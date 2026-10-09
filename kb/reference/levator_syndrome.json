@@ -1,178 +1,485 @@
 {
- "id": "levator_syndrome",
- "name": "Levator syndrome",
- "aliases": [
-  "levator ani syndrome",
-  "puborectalis syndrome",
-  "chronic proctalgia"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal / Anorectal",
- "specialty": "Colorectal surgery / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rome Foundation criteria for functional anorectal disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Levator syndrome is a functional anorectal pain disorder characterised by chronic or recurrent dull, aching, or pressure-like pain high in the rectum, often described as sitting on a ball",
-   "It falls within the Rome classification of functional anorectal pain, distinguished from proctalgia fugax (brief fleeting episodes) by its longer duration, typically lasting twenty minutes or more",
-   "The defining physical sign is tenderness on posterior traction of the puborectalis during digital rectal examination, often more pronounced on the left",
-   "It is a diagnosis of exclusion, requiring the elimination of structural and inflammatory causes of anorectal pain such as abscess, fissure, thrombosis, malignancy, and coccygeal pathology",
-   "Pain is frequently worse with prolonged sitting and may be relieved by walking or lying down, and can be associated with pelvic-floor dysfunction and dyssynergic defecation",
-   "The Rome framework separates highly likely levator ani syndrome (with puborectalis tenderness) from unspecified functional anorectal pain (without it)",
-   "Management centres on reassurance, pelvic-floor physiotherapy and biofeedback, and adjuncts such as digital massage, warm baths, electrogalvanic stimulation, and muscle relaxation techniques",
-   "It commonly coexists with other functional gastrointestinal and pelvic-floor disorders and with psychological stressors, warranting a holistic approach"
+  "id": "levator_syndrome",
+  "name": "Levator syndrome",
+  "aliases": [
+    "levator ani syndrome",
+    "puborectalis syndrome",
+    "chronic proctalgia"
   ],
-  "pathophysiology": "Levator syndrome is understood as a disorder of chronic spasm and tension in the pelvic-floor musculature, particularly the levator ani and puborectalis. Sustained or dysregulated contraction of these muscles, often in the setting of pelvic-floor dyssynergia, produces ischaemic, aching pain referred to the rectum and perineum. Central and peripheral sensitisation, abnormal pain processing, and the interplay of stress and anxiety contribute to symptom persistence, in keeping with a disorder of gut-brain and pelvic-floor interaction. There is no structural lesion; rather, heightened muscle tone, tenderness of the puborectalis, and impaired relaxation during defecation underlie the symptoms, which may be exacerbated by prolonged sitting and by dyssynergic straining.",
-  "additionalDifferentials": [
-   "Proctalgia fugax (brief episodic anorectal pain)",
-   "Coccygodynia or other musculoskeletal pelvic pain",
-   "Anal fissure, abscess, or thrombosed haemorrhoid",
-   "Pudendal neuralgia",
-   "Endometriosis or gynaecological pelvic pain",
-   "Rectal or presacral neoplasm",
-   "Chronic prostatitis or pelvic pain syndrome in men"
-  ],
-  "additionalInvestigations": [
-   "Digital rectal examination assessing puborectalis tenderness on posterior traction",
-   "Proctosigmoidoscopy to exclude mucosal or structural disease",
-   "Anorectal manometry and balloon expulsion to assess dyssynergia",
-   "Defecating proctography where obstructed defecation coexists",
-   "Pelvic MRI where structural, neurological, or gynaecological causes are suspected",
-   "Colonoscopy or cross-sectional imaging to exclude neoplasia in at-risk or alarm-symptom patients"
-  ],
-  "redFlags": [
-   "Rectal bleeding, weight loss, or a palpable mass suggesting malignancy",
-   "Fever or localised swelling suggesting abscess",
-   "Progressive neurological symptoms or saddle anaesthesia",
-   "New severe pain of abrupt onset with structural findings",
-   "Pain unresponsive to treatment with evolving alarm features"
-  ],
-  "prognosis": "Levator syndrome is benign but often chronic and relapsing; a substantial proportion of patients improve with biofeedback, physiotherapy, and reassurance, though symptoms can persist and fluctuate, and response is generally better when puborectalis tenderness is present and pelvic-floor dyssynergia is addressed.",
-  "pitfalls": [
-   "Diagnosing levator syndrome without adequately excluding structural or malignant causes",
-   "Overlooking coexisting dyssynergic defecation that is amenable to biofeedback",
-   "Attributing pain solely to haemorrhoids and performing unnecessary anal surgery",
-   "Neglecting the psychological and gut-brain dimension of the disorder",
-   "Repeated invasive investigations for a functional disorder once alarm features are excluded"
-  ],
-  "references": [
-   "Rome Foundation criteria for functional anorectal disorders",
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Standard reference texts on functional gastrointestinal and pelvic-floor disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and patient education about this functional anorectal pain disorder",
-   "Pelvic-floor physiotherapy and biofeedback targeting relaxation of the puborectalis",
-   "Digital massage of the levator muscles and warm baths for symptomatic relief",
-   "Electrogalvanic stimulation and neuromodulation for refractory symptoms",
-   "Muscle-relaxant strategies and treatment of coexisting dyssynergic defecation and constipation",
-   "Exclude structural and inflammatory anorectal causes, as it is a diagnosis of exclusion",
-   "Psychological support and stress management for the gut-brain component"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "levator_syndrome-pathway",
-   "title": "Levator syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Levator syndrome is a functional anorectal pain disorder characterised by chronic or recurrent dull, aching, or pressure-like pain high in the rectum, often described as sitting on a ball",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rectal bleeding, weight loss, or a palpable mass suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Digital rectal examination assessing puborectalis tenderness on posterior traction, Proctosigmoidoscopy to exclude mucosal or structural disease, Anorectal manometry and balloon expulsion to assess dyssynergia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and patient education about this functional anorectal pain disorder"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing levator syndrome without adequately excluding structural or malignant causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of levator syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "levator_syndrome-matrix",
-   "title": "Levator syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Levator syndrome is a functional anorectal pain disorder characterised by chronic or recurrent dull, aching, or pressure-like",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal / Anorectal",
+  "specialty": "Colorectal surgery / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rome Foundation criteria for functional anorectal disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Levator syndrome is a functional anorectal pain disorder characterised by chronic or recurrent dull, aching, or pressure-like pain high in the rectum, often described as sitting on a ball",
+      "It falls within the Rome classification of functional anorectal pain, distinguished from proctalgia fugax (brief fleeting episodes) by its longer duration, typically lasting twenty minutes or more",
+      "The defining physical sign is tenderness on posterior traction of the puborectalis during digital rectal examination, often more pronounced on the left",
+      "It is a diagnosis of exclusion, requiring the elimination of structural and inflammatory causes of anorectal pain such as abscess, fissure, thrombosis, malignancy, and coccygeal pathology",
+      "Pain is frequently worse with prolonged sitting and may be relieved by walking or lying down, and can be associated with pelvic-floor dysfunction and dyssynergic defecation",
+      "The Rome framework separates highly likely levator ani syndrome (with puborectalis tenderness) from unspecified functional anorectal pain (without it)",
+      "Management centres on reassurance, pelvic-floor physiotherapy and biofeedback, and adjuncts such as digital massage, warm baths, electrogalvanic stimulation, and muscle relaxation techniques",
+      "It commonly coexists with other functional gastrointestinal and pelvic-floor disorders and with psychological stressors, warranting a holistic approach"
     ],
-    [
-     "Key Investigations",
-     "Digital rectal examination assessing puborectalis tenderness on posterior traction, Proctosigmoidoscopy to exclude mucosal or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Levator syndrome is understood as a disorder of chronic spasm and tension in the pelvic-floor musculature, particularly the levator ani and puborectalis. Sustained or dysregulated contraction of these muscles, often in the setting of pelvic-floor dyssynergia, produces ischaemic, aching pain referred to the rectum and perineum. Central and peripheral sensitisation, abnormal pain processing, and the interplay of stress and anxiety contribute to symptom persistence, in keeping with a disorder of gut-brain and pelvic-floor interaction. There is no structural lesion; rather, heightened muscle tone, tenderness of the puborectalis, and impaired relaxation during defecation underlie the symptoms, which may be exacerbated by prolonged sitting and by dyssynergic straining.",
+    "additionalDifferentials": [
+      "Proctalgia fugax (brief episodic anorectal pain)",
+      "Coccygodynia or other musculoskeletal pelvic pain",
+      "Anal fissure, abscess, or thrombosed haemorrhoid",
+      "Pudendal neuralgia",
+      "Endometriosis or gynaecological pelvic pain",
+      "Rectal or presacral neoplasm",
+      "Chronic prostatitis or pelvic pain syndrome in men"
     ],
-    [
-     "Primary Differentials",
-     "Proctalgia fugax (brief episodic anorectal pain), Coccygodynia or other musculoskeletal pelvic pain, Anal fissure, abscess, or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Digital rectal examination assessing puborectalis tenderness on posterior traction",
+      "Proctosigmoidoscopy to exclude mucosal or structural disease",
+      "Anorectal manometry and balloon expulsion to assess dyssynergia",
+      "Defecating proctography where obstructed defecation coexists",
+      "Pelvic MRI where structural, neurological, or gynaecological causes are suspected",
+      "Colonoscopy or cross-sectional imaging to exclude neoplasia in at-risk or alarm-symptom patients"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and patient education about this functional anorectal pain disorder",
-     "Core treatment modality"
+    "redFlags": [
+      "Rectal bleeding, weight loss, or a palpable mass suggesting malignancy",
+      "Fever or localised swelling suggesting abscess",
+      "Progressive neurological symptoms or saddle anaesthesia",
+      "New severe pain of abrupt onset with structural findings",
+      "Pain unresponsive to treatment with evolving alarm features"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing levator syndrome without adequately excluding structural or malignant causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Levator syndrome is benign but often chronic and relapsing; a substantial proportion of patients improve with biofeedback, physiotherapy, and reassurance, though symptoms can persist and fluctuate, and response is generally better when puborectalis tenderness is present and pelvic-floor dyssynergia is addressed.",
+    "pitfalls": [
+      "Diagnosing levator syndrome without adequately excluding structural or malignant causes",
+      "Overlooking coexisting dyssynergic defecation that is amenable to biofeedback",
+      "Attributing pain solely to haemorrhoids and performing unnecessary anal surgery",
+      "Neglecting the psychological and gut-brain dimension of the disorder",
+      "Repeated invasive investigations for a functional disorder once alarm features are excluded"
+    ],
+    "references": [
+      "Rome Foundation criteria for functional anorectal disorders",
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Standard reference texts on functional gastrointestinal and pelvic-floor disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and patient education about this functional anorectal pain disorder",
+      "Pelvic-floor physiotherapy and biofeedback targeting relaxation of the puborectalis",
+      "Digital massage of the levator muscles and warm baths for symptomatic relief",
+      "Electrogalvanic stimulation and neuromodulation for refractory symptoms",
+      "Muscle-relaxant strategies and treatment of coexisting dyssynergic defecation and constipation",
+      "Exclude structural and inflammatory anorectal causes, as it is a diagnosis of exclusion",
+      "Psychological support and stress management for the gut-brain component"
     ]
-   ],
-   "caption": "Overview comparison matrix for levator syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "levator-syndrome-real-image",
-   "title": "Levator syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "levator_syndrome-pathway",
+      "title": "Levator syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Levator syndrome is a functional anorectal pain disorder characterised by chronic or recurrent dull, aching, or pressure-like pain high in the rectum, often described as sitting on a ball",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rectal bleeding, weight loss, or a palpable mass suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Digital rectal examination assessing puborectalis tenderness on posterior traction, Proctosigmoidoscopy to exclude mucosal or structural disease, Anorectal manometry and balloon expulsion to assess dyssynergia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and patient education about this functional anorectal pain disorder"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing levator syndrome without adequately excluding structural or malignant causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of levator syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "levator_syndrome-matrix",
+      "title": "Levator syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Levator syndrome is a functional anorectal pain disorder characterised by chronic or recurrent dull, aching, or pressure-like",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Digital rectal examination assessing puborectalis tenderness on posterior traction, Proctosigmoidoscopy to exclude mucosal or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Proctalgia fugax (brief episodic anorectal pain), Coccygodynia or other musculoskeletal pelvic pain, Anal fissure, abscess, or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and patient education about this functional anorectal pain disorder",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing levator syndrome without adequately excluding structural or malignant causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for levator syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rome Foundation criteria for functional anorectal disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "levator_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Digital rectal examination",
+          "cells": [
+            {
+              "text": "Puborectalis tenderness on posterior traction, often more on the left"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proctosigmoidoscopy",
+          "cells": [
+            {
+              "text": "Mucosal or structural disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry and balloon expulsion",
+          "cells": [
+            {
+              "text": "Dyssynergia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defecating proctography",
+          "cells": [
+            {
+              "text": "Where obstructed defecation coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Structural, neurological or gynaecological causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "levator_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Proctalgia fugax",
+          "cells": [
+            {
+              "text": "Brief, fleeting episodes rather than prolonged pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal fissure, abscess or thrombosed haemorrhoid",
+          "cells": [
+            {
+              "text": "Structural causes excluded first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometriosis or gynaecological pelvic pain",
+          "cells": [
+            {
+              "text": "Gynaecological source of pelvic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic prostatitis or pelvic pain syndrome in men",
+          "cells": [
+            {
+              "text": "Male pelvic pain mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "levator_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Explanation of the functional disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic-floor physiotherapy and biofeedback",
+          "cells": [
+            {
+              "text": "Targets relaxation of the puborectalis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital massage and warm baths",
+          "cells": [
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrogalvanic stimulation and neuromodulation",
+          "cells": [
+            {
+              "text": "For refractory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle-relaxant strategies",
+          "cells": [
+            {
+              "text": "Coexisting dyssynergic defecation and constipation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of structural disease",
+          "cells": [
+            {
+              "text": "Diagnosis of exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Stress management for the gut-brain component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "levator_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Levator syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic dull, aching pressure high in the rectum, often worse on sitting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bleeding, weight loss, mass, neurological deficit, abscess)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review to exclude malignancy, abscess or neurological lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DRE for puborectalis tenderness, sigmoidoscopy, manometry, MRI if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is puborectalis tenderness found with structural causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider proctalgia fugax, fissure, pudendal neuralgia or gynaecological pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and education on the functional disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pelvic-floor physiotherapy and biofeedback targeting the puborectalis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Digital massage of the levator muscles and warm baths",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Electrogalvanic stimulation for refractory symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat coexisting dyssynergic defecation and constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign but chronic and relapsing; many improve with biofeedback and physiotherapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

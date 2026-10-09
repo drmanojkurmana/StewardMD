@@ -1,173 +1,231 @@
 {
- "id": "blue_cone_monochromacy",
- "name": "Blue cone monochromacy",
- "aliases": [
-  "BCM",
-  "S-cone monochromatism",
-  "X-linked incomplete achromatopsia",
-  "OPN1LW/OPN1MW"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked recessive cone disorder affecting predominantly males, caused by loss of function of the long- and medium-wavelength (red and green) cone opsin gene array on Xq28, leaving only functional short-wavelength (blue) cones and rods",
-   "Presents in infancy with poor central acuity, pendular nystagmus, marked photophobia and near-absent colour discrimination",
-   "Distinguished from complete achromatopsia by residual short-wavelength cone function, which can be demonstrated with specialised colour and electrophysiological testing",
-   "Photopic (L/M cone) electroretinographic responses are severely reduced while rod responses are preserved; specialised S-cone testing reveals residual blue-cone function",
-   "The fundus is typically normal early, though some patients develop macular atrophy over time",
-   "Female carriers are usually asymptomatic but may show subtle findings, aiding pedigree analysis and counselling",
-   "Management is supportive: refractive correction, magenta or red-tinted filters for photophobia, low-vision aids and genetic counselling, with gene-therapy approaches under investigation"
+  "id": "blue_cone_monochromacy",
+  "name": "Blue cone monochromacy",
+  "aliases": [
+    "BCM",
+    "S-cone monochromatism",
+    "X-linked incomplete achromatopsia",
+    "OPN1LW/OPN1MW"
   ],
-  "pathophysiology": "Blue cone monochromacy is caused by mutations or deletions affecting the OPN1LW/OPN1MW opsin gene cluster on the X chromosome, or of its upstream locus control region, abolishing function of both long- and medium-wavelength cones. Vision then depends on rods and the numerically small population of short-wavelength cones, giving very poor acuity, defective colour vision along more than one axis, and photophobia. Because it is X-linked, affected individuals are almost always male, and the residual S-cone function is what separates it from complete rod monochromacy.",
-  "additionalDifferentials": [
-   "Complete achromatopsia (rod monochromacy)",
-   "Incomplete achromatopsia",
-   "Cone dystrophy of early onset",
-   "Leber congenital amaurosis",
-   "Idiopathic congenital nystagmus with low vision",
-   "Optic nerve hypoplasia or albinism causing infantile nystagmus"
-  ],
-  "additionalInvestigations": [
-   "Photopic and flicker full-field electroretinography showing reduced L/M cone responses with preserved rods",
-   "Specialised S-cone electroretinography and colour testing to demonstrate residual blue-cone function",
-   "Colour vision testing (for example with tests able to separate blue cone monochromacy from achromatopsia)",
-   "Optical coherence tomography to assess foveal cone structure",
-   "Molecular genetic testing of the X-linked opsin gene array",
-   "Assessment of female relatives as potential carriers"
-  ],
-  "redFlags": [
-   "Progressive macular atrophy or acuity loss suggesting an evolving cone dystrophy rather than a stationary disorder",
-   "Nystagmus and very poor acuity in infancy requiring prompt work-up to exclude other causes",
-   "Family history along an X-linked pattern indicating carrier females and at-risk male relatives",
-   "Uncertainty distinguishing it from achromatopsia, which changes genetic counselling"
-  ],
-  "prognosis": "Vision is usually stable and non-progressive with acuity commonly in the low-vision range, although some patients develop gradual macular changes over decades.",
-  "pitfalls": [
-   "Confusing it with complete achromatopsia and giving incorrect inheritance and counselling advice",
-   "Failing to demonstrate residual S-cone function, which is the diagnostic distinction",
-   "Overlooking the X-linked pattern and not evaluating carrier females",
-   "Attributing infantile nystagmus solely to a motor cause without electrophysiology"
-  ],
-  "references": [
-   "Ryan's Retina",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No established disease-specific therapy; gene therapy targeting the OPN1LW/OPN1MW opsin array remains investigational",
-   "Low-vision rehabilitation with magnification aids and educational support for the reduced acuity",
-   "Tinted or red-tinted filters and contact lenses to reduce photophobia and improve contrast",
-   "Refractive correction and management of any coexisting refractive error",
-   "Periodic optical coherence tomography and fundus review to detect macular atrophy developing over time",
-   "X-linked genetic counselling with carrier testing of female relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "blue_cone_monochromacy-pathway",
-   "title": "Blue cone monochromacy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked recessive cone disorder affecting predominantly males, caused by loss of function of the long- and medium-wavelength (red and green) cone opsin gene array on Xq28, leaving only functional short-wavelength (blue) cones and rods",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive macular atrophy or acuity loss suggesting an evolving cone dystrophy rather than a stationary disorder",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Photopic and flicker full-field electroretinography showing reduced L/M cone responses with preserved rods, Specialised S-cone electroretinography and colour testing to demonstrate residual blue-cone function, Colour"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No established disease-specific therapy; gene therapy targeting the OPN1LW/OPN1MW opsin array remains investigational"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with complete achromatopsia and giving incorrect inheritance and counselling advice"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of blue cone monochromacy."
-  }
- ],
- "tables": [
-  {
-   "id": "blue_cone_monochromacy-matrix",
-   "title": "Blue cone monochromacy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked recessive cone disorder affecting predominantly males, caused by loss of function of the long- and medium-wavelength",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked recessive cone disorder affecting predominantly males, caused by loss of function of the long- and medium-wavelength (red and green) cone opsin gene array on Xq28, leaving only functional short-wavelength (blue) cones and rods",
+      "Presents in infancy with poor central acuity, pendular nystagmus, marked photophobia and near-absent colour discrimination",
+      "Distinguished from complete achromatopsia by residual short-wavelength cone function, which can be demonstrated with specialised colour and electrophysiological testing",
+      "Photopic (L/M cone) electroretinographic responses are severely reduced while rod responses are preserved; specialised S-cone testing reveals residual blue-cone function",
+      "The fundus is typically normal early, though some patients develop macular atrophy over time",
+      "Female carriers are usually asymptomatic but may show subtle findings, aiding pedigree analysis and counselling",
+      "Management is supportive: refractive correction, magenta or red-tinted filters for photophobia, low-vision aids and genetic counselling, with gene-therapy approaches under investigation"
     ],
-    [
-     "Key Investigations",
-     "Photopic and flicker full-field electroretinography showing reduced L/M cone responses with preserved rods, Specialised S-cone",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Blue cone monochromacy is caused by mutations or deletions affecting the OPN1LW/OPN1MW opsin gene cluster on the X chromosome, or of its upstream locus control region, abolishing function of both long- and medium-wavelength cones. Vision then depends on rods and the numerically small population of short-wavelength cones, giving very poor acuity, defective colour vision along more than one axis, and photophobia. Because it is X-linked, affected individuals are almost always male, and the residual S-cone function is what separates it from complete rod monochromacy.",
+    "additionalDifferentials": [
+      "Complete achromatopsia (rod monochromacy)",
+      "Incomplete achromatopsia",
+      "Cone dystrophy of early onset",
+      "Leber congenital amaurosis",
+      "Idiopathic congenital nystagmus with low vision",
+      "Optic nerve hypoplasia or albinism causing infantile nystagmus"
     ],
-    [
-     "Primary Differentials",
-     "Complete achromatopsia (rod monochromacy), Incomplete achromatopsia, Cone dystrophy of early onset",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Photopic and flicker full-field electroretinography showing reduced L/M cone responses with preserved rods",
+      "Specialised S-cone electroretinography and colour testing to demonstrate residual blue-cone function",
+      "Colour vision testing (for example with tests able to separate blue cone monochromacy from achromatopsia)",
+      "Optical coherence tomography to assess foveal cone structure",
+      "Molecular genetic testing of the X-linked opsin gene array",
+      "Assessment of female relatives as potential carriers"
     ],
-    [
-     "Management Strategy",
-     "No established disease-specific therapy; gene therapy targeting the OPN1LW/OPN1MW opsin array remains investigational",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive macular atrophy or acuity loss suggesting an evolving cone dystrophy rather than a stationary disorder",
+      "Nystagmus and very poor acuity in infancy requiring prompt work-up to exclude other causes",
+      "Family history along an X-linked pattern indicating carrier females and at-risk male relatives",
+      "Uncertainty distinguishing it from achromatopsia, which changes genetic counselling"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with complete achromatopsia and giving incorrect inheritance and counselling advice",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vision is usually stable and non-progressive with acuity commonly in the low-vision range, although some patients develop gradual macular changes over decades.",
+    "pitfalls": [
+      "Confusing it with complete achromatopsia and giving incorrect inheritance and counselling advice",
+      "Failing to demonstrate residual S-cone function, which is the diagnostic distinction",
+      "Overlooking the X-linked pattern and not evaluating carrier females",
+      "Attributing infantile nystagmus solely to a motor cause without electrophysiology"
+    ],
+    "references": [
+      "Ryan's Retina",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No established disease-specific therapy; gene therapy targeting the OPN1LW/OPN1MW opsin array remains investigational",
+      "Low-vision rehabilitation with magnification aids and educational support for the reduced acuity",
+      "Tinted or red-tinted filters and contact lenses to reduce photophobia and improve contrast",
+      "Refractive correction and management of any coexisting refractive error",
+      "Periodic optical coherence tomography and fundus review to detect macular atrophy developing over time",
+      "X-linked genetic counselling with carrier testing of female relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for blue cone monochromacy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "blue-cone-monochromacy-real-image",
-   "title": "Blue cone monochromacy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "blue_cone_monochromacy-pathway",
+      "title": "Blue cone monochromacy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked recessive cone disorder affecting predominantly males, caused by loss of function of the long- and medium-wavelength (red and green) cone opsin gene array on Xq28, leaving only functional short-wavelength (blue) cones and rods",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive macular atrophy or acuity loss suggesting an evolving cone dystrophy rather than a stationary disorder",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Photopic and flicker full-field electroretinography showing reduced L/M cone responses with preserved rods, Specialised S-cone electroretinography and colour testing to demonstrate residual blue-cone function, Colour"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No established disease-specific therapy; gene therapy targeting the OPN1LW/OPN1MW opsin array remains investigational"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with complete achromatopsia and giving incorrect inheritance and counselling advice"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of blue cone monochromacy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "blue_cone_monochromacy-matrix",
+      "title": "Blue cone monochromacy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked recessive cone disorder affecting predominantly males, caused by loss of function of the long- and medium-wavelength",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Photopic and flicker full-field electroretinography showing reduced L/M cone responses with preserved rods, Specialised S-cone",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Complete achromatopsia (rod monochromacy), Incomplete achromatopsia, Cone dystrophy of early onset",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No established disease-specific therapy; gene therapy targeting the OPN1LW/OPN1MW opsin array remains investigational",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with complete achromatopsia and giving incorrect inheritance and counselling advice",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for blue cone monochromacy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blue_cone_monochromacy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in blue cone monochromacy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Photopic and flicker full-field electroretinography", "cells": [{"text": "Reduced L/M cone responses with preserved rod responses"}], "cite": "c1"},
+        {"parameter": "S-cone electroretinography and colour testing", "cells": [{"text": "Residual blue-cone function; the diagnostic distinction"}], "cite": "c1"},
+        {"parameter": "Colour vision testing", "cells": [{"text": "Separates blue cone monochromacy from achromatopsia"}], "cite": "c1"},
+        {"parameter": "Optical coherence tomography", "cells": [{"text": "Foveal cone structure"}], "cite": "c1"},
+        {"parameter": "Molecular genetic testing of the X-linked opsin gene array", "cells": [{"text": "OPN1LW and OPN1MW region variants or deletions"}], "cite": "c1"},
+        {"parameter": "Assessment of female relatives", "cells": [{"text": "Carrier status and pedigree"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blue_cone_monochromacy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike cone and retinal disorders",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Complete achromatopsia (rod monochromacy)", "cells": [{"text": "Residual short-wavelength cone function separates the two"}], "cite": "c1"},
+        {"parameter": "Early-onset cone dystrophy", "cells": [{"text": "Progressive macular atrophy or falling acuity suggests an evolving dystrophy"}], "cite": "c1"},
+        {"parameter": "Idiopathic or motor infantile nystagmus", "cells": [{"text": "Electrophysiology is needed; nystagmus should not be attributed to a motor cause alone"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blue_cone_monochromacy-treatment",
+      "kind": "treatment",
+      "title": "Management options in blue cone monochromacy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Gene therapy", "cells": [{"text": "Gene therapy targeting the opsin array"}, {"text": "Investigational; no established therapy"}], "cite": "c1"},
+        {"parameter": "Low-vision rehabilitation", "cells": [{"text": "Magnification aids and educational support"}, {"text": "For reduced acuity"}], "cite": "c1"},
+        {"parameter": "Tinted filters", "cells": [{"text": "Tinted or red-tinted filters and contact lenses"}, {"text": "Reduces photophobia and improves contrast"}], "cite": "c1"},
+        {"parameter": "Refractive correction", "cells": [{"text": "Correction of any coexisting refractive error"}, {"text": "Routine"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Periodic optical coherence tomography and fundus review"}, {"text": "Detects macular atrophy that can develop over time"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "X-linked counselling with carrier testing of female relatives"}, {"text": "X-linked inheritance"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blue_cone_monochromacy-dx-mgmt",
+      "title": "Diagnosis and management of blue cone monochromacy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Infant with poor central acuity, pendular nystagmus, photophobia and near-absent colour vision", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive macular atrophy or falling acuity suggesting a cone dystrophy?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: repeat OCT; consider an evolving cone dystrophy; genetic review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Photopic and flicker ERG; colour testing; foveal OCT", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "S-cone ERG to demonstrate residual blue-cone function; opsin array genetic testing", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Residual S-cone function with reduced L/M cone responses?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Refractive correction, tinted filters and low-vision aids; X-linked counselling", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider complete achromatopsia or another cone or retinal disease", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Vision usually stable at low-vision levels; macular change may develop over decades", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

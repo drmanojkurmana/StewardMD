@@ -1,172 +1,469 @@
 {
- "id": "cholinergic_urticaria",
- "name": "Cholinergic urticaria",
- "aliases": [
-  "heat urticaria of exertion",
-  "generalised heat urticaria",
-  "sweat-induced urticaria"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology / Photodermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An inducible urticaria triggered by a rise in core body temperature, as with exercise, a hot bath or shower, emotional stress or eating spicy food",
-   "The eruption is highly distinctive, consisting of numerous small (1 to 3 mm) punctate weals surrounded by large erythematous flares",
-   "It is common in adolescents and young adults and is frequently accompanied by itching, pricking or burning",
-   "Provocation by exercise to the point of sweating, or by passive warming such as a hot shower or immersion in a warm bath, can reproduce the lesions and confirm the diagnosis",
-   "Severe episodes may occasionally be associated with systemic symptoms such as wheeze, abdominal cramps or faintness",
-   "It should be distinguished from exercise-induced anaphylaxis and from cold or solar urticaria triggered in similar situations",
-   "Management combines avoidance of abrupt overheating with non-sedating antihistamines, and omalizumab is an option for chronic, antihistamine-resistant disease"
+  "id": "cholinergic_urticaria",
+  "name": "Cholinergic urticaria",
+  "aliases": [
+    "heat urticaria of exertion",
+    "generalised heat urticaria",
+    "sweat-induced urticaria"
   ],
-  "pathophysiology": "Cholinergic urticaria is triggered by an increase in core body temperature, in which cholinergic (acetylcholine-mediated) stimulation of eccrine sweat glands is linked to mast cell activation and histamine release, producing the characteristic small weals with surrounding flares. Proposed mechanisms include sensitivity to a component of sweat and impaired delivery or leakage of sweat, and in some patients a degree of sweat-related autoreactivity is demonstrable. The net effect is that any stimulus raising body temperature can provoke widespread mediator release in predisposed individuals.",
-  "additionalDifferentials": [
-   "Exercise-induced anaphylaxis",
-   "Chronic spontaneous urticaria",
-   "Cold urticaria provoked during exercise",
-   "Solar urticaria when heat and sun exposure coincide",
-   "Aquagenic urticaria from warm water",
-   "Adrenergic urticaria triggered by stress"
-  ],
-  "additionalInvestigations": [
-   "Provocation by exercise or passive warming to reproduce the characteristic punctate weals",
-   "History linking episodes to exertion, heat, hot showers, emotion or spicy food",
-   "Assessment to distinguish it from exercise-induced anaphylaxis, including any food-dependent pattern",
-   "Consideration of an intradermal test with a cholinergic agent in specialist practice",
-   "Basic screening for chronic urticaria where features overlap",
-   "Evaluation for systemic symptoms in those reporting wheeze or faintness"
-  ],
-  "redFlags": [
-   "Wheeze, throat tightness, collapse or other features suggesting anaphylaxis",
-   "Symptoms strongly linked to exercise with food, raising concern for food-dependent exercise-induced anaphylaxis",
-   "Frequent disabling attacks interfering with exercise or daily activity",
-   "Angioedema accompanying the weals"
-  ],
-  "prognosis": "Cholinergic urticaria often persists for several years but tends to improve over time, and most patients are well controlled with trigger moderation and antihistamines; the main concern is the small subset with associated systemic reactions, in whom careful assessment and an emergency plan may be needed.",
-  "pitfalls": [
-   "Mistaking it for exercise-induced anaphylaxis, which has different implications and management",
-   "Advising complete avoidance of exercise rather than gradual acclimatisation and pre-treatment",
-   "Overlooking the diagnosis because the tiny weals are less familiar than large urticarial lesions",
-   "Failing to consider omalizumab or up-dosed antihistamines in resistant cases"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Association of Dermatologists guidance on chronic urticaria"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line treatment is a second-generation non-sedating H1 antihistamine, up-titrated as needed for control",
-   "Advise moderation of triggers that raise core temperature, such as vigorous exercise, hot baths, emotional stress and spicy food",
-   "For refractory disease, consider add-on options such as an anticholinergic, propranolol, ketotifen or omalizumab",
-   "Consider graded heat exposure or sweat desensitisation to raise the provocation threshold",
-   "Provide an adrenaline auto-injector and a written emergency plan for the subset with systemic reactions such as wheeze or faintness",
-   "Distinguish and manage separately from exercise-induced anaphylaxis, referring to dermatology or allergy where the diagnosis is unclear"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cholinergic_urticaria-pathway",
-   "title": "Cholinergic urticaria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An inducible urticaria triggered by a rise in core body temperature, as with exercise, a hot bath or shower, emotional stress or eating spicy food",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Wheeze, throat tightness, collapse or other features suggesting anaphylaxis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Provocation by exercise or passive warming to reproduce the characteristic punctate weals, History linking episodes to exertion, heat, hot showers, emotion or spicy food, Assessment to distinguish it from exercise-induced"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line treatment is a second-generation non-sedating H1 antihistamine, up-titrated as needed for control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for exercise-induced anaphylaxis, which has different implications and management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cholinergic urticaria."
-  }
- ],
- "tables": [
-  {
-   "id": "cholinergic_urticaria-matrix",
-   "title": "Cholinergic urticaria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An inducible urticaria triggered by a rise in core body temperature, as with exercise, a hot bath or shower, emotional stress or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology / Photodermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An inducible urticaria triggered by a rise in core body temperature, as with exercise, a hot bath or shower, emotional stress or eating spicy food",
+      "The eruption is highly distinctive, consisting of numerous small (1 to 3 mm) punctate weals surrounded by large erythematous flares",
+      "It is common in adolescents and young adults and is frequently accompanied by itching, pricking or burning",
+      "Provocation by exercise to the point of sweating, or by passive warming such as a hot shower or immersion in a warm bath, can reproduce the lesions and confirm the diagnosis",
+      "Severe episodes may occasionally be associated with systemic symptoms such as wheeze, abdominal cramps or faintness",
+      "It should be distinguished from exercise-induced anaphylaxis and from cold or solar urticaria triggered in similar situations",
+      "Management combines avoidance of abrupt overheating with non-sedating antihistamines, and omalizumab is an option for chronic, antihistamine-resistant disease"
     ],
-    [
-     "Key Investigations",
-     "Provocation by exercise or passive warming to reproduce the characteristic punctate weals, History linking episodes to exertion,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cholinergic urticaria is triggered by an increase in core body temperature, in which cholinergic (acetylcholine-mediated) stimulation of eccrine sweat glands is linked to mast cell activation and histamine release, producing the characteristic small weals with surrounding flares. Proposed mechanisms include sensitivity to a component of sweat and impaired delivery or leakage of sweat, and in some patients a degree of sweat-related autoreactivity is demonstrable. The net effect is that any stimulus raising body temperature can provoke widespread mediator release in predisposed individuals.",
+    "additionalDifferentials": [
+      "Exercise-induced anaphylaxis",
+      "Chronic spontaneous urticaria",
+      "Cold urticaria provoked during exercise",
+      "Solar urticaria when heat and sun exposure coincide",
+      "Aquagenic urticaria from warm water",
+      "Adrenergic urticaria triggered by stress"
     ],
-    [
-     "Primary Differentials",
-     "Exercise-induced anaphylaxis, Chronic spontaneous urticaria, Cold urticaria provoked during exercise",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Provocation by exercise or passive warming to reproduce the characteristic punctate weals",
+      "History linking episodes to exertion, heat, hot showers, emotion or spicy food",
+      "Assessment to distinguish it from exercise-induced anaphylaxis, including any food-dependent pattern",
+      "Consideration of an intradermal test with a cholinergic agent in specialist practice",
+      "Basic screening for chronic urticaria where features overlap",
+      "Evaluation for systemic symptoms in those reporting wheeze or faintness"
     ],
-    [
-     "Management Strategy",
-     "First-line treatment is a second-generation non-sedating H1 antihistamine, up-titrated as needed for control",
-     "Core treatment modality"
+    "redFlags": [
+      "Wheeze, throat tightness, collapse or other features suggesting anaphylaxis",
+      "Symptoms strongly linked to exercise with food, raising concern for food-dependent exercise-induced anaphylaxis",
+      "Frequent disabling attacks interfering with exercise or daily activity",
+      "Angioedema accompanying the weals"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for exercise-induced anaphylaxis, which has different implications and management",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cholinergic urticaria often persists for several years but tends to improve over time, and most patients are well controlled with trigger moderation and antihistamines; the main concern is the small subset with associated systemic reactions, in whom careful assessment and an emergency plan may be needed.",
+    "pitfalls": [
+      "Mistaking it for exercise-induced anaphylaxis, which has different implications and management",
+      "Advising complete avoidance of exercise rather than gradual acclimatisation and pre-treatment",
+      "Overlooking the diagnosis because the tiny weals are less familiar than large urticarial lesions",
+      "Failing to consider omalizumab or up-dosed antihistamines in resistant cases"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Association of Dermatologists guidance on chronic urticaria"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line treatment is a second-generation non-sedating H1 antihistamine, up-titrated as needed for control",
+      "Advise moderation of triggers that raise core temperature, such as vigorous exercise, hot baths, emotional stress and spicy food",
+      "For refractory disease, consider add-on options such as an anticholinergic, propranolol, ketotifen or omalizumab",
+      "Consider graded heat exposure or sweat desensitisation to raise the provocation threshold",
+      "Provide an adrenaline auto-injector and a written emergency plan for the subset with systemic reactions such as wheeze or faintness",
+      "Distinguish and manage separately from exercise-induced anaphylaxis, referring to dermatology or allergy where the diagnosis is unclear"
     ]
-   ],
-   "caption": "Overview comparison matrix for cholinergic urticaria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cholinergic-urticaria-real-image",
-   "title": "Cholinergic urticaria: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "cholinergic_urticaria-pathway",
+      "title": "Cholinergic urticaria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An inducible urticaria triggered by a rise in core body temperature, as with exercise, a hot bath or shower, emotional stress or eating spicy food",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Wheeze, throat tightness, collapse or other features suggesting anaphylaxis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Provocation by exercise or passive warming to reproduce the characteristic punctate weals, History linking episodes to exertion, heat, hot showers, emotion or spicy food, Assessment to distinguish it from exercise-induced"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line treatment is a second-generation non-sedating H1 antihistamine, up-titrated as needed for control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for exercise-induced anaphylaxis, which has different implications and management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cholinergic urticaria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cholinergic_urticaria-matrix",
+      "title": "Cholinergic urticaria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An inducible urticaria triggered by a rise in core body temperature, as with exercise, a hot bath or shower, emotional stress or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Provocation by exercise or passive warming to reproduce the characteristic punctate weals, History linking episodes to exertion,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Exercise-induced anaphylaxis, Chronic spontaneous urticaria, Cold urticaria provoked during exercise",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line treatment is a second-generation non-sedating H1 antihistamine, up-titrated as needed for control",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for exercise-induced anaphylaxis, which has different implications and management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cholinergic urticaria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cholinergic_urticaria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Provocation by exercise or passive warming",
+          "cells": [
+            {
+              "text": "Reproduces the characteristic punctate weals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of triggers",
+          "cells": [
+            {
+              "text": "Exertion, heat, hot showers, emotion or spicy food"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for exercise-induced anaphylaxis, including any food-dependent pattern",
+          "cells": [
+            {
+              "text": "Distinguishes it from exercise-induced anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intradermal test with a cholinergic agent",
+          "cells": [
+            {
+              "text": "Specialist practice only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for wheeze or faintness",
+          "cells": [
+            {
+              "text": "Systemic symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholinergic_urticaria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Exercise-induced anaphylaxis",
+          "cells": [
+            {
+              "text": "Food-dependent exercise pattern; wheeze or collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solar urticaria",
+          "cells": [
+            {
+              "text": "Heat and sun exposure coincide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquagenic urticaria",
+          "cells": [
+            {
+              "text": "Triggered by warm water"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholinergic_urticaria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Second-generation H1 antihistamine",
+          "cells": [
+            {
+              "text": "Non-sedating H1 antihistamine, up-titrated as needed"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger moderation",
+          "cells": [
+            {
+              "text": "Moderate vigorous exercise, hot baths, emotional stress and spicy food"
+            },
+            {
+              "text": "Triggers that raise core temperature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Add-on therapy",
+          "cells": [
+            {
+              "text": "Anticholinergic, propranolol, ketotifen or omalizumab"
+            },
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desensitisation",
+          "cells": [
+            {
+              "text": "Graded heat exposure or sweat desensitisation"
+            },
+            {
+              "text": "Raises the provocation threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency plan",
+          "cells": [
+            {
+              "text": "Adrenaline auto-injector and written plan for systemic reactions"
+            },
+            {
+              "text": "Wheeze or faintness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Dermatology or allergy where the diagnosis is unclear"
+            },
+            {
+              "text": "Distinguish from exercise-induced anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cholinergic_urticaria-dx-mgmt",
+      "title": "Diagnosis and management of Cholinergic urticaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cholinergic urticaria: pinpoint weals with flares after heat or exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (wheeze, collapse, food-dependent exercise reaction, angioedema)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: anaphylaxis management; specialist allergy review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Provocation by exercise or warm bath; trigger history; exclude exercise anaphylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Punctate weals and flares after core warming reproduced on provocation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Non-sedating second-generation H1 antihistamine, up-titrated as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check exercise-induced anaphylaxis, solar and aquagenic urticaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Moderate triggers: vigorous exercise, hot baths, stress and spicy food",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticholinergic, propranolol, ketotifen or omalizumab for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Graded heat exposure or sweat desensitisation to raise threshold",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Adrenaline auto-injector and emergency plan for systemic reactions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

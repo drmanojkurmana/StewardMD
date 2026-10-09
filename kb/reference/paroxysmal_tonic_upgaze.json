@@ -1,168 +1,432 @@
 {
- "id": "paroxysmal_tonic_upgaze",
- "name": "Paroxysmal tonic upgaze of childhood",
- "aliases": [
-  "benign paroxysmal tonic upgaze",
-  "tonic upgaze syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Paediatrics / Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology / paediatric neurology literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Episodes of sustained or intermittent conjugate upward deviation of the eyes, typically beginning in infancy",
-   "On attempted downgaze there are characteristic down-beating saccades while the eyes remain deviated upward",
-   "Attacks are often worse with fatigue and illness and may improve with sleep",
-   "Some children have associated ataxia or developmental and language difficulties",
-   "It is frequently benign and self-limiting, but structural and genetic causes must be considered",
-   "Associations with CACNA1A and other channel genes have been reported, overlapping with episodic neurological syndromes"
+  "id": "paroxysmal_tonic_upgaze",
+  "name": "Paroxysmal tonic upgaze of childhood",
+  "aliases": [
+    "benign paroxysmal tonic upgaze",
+    "tonic upgaze syndrome"
   ],
-  "pathophysiology": "Paroxysmal tonic upgaze reflects episodic dysfunction of the supranuclear control of vertical gaze, with a relative imbalance favouring upward deviation and impaired downgaze during attacks. Many cases are idiopathic and maturational, improving as the nervous system develops, while some are linked to channelopathies or to structural lesions of the midbrain and its vertical-gaze pathways. The down-beating saccades on attempted downgaze reflect preserved attempts to overcome the tonic upward drive.",
-  "additionalDifferentials": [
-   "Oculogyric crisis (drug-induced or metabolic)",
-   "Seizures with tonic eye deviation",
-   "Structural midbrain lesion affecting vertical gaze",
-   "Opsoclonus or other saccadic intrusions",
-   "Spasmus nutans and other childhood eye-movement disorders"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain focusing on the midbrain and posterior fossa",
-   "Neurological and developmental assessment",
-   "Medication and metabolic review to exclude oculogyric crisis",
-   "EEG if seizures are considered",
-   "Genetic evaluation where an episodic channelopathy is suspected"
-  ],
-  "redFlags": [
-   "Focal neurological signs or a structural lesion on imaging",
-   "Developmental regression",
-   "Features suggesting seizures or oculogyric crisis",
-   "Progressive or atypical course"
-  ],
-  "prognosis": "The idiopathic form usually improves over months to a few years, though some children have residual ataxia or cognitive and language difficulties; prognosis of secondary cases depends on the underlying cause.",
-  "pitfalls": [
-   "Confusing it with drug-induced oculogyric crisis or seizures",
-   "Accepting a benign diagnosis without neuroimaging",
-   "Overlooking associated developmental or coordination problems",
-   "Missing an underlying channelopathy with broader implications"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage idiopathic cases with reassurance and watchful observation, as most improve spontaneously with maturation",
-   "Consider a trial of levodopa, which has benefited some children in reported cases",
-   "Investigate and treat any identified structural midbrain lesion or metabolic cause underlying secondary presentations",
-   "Monitor development, language, and coordination, arranging early support for associated ataxia or learning difficulties",
-   "Pursue genetic evaluation and counselling where an episodic channelopathy such as CACNA1A is suspected",
-   "Follow up jointly through paediatric neurology and ophthalmology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paroxysmal_tonic_upgaze-pathway",
-   "title": "Paroxysmal tonic upgaze of childhood: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Episodes of sustained or intermittent conjugate upward deviation of the eyes, typically beginning in infancy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Focal neurological signs or a structural lesion on imaging",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain focusing on the midbrain and posterior fossa, Neurological and developmental assessment, Medication and metabolic review to exclude oculogyric crisis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage idiopathic cases with reassurance and watchful observation, as most improve spontaneously with maturation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with drug-induced oculogyric crisis or seizures"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paroxysmal tonic upgaze of childhood."
-  }
- ],
- "tables": [
-  {
-   "id": "paroxysmal_tonic_upgaze-matrix",
-   "title": "Paroxysmal tonic upgaze of childhood: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Episodes of sustained or intermittent conjugate upward deviation of the eyes, typically beginning in infancy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Paediatrics / Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology / paediatric neurology literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Episodes of sustained or intermittent conjugate upward deviation of the eyes, typically beginning in infancy",
+      "On attempted downgaze there are characteristic down-beating saccades while the eyes remain deviated upward",
+      "Attacks are often worse with fatigue and illness and may improve with sleep",
+      "Some children have associated ataxia or developmental and language difficulties",
+      "It is frequently benign and self-limiting, but structural and genetic causes must be considered",
+      "Associations with CACNA1A and other channel genes have been reported, overlapping with episodic neurological syndromes"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain focusing on the midbrain and posterior fossa, Neurological and developmental assessment, Medication and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Paroxysmal tonic upgaze reflects episodic dysfunction of the supranuclear control of vertical gaze, with a relative imbalance favouring upward deviation and impaired downgaze during attacks. Many cases are idiopathic and maturational, improving as the nervous system develops, while some are linked to channelopathies or to structural lesions of the midbrain and its vertical-gaze pathways. The down-beating saccades on attempted downgaze reflect preserved attempts to overcome the tonic upward drive.",
+    "additionalDifferentials": [
+      "Oculogyric crisis (drug-induced or metabolic)",
+      "Seizures with tonic eye deviation",
+      "Structural midbrain lesion affecting vertical gaze",
+      "Opsoclonus or other saccadic intrusions",
+      "Spasmus nutans and other childhood eye-movement disorders"
     ],
-    [
-     "Primary Differentials",
-     "Oculogyric crisis (drug-induced or metabolic), Seizures with tonic eye deviation, Structural midbrain lesion affecting vertical",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain focusing on the midbrain and posterior fossa",
+      "Neurological and developmental assessment",
+      "Medication and metabolic review to exclude oculogyric crisis",
+      "EEG if seizures are considered",
+      "Genetic evaluation where an episodic channelopathy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Manage idiopathic cases with reassurance and watchful observation, as most improve spontaneously with maturation",
-     "Core treatment modality"
+    "redFlags": [
+      "Focal neurological signs or a structural lesion on imaging",
+      "Developmental regression",
+      "Features suggesting seizures or oculogyric crisis",
+      "Progressive or atypical course"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with drug-induced oculogyric crisis or seizures",
-     "Prevent diagnostic or management error"
+    "prognosis": "The idiopathic form usually improves over months to a few years, though some children have residual ataxia or cognitive and language difficulties; prognosis of secondary cases depends on the underlying cause.",
+    "pitfalls": [
+      "Confusing it with drug-induced oculogyric crisis or seizures",
+      "Accepting a benign diagnosis without neuroimaging",
+      "Overlooking associated developmental or coordination problems",
+      "Missing an underlying channelopathy with broader implications"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage idiopathic cases with reassurance and watchful observation, as most improve spontaneously with maturation",
+      "Consider a trial of levodopa, which has benefited some children in reported cases",
+      "Investigate and treat any identified structural midbrain lesion or metabolic cause underlying secondary presentations",
+      "Monitor development, language, and coordination, arranging early support for associated ataxia or learning difficulties",
+      "Pursue genetic evaluation and counselling where an episodic channelopathy such as CACNA1A is suspected",
+      "Follow up jointly through paediatric neurology and ophthalmology"
     ]
-   ],
-   "caption": "Overview comparison matrix for paroxysmal tonic upgaze of childhood."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paroxysmal-tonic-upgaze-real-image",
-   "title": "Paroxysmal tonic upgaze of childhood: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "paroxysmal_tonic_upgaze-pathway",
+      "title": "Paroxysmal tonic upgaze of childhood: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Episodes of sustained or intermittent conjugate upward deviation of the eyes, typically beginning in infancy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Focal neurological signs or a structural lesion on imaging",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain focusing on the midbrain and posterior fossa, Neurological and developmental assessment, Medication and metabolic review to exclude oculogyric crisis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage idiopathic cases with reassurance and watchful observation, as most improve spontaneously with maturation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with drug-induced oculogyric crisis or seizures"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paroxysmal tonic upgaze of childhood."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paroxysmal_tonic_upgaze-matrix",
+      "title": "Paroxysmal tonic upgaze of childhood: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Episodes of sustained or intermittent conjugate upward deviation of the eyes, typically beginning in infancy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain focusing on the midbrain and posterior fossa, Neurological and developmental assessment, Medication and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oculogyric crisis (drug-induced or metabolic), Seizures with tonic eye deviation, Structural midbrain lesion affecting vertical",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage idiopathic cases with reassurance and watchful observation, as most improve spontaneously with maturation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with drug-induced oculogyric crisis or seizures",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paroxysmal tonic upgaze of childhood."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology / paediatric neurology literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paroxysmal_tonic_upgaze-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of midbrain and posterior fossa",
+          "cells": [
+            {
+              "text": "Structural midbrain lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and developmental assessment",
+          "cells": [
+            {
+              "text": "Associated ataxia or delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication and metabolic review",
+          "cells": [
+            {
+              "text": "Oculogyric crisis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Episodic channelopathy suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_tonic_upgaze-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oculogyric crisis",
+          "cells": [
+            {
+              "text": "Drug-induced or metabolic; medication review separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures with tonic eye deviation",
+          "cells": [
+            {
+              "text": "Episodic and EEG-positive; EEG distinguishes them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_tonic_upgaze-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Idiopathic cases usually improve with maturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Has benefited some children in reported cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat secondary cause",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Structural midbrain lesion or metabolic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental monitoring",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Early support for ataxia or learning difficulty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paroxysmal_tonic_upgaze-dx-mgmt",
+      "title": "Diagnosis and management of Paroxysmal tonic upgaze of childhood",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with sustained upward eye deviation and down-beating saccades on downgaze",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (focal signs, developmental regression or atypical course)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for structural or regressive presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of midbrain and posterior fossa, medication review, EEG if seizures, genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are structural and metabolic causes excluded on MRI and medication review?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider oculogyric crisis, seizures, opsoclonus or spasmus nutans",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance and observation, as idiopathic cases usually improve",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levodopa trial, which has helped some children in reported cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any identified midbrain lesion or metabolic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor development and arrange support for ataxia or learning difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Idiopathic form usually improves over months to years; secondary outlook follows cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

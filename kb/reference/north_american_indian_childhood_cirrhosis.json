@@ -1,175 +1,435 @@
 {
- "id": "north_american_indian_childhood_cirrhosis",
- "name": "North American Indian childhood cirrhosis",
- "aliases": [
-  "NAIC",
-  "CIRH1A",
-  "UTP4 deficiency",
-  "cirhin deficiency",
-  "Ojibway-Cree childhood cirrhosis"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatology / Genetics",
- "specialty": "Hepatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System / Suchy Liver Disease in Children",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive cholestatic cirrhosis described in Ojibway-Cree children of northwestern Quebec, caused by a founder mutation in CIRH1A (now UTP4), encoding cirhin",
-   "Typically presents with transient neonatal jaundice that resolves, followed by insidious progression to biliary cirrhosis during childhood",
-   "Portal hypertension with splenomegaly and oesophageal varices is a common mode of later presentation",
-   "Liver biochemistry shows a cholestatic picture, and biopsy demonstrates portal fibrosis progressing to established cirrhosis with bile duct proliferation",
-   "Cirhin is a nucleolar protein involved in ribosomal RNA processing; how its dysfunction produces a liver-specific phenotype is not fully understood",
-   "A single homozygous founder variant (R565W) accounts for essentially all affected individuals in the original population",
-   "Management is supportive with ursodeoxycholic acid and fat-soluble vitamins, and liver transplantation is the definitive treatment for end-stage disease"
+  "id": "north_american_indian_childhood_cirrhosis",
+  "name": "North American Indian childhood cirrhosis",
+  "aliases": [
+    "NAIC",
+    "CIRH1A",
+    "UTP4 deficiency",
+    "cirhin deficiency",
+    "Ojibway-Cree childhood cirrhosis"
   ],
-  "pathophysiology": "North American Indian childhood cirrhosis is an autosomal recessive cholestatic disease caused by a founder missense mutation in CIRH1A (UTP4), which encodes cirhin, a nucleolar protein implicated in pre-ribosomal RNA processing. Affected children develop neonatal cholestasis that appears to remit, but progressive portal and periportal fibrosis continues silently, culminating in biliary cirrhosis and portal hypertension in childhood or adolescence. The exact mechanism by which impaired cirhin function selectively injures the liver remains uncertain, though disturbed ribosome biogenesis and biliary epithelial dysfunction are proposed.",
-  "additionalDifferentials": [
-   "Biliary atresia",
-   "Progressive familial intrahepatic cholestasis",
-   "Alagille syndrome",
-   "Alpha-1-antitrypsin deficiency",
-   "Congenital hepatic fibrosis",
-   "Autoimmune hepatitis with early cirrhosis"
-  ],
-  "additionalInvestigations": [
-   "Liver function tests and serum bile acids showing a cholestatic pattern",
-   "Abdominal ultrasound and elastography to assess liver architecture and fibrosis",
-   "Liver biopsy demonstrating portal fibrosis, ductular reaction, and evolving cirrhosis",
-   "Upper gastrointestinal endoscopy to screen for varices in portal hypertension",
-   "Targeted genetic testing for the CIRH1A/UTP4 founder variant",
-   "Fat-soluble vitamin levels and coagulation profile"
-  ],
-  "redFlags": [
-   "Variceal haemorrhage or other complications of portal hypertension",
-   "Progressive jaundice and synthetic failure indicating decompensated cirrhosis",
-   "Growth failure with severe fat-soluble vitamin deficiency",
-   "Ascites or hepatic encephalopathy signalling end-stage liver disease"
-  ],
-  "prognosis": "Without treatment the disease progresses to cirrhosis and portal hypertension during childhood or adolescence, and many patients ultimately require liver transplantation, which is curative; outcomes after transplantation are generally good.",
-  "pitfalls": [
-   "Being reassured by the apparent resolution of neonatal jaundice while fibrosis progresses silently",
-   "Failing to consider the diagnosis outside a recognised ancestry when the phenotype fits",
-   "Delaying variceal surveillance in a child with unexplained splenomegaly",
-   "Confusing the histology with biliary atresia or other paediatric cholestatic disorders"
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "Suchy, Sokol & Balistreri, Liver Disease in Children"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Ursodeoxycholic acid to improve bile flow and relieve cholestatic symptoms",
-   "Fat-soluble vitamin supplementation and nutritional support with medium-chain-triglyceride-based feeds to counter fat malabsorption and growth faltering",
-   "Antipruritic therapy for cholestatic itch using bile-acid sequestrants or rifampicin",
-   "Endoscopic surveillance for oesophageal varices with band ligation and non-selective beta-blockade for portal hypertension",
-   "Prompt resuscitation and endoscopic band ligation for acute variceal haemorrhage",
-   "Timely referral for liver transplantation, which is curative in end-stage biliary cirrhosis",
-   "Genetic counselling for this autosomal recessive CIRH1A/UTP4 founder disorder, with testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "north_american_indian_childhood_cirrhosis-pathway",
-   "title": "North American Indian childhood cirrhosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive cholestatic cirrhosis described in Ojibway-Cree children of northwestern Quebec, caused by a founder mutation in CIRH1A (now UTP4), encoding cirhin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Variceal haemorrhage or other complications of portal hypertension",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Liver function tests and serum bile acids showing a cholestatic pattern, Abdominal ultrasound and elastography to assess liver architecture and fibrosis, Liver biopsy demonstrating portal fibrosis, ductular reaction, and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Ursodeoxycholic acid to improve bile flow and relieve cholestatic symptoms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Being reassured by the apparent resolution of neonatal jaundice while fibrosis progresses silently"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of north american indian childhood cirrhosis."
-  }
- ],
- "tables": [
-  {
-   "id": "north_american_indian_childhood_cirrhosis-matrix",
-   "title": "North American Indian childhood cirrhosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive cholestatic cirrhosis described in Ojibway-Cree children of northwestern Quebec, caused by a founder",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatology / Genetics",
+  "specialty": "Hepatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System / Suchy Liver Disease in Children",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive cholestatic cirrhosis described in Ojibway-Cree children of northwestern Quebec, caused by a founder mutation in CIRH1A (now UTP4), encoding cirhin",
+      "Typically presents with transient neonatal jaundice that resolves, followed by insidious progression to biliary cirrhosis during childhood",
+      "Portal hypertension with splenomegaly and oesophageal varices is a common mode of later presentation",
+      "Liver biochemistry shows a cholestatic picture, and biopsy demonstrates portal fibrosis progressing to established cirrhosis with bile duct proliferation",
+      "Cirhin is a nucleolar protein involved in ribosomal RNA processing; how its dysfunction produces a liver-specific phenotype is not fully understood",
+      "A single homozygous founder variant (R565W) accounts for essentially all affected individuals in the original population",
+      "Management is supportive with ursodeoxycholic acid and fat-soluble vitamins, and liver transplantation is the definitive treatment for end-stage disease"
     ],
-    [
-     "Key Investigations",
-     "Liver function tests and serum bile acids showing a cholestatic pattern, Abdominal ultrasound and elastography to assess liver",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "North American Indian childhood cirrhosis is an autosomal recessive cholestatic disease caused by a founder missense mutation in CIRH1A (UTP4), which encodes cirhin, a nucleolar protein implicated in pre-ribosomal RNA processing. Affected children develop neonatal cholestasis that appears to remit, but progressive portal and periportal fibrosis continues silently, culminating in biliary cirrhosis and portal hypertension in childhood or adolescence. The exact mechanism by which impaired cirhin function selectively injures the liver remains uncertain, though disturbed ribosome biogenesis and biliary epithelial dysfunction are proposed.",
+    "additionalDifferentials": [
+      "Biliary atresia",
+      "Progressive familial intrahepatic cholestasis",
+      "Alagille syndrome",
+      "Alpha-1-antitrypsin deficiency",
+      "Congenital hepatic fibrosis",
+      "Autoimmune hepatitis with early cirrhosis"
     ],
-    [
-     "Primary Differentials",
-     "Biliary atresia, Progressive familial intrahepatic cholestasis, Alagille syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Liver function tests and serum bile acids showing a cholestatic pattern",
+      "Abdominal ultrasound and elastography to assess liver architecture and fibrosis",
+      "Liver biopsy demonstrating portal fibrosis, ductular reaction, and evolving cirrhosis",
+      "Upper gastrointestinal endoscopy to screen for varices in portal hypertension",
+      "Targeted genetic testing for the CIRH1A/UTP4 founder variant",
+      "Fat-soluble vitamin levels and coagulation profile"
     ],
-    [
-     "Management Strategy",
-     "Ursodeoxycholic acid to improve bile flow and relieve cholestatic symptoms",
-     "Core treatment modality"
+    "redFlags": [
+      "Variceal haemorrhage or other complications of portal hypertension",
+      "Progressive jaundice and synthetic failure indicating decompensated cirrhosis",
+      "Growth failure with severe fat-soluble vitamin deficiency",
+      "Ascites or hepatic encephalopathy signalling end-stage liver disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Being reassured by the apparent resolution of neonatal jaundice while fibrosis progresses silently",
-     "Prevent diagnostic or management error"
+    "prognosis": "Without treatment the disease progresses to cirrhosis and portal hypertension during childhood or adolescence, and many patients ultimately require liver transplantation, which is curative; outcomes after transplantation are generally good.",
+    "pitfalls": [
+      "Being reassured by the apparent resolution of neonatal jaundice while fibrosis progresses silently",
+      "Failing to consider the diagnosis outside a recognised ancestry when the phenotype fits",
+      "Delaying variceal surveillance in a child with unexplained splenomegaly",
+      "Confusing the histology with biliary atresia or other paediatric cholestatic disorders"
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "Suchy, Sokol & Balistreri, Liver Disease in Children"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Ursodeoxycholic acid to improve bile flow and relieve cholestatic symptoms",
+      "Fat-soluble vitamin supplementation and nutritional support with medium-chain-triglyceride-based feeds to counter fat malabsorption and growth faltering",
+      "Antipruritic therapy for cholestatic itch using bile-acid sequestrants or rifampicin",
+      "Endoscopic surveillance for oesophageal varices with band ligation and non-selective beta-blockade for portal hypertension",
+      "Prompt resuscitation and endoscopic band ligation for acute variceal haemorrhage",
+      "Timely referral for liver transplantation, which is curative in end-stage biliary cirrhosis",
+      "Genetic counselling for this autosomal recessive CIRH1A/UTP4 founder disorder, with testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for north american indian childhood cirrhosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "north-american-indian-childhood-cirrhosis-real-image",
-   "title": "North American Indian childhood cirrhosis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "north_american_indian_childhood_cirrhosis-pathway",
+      "title": "North American Indian childhood cirrhosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive cholestatic cirrhosis described in Ojibway-Cree children of northwestern Quebec, caused by a founder mutation in CIRH1A (now UTP4), encoding cirhin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Variceal haemorrhage or other complications of portal hypertension",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Liver function tests and serum bile acids showing a cholestatic pattern, Abdominal ultrasound and elastography to assess liver architecture and fibrosis, Liver biopsy demonstrating portal fibrosis, ductular reaction, and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Ursodeoxycholic acid to improve bile flow and relieve cholestatic symptoms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Being reassured by the apparent resolution of neonatal jaundice while fibrosis progresses silently"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of north american indian childhood cirrhosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "north_american_indian_childhood_cirrhosis-matrix",
+      "title": "North American Indian childhood cirrhosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive cholestatic cirrhosis described in Ojibway-Cree children of northwestern Quebec, caused by a founder",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Liver function tests and serum bile acids showing a cholestatic pattern, Abdominal ultrasound and elastography to assess liver",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Biliary atresia, Progressive familial intrahepatic cholestasis, Alagille syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Ursodeoxycholic acid to improve bile flow and relieve cholestatic symptoms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Being reassured by the apparent resolution of neonatal jaundice while fibrosis progresses silently",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for north american indian childhood cirrhosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Suchy Liver Disease in Children",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "north_american_indian_childhood_cirrhosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver function tests and serum bile acids",
+          "cells": [
+            {
+              "text": "Cholestatic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound and elastography",
+          "cells": [
+            {
+              "text": "Liver architecture and stiffness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CIRH1A (UTP4) genetic testing",
+          "cells": [
+            {
+              "text": "Founder missense variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and nutritional assessment",
+          "cells": [
+            {
+              "text": "Growth failure with cholestasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "north_american_indian_childhood_cirrhosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Biliary atresia",
+          "cells": [
+            {
+              "text": "Surgically treatable obstructive cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive familial intrahepatic cholestasis",
+          "cells": [
+            {
+              "text": "Other inherited cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alagille syndrome",
+          "cells": [
+            {
+              "text": "Paucity of bile ducts with other features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-1-antitrypsin deficiency",
+          "cells": [
+            {
+              "text": "Liver disease with an alpha-1 defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "north_american_indian_childhood_cirrhosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ursodeoxycholic acid",
+          "cells": [
+            {
+              "text": "Improves bile flow and relieves cholestatic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin supplementation",
+          "cells": [
+            {
+              "text": "Malabsorption from cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medium-chain triglyceride nutrition",
+          "cells": [
+            {
+              "text": "Nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Required for many patients as disease progresses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "north_american_indian_childhood_cirrhosis-dx-mgmt",
+      "title": "Diagnosis and management of North American Indian childhood cirrhosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cholestatic jaundice in a child of Ojibway-Cree ancestry",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (variceal bleeding, decompensation, growth failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent portal hypertension care; transplant assessment if decompensated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Liver tests, bile acids, ultrasound and elastography, CIRH1A testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cholestatic cirrhosis with a founder CIRH1A variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider biliary atresia or other cholestatic disease; re-investigate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ursodeoxycholic acid to improve bile flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fat-soluble vitamins and medium-chain triglyceride nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage complications of portal hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver transplantation for progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated disease progresses to cirrhosis in childhood; many need transplantation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

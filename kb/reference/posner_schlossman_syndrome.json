@@ -1,175 +1,491 @@
 {
- "id": "posner_schlossman_syndrome",
- "name": "Posner-Schlossman syndrome",
- "aliases": [
-  "glaucomatocyclitic crisis",
-  "glaucomatocyclitic crises",
-  "PSS",
-  "Posner Schlossman syndrome"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by recurrent, usually unilateral attacks of markedly raised intraocular pressure accompanied by mild, low-grade anterior uveitis",
-   "The striking feature is a large pressure rise that is disproportionate to the minimal inflammation present",
-   "Symptoms are often mild for the pressure level, with slight blurring, haloes, and mild discomfort rather than the severe pain of acute angle closure",
-   "Signs include a few fine keratic precipitates on the corneal endothelium, faint aqueous cells, an open angle on gonioscopy, and often a corneal epithelial haze",
-   "Attacks are self-limiting over days to weeks and pressure returns to normal between episodes, but the same eye tends to be repeatedly affected",
-   "An association with cytomegalovirus in the aqueous has been recognised in some cases, and herpetic mechanisms are implicated",
-   "Treatment during an attack lowers pressure with topical agents and controls the inflammation with topical corticosteroids, while antiviral therapy is considered where a viral cause is suspected",
-   "Although classically benign, recurrent or prolonged attacks can lead to glaucomatous optic-nerve damage over time, so long-term monitoring is warranted"
+  "id": "posner_schlossman_syndrome",
+  "name": "Posner-Schlossman syndrome",
+  "aliases": [
+    "glaucomatocyclitic crisis",
+    "glaucomatocyclitic crises",
+    "PSS",
+    "Posner Schlossman syndrome"
   ],
-  "pathophysiology": "Posner-Schlossman syndrome produces episodic acute rises in intraocular pressure with concurrent mild anterior chamber inflammation affecting the trabecular outflow. During an attack, low-grade trabeculitis and inflammatory obstruction of an open angle reduce aqueous outflow while aqueous production may also be altered, producing a pressure spike out of proportion to the modest cellular reaction. The angle remains open, distinguishing it from angle-closure mechanisms. Infective triggers, particularly cytomegalovirus and other herpesviruses detected in the aqueous of some patients, are thought to drive the recurrent inflammation in a subset. Between crises the eye typically returns to normal, but repeated or protracted episodes can cumulatively damage the trabecular meshwork and optic nerve.",
-  "additionalDifferentials": [
-   "Acute primary angle-closure glaucoma",
-   "Herpetic (herpes simplex or zoster) anterior uveitis with raised pressure",
-   "Fuchs heterochromic uveitis",
-   "Other uveitic glaucomas",
-   "Pigmentary glaucoma with pressure spikes",
-   "Primary open-angle glaucoma with an incidental mild uveitis"
-  ],
-  "additionalInvestigations": [
-   "Applanation tonometry during and between attacks to document the episodic pressure pattern",
-   "Gonioscopy to confirm an open angle and exclude angle closure",
-   "Slit-lamp examination for keratic precipitates and grading of anterior chamber activity",
-   "OCT of the retinal nerve fibre layer and automated perimetry to detect cumulative glaucomatous damage",
-   "Aqueous sampling for cytomegalovirus or herpesvirus in recurrent or atypical cases",
-   "Baseline optic disc assessment for long-term comparison"
-  ],
-  "redFlags": [
-   "Very high pressure during an attack that could threaten the optic nerve if prolonged",
-   "Increasingly frequent, severe, or bilateral episodes suggesting a viral or alternative diagnosis",
-   "Emerging glaucomatous disc or field change indicating cumulative damage",
-   "Features atypical for the syndrome that raise concern for herpetic uveitis or angle closure"
-  ],
-  "prognosis": "The visual prognosis is generally good because attacks are self-limiting and pressure normalises between episodes, but a minority develop chronic glaucomatous optic-nerve damage from recurrent crises, so periodic assessment of the disc and fields is advisable.",
-  "pitfalls": [
-   "Mistaking the syndrome for acute angle-closure glaucoma because of the high pressure and haloes",
-   "Overtreating with prolonged corticosteroids and inducing a steroid pressure response",
-   "Assuming the condition is always benign and omitting long-term glaucoma surveillance",
-   "Missing an underlying cytomegalovirus or herpetic cause in recurrent cases",
-   "Failing to examine the angle and confirm it is open"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Shields' Textbook of Glaucoma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt intraocular-pressure reduction during attacks with topical aqueous-suppressants such as beta-blockers, alpha-agonists and carbonic anhydrase inhibitors, adding oral acetazolamide for marked pressure spikes",
-   "Short course of topical corticosteroid to settle the low-grade anterior chamber inflammation",
-   "Antiviral therapy with ganciclovir or aciclovir where cytomegalovirus or another herpesvirus is implicated in recurrent or atypical cases",
-   "Long-term surveillance of the optic disc, retinal nerve fibre layer and visual fields for cumulative glaucomatous damage from repeated crises",
-   "Glaucoma-lowering surgery for eyes developing chronic pressure elevation or optic-nerve damage refractory to medical control",
-   "Ongoing ophthalmology follow-up given the tendency for the same eye to be repeatedly affected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "posner_schlossman_syndrome-pathway",
-   "title": "Posner-Schlossman syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by recurrent, usually unilateral attacks of markedly raised intraocular pressure accompanied by mild, low-grade anterior uveitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Very high pressure during an attack that could threaten the optic nerve if prolonged",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Applanation tonometry during and between attacks to document the episodic pressure pattern, Gonioscopy to confirm an open angle and exclude angle closure, Slit-lamp examination for keratic precipitates and grading of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt intraocular-pressure reduction during attacks with topical aqueous-suppressants such as beta-blockers, alpha-agonists and carbonic anhydrase inhibitors, adding oral acetazolamide for marked pressure spikes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the syndrome for acute angle-closure glaucoma because of the high pressure and haloes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of posner-schlossman syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "posner_schlossman_syndrome-matrix",
-   "title": "Posner-Schlossman syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by recurrent, usually unilateral attacks of markedly raised intraocular pressure accompanied by mild, low-grade",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by recurrent, usually unilateral attacks of markedly raised intraocular pressure accompanied by mild, low-grade anterior uveitis",
+      "The striking feature is a large pressure rise that is disproportionate to the minimal inflammation present",
+      "Symptoms are often mild for the pressure level, with slight blurring, haloes, and mild discomfort rather than the severe pain of acute angle closure",
+      "Signs include a few fine keratic precipitates on the corneal endothelium, faint aqueous cells, an open angle on gonioscopy, and often a corneal epithelial haze",
+      "Attacks are self-limiting over days to weeks and pressure returns to normal between episodes, but the same eye tends to be repeatedly affected",
+      "An association with cytomegalovirus in the aqueous has been recognised in some cases, and herpetic mechanisms are implicated",
+      "Treatment during an attack lowers pressure with topical agents and controls the inflammation with topical corticosteroids, while antiviral therapy is considered where a viral cause is suspected",
+      "Although classically benign, recurrent or prolonged attacks can lead to glaucomatous optic-nerve damage over time, so long-term monitoring is warranted"
     ],
-    [
-     "Key Investigations",
-     "Applanation tonometry during and between attacks to document the episodic pressure pattern, Gonioscopy to confirm an open angle",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Posner-Schlossman syndrome produces episodic acute rises in intraocular pressure with concurrent mild anterior chamber inflammation affecting the trabecular outflow. During an attack, low-grade trabeculitis and inflammatory obstruction of an open angle reduce aqueous outflow while aqueous production may also be altered, producing a pressure spike out of proportion to the modest cellular reaction. The angle remains open, distinguishing it from angle-closure mechanisms. Infective triggers, particularly cytomegalovirus and other herpesviruses detected in the aqueous of some patients, are thought to drive the recurrent inflammation in a subset. Between crises the eye typically returns to normal, but repeated or protracted episodes can cumulatively damage the trabecular meshwork and optic nerve.",
+    "additionalDifferentials": [
+      "Acute primary angle-closure glaucoma",
+      "Herpetic (herpes simplex or zoster) anterior uveitis with raised pressure",
+      "Fuchs heterochromic uveitis",
+      "Other uveitic glaucomas",
+      "Pigmentary glaucoma with pressure spikes",
+      "Primary open-angle glaucoma with an incidental mild uveitis"
     ],
-    [
-     "Primary Differentials",
-     "Acute primary angle-closure glaucoma, Herpetic (herpes simplex or zoster) anterior uveitis with raised pressure, Fuchs",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Applanation tonometry during and between attacks to document the episodic pressure pattern",
+      "Gonioscopy to confirm an open angle and exclude angle closure",
+      "Slit-lamp examination for keratic precipitates and grading of anterior chamber activity",
+      "OCT of the retinal nerve fibre layer and automated perimetry to detect cumulative glaucomatous damage",
+      "Aqueous sampling for cytomegalovirus or herpesvirus in recurrent or atypical cases",
+      "Baseline optic disc assessment for long-term comparison"
     ],
-    [
-     "Management Strategy",
-     "Prompt intraocular-pressure reduction during attacks with topical aqueous-suppressants such as beta-blockers, alpha-agonists and",
-     "Core treatment modality"
+    "redFlags": [
+      "Very high pressure during an attack that could threaten the optic nerve if prolonged",
+      "Increasingly frequent, severe, or bilateral episodes suggesting a viral or alternative diagnosis",
+      "Emerging glaucomatous disc or field change indicating cumulative damage",
+      "Features atypical for the syndrome that raise concern for herpetic uveitis or angle closure"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the syndrome for acute angle-closure glaucoma because of the high pressure and haloes",
-     "Prevent diagnostic or management error"
+    "prognosis": "The visual prognosis is generally good because attacks are self-limiting and pressure normalises between episodes, but a minority develop chronic glaucomatous optic-nerve damage from recurrent crises, so periodic assessment of the disc and fields is advisable.",
+    "pitfalls": [
+      "Mistaking the syndrome for acute angle-closure glaucoma because of the high pressure and haloes",
+      "Overtreating with prolonged corticosteroids and inducing a steroid pressure response",
+      "Assuming the condition is always benign and omitting long-term glaucoma surveillance",
+      "Missing an underlying cytomegalovirus or herpetic cause in recurrent cases",
+      "Failing to examine the angle and confirm it is open"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Shields' Textbook of Glaucoma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt intraocular-pressure reduction during attacks with topical aqueous-suppressants such as beta-blockers, alpha-agonists and carbonic anhydrase inhibitors, adding oral acetazolamide for marked pressure spikes",
+      "Short course of topical corticosteroid to settle the low-grade anterior chamber inflammation",
+      "Antiviral therapy with ganciclovir or aciclovir where cytomegalovirus or another herpesvirus is implicated in recurrent or atypical cases",
+      "Long-term surveillance of the optic disc, retinal nerve fibre layer and visual fields for cumulative glaucomatous damage from repeated crises",
+      "Glaucoma-lowering surgery for eyes developing chronic pressure elevation or optic-nerve damage refractory to medical control",
+      "Ongoing ophthalmology follow-up given the tendency for the same eye to be repeatedly affected"
     ]
-   ],
-   "caption": "Overview comparison matrix for posner-schlossman syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "posner-schlossman-syndrome-real-image",
-   "title": "Posner-Schlossman syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "posner_schlossman_syndrome-pathway",
+      "title": "Posner-Schlossman syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by recurrent, usually unilateral attacks of markedly raised intraocular pressure accompanied by mild, low-grade anterior uveitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Very high pressure during an attack that could threaten the optic nerve if prolonged",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Applanation tonometry during and between attacks to document the episodic pressure pattern, Gonioscopy to confirm an open angle and exclude angle closure, Slit-lamp examination for keratic precipitates and grading of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt intraocular-pressure reduction during attacks with topical aqueous-suppressants such as beta-blockers, alpha-agonists and carbonic anhydrase inhibitors, adding oral acetazolamide for marked pressure spikes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the syndrome for acute angle-closure glaucoma because of the high pressure and haloes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of posner-schlossman syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "posner_schlossman_syndrome-matrix",
+      "title": "Posner-Schlossman syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by recurrent, usually unilateral attacks of markedly raised intraocular pressure accompanied by mild, low-grade",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Applanation tonometry during and between attacks to document the episodic pressure pattern, Gonioscopy to confirm an open angle",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute primary angle-closure glaucoma, Herpetic (herpes simplex or zoster) anterior uveitis with raised pressure, Fuchs",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt intraocular-pressure reduction during attacks with topical aqueous-suppressants such as beta-blockers, alpha-agonists and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the syndrome for acute angle-closure glaucoma because of the high pressure and haloes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for posner-schlossman syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posner_schlossman_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Applanation tonometry during and between attacks",
+          "cells": [
+            {
+              "text": "Episodic pressure pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Open angle confirmed; angle closure excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Keratic precipitates and anterior chamber activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of retinal nerve fibre layer and perimetry",
+          "cells": [
+            {
+              "text": "Cumulative glaucomatous damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aqueous sampling",
+          "cells": [
+            {
+              "text": "Cytomegalovirus or herpesvirus in recurrent or atypical cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline optic disc assessment",
+          "cells": [
+            {
+              "text": "Long-term comparison"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posner_schlossman_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute primary angle-closure glaucoma",
+          "cells": [
+            {
+              "text": "Closed angle on gonioscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpetic anterior uveitis",
+          "cells": [
+            {
+              "text": "Raised pressure with viral features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fuchs heterochromic uveitis",
+          "cells": [
+            {
+              "text": "Heterochromia and stellate keratic precipitates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pigmentary glaucoma",
+          "cells": [
+            {
+              "text": "Pressure spikes with pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary open-angle glaucoma",
+          "cells": [
+            {
+              "text": "Incidental mild uveitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posner_schlossman_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute pressure lowering",
+          "cells": [
+            {
+              "text": "Topical aqueous suppressants during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroid",
+          "cells": [
+            {
+              "text": "Short course to settle low-grade inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiviral therapy",
+          "cells": [
+            {
+              "text": "Ganciclovir or aciclovir where CMV or herpes is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Optic disc, nerve fibre layer and visual fields"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma surgery",
+          "cells": [
+            {
+              "text": "For chronic pressure elevation or optic nerve damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ongoing follow-up",
+          "cells": [
+            {
+              "text": "Recurrent attacks in the same eye"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posner_schlossman_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Posner-Schlossman syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent unilateral attacks of raised pressure with mild anterior uveitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (very high pressure, frequent or bilateral attacks, glaucomatous damage)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pressure lowering for very high intraocular pressure during an attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tonometry; gonioscopy; slit-lamp; OCT and perimetry; aqueous PCR if recurrent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gonioscopy show an open angle with keratic precipitates during attacks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acute angle closure, herpetic uveitis, Fuchs uveitis or open-angle glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt pressure reduction during attacks with topical aqueous suppressants",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short course of topical corticosteroid for low-grade anterior inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiviral therapy where cytomegalovirus or herpes is implicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term surveillance of optic disc, nerve fibre layer and fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Glaucoma surgery for chronic pressure elevation or optic nerve damage",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Visual prognosis is generally good; a minority develop chronic glaucomatous damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

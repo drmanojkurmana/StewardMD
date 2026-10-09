@@ -1,178 +1,244 @@
 {
- "id": "bilateral_adrenal_hyperplasia",
- "name": "bilateral adrenal hyperplasia",
- "aliases": [
-  "idiopathic hyperaldosteronism",
-  "bilateral idiopathic adrenal hyperplasia",
-  "primary bilateral macronodular adrenal hyperplasia"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Bilateral idiopathic hyperplasia of the zona glomerulosa is the commonest cause of primary aldosteronism, exceeding aldosterone-producing adenoma in frequency.",
-   "Adrenal vein sampling is the pivotal test to distinguish surgically curable unilateral disease from bilateral disease before any adrenalectomy.",
-   "Bilateral aldosterone excess is managed medically with mineralocorticoid receptor antagonists rather than surgery.",
-   "Screen with the aldosterone-to-renin ratio in resistant hypertension, hypertension with hypokalaemia, or hypertension with an adrenal incidentaloma; potassium may be normal.",
-   "Primary bilateral macronodular adrenal hyperplasia can cause overt or subclinical Cushing's, sometimes via aberrant membrane receptors producing food- or posture-dependent cortisol secretion.",
-   "Germline ARMC5 mutations underlie many familial macronodular cases, so relatives should be offered assessment.",
-   "Primary pigmented nodular adrenocortical disease in a young patient suggests Carney complex, prompting a search for cardiac myxoma and skin lentigines.",
-   "Cross-sectional imaging cannot reliably lateralise aldosterone excess, and apparently normal adrenals do not exclude hyperplasia."
+  "id": "bilateral_adrenal_hyperplasia",
+  "name": "bilateral adrenal hyperplasia",
+  "aliases": [
+    "idiopathic hyperaldosteronism",
+    "bilateral idiopathic adrenal hyperplasia",
+    "primary bilateral macronodular adrenal hyperplasia"
   ],
-  "pathophysiology": "Bilateral adrenal hyperplasia denotes diffuse or nodular expansion of both adrenal cortices with autonomous hormone secretion. In the aldosterone-producing form (idiopathic hyperaldosteronism) the zona glomerulosa is hyperplastic with dysregulated aldosterone output, producing sodium retention, potassium wasting, suppressed renin and hypertension. In cortisol-producing macronodular disease, aberrant expression of membrane receptors for gastric inhibitory polypeptide, catecholamines, vasopressin or luteinising hormone couples cortisol release to non-ACTH stimuli, and germline ARMC5 mutations promote nodular growth. Primary pigmented nodular adrenocortical disease arises from PRKAR1A defects within Carney complex. These primary adrenal processes must be distinguished from ACTH-driven bilateral hyperplasia of pituitary or ectopic Cushing's and from congenital adrenal hyperplasia due to steroidogenic enzyme deficiency.",
-  "additionalDifferentials": [
-   "aldosterone-producing adenoma",
-   "unilateral adrenal hyperplasia",
-   "familial hyperaldosteronism including glucocorticoid-remediable aldosteronism",
-   "ACTH-dependent Cushing's disease",
-   "ectopic ACTH syndrome",
-   "congenital adrenal hyperplasia",
-   "phaeochromocytoma"
-  ],
-  "additionalInvestigations": [
-   "aldosterone-to-renin ratio after appropriate adjustment of interfering antihypertensives",
-   "confirmatory saline suppression or fludrocortisone suppression testing",
-   "adrenal vein sampling for lateralisation",
-   "low-dose dexamethasone suppression test and late-night salivary cortisol for autonomous cortisol",
-   "dedicated adrenal-protocol CT",
-   "germline ARMC5 and PRKAR1A genetic testing where indicated",
-   "serum electrolytes and acid-base assessment"
-  ],
-  "redFlags": [
-   "severe or resistant hypertension with cardiovascular or cerebrovascular complications",
-   "profound hypokalaemia with arrhythmia or weakness",
-   "florid hypercortisolism with proximal myopathy, fragility fracture or opportunistic infection",
-   "an adrenal nodule with radiological features suspicious for malignancy"
-  ],
-  "prognosis": "Bilateral idiopathic hyperaldosteronism is controlled but not cured by mineralocorticoid receptor antagonists, and cardiovascular risk persists if untreated; macronodular disease causing hypercortisolism improves after unilateral or bilateral adrenalectomy, though replacement therapy may then be required.",
-  "pitfalls": [
-   "proceeding to adrenalectomy on CT appearance alone without adrenal vein sampling",
-   "excluding primary aldosteronism because serum potassium is normal",
-   "inadequate preparation and drug washout before measuring the aldosterone-to-renin ratio",
-   "labelling bilateral nodules as non-functioning and missing subclinical Cushing's",
-   "misclassifying ACTH-dependent hyperplasia as a primary adrenal disorder"
-  ],
-  "references": [
-   "Endocrine Society Clinical Practice Guideline on the management of primary aldosteronism",
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society Clinical Practice Guideline on Cushing's syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the subtype and lateralise with adrenal vein sampling before any surgery, since bilateral disease is treated medically",
-   "Manage bilateral idiopathic hyperaldosteronism with mineralocorticoid receptor antagonists (spironolactone or eplerenone), controlling blood pressure and potassium",
-   "Add further antihypertensives and address persistent cardiovascular risk that remains despite mineralocorticoid blockade",
-   "Treat cortisol-secreting macronodular disease with unilateral or bilateral adrenalectomy, providing glucocorticoid and, where needed, mineralocorticoid replacement afterwards",
-   "Monitor electrolytes, blood pressure, renal function and cortisol status during treatment",
-   "Offer germline ARMC5 and PRKAR1A genetic testing and family assessment where familial macronodular disease or Carney complex is implicated",
-   "Endocrinology-led multidisciplinary care with surgical referral for lateralised or cortisol-secreting disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bilateral_adrenal_hyperplasia-pathway",
-   "title": "bilateral adrenal hyperplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Bilateral idiopathic hyperplasia of the zona glomerulosa is the commonest cause of primary aldosteronism, exceeding aldosterone-producing adenoma in frequency.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: severe or resistant hypertension with cardiovascular or cerebrovascular complications",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: aldosterone-to-renin ratio after appropriate adjustment of interfering antihypertensives, confirmatory saline suppression or fludrocortisone suppression testing, adrenal vein sampling for lateralisation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the subtype and lateralise with adrenal vein sampling before any surgery, since bilateral disease is treated medically"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: proceeding to adrenalectomy on CT appearance alone without adrenal vein sampling"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bilateral adrenal hyperplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "bilateral_adrenal_hyperplasia-matrix",
-   "title": "bilateral adrenal hyperplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Bilateral idiopathic hyperplasia of the zona glomerulosa is the commonest cause of primary aldosteronism, exceeding",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Bilateral idiopathic hyperplasia of the zona glomerulosa is the commonest cause of primary aldosteronism, exceeding aldosterone-producing adenoma in frequency.",
+      "Adrenal vein sampling is the pivotal test to distinguish surgically curable unilateral disease from bilateral disease before any adrenalectomy.",
+      "Bilateral aldosterone excess is managed medically with mineralocorticoid receptor antagonists rather than surgery.",
+      "Screen with the aldosterone-to-renin ratio in resistant hypertension, hypertension with hypokalaemia, or hypertension with an adrenal incidentaloma; potassium may be normal.",
+      "Primary bilateral macronodular adrenal hyperplasia can cause overt or subclinical Cushing's, sometimes via aberrant membrane receptors producing food- or posture-dependent cortisol secretion.",
+      "Germline ARMC5 mutations underlie many familial macronodular cases, so relatives should be offered assessment.",
+      "Primary pigmented nodular adrenocortical disease in a young patient suggests Carney complex, prompting a search for cardiac myxoma and skin lentigines.",
+      "Cross-sectional imaging cannot reliably lateralise aldosterone excess, and apparently normal adrenals do not exclude hyperplasia."
     ],
-    [
-     "Key Investigations",
-     "aldosterone-to-renin ratio after appropriate adjustment of interfering antihypertensives, confirmatory saline suppression or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bilateral adrenal hyperplasia denotes diffuse or nodular expansion of both adrenal cortices with autonomous hormone secretion. In the aldosterone-producing form (idiopathic hyperaldosteronism) the zona glomerulosa is hyperplastic with dysregulated aldosterone output, producing sodium retention, potassium wasting, suppressed renin and hypertension. In cortisol-producing macronodular disease, aberrant expression of membrane receptors for gastric inhibitory polypeptide, catecholamines, vasopressin or luteinising hormone couples cortisol release to non-ACTH stimuli, and germline ARMC5 mutations promote nodular growth. Primary pigmented nodular adrenocortical disease arises from PRKAR1A defects within Carney complex. These primary adrenal processes must be distinguished from ACTH-driven bilateral hyperplasia of pituitary or ectopic Cushing's and from congenital adrenal hyperplasia due to steroidogenic enzyme deficiency.",
+    "additionalDifferentials": [
+      "aldosterone-producing adenoma",
+      "unilateral adrenal hyperplasia",
+      "familial hyperaldosteronism including glucocorticoid-remediable aldosteronism",
+      "ACTH-dependent Cushing's disease",
+      "ectopic ACTH syndrome",
+      "congenital adrenal hyperplasia",
+      "phaeochromocytoma"
     ],
-    [
-     "Primary Differentials",
-     "aldosterone-producing adenoma, unilateral adrenal hyperplasia, familial hyperaldosteronism including glucocorticoid-remediable",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "aldosterone-to-renin ratio after appropriate adjustment of interfering antihypertensives",
+      "confirmatory saline suppression or fludrocortisone suppression testing",
+      "adrenal vein sampling for lateralisation",
+      "low-dose dexamethasone suppression test and late-night salivary cortisol for autonomous cortisol",
+      "dedicated adrenal-protocol CT",
+      "germline ARMC5 and PRKAR1A genetic testing where indicated",
+      "serum electrolytes and acid-base assessment"
     ],
-    [
-     "Management Strategy",
-     "Confirm the subtype and lateralise with adrenal vein sampling before any surgery, since bilateral disease is treated medically",
-     "Core treatment modality"
+    "redFlags": [
+      "severe or resistant hypertension with cardiovascular or cerebrovascular complications",
+      "profound hypokalaemia with arrhythmia or weakness",
+      "florid hypercortisolism with proximal myopathy, fragility fracture or opportunistic infection",
+      "an adrenal nodule with radiological features suspicious for malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "proceeding to adrenalectomy on CT appearance alone without adrenal vein sampling",
-     "Prevent diagnostic or management error"
+    "prognosis": "Bilateral idiopathic hyperaldosteronism is controlled but not cured by mineralocorticoid receptor antagonists, and cardiovascular risk persists if untreated; macronodular disease causing hypercortisolism improves after unilateral or bilateral adrenalectomy, though replacement therapy may then be required.",
+    "pitfalls": [
+      "proceeding to adrenalectomy on CT appearance alone without adrenal vein sampling",
+      "excluding primary aldosteronism because serum potassium is normal",
+      "inadequate preparation and drug washout before measuring the aldosterone-to-renin ratio",
+      "labelling bilateral nodules as non-functioning and missing subclinical Cushing's",
+      "misclassifying ACTH-dependent hyperplasia as a primary adrenal disorder"
+    ],
+    "references": [
+      "Endocrine Society Clinical Practice Guideline on the management of primary aldosteronism",
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society Clinical Practice Guideline on Cushing's syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the subtype and lateralise with adrenal vein sampling before any surgery, since bilateral disease is treated medically",
+      "Manage bilateral idiopathic hyperaldosteronism with mineralocorticoid receptor antagonists (spironolactone or eplerenone), controlling blood pressure and potassium",
+      "Add further antihypertensives and address persistent cardiovascular risk that remains despite mineralocorticoid blockade",
+      "Treat cortisol-secreting macronodular disease with unilateral or bilateral adrenalectomy, providing glucocorticoid and, where needed, mineralocorticoid replacement afterwards",
+      "Monitor electrolytes, blood pressure, renal function and cortisol status during treatment",
+      "Offer germline ARMC5 and PRKAR1A genetic testing and family assessment where familial macronodular disease or Carney complex is implicated",
+      "Endocrinology-led multidisciplinary care with surgical referral for lateralised or cortisol-secreting disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for bilateral adrenal hyperplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bilateral-adrenal-hyperplasia-real-image",
-   "title": "bilateral adrenal hyperplasia: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "bilateral_adrenal_hyperplasia-pathway",
+      "title": "bilateral adrenal hyperplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Bilateral idiopathic hyperplasia of the zona glomerulosa is the commonest cause of primary aldosteronism, exceeding aldosterone-producing adenoma in frequency.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: severe or resistant hypertension with cardiovascular or cerebrovascular complications",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: aldosterone-to-renin ratio after appropriate adjustment of interfering antihypertensives, confirmatory saline suppression or fludrocortisone suppression testing, adrenal vein sampling for lateralisation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the subtype and lateralise with adrenal vein sampling before any surgery, since bilateral disease is treated medically"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: proceeding to adrenalectomy on CT appearance alone without adrenal vein sampling"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bilateral adrenal hyperplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bilateral_adrenal_hyperplasia-matrix",
+      "title": "bilateral adrenal hyperplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Bilateral idiopathic hyperplasia of the zona glomerulosa is the commonest cause of primary aldosteronism, exceeding",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "aldosterone-to-renin ratio after appropriate adjustment of interfering antihypertensives, confirmatory saline suppression or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "aldosterone-producing adenoma, unilateral adrenal hyperplasia, familial hyperaldosteronism including glucocorticoid-remediable",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the subtype and lateralise with adrenal vein sampling before any surgery, since bilateral disease is treated medically",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "proceeding to adrenalectomy on CT appearance alone without adrenal vein sampling",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bilateral adrenal hyperplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bilateral_adrenal_hyperplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in bilateral adrenal hyperplasia",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Aldosterone-to-renin ratio", "cells": [{"text": "Screens for primary aldosteronism after adjusting interfering antihypertensives; potassium may be normal"}], "cite": "c1"},
+        {"parameter": "Confirmatory suppression testing", "cells": [{"text": "Confirms autonomous aldosterone secretion"}], "cite": "c1"},
+        {"parameter": "Adrenal vein sampling", "cells": [{"text": "Lateralises disease; separates surgically curable unilateral disease from bilateral disease"}], "cite": "c1"},
+        {"parameter": "Low-dose dexamethasone suppression test and late-night salivary cortisol", "cells": [{"text": "Autonomous cortisol secretion"}], "cite": "c1"},
+        {"parameter": "Adrenal-protocol CT", "cells": [{"text": "Cannot reliably lateralise aldosterone excess"}], "cite": "c1"},
+        {"parameter": "Germline ARMC5 and PRKAR1A testing", "cells": [{"text": "Familial macronodular disease or Carney complex, where indicated"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bilateral_adrenal_hyperplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of adrenal hormone excess",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Aldosterone-producing adenoma", "cells": [{"text": "Unilateral and surgically curable; separated by adrenal vein sampling"}], "cite": "c1"},
+        {"parameter": "ACTH-dependent Cushing's disease or ectopic ACTH syndrome", "cells": [{"text": "ACTH-driven rather than primary autonomous adrenal secretion"}], "cite": "c1"},
+        {"parameter": "Congenital adrenal hyperplasia", "cells": [{"text": "Caused by steroidogenic enzyme deficiency, not autonomous adrenal hyperplasia"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bilateral_adrenal_hyperplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options in bilateral adrenal hyperplasia",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Lateralisation before surgery", "cells": [{"text": "Adrenal vein sampling before any adrenalectomy"}, {"text": "Bilateral disease is treated medically"}], "cite": "c1"},
+        {"parameter": "Mineralocorticoid receptor antagonist", "cells": [{"text": "Spironolactone or eplerenone"}, {"text": "Controls blood pressure and potassium in bilateral disease"}], "cite": "c1"},
+        {"parameter": "Further antihypertensives", "cells": [{"text": "Add further antihypertensives for persistent cardiovascular risk"}, {"text": "Risk remains despite mineralocorticoid blockade"}], "cite": "c1"},
+        {"parameter": "Adrenalectomy for cortisol-secreting disease", "cells": [{"text": "Unilateral or bilateral adrenalectomy for macronodular disease"}, {"text": "Glucocorticoid and, if needed, mineralocorticoid replacement afterwards"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Electrolytes, blood pressure, renal function and cortisol status"}, {"text": "During treatment"}], "cite": "c1"},
+        {"parameter": "Genetic testing and family assessment", "cells": [{"text": "ARMC5 and PRKAR1A testing where familial macronodular disease or Carney complex is implicated"}, {"text": "Relatives offered assessment"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary care", "cells": [{"text": "Endocrinology-led care with surgical referral for lateralised or cortisol-secreting disease"}, {"text": "Multidisciplinary"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bilateral_adrenal_hyperplasia-dx-mgmt",
+      "title": "Diagnosis and management of bilateral adrenal hyperplasia",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Resistant hypertension or hypokalaemia, or hypercortisolism with adrenal nodules", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: severe hypertension with organ damage, profound hypokalaemia or suspicious nodule?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent control of potassium and blood pressure; adrenal-protocol CT", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Aldosterone-to-renin ratio after adjusting interfering drugs; electrolytes", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Confirmatory suppression testing; dexamethasone and late-night salivary cortisol if Cushing suspected", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Aldosterone excess confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Adrenal vein sampling to lateralise before any surgery", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: reconsider other causes of hypertension or Cushing syndrome", "cite": "c1"},
+        {"id": "n9", "type": "decision", "text": "Excess lateralised to one adrenal on vein sampling?", "cite": "c1"},
+        {"id": "n10", "type": "action", "text": "Adrenalectomy for unilateral disease, with hormone replacement as needed", "cite": "c1"},
+        {"id": "n11", "type": "action", "text": "Spironolactone or eplerenone for bilateral disease, controlling blood pressure and potassium", "cite": "c1"},
+        {"id": "n12", "type": "outcome", "text": "Bilateral disease is controlled but not cured; cardiovascular risk needs ongoing care", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Yes"},
+        {"from": "n9", "to": "n11", "label": "No"},
+        {"from": "n10", "to": "n12", "label": "Next"},
+        {"from": "n11", "to": "n12", "label": "Next"}
+      ]
+    }
+  ]
 }

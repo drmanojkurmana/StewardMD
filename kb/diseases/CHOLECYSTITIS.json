@@ -288,5 +288,564 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Cholecystitis",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/acute-cholecystitis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CHOLECYSTITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical, laboratory and imaging findings in acute cholecystitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Biliary pain duration",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Beyond about 5 to 6 hours",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "{{hy:Suggests cholecystitis rather than simple biliary colic}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Murphy sign",
+          "cells": [
+            {
+              "text": "Inspiratory arrest on right subcostal palpation"
+            },
+            {
+              "text": "Characteristic bedside sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palpable gallbladder",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Only about 25% to 50%",
+              "range": [
+                25,
+                50
+              ]
+            },
+            {
+              "text": "Absence does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prior biliary attacks",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Recalled by about 60% to 70%",
+              "range": [
+                60,
+                70
+              ]
+            },
+            {
+              "text": "Supports a gallstone cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "WBC",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "About 10,000 to 15,000 with left shift",
+              "range": [
+                10000,
+                15000
+              ]
+            },
+            {
+              "text": "Common but not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum bilirubin",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Mildly raised, under 5 in fewer than half (Merck: up to 4)",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Higher values suggest a duct stone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipase",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "More than 3 times normal",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Suggests bile duct obstruction or pancreatitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Stones in about 90% to 95%; wall thickening, pericholecystic fluid, sonographic Murphy sign",
+              "range": [
+                90,
+                95
+              ]
+            },
+            {
+              "text": "{{hy:First-line imaging}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholescintigraphy (HIDA)",
+          "cells": [
+            {
+              "text": "Bile ducts seen without gallbladder filling"
+            },
+            {
+              "text": "Confirms cystic duct obstruction when ultrasound is equivocal; best test for acalculous disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Perforation, abscess, pancreatitis, duct stones"
+            },
+            {
+              "text": "When other imaging is inconclusive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peritoneal signs or rigidity",
+          "cells": [
+            {
+              "text": "Usually absent in uncomplicated disease"
+            },
+            {
+              "text": "Raise concern for perforation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Bilirubin ceiling differs: Harrison under 5 mg/dL, Merck up to 4 mg/dL. Tokyo Guidelines 2018 numeric criteria were not available on the pages opened."
+    },
+    {
+      "id": "CHOLECYSTITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute cholecystitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Uncomplicated biliary colic",
+          "cells": [
+            {
+              "text": "Pain settles within about 5 to 6 hours, no fever"
+            },
+            {
+              "text": "Ultrasound without inflammation signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choledocholithiasis",
+          "cells": [
+            {
+              "text": "Raised bilirubin or alkaline phosphatase with biliary pain"
+            },
+            {
+              "text": "MRCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute cholangitis",
+          "cells": [
+            {
+              "text": "Fever, jaundice, rigors; gallbladder empyema can look similar"
+            },
+            {
+              "text": "Liver tests and duct imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pancreatitis",
+          "cells": [
+            {
+              "text": "Epigastric pain; amylase can rise in both"
+            },
+            {
+              "text": "{{hy:HIDA scan helps separate}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perforated peptic ulcer",
+          "cells": [
+            {
+              "text": "Sudden severe epigastric pain with peritonism"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatitis",
+          "cells": [
+            {
+              "text": "Marked aminotransferase rise"
+            },
+            {
+              "text": "Liver tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right lower lobe pneumonia or subphrenic abscess",
+          "cells": [
+            {
+              "text": "Respiratory signs or collection under diaphragm"
+            },
+            {
+              "text": "Chest x-ray or CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myocardial infarction or pericarditis",
+          "cells": [
+            {
+              "text": "Epigastric or right upper quadrant overlap"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gallbladder changes of critical illness",
+          "cells": [
+            {
+              "text": "Distended gallbladder, sludge, thick wall without pericholecystic fluid"
+            },
+            {
+              "text": "Cholescintigraphy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Separating tests marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "CHOLECYSTITIS-treatment",
+      "kind": "treatment",
+      "title": "Management of acute cholecystitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Admit, IV fluids, nil by mouth, analgesia",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "NSAID such as ketorolac or an opioid; nasogastric suction if vomiting or ileus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ampicillin-sulbactam or piperacillin-tazobactam IV",
+          "cells": [
+            {
+              "text": "Empiric gram-negative cover"
+            },
+            {
+              "text": "Benefit unproven in mild cases; source gives no doses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early laparoscopic cholecystectomy",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "{{hy:Within 7 days of admission and 10 days of symptom onset}}",
+              "op": "<=",
+              "value": 7
+            },
+            {
+              "text": "Within 24 to 48 h if low risk, elderly, diabetic, or empyema, gangrene, perforation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Early surgery favoured",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Age over 80, pregnancy, cirrhosis",
+              "op": ">",
+              "value": 80
+            },
+            {
+              "text": "Per source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Delayed cholecystectomy",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Serious comorbidity; 6 weeks or more after inflammation settles",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Recurrence about 25% within 1 year if no surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Percutaneous cholecystostomy",
+          "cells": [
+            {
+              "text": "Very high surgical risk, acalculous disease, severe liver disease, ICU patients"
+            },
+            {
+              "text": "Alternative to surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent surgery",
+          "cells": [
+            {
+              "text": "Empyema, gangrene or perforation"
+            },
+            {
+              "text": "Perforation mortality up to 16%"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Natural history differs: Harrison says about 75% remit within 2 to 7 days on medical treatment; Merck says about 85% resolve without surgery. Both are kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CHOLECYSTITIS-dx-mgmt",
+      "title": "Diagnosis and management of acute cholecystitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Right upper quadrant pain lasting over 5 to 6 hours, with or without fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CBC, liver tests, lipase; abdominal ultrasound",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Stones with wall thickening, fluid or sonographic Murphy sign?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cholescintigraphy (HIDA); CT or MRI if perforation suspected",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gallbladder fails to fill?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Look for other cause of pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Admit: fluids, nil by mouth, analgesia, IV antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Empyema, gangrene, perforation or peritonism?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Urgent cholecystectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Fit for surgery?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Laparoscopic cholecystectomy within 7 days of admission",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Percutaneous cholecystostomy; interval surgery after 6 weeks if able",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Equivocal"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
   ]
 }

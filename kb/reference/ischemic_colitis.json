@@ -1,174 +1,463 @@
 {
- "id": "ischemic_colitis",
- "name": "Ischaemic colitis",
- "aliases": [
-  "colonic ischaemia",
-  "colonic ischemia",
-  "ischaemic colitis",
-  "ischemic colitis"
- ],
- "class": "non_infective",
- "system": "GI / Hepatology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / AASLD & ACG",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest form of intestinal ischaemia, usually affecting older adults and typically arising from a transient, non-occlusive fall in colonic perfusion rather than a fixed arterial blockage",
-   "Classic presentation is sudden mild crampy left-sided abdominal pain followed within a day by the passage of bloody or maroon stool, with only modest blood loss",
-   "The watershed zones (splenic flexure and rectosigmoid junction) are most vulnerable, while the rectum is usually spared because of its dual blood supply",
-   "CT often shows segmental bowel-wall thickening, and colonoscopy is the key diagnostic test showing segmental oedema, haemorrhage, and mucosal ulceration with an abrupt transition to normal mucosa",
-   "Most cases are non-gangrenous and settle with supportive care: bowel rest, intravenous fluids, and correction of any precipitating hypoperfusion",
-   "Right-sided (isolated right colon) involvement carries a worse prognosis and should raise concern for coexisting acute mesenteric ischaemia",
-   "Distinguish from infective colitis and inflammatory bowel disease; the segmental distribution and rapid resolution favour an ischaemic cause",
-   "Recognised triggers include hypotension, cardiac or vascular surgery, dehydration, hypercoagulable states, and certain drugs such as vasoconstrictors"
+  "id": "ischemic_colitis",
+  "name": "Ischaemic colitis",
+  "aliases": [
+    "colonic ischaemia",
+    "colonic ischemia",
+    "ischaemic colitis",
+    "ischemic colitis"
   ],
-  "pathophysiology": "Ischaemic colitis results from a temporary reduction in blood flow to a colonic segment, most often a low-flow (non-occlusive) event superimposed on the marginal circulation of watershed areas. Reduced perfusion injures the mucosa first, producing oedema, submucosal haemorrhage, and superficial ulceration. In most patients reperfusion allows healing, but persistent or severe ischaemia can progress to transmural (gangrenous) necrosis with perforation or, later, to fibrotic stricture. It is usually a disease of small vessels and systemic hypoperfusion rather than a large-artery occlusion, which distinguishes it from acute mesenteric ischaemia.",
-  "additionalDifferentials": [
-   "Acute mesenteric ischaemia (small bowel)",
-   "Infective (bacterial) colitis",
-   "Inflammatory bowel disease, especially Crohn colitis",
-   "Diverticular haemorrhage or diverticulitis",
-   "Colorectal malignancy",
-   "Pseudomembranous (Clostridioides difficile) colitis"
-  ],
-  "additionalInvestigations": [
-   "CT of the abdomen and pelvis to assess segmental wall thickening and exclude perforation",
-   "Colonoscopy or flexible sigmoidoscopy showing segmental mucosal injury with an abrupt transition zone",
-   "Serum lactate and inflammatory markers to gauge severity and detect possible gangrene",
-   "Stool studies to exclude infective causes when the picture is atypical",
-   "Cardiac and vascular assessment to identify a precipitating low-flow state"
-  ],
-  "redFlags": [
-   "Peritonism, fever, marked leucocytosis, or rising lactate suggesting gangrenous colitis and impending perforation",
-   "Isolated right-sided colonic involvement, which may signal concurrent acute mesenteric ischaemia",
-   "Persistent bleeding, haemodynamic instability, or failure to improve on supportive care",
-   "Development of a colonic stricture with obstruction during recovery"
-  ],
-  "prognosis": "Non-gangrenous ischaemic colitis usually resolves within a few days with conservative management and has a good outcome. Gangrenous disease requiring surgery carries substantial mortality, and right-sided involvement predicts a worse course. A minority develop chronic segmental colitis or a stricture.",
-  "pitfalls": [
-   "Assuming rectal sparing excludes colonic ischaemia, or mistaking segmental ischaemic changes for inflammatory bowel disease",
-   "Delaying surgical review when signs of transmural necrosis are present",
-   "Overlooking a precipitating hypoperfusion event that will otherwise recur",
-   "Failing to recognise that isolated right colon disease may reflect small-bowel mesenteric ischaemia needing urgent vascular evaluation"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "AASLD/ACG guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat most non-gangrenous cases conservatively with bowel rest, intravenous fluid resuscitation and correction of the precipitating hypoperfusion",
-   "Give broad-spectrum antibiotics in moderate-to-severe disease",
-   "Optimise the circulation and review offending vasoconstrictor or precipitating medications",
-   "Proceed urgently to surgical resection for gangrenous, fulminant or perforated colitis, and hold heightened concern for coexisting acute mesenteric ischaemia in isolated right-colon disease",
-   "Monitor with serial examination and lactate and inflammatory markers to detect transmural progression",
-   "Identify and address an underlying cardiac, vascular or thrombophilic low-flow cause",
-   "Follow up for the development of chronic segmental colitis or a fibrotic stricture requiring later intervention"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ischemic_colitis-pathway",
-   "title": "Ischaemic colitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest form of intestinal ischaemia, usually affecting older adults and typically arising from a transient, non-occlusive fall in colonic perfusion rather than a fixed arterial blockage",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Peritonism, fever, marked leucocytosis, or rising lactate suggesting gangrenous colitis and impending perforation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT of the abdomen and pelvis to assess segmental wall thickening and exclude perforation, Colonoscopy or flexible sigmoidoscopy showing segmental mucosal injury with an abrupt transition zone, Serum lactate and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat most non-gangrenous cases conservatively with bowel rest, intravenous fluid resuscitation and correction of the precipitating hypoperfusion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming rectal sparing excludes colonic ischaemia, or mistaking segmental ischaemic changes for inflammatory bowel disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ischaemic colitis."
-  }
- ],
- "tables": [
-  {
-   "id": "ischemic_colitis-matrix",
-   "title": "Ischaemic colitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest form of intestinal ischaemia, usually affecting older adults and typically arising from a transient, non-occlusive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "GI / Hepatology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / AASLD & ACG",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest form of intestinal ischaemia, usually affecting older adults and typically arising from a transient, non-occlusive fall in colonic perfusion rather than a fixed arterial blockage",
+      "Classic presentation is sudden mild crampy left-sided abdominal pain followed within a day by the passage of bloody or maroon stool, with only modest blood loss",
+      "The watershed zones (splenic flexure and rectosigmoid junction) are most vulnerable, while the rectum is usually spared because of its dual blood supply",
+      "CT often shows segmental bowel-wall thickening, and colonoscopy is the key diagnostic test showing segmental oedema, haemorrhage, and mucosal ulceration with an abrupt transition to normal mucosa",
+      "Most cases are non-gangrenous and settle with supportive care: bowel rest, intravenous fluids, and correction of any precipitating hypoperfusion",
+      "Right-sided (isolated right colon) involvement carries a worse prognosis and should raise concern for coexisting acute mesenteric ischaemia",
+      "Distinguish from infective colitis and inflammatory bowel disease; the segmental distribution and rapid resolution favour an ischaemic cause",
+      "Recognised triggers include hypotension, cardiac or vascular surgery, dehydration, hypercoagulable states, and certain drugs such as vasoconstrictors"
     ],
-    [
-     "Key Investigations",
-     "CT of the abdomen and pelvis to assess segmental wall thickening and exclude perforation, Colonoscopy or flexible sigmoidoscopy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ischaemic colitis results from a temporary reduction in blood flow to a colonic segment, most often a low-flow (non-occlusive) event superimposed on the marginal circulation of watershed areas. Reduced perfusion injures the mucosa first, producing oedema, submucosal haemorrhage, and superficial ulceration. In most patients reperfusion allows healing, but persistent or severe ischaemia can progress to transmural (gangrenous) necrosis with perforation or, later, to fibrotic stricture. It is usually a disease of small vessels and systemic hypoperfusion rather than a large-artery occlusion, which distinguishes it from acute mesenteric ischaemia.",
+    "additionalDifferentials": [
+      "Acute mesenteric ischaemia (small bowel)",
+      "Infective (bacterial) colitis",
+      "Inflammatory bowel disease, especially Crohn colitis",
+      "Diverticular haemorrhage or diverticulitis",
+      "Colorectal malignancy",
+      "Pseudomembranous (Clostridioides difficile) colitis"
     ],
-    [
-     "Primary Differentials",
-     "Acute mesenteric ischaemia (small bowel), Infective (bacterial) colitis, Inflammatory bowel disease, especially Crohn colitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT of the abdomen and pelvis to assess segmental wall thickening and exclude perforation",
+      "Colonoscopy or flexible sigmoidoscopy showing segmental mucosal injury with an abrupt transition zone",
+      "Serum lactate and inflammatory markers to gauge severity and detect possible gangrene",
+      "Stool studies to exclude infective causes when the picture is atypical",
+      "Cardiac and vascular assessment to identify a precipitating low-flow state"
     ],
-    [
-     "Management Strategy",
-     "Treat most non-gangrenous cases conservatively with bowel rest, intravenous fluid resuscitation and correction of the",
-     "Core treatment modality"
+    "redFlags": [
+      "Peritonism, fever, marked leucocytosis, or rising lactate suggesting gangrenous colitis and impending perforation",
+      "Isolated right-sided colonic involvement, which may signal concurrent acute mesenteric ischaemia",
+      "Persistent bleeding, haemodynamic instability, or failure to improve on supportive care",
+      "Development of a colonic stricture with obstruction during recovery"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming rectal sparing excludes colonic ischaemia, or mistaking segmental ischaemic changes for inflammatory bowel disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Non-gangrenous ischaemic colitis usually resolves within a few days with conservative management and has a good outcome. Gangrenous disease requiring surgery carries substantial mortality, and right-sided involvement predicts a worse course. A minority develop chronic segmental colitis or a stricture.",
+    "pitfalls": [
+      "Assuming rectal sparing excludes colonic ischaemia, or mistaking segmental ischaemic changes for inflammatory bowel disease",
+      "Delaying surgical review when signs of transmural necrosis are present",
+      "Overlooking a precipitating hypoperfusion event that will otherwise recur",
+      "Failing to recognise that isolated right colon disease may reflect small-bowel mesenteric ischaemia needing urgent vascular evaluation"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "AASLD/ACG guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat most non-gangrenous cases conservatively with bowel rest, intravenous fluid resuscitation and correction of the precipitating hypoperfusion",
+      "Give broad-spectrum antibiotics in moderate-to-severe disease",
+      "Optimise the circulation and review offending vasoconstrictor or precipitating medications",
+      "Proceed urgently to surgical resection for gangrenous, fulminant or perforated colitis, and hold heightened concern for coexisting acute mesenteric ischaemia in isolated right-colon disease",
+      "Monitor with serial examination and lactate and inflammatory markers to detect transmural progression",
+      "Identify and address an underlying cardiac, vascular or thrombophilic low-flow cause",
+      "Follow up for the development of chronic segmental colitis or a fibrotic stricture requiring later intervention"
     ]
-   ],
-   "caption": "Overview comparison matrix for ischaemic colitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ischemic-colitis-real-image",
-   "title": "Ischaemic colitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "ischemic_colitis-pathway",
+      "title": "Ischaemic colitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest form of intestinal ischaemia, usually affecting older adults and typically arising from a transient, non-occlusive fall in colonic perfusion rather than a fixed arterial blockage",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Peritonism, fever, marked leucocytosis, or rising lactate suggesting gangrenous colitis and impending perforation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT of the abdomen and pelvis to assess segmental wall thickening and exclude perforation, Colonoscopy or flexible sigmoidoscopy showing segmental mucosal injury with an abrupt transition zone, Serum lactate and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat most non-gangrenous cases conservatively with bowel rest, intravenous fluid resuscitation and correction of the precipitating hypoperfusion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming rectal sparing excludes colonic ischaemia, or mistaking segmental ischaemic changes for inflammatory bowel disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ischaemic colitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ischemic_colitis-matrix",
+      "title": "Ischaemic colitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest form of intestinal ischaemia, usually affecting older adults and typically arising from a transient, non-occlusive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT of the abdomen and pelvis to assess segmental wall thickening and exclude perforation, Colonoscopy or flexible sigmoidoscopy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute mesenteric ischaemia (small bowel), Infective (bacterial) colitis, Inflammatory bowel disease, especially Crohn colitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat most non-gangrenous cases conservatively with bowel rest, intravenous fluid resuscitation and correction of the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming rectal sparing excludes colonic ischaemia, or mistaking segmental ischaemic changes for inflammatory bowel disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ischaemic colitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AASLD & ACG",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ischemic_colitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of the abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Segmental wall thickening; perforation excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy or flexible sigmoidoscopy",
+          "cells": [
+            {
+              "text": "Segmental mucosal injury with abrupt transition zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum lactate and inflammatory markers",
+          "cells": [
+            {
+              "text": "Severity and possible gangrene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool studies",
+          "cells": [
+            {
+              "text": "Infective causes when the picture is atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and vascular assessment",
+          "cells": [
+            {
+              "text": "Precipitating low-flow state"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ischemic_colitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute mesenteric ischaemia (small bowel)",
+          "cells": [
+            {
+              "text": "Isolated right colon involvement may signal small-bowel ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective colitis",
+          "cells": [
+            {
+              "text": "Excluded by stool studies when atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease (Crohn colitis)",
+          "cells": [
+            {
+              "text": "Segmental ischaemic change can mimic it; stool studies and endoscopy distinguish"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ischemic_colitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Bowel rest, intravenous fluid resuscitation and correction of hypoperfusion for non-gangrenous cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Broad-spectrum cover in moderate-to-severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circulation and drugs",
+          "cells": [
+            {
+              "text": "Optimise circulation; review offending vasoconstrictor or precipitating drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Gangrenous, fulminant or perforated colitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial examination, lactate and inflammatory markers for transmural progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Chronic segmental colitis or fibrotic stricture needing later intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ischemic_colitis-dx-mgmt",
+      "title": "Diagnosis and management of Ischaemic colitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden crampy left-sided pain, then bloody or maroon stool in an older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Peritonism, fever, rising lactate, isolated right colon disease or persistent bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for gangrene or perforation; exclude mesenteric ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT abdomen and pelvis, colonoscopy or sigmoidoscopy, lactate, markers, stool studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Segmental non-gangrenous injury with no perforation on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Gangrene or perforation suspected: urgent surgical review; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bowel rest and intravenous fluid resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Broad-spectrum antibiotics for moderate to severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optimise circulation; review vasoconstrictor drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial examination, lactate and inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Address the underlying low-flow cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most resolve conservatively; stricture may develop and need later intervention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

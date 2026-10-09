@@ -1,170 +1,459 @@
 {
- "id": "tropical_sprue",
- "name": "Tropical sprue",
- "aliases": [
-  "post-infective tropical malabsorption",
-  "tropical enteropathy with malabsorption"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Occurs in residents of, or long-stay travellers to, endemic tropical regions and presents with chronic diarrhoea, steatorrhoea, weight loss and fatigue",
-   "Characteristically causes malabsorption of both folate and vitamin B12, producing a macrocytic megaloblastic anaemia",
-   "Unlike coeliac disease it involves the entire small bowel including the ileum, which explains the B12 deficiency",
-   "Diagnosis is one of exclusion, requiring documented malabsorption and villous changes on small-bowel biopsy after ruling out parasitic and other infective causes",
-   "Small-bowel histology shows partial villous atrophy with crypt changes, generally milder than the total atrophy of coeliac disease",
-   "Management combines antibiotic courses for bacterial overgrowth of the small bowel together with folate and vitamin B12 replacement",
-   "A history of residence in the tropics, sometimes months or years earlier, is a key diagnostic clue"
+  "id": "tropical_sprue",
+  "name": "Tropical sprue",
+  "aliases": [
+    "post-infective tropical malabsorption",
+    "tropical enteropathy with malabsorption"
   ],
-  "pathophysiology": "Tropical sprue is an acquired malabsorptive disorder of the small intestine occurring in tropical regions, believed to follow an enteric infection that leads to persistent colonisation of the upper small bowel by abnormal coliform bacteria. This chronic overgrowth, together with resulting mucosal injury and impaired motility, damages the villi throughout the small intestine and impairs absorption of nutrients including folate and vitamin B12. Deficiency of these vitamins further impairs enterocyte turnover, perpetuating villous atrophy in a self-sustaining cycle until the abnormal flora and deficiencies are corrected.",
-  "additionalDifferentials": [
-   "Coeliac disease",
-   "Giardiasis and other parasitic infections",
-   "Small intestinal bacterial overgrowth from other causes",
-   "Chronic pancreatic exocrine insufficiency",
-   "HIV enteropathy and other immunodeficiency-related enteropathies",
-   "Whipple disease"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and film with folate and vitamin B12 levels to detect megaloblastic anaemia",
-   "Small-bowel biopsy showing partial villous atrophy",
-   "Stool microscopy and specific tests to exclude parasitic and other infections",
-   "Coeliac serology to exclude coeliac disease",
-   "Assessment of fat malabsorption and other nutritional deficiencies"
-  ],
-  "redFlags": [
-   "Profound weight loss and cachexia from prolonged malabsorption",
-   "Severe anaemia with symptoms from combined folate and B12 deficiency",
-   "Dehydration and electrolyte disturbance from persistent diarrhoea",
-   "Failure to respond to treatment, prompting reconsideration of the diagnosis"
-  ],
-  "prognosis": "With appropriate antibiotic therapy and vitamin replacement the prognosis is generally excellent and relapse is uncommon once the patient has left the endemic area, though untreated disease can cause severe nutritional depletion.",
-  "pitfalls": [
-   "Confusing it with coeliac disease and missing the ileal involvement and B12 deficiency",
-   "Failing to exclude parasitic infection before making the diagnosis",
-   "Overlooking a remote history of tropical residence",
-   "Neglecting to replace both folate and vitamin B12 alongside antibiotics"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give a prolonged course of a tetracycline such as tetracycline or doxycycline to eradicate the abnormal small-bowel coliform overgrowth",
-   "Replace folate and vitamin B12 to correct the megaloblastic anaemia and support enterocyte recovery",
-   "Correct associated nutritional deficiencies and provide nutritional rehabilitation with fluid and electrolyte replacement",
-   "Advise that leaving the endemic area aids recovery and reduces relapse",
-   "Monitor symptoms, haematological indices and nutritional status to confirm response to treatment",
-   "Reassess the diagnosis, excluding coeliac disease and persistent parasitic infection, if there is no response"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tropical_sprue-pathway",
-   "title": "Tropical sprue: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Occurs in residents of, or long-stay travellers to, endemic tropical regions and presents with chronic diarrhoea, steatorrhoea, weight loss and fatigue",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Profound weight loss and cachexia from prolonged malabsorption",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and film with folate and vitamin B12 levels to detect megaloblastic anaemia, Small-bowel biopsy showing partial villous atrophy, Stool microscopy and specific tests to exclude parasitic and other infections"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give a prolonged course of a tetracycline such as tetracycline or doxycycline to eradicate the abnormal small-bowel coliform overgrowth"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with coeliac disease and missing the ileal involvement and B12 deficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tropical sprue."
-  }
- ],
- "tables": [
-  {
-   "id": "tropical_sprue-matrix",
-   "title": "Tropical sprue: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Occurs in residents of, or long-stay travellers to, endemic tropical regions and presents with chronic diarrhoea, steatorrhoea,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Occurs in residents of, or long-stay travellers to, endemic tropical regions and presents with chronic diarrhoea, steatorrhoea, weight loss and fatigue",
+      "Characteristically causes malabsorption of both folate and vitamin B12, producing a macrocytic megaloblastic anaemia",
+      "Unlike coeliac disease it involves the entire small bowel including the ileum, which explains the B12 deficiency",
+      "Diagnosis is one of exclusion, requiring documented malabsorption and villous changes on small-bowel biopsy after ruling out parasitic and other infective causes",
+      "Small-bowel histology shows partial villous atrophy with crypt changes, generally milder than the total atrophy of coeliac disease",
+      "Management combines antibiotic courses for bacterial overgrowth of the small bowel together with folate and vitamin B12 replacement",
+      "A history of residence in the tropics, sometimes months or years earlier, is a key diagnostic clue"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and film with folate and vitamin B12 levels to detect megaloblastic anaemia, Small-bowel biopsy showing partial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tropical sprue is an acquired malabsorptive disorder of the small intestine occurring in tropical regions, believed to follow an enteric infection that leads to persistent colonisation of the upper small bowel by abnormal coliform bacteria. This chronic overgrowth, together with resulting mucosal injury and impaired motility, damages the villi throughout the small intestine and impairs absorption of nutrients including folate and vitamin B12. Deficiency of these vitamins further impairs enterocyte turnover, perpetuating villous atrophy in a self-sustaining cycle until the abnormal flora and deficiencies are corrected.",
+    "additionalDifferentials": [
+      "Coeliac disease",
+      "Giardiasis and other parasitic infections",
+      "Small intestinal bacterial overgrowth from other causes",
+      "Chronic pancreatic exocrine insufficiency",
+      "HIV enteropathy and other immunodeficiency-related enteropathies",
+      "Whipple disease"
     ],
-    [
-     "Primary Differentials",
-     "Coeliac disease, Giardiasis and other parasitic infections, Small intestinal bacterial overgrowth from other causes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and film with folate and vitamin B12 levels to detect megaloblastic anaemia",
+      "Small-bowel biopsy showing partial villous atrophy",
+      "Stool microscopy and specific tests to exclude parasitic and other infections",
+      "Coeliac serology to exclude coeliac disease",
+      "Assessment of fat malabsorption and other nutritional deficiencies"
     ],
-    [
-     "Management Strategy",
-     "Give a prolonged course of a tetracycline such as tetracycline or doxycycline to eradicate the abnormal small-bowel coliform",
-     "Core treatment modality"
+    "redFlags": [
+      "Profound weight loss and cachexia from prolonged malabsorption",
+      "Severe anaemia with symptoms from combined folate and B12 deficiency",
+      "Dehydration and electrolyte disturbance from persistent diarrhoea",
+      "Failure to respond to treatment, prompting reconsideration of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with coeliac disease and missing the ileal involvement and B12 deficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate antibiotic therapy and vitamin replacement the prognosis is generally excellent and relapse is uncommon once the patient has left the endemic area, though untreated disease can cause severe nutritional depletion.",
+    "pitfalls": [
+      "Confusing it with coeliac disease and missing the ileal involvement and B12 deficiency",
+      "Failing to exclude parasitic infection before making the diagnosis",
+      "Overlooking a remote history of tropical residence",
+      "Neglecting to replace both folate and vitamin B12 alongside antibiotics"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give a prolonged course of a tetracycline such as tetracycline or doxycycline to eradicate the abnormal small-bowel coliform overgrowth",
+      "Replace folate and vitamin B12 to correct the megaloblastic anaemia and support enterocyte recovery",
+      "Correct associated nutritional deficiencies and provide nutritional rehabilitation with fluid and electrolyte replacement",
+      "Advise that leaving the endemic area aids recovery and reduces relapse",
+      "Monitor symptoms, haematological indices and nutritional status to confirm response to treatment",
+      "Reassess the diagnosis, excluding coeliac disease and persistent parasitic infection, if there is no response"
     ]
-   ],
-   "caption": "Overview comparison matrix for tropical sprue."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tropical-sprue-real-image",
-   "title": "Tropical sprue: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "tropical_sprue-pathway",
+      "title": "Tropical sprue: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Occurs in residents of, or long-stay travellers to, endemic tropical regions and presents with chronic diarrhoea, steatorrhoea, weight loss and fatigue",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Profound weight loss and cachexia from prolonged malabsorption",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and film with folate and vitamin B12 levels to detect megaloblastic anaemia, Small-bowel biopsy showing partial villous atrophy, Stool microscopy and specific tests to exclude parasitic and other infections"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give a prolonged course of a tetracycline such as tetracycline or doxycycline to eradicate the abnormal small-bowel coliform overgrowth"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with coeliac disease and missing the ileal involvement and B12 deficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tropical sprue."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tropical_sprue-matrix",
+      "title": "Tropical sprue: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Occurs in residents of, or long-stay travellers to, endemic tropical regions and presents with chronic diarrhoea, steatorrhoea,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and film with folate and vitamin B12 levels to detect megaloblastic anaemia, Small-bowel biopsy showing partial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coeliac disease, Giardiasis and other parasitic infections, Small intestinal bacterial overgrowth from other causes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give a prolonged course of a tetracycline such as tetracycline or doxycycline to eradicate the abnormal small-bowel coliform",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with coeliac disease and missing the ileal involvement and B12 deficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tropical sprue."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tropical_sprue-dx-mgmt",
+      "title": "Diagnosis and management of Tropical sprue",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tropical sprue: chronic diarrhoea and macrocytic anaemia after tropics",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: profound weight loss, severe anaemia or dehydration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration and electrolyte correction for severe diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Megaloblastic indices; folate and B12; small-bowel biopsy; stool and coeliac tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does small-bowel biopsy show partial villous atrophy after parasites are excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider coeliac disease, giardiasis or Whipple disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged tetracycline or doxycycline course",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folate and vitamin B12 replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nutritional rehabilitation with fluid and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Advice that leaving the endemic area aids recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassess the diagnosis if there is no response",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally excellent with antibiotics and vitamin replacement; untreated disease depletes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tropical_sprue-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count, film, folate and vitamin B12",
+          "cells": [
+            {
+              "text": "Megaloblastic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel biopsy",
+          "cells": [
+            {
+              "text": "Partial villous atrophy with crypt change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy and infection tests",
+          "cells": [
+            {
+              "text": "Exclude parasitic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology",
+          "cells": [
+            {
+              "text": "Exclude coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat malabsorption assessment",
+          "cells": [
+            {
+              "text": "Nutritional deficiencies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tropical_sprue-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Less typical B12 loss; sprue involves the ileum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardiasis",
+          "cells": [
+            {
+              "text": "Parasitic cause identified on stool testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whipple disease",
+          "cells": [
+            {
+              "text": "Systemic features with arthralgia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tropical_sprue-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged tetracycline or doxycycline",
+          "cells": [
+            {
+              "text": "Eradicates small-bowel coliform overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folate and vitamin B12 replacement",
+          "cells": [
+            {
+              "text": "Corrects megaloblastic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Fluid, electrolytes and other deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leaving the endemic area",
+          "cells": [
+            {
+              "text": "Aids recovery and reduces relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of response",
+          "cells": [
+            {
+              "text": "Symptoms, haematology and nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment if no response",
+          "cells": [
+            {
+              "text": "Exclude coeliac disease and parasites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

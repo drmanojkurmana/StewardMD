@@ -1,172 +1,439 @@
 {
- "id": "mody_type_3_hnf1a",
- "name": "MODY type 3 (HNF1A)",
- "aliases": [
-  "HNF1A-MODY",
-  "MODY3",
-  "hepatocyte nuclear factor 1-alpha MODY",
-  "TCF1"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by heterozygous mutations in HNF1A with autosomal dominant inheritance and a strong multigenerational history of young-onset diabetes",
-   "Typically presents in adolescence or young adulthood with progressive hyperglycaemia rather than the stable elevation seen in GCK-MODY",
-   "A hallmark is marked sensitivity to sulfonylureas, which are often the treatment of choice and can allow insulin to be stopped",
-   "A low renal threshold for glucose can produce glycosuria at near-normal plasma glucose levels, an early diagnostic clue",
-   "Patients are typically lean and pancreatic autoantibody negative, distinguishing them from type 1 diabetes",
-   "Microvascular complications can develop over time, so glycaemic control and surveillance remain important",
-   "High-sensitivity C-reactive protein tends to be low, which can support the diagnosis alongside genetic testing"
+  "id": "mody_type_3_hnf1a",
+  "name": "MODY type 3 (HNF1A)",
+  "aliases": [
+    "HNF1A-MODY",
+    "MODY3",
+    "hepatocyte nuclear factor 1-alpha MODY",
+    "TCF1"
   ],
-  "pathophysiology": "HNF1A is a transcription factor essential for normal beta-cell development and function, regulating genes involved in glucose sensing and insulin secretion. Heterozygous loss-of-function mutations cause a progressive decline in insulin secretory capacity, so hyperglycaemia worsens over time in contrast to the stable defect of GCK-MODY. The transcription factor also governs renal glucose reabsorption, explaining the characteristically low renal threshold. The residual beta-cell KATP channel responsiveness underlies the pronounced clinical sensitivity to sulfonylureas.",
-  "additionalDifferentials": [
-   "Type 1 diabetes mellitus",
-   "Type 2 diabetes mellitus in a young lean adult",
-   "GCK-MODY and other MODY subtypes",
-   "HNF4A-MODY, which has an overlapping phenotype",
-   "Latent autoimmune diabetes in adults"
-  ],
-  "additionalInvestigations": [
-   "Fasting glucose and HbA1c documenting progressive hyperglycaemia",
-   "Molecular genetic testing of HNF1A to confirm the diagnosis",
-   "Negative pancreatic autoantibodies to exclude type 1 diabetes",
-   "Urinalysis or paired glucose testing demonstrating a low renal glucose threshold",
-   "High-sensitivity C-reactive protein as a supportive biomarker where available"
-  ],
-  "redFlags": [
-   "Ketoacidosis or rapid decompensation, which is atypical and warrants reassessment",
-   "Progressive rise in glycaemia despite therapy, indicating declining beta-cell reserve",
-   "Development of microvascular complications requiring intensified surveillance",
-   "Severe hypoglycaemia after starting sulfonylureas because of exaggerated drug sensitivity"
-  ],
-  "prognosis": "With correct diagnosis many patients achieve good control on low-dose sulfonylureas for years, but insulin secretion declines progressively and microvascular complications can occur, so long-term monitoring is required.",
-  "pitfalls": [
-   "Defaulting to insulin when a trial of sulfonylurea would be more appropriate and effective",
-   "Misdiagnosing the condition as type 1 diabetes because of young age at onset",
-   "Overlooking the family history that signals a dominant monogenic cause",
-   "Failing to anticipate exaggerated sulfonylurea sensitivity and consequent hypoglycaemia"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat first-line with low-dose sulfonylureas, harnessing the marked sulfonylurea sensitivity of HNF1A-MODY, which often lets insulin be discontinued",
-   "Titrate the sulfonylurea cautiously from a low starting dose to avoid hypoglycaemia",
-   "Escalate to additional oral agents or insulin as insulin secretory capacity declines progressively",
-   "Sustain glycaemic control and undertake regular surveillance for microvascular and macrovascular complications",
-   "Coordinate pregnancy care with specialists, monitoring maternal glucose",
-   "Offer genetic counselling and cascade testing of relatives given autosomal dominant inheritance",
-   "Refer to endocrinology and clinical genetics for genetic confirmation and long-term follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mody_type_3_hnf1a-pathway",
-   "title": "MODY type 3 (HNF1A): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by heterozygous mutations in HNF1A with autosomal dominant inheritance and a strong multigenerational history of young-onset diabetes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ketoacidosis or rapid decompensation, which is atypical and warrants reassessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting glucose and HbA1c documenting progressive hyperglycaemia, Molecular genetic testing of HNF1A to confirm the diagnosis, Negative pancreatic autoantibodies to exclude type 1 diabetes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat first-line with low-dose sulfonylureas, harnessing the marked sulfonylurea sensitivity of HNF1A-MODY, which often lets insulin be discontinued"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Defaulting to insulin when a trial of sulfonylurea would be more appropriate and effective"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mody type 3 (hnf1a)."
-  }
- ],
- "tables": [
-  {
-   "id": "mody_type_3_hnf1a-matrix",
-   "title": "MODY type 3 (HNF1A): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by heterozygous mutations in HNF1A with autosomal dominant inheritance and a strong multigenerational history of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by heterozygous mutations in HNF1A with autosomal dominant inheritance and a strong multigenerational history of young-onset diabetes",
+      "Typically presents in adolescence or young adulthood with progressive hyperglycaemia rather than the stable elevation seen in GCK-MODY",
+      "A hallmark is marked sensitivity to sulfonylureas, which are often the treatment of choice and can allow insulin to be stopped",
+      "A low renal threshold for glucose can produce glycosuria at near-normal plasma glucose levels, an early diagnostic clue",
+      "Patients are typically lean and pancreatic autoantibody negative, distinguishing them from type 1 diabetes",
+      "Microvascular complications can develop over time, so glycaemic control and surveillance remain important",
+      "High-sensitivity C-reactive protein tends to be low, which can support the diagnosis alongside genetic testing"
     ],
-    [
-     "Key Investigations",
-     "Fasting glucose and HbA1c documenting progressive hyperglycaemia, Molecular genetic testing of HNF1A to confirm the diagnosis,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "HNF1A is a transcription factor essential for normal beta-cell development and function, regulating genes involved in glucose sensing and insulin secretion. Heterozygous loss-of-function mutations cause a progressive decline in insulin secretory capacity, so hyperglycaemia worsens over time in contrast to the stable defect of GCK-MODY. The transcription factor also governs renal glucose reabsorption, explaining the characteristically low renal threshold. The residual beta-cell KATP channel responsiveness underlies the pronounced clinical sensitivity to sulfonylureas.",
+    "additionalDifferentials": [
+      "Type 1 diabetes mellitus",
+      "Type 2 diabetes mellitus in a young lean adult",
+      "GCK-MODY and other MODY subtypes",
+      "HNF4A-MODY, which has an overlapping phenotype",
+      "Latent autoimmune diabetes in adults"
     ],
-    [
-     "Primary Differentials",
-     "Type 1 diabetes mellitus, Type 2 diabetes mellitus in a young lean adult, GCK-MODY and other MODY subtypes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting glucose and HbA1c documenting progressive hyperglycaemia",
+      "Molecular genetic testing of HNF1A to confirm the diagnosis",
+      "Negative pancreatic autoantibodies to exclude type 1 diabetes",
+      "Urinalysis or paired glucose testing demonstrating a low renal glucose threshold",
+      "High-sensitivity C-reactive protein as a supportive biomarker where available"
     ],
-    [
-     "Management Strategy",
-     "Treat first-line with low-dose sulfonylureas, harnessing the marked sulfonylurea sensitivity of HNF1A-MODY, which often lets",
-     "Core treatment modality"
+    "redFlags": [
+      "Ketoacidosis or rapid decompensation, which is atypical and warrants reassessment",
+      "Progressive rise in glycaemia despite therapy, indicating declining beta-cell reserve",
+      "Development of microvascular complications requiring intensified surveillance",
+      "Severe hypoglycaemia after starting sulfonylureas because of exaggerated drug sensitivity"
     ],
-    [
-     "Clinical Pitfall",
-     "Defaulting to insulin when a trial of sulfonylurea would be more appropriate and effective",
-     "Prevent diagnostic or management error"
+    "prognosis": "With correct diagnosis many patients achieve good control on low-dose sulfonylureas for years, but insulin secretion declines progressively and microvascular complications can occur, so long-term monitoring is required.",
+    "pitfalls": [
+      "Defaulting to insulin when a trial of sulfonylurea would be more appropriate and effective",
+      "Misdiagnosing the condition as type 1 diabetes because of young age at onset",
+      "Overlooking the family history that signals a dominant monogenic cause",
+      "Failing to anticipate exaggerated sulfonylurea sensitivity and consequent hypoglycaemia"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat first-line with low-dose sulfonylureas, harnessing the marked sulfonylurea sensitivity of HNF1A-MODY, which often lets insulin be discontinued",
+      "Titrate the sulfonylurea cautiously from a low starting dose to avoid hypoglycaemia",
+      "Escalate to additional oral agents or insulin as insulin secretory capacity declines progressively",
+      "Sustain glycaemic control and undertake regular surveillance for microvascular and macrovascular complications",
+      "Coordinate pregnancy care with specialists, monitoring maternal glucose",
+      "Offer genetic counselling and cascade testing of relatives given autosomal dominant inheritance",
+      "Refer to endocrinology and clinical genetics for genetic confirmation and long-term follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for mody type 3 (hnf1a)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mody-type-3-hnf1a-real-image",
-   "title": "MODY type 3 (HNF1A): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "mody_type_3_hnf1a-pathway",
+      "title": "MODY type 3 (HNF1A): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by heterozygous mutations in HNF1A with autosomal dominant inheritance and a strong multigenerational history of young-onset diabetes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ketoacidosis or rapid decompensation, which is atypical and warrants reassessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting glucose and HbA1c documenting progressive hyperglycaemia, Molecular genetic testing of HNF1A to confirm the diagnosis, Negative pancreatic autoantibodies to exclude type 1 diabetes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat first-line with low-dose sulfonylureas, harnessing the marked sulfonylurea sensitivity of HNF1A-MODY, which often lets insulin be discontinued"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Defaulting to insulin when a trial of sulfonylurea would be more appropriate and effective"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mody type 3 (hnf1a)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mody_type_3_hnf1a-matrix",
+      "title": "MODY type 3 (HNF1A): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by heterozygous mutations in HNF1A with autosomal dominant inheritance and a strong multigenerational history of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting glucose and HbA1c documenting progressive hyperglycaemia, Molecular genetic testing of HNF1A to confirm the diagnosis,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Type 1 diabetes mellitus, Type 2 diabetes mellitus in a young lean adult, GCK-MODY and other MODY subtypes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat first-line with low-dose sulfonylureas, harnessing the marked sulfonylurea sensitivity of HNF1A-MODY, which often lets",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Defaulting to insulin when a trial of sulfonylurea would be more appropriate and effective",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mody type 3 (hnf1a)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mody_type_3_hnf1a-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Progressive hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of HNF1A",
+          "cells": [
+            {
+              "text": "HNF1A variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic autoantibodies",
+          "cells": [
+            {
+              "text": "Type 1 diabetes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis or paired glucose testing",
+          "cells": [
+            {
+              "text": "Low renal glucose threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-sensitivity C-reactive protein",
+          "cells": [
+            {
+              "text": "Supportive biomarker"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_3_hnf1a-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "Autoantibody positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GCK-MODY",
+          "cells": [
+            {
+              "text": "Mild, stable hyperglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HNF4A-MODY",
+          "cells": [
+            {
+              "text": "Overlapping phenotype with a normal renal glucose threshold"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mody_type_3_hnf1a-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-dose sulfonylureas as first line",
+          "cells": [
+            {
+              "text": "Often allows insulin to be discontinued"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious titration",
+          "cells": [
+            {
+              "text": "From a low starting dose to avoid hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Additional oral agents or insulin as secretion declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "Sustained glycaemic control with regular screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy care",
+          "cells": [
+            {
+              "text": "Coordinated with specialists; maternal glucose monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; cascade testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mody_type_3_hnf1a-dx-mgmt",
+      "title": "Diagnosis and management of MODY type 3 (HNF1A)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive hyperglycaemia in a young adult with a low renal glucose threshold",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ketoacidosis, rapid decompensation or severe hypoglycaemia after sulfonylurea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for ketoacidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HNF1A sequencing; autoantibodies; urine glucose; hsCRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an HNF1A variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 1 diabetes, GCK-MODY or HNF4A-MODY; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-dose sulfonylurea as first-line treatment, titrated cautiously",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate as insulin secretory capacity declines",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sustain glycaemic control and complication surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Genetic counselling and cascade testing of relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

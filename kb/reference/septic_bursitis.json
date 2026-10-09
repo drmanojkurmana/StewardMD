@@ -1,178 +1,465 @@
 {
- "id": "septic_bursitis",
- "name": "Septic bursitis",
- "aliases": [
-  "infective bursitis",
-  "infected bursa",
-  "septic olecranon bursitis",
-  "septic prepatellar bursitis"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / IDSA",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most often affects the superficial olecranon and prepatellar bursae, which are prone to trauma and abrasion",
-   "Infection usually follows direct inoculation through breached skin rather than haematogenous spread",
-   "Staphylococcus aureus is the predominant organism, with beta-haemolytic streptococci next most common",
-   "Distinguishing septic from non-septic (crystal, traumatic, or inflammatory) bursitis is the central clinical challenge and may require bursal fluid aspiration",
-   "Overlying warmth, erythema, tenderness, and fever favour infection but can be mimicked by gout or trauma",
-   "Unlike septic arthritis, passive joint movement is typically well preserved because the bursa lies outside the joint",
-   "Management principles combine aspiration for diagnosis, antistaphylococcal antibiotics, and drainage of persistent or loculated collections",
-   "Recurrent or refractory cases may need surgical bursectomy, and predisposing occupational trauma should be addressed"
+  "id": "septic_bursitis",
+  "name": "Septic bursitis",
+  "aliases": [
+    "infective bursitis",
+    "infected bursa",
+    "septic olecranon bursitis",
+    "septic prepatellar bursitis"
   ],
-  "pathophysiology": "A bursa is a synovial-lined sac that reduces friction over bony prominences. Superficial bursae such as the olecranon and prepatellar sit just beneath the skin and are readily seeded by direct trauma or overlying cellulitis. Introduced bacteria, usually skin flora, provoke an inflammatory exudate within the bursal cavity, producing pain, swelling, warmth, and sometimes abscess formation. Because the bursa is anatomically separate from the joint, infection tends to remain localised unless it extends into surrounding tissue.",
-  "additionalDifferentials": [
-   "Crystal-induced (gout or pseudogout) bursitis",
-   "Traumatic or haemorrhagic bursitis",
-   "Rheumatoid or other inflammatory bursitis",
-   "Cellulitis overlying the bursa",
-   "Septic arthritis of the adjacent joint"
-  ],
-  "infectionMimics": [
-   "Acute gouty bursitis or tophaceous deposits",
-   "Repetitive-strain (occupational) non-infective bursitis",
-   "Rheumatoid nodule with overlying inflammation",
-   "Post-traumatic haematoma of the bursa"
-  ],
-  "additionalInvestigations": [
-   "Aspiration of bursal fluid for Gram stain, culture, cell count, and crystal analysis",
-   "Blood cultures and inflammatory markers when systemic signs are present",
-   "Comparison of bursal fluid findings with adjacent joint fluid if joint infection is a concern",
-   "Ultrasound to confirm a bursal collection and guide aspiration",
-   "Assessment for underlying immunosuppression or predisposing trauma"
-  ],
-  "redFlags": [
-   "Spread into the adjacent joint or deep tissues suggesting septic arthritis or deeper infection",
-   "Systemic sepsis or rapidly advancing surrounding cellulitis requiring urgent treatment",
-   "Failure to improve after aspiration and antibiotics indicating a loculated or abscessed collection needing drainage",
-   "Immunocompromised host in whom infection may progress atypically or rapidly"
-  ],
-  "prognosis": "Superficial septic bursitis generally resolves well with aspiration and appropriate antibiotics; recurrence or chronicity is more likely with repeated trauma or delayed treatment, and a minority require surgical bursectomy.",
-  "pitfalls": [
-   "Assuming an inflamed bursa is gouty or traumatic and missing infection",
-   "Confusing septic bursitis with septic arthritis, which requires more aggressive intervention",
-   "Injecting corticosteroid into a bursa without excluding infection",
-   "Stopping treatment prematurely and precipitating relapse"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "IDSA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Aspirate the infected bursa for both diagnostic fluid analysis and therapeutic decompression",
-   "Start empirical antistaphylococcal antibiotics covering Staphylococcus aureus and beta-haemolytic streptococci, narrowing therapy to culture and sensitivity results",
-   "Repeat aspiration for reaccumulation and reserve surgical bursectomy or incision and drainage for abscess formation or refractory infection",
-   "Provide supportive analgesia, rest, and elevation of the affected limb",
-   "Address predisposing factors such as recurrent trauma over the bursa and underlying immunosuppression",
-   "Escalate for admission and intravenous therapy if there is spreading cellulitis, systemic sepsis, or failure to respond to oral treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "septic_bursitis-pathway",
-   "title": "Septic bursitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most often affects the superficial olecranon and prepatellar bursae, which are prone to trauma and abrasion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Spread into the adjacent joint or deep tissues suggesting septic arthritis or deeper infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Aspiration of bursal fluid for Gram stain, culture, cell count, and crystal analysis, Blood cultures and inflammatory markers when systemic signs are present, Comparison of bursal fluid findings with adjacent joint fluid"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Aspirate the infected bursa for both diagnostic fluid analysis and therapeutic decompression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an inflamed bursa is gouty or traumatic and missing infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of septic bursitis."
-  }
- ],
- "tables": [
-  {
-   "id": "septic_bursitis-matrix",
-   "title": "Septic bursitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most often affects the superficial olecranon and prepatellar bursae, which are prone to trauma and abrasion",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / IDSA",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most often affects the superficial olecranon and prepatellar bursae, which are prone to trauma and abrasion",
+      "Infection usually follows direct inoculation through breached skin rather than haematogenous spread",
+      "Staphylococcus aureus is the predominant organism, with beta-haemolytic streptococci next most common",
+      "Distinguishing septic from non-septic (crystal, traumatic, or inflammatory) bursitis is the central clinical challenge and may require bursal fluid aspiration",
+      "Overlying warmth, erythema, tenderness, and fever favour infection but can be mimicked by gout or trauma",
+      "Unlike septic arthritis, passive joint movement is typically well preserved because the bursa lies outside the joint",
+      "Management principles combine aspiration for diagnosis, antistaphylococcal antibiotics, and drainage of persistent or loculated collections",
+      "Recurrent or refractory cases may need surgical bursectomy, and predisposing occupational trauma should be addressed"
     ],
-    [
-     "Key Investigations",
-     "Aspiration of bursal fluid for Gram stain, culture, cell count, and crystal analysis, Blood cultures and inflammatory markers",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A bursa is a synovial-lined sac that reduces friction over bony prominences. Superficial bursae such as the olecranon and prepatellar sit just beneath the skin and are readily seeded by direct trauma or overlying cellulitis. Introduced bacteria, usually skin flora, provoke an inflammatory exudate within the bursal cavity, producing pain, swelling, warmth, and sometimes abscess formation. Because the bursa is anatomically separate from the joint, infection tends to remain localised unless it extends into surrounding tissue.",
+    "additionalDifferentials": [
+      "Crystal-induced (gout or pseudogout) bursitis",
+      "Traumatic or haemorrhagic bursitis",
+      "Rheumatoid or other inflammatory bursitis",
+      "Cellulitis overlying the bursa",
+      "Septic arthritis of the adjacent joint"
     ],
-    [
-     "Primary Differentials",
-     "Crystal-induced (gout or pseudogout) bursitis, Traumatic or haemorrhagic bursitis, Rheumatoid or other inflammatory bursitis",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Acute gouty bursitis or tophaceous deposits",
+      "Repetitive-strain (occupational) non-infective bursitis",
+      "Rheumatoid nodule with overlying inflammation",
+      "Post-traumatic haematoma of the bursa"
     ],
-    [
-     "Management Strategy",
-     "Aspirate the infected bursa for both diagnostic fluid analysis and therapeutic decompression",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Aspiration of bursal fluid for Gram stain, culture, cell count, and crystal analysis",
+      "Blood cultures and inflammatory markers when systemic signs are present",
+      "Comparison of bursal fluid findings with adjacent joint fluid if joint infection is a concern",
+      "Ultrasound to confirm a bursal collection and guide aspiration",
+      "Assessment for underlying immunosuppression or predisposing trauma"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an inflamed bursa is gouty or traumatic and missing infection",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Spread into the adjacent joint or deep tissues suggesting septic arthritis or deeper infection",
+      "Systemic sepsis or rapidly advancing surrounding cellulitis requiring urgent treatment",
+      "Failure to improve after aspiration and antibiotics indicating a loculated or abscessed collection needing drainage",
+      "Immunocompromised host in whom infection may progress atypically or rapidly"
+    ],
+    "prognosis": "Superficial septic bursitis generally resolves well with aspiration and appropriate antibiotics; recurrence or chronicity is more likely with repeated trauma or delayed treatment, and a minority require surgical bursectomy.",
+    "pitfalls": [
+      "Assuming an inflamed bursa is gouty or traumatic and missing infection",
+      "Confusing septic bursitis with septic arthritis, which requires more aggressive intervention",
+      "Injecting corticosteroid into a bursa without excluding infection",
+      "Stopping treatment prematurely and precipitating relapse"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "IDSA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Aspirate the infected bursa for both diagnostic fluid analysis and therapeutic decompression",
+      "Start empirical antistaphylococcal antibiotics covering Staphylococcus aureus and beta-haemolytic streptococci, narrowing therapy to culture and sensitivity results",
+      "Repeat aspiration for reaccumulation and reserve surgical bursectomy or incision and drainage for abscess formation or refractory infection",
+      "Provide supportive analgesia, rest, and elevation of the affected limb",
+      "Address predisposing factors such as recurrent trauma over the bursa and underlying immunosuppression",
+      "Escalate for admission and intravenous therapy if there is spreading cellulitis, systemic sepsis, or failure to respond to oral treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for septic bursitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "septic-bursitis-real-image",
-   "title": "Septic bursitis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "septic_bursitis-pathway",
+      "title": "Septic bursitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most often affects the superficial olecranon and prepatellar bursae, which are prone to trauma and abrasion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Spread into the adjacent joint or deep tissues suggesting septic arthritis or deeper infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Aspiration of bursal fluid for Gram stain, culture, cell count, and crystal analysis, Blood cultures and inflammatory markers when systemic signs are present, Comparison of bursal fluid findings with adjacent joint fluid"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Aspirate the infected bursa for both diagnostic fluid analysis and therapeutic decompression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an inflamed bursa is gouty or traumatic and missing infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of septic bursitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "septic_bursitis-matrix",
+      "title": "Septic bursitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most often affects the superficial olecranon and prepatellar bursae, which are prone to trauma and abrasion",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Aspiration of bursal fluid for Gram stain, culture, cell count, and crystal analysis, Blood cultures and inflammatory markers",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Crystal-induced (gout or pseudogout) bursitis, Traumatic or haemorrhagic bursitis, Rheumatoid or other inflammatory bursitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Aspirate the infected bursa for both diagnostic fluid analysis and therapeutic decompression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an inflamed bursa is gouty or traumatic and missing infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for septic bursitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / IDSA",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "septic_bursitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bursal fluid aspiration",
+          "cells": [
+            {
+              "text": "Gram stain, culture, cell count and crystal analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "When systemic signs are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with adjacent joint fluid",
+          "cells": [
+            {
+              "text": "If joint infection is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Confirms a bursal collection and guides aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for immunosuppression or trauma",
+          "cells": [
+            {
+              "text": "Predisposing factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "septic_bursitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Crystal-induced (gout) bursitis",
+          "cells": [
+            {
+              "text": "Mimics warmth and erythema; crystal analysis of fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic or haemorrhagic bursitis",
+          "cells": [
+            {
+              "text": "Trauma can mimic infection; aspirate to separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis of the adjacent joint",
+          "cells": [
+            {
+              "text": "Passive joint movement is preserved in bursitis; arthritis needs more aggressive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid or inflammatory bursitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "septic_bursitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration",
+          "cells": [
+            {
+              "text": "Diagnostic fluid analysis and therapeutic decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antistaphylococcal antibiotics",
+          "cells": [
+            {
+              "text": "Cover Staphylococcus aureus and beta-haemolytic streptococci; narrow to culture results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat aspiration or surgery",
+          "cells": [
+            {
+              "text": "Repeat for reaccumulation; bursectomy or incision and drainage for abscess or refractory infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia, rest and elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address predisposing factors",
+          "cells": [
+            {
+              "text": "Recurrent trauma and immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Admission and intravenous therapy for spreading cellulitis, sepsis or oral treatment failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "septic_bursitis-dx-mgmt",
+      "title": "Diagnosis and management of Septic bursitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Warm, red, tender superficial olecranon or prepatellar bursa after skin breach",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Joint or deep spread, sepsis, spreading cellulitis or immunocompromised host?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Admit; intravenous antibiotics; image for septic arthritis or deep infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aspirate for Gram stain, culture, cell count and crystals; ultrasound; blood cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does fluid show infection rather than crystals or trauma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as gout, traumatic or inflammatory bursitis; do not inject steroid blindly",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aspirate to decompress and send fluid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start antistaphylococcal and streptococcal cover; narrow to sensitivities",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repeat aspiration; bursectomy or drainage for abscess or failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesia, rest, elevation; correct predisposing trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resolves well with aspiration and antibiotics; recurrence if trauma persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

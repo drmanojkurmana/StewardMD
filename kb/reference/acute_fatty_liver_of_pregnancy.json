@@ -1,178 +1,467 @@
 {
- "id": "acute_fatty_liver_of_pregnancy",
- "name": "Acute fatty liver of pregnancy",
- "aliases": [
-  "AFLP",
-  "acute yellow atrophy of pregnancy"
- ],
- "class": "non_infective",
- "system": "Reproductive / Obstetrics",
- "specialty": "Obstetrics and gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "RCOG guidance on liver disease in pregnancy / Williams Obstetrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Acute fatty liver of pregnancy is a rare but life-threatening microvesicular fatty infiltration of hepatocytes, typically presenting in the third trimester or early postpartum period",
-   "It is associated in a proportion of cases with inherited fetal defects of mitochondrial fatty-acid oxidation, especially long-chain 3-hydroxyacyl-CoA dehydrogenase deficiency, so testing of the newborn is warranted",
-   "Early symptoms are non-specific, including nausea, vomiting, anorexia, malaise, abdominal pain, and thirst or polyuria, progressing to jaundice and features of acute liver failure",
-   "Characteristic laboratory findings include hypoglycaemia, coagulopathy with prolonged clotting times and low fibrinogen, raised transaminases and bilirubin, hyperuricaemia, renal impairment, and often a raised white cell count",
-   "The Swansea criteria provide a helpful clinical framework for diagnosis when a constellation of features is present and other causes are excluded",
-   "Hypoglycaemia and coagulopathy are hallmarks that help distinguish it from HELLP, although the two can overlap and coexist",
-   "Management is prompt delivery once the mother is stabilised, with intensive supportive care correcting hypoglycaemia, coagulopathy, and electrolyte disturbance and managing hepatic and renal failure, occasionally requiring referral to a liver unit",
-   "It demands a high index of suspicion, as delay markedly worsens maternal and fetal outcome"
+  "id": "acute_fatty_liver_of_pregnancy",
+  "name": "Acute fatty liver of pregnancy",
+  "aliases": [
+    "AFLP",
+    "acute yellow atrophy of pregnancy"
   ],
-  "pathophysiology": "Acute fatty liver of pregnancy reflects impaired mitochondrial fatty-acid oxidation within hepatocytes, leading to accumulation of microvesicular fat. In many cases the fetus carries a defect of the fatty-acid oxidation pathway, most notably long-chain 3-hydroxyacyl-CoA dehydrogenase deficiency; the metabolic burden of unmetabolised fatty-acid intermediates from the feto-placental unit is thought to overwhelm the maternal liver, whose oxidative capacity is already stressed in late pregnancy. The resulting hepatocellular dysfunction impairs gluconeogenesis, causing hypoglycaemia; synthesis of clotting factors and fibrinogen, causing coagulopathy; and ureagenesis and clearance, causing hyperammonaemia and encephalopathy. Accumulation of toxic metabolites and endothelial dysfunction contribute to renal impairment and, in severe cases, multiorgan failure. Removal of the fetal and placental metabolic load by delivery allows the maternal liver to recover.",
-  "additionalDifferentials": [
-   "HELLP syndrome and severe pre-eclampsia",
-   "Viral hepatitis, including hepatitis E, and other acute hepatitides",
-   "Intrahepatic cholestasis of pregnancy",
-   "Thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome",
-   "Drug-induced liver injury",
-   "Fulminant hepatic failure of another cause",
-   "Sepsis with associated hepatic dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Liver function tests including transaminases and bilirubin, together with serum ammonia",
-   "Blood glucose, since hypoglycaemia is characteristic and needs frequent monitoring",
-   "Coagulation screen with fibrinogen and a full blood count",
-   "Renal function, electrolytes, and urate",
-   "Viral hepatitis serology and other tests to exclude alternative causes",
-   "Liver ultrasound, chiefly to exclude other pathology such as a haematoma or Budd-Chiari syndrome",
-   "Neonatal screening for fatty-acid oxidation disorders after delivery"
-  ],
-  "redFlags": [
-   "Hypoglycaemia with worsening coagulopathy",
-   "Hepatic encephalopathy or a rising ammonia",
-   "Acute kidney injury or oliguria",
-   "Signs of disseminated intravascular coagulation or major haemorrhage",
-   "Rapid clinical deterioration or fetal compromise"
-  ],
-  "prognosis": "With early recognition, prompt delivery, and intensive supportive care, maternal survival and hepatic recovery are usual, though maternal and perinatal mortality remain significant when diagnosis is delayed; the liver typically recovers without long-term sequelae, and recurrence is uncommon but recognised, particularly with fatty-acid oxidation defects.",
-  "pitfalls": [
-   "Dismissing late-pregnancy nausea and vomiting as benign and missing early disease",
-   "Failing to check and repeatedly monitor the blood glucose",
-   "Confusing it with HELLP and overlooking the coagulopathy and hypoglycaemia that guide management",
-   "Delaying delivery while awaiting confirmatory tests",
-   "Not arranging neonatal metabolic screening for fatty-acid oxidation disorders"
-  ],
-  "references": [
-   "RCOG guidance on liver disease in pregnancy",
-   "Williams Obstetrics",
-   "Oxford Handbook of Obstetrics and Gynaecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt delivery of the foetus as the definitive treatment once the mother is stabilised, regardless of gestation",
-   "Maternal stabilisation with intensive supportive care, including correction of hypoglycaemia by dextrose infusion",
-   "Correction of coagulopathy with fresh frozen plasma, cryoprecipitate and vitamin K",
-   "Management of acute liver failure complications, monitoring for hyperammonaemia and encephalopathy, with liver transplantation reserved for irreversible failure",
-   "Coordinated multidisciplinary care involving obstetrics, hepatology, intensive care and neonatology",
-   "Screening of the newborn for fatty-acid oxidation defects, particularly long-chain 3-hydroxyacyl-CoA dehydrogenase deficiency",
-   "Genetic counselling and discussion of the recurrence risk in future pregnancies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acute_fatty_liver_of_pregnancy-pathway",
-   "title": "Acute fatty liver of pregnancy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Acute fatty liver of pregnancy is a rare but life-threatening microvesicular fatty infiltration of hepatocytes, typically presenting in the third trimester or early postpartum period",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypoglycaemia with worsening coagulopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Liver function tests including transaminases and bilirubin, together with serum ammonia, Blood glucose, since hypoglycaemia is characteristic and needs frequent monitoring, Coagulation screen with fibrinogen and a full"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt delivery of the foetus as the definitive treatment once the mother is stabilised, regardless of gestation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing late-pregnancy nausea and vomiting as benign and missing early disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acute fatty liver of pregnancy."
-  }
- ],
- "tables": [
-  {
-   "id": "acute_fatty_liver_of_pregnancy-matrix",
-   "title": "Acute fatty liver of pregnancy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Acute fatty liver of pregnancy is a rare but life-threatening microvesicular fatty infiltration of hepatocytes, typically",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Reproductive / Obstetrics",
+  "specialty": "Obstetrics and gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "RCOG guidance on liver disease in pregnancy / Williams Obstetrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Acute fatty liver of pregnancy is a rare but life-threatening microvesicular fatty infiltration of hepatocytes, typically presenting in the third trimester or early postpartum period",
+      "It is associated in a proportion of cases with inherited fetal defects of mitochondrial fatty-acid oxidation, especially long-chain 3-hydroxyacyl-CoA dehydrogenase deficiency, so testing of the newborn is warranted",
+      "Early symptoms are non-specific, including nausea, vomiting, anorexia, malaise, abdominal pain, and thirst or polyuria, progressing to jaundice and features of acute liver failure",
+      "Characteristic laboratory findings include hypoglycaemia, coagulopathy with prolonged clotting times and low fibrinogen, raised transaminases and bilirubin, hyperuricaemia, renal impairment, and often a raised white cell count",
+      "The Swansea criteria provide a helpful clinical framework for diagnosis when a constellation of features is present and other causes are excluded",
+      "Hypoglycaemia and coagulopathy are hallmarks that help distinguish it from HELLP, although the two can overlap and coexist",
+      "Management is prompt delivery once the mother is stabilised, with intensive supportive care correcting hypoglycaemia, coagulopathy, and electrolyte disturbance and managing hepatic and renal failure, occasionally requiring referral to a liver unit",
+      "It demands a high index of suspicion, as delay markedly worsens maternal and fetal outcome"
     ],
-    [
-     "Key Investigations",
-     "Liver function tests including transaminases and bilirubin, together with serum ammonia, Blood glucose, since hypoglycaemia is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acute fatty liver of pregnancy reflects impaired mitochondrial fatty-acid oxidation within hepatocytes, leading to accumulation of microvesicular fat. In many cases the fetus carries a defect of the fatty-acid oxidation pathway, most notably long-chain 3-hydroxyacyl-CoA dehydrogenase deficiency; the metabolic burden of unmetabolised fatty-acid intermediates from the feto-placental unit is thought to overwhelm the maternal liver, whose oxidative capacity is already stressed in late pregnancy. The resulting hepatocellular dysfunction impairs gluconeogenesis, causing hypoglycaemia; synthesis of clotting factors and fibrinogen, causing coagulopathy; and ureagenesis and clearance, causing hyperammonaemia and encephalopathy. Accumulation of toxic metabolites and endothelial dysfunction contribute to renal impairment and, in severe cases, multiorgan failure. Removal of the fetal and placental metabolic load by delivery allows the maternal liver to recover.",
+    "additionalDifferentials": [
+      "HELLP syndrome and severe pre-eclampsia",
+      "Viral hepatitis, including hepatitis E, and other acute hepatitides",
+      "Intrahepatic cholestasis of pregnancy",
+      "Thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome",
+      "Drug-induced liver injury",
+      "Fulminant hepatic failure of another cause",
+      "Sepsis with associated hepatic dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "HELLP syndrome and severe pre-eclampsia, Viral hepatitis, including hepatitis E, and other acute hepatitides, Intrahepatic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Liver function tests including transaminases and bilirubin, together with serum ammonia",
+      "Blood glucose, since hypoglycaemia is characteristic and needs frequent monitoring",
+      "Coagulation screen with fibrinogen and a full blood count",
+      "Renal function, electrolytes, and urate",
+      "Viral hepatitis serology and other tests to exclude alternative causes",
+      "Liver ultrasound, chiefly to exclude other pathology such as a haematoma or Budd-Chiari syndrome",
+      "Neonatal screening for fatty-acid oxidation disorders after delivery"
     ],
-    [
-     "Management Strategy",
-     "Prompt delivery of the foetus as the definitive treatment once the mother is stabilised, regardless of gestation",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypoglycaemia with worsening coagulopathy",
+      "Hepatic encephalopathy or a rising ammonia",
+      "Acute kidney injury or oliguria",
+      "Signs of disseminated intravascular coagulation or major haemorrhage",
+      "Rapid clinical deterioration or fetal compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing late-pregnancy nausea and vomiting as benign and missing early disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early recognition, prompt delivery, and intensive supportive care, maternal survival and hepatic recovery are usual, though maternal and perinatal mortality remain significant when diagnosis is delayed; the liver typically recovers without long-term sequelae, and recurrence is uncommon but recognised, particularly with fatty-acid oxidation defects.",
+    "pitfalls": [
+      "Dismissing late-pregnancy nausea and vomiting as benign and missing early disease",
+      "Failing to check and repeatedly monitor the blood glucose",
+      "Confusing it with HELLP and overlooking the coagulopathy and hypoglycaemia that guide management",
+      "Delaying delivery while awaiting confirmatory tests",
+      "Not arranging neonatal metabolic screening for fatty-acid oxidation disorders"
+    ],
+    "references": [
+      "RCOG guidance on liver disease in pregnancy",
+      "Williams Obstetrics",
+      "Oxford Handbook of Obstetrics and Gynaecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt delivery of the foetus as the definitive treatment once the mother is stabilised, regardless of gestation",
+      "Maternal stabilisation with intensive supportive care, including correction of hypoglycaemia by dextrose infusion",
+      "Correction of coagulopathy with fresh frozen plasma, cryoprecipitate and vitamin K",
+      "Management of acute liver failure complications, monitoring for hyperammonaemia and encephalopathy, with liver transplantation reserved for irreversible failure",
+      "Coordinated multidisciplinary care involving obstetrics, hepatology, intensive care and neonatology",
+      "Screening of the newborn for fatty-acid oxidation defects, particularly long-chain 3-hydroxyacyl-CoA dehydrogenase deficiency",
+      "Genetic counselling and discussion of the recurrence risk in future pregnancies"
     ]
-   ],
-   "caption": "Overview comparison matrix for acute fatty liver of pregnancy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acute-fatty-liver-of-pregnancy-real-image",
-   "title": "Acute fatty liver of pregnancy: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "acute_fatty_liver_of_pregnancy-pathway",
+      "title": "Acute fatty liver of pregnancy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Acute fatty liver of pregnancy is a rare but life-threatening microvesicular fatty infiltration of hepatocytes, typically presenting in the third trimester or early postpartum period",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypoglycaemia with worsening coagulopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Liver function tests including transaminases and bilirubin, together with serum ammonia, Blood glucose, since hypoglycaemia is characteristic and needs frequent monitoring, Coagulation screen with fibrinogen and a full"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt delivery of the foetus as the definitive treatment once the mother is stabilised, regardless of gestation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing late-pregnancy nausea and vomiting as benign and missing early disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acute fatty liver of pregnancy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acute_fatty_liver_of_pregnancy-matrix",
+      "title": "Acute fatty liver of pregnancy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acute fatty liver of pregnancy is a rare but life-threatening microvesicular fatty infiltration of hepatocytes, typically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Liver function tests including transaminases and bilirubin, together with serum ammonia, Blood glucose, since hypoglycaemia is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "HELLP syndrome and severe pre-eclampsia, Viral hepatitis, including hepatitis E, and other acute hepatitides, Intrahepatic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt delivery of the foetus as the definitive treatment once the mother is stabilised, regardless of gestation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing late-pregnancy nausea and vomiting as benign and missing early disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acute fatty liver of pregnancy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "RCOG guidance on liver disease in pregnancy / Williams Obstetrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_fatty_liver_of_pregnancy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver function tests with transaminases, bilirubin and ammonia",
+          "cells": [
+            {
+              "text": "Raised transaminases and bilirubin; hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Hypoglycaemia, which is characteristic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen with fibrinogen and full blood count",
+          "cells": [
+            {
+              "text": "Prolonged clotting times and low fibrinogen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, electrolytes and urate",
+          "cells": [
+            {
+              "text": "Renal impairment and hyperuricaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral hepatitis serology",
+          "cells": [
+            {
+              "text": "Excludes other acute hepatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver ultrasound",
+          "cells": [
+            {
+              "text": "Excludes haematoma or Budd-Chiari syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal screening for fatty-acid oxidation disorders",
+          "cells": [
+            {
+              "text": "Inherited fetal defect, especially LCHAD deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_fatty_liver_of_pregnancy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt delivery once the mother is stabilised",
+          "cells": [
+            {
+              "text": "Definitive treatment"
+            },
+            {
+              "text": "Regardless of gestation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal stabilisation with intensive supportive care and dextrose",
+          "cells": [
+            {
+              "text": "Correction of hypoglycaemia"
+            },
+            {
+              "text": "Dextrose infusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fresh frozen plasma, cryoprecipitate and vitamin K",
+          "cells": [
+            {
+              "text": "Correction of coagulopathy"
+            },
+            {
+              "text": "Coagulopathy correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for hyperammonaemia and encephalopathy",
+          "cells": [
+            {
+              "text": "Acute liver failure complications"
+            },
+            {
+              "text": "Transplant only for irreversible failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care: obstetrics, hepatology, intensive care, neonatology",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening for fatty-acid oxidation defects",
+          "cells": [
+            {
+              "text": "Especially long-chain 3-hydroxyacyl-CoA dehydrogenase deficiency"
+            },
+            {
+              "text": "Neonatal testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Recurrence risk in future pregnancies"
+            },
+            {
+              "text": "Discussion of recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_fatty_liver_of_pregnancy-dx-mgmt",
+      "title": "Diagnosis and management of Acute fatty liver of pregnancy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Late pregnancy or early postpartum nausea, malaise and abdominal pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypoglycaemia with worsening coagulopathy or encephalopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent obstetric and ICU review; prepare for delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LFTs, ammonia, glucose, coagulation screen with fibrinogen and FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Viral hepatitis excluded by serology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Liver ultrasound; confirm acute fatty liver of pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review HELLP, viral hepatitis, cholestasis and TTP or HUS",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt delivery once the mother is stabilised, regardless of gestation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dextrose for hypoglycaemia; FFP, cryoprecipitate and vitamin K",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor ammonia and encephalopathy; transplant only if failure is irreversible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Maternal survival and liver recovery usual with early delivery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

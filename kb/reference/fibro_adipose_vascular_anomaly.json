@@ -1,174 +1,470 @@
 {
- "id": "fibro_adipose_vascular_anomaly",
- "name": "Fibro-adipose vascular anomaly",
- "aliases": [
-  "FAVA",
-  "Fibroadipose vascular anomaly"
- ],
- "class": "non_infective",
- "system": "Skin / Vascular",
- "specialty": "Dermatology / Vascular anomalies / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, painful intramuscular lesion characterised by fibrofatty replacement of muscle with associated anomalous slow-flow venous and lymphatic channels.",
-   "Typically affects children and young adults, most often in the calf and gastrocnemius, the forearm or the thigh.",
-   "The hallmark is severe, disproportionate pain with a firm intramuscular mass, often accompanied by contracture such as fixed ankle equinus in calf disease.",
-   "Caused by somatic activating PIK3CA mutations, placing it within the PIK3CA-related overgrowth spectrum (PROS).",
-   "Frequently misdiagnosed as an ordinary venous malformation, but the dense fibrofatty muscle infiltration is distinctive on MRI and histology.",
-   "MRI shows an infiltrative intramuscular lesion with fibrofatty tissue, phleboliths and abnormal vascular channels.",
-   "Management includes percutaneous cryoablation, image-guided resection, physiotherapy for contracture, and PI3K/mTOR-targeted therapy such as sirolimus or alpelisib.",
-   "Involvement of intramuscular nerves can produce neuropathic pain and requires careful surgical planning."
+  "id": "fibro_adipose_vascular_anomaly",
+  "name": "Fibro-adipose vascular anomaly",
+  "aliases": [
+    "FAVA",
+    "Fibroadipose vascular anomaly"
   ],
-  "pathophysiology": "Fibro-adipose vascular anomaly is an intramuscular lesion in which normal skeletal muscle is progressively replaced by dense fibrous and adipose tissue intermixed with malformed, predominantly slow-flow venous and lymphatic channels and phleboliths. It arises from somatic mosaic activating mutations in PIK3CA with consequent PI3K/AKT/mTOR pathway activation, situating it within the PIK3CA-related overgrowth spectrum. The fibrofatty infiltration and involvement of intramuscular nerves are thought to underlie the characteristically severe pain and the tendency to produce fixed contractures, distinguishing it from a simple intramuscular venous malformation.",
-  "additionalDifferentials": [
-   "Intramuscular venous malformation",
-   "Lymphatic malformation",
-   "Intramuscular haemangioma",
-   "Soft-tissue sarcoma",
-   "Desmoid-type fibromatosis",
-   "Other PROS lesions such as CLOVES syndrome"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced MRI showing an infiltrative intramuscular fibrofatty lesion with phleboliths and slow-flow channels",
-   "Doppler ultrasound",
-   "Biopsy demonstrating fibrofatty replacement of muscle with anomalous vessels",
-   "PIK3CA mutation testing on lesional tissue",
-   "Coagulation screen for localised intravascular coagulopathy",
-   "Nerve conduction studies or assessment where neural involvement is suspected"
-  ],
-  "redFlags": [
-   "Progressive fixed contracture with loss of joint function",
-   "Severe intractable neuropathic pain",
-   "Rapid growth raising suspicion of sarcoma",
-   "Neurovascular compromise of the affected limb"
-  ],
-  "prognosis": "Fibro-adipose vascular anomaly is benign but causes considerable morbidity from pain and contracture. Targeted therapy, cryoablation and resection can relieve symptoms, though the lesion tends to persist and established contractures may require orthopaedic correction.",
-  "pitfalls": [
-   "Misdiagnosing it as a simple venous malformation and mismanaging the pain and contracture.",
-   "Failing to recognise it as part of the PIK3CA-related overgrowth spectrum.",
-   "Inadequate pain control by not addressing nerve involvement.",
-   "Underestimating the extent of intramuscular infiltration before surgery."
-  ],
-  "references": [
-   "Standard textbook of vascular anomalies",
-   "ISSVA classification of vascular anomalies",
-   "Original descriptions and case series of fibro-adipose vascular anomaly"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide multimodal analgesia including neuropathic pain agents given the characteristically severe, disproportionate pain",
-   "Offer targeted medical therapy directed at the PI3K/AKT/mTOR pathway with the mTOR inhibitor sirolimus or the PI3K inhibitor alpelisib, reflecting the underlying PIK3CA activation",
-   "Use image-guided cryoablation or sclerotherapy to reduce lesion bulk and relieve pain",
-   "Consider surgical resection of the intramuscular lesion in selected patients for pain relief and functional gain",
-   "Provide physiotherapy and orthopaedic management of contractures such as fixed ankle equinus, with corrective surgery where established",
-   "Manage within a multidisciplinary vascular anomalies team spanning interventional radiology, orthopaedics, pain and physiotherapy",
-   "Confirm the PIK3CA mutation on lesional tissue to guide targeted therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fibro_adipose_vascular_anomaly-pathway",
-   "title": "Fibro-adipose vascular anomaly: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, painful intramuscular lesion characterised by fibrofatty replacement of muscle with associated anomalous slow-flow venous and lymphatic channels.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive fixed contracture with loss of joint function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced MRI showing an infiltrative intramuscular fibrofatty lesion with phleboliths and slow-flow channels, Doppler ultrasound, Biopsy demonstrating fibrofatty replacement of muscle with anomalous vessels"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide multimodal analgesia including neuropathic pain agents given the characteristically severe, disproportionate pain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as a simple venous malformation and mismanaging the pain and contracture."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fibro-adipose vascular anomaly."
-  }
- ],
- "tables": [
-  {
-   "id": "fibro_adipose_vascular_anomaly-matrix",
-   "title": "Fibro-adipose vascular anomaly: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, painful intramuscular lesion characterised by fibrofatty replacement of muscle with associated anomalous slow-flow venous",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Vascular",
+  "specialty": "Dermatology / Vascular anomalies / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, painful intramuscular lesion characterised by fibrofatty replacement of muscle with associated anomalous slow-flow venous and lymphatic channels.",
+      "Typically affects children and young adults, most often in the calf and gastrocnemius, the forearm or the thigh.",
+      "The hallmark is severe, disproportionate pain with a firm intramuscular mass, often accompanied by contracture such as fixed ankle equinus in calf disease.",
+      "Caused by somatic activating PIK3CA mutations, placing it within the PIK3CA-related overgrowth spectrum (PROS).",
+      "Frequently misdiagnosed as an ordinary venous malformation, but the dense fibrofatty muscle infiltration is distinctive on MRI and histology.",
+      "MRI shows an infiltrative intramuscular lesion with fibrofatty tissue, phleboliths and abnormal vascular channels.",
+      "Management includes percutaneous cryoablation, image-guided resection, physiotherapy for contracture, and PI3K/mTOR-targeted therapy such as sirolimus or alpelisib.",
+      "Involvement of intramuscular nerves can produce neuropathic pain and requires careful surgical planning."
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced MRI showing an infiltrative intramuscular fibrofatty lesion with phleboliths and slow-flow channels, Doppler",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fibro-adipose vascular anomaly is an intramuscular lesion in which normal skeletal muscle is progressively replaced by dense fibrous and adipose tissue intermixed with malformed, predominantly slow-flow venous and lymphatic channels and phleboliths. It arises from somatic mosaic activating mutations in PIK3CA with consequent PI3K/AKT/mTOR pathway activation, situating it within the PIK3CA-related overgrowth spectrum. The fibrofatty infiltration and involvement of intramuscular nerves are thought to underlie the characteristically severe pain and the tendency to produce fixed contractures, distinguishing it from a simple intramuscular venous malformation.",
+    "additionalDifferentials": [
+      "Intramuscular venous malformation",
+      "Lymphatic malformation",
+      "Intramuscular haemangioma",
+      "Soft-tissue sarcoma",
+      "Desmoid-type fibromatosis",
+      "Other PROS lesions such as CLOVES syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Intramuscular venous malformation, Lymphatic malformation, Intramuscular haemangioma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced MRI showing an infiltrative intramuscular fibrofatty lesion with phleboliths and slow-flow channels",
+      "Doppler ultrasound",
+      "Biopsy demonstrating fibrofatty replacement of muscle with anomalous vessels",
+      "PIK3CA mutation testing on lesional tissue",
+      "Coagulation screen for localised intravascular coagulopathy",
+      "Nerve conduction studies or assessment where neural involvement is suspected"
     ],
-    [
-     "Management Strategy",
-     "Provide multimodal analgesia including neuropathic pain agents given the characteristically severe, disproportionate pain",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive fixed contracture with loss of joint function",
+      "Severe intractable neuropathic pain",
+      "Rapid growth raising suspicion of sarcoma",
+      "Neurovascular compromise of the affected limb"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as a simple venous malformation and mismanaging the pain and contracture.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Fibro-adipose vascular anomaly is benign but causes considerable morbidity from pain and contracture. Targeted therapy, cryoablation and resection can relieve symptoms, though the lesion tends to persist and established contractures may require orthopaedic correction.",
+    "pitfalls": [
+      "Misdiagnosing it as a simple venous malformation and mismanaging the pain and contracture.",
+      "Failing to recognise it as part of the PIK3CA-related overgrowth spectrum.",
+      "Inadequate pain control by not addressing nerve involvement.",
+      "Underestimating the extent of intramuscular infiltration before surgery."
+    ],
+    "references": [
+      "Standard textbook of vascular anomalies",
+      "ISSVA classification of vascular anomalies",
+      "Original descriptions and case series of fibro-adipose vascular anomaly"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide multimodal analgesia including neuropathic pain agents given the characteristically severe, disproportionate pain",
+      "Offer targeted medical therapy directed at the PI3K/AKT/mTOR pathway with the mTOR inhibitor sirolimus or the PI3K inhibitor alpelisib, reflecting the underlying PIK3CA activation",
+      "Use image-guided cryoablation or sclerotherapy to reduce lesion bulk and relieve pain",
+      "Consider surgical resection of the intramuscular lesion in selected patients for pain relief and functional gain",
+      "Provide physiotherapy and orthopaedic management of contractures such as fixed ankle equinus, with corrective surgery where established",
+      "Manage within a multidisciplinary vascular anomalies team spanning interventional radiology, orthopaedics, pain and physiotherapy",
+      "Confirm the PIK3CA mutation on lesional tissue to guide targeted therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for fibro-adipose vascular anomaly."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fibro-adipose-vascular-anomaly-real-image",
-   "title": "Fibro-adipose vascular anomaly: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "fibro_adipose_vascular_anomaly-pathway",
+      "title": "Fibro-adipose vascular anomaly: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, painful intramuscular lesion characterised by fibrofatty replacement of muscle with associated anomalous slow-flow venous and lymphatic channels.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive fixed contracture with loss of joint function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced MRI showing an infiltrative intramuscular fibrofatty lesion with phleboliths and slow-flow channels, Doppler ultrasound, Biopsy demonstrating fibrofatty replacement of muscle with anomalous vessels"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide multimodal analgesia including neuropathic pain agents given the characteristically severe, disproportionate pain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as a simple venous malformation and mismanaging the pain and contracture."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fibro-adipose vascular anomaly."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fibro_adipose_vascular_anomaly-matrix",
+      "title": "Fibro-adipose vascular anomaly: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, painful intramuscular lesion characterised by fibrofatty replacement of muscle with associated anomalous slow-flow venous",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced MRI showing an infiltrative intramuscular fibrofatty lesion with phleboliths and slow-flow channels, Doppler",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Intramuscular venous malformation, Lymphatic malformation, Intramuscular haemangioma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide multimodal analgesia including neuropathic pain agents given the characteristically severe, disproportionate pain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as a simple venous malformation and mismanaging the pain and contracture.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fibro-adipose vascular anomaly."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibro_adipose_vascular_anomaly-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced MRI",
+          "cells": [
+            {
+              "text": "Infiltrative intramuscular fibrofatty lesion with phleboliths"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Slow-flow vascular channels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Fibrofatty replacement of muscle with anomalous vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIK3CA mutation testing on lesional tissue",
+          "cells": [
+            {
+              "text": "Somatic activating mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Localised intravascular coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Neural involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibro_adipose_vascular_anomaly-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Intramuscular venous malformation",
+          "cells": [
+            {
+              "text": "Simple venous lesion; fibrofatty change distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soft-tissue sarcoma or desmoid fibromatosis",
+          "cells": [
+            {
+              "text": "Rapid growth raises concern for sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphatic malformation or CLOVES syndrome",
+          "cells": [
+            {
+              "text": "Other PIK3CA-related overgrowth lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibro_adipose_vascular_anomaly-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multimodal analgesia with neuropathic pain agents",
+          "cells": [
+            {
+              "text": "Severe, disproportionate pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sirolimus or PI3K inhibitor therapy",
+          "cells": [
+            {
+              "text": "Targets the PI3K/AKT/mTOR pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided cryoablation or sclerotherapy",
+          "cells": [
+            {
+              "text": "Reduces lesion bulk and relieves pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection in selected patients",
+          "cells": [
+            {
+              "text": "Pain relief and functional gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and orthopaedic care for contracture",
+          "cells": [
+            {
+              "text": "Corrective surgery where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary vascular anomalies team",
+          "cells": [
+            {
+              "text": "Interventional radiology, orthopaedics, pain and physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIK3CA confirmation on lesional tissue",
+          "cells": [
+            {
+              "text": "Guides targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibro_adipose_vascular_anomaly-dx-mgmt",
+      "title": "Diagnosis and management of Fibro-adipose vascular anomaly",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful intramuscular mass with contracture in a child or young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (fixed contracture, intractable pain, rapid growth, neurovascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for neurovascular compromise or suspected sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI; Doppler; biopsy; PIK3CA testing; coagulation screen; nerve studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fibrofatty intramuscular lesion with PIK3CA mutation on tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider venous malformation, sarcoma or other PIK3CA-related overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Multimodal analgesia including neuropathic pain agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sirolimus or PI3K inhibitor for PI3K/AKT/mTOR pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Image-guided cryoablation or sclerotherapy to reduce bulk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and orthopaedic management of contracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign but considerable morbidity from pain and contracture; targeted therapy helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

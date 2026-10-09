@@ -1,173 +1,489 @@
 {
- "id": "ectopic_parathyroid",
- "name": "Ectopic parathyroid gland",
- "aliases": [
-  "ectopic parathyroid adenoma",
-  "mediastinal parathyroid",
-  "intrathyroidal parathyroid"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology / Endocrine Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An abnormally located parathyroid gland, most often reflecting embryological descent, found in sites such as the mediastinum, thymus, retro-oesophageal space, carotid sheath, or within the thyroid",
-   "Clinically important mainly as a cause of persistent or recurrent hyperparathyroidism when a hyperfunctioning ectopic gland is missed at the initial neck exploration",
-   "Superior glands, derived from the fourth pharyngeal pouch, tend to lie posteriorly or in a retro-oesophageal position, whereas inferior glands from the third pouch may descend with the thymus into the mediastinum",
-   "Biochemistry is that of primary hyperparathyroidism, with hypercalcaemia and inappropriately elevated PTH, but conventional imaging may fail to localise the culprit gland",
-   "Accurate preoperative localisation is essential and typically combines sestamibi scintigraphy with SPECT/CT and 4D-CT, supplemented by selective venous sampling in difficult cases",
-   "An intrathyroidal parathyroid can masquerade as a thyroid nodule and be overlooked unless specifically considered",
-   "Successful cure depends on targeted surgery guided by imaging and, where available, intraoperative PTH monitoring to confirm removal of all hyperfunctioning tissue"
+  "id": "ectopic_parathyroid",
+  "name": "Ectopic parathyroid gland",
+  "aliases": [
+    "ectopic parathyroid adenoma",
+    "mediastinal parathyroid",
+    "intrathyroidal parathyroid"
   ],
-  "pathophysiology": "Ectopic parathyroid glands arise because the parathyroids migrate during embryogenesis: the superior glands develop from the fourth pharyngeal pouch and the inferior glands, together with the thymus, from the third pouch. Variations in this migration leave glands in unexpected positions, including retro-oesophageal and paraoesophageal tissue, the carotid sheath, within the thyroid, or descended into the anterior mediastinum with thymic tissue. When such a gland becomes an autonomously hyperfunctioning adenoma or hyperplastic gland, it produces primary hyperparathyroidism, but its aberrant location makes it difficult to find, and it is a frequent reason for failed neck exploration and persistent disease.",
-  "additionalDifferentials": [
-   "Orthotopic parathyroid adenoma",
-   "Multigland parathyroid hyperplasia",
-   "Thyroid nodule mimicking an intrathyroidal parathyroid",
-   "Mediastinal mass such as thymoma or lymph node",
-   "Parathyroid carcinoma",
-   "Familial hypocalciuric hypercalcaemia"
-  ],
-  "additionalInvestigations": [
-   "Serum calcium and intact PTH confirming primary hyperparathyroidism",
-   "Sestamibi scintigraphy with SPECT/CT for functional localisation",
-   "4D-CT of the neck and mediastinum for anatomical localisation",
-   "Neck ultrasound including assessment for an intrathyroidal gland",
-   "Selective venous sampling for PTH when non-invasive imaging is discordant or negative",
-   "Intraoperative PTH monitoring to confirm complete excision"
-  ],
-  "redFlags": [
-   "Persistent or recurrent hypercalcaemia after apparently successful parathyroid surgery",
-   "Severe symptomatic hypercalcaemia awaiting localisation",
-   "Discordant or negative conventional imaging in confirmed primary hyperparathyroidism",
-   "A mediastinal lesion requiring more extensive surgical access"
-  ],
-  "prognosis": "Once the ectopic hyperfunctioning gland is accurately localised and completely removed, hyperparathyroidism is usually cured; the main difficulty is localisation, and undetected glands lead to persistent disease and repeat surgery.",
-  "pitfalls": [
-   "Terminating neck exploration without considering an ectopic mediastinal or retro-oesophageal gland",
-   "Missing an intrathyroidal parathyroid mistaken for a thyroid nodule",
-   "Relying on a single imaging modality when multimodal localisation is often required",
-   "Failing to use intraoperative PTH monitoring to confirm cure in reoperative cases"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "WHO Classification of Endocrine and Neuroendocrine Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment is precise preoperative localisation with sestamibi SPECT/CT, 4D-CT and, in difficult cases, selective venous sampling, followed by targeted surgical excision of the hyperfunctioning ectopic gland",
-   "Use intraoperative parathyroid hormone monitoring to confirm complete removal and biochemical cure",
-   "Plan a thoracic, minimally invasive or trans-sternal approach with the appropriate surgical team for mediastinal glands",
-   "Control significant hypercalcaemia before surgery with intravenous fluids and, where needed, cinacalcet or a bisphosphonate, and treat hypercalcaemic crisis",
-   "Where surgery is not feasible, manage hypercalcaemia long term with the calcimimetic cinacalcet and monitor renal and skeletal complications",
-   "Monitor postoperatively for hypocalcaemia, confirm cure and surveil for persistent or recurrent disease",
-   "Manage through an endocrine surgery multidisciplinary team and consider evaluation for familial hyperparathyroidism or multiple endocrine neoplasia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ectopic_parathyroid-pathway",
-   "title": "Ectopic parathyroid gland: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An abnormally located parathyroid gland, most often reflecting embryological descent, found in sites such as the mediastinum, thymus, retro-oesophageal space, carotid sheath, or within the thyroid",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent or recurrent hypercalcaemia after apparently successful parathyroid surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum calcium and intact PTH confirming primary hyperparathyroidism, Sestamibi scintigraphy with SPECT/CT for functional localisation, 4D-CT of the neck and mediastinum for anatomical localisation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment is precise preoperative localisation with sestamibi SPECT/CT, 4D-CT and, in difficult cases, selective venous sampling, followed by targeted surgical excision of the hyperfunctioning ectopic gland"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Terminating neck exploration without considering an ectopic mediastinal or retro-oesophageal gland"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ectopic parathyroid gland."
-  }
- ],
- "tables": [
-  {
-   "id": "ectopic_parathyroid-matrix",
-   "title": "Ectopic parathyroid gland: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An abnormally located parathyroid gland, most often reflecting embryological descent, found in sites such as the mediastinum,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology / Endocrine Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An abnormally located parathyroid gland, most often reflecting embryological descent, found in sites such as the mediastinum, thymus, retro-oesophageal space, carotid sheath, or within the thyroid",
+      "Clinically important mainly as a cause of persistent or recurrent hyperparathyroidism when a hyperfunctioning ectopic gland is missed at the initial neck exploration",
+      "Superior glands, derived from the fourth pharyngeal pouch, tend to lie posteriorly or in a retro-oesophageal position, whereas inferior glands from the third pouch may descend with the thymus into the mediastinum",
+      "Biochemistry is that of primary hyperparathyroidism, with hypercalcaemia and inappropriately elevated PTH, but conventional imaging may fail to localise the culprit gland",
+      "Accurate preoperative localisation is essential and typically combines sestamibi scintigraphy with SPECT/CT and 4D-CT, supplemented by selective venous sampling in difficult cases",
+      "An intrathyroidal parathyroid can masquerade as a thyroid nodule and be overlooked unless specifically considered",
+      "Successful cure depends on targeted surgery guided by imaging and, where available, intraoperative PTH monitoring to confirm removal of all hyperfunctioning tissue"
     ],
-    [
-     "Key Investigations",
-     "Serum calcium and intact PTH confirming primary hyperparathyroidism, Sestamibi scintigraphy with SPECT/CT for functional",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ectopic parathyroid glands arise because the parathyroids migrate during embryogenesis: the superior glands develop from the fourth pharyngeal pouch and the inferior glands, together with the thymus, from the third pouch. Variations in this migration leave glands in unexpected positions, including retro-oesophageal and paraoesophageal tissue, the carotid sheath, within the thyroid, or descended into the anterior mediastinum with thymic tissue. When such a gland becomes an autonomously hyperfunctioning adenoma or hyperplastic gland, it produces primary hyperparathyroidism, but its aberrant location makes it difficult to find, and it is a frequent reason for failed neck exploration and persistent disease.",
+    "additionalDifferentials": [
+      "Orthotopic parathyroid adenoma",
+      "Multigland parathyroid hyperplasia",
+      "Thyroid nodule mimicking an intrathyroidal parathyroid",
+      "Mediastinal mass such as thymoma or lymph node",
+      "Parathyroid carcinoma",
+      "Familial hypocalciuric hypercalcaemia"
     ],
-    [
-     "Primary Differentials",
-     "Orthotopic parathyroid adenoma, Multigland parathyroid hyperplasia, Thyroid nodule mimicking an intrathyroidal parathyroid",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum calcium and intact PTH confirming primary hyperparathyroidism",
+      "Sestamibi scintigraphy with SPECT/CT for functional localisation",
+      "4D-CT of the neck and mediastinum for anatomical localisation",
+      "Neck ultrasound including assessment for an intrathyroidal gland",
+      "Selective venous sampling for PTH when non-invasive imaging is discordant or negative",
+      "Intraoperative PTH monitoring to confirm complete excision"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment is precise preoperative localisation with sestamibi SPECT/CT, 4D-CT and, in difficult cases, selective",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent or recurrent hypercalcaemia after apparently successful parathyroid surgery",
+      "Severe symptomatic hypercalcaemia awaiting localisation",
+      "Discordant or negative conventional imaging in confirmed primary hyperparathyroidism",
+      "A mediastinal lesion requiring more extensive surgical access"
     ],
-    [
-     "Clinical Pitfall",
-     "Terminating neck exploration without considering an ectopic mediastinal or retro-oesophageal gland",
-     "Prevent diagnostic or management error"
+    "prognosis": "Once the ectopic hyperfunctioning gland is accurately localised and completely removed, hyperparathyroidism is usually cured; the main difficulty is localisation, and undetected glands lead to persistent disease and repeat surgery.",
+    "pitfalls": [
+      "Terminating neck exploration without considering an ectopic mediastinal or retro-oesophageal gland",
+      "Missing an intrathyroidal parathyroid mistaken for a thyroid nodule",
+      "Relying on a single imaging modality when multimodal localisation is often required",
+      "Failing to use intraoperative PTH monitoring to confirm cure in reoperative cases"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "WHO Classification of Endocrine and Neuroendocrine Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment is precise preoperative localisation with sestamibi SPECT/CT, 4D-CT and, in difficult cases, selective venous sampling, followed by targeted surgical excision of the hyperfunctioning ectopic gland",
+      "Use intraoperative parathyroid hormone monitoring to confirm complete removal and biochemical cure",
+      "Plan a thoracic, minimally invasive or trans-sternal approach with the appropriate surgical team for mediastinal glands",
+      "Control significant hypercalcaemia before surgery with intravenous fluids and, where needed, cinacalcet or a bisphosphonate, and treat hypercalcaemic crisis",
+      "Where surgery is not feasible, manage hypercalcaemia long term with the calcimimetic cinacalcet and monitor renal and skeletal complications",
+      "Monitor postoperatively for hypocalcaemia, confirm cure and surveil for persistent or recurrent disease",
+      "Manage through an endocrine surgery multidisciplinary team and consider evaluation for familial hyperparathyroidism or multiple endocrine neoplasia"
     ]
-   ],
-   "caption": "Overview comparison matrix for ectopic parathyroid gland."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ectopic-parathyroid-real-image",
-   "title": "Ectopic parathyroid gland: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "ectopic_parathyroid-pathway",
+      "title": "Ectopic parathyroid gland: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An abnormally located parathyroid gland, most often reflecting embryological descent, found in sites such as the mediastinum, thymus, retro-oesophageal space, carotid sheath, or within the thyroid",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent or recurrent hypercalcaemia after apparently successful parathyroid surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum calcium and intact PTH confirming primary hyperparathyroidism, Sestamibi scintigraphy with SPECT/CT for functional localisation, 4D-CT of the neck and mediastinum for anatomical localisation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment is precise preoperative localisation with sestamibi SPECT/CT, 4D-CT and, in difficult cases, selective venous sampling, followed by targeted surgical excision of the hyperfunctioning ectopic gland"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Terminating neck exploration without considering an ectopic mediastinal or retro-oesophageal gland"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ectopic parathyroid gland."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ectopic_parathyroid-matrix",
+      "title": "Ectopic parathyroid gland: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An abnormally located parathyroid gland, most often reflecting embryological descent, found in sites such as the mediastinum,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum calcium and intact PTH confirming primary hyperparathyroidism, Sestamibi scintigraphy with SPECT/CT for functional",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Orthotopic parathyroid adenoma, Multigland parathyroid hyperplasia, Thyroid nodule mimicking an intrathyroidal parathyroid",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment is precise preoperative localisation with sestamibi SPECT/CT, 4D-CT and, in difficult cases, selective",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Terminating neck exploration without considering an ectopic mediastinal or retro-oesophageal gland",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ectopic parathyroid gland."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ectopic_parathyroid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium and intact PTH",
+          "cells": [
+            {
+              "text": "Primary hyperparathyroidism confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sestamibi scintigraphy with SPECT/CT",
+          "cells": [
+            {
+              "text": "Functional localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "4D-CT of the neck and mediastinum",
+          "cells": [
+            {
+              "text": "Anatomical localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neck ultrasound",
+          "cells": [
+            {
+              "text": "Intrathyroidal gland assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective venous sampling for PTH",
+          "cells": [
+            {
+              "text": "Discordant or negative imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraoperative PTH monitoring",
+          "cells": [
+            {
+              "text": "Complete excision confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ectopic_parathyroid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthotopic parathyroid adenoma",
+          "cells": [
+            {
+              "text": "Gland in the normal cervical position"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multigland hyperplasia",
+          "cells": [
+            {
+              "text": "Several enlarged glands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid nodule",
+          "cells": [
+            {
+              "text": "Mimic of an intrathyroidal parathyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mediastinal thymoma or lymph node",
+          "cells": [
+            {
+              "text": "Mass mimicking an ectopic gland"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypocalciuric hypercalcaemia",
+          "cells": [
+            {
+              "text": "Low urinary calcium, high calcium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ectopic_parathyroid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted surgical excision",
+          "cells": [
+            {
+              "text": "Definitive treatment after precise preoperative localisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraoperative PTH monitoring",
+          "cells": [
+            {
+              "text": "Confirms complete removal and biochemical cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mediastinal approach",
+          "cells": [
+            {
+              "text": "Thoracic, minimally invasive or trans-sternal route for mediastinal glands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative hypercalcaemia control",
+          "cells": [
+            {
+              "text": "Intravenous fluids, cinacalcet or bisphosphonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term cinacalcet",
+          "cells": [
+            {
+              "text": "Where surgery is not feasible; monitor renal and skeletal complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative care",
+          "cells": [
+            {
+              "text": "Monitor for hypocalcaemia; confirm cure and surveil for recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ectopic_parathyroid-dx-mgmt",
+      "title": "Diagnosis and management of Ectopic parathyroid gland",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ectopic parathyroid: primary hyperparathyroidism with negative neck imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypercalcaemia, persistent disease after surgery)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent control of severe hypercalcaemia with fluids and calcimimetic or bisphosphonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sestamibi SPECT/CT; 4D-CT; neck ultrasound; selective venous PTH sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the hyperfunctioning ectopic gland localised on imaging or venous sampling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider orthotopic adenoma, hyperplasia or familial hypocalciuric hypercalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Targeted surgical excision after precise preoperative localisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intraoperative PTH monitoring to confirm complete removal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thoracic or trans-sternal approach for mediastinal glands",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cinacalcet for long-term control where surgery is not feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for hypocalcaemia and surveil for persistent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually cured once the gland is found and removed; localisation is the main difficulty",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,170 +1,459 @@
 {
- "id": "lymphocytic_colitis",
- "name": "Lymphocytic colitis",
- "aliases": [
-  "microscopic colitis, lymphocytic type",
-  "lymphocytic type microscopic colitis"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with chronic watery, non-bloody diarrhoea similar to collagenous colitis, often with urgency and nocturnal symptoms",
-   "Affects both sexes more equally than collagenous colitis, though still with a female predominance, and typically in middle-aged and older adults",
-   "Colonoscopy shows normal-appearing mucosa, so diagnosis is made only on biopsy histology",
-   "The defining feature is a marked increase in intraepithelial lymphocytes without the thickened subepithelial collagen band that characterises collagenous colitis",
-   "Strongly associated with coeliac disease, autoimmune thyroid disease and drugs such as non-steroidal anti-inflammatory drugs, proton-pump inhibitors and certain other agents",
-   "Multiple biopsies from several colonic segments improve diagnostic yield because changes may be patchy",
-   "Budesonide for microscopic colitis is first-line, with withdrawal of implicated drugs an essential first step"
+  "id": "lymphocytic_colitis",
+  "name": "Lymphocytic colitis",
+  "aliases": [
+    "microscopic colitis, lymphocytic type",
+    "lymphocytic type microscopic colitis"
   ],
-  "pathophysiology": "Lymphocytic colitis is a subtype of microscopic colitis defined histologically by a raised intraepithelial lymphocyte count in the surface epithelium with associated chronic inflammation of the lamina propria, but crucially without the thickened subepithelial collagen band seen in collagenous colitis, and with an endoscopically normal mucosa. It is thought to result from a dysregulated mucosal immune response to luminal antigens, including drugs, in predisposed individuals, disturbing epithelial water and electrolyte transport and producing a secretory watery diarrhoea. It shares many clinical and immunological features with collagenous colitis and the two are considered ends of a spectrum.",
-  "additionalDifferentials": [
-   "Collagenous colitis",
-   "Coeliac disease",
-   "Irritable bowel syndrome with diarrhoea",
-   "Bile acid diarrhoea",
-   "Infective diarrhoea",
-   "Inflammatory bowel disease"
-  ],
-  "additionalInvestigations": [
-   "Colonoscopy with segmental biopsies despite normal mucosal appearance",
-   "Histological quantification of intraepithelial lymphocytes and assessment for a collagen band",
-   "Coeliac serology and duodenal biopsy if indicated",
-   "Thyroid function tests",
-   "Stool studies to exclude infective causes"
-  ],
-  "redFlags": [
-   "Rectal bleeding, which is not typical and should prompt reconsideration of the diagnosis",
-   "Marked weight loss requiring exclusion of coeliac disease or malignancy",
-   "Dehydration and electrolyte disturbance from severe diarrhoea",
-   "Anaemia suggesting an alternative or coexisting diagnosis"
-  ],
-  "prognosis": "The disease is benign with no increased colorectal cancer risk; many patients respond to treatment and some experience spontaneous remission, though relapses may occur and require further courses of treatment.",
-  "pitfalls": [
-   "Assuming irritable bowel syndrome and not biopsying normal-looking colonic mucosa",
-   "Failing to distinguish it from collagenous colitis by looking for the collagen band",
-   "Overlooking coexisting coeliac disease as a cause of persistent symptoms",
-   "Not reviewing medications that can precipitate or maintain the colitis"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "British Society of Gastroenterology guidance on microscopic colitis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Oral budesonide as first-line therapy to induce remission",
-   "Withdraw implicated drugs such as non-steroidal anti-inflammatory drugs, proton-pump inhibitors and other culprit agents",
-   "Antidiarrhoeal agents such as loperamide for mild symptoms, with bile-acid sequestrants where bile-acid malabsorption contributes",
-   "Escalate refractory or steroid-dependent disease to immunomodulators or biologic therapy",
-   "Screen for and treat associated coeliac disease with a gluten-free diet, and associated autoimmune thyroid disease",
-   "Reassure regarding the benign course with no increased colorectal cancer risk, and re-treat relapses with repeat budesonide courses"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lymphocytic_colitis-pathway",
-   "title": "Lymphocytic colitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with chronic watery, non-bloody diarrhoea similar to collagenous colitis, often with urgency and nocturnal symptoms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rectal bleeding, which is not typical and should prompt reconsideration of the diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Colonoscopy with segmental biopsies despite normal mucosal appearance, Histological quantification of intraepithelial lymphocytes and assessment for a collagen band, Coeliac serology and duodenal biopsy if indicated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Oral budesonide as first-line therapy to induce remission"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming irritable bowel syndrome and not biopsying normal-looking colonic mucosa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lymphocytic colitis."
-  }
- ],
- "tables": [
-  {
-   "id": "lymphocytic_colitis-matrix",
-   "title": "Lymphocytic colitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with chronic watery, non-bloody diarrhoea similar to collagenous colitis, often with urgency and nocturnal symptoms",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with chronic watery, non-bloody diarrhoea similar to collagenous colitis, often with urgency and nocturnal symptoms",
+      "Affects both sexes more equally than collagenous colitis, though still with a female predominance, and typically in middle-aged and older adults",
+      "Colonoscopy shows normal-appearing mucosa, so diagnosis is made only on biopsy histology",
+      "The defining feature is a marked increase in intraepithelial lymphocytes without the thickened subepithelial collagen band that characterises collagenous colitis",
+      "Strongly associated with coeliac disease, autoimmune thyroid disease and drugs such as non-steroidal anti-inflammatory drugs, proton-pump inhibitors and certain other agents",
+      "Multiple biopsies from several colonic segments improve diagnostic yield because changes may be patchy",
+      "Budesonide for microscopic colitis is first-line, with withdrawal of implicated drugs an essential first step"
     ],
-    [
-     "Key Investigations",
-     "Colonoscopy with segmental biopsies despite normal mucosal appearance, Histological quantification of intraepithelial lymphocytes",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lymphocytic colitis is a subtype of microscopic colitis defined histologically by a raised intraepithelial lymphocyte count in the surface epithelium with associated chronic inflammation of the lamina propria, but crucially without the thickened subepithelial collagen band seen in collagenous colitis, and with an endoscopically normal mucosa. It is thought to result from a dysregulated mucosal immune response to luminal antigens, including drugs, in predisposed individuals, disturbing epithelial water and electrolyte transport and producing a secretory watery diarrhoea. It shares many clinical and immunological features with collagenous colitis and the two are considered ends of a spectrum.",
+    "additionalDifferentials": [
+      "Collagenous colitis",
+      "Coeliac disease",
+      "Irritable bowel syndrome with diarrhoea",
+      "Bile acid diarrhoea",
+      "Infective diarrhoea",
+      "Inflammatory bowel disease"
     ],
-    [
-     "Primary Differentials",
-     "Collagenous colitis, Coeliac disease, Irritable bowel syndrome with diarrhoea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Colonoscopy with segmental biopsies despite normal mucosal appearance",
+      "Histological quantification of intraepithelial lymphocytes and assessment for a collagen band",
+      "Coeliac serology and duodenal biopsy if indicated",
+      "Thyroid function tests",
+      "Stool studies to exclude infective causes"
     ],
-    [
-     "Management Strategy",
-     "Oral budesonide as first-line therapy to induce remission",
-     "Core treatment modality"
+    "redFlags": [
+      "Rectal bleeding, which is not typical and should prompt reconsideration of the diagnosis",
+      "Marked weight loss requiring exclusion of coeliac disease or malignancy",
+      "Dehydration and electrolyte disturbance from severe diarrhoea",
+      "Anaemia suggesting an alternative or coexisting diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming irritable bowel syndrome and not biopsying normal-looking colonic mucosa",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease is benign with no increased colorectal cancer risk; many patients respond to treatment and some experience spontaneous remission, though relapses may occur and require further courses of treatment.",
+    "pitfalls": [
+      "Assuming irritable bowel syndrome and not biopsying normal-looking colonic mucosa",
+      "Failing to distinguish it from collagenous colitis by looking for the collagen band",
+      "Overlooking coexisting coeliac disease as a cause of persistent symptoms",
+      "Not reviewing medications that can precipitate or maintain the colitis"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "British Society of Gastroenterology guidance on microscopic colitis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Oral budesonide as first-line therapy to induce remission",
+      "Withdraw implicated drugs such as non-steroidal anti-inflammatory drugs, proton-pump inhibitors and other culprit agents",
+      "Antidiarrhoeal agents such as loperamide for mild symptoms, with bile-acid sequestrants where bile-acid malabsorption contributes",
+      "Escalate refractory or steroid-dependent disease to immunomodulators or biologic therapy",
+      "Screen for and treat associated coeliac disease with a gluten-free diet, and associated autoimmune thyroid disease",
+      "Reassure regarding the benign course with no increased colorectal cancer risk, and re-treat relapses with repeat budesonide courses"
     ]
-   ],
-   "caption": "Overview comparison matrix for lymphocytic colitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lymphocytic-colitis-real-image",
-   "title": "Lymphocytic colitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "lymphocytic_colitis-pathway",
+      "title": "Lymphocytic colitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with chronic watery, non-bloody diarrhoea similar to collagenous colitis, often with urgency and nocturnal symptoms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rectal bleeding, which is not typical and should prompt reconsideration of the diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Colonoscopy with segmental biopsies despite normal mucosal appearance, Histological quantification of intraepithelial lymphocytes and assessment for a collagen band, Coeliac serology and duodenal biopsy if indicated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Oral budesonide as first-line therapy to induce remission"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming irritable bowel syndrome and not biopsying normal-looking colonic mucosa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lymphocytic colitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lymphocytic_colitis-matrix",
+      "title": "Lymphocytic colitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with chronic watery, non-bloody diarrhoea similar to collagenous colitis, often with urgency and nocturnal symptoms",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Colonoscopy with segmental biopsies despite normal mucosal appearance, Histological quantification of intraepithelial lymphocytes",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Collagenous colitis, Coeliac disease, Irritable bowel syndrome with diarrhoea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Oral budesonide as first-line therapy to induce remission",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming irritable bowel syndrome and not biopsying normal-looking colonic mucosa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lymphocytic colitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphocytic_colitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Colonoscopy with segmental biopsies",
+          "cells": [
+            {
+              "text": "Normal-looking mucosa; diagnosis is histological"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraepithelial lymphocyte count",
+          "cells": [
+            {
+              "text": "Raised count without a collagen band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and duodenal biopsy",
+          "cells": [
+            {
+              "text": "Associated coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Autoimmune thyroid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool studies",
+          "cells": [
+            {
+              "text": "Infective causes excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_colitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Collagenous colitis",
+          "cells": [
+            {
+              "text": "Thickened subepithelial collagen band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Duodenal histology and serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritable bowel syndrome with diarrhoea",
+          "cells": [
+            {
+              "text": "Normal biopsy; biopsy is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Rectal bleeding is atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_colitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral budesonide",
+          "cells": [
+            {
+              "text": "First-line to induce remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw culprit drugs",
+          "cells": [
+            {
+              "text": "NSAIDs, proton-pump inhibitors and other agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic care",
+          "cells": [
+            {
+              "text": "Loperamide for mild symptoms; bile-acid sequestrants where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Immunomodulators or biologic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Gluten-free diet when identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphocytic_colitis-dx-mgmt",
+      "title": "Diagnosis and management of Lymphocytic colitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic watery non-bloody diarrhoea with urgency in a middle-aged or older adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rectal bleeding, weight loss or anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude coeliac disease or malignancy before continuing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Colonoscopy with segmental biopsies, coeliac serology, thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a raised intraepithelial lymphocyte count seen without a collagen band?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider collagenous colitis, coeliac disease or IBS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw culprit drugs such as NSAIDs and proton-pump inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral budesonide to induce remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Loperamide for mild symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gluten-free diet if coeliac disease is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Repeat budesonide for relapse; escalate refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with no increased colorectal cancer risk; spontaneous remission can occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

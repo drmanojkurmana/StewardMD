@@ -1,176 +1,474 @@
 {
- "id": "erectile_dysfunction",
- "name": "Erectile dysfunction",
- "aliases": [
-  "ED",
-  "impotence",
-  "erectile failure"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Erectile dysfunction is the persistent inability to achieve or maintain an erection sufficient for satisfactory sexual activity, and it is common with increasing age",
-   "Causes are broadly organic (vascular, neurogenic, hormonal, anatomical, drug-induced) or psychogenic, and the two frequently coexist",
-   "Vascular disease is the leading organic cause, so ED often shares risk factors with, and can be an early warning sign of, cardiovascular disease and diabetes",
-   "A history distinguishing gradual organic onset from sudden situational psychogenic ED is key; preserved spontaneous nocturnal or early-morning erections point toward a psychogenic cause",
-   "Assessment should review medications (antihypertensives, antidepressants, antiandrogens), lifestyle factors (smoking, alcohol, obesity), and endocrine and psychological status",
-   "First-line pharmacological management is with phosphodiesterase type 5 inhibitors, alongside optimisation of cardiovascular risk factors and lifestyle modification",
-   "PDE5 inhibitors are contraindicated with nitrate therapy because of the risk of profound hypotension",
-   "Second-line options include intracavernosal or intraurethral vasoactive agents and vacuum devices, with penile prosthesis implantation reserved for refractory cases"
+  "id": "erectile_dysfunction",
+  "name": "Erectile dysfunction",
+  "aliases": [
+    "ED",
+    "impotence",
+    "erectile failure"
   ],
-  "pathophysiology": "Penile erection depends on neurally mediated relaxation of cavernosal smooth muscle, increased arterial inflow, and veno-occlusion that traps blood within the corpora cavernosa; nitric oxide and the cyclic GMP pathway are central to this process. Erectile dysfunction arises when any of these mechanisms fails: arterial insufficiency from atherosclerosis reduces inflow, veno-occlusive dysfunction allows leak, neuropathy (for example from diabetes or pelvic surgery) impairs signalling, and hormonal deficiency (notably hypogonadism) reduces desire and erectile capacity. Psychogenic factors act through central inhibition of the erectile response. Many patients have a mixed, multifactorial aetiology.",
-  "additionalDifferentials": [
-   "Psychogenic erectile dysfunction",
-   "Vascular (arteriogenic or veno-occlusive) dysfunction",
-   "Neurogenic causes (diabetic neuropathy, pelvic surgery, spinal cord disease)",
-   "Endocrine causes (hypogonadism, hyperprolactinaemia, thyroid disease)",
-   "Drug-induced erectile dysfunction",
-   "Peyronie's disease",
-   "Reduced libido or relationship factors"
-  ],
-  "additionalInvestigations": [
-   "Fasting glucose or HbA1c and lipid profile to assess cardiovascular and metabolic risk",
-   "Morning serum testosterone, with prolactin and other hormones if deficiency is suspected",
-   "Blood pressure and cardiovascular risk assessment",
-   "Validated questionnaires such as the International Index of Erectile Function",
-   "Penile Doppler ultrasound and specialist vascular studies in selected complex or younger patients"
-  ],
-  "redFlags": [
-   "ED as a sentinel marker of undiagnosed cardiovascular disease or diabetes",
-   "Erectile dysfunction with neurological signs suggesting spinal cord or cauda equina pathology",
-   "Concurrent nitrate use, which contraindicates PDE5 inhibitors",
-   "Features suggesting a pituitary lesion (hyperprolactinaemia, visual field changes) requiring endocrine evaluation"
-  ],
-  "prognosis": "Erectile dysfunction is highly treatable in most men, with many responding to PDE5 inhibitors and risk-factor modification; prognosis depends on the underlying cause, and it should prompt evaluation and management of associated cardiovascular risk.",
-  "pitfalls": [
-   "Prescribing PDE5 inhibitors to a patient taking nitrates",
-   "Treating ED symptomatically without addressing underlying cardiovascular or metabolic disease",
-   "Overlooking hypogonadism or hyperprolactinaemia as reversible causes",
-   "Failing to consider medication side effects as a contributor",
-   "Neglecting the psychological and relationship dimensions of the problem"
-  ],
-  "references": [
-   "Smith & Tanagho's General Urology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifestyle modification with smoking cessation, weight reduction, regular exercise and moderation of alcohol, alongside optimisation of cardiovascular and metabolic risk factors",
-   "Review of contributing medications such as antihypertensives, antidepressants and antiandrogens, substituting where feasible",
-   "First-line pharmacological treatment with phosphodiesterase type 5 inhibitors",
-   "Testosterone replacement where hypogonadism is confirmed biochemically",
-   "Psychosexual counselling and cognitive behavioural approaches where a psychogenic component is prominent",
-   "Second-line therapy with intracavernosal or intraurethral alprostadil, or a vacuum erection device, when oral agents fail",
-   "Penile prosthesis implantation for refractory disease unresponsive to other measures",
-   "Cardiovascular risk assessment and referral, as erectile dysfunction may be an early marker of occult vascular disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "erectile_dysfunction-pathway",
-   "title": "Erectile dysfunction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Erectile dysfunction is the persistent inability to achieve or maintain an erection sufficient for satisfactory sexual activity, and it is common with increasing age",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: ED as a sentinel marker of undiagnosed cardiovascular disease or diabetes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting glucose or HbA1c and lipid profile to assess cardiovascular and metabolic risk, Morning serum testosterone, with prolactin and other hormones if deficiency is suspected, Blood pressure and cardiovascular risk"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifestyle modification with smoking cessation, weight reduction, regular exercise and moderation of alcohol, alongside optimisation of cardiovascular and metabolic risk factors"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing PDE5 inhibitors to a patient taking nitrates"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of erectile dysfunction."
-  }
- ],
- "tables": [
-  {
-   "id": "erectile_dysfunction-matrix",
-   "title": "Erectile dysfunction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Erectile dysfunction is the persistent inability to achieve or maintain an erection sufficient for satisfactory sexual activity,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Erectile dysfunction is the persistent inability to achieve or maintain an erection sufficient for satisfactory sexual activity, and it is common with increasing age",
+      "Causes are broadly organic (vascular, neurogenic, hormonal, anatomical, drug-induced) or psychogenic, and the two frequently coexist",
+      "Vascular disease is the leading organic cause, so ED often shares risk factors with, and can be an early warning sign of, cardiovascular disease and diabetes",
+      "A history distinguishing gradual organic onset from sudden situational psychogenic ED is key; preserved spontaneous nocturnal or early-morning erections point toward a psychogenic cause",
+      "Assessment should review medications (antihypertensives, antidepressants, antiandrogens), lifestyle factors (smoking, alcohol, obesity), and endocrine and psychological status",
+      "First-line pharmacological management is with phosphodiesterase type 5 inhibitors, alongside optimisation of cardiovascular risk factors and lifestyle modification",
+      "PDE5 inhibitors are contraindicated with nitrate therapy because of the risk of profound hypotension",
+      "Second-line options include intracavernosal or intraurethral vasoactive agents and vacuum devices, with penile prosthesis implantation reserved for refractory cases"
     ],
-    [
-     "Key Investigations",
-     "Fasting glucose or HbA1c and lipid profile to assess cardiovascular and metabolic risk, Morning serum testosterone, with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Penile erection depends on neurally mediated relaxation of cavernosal smooth muscle, increased arterial inflow, and veno-occlusion that traps blood within the corpora cavernosa; nitric oxide and the cyclic GMP pathway are central to this process. Erectile dysfunction arises when any of these mechanisms fails: arterial insufficiency from atherosclerosis reduces inflow, veno-occlusive dysfunction allows leak, neuropathy (for example from diabetes or pelvic surgery) impairs signalling, and hormonal deficiency (notably hypogonadism) reduces desire and erectile capacity. Psychogenic factors act through central inhibition of the erectile response. Many patients have a mixed, multifactorial aetiology.",
+    "additionalDifferentials": [
+      "Psychogenic erectile dysfunction",
+      "Vascular (arteriogenic or veno-occlusive) dysfunction",
+      "Neurogenic causes (diabetic neuropathy, pelvic surgery, spinal cord disease)",
+      "Endocrine causes (hypogonadism, hyperprolactinaemia, thyroid disease)",
+      "Drug-induced erectile dysfunction",
+      "Peyronie's disease",
+      "Reduced libido or relationship factors"
     ],
-    [
-     "Primary Differentials",
-     "Psychogenic erectile dysfunction, Vascular (arteriogenic or veno-occlusive) dysfunction, Neurogenic causes (diabetic neuropathy,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting glucose or HbA1c and lipid profile to assess cardiovascular and metabolic risk",
+      "Morning serum testosterone, with prolactin and other hormones if deficiency is suspected",
+      "Blood pressure and cardiovascular risk assessment",
+      "Validated questionnaires such as the International Index of Erectile Function",
+      "Penile Doppler ultrasound and specialist vascular studies in selected complex or younger patients"
     ],
-    [
-     "Management Strategy",
-     "Lifestyle modification with smoking cessation, weight reduction, regular exercise and moderation of alcohol, alongside",
-     "Core treatment modality"
+    "redFlags": [
+      "ED as a sentinel marker of undiagnosed cardiovascular disease or diabetes",
+      "Erectile dysfunction with neurological signs suggesting spinal cord or cauda equina pathology",
+      "Concurrent nitrate use, which contraindicates PDE5 inhibitors",
+      "Features suggesting a pituitary lesion (hyperprolactinaemia, visual field changes) requiring endocrine evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing PDE5 inhibitors to a patient taking nitrates",
-     "Prevent diagnostic or management error"
+    "prognosis": "Erectile dysfunction is highly treatable in most men, with many responding to PDE5 inhibitors and risk-factor modification; prognosis depends on the underlying cause, and it should prompt evaluation and management of associated cardiovascular risk.",
+    "pitfalls": [
+      "Prescribing PDE5 inhibitors to a patient taking nitrates",
+      "Treating ED symptomatically without addressing underlying cardiovascular or metabolic disease",
+      "Overlooking hypogonadism or hyperprolactinaemia as reversible causes",
+      "Failing to consider medication side effects as a contributor",
+      "Neglecting the psychological and relationship dimensions of the problem"
+    ],
+    "references": [
+      "Smith & Tanagho's General Urology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifestyle modification with smoking cessation, weight reduction, regular exercise and moderation of alcohol, alongside optimisation of cardiovascular and metabolic risk factors",
+      "Review of contributing medications such as antihypertensives, antidepressants and antiandrogens, substituting where feasible",
+      "First-line pharmacological treatment with phosphodiesterase type 5 inhibitors",
+      "Testosterone replacement where hypogonadism is confirmed biochemically",
+      "Psychosexual counselling and cognitive behavioural approaches where a psychogenic component is prominent",
+      "Second-line therapy with intracavernosal or intraurethral alprostadil, or a vacuum erection device, when oral agents fail",
+      "Penile prosthesis implantation for refractory disease unresponsive to other measures",
+      "Cardiovascular risk assessment and referral, as erectile dysfunction may be an early marker of occult vascular disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for erectile dysfunction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "erectile-dysfunction-real-image",
-   "title": "Erectile dysfunction: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "erectile_dysfunction-pathway",
+      "title": "Erectile dysfunction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Erectile dysfunction is the persistent inability to achieve or maintain an erection sufficient for satisfactory sexual activity, and it is common with increasing age",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: ED as a sentinel marker of undiagnosed cardiovascular disease or diabetes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting glucose or HbA1c and lipid profile to assess cardiovascular and metabolic risk, Morning serum testosterone, with prolactin and other hormones if deficiency is suspected, Blood pressure and cardiovascular risk"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifestyle modification with smoking cessation, weight reduction, regular exercise and moderation of alcohol, alongside optimisation of cardiovascular and metabolic risk factors"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing PDE5 inhibitors to a patient taking nitrates"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of erectile dysfunction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "erectile_dysfunction-matrix",
+      "title": "Erectile dysfunction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Erectile dysfunction is the persistent inability to achieve or maintain an erection sufficient for satisfactory sexual activity,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting glucose or HbA1c and lipid profile to assess cardiovascular and metabolic risk, Morning serum testosterone, with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Psychogenic erectile dysfunction, Vascular (arteriogenic or veno-occlusive) dysfunction, Neurogenic causes (diabetic neuropathy,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifestyle modification with smoking cessation, weight reduction, regular exercise and moderation of alcohol, alongside",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing PDE5 inhibitors to a patient taking nitrates",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for erectile dysfunction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "erectile_dysfunction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting glucose or HbA1c and lipid profile",
+          "cells": [
+            {
+              "text": "Cardiovascular and metabolic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morning serum testosterone, with prolactin if deficiency suspected",
+          "cells": [
+            {
+              "text": "Hypogonadism or hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure and cardiovascular risk assessment",
+          "cells": [
+            {
+              "text": "Vascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "International Index of Erectile Function questionnaire",
+          "cells": [
+            {
+              "text": "Validated measure of erectile function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Selected complex or younger patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erectile_dysfunction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychogenic erectile dysfunction",
+          "cells": [
+            {
+              "text": "Sudden, situational onset, whereas organic dysfunction develops gradually"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic causes (diabetic neuropathy, pelvic surgery, spinal cord disease)",
+          "cells": [
+            {
+              "text": "Neurological signs suggest spinal or cauda equina pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "erectile_dysfunction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle modification",
+          "cells": [
+            {
+              "text": "Smoking cessation, weight reduction, exercise and alcohol moderation, with cardiovascular and metabolic optimisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Antihypertensives, antidepressants and antiandrogens; substitution where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphodiesterase type 5 inhibitors",
+          "cells": [
+            {
+              "text": "First-line pharmacological treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone replacement",
+          "cells": [
+            {
+              "text": "Where hypogonadism is confirmed biochemically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosexual counselling",
+          "cells": [
+            {
+              "text": "Cognitive behavioural approaches where a psychogenic component is prominent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alprostadil or vacuum erection device",
+          "cells": [
+            {
+              "text": "Second-line when oral agents fail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile prosthesis",
+          "cells": [
+            {
+              "text": "Refractory disease unresponsive to other measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk referral",
+          "cells": [
+            {
+              "text": "Erectile dysfunction may be an early marker of occult vascular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "erectile_dysfunction-dx-mgmt",
+      "title": "Diagnosis and management of Erectile dysfunction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent inability to achieve or maintain an erection in an adult man",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (neurological signs, nitrate use, pituitary features, cardiovascular signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiovascular risk assessment, or neurology or endocrine referral as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Glucose or HbA1c, lipids, morning testosterone, blood pressure and IIEF",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gradual onset with organic risk factors or hypogonadism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Psychosexual assessment for a predominantly psychogenic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifestyle change, smoking cessation and cardiometabolic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Substitute medications with erectile side effects",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "PDE5 inhibitor first-line; avoid with nitrates",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Testosterone replacement if hypogonadism is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Alprostadil, vacuum device or penile prosthesis when oral therapy fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Highly treatable; many men respond to PDE5 inhibitors and risk-factor change",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

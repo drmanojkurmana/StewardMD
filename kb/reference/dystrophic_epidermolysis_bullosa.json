@@ -1,179 +1,477 @@
 {
- "id": "dystrophic_epidermolysis_bullosa",
- "name": "Dystrophic epidermolysis bullosa",
- "aliases": [
-  "DEB",
-  "COL7A1",
-  "type VII collagen deficiency",
-  "recessive dystrophic epidermolysis bullosa",
-  "RDEB",
-  "dominant dystrophic epidermolysis bullosa",
-  "DDEB"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by mutations in COL7A1, which encodes type VII collagen, the main component of the anchoring fibrils that secure the epidermis to the dermis",
-   "Blistering occurs below the lamina densa (sublamina densa) in the superficial dermis, so healing characteristically produces scarring and milia",
-   "It occurs in dominant (usually milder) and recessive (often severe) forms, with the severe generalised recessive type causing the most disabling disease",
-   "Repeated blistering and scarring of the hands and feet leads to fusion of the digits and a mitten (pseudosyndactyly) deformity in severe recessive disease",
-   "Mucosal involvement causes oesophageal strictures, dysphagia, and malnutrition, and dental and ocular complications are common",
-   "Chronic non-healing wounds in severe recessive disease carry a high risk of aggressive cutaneous squamous cell carcinoma, a leading cause of death in adulthood",
-   "Management is multidisciplinary and supportive, with meticulous wound care, nutritional support, contracture prevention, and vigilant skin cancer surveillance"
+  "id": "dystrophic_epidermolysis_bullosa",
+  "name": "Dystrophic epidermolysis bullosa",
+  "aliases": [
+    "DEB",
+    "COL7A1",
+    "type VII collagen deficiency",
+    "recessive dystrophic epidermolysis bullosa",
+    "RDEB",
+    "dominant dystrophic epidermolysis bullosa",
+    "DDEB"
   ],
-  "pathophysiology": "Type VII collagen, encoded by COL7A1, forms the anchoring fibrils that tether the lamina densa of the basement membrane to the underlying papillary dermis. In dystrophic epidermolysis bullosa, mutations reduce or abolish functional type VII collagen so anchoring fibrils are deficient or absent, and the skin separates beneath the lamina densa in the superficial dermis in response to minor trauma. Because the split lies within the dermis, repair occurs with fibrosis, producing scarring, milia, and progressive contractures rather than clean healing. Dominant mutations typically retain more residual collagen function and cause milder disease, whereas recessive loss-of-function mutations produce severe generalised disease with extensive scarring, mucosal strictures, and the chronic wounds that predispose to squamous cell carcinoma.",
-  "additionalDifferentials": [
-   "Epidermolysis bullosa simplex",
-   "Junctional epidermolysis bullosa",
-   "Epidermolysis bullosa acquisita (autoimmune, also targeting type VII collagen)",
-   "Porphyria cutanea tarda and other blistering photodermatoses",
-   "Bullous pemphigoid and other autoimmune blistering diseases",
-   "Chronic wound conditions with scarring"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with immunofluorescence antigen mapping localising the split below the lamina densa",
-   "Transmission electron microscopy assessing anchoring fibrils",
-   "Molecular genetic testing of COL7A1",
-   "Nutritional assessment with monitoring for anaemia and micronutrient deficiency",
-   "Contrast swallow or endoscopy to evaluate oesophageal strictures",
-   "Regular skin surveillance and biopsy of suspicious non-healing lesions for squamous cell carcinoma"
-  ],
-  "redFlags": [
-   "A new, enlarging, or non-healing indurated lesion suspicious for cutaneous squamous cell carcinoma",
-   "Progressive dysphagia and weight loss from oesophageal strictures",
-   "Severe anaemia and failure to thrive from chronic wounds and poor intake",
-   "Progressive pseudosyndactyly and contractures impairing function"
-  ],
-  "prognosis": "The dominant forms are generally compatible with a near-normal life expectancy, whereas severe generalised recessive disease is disabling, with progressive contractures, strictures, and a markedly increased risk of aggressive squamous cell carcinoma that is the leading cause of premature death.",
-  "pitfalls": [
-   "Failing to institute skin cancer surveillance in severe recessive disease",
-   "Overlooking oesophageal strictures as a cause of malnutrition",
-   "Not preventing hand and foot contractures and pseudosyndactyly with early therapy and dressings",
-   "Confusing dystrophic epidermolysis bullosa with the autoimmune condition epidermolysis bullosa acquisita",
-   "Underestimating the multidisciplinary nutritional, dental, and psychological support required"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide meticulous wound care with atraumatic non-adherent dressings, blister lancing and infection control to protect the fragile sub-lamina-densa skin",
-   "Adopt skin-protective handling and trauma avoidance to minimise new blistering",
-   "Support nutrition with dietitian input, correcting anaemia and micronutrient deficiency arising from chronic wounds and poor intake",
-   "Manage oesophageal strictures with dilatation and a soft diet, and provide regular dental and ocular surveillance and care",
-   "Undertake regular skin surveillance with biopsy of suspicious non-healing lesions for aggressive cutaneous squamous cell carcinoma",
-   "Control pain and itch and manage pseudosyndactyly and contractures with physiotherapy and hand surgery",
-   "Coordinate care within a specialist epidermolysis bullosa multidisciplinary team and consider emerging gene- and cell-directed therapies",
-   "Offer genetic counselling and family testing given COL7A1 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dystrophic_epidermolysis_bullosa-pathway",
-   "title": "Dystrophic epidermolysis bullosa: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by mutations in COL7A1, which encodes type VII collagen, the main component of the anchoring fibrils that secure the epidermis to the dermis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A new, enlarging, or non-healing indurated lesion suspicious for cutaneous squamous cell carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with immunofluorescence antigen mapping localising the split below the lamina densa, Transmission electron microscopy assessing anchoring fibrils, Molecular genetic testing of COL7A1"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide meticulous wound care with atraumatic non-adherent dressings, blister lancing and infection control to protect the fragile sub-lamina-densa skin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to institute skin cancer surveillance in severe recessive disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dystrophic epidermolysis bullosa."
-  }
- ],
- "tables": [
-  {
-   "id": "dystrophic_epidermolysis_bullosa-matrix",
-   "title": "Dystrophic epidermolysis bullosa: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by mutations in COL7A1, which encodes type VII collagen, the main component of the anchoring fibrils that secure the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by mutations in COL7A1, which encodes type VII collagen, the main component of the anchoring fibrils that secure the epidermis to the dermis",
+      "Blistering occurs below the lamina densa (sublamina densa) in the superficial dermis, so healing characteristically produces scarring and milia",
+      "It occurs in dominant (usually milder) and recessive (often severe) forms, with the severe generalised recessive type causing the most disabling disease",
+      "Repeated blistering and scarring of the hands and feet leads to fusion of the digits and a mitten (pseudosyndactyly) deformity in severe recessive disease",
+      "Mucosal involvement causes oesophageal strictures, dysphagia, and malnutrition, and dental and ocular complications are common",
+      "Chronic non-healing wounds in severe recessive disease carry a high risk of aggressive cutaneous squamous cell carcinoma, a leading cause of death in adulthood",
+      "Management is multidisciplinary and supportive, with meticulous wound care, nutritional support, contracture prevention, and vigilant skin cancer surveillance"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with immunofluorescence antigen mapping localising the split below the lamina densa, Transmission electron microscopy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Type VII collagen, encoded by COL7A1, forms the anchoring fibrils that tether the lamina densa of the basement membrane to the underlying papillary dermis. In dystrophic epidermolysis bullosa, mutations reduce or abolish functional type VII collagen so anchoring fibrils are deficient or absent, and the skin separates beneath the lamina densa in the superficial dermis in response to minor trauma. Because the split lies within the dermis, repair occurs with fibrosis, producing scarring, milia, and progressive contractures rather than clean healing. Dominant mutations typically retain more residual collagen function and cause milder disease, whereas recessive loss-of-function mutations produce severe generalised disease with extensive scarring, mucosal strictures, and the chronic wounds that predispose to squamous cell carcinoma.",
+    "additionalDifferentials": [
+      "Epidermolysis bullosa simplex",
+      "Junctional epidermolysis bullosa",
+      "Epidermolysis bullosa acquisita (autoimmune, also targeting type VII collagen)",
+      "Porphyria cutanea tarda and other blistering photodermatoses",
+      "Bullous pemphigoid and other autoimmune blistering diseases",
+      "Chronic wound conditions with scarring"
     ],
-    [
-     "Primary Differentials",
-     "Epidermolysis bullosa simplex, Junctional epidermolysis bullosa, Epidermolysis bullosa acquisita (autoimmune, also targeting type",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with immunofluorescence antigen mapping localising the split below the lamina densa",
+      "Transmission electron microscopy assessing anchoring fibrils",
+      "Molecular genetic testing of COL7A1",
+      "Nutritional assessment with monitoring for anaemia and micronutrient deficiency",
+      "Contrast swallow or endoscopy to evaluate oesophageal strictures",
+      "Regular skin surveillance and biopsy of suspicious non-healing lesions for squamous cell carcinoma"
     ],
-    [
-     "Management Strategy",
-     "Provide meticulous wound care with atraumatic non-adherent dressings, blister lancing and infection control to protect the",
-     "Core treatment modality"
+    "redFlags": [
+      "A new, enlarging, or non-healing indurated lesion suspicious for cutaneous squamous cell carcinoma",
+      "Progressive dysphagia and weight loss from oesophageal strictures",
+      "Severe anaemia and failure to thrive from chronic wounds and poor intake",
+      "Progressive pseudosyndactyly and contractures impairing function"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to institute skin cancer surveillance in severe recessive disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "The dominant forms are generally compatible with a near-normal life expectancy, whereas severe generalised recessive disease is disabling, with progressive contractures, strictures, and a markedly increased risk of aggressive squamous cell carcinoma that is the leading cause of premature death.",
+    "pitfalls": [
+      "Failing to institute skin cancer surveillance in severe recessive disease",
+      "Overlooking oesophageal strictures as a cause of malnutrition",
+      "Not preventing hand and foot contractures and pseudosyndactyly with early therapy and dressings",
+      "Confusing dystrophic epidermolysis bullosa with the autoimmune condition epidermolysis bullosa acquisita",
+      "Underestimating the multidisciplinary nutritional, dental, and psychological support required"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide meticulous wound care with atraumatic non-adherent dressings, blister lancing and infection control to protect the fragile sub-lamina-densa skin",
+      "Adopt skin-protective handling and trauma avoidance to minimise new blistering",
+      "Support nutrition with dietitian input, correcting anaemia and micronutrient deficiency arising from chronic wounds and poor intake",
+      "Manage oesophageal strictures with dilatation and a soft diet, and provide regular dental and ocular surveillance and care",
+      "Undertake regular skin surveillance with biopsy of suspicious non-healing lesions for aggressive cutaneous squamous cell carcinoma",
+      "Control pain and itch and manage pseudosyndactyly and contractures with physiotherapy and hand surgery",
+      "Coordinate care within a specialist epidermolysis bullosa multidisciplinary team and consider emerging gene- and cell-directed therapies",
+      "Offer genetic counselling and family testing given COL7A1 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for dystrophic epidermolysis bullosa."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dystrophic-epidermolysis-bullosa-real-image",
-   "title": "Dystrophic epidermolysis bullosa: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "dystrophic_epidermolysis_bullosa-pathway",
+      "title": "Dystrophic epidermolysis bullosa: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by mutations in COL7A1, which encodes type VII collagen, the main component of the anchoring fibrils that secure the epidermis to the dermis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A new, enlarging, or non-healing indurated lesion suspicious for cutaneous squamous cell carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with immunofluorescence antigen mapping localising the split below the lamina densa, Transmission electron microscopy assessing anchoring fibrils, Molecular genetic testing of COL7A1"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide meticulous wound care with atraumatic non-adherent dressings, blister lancing and infection control to protect the fragile sub-lamina-densa skin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to institute skin cancer surveillance in severe recessive disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dystrophic epidermolysis bullosa."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dystrophic_epidermolysis_bullosa-matrix",
+      "title": "Dystrophic epidermolysis bullosa: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by mutations in COL7A1, which encodes type VII collagen, the main component of the anchoring fibrils that secure the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with immunofluorescence antigen mapping localising the split below the lamina densa, Transmission electron microscopy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epidermolysis bullosa simplex, Junctional epidermolysis bullosa, Epidermolysis bullosa acquisita (autoimmune, also targeting type",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide meticulous wound care with atraumatic non-adherent dressings, blister lancing and infection control to protect the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to institute skin cancer surveillance in severe recessive disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dystrophic epidermolysis bullosa."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology in General Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dystrophic_epidermolysis_bullosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with immunofluorescence antigen mapping",
+          "cells": [
+            {
+              "text": "Split below the lamina densa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transmission electron microscopy",
+          "cells": [
+            {
+              "text": "Anchoring fibril assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of COL7A1",
+          "cells": [
+            {
+              "text": "COL7A1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment with anaemia and micronutrient monitoring",
+          "cells": [
+            {
+              "text": "Anaemia and micronutrient deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast swallow or endoscopy",
+          "cells": [
+            {
+              "text": "Oesophageal strictures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dystrophic_epidermolysis_bullosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidermolysis bullosa simplex",
+          "cells": [
+            {
+              "text": "Blistering within the epidermis, not below the lamina densa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidermolysis bullosa acquisita",
+          "cells": [
+            {
+              "text": "Autoimmune disease that also targets type VII collagen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bullous pemphigoid",
+          "cells": [
+            {
+              "text": "Autoimmune blistering disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dystrophic_epidermolysis_bullosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Atraumatic wound care",
+          "cells": [
+            {
+              "text": "Non-adherent dressings, blister lancing and infection control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin-protective handling",
+          "cells": [
+            {
+              "text": "Trauma avoidance to minimise new blistering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Dietitian input; correct anaemia and micronutrient deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal strictures",
+          "cells": [
+            {
+              "text": "Dilatation and soft diet; dental and ocular care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin cancer surveillance",
+          "cells": [
+            {
+              "text": "Biopsy of suspicious non-healing lesions for squamous carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain, itch and contractures",
+          "cells": [
+            {
+              "text": "Physiotherapy and hand surgery for pseudosyndactyly and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "COL7A1 inheritance and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dystrophic_epidermolysis_bullosa-dx-mgmt",
+      "title": "Diagnosis and management of Dystrophic epidermolysis bullosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dystrophic EB: chronic blistering with scarring and pseudosyndactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (non-healing lesion, progressive dysphagia, severe anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy of a non-healing indurated lesion for squamous carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with immunofluorescence mapping; COL7A1 testing; nutrition; swallow study",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a split below the lamina densa with COL7A1 variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider simplex, junctional EB, acquired EB or autoimmune blistering disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Atraumatic non-adherent dressings, blister lancing and infection control",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Skin-protective handling to minimise new blistering",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietitian input; correct anaemia and micronutrient deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dilate oesophageal strictures; regular skin surveillance biopsy for carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and hand surgery for contractures; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Dominant forms near-normal life; severe recessive disease is disabling with cancer risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

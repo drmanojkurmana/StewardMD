@@ -1,175 +1,471 @@
 {
- "id": "short_bowel_syndrome",
- "name": "Short bowel syndrome",
- "aliases": [
-  "SBS",
-  "short gut syndrome",
-  "intestinal failure"
- ],
- "class": "non_infective",
- "system": "GI / Hepatology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / AASLD & ACG",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A malabsorptive state resulting from loss of functional small-intestinal length, usually after extensive surgical resection for conditions such as mesenteric ischaemia, Crohn disease, trauma, or radiation injury",
-   "Clinical severity depends on the length and site of remaining bowel, whether the ileocaecal valve and colon are preserved, and the health of the residual intestine",
-   "The main manifestations are diarrhoea, steatorrhoea, dehydration, electrolyte disturbance, weight loss, and specific nutrient deficiencies",
-   "Loss of the terminal ileum impairs absorption of vitamin B12 and bile salts, and bile-salt spillage into the colon can worsen diarrhoea and predispose to gallstones",
-   "An intact colon is nutritionally valuable because it salvages energy by fermenting malabsorbed carbohydrate into short-chain fatty acids",
-   "Over months to years the residual bowel undergoes adaptation, increasing absorptive capacity, so nutritional needs may lessen with time",
-   "Management is staged: fluid and electrolyte correction, parenteral nutrition when needed, gradual introduction of enteral feeding to drive adaptation, and dietary modification",
-   "Long-term parenteral nutrition carries important complications including catheter-related bloodstream infection, venous thrombosis, and intestinal-failure-associated liver disease",
-   "Enterohormonal therapy (such as GLP-2 analogues) and, in selected refractory cases, intestinal transplantation are options for those dependent on parenteral support"
+  "id": "short_bowel_syndrome",
+  "name": "Short bowel syndrome",
+  "aliases": [
+    "SBS",
+    "short gut syndrome",
+    "intestinal failure"
   ],
-  "pathophysiology": "Short bowel syndrome arises when the absorptive surface of the small intestine is reduced below the level needed to maintain nutrition and hydration, most often after massive resection. The functional consequences depend on which segment is lost: jejunal loss reduces overall absorptive surface, while ileal loss additionally impairs vitamin B12 and bile-salt reabsorption, disrupting the enterohepatic circulation and causing bile-salt diarrhoea and fat malabsorption. Loss of the ileocaecal valve accelerates transit and predisposes to small-intestinal bacterial overgrowth. Rapid transit and reduced surface lead to fluid, electrolyte, and nutrient losses. Over time the remnant intestine adapts through mucosal hyperplasia and slowed transit, partially restoring absorptive capacity.",
-  "additionalDifferentials": [
-   "Chronic pancreatic exocrine insufficiency",
-   "Coeliac disease and other mucosal malabsorptive disorders",
-   "Small-intestinal bacterial overgrowth",
-   "Inflammatory bowel disease with active malabsorption",
-   "Chronic infective or inflammatory diarrhoea",
-   "Enteric fistula causing functional bowel loss"
-  ],
-  "additionalInvestigations": [
-   "Assessment of remaining bowel anatomy and length from operative records and imaging",
-   "Nutritional and electrolyte panel including magnesium, calcium, and trace elements",
-   "Fat-soluble vitamin, vitamin B12, and iron status",
-   "Monitoring of fluid balance and stool or stoma output",
-   "Liver function monitoring in patients on parenteral nutrition and evaluation for bacterial overgrowth"
-  ],
-  "redFlags": [
-   "Severe dehydration with acute kidney injury or dangerous electrolyte disturbances",
-   "Catheter-related bloodstream infection or sepsis in patients on parenteral nutrition",
-   "Progressive intestinal-failure-associated liver disease or cholestasis",
-   "Central venous thrombosis threatening long-term access for parenteral nutrition"
-  ],
-  "prognosis": "Outlook depends on residual bowel length and anatomy and on adaptation. Many patients eventually achieve enteral autonomy, while those with very short remnants or absent colon may need lifelong parenteral nutrition, whose complications (liver disease, line sepsis, thrombosis) drive much of the long-term morbidity and mortality.",
-  "pitfalls": [
-   "Underestimating fluid and electrolyte losses, particularly magnesium, in high-output patients",
-   "Withholding enteral nutrition entirely and thereby delaying adaptation",
-   "Overlooking vitamin B12 and fat-soluble vitamin deficiency after ileal resection",
-   "Missing small-intestinal bacterial overgrowth or catheter sepsis as causes of deterioration"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "AASLD/ACG guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Parenteral nutrition and intravenous fluid and electrolyte support initially to prevent dehydration and malnutrition, weaning as intestinal adaptation allows",
-   "Structured enteral and oral nutrition to stimulate adaptation, with the diet tailored to remnant anatomy and whether the colon is in continuity",
-   "Antidiarrhoeal and antisecretory agents (loperamide, and proton pump inhibitors for gastric hypersecretion) to slow transit and reduce output",
-   "Bile-acid sequestrants for bile-salt diarrhoea and parenteral vitamin B12 replacement after terminal ileal loss",
-   "The GLP-2 analogue teduglutide to enhance intestinal absorption and reduce parenteral nutrition dependence in selected patients",
-   "Correct and monitor micronutrient, fat-soluble vitamin, and trace-element deficiencies",
-   "Surveillance for parenteral-nutrition complications (intestinal failure-associated liver disease, catheter sepsis, thrombosis) and small-intestinal bacterial overgrowth",
-   "Manage in a specialist intestinal failure multidisciplinary team, considering surgical lengthening or intestinal transplantation for refractory cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "short_bowel_syndrome-pathway",
-   "title": "Short bowel syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A malabsorptive state resulting from loss of functional small-intestinal length, usually after extensive surgical resection for conditions such as mesenteric ischaemia, Crohn disease, trauma, or radiation injury",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe dehydration with acute kidney injury or dangerous electrolyte disturbances",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assessment of remaining bowel anatomy and length from operative records and imaging, Nutritional and electrolyte panel including magnesium, calcium, and trace elements, Fat-soluble vitamin, vitamin B12, and iron status"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Parenteral nutrition and intravenous fluid and electrolyte support initially to prevent dehydration and malnutrition, weaning as intestinal adaptation allows"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating fluid and electrolyte losses, particularly magnesium, in high-output patients"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of short bowel syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "short_bowel_syndrome-matrix",
-   "title": "Short bowel syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A malabsorptive state resulting from loss of functional small-intestinal length, usually after extensive surgical resection for",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "GI / Hepatology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / AASLD & ACG",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A malabsorptive state resulting from loss of functional small-intestinal length, usually after extensive surgical resection for conditions such as mesenteric ischaemia, Crohn disease, trauma, or radiation injury",
+      "Clinical severity depends on the length and site of remaining bowel, whether the ileocaecal valve and colon are preserved, and the health of the residual intestine",
+      "The main manifestations are diarrhoea, steatorrhoea, dehydration, electrolyte disturbance, weight loss, and specific nutrient deficiencies",
+      "Loss of the terminal ileum impairs absorption of vitamin B12 and bile salts, and bile-salt spillage into the colon can worsen diarrhoea and predispose to gallstones",
+      "An intact colon is nutritionally valuable because it salvages energy by fermenting malabsorbed carbohydrate into short-chain fatty acids",
+      "Over months to years the residual bowel undergoes adaptation, increasing absorptive capacity, so nutritional needs may lessen with time",
+      "Management is staged: fluid and electrolyte correction, parenteral nutrition when needed, gradual introduction of enteral feeding to drive adaptation, and dietary modification",
+      "Long-term parenteral nutrition carries important complications including catheter-related bloodstream infection, venous thrombosis, and intestinal-failure-associated liver disease",
+      "Enterohormonal therapy (such as GLP-2 analogues) and, in selected refractory cases, intestinal transplantation are options for those dependent on parenteral support"
     ],
-    [
-     "Key Investigations",
-     "Assessment of remaining bowel anatomy and length from operative records and imaging, Nutritional and electrolyte panel including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Short bowel syndrome arises when the absorptive surface of the small intestine is reduced below the level needed to maintain nutrition and hydration, most often after massive resection. The functional consequences depend on which segment is lost: jejunal loss reduces overall absorptive surface, while ileal loss additionally impairs vitamin B12 and bile-salt reabsorption, disrupting the enterohepatic circulation and causing bile-salt diarrhoea and fat malabsorption. Loss of the ileocaecal valve accelerates transit and predisposes to small-intestinal bacterial overgrowth. Rapid transit and reduced surface lead to fluid, electrolyte, and nutrient losses. Over time the remnant intestine adapts through mucosal hyperplasia and slowed transit, partially restoring absorptive capacity.",
+    "additionalDifferentials": [
+      "Chronic pancreatic exocrine insufficiency",
+      "Coeliac disease and other mucosal malabsorptive disorders",
+      "Small-intestinal bacterial overgrowth",
+      "Inflammatory bowel disease with active malabsorption",
+      "Chronic infective or inflammatory diarrhoea",
+      "Enteric fistula causing functional bowel loss"
     ],
-    [
-     "Primary Differentials",
-     "Chronic pancreatic exocrine insufficiency, Coeliac disease and other mucosal malabsorptive disorders, Small-intestinal bacterial",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assessment of remaining bowel anatomy and length from operative records and imaging",
+      "Nutritional and electrolyte panel including magnesium, calcium, and trace elements",
+      "Fat-soluble vitamin, vitamin B12, and iron status",
+      "Monitoring of fluid balance and stool or stoma output",
+      "Liver function monitoring in patients on parenteral nutrition and evaluation for bacterial overgrowth"
     ],
-    [
-     "Management Strategy",
-     "Parenteral nutrition and intravenous fluid and electrolyte support initially to prevent dehydration and malnutrition, weaning as",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe dehydration with acute kidney injury or dangerous electrolyte disturbances",
+      "Catheter-related bloodstream infection or sepsis in patients on parenteral nutrition",
+      "Progressive intestinal-failure-associated liver disease or cholestasis",
+      "Central venous thrombosis threatening long-term access for parenteral nutrition"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating fluid and electrolyte losses, particularly magnesium, in high-output patients",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook depends on residual bowel length and anatomy and on adaptation. Many patients eventually achieve enteral autonomy, while those with very short remnants or absent colon may need lifelong parenteral nutrition, whose complications (liver disease, line sepsis, thrombosis) drive much of the long-term morbidity and mortality.",
+    "pitfalls": [
+      "Underestimating fluid and electrolyte losses, particularly magnesium, in high-output patients",
+      "Withholding enteral nutrition entirely and thereby delaying adaptation",
+      "Overlooking vitamin B12 and fat-soluble vitamin deficiency after ileal resection",
+      "Missing small-intestinal bacterial overgrowth or catheter sepsis as causes of deterioration"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "AASLD/ACG guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Parenteral nutrition and intravenous fluid and electrolyte support initially to prevent dehydration and malnutrition, weaning as intestinal adaptation allows",
+      "Structured enteral and oral nutrition to stimulate adaptation, with the diet tailored to remnant anatomy and whether the colon is in continuity",
+      "Antidiarrhoeal and antisecretory agents (loperamide, and proton pump inhibitors for gastric hypersecretion) to slow transit and reduce output",
+      "Bile-acid sequestrants for bile-salt diarrhoea and parenteral vitamin B12 replacement after terminal ileal loss",
+      "The GLP-2 analogue teduglutide to enhance intestinal absorption and reduce parenteral nutrition dependence in selected patients",
+      "Correct and monitor micronutrient, fat-soluble vitamin, and trace-element deficiencies",
+      "Surveillance for parenteral-nutrition complications (intestinal failure-associated liver disease, catheter sepsis, thrombosis) and small-intestinal bacterial overgrowth",
+      "Manage in a specialist intestinal failure multidisciplinary team, considering surgical lengthening or intestinal transplantation for refractory cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for short bowel syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "short-bowel-syndrome-real-image",
-   "title": "Short bowel syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "short_bowel_syndrome-pathway",
+      "title": "Short bowel syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A malabsorptive state resulting from loss of functional small-intestinal length, usually after extensive surgical resection for conditions such as mesenteric ischaemia, Crohn disease, trauma, or radiation injury",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe dehydration with acute kidney injury or dangerous electrolyte disturbances",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assessment of remaining bowel anatomy and length from operative records and imaging, Nutritional and electrolyte panel including magnesium, calcium, and trace elements, Fat-soluble vitamin, vitamin B12, and iron status"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Parenteral nutrition and intravenous fluid and electrolyte support initially to prevent dehydration and malnutrition, weaning as intestinal adaptation allows"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating fluid and electrolyte losses, particularly magnesium, in high-output patients"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of short bowel syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "short_bowel_syndrome-matrix",
+      "title": "Short bowel syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A malabsorptive state resulting from loss of functional small-intestinal length, usually after extensive surgical resection for",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assessment of remaining bowel anatomy and length from operative records and imaging, Nutritional and electrolyte panel including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic pancreatic exocrine insufficiency, Coeliac disease and other mucosal malabsorptive disorders, Small-intestinal bacterial",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Parenteral nutrition and intravenous fluid and electrolyte support initially to prevent dehydration and malnutrition, weaning as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating fluid and electrolyte losses, particularly magnesium, in high-output patients",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for short bowel syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AASLD & ACG",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "short_bowel_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Remnant bowel anatomy and length",
+          "cells": [
+            {
+              "text": "Taken from operative records and imaging; guides diet and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and nutritional panel",
+          "cells": [
+            {
+              "text": "Magnesium, calcium and trace-element deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin, B12 and iron status",
+          "cells": [
+            {
+              "text": "Deficiencies from malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid balance and stool or stoma output",
+          "cells": [
+            {
+              "text": "Ongoing losses and dehydration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and overgrowth evaluation",
+          "cells": [
+            {
+              "text": "Parenteral-nutrition liver disease and bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_bowel_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic pancreatic exocrine insufficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-intestinal bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Can coexist and is evaluated in the patient on parenteral nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enteric fistula",
+          "cells": [
+            {
+              "text": "Causes functional bowel loss without resection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "short_bowel_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral nutrition and IV fluids",
+          "cells": [
+            {
+              "text": "Initial prevention of dehydration and malnutrition; weaned as adaptation occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured enteral and oral nutrition",
+          "cells": [
+            {
+              "text": "Stimulates adaptation; diet tailored to anatomy and colon continuity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loperamide and proton pump inhibitor",
+          "cells": [
+            {
+              "text": "Slow transit and reduce output; PPI for gastric hypersecretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile-acid sequestrants and B12",
+          "cells": [
+            {
+              "text": "Bile-salt diarrhoea; parenteral B12 after terminal ileal loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Teduglutide (GLP-2 analogue)",
+          "cells": [
+            {
+              "text": "Enhances absorption and reduces parenteral dependence in selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micronutrient correction",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamins and trace elements, monitored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "Liver disease, catheter sepsis, thrombosis and bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist intestinal failure team",
+          "cells": [
+            {
+              "text": "Surgical lengthening or transplantation for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "short_bowel_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Short bowel syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short bowel syndrome after resection: diarrhoea, dehydration, weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (AKI, line sepsis, cholestasis, central venous thrombosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent fluid and electrolyte repair; treat line sepsis; protect venous access",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Remnant length and anatomy, Mg, Ca, trace elements, vitamins, stoma output",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is intestinal failure established with ongoing parenteral need?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess fistula, pancreatic insufficiency or overgrowth as the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parenteral fluids and nutrition first; keep enteral feeding to drive adaptation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Loperamide, PPI, bile-acid sequestrant; B12 after terminal ileal loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Teduglutide in selected patients to cut parenteral dependence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor liver, catheter and micronutrients in an intestinal failure team",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on residual length; many reach enteral autonomy, some need transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

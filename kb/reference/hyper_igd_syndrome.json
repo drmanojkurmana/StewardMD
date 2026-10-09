@@ -1,176 +1,481 @@
 {
- "id": "hyper_igd_syndrome",
- "name": "hyper igd syndrome",
- "aliases": [
-  "mevalonate kinase deficiency",
-  "HIDS",
-  "hyperimmunoglobulinaemia D with periodic fever"
- ],
- "class": "non_infective",
- "system": "Immunological",
- "specialty": "Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immune Deficiencies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder caused by biallelic MVK variants reducing mevalonate kinase activity; partial deficiency produces the hyper-IgD phenotype while near-complete deficiency causes severe mevalonic aciduria with dysmorphism, cataracts, ataxia and developmental delay.",
-   "Onset is typically in the first year of life, and attacks are frequently precipitated by childhood immunisations, minor infections, physical or emotional stress.",
-   "The febrile attacks characteristically feature tender cervical lymphadenopathy, prominent abdominal pain with vomiting and diarrhoea, hepatosplenomegaly and arthralgia or arthritis.",
-   "Painful oral and genital aphthous ulceration together with a polymorphous rash are common mucocutaneous features.",
-   "Serum immunoglobulin D is often elevated but is neither sensitive nor specific and is frequently normal in young children, so a normal level never excludes the diagnosis.",
-   "Elevated urinary mevalonic acid excretion during a febrile attack is a useful and more disease-specific pointer than immunoglobulin D.",
-   "Interleukin-1 blockade is the mainstay for frequent or severe disease; on-demand non-steroidal anti-inflammatory drugs and short corticosteroid courses help milder attacks.",
-   "Reactive AA amyloidosis is less frequent than in familial Mediterranean fever or TRAPS but can still occur with long-standing uncontrolled inflammation."
+  "id": "hyper_igd_syndrome",
+  "name": "hyper igd syndrome",
+  "aliases": [
+    "mevalonate kinase deficiency",
+    "HIDS",
+    "hyperimmunoglobulinaemia D with periodic fever"
   ],
-  "pathophysiology": "Mevalonate kinase catalyses an early step in the mevalonate (isoprenoid and cholesterol) biosynthetic pathway. Reduced enzyme activity, aggravated by the temperature sensitivity of the mutant protein during febrile episodes, limits production of non-sterol isoprenoids required for post-translational prenylation of small GTPases such as RhoA. Deficient geranylgeranylation impairs RhoA-dependent restraint of the pyrin inflammasome, leading to caspase-1 activation and excess interleukin-1 beta. This links the metabolic defect to the autoinflammatory phenotype and explains why blocking interleukin-1 is effective, whereas the accumulation of upstream mevalonic acid itself is a marker rather than the primary driver of inflammation.",
-  "additionalDifferentials": [
-   "Familial Mediterranean fever",
-   "TNF receptor-associated periodic syndrome",
-   "Cryopyrin-associated periodic syndrome spectrum",
-   "PFAPA syndrome",
-   "Cyclic neutropenia",
-   "Systemic juvenile idiopathic arthritis",
-   "Behcet disease with recurrent orogenital ulceration"
-  ],
-  "additionalInvestigations": [
-   "MVK gene sequencing for biallelic pathogenic variants",
-   "Urinary organic acids for mevalonic acid, ideally sampled during a febrile attack",
-   "Serum immunoglobulin D and immunoglobulin A concentrations",
-   "Mevalonate kinase enzyme activity assay in leucocytes or fibroblasts",
-   "Acute-phase reactants during and between episodes",
-   "Urinalysis for proteinuria as amyloidosis surveillance in long-standing disease"
-  ],
-  "redFlags": [
-   "Coexisting cataracts, developmental regression or ataxia suggesting the severe mevalonic aciduria end of the spectrum",
-   "Failure to thrive or growth faltering in an infant with recurrent inflammatory attacks",
-   "New proteinuria indicating possible AA amyloidosis",
-   "An attack with peritonism severe enough to prompt consideration of a surgical abdomen"
-  ],
-  "prognosis": "The hyper-IgD phenotype tends to become less frequent and milder with age, and interleukin-1 blockade markedly improves attack control and quality of life. The severe mevalonic aciduria end of the spectrum carries substantial neurodevelopmental morbidity and higher mortality.",
-  "pitfalls": [
-   "Excluding the diagnosis because serum immunoglobulin D is normal, particularly in a child under three years of age",
-   "Failing to sample urinary mevalonic acid during rather than between attacks",
-   "Overlooking vaccination as a characteristic trigger and mislabelling post-immunisation attacks as adverse reactions",
-   "Not recognising the continuum with mevalonic aciduria when neurological or ocular features are present"
-  ],
-  "references": [
-   "Stiehm's Immune Deficiencies (current edition)",
-   "Textbook of Pediatric Rheumatology, Cassidy (current edition)",
-   "Eurofever and PRINTO consensus classification criteria for hereditary recurrent fevers"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control recurrent inflammatory attacks with interleukin-1 blockade (anakinra or canakinumab) as the mainstay disease-directed therapy",
-   "Use on-demand corticosteroids or non-steroidal anti-inflammatory drugs for milder or breakthrough attacks, with interleukin-6 or TNF blockade considered in refractory disease",
-   "Provide supportive antipyretics, hydration and analgesia for abdominal pain and arthralgia during febrile attacks",
-   "Continue routine immunisations while anticipating that vaccination may precipitate episodes",
-   "Monitor acute-phase reactants during and between attacks and screen urine for proteinuria to detect AA amyloidosis in long-standing disease",
-   "Offer genetic counselling and family testing given autosomal recessive MVK inheritance",
-   "Coordinate care through a specialist immunology or autoinflammatory service, adding metabolic and neurodevelopmental input at the severe mevalonic aciduria end of the spectrum"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hyper_igd_syndrome-pathway",
-   "title": "hyper igd syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder caused by biallelic MVK variants reducing mevalonate kinase activity; partial deficiency produces the hyper-IgD phenotype while near-complete deficiency causes severe mevalonic aciduria with dysmorphism,",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Coexisting cataracts, developmental regression or ataxia suggesting the severe mevalonic aciduria end of the spectrum",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MVK gene sequencing for biallelic pathogenic variants, Urinary organic acids for mevalonic acid, ideally sampled during a febrile attack, Serum immunoglobulin D and immunoglobulin A concentrations"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control recurrent inflammatory attacks with interleukin-1 blockade (anakinra or canakinumab) as the mainstay disease-directed therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis because serum immunoglobulin D is normal, particularly in a child under three years of age"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hyper igd syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "hyper_igd_syndrome-matrix",
-   "title": "hyper igd syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder caused by biallelic MVK variants reducing mevalonate kinase activity; partial deficiency produces",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunological",
+  "specialty": "Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immune Deficiencies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder caused by biallelic MVK variants reducing mevalonate kinase activity; partial deficiency produces the hyper-IgD phenotype while near-complete deficiency causes severe mevalonic aciduria with dysmorphism, cataracts, ataxia and developmental delay.",
+      "Onset is typically in the first year of life, and attacks are frequently precipitated by childhood immunisations, minor infections, physical or emotional stress.",
+      "The febrile attacks characteristically feature tender cervical lymphadenopathy, prominent abdominal pain with vomiting and diarrhoea, hepatosplenomegaly and arthralgia or arthritis.",
+      "Painful oral and genital aphthous ulceration together with a polymorphous rash are common mucocutaneous features.",
+      "Serum immunoglobulin D is often elevated but is neither sensitive nor specific and is frequently normal in young children, so a normal level never excludes the diagnosis.",
+      "Elevated urinary mevalonic acid excretion during a febrile attack is a useful and more disease-specific pointer than immunoglobulin D.",
+      "Interleukin-1 blockade is the mainstay for frequent or severe disease; on-demand non-steroidal anti-inflammatory drugs and short corticosteroid courses help milder attacks.",
+      "Reactive AA amyloidosis is less frequent than in familial Mediterranean fever or TRAPS but can still occur with long-standing uncontrolled inflammation."
     ],
-    [
-     "Key Investigations",
-     "MVK gene sequencing for biallelic pathogenic variants, Urinary organic acids for mevalonic acid, ideally sampled during a febrile",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mevalonate kinase catalyses an early step in the mevalonate (isoprenoid and cholesterol) biosynthetic pathway. Reduced enzyme activity, aggravated by the temperature sensitivity of the mutant protein during febrile episodes, limits production of non-sterol isoprenoids required for post-translational prenylation of small GTPases such as RhoA. Deficient geranylgeranylation impairs RhoA-dependent restraint of the pyrin inflammasome, leading to caspase-1 activation and excess interleukin-1 beta. This links the metabolic defect to the autoinflammatory phenotype and explains why blocking interleukin-1 is effective, whereas the accumulation of upstream mevalonic acid itself is a marker rather than the primary driver of inflammation.",
+    "additionalDifferentials": [
+      "Familial Mediterranean fever",
+      "TNF receptor-associated periodic syndrome",
+      "Cryopyrin-associated periodic syndrome spectrum",
+      "PFAPA syndrome",
+      "Cyclic neutropenia",
+      "Systemic juvenile idiopathic arthritis",
+      "Behcet disease with recurrent orogenital ulceration"
     ],
-    [
-     "Primary Differentials",
-     "Familial Mediterranean fever, TNF receptor-associated periodic syndrome, Cryopyrin-associated periodic syndrome spectrum",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MVK gene sequencing for biallelic pathogenic variants",
+      "Urinary organic acids for mevalonic acid, ideally sampled during a febrile attack",
+      "Serum immunoglobulin D and immunoglobulin A concentrations",
+      "Mevalonate kinase enzyme activity assay in leucocytes or fibroblasts",
+      "Acute-phase reactants during and between episodes",
+      "Urinalysis for proteinuria as amyloidosis surveillance in long-standing disease"
     ],
-    [
-     "Management Strategy",
-     "Control recurrent inflammatory attacks with interleukin-1 blockade (anakinra or canakinumab) as the mainstay disease-directed",
-     "Core treatment modality"
+    "redFlags": [
+      "Coexisting cataracts, developmental regression or ataxia suggesting the severe mevalonic aciduria end of the spectrum",
+      "Failure to thrive or growth faltering in an infant with recurrent inflammatory attacks",
+      "New proteinuria indicating possible AA amyloidosis",
+      "An attack with peritonism severe enough to prompt consideration of a surgical abdomen"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis because serum immunoglobulin D is normal, particularly in a child under three years of age",
-     "Prevent diagnostic or management error"
+    "prognosis": "The hyper-IgD phenotype tends to become less frequent and milder with age, and interleukin-1 blockade markedly improves attack control and quality of life. The severe mevalonic aciduria end of the spectrum carries substantial neurodevelopmental morbidity and higher mortality.",
+    "pitfalls": [
+      "Excluding the diagnosis because serum immunoglobulin D is normal, particularly in a child under three years of age",
+      "Failing to sample urinary mevalonic acid during rather than between attacks",
+      "Overlooking vaccination as a characteristic trigger and mislabelling post-immunisation attacks as adverse reactions",
+      "Not recognising the continuum with mevalonic aciduria when neurological or ocular features are present"
+    ],
+    "references": [
+      "Stiehm's Immune Deficiencies (current edition)",
+      "Textbook of Pediatric Rheumatology, Cassidy (current edition)",
+      "Eurofever and PRINTO consensus classification criteria for hereditary recurrent fevers"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control recurrent inflammatory attacks with interleukin-1 blockade (anakinra or canakinumab) as the mainstay disease-directed therapy",
+      "Use on-demand corticosteroids or non-steroidal anti-inflammatory drugs for milder or breakthrough attacks, with interleukin-6 or TNF blockade considered in refractory disease",
+      "Provide supportive antipyretics, hydration and analgesia for abdominal pain and arthralgia during febrile attacks",
+      "Continue routine immunisations while anticipating that vaccination may precipitate episodes",
+      "Monitor acute-phase reactants during and between attacks and screen urine for proteinuria to detect AA amyloidosis in long-standing disease",
+      "Offer genetic counselling and family testing given autosomal recessive MVK inheritance",
+      "Coordinate care through a specialist immunology or autoinflammatory service, adding metabolic and neurodevelopmental input at the severe mevalonic aciduria end of the spectrum"
     ]
-   ],
-   "caption": "Overview comparison matrix for hyper igd syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hyper-igd-syndrome-real-image",
-   "title": "hyper igd syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hyper_igd_syndrome-pathway",
+      "title": "hyper igd syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder caused by biallelic MVK variants reducing mevalonate kinase activity; partial deficiency produces the hyper-IgD phenotype while near-complete deficiency causes severe mevalonic aciduria with dysmorphism,",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Coexisting cataracts, developmental regression or ataxia suggesting the severe mevalonic aciduria end of the spectrum",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MVK gene sequencing for biallelic pathogenic variants, Urinary organic acids for mevalonic acid, ideally sampled during a febrile attack, Serum immunoglobulin D and immunoglobulin A concentrations"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control recurrent inflammatory attacks with interleukin-1 blockade (anakinra or canakinumab) as the mainstay disease-directed therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis because serum immunoglobulin D is normal, particularly in a child under three years of age"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hyper igd syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hyper_igd_syndrome-matrix",
+      "title": "hyper igd syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder caused by biallelic MVK variants reducing mevalonate kinase activity; partial deficiency produces",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MVK gene sequencing for biallelic pathogenic variants, Urinary organic acids for mevalonic acid, ideally sampled during a febrile",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Familial Mediterranean fever, TNF receptor-associated periodic syndrome, Cryopyrin-associated periodic syndrome spectrum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control recurrent inflammatory attacks with interleukin-1 blockade (anakinra or canakinumab) as the mainstay disease-directed",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis because serum immunoglobulin D is normal, particularly in a child under three years of age",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hyper igd syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immune Deficiencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyper_igd_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MVK gene sequencing",
+          "cells": [
+            {
+              "text": "Biallelic pathogenic MVK variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary organic acids for mevalonic acid",
+          "cells": [
+            {
+              "text": "Mevalonic aciduria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulin D and immunoglobulin A",
+          "cells": [
+            {
+              "text": "Raised IgD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mevalonate kinase enzyme activity in leucocytes",
+          "cells": [
+            {
+              "text": "Enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants during and between episodes",
+          "cells": [
+            {
+              "text": "Inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for proteinuria",
+          "cells": [
+            {
+              "text": "Amyloidosis surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyper_igd_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial Mediterranean fever",
+          "cells": [
+            {
+              "text": "Different gene; MVK testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF receptor-associated periodic syndrome",
+          "cells": [
+            {
+              "text": "Different gene; MVK testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFAPA syndrome",
+          "cells": [
+            {
+              "text": "Recurrent fever without MVK variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyper_igd_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interleukin-1 blockade",
+          "cells": [
+            {
+              "text": "Controls recurrent inflammatory attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "On-demand corticosteroids or NSAIDs",
+          "cells": [
+            {
+              "text": "During attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Antipyretics, hydration and analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine immunisation",
+          "cells": [
+            {
+              "text": "Continued, with monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactant monitoring",
+          "cells": [
+            {
+              "text": "During and between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunology or rheumatology care",
+          "cells": [
+            {
+              "text": "Specialist coordination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyper_igd_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of hyper igd syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent fever attacks with abdominal pain, lymph nodes and rash from infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cataracts or regression, growth faltering, new proteinuria, or severe peritonism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for peritonism or new proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MVK sequencing; urinary mevalonic acid; IgD and IgA; enzyme activity; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic MVK variants found, with raised IgD and mevalonic aciduria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FMF, TRAPS, CAPS, PFAPA or systemic JIA",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interleukin-1 blockade to control recurrent attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "On-demand corticosteroids or NSAIDs during attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Routine immunisation with monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor acute-phase reactants and urine protein for amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Attacks reduced; amyloidosis surveillance continued",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

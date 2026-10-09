@@ -1,174 +1,463 @@
 {
- "id": "depdc5_familial_focal_epilepsy",
- "name": "DEPDC5 familial focal epilepsy with variable foci",
- "aliases": [
-  "DEPDC5",
-  "familial focal epilepsy with variable foci",
-  "FFEVF",
-  "GATOR1 epilepsy",
-  "DEPDC5-related focal epilepsy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / ILAE",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by usually heterozygous loss-of-function variants in DEPDC5, a component of the GATOR1 complex that acts as a negative regulator of the mTOR signalling pathway",
-   "Produces autosomal dominant familial focal epilepsy with variable foci, in which affected relatives have focal seizures arising from different cortical regions",
-   "Penetrance is incomplete, so some variant carriers are seizure-free, which complicates family counselling and interpretation of pedigrees",
-   "Seizures are focal and include frontal, temporal, and other lobar semiologies, often nocturnal, and may be sleep-related hypermotor in type",
-   "A subset of patients have focal cortical dysplasia or other malformations of cortical development, sometimes as a somatic second-hit lesion amenable to epilepsy surgery",
-   "There is a notably increased risk of sudden unexpected death in epilepsy, which should be discussed with families and factored into management",
-   "Because DEPDC5 disinhibits mTOR, mTOR inhibitors are of mechanistic and investigational interest for refractory disease"
+  "id": "depdc5_familial_focal_epilepsy",
+  "name": "DEPDC5 familial focal epilepsy with variable foci",
+  "aliases": [
+    "DEPDC5",
+    "familial focal epilepsy with variable foci",
+    "FFEVF",
+    "GATOR1 epilepsy",
+    "DEPDC5-related focal epilepsy"
   ],
-  "pathophysiology": "DEPDC5 is part of the GATOR1 complex, which inhibits mechanistic target of rapamycin complex 1 (mTORC1) signalling, a pathway controlling cell growth, protein synthesis, and neuronal excitability. Loss-of-function variants relieve this inhibition, causing constitutive mTOR pathway overactivity. In the brain this promotes epileptogenesis and, when a somatic second hit occurs in a clone of cells, can produce focal cortical dysplasia. The dominant germline variant with incomplete penetrance explains the familial focal epilepsy with variable foci, while mTOR overactivation underlies both the seizures and associated cortical malformations and provides a rationale for mTOR-directed therapy.",
-  "additionalDifferentials": [
-   "NPRL2 and NPRL3 GATOR1 familial focal epilepsies",
-   "CHRNA4/CHRNB2 autosomal dominant sleep-related hypermotor epilepsy",
-   "Focal cortical dysplasia of other cause",
-   "Tuberous sclerosis complex and other mTORopathies",
-   "Structural focal epilepsy from acquired lesions",
-   "KCNT1-related sleep-related hypermotor epilepsy"
-  ],
-  "additionalInvestigations": [
-   "Gene panel or whole-exome sequencing to identify the DEPDC5 variant, with segregation across the family",
-   "High-resolution epilepsy-protocol brain magnetic resonance imaging to detect focal cortical dysplasia",
-   "Prolonged video electroencephalography to localise variable seizure foci",
-   "Presurgical evaluation where a resectable dysplastic lesion is identified",
-   "Consideration of somatic mosaicism testing of resected tissue",
-   "Family history documentation and genetic counselling for incomplete penetrance"
-  ],
-  "redFlags": [
-   "Drug-resistant focal seizures with a potentially resectable cortical lesion",
-   "Features suggesting elevated sudden unexpected death in epilepsy risk",
-   "Frequent nocturnal seizures with injury or respiratory risk",
-   "Progressive cognitive or behavioural difficulties"
-  ],
-  "prognosis": "Many carriers have well-controlled or even subclinical disease due to incomplete penetrance, but a subset have drug-resistant focal epilepsy; surgical resection of an identified dysplastic focus can be curative, and the recognised sudden unexpected death risk affects overall outcome.",
-  "pitfalls": [
-   "Interpreting a seizure-free carrier as unaffected and misjudging recurrence risk given incomplete penetrance",
-   "Missing subtle focal cortical dysplasia on standard imaging",
-   "Failing to counsel about the heightened sudden unexpected death in epilepsy risk",
-   "Overlooking surgical candidacy in drug-resistant focal disease"
-  ],
-  "references": [
-   "GeneReviews: DEPDC5-Related Epilepsy",
-   "ILAE resources on GATOR1/mTOR-related focal epilepsies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control focal seizures with standard focal-onset antiseizure medication such as carbamazepine, lamotrigine or levetiracetam",
-   "Pursue presurgical evaluation and resective epilepsy surgery when drug-resistant seizures arise from a defined focal cortical dysplasia",
-   "Consider mTOR-directed therapy with agents such as everolimus, given the constitutive mTOR pathway overactivity that underlies the disorder",
-   "Counsel on the recognised risk of sudden unexpected death in epilepsy and provide seizure-safety advice",
-   "Coordinate epileptology, neurosurgery and neuroradiology with high-resolution epilepsy-protocol MRI and video electroencephalography",
-   "Offer genetic counselling for autosomal dominant inheritance with incomplete penetrance and undertake family segregation testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "depdc5_familial_focal_epilepsy-pathway",
-   "title": "DEPDC5 familial focal epilepsy with variable foci: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by usually heterozygous loss-of-function variants in DEPDC5, a component of the GATOR1 complex that acts as a negative regulator of the mTOR signalling pathway",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Drug-resistant focal seizures with a potentially resectable cortical lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Gene panel or whole-exome sequencing to identify the DEPDC5 variant, with segregation across the family, High-resolution epilepsy-protocol brain magnetic resonance imaging to detect focal cortical dysplasia, Prolonged"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control focal seizures with standard focal-onset antiseizure medication such as carbamazepine, lamotrigine or levetiracetam"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting a seizure-free carrier as unaffected and misjudging recurrence risk given incomplete penetrance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of depdc5 familial focal epilepsy with variable foci."
-  }
- ],
- "tables": [
-  {
-   "id": "depdc5_familial_focal_epilepsy-matrix",
-   "title": "DEPDC5 familial focal epilepsy with variable foci: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by usually heterozygous loss-of-function variants in DEPDC5, a component of the GATOR1 complex that acts as a negative",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / ILAE",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by usually heterozygous loss-of-function variants in DEPDC5, a component of the GATOR1 complex that acts as a negative regulator of the mTOR signalling pathway",
+      "Produces autosomal dominant familial focal epilepsy with variable foci, in which affected relatives have focal seizures arising from different cortical regions",
+      "Penetrance is incomplete, so some variant carriers are seizure-free, which complicates family counselling and interpretation of pedigrees",
+      "Seizures are focal and include frontal, temporal, and other lobar semiologies, often nocturnal, and may be sleep-related hypermotor in type",
+      "A subset of patients have focal cortical dysplasia or other malformations of cortical development, sometimes as a somatic second-hit lesion amenable to epilepsy surgery",
+      "There is a notably increased risk of sudden unexpected death in epilepsy, which should be discussed with families and factored into management",
+      "Because DEPDC5 disinhibits mTOR, mTOR inhibitors are of mechanistic and investigational interest for refractory disease"
     ],
-    [
-     "Key Investigations",
-     "Gene panel or whole-exome sequencing to identify the DEPDC5 variant, with segregation across the family, High-resolution",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "DEPDC5 is part of the GATOR1 complex, which inhibits mechanistic target of rapamycin complex 1 (mTORC1) signalling, a pathway controlling cell growth, protein synthesis, and neuronal excitability. Loss-of-function variants relieve this inhibition, causing constitutive mTOR pathway overactivity. In the brain this promotes epileptogenesis and, when a somatic second hit occurs in a clone of cells, can produce focal cortical dysplasia. The dominant germline variant with incomplete penetrance explains the familial focal epilepsy with variable foci, while mTOR overactivation underlies both the seizures and associated cortical malformations and provides a rationale for mTOR-directed therapy.",
+    "additionalDifferentials": [
+      "NPRL2 and NPRL3 GATOR1 familial focal epilepsies",
+      "CHRNA4/CHRNB2 autosomal dominant sleep-related hypermotor epilepsy",
+      "Focal cortical dysplasia of other cause",
+      "Tuberous sclerosis complex and other mTORopathies",
+      "Structural focal epilepsy from acquired lesions",
+      "KCNT1-related sleep-related hypermotor epilepsy"
     ],
-    [
-     "Primary Differentials",
-     "NPRL2 and NPRL3 GATOR1 familial focal epilepsies, CHRNA4/CHRNB2 autosomal dominant sleep-related hypermotor epilepsy, Focal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Gene panel or whole-exome sequencing to identify the DEPDC5 variant, with segregation across the family",
+      "High-resolution epilepsy-protocol brain magnetic resonance imaging to detect focal cortical dysplasia",
+      "Prolonged video electroencephalography to localise variable seizure foci",
+      "Presurgical evaluation where a resectable dysplastic lesion is identified",
+      "Consideration of somatic mosaicism testing of resected tissue",
+      "Family history documentation and genetic counselling for incomplete penetrance"
     ],
-    [
-     "Management Strategy",
-     "Control focal seizures with standard focal-onset antiseizure medication such as carbamazepine, lamotrigine or levetiracetam",
-     "Core treatment modality"
+    "redFlags": [
+      "Drug-resistant focal seizures with a potentially resectable cortical lesion",
+      "Features suggesting elevated sudden unexpected death in epilepsy risk",
+      "Frequent nocturnal seizures with injury or respiratory risk",
+      "Progressive cognitive or behavioural difficulties"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting a seizure-free carrier as unaffected and misjudging recurrence risk given incomplete penetrance",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many carriers have well-controlled or even subclinical disease due to incomplete penetrance, but a subset have drug-resistant focal epilepsy; surgical resection of an identified dysplastic focus can be curative, and the recognised sudden unexpected death risk affects overall outcome.",
+    "pitfalls": [
+      "Interpreting a seizure-free carrier as unaffected and misjudging recurrence risk given incomplete penetrance",
+      "Missing subtle focal cortical dysplasia on standard imaging",
+      "Failing to counsel about the heightened sudden unexpected death in epilepsy risk",
+      "Overlooking surgical candidacy in drug-resistant focal disease"
+    ],
+    "references": [
+      "GeneReviews: DEPDC5-Related Epilepsy",
+      "ILAE resources on GATOR1/mTOR-related focal epilepsies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control focal seizures with standard focal-onset antiseizure medication such as carbamazepine, lamotrigine or levetiracetam",
+      "Pursue presurgical evaluation and resective epilepsy surgery when drug-resistant seizures arise from a defined focal cortical dysplasia",
+      "Consider mTOR-directed therapy with agents such as everolimus, given the constitutive mTOR pathway overactivity that underlies the disorder",
+      "Counsel on the recognised risk of sudden unexpected death in epilepsy and provide seizure-safety advice",
+      "Coordinate epileptology, neurosurgery and neuroradiology with high-resolution epilepsy-protocol MRI and video electroencephalography",
+      "Offer genetic counselling for autosomal dominant inheritance with incomplete penetrance and undertake family segregation testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for depdc5 familial focal epilepsy with variable foci."
-  }
- ],
- "diagrams": [
-  {
-   "id": "depdc5-familial-focal-epilepsy-real-image",
-   "title": "DEPDC5 familial focal epilepsy with variable foci: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "depdc5_familial_focal_epilepsy-pathway",
+      "title": "DEPDC5 familial focal epilepsy with variable foci: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by usually heterozygous loss-of-function variants in DEPDC5, a component of the GATOR1 complex that acts as a negative regulator of the mTOR signalling pathway",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Drug-resistant focal seizures with a potentially resectable cortical lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Gene panel or whole-exome sequencing to identify the DEPDC5 variant, with segregation across the family, High-resolution epilepsy-protocol brain magnetic resonance imaging to detect focal cortical dysplasia, Prolonged"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control focal seizures with standard focal-onset antiseizure medication such as carbamazepine, lamotrigine or levetiracetam"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting a seizure-free carrier as unaffected and misjudging recurrence risk given incomplete penetrance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of depdc5 familial focal epilepsy with variable foci."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "depdc5_familial_focal_epilepsy-matrix",
+      "title": "DEPDC5 familial focal epilepsy with variable foci: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by usually heterozygous loss-of-function variants in DEPDC5, a component of the GATOR1 complex that acts as a negative",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Gene panel or whole-exome sequencing to identify the DEPDC5 variant, with segregation across the family, High-resolution",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "NPRL2 and NPRL3 GATOR1 familial focal epilepsies, CHRNA4/CHRNB2 autosomal dominant sleep-related hypermotor epilepsy, Focal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control focal seizures with standard focal-onset antiseizure medication such as carbamazepine, lamotrigine or levetiracetam",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting a seizure-free carrier as unaffected and misjudging recurrence risk given incomplete penetrance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for depdc5 familial focal epilepsy with variable foci."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / ILAE",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "depdc5_familial_focal_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gene panel or exome sequencing for DEPDC5, with family segregation",
+          "cells": [
+            {
+              "text": "DEPDC5 variant, segregated across the family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy-protocol brain MRI",
+          "cells": [
+            {
+              "text": "Focal cortical dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged video EEG",
+          "cells": [
+            {
+              "text": "Localises variable seizure foci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Presurgical evaluation",
+          "cells": [
+            {
+              "text": "Resectable dysplastic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatic mosaicism testing of resected tissue",
+          "cells": [
+            {
+              "text": "Considered in resected tissue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "depdc5_familial_focal_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "NPRL2 and NPRL3 GATOR1 focal epilepsies",
+          "cells": [
+            {
+              "text": "Other GATOR1 complex genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHRNA4 or CHRNB2 hypermotor epilepsy",
+          "cells": [
+            {
+              "text": "Sleep-related hypermotor seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberous sclerosis and other mTORopathies",
+          "cells": [
+            {
+              "text": "mTOR pathway disease; mTOR-directed therapy relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "depdc5_familial_focal_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Focal-onset antiseizure medication",
+          "cells": [
+            {
+              "text": "Carbamazepine, lamotrigine or levetiracetam"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Presurgical evaluation and resection",
+          "cells": [
+            {
+              "text": "For drug-resistant seizures from a defined dysplastic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "mTOR-directed therapy",
+          "cells": [
+            {
+              "text": "Everolimus considered, given constitutive mTOR overactivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SUDEP counselling",
+          "cells": [
+            {
+              "text": "Recognised sudden unexpected death in epilepsy risk; seizure-safety advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Epileptology, neurosurgery and neuroradiology; high-resolution MRI and video EEG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant with incomplete penetrance; family segregation testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "depdc5_familial_focal_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of DEPDC5 familial focal epilepsy with variable foci",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DEPDC5 epilepsy: focal seizures with variable foci in a family",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (drug-resistant focal seizures, SUDEP risk, nocturnal injury)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent epilepsy surgery review for drug-resistant seizures with a resectable lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DEPDC5 gene testing with family segregation; epilepsy-protocol MRI; video EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a DEPDC5 variant found with a focal lesion on MRI or EEG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider GATOR1 gene variants, CHRNA4 or CHRNB2 hypermotor epilepsy, or TSC",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Carbamazepine, lamotrigine or levetiracetam for focal seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Presurgical evaluation and resection for a drug-resistant dysplastic focus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider everolimus for mTOR-driven disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on SUDEP risk and provide seizure-safety advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family segregation testing for incomplete penetrance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many carriers are well controlled; resection of a dysplastic focus can be curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

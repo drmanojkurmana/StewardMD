@@ -1,174 +1,443 @@
 {
- "id": "spondylolysis",
- "name": "Spondylolysis (pars defect)",
- "aliases": [
-  "pars interarticularis defect",
-  "pars defect",
-  "pars interarticularis stress fracture",
-  "isthmic defect"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Spine",
- "specialty": "Spinal Surgery / Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rothman-Simeone and Herkowitz's The Spine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A defect, either a stress fracture or a fibrous non-union, of the pars interarticularis, most often at L5",
-   "A common cause of low back pain in adolescent athletes engaged in repetitive hyperextension such as gymnastics, cricket fast bowling, dancing, and diving",
-   "Pain is typically activity-related axial low back pain that is worsened by lumbar extension",
-   "The single-leg hyperextension (stork) test may reproduce pain on the affected side",
-   "On oblique radiographs the defect appears as a collar or broken neck on the outline of the Scotty dog",
-   "A bilateral defect may allow the vertebral body to slip forward on the one below (isthmic spondylolisthesis)",
-   "SPECT or SPECT/CT and MRI detect early, radiographically occult stress reactions and help assess fracture activity and healing potential",
-   "Most respond to activity restriction, physiotherapy, and sometimes bracing; surgical repair or fusion is reserved for refractory pain or a progressive slip"
+  "id": "spondylolysis",
+  "name": "Spondylolysis (pars defect)",
+  "aliases": [
+    "pars interarticularis defect",
+    "pars defect",
+    "pars interarticularis stress fracture",
+    "isthmic defect"
   ],
-  "pathophysiology": "Spondylolysis is a defect of the pars interarticularis, the bony bridge linking the superior and inferior articular processes of a vertebra. It usually represents a fatigue (stress) fracture from repetitive hyperextension and rotational loading rather than an acute injury, and there is a recognised genetic and dysplastic predisposition. The lowest lumbar level (L5) bears the greatest shear stress and is most often affected. When the defect is bilateral the vertebral body can slip forward on the one below, producing isthmic spondylolisthesis, which may in turn narrow the foramen and place the exiting nerve root under tension.",
-  "additionalDifferentials": [
-   "Isthmic or degenerative spondylolisthesis",
-   "Facet joint syndrome",
-   "Degenerative disc (discogenic) back pain",
-   "Muscular or ligamentous strain",
-   "Sacroiliac joint dysfunction",
-   "Vertebral osteomyelitis or tumour when red flags are present"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs including oblique views (Scotty-dog sign) and lateral views to assess any slip",
-   "MRI as the first-line advanced imaging in young patients to detect a stress reaction and avoid radiation",
-   "SPECT or SPECT/CT to assess the metabolic activity and healing potential of the defect",
-   "CT to define the bony anatomy and characterise chronicity of the defect",
-   "Standing flexion-extension radiographs to assess dynamic instability when a slip is present"
-  ],
-  "redFlags": [
-   "Neurological deficit or radicular symptoms suggesting nerve-root compression from a high-grade slip",
-   "Rapidly progressive slip on serial imaging",
-   "Constitutional symptoms or night pain suggesting infection or tumour"
-  ],
-  "prognosis": "Many young patients achieve pain-free return to activity with conservative management, and early stress reactions may heal with rest; high-grade or progressive slips and persistent pain may require surgical stabilisation, but outcomes are generally good.",
-  "pitfalls": [
-   "Relying on plain radiographs alone, which miss early stress reactions",
-   "Failing to monitor for slip progression during adolescent growth",
-   "Attributing all adolescent back pain to spondylolysis without excluding other causes"
-  ],
-  "references": [
-   "Rothman-Simeone and Herkowitz's The Spine",
-   "Herring: Tachdjian's Pediatric Orthopaedics"
-  ],
-  "crossLinks": [
-   "degenerative_disc_disease",
-   "facet_joint_syndrome"
-  ],
-  "management": [
-   "Activity modification and relative rest from the provocative hyperextension loading as first-line management",
-   "Physiotherapy with core and lumbar stabilisation once acute pain settles, with analgesia for symptom control",
-   "Bracing with an antilordotic orthosis to promote healing of an active pars stress reaction in adolescents",
-   "Graded, supervised return to sport once pain-free, with monitoring of healing on imaging",
-   "Surgical repair or segmental fusion reserved for persistent pain despite prolonged conservative care or progression to symptomatic isthmic spondylolisthesis",
-   "Surveillance for slip development with standing lateral and flexion-extension radiographs when the defect is bilateral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spondylolysis-pathway",
-   "title": "Spondylolysis (pars defect): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A defect, either a stress fracture or a fibrous non-union, of the pars interarticularis, most often at L5",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological deficit or radicular symptoms suggesting nerve-root compression from a high-grade slip",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs including oblique views (Scotty-dog sign) and lateral views to assess any slip, MRI as the first-line advanced imaging in young patients to detect a stress reaction and avoid radiation, SPECT or SPECT/CT"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Activity modification and relative rest from the provocative hyperextension loading as first-line management"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on plain radiographs alone, which miss early stress reactions"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spondylolysis (pars defect)."
-  }
- ],
- "tables": [
-  {
-   "id": "spondylolysis-matrix",
-   "title": "Spondylolysis (pars defect): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A defect, either a stress fracture or a fibrous non-union, of the pars interarticularis, most often at L5",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Spine",
+  "specialty": "Spinal Surgery / Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rothman-Simeone and Herkowitz's The Spine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A defect, either a stress fracture or a fibrous non-union, of the pars interarticularis, most often at L5",
+      "A common cause of low back pain in adolescent athletes engaged in repetitive hyperextension such as gymnastics, cricket fast bowling, dancing, and diving",
+      "Pain is typically activity-related axial low back pain that is worsened by lumbar extension",
+      "The single-leg hyperextension (stork) test may reproduce pain on the affected side",
+      "On oblique radiographs the defect appears as a collar or broken neck on the outline of the Scotty dog",
+      "A bilateral defect may allow the vertebral body to slip forward on the one below (isthmic spondylolisthesis)",
+      "SPECT or SPECT/CT and MRI detect early, radiographically occult stress reactions and help assess fracture activity and healing potential",
+      "Most respond to activity restriction, physiotherapy, and sometimes bracing; surgical repair or fusion is reserved for refractory pain or a progressive slip"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs including oblique views (Scotty-dog sign) and lateral views to assess any slip, MRI as the first-line advanced",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spondylolysis is a defect of the pars interarticularis, the bony bridge linking the superior and inferior articular processes of a vertebra. It usually represents a fatigue (stress) fracture from repetitive hyperextension and rotational loading rather than an acute injury, and there is a recognised genetic and dysplastic predisposition. The lowest lumbar level (L5) bears the greatest shear stress and is most often affected. When the defect is bilateral the vertebral body can slip forward on the one below, producing isthmic spondylolisthesis, which may in turn narrow the foramen and place the exiting nerve root under tension.",
+    "additionalDifferentials": [
+      "Isthmic or degenerative spondylolisthesis",
+      "Facet joint syndrome",
+      "Degenerative disc (discogenic) back pain",
+      "Muscular or ligamentous strain",
+      "Sacroiliac joint dysfunction",
+      "Vertebral osteomyelitis or tumour when red flags are present"
     ],
-    [
-     "Primary Differentials",
-     "Isthmic or degenerative spondylolisthesis, Facet joint syndrome, Degenerative disc (discogenic) back pain",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs including oblique views (Scotty-dog sign) and lateral views to assess any slip",
+      "MRI as the first-line advanced imaging in young patients to detect a stress reaction and avoid radiation",
+      "SPECT or SPECT/CT to assess the metabolic activity and healing potential of the defect",
+      "CT to define the bony anatomy and characterise chronicity of the defect",
+      "Standing flexion-extension radiographs to assess dynamic instability when a slip is present"
     ],
-    [
-     "Management Strategy",
-     "Activity modification and relative rest from the provocative hyperextension loading as first-line management",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological deficit or radicular symptoms suggesting nerve-root compression from a high-grade slip",
+      "Rapidly progressive slip on serial imaging",
+      "Constitutional symptoms or night pain suggesting infection or tumour"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on plain radiographs alone, which miss early stress reactions",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many young patients achieve pain-free return to activity with conservative management, and early stress reactions may heal with rest; high-grade or progressive slips and persistent pain may require surgical stabilisation, but outcomes are generally good.",
+    "pitfalls": [
+      "Relying on plain radiographs alone, which miss early stress reactions",
+      "Failing to monitor for slip progression during adolescent growth",
+      "Attributing all adolescent back pain to spondylolysis without excluding other causes"
+    ],
+    "references": [
+      "Rothman-Simeone and Herkowitz's The Spine",
+      "Herring: Tachdjian's Pediatric Orthopaedics"
+    ],
+    "crossLinks": [
+      "degenerative_disc_disease",
+      "facet_joint_syndrome"
+    ],
+    "management": [
+      "Activity modification and relative rest from the provocative hyperextension loading as first-line management",
+      "Physiotherapy with core and lumbar stabilisation once acute pain settles, with analgesia for symptom control",
+      "Bracing with an antilordotic orthosis to promote healing of an active pars stress reaction in adolescents",
+      "Graded, supervised return to sport once pain-free, with monitoring of healing on imaging",
+      "Surgical repair or segmental fusion reserved for persistent pain despite prolonged conservative care or progression to symptomatic isthmic spondylolisthesis",
+      "Surveillance for slip development with standing lateral and flexion-extension radiographs when the defect is bilateral"
     ]
-   ],
-   "caption": "Overview comparison matrix for spondylolysis (pars defect)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spondylolysis-real-image",
-   "title": "Spondylolysis (pars defect): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "spondylolysis-pathway",
+      "title": "Spondylolysis (pars defect): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A defect, either a stress fracture or a fibrous non-union, of the pars interarticularis, most often at L5",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological deficit or radicular symptoms suggesting nerve-root compression from a high-grade slip",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs including oblique views (Scotty-dog sign) and lateral views to assess any slip, MRI as the first-line advanced imaging in young patients to detect a stress reaction and avoid radiation, SPECT or SPECT/CT"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Activity modification and relative rest from the provocative hyperextension loading as first-line management"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on plain radiographs alone, which miss early stress reactions"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spondylolysis (pars defect)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spondylolysis-matrix",
+      "title": "Spondylolysis (pars defect): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A defect, either a stress fracture or a fibrous non-union, of the pars interarticularis, most often at L5",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs including oblique views (Scotty-dog sign) and lateral views to assess any slip, MRI as the first-line advanced",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isthmic or degenerative spondylolisthesis, Facet joint syndrome, Degenerative disc (discogenic) back pain",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Activity modification and relative rest from the provocative hyperextension loading as first-line management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on plain radiographs alone, which miss early stress reactions",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spondylolysis (pars defect)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rothman-Simeone and Herkowitz's The Spine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spondylolysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Oblique and lateral radiographs",
+          "cells": [
+            {
+              "text": "Scotty-dog collar defect of the pars"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Early stress reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPECT or SPECT/CT",
+          "cells": [
+            {
+              "text": "Metabolic activity and healing potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Bony anatomy and chronicity of the defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standing flexion-extension radiographs",
+          "cells": [
+            {
+              "text": "Dynamic instability when a slip is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondylolysis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isthmic or degenerative spondylolisthesis",
+          "cells": [
+            {
+              "text": "A slip that may coexist with a pars defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertebral osteomyelitis or tumour",
+          "cells": [
+            {
+              "text": "Considered when red flags are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondylolysis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Relative rest from hyperextension loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core and lumbar stabilisation physiotherapy",
+          "cells": [
+            {
+              "text": "Once acute pain settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antilordotic bracing",
+          "cells": [
+            {
+              "text": "Promotes healing of an active stress reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded return to sport",
+          "cells": [
+            {
+              "text": "Supervised, with healing monitored on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical repair or fusion",
+          "cells": [
+            {
+              "text": "Persistent pain despite prolonged conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Slip development on standing and flexion-extension radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spondylolysis-dx-mgmt",
+      "title": "Diagnosis and management of Spondylolysis (pars defect)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Extension-related low back pain in a young athlete: suspected spondylolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological deficit, rapid slip, constitutional symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for nerve root compression, infection or tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oblique and lateral radiographs; MRI or SPECT for stress reaction; CT for chronicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pars defect or active stress reaction shown on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider facet syndrome, discogenic pain or strain; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activity modification and relative rest from hyperextension loading",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Core and lumbar stabilisation physiotherapy once pain settles",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antilordotic bracing to promote healing of an active stress reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Graded supervised return to sport with imaging monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most respond to activity restriction; surgery is for persistent pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

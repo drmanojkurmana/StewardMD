@@ -1,174 +1,463 @@
 {
- "id": "pinta",
- "name": "Pinta",
- "aliases": [
-  "Treponema carateum",
-  "carate",
-  "azul",
-  "mal del pinto"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Pinta is a chronic non-venereal treponematosis caused by Treponema carateum and is confined to the skin, occurring in remote rural areas of Central and South America",
-   "Transmission is by prolonged direct skin-to-skin contact with lesion material, favoured by crowding and poor hygiene; it is not sexually transmitted",
-   "Unlike the other endemic treponematoses, pinta affects only the skin and does not involve bone, viscera or the nervous system",
-   "The primary lesion is an erythematous scaly papule or plaque that slowly enlarges, usually on exposed limbs",
-   "Secondary lesions (pintids) are disseminated scaly patches that undergo striking colour changes, becoming blue, violet, brown then depigmented",
-   "Late pinta is characterised by symmetrical achromic (depigmented) and atrophic patches that resemble vitiligo and are cosmetically disfiguring",
-   "Diagnosis uses dark-field microscopy and treponemal/non-treponemal serology (indistinguishable from syphilis); treatment for the endemic treponematoses is benzathine penicillin"
+  "id": "pinta",
+  "name": "Pinta",
+  "aliases": [
+    "Treponema carateum",
+    "carate",
+    "azul",
+    "mal del pinto"
   ],
-  "pathophysiology": "Treponema carateum enters through breaks in the skin during prolonged close contact. It multiplies locally to form the primary lesion and then, over months, produces disseminated secondary skin lesions (pintids) through local and lymphatic spread. The immune response and disturbance of melanocytes produce the characteristic sequence of dyschromic changes, progressing from hyperpigmentation to permanent depigmentation and skin atrophy in late disease. Because the organism does not disseminate to deep tissues, pinta remains a purely cutaneous disease throughout its course.",
-  "additionalDifferentials": [
-   "Vitiligo (for late achromic lesions)",
-   "Pityriasis versicolor and other superficial mycoses",
-   "Other endemic treponematoses (yaws, bejel)",
-   "Leprosy (hypopigmented patches)",
-   "Post-inflammatory dyspigmentation",
-   "Psoriasis or chronic eczema (for scaly plaques)"
-  ],
-  "additionalInvestigations": [
-   "Dark-field microscopy of scrapings from active lesions for spirochaetes",
-   "Non-treponemal serology (e.g. RPR/VDRL) for activity and follow-up",
-   "Treponemal serology (e.g. TPPA/TPHA) for confirmation",
-   "Skin biopsy where the diagnosis is uncertain",
-   "PCR of lesion material where available",
-   "Assessment of close contacts in endemic communities"
-  ],
-  "redFlags": [
-   "Extensive disfiguring depigmentation causing psychosocial harm",
-   "Diagnostic uncertainty with vitiligo or leprosy delaying treatment",
-   "Positive syphilis serology raising confusion about venereal infection",
-   "Persistence or spread of active lesions despite treatment"
-  ],
-  "prognosis": "Early and secondary pinta respond fully to penicillin, but late achromic and atrophic skin changes are often permanent and cosmetically disfiguring even after cure; the disease carries no systemic morbidity.",
-  "pitfalls": [
-   "Mistaking late depigmented lesions for vitiligo and missing a treatable infection",
-   "Interpreting positive treponemal serology as venereal syphilis",
-   "Expecting depigmented skin to re-pigment fully after treatment",
-   "Failing to treat contacts and interrupt transmission",
-   "Confusing pinta with other endemic treponematoses without regional context"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with intramuscular benzathine benzylpenicillin as first-line curative therapy, which resolves early and secondary disease",
-   "Use an oral macrolide such as azithromycin, or a tetracycline such as doxycycline, in penicillin-allergic patients",
-   "Examine and treat close household and community contacts to interrupt skin-to-skin transmission",
-   "Follow response with serial non-treponemal serology titres to confirm cure",
-   "Counsel that late achromic and atrophic skin changes are usually permanent and cosmetically disfiguring despite microbiological cure",
-   "Engage public health measures in endemic communities, including active case-finding and improved hygiene and crowding"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pinta-pathway",
-   "title": "Pinta: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Pinta is a chronic non-venereal treponematosis caused by Treponema carateum and is confined to the skin, occurring in remote rural areas of Central and South America",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive disfiguring depigmentation causing psychosocial harm",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dark-field microscopy of scrapings from active lesions for spirochaetes, Non-treponemal serology (e.g. RPR/VDRL) for activity and follow-up, Treponemal serology (e.g. TPPA/TPHA) for confirmation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with intramuscular benzathine benzylpenicillin as first-line curative therapy, which resolves early and secondary disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking late depigmented lesions for vitiligo and missing a treatable infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pinta."
-  }
- ],
- "tables": [
-  {
-   "id": "pinta-matrix",
-   "title": "Pinta: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Pinta is a chronic non-venereal treponematosis caused by Treponema carateum and is confined to the skin, occurring in remote",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Pinta is a chronic non-venereal treponematosis caused by Treponema carateum and is confined to the skin, occurring in remote rural areas of Central and South America",
+      "Transmission is by prolonged direct skin-to-skin contact with lesion material, favoured by crowding and poor hygiene; it is not sexually transmitted",
+      "Unlike the other endemic treponematoses, pinta affects only the skin and does not involve bone, viscera or the nervous system",
+      "The primary lesion is an erythematous scaly papule or plaque that slowly enlarges, usually on exposed limbs",
+      "Secondary lesions (pintids) are disseminated scaly patches that undergo striking colour changes, becoming blue, violet, brown then depigmented",
+      "Late pinta is characterised by symmetrical achromic (depigmented) and atrophic patches that resemble vitiligo and are cosmetically disfiguring",
+      "Diagnosis uses dark-field microscopy and treponemal/non-treponemal serology (indistinguishable from syphilis); treatment for the endemic treponematoses is benzathine penicillin"
     ],
-    [
-     "Key Investigations",
-     "Dark-field microscopy of scrapings from active lesions for spirochaetes, Non-treponemal serology (e.g. RPR/VDRL) for activity and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Treponema carateum enters through breaks in the skin during prolonged close contact. It multiplies locally to form the primary lesion and then, over months, produces disseminated secondary skin lesions (pintids) through local and lymphatic spread. The immune response and disturbance of melanocytes produce the characteristic sequence of dyschromic changes, progressing from hyperpigmentation to permanent depigmentation and skin atrophy in late disease. Because the organism does not disseminate to deep tissues, pinta remains a purely cutaneous disease throughout its course.",
+    "additionalDifferentials": [
+      "Vitiligo (for late achromic lesions)",
+      "Pityriasis versicolor and other superficial mycoses",
+      "Other endemic treponematoses (yaws, bejel)",
+      "Leprosy (hypopigmented patches)",
+      "Post-inflammatory dyspigmentation",
+      "Psoriasis or chronic eczema (for scaly plaques)"
     ],
-    [
-     "Primary Differentials",
-     "Vitiligo (for late achromic lesions), Pityriasis versicolor and other superficial mycoses, Other endemic treponematoses (yaws,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dark-field microscopy of scrapings from active lesions for spirochaetes",
+      "Non-treponemal serology (e.g. RPR/VDRL) for activity and follow-up",
+      "Treponemal serology (e.g. TPPA/TPHA) for confirmation",
+      "Skin biopsy where the diagnosis is uncertain",
+      "PCR of lesion material where available",
+      "Assessment of close contacts in endemic communities"
     ],
-    [
-     "Management Strategy",
-     "Treat with intramuscular benzathine benzylpenicillin as first-line curative therapy, which resolves early and secondary disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive disfiguring depigmentation causing psychosocial harm",
+      "Diagnostic uncertainty with vitiligo or leprosy delaying treatment",
+      "Positive syphilis serology raising confusion about venereal infection",
+      "Persistence or spread of active lesions despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking late depigmented lesions for vitiligo and missing a treatable infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early and secondary pinta respond fully to penicillin, but late achromic and atrophic skin changes are often permanent and cosmetically disfiguring even after cure; the disease carries no systemic morbidity.",
+    "pitfalls": [
+      "Mistaking late depigmented lesions for vitiligo and missing a treatable infection",
+      "Interpreting positive treponemal serology as venereal syphilis",
+      "Expecting depigmented skin to re-pigment fully after treatment",
+      "Failing to treat contacts and interrupt transmission",
+      "Confusing pinta with other endemic treponematoses without regional context"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with intramuscular benzathine benzylpenicillin as first-line curative therapy, which resolves early and secondary disease",
+      "Use an oral macrolide such as azithromycin, or a tetracycline such as doxycycline, in penicillin-allergic patients",
+      "Examine and treat close household and community contacts to interrupt skin-to-skin transmission",
+      "Follow response with serial non-treponemal serology titres to confirm cure",
+      "Counsel that late achromic and atrophic skin changes are usually permanent and cosmetically disfiguring despite microbiological cure",
+      "Engage public health measures in endemic communities, including active case-finding and improved hygiene and crowding"
     ]
-   ],
-   "caption": "Overview comparison matrix for pinta."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pinta-real-image",
-   "title": "Pinta: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "pinta-pathway",
+      "title": "Pinta: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Pinta is a chronic non-venereal treponematosis caused by Treponema carateum and is confined to the skin, occurring in remote rural areas of Central and South America",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive disfiguring depigmentation causing psychosocial harm",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dark-field microscopy of scrapings from active lesions for spirochaetes, Non-treponemal serology (e.g. RPR/VDRL) for activity and follow-up, Treponemal serology (e.g. TPPA/TPHA) for confirmation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with intramuscular benzathine benzylpenicillin as first-line curative therapy, which resolves early and secondary disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking late depigmented lesions for vitiligo and missing a treatable infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pinta."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pinta-matrix",
+      "title": "Pinta: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Pinta is a chronic non-venereal treponematosis caused by Treponema carateum and is confined to the skin, occurring in remote",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dark-field microscopy of scrapings from active lesions for spirochaetes, Non-treponemal serology (e.g. RPR/VDRL) for activity and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vitiligo (for late achromic lesions), Pityriasis versicolor and other superficial mycoses, Other endemic treponematoses (yaws,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with intramuscular benzathine benzylpenicillin as first-line curative therapy, which resolves early and secondary disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking late depigmented lesions for vitiligo and missing a treatable infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pinta."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pinta-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dark-field microscopy of scrapings from active lesions",
+          "cells": [
+            {
+              "text": "Spirochaetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-treponemal serology (RPR or VDRL)",
+          "cells": [
+            {
+              "text": "Activity and follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treponemal serology (TPPA or TPHA)",
+          "cells": [
+            {
+              "text": "Confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of lesion material",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of close contacts in endemic communities",
+          "cells": [
+            {
+              "text": "Community transmission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pinta-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitiligo",
+          "cells": [
+            {
+              "text": "Late achromic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leprosy",
+          "cells": [
+            {
+              "text": "Hypopigmented patches"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pinta-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzathine benzylpenicillin",
+          "cells": [
+            {
+              "text": "Intramuscular first-line curative therapy; resolves early and secondary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrolide or tetracycline",
+          "cells": [
+            {
+              "text": "Azithromycin or doxycycline in penicillin-allergic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact treatment",
+          "cells": [
+            {
+              "text": "Examine and treat close household and community contacts to interrupt transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Serial non-treponemal serology titres to confirm cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Late achromic and atrophic skin changes are usually permanent and disfiguring after cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health",
+          "cells": [
+            {
+              "text": "Active case-finding, improved hygiene and reduced crowding in endemic communities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pinta-dx-mgmt",
+      "title": "Diagnosis and management of Pinta",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Scaly or depigmented skin lesions with suspected endemic treponemal infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (disfiguring depigmentation, doubt with vitiligo or leprosy, spreading lesions)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist review for disfiguring or treatment-resistant lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dark-field microscopy of scrapings; non-treponemal and treponemal serology; PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do dark-field, serology or PCR confirm a treponemal infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vitiligo, leprosy, pityriasis versicolor or post-inflammatory dyspigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intramuscular benzathine benzylpenicillin as first-line curative therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azithromycin or doxycycline in penicillin-allergic patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Examine and treat close household and community contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial non-treponemal serology titres to confirm cure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Public health measures, including active case-finding and improved hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early disease responds fully to penicillin; late achromic changes are often permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

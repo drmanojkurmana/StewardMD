@@ -1,175 +1,545 @@
 {
- "id": "cervical_spondylotic_myelopathy",
- "name": "Cervical spondylotic myelopathy",
- "aliases": [
-  "CSM",
-  "cervical myelopathy",
-  "degenerative cervical myelopathy",
-  "spondylotic cervical myelopathy"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Spine",
- "specialty": "Spinal Surgery / Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rothman-Simeone and Herkowitz's The Spine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest cause of spinal cord dysfunction in adults over 50, resulting from degenerative narrowing of the cervical canal",
-   "Presents insidiously with clumsy hands (difficulty with buttons, handwriting, and dropping objects) and an unsteady, broad-based gait",
-   "Upper motor neurone signs appear below the level of compression: hyperreflexia, clonus, extensor plantar responses, and spasticity",
-   "A positive Hoffmann sign (flicking the middle fingernail provokes thumb and index flexion) and an inverted supinator reflex point to cervical cord involvement",
-   "The Lhermitte phenomenon, an electric-shock sensation down the spine or limbs on neck flexion, may be reported",
-   "The myelopathic hand shows the finger escape sign and difficulty with rapid grip-and-release movements",
-   "Neck pain may be mild or absent, and sensory symptoms and sphincter disturbance tend to appear later",
-   "MRI demonstrates cord compression and may show intramedullary signal change; surgical decompression is the mainstay for progressive myelopathy because conservative treatment rarely reverses established deficits"
+  "id": "cervical_spondylotic_myelopathy",
+  "name": "Cervical spondylotic myelopathy",
+  "aliases": [
+    "CSM",
+    "cervical myelopathy",
+    "degenerative cervical myelopathy",
+    "spondylotic cervical myelopathy"
   ],
-  "pathophysiology": "Cervical spondylotic myelopathy results from age-related degenerative change: disc-height loss, osteophyte (spondylotic bar) formation, facet and uncovertebral hypertrophy, and infolding of a thickened ligamentum flavum progressively narrow the cervical spinal canal, and a congenitally narrow canal predisposes. Static compression is compounded by dynamic factors, as the cord is pinched during extension and stretched over ventral osteophytes during flexion. Repetitive mechanical injury together with impaired microvascular perfusion produces demyelination and grey-matter loss, particularly in the lateral and posterior columns, giving rise to the characteristic long-tract signs.",
-  "additionalDifferentials": [
-   "Motor neurone disease (amyotrophic lateral sclerosis)",
-   "Multiple sclerosis or other demyelinating disease",
-   "Subacute combined degeneration from vitamin B12 deficiency",
-   "Intramedullary or extramedullary spinal tumour",
-   "Normal-pressure hydrocephalus or other central gait disorder",
-   "Peripheral neuropathy"
-  ],
-  "additionalInvestigations": [
-   "MRI of the cervical spine to show compression and any cord signal change",
-   "Flexion-extension radiographs to assess alignment and instability",
-   "CT to characterise osteophytes and ossification of the posterior longitudinal ligament",
-   "Nerve conduction studies and EMG to help distinguish motor neurone disease or peripheral neuropathy",
-   "Vitamin B12 and metabolic screen when subacute combined degeneration is possible"
-  ],
-  "redFlags": [
-   "Rapidly progressive weakness, gait deterioration, or new sphincter disturbance",
-   "Acute deterioration after minor neck trauma suggesting a central cord syndrome in a stenotic neck",
-   "Significant cord compression with myelomalacia on imaging"
-  ],
-  "prognosis": "The natural history is typically one of stepwise deterioration; established neurological deficits often do not fully recover even after surgery, so timely decompression before severe or long-standing signs develop offers the best functional outcome.",
-  "pitfalls": [
-   "Misattributing early myelopathy to ageing, arthritis, or peripheral neuropathy and delaying imaging",
-   "Ascribing bilateral hand clumsiness and hyperreflexia to carpal tunnel syndrome",
-   "Failing to recognise the risk of catastrophic central cord injury from minor falls in a stenotic neck"
-  ],
-  "references": [
-   "Rothman-Simeone and Herkowitz's The Spine",
-   "AOSpine guidelines on the management of degenerative cervical myelopathy"
-  ],
-  "crossLinks": [
-   "cervical_radiculopathy",
-   "thoracic_disc_herniation"
-  ],
-  "management": [
-   "Refer promptly for surgical decompression by anterior cervical discectomy and fusion, corpectomy or posterior laminectomy or laminoplasty, the definitive treatment that halts progression",
-   "Consider a period of watchful waiting with activity modification in mild, non-progressive disease, counselling the patient carefully about the risk of deterioration",
-   "Provide supportive care including analgesia, occupational therapy for hand function and physiotherapy for gait and balance",
-   "Advise avoidance of high-risk activities and neck trauma, as minor injury can precipitate acute cord deterioration in a stenotic canal",
-   "Monitor with serial neurological examination and functional myelopathy scoring to detect stepwise decline",
-   "Manage established deficits with multidisciplinary rehabilitation, including falls prevention and bladder assessment",
-   "Escalate for urgent surgery if there is rapid neurological deterioration or acute cord compression"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cervical_spondylotic_myelopathy-pathway",
-   "title": "Cervical spondylotic myelopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest cause of spinal cord dysfunction in adults over 50, resulting from degenerative narrowing of the cervical canal",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive weakness, gait deterioration, or new sphincter disturbance",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the cervical spine to show compression and any cord signal change, Flexion-extension radiographs to assess alignment and instability, CT to characterise osteophytes and ossification of the posterior longitudinal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Refer promptly for surgical decompression by anterior cervical discectomy and fusion, corpectomy or posterior laminectomy or laminoplasty, the definitive treatment that halts progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misattributing early myelopathy to ageing, arthritis, or peripheral neuropathy and delaying imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cervical spondylotic myelopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "cervical_spondylotic_myelopathy-matrix",
-   "title": "Cervical spondylotic myelopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest cause of spinal cord dysfunction in adults over 50, resulting from degenerative narrowing of the cervical canal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Spine",
+  "specialty": "Spinal Surgery / Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rothman-Simeone and Herkowitz's The Spine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest cause of spinal cord dysfunction in adults over 50, resulting from degenerative narrowing of the cervical canal",
+      "Presents insidiously with clumsy hands (difficulty with buttons, handwriting, and dropping objects) and an unsteady, broad-based gait",
+      "Upper motor neurone signs appear below the level of compression: hyperreflexia, clonus, extensor plantar responses, and spasticity",
+      "A positive Hoffmann sign (flicking the middle fingernail provokes thumb and index flexion) and an inverted supinator reflex point to cervical cord involvement",
+      "The Lhermitte phenomenon, an electric-shock sensation down the spine or limbs on neck flexion, may be reported",
+      "The myelopathic hand shows the finger escape sign and difficulty with rapid grip-and-release movements",
+      "Neck pain may be mild or absent, and sensory symptoms and sphincter disturbance tend to appear later",
+      "MRI demonstrates cord compression and may show intramedullary signal change; surgical decompression is the mainstay for progressive myelopathy because conservative treatment rarely reverses established deficits"
     ],
-    [
-     "Key Investigations",
-     "MRI of the cervical spine to show compression and any cord signal change, Flexion-extension radiographs to assess alignment and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cervical spondylotic myelopathy results from age-related degenerative change: disc-height loss, osteophyte (spondylotic bar) formation, facet and uncovertebral hypertrophy, and infolding of a thickened ligamentum flavum progressively narrow the cervical spinal canal, and a congenitally narrow canal predisposes. Static compression is compounded by dynamic factors, as the cord is pinched during extension and stretched over ventral osteophytes during flexion. Repetitive mechanical injury together with impaired microvascular perfusion produces demyelination and grey-matter loss, particularly in the lateral and posterior columns, giving rise to the characteristic long-tract signs.",
+    "additionalDifferentials": [
+      "Motor neurone disease (amyotrophic lateral sclerosis)",
+      "Multiple sclerosis or other demyelinating disease",
+      "Subacute combined degeneration from vitamin B12 deficiency",
+      "Intramedullary or extramedullary spinal tumour",
+      "Normal-pressure hydrocephalus or other central gait disorder",
+      "Peripheral neuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Motor neurone disease (amyotrophic lateral sclerosis), Multiple sclerosis or other demyelinating disease, Subacute combined",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the cervical spine to show compression and any cord signal change",
+      "Flexion-extension radiographs to assess alignment and instability",
+      "CT to characterise osteophytes and ossification of the posterior longitudinal ligament",
+      "Nerve conduction studies and EMG to help distinguish motor neurone disease or peripheral neuropathy",
+      "Vitamin B12 and metabolic screen when subacute combined degeneration is possible"
     ],
-    [
-     "Management Strategy",
-     "Refer promptly for surgical decompression by anterior cervical discectomy and fusion, corpectomy or posterior laminectomy or",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive weakness, gait deterioration, or new sphincter disturbance",
+      "Acute deterioration after minor neck trauma suggesting a central cord syndrome in a stenotic neck",
+      "Significant cord compression with myelomalacia on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Misattributing early myelopathy to ageing, arthritis, or peripheral neuropathy and delaying imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is typically one of stepwise deterioration; established neurological deficits often do not fully recover even after surgery, so timely decompression before severe or long-standing signs develop offers the best functional outcome.",
+    "pitfalls": [
+      "Misattributing early myelopathy to ageing, arthritis, or peripheral neuropathy and delaying imaging",
+      "Ascribing bilateral hand clumsiness and hyperreflexia to carpal tunnel syndrome",
+      "Failing to recognise the risk of catastrophic central cord injury from minor falls in a stenotic neck"
+    ],
+    "references": [
+      "Rothman-Simeone and Herkowitz's The Spine",
+      "AOSpine guidelines on the management of degenerative cervical myelopathy"
+    ],
+    "crossLinks": [
+      "cervical_radiculopathy",
+      "thoracic_disc_herniation"
+    ],
+    "management": [
+      "Refer promptly for surgical decompression by anterior cervical discectomy and fusion, corpectomy or posterior laminectomy or laminoplasty, the definitive treatment that halts progression",
+      "Consider a period of watchful waiting with activity modification in mild, non-progressive disease, counselling the patient carefully about the risk of deterioration",
+      "Provide supportive care including analgesia, occupational therapy for hand function and physiotherapy for gait and balance",
+      "Advise avoidance of high-risk activities and neck trauma, as minor injury can precipitate acute cord deterioration in a stenotic canal",
+      "Monitor with serial neurological examination and functional myelopathy scoring to detect stepwise decline",
+      "Manage established deficits with multidisciplinary rehabilitation, including falls prevention and bladder assessment",
+      "Escalate for urgent surgery if there is rapid neurological deterioration or acute cord compression"
     ]
-   ],
-   "caption": "Overview comparison matrix for cervical spondylotic myelopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cervical-spondylotic-myelopathy-real-image",
-   "title": "Cervical spondylotic myelopathy: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "cervical_spondylotic_myelopathy-pathway",
+      "title": "Cervical spondylotic myelopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest cause of spinal cord dysfunction in adults over 50, resulting from degenerative narrowing of the cervical canal",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive weakness, gait deterioration, or new sphincter disturbance",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the cervical spine to show compression and any cord signal change, Flexion-extension radiographs to assess alignment and instability, CT to characterise osteophytes and ossification of the posterior longitudinal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Refer promptly for surgical decompression by anterior cervical discectomy and fusion, corpectomy or posterior laminectomy or laminoplasty, the definitive treatment that halts progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misattributing early myelopathy to ageing, arthritis, or peripheral neuropathy and delaying imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cervical spondylotic myelopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cervical_spondylotic_myelopathy-matrix",
+      "title": "Cervical spondylotic myelopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest cause of spinal cord dysfunction in adults over 50, resulting from degenerative narrowing of the cervical canal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the cervical spine to show compression and any cord signal change, Flexion-extension radiographs to assess alignment and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Motor neurone disease (amyotrophic lateral sclerosis), Multiple sclerosis or other demyelinating disease, Subacute combined",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Refer promptly for surgical decompression by anterior cervical discectomy and fusion, corpectomy or posterior laminectomy or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misattributing early myelopathy to ageing, arthritis, or peripheral neuropathy and delaying imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cervical spondylotic myelopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rothman-Simeone and Herkowitz's The Spine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 377-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cervical_spondylotic_myelopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the cervical spine",
+          "cells": [
+            {
+              "text": "Cord compression and any intramedullary signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexion-extension radiographs",
+          "cells": [
+            {
+              "text": "Alignment and instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Osteophytes and ossification of the posterior longitudinal ligament"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Helps distinguish motor neurone disease or peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 and metabolic screen",
+          "cells": [
+            {
+              "text": "When subacute combined degeneration is possible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cervical_spondylotic_myelopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subacute combined degeneration",
+          "cells": [
+            {
+              "text": "Vitamin B12 deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor neurone disease",
+          "cells": [
+            {
+              "text": "Distinguished by nerve conduction studies and EMG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cervical_spondylotic_myelopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Anterior cervical discectomy and fusion, corpectomy, or posterior laminectomy or laminoplasty"
+            },
+            {
+              "text": "Definitive treatment that halts progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "Activity modification with careful counselling"
+            },
+            {
+              "text": "Mild, non-progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Analgesia, occupational therapy for hand function and physiotherapy for gait"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Injury avoidance",
+          "cells": [
+            {
+              "text": "Avoid high-risk activities and neck trauma"
+            },
+            {
+              "text": "Minor injury can precipitate cord deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Serial neurological examination and functional myelopathy scoring"
+            },
+            {
+              "text": "Detects stepwise decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Multidisciplinary rehabilitation, falls prevention and bladder assessment"
+            },
+            {
+              "text": "Established deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery",
+          "cells": [
+            {
+              "text": "Escalate for rapid deterioration or acute cord compression"
+            },
+            {
+              "text": "Acute deterioration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cervical_spondylotic_myelopathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Spinal cord level versus vertebral body",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Corresponding vertebral body"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper cervical",
+          "cells": [
+            {
+              "text": "Same level as the cord segment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lower cervical",
+          "cells": [
+            {
+              "text": "1 level higher"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Upper thoracic",
+          "cells": [
+            {
+              "text": "2 levels higher"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lower thoracic",
+          "cells": [
+            {
+              "text": "2 to 3 levels higher"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lumbar",
+          "cells": [
+            {
+              "text": "T10 to T12"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sacral",
+          "cells": [
+            {
+              "text": "T12 to L1"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cervical_spondylotic_myelopathy-dx-mgmt",
+      "title": "Diagnosis and management of Cervical spondylotic myelopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cervical spondylotic myelopathy: clumsy hands and unsteady gait over 50",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid weakness, gait decline, sphincter disturbance, neck trauma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for acute cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI cervical spine, flexion-extension films, CT, EMG and B12 screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cord compression on MRI with upper motor neurone signs confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Refer promptly for surgical decompression, the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check motor neurone disease, multiple sclerosis and B12 deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Watchful waiting only for mild, non-progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid neck trauma and high-risk activities; cord injury can follow a minor fall",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial neurological examination and functional myelopathy scoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stepwise decline; established deficits often do not fully recover",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

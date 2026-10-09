@@ -1,171 +1,451 @@
 {
- "id": "legius_syndrome",
- "name": "Legius syndrome",
- "aliases": [
-  "SPRED1",
-  "neurofibromatosis type 1-like syndrome",
-  "NFLS"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as multiple cafe-au-lait macules with or without axillary/inguinal freckling, closely mimicking neurofibromatosis type 1 (NF1)",
-   "Crucially lacks the tumour features of NF1: no neurofibromas, no optic pathway gliomas, no Lisch nodules and no plexiform tumours",
-   "Caused by heterozygous loss-of-function variants in SPRED1, a negative regulator of RAS-MAPK signalling, so it belongs to the RASopathy family",
-   "Inherited in an autosomal dominant pattern; a positive family history of pigmentary features without tumours is a useful clue",
-   "Some children have mild learning difficulties, ADHD or macrocephaly, but overall the phenotype is far milder than NF1",
-   "Molecular testing distinguishes it from NF1 and spares patients unnecessary tumour surveillance and anxiety",
-   "Should be considered in any child meeting pigmentary criteria for NF1 who has no other NF1 features, especially when a parent is similarly affected"
+  "id": "legius_syndrome",
+  "name": "Legius syndrome",
+  "aliases": [
+    "SPRED1",
+    "neurofibromatosis type 1-like syndrome",
+    "NFLS"
   ],
-  "pathophysiology": "Legius syndrome results from inactivating variants in SPRED1, which encodes a protein that normally dampens the RAS-mitogen-activated protein kinase pathway by facilitating neurofibromin function. Reduced SPRED1 activity leads to mild overactivity of RAS-MAPK signalling in melanocytes, producing cafe-au-lait macules and freckling, yet without the broader tumour-suppressor loss seen when neurofibromin itself is deficient. This explains the shared pigmentary phenotype with NF1 but the absence of the neurofibromas and other tumours that characterise true NF1.",
-  "additionalDifferentials": [
-   "Neurofibromatosis type 1",
-   "Constitutional mismatch repair deficiency syndrome",
-   "Noonan syndrome with multiple lentigines",
-   "McCune-Albright syndrome (cafe-au-lait macules)",
-   "Familial multiple cafe-au-lait macules without a syndrome",
-   "Piebaldism and other pigmentary conditions"
-  ],
-  "additionalInvestigations": [
-   "Targeted SPRED1 sequencing, usually as part of an NF1/RASopathy gene panel",
-   "NF1 gene analysis to exclude neurofibromatosis type 1",
-   "Detailed dermatological examination and documentation of pigmentary lesions",
-   "Slit-lamp examination to look for Lisch nodules (absent in Legius)",
-   "Developmental and neuropsychological assessment where learning concerns exist",
-   "Family cascade screening once a variant is identified"
-  ],
-  "redFlags": [
-   "Appearance of a true neurofibroma or plexiform tumour, which points away from Legius towards NF1",
-   "Optic pathway symptoms or an orbital mass suggesting glioma (an NF1 feature)",
-   "Rapidly progressive or numerous cafe-au-lait lesions with systemic features suggesting an alternative diagnosis",
-   "Findings meeting full NF1 diagnostic criteria despite an initial Legius label"
-  ],
-  "prognosis": "Legius syndrome carries a favourable outlook with a normal life expectancy and no established increase in tumour risk, though a minority have mild cognitive or attentional difficulties that benefit from educational support.",
-  "pitfalls": [
-   "Labelling a child with NF1 on pigmentary criteria alone and imposing lifelong tumour surveillance when the true diagnosis is Legius",
-   "Assuming a normal SPRED1 result excludes NF1 without dedicated NF1 testing",
-   "Overlooking the diagnosis in a mildly affected parent, missing the autosomal dominant pattern",
-   "Failing to reassure families about the benign nature once molecular confirmation is obtained"
-  ],
-  "references": [
-   "GeneReviews: Legius Syndrome",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the diagnosis by SPRED1 molecular testing and exclude NF1, which spares patients unnecessary tumour surveillance and anxiety",
-   "Reassure that, unlike NF1, there is no established increase in tumour risk requiring neuroimaging or Lisch-nodule surveillance",
-   "Provide educational support and assessment for the mild learning difficulties or attention-deficit problems that affect a minority",
-   "Offer dermatological review of cafe-au-lait macules and freckling where there is cosmetic concern",
-   "Offer genetic counselling for this autosomal dominant condition with cascade testing of relatives once a variant is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "legius_syndrome-pathway",
-   "title": "Legius syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as multiple cafe-au-lait macules with or without axillary/inguinal freckling, closely mimicking neurofibromatosis type 1 (NF1)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Appearance of a true neurofibroma or plexiform tumour, which points away from Legius towards NF1",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted SPRED1 sequencing, usually as part of an NF1/RASopathy gene panel, NF1 gene analysis to exclude neurofibromatosis type 1, Detailed dermatological examination and documentation of pigmentary lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the diagnosis by SPRED1 molecular testing and exclude NF1, which spares patients unnecessary tumour surveillance and anxiety"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling a child with NF1 on pigmentary criteria alone and imposing lifelong tumour surveillance when the true diagnosis is Legius"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of legius syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "legius_syndrome-matrix",
-   "title": "Legius syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as multiple cafe-au-lait macules with or without axillary/inguinal freckling, closely mimicking neurofibromatosis type 1",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as multiple cafe-au-lait macules with or without axillary/inguinal freckling, closely mimicking neurofibromatosis type 1 (NF1)",
+      "Crucially lacks the tumour features of NF1: no neurofibromas, no optic pathway gliomas, no Lisch nodules and no plexiform tumours",
+      "Caused by heterozygous loss-of-function variants in SPRED1, a negative regulator of RAS-MAPK signalling, so it belongs to the RASopathy family",
+      "Inherited in an autosomal dominant pattern; a positive family history of pigmentary features without tumours is a useful clue",
+      "Some children have mild learning difficulties, ADHD or macrocephaly, but overall the phenotype is far milder than NF1",
+      "Molecular testing distinguishes it from NF1 and spares patients unnecessary tumour surveillance and anxiety",
+      "Should be considered in any child meeting pigmentary criteria for NF1 who has no other NF1 features, especially when a parent is similarly affected"
     ],
-    [
-     "Key Investigations",
-     "Targeted SPRED1 sequencing, usually as part of an NF1/RASopathy gene panel, NF1 gene analysis to exclude neurofibromatosis type",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Legius syndrome results from inactivating variants in SPRED1, which encodes a protein that normally dampens the RAS-mitogen-activated protein kinase pathway by facilitating neurofibromin function. Reduced SPRED1 activity leads to mild overactivity of RAS-MAPK signalling in melanocytes, producing cafe-au-lait macules and freckling, yet without the broader tumour-suppressor loss seen when neurofibromin itself is deficient. This explains the shared pigmentary phenotype with NF1 but the absence of the neurofibromas and other tumours that characterise true NF1.",
+    "additionalDifferentials": [
+      "Neurofibromatosis type 1",
+      "Constitutional mismatch repair deficiency syndrome",
+      "Noonan syndrome with multiple lentigines",
+      "McCune-Albright syndrome (cafe-au-lait macules)",
+      "Familial multiple cafe-au-lait macules without a syndrome",
+      "Piebaldism and other pigmentary conditions"
     ],
-    [
-     "Primary Differentials",
-     "Neurofibromatosis type 1, Constitutional mismatch repair deficiency syndrome, Noonan syndrome with multiple lentigines",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted SPRED1 sequencing, usually as part of an NF1/RASopathy gene panel",
+      "NF1 gene analysis to exclude neurofibromatosis type 1",
+      "Detailed dermatological examination and documentation of pigmentary lesions",
+      "Slit-lamp examination to look for Lisch nodules (absent in Legius)",
+      "Developmental and neuropsychological assessment where learning concerns exist",
+      "Family cascade screening once a variant is identified"
     ],
-    [
-     "Management Strategy",
-     "Confirm the diagnosis by SPRED1 molecular testing and exclude NF1, which spares patients unnecessary tumour surveillance and",
-     "Core treatment modality"
+    "redFlags": [
+      "Appearance of a true neurofibroma or plexiform tumour, which points away from Legius towards NF1",
+      "Optic pathway symptoms or an orbital mass suggesting glioma (an NF1 feature)",
+      "Rapidly progressive or numerous cafe-au-lait lesions with systemic features suggesting an alternative diagnosis",
+      "Findings meeting full NF1 diagnostic criteria despite an initial Legius label"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling a child with NF1 on pigmentary criteria alone and imposing lifelong tumour surveillance when the true diagnosis is",
-     "Prevent diagnostic or management error"
+    "prognosis": "Legius syndrome carries a favourable outlook with a normal life expectancy and no established increase in tumour risk, though a minority have mild cognitive or attentional difficulties that benefit from educational support.",
+    "pitfalls": [
+      "Labelling a child with NF1 on pigmentary criteria alone and imposing lifelong tumour surveillance when the true diagnosis is Legius",
+      "Assuming a normal SPRED1 result excludes NF1 without dedicated NF1 testing",
+      "Overlooking the diagnosis in a mildly affected parent, missing the autosomal dominant pattern",
+      "Failing to reassure families about the benign nature once molecular confirmation is obtained"
+    ],
+    "references": [
+      "GeneReviews: Legius Syndrome",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the diagnosis by SPRED1 molecular testing and exclude NF1, which spares patients unnecessary tumour surveillance and anxiety",
+      "Reassure that, unlike NF1, there is no established increase in tumour risk requiring neuroimaging or Lisch-nodule surveillance",
+      "Provide educational support and assessment for the mild learning difficulties or attention-deficit problems that affect a minority",
+      "Offer dermatological review of cafe-au-lait macules and freckling where there is cosmetic concern",
+      "Offer genetic counselling for this autosomal dominant condition with cascade testing of relatives once a variant is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for legius syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "legius-syndrome-real-image",
-   "title": "Legius syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "legius_syndrome-pathway",
+      "title": "Legius syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as multiple cafe-au-lait macules with or without axillary/inguinal freckling, closely mimicking neurofibromatosis type 1 (NF1)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Appearance of a true neurofibroma or plexiform tumour, which points away from Legius towards NF1",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted SPRED1 sequencing, usually as part of an NF1/RASopathy gene panel, NF1 gene analysis to exclude neurofibromatosis type 1, Detailed dermatological examination and documentation of pigmentary lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the diagnosis by SPRED1 molecular testing and exclude NF1, which spares patients unnecessary tumour surveillance and anxiety"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling a child with NF1 on pigmentary criteria alone and imposing lifelong tumour surveillance when the true diagnosis is Legius"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of legius syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "legius_syndrome-matrix",
+      "title": "Legius syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as multiple cafe-au-lait macules with or without axillary/inguinal freckling, closely mimicking neurofibromatosis type 1",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted SPRED1 sequencing, usually as part of an NF1/RASopathy gene panel, NF1 gene analysis to exclude neurofibromatosis type",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neurofibromatosis type 1, Constitutional mismatch repair deficiency syndrome, Noonan syndrome with multiple lentigines",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the diagnosis by SPRED1 molecular testing and exclude NF1, which spares patients unnecessary tumour surveillance and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling a child with NF1 on pigmentary criteria alone and imposing lifelong tumour surveillance when the true diagnosis is",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for legius syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "legius_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted SPRED1 sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis within an NF1 or RASopathy panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NF1 gene analysis",
+          "cells": [
+            {
+              "text": "Excludes neurofibromatosis type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological examination",
+          "cells": [
+            {
+              "text": "Documents the pigmentary lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Lisch nodules, which are absent in Legius syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Where learning concerns exist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "legius_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurofibromatosis type 1",
+          "cells": [
+            {
+              "text": "Neurofibromas, optic pathway glioma and Lisch nodules are absent in Legius"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial multiple cafe-au-lait macules without a syndrome",
+          "cells": [
+            {
+              "text": "Pigmentary features without tumours; a parent may be similarly affected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "McCune-Albright syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "legius_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "SPRED1 testing and NF1 exclusion",
+          "cells": [
+            {
+              "text": "Spares unnecessary tumour surveillance and anxiety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "No established increase in tumour risk requiring neuroimaging or Lisch-nodule surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational support",
+          "cells": [
+            {
+              "text": "For mild learning or attention difficulties in a minority"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological review",
+          "cells": [
+            {
+              "text": "Cafe-au-lait macules and freckling where there is cosmetic concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; cascade testing of relatives once a variant is found"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "legius_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Legius syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple cafe-au-lait macules with axillary or inguinal freckling, no NF1 tumour features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (true neurofibroma, optic glioma, orbital mass, full NF1 criteria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: manage as NF1, with tumour surveillance and specialist referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SPRED1 sequencing within a RASopathy panel, NF1 gene analysis, slit-lamp",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic SPRED1 variant found with NF1 excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as NF1 or consider other pigmentary syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Confirm by SPRED1 testing and exclude NF1",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure: no established tumour risk requiring neuroimaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Educational support for learning or attention difficulties",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dermatological review where there is cosmetic concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and cascade testing of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Favourable outlook with normal life expectancy; no established increase in tumour risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

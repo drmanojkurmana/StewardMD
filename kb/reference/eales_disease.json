@@ -1,178 +1,467 @@
 {
- "id": "eales_disease",
- "name": "eales disease",
- "aliases": [
-  "idiopathic retinal periphlebitis",
-  "primary perivasculitis of the retina"
- ],
- "class": "non_infective",
- "system": "ophthalmic",
- "specialty": "ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically affects young adult men, typically presenting with sudden painless loss of vision or floaters from vitreous haemorrhage rather than from the underlying vasculitis itself.",
-   "The disease is an idiopathic obliterative peripheral retinal periphlebitis; venous involvement predominates over arterial, distinguishing it from many other retinal vasculitides.",
-   "Diagnosis is one of exclusion, made only after systemic and infective causes of retinal vasculitis have been actively ruled out.",
-   "A strong association with hypersensitivity to tuberculoprotein is recognised, particularly in the Indian subcontinent, though active systemic tuberculosis is usually absent.",
-   "The natural history progresses through three overlapping phases: active periphlebitis, peripheral retinal capillary non-perfusion (ischaemia), and neovascularisation with its haemorrhagic complications.",
-   "Fundus fluorescein angiography is central to management, delineating the extent of peripheral capillary non-perfusion and areas of leakage that guide laser photocoagulation.",
-   "Bilateral involvement is common though often asymmetrical, so the fellow eye must always be examined and monitored even when asymptomatic.",
-   "Corticosteroids control the inflammatory (vasculitic) phase while sectoral or scatter laser photocoagulation addresses the ischaemic and neovascular phases."
+  "id": "eales_disease",
+  "name": "eales disease",
+  "aliases": [
+    "idiopathic retinal periphlebitis",
+    "primary perivasculitis of the retina"
   ],
-  "pathophysiology": "Eales disease is an idiopathic inflammatory occlusive vasculopathy centred on the peripheral retinal veins. An initial perivascular inflammatory infiltrate (periphlebitis) causes vessel wall thickening, sheathing and progressive luminal occlusion. The resulting peripheral capillary non-perfusion generates retinal ischaemia, which upregulates vascular endothelial growth factor and drives the formation of fragile retinal and optic disc neovascular tufts. These new vessels bleed readily into the vitreous, producing the characteristic recurrent vitreous haemorrhage, and later fibrovascular proliferation may exert tractional forces leading to retinal detachment. A delayed hypersensitivity response to mycobacterial (tuberculoprotein) antigen is strongly implicated as a trigger of the immune-mediated vascular injury in predisposed individuals, alongside proposed roles for oxidative stress and altered retinal autoimmunity, but no single causative organism is consistently demonstrated within the affected tissue.",
-  "additionalDifferentials": [
-   "Tuberculous retinal vasculitis with active systemic infection",
-   "Sarcoid retinal periphlebitis (candle-wax drippings)",
-   "Behcet disease with occlusive retinal vasculitis",
-   "Branch retinal vein occlusion",
-   "Diabetic retinopathy with peripheral neovascularisation",
-   "Sickle cell (and other haemoglobinopathy) proliferative retinopathy",
-   "Ocular ischaemic syndrome from carotid disease"
-  ],
-  "additionalInvestigations": [
-   "Fundus fluorescein angiography to map capillary non-perfusion and neovascular leakage",
-   "B-scan ultrasonography when vitreous haemorrhage obscures the fundus, to exclude retinal detachment",
-   "Tuberculin skin testing or interferon-gamma release assay",
-   "Chest imaging to screen for pulmonary tuberculosis or sarcoidosis",
-   "Serum angiotensin-converting enzyme and inflammatory markers",
-   "Optical coherence tomography for associated macular oedema",
-   "Wide-field retinal imaging to document peripheral involvement over time"
-  ],
-  "redFlags": [
-   "Sudden marked loss of vision indicating fresh dense vitreous haemorrhage",
-   "New floaters or a shadow in the peripheral field suggesting tractional retinal detachment",
-   "Neovascularisation of the optic disc, carrying high risk of recurrent bleeding",
-   "Non-clearing vitreous haemorrhage requiring surgical intervention",
-   "Rubeosis iridis or raised intraocular pressure signalling anterior segment neovascularisation"
-  ],
-  "prognosis": "With timely laser photocoagulation of ischaemic retina and control of the inflammatory phase, visual prognosis is generally favourable and many eyes retain good vision. Outcomes worsen with recurrent vitreous haemorrhage, macular involvement or tractional retinal detachment, though modern vitreoretinal surgery salvages useful vision in a substantial proportion of advanced cases.",
-  "pitfalls": [
-   "Labelling any peripheral retinal vasculitis as Eales disease without first excluding tuberculosis, sarcoidosis and Behcet disease.",
-   "Overlooking the asymptomatic fellow eye, which may harbour early treatable periphlebitis or ischaemia.",
-   "Attributing painless visual loss solely to the vasculitis and missing an underlying tractional retinal detachment behind vitreous haemorrhage.",
-   "Treating the inflammatory phase with corticosteroids while neglecting laser ablation of established peripheral non-perfusion.",
-   "Failing to arrange long-term follow-up, so recurrent neovascular bleeding goes undetected until vision is lost."
-  ],
-  "references": [
-   "Ryan's Retina (current edition)",
-   "Kanski's Clinical Ophthalmology (current edition)",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Retina and Vitreous"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Apply laser photocoagulation to ischaemic peripheral retina, guided by fundus fluorescein angiography, to regress neovascularisation and prevent recurrent haemorrhage",
-   "Control the active inflammatory periphlebitis phase with corticosteroids, given systemically or by periocular or intravitreal route",
-   "Use intravitreal anti-VEGF injection as an adjunct for active neovascularisation or associated macular oedema",
-   "Undertake pars plana vitrectomy for non-clearing vitreous haemorrhage or tractional retinal detachment",
-   "Investigate for tuberculoprotein hypersensitivity and, where latent tuberculosis is confirmed, consider antituberculous therapy in conjunction with a physician",
-   "Arrange regular ophthalmic surveillance for recurrent haemorrhage and neovascular complications in the fellow eye",
-   "Coordinate care between ophthalmology and physician or tuberculosis specialist input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eales_disease-pathway",
-   "title": "eales disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically affects young adult men, typically presenting with sudden painless loss of vision or floaters from vitreous haemorrhage rather than from the underlying vasculitis itself.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden marked loss of vision indicating fresh dense vitreous haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fundus fluorescein angiography to map capillary non-perfusion and neovascular leakage, B-scan ultrasonography when vitreous haemorrhage obscures the fundus, to exclude retinal detachment, Tuberculin skin testing or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Apply laser photocoagulation to ischaemic peripheral retina, guided by fundus fluorescein angiography, to regress neovascularisation and prevent recurrent haemorrhage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling any peripheral retinal vasculitis as Eales disease without first excluding tuberculosis, sarcoidosis and Behcet disease."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eales disease."
-  }
- ],
- "tables": [
-  {
-   "id": "eales_disease-matrix",
-   "title": "eales disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically affects young adult men, typically presenting with sudden painless loss of vision or floaters from vitreous",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ophthalmic",
+  "specialty": "ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically affects young adult men, typically presenting with sudden painless loss of vision or floaters from vitreous haemorrhage rather than from the underlying vasculitis itself.",
+      "The disease is an idiopathic obliterative peripheral retinal periphlebitis; venous involvement predominates over arterial, distinguishing it from many other retinal vasculitides.",
+      "Diagnosis is one of exclusion, made only after systemic and infective causes of retinal vasculitis have been actively ruled out.",
+      "A strong association with hypersensitivity to tuberculoprotein is recognised, particularly in the Indian subcontinent, though active systemic tuberculosis is usually absent.",
+      "The natural history progresses through three overlapping phases: active periphlebitis, peripheral retinal capillary non-perfusion (ischaemia), and neovascularisation with its haemorrhagic complications.",
+      "Fundus fluorescein angiography is central to management, delineating the extent of peripheral capillary non-perfusion and areas of leakage that guide laser photocoagulation.",
+      "Bilateral involvement is common though often asymmetrical, so the fellow eye must always be examined and monitored even when asymptomatic.",
+      "Corticosteroids control the inflammatory (vasculitic) phase while sectoral or scatter laser photocoagulation addresses the ischaemic and neovascular phases."
     ],
-    [
-     "Key Investigations",
-     "Fundus fluorescein angiography to map capillary non-perfusion and neovascular leakage, B-scan ultrasonography when vitreous",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Eales disease is an idiopathic inflammatory occlusive vasculopathy centred on the peripheral retinal veins. An initial perivascular inflammatory infiltrate (periphlebitis) causes vessel wall thickening, sheathing and progressive luminal occlusion. The resulting peripheral capillary non-perfusion generates retinal ischaemia, which upregulates vascular endothelial growth factor and drives the formation of fragile retinal and optic disc neovascular tufts. These new vessels bleed readily into the vitreous, producing the characteristic recurrent vitreous haemorrhage, and later fibrovascular proliferation may exert tractional forces leading to retinal detachment. A delayed hypersensitivity response to mycobacterial (tuberculoprotein) antigen is strongly implicated as a trigger of the immune-mediated vascular injury in predisposed individuals, alongside proposed roles for oxidative stress and altered retinal autoimmunity, but no single causative organism is consistently demonstrated within the affected tissue.",
+    "additionalDifferentials": [
+      "Tuberculous retinal vasculitis with active systemic infection",
+      "Sarcoid retinal periphlebitis (candle-wax drippings)",
+      "Behcet disease with occlusive retinal vasculitis",
+      "Branch retinal vein occlusion",
+      "Diabetic retinopathy with peripheral neovascularisation",
+      "Sickle cell (and other haemoglobinopathy) proliferative retinopathy",
+      "Ocular ischaemic syndrome from carotid disease"
     ],
-    [
-     "Primary Differentials",
-     "Tuberculous retinal vasculitis with active systemic infection, Sarcoid retinal periphlebitis (candle-wax drippings), Behcet",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fundus fluorescein angiography to map capillary non-perfusion and neovascular leakage",
+      "B-scan ultrasonography when vitreous haemorrhage obscures the fundus, to exclude retinal detachment",
+      "Tuberculin skin testing or interferon-gamma release assay",
+      "Chest imaging to screen for pulmonary tuberculosis or sarcoidosis",
+      "Serum angiotensin-converting enzyme and inflammatory markers",
+      "Optical coherence tomography for associated macular oedema",
+      "Wide-field retinal imaging to document peripheral involvement over time"
     ],
-    [
-     "Management Strategy",
-     "Apply laser photocoagulation to ischaemic peripheral retina, guided by fundus fluorescein angiography, to regress",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden marked loss of vision indicating fresh dense vitreous haemorrhage",
+      "New floaters or a shadow in the peripheral field suggesting tractional retinal detachment",
+      "Neovascularisation of the optic disc, carrying high risk of recurrent bleeding",
+      "Non-clearing vitreous haemorrhage requiring surgical intervention",
+      "Rubeosis iridis or raised intraocular pressure signalling anterior segment neovascularisation"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling any peripheral retinal vasculitis as Eales disease without first excluding tuberculosis, sarcoidosis and Behcet disease.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely laser photocoagulation of ischaemic retina and control of the inflammatory phase, visual prognosis is generally favourable and many eyes retain good vision. Outcomes worsen with recurrent vitreous haemorrhage, macular involvement or tractional retinal detachment, though modern vitreoretinal surgery salvages useful vision in a substantial proportion of advanced cases.",
+    "pitfalls": [
+      "Labelling any peripheral retinal vasculitis as Eales disease without first excluding tuberculosis, sarcoidosis and Behcet disease.",
+      "Overlooking the asymptomatic fellow eye, which may harbour early treatable periphlebitis or ischaemia.",
+      "Attributing painless visual loss solely to the vasculitis and missing an underlying tractional retinal detachment behind vitreous haemorrhage.",
+      "Treating the inflammatory phase with corticosteroids while neglecting laser ablation of established peripheral non-perfusion.",
+      "Failing to arrange long-term follow-up, so recurrent neovascular bleeding goes undetected until vision is lost."
+    ],
+    "references": [
+      "Ryan's Retina (current edition)",
+      "Kanski's Clinical Ophthalmology (current edition)",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Retina and Vitreous"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Apply laser photocoagulation to ischaemic peripheral retina, guided by fundus fluorescein angiography, to regress neovascularisation and prevent recurrent haemorrhage",
+      "Control the active inflammatory periphlebitis phase with corticosteroids, given systemically or by periocular or intravitreal route",
+      "Use intravitreal anti-VEGF injection as an adjunct for active neovascularisation or associated macular oedema",
+      "Undertake pars plana vitrectomy for non-clearing vitreous haemorrhage or tractional retinal detachment",
+      "Investigate for tuberculoprotein hypersensitivity and, where latent tuberculosis is confirmed, consider antituberculous therapy in conjunction with a physician",
+      "Arrange regular ophthalmic surveillance for recurrent haemorrhage and neovascular complications in the fellow eye",
+      "Coordinate care between ophthalmology and physician or tuberculosis specialist input"
     ]
-   ],
-   "caption": "Overview comparison matrix for eales disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eales-disease-real-image",
-   "title": "eales disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "eales_disease-pathway",
+      "title": "eales disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically affects young adult men, typically presenting with sudden painless loss of vision or floaters from vitreous haemorrhage rather than from the underlying vasculitis itself.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden marked loss of vision indicating fresh dense vitreous haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fundus fluorescein angiography to map capillary non-perfusion and neovascular leakage, B-scan ultrasonography when vitreous haemorrhage obscures the fundus, to exclude retinal detachment, Tuberculin skin testing or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Apply laser photocoagulation to ischaemic peripheral retina, guided by fundus fluorescein angiography, to regress neovascularisation and prevent recurrent haemorrhage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling any peripheral retinal vasculitis as Eales disease without first excluding tuberculosis, sarcoidosis and Behcet disease."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eales disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eales_disease-matrix",
+      "title": "eales disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically affects young adult men, typically presenting with sudden painless loss of vision or floaters from vitreous",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fundus fluorescein angiography to map capillary non-perfusion and neovascular leakage, B-scan ultrasonography when vitreous",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tuberculous retinal vasculitis with active systemic infection, Sarcoid retinal periphlebitis (candle-wax drippings), Behcet",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Apply laser photocoagulation to ischaemic peripheral retina, guided by fundus fluorescein angiography, to regress",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling any peripheral retinal vasculitis as Eales disease without first excluding tuberculosis, sarcoidosis and Behcet disease.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eales disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eales_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fundus fluorescein angiography",
+          "cells": [
+            {
+              "text": "Capillary non-perfusion and neovascular leakage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Retinal detachment behind vitreous haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculin skin test or interferon-gamma release assay",
+          "cells": [
+            {
+              "text": "Tuberculosis exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary tuberculosis or sarcoidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum ACE and inflammatory markers",
+          "cells": [
+            {
+              "text": "Sarcoidosis and inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eales_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculous retinal vasculitis",
+          "cells": [
+            {
+              "text": "Active systemic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoid retinal periphlebitis",
+          "cells": [
+            {
+              "text": "Candle-wax drippings along the veins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behcet disease with occlusive retinal vasculitis",
+          "cells": [
+            {
+              "text": "Occlusive vasculitis with systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eales_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Laser photocoagulation",
+          "cells": [
+            {
+              "text": "Ischaemic peripheral retina guided by angiography to regress neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "For the active periphlebitis phase; given systemically, periocular or intravitreal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal anti-VEGF",
+          "cells": [
+            {
+              "text": "Adjunct for active neovascularisation or macular oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pars plana vitrectomy",
+          "cells": [
+            {
+              "text": "Non-clearing vitreous haemorrhage or tractional detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis investigation",
+          "cells": [
+            {
+              "text": "Test for tuberculoprotein hypersensitivity; if latent TB is confirmed, consider antituberculous therapy with a physician"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fellow eye surveillance",
+          "cells": [
+            {
+              "text": "Recurrent haemorrhage or neovascular complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eales_disease-dx-mgmt",
+      "title": "Diagnosis and management of eales disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Eales disease: peripheral retinal vasculitis with vitreous haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden marked visual loss, shadow, disc neovascularisation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vitrectomy for non-clearing haemorrhage or tractional detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluorescein angiography; B-scan if haemorrhage; TB test or IGRA; chest imaging; ACE",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are tuberculosis, sarcoidosis and Behcet disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberculous or sarcoid vasculitis, Behcet, or branch vein occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Laser photocoagulation of ischaemic peripheral retina",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids for the active inflammatory periphlebitis phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravitreal anti-VEGF for neovascularisation or macular oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pars plana vitrectomy for non-clearing haemorrhage or tractional detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Tuberculosis assessment and regular surveillance of the fellow eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "With timely laser and control of inflammation, many eyes keep good vision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

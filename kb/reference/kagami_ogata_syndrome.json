@@ -1,175 +1,464 @@
 {
- "id": "kagami_ogata_syndrome",
- "name": "Kagami-Ogata syndrome (paternal UPD14)",
- "aliases": [
-  "upd(14)pat syndrome",
-  "paternal uniparental disomy 14",
-  "KOS14",
-  "14q32.2 imprinting disorder (paternal)"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An imprinting disorder of the chromosome 14q32.2 DLK1/MEG3 region in which the maternal contribution is lost, so paternally expressed genes are over-represented",
-   "The pregnancy is often complicated by marked polyhydramnios and a large placenta, prompting antenatal referral",
-   "The chest radiograph is the diagnostic clue: a small bell-shaped thorax with ribs that flare into a characteristic coat-hanger configuration",
-   "Neonates typically present with respiratory distress from thoracic constriction, and many require prolonged ventilatory support",
-   "Abdominal wall problems (omphalocele or diastasis recti) and feeding difficulty are common in the newborn period",
-   "It is the clinical mirror image of Temple syndrome, which arises from loss of the paternal contribution at the same locus (maternal uniparental disomy 14)",
-   "Later childhood may bring developmental delay, laryngomalacia, and a tendency to become overweight",
-   "Confirmation rests on methylation analysis of the 14q32.2 imprinted region, supported by microarray and uniparental disomy studies"
+  "id": "kagami_ogata_syndrome",
+  "name": "Kagami-Ogata syndrome (paternal UPD14)",
+  "aliases": [
+    "upd(14)pat syndrome",
+    "paternal uniparental disomy 14",
+    "KOS14",
+    "14q32.2 imprinting disorder (paternal)"
   ],
-  "pathophysiology": "The condition results from a disturbance of genomic imprinting at the DLK1/MEG3 domain on chromosome 14q32.2, a region controlled by differentially methylated regions that are normally set differently on the maternal and paternal chromosomes. When the maternally derived contribution is absent or silenced, whether through paternal uniparental disomy, a maternal deletion, or an epimutation, the paternally expressed genes such as DLK1 and RTL1 are over-dosed while the maternally expressed transcripts including MEG3 are lost. This imbalance in imprinted gene expression disrupts skeletal, placental, and neurological development, producing the thoracic dysplasia, abdominal wall defects, and neurodevelopmental features that define the phenotype. Because the same locus underlies Temple syndrome when the opposite parental contribution is affected, the two disorders behave as reciprocal imprinting conditions.",
-  "additionalDifferentials": [
-   "Temple syndrome (maternal uniparental disomy 14), the reciprocal imprinting disorder",
-   "Prader-Willi syndrome and other neonatal hypotonia/imprinting disorders",
-   "Skeletal dysplasias with small thorax such as asphyxiating thoracic dystrophy",
-   "Beckwith-Wiedemann spectrum when overgrowth and abdominal wall defects predominate",
-   "Congenital diaphragmatic hernia as a cause of neonatal respiratory failure",
-   "Trisomy 18 and other aneuploidies presenting with polyhydramnios and dysmorphism"
-  ],
-  "additionalInvestigations": [
-   "Methylation-specific analysis of the 14q32.2 imprinted region to confirm the imprinting defect",
-   "Chromosomal microarray to detect deletions or copy-number change at the locus",
-   "Uniparental disomy testing using informative microsatellite or SNP markers with parental samples",
-   "Chest radiography to demonstrate the bell-shaped thorax and coat-hanger rib pattern",
-   "Antenatal ultrasound assessment for polyhydramnios, thoracic size, and abdominal wall integrity",
-   "Neonatal respiratory and feeding assessment including consideration of laryngomalacia"
-  ],
-  "redFlags": [
-   "Severe neonatal respiratory distress from a constricted thorax requiring urgent airway and ventilatory support",
-   "Marked antenatal polyhydramnios raising the risk of preterm labour",
-   "Large abdominal wall defect needing prompt surgical planning",
-   "Failure to establish feeding with resultant faltering growth"
-  ],
-  "prognosis": "Outlook is dominated by the neonatal respiratory compromise, which can be life-threatening in the most severely affected infants; those who survive the newborn period often show gradual improvement in respiratory mechanics as the chest grows, though developmental delay, feeding problems, and a later tendency to excess weight gain frequently persist and warrant long-term multidisciplinary follow-up.",
-  "pitfalls": [
-   "Overlooking the coat-hanger rib sign on the neonatal chest film and attributing distress to other causes",
-   "Testing with karyotype or microarray alone, which can miss an imprinting defect that requires methylation analysis",
-   "Failing to counsel that recurrence risk differs markedly depending on the underlying molecular mechanism",
-   "Not recognising the reciprocal relationship with Temple syndrome when interpreting locus-specific results"
-  ],
-  "references": [
-   "GeneReviews: Kagami-Ogata syndrome / upd(14)pat and related imprinting disorders",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide neonatal respiratory support with mechanical ventilation for thoracic constriction, anticipating prolonged weaning",
-   "Surgically repair abdominal wall defects such as omphalocele",
-   "Support nutrition with nasogastric or gastrostomy feeding for feeding difficulty",
-   "Assess and manage upper-airway problems including laryngomalacia",
-   "Undertake developmental surveillance with early intervention for delay",
-   "Confirm the diagnosis by methylation-specific analysis of the 14q32.2 region and provide genetic counselling on recurrence risk",
-   "Coordinate multidisciplinary neonatology, respiratory, surgical and clinical genetics care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kagami_ogata_syndrome-pathway",
-   "title": "Kagami-Ogata syndrome (paternal UPD14): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An imprinting disorder of the chromosome 14q32.2 DLK1/MEG3 region in which the maternal contribution is lost, so paternally expressed genes are over-represented",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal respiratory distress from a constricted thorax requiring urgent airway and ventilatory support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Methylation-specific analysis of the 14q32.2 imprinted region to confirm the imprinting defect, Chromosomal microarray to detect deletions or copy-number change at the locus, Uniparental disomy testing using informative"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide neonatal respiratory support with mechanical ventilation for thoracic constriction, anticipating prolonged weaning"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the coat-hanger rib sign on the neonatal chest film and attributing distress to other causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kagami-ogata syndrome (paternal upd14)."
-  }
- ],
- "tables": [
-  {
-   "id": "kagami_ogata_syndrome-matrix",
-   "title": "Kagami-Ogata syndrome (paternal UPD14): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An imprinting disorder of the chromosome 14q32.2 DLK1/MEG3 region in which the maternal contribution is lost, so paternally",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An imprinting disorder of the chromosome 14q32.2 DLK1/MEG3 region in which the maternal contribution is lost, so paternally expressed genes are over-represented",
+      "The pregnancy is often complicated by marked polyhydramnios and a large placenta, prompting antenatal referral",
+      "The chest radiograph is the diagnostic clue: a small bell-shaped thorax with ribs that flare into a characteristic coat-hanger configuration",
+      "Neonates typically present with respiratory distress from thoracic constriction, and many require prolonged ventilatory support",
+      "Abdominal wall problems (omphalocele or diastasis recti) and feeding difficulty are common in the newborn period",
+      "It is the clinical mirror image of Temple syndrome, which arises from loss of the paternal contribution at the same locus (maternal uniparental disomy 14)",
+      "Later childhood may bring developmental delay, laryngomalacia, and a tendency to become overweight",
+      "Confirmation rests on methylation analysis of the 14q32.2 imprinted region, supported by microarray and uniparental disomy studies"
     ],
-    [
-     "Key Investigations",
-     "Methylation-specific analysis of the 14q32.2 imprinted region to confirm the imprinting defect, Chromosomal microarray to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The condition results from a disturbance of genomic imprinting at the DLK1/MEG3 domain on chromosome 14q32.2, a region controlled by differentially methylated regions that are normally set differently on the maternal and paternal chromosomes. When the maternally derived contribution is absent or silenced, whether through paternal uniparental disomy, a maternal deletion, or an epimutation, the paternally expressed genes such as DLK1 and RTL1 are over-dosed while the maternally expressed transcripts including MEG3 are lost. This imbalance in imprinted gene expression disrupts skeletal, placental, and neurological development, producing the thoracic dysplasia, abdominal wall defects, and neurodevelopmental features that define the phenotype. Because the same locus underlies Temple syndrome when the opposite parental contribution is affected, the two disorders behave as reciprocal imprinting conditions.",
+    "additionalDifferentials": [
+      "Temple syndrome (maternal uniparental disomy 14), the reciprocal imprinting disorder",
+      "Prader-Willi syndrome and other neonatal hypotonia/imprinting disorders",
+      "Skeletal dysplasias with small thorax such as asphyxiating thoracic dystrophy",
+      "Beckwith-Wiedemann spectrum when overgrowth and abdominal wall defects predominate",
+      "Congenital diaphragmatic hernia as a cause of neonatal respiratory failure",
+      "Trisomy 18 and other aneuploidies presenting with polyhydramnios and dysmorphism"
     ],
-    [
-     "Primary Differentials",
-     "Temple syndrome (maternal uniparental disomy 14), the reciprocal imprinting disorder, Prader-Willi syndrome and other neonatal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Methylation-specific analysis of the 14q32.2 imprinted region to confirm the imprinting defect",
+      "Chromosomal microarray to detect deletions or copy-number change at the locus",
+      "Uniparental disomy testing using informative microsatellite or SNP markers with parental samples",
+      "Chest radiography to demonstrate the bell-shaped thorax and coat-hanger rib pattern",
+      "Antenatal ultrasound assessment for polyhydramnios, thoracic size, and abdominal wall integrity",
+      "Neonatal respiratory and feeding assessment including consideration of laryngomalacia"
     ],
-    [
-     "Management Strategy",
-     "Provide neonatal respiratory support with mechanical ventilation for thoracic constriction, anticipating prolonged weaning",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal respiratory distress from a constricted thorax requiring urgent airway and ventilatory support",
+      "Marked antenatal polyhydramnios raising the risk of preterm labour",
+      "Large abdominal wall defect needing prompt surgical planning",
+      "Failure to establish feeding with resultant faltering growth"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the coat-hanger rib sign on the neonatal chest film and attributing distress to other causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook is dominated by the neonatal respiratory compromise, which can be life-threatening in the most severely affected infants; those who survive the newborn period often show gradual improvement in respiratory mechanics as the chest grows, though developmental delay, feeding problems, and a later tendency to excess weight gain frequently persist and warrant long-term multidisciplinary follow-up.",
+    "pitfalls": [
+      "Overlooking the coat-hanger rib sign on the neonatal chest film and attributing distress to other causes",
+      "Testing with karyotype or microarray alone, which can miss an imprinting defect that requires methylation analysis",
+      "Failing to counsel that recurrence risk differs markedly depending on the underlying molecular mechanism",
+      "Not recognising the reciprocal relationship with Temple syndrome when interpreting locus-specific results"
+    ],
+    "references": [
+      "GeneReviews: Kagami-Ogata syndrome / upd(14)pat and related imprinting disorders",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide neonatal respiratory support with mechanical ventilation for thoracic constriction, anticipating prolonged weaning",
+      "Surgically repair abdominal wall defects such as omphalocele",
+      "Support nutrition with nasogastric or gastrostomy feeding for feeding difficulty",
+      "Assess and manage upper-airway problems including laryngomalacia",
+      "Undertake developmental surveillance with early intervention for delay",
+      "Confirm the diagnosis by methylation-specific analysis of the 14q32.2 region and provide genetic counselling on recurrence risk",
+      "Coordinate multidisciplinary neonatology, respiratory, surgical and clinical genetics care"
     ]
-   ],
-   "caption": "Overview comparison matrix for kagami-ogata syndrome (paternal upd14)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kagami-ogata-syndrome-real-image",
-   "title": "Kagami-Ogata syndrome (paternal UPD14): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "kagami_ogata_syndrome-pathway",
+      "title": "Kagami-Ogata syndrome (paternal UPD14): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An imprinting disorder of the chromosome 14q32.2 DLK1/MEG3 region in which the maternal contribution is lost, so paternally expressed genes are over-represented",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal respiratory distress from a constricted thorax requiring urgent airway and ventilatory support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Methylation-specific analysis of the 14q32.2 imprinted region to confirm the imprinting defect, Chromosomal microarray to detect deletions or copy-number change at the locus, Uniparental disomy testing using informative"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide neonatal respiratory support with mechanical ventilation for thoracic constriction, anticipating prolonged weaning"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the coat-hanger rib sign on the neonatal chest film and attributing distress to other causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kagami-ogata syndrome (paternal upd14)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kagami_ogata_syndrome-matrix",
+      "title": "Kagami-Ogata syndrome (paternal UPD14): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An imprinting disorder of the chromosome 14q32.2 DLK1/MEG3 region in which the maternal contribution is lost, so paternally",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Methylation-specific analysis of the 14q32.2 imprinted region to confirm the imprinting defect, Chromosomal microarray to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Temple syndrome (maternal uniparental disomy 14), the reciprocal imprinting disorder, Prader-Willi syndrome and other neonatal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide neonatal respiratory support with mechanical ventilation for thoracic constriction, anticipating prolonged weaning",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the coat-hanger rib sign on the neonatal chest film and attributing distress to other causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kagami-ogata syndrome (paternal upd14)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kagami_ogata_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Methylation-specific analysis of 14q32.2",
+          "cells": [
+            {
+              "text": "Imprinting defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Deletion or copy-number change at the locus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uniparental disomy testing with parental samples",
+          "cells": [
+            {
+              "text": "Uniparental disomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Bell-shaped thorax and coat-hanger rib pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal ultrasound",
+          "cells": [
+            {
+              "text": "Polyhydramnios, thoracic size and abdominal wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal respiratory and feeding assessment",
+          "cells": [
+            {
+              "text": "Including laryngomalacia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kagami_ogata_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Temple syndrome",
+          "cells": [
+            {
+              "text": "Reciprocal imprinting disorder at the same region; methylation distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital diaphragmatic hernia",
+          "cells": [
+            {
+              "text": "Neonatal respiratory failure from a diaphragmatic defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kagami_ogata_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ventilation",
+          "cells": [
+            {
+              "text": "Mechanical ventilation for thoracic constriction; prolonged weaning expected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal wall",
+          "cells": [
+            {
+              "text": "Surgical repair of defects such as omphalocele"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding for feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway",
+          "cells": [
+            {
+              "text": "Management of laryngomalacia and upper-airway problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Development",
+          "cells": [
+            {
+              "text": "Developmental surveillance with early intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Methylation confirmation and counselling on recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kagami_ogata_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Kagami-Ogata syndrome (paternal UPD14)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Polyhydramnios in pregnancy; neonate with respiratory distress and bell-shaped thorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory distress needing ventilation, abdominal wall defect or feeding failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ventilation and airway support; surgical planning for abdominal wall defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph for coat-hanger ribs, 14q32.2 methylation, microarray, UPD testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Methylation or UPD14 pattern at 14q32.2 confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Temple syndrome or another thoracic dysplasia; repeat molecular tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ventilatory support for thoracic constriction, with prolonged weaning",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical repair of abdominal wall defect such as omphalocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nasogastric or gastrostomy feeding for feeding difficulty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Management of laryngomalacia and upper airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling on recurrence risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Respiratory and feeding issues settle variably; developmental surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

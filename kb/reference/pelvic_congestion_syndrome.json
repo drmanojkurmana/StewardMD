@@ -1,173 +1,407 @@
 {
- "id": "pelvic_congestion_syndrome",
- "name": "Pelvic congestion syndrome",
- "aliases": [
-  "pelvic venous congestion",
-  "pelvic venous insufficiency",
-  "ovarian vein reflux",
-  "PCS"
- ],
- "class": "non_infective",
- "system": "Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard gynaecology reference textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically affects multiparous premenopausal women who describe a dull, aching chronic pelvic pain lasting more than six months",
-   "The pain characteristically worsens towards the end of the day, on prolonged standing, and after intercourse, and eases on lying down",
-   "Deep dyspareunia and a post-coital ache are common, and varicosities may be visible over the vulva, buttocks, or upper thighs",
-   "Dilated, tortuous, incompetent ovarian and pelvic veins underlie the syndrome and can be demonstrated on Doppler imaging",
-   "It is a diagnosis of exclusion; other causes of chronic pelvic pain must be considered before symptoms are attributed to venous congestion",
-   "Ovarian and pelvic vein embolisation is the mainstay of definitive treatment, offering symptom relief in a majority of appropriately selected women",
-   "Secondary causes of pelvic venous obstruction, such as left renal vein or iliac vein compression, should be sought before treatment"
+  "id": "pelvic_congestion_syndrome",
+  "name": "Pelvic congestion syndrome",
+  "aliases": [
+    "pelvic venous congestion",
+    "pelvic venous insufficiency",
+    "ovarian vein reflux",
+    "PCS"
   ],
-  "pathophysiology": "The syndrome results from incompetence and dilatation of the ovarian and internal iliac venous tributaries. Failure of the venous valves permits retrograde flow and pooling of blood within the pelvic veins, producing chronic venous congestion. Oestrogen has a venodilatory effect and, together with the increased pelvic venous capacity acquired during pregnancy, contributes to the tendency of the condition to occur in premenopausal parous women. The engorged veins and associated stasis are thought to generate the characteristic positional pelvic pain.",
-  "additionalDifferentials": [
-   "Endometriosis",
-   "Chronic pelvic inflammatory disease and adhesions",
-   "Irritable bowel syndrome",
-   "Interstitial cystitis or bladder pain syndrome",
-   "Musculoskeletal or myofascial pelvic pain",
-   "Ovarian or other pelvic mass"
-  ],
-  "additionalInvestigations": [
-   "Transvaginal ultrasound with Doppler to identify dilated pelvic veins and demonstrate reflux",
-   "Transabdominal and transvaginal duplex assessment of ovarian vein diameter and flow direction",
-   "Magnetic resonance venography or CT venography to map the pelvic venous anatomy",
-   "Catheter venography, regarded as the reference standard, which also allows treatment at the same sitting",
-   "Investigations to exclude other pelvic pathology, including laparoscopy where indicated"
-  ],
-  "redFlags": [
-   "Features suggesting an underlying secondary obstruction such as nutcracker or May-Thurner physiology",
-   "A pelvic or renal mass causing venous compression",
-   "Haematuria or flank pain pointing to left renal vein compression",
-   "New or atypical symptoms that raise concern for malignancy"
-  ],
-  "prognosis": "Many women obtain durable relief of pain following ovarian vein embolisation, although symptoms may persist or recur, particularly if an underlying obstructive cause has not been addressed.",
-  "pitfalls": [
-   "Overdiagnosis, since pelvic varices are common and frequently asymptomatic incidental findings",
-   "Failing to exclude a secondary obstructive cause such as renal or iliac vein compression",
-   "Attributing all chronic pelvic pain to congestion without excluding coexisting pathology",
-   "Offering intervention without correlating imaging findings with the clinical picture"
-  ],
-  "references": [
-   "Standard gynaecology reference textbook",
-   "Peer-reviewed gynaecology clinical reviews",
-   "Interventional radiology reference text"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer ovarian and pelvic vein embolisation as the definitive treatment, occluding the incompetent refluxing veins",
-   "Trial hormonal venoconstriction with progestogens such as medroxyprogesterone or a GnRH analogue to reduce venous congestion and pain",
-   "Provide analgesia for the chronic positional pelvic pain",
-   "Exclude other causes of chronic pelvic pain before attributing symptoms to venous congestion, using laparoscopy where indicated",
-   "Identify and treat an underlying obstructive cause such as nutcracker or May-Thurner compression with venous stenting to prevent persistence or recurrence",
-   "Refer to interventional radiology, reserving surgical vein ligation or hysterectomy for selected refractory cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pelvic_congestion_syndrome-pathway",
-   "title": "Pelvic congestion syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically affects multiparous premenopausal women who describe a dull, aching chronic pelvic pain lasting more than six months",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting an underlying secondary obstruction such as nutcracker or May-Thurner physiology",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transvaginal ultrasound with Doppler to identify dilated pelvic veins and demonstrate reflux, Transabdominal and transvaginal duplex assessment of ovarian vein diameter and flow direction, Magnetic resonance venography or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer ovarian and pelvic vein embolisation as the definitive treatment, occluding the incompetent refluxing veins"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overdiagnosis, since pelvic varices are common and frequently asymptomatic incidental findings"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pelvic congestion syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "pelvic_congestion_syndrome-matrix",
-   "title": "Pelvic congestion syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically affects multiparous premenopausal women who describe a dull, aching chronic pelvic pain lasting more than six months",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard gynaecology reference textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically affects multiparous premenopausal women who describe a dull, aching chronic pelvic pain lasting more than six months",
+      "The pain characteristically worsens towards the end of the day, on prolonged standing, and after intercourse, and eases on lying down",
+      "Deep dyspareunia and a post-coital ache are common, and varicosities may be visible over the vulva, buttocks, or upper thighs",
+      "Dilated, tortuous, incompetent ovarian and pelvic veins underlie the syndrome and can be demonstrated on Doppler imaging",
+      "It is a diagnosis of exclusion; other causes of chronic pelvic pain must be considered before symptoms are attributed to venous congestion",
+      "Ovarian and pelvic vein embolisation is the mainstay of definitive treatment, offering symptom relief in a majority of appropriately selected women",
+      "Secondary causes of pelvic venous obstruction, such as left renal vein or iliac vein compression, should be sought before treatment"
     ],
-    [
-     "Key Investigations",
-     "Transvaginal ultrasound with Doppler to identify dilated pelvic veins and demonstrate reflux, Transabdominal and transvaginal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The syndrome results from incompetence and dilatation of the ovarian and internal iliac venous tributaries. Failure of the venous valves permits retrograde flow and pooling of blood within the pelvic veins, producing chronic venous congestion. Oestrogen has a venodilatory effect and, together with the increased pelvic venous capacity acquired during pregnancy, contributes to the tendency of the condition to occur in premenopausal parous women. The engorged veins and associated stasis are thought to generate the characteristic positional pelvic pain.",
+    "additionalDifferentials": [
+      "Endometriosis",
+      "Chronic pelvic inflammatory disease and adhesions",
+      "Irritable bowel syndrome",
+      "Interstitial cystitis or bladder pain syndrome",
+      "Musculoskeletal or myofascial pelvic pain",
+      "Ovarian or other pelvic mass"
     ],
-    [
-     "Primary Differentials",
-     "Endometriosis, Chronic pelvic inflammatory disease and adhesions, Irritable bowel syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transvaginal ultrasound with Doppler to identify dilated pelvic veins and demonstrate reflux",
+      "Transabdominal and transvaginal duplex assessment of ovarian vein diameter and flow direction",
+      "Magnetic resonance venography or CT venography to map the pelvic venous anatomy",
+      "Catheter venography, regarded as the reference standard, which also allows treatment at the same sitting",
+      "Investigations to exclude other pelvic pathology, including laparoscopy where indicated"
     ],
-    [
-     "Management Strategy",
-     "Offer ovarian and pelvic vein embolisation as the definitive treatment, occluding the incompetent refluxing veins",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting an underlying secondary obstruction such as nutcracker or May-Thurner physiology",
+      "A pelvic or renal mass causing venous compression",
+      "Haematuria or flank pain pointing to left renal vein compression",
+      "New or atypical symptoms that raise concern for malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overdiagnosis, since pelvic varices are common and frequently asymptomatic incidental findings",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many women obtain durable relief of pain following ovarian vein embolisation, although symptoms may persist or recur, particularly if an underlying obstructive cause has not been addressed.",
+    "pitfalls": [
+      "Overdiagnosis, since pelvic varices are common and frequently asymptomatic incidental findings",
+      "Failing to exclude a secondary obstructive cause such as renal or iliac vein compression",
+      "Attributing all chronic pelvic pain to congestion without excluding coexisting pathology",
+      "Offering intervention without correlating imaging findings with the clinical picture"
+    ],
+    "references": [
+      "Standard gynaecology reference textbook",
+      "Peer-reviewed gynaecology clinical reviews",
+      "Interventional radiology reference text"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer ovarian and pelvic vein embolisation as the definitive treatment, occluding the incompetent refluxing veins",
+      "Trial hormonal venoconstriction with progestogens such as medroxyprogesterone or a GnRH analogue to reduce venous congestion and pain",
+      "Provide analgesia for the chronic positional pelvic pain",
+      "Exclude other causes of chronic pelvic pain before attributing symptoms to venous congestion, using laparoscopy where indicated",
+      "Identify and treat an underlying obstructive cause such as nutcracker or May-Thurner compression with venous stenting to prevent persistence or recurrence",
+      "Refer to interventional radiology, reserving surgical vein ligation or hysterectomy for selected refractory cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for pelvic congestion syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pelvic-congestion-syndrome-real-image",
-   "title": "Pelvic congestion syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pelvic_congestion_syndrome-pathway",
+      "title": "Pelvic congestion syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically affects multiparous premenopausal women who describe a dull, aching chronic pelvic pain lasting more than six months",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting an underlying secondary obstruction such as nutcracker or May-Thurner physiology",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transvaginal ultrasound with Doppler to identify dilated pelvic veins and demonstrate reflux, Transabdominal and transvaginal duplex assessment of ovarian vein diameter and flow direction, Magnetic resonance venography or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer ovarian and pelvic vein embolisation as the definitive treatment, occluding the incompetent refluxing veins"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overdiagnosis, since pelvic varices are common and frequently asymptomatic incidental findings"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pelvic congestion syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pelvic_congestion_syndrome-matrix",
+      "title": "Pelvic congestion syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically affects multiparous premenopausal women who describe a dull, aching chronic pelvic pain lasting more than six months",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transvaginal ultrasound with Doppler to identify dilated pelvic veins and demonstrate reflux, Transabdominal and transvaginal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Endometriosis, Chronic pelvic inflammatory disease and adhesions, Irritable bowel syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer ovarian and pelvic vein embolisation as the definitive treatment, occluding the incompetent refluxing veins",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overdiagnosis, since pelvic varices are common and frequently asymptomatic incidental findings",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pelvic congestion syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pelvic_congestion_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Dilated pelvic veins and reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex of ovarian vein diameter and flow direction",
+          "cells": [
+            {
+              "text": "Ovarian vein size and direction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnetic resonance venography",
+          "cells": [
+            {
+              "text": "Pelvic venous anatomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelvic_congestion_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Endometriosis",
+          "cells": [
+            {
+              "text": "Gynaecological cause of chronic pelvic pain; imaging distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interstitial cystitis or bladder pain syndrome",
+          "cells": [
+            {
+              "text": "Bladder-related pain; urinary symptoms and venous imaging separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pelvic_congestion_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ovarian and pelvic vein embolisation",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Definitive; occludes the incompetent refluxing veins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal venoconstriction",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Progestogens such as medroxyprogesterone or a GnRH analogue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat secondary obstruction",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Address nutcracker or May-Thurner physiology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pelvic_congestion_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Pelvic congestion syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic dull pelvic ache over six months, worse on standing and by day's end",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (secondary obstruction, pelvic mass or haematuria with flank pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for a renal or pelvic mass compressing veins",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal Doppler, ovarian vein duplex, MR venography, other causes excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are dilated refluxing pelvic veins shown, with other causes of pain excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider endometriosis, pelvic inflammatory disease, IBS or bladder pain syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ovarian and pelvic vein embolisation to occlude refluxing veins",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Progestogen or GnRH analogue to reduce venous dilatation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any secondary obstruction such as nutcracker or May-Thurner physiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid overdiagnosis, since pelvic varices are often incidental",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many get durable relief after embolisation; symptoms may recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

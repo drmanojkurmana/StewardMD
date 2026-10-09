@@ -261,25 +261,570 @@
       "caption": "Diagnostic and clinical overview matrix for clostridioides difficile infection."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "c-diff-real-image",
-      "title": "Clostridioides difficile Infection: Diagnostic Abdominal Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "IDSA/SHEA, Clostridioides difficile 2021 Focused Update",
+      "url": "https://www.idsociety.org/practice-guideline/clostridioides-difficile-2021-focused-update/",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Clinical Overview of C. diff Infection",
+      "url": "https://www.cdc.gov/c-diff/hcp/clinical-overview/index.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "C_DIFF-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and grading C. difficile infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Solid Viscera",
-          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+          "parameter": "Who to test",
+          "unit": "stools/24 h",
+          "cells": [
+            {
+              "text": "3 or more unformed stools in 24 hours without laxatives or stool softeners",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Test only unformed stool; not asymptomatic patients"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Gastrointestinal Tract",
-          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+          "parameter": "Risk exposure",
+          "cells": [
+            {
+              "text": "Antibiotics (fluoroquinolones, 3rd or 4th gen cephalosporins, clindamycin, carbapenems), age 65 or older, recent hospital or nursing-home stay"
+            },
+            {
+              "text": "Raises pretest probability"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Mesentery & Peritoneum",
-          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+          "parameter": "NAAT or PCR for toxin gene",
+          "cells": [
+            {
+              "text": "Rapid and sensitive"
+            },
+            {
+              "text": "May only show colonisation; confirm toxin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxin EIA",
+          "cells": [
+            {
+              "text": "Specific but insensitive"
+            },
+            {
+              "text": "{{hy:Use in a two-step algorithm: NAAT then toxin, or GDH plus toxin with NAAT as arbiter}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool appearance",
+          "cells": [
+            {
+              "text": "Soft to watery or mucoid, almost never grossly bloody"
+            },
+            {
+              "text": "Bloody stool points to another cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe disease: white cell count",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": ">=15,000",
+              "op": ">=",
+              "value": 15000
+            },
+            {
+              "text": "Severe CDI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe disease: serum creatinine",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">=1.5",
+              "op": ">=",
+              "value": 1.5
+            },
+            {
+              "text": "Severe CDI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fulminant disease",
+          "cells": [
+            {
+              "text": "Hypotension or shock, ileus or toxic megacolon; WBC often >=20,000/uL"
+            },
+            {
+              "text": "May have no diarrhoea; mimics acute abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum lactate",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Rising; operate before it reaches 5",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Signals need for colectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Pseudomembranes seen in only about 50%",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Specific but a negative scope does not exclude CDI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal CT",
+          "cells": [
+            {
+              "text": "Marked colonic wall thickening, oedema, stranding, ascites"
+            },
+            {
+              "text": "Supports colitis in the very ill"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test of cure",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Over half stay colonised after diarrhoea resolves"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "C_DIFF-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from C. difficile infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Laxative or stool-softener diarrhoea",
+          "cells": [
+            {
+              "text": "Diarrhoea explained by these drugs; do not test"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Colonisation with diarrhoea from another cause",
+          "cells": [
+            {
+              "text": "{{hy:NAAT positive but toxin negative}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloody infective colitis or other colitis",
+          "cells": [
+            {
+              "text": "Grossly bloody stool, which is unusual in CDI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute surgical abdomen",
+          "cells": [
+            {
+              "text": "Fulminant CDI can present without diarrhoea; consider if antibiotics in prior 2 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonised infants",
+          "cells": [
+            {
+              "text": "Frequently carry toxin-producing strains but almost never develop disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "The sources opened did not list a broader differential or a separating test per condition."
+    },
+    {
+      "id": "C_DIFF-treatment",
+      "kind": "treatment",
+      "title": "Treatment of C. difficile infection (IDSA/SHEA 2021)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop or switch the inciting antibiotic",
+          "cells": [
+            {
+              "text": "All cases"
+            },
+            {
+              "text": "Reassess need for any antibiotic"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fidaxomicin",
+          "cells": [
+            {
+              "text": "{{hy:Preferred for initial episode and first recurrence}}"
+            },
+            {
+              "text": "Trial regimen 200 mg twice daily for 10 days; extended-pulsed option"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral vancomycin",
+          "cells": [
+            {
+              "text": "Acceptable alternative for initial episode"
+            },
+            {
+              "text": "125 mg four times daily for 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metronidazole",
+          "cells": [
+            {
+              "text": "Not preferred"
+            },
+            {
+              "text": "Efficacy has fallen; vancomycin or fidaxomicin preferred"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tapered-pulsed vancomycin, or vancomycin then rifaximin",
+          "cells": [
+            {
+              "text": "First or multiple recurrences"
+            },
+            {
+              "text": "Doses not given in the update"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Faecal microbiota transplantation",
+          "cells": [
+            {
+              "text": "Multiple recurrences after antibiotic failure"
+            },
+            {
+              "text": "Screened donors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bezlotoxumab",
+          "unit": "mg/kg",
+          "cells": [
+            {
+              "text": "Recurrence within 6 months, or high-risk primary episode",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Single 10 mg/kg IV over 60 minutes with antibiotics; caution in heart failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fulminant CDI: vancomycin",
+          "cells": [
+            {
+              "text": "Shock, ileus or megacolon"
+            },
+            {
+              "text": "500 mg four times daily orally or by nasogastric tube; no data for fidaxomicin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colectomy",
+          "cells": [
+            {
+              "text": "Fulminant disease, perforation, rising lactate"
+            },
+            {
+              "text": "Operate before lactate reaches 5 mmol/L"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiperistaltic agents and opiates",
+          "cells": [
+            {
+              "text": "Active CDI"
+            },
+            {
+              "text": "May mask symptoms and worsen disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact precautions and sporicidal cleaning",
+          "cells": [
+            {
+              "text": "Suspected or confirmed CDI"
+            },
+            {
+              "text": "Gloves and gown; alcohol gel does not kill spores"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Bezlotoxumab is listed as a conditional, very low certainty suggestion. The bezlotoxumab cell value is the dose in mg/kg."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "C_DIFF-dx-mgmt",
+      "title": "Diagnosis and management of C. difficile infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "3 or more unformed stools in 24 h, no laxatives, antibiotic exposure",
+          "cite": "c3"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Isolate with contact precautions; stop inciting antibiotic if possible",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Two-step stool test: NAAT then toxin, or GDH plus toxin",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Toxin confirmed (or high suspicion with test delay)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Likely colonisation; look for other cause of diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Shock, ileus or toxic megacolon?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vancomycin 500 mg four times daily oral or NG; surgical review",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Lactate rising or perforation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Colectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Recurrence?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Fidaxomicin, or vancomycin 125 mg four times daily for 10 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Fidaxomicin or tapered-pulsed vancomycin; consider bezlotoxumab",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Multiple recurrences: faecal microbiota transplantation",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Complete course; no test of cure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n14",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "First episode"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Recurrence"
+        },
+        {
+          "from": "n11",
+          "to": "n14",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Further recurrence"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "Resolved"
         }
       ]
     }

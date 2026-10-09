@@ -1,173 +1,460 @@
 {
- "id": "congenital_myasthenic_syndrome_choline_acetyltransferase",
- "name": "Choline acetyltransferase deficiency congenital myasthenic syndrome",
- "aliases": [
-  "CHAT-CMS",
-  "CMS with episodic apnoea",
-  "CMS-EA"
- ],
- "class": "non_infective",
- "system": "Neuromuscular junction",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuromuscular medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presynaptic congenital myasthenic syndrome caused by biallelic CHAT variants that impair resynthesis of acetylcholine at the motor nerve terminal.",
-   "Hallmark feature is sudden, life-threatening episodic apnoea and bulbar weakness, often triggered by fever, infection, excitement or crying, with the historical label 'CMS with episodic apnoea'.",
-   "Neonates may present with hypotonia, feeding difficulty, weak cry and recurrent unexplained respiratory arrests, sometimes mistaken for sudden infant death or brainstem pathology.",
-   "Between crises the child can appear relatively well with only mild fatigable weakness, so a normal examination does not exclude the diagnosis.",
-   "Because the defect is presynaptic, weakness worsens with sustained or repetitive activity that depletes the limited acetylcholine reserve.",
-   "Cholinesterase inhibitors are the mainstay and are usually effective; families should be trained to give them prophylactically and to manage apnoea with assisted ventilation.",
-   "Prolonged high-frequency repetitive nerve stimulation may be needed to unmask the decrement, as a standard low-frequency study can be normal at rest."
+  "id": "congenital_myasthenic_syndrome_choline_acetyltransferase",
+  "name": "Choline acetyltransferase deficiency congenital myasthenic syndrome",
+  "aliases": [
+    "CHAT-CMS",
+    "CMS with episodic apnoea",
+    "CMS-EA"
   ],
-  "pathophysiology": "Choline acetyltransferase is the presynaptic enzyme that catalyses synthesis of acetylcholine from choline and acetyl-coenzyme A within the motor nerve terminal, allowing the transmitter to be repackaged into synaptic vesicles after release. Biallelic loss-of-function or hypomorphic variants in CHAT reduce the rate at which acetylcholine can be resynthesised, so quantal stores are adequate at rest but cannot keep pace with sustained or rapid firing. During periods of high demand, such as febrile illness, physical stress or crying, the transmitter reserve becomes depleted, the endplate potential falls below threshold, and neuromuscular transmission fails abruptly, producing the characteristic episodic weakness and central-appearing apnoea. Because the postsynaptic apparatus and endplate architecture are structurally intact, the deficit is one of transmitter supply rather than receptor function, which explains the fluctuating course, the responsiveness to cholinesterase inhibition, and the paradoxically normal appearance between attacks.",
-  "additionalDifferentials": [
-   "Other presynaptic congenital myasthenic syndromes (SNAP25, synaptotagmin, VAMP1 defects)",
-   "Autoimmune myasthenia gravis of infancy (rare) and transient neonatal myasthenia",
-   "Infantile botulism with descending weakness and autonomic features",
-   "Central congenital hypoventilation and brainstem malformations causing apnoea",
-   "Spinal muscular atrophy and other causes of neonatal hypotonia",
-   "Mitochondrial and metabolic encephalopathies presenting with apnoeic episodes"
-  ],
-  "additionalInvestigations": [
-   "Repetitive nerve stimulation, including prolonged high-frequency stimulation or activity to demonstrate a decrement that may be absent at rest",
-   "Single-fibre electromyography showing increased jitter and blocking",
-   "Targeted CHAT gene sequencing or a broad congenital myasthenic syndrome gene panel",
-   "Negative acetylcholine receptor and muscle-specific kinase antibodies to exclude autoimmune disease",
-   "Therapeutic trial of a cholinesterase inhibitor with documentation of clinical response",
-   "Home apnoea and oxygen saturation monitoring during and between episodes"
-  ],
-  "redFlags": [
-   "Sudden apnoea or respiratory arrest in an infant, particularly triggered by fever or crying",
-   "Recurrent unexplained cyanotic or life-threatening events in a hypotonic infant",
-   "Rapidly progressive bulbar weakness with pooling of secretions and aspiration risk",
-   "Deterioration during intercurrent infection requiring urgent ventilatory support"
-  ],
-  "prognosis": "With early recognition, prophylactic cholinesterase inhibition and family training in apnoea management, many children improve and the frequency of crises declines with age. The principal threat to life is an unrecognised apnoeic episode, so prognosis hinges on prompt diagnosis and a rehearsed emergency plan.",
-  "pitfalls": [
-   "Attributing recurrent apnoea to a primary central or brainstem cause and overlooking a treatable neuromuscular junction disorder",
-   "Being reassured by a normal examination or normal resting nerve conduction study between crises",
-   "Failing to prescribe or continue prophylactic cholinesterase inhibitors, leaving the child vulnerable during illness",
-   "Not equipping the family with a home apnoea plan, monitoring and the means to deliver assisted ventilation"
-  ],
-  "references": [
-   "Standard neuromuscular and paediatric neurology textbooks",
-   "Peer-reviewed reviews of congenital myasthenic syndromes"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Acetylcholinesterase inhibitors such as pyridostigmine are the mainstay and are usually effective, often given prophylactically",
-   "Train families to recognise and manage apnoeic episodes with bag-mask and assisted ventilation, and provide a home apnoea and oxygen-saturation monitor",
-   "Written emergency plan with pre-emptive dosing and escalation during febrile illness or physiological stress",
-   "Prompt treatment of infection and fever, which precipitate crises",
-   "Neonatal feeding support and airway protection for bulbar weakness",
-   "Avoid drugs that impair neuromuscular transmission",
-   "Genetic counselling for autosomal recessive CHAT inheritance with sibling testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_myasthenic_syndrome_choline_acetyltransferase-pathway",
-   "title": "Choline acetyltransferase deficiency congenital myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presynaptic congenital myasthenic syndrome caused by biallelic CHAT variants that impair resynthesis of acetylcholine at the motor nerve terminal.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden apnoea or respiratory arrest in an infant, particularly triggered by fever or crying",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repetitive nerve stimulation, including prolonged high-frequency stimulation or activity to demonstrate a decrement that may be absent at rest, Single-fibre electromyography showing increased jitter and blocking, Targeted"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Acetylcholinesterase inhibitors such as pyridostigmine are the mainstay and are usually effective, often given prophylactically"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing recurrent apnoea to a primary central or brainstem cause and overlooking a treatable neuromuscular junction disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of choline acetyltransferase deficiency congenital myasthenic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_myasthenic_syndrome_choline_acetyltransferase-matrix",
-   "title": "Choline acetyltransferase deficiency congenital myasthenic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presynaptic congenital myasthenic syndrome caused by biallelic CHAT variants that impair resynthesis of acetylcholine at the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular junction",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuromuscular medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presynaptic congenital myasthenic syndrome caused by biallelic CHAT variants that impair resynthesis of acetylcholine at the motor nerve terminal.",
+      "Hallmark feature is sudden, life-threatening episodic apnoea and bulbar weakness, often triggered by fever, infection, excitement or crying, with the historical label 'CMS with episodic apnoea'.",
+      "Neonates may present with hypotonia, feeding difficulty, weak cry and recurrent unexplained respiratory arrests, sometimes mistaken for sudden infant death or brainstem pathology.",
+      "Between crises the child can appear relatively well with only mild fatigable weakness, so a normal examination does not exclude the diagnosis.",
+      "Because the defect is presynaptic, weakness worsens with sustained or repetitive activity that depletes the limited acetylcholine reserve.",
+      "Cholinesterase inhibitors are the mainstay and are usually effective; families should be trained to give them prophylactically and to manage apnoea with assisted ventilation.",
+      "Prolonged high-frequency repetitive nerve stimulation may be needed to unmask the decrement, as a standard low-frequency study can be normal at rest."
     ],
-    [
-     "Key Investigations",
-     "Repetitive nerve stimulation, including prolonged high-frequency stimulation or activity to demonstrate a decrement that may be",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Choline acetyltransferase is the presynaptic enzyme that catalyses synthesis of acetylcholine from choline and acetyl-coenzyme A within the motor nerve terminal, allowing the transmitter to be repackaged into synaptic vesicles after release. Biallelic loss-of-function or hypomorphic variants in CHAT reduce the rate at which acetylcholine can be resynthesised, so quantal stores are adequate at rest but cannot keep pace with sustained or rapid firing. During periods of high demand, such as febrile illness, physical stress or crying, the transmitter reserve becomes depleted, the endplate potential falls below threshold, and neuromuscular transmission fails abruptly, producing the characteristic episodic weakness and central-appearing apnoea. Because the postsynaptic apparatus and endplate architecture are structurally intact, the deficit is one of transmitter supply rather than receptor function, which explains the fluctuating course, the responsiveness to cholinesterase inhibition, and the paradoxically normal appearance between attacks.",
+    "additionalDifferentials": [
+      "Other presynaptic congenital myasthenic syndromes (SNAP25, synaptotagmin, VAMP1 defects)",
+      "Autoimmune myasthenia gravis of infancy (rare) and transient neonatal myasthenia",
+      "Infantile botulism with descending weakness and autonomic features",
+      "Central congenital hypoventilation and brainstem malformations causing apnoea",
+      "Spinal muscular atrophy and other causes of neonatal hypotonia",
+      "Mitochondrial and metabolic encephalopathies presenting with apnoeic episodes"
     ],
-    [
-     "Primary Differentials",
-     "Other presynaptic congenital myasthenic syndromes (SNAP25, synaptotagmin, VAMP1 defects), Autoimmune myasthenia gravis of infancy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Repetitive nerve stimulation, including prolonged high-frequency stimulation or activity to demonstrate a decrement that may be absent at rest",
+      "Single-fibre electromyography showing increased jitter and blocking",
+      "Targeted CHAT gene sequencing or a broad congenital myasthenic syndrome gene panel",
+      "Negative acetylcholine receptor and muscle-specific kinase antibodies to exclude autoimmune disease",
+      "Therapeutic trial of a cholinesterase inhibitor with documentation of clinical response",
+      "Home apnoea and oxygen saturation monitoring during and between episodes"
     ],
-    [
-     "Management Strategy",
-     "Acetylcholinesterase inhibitors such as pyridostigmine are the mainstay and are usually effective, often given prophylactically",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden apnoea or respiratory arrest in an infant, particularly triggered by fever or crying",
+      "Recurrent unexplained cyanotic or life-threatening events in a hypotonic infant",
+      "Rapidly progressive bulbar weakness with pooling of secretions and aspiration risk",
+      "Deterioration during intercurrent infection requiring urgent ventilatory support"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing recurrent apnoea to a primary central or brainstem cause and overlooking a treatable neuromuscular junction disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early recognition, prophylactic cholinesterase inhibition and family training in apnoea management, many children improve and the frequency of crises declines with age. The principal threat to life is an unrecognised apnoeic episode, so prognosis hinges on prompt diagnosis and a rehearsed emergency plan.",
+    "pitfalls": [
+      "Attributing recurrent apnoea to a primary central or brainstem cause and overlooking a treatable neuromuscular junction disorder",
+      "Being reassured by a normal examination or normal resting nerve conduction study between crises",
+      "Failing to prescribe or continue prophylactic cholinesterase inhibitors, leaving the child vulnerable during illness",
+      "Not equipping the family with a home apnoea plan, monitoring and the means to deliver assisted ventilation"
+    ],
+    "references": [
+      "Standard neuromuscular and paediatric neurology textbooks",
+      "Peer-reviewed reviews of congenital myasthenic syndromes"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Acetylcholinesterase inhibitors such as pyridostigmine are the mainstay and are usually effective, often given prophylactically",
+      "Train families to recognise and manage apnoeic episodes with bag-mask and assisted ventilation, and provide a home apnoea and oxygen-saturation monitor",
+      "Written emergency plan with pre-emptive dosing and escalation during febrile illness or physiological stress",
+      "Prompt treatment of infection and fever, which precipitate crises",
+      "Neonatal feeding support and airway protection for bulbar weakness",
+      "Avoid drugs that impair neuromuscular transmission",
+      "Genetic counselling for autosomal recessive CHAT inheritance with sibling testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for choline acetyltransferase deficiency congenital myasthenic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-myasthenic-syndrome-choline-acetyltransferase-real-image",
-   "title": "Choline acetyltransferase deficiency congenital myasthenic syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "congenital_myasthenic_syndrome_choline_acetyltransferase-pathway",
+      "title": "Choline acetyltransferase deficiency congenital myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presynaptic congenital myasthenic syndrome caused by biallelic CHAT variants that impair resynthesis of acetylcholine at the motor nerve terminal.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden apnoea or respiratory arrest in an infant, particularly triggered by fever or crying",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repetitive nerve stimulation, including prolonged high-frequency stimulation or activity to demonstrate a decrement that may be absent at rest, Single-fibre electromyography showing increased jitter and blocking, Targeted"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Acetylcholinesterase inhibitors such as pyridostigmine are the mainstay and are usually effective, often given prophylactically"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing recurrent apnoea to a primary central or brainstem cause and overlooking a treatable neuromuscular junction disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of choline acetyltransferase deficiency congenital myasthenic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_myasthenic_syndrome_choline_acetyltransferase-matrix",
+      "title": "Choline acetyltransferase deficiency congenital myasthenic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presynaptic congenital myasthenic syndrome caused by biallelic CHAT variants that impair resynthesis of acetylcholine at the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repetitive nerve stimulation, including prolonged high-frequency stimulation or activity to demonstrate a decrement that may be",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other presynaptic congenital myasthenic syndromes (SNAP25, synaptotagmin, VAMP1 defects), Autoimmune myasthenia gravis of infancy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Acetylcholinesterase inhibitors such as pyridostigmine are the mainstay and are usually effective, often given prophylactically",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing recurrent apnoea to a primary central or brainstem cause and overlooking a treatable neuromuscular junction disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for choline acetyltransferase deficiency congenital myasthenic syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_myasthenic_syndrome_choline_acetyltransferase-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repetitive nerve stimulation",
+          "cells": [
+            {
+              "text": "Decrement demonstrated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-fibre EMG",
+          "cells": [
+            {
+              "text": "Increased jitter and blocking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted CHAT sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AChR and MuSK antibodies",
+          "cells": [
+            {
+              "text": "Negative; autoimmune disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic trial of a cholinesterase inhibitor",
+          "cells": [
+            {
+              "text": "Documented clinical response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_myasthenic_syndrome_choline_acetyltransferase-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other presynaptic congenital myasthenic syndromes (SNAP25, synaptotagmin, VAMP1)",
+          "cells": [
+            {
+              "text": "Named presynaptic look-alikes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infantile botulism with descending weakness",
+          "cells": [
+            {
+              "text": "Autonomic features; named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central congenital hypoventilation",
+          "cells": [
+            {
+              "text": "Central cause of apnoea; treatable NMJ disorder must not be missed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_myasthenic_syndrome_choline_acetyltransferase-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyridostigmine",
+          "cells": [
+            {
+              "text": "Mainstay, usually effective, often given prophylactically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Home apnoea monitoring",
+          "cells": [
+            {
+              "text": "Pulse oximetry and home oxygen-saturation monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family training",
+          "cells": [
+            {
+              "text": "Recognise and manage apnoeic episodes with bag-mask and assisted ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency plan",
+          "cells": [
+            {
+              "text": "Pre-emptive dosing and escalation during fever or physiological stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Prompt treatment of fever and infection, which precipitate crises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and airway",
+          "cells": [
+            {
+              "text": "Neonatal feeding support and airway protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive CHAT inheritance; sibling testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_myasthenic_syndrome_choline_acetyltransferase-dx-mgmt",
+      "title": "Diagnosis and management of Choline acetyltransferase deficiency congenital myasthenic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CHAT deficiency myasthenic syndrome: apnoea in a hypotonic infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden apnoea, bulbar weakness, respiratory support need)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ventilatory support and airway protection during crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repetitive stimulation; single-fibre EMG; CHAT sequencing; cholinesterase trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CHAT testing or cholinesterase response confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider central apnoea, botulism or other presynaptic disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pyridostigmine as mainstay, often given prophylactically",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Home apnoea and oxygen-saturation monitoring with family training",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Written emergency plan with pre-emptive dosing during fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prompt treatment of infection; avoid transmission-impairing drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With early recognition and prophylactic therapy many children improve",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

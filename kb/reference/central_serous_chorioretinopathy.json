@@ -1,177 +1,486 @@
 {
- "id": "central_serous_chorioretinopathy",
- "name": "Central serous chorioretinopathy",
- "aliases": [
-  "CSCR",
-  "CSR",
-  "central serous retinopathy",
-  "idiopathic central serous choroidopathy"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically affects young to middle-aged adults, more commonly men, presenting with acute or subacute unilateral blurring, a central positive scotoma, micropsia and altered colour perception",
-   "Classically associated with type-A personality, psychological stress and exogenous or endogenous corticosteroid exposure, including inhaled, topical and intra-articular routes",
-   "Fundus shows a well-circumscribed serous neurosensory detachment at the macula, often with a shallow dome of subretinal fluid and sometimes a small pigment epithelial detachment",
-   "Optical coherence tomography demonstrates subretinal fluid separating the neurosensory retina from the retinal pigment epithelium and is the mainstay for diagnosis and monitoring",
-   "Fluorescein angiography classically reveals a focal leak at the level of the retinal pigment epithelium, sometimes with the characteristic smokestack or inkblot pattern of expanding dye",
-   "Indocyanine green angiography shows choroidal hyperpermeability and dilated choroidal vessels, supporting the concept of a primary choroidal (pachychoroid) disorder",
-   "Most acute episodes resolve spontaneously over weeks to a few months with observation and removal of any steroid exposure",
-   "Chronic or recurrent disease can cause widespread retinal pigment epithelial decompensation and permanent visual loss, and may be treated with photodynamic therapy or focal laser to the leakage point"
+  "id": "central_serous_chorioretinopathy",
+  "name": "Central serous chorioretinopathy",
+  "aliases": [
+    "CSCR",
+    "CSR",
+    "central serous retinopathy",
+    "idiopathic central serous choroidopathy"
   ],
-  "pathophysiology": "Central serous chorioretinopathy is thought to arise from choroidal vascular hyperpermeability and congestion (part of the pachychoroid spectrum), which raises hydrostatic pressure beneath the retinal pigment epithelium. This overwhelms and damages the pumping and barrier function of the epithelium, allowing fluid to pass into the subretinal space and produce a localised serous detachment of the neurosensory retina at the macula. Corticosteroids and elevated endogenous cortisol are believed to potentiate this choroidal dysfunction, which explains the strong association with steroid use, stress and Cushingoid states. Persistent or repeated fluid accumulation leads to chronic retinal pigment epithelial atrophy and photoreceptor damage.",
-  "additionalDifferentials": [
-   "Wet age-related macular degeneration with choroidal neovascularisation",
-   "Polypoidal choroidal vasculopathy",
-   "Optic disc pit with associated maculopathy",
-   "Inflammatory or infective posterior uveitis with exudative detachment",
-   "Vogt-Koyanagi-Harada disease",
-   "Choroidal tumour causing exudative retinal detachment",
-   "Diabetic or hypertensive macular oedema"
-  ],
-  "additionalInvestigations": [
-   "Optical coherence tomography to confirm and quantify subretinal fluid and any pigment epithelial detachment",
-   "Fundus autofluorescence to map chronic retinal pigment epithelial changes and gravitational fluid tracks",
-   "Fluorescein angiography to localise the focal leak and identify the smokestack or inkblot pattern",
-   "Indocyanine green angiography to demonstrate choroidal hyperpermeability and guide photodynamic therapy",
-   "Amsler grid testing to document and monitor the central scotoma and metamorphopsia",
-   "Review of systemic and topical corticosteroid exposure and screening for hypercortisolism when suspected"
-  ],
-  "redFlags": [
-   "Failure to resolve over several months or recurrent episodes suggesting chronic disease with progressive atrophy",
-   "Features suggesting secondary choroidal neovascularisation such as haemorrhage, lipid exudate or a sudden change in vision",
-   "Bilateral or atypical multifocal detachment prompting exclusion of inflammatory, hypertensive or neoplastic causes",
-   "Ongoing high-dose corticosteroid exposure that cannot be withdrawn"
-  ],
-  "prognosis": "Acute central serous chorioretinopathy usually resolves spontaneously within a few months with good visual recovery, but recurrences are common. Chronic or repeated disease may cause irreversible retinal pigment epithelial atrophy, photoreceptor loss and secondary neovascularisation, with lasting reduction in acuity and quality of vision.",
-  "pitfalls": [
-   "Misdiagnosing chronic disease as wet macular degeneration and giving unnecessary treatment, or vice versa",
-   "Overlooking occult corticosteroid exposure such as inhalers, skin creams or joint injections",
-   "Prescribing corticosteroids for a presumed inflammatory cause and thereby worsening the fluid",
-   "Intervening too early in acute cases that would resolve spontaneously, exposing the patient to treatment risk",
-   "Failing to recognise secondary choroidal neovascularisation developing on a background of chronic disease"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and discontinue or taper any exogenous corticosteroid exposure (systemic, inhaled, topical or intra-articular), the key modifiable trigger",
-   "Observe acute cases, as most resolve spontaneously, while addressing psychological stress and modifying lifestyle",
-   "For persistent or chronic subretinal fluid, reduced-fluence or reduced-dose photodynamic therapy guided by indocyanine green angiography as the definitive treatment",
-   "Consider focal laser photocoagulation to an extrafoveal leak localised on fluorescein angiography",
-   "Trial a mineralocorticoid receptor antagonist such as spironolactone or eplerenone in chronic disease",
-   "Monitor with serial optical coherence tomography and Amsler grid, and screen for and treat any endogenous hypercortisolism",
-   "Refer to a medical retina specialist and watch for secondary choroidal neovascularisation requiring anti-VEGF therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "central_serous_chorioretinopathy-pathway",
-   "title": "Central serous chorioretinopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically affects young to middle-aged adults, more commonly men, presenting with acute or subacute unilateral blurring, a central positive scotoma, micropsia and altered colour perception",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Failure to resolve over several months or recurrent episodes suggesting chronic disease with progressive atrophy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Optical coherence tomography to confirm and quantify subretinal fluid and any pigment epithelial detachment, Fundus autofluorescence to map chronic retinal pigment epithelial changes and gravitational fluid tracks,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and discontinue or taper any exogenous corticosteroid exposure (systemic, inhaled, topical or intra-articular), the key modifiable trigger"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing chronic disease as wet macular degeneration and giving unnecessary treatment, or vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of central serous chorioretinopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "central_serous_chorioretinopathy-matrix",
-   "title": "Central serous chorioretinopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically affects young to middle-aged adults, more commonly men, presenting with acute or subacute unilateral blurring, a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically affects young to middle-aged adults, more commonly men, presenting with acute or subacute unilateral blurring, a central positive scotoma, micropsia and altered colour perception",
+      "Classically associated with type-A personality, psychological stress and exogenous or endogenous corticosteroid exposure, including inhaled, topical and intra-articular routes",
+      "Fundus shows a well-circumscribed serous neurosensory detachment at the macula, often with a shallow dome of subretinal fluid and sometimes a small pigment epithelial detachment",
+      "Optical coherence tomography demonstrates subretinal fluid separating the neurosensory retina from the retinal pigment epithelium and is the mainstay for diagnosis and monitoring",
+      "Fluorescein angiography classically reveals a focal leak at the level of the retinal pigment epithelium, sometimes with the characteristic smokestack or inkblot pattern of expanding dye",
+      "Indocyanine green angiography shows choroidal hyperpermeability and dilated choroidal vessels, supporting the concept of a primary choroidal (pachychoroid) disorder",
+      "Most acute episodes resolve spontaneously over weeks to a few months with observation and removal of any steroid exposure",
+      "Chronic or recurrent disease can cause widespread retinal pigment epithelial decompensation and permanent visual loss, and may be treated with photodynamic therapy or focal laser to the leakage point"
     ],
-    [
-     "Key Investigations",
-     "Optical coherence tomography to confirm and quantify subretinal fluid and any pigment epithelial detachment, Fundus",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Central serous chorioretinopathy is thought to arise from choroidal vascular hyperpermeability and congestion (part of the pachychoroid spectrum), which raises hydrostatic pressure beneath the retinal pigment epithelium. This overwhelms and damages the pumping and barrier function of the epithelium, allowing fluid to pass into the subretinal space and produce a localised serous detachment of the neurosensory retina at the macula. Corticosteroids and elevated endogenous cortisol are believed to potentiate this choroidal dysfunction, which explains the strong association with steroid use, stress and Cushingoid states. Persistent or repeated fluid accumulation leads to chronic retinal pigment epithelial atrophy and photoreceptor damage.",
+    "additionalDifferentials": [
+      "Wet age-related macular degeneration with choroidal neovascularisation",
+      "Polypoidal choroidal vasculopathy",
+      "Optic disc pit with associated maculopathy",
+      "Inflammatory or infective posterior uveitis with exudative detachment",
+      "Vogt-Koyanagi-Harada disease",
+      "Choroidal tumour causing exudative retinal detachment",
+      "Diabetic or hypertensive macular oedema"
     ],
-    [
-     "Primary Differentials",
-     "Wet age-related macular degeneration with choroidal neovascularisation, Polypoidal choroidal vasculopathy, Optic disc pit with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Optical coherence tomography to confirm and quantify subretinal fluid and any pigment epithelial detachment",
+      "Fundus autofluorescence to map chronic retinal pigment epithelial changes and gravitational fluid tracks",
+      "Fluorescein angiography to localise the focal leak and identify the smokestack or inkblot pattern",
+      "Indocyanine green angiography to demonstrate choroidal hyperpermeability and guide photodynamic therapy",
+      "Amsler grid testing to document and monitor the central scotoma and metamorphopsia",
+      "Review of systemic and topical corticosteroid exposure and screening for hypercortisolism when suspected"
     ],
-    [
-     "Management Strategy",
-     "Identify and discontinue or taper any exogenous corticosteroid exposure (systemic, inhaled, topical or intra-articular), the key",
-     "Core treatment modality"
+    "redFlags": [
+      "Failure to resolve over several months or recurrent episodes suggesting chronic disease with progressive atrophy",
+      "Features suggesting secondary choroidal neovascularisation such as haemorrhage, lipid exudate or a sudden change in vision",
+      "Bilateral or atypical multifocal detachment prompting exclusion of inflammatory, hypertensive or neoplastic causes",
+      "Ongoing high-dose corticosteroid exposure that cannot be withdrawn"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing chronic disease as wet macular degeneration and giving unnecessary treatment, or vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute central serous chorioretinopathy usually resolves spontaneously within a few months with good visual recovery, but recurrences are common. Chronic or repeated disease may cause irreversible retinal pigment epithelial atrophy, photoreceptor loss and secondary neovascularisation, with lasting reduction in acuity and quality of vision.",
+    "pitfalls": [
+      "Misdiagnosing chronic disease as wet macular degeneration and giving unnecessary treatment, or vice versa",
+      "Overlooking occult corticosteroid exposure such as inhalers, skin creams or joint injections",
+      "Prescribing corticosteroids for a presumed inflammatory cause and thereby worsening the fluid",
+      "Intervening too early in acute cases that would resolve spontaneously, exposing the patient to treatment risk",
+      "Failing to recognise secondary choroidal neovascularisation developing on a background of chronic disease"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and discontinue or taper any exogenous corticosteroid exposure (systemic, inhaled, topical or intra-articular), the key modifiable trigger",
+      "Observe acute cases, as most resolve spontaneously, while addressing psychological stress and modifying lifestyle",
+      "For persistent or chronic subretinal fluid, reduced-fluence or reduced-dose photodynamic therapy guided by indocyanine green angiography as the definitive treatment",
+      "Consider focal laser photocoagulation to an extrafoveal leak localised on fluorescein angiography",
+      "Trial a mineralocorticoid receptor antagonist such as spironolactone or eplerenone in chronic disease",
+      "Monitor with serial optical coherence tomography and Amsler grid, and screen for and treat any endogenous hypercortisolism",
+      "Refer to a medical retina specialist and watch for secondary choroidal neovascularisation requiring anti-VEGF therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for central serous chorioretinopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "central-serous-chorioretinopathy-real-image",
-   "title": "Central serous chorioretinopathy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "central_serous_chorioretinopathy-pathway",
+      "title": "Central serous chorioretinopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically affects young to middle-aged adults, more commonly men, presenting with acute or subacute unilateral blurring, a central positive scotoma, micropsia and altered colour perception",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Failure to resolve over several months or recurrent episodes suggesting chronic disease with progressive atrophy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Optical coherence tomography to confirm and quantify subretinal fluid and any pigment epithelial detachment, Fundus autofluorescence to map chronic retinal pigment epithelial changes and gravitational fluid tracks,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and discontinue or taper any exogenous corticosteroid exposure (systemic, inhaled, topical or intra-articular), the key modifiable trigger"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing chronic disease as wet macular degeneration and giving unnecessary treatment, or vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of central serous chorioretinopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "central_serous_chorioretinopathy-matrix",
+      "title": "Central serous chorioretinopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically affects young to middle-aged adults, more commonly men, presenting with acute or subacute unilateral blurring, a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Optical coherence tomography to confirm and quantify subretinal fluid and any pigment epithelial detachment, Fundus",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Wet age-related macular degeneration with choroidal neovascularisation, Polypoidal choroidal vasculopathy, Optic disc pit with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and discontinue or taper any exogenous corticosteroid exposure (systemic, inhaled, topical or intra-articular), the key",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing chronic disease as wet macular degeneration and giving unnecessary treatment, or vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for central serous chorioretinopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_serous_chorioretinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Confirms and quantifies subretinal fluid; mainstay for diagnosis and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Focal leak at the retinal pigment epithelium, with a smokestack or inkblot pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indocyanine green angiography",
+          "cells": [
+            {
+              "text": "Choroidal hyperpermeability and dilated choroidal vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Maps chronic retinal pigment epithelial changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amsler grid testing",
+          "cells": [
+            {
+              "text": "Documents and monitors the central scotoma and metamorphopsia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_serous_chorioretinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wet age-related macular degeneration",
+          "cells": [
+            {
+              "text": "Choroidal neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choroidal tumour",
+          "cells": [
+            {
+              "text": "Exudative retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory or infective posterior uveitis",
+          "cells": [
+            {
+              "text": "Exudative detachment with inflammation or infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_serous_chorioretinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop corticosteroid exposure",
+          "cells": [
+            {
+              "text": "Discontinue or taper systemic, inhaled, topical or intra-articular steroids"
+            },
+            {
+              "text": "Key modifiable trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Observe acute cases; address stress and modify lifestyle"
+            },
+            {
+              "text": "Most resolve spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photodynamic therapy",
+          "cells": [
+            {
+              "text": "Reduced-fluence or reduced-dose PDT guided by indocyanine green angiography"
+            },
+            {
+              "text": "Persistent or chronic subretinal fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal laser",
+          "cells": [
+            {
+              "text": "Photocoagulation to an extrafoveal leak"
+            },
+            {
+              "text": "Leak localised on fluorescein angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mineralocorticoid receptor antagonist",
+          "cells": [
+            {
+              "text": "Trial of spironolactone or eplerenone"
+            },
+            {
+              "text": "Chronic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial OCT and Amsler grid; screen for and treat endogenous hypercortisolism"
+            },
+            {
+              "text": "Hypercortisolism when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Medical retina specialist; anti-VEGF if choroidal neovascularisation develops"
+            },
+            {
+              "text": "Secondary neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_serous_chorioretinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Central serous chorioretinopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central serous chorioretinopathy: unilateral blurring with a central scotoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (no resolution in months, haemorrhage, atypical bilateral detachment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude secondary neovascularisation and inflammatory or neoplastic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "OCT for subretinal fluid; fluorescein and ICG angiography; steroid history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Subretinal fluid with focal leak confirmed; steroid exposure reviewed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop or taper any corticosteroid exposure, the key modifiable trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check wet macular degeneration, polypoidal vasculopathy and uveitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe acute cases, most of which resolve spontaneously",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Photodynamic therapy for persistent or chronic subretinal fluid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Focal laser to an extrafoveal leak; spironolactone or eplerenone if chronic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acute disease usually resolves; chronic disease can cause permanent atrophy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

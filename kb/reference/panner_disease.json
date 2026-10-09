@@ -1,175 +1,460 @@
 {
- "id": "panner_disease",
- "name": "Panner disease",
- "aliases": [
-  "osteochondrosis of the capitellum",
-  "capitellar osteochondrosis",
-  "osteonecrosis of the humeral capitellum",
-  "Panner's disease"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A true osteonecrosis of the capitellum affecting its developing ossification centre, not a traction apophysitis",
-   "Affected bone is the capitellum of the distal humerus at the lateral elbow",
-   "Typically affects young children, roughly five to ten years of age, often in the dominant throwing arm",
-   "Presents with dull lateral elbow pain, stiffness and a mild flexion contracture, worse with throwing or weight-bearing on the arm",
-   "The radiographic hallmark is irregularity, fragmentation and sclerosis of the capitellar ossification centre, sometimes with later reossification",
-   "It should be distinguished from osteochondritis dissecans of the capitellum, which occurs in older adolescents and can produce loose bodies",
-   "Unlike osteochondritis dissecans, Panner disease usually involves the whole ossific nucleus and tends to reconstitute with growth",
-   "Management is conservative with rest, activity modification and avoidance of throwing, with physiotherapy to restore motion as needed"
+  "id": "panner_disease",
+  "name": "Panner disease",
+  "aliases": [
+    "osteochondrosis of the capitellum",
+    "capitellar osteochondrosis",
+    "osteonecrosis of the humeral capitellum",
+    "Panner's disease"
   ],
-  "pathophysiology": "Panner disease is an osteochondrosis of the capitellum in which the ossification centre of the lateral distal humerus undergoes ischaemic change during childhood. Repetitive valgus and compressive loading of the immature elbow, particularly from throwing or upper limb weight-bearing, is thought to disturb the blood supply to the developing capitellum. This produces necrosis, fragmentation and sclerosis of the ossific nucleus, followed by revascularisation and reossification as growth continues. Because the process typically affects the entire ossification centre in a skeletally immature child and remodels with growth, it is generally self-limiting, in contrast to capitellar osteochondritis dissecans in older adolescents, which involves a focal osteochondral fragment and carries a higher risk of loose bodies and residual joint incongruity.",
-  "additionalDifferentials": [
-   "Osteochondritis dissecans of the capitellum",
-   "Medial epicondyle apophysitis (little league elbow)",
-   "Radial head or neck fracture",
-   "Septic arthritis or osteomyelitis of the elbow",
-   "Juvenile idiopathic arthritis of the elbow",
-   "Radiocapitellar plica or synovitis"
-  ],
-  "additionalInvestigations": [
-   "Anteroposterior and lateral elbow radiographs showing capitellar fragmentation and sclerosis",
-   "Comparison views of the contralateral elbow to gauge normal ossification",
-   "Magnetic resonance imaging to assess the articular cartilage and distinguish from osteochondritis dissecans",
-   "Assessment of elbow range of motion and any fixed flexion contracture",
-   "Inflammatory markers if infection or inflammatory arthritis is suspected",
-   "Follow-up imaging to confirm reossification of the capitellum"
-  ],
-  "redFlags": [
-   "Mechanical locking or catching suggesting a loose body and osteochondritis dissecans rather than Panner disease",
-   "Progressive fixed flexion contracture or loss of motion",
-   "Systemic features or joint effusion raising concern for infection or inflammatory arthritis",
-   "Persistent symptoms in an older adolescent, which favour osteochondritis dissecans with poorer prognosis"
-  ],
-  "prognosis": "Panner disease generally carries a favourable prognosis; the capitellum usually reossifies and remodels with growth once the elbow is rested, and most children recover full or near-full function without long-term joint damage.",
-  "pitfalls": [
-   "Confusing Panner disease with capitellar osteochondritis dissecans, which has a different age group and worse outlook",
-   "Allowing continued throwing, which perpetuates loading of the healing capitellum",
-   "Missing an alternative diagnosis such as infection when an effusion or systemic features are present",
-   "Failing to arrange follow-up imaging to confirm reossification"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Campbell's Operative Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Rest and activity modification, stopping throwing and upper-limb weight-bearing until symptoms settle, the mainstay of treatment",
-   "Simple analgesia or NSAIDs and ice for pain during the symptomatic phase",
-   "Short-term immobilisation or splinting of the elbow if pain is marked",
-   "Gentle range-of-motion exercises and physiotherapy to address stiffness and any flexion contracture",
-   "Serial radiographs to confirm reossification and remodelling of the capitellum",
-   "Distinguish from and monitor for osteochondritis dissecans with loose bodies in the older child, referring to orthopaedics if atypical or non-resolving",
-   "Graded return to sport once pain-free with restored range of motion"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "panner_disease-pathway",
-   "title": "Panner disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A true osteonecrosis of the capitellum affecting its developing ossification centre, not a traction apophysitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Mechanical locking or catching suggesting a loose body and osteochondritis dissecans rather than Panner disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anteroposterior and lateral elbow radiographs showing capitellar fragmentation and sclerosis, Comparison views of the contralateral elbow to gauge normal ossification, Magnetic resonance imaging to assess the articular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Rest and activity modification, stopping throwing and upper-limb weight-bearing until symptoms settle, the mainstay of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing Panner disease with capitellar osteochondritis dissecans, which has a different age group and worse outlook"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of panner disease."
-  }
- ],
- "tables": [
-  {
-   "id": "panner_disease-matrix",
-   "title": "Panner disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A true osteonecrosis of the capitellum affecting its developing ossification centre, not a traction apophysitis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A true osteonecrosis of the capitellum affecting its developing ossification centre, not a traction apophysitis",
+      "Affected bone is the capitellum of the distal humerus at the lateral elbow",
+      "Typically affects young children, roughly five to ten years of age, often in the dominant throwing arm",
+      "Presents with dull lateral elbow pain, stiffness and a mild flexion contracture, worse with throwing or weight-bearing on the arm",
+      "The radiographic hallmark is irregularity, fragmentation and sclerosis of the capitellar ossification centre, sometimes with later reossification",
+      "It should be distinguished from osteochondritis dissecans of the capitellum, which occurs in older adolescents and can produce loose bodies",
+      "Unlike osteochondritis dissecans, Panner disease usually involves the whole ossific nucleus and tends to reconstitute with growth",
+      "Management is conservative with rest, activity modification and avoidance of throwing, with physiotherapy to restore motion as needed"
     ],
-    [
-     "Key Investigations",
-     "Anteroposterior and lateral elbow radiographs showing capitellar fragmentation and sclerosis, Comparison views of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Panner disease is an osteochondrosis of the capitellum in which the ossification centre of the lateral distal humerus undergoes ischaemic change during childhood. Repetitive valgus and compressive loading of the immature elbow, particularly from throwing or upper limb weight-bearing, is thought to disturb the blood supply to the developing capitellum. This produces necrosis, fragmentation and sclerosis of the ossific nucleus, followed by revascularisation and reossification as growth continues. Because the process typically affects the entire ossification centre in a skeletally immature child and remodels with growth, it is generally self-limiting, in contrast to capitellar osteochondritis dissecans in older adolescents, which involves a focal osteochondral fragment and carries a higher risk of loose bodies and residual joint incongruity.",
+    "additionalDifferentials": [
+      "Osteochondritis dissecans of the capitellum",
+      "Medial epicondyle apophysitis (little league elbow)",
+      "Radial head or neck fracture",
+      "Septic arthritis or osteomyelitis of the elbow",
+      "Juvenile idiopathic arthritis of the elbow",
+      "Radiocapitellar plica or synovitis"
     ],
-    [
-     "Primary Differentials",
-     "Osteochondritis dissecans of the capitellum, Medial epicondyle apophysitis (little league elbow), Radial head or neck fracture",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anteroposterior and lateral elbow radiographs showing capitellar fragmentation and sclerosis",
+      "Comparison views of the contralateral elbow to gauge normal ossification",
+      "Magnetic resonance imaging to assess the articular cartilage and distinguish from osteochondritis dissecans",
+      "Assessment of elbow range of motion and any fixed flexion contracture",
+      "Inflammatory markers if infection or inflammatory arthritis is suspected",
+      "Follow-up imaging to confirm reossification of the capitellum"
     ],
-    [
-     "Management Strategy",
-     "Rest and activity modification, stopping throwing and upper-limb weight-bearing until symptoms settle, the mainstay of treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Mechanical locking or catching suggesting a loose body and osteochondritis dissecans rather than Panner disease",
+      "Progressive fixed flexion contracture or loss of motion",
+      "Systemic features or joint effusion raising concern for infection or inflammatory arthritis",
+      "Persistent symptoms in an older adolescent, which favour osteochondritis dissecans with poorer prognosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing Panner disease with capitellar osteochondritis dissecans, which has a different age group and worse outlook",
-     "Prevent diagnostic or management error"
+    "prognosis": "Panner disease generally carries a favourable prognosis; the capitellum usually reossifies and remodels with growth once the elbow is rested, and most children recover full or near-full function without long-term joint damage.",
+    "pitfalls": [
+      "Confusing Panner disease with capitellar osteochondritis dissecans, which has a different age group and worse outlook",
+      "Allowing continued throwing, which perpetuates loading of the healing capitellum",
+      "Missing an alternative diagnosis such as infection when an effusion or systemic features are present",
+      "Failing to arrange follow-up imaging to confirm reossification"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Campbell's Operative Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Rest and activity modification, stopping throwing and upper-limb weight-bearing until symptoms settle, the mainstay of treatment",
+      "Simple analgesia or NSAIDs and ice for pain during the symptomatic phase",
+      "Short-term immobilisation or splinting of the elbow if pain is marked",
+      "Gentle range-of-motion exercises and physiotherapy to address stiffness and any flexion contracture",
+      "Serial radiographs to confirm reossification and remodelling of the capitellum",
+      "Distinguish from and monitor for osteochondritis dissecans with loose bodies in the older child, referring to orthopaedics if atypical or non-resolving",
+      "Graded return to sport once pain-free with restored range of motion"
     ]
-   ],
-   "caption": "Overview comparison matrix for panner disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "panner-disease-real-image",
-   "title": "Panner disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "panner_disease-pathway",
+      "title": "Panner disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A true osteonecrosis of the capitellum affecting its developing ossification centre, not a traction apophysitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Mechanical locking or catching suggesting a loose body and osteochondritis dissecans rather than Panner disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anteroposterior and lateral elbow radiographs showing capitellar fragmentation and sclerosis, Comparison views of the contralateral elbow to gauge normal ossification, Magnetic resonance imaging to assess the articular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Rest and activity modification, stopping throwing and upper-limb weight-bearing until symptoms settle, the mainstay of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing Panner disease with capitellar osteochondritis dissecans, which has a different age group and worse outlook"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of panner disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "panner_disease-matrix",
+      "title": "Panner disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A true osteonecrosis of the capitellum affecting its developing ossification centre, not a traction apophysitis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anteroposterior and lateral elbow radiographs showing capitellar fragmentation and sclerosis, Comparison views of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Osteochondritis dissecans of the capitellum, Medial epicondyle apophysitis (little league elbow), Radial head or neck fracture",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Rest and activity modification, stopping throwing and upper-limb weight-bearing until symptoms settle, the mainstay of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing Panner disease with capitellar osteochondritis dissecans, which has a different age group and worse outlook",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for panner disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "panner_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AP and lateral elbow radiographs",
+          "cells": [
+            {
+              "text": "Capitellar fragmentation and sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contralateral elbow comparison views",
+          "cells": [
+            {
+              "text": "Normal ossification for the child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Articular cartilage; distinguishes from osteochondritis dissecans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Range of motion and flexion contracture assessment",
+          "cells": [
+            {
+              "text": "Stiffness and contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Infection or inflammatory arthritis, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up radiographs",
+          "cells": [
+            {
+              "text": "Reossification of the capitellum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panner_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteochondritis dissecans of the capitellum",
+          "cells": [
+            {
+              "text": "Older adolescents with locking or loose bodies; a poorer prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis or osteomyelitis of the elbow",
+          "cells": [
+            {
+              "text": "An effusion or systemic features point to infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panner_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rest and activity modification",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Stop throwing and upper-limb weight-bearing until symptoms settle; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Simple analgesia, NSAIDs and ice during the symptomatic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immobilisation",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Short-term splinting if pain is marked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Gentle range-of-motion exercises for stiffness and flexion contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Radiographs to confirm reossification and remodelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "panner_disease-dx-mgmt",
+      "title": "Diagnosis and management of Panner disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lateral elbow pain and stiffness in a young throwing child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (locking, progressive contracture, effusion or systemic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: orthopaedic review for loose body or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AP and lateral elbow radiographs, contralateral comparison, MRI if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do radiographs show capitellar fragmentation in a young child without locking?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider capitellar OCD, medial apophysitis, radial head fracture or septic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Rest from throwing and upper-limb weight-bearing until symptoms settle",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia, NSAIDs and ice during the symptomatic phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short-term splinting if pain is marked; gentle range-of-motion exercises",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial radiographs to confirm reossification and remodelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Favourable; the capitellum usually reossifies with rest and growth",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

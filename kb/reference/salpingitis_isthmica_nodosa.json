@@ -1,171 +1,411 @@
 {
- "id": "salpingitis_isthmica_nodosa",
- "name": "Salpingitis isthmica nodosa",
- "aliases": [
-  "SIN",
-  "tubal diverticulosis",
-  "diverticular disease of the fallopian tube"
- ],
- "class": "non_infective",
- "system": "Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard gynaecology reference textbook",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by nodular thickening of the isthmic portion of the fallopian tube, with diverticula of tubal epithelium extending into a hypertrophied muscular wall",
-   "Despite its name, it is a non-infective structural process rather than active infection of the tube",
-   "It is an important association of both subfertility and tubal ectopic pregnancy",
-   "The condition is frequently bilateral and may be identified when investigating infertility",
-   "Hysterosalpingography characteristically shows small diverticular outpouchings of contrast at the isthmus, giving a nodular appearance",
-   "Definitive confirmation is histological, demonstrating epithelial diverticula surrounded by hypertrophic smooth muscle",
-   "Because tubal function is compromised, in vitro fertilisation, which bypasses the tube, is often the most effective route to pregnancy"
+  "id": "salpingitis_isthmica_nodosa",
+  "name": "Salpingitis isthmica nodosa",
+  "aliases": [
+    "SIN",
+    "tubal diverticulosis",
+    "diverticular disease of the fallopian tube"
   ],
-  "pathophysiology": "In salpingitis isthmica nodosa, the mucosal epithelium of the tubal isthmus forms diverticula that burrow into a surrounding, hypertrophied muscular layer, producing palpable and radiological nodularity. The cause is uncertain and may relate to previous chronic inflammation or to an adenomyosis-like ingrowth of epithelium into the muscularis. The distorted, partially obstructed tube impairs gamete and embryo transport, which underlies both the reduced fertility and the increased risk of tubal implantation of an embryo.",
-  "additionalDifferentials": [
-   "Hydrosalpinx",
-   "Genital tract tuberculosis affecting the tube",
-   "Tubal endometriosis",
-   "Chronic salpingitis",
-   "Tubal polyps or intramural pathology"
-  ],
-  "additionalInvestigations": [
-   "Hysterosalpingography demonstrating diverticular outpouchings and nodularity at the isthmus",
-   "Laparoscopy with chromopertubation to assess tubal patency and appearance",
-   "Histological examination, which provides the definitive diagnosis",
-   "Transvaginal ultrasound, which is of limited value but helps exclude other pelvic pathology",
-   "Assessment of overall fertility status, including partner and ovulatory factors"
-  ],
-  "redFlags": [
-   "Ectopic pregnancy in a woman known to have the condition",
-   "Significant subfertility requiring specialist reproductive input",
-   "Features suggesting coexisting tuberculous or other tubal disease",
-   "Acute pain that could indicate tubal implantation of a pregnancy"
-  ],
-  "prognosis": "The lesion is benign, but it carries a meaningful impact on fertility and a raised risk of ectopic pregnancy; assisted conception that bypasses the tube generally offers the best chance of a successful pregnancy.",
-  "pitfalls": [
-   "Failing to recognise the subtle diverticular changes on imaging",
-   "Not counselling the woman about the increased risk of ectopic pregnancy",
-   "Attempting reconstructive tubal surgery, which has limited success",
-   "Overlooking the diagnosis as a cause of otherwise unexplained subfertility"
-  ],
-  "references": [
-   "Standard gynaecology reference textbook",
-   "Reproductive medicine reference text"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In vitro fertilisation that bypasses the diseased tube as the treatment offering the best chance of pregnancy",
-   "Salpingectomy of an affected, obstructed or hydrosalpinx-bearing tube before assisted conception to improve implantation",
-   "Microsurgical tubal resection and reanastomosis of the isthmic segment in carefully selected younger women desiring natural conception",
-   "Counselling on the raised risk of tubal ectopic pregnancy, with early ultrasound in any future pregnancy to confirm intrauterine location",
-   "Prompt treatment of an ectopic pregnancy with methotrexate or surgery as appropriate",
-   "Assessment and management of coexisting fertility factors, including ovulatory and male factors",
-   "Referral to reproductive medicine for individualised fertility planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "salpingitis_isthmica_nodosa-pathway",
-   "title": "Salpingitis isthmica nodosa: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by nodular thickening of the isthmic portion of the fallopian tube, with diverticula of tubal epithelium extending into a hypertrophied muscular wall",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ectopic pregnancy in a woman known to have the condition",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Hysterosalpingography demonstrating diverticular outpouchings and nodularity at the isthmus, Laparoscopy with chromopertubation to assess tubal patency and appearance, Histological examination, which provides the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In vitro fertilisation that bypasses the diseased tube as the treatment offering the best chance of pregnancy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise the subtle diverticular changes on imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of salpingitis isthmica nodosa."
-  }
- ],
- "tables": [
-  {
-   "id": "salpingitis_isthmica_nodosa-matrix",
-   "title": "Salpingitis isthmica nodosa: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by nodular thickening of the isthmic portion of the fallopian tube, with diverticula of tubal epithelium extending",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard gynaecology reference textbook",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by nodular thickening of the isthmic portion of the fallopian tube, with diverticula of tubal epithelium extending into a hypertrophied muscular wall",
+      "Despite its name, it is a non-infective structural process rather than active infection of the tube",
+      "It is an important association of both subfertility and tubal ectopic pregnancy",
+      "The condition is frequently bilateral and may be identified when investigating infertility",
+      "Hysterosalpingography characteristically shows small diverticular outpouchings of contrast at the isthmus, giving a nodular appearance",
+      "Definitive confirmation is histological, demonstrating epithelial diverticula surrounded by hypertrophic smooth muscle",
+      "Because tubal function is compromised, in vitro fertilisation, which bypasses the tube, is often the most effective route to pregnancy"
     ],
-    [
-     "Key Investigations",
-     "Hysterosalpingography demonstrating diverticular outpouchings and nodularity at the isthmus, Laparoscopy with chromopertubation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In salpingitis isthmica nodosa, the mucosal epithelium of the tubal isthmus forms diverticula that burrow into a surrounding, hypertrophied muscular layer, producing palpable and radiological nodularity. The cause is uncertain and may relate to previous chronic inflammation or to an adenomyosis-like ingrowth of epithelium into the muscularis. The distorted, partially obstructed tube impairs gamete and embryo transport, which underlies both the reduced fertility and the increased risk of tubal implantation of an embryo.",
+    "additionalDifferentials": [
+      "Hydrosalpinx",
+      "Genital tract tuberculosis affecting the tube",
+      "Tubal endometriosis",
+      "Chronic salpingitis",
+      "Tubal polyps or intramural pathology"
     ],
-    [
-     "Primary Differentials",
-     "Hydrosalpinx, Genital tract tuberculosis affecting the tube, Tubal endometriosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Hysterosalpingography demonstrating diverticular outpouchings and nodularity at the isthmus",
+      "Laparoscopy with chromopertubation to assess tubal patency and appearance",
+      "Histological examination, which provides the definitive diagnosis",
+      "Transvaginal ultrasound, which is of limited value but helps exclude other pelvic pathology",
+      "Assessment of overall fertility status, including partner and ovulatory factors"
     ],
-    [
-     "Management Strategy",
-     "In vitro fertilisation that bypasses the diseased tube as the treatment offering the best chance of pregnancy",
-     "Core treatment modality"
+    "redFlags": [
+      "Ectopic pregnancy in a woman known to have the condition",
+      "Significant subfertility requiring specialist reproductive input",
+      "Features suggesting coexisting tuberculous or other tubal disease",
+      "Acute pain that could indicate tubal implantation of a pregnancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise the subtle diverticular changes on imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "The lesion is benign, but it carries a meaningful impact on fertility and a raised risk of ectopic pregnancy; assisted conception that bypasses the tube generally offers the best chance of a successful pregnancy.",
+    "pitfalls": [
+      "Failing to recognise the subtle diverticular changes on imaging",
+      "Not counselling the woman about the increased risk of ectopic pregnancy",
+      "Attempting reconstructive tubal surgery, which has limited success",
+      "Overlooking the diagnosis as a cause of otherwise unexplained subfertility"
+    ],
+    "references": [
+      "Standard gynaecology reference textbook",
+      "Reproductive medicine reference text"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In vitro fertilisation that bypasses the diseased tube as the treatment offering the best chance of pregnancy",
+      "Salpingectomy of an affected, obstructed or hydrosalpinx-bearing tube before assisted conception to improve implantation",
+      "Microsurgical tubal resection and reanastomosis of the isthmic segment in carefully selected younger women desiring natural conception",
+      "Counselling on the raised risk of tubal ectopic pregnancy, with early ultrasound in any future pregnancy to confirm intrauterine location",
+      "Prompt treatment of an ectopic pregnancy with methotrexate or surgery as appropriate",
+      "Assessment and management of coexisting fertility factors, including ovulatory and male factors",
+      "Referral to reproductive medicine for individualised fertility planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for salpingitis isthmica nodosa."
-  }
- ],
- "diagrams": [
-  {
-   "id": "salpingitis-isthmica-nodosa-real-image",
-   "title": "Salpingitis isthmica nodosa: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "salpingitis_isthmica_nodosa-pathway",
+      "title": "Salpingitis isthmica nodosa: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by nodular thickening of the isthmic portion of the fallopian tube, with diverticula of tubal epithelium extending into a hypertrophied muscular wall",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ectopic pregnancy in a woman known to have the condition",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Hysterosalpingography demonstrating diverticular outpouchings and nodularity at the isthmus, Laparoscopy with chromopertubation to assess tubal patency and appearance, Histological examination, which provides the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In vitro fertilisation that bypasses the diseased tube as the treatment offering the best chance of pregnancy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise the subtle diverticular changes on imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of salpingitis isthmica nodosa."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "salpingitis_isthmica_nodosa-matrix",
+      "title": "Salpingitis isthmica nodosa: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by nodular thickening of the isthmic portion of the fallopian tube, with diverticula of tubal epithelium extending",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Hysterosalpingography demonstrating diverticular outpouchings and nodularity at the isthmus, Laparoscopy with chromopertubation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hydrosalpinx, Genital tract tuberculosis affecting the tube, Tubal endometriosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In vitro fertilisation that bypasses the diseased tube as the treatment offering the best chance of pregnancy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise the subtle diverticular changes on imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for salpingitis isthmica nodosa."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "salpingitis_isthmica_nodosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hysterosalpingography",
+          "cells": [
+            {
+              "text": "Diverticular outpouchings and nodularity at the isthmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopy with chromopertubation",
+          "cells": [
+            {
+              "text": "Tubal patency and appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Definitive diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Limited value; helps exclude other pelvic pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility assessment",
+          "cells": [
+            {
+              "text": "Partner and ovulatory factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "salpingitis_isthmica_nodosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "In vitro fertilisation",
+          "cells": [
+            {
+              "text": "Bypasses the diseased tube; best chance of pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Salpingectomy",
+          "cells": [
+            {
+              "text": "Affected, obstructed or hydrosalpinx-bearing tube before assisted conception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsurgical resection and reanastomosis",
+          "cells": [
+            {
+              "text": "Isthmic segment, carefully selected younger women wanting natural conception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic pregnancy counselling",
+          "cells": [
+            {
+              "text": "Raised tubal ectopic risk; early ultrasound to confirm intrauterine site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic pregnancy treatment",
+          "cells": [
+            {
+              "text": "Methotrexate or surgery as appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive medicine referral",
+          "cells": [
+            {
+              "text": "Individualised planning; treat coexisting ovulatory and male factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "salpingitis_isthmica_nodosa-dx-mgmt",
+      "title": "Diagnosis and management of Salpingitis isthmica nodosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subfertility or prior ectopic pregnancy: suspected salpingitis isthmica nodosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute pain or positive pregnancy test suggesting tubal ectopic pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ultrasound; treat ectopic pregnancy with methotrexate or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hysterosalpingography for isthmic diverticula; laparoscopy with chromopertubation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are isthmic diverticula or nodularity shown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hydrosalpinx, genital tuberculosis, tubal endometriosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Counsel on raised ectopic risk and early ultrasound in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat coexisting ovulatory and male factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IVF bypassing the tube, with salpingectomy first if hydrosalpinx",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Microsurgical reanastomosis for selected younger women",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign lesion with real fertility impact; assisted conception gives best results",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

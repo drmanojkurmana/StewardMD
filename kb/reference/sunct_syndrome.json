@@ -1,175 +1,462 @@
 {
- "id": "sunct_syndrome",
- "name": "SUNCT/SUNA",
- "aliases": [
-  "SUNCT",
-  "SUNA",
-  "short-lasting unilateral neuralgiform headache attacks",
-  "short-lasting unilateral neuralgiform headache attacks with conjunctival injection and tearing"
- ],
- "class": "non_infective",
- "system": "Nervous system / Headache",
- "specialty": "Neurology / Headache",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / International Classification of Sleep Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Short-lasting unilateral neuralgiform headache attacks lasting seconds to a few minutes and recurring many times an hour",
-   "SUNCT requires both conjunctival injection and tearing; SUNA has only one of these, or neither",
-   "The attacks are among the most frequent of all headaches, sometimes dozens or more per hour",
-   "Cutaneous or movement triggers can provoke attacks, overlapping with trigeminal neuralgia, but the autonomic features are prominent and there is typically no refractory period",
-   "The disorder is poorly responsive to indometacin, which helps separate it from paroxysmal hemicrania",
-   "Lamotrigine is often the preferred preventive, and intravenous lidocaine can help settle severe bouts",
-   "MRI, including views of the posterior fossa and pituitary, is important because symptomatic cases occur, sometimes from neurovascular contact with the trigeminal nerve"
+  "id": "sunct_syndrome",
+  "name": "SUNCT/SUNA",
+  "aliases": [
+    "SUNCT",
+    "SUNA",
+    "short-lasting unilateral neuralgiform headache attacks",
+    "short-lasting unilateral neuralgiform headache attacks with conjunctival injection and tearing"
   ],
-  "pathophysiology": "SUNCT and SUNA are trigeminal autonomic cephalalgias in which very brief paroxysms arise from trigeminovascular activation coupled to a cranial parasympathetic reflex, producing the ipsilateral autonomic signs. Posterior hypothalamic activation is seen on functional imaging, and neurovascular compression of the trigeminal nerve is identified in a proportion of cases, giving clinical overlap with trigeminal neuralgia.",
-  "additionalDifferentials": [
-   "First-division trigeminal neuralgia",
-   "Paroxysmal hemicrania",
-   "Cluster headache",
-   "Primary stabbing headache",
-   "Symptomatic trigeminal autonomic cephalalgia from a posterior fossa or pituitary lesion",
-   "Trigeminal neuralgia with autonomic symptoms"
-  ],
-  "additionalInvestigations": [
-   "Detailed characterisation of attack duration, frequency, triggers and autonomic features",
-   "MRI brain with dedicated pituitary and posterior fossa imaging and vascular sequences",
-   "Assessment for neurovascular contact of the trigeminal nerve",
-   "Trial of indometacin to help exclude paroxysmal hemicrania",
-   "Review for cutaneous trigger zones and the presence or absence of a refractory period"
-  ],
-  "redFlags": [
-   "Abnormal neurological signs or an underlying structural lesion on imaging",
-   "First presentation in older age or rapidly escalating attacks",
-   "Features suggesting raised intracranial pressure",
-   "Attacks that do not fit the expected very-short, very-frequent profile"
-  ],
-  "prognosis": "The course is variable, ranging from single bouts to a chronic unremitting pattern; many patients improve with preventive drugs such as lamotrigine, and identifying a symptomatic cause can allow targeted treatment.",
-  "pitfalls": [
-   "Confusing the disorder with trigeminal neuralgia and missing the prominent autonomic features",
-   "Expecting an indometacin response as seen in paroxysmal hemicrania",
-   "Omitting MRI and overlooking a symptomatic lesion or neurovascular contact",
-   "Escalating opioids for what is a neuralgiform, opioid-unresponsive disorder"
-  ],
-  "references": [
-   "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
-   "The Headaches (Olesen et al.)"
-  ],
-  "crossLinks": [
-   "paroxysmal_hemicrania",
-   "hemicrania_continua"
-  ],
-  "management": [
-   "Start lamotrigine as the preferred preventive to reduce attack frequency",
-   "Use alternative preventives such as topiramate, gabapentin or oxcarbazepine when lamotrigine is ineffective or not tolerated",
-   "Settle severe exacerbations with intravenous lidocaine as a transitional measure",
-   "Arrange MRI to identify a symptomatic cause and treat any pituitary or posterior fossa lesion found",
-   "Consider microvascular decompression where trigeminal neurovascular contact is demonstrated, or neuromodulation such as occipital nerve stimulation in refractory cases",
-   "Refer to a specialist headache service for diagnosis and management of refractory disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sunct_syndrome-pathway",
-   "title": "SUNCT/SUNA: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Short-lasting unilateral neuralgiform headache attacks lasting seconds to a few minutes and recurring many times an hour",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Abnormal neurological signs or an underlying structural lesion on imaging",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed characterisation of attack duration, frequency, triggers and autonomic features, MRI brain with dedicated pituitary and posterior fossa imaging and vascular sequences, Assessment for neurovascular contact of the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start lamotrigine as the preferred preventive to reduce attack frequency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the disorder with trigeminal neuralgia and missing the prominent autonomic features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sunct/suna."
-  }
- ],
- "tables": [
-  {
-   "id": "sunct_syndrome-matrix",
-   "title": "SUNCT/SUNA: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Short-lasting unilateral neuralgiform headache attacks lasting seconds to a few minutes and recurring many times an hour",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Headache",
+  "specialty": "Neurology / Headache",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / International Classification of Sleep Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Short-lasting unilateral neuralgiform headache attacks lasting seconds to a few minutes and recurring many times an hour",
+      "SUNCT requires both conjunctival injection and tearing; SUNA has only one of these, or neither",
+      "The attacks are among the most frequent of all headaches, sometimes dozens or more per hour",
+      "Cutaneous or movement triggers can provoke attacks, overlapping with trigeminal neuralgia, but the autonomic features are prominent and there is typically no refractory period",
+      "The disorder is poorly responsive to indometacin, which helps separate it from paroxysmal hemicrania",
+      "Lamotrigine is often the preferred preventive, and intravenous lidocaine can help settle severe bouts",
+      "MRI, including views of the posterior fossa and pituitary, is important because symptomatic cases occur, sometimes from neurovascular contact with the trigeminal nerve"
     ],
-    [
-     "Key Investigations",
-     "Detailed characterisation of attack duration, frequency, triggers and autonomic features, MRI brain with dedicated pituitary and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SUNCT and SUNA are trigeminal autonomic cephalalgias in which very brief paroxysms arise from trigeminovascular activation coupled to a cranial parasympathetic reflex, producing the ipsilateral autonomic signs. Posterior hypothalamic activation is seen on functional imaging, and neurovascular compression of the trigeminal nerve is identified in a proportion of cases, giving clinical overlap with trigeminal neuralgia.",
+    "additionalDifferentials": [
+      "First-division trigeminal neuralgia",
+      "Paroxysmal hemicrania",
+      "Cluster headache",
+      "Primary stabbing headache",
+      "Symptomatic trigeminal autonomic cephalalgia from a posterior fossa or pituitary lesion",
+      "Trigeminal neuralgia with autonomic symptoms"
     ],
-    [
-     "Primary Differentials",
-     "First-division trigeminal neuralgia, Paroxysmal hemicrania, Cluster headache",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed characterisation of attack duration, frequency, triggers and autonomic features",
+      "MRI brain with dedicated pituitary and posterior fossa imaging and vascular sequences",
+      "Assessment for neurovascular contact of the trigeminal nerve",
+      "Trial of indometacin to help exclude paroxysmal hemicrania",
+      "Review for cutaneous trigger zones and the presence or absence of a refractory period"
     ],
-    [
-     "Management Strategy",
-     "Start lamotrigine as the preferred preventive to reduce attack frequency",
-     "Core treatment modality"
+    "redFlags": [
+      "Abnormal neurological signs or an underlying structural lesion on imaging",
+      "First presentation in older age or rapidly escalating attacks",
+      "Features suggesting raised intracranial pressure",
+      "Attacks that do not fit the expected very-short, very-frequent profile"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the disorder with trigeminal neuralgia and missing the prominent autonomic features",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable, ranging from single bouts to a chronic unremitting pattern; many patients improve with preventive drugs such as lamotrigine, and identifying a symptomatic cause can allow targeted treatment.",
+    "pitfalls": [
+      "Confusing the disorder with trigeminal neuralgia and missing the prominent autonomic features",
+      "Expecting an indometacin response as seen in paroxysmal hemicrania",
+      "Omitting MRI and overlooking a symptomatic lesion or neurovascular contact",
+      "Escalating opioids for what is a neuralgiform, opioid-unresponsive disorder"
+    ],
+    "references": [
+      "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
+      "The Headaches (Olesen et al.)"
+    ],
+    "crossLinks": [
+      "paroxysmal_hemicrania",
+      "hemicrania_continua"
+    ],
+    "management": [
+      "Start lamotrigine as the preferred preventive to reduce attack frequency",
+      "Use alternative preventives such as topiramate, gabapentin or oxcarbazepine when lamotrigine is ineffective or not tolerated",
+      "Settle severe exacerbations with intravenous lidocaine as a transitional measure",
+      "Arrange MRI to identify a symptomatic cause and treat any pituitary or posterior fossa lesion found",
+      "Consider microvascular decompression where trigeminal neurovascular contact is demonstrated, or neuromodulation such as occipital nerve stimulation in refractory cases",
+      "Refer to a specialist headache service for diagnosis and management of refractory disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for sunct/suna."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sunct-syndrome-real-image",
-   "title": "SUNCT/SUNA: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "sunct_syndrome-pathway",
+      "title": "SUNCT/SUNA: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Short-lasting unilateral neuralgiform headache attacks lasting seconds to a few minutes and recurring many times an hour",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Abnormal neurological signs or an underlying structural lesion on imaging",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed characterisation of attack duration, frequency, triggers and autonomic features, MRI brain with dedicated pituitary and posterior fossa imaging and vascular sequences, Assessment for neurovascular contact of the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start lamotrigine as the preferred preventive to reduce attack frequency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the disorder with trigeminal neuralgia and missing the prominent autonomic features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sunct/suna."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sunct_syndrome-matrix",
+      "title": "SUNCT/SUNA: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Short-lasting unilateral neuralgiform headache attacks lasting seconds to a few minutes and recurring many times an hour",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed characterisation of attack duration, frequency, triggers and autonomic features, MRI brain with dedicated pituitary and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "First-division trigeminal neuralgia, Paroxysmal hemicrania, Cluster headache",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start lamotrigine as the preferred preventive to reduce attack frequency",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the disorder with trigeminal neuralgia and missing the prominent autonomic features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sunct/suna."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sunct_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Attack characterisation: duration, frequency, triggers, autonomic features",
+          "cells": [
+            {
+              "text": "Short, frequent attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain with pituitary and posterior fossa imaging",
+          "cells": [
+            {
+              "text": "Symptomatic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for neurovascular contact of the trigeminal nerve",
+          "cells": [
+            {
+              "text": "Vascular compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of indometacin",
+          "cells": [
+            {
+              "text": "Helps exclude paroxysmal hemicrania"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of cutaneous trigger zones and refractory period",
+          "cells": [
+            {
+              "text": "Pattern assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sunct_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "First-division trigeminal neuralgia",
+          "cells": [
+            {
+              "text": "Pain without prominent autonomic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal hemicrania",
+          "cells": [
+            {
+              "text": "Indometacin-responsive; poor response here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cluster headache",
+          "cells": [
+            {
+              "text": "Longer attacks with a different pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sunct_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lamotrigine",
+          "cells": [
+            {
+              "text": "Preferred preventive to reduce attack frequency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative preventives",
+          "cells": [
+            {
+              "text": "Topiramate, gabapentin or oxcarbazepine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous lidocaine",
+          "cells": [
+            {
+              "text": "Transitional measure for severe bouts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI and treatment of any symptomatic lesion",
+          "cells": [
+            {
+              "text": "Pituitary or posterior fossa lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular decompression",
+          "cells": [
+            {
+              "text": "Demonstrated trigeminal neurovascular contact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occipital nerve stimulation",
+          "cells": [
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist headache service",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sunct_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of SUNCT/SUNA",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief unilateral attacks with conjunctival injection and tearing: suspected SUNCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abnormal neurology, structural lesion, raised pressure features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent MRI and neurology review for a structural or raised-pressure cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Attack characterisation; MRI with pituitary and posterior fossa; indometacin trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are very short, very frequent attacks with autonomic features seen with no lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider paroxysmal hemicrania, trigeminal neuralgia or a symptomatic lesion; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lamotrigine as the preferred preventive",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topiramate, gabapentin or oxcarbazepine if lamotrigine fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intravenous lidocaine to settle severe bouts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Microvascular decompression where neurovascular contact is shown",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often refractory; opioids are not appropriate for this neuralgiform disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

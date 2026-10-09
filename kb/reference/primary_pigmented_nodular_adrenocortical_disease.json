@@ -1,174 +1,468 @@
 {
- "id": "primary_pigmented_nodular_adrenocortical_disease",
- "name": "Primary pigmented nodular adrenocortical disease",
- "aliases": [
-  "PPNAD",
-  "primary pigmented nodular adrenal disease",
-  "micronodular adrenal disease",
-  "Carney complex adrenal disease"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard endocrinology reference texts and adrenal disorder consensus guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare cause of ACTH-independent Cushing syndrome, typically in children and young adults, in which the adrenals contain small pigmented (dark brown to black) cortical micronodules",
-   "The glands are often normal-sized or only slightly enlarged on imaging, so cross-sectional scanning can appear deceptively unremarkable",
-   "Strongly associated with Carney complex, and most cases carry germline inactivating mutations in PRKAR1A, the regulatory subunit of protein kinase A",
-   "A characteristic feature is a paradoxical rise in urinary or serum cortisol during high-dose dexamethasone administration (Liddle test), rather than the expected suppression",
-   "Cushingoid features may be cyclical or atypical, and growth failure with weight gain in a child should prompt consideration of this diagnosis",
-   "Screening for other Carney complex manifestations (cardiac myxomas, spotty skin pigmentation, testicular and other endocrine tumours) is essential once PPNAD is suspected",
-   "Bilateral adrenalectomy is generally required because the disease is bilateral and driven by constitutive protein kinase A activation"
+  "id": "primary_pigmented_nodular_adrenocortical_disease",
+  "name": "Primary pigmented nodular adrenocortical disease",
+  "aliases": [
+    "PPNAD",
+    "primary pigmented nodular adrenal disease",
+    "micronodular adrenal disease",
+    "Carney complex adrenal disease"
   ],
-  "pathophysiology": "PPNAD is a bilateral adrenocortical disorder in which numerous small cortisol-secreting micronodules, containing lipofuscin pigment, arise within an often atrophic surrounding cortex. Autonomous cortisol production suppresses pituitary ACTH. The molecular basis in most patients is a germline loss-of-function mutation in PRKAR1A, which encodes the type 1A regulatory subunit of protein kinase A; loss of this inhibitory subunit leads to constitutive, cAMP-independent activation of protein kinase A signalling and unregulated steroidogenesis. This dysregulated signalling also explains the paradoxical increase in cortisol seen with dexamethasone. The condition is a component of Carney complex, a multiple neoplasia and lentiginosis syndrome.",
-  "additionalDifferentials": [
-   "Cortisol-secreting adrenal adenoma",
-   "Primary bilateral macronodular adrenal hyperplasia",
-   "ACTH-dependent (pituitary) Cushing disease",
-   "Ectopic ACTH syndrome",
-   "Adrenocortical carcinoma",
-   "Exogenous glucocorticoid exposure"
-  ],
-  "additionalInvestigations": [
-   "24-hour urinary free cortisol and late-night salivary cortisol to confirm hypercortisolism",
-   "Paired low plasma ACTH with failure to suppress on low-dose dexamethasone establishing ACTH independence",
-   "High-dose dexamethasone (Liddle) testing to elicit the paradoxical cortisol rise",
-   "Adrenal CT or MRI, recognising that glands may look near-normal despite active disease",
-   "PRKAR1A germline genetic testing and evaluation for Carney complex features",
-   "Echocardiography and dermatological review to detect cardiac myxomas and lentigines"
-  ],
-  "redFlags": [
-   "Cardiac myxoma causing embolic events or obstruction as part of Carney complex",
-   "Severe or cyclical hypercortisolism with growth arrest in a child",
-   "Family history suggesting an inherited multiple neoplasia syndrome",
-   "Post-adrenalectomy adrenal insufficiency requiring lifelong replacement"
-  ],
-  "prognosis": "Cushing syndrome due to PPNAD is effectively cured by bilateral adrenalectomy, which necessitates lifelong glucocorticoid and mineralocorticoid replacement. Overall prognosis is dominated by other Carney complex manifestations, particularly cardiac myxomas, so lifelong surveillance is required.",
-  "pitfalls": [
-   "Concluding the adrenals are normal because imaging shows no discrete mass",
-   "Interpreting a paradoxical cortisol rise on dexamethasone as an assay error rather than a diagnostic clue",
-   "Failing to screen for Carney complex and missing life-threatening cardiac myxomas",
-   "Not offering genetic counselling for an inheritable PRKAR1A-related condition"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Consensus guidance on Carney complex and PPNAD"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Bilateral adrenalectomy as the definitive curative treatment for the ACTH-independent hypercortisolism",
-   "Lifelong glucocorticoid and mineralocorticoid replacement after adrenalectomy, with patient education on sick-day dosing and emergency steroids",
-   "Preoperative control of severe hypercortisolism with steroidogenesis inhibitors such as metyrapone or ketoconazole where required",
-   "Perioperative stress-dose corticosteroid cover and prompt recognition and treatment of adrenal crisis",
-   "Surveillance for other Carney complex features, especially echocardiographic screening for potentially life-threatening cardiac myxomas, plus dermatological, testicular, thyroid and pituitary assessment",
-   "PRKAR1A germline genetic testing with genetic counselling and family screening",
-   "Coordinated endocrine and cardiac multidisciplinary follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_pigmented_nodular_adrenocortical_disease-pathway",
-   "title": "Primary pigmented nodular adrenocortical disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare cause of ACTH-independent Cushing syndrome, typically in children and young adults, in which the adrenals contain small pigmented (dark brown to black) cortical micronodules",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac myxoma causing embolic events or obstruction as part of Carney complex",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 24-hour urinary free cortisol and late-night salivary cortisol to confirm hypercortisolism, Paired low plasma ACTH with failure to suppress on low-dose dexamethasone establishing ACTH independence, High-dose dexamethasone"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Bilateral adrenalectomy as the definitive curative treatment for the ACTH-independent hypercortisolism"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Concluding the adrenals are normal because imaging shows no discrete mass"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary pigmented nodular adrenocortical disease."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_pigmented_nodular_adrenocortical_disease-matrix",
-   "title": "Primary pigmented nodular adrenocortical disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare cause of ACTH-independent Cushing syndrome, typically in children and young adults, in which the adrenals contain small",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard endocrinology reference texts and adrenal disorder consensus guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare cause of ACTH-independent Cushing syndrome, typically in children and young adults, in which the adrenals contain small pigmented (dark brown to black) cortical micronodules",
+      "The glands are often normal-sized or only slightly enlarged on imaging, so cross-sectional scanning can appear deceptively unremarkable",
+      "Strongly associated with Carney complex, and most cases carry germline inactivating mutations in PRKAR1A, the regulatory subunit of protein kinase A",
+      "A characteristic feature is a paradoxical rise in urinary or serum cortisol during high-dose dexamethasone administration (Liddle test), rather than the expected suppression",
+      "Cushingoid features may be cyclical or atypical, and growth failure with weight gain in a child should prompt consideration of this diagnosis",
+      "Screening for other Carney complex manifestations (cardiac myxomas, spotty skin pigmentation, testicular and other endocrine tumours) is essential once PPNAD is suspected",
+      "Bilateral adrenalectomy is generally required because the disease is bilateral and driven by constitutive protein kinase A activation"
     ],
-    [
-     "Key Investigations",
-     "24-hour urinary free cortisol and late-night salivary cortisol to confirm hypercortisolism, Paired low plasma ACTH with failure",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PPNAD is a bilateral adrenocortical disorder in which numerous small cortisol-secreting micronodules, containing lipofuscin pigment, arise within an often atrophic surrounding cortex. Autonomous cortisol production suppresses pituitary ACTH. The molecular basis in most patients is a germline loss-of-function mutation in PRKAR1A, which encodes the type 1A regulatory subunit of protein kinase A; loss of this inhibitory subunit leads to constitutive, cAMP-independent activation of protein kinase A signalling and unregulated steroidogenesis. This dysregulated signalling also explains the paradoxical increase in cortisol seen with dexamethasone. The condition is a component of Carney complex, a multiple neoplasia and lentiginosis syndrome.",
+    "additionalDifferentials": [
+      "Cortisol-secreting adrenal adenoma",
+      "Primary bilateral macronodular adrenal hyperplasia",
+      "ACTH-dependent (pituitary) Cushing disease",
+      "Ectopic ACTH syndrome",
+      "Adrenocortical carcinoma",
+      "Exogenous glucocorticoid exposure"
     ],
-    [
-     "Primary Differentials",
-     "Cortisol-secreting adrenal adenoma, Primary bilateral macronodular adrenal hyperplasia, ACTH-dependent (pituitary) Cushing disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "24-hour urinary free cortisol and late-night salivary cortisol to confirm hypercortisolism",
+      "Paired low plasma ACTH with failure to suppress on low-dose dexamethasone establishing ACTH independence",
+      "High-dose dexamethasone (Liddle) testing to elicit the paradoxical cortisol rise",
+      "Adrenal CT or MRI, recognising that glands may look near-normal despite active disease",
+      "PRKAR1A germline genetic testing and evaluation for Carney complex features",
+      "Echocardiography and dermatological review to detect cardiac myxomas and lentigines"
     ],
-    [
-     "Management Strategy",
-     "Bilateral adrenalectomy as the definitive curative treatment for the ACTH-independent hypercortisolism",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac myxoma causing embolic events or obstruction as part of Carney complex",
+      "Severe or cyclical hypercortisolism with growth arrest in a child",
+      "Family history suggesting an inherited multiple neoplasia syndrome",
+      "Post-adrenalectomy adrenal insufficiency requiring lifelong replacement"
     ],
-    [
-     "Clinical Pitfall",
-     "Concluding the adrenals are normal because imaging shows no discrete mass",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cushing syndrome due to PPNAD is effectively cured by bilateral adrenalectomy, which necessitates lifelong glucocorticoid and mineralocorticoid replacement. Overall prognosis is dominated by other Carney complex manifestations, particularly cardiac myxomas, so lifelong surveillance is required.",
+    "pitfalls": [
+      "Concluding the adrenals are normal because imaging shows no discrete mass",
+      "Interpreting a paradoxical cortisol rise on dexamethasone as an assay error rather than a diagnostic clue",
+      "Failing to screen for Carney complex and missing life-threatening cardiac myxomas",
+      "Not offering genetic counselling for an inheritable PRKAR1A-related condition"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Consensus guidance on Carney complex and PPNAD"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Bilateral adrenalectomy as the definitive curative treatment for the ACTH-independent hypercortisolism",
+      "Lifelong glucocorticoid and mineralocorticoid replacement after adrenalectomy, with patient education on sick-day dosing and emergency steroids",
+      "Preoperative control of severe hypercortisolism with steroidogenesis inhibitors such as metyrapone or ketoconazole where required",
+      "Perioperative stress-dose corticosteroid cover and prompt recognition and treatment of adrenal crisis",
+      "Surveillance for other Carney complex features, especially echocardiographic screening for potentially life-threatening cardiac myxomas, plus dermatological, testicular, thyroid and pituitary assessment",
+      "PRKAR1A germline genetic testing with genetic counselling and family screening",
+      "Coordinated endocrine and cardiac multidisciplinary follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary pigmented nodular adrenocortical disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-pigmented-nodular-adrenocortical-disease-real-image",
-   "title": "Primary pigmented nodular adrenocortical disease: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "primary_pigmented_nodular_adrenocortical_disease-pathway",
+      "title": "Primary pigmented nodular adrenocortical disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare cause of ACTH-independent Cushing syndrome, typically in children and young adults, in which the adrenals contain small pigmented (dark brown to black) cortical micronodules",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac myxoma causing embolic events or obstruction as part of Carney complex",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 24-hour urinary free cortisol and late-night salivary cortisol to confirm hypercortisolism, Paired low plasma ACTH with failure to suppress on low-dose dexamethasone establishing ACTH independence, High-dose dexamethasone"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Bilateral adrenalectomy as the definitive curative treatment for the ACTH-independent hypercortisolism"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Concluding the adrenals are normal because imaging shows no discrete mass"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary pigmented nodular adrenocortical disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_pigmented_nodular_adrenocortical_disease-matrix",
+      "title": "Primary pigmented nodular adrenocortical disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare cause of ACTH-independent Cushing syndrome, typically in children and young adults, in which the adrenals contain small",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "24-hour urinary free cortisol and late-night salivary cortisol to confirm hypercortisolism, Paired low plasma ACTH with failure",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cortisol-secreting adrenal adenoma, Primary bilateral macronodular adrenal hyperplasia, ACTH-dependent (pituitary) Cushing disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Bilateral adrenalectomy as the definitive curative treatment for the ACTH-independent hypercortisolism",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Concluding the adrenals are normal because imaging shows no discrete mass",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary pigmented nodular adrenocortical disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology reference texts and adrenal disorder consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_pigmented_nodular_adrenocortical_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "24-hour urinary free cortisol and late-night salivary cortisol",
+          "cells": [
+            {
+              "text": "Hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired low plasma ACTH with low-dose dexamethasone",
+          "cells": [
+            {
+              "text": "ACTH independence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose dexamethasone (Liddle) testing",
+          "cells": [
+            {
+              "text": "Paradoxical cortisol rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal CT or MRI",
+          "cells": [
+            {
+              "text": "Glands may look near-normal despite active disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PRKAR1A germline genetic testing",
+          "cells": [
+            {
+              "text": "Carney complex features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and dermatological review",
+          "cells": [
+            {
+              "text": "Cardiac myxomas and lentigines"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_pigmented_nodular_adrenocortical_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary bilateral macronodular adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Bilateral macronodular enlargement on imaging"
+            },
+            {
+              "text": "Adrenal CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACTH-dependent (pituitary) Cushing disease",
+          "cells": [
+            {
+              "text": "ACTH-dependent cortisol excess"
+            },
+            {
+              "text": "Paired plasma ACTH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_pigmented_nodular_adrenocortical_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral adrenalectomy",
+          "cells": [
+            {
+              "text": "Definitive curative treatment for ACTH-independent hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong replacement",
+          "cells": [
+            {
+              "text": "Glucocorticoid and mineralocorticoid after adrenalectomy, with sick-day dosing and emergency steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative control",
+          "cells": [
+            {
+              "text": "Metyrapone or ketoconazole where severe hypercortisolism needs controlling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative cover",
+          "cells": [
+            {
+              "text": "Stress-dose corticosteroid cover; prompt recognition and treatment of adrenal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex surveillance",
+          "cells": [
+            {
+              "text": "Echocardiographic screening for cardiac myxomas; dermatological review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "PRKAR1A germline testing, genetic counselling and family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Coordinated endocrine and cardiac multidisciplinary follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_pigmented_nodular_adrenocortical_disease-dx-mgmt",
+      "title": "Diagnosis and management of Primary pigmented nodular adrenocortical disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PPNAD: ACTH-independent hypercortisolism with pigmented adrenal nodules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiac myxoma, severe or cyclical hypercortisolism in a child, or inherited syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac review for myxoma causing embolic events or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary and late-night salivary cortisol; dexamethasone tests; ACTH; imaging; PRKAR1A",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do cortisol and ACTH tests confirm ACTH-independent hypercortisolism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider adenoma, macronodular hyperplasia or pituitary Cushing disease; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bilateral adrenalectomy as definitive curative treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong glucocorticoid and mineralocorticoid replacement afterwards",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Metyrapone or ketoconazole for severe hypercortisolism before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Echocardiographic screening for cardiac myxomas; PRKAR1A testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coordinated endocrine and cardiac follow-up with family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

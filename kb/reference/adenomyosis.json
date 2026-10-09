@@ -1,175 +1,491 @@
 {
- "id": "adenomyosis",
- "name": "Adenomyosis",
- "aliases": [
-  "uterine adenomyosis",
-  "adenomyosis uteri",
-  "endometriosis interna"
- ],
- "class": "non_infective",
- "system": "Obstetrics and Gynaecology",
- "specialty": "Obstetrics and Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "RCOG and international guidance / standard gynaecology texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Adenomyosis is the presence of endometrial glands and stroma within the myometrium, causing a diffusely enlarged, tender, 'boggy' uterus",
-   "Typical symptoms are heavy menstrual bleeding and progressively worsening dysmenorrhoea, often with chronic pelvic pain",
-   "It classically affects multiparous women in their late reproductive years but is increasingly recognised in younger women with imaging",
-   "It frequently coexists with endometriosis and uterine fibroids, which can complicate the clinical picture",
-   "Transvaginal ultrasound and magnetic resonance imaging are the main diagnostic tools, showing myometrial changes and thickening of the junctional zone",
-   "Medical options aim to control bleeding and pain, including hormonal and intrauterine progestogen approaches",
-   "Conservative and uterine-sparing treatments are preferred in women wishing to retain fertility, with hysterectomy reserved for refractory disease",
-   "It may adversely affect fertility and pregnancy outcomes, which is relevant when counselling women planning conception"
+  "id": "adenomyosis",
+  "name": "Adenomyosis",
+  "aliases": [
+    "uterine adenomyosis",
+    "adenomyosis uteri",
+    "endometriosis interna"
   ],
-  "pathophysiology": "Adenomyosis develops when endometrial glands and stroma invade the myometrium, thought to occur through invagination of the basal endometrium along the disrupted endometrial-myometrial junction, or from metaplasia of displaced tissue. The ectopic tissue and surrounding smooth muscle undergo hypertrophy and hyperplasia under cyclical hormonal influence, producing a globular, enlarged uterus. Local oestrogen production, altered progesterone signalling, neuroangiogenesis, and inflammation contribute to heavy bleeding and pain, while distortion of the junctional zone and abnormal uterine contractility may impair implantation and contribute to subfertility.",
-  "additionalDifferentials": [
-   "Uterine fibroids",
-   "Endometriosis",
-   "Endometrial polyp or hyperplasia",
-   "Endometrial or uterine malignancy",
-   "Pelvic inflammatory disease",
-   "Dysfunctional or other causes of heavy menstrual bleeding"
-  ],
-  "additionalInvestigations": [
-   "Transvaginal ultrasound assessing myometrial texture and junctional zone",
-   "Pelvic magnetic resonance imaging for junctional zone thickening and extent",
-   "Full blood count to assess anaemia from heavy bleeding",
-   "Endometrial assessment or biopsy to exclude hyperplasia or malignancy where indicated",
-   "Assessment for coexisting endometriosis or fibroids",
-   "Histology of the hysterectomy specimen for definitive diagnosis"
-  ],
-  "redFlags": [
-   "Postmenopausal bleeding or intermenstrual bleeding suggesting alternative pathology",
-   "Rapidly enlarging uterine mass raising concern for malignancy",
-   "Severe anaemia from heavy menstrual loss",
-   "Pain unresponsive to appropriate treatment warranting reassessment"
-  ],
-  "prognosis": "Adenomyosis is a benign but often chronic condition; symptoms frequently persist through the reproductive years and typically regress after menopause. Symptom control is achievable in many women with medical therapy, and hysterectomy is definitive when fertility is no longer desired.",
-  "pitfalls": [
-   "Attributing all heavy bleeding and pain to fibroids and overlooking coexisting adenomyosis",
-   "Failing to exclude endometrial hyperplasia or malignancy in abnormal bleeding",
-   "Assuming imaging is normal because the uterus is only mildly enlarged",
-   "Overlooking the impact on fertility and pregnancy when counselling younger women"
-  ],
-  "references": [
-   "RCOG and national guidance on heavy menstrual bleeding",
-   "International consensus on adenomyosis imaging and classification",
-   "Standard gynaecology texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer the levonorgestrel-releasing intrauterine system as first-line therapy to control heavy menstrual bleeding and dysmenorrhoea",
-   "Use other hormonal options such as combined or progestogen-only contraceptives, or GnRH analogues, to suppress cyclical bleeding and pain",
-   "Provide symptomatic relief of heavy bleeding and pain with tranexamic acid and NSAIDs",
-   "Correct iron-deficiency anaemia from heavy menstrual loss with iron supplementation",
-   "Consider uterine-sparing intervention such as uterine artery embolisation or adenomyomectomy where fertility or uterine preservation is desired",
-   "Offer hysterectomy as definitive treatment once fertility is no longer desired",
-   "Refer for reproductive medicine input where subfertility is a concern and to gynaecology for coexisting endometriosis or fibroids"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adenomyosis-pathway",
-   "title": "Adenomyosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Adenomyosis is the presence of endometrial glands and stroma within the myometrium, causing a diffusely enlarged, tender, 'boggy' uterus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Postmenopausal bleeding or intermenstrual bleeding suggesting alternative pathology",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transvaginal ultrasound assessing myometrial texture and junctional zone, Pelvic magnetic resonance imaging for junctional zone thickening and extent, Full blood count to assess anaemia from heavy bleeding"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer the levonorgestrel-releasing intrauterine system as first-line therapy to control heavy menstrual bleeding and dysmenorrhoea"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all heavy bleeding and pain to fibroids and overlooking coexisting adenomyosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of adenomyosis."
-  }
- ],
- "tables": [
-  {
-   "id": "adenomyosis-matrix",
-   "title": "Adenomyosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Adenomyosis is the presence of endometrial glands and stroma within the myometrium, causing a diffusely enlarged, tender, 'boggy'",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics and Gynaecology",
+  "specialty": "Obstetrics and Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "RCOG and international guidance / standard gynaecology texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Adenomyosis is the presence of endometrial glands and stroma within the myometrium, causing a diffusely enlarged, tender, 'boggy' uterus",
+      "Typical symptoms are heavy menstrual bleeding and progressively worsening dysmenorrhoea, often with chronic pelvic pain",
+      "It classically affects multiparous women in their late reproductive years but is increasingly recognised in younger women with imaging",
+      "It frequently coexists with endometriosis and uterine fibroids, which can complicate the clinical picture",
+      "Transvaginal ultrasound and magnetic resonance imaging are the main diagnostic tools, showing myometrial changes and thickening of the junctional zone",
+      "Medical options aim to control bleeding and pain, including hormonal and intrauterine progestogen approaches",
+      "Conservative and uterine-sparing treatments are preferred in women wishing to retain fertility, with hysterectomy reserved for refractory disease",
+      "It may adversely affect fertility and pregnancy outcomes, which is relevant when counselling women planning conception"
     ],
-    [
-     "Key Investigations",
-     "Transvaginal ultrasound assessing myometrial texture and junctional zone, Pelvic magnetic resonance imaging for junctional zone",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Adenomyosis develops when endometrial glands and stroma invade the myometrium, thought to occur through invagination of the basal endometrium along the disrupted endometrial-myometrial junction, or from metaplasia of displaced tissue. The ectopic tissue and surrounding smooth muscle undergo hypertrophy and hyperplasia under cyclical hormonal influence, producing a globular, enlarged uterus. Local oestrogen production, altered progesterone signalling, neuroangiogenesis, and inflammation contribute to heavy bleeding and pain, while distortion of the junctional zone and abnormal uterine contractility may impair implantation and contribute to subfertility.",
+    "additionalDifferentials": [
+      "Uterine fibroids",
+      "Endometriosis",
+      "Endometrial polyp or hyperplasia",
+      "Endometrial or uterine malignancy",
+      "Pelvic inflammatory disease",
+      "Dysfunctional or other causes of heavy menstrual bleeding"
     ],
-    [
-     "Primary Differentials",
-     "Uterine fibroids, Endometriosis, Endometrial polyp or hyperplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transvaginal ultrasound assessing myometrial texture and junctional zone",
+      "Pelvic magnetic resonance imaging for junctional zone thickening and extent",
+      "Full blood count to assess anaemia from heavy bleeding",
+      "Endometrial assessment or biopsy to exclude hyperplasia or malignancy where indicated",
+      "Assessment for coexisting endometriosis or fibroids",
+      "Histology of the hysterectomy specimen for definitive diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Offer the levonorgestrel-releasing intrauterine system as first-line therapy to control heavy menstrual bleeding and dysmenorrhoea",
-     "Core treatment modality"
+    "redFlags": [
+      "Postmenopausal bleeding or intermenstrual bleeding suggesting alternative pathology",
+      "Rapidly enlarging uterine mass raising concern for malignancy",
+      "Severe anaemia from heavy menstrual loss",
+      "Pain unresponsive to appropriate treatment warranting reassessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all heavy bleeding and pain to fibroids and overlooking coexisting adenomyosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Adenomyosis is a benign but often chronic condition; symptoms frequently persist through the reproductive years and typically regress after menopause. Symptom control is achievable in many women with medical therapy, and hysterectomy is definitive when fertility is no longer desired.",
+    "pitfalls": [
+      "Attributing all heavy bleeding and pain to fibroids and overlooking coexisting adenomyosis",
+      "Failing to exclude endometrial hyperplasia or malignancy in abnormal bleeding",
+      "Assuming imaging is normal because the uterus is only mildly enlarged",
+      "Overlooking the impact on fertility and pregnancy when counselling younger women"
+    ],
+    "references": [
+      "RCOG and national guidance on heavy menstrual bleeding",
+      "International consensus on adenomyosis imaging and classification",
+      "Standard gynaecology texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer the levonorgestrel-releasing intrauterine system as first-line therapy to control heavy menstrual bleeding and dysmenorrhoea",
+      "Use other hormonal options such as combined or progestogen-only contraceptives, or GnRH analogues, to suppress cyclical bleeding and pain",
+      "Provide symptomatic relief of heavy bleeding and pain with tranexamic acid and NSAIDs",
+      "Correct iron-deficiency anaemia from heavy menstrual loss with iron supplementation",
+      "Consider uterine-sparing intervention such as uterine artery embolisation or adenomyomectomy where fertility or uterine preservation is desired",
+      "Offer hysterectomy as definitive treatment once fertility is no longer desired",
+      "Refer for reproductive medicine input where subfertility is a concern and to gynaecology for coexisting endometriosis or fibroids"
     ]
-   ],
-   "caption": "Overview comparison matrix for adenomyosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adenomyosis-real-image",
-   "title": "Adenomyosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "adenomyosis-pathway",
+      "title": "Adenomyosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Adenomyosis is the presence of endometrial glands and stroma within the myometrium, causing a diffusely enlarged, tender, 'boggy' uterus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Postmenopausal bleeding or intermenstrual bleeding suggesting alternative pathology",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transvaginal ultrasound assessing myometrial texture and junctional zone, Pelvic magnetic resonance imaging for junctional zone thickening and extent, Full blood count to assess anaemia from heavy bleeding"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer the levonorgestrel-releasing intrauterine system as first-line therapy to control heavy menstrual bleeding and dysmenorrhoea"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all heavy bleeding and pain to fibroids and overlooking coexisting adenomyosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of adenomyosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adenomyosis-matrix",
+      "title": "Adenomyosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Adenomyosis is the presence of endometrial glands and stroma within the myometrium, causing a diffusely enlarged, tender, 'boggy'",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transvaginal ultrasound assessing myometrial texture and junctional zone, Pelvic magnetic resonance imaging for junctional zone",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Uterine fibroids, Endometriosis, Endometrial polyp or hyperplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer the levonorgestrel-releasing intrauterine system as first-line therapy to control heavy menstrual bleeding and dysmenorrhoea",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all heavy bleeding and pain to fibroids and overlooking coexisting adenomyosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for adenomyosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "RCOG and international guidance / standard gynaecology texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adenomyosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound for myometrial texture and junctional zone",
+          "cells": [
+            {
+              "text": "Myometrial texture and junctional zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Junctional zone thickening and extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia from heavy bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial assessment or biopsy",
+          "cells": [
+            {
+              "text": "Excludes hyperplasia or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for coexisting endometriosis or fibroids",
+          "cells": [
+            {
+              "text": "Coexisting disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the hysterectomy specimen",
+          "cells": [
+            {
+              "text": "Definitive diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenomyosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Uterine fibroids",
+          "cells": [
+            {
+              "text": "Discrete mass rather than diffuse enlargement"
+            },
+            {
+              "text": "Pelvic MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometriosis",
+          "cells": [
+            {
+              "text": "Often coexists with adenomyosis"
+            },
+            {
+              "text": "Assessment for endometriosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenomyosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Levonorgestrel-releasing intrauterine system",
+          "cells": [
+            {
+              "text": "First-line for heavy bleeding and dysmenorrhoea"
+            },
+            {
+              "text": "First-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined or progestogen-only contraceptives, or GnRH analogues",
+          "cells": [
+            {
+              "text": "Suppress cyclical bleeding and pain"
+            },
+            {
+              "text": "Hormonal options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid and NSAIDs",
+          "cells": [
+            {
+              "text": "Symptom relief of bleeding and pain"
+            },
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron supplementation",
+          "cells": [
+            {
+              "text": "Iron-deficiency anaemia"
+            },
+            {
+              "text": "Correction of anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uterine artery embolisation or adenomyomectomy",
+          "cells": [
+            {
+              "text": "Fertility or uterine preservation"
+            },
+            {
+              "text": "Uterine-sparing intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hysterectomy",
+          "cells": [
+            {
+              "text": "Definitive treatment"
+            },
+            {
+              "text": "Once fertility is no longer wanted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive medicine referral",
+          "cells": [
+            {
+              "text": "Subfertility"
+            },
+            {
+              "text": "Where subfertility is a concern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adenomyosis-dx-mgmt",
+      "title": "Diagnosis and management of Adenomyosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heavy menstrual bleeding and progressive dysmenorrhoea in a multiparous woman",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Postmenopausal or intermenstrual bleeding, or a rapidly enlarging uterus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent gynaecology review; exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound, pelvic MRI for junctional zone, and FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Junctional zone thickening with diffuse enlargement on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Offer LNG-IUS first-line for bleeding and dysmenorrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review fibroids, endometriosis, polyps and hyperplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tranexamic acid and NSAIDs for bleeding and pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Iron replacement for anaemia from heavy menstrual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Uterine-sparing options such as embolisation or adenomyomectomy if fertility desired",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and often chronic; hysterectomy definitive when fertility not wanted",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

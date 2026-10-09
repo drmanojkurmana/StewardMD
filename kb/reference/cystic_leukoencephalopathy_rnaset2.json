@@ -1,175 +1,462 @@
 {
- "id": "cystic_leukoencephalopathy_rnaset2",
- "name": "Cystic leukoencephalopathy (RNASET2)",
- "aliases": [
-  "RNASET2-related leukoencephalopathy",
-  "cystic leukoencephalopathy without megalencephaly",
-  "RNASET2 deficiency",
-  "CMV-like leukoencephalopathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive leukoencephalopathy caused by variants in RNASET2, which encodes a ribonuclease",
-   "The MRI pattern closely mimics congenital cytomegalovirus infection, with multifocal patchy white matter lesions and bilateral anterior temporal subcortical cysts",
-   "Because of this imaging overlap, a key diagnostic step is to exclude congenital cytomegalovirus, including testing of stored neonatal blood spots where available",
-   "Children usually present in infancy with psychomotor delay, hypotonia and often seizures, and sensorineural hearing loss may be present",
-   "The clinical course is frequently non-progressive or only slowly progressive, distinguishing it from many other leukodystrophies",
-   "Diagnosis rests on the characteristic imaging combined with exclusion of congenital infection and confirmation of biallelic RNASET2 variants",
-   "Management is supportive and multidisciplinary, with seizure control, developmental support, hearing rehabilitation and physiotherapy"
+  "id": "cystic_leukoencephalopathy_rnaset2",
+  "name": "Cystic leukoencephalopathy (RNASET2)",
+  "aliases": [
+    "RNASET2-related leukoencephalopathy",
+    "cystic leukoencephalopathy without megalencephaly",
+    "RNASET2 deficiency",
+    "CMV-like leukoencephalopathy"
   ],
-  "pathophysiology": "This leukoencephalopathy is caused by biallelic loss-of-function variants in RNASET2, which encodes a ribonuclease of the transferase T2 family that participates in RNA turnover and lysosomal RNA degradation. Loss of enzyme activity is thought to disturb RNA processing and clearance, with downstream effects on neuroinflammation and glial function during early brain development. The resulting injury produces the distinctive combination of multifocal white matter abnormality and anterior temporal cysts, a pattern that strikingly resembles the sequelae of intrauterine cytomegalovirus infection despite the genetic cause.",
-  "additionalDifferentials": [
-   "Congenital cytomegalovirus infection and other congenital (TORCH) infections",
-   "Aicardi-Goutieres syndrome and other interferonopathies",
-   "Megalencephalic leukoencephalopathy with subcortical cysts (MLC1/GLIALCAM)",
-   "Vanishing white matter disease and other cystic leukoencephalopathies",
-   "Mitochondrial leukoencephalopathy with cystic change",
-   "Congenital muscular dystrophies with brain malformation and white matter change"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to demonstrate multifocal white matter lesions with bilateral anterior temporal cysts",
-   "Congenital cytomegalovirus testing, including PCR of stored neonatal blood spots where possible",
-   "RNASET2 sequencing, with leukodystrophy panel or exome if targeted testing is negative",
-   "Audiometry for associated sensorineural hearing loss",
-   "Electroencephalography where seizures are present",
-   "Developmental assessment to guide supportive intervention"
-  ],
-  "redFlags": [
-   "Poorly controlled seizures or status epilepticus",
-   "Unexpected neurological regression prompting reassessment of the diagnosis",
-   "Progressive hearing loss impairing communication and development",
-   "Feeding difficulty with aspiration risk"
-  ],
-  "prognosis": "The disorder is often static or only slowly progressive, with fixed motor and cognitive impairment of variable severity and, in many children, associated epilepsy and hearing loss; because it is largely non-progressive, prognosis relates mainly to the initial extent of brain injury and the burden of seizures rather than to ongoing degeneration.",
-  "pitfalls": [
-   "Diagnosing congenital cytomegalovirus purely on imaging without genetic testing, or vice versa, given their close resemblance",
-   "Overlooking the anterior temporal cysts as a specific pattern clue",
-   "Assuming a progressive leukodystrophy and giving an unduly pessimistic prognosis for what is often a static condition",
-   "Failing to test stored neonatal blood spots when congenital infection needs to be excluded",
-   "Not arranging hearing assessment and developmental support"
-  ],
-  "references": [
-   "GeneReviews, University of Washington, Seattle",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive, symptomatic care as there is no disease-specific therapy for this ribonuclease deficiency",
-   "Control seizures with antiepileptic drugs and manage epilepsy where present",
-   "Address sensorineural hearing loss with audiological assessment and hearing aids or cochlear implantation as indicated",
-   "Support psychomotor delay and hypotonia with physiotherapy, occupational therapy and speech and language therapy",
-   "Exclude congenital cytomegalovirus infection, whose imaging closely mimics this disorder, before attributing findings to the genetic cause",
-   "Offer genetic counselling for this autosomal recessive RNASET2-related condition and testing of at-risk relatives",
-   "Coordinate neurology and developmental paediatrics for long-term multidisciplinary follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cystic_leukoencephalopathy_rnaset2-pathway",
-   "title": "Cystic leukoencephalopathy (RNASET2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive leukoencephalopathy caused by variants in RNASET2, which encodes a ribonuclease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Poorly controlled seizures or status epilepticus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to demonstrate multifocal white matter lesions with bilateral anterior temporal cysts, Congenital cytomegalovirus testing, including PCR of stored neonatal blood spots where possible, RNASET2 sequencing, with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive, symptomatic care as there is no disease-specific therapy for this ribonuclease deficiency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing congenital cytomegalovirus purely on imaging without genetic testing, or vice versa, given their close resemblance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cystic leukoencephalopathy (rnaset2)."
-  }
- ],
- "tables": [
-  {
-   "id": "cystic_leukoencephalopathy_rnaset2-matrix",
-   "title": "Cystic leukoencephalopathy (RNASET2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive leukoencephalopathy caused by variants in RNASET2, which encodes a ribonuclease",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive leukoencephalopathy caused by variants in RNASET2, which encodes a ribonuclease",
+      "The MRI pattern closely mimics congenital cytomegalovirus infection, with multifocal patchy white matter lesions and bilateral anterior temporal subcortical cysts",
+      "Because of this imaging overlap, a key diagnostic step is to exclude congenital cytomegalovirus, including testing of stored neonatal blood spots where available",
+      "Children usually present in infancy with psychomotor delay, hypotonia and often seizures, and sensorineural hearing loss may be present",
+      "The clinical course is frequently non-progressive or only slowly progressive, distinguishing it from many other leukodystrophies",
+      "Diagnosis rests on the characteristic imaging combined with exclusion of congenital infection and confirmation of biallelic RNASET2 variants",
+      "Management is supportive and multidisciplinary, with seizure control, developmental support, hearing rehabilitation and physiotherapy"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to demonstrate multifocal white matter lesions with bilateral anterior temporal cysts, Congenital cytomegalovirus",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "This leukoencephalopathy is caused by biallelic loss-of-function variants in RNASET2, which encodes a ribonuclease of the transferase T2 family that participates in RNA turnover and lysosomal RNA degradation. Loss of enzyme activity is thought to disturb RNA processing and clearance, with downstream effects on neuroinflammation and glial function during early brain development. The resulting injury produces the distinctive combination of multifocal white matter abnormality and anterior temporal cysts, a pattern that strikingly resembles the sequelae of intrauterine cytomegalovirus infection despite the genetic cause.",
+    "additionalDifferentials": [
+      "Congenital cytomegalovirus infection and other congenital (TORCH) infections",
+      "Aicardi-Goutieres syndrome and other interferonopathies",
+      "Megalencephalic leukoencephalopathy with subcortical cysts (MLC1/GLIALCAM)",
+      "Vanishing white matter disease and other cystic leukoencephalopathies",
+      "Mitochondrial leukoencephalopathy with cystic change",
+      "Congenital muscular dystrophies with brain malformation and white matter change"
     ],
-    [
-     "Primary Differentials",
-     "Congenital cytomegalovirus infection and other congenital (TORCH) infections, Aicardi-Goutieres syndrome and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to demonstrate multifocal white matter lesions with bilateral anterior temporal cysts",
+      "Congenital cytomegalovirus testing, including PCR of stored neonatal blood spots where possible",
+      "RNASET2 sequencing, with leukodystrophy panel or exome if targeted testing is negative",
+      "Audiometry for associated sensorineural hearing loss",
+      "Electroencephalography where seizures are present",
+      "Developmental assessment to guide supportive intervention"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive, symptomatic care as there is no disease-specific therapy for this ribonuclease deficiency",
-     "Core treatment modality"
+    "redFlags": [
+      "Poorly controlled seizures or status epilepticus",
+      "Unexpected neurological regression prompting reassessment of the diagnosis",
+      "Progressive hearing loss impairing communication and development",
+      "Feeding difficulty with aspiration risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing congenital cytomegalovirus purely on imaging without genetic testing, or vice versa, given their close resemblance",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is often static or only slowly progressive, with fixed motor and cognitive impairment of variable severity and, in many children, associated epilepsy and hearing loss; because it is largely non-progressive, prognosis relates mainly to the initial extent of brain injury and the burden of seizures rather than to ongoing degeneration.",
+    "pitfalls": [
+      "Diagnosing congenital cytomegalovirus purely on imaging without genetic testing, or vice versa, given their close resemblance",
+      "Overlooking the anterior temporal cysts as a specific pattern clue",
+      "Assuming a progressive leukodystrophy and giving an unduly pessimistic prognosis for what is often a static condition",
+      "Failing to test stored neonatal blood spots when congenital infection needs to be excluded",
+      "Not arranging hearing assessment and developmental support"
+    ],
+    "references": [
+      "GeneReviews, University of Washington, Seattle",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive, symptomatic care as there is no disease-specific therapy for this ribonuclease deficiency",
+      "Control seizures with antiepileptic drugs and manage epilepsy where present",
+      "Address sensorineural hearing loss with audiological assessment and hearing aids or cochlear implantation as indicated",
+      "Support psychomotor delay and hypotonia with physiotherapy, occupational therapy and speech and language therapy",
+      "Exclude congenital cytomegalovirus infection, whose imaging closely mimics this disorder, before attributing findings to the genetic cause",
+      "Offer genetic counselling for this autosomal recessive RNASET2-related condition and testing of at-risk relatives",
+      "Coordinate neurology and developmental paediatrics for long-term multidisciplinary follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for cystic leukoencephalopathy (rnaset2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cystic-leukoencephalopathy-rnaset2-real-image",
-   "title": "Cystic leukoencephalopathy (RNASET2): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cystic_leukoencephalopathy_rnaset2-pathway",
+      "title": "Cystic leukoencephalopathy (RNASET2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive leukoencephalopathy caused by variants in RNASET2, which encodes a ribonuclease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Poorly controlled seizures or status epilepticus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to demonstrate multifocal white matter lesions with bilateral anterior temporal cysts, Congenital cytomegalovirus testing, including PCR of stored neonatal blood spots where possible, RNASET2 sequencing, with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive, symptomatic care as there is no disease-specific therapy for this ribonuclease deficiency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing congenital cytomegalovirus purely on imaging without genetic testing, or vice versa, given their close resemblance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cystic leukoencephalopathy (rnaset2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cystic_leukoencephalopathy_rnaset2-matrix",
+      "title": "Cystic leukoencephalopathy (RNASET2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive leukoencephalopathy caused by variants in RNASET2, which encodes a ribonuclease",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to demonstrate multifocal white matter lesions with bilateral anterior temporal cysts, Congenital cytomegalovirus",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital cytomegalovirus infection and other congenital (TORCH) infections, Aicardi-Goutieres syndrome and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive, symptomatic care as there is no disease-specific therapy for this ribonuclease deficiency",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing congenital cytomegalovirus purely on imaging without genetic testing, or vice versa, given their close resemblance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cystic leukoencephalopathy (rnaset2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystic_leukoencephalopathy_rnaset2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Multifocal white matter lesions with anterior temporal cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital CMV testing, including stored blood spot PCR",
+          "cells": [
+            {
+              "text": "CMV excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RNASET2 sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_leukoencephalopathy_rnaset2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital cytomegalovirus infection",
+          "cells": [
+            {
+              "text": "Imaging closely mimics; CMV testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aicardi-Goutieres syndrome",
+          "cells": [
+            {
+              "text": "Named interferonopathy look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Megalencephalic leukoencephalopathy with subcortical cysts",
+          "cells": [
+            {
+              "text": "Named cystic leukoencephalopathy look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_leukoencephalopathy_rnaset2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy for this ribonuclease deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure drugs",
+          "cells": [
+            {
+              "text": "Where epilepsy is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing support",
+          "cells": [
+            {
+              "text": "Audiology; hearing aids or cochlear implantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental therapies",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech and language therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude congenital CMV",
+          "cells": [
+            {
+              "text": "Before attributing findings to the genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive RNASET2; testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and developmental team",
+          "cells": [
+            {
+              "text": "Long-term follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystic_leukoencephalopathy_rnaset2-dx-mgmt",
+      "title": "Diagnosis and management of Cystic leukoencephalopathy (RNASET2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected RNASET2 leukoencephalopathy: developmental delay, MRI white matter cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (uncontrolled seizures, regression, hearing loss, aspiration)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent seizure control and swallowing assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI; congenital CMV PCR on blood spot; RNASET2 sequencing; audiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does RNASET2 sequencing confirm a causative variant after CMV is excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital CMV, Aicardi-Goutieres or MLC1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with no disease-specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication where epilepsy is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Audiology with hearing aids or implants as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational and speech therapy; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often static or slowly progressive, with fixed motor and cognitive impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

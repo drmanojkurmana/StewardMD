@@ -1,171 +1,451 @@
 {
- "id": "sinus_barotrauma",
- "name": "Sinus barotrauma",
- "aliases": [
-  "barosinusitis",
-  "aerosinusitis",
-  "sinus squeeze"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency & Wilderness Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Occurs when a paranasal sinus cannot equalise pressure with the environment because its ostium is obstructed, classically during descent",
-   "The frontal and maxillary sinuses are most often affected, producing pain over the forehead, cheek, or around the eye",
-   "On descent the trapped sinus air is compressed relative to the surroundings, creating a squeeze that causes mucosal swelling, congestion, and bleeding into the sinus",
-   "Epistaxis or blood-tinged nasal discharge on ascent, when the injured mucosa is decompressed, is a common finding",
-   "Predisposing factors include upper respiratory infection, allergic rhinitis, nasal polyps, and other causes of ostial obstruction",
-   "Management is decongestion, avoiding diving or flying until the sinuses can equalise, and treating any underlying nasal pathology",
-   "Prevention centres on not diving or flying with nasal or sinus congestion and controlling rhinitis"
+  "id": "sinus_barotrauma",
+  "name": "Sinus barotrauma",
+  "aliases": [
+    "barosinusitis",
+    "aerosinusitis",
+    "sinus squeeze"
   ],
-  "pathophysiology": "The paranasal sinuses are air-filled cavities that equalise pressure through their ostia into the nasal cavity. When an ostium is blocked by mucosal swelling, polyps, or secretions, the air within the sinus cannot equalise with rising ambient pressure on descent. The resulting relative negative pressure within the sinus draws fluid and blood from the mucosa into the cavity and causes mucosal engorgement and haemorrhage, producing pain and bleeding. On ascent, expanding trapped air or dislodged material can cause further discomfort and epistaxis.",
-  "additionalDifferentials": [
-   "Ear barotrauma",
-   "Acute or chronic sinusitis",
-   "Dental barotrauma (barodontalgia)",
-   "Migraine or tension headache",
-   "Trigeminal neuralgia",
-   "Facial pain from temporomandibular joint dysfunction"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment correlating facial pain and epistaxis with the dive or flight profile",
-   "Anterior rhinoscopy or nasendoscopy to identify ostial obstruction, polyps, or inflammation",
-   "Otoscopy to assess for coexisting ear barotrauma",
-   "Sinus imaging (CT) in recurrent, severe, or diagnostically unclear cases",
-   "Assessment for underlying rhinitis or structural nasal abnormality"
-  ],
-  "redFlags": [
-   "Severe or persistent headache with neurological or visual symptoms",
-   "Features suggesting orbital or intracranial extension of infection",
-   "Recurrent barotrauma indicating significant untreated nasal or sinus disease",
-   "Signs of secondary bacterial sinusitis"
-  ],
-  "prognosis": "Sinus barotrauma usually settles within days to a couple of weeks with decongestion and avoidance of pressure changes; recurrence is likely if underlying nasal or sinus disease is not addressed, but serious complications are uncommon.",
-  "pitfalls": [
-   "Continuing to dive or fly with nasal congestion and provoking recurrence",
-   "Overlooking coexisting ear barotrauma",
-   "Failing to identify and treat underlying rhinitis, polyps, or structural obstruction",
-   "Missing secondary bacterial sinusitis after the injury"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Bove and Davis' Diving Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical and systemic decongestants to relieve ostial obstruction and restore sinus ventilation, the mainstay of acute treatment",
-   "Analgesia for facial pain, with intranasal corticosteroids and antihistamines where rhinitis or allergy contributes",
-   "Avoidance of diving and flying until the sinuses can equalise, with instruction on equalisation technique",
-   "Treatment of underlying nasal pathology such as rhinitis, polyps or structural obstruction, including endoscopic surgery for recurrent or refractory cases",
-   "Antibiotics reserved for secondary bacterial sinusitis",
-   "Otolaryngology referral and follow-up for recurrent or severe episodes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sinus_barotrauma-pathway",
-   "title": "Sinus barotrauma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Occurs when a paranasal sinus cannot equalise pressure with the environment because its ostium is obstructed, classically during descent",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or persistent headache with neurological or visual symptoms",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment correlating facial pain and epistaxis with the dive or flight profile, Anterior rhinoscopy or nasendoscopy to identify ostial obstruction, polyps, or inflammation, Otoscopy to assess for coexisting ear"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical and systemic decongestants to relieve ostial obstruction and restore sinus ventilation, the mainstay of acute treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Continuing to dive or fly with nasal congestion and provoking recurrence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sinus barotrauma."
-  }
- ],
- "tables": [
-  {
-   "id": "sinus_barotrauma-matrix",
-   "title": "Sinus barotrauma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Occurs when a paranasal sinus cannot equalise pressure with the environment because its ostium is obstructed, classically during",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency & Wilderness Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Occurs when a paranasal sinus cannot equalise pressure with the environment because its ostium is obstructed, classically during descent",
+      "The frontal and maxillary sinuses are most often affected, producing pain over the forehead, cheek, or around the eye",
+      "On descent the trapped sinus air is compressed relative to the surroundings, creating a squeeze that causes mucosal swelling, congestion, and bleeding into the sinus",
+      "Epistaxis or blood-tinged nasal discharge on ascent, when the injured mucosa is decompressed, is a common finding",
+      "Predisposing factors include upper respiratory infection, allergic rhinitis, nasal polyps, and other causes of ostial obstruction",
+      "Management is decongestion, avoiding diving or flying until the sinuses can equalise, and treating any underlying nasal pathology",
+      "Prevention centres on not diving or flying with nasal or sinus congestion and controlling rhinitis"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment correlating facial pain and epistaxis with the dive or flight profile, Anterior rhinoscopy or nasendoscopy to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The paranasal sinuses are air-filled cavities that equalise pressure through their ostia into the nasal cavity. When an ostium is blocked by mucosal swelling, polyps, or secretions, the air within the sinus cannot equalise with rising ambient pressure on descent. The resulting relative negative pressure within the sinus draws fluid and blood from the mucosa into the cavity and causes mucosal engorgement and haemorrhage, producing pain and bleeding. On ascent, expanding trapped air or dislodged material can cause further discomfort and epistaxis.",
+    "additionalDifferentials": [
+      "Ear barotrauma",
+      "Acute or chronic sinusitis",
+      "Dental barotrauma (barodontalgia)",
+      "Migraine or tension headache",
+      "Trigeminal neuralgia",
+      "Facial pain from temporomandibular joint dysfunction"
     ],
-    [
-     "Primary Differentials",
-     "Ear barotrauma, Acute or chronic sinusitis, Dental barotrauma (barodontalgia)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment correlating facial pain and epistaxis with the dive or flight profile",
+      "Anterior rhinoscopy or nasendoscopy to identify ostial obstruction, polyps, or inflammation",
+      "Otoscopy to assess for coexisting ear barotrauma",
+      "Sinus imaging (CT) in recurrent, severe, or diagnostically unclear cases",
+      "Assessment for underlying rhinitis or structural nasal abnormality"
     ],
-    [
-     "Management Strategy",
-     "Topical and systemic decongestants to relieve ostial obstruction and restore sinus ventilation, the mainstay of acute treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or persistent headache with neurological or visual symptoms",
+      "Features suggesting orbital or intracranial extension of infection",
+      "Recurrent barotrauma indicating significant untreated nasal or sinus disease",
+      "Signs of secondary bacterial sinusitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Continuing to dive or fly with nasal congestion and provoking recurrence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Sinus barotrauma usually settles within days to a couple of weeks with decongestion and avoidance of pressure changes; recurrence is likely if underlying nasal or sinus disease is not addressed, but serious complications are uncommon.",
+    "pitfalls": [
+      "Continuing to dive or fly with nasal congestion and provoking recurrence",
+      "Overlooking coexisting ear barotrauma",
+      "Failing to identify and treat underlying rhinitis, polyps, or structural obstruction",
+      "Missing secondary bacterial sinusitis after the injury"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Bove and Davis' Diving Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical and systemic decongestants to relieve ostial obstruction and restore sinus ventilation, the mainstay of acute treatment",
+      "Analgesia for facial pain, with intranasal corticosteroids and antihistamines where rhinitis or allergy contributes",
+      "Avoidance of diving and flying until the sinuses can equalise, with instruction on equalisation technique",
+      "Treatment of underlying nasal pathology such as rhinitis, polyps or structural obstruction, including endoscopic surgery for recurrent or refractory cases",
+      "Antibiotics reserved for secondary bacterial sinusitis",
+      "Otolaryngology referral and follow-up for recurrent or severe episodes"
     ]
-   ],
-   "caption": "Overview comparison matrix for sinus barotrauma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sinus-barotrauma-real-image",
-   "title": "Sinus barotrauma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sinus_barotrauma-pathway",
+      "title": "Sinus barotrauma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Occurs when a paranasal sinus cannot equalise pressure with the environment because its ostium is obstructed, classically during descent",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or persistent headache with neurological or visual symptoms",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment correlating facial pain and epistaxis with the dive or flight profile, Anterior rhinoscopy or nasendoscopy to identify ostial obstruction, polyps, or inflammation, Otoscopy to assess for coexisting ear"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical and systemic decongestants to relieve ostial obstruction and restore sinus ventilation, the mainstay of acute treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Continuing to dive or fly with nasal congestion and provoking recurrence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sinus barotrauma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sinus_barotrauma-matrix",
+      "title": "Sinus barotrauma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Occurs when a paranasal sinus cannot equalise pressure with the environment because its ostium is obstructed, classically during",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment correlating facial pain and epistaxis with the dive or flight profile, Anterior rhinoscopy or nasendoscopy to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ear barotrauma, Acute or chronic sinusitis, Dental barotrauma (barodontalgia)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical and systemic decongestants to relieve ostial obstruction and restore sinus ventilation, the mainstay of acute treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Continuing to dive or fly with nasal congestion and provoking recurrence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sinus barotrauma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sinus_barotrauma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical correlation with the dive or flight",
+          "cells": [
+            {
+              "text": "Facial pain and epistaxis timed to descent or ascent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior rhinoscopy or nasendoscopy",
+          "cells": [
+            {
+              "text": "Ostial obstruction, polyps or inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Coexisting ear barotrauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the sinuses",
+          "cells": [
+            {
+              "text": "Recurrent, severe or diagnostically unclear cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for rhinitis or structural abnormality",
+          "cells": [
+            {
+              "text": "Underlying nasal pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinus_barotrauma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ear barotrauma",
+          "cells": [
+            {
+              "text": "Can coexist; checked by otoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute or chronic sinusitis",
+          "cells": [
+            {
+              "text": "Secondary bacterial sinusitis can follow the injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sinus_barotrauma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical and systemic decongestants",
+          "cells": [
+            {
+              "text": "Restore sinus ventilation; the mainstay of acute treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia, intranasal corticosteroids and antihistamines",
+          "cells": [
+            {
+              "text": "Facial pain, with the latter two where rhinitis or allergy contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid diving and flying",
+          "cells": [
+            {
+              "text": "Until the sinuses can equalise; teach equalisation technique"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying nasal pathology",
+          "cells": [
+            {
+              "text": "Rhinitis, polyps or structural obstruction; endoscopic surgery for recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Reserved for secondary bacterial sinusitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otolaryngology referral",
+          "cells": [
+            {
+              "text": "Recurrent or severe episodes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sinus_barotrauma-dx-mgmt",
+      "title": "Diagnosis and management of Sinus barotrauma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Facial pain and epistaxis after diving or flying with sinus congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe headache with visual or neurological signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for orbital or intracranial extension of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nasendoscopy for ostial obstruction; otoscopy for ear barotrauma; CT if recurrent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ostial obstruction present, with features of sinus barotrauma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sinusitis, ear barotrauma, migraine or trigeminal neuralgia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Decongestants to restore sinus ventilation, the mainstay of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia; intranasal steroids and antihistamines if allergy contributes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "No diving or flying until the sinuses can equalise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat underlying rhinitis, polyps or structural obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Antibiotics only for secondary bacterial sinusitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Usually settles within days to weeks; recurs if underlying disease persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,440 @@
 {
- "id": "pura_syndrome",
- "name": "PURA syndrome",
- "aliases": [
-  "PURA",
-  "Pur-alpha syndrome",
-  "PURA-related neurodevelopmental disorder",
-  "5q31.3 microdeletion (PURA)"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Clinical Genetics / Neurodevelopmental",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents in the neonatal period with profound hypotonia, feeding difficulties and often excessive sleepiness or reduced arousal",
-   "Neonatal problems can include temperature instability, hypersomnolence and apnoea or hypoventilation",
-   "A prominent movement disorder emerges, with dyskinesias, dystonia, tremor and exaggerated startle-like or myoclonic movements",
-   "Epilepsy and abnormal EEG activity are common, though some paroxysmal movements are non-epileptic and can mimic seizures",
-   "Global developmental delay with intellectual disability, absent or limited speech and delayed walking is typical",
-   "Caused by heterozygous loss-of-function variants in PURA (or 5q31.3 deletions including it), usually de novo and autosomal dominant, encoding the DNA/RNA-binding protein Pur-alpha",
-   "Distinguishing true seizures from non-epileptic paroxysmal movements is a recurring clinical challenge"
+  "id": "pura_syndrome",
+  "name": "PURA syndrome",
+  "aliases": [
+    "PURA",
+    "Pur-alpha syndrome",
+    "PURA-related neurodevelopmental disorder",
+    "5q31.3 microdeletion (PURA)"
   ],
-  "pathophysiology": "PURA encodes Pur-alpha, a highly conserved DNA- and RNA-binding protein that participates in transcriptional regulation, DNA replication and the transport and translation of messenger RNA in neurons, functions essential for normal brain development and neuronal maturation. Heterozygous loss-of-function variants, usually de novo, reduce functional protein through haploinsufficiency, disrupting neuronal differentiation and synaptic function. The resulting impairment produces the neonatal hypotonia and reduced arousal, movement disorder, epilepsy and developmental delay. Because a single functional copy is insufficient, the gene is dosage-sensitive and deletions encompassing it produce the same disorder.",
-  "additionalDifferentials": [
-   "Prader-Willi syndrome",
-   "Angelman syndrome",
-   "Congenital myasthenic and neuromuscular disorders causing hypotonia",
-   "Neonatal epileptic encephalopathies",
-   "Mitochondrial and metabolic encephalopathies",
-   "Other causes of the floppy infant"
-  ],
-  "additionalInvestigations": [
-   "EEG, ideally with video, to distinguish seizures from non-epileptic paroxysmal movements",
-   "Brain MRI, often normal or with non-specific changes",
-   "Neuromuscular and metabolic workup for the hypotonic infant",
-   "Chromosomal microarray to detect 5q31.3 deletions involving PURA",
-   "Gene panel or exome sequencing including PURA"
-  ],
-  "redFlags": [
-   "Apnoea, hypoventilation or respiratory instability in the neonate",
-   "Feeding failure requiring supported nutrition",
-   "Poorly controlled seizures or status epilepticus",
-   "Severe temperature or autonomic instability"
-  ],
-  "prognosis": "PURA syndrome causes lifelong moderate to severe intellectual disability with motor and often speech impairment; early neonatal risks include respiratory and feeding instability. With supportive care many children improve in arousal and feeding over infancy, and management is multidisciplinary.",
-  "pitfalls": [
-   "Over-treating non-epileptic paroxysmal movements as seizures",
-   "Misdiagnosing as Prader-Willi or a primary neuromuscular disorder without genetic testing",
-   "Assuming a normal MRI excludes a genetic cause",
-   "Overlooking respiratory and autonomic instability in the neonatal period"
-  ],
-  "references": [
-   "GeneReviews: PURA-Related Neurodevelopmental Disorders",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control epilepsy with antiepileptic drugs, using video-EEG to distinguish true seizures from non-epileptic paroxysmal movements",
-   "Manage the movement disorder of dystonia, dyskinesia and myoclonus symptomatically",
-   "Support neonatal respiratory instability, apnoea and hypoventilation with monitoring and ventilatory support as needed",
-   "Address feeding difficulties with feeding support and nasogastric or gastrostomy feeding where required",
-   "Provide developmental therapies including physiotherapy, occupational therapy and speech and language therapy for hypotonia and global delay",
-   "Coordinate care through a neurodevelopmental multidisciplinary team",
-   "Offer genetic counselling, confirming the usually de novo variant and advising on the low recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pura_syndrome-pathway",
-   "title": "PURA syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents in the neonatal period with profound hypotonia, feeding difficulties and often excessive sleepiness or reduced arousal",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Apnoea, hypoventilation or respiratory instability in the neonate",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: EEG, ideally with video, to distinguish seizures from non-epileptic paroxysmal movements, Brain MRI, often normal or with non-specific changes, Neuromuscular and metabolic workup for the hypotonic infant"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control epilepsy with antiepileptic drugs, using video-EEG to distinguish true seizures from non-epileptic paroxysmal movements"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Over-treating non-epileptic paroxysmal movements as seizures"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pura syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "pura_syndrome-matrix",
-   "title": "PURA syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents in the neonatal period with profound hypotonia, feeding difficulties and often excessive sleepiness or reduced arousal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Clinical Genetics / Neurodevelopmental",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents in the neonatal period with profound hypotonia, feeding difficulties and often excessive sleepiness or reduced arousal",
+      "Neonatal problems can include temperature instability, hypersomnolence and apnoea or hypoventilation",
+      "A prominent movement disorder emerges, with dyskinesias, dystonia, tremor and exaggerated startle-like or myoclonic movements",
+      "Epilepsy and abnormal EEG activity are common, though some paroxysmal movements are non-epileptic and can mimic seizures",
+      "Global developmental delay with intellectual disability, absent or limited speech and delayed walking is typical",
+      "Caused by heterozygous loss-of-function variants in PURA (or 5q31.3 deletions including it), usually de novo and autosomal dominant, encoding the DNA/RNA-binding protein Pur-alpha",
+      "Distinguishing true seizures from non-epileptic paroxysmal movements is a recurring clinical challenge"
     ],
-    [
-     "Key Investigations",
-     "EEG, ideally with video, to distinguish seizures from non-epileptic paroxysmal movements, Brain MRI, often normal or with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PURA encodes Pur-alpha, a highly conserved DNA- and RNA-binding protein that participates in transcriptional regulation, DNA replication and the transport and translation of messenger RNA in neurons, functions essential for normal brain development and neuronal maturation. Heterozygous loss-of-function variants, usually de novo, reduce functional protein through haploinsufficiency, disrupting neuronal differentiation and synaptic function. The resulting impairment produces the neonatal hypotonia and reduced arousal, movement disorder, epilepsy and developmental delay. Because a single functional copy is insufficient, the gene is dosage-sensitive and deletions encompassing it produce the same disorder.",
+    "additionalDifferentials": [
+      "Prader-Willi syndrome",
+      "Angelman syndrome",
+      "Congenital myasthenic and neuromuscular disorders causing hypotonia",
+      "Neonatal epileptic encephalopathies",
+      "Mitochondrial and metabolic encephalopathies",
+      "Other causes of the floppy infant"
     ],
-    [
-     "Primary Differentials",
-     "Prader-Willi syndrome, Angelman syndrome, Congenital myasthenic and neuromuscular disorders causing hypotonia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "EEG, ideally with video, to distinguish seizures from non-epileptic paroxysmal movements",
+      "Brain MRI, often normal or with non-specific changes",
+      "Neuromuscular and metabolic workup for the hypotonic infant",
+      "Chromosomal microarray to detect 5q31.3 deletions involving PURA",
+      "Gene panel or exome sequencing including PURA"
     ],
-    [
-     "Management Strategy",
-     "Control epilepsy with antiepileptic drugs, using video-EEG to distinguish true seizures from non-epileptic paroxysmal movements",
-     "Core treatment modality"
+    "redFlags": [
+      "Apnoea, hypoventilation or respiratory instability in the neonate",
+      "Feeding failure requiring supported nutrition",
+      "Poorly controlled seizures or status epilepticus",
+      "Severe temperature or autonomic instability"
     ],
-    [
-     "Clinical Pitfall",
-     "Over-treating non-epileptic paroxysmal movements as seizures",
-     "Prevent diagnostic or management error"
+    "prognosis": "PURA syndrome causes lifelong moderate to severe intellectual disability with motor and often speech impairment; early neonatal risks include respiratory and feeding instability. With supportive care many children improve in arousal and feeding over infancy, and management is multidisciplinary.",
+    "pitfalls": [
+      "Over-treating non-epileptic paroxysmal movements as seizures",
+      "Misdiagnosing as Prader-Willi or a primary neuromuscular disorder without genetic testing",
+      "Assuming a normal MRI excludes a genetic cause",
+      "Overlooking respiratory and autonomic instability in the neonatal period"
+    ],
+    "references": [
+      "GeneReviews: PURA-Related Neurodevelopmental Disorders",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control epilepsy with antiepileptic drugs, using video-EEG to distinguish true seizures from non-epileptic paroxysmal movements",
+      "Manage the movement disorder of dystonia, dyskinesia and myoclonus symptomatically",
+      "Support neonatal respiratory instability, apnoea and hypoventilation with monitoring and ventilatory support as needed",
+      "Address feeding difficulties with feeding support and nasogastric or gastrostomy feeding where required",
+      "Provide developmental therapies including physiotherapy, occupational therapy and speech and language therapy for hypotonia and global delay",
+      "Coordinate care through a neurodevelopmental multidisciplinary team",
+      "Offer genetic counselling, confirming the usually de novo variant and advising on the low recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for pura syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pura-syndrome-real-image",
-   "title": "PURA syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "pura_syndrome-pathway",
+      "title": "PURA syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents in the neonatal period with profound hypotonia, feeding difficulties and often excessive sleepiness or reduced arousal",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Apnoea, hypoventilation or respiratory instability in the neonate",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: EEG, ideally with video, to distinguish seizures from non-epileptic paroxysmal movements, Brain MRI, often normal or with non-specific changes, Neuromuscular and metabolic workup for the hypotonic infant"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control epilepsy with antiepileptic drugs, using video-EEG to distinguish true seizures from non-epileptic paroxysmal movements"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Over-treating non-epileptic paroxysmal movements as seizures"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pura syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pura_syndrome-matrix",
+      "title": "PURA syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents in the neonatal period with profound hypotonia, feeding difficulties and often excessive sleepiness or reduced arousal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "EEG, ideally with video, to distinguish seizures from non-epileptic paroxysmal movements, Brain MRI, often normal or with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Prader-Willi syndrome, Angelman syndrome, Congenital myasthenic and neuromuscular disorders causing hypotonia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control epilepsy with antiepileptic drugs, using video-EEG to distinguish true seizures from non-epileptic paroxysmal movements",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-treating non-epileptic paroxysmal movements as seizures",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pura syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pura_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EEG with video",
+          "cells": [
+            {
+              "text": "Seizures versus non-epileptic movements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Often normal or non-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular and metabolic workup",
+          "cells": [
+            {
+              "text": "Hypotonic infant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "5q31.3 deletions involving PURA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "PURA variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pura_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital myasthenic and neuromuscular disorders",
+          "cells": [
+            {
+              "text": "Hypotonic infant"
+            },
+            {
+              "text": "Neuromuscular workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal epileptic encephalopathies",
+          "cells": [
+            {
+              "text": "Poorly controlled seizures"
+            },
+            {
+              "text": "EEG with video"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pura_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiepileptic drugs",
+          "cells": [
+            {
+              "text": "After video-EEG confirms true seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Movement disorder",
+          "cells": [
+            {
+              "text": "Symptomatic treatment of dystonia, dyskinesia and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Monitoring for apnoea and hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Supported feeding; nasogastric or gastrostomy feeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Development",
+          "cells": [
+            {
+              "text": "Developmental therapies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pura_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of PURA syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PURA syndrome: hypotonic infant with seizures and movement disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Apnoea, feeding failure, status epilepticus, or autonomic instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neonatal review for apnoea or status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EEG with video; MRI; metabolic workup; PURA deletion or gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a PURA deletion or variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Prader-Willi, Angelman or neuromuscular disorder; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiepileptic drugs after video-EEG confirmation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Symptomatic treatment of the movement disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory monitoring and support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gastrostomy feeding if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Developmental therapies and multidisciplinary follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

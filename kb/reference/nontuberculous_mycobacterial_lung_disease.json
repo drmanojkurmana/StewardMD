@@ -1,180 +1,440 @@
 {
- "id": "nontuberculous_mycobacterial_lung_disease",
- "name": "Non-tuberculous mycobacterial lung disease",
- "aliases": [
-  "NTM pulmonary disease",
-  "NTM lung disease",
-  "NTM-PD",
-  "atypical mycobacterial lung disease"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common form of nontuberculous mycobacterial disease in many regions, caused predominantly by Mycobacterium avium complex, followed by M. kansasii, M. xenopi, M. malmoense, and M. abscessus",
-   "Two classic radiological phenotypes are recognised: fibrocavitary upper-lobe disease and nodular-bronchiectatic disease",
-   "Fibrocavitary disease typically affects older male smokers with chronic obstructive pulmonary disease and resembles tuberculosis",
-   "Nodular-bronchiectatic disease classically affects older non-smoking women, often tall and slender, with right-middle-lobe and lingular involvement (so-called Lady Windermere syndrome)",
-   "Hot-tub lung is a hypersensitivity reaction to inhaled mycobacteria in aerosolised water and is distinct from invasive infection",
-   "Diagnosis requires compatible symptoms, characteristic imaging, exclusion of other causes, and defined microbiological criteria, since a single positive culture may reflect colonisation",
-   "Treatment is prolonged macrolide-based multidrug therapy, continued for about a year beyond culture conversion, with the regimen tailored to the species",
-   "Not every isolate needs treatment; the decision weighs disease severity, progression, species, and the risks of long, poorly tolerated therapy"
+  "id": "nontuberculous_mycobacterial_lung_disease",
+  "name": "Non-tuberculous mycobacterial lung disease",
+  "aliases": [
+    "NTM pulmonary disease",
+    "NTM lung disease",
+    "NTM-PD",
+    "atypical mycobacterial lung disease"
   ],
-  "pathophysiology": "Nontuberculous mycobacterial lung disease arises when ubiquitous environmental mycobacteria from water and soil are inhaled and establish infection in a susceptible airway. The main predisposing factor is impaired local defence from structural lung disease such as bronchiectasis, chronic obstructive pulmonary disease, cystic fibrosis, or prior tuberculosis, rather than systemic immunodeficiency. The organisms provoke a granulomatous inflammatory response that produces either upper-lobe cavitation resembling tuberculosis or a nodular-bronchiectatic pattern with tree-in-bud change, particularly in the right middle lobe and lingula. Because exposure is universal but disease is focal and typically non-disseminating, host airway factors and body habitus are thought to be central; a separate hypersensitivity response to aerosolised organisms underlies hot-tub lung.",
-  "additionalDifferentials": [
-   "Pulmonary tuberculosis",
-   "Bronchiectasis exacerbation from conventional pathogens",
-   "Chronic pulmonary aspergillosis",
-   "Lung malignancy",
-   "Airway colonisation without true disease",
-   "Hypersensitivity pneumonitis (including hot-tub lung)",
-   "Other chronic pulmonary infection such as nocardiosis"
-  ],
-  "additionalInvestigations": [
-   "Repeated sputum mycobacterial cultures (at least two separate positive samples) to meet diagnostic criteria",
-   "Bronchoalveolar lavage culture when sputum is unobtainable or non-diagnostic",
-   "High-resolution CT of the chest for cavitation, nodules, and bronchiectasis",
-   "Molecular identification to species (and, for M. abscessus, subspecies) level",
-   "Species-specific susceptibility testing, notably macrolide for MAC and rifampicin for M. kansasii",
-   "Lung biopsy with granulomatous inflammation plus culture when criteria are otherwise unmet",
-   "Assessment of underlying lung disease and, in atypical cases, immune status"
-  ],
-  "redFlags": [
-   "Extensive cavitary disease with haemoptysis and weight loss",
-   "Rapid radiographic or clinical progression",
-   "Infection with a drug-resistant species such as M. abscessus with inducible macrolide resistance",
-   "Disease in cystic fibrosis affecting transplantation candidacy",
-   "Deterioration or macrolide resistance during treatment indicating inadequate therapy"
-  ],
-  "prognosis": "Prognosis varies by species and phenotype: M. kansasii responds well to rifampicin-based therapy, nodular-bronchiectatic MAC is often controllable though relapse and reinfection are common, and fibrocavitary or M. abscessus disease carries a worse outlook with lower cure rates. Underlying lung disease and treatment tolerance strongly influence long-term outcomes.",
-  "pitfalls": [
-   "Treating a single positive culture without meeting diagnostic criteria, mistaking colonisation for disease",
-   "Using macrolide-containing regimens without recognising or testing for inducible macrolide resistance in rapid growers",
-   "Adding a single new drug to a failing regimen and thereby selecting resistance",
-   "Failing to identify the species and subspecies, which determines the regimen and expected response",
-   "Underestimating the toxicity and duration of therapy and losing adherence"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "ATS/IDSA guideline on nontuberculous mycobacterial diseases",
-   "British Thoracic Society guideline for the management of nontuberculous mycobacterial pulmonary disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat Mycobacterium avium complex lung disease with a macrolide plus rifampicin and ethambutol, continued well beyond sputum culture conversion",
-   "Add intravenous or nebulised amikacin for cavitary, extensive or refractory MAC disease",
-   "Use rifampicin-based multidrug therapy for M. kansasii and macrolide plus intravenous agents such as amikacin, cefoxitin or imipenem for M. abscessus",
-   "Manage hot-tub lung by removing the aerosolised-water exposure, using corticosteroids rather than prolonged antimycobacterials",
-   "Optimise the underlying lung disease with airway clearance and physiotherapy for bronchiectasis and appropriate bronchodilator therapy",
-   "Consider watchful waiting for mild nodular-bronchiectatic disease and surgical resection for localised refractory or cavitary disease",
-   "Monitor serial sputum cultures for conversion and screen for drug toxicity, managing through a specialist multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nontuberculous_mycobacterial_lung_disease-pathway",
-   "title": "Non-tuberculous mycobacterial lung disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common form of nontuberculous mycobacterial disease in many regions, caused predominantly by Mycobacterium avium complex, followed by M. kansasii, M. xenopi, M. malmoense, and M. abscessus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive cavitary disease with haemoptysis and weight loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repeated sputum mycobacterial cultures (at least two separate positive samples) to meet diagnostic criteria, Bronchoalveolar lavage culture when sputum is unobtainable or non-diagnostic, High-resolution CT of the chest for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat Mycobacterium avium complex lung disease with a macrolide plus rifampicin and ethambutol, continued well beyond sputum culture conversion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a single positive culture without meeting diagnostic criteria, mistaking colonisation for disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of non-tuberculous mycobacterial lung disease."
-  }
- ],
- "tables": [
-  {
-   "id": "nontuberculous_mycobacterial_lung_disease-matrix",
-   "title": "Non-tuberculous mycobacterial lung disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common form of nontuberculous mycobacterial disease in many regions, caused predominantly by Mycobacterium avium",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common form of nontuberculous mycobacterial disease in many regions, caused predominantly by Mycobacterium avium complex, followed by M. kansasii, M. xenopi, M. malmoense, and M. abscessus",
+      "Two classic radiological phenotypes are recognised: fibrocavitary upper-lobe disease and nodular-bronchiectatic disease",
+      "Fibrocavitary disease typically affects older male smokers with chronic obstructive pulmonary disease and resembles tuberculosis",
+      "Nodular-bronchiectatic disease classically affects older non-smoking women, often tall and slender, with right-middle-lobe and lingular involvement (so-called Lady Windermere syndrome)",
+      "Hot-tub lung is a hypersensitivity reaction to inhaled mycobacteria in aerosolised water and is distinct from invasive infection",
+      "Diagnosis requires compatible symptoms, characteristic imaging, exclusion of other causes, and defined microbiological criteria, since a single positive culture may reflect colonisation",
+      "Treatment is prolonged macrolide-based multidrug therapy, continued for about a year beyond culture conversion, with the regimen tailored to the species",
+      "Not every isolate needs treatment; the decision weighs disease severity, progression, species, and the risks of long, poorly tolerated therapy"
     ],
-    [
-     "Key Investigations",
-     "Repeated sputum mycobacterial cultures (at least two separate positive samples) to meet diagnostic criteria, Bronchoalveolar",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nontuberculous mycobacterial lung disease arises when ubiquitous environmental mycobacteria from water and soil are inhaled and establish infection in a susceptible airway. The main predisposing factor is impaired local defence from structural lung disease such as bronchiectasis, chronic obstructive pulmonary disease, cystic fibrosis, or prior tuberculosis, rather than systemic immunodeficiency. The organisms provoke a granulomatous inflammatory response that produces either upper-lobe cavitation resembling tuberculosis or a nodular-bronchiectatic pattern with tree-in-bud change, particularly in the right middle lobe and lingula. Because exposure is universal but disease is focal and typically non-disseminating, host airway factors and body habitus are thought to be central; a separate hypersensitivity response to aerosolised organisms underlies hot-tub lung.",
+    "additionalDifferentials": [
+      "Pulmonary tuberculosis",
+      "Bronchiectasis exacerbation from conventional pathogens",
+      "Chronic pulmonary aspergillosis",
+      "Lung malignancy",
+      "Airway colonisation without true disease",
+      "Hypersensitivity pneumonitis (including hot-tub lung)",
+      "Other chronic pulmonary infection such as nocardiosis"
     ],
-    [
-     "Primary Differentials",
-     "Pulmonary tuberculosis, Bronchiectasis exacerbation from conventional pathogens, Chronic pulmonary aspergillosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Repeated sputum mycobacterial cultures (at least two separate positive samples) to meet diagnostic criteria",
+      "Bronchoalveolar lavage culture when sputum is unobtainable or non-diagnostic",
+      "High-resolution CT of the chest for cavitation, nodules, and bronchiectasis",
+      "Molecular identification to species (and, for M. abscessus, subspecies) level",
+      "Species-specific susceptibility testing, notably macrolide for MAC and rifampicin for M. kansasii",
+      "Lung biopsy with granulomatous inflammation plus culture when criteria are otherwise unmet",
+      "Assessment of underlying lung disease and, in atypical cases, immune status"
     ],
-    [
-     "Management Strategy",
-     "Treat Mycobacterium avium complex lung disease with a macrolide plus rifampicin and ethambutol, continued well beyond sputum",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive cavitary disease with haemoptysis and weight loss",
+      "Rapid radiographic or clinical progression",
+      "Infection with a drug-resistant species such as M. abscessus with inducible macrolide resistance",
+      "Disease in cystic fibrosis affecting transplantation candidacy",
+      "Deterioration or macrolide resistance during treatment indicating inadequate therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a single positive culture without meeting diagnostic criteria, mistaking colonisation for disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies by species and phenotype: M. kansasii responds well to rifampicin-based therapy, nodular-bronchiectatic MAC is often controllable though relapse and reinfection are common, and fibrocavitary or M. abscessus disease carries a worse outlook with lower cure rates. Underlying lung disease and treatment tolerance strongly influence long-term outcomes.",
+    "pitfalls": [
+      "Treating a single positive culture without meeting diagnostic criteria, mistaking colonisation for disease",
+      "Using macrolide-containing regimens without recognising or testing for inducible macrolide resistance in rapid growers",
+      "Adding a single new drug to a failing regimen and thereby selecting resistance",
+      "Failing to identify the species and subspecies, which determines the regimen and expected response",
+      "Underestimating the toxicity and duration of therapy and losing adherence"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "ATS/IDSA guideline on nontuberculous mycobacterial diseases",
+      "British Thoracic Society guideline for the management of nontuberculous mycobacterial pulmonary disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat Mycobacterium avium complex lung disease with a macrolide plus rifampicin and ethambutol, continued well beyond sputum culture conversion",
+      "Add intravenous or nebulised amikacin for cavitary, extensive or refractory MAC disease",
+      "Use rifampicin-based multidrug therapy for M. kansasii and macrolide plus intravenous agents such as amikacin, cefoxitin or imipenem for M. abscessus",
+      "Manage hot-tub lung by removing the aerosolised-water exposure, using corticosteroids rather than prolonged antimycobacterials",
+      "Optimise the underlying lung disease with airway clearance and physiotherapy for bronchiectasis and appropriate bronchodilator therapy",
+      "Consider watchful waiting for mild nodular-bronchiectatic disease and surgical resection for localised refractory or cavitary disease",
+      "Monitor serial sputum cultures for conversion and screen for drug toxicity, managing through a specialist multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for non-tuberculous mycobacterial lung disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nontuberculous-mycobacterial-lung-disease-real-image",
-   "title": "Non-tuberculous mycobacterial lung disease: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "nontuberculous_mycobacterial_lung_disease-pathway",
+      "title": "Non-tuberculous mycobacterial lung disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common form of nontuberculous mycobacterial disease in many regions, caused predominantly by Mycobacterium avium complex, followed by M. kansasii, M. xenopi, M. malmoense, and M. abscessus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive cavitary disease with haemoptysis and weight loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repeated sputum mycobacterial cultures (at least two separate positive samples) to meet diagnostic criteria, Bronchoalveolar lavage culture when sputum is unobtainable or non-diagnostic, High-resolution CT of the chest for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat Mycobacterium avium complex lung disease with a macrolide plus rifampicin and ethambutol, continued well beyond sputum culture conversion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a single positive culture without meeting diagnostic criteria, mistaking colonisation for disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of non-tuberculous mycobacterial lung disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nontuberculous_mycobacterial_lung_disease-matrix",
+      "title": "Non-tuberculous mycobacterial lung disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common form of nontuberculous mycobacterial disease in many regions, caused predominantly by Mycobacterium avium",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repeated sputum mycobacterial cultures (at least two separate positive samples) to meet diagnostic criteria, Bronchoalveolar",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pulmonary tuberculosis, Bronchiectasis exacerbation from conventional pathogens, Chronic pulmonary aspergillosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat Mycobacterium avium complex lung disease with a macrolide plus rifampicin and ethambutol, continued well beyond sputum",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a single positive culture without meeting diagnostic criteria, mistaking colonisation for disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for non-tuberculous mycobacterial lung disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nontuberculous_mycobacterial_lung_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated sputum mycobacterial cultures",
+          "cells": [
+            {
+              "text": "At least two separate positive samples"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage culture",
+          "cells": [
+            {
+              "text": "When sputum is not obtainable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species identification",
+          "cells": [
+            {
+              "text": "Guides drug choice and resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Cavitation and nodular bronchiectatic pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nontuberculous_mycobacterial_lung_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "Must be excluded before treating NTM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchiectasis exacerbation from conventional pathogens",
+          "cells": [
+            {
+              "text": "Treated differently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pulmonary aspergillosis",
+          "cells": [
+            {
+              "text": "Fungal cavitary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung malignancy",
+          "cells": [
+            {
+              "text": "Mass or cavitary lesion on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nontuberculous_mycobacterial_lung_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Macrolide, rifampicin and ethambutol for MAC",
+          "cells": [
+            {
+              "text": "Continued well beyond sputum culture conversion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rifampicin-based therapy for M. kansasii",
+          "cells": [
+            {
+              "text": "Responds well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous agents for extensive disease",
+          "cells": [
+            {
+              "text": "Added in severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid macrolide monotherapy",
+          "cells": [
+            {
+              "text": "Resistance develops without a full regimen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nontuberculous_mycobacterial_lung_disease-dx-mgmt",
+      "title": "Diagnosis and management of Non-tuberculous mycobacterial lung disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cough and sputum with nodular bronchiectasis or cavitary lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemoptysis, weight loss, rapid progression, resistant species)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for haemoptysis; exclude tuberculosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated sputum cultures, bronchoscopic lavage if needed, species identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Two or more positive cultures with compatible imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider colonisation, tuberculosis or aspergillosis; re-culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Macrolide, rifampicin and ethambutol for MAC disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continue beyond sputum culture conversion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rifampicin-based therapy for M. kansasii",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intravenous agents for extensive or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies by species; kansasii responds well, MAC is often controllable but relapses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

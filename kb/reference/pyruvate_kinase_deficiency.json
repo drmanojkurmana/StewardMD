@@ -1,174 +1,403 @@
 {
- "id": "pyruvate_kinase_deficiency",
- "name": "Pyruvate kinase deficiency (haemolytic anaemia)",
- "aliases": [
-  "PK deficiency",
-  "PKLR",
-  "pyruvate kinase deficiency haemolytic anaemia",
-  "red-cell pyruvate kinase deficiency"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest inherited enzyme defect of the glycolytic pathway to cause chronic haemolytic anaemia, inherited in an autosomal recessive manner through PKLR mutations",
-   "It produces a lifelong non-spherocytic haemolytic anaemia of very variable severity, from mild to transfusion-dependent",
-   "Because the block is in glycolysis, upstream 2,3-diphosphoglycerate accumulates and shifts the oxygen dissociation curve, so anaemia is often better tolerated than the haemoglobin level suggests",
-   "Presentation ranges from neonatal jaundice and anaemia to gallstones, splenomegaly and iron overload in later life",
-   "Diagnosis relies on demonstrating reduced red-cell pyruvate kinase enzyme activity and confirmatory PKLR genetic testing, after excluding commoner causes",
-   "The blood film is non-specific, and characteristic echinocytes may become prominent only after splenectomy",
-   "Management includes folate support, transfusion when required, cholelithiasis surveillance, iron-overload monitoring, and splenectomy or newer targeted therapy in selected severe cases"
+  "id": "pyruvate_kinase_deficiency",
+  "name": "Pyruvate kinase deficiency (haemolytic anaemia)",
+  "aliases": [
+    "PK deficiency",
+    "PKLR",
+    "pyruvate kinase deficiency haemolytic anaemia",
+    "red-cell pyruvate kinase deficiency"
   ],
-  "pathophysiology": "Pyruvate kinase catalyses the final adenosine-triphosphate-generating step of glycolysis, the mature red cell's sole source of energy since it lacks mitochondria. Autosomal recessive PKLR mutations reduce enzyme activity, depleting cellular ATP and impairing the ion pumps and membrane maintenance that keep the red cell flexible, so cells become rigid, dehydrated and are removed prematurely, chiefly in the spleen and liver. The upstream metabolic block raises 2,3-diphosphoglycerate, which lowers haemoglobin oxygen affinity and improves tissue oxygen delivery, partly offsetting the anaemia; chronic haemolysis in turn produces jaundice, gallstones and, over time, iron loading.",
-  "additionalDifferentials": [
-   "Hereditary spherocytosis and other membrane disorders",
-   "Glucose-6-phosphate dehydrogenase deficiency",
-   "Autoimmune haemolytic anaemia",
-   "Other glycolytic or red-cell enzyme deficiencies",
-   "Unstable haemoglobin variants",
-   "Thalassaemia syndromes"
-  ],
-  "additionalInvestigations": [
-   "Full blood count, reticulocyte count and blood film",
-   "Haemolysis markers including bilirubin, lactate dehydrogenase and haptoglobin",
-   "Direct antiglobulin test to exclude immune haemolysis",
-   "Red-cell pyruvate kinase enzyme activity assay (interpreted allowing for reticulocytosis)",
-   "PKLR gene sequencing for confirmation and counselling",
-   "Iron studies and ferritin to monitor for iron overload"
-  ],
-  "redFlags": [
-   "Aplastic crisis from parvovirus B19 with a sharp fall in haemoglobin",
-   "Severe neonatal jaundice risking kernicterus",
-   "Symptomatic anaemia with cardiovascular compromise",
-   "Iron overload with cardiac, hepatic or endocrine dysfunction"
-  ],
-  "prognosis": "Prognosis is highly variable; many patients live well with intermittent support, while severely affected individuals face transfusion dependence, iron overload and gallstone complications, with splenectomy or targeted therapy able to reduce transfusion needs in selected cases.",
-  "pitfalls": [
-   "Interpreting a normal-looking enzyme level without correcting for reticulocytosis, which can mask deficiency",
-   "Overlooking iron overload in patients who are not regularly transfused",
-   "Assuming the haemoglobin concentration reflects symptom burden despite the compensatory oxygen-delivery shift",
-   "Missing gallstones as a cause of recurrent biliary symptoms"
-  ],
-  "references": [
-   "Postgraduate Haematology",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer the oral pyruvate kinase activator mitapivat as targeted therapy to raise haemoglobin and reduce transfusion need in eligible patients",
-   "Provide folic acid supplementation and red cell transfusion for symptomatic or transfusion-dependent anaemia, with phototherapy or exchange transfusion for severe neonatal jaundice",
-   "Consider splenectomy to reduce haemolysis and transfusion requirement in severely affected patients, with appropriate pre-splenectomy vaccination and thromboprophylaxis awareness",
-   "Institute iron chelation for transfusional or absorptive iron overload",
-   "Manage pigment gallstones with cholecystectomy when symptomatic",
-   "Reserve allogeneic haematopoietic stem-cell transplantation, and emerging gene therapy, for severe transfusion-dependent disease",
-   "Monitor haemoglobin and iron studies and for gallstones, and offer genetic counselling for this autosomal recessive PKLR disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pyruvate_kinase_deficiency-pathway",
-   "title": "Pyruvate kinase deficiency (haemolytic anaemia): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest inherited enzyme defect of the glycolytic pathway to cause chronic haemolytic anaemia, inherited in an autosomal recessive manner through PKLR mutations",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Aplastic crisis from parvovirus B19 with a sharp fall in haemoglobin",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count, reticulocyte count and blood film, Haemolysis markers including bilirubin, lactate dehydrogenase and haptoglobin, Direct antiglobulin test to exclude immune haemolysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer the oral pyruvate kinase activator mitapivat as targeted therapy to raise haemoglobin and reduce transfusion need in eligible patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting a normal-looking enzyme level without correcting for reticulocytosis, which can mask deficiency"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pyruvate kinase deficiency (haemolytic anaemia)."
-  }
- ],
- "tables": [
-  {
-   "id": "pyruvate_kinase_deficiency-matrix",
-   "title": "Pyruvate kinase deficiency (haemolytic anaemia): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest inherited enzyme defect of the glycolytic pathway to cause chronic haemolytic anaemia, inherited in an autosomal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest inherited enzyme defect of the glycolytic pathway to cause chronic haemolytic anaemia, inherited in an autosomal recessive manner through PKLR mutations",
+      "It produces a lifelong non-spherocytic haemolytic anaemia of very variable severity, from mild to transfusion-dependent",
+      "Because the block is in glycolysis, upstream 2,3-diphosphoglycerate accumulates and shifts the oxygen dissociation curve, so anaemia is often better tolerated than the haemoglobin level suggests",
+      "Presentation ranges from neonatal jaundice and anaemia to gallstones, splenomegaly and iron overload in later life",
+      "Diagnosis relies on demonstrating reduced red-cell pyruvate kinase enzyme activity and confirmatory PKLR genetic testing, after excluding commoner causes",
+      "The blood film is non-specific, and characteristic echinocytes may become prominent only after splenectomy",
+      "Management includes folate support, transfusion when required, cholelithiasis surveillance, iron-overload monitoring, and splenectomy or newer targeted therapy in selected severe cases"
     ],
-    [
-     "Key Investigations",
-     "Full blood count, reticulocyte count and blood film, Haemolysis markers including bilirubin, lactate dehydrogenase and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pyruvate kinase catalyses the final adenosine-triphosphate-generating step of glycolysis, the mature red cell's sole source of energy since it lacks mitochondria. Autosomal recessive PKLR mutations reduce enzyme activity, depleting cellular ATP and impairing the ion pumps and membrane maintenance that keep the red cell flexible, so cells become rigid, dehydrated and are removed prematurely, chiefly in the spleen and liver. The upstream metabolic block raises 2,3-diphosphoglycerate, which lowers haemoglobin oxygen affinity and improves tissue oxygen delivery, partly offsetting the anaemia; chronic haemolysis in turn produces jaundice, gallstones and, over time, iron loading.",
+    "additionalDifferentials": [
+      "Hereditary spherocytosis and other membrane disorders",
+      "Glucose-6-phosphate dehydrogenase deficiency",
+      "Autoimmune haemolytic anaemia",
+      "Other glycolytic or red-cell enzyme deficiencies",
+      "Unstable haemoglobin variants",
+      "Thalassaemia syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Hereditary spherocytosis and other membrane disorders, Glucose-6-phosphate dehydrogenase deficiency, Autoimmune haemolytic anaemia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count, reticulocyte count and blood film",
+      "Haemolysis markers including bilirubin, lactate dehydrogenase and haptoglobin",
+      "Direct antiglobulin test to exclude immune haemolysis",
+      "Red-cell pyruvate kinase enzyme activity assay (interpreted allowing for reticulocytosis)",
+      "PKLR gene sequencing for confirmation and counselling",
+      "Iron studies and ferritin to monitor for iron overload"
     ],
-    [
-     "Management Strategy",
-     "Offer the oral pyruvate kinase activator mitapivat as targeted therapy to raise haemoglobin and reduce transfusion need in",
-     "Core treatment modality"
+    "redFlags": [
+      "Aplastic crisis from parvovirus B19 with a sharp fall in haemoglobin",
+      "Severe neonatal jaundice risking kernicterus",
+      "Symptomatic anaemia with cardiovascular compromise",
+      "Iron overload with cardiac, hepatic or endocrine dysfunction"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting a normal-looking enzyme level without correcting for reticulocytosis, which can mask deficiency",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is highly variable; many patients live well with intermittent support, while severely affected individuals face transfusion dependence, iron overload and gallstone complications, with splenectomy or targeted therapy able to reduce transfusion needs in selected cases.",
+    "pitfalls": [
+      "Interpreting a normal-looking enzyme level without correcting for reticulocytosis, which can mask deficiency",
+      "Overlooking iron overload in patients who are not regularly transfused",
+      "Assuming the haemoglobin concentration reflects symptom burden despite the compensatory oxygen-delivery shift",
+      "Missing gallstones as a cause of recurrent biliary symptoms"
+    ],
+    "references": [
+      "Postgraduate Haematology",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer the oral pyruvate kinase activator mitapivat as targeted therapy to raise haemoglobin and reduce transfusion need in eligible patients",
+      "Provide folic acid supplementation and red cell transfusion for symptomatic or transfusion-dependent anaemia, with phototherapy or exchange transfusion for severe neonatal jaundice",
+      "Consider splenectomy to reduce haemolysis and transfusion requirement in severely affected patients, with appropriate pre-splenectomy vaccination and thromboprophylaxis awareness",
+      "Institute iron chelation for transfusional or absorptive iron overload",
+      "Manage pigment gallstones with cholecystectomy when symptomatic",
+      "Reserve allogeneic haematopoietic stem-cell transplantation, and emerging gene therapy, for severe transfusion-dependent disease",
+      "Monitor haemoglobin and iron studies and for gallstones, and offer genetic counselling for this autosomal recessive PKLR disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for pyruvate kinase deficiency (haemolytic anaemia)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pyruvate-kinase-deficiency-real-image",
-   "title": "Pyruvate kinase deficiency (haemolytic anaemia): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "pyruvate_kinase_deficiency-pathway",
+      "title": "Pyruvate kinase deficiency (haemolytic anaemia): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest inherited enzyme defect of the glycolytic pathway to cause chronic haemolytic anaemia, inherited in an autosomal recessive manner through PKLR mutations",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Aplastic crisis from parvovirus B19 with a sharp fall in haemoglobin",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count, reticulocyte count and blood film, Haemolysis markers including bilirubin, lactate dehydrogenase and haptoglobin, Direct antiglobulin test to exclude immune haemolysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer the oral pyruvate kinase activator mitapivat as targeted therapy to raise haemoglobin and reduce transfusion need in eligible patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting a normal-looking enzyme level without correcting for reticulocytosis, which can mask deficiency"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pyruvate kinase deficiency (haemolytic anaemia)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pyruvate_kinase_deficiency-matrix",
+      "title": "Pyruvate kinase deficiency (haemolytic anaemia): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest inherited enzyme defect of the glycolytic pathway to cause chronic haemolytic anaemia, inherited in an autosomal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count, reticulocyte count and blood film, Haemolysis markers including bilirubin, lactate dehydrogenase and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hereditary spherocytosis and other membrane disorders, Glucose-6-phosphate dehydrogenase deficiency, Autoimmune haemolytic anaemia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer the oral pyruvate kinase activator mitapivat as targeted therapy to raise haemoglobin and reduce transfusion need in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting a normal-looking enzyme level without correcting for reticulocytosis, which can mask deficiency",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pyruvate kinase deficiency (haemolytic anaemia)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pyruvate_kinase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FBC, reticulocyte count and blood film",
+          "cells": [
+            {
+              "text": "Anaemia and reticulocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin, LDH and haptoglobin",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Immune haemolysis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell pyruvate kinase activity",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_kinase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Positive direct antiglobulin test"
+            },
+            {
+              "text": "Direct antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose-6-phosphate dehydrogenase deficiency",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pyruvate_kinase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mitapivat",
+          "cells": [
+            {
+              "text": "Oral pyruvate kinase activator as targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid and transfusion",
+          "cells": [
+            {
+              "text": "For symptomatic or transfusion-dependent anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Considered to reduce haemolysis and transfusion need"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pyruvate_kinase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Pyruvate kinase deficiency (haemolytic anaemia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pyruvate kinase deficiency: chronic non-spherocytic haemolytic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Aplastic crisis, neonatal jaundice risk, symptomatic anaemia, or iron overload?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent transfusion for aplastic crisis or symptomatic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC, reticulocytes, film; haemolysis markers; DAT; PK enzyme assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is red-cell PK activity deficient with immune haemolysis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider membrane disorders, G6PD deficiency or autoimmune haemolysis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mitapivat as targeted oral therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid and red cell transfusion for symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider splenectomy to reduce haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Monitor for iron overload and gallstones; haematology follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

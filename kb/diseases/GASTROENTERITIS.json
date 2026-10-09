@@ -269,25 +269,717 @@
       "caption": "Diagnostic and clinical overview matrix for acute gastroenteritis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "gastroenteritis-real-image",
-      "title": "Acute Gastroenteritis: Diagnostic Abdominal Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Barr and Smith, Acute Diarrhea in Adults, Am Fam Physician 2014",
+      "url": "https://www.aafp.org/pubs/afp/issues/2014/0201/p180.html",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 47-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 149-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "GASTROENTERITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessing acute gastroenteritis and when to test",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Solid Viscera",
-          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+          "parameter": "Duration",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "<14",
+              "op": "<",
+              "value": 14
+            },
+            {
+              "text": "Defines acute diarrhoea"
+            }
+          ],
+          "cite": "c3"
         },
         {
-          "label": "Gastrointestinal Tract",
-          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+          "parameter": "Cause",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">90% infectious",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Most episodes mild and self-limited"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Mesentery & Peritoneum",
-          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+          "parameter": "Dehydration symptoms",
+          "cells": [
+            {
+              "text": "Less urine, thirst, dizziness, altered mental status"
+            },
+            {
+              "text": "Assess in every patient"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Severe dehydration signs",
+          "cells": [
+            {
+              "text": "Ill appearance, dry mucosa, slow capillary refill, tachycardia, orthostatic change"
+            },
+            {
+              "text": "{{hy:Needs urgent rehydration, consider IV fluids}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stool culture",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Bloody stool, severe dehydration, inflammatory signs, symptoms >3 to 7 days, immunosuppression",
+              "range": [
+                3,
+                7
+              ]
+            },
+            {
+              "text": "Otherwise not routinely needed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "C. difficile toxin test",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Diarrhoea after 3 days in hospital, or on or within 3 months of antibiotics",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Hospital-onset or antibiotic-associated diarrhoea"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ova and parasites",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Diarrhoea >7 days or high-risk travel",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Not routine"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Faecal leukocytes or lactoferrin",
+          "cells": [
+            {
+              "text": "Separates inflammatory from non-inflammatory diarrhoea"
+            },
+            {
+              "text": "Lactoferrin more sensitive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "GASTROENTERITIS-ddx",
+      "kind": "ddx",
+      "title": "Bacterial food poisoning by incubation period",
+      "rowHeader": "Condition",
+      "columns": [
+        "Incubation and symptoms",
+        "Common food sources"
+      ],
+      "rows": [
+        {
+          "parameter": "Staphylococcus aureus",
+          "cells": [
+            {
+              "text": "{{hy:1 to 6 h}}; nausea, vomiting, diarrhoea"
+            },
+            {
+              "text": "Ham, poultry, potato or egg salad, mayonnaise, cream pastries"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bacillus cereus, emetic",
+          "cells": [
+            {
+              "text": "1 to 6 h; nausea, vomiting, diarrhoea"
+            },
+            {
+              "text": "Fried rice"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clostridium perfringens",
+          "cells": [
+            {
+              "text": "8 to 16 h; cramps and diarrhoea, vomiting rare"
+            },
+            {
+              "text": "Beef, poultry, legumes, gravies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bacillus cereus, diarrhoeal",
+          "cells": [
+            {
+              "text": "8 to 16 h; cramps and diarrhoea, vomiting rare"
+            },
+            {
+              "text": "Meats, vegetables, dried beans, cereals"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vibrio cholerae",
+          "cells": [
+            {
+              "text": ">16 h; watery diarrhoea"
+            },
+            {
+              "text": "Shellfish, water"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Enterotoxigenic E. coli",
+          "cells": [
+            {
+              "text": ">16 h; watery diarrhoea"
+            },
+            {
+              "text": "Salads, cheese, meats, water"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Enterohaemorrhagic E. coli",
+          "cells": [
+            {
+              "text": ">16 h; bloody diarrhoea"
+            },
+            {
+              "text": "Ground or roast beef, salami, raw milk, raw vegetables, apple juice"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Salmonella spp.",
+          "cells": [
+            {
+              "text": ">16 h; inflammatory diarrhoea"
+            },
+            {
+              "text": "Beef, poultry, eggs, dairy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Campylobacter jejuni",
+          "cells": [
+            {
+              "text": ">16 h; inflammatory diarrhoea"
+            },
+            {
+              "text": "Poultry, raw milk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Shigella spp.",
+          "cells": [
+            {
+              "text": ">16 h; dysentery"
+            },
+            {
+              "text": "Potato or egg salad, lettuce, raw vegetables"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vibrio parahaemolyticus",
+          "cells": [
+            {
+              "text": ">16 h; dysentery"
+            },
+            {
+              "text": "Molluscs, crustaceans"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Rephrased from the owner's tables PDF, Table 128-4; all organisms and times retained."
+    },
+    {
+      "id": "GASTROENTERITIS-treatment",
+      "kind": "treatment",
+      "title": "Management of acute gastroenteritis in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral rehydration solution",
+          "cells": [
+            {
+              "text": "{{hy:First step in all patients}}"
+            },
+            {
+              "text": "Reduced osmolarity, 250 mOsm/L or less; IV fluids if oral not feasible"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Early refeeding",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Fasting for 24 h not useful"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Loperamide",
+          "cells": [
+            {
+              "text": "Non-bloody diarrhoea"
+            },
+            {
+              "text": "Avoid in bloody or febrile diarrhoea"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bismuth subsalicylate",
+          "cells": [
+            {
+              "text": "Fever with inflammatory diarrhoea"
+            },
+            {
+              "text": "Safe alternative to loperamide here"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "No routine antibiotics",
+          "cells": [
+            {
+              "text": "Non-severe watery diarrhoea"
+            },
+            {
+              "text": "Consider if age >65, immunocompromised, severely ill or septic"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ciprofloxacin or azithromycin",
+          "cells": [
+            {
+              "text": "Traveller's diarrhoea (ETEC)"
+            },
+            {
+              "text": "Ciprofloxacin 500 mg bid 3 days or azithromycin 500 mg daily 3 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Campylobacter"
+            },
+            {
+              "text": "500 mg once daily for 3 to 5 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ciprofloxacin",
+          "cells": [
+            {
+              "text": "Severe non-typhoidal Salmonella"
+            },
+            {
+              "text": "500 mg bid 5 to 7 days; 14 days if immunocompromised"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Avoid antibiotics and antimotility drugs",
+          "cells": [
+            {
+              "text": "Suspected Shiga toxin-producing E. coli"
+            },
+            {
+              "text": "Antibiotics may raise risk of haemolytic uraemic syndrome"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "GASTROENTERITIS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of non-anion gap acidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "I. Gastrointestinal bicarbonate loss",
+          "cells": [
+            {
+              "text": "Diarrhea; external pancreatic or small-bowel drainage; ureterosigmoidostomy, jejunal loop, ileal loop; drugs: calcium chloride (acidifying agent), magnesium sulfate (diarrhea), cholestyramine (bile acid diarrhea)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "II.A Renal acidosis with hypokalemia",
+          "cells": [
+            {
+              "text": "Proximal RTA (type 2), drug-induced: acetazolamide, topiramate; distal (classic) RTA (type 1), drug-induced: amphotericin B, ifosfamide"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "II.B Renal acidosis with hyperkalemia",
+          "cells": [
+            {
+              "text": "Generalized distal nephron dysfunction (type 4 RTA): mineralocorticoid deficiency; mineralocorticoid resistance (autosomal dominant PHA I); voltage defect (autosomal dominant PHA I and PHA II); tubulointerstitial disease"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "III. Drug-induced hyperkalemia (with renal insufficiency)",
+          "cells": [
+            {
+              "text": "Potassium-sparing diuretics (amiloride, triamterene, spironolactone); trimethoprim; pentamidine; ACE inhibitors and ARBs; nonsteroidal anti-inflammatory drugs; cyclosporine and tacrolimus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "IV. Other",
+          "cells": [
+            {
+              "text": "Acid loads (ammonium chloride, hyperalimentation); loss of potential bicarbonate (ketosis with ketone excretion); expansion acidosis (rapid saline administration); hippurate; cation exchange resins"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "The last row is partly cut off at the bottom of the printed page; any further rows are unreadable."
+    },
+    {
+      "id": "GASTROENTERITIS-ddx-2",
+      "kind": "ddx",
+      "title": "Intestinal pathogenic E. coli pathotypes",
+      "rowHeader": "Pathotype",
+      "columns": [
+        "Epidemiology",
+        "Clinical syndrome",
+        "Defining molecular trait",
+        "Responsible genetic element"
+      ],
+      "rows": [
+        {
+          "parameter": "STEC/EHEC",
+          "cells": [
+            {
+              "text": "Food, water, person-to-person; all ages, industrialized countries"
+            },
+            {
+              "text": "Hemorrhagic colitis, hemolytic-uremic syndrome"
+            },
+            {
+              "text": "Shiga toxin"
+            },
+            {
+              "text": "Lambda-like Stx1- or Stx2-encoding bacteriophage"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "ETEC",
+          "cells": [
+            {
+              "text": "Food, water; young children in and travelers to developing countries"
+            },
+            {
+              "text": "Traveler's diarrhea"
+            },
+            {
+              "text": "Heat-stable and heat-labile enterotoxins, colonization factors"
+            },
+            {
+              "text": "Virulence plasmid(s)"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "EPEC",
+          "cells": [
+            {
+              "text": "Person-to-person; young children and neonates in developing countries"
+            },
+            {
+              "text": "Watery diarrhea, persistent diarrhea"
+            },
+            {
+              "text": "Localized adherence, attaching and effacing lesion on intestinal epithelium"
+            },
+            {
+              "text": "EPEC adherence factor plasmid and pathogenicity island [locus for enterocyte effacement (LEE)]"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "EIEC",
+          "cells": [
+            {
+              "text": "Food, water; children in and travelers to developing countries"
+            },
+            {
+              "text": "Dysentery"
+            },
+            {
+              "text": "Invasion of colonic epithelial cells, intracellular multiplication, cell-to-cell spread"
+            },
+            {
+              "text": "Multiple genes contained primarily in a large virulence plasmid"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "EAEC",
+          "cells": [
+            {
+              "text": "Possibly food, water; children in and travelers to developing countries; all ages in industrialized countries"
+            },
+            {
+              "text": "Traveler's diarrhea, acute diarrhea, persistent diarrhea"
+            },
+            {
+              "text": "Aggregative/diffuse adherence, virulence factors regulated by AggR"
+            },
+            {
+              "text": "Chromosomal or plasmid-associated adherence and toxin genes"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Source footnotes (a) to (c) are not shown on the page; the question mark before food and water for EAEC is rendered here as possibly."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "GASTROENTERITIS-dx-mgmt",
+      "title": "Diagnosis and management of acute gastroenteritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute diarrhoea under 14 days, with or without vomiting",
+          "cite": "c3"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Assess dehydration: urine output, mental status, pulse, orthostatic change",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe dehydration or oral intake not possible?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IV fluids",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Reduced-osmolarity ORS and early refeeding",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Bloody stool, fever, immunosuppression or illness >3 to 7 days?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Supportive care; loperamide if stool is not bloody",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stool culture; C. difficile toxin if hospital or antibiotic linked",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Suspected Shiga toxin-producing E. coli?",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "No antibiotics or antimotility drugs; watch for HUS",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pathogen-directed antibiotic if severe, elderly or immunocompromised",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
         }
       ]
     }

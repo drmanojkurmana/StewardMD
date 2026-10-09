@@ -1,172 +1,436 @@
 {
- "id": "parachute_mitral_valve",
- "name": "parachute mitral valve",
- "aliases": [
-  "parachute mitral valve deformity",
-  "single papillary muscle mitral valve"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Paediatric Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Parachute mitral valve has all chordae inserting into a single dominant papillary muscle, producing subvalvar inflow obstruction and congenital mitral stenosis.",
-   "It is the classic component of Shone complex alongside supravalvar mitral ring, subaortic stenosis and coarctation, so the other three lesions should always be sought.",
-   "Obstruction occurs at the interchordal level, so the mitral orifice can look adequate while flow is restricted between crowded chordae.",
-   "Parasternal short-axis imaging shows a single papillary muscle with limited leaflet opening and a narrow subvalvar funnel.",
-   "A true parachute with one papillary muscle is distinguished from a parachute-like asymmetric valve, which has two papillary muscles, one of them hypoplastic.",
-   "Symptoms track the gradient and include dyspnoea, poor feeding and pulmonary hypertension in infants.",
-   "Surgery is technically difficult; splitting the papillary muscle or fenestrating chordae may relieve obstruction, but replacement is sometimes required."
+  "id": "parachute_mitral_valve",
+  "name": "parachute mitral valve",
+  "aliases": [
+    "parachute mitral valve deformity",
+    "single papillary muscle mitral valve"
   ],
-  "pathophysiology": "In a true parachute mitral valve all chordae tendineae converge and insert into a single papillary muscle, while in the parachute-like asymmetric variant they insert into one dominant papillary muscle with a hypoplastic second muscle. The interchordal spaces are markedly reduced, so blood entering the left ventricle must pass through the crowded, narrowed spaces between chordae, generating functional stenosis at the subvalvar level even when the annular orifice appears normal. The lesion frequently coexists with other left-heart obstructive anomalies as part of Shone complex, compounding the inflow and outflow obstruction.",
-  "additionalDifferentials": [
-   "Supravalvar mitral ring",
-   "Anomalous mitral arcade",
-   "Cor triatriatum",
-   "Rheumatic mitral stenosis",
-   "Congenital mitral valve dysplasia",
-   "Double-orifice mitral valve"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography with short-axis papillary muscle count and Doppler inflow gradients",
-   "Transoesophageal and 3D echocardiography",
-   "Cardiac MRI",
-   "Cardiac catheterisation",
-   "Aortic arch imaging to screen for Shone-complex lesions",
-   "Electrocardiography for right ventricular hypertrophy and left atrial enlargement"
-  ],
-  "redFlags": [
-   "Severe pulmonary hypertension",
-   "Heart failure or failure to thrive in infancy",
-   "Severe inflow gradient with low cardiac output",
-   "Coexisting critical left-heart outflow obstruction"
-  ],
-  "prognosis": "Isolated mild parachute valve may be well tolerated, but significant stenosis, especially within Shone complex, carries higher surgical risk and a tendency to residual or recurrent obstruction requiring reintervention.",
-  "pitfalls": [
-   "Overlooking subvalvar obstruction when the annulus and orifice appear normal",
-   "Failing to identify associated Shone-complex lesions",
-   "Confusing the lesion with supravalvar mitral ring or cor triatriatum",
-   "Assuming a successful repair is durable when restenosis is common"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "Feigenbaum's Echocardiography"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical relief of significant subvalvar mitral stenosis by valve repair, splitting fused chordae and the papillary muscle, or mitral valve replacement when repair is not feasible",
-   "Concurrent correction of associated Shone-complex lesions such as supravalvar mitral ring resection, subaortic stenosis relief and coarctation repair",
-   "Medical management of pulmonary congestion and heart failure with diuretics while optimising for surgery",
-   "Treatment of secondary pulmonary hypertension and monitoring of its progression",
-   "Serial echocardiographic surveillance of the inflow gradient, ventricular function and pulmonary pressures, with reintervention for residual or recurrent obstruction",
-   "Management within a paediatric and congenital cardiology and cardiac-surgery multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "parachute_mitral_valve-pathway",
-   "title": "parachute mitral valve: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Parachute mitral valve has all chordae inserting into a single dominant papillary muscle, producing subvalvar inflow obstruction and congenital mitral stenosis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe pulmonary hypertension",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography with short-axis papillary muscle count and Doppler inflow gradients, Transoesophageal and 3D echocardiography, Cardiac MRI"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical relief of significant subvalvar mitral stenosis by valve repair, splitting fused chordae and the papillary muscle, or mitral valve replacement when repair is not feasible"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking subvalvar obstruction when the annulus and orifice appear normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of parachute mitral valve."
-  }
- ],
- "tables": [
-  {
-   "id": "parachute_mitral_valve-matrix",
-   "title": "parachute mitral valve: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Parachute mitral valve has all chordae inserting into a single dominant papillary muscle, producing subvalvar inflow obstruction",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Paediatric Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Parachute mitral valve has all chordae inserting into a single dominant papillary muscle, producing subvalvar inflow obstruction and congenital mitral stenosis.",
+      "It is the classic component of Shone complex alongside supravalvar mitral ring, subaortic stenosis and coarctation, so the other three lesions should always be sought.",
+      "Obstruction occurs at the interchordal level, so the mitral orifice can look adequate while flow is restricted between crowded chordae.",
+      "Parasternal short-axis imaging shows a single papillary muscle with limited leaflet opening and a narrow subvalvar funnel.",
+      "A true parachute with one papillary muscle is distinguished from a parachute-like asymmetric valve, which has two papillary muscles, one of them hypoplastic.",
+      "Symptoms track the gradient and include dyspnoea, poor feeding and pulmonary hypertension in infants.",
+      "Surgery is technically difficult; splitting the papillary muscle or fenestrating chordae may relieve obstruction, but replacement is sometimes required."
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography with short-axis papillary muscle count and Doppler inflow gradients, Transoesophageal and 3D",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In a true parachute mitral valve all chordae tendineae converge and insert into a single papillary muscle, while in the parachute-like asymmetric variant they insert into one dominant papillary muscle with a hypoplastic second muscle. The interchordal spaces are markedly reduced, so blood entering the left ventricle must pass through the crowded, narrowed spaces between chordae, generating functional stenosis at the subvalvar level even when the annular orifice appears normal. The lesion frequently coexists with other left-heart obstructive anomalies as part of Shone complex, compounding the inflow and outflow obstruction.",
+    "additionalDifferentials": [
+      "Supravalvar mitral ring",
+      "Anomalous mitral arcade",
+      "Cor triatriatum",
+      "Rheumatic mitral stenosis",
+      "Congenital mitral valve dysplasia",
+      "Double-orifice mitral valve"
     ],
-    [
-     "Primary Differentials",
-     "Supravalvar mitral ring, Anomalous mitral arcade, Cor triatriatum",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography with short-axis papillary muscle count and Doppler inflow gradients",
+      "Transoesophageal and 3D echocardiography",
+      "Cardiac MRI",
+      "Cardiac catheterisation",
+      "Aortic arch imaging to screen for Shone-complex lesions",
+      "Electrocardiography for right ventricular hypertrophy and left atrial enlargement"
     ],
-    [
-     "Management Strategy",
-     "Surgical relief of significant subvalvar mitral stenosis by valve repair, splitting fused chordae and the papillary muscle, or",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe pulmonary hypertension",
+      "Heart failure or failure to thrive in infancy",
+      "Severe inflow gradient with low cardiac output",
+      "Coexisting critical left-heart outflow obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking subvalvar obstruction when the annulus and orifice appear normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated mild parachute valve may be well tolerated, but significant stenosis, especially within Shone complex, carries higher surgical risk and a tendency to residual or recurrent obstruction requiring reintervention.",
+    "pitfalls": [
+      "Overlooking subvalvar obstruction when the annulus and orifice appear normal",
+      "Failing to identify associated Shone-complex lesions",
+      "Confusing the lesion with supravalvar mitral ring or cor triatriatum",
+      "Assuming a successful repair is durable when restenosis is common"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "Feigenbaum's Echocardiography"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical relief of significant subvalvar mitral stenosis by valve repair, splitting fused chordae and the papillary muscle, or mitral valve replacement when repair is not feasible",
+      "Concurrent correction of associated Shone-complex lesions such as supravalvar mitral ring resection, subaortic stenosis relief and coarctation repair",
+      "Medical management of pulmonary congestion and heart failure with diuretics while optimising for surgery",
+      "Treatment of secondary pulmonary hypertension and monitoring of its progression",
+      "Serial echocardiographic surveillance of the inflow gradient, ventricular function and pulmonary pressures, with reintervention for residual or recurrent obstruction",
+      "Management within a paediatric and congenital cardiology and cardiac-surgery multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for parachute mitral valve."
-  }
- ],
- "diagrams": [
-  {
-   "id": "parachute-mitral-valve-real-image",
-   "title": "parachute mitral valve: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "parachute_mitral_valve-pathway",
+      "title": "parachute mitral valve: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Parachute mitral valve has all chordae inserting into a single dominant papillary muscle, producing subvalvar inflow obstruction and congenital mitral stenosis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe pulmonary hypertension",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography with short-axis papillary muscle count and Doppler inflow gradients, Transoesophageal and 3D echocardiography, Cardiac MRI"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical relief of significant subvalvar mitral stenosis by valve repair, splitting fused chordae and the papillary muscle, or mitral valve replacement when repair is not feasible"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking subvalvar obstruction when the annulus and orifice appear normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of parachute mitral valve."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "parachute_mitral_valve-matrix",
+      "title": "parachute mitral valve: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Parachute mitral valve has all chordae inserting into a single dominant papillary muscle, producing subvalvar inflow obstruction",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography with short-axis papillary muscle count and Doppler inflow gradients, Transoesophageal and 3D",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Supravalvar mitral ring, Anomalous mitral arcade, Cor triatriatum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical relief of significant subvalvar mitral stenosis by valve repair, splitting fused chordae and the papillary muscle, or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking subvalvar obstruction when the annulus and orifice appear normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for parachute mitral valve."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children, and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parachute_mitral_valve-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echo with short-axis papillary muscle count",
+          "cells": [
+            {
+              "text": "A single dominant papillary muscle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal and 3D echo",
+          "cells": [
+            {
+              "text": "Subvalvar inflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler inflow gradients",
+          "cells": [
+            {
+              "text": "Severity of the obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic arch imaging",
+          "cells": [
+            {
+              "text": "Shone-complex lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiography",
+          "cells": [
+            {
+              "text": "Right ventricular hypertrophy and left atrial enlargement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parachute_mitral_valve-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Supravalvar mitral ring",
+          "cells": [
+            {
+              "text": "Another Shone component; supravalvar rather than subvalvar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cor triatriatum",
+          "cells": [
+            {
+              "text": "A membrane above the mitral valve, not subvalvar obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parachute_mitral_valve-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical relief of subvalvar stenosis",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Repair by splitting fused chordae and the papillary muscle, or replacement when repair is not feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shone-complex correction",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Supravalvar ring resection, subaortic relief and coarctation repair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical management",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Diuretics for pulmonary congestion while optimising for surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Treatment and monitoring of secondary pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parachute_mitral_valve-dx-mgmt",
+      "title": "Diagnosis and management of parachute mitral valve",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with heart failure or failure to thrive and a mitral inflow gradient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe pulmonary hypertension, heart failure or low cardiac output)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac surgery for low output and severe obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo with papillary muscle count and Doppler gradient, TOE, MRI, arch imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echo show all chordae into one papillary muscle with subvalvar obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider supravalvar mitral ring, cor triatriatum or mitral valve dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical relief of subvalvar stenosis by repair, or replacement if repair fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correction of associated Shone-complex lesions such as supravalvar ring or coarctation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diuretics for pulmonary congestion while optimising for surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treatment and monitoring of secondary pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild isolated lesions are tolerated; severe stenosis carries surgical and restenosis risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

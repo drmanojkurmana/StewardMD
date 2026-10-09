@@ -1,176 +1,528 @@
 {
- "id": "andersen_tawil_syndrome",
- "name": "Andersen-Tawil syndrome",
- "aliases": [
-  "ATS",
-  "Andersen syndrome",
-  "long QT syndrome type 7",
-  "LQT7",
-  "KCNJ2",
-  "periodic paralysis with cardiac dysrhythmia and dysmorphism"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by a clinical triad of periodic paralysis, ventricular arrhythmia with characteristic electrocardiographic changes, and distinctive dysmorphic features",
-   "Dysmorphism includes low-set ears, hypertelorism, a small mandible, clinodactyly and syndactyly, and short stature",
-   "The characteristic electrocardiogram shows prominent U waves and a prolonged QU interval with frequent ventricular ectopy, and it is classed as long QT syndrome type 7",
-   "Ventricular arrhythmias, including bidirectional and polymorphic ventricular tachycardia, are often surprisingly well tolerated but carry a risk of syncope",
-   "Periodic paralysis in this syndrome can be associated with a low, normal or high serum potassium, so the potassium-shift pattern is variable between families",
-   "Inherited as an autosomal dominant condition with marked variable expressivity, most often due to mutations in the KCNJ2 gene encoding the inward-rectifier potassium channel Kir2.1",
-   "The full triad may be incomplete in any given patient, so a normal cardiac or dysmorphic assessment does not exclude the diagnosis"
+  "id": "andersen_tawil_syndrome",
+  "name": "Andersen-Tawil syndrome",
+  "aliases": [
+    "ATS",
+    "Andersen syndrome",
+    "long QT syndrome type 7",
+    "LQT7",
+    "KCNJ2",
+    "periodic paralysis with cardiac dysrhythmia and dysmorphism"
   ],
-  "pathophysiology": "Andersen-Tawil syndrome is most commonly caused by loss-of-function mutations in KCNJ2, which encodes the inward-rectifier potassium channel Kir2.1. This channel stabilises the resting membrane potential and shapes the terminal phase of repolarisation in both skeletal and cardiac muscle. Reduced Kir2.1 current, often through a dominant-negative effect on the tetrameric channel, destabilises the resting potential of skeletal muscle to produce periodic paralysis, and prolongs and destabilises cardiac repolarisation to generate the prominent U waves, QU prolongation and ventricular arrhythmias. The same channel and related developmental signalling pathways are implicated in the skeletal and craniofacial dysmorphism that completes the triad.",
-  "additionalDifferentials": [
-   "Hypokalaemic periodic paralysis",
-   "Hyperkalaemic periodic paralysis",
-   "Other congenital long QT syndromes",
-   "Catecholaminergic polymorphic ventricular tachycardia",
-   "Thyrotoxic periodic paralysis",
-   "Other syndromic causes of short stature and dysmorphism"
-  ],
-  "additionalInvestigations": [
-   "Twelve-lead electrocardiogram and prolonged rhythm monitoring for U waves, QU prolongation and ventricular ectopy",
-   "Serum potassium measured during paralytic episodes",
-   "Echocardiography to assess cardiac structure and function",
-   "Prolonged exercise electromyography protocol to characterise the periodic paralysis",
-   "Targeted KCNJ2 genetic testing, with a broader panel if negative",
-   "Clinical dysmorphology assessment and skeletal imaging as indicated"
-  ],
-  "redFlags": [
-   "Syncope, palpitations or documented ventricular tachycardia indicating arrhythmic risk",
-   "Family history of sudden cardiac death",
-   "Marked QU prolongation with frequent or complex ventricular ectopy",
-   "Respiratory or severe generalised weakness during a paralytic attack"
-  ],
-  "prognosis": "Life expectancy is usually near normal because the ventricular arrhythmias are frequently well tolerated, but syncope and, rarely, sudden cardiac death can occur, so cardiac surveillance is essential and the periodic paralysis and dysmorphic features add variable long-term morbidity.",
-  "pitfalls": [
-   "Diagnosing simple periodic paralysis and missing the cardiac and dysmorphic components of the triad",
-   "Expecting a consistent potassium-shift direction, when the potassium level during attacks is variable",
-   "Under-appreciating arrhythmic risk because the ventricular tachycardia is often asymptomatic",
-   "Prescribing QT-prolonging drugs without recognising the underlying repolarisation abnormality"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: Andersen-Tawil Syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the ventricular arrhythmia with beta-blockers and antiarrhythmics such as flecainide, reserving an implantable defibrillator for high-risk patients",
-   "Treat the periodic paralysis with a carbonic anhydrase inhibitor such as acetazolamide, tailoring potassium management to the individual's shift pattern",
-   "Avoid QT-prolonging drugs given the underlying repolarisation abnormality",
-   "Advise avoidance of recognised triggers that precipitate paralytic attacks",
-   "Undertake cardiac surveillance with electrocardiography and prolonged rhythm monitoring for arrhythmia and syncope",
-   "Coordinate care across cardiology and neurology",
-   "Offer genetic counselling and family screening given autosomal dominant inheritance of the KCNJ2 mutation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "andersen_tawil_syndrome-pathway",
-   "title": "Andersen-Tawil syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by a clinical triad of periodic paralysis, ventricular arrhythmia with characteristic electrocardiographic changes, and distinctive dysmorphic features",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope, palpitations or documented ventricular tachycardia indicating arrhythmic risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Twelve-lead electrocardiogram and prolonged rhythm monitoring for U waves, QU prolongation and ventricular ectopy, Serum potassium measured during paralytic episodes, Echocardiography to assess cardiac structure and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the ventricular arrhythmia with beta-blockers and antiarrhythmics such as flecainide, reserving an implantable defibrillator for high-risk patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing simple periodic paralysis and missing the cardiac and dysmorphic components of the triad"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of andersen-tawil syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "andersen_tawil_syndrome-matrix",
-   "title": "Andersen-Tawil syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by a clinical triad of periodic paralysis, ventricular arrhythmia with characteristic electrocardiographic changes, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by a clinical triad of periodic paralysis, ventricular arrhythmia with characteristic electrocardiographic changes, and distinctive dysmorphic features",
+      "Dysmorphism includes low-set ears, hypertelorism, a small mandible, clinodactyly and syndactyly, and short stature",
+      "The characteristic electrocardiogram shows prominent U waves and a prolonged QU interval with frequent ventricular ectopy, and it is classed as long QT syndrome type 7",
+      "Ventricular arrhythmias, including bidirectional and polymorphic ventricular tachycardia, are often surprisingly well tolerated but carry a risk of syncope",
+      "Periodic paralysis in this syndrome can be associated with a low, normal or high serum potassium, so the potassium-shift pattern is variable between families",
+      "Inherited as an autosomal dominant condition with marked variable expressivity, most often due to mutations in the KCNJ2 gene encoding the inward-rectifier potassium channel Kir2.1",
+      "The full triad may be incomplete in any given patient, so a normal cardiac or dysmorphic assessment does not exclude the diagnosis"
     ],
-    [
-     "Key Investigations",
-     "Twelve-lead electrocardiogram and prolonged rhythm monitoring for U waves, QU prolongation and ventricular ectopy, Serum",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Andersen-Tawil syndrome is most commonly caused by loss-of-function mutations in KCNJ2, which encodes the inward-rectifier potassium channel Kir2.1. This channel stabilises the resting membrane potential and shapes the terminal phase of repolarisation in both skeletal and cardiac muscle. Reduced Kir2.1 current, often through a dominant-negative effect on the tetrameric channel, destabilises the resting potential of skeletal muscle to produce periodic paralysis, and prolongs and destabilises cardiac repolarisation to generate the prominent U waves, QU prolongation and ventricular arrhythmias. The same channel and related developmental signalling pathways are implicated in the skeletal and craniofacial dysmorphism that completes the triad.",
+    "additionalDifferentials": [
+      "Hypokalaemic periodic paralysis",
+      "Hyperkalaemic periodic paralysis",
+      "Other congenital long QT syndromes",
+      "Catecholaminergic polymorphic ventricular tachycardia",
+      "Thyrotoxic periodic paralysis",
+      "Other syndromic causes of short stature and dysmorphism"
     ],
-    [
-     "Primary Differentials",
-     "Hypokalaemic periodic paralysis, Hyperkalaemic periodic paralysis, Other congenital long QT syndromes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Twelve-lead electrocardiogram and prolonged rhythm monitoring for U waves, QU prolongation and ventricular ectopy",
+      "Serum potassium measured during paralytic episodes",
+      "Echocardiography to assess cardiac structure and function",
+      "Prolonged exercise electromyography protocol to characterise the periodic paralysis",
+      "Targeted KCNJ2 genetic testing, with a broader panel if negative",
+      "Clinical dysmorphology assessment and skeletal imaging as indicated"
     ],
-    [
-     "Management Strategy",
-     "Manage the ventricular arrhythmia with beta-blockers and antiarrhythmics such as flecainide, reserving an implantable",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope, palpitations or documented ventricular tachycardia indicating arrhythmic risk",
+      "Family history of sudden cardiac death",
+      "Marked QU prolongation with frequent or complex ventricular ectopy",
+      "Respiratory or severe generalised weakness during a paralytic attack"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing simple periodic paralysis and missing the cardiac and dysmorphic components of the triad",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is usually near normal because the ventricular arrhythmias are frequently well tolerated, but syncope and, rarely, sudden cardiac death can occur, so cardiac surveillance is essential and the periodic paralysis and dysmorphic features add variable long-term morbidity.",
+    "pitfalls": [
+      "Diagnosing simple periodic paralysis and missing the cardiac and dysmorphic components of the triad",
+      "Expecting a consistent potassium-shift direction, when the potassium level during attacks is variable",
+      "Under-appreciating arrhythmic risk because the ventricular tachycardia is often asymptomatic",
+      "Prescribing QT-prolonging drugs without recognising the underlying repolarisation abnormality"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: Andersen-Tawil Syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the ventricular arrhythmia with beta-blockers and antiarrhythmics such as flecainide, reserving an implantable defibrillator for high-risk patients",
+      "Treat the periodic paralysis with a carbonic anhydrase inhibitor such as acetazolamide, tailoring potassium management to the individual's shift pattern",
+      "Avoid QT-prolonging drugs given the underlying repolarisation abnormality",
+      "Advise avoidance of recognised triggers that precipitate paralytic attacks",
+      "Undertake cardiac surveillance with electrocardiography and prolonged rhythm monitoring for arrhythmia and syncope",
+      "Coordinate care across cardiology and neurology",
+      "Offer genetic counselling and family screening given autosomal dominant inheritance of the KCNJ2 mutation"
     ]
-   ],
-   "caption": "Overview comparison matrix for andersen-tawil syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "andersen-tawil-syndrome-real-image",
-   "title": "Andersen-Tawil syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "andersen_tawil_syndrome-pathway",
+      "title": "Andersen-Tawil syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by a clinical triad of periodic paralysis, ventricular arrhythmia with characteristic electrocardiographic changes, and distinctive dysmorphic features",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope, palpitations or documented ventricular tachycardia indicating arrhythmic risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Twelve-lead electrocardiogram and prolonged rhythm monitoring for U waves, QU prolongation and ventricular ectopy, Serum potassium measured during paralytic episodes, Echocardiography to assess cardiac structure and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the ventricular arrhythmia with beta-blockers and antiarrhythmics such as flecainide, reserving an implantable defibrillator for high-risk patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing simple periodic paralysis and missing the cardiac and dysmorphic components of the triad"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of andersen-tawil syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "andersen_tawil_syndrome-matrix",
+      "title": "Andersen-Tawil syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by a clinical triad of periodic paralysis, ventricular arrhythmia with characteristic electrocardiographic changes, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Twelve-lead electrocardiogram and prolonged rhythm monitoring for U waves, QU prolongation and ventricular ectopy, Serum",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypokalaemic periodic paralysis, Hyperkalaemic periodic paralysis, Other congenital long QT syndromes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the ventricular arrhythmia with beta-blockers and antiarrhythmics such as flecainide, reserving an implantable",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing simple periodic paralysis and missing the cardiac and dysmorphic components of the triad",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for andersen-tawil syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "andersen_tawil_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Twelve-lead ECG and prolonged rhythm monitoring",
+          "cells": [
+            {
+              "text": "U waves, QU prolongation and ectopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium during paralytic episodes",
+          "cells": [
+            {
+              "text": "Potassium shift"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiac structure and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged exercise electromyography",
+          "cells": [
+            {
+              "text": "Periodic paralysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted KCNJ2 genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysmorphology assessment and skeletal imaging",
+          "cells": [
+            {
+              "text": "Dysmorphic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "andersen_tawil_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypokalaemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Paralysis with low potassium"
+            },
+            {
+              "text": "Potassium during attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Paralysis with high potassium"
+            },
+            {
+              "text": "Potassium during attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other congenital long QT syndromes",
+          "cells": [
+            {
+              "text": "Prolonged QT without paralysis"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catecholaminergic polymorphic ventricular tachycardia",
+          "cells": [
+            {
+              "text": "Exercise-induced arrhythmia"
+            },
+            {
+              "text": "Exercise testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyrotoxic periodic paralysis",
+          "cells": [
+            {
+              "text": "Paralysis with thyrotoxicosis"
+            },
+            {
+              "text": "Thyroid function tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other syndromic causes of short stature and dysmorphism",
+          "cells": [
+            {
+              "text": "Dysmorphic syndrome"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "andersen_tawil_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blockers and antiarrhythmics such as flecainide",
+          "cells": [
+            {
+              "text": "Ventricular arrhythmia"
+            },
+            {
+              "text": "Implantable defibrillator for high-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetazolamide for periodic paralysis",
+          "cells": [
+            {
+              "text": "Paralytic attacks"
+            },
+            {
+              "text": "Potassium management tailored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of QT-prolonging drugs",
+          "cells": [
+            {
+              "text": "Repolarisation abnormality"
+            },
+            {
+              "text": "Preventive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of paralysis triggers",
+          "cells": [
+            {
+              "text": "Recognised triggers"
+            },
+            {
+              "text": "Lifestyle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance with ECG and prolonged rhythm monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and syncope"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant KCNJ2 mutation"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "andersen_tawil_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Andersen-Tawil syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Periodic weakness with dysmorphism and frequent ventricular ectopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Syncope, palpitations, VT or respiratory weakness during an attack?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review; treat arrhythmia and paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG for U waves and QU prolongation; rhythm monitoring; KCNJ2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "KCNJ2 variant with triad features confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Beta-blocker and flecainide for ventricular arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review hypo- and hyperkalaemic paralysis and congenital long QT",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Acetazolamide for periodic paralysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid QT-prolonging drugs and paralysis triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rhythm surveillance; ICD for high-risk patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Life expectancy near normal; syncope and rare sudden death occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

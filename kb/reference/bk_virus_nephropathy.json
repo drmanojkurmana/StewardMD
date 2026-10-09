@@ -1,173 +1,236 @@
 {
- "id": "bk_virus_nephropathy",
- "name": "BK polyomavirus nephropathy",
- "aliases": [
-  "BK virus nephropathy",
-  "BKVN",
-  "polyomavirus-associated nephropathy",
-  "BK polyomavirus (BKPyV) infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by reactivation of BK polyomavirus, a ubiquitous virus latent in the urinary tract epithelium that reactivates under the intense immunosuppression of kidney transplantation",
-   "It is a leading infectious cause of allograft dysfunction and loss, typically emerging within the first year after transplantation",
-   "Usually silent until an asymptomatic rise in serum creatinine appears; frank cystitis or ureteric stenosis is less common than in haemorrhagic cystitis after stem-cell transplant",
-   "Urine cytology may reveal decoy cells, tubular epithelial cells bearing enlarged nuclei with ground-glass viral inclusions that mimic malignant cells",
-   "Surveillance uses quantitative plasma BK virus DNA (viraemia), which correlates with nephropathy better than urinary viral load alone",
-   "Definitive diagnosis requires allograft biopsy showing viral cytopathic changes in tubular cells with confirmatory SV40 large T antigen immunostaining",
-   "The cornerstone of management is judicious reduction of immunosuppression to allow virus-specific cellular immunity to recover, balanced against the risk of rejection"
+  "id": "bk_virus_nephropathy",
+  "name": "BK polyomavirus nephropathy",
+  "aliases": [
+    "BK virus nephropathy",
+    "BKVN",
+    "polyomavirus-associated nephropathy",
+    "BK polyomavirus (BKPyV) infection"
   ],
-  "pathophysiology": "BK polyomavirus infects most people in childhood and thereafter persists latently within the epithelium of the renal tubules and urinary tract. In the transplanted kidney, heavy pharmacological immunosuppression allows the virus to reactivate and replicate, first producing viruria, then viraemia, and finally invasive infection of tubular epithelial cells. Lytic viral replication causes cell injury and denudation of the tubular basement membrane, with an accompanying interstitial inflammatory infiltrate and progressive tubular atrophy and interstitial fibrosis. The inflammatory response is difficult to distinguish histologically from acute rejection, and untreated infection leads to scarring and irreversible loss of graft function. Ureteric involvement can cause stenosis and obstruction.",
-  "additionalDifferentials": [
-   "Acute cellular allograft rejection",
-   "Calcineurin inhibitor nephrotoxicity",
-   "Cytomegalovirus nephritis or disease",
-   "Adenovirus nephritis or haemorrhagic cystitis",
-   "Obstructive uropathy or ureteric stenosis from other causes",
-   "Recurrent or de novo glomerular disease in the graft"
-  ],
-  "additionalInvestigations": [
-   "Quantitative plasma BK virus DNA by PCR for screening and monitoring of viraemia",
-   "Urine BK virus DNA quantification and urine cytology for decoy cells",
-   "Renal allograft biopsy with SV40 large T antigen immunohistochemistry",
-   "Serial serum creatinine and estimated glomerular filtration rate",
-   "Assessment of net immunosuppression, including drug levels of calcineurin inhibitors and antiproliferative agents",
-   "Imaging of the urinary tract to exclude ureteric stenosis or obstruction"
-  ],
-  "redFlags": [
-   "Rising allograft creatinine with high-level BK viraemia",
-   "Biopsy features overlapping with acute rejection creating diagnostic and therapeutic conflict",
-   "Ureteric stenosis with obstructive graft dysfunction",
-   "Persistent high viral load despite reduction of immunosuppression"
-  ],
-  "prognosis": "Outcome depends on how early infection is detected and immunosuppression reduced; caught during viraemia the graft is often preserved, but established nephropathy with extensive fibrosis frequently progresses to allograft failure despite intervention.",
-  "pitfalls": [
-   "Mistaking BK nephropathy for acute rejection and intensifying immunosuppression, which worsens viral replication",
-   "Relying on urinary viral load or decoy cells alone, which are sensitive but not specific for invasive nephropathy",
-   "Delaying protocol screening so that infection is only detected once irreversible scarring has occurred",
-   "Reducing immunosuppression too aggressively and precipitating rejection"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "UpToDate: BK polyomavirus-associated nephropathy in kidney transplantation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduction of net immunosuppression — lowering calcineurin-inhibitor and antiproliferative agent exposure — as the primary intervention to enable immune clearance of the virus",
-   "Guide therapy by quantitative plasma BK virus DNA surveillance, intervening at viraemia before nephropathy becomes established",
-   "Confirm and stage disease with allograft biopsy and SV40 large T antigen immunostaining, distinguishing nephropathy from concurrent acute rejection",
-   "Consider adjunctive agents such as intravenous immunoglobulin, leflunomide or cidofovir where reduction of immunosuppression alone fails, acknowledging limited evidence",
-   "Relieve ureteric stenosis or obstruction where it complicates infection",
-   "Manage under transplant nephrology with serial graft-function monitoring, balancing viral control against rejection risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bk_virus_nephropathy-pathway",
-   "title": "BK polyomavirus nephropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by reactivation of BK polyomavirus, a ubiquitous virus latent in the urinary tract epithelium that reactivates under the intense immunosuppression of kidney transplantation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rising allograft creatinine with high-level BK viraemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Quantitative plasma BK virus DNA by PCR for screening and monitoring of viraemia, Urine BK virus DNA quantification and urine cytology for decoy cells, Renal allograft biopsy with SV40 large T antigen immunohistochemistry"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduction of net immunosuppression - lowering calcineurin-inhibitor and antiproliferative agent exposure - as the primary intervention to enable immune clearance of the virus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking BK nephropathy for acute rejection and intensifying immunosuppression, which worsens viral replication"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bk polyomavirus nephropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "bk_virus_nephropathy-matrix",
-   "title": "BK polyomavirus nephropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by reactivation of BK polyomavirus, a ubiquitous virus latent in the urinary tract epithelium that reactivates under the",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by reactivation of BK polyomavirus, a ubiquitous virus latent in the urinary tract epithelium that reactivates under the intense immunosuppression of kidney transplantation",
+      "It is a leading infectious cause of allograft dysfunction and loss, typically emerging within the first year after transplantation",
+      "Usually silent until an asymptomatic rise in serum creatinine appears; frank cystitis or ureteric stenosis is less common than in haemorrhagic cystitis after stem-cell transplant",
+      "Urine cytology may reveal decoy cells, tubular epithelial cells bearing enlarged nuclei with ground-glass viral inclusions that mimic malignant cells",
+      "Surveillance uses quantitative plasma BK virus DNA (viraemia), which correlates with nephropathy better than urinary viral load alone",
+      "Definitive diagnosis requires allograft biopsy showing viral cytopathic changes in tubular cells with confirmatory SV40 large T antigen immunostaining",
+      "The cornerstone of management is judicious reduction of immunosuppression to allow virus-specific cellular immunity to recover, balanced against the risk of rejection"
     ],
-    [
-     "Key Investigations",
-     "Quantitative plasma BK virus DNA by PCR for screening and monitoring of viraemia, Urine BK virus DNA quantification and urine",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "BK polyomavirus infects most people in childhood and thereafter persists latently within the epithelium of the renal tubules and urinary tract. In the transplanted kidney, heavy pharmacological immunosuppression allows the virus to reactivate and replicate, first producing viruria, then viraemia, and finally invasive infection of tubular epithelial cells. Lytic viral replication causes cell injury and denudation of the tubular basement membrane, with an accompanying interstitial inflammatory infiltrate and progressive tubular atrophy and interstitial fibrosis. The inflammatory response is difficult to distinguish histologically from acute rejection, and untreated infection leads to scarring and irreversible loss of graft function. Ureteric involvement can cause stenosis and obstruction.",
+    "additionalDifferentials": [
+      "Acute cellular allograft rejection",
+      "Calcineurin inhibitor nephrotoxicity",
+      "Cytomegalovirus nephritis or disease",
+      "Adenovirus nephritis or haemorrhagic cystitis",
+      "Obstructive uropathy or ureteric stenosis from other causes",
+      "Recurrent or de novo glomerular disease in the graft"
     ],
-    [
-     "Primary Differentials",
-     "Acute cellular allograft rejection, Calcineurin inhibitor nephrotoxicity, Cytomegalovirus nephritis or disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Quantitative plasma BK virus DNA by PCR for screening and monitoring of viraemia",
+      "Urine BK virus DNA quantification and urine cytology for decoy cells",
+      "Renal allograft biopsy with SV40 large T antigen immunohistochemistry",
+      "Serial serum creatinine and estimated glomerular filtration rate",
+      "Assessment of net immunosuppression, including drug levels of calcineurin inhibitors and antiproliferative agents",
+      "Imaging of the urinary tract to exclude ureteric stenosis or obstruction"
     ],
-    [
-     "Management Strategy",
-     "Reduction of net immunosuppression - lowering calcineurin-inhibitor and antiproliferative agent exposure - as the primary",
-     "Core treatment modality"
+    "redFlags": [
+      "Rising allograft creatinine with high-level BK viraemia",
+      "Biopsy features overlapping with acute rejection creating diagnostic and therapeutic conflict",
+      "Ureteric stenosis with obstructive graft dysfunction",
+      "Persistent high viral load despite reduction of immunosuppression"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking BK nephropathy for acute rejection and intensifying immunosuppression, which worsens viral replication",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on how early infection is detected and immunosuppression reduced; caught during viraemia the graft is often preserved, but established nephropathy with extensive fibrosis frequently progresses to allograft failure despite intervention.",
+    "pitfalls": [
+      "Mistaking BK nephropathy for acute rejection and intensifying immunosuppression, which worsens viral replication",
+      "Relying on urinary viral load or decoy cells alone, which are sensitive but not specific for invasive nephropathy",
+      "Delaying protocol screening so that infection is only detected once irreversible scarring has occurred",
+      "Reducing immunosuppression too aggressively and precipitating rejection"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "UpToDate: BK polyomavirus-associated nephropathy in kidney transplantation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduction of net immunosuppression — lowering calcineurin-inhibitor and antiproliferative agent exposure — as the primary intervention to enable immune clearance of the virus",
+      "Guide therapy by quantitative plasma BK virus DNA surveillance, intervening at viraemia before nephropathy becomes established",
+      "Confirm and stage disease with allograft biopsy and SV40 large T antigen immunostaining, distinguishing nephropathy from concurrent acute rejection",
+      "Consider adjunctive agents such as intravenous immunoglobulin, leflunomide or cidofovir where reduction of immunosuppression alone fails, acknowledging limited evidence",
+      "Relieve ureteric stenosis or obstruction where it complicates infection",
+      "Manage under transplant nephrology with serial graft-function monitoring, balancing viral control against rejection risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for bk polyomavirus nephropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bk-virus-nephropathy-real-image",
-   "title": "BK polyomavirus nephropathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "bk_virus_nephropathy-pathway",
+      "title": "BK polyomavirus nephropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by reactivation of BK polyomavirus, a ubiquitous virus latent in the urinary tract epithelium that reactivates under the intense immunosuppression of kidney transplantation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rising allograft creatinine with high-level BK viraemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Quantitative plasma BK virus DNA by PCR for screening and monitoring of viraemia, Urine BK virus DNA quantification and urine cytology for decoy cells, Renal allograft biopsy with SV40 large T antigen immunohistochemistry"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduction of net immunosuppression - lowering calcineurin-inhibitor and antiproliferative agent exposure - as the primary intervention to enable immune clearance of the virus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking BK nephropathy for acute rejection and intensifying immunosuppression, which worsens viral replication"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bk polyomavirus nephropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bk_virus_nephropathy-matrix",
+      "title": "BK polyomavirus nephropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by reactivation of BK polyomavirus, a ubiquitous virus latent in the urinary tract epithelium that reactivates under the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Quantitative plasma BK virus DNA by PCR for screening and monitoring of viraemia, Urine BK virus DNA quantification and urine",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute cellular allograft rejection, Calcineurin inhibitor nephrotoxicity, Cytomegalovirus nephritis or disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduction of net immunosuppression - lowering calcineurin-inhibitor and antiproliferative agent exposure - as the primary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking BK nephropathy for acute rejection and intensifying immunosuppression, which worsens viral replication",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bk polyomavirus nephropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bk_virus_nephropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in BK polyomavirus nephropathy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Quantitative plasma BK virus DNA PCR", "cells": [{"text": "Viraemia; correlates with nephropathy better than urinary load alone"}], "cite": "c1"},
+        {"parameter": "Urine BK virus DNA and cytology", "cells": [{"text": "Decoy cells; sensitive but not specific for invasive nephropathy"}], "cite": "c1"},
+        {"parameter": "Allograft biopsy with SV40 large T antigen immunostaining", "cells": [{"text": "Viral cytopathic change in tubular cells; confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "Serum creatinine and eGFR", "cells": [{"text": "Rising creatinine, often asymptomatic"}], "cite": "c1"},
+        {"parameter": "Net immunosuppression and drug levels", "cells": [{"text": "Calcineurin inhibitor and antiproliferative exposure"}], "cite": "c1"},
+        {"parameter": "Urinary tract imaging", "cells": [{"text": "Ureteric stenosis or obstruction"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bk_virus_nephropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of graft dysfunction",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Acute cellular allograft rejection", "cells": [{"text": "Histology overlaps; SV40 large T antigen immunostaining confirms BK infection"}], "cite": "c1"},
+        {"parameter": "Obstructive uropathy or ureteric stenosis", "cells": [{"text": "Excluded by urinary tract imaging"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bk_virus_nephropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options in BK polyomavirus nephropathy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reduce net immunosuppression", "cells": [{"text": "Lower calcineurin inhibitor and antiproliferative exposure"}, {"text": "Primary intervention; allows immune clearance of the virus"}], "cite": "c1"},
+        {"parameter": "Viraemia-guided surveillance", "cells": [{"text": "Quantitative plasma BK DNA; intervene at viraemia"}, {"text": "Before nephropathy becomes established"}], "cite": "c1"},
+        {"parameter": "Biopsy confirmation", "cells": [{"text": "Allograft biopsy with SV40 large T antigen immunostaining"}, {"text": "Separates nephropathy from acute rejection"}], "cite": "c1"},
+        {"parameter": "Adjunctive agents", "cells": [{"text": "Intravenous immunoglobulin, leflunomide or cidofovir where reduction alone fails"}, {"text": "Limited evidence"}], "cite": "c1"},
+        {"parameter": "Ureteric stenosis", "cells": [{"text": "Relieve stenosis or obstruction where it complicates infection"}, {"text": "Obstructive complication"}], "cite": "c1"},
+        {"parameter": "Graft monitoring", "cells": [{"text": "Serial graft-function monitoring under transplant nephrology"}, {"text": "Balances viral control against rejection risk"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bk_virus_nephropathy-dx-mgmt",
+      "title": "Diagnosis and management of BK polyomavirus nephropathy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Rising serum creatinine in a kidney transplant recipient, often in the first year", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: high BK viraemia, ureteric obstruction, or biopsy conflict with rejection?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: transplant nephrology; relieve obstruction; biopsy to stage the disease", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Quantitative plasma BK DNA PCR; urine BK DNA and cytology for decoy cells", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Allograft biopsy with SV40 large T antigen immunostaining", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "BK nephropathy confirmed on biopsy rather than rejection?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Reduce calcineurin inhibitor and antiproliferative exposure; serial BK DNA", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: pursue acute rejection or another graft cause as indicated", "cite": "c1"},
+        {"id": "n9", "type": "decision", "text": "Viral load falls and creatinine stabilises?", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Graft often preserved; continue viraemia surveillance", "cite": "c1"},
+        {"id": "n11", "type": "action", "text": "Consider IVIG, leflunomide or cidofovir where reduction fails; evidence is limited", "cite": "c1"},
+        {"id": "n12", "type": "outcome", "text": "Established fibrosis may still progress to graft failure", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Yes"},
+        {"from": "n9", "to": "n11", "label": "No"},
+        {"from": "n11", "to": "n12", "label": "Next"}
+      ]
+    }
+  ]
 }

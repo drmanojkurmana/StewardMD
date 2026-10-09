@@ -1,175 +1,472 @@
 {
- "id": "osteopoikilosis",
- "name": "Osteopoikilosis (LEMD3)",
- "aliases": [
-  "spotted bone disease",
-  "osteopathia condensans disseminata",
-  "LEMD3",
-  "MAN1"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Usually an incidental radiographic finding of numerous small, symmetrical, round or oval sclerotic foci clustered in the epiphyses and metaphyses of long bones and in the pelvis, carpus and tarsus",
-   "The individual is typically asymptomatic; when symptoms occur they are mild joint aches rather than a destructive process",
-   "Caused by loss-of-function variants in LEMD3, encoding an inner nuclear membrane protein that antagonises BMP and TGF-beta signalling, leading to focal islands of dense trabecular bone",
-   "Inherited in an autosomal dominant pattern with variable penetrance, so unaffected-appearing relatives may still carry the variant",
-   "Bone scintigraphy characteristically shows no increased uptake in the sclerotic foci, an important feature distinguishing it from osteoblastic metastases",
-   "When cutaneous connective-tissue naevi (elastomas or collagenomas) coexist with the spotty bone lesions, the combined disorder is termed Buschke-Ollendorff syndrome",
-   "Management is generally reassurance and avoidance of unnecessary intervention once the benign nature is confirmed"
+  "id": "osteopoikilosis",
+  "name": "Osteopoikilosis (LEMD3)",
+  "aliases": [
+    "spotted bone disease",
+    "osteopathia condensans disseminata",
+    "LEMD3",
+    "MAN1"
   ],
-  "pathophysiology": "Osteopoikilosis arises from heterozygous loss-of-function variants in LEMD3, whose protein product resides in the inner nuclear membrane and normally dampens bone morphogenetic protein and transforming growth factor-beta signalling. Reduced antagonism tips the balance towards osteoblastic activity in discrete foci, producing scattered islands of compact lamellar bone within the spongiosa. These enostosis-like foci concentrate near the ends of long bones and around the pelvis and short tubular bones, remain metabolically quiet, and do not disturb the overall bone architecture, explaining the asymptomatic incidental presentation and the absence of scintigraphic uptake.",
-  "additionalDifferentials": [
-   "Osteoblastic (sclerotic) skeletal metastases, particularly from prostate or breast carcinoma",
-   "Mastocytosis with sclerotic bone deposits",
-   "Tuberous sclerosis with sclerotic bone islands",
-   "Melorheostosis (which can coexist within the LEMD3 spectrum)",
-   "Osteopathia striata with cranial sclerosis",
-   "Solitary bone island (enostosis)"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs or skeletal survey demonstrating the characteristic symmetrical sclerotic foci",
-   "Bone scintigraphy to confirm absent tracer uptake and help exclude metastatic disease",
-   "Cross-sectional imaging where distinction from metastasis remains uncertain",
-   "Skin examination and, if lesions are present, biopsy for connective-tissue naevi (Buschke-Ollendorff overlap)",
-   "LEMD3 molecular genetic testing to confirm the diagnosis and inform family counselling",
-   "Family history review and consideration of imaging in first-degree relatives"
-  ],
-  "redFlags": [
-   "New focal bone pain or a lesion showing increasing size, cortical destruction or scintigraphic uptake, suggesting an alternative diagnosis such as metastasis",
-   "Unexplained weight loss or a known primary malignancy raising concern for osteoblastic metastases mimicking the foci",
-   "Progressive limb pain or contracture suggesting associated melorheostosis"
-  ],
-  "prognosis": "The skeletal condition is benign and does not shorten life or cause meaningful disability; the main risk is diagnostic confusion with malignancy leading to unnecessary investigation, and prognosis is excellent once the diagnosis is recognised.",
-  "pitfalls": [
-   "Misinterpreting the sclerotic foci as osteoblastic metastases and initiating an unnecessary oncological workup",
-   "Overlooking coexisting cutaneous connective-tissue naevi that would establish Buschke-Ollendorff syndrome",
-   "Failing to counsel relatives despite the autosomal dominant inheritance with variable penetrance",
-   "Attributing incidental joint symptoms wholly to the bone foci rather than considering another cause"
-  ],
-  "references": [
-   "Resnick's Diagnosis of Bone and Joint Disorders",
-   "GeneReviews: LEMD3-related disorders"
-  ],
-  "crossLinks": [
-   "buschke_ollendorff_syndrome",
-   "osteopathia_striata_with_cranial_sclerosis"
-  ],
-  "management": [
-   "Recognise the benign nature and avoid unnecessary treatment, since the sclerotic foci are asymptomatic and do not weaken bone",
-   "Use bone scintigraphy showing absent tracer uptake to distinguish the foci from osteoblastic metastases and prevent needless investigation",
-   "Reserve cross-sectional imaging for cases where distinction from malignancy remains uncertain",
-   "Simple analgesia for the mild joint aches that occasionally occur",
-   "Examine the skin and biopsy any connective-tissue naevi to identify Buschke-Ollendorff overlap",
-   "LEMD3 molecular testing and autosomal dominant family counselling, with awareness of variable penetrance in relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "osteopoikilosis-pathway",
-   "title": "Osteopoikilosis (LEMD3): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Usually an incidental radiographic finding of numerous small, symmetrical, round or oval sclerotic foci clustered in the epiphyses and metaphyses of long bones and in the pelvis, carpus and tarsus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New focal bone pain or a lesion showing increasing size, cortical destruction or scintigraphic uptake, suggesting an alternative diagnosis such as metastasis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs or skeletal survey demonstrating the characteristic symmetrical sclerotic foci, Bone scintigraphy to confirm absent tracer uptake and help exclude metastatic disease, Cross-sectional imaging where"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise the benign nature and avoid unnecessary treatment, since the sclerotic foci are asymptomatic and do not weaken bone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the sclerotic foci as osteoblastic metastases and initiating an unnecessary oncological workup"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of osteopoikilosis (lemd3)."
-  }
- ],
- "tables": [
-  {
-   "id": "osteopoikilosis-matrix",
-   "title": "Osteopoikilosis (LEMD3): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Usually an incidental radiographic finding of numerous small, symmetrical, round or oval sclerotic foci clustered in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Usually an incidental radiographic finding of numerous small, symmetrical, round or oval sclerotic foci clustered in the epiphyses and metaphyses of long bones and in the pelvis, carpus and tarsus",
+      "The individual is typically asymptomatic; when symptoms occur they are mild joint aches rather than a destructive process",
+      "Caused by loss-of-function variants in LEMD3, encoding an inner nuclear membrane protein that antagonises BMP and TGF-beta signalling, leading to focal islands of dense trabecular bone",
+      "Inherited in an autosomal dominant pattern with variable penetrance, so unaffected-appearing relatives may still carry the variant",
+      "Bone scintigraphy characteristically shows no increased uptake in the sclerotic foci, an important feature distinguishing it from osteoblastic metastases",
+      "When cutaneous connective-tissue naevi (elastomas or collagenomas) coexist with the spotty bone lesions, the combined disorder is termed Buschke-Ollendorff syndrome",
+      "Management is generally reassurance and avoidance of unnecessary intervention once the benign nature is confirmed"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs or skeletal survey demonstrating the characteristic symmetrical sclerotic foci, Bone scintigraphy to confirm",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Osteopoikilosis arises from heterozygous loss-of-function variants in LEMD3, whose protein product resides in the inner nuclear membrane and normally dampens bone morphogenetic protein and transforming growth factor-beta signalling. Reduced antagonism tips the balance towards osteoblastic activity in discrete foci, producing scattered islands of compact lamellar bone within the spongiosa. These enostosis-like foci concentrate near the ends of long bones and around the pelvis and short tubular bones, remain metabolically quiet, and do not disturb the overall bone architecture, explaining the asymptomatic incidental presentation and the absence of scintigraphic uptake.",
+    "additionalDifferentials": [
+      "Osteoblastic (sclerotic) skeletal metastases, particularly from prostate or breast carcinoma",
+      "Mastocytosis with sclerotic bone deposits",
+      "Tuberous sclerosis with sclerotic bone islands",
+      "Melorheostosis (which can coexist within the LEMD3 spectrum)",
+      "Osteopathia striata with cranial sclerosis",
+      "Solitary bone island (enostosis)"
     ],
-    [
-     "Primary Differentials",
-     "Osteoblastic (sclerotic) skeletal metastases, particularly from prostate or breast carcinoma, Mastocytosis with sclerotic bone",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs or skeletal survey demonstrating the characteristic symmetrical sclerotic foci",
+      "Bone scintigraphy to confirm absent tracer uptake and help exclude metastatic disease",
+      "Cross-sectional imaging where distinction from metastasis remains uncertain",
+      "Skin examination and, if lesions are present, biopsy for connective-tissue naevi (Buschke-Ollendorff overlap)",
+      "LEMD3 molecular genetic testing to confirm the diagnosis and inform family counselling",
+      "Family history review and consideration of imaging in first-degree relatives"
     ],
-    [
-     "Management Strategy",
-     "Recognise the benign nature and avoid unnecessary treatment, since the sclerotic foci are asymptomatic and do not weaken bone",
-     "Core treatment modality"
+    "redFlags": [
+      "New focal bone pain or a lesion showing increasing size, cortical destruction or scintigraphic uptake, suggesting an alternative diagnosis such as metastasis",
+      "Unexplained weight loss or a known primary malignancy raising concern for osteoblastic metastases mimicking the foci",
+      "Progressive limb pain or contracture suggesting associated melorheostosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the sclerotic foci as osteoblastic metastases and initiating an unnecessary oncological workup",
-     "Prevent diagnostic or management error"
+    "prognosis": "The skeletal condition is benign and does not shorten life or cause meaningful disability; the main risk is diagnostic confusion with malignancy leading to unnecessary investigation, and prognosis is excellent once the diagnosis is recognised.",
+    "pitfalls": [
+      "Misinterpreting the sclerotic foci as osteoblastic metastases and initiating an unnecessary oncological workup",
+      "Overlooking coexisting cutaneous connective-tissue naevi that would establish Buschke-Ollendorff syndrome",
+      "Failing to counsel relatives despite the autosomal dominant inheritance with variable penetrance",
+      "Attributing incidental joint symptoms wholly to the bone foci rather than considering another cause"
+    ],
+    "references": [
+      "Resnick's Diagnosis of Bone and Joint Disorders",
+      "GeneReviews: LEMD3-related disorders"
+    ],
+    "crossLinks": [
+      "buschke_ollendorff_syndrome",
+      "osteopathia_striata_with_cranial_sclerosis"
+    ],
+    "management": [
+      "Recognise the benign nature and avoid unnecessary treatment, since the sclerotic foci are asymptomatic and do not weaken bone",
+      "Use bone scintigraphy showing absent tracer uptake to distinguish the foci from osteoblastic metastases and prevent needless investigation",
+      "Reserve cross-sectional imaging for cases where distinction from malignancy remains uncertain",
+      "Simple analgesia for the mild joint aches that occasionally occur",
+      "Examine the skin and biopsy any connective-tissue naevi to identify Buschke-Ollendorff overlap",
+      "LEMD3 molecular testing and autosomal dominant family counselling, with awareness of variable penetrance in relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for osteopoikilosis (lemd3)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "osteopoikilosis-real-image",
-   "title": "Osteopoikilosis (LEMD3): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "osteopoikilosis-pathway",
+      "title": "Osteopoikilosis (LEMD3): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Usually an incidental radiographic finding of numerous small, symmetrical, round or oval sclerotic foci clustered in the epiphyses and metaphyses of long bones and in the pelvis, carpus and tarsus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New focal bone pain or a lesion showing increasing size, cortical destruction or scintigraphic uptake, suggesting an alternative diagnosis such as metastasis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs or skeletal survey demonstrating the characteristic symmetrical sclerotic foci, Bone scintigraphy to confirm absent tracer uptake and help exclude metastatic disease, Cross-sectional imaging where"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise the benign nature and avoid unnecessary treatment, since the sclerotic foci are asymptomatic and do not weaken bone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the sclerotic foci as osteoblastic metastases and initiating an unnecessary oncological workup"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of osteopoikilosis (lemd3)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "osteopoikilosis-matrix",
+      "title": "Osteopoikilosis (LEMD3): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Usually an incidental radiographic finding of numerous small, symmetrical, round or oval sclerotic foci clustered in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs or skeletal survey demonstrating the characteristic symmetrical sclerotic foci, Bone scintigraphy to confirm",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Osteoblastic (sclerotic) skeletal metastases, particularly from prostate or breast carcinoma, Mastocytosis with sclerotic bone",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise the benign nature and avoid unnecessary treatment, since the sclerotic foci are asymptomatic and do not weaken bone",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the sclerotic foci as osteoblastic metastases and initiating an unnecessary oncological workup",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for osteopoikilosis (lemd3)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteopoikilosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs or skeletal survey",
+          "cells": [
+            {
+              "text": "Symmetrical sclerotic foci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy",
+          "cells": [
+            {
+              "text": "Absent tracer uptake, which helps exclude metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Where distinction from metastasis remains uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination and biopsy of any naevi",
+          "cells": [
+            {
+              "text": "Connective-tissue naevi (Buschke-Ollendorff overlap)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LEMD3 molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history review",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; imaging in relatives where considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteopoikilosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteoblastic skeletal metastases",
+          "cells": [
+            {
+              "text": "Metastases take up tracer and may enlarge or destroy cortex; these foci do not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melorheostosis",
+          "cells": [
+            {
+              "text": "Can coexist within the spectrum; progressive limb pain or contracture suggests it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteopoikilosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognise the benign nature",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Avoid unnecessary treatment; the foci are asymptomatic and do not weaken bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scintigraphy",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Absent tracer uptake prevents needless investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging when uncertain",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Only where distinction from malignancy remains unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "For occasional mild joint aches"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Biopsy of connective-tissue naevi to identify Buschke-Ollendorff overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "LEMD3 testing and autosomal dominant counselling, given variable penetrance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteopoikilosis-dx-mgmt",
+      "title": "Diagnosis and management of Osteopoikilosis (LEMD3)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental symmetrical sclerotic foci on radiograph; osteopoikilosis suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (new focal pain, enlarging lesion, cortical destruction or weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: cancer work-up for suspected osteoblastic metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, bone scintigraphy for absent uptake, skin examination, LEMD3 test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is tracer uptake absent in the foci, excluding metastasis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metastasis, melorheostosis or osteopathia striata; image further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recognise the benign nature; avoid unnecessary treatment for asymptomatic foci",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Simple analgesia for occasional mild joint aches",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Examine the skin; biopsy connective-tissue naevi if present (Buschke-Ollendorff)",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "LEMD3 testing and autosomal dominant family counselling, given variable penetrance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and non-disabling; prognosis excellent once the diagnosis is recognised",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,452 @@
 {
- "id": "scleritis",
- "name": "Scleritis",
- "aliases": [
-  "anterior scleritis",
-  "posterior scleritis",
-  "necrotising scleritis",
-  "scleromalacia perforans"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with severe, deep, boring ocular pain that is often worse at night, may radiate to the face or jaw, and characteristically disturbs sleep",
-   "The redness has a bluish or violaceous hue from involvement of the deep scleral vessels, unlike the bright red of episcleritis",
-   "Scleral vessels do not blanch with topical phenylephrine, which helps distinguish scleritis from episcleritis",
-   "Classified into anterior (diffuse, nodular, or necrotising) and posterior forms; necrotising scleritis is the most destructive and sight-threatening",
-   "Scleromalacia perforans is a painless necrotising form seen in long-standing rheumatoid arthritis",
-   "Roughly half of cases are associated with systemic disease, especially rheumatoid arthritis and ANCA-associated vasculitis such as granulomatosis with polyangiitis",
-   "Posterior scleritis can mimic other conditions with proptosis, pain on eye movement, and disc swelling, and is confirmed on ultrasound (T-sign)",
-   "Management is with systemic anti-inflammatory therapy: oral NSAIDs for milder disease and systemic corticosteroids or immunosuppression for necrotising or refractory cases"
+  "id": "scleritis",
+  "name": "Scleritis",
+  "aliases": [
+    "anterior scleritis",
+    "posterior scleritis",
+    "necrotising scleritis",
+    "scleromalacia perforans"
   ],
-  "pathophysiology": "Scleritis is inflammation of the sclera, frequently immune-mediated and often a manifestation of systemic autoimmune or vasculitic disease. Immune-complex deposition and T-cell-mediated inflammation cause oedema and cellular infiltration of the sclera and episclera; in necrotising disease, occlusive vasculitis of the deep episcleral vessels leads to scleral ischaemia, necrosis, and thinning, with risk of perforation. Chronic or severe inflammation can extend to adjacent structures causing keratitis, uveitis, glaucoma, and, in posterior disease, exudative retinal detachment and optic nerve involvement.",
-  "additionalDifferentials": [
-   "Episcleritis",
-   "Anterior uveitis",
-   "Conjunctivitis",
-   "Orbital cellulitis or orbital inflammatory disease (posterior scleritis)",
-   "Infective (e.g. herpetic or pseudomonal) scleritis",
-   "Choroidal tumour or exudative retinal detachment (posterior scleritis)"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination with assessment of deep vessel involvement and response to topical phenylephrine",
-   "B-scan ultrasonography for posterior scleritis (scleral thickening and T-sign)",
-   "Inflammatory and autoimmune workup: full blood count, ESR/CRP, ANA, ANCA, rheumatoid factor",
-   "Investigations for infective causes (including syphilis and tuberculosis) when indicated",
-   "Imaging or systemic referral when an underlying vasculitis is suspected"
-  ],
-  "redFlags": [
-   "Necrotising scleritis with scleral thinning or threatened perforation",
-   "Severe pain with reduced vision indicating posterior segment or optic nerve involvement",
-   "Features of systemic vasculitis (e.g. granulomatosis with polyangiitis) requiring urgent systemic treatment",
-   "Rapid progression despite therapy suggesting infective scleritis or aggressive vasculitis"
-  ],
-  "prognosis": "Diffuse and nodular anterior scleritis usually respond to anti-inflammatory treatment with good visual outcomes, but necrotising scleritis is associated with significant ocular morbidity and, when linked to systemic vasculitis, increased mortality if the underlying disease is untreated.",
-  "pitfalls": [
-   "Mistaking scleritis for the benign, self-limiting episcleritis and undertreating it",
-   "Failing to search for and treat an underlying systemic vasculitis or connective-tissue disease",
-   "Missing posterior scleritis, which lacks obvious external redness and mimics orbital disease",
-   "Using topical steroids alone when systemic immunosuppression is required for necrotising disease"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat non-necrotising anterior scleritis first-line with systemic NSAIDs",
-   "Escalate to systemic corticosteroids for NSAID-refractory, necrotising or posterior disease",
-   "Add steroid-sparing immunosuppression such as methotrexate, mycophenolate or ciclosporin, or a biologic such as rituximab or a TNF inhibitor, for severe, necrotising or systemic-disease-associated scleritis",
-   "Investigate and treat any underlying systemic disease such as rheumatoid arthritis or ANCA-associated vasculitis including granulomatosis with polyangiitis, jointly with rheumatology",
-   "Exclude and treat infective scleritis, including tuberculosis and syphilis, with appropriate antimicrobials and withhold immunosuppression in that setting",
-   "Manage complications such as uveitis, glaucoma and keratitis, and consider scleral patch grafting for impending perforation",
-   "Coordinate ophthalmology and rheumatology follow-up, as untreated necrotising disease linked to vasculitis carries increased mortality"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scleritis-pathway",
-   "title": "Scleritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with severe, deep, boring ocular pain that is often worse at night, may radiate to the face or jaw, and characteristically disturbs sleep",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Necrotising scleritis with scleral thinning or threatened perforation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination with assessment of deep vessel involvement and response to topical phenylephrine, B-scan ultrasonography for posterior scleritis (scleral thickening and T-sign), Inflammatory and autoimmune workup:"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat non-necrotising anterior scleritis first-line with systemic NSAIDs"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking scleritis for the benign, self-limiting episcleritis and undertreating it"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scleritis."
-  }
- ],
- "tables": [
-  {
-   "id": "scleritis-matrix",
-   "title": "Scleritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with severe, deep, boring ocular pain that is often worse at night, may radiate to the face or jaw, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with severe, deep, boring ocular pain that is often worse at night, may radiate to the face or jaw, and characteristically disturbs sleep",
+      "The redness has a bluish or violaceous hue from involvement of the deep scleral vessels, unlike the bright red of episcleritis",
+      "Scleral vessels do not blanch with topical phenylephrine, which helps distinguish scleritis from episcleritis",
+      "Classified into anterior (diffuse, nodular, or necrotising) and posterior forms; necrotising scleritis is the most destructive and sight-threatening",
+      "Scleromalacia perforans is a painless necrotising form seen in long-standing rheumatoid arthritis",
+      "Roughly half of cases are associated with systemic disease, especially rheumatoid arthritis and ANCA-associated vasculitis such as granulomatosis with polyangiitis",
+      "Posterior scleritis can mimic other conditions with proptosis, pain on eye movement, and disc swelling, and is confirmed on ultrasound (T-sign)",
+      "Management is with systemic anti-inflammatory therapy: oral NSAIDs for milder disease and systemic corticosteroids or immunosuppression for necrotising or refractory cases"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination with assessment of deep vessel involvement and response to topical phenylephrine, B-scan ultrasonography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scleritis is inflammation of the sclera, frequently immune-mediated and often a manifestation of systemic autoimmune or vasculitic disease. Immune-complex deposition and T-cell-mediated inflammation cause oedema and cellular infiltration of the sclera and episclera; in necrotising disease, occlusive vasculitis of the deep episcleral vessels leads to scleral ischaemia, necrosis, and thinning, with risk of perforation. Chronic or severe inflammation can extend to adjacent structures causing keratitis, uveitis, glaucoma, and, in posterior disease, exudative retinal detachment and optic nerve involvement.",
+    "additionalDifferentials": [
+      "Episcleritis",
+      "Anterior uveitis",
+      "Conjunctivitis",
+      "Orbital cellulitis or orbital inflammatory disease (posterior scleritis)",
+      "Infective (e.g. herpetic or pseudomonal) scleritis",
+      "Choroidal tumour or exudative retinal detachment (posterior scleritis)"
     ],
-    [
-     "Primary Differentials",
-     "Episcleritis, Anterior uveitis, Conjunctivitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination with assessment of deep vessel involvement and response to topical phenylephrine",
+      "B-scan ultrasonography for posterior scleritis (scleral thickening and T-sign)",
+      "Inflammatory and autoimmune workup: full blood count, ESR/CRP, ANA, ANCA, rheumatoid factor",
+      "Investigations for infective causes (including syphilis and tuberculosis) when indicated",
+      "Imaging or systemic referral when an underlying vasculitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Treat non-necrotising anterior scleritis first-line with systemic NSAIDs",
-     "Core treatment modality"
+    "redFlags": [
+      "Necrotising scleritis with scleral thinning or threatened perforation",
+      "Severe pain with reduced vision indicating posterior segment or optic nerve involvement",
+      "Features of systemic vasculitis (e.g. granulomatosis with polyangiitis) requiring urgent systemic treatment",
+      "Rapid progression despite therapy suggesting infective scleritis or aggressive vasculitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking scleritis for the benign, self-limiting episcleritis and undertreating it",
-     "Prevent diagnostic or management error"
+    "prognosis": "Diffuse and nodular anterior scleritis usually respond to anti-inflammatory treatment with good visual outcomes, but necrotising scleritis is associated with significant ocular morbidity and, when linked to systemic vasculitis, increased mortality if the underlying disease is untreated.",
+    "pitfalls": [
+      "Mistaking scleritis for the benign, self-limiting episcleritis and undertreating it",
+      "Failing to search for and treat an underlying systemic vasculitis or connective-tissue disease",
+      "Missing posterior scleritis, which lacks obvious external redness and mimics orbital disease",
+      "Using topical steroids alone when systemic immunosuppression is required for necrotising disease"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat non-necrotising anterior scleritis first-line with systemic NSAIDs",
+      "Escalate to systemic corticosteroids for NSAID-refractory, necrotising or posterior disease",
+      "Add steroid-sparing immunosuppression such as methotrexate, mycophenolate or ciclosporin, or a biologic such as rituximab or a TNF inhibitor, for severe, necrotising or systemic-disease-associated scleritis",
+      "Investigate and treat any underlying systemic disease such as rheumatoid arthritis or ANCA-associated vasculitis including granulomatosis with polyangiitis, jointly with rheumatology",
+      "Exclude and treat infective scleritis, including tuberculosis and syphilis, with appropriate antimicrobials and withhold immunosuppression in that setting",
+      "Manage complications such as uveitis, glaucoma and keratitis, and consider scleral patch grafting for impending perforation",
+      "Coordinate ophthalmology and rheumatology follow-up, as untreated necrotising disease linked to vasculitis carries increased mortality"
     ]
-   ],
-   "caption": "Overview comparison matrix for scleritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scleritis-real-image",
-   "title": "Scleritis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "scleritis-pathway",
+      "title": "Scleritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with severe, deep, boring ocular pain that is often worse at night, may radiate to the face or jaw, and characteristically disturbs sleep",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Necrotising scleritis with scleral thinning or threatened perforation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination with assessment of deep vessel involvement and response to topical phenylephrine, B-scan ultrasonography for posterior scleritis (scleral thickening and T-sign), Inflammatory and autoimmune workup:"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat non-necrotising anterior scleritis first-line with systemic NSAIDs"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking scleritis for the benign, self-limiting episcleritis and undertreating it"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scleritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scleritis-matrix",
+      "title": "Scleritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with severe, deep, boring ocular pain that is often worse at night, may radiate to the face or jaw, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination with assessment of deep vessel involvement and response to topical phenylephrine, B-scan ultrasonography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Episcleritis, Anterior uveitis, Conjunctivitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat non-necrotising anterior scleritis first-line with systemic NSAIDs",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking scleritis for the benign, self-limiting episcleritis and undertreating it",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scleritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scleritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Deep vessel involvement and response to topical phenylephrine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Posterior scleritis: scleral thickening and T-sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory and autoimmune workup",
+          "cells": [
+            {
+              "text": "FBC, ESR/CRP, ANA, ANCA, rheumatoid factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective screen",
+          "cells": [
+            {
+              "text": "Syphilis and tuberculosis when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging or systemic referral",
+          "cells": [
+            {
+              "text": "When underlying vasculitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Episcleritis",
+          "cells": [
+            {
+              "text": "Benign and self-limiting; mistaking scleritis for it leads to undertreatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective scleritis",
+          "cells": [
+            {
+              "text": "Herpetic or pseudomonal; suspect with rapid progression despite therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior scleritis mimics",
+          "cells": [
+            {
+              "text": "Orbital inflammation, choroidal tumour or exudative detachment; B-scan T-sign supports scleritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic NSAIDs",
+          "cells": [
+            {
+              "text": "First line for non-necrotising anterior scleritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "NSAID-refractory, necrotising or posterior disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Methotrexate, mycophenolate, ciclosporin, rituximab or a TNF inhibitor for severe or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying disease",
+          "cells": [
+            {
+              "text": "Such as rheumatoid arthritis or ANCA-associated vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infection",
+          "cells": [
+            {
+              "text": "Tuberculosis and syphilis: antimicrobials and withhold immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication care",
+          "cells": [
+            {
+              "text": "Uveitis, glaucoma, keratitis; scleral patch graft for impending perforation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scleritis-dx-mgmt",
+      "title": "Diagnosis and management of Scleritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe deep ocular pain with scleral inflammation: suspected scleritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Scleral thinning, reduced vision, systemic vasculitis or rapid progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology and rheumatology: systemic steroids, exclude infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp with phenylephrine, B-scan, ESR/CRP, ANA, ANCA, infective screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Non-necrotising anterior disease without infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat infection or escalate to steroids for necrotising or posterior disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic NSAIDs first line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids if NSAID-refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add methotrexate, mycophenolate, rituximab or TNF inhibitor if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the underlying vasculitis or connective-tissue disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Anterior forms respond well; necrotising disease carries risk to the eye and life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

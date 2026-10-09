@@ -1,176 +1,483 @@
 {
- "id": "syringoma",
- "name": "Syringoma",
- "aliases": [
-  "eccrine syringoma",
-  "periorbital syringoma"
- ],
- "class": "non_infective",
- "system": "Dermatology / Oncology",
- "specialty": "Dermatopathology / Ophthalmic Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / WHO Classification of Skin Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign adnexal tumour of eccrine sweat-duct differentiation, presenting as small skin-coloured to yellowish papules",
-   "Most characteristically clustered symmetrically on the lower eyelids and periorbital skin, more common in women",
-   "Eruptive syringomas can appear in crops on the trunk, and there is an association with Down syndrome",
-   "Lesions are usually asymptomatic and stable, sought mainly for cosmetic reasons rather than medical concern",
-   "Histology shows small ducts lined by two layers of epithelial cells, some with a comma-like or tadpole tail, embedded in a sclerotic dermal stroma",
-   "The tadpole/comma-shaped ducts distinguish syringoma from other basaloid adnexal tumours",
-   "Treatment is optional and cosmetic; options include ablative or destructive methods, with recurrence common because lesions are numerous"
+  "id": "syringoma",
+  "name": "Syringoma",
+  "aliases": [
+    "eccrine syringoma",
+    "periorbital syringoma"
   ],
-  "pathophysiology": "Syringoma is a benign adnexal neoplasm derived from the intraepidermal portion of the eccrine sweat duct. Histologically it consists of numerous small ducts and solid epithelial strands set within a fibrous, often sclerotic, dermal stroma; the ducts are lined by two layers of cuboidal cells and many acquire a characteristic comma-like or tadpole configuration. The lesions represent a proliferation of well-differentiated ductal structures rather than an aggressive process, so they remain confined to the dermis without invasion or metastatic potential. Hormonal and genetic influences are thought to contribute, reflected in the female predominance, the tendency to periorbital clustering, and the eruptive forms associated with certain systemic conditions.",
-  "additionalDifferentials": [
-   "Xanthelasma (periorbital)",
-   "Trichoepithelioma",
-   "Milia and small epidermoid cysts",
-   "Basal cell carcinoma (superficial or micronodular)",
-   "Microcystic adnexal carcinoma (histological mimic)",
-   "Sebaceous hyperplasia"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination of the periorbital and eyelid skin for characteristic clustered papules",
-   "Skin biopsy with histopathology showing tadpole-shaped ducts in sclerotic stroma",
-   "Dermoscopy to help distinguish from xanthelasma and other papules",
-   "Immunohistochemistry in equivocal cases to distinguish from microcystic adnexal carcinoma",
-   "Assessment for associated conditions when lesions are eruptive or widespread"
-  ],
-  "redFlags": [
-   "An indurated infiltrative plaque rather than discrete papules, raising concern for microcystic adnexal carcinoma",
-   "Rapid change or ulceration atypical for benign syringoma",
-   "Widespread eruptive lesions prompting evaluation for an associated systemic condition"
-  ],
-  "prognosis": "Syringomas are entirely benign with no malignant potential; they are cosmetically bothersome and tend to persist, and treatment can be complicated by recurrence and scarring given the number and depth of lesions.",
-  "pitfalls": [
-   "Confusing periorbital syringomas with xanthelasma and pursuing lipid-lowering rather than dermatological assessment",
-   "Misinterpreting the sclerotic ductal histology as microcystic adnexal carcinoma or morphoeic basal cell carcinoma",
-   "Promising complete cosmetic clearance despite a high recurrence rate",
-   "Overlooking the association with systemic conditions in eruptive presentations"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "WHO Classification of Skin Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Syringoma is a benign eccrine adnexal tumour, so treatment is elective and cosmetic rather than disease directed, with no stage or intent based systemic therapy pathway",
-   "Asymptomatic, stable, cosmetically acceptable lesions can simply be observed with reassurance, no treatment is medically required",
-   "Cosmetically bothersome periorbital or clustered lesions are managed with destructive or ablative modalities such as ablative laser resurfacing, electrodesiccation or electrocautery, dermabrasion, or chemical destruction with trichloroacetic acid",
-   "Isolated or few papules can be treated with surgical excision or focal cautery, though excising every lesion in an eruptive or densely clustered case is impractical and scar prone",
-   "Eruptive or widespread syringomatosis should prompt work-up for an associated systemic condition, such as Down syndrome or a metabolic or endocrine trigger, rather than escalating local destructive therapy",
-   "There is no first-line or second-line systemic therapy ladder, sequencing is escalation of cosmetic intervention from observation to destructive treatment to repeat treatment for recurrence",
-   "Surgery is limited to excising an individual troublesome papule or obtaining a biopsy before destructive treatment when a lesion looks atypical, it is not used as definitive therapy for numerous lesions",
-   "Radiotherapy and systemic therapy including chemotherapy, targeted therapy, or immunotherapy have no established role in benign syringoma",
-   "Follow-up is driven by cosmetic goals and recurrence rather than oncologic surveillance, and recurrence after destructive treatment is common so patients should be counselled that repeat sessions are often needed",
-   "Any lesion that becomes indurated, infiltrative, rapidly enlarging, or ulcerated should prompt re-biopsy rather than repeat cosmetic treatment, to exclude a malignant mimic such as microcystic adnexal carcinoma, morpheaform basal cell carcinoma, or desmoplastic trichoepithelioma",
-   "Refer to dermatology, or ophthalmology for periorbital lesions, for diagnostic confirmation and destructive or ablative cosmetic treatment",
-   "Refer for repeat biopsy and to a specialist familiar with adnexal tumour pathology whenever a lesion behaves atypically, so a malignant mimic is not treated and destroyed like a benign syringoma",
-   "Refer for genetics, paediatric, or endocrine assessment when syringomas are eruptive and widespread and an associated systemic condition is suspected but not yet established"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "syringoma-pathway",
-   "title": "Syringoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign adnexal tumour of eccrine sweat-duct differentiation, presenting as small skin-coloured to yellowish papules",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An indurated infiltrative plaque rather than discrete papules, raising concern for microcystic adnexal carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination of the periorbital and eyelid skin for characteristic clustered papules, Skin biopsy with histopathology showing tadpole-shaped ducts in sclerotic stroma, Dermoscopy to help distinguish from"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Syringoma is a benign eccrine adnexal tumour, so treatment is elective and cosmetic rather than disease directed, with no stage or intent based systemic therapy pathway"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing periorbital syringomas with xanthelasma and pursuing lipid-lowering rather than dermatological assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of syringoma."
-  }
- ],
- "tables": [
-  {
-   "id": "syringoma-matrix",
-   "title": "Syringoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign adnexal tumour of eccrine sweat-duct differentiation, presenting as small skin-coloured to yellowish papules",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Oncology",
+  "specialty": "Dermatopathology / Ophthalmic Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / WHO Classification of Skin Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign adnexal tumour of eccrine sweat-duct differentiation, presenting as small skin-coloured to yellowish papules",
+      "Most characteristically clustered symmetrically on the lower eyelids and periorbital skin, more common in women",
+      "Eruptive syringomas can appear in crops on the trunk, and there is an association with Down syndrome",
+      "Lesions are usually asymptomatic and stable, sought mainly for cosmetic reasons rather than medical concern",
+      "Histology shows small ducts lined by two layers of epithelial cells, some with a comma-like or tadpole tail, embedded in a sclerotic dermal stroma",
+      "The tadpole/comma-shaped ducts distinguish syringoma from other basaloid adnexal tumours",
+      "Treatment is optional and cosmetic; options include ablative or destructive methods, with recurrence common because lesions are numerous"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination of the periorbital and eyelid skin for characteristic clustered papules, Skin biopsy with histopathology",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Syringoma is a benign adnexal neoplasm derived from the intraepidermal portion of the eccrine sweat duct. Histologically it consists of numerous small ducts and solid epithelial strands set within a fibrous, often sclerotic, dermal stroma; the ducts are lined by two layers of cuboidal cells and many acquire a characteristic comma-like or tadpole configuration. The lesions represent a proliferation of well-differentiated ductal structures rather than an aggressive process, so they remain confined to the dermis without invasion or metastatic potential. Hormonal and genetic influences are thought to contribute, reflected in the female predominance, the tendency to periorbital clustering, and the eruptive forms associated with certain systemic conditions.",
+    "additionalDifferentials": [
+      "Xanthelasma (periorbital)",
+      "Trichoepithelioma",
+      "Milia and small epidermoid cysts",
+      "Basal cell carcinoma (superficial or micronodular)",
+      "Microcystic adnexal carcinoma (histological mimic)",
+      "Sebaceous hyperplasia"
     ],
-    [
-     "Primary Differentials",
-     "Xanthelasma (periorbital), Trichoepithelioma, Milia and small epidermoid cysts",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination of the periorbital and eyelid skin for characteristic clustered papules",
+      "Skin biopsy with histopathology showing tadpole-shaped ducts in sclerotic stroma",
+      "Dermoscopy to help distinguish from xanthelasma and other papules",
+      "Immunohistochemistry in equivocal cases to distinguish from microcystic adnexal carcinoma",
+      "Assessment for associated conditions when lesions are eruptive or widespread"
     ],
-    [
-     "Management Strategy",
-     "Syringoma is a benign eccrine adnexal tumour, so treatment is elective and cosmetic rather than disease directed, with no stage",
-     "Core treatment modality"
+    "redFlags": [
+      "An indurated infiltrative plaque rather than discrete papules, raising concern for microcystic adnexal carcinoma",
+      "Rapid change or ulceration atypical for benign syringoma",
+      "Widespread eruptive lesions prompting evaluation for an associated systemic condition"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing periorbital syringomas with xanthelasma and pursuing lipid-lowering rather than dermatological assessment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Syringomas are entirely benign with no malignant potential; they are cosmetically bothersome and tend to persist, and treatment can be complicated by recurrence and scarring given the number and depth of lesions.",
+    "pitfalls": [
+      "Confusing periorbital syringomas with xanthelasma and pursuing lipid-lowering rather than dermatological assessment",
+      "Misinterpreting the sclerotic ductal histology as microcystic adnexal carcinoma or morphoeic basal cell carcinoma",
+      "Promising complete cosmetic clearance despite a high recurrence rate",
+      "Overlooking the association with systemic conditions in eruptive presentations"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "WHO Classification of Skin Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Syringoma is a benign eccrine adnexal tumour, so treatment is elective and cosmetic rather than disease directed, with no stage or intent based systemic therapy pathway",
+      "Asymptomatic, stable, cosmetically acceptable lesions can simply be observed with reassurance, no treatment is medically required",
+      "Cosmetically bothersome periorbital or clustered lesions are managed with destructive or ablative modalities such as ablative laser resurfacing, electrodesiccation or electrocautery, dermabrasion, or chemical destruction with trichloroacetic acid",
+      "Isolated or few papules can be treated with surgical excision or focal cautery, though excising every lesion in an eruptive or densely clustered case is impractical and scar prone",
+      "Eruptive or widespread syringomatosis should prompt work-up for an associated systemic condition, such as Down syndrome or a metabolic or endocrine trigger, rather than escalating local destructive therapy",
+      "There is no first-line or second-line systemic therapy ladder, sequencing is escalation of cosmetic intervention from observation to destructive treatment to repeat treatment for recurrence",
+      "Surgery is limited to excising an individual troublesome papule or obtaining a biopsy before destructive treatment when a lesion looks atypical, it is not used as definitive therapy for numerous lesions",
+      "Radiotherapy and systemic therapy including chemotherapy, targeted therapy, or immunotherapy have no established role in benign syringoma",
+      "Follow-up is driven by cosmetic goals and recurrence rather than oncologic surveillance, and recurrence after destructive treatment is common so patients should be counselled that repeat sessions are often needed",
+      "Any lesion that becomes indurated, infiltrative, rapidly enlarging, or ulcerated should prompt re-biopsy rather than repeat cosmetic treatment, to exclude a malignant mimic such as microcystic adnexal carcinoma, morpheaform basal cell carcinoma, or desmoplastic trichoepithelioma",
+      "Refer to dermatology, or ophthalmology for periorbital lesions, for diagnostic confirmation and destructive or ablative cosmetic treatment",
+      "Refer for repeat biopsy and to a specialist familiar with adnexal tumour pathology whenever a lesion behaves atypically, so a malignant mimic is not treated and destroyed like a benign syringoma",
+      "Refer for genetics, paediatric, or endocrine assessment when syringomas are eruptive and widespread and an associated systemic condition is suspected but not yet established"
     ]
-   ],
-   "caption": "Overview comparison matrix for syringoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "syringoma-real-image",
-   "title": "Syringoma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "syringoma-pathway",
+      "title": "Syringoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign adnexal tumour of eccrine sweat-duct differentiation, presenting as small skin-coloured to yellowish papules",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An indurated infiltrative plaque rather than discrete papules, raising concern for microcystic adnexal carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination of the periorbital and eyelid skin for characteristic clustered papules, Skin biopsy with histopathology showing tadpole-shaped ducts in sclerotic stroma, Dermoscopy to help distinguish from"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Syringoma is a benign eccrine adnexal tumour, so treatment is elective and cosmetic rather than disease directed, with no stage or intent based systemic therapy pathway"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing periorbital syringomas with xanthelasma and pursuing lipid-lowering rather than dermatological assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of syringoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "syringoma-matrix",
+      "title": "Syringoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign adnexal tumour of eccrine sweat-duct differentiation, presenting as small skin-coloured to yellowish papules",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination of the periorbital and eyelid skin for characteristic clustered papules, Skin biopsy with histopathology",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Xanthelasma (periorbital), Trichoepithelioma, Milia and small epidermoid cysts",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Syringoma is a benign eccrine adnexal tumour, so treatment is elective and cosmetic rather than disease directed, with no stage",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing periorbital syringomas with xanthelasma and pursuing lipid-lowering rather than dermatological assessment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for syringoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / WHO Classification of Skin Tumours",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "syringoma-dx-mgmt",
+      "title": "Diagnosis and management of Syringoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected syringoma: multiple skin-coloured periorbital papules, often symmetrical",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (indurated plaque, ulceration, rapid change, or eruptive spread)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Re-biopsy to exclude microcystic adnexal carcinoma; systemic work-up if eruptive",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination; dermoscopy; skin biopsy showing tadpole-shaped ducts",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show tadpole-shaped ducts in a sclerotic stroma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider xanthelasma, trichoepithelioma or adnexal carcinoma; immunohistochemistry",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe asymptomatic, stable, cosmetically acceptable lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Destructive or ablative treatment for bothersome periorbital lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Excise isolated or few papules, avoiding extensive scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Work up an associated systemic condition if eruptive",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Counsel that recurrence after destructive treatment is common",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with no malignant potential; cosmetic concern with frequent recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "syringoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of periorbital and eyelid skin",
+          "cells": [
+            {
+              "text": "Characteristic clustered papules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Tadpole-shaped ducts in a sclerotic stroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Helps distinguish from xanthelasma and other papules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "Equivocal cases; distinguishes microcystic adnexal carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for associated conditions",
+          "cells": [
+            {
+              "text": "Eruptive or widespread lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syringoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Xanthelasma",
+          "cells": [
+            {
+              "text": "Similar periorbital papules; syringoma shows tadpole-shaped ducts on histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microcystic adnexal carcinoma",
+          "cells": [
+            {
+              "text": "Histological mimic; an indurated, infiltrative plaque rather than discrete papules raises concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichoepithelioma",
+          "cells": [
+            {
+              "text": "Another basaloid adnexal tumour; tadpole-shaped ducts distinguish syringoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "syringoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation and reassurance",
+          "cells": [
+            {
+              "text": "Asymptomatic, stable, cosmetically acceptable lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Destructive or ablative treatment",
+          "cells": [
+            {
+              "text": "Cosmetically bothersome periorbital or clustered lesions: laser resurfacing, electrodesiccation, electrocautery, dermabrasion or chemical destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision or focal cautery",
+          "cells": [
+            {
+              "text": "Isolated or few papules; excising every lesion in eruptive cases is impractical and scar prone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Work-up for an associated systemic condition",
+          "cells": [
+            {
+              "text": "Eruptive or widespread syringomatosis, such as Down syndrome or a metabolic or endocrine trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-biopsy",
+          "cells": [
+            {
+              "text": "Indurated, infiltrative, rapidly enlarging or ulcerated lesions, to exclude a malignant mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology or ophthalmology referral",
+          "cells": [
+            {
+              "text": "Diagnostic confirmation and cosmetic treatment; ophthalmology for periorbital lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence counselling",
+          "cells": [
+            {
+              "text": "Repeat sessions are often needed after destructive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No systemic or radiotherapy role",
+          "cells": [
+            {
+              "text": "No established role in benign syringoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

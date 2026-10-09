@@ -1,173 +1,442 @@
 {
- "id": "de_quervain_tenosynovitis",
- "name": "De Quervain tenosynovitis",
- "aliases": [
-  "de Quervain's disease",
-  "first dorsal compartment tenosynovitis",
-  "radial styloid tenosynovitis",
-  "mother's wrist"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Sports & Musculoskeletal Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon / standard sports medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with pain and tenderness over the radial styloid, aggravated by thumb and wrist movement and by gripping and lifting",
-   "It affects the first dorsal extensor compartment, involving abductor pollicis longus and extensor pollicis brevis as they pass under the extensor retinaculum",
-   "It is commonly seen in new parents lifting infants and in occupations or activities with repetitive thumb use, and more often in women, especially postpartum",
-   "The Finkelstein test, reproducing pain when the thumb is flexed into the palm and the wrist ulnar-deviated, supports the diagnosis",
-   "The underlying pathology is thickening of the tendon sheath and stenosis of the compartment rather than a purely inflammatory tenosynovitis",
-   "First-line management is activity modification, a thumb spica splint, and analgesia by principle",
-   "Corticosteroid injection into the first dorsal compartment is effective for cases not settling with conservative measures",
-   "A separating septum within the compartment can reduce injection success and may need to be addressed surgically",
-   "Surgical release of the first dorsal compartment is reserved for refractory cases, protecting the superficial radial nerve"
+  "id": "de_quervain_tenosynovitis",
+  "name": "De Quervain tenosynovitis",
+  "aliases": [
+    "de Quervain's disease",
+    "first dorsal compartment tenosynovitis",
+    "radial styloid tenosynovitis",
+    "mother's wrist"
   ],
-  "pathophysiology": "De Quervain tenosynovitis is a stenosing tenosynovitis of the first dorsal extensor compartment of the wrist. Repetitive or sustained thumb and wrist loading causes thickening and myxoid degeneration of the tendon sheath and retinaculum, narrowing the fibro-osseous tunnel through which abductor pollicis longus and extensor pollicis brevis run. The resulting friction and impaired tendon gliding produce pain over the radial styloid.",
-  "additionalDifferentials": [
-   "Thumb carpometacarpal (basal joint) osteoarthritis",
-   "Intersection syndrome",
-   "Wartenberg syndrome (superficial radial nerve entrapment)",
-   "Scaphoid fracture or non-union",
-   "Radiocarpal or scaphotrapezial osteoarthritis",
-   "Wrist ganglion"
-  ],
-  "additionalInvestigations": [
-   "Usually a clinical diagnosis based on history and the Finkelstein test",
-   "Ultrasound to confirm thickening of the retinaculum and tendon sheath and to detect a septum",
-   "Plain radiographs if basal joint arthritis or a bony cause is suspected",
-   "MRI only in atypical or refractory cases",
-   "Assessment of the superficial radial nerve when nerve irritation is suspected"
-  ],
-  "redFlags": [
-   "Signs of infection such as warmth, spreading erythema, fever, or a penetrating injury",
-   "Neurological symptoms suggesting superficial radial nerve involvement",
-   "History of trauma raising concern for scaphoid or other fracture",
-   "Failure to respond to appropriate treatment, prompting diagnostic review"
-  ],
-  "prognosis": "Most cases respond well to splinting and corticosteroid injection, and postpartum cases often settle as hormonal and mechanical factors resolve; a minority need surgical release, which is generally successful.",
-  "pitfalls": [
-   "Confusing it with thumb basal joint arthritis, which needs different treatment",
-   "Injuring or overlooking the superficial radial nerve during injection or surgery",
-   "Failing to recognise a compartment septum causing injection failure",
-   "Neglecting activity modification so symptoms persist or recur"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Advise activity modification, avoiding provoking thumb and wrist movements, and immobilise in a thumb spica splint",
-   "Provide analgesia with oral or topical non-steroidal anti-inflammatory drugs",
-   "Offer corticosteroid injection into the first dorsal extensor compartment for persistent symptoms, which is often highly effective",
-   "Refer for hand therapy with tendon-gliding and graded strengthening as symptoms settle",
-   "Reassure postpartum patients that symptoms often resolve as hormonal and mechanical factors improve",
-   "Reserve surgical decompression by first dorsal compartment release for refractory cases, taking care to protect the superficial radial nerve"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "de_quervain_tenosynovitis-pathway",
-   "title": "De Quervain tenosynovitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with pain and tenderness over the radial styloid, aggravated by thumb and wrist movement and by gripping and lifting",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of infection such as warmth, spreading erythema, fever, or a penetrating injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Usually a clinical diagnosis based on history and the Finkelstein test, Ultrasound to confirm thickening of the retinaculum and tendon sheath and to detect a septum, Plain radiographs if basal joint arthritis or a bony"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Advise activity modification, avoiding provoking thumb and wrist movements, and immobilise in a thumb spica splint"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with thumb basal joint arthritis, which needs different treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of de quervain tenosynovitis."
-  }
- ],
- "tables": [
-  {
-   "id": "de_quervain_tenosynovitis-matrix",
-   "title": "De Quervain tenosynovitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with pain and tenderness over the radial styloid, aggravated by thumb and wrist movement and by gripping and lifting",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Sports & Musculoskeletal Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon / standard sports medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with pain and tenderness over the radial styloid, aggravated by thumb and wrist movement and by gripping and lifting",
+      "It affects the first dorsal extensor compartment, involving abductor pollicis longus and extensor pollicis brevis as they pass under the extensor retinaculum",
+      "It is commonly seen in new parents lifting infants and in occupations or activities with repetitive thumb use, and more often in women, especially postpartum",
+      "The Finkelstein test, reproducing pain when the thumb is flexed into the palm and the wrist ulnar-deviated, supports the diagnosis",
+      "The underlying pathology is thickening of the tendon sheath and stenosis of the compartment rather than a purely inflammatory tenosynovitis",
+      "First-line management is activity modification, a thumb spica splint, and analgesia by principle",
+      "Corticosteroid injection into the first dorsal compartment is effective for cases not settling with conservative measures",
+      "A separating septum within the compartment can reduce injection success and may need to be addressed surgically",
+      "Surgical release of the first dorsal compartment is reserved for refractory cases, protecting the superficial radial nerve"
     ],
-    [
-     "Key Investigations",
-     "Usually a clinical diagnosis based on history and the Finkelstein test, Ultrasound to confirm thickening of the retinaculum and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "De Quervain tenosynovitis is a stenosing tenosynovitis of the first dorsal extensor compartment of the wrist. Repetitive or sustained thumb and wrist loading causes thickening and myxoid degeneration of the tendon sheath and retinaculum, narrowing the fibro-osseous tunnel through which abductor pollicis longus and extensor pollicis brevis run. The resulting friction and impaired tendon gliding produce pain over the radial styloid.",
+    "additionalDifferentials": [
+      "Thumb carpometacarpal (basal joint) osteoarthritis",
+      "Intersection syndrome",
+      "Wartenberg syndrome (superficial radial nerve entrapment)",
+      "Scaphoid fracture or non-union",
+      "Radiocarpal or scaphotrapezial osteoarthritis",
+      "Wrist ganglion"
     ],
-    [
-     "Primary Differentials",
-     "Thumb carpometacarpal (basal joint) osteoarthritis, Intersection syndrome, Wartenberg syndrome (superficial radial nerve",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Usually a clinical diagnosis based on history and the Finkelstein test",
+      "Ultrasound to confirm thickening of the retinaculum and tendon sheath and to detect a septum",
+      "Plain radiographs if basal joint arthritis or a bony cause is suspected",
+      "MRI only in atypical or refractory cases",
+      "Assessment of the superficial radial nerve when nerve irritation is suspected"
     ],
-    [
-     "Management Strategy",
-     "Advise activity modification, avoiding provoking thumb and wrist movements, and immobilise in a thumb spica splint",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of infection such as warmth, spreading erythema, fever, or a penetrating injury",
+      "Neurological symptoms suggesting superficial radial nerve involvement",
+      "History of trauma raising concern for scaphoid or other fracture",
+      "Failure to respond to appropriate treatment, prompting diagnostic review"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with thumb basal joint arthritis, which needs different treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases respond well to splinting and corticosteroid injection, and postpartum cases often settle as hormonal and mechanical factors resolve; a minority need surgical release, which is generally successful.",
+    "pitfalls": [
+      "Confusing it with thumb basal joint arthritis, which needs different treatment",
+      "Injuring or overlooking the superficial radial nerve during injection or surgery",
+      "Failing to recognise a compartment septum causing injection failure",
+      "Neglecting activity modification so symptoms persist or recur"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Advise activity modification, avoiding provoking thumb and wrist movements, and immobilise in a thumb spica splint",
+      "Provide analgesia with oral or topical non-steroidal anti-inflammatory drugs",
+      "Offer corticosteroid injection into the first dorsal extensor compartment for persistent symptoms, which is often highly effective",
+      "Refer for hand therapy with tendon-gliding and graded strengthening as symptoms settle",
+      "Reassure postpartum patients that symptoms often resolve as hormonal and mechanical factors improve",
+      "Reserve surgical decompression by first dorsal compartment release for refractory cases, taking care to protect the superficial radial nerve"
     ]
-   ],
-   "caption": "Overview comparison matrix for de quervain tenosynovitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "de-quervain-tenosynovitis-real-image",
-   "title": "De Quervain tenosynovitis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "de_quervain_tenosynovitis-pathway",
+      "title": "De Quervain tenosynovitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with pain and tenderness over the radial styloid, aggravated by thumb and wrist movement and by gripping and lifting",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of infection such as warmth, spreading erythema, fever, or a penetrating injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Usually a clinical diagnosis based on history and the Finkelstein test, Ultrasound to confirm thickening of the retinaculum and tendon sheath and to detect a septum, Plain radiographs if basal joint arthritis or a bony"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Advise activity modification, avoiding provoking thumb and wrist movements, and immobilise in a thumb spica splint"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with thumb basal joint arthritis, which needs different treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of de quervain tenosynovitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "de_quervain_tenosynovitis-matrix",
+      "title": "De Quervain tenosynovitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with pain and tenderness over the radial styloid, aggravated by thumb and wrist movement and by gripping and lifting",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Usually a clinical diagnosis based on history and the Finkelstein test, Ultrasound to confirm thickening of the retinaculum and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thumb carpometacarpal (basal joint) osteoarthritis, Intersection syndrome, Wartenberg syndrome (superficial radial nerve",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Advise activity modification, avoiding provoking thumb and wrist movements, and immobilise in a thumb spica splint",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with thumb basal joint arthritis, which needs different treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for de quervain tenosynovitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon / standard sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "de_quervain_tenosynovitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Finkelstein test with history",
+          "cells": [
+            {
+              "text": "Usually sufficient for a clinical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Thickened retinaculum and tendon sheath; detects a septum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Basal joint arthritis or a bony cause, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "de_quervain_tenosynovitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thumb basal joint osteoarthritis",
+          "cells": [
+            {
+              "text": "Needs different treatment; confirmed with radiographs if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scaphoid fracture or non-union",
+          "cells": [
+            {
+              "text": "Trauma history raises concern for it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superficial radial nerve entrapment",
+          "cells": [
+            {
+              "text": "Neurological symptoms in the superficial radial nerve distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective tenosynovitis",
+          "cells": [
+            {
+              "text": "Warmth, spreading erythema, fever or a penetrating injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "de_quervain_tenosynovitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification and splint",
+          "cells": [
+            {
+              "text": "Avoid provoking thumb and wrist movements; thumb spica splint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Oral or topical non-steroidal anti-inflammatory drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "First dorsal extensor compartment for persistent symptoms; often highly effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Tendon-gliding and graded strengthening as symptoms settle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum reassurance",
+          "cells": [
+            {
+              "text": "Symptoms often resolve as hormonal and mechanical factors improve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical release",
+          "cells": [
+            {
+              "text": "First dorsal compartment release for refractory cases; protect the superficial radial nerve"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "de_quervain_tenosynovitis-dx-mgmt",
+      "title": "Diagnosis and management of De Quervain tenosynovitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected de Quervain tenosynovitis: radial wrist pain worse with thumb movement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infection signs, nerve symptoms, or trauma suggesting scaphoid injury)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat infection or investigate a suspected scaphoid fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Finkelstein test with history; ultrasound for sheath thickening or a septum",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ultrasound confirm first dorsal compartment thickening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Review basal joint arthritis, scaphoid pathology or superficial radial nerve entrapment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Splint and activity modification with NSAIDs for analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroid injection into the first dorsal extensor compartment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand therapy with tendon-gliding and graded strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "First dorsal compartment release for refractory cases; protect the nerve",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most settle with splinting and injection; surgery is generally successful",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,527 @@
 {
- "id": "analphalipoproteinemia",
- "name": "Analphalipoproteinaemia",
- "aliases": [
-  "familial HDL deficiency",
-  "high-density lipoprotein deficiency",
-  "apolipoprotein A-I deficiency",
-  "APOA1",
-  "ABCA1"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley and Daroff Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Term for severe deficiency of high-density lipoprotein, in which plasma HDL cholesterol and apolipoprotein A-I are extremely low or absent",
-   "Includes ABCA1-related Tangier disease and forms caused by variants in APOA1, the gene encoding the principal HDL apolipoprotein",
-   "Shares clinical features with Tangier disease, including very low HDL and total cholesterol, hepatosplenomegaly, and in some cases enlarged lipid-laden tonsils",
-   "Peripheral neuropathy can occur and may be relapsing and multifocal or produce a syringomyelia-like dissociated sensory loss with preferential loss of pain and temperature sensation",
-   "Certain APOA1 variants also cause hereditary systemic amyloidosis with organ deposition, adding to the phenotypic range",
-   "A markedly reduced HDL cholesterol on a routine lipid panel is the key laboratory clue and should prompt further evaluation when accompanied by neuropathy or organomegaly",
-   "Diagnosis combines the characteristic lipid abnormalities with genetic testing of ABCA1 and APOA1"
+  "id": "analphalipoproteinemia",
+  "name": "Analphalipoproteinaemia",
+  "aliases": [
+    "familial HDL deficiency",
+    "high-density lipoprotein deficiency",
+    "apolipoprotein A-I deficiency",
+    "APOA1",
+    "ABCA1"
   ],
-  "pathophysiology": "Analphalipoproteinaemia describes states of profound high-density lipoprotein deficiency arising from defects in HDL metabolism. In ABCA1-related disease (Tangier disease), impaired cholesterol efflux prevents lipidation of apolipoprotein A-I, which is then rapidly degraded; in APOA1-related disease, variants reduce or abolish functional apolipoprotein A-I itself. Either mechanism leaves the body unable to assemble normal HDL particles, so HDL cholesterol and apolipoprotein A-I are very low and cholesterol accumulates within tissue macrophages, producing hepatosplenomegaly and, in some cases, lipid-laden tonsils. Deposition of lipid within Schwann cells and peripheral nerves is thought to drive the neuropathy, which can be multifocal and relapsing or cause a pseudosyringomyelic dissociated sensory loss. Some APOA1 variants additionally form amyloid deposits.",
-  "additionalDifferentials": [
-   "Tangier disease (as a specific ABCA1 cause)",
-   "Lecithin-cholesterol acyltransferase (LCAT) deficiency",
-   "Secondary causes of low HDL (severe illness, drugs, metabolic syndrome)",
-   "Syringomyelia and other cord lesions",
-   "Vasculitic mononeuritis multiplex",
-   "Hereditary amyloid neuropathy"
-  ],
-  "additionalInvestigations": [
-   "Fasting lipid panel demonstrating very low HDL cholesterol and apolipoprotein A-I",
-   "Sequencing of ABCA1 and APOA1 to define the molecular cause",
-   "Nerve conduction studies to characterise the neuropathy",
-   "Assessment for hepatosplenomegaly and lipid deposition in tonsils",
-   "Evaluation for systemic amyloidosis where an APOA1 amyloidogenic variant is suspected",
-   "Cardiovascular risk assessment in view of altered HDL-mediated protection"
-  ],
-  "redFlags": [
-   "Rapidly progressive multifocal neuropathy causing significant disability",
-   "Features of systemic amyloidosis such as renal or hepatic involvement with APOA1 variants",
-   "Progressive dissociated sensory loss raising concern for a spinal cord lesion",
-   "Painless burns or injuries from unrecognised loss of pain and temperature sensation"
-  ],
-  "prognosis": "Variable and dependent on the underlying gene; neuropathy can be disabling, and APOA1-related amyloidosis may affect vital organs and thereby prognosis, while cardiovascular risk is also altered by the HDL deficiency.",
-  "pitfalls": [
-   "Dismissing a very low HDL as laboratory error rather than a diagnostic clue",
-   "Failing to distinguish ABCA1 (Tangier) from APOA1-related disease, which can cause amyloidosis",
-   "Mistaking pseudosyringomyelic sensory loss for a primary cord lesion",
-   "Overlooking secondary causes of low HDL before pursuing a genetic diagnosis"
-  ],
-  "references": [
-   "GeneReviews / OMIM: APOA1- and ABCA1-Related HDL Deficiency",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise that no specific therapy restores the deficient high-density lipoprotein, so care is supportive and directed at complications",
-   "Modify cardiovascular risk through control of other lipids, blood pressure and glycaemia and through smoking cessation",
-   "Manage the peripheral neuropathy with neuropathic pain agents, physiotherapy and functional support",
-   "Monitor for systemic amyloidosis where an amyloidogenic APOA1 variant is present, assessing affected organs",
-   "Assess periodically for hepatosplenomegaly and lipid deposition",
-   "Confirm the molecular cause by sequencing ABCA1 and APOA1 and offer genetic counselling and family screening",
-   "Coordinate care across neurology and lipid specialist services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "analphalipoproteinemia-pathway",
-   "title": "Analphalipoproteinaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Term for severe deficiency of high-density lipoprotein, in which plasma HDL cholesterol and apolipoprotein A-I are extremely low or absent",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive multifocal neuropathy causing significant disability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting lipid panel demonstrating very low HDL cholesterol and apolipoprotein A-I, Sequencing of ABCA1 and APOA1 to define the molecular cause, Nerve conduction studies to characterise the neuropathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise that no specific therapy restores the deficient high-density lipoprotein, so care is supportive and directed at complications"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing a very low HDL as laboratory error rather than a diagnostic clue"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of analphalipoproteinaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "analphalipoproteinemia-matrix",
-   "title": "Analphalipoproteinaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Term for severe deficiency of high-density lipoprotein, in which plasma HDL cholesterol and apolipoprotein A-I are extremely low",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley and Daroff Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Term for severe deficiency of high-density lipoprotein, in which plasma HDL cholesterol and apolipoprotein A-I are extremely low or absent",
+      "Includes ABCA1-related Tangier disease and forms caused by variants in APOA1, the gene encoding the principal HDL apolipoprotein",
+      "Shares clinical features with Tangier disease, including very low HDL and total cholesterol, hepatosplenomegaly, and in some cases enlarged lipid-laden tonsils",
+      "Peripheral neuropathy can occur and may be relapsing and multifocal or produce a syringomyelia-like dissociated sensory loss with preferential loss of pain and temperature sensation",
+      "Certain APOA1 variants also cause hereditary systemic amyloidosis with organ deposition, adding to the phenotypic range",
+      "A markedly reduced HDL cholesterol on a routine lipid panel is the key laboratory clue and should prompt further evaluation when accompanied by neuropathy or organomegaly",
+      "Diagnosis combines the characteristic lipid abnormalities with genetic testing of ABCA1 and APOA1"
     ],
-    [
-     "Key Investigations",
-     "Fasting lipid panel demonstrating very low HDL cholesterol and apolipoprotein A-I, Sequencing of ABCA1 and APOA1 to define the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Analphalipoproteinaemia describes states of profound high-density lipoprotein deficiency arising from defects in HDL metabolism. In ABCA1-related disease (Tangier disease), impaired cholesterol efflux prevents lipidation of apolipoprotein A-I, which is then rapidly degraded; in APOA1-related disease, variants reduce or abolish functional apolipoprotein A-I itself. Either mechanism leaves the body unable to assemble normal HDL particles, so HDL cholesterol and apolipoprotein A-I are very low and cholesterol accumulates within tissue macrophages, producing hepatosplenomegaly and, in some cases, lipid-laden tonsils. Deposition of lipid within Schwann cells and peripheral nerves is thought to drive the neuropathy, which can be multifocal and relapsing or cause a pseudosyringomyelic dissociated sensory loss. Some APOA1 variants additionally form amyloid deposits.",
+    "additionalDifferentials": [
+      "Tangier disease (as a specific ABCA1 cause)",
+      "Lecithin-cholesterol acyltransferase (LCAT) deficiency",
+      "Secondary causes of low HDL (severe illness, drugs, metabolic syndrome)",
+      "Syringomyelia and other cord lesions",
+      "Vasculitic mononeuritis multiplex",
+      "Hereditary amyloid neuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Tangier disease (as a specific ABCA1 cause), Lecithin-cholesterol acyltransferase (LCAT) deficiency, Secondary causes of low HDL",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting lipid panel demonstrating very low HDL cholesterol and apolipoprotein A-I",
+      "Sequencing of ABCA1 and APOA1 to define the molecular cause",
+      "Nerve conduction studies to characterise the neuropathy",
+      "Assessment for hepatosplenomegaly and lipid deposition in tonsils",
+      "Evaluation for systemic amyloidosis where an APOA1 amyloidogenic variant is suspected",
+      "Cardiovascular risk assessment in view of altered HDL-mediated protection"
     ],
-    [
-     "Management Strategy",
-     "Recognise that no specific therapy restores the deficient high-density lipoprotein, so care is supportive and directed at",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive multifocal neuropathy causing significant disability",
+      "Features of systemic amyloidosis such as renal or hepatic involvement with APOA1 variants",
+      "Progressive dissociated sensory loss raising concern for a spinal cord lesion",
+      "Painless burns or injuries from unrecognised loss of pain and temperature sensation"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing a very low HDL as laboratory error rather than a diagnostic clue",
-     "Prevent diagnostic or management error"
+    "prognosis": "Variable and dependent on the underlying gene; neuropathy can be disabling, and APOA1-related amyloidosis may affect vital organs and thereby prognosis, while cardiovascular risk is also altered by the HDL deficiency.",
+    "pitfalls": [
+      "Dismissing a very low HDL as laboratory error rather than a diagnostic clue",
+      "Failing to distinguish ABCA1 (Tangier) from APOA1-related disease, which can cause amyloidosis",
+      "Mistaking pseudosyringomyelic sensory loss for a primary cord lesion",
+      "Overlooking secondary causes of low HDL before pursuing a genetic diagnosis"
+    ],
+    "references": [
+      "GeneReviews / OMIM: APOA1- and ABCA1-Related HDL Deficiency",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise that no specific therapy restores the deficient high-density lipoprotein, so care is supportive and directed at complications",
+      "Modify cardiovascular risk through control of other lipids, blood pressure and glycaemia and through smoking cessation",
+      "Manage the peripheral neuropathy with neuropathic pain agents, physiotherapy and functional support",
+      "Monitor for systemic amyloidosis where an amyloidogenic APOA1 variant is present, assessing affected organs",
+      "Assess periodically for hepatosplenomegaly and lipid deposition",
+      "Confirm the molecular cause by sequencing ABCA1 and APOA1 and offer genetic counselling and family screening",
+      "Coordinate care across neurology and lipid specialist services"
     ]
-   ],
-   "caption": "Overview comparison matrix for analphalipoproteinaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "analphalipoproteinemia-real-image",
-   "title": "Analphalipoproteinaemia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "analphalipoproteinemia-pathway",
+      "title": "Analphalipoproteinaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Term for severe deficiency of high-density lipoprotein, in which plasma HDL cholesterol and apolipoprotein A-I are extremely low or absent",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive multifocal neuropathy causing significant disability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting lipid panel demonstrating very low HDL cholesterol and apolipoprotein A-I, Sequencing of ABCA1 and APOA1 to define the molecular cause, Nerve conduction studies to characterise the neuropathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise that no specific therapy restores the deficient high-density lipoprotein, so care is supportive and directed at complications"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing a very low HDL as laboratory error rather than a diagnostic clue"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of analphalipoproteinaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "analphalipoproteinemia-matrix",
+      "title": "Analphalipoproteinaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Term for severe deficiency of high-density lipoprotein, in which plasma HDL cholesterol and apolipoprotein A-I are extremely low",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting lipid panel demonstrating very low HDL cholesterol and apolipoprotein A-I, Sequencing of ABCA1 and APOA1 to define the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tangier disease (as a specific ABCA1 cause), Lecithin-cholesterol acyltransferase (LCAT) deficiency, Secondary causes of low HDL",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise that no specific therapy restores the deficient high-density lipoprotein, so care is supportive and directed at",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing a very low HDL as laboratory error rather than a diagnostic clue",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for analphalipoproteinaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley and Daroff Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "analphalipoproteinemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting lipid panel with very low HDL cholesterol and apolipoprotein A-I",
+          "cells": [
+            {
+              "text": "Profound HDL deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sequencing of ABCA1 and APOA1",
+          "cells": [
+            {
+              "text": "Molecular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Neuropathy characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for hepatosplenomegaly and tonsillar lipid deposition",
+          "cells": [
+            {
+              "text": "Tangier features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for systemic amyloidosis where an APOA1 amyloidogenic variant is suspected",
+          "cells": [
+            {
+              "text": "Amyloid involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk assessment",
+          "cells": [
+            {
+              "text": "Altered HDL protection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "analphalipoproteinemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Tangier disease",
+          "cells": [
+            {
+              "text": "ABCA1 cause of very low HDL"
+            },
+            {
+              "text": "ABCA1 sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LCAT deficiency",
+          "cells": [
+            {
+              "text": "Low HDL with corneal opacity"
+            },
+            {
+              "text": "LCAT testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary causes of low HDL",
+          "cells": [
+            {
+              "text": "Illness, drugs or metabolic syndrome"
+            },
+            {
+              "text": "Clinical context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syringomyelia or other cord lesions",
+          "cells": [
+            {
+              "text": "Dissociated sensory loss"
+            },
+            {
+              "text": "MRI spine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculitic mononeuritis multiplex",
+          "cells": [
+            {
+              "text": "Multifocal neuropathy"
+            },
+            {
+              "text": "Nerve biopsy and serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary amyloid neuropathy",
+          "cells": [
+            {
+              "text": "Neuropathy with amyloid"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "analphalipoproteinemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care; no therapy restores HDL",
+          "cells": [
+            {
+              "text": "Deficient HDL"
+            },
+            {
+              "text": "Directed at complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Control of other lipids, blood pressure and glycaemia, and smoking cessation",
+          "cells": [
+            {
+              "text": "Cardiovascular risk"
+            },
+            {
+              "text": "Risk modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents, physiotherapy and functional support",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for systemic amyloidosis in APOA1 variant carriers",
+          "cells": [
+            {
+              "text": "Amyloid involvement"
+            },
+            {
+              "text": "Organ assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic assessment for hepatosplenomegaly and lipid deposition",
+          "cells": [
+            {
+              "text": "Tangier features"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Molecular cause confirmed"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "analphalipoproteinemia-dx-mgmt",
+      "title": "Diagnosis and management of Analphalipoproteinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Very low HDL and apolipoprotein A-I with hepatosplenomegaly or neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly progressive multifocal neuropathy or amyloid involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for progressive neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lipid panel; ABCA1 and APOA1 sequencing; NCS; organ assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Very low HDL with ABCA1 or APOA1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive care; no specific HDL-raising therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review LCAT deficiency, secondary low HDL and vasculitic neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neuropathic pain treatment and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen APOA1 carriers for amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiovascular risk control and smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis depends on gene; APOA1 amyloid can affect vital organs",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

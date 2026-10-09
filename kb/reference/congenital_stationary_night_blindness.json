@@ -1,176 +1,454 @@
 {
- "id": "congenital_stationary_night_blindness",
- "name": "Congenital stationary night blindness",
- "aliases": [
-  "CSNB",
-  "Schubert-Bornschein type",
-  "Riggs type",
-  "NYX",
-  "CACNA1F",
-  "GRM6",
-  "TRPM1"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Non-progressive rod-system disorder presenting from birth with night blindness, and often nystagmus, myopia and reduced acuity, especially in X-linked forms",
-   "A normal-appearing fundus in a patient with lifelong nyctalopia is a strong clue to the diagnosis",
-   "The Schubert-Bornschein type shows a characteristic electronegative electroretinogram, where the b-wave is reduced below the a-wave under scotopic bright-flash conditions, reflecting impaired signalling from photoreceptors to bipolar cells",
-   "It subdivides into complete (ON-bipolar dysfunction, for example NYX, GRM6, TRPM1) and incomplete (ON and OFF pathway, for example CACNA1F) forms distinguished by detailed electrophysiology",
-   "The Riggs type shows reduced rod a-wave amplitude without the electronegative configuration, reflecting a phototransduction defect",
-   "Inheritance is commonly X-linked (NYX, CACNA1F) but autosomal recessive and dominant forms exist",
-   "The condition is stationary, so management is refractive correction, low-vision advice where needed, and genetic counselling rather than treatment of progression"
+  "id": "congenital_stationary_night_blindness",
+  "name": "Congenital stationary night blindness",
+  "aliases": [
+    "CSNB",
+    "Schubert-Bornschein type",
+    "Riggs type",
+    "NYX",
+    "CACNA1F",
+    "GRM6",
+    "TRPM1"
   ],
-  "pathophysiology": "Congenital stationary night blindness is caused by mutations that disrupt rod-mediated signal transmission. In the common Schubert-Bornschein group, defects in genes controlling the photoreceptor-to-bipolar synapse (NYX, GRM6, TRPM1 for the complete form; CACNA1F for the incomplete form) impair transmission to depolarising bipolar cells, producing the electronegative electroretinogram despite preserved photoreceptor phototransduction. In the rarer Riggs type, the primary defect is in rod phototransduction itself, reducing the rod a-wave. Because the abnormality is developmental and non-degenerative, visual function remains stable over life.",
-  "additionalDifferentials": [
-   "Retinitis pigmentosa and other progressive rod-cone dystrophies",
-   "Oguchi disease and fundus albipunctatus (other stationary night-blindness disorders)",
-   "Vitamin A deficiency retinopathy",
-   "X-linked retinoschisis (also electronegative)",
-   "Enhanced S-cone syndrome",
-   "Melanoma-associated or other autoimmune retinopathy causing negative electroretinogram"
-  ],
-  "additionalInvestigations": [
-   "Full-field electroretinography to detect an electronegative waveform and classify complete versus incomplete forms",
-   "Detailed ON/OFF and S-cone electroretinographic protocols for subtyping",
-   "Dark adaptometry to quantify the rod threshold defect",
-   "Refraction and assessment for nystagmus and myopia",
-   "Molecular genetic testing (NYX, CACNA1F, GRM6, TRPM1 and others)",
-   "Fundus examination and imaging to confirm an otherwise normal retina"
-  ],
-  "redFlags": [
-   "Documented progression of field loss or fundus change, which should prompt reconsideration of a degenerative diagnosis",
-   "Systemic features or malabsorption suggesting acquired vitamin A deficiency",
-   "Sudden onset of night blindness later in life indicating an acquired cause such as autoimmune retinopathy",
-   "New maculopathy raising suspicion of an alternative diagnosis"
-  ],
-  "prognosis": "By definition the disorder is stationary; night vision and acuity remain stable throughout life, though associated myopia and nystagmus may limit best-corrected acuity.",
-  "pitfalls": [
-   "Mislabelling a stable patient as having progressive retinitis pigmentosa",
-   "Overlooking the electronegative electroretinogram or failing to perform electrophysiology in a patient with lifelong nyctalopia and a normal fundus",
-   "Confusing acquired night blindness (vitamin A deficiency, autoimmune retinopathy) with the congenital disorder",
-   "Not distinguishing complete from incomplete forms, which carry different associated features"
-  ],
-  "references": [
-   "Ryan's Retina",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the associated refractive error, particularly myopia, with spectacles or contact lenses to optimise best-corrected acuity",
-   "Provide low-vision support and counselling on impaired night vision, including safety advice for driving and navigating in low light",
-   "Manage associated nystagmus and offer amblyopia treatment in children where indicated",
-   "Reassure that the disorder is non-progressive, with lifelong stability of night vision and acuity, avoiding unnecessary treatment",
-   "Confirm the diagnosis with electroretinography and molecular genetic testing to distinguish it from progressive retinal degenerations",
-   "Offer genetic counselling addressing the X-linked, autosomal recessive or dominant inheritance pattern identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_stationary_night_blindness-pathway",
-   "title": "Congenital stationary night blindness: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Non-progressive rod-system disorder presenting from birth with night blindness, and often nystagmus, myopia and reduced acuity, especially in X-linked forms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Documented progression of field loss or fundus change, which should prompt reconsideration of a degenerative diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full-field electroretinography to detect an electronegative waveform and classify complete versus incomplete forms, Detailed ON/OFF and S-cone electroretinographic protocols for subtyping, Dark adaptometry to quantify the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the associated refractive error, particularly myopia, with spectacles or contact lenses to optimise best-corrected acuity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling a stable patient as having progressive retinitis pigmentosa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital stationary night blindness."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_stationary_night_blindness-matrix",
-   "title": "Congenital stationary night blindness: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Non-progressive rod-system disorder presenting from birth with night blindness, and often nystagmus, myopia and reduced acuity,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Non-progressive rod-system disorder presenting from birth with night blindness, and often nystagmus, myopia and reduced acuity, especially in X-linked forms",
+      "A normal-appearing fundus in a patient with lifelong nyctalopia is a strong clue to the diagnosis",
+      "The Schubert-Bornschein type shows a characteristic electronegative electroretinogram, where the b-wave is reduced below the a-wave under scotopic bright-flash conditions, reflecting impaired signalling from photoreceptors to bipolar cells",
+      "It subdivides into complete (ON-bipolar dysfunction, for example NYX, GRM6, TRPM1) and incomplete (ON and OFF pathway, for example CACNA1F) forms distinguished by detailed electrophysiology",
+      "The Riggs type shows reduced rod a-wave amplitude without the electronegative configuration, reflecting a phototransduction defect",
+      "Inheritance is commonly X-linked (NYX, CACNA1F) but autosomal recessive and dominant forms exist",
+      "The condition is stationary, so management is refractive correction, low-vision advice where needed, and genetic counselling rather than treatment of progression"
     ],
-    [
-     "Key Investigations",
-     "Full-field electroretinography to detect an electronegative waveform and classify complete versus incomplete forms, Detailed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital stationary night blindness is caused by mutations that disrupt rod-mediated signal transmission. In the common Schubert-Bornschein group, defects in genes controlling the photoreceptor-to-bipolar synapse (NYX, GRM6, TRPM1 for the complete form; CACNA1F for the incomplete form) impair transmission to depolarising bipolar cells, producing the electronegative electroretinogram despite preserved photoreceptor phototransduction. In the rarer Riggs type, the primary defect is in rod phototransduction itself, reducing the rod a-wave. Because the abnormality is developmental and non-degenerative, visual function remains stable over life.",
+    "additionalDifferentials": [
+      "Retinitis pigmentosa and other progressive rod-cone dystrophies",
+      "Oguchi disease and fundus albipunctatus (other stationary night-blindness disorders)",
+      "Vitamin A deficiency retinopathy",
+      "X-linked retinoschisis (also electronegative)",
+      "Enhanced S-cone syndrome",
+      "Melanoma-associated or other autoimmune retinopathy causing negative electroretinogram"
     ],
-    [
-     "Primary Differentials",
-     "Retinitis pigmentosa and other progressive rod-cone dystrophies, Oguchi disease and fundus albipunctatus (other stationary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full-field electroretinography to detect an electronegative waveform and classify complete versus incomplete forms",
+      "Detailed ON/OFF and S-cone electroretinographic protocols for subtyping",
+      "Dark adaptometry to quantify the rod threshold defect",
+      "Refraction and assessment for nystagmus and myopia",
+      "Molecular genetic testing (NYX, CACNA1F, GRM6, TRPM1 and others)",
+      "Fundus examination and imaging to confirm an otherwise normal retina"
     ],
-    [
-     "Management Strategy",
-     "Correct the associated refractive error, particularly myopia, with spectacles or contact lenses to optimise best-corrected acuity",
-     "Core treatment modality"
+    "redFlags": [
+      "Documented progression of field loss or fundus change, which should prompt reconsideration of a degenerative diagnosis",
+      "Systemic features or malabsorption suggesting acquired vitamin A deficiency",
+      "Sudden onset of night blindness later in life indicating an acquired cause such as autoimmune retinopathy",
+      "New maculopathy raising suspicion of an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling a stable patient as having progressive retinitis pigmentosa",
-     "Prevent diagnostic or management error"
+    "prognosis": "By definition the disorder is stationary; night vision and acuity remain stable throughout life, though associated myopia and nystagmus may limit best-corrected acuity.",
+    "pitfalls": [
+      "Mislabelling a stable patient as having progressive retinitis pigmentosa",
+      "Overlooking the electronegative electroretinogram or failing to perform electrophysiology in a patient with lifelong nyctalopia and a normal fundus",
+      "Confusing acquired night blindness (vitamin A deficiency, autoimmune retinopathy) with the congenital disorder",
+      "Not distinguishing complete from incomplete forms, which carry different associated features"
+    ],
+    "references": [
+      "Ryan's Retina",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the associated refractive error, particularly myopia, with spectacles or contact lenses to optimise best-corrected acuity",
+      "Provide low-vision support and counselling on impaired night vision, including safety advice for driving and navigating in low light",
+      "Manage associated nystagmus and offer amblyopia treatment in children where indicated",
+      "Reassure that the disorder is non-progressive, with lifelong stability of night vision and acuity, avoiding unnecessary treatment",
+      "Confirm the diagnosis with electroretinography and molecular genetic testing to distinguish it from progressive retinal degenerations",
+      "Offer genetic counselling addressing the X-linked, autosomal recessive or dominant inheritance pattern identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital stationary night blindness."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-stationary-night-blindness-real-image",
-   "title": "Congenital stationary night blindness: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "congenital_stationary_night_blindness-pathway",
+      "title": "Congenital stationary night blindness: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Non-progressive rod-system disorder presenting from birth with night blindness, and often nystagmus, myopia and reduced acuity, especially in X-linked forms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Documented progression of field loss or fundus change, which should prompt reconsideration of a degenerative diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full-field electroretinography to detect an electronegative waveform and classify complete versus incomplete forms, Detailed ON/OFF and S-cone electroretinographic protocols for subtyping, Dark adaptometry to quantify the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the associated refractive error, particularly myopia, with spectacles or contact lenses to optimise best-corrected acuity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling a stable patient as having progressive retinitis pigmentosa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital stationary night blindness."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_stationary_night_blindness-matrix",
+      "title": "Congenital stationary night blindness: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Non-progressive rod-system disorder presenting from birth with night blindness, and often nystagmus, myopia and reduced acuity,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full-field electroretinography to detect an electronegative waveform and classify complete versus incomplete forms, Detailed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Retinitis pigmentosa and other progressive rod-cone dystrophies, Oguchi disease and fundus albipunctatus (other stationary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the associated refractive error, particularly myopia, with spectacles or contact lenses to optimise best-corrected acuity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling a stable patient as having progressive retinitis pigmentosa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital stationary night blindness."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_stationary_night_blindness-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-field ERG",
+          "cells": [
+            {
+              "text": "Electronegative waveform; complete versus incomplete forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ON/OFF and S-cone ERG protocols",
+          "cells": [
+            {
+              "text": "Subtyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dark adaptometry",
+          "cells": [
+            {
+              "text": "Rod threshold defect quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing (NYX, CACNA1F, GRM6, TRPM1)",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus examination and imaging",
+          "cells": [
+            {
+              "text": "Otherwise normal retina"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_stationary_night_blindness-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinitis pigmentosa and other progressive rod-cone dystrophies",
+          "cells": [
+            {
+              "text": "Progression of field or fundus change points away from stationary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin A deficiency retinopathy",
+          "cells": [
+            {
+              "text": "Systemic features or malabsorption suggest acquired deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune retinopathy",
+          "cells": [
+            {
+              "text": "Sudden later-onset night blindness suggests acquired cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_stationary_night_blindness-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Refractive correction",
+          "cells": [
+            {
+              "text": "Spectacles or contact lenses, particularly for myopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support",
+          "cells": [
+            {
+              "text": "Counselling on night vision; driving and low-light safety advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nystagmus and amblyopia",
+          "cells": [
+            {
+              "text": "Managed where indicated, including amblyopia treatment in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Non-progressive; avoid unnecessary treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation",
+          "cells": [
+            {
+              "text": "Electroretinography and genetic testing to distinguish from progressive degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked, autosomal recessive or dominant pattern identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_stationary_night_blindness-dx-mgmt",
+      "title": "Diagnosis and management of Congenital stationary night blindness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital stationary night blindness: lifelong poor night vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (documented progression, malabsorption, late-onset night blindness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reconsider a degenerative or acquired diagnosis; check vitamin A status",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-field ERG with ON/OFF protocols; dark adaptometry; gene testing; fundus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ERG show an electronegative waveform with a stable phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider progressive rod-cone dystrophy or acquired retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Refractive correction, particularly for myopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-vision support and advice on driving and low-light activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nystagmus management and amblyopia treatment in children",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure: non-progressive; genetic counselling for inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "By definition stationary; night vision and acuity remain stable throughout life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,178 +1,485 @@
 {
- "id": "lateral_pontine_syndrome",
- "name": "Lateral pontine (Marie-Foix) syndrome",
- "aliases": [
-  "Marie-Foix syndrome",
-  "anterior inferior cerebellar artery syndrome",
-  "AICA syndrome",
-  "lateral inferior pontine syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Cerebrovascular",
- "specialty": "Neurology / Stroke",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from infarction of the lateral pons, most often in the territory of the anterior inferior cerebellar artery arising from the basilar artery",
-   "Ipsilateral facial weakness, hearing loss, and vertigo follow involvement of the facial and vestibulocochlear nerve nuclei and fibres",
-   "Ipsilateral limb ataxia reflects damage to the middle cerebellar peduncle and cerebellar input",
-   "A crossed sensory pattern occurs with ipsilateral facial and contralateral body loss of pain and temperature from trigeminal and spinothalamic involvement",
-   "Ipsilateral Horner syndrome may arise from disruption of descending sympathetic fibres",
-   "Sudden unilateral deafness is a distinguishing feature because the labyrinthine artery commonly arises from the anterior inferior cerebellar artery",
-   "Motor power is usually preserved as the corticospinal tract lies more medially in the basis pontis"
+  "id": "lateral_pontine_syndrome",
+  "name": "Lateral pontine (Marie-Foix) syndrome",
+  "aliases": [
+    "Marie-Foix syndrome",
+    "anterior inferior cerebellar artery syndrome",
+    "AICA syndrome",
+    "lateral inferior pontine syndrome"
   ],
-  "pathophysiology": "Lateral pontine syndrome follows ischaemia of the lateral pontine tegmentum and adjacent cerebellum, supplied chiefly by the anterior inferior cerebellar artery, a branch of the basilar artery. The infarct affects the facial nucleus and nerve (ipsilateral facial weakness), the vestibulocochlear nucleus and often the labyrinthine artery territory (vertigo and ipsilateral hearing loss), the trigeminal nucleus and crossing spinothalamic tract (ipsilateral facial and contralateral body sensory loss), the middle cerebellar peduncle (ipsilateral ataxia), and the descending sympathetic fibres (Horner syndrome). The medial location of the corticospinal tract usually spares limb strength, giving a crossed brainstem picture analogous to Wallenberg syndrome but at pontine level and with prominent auditory involvement.",
-  "additionalDifferentials": [
-   "Lateral medullary (Wallenberg) syndrome",
-   "Vestibular neuronitis or labyrinthitis",
-   "Cerebellopontine angle lesion such as vestibular schwannoma",
-   "Cerebellar infarction or haemorrhage",
-   "Pontine demyelination or tumour",
-   "Sudden sensorineural hearing loss of peripheral origin"
-  ],
-  "additionalInvestigations": [
-   "Diffusion-weighted MRI of the lateral pons and cerebellum to confirm the infarct",
-   "MR or CT angiography of the basilar artery and its cerebellar branches",
-   "Audiometry and vestibular testing to characterise the auditory and balance deficit",
-   "HINTS bedside oculomotor examination to distinguish central from peripheral vertigo",
-   "Cardiovascular and stroke risk workup including ECG and metabolic profiling",
-   "Vessel wall imaging where basilar atherosclerosis or dissection is suspected"
-  ],
-  "redFlags": [
-   "Progressive drowsiness or brainstem compression from associated cerebellar swelling",
-   "Evolving basilar thrombosis with risk of extensive pontine infarction",
-   "Central vertigo misattributed to a peripheral cause and discharged",
-   "New long-tract or bulbar signs suggesting medial extension"
-  ],
-  "prognosis": "Vertigo and facial weakness often improve over weeks, but ipsilateral hearing loss may be permanent and cerebellar ataxia can persist; outcome is generally favourable unless the infarct is large or heralds basilar disease.",
-  "pitfalls": [
-   "Attributing acute vertigo and hearing loss to a peripheral labyrinthine cause and missing the stroke",
-   "Overlooking a subtle Horner syndrome that helps localise the lesion",
-   "Confusing lateral pontine with lateral medullary syndrome when auditory signs are not sought",
-   "Assuming preserved limb power excludes a significant brainstem infarct"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [
-   "lateral_medullary_syndrome",
-   "millard_gubler_syndrome",
-   "foville_syndrome"
-  ],
-  "management": [
-   "Manage as an acute basilar-territory stroke with thrombolysis within the window then antiplatelet therapy, imaging for basilar atherosclerosis or dissection",
-   "Start secondary prevention with antiplatelet or anticoagulant therapy, statin, and aggressive vascular risk-factor control",
-   "Protect against aspiration with swallow assessment and modified feeding while facial weakness and bulbar dysfunction persist",
-   "Treat vertigo, nausea, and vomiting with vestibular sedatives and antiemetics",
-   "Manage sudden sensorineural hearing loss with audiological rehabilitation, and protect the eye in facial-nerve palsy with lubrication and taping",
-   "Deliver multidisciplinary rehabilitation with physiotherapy for cerebellar ataxia and speech and swallow therapy",
-   "Monitor for evolving basilar disease and posterior-fossa swelling, escalating to neurosurgery if brainstem compression develops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lateral_pontine_syndrome-pathway",
-   "title": "Lateral pontine (Marie-Foix) syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from infarction of the lateral pons, most often in the territory of the anterior inferior cerebellar artery arising from the basilar artery",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive drowsiness or brainstem compression from associated cerebellar swelling",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diffusion-weighted MRI of the lateral pons and cerebellum to confirm the infarct, MR or CT angiography of the basilar artery and its cerebellar branches, Audiometry and vestibular testing to characterise the auditory and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage as an acute basilar-territory stroke with thrombolysis within the window then antiplatelet therapy, imaging for basilar atherosclerosis or dissection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing acute vertigo and hearing loss to a peripheral labyrinthine cause and missing the stroke"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lateral pontine (marie-foix) syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "lateral_pontine_syndrome-matrix",
-   "title": "Lateral pontine (Marie-Foix) syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from infarction of the lateral pons, most often in the territory of the anterior inferior cerebellar artery arising from",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Cerebrovascular",
+  "specialty": "Neurology / Stroke",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from infarction of the lateral pons, most often in the territory of the anterior inferior cerebellar artery arising from the basilar artery",
+      "Ipsilateral facial weakness, hearing loss, and vertigo follow involvement of the facial and vestibulocochlear nerve nuclei and fibres",
+      "Ipsilateral limb ataxia reflects damage to the middle cerebellar peduncle and cerebellar input",
+      "A crossed sensory pattern occurs with ipsilateral facial and contralateral body loss of pain and temperature from trigeminal and spinothalamic involvement",
+      "Ipsilateral Horner syndrome may arise from disruption of descending sympathetic fibres",
+      "Sudden unilateral deafness is a distinguishing feature because the labyrinthine artery commonly arises from the anterior inferior cerebellar artery",
+      "Motor power is usually preserved as the corticospinal tract lies more medially in the basis pontis"
     ],
-    [
-     "Key Investigations",
-     "Diffusion-weighted MRI of the lateral pons and cerebellum to confirm the infarct, MR or CT angiography of the basilar artery and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lateral pontine syndrome follows ischaemia of the lateral pontine tegmentum and adjacent cerebellum, supplied chiefly by the anterior inferior cerebellar artery, a branch of the basilar artery. The infarct affects the facial nucleus and nerve (ipsilateral facial weakness), the vestibulocochlear nucleus and often the labyrinthine artery territory (vertigo and ipsilateral hearing loss), the trigeminal nucleus and crossing spinothalamic tract (ipsilateral facial and contralateral body sensory loss), the middle cerebellar peduncle (ipsilateral ataxia), and the descending sympathetic fibres (Horner syndrome). The medial location of the corticospinal tract usually spares limb strength, giving a crossed brainstem picture analogous to Wallenberg syndrome but at pontine level and with prominent auditory involvement.",
+    "additionalDifferentials": [
+      "Lateral medullary (Wallenberg) syndrome",
+      "Vestibular neuronitis or labyrinthitis",
+      "Cerebellopontine angle lesion such as vestibular schwannoma",
+      "Cerebellar infarction or haemorrhage",
+      "Pontine demyelination or tumour",
+      "Sudden sensorineural hearing loss of peripheral origin"
     ],
-    [
-     "Primary Differentials",
-     "Lateral medullary (Wallenberg) syndrome, Vestibular neuronitis or labyrinthitis, Cerebellopontine angle lesion such as vestibular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diffusion-weighted MRI of the lateral pons and cerebellum to confirm the infarct",
+      "MR or CT angiography of the basilar artery and its cerebellar branches",
+      "Audiometry and vestibular testing to characterise the auditory and balance deficit",
+      "HINTS bedside oculomotor examination to distinguish central from peripheral vertigo",
+      "Cardiovascular and stroke risk workup including ECG and metabolic profiling",
+      "Vessel wall imaging where basilar atherosclerosis or dissection is suspected"
     ],
-    [
-     "Management Strategy",
-     "Manage as an acute basilar-territory stroke with thrombolysis within the window then antiplatelet therapy, imaging for basilar",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive drowsiness or brainstem compression from associated cerebellar swelling",
+      "Evolving basilar thrombosis with risk of extensive pontine infarction",
+      "Central vertigo misattributed to a peripheral cause and discharged",
+      "New long-tract or bulbar signs suggesting medial extension"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing acute vertigo and hearing loss to a peripheral labyrinthine cause and missing the stroke",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vertigo and facial weakness often improve over weeks, but ipsilateral hearing loss may be permanent and cerebellar ataxia can persist; outcome is generally favourable unless the infarct is large or heralds basilar disease.",
+    "pitfalls": [
+      "Attributing acute vertigo and hearing loss to a peripheral labyrinthine cause and missing the stroke",
+      "Overlooking a subtle Horner syndrome that helps localise the lesion",
+      "Confusing lateral pontine with lateral medullary syndrome when auditory signs are not sought",
+      "Assuming preserved limb power excludes a significant brainstem infarct"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [
+      "lateral_medullary_syndrome",
+      "millard_gubler_syndrome",
+      "foville_syndrome"
+    ],
+    "management": [
+      "Manage as an acute basilar-territory stroke with thrombolysis within the window then antiplatelet therapy, imaging for basilar atherosclerosis or dissection",
+      "Start secondary prevention with antiplatelet or anticoagulant therapy, statin, and aggressive vascular risk-factor control",
+      "Protect against aspiration with swallow assessment and modified feeding while facial weakness and bulbar dysfunction persist",
+      "Treat vertigo, nausea, and vomiting with vestibular sedatives and antiemetics",
+      "Manage sudden sensorineural hearing loss with audiological rehabilitation, and protect the eye in facial-nerve palsy with lubrication and taping",
+      "Deliver multidisciplinary rehabilitation with physiotherapy for cerebellar ataxia and speech and swallow therapy",
+      "Monitor for evolving basilar disease and posterior-fossa swelling, escalating to neurosurgery if brainstem compression develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for lateral pontine (marie-foix) syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lateral-pontine-syndrome-real-image",
-   "title": "Lateral pontine (Marie-Foix) syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "lateral_pontine_syndrome-pathway",
+      "title": "Lateral pontine (Marie-Foix) syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from infarction of the lateral pons, most often in the territory of the anterior inferior cerebellar artery arising from the basilar artery",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive drowsiness or brainstem compression from associated cerebellar swelling",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diffusion-weighted MRI of the lateral pons and cerebellum to confirm the infarct, MR or CT angiography of the basilar artery and its cerebellar branches, Audiometry and vestibular testing to characterise the auditory and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage as an acute basilar-territory stroke with thrombolysis within the window then antiplatelet therapy, imaging for basilar atherosclerosis or dissection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing acute vertigo and hearing loss to a peripheral labyrinthine cause and missing the stroke"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lateral pontine (marie-foix) syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lateral_pontine_syndrome-matrix",
+      "title": "Lateral pontine (Marie-Foix) syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from infarction of the lateral pons, most often in the territory of the anterior inferior cerebellar artery arising from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diffusion-weighted MRI of the lateral pons and cerebellum to confirm the infarct, MR or CT angiography of the basilar artery and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lateral medullary (Wallenberg) syndrome, Vestibular neuronitis or labyrinthitis, Cerebellopontine angle lesion such as vestibular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage as an acute basilar-territory stroke with thrombolysis within the window then antiplatelet therapy, imaging for basilar",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing acute vertigo and hearing loss to a peripheral labyrinthine cause and missing the stroke",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lateral pontine (marie-foix) syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lateral_pontine_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted MRI of the lateral pons and cerebellum",
+          "cells": [
+            {
+              "text": "Confirms the infarct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography of the basilar artery",
+          "cells": [
+            {
+              "text": "Cerebellar branches and basilar atherosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and vestibular testing",
+          "cells": [
+            {
+              "text": "Auditory and balance deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HINTS bedside oculomotor examination",
+          "cells": [
+            {
+              "text": "Distinguishes central from peripheral vertigo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and metabolic profiling",
+          "cells": [
+            {
+              "text": "Cardiovascular and stroke risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lateral_pontine_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lateral medullary (Wallenberg) syndrome",
+          "cells": [
+            {
+              "text": "Auditory signs must be sought to tell it apart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular neuronitis or labyrinthitis",
+          "cells": [
+            {
+              "text": "Peripheral vertigo mimic; HINTS separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebellopontine angle lesion, such as vestibular schwannoma",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lateral_pontine_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute basilar-territory stroke care",
+          "cells": [
+            {
+              "text": "Thrombolysis within the window, then antiplatelet therapy; imaging for basilar disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Antiplatelet or anticoagulant, statin, aggressive vascular risk-factor control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration protection",
+          "cells": [
+            {
+              "text": "Swallow assessment and modified feeding while bulbar dysfunction persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vertigo, nausea and vomiting",
+          "cells": [
+            {
+              "text": "Vestibular sedatives and antiemetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sudden sensorineural hearing loss",
+          "cells": [
+            {
+              "text": "Audiological rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Facial-nerve palsy",
+          "cells": [
+            {
+              "text": "Eye protection with lubrication and taping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy for cerebellar ataxia; speech and swallow therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior fossa surveillance",
+          "cells": [
+            {
+              "text": "Monitor for basilar disease and swelling; neurosurgery if it develops"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lateral_pontine_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Lateral pontine (Marie-Foix) syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute vertigo, hearing loss, facial weakness and ipsilateral limb ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (drowsiness, basilar thrombosis, central vertigo, medial signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent stroke and neurosurgical review for posterior fossa swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DWI MRI of pons and cerebellum, basilar angiography, audiometry, HINTS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does DWI MRI confirm a lateral pontine infarct?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lateral medullary syndrome, vestibular neuronitis or cerebellopontine lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acute basilar stroke care with thrombolysis, then antiplatelet therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Secondary prevention with antiplatelet, statin and risk-factor control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Protect against aspiration with swallow assessment and modified feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Vestibular sedatives and antiemetics for vertigo and vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Eye protection in facial palsy; audiological rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Vertigo and facial weakness often improve over weeks; hearing loss may be permanent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

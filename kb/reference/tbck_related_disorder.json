@@ -1,185 +1,492 @@
 {
- "id": "tbck_related_disorder",
- "name": "TBCK-related intellectual disability syndrome",
- "aliases": [
-  "Boricua founder syndrome",
-  "HISHDT",
-  "TBCK encephaloneuronopathy",
-  "TBCK encephaloneuropathy",
-  "TBCK syndrome",
-  "TBCK-Related Intellectual Disability Syndrome",
-  "TBCK-related disorder",
-  "TBCKE",
-  "hypotonia, infantile, with psychomotor retardation and characteristic facies (IHPRF3)",
-  "tbck syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nature Reviews chromatinopathy literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by biallelic loss-of-function variants in TBCK, which encodes a protein implicated in the regulation of mTOR signalling and autophagy, so it is a metabolic-neurodegenerative disorder rather than a chromatin-modifier syndrome",
-   "Profound infantile hypotonia, global developmental delay and intellectual disability with a distinctive facial appearance are the core features",
-   "Many children have severe feeding and respiratory difficulty, and progressive, neurodegenerative decline can occur in more severely affected individuals",
-   "A recurrent founder variant is prevalent in individuals of Puerto Rican ancestry and is associated with a severe, progressive phenotype",
-   "Neuroimaging may show white matter abnormalities (leukoencephalopathy), a thin corpus callosum and brain atrophy",
-   "Epilepsy, hyporeflexia and features of a motor neuronopathy or neuropathy may develop over time",
-   "Diagnosis rests on identifying biallelic pathogenic TBCK variants, and inheritance is autosomal recessive with implications for carrier and reproductive counselling"
+  "id": "tbck_related_disorder",
+  "name": "TBCK-related intellectual disability syndrome",
+  "aliases": [
+    "Boricua founder syndrome",
+    "HISHDT",
+    "TBCK encephaloneuronopathy",
+    "TBCK encephaloneuropathy",
+    "TBCK syndrome",
+    "TBCK-Related Intellectual Disability Syndrome",
+    "TBCK-related disorder",
+    "TBCKE",
+    "hypotonia, infantile, with psychomotor retardation and characteristic facies (IHPRF3)",
+    "tbck syndrome"
   ],
-  "pathophysiology": "TBCK encodes a multidomain protein carrying a TBC domain and a pseudokinase region that is thought to participate in regulating the mTOR signalling pathway and cellular autophagy, processes central to cell growth, protein turnover and the clearance of cellular waste. Biallelic loss-of-function variants reduce or abolish functional protein, dysregulating mTOR-related signalling and impairing autophagy so that abnormal material accumulates within cells, with some findings suggesting a lysosomal storage-like component. The nervous system is especially vulnerable, producing profound hypotonia, developmental impairment, white matter disease and, in severe cases, progressive neurodegeneration, while the severity varies with the specific genotype including the severe founder variant.",
-  "additionalDifferentials": [
-   "Other genetic causes of severe infantile hypotonia (e.g. spinal muscular atrophy)",
-   "Congenital myopathies and congenital muscular dystrophies",
-   "Peroxisomal and mitochondrial disorders",
-   "Lysosomal storage disorders",
-   "Pontocerebellar hypoplasias",
-   "Other leukoencephalopathies of infancy",
-   "Prader-Willi syndrome and other causes of neonatal hypotonia"
-  ],
-  "additionalInvestigations": [
-   "Exome or genome sequencing to identify biallelic TBCK variants, with targeted testing for the founder variant in relevant ancestries",
-   "Brain MRI to characterise leukoencephalopathy, corpus callosum thinning and atrophy",
-   "Electroencephalography where seizures are present",
-   "Assessment of feeding and swallowing with respiratory evaluation",
-   "Neuromuscular assessment including nerve conduction studies if a neuropathy is suspected",
-   "Creatine kinase and metabolic screening to help exclude alternative diagnoses",
-   "Ophthalmological and audiological review"
-  ],
-  "redFlags": [
-   "Respiratory insufficiency or recurrent aspiration requiring urgent support",
-   "Developmental regression or loss of skills indicating progression",
-   "Refractory or worsening seizures",
-   "Severe feeding failure with faltering growth",
-   "Rapid neurological deterioration in the severe (founder-variant) phenotype"
-  ],
-  "prognosis": "Outcome varies widely with genotype: milder cases have static severe developmental impairment, whereas the severe form, including the founder variant, is often progressive with neurodegeneration, respiratory compromise and shortened survival; care is supportive, centring on feeding, respiratory management, seizure control and developmental support.",
-  "pitfalls": [
-   "Overlooking the recurrent founder variant in individuals of Puerto Rican ancestry",
-   "Mistaking the disorder for a static encephalopathy and missing its potential to progress",
-   "Attributing the hypotonia to a primary neuromuscular disease without genetic testing",
-   "Failing to provide recurrence-risk counselling appropriate to autosomal recessive inheritance",
-   "Underestimating respiratory risk that drives much of the morbidity"
-  ],
-  "references": [
-   "GeneReviews — TBCK-Related Intellectual Disability Syndrome",
-   "Nature Reviews — mTOR signalling, autophagy and neurodevelopmental disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-modifying therapy, so management is supportive and directed at the neurological, feeding and respiratory manifestations",
-   "Support feeding and nutrition with swallowing assessment and gastrostomy where oral intake is unsafe",
-   "Provide respiratory care including secretion management, prompt infection treatment and ventilatory support as decline progresses",
-   "Manage hypotonia and developmental impairment with physiotherapy, occupational and speech therapy",
-   "Control epilepsy with anticonvulsant therapy where seizures occur",
-   "Monitor for neurodegenerative progression and involve palliative care in severe, progressive disease",
-   "Coordinate multidisciplinary paediatric care across neurology, respiratory and allied health",
-   "Offer genetic counselling for this autosomal recessive disorder, with targeted founder-variant testing in Puerto Rican families and carrier testing of relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tbck_related_disorder-pathway",
-   "title": "TBCK-related intellectual disability syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by biallelic loss-of-function variants in TBCK, which encodes a protein implicated in the regulation of mTOR signalling and autophagy, so it is a metabolic-neurodegenerative disorder rather than a chromatin-modifier syndrome",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory insufficiency or recurrent aspiration requiring urgent support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Exome or genome sequencing to identify biallelic TBCK variants, with targeted testing for the founder variant in relevant ancestries, Brain MRI to characterise leukoencephalopathy, corpus callosum thinning and atrophy,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-modifying therapy, so management is supportive and directed at the neurological, feeding and respiratory manifestations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the recurrent founder variant in individuals of Puerto Rican ancestry"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tbck-related intellectual disability syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "tbck_related_disorder-matrix",
-   "title": "TBCK-related intellectual disability syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by biallelic loss-of-function variants in TBCK, which encodes a protein implicated in the regulation of mTOR signalling",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nature Reviews chromatinopathy literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by biallelic loss-of-function variants in TBCK, which encodes a protein implicated in the regulation of mTOR signalling and autophagy, so it is a metabolic-neurodegenerative disorder rather than a chromatin-modifier syndrome",
+      "Profound infantile hypotonia, global developmental delay and intellectual disability with a distinctive facial appearance are the core features",
+      "Many children have severe feeding and respiratory difficulty, and progressive, neurodegenerative decline can occur in more severely affected individuals",
+      "A recurrent founder variant is prevalent in individuals of Puerto Rican ancestry and is associated with a severe, progressive phenotype",
+      "Neuroimaging may show white matter abnormalities (leukoencephalopathy), a thin corpus callosum and brain atrophy",
+      "Epilepsy, hyporeflexia and features of a motor neuronopathy or neuropathy may develop over time",
+      "Diagnosis rests on identifying biallelic pathogenic TBCK variants, and inheritance is autosomal recessive with implications for carrier and reproductive counselling"
     ],
-    [
-     "Key Investigations",
-     "Exome or genome sequencing to identify biallelic TBCK variants, with targeted testing for the founder variant in relevant",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "TBCK encodes a multidomain protein carrying a TBC domain and a pseudokinase region that is thought to participate in regulating the mTOR signalling pathway and cellular autophagy, processes central to cell growth, protein turnover and the clearance of cellular waste. Biallelic loss-of-function variants reduce or abolish functional protein, dysregulating mTOR-related signalling and impairing autophagy so that abnormal material accumulates within cells, with some findings suggesting a lysosomal storage-like component. The nervous system is especially vulnerable, producing profound hypotonia, developmental impairment, white matter disease and, in severe cases, progressive neurodegeneration, while the severity varies with the specific genotype including the severe founder variant.",
+    "additionalDifferentials": [
+      "Other genetic causes of severe infantile hypotonia (e.g. spinal muscular atrophy)",
+      "Congenital myopathies and congenital muscular dystrophies",
+      "Peroxisomal and mitochondrial disorders",
+      "Lysosomal storage disorders",
+      "Pontocerebellar hypoplasias",
+      "Other leukoencephalopathies of infancy",
+      "Prader-Willi syndrome and other causes of neonatal hypotonia"
     ],
-    [
-     "Primary Differentials",
-     "Other genetic causes of severe infantile hypotonia (e.g. spinal muscular atrophy), Congenital myopathies and congenital muscular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Exome or genome sequencing to identify biallelic TBCK variants, with targeted testing for the founder variant in relevant ancestries",
+      "Brain MRI to characterise leukoencephalopathy, corpus callosum thinning and atrophy",
+      "Electroencephalography where seizures are present",
+      "Assessment of feeding and swallowing with respiratory evaluation",
+      "Neuromuscular assessment including nerve conduction studies if a neuropathy is suspected",
+      "Creatine kinase and metabolic screening to help exclude alternative diagnoses",
+      "Ophthalmological and audiological review"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-modifying therapy, so management is supportive and directed at the neurological, feeding and",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory insufficiency or recurrent aspiration requiring urgent support",
+      "Developmental regression or loss of skills indicating progression",
+      "Refractory or worsening seizures",
+      "Severe feeding failure with faltering growth",
+      "Rapid neurological deterioration in the severe (founder-variant) phenotype"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the recurrent founder variant in individuals of Puerto Rican ancestry",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies widely with genotype: milder cases have static severe developmental impairment, whereas the severe form, including the founder variant, is often progressive with neurodegeneration, respiratory compromise and shortened survival; care is supportive, centring on feeding, respiratory management, seizure control and developmental support.",
+    "pitfalls": [
+      "Overlooking the recurrent founder variant in individuals of Puerto Rican ancestry",
+      "Mistaking the disorder for a static encephalopathy and missing its potential to progress",
+      "Attributing the hypotonia to a primary neuromuscular disease without genetic testing",
+      "Failing to provide recurrence-risk counselling appropriate to autosomal recessive inheritance",
+      "Underestimating respiratory risk that drives much of the morbidity"
+    ],
+    "references": [
+      "GeneReviews — TBCK-Related Intellectual Disability Syndrome",
+      "Nature Reviews — mTOR signalling, autophagy and neurodevelopmental disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-modifying therapy, so management is supportive and directed at the neurological, feeding and respiratory manifestations",
+      "Support feeding and nutrition with swallowing assessment and gastrostomy where oral intake is unsafe",
+      "Provide respiratory care including secretion management, prompt infection treatment and ventilatory support as decline progresses",
+      "Manage hypotonia and developmental impairment with physiotherapy, occupational and speech therapy",
+      "Control epilepsy with anticonvulsant therapy where seizures occur",
+      "Monitor for neurodegenerative progression and involve palliative care in severe, progressive disease",
+      "Coordinate multidisciplinary paediatric care across neurology, respiratory and allied health",
+      "Offer genetic counselling for this autosomal recessive disorder, with targeted founder-variant testing in Puerto Rican families and carrier testing of relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for tbck-related intellectual disability syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tbck-related-disorder-real-image",
-   "title": "TBCK-related intellectual disability syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "tbck_related_disorder-pathway",
+      "title": "TBCK-related intellectual disability syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by biallelic loss-of-function variants in TBCK, which encodes a protein implicated in the regulation of mTOR signalling and autophagy, so it is a metabolic-neurodegenerative disorder rather than a chromatin-modifier syndrome",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory insufficiency or recurrent aspiration requiring urgent support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Exome or genome sequencing to identify biallelic TBCK variants, with targeted testing for the founder variant in relevant ancestries, Brain MRI to characterise leukoencephalopathy, corpus callosum thinning and atrophy,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-modifying therapy, so management is supportive and directed at the neurological, feeding and respiratory manifestations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the recurrent founder variant in individuals of Puerto Rican ancestry"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tbck-related intellectual disability syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tbck_related_disorder-matrix",
+      "title": "TBCK-related intellectual disability syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by biallelic loss-of-function variants in TBCK, which encodes a protein implicated in the regulation of mTOR signalling",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Exome or genome sequencing to identify biallelic TBCK variants, with targeted testing for the founder variant in relevant",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other genetic causes of severe infantile hypotonia (e.g. spinal muscular atrophy), Congenital myopathies and congenital muscular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-modifying therapy, so management is supportive and directed at the neurological, feeding and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the recurrent founder variant in individuals of Puerto Rican ancestry",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tbck-related intellectual disability syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nature Reviews chromatinopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tbck_related_disorder-dx-mgmt",
+      "title": "Diagnosis and management of TBCK-related intellectual disability syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected TBCK disorder: severe infantile hypotonia with developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: respiratory insufficiency, aspiration, or developmental regression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory and feeding support; palliative input for progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exome or genome sequencing for biallelic TBCK; brain MRI; EEG if seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sequencing identify biallelic pathogenic TBCK variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider spinal muscular atrophy, Prader-Willi syndrome or another leukoencephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; no disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Feeding support, with gastrostomy where oral intake is unsafe",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Respiratory care with secretion management and infection treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Anticonvulsant therapy and palliative input in progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe, often progressive form with neurodegeneration and respiratory compromise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tbck_related_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome or genome sequencing",
+          "cells": [
+            {
+              "text": "Biallelic TBCK variants; targeted founder-variant testing in relevant ancestry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Leukoencephalopathy, thin corpus callosum and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures, where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and respiratory assessment",
+          "cells": [
+            {
+              "text": "Swallowing safety and respiratory function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Neuropathy, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and metabolic screen",
+          "cells": [
+            {
+              "text": "Alternative diagnoses excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tbck_related_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spinal muscular atrophy",
+          "cells": [
+            {
+              "text": "Severe infantile hypotonia overlaps; genetic testing separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prader-Willi syndrome",
+          "cells": [
+            {
+              "text": "Neonatal hypotonia overlaps; genetic testing separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other leukoencephalopathies of infancy",
+          "cells": [
+            {
+              "text": "Thin corpus callosum and leukoencephalopathy on MRI point to TBCK; sequencing confirms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tbck_related_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support",
+          "cells": [
+            {
+              "text": "Swallowing assessment; gastrostomy where oral intake is unsafe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory care",
+          "cells": [
+            {
+              "text": "Secretion management, prompt infection treatment and ventilatory support as decline progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental therapy",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "Where seizures occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative involvement",
+          "cells": [
+            {
+              "text": "Severe, progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; founder-variant and carrier testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

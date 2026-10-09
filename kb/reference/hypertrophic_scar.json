@@ -1,170 +1,450 @@
 {
- "id": "hypertrophic_scar",
- "name": "Hypertrophic scar",
- "aliases": [
-  "hypertrophic scarring",
-  "abnormal scar",
-  "pathological scar"
- ],
- "class": "non_infective",
- "system": "Plastic / Reconstructive",
- "specialty": "Plastic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Grabb & Smith's Plastic Surgery / standard references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A hypertrophic scar is raised, red, and often itchy but remains confined within the boundaries of the original wound, unlike a keloid which extends beyond the wound margins",
-   "Hypertrophic scars typically appear within weeks of injury and tend to improve or partially regress over months to years, whereas keloids persist and often recur",
-   "Risk is increased by wounds under tension, wounds crossing joints or perpendicular to skin tension lines, delayed healing, infection, and burns",
-   "Prevention centres on meticulous wound closure, tension reduction, and avoiding infection and delayed healing",
-   "First-line management commonly includes silicone gel sheeting, pressure therapy, and scar massage, with intralesional corticosteroid injection for thicker or symptomatic scars",
-   "Adjuncts such as laser therapy and, in selected cases, surgical revision can improve appearance, though surgery alone risks recurrence without additional measures",
-   "Burn scars are particularly prone to hypertrophy and contracture, and early pressure garments and physiotherapy help limit deformity",
-   "Realistic counselling about the prolonged and often incomplete nature of scar improvement is important for patient expectations"
+  "id": "hypertrophic_scar",
+  "name": "Hypertrophic scar",
+  "aliases": [
+    "hypertrophic scarring",
+    "abnormal scar",
+    "pathological scar"
   ],
-  "pathophysiology": "Hypertrophic scarring reflects a dysregulated wound-healing response in which the proliferative phase is prolonged and remodelling is impaired. Excessive and persistent inflammation drives fibroblast proliferation and overproduction of collagen, with an imbalance between collagen synthesis and breakdown. The collagen is deposited in comparatively organised bundles aligned parallel to the skin surface, distinguishing it histologically from the thick, disorganised collagen of keloids. Mechanical tension across the wound and prolonged inflammation from infection or delayed healing promote this fibrotic response, and myofibroblast activity contributes to scar contraction.",
-  "additionalDifferentials": [
-   "Keloid scar",
-   "Dermatofibroma",
-   "Scar contracture",
-   "Dermatofibrosarcoma protuberans",
-   "Foreign body granuloma within a scar",
-   "Cutaneous sarcoidosis in a scar"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment and scar scoring (e.g. Vancouver Scar Scale) for baseline and monitoring",
-   "Photographic documentation to track evolution and treatment response",
-   "Biopsy when the diagnosis is uncertain or malignancy is suspected",
-   "Assessment of joint range of motion when scars cross a joint or cause contracture"
-  ],
-  "redFlags": [
-   "Rapid growth, ulceration, or atypical change suggesting malignancy rather than a simple scar",
-   "Progressive contracture across a joint causing functional loss",
-   "Signs of secondary infection within the scar or wound"
-  ],
-  "prognosis": "Hypertrophic scars often mature and flatten over one to two years and generally respond better to conservative therapy than keloids, with a lower recurrence rate after appropriately combined treatment. Outcomes are less favourable for burn-related scars and scars under tension or across joints, which may require ongoing management to prevent contracture.",
-  "pitfalls": [
-   "Confusing a hypertrophic scar with a keloid, leading to inappropriate treatment expectations",
-   "Performing surgical revision alone without adjuncts, resulting in recurrence",
-   "Delaying preventive measures such as pressure garments in burn scars",
-   "Repeated or excessive corticosteroid injection causing skin atrophy, telangiectasia, or hypopigmentation",
-   "Overlooking functional contracture while focusing only on cosmetic appearance"
-  ],
-  "references": [
-   "Grabb & Smith's Plastic Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prevention through meticulous tension-free wound closure and avoidance of infection and delayed healing",
-   "First-line silicone gel sheeting, pressure therapy and scar massage for established scars",
-   "Intralesional corticosteroid injection for thicker or symptomatic scars, with adjunctive intralesional antimetabolite in resistant cases",
-   "Laser therapy as an adjunct to improve colour, texture and symptoms",
-   "Surgical revision in selected cases combined with adjuvant measures to reduce recurrence, avoiding surgery alone",
-   "Physiotherapy and, where needed, contracture release for scars crossing joints, with serial scar scoring to monitor response"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypertrophic_scar-pathway",
-   "title": "Hypertrophic scar: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A hypertrophic scar is raised, red, and often itchy but remains confined within the boundaries of the original wound, unlike a keloid which extends beyond the wound margins",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, ulceration, or atypical change suggesting malignancy rather than a simple scar",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment and scar scoring (e.g. Vancouver Scar Scale) for baseline and monitoring, Photographic documentation to track evolution and treatment response, Biopsy when the diagnosis is uncertain or malignancy is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevention through meticulous tension-free wound closure and avoidance of infection and delayed healing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing a hypertrophic scar with a keloid, leading to inappropriate treatment expectations"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypertrophic scar."
-  }
- ],
- "tables": [
-  {
-   "id": "hypertrophic_scar-matrix",
-   "title": "Hypertrophic scar: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A hypertrophic scar is raised, red, and often itchy but remains confined within the boundaries of the original wound, unlike a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Plastic / Reconstructive",
+  "specialty": "Plastic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Grabb & Smith's Plastic Surgery / standard references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A hypertrophic scar is raised, red, and often itchy but remains confined within the boundaries of the original wound, unlike a keloid which extends beyond the wound margins",
+      "Hypertrophic scars typically appear within weeks of injury and tend to improve or partially regress over months to years, whereas keloids persist and often recur",
+      "Risk is increased by wounds under tension, wounds crossing joints or perpendicular to skin tension lines, delayed healing, infection, and burns",
+      "Prevention centres on meticulous wound closure, tension reduction, and avoiding infection and delayed healing",
+      "First-line management commonly includes silicone gel sheeting, pressure therapy, and scar massage, with intralesional corticosteroid injection for thicker or symptomatic scars",
+      "Adjuncts such as laser therapy and, in selected cases, surgical revision can improve appearance, though surgery alone risks recurrence without additional measures",
+      "Burn scars are particularly prone to hypertrophy and contracture, and early pressure garments and physiotherapy help limit deformity",
+      "Realistic counselling about the prolonged and often incomplete nature of scar improvement is important for patient expectations"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment and scar scoring (e.g. Vancouver Scar Scale) for baseline and monitoring, Photographic documentation to track",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hypertrophic scarring reflects a dysregulated wound-healing response in which the proliferative phase is prolonged and remodelling is impaired. Excessive and persistent inflammation drives fibroblast proliferation and overproduction of collagen, with an imbalance between collagen synthesis and breakdown. The collagen is deposited in comparatively organised bundles aligned parallel to the skin surface, distinguishing it histologically from the thick, disorganised collagen of keloids. Mechanical tension across the wound and prolonged inflammation from infection or delayed healing promote this fibrotic response, and myofibroblast activity contributes to scar contraction.",
+    "additionalDifferentials": [
+      "Keloid scar",
+      "Dermatofibroma",
+      "Scar contracture",
+      "Dermatofibrosarcoma protuberans",
+      "Foreign body granuloma within a scar",
+      "Cutaneous sarcoidosis in a scar"
     ],
-    [
-     "Primary Differentials",
-     "Keloid scar, Dermatofibroma, Scar contracture",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment and scar scoring (e.g. Vancouver Scar Scale) for baseline and monitoring",
+      "Photographic documentation to track evolution and treatment response",
+      "Biopsy when the diagnosis is uncertain or malignancy is suspected",
+      "Assessment of joint range of motion when scars cross a joint or cause contracture"
     ],
-    [
-     "Management Strategy",
-     "Prevention through meticulous tension-free wound closure and avoidance of infection and delayed healing",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, ulceration, or atypical change suggesting malignancy rather than a simple scar",
+      "Progressive contracture across a joint causing functional loss",
+      "Signs of secondary infection within the scar or wound"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing a hypertrophic scar with a keloid, leading to inappropriate treatment expectations",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hypertrophic scars often mature and flatten over one to two years and generally respond better to conservative therapy than keloids, with a lower recurrence rate after appropriately combined treatment. Outcomes are less favourable for burn-related scars and scars under tension or across joints, which may require ongoing management to prevent contracture.",
+    "pitfalls": [
+      "Confusing a hypertrophic scar with a keloid, leading to inappropriate treatment expectations",
+      "Performing surgical revision alone without adjuncts, resulting in recurrence",
+      "Delaying preventive measures such as pressure garments in burn scars",
+      "Repeated or excessive corticosteroid injection causing skin atrophy, telangiectasia, or hypopigmentation",
+      "Overlooking functional contracture while focusing only on cosmetic appearance"
+    ],
+    "references": [
+      "Grabb & Smith's Plastic Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prevention through meticulous tension-free wound closure and avoidance of infection and delayed healing",
+      "First-line silicone gel sheeting, pressure therapy and scar massage for established scars",
+      "Intralesional corticosteroid injection for thicker or symptomatic scars, with adjunctive intralesional antimetabolite in resistant cases",
+      "Laser therapy as an adjunct to improve colour, texture and symptoms",
+      "Surgical revision in selected cases combined with adjuvant measures to reduce recurrence, avoiding surgery alone",
+      "Physiotherapy and, where needed, contracture release for scars crossing joints, with serial scar scoring to monitor response"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypertrophic scar."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypertrophic-scar-real-image",
-   "title": "Hypertrophic scar: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hypertrophic_scar-pathway",
+      "title": "Hypertrophic scar: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A hypertrophic scar is raised, red, and often itchy but remains confined within the boundaries of the original wound, unlike a keloid which extends beyond the wound margins",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, ulceration, or atypical change suggesting malignancy rather than a simple scar",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment and scar scoring (e.g. Vancouver Scar Scale) for baseline and monitoring, Photographic documentation to track evolution and treatment response, Biopsy when the diagnosis is uncertain or malignancy is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevention through meticulous tension-free wound closure and avoidance of infection and delayed healing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing a hypertrophic scar with a keloid, leading to inappropriate treatment expectations"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypertrophic scar."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypertrophic_scar-matrix",
+      "title": "Hypertrophic scar: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A hypertrophic scar is raised, red, and often itchy but remains confined within the boundaries of the original wound, unlike a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment and scar scoring (e.g. Vancouver Scar Scale) for baseline and monitoring, Photographic documentation to track",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Keloid scar, Dermatofibroma, Scar contracture",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevention through meticulous tension-free wound closure and avoidance of infection and delayed healing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing a hypertrophic scar with a keloid, leading to inappropriate treatment expectations",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypertrophic scar."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Grabb & Smith's Plastic Surgery / standard references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypertrophic_scar-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment and scar scoring (Vancouver Scar Scale)",
+          "cells": [
+            {
+              "text": "Baseline and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic documentation",
+          "cells": [
+            {
+              "text": "Evolution and treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Used when the diagnosis is uncertain or malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint range of motion",
+          "cells": [
+            {
+              "text": "Contracture when scars cross a joint"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic_scar-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Keloid scar",
+          "cells": [
+            {
+              "text": "Extends beyond the wound margins; persists and often recurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scar contracture",
+          "cells": [
+            {
+              "text": "Progressive contracture across a joint causing functional loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatofibrosarcoma protuberans",
+          "cells": [
+            {
+              "text": "Rapid growth, ulceration or atypical change suggesting malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic_scar-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Tension-free wound closure; avoid infection and delayed healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line measures",
+          "cells": [
+            {
+              "text": "Silicone gel sheeting, pressure therapy and scar massage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional injection",
+          "cells": [
+            {
+              "text": "Corticosteroid for thick or symptomatic scars; antimetabolite in resistant cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser therapy",
+          "cells": [
+            {
+              "text": "Adjunct to improve colour, texture and symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical revision",
+          "cells": [
+            {
+              "text": "Only with adjuvant measures to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and contracture release",
+          "cells": [
+            {
+              "text": "Scars crossing joints, with serial scar scoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypertrophic_scar-dx-mgmt",
+      "title": "Diagnosis and management of Hypertrophic scar",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised, red, itchy scar confined within the original wound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid growth, ulceration, atypical change or progressive joint contracture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy to exclude malignancy; refer for contracture management",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Vancouver scar scoring, photographs, joint range of motion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lesion confined to wound and not a keloid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Keloid or other lesion suspected; reassess the diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Silicone gel sheeting, pressure therapy and scar massage",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intralesional corticosteroid for thick or symptomatic scars",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser therapy as adjunct for colour and texture",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical revision only with adjuvant measures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and contracture release across joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often improves or partly regresses over months to years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

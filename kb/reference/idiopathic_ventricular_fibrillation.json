@@ -1,173 +1,471 @@
 {
- "id": "idiopathic_ventricular_fibrillation",
- "name": "Idiopathic ventricular fibrillation",
- "aliases": [
-  "IVF",
-  "idiopathic VF",
-  "primary electrical disease",
-  "unexplained cardiac arrest with normal heart"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Genetics",
- "specialty": "Cardiology / Inherited Cardiac Conditions",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard cardiology and inherited cardiac conditions references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A diagnosis of exclusion applied to resuscitated ventricular fibrillation when no structural, electrical, metabolic or toxic cause is identified after thorough evaluation",
-   "Requires systematic exclusion of coronary disease, cardiomyopathy, and inherited channelopathies such as long QT, Brugada, and catecholaminergic polymorphic ventricular tachycardia",
-   "Often triggered by short-coupled ventricular ectopy, sometimes arising from the Purkinje system or right ventricular outflow tract",
-   "A short-coupled variant with very early ectopic beats initiating fibrillation is recognised as a distinct high-risk entity",
-   "Typically affects young, otherwise healthy adults presenting with aborted sudden death, so meticulous family and genetic evaluation is essential",
-   "Because a subtle inherited cause may only declare itself later, ongoing surveillance and cascade family screening are important",
-   "Secondary prevention with an implantable defibrillator is standard for survivors of the arrest"
+  "id": "idiopathic_ventricular_fibrillation",
+  "name": "Idiopathic ventricular fibrillation",
+  "aliases": [
+    "IVF",
+    "idiopathic VF",
+    "primary electrical disease",
+    "unexplained cardiac arrest with normal heart"
   ],
-  "pathophysiology": "Idiopathic ventricular fibrillation denotes a primary electrical disorder of the heart in which ventricular fibrillation occurs without demonstrable structural, ischaemic or recognised channelopathic cause. In many patients, closely coupled ventricular premature beats, frequently originating from Purkinje tissue or a ventricular outflow region, fall on the vulnerable phase of repolarisation and degenerate into fibrillation. Underlying microscopic or as-yet-unrecognised ion-channel or repolarisation abnormalities are presumed, and some patients are later reclassified once a concealed channelopathy or cardiomyopathy becomes apparent. The label therefore reflects the current limits of investigation rather than a single defined mechanism.",
-  "additionalDifferentials": [
-   "Long QT syndrome",
-   "Brugada syndrome",
-   "Catecholaminergic polymorphic ventricular tachycardia",
-   "Early repolarisation syndrome",
-   "Occult ischaemic or structural heart disease (including subtle cardiomyopathy)",
-   "Electrolyte disturbance or drug-induced proarrhythmia"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG with repeated and high-lead recordings to seek a concealed channelopathy",
-   "Echocardiography and cardiac MRI to exclude structural disease",
-   "Coronary evaluation and provocation testing to exclude ischaemia and vasospasm",
-   "Drug-provocation and exercise testing to unmask Brugada or catecholaminergic phenotypes",
-   "Genetic testing and comprehensive cascade family screening",
-   "Ambulatory monitoring to characterise triggering ectopy and its coupling interval"
-  ],
-  "redFlags": [
-   "Recurrent ventricular fibrillation or electrical storm",
-   "Very short-coupled premature beats initiating fibrillation",
-   "Family history of unexplained sudden death or aborted arrest",
-   "Emergence of a diagnostic channelopathy pattern on follow-up"
-  ],
-  "prognosis": "Survivors face an ongoing risk of recurrent malignant arrhythmia, mitigated by defibrillator therapy; long-term outlook depends on whether a specific underlying disorder is subsequently identified and treatable, and on control of triggering ectopy.",
-  "pitfalls": [
-   "Settling on the label without an exhaustive search for a specific cause",
-   "Missing a concealed channelopathy that only manifests with provocation or over time",
-   "Neglecting cascade family screening for an inherited disorder",
-   "Overlooking short-coupled triggering ectopy amenable to targeted therapy"
-  ],
-  "references": [
-   "ESC guidelines on ventricular arrhythmias and prevention of sudden cardiac death",
-   "Braunwald's Heart Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Implant a cardioverter-defibrillator as the cornerstone of secondary prevention after resuscitated ventricular fibrillation",
-   "Treat the arrest and any electrical storm with prompt defibrillation and advanced life support, using an isoprenaline infusion during storm",
-   "Suppress the closely coupled triggering ectopy with quinidine, which is particularly effective, and consider beta-blockers or verapamil",
-   "Offer catheter ablation of the initiating Purkinje or outflow-tract ectopic focus for recurrent arrhythmia or refractory electrical storm",
-   "Maintain long-term rhythm surveillance and periodic re-evaluation, as a concealed channelopathy or cardiomyopathy may later declare itself",
-   "Arrange genetic testing and cascade screening of first-degree relatives through an inherited cardiac conditions clinic"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "idiopathic_ventricular_fibrillation-pathway",
-   "title": "Idiopathic ventricular fibrillation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A diagnosis of exclusion applied to resuscitated ventricular fibrillation when no structural, electrical, metabolic or toxic cause is identified after thorough evaluation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent ventricular fibrillation or electrical storm",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG with repeated and high-lead recordings to seek a concealed channelopathy, Echocardiography and cardiac MRI to exclude structural disease, Coronary evaluation and provocation testing to exclude ischaemia and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Implant a cardioverter-defibrillator as the cornerstone of secondary prevention after resuscitated ventricular fibrillation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Settling on the label without an exhaustive search for a specific cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of idiopathic ventricular fibrillation."
-  }
- ],
- "tables": [
-  {
-   "id": "idiopathic_ventricular_fibrillation-matrix",
-   "title": "Idiopathic ventricular fibrillation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A diagnosis of exclusion applied to resuscitated ventricular fibrillation when no structural, electrical, metabolic or toxic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Genetics",
+  "specialty": "Cardiology / Inherited Cardiac Conditions",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard cardiology and inherited cardiac conditions references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A diagnosis of exclusion applied to resuscitated ventricular fibrillation when no structural, electrical, metabolic or toxic cause is identified after thorough evaluation",
+      "Requires systematic exclusion of coronary disease, cardiomyopathy, and inherited channelopathies such as long QT, Brugada, and catecholaminergic polymorphic ventricular tachycardia",
+      "Often triggered by short-coupled ventricular ectopy, sometimes arising from the Purkinje system or right ventricular outflow tract",
+      "A short-coupled variant with very early ectopic beats initiating fibrillation is recognised as a distinct high-risk entity",
+      "Typically affects young, otherwise healthy adults presenting with aborted sudden death, so meticulous family and genetic evaluation is essential",
+      "Because a subtle inherited cause may only declare itself later, ongoing surveillance and cascade family screening are important",
+      "Secondary prevention with an implantable defibrillator is standard for survivors of the arrest"
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG with repeated and high-lead recordings to seek a concealed channelopathy, Echocardiography and cardiac MRI to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Idiopathic ventricular fibrillation denotes a primary electrical disorder of the heart in which ventricular fibrillation occurs without demonstrable structural, ischaemic or recognised channelopathic cause. In many patients, closely coupled ventricular premature beats, frequently originating from Purkinje tissue or a ventricular outflow region, fall on the vulnerable phase of repolarisation and degenerate into fibrillation. Underlying microscopic or as-yet-unrecognised ion-channel or repolarisation abnormalities are presumed, and some patients are later reclassified once a concealed channelopathy or cardiomyopathy becomes apparent. The label therefore reflects the current limits of investigation rather than a single defined mechanism.",
+    "additionalDifferentials": [
+      "Long QT syndrome",
+      "Brugada syndrome",
+      "Catecholaminergic polymorphic ventricular tachycardia",
+      "Early repolarisation syndrome",
+      "Occult ischaemic or structural heart disease (including subtle cardiomyopathy)",
+      "Electrolyte disturbance or drug-induced proarrhythmia"
     ],
-    [
-     "Primary Differentials",
-     "Long QT syndrome, Brugada syndrome, Catecholaminergic polymorphic ventricular tachycardia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG with repeated and high-lead recordings to seek a concealed channelopathy",
+      "Echocardiography and cardiac MRI to exclude structural disease",
+      "Coronary evaluation and provocation testing to exclude ischaemia and vasospasm",
+      "Drug-provocation and exercise testing to unmask Brugada or catecholaminergic phenotypes",
+      "Genetic testing and comprehensive cascade family screening",
+      "Ambulatory monitoring to characterise triggering ectopy and its coupling interval"
     ],
-    [
-     "Management Strategy",
-     "Implant a cardioverter-defibrillator as the cornerstone of secondary prevention after resuscitated ventricular fibrillation",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent ventricular fibrillation or electrical storm",
+      "Very short-coupled premature beats initiating fibrillation",
+      "Family history of unexplained sudden death or aborted arrest",
+      "Emergence of a diagnostic channelopathy pattern on follow-up"
     ],
-    [
-     "Clinical Pitfall",
-     "Settling on the label without an exhaustive search for a specific cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Survivors face an ongoing risk of recurrent malignant arrhythmia, mitigated by defibrillator therapy; long-term outlook depends on whether a specific underlying disorder is subsequently identified and treatable, and on control of triggering ectopy.",
+    "pitfalls": [
+      "Settling on the label without an exhaustive search for a specific cause",
+      "Missing a concealed channelopathy that only manifests with provocation or over time",
+      "Neglecting cascade family screening for an inherited disorder",
+      "Overlooking short-coupled triggering ectopy amenable to targeted therapy"
+    ],
+    "references": [
+      "ESC guidelines on ventricular arrhythmias and prevention of sudden cardiac death",
+      "Braunwald's Heart Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Implant a cardioverter-defibrillator as the cornerstone of secondary prevention after resuscitated ventricular fibrillation",
+      "Treat the arrest and any electrical storm with prompt defibrillation and advanced life support, using an isoprenaline infusion during storm",
+      "Suppress the closely coupled triggering ectopy with quinidine, which is particularly effective, and consider beta-blockers or verapamil",
+      "Offer catheter ablation of the initiating Purkinje or outflow-tract ectopic focus for recurrent arrhythmia or refractory electrical storm",
+      "Maintain long-term rhythm surveillance and periodic re-evaluation, as a concealed channelopathy or cardiomyopathy may later declare itself",
+      "Arrange genetic testing and cascade screening of first-degree relatives through an inherited cardiac conditions clinic"
     ]
-   ],
-   "caption": "Overview comparison matrix for idiopathic ventricular fibrillation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "idiopathic-ventricular-fibrillation-real-image",
-   "title": "Idiopathic ventricular fibrillation: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "idiopathic_ventricular_fibrillation-pathway",
+      "title": "Idiopathic ventricular fibrillation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A diagnosis of exclusion applied to resuscitated ventricular fibrillation when no structural, electrical, metabolic or toxic cause is identified after thorough evaluation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent ventricular fibrillation or electrical storm",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG with repeated and high-lead recordings to seek a concealed channelopathy, Echocardiography and cardiac MRI to exclude structural disease, Coronary evaluation and provocation testing to exclude ischaemia and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Implant a cardioverter-defibrillator as the cornerstone of secondary prevention after resuscitated ventricular fibrillation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Settling on the label without an exhaustive search for a specific cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of idiopathic ventricular fibrillation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "idiopathic_ventricular_fibrillation-matrix",
+      "title": "Idiopathic ventricular fibrillation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A diagnosis of exclusion applied to resuscitated ventricular fibrillation when no structural, electrical, metabolic or toxic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG with repeated and high-lead recordings to seek a concealed channelopathy, Echocardiography and cardiac MRI to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Long QT syndrome, Brugada syndrome, Catecholaminergic polymorphic ventricular tachycardia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Implant a cardioverter-defibrillator as the cornerstone of secondary prevention after resuscitated ventricular fibrillation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Settling on the label without an exhaustive search for a specific cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for idiopathic ventricular fibrillation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard cardiology and inherited cardiac conditions references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "idiopathic_ventricular_fibrillation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeated and high-lead 12-lead ECG",
+          "cells": [
+            {
+              "text": "Concealed channelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Structural disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary evaluation and provocation testing",
+          "cells": [
+            {
+              "text": "Ischaemia and vasospasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-provocation and exercise testing",
+          "cells": [
+            {
+              "text": "Unmasks Brugada or catecholaminergic phenotypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and cascade family screening",
+          "cells": [
+            {
+              "text": "Inherited variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Triggering ectopy and its coupling interval"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_ventricular_fibrillation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Brugada syndrome",
+          "cells": [
+            {
+              "text": "Unmasked by drug-provocation testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catecholaminergic polymorphic ventricular tachycardia",
+          "cells": [
+            {
+              "text": "Unmasked by exercise testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occult ischaemic or structural heart disease",
+          "cells": [
+            {
+              "text": "Excluded by coronary evaluation, echocardiography and cardiac MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "idiopathic_ventricular_fibrillation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Cornerstone of secondary prevention after resuscitated ventricular fibrillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Storm management",
+          "cells": [
+            {
+              "text": "Prompt defibrillation and advanced life support; isoprenaline infusion during storm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopy suppression",
+          "cells": [
+            {
+              "text": "Quinidine, particularly effective; beta-blockers or verapamil considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "cells": [
+            {
+              "text": "Initiating Purkinje or outflow-tract focus for recurrent or refractory storm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Periodic re-evaluation, as concealed disease may declare itself"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "Genetic testing and cascade screening of first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "idiopathic_ventricular_fibrillation-dx-mgmt",
+      "title": "Diagnosis and management of Idiopathic ventricular fibrillation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Resuscitated ventricular fibrillation with no cause found on evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent VF or storm, very short-coupled ectopy, or family sudden death?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Defibrillation, advanced life support and isoprenaline during storm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeated ECG, echo and MRI, coronary and provocation tests, genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Structural, ischaemic and channelopathic causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the identified cause or channelopathy; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Implantable cardioverter-defibrillator as cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Quinidine to suppress coupled ectopy; beta-blockers or verapamil",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Catheter ablation for recurrent or refractory storm",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term rhythm surveillance and re-evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic testing and cascade family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Protected by defibrillator; lifelong surveillance as disease may declare",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

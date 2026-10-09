@@ -1,172 +1,714 @@
 {
- "id": "fragile_x_syndrome",
- "name": "Fragile X syndrome",
- "aliases": [
-  "FXS",
-  "Martin-Bell syndrome",
-  "FMR1-related intellectual disability",
-  "marker X syndrome"
- ],
- "class": "non_infective",
- "system": "Genetic / Paediatrics",
- "specialty": "Medical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most common inherited cause of intellectual disability and the leading single-gene contributor to autism spectrum disorder",
-   "Affected boys are typically more severely impaired than girls because of X-linkage, with variable expression in female carriers",
-   "Characteristic physical features include a long narrow face, prominent forehead and jaw, large protruding ears, and macro-orchidism that becomes evident around puberty",
-   "Behavioural profile often includes hyperactivity, attention problems, anxiety, hand-flapping, poor eye contact, and tactile defensiveness",
-   "Connective tissue laxity may produce joint hypermobility, flat feet, and mitral valve prolapse",
-   "Caused by expansion of a CGG trinucleotide repeat in the FMR1 gene leading to loss of the FMRP protein needed for normal synaptic function",
-   "Repeat number distinguishes normal, intermediate, premutation, and full-mutation alleles, with premutations carrying separate adult risks",
-   "Diagnosis is confirmed by targeted DNA testing (repeat sizing and methylation analysis) rather than routine karyotype"
+  "id": "fragile_x_syndrome",
+  "name": "Fragile X syndrome",
+  "aliases": [
+    "FXS",
+    "Martin-Bell syndrome",
+    "FMR1-related intellectual disability",
+    "marker X syndrome"
   ],
-  "pathophysiology": "Fragile X syndrome results from an unstable expansion of a CGG trinucleotide repeat in the 5' untranslated region of the FMR1 gene on the X chromosome. When the repeat expands beyond the full-mutation threshold, the gene becomes hypermethylated and transcriptionally silenced, so little or no fragile X mental retardation protein (FMRP) is produced. FMRP normally regulates translation of numerous messenger RNAs at synapses, and its absence disrupts synaptic maturation and pruning, producing intellectual disability and the behavioural phenotype. Premutation-length repeats are not silenced but generate excess, potentially toxic FMR1 messenger RNA, which underlies the distinct premutation-associated disorders. The repeat tends to expand across generations, particularly through the maternal line, explaining anticipation.",
-  "additionalDifferentials": [
-   "Idiopathic autism spectrum disorder",
-   "Other X-linked intellectual disability syndromes",
-   "Sotos syndrome and other overgrowth syndromes",
-   "Klinefelter syndrome",
-   "Nonspecific developmental delay of undetermined cause"
-  ],
-  "additionalInvestigations": [
-   "Targeted FMR1 molecular testing with CGG repeat sizing and methylation status",
-   "Chromosomal microarray if the molecular test is negative and the cause remains unclear",
-   "Formal developmental, cognitive, and autism assessments",
-   "Cardiac evaluation for mitral valve prolapse when clinically indicated",
-   "Genetic counselling and cascade testing of at-risk relatives"
-  ],
-  "redFlags": [
-   "Female premutation carriers face increased risk of primary ovarian insufficiency and reduced fertility",
-   "Older premutation carriers, particularly men, may develop fragile X-associated tremor/ataxia syndrome",
-   "Recurrence risk in the family is high, making prompt genetic counselling important",
-   "Emerging seizures or marked behavioural deterioration warrant neurological review"
-  ],
-  "prognosis": "Life expectancy is generally normal, but intellectual disability persists lifelong; early behavioural, educational, and speech interventions improve functional outcomes, and severity is typically greater in males than in females.",
-  "pitfalls": [
-   "Assuming a normal karyotype excludes the diagnosis when specific FMR1 repeat testing is required",
-   "Overlooking milder or subtle presentations in female carriers",
-   "Failing to recognise premutation-related adult conditions in relatives",
-   "Neglecting genetic counselling and cascade screening after diagnosis"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early intensive behavioural, educational, speech-language and occupational therapy to maximise developmental and functional outcomes",
-   "Pharmacological treatment of comorbid symptoms: stimulants or alpha-2 agonists for hyperactivity and inattention, selective serotonin reuptake inhibitors for anxiety, and antipsychotics for severe aggression or self-injury",
-   "Applied behavioural interventions for autism-spectrum features, hand-flapping and tactile defensiveness",
-   "Antiseizure medication for the epilepsy that affects a proportion of patients",
-   "Cardiac follow-up for mitral valve prolapse and orthopaedic or physiotherapy input for joint hypermobility and pes planus",
-   "Multidisciplinary follow-up across paediatrics, developmental specialists and psychology, with planned transition to adult services",
-   "Genetic counselling and cascade testing of at-risk relatives, with discussion of premutation-associated disorders and reproductive options"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fragile_x_syndrome-pathway",
-   "title": "Fragile X syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most common inherited cause of intellectual disability and the leading single-gene contributor to autism spectrum disorder",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Female premutation carriers face increased risk of primary ovarian insufficiency and reduced fertility",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted FMR1 molecular testing with CGG repeat sizing and methylation status, Chromosomal microarray if the molecular test is negative and the cause remains unclear, Formal developmental, cognitive, and autism assessments"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early intensive behavioural, educational, speech-language and occupational therapy to maximise developmental and functional outcomes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal karyotype excludes the diagnosis when specific FMR1 repeat testing is required"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fragile x syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "fragile_x_syndrome-matrix",
-   "title": "Fragile X syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most common inherited cause of intellectual disability and the leading single-gene contributor to autism spectrum disorder",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Paediatrics",
+  "specialty": "Medical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most common inherited cause of intellectual disability and the leading single-gene contributor to autism spectrum disorder",
+      "Affected boys are typically more severely impaired than girls because of X-linkage, with variable expression in female carriers",
+      "Characteristic physical features include a long narrow face, prominent forehead and jaw, large protruding ears, and macro-orchidism that becomes evident around puberty",
+      "Behavioural profile often includes hyperactivity, attention problems, anxiety, hand-flapping, poor eye contact, and tactile defensiveness",
+      "Connective tissue laxity may produce joint hypermobility, flat feet, and mitral valve prolapse",
+      "Caused by expansion of a CGG trinucleotide repeat in the FMR1 gene leading to loss of the FMRP protein needed for normal synaptic function",
+      "Repeat number distinguishes normal, intermediate, premutation, and full-mutation alleles, with premutations carrying separate adult risks",
+      "Diagnosis is confirmed by targeted DNA testing (repeat sizing and methylation analysis) rather than routine karyotype"
     ],
-    [
-     "Key Investigations",
-     "Targeted FMR1 molecular testing with CGG repeat sizing and methylation status, Chromosomal microarray if the molecular test is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fragile X syndrome results from an unstable expansion of a CGG trinucleotide repeat in the 5' untranslated region of the FMR1 gene on the X chromosome. When the repeat expands beyond the full-mutation threshold, the gene becomes hypermethylated and transcriptionally silenced, so little or no fragile X mental retardation protein (FMRP) is produced. FMRP normally regulates translation of numerous messenger RNAs at synapses, and its absence disrupts synaptic maturation and pruning, producing intellectual disability and the behavioural phenotype. Premutation-length repeats are not silenced but generate excess, potentially toxic FMR1 messenger RNA, which underlies the distinct premutation-associated disorders. The repeat tends to expand across generations, particularly through the maternal line, explaining anticipation.",
+    "additionalDifferentials": [
+      "Idiopathic autism spectrum disorder",
+      "Other X-linked intellectual disability syndromes",
+      "Sotos syndrome and other overgrowth syndromes",
+      "Klinefelter syndrome",
+      "Nonspecific developmental delay of undetermined cause"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic autism spectrum disorder, Other X-linked intellectual disability syndromes, Sotos syndrome and other overgrowth",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted FMR1 molecular testing with CGG repeat sizing and methylation status",
+      "Chromosomal microarray if the molecular test is negative and the cause remains unclear",
+      "Formal developmental, cognitive, and autism assessments",
+      "Cardiac evaluation for mitral valve prolapse when clinically indicated",
+      "Genetic counselling and cascade testing of at-risk relatives"
     ],
-    [
-     "Management Strategy",
-     "Early intensive behavioural, educational, speech-language and occupational therapy to maximise developmental and functional",
-     "Core treatment modality"
+    "redFlags": [
+      "Female premutation carriers face increased risk of primary ovarian insufficiency and reduced fertility",
+      "Older premutation carriers, particularly men, may develop fragile X-associated tremor/ataxia syndrome",
+      "Recurrence risk in the family is high, making prompt genetic counselling important",
+      "Emerging seizures or marked behavioural deterioration warrant neurological review"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal karyotype excludes the diagnosis when specific FMR1 repeat testing is required",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is generally normal, but intellectual disability persists lifelong; early behavioural, educational, and speech interventions improve functional outcomes, and severity is typically greater in males than in females.",
+    "pitfalls": [
+      "Assuming a normal karyotype excludes the diagnosis when specific FMR1 repeat testing is required",
+      "Overlooking milder or subtle presentations in female carriers",
+      "Failing to recognise premutation-related adult conditions in relatives",
+      "Neglecting genetic counselling and cascade screening after diagnosis"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early intensive behavioural, educational, speech-language and occupational therapy to maximise developmental and functional outcomes",
+      "Pharmacological treatment of comorbid symptoms: stimulants or alpha-2 agonists for hyperactivity and inattention, selective serotonin reuptake inhibitors for anxiety, and antipsychotics for severe aggression or self-injury",
+      "Applied behavioural interventions for autism-spectrum features, hand-flapping and tactile defensiveness",
+      "Antiseizure medication for the epilepsy that affects a proportion of patients",
+      "Cardiac follow-up for mitral valve prolapse and orthopaedic or physiotherapy input for joint hypermobility and pes planus",
+      "Multidisciplinary follow-up across paediatrics, developmental specialists and psychology, with planned transition to adult services",
+      "Genetic counselling and cascade testing of at-risk relatives, with discussion of premutation-associated disorders and reproductive options"
     ]
-   ],
-   "caption": "Overview comparison matrix for fragile x syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fragile-x-syndrome-real-image",
-   "title": "Fragile X syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fragile_x_syndrome-pathway",
+      "title": "Fragile X syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most common inherited cause of intellectual disability and the leading single-gene contributor to autism spectrum disorder",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Female premutation carriers face increased risk of primary ovarian insufficiency and reduced fertility",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted FMR1 molecular testing with CGG repeat sizing and methylation status, Chromosomal microarray if the molecular test is negative and the cause remains unclear, Formal developmental, cognitive, and autism assessments"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early intensive behavioural, educational, speech-language and occupational therapy to maximise developmental and functional outcomes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal karyotype excludes the diagnosis when specific FMR1 repeat testing is required"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fragile x syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fragile_x_syndrome-matrix",
+      "title": "Fragile X syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most common inherited cause of intellectual disability and the leading single-gene contributor to autism spectrum disorder",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted FMR1 molecular testing with CGG repeat sizing and methylation status, Chromosomal microarray if the molecular test is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic autism spectrum disorder, Other X-linked intellectual disability syndromes, Sotos syndrome and other overgrowth",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early intensive behavioural, educational, speech-language and occupational therapy to maximise developmental and functional",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal karyotype excludes the diagnosis when specific FMR1 repeat testing is required",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fragile x syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / standard medical genetics references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 61-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fragile_x_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted FMR1 molecular testing",
+          "cells": [
+            {
+              "text": "CGG repeat sizing and methylation status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Used if the molecular test is negative and the cause is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, cognitive and autism assessments",
+          "cells": [
+            {
+              "text": "Formal assessment across domains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac evaluation",
+          "cells": [
+            {
+              "text": "Mitral valve prolapse, when clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cascade testing of at-risk relatives",
+          "cells": [
+            {
+              "text": "Identifies at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fragile_x_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early intensive therapy",
+          "cells": [
+            {
+              "text": "Behavioural, educational, speech-language and occupational therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication for comorbid symptoms",
+          "cells": [
+            {
+              "text": "Stimulants or alpha-2 agonists for hyperactivity and inattention; selective serotonin reuptake inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural interventions",
+          "cells": [
+            {
+              "text": "For autism-spectrum features, hand-flapping and tactile defensiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For the epilepsy affecting a proportion of patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and orthopaedic follow-up",
+          "cells": [
+            {
+              "text": "Mitral valve prolapse; joint hypermobility and pes planus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Paediatrics, developmental specialists and psychology; planned transition to adult services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade testing, premutation-associated disorders and reproductive options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fragile_x_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Selected trinucleotide repeat disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Locus",
+        "Repeat",
+        "Triplet length (normal/disease)",
+        "Inheritance",
+        "Gene product"
+      ],
+      "rows": [
+        {
+          "parameter": "X-chromosomal spinobulbar muscular atrophy (SBMA)",
+          "cells": [
+            {
+              "text": "Xq11-q12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "11-34/40-62"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "Androgen receptor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXA)",
+          "cells": [
+            {
+              "text": "Xq27.3"
+            },
+            {
+              "text": "CGG"
+            },
+            {
+              "text": "6-50/200-300"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-1 protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fragile X syndrome (FRAXE)",
+          "cells": [
+            {
+              "text": "Xq28"
+            },
+            {
+              "text": "GCC"
+            },
+            {
+              "text": "6-25/>200"
+            },
+            {
+              "text": "XR"
+            },
+            {
+              "text": "FMR-2 protein"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dystrophia myotonica (DM)",
+          "cells": [
+            {
+              "text": "19q13.2-q13.3"
+            },
+            {
+              "text": "CTG"
+            },
+            {
+              "text": "5-30/200-1000"
+            },
+            {
+              "text": "AD, variable penetrance"
+            },
+            {
+              "text": "Myotonin protein kinase"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Huntington's disease (HD)",
+          "cells": [
+            {
+              "text": "4p16.3"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-34/37-180"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Huntingtin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia type 1 (SCA1)",
+          "cells": [
+            {
+              "text": "6p21.3-21.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-39/40-88"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA2",
+          "cells": [
+            {
+              "text": "12q24.1"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "15-31/34-400"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA3; Machado-Joseph disease (MD)",
+          "cells": [
+            {
+              "text": "14q21"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "13-36/55-86"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA6 (CACNA1A)",
+          "cells": [
+            {
+              "text": "19p13.1-13.2"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-16/20-33"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Alpha 1A voltage-dependent L-type calcium channel"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA7",
+          "cells": [
+            {
+              "text": "3p21.1-p12"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "4-19/37 to >300"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Ataxin 7"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCA12",
+          "cells": [
+            {
+              "text": "5q31"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "6-26/66-78"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Protein phosphatase 2A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dentorubral pallidoluysian atrophy (DRPLA)",
+          "cells": [
+            {
+              "text": "12p"
+            },
+            {
+              "text": "CAG"
+            },
+            {
+              "text": "7-23/49-75"
+            },
+            {
+              "text": "AD"
+            },
+            {
+              "text": "Atrophin 1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Friedreich ataxia (FRDA1)",
+          "cells": [
+            {
+              "text": "9q13-21"
+            },
+            {
+              "text": "GAA"
+            },
+            {
+              "text": "7-22/200-900"
+            },
+            {
+              "text": "AR"
+            },
+            {
+              "text": "Frataxin"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fragile_x_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Fragile X syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected fragile X syndrome: intellectual disability with autism-spectrum features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (premutation carrier risks, seizures, marked behavioural decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurological review for emerging seizures or marked behavioural deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Targeted FMR1 testing with CGG repeat sizing and methylation status",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do FMR1 repeat sizing and methylation confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chromosomal microarray; consider other X-linked or developmental causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early intensive behavioural, educational, speech and occupational therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stimulants or alpha-2 agonists for hyperactivity and inattention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication for the epilepsy in a proportion of patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac follow-up; genetic counselling and cascade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Life expectancy generally normal; intellectual disability persists lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

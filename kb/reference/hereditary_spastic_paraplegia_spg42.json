@@ -1,176 +1,472 @@
 {
- "id": "hereditary_spastic_paraplegia_spg42",
- "name": "Hereditary spastic paraplegia type 42 (SPG42)",
- "aliases": [
-  "SPG42",
-  "SLC33A1",
-  "AT-1-related hereditary spastic paraplegia"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary spastic paraplegia",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant, typically pure (uncomplicated) hereditary spastic paraplegia caused by heterozygous SLC33A1 mutations encoding the endoplasmic reticulum acetyl-CoA transporter AT-1.",
-   "Originally delineated in a large Han Chinese kindred; manifests as a length-dependent corticospinal tract degeneration.",
-   "Age of onset is strikingly variable, ranging from early childhood to mid-adulthood even within a single family.",
-   "Core signs are slowly progressive lower-limb spasticity, hyperreflexia, extensor plantar responses and a spastic gait, with the upper limbs characteristically spared.",
-   "Incomplete penetrance and intrafamilial variability are recognised, so obligate carriers may appear unaffected.",
-   "Urinary urgency can emerge later, but sensation and cognition remain preserved in the pure phenotype.",
-   "Biallelic loss-of-function SLC33A1 change causes a distinct severe congenital neurodegenerative syndrome with cataracts and hearing loss, which must not be conflated with dominant SPG42.",
-   "Diagnosis rests on genetic testing; no routine acetyl-CoA transporter assay exists in clinical practice."
+  "id": "hereditary_spastic_paraplegia_spg42",
+  "name": "Hereditary spastic paraplegia type 42 (SPG42)",
+  "aliases": [
+    "SPG42",
+    "SLC33A1",
+    "AT-1-related hereditary spastic paraplegia"
   ],
-  "pathophysiology": "SPG42 arises from mutation in SLC33A1, which encodes acetyl-coenzyme A transporter 1 (AT-1), an endoplasmic reticulum membrane protein that imports cytosolic acetyl-CoA into the ER lumen to supply the acetyl donor for N-epsilon-lysine acetylation of nascent membrane and secretory proteins. The recognised dominant allele (a serine-to-arginine substitution) is thought to act by a dominant-negative or gain-of-function mechanism that perturbs ER protein acetylation, proteostasis and autophagy; the very long corticospinal axons are selectively vulnerable to this metabolic and trafficking stress, producing a distal, length-dependent axonopathy that clinically presents as progressive lower-limb spasticity.",
-  "additionalDifferentials": [
-   "SPG4 (SPAST/spastin) - the commonest autosomal dominant pure HSP",
-   "SPG3A (ATL1/atlastin-1) - early-onset dominant pure HSP",
-   "SPG31 (REEP1) dominant HSP",
-   "Other dominant pure subtypes: SPG6 (NIPA1), SPG8 (WASHC5), SPG10 (KIF5A), SPG12 (RTN2)",
-   "Primary lateral sclerosis and early amyotrophic lateral sclerosis",
-   "Dopa-responsive dystonia and spastic diplegic cerebral palsy in childhood-onset cases",
-   "Acquired myelopathies from vitamin B12 or copper deficiency, or HTLV-1 infection"
-  ],
-  "additionalInvestigations": [
-   "Targeted SLC33A1 sequencing within a hereditary spastic paraplegia gene panel or exome sequencing",
-   "MRI of the brain and whole spine to exclude structural, demyelinating or compressive myelopathy",
-   "Nerve conduction studies and EMG, expected to be normal in the pure form and useful to exclude a neuropathy",
-   "Serum vitamin B12, copper, caeruloplasmin, very-long-chain fatty acids and HTLV-1 serology to exclude treatable or infective mimics",
-   "Motor and somatosensory evoked potentials to document central conduction delay",
-   "Cerebrospinal fluid analysis when an acquired inflammatory myelopathy is plausible",
-   "Family segregation analysis and genetic counselling"
-  ],
-  "redFlags": [
-   "A distinct sensory level, rapidly evolving bladder or bowel dysfunction, or back pain suggesting a compressive or structural cord lesion rather than HSP",
-   "Rapidly progressive or markedly asymmetric weakness raising concern for motor neurone disease",
-   "Cognitive decline, cataracts or deafness pointing to the recessive SLC33A1 syndrome or an alternative diagnosis",
-   "Bulbar or respiratory involvement"
-  ],
-  "prognosis": "Pure SPG42 is generally slowly progressive, with ambulation preserved for years to decades and a normal life expectancy, although walking aids may eventually become necessary.",
-  "pitfalls": [
-   "Assuming any SLC33A1 variant is causal, as the pathogenicity of dominant HSP alleles has been debated and requires careful interpretation with family segregation",
-   "Confusing dominant SPG42 with the severe recessive biallelic SLC33A1 neurodegeneration syndrome",
-   "Labelling static-appearing childhood-onset cases as cerebral palsy",
-   "Omitting exclusion of treatable mimics such as vitamin B12 or copper deficiency before committing to a genetic label"
-  ],
-  "references": [
-   "Standard neurology reference texts",
-   "Clinical neurogenetics literature",
-   "Hereditary spastic paraplegia clinical overviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Symptomatic antispasticity therapy with baclofen or tizanidine, with botulinum toxin for focal lower-limb spasticity",
-   "Regular physiotherapy, stretching and provision of orthoses and walking aids to maintain the spastic gait",
-   "Bladder management with antimuscarinic therapy for urinary urgency emerging later in the course",
-   "Surveillance for gait deterioration, falls and contractures with orthotic and orthopaedic review",
-   "Genetic counselling for autosomal dominant inheritance with incomplete penetrance and strikingly variable onset, offering testing to relatives",
-   "Multidisciplinary neurology, physiotherapy and rehabilitation input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_spastic_paraplegia_spg42-pathway",
-   "title": "Hereditary spastic paraplegia type 42 (SPG42): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant, typically pure (uncomplicated) hereditary spastic paraplegia caused by heterozygous SLC33A1 mutations encoding the endoplasmic reticulum acetyl-CoA transporter AT-1.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A distinct sensory level, rapidly evolving bladder or bowel dysfunction, or back pain suggesting a compressive or structural cord lesion rather than HSP",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted SLC33A1 sequencing within a hereditary spastic paraplegia gene panel or exome sequencing, MRI of the brain and whole spine to exclude structural, demyelinating or compressive myelopathy, Nerve conduction studies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Symptomatic antispasticity therapy with baclofen or tizanidine, with botulinum toxin for focal lower-limb spasticity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming any SLC33A1 variant is causal, as the pathogenicity of dominant HSP alleles has been debated and requires careful interpretation with family segregation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary spastic paraplegia type 42 (spg42)."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_spastic_paraplegia_spg42-matrix",
-   "title": "Hereditary spastic paraplegia type 42 (SPG42): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant, typically pure (uncomplicated) hereditary spastic paraplegia caused by heterozygous SLC33A1 mutations",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary spastic paraplegia",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant, typically pure (uncomplicated) hereditary spastic paraplegia caused by heterozygous SLC33A1 mutations encoding the endoplasmic reticulum acetyl-CoA transporter AT-1.",
+      "Originally delineated in a large Han Chinese kindred; manifests as a length-dependent corticospinal tract degeneration.",
+      "Age of onset is strikingly variable, ranging from early childhood to mid-adulthood even within a single family.",
+      "Core signs are slowly progressive lower-limb spasticity, hyperreflexia, extensor plantar responses and a spastic gait, with the upper limbs characteristically spared.",
+      "Incomplete penetrance and intrafamilial variability are recognised, so obligate carriers may appear unaffected.",
+      "Urinary urgency can emerge later, but sensation and cognition remain preserved in the pure phenotype.",
+      "Biallelic loss-of-function SLC33A1 change causes a distinct severe congenital neurodegenerative syndrome with cataracts and hearing loss, which must not be conflated with dominant SPG42.",
+      "Diagnosis rests on genetic testing; no routine acetyl-CoA transporter assay exists in clinical practice."
     ],
-    [
-     "Key Investigations",
-     "Targeted SLC33A1 sequencing within a hereditary spastic paraplegia gene panel or exome sequencing, MRI of the brain and whole",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SPG42 arises from mutation in SLC33A1, which encodes acetyl-coenzyme A transporter 1 (AT-1), an endoplasmic reticulum membrane protein that imports cytosolic acetyl-CoA into the ER lumen to supply the acetyl donor for N-epsilon-lysine acetylation of nascent membrane and secretory proteins. The recognised dominant allele (a serine-to-arginine substitution) is thought to act by a dominant-negative or gain-of-function mechanism that perturbs ER protein acetylation, proteostasis and autophagy; the very long corticospinal axons are selectively vulnerable to this metabolic and trafficking stress, producing a distal, length-dependent axonopathy that clinically presents as progressive lower-limb spasticity.",
+    "additionalDifferentials": [
+      "SPG4 (SPAST/spastin) - the commonest autosomal dominant pure HSP",
+      "SPG3A (ATL1/atlastin-1) - early-onset dominant pure HSP",
+      "SPG31 (REEP1) dominant HSP",
+      "Other dominant pure subtypes: SPG6 (NIPA1), SPG8 (WASHC5), SPG10 (KIF5A), SPG12 (RTN2)",
+      "Primary lateral sclerosis and early amyotrophic lateral sclerosis",
+      "Dopa-responsive dystonia and spastic diplegic cerebral palsy in childhood-onset cases",
+      "Acquired myelopathies from vitamin B12 or copper deficiency, or HTLV-1 infection"
     ],
-    [
-     "Primary Differentials",
-     "SPG4 (SPAST/spastin) - the commonest autosomal dominant pure HSP, SPG3A (ATL1/atlastin-1) - early-onset dominant pure HSP, SPG31",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted SLC33A1 sequencing within a hereditary spastic paraplegia gene panel or exome sequencing",
+      "MRI of the brain and whole spine to exclude structural, demyelinating or compressive myelopathy",
+      "Nerve conduction studies and EMG, expected to be normal in the pure form and useful to exclude a neuropathy",
+      "Serum vitamin B12, copper, caeruloplasmin, very-long-chain fatty acids and HTLV-1 serology to exclude treatable or infective mimics",
+      "Motor and somatosensory evoked potentials to document central conduction delay",
+      "Cerebrospinal fluid analysis when an acquired inflammatory myelopathy is plausible",
+      "Family segregation analysis and genetic counselling"
     ],
-    [
-     "Management Strategy",
-     "Symptomatic antispasticity therapy with baclofen or tizanidine, with botulinum toxin for focal lower-limb spasticity",
-     "Core treatment modality"
+    "redFlags": [
+      "A distinct sensory level, rapidly evolving bladder or bowel dysfunction, or back pain suggesting a compressive or structural cord lesion rather than HSP",
+      "Rapidly progressive or markedly asymmetric weakness raising concern for motor neurone disease",
+      "Cognitive decline, cataracts or deafness pointing to the recessive SLC33A1 syndrome or an alternative diagnosis",
+      "Bulbar or respiratory involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming any SLC33A1 variant is causal, as the pathogenicity of dominant HSP alleles has been debated and requires careful",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pure SPG42 is generally slowly progressive, with ambulation preserved for years to decades and a normal life expectancy, although walking aids may eventually become necessary.",
+    "pitfalls": [
+      "Assuming any SLC33A1 variant is causal, as the pathogenicity of dominant HSP alleles has been debated and requires careful interpretation with family segregation",
+      "Confusing dominant SPG42 with the severe recessive biallelic SLC33A1 neurodegeneration syndrome",
+      "Labelling static-appearing childhood-onset cases as cerebral palsy",
+      "Omitting exclusion of treatable mimics such as vitamin B12 or copper deficiency before committing to a genetic label"
+    ],
+    "references": [
+      "Standard neurology reference texts",
+      "Clinical neurogenetics literature",
+      "Hereditary spastic paraplegia clinical overviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Symptomatic antispasticity therapy with baclofen or tizanidine, with botulinum toxin for focal lower-limb spasticity",
+      "Regular physiotherapy, stretching and provision of orthoses and walking aids to maintain the spastic gait",
+      "Bladder management with antimuscarinic therapy for urinary urgency emerging later in the course",
+      "Surveillance for gait deterioration, falls and contractures with orthotic and orthopaedic review",
+      "Genetic counselling for autosomal dominant inheritance with incomplete penetrance and strikingly variable onset, offering testing to relatives",
+      "Multidisciplinary neurology, physiotherapy and rehabilitation input"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary spastic paraplegia type 42 (spg42)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-spastic-paraplegia-spg42-real-image",
-   "title": "Hereditary spastic paraplegia type 42 (SPG42): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hereditary_spastic_paraplegia_spg42-pathway",
+      "title": "Hereditary spastic paraplegia type 42 (SPG42): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant, typically pure (uncomplicated) hereditary spastic paraplegia caused by heterozygous SLC33A1 mutations encoding the endoplasmic reticulum acetyl-CoA transporter AT-1.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A distinct sensory level, rapidly evolving bladder or bowel dysfunction, or back pain suggesting a compressive or structural cord lesion rather than HSP",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted SLC33A1 sequencing within a hereditary spastic paraplegia gene panel or exome sequencing, MRI of the brain and whole spine to exclude structural, demyelinating or compressive myelopathy, Nerve conduction studies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Symptomatic antispasticity therapy with baclofen or tizanidine, with botulinum toxin for focal lower-limb spasticity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming any SLC33A1 variant is causal, as the pathogenicity of dominant HSP alleles has been debated and requires careful interpretation with family segregation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary spastic paraplegia type 42 (spg42)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg42-matrix",
+      "title": "Hereditary spastic paraplegia type 42 (SPG42): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant, typically pure (uncomplicated) hereditary spastic paraplegia caused by heterozygous SLC33A1 mutations",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted SLC33A1 sequencing within a hereditary spastic paraplegia gene panel or exome sequencing, MRI of the brain and whole",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SPG4 (SPAST/spastin) - the commonest autosomal dominant pure HSP, SPG3A (ATL1/atlastin-1) - early-onset dominant pure HSP, SPG31",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Symptomatic antispasticity therapy with baclofen or tizanidine, with botulinum toxin for focal lower-limb spasticity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any SLC33A1 variant is causal, as the pathogenicity of dominant HSP alleles has been debated and requires careful",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary spastic paraplegia type 42 (spg42)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg42-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted SLC33A1 sequencing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of brain and whole spine",
+          "cells": [
+            {
+              "text": "Excludes structural and demyelinating causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Expected to be normal in the pure form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12, copper, caeruloplasmin and very-long-chain fatty acids",
+          "cells": [
+            {
+              "text": "Excludes acquired mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor and somatosensory evoked potentials",
+          "cells": [
+            {
+              "text": "Central conduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family segregation analysis",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg42-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SPG4 (SPAST)",
+          "cells": [
+            {
+              "text": "Commonest autosomal dominant pure HSP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPG3A (ATL1)",
+          "cells": [
+            {
+              "text": "Early-onset dominant pure HSP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SPG31 (REEP1)",
+          "cells": [
+            {
+              "text": "Dominant HSP; SLC33A1 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopa-responsive dystonia or spastic diplegic cerebral palsy",
+          "cells": [
+            {
+              "text": "Treatable or non-progressive mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hereditary_spastic_paraplegia_spg42-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Baclofen or tizanidine",
+          "cells": [
+            {
+              "text": "Symptomatic antispasticity therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, stretching, orthoses and walking aids",
+          "cells": [
+            {
+              "text": "Maintains mobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimuscarinic therapy",
+          "cells": [
+            {
+              "text": "Urinary urgency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Gait deterioration, falls and contractures, with orthopaedic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance with incomplete penetrance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary neurology",
+          "cells": [
+            {
+              "text": "Physiotherapy and rehabilitation input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hereditary_spastic_paraplegia_spg42-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary spastic paraplegia type 42 (SPG42)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pure dominant lower-limb spasticity with a family history and normal nerve studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sensory level, fast bladder or bowel failure, cognitive decline, cataract or deafness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: MRI for compressive lesion; neurology review for cognitive or sensory signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SLC33A1 sequencing; MRI brain and spine; nerve studies; evoked potentials; B12, copper",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an SLC33A1 variant found, with acquired myelopathy excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SPG4, SPG3A, SPG31, primary lateral sclerosis or dopa-responsive dystonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral baclofen or tizanidine for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, stretching, orthoses and walking aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antimuscarinic therapy for bladder urgency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gait, falls and contracture surveillance with orthopaedic input",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms managed; genetic counselling with incomplete penetrance noted",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

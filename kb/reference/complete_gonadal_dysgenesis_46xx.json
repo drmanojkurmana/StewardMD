@@ -1,174 +1,461 @@
 {
- "id": "complete_gonadal_dysgenesis_46xx",
- "name": "46,XX gonadal dysgenesis",
- "aliases": [
-  "46,XX complete gonadal dysgenesis",
-  "XX gonadal dysgenesis",
-  "XX pure gonadal dysgenesis",
-  "hypergonadotropic ovarian dysgenesis"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive genetics",
- "specialty": "Reproductive Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A 46,XX individual with a female phenotype, normal internal mullerian structures, but bilateral streak gonads that fail to produce oestrogen",
-   "Typically presents with primary amenorrhoea and absent or arrested puberty in a girl of normal stature, without the somatic stigmata of Turner syndrome",
-   "Biochemistry shows hypergonadotropic hypogonadism with high gonadotropins and low oestradiol",
-   "Often inherited in an autosomal recessive manner, with variants in genes such as FSHR and other ovarian-determining and DNA-repair genes; some cases form part of syndromes (for example Perrault syndrome with sensorineural deafness)",
-   "The uterus is present and normal, so pregnancy is achievable through oocyte donation after adequate hormonal preparation",
-   "Unlike dysgenesis involving a Y chromosome, there is no gonadoblastoma risk, so prophylactic gonadectomy is not indicated on tumour grounds",
-   "Management centres on oestrogen and progestogen replacement to induce puberty, maintain secondary sexual characteristics and protect bone"
+  "id": "complete_gonadal_dysgenesis_46xx",
+  "name": "46,XX gonadal dysgenesis",
+  "aliases": [
+    "46,XX complete gonadal dysgenesis",
+    "XX gonadal dysgenesis",
+    "XX pure gonadal dysgenesis",
+    "hypergonadotropic ovarian dysgenesis"
   ],
-  "pathophysiology": "In 46,XX gonadal dysgenesis the karyotype is normal female, but the ovaries fail to develop and are replaced by fibrous streak gonads, so oestrogen production is absent. This may follow biallelic defects in genes required for ovarian development or gonadotropin signalling (such as the follicle-stimulating hormone receptor) or occur within multisystem syndromes. The mullerian ducts, whose development does not depend on gonadal hormones, form a normal uterus and upper vagina, while the absence of oestrogen prevents pubertal maturation and drives compensatory elevation of gonadotropins. Because no Y-chromosome material is present, the streak gonads do not carry the germ cell tumour risk seen in Y-bearing dysgenesis.",
-  "additionalDifferentials": [
-   "Turner syndrome and its mosaic forms",
-   "Swyer syndrome (46,XY complete gonadal dysgenesis)",
-   "Premature ovarian insufficiency of other cause",
-   "Congenital hypogonadotropic hypogonadism",
-   "Complete androgen insensitivity syndrome (uterus absent)",
-   "Galactosaemia-associated ovarian failure"
-  ],
-  "additionalInvestigations": [
-   "Karyotype confirming 46,XX and excluding a Y-bearing line",
-   "Serum follicle-stimulating hormone, luteinising hormone and oestradiol demonstrating hypergonadotropic hypogonadism",
-   "Pelvic ultrasound or MRI confirming a uterus and streak gonads",
-   "Genetic testing including FSHR and syndromic genes where indicated",
-   "Audiometry to detect associated sensorineural hearing loss (Perrault syndrome)",
-   "Bone mineral density assessment given oestrogen deficiency"
-  ],
-  "redFlags": [
-   "Associated sensorineural deafness or neurological features suggesting a syndromic diagnosis",
-   "Severe osteoporosis or fragility fracture from untreated oestrogen deficiency",
-   "Delayed diagnosis with prolonged absence of pubertal development",
-   "Any evidence of a Y-chromosome line on karyotype, which would change tumour-risk management"
-  ],
-  "prognosis": "With oestrogen and progestogen replacement, pubertal development and bone health can be established and maintained, and pregnancy is feasible through oocyte donation because the uterus is intact. The absence of a Y line means germ cell tumour risk is not a concern in this karyotype.",
-  "pitfalls": [
-   "Attributing primary amenorrhoea to constitutional delay and missing hypergonadotropic hypogonadism",
-   "Recommending gonadectomy despite the absence of a Y chromosome and tumour risk",
-   "Confusing it with androgen insensitivity, in which the uterus is absent",
-   "Overlooking associated syndromic features such as deafness"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on disorders of sex development"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce puberty with incremental oestrogen followed by combined oestrogen and progestogen replacement to develop secondary sexual characteristics and protect the uterus and bone",
-   "Maintain long-term hormone replacement to preserve bone health and cardiovascular protection in the setting of oestrogen deficiency",
-   "Offer fertility through oocyte donation with hormonal preparation of the intact uterus",
-   "Avoid prophylactic gonadectomy, since the absence of a Y chromosome means there is no gonadoblastoma risk",
-   "Monitor bone mineral density given the oestrogen deficiency",
-   "Arrange audiometry to detect associated sensorineural hearing loss as in Perrault syndrome",
-   "Provide genetic counselling and family screening given the autosomal recessive inheritance, together with psychological support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "complete_gonadal_dysgenesis_46xx-pathway",
-   "title": "46,XX gonadal dysgenesis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A 46,XX individual with a female phenotype, normal internal mullerian structures, but bilateral streak gonads that fail to produce oestrogen",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Associated sensorineural deafness or neurological features suggesting a syndromic diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Karyotype confirming 46,XX and excluding a Y-bearing line, Serum follicle-stimulating hormone, luteinising hormone and oestradiol demonstrating hypergonadotropic hypogonadism, Pelvic ultrasound or MRI confirming a uterus"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce puberty with incremental oestrogen followed by combined oestrogen and progestogen replacement to develop secondary sexual characteristics and protect the uterus and bone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing primary amenorrhoea to constitutional delay and missing hypergonadotropic hypogonadism"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of 46,xx gonadal dysgenesis."
-  }
- ],
- "tables": [
-  {
-   "id": "complete_gonadal_dysgenesis_46xx-matrix",
-   "title": "46,XX gonadal dysgenesis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A 46,XX individual with a female phenotype, normal internal mullerian structures, but bilateral streak gonads that fail to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive genetics",
+  "specialty": "Reproductive Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A 46,XX individual with a female phenotype, normal internal mullerian structures, but bilateral streak gonads that fail to produce oestrogen",
+      "Typically presents with primary amenorrhoea and absent or arrested puberty in a girl of normal stature, without the somatic stigmata of Turner syndrome",
+      "Biochemistry shows hypergonadotropic hypogonadism with high gonadotropins and low oestradiol",
+      "Often inherited in an autosomal recessive manner, with variants in genes such as FSHR and other ovarian-determining and DNA-repair genes; some cases form part of syndromes (for example Perrault syndrome with sensorineural deafness)",
+      "The uterus is present and normal, so pregnancy is achievable through oocyte donation after adequate hormonal preparation",
+      "Unlike dysgenesis involving a Y chromosome, there is no gonadoblastoma risk, so prophylactic gonadectomy is not indicated on tumour grounds",
+      "Management centres on oestrogen and progestogen replacement to induce puberty, maintain secondary sexual characteristics and protect bone"
     ],
-    [
-     "Key Investigations",
-     "Karyotype confirming 46,XX and excluding a Y-bearing line, Serum follicle-stimulating hormone, luteinising hormone and oestradiol",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In 46,XX gonadal dysgenesis the karyotype is normal female, but the ovaries fail to develop and are replaced by fibrous streak gonads, so oestrogen production is absent. This may follow biallelic defects in genes required for ovarian development or gonadotropin signalling (such as the follicle-stimulating hormone receptor) or occur within multisystem syndromes. The mullerian ducts, whose development does not depend on gonadal hormones, form a normal uterus and upper vagina, while the absence of oestrogen prevents pubertal maturation and drives compensatory elevation of gonadotropins. Because no Y-chromosome material is present, the streak gonads do not carry the germ cell tumour risk seen in Y-bearing dysgenesis.",
+    "additionalDifferentials": [
+      "Turner syndrome and its mosaic forms",
+      "Swyer syndrome (46,XY complete gonadal dysgenesis)",
+      "Premature ovarian insufficiency of other cause",
+      "Congenital hypogonadotropic hypogonadism",
+      "Complete androgen insensitivity syndrome (uterus absent)",
+      "Galactosaemia-associated ovarian failure"
     ],
-    [
-     "Primary Differentials",
-     "Turner syndrome and its mosaic forms, Swyer syndrome (46,XY complete gonadal dysgenesis), Premature ovarian insufficiency of",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Karyotype confirming 46,XX and excluding a Y-bearing line",
+      "Serum follicle-stimulating hormone, luteinising hormone and oestradiol demonstrating hypergonadotropic hypogonadism",
+      "Pelvic ultrasound or MRI confirming a uterus and streak gonads",
+      "Genetic testing including FSHR and syndromic genes where indicated",
+      "Audiometry to detect associated sensorineural hearing loss (Perrault syndrome)",
+      "Bone mineral density assessment given oestrogen deficiency"
     ],
-    [
-     "Management Strategy",
-     "Induce puberty with incremental oestrogen followed by combined oestrogen and progestogen replacement to develop secondary sexual",
-     "Core treatment modality"
+    "redFlags": [
+      "Associated sensorineural deafness or neurological features suggesting a syndromic diagnosis",
+      "Severe osteoporosis or fragility fracture from untreated oestrogen deficiency",
+      "Delayed diagnosis with prolonged absence of pubertal development",
+      "Any evidence of a Y-chromosome line on karyotype, which would change tumour-risk management"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing primary amenorrhoea to constitutional delay and missing hypergonadotropic hypogonadism",
-     "Prevent diagnostic or management error"
+    "prognosis": "With oestrogen and progestogen replacement, pubertal development and bone health can be established and maintained, and pregnancy is feasible through oocyte donation because the uterus is intact. The absence of a Y line means germ cell tumour risk is not a concern in this karyotype.",
+    "pitfalls": [
+      "Attributing primary amenorrhoea to constitutional delay and missing hypergonadotropic hypogonadism",
+      "Recommending gonadectomy despite the absence of a Y chromosome and tumour risk",
+      "Confusing it with androgen insensitivity, in which the uterus is absent",
+      "Overlooking associated syndromic features such as deafness"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on disorders of sex development"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce puberty with incremental oestrogen followed by combined oestrogen and progestogen replacement to develop secondary sexual characteristics and protect the uterus and bone",
+      "Maintain long-term hormone replacement to preserve bone health and cardiovascular protection in the setting of oestrogen deficiency",
+      "Offer fertility through oocyte donation with hormonal preparation of the intact uterus",
+      "Avoid prophylactic gonadectomy, since the absence of a Y chromosome means there is no gonadoblastoma risk",
+      "Monitor bone mineral density given the oestrogen deficiency",
+      "Arrange audiometry to detect associated sensorineural hearing loss as in Perrault syndrome",
+      "Provide genetic counselling and family screening given the autosomal recessive inheritance, together with psychological support"
     ]
-   ],
-   "caption": "Overview comparison matrix for 46,xx gonadal dysgenesis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "complete-gonadal-dysgenesis-46xx-real-image",
-   "title": "46,XX gonadal dysgenesis: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "complete_gonadal_dysgenesis_46xx-pathway",
+      "title": "46,XX gonadal dysgenesis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A 46,XX individual with a female phenotype, normal internal mullerian structures, but bilateral streak gonads that fail to produce oestrogen",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Associated sensorineural deafness or neurological features suggesting a syndromic diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Karyotype confirming 46,XX and excluding a Y-bearing line, Serum follicle-stimulating hormone, luteinising hormone and oestradiol demonstrating hypergonadotropic hypogonadism, Pelvic ultrasound or MRI confirming a uterus"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce puberty with incremental oestrogen followed by combined oestrogen and progestogen replacement to develop secondary sexual characteristics and protect the uterus and bone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing primary amenorrhoea to constitutional delay and missing hypergonadotropic hypogonadism"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of 46,xx gonadal dysgenesis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "complete_gonadal_dysgenesis_46xx-matrix",
+      "title": "46,XX gonadal dysgenesis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A 46,XX individual with a female phenotype, normal internal mullerian structures, but bilateral streak gonads that fail to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Karyotype confirming 46,XX and excluding a Y-bearing line, Serum follicle-stimulating hormone, luteinising hormone and oestradiol",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Turner syndrome and its mosaic forms, Swyer syndrome (46,XY complete gonadal dysgenesis), Premature ovarian insufficiency of",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce puberty with incremental oestrogen followed by combined oestrogen and progestogen replacement to develop secondary sexual",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing primary amenorrhoea to constitutional delay and missing hypergonadotropic hypogonadism",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for 46,xx gonadal dysgenesis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "complete_gonadal_dysgenesis_46xx-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "46,XX; no Y-bearing line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum FSH, LH and oestradiol",
+          "cells": [
+            {
+              "text": "Hypergonadotropic hypogonadism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Uterus present; streak gonads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Associated sensorineural hearing loss (Perrault syndrome)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone mineral density",
+          "cells": [
+            {
+              "text": "Oestrogen deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complete_gonadal_dysgenesis_46xx-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Turner syndrome and its mosaic forms",
+          "cells": [
+            {
+              "text": "Karyotype distinguishes 46,XX from 45,X or mosaic forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swyer syndrome (46,XY complete gonadal dysgenesis)",
+          "cells": [
+            {
+              "text": "46,XY karyotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete androgen insensitivity syndrome",
+          "cells": [
+            {
+              "text": "Absent uterus; 46,XY karyotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complete_gonadal_dysgenesis_46xx-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Puberty induction",
+          "cells": [
+            {
+              "text": "Incremental oestrogen, then combined oestrogen and progestogen replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term hormone replacement",
+          "cells": [
+            {
+              "text": "Preserves bone health and cardiovascular protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility",
+          "cells": [
+            {
+              "text": "Oocyte donation with hormonal preparation of the intact uterus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No prophylactic gonadectomy",
+          "cells": [
+            {
+              "text": "No Y chromosome, so no gonadoblastoma risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone density monitoring",
+          "cells": [
+            {
+              "text": "Oestrogen deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "To detect sensorineural hearing loss as in Perrault syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening; psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "complete_gonadal_dysgenesis_46xx-dx-mgmt",
+      "title": "Diagnosis and management of 46,XX gonadal dysgenesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected 46,XX gonadal dysgenesis: primary amenorrhoea, absent puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (deafness or neurological signs, fragility fracture, Y-line)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: check for a Y-chromosome line; assess bone health",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype; FSH, LH and oestradiol; pelvic imaging; audiometry; bone density",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the karyotype and gonadotrophins consistent with 46,XX dysgenesis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Turner syndrome, Swyer syndrome or constitutional delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Induce puberty with incremental oestrogen, then add progestogen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term replacement for bone and cardiovascular protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Audiometry to detect Perrault-associated hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oocyte donation for fertility; genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With replacement, puberty and bone health are established; pregnancy is feasible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

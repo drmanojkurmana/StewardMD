@@ -1,175 +1,415 @@
 {
- "id": "retinoblastoma_hereditary",
- "name": "Hereditary retinoblastoma",
- "aliases": [
-  "RB1",
-  "heritable retinoblastoma",
-  "germline retinoblastoma",
-  "bilateral retinoblastoma"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest primary intraocular malignancy of childhood, usually presenting before the age of five with leukocoria or strabismus",
-   "The hereditary form is caused by a germline mutation in the RB1 tumour-suppressor gene and follows Knudson's two-hit model, with a second somatic hit initiating the tumour",
-   "Hereditary disease tends to be bilateral and multifocal and presents earlier than the sporadic, unilateral form",
-   "A germline RB1 mutation confers a substantial lifetime risk of second, non-ocular malignancies such as osteosarcoma, soft-tissue sarcoma and melanoma",
-   "The inheritance pattern is autosomal dominant with high penetrance, so genetic testing and counselling of families is essential",
-   "Diagnosis is clinical and radiological, and biopsy is avoided because of the risk of tumour seeding",
-   "Pinealoblastoma occurring with bilateral retinoblastoma is termed trilateral retinoblastoma and carries a poor prognosis"
+  "id": "retinoblastoma_hereditary",
+  "name": "Hereditary retinoblastoma",
+  "aliases": [
+    "RB1",
+    "heritable retinoblastoma",
+    "germline retinoblastoma",
+    "bilateral retinoblastoma"
   ],
-  "pathophysiology": "Retinoblastoma arises from developing retinal cells and is driven by biallelic inactivation of the RB1 tumour-suppressor gene, whose protein normally restrains cell-cycle progression. In hereditary disease one defective RB1 allele is present in every cell as a germline mutation (the first hit), and loss or mutation of the remaining functional allele within a retinal cell (the second hit) allows unregulated proliferation and tumour formation, in keeping with Knudson's two-hit hypothesis. Because the first hit is already present throughout the body, tumours tend to be bilateral and multifocal and to arise early, and the germline defect predisposes other tissues to malignancy later in life.",
-  "additionalDifferentials": [
-   "Coats disease with exudative retinal detachment",
-   "Persistent fetal vasculature (persistent hyperplastic primary vitreous)",
-   "Norrie disease and other causes of a retrolental mass",
-   "Toxocariasis and other inflammatory causes of leukocoria",
-   "Congenital cataract and retinopathy of prematurity",
-   "Astrocytic hamartoma of the retina"
-  ],
-  "additionalInvestigations": [
-   "Examination under anaesthesia with wide-field fundus imaging to map and stage tumours",
-   "Ocular ultrasound to demonstrate an intraocular mass with characteristic calcification",
-   "MRI of the orbits and brain to assess optic nerve, extraocular spread and pineal involvement",
-   "RB1 germline molecular genetic testing with counselling and cascade screening of relatives",
-   "Surveillance examinations of at-risk siblings and offspring from infancy"
-  ],
-  "redFlags": [
-   "Leukocoria or new strabismus in a young child requiring urgent ophthalmology referral",
-   "A buphthalmic or painful red eye suggesting advanced intraocular disease",
-   "Signs of optic nerve or extraocular extension on imaging",
-   "New neurological symptoms or a pineal mass suggesting trilateral disease",
-   "Later bone pain or a mass in a survivor, raising concern for a second malignancy"
-  ],
-  "prognosis": "With early diagnosis and modern treatment, survival from intraocular retinoblastoma is high in well-resourced settings, and eye-preserving therapy is often possible; however, patients with a germline RB1 mutation carry a lifelong increased risk of second malignancies, and extraocular or metastatic disease and trilateral retinoblastoma carry a much poorer prognosis.",
-  "pitfalls": [
-   "Delaying referral of leukocoria and allowing progression to advanced disease",
-   "Performing intraocular biopsy and risking tumour dissemination",
-   "Assuming a unilateral presentation excludes a germline mutation without genetic testing",
-   "Neglecting lifelong surveillance for second malignancies in germline carriers",
-   "Failing to screen and counsel at-risk relatives"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Preserve vision where possible with eye-conserving therapy: focal laser or thermotherapy, cryotherapy, plaque brachytherapy, and chemoreduction using systemic, intra-arterial or intravitreal chemotherapy for the typically bilateral, multifocal tumours",
-   "Reserve enucleation for eyes with advanced disease, avoiding diagnostic biopsy because of the risk of tumour seeding",
-   "Avoid external beam radiotherapy where feasible, as it markedly increases the risk of radiation-induced second malignancies in germline mutation carriers",
-   "Confirm the germline RB1 mutation and provide genetic counselling with cascade screening of relatives",
-   "Screen at-risk siblings and offspring from infancy with serial examinations under anaesthesia",
-   "Maintain lifelong surveillance for second, non-ocular malignancies such as osteosarcoma, soft-tissue sarcoma and melanoma",
-   "Coordinate care through an ocular oncology and clinical genetics multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "retinoblastoma_hereditary-pathway",
-   "title": "Hereditary retinoblastoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest primary intraocular malignancy of childhood, usually presenting before the age of five with leukocoria or strabismus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Leukocoria or new strabismus in a young child requiring urgent ophthalmology referral",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination under anaesthesia with wide-field fundus imaging to map and stage tumours, Ocular ultrasound to demonstrate an intraocular mass with characteristic calcification, MRI of the orbits and brain to assess optic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Preserve vision where possible with eye-conserving therapy: focal laser or thermotherapy, cryotherapy, plaque brachytherapy, and chemoreduction using systemic, intra-arterial or intravitreal chemotherapy for the"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying referral of leukocoria and allowing progression to advanced disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary retinoblastoma."
-  }
- ],
- "tables": [
-  {
-   "id": "retinoblastoma_hereditary-matrix",
-   "title": "Hereditary retinoblastoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest primary intraocular malignancy of childhood, usually presenting before the age of five with leukocoria or strabismus",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest primary intraocular malignancy of childhood, usually presenting before the age of five with leukocoria or strabismus",
+      "The hereditary form is caused by a germline mutation in the RB1 tumour-suppressor gene and follows Knudson's two-hit model, with a second somatic hit initiating the tumour",
+      "Hereditary disease tends to be bilateral and multifocal and presents earlier than the sporadic, unilateral form",
+      "A germline RB1 mutation confers a substantial lifetime risk of second, non-ocular malignancies such as osteosarcoma, soft-tissue sarcoma and melanoma",
+      "The inheritance pattern is autosomal dominant with high penetrance, so genetic testing and counselling of families is essential",
+      "Diagnosis is clinical and radiological, and biopsy is avoided because of the risk of tumour seeding",
+      "Pinealoblastoma occurring with bilateral retinoblastoma is termed trilateral retinoblastoma and carries a poor prognosis"
     ],
-    [
-     "Key Investigations",
-     "Examination under anaesthesia with wide-field fundus imaging to map and stage tumours, Ocular ultrasound to demonstrate an",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Retinoblastoma arises from developing retinal cells and is driven by biallelic inactivation of the RB1 tumour-suppressor gene, whose protein normally restrains cell-cycle progression. In hereditary disease one defective RB1 allele is present in every cell as a germline mutation (the first hit), and loss or mutation of the remaining functional allele within a retinal cell (the second hit) allows unregulated proliferation and tumour formation, in keeping with Knudson's two-hit hypothesis. Because the first hit is already present throughout the body, tumours tend to be bilateral and multifocal and to arise early, and the germline defect predisposes other tissues to malignancy later in life.",
+    "additionalDifferentials": [
+      "Coats disease with exudative retinal detachment",
+      "Persistent fetal vasculature (persistent hyperplastic primary vitreous)",
+      "Norrie disease and other causes of a retrolental mass",
+      "Toxocariasis and other inflammatory causes of leukocoria",
+      "Congenital cataract and retinopathy of prematurity",
+      "Astrocytic hamartoma of the retina"
     ],
-    [
-     "Primary Differentials",
-     "Coats disease with exudative retinal detachment, Persistent fetal vasculature (persistent hyperplastic primary vitreous), Norrie",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination under anaesthesia with wide-field fundus imaging to map and stage tumours",
+      "Ocular ultrasound to demonstrate an intraocular mass with characteristic calcification",
+      "MRI of the orbits and brain to assess optic nerve, extraocular spread and pineal involvement",
+      "RB1 germline molecular genetic testing with counselling and cascade screening of relatives",
+      "Surveillance examinations of at-risk siblings and offspring from infancy"
     ],
-    [
-     "Management Strategy",
-     "Preserve vision where possible with eye-conserving therapy: focal laser or thermotherapy, cryotherapy, plaque brachytherapy, and",
-     "Core treatment modality"
+    "redFlags": [
+      "Leukocoria or new strabismus in a young child requiring urgent ophthalmology referral",
+      "A buphthalmic or painful red eye suggesting advanced intraocular disease",
+      "Signs of optic nerve or extraocular extension on imaging",
+      "New neurological symptoms or a pineal mass suggesting trilateral disease",
+      "Later bone pain or a mass in a survivor, raising concern for a second malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying referral of leukocoria and allowing progression to advanced disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis and modern treatment, survival from intraocular retinoblastoma is high in well-resourced settings, and eye-preserving therapy is often possible; however, patients with a germline RB1 mutation carry a lifelong increased risk of second malignancies, and extraocular or metastatic disease and trilateral retinoblastoma carry a much poorer prognosis.",
+    "pitfalls": [
+      "Delaying referral of leukocoria and allowing progression to advanced disease",
+      "Performing intraocular biopsy and risking tumour dissemination",
+      "Assuming a unilateral presentation excludes a germline mutation without genetic testing",
+      "Neglecting lifelong surveillance for second malignancies in germline carriers",
+      "Failing to screen and counsel at-risk relatives"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Preserve vision where possible with eye-conserving therapy: focal laser or thermotherapy, cryotherapy, plaque brachytherapy, and chemoreduction using systemic, intra-arterial or intravitreal chemotherapy for the typically bilateral, multifocal tumours",
+      "Reserve enucleation for eyes with advanced disease, avoiding diagnostic biopsy because of the risk of tumour seeding",
+      "Avoid external beam radiotherapy where feasible, as it markedly increases the risk of radiation-induced second malignancies in germline mutation carriers",
+      "Confirm the germline RB1 mutation and provide genetic counselling with cascade screening of relatives",
+      "Screen at-risk siblings and offspring from infancy with serial examinations under anaesthesia",
+      "Maintain lifelong surveillance for second, non-ocular malignancies such as osteosarcoma, soft-tissue sarcoma and melanoma",
+      "Coordinate care through an ocular oncology and clinical genetics multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary retinoblastoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "retinoblastoma-hereditary-real-image",
-   "title": "Hereditary retinoblastoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "retinoblastoma_hereditary-pathway",
+      "title": "Hereditary retinoblastoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest primary intraocular malignancy of childhood, usually presenting before the age of five with leukocoria or strabismus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Leukocoria or new strabismus in a young child requiring urgent ophthalmology referral",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination under anaesthesia with wide-field fundus imaging to map and stage tumours, Ocular ultrasound to demonstrate an intraocular mass with characteristic calcification, MRI of the orbits and brain to assess optic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Preserve vision where possible with eye-conserving therapy: focal laser or thermotherapy, cryotherapy, plaque brachytherapy, and chemoreduction using systemic, intra-arterial or intravitreal chemotherapy for the"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying referral of leukocoria and allowing progression to advanced disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary retinoblastoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "retinoblastoma_hereditary-matrix",
+      "title": "Hereditary retinoblastoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest primary intraocular malignancy of childhood, usually presenting before the age of five with leukocoria or strabismus",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination under anaesthesia with wide-field fundus imaging to map and stage tumours, Ocular ultrasound to demonstrate an",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coats disease with exudative retinal detachment, Persistent fetal vasculature (persistent hyperplastic primary vitreous), Norrie",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Preserve vision where possible with eye-conserving therapy: focal laser or thermotherapy, cryotherapy, plaque brachytherapy, and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying referral of leukocoria and allowing progression to advanced disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary retinoblastoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "retinoblastoma_hereditary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination under anaesthesia with wide-field fundus imaging",
+          "cells": [
+            {
+              "text": "Tumour map and stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular ultrasound",
+          "cells": [
+            {
+              "text": "Intraocular mass with characteristic calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of orbits and brain",
+          "cells": [
+            {
+              "text": "Optic nerve and extraocular spread; pineal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline RB1 testing with counselling",
+          "cells": [
+            {
+              "text": "Germline RB1 mutation; cascade screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "retinoblastoma_hereditary-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Eye-conserving therapy",
+          "cells": [
+            {
+              "text": "Focal laser or thermotherapy, cryotherapy, plaque brachytherapy and chemoreduction for typically bilateral, multifocal tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enucleation",
+          "cells": [
+            {
+              "text": "For eyes with advanced disease; avoid diagnostic biopsy because of tumour seeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "External beam radiotherapy",
+          "cells": [
+            {
+              "text": "Avoid where feasible; markedly increases radiation-induced second malignancy risk in germline carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation",
+          "cells": [
+            {
+              "text": "Confirm germline RB1 mutation; counselling and cascade screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening of siblings and offspring",
+          "cells": [
+            {
+              "text": "Serial examinations under anaesthesia from infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Second non-ocular malignancies such as osteosarcoma, soft-tissue sarcoma and melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordination",
+          "cells": [
+            {
+              "text": "Care coordinated through an ocular oncology team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "retinoblastoma_hereditary-dx-mgmt",
+      "title": "Diagnosis and management of Hereditary retinoblastoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with leukocoria or strabismus; possible germline RB1 mutation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (buphthalmos, painful red eye, optic or pineal involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review: advanced disease with optic nerve, extraocular or pineal spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia, ocular ultrasound, orbit and brain MRI, RB1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a germline RB1 mutation confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Keep under review; consider other causes of leukocoria and repeat assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Eye-conserving therapy: laser, cryotherapy, brachytherapy or chemoreduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enucleation for advanced disease; avoid diagnostic biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid external beam radiotherapy where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cascade RB1 screening of relatives; serial examinations from infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Eye-preserving therapy often possible; lifelong second-malignancy risk in carriers",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

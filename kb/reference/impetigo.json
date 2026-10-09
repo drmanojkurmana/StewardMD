@@ -1,174 +1,804 @@
 {
- "id": "impetigo",
- "name": "Impetigo",
- "aliases": [
-  "impetigo contagiosa",
-  "school sores",
-  "bullous impetigo",
-  "non-bullous impetigo"
- ],
- "class": "infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Non-bullous impetigo, the most common form, begins as fragile vesicles or pustules that rupture to leave the characteristic golden-yellow (honey-coloured) crusts, often around the nose and mouth",
-   "Bullous impetigo produces larger flaccid blisters that leave a collarette of scale, and is driven by exfoliative toxins from Staphylococcus aureus",
-   "It is highly contagious and spreads readily among children through close contact and shared items",
-   "It frequently arises as a secondary infection over broken skin such as eczema, insect bites, or scabies, so look for and treat the underlying condition",
-   "Management centres on hygiene measures and antibacterial therapy: topical treatment for localised disease and systemic antibiotics for widespread, bullous, or systemically unwell cases, guided by local resistance patterns",
-   "Advise on reducing transmission, including handwashing, not sharing towels, and keeping children away from school or nursery until lesions have crusted or treatment has been under way for the recommended period",
-   "Post-streptococcal glomerulonephritis is a recognised complication following certain streptococcal strains, so watch for signs such as dark urine or oedema",
-   "Recurrent impetigo warrants consideration of staphylococcal carriage and decolonisation"
+  "id": "impetigo",
+  "name": "Impetigo",
+  "aliases": [
+    "impetigo contagiosa",
+    "school sores",
+    "bullous impetigo",
+    "non-bullous impetigo"
   ],
-  "pathophysiology": "Impetigo is a superficial bacterial infection of the epidermis caused predominantly by Staphylococcus aureus and Streptococcus pyogenes, alone or together. Organisms colonise and then invade skin whose barrier has been breached by minor trauma, bites, or pre-existing dermatoses. In bullous disease, staphylococcal exfoliative toxins cleave desmoglein-1 in the superficial epidermis, causing intraepidermal separation and blister formation. The host inflammatory response and serous exudate dry to form the typical crusts. Certain nephritogenic streptococcal strains can trigger immune-complex-mediated post-streptococcal glomerulonephritis.",
-  "additionalDifferentials": [
-   "Herpes simplex infection (grouped vesicles, may recur at the same site)",
-   "Eczema herpeticum in a child with atopic dermatitis",
-   "Acute allergic or irritant contact dermatitis with exudate and crusting",
-   "Tinea with secondary infection",
-   "Bullous conditions such as bullous pemphigoid or linear IgA disease when blistering predominates",
-   "Staphylococcal scalded skin syndrome in a systemically unwell young child"
-  ],
-  "additionalInvestigations": [
-   "Often a clinical diagnosis",
-   "Bacterial swab of exudate for culture and sensitivities in extensive, recurrent, or treatment-failing cases",
-   "Nasal and skin swabs to identify staphylococcal carriage in recurrent disease",
-   "Urinalysis and blood pressure monitoring if post-streptococcal glomerulonephritis is suspected",
-   "Assessment for and treatment of underlying dermatoses such as eczema or scabies"
-  ],
-  "redFlags": [
-   "Rapidly spreading erythema, pain out of proportion, or systemic toxicity suggesting cellulitis or a deeper, necrotising infection",
-   "Widespread tender blistering and skin peeling in a young child indicating staphylococcal scalded skin syndrome",
-   "Features of eczema herpeticum such as punched-out erosions and systemic upset in an atopic patient",
-   "Dark urine, facial oedema, or hypertension after infection suggesting post-streptococcal glomerulonephritis"
-  ],
-  "prognosis": "Impetigo generally responds well to treatment and often heals without scarring, though it can recur, particularly with staphylococcal carriage or an untreated underlying skin condition; serious sequelae are uncommon but include post-streptococcal glomerulonephritis.",
-  "pitfalls": [
-   "Missing an underlying dermatosis such as scabies or eczema that will drive recurrence if untreated",
-   "Failing to recognise eczema herpeticum and treating presumed impetigo with antibiotics alone",
-   "Overusing topical antibiotics and promoting resistance",
-   "Neglecting infection-control advice, allowing continued spread among household and school contacts"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical antibacterial therapy such as fusidic acid or mupirocin, or topical hydrogen peroxide, for localised non-bullous disease",
-   "Oral antibiotics active against staphylococci and streptococci, such as flucloxacillin or a macrolide in penicillin allergy, for widespread, bullous or systemically unwell cases, guided by local resistance patterns",
-   "Hygiene measures including handwashing, not sharing towels and keeping lesions covered to reduce transmission",
-   "Identify and treat any underlying skin condition such as eczema, insect bites or scabies",
-   "Staphylococcal decolonisation with nasal and skin antiseptics in recurrent disease with confirmed carriage",
-   "Exclusion from school or nursery until lesions have crusted or antibiotic treatment has been under way for the recommended period",
-   "Monitor blood pressure and urinalysis where post-streptococcal glomerulonephritis is a concern"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "impetigo-pathway",
-   "title": "Impetigo: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Non-bullous impetigo, the most common form, begins as fragile vesicles or pustules that rupture to leave the characteristic golden-yellow (honey-coloured) crusts, often around the nose and mouth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly spreading erythema, pain out of proportion, or systemic toxicity suggesting cellulitis or a deeper, necrotising infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Often a clinical diagnosis, Bacterial swab of exudate for culture and sensitivities in extensive, recurrent, or treatment-failing cases, Nasal and skin swabs to identify staphylococcal carriage in recurrent disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical antibacterial therapy such as fusidic acid or mupirocin, or topical hydrogen peroxide, for localised non-bullous disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing an underlying dermatosis such as scabies or eczema that will drive recurrence if untreated"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of impetigo."
-  }
- ],
- "tables": [
-  {
-   "id": "impetigo-matrix",
-   "title": "Impetigo: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Non-bullous impetigo, the most common form, begins as fragile vesicles or pustules that rupture to leave the characteristic",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Non-bullous impetigo, the most common form, begins as fragile vesicles or pustules that rupture to leave the characteristic golden-yellow (honey-coloured) crusts, often around the nose and mouth",
+      "Bullous impetigo produces larger flaccid blisters that leave a collarette of scale, and is driven by exfoliative toxins from Staphylococcus aureus",
+      "It is highly contagious and spreads readily among children through close contact and shared items",
+      "It frequently arises as a secondary infection over broken skin such as eczema, insect bites, or scabies, so look for and treat the underlying condition",
+      "Management centres on hygiene measures and antibacterial therapy: topical treatment for localised disease and systemic antibiotics for widespread, bullous, or systemically unwell cases, guided by local resistance patterns",
+      "Advise on reducing transmission, including handwashing, not sharing towels, and keeping children away from school or nursery until lesions have crusted or treatment has been under way for the recommended period",
+      "Post-streptococcal glomerulonephritis is a recognised complication following certain streptococcal strains, so watch for signs such as dark urine or oedema",
+      "Recurrent impetigo warrants consideration of staphylococcal carriage and decolonisation"
     ],
-    [
-     "Key Investigations",
-     "Often a clinical diagnosis, Bacterial swab of exudate for culture and sensitivities in extensive, recurrent, or treatment-failing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Impetigo is a superficial bacterial infection of the epidermis caused predominantly by Staphylococcus aureus and Streptococcus pyogenes, alone or together. Organisms colonise and then invade skin whose barrier has been breached by minor trauma, bites, or pre-existing dermatoses. In bullous disease, staphylococcal exfoliative toxins cleave desmoglein-1 in the superficial epidermis, causing intraepidermal separation and blister formation. The host inflammatory response and serous exudate dry to form the typical crusts. Certain nephritogenic streptococcal strains can trigger immune-complex-mediated post-streptococcal glomerulonephritis.",
+    "additionalDifferentials": [
+      "Herpes simplex infection (grouped vesicles, may recur at the same site)",
+      "Eczema herpeticum in a child with atopic dermatitis",
+      "Acute allergic or irritant contact dermatitis with exudate and crusting",
+      "Tinea with secondary infection",
+      "Bullous conditions such as bullous pemphigoid or linear IgA disease when blistering predominates",
+      "Staphylococcal scalded skin syndrome in a systemically unwell young child"
     ],
-    [
-     "Primary Differentials",
-     "Herpes simplex infection (grouped vesicles, may recur at the same site), Eczema herpeticum in a child with atopic dermatitis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Often a clinical diagnosis",
+      "Bacterial swab of exudate for culture and sensitivities in extensive, recurrent, or treatment-failing cases",
+      "Nasal and skin swabs to identify staphylococcal carriage in recurrent disease",
+      "Urinalysis and blood pressure monitoring if post-streptococcal glomerulonephritis is suspected",
+      "Assessment for and treatment of underlying dermatoses such as eczema or scabies"
     ],
-    [
-     "Management Strategy",
-     "Topical antibacterial therapy such as fusidic acid or mupirocin, or topical hydrogen peroxide, for localised non-bullous disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly spreading erythema, pain out of proportion, or systemic toxicity suggesting cellulitis or a deeper, necrotising infection",
+      "Widespread tender blistering and skin peeling in a young child indicating staphylococcal scalded skin syndrome",
+      "Features of eczema herpeticum such as punched-out erosions and systemic upset in an atopic patient",
+      "Dark urine, facial oedema, or hypertension after infection suggesting post-streptococcal glomerulonephritis"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing an underlying dermatosis such as scabies or eczema that will drive recurrence if untreated",
-     "Prevent diagnostic or management error"
+    "prognosis": "Impetigo generally responds well to treatment and often heals without scarring, though it can recur, particularly with staphylococcal carriage or an untreated underlying skin condition; serious sequelae are uncommon but include post-streptococcal glomerulonephritis.",
+    "pitfalls": [
+      "Missing an underlying dermatosis such as scabies or eczema that will drive recurrence if untreated",
+      "Failing to recognise eczema herpeticum and treating presumed impetigo with antibiotics alone",
+      "Overusing topical antibiotics and promoting resistance",
+      "Neglecting infection-control advice, allowing continued spread among household and school contacts"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical antibacterial therapy such as fusidic acid or mupirocin, or topical hydrogen peroxide, for localised non-bullous disease",
+      "Oral antibiotics active against staphylococci and streptococci, such as flucloxacillin or a macrolide in penicillin allergy, for widespread, bullous or systemically unwell cases, guided by local resistance patterns",
+      "Hygiene measures including handwashing, not sharing towels and keeping lesions covered to reduce transmission",
+      "Identify and treat any underlying skin condition such as eczema, insect bites or scabies",
+      "Staphylococcal decolonisation with nasal and skin antiseptics in recurrent disease with confirmed carriage",
+      "Exclusion from school or nursery until lesions have crusted or antibiotic treatment has been under way for the recommended period",
+      "Monitor blood pressure and urinalysis where post-streptococcal glomerulonephritis is a concern"
     ]
-   ],
-   "caption": "Overview comparison matrix for impetigo."
-  }
- ],
- "diagrams": [
-  {
-   "id": "impetigo-real-image",
-   "title": "Impetigo: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "impetigo-pathway",
+      "title": "Impetigo: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Non-bullous impetigo, the most common form, begins as fragile vesicles or pustules that rupture to leave the characteristic golden-yellow (honey-coloured) crusts, often around the nose and mouth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly spreading erythema, pain out of proportion, or systemic toxicity suggesting cellulitis or a deeper, necrotising infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Often a clinical diagnosis, Bacterial swab of exudate for culture and sensitivities in extensive, recurrent, or treatment-failing cases, Nasal and skin swabs to identify staphylococcal carriage in recurrent disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical antibacterial therapy such as fusidic acid or mupirocin, or topical hydrogen peroxide, for localised non-bullous disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing an underlying dermatosis such as scabies or eczema that will drive recurrence if untreated"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of impetigo."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "impetigo-matrix",
+      "title": "Impetigo: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Non-bullous impetigo, the most common form, begins as fragile vesicles or pustules that rupture to leave the characteristic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Often a clinical diagnosis, Bacterial swab of exudate for culture and sensitivities in extensive, recurrent, or treatment-failing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpes simplex infection (grouped vesicles, may recur at the same site), Eczema herpeticum in a child with atopic dermatitis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical antibacterial therapy such as fusidic acid or mupirocin, or topical hydrogen peroxide, for localised non-bullous disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing an underlying dermatosis such as scabies or eczema that will drive recurrence if untreated",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for impetigo."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 135-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 136-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 52-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "impetigo-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Honey-coloured crusts; diagnosis is often clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial swab with culture and sensitivities",
+          "cells": [
+            {
+              "text": "Extensive, recurrent or treatment-failing cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal and skin swabs",
+          "cells": [
+            {
+              "text": "Staphylococcal carriage in recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and blood pressure",
+          "cells": [
+            {
+              "text": "Post-streptococcal glomerulonephritis when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for underlying dermatoses",
+          "cells": [
+            {
+              "text": "Eczema, scabies or insect bites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "impetigo-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex infection",
+          "cells": [
+            {
+              "text": "Grouped vesicles that may recur at the same site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eczema herpeticum",
+          "cells": [
+            {
+              "text": "Punched-out erosions and systemic upset in an atopic child"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal scalded skin syndrome",
+          "cells": [
+            {
+              "text": "Widespread tender blistering with skin peeling in a young child"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "impetigo-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical antibacterials",
+          "cells": [
+            {
+              "text": "Fusidic acid or mupirocin, or topical hydrogen peroxide, for localised non-bullous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antibiotics",
+          "cells": [
+            {
+              "text": "Flucloxacillin, or a macrolide in penicillin allergy, for widespread, bullous or unwell cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hygiene",
+          "cells": [
+            {
+              "text": "Handwashing, no shared towels, keep lesions covered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying skin disease",
+          "cells": [
+            {
+              "text": "Treat eczema, insect bites or scabies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decolonisation",
+          "cells": [
+            {
+              "text": "Nasal and skin antiseptics for recurrent disease with confirmed carriage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion",
+          "cells": [
+            {
+              "text": "From school or nursery until crusted or antibiotic treatment is under way"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "impetigo-treatment-2",
+      "kind": "treatment",
+      "title": "Antistaphylococcal therapy by isolate sensitivity",
+      "rowHeader": "Option",
+      "columns": [
+        "Drug of choice",
+        "Alternatives",
+        "Comments"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral, serious infection: sensitive to penicillin",
+          "cells": [
+            {
+              "text": "Penicillin G 4 mU q4h"
+            },
+            {
+              "text": "Nafcillin or oxacillin 2 g q4h, cefazolin 2 g q8h, vancomycin 1 g q12h (b)"
+            },
+            {
+              "text": "Fewer than 5% of isolates are sensitive to penicillin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parenteral, serious infection: sensitive to methicillin",
+          "cells": [
+            {
+              "text": "Nafcillin or oxacillin 2 g q4h"
+            },
+            {
+              "text": "Cefazolin 2 g q8h (b), vancomycin 15 to 20 mg/kg q8 to 12h (b)"
+            },
+            {
+              "text": "Penicillin-allergic patients can have a cephalosporin if the allergy was not anaphylactic or accelerated; desensitization to beta-lactams may be indicated in selected serious infections needing maximal bactericidal activity (for example prosthetic valve endocarditis (d)). Type A beta-lactamase may rapidly hydrolyze cefazolin and reduce efficacy in endocarditis. Vancomycin is a less effective option"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parenteral, serious infection: resistant to methicillin",
+          "cells": [
+            {
+              "text": "Vancomycin 15 to 20 mg/kg q8 to 12h (b)"
+            },
+            {
+              "text": "Daptomycin 6 mg/kg q24h (b,c) for bacteremia, endocarditis and complicated skin infections; linezolid 600 mg q12h (400 mg q12h for uncomplicated skin infections); quinupristin/dalfopristin 7.5 mg/kg q8h"
+            },
+            {
+              "text": "Test sensitivity before using an alternative. Adjunctive drugs, used only with other antimicrobials: gentamicin 1 mg/kg q8h (b), rifampin 300 mg PO q8h, fusidic acid 500 mg q8h (not readily available in the United States). Higher daptomycin doses have been used in some serious infections. Quinupristin/dalfopristin is bactericidal against methicillin-resistant isolates unless the strain is resistant to erythromycin or clindamycin. Efficacy of adjunctive therapy is not well established in many settings. Linezolid and quinupristin/dalfopristin have in vitro activity against most VISA and VRSA strains. See footnote (d) for prosthetic-valve endocarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parenteral, serious infection: methicillin-resistant with intermediate or complete vancomycin resistance (e)",
+          "cells": [
+            {
+              "text": "Uncertain"
+            },
+            {
+              "text": "Same as for methicillin-resistant strains; check susceptibilities"
+            },
+            {
+              "text": "Same as for methicillin-resistant strains; check susceptibilities"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parenteral, serious infection: not yet known (empirical)",
+          "cells": [
+            {
+              "text": "Vancomycin 15 to 20 mg/kg q8 to 12h (b)"
+            },
+            {
+              "text": "None listed"
+            },
+            {
+              "text": "Empirical therapy is used when susceptibility is unknown. Vancomycin with or without an aminoglycoside is recommended for suspected community- or hospital-acquired S. aureus infection because methicillin-resistant strains are more frequent in the community"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral, skin and soft tissue: sensitive to methicillin",
+          "cells": [
+            {
+              "text": "Dicloxacillin 500 mg qid, cephalexin 500 mg qid"
+            },
+            {
+              "text": "Minocycline or doxycycline 100 mg q12h (b), TMP-SMX 1 or 2 DS tablets bid, clindamycin 300 to 450 mg/kg tid (dose unit as printed)"
+            },
+            {
+              "text": "Know the local antibiotic susceptibility of isolates; culture all drainage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral, skin and soft tissue: resistant to methicillin",
+          "cells": [
+            {
+              "text": "Clindamycin 300 to 450 mg/kg tid (dose unit as printed), TMP-SMX 1 or 2 DS tablets bid, minocycline or doxycycline 100 mg q12h (b), linezolid 400 to 600 mg bid"
+            },
+            {
+              "text": "None listed"
+            },
+            {
+              "text": "Know the local antibiotic susceptibility of isolates; culture all drainage"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnotes (a) to (e) were not shown on the printed page."
+    },
+    {
+      "id": "impetigo-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Classification of streptococci",
+      "rowHeader": "Lancefield group",
+      "columns": [
+        "Representative species",
+        "Hemolytic pattern",
+        "Typical infections"
+      ],
+      "rows": [
+        {
+          "parameter": "A",
+          "cells": [
+            {
+              "text": "S. pyogenes"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Pharyngitis, impetigo, cellulitis, scarlet fever"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "B",
+          "cells": [
+            {
+              "text": "S. agalactiae"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Neonatal sepsis and meningitis, puerperal infection, urinary tract infection, diabetic ulcer infection, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "C, G",
+          "cells": [
+            {
+              "text": "S. dysgalactiae subsp. equisimilis"
+            },
+            {
+              "text": "Beta"
+            },
+            {
+              "text": "Cellulitis, bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "D: enterococci",
+          "cells": [
+            {
+              "text": "E. faecalis; E. faecium"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Urinary tract infection, nosocomial bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "D: nonenterococci",
+          "cells": [
+            {
+              "text": "S. bovis"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Bacteremia, endocarditis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: viridans streptococci",
+          "cells": [
+            {
+              "text": "S. sanguis; S. mitis"
+            },
+            {
+              "text": "Alpha"
+            },
+            {
+              "text": "Endocarditis, dental abscess, brain abscess"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: intermedius or milleri group",
+          "cells": [
+            {
+              "text": "S. intermedius, S. anginosus, S. constellatus"
+            },
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Brain abscess, visceral abscess"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Variable or nongroupable: anaerobic streptococci",
+          "cells": [
+            {
+              "text": "Peptostreptococcus magnus"
+            },
+            {
+              "text": "Usually nonhemolytic"
+            },
+            {
+              "text": "Sinusitis, pneumonia, empyema, brain abscess, liver abscess"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Source footnotes (a) on enterococci and (b) on anaerobic streptococci are not legible in the transcription."
+    },
+    {
+      "id": "impetigo-ddx-2",
+      "kind": "ddx",
+      "title": "Common skin infections",
+      "rowHeader": "Infection",
+      "columns": [
+        "Clinical features",
+        "Etiologic agent",
+        "Treatment"
+      ],
+      "rows": [
+        {
+          "parameter": "Impetigo",
+          "cells": [
+            {
+              "text": "Honey-colored crusted papules, plaques or bullae"
+            },
+            {
+              "text": "Group A streptococcus and Staphylococcus aureus"
+            },
+            {
+              "text": "Systemic or topical antistaphylococcal antibiotics"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Dermatophytosis",
+          "cells": [
+            {
+              "text": "Inflammatory or noninflammatory annular scaly plaques; may have hair loss; groin involvement spares the scrotum; hyphae on KOH preparation"
+            },
+            {
+              "text": "Trichophyton, Epidermophyton or Microsporum sp."
+            },
+            {
+              "text": "Topical azoles, systemic griseofulvin, terbinafine, or azoles"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Candidiasis",
+          "cells": [
+            {
+              "text": "Inflammatory papules and plaques with satellite pustules, frequently in intertriginous areas; may involve the scrotum; pseudohyphae on KOH preparation"
+            },
+            {
+              "text": "Candida albicans and other Candida sp."
+            },
+            {
+              "text": "Topical nystatin or azoles; systemic azoles for resistant disease"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Tinea versicolor",
+          "cells": [
+            {
+              "text": "Hyper- or hypopigmented scaly patches on the trunk; mixture of hyphae and spores (spaghetti and meatballs) on KOH preparation"
+            },
+            {
+              "text": "Malassezia furfur"
+            },
+            {
+              "text": "Topical selenium sulfide lotion or azoles"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "impetigo-dx-mgmt",
+      "title": "Diagnosis and management of Impetigo",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Honey-coloured crusted vesicles or pustules, often around the nose and mouth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Spreading cellulitis, tender blistering with peeling, or eczema herpeticum signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review; systemic antibiotics; assess for scalded skin or herpes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; swabs in extensive, recurrent or treatment-failing cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Localised non-bullous disease without systemic upset?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Widespread or bullous disease: oral antistaphylococcal antibiotic and swab",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical fusidic acid or mupirocin for localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral flucloxacillin, or a macrolide if penicillin-allergic",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hygiene: handwashing, no shared towels, cover lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat underlying eczema, bites or scabies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Decolonise for recurrent staphylococcal carriage",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Heals with treatment; watch for post-streptococcal glomerulonephritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

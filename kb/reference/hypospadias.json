@@ -1,173 +1,480 @@
 {
- "id": "hypospadias",
- "name": "Hypospadias",
- "aliases": [
-  "hypospadia",
-  "ventral urethral meatus anomaly",
-  "congenital urethral malposition"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive",
- "specialty": "Paediatric & Reproductive Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital anomaly in which the urethral opening lies on the ventral aspect of the penis rather than at the tip, resulting from incomplete tubularisation of the urethral plate",
-   "The severity spectrum runs from a distal (glanular or coronal) meatus to more proximal penoscrotal or perineal positions, the latter being functionally more significant",
-   "It is commonly accompanied by ventral penile curvature (chordee) and a dorsally hooded, incompletely formed prepuce",
-   "Severe or proximal hypospadias, particularly when combined with cryptorchidism or a bifid scrotum, should prompt evaluation for a disorder of sex development",
-   "Circumcision should be avoided in affected infants because the foreskin is often needed as tissue for surgical reconstruction",
-   "Surgical repair aims to reposition the meatus, straighten the penis, and achieve a normal cosmetic and functional result, usually undertaken in early childhood",
-   "Isolated distal hypospadias in an otherwise normally virilised boy generally does not require an extensive endocrine workup"
+  "id": "hypospadias",
+  "name": "Hypospadias",
+  "aliases": [
+    "hypospadia",
+    "ventral urethral meatus anomaly",
+    "congenital urethral malposition"
   ],
-  "pathophysiology": "During male genital development, androgen-driven fusion of the urethral folds progresses from proximal to distal to form the penile urethra and close the ventral shaft. Hypospadias results when this tubularisation is incomplete, leaving the urethral meatus proximal to its normal position and often accompanied by a ventral tethering of tissue (chordee) and a defect in foreskin formation. The defect reflects inadequate or mistimed androgen action, or disturbance of the developmental signalling that guides urethral closure. When hypospadias is proximal and severe or occurs with undescended testes, it more often signals a broader disturbance of sexual differentiation, whereas isolated distal disease usually represents a localised developmental anomaly.",
-  "additionalDifferentials": [
-   "Disorder of sex development, including partial androgen insensitivity and defects of testosterone or dihydrotestosterone synthesis",
-   "Congenital adrenal hyperplasia causing atypical genitalia",
-   "Chordee without hypospadias (isolated ventral curvature)",
-   "Epispadias (dorsally placed meatus) as part of the exstrophy-epispadias spectrum",
-   "Megameatus with intact prepuce variant",
-   "Buried or webbed penis with an apparently displaced meatus"
-  ],
-  "additionalInvestigations": [
-   "Thorough genital examination to define meatal position, degree of chordee, and scrotal and testicular findings",
-   "Karyotype and disorder-of-sex-development evaluation in proximal or severe cases or with associated cryptorchidism",
-   "Serum electrolytes and 17-hydroxyprogesterone to exclude congenital adrenal hyperplasia where indicated",
-   "LH, FSH, testosterone, and anti-Müllerian hormone to assess gonadal function in complex cases",
-   "hCG stimulation test to evaluate testicular androgen production when a synthetic defect is suspected",
-   "Pelvic ultrasound to assess internal genital structures in ambiguous presentations"
-  ],
-  "redFlags": [
-   "Proximal hypospadias with unilateral or bilateral cryptorchidism, suggesting a disorder of sex development requiring urgent assessment",
-   "Any genital ambiguity or a bifid scrotum accompanying the hypospadias",
-   "Features suggestive of salt-wasting congenital adrenal hyperplasia in a virilised infant",
-   "Impaired urinary stream or difficulty voiding related to meatal position"
-  ],
-  "prognosis": "Distal hypospadias has an excellent outcome after repair, with good cosmetic and functional results; more proximal forms may require staged or complex reconstruction and carry a higher rate of complications such as fistula or stricture, but most children ultimately achieve satisfactory urinary and sexual function.",
-  "pitfalls": [
-   "Permitting neonatal circumcision, thereby removing foreskin tissue that is valuable for later repair",
-   "Failing to evaluate proximal hypospadias with cryptorchidism as a possible disorder of sex development",
-   "Overlooking congenital adrenal hyperplasia in an infant with atypical genitalia and its salt-wasting risk",
-   "Missing associated chordee, which must be corrected to achieve a straight, functional penis",
-   "Subjecting isolated distal hypospadias to an unnecessarily extensive endocrine investigation"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake surgical repair (urethroplasty) to reposition the meatus, with orthoplasty to correct chordee and reconstruction using preputial or oral mucosal tissue, usually in early childhood",
-   "Avoid circumcision so the foreskin is preserved as reconstructive tissue",
-   "For proximal or severe disease, plan staged reconstruction and consider preoperative topical or parenteral androgen stimulation to enlarge the phallus",
-   "Evaluate proximal, severe or cryptorchidism-associated cases for a disorder of sex development, including karyotype and endocrine assessment, before surgery",
-   "Monitor postoperatively for urethrocutaneous fistula, meatal stenosis and urethral stricture",
-   "Manage within a paediatric urology and endocrinology multidisciplinary team, involving clinical genetics where a disorder of sex development is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypospadias-pathway",
-   "title": "Hypospadias: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital anomaly in which the urethral opening lies on the ventral aspect of the penis rather than at the tip, resulting from incomplete tubularisation of the urethral plate",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Proximal hypospadias with unilateral or bilateral cryptorchidism, suggesting a disorder of sex development requiring urgent assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thorough genital examination to define meatal position, degree of chordee, and scrotal and testicular findings, Karyotype and disorder-of-sex-development evaluation in proximal or severe cases or with associated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake surgical repair (urethroplasty) to reposition the meatus, with orthoplasty to correct chordee and reconstruction using preputial or oral mucosal tissue, usually in early childhood"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Permitting neonatal circumcision, thereby removing foreskin tissue that is valuable for later repair"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypospadias."
-  }
- ],
- "tables": [
-  {
-   "id": "hypospadias-matrix",
-   "title": "Hypospadias: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital anomaly in which the urethral opening lies on the ventral aspect of the penis rather than at the tip, resulting from",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive",
+  "specialty": "Paediatric & Reproductive Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital anomaly in which the urethral opening lies on the ventral aspect of the penis rather than at the tip, resulting from incomplete tubularisation of the urethral plate",
+      "The severity spectrum runs from a distal (glanular or coronal) meatus to more proximal penoscrotal or perineal positions, the latter being functionally more significant",
+      "It is commonly accompanied by ventral penile curvature (chordee) and a dorsally hooded, incompletely formed prepuce",
+      "Severe or proximal hypospadias, particularly when combined with cryptorchidism or a bifid scrotum, should prompt evaluation for a disorder of sex development",
+      "Circumcision should be avoided in affected infants because the foreskin is often needed as tissue for surgical reconstruction",
+      "Surgical repair aims to reposition the meatus, straighten the penis, and achieve a normal cosmetic and functional result, usually undertaken in early childhood",
+      "Isolated distal hypospadias in an otherwise normally virilised boy generally does not require an extensive endocrine workup"
     ],
-    [
-     "Key Investigations",
-     "Thorough genital examination to define meatal position, degree of chordee, and scrotal and testicular findings, Karyotype and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During male genital development, androgen-driven fusion of the urethral folds progresses from proximal to distal to form the penile urethra and close the ventral shaft. Hypospadias results when this tubularisation is incomplete, leaving the urethral meatus proximal to its normal position and often accompanied by a ventral tethering of tissue (chordee) and a defect in foreskin formation. The defect reflects inadequate or mistimed androgen action, or disturbance of the developmental signalling that guides urethral closure. When hypospadias is proximal and severe or occurs with undescended testes, it more often signals a broader disturbance of sexual differentiation, whereas isolated distal disease usually represents a localised developmental anomaly.",
+    "additionalDifferentials": [
+      "Disorder of sex development, including partial androgen insensitivity and defects of testosterone or dihydrotestosterone synthesis",
+      "Congenital adrenal hyperplasia causing atypical genitalia",
+      "Chordee without hypospadias (isolated ventral curvature)",
+      "Epispadias (dorsally placed meatus) as part of the exstrophy-epispadias spectrum",
+      "Megameatus with intact prepuce variant",
+      "Buried or webbed penis with an apparently displaced meatus"
     ],
-    [
-     "Primary Differentials",
-     "Disorder of sex development, including partial androgen insensitivity and defects of testosterone or dihydrotestosterone",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thorough genital examination to define meatal position, degree of chordee, and scrotal and testicular findings",
+      "Karyotype and disorder-of-sex-development evaluation in proximal or severe cases or with associated cryptorchidism",
+      "Serum electrolytes and 17-hydroxyprogesterone to exclude congenital adrenal hyperplasia where indicated",
+      "LH, FSH, testosterone, and anti-Müllerian hormone to assess gonadal function in complex cases",
+      "hCG stimulation test to evaluate testicular androgen production when a synthetic defect is suspected",
+      "Pelvic ultrasound to assess internal genital structures in ambiguous presentations"
     ],
-    [
-     "Management Strategy",
-     "Undertake surgical repair (urethroplasty) to reposition the meatus, with orthoplasty to correct chordee and reconstruction using",
-     "Core treatment modality"
+    "redFlags": [
+      "Proximal hypospadias with unilateral or bilateral cryptorchidism, suggesting a disorder of sex development requiring urgent assessment",
+      "Any genital ambiguity or a bifid scrotum accompanying the hypospadias",
+      "Features suggestive of salt-wasting congenital adrenal hyperplasia in a virilised infant",
+      "Impaired urinary stream or difficulty voiding related to meatal position"
     ],
-    [
-     "Clinical Pitfall",
-     "Permitting neonatal circumcision, thereby removing foreskin tissue that is valuable for later repair",
-     "Prevent diagnostic or management error"
+    "prognosis": "Distal hypospadias has an excellent outcome after repair, with good cosmetic and functional results; more proximal forms may require staged or complex reconstruction and carry a higher rate of complications such as fistula or stricture, but most children ultimately achieve satisfactory urinary and sexual function.",
+    "pitfalls": [
+      "Permitting neonatal circumcision, thereby removing foreskin tissue that is valuable for later repair",
+      "Failing to evaluate proximal hypospadias with cryptorchidism as a possible disorder of sex development",
+      "Overlooking congenital adrenal hyperplasia in an infant with atypical genitalia and its salt-wasting risk",
+      "Missing associated chordee, which must be corrected to achieve a straight, functional penis",
+      "Subjecting isolated distal hypospadias to an unnecessarily extensive endocrine investigation"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake surgical repair (urethroplasty) to reposition the meatus, with orthoplasty to correct chordee and reconstruction using preputial or oral mucosal tissue, usually in early childhood",
+      "Avoid circumcision so the foreskin is preserved as reconstructive tissue",
+      "For proximal or severe disease, plan staged reconstruction and consider preoperative topical or parenteral androgen stimulation to enlarge the phallus",
+      "Evaluate proximal, severe or cryptorchidism-associated cases for a disorder of sex development, including karyotype and endocrine assessment, before surgery",
+      "Monitor postoperatively for urethrocutaneous fistula, meatal stenosis and urethral stricture",
+      "Manage within a paediatric urology and endocrinology multidisciplinary team, involving clinical genetics where a disorder of sex development is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypospadias."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypospadias-real-image",
-   "title": "Hypospadias: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "hypospadias-pathway",
+      "title": "Hypospadias: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital anomaly in which the urethral opening lies on the ventral aspect of the penis rather than at the tip, resulting from incomplete tubularisation of the urethral plate",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Proximal hypospadias with unilateral or bilateral cryptorchidism, suggesting a disorder of sex development requiring urgent assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thorough genital examination to define meatal position, degree of chordee, and scrotal and testicular findings, Karyotype and disorder-of-sex-development evaluation in proximal or severe cases or with associated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake surgical repair (urethroplasty) to reposition the meatus, with orthoplasty to correct chordee and reconstruction using preputial or oral mucosal tissue, usually in early childhood"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Permitting neonatal circumcision, thereby removing foreskin tissue that is valuable for later repair"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypospadias."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypospadias-matrix",
+      "title": "Hypospadias: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital anomaly in which the urethral opening lies on the ventral aspect of the penis rather than at the tip, resulting from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thorough genital examination to define meatal position, degree of chordee, and scrotal and testicular findings, Karyotype and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Disorder of sex development, including partial androgen insensitivity and defects of testosterone or dihydrotestosterone",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake surgical repair (urethroplasty) to reposition the meatus, with orthoplasty to correct chordee and reconstruction using",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Permitting neonatal circumcision, thereby removing foreskin tissue that is valuable for later repair",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypospadias."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypospadias-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genital examination",
+          "cells": [
+            {
+              "text": "Meatal position, chordee, scrotal and testicular findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and disorder-of-sex-development evaluation",
+          "cells": [
+            {
+              "text": "Proximal or severe cases, or cryptorchidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes and 17-hydroxyprogesterone",
+          "cells": [
+            {
+              "text": "Congenital adrenal hyperplasia when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LH, FSH, testosterone and anti-Mullerian hormone",
+          "cells": [
+            {
+              "text": "Gonadal function in complex cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "hCG stimulation test",
+          "cells": [
+            {
+              "text": "Testicular androgen production when a synthetic defect is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Internal genital structures in ambiguous presentations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypospadias-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Disorder of sex development (partial androgen insensitivity, testosterone or DHT synthesis defects)",
+          "cells": [
+            {
+              "text": "Proximal hypospadias with cryptorchidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Salt-wasting risk in a virilised infant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chordee without hypospadias",
+          "cells": [
+            {
+              "text": "Isolated ventral curvature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epispadias",
+          "cells": [
+            {
+              "text": "Dorsally placed meatus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypospadias-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urethroplasty",
+          "cells": [
+            {
+              "text": "Repositions the meatus, usually in early childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoplasty",
+          "cells": [
+            {
+              "text": "Corrects chordee; reconstruction with preputial or oral mucosal tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preserve foreskin",
+          "cells": [
+            {
+              "text": "Avoid circumcision so foreskin remains usable for reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged repair",
+          "cells": [
+            {
+              "text": "Proximal or severe disease; consider pre-operative androgen stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative evaluation",
+          "cells": [
+            {
+              "text": "Disorder of sex development assessment in proximal or cryptorchidism-associated cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-operative monitoring",
+          "cells": [
+            {
+              "text": "Urethrocutaneous fistula, meatal stenosis and urethral stricture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypospadias-dx-mgmt",
+      "title": "Diagnosis and management of Hypospadias",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Urethral opening on the ventral penis, often with chordee",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cryptorchidism with proximal hypospadias, genital ambiguity or salt-wasting signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent disorder-of-sex-development and adrenal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Genital examination, karyotype, electrolytes, 17-OHP, hormone and imaging tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Distal or simple disease without DSD or adrenal features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Complete disorder-of-sex-development or adrenal evaluation before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urethroplasty to reposition the meatus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthoplasty to correct chordee",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Preserve the foreskin; avoid circumcision",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Staged repair and pre-operative androgen for proximal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for fistula, meatal stenosis and stricture",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Straight, functional penis with normal voiding; watch for complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,483 @@
 {
- "id": "portal_vein_thrombosis",
- "name": "Portal vein thrombosis",
- "aliases": [
-  "PVT",
-  "Portal venous thrombosis"
- ],
- "class": "non_infective",
- "system": "Hepatobiliary",
- "specialty": "Hepatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents acutely with abdominal pain or is discovered chronically as cavernous transformation (portal cavernoma) with periportal collaterals.",
-   "Cirrhosis is the commonest predisposing factor in adults; other causes include myeloproliferative neoplasms, abdominal sepsis, pancreatitis and malignancy.",
-   "Distinguish bland thrombus from tumour thrombus (hepatocellular carcinoma): tumour thrombus expands the vein, enhances arterially and may show pulsatile flow on Doppler.",
-   "Extension into the mesenteric veins is the feared complication, risking intestinal congestion, ischaemia and infarction.",
-   "Doppler ultrasound is first line; contrast CT or MR portography defines the extent and mesenteric involvement.",
-   "Anticoagulation promotes recanalisation and prevents extension in acute non-cirrhotic disease, balanced against variceal bleeding risk after endoscopic assessment.",
-   "In non-cirrhotic patients, screen for an underlying myeloproliferative neoplasm including JAK2 V617F even when the standard thrombophilia screen is negative.",
-   "Chronic portal cavernoma causes portal hypertension with varices and splenomegaly but relatively preserved hepatic synthetic function when non-cirrhotic."
+  "id": "portal_vein_thrombosis",
+  "name": "Portal vein thrombosis",
+  "aliases": [
+    "PVT",
+    "Portal venous thrombosis"
   ],
-  "pathophysiology": "Thrombosis within the extrahepatic portal vein or its intrahepatic branches arises from the elements of Virchow's triad: reduced portal flow (cirrhosis and portal hypertension), endothelial injury (inflammation, tumour invasion, sclerotherapy, surgery) and hypercoagulability (myeloproliferative neoplasms, inherited or acquired thrombophilias, pregnancy and oestrogen exposure). Obstruction raises portal pressure and, when persistent, drives the development of periportal venous collaterals termed cavernous transformation. If thrombus propagates into the superior mesenteric vein, venous congestion of the bowel can progress to ischaemia and transmural infarction.",
-  "additionalDifferentials": [
-   "Budd-Chiari syndrome (hepatic venous outflow obstruction)",
-   "Tumour (hepatocellular carcinoma) invasion of the portal vein",
-   "Cirrhotic portal hypertension without thrombosis",
-   "Mesenteric arterial ischaemia",
-   "Nodular regenerative hyperplasia or idiopathic non-cirrhotic portal hypertension",
-   "Constrictive pericarditis or cardiac cirrhosis causing portal hypertension",
-   "Congenital portosystemic shunt"
-  ],
-  "additionalInvestigations": [
-   "Doppler ultrasonography of the portal venous system",
-   "Contrast-enhanced CT or MR portography to map thrombus extent",
-   "Full blood count and JAK2 V617F mutation testing",
-   "Thrombophilia screen (protein C and S, antithrombin, antiphospholipid antibodies, factor V Leiden, prothrombin gene mutation)",
-   "Liver function and synthetic markers with cause-specific liver workup",
-   "Upper gastrointestinal endoscopy for varices",
-   "Alpha-fetoprotein and cross-sectional imaging to exclude hepatocellular carcinoma"
-  ],
-  "redFlags": [
-   "Severe worsening abdominal pain with lactic acidosis suggesting mesenteric ischaemia",
-   "Peritonism or clinical signs of bowel infarction",
-   "Variceal haemorrhage",
-   "New ascites with fever suggesting concurrent sepsis"
-  ],
-  "prognosis": "Acute non-cirrhotic portal vein thrombosis has a good outcome with prompt anticoagulation and high recanalisation rates, whereas chronic cavernoma carries a risk of portal hypertensive bleeding but usually preserved liver function. Thrombosis complicating cirrhosis or malignancy portends a worse prognosis.",
-  "pitfalls": [
-   "Mistaking bland thrombus for tumour thrombus, or vice versa, which fundamentally alters management",
-   "Withholding anticoagulation for fear of varices without first assessing and prophylaxing them",
-   "Missing mesenteric extension and impending bowel infarction",
-   "Overlooking an occult myeloproliferative neoplasm when the standard thrombophilia screen is negative"
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "Oxford Textbook of Medicine",
-   "Baveno consensus workshop on portal hypertension"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anticoagulation, initially low-molecular-weight heparin transitioning to an oral agent, for acute non-cirrhotic thrombosis to promote recanalisation and prevent propagation",
-   "Treatment of the underlying cause, including a myeloproliferative neoplasm or thrombophilia, with haematology involvement",
-   "Endoscopic screening for varices and appropriate prophylaxis before or alongside anticoagulation to mitigate bleeding risk",
-   "Distinction of bland from tumour thrombus, with hepatocellular carcinoma directed therapy where tumour invasion is present",
-   "Urgent surgical assessment for mesenteric extension threatening bowel viability, with systemic anticoagulation, possible thrombolysis or thrombectomy, and resection of infarcted bowel",
-   "Broad-spectrum antibiotics when septic thrombophlebitis of the portal vein is present",
-   "Management of established portal hypertension in chronic cavernoma"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "portal_vein_thrombosis-pathway",
-   "title": "Portal vein thrombosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents acutely with abdominal pain or is discovered chronically as cavernous transformation (portal cavernoma) with periportal collaterals.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe worsening abdominal pain with lactic acidosis suggesting mesenteric ischaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Doppler ultrasonography of the portal venous system, Contrast-enhanced CT or MR portography to map thrombus extent, Full blood count and JAK2 V617F mutation testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anticoagulation, initially low-molecular-weight heparin transitioning to an oral agent, for acute non-cirrhotic thrombosis to promote recanalisation and prevent propagation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking bland thrombus for tumour thrombus, or vice versa, which fundamentally alters management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of portal vein thrombosis."
-  }
- ],
- "tables": [
-  {
-   "id": "portal_vein_thrombosis-matrix",
-   "title": "Portal vein thrombosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents acutely with abdominal pain or is discovered chronically as cavernous transformation (portal cavernoma) with periportal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatobiliary",
+  "specialty": "Hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents acutely with abdominal pain or is discovered chronically as cavernous transformation (portal cavernoma) with periportal collaterals.",
+      "Cirrhosis is the commonest predisposing factor in adults; other causes include myeloproliferative neoplasms, abdominal sepsis, pancreatitis and malignancy.",
+      "Distinguish bland thrombus from tumour thrombus (hepatocellular carcinoma): tumour thrombus expands the vein, enhances arterially and may show pulsatile flow on Doppler.",
+      "Extension into the mesenteric veins is the feared complication, risking intestinal congestion, ischaemia and infarction.",
+      "Doppler ultrasound is first line; contrast CT or MR portography defines the extent and mesenteric involvement.",
+      "Anticoagulation promotes recanalisation and prevents extension in acute non-cirrhotic disease, balanced against variceal bleeding risk after endoscopic assessment.",
+      "In non-cirrhotic patients, screen for an underlying myeloproliferative neoplasm including JAK2 V617F even when the standard thrombophilia screen is negative.",
+      "Chronic portal cavernoma causes portal hypertension with varices and splenomegaly but relatively preserved hepatic synthetic function when non-cirrhotic."
     ],
-    [
-     "Key Investigations",
-     "Doppler ultrasonography of the portal venous system, Contrast-enhanced CT or MR portography to map thrombus extent, Full blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Thrombosis within the extrahepatic portal vein or its intrahepatic branches arises from the elements of Virchow's triad: reduced portal flow (cirrhosis and portal hypertension), endothelial injury (inflammation, tumour invasion, sclerotherapy, surgery) and hypercoagulability (myeloproliferative neoplasms, inherited or acquired thrombophilias, pregnancy and oestrogen exposure). Obstruction raises portal pressure and, when persistent, drives the development of periportal venous collaterals termed cavernous transformation. If thrombus propagates into the superior mesenteric vein, venous congestion of the bowel can progress to ischaemia and transmural infarction.",
+    "additionalDifferentials": [
+      "Budd-Chiari syndrome (hepatic venous outflow obstruction)",
+      "Tumour (hepatocellular carcinoma) invasion of the portal vein",
+      "Cirrhotic portal hypertension without thrombosis",
+      "Mesenteric arterial ischaemia",
+      "Nodular regenerative hyperplasia or idiopathic non-cirrhotic portal hypertension",
+      "Constrictive pericarditis or cardiac cirrhosis causing portal hypertension",
+      "Congenital portosystemic shunt"
     ],
-    [
-     "Primary Differentials",
-     "Budd-Chiari syndrome (hepatic venous outflow obstruction), Tumour (hepatocellular carcinoma) invasion of the portal vein,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Doppler ultrasonography of the portal venous system",
+      "Contrast-enhanced CT or MR portography to map thrombus extent",
+      "Full blood count and JAK2 V617F mutation testing",
+      "Thrombophilia screen (protein C and S, antithrombin, antiphospholipid antibodies, factor V Leiden, prothrombin gene mutation)",
+      "Liver function and synthetic markers with cause-specific liver workup",
+      "Upper gastrointestinal endoscopy for varices",
+      "Alpha-fetoprotein and cross-sectional imaging to exclude hepatocellular carcinoma"
     ],
-    [
-     "Management Strategy",
-     "Anticoagulation, initially low-molecular-weight heparin transitioning to an oral agent, for acute non-cirrhotic thrombosis to",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe worsening abdominal pain with lactic acidosis suggesting mesenteric ischaemia",
+      "Peritonism or clinical signs of bowel infarction",
+      "Variceal haemorrhage",
+      "New ascites with fever suggesting concurrent sepsis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking bland thrombus for tumour thrombus, or vice versa, which fundamentally alters management",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute non-cirrhotic portal vein thrombosis has a good outcome with prompt anticoagulation and high recanalisation rates, whereas chronic cavernoma carries a risk of portal hypertensive bleeding but usually preserved liver function. Thrombosis complicating cirrhosis or malignancy portends a worse prognosis.",
+    "pitfalls": [
+      "Mistaking bland thrombus for tumour thrombus, or vice versa, which fundamentally alters management",
+      "Withholding anticoagulation for fear of varices without first assessing and prophylaxing them",
+      "Missing mesenteric extension and impending bowel infarction",
+      "Overlooking an occult myeloproliferative neoplasm when the standard thrombophilia screen is negative"
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "Oxford Textbook of Medicine",
+      "Baveno consensus workshop on portal hypertension"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anticoagulation, initially low-molecular-weight heparin transitioning to an oral agent, for acute non-cirrhotic thrombosis to promote recanalisation and prevent propagation",
+      "Treatment of the underlying cause, including a myeloproliferative neoplasm or thrombophilia, with haematology involvement",
+      "Endoscopic screening for varices and appropriate prophylaxis before or alongside anticoagulation to mitigate bleeding risk",
+      "Distinction of bland from tumour thrombus, with hepatocellular carcinoma directed therapy where tumour invasion is present",
+      "Urgent surgical assessment for mesenteric extension threatening bowel viability, with systemic anticoagulation, possible thrombolysis or thrombectomy, and resection of infarcted bowel",
+      "Broad-spectrum antibiotics when septic thrombophlebitis of the portal vein is present",
+      "Management of established portal hypertension in chronic cavernoma"
     ]
-   ],
-   "caption": "Overview comparison matrix for portal vein thrombosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "portal-vein-thrombosis-real-image",
-   "title": "Portal vein thrombosis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "portal_vein_thrombosis-pathway",
+      "title": "Portal vein thrombosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents acutely with abdominal pain or is discovered chronically as cavernous transformation (portal cavernoma) with periportal collaterals.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe worsening abdominal pain with lactic acidosis suggesting mesenteric ischaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Doppler ultrasonography of the portal venous system, Contrast-enhanced CT or MR portography to map thrombus extent, Full blood count and JAK2 V617F mutation testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anticoagulation, initially low-molecular-weight heparin transitioning to an oral agent, for acute non-cirrhotic thrombosis to promote recanalisation and prevent propagation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking bland thrombus for tumour thrombus, or vice versa, which fundamentally alters management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of portal vein thrombosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "portal_vein_thrombosis-matrix",
+      "title": "Portal vein thrombosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents acutely with abdominal pain or is discovered chronically as cavernous transformation (portal cavernoma) with periportal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Doppler ultrasonography of the portal venous system, Contrast-enhanced CT or MR portography to map thrombus extent, Full blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Budd-Chiari syndrome (hepatic venous outflow obstruction), Tumour (hepatocellular carcinoma) invasion of the portal vein,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anticoagulation, initially low-molecular-weight heparin transitioning to an oral agent, for acute non-cirrhotic thrombosis to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking bland thrombus for tumour thrombus, or vice versa, which fundamentally alters management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for portal vein thrombosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "portal_vein_thrombosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Doppler ultrasonography of the portal venous system",
+          "cells": [
+            {
+              "text": "Portal vein thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT or MR portography",
+          "cells": [
+            {
+              "text": "Thrombus extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FBC and JAK2 V617F",
+          "cells": [
+            {
+              "text": "Myeloproliferative neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia screen",
+          "cells": [
+            {
+              "text": "Protein C and S, antithrombin, antiphospholipid antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LFTs and synthetic markers",
+          "cells": [
+            {
+              "text": "Cause-specific liver work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Varices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AFP and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Hepatocellular carcinoma excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_vein_thrombosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Budd-Chiari syndrome",
+          "cells": [
+            {
+              "text": "Hepatic venous outflow obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portal vein tumour invasion",
+          "cells": [
+            {
+              "text": "Hepatocellular carcinoma invasion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "portal_vein_thrombosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Low-molecular-weight heparin, transitioning to an oral agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying cause",
+          "cells": [
+            {
+              "text": "Treat, including a myeloproliferative neoplasm or thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Varices",
+          "cells": [
+            {
+              "text": "Endoscopic screening and prophylaxis alongside anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour thrombus",
+          "cells": [
+            {
+              "text": "Distinguish bland from tumour thrombus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesenteric extension",
+          "cells": [
+            {
+              "text": "Urgent surgical assessment if bowel viability is threatened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic thrombophlebitis",
+          "cells": [
+            {
+              "text": "Broad-spectrum antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic portal hypertension",
+          "cells": [
+            {
+              "text": "Management of established portal hypertension in cavernoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "portal_vein_thrombosis-dx-mgmt",
+      "title": "Diagnosis and management of Portal vein thrombosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute abdominal pain or portal vein filling defect on Doppler",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (mesenteric ischaemia, peritonism, variceal haemorrhage, sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical assessment for mesenteric ischaemia or peritonism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler; CT or MR portography; JAK2; thrombophilia screen; AFP; endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does portography confirm portal vein thrombus, with bland or tumour origin distinguished?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Budd-Chiari, tumour invasion, cirrhotic portal hypertension or NRH",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anticoagulation with LMWH, transitioning to an oral agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the underlying cause, including a myeloproliferative neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic screening for varices and prophylaxis alongside anticoagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent surgical assessment for mesenteric extension threatening bowel",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Broad-spectrum antibiotics for septic portal thrombophlebitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Acute non-cirrhotic thrombosis does well with prompt anticoagulation and recanalisation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

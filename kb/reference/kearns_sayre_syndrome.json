@@ -1,174 +1,639 @@
 {
- "id": "kearns_sayre_syndrome",
- "name": "Kearns-Sayre syndrome",
- "aliases": [
-  "KSS",
-  "mitochondrial DNA deletion syndrome",
-  "oculocraniosomatic disorder"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews (NCBI) and standard mitochondrial disease references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Mitochondrial disorder usually caused by a single large-scale deletion of mitochondrial DNA, typically sporadic",
-   "Defined by a classic triad: onset before the age of twenty, progressive external ophthalmoplegia and pigmentary retinopathy",
-   "At least one of cardiac conduction block, cerebrospinal fluid protein above one gram per litre, or cerebellar ataxia is required to complete the diagnosis",
-   "The pigmentary retinopathy has a salt-and-pepper appearance and may cause relatively mild visual symptoms",
-   "Progressive cardiac conduction disease can culminate in complete heart block and sudden death, warranting close cardiac monitoring and timely pacing",
-   "Additional features include proximal myopathy, sensorineural deafness, short stature and endocrinopathies such as diabetes and hypoparathyroidism",
-   "Muscle biopsy classically shows ragged-red fibres and cytochrome c oxidase-deficient fibres",
-   "Elevated blood and cerebrospinal fluid lactate and molecular analysis of mitochondrial DNA support the diagnosis"
+  "id": "kearns_sayre_syndrome",
+  "name": "Kearns-Sayre syndrome",
+  "aliases": [
+    "KSS",
+    "mitochondrial DNA deletion syndrome",
+    "oculocraniosomatic disorder"
   ],
-  "pathophysiology": "Kearns-Sayre syndrome usually results from a single large-scale deletion of mitochondrial DNA arising during oogenesis or early embryogenesis, so it is generally sporadic. The deletion removes genes encoding subunits of the oxidative phosphorylation chain and mitochondrial transfer RNAs, impairing energy production. Heteroplasmic distribution of deleted genomes across tissues, with a bias toward post-mitotic high-energy-demand organs such as extraocular muscle, retina, cardiac conduction tissue, brain and endocrine glands, explains the characteristic multisystem phenotype.",
-  "additionalDifferentials": [
-   "Chronic progressive external ophthalmoplegia without the full syndrome",
-   "Myasthenia gravis",
-   "Oculopharyngeal muscular dystrophy",
-   "Other mitochondrial encephalomyopathies such as MELAS and MERRF",
-   "Pearson marrow-pancreas syndrome (which can evolve into Kearns-Sayre syndrome)",
-   "Congenital or acquired causes of pigmentary retinopathy"
-  ],
-  "additionalInvestigations": [
-   "ECG and Holter monitoring for conduction disease, with cardiology surveillance",
-   "Molecular analysis for a single large-scale mitochondrial DNA deletion",
-   "Blood and cerebrospinal fluid lactate and cerebrospinal fluid protein",
-   "Muscle biopsy for ragged-red and cytochrome c oxidase-deficient fibres",
-   "Ophthalmological assessment including retinal examination",
-   "Endocrine screen and audiometry for associated organ involvement"
-  ],
-  "redFlags": [
-   "New or progressive cardiac conduction block, syncope or bradyarrhythmia",
-   "Symptomatic hypoparathyroidism or diabetic decompensation",
-   "Rapid neurological or bulbar deterioration",
-   "Progressive respiratory muscle weakness"
-  ],
-  "prognosis": "The condition is progressive and multisystem; prognosis is largely determined by cardiac conduction disease, which can cause sudden death and is mitigated by surveillance and pacing. Life expectancy is reduced, with care focused on supportive and organ-specific management.",
-  "pitfalls": [
-   "Failing to institute cardiac surveillance and offer timely pacing for conduction block",
-   "Mistaking the ophthalmoplegia for myasthenia gravis",
-   "Overlooking treatable associated endocrinopathies",
-   "Not recognising that Pearson syndrome in a survivor may evolve into Kearns-Sayre syndrome"
-  ],
-  "references": [
-   "GeneReviews (NCBI): Mitochondrial DNA deletion syndromes",
-   "OMIM: Kearns-Sayre syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cardiac conduction surveillance with regular ECG and Holter monitoring and timely pacemaker insertion for progressive block, since conduction disease drives mortality",
-   "Consideration of a defibrillator-capable device given the risk of sudden death from complete heart block",
-   "Supportive mitochondrial cofactor supplementation such as coenzyme Q10, with avoidance of mitochondrial-toxic drugs including sodium valproate and aminoglycosides",
-   "Ophthalmological management of ptosis and ophthalmoplegia with ptosis props or surgery, and low-vision support for the pigmentary retinopathy",
-   "Endocrine screening and replacement for associated diabetes, hypoparathyroidism and other endocrinopathies",
-   "Audiological rehabilitation with hearing aids or cochlear implantation for sensorineural deafness, plus physiotherapy and swallowing support for proximal myopathy",
-   "Clinical genetics and metabolic specialist input with counselling; recurrence risk is usually low as single large-scale deletions are typically sporadic"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kearns_sayre_syndrome-pathway",
-   "title": "Kearns-Sayre syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Mitochondrial disorder usually caused by a single large-scale deletion of mitochondrial DNA, typically sporadic",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New or progressive cardiac conduction block, syncope or bradyarrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: ECG and Holter monitoring for conduction disease, with cardiology surveillance, Molecular analysis for a single large-scale mitochondrial DNA deletion, Blood and cerebrospinal fluid lactate and cerebrospinal fluid protein"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cardiac conduction surveillance with regular ECG and Holter monitoring and timely pacemaker insertion for progressive block, since conduction disease drives mortality"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to institute cardiac surveillance and offer timely pacing for conduction block"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kearns-sayre syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "kearns_sayre_syndrome-matrix",
-   "title": "Kearns-Sayre syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Mitochondrial disorder usually caused by a single large-scale deletion of mitochondrial DNA, typically sporadic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews (NCBI) and standard mitochondrial disease references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Mitochondrial disorder usually caused by a single large-scale deletion of mitochondrial DNA, typically sporadic",
+      "Defined by a classic triad: onset before the age of twenty, progressive external ophthalmoplegia and pigmentary retinopathy",
+      "At least one of cardiac conduction block, cerebrospinal fluid protein above one gram per litre, or cerebellar ataxia is required to complete the diagnosis",
+      "The pigmentary retinopathy has a salt-and-pepper appearance and may cause relatively mild visual symptoms",
+      "Progressive cardiac conduction disease can culminate in complete heart block and sudden death, warranting close cardiac monitoring and timely pacing",
+      "Additional features include proximal myopathy, sensorineural deafness, short stature and endocrinopathies such as diabetes and hypoparathyroidism",
+      "Muscle biopsy classically shows ragged-red fibres and cytochrome c oxidase-deficient fibres",
+      "Elevated blood and cerebrospinal fluid lactate and molecular analysis of mitochondrial DNA support the diagnosis"
     ],
-    [
-     "Key Investigations",
-     "ECG and Holter monitoring for conduction disease, with cardiology surveillance, Molecular analysis for a single large-scale",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Kearns-Sayre syndrome usually results from a single large-scale deletion of mitochondrial DNA arising during oogenesis or early embryogenesis, so it is generally sporadic. The deletion removes genes encoding subunits of the oxidative phosphorylation chain and mitochondrial transfer RNAs, impairing energy production. Heteroplasmic distribution of deleted genomes across tissues, with a bias toward post-mitotic high-energy-demand organs such as extraocular muscle, retina, cardiac conduction tissue, brain and endocrine glands, explains the characteristic multisystem phenotype.",
+    "additionalDifferentials": [
+      "Chronic progressive external ophthalmoplegia without the full syndrome",
+      "Myasthenia gravis",
+      "Oculopharyngeal muscular dystrophy",
+      "Other mitochondrial encephalomyopathies such as MELAS and MERRF",
+      "Pearson marrow-pancreas syndrome (which can evolve into Kearns-Sayre syndrome)",
+      "Congenital or acquired causes of pigmentary retinopathy"
     ],
-    [
-     "Primary Differentials",
-     "Chronic progressive external ophthalmoplegia without the full syndrome, Myasthenia gravis, Oculopharyngeal muscular dystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "ECG and Holter monitoring for conduction disease, with cardiology surveillance",
+      "Molecular analysis for a single large-scale mitochondrial DNA deletion",
+      "Blood and cerebrospinal fluid lactate and cerebrospinal fluid protein",
+      "Muscle biopsy for ragged-red and cytochrome c oxidase-deficient fibres",
+      "Ophthalmological assessment including retinal examination",
+      "Endocrine screen and audiometry for associated organ involvement"
     ],
-    [
-     "Management Strategy",
-     "Cardiac conduction surveillance with regular ECG and Holter monitoring and timely pacemaker insertion for progressive block,",
-     "Core treatment modality"
+    "redFlags": [
+      "New or progressive cardiac conduction block, syncope or bradyarrhythmia",
+      "Symptomatic hypoparathyroidism or diabetic decompensation",
+      "Rapid neurological or bulbar deterioration",
+      "Progressive respiratory muscle weakness"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to institute cardiac surveillance and offer timely pacing for conduction block",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is progressive and multisystem; prognosis is largely determined by cardiac conduction disease, which can cause sudden death and is mitigated by surveillance and pacing. Life expectancy is reduced, with care focused on supportive and organ-specific management.",
+    "pitfalls": [
+      "Failing to institute cardiac surveillance and offer timely pacing for conduction block",
+      "Mistaking the ophthalmoplegia for myasthenia gravis",
+      "Overlooking treatable associated endocrinopathies",
+      "Not recognising that Pearson syndrome in a survivor may evolve into Kearns-Sayre syndrome"
+    ],
+    "references": [
+      "GeneReviews (NCBI): Mitochondrial DNA deletion syndromes",
+      "OMIM: Kearns-Sayre syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cardiac conduction surveillance with regular ECG and Holter monitoring and timely pacemaker insertion for progressive block, since conduction disease drives mortality",
+      "Consideration of a defibrillator-capable device given the risk of sudden death from complete heart block",
+      "Supportive mitochondrial cofactor supplementation such as coenzyme Q10, with avoidance of mitochondrial-toxic drugs including sodium valproate and aminoglycosides",
+      "Ophthalmological management of ptosis and ophthalmoplegia with ptosis props or surgery, and low-vision support for the pigmentary retinopathy",
+      "Endocrine screening and replacement for associated diabetes, hypoparathyroidism and other endocrinopathies",
+      "Audiological rehabilitation with hearing aids or cochlear implantation for sensorineural deafness, plus physiotherapy and swallowing support for proximal myopathy",
+      "Clinical genetics and metabolic specialist input with counselling; recurrence risk is usually low as single large-scale deletions are typically sporadic"
     ]
-   ],
-   "caption": "Overview comparison matrix for kearns-sayre syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kearns-sayre-syndrome-real-image",
-   "title": "Kearns-Sayre syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "kearns_sayre_syndrome-pathway",
+      "title": "Kearns-Sayre syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Mitochondrial disorder usually caused by a single large-scale deletion of mitochondrial DNA, typically sporadic",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New or progressive cardiac conduction block, syncope or bradyarrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: ECG and Holter monitoring for conduction disease, with cardiology surveillance, Molecular analysis for a single large-scale mitochondrial DNA deletion, Blood and cerebrospinal fluid lactate and cerebrospinal fluid protein"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cardiac conduction surveillance with regular ECG and Holter monitoring and timely pacemaker insertion for progressive block, since conduction disease drives mortality"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to institute cardiac surveillance and offer timely pacing for conduction block"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kearns-sayre syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kearns_sayre_syndrome-matrix",
+      "title": "Kearns-Sayre syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Mitochondrial disorder usually caused by a single large-scale deletion of mitochondrial DNA, typically sporadic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "ECG and Holter monitoring for conduction disease, with cardiology surveillance, Molecular analysis for a single large-scale",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic progressive external ophthalmoplegia without the full syndrome, Myasthenia gravis, Oculopharyngeal muscular dystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cardiac conduction surveillance with regular ECG and Holter monitoring and timely pacemaker insertion for progressive block,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to institute cardiac surveillance and offer timely pacing for conduction block",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kearns-sayre syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews (NCBI) and standard mitochondrial disease references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 387-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 61-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "kearns_sayre_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ECG and Holter monitoring",
+          "cells": [
+            {
+              "text": "Conduction block surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular analysis for mtDNA deletion",
+          "cells": [
+            {
+              "text": "Single large-scale deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and CSF lactate; CSF protein",
+          "cells": [
+            {
+              "text": "Metabolic and CSF criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Ragged-red and COX-deficient fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment with retinal exam",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia and retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine screen and audiometry",
+          "cells": [
+            {
+              "text": "Associated organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kearns_sayre_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic progressive external ophthalmoplegia alone",
+          "cells": [
+            {
+              "text": "Without full syndrome criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable ptosis and diplopia; antibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculopharyngeal muscular dystrophy",
+          "cells": [
+            {
+              "text": "Ptosis with dysphagia, later onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MELAS or MERRF",
+          "cells": [
+            {
+              "text": "Other mitochondrial encephalomyopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pearson marrow-pancreas syndrome",
+          "cells": [
+            {
+              "text": "May evolve into Kearns-Sayre syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kearns_sayre_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Regular ECG and Holter; timely pacing for progressive block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defibrillator",
+          "cells": [
+            {
+              "text": "Consider capable device given risk of sudden death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cofactors",
+          "cells": [
+            {
+              "text": "Coenzyme Q10; avoid valproate and aminoglycosides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyes",
+          "cells": [
+            {
+              "text": "Ptosis props or surgery; low-vision support for retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine",
+          "cells": [
+            {
+              "text": "Screen and replace for diabetes and hypoparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and muscle",
+          "cells": [
+            {
+              "text": "Hearing aids or implant; physiotherapy and swallow support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetics",
+          "cells": [
+            {
+              "text": "Clinical genetics and metabolic support with counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "kearns_sayre_syndrome-ddx-2",
+      "kind": "ddx",
+      "title": "Neuromuscular causes of ptosis or ophthalmoplegia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Disorders"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral neuropathy",
+          "cells": [
+            {
+              "text": "Guillain-Barre syndrome; Miller-Fisher syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuromuscular junction",
+          "cells": [
+            {
+              "text": "botulism; Lambert-Eaton syndrome; myasthenia gravis; congenital myasthenia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myopathy",
+          "cells": [
+            {
+              "text": "mitochondrial myopathies (Kearns-Sayre syndrome, progressive external ophthalmoplegia); oculopharyngeal and oculopharyngodistal muscular dystrophy; myotonic dystrophy (ptosis only); congenital myopathy (myotubular; nemaline, ptosis only); hyperthyroidism or Graves disease (ophthalmoplegia without ptosis); hereditary inclusion body myopathy type 3"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "kearns_sayre_syndrome-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Selected mitochondrial diseases",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Features"
+      ],
+      "rows": [
+        {
+          "parameter": "MELAS syndrome",
+          "cells": [
+            {
+              "text": "Mitochondrial myopathy with encephalopathy, lactic acidosis, and stroke"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Leber's optic atrophy",
+          "cells": [
+            {
+              "text": "Hereditary optic neuropathy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Kearns-Sayre syndrome (KSS)",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia, pigmentary degeneration of the retina, cardiomyopathy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "MERRF syndrome",
+          "cells": [
+            {
+              "text": "Myoclonic epilepsy and ragged-red fibers"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "NARP",
+          "cells": [
+            {
+              "text": "Neurogenic muscular weakness with ataxia and retinitis pigmentosa"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic progressive external ophthalmoplegia (CEOP)",
+          "cells": [
+            {
+              "text": "Chronic progressive external ophthalmoplegia"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pearson's syndrome (PEAR)",
+          "cells": [
+            {
+              "text": "Bone marrow and pancreatic failure"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ADMIMY",
+          "cells": [
+            {
+              "text": "Autosomal dominant inherited mitochondrial myopathy with mitochondrial deletion"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Somatic mutations in the cytochrome b gene",
+          "cells": [
+            {
+              "text": "Exercise intolerance, lactic acidosis, complex III deficiency, muscle pain, ragged-red fibers (text cut off at the page edge)"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "kearns_sayre_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Kearns-Sayre syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Onset before age twenty with progressive ophthalmoplegia and pigmentary retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New conduction block, syncope, rapid bulbar decline, or respiratory muscle weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for conduction block; pacing as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG and Holter, mtDNA deletion analysis, lactate, CSF protein, biopsy, eye and endocrine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ophthalmoplegia, retinopathy and one further criterion confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CPEO alone, myasthenia, OPMD or MELAS; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cardiac surveillance with timely pacing and defibrillator consideration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Coenzyme Q10; avoid valproate and aminoglycosides",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ptosis props or surgery and low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endocrine screening and replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Hearing, physiotherapy and swallowing support; genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Conduction disease drives mortality; multisystem follow-up required",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,437 @@
 {
- "id": "takayasu_arteritis",
- "name": "Takayasu arteritis",
- "aliases": [
-  "TAK",
-  "pulseless disease",
-  "aortic arch syndrome",
-  "large-vessel vasculitis"
- ],
- "class": "non_infective",
- "system": "Rheumatology / MSK",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A large-vessel vasculitis affecting the aorta and its major branches, characteristically in young women under 40, often of Asian descent",
-   "An early systemic phase of malaise, fever, and arthralgia may precede a later occlusive phase with vascular symptoms",
-   "Classic signs include diminished or absent peripheral pulses, blood pressure asymmetry between limbs, vascular bruits, and limb claudication",
-   "Renovascular involvement is an important cause of secondary hypertension in young patients",
-   "Inflammatory markers are often raised but can be normal despite ongoing vascular damage",
-   "Cross-sectional vascular imaging (MR or CT angiography, PET) demonstrates wall thickening, stenoses, occlusions, and aneurysms",
-   "Blood pressure should be measured in the arm with the least affected artery, as readings can be falsely low with subclavian stenosis",
-   "Corticosteroids are first-line, with steroid-sparing immunosuppressants or biologics for relapsing disease, and revascularisation reserved for critical lesions once inflammation is controlled"
+  "id": "takayasu_arteritis",
+  "name": "Takayasu arteritis",
+  "aliases": [
+    "TAK",
+    "pulseless disease",
+    "aortic arch syndrome",
+    "large-vessel vasculitis"
   ],
-  "pathophysiology": "Takayasu arteritis is a chronic granulomatous large-vessel vasculitis of unknown cause. Cell-mediated immunity drives infiltration of the arterial wall by T cells, macrophages, and giant cells, beginning in the adventitia and vasa vasorum and extending through the media. Chronic inflammation produces intimal proliferation, medial destruction, and fibrosis, leading to segmental stenosis, occlusion, aneurysm formation, and thrombosis of the aorta and its principal branches. The resulting reduced or absent blood flow causes the ischaemic and 'pulseless' clinical manifestations.",
-  "additionalDifferentials": [
-   "Giant cell arteritis (large-vessel involvement in older patients)",
-   "Fibromuscular dysplasia",
-   "Atherosclerotic occlusive disease",
-   "IgG4-related aortitis and other aortitides",
-   "Behçet disease with vascular involvement",
-   "Infective aortitis (e.g. syphilis, tuberculosis)"
-  ],
-  "additionalInvestigations": [
-   "Bilateral limb blood pressures and pulse examination with auscultation for bruits",
-   "MR or CT angiography of the aorta and branches for wall thickening, stenosis, and aneurysm",
-   "FDG-PET to assess vascular wall inflammatory activity",
-   "Inflammatory markers (ESR and CRP) recognising they may be normal",
-   "Assessment for renovascular hypertension and end-organ ischaemia"
-  ],
-  "redFlags": [
-   "Cerebrovascular symptoms, visual loss, or syncope from carotid or vertebral artery involvement",
-   "Severe or refractory hypertension from renal artery stenosis with risk of end-organ damage",
-   "Critical limb or mesenteric ischaemia",
-   "Aortic aneurysm with risk of dissection or rupture, or significant aortic regurgitation",
-   "Myocardial ischaemia from coronary ostial involvement"
-  ],
-  "prognosis": "With early diagnosis and immunosuppression many patients do well, but relapses are common and progressive vascular damage can cause hypertension, ischaemic complications, and aneurysms. Long-term morbidity relates to arterial stenoses, aortic regurgitation, and cardiovascular events.",
-  "pitfalls": [
-   "Missing the diagnosis in a young woman with nonspecific systemic symptoms before vascular signs appear",
-   "Relying on a single-arm blood pressure that is falsely low due to subclavian stenosis",
-   "Assuming normal inflammatory markers exclude active disease",
-   "Attempting revascularisation during active inflammation with high restenosis risk",
-   "Overlooking renovascular hypertension as a treatable cause of raised blood pressure"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ACR/EULAR guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with systemic glucocorticoids as first-line therapy for active large-vessel inflammation",
-   "Add a steroid-sparing agent such as methotrexate, azathioprine or mycophenolate to maintain remission and limit corticosteroid toxicity",
-   "Reserve biologic therapy with tocilizumab or a TNF inhibitor for relapsing or refractory disease",
-   "Control renovascular and systemic hypertension, measuring pressure in an unaffected limb to avoid underestimation from subclavian stenosis",
-   "Monitor disease activity with serial inflammatory markers and cross-sectional vascular imaging (MR or CT angiography, or PET), recognising markers may be normal despite progression",
-   "Use antiplatelet therapy for ischaemic complications and manage cardiovascular risk factors",
-   "Defer revascularisation by angioplasty or bypass for critical stenoses to periods of disease quiescence, coordinated with vascular surgery",
-   "Manage through a rheumatology-led multidisciplinary team with vascular surgery and cardiology input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "takayasu_arteritis-pathway",
-   "title": "Takayasu arteritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A large-vessel vasculitis affecting the aorta and its major branches, characteristically in young women under 40, often of Asian descent",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cerebrovascular symptoms, visual loss, or syncope from carotid or vertebral artery involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bilateral limb blood pressures and pulse examination with auscultation for bruits, MR or CT angiography of the aorta and branches for wall thickening, stenosis, and aneurysm, FDG-PET to assess vascular wall inflammatory"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with systemic glucocorticoids as first-line therapy for active large-vessel inflammation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis in a young woman with nonspecific systemic symptoms before vascular signs appear"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of takayasu arteritis."
-  }
- ],
- "tables": [
-  {
-   "id": "takayasu_arteritis-matrix",
-   "title": "Takayasu arteritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A large-vessel vasculitis affecting the aorta and its major branches, characteristically in young women under 40, often of Asian",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / MSK",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A large-vessel vasculitis affecting the aorta and its major branches, characteristically in young women under 40, often of Asian descent",
+      "An early systemic phase of malaise, fever, and arthralgia may precede a later occlusive phase with vascular symptoms",
+      "Classic signs include diminished or absent peripheral pulses, blood pressure asymmetry between limbs, vascular bruits, and limb claudication",
+      "Renovascular involvement is an important cause of secondary hypertension in young patients",
+      "Inflammatory markers are often raised but can be normal despite ongoing vascular damage",
+      "Cross-sectional vascular imaging (MR or CT angiography, PET) demonstrates wall thickening, stenoses, occlusions, and aneurysms",
+      "Blood pressure should be measured in the arm with the least affected artery, as readings can be falsely low with subclavian stenosis",
+      "Corticosteroids are first-line, with steroid-sparing immunosuppressants or biologics for relapsing disease, and revascularisation reserved for critical lesions once inflammation is controlled"
     ],
-    [
-     "Key Investigations",
-     "Bilateral limb blood pressures and pulse examination with auscultation for bruits, MR or CT angiography of the aorta and branches",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Takayasu arteritis is a chronic granulomatous large-vessel vasculitis of unknown cause. Cell-mediated immunity drives infiltration of the arterial wall by T cells, macrophages, and giant cells, beginning in the adventitia and vasa vasorum and extending through the media. Chronic inflammation produces intimal proliferation, medial destruction, and fibrosis, leading to segmental stenosis, occlusion, aneurysm formation, and thrombosis of the aorta and its principal branches. The resulting reduced or absent blood flow causes the ischaemic and 'pulseless' clinical manifestations.",
+    "additionalDifferentials": [
+      "Giant cell arteritis (large-vessel involvement in older patients)",
+      "Fibromuscular dysplasia",
+      "Atherosclerotic occlusive disease",
+      "IgG4-related aortitis and other aortitides",
+      "Behçet disease with vascular involvement",
+      "Infective aortitis (e.g. syphilis, tuberculosis)"
     ],
-    [
-     "Primary Differentials",
-     "Giant cell arteritis (large-vessel involvement in older patients), Fibromuscular dysplasia, Atherosclerotic occlusive disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bilateral limb blood pressures and pulse examination with auscultation for bruits",
+      "MR or CT angiography of the aorta and branches for wall thickening, stenosis, and aneurysm",
+      "FDG-PET to assess vascular wall inflammatory activity",
+      "Inflammatory markers (ESR and CRP) recognising they may be normal",
+      "Assessment for renovascular hypertension and end-organ ischaemia"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with systemic glucocorticoids as first-line therapy for active large-vessel inflammation",
-     "Core treatment modality"
+    "redFlags": [
+      "Cerebrovascular symptoms, visual loss, or syncope from carotid or vertebral artery involvement",
+      "Severe or refractory hypertension from renal artery stenosis with risk of end-organ damage",
+      "Critical limb or mesenteric ischaemia",
+      "Aortic aneurysm with risk of dissection or rupture, or significant aortic regurgitation",
+      "Myocardial ischaemia from coronary ostial involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis in a young woman with nonspecific systemic symptoms before vascular signs appear",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis and immunosuppression many patients do well, but relapses are common and progressive vascular damage can cause hypertension, ischaemic complications, and aneurysms. Long-term morbidity relates to arterial stenoses, aortic regurgitation, and cardiovascular events.",
+    "pitfalls": [
+      "Missing the diagnosis in a young woman with nonspecific systemic symptoms before vascular signs appear",
+      "Relying on a single-arm blood pressure that is falsely low due to subclavian stenosis",
+      "Assuming normal inflammatory markers exclude active disease",
+      "Attempting revascularisation during active inflammation with high restenosis risk",
+      "Overlooking renovascular hypertension as a treatable cause of raised blood pressure"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ACR/EULAR guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with systemic glucocorticoids as first-line therapy for active large-vessel inflammation",
+      "Add a steroid-sparing agent such as methotrexate, azathioprine or mycophenolate to maintain remission and limit corticosteroid toxicity",
+      "Reserve biologic therapy with tocilizumab or a TNF inhibitor for relapsing or refractory disease",
+      "Control renovascular and systemic hypertension, measuring pressure in an unaffected limb to avoid underestimation from subclavian stenosis",
+      "Monitor disease activity with serial inflammatory markers and cross-sectional vascular imaging (MR or CT angiography, or PET), recognising markers may be normal despite progression",
+      "Use antiplatelet therapy for ischaemic complications and manage cardiovascular risk factors",
+      "Defer revascularisation by angioplasty or bypass for critical stenoses to periods of disease quiescence, coordinated with vascular surgery",
+      "Manage through a rheumatology-led multidisciplinary team with vascular surgery and cardiology input"
     ]
-   ],
-   "caption": "Overview comparison matrix for takayasu arteritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "takayasu-arteritis-real-image",
-   "title": "Takayasu arteritis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "takayasu_arteritis-pathway",
+      "title": "Takayasu arteritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A large-vessel vasculitis affecting the aorta and its major branches, characteristically in young women under 40, often of Asian descent",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cerebrovascular symptoms, visual loss, or syncope from carotid or vertebral artery involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bilateral limb blood pressures and pulse examination with auscultation for bruits, MR or CT angiography of the aorta and branches for wall thickening, stenosis, and aneurysm, FDG-PET to assess vascular wall inflammatory"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with systemic glucocorticoids as first-line therapy for active large-vessel inflammation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis in a young woman with nonspecific systemic symptoms before vascular signs appear"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of takayasu arteritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "takayasu_arteritis-matrix",
+      "title": "Takayasu arteritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A large-vessel vasculitis affecting the aorta and its major branches, characteristically in young women under 40, often of Asian",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bilateral limb blood pressures and pulse examination with auscultation for bruits, MR or CT angiography of the aorta and branches",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Giant cell arteritis (large-vessel involvement in older patients), Fibromuscular dysplasia, Atherosclerotic occlusive disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with systemic glucocorticoids as first-line therapy for active large-vessel inflammation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis in a young woman with nonspecific systemic symptoms before vascular signs appear",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for takayasu arteritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "takayasu_arteritis-dx-mgmt",
+      "title": "Diagnosis and management of Takayasu arteritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Takayasu arteritis: young woman with systemic symptoms and pulse deficits",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: cerebral or visual symptoms, refractory hypertension, or limb ischaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review for ischaemia, aneurysm, or severe hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bilateral limb blood pressures; MR or CT angiography; FDG-PET; ESR and CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does angiography show wall thickening, stenosis or aneurysm in the aorta or branches?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider giant cell arteritis, fibromuscular dysplasia or atherosclerosis; re-image",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic glucocorticoids as first-line for active inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methotrexate, azathioprine or mycophenolate to maintain remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tocilizumab or TNF inhibitor for relapsing or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Control hypertension, measuring in an unaffected limb",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Defer angioplasty or bypass for critical stenoses until quiescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early immunosuppression helps; relapses are common and vascular damage can progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "takayasu_arteritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral limb blood pressures and pulse examination",
+          "cells": [
+            {
+              "text": "Diminished or absent pulses, asymmetry, and bruits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography of aorta and branches",
+          "cells": [
+            {
+              "text": "Wall thickening, stenosis, occlusion and aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Vascular wall inflammatory activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "May be normal despite active disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for renovascular hypertension",
+          "cells": [
+            {
+              "text": "End-organ ischaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "takayasu_arteritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic glucocorticoids",
+          "cells": [
+            {
+              "text": "First-line for active large-vessel inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agent",
+          "cells": [
+            {
+              "text": "Methotrexate, azathioprine or mycophenolate to maintain remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biologic therapy",
+          "cells": [
+            {
+              "text": "Tocilizumab or a TNF inhibitor for relapsing or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Measure in an unaffected limb to avoid underestimation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Inflammatory markers and cross-sectional vascular imaging, as markers may be normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Ischaemic complications; manage cardiovascular risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deferred revascularisation",
+          "cells": [
+            {
+              "text": "Critical stenoses, during disease quiescence, with vascular surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

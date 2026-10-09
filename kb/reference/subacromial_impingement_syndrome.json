@@ -1,175 +1,453 @@
 {
- "id": "subacromial_impingement_syndrome",
- "name": "subacromial impingement syndrome",
- "aliases": [
-  "subacromial pain syndrome",
-  "rotator cuff impingement"
- ],
- "class": "non_infective",
- "system": "musculoskeletal",
- "specialty": "orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Trauma",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as a painful arc during mid-range abduction, typically with anterolateral shoulder pain that is worse on overhead reach and at night when lying on the affected side.",
-   "The term subacromial pain syndrome is increasingly preferred, reflecting a shift away from a purely mechanical model towards a spectrum including bursitis, tendinopathy and partial cuff pathology.",
-   "Neer and Hawkins-Kennedy provocation tests are sensitive but not specific; a positive subacromial injection test supports the diagnosis by transiently abolishing pain and improving cuff strength.",
-   "Acromial morphology matters: a hooked (Bigliami type III) acromion and a laterally downsloping acromion are associated with increased mechanical narrowing of the subacromial space.",
-   "Distinguish primary (extrinsic mechanical) impingement from secondary impingement arising from glenohumeral instability or scapular dyskinesis, as the latter requires rehabilitation rather than decompression.",
-   "Structured physiotherapy targeting rotator cuff and scapular stabiliser strengthening is first-line and resolves symptoms in the majority without surgery.",
-   "Consider an alternative or coexisting diagnosis when weakness is profound or there is loss of active elevation, suggesting a full-thickness cuff tear rather than isolated impingement.",
-   "Subacromial corticosteroid injection can provide short-term relief and aid engagement with rehabilitation, but repeated injections risk tendon deterioration."
+  "id": "subacromial_impingement_syndrome",
+  "name": "subacromial impingement syndrome",
+  "aliases": [
+    "subacromial pain syndrome",
+    "rotator cuff impingement"
   ],
-  "pathophysiology": "Impingement describes mechanical compression and irritation of the rotator cuff tendons (chiefly supraspinatus) and the subacromial bursa within the coracoacromial arch during elevation of the arm. Extrinsic factors include acromial shape, subacromial spurs and coracoacromial ligament thickening, which narrow the outlet, while intrinsic tendon degeneration, hypovascularity of the critical zone and age-related collagen changes weaken the tendon. Dynamic contributors such as scapular dyskinesis, glenohumeral instability and rotator cuff or periscapular muscle imbalance reduce effective humeral head depression, allowing superior migration and repetitive abrasion. The resulting inflammatory and degenerative cascade produces bursitis, tendinopathy and progressive partial tearing, forming part of a continuum that may culminate in cuff failure.",
-  "additionalDifferentials": [
-   "Rotator cuff tear (partial or full thickness)",
-   "Calcific tendinitis of the shoulder",
-   "Adhesive capsulitis (frozen shoulder)",
-   "Acromioclavicular joint osteoarthritis",
-   "Glenohumeral instability with secondary impingement",
-   "Cervical radiculopathy referring to the shoulder",
-   "Glenohumeral osteoarthritis"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs including an outlet (scapular Y) view to assess acromial morphology and spurs",
-   "Ultrasound of the rotator cuff and subacromial bursa, including dynamic assessment during elevation",
-   "MRI to characterise cuff tendinopathy, partial or full-thickness tears and bursal changes",
-   "Diagnostic subacromial local anaesthetic injection test",
-   "Assessment of scapular kinematics and posture",
-   "Cervical spine imaging if radicular features are present"
-  ],
-  "redFlags": [
-   "Profound weakness or inability to actively elevate the arm suggesting a large or massive cuff tear",
-   "Rest and night pain unresponsive to conservative measures raising concern for tumour or infection",
-   "History of significant trauma with acute loss of function suggesting acute cuff rupture or fracture",
-   "Constitutional symptoms such as fever, weight loss or a palpable mass"
-  ],
-  "prognosis": "Most patients improve substantially with a sustained programme of physiotherapy and activity modification, and outcomes of subacromial decompression are comparable to structured exercise in appropriately selected cases. Prognosis is less favourable when impingement is secondary to unaddressed instability, dyskinesis or an established cuff tear.",
-  "pitfalls": [
-   "Attributing all anterolateral shoulder pain to impingement while missing an underlying full-thickness cuff tear or glenohumeral pathology.",
-   "Proceeding to acromioplasty without first correcting scapular dyskinesis or instability, leading to persistent secondary impingement.",
-   "Over-reliance on radiographic acromial shape, which correlates poorly with symptoms in individual patients.",
-   "Repeated corticosteroid injections that mask progression and may compromise tendon integrity."
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Trauma",
-   "Miller's Review of Orthopaedics",
-   "British Elbow and Shoulder Society guidance on subacromial pain"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line structured physiotherapy targeting rotator cuff and scapular stabiliser strengthening, combined with activity modification",
-   "Analgesia and NSAIDs for symptom control",
-   "Subacromial corticosteroid injection for refractory pain, used judiciously",
-   "Manage secondary impingement from scapular dyskinesis or glenohumeral instability with rehabilitation rather than decompression",
-   "Correct posture and scapular kinematics with a graded return to overhead activity",
-   "Surgical subacromial decompression, with treatment of any cuff pathology, reserved for those failing sustained conservative therapy",
-   "Referral to orthopaedics or physiotherapy where symptoms persist or a rotator cuff tear is suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subacromial_impingement_syndrome-pathway",
-   "title": "subacromial impingement syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as a painful arc during mid-range abduction, typically with anterolateral shoulder pain that is worse on overhead reach and at night when lying on the affected side.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Profound weakness or inability to actively elevate the arm suggesting a large or massive cuff tear",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs including an outlet (scapular Y) view to assess acromial morphology and spurs, Ultrasound of the rotator cuff and subacromial bursa, including dynamic assessment during elevation, MRI to characterise cuff"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line structured physiotherapy targeting rotator cuff and scapular stabiliser strengthening, combined with activity modification"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all anterolateral shoulder pain to impingement while missing an underlying full-thickness cuff tear or glenohumeral pathology."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of subacromial impingement syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "subacromial_impingement_syndrome-matrix",
-   "title": "subacromial impingement syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as a painful arc during mid-range abduction, typically with anterolateral shoulder pain that is worse on overhead reach",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "musculoskeletal",
+  "specialty": "orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Trauma",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as a painful arc during mid-range abduction, typically with anterolateral shoulder pain that is worse on overhead reach and at night when lying on the affected side.",
+      "The term subacromial pain syndrome is increasingly preferred, reflecting a shift away from a purely mechanical model towards a spectrum including bursitis, tendinopathy and partial cuff pathology.",
+      "Neer and Hawkins-Kennedy provocation tests are sensitive but not specific; a positive subacromial injection test supports the diagnosis by transiently abolishing pain and improving cuff strength.",
+      "Acromial morphology matters: a hooked (Bigliami type III) acromion and a laterally downsloping acromion are associated with increased mechanical narrowing of the subacromial space.",
+      "Distinguish primary (extrinsic mechanical) impingement from secondary impingement arising from glenohumeral instability or scapular dyskinesis, as the latter requires rehabilitation rather than decompression.",
+      "Structured physiotherapy targeting rotator cuff and scapular stabiliser strengthening is first-line and resolves symptoms in the majority without surgery.",
+      "Consider an alternative or coexisting diagnosis when weakness is profound or there is loss of active elevation, suggesting a full-thickness cuff tear rather than isolated impingement.",
+      "Subacromial corticosteroid injection can provide short-term relief and aid engagement with rehabilitation, but repeated injections risk tendon deterioration."
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs including an outlet (scapular Y) view to assess acromial morphology and spurs, Ultrasound of the rotator cuff",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Impingement describes mechanical compression and irritation of the rotator cuff tendons (chiefly supraspinatus) and the subacromial bursa within the coracoacromial arch during elevation of the arm. Extrinsic factors include acromial shape, subacromial spurs and coracoacromial ligament thickening, which narrow the outlet, while intrinsic tendon degeneration, hypovascularity of the critical zone and age-related collagen changes weaken the tendon. Dynamic contributors such as scapular dyskinesis, glenohumeral instability and rotator cuff or periscapular muscle imbalance reduce effective humeral head depression, allowing superior migration and repetitive abrasion. The resulting inflammatory and degenerative cascade produces bursitis, tendinopathy and progressive partial tearing, forming part of a continuum that may culminate in cuff failure.",
+    "additionalDifferentials": [
+      "Rotator cuff tear (partial or full thickness)",
+      "Calcific tendinitis of the shoulder",
+      "Adhesive capsulitis (frozen shoulder)",
+      "Acromioclavicular joint osteoarthritis",
+      "Glenohumeral instability with secondary impingement",
+      "Cervical radiculopathy referring to the shoulder",
+      "Glenohumeral osteoarthritis"
     ],
-    [
-     "Primary Differentials",
-     "Rotator cuff tear (partial or full thickness), Calcific tendinitis of the shoulder, Adhesive capsulitis (frozen shoulder)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs including an outlet (scapular Y) view to assess acromial morphology and spurs",
+      "Ultrasound of the rotator cuff and subacromial bursa, including dynamic assessment during elevation",
+      "MRI to characterise cuff tendinopathy, partial or full-thickness tears and bursal changes",
+      "Diagnostic subacromial local anaesthetic injection test",
+      "Assessment of scapular kinematics and posture",
+      "Cervical spine imaging if radicular features are present"
     ],
-    [
-     "Management Strategy",
-     "First-line structured physiotherapy targeting rotator cuff and scapular stabiliser strengthening, combined with activity",
-     "Core treatment modality"
+    "redFlags": [
+      "Profound weakness or inability to actively elevate the arm suggesting a large or massive cuff tear",
+      "Rest and night pain unresponsive to conservative measures raising concern for tumour or infection",
+      "History of significant trauma with acute loss of function suggesting acute cuff rupture or fracture",
+      "Constitutional symptoms such as fever, weight loss or a palpable mass"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all anterolateral shoulder pain to impingement while missing an underlying full-thickness cuff tear or glenohumeral",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients improve substantially with a sustained programme of physiotherapy and activity modification, and outcomes of subacromial decompression are comparable to structured exercise in appropriately selected cases. Prognosis is less favourable when impingement is secondary to unaddressed instability, dyskinesis or an established cuff tear.",
+    "pitfalls": [
+      "Attributing all anterolateral shoulder pain to impingement while missing an underlying full-thickness cuff tear or glenohumeral pathology.",
+      "Proceeding to acromioplasty without first correcting scapular dyskinesis or instability, leading to persistent secondary impingement.",
+      "Over-reliance on radiographic acromial shape, which correlates poorly with symptoms in individual patients.",
+      "Repeated corticosteroid injections that mask progression and may compromise tendon integrity."
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Trauma",
+      "Miller's Review of Orthopaedics",
+      "British Elbow and Shoulder Society guidance on subacromial pain"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line structured physiotherapy targeting rotator cuff and scapular stabiliser strengthening, combined with activity modification",
+      "Analgesia and NSAIDs for symptom control",
+      "Subacromial corticosteroid injection for refractory pain, used judiciously",
+      "Manage secondary impingement from scapular dyskinesis or glenohumeral instability with rehabilitation rather than decompression",
+      "Correct posture and scapular kinematics with a graded return to overhead activity",
+      "Surgical subacromial decompression, with treatment of any cuff pathology, reserved for those failing sustained conservative therapy",
+      "Referral to orthopaedics or physiotherapy where symptoms persist or a rotator cuff tear is suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for subacromial impingement syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subacromial-impingement-syndrome-real-image",
-   "title": "subacromial impingement syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "subacromial_impingement_syndrome-pathway",
+      "title": "subacromial impingement syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as a painful arc during mid-range abduction, typically with anterolateral shoulder pain that is worse on overhead reach and at night when lying on the affected side.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Profound weakness or inability to actively elevate the arm suggesting a large or massive cuff tear",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs including an outlet (scapular Y) view to assess acromial morphology and spurs, Ultrasound of the rotator cuff and subacromial bursa, including dynamic assessment during elevation, MRI to characterise cuff"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line structured physiotherapy targeting rotator cuff and scapular stabiliser strengthening, combined with activity modification"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all anterolateral shoulder pain to impingement while missing an underlying full-thickness cuff tear or glenohumeral pathology."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of subacromial impingement syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subacromial_impingement_syndrome-matrix",
+      "title": "subacromial impingement syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as a painful arc during mid-range abduction, typically with anterolateral shoulder pain that is worse on overhead reach",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs including an outlet (scapular Y) view to assess acromial morphology and spurs, Ultrasound of the rotator cuff",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rotator cuff tear (partial or full thickness), Calcific tendinitis of the shoulder, Adhesive capsulitis (frozen shoulder)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line structured physiotherapy targeting rotator cuff and scapular stabiliser strengthening, combined with activity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all anterolateral shoulder pain to impingement while missing an underlying full-thickness cuff tear or glenohumeral",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for subacromial impingement syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Trauma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "subacromial_impingement_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Outlet (scapular Y) radiographs",
+          "cells": [
+            {
+              "text": "Acromial morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic ultrasound of cuff and bursa",
+          "cells": [
+            {
+              "text": "Cuff and bursal pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Cuff tendinopathy or partial or full-thickness tear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic subacromial injection",
+          "cells": [
+            {
+              "text": "Confirms the pain source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scapular kinematics and posture assessment",
+          "cells": [
+            {
+              "text": "Secondary impingement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine imaging",
+          "cells": [
+            {
+              "text": "Radicular features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacromial_impingement_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rotator cuff tear",
+          "cells": [
+            {
+              "text": "Profound weakness or inability to elevate the arm suggests it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcific tendinitis of the shoulder",
+          "cells": [
+            {
+              "text": "Calcification on imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "subacromial_impingement_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured physiotherapy",
+          "cells": [
+            {
+              "text": "Rotator cuff and scapular stabilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and NSAIDs",
+          "cells": [
+            {
+              "text": "Symptom control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacromial corticosteroid injection",
+          "cells": [
+            {
+              "text": "Refractory pain, used judiciously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of scapular dyskinesis",
+          "cells": [
+            {
+              "text": "Secondary impingement from glenohumeral or scapular causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded return to overhead activity",
+          "cells": [
+            {
+              "text": "After posture and scapular kinematics are corrected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacromial decompression",
+          "cells": [
+            {
+              "text": "Persistent cases, with treatment of any cuff pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "subacromial_impingement_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of subacromial impingement syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful arc in mid-range abduction: suspected subacromial impingement",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (profound weakness, night pain, trauma, constitutional symptoms)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for cuff tear, infection or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Outlet radiographs; dynamic ultrasound; MRI for cuff; injection test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the subacromial injection relieve pain with cuff tear excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cuff tear, calcific tendinitis or cervical radiculopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Structured physiotherapy for cuff and scapular stability",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Subacromial corticosteroid for refractory pain, used judiciously",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct scapular dyskinesis before any decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most improve with physiotherapy; decompression is for persistent cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

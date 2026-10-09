@@ -1,174 +1,472 @@
 {
- "id": "tmj_disorder",
- "name": "Temporomandibular joint disorder",
- "aliases": [
-  "TMD",
-  "temporomandibular disorder",
-  "TMJ dysfunction",
-  "myofascial pain dysfunction"
- ],
- "class": "non_infective",
- "system": "Oral / Dental / Maxillofacial",
- "specialty": "Dentistry / OMFS",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard oral medicine & OMFS references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Temporomandibular disorders are a group of musculoskeletal conditions affecting the jaw joints, the muscles of mastication, or both",
-   "Typical features are jaw pain, joint sounds such as clicking or crepitus, limited or deviated mouth opening, and pain on chewing",
-   "Pain is often localised to the preauricular region and may radiate to the temple, ear, or face, and can mimic ear or dental pathology",
-   "Most cases are muscular (myofascial) rather than intra-articular, and parafunctional habits like clenching and grinding are common contributors",
-   "Disc displacement with reduction typically produces reciprocal clicking, whereas displacement without reduction causes locking and restricted opening",
-   "It is largely a clinical diagnosis; imaging is reserved for atypical, persistent, or red-flag presentations",
-   "Initial management is conservative, including reassurance, jaw rest, soft diet, physiotherapy, occlusal splints, and stress and habit control",
-   "Psychological factors, stress, and chronic pain behaviours strongly influence symptoms and treatment response"
+  "id": "tmj_disorder",
+  "name": "Temporomandibular joint disorder",
+  "aliases": [
+    "TMD",
+    "temporomandibular disorder",
+    "TMJ dysfunction",
+    "myofascial pain dysfunction"
   ],
-  "pathophysiology": "Temporomandibular disorders arise from a multifactorial interplay of biomechanical overload, parafunctional habits, trauma, and psychosocial stress acting on the masticatory system. Sustained muscle hyperactivity from clenching or grinding produces myofascial pain and fatigue, while abnormal loading and internal derangement of the joint can disturb the normal disc-condyle relationship, causing clicking, locking, or degenerative change. Central sensitisation and psychological factors can amplify and perpetuate pain. The result is a spectrum ranging from purely muscular pain to intra-articular disc displacement and degenerative joint disease.",
-  "additionalDifferentials": [
-   "Odontogenic pain from pulpal or periapical disease",
-   "Otitis or other ear pathology",
-   "Trigeminal neuralgia or other neuropathic facial pain",
-   "Giant cell (temporal) arteritis in older patients",
-   "Salivary gland disease",
-   "Referred pain from cervical spine or headache disorders"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment of jaw movement, joint sounds, and muscle tenderness",
-   "Evaluation of occlusion and parafunctional habits",
-   "MRI for suspected internal derangement when symptoms persist",
-   "CT or cone-beam imaging for bony or degenerative joint changes",
-   "Inflammatory markers if temporal arteritis is a concern in older patients"
-  ],
-  "redFlags": [
-   "New onset facial pain with headache, scalp tenderness, or visual symptoms in an older patient suggesting giant cell arteritis",
-   "Progressive limitation of opening, a hard end-feel, or a mass suggesting joint ankylosis or neoplasia",
-   "Unilateral worsening symptoms with cranial nerve signs pointing to a sinister cause",
-   "Recent significant trauma raising the possibility of condylar fracture"
-  ],
-  "prognosis": "Most patients improve with conservative, reversible measures and the condition often follows a self-limiting or fluctuating course, though a minority develop chronic pain or progressive degenerative joint change.",
-  "pitfalls": [
-   "Proceeding to irreversible occlusal or surgical treatment before trying conservative care",
-   "Missing giant cell arteritis in an older patient with jaw and temporal symptoms",
-   "Attributing all facial pain to the joint and overlooking dental or neuropathic causes",
-   "Neglecting parafunctional habits and psychosocial factors that drive symptoms"
-  ],
-  "references": [
-   "Burket's Oral Medicine",
-   "Standard OMFS references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and patient education with jaw rest, a soft diet, and elimination of parafunctional habits such as clenching and grinding as first-line reversible therapy",
-   "Short-term simple analgesia with NSAIDs and, for muscular pain, a trial of a muscle relaxant",
-   "Supervised jaw physiotherapy including range-of-motion and stretching exercises",
-   "Occlusal splint or stabilisation appliance to offload the joint and protect against nocturnal bruxism",
-   "Address psychosocial contributors with stress management and cognitive behavioural therapy for chronic or centrally sensitised pain",
-   "Intra-articular corticosteroid injection or arthrocentesis for refractory intra-articular pain or persistent locking",
-   "Refer to oral and maxillofacial surgery for arthroscopy or open surgery when internal derangement or degenerative disease fails conservative care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tmj_disorder-pathway",
-   "title": "Temporomandibular joint disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Temporomandibular disorders are a group of musculoskeletal conditions affecting the jaw joints, the muscles of mastication, or both",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New onset facial pain with headache, scalp tenderness, or visual symptoms in an older patient suggesting giant cell arteritis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment of jaw movement, joint sounds, and muscle tenderness, Evaluation of occlusion and parafunctional habits, MRI for suspected internal derangement when symptoms persist"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and patient education with jaw rest, a soft diet, and elimination of parafunctional habits such as clenching and grinding as first-line reversible therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Proceeding to irreversible occlusal or surgical treatment before trying conservative care"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of temporomandibular joint disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "tmj_disorder-matrix",
-   "title": "Temporomandibular joint disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Temporomandibular disorders are a group of musculoskeletal conditions affecting the jaw joints, the muscles of mastication, or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oral / Dental / Maxillofacial",
+  "specialty": "Dentistry / OMFS",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard oral medicine & OMFS references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Temporomandibular disorders are a group of musculoskeletal conditions affecting the jaw joints, the muscles of mastication, or both",
+      "Typical features are jaw pain, joint sounds such as clicking or crepitus, limited or deviated mouth opening, and pain on chewing",
+      "Pain is often localised to the preauricular region and may radiate to the temple, ear, or face, and can mimic ear or dental pathology",
+      "Most cases are muscular (myofascial) rather than intra-articular, and parafunctional habits like clenching and grinding are common contributors",
+      "Disc displacement with reduction typically produces reciprocal clicking, whereas displacement without reduction causes locking and restricted opening",
+      "It is largely a clinical diagnosis; imaging is reserved for atypical, persistent, or red-flag presentations",
+      "Initial management is conservative, including reassurance, jaw rest, soft diet, physiotherapy, occlusal splints, and stress and habit control",
+      "Psychological factors, stress, and chronic pain behaviours strongly influence symptoms and treatment response"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment of jaw movement, joint sounds, and muscle tenderness, Evaluation of occlusion and parafunctional habits, MRI",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Temporomandibular disorders arise from a multifactorial interplay of biomechanical overload, parafunctional habits, trauma, and psychosocial stress acting on the masticatory system. Sustained muscle hyperactivity from clenching or grinding produces myofascial pain and fatigue, while abnormal loading and internal derangement of the joint can disturb the normal disc-condyle relationship, causing clicking, locking, or degenerative change. Central sensitisation and psychological factors can amplify and perpetuate pain. The result is a spectrum ranging from purely muscular pain to intra-articular disc displacement and degenerative joint disease.",
+    "additionalDifferentials": [
+      "Odontogenic pain from pulpal or periapical disease",
+      "Otitis or other ear pathology",
+      "Trigeminal neuralgia or other neuropathic facial pain",
+      "Giant cell (temporal) arteritis in older patients",
+      "Salivary gland disease",
+      "Referred pain from cervical spine or headache disorders"
     ],
-    [
-     "Primary Differentials",
-     "Odontogenic pain from pulpal or periapical disease, Otitis or other ear pathology, Trigeminal neuralgia or other neuropathic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment of jaw movement, joint sounds, and muscle tenderness",
+      "Evaluation of occlusion and parafunctional habits",
+      "MRI for suspected internal derangement when symptoms persist",
+      "CT or cone-beam imaging for bony or degenerative joint changes",
+      "Inflammatory markers if temporal arteritis is a concern in older patients"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and patient education with jaw rest, a soft diet, and elimination of parafunctional habits such as clenching and",
-     "Core treatment modality"
+    "redFlags": [
+      "New onset facial pain with headache, scalp tenderness, or visual symptoms in an older patient suggesting giant cell arteritis",
+      "Progressive limitation of opening, a hard end-feel, or a mass suggesting joint ankylosis or neoplasia",
+      "Unilateral worsening symptoms with cranial nerve signs pointing to a sinister cause",
+      "Recent significant trauma raising the possibility of condylar fracture"
     ],
-    [
-     "Clinical Pitfall",
-     "Proceeding to irreversible occlusal or surgical treatment before trying conservative care",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients improve with conservative, reversible measures and the condition often follows a self-limiting or fluctuating course, though a minority develop chronic pain or progressive degenerative joint change.",
+    "pitfalls": [
+      "Proceeding to irreversible occlusal or surgical treatment before trying conservative care",
+      "Missing giant cell arteritis in an older patient with jaw and temporal symptoms",
+      "Attributing all facial pain to the joint and overlooking dental or neuropathic causes",
+      "Neglecting parafunctional habits and psychosocial factors that drive symptoms"
+    ],
+    "references": [
+      "Burket's Oral Medicine",
+      "Standard OMFS references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and patient education with jaw rest, a soft diet, and elimination of parafunctional habits such as clenching and grinding as first-line reversible therapy",
+      "Short-term simple analgesia with NSAIDs and, for muscular pain, a trial of a muscle relaxant",
+      "Supervised jaw physiotherapy including range-of-motion and stretching exercises",
+      "Occlusal splint or stabilisation appliance to offload the joint and protect against nocturnal bruxism",
+      "Address psychosocial contributors with stress management and cognitive behavioural therapy for chronic or centrally sensitised pain",
+      "Intra-articular corticosteroid injection or arthrocentesis for refractory intra-articular pain or persistent locking",
+      "Refer to oral and maxillofacial surgery for arthroscopy or open surgery when internal derangement or degenerative disease fails conservative care"
     ]
-   ],
-   "caption": "Overview comparison matrix for temporomandibular joint disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tmj-disorder-real-image",
-   "title": "Temporomandibular joint disorder: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "tmj_disorder-pathway",
+      "title": "Temporomandibular joint disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Temporomandibular disorders are a group of musculoskeletal conditions affecting the jaw joints, the muscles of mastication, or both",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New onset facial pain with headache, scalp tenderness, or visual symptoms in an older patient suggesting giant cell arteritis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment of jaw movement, joint sounds, and muscle tenderness, Evaluation of occlusion and parafunctional habits, MRI for suspected internal derangement when symptoms persist"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and patient education with jaw rest, a soft diet, and elimination of parafunctional habits such as clenching and grinding as first-line reversible therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Proceeding to irreversible occlusal or surgical treatment before trying conservative care"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of temporomandibular joint disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tmj_disorder-matrix",
+      "title": "Temporomandibular joint disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Temporomandibular disorders are a group of musculoskeletal conditions affecting the jaw joints, the muscles of mastication, or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment of jaw movement, joint sounds, and muscle tenderness, Evaluation of occlusion and parafunctional habits, MRI",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Odontogenic pain from pulpal or periapical disease, Otitis or other ear pathology, Trigeminal neuralgia or other neuropathic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and patient education with jaw rest, a soft diet, and elimination of parafunctional habits such as clenching and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Proceeding to irreversible occlusal or surgical treatment before trying conservative care",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for temporomandibular joint disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tmj_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Temporomandibular joint disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected temporomandibular disorder: jaw pain with clicking or restricted opening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: temporal headache in an older patient, hard end-feel, or cranial nerve signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of giant cell arteritis or sinister cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Jaw movement and joint sounds; occlusion review; MRI if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does examination show muscle tenderness or joint sounds without red flags?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider odontogenic pain, trigeminal neuralgia or temporal arteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance, jaw rest and removal of clenching and grinding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short-term analgesia and a muscle relaxant trial for muscular pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supervised jaw physiotherapy with stretching",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occlusal splint to offload the joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Injection or arthrocentesis for refractory locking",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most improve with reversible measures; a minority develop chronic pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tmj_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of jaw movement and joint sounds",
+          "cells": [
+            {
+              "text": "Clicking or crepitus, limited or deviated opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation of occlusion and parafunctional habits",
+          "cells": [
+            {
+              "text": "Clenching and grinding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Internal derangement, when symptoms persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or cone-beam imaging",
+          "cells": [
+            {
+              "text": "Bony or degenerative joint change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Temporal arteritis, when a concern in older patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tmj_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Giant cell (temporal) arteritis",
+          "cells": [
+            {
+              "text": "Older patient with jaw and temporal symptoms; inflammatory markers and red flags are checked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Odontogenic pain from pulpal or periapical disease",
+          "cells": [
+            {
+              "text": "Dental source of pain; dental examination separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigeminal neuralgia or neuropathic facial pain",
+          "cells": [
+            {
+              "text": "Neuropathic facial pain; joint sounds and muscle tenderness are absent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tmj_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance, jaw rest and soft diet",
+          "cells": [
+            {
+              "text": "Elimination of clenching and grinding; first-line reversible therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple analgesia and muscle relaxant",
+          "cells": [
+            {
+              "text": "NSAIDs short term; a muscle relaxant trial for muscular pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised jaw physiotherapy",
+          "cells": [
+            {
+              "text": "Range-of-motion and stretching exercises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occlusal splint",
+          "cells": [
+            {
+              "text": "Offloads the joint and protects against nocturnal bruxism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial management",
+          "cells": [
+            {
+              "text": "Stress management and cognitive behavioural therapy for chronic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular corticosteroid or arthrocentesis",
+          "cells": [
+            {
+              "text": "Refractory intra-articular pain or persistent locking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral and maxillofacial surgery referral",
+          "cells": [
+            {
+              "text": "Arthroscopy or open surgery when conservative care fails"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

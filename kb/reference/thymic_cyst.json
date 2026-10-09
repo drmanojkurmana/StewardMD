@@ -1,171 +1,440 @@
 {
- "id": "thymic_cyst",
- "name": "Thymic cyst",
- "aliases": [
-  "congenital thymic cyst",
-  "acquired thymic cyst",
-  "cystic thymic lesion"
- ],
- "class": "non_infective",
- "system": "Respiratory / Thoracic",
- "specialty": "Respiratory / Thoracic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Shields' General Thoracic Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A usually benign fluid-filled cyst of the thymus, presenting in the anterior mediastinum or occasionally the neck",
-   "Congenital cysts arise from remnants of the thymopharyngeal duct, while acquired cysts follow inflammation, surgery, or radiotherapy",
-   "Most are asymptomatic and found incidentally on imaging performed for another reason",
-   "Cross-sectional imaging shows a well-defined, thin-walled, homogeneous fluid-density lesion without a solid enhancing component",
-   "A simple, uncomplicated cyst can often be managed conservatively with surveillance",
-   "Solid components, thick or irregular walls, or internal nodularity should raise concern for a cystic thymic neoplasm and prompt resection",
-   "Surgical excision is both diagnostic and curative when there is diagnostic uncertainty or symptomatic mass effect"
+  "id": "thymic_cyst",
+  "name": "Thymic cyst",
+  "aliases": [
+    "congenital thymic cyst",
+    "acquired thymic cyst",
+    "cystic thymic lesion"
   ],
-  "pathophysiology": "Congenital thymic cysts develop from persistent epithelial remnants of the thymopharyngeal duct along the line of embryological thymic descent from the neck to the anterior mediastinum. Acquired cysts instead form through cystic degeneration provoked by inflammation, previous thoracic surgery or radiotherapy, or an adjacent neoplasm, and are often multilocular. In both cases the cyst is lined by thymic epithelium and filled with clear or proteinaceous fluid, and remains benign unless associated with an underlying tumour such as a thymoma or lymphoma undergoing cystic change.",
-  "additionalDifferentials": [
-   "Cystic thymoma or thymic carcinoma",
-   "Mature cystic teratoma",
-   "Lymphangioma or other lymphatic malformation",
-   "Bronchogenic or other foregut duplication cyst",
-   "Pericardial cyst",
-   "Lymphoma with cystic change"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the thorax to confirm fluid density and a thin wall",
-   "MRI to characterise cyst contents and exclude a solid component",
-   "Ultrasound for cervically extending or superficial lesions",
-   "Surgical excision with histology when the diagnosis is uncertain",
-   "PET-CT where a cystic neoplasm is suspected"
-  ],
-  "redFlags": [
-   "A solid, enhancing, or nodular component within the cyst",
-   "Thick, irregular walls or internal septation suggesting neoplasm",
-   "Rapid enlargement or compressive symptoms",
-   "Associated lymphadenopathy raising concern for lymphoma"
-  ],
-  "prognosis": "Simple thymic cysts are benign with an excellent prognosis, and complete excision of a symptomatic or indeterminate cyst is curative; the outlook depends on any underlying neoplasm if the cyst proves to be a cystic tumour.",
-  "pitfalls": [
-   "Assuming every cystic anterior mediastinal lesion is a benign cyst and missing a cystic thymoma or lymphoma",
-   "Failing to characterise a solid component on adequate cross-sectional imaging",
-   "Aspirating a cyst without excluding malignancy when features are indeterminate",
-   "Overlooking that acquired cysts may accompany an adjacent tumour"
-  ],
-  "references": [
-   "Shields' General Thoracic Surgery",
-   "Murray & Nadel's Textbook of Respiratory Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage a simple, thin-walled, uncomplicated cyst conservatively with periodic surveillance imaging",
-   "Undertake surgical excision with histology for symptomatic, enlarging or diagnostically indeterminate cysts",
-   "Resect promptly when solid components, thick or irregular walls or internal nodularity raise concern for a cystic thymoma or lymphoma",
-   "Characterise and follow lesions with contrast CT or MRI, adding PET-CT where a cystic neoplasm is suspected",
-   "Refer indeterminate anterior mediastinal lesions to thoracic surgery",
-   "Direct further management according to any underlying neoplasm if the cyst proves to be a cystic tumour"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thymic_cyst-pathway",
-   "title": "Thymic cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A usually benign fluid-filled cyst of the thymus, presenting in the anterior mediastinum or occasionally the neck",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A solid, enhancing, or nodular component within the cyst",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the thorax to confirm fluid density and a thin wall, MRI to characterise cyst contents and exclude a solid component, Ultrasound for cervically extending or superficial lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage a simple, thin-walled, uncomplicated cyst conservatively with periodic surveillance imaging"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming every cystic anterior mediastinal lesion is a benign cyst and missing a cystic thymoma or lymphoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thymic cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "thymic_cyst-matrix",
-   "title": "Thymic cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A usually benign fluid-filled cyst of the thymus, presenting in the anterior mediastinum or occasionally the neck",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Thoracic",
+  "specialty": "Respiratory / Thoracic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Shields' General Thoracic Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A usually benign fluid-filled cyst of the thymus, presenting in the anterior mediastinum or occasionally the neck",
+      "Congenital cysts arise from remnants of the thymopharyngeal duct, while acquired cysts follow inflammation, surgery, or radiotherapy",
+      "Most are asymptomatic and found incidentally on imaging performed for another reason",
+      "Cross-sectional imaging shows a well-defined, thin-walled, homogeneous fluid-density lesion without a solid enhancing component",
+      "A simple, uncomplicated cyst can often be managed conservatively with surveillance",
+      "Solid components, thick or irregular walls, or internal nodularity should raise concern for a cystic thymic neoplasm and prompt resection",
+      "Surgical excision is both diagnostic and curative when there is diagnostic uncertainty or symptomatic mass effect"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the thorax to confirm fluid density and a thin wall, MRI to characterise cyst contents and exclude a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital thymic cysts develop from persistent epithelial remnants of the thymopharyngeal duct along the line of embryological thymic descent from the neck to the anterior mediastinum. Acquired cysts instead form through cystic degeneration provoked by inflammation, previous thoracic surgery or radiotherapy, or an adjacent neoplasm, and are often multilocular. In both cases the cyst is lined by thymic epithelium and filled with clear or proteinaceous fluid, and remains benign unless associated with an underlying tumour such as a thymoma or lymphoma undergoing cystic change.",
+    "additionalDifferentials": [
+      "Cystic thymoma or thymic carcinoma",
+      "Mature cystic teratoma",
+      "Lymphangioma or other lymphatic malformation",
+      "Bronchogenic or other foregut duplication cyst",
+      "Pericardial cyst",
+      "Lymphoma with cystic change"
     ],
-    [
-     "Primary Differentials",
-     "Cystic thymoma or thymic carcinoma, Mature cystic teratoma, Lymphangioma or other lymphatic malformation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the thorax to confirm fluid density and a thin wall",
+      "MRI to characterise cyst contents and exclude a solid component",
+      "Ultrasound for cervically extending or superficial lesions",
+      "Surgical excision with histology when the diagnosis is uncertain",
+      "PET-CT where a cystic neoplasm is suspected"
     ],
-    [
-     "Management Strategy",
-     "Manage a simple, thin-walled, uncomplicated cyst conservatively with periodic surveillance imaging",
-     "Core treatment modality"
+    "redFlags": [
+      "A solid, enhancing, or nodular component within the cyst",
+      "Thick, irregular walls or internal septation suggesting neoplasm",
+      "Rapid enlargement or compressive symptoms",
+      "Associated lymphadenopathy raising concern for lymphoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming every cystic anterior mediastinal lesion is a benign cyst and missing a cystic thymoma or lymphoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Simple thymic cysts are benign with an excellent prognosis, and complete excision of a symptomatic or indeterminate cyst is curative; the outlook depends on any underlying neoplasm if the cyst proves to be a cystic tumour.",
+    "pitfalls": [
+      "Assuming every cystic anterior mediastinal lesion is a benign cyst and missing a cystic thymoma or lymphoma",
+      "Failing to characterise a solid component on adequate cross-sectional imaging",
+      "Aspirating a cyst without excluding malignancy when features are indeterminate",
+      "Overlooking that acquired cysts may accompany an adjacent tumour"
+    ],
+    "references": [
+      "Shields' General Thoracic Surgery",
+      "Murray & Nadel's Textbook of Respiratory Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage a simple, thin-walled, uncomplicated cyst conservatively with periodic surveillance imaging",
+      "Undertake surgical excision with histology for symptomatic, enlarging or diagnostically indeterminate cysts",
+      "Resect promptly when solid components, thick or irregular walls or internal nodularity raise concern for a cystic thymoma or lymphoma",
+      "Characterise and follow lesions with contrast CT or MRI, adding PET-CT where a cystic neoplasm is suspected",
+      "Refer indeterminate anterior mediastinal lesions to thoracic surgery",
+      "Direct further management according to any underlying neoplasm if the cyst proves to be a cystic tumour"
     ]
-   ],
-   "caption": "Overview comparison matrix for thymic cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thymic-cyst-real-image",
-   "title": "Thymic cyst: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "thymic_cyst-pathway",
+      "title": "Thymic cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A usually benign fluid-filled cyst of the thymus, presenting in the anterior mediastinum or occasionally the neck",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A solid, enhancing, or nodular component within the cyst",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the thorax to confirm fluid density and a thin wall, MRI to characterise cyst contents and exclude a solid component, Ultrasound for cervically extending or superficial lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage a simple, thin-walled, uncomplicated cyst conservatively with periodic surveillance imaging"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming every cystic anterior mediastinal lesion is a benign cyst and missing a cystic thymoma or lymphoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thymic cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thymic_cyst-matrix",
+      "title": "Thymic cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A usually benign fluid-filled cyst of the thymus, presenting in the anterior mediastinum or occasionally the neck",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the thorax to confirm fluid density and a thin wall, MRI to characterise cyst contents and exclude a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cystic thymoma or thymic carcinoma, Mature cystic teratoma, Lymphangioma or other lymphatic malformation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage a simple, thin-walled, uncomplicated cyst conservatively with periodic surveillance imaging",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming every cystic anterior mediastinal lesion is a benign cyst and missing a cystic thymoma or lymphoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thymic cyst."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Shields' General Thoracic Surgery",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "thymic_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Thymic cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected thymic cyst: incidental fluid-filled anterior mediastinal lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: solid enhancing component, thick irregular wall, or rapid enlargement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prompt thoracic surgical resection for suspected cystic neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI for density, wall and solid component",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion a thin-walled fluid cyst with no solid component?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Indeterminate or solid: refer for excision and histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surveillance imaging for a simple, uncomplicated cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical excision for symptomatic, enlarging or indeterminate cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt resection for solid or irregular components",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thoracic surgery referral for indeterminate lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Simple cysts are benign and excision is curative; outlook follows any cystic tumour",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "thymic_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of the thorax",
+          "cells": [
+            {
+              "text": "Fluid density and a thin wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Cyst contents and any solid component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Cervically extending or superficial lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision with histology",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET-CT",
+          "cells": [
+            {
+              "text": "Suspected cystic neoplasm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thymic_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cystic thymoma or thymic carcinoma",
+          "cells": [
+            {
+              "text": "Solid components, thick or irregular walls or nodularity favour neoplasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma with cystic change",
+          "cells": [
+            {
+              "text": "Associated lymphadenopathy raises concern for lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphangioma or lymphatic malformation",
+          "cells": [
+            {
+              "text": "Fluid-filled lesion; a benign cyst lacks solid enhancing tissue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "thymic_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative surveillance",
+          "cells": [
+            {
+              "text": "Simple, thin-walled, uncomplicated cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision with histology",
+          "cells": [
+            {
+              "text": "Symptomatic, enlarging or indeterminate cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt resection",
+          "cells": [
+            {
+              "text": "Solid components, thick walls or internal nodularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT or MRI follow-up",
+          "cells": [
+            {
+              "text": "PET-CT where a cystic neoplasm is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic surgery referral",
+          "cells": [
+            {
+              "text": "Indeterminate anterior mediastinal lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

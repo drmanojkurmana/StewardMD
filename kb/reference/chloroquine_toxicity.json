@@ -1,178 +1,449 @@
 {
- "id": "chloroquine_toxicity",
- "name": "Chloroquine/hydroxychloroquine toxicity",
- "aliases": [
-  "chloroquine poisoning",
-  "hydroxychloroquine toxicity",
-  "hydroxychloroquine overdose",
-  "aminoquinoline toxicity",
-  "chloroquine overdose"
- ],
- "class": "non_infective",
- "system": "Toxicology",
- "specialty": "Clinical Toxicology / Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Cardiotoxicity dominates acute overdose, with hypotension, QRS and QT prolongation and ventricular arrhythmias that can progress rapidly to cardiac arrest",
-   "The combination of hypotension, widened QRS, prolonged QT and central nervous system depression after ingestion is highly suggestive",
-   "Even a small number of tablets can be lethal in a child owing to the drug's potency and volume of distribution",
-   "Severe hypokalaemia is common and results from intracellular potassium shift rather than true depletion, so cautious replacement is needed to avoid rebound hyperkalaemia",
-   "Onset can be rapid, so early cardiac monitoring, airway assessment and intravenous access are priorities",
-   "Management principles include early mechanical ventilation, high-dose diazepam and vasopressor support as described for severe poisoning, guided by the poisons centre",
-   "Sodium bicarbonate may be used for QRS widening reflecting sodium-channel blockade",
-   "Visual disturbance, deafness and gastrointestinal upset are additional features, and chronic use is associated with retinopathy"
+  "id": "chloroquine_toxicity",
+  "name": "Chloroquine/hydroxychloroquine toxicity",
+  "aliases": [
+    "chloroquine poisoning",
+    "hydroxychloroquine toxicity",
+    "hydroxychloroquine overdose",
+    "aminoquinoline toxicity",
+    "chloroquine overdose"
   ],
-  "pathophysiology": "Chloroquine and hydroxychloroquine are aminoquinolines with membrane-stabilising, quinidine-like activity. They block cardiac sodium channels, slowing depolarisation and widening the QRS complex, and block potassium channels, prolonging repolarisation and the QT interval, together predisposing to ventricular tachyarrhythmias. Negative inotropy and vasodilatation produce hypotension and cardiovascular collapse. The drugs also drive potassium into cells, causing hypokalaemia whose severity broadly parallels the ingested dose. Central nervous system depression and seizures may occur, and the very large volume of distribution limits the usefulness of extracorporeal removal.",
-  "additionalDifferentials": [
-   "Other sodium-channel-blocking drug overdose (e.g. tricyclic antidepressants, class I antiarrhythmics)",
-   "Beta-blocker or calcium-channel-blocker poisoning",
-   "Quinine or quinidine toxicity",
-   "Other causes of shock with wide-complex tachycardia",
-   "Primary cardiac arrhythmia or ischaemia",
-   "Electrolyte-driven QT prolongation from another cause"
-  ],
-  "additionalInvestigations": [
-   "Electrocardiogram and continuous cardiac monitoring for QRS and QT changes and arrhythmia",
-   "Serum potassium with serial monitoring given shift-related hypokalaemia",
-   "Arterial blood gas and lactate",
-   "Renal and liver function and other electrolytes including magnesium",
-   "Blood glucose, as hypoglycaemia may occur",
-   "Paracetamol and salicylate levels in intentional overdose"
-  ],
-  "redFlags": [
-   "Widening QRS or marked QT prolongation",
-   "Ventricular arrhythmia or cardiac arrest",
-   "Refractory hypotension or cardiovascular collapse",
-   "Severe hypokalaemia reflecting a large ingested dose",
-   "Rapid deterioration or reduced consciousness soon after ingestion"
-  ],
-  "prognosis": "Severe acute overdose carries a high risk of sudden cardiovascular collapse and death, but early aggressive supportive care including ventilation, sedation and vasopressors has improved survival; milder ingestions and most chronic therapeutic toxicity have a good outcome.",
-  "pitfalls": [
-   "Underestimating lethality, particularly of small ingestions in children",
-   "Aggressively correcting hypokalaemia and precipitating rebound hyperkalaemia",
-   "Delaying airway control and monitoring given the potential for rapid collapse",
-   "Assuming extracorporeal removal will help despite the large volume of distribution",
-   "Overlooking sodium-channel blockade as the mechanism of QRS widening"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "UpToDate: Aminoquinoline (chloroquine and hydroxychloroquine) poisoning"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early aggressive supportive care is the mainstay of severe poisoning, with prompt mechanical ventilation, high-dose diazepam and adrenaline as a vasopressor, guided by the poisons centre",
-   "Continuous cardiac monitoring and ECG, treating QRS widening with sodium bicarbonate and managing ventricular arrhythmias",
-   "Cautious potassium replacement, recognising that the hypokalaemia reflects intracellular shift rather than true depletion, to avoid rebound hyperkalaemia",
-   "Airway protection and consideration of activated charcoal for patients presenting early after ingestion",
-   "Control seizures with benzodiazepines and correct associated hypoglycaemia and electrolyte disturbance",
-   "Consider lipid emulsion therapy and extracorporeal cardiovascular support in refractory cardiovascular collapse",
-   "Psychiatric assessment and risk management after intentional overdose"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chloroquine_toxicity-pathway",
-   "title": "Chloroquine/hydroxychloroquine toxicity: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Cardiotoxicity dominates acute overdose, with hypotension, QRS and QT prolongation and ventricular arrhythmias that can progress rapidly to cardiac arrest",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Widening QRS or marked QT prolongation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electrocardiogram and continuous cardiac monitoring for QRS and QT changes and arrhythmia, Serum potassium with serial monitoring given shift-related hypokalaemia, Arterial blood gas and lactate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early aggressive supportive care is the mainstay of severe poisoning, with prompt mechanical ventilation, high-dose diazepam and adrenaline as a vasopressor, guided by the poisons centre"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating lethality, particularly of small ingestions in children"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chloroquine/hydroxychloroquine toxicity."
-  }
- ],
- "tables": [
-  {
-   "id": "chloroquine_toxicity-matrix",
-   "title": "Chloroquine/hydroxychloroquine toxicity: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Cardiotoxicity dominates acute overdose, with hypotension, QRS and QT prolongation and ventricular arrhythmias that can progress",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology",
+  "specialty": "Clinical Toxicology / Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Cardiotoxicity dominates acute overdose, with hypotension, QRS and QT prolongation and ventricular arrhythmias that can progress rapidly to cardiac arrest",
+      "The combination of hypotension, widened QRS, prolonged QT and central nervous system depression after ingestion is highly suggestive",
+      "Even a small number of tablets can be lethal in a child owing to the drug's potency and volume of distribution",
+      "Severe hypokalaemia is common and results from intracellular potassium shift rather than true depletion, so cautious replacement is needed to avoid rebound hyperkalaemia",
+      "Onset can be rapid, so early cardiac monitoring, airway assessment and intravenous access are priorities",
+      "Management principles include early mechanical ventilation, high-dose diazepam and vasopressor support as described for severe poisoning, guided by the poisons centre",
+      "Sodium bicarbonate may be used for QRS widening reflecting sodium-channel blockade",
+      "Visual disturbance, deafness and gastrointestinal upset are additional features, and chronic use is associated with retinopathy"
     ],
-    [
-     "Key Investigations",
-     "Electrocardiogram and continuous cardiac monitoring for QRS and QT changes and arrhythmia, Serum potassium with serial monitoring",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chloroquine and hydroxychloroquine are aminoquinolines with membrane-stabilising, quinidine-like activity. They block cardiac sodium channels, slowing depolarisation and widening the QRS complex, and block potassium channels, prolonging repolarisation and the QT interval, together predisposing to ventricular tachyarrhythmias. Negative inotropy and vasodilatation produce hypotension and cardiovascular collapse. The drugs also drive potassium into cells, causing hypokalaemia whose severity broadly parallels the ingested dose. Central nervous system depression and seizures may occur, and the very large volume of distribution limits the usefulness of extracorporeal removal.",
+    "additionalDifferentials": [
+      "Other sodium-channel-blocking drug overdose (e.g. tricyclic antidepressants, class I antiarrhythmics)",
+      "Beta-blocker or calcium-channel-blocker poisoning",
+      "Quinine or quinidine toxicity",
+      "Other causes of shock with wide-complex tachycardia",
+      "Primary cardiac arrhythmia or ischaemia",
+      "Electrolyte-driven QT prolongation from another cause"
     ],
-    [
-     "Primary Differentials",
-     "Other sodium-channel-blocking drug overdose (e.g. tricyclic antidepressants, class I antiarrhythmics), Beta-blocker or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electrocardiogram and continuous cardiac monitoring for QRS and QT changes and arrhythmia",
+      "Serum potassium with serial monitoring given shift-related hypokalaemia",
+      "Arterial blood gas and lactate",
+      "Renal and liver function and other electrolytes including magnesium",
+      "Blood glucose, as hypoglycaemia may occur",
+      "Paracetamol and salicylate levels in intentional overdose"
     ],
-    [
-     "Management Strategy",
-     "Early aggressive supportive care is the mainstay of severe poisoning, with prompt mechanical ventilation, high-dose diazepam and",
-     "Core treatment modality"
+    "redFlags": [
+      "Widening QRS or marked QT prolongation",
+      "Ventricular arrhythmia or cardiac arrest",
+      "Refractory hypotension or cardiovascular collapse",
+      "Severe hypokalaemia reflecting a large ingested dose",
+      "Rapid deterioration or reduced consciousness soon after ingestion"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating lethality, particularly of small ingestions in children",
-     "Prevent diagnostic or management error"
+    "prognosis": "Severe acute overdose carries a high risk of sudden cardiovascular collapse and death, but early aggressive supportive care including ventilation, sedation and vasopressors has improved survival; milder ingestions and most chronic therapeutic toxicity have a good outcome.",
+    "pitfalls": [
+      "Underestimating lethality, particularly of small ingestions in children",
+      "Aggressively correcting hypokalaemia and precipitating rebound hyperkalaemia",
+      "Delaying airway control and monitoring given the potential for rapid collapse",
+      "Assuming extracorporeal removal will help despite the large volume of distribution",
+      "Overlooking sodium-channel blockade as the mechanism of QRS widening"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "UpToDate: Aminoquinoline (chloroquine and hydroxychloroquine) poisoning"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early aggressive supportive care is the mainstay of severe poisoning, with prompt mechanical ventilation, high-dose diazepam and adrenaline as a vasopressor, guided by the poisons centre",
+      "Continuous cardiac monitoring and ECG, treating QRS widening with sodium bicarbonate and managing ventricular arrhythmias",
+      "Cautious potassium replacement, recognising that the hypokalaemia reflects intracellular shift rather than true depletion, to avoid rebound hyperkalaemia",
+      "Airway protection and consideration of activated charcoal for patients presenting early after ingestion",
+      "Control seizures with benzodiazepines and correct associated hypoglycaemia and electrolyte disturbance",
+      "Consider lipid emulsion therapy and extracorporeal cardiovascular support in refractory cardiovascular collapse",
+      "Psychiatric assessment and risk management after intentional overdose"
     ]
-   ],
-   "caption": "Overview comparison matrix for chloroquine/hydroxychloroquine toxicity."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chloroquine-toxicity-real-image",
-   "title": "Chloroquine/hydroxychloroquine toxicity: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "chloroquine_toxicity-pathway",
+      "title": "Chloroquine/hydroxychloroquine toxicity: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Cardiotoxicity dominates acute overdose, with hypotension, QRS and QT prolongation and ventricular arrhythmias that can progress rapidly to cardiac arrest",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Widening QRS or marked QT prolongation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electrocardiogram and continuous cardiac monitoring for QRS and QT changes and arrhythmia, Serum potassium with serial monitoring given shift-related hypokalaemia, Arterial blood gas and lactate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early aggressive supportive care is the mainstay of severe poisoning, with prompt mechanical ventilation, high-dose diazepam and adrenaline as a vasopressor, guided by the poisons centre"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating lethality, particularly of small ingestions in children"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chloroquine/hydroxychloroquine toxicity."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chloroquine_toxicity-matrix",
+      "title": "Chloroquine/hydroxychloroquine toxicity: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cardiotoxicity dominates acute overdose, with hypotension, QRS and QT prolongation and ventricular arrhythmias that can progress",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electrocardiogram and continuous cardiac monitoring for QRS and QT changes and arrhythmia, Serum potassium with serial monitoring",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other sodium-channel-blocking drug overdose (e.g. tricyclic antidepressants, class I antiarrhythmics), Beta-blocker or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early aggressive supportive care is the mainstay of severe poisoning, with prompt mechanical ventilation, high-dose diazepam and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating lethality, particularly of small ingestions in children",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chloroquine/hydroxychloroquine toxicity."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chloroquine_toxicity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ECG and continuous cardiac monitoring",
+          "cells": [
+            {
+              "text": "QRS and QT changes and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium with serial monitoring",
+          "cells": [
+            {
+              "text": "Shift-related hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Acid-base status and tissue perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Hypoglycaemia may occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paracetamol and salicylate levels",
+          "cells": [
+            {
+              "text": "Intentional overdose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chloroquine_toxicity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Early mechanical ventilation, high-dose diazepam and adrenaline as vasopressor, guided by the poisons centre"
+            },
+            {
+              "text": "Mainstay of severe poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring and QRS treatment",
+          "cells": [
+            {
+              "text": "Continuous ECG; sodium bicarbonate for QRS widening; manage ventricular arrhythmias"
+            },
+            {
+              "text": "QRS widening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium replacement",
+          "cells": [
+            {
+              "text": "Cautious replacement, as hypokalaemia reflects intracellular shift"
+            },
+            {
+              "text": "Avoid rebound hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and decontamination",
+          "cells": [
+            {
+              "text": "Airway protection; consider activated charcoal if presenting early"
+            },
+            {
+              "text": "Early presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure and metabolic control",
+          "cells": [
+            {
+              "text": "Benzodiazepines for seizures; correct hypoglycaemia and electrolytes"
+            },
+            {
+              "text": "Associated disturbances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory collapse",
+          "cells": [
+            {
+              "text": "Consider lipid emulsion and extracorporeal cardiovascular support"
+            },
+            {
+              "text": "Refractory cardiovascular collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric assessment",
+          "cells": [
+            {
+              "text": "Assess and manage risk after intentional overdose"
+            },
+            {
+              "text": "Intentional overdose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chloroquine_toxicity-dx-mgmt",
+      "title": "Diagnosis and management of Chloroquine/hydroxychloroquine toxicity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chloroquine toxicity: cardiovascular collapse after ingestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (QRS or QT prolongation, arrhythmia, refractory hypotension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: airway, ventilation and cardiac monitoring; contact poisons centre",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG and monitoring; potassium, glucose, gases and paracetamol or salicylate levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "QRS or QT prolongation with cardiovascular compromise confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Early ventilation, high-dose diazepam and adrenaline, guided by poisons centre",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check other sodium-channel blockers, quinine and beta-blocker poisoning",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sodium bicarbonate for QRS widening; manage ventricular arrhythmias",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cautious potassium replacement to avoid rebound hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lipid emulsion and extracorporeal support for refractory collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Psychiatric assessment and risk management after intentional overdose",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

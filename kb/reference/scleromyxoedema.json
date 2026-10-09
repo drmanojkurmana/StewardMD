@@ -1,182 +1,460 @@
 {
- "id": "scleromyxoedema",
- "name": "scleromyxoedema",
- "aliases": [
-  "Arndt-Gottron syndrome",
-  "Scleromyxoedema",
-  "generalised lichen myxoedematosus",
-  "papular mucinosis",
-  "scleromyxedema"
- ],
- "class": "non_infective",
- "system": "Skin / Integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The generalised, sclerodermoid form of lichen myxoedematosus, characterised by widespread firm waxy papules, dermal mucin deposition, fibroblast proliferation and an associated monoclonal gammopathy",
-   "Numerous closely set, dome-shaped papules are typically arranged in a linear array over the face, ears, neck, trunk and hands, with progressive skin thickening and induration",
-   "Characteristic signs include the doughnut sign (a central depression surrounded by a raised rim over the proximal interphalangeal joints), deep glabellar furrows producing leonine facies, and reduced mouth opening",
-   "A monoclonal paraprotein, most often IgG with lambda light chains, is present in the large majority, although progression to overt myeloma is uncommon",
-   "Systemic involvement may affect the gastrointestinal tract (dysphagia, dysmotility), muscles (proximal myopathy), heart, kidneys and nervous system",
-   "The dermato-neuro syndrome, an abrupt encephalopathy with fever, seizures and coma, is a rare but life-threatening complication requiring emergency treatment",
-   "Intravenous immunoglobulin is generally first-line therapy, with options such as thalidomide or lenalidomide, systemic corticosteroids, bortezomib and autologous stem-cell transplantation for refractory or systemic disease"
+  "id": "scleromyxoedema",
+  "name": "scleromyxoedema",
+  "aliases": [
+    "Arndt-Gottron syndrome",
+    "Scleromyxoedema",
+    "generalised lichen myxoedematosus",
+    "papular mucinosis",
+    "scleromyxedema"
   ],
-  "pathophysiology": "Scleromyxoedema is a primary cutaneous mucinosis in which fibroblasts, apparently stimulated by circulating factors, proliferate and deposit excess glycosaminoglycans (chiefly hyaluronic acid) together with increased collagen in the upper and mid dermis. A monoclonal gammopathy is almost always present, and the paraprotein or associated cytokines are thought to drive fibroblast activation and mucin production, though the precise mechanism linking the two is not fully understood. The resulting combination of dermal mucin, fibroblast proliferation and fibrosis accounts for the papular and sclerodermoid skin changes, while similar processes in other organs underlie the systemic and neurological complications.",
-  "additionalDifferentials": [
-   "Systemic sclerosis and morphoea",
-   "Nephrogenic systemic fibrosis",
-   "Scleroedema",
-   "Localised forms of lichen myxoedematosus without paraproteinaemia",
-   "Scleromyxoedema-like changes of the reticular erythematous mucinosis or lupus spectrum",
-   "Amyloidosis with cutaneous infiltration"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing dermal mucin deposition, fibroblast proliferation and fibrosis",
-   "Serum protein electrophoresis and immunofixation to detect and characterise the paraprotein",
-   "Serum free light chains and quantitative immunoglobulins",
-   "Bone marrow examination to assess for a plasma cell dyscrasia",
-   "Colloidal iron or Alcian blue staining of biopsy to confirm mucin",
-   "Screening for systemic involvement with cardiac, oesophageal, muscle and renal assessment as indicated",
-   "Neuroimaging and lumbar puncture if dermato-neuro syndrome is suspected"
-  ],
-  "redFlags": [
-   "Abrupt fever, confusion, seizures or coma indicating dermato-neuro syndrome",
-   "Progressive dysphagia or aspiration from oesophageal dysmotility",
-   "Cardiac or renal involvement suggesting extensive systemic disease",
-   "Evidence of transformation to multiple myeloma",
-   "Severe proximal weakness compromising mobility or respiration"
-  ],
-  "prognosis": "Scleromyxoedema is a chronic, unpredictable and potentially progressive disorder that can be complicated by fatal systemic and neurological involvement. Response to intravenous immunoglobulin and other therapies has improved outcomes, but relapses are common and the dermato-neuro syndrome carries a high mortality.",
-  "pitfalls": [
-   "Failing to search for and monitor the associated monoclonal gammopathy",
-   "Mistaking the condition for systemic sclerosis and missing the distinctive papular and doughnut-sign features",
-   "Not recognising dermato-neuro syndrome, a treatable but rapidly fatal emergency, as part of the disease",
-   "Overlooking systemic organ involvement while focusing on the skin",
-   "Assuming a normal bone marrow excludes significant paraprotein-related disease"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia, Dermatology"
-  ],
-  "crossLinks": [
-   "scleroedema",
-   "cutaneous_mucinosis",
-   "nephrogenic_systemic_fibrosis"
-  ],
-  "management": [
-   "Give intravenous immunoglobulin as the treatment of choice for the cutaneous and systemic manifestations",
-   "Escalate to plasma-cell-directed therapy such as systemic corticosteroids, thalidomide or lenalidomide, or bortezomib with autologous stem-cell transplantation in resistant cases",
-   "Manage the dermato-neuro syndrome of encephalopathy, seizures, and coma as a life-threatening emergency with intravenous immunoglobulin, corticosteroids, and plasma exchange",
-   "Provide supportive care for dysphagia and dysmotility, proximal myopathy, and reduced mouth opening",
-   "Monitor for gastrointestinal, muscular, cardiac, renal, and neurological involvement",
-   "Refer to haematology to characterise the IgG-lambda paraprotein and exclude progression to myeloma",
-   "Coordinate multidisciplinary dermatology, haematology, and neurology follow-up given the relapsing, unpredictable course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scleromyxoedema-pathway",
-   "title": "scleromyxoedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The generalised, sclerodermoid form of lichen myxoedematosus, characterised by widespread firm waxy papules, dermal mucin deposition, fibroblast proliferation and an associated monoclonal gammopathy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Abrupt fever, confusion, seizures or coma indicating dermato-neuro syndrome",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing dermal mucin deposition, fibroblast proliferation and fibrosis, Serum protein electrophoresis and immunofixation to detect and characterise the paraprotein, Serum free light chains and quantitative"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give intravenous immunoglobulin as the treatment of choice for the cutaneous and systemic manifestations"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to search for and monitor the associated monoclonal gammopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scleromyxoedema."
-  }
- ],
- "tables": [
-  {
-   "id": "scleromyxoedema-matrix",
-   "title": "scleromyxoedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The generalised, sclerodermoid form of lichen myxoedematosus, characterised by widespread firm waxy papules, dermal mucin",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The generalised, sclerodermoid form of lichen myxoedematosus, characterised by widespread firm waxy papules, dermal mucin deposition, fibroblast proliferation and an associated monoclonal gammopathy",
+      "Numerous closely set, dome-shaped papules are typically arranged in a linear array over the face, ears, neck, trunk and hands, with progressive skin thickening and induration",
+      "Characteristic signs include the doughnut sign (a central depression surrounded by a raised rim over the proximal interphalangeal joints), deep glabellar furrows producing leonine facies, and reduced mouth opening",
+      "A monoclonal paraprotein, most often IgG with lambda light chains, is present in the large majority, although progression to overt myeloma is uncommon",
+      "Systemic involvement may affect the gastrointestinal tract (dysphagia, dysmotility), muscles (proximal myopathy), heart, kidneys and nervous system",
+      "The dermato-neuro syndrome, an abrupt encephalopathy with fever, seizures and coma, is a rare but life-threatening complication requiring emergency treatment",
+      "Intravenous immunoglobulin is generally first-line therapy, with options such as thalidomide or lenalidomide, systemic corticosteroids, bortezomib and autologous stem-cell transplantation for refractory or systemic disease"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing dermal mucin deposition, fibroblast proliferation and fibrosis, Serum protein electrophoresis and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scleromyxoedema is a primary cutaneous mucinosis in which fibroblasts, apparently stimulated by circulating factors, proliferate and deposit excess glycosaminoglycans (chiefly hyaluronic acid) together with increased collagen in the upper and mid dermis. A monoclonal gammopathy is almost always present, and the paraprotein or associated cytokines are thought to drive fibroblast activation and mucin production, though the precise mechanism linking the two is not fully understood. The resulting combination of dermal mucin, fibroblast proliferation and fibrosis accounts for the papular and sclerodermoid skin changes, while similar processes in other organs underlie the systemic and neurological complications.",
+    "additionalDifferentials": [
+      "Systemic sclerosis and morphoea",
+      "Nephrogenic systemic fibrosis",
+      "Scleroedema",
+      "Localised forms of lichen myxoedematosus without paraproteinaemia",
+      "Scleromyxoedema-like changes of the reticular erythematous mucinosis or lupus spectrum",
+      "Amyloidosis with cutaneous infiltration"
     ],
-    [
-     "Primary Differentials",
-     "Systemic sclerosis and morphoea, Nephrogenic systemic fibrosis, Scleroedema",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing dermal mucin deposition, fibroblast proliferation and fibrosis",
+      "Serum protein electrophoresis and immunofixation to detect and characterise the paraprotein",
+      "Serum free light chains and quantitative immunoglobulins",
+      "Bone marrow examination to assess for a plasma cell dyscrasia",
+      "Colloidal iron or Alcian blue staining of biopsy to confirm mucin",
+      "Screening for systemic involvement with cardiac, oesophageal, muscle and renal assessment as indicated",
+      "Neuroimaging and lumbar puncture if dermato-neuro syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Give intravenous immunoglobulin as the treatment of choice for the cutaneous and systemic manifestations",
-     "Core treatment modality"
+    "redFlags": [
+      "Abrupt fever, confusion, seizures or coma indicating dermato-neuro syndrome",
+      "Progressive dysphagia or aspiration from oesophageal dysmotility",
+      "Cardiac or renal involvement suggesting extensive systemic disease",
+      "Evidence of transformation to multiple myeloma",
+      "Severe proximal weakness compromising mobility or respiration"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to search for and monitor the associated monoclonal gammopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Scleromyxoedema is a chronic, unpredictable and potentially progressive disorder that can be complicated by fatal systemic and neurological involvement. Response to intravenous immunoglobulin and other therapies has improved outcomes, but relapses are common and the dermato-neuro syndrome carries a high mortality.",
+    "pitfalls": [
+      "Failing to search for and monitor the associated monoclonal gammopathy",
+      "Mistaking the condition for systemic sclerosis and missing the distinctive papular and doughnut-sign features",
+      "Not recognising dermato-neuro syndrome, a treatable but rapidly fatal emergency, as part of the disease",
+      "Overlooking systemic organ involvement while focusing on the skin",
+      "Assuming a normal bone marrow excludes significant paraprotein-related disease"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia, Dermatology"
+    ],
+    "crossLinks": [
+      "scleroedema",
+      "cutaneous_mucinosis",
+      "nephrogenic_systemic_fibrosis"
+    ],
+    "management": [
+      "Give intravenous immunoglobulin as the treatment of choice for the cutaneous and systemic manifestations",
+      "Escalate to plasma-cell-directed therapy such as systemic corticosteroids, thalidomide or lenalidomide, or bortezomib with autologous stem-cell transplantation in resistant cases",
+      "Manage the dermato-neuro syndrome of encephalopathy, seizures, and coma as a life-threatening emergency with intravenous immunoglobulin, corticosteroids, and plasma exchange",
+      "Provide supportive care for dysphagia and dysmotility, proximal myopathy, and reduced mouth opening",
+      "Monitor for gastrointestinal, muscular, cardiac, renal, and neurological involvement",
+      "Refer to haematology to characterise the IgG-lambda paraprotein and exclude progression to myeloma",
+      "Coordinate multidisciplinary dermatology, haematology, and neurology follow-up given the relapsing, unpredictable course"
     ]
-   ],
-   "caption": "Overview comparison matrix for scleromyxoedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scleromyxoedema-real-image",
-   "title": "scleromyxoedema: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "scleromyxoedema-pathway",
+      "title": "scleromyxoedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The generalised, sclerodermoid form of lichen myxoedematosus, characterised by widespread firm waxy papules, dermal mucin deposition, fibroblast proliferation and an associated monoclonal gammopathy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Abrupt fever, confusion, seizures or coma indicating dermato-neuro syndrome",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing dermal mucin deposition, fibroblast proliferation and fibrosis, Serum protein electrophoresis and immunofixation to detect and characterise the paraprotein, Serum free light chains and quantitative"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give intravenous immunoglobulin as the treatment of choice for the cutaneous and systemic manifestations"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to search for and monitor the associated monoclonal gammopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scleromyxoedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scleromyxoedema-matrix",
+      "title": "scleromyxoedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The generalised, sclerodermoid form of lichen myxoedematosus, characterised by widespread firm waxy papules, dermal mucin",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing dermal mucin deposition, fibroblast proliferation and fibrosis, Serum protein electrophoresis and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Systemic sclerosis and morphoea, Nephrogenic systemic fibrosis, Scleroedema",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give intravenous immunoglobulin as the treatment of choice for the cutaneous and systemic manifestations",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to search for and monitor the associated monoclonal gammopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scleromyxoedema."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "scleromyxoedema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dermal mucin deposition, fibroblast proliferation and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein electrophoresis and immunofixation",
+          "cells": [
+            {
+              "text": "Detects and characterises the paraprotein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains and immunoglobulins",
+          "cells": [
+            {
+              "text": "Quantify the gammopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Plasma cell dyscrasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colloidal iron or Alcian blue stain",
+          "cells": [
+            {
+              "text": "Confirms mucin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging and lumbar puncture",
+          "cells": [
+            {
+              "text": "If dermato-neuro syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleromyxoedema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic sclerosis",
+          "cells": [
+            {
+              "text": "Scleromyxoedema has papular and doughnut-sign features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleroedema",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "scleromyxoedema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Treatment of choice for cutaneous and systemic manifestations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma-cell-directed therapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, thalidomide, lenalidomide, or bortezomib with autologous stem-cell transplant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermato-neuro syndrome",
+          "cells": [
+            {
+              "text": "Life-threatening emergency: IVIG and corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Dysphagia, dysmotility, proximal myopathy and reduced mouth opening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic monitoring",
+          "cells": [
+            {
+              "text": "Gastrointestinal, muscular, cardiac, renal and neurological involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology referral",
+          "cells": [
+            {
+              "text": "Characterise the IgG-lambda paraprotein and exclude myeloma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "scleromyxoedema-dx-mgmt",
+      "title": "Diagnosis and management of scleromyxoedema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Waxy papules with induration: suspected scleromyxoedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever, confusion, seizures, dysphagia, cardiac or renal disease, or myeloma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency: dermato-neuro syndrome needs IVIG, steroids and neurology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, immunofixation, free light chains, bone marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mucin with fibroblast proliferation and an IgG-lambda paraprotein?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider systemic sclerosis, scleroedema or NSF; repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intravenous immunoglobulin as treatment of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate to thalidomide, lenalidomide or bortezomib with transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for dysphagia, myopathy and mouth opening",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Haematology monitoring for myeloma transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic, relapsing and unpredictable; fatal systemic or neurological disease possible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,416 @@
 {
- "id": "vesicoureteric_reflux",
- "name": "Vesicoureteric reflux",
- "aliases": [
-  "VUR",
-  "vesicoureteral reflux",
-  "vesico-ureteric reflux"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Vesicoureteric reflux is the retrograde flow of urine from the bladder up the ureter toward the kidney, predisposing to recurrent pyelonephritis and renal scarring, mainly in children",
-   "Primary VUR results from a congenitally short or abnormal submucosal ureteric tunnel with an incompetent vesicoureteric junction, whereas secondary VUR arises from raised bladder pressure due to obstruction or a neurogenic or dysfunctional bladder",
-   "It commonly presents with febrile urinary tract infections in infancy or childhood, or is detected during investigation of antenatal hydronephrosis",
-   "Severity is graded I to V by the voiding cystourethrogram appearance, from reflux confined to a non-dilated ureter up to gross dilatation and tortuosity with a severely dilated collecting system",
-   "The principal concern is reflux nephropathy: renal scarring from recurrent infection combined with reflux, which can lead to hypertension, proteinuria, and chronic kidney disease",
-   "Voiding cystourethrography is the standard test to confirm and grade reflux, while DMSA scintigraphy detects renal scarring and pyelonephritis",
-   "Management principles emphasise prevention and prompt treatment of infection, attention to bladder and bowel dysfunction, and continuous antibiotic prophylaxis in selected children, since many low-grade cases resolve spontaneously with growth",
-   "Surgical or endoscopic correction (ureteric reimplantation or subureteric injection) is reserved for high-grade, persistent, or breakthrough-infection cases"
+  "id": "vesicoureteric_reflux",
+  "name": "Vesicoureteric reflux",
+  "aliases": [
+    "VUR",
+    "vesicoureteral reflux",
+    "vesico-ureteric reflux"
   ],
-  "pathophysiology": "Vesicoureteric reflux occurs when the valve-like mechanism of the vesicoureteric junction fails, allowing urine to reflux from the bladder into the ureter and renal pelvis. Normally an adequate length of submucosal ureter within the bladder wall is compressed during bladder filling and voiding, preventing reflux; in primary VUR this tunnel is congenitally short or laterally placed. Secondary VUR develops when high intravesical pressures from bladder outlet obstruction or neurogenic/dysfunctional voiding overcome the junction. Reflux of infected urine and elevated pressures transmitted to the kidney cause pyelonephritis and scarring (reflux nephropathy), which underlies later hypertension and renal impairment.",
-  "additionalDifferentials": [
-   "Recurrent urinary tract infection without reflux",
-   "Obstructive uropathy (posterior urethral valves, PUJ obstruction)",
-   "Neurogenic or dysfunctional bladder (bladder-bowel dysfunction)",
-   "Antenatal hydronephrosis of other cause",
-   "Duplex collecting system with ectopic ureter or ureterocele",
-   "Primary megaureter"
-  ],
-  "additionalInvestigations": [
-   "Voiding (micturating) cystourethrography to confirm and grade reflux",
-   "DMSA renal scintigraphy to detect scarring and acute pyelonephritis",
-   "Renal and bladder ultrasound to assess for dilatation and anatomy",
-   "Urinalysis and culture during febrile illness",
-   "Assessment of renal function and blood pressure",
-   "Evaluation of bladder and bowel function (uroflowmetry, voiding diary) in older children"
-  ],
-  "redFlags": [
-   "Febrile urinary tract infection with an obstructed or refluxing system risking urosepsis, a urological emergency requiring prompt drainage and antibiotics",
-   "Progressive renal scarring or reduced differential renal function",
-   "New or worsening hypertension or proteinuria indicating reflux nephropathy",
-   "High-grade reflux with breakthrough infections despite prophylaxis",
-   "Bilateral high-grade reflux with impaired renal function"
-  ],
-  "prognosis": "Many children with low-grade primary reflux resolve spontaneously as they grow and do well with infection prevention; high-grade reflux, recurrent pyelonephritis, and established scarring carry a greater risk of hypertension and chronic kidney disease, making surveillance important.",
-  "pitfalls": [
-   "Failing to investigate recurrent febrile UTIs in a child for underlying reflux",
-   "Overlooking bladder and bowel dysfunction, which perpetuates reflux and infection",
-   "Missing secondary reflux from obstruction such as posterior urethral valves",
-   "Neglecting long-term monitoring of blood pressure and renal function in children with scarring",
-   "Delaying treatment of a febrile infection in an obstructed, refluxing system"
-  ],
-  "references": [
-   "Smith & Tanagho's General Urology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Optimise bladder and bowel function first, treating constipation and dysfunctional voiding with timed voiding and a bowel regimen to reduce infection and aid resolution",
-   "Continuous antibiotic prophylaxis for infants and children with high-grade reflux or recurrent febrile urinary tract infections",
-   "Conservative observation with infection prevention for low-grade primary reflux, anticipating spontaneous resolution with growth",
-   "Treat febrile urinary tract infections promptly with culture-directed antibiotics to minimise reflux nephropathy",
-   "Endoscopic subureteric injection or open ureteric reimplantation for persistent high-grade reflux or breakthrough pyelonephritis despite prophylaxis",
-   "Regular surveillance with renal tract ultrasound, DMSA scanning for scarring, blood pressure and renal function assessment",
-   "Involve paediatric urology and nephrology, escalating if hypertension, proteinuria or chronic kidney disease develop"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vesicoureteric_reflux-pathway",
-   "title": "Vesicoureteric reflux: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Vesicoureteric reflux is the retrograde flow of urine from the bladder up the ureter toward the kidney, predisposing to recurrent pyelonephritis and renal scarring, mainly in children",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Febrile urinary tract infection with an obstructed or refluxing system risking urosepsis, a urological emergency requiring prompt drainage and antibiotics",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Voiding (micturating) cystourethrography to confirm and grade reflux, DMSA renal scintigraphy to detect scarring and acute pyelonephritis, Renal and bladder ultrasound to assess for dilatation and anatomy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Optimise bladder and bowel function first, treating constipation and dysfunctional voiding with timed voiding and a bowel regimen to reduce infection and aid resolution"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to investigate recurrent febrile UTIs in a child for underlying reflux"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vesicoureteric reflux."
-  }
- ],
- "tables": [
-  {
-   "id": "vesicoureteric_reflux-matrix",
-   "title": "Vesicoureteric reflux: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Vesicoureteric reflux is the retrograde flow of urine from the bladder up the ureter toward the kidney, predisposing to recurrent",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Vesicoureteric reflux is the retrograde flow of urine from the bladder up the ureter toward the kidney, predisposing to recurrent pyelonephritis and renal scarring, mainly in children",
+      "Primary VUR results from a congenitally short or abnormal submucosal ureteric tunnel with an incompetent vesicoureteric junction, whereas secondary VUR arises from raised bladder pressure due to obstruction or a neurogenic or dysfunctional bladder",
+      "It commonly presents with febrile urinary tract infections in infancy or childhood, or is detected during investigation of antenatal hydronephrosis",
+      "Severity is graded I to V by the voiding cystourethrogram appearance, from reflux confined to a non-dilated ureter up to gross dilatation and tortuosity with a severely dilated collecting system",
+      "The principal concern is reflux nephropathy: renal scarring from recurrent infection combined with reflux, which can lead to hypertension, proteinuria, and chronic kidney disease",
+      "Voiding cystourethrography is the standard test to confirm and grade reflux, while DMSA scintigraphy detects renal scarring and pyelonephritis",
+      "Management principles emphasise prevention and prompt treatment of infection, attention to bladder and bowel dysfunction, and continuous antibiotic prophylaxis in selected children, since many low-grade cases resolve spontaneously with growth",
+      "Surgical or endoscopic correction (ureteric reimplantation or subureteric injection) is reserved for high-grade, persistent, or breakthrough-infection cases"
     ],
-    [
-     "Key Investigations",
-     "Voiding (micturating) cystourethrography to confirm and grade reflux, DMSA renal scintigraphy to detect scarring and acute",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vesicoureteric reflux occurs when the valve-like mechanism of the vesicoureteric junction fails, allowing urine to reflux from the bladder into the ureter and renal pelvis. Normally an adequate length of submucosal ureter within the bladder wall is compressed during bladder filling and voiding, preventing reflux; in primary VUR this tunnel is congenitally short or laterally placed. Secondary VUR develops when high intravesical pressures from bladder outlet obstruction or neurogenic/dysfunctional voiding overcome the junction. Reflux of infected urine and elevated pressures transmitted to the kidney cause pyelonephritis and scarring (reflux nephropathy), which underlies later hypertension and renal impairment.",
+    "additionalDifferentials": [
+      "Recurrent urinary tract infection without reflux",
+      "Obstructive uropathy (posterior urethral valves, PUJ obstruction)",
+      "Neurogenic or dysfunctional bladder (bladder-bowel dysfunction)",
+      "Antenatal hydronephrosis of other cause",
+      "Duplex collecting system with ectopic ureter or ureterocele",
+      "Primary megaureter"
     ],
-    [
-     "Primary Differentials",
-     "Recurrent urinary tract infection without reflux, Obstructive uropathy (posterior urethral valves, PUJ obstruction), Neurogenic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Voiding (micturating) cystourethrography to confirm and grade reflux",
+      "DMSA renal scintigraphy to detect scarring and acute pyelonephritis",
+      "Renal and bladder ultrasound to assess for dilatation and anatomy",
+      "Urinalysis and culture during febrile illness",
+      "Assessment of renal function and blood pressure",
+      "Evaluation of bladder and bowel function (uroflowmetry, voiding diary) in older children"
     ],
-    [
-     "Management Strategy",
-     "Optimise bladder and bowel function first, treating constipation and dysfunctional voiding with timed voiding and a bowel regimen",
-     "Core treatment modality"
+    "redFlags": [
+      "Febrile urinary tract infection with an obstructed or refluxing system risking urosepsis, a urological emergency requiring prompt drainage and antibiotics",
+      "Progressive renal scarring or reduced differential renal function",
+      "New or worsening hypertension or proteinuria indicating reflux nephropathy",
+      "High-grade reflux with breakthrough infections despite prophylaxis",
+      "Bilateral high-grade reflux with impaired renal function"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to investigate recurrent febrile UTIs in a child for underlying reflux",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many children with low-grade primary reflux resolve spontaneously as they grow and do well with infection prevention; high-grade reflux, recurrent pyelonephritis, and established scarring carry a greater risk of hypertension and chronic kidney disease, making surveillance important.",
+    "pitfalls": [
+      "Failing to investigate recurrent febrile UTIs in a child for underlying reflux",
+      "Overlooking bladder and bowel dysfunction, which perpetuates reflux and infection",
+      "Missing secondary reflux from obstruction such as posterior urethral valves",
+      "Neglecting long-term monitoring of blood pressure and renal function in children with scarring",
+      "Delaying treatment of a febrile infection in an obstructed, refluxing system"
+    ],
+    "references": [
+      "Smith & Tanagho's General Urology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Optimise bladder and bowel function first, treating constipation and dysfunctional voiding with timed voiding and a bowel regimen to reduce infection and aid resolution",
+      "Continuous antibiotic prophylaxis for infants and children with high-grade reflux or recurrent febrile urinary tract infections",
+      "Conservative observation with infection prevention for low-grade primary reflux, anticipating spontaneous resolution with growth",
+      "Treat febrile urinary tract infections promptly with culture-directed antibiotics to minimise reflux nephropathy",
+      "Endoscopic subureteric injection or open ureteric reimplantation for persistent high-grade reflux or breakthrough pyelonephritis despite prophylaxis",
+      "Regular surveillance with renal tract ultrasound, DMSA scanning for scarring, blood pressure and renal function assessment",
+      "Involve paediatric urology and nephrology, escalating if hypertension, proteinuria or chronic kidney disease develop"
     ]
-   ],
-   "caption": "Overview comparison matrix for vesicoureteric reflux."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vesicoureteric-reflux-real-image",
-   "title": "Vesicoureteric reflux: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "vesicoureteric_reflux-pathway",
+      "title": "Vesicoureteric reflux: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Vesicoureteric reflux is the retrograde flow of urine from the bladder up the ureter toward the kidney, predisposing to recurrent pyelonephritis and renal scarring, mainly in children",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Febrile urinary tract infection with an obstructed or refluxing system risking urosepsis, a urological emergency requiring prompt drainage and antibiotics",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Voiding (micturating) cystourethrography to confirm and grade reflux, DMSA renal scintigraphy to detect scarring and acute pyelonephritis, Renal and bladder ultrasound to assess for dilatation and anatomy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Optimise bladder and bowel function first, treating constipation and dysfunctional voiding with timed voiding and a bowel regimen to reduce infection and aid resolution"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to investigate recurrent febrile UTIs in a child for underlying reflux"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vesicoureteric reflux."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vesicoureteric_reflux-matrix",
+      "title": "Vesicoureteric reflux: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Vesicoureteric reflux is the retrograde flow of urine from the bladder up the ureter toward the kidney, predisposing to recurrent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Voiding (micturating) cystourethrography to confirm and grade reflux, DMSA renal scintigraphy to detect scarring and acute",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Recurrent urinary tract infection without reflux, Obstructive uropathy (posterior urethral valves, PUJ obstruction), Neurogenic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Optimise bladder and bowel function first, treating constipation and dysfunctional voiding with timed voiding and a bowel regimen",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to investigate recurrent febrile UTIs in a child for underlying reflux",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vesicoureteric reflux."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "vesicoureteric_reflux-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Voiding cystourethrography",
+          "cells": [
+            {
+              "text": "Confirms and grades reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DMSA renal scintigraphy",
+          "cells": [
+            {
+              "text": "Scarring and acute pyelonephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Dilatation and anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and culture during febrile illness",
+          "cells": [
+            {
+              "text": "Infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vesicoureteric_reflux-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Recurrent urinary tract infection without reflux",
+          "cells": [
+            {
+              "text": "Infection without reflux on cystourethrography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior urethral valves or PUJ obstruction",
+          "cells": [
+            {
+              "text": "Obstructive uropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic or dysfunctional bladder",
+          "cells": [
+            {
+              "text": "Bladder-bowel dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex collecting system with ectopic ureter",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "vesicoureteric_reflux-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optimise bladder and bowel function",
+          "cells": [
+            {
+              "text": "Constipation and dysfunctional voiding treated with timed voiding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous antibiotic prophylaxis",
+          "cells": [
+            {
+              "text": "High-grade reflux or recurrent febrile UTI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Most reflux managed without surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "vesicoureteric_reflux-dx-mgmt",
+      "title": "Diagnosis and management of Vesicoureteric reflux",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected vesicoureteric reflux: febrile UTI with retrograde urine flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (obstructed or refluxing system with fever, or progressive scarring)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent urology review for urosepsis in an obstructed or refluxing system",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Voiding cystourethrography, DMSA scintigraphy, renal and bladder ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does voiding cystourethrography confirm reflux?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate recurrent UTI for other causes, such as obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise bladder and bowel function with timed voiding and bowel regimen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous antibiotic prophylaxis for high-grade reflux",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conservative management with surveillance of renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Scarring and reduced differential function determine long-term outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

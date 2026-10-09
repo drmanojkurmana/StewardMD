@@ -1,174 +1,504 @@
 {
- "id": "collapsing_glomerulopathy",
- "name": "Collapsing glomerulopathy",
- "aliases": [
-  "collapsing FSGS",
-  "collapsing variant of focal segmental glomerulosclerosis",
-  "HIV-associated nephropathy (collapsing pattern)"
- ],
- "class": "non_infective",
- "system": "Renal / Nephrology",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An aggressive glomerular disease defined by segmental or global collapse of the glomerular tuft with overlying podocyte hyperplasia and hypertrophy",
-   "Presents with heavy, often massive, proteinuria, rapidly declining renal function and prominent tubulointerstitial injury with microcystic tubular dilatation",
-   "Strongly linked to APOL1 high-risk genotypes in people of African ancestry, and to viral triggers including HIV and parvovirus B19",
-   "HIV-associated nephropathy is the archetypal viral form, but the pattern also follows other infections, interferon and pamidronate exposure, and autoimmune disease",
-   "Podocytes show a dysregulated, dedifferentiated proliferative phenotype rather than the quiescent injured podocyte of classic FSGS",
-   "It is regarded as a distinct, more severe entity than other FSGS variants and warrants a search for a reversible trigger",
-   "Management combines treatment of any underlying cause (antiretroviral therapy in HIV, drug withdrawal, control of autoimmune disease) with immunosuppression/corticosteroids in idiopathic cases and supportive renal care"
+  "id": "collapsing_glomerulopathy",
+  "name": "Collapsing glomerulopathy",
+  "aliases": [
+    "collapsing FSGS",
+    "collapsing variant of focal segmental glomerulosclerosis",
+    "HIV-associated nephropathy (collapsing pattern)"
   ],
-  "pathophysiology": "Collapsing glomerulopathy is a podocytopathy in which a severe injury drives podocytes to lose their differentiated markers and proliferate, forming a hyperplastic cap over a collapsed, wrinkled glomerular basement membrane. APOL1 high-risk variants render podocytes susceptible, and a 'second hit' such as viral infection, interferon exposure or another stressor precipitates the collapsing response. The intense podocyte injury produces massive proteinuria, while associated severe tubular injury with microcyst formation contributes to the rapid loss of function. The combination of tuft collapse and epithelial proliferation distinguishes it histologically from other FSGS variants and accounts for its worse prognosis.",
-  "additionalDifferentials": [
-   "Other focal segmental glomerulosclerosis variants",
-   "HIV-associated nephropathy",
-   "Thrombotic microangiopathy",
-   "Crescentic glomerulonephritis",
-   "Acute tubular injury with heavy proteinuria",
-   "Drug-induced (interferon or pamidronate) podocyte injury"
-  ],
-  "additionalInvestigations": [
-   "Renal biopsy showing tuft collapse with podocyte hyperplasia and tubular microcysts",
-   "HIV and parvovirus B19 testing and broader viral screen",
-   "APOL1 genotyping in patients of African ancestry",
-   "Review of drug exposures including interferon and bisphosphonates",
-   "Autoimmune serology where a connective-tissue disease is suspected",
-   "Quantification of proteinuria and monitoring of renal function"
-  ],
-  "redFlags": [
-   "Rapid progression to advanced renal failure over weeks to months",
-   "Nephrotic-range or massive proteinuria with severe hypoalbuminaemia",
-   "Newly diagnosed HIV or other precipitating infection",
-   "Exposure to interferon or other implicated drugs"
-  ],
-  "prognosis": "Collapsing glomerulopathy carries the worst prognosis among FSGS patterns, with rapid progression to end-stage kidney disease in many patients despite treatment. Outcomes are better when a reversible trigger such as HIV or an offending drug is identified and addressed early, but APOL1-associated idiopathic disease often responds poorly to immunosuppression.",
-  "pitfalls": [
-   "Treating it as ordinary FSGS and underestimating its aggressiveness",
-   "Failing to test for HIV, parvovirus and other viral triggers",
-   "Overlooking implicated drugs such as interferon and bisphosphonates",
-   "Not considering APOL1 risk in patients of African ancestry",
-   "Delaying antiretroviral therapy in HIV-associated disease"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "Brenner and Rector's The Kidney"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat a reversible trigger - antiretroviral therapy for HIV-associated disease, treatment of parvovirus B19, and withdrawal of interferon or pamidronate",
-   "Renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control blood pressure",
-   "Corticosteroids with or without additional immunosuppression for idiopathic disease, recognising the limited response",
-   "Supportive management of nephrotic syndrome with diuretics for oedema and a statin for dyslipidaemia",
-   "Close monitoring of proteinuria and renal function with early planning for dialysis or transplantation given rapid progression",
-   "APOL1 genotyping in patients of African ancestry with genetic counselling where relevant",
-   "Nephrology referral for biopsy-guided diagnosis and management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "collapsing_glomerulopathy-pathway",
-   "title": "Collapsing glomerulopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An aggressive glomerular disease defined by segmental or global collapse of the glomerular tuft with overlying podocyte hyperplasia and hypertrophy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid progression to advanced renal failure over weeks to months",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal biopsy showing tuft collapse with podocyte hyperplasia and tubular microcysts, HIV and parvovirus B19 testing and broader viral screen, APOL1 genotyping in patients of African ancestry"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat a reversible trigger - antiretroviral therapy for HIV-associated disease, treatment of parvovirus B19, and withdrawal of interferon or pamidronate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating it as ordinary FSGS and underestimating its aggressiveness"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of collapsing glomerulopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "collapsing_glomerulopathy-matrix",
-   "title": "Collapsing glomerulopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An aggressive glomerular disease defined by segmental or global collapse of the glomerular tuft with overlying podocyte",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Nephrology",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An aggressive glomerular disease defined by segmental or global collapse of the glomerular tuft with overlying podocyte hyperplasia and hypertrophy",
+      "Presents with heavy, often massive, proteinuria, rapidly declining renal function and prominent tubulointerstitial injury with microcystic tubular dilatation",
+      "Strongly linked to APOL1 high-risk genotypes in people of African ancestry, and to viral triggers including HIV and parvovirus B19",
+      "HIV-associated nephropathy is the archetypal viral form, but the pattern also follows other infections, interferon and pamidronate exposure, and autoimmune disease",
+      "Podocytes show a dysregulated, dedifferentiated proliferative phenotype rather than the quiescent injured podocyte of classic FSGS",
+      "It is regarded as a distinct, more severe entity than other FSGS variants and warrants a search for a reversible trigger",
+      "Management combines treatment of any underlying cause (antiretroviral therapy in HIV, drug withdrawal, control of autoimmune disease) with immunosuppression/corticosteroids in idiopathic cases and supportive renal care"
     ],
-    [
-     "Key Investigations",
-     "Renal biopsy showing tuft collapse with podocyte hyperplasia and tubular microcysts, HIV and parvovirus B19 testing and broader",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Collapsing glomerulopathy is a podocytopathy in which a severe injury drives podocytes to lose their differentiated markers and proliferate, forming a hyperplastic cap over a collapsed, wrinkled glomerular basement membrane. APOL1 high-risk variants render podocytes susceptible, and a 'second hit' such as viral infection, interferon exposure or another stressor precipitates the collapsing response. The intense podocyte injury produces massive proteinuria, while associated severe tubular injury with microcyst formation contributes to the rapid loss of function. The combination of tuft collapse and epithelial proliferation distinguishes it histologically from other FSGS variants and accounts for its worse prognosis.",
+    "additionalDifferentials": [
+      "Other focal segmental glomerulosclerosis variants",
+      "HIV-associated nephropathy",
+      "Thrombotic microangiopathy",
+      "Crescentic glomerulonephritis",
+      "Acute tubular injury with heavy proteinuria",
+      "Drug-induced (interferon or pamidronate) podocyte injury"
     ],
-    [
-     "Primary Differentials",
-     "Other focal segmental glomerulosclerosis variants, HIV-associated nephropathy, Thrombotic microangiopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal biopsy showing tuft collapse with podocyte hyperplasia and tubular microcysts",
+      "HIV and parvovirus B19 testing and broader viral screen",
+      "APOL1 genotyping in patients of African ancestry",
+      "Review of drug exposures including interferon and bisphosphonates",
+      "Autoimmune serology where a connective-tissue disease is suspected",
+      "Quantification of proteinuria and monitoring of renal function"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat a reversible trigger - antiretroviral therapy for HIV-associated disease, treatment of parvovirus B19, and",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid progression to advanced renal failure over weeks to months",
+      "Nephrotic-range or massive proteinuria with severe hypoalbuminaemia",
+      "Newly diagnosed HIV or other precipitating infection",
+      "Exposure to interferon or other implicated drugs"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating it as ordinary FSGS and underestimating its aggressiveness",
-     "Prevent diagnostic or management error"
+    "prognosis": "Collapsing glomerulopathy carries the worst prognosis among FSGS patterns, with rapid progression to end-stage kidney disease in many patients despite treatment. Outcomes are better when a reversible trigger such as HIV or an offending drug is identified and addressed early, but APOL1-associated idiopathic disease often responds poorly to immunosuppression.",
+    "pitfalls": [
+      "Treating it as ordinary FSGS and underestimating its aggressiveness",
+      "Failing to test for HIV, parvovirus and other viral triggers",
+      "Overlooking implicated drugs such as interferon and bisphosphonates",
+      "Not considering APOL1 risk in patients of African ancestry",
+      "Delaying antiretroviral therapy in HIV-associated disease"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "Brenner and Rector's The Kidney"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat a reversible trigger - antiretroviral therapy for HIV-associated disease, treatment of parvovirus B19, and withdrawal of interferon or pamidronate",
+      "Renin-angiotensin system blockade with an ACE inhibitor or angiotensin-receptor blocker to reduce proteinuria and control blood pressure",
+      "Corticosteroids with or without additional immunosuppression for idiopathic disease, recognising the limited response",
+      "Supportive management of nephrotic syndrome with diuretics for oedema and a statin for dyslipidaemia",
+      "Close monitoring of proteinuria and renal function with early planning for dialysis or transplantation given rapid progression",
+      "APOL1 genotyping in patients of African ancestry with genetic counselling where relevant",
+      "Nephrology referral for biopsy-guided diagnosis and management"
     ]
-   ],
-   "caption": "Overview comparison matrix for collapsing glomerulopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "collapsing-glomerulopathy-real-image",
-   "title": "Collapsing glomerulopathy: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "collapsing_glomerulopathy-pathway",
+      "title": "Collapsing glomerulopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An aggressive glomerular disease defined by segmental or global collapse of the glomerular tuft with overlying podocyte hyperplasia and hypertrophy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid progression to advanced renal failure over weeks to months",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal biopsy showing tuft collapse with podocyte hyperplasia and tubular microcysts, HIV and parvovirus B19 testing and broader viral screen, APOL1 genotyping in patients of African ancestry"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat a reversible trigger - antiretroviral therapy for HIV-associated disease, treatment of parvovirus B19, and withdrawal of interferon or pamidronate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating it as ordinary FSGS and underestimating its aggressiveness"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of collapsing glomerulopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "collapsing_glomerulopathy-matrix",
+      "title": "Collapsing glomerulopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An aggressive glomerular disease defined by segmental or global collapse of the glomerular tuft with overlying podocyte",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal biopsy showing tuft collapse with podocyte hyperplasia and tubular microcysts, HIV and parvovirus B19 testing and broader",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other focal segmental glomerulosclerosis variants, HIV-associated nephropathy, Thrombotic microangiopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat a reversible trigger - antiretroviral therapy for HIV-associated disease, treatment of parvovirus B19, and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating it as ordinary FSGS and underestimating its aggressiveness",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for collapsing glomerulopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Brenner and Rector's The Kidney",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 283-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "collapsing_glomerulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy",
+          "cells": [
+            {
+              "text": "Tuft collapse, podocyte hyperplasia and tubular microcysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV and parvovirus B19 testing",
+          "cells": [
+            {
+              "text": "Viral triggers, which are linked to the disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "APOL1 genotyping",
+          "cells": [
+            {
+              "text": "High-risk genotypes, in people of African ancestry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of drug exposure (interferon, bisphosphonates)",
+          "cells": [
+            {
+              "text": "Implicated drug exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collapsing_glomerulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other focal segmental glomerulosclerosis variants",
+          "cells": [
+            {
+              "text": "Aggressive course; must not be managed as ordinary FSGS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV-associated nephropathy",
+          "cells": [
+            {
+              "text": "Viral trigger; HIV testing is required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced podocyte injury",
+          "cells": [
+            {
+              "text": "Interferon or pamidronate exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collapsing_glomerulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat reversible triggers",
+          "cells": [
+            {
+              "text": "Antiretroviral therapy for HIV; treat parvovirus B19; withdraw interferon or pamidronate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "To reduce proteinuria and control blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "With or without immunosuppression for idiopathic disease; limited response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive nephrotic care",
+          "cells": [
+            {
+              "text": "Diuretics for oedema; statin for dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and planning",
+          "cells": [
+            {
+              "text": "Proteinuria and renal function; early planning for dialysis or transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "APOL1 genotyping",
+          "cells": [
+            {
+              "text": "In patients of African ancestry, with genetic counselling where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "cells": [
+            {
+              "text": "Biopsy-guided diagnosis and management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collapsing_glomerulopathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Focal segmental glomerulosclerosis: primary and secondary causes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary FSGS",
+          "cells": [
+            {
+              "text": "Primary focal segmental glomerulosclerosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary FSGS: viruses and hypertension",
+          "cells": [
+            {
+              "text": "HIV, hepatitis B, parvovirus; hypertensive nephropathy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary FSGS: other causes",
+          "cells": [
+            {
+              "text": "Reflux nephropathy; cholesterol emboli; drugs (heroin, analgesics, pamidronate); oligomeganephronia; renal dysgenesis; Alport's syndrome; sickle cell disease; lymphoma; radiation nephritis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Familial podocytopathies",
+          "cells": [
+            {
+              "text": "NPHS1 mutation (nephrin); NPHS2 mutation (podocin); TRPC6 mutation (cation channel); ACTN4 mutation (actinin); alpha-galactosidase A deficiency (Fabry's disease); N-acetylneuraminic acid hydrolase deficiency (nephrosialidosis)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "collapsing_glomerulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Collapsing glomerulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected collapsing glomerulopathy: massive proteinuria with rapid renal decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid progression, HIV or viral trigger, implicated drug)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat the reversible trigger; plan dialysis if function falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal biopsy; HIV and parvovirus B19 tests; APOL1 genotype; drug review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a reversible trigger found on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as idiopathic disease; corticosteroids with limited response expected",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antiretroviral therapy for HIV-associated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ACE inhibitor or ARB for proteinuria and blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diuretics and statin for nephrotic syndrome features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early planning for dialysis or transplantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Worst FSGS prognosis; outcomes can be better when a reversible cause is found",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

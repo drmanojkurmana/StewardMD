@@ -1,173 +1,442 @@
 {
- "id": "contact_urticaria",
- "name": "Contact urticaria",
- "aliases": [
-  "contact hives",
-  "immediate contact reaction",
-  "occupational contact urticaria"
- ],
- "class": "non_infective",
- "system": "Occupational / Environmental",
- "specialty": "Occupational & Environmental Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hunter's Diseases of Occupations / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Contact urticaria is an immediate wheal-and-flare reaction appearing within minutes of skin contact with a triggering substance, unlike the delayed pattern of allergic contact dermatitis",
-   "It is divided into non-immunological reactions (direct release of mediators, for example from certain foods, plants or chemicals) and immunological IgE-mediated reactions in sensitised individuals",
-   "Natural rubber latex is a classic occupational cause, notably in healthcare and among workers using latex gloves",
-   "Food handlers, bakers, farmers, hairdressers and healthcare staff are commonly affected occupational groups",
-   "Immunological contact urticaria can progress to generalised urticaria, angioedema, respiratory symptoms and, in severe cases, anaphylaxis",
-   "The hands are the usual site of occupational reactions, and symptoms typically settle when contact ends",
-   "Diagnosis is supported by the history and by cautious skin testing or specific IgE, with provocation testing done carefully because of the anaphylaxis risk",
-   "Management centres on identifying and avoiding the trigger, using substitutes such as non-latex gloves, and having a plan for systemic reactions"
+  "id": "contact_urticaria",
+  "name": "Contact urticaria",
+  "aliases": [
+    "contact hives",
+    "immediate contact reaction",
+    "occupational contact urticaria"
   ],
-  "pathophysiology": "In the immunological form, prior sensitisation leads to allergen-specific IgE on mast cells; re-exposure cross-links IgE and triggers rapid mast cell degranulation with histamine release, producing the immediate wheal and flare and, if extensive, systemic effects. In the non-immunological form, substances act directly to release vasoactive mediators without prior sensitisation, generally causing localised reactions.",
-  "additionalDifferentials": [
-   "Allergic contact dermatitis (delayed type)",
-   "Irritant contact dermatitis",
-   "Chronic spontaneous urticaria",
-   "Cholinergic or physical urticaria",
-   "Angioedema of other cause",
-   "Protein contact dermatitis"
-  ],
-  "additionalInvestigations": [
-   "Detailed occupational and exposure history with symptom timing",
-   "Skin prick testing to suspected agents such as latex, performed with resuscitation available",
-   "Open or use provocation tests done cautiously",
-   "Specific IgE blood testing where available",
-   "Assessment for coexisting asthma or rhinitis, especially with latex"
-  ],
-  "redFlags": [
-   "Progression to angioedema, wheeze or anaphylaxis requiring emergency treatment",
-   "Widespread reaction beyond the site of contact",
-   "History of previous severe systemic reaction on re-exposure",
-   "Respiratory symptoms accompanying skin reactions"
-  ],
-  "prognosis": "Symptoms usually resolve once the causative contact is avoided, and the outlook is good with effective avoidance; however, sensitised individuals remain at risk of severe reactions on re-exposure, and latex allergy in particular can have systemic consequences.",
-  "pitfalls": [
-   "Confusing immediate contact urticaria with delayed allergic contact dermatitis and choosing the wrong test",
-   "Performing provocation testing without resuscitation facilities in a potentially anaphylactic patient",
-   "Failing to recognise latex as a cause and continuing latex glove use",
-   "Overlooking associated respiratory allergy",
-   "Not providing an emergency plan for those at risk of systemic reactions"
-  ],
-  "references": [
-   "Hunter's Diseases of Occupations",
-   "WHO guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and avoid the causative substance, providing a latex-free environment where natural rubber latex is implicated",
-   "Relieve symptoms with oral antihistamines",
-   "Prescribe an adrenaline auto-injector and an emergency action plan for individuals at risk of systemic reactions or anaphylaxis",
-   "Institute occupational measures such as substituting latex gloves and modifying the workplace for affected food handlers, healthcare and other at-risk workers",
-   "Assess and manage coexisting asthma and rhinitis, particularly with latex sensitisation",
-   "Confirm sensitisation with skin-prick or specific IgE testing performed with resuscitation facilities available, and counsel on the ongoing risk of severe reactions on re-exposure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "contact_urticaria-pathway",
-   "title": "Contact urticaria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Contact urticaria is an immediate wheal-and-flare reaction appearing within minutes of skin contact with a triggering substance, unlike the delayed pattern of allergic contact dermatitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progression to angioedema, wheeze or anaphylaxis requiring emergency treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed occupational and exposure history with symptom timing, Skin prick testing to suspected agents such as latex, performed with resuscitation available, Open or use provocation tests done cautiously"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and avoid the causative substance, providing a latex-free environment where natural rubber latex is implicated"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing immediate contact urticaria with delayed allergic contact dermatitis and choosing the wrong test"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of contact urticaria."
-  }
- ],
- "tables": [
-  {
-   "id": "contact_urticaria-matrix",
-   "title": "Contact urticaria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Contact urticaria is an immediate wheal-and-flare reaction appearing within minutes of skin contact with a triggering substance,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Occupational / Environmental",
+  "specialty": "Occupational & Environmental Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hunter's Diseases of Occupations / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Contact urticaria is an immediate wheal-and-flare reaction appearing within minutes of skin contact with a triggering substance, unlike the delayed pattern of allergic contact dermatitis",
+      "It is divided into non-immunological reactions (direct release of mediators, for example from certain foods, plants or chemicals) and immunological IgE-mediated reactions in sensitised individuals",
+      "Natural rubber latex is a classic occupational cause, notably in healthcare and among workers using latex gloves",
+      "Food handlers, bakers, farmers, hairdressers and healthcare staff are commonly affected occupational groups",
+      "Immunological contact urticaria can progress to generalised urticaria, angioedema, respiratory symptoms and, in severe cases, anaphylaxis",
+      "The hands are the usual site of occupational reactions, and symptoms typically settle when contact ends",
+      "Diagnosis is supported by the history and by cautious skin testing or specific IgE, with provocation testing done carefully because of the anaphylaxis risk",
+      "Management centres on identifying and avoiding the trigger, using substitutes such as non-latex gloves, and having a plan for systemic reactions"
     ],
-    [
-     "Key Investigations",
-     "Detailed occupational and exposure history with symptom timing, Skin prick testing to suspected agents such as latex, performed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In the immunological form, prior sensitisation leads to allergen-specific IgE on mast cells; re-exposure cross-links IgE and triggers rapid mast cell degranulation with histamine release, producing the immediate wheal and flare and, if extensive, systemic effects. In the non-immunological form, substances act directly to release vasoactive mediators without prior sensitisation, generally causing localised reactions.",
+    "additionalDifferentials": [
+      "Allergic contact dermatitis (delayed type)",
+      "Irritant contact dermatitis",
+      "Chronic spontaneous urticaria",
+      "Cholinergic or physical urticaria",
+      "Angioedema of other cause",
+      "Protein contact dermatitis"
     ],
-    [
-     "Primary Differentials",
-     "Allergic contact dermatitis (delayed type), Irritant contact dermatitis, Chronic spontaneous urticaria",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed occupational and exposure history with symptom timing",
+      "Skin prick testing to suspected agents such as latex, performed with resuscitation available",
+      "Open or use provocation tests done cautiously",
+      "Specific IgE blood testing where available",
+      "Assessment for coexisting asthma or rhinitis, especially with latex"
     ],
-    [
-     "Management Strategy",
-     "Identify and avoid the causative substance, providing a latex-free environment where natural rubber latex is implicated",
-     "Core treatment modality"
+    "redFlags": [
+      "Progression to angioedema, wheeze or anaphylaxis requiring emergency treatment",
+      "Widespread reaction beyond the site of contact",
+      "History of previous severe systemic reaction on re-exposure",
+      "Respiratory symptoms accompanying skin reactions"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing immediate contact urticaria with delayed allergic contact dermatitis and choosing the wrong test",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms usually resolve once the causative contact is avoided, and the outlook is good with effective avoidance; however, sensitised individuals remain at risk of severe reactions on re-exposure, and latex allergy in particular can have systemic consequences.",
+    "pitfalls": [
+      "Confusing immediate contact urticaria with delayed allergic contact dermatitis and choosing the wrong test",
+      "Performing provocation testing without resuscitation facilities in a potentially anaphylactic patient",
+      "Failing to recognise latex as a cause and continuing latex glove use",
+      "Overlooking associated respiratory allergy",
+      "Not providing an emergency plan for those at risk of systemic reactions"
+    ],
+    "references": [
+      "Hunter's Diseases of Occupations",
+      "WHO guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and avoid the causative substance, providing a latex-free environment where natural rubber latex is implicated",
+      "Relieve symptoms with oral antihistamines",
+      "Prescribe an adrenaline auto-injector and an emergency action plan for individuals at risk of systemic reactions or anaphylaxis",
+      "Institute occupational measures such as substituting latex gloves and modifying the workplace for affected food handlers, healthcare and other at-risk workers",
+      "Assess and manage coexisting asthma and rhinitis, particularly with latex sensitisation",
+      "Confirm sensitisation with skin-prick or specific IgE testing performed with resuscitation facilities available, and counsel on the ongoing risk of severe reactions on re-exposure"
     ]
-   ],
-   "caption": "Overview comparison matrix for contact urticaria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "contact-urticaria-real-image",
-   "title": "Contact urticaria: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "contact_urticaria-pathway",
+      "title": "Contact urticaria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Contact urticaria is an immediate wheal-and-flare reaction appearing within minutes of skin contact with a triggering substance, unlike the delayed pattern of allergic contact dermatitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progression to angioedema, wheeze or anaphylaxis requiring emergency treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed occupational and exposure history with symptom timing, Skin prick testing to suspected agents such as latex, performed with resuscitation available, Open or use provocation tests done cautiously"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and avoid the causative substance, providing a latex-free environment where natural rubber latex is implicated"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing immediate contact urticaria with delayed allergic contact dermatitis and choosing the wrong test"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of contact urticaria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "contact_urticaria-matrix",
+      "title": "Contact urticaria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Contact urticaria is an immediate wheal-and-flare reaction appearing within minutes of skin contact with a triggering substance,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed occupational and exposure history with symptom timing, Skin prick testing to suspected agents such as latex, performed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Allergic contact dermatitis (delayed type), Irritant contact dermatitis, Chronic spontaneous urticaria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and avoid the causative substance, providing a latex-free environment where natural rubber latex is implicated",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing immediate contact urticaria with delayed allergic contact dermatitis and choosing the wrong test",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for contact urticaria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "contact_urticaria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Occupational and exposure history with symptom timing",
+          "cells": [
+            {
+              "text": "Causative contact identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin prick testing with resuscitation available",
+          "cells": [
+            {
+              "text": "Sensitisation confirmed, e.g. to latex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific IgE testing",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for asthma or rhinitis",
+          "cells": [
+            {
+              "text": "Coexisting disease, especially with latex"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "contact_urticaria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic contact dermatitis (delayed type)",
+          "cells": [
+            {
+              "text": "Pitfall: immediate urticaria confused with delayed dermatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritant contact dermatitis",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic spontaneous urticaria",
+          "cells": [
+            {
+              "text": "Named look-alike; no contact trigger"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "contact_urticaria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid the causative substance",
+          "cells": [
+            {
+              "text": "Latex-free environment where natural rubber latex is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines",
+          "cells": [
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenaline auto-injector",
+          "cells": [
+            {
+              "text": "Emergency action plan for those at risk of systemic reaction or anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational measures",
+          "cells": [
+            {
+              "text": "Substituting latex gloves; workplace changes for food handlers and healthcare workers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting asthma and rhinitis",
+          "cells": [
+            {
+              "text": "Assessed and managed, particularly with latex sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation and counselling",
+          "cells": [
+            {
+              "text": "Skin-prick or IgE testing with resuscitation; ongoing risk of sensitisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "contact_urticaria-dx-mgmt",
+      "title": "Diagnosis and management of Contact urticaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected contact urticaria: immediate weals after contact with a substance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (angioedema, wheeze, anaphylaxis, prior severe reaction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency treatment of anaphylaxis with adrenaline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exposure history; skin prick or IgE testing with resuscitation available",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does skin-prick or IgE testing confirm sensitisation to the contact agent?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider allergic contact dermatitis or chronic spontaneous urticaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid the causative substance, such as latex",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral antihistamines for symptomatic relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adrenaline auto-injector and action plan for at-risk individuals",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occupational measures and asthma or rhinitis management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms resolve with avoidance; sensitised individuals remain at risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

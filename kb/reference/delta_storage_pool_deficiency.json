@@ -1,179 +1,486 @@
 {
- "id": "delta_storage_pool_deficiency",
- "name": "Delta storage pool deficiency",
- "aliases": [
-  "Dense granule deficiency",
-  "Delta-SPD",
-  "Delta storage pool disease"
- ],
- "class": "non_infective",
- "system": "Haematological system",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An inherited platelet function disorder characterised by a reduced number or content of platelet dense (delta) granules.",
-   "Dense granules store the small molecules ADP, ATP, calcium, serotonin and polyphosphate that amplify platelet activation and recruitment.",
-   "Clinically presents with lifelong mucocutaneous bleeding: easy bruising, epistaxis, gum bleeding, menorrhagia and excessive surgical or dental bleeding.",
-   "The platelet count is normal, so the disorder is a qualitative rather than quantitative defect.",
-   "Aggregometry classically shows an absent or blunted second wave with impaired response to ADP and collagen and a diminished response to arachidonic acid.",
-   "Confirmation uses whole-mount electron microscopy for dense granule count, mepacrine uptake and release by flow cytometry, or measurement of the platelet ADP:ATP ratio and secretion.",
-   "May be isolated or syndromic, occurring in Hermansky-Pudlak syndrome (with albinism and pulmonary fibrosis) and Chediak-Higashi syndrome (with immunodeficiency).",
-   "Treatment employs antifibrinolytics and desmopressin for minor bleeding and procedures, reserving platelet transfusion for major haemorrhage."
+  "id": "delta_storage_pool_deficiency",
+  "name": "Delta storage pool deficiency",
+  "aliases": [
+    "Dense granule deficiency",
+    "Delta-SPD",
+    "Delta storage pool disease"
   ],
-  "pathophysiology": "Delta storage pool deficiency arises from defective biogenesis or cargo loading of platelet dense granules, the lysosome-related organelles that store the non-protein mediators ADP, ATP, calcium, serotonin and inorganic polyphosphate. Upon activation, normal platelets secrete dense granule contents, and released ADP engages P2Y receptors to amplify aggregation and recruit further platelets, producing the second wave of aggregation. When dense granules are reduced in number or content, this positive-feedback amplification fails, so platelet activation and thrombus consolidation are impaired even though adhesion and initial shape change are intact. In syndromic forms, mutations in genes governing the biogenesis of lysosome-related organelles (as in Hermansky-Pudlak syndrome) or vesicle trafficking (as in Chediak-Higashi syndrome) simultaneously affect melanosomes and other organelles, accounting for the associated albinism and immune defects.",
-  "additionalDifferentials": [
-   "Alpha granule deficiency (grey platelet syndrome)",
-   "Combined alpha-delta storage pool deficiency",
-   "von Willebrand disease",
-   "Glanzmann thrombasthenia",
-   "Platelet release/signalling (secretion) defects",
-   "Antiplatelet drug or non-steroidal anti-inflammatory effect",
-   "Acquired platelet dysfunction (uraemia, myeloproliferative neoplasm)"
-  ],
-  "additionalInvestigations": [
-   "Light transmission platelet aggregometry with ADP, collagen, adrenaline and arachidonic acid",
-   "Whole-mount transmission electron microscopy for dense granule enumeration",
-   "Flow-cytometric mepacrine uptake and release assay",
-   "Platelet nucleotide content and ADP:ATP ratio with secretion studies",
-   "Full blood count and blood film to confirm normal platelet number",
-   "von Willebrand factor antigen and activity to exclude von Willebrand disease",
-   "Examination and testing for syndromic features (albinism, immune defects) with targeted genetics"
-  ],
-  "redFlags": [
-   "Major haemorrhage after surgery, trauma or childbirth",
-   "Severe menorrhagia producing symptomatic iron-deficiency anaemia",
-   "Features of Hermansky-Pudlak syndrome such as progressive pulmonary fibrosis or granulomatous colitis",
-   "Recurrent severe infections or accelerated-phase lymphohistiocytosis suggesting Chediak-Higashi syndrome",
-   "Uncontrolled bleeding despite antifibrinolytic and desmopressin therapy"
-  ],
-  "prognosis": "Isolated delta storage pool deficiency usually causes mild to moderate lifelong bleeding with a normal life expectancy when peri-procedural precautions are observed. In syndromic disease the outlook is dominated by associated features such as pulmonary fibrosis in Hermansky-Pudlak syndrome or immunodeficiency in Chediak-Higashi syndrome.",
-  "pitfalls": [
-   "Overlooking a qualitative platelet defect because the platelet count is normal.",
-   "Missing an underlying syndrome by not examining for oculocutaneous albinism or a history of recurrent infection.",
-   "Misinterpreting aggregometry performed after recent aspirin or non-steroidal drug use.",
-   "Relying on a single aggregometry result, as dense granule defects can give subtle or variable patterns.",
-   "Repeated platelet transfusion causing alloimmunisation and later refractoriness."
-  ],
-  "references": [
-   "Williams Hematology, current edition",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood, current edition",
-   "International Society on Thrombosis and Haemostasis guidance on inherited platelet function disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid antiplatelet drugs such as aspirin and non-steroidal anti-inflammatory drugs and other agents that further impair platelet function",
-   "Antifibrinolytic therapy with tranexamic acid for mucocutaneous bleeding and to cover minor and dental procedures",
-   "Desmopressin to improve platelet function and cover bleeding episodes or surgery",
-   "Reserve platelet transfusion for major bleeding or major surgery unresponsive to other measures, using leucodepleted products",
-   "Manage menorrhagia with tranexamic acid and hormonal therapy such as the combined oral contraceptive or a levonorgestrel intrauterine system, and treat iron deficiency from chronic blood loss",
-   "Peri-procedural planning with haematology, provision of a bleeding-disorder alert card, and recombinant activated factor VII for refractory bleeding",
-   "Evaluate for syndromic association such as Hermansky-Pudlak syndrome, surveil related complications including pulmonary fibrosis, and provide genetic counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "delta_storage_pool_deficiency-pathway",
-   "title": "Delta storage pool deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An inherited platelet function disorder characterised by a reduced number or content of platelet dense (delta) granules.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Major haemorrhage after surgery, trauma or childbirth",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Light transmission platelet aggregometry with ADP, collagen, adrenaline and arachidonic acid, Whole-mount transmission electron microscopy for dense granule enumeration, Flow-cytometric mepacrine uptake and release assay"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid antiplatelet drugs such as aspirin and non-steroidal anti-inflammatory drugs and other agents that further impair platelet function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking a qualitative platelet defect because the platelet count is normal."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of delta storage pool deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "delta_storage_pool_deficiency-matrix",
-   "title": "Delta storage pool deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An inherited platelet function disorder characterised by a reduced number or content of platelet dense (delta) granules.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological system",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An inherited platelet function disorder characterised by a reduced number or content of platelet dense (delta) granules.",
+      "Dense granules store the small molecules ADP, ATP, calcium, serotonin and polyphosphate that amplify platelet activation and recruitment.",
+      "Clinically presents with lifelong mucocutaneous bleeding: easy bruising, epistaxis, gum bleeding, menorrhagia and excessive surgical or dental bleeding.",
+      "The platelet count is normal, so the disorder is a qualitative rather than quantitative defect.",
+      "Aggregometry classically shows an absent or blunted second wave with impaired response to ADP and collagen and a diminished response to arachidonic acid.",
+      "Confirmation uses whole-mount electron microscopy for dense granule count, mepacrine uptake and release by flow cytometry, or measurement of the platelet ADP:ATP ratio and secretion.",
+      "May be isolated or syndromic, occurring in Hermansky-Pudlak syndrome (with albinism and pulmonary fibrosis) and Chediak-Higashi syndrome (with immunodeficiency).",
+      "Treatment employs antifibrinolytics and desmopressin for minor bleeding and procedures, reserving platelet transfusion for major haemorrhage."
     ],
-    [
-     "Key Investigations",
-     "Light transmission platelet aggregometry with ADP, collagen, adrenaline and arachidonic acid, Whole-mount transmission electron",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Delta storage pool deficiency arises from defective biogenesis or cargo loading of platelet dense granules, the lysosome-related organelles that store the non-protein mediators ADP, ATP, calcium, serotonin and inorganic polyphosphate. Upon activation, normal platelets secrete dense granule contents, and released ADP engages P2Y receptors to amplify aggregation and recruit further platelets, producing the second wave of aggregation. When dense granules are reduced in number or content, this positive-feedback amplification fails, so platelet activation and thrombus consolidation are impaired even though adhesion and initial shape change are intact. In syndromic forms, mutations in genes governing the biogenesis of lysosome-related organelles (as in Hermansky-Pudlak syndrome) or vesicle trafficking (as in Chediak-Higashi syndrome) simultaneously affect melanosomes and other organelles, accounting for the associated albinism and immune defects.",
+    "additionalDifferentials": [
+      "Alpha granule deficiency (grey platelet syndrome)",
+      "Combined alpha-delta storage pool deficiency",
+      "von Willebrand disease",
+      "Glanzmann thrombasthenia",
+      "Platelet release/signalling (secretion) defects",
+      "Antiplatelet drug or non-steroidal anti-inflammatory effect",
+      "Acquired platelet dysfunction (uraemia, myeloproliferative neoplasm)"
     ],
-    [
-     "Primary Differentials",
-     "Alpha granule deficiency (grey platelet syndrome), Combined alpha-delta storage pool deficiency, von Willebrand disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Light transmission platelet aggregometry with ADP, collagen, adrenaline and arachidonic acid",
+      "Whole-mount transmission electron microscopy for dense granule enumeration",
+      "Flow-cytometric mepacrine uptake and release assay",
+      "Platelet nucleotide content and ADP:ATP ratio with secretion studies",
+      "Full blood count and blood film to confirm normal platelet number",
+      "von Willebrand factor antigen and activity to exclude von Willebrand disease",
+      "Examination and testing for syndromic features (albinism, immune defects) with targeted genetics"
     ],
-    [
-     "Management Strategy",
-     "Avoid antiplatelet drugs such as aspirin and non-steroidal anti-inflammatory drugs and other agents that further impair platelet",
-     "Core treatment modality"
+    "redFlags": [
+      "Major haemorrhage after surgery, trauma or childbirth",
+      "Severe menorrhagia producing symptomatic iron-deficiency anaemia",
+      "Features of Hermansky-Pudlak syndrome such as progressive pulmonary fibrosis or granulomatous colitis",
+      "Recurrent severe infections or accelerated-phase lymphohistiocytosis suggesting Chediak-Higashi syndrome",
+      "Uncontrolled bleeding despite antifibrinolytic and desmopressin therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking a qualitative platelet defect because the platelet count is normal.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated delta storage pool deficiency usually causes mild to moderate lifelong bleeding with a normal life expectancy when peri-procedural precautions are observed. In syndromic disease the outlook is dominated by associated features such as pulmonary fibrosis in Hermansky-Pudlak syndrome or immunodeficiency in Chediak-Higashi syndrome.",
+    "pitfalls": [
+      "Overlooking a qualitative platelet defect because the platelet count is normal.",
+      "Missing an underlying syndrome by not examining for oculocutaneous albinism or a history of recurrent infection.",
+      "Misinterpreting aggregometry performed after recent aspirin or non-steroidal drug use.",
+      "Relying on a single aggregometry result, as dense granule defects can give subtle or variable patterns.",
+      "Repeated platelet transfusion causing alloimmunisation and later refractoriness."
+    ],
+    "references": [
+      "Williams Hematology, current edition",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood, current edition",
+      "International Society on Thrombosis and Haemostasis guidance on inherited platelet function disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid antiplatelet drugs such as aspirin and non-steroidal anti-inflammatory drugs and other agents that further impair platelet function",
+      "Antifibrinolytic therapy with tranexamic acid for mucocutaneous bleeding and to cover minor and dental procedures",
+      "Desmopressin to improve platelet function and cover bleeding episodes or surgery",
+      "Reserve platelet transfusion for major bleeding or major surgery unresponsive to other measures, using leucodepleted products",
+      "Manage menorrhagia with tranexamic acid and hormonal therapy such as the combined oral contraceptive or a levonorgestrel intrauterine system, and treat iron deficiency from chronic blood loss",
+      "Peri-procedural planning with haematology, provision of a bleeding-disorder alert card, and recombinant activated factor VII for refractory bleeding",
+      "Evaluate for syndromic association such as Hermansky-Pudlak syndrome, surveil related complications including pulmonary fibrosis, and provide genetic counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for delta storage pool deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "delta-storage-pool-deficiency-real-image",
-   "title": "Delta storage pool deficiency: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "delta_storage_pool_deficiency-pathway",
+      "title": "Delta storage pool deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An inherited platelet function disorder characterised by a reduced number or content of platelet dense (delta) granules.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Major haemorrhage after surgery, trauma or childbirth",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Light transmission platelet aggregometry with ADP, collagen, adrenaline and arachidonic acid, Whole-mount transmission electron microscopy for dense granule enumeration, Flow-cytometric mepacrine uptake and release assay"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid antiplatelet drugs such as aspirin and non-steroidal anti-inflammatory drugs and other agents that further impair platelet function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking a qualitative platelet defect because the platelet count is normal."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of delta storage pool deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "delta_storage_pool_deficiency-matrix",
+      "title": "Delta storage pool deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An inherited platelet function disorder characterised by a reduced number or content of platelet dense (delta) granules.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Light transmission platelet aggregometry with ADP, collagen, adrenaline and arachidonic acid, Whole-mount transmission electron",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alpha granule deficiency (grey platelet syndrome), Combined alpha-delta storage pool deficiency, von Willebrand disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid antiplatelet drugs such as aspirin and non-steroidal anti-inflammatory drugs and other agents that further impair platelet",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking a qualitative platelet defect because the platelet count is normal.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for delta storage pool deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "delta_storage_pool_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Light transmission platelet aggregometry with ADP, collagen, adrenaline and arachidonic acid",
+          "cells": [
+            {
+              "text": "Aggregation defect; a single result can be subtle or variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-mount transmission electron microscopy",
+          "cells": [
+            {
+              "text": "Dense granule enumeration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow-cytometric mepacrine uptake and release",
+          "cells": [
+            {
+              "text": "Dense granule uptake and release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet nucleotide content and ADP:ATP ratio",
+          "cells": [
+            {
+              "text": "Dense granule nucleotide stores"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Normal platelet number"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "von Willebrand factor antigen and activity",
+          "cells": [
+            {
+              "text": "Excludes von Willebrand disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delta_storage_pool_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "von Willebrand disease",
+          "cells": [
+            {
+              "text": "Excluded by von Willebrand factor antigen and activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined alpha-delta storage pool deficiency",
+          "cells": [
+            {
+              "text": "Both granule types affected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet drug or NSAID effect",
+          "cells": [
+            {
+              "text": "Aggregometry after aspirin or NSAIDs can mislead"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delta_storage_pool_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid antiplatelet drugs",
+          "cells": [
+            {
+              "text": "Aspirin, NSAIDs and other agents that further impair platelet function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "Mucocutaneous bleeding and minor or dental procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Improves platelet function; covers bleeding or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet transfusion",
+          "cells": [
+            {
+              "text": "Reserved for major bleeding unresponsive to other measures; leucodepleted products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menorrhagia management",
+          "cells": [
+            {
+              "text": "Tranexamic acid, combined oral contraceptive or levonorgestrel IUS; treat iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peri-procedural planning",
+          "cells": [
+            {
+              "text": "Haematology input, bleeding alert card, recombinant factor VIIa for refractory bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic evaluation",
+          "cells": [
+            {
+              "text": "Look for Hermansky-Pudlak syndrome; surveil pulmonary fibrosis; genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "delta_storage_pool_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Delta storage pool deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected delta storage pool deficiency: mucocutaneous bleeding, normal platelet count",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (major haemorrhage, severe menorrhagia, syndromic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology input for major haemorrhage; platelets if unresponsive",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Platelet aggregometry, dense granule electron microscopy and mepacrine uptake",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do aggregometry and dense granule tests confirm a storage pool defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider von Willebrand disease, Glanzmann thrombasthenia or drug effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid aspirin and NSAIDs; they further impair platelet function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tranexamic acid for mucocutaneous bleeding and minor procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Desmopressin to improve platelet function before bleeding or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hormonal therapy and tranexamic acid for menorrhagia; treat iron deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Evaluate for Hermansky-Pudlak syndrome and surveil pulmonary fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Isolated form gives lifelong mild to moderate bleeding with normal life expectancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

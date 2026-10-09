@@ -1,176 +1,434 @@
 {
- "id": "fraser_syndrome",
- "name": "Fraser syndrome (cryptophthalmos-syndactyly)",
- "aliases": [
-  "cryptophthalmos-syndactyly syndrome",
-  "Fraser-Francois syndrome",
-  "Meyer-Schwickerath syndrome",
-  "cryptophthalmos syndrome"
- ],
- "class": "non_infective",
- "system": "Genetics / Craniofacial",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal recessive multisystem disorder whose hallmark is cryptophthalmos, in which skin covers one or both eyes with absent or fused eyelids",
-   "Cutaneous syndactyly of the fingers and toes is a characteristic and readily recognised feature",
-   "Genitourinary anomalies are frequent and include renal agenesis and ambiguous genitalia",
-   "Laryngeal and airway malformations may cause severe neonatal respiratory obstruction",
-   "The combination of bilateral renal agenesis and laryngeal atresia contributes to high perinatal mortality",
-   "It is caused by variants in genes of the FRAS-FREM complex, which anchor the embryonic epidermis to the underlying basement membrane",
-   "Diagnostic criteria weigh major features such as cryptophthalmos, syndactyly, and genital and renal anomalies against minor features"
+  "id": "fraser_syndrome",
+  "name": "Fraser syndrome (cryptophthalmos-syndactyly)",
+  "aliases": [
+    "cryptophthalmos-syndactyly syndrome",
+    "Fraser-Francois syndrome",
+    "Meyer-Schwickerath syndrome",
+    "cryptophthalmos syndrome"
   ],
-  "pathophysiology": "Fraser syndrome is caused by autosomal recessive loss-of-function variants in genes encoding components of the FRAS-FREM protein complex, which forms part of the basement membrane and mediates adhesion between the developing epidermis and dermis during embryogenesis. Failure of this adhesion disturbs the normal separation and modelling of tissues, so structures that should divide or open do not, producing cryptophthalmos from failed eyelid separation, cutaneous syndactyly from failed digital separation, and blockage of the larynx and urinary tract. Because these adhesion proteins act at multiple epithelial-mesenchymal interfaces during development, the disorder affects the eyes, digits, airway, and genitourinary system together.",
-  "additionalDifferentials": [
-   "Bilateral renal agenesis (Potter) sequence from other causes",
-   "Bartsocas-Papas and other lethal syndactyly syndromes",
-   "Isolated cryptophthalmos",
-   "Fryns syndrome",
-   "Manitoba oculotrichoanal syndrome",
-   "Amniotic band sequence affecting the eyes and digits"
-  ],
-  "additionalInvestigations": [
-   "Antenatal ultrasound, which may show renal anomalies, oligohydramnios, and other features",
-   "Molecular testing of FRAS-FREM complex genes",
-   "Renal and urinary tract ultrasound",
-   "Airway endoscopy to assess laryngeal patency in the neonate",
-   "Ophthalmological and orbital imaging to define the ocular anomaly",
-   "Radiographs and examination to characterise syndactyly and skeletal anomalies"
-  ],
-  "redFlags": [
-   "Neonatal airway obstruction from laryngeal atresia or stenosis requiring immediate intervention",
-   "Bilateral renal agenesis, which is incompatible with survival",
-   "Severe oligohydramnios with pulmonary hypoplasia",
-   "Undiagnosed urinary tract obstruction threatening kidney function",
-   "Ambiguous genitalia requiring careful multidisciplinary evaluation"
-  ],
-  "prognosis": "Prognosis is heavily determined by the airway and renal anomalies; bilateral renal agenesis or laryngeal atresia often results in perinatal death, whereas survivors with preserved renal and airway function can do reasonably well with staged reconstruction.",
-  "pitfalls": [
-   "Overlooking life-threatening laryngeal atresia while attention focuses on the visible eye defect",
-   "Failing to assess renal function early given the high frequency of renal agenesis",
-   "Missing the diagnosis when cryptophthalmos is incomplete or unilateral",
-   "Not recognising the autosomal recessive recurrence risk for counselling",
-   "Attributing the presentation to amniotic band sequence and missing the underlying genetic disorder"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews and Gorlin's Syndromes of the Head and Neck"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate neonatal airway assessment and securing of the airway for laryngeal atresia or stenosis, including tracheostomy or an ex-utero intrapartum treatment approach when anticipated antenatally",
-   "Evaluation and support of renal function, with dialysis and consideration of transplantation for significant impairment, and palliative discussion when there is bilateral renal agenesis",
-   "Staged ophthalmic and oculoplastic surgery for cryptophthalmos, recognising that vision is often not salvageable",
-   "Surgical release of cutaneous syndactyly and correction of associated skeletal anomalies",
-   "Assessment and management of genitourinary and ambiguous-genitalia anomalies within a disorder-of-sex-development team",
-   "Multidisciplinary neonatal and paediatric care coordinating urology, ophthalmology, ENT and reconstructive surgery",
-   "Genetic counselling for the autosomal recessive FRAS-FREM disorder, with recurrence-risk discussion and antenatal counselling for future pregnancies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fraser_syndrome-pathway",
-   "title": "Fraser syndrome (cryptophthalmos-syndactyly): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal recessive multisystem disorder whose hallmark is cryptophthalmos, in which skin covers one or both eyes with absent or fused eyelids",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal airway obstruction from laryngeal atresia or stenosis requiring immediate intervention",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antenatal ultrasound, which may show renal anomalies, oligohydramnios, and other features, Molecular testing of FRAS-FREM complex genes, Renal and urinary tract ultrasound"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate neonatal airway assessment and securing of the airway for laryngeal atresia or stenosis, including tracheostomy or an ex-utero intrapartum treatment approach when anticipated antenatally"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking life-threatening laryngeal atresia while attention focuses on the visible eye defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fraser syndrome (cryptophthalmos-syndactyly)."
-  }
- ],
- "tables": [
-  {
-   "id": "fraser_syndrome-matrix",
-   "title": "Fraser syndrome (cryptophthalmos-syndactyly): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal recessive multisystem disorder whose hallmark is cryptophthalmos, in which skin covers one or both eyes with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Craniofacial",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal recessive multisystem disorder whose hallmark is cryptophthalmos, in which skin covers one or both eyes with absent or fused eyelids",
+      "Cutaneous syndactyly of the fingers and toes is a characteristic and readily recognised feature",
+      "Genitourinary anomalies are frequent and include renal agenesis and ambiguous genitalia",
+      "Laryngeal and airway malformations may cause severe neonatal respiratory obstruction",
+      "The combination of bilateral renal agenesis and laryngeal atresia contributes to high perinatal mortality",
+      "It is caused by variants in genes of the FRAS-FREM complex, which anchor the embryonic epidermis to the underlying basement membrane",
+      "Diagnostic criteria weigh major features such as cryptophthalmos, syndactyly, and genital and renal anomalies against minor features"
     ],
-    [
-     "Key Investigations",
-     "Antenatal ultrasound, which may show renal anomalies, oligohydramnios, and other features, Molecular testing of FRAS-FREM complex",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fraser syndrome is caused by autosomal recessive loss-of-function variants in genes encoding components of the FRAS-FREM protein complex, which forms part of the basement membrane and mediates adhesion between the developing epidermis and dermis during embryogenesis. Failure of this adhesion disturbs the normal separation and modelling of tissues, so structures that should divide or open do not, producing cryptophthalmos from failed eyelid separation, cutaneous syndactyly from failed digital separation, and blockage of the larynx and urinary tract. Because these adhesion proteins act at multiple epithelial-mesenchymal interfaces during development, the disorder affects the eyes, digits, airway, and genitourinary system together.",
+    "additionalDifferentials": [
+      "Bilateral renal agenesis (Potter) sequence from other causes",
+      "Bartsocas-Papas and other lethal syndactyly syndromes",
+      "Isolated cryptophthalmos",
+      "Fryns syndrome",
+      "Manitoba oculotrichoanal syndrome",
+      "Amniotic band sequence affecting the eyes and digits"
     ],
-    [
-     "Primary Differentials",
-     "Bilateral renal agenesis (Potter) sequence from other causes, Bartsocas-Papas and other lethal syndactyly syndromes, Isolated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antenatal ultrasound, which may show renal anomalies, oligohydramnios, and other features",
+      "Molecular testing of FRAS-FREM complex genes",
+      "Renal and urinary tract ultrasound",
+      "Airway endoscopy to assess laryngeal patency in the neonate",
+      "Ophthalmological and orbital imaging to define the ocular anomaly",
+      "Radiographs and examination to characterise syndactyly and skeletal anomalies"
     ],
-    [
-     "Management Strategy",
-     "Immediate neonatal airway assessment and securing of the airway for laryngeal atresia or stenosis, including tracheostomy or an",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal airway obstruction from laryngeal atresia or stenosis requiring immediate intervention",
+      "Bilateral renal agenesis, which is incompatible with survival",
+      "Severe oligohydramnios with pulmonary hypoplasia",
+      "Undiagnosed urinary tract obstruction threatening kidney function",
+      "Ambiguous genitalia requiring careful multidisciplinary evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking life-threatening laryngeal atresia while attention focuses on the visible eye defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is heavily determined by the airway and renal anomalies; bilateral renal agenesis or laryngeal atresia often results in perinatal death, whereas survivors with preserved renal and airway function can do reasonably well with staged reconstruction.",
+    "pitfalls": [
+      "Overlooking life-threatening laryngeal atresia while attention focuses on the visible eye defect",
+      "Failing to assess renal function early given the high frequency of renal agenesis",
+      "Missing the diagnosis when cryptophthalmos is incomplete or unilateral",
+      "Not recognising the autosomal recessive recurrence risk for counselling",
+      "Attributing the presentation to amniotic band sequence and missing the underlying genetic disorder"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews and Gorlin's Syndromes of the Head and Neck"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate neonatal airway assessment and securing of the airway for laryngeal atresia or stenosis, including tracheostomy or an ex-utero intrapartum treatment approach when anticipated antenatally",
+      "Evaluation and support of renal function, with dialysis and consideration of transplantation for significant impairment, and palliative discussion when there is bilateral renal agenesis",
+      "Staged ophthalmic and oculoplastic surgery for cryptophthalmos, recognising that vision is often not salvageable",
+      "Surgical release of cutaneous syndactyly and correction of associated skeletal anomalies",
+      "Assessment and management of genitourinary and ambiguous-genitalia anomalies within a disorder-of-sex-development team",
+      "Multidisciplinary neonatal and paediatric care coordinating urology, ophthalmology, ENT and reconstructive surgery",
+      "Genetic counselling for the autosomal recessive FRAS-FREM disorder, with recurrence-risk discussion and antenatal counselling for future pregnancies"
     ]
-   ],
-   "caption": "Overview comparison matrix for fraser syndrome (cryptophthalmos-syndactyly)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fraser-syndrome-real-image",
-   "title": "Fraser syndrome (cryptophthalmos-syndactyly): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fraser_syndrome-pathway",
+      "title": "Fraser syndrome (cryptophthalmos-syndactyly): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal recessive multisystem disorder whose hallmark is cryptophthalmos, in which skin covers one or both eyes with absent or fused eyelids",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal airway obstruction from laryngeal atresia or stenosis requiring immediate intervention",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antenatal ultrasound, which may show renal anomalies, oligohydramnios, and other features, Molecular testing of FRAS-FREM complex genes, Renal and urinary tract ultrasound"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate neonatal airway assessment and securing of the airway for laryngeal atresia or stenosis, including tracheostomy or an ex-utero intrapartum treatment approach when anticipated antenatally"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking life-threatening laryngeal atresia while attention focuses on the visible eye defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fraser syndrome (cryptophthalmos-syndactyly)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fraser_syndrome-matrix",
+      "title": "Fraser syndrome (cryptophthalmos-syndactyly): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal recessive multisystem disorder whose hallmark is cryptophthalmos, in which skin covers one or both eyes with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antenatal ultrasound, which may show renal anomalies, oligohydramnios, and other features, Molecular testing of FRAS-FREM complex",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bilateral renal agenesis (Potter) sequence from other causes, Bartsocas-Papas and other lethal syndactyly syndromes, Isolated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate neonatal airway assessment and securing of the airway for laryngeal atresia or stenosis, including tracheostomy or an",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking life-threatening laryngeal atresia while attention focuses on the visible eye defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fraser syndrome (cryptophthalmos-syndactyly)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fraser_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal ultrasound",
+          "cells": [
+            {
+              "text": "May show renal anomalies, oligohydramnios and other features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of FRAS-FREM complex genes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and urinary tract ultrasound",
+          "cells": [
+            {
+              "text": "Assesses renal and urinary tract anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway endoscopy",
+          "cells": [
+            {
+              "text": "Laryngeal patency in the neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and orbital imaging",
+          "cells": [
+            {
+              "text": "Defines the ocular anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs and examination",
+          "cells": [
+            {
+              "text": "Characterise syndactyly and skeletal anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fraser_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate neonatal airway assessment",
+          "cells": [
+            {
+              "text": "Securing the airway for laryngeal atresia or stenosis, including tracheostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal support",
+          "cells": [
+            {
+              "text": "Dialysis, and transplantation consideration for significant impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged ophthalmic surgery",
+          "cells": [
+            {
+              "text": "For cryptophthalmos; vision is often not salvageable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndactyly and skeletal surgery",
+          "cells": [
+            {
+              "text": "Surgical release of cutaneous syndactyly; correction of skeletal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genitourinary and disorder-of-sex-development care",
+          "cells": [
+            {
+              "text": "Within a multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary coordination",
+          "cells": [
+            {
+              "text": "Urology, ophthalmology, ENT and reconstructive surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive FRAS-FREM disorder; recurrence and antenatal counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fraser_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Fraser syndrome (cryptophthalmos-syndactyly)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Fraser syndrome: cryptophthalmos with syndactyly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway obstruction, bilateral renal agenesis, severe oligohydramnios)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate neonatal airway assessment and securing of the airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antenatal and renal ultrasound, airway endoscopy and FRAS-FREM gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does molecular testing of FRAS-FREM genes confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Potter sequence, Fryns syndrome or amniotic band sequence",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Secure the airway for laryngeal atresia or stenosis, including tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Support renal function; dialysis and transplantation consideration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staged ophthalmic surgery for cryptophthalmos",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Release of cutaneous syndactyly and correction of skeletal anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bilateral renal agenesis or laryngeal atresia often causes perinatal death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

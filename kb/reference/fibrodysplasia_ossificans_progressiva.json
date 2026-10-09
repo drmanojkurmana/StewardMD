@@ -1,175 +1,462 @@
 {
- "id": "fibrodysplasia_ossificans_progressiva",
- "name": "Fibrodysplasia ossificans progressiva",
- "aliases": [
-  "FOP",
-  "ACVR1",
-  "myositis ossificans progressiva",
-  "stone man syndrome"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, disabling disorder in which soft tissues progressively turn to bone through heterotopic endochondral ossification",
-   "Caused by a recurrent gain-of-function variant in ACVR1, a bone morphogenetic protein type I receptor, inherited in an autosomal dominant pattern but usually arising de novo",
-   "Characteristic malformed great toes present at birth are a vital early clue that often precedes any ossification",
-   "Painful soft-tissue flare-ups, sometimes triggered by trauma, injections, or viral illness, herald new bone formation, so biopsy and intramuscular injections should be avoided",
-   "Ossification typically progresses in a defined pattern, from axial to appendicular and cranial to caudal, gradually locking joints and immobilising the patient",
-   "Involvement of the chest wall and paraspinal tissues produces thoracic insufficiency, the leading cause of premature death",
-   "Diagnosis is clinical, recognising the toe malformation and characteristic flare-ups, and is confirmed by ACVR1 molecular testing while avoiding provocative procedures"
+  "id": "fibrodysplasia_ossificans_progressiva",
+  "name": "Fibrodysplasia ossificans progressiva",
+  "aliases": [
+    "FOP",
+    "ACVR1",
+    "myositis ossificans progressiva",
+    "stone man syndrome"
   ],
-  "pathophysiology": "Fibrodysplasia ossificans progressiva is caused by an activating variant in ACVR1, a receptor in the bone morphogenetic protein signalling pathway. The mutant receptor becomes inappropriately responsive, including to activin, and drives excessive signalling that converts connective-tissue progenitor cells into cartilage and then bone through endochondral ossification. Inflammatory flare-ups, often after tissue injury, seed episodes of heterotopic ossification in muscle, tendon, ligament, and fascia. The accumulating extraskeletal bone bridges joints and restricts the chest wall, producing progressive immobility and life-limiting thoracic insufficiency.",
-  "additionalDifferentials": [
-   "Progressive osseous heteroplasia",
-   "Traumatic (localised) myositis ossificans",
-   "Osteosarcoma or other soft-tissue tumour (when flares are mistaken for masses)",
-   "Aggressive juvenile fibromatosis",
-   "Lymphoedema or soft-tissue infection during acute flares",
-   "Albright hereditary osteodystrophy-related ossification"
-  ],
-  "additionalInvestigations": [
-   "Clinical recognition of the malformed great toes and typical flare pattern",
-   "ACVR1 molecular genetic testing to confirm the diagnosis",
-   "Imaging to map established heterotopic ossification while avoiding provocative procedures",
-   "Baseline and periodic respiratory and thoracic function assessment",
-   "Dental and airway planning to avoid mandibular and jaw ossification triggers",
-   "Multidisciplinary functional and mobility assessment"
-  ],
-  "redFlags": [
-   "New chest-wall or paraspinal ossification with declining respiratory reserve",
-   "Rapidly progressive flare-ups following trauma or an invasive procedure",
-   "Jaw ossification threatening oral intake and airway access",
-   "Falls in an immobilised patient, given high fracture and complication risk"
-  ],
-  "prognosis": "The condition is relentlessly progressive, with cumulative loss of mobility and joint ankylosis; median survival is reduced, and thoracic insufficiency from chest-wall ossification is the usual cause of death. Avoiding iatrogenic triggers is central to limiting progression.",
-  "pitfalls": [
-   "Performing a biopsy or intramuscular injection on a flare, which accelerates ossification",
-   "Misdiagnosing early flares as tumour, infection, or injury",
-   "Overlooking the diagnostic great-toe malformation at birth",
-   "Failing to plan carefully around dental and anaesthetic procedures"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Strictly avoid iatrogenic triggers, withholding muscle biopsy, intramuscular injections, elective surgery on heterotopic bone and unnecessary trauma",
-   "Use a short course of corticosteroids for early flare-ups affecting major joints or the jaw to limit inflammatory oedema",
-   "Manage flares symptomatically with non-steroidal anti-inflammatory drugs, other anti-inflammatory measures and pain control",
-   "Consider disease-specific therapy with the retinoic acid receptor gamma agonist palovarotene or other ACVR1-directed agents to reduce heterotopic ossification under specialist care",
-   "Provide fall prevention, mobility aids and occupational therapy to protect against injury-induced ossification and preserve function",
-   "Undertake respiratory and thoracic surveillance for restrictive chest-wall disease and thoracic insufficiency",
-   "Plan dental and airway care carefully using non-traumatic techniques and avoiding mandibular block injections",
-   "Offer genetic counselling given the autosomal dominant ACVR1 variant, which usually arises de novo"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fibrodysplasia_ossificans_progressiva-pathway",
-   "title": "Fibrodysplasia ossificans progressiva: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, disabling disorder in which soft tissues progressively turn to bone through heterotopic endochondral ossification",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New chest-wall or paraspinal ossification with declining respiratory reserve",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical recognition of the malformed great toes and typical flare pattern, ACVR1 molecular genetic testing to confirm the diagnosis, Imaging to map established heterotopic ossification while avoiding provocative procedures"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Strictly avoid iatrogenic triggers, withholding muscle biopsy, intramuscular injections, elective surgery on heterotopic bone and unnecessary trauma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing a biopsy or intramuscular injection on a flare, which accelerates ossification"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fibrodysplasia ossificans progressiva."
-  }
- ],
- "tables": [
-  {
-   "id": "fibrodysplasia_ossificans_progressiva-matrix",
-   "title": "Fibrodysplasia ossificans progressiva: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, disabling disorder in which soft tissues progressively turn to bone through heterotopic endochondral ossification",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, disabling disorder in which soft tissues progressively turn to bone through heterotopic endochondral ossification",
+      "Caused by a recurrent gain-of-function variant in ACVR1, a bone morphogenetic protein type I receptor, inherited in an autosomal dominant pattern but usually arising de novo",
+      "Characteristic malformed great toes present at birth are a vital early clue that often precedes any ossification",
+      "Painful soft-tissue flare-ups, sometimes triggered by trauma, injections, or viral illness, herald new bone formation, so biopsy and intramuscular injections should be avoided",
+      "Ossification typically progresses in a defined pattern, from axial to appendicular and cranial to caudal, gradually locking joints and immobilising the patient",
+      "Involvement of the chest wall and paraspinal tissues produces thoracic insufficiency, the leading cause of premature death",
+      "Diagnosis is clinical, recognising the toe malformation and characteristic flare-ups, and is confirmed by ACVR1 molecular testing while avoiding provocative procedures"
     ],
-    [
-     "Key Investigations",
-     "Clinical recognition of the malformed great toes and typical flare pattern, ACVR1 molecular genetic testing to confirm the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fibrodysplasia ossificans progressiva is caused by an activating variant in ACVR1, a receptor in the bone morphogenetic protein signalling pathway. The mutant receptor becomes inappropriately responsive, including to activin, and drives excessive signalling that converts connective-tissue progenitor cells into cartilage and then bone through endochondral ossification. Inflammatory flare-ups, often after tissue injury, seed episodes of heterotopic ossification in muscle, tendon, ligament, and fascia. The accumulating extraskeletal bone bridges joints and restricts the chest wall, producing progressive immobility and life-limiting thoracic insufficiency.",
+    "additionalDifferentials": [
+      "Progressive osseous heteroplasia",
+      "Traumatic (localised) myositis ossificans",
+      "Osteosarcoma or other soft-tissue tumour (when flares are mistaken for masses)",
+      "Aggressive juvenile fibromatosis",
+      "Lymphoedema or soft-tissue infection during acute flares",
+      "Albright hereditary osteodystrophy-related ossification"
     ],
-    [
-     "Primary Differentials",
-     "Progressive osseous heteroplasia, Traumatic (localised) myositis ossificans, Osteosarcoma or other soft-tissue tumour (when",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical recognition of the malformed great toes and typical flare pattern",
+      "ACVR1 molecular genetic testing to confirm the diagnosis",
+      "Imaging to map established heterotopic ossification while avoiding provocative procedures",
+      "Baseline and periodic respiratory and thoracic function assessment",
+      "Dental and airway planning to avoid mandibular and jaw ossification triggers",
+      "Multidisciplinary functional and mobility assessment"
     ],
-    [
-     "Management Strategy",
-     "Strictly avoid iatrogenic triggers, withholding muscle biopsy, intramuscular injections, elective surgery on heterotopic bone and",
-     "Core treatment modality"
+    "redFlags": [
+      "New chest-wall or paraspinal ossification with declining respiratory reserve",
+      "Rapidly progressive flare-ups following trauma or an invasive procedure",
+      "Jaw ossification threatening oral intake and airway access",
+      "Falls in an immobilised patient, given high fracture and complication risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing a biopsy or intramuscular injection on a flare, which accelerates ossification",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is relentlessly progressive, with cumulative loss of mobility and joint ankylosis; median survival is reduced, and thoracic insufficiency from chest-wall ossification is the usual cause of death. Avoiding iatrogenic triggers is central to limiting progression.",
+    "pitfalls": [
+      "Performing a biopsy or intramuscular injection on a flare, which accelerates ossification",
+      "Misdiagnosing early flares as tumour, infection, or injury",
+      "Overlooking the diagnostic great-toe malformation at birth",
+      "Failing to plan carefully around dental and anaesthetic procedures"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Strictly avoid iatrogenic triggers, withholding muscle biopsy, intramuscular injections, elective surgery on heterotopic bone and unnecessary trauma",
+      "Use a short course of corticosteroids for early flare-ups affecting major joints or the jaw to limit inflammatory oedema",
+      "Manage flares symptomatically with non-steroidal anti-inflammatory drugs, other anti-inflammatory measures and pain control",
+      "Consider disease-specific therapy with the retinoic acid receptor gamma agonist palovarotene or other ACVR1-directed agents to reduce heterotopic ossification under specialist care",
+      "Provide fall prevention, mobility aids and occupational therapy to protect against injury-induced ossification and preserve function",
+      "Undertake respiratory and thoracic surveillance for restrictive chest-wall disease and thoracic insufficiency",
+      "Plan dental and airway care carefully using non-traumatic techniques and avoiding mandibular block injections",
+      "Offer genetic counselling given the autosomal dominant ACVR1 variant, which usually arises de novo"
     ]
-   ],
-   "caption": "Overview comparison matrix for fibrodysplasia ossificans progressiva."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fibrodysplasia-ossificans-progressiva-real-image",
-   "title": "Fibrodysplasia ossificans progressiva: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "fibrodysplasia_ossificans_progressiva-pathway",
+      "title": "Fibrodysplasia ossificans progressiva: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, disabling disorder in which soft tissues progressively turn to bone through heterotopic endochondral ossification",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New chest-wall or paraspinal ossification with declining respiratory reserve",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical recognition of the malformed great toes and typical flare pattern, ACVR1 molecular genetic testing to confirm the diagnosis, Imaging to map established heterotopic ossification while avoiding provocative procedures"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Strictly avoid iatrogenic triggers, withholding muscle biopsy, intramuscular injections, elective surgery on heterotopic bone and unnecessary trauma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing a biopsy or intramuscular injection on a flare, which accelerates ossification"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fibrodysplasia ossificans progressiva."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fibrodysplasia_ossificans_progressiva-matrix",
+      "title": "Fibrodysplasia ossificans progressiva: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, disabling disorder in which soft tissues progressively turn to bone through heterotopic endochondral ossification",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical recognition of the malformed great toes and typical flare pattern, ACVR1 molecular genetic testing to confirm the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Progressive osseous heteroplasia, Traumatic (localised) myositis ossificans, Osteosarcoma or other soft-tissue tumour (when",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Strictly avoid iatrogenic triggers, withholding muscle biopsy, intramuscular injections, elective surgery on heterotopic bone and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing a biopsy or intramuscular injection on a flare, which accelerates ossification",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fibrodysplasia ossificans progressiva."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibrodysplasia_ossificans_progressiva-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognition of malformed great toes and flare pattern",
+          "cells": [
+            {
+              "text": "Clinical clue present from birth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACVR1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of established heterotopic ossification",
+          "cells": [
+            {
+              "text": "Map ossification without provoking flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and thoracic function assessment",
+          "cells": [
+            {
+              "text": "Restrictive chest-wall disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and airway planning",
+          "cells": [
+            {
+              "text": "Jaw ossification risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrodysplasia_ossificans_progressiva-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Progressive osseous heteroplasia",
+          "cells": [
+            {
+              "text": "Other heterotopic ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Traumatic myositis ossificans",
+          "cells": [
+            {
+              "text": "Localised ossification after injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteosarcoma or aggressive juvenile fibromatosis",
+          "cells": [
+            {
+              "text": "Flares mistaken for a mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibrodysplasia_ossificans_progressiva-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid iatrogenic triggers",
+          "cells": [
+            {
+              "text": "No muscle biopsy, intramuscular injection or elective surgery on ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short corticosteroid course for early flares",
+          "cells": [
+            {
+              "text": "Major joints or jaw"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic NSAIDs for flares",
+          "cells": [
+            {
+              "text": "Pain control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palovarotene or other ACVR1-directed therapy",
+          "cells": [
+            {
+              "text": "Disease-specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fall prevention and occupational therapy",
+          "cells": [
+            {
+              "text": "Protect against injury-induced ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory and thoracic surveillance",
+          "cells": [
+            {
+              "text": "Restrictive chest-wall disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-traumatic dental and airway care",
+          "cells": [
+            {
+              "text": "Avoid mandibular block injections"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibrodysplasia_ossificans_progressiva-dx-mgmt",
+      "title": "Diagnosis and management of Fibrodysplasia ossificans progressiva",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Malformed great toes with painful soft-tissue flares and progressive heterotopic bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (chest-wall ossification, jaw ossification, trauma-triggered flare)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory review for falling reserve or jaw ossification threatening airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Great-toe review; ACVR1 testing; imaging of ossification; respiratory assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ACVR1 variant confirmed with characteristic toes and flares?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tumour, myositis ossificans or progressive osseous heteroplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strictly avoid biopsy, injections and elective surgery on flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short corticosteroid course for flares of major joints or jaw",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Palovarotene or other ACVR1-directed therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Respiratory and thoracic surveillance with fall prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive with joint ankylosis; thoracic insufficiency is the leading death cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

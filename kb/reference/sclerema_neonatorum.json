@@ -1,177 +1,446 @@
 {
- "id": "sclerema_neonatorum",
- "name": "sclerema neonatorum",
- "aliases": [
-  "sclerema neonatorum",
-  "sclerema adiposum"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Weedon's Skin Pathology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, diffuse hardening of the skin and subcutaneous fat affecting critically ill, usually premature or low-birth-weight neonates in the first week of life.",
-   "The skin becomes cold, board-like, waxy and immobile, spreading rapidly from the buttocks and lower limbs to involve most of the body, sparing the palms, soles and genitalia.",
-   "It is almost always a marker of severe underlying illness such as sepsis, dehydration, hypothermia, hypoxia or congenital malformation, rather than a primary skin disease.",
-   "Unlike subcutaneous fat necrosis of the newborn, affected infants are gravely unwell and the induration is diffuse rather than nodular.",
-   "The rigid skin restricts respiration and feeding, compounding the underlying condition.",
-   "Histology shows widened fibrous septa and needle-shaped clefts within enlarged adipocytes, with little or no inflammatory infiltrate and minimal fat necrosis.",
-   "Management is directed at the underlying illness, aggressive supportive care, warming, correction of fluid and electrolyte disturbances and treatment of sepsis.",
-   "Mortality is high and correlates with the severity of the precipitating illness rather than the skin changes themselves."
+  "id": "sclerema_neonatorum",
+  "name": "sclerema neonatorum",
+  "aliases": [
+    "sclerema neonatorum",
+    "sclerema adiposum"
   ],
-  "pathophysiology": "Sclerema neonatorum reflects the physicochemical vulnerability of neonatal subcutaneous fat, which has a high ratio of saturated to unsaturated fatty acids and thus a high melting point. In a critically ill, hypothermic and hypoperfused infant, this fat solidifies and crystallises, producing diffuse induration. Enzymatic defects in fatty-acid mobilisation and impaired thermoregulation are thought to contribute. Histologically there is little inflammation or true necrosis; instead adipocytes enlarge and contain needle-shaped crystal clefts, and the fibrous septa thicken. The process is best understood as a physical solidification of fat in a decompensating infant, so the condition is essentially an epiphenomenon of severe systemic illness.",
-  "additionalDifferentials": [
-   "subcutaneous fat necrosis of the newborn",
-   "neonatal scleroderma / stiff skin syndromes",
-   "neonatal sepsis with oedema and induration",
-   "cold injury / neonatal cold syndrome",
-   "diffuse neonatal oedema (hydrops, hypoproteinaemia)",
-   "congenital ichthyosis with taut skin"
-  ],
-  "additionalInvestigations": [
-   "full septic screen including blood cultures, lumbar puncture and cultures as indicated",
-   "full blood count, C-reactive protein and coagulation studies",
-   "serum electrolytes, glucose, urea and creatinine",
-   "blood gas analysis for hypoxia and acidosis",
-   "skin biopsy for histopathology when diagnosis is uncertain (wide septa, crystal clefts, scant inflammation)",
-   "core temperature monitoring",
-   "chest radiograph and other imaging directed at the underlying illness"
-  ],
-  "redFlags": [
-   "rapidly spreading induration in a hypothermic, hypotensive or septic neonate",
-   "respiratory compromise from restricted chest-wall movement",
-   "haemodynamic instability and multi-organ dysfunction",
-   "severe metabolic acidosis or coagulopathy",
-   "inability to feed or maintain temperature despite supportive measures"
-  ],
-  "prognosis": "The prognosis is poor, with high mortality driven by the severity of the underlying illness; survival depends on prompt and effective treatment of the precipitating condition rather than of the skin changes.",
-  "pitfalls": [
-   "Regarding the skin hardening as the primary problem instead of a sign of critical systemic illness.",
-   "Confusing it with the far more benign subcutaneous fat necrosis of the newborn.",
-   "Delaying sepsis evaluation and empirical treatment while investigating the skin.",
-   "Underestimating the respiratory impact of diffuse cutaneous rigidity.",
-   "Attributing induration to primary scleroderma in a neonate."
-  ],
-  "references": [
-   "Weedon's Skin Pathology, current edition",
-   "Rook's Textbook of Dermatology, current edition",
-   "Textbook of Neonatal Dermatology, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying critical illness aggressively — sepsis, dehydration, hypothermia and hypoxia — since outcome depends on this rather than on the skin",
-   "Give broad-spectrum intravenous antibiotics for suspected sepsis after taking cultures, guided by the septic screen",
-   "Provide intensive supportive care with careful rewarming, correction of fluid and electrolyte disturbance and haemodynamic support in a neonatal intensive care setting",
-   "Support respiration, including mechanical ventilation, as the rigid skin restricts chest movement",
-   "Maintain nutrition and correct hypoglycaemia and acidosis",
-   "Monitor core temperature, blood gases and coagulation, treating disseminated intravascular coagulation as needed",
-   "Involve neonatology early and discuss the guarded prognosis with the family given the high mortality"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sclerema_neonatorum-pathway",
-   "title": "sclerema neonatorum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, diffuse hardening of the skin and subcutaneous fat affecting critically ill, usually premature or low-birth-weight neonates in the first week of life.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rapidly spreading induration in a hypothermic, hypotensive or septic neonate",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: full septic screen including blood cultures, lumbar puncture and cultures as indicated, full blood count, C-reactive protein and coagulation studies, serum electrolytes, glucose, urea and creatinine"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying critical illness aggressively - sepsis, dehydration, hypothermia and hypoxia - since outcome depends on this rather than on the skin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regarding the skin hardening as the primary problem instead of a sign of critical systemic illness."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sclerema neonatorum."
-  }
- ],
- "tables": [
-  {
-   "id": "sclerema_neonatorum-matrix",
-   "title": "sclerema neonatorum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, diffuse hardening of the skin and subcutaneous fat affecting critically ill, usually premature or low-birth-weight",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Weedon's Skin Pathology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, diffuse hardening of the skin and subcutaneous fat affecting critically ill, usually premature or low-birth-weight neonates in the first week of life.",
+      "The skin becomes cold, board-like, waxy and immobile, spreading rapidly from the buttocks and lower limbs to involve most of the body, sparing the palms, soles and genitalia.",
+      "It is almost always a marker of severe underlying illness such as sepsis, dehydration, hypothermia, hypoxia or congenital malformation, rather than a primary skin disease.",
+      "Unlike subcutaneous fat necrosis of the newborn, affected infants are gravely unwell and the induration is diffuse rather than nodular.",
+      "The rigid skin restricts respiration and feeding, compounding the underlying condition.",
+      "Histology shows widened fibrous septa and needle-shaped clefts within enlarged adipocytes, with little or no inflammatory infiltrate and minimal fat necrosis.",
+      "Management is directed at the underlying illness, aggressive supportive care, warming, correction of fluid and electrolyte disturbances and treatment of sepsis.",
+      "Mortality is high and correlates with the severity of the precipitating illness rather than the skin changes themselves."
     ],
-    [
-     "Key Investigations",
-     "full septic screen including blood cultures, lumbar puncture and cultures as indicated, full blood count, C-reactive protein and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sclerema neonatorum reflects the physicochemical vulnerability of neonatal subcutaneous fat, which has a high ratio of saturated to unsaturated fatty acids and thus a high melting point. In a critically ill, hypothermic and hypoperfused infant, this fat solidifies and crystallises, producing diffuse induration. Enzymatic defects in fatty-acid mobilisation and impaired thermoregulation are thought to contribute. Histologically there is little inflammation or true necrosis; instead adipocytes enlarge and contain needle-shaped crystal clefts, and the fibrous septa thicken. The process is best understood as a physical solidification of fat in a decompensating infant, so the condition is essentially an epiphenomenon of severe systemic illness.",
+    "additionalDifferentials": [
+      "subcutaneous fat necrosis of the newborn",
+      "neonatal scleroderma / stiff skin syndromes",
+      "neonatal sepsis with oedema and induration",
+      "cold injury / neonatal cold syndrome",
+      "diffuse neonatal oedema (hydrops, hypoproteinaemia)",
+      "congenital ichthyosis with taut skin"
     ],
-    [
-     "Primary Differentials",
-     "subcutaneous fat necrosis of the newborn, neonatal scleroderma / stiff skin syndromes, neonatal sepsis with oedema and induration",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "full septic screen including blood cultures, lumbar puncture and cultures as indicated",
+      "full blood count, C-reactive protein and coagulation studies",
+      "serum electrolytes, glucose, urea and creatinine",
+      "blood gas analysis for hypoxia and acidosis",
+      "skin biopsy for histopathology when diagnosis is uncertain (wide septa, crystal clefts, scant inflammation)",
+      "core temperature monitoring",
+      "chest radiograph and other imaging directed at the underlying illness"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying critical illness aggressively - sepsis, dehydration, hypothermia and hypoxia - since outcome depends on this",
-     "Core treatment modality"
+    "redFlags": [
+      "rapidly spreading induration in a hypothermic, hypotensive or septic neonate",
+      "respiratory compromise from restricted chest-wall movement",
+      "haemodynamic instability and multi-organ dysfunction",
+      "severe metabolic acidosis or coagulopathy",
+      "inability to feed or maintain temperature despite supportive measures"
     ],
-    [
-     "Clinical Pitfall",
-     "Regarding the skin hardening as the primary problem instead of a sign of critical systemic illness.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is poor, with high mortality driven by the severity of the underlying illness; survival depends on prompt and effective treatment of the precipitating condition rather than of the skin changes.",
+    "pitfalls": [
+      "Regarding the skin hardening as the primary problem instead of a sign of critical systemic illness.",
+      "Confusing it with the far more benign subcutaneous fat necrosis of the newborn.",
+      "Delaying sepsis evaluation and empirical treatment while investigating the skin.",
+      "Underestimating the respiratory impact of diffuse cutaneous rigidity.",
+      "Attributing induration to primary scleroderma in a neonate."
+    ],
+    "references": [
+      "Weedon's Skin Pathology, current edition",
+      "Rook's Textbook of Dermatology, current edition",
+      "Textbook of Neonatal Dermatology, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying critical illness aggressively — sepsis, dehydration, hypothermia and hypoxia — since outcome depends on this rather than on the skin",
+      "Give broad-spectrum intravenous antibiotics for suspected sepsis after taking cultures, guided by the septic screen",
+      "Provide intensive supportive care with careful rewarming, correction of fluid and electrolyte disturbance and haemodynamic support in a neonatal intensive care setting",
+      "Support respiration, including mechanical ventilation, as the rigid skin restricts chest movement",
+      "Maintain nutrition and correct hypoglycaemia and acidosis",
+      "Monitor core temperature, blood gases and coagulation, treating disseminated intravascular coagulation as needed",
+      "Involve neonatology early and discuss the guarded prognosis with the family given the high mortality"
     ]
-   ],
-   "caption": "Overview comparison matrix for sclerema neonatorum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sclerema-neonatorum-real-image",
-   "title": "sclerema neonatorum: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sclerema_neonatorum-pathway",
+      "title": "sclerema neonatorum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, diffuse hardening of the skin and subcutaneous fat affecting critically ill, usually premature or low-birth-weight neonates in the first week of life.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rapidly spreading induration in a hypothermic, hypotensive or septic neonate",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: full septic screen including blood cultures, lumbar puncture and cultures as indicated, full blood count, C-reactive protein and coagulation studies, serum electrolytes, glucose, urea and creatinine"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying critical illness aggressively - sepsis, dehydration, hypothermia and hypoxia - since outcome depends on this rather than on the skin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regarding the skin hardening as the primary problem instead of a sign of critical systemic illness."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sclerema neonatorum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sclerema_neonatorum-matrix",
+      "title": "sclerema neonatorum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, diffuse hardening of the skin and subcutaneous fat affecting critically ill, usually premature or low-birth-weight",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "full septic screen including blood cultures, lumbar puncture and cultures as indicated, full blood count, C-reactive protein and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "subcutaneous fat necrosis of the newborn, neonatal scleroderma / stiff skin syndromes, neonatal sepsis with oedema and induration",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying critical illness aggressively - sepsis, dehydration, hypothermia and hypoxia - since outcome depends on this",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regarding the skin hardening as the primary problem instead of a sign of critical systemic illness.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sclerema neonatorum."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Weedon's Skin Pathology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sclerema_neonatorum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic screen",
+          "cells": [
+            {
+              "text": "Blood cultures, lumbar puncture and cultures as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, CRP and coagulation",
+          "cells": [
+            {
+              "text": "Infection and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes, glucose, urea, creatinine",
+          "cells": [
+            {
+              "text": "Metabolic disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas",
+          "cells": [
+            {
+              "text": "Hypoxia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Wide septa, crystal clefts and scant inflammation, when diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sclerema_neonatorum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Subcutaneous fat necrosis of the newborn",
+          "cells": [
+            {
+              "text": "Far more benign than sclerema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis with oedema",
+          "cells": [
+            {
+              "text": "Sepsis may cause the induration and is the likely underlying illness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sclerema_neonatorum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat underlying critical illness",
+          "cells": [
+            {
+              "text": "Sepsis, dehydration, hypothermia and hypoxia; outcome depends on this"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad-spectrum IV antibiotics",
+          "cells": [
+            {
+              "text": "After cultures, guided by the septic screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Careful rewarming, fluid and electrolyte correction, haemodynamic support in NICU"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Mechanical ventilation, as rigid skin restricts chest movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and metabolic correction",
+          "cells": [
+            {
+              "text": "Hypoglycaemia and acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Core temperature, blood gases, coagulation; treat DIC"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sclerema_neonatorum-dx-mgmt",
+      "title": "Diagnosis and management of sclerema neonatorum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hardening of skin in a sick preterm or hypothermic neonate: sclerema",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypothermia, hypotension, sepsis, respiratory compromise or acidosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "NICU resuscitation, rewarming, ventilation and early neonatology involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Septic screen, FBC, CRP, coagulation, blood gas, glucose and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is sepsis or another critical illness identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider skin biopsy and fat necrosis of the newborn; continue support",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Broad-spectrum IV antibiotics after cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Careful rewarming, fluids and haemodynamic support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mechanical ventilation as chest wall is restricted",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct hypoglycaemia and acidosis; treat DIC",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Poor prognosis with high mortality, driven by the underlying illness",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

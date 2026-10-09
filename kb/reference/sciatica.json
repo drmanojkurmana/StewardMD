@@ -1,176 +1,443 @@
 {
- "id": "sciatica",
- "name": "Sciatica",
- "aliases": [
-  "lumbar radiculopathy",
-  "lumbosacral radicular pain",
-  "nerve root pain",
-  "radicular leg pain"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Sports & Musculoskeletal Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon / standard sports medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Sciatica describes radicular leg pain following a dermatomal distribution below the knee, often with associated tingling, numbness, or weakness, and typically worse than any back pain",
-   "The commonest cause is compression or irritation of a lumbosacral nerve root by a prolapsed intervertebral disc, most often at L4-5 or L5-S1",
-   "In older patients, lumbar spinal stenosis causing neurogenic claudication is a frequent cause, with leg symptoms brought on by walking and relieved by sitting or flexion",
-   "A positive straight-leg raise (and crossed straight-leg raise) suggests lower lumbar nerve root tension, while the femoral stretch test targets higher roots",
-   "Examination should localise the affected root through its characteristic sensory, motor, and reflex changes",
-   "Most disc-related sciatica improves over weeks to a few months with conservative care, staying active, analgesia by principle, and physiotherapy",
-   "MRI is reserved for severe or persistent symptoms, progressive deficit, or when surgery or injection is being considered, not for routine early management",
-   "Surgery such as discectomy is considered for persistent disabling radicular pain that fails conservative treatment, or urgently for significant or progressive neurological deficit",
-   "Screen every patient for cauda equina and other red flags at presentation and again if symptoms change"
+  "id": "sciatica",
+  "name": "Sciatica",
+  "aliases": [
+    "lumbar radiculopathy",
+    "lumbosacral radicular pain",
+    "nerve root pain",
+    "radicular leg pain"
   ],
-  "pathophysiology": "Sciatica is caused by compression, tension, or chemical irritation of a lumbosacral nerve root, most commonly from a herniated disc whose nucleus material both mechanically compresses and inflames the root. Other causes include degenerative foraminal or central canal stenosis, spondylolisthesis, and less often tumour or infection. Nerve root inflammation and ischaemia generate the characteristic radiating pain and neurological signs in the corresponding dermatome and myotome.",
-  "additionalDifferentials": [
-   "Lumbar disc herniation with radiculopathy",
-   "Lumbar spinal or foraminal stenosis with neurogenic claudication",
-   "Spondylolisthesis",
-   "Piriformis syndrome or deep gluteal syndrome",
-   "Peripheral neuropathy or nerve entrapment (e.g. peroneal nerve)",
-   "Hip or sacroiliac joint pathology referring to the leg",
-   "Vascular claudication",
-   "Spinal tumour or infection compressing a nerve root"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis with root localisation; imaging not required for typical early sciatica without red flags",
-   "MRI of the lumbar spine for severe, persistent, or progressive symptoms or when intervention is planned",
-   "CT if MRI is contraindicated",
-   "Nerve conduction studies and electromyography in selected cases to clarify the level or exclude peripheral neuropathy",
-   "Blood tests and targeted imaging if infection or malignancy is suspected"
-  ],
-  "redFlags": [
-   "Cauda equina syndrome: saddle anaesthesia, urinary retention or incontinence, faecal incontinence, and bilateral or progressive leg weakness requiring emergency imaging and decompression",
-   "Progressive or severe motor deficit such as foot drop needing urgent assessment",
-   "Features suggesting malignancy: previous cancer, unexplained weight loss, age over 50, and night pain",
-   "Features suggesting infection: fever, immunosuppression, intravenous drug use, and severe unremitting pain"
-  ],
-  "prognosis": "The majority of disc-related cases resolve within six to twelve weeks with conservative treatment, but a proportion have persistent or recurrent symptoms; surgery gives faster relief of leg pain in selected patients, and outcomes worsen if significant neurological deficit is not treated promptly.",
-  "pitfalls": [
-   "Failing to ask about and detect cauda equina features, risking permanent deficit",
-   "Ordering early MRI and over-attributing symptoms to incidental disc findings",
-   "Mistaking peripheral entrapment, hip, or vascular pathology for radicular pain",
-   "Delaying referral for progressive motor deficit"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and encourage staying active, since most disc-related sciatica settles over weeks to a few months with conservative care",
-   "Provide analgesia and structured physiotherapy while avoiding prolonged bed rest",
-   "Consider a fluoroscopically guided epidural or transforaminal corticosteroid injection for severe, persistent radicular pain",
-   "Reserve MRI of the lumbar spine for severe, progressive or persistent symptoms or when intervention is planned",
-   "Refer for surgical decompression such as microdiscectomy in selected patients with persistent disabling pain or significant neurological deficit",
-   "Escalate urgently for suspected cauda equina syndrome or progressive motor deficit, with emergency imaging and surgical decompression",
-   "Manage neurogenic claudication from spinal stenosis in older patients with physiotherapy, activity modification and decompressive surgery where disabling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sciatica-pathway",
-   "title": "Sciatica: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Sciatica describes radicular leg pain following a dermatomal distribution below the knee, often with associated tingling, numbness, or weakness, and typically worse than any back pain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cauda equina syndrome: saddle anaesthesia, urinary retention or incontinence, faecal incontinence, and bilateral or progressive leg weakness requiring emergency imaging and decompression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis with root localisation; imaging not required for typical early sciatica without red flags, MRI of the lumbar spine for severe, persistent, or progressive symptoms or when intervention is planned, CT if"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and encourage staying active, since most disc-related sciatica settles over weeks to a few months with conservative care"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to ask about and detect cauda equina features, risking permanent deficit"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sciatica."
-  }
- ],
- "tables": [
-  {
-   "id": "sciatica-matrix",
-   "title": "Sciatica: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Sciatica describes radicular leg pain following a dermatomal distribution below the knee, often with associated tingling,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Sports & Musculoskeletal Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon / standard sports medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Sciatica describes radicular leg pain following a dermatomal distribution below the knee, often with associated tingling, numbness, or weakness, and typically worse than any back pain",
+      "The commonest cause is compression or irritation of a lumbosacral nerve root by a prolapsed intervertebral disc, most often at L4-5 or L5-S1",
+      "In older patients, lumbar spinal stenosis causing neurogenic claudication is a frequent cause, with leg symptoms brought on by walking and relieved by sitting or flexion",
+      "A positive straight-leg raise (and crossed straight-leg raise) suggests lower lumbar nerve root tension, while the femoral stretch test targets higher roots",
+      "Examination should localise the affected root through its characteristic sensory, motor, and reflex changes",
+      "Most disc-related sciatica improves over weeks to a few months with conservative care, staying active, analgesia by principle, and physiotherapy",
+      "MRI is reserved for severe or persistent symptoms, progressive deficit, or when surgery or injection is being considered, not for routine early management",
+      "Surgery such as discectomy is considered for persistent disabling radicular pain that fails conservative treatment, or urgently for significant or progressive neurological deficit",
+      "Screen every patient for cauda equina and other red flags at presentation and again if symptoms change"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis with root localisation; imaging not required for typical early sciatica without red flags, MRI of the lumbar",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sciatica is caused by compression, tension, or chemical irritation of a lumbosacral nerve root, most commonly from a herniated disc whose nucleus material both mechanically compresses and inflames the root. Other causes include degenerative foraminal or central canal stenosis, spondylolisthesis, and less often tumour or infection. Nerve root inflammation and ischaemia generate the characteristic radiating pain and neurological signs in the corresponding dermatome and myotome.",
+    "additionalDifferentials": [
+      "Lumbar disc herniation with radiculopathy",
+      "Lumbar spinal or foraminal stenosis with neurogenic claudication",
+      "Spondylolisthesis",
+      "Piriformis syndrome or deep gluteal syndrome",
+      "Peripheral neuropathy or nerve entrapment (e.g. peroneal nerve)",
+      "Hip or sacroiliac joint pathology referring to the leg",
+      "Vascular claudication",
+      "Spinal tumour or infection compressing a nerve root"
     ],
-    [
-     "Primary Differentials",
-     "Lumbar disc herniation with radiculopathy, Lumbar spinal or foraminal stenosis with neurogenic claudication, Spondylolisthesis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis with root localisation; imaging not required for typical early sciatica without red flags",
+      "MRI of the lumbar spine for severe, persistent, or progressive symptoms or when intervention is planned",
+      "CT if MRI is contraindicated",
+      "Nerve conduction studies and electromyography in selected cases to clarify the level or exclude peripheral neuropathy",
+      "Blood tests and targeted imaging if infection or malignancy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassure and encourage staying active, since most disc-related sciatica settles over weeks to a few months with conservative care",
-     "Core treatment modality"
+    "redFlags": [
+      "Cauda equina syndrome: saddle anaesthesia, urinary retention or incontinence, faecal incontinence, and bilateral or progressive leg weakness requiring emergency imaging and decompression",
+      "Progressive or severe motor deficit such as foot drop needing urgent assessment",
+      "Features suggesting malignancy: previous cancer, unexplained weight loss, age over 50, and night pain",
+      "Features suggesting infection: fever, immunosuppression, intravenous drug use, and severe unremitting pain"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to ask about and detect cauda equina features, risking permanent deficit",
-     "Prevent diagnostic or management error"
+    "prognosis": "The majority of disc-related cases resolve within six to twelve weeks with conservative treatment, but a proportion have persistent or recurrent symptoms; surgery gives faster relief of leg pain in selected patients, and outcomes worsen if significant neurological deficit is not treated promptly.",
+    "pitfalls": [
+      "Failing to ask about and detect cauda equina features, risking permanent deficit",
+      "Ordering early MRI and over-attributing symptoms to incidental disc findings",
+      "Mistaking peripheral entrapment, hip, or vascular pathology for radicular pain",
+      "Delaying referral for progressive motor deficit"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and encourage staying active, since most disc-related sciatica settles over weeks to a few months with conservative care",
+      "Provide analgesia and structured physiotherapy while avoiding prolonged bed rest",
+      "Consider a fluoroscopically guided epidural or transforaminal corticosteroid injection for severe, persistent radicular pain",
+      "Reserve MRI of the lumbar spine for severe, progressive or persistent symptoms or when intervention is planned",
+      "Refer for surgical decompression such as microdiscectomy in selected patients with persistent disabling pain or significant neurological deficit",
+      "Escalate urgently for suspected cauda equina syndrome or progressive motor deficit, with emergency imaging and surgical decompression",
+      "Manage neurogenic claudication from spinal stenosis in older patients with physiotherapy, activity modification and decompressive surgery where disabling"
     ]
-   ],
-   "caption": "Overview comparison matrix for sciatica."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sciatica-real-image",
-   "title": "Sciatica: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "sciatica-pathway",
+      "title": "Sciatica: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Sciatica describes radicular leg pain following a dermatomal distribution below the knee, often with associated tingling, numbness, or weakness, and typically worse than any back pain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cauda equina syndrome: saddle anaesthesia, urinary retention or incontinence, faecal incontinence, and bilateral or progressive leg weakness requiring emergency imaging and decompression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis with root localisation; imaging not required for typical early sciatica without red flags, MRI of the lumbar spine for severe, persistent, or progressive symptoms or when intervention is planned, CT if"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and encourage staying active, since most disc-related sciatica settles over weeks to a few months with conservative care"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to ask about and detect cauda equina features, risking permanent deficit"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sciatica."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sciatica-matrix",
+      "title": "Sciatica: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sciatica describes radicular leg pain following a dermatomal distribution below the knee, often with associated tingling,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis with root localisation; imaging not required for typical early sciatica without red flags, MRI of the lumbar",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lumbar disc herniation with radiculopathy, Lumbar spinal or foraminal stenosis with neurogenic claudication, Spondylolisthesis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and encourage staying active, since most disc-related sciatica settles over weeks to a few months with conservative care",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to ask about and detect cauda equina features, risking permanent deficit",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sciatica."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon / standard sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sciatica-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Root localisation; imaging not needed for typical early sciatica without red flags"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI lumbar spine",
+          "cells": [
+            {
+              "text": "For severe, persistent or progressive symptoms, or when intervention is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Alternative if MRI is contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction and EMG",
+          "cells": [
+            {
+              "text": "Selected cases, to clarify level or exclude peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests and targeted imaging",
+          "cells": [
+            {
+              "text": "If infection or malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sciatica-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lumbar spinal stenosis",
+          "cells": [
+            {
+              "text": "Neurogenic claudication, mostly in older patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular claudication",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal tumour or infection",
+          "cells": [
+            {
+              "text": "Cancer history, weight loss, night pain, fever, immunosuppression or drug use"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sciatica-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and staying active",
+          "cells": [
+            {
+              "text": "Most disc-related sciatica settles over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Avoid prolonged bed rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural or transforaminal steroid injection",
+          "cells": [
+            {
+              "text": "Fluoroscopically guided, for severe persistent radicular pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Reserve for severe, progressive or persistent symptoms or planned intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Such as microdiscectomy for persistent disabling pain or significant deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent escalation",
+          "cells": [
+            {
+              "text": "Suspected cauda equina or progressive motor deficit: emergency imaging and decompression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sciatica-dx-mgmt",
+      "title": "Diagnosis and management of Sciatica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Leg pain in a root distribution: suspected sciatica",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Saddle anaesthesia, sphincter change, foot drop, or cancer or infection features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency MRI and surgical referral for cauda equina or progressive deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical root localisation; MRI only if severe, persistent or progressive",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is pain persistent and disabling beyond conservative care?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue reassurance, activity and physiotherapy; most settle in weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Analgesia and structured physiotherapy, avoid bed rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider image-guided epidural or transforaminal steroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Microdiscectomy for persistent disabling pain or deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Most disc-related cases resolve within 6 to 12 weeks with conservative care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

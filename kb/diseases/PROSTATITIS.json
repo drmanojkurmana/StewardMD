@@ -287,25 +287,514 @@
       "caption": "Diagnostic and clinical overview matrix for acute bacterial prostatitis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "prostatitis-real-image",
-      "title": "Acute Bacterial Prostatitis: Diagnostic Renal Ultrasonography",
-      "type": "ultrasound",
-      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Coker and Dierfeldt, Acute Bacterial Prostatitis, Am Fam Physician 2016",
+      "url": "https://www.aafp.org/pubs/afp/issues/2016/0115/p114.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PROSTATITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing acute bacterial prostatitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Renal Cortex",
-          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+          "parameter": "Symptoms",
+          "cells": [
+            {
+              "text": "Dysuria, frequency, prostatic, pelvic or perineal pain; fever, rigors, outlet obstruction"
+            },
+            {
+              "text": "Typical severe illness"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Corticomedullary Junction",
-          "description": "Medullary pyramid definition and structural architecture."
+          "parameter": "Febrile UTI in a man",
+          "cells": [
+            {
+              "text": "No other source such as pyelonephritis"
+            },
+            {
+              "text": "Prostate is involved in most febrile male UTIs"
+            }
+          ],
+          "cite": "c1"
         },
         {
-          "label": "Collecting System",
-          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+          "parameter": "Rectal examination",
+          "cells": [
+            {
+              "text": "Gentle only"
+            },
+            {
+              "text": "{{hy:Avoid prostatic massage; risks bacteraemia and sepsis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urinalysis and midstream urine culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Before antibiotics; up to 35% grow no organism",
+              "op": "<=",
+              "value": 35
+            },
+            {
+              "text": "Bacteriuria separates bacterial prostatitis from pelvic pain syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood cultures",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Temperature >38.4 deg C, sepsis, complicated infection, immunocompromise",
+              "op": ">",
+              "value": 38.4
+            },
+            {
+              "text": "Indicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PSA",
+          "cells": [
+            {
+              "text": "May be raised in febrile UTI"
+            },
+            {
+              "text": "Not useful as a cancer marker during infection; AFP advises not testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent fever",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Fever beyond 36 h on antibiotics",
+              "op": ">",
+              "value": 36
+            },
+            {
+              "text": "Image for prostatic abscess: transrectal US, CT or MRI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Imaging in febrile male UTI",
+          "cells": [
+            {
+              "text": "CT or ultrasound, including first episode, if not done before"
+            },
+            {
+              "text": "Look for obstruction or abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Admission criteria",
+          "cells": [
+            {
+              "text": "Sepsis, urinary retention, cannot take oral, failed outpatient care, resistance risk"
+            },
+            {
+              "text": "Inpatient IV therapy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison notes PSA may rise in febrile UTI; the 2016 AFP review says PSA testing is not indicated. Both kept."
+    },
+    {
+      "id": "PROSTATITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute bacterial prostatitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic bacterial prostatitis",
+          "cells": [
+            {
+              "text": "Recurring for at least 3 months, positive culture each episode"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic pelvic pain syndrome",
+          "cells": [
+            {
+              "text": "{{hy:No bacteriuria; no response to antibiotics}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign prostatic hyperplasia",
+          "cells": [
+            {
+              "text": "Obstructive symptoms, enlarged non-tender prostate, negative culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pyelonephritis",
+          "cells": [
+            {
+              "text": "Flank or costovertebral angle pain, upper-tract source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystitis",
+          "cells": [
+            {
+              "text": "Irritative symptoms, normal prostate examination"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urethritis",
+          "cells": [
+            {
+              "text": "Discharge or itch; test for gonorrhoea, chlamydia, M. genitalium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymitis or orchitis",
+          "cells": [
+            {
+              "text": "Tender epididymis or testis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Proctitis",
+          "cells": [
+            {
+              "text": "Tenesmus, rectal bleeding, mucus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diverticulitis",
+          "cells": [
+            {
+              "text": "Left lower quadrant pain, bowel habit change"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prostate cancer",
+          "cells": [
+            {
+              "text": "Constitutional symptoms, prostatic nodules"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "PROSTATITIS-treatment",
+      "kind": "treatment",
+      "title": "Antibiotic treatment of acute bacterial prostatitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Ciprofloxacin, levofloxacin or TMP-SMX oral",
+          "cells": [
+            {
+              "text": "{{hy:Outpatient, mild illness}}"
+            },
+            {
+              "text": "Ciprofloxacin 500 mg twice daily; levofloxacin 500 to 750 mg daily; TMP-SMX 160/800 mg twice daily; 10 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ceftriaxone or cefixime then doxycycline",
+          "cells": [
+            {
+              "text": "Sexually acquired risk (gonorrhoea, chlamydia)"
+            },
+            {
+              "text": "Ceftriaxone 250 mg IM or cefixime 400 mg once, then doxycycline 100 mg twice daily for 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV fluoroquinolone, piperacillin-tazobactam or ceftriaxone plus fluoroquinolone",
+          "cells": [
+            {
+              "text": "Inpatient"
+            },
+            {
+              "text": "Ciprofloxacin 400 mg every 12 h; piperacillin-tazobactam 3.375 g every 6 h; ceftriaxone 1 to 2 g daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Broad-spectrum with aminoglycoside, or carbapenem",
+          "cells": [
+            {
+              "text": "Resistance risk"
+            },
+            {
+              "text": "Gentamicin 7 mg/kg daily or amikacin 15 mg/kg daily; ertapenem 1 g daily; meropenem 500 mg every 8 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carbapenem",
+          "cells": [
+            {
+              "text": "After transrectal biopsy, ESBL or fluoroquinolone-resistant E. coli, unstable"
+            },
+            {
+              "text": "Preferred if unstable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV to oral switch",
+          "cells": [
+            {
+              "text": "Once afebrile"
+            },
+            {
+              "text": "Oral for 2 to 4 more weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Mild 10 to 14 days (extend 2 weeks if symptomatic); severe 4 weeks total",
+              "op": "=",
+              "value": 4
+            },
+            {
+              "text": "Repeat urine culture 1 week after stopping"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abscess drainage",
+          "cells": [
+            {
+              "text": "Prostatic abscess on imaging"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Regimens and doses from the 2016 AFP review. Harrison notes prostatitis is under-represented in UTI trials. Drainage technique was not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PROSTATITIS-dx-mgmt",
+      "title": "Diagnosis and management of acute bacterial prostatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Man with dysuria, pelvic or perineal pain, fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Gentle rectal exam, no massage; urinalysis and urine culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Temperature >38.4 deg C, sepsis or immunocompromise?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood cultures",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sepsis, retention, cannot take oral or resistance risk?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Admit; IV antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral fluoroquinolone or TMP-SMX for 10 to 14 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Afebrile within 36 h?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Image for prostatic abscess",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Switch to oral; complete 2 to 4 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Repeat urine culture 1 week after finishing",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Treat abscess; urology review",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "Abscess found"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No abscess"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
         }
       ]
     }

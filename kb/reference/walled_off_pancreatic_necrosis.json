@@ -1,177 +1,399 @@
 {
- "id": "walled_off_pancreatic_necrosis",
- "name": "Walled-off pancreatic necrosis",
- "aliases": [
-  "WON",
-  "walled-off necrosis",
-  "organised pancreatic necrosis",
-  "mature necrotic collection"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatobiliary",
- "specialty": "Hepatobiliary / Pancreatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mature, encapsulated collection of necrotic pancreatic and peripancreatic tissue that develops typically about four weeks after an episode of necrotising pancreatitis",
-   "Distinguished from a pseudocyst by its heterogeneous content, which includes solid debris rather than pure fluid, under the revised Atlanta classification",
-   "May be sterile or become infected; infected necrosis is suggested by clinical deterioration, sepsis, or gas within the collection on imaging",
-   "Contrast-enhanced CT shows an encapsulated collection with variable solid and liquid components in or around the pancreas",
-   "Asymptomatic sterile collections can be managed conservatively, as many resolve or remain stable without intervention",
-   "When drainage is needed, a step-up approach is favoured, beginning with percutaneous or endoscopic drainage before escalating to minimally invasive necrosectomy",
-   "Endoscopic transmural drainage with lumen-apposing metal stents and, where required, direct endoscopic necrosectomy has become a mainstay of management"
+  "id": "walled_off_pancreatic_necrosis",
+  "name": "Walled-off pancreatic necrosis",
+  "aliases": [
+    "WON",
+    "walled-off necrosis",
+    "organised pancreatic necrosis",
+    "mature necrotic collection"
   ],
-  "pathophysiology": "Walled-off pancreatic necrosis is a late local complication of necrotising pancreatitis. During the acute illness, ischaemic and enzymatic injury produces necrosis of pancreatic parenchyma and surrounding fat, generating an acute necrotic collection containing both liquefied and solid material. Over the following weeks a fibrous and granulation-tissue wall matures around this collection, converting it into an organised, encapsulated cavity that still contains devitalised solid debris. The retained necrotic tissue can become secondarily infected by gut-derived organisms, and the collection may erode adjacent structures, obstruct the stomach or duodenum, compress the bile duct, or communicate with the pancreatic duct, producing persistent leakage.",
-  "additionalDifferentials": [
-   "Pancreatic pseudocyst",
-   "Acute necrotic collection (before maturation of the wall)",
-   "Pancreatic abscess",
-   "Cystic pancreatic neoplasm with debris",
-   "Duodenal or gastric outlet obstruction from other causes",
-   "Infected peripancreatic haematoma"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT to define the extent, wall maturity, and solid content of the collection",
-   "MRI or endoscopic ultrasound to better characterise solid debris and guide drainage",
-   "Inflammatory markers and blood cultures if infection is suspected",
-   "Image-guided aspiration for culture when infected necrosis is in question",
-   "Assessment of pancreatic duct integrity (for example MRCP) to detect disconnected duct syndrome",
-   "Monitoring of nutritional status and glycaemic control"
-  ],
-  "redFlags": [
-   "Clinical deterioration, persistent fever, or sepsis suggesting infected necrosis",
-   "Gas within the collection on imaging",
-   "Gastric outlet or biliary obstruction from mass effect",
-   "Haemorrhage into the collection or a pseudoaneurysm of a splanchnic vessel",
-   "Rapid enlargement of the collection"
-  ],
-  "prognosis": "Sterile, asymptomatic collections often resolve or stabilise without intervention and carry a good outlook; infected necrosis substantially increases morbidity and mortality, though outcomes have improved with a minimally invasive step-up strategy and delayed intervention where possible.",
-  "pitfalls": [
-   "Intervening too early before the wall has matured, which increases complications",
-   "Mistaking walled-off necrosis for a simple pseudocyst and attempting drainage of solid debris through inadequate routes",
-   "Overlooking a disconnected pancreatic duct, which predisposes to persistent or recurrent collections",
-   "Failing to recognise vascular complications such as pseudoaneurysm before drainage",
-   "Delaying antibiotics and source control once infection is established"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Revised Atlanta classification of acute pancreatitis",
-   "Guidelines on the step-up management of necrotising pancreatitis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage sterile, asymptomatic collections conservatively, as many resolve or remain stable, while supporting nutrition preferably by the enteral route and optimising glycaemic control",
-   "Delay any intervention where possible until the collection wall has matured, which reduces procedural morbidity",
-   "Treat infected or symptomatic necrosis with a step-up approach, beginning with endoscopic ultrasound-guided transmural drainage or percutaneous catheter drainage",
-   "Give broad-spectrum antibiotics with good pancreatic penetration, such as a carbapenem, for confirmed or strongly suspected infected necrosis",
-   "Escalate to minimally invasive necrosectomy, whether endoscopic or video-assisted retroperitoneal debridement, when drainage alone fails to control sepsis",
-   "Identify and manage disconnected pancreatic duct syndrome and treat local complications such as gastric outlet or biliary obstruction and haemorrhage",
-   "Coordinate care through a hepatobiliary and pancreatology multidisciplinary team with interventional radiology and therapeutic endoscopy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "walled_off_pancreatic_necrosis-pathway",
-   "title": "Walled-off pancreatic necrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mature, encapsulated collection of necrotic pancreatic and peripancreatic tissue that develops typically about four weeks after an episode of necrotising pancreatitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Clinical deterioration, persistent fever, or sepsis suggesting infected necrosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT to define the extent, wall maturity, and solid content of the collection, MRI or endoscopic ultrasound to better characterise solid debris and guide drainage, Inflammatory markers and blood cultures if"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage sterile, asymptomatic collections conservatively, as many resolve or remain stable, while supporting nutrition preferably by the enteral route and optimising glycaemic control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Intervening too early before the wall has matured, which increases complications"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of walled-off pancreatic necrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "walled_off_pancreatic_necrosis-matrix",
-   "title": "Walled-off pancreatic necrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mature, encapsulated collection of necrotic pancreatic and peripancreatic tissue that develops typically about four weeks after",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatobiliary",
+  "specialty": "Hepatobiliary / Pancreatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mature, encapsulated collection of necrotic pancreatic and peripancreatic tissue that develops typically about four weeks after an episode of necrotising pancreatitis",
+      "Distinguished from a pseudocyst by its heterogeneous content, which includes solid debris rather than pure fluid, under the revised Atlanta classification",
+      "May be sterile or become infected; infected necrosis is suggested by clinical deterioration, sepsis, or gas within the collection on imaging",
+      "Contrast-enhanced CT shows an encapsulated collection with variable solid and liquid components in or around the pancreas",
+      "Asymptomatic sterile collections can be managed conservatively, as many resolve or remain stable without intervention",
+      "When drainage is needed, a step-up approach is favoured, beginning with percutaneous or endoscopic drainage before escalating to minimally invasive necrosectomy",
+      "Endoscopic transmural drainage with lumen-apposing metal stents and, where required, direct endoscopic necrosectomy has become a mainstay of management"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT to define the extent, wall maturity, and solid content of the collection, MRI or endoscopic ultrasound to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Walled-off pancreatic necrosis is a late local complication of necrotising pancreatitis. During the acute illness, ischaemic and enzymatic injury produces necrosis of pancreatic parenchyma and surrounding fat, generating an acute necrotic collection containing both liquefied and solid material. Over the following weeks a fibrous and granulation-tissue wall matures around this collection, converting it into an organised, encapsulated cavity that still contains devitalised solid debris. The retained necrotic tissue can become secondarily infected by gut-derived organisms, and the collection may erode adjacent structures, obstruct the stomach or duodenum, compress the bile duct, or communicate with the pancreatic duct, producing persistent leakage.",
+    "additionalDifferentials": [
+      "Pancreatic pseudocyst",
+      "Acute necrotic collection (before maturation of the wall)",
+      "Pancreatic abscess",
+      "Cystic pancreatic neoplasm with debris",
+      "Duodenal or gastric outlet obstruction from other causes",
+      "Infected peripancreatic haematoma"
     ],
-    [
-     "Primary Differentials",
-     "Pancreatic pseudocyst, Acute necrotic collection (before maturation of the wall), Pancreatic abscess",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT to define the extent, wall maturity, and solid content of the collection",
+      "MRI or endoscopic ultrasound to better characterise solid debris and guide drainage",
+      "Inflammatory markers and blood cultures if infection is suspected",
+      "Image-guided aspiration for culture when infected necrosis is in question",
+      "Assessment of pancreatic duct integrity (for example MRCP) to detect disconnected duct syndrome",
+      "Monitoring of nutritional status and glycaemic control"
     ],
-    [
-     "Management Strategy",
-     "Manage sterile, asymptomatic collections conservatively, as many resolve or remain stable, while supporting nutrition preferably",
-     "Core treatment modality"
+    "redFlags": [
+      "Clinical deterioration, persistent fever, or sepsis suggesting infected necrosis",
+      "Gas within the collection on imaging",
+      "Gastric outlet or biliary obstruction from mass effect",
+      "Haemorrhage into the collection or a pseudoaneurysm of a splanchnic vessel",
+      "Rapid enlargement of the collection"
     ],
-    [
-     "Clinical Pitfall",
-     "Intervening too early before the wall has matured, which increases complications",
-     "Prevent diagnostic or management error"
+    "prognosis": "Sterile, asymptomatic collections often resolve or stabilise without intervention and carry a good outlook; infected necrosis substantially increases morbidity and mortality, though outcomes have improved with a minimally invasive step-up strategy and delayed intervention where possible.",
+    "pitfalls": [
+      "Intervening too early before the wall has matured, which increases complications",
+      "Mistaking walled-off necrosis for a simple pseudocyst and attempting drainage of solid debris through inadequate routes",
+      "Overlooking a disconnected pancreatic duct, which predisposes to persistent or recurrent collections",
+      "Failing to recognise vascular complications such as pseudoaneurysm before drainage",
+      "Delaying antibiotics and source control once infection is established"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Revised Atlanta classification of acute pancreatitis",
+      "Guidelines on the step-up management of necrotising pancreatitis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage sterile, asymptomatic collections conservatively, as many resolve or remain stable, while supporting nutrition preferably by the enteral route and optimising glycaemic control",
+      "Delay any intervention where possible until the collection wall has matured, which reduces procedural morbidity",
+      "Treat infected or symptomatic necrosis with a step-up approach, beginning with endoscopic ultrasound-guided transmural drainage or percutaneous catheter drainage",
+      "Give broad-spectrum antibiotics with good pancreatic penetration, such as a carbapenem, for confirmed or strongly suspected infected necrosis",
+      "Escalate to minimally invasive necrosectomy, whether endoscopic or video-assisted retroperitoneal debridement, when drainage alone fails to control sepsis",
+      "Identify and manage disconnected pancreatic duct syndrome and treat local complications such as gastric outlet or biliary obstruction and haemorrhage",
+      "Coordinate care through a hepatobiliary and pancreatology multidisciplinary team with interventional radiology and therapeutic endoscopy"
     ]
-   ],
-   "caption": "Overview comparison matrix for walled-off pancreatic necrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "walled-off-pancreatic-necrosis-real-image",
-   "title": "Walled-off pancreatic necrosis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "walled_off_pancreatic_necrosis-pathway",
+      "title": "Walled-off pancreatic necrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mature, encapsulated collection of necrotic pancreatic and peripancreatic tissue that develops typically about four weeks after an episode of necrotising pancreatitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Clinical deterioration, persistent fever, or sepsis suggesting infected necrosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT to define the extent, wall maturity, and solid content of the collection, MRI or endoscopic ultrasound to better characterise solid debris and guide drainage, Inflammatory markers and blood cultures if"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage sterile, asymptomatic collections conservatively, as many resolve or remain stable, while supporting nutrition preferably by the enteral route and optimising glycaemic control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Intervening too early before the wall has matured, which increases complications"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of walled-off pancreatic necrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "walled_off_pancreatic_necrosis-matrix",
+      "title": "Walled-off pancreatic necrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mature, encapsulated collection of necrotic pancreatic and peripancreatic tissue that develops typically about four weeks after",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT to define the extent, wall maturity, and solid content of the collection, MRI or endoscopic ultrasound to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pancreatic pseudocyst, Acute necrotic collection (before maturation of the wall), Pancreatic abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage sterile, asymptomatic collections conservatively, as many resolve or remain stable, while supporting nutrition preferably",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Intervening too early before the wall has matured, which increases complications",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for walled-off pancreatic necrosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "walled_off_pancreatic_necrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Extent, wall maturity and solid content of the collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Better characterisation of the collection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "walled_off_pancreatic_necrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pancreatic pseudocyst",
+          "cells": [
+            {
+              "text": "Simple cyst without a mature necrotic wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute necrotic collection",
+          "cells": [
+            {
+              "text": "Before maturation of the wall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic abscess",
+          "cells": [
+            {
+              "text": "Infected necrosis; gas within the collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic pancreatic neoplasm with debris",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "walled_off_pancreatic_necrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Sterile, asymptomatic collections; many resolve or remain stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Preferably by the enteral route"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed intervention",
+          "cells": [
+            {
+              "text": "Avoid intervening before the wall has matured"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "walled_off_pancreatic_necrosis-dx-mgmt",
+      "title": "Diagnosis and management of Walled-off pancreatic necrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected walled-off necrosis: encapsulated collection weeks after pancreatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (deterioration, persistent fever, sepsis or gas in the collection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage or intervention for infected necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast-enhanced CT for extent and wall maturity; MRI or endoscopic ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the collection mature and encapsulated, with no infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acute necrotic collection, pseudocyst or cystic neoplasm; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative management of sterile asymptomatic collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Enteral nutritional support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Delay intervention until the wall has matured",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Many collections resolve; infection or obstruction needs intervention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

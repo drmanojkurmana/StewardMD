@@ -1,173 +1,478 @@
 {
- "id": "suprascapular_neuropathy",
- "name": "suprascapular neuropathy",
- "aliases": [
-  "suprascapular nerve entrapment",
-  "suprascapular nerve palsy",
-  "spinoglenoid notch syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Peripheral nervous system",
- "specialty": "Neurology / Shoulder and orthopaedic surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Entrapment or injury of the suprascapular nerve, most often at the suprascapular notch beneath the transverse scapular ligament or more distally at the spinoglenoid notch",
-   "The level of the lesion determines the deficit: a suprascapular notch lesion weakens both supraspinatus and infraspinatus, whereas a spinoglenoid notch lesion selectively weakens infraspinatus, sparing supraspinatus",
-   "Clinically there is weakness of shoulder external rotation and of the initial phase of abduction, with a deep, poorly localised posterolateral shoulder ache; the nerve carries no cutaneous sensory territory, so there is no skin numbness",
-   "A spinoglenoid notch ganglion cyst, frequently associated with a posterosuperior glenoid labral tear, is a classic and treatable cause of isolated infraspinatus wasting",
-   "Repetitive overhead activity, particularly in volleyball players and other overhead athletes, and traction injuries or scapular fractures are recognised mechanisms",
-   "Visible infraspinatus wasting in the infraspinatus fossa is often the presenting sign, and can be mistaken for a rotator cuff tear or C5-C6 radiculopathy",
-   "Management is conservative with physiotherapy and activity modification for traction or overuse cases, decompression or aspiration for a compressive ganglion, and repair of an associated labral tear where present"
+  "id": "suprascapular_neuropathy",
+  "name": "suprascapular neuropathy",
+  "aliases": [
+    "suprascapular nerve entrapment",
+    "suprascapular nerve palsy",
+    "spinoglenoid notch syndrome"
   ],
-  "pathophysiology": "The suprascapular nerve arises from the upper trunk of the brachial plexus (C5-C6, occasionally C4) and runs laterally to pass through the suprascapular notch beneath the transverse scapular ligament, where it gives motor branches to supraspinatus, before curving around the base of the scapular spine through the spinoglenoid notch to supply infraspinatus. Both notches are relatively fixed fibro-osseous tunnels that tether the nerve, making it vulnerable to compression and to repetitive traction during overhead and cross-body movement. A ganglion cyst arising from a labral tear characteristically compresses the nerve at the spinoglenoid notch, selectively denervating infraspinatus, while ligamentous or bony narrowing at the suprascapular notch affects both muscles. Because the nerve is essentially purely motor, injury produces weakness and muscle wasting with pain but without cutaneous sensory loss.",
-  "additionalDifferentials": [
-   "Rotator cuff tear (supraspinatus or infraspinatus)",
-   "C5-C6 cervical radiculopathy",
-   "Neuralgic amyotrophy (Parsonage-Turner syndrome)",
-   "Upper-trunk brachial plexopathy",
-   "Glenohumeral or acromioclavicular joint pathology",
-   "Quadrilateral space syndrome (axillary neuropathy) as an alternative cause of shoulder wasting"
-  ],
-  "additionalInvestigations": [
-   "Needle electromyography of supraspinatus and infraspinatus to localise the lesion to the suprascapular or spinoglenoid notch",
-   "Nerve conduction studies measuring suprascapular motor latencies to the two muscles",
-   "MRI of the shoulder to detect a ganglion cyst, labral tear and the pattern of muscle oedema or fatty atrophy",
-   "Magnetic resonance or ultrasound arthrography if a posterosuperior labral tear is suspected",
-   "Cervical spine imaging when C5-C6 radiculopathy is a competing diagnosis",
-   "Diagnostic suprascapular nerve block in selected cases"
-  ],
-  "redFlags": [
-   "Acute severe shoulder-girdle pain followed by weakness and wasting, suggesting neuralgic amyotrophy",
-   "A spinoglenoid or suprascapular notch mass on imaging indicating a compressive ganglion or tumour",
-   "Rapidly progressive or profound wasting despite conservative treatment",
-   "Associated mechanical symptoms of a labral tear such as clicking, catching or instability"
-  ],
-  "prognosis": "Traction and overuse cases and those with a decompressed or aspirated ganglion generally recover strength over months, particularly when an associated labral tear is addressed. Long-standing entrapment with established fatty atrophy of the muscle recovers less completely, leaving persistent weakness of external rotation.",
-  "pitfalls": [
-   "Attributing external rotation weakness and infraspinatus wasting to a rotator cuff tear without imaging or electrophysiology",
-   "Missing a spinoglenoid notch ganglion and its associated labral tear as a treatable cause",
-   "Confusing the deep aching pain with primary glenohumeral joint disease",
-   "Overlooking neuralgic amyotrophy in acute painful presentations",
-   "Failing to localise the lesion by not distinguishing isolated infraspinatus from combined supraspinatus and infraspinatus involvement"
-  ],
-  "references": [
-   "Green's Operative Hand Surgery",
-   "Stewart's Focal Peripheral Neuropathies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage traction and overuse cases conservatively with activity modification, avoidance of provocative overhead movement, physiotherapy and analgesia",
-   "Treat a spinoglenoid or suprascapular notch ganglion cyst by image-guided aspiration or surgical excision, addressing any associated glenoid labral tear",
-   "Offer surgical decompression, including release of the transverse scapular ligament, for entrapment that fails conservative management",
-   "Consider a diagnostic and therapeutic suprascapular nerve block in selected patients",
-   "Monitor recovery with serial needle electromyography for evidence of reinnervation",
-   "Refer earlier for surgery where established fatty atrophy predicts poorer spontaneous recovery, involving shoulder and orthopaedic services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "suprascapular_neuropathy-pathway",
-   "title": "suprascapular neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Entrapment or injury of the suprascapular nerve, most often at the suprascapular notch beneath the transverse scapular ligament or more distally at the spinoglenoid notch",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe shoulder-girdle pain followed by weakness and wasting, suggesting neuralgic amyotrophy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Needle electromyography of supraspinatus and infraspinatus to localise the lesion to the suprascapular or spinoglenoid notch, Nerve conduction studies measuring suprascapular motor latencies to the two muscles, MRI of the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage traction and overuse cases conservatively with activity modification, avoidance of provocative overhead movement, physiotherapy and analgesia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing external rotation weakness and infraspinatus wasting to a rotator cuff tear without imaging or electrophysiology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of suprascapular neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "suprascapular_neuropathy-matrix",
-   "title": "suprascapular neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Entrapment or injury of the suprascapular nerve, most often at the suprascapular notch beneath the transverse scapular ligament",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Peripheral nervous system",
+  "specialty": "Neurology / Shoulder and orthopaedic surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Entrapment or injury of the suprascapular nerve, most often at the suprascapular notch beneath the transverse scapular ligament or more distally at the spinoglenoid notch",
+      "The level of the lesion determines the deficit: a suprascapular notch lesion weakens both supraspinatus and infraspinatus, whereas a spinoglenoid notch lesion selectively weakens infraspinatus, sparing supraspinatus",
+      "Clinically there is weakness of shoulder external rotation and of the initial phase of abduction, with a deep, poorly localised posterolateral shoulder ache; the nerve carries no cutaneous sensory territory, so there is no skin numbness",
+      "A spinoglenoid notch ganglion cyst, frequently associated with a posterosuperior glenoid labral tear, is a classic and treatable cause of isolated infraspinatus wasting",
+      "Repetitive overhead activity, particularly in volleyball players and other overhead athletes, and traction injuries or scapular fractures are recognised mechanisms",
+      "Visible infraspinatus wasting in the infraspinatus fossa is often the presenting sign, and can be mistaken for a rotator cuff tear or C5-C6 radiculopathy",
+      "Management is conservative with physiotherapy and activity modification for traction or overuse cases, decompression or aspiration for a compressive ganglion, and repair of an associated labral tear where present"
     ],
-    [
-     "Key Investigations",
-     "Needle electromyography of supraspinatus and infraspinatus to localise the lesion to the suprascapular or spinoglenoid notch,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The suprascapular nerve arises from the upper trunk of the brachial plexus (C5-C6, occasionally C4) and runs laterally to pass through the suprascapular notch beneath the transverse scapular ligament, where it gives motor branches to supraspinatus, before curving around the base of the scapular spine through the spinoglenoid notch to supply infraspinatus. Both notches are relatively fixed fibro-osseous tunnels that tether the nerve, making it vulnerable to compression and to repetitive traction during overhead and cross-body movement. A ganglion cyst arising from a labral tear characteristically compresses the nerve at the spinoglenoid notch, selectively denervating infraspinatus, while ligamentous or bony narrowing at the suprascapular notch affects both muscles. Because the nerve is essentially purely motor, injury produces weakness and muscle wasting with pain but without cutaneous sensory loss.",
+    "additionalDifferentials": [
+      "Rotator cuff tear (supraspinatus or infraspinatus)",
+      "C5-C6 cervical radiculopathy",
+      "Neuralgic amyotrophy (Parsonage-Turner syndrome)",
+      "Upper-trunk brachial plexopathy",
+      "Glenohumeral or acromioclavicular joint pathology",
+      "Quadrilateral space syndrome (axillary neuropathy) as an alternative cause of shoulder wasting"
     ],
-    [
-     "Primary Differentials",
-     "Rotator cuff tear (supraspinatus or infraspinatus), C5-C6 cervical radiculopathy, Neuralgic amyotrophy (Parsonage-Turner syndrome)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Needle electromyography of supraspinatus and infraspinatus to localise the lesion to the suprascapular or spinoglenoid notch",
+      "Nerve conduction studies measuring suprascapular motor latencies to the two muscles",
+      "MRI of the shoulder to detect a ganglion cyst, labral tear and the pattern of muscle oedema or fatty atrophy",
+      "Magnetic resonance or ultrasound arthrography if a posterosuperior labral tear is suspected",
+      "Cervical spine imaging when C5-C6 radiculopathy is a competing diagnosis",
+      "Diagnostic suprascapular nerve block in selected cases"
     ],
-    [
-     "Management Strategy",
-     "Manage traction and overuse cases conservatively with activity modification, avoidance of provocative overhead movement,",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe shoulder-girdle pain followed by weakness and wasting, suggesting neuralgic amyotrophy",
+      "A spinoglenoid or suprascapular notch mass on imaging indicating a compressive ganglion or tumour",
+      "Rapidly progressive or profound wasting despite conservative treatment",
+      "Associated mechanical symptoms of a labral tear such as clicking, catching or instability"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing external rotation weakness and infraspinatus wasting to a rotator cuff tear without imaging or electrophysiology",
-     "Prevent diagnostic or management error"
+    "prognosis": "Traction and overuse cases and those with a decompressed or aspirated ganglion generally recover strength over months, particularly when an associated labral tear is addressed. Long-standing entrapment with established fatty atrophy of the muscle recovers less completely, leaving persistent weakness of external rotation.",
+    "pitfalls": [
+      "Attributing external rotation weakness and infraspinatus wasting to a rotator cuff tear without imaging or electrophysiology",
+      "Missing a spinoglenoid notch ganglion and its associated labral tear as a treatable cause",
+      "Confusing the deep aching pain with primary glenohumeral joint disease",
+      "Overlooking neuralgic amyotrophy in acute painful presentations",
+      "Failing to localise the lesion by not distinguishing isolated infraspinatus from combined supraspinatus and infraspinatus involvement"
+    ],
+    "references": [
+      "Green's Operative Hand Surgery",
+      "Stewart's Focal Peripheral Neuropathies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage traction and overuse cases conservatively with activity modification, avoidance of provocative overhead movement, physiotherapy and analgesia",
+      "Treat a spinoglenoid or suprascapular notch ganglion cyst by image-guided aspiration or surgical excision, addressing any associated glenoid labral tear",
+      "Offer surgical decompression, including release of the transverse scapular ligament, for entrapment that fails conservative management",
+      "Consider a diagnostic and therapeutic suprascapular nerve block in selected patients",
+      "Monitor recovery with serial needle electromyography for evidence of reinnervation",
+      "Refer earlier for surgery where established fatty atrophy predicts poorer spontaneous recovery, involving shoulder and orthopaedic services"
     ]
-   ],
-   "caption": "Overview comparison matrix for suprascapular neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "suprascapular-neuropathy-real-image",
-   "title": "suprascapular neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "suprascapular_neuropathy-pathway",
+      "title": "suprascapular neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Entrapment or injury of the suprascapular nerve, most often at the suprascapular notch beneath the transverse scapular ligament or more distally at the spinoglenoid notch",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe shoulder-girdle pain followed by weakness and wasting, suggesting neuralgic amyotrophy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Needle electromyography of supraspinatus and infraspinatus to localise the lesion to the suprascapular or spinoglenoid notch, Nerve conduction studies measuring suprascapular motor latencies to the two muscles, MRI of the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage traction and overuse cases conservatively with activity modification, avoidance of provocative overhead movement, physiotherapy and analgesia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing external rotation weakness and infraspinatus wasting to a rotator cuff tear without imaging or electrophysiology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of suprascapular neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "suprascapular_neuropathy-matrix",
+      "title": "suprascapular neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Entrapment or injury of the suprascapular nerve, most often at the suprascapular notch beneath the transverse scapular ligament",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Needle electromyography of supraspinatus and infraspinatus to localise the lesion to the suprascapular or spinoglenoid notch,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rotator cuff tear (supraspinatus or infraspinatus), C5-C6 cervical radiculopathy, Neuralgic amyotrophy (Parsonage-Turner syndrome)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage traction and overuse cases conservatively with activity modification, avoidance of provocative overhead movement,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing external rotation weakness and infraspinatus wasting to a rotator cuff tear without imaging or electrophysiology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for suprascapular neuropathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "suprascapular_neuropathy-dx-mgmt",
+      "title": "Diagnosis and management of suprascapular neuropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected suprascapular neuropathy: external rotation weakness and infraspinatus wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute pain then weakness, mass on imaging, rapid wasting)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review: rapidly progressive or profound wasting despite conservative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Needle EMG of supraspinatus and infraspinatus; nerve conduction; shoulder MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does EMG localise the lesion to the suprascapular or spinoglenoid notch?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-evaluate for rotator cuff tear, C5-C6 radiculopathy or neuralgic amyotrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activity modification and physiotherapy for traction or overuse cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aspiration or excision of a ganglion, addressing any labral tear",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical decompression for entrapment that fails conservative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial EMG to monitor reinnervation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most traction, overuse and decompressed cases regain strength over months",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "suprascapular_neuropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Needle EMG of supraspinatus and infraspinatus",
+          "cells": [
+            {
+              "text": "Localises the lesion to the suprascapular or spinoglenoid notch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Suprascapular motor latencies to the two muscles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the shoulder",
+          "cells": [
+            {
+              "text": "Ganglion cyst, labral tear, and the pattern of muscle oedema or fatty atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or ultrasound arthrography",
+          "cells": [
+            {
+              "text": "Posterosuperior labral tear, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine imaging",
+          "cells": [
+            {
+              "text": "C5-C6 radiculopathy, when it is a competing diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic suprascapular nerve block",
+          "cells": [
+            {
+              "text": "Selected cases, as a diagnostic and therapeutic step"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "suprascapular_neuropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rotator cuff tear",
+          "cells": [
+            {
+              "text": "Tear is confirmed on imaging, not assumed from weakness and infraspinatus wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C5-C6 cervical radiculopathy",
+          "cells": [
+            {
+              "text": "Cervical cause must be excluded; the suprascapular nerve has no cutaneous territory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuralgic amyotrophy",
+          "cells": [
+            {
+              "text": "Acute severe shoulder-girdle pain followed by weakness and wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glenohumeral or AC joint pathology",
+          "cells": [
+            {
+              "text": "Deep, poorly localised posterolateral ache can be mistaken for primary joint disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quadrilateral space syndrome",
+          "cells": [
+            {
+              "text": "Axillary neuropathy is an alternative cause of shoulder wasting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "suprascapular_neuropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification and physiotherapy",
+          "cells": [
+            {
+              "text": "Traction or overuse cases; avoid provocative overhead movement; analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration or excision of ganglion",
+          "cells": [
+            {
+              "text": "Spinoglenoid or suprascapular notch cyst, with any associated labral tear addressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Transverse scapular ligament release, for entrapment failing conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suprascapular nerve block",
+          "cells": [
+            {
+              "text": "Selected patients, as diagnostic and therapeutic step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial needle EMG",
+          "cells": [
+            {
+              "text": "Monitors recovery for evidence of reinnervation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Earlier surgical referral",
+          "cells": [
+            {
+              "text": "Where established fatty atrophy predicts poorer spontaneous recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

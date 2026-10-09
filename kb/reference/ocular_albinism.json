@@ -1,174 +1,471 @@
 {
- "id": "ocular_albinism",
- "name": "Ocular albinism (GPR143)",
- "aliases": [
-  "X-linked ocular albinism",
-  "ocular albinism type 1",
-  "OA1",
-  "Nettleship-Falls ocular albinism",
-  "GPR143"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked recessive disorder in which pigment deficiency is largely confined to the eye, with near-normal skin and hair pigmentation",
-   "Affected boys present with reduced acuity, congenital nystagmus, iris transillumination and photophobia",
-   "Foveal hypoplasia and hypopigmentation of the fundus with prominent choroidal vessels are characteristic",
-   "Misrouting of optic nerve fibres at the chiasm produces abnormal decussation, detectable on visual evoked potentials and associated with reduced stereopsis and strabismus",
-   "Caused by mutations in GPR143, encoding a G-protein-coupled receptor involved in melanosome biogenesis, giving giant melanosomes (macromelanosomes)",
-   "Carrier females may show a partial mud-splattered or mosaic fundus pigmentation and patchy iris transillumination due to lyonisation",
-   "Management is supportive with refractive correction, tinted lenses for photophobia, low-vision aids and strabismus care"
+  "id": "ocular_albinism",
+  "name": "Ocular albinism (GPR143)",
+  "aliases": [
+    "X-linked ocular albinism",
+    "ocular albinism type 1",
+    "OA1",
+    "Nettleship-Falls ocular albinism",
+    "GPR143"
   ],
-  "pathophysiology": "Ocular albinism type 1 arises from mutations in the X-linked GPR143 gene, whose product regulates melanosome maturation and size within the retinal pigment epithelium and other melanocytes. Loss of function leads to abnormal, enlarged melanosomes and deficient ocular melanin, chiefly affecting the eye while skin and hair are relatively spared. Reduced retinal pigment impairs normal foveal development (foveal hypoplasia) and disturbs the guidance cues that determine crossing of ganglion cell axons at the chiasm, causing excessive decussation and misrouting. The combined effects produce nystagmus, subnormal acuity, iris transillumination and defective binocular vision. Female carriers show mosaic features owing to random X-inactivation.",
-  "additionalDifferentials": [
-   "Oculocutaneous albinism (tyrosinase-related and other types)",
-   "Idiopathic congenital (infantile) nystagmus",
-   "Isolated foveal hypoplasia (PAX6-related)",
-   "Achromatopsia and blue-cone monochromacy",
-   "Aniridia with foveal hypoplasia",
-   "Retinal dystrophies presenting in infancy"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp iris transillumination assessment",
-   "Dilated fundus examination for hypopigmentation and foveal hypoplasia",
-   "OCT of the macula to grade foveal hypoplasia",
-   "Visual evoked potentials to demonstrate chiasmal misrouting",
-   "Cycloplegic refraction and orthoptic/strabismus assessment",
-   "Genetic testing of GPR143 and albinism gene panels"
-  ],
-  "redFlags": [
-   "Systemic bleeding tendency or recurrent infections suggesting syndromic albinism (Hermansky-Pudlak or Chediak-Higashi) rather than isolated ocular disease",
-   "Progressive rather than stable visual loss prompting reassessment for a retinal dystrophy",
-   "Marked asymmetry of findings requiring exclusion of other pathology",
-   "Failure to thrive or dysmorphism suggesting a broader syndrome"
-  ],
-  "prognosis": "Vision is subnormal but usually stable, with acuity commonly in the low-vision range; most individuals function well with refractive correction, tints and low-vision support.",
-  "pitfalls": [
-   "Overlooking the diagnosis in a boy with nystagmus because skin and hair look normal",
-   "Missing carrier status in the mother by not examining her iris and fundus",
-   "Failing to check for syndromic albinism when there is bruising or infection",
-   "Attributing poor acuity solely to nystagmus and neglecting foveal hypoplasia"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific treatment; optimise vision with full refractive correction and tinted or photochromic lenses to reduce photophobia",
-   "Low-vision aids and rehabilitation to support education and daily function",
-   "Orthoptic assessment and management of strabismus and nystagmus, with squint surgery or nystagmus null-point and head-posture surgery in selected cases",
-   "Regular ophthalmological follow-up to monitor acuity and refractive changes",
-   "Genetic counselling for X-linked GPR143 inheritance, with carrier testing of female relatives",
-   "Educational and occupational low-vision support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ocular_albinism-pathway",
-   "title": "Ocular albinism (GPR143): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked recessive disorder in which pigment deficiency is largely confined to the eye, with near-normal skin and hair pigmentation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Systemic bleeding tendency or recurrent infections suggesting syndromic albinism (Hermansky-Pudlak or Chediak-Higashi) rather than isolated ocular disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp iris transillumination assessment, Dilated fundus examination for hypopigmentation and foveal hypoplasia, OCT of the macula to grade foveal hypoplasia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific treatment; optimise vision with full refractive correction and tinted or photochromic lenses to reduce photophobia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis in a boy with nystagmus because skin and hair look normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ocular albinism (gpr143)."
-  }
- ],
- "tables": [
-  {
-   "id": "ocular_albinism-matrix",
-   "title": "Ocular albinism (GPR143): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked recessive disorder in which pigment deficiency is largely confined to the eye, with near-normal skin and hair",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked recessive disorder in which pigment deficiency is largely confined to the eye, with near-normal skin and hair pigmentation",
+      "Affected boys present with reduced acuity, congenital nystagmus, iris transillumination and photophobia",
+      "Foveal hypoplasia and hypopigmentation of the fundus with prominent choroidal vessels are characteristic",
+      "Misrouting of optic nerve fibres at the chiasm produces abnormal decussation, detectable on visual evoked potentials and associated with reduced stereopsis and strabismus",
+      "Caused by mutations in GPR143, encoding a G-protein-coupled receptor involved in melanosome biogenesis, giving giant melanosomes (macromelanosomes)",
+      "Carrier females may show a partial mud-splattered or mosaic fundus pigmentation and patchy iris transillumination due to lyonisation",
+      "Management is supportive with refractive correction, tinted lenses for photophobia, low-vision aids and strabismus care"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp iris transillumination assessment, Dilated fundus examination for hypopigmentation and foveal hypoplasia, OCT of the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ocular albinism type 1 arises from mutations in the X-linked GPR143 gene, whose product regulates melanosome maturation and size within the retinal pigment epithelium and other melanocytes. Loss of function leads to abnormal, enlarged melanosomes and deficient ocular melanin, chiefly affecting the eye while skin and hair are relatively spared. Reduced retinal pigment impairs normal foveal development (foveal hypoplasia) and disturbs the guidance cues that determine crossing of ganglion cell axons at the chiasm, causing excessive decussation and misrouting. The combined effects produce nystagmus, subnormal acuity, iris transillumination and defective binocular vision. Female carriers show mosaic features owing to random X-inactivation.",
+    "additionalDifferentials": [
+      "Oculocutaneous albinism (tyrosinase-related and other types)",
+      "Idiopathic congenital (infantile) nystagmus",
+      "Isolated foveal hypoplasia (PAX6-related)",
+      "Achromatopsia and blue-cone monochromacy",
+      "Aniridia with foveal hypoplasia",
+      "Retinal dystrophies presenting in infancy"
     ],
-    [
-     "Primary Differentials",
-     "Oculocutaneous albinism (tyrosinase-related and other types), Idiopathic congenital (infantile) nystagmus, Isolated foveal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp iris transillumination assessment",
+      "Dilated fundus examination for hypopigmentation and foveal hypoplasia",
+      "OCT of the macula to grade foveal hypoplasia",
+      "Visual evoked potentials to demonstrate chiasmal misrouting",
+      "Cycloplegic refraction and orthoptic/strabismus assessment",
+      "Genetic testing of GPR143 and albinism gene panels"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific treatment; optimise vision with full refractive correction and tinted or photochromic lenses to reduce",
-     "Core treatment modality"
+    "redFlags": [
+      "Systemic bleeding tendency or recurrent infections suggesting syndromic albinism (Hermansky-Pudlak or Chediak-Higashi) rather than isolated ocular disease",
+      "Progressive rather than stable visual loss prompting reassessment for a retinal dystrophy",
+      "Marked asymmetry of findings requiring exclusion of other pathology",
+      "Failure to thrive or dysmorphism suggesting a broader syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis in a boy with nystagmus because skin and hair look normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vision is subnormal but usually stable, with acuity commonly in the low-vision range; most individuals function well with refractive correction, tints and low-vision support.",
+    "pitfalls": [
+      "Overlooking the diagnosis in a boy with nystagmus because skin and hair look normal",
+      "Missing carrier status in the mother by not examining her iris and fundus",
+      "Failing to check for syndromic albinism when there is bruising or infection",
+      "Attributing poor acuity solely to nystagmus and neglecting foveal hypoplasia"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific treatment; optimise vision with full refractive correction and tinted or photochromic lenses to reduce photophobia",
+      "Low-vision aids and rehabilitation to support education and daily function",
+      "Orthoptic assessment and management of strabismus and nystagmus, with squint surgery or nystagmus null-point and head-posture surgery in selected cases",
+      "Regular ophthalmological follow-up to monitor acuity and refractive changes",
+      "Genetic counselling for X-linked GPR143 inheritance, with carrier testing of female relatives",
+      "Educational and occupational low-vision support"
     ]
-   ],
-   "caption": "Overview comparison matrix for ocular albinism (gpr143)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ocular-albinism-real-image",
-   "title": "Ocular albinism (GPR143): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ocular_albinism-pathway",
+      "title": "Ocular albinism (GPR143): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked recessive disorder in which pigment deficiency is largely confined to the eye, with near-normal skin and hair pigmentation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Systemic bleeding tendency or recurrent infections suggesting syndromic albinism (Hermansky-Pudlak or Chediak-Higashi) rather than isolated ocular disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp iris transillumination assessment, Dilated fundus examination for hypopigmentation and foveal hypoplasia, OCT of the macula to grade foveal hypoplasia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific treatment; optimise vision with full refractive correction and tinted or photochromic lenses to reduce photophobia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis in a boy with nystagmus because skin and hair look normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ocular albinism (gpr143)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ocular_albinism-matrix",
+      "title": "Ocular albinism (GPR143): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked recessive disorder in which pigment deficiency is largely confined to the eye, with near-normal skin and hair",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp iris transillumination assessment, Dilated fundus examination for hypopigmentation and foveal hypoplasia, OCT of the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oculocutaneous albinism (tyrosinase-related and other types), Idiopathic congenital (infantile) nystagmus, Isolated foveal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific treatment; optimise vision with full refractive correction and tinted or photochromic lenses to reduce",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis in a boy with nystagmus because skin and hair look normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ocular albinism (gpr143)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ocular_albinism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp iris transillumination",
+          "cells": [
+            {
+              "text": "Iris transillumination in affected boys"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Fundus hypopigmentation with prominent choroidal vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the macula",
+          "cells": [
+            {
+              "text": "Grades foveal hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual evoked potentials",
+          "cells": [
+            {
+              "text": "Chiasmal misrouting of optic nerve fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction and orthoptic assessment",
+          "cells": [
+            {
+              "text": "Strabismus and reduced stereopsis, linked to chiasmal misrouting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GPR143 and albinism gene panel testing",
+          "cells": [
+            {
+              "text": "Mutation in GPR143, the X-linked gene for this condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ocular_albinism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oculocutaneous albinism",
+          "cells": [
+            {
+              "text": "Skin and hair pigmentation is reduced; in this condition they are near normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal dystrophies",
+          "cells": [
+            {
+              "text": "Progressive rather than stable visual loss; this condition is usually stable"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ocular_albinism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Refractive correction and tints",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Full refractive correction; tinted or photochromic lenses for photophobia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision aids and rehabilitation",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Supports education and daily function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic management of strabismus and nystagmus",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Squint surgery, or nystagmus null-point and head-posture surgery, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular ophthalmology follow-up",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Monitors acuity and refractive change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "X-linked GPR143 inheritance; carrier testing of female relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational and occupational support",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Low-vision support for schooling and work"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ocular_albinism-dx-mgmt",
+      "title": "Diagnosis and management of Ocular albinism (GPR143)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Boy with congenital nystagmus, reduced acuity and iris transillumination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bleeding, recurrent infection, progressive loss or dysmorphism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: assess for syndromic albinism such as Hermansky-Pudlak or Chediak-Higashi",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Iris transillumination, fundus examination, OCT for foveal hypoplasia and VEP",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do GPR143 testing and VEP support X-linked ocular albinism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider oculocutaneous albinism, isolated foveal hypoplasia or infantile retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Full refractive correction and tinted or photochromic lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-vision aids and rehabilitation for education and daily function",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthoptic care for strabismus and nystagmus; surgery in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and carrier testing of female relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vision usually stable at a low-vision level; most manage well with correction and support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

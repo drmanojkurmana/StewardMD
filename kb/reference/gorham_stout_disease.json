@@ -1,173 +1,460 @@
 {
- "id": "gorham_stout_disease",
- "name": "Gorham-Stout disease (vanishing bone disease)",
- "aliases": [
-  "vanishing bone disease",
-  "massive osteolysis",
-  "phantom bone disease",
-  "Gorham disease"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare disorder of progressive, spontaneous massive osteolysis with replacement of bone by proliferating thin-walled vascular and lymphatic channels",
-   "Bone is resorbed and effectively disappears on serial radiographs, giving rise to the vanishing or phantom bone description",
-   "Can affect any bone but has a predilection for the shoulder girdle, skull, spine, pelvis, and ribs, and it may cross joints and normal anatomical boundaries",
-   "Presents with insidious pain, weakness, deformity, or a pathological fracture, sometimes discovered incidentally",
-   "Involvement of the ribs, spine, or thoracic duct can lead to chylothorax, a serious and potentially fatal complication",
-   "It is a diagnosis of exclusion, requiring biopsy showing angiomatous or lymphangiomatous proliferation and exclusion of infection, malignancy, and other osteolytic disease",
-   "Management is individualised and may combine antiresorptive therapy, agents targeting abnormal vascular and lymphatic proliferation, radiotherapy, and surgical stabilisation"
+  "id": "gorham_stout_disease",
+  "name": "Gorham-Stout disease (vanishing bone disease)",
+  "aliases": [
+    "vanishing bone disease",
+    "massive osteolysis",
+    "phantom bone disease",
+    "Gorham disease"
   ],
-  "pathophysiology": "Gorham-Stout disease is characterised by uncontrolled proliferation of vascular and lymphatic endothelial channels within bone that progressively replace and destroy the osseous matrix. The abnormal vessels and associated osteoclastic activity dissolve bone in a relentless, often locally aggressive fashion, though the process does not metastasise. The trigger is not fully understood, but dysregulated lymphangiogenesis and angiogenesis, with increased osteoclast sensitivity to humoral factors, are thought central. When the disease reaches the thoracic cavity or thoracic duct, abnormal lymphatic channels can leak, producing chylous effusions that carry significant morbidity and mortality.",
-  "additionalDifferentials": [
-   "Metastatic bone disease or multiple myeloma",
-   "Osteomyelitis with bone destruction",
-   "Skeletal angiomatosis or lymphangiomatosis",
-   "Primary bone malignancy such as haemangioendothelioma",
-   "Hyperparathyroidism with osteolysis",
-   "Other idiopathic osteolysis syndromes"
-  ],
-  "additionalInvestigations": [
-   "Serial plain radiographs documenting progressive osteolysis and disappearance of bone",
-   "MRI and CT to define soft-tissue and vascular-lymphatic involvement",
-   "Bone biopsy demonstrating angiomatous or lymphangiomatous tissue and excluding malignancy",
-   "Chest imaging and pleural fluid analysis where chylothorax is suspected",
-   "Inflammatory markers, serum calcium, and bone turnover markers",
-   "Screening for associated lymphatic anomalies in adjacent tissues"
-  ],
-  "redFlags": [
-   "Dyspnoea and a chylous pleural effusion indicating thoracic duct or rib involvement",
-   "Rapidly progressive osteolysis threatening the spine with instability or cord compromise",
-   "Pathological fracture in a weight-bearing or load-critical bone",
-   "Skull-base involvement with neurological deficit or cerebrospinal fluid leak"
-  ],
-  "prognosis": "The course is unpredictable; disease may stabilise spontaneously or progress relentlessly, and prognosis is generally good when confined to an extremity but markedly worse with thoracic involvement and chylothorax.",
-  "pitfalls": [
-   "Labelling the osteolysis as malignancy or infection without appropriate biopsy",
-   "Underestimating the risk of chylothorax when ribs, spine, or thorax are affected",
-   "Assuming stabilisation is permanent and stopping surveillance too early",
-   "Attempting isolated surgery without addressing the underlying vascular-lymphatic process, risking recurrence"
-  ],
-  "references": [
-   "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
-   "Peer-reviewed reviews of Gorham-Stout disease and complex lymphatic anomalies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give antiresorptive therapy with bisphosphonates to inhibit the osteoclastic bone destruction",
-   "Use anti-angiogenic and antiproliferative agents such as interferon-alpha and the mTOR inhibitor sirolimus to target the abnormal vascular and lymphatic proliferation",
-   "Deliver localised radiotherapy to halt progression at aggressive or surgically inaccessible sites",
-   "Provide surgical stabilisation, resection and reconstruction with bone grafting or orthopaedic fixation for pathological fracture, deformity or instability",
-   "Manage chylothorax aggressively with drainage, a low-fat medium-chain-triglyceride diet, thoracic duct intervention and sirolimus, given its high mortality",
-   "Monitor osteolysis with serial imaging and coordinate multidisciplinary metabolic bone, orthopaedic, interventional radiology, thoracic surgery and lymphatic-anomaly care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gorham_stout_disease-pathway",
-   "title": "Gorham-Stout disease (vanishing bone disease): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare disorder of progressive, spontaneous massive osteolysis with replacement of bone by proliferating thin-walled vascular and lymphatic channels",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Dyspnoea and a chylous pleural effusion indicating thoracic duct or rib involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial plain radiographs documenting progressive osteolysis and disappearance of bone, MRI and CT to define soft-tissue and vascular-lymphatic involvement, Bone biopsy demonstrating angiomatous or lymphangiomatous tissue"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give antiresorptive therapy with bisphosphonates to inhibit the osteoclastic bone destruction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the osteolysis as malignancy or infection without appropriate biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gorham-stout disease (vanishing bone disease)."
-  }
- ],
- "tables": [
-  {
-   "id": "gorham_stout_disease-matrix",
-   "title": "Gorham-Stout disease (vanishing bone disease): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare disorder of progressive, spontaneous massive osteolysis with replacement of bone by proliferating thin-walled vascular and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare disorder of progressive, spontaneous massive osteolysis with replacement of bone by proliferating thin-walled vascular and lymphatic channels",
+      "Bone is resorbed and effectively disappears on serial radiographs, giving rise to the vanishing or phantom bone description",
+      "Can affect any bone but has a predilection for the shoulder girdle, skull, spine, pelvis, and ribs, and it may cross joints and normal anatomical boundaries",
+      "Presents with insidious pain, weakness, deformity, or a pathological fracture, sometimes discovered incidentally",
+      "Involvement of the ribs, spine, or thoracic duct can lead to chylothorax, a serious and potentially fatal complication",
+      "It is a diagnosis of exclusion, requiring biopsy showing angiomatous or lymphangiomatous proliferation and exclusion of infection, malignancy, and other osteolytic disease",
+      "Management is individualised and may combine antiresorptive therapy, agents targeting abnormal vascular and lymphatic proliferation, radiotherapy, and surgical stabilisation"
     ],
-    [
-     "Key Investigations",
-     "Serial plain radiographs documenting progressive osteolysis and disappearance of bone, MRI and CT to define soft-tissue and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gorham-Stout disease is characterised by uncontrolled proliferation of vascular and lymphatic endothelial channels within bone that progressively replace and destroy the osseous matrix. The abnormal vessels and associated osteoclastic activity dissolve bone in a relentless, often locally aggressive fashion, though the process does not metastasise. The trigger is not fully understood, but dysregulated lymphangiogenesis and angiogenesis, with increased osteoclast sensitivity to humoral factors, are thought central. When the disease reaches the thoracic cavity or thoracic duct, abnormal lymphatic channels can leak, producing chylous effusions that carry significant morbidity and mortality.",
+    "additionalDifferentials": [
+      "Metastatic bone disease or multiple myeloma",
+      "Osteomyelitis with bone destruction",
+      "Skeletal angiomatosis or lymphangiomatosis",
+      "Primary bone malignancy such as haemangioendothelioma",
+      "Hyperparathyroidism with osteolysis",
+      "Other idiopathic osteolysis syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Metastatic bone disease or multiple myeloma, Osteomyelitis with bone destruction, Skeletal angiomatosis or lymphangiomatosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial plain radiographs documenting progressive osteolysis and disappearance of bone",
+      "MRI and CT to define soft-tissue and vascular-lymphatic involvement",
+      "Bone biopsy demonstrating angiomatous or lymphangiomatous tissue and excluding malignancy",
+      "Chest imaging and pleural fluid analysis where chylothorax is suspected",
+      "Inflammatory markers, serum calcium, and bone turnover markers",
+      "Screening for associated lymphatic anomalies in adjacent tissues"
     ],
-    [
-     "Management Strategy",
-     "Give antiresorptive therapy with bisphosphonates to inhibit the osteoclastic bone destruction",
-     "Core treatment modality"
+    "redFlags": [
+      "Dyspnoea and a chylous pleural effusion indicating thoracic duct or rib involvement",
+      "Rapidly progressive osteolysis threatening the spine with instability or cord compromise",
+      "Pathological fracture in a weight-bearing or load-critical bone",
+      "Skull-base involvement with neurological deficit or cerebrospinal fluid leak"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the osteolysis as malignancy or infection without appropriate biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is unpredictable; disease may stabilise spontaneously or progress relentlessly, and prognosis is generally good when confined to an extremity but markedly worse with thoracic involvement and chylothorax.",
+    "pitfalls": [
+      "Labelling the osteolysis as malignancy or infection without appropriate biopsy",
+      "Underestimating the risk of chylothorax when ribs, spine, or thorax are affected",
+      "Assuming stabilisation is permanent and stopping surveillance too early",
+      "Attempting isolated surgery without addressing the underlying vascular-lymphatic process, risking recurrence"
+    ],
+    "references": [
+      "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+      "Peer-reviewed reviews of Gorham-Stout disease and complex lymphatic anomalies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give antiresorptive therapy with bisphosphonates to inhibit the osteoclastic bone destruction",
+      "Use anti-angiogenic and antiproliferative agents such as interferon-alpha and the mTOR inhibitor sirolimus to target the abnormal vascular and lymphatic proliferation",
+      "Deliver localised radiotherapy to halt progression at aggressive or surgically inaccessible sites",
+      "Provide surgical stabilisation, resection and reconstruction with bone grafting or orthopaedic fixation for pathological fracture, deformity or instability",
+      "Manage chylothorax aggressively with drainage, a low-fat medium-chain-triglyceride diet, thoracic duct intervention and sirolimus, given its high mortality",
+      "Monitor osteolysis with serial imaging and coordinate multidisciplinary metabolic bone, orthopaedic, interventional radiology, thoracic surgery and lymphatic-anomaly care"
     ]
-   ],
-   "caption": "Overview comparison matrix for gorham-stout disease (vanishing bone disease)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gorham-stout-disease-real-image",
-   "title": "Gorham-Stout disease (vanishing bone disease): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "gorham_stout_disease-pathway",
+      "title": "Gorham-Stout disease (vanishing bone disease): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare disorder of progressive, spontaneous massive osteolysis with replacement of bone by proliferating thin-walled vascular and lymphatic channels",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Dyspnoea and a chylous pleural effusion indicating thoracic duct or rib involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial plain radiographs documenting progressive osteolysis and disappearance of bone, MRI and CT to define soft-tissue and vascular-lymphatic involvement, Bone biopsy demonstrating angiomatous or lymphangiomatous tissue"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give antiresorptive therapy with bisphosphonates to inhibit the osteoclastic bone destruction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the osteolysis as malignancy or infection without appropriate biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gorham-stout disease (vanishing bone disease)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gorham_stout_disease-matrix",
+      "title": "Gorham-Stout disease (vanishing bone disease): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare disorder of progressive, spontaneous massive osteolysis with replacement of bone by proliferating thin-walled vascular and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial plain radiographs documenting progressive osteolysis and disappearance of bone, MRI and CT to define soft-tissue and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Metastatic bone disease or multiple myeloma, Osteomyelitis with bone destruction, Skeletal angiomatosis or lymphangiomatosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give antiresorptive therapy with bisphosphonates to inhibit the osteoclastic bone destruction",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the osteolysis as malignancy or infection without appropriate biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gorham-stout disease (vanishing bone disease)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism (ASBMR)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gorham_stout_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial plain radiographs",
+          "cells": [
+            {
+              "text": "Progressive osteolysis and disappearance of bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI and CT",
+          "cells": [
+            {
+              "text": "Soft-tissue and vascular-lymphatic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone biopsy",
+          "cells": [
+            {
+              "text": "Angiomatous or lymphangiomatous tissue; excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and pleural fluid analysis",
+          "cells": [
+            {
+              "text": "Where chylothorax is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers, serum calcium and bone turnover markers",
+          "cells": [
+            {
+              "text": "Metabolic and inflammatory status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for lymphatic anomalies in adjacent tissue",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gorham_stout_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic bone disease or multiple myeloma",
+          "cells": [
+            {
+              "text": "Osteolysis; excluded by biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteomyelitis",
+          "cells": [
+            {
+              "text": "Bone destruction; infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Osteolysis; excluded by calcium and PTH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gorham_stout_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bisphosphonates",
+          "cells": [
+            {
+              "text": "Inhibit osteoclastic bone destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-angiogenic and antiproliferative agents",
+          "cells": [
+            {
+              "text": "Interferon-alpha or the mTOR inhibitor sirolimus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localised radiotherapy",
+          "cells": [
+            {
+              "text": "To halt progression at aggressive or surgically inaccessible sites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical stabilisation",
+          "cells": [
+            {
+              "text": "Resection, reconstruction or fixation for pathological fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chylothorax management",
+          "cells": [
+            {
+              "text": "Drainage, low-fat MCT diet, thoracic duct intervention and sirolimus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary monitoring",
+          "cells": [
+            {
+              "text": "Serial imaging with metabolic bone, orthopaedic and interventional radiology teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gorham_stout_disease-dx-mgmt",
+      "title": "Diagnosis and management of Gorham-Stout disease (vanishing bone disease)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Gorham-Stout disease: progressive osteolysis with bone disappearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (chylous pleural effusion, spinal instability, pathological fracture)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and chylothorax management for a chylous effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial radiographs, MRI or CT, bone biopsy and chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does bone biopsy show angiomatous or lymphangiomatous tissue, excluding malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider metastasis or myeloma, osteomyelitis, hyperparathyroidism or angiomatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bisphosphonates to inhibit osteoclastic bone destruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sirolimus or interferon-alpha as anti-angiogenic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Localised radiotherapy at aggressive or inaccessible sites",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical stabilisation for pathological fractures and instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Unpredictable; may stabilise or progress, and is generally good when confined to a limb",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

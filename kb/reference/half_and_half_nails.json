@@ -1,172 +1,439 @@
 {
- "id": "half_and_half_nails",
- "name": "Half-and-half nails",
- "aliases": [
-  "Lindsay's nails",
-  "Lindsay nails"
- ],
- "class": "non_infective",
- "system": "Skin / Hair and nails",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Half-and-half nails, or Lindsay nails, show a proximal white or dull ground-glass half sharply demarcated from a distal reddish, pink or brown half.",
-   "The distal band typically occupies from a fifth to a half of the nail length and the transverse border between the two zones is characteristically sharp.",
-   "The strongest association is with chronic kidney disease and uraemia, and the sign may be found in a substantial proportion of patients on dialysis.",
-   "The distal darker band does not fade with nail bed pressure, which helps separate it from Muehrcke lines.",
-   "It is a nail bed change (apparent leukonychia proximally with distal pigmentation) rather than a nail plate abnormality, so it does not migrate distally.",
-   "The proximal whitening is thought to relate to nail bed oedema while the distal band reflects increased melanin and capillary changes.",
-   "The sign is asymptomatic and its value is as a marker prompting assessment of renal function.",
-   "It should be distinguished from Terry nails, where the white zone is more extensive and the distal normal band much narrower."
+  "id": "half_and_half_nails",
+  "name": "Half-and-half nails",
+  "aliases": [
+    "Lindsay's nails",
+    "Lindsay nails"
   ],
-  "pathophysiology": "Half-and-half nails are an apparent leukonychia in which the proximal portion of the nail bed becomes pale and oedematous, obscuring its normal vascular pink, while the distal portion develops a persistent darker band. The proximal whitening is attributed to oedema of the nail bed, whereas the distal brown-red band is thought to result from a combination of increased melanin deposition, thickening of the capillary walls and the concentration of the vascular bed towards the free edge. These changes are strongly linked to the metabolic and microvascular disturbances of chronic renal failure and uraemia, though the exact trigger for the melanin increase is uncertain. Because the process resides in the bed and its melanin is fixed, the distal band neither blanches with pressure nor migrates as the nail grows, distinguishing it from Muehrcke lines.",
-  "additionalDifferentials": [
-   "Terry nails",
-   "Muehrcke lines",
-   "True leukonychia",
-   "Uraemic nail pigmentation",
-   "Normal variant distal nail band",
-   "Onycholysis with distal discolouration"
-  ],
-  "additionalInvestigations": [
-   "Renal function tests (urea, creatinine, eGFR)",
-   "Urinalysis for proteinuria and haematuria",
-   "Assessment for chronic kidney disease and dialysis status",
-   "Digital pressure (blanch) test to distinguish from Muehrcke lines",
-   "Examination of all nails for symmetry of the change",
-   "Full blood count and electrolytes as part of renal workup"
-  ],
-  "redFlags": [
-   "New half-and-half nails in a patient with declining renal function",
-   "Associated signs of uraemia such as pruritus, nausea or fluid overload",
-   "Rapid appearance suggesting acute deterioration of kidney function",
-   "Features overlapping with hepatic disease that might indicate Terry nails instead"
-  ],
-  "prognosis": "The nail change is benign and needs no direct treatment, but it commonly signals chronic kidney disease and therefore follows the prognosis of the underlying renal condition. It may persist or fluctuate with the course of the renal impairment.",
-  "pitfalls": [
-   "Confusing half-and-half nails with Terry nails and misdirecting investigation towards liver rather than kidney",
-   "Mistaking the distal band for Muehrcke lines by not testing whether it blanches",
-   "Overlooking the sign as a prompt to check renal function",
-   "Attributing the pigment to trauma or fungal disease"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Baran and Dawber's Diseases of the Nails and their Management, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that the nail change itself is benign and requires no specific nail treatment",
-   "Investigate and manage the underlying chronic kidney disease and uraemia that the sign reflects",
-   "Optimise chronic kidney disease care including control of hypertension, renal anaemia and mineral bone disease",
-   "Institute renal replacement therapy with dialysis or transplantation for advanced disease, after which the nail change may improve",
-   "Distinguish the fixed distal band from Muehrcke lines using the digital blanch test",
-   "Refer to nephrology for assessment and ongoing management of the renal impairment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "half_and_half_nails-pathway",
-   "title": "Half-and-half nails: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Half-and-half nails, or Lindsay nails, show a proximal white or dull ground-glass half sharply demarcated from a distal reddish, pink or brown half.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New half-and-half nails in a patient with declining renal function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal function tests (urea, creatinine, eGFR), Urinalysis for proteinuria and haematuria, Assessment for chronic kidney disease and dialysis status"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that the nail change itself is benign and requires no specific nail treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing half-and-half nails with Terry nails and misdirecting investigation towards liver rather than kidney"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of half-and-half nails."
-  }
- ],
- "tables": [
-  {
-   "id": "half_and_half_nails-matrix",
-   "title": "Half-and-half nails: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Half-and-half nails, or Lindsay nails, show a proximal white or dull ground-glass half sharply demarcated from a distal reddish,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Hair and nails",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Half-and-half nails, or Lindsay nails, show a proximal white or dull ground-glass half sharply demarcated from a distal reddish, pink or brown half.",
+      "The distal band typically occupies from a fifth to a half of the nail length and the transverse border between the two zones is characteristically sharp.",
+      "The strongest association is with chronic kidney disease and uraemia, and the sign may be found in a substantial proportion of patients on dialysis.",
+      "The distal darker band does not fade with nail bed pressure, which helps separate it from Muehrcke lines.",
+      "It is a nail bed change (apparent leukonychia proximally with distal pigmentation) rather than a nail plate abnormality, so it does not migrate distally.",
+      "The proximal whitening is thought to relate to nail bed oedema while the distal band reflects increased melanin and capillary changes.",
+      "The sign is asymptomatic and its value is as a marker prompting assessment of renal function.",
+      "It should be distinguished from Terry nails, where the white zone is more extensive and the distal normal band much narrower."
     ],
-    [
-     "Key Investigations",
-     "Renal function tests (urea, creatinine, eGFR), Urinalysis for proteinuria and haematuria, Assessment for chronic kidney disease",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Half-and-half nails are an apparent leukonychia in which the proximal portion of the nail bed becomes pale and oedematous, obscuring its normal vascular pink, while the distal portion develops a persistent darker band. The proximal whitening is attributed to oedema of the nail bed, whereas the distal brown-red band is thought to result from a combination of increased melanin deposition, thickening of the capillary walls and the concentration of the vascular bed towards the free edge. These changes are strongly linked to the metabolic and microvascular disturbances of chronic renal failure and uraemia, though the exact trigger for the melanin increase is uncertain. Because the process resides in the bed and its melanin is fixed, the distal band neither blanches with pressure nor migrates as the nail grows, distinguishing it from Muehrcke lines.",
+    "additionalDifferentials": [
+      "Terry nails",
+      "Muehrcke lines",
+      "True leukonychia",
+      "Uraemic nail pigmentation",
+      "Normal variant distal nail band",
+      "Onycholysis with distal discolouration"
     ],
-    [
-     "Primary Differentials",
-     "Terry nails, Muehrcke lines, True leukonychia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal function tests (urea, creatinine, eGFR)",
+      "Urinalysis for proteinuria and haematuria",
+      "Assessment for chronic kidney disease and dialysis status",
+      "Digital pressure (blanch) test to distinguish from Muehrcke lines",
+      "Examination of all nails for symmetry of the change",
+      "Full blood count and electrolytes as part of renal workup"
     ],
-    [
-     "Management Strategy",
-     "Reassure that the nail change itself is benign and requires no specific nail treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "New half-and-half nails in a patient with declining renal function",
+      "Associated signs of uraemia such as pruritus, nausea or fluid overload",
+      "Rapid appearance suggesting acute deterioration of kidney function",
+      "Features overlapping with hepatic disease that might indicate Terry nails instead"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing half-and-half nails with Terry nails and misdirecting investigation towards liver rather than kidney",
-     "Prevent diagnostic or management error"
+    "prognosis": "The nail change is benign and needs no direct treatment, but it commonly signals chronic kidney disease and therefore follows the prognosis of the underlying renal condition. It may persist or fluctuate with the course of the renal impairment.",
+    "pitfalls": [
+      "Confusing half-and-half nails with Terry nails and misdirecting investigation towards liver rather than kidney",
+      "Mistaking the distal band for Muehrcke lines by not testing whether it blanches",
+      "Overlooking the sign as a prompt to check renal function",
+      "Attributing the pigment to trauma or fungal disease"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Baran and Dawber's Diseases of the Nails and their Management, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that the nail change itself is benign and requires no specific nail treatment",
+      "Investigate and manage the underlying chronic kidney disease and uraemia that the sign reflects",
+      "Optimise chronic kidney disease care including control of hypertension, renal anaemia and mineral bone disease",
+      "Institute renal replacement therapy with dialysis or transplantation for advanced disease, after which the nail change may improve",
+      "Distinguish the fixed distal band from Muehrcke lines using the digital blanch test",
+      "Refer to nephrology for assessment and ongoing management of the renal impairment"
     ]
-   ],
-   "caption": "Overview comparison matrix for half-and-half nails."
-  }
- ],
- "diagrams": [
-  {
-   "id": "half-and-half-nails-real-image",
-   "title": "Half-and-half nails: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "half_and_half_nails-pathway",
+      "title": "Half-and-half nails: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Half-and-half nails, or Lindsay nails, show a proximal white or dull ground-glass half sharply demarcated from a distal reddish, pink or brown half.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New half-and-half nails in a patient with declining renal function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal function tests (urea, creatinine, eGFR), Urinalysis for proteinuria and haematuria, Assessment for chronic kidney disease and dialysis status"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that the nail change itself is benign and requires no specific nail treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing half-and-half nails with Terry nails and misdirecting investigation towards liver rather than kidney"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of half-and-half nails."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "half_and_half_nails-matrix",
+      "title": "Half-and-half nails: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Half-and-half nails, or Lindsay nails, show a proximal white or dull ground-glass half sharply demarcated from a distal reddish,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal function tests (urea, creatinine, eGFR), Urinalysis for proteinuria and haematuria, Assessment for chronic kidney disease",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Terry nails, Muehrcke lines, True leukonychia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that the nail change itself is benign and requires no specific nail treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing half-and-half nails with Terry nails and misdirecting investigation towards liver rather than kidney",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for half-and-half nails."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "half_and_half_nails-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal function tests (urea, creatinine, eGFR)",
+          "cells": [
+            {
+              "text": "Assesses the kidney disease the nail sign reflects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Proteinuria and haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital pressure (blanch) test",
+          "cells": [
+            {
+              "text": "Distal band does not fade with pressure, separating it from Muehrcke lines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of all nails",
+          "cells": [
+            {
+              "text": "Symmetry of the change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and electrolytes",
+          "cells": [
+            {
+              "text": "Part of the renal workup"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "half_and_half_nails-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Terry nails",
+          "cells": [
+            {
+              "text": "Much more extensive white zone with a much narrower distal normal band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muehrcke lines",
+          "cells": [
+            {
+              "text": "Fade with nail bed pressure; the distal band of half-and-half nails does not"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "True leukonychia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Onycholysis with distal discolouration",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "half_and_half_nails-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "The nail change itself is benign and needs no specific nail treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage the underlying kidney disease",
+          "cells": [
+            {
+              "text": "Investigate and treat chronic kidney disease and uraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimise chronic kidney disease care",
+          "cells": [
+            {
+              "text": "Control hypertension, renal anaemia and mineral bone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Dialysis or transplantation for advanced disease; the nail change may improve afterwards"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "cells": [
+            {
+              "text": "Assessment and ongoing management of renal impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "half_and_half_nails-dx-mgmt",
+      "title": "Diagnosis and management of Half-and-half nails",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Half-and-half nails on examination, most strongly linked to chronic kidney disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (declining renal function, uraemic symptoms, rapid onset)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent renal assessment for acute deterioration or uraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urea, creatinine, eGFR; urinalysis for proteinuria and haematuria; full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the distal band persist on digital blanch testing, excluding Muehrcke lines?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Terry nails, Muehrcke lines or true leukonychia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that the nail change itself is benign",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage underlying chronic kidney disease, including hypertension and renal anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Refer to nephrology; dialysis or transplantation for advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Nail change benign; kidney disease managed, and the nail may improve after dialysis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

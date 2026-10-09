@@ -1,173 +1,462 @@
 {
- "id": "periapical_abscess",
- "name": "Periapical abscess",
- "aliases": [
-  "dentoalveolar abscess",
-  "apical abscess",
-  "acute periapical abscess",
-  "dental abscess"
- ],
- "class": "infective",
- "system": "Oral / Dental / Maxillofacial",
- "specialty": "Dentistry / OMFS",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard oral medicine & OMFS references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A periapical abscess is a localised collection of pus at the root apex arising from a necrotic, infected pulp",
-   "Classic features are severe, well-localised pain, tenderness to percussion, and a feeling that the tooth is extruded or high on biting",
-   "The affected tooth is typically non-vital, so pulp sensibility testing is negative while percussion and palpation are markedly positive",
-   "Pus may drain spontaneously through a sinus tract (gum boil), which can relieve pain and produce a chronic, less symptomatic picture",
-   "Early radiographs may look normal because bone changes lag behind, whereas chronic lesions show a periapical radiolucency",
-   "Primary management is drainage and elimination of the source through root canal treatment or extraction; antibiotics are adjuncts reserved for spreading infection or systemic involvement",
-   "Infection can track along fascial planes, so the pattern of swelling depends on tooth position relative to muscle attachments",
-   "Recurrent or persistent sinus tracts indicate ongoing infection needing definitive endodontic or surgical treatment"
+  "id": "periapical_abscess",
+  "name": "Periapical abscess",
+  "aliases": [
+    "dentoalveolar abscess",
+    "apical abscess",
+    "acute periapical abscess",
+    "dental abscess"
   ],
-  "pathophysiology": "A periapical abscess develops when pulp necrosis, usually secondary to caries or trauma, allows bacteria and their toxins to egress through the apical foramen into the periapical tissues. The host inflammatory response produces a purulent collection localised to the periradicular bone. Rising pressure causes intense pain and may resorb surrounding bone, seen later as a radiolucency. Pus follows the path of least resistance, perforating cortical bone and tracking into soft tissue, where the relationship of the perforation to muscle attachments determines whether a localised vestibular swelling, a draining sinus, or a spreading fascial-space infection results.",
-  "additionalDifferentials": [
-   "Periodontal abscess arising from the gingival sulcus",
-   "Irreversible pulpitis without abscess formation",
-   "Periapical granuloma or radicular cyst",
-   "Osteomyelitis of the jaw",
-   "Odontogenic infection of adjacent teeth or sinus"
-  ],
-  "additionalInvestigations": [
-   "Pulp sensibility testing (expected non-vital response)",
-   "Percussion, palpation, and mobility assessment",
-   "Periapical radiography and, when needed, cone-beam CT for extent",
-   "Assessment for fascial-space spread and airway compromise in swelling",
-   "Culture and systemic markers if severe or spreading infection"
-  ],
-  "redFlags": [
-   "Rapidly spreading swelling of the floor of mouth or submandibular region raising concern for Ludwig angina and airway obstruction",
-   "Trismus, difficulty swallowing, drooling, or voice change indicating deep-space infection",
-   "Systemic sepsis, high fever, or periorbital/cavernous sinus spread from upper anterior teeth",
-   "Immunocompromised or diabetic patients in whom infection can progress dangerously fast"
-  ],
-  "prognosis": "With timely drainage and source control the prognosis is excellent, but delayed treatment risks spread to fascial spaces, osteomyelitis, airway compromise, or life-threatening sepsis.",
-  "pitfalls": [
-   "Prescribing antibiotics without draining the abscess or removing the source",
-   "Being reassured by a normal early radiograph despite clear clinical signs",
-   "Missing progression to a deep-space or airway-threatening infection",
-   "Confusing a periodontal abscess with a periapical abscess and mistreating the cause"
-  ],
-  "references": [
-   "Burket's Oral Medicine",
-   "Standard OMFS references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Achieve source control by root canal treatment or extraction of the necrotic, infected tooth",
-   "Establish drainage of pus through the tooth or by incision of a fluctuant swelling for immediate relief",
-   "Reserve antibiotics as an adjunct for spreading infection, systemic involvement or immunocompromise",
-   "Provide analgesia for pain control",
-   "Assess for fascial-space spread and airway compromise, escalating urgently if present",
-   "Refer to dentistry or oral and maxillofacial surgery for definitive management",
-   "Provide restorative dental follow-up and caries prevention to reduce recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "periapical_abscess-pathway",
-   "title": "Periapical abscess: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A periapical abscess is a localised collection of pus at the root apex arising from a necrotic, infected pulp",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly spreading swelling of the floor of mouth or submandibular region raising concern for Ludwig angina and airway obstruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pulp sensibility testing (expected non-vital response), Percussion, palpation, and mobility assessment, Periapical radiography and, when needed, cone-beam CT for extent"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Achieve source control by root canal treatment or extraction of the necrotic, infected tooth"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing antibiotics without draining the abscess or removing the source"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of periapical abscess."
-  }
- ],
- "tables": [
-  {
-   "id": "periapical_abscess-matrix",
-   "title": "Periapical abscess: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A periapical abscess is a localised collection of pus at the root apex arising from a necrotic, infected pulp",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Oral / Dental / Maxillofacial",
+  "specialty": "Dentistry / OMFS",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard oral medicine & OMFS references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A periapical abscess is a localised collection of pus at the root apex arising from a necrotic, infected pulp",
+      "Classic features are severe, well-localised pain, tenderness to percussion, and a feeling that the tooth is extruded or high on biting",
+      "The affected tooth is typically non-vital, so pulp sensibility testing is negative while percussion and palpation are markedly positive",
+      "Pus may drain spontaneously through a sinus tract (gum boil), which can relieve pain and produce a chronic, less symptomatic picture",
+      "Early radiographs may look normal because bone changes lag behind, whereas chronic lesions show a periapical radiolucency",
+      "Primary management is drainage and elimination of the source through root canal treatment or extraction; antibiotics are adjuncts reserved for spreading infection or systemic involvement",
+      "Infection can track along fascial planes, so the pattern of swelling depends on tooth position relative to muscle attachments",
+      "Recurrent or persistent sinus tracts indicate ongoing infection needing definitive endodontic or surgical treatment"
     ],
-    [
-     "Key Investigations",
-     "Pulp sensibility testing (expected non-vital response), Percussion, palpation, and mobility assessment, Periapical radiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A periapical abscess develops when pulp necrosis, usually secondary to caries or trauma, allows bacteria and their toxins to egress through the apical foramen into the periapical tissues. The host inflammatory response produces a purulent collection localised to the periradicular bone. Rising pressure causes intense pain and may resorb surrounding bone, seen later as a radiolucency. Pus follows the path of least resistance, perforating cortical bone and tracking into soft tissue, where the relationship of the perforation to muscle attachments determines whether a localised vestibular swelling, a draining sinus, or a spreading fascial-space infection results.",
+    "additionalDifferentials": [
+      "Periodontal abscess arising from the gingival sulcus",
+      "Irreversible pulpitis without abscess formation",
+      "Periapical granuloma or radicular cyst",
+      "Osteomyelitis of the jaw",
+      "Odontogenic infection of adjacent teeth or sinus"
     ],
-    [
-     "Primary Differentials",
-     "Periodontal abscess arising from the gingival sulcus, Irreversible pulpitis without abscess formation, Periapical granuloma or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pulp sensibility testing (expected non-vital response)",
+      "Percussion, palpation, and mobility assessment",
+      "Periapical radiography and, when needed, cone-beam CT for extent",
+      "Assessment for fascial-space spread and airway compromise in swelling",
+      "Culture and systemic markers if severe or spreading infection"
     ],
-    [
-     "Management Strategy",
-     "Achieve source control by root canal treatment or extraction of the necrotic, infected tooth",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly spreading swelling of the floor of mouth or submandibular region raising concern for Ludwig angina and airway obstruction",
+      "Trismus, difficulty swallowing, drooling, or voice change indicating deep-space infection",
+      "Systemic sepsis, high fever, or periorbital/cavernous sinus spread from upper anterior teeth",
+      "Immunocompromised or diabetic patients in whom infection can progress dangerously fast"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing antibiotics without draining the abscess or removing the source",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely drainage and source control the prognosis is excellent, but delayed treatment risks spread to fascial spaces, osteomyelitis, airway compromise, or life-threatening sepsis.",
+    "pitfalls": [
+      "Prescribing antibiotics without draining the abscess or removing the source",
+      "Being reassured by a normal early radiograph despite clear clinical signs",
+      "Missing progression to a deep-space or airway-threatening infection",
+      "Confusing a periodontal abscess with a periapical abscess and mistreating the cause"
+    ],
+    "references": [
+      "Burket's Oral Medicine",
+      "Standard OMFS references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Achieve source control by root canal treatment or extraction of the necrotic, infected tooth",
+      "Establish drainage of pus through the tooth or by incision of a fluctuant swelling for immediate relief",
+      "Reserve antibiotics as an adjunct for spreading infection, systemic involvement or immunocompromise",
+      "Provide analgesia for pain control",
+      "Assess for fascial-space spread and airway compromise, escalating urgently if present",
+      "Refer to dentistry or oral and maxillofacial surgery for definitive management",
+      "Provide restorative dental follow-up and caries prevention to reduce recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for periapical abscess."
-  }
- ],
- "diagrams": [
-  {
-   "id": "periapical-abscess-real-image",
-   "title": "Periapical abscess: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "periapical_abscess-pathway",
+      "title": "Periapical abscess: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A periapical abscess is a localised collection of pus at the root apex arising from a necrotic, infected pulp",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly spreading swelling of the floor of mouth or submandibular region raising concern for Ludwig angina and airway obstruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pulp sensibility testing (expected non-vital response), Percussion, palpation, and mobility assessment, Periapical radiography and, when needed, cone-beam CT for extent"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Achieve source control by root canal treatment or extraction of the necrotic, infected tooth"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing antibiotics without draining the abscess or removing the source"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of periapical abscess."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "periapical_abscess-matrix",
+      "title": "Periapical abscess: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A periapical abscess is a localised collection of pus at the root apex arising from a necrotic, infected pulp",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pulp sensibility testing (expected non-vital response), Percussion, palpation, and mobility assessment, Periapical radiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Periodontal abscess arising from the gingival sulcus, Irreversible pulpitis without abscess formation, Periapical granuloma or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Achieve source control by root canal treatment or extraction of the necrotic, infected tooth",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing antibiotics without draining the abscess or removing the source",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for periapical abscess."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "periapical_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulp sensibility testing",
+          "cells": [
+            {
+              "text": "Expected non-vital response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percussion, palpation and mobility assessment",
+          "cells": [
+            {
+              "text": "Tooth tenderness, palpation and mobility findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periapical radiography; cone-beam CT when needed",
+          "cells": [
+            {
+              "text": "Extent of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for fascial-space spread and airway compromise",
+          "cells": [
+            {
+              "text": "Spread of infection in swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture and systemic markers",
+          "cells": [
+            {
+              "text": "Severe or spreading infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periapical_abscess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Periodontal abscess",
+          "cells": [
+            {
+              "text": "Arises from the gingival sulcus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irreversible pulpitis",
+          "cells": [
+            {
+              "text": "Occurs without abscess formation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "periapical_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Root canal treatment or extraction of the necrotic, infected tooth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage",
+          "cells": [
+            {
+              "text": "Drain pus through the tooth or incise a fluctuant swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Adjunct only for spreading infection, systemic involvement or immunocompromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Pain control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fascial-space and airway check",
+          "cells": [
+            {
+              "text": "Assess for spread and airway compromise; escalate urgently if present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Dentistry or oral and maxillofacial surgery for definitive management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restorative follow-up",
+          "cells": [
+            {
+              "text": "Caries prevention and restorative care to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "periapical_abscess-dx-mgmt",
+      "title": "Diagnosis and management of Periapical abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tooth pain with swelling from a necrotic, infected tooth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid floor-of-mouth swelling, trismus, dysphagia, systemic sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and surgical escalation for Ludwig angina or deep-space infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pulp sensibility testing, percussion and periapical radiography; cone-beam CT if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does testing show a non-vital tooth with periapical infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider periodontal abscess, irreversible pulpitis or periapical granuloma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Source control by root canal treatment or extraction of the infected tooth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Drain pus through the tooth or incise a fluctuant swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reserve antibiotics for spreading infection, systemic involvement or immunocompromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Provide analgesia and assess for fascial-space spread and airway compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to dentistry or oral and maxillofacial surgery for definitive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent prognosis with timely drainage and source control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

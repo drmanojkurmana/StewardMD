@@ -1,173 +1,469 @@
 {
- "id": "mallet_toe",
- "name": "Mallet toe",
- "aliases": [
-  "mallet toe deformity",
-  "DIP flexion deformity of the lesser toe"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Foot & Ankle",
- "specialty": "Orthopaedics / Podiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Mann's Surgery of the Foot and Ankle",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mallet toe is an isolated flexion deformity of the distal interphalangeal joint, with the metatarsophalangeal and proximal interphalangeal joints held in relatively neutral positions",
-   "This isolated distal deformity is the distinguishing feature against hammer toe (proximal interphalangeal flexion) and claw toe (metatarsophalangeal hyperextension plus flexion of both interphalangeal joints)",
-   "It most often affects the longest lesser toe, typically the second, where the toe tip is repeatedly buckled against the shoe",
-   "A painful callosity or corn develops at the tip of the toe or under the nail, and nail deformity may accompany chronic pressure",
-   "Repetitive footwear pressure and minor trauma are common causes, and contracture of the long flexor tendon perpetuates the deformity",
-   "Flexibility should be tested, since a passively correctable deformity may respond to flexor tenotomy while a fixed one needs joint resection or fusion",
-   "Conservative care includes deep-toe-box footwear, toe caps or crest pads to relieve tip pressure, and callus management",
-   "Surgical treatment uses flexor tenotomy for flexible deformity and distal interphalangeal arthrodesis or resection for fixed deformity"
+  "id": "mallet_toe",
+  "name": "Mallet toe",
+  "aliases": [
+    "mallet toe deformity",
+    "DIP flexion deformity of the lesser toe"
   ],
-  "pathophysiology": "Mallet toe is a flexion deformity confined to the distal interphalangeal joint, produced by an imbalance favouring the long flexor tendon across that joint while the more proximal joints remain in neutral alignment. It is commonly precipitated by chronic pressure from footwear that is too short or too shallow, so that the longest toe is repeatedly forced into flexion, and by minor trauma. Over time the flexor tendon and joint capsule contract, converting an initially flexible deformity into a fixed one. The buckled distal phalanx concentrates load at the toe tip, producing a painful end-of-toe corn or callosity, subungual pressure changes, and occasionally ulceration, particularly where sensation or perfusion is impaired. Because the deformity is distal and isolated, associated metatarsophalangeal subluxation and generalised clawing are typically absent.",
-  "additionalDifferentials": [
-   "Hammer toe with proximal interphalangeal flexion",
-   "Claw toe with combined metatarsophalangeal and interphalangeal deformity",
-   "Curly toe deformity",
-   "Subungual exostosis or nail pathology causing tip pain",
-   "Distal phalanx fracture or post-traumatic deformity",
-   "Inflammatory arthritis affecting the distal interphalangeal joint"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination localising the deformity to the distal interphalangeal joint and testing its flexibility",
-   "Weight-bearing foot radiographs to confirm the level of deformity and exclude bony lesions",
-   "Inspection of the toe tip and nail for callosity, corn, or ulceration",
-   "Assessment of the other toes and forefoot to exclude a wider deformity pattern",
-   "Vascular and neurological assessment of the toe before surgery",
-   "Inflammatory markers or serology only if inflammatory arthritis is suspected"
-  ],
-  "redFlags": [
-   "Ulceration or infection at the toe tip, particularly in diabetes or peripheral vascular disease",
-   "Signs of digital ischaemia that would jeopardise healing",
-   "Multiple or symmetrical toe deformities suggesting an underlying neuromuscular or inflammatory disorder",
-   "A firm, growing subungual lesion suggesting exostosis or, rarely, tumour"
-  ],
-  "prognosis": "Mallet toe generally responds well to simple measures. Flexible deformity is often corrected by flexor tenotomy with reliable relief of tip pain, and fixed deformity does well with distal interphalangeal arthrodesis or resection. Recurrence is uncommon when appropriate footwear is maintained, though tip numbness, mild residual deformity, or persistent nail changes can occur.",
-  "pitfalls": [
-   "Failing to test flexibility and performing joint resection when a simple flexor tenotomy would suffice",
-   "Missing an underlying bony lesion such as subungual exostosis as the cause of tip pain",
-   "Overlooking ulceration or ischaemia at the toe tip in the neuropathic or vasculopathic foot",
-   "Attributing an isolated distal deformity to a broader claw or hammer toe pattern and over-treating",
-   "Neglecting footwear correction so that pressure recurs after treatment"
-  ],
-  "references": [
-   "Mann's Surgery of the Foot and Ankle",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Footwear advice with a roomy, deep toe box and protective silicone sleeves or padding to relieve pressure on the buckled toe tip",
-   "Regular paring of the tip callosity or corn and attention to associated nail deformity, with podiatry input",
-   "Flexor tenotomy for a passively correctable flexible deformity to relieve tip pain",
-   "Distal interphalangeal arthrodesis or resection arthroplasty for a fixed deformity",
-   "Vascular and neurological assessment before surgery, with protective offloading where sensation or perfusion is impaired to prevent ulceration",
-   "Treat any ulceration or secondary infection and reinforce appropriate footwear to prevent recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mallet_toe-pathway",
-   "title": "Mallet toe: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mallet toe is an isolated flexion deformity of the distal interphalangeal joint, with the metatarsophalangeal and proximal interphalangeal joints held in relatively neutral positions",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ulceration or infection at the toe tip, particularly in diabetes or peripheral vascular disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination localising the deformity to the distal interphalangeal joint and testing its flexibility, Weight-bearing foot radiographs to confirm the level of deformity and exclude bony lesions, Inspection of the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Footwear advice with a roomy, deep toe box and protective silicone sleeves or padding to relieve pressure on the buckled toe tip"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to test flexibility and performing joint resection when a simple flexor tenotomy would suffice"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mallet toe."
-  }
- ],
- "tables": [
-  {
-   "id": "mallet_toe-matrix",
-   "title": "Mallet toe: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mallet toe is an isolated flexion deformity of the distal interphalangeal joint, with the metatarsophalangeal and proximal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Foot & Ankle",
+  "specialty": "Orthopaedics / Podiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mann's Surgery of the Foot and Ankle",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mallet toe is an isolated flexion deformity of the distal interphalangeal joint, with the metatarsophalangeal and proximal interphalangeal joints held in relatively neutral positions",
+      "This isolated distal deformity is the distinguishing feature against hammer toe (proximal interphalangeal flexion) and claw toe (metatarsophalangeal hyperextension plus flexion of both interphalangeal joints)",
+      "It most often affects the longest lesser toe, typically the second, where the toe tip is repeatedly buckled against the shoe",
+      "A painful callosity or corn develops at the tip of the toe or under the nail, and nail deformity may accompany chronic pressure",
+      "Repetitive footwear pressure and minor trauma are common causes, and contracture of the long flexor tendon perpetuates the deformity",
+      "Flexibility should be tested, since a passively correctable deformity may respond to flexor tenotomy while a fixed one needs joint resection or fusion",
+      "Conservative care includes deep-toe-box footwear, toe caps or crest pads to relieve tip pressure, and callus management",
+      "Surgical treatment uses flexor tenotomy for flexible deformity and distal interphalangeal arthrodesis or resection for fixed deformity"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination localising the deformity to the distal interphalangeal joint and testing its flexibility, Weight-bearing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mallet toe is a flexion deformity confined to the distal interphalangeal joint, produced by an imbalance favouring the long flexor tendon across that joint while the more proximal joints remain in neutral alignment. It is commonly precipitated by chronic pressure from footwear that is too short or too shallow, so that the longest toe is repeatedly forced into flexion, and by minor trauma. Over time the flexor tendon and joint capsule contract, converting an initially flexible deformity into a fixed one. The buckled distal phalanx concentrates load at the toe tip, producing a painful end-of-toe corn or callosity, subungual pressure changes, and occasionally ulceration, particularly where sensation or perfusion is impaired. Because the deformity is distal and isolated, associated metatarsophalangeal subluxation and generalised clawing are typically absent.",
+    "additionalDifferentials": [
+      "Hammer toe with proximal interphalangeal flexion",
+      "Claw toe with combined metatarsophalangeal and interphalangeal deformity",
+      "Curly toe deformity",
+      "Subungual exostosis or nail pathology causing tip pain",
+      "Distal phalanx fracture or post-traumatic deformity",
+      "Inflammatory arthritis affecting the distal interphalangeal joint"
     ],
-    [
-     "Primary Differentials",
-     "Hammer toe with proximal interphalangeal flexion, Claw toe with combined metatarsophalangeal and interphalangeal deformity, Curly",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination localising the deformity to the distal interphalangeal joint and testing its flexibility",
+      "Weight-bearing foot radiographs to confirm the level of deformity and exclude bony lesions",
+      "Inspection of the toe tip and nail for callosity, corn, or ulceration",
+      "Assessment of the other toes and forefoot to exclude a wider deformity pattern",
+      "Vascular and neurological assessment of the toe before surgery",
+      "Inflammatory markers or serology only if inflammatory arthritis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Footwear advice with a roomy, deep toe box and protective silicone sleeves or padding to relieve pressure on the buckled toe tip",
-     "Core treatment modality"
+    "redFlags": [
+      "Ulceration or infection at the toe tip, particularly in diabetes or peripheral vascular disease",
+      "Signs of digital ischaemia that would jeopardise healing",
+      "Multiple or symmetrical toe deformities suggesting an underlying neuromuscular or inflammatory disorder",
+      "A firm, growing subungual lesion suggesting exostosis or, rarely, tumour"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to test flexibility and performing joint resection when a simple flexor tenotomy would suffice",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mallet toe generally responds well to simple measures. Flexible deformity is often corrected by flexor tenotomy with reliable relief of tip pain, and fixed deformity does well with distal interphalangeal arthrodesis or resection. Recurrence is uncommon when appropriate footwear is maintained, though tip numbness, mild residual deformity, or persistent nail changes can occur.",
+    "pitfalls": [
+      "Failing to test flexibility and performing joint resection when a simple flexor tenotomy would suffice",
+      "Missing an underlying bony lesion such as subungual exostosis as the cause of tip pain",
+      "Overlooking ulceration or ischaemia at the toe tip in the neuropathic or vasculopathic foot",
+      "Attributing an isolated distal deformity to a broader claw or hammer toe pattern and over-treating",
+      "Neglecting footwear correction so that pressure recurs after treatment"
+    ],
+    "references": [
+      "Mann's Surgery of the Foot and Ankle",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Footwear advice with a roomy, deep toe box and protective silicone sleeves or padding to relieve pressure on the buckled toe tip",
+      "Regular paring of the tip callosity or corn and attention to associated nail deformity, with podiatry input",
+      "Flexor tenotomy for a passively correctable flexible deformity to relieve tip pain",
+      "Distal interphalangeal arthrodesis or resection arthroplasty for a fixed deformity",
+      "Vascular and neurological assessment before surgery, with protective offloading where sensation or perfusion is impaired to prevent ulceration",
+      "Treat any ulceration or secondary infection and reinforce appropriate footwear to prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for mallet toe."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mallet-toe-real-image",
-   "title": "Mallet toe: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "mallet_toe-pathway",
+      "title": "Mallet toe: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mallet toe is an isolated flexion deformity of the distal interphalangeal joint, with the metatarsophalangeal and proximal interphalangeal joints held in relatively neutral positions",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ulceration or infection at the toe tip, particularly in diabetes or peripheral vascular disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination localising the deformity to the distal interphalangeal joint and testing its flexibility, Weight-bearing foot radiographs to confirm the level of deformity and exclude bony lesions, Inspection of the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Footwear advice with a roomy, deep toe box and protective silicone sleeves or padding to relieve pressure on the buckled toe tip"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to test flexibility and performing joint resection when a simple flexor tenotomy would suffice"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mallet toe."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mallet_toe-matrix",
+      "title": "Mallet toe: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mallet toe is an isolated flexion deformity of the distal interphalangeal joint, with the metatarsophalangeal and proximal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination localising the deformity to the distal interphalangeal joint and testing its flexibility, Weight-bearing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hammer toe with proximal interphalangeal flexion, Claw toe with combined metatarsophalangeal and interphalangeal deformity, Curly",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Footwear advice with a roomy, deep toe box and protective silicone sleeves or padding to relieve pressure on the buckled toe tip",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to test flexibility and performing joint resection when a simple flexor tenotomy would suffice",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mallet toe."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mallet_toe-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of the DIP deformity",
+          "cells": [
+            {
+              "text": "Localises the deformity to the DIP joint and tests its flexibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing foot radiographs",
+          "cells": [
+            {
+              "text": "Level of deformity; bony lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inspection of toe tip and nail",
+          "cells": [
+            {
+              "text": "Callosity, corn or ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of other toes and forefoot",
+          "cells": [
+            {
+              "text": "Wider deformity pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular and neurological assessment",
+          "cells": [
+            {
+              "text": "Perfusion and sensation before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers or serology",
+          "cells": [
+            {
+              "text": "Only when inflammatory arthritis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mallet_toe-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hammer toe",
+          "cells": [
+            {
+              "text": "Proximal interphalangeal flexion, whereas the PIP is neutral in mallet toe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Claw toe",
+          "cells": [
+            {
+              "text": "Combined metatarsophalangeal and interphalangeal deformity, unlike the isolated DIP deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual exostosis or nail pathology",
+          "cells": [
+            {
+              "text": "Firm, growing subungual lesion causing tip pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory arthritis of the DIP joint",
+          "cells": [
+            {
+              "text": "Multiple or symmetrical deformities; inflammatory markers or serology if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mallet_toe-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Footwear advice",
+          "cells": [
+            {
+              "text": "Roomy, deep toe box and protective silicone sleeves or padding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tip callosity or corn paring",
+          "cells": [
+            {
+              "text": "Regular paring with podiatry input; attention to nail deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexor tenotomy",
+          "cells": [
+            {
+              "text": "Passively correctable, flexible deformity, to relieve tip pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DIP arthrodesis or resection arthroplasty",
+          "cells": [
+            {
+              "text": "Fixed deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-surgical vascular and neurological assessment",
+          "cells": [
+            {
+              "text": "Protective offloading where sensation or perfusion is impaired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat ulceration or infection",
+          "cells": [
+            {
+              "text": "Reinforce appropriate footwear to prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mallet_toe-dx-mgmt",
+      "title": "Diagnosis and management of Mallet toe",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Isolated DIP flexion deformity of the toe, often with tip callosity or pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tip ulceration, digital ischaemia or multiple symmetrical deformities present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for tip ulceration, digital ischaemia or systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight-bearing radiographs; examine flexibility, toe tip, nail and perfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the deformity correct passively on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Fixed deformity: exclude subungual exostosis and inflammatory arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Roomy, deep toe box and silicone sleeves or padding for pressure relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Paring of tip callosity with podiatry input",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Flexor tenotomy for a passively correctable deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Arthrodesis or resection arthroplasty for a fixed deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Flexible deformity often relieved by tenotomy; recurrence uncommon with good footwear",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

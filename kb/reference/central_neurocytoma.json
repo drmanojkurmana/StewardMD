@@ -1,181 +1,452 @@
 {
- "id": "central_neurocytoma",
- "name": "Central neurocytoma",
- "aliases": [
-  "central neurocytoma",
-  "intraventricular neurocytoma",
-  "WHO grade 2 neurocytoma",
-  "synaptophysin-positive neurocytoma"
- ],
- "class": "non_infective",
- "system": "Oncology / Neuro-oncology",
- "specialty": "Neuro-oncology / Neuropathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours of the CNS",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A typically benign neuronal tumour (CNS WHO grade 2) of young and middle-aged adults, arising within the lateral ventricles",
-   "Characteristically attached near the septum pellucidum or foramen of Monro, where it obstructs cerebrospinal fluid flow",
-   "Usually presents with headache and other features of raised intracranial pressure from obstructive hydrocephalus",
-   "Histology resembles oligodendroglioma with uniform round cells, but neuronal differentiation is confirmed by strong synaptophysin positivity",
-   "Retained ATRX and absence of IDH mutation and 1p/19q codeletion help distinguish it from oligodendroglioma",
-   "Extraventricular neurocytomas with similar morphology can occur in the brain parenchyma",
-   "Gross total resection is often curative; atypical variants with higher proliferation may recur"
+  "id": "central_neurocytoma",
+  "name": "Central neurocytoma",
+  "aliases": [
+    "central neurocytoma",
+    "intraventricular neurocytoma",
+    "WHO grade 2 neurocytoma",
+    "synaptophysin-positive neurocytoma"
   ],
-  "pathophysiology": "Central neurocytoma is a neuronal tumour believed to arise from bipotential progenitor cells or neuronal precursors near the septum pellucidum and the walls of the lateral ventricles. It grows as a well-circumscribed intraventricular mass composed of uniform round cells with clear cytoplasm and finely speckled chromatin, set in a fibrillary neuropil-like background, frequently with calcification and microcystic change. Despite a superficial resemblance to oligodendroglioma on light microscopy, it shows neuronal differentiation demonstrated by synaptophysin expression and lacks the molecular signatures of diffuse glioma. Symptoms result largely from mechanical obstruction of cerebrospinal fluid at the foramen of Monro.",
-  "additionalDifferentials": [
-   "Oligodendroglioma",
-   "Ependymoma",
-   "Subependymoma",
-   "Intraventricular meningioma",
-   "Subependymal giant cell astrocytoma",
-   "Metastasis to the ventricular region"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced brain MRI to characterise the intraventricular mass and hydrocephalus",
-   "Assessment of relationship to the septum pellucidum and foramen of Monro",
-   "Histopathology showing uniform round cells in a neuropil background",
-   "Synaptophysin immunohistochemistry to confirm neuronal differentiation",
-   "IDH, 1p/19q and ATRX testing to exclude oligodendroglioma",
-   "Ki-67/MIB-1 proliferation index to identify atypical, higher-risk tumours"
-  ],
-  "redFlags": [
-   "Acute obstructive hydrocephalus with rapidly rising intracranial pressure",
-   "Intraventricular haemorrhage from the tumour",
-   "High proliferation index or atypical features indicating recurrence risk",
-   "Sudden deterioration in consciousness from cerebrospinal fluid obstruction"
-  ],
-  "prognosis": "Prognosis is generally favourable, with gross total resection frequently curative and long-term survival common. Atypical central neurocytomas with an elevated proliferation index carry a higher risk of recurrence, and adjuvant radiotherapy may be considered for incompletely resected or recurrent disease.",
-  "pitfalls": [
-   "Misdiagnosing it as oligodendroglioma and applying inappropriate glioma management",
-   "Not performing synaptophysin staining to establish neuronal differentiation",
-   "Overlooking an elevated proliferation index that flags an atypical, recurrence-prone tumour",
-   "Delaying relief of obstructive hydrocephalus in a symptomatic patient"
-  ],
-  "references": [
-   "WHO Classification of Tumours of the Central Nervous System",
-   "Louis DN et al. The 2021 WHO Classification of Tumors of the Central Nervous System"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For acute obstructive hydrocephalus, urgently relieve CSF obstruction via external ventricular drain, endoscopic third ventriculostomy, or shunt, either before or at the time of definitive surgery.",
-   "Maximal safe surgical resection is the primary and usually definitive treatment for localized, resectable tumors, with gross total resection frequently curative.",
-   "Choice of transcortical versus transcallosal surgical approach is made by the neurosurgical team based on ventricular anatomy and tumor extent.",
-   "Consider adjuvant radiotherapy for incompletely resected, recurrent, or atypical tumors with an elevated proliferation index or atypical histology.",
-   "Stereotactic radiosurgery is a reasonable option for small residual or recurrent disease, especially where repeat open resection carries high risk.",
-   "Systemic drug therapy has no established role in central neurocytoma; management relies on local therapy (surgery and radiotherapy when indicated) rather than systemic anticancer regimens.",
-   "Typical sequence is maximal safe resection, then surveillance imaging if resection is complete and histology is typical, with adjuvant radiotherapy reserved for incomplete resection, atypical histology, or recurrence.",
-   "At recurrence, individualize repeat resection and/or radiotherapy through the neuro-oncology multidisciplinary team.",
-   "Obtain serial contrast-enhanced brain MRI to monitor for recurrence or progression, with surveillance intervals individualized to extent of resection and histologic risk.",
-   "Monitor clinically for symptoms of raised intracranial pressure or new hydrocephalus, prompting urgent imaging if present.",
-   "Confirm diagnosis histopathologically with synaptophysin staining and assess proliferation index (Ki-67/MIB-1) to stratify standard versus atypical, higher-recurrence-risk disease.",
-   "Refer newly identified intraventricular masses suspicious for central neurocytoma to an experienced neurosurgical team and to a neuro-oncology multidisciplinary team once histology is confirmed.",
-   "Refer urgently to neurosurgery for acute or rapidly progressive obstructive hydrocephalus or deteriorating consciousness.",
-   "Pursue neuropathology review including IDH, 1p/19q, and ATRX status when the differential with oligodendroglioma or another glial tumor is unresolved, since management differs substantially between these entities."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "central_neurocytoma-pathway",
-   "title": "Central neurocytoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A typically benign neuronal tumour (CNS WHO grade 2) of young and middle-aged adults, arising within the lateral ventricles",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute obstructive hydrocephalus with rapidly rising intracranial pressure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced brain MRI to characterise the intraventricular mass and hydrocephalus, Assessment of relationship to the septum pellucidum and foramen of Monro, Histopathology showing uniform round cells in a neuropil"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For acute obstructive hydrocephalus, urgently relieve CSF obstruction via external ventricular drain, endoscopic third ventriculostomy, or shunt, either before or at the time of definitive surgery."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as oligodendroglioma and applying inappropriate glioma management"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of central neurocytoma."
-  }
- ],
- "tables": [
-  {
-   "id": "central_neurocytoma-matrix",
-   "title": "Central neurocytoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A typically benign neuronal tumour (CNS WHO grade 2) of young and middle-aged adults, arising within the lateral ventricles",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Neuro-oncology",
+  "specialty": "Neuro-oncology / Neuropathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours of the CNS",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A typically benign neuronal tumour (CNS WHO grade 2) of young and middle-aged adults, arising within the lateral ventricles",
+      "Characteristically attached near the septum pellucidum or foramen of Monro, where it obstructs cerebrospinal fluid flow",
+      "Usually presents with headache and other features of raised intracranial pressure from obstructive hydrocephalus",
+      "Histology resembles oligodendroglioma with uniform round cells, but neuronal differentiation is confirmed by strong synaptophysin positivity",
+      "Retained ATRX and absence of IDH mutation and 1p/19q codeletion help distinguish it from oligodendroglioma",
+      "Extraventricular neurocytomas with similar morphology can occur in the brain parenchyma",
+      "Gross total resection is often curative; atypical variants with higher proliferation may recur"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced brain MRI to characterise the intraventricular mass and hydrocephalus, Assessment of relationship to the septum",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Central neurocytoma is a neuronal tumour believed to arise from bipotential progenitor cells or neuronal precursors near the septum pellucidum and the walls of the lateral ventricles. It grows as a well-circumscribed intraventricular mass composed of uniform round cells with clear cytoplasm and finely speckled chromatin, set in a fibrillary neuropil-like background, frequently with calcification and microcystic change. Despite a superficial resemblance to oligodendroglioma on light microscopy, it shows neuronal differentiation demonstrated by synaptophysin expression and lacks the molecular signatures of diffuse glioma. Symptoms result largely from mechanical obstruction of cerebrospinal fluid at the foramen of Monro.",
+    "additionalDifferentials": [
+      "Oligodendroglioma",
+      "Ependymoma",
+      "Subependymoma",
+      "Intraventricular meningioma",
+      "Subependymal giant cell astrocytoma",
+      "Metastasis to the ventricular region"
     ],
-    [
-     "Primary Differentials",
-     "Oligodendroglioma, Ependymoma, Subependymoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced brain MRI to characterise the intraventricular mass and hydrocephalus",
+      "Assessment of relationship to the septum pellucidum and foramen of Monro",
+      "Histopathology showing uniform round cells in a neuropil background",
+      "Synaptophysin immunohistochemistry to confirm neuronal differentiation",
+      "IDH, 1p/19q and ATRX testing to exclude oligodendroglioma",
+      "Ki-67/MIB-1 proliferation index to identify atypical, higher-risk tumours"
     ],
-    [
-     "Management Strategy",
-     "For acute obstructive hydrocephalus, urgently relieve CSF obstruction via external ventricular drain, endoscopic third",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute obstructive hydrocephalus with rapidly rising intracranial pressure",
+      "Intraventricular haemorrhage from the tumour",
+      "High proliferation index or atypical features indicating recurrence risk",
+      "Sudden deterioration in consciousness from cerebrospinal fluid obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as oligodendroglioma and applying inappropriate glioma management",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally favourable, with gross total resection frequently curative and long-term survival common. Atypical central neurocytomas with an elevated proliferation index carry a higher risk of recurrence, and adjuvant radiotherapy may be considered for incompletely resected or recurrent disease.",
+    "pitfalls": [
+      "Misdiagnosing it as oligodendroglioma and applying inappropriate glioma management",
+      "Not performing synaptophysin staining to establish neuronal differentiation",
+      "Overlooking an elevated proliferation index that flags an atypical, recurrence-prone tumour",
+      "Delaying relief of obstructive hydrocephalus in a symptomatic patient"
+    ],
+    "references": [
+      "WHO Classification of Tumours of the Central Nervous System",
+      "Louis DN et al. The 2021 WHO Classification of Tumors of the Central Nervous System"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For acute obstructive hydrocephalus, urgently relieve CSF obstruction via external ventricular drain, endoscopic third ventriculostomy, or shunt, either before or at the time of definitive surgery.",
+      "Maximal safe surgical resection is the primary and usually definitive treatment for localized, resectable tumors, with gross total resection frequently curative.",
+      "Choice of transcortical versus transcallosal surgical approach is made by the neurosurgical team based on ventricular anatomy and tumor extent.",
+      "Consider adjuvant radiotherapy for incompletely resected, recurrent, or atypical tumors with an elevated proliferation index or atypical histology.",
+      "Stereotactic radiosurgery is a reasonable option for small residual or recurrent disease, especially where repeat open resection carries high risk.",
+      "Systemic drug therapy has no established role in central neurocytoma; management relies on local therapy (surgery and radiotherapy when indicated) rather than systemic anticancer regimens.",
+      "Typical sequence is maximal safe resection, then surveillance imaging if resection is complete and histology is typical, with adjuvant radiotherapy reserved for incomplete resection, atypical histology, or recurrence.",
+      "At recurrence, individualize repeat resection and/or radiotherapy through the neuro-oncology multidisciplinary team.",
+      "Obtain serial contrast-enhanced brain MRI to monitor for recurrence or progression, with surveillance intervals individualized to extent of resection and histologic risk.",
+      "Monitor clinically for symptoms of raised intracranial pressure or new hydrocephalus, prompting urgent imaging if present.",
+      "Confirm diagnosis histopathologically with synaptophysin staining and assess proliferation index (Ki-67/MIB-1) to stratify standard versus atypical, higher-recurrence-risk disease.",
+      "Refer newly identified intraventricular masses suspicious for central neurocytoma to an experienced neurosurgical team and to a neuro-oncology multidisciplinary team once histology is confirmed.",
+      "Refer urgently to neurosurgery for acute or rapidly progressive obstructive hydrocephalus or deteriorating consciousness.",
+      "Pursue neuropathology review including IDH, 1p/19q, and ATRX status when the differential with oligodendroglioma or another glial tumor is unresolved, since management differs substantially between these entities."
     ]
-   ],
-   "caption": "Overview comparison matrix for central neurocytoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "central-neurocytoma-real-image",
-   "title": "Central neurocytoma: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "central_neurocytoma-pathway",
+      "title": "Central neurocytoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A typically benign neuronal tumour (CNS WHO grade 2) of young and middle-aged adults, arising within the lateral ventricles",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute obstructive hydrocephalus with rapidly rising intracranial pressure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced brain MRI to characterise the intraventricular mass and hydrocephalus, Assessment of relationship to the septum pellucidum and foramen of Monro, Histopathology showing uniform round cells in a neuropil"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For acute obstructive hydrocephalus, urgently relieve CSF obstruction via external ventricular drain, endoscopic third ventriculostomy, or shunt, either before or at the time of definitive surgery."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as oligodendroglioma and applying inappropriate glioma management"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of central neurocytoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "central_neurocytoma-matrix",
+      "title": "Central neurocytoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A typically benign neuronal tumour (CNS WHO grade 2) of young and middle-aged adults, arising within the lateral ventricles",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced brain MRI to characterise the intraventricular mass and hydrocephalus, Assessment of relationship to the septum",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Oligodendroglioma, Ependymoma, Subependymoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For acute obstructive hydrocephalus, urgently relieve CSF obstruction via external ventricular drain, endoscopic third",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as oligodendroglioma and applying inappropriate glioma management",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for central neurocytoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_neurocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced brain MRI",
+          "cells": [
+            {
+              "text": "Characterises the intraventricular mass and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with synaptophysin staining",
+          "cells": [
+            {
+              "text": "Uniform round cells; strong synaptophysin positivity confirms neuronal differentiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IDH, 1p/19q and ATRX testing",
+          "cells": [
+            {
+              "text": "Absent IDH mutation and 1p/19q codeletion with retained ATRX distinguish it from oligodendroglioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ki-67/MIB-1 proliferation index",
+          "cells": [
+            {
+              "text": "Identifies atypical, higher-risk tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relationship to septum pellucidum and foramen of Monro",
+          "cells": [
+            {
+              "text": "Attachment near these structures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_neurocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relief of obstructive hydrocephalus",
+          "cells": [
+            {
+              "text": "External ventricular drain, endoscopic third ventriculostomy or shunt"
+            },
+            {
+              "text": "Urgent, before or at definitive surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maximal safe surgical resection",
+          "cells": [
+            {
+              "text": "Primary and usually definitive treatment for resectable tumours"
+            },
+            {
+              "text": "Gross total resection is often curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "For incompletely resected, recurrent or atypical tumours"
+            },
+            {
+              "text": "Elevated proliferation index or atypical histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereotactic radiosurgery",
+          "cells": [
+            {
+              "text": "Option for small residual or recurrent disease"
+            },
+            {
+              "text": "Where repeat open resection carries high risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic drug therapy",
+          "cells": [
+            {
+              "text": "No established role; management relies on local therapy"
+            },
+            {
+              "text": "Not established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance MRI",
+          "cells": [
+            {
+              "text": "Serial contrast-enhanced brain MRI for recurrence"
+            },
+            {
+              "text": "Intervals individualised to resection and histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-oncology review",
+          "cells": [
+            {
+              "text": "Individualise repeat resection or radiotherapy at recurrence"
+            },
+            {
+              "text": "Multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_neurocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Central neurocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central neurocytoma: intraventricular mass with raised pressure symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute obstructive hydrocephalus, haemorrhage, falling consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgery; drain or ventriculostomy for CSF obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI, synaptophysin staining, IDH, 1p/19q and ATRX testing, Ki-67",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Synaptophysin positive, with IDH and 1p/19q pattern excluding oligodendroglioma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Maximal safe surgical resection, often definitive for resectable tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check oligodendroglioma, ependymoma and subependymoma by molecular markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for incomplete, atypical or recurrent tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stereotactic radiosurgery for small residual or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial contrast MRI surveillance, individualised to resection extent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally favourable; atypical tumours with high Ki-67 recur more often",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

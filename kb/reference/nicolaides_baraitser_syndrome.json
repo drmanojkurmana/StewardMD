@@ -1,173 +1,442 @@
 {
- "id": "nicolaides_baraitser_syndrome",
- "name": "Nicolaides-Baraitser syndrome (SMARCA2)",
- "aliases": [
-  "SMARCA2",
-  "NCBRS",
-  "Nicolaides-Baraitser",
-  "BAF complex disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Clinical Genetics / Neurodevelopmental",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A distinctive intellectual disability syndrome with sparse scalp hair and prominent interphalangeal joints",
-   "The fingers show prominent, thickened interphalangeal joints and distal phalanges, often becoming more evident with age",
-   "Facial features include a triangular face, sparse hair, a wide mouth with a thin upper lip and thick lower lip",
-   "Seizures are common and can be difficult to control, and severe speech impairment is typical",
-   "Short stature and a friendly but sometimes irritable behavioural profile are described",
-   "Caused by de novo heterozygous variants in SMARCA2, a component of the BAF (SWI/SNF) chromatin-remodelling complex, inherited in an autosomal dominant pattern",
-   "The combination of sparse hair, distinctive digits and intellectual disability is highly suggestive"
+  "id": "nicolaides_baraitser_syndrome",
+  "name": "Nicolaides-Baraitser syndrome (SMARCA2)",
+  "aliases": [
+    "SMARCA2",
+    "NCBRS",
+    "Nicolaides-Baraitser",
+    "BAF complex disorder"
   ],
-  "pathophysiology": "SMARCA2 encodes BRM, an ATPase subunit of the BAF (SWI/SNF) chromatin-remodelling complex, which uses ATP to reposition nucleosomes and thereby regulate access to DNA for transcription during development. Missense variants, typically de novo, alter the ATPase function and act through a dominant mechanism, dysregulating the expression of genes needed for normal brain, skin appendage and skeletal development. The disturbed chromatin remodelling produces the intellectual disability, epilepsy, sparse hair and characteristic digital and facial features. As a chromatin-remodelling disorder, it belongs to the broader group of BAF-complex (SWI/SNF) developmental syndromes that overlaps with Coffin-Siris syndrome.",
-  "additionalDifferentials": [
-   "Coffin-Siris syndrome",
-   "Cornelia de Lange syndrome",
-   "Ectodermal dysplasias with sparse hair",
-   "Cockayne syndrome",
-   "Other BAF-complex-related disorders",
-   "Mucopolysaccharidoses with joint changes"
-  ],
-  "additionalInvestigations": [
-   "Hand and skeletal radiographs for prominent interphalangeal joints and phalangeal changes",
-   "EEG and brain MRI when seizures occur",
-   "Developmental and speech assessment",
-   "Chromosomal microarray to exclude copy-number causes",
-   "Gene panel or exome sequencing including SMARCA2 and other BAF-complex genes"
-  ],
-  "redFlags": [
-   "Drug-resistant seizures or status epilepticus",
-   "Feeding difficulty and faltering growth",
-   "Rapid deterioration in seizure control",
-   "Severe behavioural disturbance affecting safety"
-  ],
-  "prognosis": "Nicolaides-Baraitser syndrome causes moderate to severe lifelong intellectual disability with limited speech; epilepsy severity is a major determinant of outcome. Care is supportive, with attention to seizures, development and orthopaedic features.",
-  "pitfalls": [
-   "Mislabelling as an ectodermal dysplasia based on the sparse hair alone",
-   "Confusing it with Coffin-Siris syndrome without gene-level testing",
-   "Underestimating the severity and drug resistance of the epilepsy",
-   "Overlooking the progressive nature of the digital joint changes in young children"
-  ],
-  "references": [
-   "GeneReviews: Nicolaides-Baraitser Syndrome",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive, symptom-directed care as there is no disease-modifying therapy for this chromatin-remodelling disorder",
-   "Control seizures with antiepileptic drugs, recognising that epilepsy is often difficult to treat and may need combination regimens",
-   "Deliver early developmental support with speech and language therapy, physiotherapy, occupational therapy and tailored special educational provision for the severe speech impairment and intellectual disability",
-   "Assess and manage the hand and skeletal features through orthopaedic and hand-therapy input",
-   "Monitor growth and nutrition given short stature, and offer behavioural support for the irritable behavioural profile",
-   "Coordinate multidisciplinary follow-up across clinical genetics, paediatric neurology and paediatrics",
-   "Provide genetic counselling, noting most cases arise from de novo SMARCA2 variants with a low recurrence risk in autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nicolaides_baraitser_syndrome-pathway",
-   "title": "Nicolaides-Baraitser syndrome (SMARCA2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A distinctive intellectual disability syndrome with sparse scalp hair and prominent interphalangeal joints",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Drug-resistant seizures or status epilepticus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Hand and skeletal radiographs for prominent interphalangeal joints and phalangeal changes, EEG and brain MRI when seizures occur, Developmental and speech assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive, symptom-directed care as there is no disease-modifying therapy for this chromatin-remodelling disorder"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling as an ectodermal dysplasia based on the sparse hair alone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nicolaides-baraitser syndrome (smarca2)."
-  }
- ],
- "tables": [
-  {
-   "id": "nicolaides_baraitser_syndrome-matrix",
-   "title": "Nicolaides-Baraitser syndrome (SMARCA2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A distinctive intellectual disability syndrome with sparse scalp hair and prominent interphalangeal joints",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Clinical Genetics / Neurodevelopmental",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A distinctive intellectual disability syndrome with sparse scalp hair and prominent interphalangeal joints",
+      "The fingers show prominent, thickened interphalangeal joints and distal phalanges, often becoming more evident with age",
+      "Facial features include a triangular face, sparse hair, a wide mouth with a thin upper lip and thick lower lip",
+      "Seizures are common and can be difficult to control, and severe speech impairment is typical",
+      "Short stature and a friendly but sometimes irritable behavioural profile are described",
+      "Caused by de novo heterozygous variants in SMARCA2, a component of the BAF (SWI/SNF) chromatin-remodelling complex, inherited in an autosomal dominant pattern",
+      "The combination of sparse hair, distinctive digits and intellectual disability is highly suggestive"
     ],
-    [
-     "Key Investigations",
-     "Hand and skeletal radiographs for prominent interphalangeal joints and phalangeal changes, EEG and brain MRI when seizures occur,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SMARCA2 encodes BRM, an ATPase subunit of the BAF (SWI/SNF) chromatin-remodelling complex, which uses ATP to reposition nucleosomes and thereby regulate access to DNA for transcription during development. Missense variants, typically de novo, alter the ATPase function and act through a dominant mechanism, dysregulating the expression of genes needed for normal brain, skin appendage and skeletal development. The disturbed chromatin remodelling produces the intellectual disability, epilepsy, sparse hair and characteristic digital and facial features. As a chromatin-remodelling disorder, it belongs to the broader group of BAF-complex (SWI/SNF) developmental syndromes that overlaps with Coffin-Siris syndrome.",
+    "additionalDifferentials": [
+      "Coffin-Siris syndrome",
+      "Cornelia de Lange syndrome",
+      "Ectodermal dysplasias with sparse hair",
+      "Cockayne syndrome",
+      "Other BAF-complex-related disorders",
+      "Mucopolysaccharidoses with joint changes"
     ],
-    [
-     "Primary Differentials",
-     "Coffin-Siris syndrome, Cornelia de Lange syndrome, Ectodermal dysplasias with sparse hair",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Hand and skeletal radiographs for prominent interphalangeal joints and phalangeal changes",
+      "EEG and brain MRI when seizures occur",
+      "Developmental and speech assessment",
+      "Chromosomal microarray to exclude copy-number causes",
+      "Gene panel or exome sequencing including SMARCA2 and other BAF-complex genes"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive, symptom-directed care as there is no disease-modifying therapy for this chromatin-remodelling disorder",
-     "Core treatment modality"
+    "redFlags": [
+      "Drug-resistant seizures or status epilepticus",
+      "Feeding difficulty and faltering growth",
+      "Rapid deterioration in seizure control",
+      "Severe behavioural disturbance affecting safety"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling as an ectodermal dysplasia based on the sparse hair alone",
-     "Prevent diagnostic or management error"
+    "prognosis": "Nicolaides-Baraitser syndrome causes moderate to severe lifelong intellectual disability with limited speech; epilepsy severity is a major determinant of outcome. Care is supportive, with attention to seizures, development and orthopaedic features.",
+    "pitfalls": [
+      "Mislabelling as an ectodermal dysplasia based on the sparse hair alone",
+      "Confusing it with Coffin-Siris syndrome without gene-level testing",
+      "Underestimating the severity and drug resistance of the epilepsy",
+      "Overlooking the progressive nature of the digital joint changes in young children"
+    ],
+    "references": [
+      "GeneReviews: Nicolaides-Baraitser Syndrome",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive, symptom-directed care as there is no disease-modifying therapy for this chromatin-remodelling disorder",
+      "Control seizures with antiepileptic drugs, recognising that epilepsy is often difficult to treat and may need combination regimens",
+      "Deliver early developmental support with speech and language therapy, physiotherapy, occupational therapy and tailored special educational provision for the severe speech impairment and intellectual disability",
+      "Assess and manage the hand and skeletal features through orthopaedic and hand-therapy input",
+      "Monitor growth and nutrition given short stature, and offer behavioural support for the irritable behavioural profile",
+      "Coordinate multidisciplinary follow-up across clinical genetics, paediatric neurology and paediatrics",
+      "Provide genetic counselling, noting most cases arise from de novo SMARCA2 variants with a low recurrence risk in autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for nicolaides-baraitser syndrome (smarca2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nicolaides-baraitser-syndrome-real-image",
-   "title": "Nicolaides-Baraitser syndrome (SMARCA2): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "nicolaides_baraitser_syndrome-pathway",
+      "title": "Nicolaides-Baraitser syndrome (SMARCA2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A distinctive intellectual disability syndrome with sparse scalp hair and prominent interphalangeal joints",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Drug-resistant seizures or status epilepticus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Hand and skeletal radiographs for prominent interphalangeal joints and phalangeal changes, EEG and brain MRI when seizures occur, Developmental and speech assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive, symptom-directed care as there is no disease-modifying therapy for this chromatin-remodelling disorder"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling as an ectodermal dysplasia based on the sparse hair alone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nicolaides-baraitser syndrome (smarca2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nicolaides_baraitser_syndrome-matrix",
+      "title": "Nicolaides-Baraitser syndrome (SMARCA2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A distinctive intellectual disability syndrome with sparse scalp hair and prominent interphalangeal joints",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Hand and skeletal radiographs for prominent interphalangeal joints and phalangeal changes, EEG and brain MRI when seizures occur,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coffin-Siris syndrome, Cornelia de Lange syndrome, Ectodermal dysplasias with sparse hair",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive, symptom-directed care as there is no disease-modifying therapy for this chromatin-remodelling disorder",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling as an ectodermal dysplasia based on the sparse hair alone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nicolaides-baraitser syndrome (smarca2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nicolaides_baraitser_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Hand and skeletal radiographs",
+          "cells": [
+            {
+              "text": "Prominent interphalangeal joints and phalangeal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and brain MRI",
+          "cells": [
+            {
+              "text": "When seizures occur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and speech assessment",
+          "cells": [
+            {
+              "text": "Intellectual disability and speech"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Excludes copy-number variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nicolaides_baraitser_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coffin-Siris syndrome",
+          "cells": [
+            {
+              "text": "Similar intellectual disability; gene-level testing separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cornelia de Lange syndrome",
+          "cells": [
+            {
+              "text": "Facial and limb features with growth restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectodermal dysplasia",
+          "cells": [
+            {
+              "text": "Sparse hair alone is not enough for this diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cockayne syndrome",
+          "cells": [
+            {
+              "text": "Progressive neurological decline and photosensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucopolysaccharidoses",
+          "cells": [
+            {
+              "text": "Joint changes with storage features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nicolaides_baraitser_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom-directed supportive care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy for this chromatin disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Epilepsy is often difficult to treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and growth support",
+          "cells": [
+            {
+              "text": "Faltering growth and feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and behavioural support",
+          "cells": [
+            {
+              "text": "Speech and safety"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nicolaides_baraitser_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Nicolaides-Baraitser syndrome (SMARCA2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intellectual disability with sparse scalp hair and prominent interphalangeal joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (drug-resistant seizures, feeding failure, rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of drug-resistant seizures; feeding and growth support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal radiographs, EEG and MRI if seizures, developmental and speech assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SMARCA2 variant with the typical facial and digital features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Coffin-Siris or Cornelia de Lange syndrome; retest genes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptom-directed supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication, expecting difficult epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding and growth support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental, speech and behavioural support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong moderate to severe intellectual disability; epilepsy severity drives outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,474 @@
 {
- "id": "timothy_syndrome",
- "name": "Timothy syndrome",
- "aliases": [
-  "CACNA1C-related disorder",
-  "long QT syndrome type 8",
-  "LQT8",
-  "Timothy syndrome type 1"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Genetics",
- "specialty": "Cardiology / Inherited Cardiac Conditions",
- "referenceOnly": true,
- "reference": {
-  "source": "ESC/AHA guidelines on ventricular arrhythmias and sudden cardiac death; specialist inherited arrhythmia literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare multisystem disorder caused by gain-of-function variants in the L-type calcium channel gene CACNA1C, classified as long QT syndrome type 8",
-   "Marked QT prolongation predisposes to life-threatening ventricular arrhythmia and sudden death, often in infancy or early childhood",
-   "Extracardiac features commonly include cutaneous syndactyly of the fingers and toes, facial dysmorphism, and neurodevelopmental problems such as autism spectrum features",
-   "Congenital heart defects, immune dysfunction, hypoglycaemia and dental abnormalities can also occur",
-   "The classic form usually arises from de novo variants, so a negative family history does not exclude it",
-   "Management focuses on preventing arrhythmia with beta-blockers, careful avoidance of QT-prolonging drugs and an implantable cardioverter defibrillator in high-risk children",
-   "Functional 2:1 atrioventricular block can occur because the very long ventricular repolarisation leaves the ventricle refractory to alternate atrial beats",
-   "Care is multidisciplinary given the cardiac, developmental and systemic involvement"
+  "id": "timothy_syndrome",
+  "name": "Timothy syndrome",
+  "aliases": [
+    "CACNA1C-related disorder",
+    "long QT syndrome type 8",
+    "LQT8",
+    "Timothy syndrome type 1"
   ],
-  "pathophysiology": "Timothy syndrome is caused by gain-of-function variants in CACNA1C, which encodes the pore-forming subunit of the L-type calcium channel (CaV1.2). The variants impair voltage-dependent inactivation of the channel, so calcium entry into cells is prolonged. In cardiomyocytes this lengthens the action potential and markedly prolongs the QT interval, promoting early afterdepolarisations and torsades-de-pointes ventricular arrhythmia. Because CaV1.2 is expressed widely, the same channel dysfunction disrupts development and function of other tissues, producing the syndactyly, neurodevelopmental, immune and other systemic features that distinguish the syndrome from isolated long QT syndrome.",
-  "additionalDifferentials": [
-   "Other genetic long QT syndrome subtypes",
-   "Acquired QT prolongation from drugs or electrolyte disturbance",
-   "Jervell and Lange-Nielsen syndrome",
-   "Andersen-Tawil syndrome",
-   "Other syndromic causes of syndactyly with cardiac disease",
-   "Congenital heart block from other causes"
-  ],
-  "additionalInvestigations": [
-   "12-lead ECG demonstrating marked QT prolongation and any functional 2:1 atrioventricular block",
-   "Ambulatory monitoring for ventricular arrhythmia",
-   "Echocardiography for associated congenital heart defects",
-   "Genetic testing for CACNA1C variants",
-   "Developmental and neurological assessment",
-   "Evaluation of immune function, glucose homeostasis and dental health as indicated"
-  ],
-  "redFlags": [
-   "Marked QT prolongation with syncope or documented ventricular arrhythmia",
-   "Functional 2:1 atrioventricular block in an infant",
-   "Aborted cardiac arrest",
-   "Syndactyly with cardiac and neurodevelopmental features prompting urgent cardiac evaluation"
-  ],
-  "prognosis": "Timothy syndrome carries a high risk of early sudden death from malignant ventricular arrhythmia, and survivors face substantial neurodevelopmental and systemic morbidity; multidisciplinary care and arrhythmia prevention improve but do not eliminate the risk.",
-  "pitfalls": [
-   "Assuming a negative family history excludes the diagnosis, when most cases are de novo",
-   "Attributing an infant's QT prolongation to reversible causes and missing the genetic syndrome",
-   "Focusing on the cardiac problem and overlooking the syndactyly and developmental clues",
-   "Using QT-prolonging medications that can precipitate torsades",
-   "Underestimating the systemic and immune complications"
-  ],
-  "references": [
-   "ESC Guidelines for the management of patients with ventricular arrhythmias and the prevention of sudden cardiac death",
-   "GeneReviews: Timothy syndrome / CACNA1C-related disorder"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prevent arrhythmia with beta-blockade as the cornerstone of cardiac management",
-   "Strictly avoid QT-prolonging drugs and correct electrolyte disturbances that further lengthen the QT interval",
-   "Implant a cardioverter defibrillator in high-risk children, and consider left cardiac sympathetic denervation for breakthrough arrhythmia",
-   "Treat acute torsades-de-pointes with magnesium and defibrillation, with a calcium channel blocker such as verapamil considered given the underlying L-type calcium channel gain of function",
-   "Provide multidisciplinary support for extracardiac features, including surgical release of syndactyly, neurodevelopmental and autism support, and attention to immune, glucose and dental problems",
-   "Monitor with serial ECG, QT assessment and ambulatory rhythm recording, and screen for congenital heart defects with echocardiography",
-   "Offer genetic counselling and cardiac evaluation of relatives, recognising that most cases arise from de novo variants so a negative family history does not exclude it"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "timothy_syndrome-pathway",
-   "title": "Timothy syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare multisystem disorder caused by gain-of-function variants in the L-type calcium channel gene CACNA1C, classified as long QT syndrome type 8",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked QT prolongation with syncope or documented ventricular arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: 12-lead ECG demonstrating marked QT prolongation and any functional 2:1 atrioventricular block, Ambulatory monitoring for ventricular arrhythmia, Echocardiography for associated congenital heart defects"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prevent arrhythmia with beta-blockade as the cornerstone of cardiac management"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a negative family history excludes the diagnosis, when most cases are de novo"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of timothy syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "timothy_syndrome-matrix",
-   "title": "Timothy syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare multisystem disorder caused by gain-of-function variants in the L-type calcium channel gene CACNA1C, classified as long QT",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Genetics",
+  "specialty": "Cardiology / Inherited Cardiac Conditions",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ESC/AHA guidelines on ventricular arrhythmias and sudden cardiac death; specialist inherited arrhythmia literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare multisystem disorder caused by gain-of-function variants in the L-type calcium channel gene CACNA1C, classified as long QT syndrome type 8",
+      "Marked QT prolongation predisposes to life-threatening ventricular arrhythmia and sudden death, often in infancy or early childhood",
+      "Extracardiac features commonly include cutaneous syndactyly of the fingers and toes, facial dysmorphism, and neurodevelopmental problems such as autism spectrum features",
+      "Congenital heart defects, immune dysfunction, hypoglycaemia and dental abnormalities can also occur",
+      "The classic form usually arises from de novo variants, so a negative family history does not exclude it",
+      "Management focuses on preventing arrhythmia with beta-blockers, careful avoidance of QT-prolonging drugs and an implantable cardioverter defibrillator in high-risk children",
+      "Functional 2:1 atrioventricular block can occur because the very long ventricular repolarisation leaves the ventricle refractory to alternate atrial beats",
+      "Care is multidisciplinary given the cardiac, developmental and systemic involvement"
     ],
-    [
-     "Key Investigations",
-     "12-lead ECG demonstrating marked QT prolongation and any functional 2:1 atrioventricular block, Ambulatory monitoring for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Timothy syndrome is caused by gain-of-function variants in CACNA1C, which encodes the pore-forming subunit of the L-type calcium channel (CaV1.2). The variants impair voltage-dependent inactivation of the channel, so calcium entry into cells is prolonged. In cardiomyocytes this lengthens the action potential and markedly prolongs the QT interval, promoting early afterdepolarisations and torsades-de-pointes ventricular arrhythmia. Because CaV1.2 is expressed widely, the same channel dysfunction disrupts development and function of other tissues, producing the syndactyly, neurodevelopmental, immune and other systemic features that distinguish the syndrome from isolated long QT syndrome.",
+    "additionalDifferentials": [
+      "Other genetic long QT syndrome subtypes",
+      "Acquired QT prolongation from drugs or electrolyte disturbance",
+      "Jervell and Lange-Nielsen syndrome",
+      "Andersen-Tawil syndrome",
+      "Other syndromic causes of syndactyly with cardiac disease",
+      "Congenital heart block from other causes"
     ],
-    [
-     "Primary Differentials",
-     "Other genetic long QT syndrome subtypes, Acquired QT prolongation from drugs or electrolyte disturbance, Jervell and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "12-lead ECG demonstrating marked QT prolongation and any functional 2:1 atrioventricular block",
+      "Ambulatory monitoring for ventricular arrhythmia",
+      "Echocardiography for associated congenital heart defects",
+      "Genetic testing for CACNA1C variants",
+      "Developmental and neurological assessment",
+      "Evaluation of immune function, glucose homeostasis and dental health as indicated"
     ],
-    [
-     "Management Strategy",
-     "Prevent arrhythmia with beta-blockade as the cornerstone of cardiac management",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked QT prolongation with syncope or documented ventricular arrhythmia",
+      "Functional 2:1 atrioventricular block in an infant",
+      "Aborted cardiac arrest",
+      "Syndactyly with cardiac and neurodevelopmental features prompting urgent cardiac evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a negative family history excludes the diagnosis, when most cases are de novo",
-     "Prevent diagnostic or management error"
+    "prognosis": "Timothy syndrome carries a high risk of early sudden death from malignant ventricular arrhythmia, and survivors face substantial neurodevelopmental and systemic morbidity; multidisciplinary care and arrhythmia prevention improve but do not eliminate the risk.",
+    "pitfalls": [
+      "Assuming a negative family history excludes the diagnosis, when most cases are de novo",
+      "Attributing an infant's QT prolongation to reversible causes and missing the genetic syndrome",
+      "Focusing on the cardiac problem and overlooking the syndactyly and developmental clues",
+      "Using QT-prolonging medications that can precipitate torsades",
+      "Underestimating the systemic and immune complications"
+    ],
+    "references": [
+      "ESC Guidelines for the management of patients with ventricular arrhythmias and the prevention of sudden cardiac death",
+      "GeneReviews: Timothy syndrome / CACNA1C-related disorder"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prevent arrhythmia with beta-blockade as the cornerstone of cardiac management",
+      "Strictly avoid QT-prolonging drugs and correct electrolyte disturbances that further lengthen the QT interval",
+      "Implant a cardioverter defibrillator in high-risk children, and consider left cardiac sympathetic denervation for breakthrough arrhythmia",
+      "Treat acute torsades-de-pointes with magnesium and defibrillation, with a calcium channel blocker such as verapamil considered given the underlying L-type calcium channel gain of function",
+      "Provide multidisciplinary support for extracardiac features, including surgical release of syndactyly, neurodevelopmental and autism support, and attention to immune, glucose and dental problems",
+      "Monitor with serial ECG, QT assessment and ambulatory rhythm recording, and screen for congenital heart defects with echocardiography",
+      "Offer genetic counselling and cardiac evaluation of relatives, recognising that most cases arise from de novo variants so a negative family history does not exclude it"
     ]
-   ],
-   "caption": "Overview comparison matrix for timothy syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "timothy-syndrome-real-image",
-   "title": "Timothy syndrome: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "timothy_syndrome-pathway",
+      "title": "Timothy syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare multisystem disorder caused by gain-of-function variants in the L-type calcium channel gene CACNA1C, classified as long QT syndrome type 8",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked QT prolongation with syncope or documented ventricular arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: 12-lead ECG demonstrating marked QT prolongation and any functional 2:1 atrioventricular block, Ambulatory monitoring for ventricular arrhythmia, Echocardiography for associated congenital heart defects"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prevent arrhythmia with beta-blockade as the cornerstone of cardiac management"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a negative family history excludes the diagnosis, when most cases are de novo"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of timothy syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "timothy_syndrome-matrix",
+      "title": "Timothy syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare multisystem disorder caused by gain-of-function variants in the L-type calcium channel gene CACNA1C, classified as long QT",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "12-lead ECG demonstrating marked QT prolongation and any functional 2:1 atrioventricular block, Ambulatory monitoring for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other genetic long QT syndrome subtypes, Acquired QT prolongation from drugs or electrolyte disturbance, Jervell and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prevent arrhythmia with beta-blockade as the cornerstone of cardiac management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a negative family history excludes the diagnosis, when most cases are de novo",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for timothy syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/AHA guidelines on ventricular arrhythmias and sudden cardiac death; specialist inherited arrhythmia literature",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "timothy_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Timothy syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Timothy syndrome: marked QT prolongation with syndactyly in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: syncope, ventricular arrhythmia, or functional 2:1 block in infancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent arrhythmia care with magnesium, defibrillation and beta-blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG for QT; ambulatory monitoring; echocardiography; CACNA1C testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CACNA1C testing identify a gain-of-function variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other long QT subtypes, Jervell and Lange-Nielsen or acquired QT",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Beta-blockade as cornerstone of arrhythmia prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict avoidance of QT-prolonging drugs and correction of electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Implantable defibrillator in high-risk children",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Magnesium and defibrillation for torsades de pointes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Multidisciplinary care for syndactyly and neurodevelopment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "High risk of early sudden death; arrhythmia prevention reduces but does not remove it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "timothy_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Marked QT prolongation and functional 2:1 atrioventricular block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Ventricular arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Associated congenital heart defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CACNA1C genetic testing",
+          "cells": [
+            {
+              "text": "Pathogenic gain-of-function variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological assessment",
+          "cells": [
+            {
+              "text": "Neurodevelopmental features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "timothy_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other genetic long QT syndrome subtypes",
+          "cells": [
+            {
+              "text": "Separated by CACNA1C testing; Timothy has syndactyly and developmental features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jervell and Lange-Nielsen syndrome",
+          "cells": [
+            {
+              "text": "Congenital deafness with long QT; genetic testing separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired QT prolongation from drugs or electrolytes",
+          "cells": [
+            {
+              "text": "Reversible cause; QT-prolonging drugs and electrolytes reviewed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "timothy_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Cornerstone of arrhythmia prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid QT-prolonging drugs",
+          "cells": [
+            {
+              "text": "Correct electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable defibrillator",
+          "cells": [
+            {
+              "text": "High-risk children; sympathetic denervation for breakthrough arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Torsades management",
+          "cells": [
+            {
+              "text": "Magnesium and defibrillation; verapamil considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extracardiac support",
+          "cells": [
+            {
+              "text": "Syndactyly release, neurodevelopmental support, immune, glucose and dental care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ECG and echocardiography",
+          "cells": [
+            {
+              "text": "QT assessment and screening for congenital heart defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and relative screening",
+          "cells": [
+            {
+              "text": "Most cases are de novo"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

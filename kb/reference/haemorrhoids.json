@@ -1,180 +1,586 @@
 {
- "id": "haemorrhoids",
- "name": "Haemorrhoids",
- "aliases": [
-  "external haemorrhoids",
-  "haemorrhoidal disease",
-  "hemorrhoids",
-  "internal haemorrhoids",
-  "piles"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal / Anorectal",
- "specialty": "Colorectal surgery / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Haemorrhoids are symptomatic enlargement and distal displacement of the normal anal cushions; the cushions themselves are physiological structures contributing to continence, so their mere presence is not pathological",
-   "Internal haemorrhoids arise above the dentate line and are typically painless, presenting with bright-red painless bleeding at defecation, mucus discharge, pruritus, and prolapse; external haemorrhoids lie below the dentate line and are somatically innervated, so become painful when thrombosed",
-   "The Goligher grading of internal haemorrhoids (grade I no prolapse, II prolapse with spontaneous reduction, III prolapse needing manual reduction, IV irreducible) guides management choice",
-   "Diagnosis rests on inspection, digital rectal examination, and proctoscopy; internal haemorrhoids are usually not palpable and are best seen on proctoscopy or anoscopy",
-   "First-line management is conservative: increased dietary fibre and fluid, stool softening, avoidance of straining and prolonged toilet sitting, and topical agents for symptom relief",
-   "Office procedures such as rubber-band ligation are effective for grade I to III disease, while excisional or stapled haemorrhoidectomy and haemorrhoidal artery ligation are reserved for higher-grade or refractory disease",
-   "Rectal bleeding must never be attributed to haemorrhoids without excluding proximal pathology, particularly colorectal neoplasia, in at-risk patients",
-   "Pregnancy, chronic constipation with straining, low-fibre diet, and raised intra-abdominal pressure are common contributory factors"
+  "id": "haemorrhoids",
+  "name": "Haemorrhoids",
+  "aliases": [
+    "external haemorrhoids",
+    "haemorrhoidal disease",
+    "hemorrhoids",
+    "internal haemorrhoids",
+    "piles"
   ],
-  "pathophysiology": "The anal canal contains three main vascular cushions of submucosal connective tissue, smooth muscle (the muscle of Treitz), and arteriovenous communications that contribute to fine continence by sealing the canal. Haemorrhoidal disease develops when these cushions become engorged, hypertrophied, and prolapsed owing to deterioration of the supporting fibromuscular anchoring tissue, allowing distal sliding of the cushions. Repeated straining, prolonged defecation, chronic constipation or diarrhoea, and raised intra-abdominal pressure (as in pregnancy) increase venous congestion and shearing forces. Increased resting anal tone and arteriovenous shunting within the cushions contribute to the bright-red bleeding characteristic of internal haemorrhoids. Progressive fragmentation of the connective tissue and dilatation of the vascular plexus lead to bleeding, prolapse, mucus discharge, and, in external components, thrombosis.",
-  "additionalDifferentials": [
-   "Colorectal carcinoma or rectal polyp causing rectal bleeding",
-   "Anal fissure (painful bright-red bleeding with sentinel tag)",
-   "Rectal prolapse (full-thickness circumferential prolapse)",
-   "Anal or perianal skin tag or hypertrophied anal papilla",
-   "Anorectal abscess or fistula",
-   "Inflammatory bowel disease with proctitis",
-   "Anal carcinoma or anal intraepithelial neoplasia"
-  ],
-  "additionalInvestigations": [
-   "Proctoscopy or anoscopy to visualise and grade internal haemorrhoids",
-   "Rigid or flexible sigmoidoscopy to inspect the distal bowel",
-   "Colonoscopy where bleeding is unexplained, atypical, or the patient is at risk of neoplasia",
-   "Full blood count if bleeding is chronic or heavy, to detect iron-deficiency anaemia",
-   "Digital rectal examination to exclude a palpable mass and assess sphincter tone",
-   "Faecal immunochemical testing and further imaging where colorectal cancer must be excluded"
-  ],
-  "redFlags": [
-   "Change in bowel habit, weight loss, or iron-deficiency anaemia suggesting colorectal malignancy",
-   "Dark blood, blood mixed within the stool, or a palpable rectal mass",
-   "Persistent bleeding despite adequate treatment of visible haemorrhoids",
-   "Severe unremitting anal pain suggesting thrombosis, abscess, or another cause",
-   "New symptoms in older patients or those with a family history of bowel cancer"
-  ],
-  "prognosis": "Most haemorrhoidal symptoms respond well to conservative measures and office-based procedures, with good long-term control; recurrence can occur, particularly if predisposing factors such as constipation and straining persist, and surgery carries small risks of pain, bleeding, and rarely incontinence or stenosis.",
-  "pitfalls": [
-   "Attributing rectal bleeding to haemorrhoids without adequately excluding colorectal cancer in at-risk patients",
-   "Banding external or mixed haemorrhoids below the dentate line, which causes severe pain",
-   "Overlooking a coexisting fissure or fistula as the true source of symptoms",
-   "Neglecting to correct constipation and straining, leading to early recurrence",
-   "Aggressive circumferential excision risking anal stenosis"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Association of Coloproctology of Great Britain and Ireland guidance on haemorrhoids",
-   "NICE clinical guidance on suspected lower gastrointestinal cancer referral"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line conservative management with a high-fibre diet, increased fluids, stool softeners, and avoidance of straining and prolonged toilet sitting",
-   "Topical agents for short-term relief of pruritus and discomfort",
-   "Office-based rubber-band ligation for lower-grade internal haemorrhoids, with sclerotherapy or infrared coagulation as alternatives",
-   "Excisional or stapled haemorrhoidectomy or haemorrhoidal artery ligation for high-grade or refractory disease",
-   "Treat iron-deficiency anaemia arising from chronic or heavy bleeding",
-   "Exclude colorectal neoplasia with colonoscopy or faecal immunochemical testing when bleeding is atypical, unexplained or the patient is at risk",
-   "Correct persistent precipitating factors such as constipation and chronic straining to reduce recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "haemorrhoids-pathway",
-   "title": "Haemorrhoids: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Haemorrhoids are symptomatic enlargement and distal displacement of the normal anal cushions; the cushions themselves are physiological structures contributing to continence, so their mere presence is not pathological",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Change in bowel habit, weight loss, or iron-deficiency anaemia suggesting colorectal malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Proctoscopy or anoscopy to visualise and grade internal haemorrhoids, Rigid or flexible sigmoidoscopy to inspect the distal bowel, Colonoscopy where bleeding is unexplained, atypical, or the patient is at risk of neoplasia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line conservative management with a high-fibre diet, increased fluids, stool softeners, and avoidance of straining and prolonged toilet sitting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing rectal bleeding to haemorrhoids without adequately excluding colorectal cancer in at-risk patients"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of haemorrhoids."
-  }
- ],
- "tables": [
-  {
-   "id": "haemorrhoids-matrix",
-   "title": "Haemorrhoids: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Haemorrhoids are symptomatic enlargement and distal displacement of the normal anal cushions; the cushions themselves are",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal / Anorectal",
+  "specialty": "Colorectal surgery / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Haemorrhoids are symptomatic enlargement and distal displacement of the normal anal cushions; the cushions themselves are physiological structures contributing to continence, so their mere presence is not pathological",
+      "Internal haemorrhoids arise above the dentate line and are typically painless, presenting with bright-red painless bleeding at defecation, mucus discharge, pruritus, and prolapse; external haemorrhoids lie below the dentate line and are somatically innervated, so become painful when thrombosed",
+      "The Goligher grading of internal haemorrhoids (grade I no prolapse, II prolapse with spontaneous reduction, III prolapse needing manual reduction, IV irreducible) guides management choice",
+      "Diagnosis rests on inspection, digital rectal examination, and proctoscopy; internal haemorrhoids are usually not palpable and are best seen on proctoscopy or anoscopy",
+      "First-line management is conservative: increased dietary fibre and fluid, stool softening, avoidance of straining and prolonged toilet sitting, and topical agents for symptom relief",
+      "Office procedures such as rubber-band ligation are effective for grade I to III disease, while excisional or stapled haemorrhoidectomy and haemorrhoidal artery ligation are reserved for higher-grade or refractory disease",
+      "Rectal bleeding must never be attributed to haemorrhoids without excluding proximal pathology, particularly colorectal neoplasia, in at-risk patients",
+      "Pregnancy, chronic constipation with straining, low-fibre diet, and raised intra-abdominal pressure are common contributory factors"
     ],
-    [
-     "Key Investigations",
-     "Proctoscopy or anoscopy to visualise and grade internal haemorrhoids, Rigid or flexible sigmoidoscopy to inspect the distal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The anal canal contains three main vascular cushions of submucosal connective tissue, smooth muscle (the muscle of Treitz), and arteriovenous communications that contribute to fine continence by sealing the canal. Haemorrhoidal disease develops when these cushions become engorged, hypertrophied, and prolapsed owing to deterioration of the supporting fibromuscular anchoring tissue, allowing distal sliding of the cushions. Repeated straining, prolonged defecation, chronic constipation or diarrhoea, and raised intra-abdominal pressure (as in pregnancy) increase venous congestion and shearing forces. Increased resting anal tone and arteriovenous shunting within the cushions contribute to the bright-red bleeding characteristic of internal haemorrhoids. Progressive fragmentation of the connective tissue and dilatation of the vascular plexus lead to bleeding, prolapse, mucus discharge, and, in external components, thrombosis.",
+    "additionalDifferentials": [
+      "Colorectal carcinoma or rectal polyp causing rectal bleeding",
+      "Anal fissure (painful bright-red bleeding with sentinel tag)",
+      "Rectal prolapse (full-thickness circumferential prolapse)",
+      "Anal or perianal skin tag or hypertrophied anal papilla",
+      "Anorectal abscess or fistula",
+      "Inflammatory bowel disease with proctitis",
+      "Anal carcinoma or anal intraepithelial neoplasia"
     ],
-    [
-     "Primary Differentials",
-     "Colorectal carcinoma or rectal polyp causing rectal bleeding, Anal fissure (painful bright-red bleeding with sentinel tag),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Proctoscopy or anoscopy to visualise and grade internal haemorrhoids",
+      "Rigid or flexible sigmoidoscopy to inspect the distal bowel",
+      "Colonoscopy where bleeding is unexplained, atypical, or the patient is at risk of neoplasia",
+      "Full blood count if bleeding is chronic or heavy, to detect iron-deficiency anaemia",
+      "Digital rectal examination to exclude a palpable mass and assess sphincter tone",
+      "Faecal immunochemical testing and further imaging where colorectal cancer must be excluded"
     ],
-    [
-     "Management Strategy",
-     "First-line conservative management with a high-fibre diet, increased fluids, stool softeners, and avoidance of straining and",
-     "Core treatment modality"
+    "redFlags": [
+      "Change in bowel habit, weight loss, or iron-deficiency anaemia suggesting colorectal malignancy",
+      "Dark blood, blood mixed within the stool, or a palpable rectal mass",
+      "Persistent bleeding despite adequate treatment of visible haemorrhoids",
+      "Severe unremitting anal pain suggesting thrombosis, abscess, or another cause",
+      "New symptoms in older patients or those with a family history of bowel cancer"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing rectal bleeding to haemorrhoids without adequately excluding colorectal cancer in at-risk patients",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most haemorrhoidal symptoms respond well to conservative measures and office-based procedures, with good long-term control; recurrence can occur, particularly if predisposing factors such as constipation and straining persist, and surgery carries small risks of pain, bleeding, and rarely incontinence or stenosis.",
+    "pitfalls": [
+      "Attributing rectal bleeding to haemorrhoids without adequately excluding colorectal cancer in at-risk patients",
+      "Banding external or mixed haemorrhoids below the dentate line, which causes severe pain",
+      "Overlooking a coexisting fissure or fistula as the true source of symptoms",
+      "Neglecting to correct constipation and straining, leading to early recurrence",
+      "Aggressive circumferential excision risking anal stenosis"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Association of Coloproctology of Great Britain and Ireland guidance on haemorrhoids",
+      "NICE clinical guidance on suspected lower gastrointestinal cancer referral"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line conservative management with a high-fibre diet, increased fluids, stool softeners, and avoidance of straining and prolonged toilet sitting",
+      "Topical agents for short-term relief of pruritus and discomfort",
+      "Office-based rubber-band ligation for lower-grade internal haemorrhoids, with sclerotherapy or infrared coagulation as alternatives",
+      "Excisional or stapled haemorrhoidectomy or haemorrhoidal artery ligation for high-grade or refractory disease",
+      "Treat iron-deficiency anaemia arising from chronic or heavy bleeding",
+      "Exclude colorectal neoplasia with colonoscopy or faecal immunochemical testing when bleeding is atypical, unexplained or the patient is at risk",
+      "Correct persistent precipitating factors such as constipation and chronic straining to reduce recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for haemorrhoids."
-  }
- ],
- "diagrams": [
-  {
-   "id": "haemorrhoids-real-image",
-   "title": "Haemorrhoids: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "haemorrhoids-pathway",
+      "title": "Haemorrhoids: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Haemorrhoids are symptomatic enlargement and distal displacement of the normal anal cushions; the cushions themselves are physiological structures contributing to continence, so their mere presence is not pathological",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Change in bowel habit, weight loss, or iron-deficiency anaemia suggesting colorectal malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Proctoscopy or anoscopy to visualise and grade internal haemorrhoids, Rigid or flexible sigmoidoscopy to inspect the distal bowel, Colonoscopy where bleeding is unexplained, atypical, or the patient is at risk of neoplasia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line conservative management with a high-fibre diet, increased fluids, stool softeners, and avoidance of straining and prolonged toilet sitting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing rectal bleeding to haemorrhoids without adequately excluding colorectal cancer in at-risk patients"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of haemorrhoids."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "haemorrhoids-matrix",
+      "title": "Haemorrhoids: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Haemorrhoids are symptomatic enlargement and distal displacement of the normal anal cushions; the cushions themselves are",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Proctoscopy or anoscopy to visualise and grade internal haemorrhoids, Rigid or flexible sigmoidoscopy to inspect the distal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Colorectal carcinoma or rectal polyp causing rectal bleeding, Anal fissure (painful bright-red bleeding with sentinel tag),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line conservative management with a high-fibre diet, increased fluids, stool softeners, and avoidance of straining and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing rectal bleeding to haemorrhoids without adequately excluding colorectal cancer in at-risk patients",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for haemorrhoids."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 297-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "haemorrhoids-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Internal haemorrhoid grading (Goligher)",
+          "cells": [
+            {
+              "text": "Grade I no prolapse; II prolapse with spontaneous reduction; III prolapse needing manual reduction; IV irreducible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proctoscopy or anoscopy",
+          "cells": [
+            {
+              "text": "Visualises and grades internal haemorrhoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital rectal examination",
+          "cells": [
+            {
+              "text": "Excludes a palpable mass and assesses sphincter tone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sigmoidoscopy",
+          "cells": [
+            {
+              "text": "Inspects the distal bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "Used when bleeding is unexplained or atypical, or the patient is at risk of neoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Detects iron-deficiency anaemia when bleeding is chronic or heavy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal immunochemical testing",
+          "cells": [
+            {
+              "text": "Used where colorectal cancer must be excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemorrhoids-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Colorectal carcinoma or rectal polyp",
+          "cells": [
+            {
+              "text": "Change in bowel habit, weight loss, or iron-deficiency anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal fissure",
+          "cells": [
+            {
+              "text": "Painful bright-red bleeding with a sentinel tag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectal prolapse",
+          "cells": [
+            {
+              "text": "Full-thickness circumferential prolapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal skin tag or hypertrophied papilla",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal abscess or fistula",
+          "cells": [
+            {
+              "text": "Severe unremitting anal pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease with proctitis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal carcinoma or anal intraepithelial neoplasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemorrhoids-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "High-fibre diet, increased fluids, stool softeners; avoid straining and prolonged toilet sitting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical agents",
+          "cells": [
+            {
+              "text": "Short-term relief of pruritus and discomfort"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rubber-band ligation",
+          "cells": [
+            {
+              "text": "Office-based, for lower-grade internal haemorrhoids; sclerotherapy or infrared coagulation as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemorrhoidectomy or artery ligation",
+          "cells": [
+            {
+              "text": "Excisional or stapled haemorrhoidectomy, or haemorrhoidal artery ligation, for high-grade or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat iron-deficiency anaemia",
+          "cells": [
+            {
+              "text": "Arising from chronic or heavy bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude colorectal neoplasia",
+          "cells": [
+            {
+              "text": "Colonoscopy or faecal immunochemical testing when bleeding is atypical, unexplained or the patient is at risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct precipitating factors",
+          "cells": [
+            {
+              "text": "Persistent constipation and straining, to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemorrhoids-treatment-2",
+      "kind": "treatment",
+      "title": "Staging and treatment of hemorrhoids",
+      "rowHeader": "Option",
+      "columns": [
+        "Description of classification",
+        "Treatment"
+      ],
+      "rows": [
+        {
+          "parameter": "Stage I",
+          "cells": [
+            {
+              "text": "Enlargement with bleeding"
+            },
+            {
+              "text": "Fiber supplementation, cortisone suppository, sclerotherapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage II",
+          "cells": [
+            {
+              "text": "Protrusion with spontaneous reduction"
+            },
+            {
+              "text": "Fiber supplementation, cortisone suppository"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage III",
+          "cells": [
+            {
+              "text": "Protrusion requiring manual reduction"
+            },
+            {
+              "text": "Fiber supplementation, cortisone suppository, banding, operative hemorrhoidectomy (stapled or traditional)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage IV",
+          "cells": [
+            {
+              "text": "Irreducible protrusion"
+            },
+            {
+              "text": "Fiber supplementation, cortisone suppository, operative hemorrhoidectomy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "haemorrhoids-dx-mgmt",
+      "title": "Diagnosis and management of Haemorrhoids",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rectal bleeding or anal symptoms suspected to be haemorrhoidal",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (weight loss, iron-deficiency anaemia, mass, persistent bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude colorectal cancer before attributing bleeding to haemorrhoids",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anoscopy, digital rectal exam, full blood count; colonoscopy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is proximal pathology excluded and haemorrhoids the cause of bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue workup: proctitis, anal fissure, rectal prolapse or neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-fibre diet, fluids and stool softeners; avoid straining",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Office rubber-band ligation for lower-grade internal haemorrhoids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Haemorrhoidectomy or artery ligation for high-grade or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat iron-deficiency anaemia from chronic or heavy bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms controlled; correct constipation and straining to reduce recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

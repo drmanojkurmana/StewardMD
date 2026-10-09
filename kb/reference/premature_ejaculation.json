@@ -1,171 +1,471 @@
 {
- "id": "premature_ejaculation",
- "name": "Premature ejaculation",
- "aliases": [
-  "PE",
-  "early ejaculation",
-  "rapid ejaculation"
- ],
- "class": "non_infective",
- "system": "Reproductive medicine",
- "specialty": "Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Premature ejaculation is the most common male sexual complaint and is defined by ejaculation occurring sooner than desired, with a perceived inability to delay it and associated distress",
-   "It is classified as lifelong (present since first sexual experiences) or acquired (developing later after a period of normal control), which guides evaluation and management",
-   "Diagnosis is clinical and rests on the history; the intravaginal ejaculatory latency time and degree of control, distress, and interpersonal difficulty frame the assessment",
-   "Acquired cases warrant a search for contributing conditions such as erectile dysfunction, thyroid dysfunction, prostatitis, or psychological stressors",
-   "Erectile dysfunction and premature ejaculation frequently coexist, and treating the erectile problem first may resolve the ejaculatory complaint",
-   "Behavioural techniques such as the stop-start and squeeze methods can improve ejaculatory control, often combined with partner involvement and counselling",
-   "Pharmacological options work by delaying the ejaculatory reflex, and topical desensitising agents or centrally acting serotonergic medication are used according to principle rather than fixed dosing",
-   "A collaborative, non-judgemental approach that addresses relationship and psychological factors improves outcomes"
+  "id": "premature_ejaculation",
+  "name": "Premature ejaculation",
+  "aliases": [
+    "PE",
+    "early ejaculation",
+    "rapid ejaculation"
   ],
-  "pathophysiology": "Ejaculation is a spinal reflex coordinated by sympathetic, parasympathetic, and somatic pathways and modulated by supraspinal serotonergic centres. Serotonin (5-HT) generally raises the ejaculatory threshold, and variation in central serotonergic tone and receptor sensitivity is thought to underlie lifelong premature ejaculation, giving it a substantial neurobiological and genetic basis. Acquired premature ejaculation is more often secondary, arising from erectile dysfunction (where a man rushes before losing his erection), prostatic or thyroid disease, or psychological factors such as anxiety and performance pressure that heighten sympathetic arousal and shorten latency.",
-  "additionalDifferentials": [
-   "Erectile dysfunction with compensatory rapid ejaculation",
-   "Chronic prostatitis or pelvic pain contributing to ejaculatory symptoms",
-   "Hyperthyroidism",
-   "Performance anxiety and situational sexual dysfunction",
-   "Relationship or psychosexual conflict",
-   "Substance or medication effects"
-  ],
-  "additionalInvestigations": [
-   "Focused sexual and psychosocial history distinguishing lifelong from acquired patterns",
-   "Assessment of erectile function to identify coexisting erectile dysfunction",
-   "Thyroid function testing when an endocrine cause is suspected",
-   "Evaluation for prostatitis or lower urinary tract symptoms where indicated",
-   "Screening for depression, anxiety, and relationship stressors"
-  ],
-  "redFlags": [
-   "Sudden acquired premature ejaculation with erectile dysfunction, which may signal underlying vascular or endocrine disease",
-   "Associated pelvic or perineal pain suggesting prostatitis",
-   "Significant psychological distress, relationship breakdown, or depression",
-   "Symptoms of thyrotoxicosis accompanying new-onset ejaculatory change"
-  ],
-  "prognosis": "Premature ejaculation responds well to a combination of behavioural therapy, pharmacological delay of the reflex, and treatment of any coexisting condition, though lifelong forms may require ongoing management to maintain control.",
-  "pitfalls": [
-   "Treating premature ejaculation in isolation while missing coexisting erectile dysfunction",
-   "Neglecting the partner and relationship dimension, which strongly influences distress and outcome",
-   "Overlooking treatable contributors such as thyroid disease or prostatitis in acquired cases",
-   "Framing the problem as purely psychological when a neurobiological basis is likely in lifelong disease"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Behavioural techniques such as the stop-start and squeeze methods, often with partner involvement and psychosexual counselling",
-   "Serotonergic pharmacotherapy to raise the ejaculatory threshold, using an on-demand or daily SSRI such as dapoxetine",
-   "Topical anaesthetic agents such as lidocaine-prilocaine applied to reduce glans sensitivity",
-   "Treat coexisting erectile dysfunction, for example with a PDE5 inhibitor, which may itself resolve the ejaculatory complaint",
-   "Identify and manage contributing conditions such as thyroid dysfunction, prostatitis or lower urinary tract symptoms",
-   "Address anxiety, performance pressure and relationship factors with psychological support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "premature_ejaculation-pathway",
-   "title": "Premature ejaculation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Premature ejaculation is the most common male sexual complaint and is defined by ejaculation occurring sooner than desired, with a perceived inability to delay it and associated distress",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden acquired premature ejaculation with erectile dysfunction, which may signal underlying vascular or endocrine disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Focused sexual and psychosocial history distinguishing lifelong from acquired patterns, Assessment of erectile function to identify coexisting erectile dysfunction, Thyroid function testing when an endocrine cause is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Behavioural techniques such as the stop-start and squeeze methods, often with partner involvement and psychosexual counselling"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating premature ejaculation in isolation while missing coexisting erectile dysfunction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of premature ejaculation."
-  }
- ],
- "tables": [
-  {
-   "id": "premature_ejaculation-matrix",
-   "title": "Premature ejaculation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Premature ejaculation is the most common male sexual complaint and is defined by ejaculation occurring sooner than desired, with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Reproductive medicine",
+  "specialty": "Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Premature ejaculation is the most common male sexual complaint and is defined by ejaculation occurring sooner than desired, with a perceived inability to delay it and associated distress",
+      "It is classified as lifelong (present since first sexual experiences) or acquired (developing later after a period of normal control), which guides evaluation and management",
+      "Diagnosis is clinical and rests on the history; the intravaginal ejaculatory latency time and degree of control, distress, and interpersonal difficulty frame the assessment",
+      "Acquired cases warrant a search for contributing conditions such as erectile dysfunction, thyroid dysfunction, prostatitis, or psychological stressors",
+      "Erectile dysfunction and premature ejaculation frequently coexist, and treating the erectile problem first may resolve the ejaculatory complaint",
+      "Behavioural techniques such as the stop-start and squeeze methods can improve ejaculatory control, often combined with partner involvement and counselling",
+      "Pharmacological options work by delaying the ejaculatory reflex, and topical desensitising agents or centrally acting serotonergic medication are used according to principle rather than fixed dosing",
+      "A collaborative, non-judgemental approach that addresses relationship and psychological factors improves outcomes"
     ],
-    [
-     "Key Investigations",
-     "Focused sexual and psychosocial history distinguishing lifelong from acquired patterns, Assessment of erectile function to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ejaculation is a spinal reflex coordinated by sympathetic, parasympathetic, and somatic pathways and modulated by supraspinal serotonergic centres. Serotonin (5-HT) generally raises the ejaculatory threshold, and variation in central serotonergic tone and receptor sensitivity is thought to underlie lifelong premature ejaculation, giving it a substantial neurobiological and genetic basis. Acquired premature ejaculation is more often secondary, arising from erectile dysfunction (where a man rushes before losing his erection), prostatic or thyroid disease, or psychological factors such as anxiety and performance pressure that heighten sympathetic arousal and shorten latency.",
+    "additionalDifferentials": [
+      "Erectile dysfunction with compensatory rapid ejaculation",
+      "Chronic prostatitis or pelvic pain contributing to ejaculatory symptoms",
+      "Hyperthyroidism",
+      "Performance anxiety and situational sexual dysfunction",
+      "Relationship or psychosexual conflict",
+      "Substance or medication effects"
     ],
-    [
-     "Primary Differentials",
-     "Erectile dysfunction with compensatory rapid ejaculation, Chronic prostatitis or pelvic pain contributing to ejaculatory",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Focused sexual and psychosocial history distinguishing lifelong from acquired patterns",
+      "Assessment of erectile function to identify coexisting erectile dysfunction",
+      "Thyroid function testing when an endocrine cause is suspected",
+      "Evaluation for prostatitis or lower urinary tract symptoms where indicated",
+      "Screening for depression, anxiety, and relationship stressors"
     ],
-    [
-     "Management Strategy",
-     "Behavioural techniques such as the stop-start and squeeze methods, often with partner involvement and psychosexual counselling",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden acquired premature ejaculation with erectile dysfunction, which may signal underlying vascular or endocrine disease",
+      "Associated pelvic or perineal pain suggesting prostatitis",
+      "Significant psychological distress, relationship breakdown, or depression",
+      "Symptoms of thyrotoxicosis accompanying new-onset ejaculatory change"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating premature ejaculation in isolation while missing coexisting erectile dysfunction",
-     "Prevent diagnostic or management error"
+    "prognosis": "Premature ejaculation responds well to a combination of behavioural therapy, pharmacological delay of the reflex, and treatment of any coexisting condition, though lifelong forms may require ongoing management to maintain control.",
+    "pitfalls": [
+      "Treating premature ejaculation in isolation while missing coexisting erectile dysfunction",
+      "Neglecting the partner and relationship dimension, which strongly influences distress and outcome",
+      "Overlooking treatable contributors such as thyroid disease or prostatitis in acquired cases",
+      "Framing the problem as purely psychological when a neurobiological basis is likely in lifelong disease"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Behavioural techniques such as the stop-start and squeeze methods, often with partner involvement and psychosexual counselling",
+      "Serotonergic pharmacotherapy to raise the ejaculatory threshold, using an on-demand or daily SSRI such as dapoxetine",
+      "Topical anaesthetic agents such as lidocaine-prilocaine applied to reduce glans sensitivity",
+      "Treat coexisting erectile dysfunction, for example with a PDE5 inhibitor, which may itself resolve the ejaculatory complaint",
+      "Identify and manage contributing conditions such as thyroid dysfunction, prostatitis or lower urinary tract symptoms",
+      "Address anxiety, performance pressure and relationship factors with psychological support"
     ]
-   ],
-   "caption": "Overview comparison matrix for premature ejaculation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "premature-ejaculation-real-image",
-   "title": "Premature ejaculation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "premature_ejaculation-pathway",
+      "title": "Premature ejaculation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Premature ejaculation is the most common male sexual complaint and is defined by ejaculation occurring sooner than desired, with a perceived inability to delay it and associated distress",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden acquired premature ejaculation with erectile dysfunction, which may signal underlying vascular or endocrine disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Focused sexual and psychosocial history distinguishing lifelong from acquired patterns, Assessment of erectile function to identify coexisting erectile dysfunction, Thyroid function testing when an endocrine cause is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Behavioural techniques such as the stop-start and squeeze methods, often with partner involvement and psychosexual counselling"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating premature ejaculation in isolation while missing coexisting erectile dysfunction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of premature ejaculation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "premature_ejaculation-matrix",
+      "title": "Premature ejaculation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Premature ejaculation is the most common male sexual complaint and is defined by ejaculation occurring sooner than desired, with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Focused sexual and psychosocial history distinguishing lifelong from acquired patterns, Assessment of erectile function to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Erectile dysfunction with compensatory rapid ejaculation, Chronic prostatitis or pelvic pain contributing to ejaculatory",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Behavioural techniques such as the stop-start and squeeze methods, often with partner involvement and psychosexual counselling",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating premature ejaculation in isolation while missing coexisting erectile dysfunction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for premature ejaculation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "premature_ejaculation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sexual and psychosocial history",
+          "cells": [
+            {
+              "text": "Lifelong versus acquired pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erectile function assessment",
+          "cells": [
+            {
+              "text": "Coexisting erectile dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Endocrine cause, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for prostatitis or lower urinary tract symptoms",
+          "cells": [
+            {
+              "text": "Prostatitis or LUTS, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for depression, anxiety and relationship stress",
+          "cells": [
+            {
+              "text": "Psychological and relationship contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "premature_ejaculation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Erectile dysfunction with compensatory rapid ejaculation",
+          "cells": [
+            {
+              "text": "Erectile dysfunction present"
+            },
+            {
+              "text": "Erectile function assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic prostatitis or pelvic pain",
+          "cells": [
+            {
+              "text": "Associated pelvic or perineal pain"
+            },
+            {
+              "text": "Prostatitis evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperthyroidism",
+          "cells": [
+            {
+              "text": "Symptoms of thyrotoxicosis"
+            },
+            {
+              "text": "Thyroid function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Performance anxiety or relationship conflict",
+          "cells": [
+            {
+              "text": "Significant psychological distress or relationship breakdown"
+            },
+            {
+              "text": "Depression and anxiety screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "premature_ejaculation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural techniques",
+          "cells": [
+            {
+              "text": "Stop-start and squeeze methods, often with partner involvement and psychosexual counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serotonergic pharmacotherapy",
+          "cells": [
+            {
+              "text": "On-demand or daily SSRI such as dapoxetine to raise the ejaculatory threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical anaesthetic",
+          "cells": [
+            {
+              "text": "Lidocaine-prilocaine to reduce glans sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting erectile dysfunction",
+          "cells": [
+            {
+              "text": "PDE5 inhibitor, which may itself resolve the complaint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage contributing conditions",
+          "cells": [
+            {
+              "text": "Thyroid dysfunction, prostatitis or lower urinary tract symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Anxiety, performance pressure and relationship factors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "premature_ejaculation-dx-mgmt",
+      "title": "Diagnosis and management of Premature ejaculation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Premature ejaculation: ejaculatory control complaint, lifelong or acquired",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden onset with erectile dysfunction, pelvic pain or thyrotoxic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: evaluate for underlying vascular, endocrine or prostatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sexual and psychosocial history; erectile function; thyroid function; mood screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are history and tests consistent with premature ejaculation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other causes such as ED, thyroid disease or prostatitis; repeat workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Behavioural techniques: stop-start and squeeze, with partner involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "On-demand or daily SSRI such as dapoxetine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical lidocaine-prilocaine to reduce glans sensitivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting erectile dysfunction and contributing conditions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treatment follows the cause found; psychological support for anxiety",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

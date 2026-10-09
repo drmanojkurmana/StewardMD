@@ -1,173 +1,473 @@
 {
- "id": "bacterial_keratitis",
- "name": "Bacterial keratitis",
- "aliases": [
-  "microbial keratitis",
-  "bacterial corneal ulcer",
-  "infective keratitis",
-  "corneal ulcer"
- ],
- "class": "infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with a painful red eye, photophobia, watering, discharge, and reduced vision, usually developing over hours to days",
-   "Examination shows a focal white or grey corneal infiltrate with an overlying epithelial defect that stains with fluorescein; a hypopyon may be present in severe cases",
-   "Contact lens wear (especially overnight or poor hygiene) is the leading risk factor, alongside corneal trauma, ocular surface disease, and previous surgery",
-   "Pseudomonas is an important and rapidly destructive pathogen in contact lens wearers; Staphylococci and Streptococci are also common",
-   "Corneal scraping for Gram stain and culture should ideally be taken before starting intensive treatment in significant ulcers",
-   "Management is with intensive topical broad-spectrum antibiotics, initially given very frequently, and stopping contact lens use",
-   "Central ulcers, large infiltrates, or delayed treatment risk scarring, perforation, and permanent visual loss"
+  "id": "bacterial_keratitis",
+  "name": "Bacterial keratitis",
+  "aliases": [
+    "microbial keratitis",
+    "bacterial corneal ulcer",
+    "infective keratitis",
+    "corneal ulcer"
   ],
-  "pathophysiology": "Bacterial keratitis develops when the corneal epithelial barrier is breached (by trauma, contact lens wear, dry eye, or surgery), allowing bacteria to invade the corneal stroma. Bacterial proliferation and the release of enzymes and toxins, together with the host inflammatory response and recruited neutrophils, cause stromal necrosis and an infiltrate. Collagen-degrading enzymes can rapidly thin the cornea, leading to ulceration, descemetocele formation, and perforation. Healing occurs with scarring that reduces corneal clarity, particularly when the visual axis is involved.",
-  "additionalDifferentials": [
-   "Herpes simplex (dendritic) keratitis",
-   "Fungal keratitis",
-   "Acanthamoeba keratitis",
-   "Marginal (hypersensitivity) keratitis",
-   "Sterile contact-lens-related infiltrates",
-   "Anterior uveitis or acute angle-closure glaucoma (for the red painful eye)"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination with fluorescein staining to define the infiltrate and epithelial defect",
-   "Corneal scraping for Gram stain, culture, and sensitivities",
-   "Contact lens and lens case cultures where relevant",
-   "Measurement of infiltrate size and assessment of corneal thinning",
-   "Confocal microscopy or specialised staining if Acanthamoeba or fungal infection is suspected"
-  ],
-  "redFlags": [
-   "Sight-threatening — central or large ulcers can scar the visual axis or perforate the cornea",
-   "Rapid progression, especially in a contact lens wearer, suggesting Pseudomonas",
-   "Hypopyon, corneal thinning, or descemetocele indicating impending perforation",
-   "Worsening despite treatment raising suspicion of fungal or Acanthamoeba infection"
-  ],
-  "prognosis": "Prompt intensive antibiotic treatment usually controls infection, but a central scar, large ulcer, or delayed care can leave permanent visual impairment; perforation may require corneal grafting.",
-  "pitfalls": [
-   "Prescribing topical steroids or a patch that can worsen infection, particularly with undiagnosed herpetic or fungal disease",
-   "Failing to scrape a significant ulcer for culture before starting treatment",
-   "Underestimating the aggressiveness of contact-lens-associated Pseudomonas keratitis",
-   "Missing Acanthamoeba in a contact lens wearer with pain out of proportion to signs"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Take a corneal scrape for Gram stain and culture, then start intensive topical broad-spectrum antibiotics such as fluoroquinolone monotherapy or fortified aminoglycoside plus cephalosporin",
-   "Administer drops very frequently including overnight in significant ulcers, tapering according to clinical response and culture sensitivities",
-   "Stop contact lens wear immediately and send the lens and case for culture",
-   "Provide analgesia and a cycloplegic drop for pain and ciliary spasm, and withhold topical corticosteroids until infection is controlled",
-   "Monitor infiltrate size, epithelial healing and corneal thinning closely, watching for descemetocele formation and perforation",
-   "Escalate to tissue adhesive, corneal glue or emergency keratoplasty for impending or actual perforation",
-   "Refer for specialist microscopy and tailored therapy when Acanthamoeba or fungal keratitis is suspected, particularly in unresponsive contact-lens-related disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bacterial_keratitis-pathway",
-   "title": "Bacterial keratitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with a painful red eye, photophobia, watering, discharge, and reduced vision, usually developing over hours to days",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sight-threatening - central or large ulcers can scar the visual axis or perforate the cornea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination with fluorescein staining to define the infiltrate and epithelial defect, Corneal scraping for Gram stain, culture, and sensitivities, Contact lens and lens case cultures where relevant"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Take a corneal scrape for Gram stain and culture, then start intensive topical broad-spectrum antibiotics such as fluoroquinolone monotherapy or fortified aminoglycoside plus cephalosporin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing topical steroids or a patch that can worsen infection, particularly with undiagnosed herpetic or fungal disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bacterial keratitis."
-  }
- ],
- "tables": [
-  {
-   "id": "bacterial_keratitis-matrix",
-   "title": "Bacterial keratitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with a painful red eye, photophobia, watering, discharge, and reduced vision, usually developing over hours to days",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with a painful red eye, photophobia, watering, discharge, and reduced vision, usually developing over hours to days",
+      "Examination shows a focal white or grey corneal infiltrate with an overlying epithelial defect that stains with fluorescein; a hypopyon may be present in severe cases",
+      "Contact lens wear (especially overnight or poor hygiene) is the leading risk factor, alongside corneal trauma, ocular surface disease, and previous surgery",
+      "Pseudomonas is an important and rapidly destructive pathogen in contact lens wearers; Staphylococci and Streptococci are also common",
+      "Corneal scraping for Gram stain and culture should ideally be taken before starting intensive treatment in significant ulcers",
+      "Management is with intensive topical broad-spectrum antibiotics, initially given very frequently, and stopping contact lens use",
+      "Central ulcers, large infiltrates, or delayed treatment risk scarring, perforation, and permanent visual loss"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination with fluorescein staining to define the infiltrate and epithelial defect, Corneal scraping for Gram stain,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bacterial keratitis develops when the corneal epithelial barrier is breached (by trauma, contact lens wear, dry eye, or surgery), allowing bacteria to invade the corneal stroma. Bacterial proliferation and the release of enzymes and toxins, together with the host inflammatory response and recruited neutrophils, cause stromal necrosis and an infiltrate. Collagen-degrading enzymes can rapidly thin the cornea, leading to ulceration, descemetocele formation, and perforation. Healing occurs with scarring that reduces corneal clarity, particularly when the visual axis is involved.",
+    "additionalDifferentials": [
+      "Herpes simplex (dendritic) keratitis",
+      "Fungal keratitis",
+      "Acanthamoeba keratitis",
+      "Marginal (hypersensitivity) keratitis",
+      "Sterile contact-lens-related infiltrates",
+      "Anterior uveitis or acute angle-closure glaucoma (for the red painful eye)"
     ],
-    [
-     "Primary Differentials",
-     "Herpes simplex (dendritic) keratitis, Fungal keratitis, Acanthamoeba keratitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination with fluorescein staining to define the infiltrate and epithelial defect",
+      "Corneal scraping for Gram stain, culture, and sensitivities",
+      "Contact lens and lens case cultures where relevant",
+      "Measurement of infiltrate size and assessment of corneal thinning",
+      "Confocal microscopy or specialised staining if Acanthamoeba or fungal infection is suspected"
     ],
-    [
-     "Management Strategy",
-     "Take a corneal scrape for Gram stain and culture, then start intensive topical broad-spectrum antibiotics such as fluoroquinolone",
-     "Core treatment modality"
+    "redFlags": [
+      "Sight-threatening — central or large ulcers can scar the visual axis or perforate the cornea",
+      "Rapid progression, especially in a contact lens wearer, suggesting Pseudomonas",
+      "Hypopyon, corneal thinning, or descemetocele indicating impending perforation",
+      "Worsening despite treatment raising suspicion of fungal or Acanthamoeba infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing topical steroids or a patch that can worsen infection, particularly with undiagnosed herpetic or fungal disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prompt intensive antibiotic treatment usually controls infection, but a central scar, large ulcer, or delayed care can leave permanent visual impairment; perforation may require corneal grafting.",
+    "pitfalls": [
+      "Prescribing topical steroids or a patch that can worsen infection, particularly with undiagnosed herpetic or fungal disease",
+      "Failing to scrape a significant ulcer for culture before starting treatment",
+      "Underestimating the aggressiveness of contact-lens-associated Pseudomonas keratitis",
+      "Missing Acanthamoeba in a contact lens wearer with pain out of proportion to signs"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Take a corneal scrape for Gram stain and culture, then start intensive topical broad-spectrum antibiotics such as fluoroquinolone monotherapy or fortified aminoglycoside plus cephalosporin",
+      "Administer drops very frequently including overnight in significant ulcers, tapering according to clinical response and culture sensitivities",
+      "Stop contact lens wear immediately and send the lens and case for culture",
+      "Provide analgesia and a cycloplegic drop for pain and ciliary spasm, and withhold topical corticosteroids until infection is controlled",
+      "Monitor infiltrate size, epithelial healing and corneal thinning closely, watching for descemetocele formation and perforation",
+      "Escalate to tissue adhesive, corneal glue or emergency keratoplasty for impending or actual perforation",
+      "Refer for specialist microscopy and tailored therapy when Acanthamoeba or fungal keratitis is suspected, particularly in unresponsive contact-lens-related disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for bacterial keratitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bacterial-keratitis-real-image",
-   "title": "Bacterial keratitis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "bacterial_keratitis-pathway",
+      "title": "Bacterial keratitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with a painful red eye, photophobia, watering, discharge, and reduced vision, usually developing over hours to days",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sight-threatening - central or large ulcers can scar the visual axis or perforate the cornea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination with fluorescein staining to define the infiltrate and epithelial defect, Corneal scraping for Gram stain, culture, and sensitivities, Contact lens and lens case cultures where relevant"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Take a corneal scrape for Gram stain and culture, then start intensive topical broad-spectrum antibiotics such as fluoroquinolone monotherapy or fortified aminoglycoside plus cephalosporin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing topical steroids or a patch that can worsen infection, particularly with undiagnosed herpetic or fungal disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bacterial keratitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bacterial_keratitis-matrix",
+      "title": "Bacterial keratitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with a painful red eye, photophobia, watering, discharge, and reduced vision, usually developing over hours to days",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination with fluorescein staining to define the infiltrate and epithelial defect, Corneal scraping for Gram stain,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpes simplex (dendritic) keratitis, Fungal keratitis, Acanthamoeba keratitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Take a corneal scrape for Gram stain and culture, then start intensive topical broad-spectrum antibiotics such as fluoroquinolone",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing topical steroids or a patch that can worsen infection, particularly with undiagnosed herpetic or fungal disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bacterial keratitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bacterial_keratitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination with fluorescein staining",
+          "cells": [
+            {
+              "text": "Infiltrate and epithelial defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal scraping for Gram stain and culture",
+          "cells": [
+            {
+              "text": "Organism and sensitivities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact lens and lens case cultures",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measurement of infiltrate size and corneal thinning",
+          "cells": [
+            {
+              "text": "Infiltrate size and thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confocal microscopy or specialised staining",
+          "cells": [
+            {
+              "text": "Acanthamoeba or fungal infection suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacterial_keratitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex (dendritic) keratitis",
+          "cells": [
+            {
+              "text": "Steroids can worsen undiagnosed herpetic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal keratitis",
+          "cells": [
+            {
+              "text": "Identified by specialised microscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacterial_keratitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corneal scrape then intensive antibiotics",
+          "cells": [
+            {
+              "text": "Gram stain and culture, then intensive topical broad-spectrum antibiotics"
+            },
+            {
+              "text": "Start after scraping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frequent dosing",
+          "cells": [
+            {
+              "text": "Drops very frequently, including overnight in significant ulcers"
+            },
+            {
+              "text": "Tapered to response and sensitivities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop contact lens wear",
+          "cells": [
+            {
+              "text": "Lens and case sent for culture"
+            },
+            {
+              "text": "Contact lens use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and cycloplegia",
+          "cells": [
+            {
+              "text": "Cycloplegic drop for pain and ciliary spasm; withhold steroids until infection is controlled"
+            },
+            {
+              "text": "Pain and spasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor for thinning and perforation",
+          "cells": [
+            {
+              "text": "Infiltrate size, epithelial healing, descemetocele formation"
+            },
+            {
+              "text": "Complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue adhesive or keratoplasty",
+          "cells": [
+            {
+              "text": "Corneal glue or emergency keratoplasty"
+            },
+            {
+              "text": "Impending or actual perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Tailored therapy when Acanthamoeba or fungal keratitis is suspected"
+            },
+            {
+              "text": "Unresponsive lens-related disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bacterial_keratitis-dx-mgmt",
+      "title": "Diagnosis and management of Bacterial keratitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful red eye with a corneal ulcer, often in a contact lens wearer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Central or large ulcer, rapid progression or perforation risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Corneal scrape, then intensive topical antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluorescein slit lamp, corneal scraping culture, lens cultures, infiltrate measurement",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organism identified, or Acanthamoeba and fungus excluded on microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intensive topical broad-spectrum antibiotics with frequent dosing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and refer for specialist microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop contact lens wear; send lens for culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cycloplegic drops; withhold steroids until infection is controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor thinning and perforation; glue or keratoplasty if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist referral for Acanthamoeba or fungal keratitis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

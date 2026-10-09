@@ -1,179 +1,793 @@
 {
- "id": "drug_induced_lupus",
- "name": "Drug-induced lupus erythematosus",
- "aliases": [
-  "DILE",
-  "drug-induced lupus",
-  "procainamide-induced lupus",
-  "hydralazine-induced lupus",
-  "isoniazid",
-  "minocycline",
-  "anti-TNF-induced lupus",
-  "quinidine",
-  "anti-histone antibody syndrome"
- ],
- "class": "non_infective",
- "system": "Clinical pharmacology / Toxicology",
- "specialty": "Clinical Pharmacology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with arthralgia, myalgia, fever, serositis and constitutional symptoms after weeks to months of exposure to a culprit drug",
-   "Classic culprits include procainamide and hydralazine (highest risk), and also isoniazid, minocycline, quinidine and certain anticonvulsants",
-   "Anti-histone antibodies are characteristically positive, while anti-dsDNA antibodies are usually absent (a helpful contrast with idiopathic systemic lupus)",
-   "Renal and central nervous system involvement are uncommon compared with idiopathic lupus",
-   "Anti-TNF and other biologic agents cause a distinct form that may include anti-dsDNA positivity and occasional organ involvement",
-   "Slow acetylator status increases susceptibility to hydralazine- and procainamide-induced disease",
-   "The cornerstone of management is withdrawal of the offending drug, with symptoms usually resolving over weeks to months",
-   "A short course of non-steroidal anti-inflammatory drugs or corticosteroids may be used for troublesome symptoms during recovery"
+  "id": "drug_induced_lupus",
+  "name": "Drug-induced lupus erythematosus",
+  "aliases": [
+    "DILE",
+    "drug-induced lupus",
+    "procainamide-induced lupus",
+    "hydralazine-induced lupus",
+    "isoniazid",
+    "minocycline",
+    "anti-TNF-induced lupus",
+    "quinidine",
+    "anti-histone antibody syndrome"
   ],
-  "pathophysiology": "Drug-induced lupus is a systemic autoimmune reaction triggered by chronic drug exposure. Several mechanisms are proposed, including drug-induced disruption of central immune tolerance, inhibition of DNA methylation altering T-cell gene expression, and formation of reactive metabolites (often by activated neutrophils or hepatic oxidation) that modify nuclear proteins and break self-tolerance. This drives production of antinuclear antibodies, particularly against the histone-DNA complex, giving the characteristic anti-histone antibody positivity. Slow acetylators accumulate parent drug and are at higher risk with hydralazine and procainamide. Unlike idiopathic disease, immune complex deposition rarely causes significant nephritis, and manifestations typically remit once the drug and its metabolites are cleared.",
-  "additionalDifferentials": [
-   "Idiopathic systemic lupus erythematosus",
-   "Other connective tissue diseases (mixed connective tissue disease, undifferentiated)",
-   "Viral polyarthritis and post-viral syndromes",
-   "Rheumatoid arthritis",
-   "Drug hypersensitivity or serum-sickness-like reaction",
-   "Paraneoplastic autoimmune syndromes"
-  ],
-  "additionalInvestigations": [
-   "Antinuclear antibody testing (typically positive, often homogeneous)",
-   "Anti-histone antibodies to support the diagnosis",
-   "Anti-dsDNA and complement levels to help distinguish from idiopathic lupus",
-   "Full blood count for cytopenias and inflammatory markers (ESR/CRP)",
-   "Urinalysis and renal function to screen for the rare renal involvement",
-   "Chest radiography or echocardiography where serositis is suspected"
-  ],
-  "redFlags": [
-   "Significant pericardial or pleural effusion causing haemodynamic or respiratory compromise",
-   "Renal involvement with proteinuria or an active urinary sediment (uncommon, prompts reassessment)",
-   "Marked cytopenias",
-   "Persistent or worsening symptoms despite withdrawal of the suspected agent"
-  ],
-  "prognosis": "The prognosis is generally excellent; clinical features usually resolve within weeks to months of stopping the culprit drug, though serological abnormalities may persist longer. Serious organ-threatening disease is rare, and permanent sequelae are unusual.",
-  "pitfalls": [
-   "Mistaking drug-induced lupus for idiopathic systemic lupus and committing the patient to long-term immunosuppression",
-   "Failing to review the full medication list, including recently started antihypertensives, antiarrhythmics and biologics",
-   "Assuming a positive antinuclear antibody alone confirms the diagnosis without the compatible clinical picture",
-   "Not appreciating that biologic-induced lupus can behave atypically with anti-dsDNA positivity"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine",
-   "Kelley and Firestein's Textbook of Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Withdraw the culprit drug (classically procainamide or hydralazine), the definitive step, after which symptoms usually remit over weeks to months",
-   "Relieve arthralgia, myalgia and serositis with non-steroidal anti-inflammatory drugs",
-   "Use a short course of corticosteroids for significant serositis or symptoms not controlled by non-steroidal anti-inflammatory drugs",
-   "Consider hydroxychloroquine for persistent musculoskeletal or cutaneous manifestations",
-   "Monitor clinical resolution and manage the uncommon renal or anti-TNF-associated organ involvement as it arises",
-   "Document the offending drug, advise avoidance, and reassure that serological abnormalities may persist after clinical recovery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "drug_induced_lupus-pathway",
-   "title": "Drug-induced lupus erythematosus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with arthralgia, myalgia, fever, serositis and constitutional symptoms after weeks to months of exposure to a culprit drug",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant pericardial or pleural effusion causing haemodynamic or respiratory compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antinuclear antibody testing (typically positive, often homogeneous), Anti-histone antibodies to support the diagnosis, Anti-dsDNA and complement levels to help distinguish from idiopathic lupus"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Withdraw the culprit drug (classically procainamide or hydralazine), the definitive step, after which symptoms usually remit over weeks to months"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking drug-induced lupus for idiopathic systemic lupus and committing the patient to long-term immunosuppression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of drug-induced lupus erythematosus."
-  }
- ],
- "tables": [
-  {
-   "id": "drug_induced_lupus-matrix",
-   "title": "Drug-induced lupus erythematosus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with arthralgia, myalgia, fever, serositis and constitutional symptoms after weeks to months of exposure to a culprit",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Clinical pharmacology / Toxicology",
+  "specialty": "Clinical Pharmacology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with arthralgia, myalgia, fever, serositis and constitutional symptoms after weeks to months of exposure to a culprit drug",
+      "Classic culprits include procainamide and hydralazine (highest risk), and also isoniazid, minocycline, quinidine and certain anticonvulsants",
+      "Anti-histone antibodies are characteristically positive, while anti-dsDNA antibodies are usually absent (a helpful contrast with idiopathic systemic lupus)",
+      "Renal and central nervous system involvement are uncommon compared with idiopathic lupus",
+      "Anti-TNF and other biologic agents cause a distinct form that may include anti-dsDNA positivity and occasional organ involvement",
+      "Slow acetylator status increases susceptibility to hydralazine- and procainamide-induced disease",
+      "The cornerstone of management is withdrawal of the offending drug, with symptoms usually resolving over weeks to months",
+      "A short course of non-steroidal anti-inflammatory drugs or corticosteroids may be used for troublesome symptoms during recovery"
     ],
-    [
-     "Key Investigations",
-     "Antinuclear antibody testing (typically positive, often homogeneous), Anti-histone antibodies to support the diagnosis,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Drug-induced lupus is a systemic autoimmune reaction triggered by chronic drug exposure. Several mechanisms are proposed, including drug-induced disruption of central immune tolerance, inhibition of DNA methylation altering T-cell gene expression, and formation of reactive metabolites (often by activated neutrophils or hepatic oxidation) that modify nuclear proteins and break self-tolerance. This drives production of antinuclear antibodies, particularly against the histone-DNA complex, giving the characteristic anti-histone antibody positivity. Slow acetylators accumulate parent drug and are at higher risk with hydralazine and procainamide. Unlike idiopathic disease, immune complex deposition rarely causes significant nephritis, and manifestations typically remit once the drug and its metabolites are cleared.",
+    "additionalDifferentials": [
+      "Idiopathic systemic lupus erythematosus",
+      "Other connective tissue diseases (mixed connective tissue disease, undifferentiated)",
+      "Viral polyarthritis and post-viral syndromes",
+      "Rheumatoid arthritis",
+      "Drug hypersensitivity or serum-sickness-like reaction",
+      "Paraneoplastic autoimmune syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic systemic lupus erythematosus, Other connective tissue diseases (mixed connective tissue disease, undifferentiated),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antinuclear antibody testing (typically positive, often homogeneous)",
+      "Anti-histone antibodies to support the diagnosis",
+      "Anti-dsDNA and complement levels to help distinguish from idiopathic lupus",
+      "Full blood count for cytopenias and inflammatory markers (ESR/CRP)",
+      "Urinalysis and renal function to screen for the rare renal involvement",
+      "Chest radiography or echocardiography where serositis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Withdraw the culprit drug (classically procainamide or hydralazine), the definitive step, after which symptoms usually remit over",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant pericardial or pleural effusion causing haemodynamic or respiratory compromise",
+      "Renal involvement with proteinuria or an active urinary sediment (uncommon, prompts reassessment)",
+      "Marked cytopenias",
+      "Persistent or worsening symptoms despite withdrawal of the suspected agent"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking drug-induced lupus for idiopathic systemic lupus and committing the patient to long-term immunosuppression",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally excellent; clinical features usually resolve within weeks to months of stopping the culprit drug, though serological abnormalities may persist longer. Serious organ-threatening disease is rare, and permanent sequelae are unusual.",
+    "pitfalls": [
+      "Mistaking drug-induced lupus for idiopathic systemic lupus and committing the patient to long-term immunosuppression",
+      "Failing to review the full medication list, including recently started antihypertensives, antiarrhythmics and biologics",
+      "Assuming a positive antinuclear antibody alone confirms the diagnosis without the compatible clinical picture",
+      "Not appreciating that biologic-induced lupus can behave atypically with anti-dsDNA positivity"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine",
+      "Kelley and Firestein's Textbook of Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Withdraw the culprit drug (classically procainamide or hydralazine), the definitive step, after which symptoms usually remit over weeks to months",
+      "Relieve arthralgia, myalgia and serositis with non-steroidal anti-inflammatory drugs",
+      "Use a short course of corticosteroids for significant serositis or symptoms not controlled by non-steroidal anti-inflammatory drugs",
+      "Consider hydroxychloroquine for persistent musculoskeletal or cutaneous manifestations",
+      "Monitor clinical resolution and manage the uncommon renal or anti-TNF-associated organ involvement as it arises",
+      "Document the offending drug, advise avoidance, and reassure that serological abnormalities may persist after clinical recovery"
     ]
-   ],
-   "caption": "Overview comparison matrix for drug-induced lupus erythematosus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "drug-induced-lupus-real-image",
-   "title": "Drug-induced lupus erythematosus: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "drug_induced_lupus-pathway",
+      "title": "Drug-induced lupus erythematosus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with arthralgia, myalgia, fever, serositis and constitutional symptoms after weeks to months of exposure to a culprit drug",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant pericardial or pleural effusion causing haemodynamic or respiratory compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antinuclear antibody testing (typically positive, often homogeneous), Anti-histone antibodies to support the diagnosis, Anti-dsDNA and complement levels to help distinguish from idiopathic lupus"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Withdraw the culprit drug (classically procainamide or hydralazine), the definitive step, after which symptoms usually remit over weeks to months"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking drug-induced lupus for idiopathic systemic lupus and committing the patient to long-term immunosuppression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of drug-induced lupus erythematosus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "drug_induced_lupus-matrix",
+      "title": "Drug-induced lupus erythematosus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with arthralgia, myalgia, fever, serositis and constitutional symptoms after weeks to months of exposure to a culprit",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antinuclear antibody testing (typically positive, often homogeneous), Anti-histone antibodies to support the diagnosis,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic systemic lupus erythematosus, Other connective tissue diseases (mixed connective tissue disease, undifferentiated),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Withdraw the culprit drug (classically procainamide or hydralazine), the definitive step, after which symptoms usually remit over",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking drug-induced lupus for idiopathic systemic lupus and committing the patient to long-term immunosuppression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for drug-induced lupus erythematosus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 233-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "drug_induced_lupus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antinuclear antibody testing",
+          "cells": [
+            {
+              "text": "Typically positive, often homogeneous"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-histone antibodies",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-dsDNA and complement levels",
+          "cells": [
+            {
+              "text": "Helps distinguish from idiopathic lupus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with ESR and CRP",
+          "cells": [
+            {
+              "text": "Cytopenias and inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and renal function",
+          "cells": [
+            {
+              "text": "Rare renal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_lupus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Anti-dsDNA and complement help separate the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral polyarthritis and post-viral syndromes",
+          "cells": [
+            {
+              "text": "Viral exposure rather than drug exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug hypersensitivity or serum-sickness-like reaction",
+          "cells": [
+            {
+              "text": "Acute hypersensitivity pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_lupus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the culprit drug",
+          "cells": [
+            {
+              "text": "Classically procainamide or hydralazine; symptoms remit over weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Arthralgia, myalgia and serositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short corticosteroid course",
+          "cells": [
+            {
+              "text": "Significant serositis or symptoms not controlled by NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Persistent musculoskeletal or cutaneous manifestations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ monitoring",
+          "cells": [
+            {
+              "text": "Renal or anti-TNF-associated organ involvement as it arises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation",
+          "cells": [
+            {
+              "text": "Record the offending drug; serology may persist after recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_lupus-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs linked to lupus-like illness",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced lupus",
+          "cells": [
+            {
+              "text": "hydralazine, procainamide, quinidine, phenytoin, carbamazepine, methyldopa, isoniazid, chlorpromazine, lithium, penicillamine, tetracyclines, TNF inhibitors, ACE inhibitors, ticlopidine"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_lupus-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common non-arrhythmic toxicity of antiarrhythmic drugs",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Common nonarrhythmic toxicity"
+      ],
+      "rows": [
+        {
+          "parameter": "Amiodarone",
+          "cells": [
+            {
+              "text": "Tremor, peripheral neuropathy, pulmonary inflammation, hypothyroidism and hyperthyroidism, photosensitivity"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Adenosine",
+          "cells": [
+            {
+              "text": "Cough, flushing"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Digoxin",
+          "cells": [
+            {
+              "text": "Anorexia, nausea, vomiting, visual changes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Disopyramide",
+          "cells": [
+            {
+              "text": "Anticholinergic effects, decreased myocardial contractility"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dofetilide",
+          "cells": [
+            {
+              "text": "Nausea"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dronedarone",
+          "cells": [
+            {
+              "text": "Gastrointestinal intolerance, exacerbation of heart failure"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Flecainide",
+          "cells": [
+            {
+              "text": "Dizziness, nausea, headache, decreased myocardial contractility"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ibutilide",
+          "cells": [
+            {
+              "text": "Nausea"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lidocaine",
+          "cells": [
+            {
+              "text": "Dizziness, confusion, delirium, seizures, coma"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mexiletine",
+          "cells": [
+            {
+              "text": "Ataxia, tremor, gait disturbances, rash, nausea"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Moricizine",
+          "cells": [
+            {
+              "text": "Mood changes, tremor, loss of mental clarity, nausea"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Procainamide",
+          "cells": [
+            {
+              "text": "Lupus erythematosus-like syndrome (more common in slow acetylators), anorexia, nausea, neutropenia"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Propafenone",
+          "cells": [
+            {
+              "text": "Taste disturbance, dyspepsia, nausea, vomiting"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Quinidine",
+          "cells": [
+            {
+              "text": "Diarrhea, nausea, vomiting, cinchonism, thrombocytopenia"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sotalol",
+          "cells": [
+            {
+              "text": "Hypotension, bronchospasm"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "drug_induced_lupus-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "ANA patterns, target antigens and clinical correlates",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Antigen identified",
+        "Clinical correlate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffuse",
+          "cells": [
+            {
+              "text": "Deoxyribonucleoprotein, histones"
+            },
+            {
+              "text": "Nonspecific; drug-induced lupus, lupus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Peripheral (rim)",
+          "cells": [
+            {
+              "text": "ds-DNA"
+            },
+            {
+              "text": "50% of SLE (specific)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: U1-RNP",
+          "cells": [
+            {
+              "text": "U1-RNP"
+            },
+            {
+              "text": "Up to 90% of MCTD"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: Sm",
+          "cells": [
+            {
+              "text": "Sm"
+            },
+            {
+              "text": "30% of SLE (specific)"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: Ro (SS-A)",
+          "cells": [
+            {
+              "text": "Ro (SS-A)"
+            },
+            {
+              "text": "Sjogren's 60%, subacute cutaneous lupus, neonatal lupus, ANA-negative lupus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: La (SS-B)",
+          "cells": [
+            {
+              "text": "La (SS-B)"
+            },
+            {
+              "text": "50% of Sjogren's, 15% of lupus"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: Scl-70",
+          "cells": [
+            {
+              "text": "Scl-70"
+            },
+            {
+              "text": "40% of diffuse scleroderma"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: PM-1",
+          "cells": [
+            {
+              "text": "PM-1"
+            },
+            {
+              "text": "Polymyositis, dermatomyositis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Speckled: Jo-1",
+          "cells": [
+            {
+              "text": "Jo-1"
+            },
+            {
+              "text": "Polymyositis with pneumonitis and arthritis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Nucleolar",
+          "cells": [
+            {
+              "text": "RNA polymerase I, others"
+            },
+            {
+              "text": "40% of progressive systemic sclerosis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Centromere",
+          "cells": [
+            {
+              "text": "Kinetochore"
+            },
+            {
+              "text": "75% of CREST (limited scleroderma)"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "drug_induced_lupus-dx-mgmt",
+      "title": "Diagnosis and management of Drug-induced lupus erythematosus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected drug-induced lupus: arthralgia, serositis or rash on a long-term drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (significant effusion, renal involvement, marked cytopenia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of significant pericardial or pleural effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANA, anti-histone and anti-dsDNA; complement; FBC with ESR and CRP; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do ANA and anti-histone antibodies fit a drug-induced pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider idiopathic SLE, other connective tissue disease or viral arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw the culprit drug, the definitive step; symptoms usually remit",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs for arthralgia, myalgia and serositis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Short corticosteroid course for significant serositis or NSAID-resistant symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hydroxychloroquine for persistent musculoskeletal or skin symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Document the offending drug and reassure that serology may persist",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally excellent; features resolve over weeks to months after stopping the drug",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

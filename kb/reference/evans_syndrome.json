@@ -1,173 +1,480 @@
 {
- "id": "evans_syndrome",
- "name": "Evans syndrome",
- "aliases": [
-  "Evans' syndrome",
-  "autoimmune haemolytic anaemia with immune thrombocytopenia",
-  "combined AIHA and ITP"
- ],
- "class": "non_infective",
- "system": "Haematology / Transfusion",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / AABB technical manual",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by the combination of autoimmune haemolytic anaemia and immune thrombocytopenia, either simultaneously or sequentially",
-   "Some patients also develop autoimmune neutropenia, reflecting broad autoantibody-mediated destruction of blood cells",
-   "The direct antiglobulin test is positive, and patients show both haemolysis and thrombocytopenic bleeding tendency",
-   "Frequently secondary to an underlying disorder such as lupus, lymphoproliferative disease or a primary immunodeficiency",
-   "It follows a relapsing and remitting course and is often more refractory to treatment than isolated autoimmune cytopenias",
-   "First-line treatment is corticosteroids, with immunoglobulin, rituximab and other immunosuppression used for relapse",
-   "Children presenting with Evans syndrome warrant evaluation for an underlying immune dysregulation disorder"
+  "id": "evans_syndrome",
+  "name": "Evans syndrome",
+  "aliases": [
+    "Evans' syndrome",
+    "autoimmune haemolytic anaemia with immune thrombocytopenia",
+    "combined AIHA and ITP"
   ],
-  "pathophysiology": "Evans syndrome represents a breakdown of immune tolerance that generates autoantibodies against more than one blood-cell lineage. Warm IgG autoantibodies coat red cells, which are cleared extravascularly by splenic macrophages to cause haemolytic anaemia, while separate antiplatelet autoantibodies drive splenic destruction of platelets producing immune thrombocytopenia; some patients also form antineutrophil antibodies. The underlying immune dysregulation may be idiopathic or secondary to systemic autoimmune disease, lymphoproliferative disorders or inherited defects of immune regulation such as autoimmune lymphoproliferative syndrome and common variable immunodeficiency. The multilineage nature of the autoimmunity accounts for the relapsing course and the frequent need for prolonged immunosuppression.",
-  "additionalDifferentials": [
-   "Thrombotic thrombocytopenic purpura",
-   "Systemic lupus erythematosus with cytopenias",
-   "Disseminated intravascular coagulation",
-   "Isolated autoimmune haemolytic anaemia or immune thrombocytopenia",
-   "Bone marrow failure or myelodysplasia",
-   "Lymphoproliferative disorder with immune cytopenias"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film demonstrating anaemia with spherocytes and thrombocytopenia",
-   "Direct antiglobulin test, characteristically positive",
-   "Haemolysis markers including reticulocytes, lactate dehydrogenase, haptoglobin and bilirubin",
-   "Autoimmune screen and investigation for systemic lupus erythematosus",
-   "Evaluation for lymphoproliferative disease and, in children, for primary immunodeficiency",
-   "Coagulation screen and assessment to exclude thrombotic microangiopathy"
-  ],
-  "redFlags": [
-   "Severe thrombocytopenia with significant or intracranial bleeding",
-   "Rapidly falling haemoglobin with haemodynamic compromise",
-   "Features suggesting thrombotic thrombocytopenic purpura that require urgent exclusion",
-   "Evidence of an aggressive underlying lymphoproliferative disorder"
-  ],
-  "prognosis": "The syndrome typically runs a chronic, relapsing course that is often harder to control than isolated autoimmune cytopenias, with outcome shaped by the response to immunosuppression and by any underlying disease.",
-  "pitfalls": [
-   "Treating the anaemia or thrombocytopenia in isolation without recognising the combined syndrome",
-   "Missing an underlying autoimmune, lymphoproliferative or immunodeficiency disorder",
-   "Failing to consider thrombotic thrombocytopenic purpura before attributing cytopenias to autoimmunity",
-   "Underestimating the relapsing course and stopping immunosuppression prematurely"
-  ],
-  "references": [
-   "Williams Hematology",
-   "AABB Technical Manual"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line corticosteroids to suppress autoantibody-mediated destruction of red cells and platelets",
-   "Intravenous immunoglobulin for rapid control of severe immune thrombocytopenia or bleeding",
-   "Rituximab for relapsing or corticosteroid-refractory disease",
-   "Second-line immunosuppression (ciclosporin, mycophenolate mofetil or azathioprine) and thrombopoietin-receptor agonists for a refractory thrombocytopenic component, with splenectomy considered in selected cases",
-   "Supportive care: folate supplementation, judicious transfusion of best-matched blood given the positive direct antiglobulin test, and careful haemostatic support",
-   "Investigate for and treat an underlying disorder such as systemic lupus erythematosus, lymphoproliferative disease or primary immunodeficiency (ALPS, CVID)",
-   "Monitor full blood count and haemolysis markers for relapse under long-term haematology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "evans_syndrome-pathway",
-   "title": "Evans syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by the combination of autoimmune haemolytic anaemia and immune thrombocytopenia, either simultaneously or sequentially",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe thrombocytopenia with significant or intracranial bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film demonstrating anaemia with spherocytes and thrombocytopenia, Direct antiglobulin test, characteristically positive, Haemolysis markers including reticulocytes, lactate dehydrogenase,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line corticosteroids to suppress autoantibody-mediated destruction of red cells and platelets"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the anaemia or thrombocytopenia in isolation without recognising the combined syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of evans syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "evans_syndrome-matrix",
-   "title": "Evans syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by the combination of autoimmune haemolytic anaemia and immune thrombocytopenia, either simultaneously or sequentially",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Transfusion",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / AABB technical manual",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by the combination of autoimmune haemolytic anaemia and immune thrombocytopenia, either simultaneously or sequentially",
+      "Some patients also develop autoimmune neutropenia, reflecting broad autoantibody-mediated destruction of blood cells",
+      "The direct antiglobulin test is positive, and patients show both haemolysis and thrombocytopenic bleeding tendency",
+      "Frequently secondary to an underlying disorder such as lupus, lymphoproliferative disease or a primary immunodeficiency",
+      "It follows a relapsing and remitting course and is often more refractory to treatment than isolated autoimmune cytopenias",
+      "First-line treatment is corticosteroids, with immunoglobulin, rituximab and other immunosuppression used for relapse",
+      "Children presenting with Evans syndrome warrant evaluation for an underlying immune dysregulation disorder"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film demonstrating anaemia with spherocytes and thrombocytopenia, Direct antiglobulin test,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Evans syndrome represents a breakdown of immune tolerance that generates autoantibodies against more than one blood-cell lineage. Warm IgG autoantibodies coat red cells, which are cleared extravascularly by splenic macrophages to cause haemolytic anaemia, while separate antiplatelet autoantibodies drive splenic destruction of platelets producing immune thrombocytopenia; some patients also form antineutrophil antibodies. The underlying immune dysregulation may be idiopathic or secondary to systemic autoimmune disease, lymphoproliferative disorders or inherited defects of immune regulation such as autoimmune lymphoproliferative syndrome and common variable immunodeficiency. The multilineage nature of the autoimmunity accounts for the relapsing course and the frequent need for prolonged immunosuppression.",
+    "additionalDifferentials": [
+      "Thrombotic thrombocytopenic purpura",
+      "Systemic lupus erythematosus with cytopenias",
+      "Disseminated intravascular coagulation",
+      "Isolated autoimmune haemolytic anaemia or immune thrombocytopenia",
+      "Bone marrow failure or myelodysplasia",
+      "Lymphoproliferative disorder with immune cytopenias"
     ],
-    [
-     "Primary Differentials",
-     "Thrombotic thrombocytopenic purpura, Systemic lupus erythematosus with cytopenias, Disseminated intravascular coagulation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film demonstrating anaemia with spherocytes and thrombocytopenia",
+      "Direct antiglobulin test, characteristically positive",
+      "Haemolysis markers including reticulocytes, lactate dehydrogenase, haptoglobin and bilirubin",
+      "Autoimmune screen and investigation for systemic lupus erythematosus",
+      "Evaluation for lymphoproliferative disease and, in children, for primary immunodeficiency",
+      "Coagulation screen and assessment to exclude thrombotic microangiopathy"
     ],
-    [
-     "Management Strategy",
-     "First-line corticosteroids to suppress autoantibody-mediated destruction of red cells and platelets",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe thrombocytopenia with significant or intracranial bleeding",
+      "Rapidly falling haemoglobin with haemodynamic compromise",
+      "Features suggesting thrombotic thrombocytopenic purpura that require urgent exclusion",
+      "Evidence of an aggressive underlying lymphoproliferative disorder"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the anaemia or thrombocytopenia in isolation without recognising the combined syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "The syndrome typically runs a chronic, relapsing course that is often harder to control than isolated autoimmune cytopenias, with outcome shaped by the response to immunosuppression and by any underlying disease.",
+    "pitfalls": [
+      "Treating the anaemia or thrombocytopenia in isolation without recognising the combined syndrome",
+      "Missing an underlying autoimmune, lymphoproliferative or immunodeficiency disorder",
+      "Failing to consider thrombotic thrombocytopenic purpura before attributing cytopenias to autoimmunity",
+      "Underestimating the relapsing course and stopping immunosuppression prematurely"
+    ],
+    "references": [
+      "Williams Hematology",
+      "AABB Technical Manual"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line corticosteroids to suppress autoantibody-mediated destruction of red cells and platelets",
+      "Intravenous immunoglobulin for rapid control of severe immune thrombocytopenia or bleeding",
+      "Rituximab for relapsing or corticosteroid-refractory disease",
+      "Second-line immunosuppression (ciclosporin, mycophenolate mofetil or azathioprine) and thrombopoietin-receptor agonists for a refractory thrombocytopenic component, with splenectomy considered in selected cases",
+      "Supportive care: folate supplementation, judicious transfusion of best-matched blood given the positive direct antiglobulin test, and careful haemostatic support",
+      "Investigate for and treat an underlying disorder such as systemic lupus erythematosus, lymphoproliferative disease or primary immunodeficiency (ALPS, CVID)",
+      "Monitor full blood count and haemolysis markers for relapse under long-term haematology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for evans syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "evans-syndrome-real-image",
-   "title": "Evans syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "evans_syndrome-pathway",
+      "title": "Evans syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by the combination of autoimmune haemolytic anaemia and immune thrombocytopenia, either simultaneously or sequentially",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe thrombocytopenia with significant or intracranial bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film demonstrating anaemia with spherocytes and thrombocytopenia, Direct antiglobulin test, characteristically positive, Haemolysis markers including reticulocytes, lactate dehydrogenase,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line corticosteroids to suppress autoantibody-mediated destruction of red cells and platelets"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the anaemia or thrombocytopenia in isolation without recognising the combined syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of evans syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "evans_syndrome-matrix",
+      "title": "Evans syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by the combination of autoimmune haemolytic anaemia and immune thrombocytopenia, either simultaneously or sequentially",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film demonstrating anaemia with spherocytes and thrombocytopenia, Direct antiglobulin test,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thrombotic thrombocytopenic purpura, Systemic lupus erythematosus with cytopenias, Disseminated intravascular coagulation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line corticosteroids to suppress autoantibody-mediated destruction of red cells and platelets",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the anaemia or thrombocytopenia in isolation without recognising the combined syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for evans syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / AABB technical manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "evans_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Anaemia with spherocytes and thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Characteristically positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis markers",
+          "cells": [
+            {
+              "text": "Reticulocytes, lactate dehydrogenase, haptoglobin and bilirubin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune screen including lupus",
+          "cells": [
+            {
+              "text": "Associated systemic autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoproliferative and immunodeficiency evaluation",
+          "cells": [
+            {
+              "text": "Lymphoproliferative disease; in children, primary immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen and microangiopathy assessment",
+          "cells": [
+            {
+              "text": "Excludes thrombotic microangiopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "evans_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thrombotic thrombocytopenic purpura",
+          "cells": [
+            {
+              "text": "Must be excluded urgently before attributing cytopenias to autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus with cytopenias",
+          "cells": [
+            {
+              "text": "Lupus frequently underlies Evans syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated autoimmune haemolytic anaemia or immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Evans requires both cytopenias, simultaneously or sequentially"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "evans_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids as first-line",
+          "cells": [
+            {
+              "text": "Suppress autoantibody-mediated destruction of red cells and platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Rapid control of severe immune thrombocytopenia or bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Relapsing or corticosteroid-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunosuppression and thrombopoietin-receptor agonists",
+          "cells": [
+            {
+              "text": "Ciclosporin, mycophenolate or azathioprine; thrombopoietin-receptor agonists for refractory thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Folate, judicious best-matched transfusion, careful haemostasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying disorder",
+          "cells": [
+            {
+              "text": "Lupus, lymphoproliferative disease or primary immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Counts and haemolysis markers for relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "evans_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Evans syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anaemia with thrombocytopenia, bleeding or jaundice, and a positive antiglobulin test",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (severe bleeding, falling haemoglobin, TTP features, aggressive lymphoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of TTP; best-matched transfusion; IV immunoglobulin for severe bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; antiglobulin test; haemolysis markers; autoimmune screen; coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Autoimmune haemolysis and immune thrombocytopenia coexist on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider TTP, lupus-related cytopenias or marrow failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV immunoglobulin for severe thrombocytopenia or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab for relapsing or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ciclosporin, mycophenolate or azathioprine as second-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat any underlying lupus, lymphoproliferative or immunodeficiency disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic relapsing course, often harder to control than isolated autoimmune cytopenias",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

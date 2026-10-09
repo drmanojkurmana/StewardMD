@@ -1,170 +1,650 @@
 {
- "id": "bladder_cancer",
- "name": "Bladder & Urinary Tract Cancer",
- "system": "Oncology",
- "class": "non_infective",
- "chapter": 91,
- "page": 690,
- "aliases": [
-  "urothelial carcinoma",
-  "transitional cell carcinoma"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.690-693",
-  "clinicalPearls": [
-   "Painless hematuria, either gross or microscopic, is the initial manifestation of urinary tract cancer in most patients; in males painless hematuria is almost always abnormal and must be worked up (Harrison 22e p.691).",
-   "In females, hematuria due to malignancy is often mistaken for a urinary tract infection or menstrual bleeding; antibiotics are warranted if a concurrent UTI is found, but persistent hematuria still requires further workup (Harrison 22e p.691).",
-   "Initial investigation in either sex includes urine cytology plus visual examination of the bladder by cystoscopy, together with radiographic evaluation of the kidneys and upper tract by CT urogram (MR urogram if renal function is poor) (Harrison 22e p.691).",
-   "Smoking of tobacco products is the overwhelming leading risk factor; 90% of new bladder cancer diagnoses occur in current or former smokers, and roughly one-third of cases could be prevented by smoking cessation (Harrison 22e p.692).",
-   "Urothelial carcinoma (formerly transitional cell carcinoma) is the most common histology, seen in about 90% of cases; nonurothelial variants (squamous cell, adenocarcinoma, small-cell, carcinosarcoma) collectively account for 10% or less (Harrison 22e p.690-691).",
-   "Disease is divided into non-muscle-invasive bladder cancer (NMIBC: carcinoma in situ, Ta, or T1 not reaching the muscularis propria; ~75% at presentation) and muscle-invasive bladder cancer (MIBC: T2 invasion of muscularis propria and beyond) (Harrison 22e p.691-692).",
-   "Urothelial carcinoma shows a biphasic phenotype: low-grade papillary tumors that frequently recur but rarely invade or metastasize, and high-grade often flat tumors that invade early and lead to lethal metastatic disease (Harrison 22e p.691)."
+  "id": "bladder_cancer",
+  "name": "Bladder & Urinary Tract Cancer",
+  "system": "Oncology",
+  "class": "non_infective",
+  "chapter": 91,
+  "page": 690,
+  "aliases": [
+    "urothelial carcinoma",
+    "transitional cell carcinoma"
   ],
-  "pathophysiology": "Urothelial carcinoma arises from the lining of the bladder, renal pelvis, ureter, and urethra and displays a biphasic clinical behavior. Loss of portions of chromosomes 9q and 9p (loss of heterozygosity) is an early molecular event in both phenotypes; candidate genes in these regions include CDKN2A and TSC1. Low-grade papillary tumors are characterized by RAS/RAF pathway alterations with activating FGFR3 mutations or fusions in 60-80% of patients, whereas the high-grade invasive phenotype features early deleterious TP53 and RB1 mutations, CDH1 (E-cadherin) alterations, and increased VEGFR2 expression. Chronic inflammatory states drive squamous-type bladder cancer, classically chronic schistosomiasis infection and chronic indwelling catheters in paraplegic patients. Carcinogenic exposures include aromatic amines (benzidine, beta-naphthylamine) in industrial dyes and arsenic-contaminated drinking water. The Cancer Genome Atlas defined five intrinsic molecular subtypes (luminal papillary, luminal infiltrated, luminal, basal squamous, neuronal) resembling breast cancer subclasses (Harrison 22e p.691-692).",
-  "additionalDifferentials": [],
-  "infectionMimics": [
-   "Hematuria from malignancy in females is frequently mistaken for a urinary tract infection (Harrison 22e p.691)."
-  ],
-  "nonInfectiousMimics": [
-   "In females, malignant hematuria may be misattributed to menstrual bleeding (Harrison 22e p.691).",
-   "Intravesical BCG side effects (dysuria, urinary frequency, bladder spasms, hematuria) overlap with infection/cystitis, and in <5% a systemic inflammatory response can mimic disseminated BCG infection (Harrison 22e p.692)."
-  ],
-  "additionalInvestigations": [
-   "Urine cytology (detects cancer in only about 50% of high-grade bladder cancers) (Harrison 22e p.691).",
-   "Cystoscopy for direct bladder visualization; blue light or narrow-band imaging cystoscopy improves detection of small or flat noninvasive tumors and is used routinely in monitoring (Harrison 22e p.691).",
-   "CT urogram (or MR urogram if renal function is impaired) for the kidneys and upper tract (Harrison 22e p.691).",
-   "Adjunct urine molecular tests (FISH for chromosomal changes, nuclear mitotic proteins, bladder tumor-associated antigens) used mainly for detecting recurrence, as they can be falsely positive (Harrison 22e p.691).",
-   "Ureteroscopy or retrograde pyelography when upper-tract tumors are suspected with a normal bladder (Harrison 22e p.691).",
-   "Transurethral resection of bladder tumor (TURBT) or endoscopic resection of upper tract tumors for histologic diagnosis and staging (Harrison 22e p.691).",
-   "Genomic sequencing of tumor tissue and/or circulating tumor DNA (ctDNA) recommended in all metastatic patients (Harrison 22e p.690)."
-  ],
-  "redFlags": [
-   "Painless gross or microscopic hematuria warrants investigation for urothelial cancer; in males it is almost always abnormal (Harrison 22e p.691).",
-   "Persistent hematuria despite treatment of a concurrent UTI requires further workup (Harrison 22e p.691).",
-   "Flank pain with an upper tract renal pelvis/ureter cancer, or hydronephrosis from a bladder tumor obstructing the ureteral orifice (Harrison 22e p.691).",
-   "Cachexia and widespread metastatic disease at presentation (rare) (Harrison 22e p.691)."
-  ],
-  "prognosis": "Outcomes correlate closely with stage at diagnosis. About 75% present with non-muscle-invasive disease, 18% with muscle-invasive disease, and only 3% with metastatic spread. 5-year overall survival is 70-90% for disease confined to the bladder (stage I-II), 39-50% for disease penetrating through the bladder or involving regional lymph nodes (stage III), and only 8% for metastatic disease (stage IV) (Harrison 22e p.692).",
-  "pitfalls": [
-   "Urine cytology is insensitive, identifying cancer in only about 50% of high-grade bladder cancers, so a negative cytology does not exclude malignancy (Harrison 22e p.691).",
-   "Treating presumed UTI without follow-up risks missing malignancy; persistent hematuria after antibiotics still requires workup (Harrison 22e p.691).",
-   "Adjunct urine molecular tests may be abnormal in patients without cancer (false positives) and are best reserved for surveillance of known cancer (Harrison 22e p.691).",
-   "Systemic inflammatory reaction after intravesical BCG can mimic disseminated BCG infection (Harrison 22e p.692)."
-  ],
-  "severityClassification": "Staging is driven primarily by depth of invasion (T stage). NMIBC: Tis (CIS) and Ta (epithelial layer only) or T1 (into connective tissue/lamina propria below urothelium but not muscularis propria). MIBC: T2 (into muscularis propria), T3 (through muscularis propria to serosa), T4 (adjacent pelvic organs - rectum, prostate, vagina, cervix). Nodal: N1 (single true pelvic node), N2 (two true pelvic nodes), N3 (common iliac nodes); disease beyond common iliac nodes or distant spread is M1. Stages 0a-II are defined by T stage alone without nodal/metastatic disease; regional pelvic or common iliac nodal involvement is stage III; any distant metastasis is stage IV (Harrison 22e p.691-692).",
-  "references": [
-   "Harrison 22e p.690-693"
-  ],
-  "crossLinks": [
-   "schistosomiasis"
-  ],
-  "management": [
-   "For non-muscle-invasive disease, transurethral resection of bladder tumour followed by intravesical BCG immunotherapy or intravesical chemotherapy to reduce recurrence and progression",
-   "For muscle-invasive disease, neoadjuvant cisplatin-based chemotherapy with radical cystectomy, or bladder-preserving chemoradiotherapy in selected patients",
-   "For advanced or metastatic disease, platinum-based chemotherapy with immune checkpoint inhibitors and targeted options such as FGFR inhibitors or antibody-drug conjugates",
-   "Smoking cessation as the key modifiable risk factor influencing recurrence and new tumour formation",
-   "Surveillance cystoscopy with urine cytology to detect recurrence, using blue-light or narrow-band imaging for subtle flat lesions",
-   "Evaluate the upper tracts with CT urography and treat upper-tract urothelial tumours accordingly",
-   "Coordinate care through a urology and oncology multidisciplinary team"
-  ]
- },
- "algorithms": [
-  {
-   "id": "bladder_cancer-pathway",
-   "title": "Bladder & Urinary Tract Cancer: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Painless hematuria, either gross or microscopic, is the initial manifestation of urinary tract cancer in most patients; in males painless hematuria is almost always abnormal and must be worked up (Harrison 22e p.691).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Painless gross or microscopic hematuria warrants investigation for urothelial cancer; in males it is almost always abnormal (Harrison 22e p.691).",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine cytology (detects cancer in only about 50% of high-grade bladder cancers) (Harrison 22e p.691)., Cystoscopy for direct bladder visualization; blue light or narrow-band imaging cystoscopy improves detection of small"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For non-muscle-invasive disease, transurethral resection of bladder tumour followed by intravesical BCG immunotherapy or intravesical chemotherapy to reduce recurrence and progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Urine cytology is insensitive, identifying cancer in only about 50% of high-grade bladder cancers, so a negative cytology does not exclude malignancy (Harrison 22e p.691)."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bladder & urinary tract cancer."
-  }
- ],
- "tables": [
-  {
-   "id": "bladder_cancer-matrix",
-   "title": "Bladder & Urinary Tract Cancer: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Painless hematuria, either gross or microscopic, is the initial manifestation of urinary tract cancer in most patients; in males",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.690-693",
+    "clinicalPearls": [
+      "Painless hematuria, either gross or microscopic, is the initial manifestation of urinary tract cancer in most patients; in males painless hematuria is almost always abnormal and must be worked up (Harrison 22e p.691).",
+      "In females, hematuria due to malignancy is often mistaken for a urinary tract infection or menstrual bleeding; antibiotics are warranted if a concurrent UTI is found, but persistent hematuria still requires further workup (Harrison 22e p.691).",
+      "Initial investigation in either sex includes urine cytology plus visual examination of the bladder by cystoscopy, together with radiographic evaluation of the kidneys and upper tract by CT urogram (MR urogram if renal function is poor) (Harrison 22e p.691).",
+      "Smoking of tobacco products is the overwhelming leading risk factor; 90% of new bladder cancer diagnoses occur in current or former smokers, and roughly one-third of cases could be prevented by smoking cessation (Harrison 22e p.692).",
+      "Urothelial carcinoma (formerly transitional cell carcinoma) is the most common histology, seen in about 90% of cases; nonurothelial variants (squamous cell, adenocarcinoma, small-cell, carcinosarcoma) collectively account for 10% or less (Harrison 22e p.690-691).",
+      "Disease is divided into non-muscle-invasive bladder cancer (NMIBC: carcinoma in situ, Ta, or T1 not reaching the muscularis propria; ~75% at presentation) and muscle-invasive bladder cancer (MIBC: T2 invasion of muscularis propria and beyond) (Harrison 22e p.691-692).",
+      "Urothelial carcinoma shows a biphasic phenotype: low-grade papillary tumors that frequently recur but rarely invade or metastasize, and high-grade often flat tumors that invade early and lead to lethal metastatic disease (Harrison 22e p.691)."
     ],
-    [
-     "Key Investigations",
-     "Urine cytology (detects cancer in only about 50% of high-grade bladder cancers) (Harrison 22e p.691)., Cystoscopy for direct",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Urothelial carcinoma arises from the lining of the bladder, renal pelvis, ureter, and urethra and displays a biphasic clinical behavior. Loss of portions of chromosomes 9q and 9p (loss of heterozygosity) is an early molecular event in both phenotypes; candidate genes in these regions include CDKN2A and TSC1. Low-grade papillary tumors are characterized by RAS/RAF pathway alterations with activating FGFR3 mutations or fusions in 60-80% of patients, whereas the high-grade invasive phenotype features early deleterious TP53 and RB1 mutations, CDH1 (E-cadherin) alterations, and increased VEGFR2 expression. Chronic inflammatory states drive squamous-type bladder cancer, classically chronic schistosomiasis infection and chronic indwelling catheters in paraplegic patients. Carcinogenic exposures include aromatic amines (benzidine, beta-naphthylamine) in industrial dyes and arsenic-contaminated drinking water. The Cancer Genome Atlas defined five intrinsic molecular subtypes (luminal papillary, luminal infiltrated, luminal, basal squamous, neuronal) resembling breast cancer subclasses (Harrison 22e p.691-692).",
+    "additionalDifferentials": [],
+    "infectionMimics": [
+      "Hematuria from malignancy in females is frequently mistaken for a urinary tract infection (Harrison 22e p.691)."
     ],
-    [
-     "Primary Differentials",
-     "Alternative etiologies and clinical mimics",
-     "Rule out key mimics"
+    "nonInfectiousMimics": [
+      "In females, malignant hematuria may be misattributed to menstrual bleeding (Harrison 22e p.691).",
+      "Intravesical BCG side effects (dysuria, urinary frequency, bladder spasms, hematuria) overlap with infection/cystitis, and in <5% a systemic inflammatory response can mimic disseminated BCG infection (Harrison 22e p.692)."
     ],
-    [
-     "Management Strategy",
-     "For non-muscle-invasive disease, transurethral resection of bladder tumour followed by intravesical BCG immunotherapy or",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Urine cytology (detects cancer in only about 50% of high-grade bladder cancers) (Harrison 22e p.691).",
+      "Cystoscopy for direct bladder visualization; blue light or narrow-band imaging cystoscopy improves detection of small or flat noninvasive tumors and is used routinely in monitoring (Harrison 22e p.691).",
+      "CT urogram (or MR urogram if renal function is impaired) for the kidneys and upper tract (Harrison 22e p.691).",
+      "Adjunct urine molecular tests (FISH for chromosomal changes, nuclear mitotic proteins, bladder tumor-associated antigens) used mainly for detecting recurrence, as they can be falsely positive (Harrison 22e p.691).",
+      "Ureteroscopy or retrograde pyelography when upper-tract tumors are suspected with a normal bladder (Harrison 22e p.691).",
+      "Transurethral resection of bladder tumor (TURBT) or endoscopic resection of upper tract tumors for histologic diagnosis and staging (Harrison 22e p.691).",
+      "Genomic sequencing of tumor tissue and/or circulating tumor DNA (ctDNA) recommended in all metastatic patients (Harrison 22e p.690)."
     ],
-    [
-     "Clinical Pitfall",
-     "Urine cytology is insensitive, identifying cancer in only about 50% of high-grade bladder cancers, so a negative cytology does",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Painless gross or microscopic hematuria warrants investigation for urothelial cancer; in males it is almost always abnormal (Harrison 22e p.691).",
+      "Persistent hematuria despite treatment of a concurrent UTI requires further workup (Harrison 22e p.691).",
+      "Flank pain with an upper tract renal pelvis/ureter cancer, or hydronephrosis from a bladder tumor obstructing the ureteral orifice (Harrison 22e p.691).",
+      "Cachexia and widespread metastatic disease at presentation (rare) (Harrison 22e p.691)."
+    ],
+    "prognosis": "Outcomes correlate closely with stage at diagnosis. About 75% present with non-muscle-invasive disease, 18% with muscle-invasive disease, and only 3% with metastatic spread. 5-year overall survival is 70-90% for disease confined to the bladder (stage I-II), 39-50% for disease penetrating through the bladder or involving regional lymph nodes (stage III), and only 8% for metastatic disease (stage IV) (Harrison 22e p.692).",
+    "pitfalls": [
+      "Urine cytology is insensitive, identifying cancer in only about 50% of high-grade bladder cancers, so a negative cytology does not exclude malignancy (Harrison 22e p.691).",
+      "Treating presumed UTI without follow-up risks missing malignancy; persistent hematuria after antibiotics still requires workup (Harrison 22e p.691).",
+      "Adjunct urine molecular tests may be abnormal in patients without cancer (false positives) and are best reserved for surveillance of known cancer (Harrison 22e p.691).",
+      "Systemic inflammatory reaction after intravesical BCG can mimic disseminated BCG infection (Harrison 22e p.692)."
+    ],
+    "severityClassification": "Staging is driven primarily by depth of invasion (T stage). NMIBC: Tis (CIS) and Ta (epithelial layer only) or T1 (into connective tissue/lamina propria below urothelium but not muscularis propria). MIBC: T2 (into muscularis propria), T3 (through muscularis propria to serosa), T4 (adjacent pelvic organs - rectum, prostate, vagina, cervix). Nodal: N1 (single true pelvic node), N2 (two true pelvic nodes), N3 (common iliac nodes); disease beyond common iliac nodes or distant spread is M1. Stages 0a-II are defined by T stage alone without nodal/metastatic disease; regional pelvic or common iliac nodal involvement is stage III; any distant metastasis is stage IV (Harrison 22e p.691-692).",
+    "references": [
+      "Harrison 22e p.690-693"
+    ],
+    "crossLinks": [
+      "schistosomiasis"
+    ],
+    "management": [
+      "For non-muscle-invasive disease, transurethral resection of bladder tumour followed by intravesical BCG immunotherapy or intravesical chemotherapy to reduce recurrence and progression",
+      "For muscle-invasive disease, neoadjuvant cisplatin-based chemotherapy with radical cystectomy, or bladder-preserving chemoradiotherapy in selected patients",
+      "For advanced or metastatic disease, platinum-based chemotherapy with immune checkpoint inhibitors and targeted options such as FGFR inhibitors or antibody-drug conjugates",
+      "Smoking cessation as the key modifiable risk factor influencing recurrence and new tumour formation",
+      "Surveillance cystoscopy with urine cytology to detect recurrence, using blue-light or narrow-band imaging for subtle flat lesions",
+      "Evaluate the upper tracts with CT urography and treat upper-tract urothelial tumours accordingly",
+      "Coordinate care through a urology and oncology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for bladder & urinary tract cancer."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bladder-cancer-real-image",
-   "title": "Bladder & Urinary Tract Cancer: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "bladder_cancer-pathway",
+      "title": "Bladder & Urinary Tract Cancer: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Painless hematuria, either gross or microscopic, is the initial manifestation of urinary tract cancer in most patients; in males painless hematuria is almost always abnormal and must be worked up (Harrison 22e p.691).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Painless gross or microscopic hematuria warrants investigation for urothelial cancer; in males it is almost always abnormal (Harrison 22e p.691).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine cytology (detects cancer in only about 50% of high-grade bladder cancers) (Harrison 22e p.691)., Cystoscopy for direct bladder visualization; blue light or narrow-band imaging cystoscopy improves detection of small"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For non-muscle-invasive disease, transurethral resection of bladder tumour followed by intravesical BCG immunotherapy or intravesical chemotherapy to reduce recurrence and progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Urine cytology is insensitive, identifying cancer in only about 50% of high-grade bladder cancers, so a negative cytology does not exclude malignancy (Harrison 22e p.691)."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bladder & urinary tract cancer."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bladder_cancer-matrix",
+      "title": "Bladder & Urinary Tract Cancer: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Painless hematuria, either gross or microscopic, is the initial manifestation of urinary tract cancer in most patients; in males",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine cytology (detects cancer in only about 50% of high-grade bladder cancers) (Harrison 22e p.691)., Cystoscopy for direct",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alternative etiologies and clinical mimics",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For non-muscle-invasive disease, transurethral resection of bladder tumour followed by intravesical BCG immunotherapy or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Urine cytology is insensitive, identifying cancer in only about 50% of high-grade bladder cancers, so a negative cytology does",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bladder & urinary tract cancer."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Bladder Cancer",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/genitourinary-cancer/bladder-cancer",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bladder_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and staging of urothelial cancer",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Painless haematuria",
+          "cells": [
+            {
+              "text": "{{hy:Commonest first sign; in men almost always abnormal}}"
+            },
+            {
+              "text": "Persistent haematuria after UTI treatment needs work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking history",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "90% of new cases are current or former smokers"
+            },
+            {
+              "text": "About one-third preventable by cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy with biopsy or TURBT",
+          "cells": [
+            {
+              "text": "Diagnosis and T stage"
+            },
+            {
+              "text": "Blue-light cystoscopy improves detection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine cytology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Detects about 50% of high-grade tumours"
+            },
+            {
+              "text": "Negative cytology does not exclude cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT urogram (MR if renal impairment)",
+          "cells": [
+            {
+              "text": "Upper tract and kidneys"
+            },
+            {
+              "text": "Ureteroscopy if upper tract suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial histology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90%"
+            },
+            {
+              "text": "Squamous, adeno, small-cell 10% or less"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NMIBC (Tis, Ta, T1)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 75% at presentation"
+            },
+            {
+              "text": "Recurs often, rarely metastasises if low grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MIBC (T2 and above)",
+          "cells": [
+            {
+              "text": "Invades muscularis propria"
+            },
+            {
+              "text": "About 18% at presentation; 3% metastatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "5-year survival, stage I to II",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "70 to 90",
+              "range": [
+                70,
+                90
+              ]
+            },
+            {
+              "text": "Outcome tracks stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine molecular tests (FISH, NMP, BTA)",
+          "cells": [
+            {
+              "text": "Adjunct"
+            },
+            {
+              "text": "Mainly for recurrence; false positives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bladder_cancer-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of haematuria with suspected bladder cancer",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary tract infection",
+          "cells": [
+            {
+              "text": "{{hy:Haematuria persisting after treatment still needs cystoscopy}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menstrual bleeding",
+          "cells": [
+            {
+              "text": "Women; cyclical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper tract urothelial cancer",
+          "cells": [
+            {
+              "text": "Flank pain, normal bladder; CT urogram or ureteroscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCG cystitis",
+          "cells": [
+            {
+              "text": "Dysuria and frequency after intravesical BCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schistosomiasis-related squamous carcinoma",
+          "cells": [
+            {
+              "text": "Endemic exposure; squamous histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Other haematuria causes (stones, renal cell cancer, glomerular disease) were not covered in the sources opened."
+    },
+    {
+      "id": "bladder_cancer-treatment",
+      "kind": "treatment",
+      "title": "Treatment of bladder cancer by stage",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete TURBT",
+          "cells": [
+            {
+              "text": "NMIBC"
+            },
+            {
+              "text": "Repeat resection in 4 to 8 weeks if more invasive than expected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Single postoperative intravesical mitomycin C or gemcitabine",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Within 24 h of TURBT",
+              "op": "<=",
+              "value": 24
+            },
+            {
+              "text": "Reduces recurrence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intravesical BCG",
+          "cells": [
+            {
+              "text": "{{hy:High-grade NMIBC or carcinoma in situ}}"
+            },
+            {
+              "text": "Weekly to monthly over 1 to 3 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BCG-unresponsive options",
+          "cells": [
+            {
+              "text": "Recurrence or intolerance"
+            },
+            {
+              "text": "Intravesical gemcitabine-docetaxel, nadofaragene, IV pembrolizumab, or cystectomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neoadjuvant cisplatin chemotherapy plus radical cystectomy",
+          "cells": [
+            {
+              "text": "MIBC, cisplatin eligible"
+            },
+            {
+              "text": "Partial cystectomy possible in under 5%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adjuvant nivolumab",
+          "cells": [
+            {
+              "text": "Residual disease after neoadjuvant chemo or cisplatin-ineligible"
+            },
+            {
+              "text": "After cystectomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Trimodal bladder preservation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Selected MIBC"
+            },
+            {
+              "text": "5-year survival 36 to 74%; 10 to 20% need salvage cystectomy",
+              "range": [
+                36,
+                74
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Enfortumab vedotin plus pembrolizumab, or cisplatin-based chemo",
+          "cells": [
+            {
+              "text": "Metastatic disease"
+            },
+            {
+              "text": "Avelumab maintenance after chemo; erdafitinib for FGFR2 or 3 alterations"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "All stages"
+            },
+            {
+              "text": "Reduces recurrence and new tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance cystoscopy and cytology",
+          "cells": [
+            {
+              "text": "After treatment"
+            },
+            {
+              "text": "Every 3 to 6 months after invasive cancer"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bladder_cancer-dx-mgmt",
+      "title": "Diagnosis and management of bladder cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless haematuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urine culture; treat UTI if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Cystoscopy, urine cytology, CT urogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Bladder tumour seen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Evaluate upper tract or other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "TURBT for histology and T stage",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Muscle invasive (T2 or above)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "High grade or carcinoma in situ?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Single intravesical chemo; cystoscopic surveillance",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Intravesical BCG; cystectomy if BCG fails",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Metastatic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Neoadjuvant cisplatin then cystectomy, or trimodal therapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Enfortumab vedotin plus pembrolizumab or platinum chemo",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

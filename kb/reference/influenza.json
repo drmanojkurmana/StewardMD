@@ -1,185 +1,878 @@
 {
- "id": "influenza",
- "name": "Influenza",
- "system": "Infectious Diseases",
- "class": "infective",
- "chapter": 206,
- "page": 1544,
- "aliases": [
-  "flu"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.1544",
-  "clinicalPearls": [
-   "Influenza presents with an abrupt febrile illness: fever, myalgias, fatigue, sore throat, headache, and cough (Harrison 22e p.1576).",
-   "Influenza A viruses are the most virulent for humans and cause most severe disease, though type B viruses (Victoria lineage) also cause substantial morbidity; type A is subdivided by hemagglutinin (H) and neuraminidase (N) surface protein subtypes (Harrison 22e p.1576).",
-   "Two type A subtypes (H1N1 and H3N2) and one type B lineage (Victoria) cause annual seasonal epidemics, which occur in winter in temperate regions (Harrison 22e p.1576, p.1579).",
-   "Influenza pneumonia has an unusually high rate of complication by bacterial superinfection, with staphylococcal and streptococcal pneumonia occurring in as many as 10% of cases in some series (Harrison 22e p.1576).",
-   "Antiviral treatment of influenza is effective only when given early in the course of illness; baloxavir marboxil is approved for acute uncomplicated flu when started within 2 days of onset (Harrison 22e p.1537, p.1580).",
-   "Antibiotics do NOT improve the outcome of uncomplicated viral respiratory infection in otherwise healthy people, but influenza can be complicated by secondary bacterial infection that does warrant antibacterials (Harrison 22e p.1537).",
-   "Annual vaccine reformulation is required because antigenic drift (point mutations in HA and NA) causes antigenic divergence; an occasional antigenic mismatch can render a vaccine component of negligible efficacy (Harrison 22e p.1538)."
+  "id": "influenza",
+  "name": "Influenza",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 206,
+  "page": 1544,
+  "aliases": [
+    "flu"
   ],
-  "pathophysiology": "Influenza is a single-stranded, segmented, negative-sense RNA genome virus of the family Orthomyxoviridae, with four (sero)types: A, B, C, and D. Influenza A and C infect multiple species; B infects humans almost exclusively; D primarily infects cattle and is not known to infect humans. Influenza A is subdivided into 18 hemagglutinin (H) and 11 neuraminidase (N) surface-protein subtypes. Two distinct mechanisms drive antigenic variation: antigenic drift (accumulation of point mutations in the HA and NA molecules) produces the gradual divergence underlying annual epidemics and requires new vaccines each year; antigenic shift, enabled by the segmented genome allowing reassortment between two viruses co-infecting one host, can produce a major novel virus and a pandemic. Type B viruses mutate less frequently than type A, probably reflecting their near-exclusive human host range. Many highly pathogenic strains circulate in aquatic birds; pigs, which carry both avian and human receptors, can serve as a mixing vessel for reassortment that makes zoonotic viruses more fit for human replication (Harrison 22e p.1576).",
-  "additionalDifferentials": [
-   "COVID-19 (SARS-CoV-2) respiratory illness",
-   "Respiratory syncytial virus (RSV) infection",
-   "Human metapneumovirus infection",
-   "Parainfluenza virus infection",
-   "Rhinovirus / common cold",
-   "Adenovirus infection",
-   "Acute bronchitis"
-  ],
-  "infectionMimics": [
-   "SARS-CoV-2 (COVID-19)",
-   "Respiratory syncytial virus",
-   "Human metapneumovirus",
-   "Parainfluenza virus",
-   "Adenovirus",
-   "Rhinovirus",
-   "Community-acquired bacterial pneumonia (e.g., S. pneumoniae)"
-  ],
-  "nonInfectiousMimics": [
-   "Acute exacerbation of COPD",
-   "Acute exacerbation of chronic bronchitis",
-   "Decompensated cardiovascular disease presenting with fever and dyspnea"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR molecular testing of respiratory secretions (most sensitive and specific; multiplex respiratory panels available)",
-   "Rapid antigen-based diagnostic test for influenza viral protein in nasopharyngeal secretions",
-   "Viral isolation by cell culture in a reference laboratory (gold standard but insensitive/slow)",
-   "Direct or indirect fluorescent antibody detection of virus-infected cells in nasal secretions",
-   "Chest radiograph for all patients with suspected pneumonia"
-  ],
-  "redFlags": [
-   "Secondary bacterial pneumonia complicating influenza, classically caused by S. aureus (including MRSA, with risk of necrotizing pneumonia) and S. pneumoniae/S. pyogenes",
-   "Severe or fatal primary viral pneumonia, particularly in elderly patients, nursing-home residents, immunocompromised persons, and very young children",
-   "Hypoxia or respiratory failure requiring supplemental oxygen or mechanical ventilation",
-   "Avian/zoonotic strains (e.g., H5N1, H7N9) with high mortality and pandemic potential, especially with relevant exposure history"
-  ],
-  "prognosis": "Uncomplicated influenza in otherwise healthy adults is generally self-limited, and antiviral therapy started early shortens illness. Severe and even fatal pneumonia occurs particularly in elderly patients, nursing-home residents, immunocompromised persons, and very young children. Bacterial superinfection complicates as many as 10% of influenza pneumonia cases in some series. Pandemics caused by novel viruses occur on average every 20-30 years (Harrison 22e p.1576, p.1538).",
-  "pitfalls": [
-   "RT-PCR is extremely sensitive: viral genome can persist in nasal secretions for weeks after an infection resolves, so a positive test may reflect a recently resolved rather than a currently acute infection, and laboratory contamination can produce false positives (Harrison 22e p.1537).",
-   "Rapid diagnostic tests have the highest positive predictive value when applied to high-risk, appropriately seasonal samples; indiscriminate testing lowers predictive value (Harrison 22e p.1537).",
-   "Adamantanes (amantadine, rimantadine) should not be relied upon: widespread resistance has occurred in many currently circulating influenza A viruses (Harrison 22e p.1580).",
-   "Antiviral therapy started late is of limited benefit, as it is effective mainly when given early in the course (Harrison 22e p.1537)."
-  ],
-  "severityClassification": "",
-  "references": [
-   "Harrison 22e p.1544",
-   "Harrison 22e p.1576",
-   "Harrison 22e p.1537",
-   "Harrison 22e p.1538",
-   "Harrison 22e p.1580"
-  ],
-  "crossLinks": [
-   "CAP"
-  ],
-  "management": [
-   "Start antiviral therapy early with neuraminidase inhibitors (oseltamivir or zanamivir) or the endonuclease inhibitor baloxavir marboxil, prioritising high-risk and hospitalised patients",
-   "Provide supportive care with antipyretics, analgesia, hydration and oxygen as needed, avoiding antibacterials for uncomplicated viral illness",
-   "Treat secondary bacterial pneumonia with antibacterials directed at staphylococcal and streptococcal superinfection",
-   "Prevent disease and spread with annual inactivated influenza vaccination and antiviral post-exposure prophylaxis for vulnerable contacts",
-   "Monitor high-risk groups (the elderly, immunocompromised, very young and those with comorbidities) for deterioration and complications",
-   "Escalate to hospital admission and respiratory support for severe or complicated pneumonia and respiratory failure"
-  ]
- },
- "algorithms": [
-  {
-   "id": "influenza-pathway",
-   "title": "Influenza: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Influenza presents with an abrupt febrile illness: fever, myalgias, fatigue, sore throat, headache, and cough (Harrison 22e p.1576).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Secondary bacterial pneumonia complicating influenza, classically caused by S. aureus (including MRSA, with risk of necrotizing pneumonia) and S. pneumoniae/S. pyogenes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR molecular testing of respiratory secretions (most sensitive and specific; multiplex respiratory panels available), Rapid antigen-based diagnostic test for influenza viral protein in nasopharyngeal secretions, Viral"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start antiviral therapy early with neuraminidase inhibitors (oseltamivir or zanamivir) or the endonuclease inhibitor baloxavir marboxil, prioritising high-risk and hospitalised patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: RT-PCR is extremely sensitive: viral genome can persist in nasal secretions for weeks after an infection resolves, so a positive test may reflect a recently resolved rather than a currently acute infection, and"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of influenza."
-  }
- ],
- "tables": [
-  {
-   "id": "influenza-matrix",
-   "title": "Influenza: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Influenza presents with an abrupt febrile illness: fever, myalgias, fatigue, sore throat, headache, and cough (Harrison 22e",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1544",
+    "clinicalPearls": [
+      "Influenza presents with an abrupt febrile illness: fever, myalgias, fatigue, sore throat, headache, and cough (Harrison 22e p.1576).",
+      "Influenza A viruses are the most virulent for humans and cause most severe disease, though type B viruses (Victoria lineage) also cause substantial morbidity; type A is subdivided by hemagglutinin (H) and neuraminidase (N) surface protein subtypes (Harrison 22e p.1576).",
+      "Two type A subtypes (H1N1 and H3N2) and one type B lineage (Victoria) cause annual seasonal epidemics, which occur in winter in temperate regions (Harrison 22e p.1576, p.1579).",
+      "Influenza pneumonia has an unusually high rate of complication by bacterial superinfection, with staphylococcal and streptococcal pneumonia occurring in as many as 10% of cases in some series (Harrison 22e p.1576).",
+      "Antiviral treatment of influenza is effective only when given early in the course of illness; baloxavir marboxil is approved for acute uncomplicated flu when started within 2 days of onset (Harrison 22e p.1537, p.1580).",
+      "Antibiotics do NOT improve the outcome of uncomplicated viral respiratory infection in otherwise healthy people, but influenza can be complicated by secondary bacterial infection that does warrant antibacterials (Harrison 22e p.1537).",
+      "Annual vaccine reformulation is required because antigenic drift (point mutations in HA and NA) causes antigenic divergence; an occasional antigenic mismatch can render a vaccine component of negligible efficacy (Harrison 22e p.1538)."
     ],
-    [
-     "Key Investigations",
-     "RT-PCR molecular testing of respiratory secretions (most sensitive and specific; multiplex respiratory panels available), Rapid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Influenza is a single-stranded, segmented, negative-sense RNA genome virus of the family Orthomyxoviridae, with four (sero)types: A, B, C, and D. Influenza A and C infect multiple species; B infects humans almost exclusively; D primarily infects cattle and is not known to infect humans. Influenza A is subdivided into 18 hemagglutinin (H) and 11 neuraminidase (N) surface-protein subtypes. Two distinct mechanisms drive antigenic variation: antigenic drift (accumulation of point mutations in the HA and NA molecules) produces the gradual divergence underlying annual epidemics and requires new vaccines each year; antigenic shift, enabled by the segmented genome allowing reassortment between two viruses co-infecting one host, can produce a major novel virus and a pandemic. Type B viruses mutate less frequently than type A, probably reflecting their near-exclusive human host range. Many highly pathogenic strains circulate in aquatic birds; pigs, which carry both avian and human receptors, can serve as a mixing vessel for reassortment that makes zoonotic viruses more fit for human replication (Harrison 22e p.1576).",
+    "additionalDifferentials": [
+      "COVID-19 (SARS-CoV-2) respiratory illness",
+      "Respiratory syncytial virus (RSV) infection",
+      "Human metapneumovirus infection",
+      "Parainfluenza virus infection",
+      "Rhinovirus / common cold",
+      "Adenovirus infection",
+      "Acute bronchitis"
     ],
-    [
-     "Primary Differentials",
-     "COVID-19 (SARS-CoV-2) respiratory illness, Respiratory syncytial virus (RSV) infection, Human metapneumovirus infection",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "SARS-CoV-2 (COVID-19)",
+      "Respiratory syncytial virus",
+      "Human metapneumovirus",
+      "Parainfluenza virus",
+      "Adenovirus",
+      "Rhinovirus",
+      "Community-acquired bacterial pneumonia (e.g., S. pneumoniae)"
     ],
-    [
-     "Management Strategy",
-     "Start antiviral therapy early with neuraminidase inhibitors (oseltamivir or zanamivir) or the endonuclease inhibitor baloxavir",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Acute exacerbation of COPD",
+      "Acute exacerbation of chronic bronchitis",
+      "Decompensated cardiovascular disease presenting with fever and dyspnea"
     ],
-    [
-     "Clinical Pitfall",
-     "RT-PCR is extremely sensitive: viral genome can persist in nasal secretions for weeks after an infection resolves, so a positive",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "RT-PCR molecular testing of respiratory secretions (most sensitive and specific; multiplex respiratory panels available)",
+      "Rapid antigen-based diagnostic test for influenza viral protein in nasopharyngeal secretions",
+      "Viral isolation by cell culture in a reference laboratory (gold standard but insensitive/slow)",
+      "Direct or indirect fluorescent antibody detection of virus-infected cells in nasal secretions",
+      "Chest radiograph for all patients with suspected pneumonia"
+    ],
+    "redFlags": [
+      "Secondary bacterial pneumonia complicating influenza, classically caused by S. aureus (including MRSA, with risk of necrotizing pneumonia) and S. pneumoniae/S. pyogenes",
+      "Severe or fatal primary viral pneumonia, particularly in elderly patients, nursing-home residents, immunocompromised persons, and very young children",
+      "Hypoxia or respiratory failure requiring supplemental oxygen or mechanical ventilation",
+      "Avian/zoonotic strains (e.g., H5N1, H7N9) with high mortality and pandemic potential, especially with relevant exposure history"
+    ],
+    "prognosis": "Uncomplicated influenza in otherwise healthy adults is generally self-limited, and antiviral therapy started early shortens illness. Severe and even fatal pneumonia occurs particularly in elderly patients, nursing-home residents, immunocompromised persons, and very young children. Bacterial superinfection complicates as many as 10% of influenza pneumonia cases in some series. Pandemics caused by novel viruses occur on average every 20-30 years (Harrison 22e p.1576, p.1538).",
+    "pitfalls": [
+      "RT-PCR is extremely sensitive: viral genome can persist in nasal secretions for weeks after an infection resolves, so a positive test may reflect a recently resolved rather than a currently acute infection, and laboratory contamination can produce false positives (Harrison 22e p.1537).",
+      "Rapid diagnostic tests have the highest positive predictive value when applied to high-risk, appropriately seasonal samples; indiscriminate testing lowers predictive value (Harrison 22e p.1537).",
+      "Adamantanes (amantadine, rimantadine) should not be relied upon: widespread resistance has occurred in many currently circulating influenza A viruses (Harrison 22e p.1580).",
+      "Antiviral therapy started late is of limited benefit, as it is effective mainly when given early in the course (Harrison 22e p.1537)."
+    ],
+    "severityClassification": "",
+    "references": [
+      "Harrison 22e p.1544",
+      "Harrison 22e p.1576",
+      "Harrison 22e p.1537",
+      "Harrison 22e p.1538",
+      "Harrison 22e p.1580"
+    ],
+    "crossLinks": [
+      "CAP"
+    ],
+    "management": [
+      "Start antiviral therapy early with neuraminidase inhibitors (oseltamivir or zanamivir) or the endonuclease inhibitor baloxavir marboxil, prioritising high-risk and hospitalised patients",
+      "Provide supportive care with antipyretics, analgesia, hydration and oxygen as needed, avoiding antibacterials for uncomplicated viral illness",
+      "Treat secondary bacterial pneumonia with antibacterials directed at staphylococcal and streptococcal superinfection",
+      "Prevent disease and spread with annual inactivated influenza vaccination and antiviral post-exposure prophylaxis for vulnerable contacts",
+      "Monitor high-risk groups (the elderly, immunocompromised, very young and those with comorbidities) for deterioration and complications",
+      "Escalate to hospital admission and respiratory support for severe or complicated pneumonia and respiratory failure"
     ]
-   ],
-   "caption": "Overview comparison matrix for influenza."
-  }
- ],
- "diagrams": [
-  {
-   "id": "influenza-real-image",
-   "title": "Influenza: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "influenza-pathway",
+      "title": "Influenza: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Influenza presents with an abrupt febrile illness: fever, myalgias, fatigue, sore throat, headache, and cough (Harrison 22e p.1576).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Secondary bacterial pneumonia complicating influenza, classically caused by S. aureus (including MRSA, with risk of necrotizing pneumonia) and S. pneumoniae/S. pyogenes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR molecular testing of respiratory secretions (most sensitive and specific; multiplex respiratory panels available), Rapid antigen-based diagnostic test for influenza viral protein in nasopharyngeal secretions, Viral"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start antiviral therapy early with neuraminidase inhibitors (oseltamivir or zanamivir) or the endonuclease inhibitor baloxavir marboxil, prioritising high-risk and hospitalised patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: RT-PCR is extremely sensitive: viral genome can persist in nasal secretions for weeks after an infection resolves, so a positive test may reflect a recently resolved rather than a currently acute infection, and"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of influenza."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "influenza-matrix",
+      "title": "Influenza: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Influenza presents with an abrupt febrile illness: fever, myalgias, fatigue, sore throat, headache, and cough (Harrison 22e",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR molecular testing of respiratory secretions (most sensitive and specific; multiplex respiratory panels available), Rapid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "COVID-19 (SARS-CoV-2) respiratory illness, Respiratory syncytial virus (RSV) infection, Human metapneumovirus infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start antiviral therapy early with neuraminidase inhibitors (oseltamivir or zanamivir) or the endonuclease inhibitor baloxavir",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "RT-PCR is extremely sensitive: viral genome can persist in nasal secretions for weeks after an infection resolves, so a positive",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for influenza."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC Influenza Antiviral Medications: Summary for Clinicians",
+      "kind": "web",
+      "url": "https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 120-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "influenza-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing influenza",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical picture",
+          "cells": [
+            {
+              "text": "Abrupt fever, myalgia, fatigue, sore throat, headache, cough in winter season"
+            },
+            {
+              "text": "Do not wait for testing before treating priority groups"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "{{hy:Molecular test (RT-PCR or multiplex)}}",
+          "cells": [
+            {
+              "text": "Most sensitive and specific; multiplex separates influenza A, B and SARS-CoV-2"
+            },
+            {
+              "text": "Positive for one virus does not exclude co-infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RT-PCR persistence",
+          "cells": [
+            {
+              "text": "Genome can persist in nasal secretions for weeks"
+            },
+            {
+              "text": "Positive may reflect a recent rather than current infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid antigen test",
+          "cells": [
+            {
+              "text": "Detects viral protein in nasopharyngeal secretions"
+            },
+            {
+              "text": "Best predictive value in high-risk seasonal samples"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lower respiratory RT-PCR",
+          "cells": [
+            {
+              "text": "Severely ill hospitalised patients"
+            },
+            {
+              "text": "Helps decide on extending treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "All with suspected pneumonia"
+            },
+            {
+              "text": "Look for primary viral or secondary bacterial pneumonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial superinfection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 10% of influenza pneumonia in some series",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "S. aureus including MRSA, S. pneumoniae, S. pyogenes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "influenza-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic influenza",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "COVID-19",
+          "cells": [
+            {
+              "text": "Overlapping symptoms; loss of smell may occur"
+            },
+            {
+              "text": "Multiplex molecular test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RSV, metapneumovirus, parainfluenza, adenovirus, rhinovirus",
+          "cells": [
+            {
+              "text": "Similar respiratory syndrome"
+            },
+            {
+              "text": "Multiplex respiratory panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial community-acquired pneumonia",
+          "cells": [
+            {
+              "text": "Focal consolidation, purulent sputum"
+            },
+            {
+              "text": "Chest radiograph and cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COPD or chronic bronchitis exacerbation",
+          "cells": [
+            {
+              "text": "Known lung disease, may be triggered by influenza"
+            },
+            {
+              "text": "Clinical history; test for influenza"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompensated heart disease",
+          "cells": [
+            {
+              "text": "Fever and dyspnoea with fluid overload"
+            },
+            {
+              "text": "Clinical exam, echocardiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "influenza-treatment",
+      "kind": "treatment",
+      "title": "Treating and preventing influenza (CDC)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "{{hy:Oseltamivir oral}}",
+          "cells": [
+            {
+              "text": "Hospitalised, severe or progressive illness, or higher risk; start as soon as possible"
+            },
+            {
+              "text": "75 mg twice daily for 5 days (adults over 40 kg); benefit in hospitalised even after 48 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zanamivir inhaled",
+          "cells": [
+            {
+              "text": "Outpatients without airway disease"
+            },
+            {
+              "text": "10 mg (two 5 mg inhalations) twice daily for 5 days; avoid in asthma or COPD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peramivir IV",
+          "cells": [
+            {
+              "text": "Cannot take oral therapy"
+            },
+            {
+              "text": "600 mg once if creatinine clearance 50 mL/min or more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Baloxavir oral",
+          "cells": [
+            {
+              "text": "Uncomplicated influenza within 2 days of onset"
+            },
+            {
+              "text": "40 mg if 20 to under 80 kg, 80 mg if 80 kg or more, single dose; not in pregnancy or severe immunosuppression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adamantanes",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Widespread resistance in circulating influenza A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Secondary bacterial pneumonia only"
+            },
+            {
+              "text": "Cover S. aureus and streptococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-exposure prophylaxis",
+          "cells": [
+            {
+              "text": "Vulnerable contacts"
+            },
+            {
+              "text": "Oseltamivir 75 mg once daily for 7 days after last exposure; outbreaks at least 2 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Annual vaccination",
+          "cells": [
+            {
+              "text": "Everyone eligible"
+            },
+            {
+              "text": "Reformulated yearly for antigenic drift"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "influenza-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Examples of microbial ligand-receptor interactions",
+      "rowHeader": "Microorganism",
+      "columns": [
+        "Microbial ligand",
+        "Host receptor"
+      ],
+      "rows": [
+        {
+          "parameter": "Influenza virus",
+          "cells": [
+            {
+              "text": "Hemagglutinin"
+            },
+            {
+              "text": "Sialic acid"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Measles virus, vaccine strain",
+          "cells": [
+            {
+              "text": "Hemagglutinin"
+            },
+            {
+              "text": "CD46/moesin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Measles virus, wild-type strains",
+          "cells": [
+            {
+              "text": "Hemagglutinin"
+            },
+            {
+              "text": "Signaling lymphocytic activation molecule (SLAM)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Human herpesvirus type 6",
+          "cells": [
+            {
+              "text": "Not stated (question mark in source)"
+            },
+            {
+              "text": "CD46"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Herpes simplex virus",
+          "cells": [
+            {
+              "text": "Glycoprotein C"
+            },
+            {
+              "text": "Heparan sulfate"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "HIV",
+          "cells": [
+            {
+              "text": "Surface glycoprotein"
+            },
+            {
+              "text": "CD4 and chemokine receptors (CCR5 and CXCR4)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Epstein-Barr virus",
+          "cells": [
+            {
+              "text": "Envelope protein"
+            },
+            {
+              "text": "CD21 (CR2)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Adenovirus",
+          "cells": [
+            {
+              "text": "Fiber protein"
+            },
+            {
+              "text": "Coxsackie-adenovirus receptor (CAR)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Coxsackievirus",
+          "cells": [
+            {
+              "text": "Viral coat proteins"
+            },
+            {
+              "text": "CAR and major histocompatibility class I antigens"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Neisseria spp.",
+          "cells": [
+            {
+              "text": "Pili"
+            },
+            {
+              "text": "Membrane co-factor protein (CD46)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pseudomonas aeruginosa (pili and flagella)",
+          "cells": [
+            {
+              "text": "Pili and flagella"
+            },
+            {
+              "text": "Asialo-GM1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pseudomonas aeruginosa (lipopolysaccharide)",
+          "cells": [
+            {
+              "text": "Lipopolysaccharide"
+            },
+            {
+              "text": "Cystic fibrosis transmembrane conductance regulator (CFTR)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Escherichia coli",
+          "cells": [
+            {
+              "text": "Pili"
+            },
+            {
+              "text": "Ceramides/mannose and digalactosyl residues"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Streptococcus pyogenes",
+          "cells": [
+            {
+              "text": "Hyaluronic acid capsule"
+            },
+            {
+              "text": "CD44"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Yersinia spp.",
+          "cells": [
+            {
+              "text": "Invasin/accessory invasin locus"
+            },
+            {
+              "text": "Beta1 integrins"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bordetella pertussis",
+          "cells": [
+            {
+              "text": "Filamentous hemagglutinin"
+            },
+            {
+              "text": "CR3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Legionella pneumophila",
+          "cells": [
+            {
+              "text": "Adsorbed C3bi"
+            },
+            {
+              "text": "CR3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mycobacterium tuberculosis",
+          "cells": [
+            {
+              "text": "Adsorbed C3bi"
+            },
+            {
+              "text": "CR3; DC-SIGN (footnote a, text not on page)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Blastomyces dermatitidis",
+          "cells": [
+            {
+              "text": "WI-1"
+            },
+            {
+              "text": "Possibly matrix proteins and integrins"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Candida albicans",
+          "cells": [
+            {
+              "text": "Int1p"
+            },
+            {
+              "text": "Extracellular matrix proteins"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Plasmodium vivax",
+          "cells": [
+            {
+              "text": "Merozoite form"
+            },
+            {
+              "text": "Duffy Fy antigen"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Plasmodium falciparum",
+          "cells": [
+            {
+              "text": "Erythrocyte-binding protein 175 (EBA-175)"
+            },
+            {
+              "text": "Glycophorin A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Entamoeba histolytica",
+          "cells": [
+            {
+              "text": "Surface lectin"
+            },
+            {
+              "text": "N-Acetylglucosamine"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "The source groups rows as viral, bacterial, fungal and protozoal pathogens."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "influenza-dx-mgmt",
+      "title": "Diagnosis and management of influenza",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute fever, cough and myalgia in flu season",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hospitalised, severe or progressive illness?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Start oseltamivir now; molecular test; chest X-ray",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Signs of bacterial pneumonia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Add antibiotics covering S. aureus and streptococci",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Continue oseltamivir and supportive care",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Higher risk for complications?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Treat early with oseltamivir regardless of test result",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Within 2 days of onset?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Consider oseltamivir, zanamivir or baloxavir",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Supportive care and safety-net advice",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

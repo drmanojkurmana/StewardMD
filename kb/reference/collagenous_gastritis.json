@@ -1,170 +1,439 @@
 {
- "id": "collagenous_gastritis",
- "name": "Collagenous gastritis",
- "aliases": [
-  "collagenous gastropathy"
- ],
- "class": "non_infective",
- "system": "Gastroenterology",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined histologically by a thickened subepithelial collagen band beneath the surface epithelium accompanied by a lamina propria inflammatory infiltrate",
-   "A paediatric or young-adult pattern typically presents with abdominal pain and iron-deficiency anaemia and is often confined to the stomach",
-   "An adult pattern more often accompanies chronic watery diarrhoea and overlaps with collagenous colitis and other microscopic colitides",
-   "Endoscopy may show a nodular or mosaic mucosa, erosions, or an essentially normal-appearing stomach, so diagnosis rests on biopsy",
-   "There is a recognised association with coeliac disease, so duodenal sampling and coeliac serology are worthwhile",
-   "Entrapment of surface epithelium and dilated capillaries within the collagen band helps distinguish it from other gastritides",
-   "No definitive therapy exists; management is empirical and supportive, including iron repletion and trials of acid suppression or corticosteroids"
+  "id": "collagenous_gastritis",
+  "name": "Collagenous gastritis",
+  "aliases": [
+    "collagenous gastropathy"
   ],
-  "pathophysiology": "Collagenous gastritis is a rare disorder in which an abnormally thick, patchy band of subepithelial collagen is deposited immediately beneath the gastric surface epithelium, associated with a chronic inflammatory infiltrate in the lamina propria and often entrapped dilated capillaries and detached surface cells. The mechanism is uncertain but is presumed to reflect an aberrant reparative or immune-mediated response of the subepithelial fibroblast sheath, mirroring the process seen in collagenous colitis, with which it may coexist. The abnormal mucosa can bleed and impair nutrient handling, contributing to the iron-deficiency anaemia commonly seen in affected children and young adults.",
-  "additionalDifferentials": [
-   "Coeliac disease with gastric involvement",
-   "Collagenous colitis or collagenous sprue as part of a diffuse gastrointestinal process",
-   "Lymphocytic gastritis",
-   "Helicobacter pylori-associated chronic gastritis",
-   "Autoimmune (atrophic) gastritis",
-   "Amyloidosis of the stomach"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy with multiple gastric biopsies, using special stains to highlight the subepithelial collagen band",
-   "Duodenal biopsies and coeliac serology to detect coexisting coeliac disease",
-   "Colonoscopy with biopsies where diarrhoea suggests coexisting microscopic (collagenous) colitis",
-   "Full blood count and iron studies to characterise anaemia",
-   "Helicobacter pylori testing to exclude a treatable co-factor",
-   "Nutritional and coeliac-related deficiency screening where malabsorption is suspected"
-  ],
-  "redFlags": [
-   "Significant or refractory iron-deficiency anaemia requiring transfusion or intravenous iron",
-   "Marked weight loss or failure to thrive in children",
-   "Severe or dehydrating diarrhoea in the adult diarrhoeal pattern"
-  ],
-  "prognosis": "The condition tends to be chronic and relapsing; the subepithelial collagen band often persists on repeat biopsy, but symptoms can be controlled and serious complications are uncommon, with prognosis largely determined by associated coeliac or colonic disease.",
-  "pitfalls": [
-   "Overlooking the diagnosis when the mucosa looks endoscopically normal and biopsies are not taken or not specially stained",
-   "Failing to search for coexisting coeliac disease or collagenous colitis",
-   "Attributing the iron-deficiency anaemia solely to another cause and missing the gastric source",
-   "Confusing the entrapped surface changes with a neoplastic process"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Yamada's Textbook of Gastroenterology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct iron-deficiency anaemia with oral or intravenous iron replacement",
-   "Trial of acid suppression with a proton-pump inhibitor and, in selected cases, corticosteroids such as budesonide for symptom control",
-   "Eradicate Helicobacter pylori with combination antibiotic therapy if detected",
-   "Institute a gluten-free diet where coexisting coeliac disease is confirmed",
-   "Nutritional assessment and replacement of demonstrated deficiencies",
-   "Endoscopic follow-up with repeat biopsy to monitor the mucosa given the chronic relapsing course",
-   "Referral to gastroenterology, paediatric where relevant, for coordinated management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "collagenous_gastritis-pathway",
-   "title": "Collagenous gastritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined histologically by a thickened subepithelial collagen band beneath the surface epithelium accompanied by a lamina propria inflammatory infiltrate",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant or refractory iron-deficiency anaemia requiring transfusion or intravenous iron",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy with multiple gastric biopsies, using special stains to highlight the subepithelial collagen band, Duodenal biopsies and coeliac serology to detect coexisting coeliac disease, Colonoscopy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct iron-deficiency anaemia with oral or intravenous iron replacement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis when the mucosa looks endoscopically normal and biopsies are not taken or not specially stained"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of collagenous gastritis."
-  }
- ],
- "tables": [
-  {
-   "id": "collagenous_gastritis-matrix",
-   "title": "Collagenous gastritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined histologically by a thickened subepithelial collagen band beneath the surface epithelium accompanied by a lamina propria",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined histologically by a thickened subepithelial collagen band beneath the surface epithelium accompanied by a lamina propria inflammatory infiltrate",
+      "A paediatric or young-adult pattern typically presents with abdominal pain and iron-deficiency anaemia and is often confined to the stomach",
+      "An adult pattern more often accompanies chronic watery diarrhoea and overlaps with collagenous colitis and other microscopic colitides",
+      "Endoscopy may show a nodular or mosaic mucosa, erosions, or an essentially normal-appearing stomach, so diagnosis rests on biopsy",
+      "There is a recognised association with coeliac disease, so duodenal sampling and coeliac serology are worthwhile",
+      "Entrapment of surface epithelium and dilated capillaries within the collagen band helps distinguish it from other gastritides",
+      "No definitive therapy exists; management is empirical and supportive, including iron repletion and trials of acid suppression or corticosteroids"
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy with multiple gastric biopsies, using special stains to highlight the subepithelial collagen",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Collagenous gastritis is a rare disorder in which an abnormally thick, patchy band of subepithelial collagen is deposited immediately beneath the gastric surface epithelium, associated with a chronic inflammatory infiltrate in the lamina propria and often entrapped dilated capillaries and detached surface cells. The mechanism is uncertain but is presumed to reflect an aberrant reparative or immune-mediated response of the subepithelial fibroblast sheath, mirroring the process seen in collagenous colitis, with which it may coexist. The abnormal mucosa can bleed and impair nutrient handling, contributing to the iron-deficiency anaemia commonly seen in affected children and young adults.",
+    "additionalDifferentials": [
+      "Coeliac disease with gastric involvement",
+      "Collagenous colitis or collagenous sprue as part of a diffuse gastrointestinal process",
+      "Lymphocytic gastritis",
+      "Helicobacter pylori-associated chronic gastritis",
+      "Autoimmune (atrophic) gastritis",
+      "Amyloidosis of the stomach"
     ],
-    [
-     "Primary Differentials",
-     "Coeliac disease with gastric involvement, Collagenous colitis or collagenous sprue as part of a diffuse gastrointestinal process,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy with multiple gastric biopsies, using special stains to highlight the subepithelial collagen band",
+      "Duodenal biopsies and coeliac serology to detect coexisting coeliac disease",
+      "Colonoscopy with biopsies where diarrhoea suggests coexisting microscopic (collagenous) colitis",
+      "Full blood count and iron studies to characterise anaemia",
+      "Helicobacter pylori testing to exclude a treatable co-factor",
+      "Nutritional and coeliac-related deficiency screening where malabsorption is suspected"
     ],
-    [
-     "Management Strategy",
-     "Correct iron-deficiency anaemia with oral or intravenous iron replacement",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant or refractory iron-deficiency anaemia requiring transfusion or intravenous iron",
+      "Marked weight loss or failure to thrive in children",
+      "Severe or dehydrating diarrhoea in the adult diarrhoeal pattern"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis when the mucosa looks endoscopically normal and biopsies are not taken or not specially stained",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition tends to be chronic and relapsing; the subepithelial collagen band often persists on repeat biopsy, but symptoms can be controlled and serious complications are uncommon, with prognosis largely determined by associated coeliac or colonic disease.",
+    "pitfalls": [
+      "Overlooking the diagnosis when the mucosa looks endoscopically normal and biopsies are not taken or not specially stained",
+      "Failing to search for coexisting coeliac disease or collagenous colitis",
+      "Attributing the iron-deficiency anaemia solely to another cause and missing the gastric source",
+      "Confusing the entrapped surface changes with a neoplastic process"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Yamada's Textbook of Gastroenterology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct iron-deficiency anaemia with oral or intravenous iron replacement",
+      "Trial of acid suppression with a proton-pump inhibitor and, in selected cases, corticosteroids such as budesonide for symptom control",
+      "Eradicate Helicobacter pylori with combination antibiotic therapy if detected",
+      "Institute a gluten-free diet where coexisting coeliac disease is confirmed",
+      "Nutritional assessment and replacement of demonstrated deficiencies",
+      "Endoscopic follow-up with repeat biopsy to monitor the mucosa given the chronic relapsing course",
+      "Referral to gastroenterology, paediatric where relevant, for coordinated management"
     ]
-   ],
-   "caption": "Overview comparison matrix for collagenous gastritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "collagenous-gastritis-real-image",
-   "title": "Collagenous gastritis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "collagenous_gastritis-pathway",
+      "title": "Collagenous gastritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined histologically by a thickened subepithelial collagen band beneath the surface epithelium accompanied by a lamina propria inflammatory infiltrate",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant or refractory iron-deficiency anaemia requiring transfusion or intravenous iron",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy with multiple gastric biopsies, using special stains to highlight the subepithelial collagen band, Duodenal biopsies and coeliac serology to detect coexisting coeliac disease, Colonoscopy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct iron-deficiency anaemia with oral or intravenous iron replacement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis when the mucosa looks endoscopically normal and biopsies are not taken or not specially stained"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of collagenous gastritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "collagenous_gastritis-matrix",
+      "title": "Collagenous gastritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined histologically by a thickened subepithelial collagen band beneath the surface epithelium accompanied by a lamina propria",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy with multiple gastric biopsies, using special stains to highlight the subepithelial collagen",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coeliac disease with gastric involvement, Collagenous colitis or collagenous sprue as part of a diffuse gastrointestinal process,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct iron-deficiency anaemia with oral or intravenous iron replacement",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis when the mucosa looks endoscopically normal and biopsies are not taken or not specially stained",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for collagenous gastritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "collagenous_gastritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy with multiple gastric biopsies and special stains",
+          "cells": [
+            {
+              "text": "Subepithelial collagen band highlighted by special stains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and duodenal biopsies",
+          "cells": [
+            {
+              "text": "Coexisting coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy with biopsies",
+          "cells": [
+            {
+              "text": "Coexisting microscopic colitis, when diarrhoea suggests it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Helicobacter pylori testing",
+          "cells": [
+            {
+              "text": "Treatable co-factor identified or excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenous_gastritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease with gastric involvement",
+          "cells": [
+            {
+              "text": "Coexists in many cases; must be searched for"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Collagenous colitis",
+          "cells": [
+            {
+              "text": "Adult gastric pattern overlaps with it in chronic watery diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenous_gastritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron replacement",
+          "cells": [
+            {
+              "text": "Oral or intravenous iron for iron-deficiency anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid suppression trial",
+          "cells": [
+            {
+              "text": "Proton-pump inhibitor; corticosteroids such as budesonide in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Helicobacter pylori eradication",
+          "cells": [
+            {
+              "text": "Combination antibiotic therapy if detected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gluten-free diet",
+          "cells": [
+            {
+              "text": "Where coexisting coeliac disease is confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional replacement",
+          "cells": [
+            {
+              "text": "Assessment and replacement of demonstrated deficiencies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic follow-up",
+          "cells": [
+            {
+              "text": "Repeat biopsy to monitor the mucosa given the chronic relapsing course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroenterology referral",
+          "cells": [
+            {
+              "text": "Paediatric where relevant, for coordinated management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "collagenous_gastritis-dx-mgmt",
+      "title": "Diagnosis and management of Collagenous gastritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected collagenous gastritis: iron-deficiency anaemia, abdominal pain or diarrhoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory iron deficiency, marked weight loss, dehydrating diarrhoea)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: transfusion or IV iron and correction of dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gastric biopsies with collagen stain; coeliac serology; H pylori testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a thickened subepithelial collagen band?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Search for coexisting coeliac disease or collagenous colitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct iron deficiency with oral or intravenous replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trial of proton-pump inhibitor; budesonide in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Eradicate H pylori if detected; gluten-free diet if coeliac is confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat endoscopic biopsy to monitor the chronic relapsing course",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and relapsing; complications are uncommon and symptoms can be controlled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

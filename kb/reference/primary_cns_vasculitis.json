@@ -1,180 +1,492 @@
 {
- "id": "primary_cns_vasculitis",
- "name": "Primary central nervous system vasculitis",
- "aliases": [
-  "Primary angiitis of the central nervous system",
-  "PACNS",
-  "Primary CNS vasculitis"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Primary CNS vasculitis is an inflammatory vasculopathy confined to the brain, spinal cord and leptomeninges, with no systemic vasculitis.",
-   "Presentation is typically insidious with headache and cognitive decline, punctuated by multifocal strokes or transient ischaemic events in different vascular territories.",
-   "Systemic inflammatory markers and ANCA are usually normal or negative, which helps distinguish it from systemic vasculitides.",
-   "Cerebrospinal fluid commonly shows a mild lymphocytic pleocytosis and raised protein; a completely normal CSF makes the diagnosis much less likely.",
-   "Catheter angiography may show alternating stenosis and dilatation ('beading'), but is neither sensitive nor specific and can be normal in small-vessel disease.",
-   "Brain and leptomeningeal biopsy is the reference standard but has significant sampling error because the disease is patchy.",
-   "Reversible cerebral vasoconstriction syndrome is the key mimic and must be excluded before committing to prolonged immunosuppression.",
-   "High-resolution vessel-wall MRI showing concentric enhancement can support the diagnosis and help differentiate it from non-inflammatory vasculopathy."
+  "id": "primary_cns_vasculitis",
+  "name": "Primary central nervous system vasculitis",
+  "aliases": [
+    "Primary angiitis of the central nervous system",
+    "PACNS",
+    "Primary CNS vasculitis"
   ],
-  "pathophysiology": "Primary CNS vasculitis is characterised by inflammatory infiltration and destruction of the walls of small and medium arteries and veins restricted to the central nervous system. Histology varies from granulomatous inflammation (often with vascular amyloid deposition) to lymphocytic or acute necrotising patterns. The inflammation narrows and occludes vessels, producing ischaemia and infarction, and may weaken walls to cause haemorrhage. The stimulus is unknown and, by definition, there is no systemic vasculitic process; the disease is heterogeneous, affecting different calibre vessels in different patients, which accounts for its variable clinical and radiological picture.",
-  "additionalDifferentials": [
-   "Reversible cerebral vasoconstriction syndrome",
-   "Intracranial atherosclerosis or embolic stroke",
-   "Secondary CNS involvement by systemic vasculitis or connective tissue disease",
-   "CNS infection (varicella zoster, tuberculosis, fungal, syphilitic arteritis)",
-   "Intravascular lymphoma or other neoplastic vasculopathy",
-   "Cerebral amyloid angiopathy with associated inflammation",
-   "Moyamoya and other non-inflammatory vasculopathies"
-  ],
-  "additionalInvestigations": [
-   "MRI brain with diffusion and gradient-echo or susceptibility sequences",
-   "High-resolution vessel-wall MRI to assess mural enhancement",
-   "Catheter cerebral angiography where medium-vessel disease is suspected",
-   "Cerebrospinal fluid analysis including cell count, protein, cytology and infection screen",
-   "Systemic vasculitis and autoimmune serology (ANCA, ANA, complement) to exclude secondary causes",
-   "Brain and leptomeningeal biopsy in selected cases",
-   "Screening for infective and neoplastic mimics including varicella zoster PCR"
-  ],
-  "redFlags": [
-   "Rapidly progressive encephalopathy or reduced consciousness",
-   "Recurrent multifocal strokes despite treatment",
-   "Intracranial haemorrhage",
-   "Spinal cord involvement with evolving myelopathy",
-   "New seizures with progressive cognitive decline"
-  ],
-  "prognosis": "Untreated disease can progress to disabling stroke, cognitive impairment or death, but many patients respond to immunosuppression; the granulomatous and small-vessel subtypes may relapse and require prolonged therapy. Early diagnosis and exclusion of mimics substantially improve outcomes.",
-  "pitfalls": [
-   "Misdiagnosing reversible cerebral vasoconstriction syndrome as vasculitis and giving unnecessary long-term immunosuppression.",
-   "Relying on angiographic 'beading' as diagnostic when it is non-specific and often absent in small-vessel disease.",
-   "Excluding the diagnosis on a single negative biopsy given the patchy distribution of disease.",
-   "Overlooking infective arteritis, particularly varicella zoster, before starting immunosuppression.",
-   "Attributing an isolated stroke in a young patient to atherosclerosis without considering CNS vasculitis."
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology, current edition",
-   "Oxford Textbook of Medicine, current edition",
-   "Consensus reviews on primary angiitis of the central nervous system"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with high-dose corticosteroids combined with cyclophosphamide",
-   "Maintain remission with azathioprine or mycophenolate mofetil once disease is controlled",
-   "Reserve rituximab for refractory or relapsing disease",
-   "Exclude mimics such as infection, reversible cerebral vasoconstriction syndrome, cerebral amyloid angiopathy, and malignancy before immunosuppression",
-   "Track disease activity with serial MRI and clinical assessment to detect relapse",
-   "Provide prophylaxis against Pneumocystis pneumonia, osteoporosis, and gastric ulceration during immunosuppression",
-   "Institute stroke prevention and neurorehabilitation",
-   "Manage within a neurology and rheumatology multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_cns_vasculitis-pathway",
-   "title": "Primary central nervous system vasculitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Primary CNS vasculitis is an inflammatory vasculopathy confined to the brain, spinal cord and leptomeninges, with no systemic vasculitis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive encephalopathy or reduced consciousness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain with diffusion and gradient-echo or susceptibility sequences, High-resolution vessel-wall MRI to assess mural enhancement, Catheter cerebral angiography where medium-vessel disease is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with high-dose corticosteroids combined with cyclophosphamide"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing reversible cerebral vasoconstriction syndrome as vasculitis and giving unnecessary long-term immunosuppression."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary central nervous system vasculitis."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_cns_vasculitis-matrix",
-   "title": "Primary central nervous system vasculitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Primary CNS vasculitis is an inflammatory vasculopathy confined to the brain, spinal cord and leptomeninges, with no systemic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Primary CNS vasculitis is an inflammatory vasculopathy confined to the brain, spinal cord and leptomeninges, with no systemic vasculitis.",
+      "Presentation is typically insidious with headache and cognitive decline, punctuated by multifocal strokes or transient ischaemic events in different vascular territories.",
+      "Systemic inflammatory markers and ANCA are usually normal or negative, which helps distinguish it from systemic vasculitides.",
+      "Cerebrospinal fluid commonly shows a mild lymphocytic pleocytosis and raised protein; a completely normal CSF makes the diagnosis much less likely.",
+      "Catheter angiography may show alternating stenosis and dilatation ('beading'), but is neither sensitive nor specific and can be normal in small-vessel disease.",
+      "Brain and leptomeningeal biopsy is the reference standard but has significant sampling error because the disease is patchy.",
+      "Reversible cerebral vasoconstriction syndrome is the key mimic and must be excluded before committing to prolonged immunosuppression.",
+      "High-resolution vessel-wall MRI showing concentric enhancement can support the diagnosis and help differentiate it from non-inflammatory vasculopathy."
     ],
-    [
-     "Key Investigations",
-     "MRI brain with diffusion and gradient-echo or susceptibility sequences, High-resolution vessel-wall MRI to assess mural",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary CNS vasculitis is characterised by inflammatory infiltration and destruction of the walls of small and medium arteries and veins restricted to the central nervous system. Histology varies from granulomatous inflammation (often with vascular amyloid deposition) to lymphocytic or acute necrotising patterns. The inflammation narrows and occludes vessels, producing ischaemia and infarction, and may weaken walls to cause haemorrhage. The stimulus is unknown and, by definition, there is no systemic vasculitic process; the disease is heterogeneous, affecting different calibre vessels in different patients, which accounts for its variable clinical and radiological picture.",
+    "additionalDifferentials": [
+      "Reversible cerebral vasoconstriction syndrome",
+      "Intracranial atherosclerosis or embolic stroke",
+      "Secondary CNS involvement by systemic vasculitis or connective tissue disease",
+      "CNS infection (varicella zoster, tuberculosis, fungal, syphilitic arteritis)",
+      "Intravascular lymphoma or other neoplastic vasculopathy",
+      "Cerebral amyloid angiopathy with associated inflammation",
+      "Moyamoya and other non-inflammatory vasculopathies"
     ],
-    [
-     "Primary Differentials",
-     "Reversible cerebral vasoconstriction syndrome, Intracranial atherosclerosis or embolic stroke, Secondary CNS involvement by",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain with diffusion and gradient-echo or susceptibility sequences",
+      "High-resolution vessel-wall MRI to assess mural enhancement",
+      "Catheter cerebral angiography where medium-vessel disease is suspected",
+      "Cerebrospinal fluid analysis including cell count, protein, cytology and infection screen",
+      "Systemic vasculitis and autoimmune serology (ANCA, ANA, complement) to exclude secondary causes",
+      "Brain and leptomeningeal biopsy in selected cases",
+      "Screening for infective and neoplastic mimics including varicella zoster PCR"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with high-dose corticosteroids combined with cyclophosphamide",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive encephalopathy or reduced consciousness",
+      "Recurrent multifocal strokes despite treatment",
+      "Intracranial haemorrhage",
+      "Spinal cord involvement with evolving myelopathy",
+      "New seizures with progressive cognitive decline"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing reversible cerebral vasoconstriction syndrome as vasculitis and giving unnecessary long-term immunosuppression.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disease can progress to disabling stroke, cognitive impairment or death, but many patients respond to immunosuppression; the granulomatous and small-vessel subtypes may relapse and require prolonged therapy. Early diagnosis and exclusion of mimics substantially improve outcomes.",
+    "pitfalls": [
+      "Misdiagnosing reversible cerebral vasoconstriction syndrome as vasculitis and giving unnecessary long-term immunosuppression.",
+      "Relying on angiographic 'beading' as diagnostic when it is non-specific and often absent in small-vessel disease.",
+      "Excluding the diagnosis on a single negative biopsy given the patchy distribution of disease.",
+      "Overlooking infective arteritis, particularly varicella zoster, before starting immunosuppression.",
+      "Attributing an isolated stroke in a young patient to atherosclerosis without considering CNS vasculitis."
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology, current edition",
+      "Oxford Textbook of Medicine, current edition",
+      "Consensus reviews on primary angiitis of the central nervous system"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with high-dose corticosteroids combined with cyclophosphamide",
+      "Maintain remission with azathioprine or mycophenolate mofetil once disease is controlled",
+      "Reserve rituximab for refractory or relapsing disease",
+      "Exclude mimics such as infection, reversible cerebral vasoconstriction syndrome, cerebral amyloid angiopathy, and malignancy before immunosuppression",
+      "Track disease activity with serial MRI and clinical assessment to detect relapse",
+      "Provide prophylaxis against Pneumocystis pneumonia, osteoporosis, and gastric ulceration during immunosuppression",
+      "Institute stroke prevention and neurorehabilitation",
+      "Manage within a neurology and rheumatology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary central nervous system vasculitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-cns-vasculitis-real-image",
-   "title": "Primary central nervous system vasculitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "primary_cns_vasculitis-pathway",
+      "title": "Primary central nervous system vasculitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Primary CNS vasculitis is an inflammatory vasculopathy confined to the brain, spinal cord and leptomeninges, with no systemic vasculitis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive encephalopathy or reduced consciousness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain with diffusion and gradient-echo or susceptibility sequences, High-resolution vessel-wall MRI to assess mural enhancement, Catheter cerebral angiography where medium-vessel disease is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with high-dose corticosteroids combined with cyclophosphamide"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing reversible cerebral vasoconstriction syndrome as vasculitis and giving unnecessary long-term immunosuppression."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary central nervous system vasculitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_cns_vasculitis-matrix",
+      "title": "Primary central nervous system vasculitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Primary CNS vasculitis is an inflammatory vasculopathy confined to the brain, spinal cord and leptomeninges, with no systemic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain with diffusion and gradient-echo or susceptibility sequences, High-resolution vessel-wall MRI to assess mural",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Reversible cerebral vasoconstriction syndrome, Intracranial atherosclerosis or embolic stroke, Secondary CNS involvement by",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with high-dose corticosteroids combined with cyclophosphamide",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing reversible cerebral vasoconstriction syndrome as vasculitis and giving unnecessary long-term immunosuppression.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary central nervous system vasculitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_cns_vasculitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain with diffusion and susceptibility sequences",
+          "cells": [
+            {
+              "text": "Brain lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution vessel-wall MRI",
+          "cells": [
+            {
+              "text": "Mural enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter cerebral angiography",
+          "cells": [
+            {
+              "text": "Medium-vessel disease, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis (cell count, protein, cytology, infection screen)",
+          "cells": [
+            {
+              "text": "Inflammation, and exclusion of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic vasculitis and autoimmune serology (ANCA, ANA, complement)",
+          "cells": [
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain and leptomeningeal biopsy",
+          "cells": [
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Varicella zoster PCR",
+          "cells": [
+            {
+              "text": "Infective mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cns_vasculitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary CNS involvement by systemic vasculitis or connective tissue disease",
+          "cells": [
+            {
+              "text": "Systemic vasculitis or connective tissue disease"
+            },
+            {
+              "text": "Systemic vasculitis and autoimmune serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS infection (varicella zoster, tuberculosis, fungal, syphilitic arteritis)",
+          "cells": [
+            {
+              "text": "Infection, excluded by CSF analysis and PCR"
+            },
+            {
+              "text": "CSF analysis and varicella zoster PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_cns_vasculitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Induction",
+          "cells": [
+            {
+              "text": "High-dose corticosteroids with cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "Azathioprine or mycophenolate mofetil once disease is controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory or relapsing disease",
+          "cells": [
+            {
+              "text": "Rituximab, reserved for this group"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mimics first",
+          "cells": [
+            {
+              "text": "Infection, reversible cerebral vasoconstriction syndrome, cerebral amyloid angiopathy and malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial MRI and clinical assessment to detect relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis",
+          "cells": [
+            {
+              "text": "Pneumocystis pneumonia, osteoporosis and gastric ulceration during immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke prevention",
+          "cells": [
+            {
+              "text": "Stroke prevention and neurorehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team",
+          "cells": [
+            {
+              "text": "Neurology and rheumatology multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_cns_vasculitis-dx-mgmt",
+      "title": "Diagnosis and management of Primary central nervous system vasculitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary CNS vasculitis: multifocal strokes or evolving encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid encephalopathy, recurrent strokes, haemorrhage or spinal cord involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for haemorrhage or rapid deterioration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with vessel-wall imaging; catheter angiography; CSF analysis; ANCA, ANA, complement",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are secondary causes and mimics excluded, with supportive MRI or CSF findings?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat mimics such as infection, RCVS or amyloid angiopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-dose corticosteroids with cyclophosphamide for induction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azathioprine or mycophenolate mofetil to maintain remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab reserved for refractory or relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial MRI and clinical review; prophylaxis during immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurology and rheumatology follow-up; stroke prevention and neurorehabilitation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,179 +1,466 @@
 {
- "id": "gastric_bezoar",
- "name": "gastric bezoar",
- "aliases": [
-  "phytobezoar",
-  "trichobezoar",
-  "gastric concretion"
- ],
- "class": "non_infective",
- "system": "gastrointestinal",
- "specialty": "gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A bezoar is a retained, compacted mass of indigestible material within the gastrointestinal tract, most often lodged in the stomach.",
-   "Phytobezoars composed of undigested plant fibre are the commonest type; diospyrobezoars from unripe persimmons are particularly hard and refractory to dissolution.",
-   "Trichobezoars from ingested hair occur almost exclusively in young women with trichotillomania and trichophagia; extension of the mass through the pylorus into the small bowel defines Rapunzel syndrome.",
-   "Delayed gastric emptying is central to formation, so prior gastric surgery such as vagotomy or partial gastrectomy, diabetic gastroparesis, hypochlorhydria and poor dentition are key predisposing factors.",
-   "Presentation ranges from vague epigastric fullness, early satiety and halitosis to frank gastric outlet obstruction, mucosal ulceration and bleeding.",
-   "Upper gastrointestinal endoscopy is both diagnostic and first-line therapeutic, allowing fragmentation and retrieval under direct vision.",
-   "Enzymatic or chemical dissolution such as cellulase or cola lavage can soften phytobezoars but is ineffective for trichobezoars, which usually require surgical removal.",
-   "Always look for a second bezoar or distal migration causing small bowel obstruction after clearing a gastric one."
+  "id": "gastric_bezoar",
+  "name": "gastric bezoar",
+  "aliases": [
+    "phytobezoar",
+    "trichobezoar",
+    "gastric concretion"
   ],
-  "pathophysiology": "Bezoar formation reflects an imbalance between the ingestion of poorly digestible material and the stomach's ability to break it down and empty it. Impaired gastric motility and reduced acid-peptic digestion allow fibrous plant residues, hair or medication to aggregate around a nidus that progressively enlarges as further debris and mucus adhere. Tannins and cellulose in certain fruits, notably unripe persimmons, polymerise in an acid environment to produce especially dense, adherent concretions. Hair is resistant to both digestion and peristalsis, so strands become enmeshed within the mucosal folds and mat together over months to years, moulding to the shape of the gastric lumen. The resulting mass causes symptoms through mechanical mass effect, pressure necrosis of the overlying mucosa and obstruction at the pylorus or, if fragments migrate, more distally in the small bowel.",
-  "additionalDifferentials": [
-   "Gastric outlet obstruction from peptic stricture",
-   "Gastric adenocarcinoma or lymphoma",
-   "Gastric volvulus",
-   "Peptic ulcer disease",
-   "Retained food from gastroparesis without a discrete bezoar",
-   "Ingested foreign body",
-   "Superior mesenteric artery syndrome"
-  ],
-  "additionalInvestigations": [
-   "Upper gastrointestinal endoscopy with biopsy of the underlying mucosa",
-   "Contrast-enhanced CT of the abdomen to define size, location and complications",
-   "Barium meal showing a mottled, freely mobile intraluminal filling defect",
-   "Gastric emptying study where dysmotility is suspected",
-   "Full blood count and iron studies if chronic occult blood loss",
-   "Markers of nutritional depletion",
-   "Psychiatric assessment where a trichobezoar is confirmed"
-  ],
-  "redFlags": [
-   "Features of gastric outlet obstruction with persistent vomiting and dehydration",
-   "Haematemesis or melaena indicating mucosal ulceration and bleeding",
-   "Signs of perforation or peritonism",
-   "New colicky pain suggesting small bowel obstruction from a migrated fragment",
-   "Rapid weight loss and malnutrition"
-  ],
-  "prognosis": "Prognosis is generally excellent once the bezoar is removed and the predisposing factor addressed, but recurrence is common if gastroparesis, dietary habits or trichophagia persist.",
-  "pitfalls": [
-   "Attempting chemical dissolution of a trichobezoar, which is futile and delays definitive surgery.",
-   "Overlooking a coexisting distal bezoar and precipitating small bowel obstruction after gastric clearance.",
-   "Missing the underlying psychiatric disorder in trichobezoar, leading to recurrence.",
-   "Confusing retained food in gastroparesis with a true bezoar, or the reverse.",
-   "Aggressive endoscopic fragmentation of a large hard phytobezoar without a plan for retrieving the fragments."
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Oxford Textbook of Medicine",
-   "ASGE guideline on management of ingested foreign bodies and food impactions"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Endoscopic fragmentation and retrieval under direct vision is first-line for most gastric bezoars",
-   "Attempt chemical dissolution, classically with cola lavage or enzymatic agents such as cellulase or papain, for phytobezoars",
-   "Refer for surgical removal of large, hard diospyrobezoars and of trichobezoars, especially where Rapunzel-syndrome small-bowel extension is present",
-   "Use prokinetic agents and treat the underlying gastroparesis to aid clearance and prevent reformation",
-   "Address predisposing factors by optimising dentition, modifying diet, and managing prior gastric-surgery-related dysmotility",
-   "Refer for psychiatric management of trichotillomania and trichophagia in trichobezoar cases to prevent recurrence",
-   "Provide nutritional support and correct iron-deficiency anaemia from chronic blood loss"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gastric_bezoar-pathway",
-   "title": "gastric bezoar: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A bezoar is a retained, compacted mass of indigestible material within the gastrointestinal tract, most often lodged in the stomach.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of gastric outlet obstruction with persistent vomiting and dehydration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Upper gastrointestinal endoscopy with biopsy of the underlying mucosa, Contrast-enhanced CT of the abdomen to define size, location and complications, Barium meal showing a mottled, freely mobile intraluminal filling defect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Endoscopic fragmentation and retrieval under direct vision is first-line for most gastric bezoars"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attempting chemical dissolution of a trichobezoar, which is futile and delays definitive surgery."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gastric bezoar."
-  }
- ],
- "tables": [
-  {
-   "id": "gastric_bezoar-matrix",
-   "title": "gastric bezoar: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A bezoar is a retained, compacted mass of indigestible material within the gastrointestinal tract, most often lodged in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "gastrointestinal",
+  "specialty": "gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A bezoar is a retained, compacted mass of indigestible material within the gastrointestinal tract, most often lodged in the stomach.",
+      "Phytobezoars composed of undigested plant fibre are the commonest type; diospyrobezoars from unripe persimmons are particularly hard and refractory to dissolution.",
+      "Trichobezoars from ingested hair occur almost exclusively in young women with trichotillomania and trichophagia; extension of the mass through the pylorus into the small bowel defines Rapunzel syndrome.",
+      "Delayed gastric emptying is central to formation, so prior gastric surgery such as vagotomy or partial gastrectomy, diabetic gastroparesis, hypochlorhydria and poor dentition are key predisposing factors.",
+      "Presentation ranges from vague epigastric fullness, early satiety and halitosis to frank gastric outlet obstruction, mucosal ulceration and bleeding.",
+      "Upper gastrointestinal endoscopy is both diagnostic and first-line therapeutic, allowing fragmentation and retrieval under direct vision.",
+      "Enzymatic or chemical dissolution such as cellulase or cola lavage can soften phytobezoars but is ineffective for trichobezoars, which usually require surgical removal.",
+      "Always look for a second bezoar or distal migration causing small bowel obstruction after clearing a gastric one."
     ],
-    [
-     "Key Investigations",
-     "Upper gastrointestinal endoscopy with biopsy of the underlying mucosa, Contrast-enhanced CT of the abdomen to define size,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bezoar formation reflects an imbalance between the ingestion of poorly digestible material and the stomach's ability to break it down and empty it. Impaired gastric motility and reduced acid-peptic digestion allow fibrous plant residues, hair or medication to aggregate around a nidus that progressively enlarges as further debris and mucus adhere. Tannins and cellulose in certain fruits, notably unripe persimmons, polymerise in an acid environment to produce especially dense, adherent concretions. Hair is resistant to both digestion and peristalsis, so strands become enmeshed within the mucosal folds and mat together over months to years, moulding to the shape of the gastric lumen. The resulting mass causes symptoms through mechanical mass effect, pressure necrosis of the overlying mucosa and obstruction at the pylorus or, if fragments migrate, more distally in the small bowel.",
+    "additionalDifferentials": [
+      "Gastric outlet obstruction from peptic stricture",
+      "Gastric adenocarcinoma or lymphoma",
+      "Gastric volvulus",
+      "Peptic ulcer disease",
+      "Retained food from gastroparesis without a discrete bezoar",
+      "Ingested foreign body",
+      "Superior mesenteric artery syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Gastric outlet obstruction from peptic stricture, Gastric adenocarcinoma or lymphoma, Gastric volvulus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Upper gastrointestinal endoscopy with biopsy of the underlying mucosa",
+      "Contrast-enhanced CT of the abdomen to define size, location and complications",
+      "Barium meal showing a mottled, freely mobile intraluminal filling defect",
+      "Gastric emptying study where dysmotility is suspected",
+      "Full blood count and iron studies if chronic occult blood loss",
+      "Markers of nutritional depletion",
+      "Psychiatric assessment where a trichobezoar is confirmed"
     ],
-    [
-     "Management Strategy",
-     "Endoscopic fragmentation and retrieval under direct vision is first-line for most gastric bezoars",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of gastric outlet obstruction with persistent vomiting and dehydration",
+      "Haematemesis or melaena indicating mucosal ulceration and bleeding",
+      "Signs of perforation or peritonism",
+      "New colicky pain suggesting small bowel obstruction from a migrated fragment",
+      "Rapid weight loss and malnutrition"
     ],
-    [
-     "Clinical Pitfall",
-     "Attempting chemical dissolution of a trichobezoar, which is futile and delays definitive surgery.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally excellent once the bezoar is removed and the predisposing factor addressed, but recurrence is common if gastroparesis, dietary habits or trichophagia persist.",
+    "pitfalls": [
+      "Attempting chemical dissolution of a trichobezoar, which is futile and delays definitive surgery.",
+      "Overlooking a coexisting distal bezoar and precipitating small bowel obstruction after gastric clearance.",
+      "Missing the underlying psychiatric disorder in trichobezoar, leading to recurrence.",
+      "Confusing retained food in gastroparesis with a true bezoar, or the reverse.",
+      "Aggressive endoscopic fragmentation of a large hard phytobezoar without a plan for retrieving the fragments."
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Oxford Textbook of Medicine",
+      "ASGE guideline on management of ingested foreign bodies and food impactions"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Endoscopic fragmentation and retrieval under direct vision is first-line for most gastric bezoars",
+      "Attempt chemical dissolution, classically with cola lavage or enzymatic agents such as cellulase or papain, for phytobezoars",
+      "Refer for surgical removal of large, hard diospyrobezoars and of trichobezoars, especially where Rapunzel-syndrome small-bowel extension is present",
+      "Use prokinetic agents and treat the underlying gastroparesis to aid clearance and prevent reformation",
+      "Address predisposing factors by optimising dentition, modifying diet, and managing prior gastric-surgery-related dysmotility",
+      "Refer for psychiatric management of trichotillomania and trichophagia in trichobezoar cases to prevent recurrence",
+      "Provide nutritional support and correct iron-deficiency anaemia from chronic blood loss"
     ]
-   ],
-   "caption": "Overview comparison matrix for gastric bezoar."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gastric-bezoar-real-image",
-   "title": "gastric bezoar: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "gastric_bezoar-pathway",
+      "title": "gastric bezoar: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A bezoar is a retained, compacted mass of indigestible material within the gastrointestinal tract, most often lodged in the stomach.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of gastric outlet obstruction with persistent vomiting and dehydration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Upper gastrointestinal endoscopy with biopsy of the underlying mucosa, Contrast-enhanced CT of the abdomen to define size, location and complications, Barium meal showing a mottled, freely mobile intraluminal filling defect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Endoscopic fragmentation and retrieval under direct vision is first-line for most gastric bezoars"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attempting chemical dissolution of a trichobezoar, which is futile and delays definitive surgery."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gastric bezoar."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gastric_bezoar-matrix",
+      "title": "gastric bezoar: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A bezoar is a retained, compacted mass of indigestible material within the gastrointestinal tract, most often lodged in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Upper gastrointestinal endoscopy with biopsy of the underlying mucosa, Contrast-enhanced CT of the abdomen to define size,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gastric outlet obstruction from peptic stricture, Gastric adenocarcinoma or lymphoma, Gastric volvulus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Endoscopic fragmentation and retrieval under direct vision is first-line for most gastric bezoars",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attempting chemical dissolution of a trichobezoar, which is futile and delays definitive surgery.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gastric bezoar."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastric_bezoar-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI endoscopy with biopsy of underlying mucosa",
+          "cells": [
+            {
+              "text": "Identifies the bezoar; biopsies the mucosa beneath"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT of the abdomen",
+          "cells": [
+            {
+              "text": "Size, location and complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barium meal",
+          "cells": [
+            {
+              "text": "Mottled, freely mobile intraluminal filling defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric emptying study",
+          "cells": [
+            {
+              "text": "Where dysmotility is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Chronic occult blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Markers of nutritional depletion",
+          "cells": [
+            {
+              "text": "Nutritional status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_bezoar-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gastric outlet obstruction from peptic stricture",
+          "cells": [
+            {
+              "text": "Persistent vomiting and dehydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retained food from gastroparesis",
+          "cells": [
+            {
+              "text": "No discrete bezoar present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_bezoar-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic fragmentation and retrieval",
+          "cells": [
+            {
+              "text": "First-line for most gastric bezoars, under direct vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemical dissolution for phytobezoars",
+          "cells": [
+            {
+              "text": "Cola lavage, or enzymatic agents such as cellulase or papain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical removal",
+          "cells": [
+            {
+              "text": "Large, hard diospyrobezoars and trichobezoars"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prokinetics and treatment of gastroparesis",
+          "cells": [
+            {
+              "text": "Aids clearance and prevents reformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address predisposing factors",
+          "cells": [
+            {
+              "text": "Dentition, diet and dysmotility after prior gastric surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric management",
+          "cells": [
+            {
+              "text": "Trichotillomania and trichophagia in trichobezoar cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Correct iron-deficiency anaemia from chronic blood loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastric_bezoar-dx-mgmt",
+      "title": "Diagnosis and management of gastric bezoar",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gastric bezoar: intraluminal filling defect with vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (outlet obstruction, haematemesis, perforation, weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for perforation or peritonism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with biopsy, contrast CT, barium meal and full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a mobile intraluminal filling defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider outlet obstruction, gastroparesis, malignancy or volvulus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic fragmentation and retrieval under direct vision, first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chemical dissolution for phytobezoars: cola lavage, cellulase or papain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical removal of large, hard diospyrobezoars and trichobezoars",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prokinetics and treatment of underlying gastroparesis to prevent reformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent if removed and the cause is treated; recurrence is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

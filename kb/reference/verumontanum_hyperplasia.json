@@ -1,175 +1,415 @@
 {
- "id": "verumontanum_hyperplasia",
- "name": "Verumontanum mucosal gland hyperplasia",
- "aliases": [
-  "verumontanum mucosal gland hyperplasia",
-  "verumontanum hyperplasia",
-  "VMGH"
- ],
- "class": "non_infective",
- "system": "Urology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO Classification of Tumours: Urinary and Male Genital Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign proliferation of small glands in and around the verumontanum, important chiefly as a histological mimic of low-grade prostatic adenocarcinoma",
-   "It is usually an incidental finding on needle biopsy, transurethral resection specimens or at autopsy, without specific symptoms",
-   "It is characterised by small crowded acini that retain a basal cell layer, which distinguishes it from carcinoma",
-   "It is commonly associated with corpora amylacea and lacks the infiltrative growth, nuclear enlargement and prominent nucleoli of cancer",
-   "It sits among the benign entities that can mimic malignancy in the prostate and posterior urethra, underlining the importance of careful histological interpretation when PSA is raised",
-   "Immunohistochemistry for basal cell markers confirms the benign nature",
-   "No treatment is required once malignancy has been excluded"
+  "id": "verumontanum_hyperplasia",
+  "name": "Verumontanum mucosal gland hyperplasia",
+  "aliases": [
+    "verumontanum mucosal gland hyperplasia",
+    "verumontanum hyperplasia",
+    "VMGH"
   ],
-  "pathophysiology": "Verumontanum mucosal gland hyperplasia is a benign hyperplastic proliferation of the small mucosal glands at the verumontanum in the posterior prostatic urethra. The closely packed small acini can architecturally resemble low-grade adenocarcinoma, but the retained basal cell layer, bland cytology and characteristic distinctive orange-brown luminal concretions mark the process as benign.",
-  "additionalDifferentials": [
-   "Low-grade prostatic adenocarcinoma",
-   "Atypical adenomatous hyperplasia (adenosis)",
-   "Atypical small acinar proliferation",
-   "Prostatic intraepithelial neoplasia",
-   "Basal cell hyperplasia",
-   "Nephrogenic adenoma of the prostatic urethra"
-  ],
-  "additionalInvestigations": [
-   "Histopathological assessment by an experienced uropathologist",
-   "Immunohistochemistry for basal cell markers (p63, high-molecular-weight cytokeratin) and AMACR",
-   "Correlation with the anatomical site around the verumontanum",
-   "PSA interpreted in clinical context",
-   "Multiparametric MRI if imaging correlation is needed",
-   "Repeat or targeted biopsy only if malignancy remains a genuine concern"
-  ],
-  "redFlags": [
-   "Coexisting atypical or malignant foci on the same specimen",
-   "A persistently rising PSA prompting further evaluation",
-   "Diagnostic uncertainty requiring specialist pathology review",
-   "Discordant MRI findings suggesting cancer"
-  ],
-  "prognosis": "Excellent; the lesion is entirely benign with no malignant potential, and its principal significance lies in avoiding a mistaken diagnosis of carcinoma.",
-  "pitfalls": [
-   "Overdiagnosing carcinoma on small crowded benign glands and prompting unnecessary treatment",
-   "Failing to use basal cell immunostains to confirm benignity",
-   "Attributing PSA elevation solely to this lesion without appropriate follow-up",
-   "Not seeking specialist review in equivocal cases"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "WHO Classification of Tumours: Urinary and Male Genital Tumours"
-  ],
-  "crossLinks": [
-   "prostate_intraepithelial_neoplasia",
-   "posterior_urethral_polyp"
-  ],
-  "management": [
-   "Provide no disease-specific treatment, as the lesion is entirely benign with no malignant potential, and reassure the patient",
-   "Confirm the benign diagnosis with immunohistochemistry for retained basal cells using p63 and high-molecular-weight cytokeratin alongside AMACR",
-   "Ensure review by an experienced uropathologist to avoid a mistaken diagnosis of prostatic adenocarcinoma",
-   "Interpret prostate-specific antigen within the clinical context rather than attributing elevation to this lesion",
-   "Reserve multiparametric MRI and repeat or targeted biopsy for cases where malignancy remains a genuine concern",
-   "Continue routine urological care as clinically indicated, without specific surveillance for this entity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "verumontanum_hyperplasia-pathway",
-   "title": "Verumontanum mucosal gland hyperplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign proliferation of small glands in and around the verumontanum, important chiefly as a histological mimic of low-grade prostatic adenocarcinoma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Coexisting atypical or malignant foci on the same specimen",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Histopathological assessment by an experienced uropathologist, Immunohistochemistry for basal cell markers (p63, high-molecular-weight cytokeratin) and AMACR, Correlation with the anatomical site around the verumontanum"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide no disease-specific treatment, as the lesion is entirely benign with no malignant potential, and reassure the patient"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overdiagnosing carcinoma on small crowded benign glands and prompting unnecessary treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of verumontanum mucosal gland hyperplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "verumontanum_hyperplasia-matrix",
-   "title": "Verumontanum mucosal gland hyperplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign proliferation of small glands in and around the verumontanum, important chiefly as a histological mimic of low-grade",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO Classification of Tumours: Urinary and Male Genital Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign proliferation of small glands in and around the verumontanum, important chiefly as a histological mimic of low-grade prostatic adenocarcinoma",
+      "It is usually an incidental finding on needle biopsy, transurethral resection specimens or at autopsy, without specific symptoms",
+      "It is characterised by small crowded acini that retain a basal cell layer, which distinguishes it from carcinoma",
+      "It is commonly associated with corpora amylacea and lacks the infiltrative growth, nuclear enlargement and prominent nucleoli of cancer",
+      "It sits among the benign entities that can mimic malignancy in the prostate and posterior urethra, underlining the importance of careful histological interpretation when PSA is raised",
+      "Immunohistochemistry for basal cell markers confirms the benign nature",
+      "No treatment is required once malignancy has been excluded"
     ],
-    [
-     "Key Investigations",
-     "Histopathological assessment by an experienced uropathologist, Immunohistochemistry for basal cell markers (p63,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Verumontanum mucosal gland hyperplasia is a benign hyperplastic proliferation of the small mucosal glands at the verumontanum in the posterior prostatic urethra. The closely packed small acini can architecturally resemble low-grade adenocarcinoma, but the retained basal cell layer, bland cytology and characteristic distinctive orange-brown luminal concretions mark the process as benign.",
+    "additionalDifferentials": [
+      "Low-grade prostatic adenocarcinoma",
+      "Atypical adenomatous hyperplasia (adenosis)",
+      "Atypical small acinar proliferation",
+      "Prostatic intraepithelial neoplasia",
+      "Basal cell hyperplasia",
+      "Nephrogenic adenoma of the prostatic urethra"
     ],
-    [
-     "Primary Differentials",
-     "Low-grade prostatic adenocarcinoma, Atypical adenomatous hyperplasia (adenosis), Atypical small acinar proliferation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Histopathological assessment by an experienced uropathologist",
+      "Immunohistochemistry for basal cell markers (p63, high-molecular-weight cytokeratin) and AMACR",
+      "Correlation with the anatomical site around the verumontanum",
+      "PSA interpreted in clinical context",
+      "Multiparametric MRI if imaging correlation is needed",
+      "Repeat or targeted biopsy only if malignancy remains a genuine concern"
     ],
-    [
-     "Management Strategy",
-     "Provide no disease-specific treatment, as the lesion is entirely benign with no malignant potential, and reassure the patient",
-     "Core treatment modality"
+    "redFlags": [
+      "Coexisting atypical or malignant foci on the same specimen",
+      "A persistently rising PSA prompting further evaluation",
+      "Diagnostic uncertainty requiring specialist pathology review",
+      "Discordant MRI findings suggesting cancer"
     ],
-    [
-     "Clinical Pitfall",
-     "Overdiagnosing carcinoma on small crowded benign glands and prompting unnecessary treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent; the lesion is entirely benign with no malignant potential, and its principal significance lies in avoiding a mistaken diagnosis of carcinoma.",
+    "pitfalls": [
+      "Overdiagnosing carcinoma on small crowded benign glands and prompting unnecessary treatment",
+      "Failing to use basal cell immunostains to confirm benignity",
+      "Attributing PSA elevation solely to this lesion without appropriate follow-up",
+      "Not seeking specialist review in equivocal cases"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "WHO Classification of Tumours: Urinary and Male Genital Tumours"
+    ],
+    "crossLinks": [
+      "prostate_intraepithelial_neoplasia",
+      "posterior_urethral_polyp"
+    ],
+    "management": [
+      "Provide no disease-specific treatment, as the lesion is entirely benign with no malignant potential, and reassure the patient",
+      "Confirm the benign diagnosis with immunohistochemistry for retained basal cells using p63 and high-molecular-weight cytokeratin alongside AMACR",
+      "Ensure review by an experienced uropathologist to avoid a mistaken diagnosis of prostatic adenocarcinoma",
+      "Interpret prostate-specific antigen within the clinical context rather than attributing elevation to this lesion",
+      "Reserve multiparametric MRI and repeat or targeted biopsy for cases where malignancy remains a genuine concern",
+      "Continue routine urological care as clinically indicated, without specific surveillance for this entity"
     ]
-   ],
-   "caption": "Overview comparison matrix for verumontanum mucosal gland hyperplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "verumontanum-hyperplasia-real-image",
-   "title": "Verumontanum mucosal gland hyperplasia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "verumontanum_hyperplasia-pathway",
+      "title": "Verumontanum mucosal gland hyperplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign proliferation of small glands in and around the verumontanum, important chiefly as a histological mimic of low-grade prostatic adenocarcinoma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Coexisting atypical or malignant foci on the same specimen",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Histopathological assessment by an experienced uropathologist, Immunohistochemistry for basal cell markers (p63, high-molecular-weight cytokeratin) and AMACR, Correlation with the anatomical site around the verumontanum"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide no disease-specific treatment, as the lesion is entirely benign with no malignant potential, and reassure the patient"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overdiagnosing carcinoma on small crowded benign glands and prompting unnecessary treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of verumontanum mucosal gland hyperplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "verumontanum_hyperplasia-matrix",
+      "title": "Verumontanum mucosal gland hyperplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign proliferation of small glands in and around the verumontanum, important chiefly as a histological mimic of low-grade",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Histopathological assessment by an experienced uropathologist, Immunohistochemistry for basal cell markers (p63,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Low-grade prostatic adenocarcinoma, Atypical adenomatous hyperplasia (adenosis), Atypical small acinar proliferation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide no disease-specific treatment, as the lesion is entirely benign with no malignant potential, and reassure the patient",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overdiagnosing carcinoma on small crowded benign glands and prompting unnecessary treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for verumontanum mucosal gland hyperplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO Classification of Tumours: Urinary and Male Genital Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "verumontanum_hyperplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Histopathological assessment by an uropathologist",
+          "cells": [
+            {
+              "text": "Benign glands versus low-grade carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for p63 and high-molecular-weight cytokeratin",
+          "cells": [
+            {
+              "text": "Retained basal cells confirm benignity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AMACR immunostaining",
+          "cells": [
+            {
+              "text": "Separates it from carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anatomical correlation with the verumontanum",
+          "cells": [
+            {
+              "text": "Site of the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PSA interpreted in clinical context",
+          "cells": [
+            {
+              "text": "Persistent rise prompts further evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "verumontanum_hyperplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-grade prostatic adenocarcinoma",
+          "cells": [
+            {
+              "text": "Crowded small glands; basal cell stains confirm benignity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical adenomatous hyperplasia (adenosis)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostatic intraepithelial neoplasia",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "verumontanum_hyperplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-specific treatment",
+          "cells": [
+            {
+              "text": "Entirely benign; reassure the patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm benignity",
+          "cells": [
+            {
+              "text": "Basal cell immunostains for p63 and high-molecular-weight cytokeratin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review",
+          "cells": [
+            {
+              "text": "Persistently rising PSA or atypical foci on the same specimen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "verumontanum_hyperplasia-dx-mgmt",
+      "title": "Diagnosis and management of Verumontanum mucosal gland hyperplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected verumontanum hyperplasia: small glands near the verumontanum on biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (atypical foci on the same specimen or rising PSA)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist uropathology review and further prostate evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Histopathology review, p63 and high-molecular-weight cytokeratin, AMACR staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do basal cell stains confirm benign glands?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat as possible carcinoma; further biopsy and specialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure the patient; no disease-specific treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm benign diagnosis with basal cell immunostains",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Review PSA and clinical context at follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Entirely benign; the main risk is overdiagnosis of carcinoma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

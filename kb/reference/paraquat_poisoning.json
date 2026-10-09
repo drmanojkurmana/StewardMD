@@ -1,173 +1,461 @@
 {
- "id": "paraquat_poisoning",
- "name": "Paraquat poisoning",
- "aliases": [
-  "paraquat toxicity",
-  "herbicide poisoning",
-  "gramoxone poisoning"
- ],
- "class": "non_infective",
- "system": "Toxicology / Environmental",
- "specialty": "Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A highly lethal herbicide with no effective antidote; even small deliberate ingestions of concentrated solution are frequently fatal",
-   "It concentrates in and selectively destroys the lungs, causing progressive pulmonary oedema, haemorrhage, and then relentless fibrosis over days to weeks",
-   "Early features include painful corrosive burns to the mouth, throat, and oesophagus, vomiting, and abdominal pain",
-   "Oxygen supplementation should generally be avoided or minimised, as high oxygen tension accelerates free-radical lung injury; supplemental oxygen is reserved for severe, refractory hypoxaemia",
-   "Immediate gastrointestinal decontamination with an adsorbent such as activated charcoal or Fuller's earth is a priority if the patient presents very early",
-   "Enhanced elimination (haemoperfusion or haemodialysis) and immunosuppression with corticosteroids and cyclophosphamide have been tried, but none reliably alters the poor outcome",
-   "Acute kidney injury and hepatic injury commonly precede the delayed, usually fatal, pulmonary fibrosis",
-   "Plasma paraquat concentration plotted against time since ingestion helps estimate prognosis and guide the intensity of intervention"
+  "id": "paraquat_poisoning",
+  "name": "Paraquat poisoning",
+  "aliases": [
+    "paraquat toxicity",
+    "herbicide poisoning",
+    "gramoxone poisoning"
   ],
-  "pathophysiology": "Paraquat undergoes cyclical reduction and oxidation (redox cycling), generating large amounts of superoxide and other reactive oxygen species that deplete NADPH and cause lipid peroxidation and cell death. It is actively taken up and concentrated by alveolar epithelial (type I and II) cells, making the lung the primary target: an early destructive phase of alveolitis and haemorrhagic oedema is followed by an obliterative pulmonary fibrosis. The kidneys and liver, which also accumulate the compound, sustain acute injury, and high oxygen tensions worsen the oxidative damage.",
-  "additionalDifferentials": [
-   "Corrosive ingestion from other agents",
-   "Other lethal pesticide ingestions (organophosphate, aluminium phosphide)",
-   "Acute respiratory distress syndrome from other causes",
-   "Acute interstitial pneumonitis",
-   "Caustic oesophageal injury"
-  ],
-  "additionalInvestigations": [
-   "Plasma or urine paraquat level and the urine dithionite qualitative test",
-   "Serial renal and liver function tests",
-   "Arterial blood gas and serial chest imaging to track evolving lung injury",
-   "Full blood count and electrolytes",
-   "Prognostic assessment using plasma concentration versus time since ingestion"
-  ],
-  "redFlags": [
-   "Ingestion of concentrated solution or any large deliberate ingestion",
-   "Early acute kidney injury, which predicts high toxin burden and poor outcome",
-   "Progressive hypoxaemia and radiographic lung changes",
-   "Extensive oropharyngeal and oesophageal corrosive burns",
-   "Rising plasma paraquat level for the time since ingestion indicating a lethal exposure"
-  ],
-  "prognosis": "Prognosis is generally poor and dose-dependent; ingestion of concentrated formulation is usually fatal, with death from multi-organ failure early or from progressive pulmonary fibrosis over subsequent days to weeks, and no treatment has been shown to reliably improve survival.",
-  "pitfalls": [
-   "Giving liberal supplemental oxygen, which accelerates oxidative lung injury",
-   "Delaying adsorbent decontamination in an early presentation",
-   "Offering false reassurance during the deceptively stable early period before lung failure",
-   "Underestimating lethality and under-treating the psychosocial and palliative needs of the patient"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/national toxicology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake immediate gastrointestinal decontamination with an adsorbent such as activated charcoal or Fuller's earth if the patient presents very early after ingestion",
-   "Withhold or strictly minimise supplemental oxygen, since high oxygen tension accelerates free-radical lung injury; reserve it for severe refractory hypoxaemia",
-   "Provide aggressive supportive care with intravenous fluid resuscitation, analgesia for corrosive oropharyngeal and oesophageal burns, and antiemetics",
-   "Consider enhanced elimination by haemoperfusion or haemodialysis, while recognising that evidence of survival benefit is limited",
-   "Trial immunosuppression with corticosteroids and cyclophosphamide in severe poisoning, acknowledging that no regimen reliably alters the poor outcome",
-   "Monitor renal and hepatic function, arterial blood gases and serial chest imaging to track evolving alveolitis and fibrosis",
-   "Involve a clinical toxicology service or poisons centre early, and provide honest prognostication and palliative care given the high lethality"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paraquat_poisoning-pathway",
-   "title": "Paraquat poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A highly lethal herbicide with no effective antidote; even small deliberate ingestions of concentrated solution are frequently fatal",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ingestion of concentrated solution or any large deliberate ingestion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma or urine paraquat level and the urine dithionite qualitative test, Serial renal and liver function tests, Arterial blood gas and serial chest imaging to track evolving lung injury"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake immediate gastrointestinal decontamination with an adsorbent such as activated charcoal or Fuller's earth if the patient presents very early after ingestion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving liberal supplemental oxygen, which accelerates oxidative lung injury"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paraquat poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "paraquat_poisoning-matrix",
-   "title": "Paraquat poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A highly lethal herbicide with no effective antidote; even small deliberate ingestions of concentrated solution are frequently",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Environmental",
+  "specialty": "Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A highly lethal herbicide with no effective antidote; even small deliberate ingestions of concentrated solution are frequently fatal",
+      "It concentrates in and selectively destroys the lungs, causing progressive pulmonary oedema, haemorrhage, and then relentless fibrosis over days to weeks",
+      "Early features include painful corrosive burns to the mouth, throat, and oesophagus, vomiting, and abdominal pain",
+      "Oxygen supplementation should generally be avoided or minimised, as high oxygen tension accelerates free-radical lung injury; supplemental oxygen is reserved for severe, refractory hypoxaemia",
+      "Immediate gastrointestinal decontamination with an adsorbent such as activated charcoal or Fuller's earth is a priority if the patient presents very early",
+      "Enhanced elimination (haemoperfusion or haemodialysis) and immunosuppression with corticosteroids and cyclophosphamide have been tried, but none reliably alters the poor outcome",
+      "Acute kidney injury and hepatic injury commonly precede the delayed, usually fatal, pulmonary fibrosis",
+      "Plasma paraquat concentration plotted against time since ingestion helps estimate prognosis and guide the intensity of intervention"
     ],
-    [
-     "Key Investigations",
-     "Plasma or urine paraquat level and the urine dithionite qualitative test, Serial renal and liver function tests, Arterial blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Paraquat undergoes cyclical reduction and oxidation (redox cycling), generating large amounts of superoxide and other reactive oxygen species that deplete NADPH and cause lipid peroxidation and cell death. It is actively taken up and concentrated by alveolar epithelial (type I and II) cells, making the lung the primary target: an early destructive phase of alveolitis and haemorrhagic oedema is followed by an obliterative pulmonary fibrosis. The kidneys and liver, which also accumulate the compound, sustain acute injury, and high oxygen tensions worsen the oxidative damage.",
+    "additionalDifferentials": [
+      "Corrosive ingestion from other agents",
+      "Other lethal pesticide ingestions (organophosphate, aluminium phosphide)",
+      "Acute respiratory distress syndrome from other causes",
+      "Acute interstitial pneumonitis",
+      "Caustic oesophageal injury"
     ],
-    [
-     "Primary Differentials",
-     "Corrosive ingestion from other agents, Other lethal pesticide ingestions (organophosphate, aluminium phosphide), Acute",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma or urine paraquat level and the urine dithionite qualitative test",
+      "Serial renal and liver function tests",
+      "Arterial blood gas and serial chest imaging to track evolving lung injury",
+      "Full blood count and electrolytes",
+      "Prognostic assessment using plasma concentration versus time since ingestion"
     ],
-    [
-     "Management Strategy",
-     "Undertake immediate gastrointestinal decontamination with an adsorbent such as activated charcoal or Fuller's earth if the",
-     "Core treatment modality"
+    "redFlags": [
+      "Ingestion of concentrated solution or any large deliberate ingestion",
+      "Early acute kidney injury, which predicts high toxin burden and poor outcome",
+      "Progressive hypoxaemia and radiographic lung changes",
+      "Extensive oropharyngeal and oesophageal corrosive burns",
+      "Rising plasma paraquat level for the time since ingestion indicating a lethal exposure"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving liberal supplemental oxygen, which accelerates oxidative lung injury",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is generally poor and dose-dependent; ingestion of concentrated formulation is usually fatal, with death from multi-organ failure early or from progressive pulmonary fibrosis over subsequent days to weeks, and no treatment has been shown to reliably improve survival.",
+    "pitfalls": [
+      "Giving liberal supplemental oxygen, which accelerates oxidative lung injury",
+      "Delaying adsorbent decontamination in an early presentation",
+      "Offering false reassurance during the deceptively stable early period before lung failure",
+      "Underestimating lethality and under-treating the psychosocial and palliative needs of the patient"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/national toxicology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake immediate gastrointestinal decontamination with an adsorbent such as activated charcoal or Fuller's earth if the patient presents very early after ingestion",
+      "Withhold or strictly minimise supplemental oxygen, since high oxygen tension accelerates free-radical lung injury; reserve it for severe refractory hypoxaemia",
+      "Provide aggressive supportive care with intravenous fluid resuscitation, analgesia for corrosive oropharyngeal and oesophageal burns, and antiemetics",
+      "Consider enhanced elimination by haemoperfusion or haemodialysis, while recognising that evidence of survival benefit is limited",
+      "Trial immunosuppression with corticosteroids and cyclophosphamide in severe poisoning, acknowledging that no regimen reliably alters the poor outcome",
+      "Monitor renal and hepatic function, arterial blood gases and serial chest imaging to track evolving alveolitis and fibrosis",
+      "Involve a clinical toxicology service or poisons centre early, and provide honest prognostication and palliative care given the high lethality"
     ]
-   ],
-   "caption": "Overview comparison matrix for paraquat poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paraquat-poisoning-real-image",
-   "title": "Paraquat poisoning: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "paraquat_poisoning-pathway",
+      "title": "Paraquat poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A highly lethal herbicide with no effective antidote; even small deliberate ingestions of concentrated solution are frequently fatal",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ingestion of concentrated solution or any large deliberate ingestion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma or urine paraquat level and the urine dithionite qualitative test, Serial renal and liver function tests, Arterial blood gas and serial chest imaging to track evolving lung injury"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake immediate gastrointestinal decontamination with an adsorbent such as activated charcoal or Fuller's earth if the patient presents very early after ingestion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving liberal supplemental oxygen, which accelerates oxidative lung injury"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paraquat poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paraquat_poisoning-matrix",
+      "title": "Paraquat poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A highly lethal herbicide with no effective antidote; even small deliberate ingestions of concentrated solution are frequently",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma or urine paraquat level and the urine dithionite qualitative test, Serial renal and liver function tests, Arterial blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Corrosive ingestion from other agents, Other lethal pesticide ingestions (organophosphate, aluminium phosphide), Acute",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake immediate gastrointestinal decontamination with an adsorbent such as activated charcoal or Fuller's earth if the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving liberal supplemental oxygen, which accelerates oxidative lung injury",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paraquat poisoning."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paraquat_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma or urine paraquat level and urine dithionite test",
+          "cells": [
+            {
+              "text": "Confirms the agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial renal and liver function tests",
+          "cells": [
+            {
+              "text": "Early kidney and liver injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and serial chest imaging",
+          "cells": [
+            {
+              "text": "Evolving lung injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and electrolytes",
+          "cells": [
+            {
+              "text": "Baseline and supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma level plotted against time since ingestion",
+          "cells": [
+            {
+              "text": "Prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraquat_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other lethal pesticide ingestion",
+          "cells": [
+            {
+              "text": "Organophosphate or aluminium phosphide; the paraquat level separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute interstitial pneumonitis or other ARDS",
+          "cells": [
+            {
+              "text": "Ingestion history and plasma level distinguish paraquat injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paraquat_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early decontamination",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Activated charcoal or Fuller's earth if presenting very early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen restriction",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Withhold or minimise oxygen; reserve for severe refractory hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "IV fluids, analgesia for corrosive burns and antiemetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enhanced elimination",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Haemoperfusion or haemodialysis; survival benefit is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Corticosteroids and cyclophosphamide in severe cases; outcome still poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicology input",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Early poisons centre review and honest palliative planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paraquat_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Paraquat poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paraquat ingestion with painful oropharyngeal burns, vomiting and abdominal pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (concentrated ingestion, early kidney injury or progressive hypoxaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent toxicology and ICU review; decontaminate if very early",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paraquat level, dithionite test, renal and liver tests, ABG, serial chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is paraquat confirmed, with the plasma level plotted against time since ingestion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other pesticide ingestion, corrosive injury, ARDS or pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activated charcoal or Fuller's earth if presenting very early after ingestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withhold or minimise oxygen, which accelerates free-radical lung injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV fluids, analgesia for burns, and haemoperfusion or haemodialysis if available",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids and cyclophosphamide in severe poisoning, with limited benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally poor and dose-dependent; death from organ failure or pulmonary fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

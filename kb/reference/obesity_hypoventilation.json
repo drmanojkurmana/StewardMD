@@ -1,172 +1,423 @@
 {
- "id": "obesity_hypoventilation",
- "name": "Obesity hypoventilation syndrome",
- "aliases": [
-  "Pickwickian syndrome",
-  "obesity-related hypoventilation",
-  "OHS"
- ],
- "class": "non_infective",
- "system": "Nutrition / Metabolic",
- "specialty": "Nutrition & Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by obesity with chronic daytime hypercapnia and hypoxaemia that is not explained by another cause of hypoventilation",
-   "Most patients also have obstructive sleep apnoea, with loud snoring, witnessed apnoeas, and daytime sleepiness",
-   "It should be suspected in an obese patient with an unexplained raised serum bicarbonate reflecting chronic carbon dioxide retention",
-   "Untreated disease progresses to pulmonary hypertension, right heart failure (cor pulmonale), and peripheral oedema",
-   "Patients are vulnerable to acute-on-chronic respiratory failure, which can be precipitated by infection, sedatives, or high-flow uncontrolled oxygen",
-   "Positive airway pressure therapy is the cornerstone of management, alongside sustained weight reduction",
-   "It is increasingly relevant as obesity prevalence rises, including in urban India"
+  "id": "obesity_hypoventilation",
+  "name": "Obesity hypoventilation syndrome",
+  "aliases": [
+    "Pickwickian syndrome",
+    "obesity-related hypoventilation",
+    "OHS"
   ],
-  "pathophysiology": "Severe obesity increases the mechanical load on the respiratory system through chest wall and abdominal fat, reducing lung volumes and respiratory compliance and increasing the work of breathing. Combined with blunted central ventilatory responsiveness to carbon dioxide and, in most patients, coexisting upper airway obstruction during sleep, this leads to chronic alveolar hypoventilation. Sustained carbon dioxide retention drives renal bicarbonate retention, which further blunts the ventilatory drive. Chronic hypoxaemia causes pulmonary vasoconstriction and, over time, pulmonary hypertension and right ventricular failure.",
-  "additionalDifferentials": [
-   "Chronic obstructive pulmonary disease and other intrinsic lung disease",
-   "Obstructive sleep apnoea without daytime hypercapnia",
-   "Neuromuscular disease causing respiratory muscle weakness",
-   "Chest wall disorders such as severe kyphoscoliosis",
-   "Central hypoventilation from other causes",
-   "Hypothyroidism contributing to hypoventilation"
-  ],
-  "additionalInvestigations": [
-   "Arterial blood gas demonstrating daytime hypercapnia and hypoxaemia",
-   "Serum bicarbonate as a screening clue to chronic carbon dioxide retention",
-   "Sleep study to assess for obstructive sleep apnoea and nocturnal hypoventilation",
-   "Pulmonary function tests to exclude intrinsic lung disease",
-   "Assessment for pulmonary hypertension and right heart strain (ECG and echocardiography)"
-  ],
-  "redFlags": [
-   "Acute-on-chronic hypercapnic respiratory failure with reduced consciousness",
-   "Signs of cor pulmonale and right heart failure",
-   "Deterioration after uncontrolled high-flow oxygen or sedative drugs",
-   "Severe hypoxaemia or respiratory acidosis requiring urgent ventilatory support"
-  ],
-  "prognosis": "Positive airway pressure therapy and weight reduction improve gas exchange, symptoms, and survival; untreated disease carries high morbidity and mortality from respiratory failure and cor pulmonale.",
-  "pitfalls": [
-   "Attributing hypercapnia to obstructive sleep apnoea alone and missing the hypoventilation syndrome",
-   "Giving uncontrolled high-flow oxygen and worsening carbon dioxide retention",
-   "Using sedatives that further depress ventilation",
-   "Overlooking a raised bicarbonate as an early clue to chronic hypercapnia"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO nutrition guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Positive airway pressure therapy as the cornerstone: CPAP for coexisting obstructive sleep apnoea, or bilevel ventilation for persistent hypercapnia",
-   "Sustained weight reduction through lifestyle change, pharmacotherapy or bariatric surgery to reduce respiratory load",
-   "Cautious controlled oxygen therapy, avoiding uncontrolled high-flow oxygen that may worsen carbon dioxide retention",
-   "Treatment of pulmonary hypertension and cor pulmonale, including diuretics for right heart failure and peripheral oedema",
-   "Avoidance of sedatives and management of precipitants such as infection during acute-on-chronic respiratory failure",
-   "Non-invasive ventilation, escalating to invasive ventilatory support, for acute decompensated hypercapnic respiratory failure",
-   "Multidisciplinary follow-up with monitoring of daytime gas exchange and adherence to positive airway pressure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "obesity_hypoventilation-pathway",
-   "title": "Obesity hypoventilation syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by obesity with chronic daytime hypercapnia and hypoxaemia that is not explained by another cause of hypoventilation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute-on-chronic hypercapnic respiratory failure with reduced consciousness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Arterial blood gas demonstrating daytime hypercapnia and hypoxaemia, Serum bicarbonate as a screening clue to chronic carbon dioxide retention, Sleep study to assess for obstructive sleep apnoea and nocturnal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Positive airway pressure therapy as the cornerstone: CPAP for coexisting obstructive sleep apnoea, or bilevel ventilation for persistent hypercapnia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing hypercapnia to obstructive sleep apnoea alone and missing the hypoventilation syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of obesity hypoventilation syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "obesity_hypoventilation-matrix",
-   "title": "Obesity hypoventilation syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by obesity with chronic daytime hypercapnia and hypoxaemia that is not explained by another cause of hypoventilation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutrition / Metabolic",
+  "specialty": "Nutrition & Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by obesity with chronic daytime hypercapnia and hypoxaemia that is not explained by another cause of hypoventilation",
+      "Most patients also have obstructive sleep apnoea, with loud snoring, witnessed apnoeas, and daytime sleepiness",
+      "It should be suspected in an obese patient with an unexplained raised serum bicarbonate reflecting chronic carbon dioxide retention",
+      "Untreated disease progresses to pulmonary hypertension, right heart failure (cor pulmonale), and peripheral oedema",
+      "Patients are vulnerable to acute-on-chronic respiratory failure, which can be precipitated by infection, sedatives, or high-flow uncontrolled oxygen",
+      "Positive airway pressure therapy is the cornerstone of management, alongside sustained weight reduction",
+      "It is increasingly relevant as obesity prevalence rises, including in urban India"
     ],
-    [
-     "Key Investigations",
-     "Arterial blood gas demonstrating daytime hypercapnia and hypoxaemia, Serum bicarbonate as a screening clue to chronic carbon",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Severe obesity increases the mechanical load on the respiratory system through chest wall and abdominal fat, reducing lung volumes and respiratory compliance and increasing the work of breathing. Combined with blunted central ventilatory responsiveness to carbon dioxide and, in most patients, coexisting upper airway obstruction during sleep, this leads to chronic alveolar hypoventilation. Sustained carbon dioxide retention drives renal bicarbonate retention, which further blunts the ventilatory drive. Chronic hypoxaemia causes pulmonary vasoconstriction and, over time, pulmonary hypertension and right ventricular failure.",
+    "additionalDifferentials": [
+      "Chronic obstructive pulmonary disease and other intrinsic lung disease",
+      "Obstructive sleep apnoea without daytime hypercapnia",
+      "Neuromuscular disease causing respiratory muscle weakness",
+      "Chest wall disorders such as severe kyphoscoliosis",
+      "Central hypoventilation from other causes",
+      "Hypothyroidism contributing to hypoventilation"
     ],
-    [
-     "Primary Differentials",
-     "Chronic obstructive pulmonary disease and other intrinsic lung disease, Obstructive sleep apnoea without daytime hypercapnia,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Arterial blood gas demonstrating daytime hypercapnia and hypoxaemia",
+      "Serum bicarbonate as a screening clue to chronic carbon dioxide retention",
+      "Sleep study to assess for obstructive sleep apnoea and nocturnal hypoventilation",
+      "Pulmonary function tests to exclude intrinsic lung disease",
+      "Assessment for pulmonary hypertension and right heart strain (ECG and echocardiography)"
     ],
-    [
-     "Management Strategy",
-     "Positive airway pressure therapy as the cornerstone: CPAP for coexisting obstructive sleep apnoea, or bilevel ventilation for",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute-on-chronic hypercapnic respiratory failure with reduced consciousness",
+      "Signs of cor pulmonale and right heart failure",
+      "Deterioration after uncontrolled high-flow oxygen or sedative drugs",
+      "Severe hypoxaemia or respiratory acidosis requiring urgent ventilatory support"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing hypercapnia to obstructive sleep apnoea alone and missing the hypoventilation syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Positive airway pressure therapy and weight reduction improve gas exchange, symptoms, and survival; untreated disease carries high morbidity and mortality from respiratory failure and cor pulmonale.",
+    "pitfalls": [
+      "Attributing hypercapnia to obstructive sleep apnoea alone and missing the hypoventilation syndrome",
+      "Giving uncontrolled high-flow oxygen and worsening carbon dioxide retention",
+      "Using sedatives that further depress ventilation",
+      "Overlooking a raised bicarbonate as an early clue to chronic hypercapnia"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO nutrition guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Positive airway pressure therapy as the cornerstone: CPAP for coexisting obstructive sleep apnoea, or bilevel ventilation for persistent hypercapnia",
+      "Sustained weight reduction through lifestyle change, pharmacotherapy or bariatric surgery to reduce respiratory load",
+      "Cautious controlled oxygen therapy, avoiding uncontrolled high-flow oxygen that may worsen carbon dioxide retention",
+      "Treatment of pulmonary hypertension and cor pulmonale, including diuretics for right heart failure and peripheral oedema",
+      "Avoidance of sedatives and management of precipitants such as infection during acute-on-chronic respiratory failure",
+      "Non-invasive ventilation, escalating to invasive ventilatory support, for acute decompensated hypercapnic respiratory failure",
+      "Multidisciplinary follow-up with monitoring of daytime gas exchange and adherence to positive airway pressure"
     ]
-   ],
-   "caption": "Overview comparison matrix for obesity hypoventilation syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "obesity-hypoventilation-real-image",
-   "title": "Obesity hypoventilation syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "obesity_hypoventilation-pathway",
+      "title": "Obesity hypoventilation syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by obesity with chronic daytime hypercapnia and hypoxaemia that is not explained by another cause of hypoventilation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute-on-chronic hypercapnic respiratory failure with reduced consciousness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Arterial blood gas demonstrating daytime hypercapnia and hypoxaemia, Serum bicarbonate as a screening clue to chronic carbon dioxide retention, Sleep study to assess for obstructive sleep apnoea and nocturnal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Positive airway pressure therapy as the cornerstone: CPAP for coexisting obstructive sleep apnoea, or bilevel ventilation for persistent hypercapnia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing hypercapnia to obstructive sleep apnoea alone and missing the hypoventilation syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of obesity hypoventilation syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "obesity_hypoventilation-matrix",
+      "title": "Obesity hypoventilation syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by obesity with chronic daytime hypercapnia and hypoxaemia that is not explained by another cause of hypoventilation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Arterial blood gas demonstrating daytime hypercapnia and hypoxaemia, Serum bicarbonate as a screening clue to chronic carbon",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic obstructive pulmonary disease and other intrinsic lung disease, Obstructive sleep apnoea without daytime hypercapnia,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Positive airway pressure therapy as the cornerstone: CPAP for coexisting obstructive sleep apnoea, or bilevel ventilation for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing hypercapnia to obstructive sleep apnoea alone and missing the hypoventilation syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for obesity hypoventilation syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "obesity_hypoventilation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial blood gas on room air",
+          "cells": [
+            {
+              "text": "Daytime hypercapnia and hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum bicarbonate",
+          "cells": [
+            {
+              "text": "Screening clue to chronic CO2 retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography",
+          "cells": [
+            {
+              "text": "Coexisting obstructive sleep apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry and chest imaging",
+          "cells": [
+            {
+              "text": "Excludes intrinsic lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "obesity_hypoventilation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic obstructive pulmonary disease",
+          "cells": [
+            {
+              "text": "Intrinsic lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea without daytime hypercapnia",
+          "cells": [
+            {
+              "text": "Sleep disorder without hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular disease",
+          "cells": [
+            {
+              "text": "Respiratory muscle weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "obesity_hypoventilation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Positive airway pressure therapy",
+          "cells": [
+            {
+              "text": "Cornerstone of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CPAP for coexisting obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Or bilevel ventilation for persistent hypercapnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight reduction",
+          "cells": [
+            {
+              "text": "Improves gas exchange and survival"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid high-flow oxygen without monitoring",
+          "cells": [
+            {
+              "text": "Can worsen carbon dioxide retention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "obesity_hypoventilation-dx-mgmt",
+      "title": "Diagnosis and management of Obesity hypoventilation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe obesity with daytime somnolence and raised bicarbonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (reduced consciousness, cor pulmonale, deterioration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ventilatory support for acute-on-chronic hypercapnic failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Arterial blood gas, serum bicarbonate, polysomnography, spirometry, imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Obesity with daytime hypercapnia not explained by another cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider COPD or neuromuscular disease; investigate further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Positive airway pressure as the cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CPAP for sleep apnoea or bilevel ventilation for persistent hypercapnia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Weight reduction to improve gas exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Controlled oxygen only, with gas monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Positive pressure and weight loss improve gas exchange, symptoms and survival",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,615 @@
 {
- "id": "paroxysmal_cold_hemoglobinuria",
- "name": "Paroxysmal cold haemoglobinuria",
- "aliases": [
-  "Donath-Landsteiner haemolytic anaemia",
-  "PCH",
-  "biphasic haemolysin haemolytic anaemia",
-  "paroxysmal cold haemoglobinuria"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An uncommon autoimmune haemolytic anaemia caused by a biphasic IgG autoantibody, the Donath-Landsteiner antibody, usually directed against the P antigen",
-   "It most often occurs in children after a viral infection and produces acute, sometimes dramatic, intravascular haemolysis",
-   "Classic features are cold-triggered episodes of haemoglobinuria with fever, back or abdominal pain and pallor",
-   "The Donath-Landsteiner test is diagnostic: the antibody binds red cells and fixes complement in the cold, then triggers lysis on rewarming",
-   "The direct antiglobulin test is typically positive for complement (C3d) and negative for IgG because the IgG antibody elutes on warming",
-   "Unlike cold agglutinin disease, haemolysis is predominantly intravascular and the antibody is IgG rather than IgM",
-   "In children the disorder is usually acute and self-limiting, and management is supportive with warmth and transfusion when needed"
+  "id": "paroxysmal_cold_hemoglobinuria",
+  "name": "Paroxysmal cold haemoglobinuria",
+  "aliases": [
+    "Donath-Landsteiner haemolytic anaemia",
+    "PCH",
+    "biphasic haemolysin haemolytic anaemia",
+    "paroxysmal cold haemoglobinuria"
   ],
-  "pathophysiology": "Paroxysmal cold haemoglobinuria is mediated by a biphasic IgG autoantibody, the Donath-Landsteiner antibody, classically specific for the P blood group antigen. In the cooler peripheral circulation the antibody binds red cells and fixes early complement components; when the cells return to core body temperature the complement cascade proceeds to completion, producing complement-mediated intravascular haemolysis and haemoglobinuria. The antibody itself detaches on warming, which is why the direct antiglobulin test detects complement rather than IgG. The disorder most often arises transiently after viral or other infections in children.",
-  "additionalDifferentials": [
-   "Cold agglutinin disease",
-   "Warm autoimmune haemolytic anaemia",
-   "Glucose-6-phosphate dehydrogenase deficiency with acute haemolysis",
-   "Paroxysmal nocturnal haemoglobinuria",
-   "Microangiopathic haemolytic anaemia",
-   "Transfusion or other acute intravascular haemolysis"
-  ],
-  "additionalInvestigations": [
-   "Donath-Landsteiner biphasic haemolysin test",
-   "Direct antiglobulin test with monospecific C3d and IgG reagents",
-   "Blood film and haemolysis markers including free haemoglobin",
-   "Urinalysis for haemoglobinuria",
-   "Reticulocyte count, lactate dehydrogenase, haptoglobin and bilirubin",
-   "Screening for a preceding or concurrent infection"
-  ],
-  "redFlags": [
-   "Rapid, severe haemoglobin fall with haemodynamic instability",
-   "Marked haemoglobinuria with risk of acute kidney injury",
-   "Recurrent episodes suggesting a persistent or secondary cause",
-   "Haemolysis in an adult prompting evaluation for underlying malignancy or syphilis"
-  ],
-  "prognosis": "Post-infectious paroxysmal cold haemoglobinuria in children is usually acute and self-limiting with full recovery once the trigger resolves; supportive care and keeping the patient warm are generally sufficient.",
-  "pitfalls": [
-   "Confusing it with cold agglutinin disease and misdirecting therapy",
-   "Not requesting the specific Donath-Landsteiner test, so the diagnosis is missed",
-   "Allowing the patient or blood products to be cold, precipitating further haemolysis",
-   "Overlooking rare chronic adult forms historically linked to syphilis"
-  ],
-  "references": [
-   "Williams Hematology",
-   "WHO Classification of Haematolymphoid Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage supportively, as the post-infectious childhood form is usually acute and self-limiting with full recovery",
-   "Keep the patient warm and avoid cold exposure to prevent the biphasic Donath-Landsteiner antibody from binding red cells",
-   "Transfuse for symptomatic anaemia, warming both the patient and the blood via an in-line warmer",
-   "Provide intravenous fluids to maintain renal perfusion during intravascular haemolysis and haemoglobinuria",
-   "Identify and treat any preceding or concurrent infection that triggered the episode",
-   "Monitor haemoglobin, reticulocytes and haemolysis markers until recovery, reserving corticosteroids or other immunosuppression for rare persistent or chronic disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paroxysmal_cold_hemoglobinuria-pathway",
-   "title": "Paroxysmal cold haemoglobinuria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An uncommon autoimmune haemolytic anaemia caused by a biphasic IgG autoantibody, the Donath-Landsteiner antibody, usually directed against the P antigen",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid, severe haemoglobin fall with haemodynamic instability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Donath-Landsteiner biphasic haemolysin test, Direct antiglobulin test with monospecific C3d and IgG reagents, Blood film and haemolysis markers including free haemoglobin"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage supportively, as the post-infectious childhood form is usually acute and self-limiting with full recovery"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with cold agglutinin disease and misdirecting therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paroxysmal cold haemoglobinuria."
-  }
- ],
- "tables": [
-  {
-   "id": "paroxysmal_cold_hemoglobinuria-matrix",
-   "title": "Paroxysmal cold haemoglobinuria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An uncommon autoimmune haemolytic anaemia caused by a biphasic IgG autoantibody, the Donath-Landsteiner antibody, usually",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An uncommon autoimmune haemolytic anaemia caused by a biphasic IgG autoantibody, the Donath-Landsteiner antibody, usually directed against the P antigen",
+      "It most often occurs in children after a viral infection and produces acute, sometimes dramatic, intravascular haemolysis",
+      "Classic features are cold-triggered episodes of haemoglobinuria with fever, back or abdominal pain and pallor",
+      "The Donath-Landsteiner test is diagnostic: the antibody binds red cells and fixes complement in the cold, then triggers lysis on rewarming",
+      "The direct antiglobulin test is typically positive for complement (C3d) and negative for IgG because the IgG antibody elutes on warming",
+      "Unlike cold agglutinin disease, haemolysis is predominantly intravascular and the antibody is IgG rather than IgM",
+      "In children the disorder is usually acute and self-limiting, and management is supportive with warmth and transfusion when needed"
     ],
-    [
-     "Key Investigations",
-     "Donath-Landsteiner biphasic haemolysin test, Direct antiglobulin test with monospecific C3d and IgG reagents, Blood film and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Paroxysmal cold haemoglobinuria is mediated by a biphasic IgG autoantibody, the Donath-Landsteiner antibody, classically specific for the P blood group antigen. In the cooler peripheral circulation the antibody binds red cells and fixes early complement components; when the cells return to core body temperature the complement cascade proceeds to completion, producing complement-mediated intravascular haemolysis and haemoglobinuria. The antibody itself detaches on warming, which is why the direct antiglobulin test detects complement rather than IgG. The disorder most often arises transiently after viral or other infections in children.",
+    "additionalDifferentials": [
+      "Cold agglutinin disease",
+      "Warm autoimmune haemolytic anaemia",
+      "Glucose-6-phosphate dehydrogenase deficiency with acute haemolysis",
+      "Paroxysmal nocturnal haemoglobinuria",
+      "Microangiopathic haemolytic anaemia",
+      "Transfusion or other acute intravascular haemolysis"
     ],
-    [
-     "Primary Differentials",
-     "Cold agglutinin disease, Warm autoimmune haemolytic anaemia, Glucose-6-phosphate dehydrogenase deficiency with acute haemolysis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Donath-Landsteiner biphasic haemolysin test",
+      "Direct antiglobulin test with monospecific C3d and IgG reagents",
+      "Blood film and haemolysis markers including free haemoglobin",
+      "Urinalysis for haemoglobinuria",
+      "Reticulocyte count, lactate dehydrogenase, haptoglobin and bilirubin",
+      "Screening for a preceding or concurrent infection"
     ],
-    [
-     "Management Strategy",
-     "Manage supportively, as the post-infectious childhood form is usually acute and self-limiting with full recovery",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid, severe haemoglobin fall with haemodynamic instability",
+      "Marked haemoglobinuria with risk of acute kidney injury",
+      "Recurrent episodes suggesting a persistent or secondary cause",
+      "Haemolysis in an adult prompting evaluation for underlying malignancy or syphilis"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with cold agglutinin disease and misdirecting therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Post-infectious paroxysmal cold haemoglobinuria in children is usually acute and self-limiting with full recovery once the trigger resolves; supportive care and keeping the patient warm are generally sufficient.",
+    "pitfalls": [
+      "Confusing it with cold agglutinin disease and misdirecting therapy",
+      "Not requesting the specific Donath-Landsteiner test, so the diagnosis is missed",
+      "Allowing the patient or blood products to be cold, precipitating further haemolysis",
+      "Overlooking rare chronic adult forms historically linked to syphilis"
+    ],
+    "references": [
+      "Williams Hematology",
+      "WHO Classification of Haematolymphoid Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage supportively, as the post-infectious childhood form is usually acute and self-limiting with full recovery",
+      "Keep the patient warm and avoid cold exposure to prevent the biphasic Donath-Landsteiner antibody from binding red cells",
+      "Transfuse for symptomatic anaemia, warming both the patient and the blood via an in-line warmer",
+      "Provide intravenous fluids to maintain renal perfusion during intravascular haemolysis and haemoglobinuria",
+      "Identify and treat any preceding or concurrent infection that triggered the episode",
+      "Monitor haemoglobin, reticulocytes and haemolysis markers until recovery, reserving corticosteroids or other immunosuppression for rare persistent or chronic disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for paroxysmal cold haemoglobinuria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paroxysmal-cold-hemoglobinuria-real-image",
-   "title": "Paroxysmal cold haemoglobinuria: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "paroxysmal_cold_hemoglobinuria-pathway",
+      "title": "Paroxysmal cold haemoglobinuria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An uncommon autoimmune haemolytic anaemia caused by a biphasic IgG autoantibody, the Donath-Landsteiner antibody, usually directed against the P antigen",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid, severe haemoglobin fall with haemodynamic instability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Donath-Landsteiner biphasic haemolysin test, Direct antiglobulin test with monospecific C3d and IgG reagents, Blood film and haemolysis markers including free haemoglobin"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage supportively, as the post-infectious childhood form is usually acute and self-limiting with full recovery"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with cold agglutinin disease and misdirecting therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paroxysmal cold haemoglobinuria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paroxysmal_cold_hemoglobinuria-matrix",
+      "title": "Paroxysmal cold haemoglobinuria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An uncommon autoimmune haemolytic anaemia caused by a biphasic IgG autoantibody, the Donath-Landsteiner antibody, usually",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Donath-Landsteiner biphasic haemolysin test, Direct antiglobulin test with monospecific C3d and IgG reagents, Blood film and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cold agglutinin disease, Warm autoimmune haemolytic anaemia, Glucose-6-phosphate dehydrogenase deficiency with acute haemolysis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage supportively, as the post-infectious childhood form is usually acute and self-limiting with full recovery",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with cold agglutinin disease and misdirecting therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paroxysmal cold haemoglobinuria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / WHO classification of haematolymphoid tumours",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 106-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paroxysmal_cold_hemoglobinuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Donath-Landsteiner biphasic haemolysin test",
+          "cells": [
+            {
+              "text": "Diagnostic test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test with C3d and IgG",
+          "cells": [
+            {
+              "text": "Complement-positive, IgG-negative pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film and free haemoglobin",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for haemoglobinuria",
+          "cells": [
+            {
+              "text": "Intravascular haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reticulocytes, LDH, haptoglobin and bilirubin",
+          "cells": [
+            {
+              "text": "Haemolysis markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for preceding infection",
+          "cells": [
+            {
+              "text": "Trigger"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_cold_hemoglobinuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cold agglutinin disease",
+          "cells": [
+            {
+              "text": "IgM-mediated and mostly extravascular; the IgG type separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warm autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Warm-reactive antibody; cold trigger and biphasic test point to PCH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_cold_hemoglobinuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Acute and self-limiting in post-infectious childhood disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keep warm",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Avoid cold so the antibody does not bind red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "For symptomatic anaemia, warming the blood through an in-line warmer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV fluids",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Maintain renal perfusion during intravascular haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the trigger",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Identify and treat preceding or concurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Haemoglobin and haemolysis markers; steroids only for rare chronic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_cold_hemoglobinuria-ddx-2",
+      "kind": "ddx",
+      "title": "Predominantly intravascular hemolysis situations",
+      "rowHeader": "Condition",
+      "columns": [
+        "Onset/time course",
+        "Main mechanism",
+        "Appropriate diagnostic procedure",
+        "Comments"
+      ],
+      "rows": [
+        {
+          "parameter": "Mismatched blood transfusion",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Nearly always ABO incompatibility"
+            },
+            {
+              "text": "Repeat cross-match"
+            },
+            {
+              "text": "None printed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paroxysmal nocturnal hemoglobinuria (PNH)",
+          "cells": [
+            {
+              "text": "Chronic with acute exacerbations"
+            },
+            {
+              "text": "Complement-mediated destruction of CD59-negative red cells"
+            },
+            {
+              "text": "Flow cytometry to display a CD59-negative red cell population"
+            },
+            {
+              "text": "Exacerbations due to complement activation through any pathway"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paroxysmal cold hemoglobinuria (PCH)",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Immune lysis of normal red cells"
+            },
+            {
+              "text": "Test for Donath-Landsteiner antibody"
+            },
+            {
+              "text": "Often triggered by viral infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Septicemia",
+          "cells": [
+            {
+              "text": "Very acute"
+            },
+            {
+              "text": "Exotoxins produced by Clostridium perfringens"
+            },
+            {
+              "text": "Blood cultures"
+            },
+            {
+              "text": "Other organisms may be responsible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Microangiopathic",
+          "cells": [
+            {
+              "text": "Acute or chronic"
+            },
+            {
+              "text": "Red cell fragmentation"
+            },
+            {
+              "text": "Red cell morphology on blood smear"
+            },
+            {
+              "text": "Causes range from endothelial damage to hemangioma to leaky prosthetic heart valve"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "March hemoglobinuria",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Mechanical destruction"
+            },
+            {
+              "text": "Targeted history taking"
+            },
+            {
+              "text": "None printed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Favism",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Destruction of the older fraction of G6PD-deficient red cells"
+            },
+            {
+              "text": "G6PD assay"
+            },
+            {
+              "text": "Triggered by a large dish of fava beans, but infection or a drug can be the trigger instead"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paroxysmal_cold_hemoglobinuria-dx-mgmt",
+      "title": "Diagnosis and management of Paroxysmal cold haemoglobinuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cold-triggered haemoglobinuria with fever, back pain and pallor, after viral illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rapid haemoglobin fall, instability or acute kidney injury risk)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent transfusion and renal support for haemodynamic instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Donath-Landsteiner test, DAT with C3d and IgG, film, haemolysis markers, urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a biphasic Donath-Landsteiner haemolysin confirmed by the test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cold agglutinin disease, warm AIHA, G6PD deficiency or PNH",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; most childhood cases are acute and self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Keep the patient warm and avoid cold exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transfuse warmed blood for symptomatic anaemia and maintain renal perfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat the preceding or concurrent infection that triggered the episode",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Post-infectious childhood form usually resolves fully once the trigger settles",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,501 @@
 {
- "id": "myelodysplastic_syndrome",
- "name": "Myelodysplastic syndrome",
- "aliases": [
-  "MDS",
-  "myelodysplasia",
-  "myelodysplastic syndromes",
-  "preleukaemia"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of clonal stem cell disorders defined by ineffective haematopoiesis, producing peripheral cytopenias despite a marrow that is usually normocellular or hypercellular",
-   "Typically affects older adults, often presenting with symptomatic anaemia; neutropenia and thrombocytopenia may also occur, sometimes with recurrent infection or bleeding",
-   "The paradox of low blood counts with a busy marrow reflects intramedullary apoptosis of dysplastic precursors",
-   "Diagnosis rests on morphological dysplasia in one or more lineages, blast percentage, and cytogenetic or molecular abnormalities; ring sideroblasts and specific mutations (e.g. SF3B1) carry prognostic meaning",
-   "Risk stratification with scoring systems that weight blast count, cytogenetics, and depth of cytopenias guides both prognosis and treatment intensity",
-   "Lower-risk disease is managed supportively with transfusions, erythropoiesis-stimulating agents, and iron chelation when transfusion burden is high; an isolated 5q deletion responds well to lenalidomide",
-   "Higher-risk disease is treated with hypomethylating agents, and allogeneic stem cell transplant offers the only potential cure for suitable patients",
-   "Progression to acute myeloid leukaemia is a defining risk, greatest in high-risk categories with excess blasts and adverse cytogenetics"
+  "id": "myelodysplastic_syndrome",
+  "name": "Myelodysplastic syndrome",
+  "aliases": [
+    "MDS",
+    "myelodysplasia",
+    "myelodysplastic syndromes",
+    "preleukaemia"
   ],
-  "pathophysiology": "MDS arises from an acquired mutation in a haematopoietic stem cell that gains a clonal growth advantage. Accumulating mutations in genes governing RNA splicing, epigenetic regulation, transcription, and signalling produce disordered maturation. Precursors are produced abundantly but undergo excessive apoptosis within the marrow, so mature cells are released ineffectively, giving cytopenias in the face of a cellular marrow. Over time the clone may acquire further mutations and expand, with rising blast counts marking transformation towards acute myeloid leukaemia. Prior chemotherapy or radiotherapy can cause therapy-related MDS, which typically carries adverse cytogenetics.",
-  "additionalDifferentials": [
-   "Aplastic anaemia (especially hypoplastic MDS)",
-   "Vitamin B12 or folate deficiency causing megaloblastic dysplasia",
-   "Acute myeloid leukaemia",
-   "Myelodysplastic/myeloproliferative overlap syndromes (e.g. CMML)",
-   "Reactive dysplasia from alcohol, copper deficiency, or drugs",
-   "Paroxysmal nocturnal haemoglobinuria"
-  ],
-  "additionalInvestigations": [
-   "Full blood count, reticulocytes, and careful blood film review for dysplastic changes",
-   "Bone marrow aspirate and trephine with blast count and assessment of dysplasia and ring sideroblasts",
-   "Cytogenetic analysis and targeted molecular/next-generation sequencing panels",
-   "Serum erythropoietin level to predict response to erythropoiesis-stimulating agents",
-   "B12, folate, and copper levels to exclude reversible mimics",
-   "Flow cytometry and PNH clone testing when the picture overlaps with marrow failure"
-  ],
-  "redFlags": [
-   "Rising blast percentage or new adverse cytogenetics signalling transformation to acute leukaemia",
-   "Severe neutropenia with fever requiring urgent treatment for sepsis",
-   "Profound thrombocytopenia with clinically significant bleeding",
-   "Rapidly worsening pancytopenia demanding urgent haematology review and transplant assessment"
-  ],
-  "prognosis": "Outcomes vary widely by risk category: lower-risk patients may live many years with supportive care, whereas high-risk disease carries short survival and a substantial chance of progression to acute myeloid leukaemia. Allogeneic transplant is the only curative option but is limited by age and comorbidity.",
-  "pitfalls": [
-   "Diagnosing MDS without excluding reversible causes of dysplasia such as B12 or folate deficiency, copper deficiency, alcohol, or recent chemotherapy",
-   "Failing to obtain cytogenetics and molecular testing, which are central to risk stratification",
-   "Undertreating iron overload in chronically transfused patients",
-   "Overlooking an isolated 5q deletion that has a favourable, targeted treatment",
-   "Missing the transition to acute leukaemia by not repeating marrow assessment when counts deteriorate"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Risk-stratify with a validated prognostic scoring system that weights blast count, cytogenetics and depth of cytopenias to guide treatment intensity",
-   "Support lower-risk disease with red-cell transfusions and erythropoiesis-stimulating agents to improve symptomatic anaemia",
-   "Use lenalidomide for transfusion-dependent disease with an isolated 5q deletion, which responds well",
-   "Offer hypomethylating agents such as azacitidine or decitabine for higher-risk disease unsuitable for transplantation",
-   "Proceed to allogeneic haematopoietic stem cell transplantation as the only curative option in eligible higher-risk patients",
-   "Add iron chelation therapy where a high transfusion burden causes iron overload",
-   "Treat neutropenic infection promptly with antimicrobials and give platelet transfusions for bleeding or severe thrombocytopenia",
-   "Monitor blood counts and repeat marrow assessment to detect progression towards acute myeloid leukaemia, under haematology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myelodysplastic_syndrome-pathway",
-   "title": "Myelodysplastic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of clonal stem cell disorders defined by ineffective haematopoiesis, producing peripheral cytopenias despite a marrow that is usually normocellular or hypercellular",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rising blast percentage or new adverse cytogenetics signalling transformation to acute leukaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count, reticulocytes, and careful blood film review for dysplastic changes, Bone marrow aspirate and trephine with blast count and assessment of dysplasia and ring sideroblasts, Cytogenetic analysis and targeted"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Risk-stratify with a validated prognostic scoring system that weights blast count, cytogenetics and depth of cytopenias to guide treatment intensity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing MDS without excluding reversible causes of dysplasia such as B12 or folate deficiency, copper deficiency, alcohol, or recent chemotherapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myelodysplastic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "myelodysplastic_syndrome-matrix",
-   "title": "Myelodysplastic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of clonal stem cell disorders defined by ineffective haematopoiesis, producing peripheral cytopenias despite a marrow",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of clonal stem cell disorders defined by ineffective haematopoiesis, producing peripheral cytopenias despite a marrow that is usually normocellular or hypercellular",
+      "Typically affects older adults, often presenting with symptomatic anaemia; neutropenia and thrombocytopenia may also occur, sometimes with recurrent infection or bleeding",
+      "The paradox of low blood counts with a busy marrow reflects intramedullary apoptosis of dysplastic precursors",
+      "Diagnosis rests on morphological dysplasia in one or more lineages, blast percentage, and cytogenetic or molecular abnormalities; ring sideroblasts and specific mutations (e.g. SF3B1) carry prognostic meaning",
+      "Risk stratification with scoring systems that weight blast count, cytogenetics, and depth of cytopenias guides both prognosis and treatment intensity",
+      "Lower-risk disease is managed supportively with transfusions, erythropoiesis-stimulating agents, and iron chelation when transfusion burden is high; an isolated 5q deletion responds well to lenalidomide",
+      "Higher-risk disease is treated with hypomethylating agents, and allogeneic stem cell transplant offers the only potential cure for suitable patients",
+      "Progression to acute myeloid leukaemia is a defining risk, greatest in high-risk categories with excess blasts and adverse cytogenetics"
     ],
-    [
-     "Key Investigations",
-     "Full blood count, reticulocytes, and careful blood film review for dysplastic changes, Bone marrow aspirate and trephine with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MDS arises from an acquired mutation in a haematopoietic stem cell that gains a clonal growth advantage. Accumulating mutations in genes governing RNA splicing, epigenetic regulation, transcription, and signalling produce disordered maturation. Precursors are produced abundantly but undergo excessive apoptosis within the marrow, so mature cells are released ineffectively, giving cytopenias in the face of a cellular marrow. Over time the clone may acquire further mutations and expand, with rising blast counts marking transformation towards acute myeloid leukaemia. Prior chemotherapy or radiotherapy can cause therapy-related MDS, which typically carries adverse cytogenetics.",
+    "additionalDifferentials": [
+      "Aplastic anaemia (especially hypoplastic MDS)",
+      "Vitamin B12 or folate deficiency causing megaloblastic dysplasia",
+      "Acute myeloid leukaemia",
+      "Myelodysplastic/myeloproliferative overlap syndromes (e.g. CMML)",
+      "Reactive dysplasia from alcohol, copper deficiency, or drugs",
+      "Paroxysmal nocturnal haemoglobinuria"
     ],
-    [
-     "Primary Differentials",
-     "Aplastic anaemia (especially hypoplastic MDS), Vitamin B12 or folate deficiency causing megaloblastic dysplasia, Acute myeloid",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count, reticulocytes, and careful blood film review for dysplastic changes",
+      "Bone marrow aspirate and trephine with blast count and assessment of dysplasia and ring sideroblasts",
+      "Cytogenetic analysis and targeted molecular/next-generation sequencing panels",
+      "Serum erythropoietin level to predict response to erythropoiesis-stimulating agents",
+      "B12, folate, and copper levels to exclude reversible mimics",
+      "Flow cytometry and PNH clone testing when the picture overlaps with marrow failure"
     ],
-    [
-     "Management Strategy",
-     "Risk-stratify with a validated prognostic scoring system that weights blast count, cytogenetics and depth of cytopenias to guide",
-     "Core treatment modality"
+    "redFlags": [
+      "Rising blast percentage or new adverse cytogenetics signalling transformation to acute leukaemia",
+      "Severe neutropenia with fever requiring urgent treatment for sepsis",
+      "Profound thrombocytopenia with clinically significant bleeding",
+      "Rapidly worsening pancytopenia demanding urgent haematology review and transplant assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing MDS without excluding reversible causes of dysplasia such as B12 or folate deficiency, copper deficiency, alcohol, or",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes vary widely by risk category: lower-risk patients may live many years with supportive care, whereas high-risk disease carries short survival and a substantial chance of progression to acute myeloid leukaemia. Allogeneic transplant is the only curative option but is limited by age and comorbidity.",
+    "pitfalls": [
+      "Diagnosing MDS without excluding reversible causes of dysplasia such as B12 or folate deficiency, copper deficiency, alcohol, or recent chemotherapy",
+      "Failing to obtain cytogenetics and molecular testing, which are central to risk stratification",
+      "Undertreating iron overload in chronically transfused patients",
+      "Overlooking an isolated 5q deletion that has a favourable, targeted treatment",
+      "Missing the transition to acute leukaemia by not repeating marrow assessment when counts deteriorate"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Risk-stratify with a validated prognostic scoring system that weights blast count, cytogenetics and depth of cytopenias to guide treatment intensity",
+      "Support lower-risk disease with red-cell transfusions and erythropoiesis-stimulating agents to improve symptomatic anaemia",
+      "Use lenalidomide for transfusion-dependent disease with an isolated 5q deletion, which responds well",
+      "Offer hypomethylating agents such as azacitidine or decitabine for higher-risk disease unsuitable for transplantation",
+      "Proceed to allogeneic haematopoietic stem cell transplantation as the only curative option in eligible higher-risk patients",
+      "Add iron chelation therapy where a high transfusion burden causes iron overload",
+      "Treat neutropenic infection promptly with antimicrobials and give platelet transfusions for bleeding or severe thrombocytopenia",
+      "Monitor blood counts and repeat marrow assessment to detect progression towards acute myeloid leukaemia, under haematology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for myelodysplastic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myelodysplastic-syndrome-real-image",
-   "title": "Myelodysplastic syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "myelodysplastic_syndrome-pathway",
+      "title": "Myelodysplastic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of clonal stem cell disorders defined by ineffective haematopoiesis, producing peripheral cytopenias despite a marrow that is usually normocellular or hypercellular",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rising blast percentage or new adverse cytogenetics signalling transformation to acute leukaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count, reticulocytes, and careful blood film review for dysplastic changes, Bone marrow aspirate and trephine with blast count and assessment of dysplasia and ring sideroblasts, Cytogenetic analysis and targeted"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Risk-stratify with a validated prognostic scoring system that weights blast count, cytogenetics and depth of cytopenias to guide treatment intensity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing MDS without excluding reversible causes of dysplasia such as B12 or folate deficiency, copper deficiency, alcohol, or recent chemotherapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myelodysplastic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myelodysplastic_syndrome-matrix",
+      "title": "Myelodysplastic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of clonal stem cell disorders defined by ineffective haematopoiesis, producing peripheral cytopenias despite a marrow",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count, reticulocytes, and careful blood film review for dysplastic changes, Bone marrow aspirate and trephine with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Aplastic anaemia (especially hypoplastic MDS), Vitamin B12 or folate deficiency causing megaloblastic dysplasia, Acute myeloid",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Risk-stratify with a validated prognostic scoring system that weights blast count, cytogenetics and depth of cytopenias to guide",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing MDS without excluding reversible causes of dysplasia such as B12 or folate deficiency, copper deficiency, alcohol, or",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myelodysplastic syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myelodysplastic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count, reticulocytes and blood film review",
+          "cells": [
+            {
+              "text": "Cytopenias and dysplastic changes on the film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine",
+          "cells": [
+            {
+              "text": "Blast count, dysplasia and ring sideroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetics and molecular or next-generation sequencing panels",
+          "cells": [
+            {
+              "text": "Prognostic abnormalities, such as SF3B1 mutations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum erythropoietin level",
+          "cells": [
+            {
+              "text": "Predicts response to erythropoiesis-stimulating agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12, folate and copper levels",
+          "cells": [
+            {
+              "text": "Exclude reversible mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry and PNH clone testing",
+          "cells": [
+            {
+              "text": "When the picture overlaps with marrow failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myelodysplastic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aplastic anaemia, especially hypoplastic MDS",
+          "cells": [
+            {
+              "text": "MDS marrow is usually normocellular or hypercellular; hypoplastic MDS overlaps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 or folate deficiency",
+          "cells": [
+            {
+              "text": "Causes megaloblastic dysplasia; reversible, so excluded by level testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute myeloid leukaemia",
+          "cells": [
+            {
+              "text": "Excess blasts and adverse cytogenetics mark progression toward AML"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal nocturnal haemoglobinuria",
+          "cells": [
+            {
+              "text": "Excluded by PNH clone testing when marrow failure overlaps"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myelodysplastic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Validated scoring system weighting blast count, cytogenetics and depth of cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lower-risk supportive care",
+          "cells": [
+            {
+              "text": "Red-cell transfusions and erythropoiesis-stimulating agents for symptomatic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lenalidomide",
+          "cells": [
+            {
+              "text": "For transfusion-dependent disease with an isolated 5q deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypomethylating agents",
+          "cells": [
+            {
+              "text": "Azacitidine or decitabine for higher-risk disease unsuitable for transplant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic transplant",
+          "cells": [
+            {
+              "text": "The only curative option in eligible higher-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Where a high transfusion burden causes iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and bleeding",
+          "cells": [
+            {
+              "text": "Prompt antimicrobials for neutropenic infection; platelets for bleeding or severe thrombocytopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Counts and repeat marrow assessment to detect progression toward AML"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myelodysplastic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Myelodysplastic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Older adult with cytopenias, often anaemia, and a normal or busy marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising blasts, adverse cytogenetics, severe neutropenia or bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review; treat neutropenic sepsis; assess for transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film, marrow aspirate and trephine, cytogenetics, molecular panel, B12 and folate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dysplasia confirmed with B12, folate and copper deficiency excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider aplastic anaemia, PNH or another mimic; repeat marrow with flow cytometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Risk-stratify with a validated scoring system weighting blasts and cytogenetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Red-cell transfusions and erythropoiesis-stimulating agents for lower-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lenalidomide for transfusion-dependent isolated 5q deletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hypomethylating agents such as azacitidine or decitabine for higher-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Allogeneic transplant, the only curative option in eligible patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome varies by risk; high-risk disease carries short survival and AML risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,175 +1,482 @@
 {
- "id": "tarsal_coalition",
- "name": "Tarsal coalition",
- "aliases": [
-  "peroneal spastic flatfoot",
-  "calcaneonavicular coalition",
-  "talocalcaneal coalition",
-  "tarsal bar"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An abnormal bony, cartilaginous or fibrous union between two or more tarsal bones arising from a failure of embryonic segmentation, not an osteonecrosis or apophysitis",
-   "The two most common types are calcaneonavicular and talocalcaneal (subtalar) coalitions",
-   "Typically becomes symptomatic in later childhood or adolescence, roughly eight to sixteen years, as a fibrous or cartilaginous bar ossifies and stiffens",
-   "Presents with a rigid flatfoot, recurrent ankle sprains, activity-related hindfoot pain and limited subtalar motion",
-   "The classic clinical picture is a peroneal spastic flatfoot, in which the peroneal muscles are held in protective spasm and the hindfoot does not invert on tiptoe standing",
-   "Radiographic clues include the C-sign and talar beaking in talocalcaneal coalition and the anteater nose sign in calcaneonavicular coalition",
-   "Computed tomography or magnetic resonance imaging confirms the coalition, defines its type and extent and detects secondary joint changes",
-   "Management ranges from activity modification, orthoses and immobilisation for symptom control to surgical resection or arthrodesis as needed"
+  "id": "tarsal_coalition",
+  "name": "Tarsal coalition",
+  "aliases": [
+    "peroneal spastic flatfoot",
+    "calcaneonavicular coalition",
+    "talocalcaneal coalition",
+    "tarsal bar"
   ],
-  "pathophysiology": "Tarsal coalition results from a failure of normal segmentation of the primitive mesenchyme during foetal development, so that two or more tarsal bones remain abnormally joined by bone (synostosis), cartilage (synchondrosis) or fibrous tissue (syndesmosis). Early in life a fibrous or cartilaginous coalition may permit some movement and remain asymptomatic, but as the child grows the bar tends to ossify and progressively restrict motion at the affected joint, most often the subtalar or calcaneonavicular articulation. The loss of hindfoot mobility transfers abnormal stress to adjacent joints and provokes protective spasm of the peroneal muscles, producing the characteristic rigid, everted flatfoot. Over time the restricted, abnormally loaded joints are prone to secondary degenerative change.",
-  "additionalDifferentials": [
-   "Flexible flatfoot",
-   "Inflammatory or juvenile idiopathic arthritis of the hindfoot",
-   "Recurrent lateral ankle instability",
-   "Accessory navicular syndrome",
-   "Post-traumatic subtalar stiffness or arthritis",
-   "Infection or tumour of the hindfoot"
-  ],
-  "additionalInvestigations": [
-   "Weight-bearing foot radiographs including an oblique view for calcaneonavicular coalition",
-   "Assessment for the C-sign, talar beaking and the anteater nose sign",
-   "Computed tomography to define bony coalitions and their extent",
-   "Magnetic resonance imaging to detect fibrous or cartilaginous coalitions and marrow oedema",
-   "Clinical assessment of subtalar motion and hindfoot flexibility on tiptoe standing",
-   "Examination for peroneal muscle spasm reproducing the rigid flatfoot"
-  ],
-  "redFlags": [
-   "A rigid, painful flatfoot that does not correct on tiptoe standing, indicating a fixed structural cause",
-   "Established secondary degenerative change in the subtalar or adjacent joints",
-   "Progressive pain and deformity limiting walking despite conservative measures",
-   "Atypical features such as warmth, swelling or systemic upset suggesting infection or inflammatory arthritis"
-  ],
-  "prognosis": "Many patients improve with conservative measures, particularly when a limited coalition is treated before secondary arthritis develops; larger coalitions, established degenerative change or persistent pain may require surgery, with resection favoured for smaller bars and arthrodesis for extensive coalitions or arthritic joints.",
-  "pitfalls": [
-   "Labelling a rigid flatfoot as a simple flexible flatfoot and missing an underlying coalition",
-   "Relying on plain radiographs alone and overlooking a fibrous or cartilaginous coalition best seen on cross-sectional imaging",
-   "Attributing recurrent ankle sprains to instability without recognising restricted subtalar motion",
-   "Proceeding to resection when extensive coalition or established arthritis would be better served by arthrodesis"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Campbell's Operative Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin with conservative management using activity modification, non-steroidal anti-inflammatory analgesia and supportive orthoses to offload the hindfoot",
-   "Use a period of cast or walking-boot immobilisation to settle acute pain and peroneal spasm",
-   "Provide physiotherapy for hindfoot stretching, peroneal spasm and strengthening once acute symptoms settle",
-   "Consider a corticosteroid injection to the coalition for persistent inflammatory pain",
-   "Offer surgical resection of the bar with interposition of fat or muscle for smaller symptomatic coalitions without established arthritis",
-   "Reserve arthrodesis for extensive coalitions or established secondary degenerative change",
-   "Refer persistent or disabling cases to orthopaedic foot and ankle surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tarsal_coalition-pathway",
-   "title": "Tarsal coalition: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An abnormal bony, cartilaginous or fibrous union between two or more tarsal bones arising from a failure of embryonic segmentation, not an osteonecrosis or apophysitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A rigid, painful flatfoot that does not correct on tiptoe standing, indicating a fixed structural cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Weight-bearing foot radiographs including an oblique view for calcaneonavicular coalition, Assessment for the C-sign, talar beaking and the anteater nose sign, Computed tomography to define bony coalitions and their extent"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin with conservative management using activity modification, non-steroidal anti-inflammatory analgesia and supportive orthoses to offload the hindfoot"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling a rigid flatfoot as a simple flexible flatfoot and missing an underlying coalition"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tarsal coalition."
-  }
- ],
- "tables": [
-  {
-   "id": "tarsal_coalition-matrix",
-   "title": "Tarsal coalition: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An abnormal bony, cartilaginous or fibrous union between two or more tarsal bones arising from a failure of embryonic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An abnormal bony, cartilaginous or fibrous union between two or more tarsal bones arising from a failure of embryonic segmentation, not an osteonecrosis or apophysitis",
+      "The two most common types are calcaneonavicular and talocalcaneal (subtalar) coalitions",
+      "Typically becomes symptomatic in later childhood or adolescence, roughly eight to sixteen years, as a fibrous or cartilaginous bar ossifies and stiffens",
+      "Presents with a rigid flatfoot, recurrent ankle sprains, activity-related hindfoot pain and limited subtalar motion",
+      "The classic clinical picture is a peroneal spastic flatfoot, in which the peroneal muscles are held in protective spasm and the hindfoot does not invert on tiptoe standing",
+      "Radiographic clues include the C-sign and talar beaking in talocalcaneal coalition and the anteater nose sign in calcaneonavicular coalition",
+      "Computed tomography or magnetic resonance imaging confirms the coalition, defines its type and extent and detects secondary joint changes",
+      "Management ranges from activity modification, orthoses and immobilisation for symptom control to surgical resection or arthrodesis as needed"
     ],
-    [
-     "Key Investigations",
-     "Weight-bearing foot radiographs including an oblique view for calcaneonavicular coalition, Assessment for the C-sign, talar",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tarsal coalition results from a failure of normal segmentation of the primitive mesenchyme during foetal development, so that two or more tarsal bones remain abnormally joined by bone (synostosis), cartilage (synchondrosis) or fibrous tissue (syndesmosis). Early in life a fibrous or cartilaginous coalition may permit some movement and remain asymptomatic, but as the child grows the bar tends to ossify and progressively restrict motion at the affected joint, most often the subtalar or calcaneonavicular articulation. The loss of hindfoot mobility transfers abnormal stress to adjacent joints and provokes protective spasm of the peroneal muscles, producing the characteristic rigid, everted flatfoot. Over time the restricted, abnormally loaded joints are prone to secondary degenerative change.",
+    "additionalDifferentials": [
+      "Flexible flatfoot",
+      "Inflammatory or juvenile idiopathic arthritis of the hindfoot",
+      "Recurrent lateral ankle instability",
+      "Accessory navicular syndrome",
+      "Post-traumatic subtalar stiffness or arthritis",
+      "Infection or tumour of the hindfoot"
     ],
-    [
-     "Primary Differentials",
-     "Flexible flatfoot, Inflammatory or juvenile idiopathic arthritis of the hindfoot, Recurrent lateral ankle instability",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Weight-bearing foot radiographs including an oblique view for calcaneonavicular coalition",
+      "Assessment for the C-sign, talar beaking and the anteater nose sign",
+      "Computed tomography to define bony coalitions and their extent",
+      "Magnetic resonance imaging to detect fibrous or cartilaginous coalitions and marrow oedema",
+      "Clinical assessment of subtalar motion and hindfoot flexibility on tiptoe standing",
+      "Examination for peroneal muscle spasm reproducing the rigid flatfoot"
     ],
-    [
-     "Management Strategy",
-     "Begin with conservative management using activity modification, non-steroidal anti-inflammatory analgesia and supportive orthoses",
-     "Core treatment modality"
+    "redFlags": [
+      "A rigid, painful flatfoot that does not correct on tiptoe standing, indicating a fixed structural cause",
+      "Established secondary degenerative change in the subtalar or adjacent joints",
+      "Progressive pain and deformity limiting walking despite conservative measures",
+      "Atypical features such as warmth, swelling or systemic upset suggesting infection or inflammatory arthritis"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling a rigid flatfoot as a simple flexible flatfoot and missing an underlying coalition",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients improve with conservative measures, particularly when a limited coalition is treated before secondary arthritis develops; larger coalitions, established degenerative change or persistent pain may require surgery, with resection favoured for smaller bars and arthrodesis for extensive coalitions or arthritic joints.",
+    "pitfalls": [
+      "Labelling a rigid flatfoot as a simple flexible flatfoot and missing an underlying coalition",
+      "Relying on plain radiographs alone and overlooking a fibrous or cartilaginous coalition best seen on cross-sectional imaging",
+      "Attributing recurrent ankle sprains to instability without recognising restricted subtalar motion",
+      "Proceeding to resection when extensive coalition or established arthritis would be better served by arthrodesis"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Campbell's Operative Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin with conservative management using activity modification, non-steroidal anti-inflammatory analgesia and supportive orthoses to offload the hindfoot",
+      "Use a period of cast or walking-boot immobilisation to settle acute pain and peroneal spasm",
+      "Provide physiotherapy for hindfoot stretching, peroneal spasm and strengthening once acute symptoms settle",
+      "Consider a corticosteroid injection to the coalition for persistent inflammatory pain",
+      "Offer surgical resection of the bar with interposition of fat or muscle for smaller symptomatic coalitions without established arthritis",
+      "Reserve arthrodesis for extensive coalitions or established secondary degenerative change",
+      "Refer persistent or disabling cases to orthopaedic foot and ankle surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for tarsal coalition."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tarsal-coalition-real-image",
-   "title": "Tarsal coalition: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "tarsal_coalition-pathway",
+      "title": "Tarsal coalition: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An abnormal bony, cartilaginous or fibrous union between two or more tarsal bones arising from a failure of embryonic segmentation, not an osteonecrosis or apophysitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A rigid, painful flatfoot that does not correct on tiptoe standing, indicating a fixed structural cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Weight-bearing foot radiographs including an oblique view for calcaneonavicular coalition, Assessment for the C-sign, talar beaking and the anteater nose sign, Computed tomography to define bony coalitions and their extent"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin with conservative management using activity modification, non-steroidal anti-inflammatory analgesia and supportive orthoses to offload the hindfoot"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling a rigid flatfoot as a simple flexible flatfoot and missing an underlying coalition"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tarsal coalition."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tarsal_coalition-matrix",
+      "title": "Tarsal coalition: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An abnormal bony, cartilaginous or fibrous union between two or more tarsal bones arising from a failure of embryonic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Weight-bearing foot radiographs including an oblique view for calcaneonavicular coalition, Assessment for the C-sign, talar",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Flexible flatfoot, Inflammatory or juvenile idiopathic arthritis of the hindfoot, Recurrent lateral ankle instability",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin with conservative management using activity modification, non-steroidal anti-inflammatory analgesia and supportive orthoses",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling a rigid flatfoot as a simple flexible flatfoot and missing an underlying coalition",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tarsal coalition."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tarsal_coalition-dx-mgmt",
+      "title": "Diagnosis and management of Tarsal coalition",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tarsal coalition: rigid flatfoot with hindfoot pain in an adolescent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rigid painful flatfoot, established arthritis, or warmth and systemic upset?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for infection or inflammatory arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oblique foot radiographs; CT for bony bar; MRI for fibrous or cartilaginous bar",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a coalition, such as a C-sign or anteater nose sign?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider flexible flatfoot, hindfoot JIA or recurrent ankle instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activity modification, NSAIDs and supportive orthoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cast or walking-boot immobilisation for acute pain and peroneal spasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy for hindfoot stretching and strengthening",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroid injection for persistent inflammatory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Resection of the bar for smaller coalitions; arthrodesis if extensive",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Many improve with conservative care when treated before secondary arthritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tarsal_coalition-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight-bearing foot radiographs with oblique view",
+          "cells": [
+            {
+              "text": "Calcaneonavicular coalition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographic signs",
+          "cells": [
+            {
+              "text": "C-sign, talar beaking and the anteater nose sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Computed tomography",
+          "cells": [
+            {
+              "text": "Bony coalition and its extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnetic resonance imaging",
+          "cells": [
+            {
+              "text": "Fibrous or cartilaginous coalition and marrow oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment of subtalar motion on tiptoe standing",
+          "cells": [
+            {
+              "text": "Hindfoot flexibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for peroneal spasm",
+          "cells": [
+            {
+              "text": "Reproduces the rigid flatfoot"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarsal_coalition-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible flatfoot",
+          "cells": [
+            {
+              "text": "A rigid flatfoot that does not correct on tiptoe standing favours coalition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory or juvenile idiopathic arthritis of the hindfoot",
+          "cells": [
+            {
+              "text": "Warmth, swelling or systemic upset suggests inflammatory arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent lateral ankle instability",
+          "cells": [
+            {
+              "text": "Restricted subtalar motion, not instability, may explain recurrent sprains"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tarsal_coalition-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Activity modification, NSAIDs and supportive orthoses to offload the hindfoot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cast or walking-boot immobilisation",
+          "cells": [
+            {
+              "text": "Acute pain and peroneal spasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Hindfoot stretching, peroneal spasm and strengthening once acute symptoms settle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid injection",
+          "cells": [
+            {
+              "text": "Persistent inflammatory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection of the bar",
+          "cells": [
+            {
+              "text": "Smaller symptomatic coalitions without established arthritis, with fat or muscle interposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthrodesis",
+          "cells": [
+            {
+              "text": "Extensive coalitions or established secondary degenerative change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic foot and ankle referral",
+          "cells": [
+            {
+              "text": "Persistent or disabling cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,507 @@
 {
- "id": "posterior_tibial_tendon_dysfunction",
- "name": "Posterior tibial tendon dysfunction",
- "aliases": [
-  "adult acquired flatfoot deformity",
-  "tibialis posterior tendinopathy",
-  "progressive collapsing foot deformity"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal system / Foot and ankle",
- "specialty": "Trauma and orthopaedics / Podiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Mann's Surgery of the Foot and Ankle / Apley and Solomon's System of Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The tibialis posterior is the principal dynamic stabiliser of the medial longitudinal arch; it inverts the hindfoot and locks the transverse tarsal joint to create a rigid lever for push-off, so its failure produces a progressive collapsing flatfoot",
-   "It is the commonest cause of acquired adult flatfoot, classically in middle-aged women, and is associated with obesity, hypertension, diabetes, corticosteroid use and seronegative inflammatory arthropathy",
-   "Early disease causes medial hindfoot pain and swelling behind the medial malleolus; as the arch collapses, lateral subfibular impingement pain can develop",
-   "The too-many-toes sign and an inability to perform a single-limb heel raise with hindfoot inversion are key bedside tests of tendon competence",
-   "The Johnson and Strom staging, with the Myerson modification, runs from tenosynovitis with a flexible foot, through a flexible then rigid flatfoot, to fixed deformity with ankle valgus and deltoid ligament failure",
-   "A watershed zone of relative hypovascularity just distal and posterior to the medial malleolus predisposes the tendon to degeneration and rupture",
-   "Flexible deformity is managed with orthoses, medial arch support or an ankle-foot orthosis and structured rehabilitation, whereas fixed deformity or ankle involvement requires reconstructive or fusion surgery"
+  "id": "posterior_tibial_tendon_dysfunction",
+  "name": "Posterior tibial tendon dysfunction",
+  "aliases": [
+    "adult acquired flatfoot deformity",
+    "tibialis posterior tendinopathy",
+    "progressive collapsing foot deformity"
   ],
-  "pathophysiology": "Posterior tibial tendon dysfunction begins as degenerative tendinosis and tenosynovitis within the watershed hypovascular segment behind the medial malleolus, where repetitive load, ageing and impaired healing lead to mucoid degeneration, elongation and eventual attritional rupture. As the tibialis posterior loses its inverting and arch-supporting action, the unopposed peroneus brevis and the body's weight drive progressive hindfoot valgus, forefoot abduction and collapse of the medial longitudinal arch. Secondary attenuation of the spring (plantar calcaneonavicular) ligament and later the deltoid ligament allows the talar head to plantarflex and the deformity to become fixed, with lateral subfibular and sinus tarsi impingement and, in advanced disease, valgus tilt of the ankle. Inflammatory arthropathy and metabolic factors accelerate this degenerative cascade.",
-  "additionalDifferentials": [
-   "Tarsal coalition or accessory navicular causing a rigid or painful flatfoot",
-   "Midfoot or hindfoot osteoarthritis and Charcot neuroarthropathy",
-   "Inflammatory arthropathy such as rheumatoid or seronegative spondyloarthritis",
-   "Deltoid or spring ligament injury without primary tendon disease",
-   "Tarsal tunnel syndrome or medial ankle nerve entrapment",
-   "Deep posterior compartment or medial ankle tenosynovitis of other tendons"
-  ],
-  "additionalInvestigations": [
-   "Weight-bearing foot and ankle radiographs assessing talonavicular coverage, talo-first metatarsal alignment and arch collapse",
-   "MRI to grade tendon degeneration, tears and associated spring and deltoid ligament involvement",
-   "Ultrasound for dynamic assessment of tendon integrity and tenosynovitis",
-   "Standing hindfoot alignment view or weight-bearing CT for coronal deformity",
-   "Single-limb heel-rise test and too-many-toes assessment documented over time",
-   "Screening for inflammatory arthropathy and metabolic risk factors where clinically indicated"
-  ],
-  "redFlags": [
-   "A hot, deformed insensate foot suggesting Charcot neuroarthropathy, especially in diabetes",
-   "Rapidly progressive deformity or fixed valgus with ankle involvement",
-   "Features of an inflammatory or septic process rather than degenerative tendinopathy",
-   "Neurovascular compromise or non-healing medial ankle ulceration"
-  ],
-  "prognosis": "With early diagnosis, flexible deformity often responds well to orthoses and rehabilitation, and joint-preserving reconstruction can restore function; once deformity becomes rigid or the ankle is involved, arthrodesis is usually required and full correction of established deformity is less predictable.",
-  "pitfalls": [
-   "Dismissing early medial ankle pain and swelling as a simple sprain and missing tenosynovitis",
-   "Failing to distinguish a flexible from a rigid deformity, which fundamentally changes management",
-   "Overlooking a hot deformed neuropathic foot and treating Charcot arthropathy as tendon dysfunction",
-   "Attempting soft-tissue reconstruction alone without correcting hindfoot malalignment with osteotomy, so the reconstruction fails"
-  ],
-  "references": [
-   "Mann's Surgery of the Foot and Ankle",
-   "Apley and Solomon's System of Orthopaedics and Trauma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage early flexible disease non-operatively with medial-arch orthoses or a custom foot orthosis and immobilisation in a walking boot or cast during acute tenosynovitis",
-   "Prescribe eccentric tibialis posterior strengthening and calf-stretching physiotherapy, with non-steroidal anti-inflammatory drugs for pain, and avoid corticosteroid injection into the tendon",
-   "Address modifiable contributors including obesity, diabetes and inflammatory arthropathy",
-   "Offer joint-preserving reconstruction, such as flexor digitorum longus tendon transfer with a medialising calcaneal osteotomy, for flexible deformity failing conservative care",
-   "Perform hindfoot or triple arthrodesis for rigid, fixed deformity or when the ankle joint is involved",
-   "Monitor deformity progression with the single-limb heel-rise test, too-many-toes sign and weight-bearing radiographs",
-   "Refer to orthopaedic and podiatry services for staging-based decision-making"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "posterior_tibial_tendon_dysfunction-pathway",
-   "title": "Posterior tibial tendon dysfunction: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The tibialis posterior is the principal dynamic stabiliser of the medial longitudinal arch; it inverts the hindfoot and locks the transverse tarsal joint to create a rigid lever for push-off, so its failure produces a progressive",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A hot, deformed insensate foot suggesting Charcot neuroarthropathy, especially in diabetes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Weight-bearing foot and ankle radiographs assessing talonavicular coverage, talo-first metatarsal alignment and arch collapse, MRI to grade tendon degeneration, tears and associated spring and deltoid ligament involvement,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage early flexible disease non-operatively with medial-arch orthoses or a custom foot orthosis and immobilisation in a walking boot or cast during acute tenosynovitis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing early medial ankle pain and swelling as a simple sprain and missing tenosynovitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of posterior tibial tendon dysfunction."
-  }
- ],
- "tables": [
-  {
-   "id": "posterior_tibial_tendon_dysfunction-matrix",
-   "title": "Posterior tibial tendon dysfunction: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The tibialis posterior is the principal dynamic stabiliser of the medial longitudinal arch; it inverts the hindfoot and locks the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal system / Foot and ankle",
+  "specialty": "Trauma and orthopaedics / Podiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mann's Surgery of the Foot and Ankle / Apley and Solomon's System of Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The tibialis posterior is the principal dynamic stabiliser of the medial longitudinal arch; it inverts the hindfoot and locks the transverse tarsal joint to create a rigid lever for push-off, so its failure produces a progressive collapsing flatfoot",
+      "It is the commonest cause of acquired adult flatfoot, classically in middle-aged women, and is associated with obesity, hypertension, diabetes, corticosteroid use and seronegative inflammatory arthropathy",
+      "Early disease causes medial hindfoot pain and swelling behind the medial malleolus; as the arch collapses, lateral subfibular impingement pain can develop",
+      "The too-many-toes sign and an inability to perform a single-limb heel raise with hindfoot inversion are key bedside tests of tendon competence",
+      "The Johnson and Strom staging, with the Myerson modification, runs from tenosynovitis with a flexible foot, through a flexible then rigid flatfoot, to fixed deformity with ankle valgus and deltoid ligament failure",
+      "A watershed zone of relative hypovascularity just distal and posterior to the medial malleolus predisposes the tendon to degeneration and rupture",
+      "Flexible deformity is managed with orthoses, medial arch support or an ankle-foot orthosis and structured rehabilitation, whereas fixed deformity or ankle involvement requires reconstructive or fusion surgery"
     ],
-    [
-     "Key Investigations",
-     "Weight-bearing foot and ankle radiographs assessing talonavicular coverage, talo-first metatarsal alignment and arch collapse,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Posterior tibial tendon dysfunction begins as degenerative tendinosis and tenosynovitis within the watershed hypovascular segment behind the medial malleolus, where repetitive load, ageing and impaired healing lead to mucoid degeneration, elongation and eventual attritional rupture. As the tibialis posterior loses its inverting and arch-supporting action, the unopposed peroneus brevis and the body's weight drive progressive hindfoot valgus, forefoot abduction and collapse of the medial longitudinal arch. Secondary attenuation of the spring (plantar calcaneonavicular) ligament and later the deltoid ligament allows the talar head to plantarflex and the deformity to become fixed, with lateral subfibular and sinus tarsi impingement and, in advanced disease, valgus tilt of the ankle. Inflammatory arthropathy and metabolic factors accelerate this degenerative cascade.",
+    "additionalDifferentials": [
+      "Tarsal coalition or accessory navicular causing a rigid or painful flatfoot",
+      "Midfoot or hindfoot osteoarthritis and Charcot neuroarthropathy",
+      "Inflammatory arthropathy such as rheumatoid or seronegative spondyloarthritis",
+      "Deltoid or spring ligament injury without primary tendon disease",
+      "Tarsal tunnel syndrome or medial ankle nerve entrapment",
+      "Deep posterior compartment or medial ankle tenosynovitis of other tendons"
     ],
-    [
-     "Primary Differentials",
-     "Tarsal coalition or accessory navicular causing a rigid or painful flatfoot, Midfoot or hindfoot osteoarthritis and Charcot",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Weight-bearing foot and ankle radiographs assessing talonavicular coverage, talo-first metatarsal alignment and arch collapse",
+      "MRI to grade tendon degeneration, tears and associated spring and deltoid ligament involvement",
+      "Ultrasound for dynamic assessment of tendon integrity and tenosynovitis",
+      "Standing hindfoot alignment view or weight-bearing CT for coronal deformity",
+      "Single-limb heel-rise test and too-many-toes assessment documented over time",
+      "Screening for inflammatory arthropathy and metabolic risk factors where clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Manage early flexible disease non-operatively with medial-arch orthoses or a custom foot orthosis and immobilisation in a walking",
-     "Core treatment modality"
+    "redFlags": [
+      "A hot, deformed insensate foot suggesting Charcot neuroarthropathy, especially in diabetes",
+      "Rapidly progressive deformity or fixed valgus with ankle involvement",
+      "Features of an inflammatory or septic process rather than degenerative tendinopathy",
+      "Neurovascular compromise or non-healing medial ankle ulceration"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing early medial ankle pain and swelling as a simple sprain and missing tenosynovitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis, flexible deformity often responds well to orthoses and rehabilitation, and joint-preserving reconstruction can restore function; once deformity becomes rigid or the ankle is involved, arthrodesis is usually required and full correction of established deformity is less predictable.",
+    "pitfalls": [
+      "Dismissing early medial ankle pain and swelling as a simple sprain and missing tenosynovitis",
+      "Failing to distinguish a flexible from a rigid deformity, which fundamentally changes management",
+      "Overlooking a hot deformed neuropathic foot and treating Charcot arthropathy as tendon dysfunction",
+      "Attempting soft-tissue reconstruction alone without correcting hindfoot malalignment with osteotomy, so the reconstruction fails"
+    ],
+    "references": [
+      "Mann's Surgery of the Foot and Ankle",
+      "Apley and Solomon's System of Orthopaedics and Trauma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage early flexible disease non-operatively with medial-arch orthoses or a custom foot orthosis and immobilisation in a walking boot or cast during acute tenosynovitis",
+      "Prescribe eccentric tibialis posterior strengthening and calf-stretching physiotherapy, with non-steroidal anti-inflammatory drugs for pain, and avoid corticosteroid injection into the tendon",
+      "Address modifiable contributors including obesity, diabetes and inflammatory arthropathy",
+      "Offer joint-preserving reconstruction, such as flexor digitorum longus tendon transfer with a medialising calcaneal osteotomy, for flexible deformity failing conservative care",
+      "Perform hindfoot or triple arthrodesis for rigid, fixed deformity or when the ankle joint is involved",
+      "Monitor deformity progression with the single-limb heel-rise test, too-many-toes sign and weight-bearing radiographs",
+      "Refer to orthopaedic and podiatry services for staging-based decision-making"
     ]
-   ],
-   "caption": "Overview comparison matrix for posterior tibial tendon dysfunction."
-  }
- ],
- "diagrams": [
-  {
-   "id": "posterior-tibial-tendon-dysfunction-real-image",
-   "title": "Posterior tibial tendon dysfunction: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "posterior_tibial_tendon_dysfunction-pathway",
+      "title": "Posterior tibial tendon dysfunction: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The tibialis posterior is the principal dynamic stabiliser of the medial longitudinal arch; it inverts the hindfoot and locks the transverse tarsal joint to create a rigid lever for push-off, so its failure produces a progressive",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A hot, deformed insensate foot suggesting Charcot neuroarthropathy, especially in diabetes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Weight-bearing foot and ankle radiographs assessing talonavicular coverage, talo-first metatarsal alignment and arch collapse, MRI to grade tendon degeneration, tears and associated spring and deltoid ligament involvement,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage early flexible disease non-operatively with medial-arch orthoses or a custom foot orthosis and immobilisation in a walking boot or cast during acute tenosynovitis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing early medial ankle pain and swelling as a simple sprain and missing tenosynovitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of posterior tibial tendon dysfunction."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "posterior_tibial_tendon_dysfunction-matrix",
+      "title": "Posterior tibial tendon dysfunction: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The tibialis posterior is the principal dynamic stabiliser of the medial longitudinal arch; it inverts the hindfoot and locks the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Weight-bearing foot and ankle radiographs assessing talonavicular coverage, talo-first metatarsal alignment and arch collapse,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tarsal coalition or accessory navicular causing a rigid or painful flatfoot, Midfoot or hindfoot osteoarthritis and Charcot",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage early flexible disease non-operatively with medial-arch orthoses or a custom foot orthosis and immobilisation in a walking",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing early medial ankle pain and swelling as a simple sprain and missing tenosynovitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for posterior tibial tendon dysfunction."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle / Apley and Solomon's System of Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_tibial_tendon_dysfunction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight-bearing foot and ankle radiographs",
+          "cells": [
+            {
+              "text": "Talonavicular coverage and talo-first metatarsal angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the tendon and ligaments",
+          "cells": [
+            {
+              "text": "Tendon degeneration, tears, spring and deltoid ligament involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic ultrasound",
+          "cells": [
+            {
+              "text": "Tendon integrity and tenosynovitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hindfoot alignment view or weight-bearing CT",
+          "cells": [
+            {
+              "text": "Coronal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-limb heel-rise test",
+          "cells": [
+            {
+              "text": "Functional tendon capacity over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory arthropathy and metabolic screen",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_tibial_tendon_dysfunction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tarsal coalition or accessory navicular",
+          "cells": [
+            {
+              "text": "Rigid or painful flatfoot from birth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Midfoot or hindfoot osteoarthritis",
+          "cells": [
+            {
+              "text": "Arthritic change on radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot neuroarthropathy",
+          "cells": [
+            {
+              "text": "Hot, deformed, insensate foot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory arthropathy",
+          "cells": [
+            {
+              "text": "Rheumatoid or seronegative spondyloarthropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deltoid or spring ligament injury",
+          "cells": [
+            {
+              "text": "Without primary tendon disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tarsal tunnel syndrome",
+          "cells": [
+            {
+              "text": "Medial ankle nerve entrapment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_tibial_tendon_dysfunction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthoses",
+          "cells": [
+            {
+              "text": "Medial-arch orthoses or custom footwear for early flexible disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eccentric strengthening",
+          "cells": [
+            {
+              "text": "Tibialis posterior strengthening and calf stretching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modifiable contributors",
+          "cells": [
+            {
+              "text": "Obesity, diabetes and inflammatory arthropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint-preserving reconstruction",
+          "cells": [
+            {
+              "text": "Such as flexor digitorum longus tendon transfer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hindfoot arthrodesis",
+          "cells": [
+            {
+              "text": "Triple arthrodesis for rigid, fixed deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression monitoring",
+          "cells": [
+            {
+              "text": "Single-limb heel-rise test and too-many-toes sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Orthopaedic and podiatry staging-based decisions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_tibial_tendon_dysfunction-dx-mgmt",
+      "title": "Diagnosis and management of Posterior tibial tendon dysfunction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive medial ankle pain and flatfoot deformity in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hot insensate foot, rapid deformity, neurovascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for suspected Charcot neuroarthropathy or septic process",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight-bearing radiographs; MRI of tendon; dynamic ultrasound; heel-rise test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do imaging and heel-rise testing confirm tibialis posterior tendon dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tarsal coalition, arthritis, Charcot foot or deltoid ligament injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Medial-arch orthoses or custom footwear for early flexible disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Eccentric tibialis posterior strengthening and calf stretching physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Address obesity, diabetes and inflammatory arthropathy as contributors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Joint-preserving reconstruction such as flexor digitorum longus transfer",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Hindfoot or triple arthrodesis for rigid, fixed deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early diagnosis: flexible deformity often responds to orthoses and rehabilitation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

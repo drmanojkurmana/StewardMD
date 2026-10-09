@@ -1,176 +1,447 @@
 {
- "id": "cerebral_palsy",
- "name": "Cerebral Palsy",
- "aliases": [
-  "CP",
-  "spastic diplegia",
-  "static encephalopathy"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of permanent disorders of movement and posture caused by a non-progressive injury or malformation of the developing brain, though the clinical picture can change as the child grows.",
-   "It is the most common cause of chronic motor disability beginning in childhood.",
-   "Classified by motor type (spastic, dyskinetic, ataxic, or mixed) and by topography (hemiplegia, diplegia, quadriplegia).",
-   "Spastic forms are most common; early signs include abnormal tone, persistent primitive reflexes, delayed motor milestones, and early hand preference before one year.",
-   "Preterm birth, low birth weight, intrauterine growth restriction, perinatal hypoxic-ischaemic injury, infection, kernicterus, and brain malformations are recognised risk factors.",
-   "Frequent comorbidities include intellectual disability, epilepsy, visual and hearing impairment, feeding and swallowing difficulties, communication problems, and orthopaedic complications such as hip subluxation and contractures.",
-   "Diagnosis is largely clinical; MRI often identifies the underlying lesion and helps establish aetiology.",
-   "Management is multidisciplinary and supportive, aiming to maximise function and participation with therapy, orthotics, spasticity treatment, and orthopaedic care rather than cure.",
-   "Because the disorder is static, clear progression or regression of neurological signs should prompt a search for an alternative, evolving diagnosis."
+  "id": "cerebral_palsy",
+  "name": "Cerebral Palsy",
+  "aliases": [
+    "CP",
+    "spastic diplegia",
+    "static encephalopathy"
   ],
-  "pathophysiology": "Cerebral palsy results from injury or maldevelopment of the immature brain from any of a range of prenatal, perinatal, or early postnatal insults. In preterm infants, periventricular white-matter injury (periventricular leukomalacia) commonly affects descending motor tracts, producing spastic diplegia; in term infants, hypoxic-ischaemic injury, malformations, stroke, or kernicterus may be responsible. The primary lesion is non-progressive, but secondary musculoskeletal changes such as contractures and bony deformity evolve over time.",
-  "additionalDifferentials": [
-   "Progressive neurodegenerative or metabolic disorders",
-   "Spinal muscular atrophy and other neuromuscular disorders",
-   "Dopa-responsive dystonia",
-   "Hereditary spastic paraplegia",
-   "Structural spinal cord lesions",
-   "Global developmental delay without a motor disorder"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain to identify structural or ischaemic lesions",
-   "EEG when seizures are suspected",
-   "Metabolic or genetic testing if the presentation is atypical or progressive",
-   "Assessment of vision and hearing",
-   "Hip surveillance imaging to detect subluxation",
-   "Evaluation of feeding, swallowing, and nutrition"
-  ],
-  "redFlags": [
-   "Loss of previously acquired skills or clear neurological progression (suggests an alternative diagnosis)",
-   "New or worsening seizures",
-   "Signs of aspiration or faltering growth from feeding difficulty",
-   "Progressive scoliosis or hip dislocation",
-   "Rapidly increasing spasticity or dystonia causing pain or care difficulty"
-  ],
-  "prognosis": "The motor impairment itself is non-progressive, and life expectancy is often near normal in milder forms; outcome depends on severity, mobility level, and comorbidities, with severe quadriplegia, epilepsy, intellectual disability, and feeding problems associated with greater disability and shorter survival.",
-  "pitfalls": [
-   "Labelling a child with cerebral palsy when the course is actually progressive (missing a treatable metabolic or genetic disorder)",
-   "Focusing only on motor impairment and overlooking epilepsy, sensory, or feeding comorbidities",
-   "Neglecting hip surveillance, allowing silent dislocation",
-   "Underestimating cognition in non-verbal children with good comprehension",
-   "Delaying nutritional and communication support"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Coordinate multidisciplinary supportive care for the non-progressive lesion, centred on physiotherapy and occupational therapy to maximise function",
-   "Manage spasticity with oral agents such as baclofen, focal botulinum toxin injections, intrathecal baclofen or selective dorsal rhizotomy",
-   "Undertake orthopaedic surveillance with hip surveillance imaging and corrective surgery for subluxation and contractures",
-   "Treat comorbid epilepsy with antiseizure medication",
-   "Address feeding and swallowing difficulties with speech and language assessment and gastrostomy for nutrition, and treat drooling",
-   "Assess and manage visual, hearing, communication and intellectual impairments, including augmentative communication",
-   "Provide orthoses, mobility aids and assistive technology, with family support and planned transition to adult services"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cerebral_palsy-pathway",
-   "title": "Cerebral Palsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of permanent disorders of movement and posture caused by a non-progressive injury or malformation of the developing brain, though the clinical picture can change as the child grows.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Loss of previously acquired skills or clear neurological progression (suggests an alternative diagnosis)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain to identify structural or ischaemic lesions, EEG when seizures are suspected, Metabolic or genetic testing if the presentation is atypical or progressive"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Coordinate multidisciplinary supportive care for the non-progressive lesion, centred on physiotherapy and occupational therapy to maximise function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling a child with cerebral palsy when the course is actually progressive (missing a treatable metabolic or genetic disorder)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cerebral palsy."
-  }
- ],
- "tables": [
-  {
-   "id": "cerebral_palsy-matrix",
-   "title": "Cerebral Palsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of permanent disorders of movement and posture caused by a non-progressive injury or malformation of the developing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of permanent disorders of movement and posture caused by a non-progressive injury or malformation of the developing brain, though the clinical picture can change as the child grows.",
+      "It is the most common cause of chronic motor disability beginning in childhood.",
+      "Classified by motor type (spastic, dyskinetic, ataxic, or mixed) and by topography (hemiplegia, diplegia, quadriplegia).",
+      "Spastic forms are most common; early signs include abnormal tone, persistent primitive reflexes, delayed motor milestones, and early hand preference before one year.",
+      "Preterm birth, low birth weight, intrauterine growth restriction, perinatal hypoxic-ischaemic injury, infection, kernicterus, and brain malformations are recognised risk factors.",
+      "Frequent comorbidities include intellectual disability, epilepsy, visual and hearing impairment, feeding and swallowing difficulties, communication problems, and orthopaedic complications such as hip subluxation and contractures.",
+      "Diagnosis is largely clinical; MRI often identifies the underlying lesion and helps establish aetiology.",
+      "Management is multidisciplinary and supportive, aiming to maximise function and participation with therapy, orthotics, spasticity treatment, and orthopaedic care rather than cure.",
+      "Because the disorder is static, clear progression or regression of neurological signs should prompt a search for an alternative, evolving diagnosis."
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain to identify structural or ischaemic lesions, EEG when seizures are suspected, Metabolic or genetic testing if",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cerebral palsy results from injury or maldevelopment of the immature brain from any of a range of prenatal, perinatal, or early postnatal insults. In preterm infants, periventricular white-matter injury (periventricular leukomalacia) commonly affects descending motor tracts, producing spastic diplegia; in term infants, hypoxic-ischaemic injury, malformations, stroke, or kernicterus may be responsible. The primary lesion is non-progressive, but secondary musculoskeletal changes such as contractures and bony deformity evolve over time.",
+    "additionalDifferentials": [
+      "Progressive neurodegenerative or metabolic disorders",
+      "Spinal muscular atrophy and other neuromuscular disorders",
+      "Dopa-responsive dystonia",
+      "Hereditary spastic paraplegia",
+      "Structural spinal cord lesions",
+      "Global developmental delay without a motor disorder"
     ],
-    [
-     "Primary Differentials",
-     "Progressive neurodegenerative or metabolic disorders, Spinal muscular atrophy and other neuromuscular disorders, Dopa-responsive",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain to identify structural or ischaemic lesions",
+      "EEG when seizures are suspected",
+      "Metabolic or genetic testing if the presentation is atypical or progressive",
+      "Assessment of vision and hearing",
+      "Hip surveillance imaging to detect subluxation",
+      "Evaluation of feeding, swallowing, and nutrition"
     ],
-    [
-     "Management Strategy",
-     "Coordinate multidisciplinary supportive care for the non-progressive lesion, centred on physiotherapy and occupational therapy to",
-     "Core treatment modality"
+    "redFlags": [
+      "Loss of previously acquired skills or clear neurological progression (suggests an alternative diagnosis)",
+      "New or worsening seizures",
+      "Signs of aspiration or faltering growth from feeding difficulty",
+      "Progressive scoliosis or hip dislocation",
+      "Rapidly increasing spasticity or dystonia causing pain or care difficulty"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling a child with cerebral palsy when the course is actually progressive (missing a treatable metabolic or genetic disorder)",
-     "Prevent diagnostic or management error"
+    "prognosis": "The motor impairment itself is non-progressive, and life expectancy is often near normal in milder forms; outcome depends on severity, mobility level, and comorbidities, with severe quadriplegia, epilepsy, intellectual disability, and feeding problems associated with greater disability and shorter survival.",
+    "pitfalls": [
+      "Labelling a child with cerebral palsy when the course is actually progressive (missing a treatable metabolic or genetic disorder)",
+      "Focusing only on motor impairment and overlooking epilepsy, sensory, or feeding comorbidities",
+      "Neglecting hip surveillance, allowing silent dislocation",
+      "Underestimating cognition in non-verbal children with good comprehension",
+      "Delaying nutritional and communication support"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Coordinate multidisciplinary supportive care for the non-progressive lesion, centred on physiotherapy and occupational therapy to maximise function",
+      "Manage spasticity with oral agents such as baclofen, focal botulinum toxin injections, intrathecal baclofen or selective dorsal rhizotomy",
+      "Undertake orthopaedic surveillance with hip surveillance imaging and corrective surgery for subluxation and contractures",
+      "Treat comorbid epilepsy with antiseizure medication",
+      "Address feeding and swallowing difficulties with speech and language assessment and gastrostomy for nutrition, and treat drooling",
+      "Assess and manage visual, hearing, communication and intellectual impairments, including augmentative communication",
+      "Provide orthoses, mobility aids and assistive technology, with family support and planned transition to adult services"
     ]
-   ],
-   "caption": "Overview comparison matrix for cerebral palsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cerebral-palsy-real-image",
-   "title": "Cerebral Palsy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cerebral_palsy-pathway",
+      "title": "Cerebral Palsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of permanent disorders of movement and posture caused by a non-progressive injury or malformation of the developing brain, though the clinical picture can change as the child grows.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Loss of previously acquired skills or clear neurological progression (suggests an alternative diagnosis)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain to identify structural or ischaemic lesions, EEG when seizures are suspected, Metabolic or genetic testing if the presentation is atypical or progressive"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Coordinate multidisciplinary supportive care for the non-progressive lesion, centred on physiotherapy and occupational therapy to maximise function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling a child with cerebral palsy when the course is actually progressive (missing a treatable metabolic or genetic disorder)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cerebral palsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cerebral_palsy-matrix",
+      "title": "Cerebral Palsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of permanent disorders of movement and posture caused by a non-progressive injury or malformation of the developing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain to identify structural or ischaemic lesions, EEG when seizures are suspected, Metabolic or genetic testing if",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Progressive neurodegenerative or metabolic disorders, Spinal muscular atrophy and other neuromuscular disorders, Dopa-responsive",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Coordinate multidisciplinary supportive care for the non-progressive lesion, centred on physiotherapy and occupational therapy to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling a child with cerebral palsy when the course is actually progressive (missing a treatable metabolic or genetic disorder)",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cerebral palsy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cerebral_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Identifies structural or ischaemic lesions and helps establish aetiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "When seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic or genetic testing",
+          "cells": [
+            {
+              "text": "If the presentation is atypical or progressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of vision and hearing",
+          "cells": [
+            {
+              "text": "Common comorbid sensory impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip surveillance imaging",
+          "cells": [
+            {
+              "text": "Detects subluxation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebral_palsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Multidisciplinary therapy to maximise function"
+            },
+            {
+              "text": "Core supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity management",
+          "cells": [
+            {
+              "text": "Oral baclofen, focal botulinum toxin, intrathecal baclofen or selective dorsal rhizotomy"
+            },
+            {
+              "text": "Spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surveillance",
+          "cells": [
+            {
+              "text": "Hip surveillance imaging; corrective surgery for subluxation and contractures"
+            },
+            {
+              "text": "Hip subluxation and contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy treatment",
+          "cells": [
+            {
+              "text": "Antiseizure medication"
+            },
+            {
+              "text": "Comorbid epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and swallowing",
+          "cells": [
+            {
+              "text": "Speech and language assessment; gastrostomy for nutrition; drooling treatment"
+            },
+            {
+              "text": "Feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory, communication and cognitive support",
+          "cells": [
+            {
+              "text": "Vision, hearing, communication and intellectual impairment; augmentative communication"
+            },
+            {
+              "text": "Comorbidities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and assistive technology",
+          "cells": [
+            {
+              "text": "Orthoses, mobility aids and assistive technology; transition to adult services"
+            },
+            {
+              "text": "Family support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cerebral_palsy-dx-mgmt",
+      "title": "Diagnosis and management of Cerebral Palsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cerebral palsy: abnormal tone, delayed milestones, primitive reflexes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (loss of skills, new seizures, aspiration, progressive scoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: review for an alternative progressive or metabolic diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain, EEG if seizures, hip imaging and sensory assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Static motor disorder with MRI lesion and no progression confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to maximise function",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check progressive neurodegenerative, metabolic and spinal muscular atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Manage spasticity with baclofen, botulinum toxin or dorsal rhizotomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hip surveillance and orthopaedic surgery for subluxation or contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication, feeding support and gastrostomy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Non-progressive motor impairment; outcome depends on severity and comorbidity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

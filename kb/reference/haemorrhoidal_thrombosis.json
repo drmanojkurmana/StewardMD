@@ -1,178 +1,539 @@
 {
- "id": "haemorrhoidal_thrombosis",
- "name": "Haemorrhoidal thrombosis",
- "aliases": [
-  "thrombosed haemorrhoids",
-  "thrombosed prolapsed haemorrhoids",
-  "acute haemorrhoidal crisis"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal / Anorectal",
- "specialty": "Colorectal surgery / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Haemorrhoidal thrombosis is acute clotting within haemorrhoidal tissue, ranging from an isolated thrombosed external haemorrhoid to an acute crisis of thrombosed, prolapsed, and oedematous internal or mixed haemorrhoids",
-   "The hallmark is sudden severe anal pain with a tense, tender, blue-purple swelling; extensive prolapsed thrombosis produces a circumferential oedematous painful mass at the anal verge",
-   "It is often precipitated by straining, constipation, diarrhoea, pregnancy, or childbirth",
-   "Acutely incarcerated, thrombosed, prolapsed internal haemorrhoids may become irreducible and, rarely, progress to ulceration, necrosis, or sepsis",
-   "Diagnosis is clinical on inspection; painful examination and instrumentation should be deferred or done under anaesthesia in severe cases",
-   "Most cases settle with conservative care: analgesia, stool softening, warm baths, topical agents, and reduction of oedema, with full assessment once the acute episode resolves",
-   "Early surgery (excisional haemorrhoidectomy) can be offered for severe or extensive acute thrombosis in suitable patients and gives durable results, but carries risks in the oedematous acute setting",
-   "The differential includes strangulated rectal prolapse, perianal abscess, and, in immunocompromised patients, a threshold for concern about necrosis and sepsis"
+  "id": "haemorrhoidal_thrombosis",
+  "name": "Haemorrhoidal thrombosis",
+  "aliases": [
+    "thrombosed haemorrhoids",
+    "thrombosed prolapsed haemorrhoids",
+    "acute haemorrhoidal crisis"
   ],
-  "pathophysiology": "Haemorrhoidal thrombosis develops when blood within the dilated vessels of the haemorrhoidal cushions clots, either from venous stasis and raised pressure or from an acute rise in intra-abdominal and anal pressure that ruptures or occludes vessels. In external thrombosis a discrete clot forms in the subcutaneous plexus below the dentate line. In an acute internal or mixed haemorrhoidal crisis, prolapsed cushions become trapped by sphincter spasm, which impairs venous return, causing progressive engorgement, thrombosis, and marked oedema; the swelling worsens the incarceration in a self-perpetuating cycle. The tense, clotted, oedematous tissue stretches somatically innervated anoderm, producing intense pain, and in severe incarceration the compromised blood supply may lead to mucosal ulceration, necrosis, and, rarely, secondary infection.",
-  "additionalDifferentials": [
-   "Isolated perianal haematoma (thrombosed external haemorrhoid)",
-   "Strangulated full-thickness rectal prolapse",
-   "Perianal or ischiorectal abscess",
-   "Anal fissure with sentinel pile",
-   "Anal or low rectal carcinoma",
-   "Crohn disease with acute perianal inflammation",
-   "Pigmented perianal lesion such as melanoma"
-  ],
-  "additionalInvestigations": [
-   "Inspection and gentle digital examination to confirm thrombosed haemorrhoidal tissue",
-   "Examination under anaesthesia when pain precludes assessment or surgery is planned",
-   "Proctoscopy once the acute episode settles, to grade residual haemorrhoids",
-   "Full blood count if bleeding is significant or infection is suspected",
-   "Assessment for constipation, diarrhoea, or pregnancy as precipitants",
-   "Histology of excised tissue where appearances are atypical"
-  ],
-  "redFlags": [
-   "Necrosis, ulceration, or spreading infection of the thrombosed mass",
-   "Systemic sepsis, particularly in immunocompromised or diabetic patients",
-   "Irreducible incarcerated prolapse with compromised viability",
-   "A pigmented or indurated lesion suggesting malignancy",
-   "Severe uncontrolled bleeding"
-  ],
-  "prognosis": "Most haemorrhoidal thromboses are self-limiting, with pain settling over days to a couple of weeks under conservative care; early excisional surgery in appropriate patients relieves symptoms quickly and reduces recurrence, while severe incarcerated thrombosis with necrosis is uncommon but carries greater morbidity.",
-  "pitfalls": [
-   "Confusing incarcerated thrombosed haemorrhoids with strangulated rectal prolapse or abscess",
-   "Aggressive instrumentation of an acutely painful anus without anaesthesia",
-   "Simple incision of a clot rather than excision, leading to recurrence and residual tag",
-   "Underestimating necrosis or sepsis in immunocompromised patients",
-   "Neglecting to correct constipation, straining, or diarrhoea, allowing recurrence"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Association of Coloproctology of Great Britain and Ireland guidance on haemorrhoidal disease",
-   "Standard coloproctology reference texts on acute anorectal emergencies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative first-line care with oral analgesia, stool softeners and bulking agents, warm sitz baths and increased dietary fibre and fluids",
-   "Topical glyceryl trinitrate or a topical calcium channel blocker to relieve sphincter spasm, with topical anaesthetic or corticosteroid preparations for symptom relief",
-   "Early excision of an isolated thrombosed external haemorrhoid within the first few days for rapid and durable pain relief",
-   "Urgent haemorrhoidectomy or examination under anaesthesia for an acutely incarcerated, thrombosed and prolapsed crisis",
-   "Monitor for progression to ulceration, necrosis or sepsis in severe incarcerated disease",
-   "Deferred proctoscopy once the acute episode settles to grade residual haemorrhoids and plan definitive treatment",
-   "Address precipitants such as constipation, diarrhoea, straining and pregnancy-related factors"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "haemorrhoidal_thrombosis-pathway",
-   "title": "Haemorrhoidal thrombosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Haemorrhoidal thrombosis is acute clotting within haemorrhoidal tissue, ranging from an isolated thrombosed external haemorrhoid to an acute crisis of thrombosed, prolapsed, and oedematous internal or mixed haemorrhoids",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Necrosis, ulceration, or spreading infection of the thrombosed mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Inspection and gentle digital examination to confirm thrombosed haemorrhoidal tissue, Examination under anaesthesia when pain precludes assessment or surgery is planned, Proctoscopy once the acute episode settles, to grade"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative first-line care with oral analgesia, stool softeners and bulking agents, warm sitz baths and increased dietary fibre and fluids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing incarcerated thrombosed haemorrhoids with strangulated rectal prolapse or abscess"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of haemorrhoidal thrombosis."
-  }
- ],
- "tables": [
-  {
-   "id": "haemorrhoidal_thrombosis-matrix",
-   "title": "Haemorrhoidal thrombosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Haemorrhoidal thrombosis is acute clotting within haemorrhoidal tissue, ranging from an isolated thrombosed external haemorrhoid",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal / Anorectal",
+  "specialty": "Colorectal surgery / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Haemorrhoidal thrombosis is acute clotting within haemorrhoidal tissue, ranging from an isolated thrombosed external haemorrhoid to an acute crisis of thrombosed, prolapsed, and oedematous internal or mixed haemorrhoids",
+      "The hallmark is sudden severe anal pain with a tense, tender, blue-purple swelling; extensive prolapsed thrombosis produces a circumferential oedematous painful mass at the anal verge",
+      "It is often precipitated by straining, constipation, diarrhoea, pregnancy, or childbirth",
+      "Acutely incarcerated, thrombosed, prolapsed internal haemorrhoids may become irreducible and, rarely, progress to ulceration, necrosis, or sepsis",
+      "Diagnosis is clinical on inspection; painful examination and instrumentation should be deferred or done under anaesthesia in severe cases",
+      "Most cases settle with conservative care: analgesia, stool softening, warm baths, topical agents, and reduction of oedema, with full assessment once the acute episode resolves",
+      "Early surgery (excisional haemorrhoidectomy) can be offered for severe or extensive acute thrombosis in suitable patients and gives durable results, but carries risks in the oedematous acute setting",
+      "The differential includes strangulated rectal prolapse, perianal abscess, and, in immunocompromised patients, a threshold for concern about necrosis and sepsis"
     ],
-    [
-     "Key Investigations",
-     "Inspection and gentle digital examination to confirm thrombosed haemorrhoidal tissue, Examination under anaesthesia when pain",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Haemorrhoidal thrombosis develops when blood within the dilated vessels of the haemorrhoidal cushions clots, either from venous stasis and raised pressure or from an acute rise in intra-abdominal and anal pressure that ruptures or occludes vessels. In external thrombosis a discrete clot forms in the subcutaneous plexus below the dentate line. In an acute internal or mixed haemorrhoidal crisis, prolapsed cushions become trapped by sphincter spasm, which impairs venous return, causing progressive engorgement, thrombosis, and marked oedema; the swelling worsens the incarceration in a self-perpetuating cycle. The tense, clotted, oedematous tissue stretches somatically innervated anoderm, producing intense pain, and in severe incarceration the compromised blood supply may lead to mucosal ulceration, necrosis, and, rarely, secondary infection.",
+    "additionalDifferentials": [
+      "Isolated perianal haematoma (thrombosed external haemorrhoid)",
+      "Strangulated full-thickness rectal prolapse",
+      "Perianal or ischiorectal abscess",
+      "Anal fissure with sentinel pile",
+      "Anal or low rectal carcinoma",
+      "Crohn disease with acute perianal inflammation",
+      "Pigmented perianal lesion such as melanoma"
     ],
-    [
-     "Primary Differentials",
-     "Isolated perianal haematoma (thrombosed external haemorrhoid), Strangulated full-thickness rectal prolapse, Perianal or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Inspection and gentle digital examination to confirm thrombosed haemorrhoidal tissue",
+      "Examination under anaesthesia when pain precludes assessment or surgery is planned",
+      "Proctoscopy once the acute episode settles, to grade residual haemorrhoids",
+      "Full blood count if bleeding is significant or infection is suspected",
+      "Assessment for constipation, diarrhoea, or pregnancy as precipitants",
+      "Histology of excised tissue where appearances are atypical"
     ],
-    [
-     "Management Strategy",
-     "Conservative first-line care with oral analgesia, stool softeners and bulking agents, warm sitz baths and increased dietary fibre",
-     "Core treatment modality"
+    "redFlags": [
+      "Necrosis, ulceration, or spreading infection of the thrombosed mass",
+      "Systemic sepsis, particularly in immunocompromised or diabetic patients",
+      "Irreducible incarcerated prolapse with compromised viability",
+      "A pigmented or indurated lesion suggesting malignancy",
+      "Severe uncontrolled bleeding"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing incarcerated thrombosed haemorrhoids with strangulated rectal prolapse or abscess",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most haemorrhoidal thromboses are self-limiting, with pain settling over days to a couple of weeks under conservative care; early excisional surgery in appropriate patients relieves symptoms quickly and reduces recurrence, while severe incarcerated thrombosis with necrosis is uncommon but carries greater morbidity.",
+    "pitfalls": [
+      "Confusing incarcerated thrombosed haemorrhoids with strangulated rectal prolapse or abscess",
+      "Aggressive instrumentation of an acutely painful anus without anaesthesia",
+      "Simple incision of a clot rather than excision, leading to recurrence and residual tag",
+      "Underestimating necrosis or sepsis in immunocompromised patients",
+      "Neglecting to correct constipation, straining, or diarrhoea, allowing recurrence"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Association of Coloproctology of Great Britain and Ireland guidance on haemorrhoidal disease",
+      "Standard coloproctology reference texts on acute anorectal emergencies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative first-line care with oral analgesia, stool softeners and bulking agents, warm sitz baths and increased dietary fibre and fluids",
+      "Topical glyceryl trinitrate or a topical calcium channel blocker to relieve sphincter spasm, with topical anaesthetic or corticosteroid preparations for symptom relief",
+      "Early excision of an isolated thrombosed external haemorrhoid within the first few days for rapid and durable pain relief",
+      "Urgent haemorrhoidectomy or examination under anaesthesia for an acutely incarcerated, thrombosed and prolapsed crisis",
+      "Monitor for progression to ulceration, necrosis or sepsis in severe incarcerated disease",
+      "Deferred proctoscopy once the acute episode settles to grade residual haemorrhoids and plan definitive treatment",
+      "Address precipitants such as constipation, diarrhoea, straining and pregnancy-related factors"
     ]
-   ],
-   "caption": "Overview comparison matrix for haemorrhoidal thrombosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "haemorrhoidal-thrombosis-real-image",
-   "title": "Haemorrhoidal thrombosis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "haemorrhoidal_thrombosis-pathway",
+      "title": "Haemorrhoidal thrombosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Haemorrhoidal thrombosis is acute clotting within haemorrhoidal tissue, ranging from an isolated thrombosed external haemorrhoid to an acute crisis of thrombosed, prolapsed, and oedematous internal or mixed haemorrhoids",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Necrosis, ulceration, or spreading infection of the thrombosed mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Inspection and gentle digital examination to confirm thrombosed haemorrhoidal tissue, Examination under anaesthesia when pain precludes assessment or surgery is planned, Proctoscopy once the acute episode settles, to grade"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative first-line care with oral analgesia, stool softeners and bulking agents, warm sitz baths and increased dietary fibre and fluids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing incarcerated thrombosed haemorrhoids with strangulated rectal prolapse or abscess"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of haemorrhoidal thrombosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "haemorrhoidal_thrombosis-matrix",
+      "title": "Haemorrhoidal thrombosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Haemorrhoidal thrombosis is acute clotting within haemorrhoidal tissue, ranging from an isolated thrombosed external haemorrhoid",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Inspection and gentle digital examination to confirm thrombosed haemorrhoidal tissue, Examination under anaesthesia when pain",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated perianal haematoma (thrombosed external haemorrhoid), Strangulated full-thickness rectal prolapse, Perianal or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative first-line care with oral analgesia, stool softeners and bulking agents, warm sitz baths and increased dietary fibre",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing incarcerated thrombosed haemorrhoids with strangulated rectal prolapse or abscess",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for haemorrhoidal thrombosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 297-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "haemorrhoidal_thrombosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Inspection and gentle digital examination",
+          "cells": [
+            {
+              "text": "Thrombosed haemorrhoidal tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "When pain precludes assessment or surgery is planned"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proctoscopy after the acute episode",
+          "cells": [
+            {
+              "text": "Grades residual haemorrhoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Significant bleeding or infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of constipation, diarrhoea or pregnancy",
+          "cells": [
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of excised tissue",
+          "cells": [
+            {
+              "text": "Atypical appearances"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemorrhoidal_thrombosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Strangulated full-thickness rectal prolapse",
+          "cells": [
+            {
+              "text": "Irreducible prolapse with compromised viability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perianal or ischiorectal abscess",
+          "cells": [
+            {
+              "text": "Perianal collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal or low rectal carcinoma",
+          "cells": [
+            {
+              "text": "Pigmented or indurated lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemorrhoidal_thrombosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Oral analgesia, stool softeners, bulking agents, warm sitz baths and dietary fibre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical sphincter relaxants",
+          "cells": [
+            {
+              "text": "Glyceryl trinitrate or calcium channel blocker for spasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early excision",
+          "cells": [
+            {
+              "text": "Isolated thrombosed external haemorrhoid within the first few days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent haemorrhoidectomy or examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Acutely incarcerated, thrombosed and prolapsed crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Progression to ulceration, necrosis or sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deferred proctoscopy",
+          "cells": [
+            {
+              "text": "Grades residual haemorrhoids once the episode settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Precipitant management",
+          "cells": [
+            {
+              "text": "Constipation, diarrhoea, straining and pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemorrhoidal_thrombosis-treatment-2",
+      "kind": "treatment",
+      "title": "Staging and treatment of hemorrhoids",
+      "rowHeader": "Option",
+      "columns": [
+        "Description of classification",
+        "Treatment"
+      ],
+      "rows": [
+        {
+          "parameter": "Stage I",
+          "cells": [
+            {
+              "text": "Enlargement with bleeding"
+            },
+            {
+              "text": "Fiber supplementation, cortisone suppository, sclerotherapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage II",
+          "cells": [
+            {
+              "text": "Protrusion with spontaneous reduction"
+            },
+            {
+              "text": "Fiber supplementation, cortisone suppository"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage III",
+          "cells": [
+            {
+              "text": "Protrusion requiring manual reduction"
+            },
+            {
+              "text": "Fiber supplementation, cortisone suppository, banding, operative hemorrhoidectomy (stapled or traditional)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage IV",
+          "cells": [
+            {
+              "text": "Irreducible protrusion"
+            },
+            {
+              "text": "Fiber supplementation, cortisone suppository, operative hemorrhoidectomy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "haemorrhoidal_thrombosis-dx-mgmt",
+      "title": "Diagnosis and management of Haemorrhoidal thrombosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected haemorrhoidal thrombosis: painful perianal swelling with bluish mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (necrosis, spreading infection, incarceration or suspicious lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent examination under anaesthesia for incarcerated, prolapsed thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inspection and gentle digital examination; FBC if bleeding or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does examination confirm thrombosed haemorrhoidal tissue without strangulation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider strangulated prolapse, abscess, fissure or carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Conservative care with analgesia, stool softeners and warm sitz baths",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical glyceryl trinitrate or calcium channel blocker for spasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early excision of an isolated thrombosed external haemorrhoid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent haemorrhoidectomy or examination under anaesthesia for incarceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most resolve in days to weeks; early excision gives quicker and durable pain relief",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

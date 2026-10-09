@@ -1,176 +1,505 @@
 {
- "id": "opsismodysplasia",
- "name": "Opsismodysplasia",
- "aliases": [
-  "INPPL1-related opsismodysplasia",
-  "OPSMD"
- ],
- "class": "non_infective",
- "system": "Skeletal dysplasia",
- "specialty": "Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Skeletal dysplasia references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal recessive skeletal dysplasia whose name derives from the Greek for 'late', reflecting the hallmark markedly delayed epiphyseal and carpotarsal ossification (retarded skeletal maturation) — the opposite of the advanced bone age seen in Desbuquois dysplasia.",
-   "Presents at or before birth with severe micromelia — short limbs with disproportionately short hands and feet — together with relative macrocephaly, frontal bossing, a depressed nasal bridge, small anteverted nares and a long philtrum.",
-   "Characteristic radiographic combination: severe platyspondyly, extremely short and squared metacarpals and phalanges, concave metaphyseal cupping, and ossification profoundly delayed relative to gestational or chronological age.",
-   "Biallelic loss-of-function variants in INPPL1 (encoding the inositol polyphosphate 5-phosphatase SHIP2) underlie most cases; a subset of clinically typical patients lack INPPL1 variants, pointing to locus heterogeneity.",
-   "Renal phosphate wasting with hypophosphataemic, rickets-like bone changes may accompany the dysplasia, so bone biochemistry and renal tubular handling of phosphate deserve evaluation.",
-   "A narrow thorax with respiratory insufficiency is the leading cause of early death; airway and ventilatory planning are central to neonatal management.",
-   "Antenatal ultrasound may show short-limb dysplasia with a small chest and relative macrocephaly; the striking discrepancy between skeletal maturity and gestation is a diagnostic clue.",
-   "Intelligence is generally preserved in survivors, so prognostic counselling should separate the skeletal and respiratory burden from cognitive outcome."
+  "id": "opsismodysplasia",
+  "name": "Opsismodysplasia",
+  "aliases": [
+    "INPPL1-related opsismodysplasia",
+    "OPSMD"
   ],
-  "pathophysiology": "Opsismodysplasia is most often caused by biallelic loss-of-function variants in INPPL1, the gene encoding SHIP2 (SH2-domain-containing inositol polyphosphate 5-phosphatase 2), an enzyme that hydrolyses the 5-phosphate of phosphatidylinositol-3,4,5-trisphosphate and thereby dampens phosphoinositide signalling downstream of growth-factor and insulin receptors. Within the growth plate, disruption of this signalling is thought to impair chondrocyte proliferation and the orderly progression of endochondral ossification, generating the profound delay in epiphyseal and carpotarsal maturation, the metaphyseal cupping and the platyspondyly that define the disorder. SHIP2 also participates in phosphate homeostasis, which may account for the renal phosphate wasting and hypophosphataemic, rickets-like bone changes reported in some individuals. Because a proportion of clinically typical cases carry no identifiable INPPL1 variant, additional as-yet-undefined genetic causes are presumed.",
-  "additionalDifferentials": [
-   "Desbuquois dysplasia (short-limb dysplasia but with advanced bone age and joint dislocations)",
-   "Short-limb spondyloepimetaphyseal dysplasia with hand anomalies",
-   "Achondrogenesis and other perinatally lethal short-limb dysplasias",
-   "Hypophosphatasia (low alkaline phosphatase, poor mineralisation)",
-   "Chondrodysplasia punctata (stippled epiphyses)",
-   "Dyssegmental dysplasia",
-   "Kniest dysplasia and spondyloepiphyseal dysplasia congenita"
-  ],
-  "additionalInvestigations": [
-   "Full skeletal survey with formal assessment of bone age and hand/foot morphology",
-   "Molecular testing of INPPL1 or a skeletal dysplasia gene panel, with parental testing",
-   "Serum calcium, phosphate, alkaline phosphatase and parathyroid hormone",
-   "Renal tubular phosphate handling studies and urinalysis for phosphaturia",
-   "Renal tract ultrasound to look for nephrocalcinosis",
-   "Chest imaging and echocardiography to assess thoracic and cardiac status",
-   "Genetic counselling with discussion of autosomal recessive recurrence risk"
-  ],
-  "redFlags": [
-   "Progressive respiratory distress or failure from a small thorax in early infancy",
-   "Feeding difficulty with failure to thrive",
-   "Biochemical hypophosphataemia with clinical or radiographic rickets",
-   "Nephrocalcinosis or deteriorating renal function"
-  ],
-  "prognosis": "Early mortality from respiratory failure is common in the neonatal and infant period; survivors have disproportionate short stature and may develop metabolic bone and renal complications, while cognition is usually preserved.",
-  "pitfalls": [
-   "Interpreting the delayed ossification as a lethal achondrogenesis and withdrawing care prematurely",
-   "Overlooking treatable hypophosphataemia and renal phosphate wasting",
-   "Assuming dominant inheritance and understating the autosomal recessive recurrence risk",
-   "Attributing the short limbs to constitutional smallness rather than a defined dysplasia"
-  ],
-  "references": [
-   "International nosology and classification of genetic skeletal disorders",
-   "Standard clinical genetics and dysmorphology reference texts",
-   "Paediatric skeletal radiology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise neonatal airway and ventilatory support for the narrow thorax and respiratory insufficiency, which is the leading cause of early death",
-   "Treat the hypophosphataemic, rickets-like bone disease with oral phosphate and active vitamin D analogues such as alfacalcidol or calcitriol, guided by bone biochemistry and renal tubular phosphate handling",
-   "Monitor for nephrocalcinosis and renal tubular dysfunction with imaging and urinalysis",
-   "Manage the disproportionate short stature and skeletal deformity through orthopaedic input",
-   "Provide nutritional and growth support while noting that cognition is usually preserved",
-   "Coordinate multidisciplinary care across clinical genetics, respiratory medicine, nephrology and orthopaedics",
-   "Offer genetic counselling with molecular testing of INPPL1 and parental testing, given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "opsismodysplasia-pathway",
-   "title": "Opsismodysplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal recessive skeletal dysplasia whose name derives from the Greek for 'late', reflecting the hallmark markedly delayed epiphyseal and carpotarsal ossification (retarded skeletal maturation) - the opposite of the advanced bone",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive respiratory distress or failure from a small thorax in early infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full skeletal survey with formal assessment of bone age and hand/foot morphology, Molecular testing of INPPL1 or a skeletal dysplasia gene panel, with parental testing, Serum calcium, phosphate, alkaline phosphatase and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise neonatal airway and ventilatory support for the narrow thorax and respiratory insufficiency, which is the leading cause of early death"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting the delayed ossification as a lethal achondrogenesis and withdrawing care prematurely"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of opsismodysplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "opsismodysplasia-matrix",
-   "title": "Opsismodysplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal recessive skeletal dysplasia whose name derives from the Greek for 'late', reflecting the hallmark markedly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skeletal dysplasia",
+  "specialty": "Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Skeletal dysplasia references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal recessive skeletal dysplasia whose name derives from the Greek for 'late', reflecting the hallmark markedly delayed epiphyseal and carpotarsal ossification (retarded skeletal maturation) — the opposite of the advanced bone age seen in Desbuquois dysplasia.",
+      "Presents at or before birth with severe micromelia — short limbs with disproportionately short hands and feet — together with relative macrocephaly, frontal bossing, a depressed nasal bridge, small anteverted nares and a long philtrum.",
+      "Characteristic radiographic combination: severe platyspondyly, extremely short and squared metacarpals and phalanges, concave metaphyseal cupping, and ossification profoundly delayed relative to gestational or chronological age.",
+      "Biallelic loss-of-function variants in INPPL1 (encoding the inositol polyphosphate 5-phosphatase SHIP2) underlie most cases; a subset of clinically typical patients lack INPPL1 variants, pointing to locus heterogeneity.",
+      "Renal phosphate wasting with hypophosphataemic, rickets-like bone changes may accompany the dysplasia, so bone biochemistry and renal tubular handling of phosphate deserve evaluation.",
+      "A narrow thorax with respiratory insufficiency is the leading cause of early death; airway and ventilatory planning are central to neonatal management.",
+      "Antenatal ultrasound may show short-limb dysplasia with a small chest and relative macrocephaly; the striking discrepancy between skeletal maturity and gestation is a diagnostic clue.",
+      "Intelligence is generally preserved in survivors, so prognostic counselling should separate the skeletal and respiratory burden from cognitive outcome."
     ],
-    [
-     "Key Investigations",
-     "Full skeletal survey with formal assessment of bone age and hand/foot morphology, Molecular testing of INPPL1 or a skeletal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Opsismodysplasia is most often caused by biallelic loss-of-function variants in INPPL1, the gene encoding SHIP2 (SH2-domain-containing inositol polyphosphate 5-phosphatase 2), an enzyme that hydrolyses the 5-phosphate of phosphatidylinositol-3,4,5-trisphosphate and thereby dampens phosphoinositide signalling downstream of growth-factor and insulin receptors. Within the growth plate, disruption of this signalling is thought to impair chondrocyte proliferation and the orderly progression of endochondral ossification, generating the profound delay in epiphyseal and carpotarsal maturation, the metaphyseal cupping and the platyspondyly that define the disorder. SHIP2 also participates in phosphate homeostasis, which may account for the renal phosphate wasting and hypophosphataemic, rickets-like bone changes reported in some individuals. Because a proportion of clinically typical cases carry no identifiable INPPL1 variant, additional as-yet-undefined genetic causes are presumed.",
+    "additionalDifferentials": [
+      "Desbuquois dysplasia (short-limb dysplasia but with advanced bone age and joint dislocations)",
+      "Short-limb spondyloepimetaphyseal dysplasia with hand anomalies",
+      "Achondrogenesis and other perinatally lethal short-limb dysplasias",
+      "Hypophosphatasia (low alkaline phosphatase, poor mineralisation)",
+      "Chondrodysplasia punctata (stippled epiphyses)",
+      "Dyssegmental dysplasia",
+      "Kniest dysplasia and spondyloepiphyseal dysplasia congenita"
     ],
-    [
-     "Primary Differentials",
-     "Desbuquois dysplasia (short-limb dysplasia but with advanced bone age and joint dislocations), Short-limb spondyloepimetaphyseal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full skeletal survey with formal assessment of bone age and hand/foot morphology",
+      "Molecular testing of INPPL1 or a skeletal dysplasia gene panel, with parental testing",
+      "Serum calcium, phosphate, alkaline phosphatase and parathyroid hormone",
+      "Renal tubular phosphate handling studies and urinalysis for phosphaturia",
+      "Renal tract ultrasound to look for nephrocalcinosis",
+      "Chest imaging and echocardiography to assess thoracic and cardiac status",
+      "Genetic counselling with discussion of autosomal recessive recurrence risk"
     ],
-    [
-     "Management Strategy",
-     "Prioritise neonatal airway and ventilatory support for the narrow thorax and respiratory insufficiency, which is the leading",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive respiratory distress or failure from a small thorax in early infancy",
+      "Feeding difficulty with failure to thrive",
+      "Biochemical hypophosphataemia with clinical or radiographic rickets",
+      "Nephrocalcinosis or deteriorating renal function"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting the delayed ossification as a lethal achondrogenesis and withdrawing care prematurely",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early mortality from respiratory failure is common in the neonatal and infant period; survivors have disproportionate short stature and may develop metabolic bone and renal complications, while cognition is usually preserved.",
+    "pitfalls": [
+      "Interpreting the delayed ossification as a lethal achondrogenesis and withdrawing care prematurely",
+      "Overlooking treatable hypophosphataemia and renal phosphate wasting",
+      "Assuming dominant inheritance and understating the autosomal recessive recurrence risk",
+      "Attributing the short limbs to constitutional smallness rather than a defined dysplasia"
+    ],
+    "references": [
+      "International nosology and classification of genetic skeletal disorders",
+      "Standard clinical genetics and dysmorphology reference texts",
+      "Paediatric skeletal radiology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise neonatal airway and ventilatory support for the narrow thorax and respiratory insufficiency, which is the leading cause of early death",
+      "Treat the hypophosphataemic, rickets-like bone disease with oral phosphate and active vitamin D analogues such as alfacalcidol or calcitriol, guided by bone biochemistry and renal tubular phosphate handling",
+      "Monitor for nephrocalcinosis and renal tubular dysfunction with imaging and urinalysis",
+      "Manage the disproportionate short stature and skeletal deformity through orthopaedic input",
+      "Provide nutritional and growth support while noting that cognition is usually preserved",
+      "Coordinate multidisciplinary care across clinical genetics, respiratory medicine, nephrology and orthopaedics",
+      "Offer genetic counselling with molecular testing of INPPL1 and parental testing, given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for opsismodysplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "opsismodysplasia-real-image",
-   "title": "Opsismodysplasia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "opsismodysplasia-pathway",
+      "title": "Opsismodysplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal recessive skeletal dysplasia whose name derives from the Greek for 'late', reflecting the hallmark markedly delayed epiphyseal and carpotarsal ossification (retarded skeletal maturation) - the opposite of the advanced bone",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive respiratory distress or failure from a small thorax in early infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full skeletal survey with formal assessment of bone age and hand/foot morphology, Molecular testing of INPPL1 or a skeletal dysplasia gene panel, with parental testing, Serum calcium, phosphate, alkaline phosphatase and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise neonatal airway and ventilatory support for the narrow thorax and respiratory insufficiency, which is the leading cause of early death"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting the delayed ossification as a lethal achondrogenesis and withdrawing care prematurely"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of opsismodysplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "opsismodysplasia-matrix",
+      "title": "Opsismodysplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal recessive skeletal dysplasia whose name derives from the Greek for 'late', reflecting the hallmark markedly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full skeletal survey with formal assessment of bone age and hand/foot morphology, Molecular testing of INPPL1 or a skeletal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Desbuquois dysplasia (short-limb dysplasia but with advanced bone age and joint dislocations), Short-limb spondyloepimetaphyseal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise neonatal airway and ventilatory support for the narrow thorax and respiratory insufficiency, which is the leading",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting the delayed ossification as a lethal achondrogenesis and withdrawing care prematurely",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for opsismodysplasia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Skeletal dysplasia references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "opsismodysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey with bone age and hand and foot morphology",
+          "cells": [
+            {
+              "text": "Markedly delayed ossification; short, squared metacarpals and phalanges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "INPPL1 testing",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate, alkaline phosphatase and PTH",
+          "cells": [
+            {
+              "text": "Hypophosphataemia, a treatable bone disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular phosphate handling and urinalysis",
+          "cells": [
+            {
+              "text": "Renal phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and echocardiography",
+          "cells": [
+            {
+              "text": "Thoracic and cardiac status; narrow thorax"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opsismodysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Desbuquois dysplasia",
+          "cells": [
+            {
+              "text": "Advanced bone age and joint dislocations; the opposite of delayed ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypophosphatasia",
+          "cells": [
+            {
+              "text": "Low alkaline phosphatase and poor mineralisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Achondrogenesis",
+          "cells": [
+            {
+              "text": "Delayed ossification can mimic it; care should not be withdrawn prematurely"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opsismodysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal airway and ventilatory support",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "For the narrow thorax and respiratory insufficiency, the leading cause of early death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral phosphate and active vitamin D",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Alfacalcidol or calcitriol for hypophosphataemic bone disease, guided by bone biochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal monitoring",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Imaging and urinalysis for nephrocalcinosis and renal tubular dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic input",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Disproportionate short stature and skeletal deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and growth support",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Cognition is usually preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Clinical genetics, respiratory medicine, nephrology and orthopaedics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Autosomal recessive inheritance; INPPL1 and parental testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "opsismodysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Opsismodysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe short limbs, narrow thorax and delayed ossification at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (respiratory failure, failure to thrive, hypophosphataemia or nephrocalcinosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neonatal airway and ventilatory support for narrow thorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, INPPL1 testing, bone biochemistry, renal phosphate and ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do INPPL1 testing and the skeletal picture confirm opsismodysplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Desbuquois dysplasia, hypophosphatasia or achondrogenesis; re-review films",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Neonatal airway and ventilatory support, the leading cause of early death",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral phosphate and active vitamin D if hypophosphataemic bone disease is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Imaging and urinalysis to monitor for nephrocalcinosis and renal dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic input for disproportionate short stature; nutrition and growth support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling on recurrence risk, with INPPL1 and parental testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early respiratory death is common; survivors often keep normal cognition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

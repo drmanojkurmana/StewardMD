@@ -1,177 +1,644 @@
 {
- "id": "beta_thalassemia",
- "name": "Beta Thalassaemia",
- "aliases": [
-  "beta-thalassaemia major",
-  "Cooley anaemia",
-  "beta-thalassaemia intermedia",
-  "beta thalassemia"
- ],
- "class": "non_infective",
- "system": "Haematological",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "An inherited disorder of reduced or absent beta-globin chain production, most common in Mediterranean, Middle Eastern, South Asian, and Southeast Asian populations.",
-   "Beta-thalassaemia major typically presents in the second half of the first year of life as protective fetal haemoglobin declines, with progressive pallor, poor growth, and hepatosplenomegaly.",
-   "The blood film shows a severe microcytic hypochromic anaemia with marked anisopoikilocytosis, target cells, and nucleated red cells.",
-   "Haemoglobin electrophoresis or HPLC demonstrates elevated HbF and often raised HbA2, with little or no HbA in the major form.",
-   "Chronic transfusion is required in transfusion-dependent disease to sustain growth and suppress ineffective erythropoiesis.",
-   "Repeated transfusion inevitably causes iron overload, so iron chelation is essential to prevent cardiac, hepatic, and endocrine damage.",
-   "Untreated or under-transfused children develop characteristic skeletal changes from marrow expansion, including frontal bossing and maxillary overgrowth.",
-   "Allogeneic haematopoietic stem cell transplantation offers a potential cure, and newer gene-based therapies are emerging.",
-   "Splenomegaly may lead to hypersplenism and rising transfusion requirements; genetic counselling and antenatal screening are important for at-risk families."
+  "id": "beta_thalassemia",
+  "name": "Beta Thalassaemia",
+  "aliases": [
+    "beta-thalassaemia major",
+    "Cooley anaemia",
+    "beta-thalassaemia intermedia",
+    "beta thalassemia"
   ],
-  "pathophysiology": "Mutations in the beta-globin gene reduce (beta+) or abolish (beta0) beta-chain synthesis, creating an imbalance with relatively excess alpha-globin chains. Unpaired alpha chains precipitate within red cell precursors, causing their destruction in the marrow (ineffective erythropoiesis) and shortened survival of circulating red cells (haemolysis). The resulting chronic anaemia drives erythropoietin-mediated marrow expansion and extramedullary haematopoiesis, while increased gastrointestinal iron absorption and transfusional iron together produce progressive tissue iron overload.",
-  "additionalDifferentials": [
-   "Iron deficiency anaemia",
-   "Alpha thalassaemia",
-   "Sickle cell disease and other haemoglobinopathies",
-   "Anaemia of chronic disease",
-   "Sideroblastic anaemia",
-   "Congenital dyserythropoietic anaemia"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with red cell indices (low MCV and MCH)",
-   "Peripheral blood film",
-   "Haemoglobin electrophoresis or HPLC quantifying HbA, HbA2, and HbF",
-   "Reticulocyte count",
-   "Iron studies and serum ferritin to distinguish iron deficiency and monitor overload",
-   "Genetic mutation analysis of the beta-globin gene",
-   "Serial ferritin and cardiac/hepatic MRI (T2*) to monitor iron burden"
-  ],
-  "redFlags": [
-   "Symptomatic severe anaemia with cardiac decompensation",
-   "Signs of iron overload cardiomyopathy or arrhythmia",
-   "Rapidly enlarging spleen with falling counts (hypersplenism)",
-   "Growth failure and delayed puberty from chronic anaemia or endocrine iron toxicity",
-   "Features of extramedullary masses causing compressive symptoms"
-  ],
-  "prognosis": "With regular transfusion and effective iron chelation, survival into adulthood with good quality of life is achievable; outcomes are limited chiefly by iron-related cardiac and endocrine complications, and stem cell transplant can be curative in selected patients.",
-  "pitfalls": [
-   "Misdiagnosing microcytic anaemia as simple iron deficiency and giving unnecessary iron",
-   "Under-transfusing and allowing marrow expansion and skeletal deformity to progress",
-   "Neglecting or delaying iron chelation, leading to preventable organ damage",
-   "Overlooking endocrine complications such as hypothyroidism, diabetes, and delayed puberty"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Regular red-cell transfusion in transfusion-dependent disease to correct anaemia, support growth and suppress ineffective erythropoiesis",
-   "Iron chelation therapy (deferoxamine, deferasirox or deferiprone) to prevent transfusional iron overload",
-   "Folic acid supplementation, with splenectomy considered for hypersplenism or rising transfusion needs, alongside pre-splenectomy vaccination and post-splenectomy antibiotic prophylaxis",
-   "Monitoring of iron burden with serum ferritin and cardiac and hepatic iron assessment by MRI, plus endocrine, cardiac and hepatic surveillance",
-   "Allogeneic haematopoietic stem cell transplantation as a curative option in selected patients, with luspatercept and gene therapy as emerging alternatives",
-   "Haematology-led multidisciplinary care with cardiology, hepatology and endocrinology input for iron-related complications",
-   "Genetic counselling with carrier and antenatal screening for the family given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "beta_thalassemia-pathway",
-   "title": "Beta Thalassaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An inherited disorder of reduced or absent beta-globin chain production, most common in Mediterranean, Middle Eastern, South Asian, and Southeast Asian populations.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic severe anaemia with cardiac decompensation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with red cell indices (low MCV and MCH), Peripheral blood film, Haemoglobin electrophoresis or HPLC quantifying HbA, HbA2, and HbF"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Regular red-cell transfusion in transfusion-dependent disease to correct anaemia, support growth and suppress ineffective erythropoiesis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing microcytic anaemia as simple iron deficiency and giving unnecessary iron"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of beta thalassaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "beta_thalassemia-matrix",
-   "title": "Beta Thalassaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An inherited disorder of reduced or absent beta-globin chain production, most common in Mediterranean, Middle Eastern, South",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "An inherited disorder of reduced or absent beta-globin chain production, most common in Mediterranean, Middle Eastern, South Asian, and Southeast Asian populations.",
+      "Beta-thalassaemia major typically presents in the second half of the first year of life as protective fetal haemoglobin declines, with progressive pallor, poor growth, and hepatosplenomegaly.",
+      "The blood film shows a severe microcytic hypochromic anaemia with marked anisopoikilocytosis, target cells, and nucleated red cells.",
+      "Haemoglobin electrophoresis or HPLC demonstrates elevated HbF and often raised HbA2, with little or no HbA in the major form.",
+      "Chronic transfusion is required in transfusion-dependent disease to sustain growth and suppress ineffective erythropoiesis.",
+      "Repeated transfusion inevitably causes iron overload, so iron chelation is essential to prevent cardiac, hepatic, and endocrine damage.",
+      "Untreated or under-transfused children develop characteristic skeletal changes from marrow expansion, including frontal bossing and maxillary overgrowth.",
+      "Allogeneic haematopoietic stem cell transplantation offers a potential cure, and newer gene-based therapies are emerging.",
+      "Splenomegaly may lead to hypersplenism and rising transfusion requirements; genetic counselling and antenatal screening are important for at-risk families."
     ],
-    [
-     "Key Investigations",
-     "Full blood count with red cell indices (low MCV and MCH), Peripheral blood film, Haemoglobin electrophoresis or HPLC quantifying",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mutations in the beta-globin gene reduce (beta+) or abolish (beta0) beta-chain synthesis, creating an imbalance with relatively excess alpha-globin chains. Unpaired alpha chains precipitate within red cell precursors, causing their destruction in the marrow (ineffective erythropoiesis) and shortened survival of circulating red cells (haemolysis). The resulting chronic anaemia drives erythropoietin-mediated marrow expansion and extramedullary haematopoiesis, while increased gastrointestinal iron absorption and transfusional iron together produce progressive tissue iron overload.",
+    "additionalDifferentials": [
+      "Iron deficiency anaemia",
+      "Alpha thalassaemia",
+      "Sickle cell disease and other haemoglobinopathies",
+      "Anaemia of chronic disease",
+      "Sideroblastic anaemia",
+      "Congenital dyserythropoietic anaemia"
     ],
-    [
-     "Primary Differentials",
-     "Iron deficiency anaemia, Alpha thalassaemia, Sickle cell disease and other haemoglobinopathies",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with red cell indices (low MCV and MCH)",
+      "Peripheral blood film",
+      "Haemoglobin electrophoresis or HPLC quantifying HbA, HbA2, and HbF",
+      "Reticulocyte count",
+      "Iron studies and serum ferritin to distinguish iron deficiency and monitor overload",
+      "Genetic mutation analysis of the beta-globin gene",
+      "Serial ferritin and cardiac/hepatic MRI (T2*) to monitor iron burden"
     ],
-    [
-     "Management Strategy",
-     "Regular red-cell transfusion in transfusion-dependent disease to correct anaemia, support growth and suppress ineffective",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic severe anaemia with cardiac decompensation",
+      "Signs of iron overload cardiomyopathy or arrhythmia",
+      "Rapidly enlarging spleen with falling counts (hypersplenism)",
+      "Growth failure and delayed puberty from chronic anaemia or endocrine iron toxicity",
+      "Features of extramedullary masses causing compressive symptoms"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing microcytic anaemia as simple iron deficiency and giving unnecessary iron",
-     "Prevent diagnostic or management error"
+    "prognosis": "With regular transfusion and effective iron chelation, survival into adulthood with good quality of life is achievable; outcomes are limited chiefly by iron-related cardiac and endocrine complications, and stem cell transplant can be curative in selected patients.",
+    "pitfalls": [
+      "Misdiagnosing microcytic anaemia as simple iron deficiency and giving unnecessary iron",
+      "Under-transfusing and allowing marrow expansion and skeletal deformity to progress",
+      "Neglecting or delaying iron chelation, leading to preventable organ damage",
+      "Overlooking endocrine complications such as hypothyroidism, diabetes, and delayed puberty"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Regular red-cell transfusion in transfusion-dependent disease to correct anaemia, support growth and suppress ineffective erythropoiesis",
+      "Iron chelation therapy (deferoxamine, deferasirox or deferiprone) to prevent transfusional iron overload",
+      "Folic acid supplementation, with splenectomy considered for hypersplenism or rising transfusion needs, alongside pre-splenectomy vaccination and post-splenectomy antibiotic prophylaxis",
+      "Monitoring of iron burden with serum ferritin and cardiac and hepatic iron assessment by MRI, plus endocrine, cardiac and hepatic surveillance",
+      "Allogeneic haematopoietic stem cell transplantation as a curative option in selected patients, with luspatercept and gene therapy as emerging alternatives",
+      "Haematology-led multidisciplinary care with cardiology, hepatology and endocrinology input for iron-related complications",
+      "Genetic counselling with carrier and antenatal screening for the family given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for beta thalassaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "beta-thalassemia-real-image",
-   "title": "Beta Thalassaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "beta_thalassemia-pathway",
+      "title": "Beta Thalassaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An inherited disorder of reduced or absent beta-globin chain production, most common in Mediterranean, Middle Eastern, South Asian, and Southeast Asian populations.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic severe anaemia with cardiac decompensation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with red cell indices (low MCV and MCH), Peripheral blood film, Haemoglobin electrophoresis or HPLC quantifying HbA, HbA2, and HbF"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Regular red-cell transfusion in transfusion-dependent disease to correct anaemia, support growth and suppress ineffective erythropoiesis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing microcytic anaemia as simple iron deficiency and giving unnecessary iron"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of beta thalassaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "beta_thalassemia-matrix",
+      "title": "Beta Thalassaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An inherited disorder of reduced or absent beta-globin chain production, most common in Mediterranean, Middle Eastern, South",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with red cell indices (low MCV and MCH), Peripheral blood film, Haemoglobin electrophoresis or HPLC quantifying",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Iron deficiency anaemia, Alpha thalassaemia, Sickle cell disease and other haemoglobinopathies",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Regular red-cell transfusion in transfusion-dependent disease to correct anaemia, support growth and suppress ineffective",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing microcytic anaemia as simple iron deficiency and giving unnecessary iron",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for beta thalassaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 103-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Acquired Iron Overload (p39)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beta_thalassemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in beta thalassaemia major",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and red cell indices",
+          "cells": [
+            {
+              "text": "Low MCV and MCH; severe microcytic hypochromic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film",
+          "cells": [
+            {
+              "text": "Marked anisopoikilocytosis, target cells and nucleated red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin electrophoresis or HPLC",
+          "cells": [
+            {
+              "text": "Elevated HbF and often raised HbA2; little or no HbA in the major form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies and serum ferritin",
+          "cells": [
+            {
+              "text": "Distinguishes iron deficiency and monitors iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-globin gene mutation analysis",
+          "cells": [
+            {
+              "text": "Confirms beta-globin gene mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ferritin and cardiac or hepatic MRI (T2*)",
+          "cells": [
+            {
+              "text": "Monitors iron burden"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beta_thalassemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for beta thalassaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency anaemia",
+          "cells": [
+            {
+              "text": "Separated by iron studies and serum ferritin; unnecessary iron should be avoided"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha thalassaemia",
+          "cells": [
+            {
+              "text": "Beta-globin gene analysis confirms beta disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell disease and other haemoglobinopathies",
+          "cells": [
+            {
+              "text": "Haemoglobin electrophoresis or HPLC quantifies HbA, HbA2 and HbF"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beta_thalassemia-treatment",
+      "kind": "treatment",
+      "title": "Management options in beta thalassaemia major",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Regular red-cell transfusion",
+          "cells": [
+            {
+              "text": "Regular transfusion in transfusion-dependent disease"
+            },
+            {
+              "text": "Corrects anaemia, supports growth and suppresses ineffective erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Deferoxamine, deferasirox or deferiprone"
+            },
+            {
+              "text": "Prevents transfusional iron overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid and splenectomy",
+          "cells": [
+            {
+              "text": "Folic acid supplementation; splenectomy considered for hypersplenism or rising transfusion needs"
+            },
+            {
+              "text": "With pre-splenectomy vaccination and post-splenectomy antibiotic prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron burden and organ surveillance",
+          "cells": [
+            {
+              "text": "Serum ferritin, cardiac and hepatic MRI, and endocrine surveillance"
+            },
+            {
+              "text": "Guides chelation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Curative and emerging options",
+          "cells": [
+            {
+              "text": "Allogeneic haematopoietic stem cell transplantation in selected patients"
+            },
+            {
+              "text": "Luspatercept and gene therapy are emerging alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Haematology-led care with cardiology, hepatology and endocrinology input"
+            },
+            {
+              "text": "For iron-related complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier and antenatal screening for at-risk families"
+            },
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beta_thalassemia-ddx-2",
+      "kind": "ddx",
+      "title": "Microcytic anemia: iron deficiency, inflammation, thalassemia, sideroblastic anemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Smear",
+        "Serum iron (SI)",
+        "TIBC",
+        "Percent saturation",
+        "Ferritin (ug/L)",
+        "Hemoglobin pattern on electrophoresis"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "Micro/hypochromic"
+            },
+            {
+              "text": "<30"
+            },
+            {
+              "text": "Over 360"
+            },
+            {
+              "text": "<10"
+            },
+            {
+              "text": "<15"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammation",
+          "cells": [
+            {
+              "text": "Normal to micro/hypochromic"
+            },
+            {
+              "text": "<50"
+            },
+            {
+              "text": "<300"
+            },
+            {
+              "text": "10 to 20"
+            },
+            {
+              "text": "30 to 200"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thalassemia",
+          "cells": [
+            {
+              "text": "Micro/hypochromic with targeting"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Abnormal with beta thalassemia; can be normal with alpha thalassemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sideroblastic anemia",
+          "cells": [
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Normal to high"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "30 to 80"
+            },
+            {
+              "text": "50 to 300"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "beta_thalassemia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Causes of acquired iron overload",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron-loading anemias",
+          "cells": [
+            {
+              "text": "Thalassemia major; sideroblastic anemia; chronic hemolytic anemias; transfusional and parenteral iron overload; dietary iron overload"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic liver disease",
+          "cells": [
+            {
+              "text": "Hepatitis C; alcoholic cirrhosis, especially when advanced; nonalcoholic steatohepatitis; porphyria cutanea tarda; dysmetabolic iron overload syndrome; post-portacaval shunting"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Miscellaneous",
+          "cells": [
+            {
+              "text": "Iron overload in sub-Saharan Africa; neonatal iron overload; aceruloplasminemia; congenital atransferrinemia"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beta_thalassemia-dx-mgmt",
+      "title": "Diagnosis and management of beta thalassaemia major",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pallor, poor growth and hepatosplenomegaly from late infancy with microcytic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: cardiac decompensation, iron overload arrhythmia, or hypersplenism with falling counts?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent transfusion and cardiac iron assessment; review the spleen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film and HbA, HbA2, HbF by electrophoresis or HPLC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Iron studies and ferritin to exclude iron deficiency; beta-globin gene analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Little or no HbA with raised HbF on electrophoresis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Regular transfusion, iron chelation with deferoxamine, deferasirox or deferiprone, folic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider alpha thalassaemia, sickle cell disease or iron deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor ferritin and cardiac or hepatic MRI; consider stem cell transplant if selected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Good quality of life with transfusion and chelation; transplant can be curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

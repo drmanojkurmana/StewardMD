@@ -1,181 +1,468 @@
 {
- "id": "umbilical_cord_prolapse",
- "name": "Umbilical cord prolapse",
- "aliases": [
-  "Umbilical Cord Prolapse",
-  "cord prolapse",
-  "funic prolapse",
-  "occult cord prolapse",
-  "overt cord prolapse",
-  "prolapsed cord",
-  "umbilical cord prolapse"
- ],
- "class": "non_infective",
- "system": "Reproductive / Obstetrics",
- "specialty": "Obstetrics and gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "RCOG Green-top Guideline / Williams Obstetrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Cord prolapse is descent of the umbilical cord below the presenting part once the membranes have ruptured (overt prolapse); a cord lying beside the presenting part is occult prolapse, and a cord below the presenting part with intact membranes is a cord presentation",
-   "It is an acute obstetric emergency because cord compression, together with vasospasm from cooling and handling, interrupts fetal oxygenation and produces rapid fetal hypoxia and bradycardia",
-   "Risk factors reflect a poorly applied presenting part: malpresentation such as breech or transverse lie, prematurity, polyhydramnios, a high or unengaged presenting part, multiparity, multiple pregnancy, and a long cord",
-   "Iatrogenic cases follow artificial rupture of membranes with a high presenting part, amnioinfusion, external cephalic version, or other intrauterine manipulation",
-   "Diagnosis is by seeing or palpating the cord in the vagina or at the introitus, or by an abrupt fetal heart rate abnormality such as variable decelerations or bradycardia soon after membrane rupture",
-   "Immediate measures relieve cord compression: elevate the presenting part manually or by filling the bladder, position the woman knee-chest or head-down in the left lateral posture, minimise handling of the cord, and consider tocolysis",
-   "Definitive management is expedited delivery, most often by emergency caesarean section, unless vaginal birth is imminent and would be quicker",
-   "Outcome depends chiefly on the interval from diagnosis to delivery, so regular drills, early recognition, and rapid transfer are central to safe management"
+  "id": "umbilical_cord_prolapse",
+  "name": "Umbilical cord prolapse",
+  "aliases": [
+    "Umbilical Cord Prolapse",
+    "cord prolapse",
+    "funic prolapse",
+    "occult cord prolapse",
+    "overt cord prolapse",
+    "prolapsed cord",
+    "umbilical cord prolapse"
   ],
-  "pathophysiology": "The umbilical cord supplies the fetus with oxygenated blood, and vessel patency depends on the cord not being compressed. A presenting part that does not fill the pelvic inlet, as in malpresentation, prematurity, an unengaged head, or polyhydramnios with sudden decompression at membrane rupture, leaves a space through which the cord can slip below or beside the fetus. Once the cord lies below the presenting part with ruptured membranes, descent of the fetus and uterine contractions compress the cord against the bony pelvis and occlude the umbilical vessels. In addition, exposure of the cord to the cooler vaginal environment and physical handling provoke reflex vasospasm. The combination of mechanical occlusion and vasospasm reduces or abolishes umbilical blood flow, causing fetal hypoxaemia, bradycardia, and, if unrelieved, hypoxic-ischaemic injury or death.",
-  "additionalDifferentials": [
-   "Other causes of acute fetal bradycardia such as placental abruption, uterine rupture, or maternal hypotension",
-   "Cord presentation with intact membranes rather than frank prolapse",
-   "Vasa praevia with vessel rupture",
-   "Prolonged deceleration from rapid cervical dilatation or uterine hyperstimulation",
-   "Maternal supine hypotension reducing uteroplacental flow",
-   "Prolapse of another structure mistaken for cord at examination"
-  ],
-  "additionalInvestigations": [
-   "Immediate vaginal examination to confirm the cord below or alongside the presenting part and to assess cervical dilatation",
-   "Palpation of the cord for pulsation as a bedside marker of fetal viability",
-   "Continuous cardiotocography or fetal heart rate monitoring",
-   "Bedside ultrasound to confirm presentation and fetal viability if immediately available",
-   "Maternal observations of pulse and blood pressure to exclude contributory hypotension",
-   "Urgent preoperative bloods including full blood count and group-and-save or crossmatch",
-   "Umbilical cord arterial blood gas at delivery to document the degree of acidaemia"
-  ],
-  "redFlags": [
-   "Fetal bradycardia or deep variable decelerations following rupture of the membranes",
-   "Visible or palpable cord at or beyond the introitus",
-   "Loss of cord pulsation",
-   "A prolonged diagnosis-to-delivery interval",
-   "Cord prolapse occurring remote from theatre or skilled help"
-  ],
-  "prognosis": "When recognised promptly and followed by rapid delivery, most babies do well. Delay in relieving cord compression is associated with hypoxic-ischaemic injury and perinatal death, and outcomes are worse when prolapse occurs outside hospital.",
-  "pitfalls": [
-   "Performing artificial rupture of membranes with a high or ill-applied presenting part, precipitating prolapse",
-   "Attempting to replace or excessively handle the cord, which aggravates vasospasm",
-   "Failing to maintain continuous elevation of the presenting part until delivery",
-   "Delaying delivery to complete investigations or transfer without maintaining decompression measures",
-   "Overlooking a cord presentation on examination in a woman with risk factors before the membranes rupture"
-  ],
-  "references": [
-   "RCOG Green-top Guideline on umbilical cord prolapse",
-   "Williams Obstetrics",
-   "Oxford Handbook of Obstetrics and Gynaecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate relief of cord compression by manually elevating the presenting part or filling the bladder, and minimising handling of the cord to avoid vasospasm",
-   "Positioning the woman knee-chest or head-down in the left lateral position to reduce pressure on the cord",
-   "Tocolysis to abolish uterine contractions and improve foetal oxygenation while preparing for delivery",
-   "Continuous cardiotocographic foetal heart rate monitoring, with cord pulsation used as a bedside marker of viability",
-   "Urgent delivery, usually by category-one caesarean section, or assisted vaginal birth if the cervix is fully dilated and delivery is imminent",
-   "Activation of the obstetric emergency response with neonatal resuscitation team present at delivery and anaesthetic support"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "umbilical_cord_prolapse-pathway",
-   "title": "Umbilical cord prolapse: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Cord prolapse is descent of the umbilical cord below the presenting part once the membranes have ruptured (overt prolapse); a cord lying beside the presenting part is occult prolapse, and a cord below the presenting part with intact",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fetal bradycardia or deep variable decelerations following rupture of the membranes",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Immediate vaginal examination to confirm the cord below or alongside the presenting part and to assess cervical dilatation, Palpation of the cord for pulsation as a bedside marker of fetal viability, Continuous"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate relief of cord compression by manually elevating the presenting part or filling the bladder, and minimising handling of the cord to avoid vasospasm"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing artificial rupture of membranes with a high or ill-applied presenting part, precipitating prolapse"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of umbilical cord prolapse."
-  }
- ],
- "tables": [
-  {
-   "id": "umbilical_cord_prolapse-matrix",
-   "title": "Umbilical cord prolapse: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Cord prolapse is descent of the umbilical cord below the presenting part once the membranes have ruptured (overt prolapse); a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Reproductive / Obstetrics",
+  "specialty": "Obstetrics and gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "RCOG Green-top Guideline / Williams Obstetrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Cord prolapse is descent of the umbilical cord below the presenting part once the membranes have ruptured (overt prolapse); a cord lying beside the presenting part is occult prolapse, and a cord below the presenting part with intact membranes is a cord presentation",
+      "It is an acute obstetric emergency because cord compression, together with vasospasm from cooling and handling, interrupts fetal oxygenation and produces rapid fetal hypoxia and bradycardia",
+      "Risk factors reflect a poorly applied presenting part: malpresentation such as breech or transverse lie, prematurity, polyhydramnios, a high or unengaged presenting part, multiparity, multiple pregnancy, and a long cord",
+      "Iatrogenic cases follow artificial rupture of membranes with a high presenting part, amnioinfusion, external cephalic version, or other intrauterine manipulation",
+      "Diagnosis is by seeing or palpating the cord in the vagina or at the introitus, or by an abrupt fetal heart rate abnormality such as variable decelerations or bradycardia soon after membrane rupture",
+      "Immediate measures relieve cord compression: elevate the presenting part manually or by filling the bladder, position the woman knee-chest or head-down in the left lateral posture, minimise handling of the cord, and consider tocolysis",
+      "Definitive management is expedited delivery, most often by emergency caesarean section, unless vaginal birth is imminent and would be quicker",
+      "Outcome depends chiefly on the interval from diagnosis to delivery, so regular drills, early recognition, and rapid transfer are central to safe management"
     ],
-    [
-     "Key Investigations",
-     "Immediate vaginal examination to confirm the cord below or alongside the presenting part and to assess cervical dilatation,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The umbilical cord supplies the fetus with oxygenated blood, and vessel patency depends on the cord not being compressed. A presenting part that does not fill the pelvic inlet, as in malpresentation, prematurity, an unengaged head, or polyhydramnios with sudden decompression at membrane rupture, leaves a space through which the cord can slip below or beside the fetus. Once the cord lies below the presenting part with ruptured membranes, descent of the fetus and uterine contractions compress the cord against the bony pelvis and occlude the umbilical vessels. In addition, exposure of the cord to the cooler vaginal environment and physical handling provoke reflex vasospasm. The combination of mechanical occlusion and vasospasm reduces or abolishes umbilical blood flow, causing fetal hypoxaemia, bradycardia, and, if unrelieved, hypoxic-ischaemic injury or death.",
+    "additionalDifferentials": [
+      "Other causes of acute fetal bradycardia such as placental abruption, uterine rupture, or maternal hypotension",
+      "Cord presentation with intact membranes rather than frank prolapse",
+      "Vasa praevia with vessel rupture",
+      "Prolonged deceleration from rapid cervical dilatation or uterine hyperstimulation",
+      "Maternal supine hypotension reducing uteroplacental flow",
+      "Prolapse of another structure mistaken for cord at examination"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of acute fetal bradycardia such as placental abruption, uterine rupture, or maternal hypotension, Cord presentation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Immediate vaginal examination to confirm the cord below or alongside the presenting part and to assess cervical dilatation",
+      "Palpation of the cord for pulsation as a bedside marker of fetal viability",
+      "Continuous cardiotocography or fetal heart rate monitoring",
+      "Bedside ultrasound to confirm presentation and fetal viability if immediately available",
+      "Maternal observations of pulse and blood pressure to exclude contributory hypotension",
+      "Urgent preoperative bloods including full blood count and group-and-save or crossmatch",
+      "Umbilical cord arterial blood gas at delivery to document the degree of acidaemia"
     ],
-    [
-     "Management Strategy",
-     "Immediate relief of cord compression by manually elevating the presenting part or filling the bladder, and minimising handling of",
-     "Core treatment modality"
+    "redFlags": [
+      "Fetal bradycardia or deep variable decelerations following rupture of the membranes",
+      "Visible or palpable cord at or beyond the introitus",
+      "Loss of cord pulsation",
+      "A prolonged diagnosis-to-delivery interval",
+      "Cord prolapse occurring remote from theatre or skilled help"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing artificial rupture of membranes with a high or ill-applied presenting part, precipitating prolapse",
-     "Prevent diagnostic or management error"
+    "prognosis": "When recognised promptly and followed by rapid delivery, most babies do well. Delay in relieving cord compression is associated with hypoxic-ischaemic injury and perinatal death, and outcomes are worse when prolapse occurs outside hospital.",
+    "pitfalls": [
+      "Performing artificial rupture of membranes with a high or ill-applied presenting part, precipitating prolapse",
+      "Attempting to replace or excessively handle the cord, which aggravates vasospasm",
+      "Failing to maintain continuous elevation of the presenting part until delivery",
+      "Delaying delivery to complete investigations or transfer without maintaining decompression measures",
+      "Overlooking a cord presentation on examination in a woman with risk factors before the membranes rupture"
+    ],
+    "references": [
+      "RCOG Green-top Guideline on umbilical cord prolapse",
+      "Williams Obstetrics",
+      "Oxford Handbook of Obstetrics and Gynaecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate relief of cord compression by manually elevating the presenting part or filling the bladder, and minimising handling of the cord to avoid vasospasm",
+      "Positioning the woman knee-chest or head-down in the left lateral position to reduce pressure on the cord",
+      "Tocolysis to abolish uterine contractions and improve foetal oxygenation while preparing for delivery",
+      "Continuous cardiotocographic foetal heart rate monitoring, with cord pulsation used as a bedside marker of viability",
+      "Urgent delivery, usually by category-one caesarean section, or assisted vaginal birth if the cervix is fully dilated and delivery is imminent",
+      "Activation of the obstetric emergency response with neonatal resuscitation team present at delivery and anaesthetic support"
     ]
-   ],
-   "caption": "Overview comparison matrix for umbilical cord prolapse."
-  }
- ],
- "diagrams": [
-  {
-   "id": "umbilical-cord-prolapse-real-image",
-   "title": "Umbilical cord prolapse: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "umbilical_cord_prolapse-pathway",
+      "title": "Umbilical cord prolapse: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Cord prolapse is descent of the umbilical cord below the presenting part once the membranes have ruptured (overt prolapse); a cord lying beside the presenting part is occult prolapse, and a cord below the presenting part with intact",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fetal bradycardia or deep variable decelerations following rupture of the membranes",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Immediate vaginal examination to confirm the cord below or alongside the presenting part and to assess cervical dilatation, Palpation of the cord for pulsation as a bedside marker of fetal viability, Continuous"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate relief of cord compression by manually elevating the presenting part or filling the bladder, and minimising handling of the cord to avoid vasospasm"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing artificial rupture of membranes with a high or ill-applied presenting part, precipitating prolapse"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of umbilical cord prolapse."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "umbilical_cord_prolapse-matrix",
+      "title": "Umbilical cord prolapse: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cord prolapse is descent of the umbilical cord below the presenting part once the membranes have ruptured (overt prolapse); a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Immediate vaginal examination to confirm the cord below or alongside the presenting part and to assess cervical dilatation,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of acute fetal bradycardia such as placental abruption, uterine rupture, or maternal hypotension, Cord presentation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate relief of cord compression by manually elevating the presenting part or filling the bladder, and minimising handling of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing artificial rupture of membranes with a high or ill-applied presenting part, precipitating prolapse",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for umbilical cord prolapse."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "RCOG Green-top Guideline / Williams Obstetrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "umbilical_cord_prolapse-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Vaginal examination",
+          "cells": [
+            {
+              "text": "Cord below or alongside the presenting part, and cervical dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palpation of the cord",
+          "cells": [
+            {
+              "text": "Pulsation is a bedside marker of fetal viability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiotocography",
+          "cells": [
+            {
+              "text": "Abrupt fetal bradycardia or deep variable decelerations after membrane rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedside ultrasound",
+          "cells": [
+            {
+              "text": "Presentation and fetal viability, if immediately available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal pulse and blood pressure",
+          "cells": [
+            {
+              "text": "Contributory maternal hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Umbilical cord arterial blood gas at delivery",
+          "cells": [
+            {
+              "text": "Degree of acidaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "umbilical_cord_prolapse-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Placental abruption, uterine rupture or maternal hypotension",
+          "cells": [
+            {
+              "text": "Also cause acute fetal bradycardia; the cord is felt on examination in prolapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cord presentation with intact membranes",
+          "cells": [
+            {
+              "text": "Cord lies below the presenting part with membranes intact, not frank prolapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasa praevia",
+          "cells": [
+            {
+              "text": "Vessel rupture rather than cord prolapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "umbilical_cord_prolapse-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relieve cord compression",
+          "cells": [
+            {
+              "text": "Manually elevate the presenting part or fill the bladder; minimise handling to avoid vasospasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positioning",
+          "cells": [
+            {
+              "text": "Knee-chest or head-down, in the left lateral position, to reduce pressure on the cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tocolysis",
+          "cells": [
+            {
+              "text": "Abolishes uterine contractions and improves fetal oxygenation while delivery is prepared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiotocography",
+          "cells": [
+            {
+              "text": "Continuous fetal heart rate monitoring; cord pulsation as a bedside viability marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent delivery",
+          "cells": [
+            {
+              "text": "Usually category-one caesarean; assisted vaginal birth if fully dilated and delivery is imminent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency response",
+          "cells": [
+            {
+              "text": "Neonatal resuscitation team and anaesthetic support present at delivery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "umbilical_cord_prolapse-dx-mgmt",
+      "title": "Diagnosis and management of Umbilical cord prolapse",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cord prolapse: cord at introitus or fetal bradycardia after membrane rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fetal bradycardia, visible cord or loss of pulsation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Obstetric emergency: relieve cord compression and prepare for immediate delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Vaginal examination, cord pulsation, continuous CTG, maternal pulse and blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the cord confirmed below or beside the presenting part on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cord presentation, vasa praevia or placental abruption; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Elevate the presenting part or fill the bladder; minimise handling of the cord",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Knee-chest or head-down position; tocolysis to abolish contractions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Continuous CTG, using cord pulsation as a bedside viability marker",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent delivery, usually by category-one caesarean; assisted birth if fully dilated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most babies do well if relief and delivery are prompt; delay risks hypoxic injury",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

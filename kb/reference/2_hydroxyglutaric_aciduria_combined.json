@@ -1,176 +1,550 @@
 {
- "id": "2_hydroxyglutaric_aciduria_combined",
- "name": "Combined D,L-2-hydroxyglutaric aciduria",
- "aliases": [
-  "SLC25A1 deficiency",
-  "D-2- and L-2-hydroxyglutaric aciduria",
-  "Combined 2-HGA",
-  "Mitochondrial citrate carrier deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Neurology",
- "specialty": "Metabolic medicine / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurometabolic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by biallelic loss-of-function variants in SLC25A1, the mitochondrial citrate carrier (citrate-malate antiporter) — biochemically distinct from the two single 2-hydroxyglutaric acidurias because both the D- and L-enantiomers accumulate together.",
-   "Presents as a severe neonatal-onset epileptic encephalopathy with profound hypotonia, intractable seizures, respiratory insufficiency and essentially absent psychomotor development.",
-   "Structural brain malformations are common, particularly agenesis or hypoplasia of the corpus callosum and simplified gyration.",
-   "Urine organic acids show elevation of both D-2- and L-2-hydroxyglutarate; chiral (enantiomer-resolving) separation confirms the combined pattern.",
-   "An allelic congenital myasthenic syndrome (SLC25A1-related, CMS23) sits at the milder end of the SLC25A1 spectrum and should be recognised in relatives.",
-   "The citrate carrier exports mitochondrial citrate to the cytosol for fatty acid and sterol synthesis; its loss disrupts carbon shuttling and the 2-hydroxyglutarate/2-oxoglutarate balance.",
-   "Prognosis is poor with frequent early death, and management is supportive."
+  "id": "2_hydroxyglutaric_aciduria_combined",
+  "name": "Combined D,L-2-hydroxyglutaric aciduria",
+  "aliases": [
+    "SLC25A1 deficiency",
+    "D-2- and L-2-hydroxyglutaric aciduria",
+    "Combined 2-HGA",
+    "Mitochondrial citrate carrier deficiency"
   ],
-  "pathophysiology": "Combined D,L-2-hydroxyglutaric aciduria is an autosomal recessive disorder caused by biallelic loss-of-function variants in SLC25A1, which encodes the mitochondrial citrate carrier (tricarboxylate carrier), an inner-membrane transporter that exchanges cytosolic malate for mitochondrial citrate and isocitrate. Loss of transport impairs export of citrate required for cytosolic lipogenesis and sterol synthesis and perturbs the interconnected 2-hydroxyglutarate/2-oxoglutarate pool, so both D-2- and L-2-hydroxyglutarate accumulate simultaneously — the biochemical signature that separates this condition from the single-enantiomer acidurias caused by defective enantiomer-specific dehydrogenases. The resulting disturbance of neuronal energy and biosynthetic metabolism produces a severe neonatal epileptic encephalopathy, often accompanied by structural brain malformation.",
-  "additionalDifferentials": [
-   "L-2-hydroxyglutaric aciduria (L2HGDH) — childhood leukoencephalopathy, cerebellar ataxia and increased brain tumour risk",
-   "D-2-hydroxyglutaric aciduria type I (D2HGDH)",
-   "D-2-hydroxyglutaric aciduria type II (gain-of-function IDH2)",
-   "Other neonatal epileptic encephalopathies (KCNQ2, STXBP1, pyridoxine-dependent epilepsy)",
-   "Nonketotic hyperglycinaemia and other neonatal metabolic encephalopathies",
-   "Mitochondrial energy-failure encephalopathies with structural brain anomalies",
-   "Congenital myasthenic syndromes (for the milder allelic SLC25A1 phenotype)"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acids with chiral separation of D- and L-2-hydroxyglutarate",
-   "Plasma and CSF 2-hydroxyglutarate and amino acid profiles",
-   "SLC25A1 gene sequencing or metabolic gene panel",
-   "Brain MRI assessing the corpus callosum, gyral pattern and white matter",
-   "EEG to characterise the seizure and encephalopathy pattern",
-   "Blood lactate and general metabolic screen",
-   "Echocardiography and systemic examination for associated anomalies"
-  ],
-  "redFlags": [
-   "Neonatal intractable seizures with profound hypotonia and no developmental progress",
-   "Respiratory failure requiring support in the newborn period",
-   "Structural brain malformation on imaging in the setting of an organic aciduria",
-   "Rapid clinical deterioration in the neonatal period"
-  ],
-  "prognosis": "The combined form is severe: most affected neonates have profound neurological impairment and many die in infancy or early childhood, with care remaining supportive.",
-  "pitfalls": [
-   "Measuring total 2-hydroxyglutarate without chiral separation, which can miss the combined both-enantiomer signature.",
-   "Attributing the picture to a single 2-HGA subtype and halting the diagnostic workup.",
-   "Overlooking the milder allelic congenital myasthenic phenotype in a relative.",
-   "Assuming that a structural brain malformation excludes an underlying metabolic cause."
-  ],
-  "references": [
-   "Inherited metabolic disease reference texts",
-   "Neurometabolic disorders review literature",
-   "Mitochondrial transporter disease literature"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Aggressive antiseizure therapy, often combining agents, for the intractable neonatal-onset epileptic encephalopathy",
-   "Respiratory support, including ventilatory assistance, for the associated respiratory insufficiency",
-   "Nutritional support by nasogastric or gastrostomy feeding for the profound hypotonia and feeding difficulty",
-   "Supportive neurodevelopmental and comfort care with early palliative-care involvement given the severe prognosis and high early mortality",
-   "Coordinate care through neonatology, metabolic medicine, neurology and palliative-care teams",
-   "Offer genetic counselling and SLC25A1 family testing, including recognition of the allelic congenital myasthenic syndrome in relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "2_hydroxyglutaric_aciduria_combined-pathway",
-   "title": "Combined D,L-2-hydroxyglutaric aciduria: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by biallelic loss-of-function variants in SLC25A1, the mitochondrial citrate carrier (citrate-malate antiporter) - biochemically distinct from the two single 2-hydroxyglutaric acidurias because both the D- and L-enantiomers",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal intractable seizures with profound hypotonia and no developmental progress",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acids with chiral separation of D- and L-2-hydroxyglutarate, Plasma and CSF 2-hydroxyglutarate and amino acid profiles, SLC25A1 gene sequencing or metabolic gene panel"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Aggressive antiseizure therapy, often combining agents, for the intractable neonatal-onset epileptic encephalopathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Measuring total 2-hydroxyglutarate without chiral separation, which can miss the combined both-enantiomer signature."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of combined d,l-2-hydroxyglutaric aciduria."
-  }
- ],
- "tables": [
-  {
-   "id": "2_hydroxyglutaric_aciduria_combined-matrix",
-   "title": "Combined D,L-2-hydroxyglutaric aciduria: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by biallelic loss-of-function variants in SLC25A1, the mitochondrial citrate carrier (citrate-malate antiporter) -",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Neurology",
+  "specialty": "Metabolic medicine / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurometabolic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by biallelic loss-of-function variants in SLC25A1, the mitochondrial citrate carrier (citrate-malate antiporter) — biochemically distinct from the two single 2-hydroxyglutaric acidurias because both the D- and L-enantiomers accumulate together.",
+      "Presents as a severe neonatal-onset epileptic encephalopathy with profound hypotonia, intractable seizures, respiratory insufficiency and essentially absent psychomotor development.",
+      "Structural brain malformations are common, particularly agenesis or hypoplasia of the corpus callosum and simplified gyration.",
+      "Urine organic acids show elevation of both D-2- and L-2-hydroxyglutarate; chiral (enantiomer-resolving) separation confirms the combined pattern.",
+      "An allelic congenital myasthenic syndrome (SLC25A1-related, CMS23) sits at the milder end of the SLC25A1 spectrum and should be recognised in relatives.",
+      "The citrate carrier exports mitochondrial citrate to the cytosol for fatty acid and sterol synthesis; its loss disrupts carbon shuttling and the 2-hydroxyglutarate/2-oxoglutarate balance.",
+      "Prognosis is poor with frequent early death, and management is supportive."
     ],
-    [
-     "Key Investigations",
-     "Urine organic acids with chiral separation of D- and L-2-hydroxyglutarate, Plasma and CSF 2-hydroxyglutarate and amino acid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Combined D,L-2-hydroxyglutaric aciduria is an autosomal recessive disorder caused by biallelic loss-of-function variants in SLC25A1, which encodes the mitochondrial citrate carrier (tricarboxylate carrier), an inner-membrane transporter that exchanges cytosolic malate for mitochondrial citrate and isocitrate. Loss of transport impairs export of citrate required for cytosolic lipogenesis and sterol synthesis and perturbs the interconnected 2-hydroxyglutarate/2-oxoglutarate pool, so both D-2- and L-2-hydroxyglutarate accumulate simultaneously — the biochemical signature that separates this condition from the single-enantiomer acidurias caused by defective enantiomer-specific dehydrogenases. The resulting disturbance of neuronal energy and biosynthetic metabolism produces a severe neonatal epileptic encephalopathy, often accompanied by structural brain malformation.",
+    "additionalDifferentials": [
+      "L-2-hydroxyglutaric aciduria (L2HGDH) — childhood leukoencephalopathy, cerebellar ataxia and increased brain tumour risk",
+      "D-2-hydroxyglutaric aciduria type I (D2HGDH)",
+      "D-2-hydroxyglutaric aciduria type II (gain-of-function IDH2)",
+      "Other neonatal epileptic encephalopathies (KCNQ2, STXBP1, pyridoxine-dependent epilepsy)",
+      "Nonketotic hyperglycinaemia and other neonatal metabolic encephalopathies",
+      "Mitochondrial energy-failure encephalopathies with structural brain anomalies",
+      "Congenital myasthenic syndromes (for the milder allelic SLC25A1 phenotype)"
     ],
-    [
-     "Primary Differentials",
-     "L-2-hydroxyglutaric aciduria (L2HGDH) - childhood leukoencephalopathy, cerebellar ataxia and increased brain tumour risk,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acids with chiral separation of D- and L-2-hydroxyglutarate",
+      "Plasma and CSF 2-hydroxyglutarate and amino acid profiles",
+      "SLC25A1 gene sequencing or metabolic gene panel",
+      "Brain MRI assessing the corpus callosum, gyral pattern and white matter",
+      "EEG to characterise the seizure and encephalopathy pattern",
+      "Blood lactate and general metabolic screen",
+      "Echocardiography and systemic examination for associated anomalies"
     ],
-    [
-     "Management Strategy",
-     "Aggressive antiseizure therapy, often combining agents, for the intractable neonatal-onset epileptic encephalopathy",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal intractable seizures with profound hypotonia and no developmental progress",
+      "Respiratory failure requiring support in the newborn period",
+      "Structural brain malformation on imaging in the setting of an organic aciduria",
+      "Rapid clinical deterioration in the neonatal period"
     ],
-    [
-     "Clinical Pitfall",
-     "Measuring total 2-hydroxyglutarate without chiral separation, which can miss the combined both-enantiomer signature.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The combined form is severe: most affected neonates have profound neurological impairment and many die in infancy or early childhood, with care remaining supportive.",
+    "pitfalls": [
+      "Measuring total 2-hydroxyglutarate without chiral separation, which can miss the combined both-enantiomer signature.",
+      "Attributing the picture to a single 2-HGA subtype and halting the diagnostic workup.",
+      "Overlooking the milder allelic congenital myasthenic phenotype in a relative.",
+      "Assuming that a structural brain malformation excludes an underlying metabolic cause."
+    ],
+    "references": [
+      "Inherited metabolic disease reference texts",
+      "Neurometabolic disorders review literature",
+      "Mitochondrial transporter disease literature"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Aggressive antiseizure therapy, often combining agents, for the intractable neonatal-onset epileptic encephalopathy",
+      "Respiratory support, including ventilatory assistance, for the associated respiratory insufficiency",
+      "Nutritional support by nasogastric or gastrostomy feeding for the profound hypotonia and feeding difficulty",
+      "Supportive neurodevelopmental and comfort care with early palliative-care involvement given the severe prognosis and high early mortality",
+      "Coordinate care through neonatology, metabolic medicine, neurology and palliative-care teams",
+      "Offer genetic counselling and SLC25A1 family testing, including recognition of the allelic congenital myasthenic syndrome in relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for combined d,l-2-hydroxyglutaric aciduria."
-  }
- ],
- "diagrams": [
-  {
-   "id": "2-hydroxyglutaric-aciduria-combined-real-image",
-   "title": "Combined D,L-2-hydroxyglutaric aciduria: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "2_hydroxyglutaric_aciduria_combined-pathway",
+      "title": "Combined D,L-2-hydroxyglutaric aciduria: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by biallelic loss-of-function variants in SLC25A1, the mitochondrial citrate carrier (citrate-malate antiporter) - biochemically distinct from the two single 2-hydroxyglutaric acidurias because both the D- and L-enantiomers",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal intractable seizures with profound hypotonia and no developmental progress",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acids with chiral separation of D- and L-2-hydroxyglutarate, Plasma and CSF 2-hydroxyglutarate and amino acid profiles, SLC25A1 gene sequencing or metabolic gene panel"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Aggressive antiseizure therapy, often combining agents, for the intractable neonatal-onset epileptic encephalopathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Measuring total 2-hydroxyglutarate without chiral separation, which can miss the combined both-enantiomer signature."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of combined d,l-2-hydroxyglutaric aciduria."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "2_hydroxyglutaric_aciduria_combined-matrix",
+      "title": "Combined D,L-2-hydroxyglutaric aciduria: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by biallelic loss-of-function variants in SLC25A1, the mitochondrial citrate carrier (citrate-malate antiporter) -",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acids with chiral separation of D- and L-2-hydroxyglutarate, Plasma and CSF 2-hydroxyglutarate and amino acid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "L-2-hydroxyglutaric aciduria (L2HGDH) - childhood leukoencephalopathy, cerebellar ataxia and increased brain tumour risk,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Aggressive antiseizure therapy, often combining agents, for the intractable neonatal-onset epileptic encephalopathy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Measuring total 2-hydroxyglutarate without chiral separation, which can miss the combined both-enantiomer signature.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for combined d,l-2-hydroxyglutaric aciduria."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurometabolic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "2_hydroxyglutaric_aciduria_combined-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids with chiral separation",
+          "cells": [
+            {
+              "text": "Elevation of both D- and L-2-hydroxyglutarate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma and CSF 2-hydroxyglutarate and amino acid profiles",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC25A1 sequencing or metabolic gene panel",
+          "cells": [
+            {
+              "text": "Biallelic SLC25A1 variants (the cause of the disorder)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural malformation is common, particularly corpus callosum and gyral pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizure and encephalopathy pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood lactate and general metabolic screen",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and systemic examination",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "2_hydroxyglutaric_aciduria_combined-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "L-2-hydroxyglutaric aciduria (L2HGDH)",
+          "cells": [
+            {
+              "text": "Only the L enantiomer accumulates; childhood leukoencephalopathy"
+            },
+            {
+              "text": "Urine organic acids with chiral separation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-2-hydroxyglutaric aciduria type I (D2HGDH)",
+          "cells": [
+            {
+              "text": "Only the D enantiomer accumulates"
+            },
+            {
+              "text": "Molecular analysis of D2HGDH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-2-hydroxyglutaric aciduria type II (IDH2)",
+          "cells": [
+            {
+              "text": "Only the D enantiomer accumulates; gain-of-function IDH2"
+            },
+            {
+              "text": "Molecular analysis of IDH2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other neonatal epileptic encephalopathies",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonketotic hyperglycinaemia",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial energy-failure encephalopathies with structural anomalies",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myasthenic syndromes",
+          "cells": [
+            {
+              "text": "Milder allelic SLC25A1 phenotype (CMS23)"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "2_hydroxyglutaric_aciduria_combined-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure therapy",
+          "cells": [
+            {
+              "text": "Aggressive, often combining agents"
+            },
+            {
+              "text": "No drug named in source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Ventilatory assistance for respiratory insufficiency"
+            },
+            {
+              "text": "Newborn period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Nasogastric or gastrostomy feeding for hypotonia and feeding difficulty"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comfort and palliative care",
+          "cells": [
+            {
+              "text": "Neurodevelopmental and comfort care with early palliative input"
+            },
+            {
+              "text": "High early mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Neonatology, metabolic medicine, neurology and palliative care"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "SLC25A1 family testing; recognise the milder congenital myasthenic syndrome in relatives"
+            },
+            {
+              "text": "Allelic CMS23"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "2_hydroxyglutaric_aciduria_combined-dx-mgmt",
+      "title": "Diagnosis and management of Combined D,L-2-hydroxyglutaric aciduria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected combined D,L-2-hydroxyglutaric aciduria: neonatal epileptic encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intractable seizures, respiratory failure, rapid decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neonatal intensive care; ventilatory support and urgent neurology input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chiral urine organic acids, plasma and CSF profiles, SLC25A1 sequencing, MRI, EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Both D- and L-2-hydroxyglutarate raised on chiral separation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start antiseizure therapy (often combined agents)",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see look-alike table) and repeat chiral analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ventilatory support for respiratory insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nasogastric or gastrostomy feeding for hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Comfort care with early palliative-care involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Supportive care; SLC25A1 genetic counselling and family testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

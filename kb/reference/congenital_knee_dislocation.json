@@ -1,176 +1,454 @@
 {
- "id": "congenital_knee_dislocation",
- "name": "Congenital knee dislocation",
- "aliases": [
-  "congenital dislocation of the knee",
-  "congenital genu recurvatum",
-  "congenital knee hyperextension",
-  "CDK"
- ],
- "class": "non_infective",
- "system": "Paediatric orthopaedics",
- "specialty": "Paediatric Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare neonatal deformity in which the knee is hyperextended at birth, ranging along a spectrum from simple recurvatum through anterior subluxation to frank dislocation of the tibia on the femur",
-   "The severity is graded clinically and radiographically by the degree of anterior tibial displacement and by how much passive flexion can be achieved",
-   "It is strongly associated with other packaging and connective-tissue conditions, notably developmental dysplasia of the hip, clubfoot, arthrogryposis, and Larsen syndrome, so a full musculoskeletal and syndromic assessment is essential",
-   "Contracture and fibrosis of the quadriceps with a tight anterior capsule prevent flexion and maintain the deformity",
-   "Early treatment, ideally begun in the neonatal period, uses gentle serial casting or splinting to progressively flex the knee while the tissues are most compliant",
-   "The frequent coexistence of hip dysplasia means treatment must be coordinated, as knee extension casting can conflict with the flexion-abduction positioning used for the hip",
-   "Irreducible or resistant dislocations, or those in syndromic children, may require surgical quadriceps lengthening and capsular release"
+  "id": "congenital_knee_dislocation",
+  "name": "Congenital knee dislocation",
+  "aliases": [
+    "congenital dislocation of the knee",
+    "congenital genu recurvatum",
+    "congenital knee hyperextension",
+    "CDK"
   ],
-  "pathophysiology": "Congenital dislocation of the knee is characterised by fixed hyperextension due to contracture of the quadriceps mechanism and anterior knee capsule, so that the tibia is displaced or dislocated anteriorly on the femur. The quadriceps is often fibrotic and foreshortened, the cruciate ligaments may be hypoplastic or absent, and the suprapatellar pouch is obliterated, all of which resist flexion. It may occur in isolation as a packaging phenomenon from abnormal intrauterine position, particularly with breech presentation and oligohydramnios, or as part of a generalised condition such as arthrogryposis or Larsen syndrome in which multiple joints are affected by connective-tissue laxity or contracture.",
-  "additionalDifferentials": [
-   "Physiological neonatal genu recurvatum",
-   "Congenital dislocation of the patella",
-   "Arthrogryposis multiplex congenita with knee involvement",
-   "Larsen syndrome with multiple congenital dislocations",
-   "Developmental dysplasia of the hip presenting as part of the same spectrum",
-   "Neuromuscular knee deformity such as that in myelomeningocele"
-  ],
-  "additionalInvestigations": [
-   "Clinical grading of the deformity and the achievable range of passive flexion",
-   "Lateral knee radiographs to assess anterior tibial displacement and grade the dislocation",
-   "Ultrasound or radiography of the hips to exclude coexisting dysplasia",
-   "Examination for clubfoot and other associated deformities",
-   "Assessment for arthrogryposis, Larsen syndrome, or other syndromic features",
-   "Genetic evaluation where a syndrome is suspected"
-  ],
-  "redFlags": [
-   "An irreducible knee that cannot be brought into flexion with gentle manipulation",
-   "Features of arthrogryposis, Larsen syndrome, or another generalised connective-tissue disorder",
-   "Coexisting hip dislocation or clubfoot requiring coordinated management",
-   "Skin compromise or neurovascular concern from severe hyperextension",
-   "Failure to respond to early conservative treatment"
-  ],
-  "prognosis": "Isolated, reducible dislocations treated early with serial casting generally achieve a stable, functional, well-flexing knee, whereas irreducible or syndromic cases have a more guarded outlook and often require surgery and prolonged rehabilitation.",
-  "pitfalls": [
-   "Failing to begin gentle correction in the neonatal period when the tissues are most amenable",
-   "Overlooking coexisting hip dysplasia, or managing the hip and knee positioning in conflict",
-   "Missing an underlying syndrome such as arthrogryposis or Larsen syndrome",
-   "Applying forceful manipulation that risks physeal or growth-plate injury",
-   "Underestimating the need for surgery in resistant or syndromic dislocations"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Lovell and Winter's Pediatric Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin gentle serial casting or splinting in progressive flexion in the neonatal period while the tissues remain compliant",
-   "Coordinate positioning with concurrent hip dysplasia treatment, as knee-extension casting conflicts with the flexion-abduction posture used for the hip",
-   "Surgical quadriceps lengthening with V-Y quadricepsplasty and anterior capsular release for irreducible or resistant dislocations",
-   "Physiotherapy and rehabilitation to restore flexion and quadriceps function after reduction",
-   "Screen for and manage associated developmental hip dysplasia, clubfoot and other packaging deformities",
-   "Assess for arthrogryposis or Larsen syndrome with genetic evaluation where syndromic features are present",
-   "Paediatric orthopaedic follow-up to monitor knee stability and function through growth"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_knee_dislocation-pathway",
-   "title": "Congenital knee dislocation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare neonatal deformity in which the knee is hyperextended at birth, ranging along a spectrum from simple recurvatum through anterior subluxation to frank dislocation of the tibia on the femur",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An irreducible knee that cannot be brought into flexion with gentle manipulation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical grading of the deformity and the achievable range of passive flexion, Lateral knee radiographs to assess anterior tibial displacement and grade the dislocation, Ultrasound or radiography of the hips to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin gentle serial casting or splinting in progressive flexion in the neonatal period while the tissues remain compliant"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to begin gentle correction in the neonatal period when the tissues are most amenable"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital knee dislocation."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_knee_dislocation-matrix",
-   "title": "Congenital knee dislocation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare neonatal deformity in which the knee is hyperextended at birth, ranging along a spectrum from simple recurvatum through",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric orthopaedics",
+  "specialty": "Paediatric Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare neonatal deformity in which the knee is hyperextended at birth, ranging along a spectrum from simple recurvatum through anterior subluxation to frank dislocation of the tibia on the femur",
+      "The severity is graded clinically and radiographically by the degree of anterior tibial displacement and by how much passive flexion can be achieved",
+      "It is strongly associated with other packaging and connective-tissue conditions, notably developmental dysplasia of the hip, clubfoot, arthrogryposis, and Larsen syndrome, so a full musculoskeletal and syndromic assessment is essential",
+      "Contracture and fibrosis of the quadriceps with a tight anterior capsule prevent flexion and maintain the deformity",
+      "Early treatment, ideally begun in the neonatal period, uses gentle serial casting or splinting to progressively flex the knee while the tissues are most compliant",
+      "The frequent coexistence of hip dysplasia means treatment must be coordinated, as knee extension casting can conflict with the flexion-abduction positioning used for the hip",
+      "Irreducible or resistant dislocations, or those in syndromic children, may require surgical quadriceps lengthening and capsular release"
     ],
-    [
-     "Key Investigations",
-     "Clinical grading of the deformity and the achievable range of passive flexion, Lateral knee radiographs to assess anterior tibial",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital dislocation of the knee is characterised by fixed hyperextension due to contracture of the quadriceps mechanism and anterior knee capsule, so that the tibia is displaced or dislocated anteriorly on the femur. The quadriceps is often fibrotic and foreshortened, the cruciate ligaments may be hypoplastic or absent, and the suprapatellar pouch is obliterated, all of which resist flexion. It may occur in isolation as a packaging phenomenon from abnormal intrauterine position, particularly with breech presentation and oligohydramnios, or as part of a generalised condition such as arthrogryposis or Larsen syndrome in which multiple joints are affected by connective-tissue laxity or contracture.",
+    "additionalDifferentials": [
+      "Physiological neonatal genu recurvatum",
+      "Congenital dislocation of the patella",
+      "Arthrogryposis multiplex congenita with knee involvement",
+      "Larsen syndrome with multiple congenital dislocations",
+      "Developmental dysplasia of the hip presenting as part of the same spectrum",
+      "Neuromuscular knee deformity such as that in myelomeningocele"
     ],
-    [
-     "Primary Differentials",
-     "Physiological neonatal genu recurvatum, Congenital dislocation of the patella, Arthrogryposis multiplex congenita with knee",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical grading of the deformity and the achievable range of passive flexion",
+      "Lateral knee radiographs to assess anterior tibial displacement and grade the dislocation",
+      "Ultrasound or radiography of the hips to exclude coexisting dysplasia",
+      "Examination for clubfoot and other associated deformities",
+      "Assessment for arthrogryposis, Larsen syndrome, or other syndromic features",
+      "Genetic evaluation where a syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Begin gentle serial casting or splinting in progressive flexion in the neonatal period while the tissues remain compliant",
-     "Core treatment modality"
+    "redFlags": [
+      "An irreducible knee that cannot be brought into flexion with gentle manipulation",
+      "Features of arthrogryposis, Larsen syndrome, or another generalised connective-tissue disorder",
+      "Coexisting hip dislocation or clubfoot requiring coordinated management",
+      "Skin compromise or neurovascular concern from severe hyperextension",
+      "Failure to respond to early conservative treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to begin gentle correction in the neonatal period when the tissues are most amenable",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated, reducible dislocations treated early with serial casting generally achieve a stable, functional, well-flexing knee, whereas irreducible or syndromic cases have a more guarded outlook and often require surgery and prolonged rehabilitation.",
+    "pitfalls": [
+      "Failing to begin gentle correction in the neonatal period when the tissues are most amenable",
+      "Overlooking coexisting hip dysplasia, or managing the hip and knee positioning in conflict",
+      "Missing an underlying syndrome such as arthrogryposis or Larsen syndrome",
+      "Applying forceful manipulation that risks physeal or growth-plate injury",
+      "Underestimating the need for surgery in resistant or syndromic dislocations"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Lovell and Winter's Pediatric Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin gentle serial casting or splinting in progressive flexion in the neonatal period while the tissues remain compliant",
+      "Coordinate positioning with concurrent hip dysplasia treatment, as knee-extension casting conflicts with the flexion-abduction posture used for the hip",
+      "Surgical quadriceps lengthening with V-Y quadricepsplasty and anterior capsular release for irreducible or resistant dislocations",
+      "Physiotherapy and rehabilitation to restore flexion and quadriceps function after reduction",
+      "Screen for and manage associated developmental hip dysplasia, clubfoot and other packaging deformities",
+      "Assess for arthrogryposis or Larsen syndrome with genetic evaluation where syndromic features are present",
+      "Paediatric orthopaedic follow-up to monitor knee stability and function through growth"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital knee dislocation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-knee-dislocation-real-image",
-   "title": "Congenital knee dislocation: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "congenital_knee_dislocation-pathway",
+      "title": "Congenital knee dislocation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare neonatal deformity in which the knee is hyperextended at birth, ranging along a spectrum from simple recurvatum through anterior subluxation to frank dislocation of the tibia on the femur",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An irreducible knee that cannot be brought into flexion with gentle manipulation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical grading of the deformity and the achievable range of passive flexion, Lateral knee radiographs to assess anterior tibial displacement and grade the dislocation, Ultrasound or radiography of the hips to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin gentle serial casting or splinting in progressive flexion in the neonatal period while the tissues remain compliant"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to begin gentle correction in the neonatal period when the tissues are most amenable"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital knee dislocation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_knee_dislocation-matrix",
+      "title": "Congenital knee dislocation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare neonatal deformity in which the knee is hyperextended at birth, ranging along a spectrum from simple recurvatum through",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical grading of the deformity and the achievable range of passive flexion, Lateral knee radiographs to assess anterior tibial",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Physiological neonatal genu recurvatum, Congenital dislocation of the patella, Arthrogryposis multiplex congenita with knee",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin gentle serial casting or splinting in progressive flexion in the neonatal period while the tissues remain compliant",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to begin gentle correction in the neonatal period when the tissues are most amenable",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital knee dislocation."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_knee_dislocation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical grading of deformity and passive flexion range",
+          "cells": [
+            {
+              "text": "Achievable flexion graded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral knee radiographs",
+          "cells": [
+            {
+              "text": "Anterior tibial displacement and dislocation grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip ultrasound or radiography",
+          "cells": [
+            {
+              "text": "Coexisting dysplasia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for clubfoot and associated deformities",
+          "cells": [
+            {
+              "text": "Associated deformities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_knee_dislocation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiological neonatal genu recurvatum",
+          "cells": [
+            {
+              "text": "Physiological; flexion is preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital dislocation of the patella",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthrogryposis multiplex congenita with knee involvement",
+          "cells": [
+            {
+              "text": "Syndromic features; genetic evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_knee_dislocation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial casting or splinting",
+          "cells": [
+            {
+              "text": "Gentle, in progressive flexion in the neonatal period while tissues are compliant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinate with hip treatment",
+          "cells": [
+            {
+              "text": "Knee-extension casting conflicts with the flexion-abduction posture for hip dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical release",
+          "cells": [
+            {
+              "text": "V-Y quadricepsplasty and anterior capsular release for irreducible or resistant dislocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Restore flexion and quadriceps function after reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated deformities",
+          "cells": [
+            {
+              "text": "Developmental hip dysplasia, clubfoot and packaging deformities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndrome assessment",
+          "cells": [
+            {
+              "text": "Arthrogryposis or Larsen syndrome with genetic evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic follow-up",
+          "cells": [
+            {
+              "text": "Knee stability and function through growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_knee_dislocation-dx-mgmt",
+      "title": "Diagnosis and management of Congenital knee dislocation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital knee dislocation: knee held in extension at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (irreducible knee, arthrogryposis, skin or neurovascular concern)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic review for irreducible knee or neurovascular concern",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical grading; lateral knee radiographs; hip ultrasound; syndrome screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the knee dislocation reducible with gentle serial correction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider physiological recurvatum or arthrogryposis; refer for surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Gentle serial casting or splinting in the neonatal period",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Coordinate knee positioning with hip dysplasia treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "V-Y quadricepsplasty and capsular release for irreducible dislocation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy to restore flexion; orthopaedic follow-up through growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated reducible cases treated early usually achieve a functional knee",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

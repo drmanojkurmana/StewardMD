@@ -1,174 +1,481 @@
 {
- "id": "lowe_syndrome",
- "name": "Lowe syndrome",
- "aliases": [
-  "oculocerebrorenal syndrome",
-  "oculocerebrorenal syndrome of Lowe",
-  "OCRL",
-  "Lowe oculocerebrorenal syndrome"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked multisystem disorder affecting males, caused by loss-of-function variants in OCRL, which encodes a phosphatidylinositol phosphatase",
-   "Defined by a triad of eye, brain and kidney involvement: congenital cataracts, neurological impairment and a renal proximal tubulopathy",
-   "Congenital bilateral cataracts are present from birth and glaucoma may develop, so early ophthalmological assessment is essential",
-   "Neurological features include neonatal hypotonia, developmental delay, intellectual disability and, in some, behavioural problems and seizures",
-   "The kidney phenotype is a proximal (Fanconi-type) tubulopathy with low-molecular-weight proteinuria, aminoaciduria, phosphaturia, bicarbonate wasting and hypercalciuria",
-   "OCRL variants also underlie Dent disease 2, and the two conditions represent a phenotypic spectrum of the same gene",
-   "Female carriers are usually asymptomatic but may show characteristic lenticular opacities on slit-lamp examination"
+  "id": "lowe_syndrome",
+  "name": "Lowe syndrome",
+  "aliases": [
+    "oculocerebrorenal syndrome",
+    "oculocerebrorenal syndrome of Lowe",
+    "OCRL",
+    "Lowe oculocerebrorenal syndrome"
   ],
-  "pathophysiology": "Lowe syndrome is caused by loss of function of OCRL, which encodes an inositol polyphosphate 5-phosphatase that regulates phosphatidylinositol 4,5-bisphosphate at the Golgi, endosomes and primary cilium. Disrupted phosphoinositide metabolism impairs membrane trafficking, actin cytoskeletal organisation and endocytosis in multiple tissues. In the proximal tubule this compromises receptor-mediated endocytosis of filtered proteins, producing low-molecular-weight proteinuria and a generalised Fanconi-type tubulopathy; in the developing lens and brain the same trafficking defects lead to congenital cataract and neurodevelopmental impairment. The overlap with Dent disease 2 reflects a shared molecular basis with differing severity of extrarenal involvement.",
-  "additionalDifferentials": [
-   "Dent disease 2 (OCRL)",
-   "Cystinosis and other causes of renal Fanconi syndrome",
-   "Galactosaemia (cataract with metabolic disease)",
-   "Congenital infection causing cataract and neurological impairment",
-   "Other inherited proximal tubulopathies",
-   "Mitochondrial disease with multisystem involvement"
-  ],
-  "additionalInvestigations": [
-   "Ophthalmological examination for congenital cataract and glaucoma",
-   "Assessment of proximal tubular function including low-molecular-weight proteinuria, aminoaciduria, phosphate, bicarbonate and urinary calcium",
-   "Genetic testing of OCRL",
-   "Developmental and neurological evaluation, with brain imaging where indicated",
-   "Serial kidney function and growth monitoring",
-   "Slit-lamp examination of the mother to detect carrier lens opacities"
-  ],
-  "redFlags": [
-   "Untreated congenital cataract threatening visual development, or rising intraocular pressure",
-   "Failure to thrive and growth failure from tubulopathy and acidosis",
-   "Progressive decline in kidney function",
-   "Seizures or significant electrolyte and acid-base disturbance"
-  ],
-  "prognosis": "Lowe syndrome is a chronic multisystem condition; the proximal tubulopathy and, later, progressive chronic kidney disease, together with visual and neurodevelopmental impairment, determine outcome, and life expectancy is reduced though many survive into adulthood with supportive care.",
-  "pitfalls": [
-   "Delaying cataract surgery and vision support, harming neurodevelopmental outcome",
-   "Failing to recognise and treat the Fanconi-type tubulopathy and its metabolic consequences",
-   "Not appreciating the OCRL spectrum linking Lowe syndrome and Dent disease 2",
-   "Overlooking carrier detection in the mother by slit-lamp examination"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "OMIM: Lowe oculocerebrorenal syndrome (OCRL)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the proximal (Fanconi) tubulopathy with alkali such as bicarbonate or citrate for the acidosis, oral phosphate and active vitamin D (calcitriol) for the phosphaturic bone disease, and potassium replacement",
-   "Arrange early cataract surgery for the congenital bilateral cataracts and lifelong ophthalmological monitoring and treatment of glaucoma",
-   "Provide neurodevelopmental support with physiotherapy, occupational and speech therapy, and treat seizures and behavioural problems as they arise",
-   "Monitor kidney function and growth serially and manage progressive chronic kidney disease, providing renal replacement therapy as it advances",
-   "Coordinate multidisciplinary care across nephrology, ophthalmology, neurology, clinical genetics and allied therapists",
-   "Offer genetic counselling for this X-linked disorder, with carrier testing of the mother including slit-lamp examination for lens opacities and cascade family screening",
-   "Escalate for acute metabolic derangement, uncontrolled glaucoma or declining renal function"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lowe_syndrome-pathway",
-   "title": "Lowe syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked multisystem disorder affecting males, caused by loss-of-function variants in OCRL, which encodes a phosphatidylinositol phosphatase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Untreated congenital cataract threatening visual development, or rising intraocular pressure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Ophthalmological examination for congenital cataract and glaucoma, Assessment of proximal tubular function including low-molecular-weight proteinuria, aminoaciduria, phosphate, bicarbonate and urinary calcium, Genetic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the proximal (Fanconi) tubulopathy with alkali such as bicarbonate or citrate for the acidosis, oral phosphate and active vitamin D (calcitriol) for the phosphaturic bone disease, and potassium replacement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying cataract surgery and vision support, harming neurodevelopmental outcome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lowe syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "lowe_syndrome-matrix",
-   "title": "Lowe syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked multisystem disorder affecting males, caused by loss-of-function variants in OCRL, which encodes a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked multisystem disorder affecting males, caused by loss-of-function variants in OCRL, which encodes a phosphatidylinositol phosphatase",
+      "Defined by a triad of eye, brain and kidney involvement: congenital cataracts, neurological impairment and a renal proximal tubulopathy",
+      "Congenital bilateral cataracts are present from birth and glaucoma may develop, so early ophthalmological assessment is essential",
+      "Neurological features include neonatal hypotonia, developmental delay, intellectual disability and, in some, behavioural problems and seizures",
+      "The kidney phenotype is a proximal (Fanconi-type) tubulopathy with low-molecular-weight proteinuria, aminoaciduria, phosphaturia, bicarbonate wasting and hypercalciuria",
+      "OCRL variants also underlie Dent disease 2, and the two conditions represent a phenotypic spectrum of the same gene",
+      "Female carriers are usually asymptomatic but may show characteristic lenticular opacities on slit-lamp examination"
     ],
-    [
-     "Key Investigations",
-     "Ophthalmological examination for congenital cataract and glaucoma, Assessment of proximal tubular function including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lowe syndrome is caused by loss of function of OCRL, which encodes an inositol polyphosphate 5-phosphatase that regulates phosphatidylinositol 4,5-bisphosphate at the Golgi, endosomes and primary cilium. Disrupted phosphoinositide metabolism impairs membrane trafficking, actin cytoskeletal organisation and endocytosis in multiple tissues. In the proximal tubule this compromises receptor-mediated endocytosis of filtered proteins, producing low-molecular-weight proteinuria and a generalised Fanconi-type tubulopathy; in the developing lens and brain the same trafficking defects lead to congenital cataract and neurodevelopmental impairment. The overlap with Dent disease 2 reflects a shared molecular basis with differing severity of extrarenal involvement.",
+    "additionalDifferentials": [
+      "Dent disease 2 (OCRL)",
+      "Cystinosis and other causes of renal Fanconi syndrome",
+      "Galactosaemia (cataract with metabolic disease)",
+      "Congenital infection causing cataract and neurological impairment",
+      "Other inherited proximal tubulopathies",
+      "Mitochondrial disease with multisystem involvement"
     ],
-    [
-     "Primary Differentials",
-     "Dent disease 2 (OCRL), Cystinosis and other causes of renal Fanconi syndrome, Galactosaemia (cataract with metabolic disease)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Ophthalmological examination for congenital cataract and glaucoma",
+      "Assessment of proximal tubular function including low-molecular-weight proteinuria, aminoaciduria, phosphate, bicarbonate and urinary calcium",
+      "Genetic testing of OCRL",
+      "Developmental and neurological evaluation, with brain imaging where indicated",
+      "Serial kidney function and growth monitoring",
+      "Slit-lamp examination of the mother to detect carrier lens opacities"
     ],
-    [
-     "Management Strategy",
-     "Correct the proximal (Fanconi) tubulopathy with alkali such as bicarbonate or citrate for the acidosis, oral phosphate and active",
-     "Core treatment modality"
+    "redFlags": [
+      "Untreated congenital cataract threatening visual development, or rising intraocular pressure",
+      "Failure to thrive and growth failure from tubulopathy and acidosis",
+      "Progressive decline in kidney function",
+      "Seizures or significant electrolyte and acid-base disturbance"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying cataract surgery and vision support, harming neurodevelopmental outcome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Lowe syndrome is a chronic multisystem condition; the proximal tubulopathy and, later, progressive chronic kidney disease, together with visual and neurodevelopmental impairment, determine outcome, and life expectancy is reduced though many survive into adulthood with supportive care.",
+    "pitfalls": [
+      "Delaying cataract surgery and vision support, harming neurodevelopmental outcome",
+      "Failing to recognise and treat the Fanconi-type tubulopathy and its metabolic consequences",
+      "Not appreciating the OCRL spectrum linking Lowe syndrome and Dent disease 2",
+      "Overlooking carrier detection in the mother by slit-lamp examination"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "OMIM: Lowe oculocerebrorenal syndrome (OCRL)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the proximal (Fanconi) tubulopathy with alkali such as bicarbonate or citrate for the acidosis, oral phosphate and active vitamin D (calcitriol) for the phosphaturic bone disease, and potassium replacement",
+      "Arrange early cataract surgery for the congenital bilateral cataracts and lifelong ophthalmological monitoring and treatment of glaucoma",
+      "Provide neurodevelopmental support with physiotherapy, occupational and speech therapy, and treat seizures and behavioural problems as they arise",
+      "Monitor kidney function and growth serially and manage progressive chronic kidney disease, providing renal replacement therapy as it advances",
+      "Coordinate multidisciplinary care across nephrology, ophthalmology, neurology, clinical genetics and allied therapists",
+      "Offer genetic counselling for this X-linked disorder, with carrier testing of the mother including slit-lamp examination for lens opacities and cascade family screening",
+      "Escalate for acute metabolic derangement, uncontrolled glaucoma or declining renal function"
     ]
-   ],
-   "caption": "Overview comparison matrix for lowe syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lowe-syndrome-real-image",
-   "title": "Lowe syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "lowe_syndrome-pathway",
+      "title": "Lowe syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked multisystem disorder affecting males, caused by loss-of-function variants in OCRL, which encodes a phosphatidylinositol phosphatase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Untreated congenital cataract threatening visual development, or rising intraocular pressure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Ophthalmological examination for congenital cataract and glaucoma, Assessment of proximal tubular function including low-molecular-weight proteinuria, aminoaciduria, phosphate, bicarbonate and urinary calcium, Genetic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the proximal (Fanconi) tubulopathy with alkali such as bicarbonate or citrate for the acidosis, oral phosphate and active vitamin D (calcitriol) for the phosphaturic bone disease, and potassium replacement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying cataract surgery and vision support, harming neurodevelopmental outcome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lowe syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lowe_syndrome-matrix",
+      "title": "Lowe syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked multisystem disorder affecting males, caused by loss-of-function variants in OCRL, which encodes a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Ophthalmological examination for congenital cataract and glaucoma, Assessment of proximal tubular function including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dent disease 2 (OCRL), Cystinosis and other causes of renal Fanconi syndrome, Galactosaemia (cataract with metabolic disease)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the proximal (Fanconi) tubulopathy with alkali such as bicarbonate or citrate for the acidosis, oral phosphate and active",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying cataract surgery and vision support, harming neurodevelopmental outcome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lowe syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lowe_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Congenital cataract and glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proximal tubular function tests",
+          "cells": [
+            {
+              "text": "Low-molecular-weight proteinuria, aminoaciduria, phosphate, bicarbonate, urinary calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCRL genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological evaluation",
+          "cells": [
+            {
+              "text": "With brain imaging where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial kidney function and growth monitoring",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination of the mother",
+          "cells": [
+            {
+              "text": "Carrier lens opacities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lowe_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dent disease 2 (OCRL)",
+          "cells": [
+            {
+              "text": "Same gene; a kidney-predominant part of the spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystinosis and other Fanconi syndromes",
+          "cells": [
+            {
+              "text": "Other causes of renal Fanconi syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galactosaemia",
+          "cells": [
+            {
+              "text": "Cataract with a metabolic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital infection causing cataract and neurological impairment",
+          "cells": [
+            {
+              "text": "Infective cause of cataract and neurology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lowe_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correction of the tubulopathy",
+          "cells": [
+            {
+              "text": "Alkali (bicarbonate or citrate) for acidosis; oral phosphate and calcitriol for the phosphate and bone effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cataract surgery",
+          "cells": [
+            {
+              "text": "Early for congenital bilateral cataracts; lifelong glaucoma monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental support",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech therapy; treatment of seizures and behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney monitoring",
+          "cells": [
+            {
+              "text": "Serial kidney function and growth; renal replacement as CKD advances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Nephrology, ophthalmology, neurology, genetics and allied therapists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked; carrier testing of the mother including slit-lamp; cascade screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lowe_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Lowe syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital bilateral cataract in a boy with hypotonia and a Fanconi-type tubulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (threatened vision, glaucoma, poor growth, falling kidney function)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ophthalmology for raised pressure or threatened vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Eye examination, tubular function tests, OCRL testing, developmental and renal monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an OCRL variant confirmed with the Fanconi-type tubulopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Dent disease, cystinosis, galactosaemia or congenital infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Alkali for acidosis; phosphate and calcitriol for the tubulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early cataract surgery and lifelong glaucoma monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurodevelopmental therapy and seizure management",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial kidney and growth monitoring, with renal replacement as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Carrier testing of the mother and cascade screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic multisystem disease; visual, neurodevelopmental and kidney outcomes set prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

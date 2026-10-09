@@ -1,174 +1,472 @@
 {
- "id": "knobloch_syndrome",
- "name": "Knobloch syndrome",
- "aliases": [
-  "KNO",
-  "COL18A1",
-  "vitreoretinal degeneration with occipital encephalocele"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive vitreoretinal degeneration caused by COL18A1 mutations affecting collagen XVIII and its endostatin fragment",
-   "Classic triad is high (often extreme) myopia, vitreoretinal degeneration with a high risk of retinal detachment, and an occipital skull defect such as an encephalocele or meningocele",
-   "Macular abnormalities and chorioretinal atrophy are common and can markedly reduce central vision",
-   "The occipital defect may be subtle (a scalp lesion or bony defect) and warrants neuroimaging when the ocular phenotype is recognised",
-   "Retinal detachment often occurs early and can be bilateral, so prophylactic surveillance is important",
-   "Cataract, lens subluxation and glaucoma may also occur",
-   "Management includes correction of high myopia, vigilant monitoring and surgical treatment of retinal detachment, neurosurgical assessment of the encephalocele, and genetic counselling"
+  "id": "knobloch_syndrome",
+  "name": "Knobloch syndrome",
+  "aliases": [
+    "KNO",
+    "COL18A1",
+    "vitreoretinal degeneration with occipital encephalocele"
   ],
-  "pathophysiology": "Knobloch syndrome is caused by biallelic mutations in COL18A1, which encodes collagen XVIII, a basement-membrane collagen expressed in the eye and brain and the precursor of the anti-angiogenic fragment endostatin. Loss of functional collagen XVIII disrupts the internal limiting membrane and vitreoretinal interface, producing severe vitreoretinal degeneration, high myopia and a strong predisposition to retinal detachment. The same developmental defect in neural tissue underlies the occipital skull and meningeal defects, linking the ocular and central nervous system features.",
-  "additionalDifferentials": [
-   "Stickler syndrome",
-   "Marfan syndrome and other high-myopia connective tissue disorders",
-   "Wagner syndrome and other vitreoretinopathies",
-   "Walker-Warburg syndrome and other syndromic high myopia with brain malformation",
-   "Isolated pathological (degenerative) myopia",
-   "Familial exudative vitreoretinopathy"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus examination and wide-field imaging for vitreoretinal degeneration and detachment risk",
-   "Neuroimaging (MRI) to characterise the occipital encephalocele or skull defect",
-   "Optical coherence tomography for macular atrophy and vitreoretinal interface changes",
-   "Axial length and refraction to quantify high myopia",
-   "Electroretinography to assess retinal function",
-   "Molecular genetic testing for COL18A1 mutations"
-  ],
-  "redFlags": [
-   "Signs of retinal detachment (floaters, flashes, field loss) demanding urgent vitreoretinal care",
-   "An occipital scalp or skull lesion requiring neurosurgical evaluation",
-   "Rapidly progressive myopia or macular change in early childhood",
-   "Affected siblings needing screening given recessive inheritance"
-  ],
-  "prognosis": "Visual prognosis is often guarded because of high myopia, macular degeneration and recurrent retinal detachment; systemic prognosis depends on the severity of the occipital defect and any associated neurological features.",
-  "pitfalls": [
-   "Missing the occipital encephalocele when it presents only as a subtle scalp or bony abnormality",
-   "Attributing the ocular picture to isolated pathological myopia and underestimating detachment risk",
-   "Failing to arrange neuroimaging once the syndrome is suspected",
-   "Not counselling parents about recessive recurrence risk"
-  ],
-  "references": [
-   "Ryan's Retina",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong ophthalmological surveillance with dilated and wide-field examination for vitreoretinal degeneration and retinal detachment, as there is no disease-specific therapy",
-   "Prophylactic retinopexy or laser and prompt surgical repair by vitrectomy or scleral buckling for retinal detachment",
-   "Correction of high myopia with refraction and low-vision aids",
-   "Neuroimaging and neurosurgical assessment and repair of the occipital encephalocele or skull defect",
-   "Monitoring and management of associated cataract, lens subluxation and glaucoma",
-   "Visual rehabilitation and low-vision support",
-   "Genetic counselling and family screening, reflecting autosomal recessive COL18A1 inheritance",
-   "Multidisciplinary ophthalmology and neurosurgery follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "knobloch_syndrome-pathway",
-   "title": "Knobloch syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive vitreoretinal degeneration caused by COL18A1 mutations affecting collagen XVIII and its endostatin fragment",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of retinal detachment (floaters, flashes, field loss) demanding urgent vitreoretinal care",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus examination and wide-field imaging for vitreoretinal degeneration and detachment risk, Neuroimaging (MRI) to characterise the occipital encephalocele or skull defect, Optical coherence tomography for macular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong ophthalmological surveillance with dilated and wide-field examination for vitreoretinal degeneration and retinal detachment, as there is no disease-specific therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the occipital encephalocele when it presents only as a subtle scalp or bony abnormality"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of knobloch syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "knobloch_syndrome-matrix",
-   "title": "Knobloch syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive vitreoretinal degeneration caused by COL18A1 mutations affecting collagen XVIII and its endostatin fragment",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive vitreoretinal degeneration caused by COL18A1 mutations affecting collagen XVIII and its endostatin fragment",
+      "Classic triad is high (often extreme) myopia, vitreoretinal degeneration with a high risk of retinal detachment, and an occipital skull defect such as an encephalocele or meningocele",
+      "Macular abnormalities and chorioretinal atrophy are common and can markedly reduce central vision",
+      "The occipital defect may be subtle (a scalp lesion or bony defect) and warrants neuroimaging when the ocular phenotype is recognised",
+      "Retinal detachment often occurs early and can be bilateral, so prophylactic surveillance is important",
+      "Cataract, lens subluxation and glaucoma may also occur",
+      "Management includes correction of high myopia, vigilant monitoring and surgical treatment of retinal detachment, neurosurgical assessment of the encephalocele, and genetic counselling"
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus examination and wide-field imaging for vitreoretinal degeneration and detachment risk, Neuroimaging (MRI) to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Knobloch syndrome is caused by biallelic mutations in COL18A1, which encodes collagen XVIII, a basement-membrane collagen expressed in the eye and brain and the precursor of the anti-angiogenic fragment endostatin. Loss of functional collagen XVIII disrupts the internal limiting membrane and vitreoretinal interface, producing severe vitreoretinal degeneration, high myopia and a strong predisposition to retinal detachment. The same developmental defect in neural tissue underlies the occipital skull and meningeal defects, linking the ocular and central nervous system features.",
+    "additionalDifferentials": [
+      "Stickler syndrome",
+      "Marfan syndrome and other high-myopia connective tissue disorders",
+      "Wagner syndrome and other vitreoretinopathies",
+      "Walker-Warburg syndrome and other syndromic high myopia with brain malformation",
+      "Isolated pathological (degenerative) myopia",
+      "Familial exudative vitreoretinopathy"
     ],
-    [
-     "Primary Differentials",
-     "Stickler syndrome, Marfan syndrome and other high-myopia connective tissue disorders, Wagner syndrome and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus examination and wide-field imaging for vitreoretinal degeneration and detachment risk",
+      "Neuroimaging (MRI) to characterise the occipital encephalocele or skull defect",
+      "Optical coherence tomography for macular atrophy and vitreoretinal interface changes",
+      "Axial length and refraction to quantify high myopia",
+      "Electroretinography to assess retinal function",
+      "Molecular genetic testing for COL18A1 mutations"
     ],
-    [
-     "Management Strategy",
-     "Lifelong ophthalmological surveillance with dilated and wide-field examination for vitreoretinal degeneration and retinal",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of retinal detachment (floaters, flashes, field loss) demanding urgent vitreoretinal care",
+      "An occipital scalp or skull lesion requiring neurosurgical evaluation",
+      "Rapidly progressive myopia or macular change in early childhood",
+      "Affected siblings needing screening given recessive inheritance"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the occipital encephalocele when it presents only as a subtle scalp or bony abnormality",
-     "Prevent diagnostic or management error"
+    "prognosis": "Visual prognosis is often guarded because of high myopia, macular degeneration and recurrent retinal detachment; systemic prognosis depends on the severity of the occipital defect and any associated neurological features.",
+    "pitfalls": [
+      "Missing the occipital encephalocele when it presents only as a subtle scalp or bony abnormality",
+      "Attributing the ocular picture to isolated pathological myopia and underestimating detachment risk",
+      "Failing to arrange neuroimaging once the syndrome is suspected",
+      "Not counselling parents about recessive recurrence risk"
+    ],
+    "references": [
+      "Ryan's Retina",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong ophthalmological surveillance with dilated and wide-field examination for vitreoretinal degeneration and retinal detachment, as there is no disease-specific therapy",
+      "Prophylactic retinopexy or laser and prompt surgical repair by vitrectomy or scleral buckling for retinal detachment",
+      "Correction of high myopia with refraction and low-vision aids",
+      "Neuroimaging and neurosurgical assessment and repair of the occipital encephalocele or skull defect",
+      "Monitoring and management of associated cataract, lens subluxation and glaucoma",
+      "Visual rehabilitation and low-vision support",
+      "Genetic counselling and family screening, reflecting autosomal recessive COL18A1 inheritance",
+      "Multidisciplinary ophthalmology and neurosurgery follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for knobloch syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "knobloch-syndrome-real-image",
-   "title": "Knobloch syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "knobloch_syndrome-pathway",
+      "title": "Knobloch syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive vitreoretinal degeneration caused by COL18A1 mutations affecting collagen XVIII and its endostatin fragment",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of retinal detachment (floaters, flashes, field loss) demanding urgent vitreoretinal care",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus examination and wide-field imaging for vitreoretinal degeneration and detachment risk, Neuroimaging (MRI) to characterise the occipital encephalocele or skull defect, Optical coherence tomography for macular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong ophthalmological surveillance with dilated and wide-field examination for vitreoretinal degeneration and retinal detachment, as there is no disease-specific therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the occipital encephalocele when it presents only as a subtle scalp or bony abnormality"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of knobloch syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "knobloch_syndrome-matrix",
+      "title": "Knobloch syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive vitreoretinal degeneration caused by COL18A1 mutations affecting collagen XVIII and its endostatin fragment",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus examination and wide-field imaging for vitreoretinal degeneration and detachment risk, Neuroimaging (MRI) to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Stickler syndrome, Marfan syndrome and other high-myopia connective tissue disorders, Wagner syndrome and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong ophthalmological surveillance with dilated and wide-field examination for vitreoretinal degeneration and retinal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the occipital encephalocele when it presents only as a subtle scalp or bony abnormality",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for knobloch syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "knobloch_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination and wide-field imaging",
+          "cells": [
+            {
+              "text": "Vitreoretinal degeneration and detachment risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the head",
+          "cells": [
+            {
+              "text": "Occipital encephalocele or skull defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular atrophy and vitreoretinal interface changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axial length and refraction",
+          "cells": [
+            {
+              "text": "Quantifies high myopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Retinal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COL18A1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Identifies COL18A1 mutations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "knobloch_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Walker-Warburg syndrome",
+          "cells": [
+            {
+              "text": "Syndromic high myopia with brain malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated pathological (degenerative) myopia",
+          "cells": [
+            {
+              "text": "Occipital defect and vitreoretinal degeneration distinguish Knobloch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stickler syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "knobloch_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong ophthalmological surveillance",
+          "cells": [
+            {
+              "text": "Dilated and wide-field examination for degeneration and detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinopexy or surgical repair",
+          "cells": [
+            {
+              "text": "Prophylactic retinopexy or laser; vitrectomy or scleral buckling for detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myopia correction",
+          "cells": [
+            {
+              "text": "Refraction and low-vision aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical assessment",
+          "cells": [
+            {
+              "text": "Neuroimaging and repair of the occipital encephalocele or skull defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated eye conditions",
+          "cells": [
+            {
+              "text": "Monitoring and management of cataract, lens subluxation and glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive COL18A1 inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "knobloch_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Knobloch syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Knobloch syndrome: high myopia, vitreoretinal degeneration, occipital defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (retinal symptoms, occipital lesion, rapid myopia progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent vitreoretinal care for retinal detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus exam, MRI for occipital defect, OCT, COL18A1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does COL18A1 testing show biallelic mutations?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Stickler, Walker-Warburg and isolated degenerative myopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong ophthalmological surveillance for degeneration and detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prophylactic retinopexy and surgical repair of detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correction of high myopia and low-vision support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neuroimaging and neurosurgical assessment of the occipital defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor cataract, lens subluxation and glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Visual prognosis guarded given myopia, macular change and recurrent detachment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

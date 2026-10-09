@@ -1,178 +1,510 @@
 {
- "id": "hallux_rigidus",
- "name": "Hallux rigidus",
- "aliases": [
-  "first MTP osteoarthritis",
-  "hallux limitus",
-  "stiff great toe",
-  "dorsal bunion"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Foot & Ankle",
- "specialty": "Orthopaedics / Podiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Mann's Surgery of the Foot and Ankle",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hallux rigidus is osteoarthritis of the first metatarsophalangeal joint, characterised by pain and progressive loss of dorsiflexion of the great toe",
-   "A dorsal osteophyte on the metatarsal head produces a palpable dorsal bump and causes dorsal impingement pain at the extremes of extension",
-   "Pain is typically worst at toe-off during walking and when wearing heeled or stiff-toed shoes that force dorsiflexion",
-   "In earlier disease (hallux limitus) motion is limited but the joint is relatively preserved, whereas advanced disease shows global cartilage loss and marked stiffness",
-   "Grind and dorsal impingement tests reproduce pain, and the range of dorsiflexion should be compared with the unaffected side",
-   "Weight-bearing radiographs demonstrate joint-space narrowing, subchondral sclerosis, dorsal osteophytes, and periarticular cysts",
-   "Conservative management uses a stiff-soled or rocker-bottom shoe, a rigid insole to limit painful motion, activity modification, and intra-articular corticosteroid injection",
-   "Surgical choices depend on disease stage and include dorsal cheilectomy for early impingement and arthrodesis for advanced arthritis, with arthroplasty in selected patients"
+  "id": "hallux_rigidus",
+  "name": "Hallux rigidus",
+  "aliases": [
+    "first MTP osteoarthritis",
+    "hallux limitus",
+    "stiff great toe",
+    "dorsal bunion"
   ],
-  "pathophysiology": "Hallux rigidus is degenerative arthritis of the first metatarsophalangeal joint in which cartilage wear begins dorsally on the metatarsal head, where compressive and shear loads concentrate during dorsiflexion at push-off. Reactive bone forms a dorsal osteophyte on the metatarsal head and often the proximal phalanx, which mechanically blocks dorsiflexion and impinges painfully at the extremes of extension. Over time the wear becomes global with joint-space narrowing, subchondral sclerosis and cyst formation, and the toe becomes progressively stiff. Contributing factors include previous trauma or osteochondral injury, an elevated or long first metatarsal, inflammatory or crystal arthropathy, and possibly a familial predisposition. As dorsiflexion is lost the patient rolls onto the outer border of the foot at toe-off, which can produce lateral forefoot overload and secondary symptoms.",
-  "additionalDifferentials": [
-   "Hallux valgus with a painful medial eminence",
-   "Gout or pseudogout of the first metatarsophalangeal joint",
-   "Sesamoiditis or sesamoid osteoarthritis",
-   "Turf toe or other capsuloligamentous injury of the first metatarsophalangeal joint",
-   "Inflammatory arthritis such as rheumatoid or psoriatic disease",
-   "Septic arthritis of the first metatarsophalangeal joint",
-   "Osteochondral lesion of the metatarsal head"
-  ],
-  "additionalInvestigations": [
-   "Weight-bearing dorsoplantar and lateral foot radiographs to grade joint-space narrowing and dorsal osteophytes",
-   "Clinical measurement of dorsiflexion and plantarflexion compared with the contralateral toe",
-   "Dorsal impingement and axial grind tests to localise pain to the joint",
-   "Serum urate and inflammatory markers where crystal or inflammatory disease is suspected",
-   "Joint aspiration and microscopy if acute inflammation or infection cannot be excluded clinically",
-   "MRI in selected cases to assess an osteochondral lesion or early cartilage change",
-   "Response to a diagnostic intra-articular local anaesthetic injection to confirm the pain source"
-  ],
-  "redFlags": [
-   "Acutely hot, red, swollen joint suggesting gout, pseudogout, or septic arthritis rather than degenerative disease",
-   "Systemic features or polyarticular involvement indicating inflammatory arthropathy",
-   "Rest pain, night pain, or a destructive appearance on imaging out of keeping with simple osteoarthritis",
-   "Ulceration or infection over the dorsal bump, particularly in diabetes or vascular disease"
-  ],
-  "prognosis": "Symptoms usually progress slowly with fluctuating pain and increasing stiffness. Many patients are controlled long term with footwear and insole modification and occasional injections. Cheilectomy relieves dorsal impingement well in early to moderate disease, and arthrodesis is a reliable and durable procedure for advanced arthritis that reliably relieves pain at the cost of joint motion. Progression of arthritis after motion-preserving surgery is possible.",
-  "pitfalls": [
-   "Mistaking a painful dorsal osteophyte for a hallux valgus bunion and directing treatment to the wrong deformity",
-   "Performing cheilectomy alone in advanced global arthritis, which fails because the whole joint surface is worn",
-   "Missing acute gout or infection presenting as a suddenly painful, swollen first metatarsophalangeal joint",
-   "Neglecting footwear and insole modification before considering surgery",
-   "Overlooking lateral forefoot overload that develops as the patient offloads the stiff great toe"
-  ],
-  "references": [
-   "Mann's Surgery of the Foot and Ankle",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Footwear modification with a stiff-soled or rocker-bottom shoe and a Morton's extension orthosis to limit painful first metatarsophalangeal dorsiflexion",
-   "Activity modification and NSAIDs for symptomatic relief",
-   "Intra-articular corticosteroid injection for painful flares",
-   "Cheilectomy to remove the dorsal osteophyte and relieve impingement in early to moderate disease",
-   "First metatarsophalangeal arthrodesis as a durable option for advanced global degeneration",
-   "Joint-preserving arthroplasty or implant in selected patients as an alternative to fusion",
-   "Escalate to surgical referral when footwear, orthoses and injections fail to control symptoms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hallux_rigidus-pathway",
-   "title": "Hallux rigidus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hallux rigidus is osteoarthritis of the first metatarsophalangeal joint, characterised by pain and progressive loss of dorsiflexion of the great toe",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acutely hot, red, swollen joint suggesting gout, pseudogout, or septic arthritis rather than degenerative disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Weight-bearing dorsoplantar and lateral foot radiographs to grade joint-space narrowing and dorsal osteophytes, Clinical measurement of dorsiflexion and plantarflexion compared with the contralateral toe, Dorsal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Footwear modification with a stiff-soled or rocker-bottom shoe and a Morton's extension orthosis to limit painful first metatarsophalangeal dorsiflexion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a painful dorsal osteophyte for a hallux valgus bunion and directing treatment to the wrong deformity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hallux rigidus."
-  }
- ],
- "tables": [
-  {
-   "id": "hallux_rigidus-matrix",
-   "title": "Hallux rigidus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hallux rigidus is osteoarthritis of the first metatarsophalangeal joint, characterised by pain and progressive loss of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Foot & Ankle",
+  "specialty": "Orthopaedics / Podiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mann's Surgery of the Foot and Ankle",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hallux rigidus is osteoarthritis of the first metatarsophalangeal joint, characterised by pain and progressive loss of dorsiflexion of the great toe",
+      "A dorsal osteophyte on the metatarsal head produces a palpable dorsal bump and causes dorsal impingement pain at the extremes of extension",
+      "Pain is typically worst at toe-off during walking and when wearing heeled or stiff-toed shoes that force dorsiflexion",
+      "In earlier disease (hallux limitus) motion is limited but the joint is relatively preserved, whereas advanced disease shows global cartilage loss and marked stiffness",
+      "Grind and dorsal impingement tests reproduce pain, and the range of dorsiflexion should be compared with the unaffected side",
+      "Weight-bearing radiographs demonstrate joint-space narrowing, subchondral sclerosis, dorsal osteophytes, and periarticular cysts",
+      "Conservative management uses a stiff-soled or rocker-bottom shoe, a rigid insole to limit painful motion, activity modification, and intra-articular corticosteroid injection",
+      "Surgical choices depend on disease stage and include dorsal cheilectomy for early impingement and arthrodesis for advanced arthritis, with arthroplasty in selected patients"
     ],
-    [
-     "Key Investigations",
-     "Weight-bearing dorsoplantar and lateral foot radiographs to grade joint-space narrowing and dorsal osteophytes, Clinical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hallux rigidus is degenerative arthritis of the first metatarsophalangeal joint in which cartilage wear begins dorsally on the metatarsal head, where compressive and shear loads concentrate during dorsiflexion at push-off. Reactive bone forms a dorsal osteophyte on the metatarsal head and often the proximal phalanx, which mechanically blocks dorsiflexion and impinges painfully at the extremes of extension. Over time the wear becomes global with joint-space narrowing, subchondral sclerosis and cyst formation, and the toe becomes progressively stiff. Contributing factors include previous trauma or osteochondral injury, an elevated or long first metatarsal, inflammatory or crystal arthropathy, and possibly a familial predisposition. As dorsiflexion is lost the patient rolls onto the outer border of the foot at toe-off, which can produce lateral forefoot overload and secondary symptoms.",
+    "additionalDifferentials": [
+      "Hallux valgus with a painful medial eminence",
+      "Gout or pseudogout of the first metatarsophalangeal joint",
+      "Sesamoiditis or sesamoid osteoarthritis",
+      "Turf toe or other capsuloligamentous injury of the first metatarsophalangeal joint",
+      "Inflammatory arthritis such as rheumatoid or psoriatic disease",
+      "Septic arthritis of the first metatarsophalangeal joint",
+      "Osteochondral lesion of the metatarsal head"
     ],
-    [
-     "Primary Differentials",
-     "Hallux valgus with a painful medial eminence, Gout or pseudogout of the first metatarsophalangeal joint, Sesamoiditis or sesamoid",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Weight-bearing dorsoplantar and lateral foot radiographs to grade joint-space narrowing and dorsal osteophytes",
+      "Clinical measurement of dorsiflexion and plantarflexion compared with the contralateral toe",
+      "Dorsal impingement and axial grind tests to localise pain to the joint",
+      "Serum urate and inflammatory markers where crystal or inflammatory disease is suspected",
+      "Joint aspiration and microscopy if acute inflammation or infection cannot be excluded clinically",
+      "MRI in selected cases to assess an osteochondral lesion or early cartilage change",
+      "Response to a diagnostic intra-articular local anaesthetic injection to confirm the pain source"
     ],
-    [
-     "Management Strategy",
-     "Footwear modification with a stiff-soled or rocker-bottom shoe and a Morton's extension orthosis to limit painful first",
-     "Core treatment modality"
+    "redFlags": [
+      "Acutely hot, red, swollen joint suggesting gout, pseudogout, or septic arthritis rather than degenerative disease",
+      "Systemic features or polyarticular involvement indicating inflammatory arthropathy",
+      "Rest pain, night pain, or a destructive appearance on imaging out of keeping with simple osteoarthritis",
+      "Ulceration or infection over the dorsal bump, particularly in diabetes or vascular disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a painful dorsal osteophyte for a hallux valgus bunion and directing treatment to the wrong deformity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms usually progress slowly with fluctuating pain and increasing stiffness. Many patients are controlled long term with footwear and insole modification and occasional injections. Cheilectomy relieves dorsal impingement well in early to moderate disease, and arthrodesis is a reliable and durable procedure for advanced arthritis that reliably relieves pain at the cost of joint motion. Progression of arthritis after motion-preserving surgery is possible.",
+    "pitfalls": [
+      "Mistaking a painful dorsal osteophyte for a hallux valgus bunion and directing treatment to the wrong deformity",
+      "Performing cheilectomy alone in advanced global arthritis, which fails because the whole joint surface is worn",
+      "Missing acute gout or infection presenting as a suddenly painful, swollen first metatarsophalangeal joint",
+      "Neglecting footwear and insole modification before considering surgery",
+      "Overlooking lateral forefoot overload that develops as the patient offloads the stiff great toe"
+    ],
+    "references": [
+      "Mann's Surgery of the Foot and Ankle",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Footwear modification with a stiff-soled or rocker-bottom shoe and a Morton's extension orthosis to limit painful first metatarsophalangeal dorsiflexion",
+      "Activity modification and NSAIDs for symptomatic relief",
+      "Intra-articular corticosteroid injection for painful flares",
+      "Cheilectomy to remove the dorsal osteophyte and relieve impingement in early to moderate disease",
+      "First metatarsophalangeal arthrodesis as a durable option for advanced global degeneration",
+      "Joint-preserving arthroplasty or implant in selected patients as an alternative to fusion",
+      "Escalate to surgical referral when footwear, orthoses and injections fail to control symptoms"
     ]
-   ],
-   "caption": "Overview comparison matrix for hallux rigidus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hallux-rigidus-real-image",
-   "title": "Hallux rigidus: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "hallux_rigidus-pathway",
+      "title": "Hallux rigidus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hallux rigidus is osteoarthritis of the first metatarsophalangeal joint, characterised by pain and progressive loss of dorsiflexion of the great toe",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acutely hot, red, swollen joint suggesting gout, pseudogout, or septic arthritis rather than degenerative disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Weight-bearing dorsoplantar and lateral foot radiographs to grade joint-space narrowing and dorsal osteophytes, Clinical measurement of dorsiflexion and plantarflexion compared with the contralateral toe, Dorsal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Footwear modification with a stiff-soled or rocker-bottom shoe and a Morton's extension orthosis to limit painful first metatarsophalangeal dorsiflexion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a painful dorsal osteophyte for a hallux valgus bunion and directing treatment to the wrong deformity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hallux rigidus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hallux_rigidus-matrix",
+      "title": "Hallux rigidus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hallux rigidus is osteoarthritis of the first metatarsophalangeal joint, characterised by pain and progressive loss of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Weight-bearing dorsoplantar and lateral foot radiographs to grade joint-space narrowing and dorsal osteophytes, Clinical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hallux valgus with a painful medial eminence, Gout or pseudogout of the first metatarsophalangeal joint, Sesamoiditis or sesamoid",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Footwear modification with a stiff-soled or rocker-bottom shoe and a Morton's extension orthosis to limit painful first",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a painful dorsal osteophyte for a hallux valgus bunion and directing treatment to the wrong deformity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hallux rigidus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hallux_rigidus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight-bearing dorsoplantar and lateral radiographs",
+          "cells": [
+            {
+              "text": "Joint-space narrowing, dorsal osteophytes, subchondral sclerosis and periarticular cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dorsiflexion and plantarflexion compared with the other toe",
+          "cells": [
+            {
+              "text": "Range of motion; limited in hallux limitus with a relatively preserved joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dorsal impingement and axial grind tests",
+          "cells": [
+            {
+              "text": "Reproduce pain and localise it to the joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate and inflammatory markers",
+          "cells": [
+            {
+              "text": "Relevant when crystal or inflammatory disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint aspiration and microscopy",
+          "cells": [
+            {
+              "text": "Used if acute inflammation or infection cannot be excluded clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Osteochondral lesion or early cartilage change, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular local anaesthetic injection",
+          "cells": [
+            {
+              "text": "Confirms the pain source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hallux_rigidus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hallux valgus with a painful medial eminence",
+          "cells": [
+            {
+              "text": "Pain from a dorsal osteophyte rather than the medial bump is the point to separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout or pseudogout of the first metatarsophalangeal joint",
+          "cells": [
+            {
+              "text": "Acutely hot, red, swollen joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis of the first metatarsophalangeal joint",
+          "cells": [
+            {
+              "text": "Acutely hot, red, swollen joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory arthritis such as rheumatoid or psoriatic disease",
+          "cells": [
+            {
+              "text": "Systemic features or polyarticular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteochondral lesion of the metatarsal head",
+          "cells": [
+            {
+              "text": "Identified on MRI in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sesamoiditis or sesamoid osteoarthritis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hallux_rigidus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Footwear modification",
+          "cells": [
+            {
+              "text": "Stiff-soled or rocker-bottom shoe, with a Morton's extension orthosis to limit painful motion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification and NSAIDs",
+          "cells": [
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular corticosteroid injection",
+          "cells": [
+            {
+              "text": "Painful flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cheilectomy",
+          "cells": [
+            {
+              "text": "Removes the dorsal osteophyte to relieve impingement in early to moderate disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First metatarsophalangeal arthrodesis",
+          "cells": [
+            {
+              "text": "Durable option for advanced global degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint-preserving arthroplasty or implant",
+          "cells": [
+            {
+              "text": "Selected patients, as an alternative to fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "When footwear, orthoses and injections fail to control symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hallux_rigidus-dx-mgmt",
+      "title": "Diagnosis and management of Hallux rigidus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pain and stiffness at the first metatarsophalangeal joint with a dorsal bump",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hot swollen joint, systemic or polyarticular, destructive imaging)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude gout, pseudogout or septic arthritis before treating osteoarthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weight-bearing radiographs, range of motion, impingement and grind tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Joint-space narrowing and dorsal osteophytes on weight-bearing films?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hallux valgus, gout, sesamoiditis or inflammatory arthritis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stiff-soled or rocker-bottom shoe with a Morton's extension orthosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activity modification, NSAIDs and intra-articular steroid for flares",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cheilectomy for early to moderate disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "First metatarsophalangeal arthrodesis for advanced global degeneration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Pain controlled conservatively, or joint surgery when symptoms are refractory",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

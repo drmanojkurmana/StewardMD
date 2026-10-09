@@ -1,175 +1,453 @@
 {
- "id": "hydroxyprolinaemia",
- "name": "Hydroxyprolinaemia",
- "aliases": [
-  "Hydroxyproline oxidase deficiency",
-  "PRODH2 deficiency",
-  "4-hydroxyproline dehydrogenase deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Amino acid metabolism",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Inborn errors of metabolism references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal recessive disorder of the free hydroxyproline degradation pathway caused by deficiency of hydroxyproline oxidase (4-hydroxyproline dehydrogenase), encoded by PRODH2.",
-   "Biochemical hallmark is a marked isolated increase in plasma free hydroxyproline, with a corresponding rise in urinary free (not peptide-bound) hydroxyproline.",
-   "Considered a benign metabolic variant; the neurological and intellectual problems described in the earliest case reports are now generally attributed to ascertainment bias rather than to the enzyme defect.",
-   "Free hydroxyproline arises largely from the turnover of collagen-derived hydroxyproline; the block prevents its conversion to 4-hydroxy-glutamate semialdehyde and onward metabolism.",
-   "Crucially distinct from disorders of proline metabolism: the enzyme is specific for hydroxyproline and does not affect proline, so proline levels are normal.",
-   "Must be differentiated from raised total urinary hydroxyproline seen in high-bone-turnover states, where the hydroxyproline is peptide-bound and derived from collagen breakdown.",
-   "No dietary restriction or specific therapy is indicated; recognition mainly prevents unnecessary further investigation.",
-   "Diagnosis rests on demonstrating the selective free-hydroxyproline elevation with normal proline, ideally supported by PRODH2 analysis."
+  "id": "hydroxyprolinaemia",
+  "name": "Hydroxyprolinaemia",
+  "aliases": [
+    "Hydroxyproline oxidase deficiency",
+    "PRODH2 deficiency",
+    "4-hydroxyproline dehydrogenase deficiency"
   ],
-  "pathophysiology": "Hydroxyprolinaemia is caused by deficient activity of hydroxyproline oxidase (also termed 4-hydroxyproline dehydrogenase), a mitochondrial flavoenzyme encoded by PRODH2 that catalyses the first step in the catabolism of free trans-4-hydroxy-L-proline, oxidising it to delta-1-pyrroline-3-hydroxy-5-carboxylate. Free hydroxyproline is generated during the physiological turnover of collagen and other hydroxyproline-containing proteins, since hydroxyproline is formed post-translationally by prolyl hydroxylation and cannot be reincorporated into protein once liberated. Loss of the oxidase blocks this degradative route, so free hydroxyproline accumulates in plasma and is excreted in urine in its free form. The enzyme is distinct from proline oxidase (PRODH1), which acts on proline; consequently the defect is specific to hydroxyproline handling and does not perturb proline catabolism or the interconnected glutamate and ornithine pathways. Because no neurotoxic intermediates accumulate, the biochemical lesion appears to be clinically silent in most reported individuals.",
-  "additionalDifferentials": [
-   "Hyperprolinaemia type 1 (proline oxidase/PRODH1 deficiency, affecting proline rather than hydroxyproline)",
-   "Hyperprolinaemia type 2 (P5C dehydrogenase/ALDH4A1 deficiency)",
-   "Prolidase deficiency (impaired recycling of proline and hydroxyproline from dipeptides)",
-   "Raised total urinary hydroxyproline from high bone turnover (Paget disease, hyperparathyroidism, growth)",
-   "Iminoglycinuria (renal transport defect affecting proline, hydroxyproline and glycine)",
-   "Coincidental elevation from collagen-related connective tissue disease or fracture healing",
-   "Other benign incidental aminoacidurias detected on screening"
-  ],
-  "additionalInvestigations": [
-   "Quantitative plasma amino acids showing isolated elevation of free hydroxyproline with normal proline",
-   "Urine amino acid analysis confirming increased free (non-peptide-bound) hydroxyproline",
-   "Fractionation of urinary hydroxyproline into free versus peptide-bound to exclude collagen-turnover causes",
-   "Markers of bone turnover and calcium metabolism to exclude high-turnover states",
-   "PRODH2 gene analysis to confirm the diagnosis",
-   "Family biochemical screening of siblings given autosomal recessive inheritance"
-  ],
-  "redFlags": [
-   "Predominantly peptide-bound urinary hydroxyproline suggests a bone or collagen-turnover disorder rather than the primary enzyme defect",
-   "Concurrent elevation of proline points instead to a hyperprolinaemia subtype or prolidase deficiency",
-   "Significant neurological or developmental abnormality should prompt search for an independent cause",
-   "Skin ulceration or recurrent infection suggests prolidase deficiency rather than hydroxyprolinaemia"
-  ],
-  "prognosis": "Hydroxyprolinaemia is considered a benign biochemical trait compatible with normal health and life expectancy, and no morbidity has been reliably attributed to the isolated elevation of free hydroxyproline. Its recognition is chiefly of value in avoiding unwarranted investigation and reassuring affected families.",
-  "pitfalls": [
-   "Mistaking a benign free-hydroxyproline elevation for evidence of a serious metabolic or bone disorder",
-   "Failing to fractionate urinary hydroxyproline, thereby confusing collagen-turnover elevation with the primary defect",
-   "Confusing hydroxyprolinaemia with the clinically important hyperprolinaemias because of the similar names",
-   "Attributing incidental developmental problems to the metabolic finding without further evaluation",
-   "Overlooking prolidase deficiency, which also raises hydroxyproline-containing dipeptides but has a distinct phenotype"
-  ],
-  "references": [
-   "Standard inborn errors of metabolism textbooks",
-   "Clinical biochemical genetics reference guidelines",
-   "Amino acid disorders diagnostic reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy is required, as hydroxyprolinaemia is a benign biochemical trait compatible with normal health",
-   "Reassurance of affected individuals and families, avoiding unnecessary investigation or treatment prompted by the incidental biochemical finding",
-   "Confirmation of the diagnosis by demonstrating isolated elevation of free hydroxyproline with normal proline and, where available, PRODH2 gene analysis",
-   "Differentiation from high-bone-turnover states, in which raised urinary hydroxyproline is peptide-bound and collagen-derived",
-   "Genetic counselling for autosomal recessive inheritance with biochemical screening of siblings"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hydroxyprolinaemia-pathway",
-   "title": "Hydroxyprolinaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal recessive disorder of the free hydroxyproline degradation pathway caused by deficiency of hydroxyproline oxidase (4-hydroxyproline dehydrogenase), encoded by PRODH2.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Predominantly peptide-bound urinary hydroxyproline suggests a bone or collagen-turnover disorder rather than the primary enzyme defect",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Quantitative plasma amino acids showing isolated elevation of free hydroxyproline with normal proline, Urine amino acid analysis confirming increased free (non-peptide-bound) hydroxyproline, Fractionation of urinary"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy is required, as hydroxyprolinaemia is a benign biochemical trait compatible with normal health"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a benign free-hydroxyproline elevation for evidence of a serious metabolic or bone disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hydroxyprolinaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "hydroxyprolinaemia-matrix",
-   "title": "Hydroxyprolinaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal recessive disorder of the free hydroxyproline degradation pathway caused by deficiency of hydroxyproline oxidase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Amino acid metabolism",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Inborn errors of metabolism references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal recessive disorder of the free hydroxyproline degradation pathway caused by deficiency of hydroxyproline oxidase (4-hydroxyproline dehydrogenase), encoded by PRODH2.",
+      "Biochemical hallmark is a marked isolated increase in plasma free hydroxyproline, with a corresponding rise in urinary free (not peptide-bound) hydroxyproline.",
+      "Considered a benign metabolic variant; the neurological and intellectual problems described in the earliest case reports are now generally attributed to ascertainment bias rather than to the enzyme defect.",
+      "Free hydroxyproline arises largely from the turnover of collagen-derived hydroxyproline; the block prevents its conversion to 4-hydroxy-glutamate semialdehyde and onward metabolism.",
+      "Crucially distinct from disorders of proline metabolism: the enzyme is specific for hydroxyproline and does not affect proline, so proline levels are normal.",
+      "Must be differentiated from raised total urinary hydroxyproline seen in high-bone-turnover states, where the hydroxyproline is peptide-bound and derived from collagen breakdown.",
+      "No dietary restriction or specific therapy is indicated; recognition mainly prevents unnecessary further investigation.",
+      "Diagnosis rests on demonstrating the selective free-hydroxyproline elevation with normal proline, ideally supported by PRODH2 analysis."
     ],
-    [
-     "Key Investigations",
-     "Quantitative plasma amino acids showing isolated elevation of free hydroxyproline with normal proline, Urine amino acid analysis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hydroxyprolinaemia is caused by deficient activity of hydroxyproline oxidase (also termed 4-hydroxyproline dehydrogenase), a mitochondrial flavoenzyme encoded by PRODH2 that catalyses the first step in the catabolism of free trans-4-hydroxy-L-proline, oxidising it to delta-1-pyrroline-3-hydroxy-5-carboxylate. Free hydroxyproline is generated during the physiological turnover of collagen and other hydroxyproline-containing proteins, since hydroxyproline is formed post-translationally by prolyl hydroxylation and cannot be reincorporated into protein once liberated. Loss of the oxidase blocks this degradative route, so free hydroxyproline accumulates in plasma and is excreted in urine in its free form. The enzyme is distinct from proline oxidase (PRODH1), which acts on proline; consequently the defect is specific to hydroxyproline handling and does not perturb proline catabolism or the interconnected glutamate and ornithine pathways. Because no neurotoxic intermediates accumulate, the biochemical lesion appears to be clinically silent in most reported individuals.",
+    "additionalDifferentials": [
+      "Hyperprolinaemia type 1 (proline oxidase/PRODH1 deficiency, affecting proline rather than hydroxyproline)",
+      "Hyperprolinaemia type 2 (P5C dehydrogenase/ALDH4A1 deficiency)",
+      "Prolidase deficiency (impaired recycling of proline and hydroxyproline from dipeptides)",
+      "Raised total urinary hydroxyproline from high bone turnover (Paget disease, hyperparathyroidism, growth)",
+      "Iminoglycinuria (renal transport defect affecting proline, hydroxyproline and glycine)",
+      "Coincidental elevation from collagen-related connective tissue disease or fracture healing",
+      "Other benign incidental aminoacidurias detected on screening"
     ],
-    [
-     "Primary Differentials",
-     "Hyperprolinaemia type 1 (proline oxidase/PRODH1 deficiency, affecting proline rather than hydroxyproline), Hyperprolinaemia type",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Quantitative plasma amino acids showing isolated elevation of free hydroxyproline with normal proline",
+      "Urine amino acid analysis confirming increased free (non-peptide-bound) hydroxyproline",
+      "Fractionation of urinary hydroxyproline into free versus peptide-bound to exclude collagen-turnover causes",
+      "Markers of bone turnover and calcium metabolism to exclude high-turnover states",
+      "PRODH2 gene analysis to confirm the diagnosis",
+      "Family biochemical screening of siblings given autosomal recessive inheritance"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy is required, as hydroxyprolinaemia is a benign biochemical trait compatible with normal health",
-     "Core treatment modality"
+    "redFlags": [
+      "Predominantly peptide-bound urinary hydroxyproline suggests a bone or collagen-turnover disorder rather than the primary enzyme defect",
+      "Concurrent elevation of proline points instead to a hyperprolinaemia subtype or prolidase deficiency",
+      "Significant neurological or developmental abnormality should prompt search for an independent cause",
+      "Skin ulceration or recurrent infection suggests prolidase deficiency rather than hydroxyprolinaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a benign free-hydroxyproline elevation for evidence of a serious metabolic or bone disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hydroxyprolinaemia is considered a benign biochemical trait compatible with normal health and life expectancy, and no morbidity has been reliably attributed to the isolated elevation of free hydroxyproline. Its recognition is chiefly of value in avoiding unwarranted investigation and reassuring affected families.",
+    "pitfalls": [
+      "Mistaking a benign free-hydroxyproline elevation for evidence of a serious metabolic or bone disorder",
+      "Failing to fractionate urinary hydroxyproline, thereby confusing collagen-turnover elevation with the primary defect",
+      "Confusing hydroxyprolinaemia with the clinically important hyperprolinaemias because of the similar names",
+      "Attributing incidental developmental problems to the metabolic finding without further evaluation",
+      "Overlooking prolidase deficiency, which also raises hydroxyproline-containing dipeptides but has a distinct phenotype"
+    ],
+    "references": [
+      "Standard inborn errors of metabolism textbooks",
+      "Clinical biochemical genetics reference guidelines",
+      "Amino acid disorders diagnostic reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy is required, as hydroxyprolinaemia is a benign biochemical trait compatible with normal health",
+      "Reassurance of affected individuals and families, avoiding unnecessary investigation or treatment prompted by the incidental biochemical finding",
+      "Confirmation of the diagnosis by demonstrating isolated elevation of free hydroxyproline with normal proline and, where available, PRODH2 gene analysis",
+      "Differentiation from high-bone-turnover states, in which raised urinary hydroxyproline is peptide-bound and collagen-derived",
+      "Genetic counselling for autosomal recessive inheritance with biochemical screening of siblings"
     ]
-   ],
-   "caption": "Overview comparison matrix for hydroxyprolinaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hydroxyprolinaemia-real-image",
-   "title": "Hydroxyprolinaemia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hydroxyprolinaemia-pathway",
+      "title": "Hydroxyprolinaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal recessive disorder of the free hydroxyproline degradation pathway caused by deficiency of hydroxyproline oxidase (4-hydroxyproline dehydrogenase), encoded by PRODH2.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Predominantly peptide-bound urinary hydroxyproline suggests a bone or collagen-turnover disorder rather than the primary enzyme defect",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Quantitative plasma amino acids showing isolated elevation of free hydroxyproline with normal proline, Urine amino acid analysis confirming increased free (non-peptide-bound) hydroxyproline, Fractionation of urinary"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy is required, as hydroxyprolinaemia is a benign biochemical trait compatible with normal health"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a benign free-hydroxyproline elevation for evidence of a serious metabolic or bone disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hydroxyprolinaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hydroxyprolinaemia-matrix",
+      "title": "Hydroxyprolinaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal recessive disorder of the free hydroxyproline degradation pathway caused by deficiency of hydroxyproline oxidase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Quantitative plasma amino acids showing isolated elevation of free hydroxyproline with normal proline, Urine amino acid analysis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hyperprolinaemia type 1 (proline oxidase/PRODH1 deficiency, affecting proline rather than hydroxyproline), Hyperprolinaemia type",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy is required, as hydroxyprolinaemia is a benign biochemical trait compatible with normal health",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a benign free-hydroxyproline elevation for evidence of a serious metabolic or bone disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hydroxyprolinaemia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inborn errors of metabolism references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hydroxyprolinaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Quantitative plasma amino acids",
+          "cells": [
+            {
+              "text": "Isolated elevated hydroxyproline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine amino acid analysis",
+          "cells": [
+            {
+              "text": "Increased free hydroxyproline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fractionation of urinary hydroxyproline",
+          "cells": [
+            {
+              "text": "Free versus peptide-bound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone turnover and calcium markers",
+          "cells": [
+            {
+              "text": "High bone turnover excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PRODH2 gene analysis",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical screening of siblings",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydroxyprolinaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hyperprolinaemia type 1 (PRODH1)",
+          "cells": [
+            {
+              "text": "Raised proline; separated by genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperprolinaemia type 2 (ALDH4A1)",
+          "cells": [
+            {
+              "text": "Raised proline with P5C dehydrogenase defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High bone turnover states",
+          "cells": [
+            {
+              "text": "Raised total urinary hydroxyproline from bone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hydroxyprolinaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No specific therapy",
+          "cells": [
+            {
+              "text": "Not required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Affected individuals and families"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation by isolated elevation",
+          "cells": [
+            {
+              "text": "Biochemical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Differentiation from high bone turnover",
+          "cells": [
+            {
+              "text": "Excludes secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hydroxyprolinaemia-dx-mgmt",
+      "title": "Diagnosis and management of Hydroxyprolinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised urinary hydroxyproline on amino acid analysis, without bone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised proline with neurological or developmental abnormality, or skin ulceration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: metabolic review for neurological or developmental features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma and urine amino acids; hydroxyproline fractionation; bone markers; PRODH2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is free hydroxyproline raised, with a PRODH2 variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hyperprolinaemia types 1 and 2, prolidase deficiency or high bone turnover",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "No specific therapy is required",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassurance for affected individuals and families",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Differentiation from high-bone-turnover states",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign course; sibling screening as needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,461 @@
 {
- "id": "naevus_anaemicus",
- "name": "naevus anaemicus",
- "aliases": [
-  "nevus anemicus",
-  "pharmacological naevus"
- ],
- "class": "non_infective",
- "system": "Integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital vascular anomaly rather than a true pigmentary disorder, appearing as a pale, well-demarcated macule or patch usually on the upper trunk.",
-   "The pallor is functional and reflects a localised hypersensitivity of dermal vessels to catecholamines causing persistent vasoconstriction, not a deficiency of melanin.",
-   "Diascopy (pressure with a glass slide) causes the lesion to blend indistinguishably with the surrounding blanched skin, confirming the vascular basis.",
-   "Rubbing or warming the area produces reactive erythema in the normal surrounding skin but not within the naevus, sharply outlining the lesion.",
-   "Wood's lamp examination does not accentuate the border, because there is no melanin abnormality, helping distinguish it from hypomelanotic lesions.",
-   "Injection of an alpha-adrenergic blocker or heating abolishes the pallor, underscoring the pharmacological (catecholamine-mediated) mechanism.",
-   "It is associated with neurofibromatosis type 1 and may be an early cutaneous marker, and can also co-occur with tuberous sclerosis and phacomatosis pigmentovascularis.",
-   "The lesion is stable throughout life and of cosmetic significance only."
+  "id": "naevus_anaemicus",
+  "name": "naevus anaemicus",
+  "aliases": [
+    "nevus anemicus",
+    "pharmacological naevus"
   ],
-  "pathophysiology": "Naevus anaemicus is a congenital functional vascular defect in which the cutaneous blood vessels within a circumscribed area exhibit exaggerated sensitivity to circulating and locally released catecholamines. This heightened alpha-adrenergic responsiveness maintains the affected vessels in a state of near-permanent vasoconstriction, reducing local blood flow and producing the characteristic pallor against normally perfused surrounding skin. The vessels are structurally normal, and there is no abnormality of melanocytes, melanin, or vessel number; the phenomenon is therefore pharmacological rather than anatomical or pigmentary. Evidence for this mechanism includes the abolition of pallor by intradermal alpha-adrenergic blockade, by warming, and by physical trauma that would normally provoke a vasodilatory flare, and its persistence despite normal vascular architecture. Because there is no melanin defect, the lesion neither fluoresces abnormally under Wood's lamp nor blanches distinctly on diascopy.",
-  "additionalDifferentials": [
-   "Naevus depigmentosus",
-   "Vitiligo",
-   "Ash-leaf macule of tuberous sclerosis",
-   "Pityriasis alba",
-   "Post-inflammatory hypopigmentation",
-   "Hypopigmented segmental lesions of mosaicism"
-  ],
-  "additionalInvestigations": [
-   "Diascopy demonstrating disappearance of the lesion margin under glass pressure",
-   "Rubbing or warming test showing surrounding erythema that spares the lesion",
-   "Wood's lamp examination confirming absence of pigmentary accentuation",
-   "Examination for café-au-lait macules, neurofibromas, and other features of neurofibromatosis type 1",
-   "Dermoscopy showing reduced or absent background vascular erythema",
-   "Skin biopsy (rarely required) confirming normal melanocytes and vasculature"
-  ],
-  "redFlags": [
-   "Multiple café-au-lait macules or neurofibromas suggesting associated neurofibromatosis type 1",
-   "Coexisting vascular and pigmentary naevi indicating phacomatosis pigmentovascularis",
-   "Features of tuberous sclerosis accompanying the lesion",
-   "Any progressive change, which would be atypical for this stable congenital anomaly"
-  ],
-  "prognosis": "Naevus anaemicus is entirely benign and permanent, remaining stable throughout life with no risk of malignant transformation. Its main clinical value is as a potential early cutaneous marker prompting evaluation for neurofibromatosis type 1.",
-  "pitfalls": [
-   "Misinterpreting the pallor as a hypomelanotic or depigmenting disorder and pursuing unnecessary pigmentary work-up",
-   "Omitting diascopy and the rub test, which are the simplest confirmatory bedside manoeuvres",
-   "Expecting Wood's lamp accentuation and doubting the diagnosis when none occurs",
-   "Failing to examine for neurofibromatosis type 1 when a naevus anaemicus is identified",
-   "Attempting active treatment of an inherently stable, benign vascular anomaly"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Fitzpatrick's Dermatology in General Medicine, current edition",
-   "Bolognia Dermatology, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that the lesion is a benign, stable functional vascular anomaly requiring no active treatment",
-   "Confirm the diagnosis clinically with diascopy and the rubbing or warming test rather than resorting to biopsy",
-   "Evaluate for neurofibromatosis type 1, since naevus anaemicus can be an early cutaneous marker, examining for cafe-au-lait macules, neurofibromas and other stigmata",
-   "Arrange neurocutaneous and genetic assessment with family-history review where features of neurofibromatosis type 1 coexist",
-   "Offer cosmetic camouflage for troublesome lesions, as no medical treatment alters the pallor",
-   "Provide follow-up focused on the associated neurofibromatosis risk rather than the naevus itself"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "naevus_anaemicus-pathway",
-   "title": "naevus anaemicus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital vascular anomaly rather than a true pigmentary disorder, appearing as a pale, well-demarcated macule or patch usually on the upper trunk.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Multiple café-au-lait macules or neurofibromas suggesting associated neurofibromatosis type 1",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diascopy demonstrating disappearance of the lesion margin under glass pressure, Rubbing or warming test showing surrounding erythema that spares the lesion, Wood's lamp examination confirming absence of pigmentary"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that the lesion is a benign, stable functional vascular anomaly requiring no active treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the pallor as a hypomelanotic or depigmenting disorder and pursuing unnecessary pigmentary work-up"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of naevus anaemicus."
-  }
- ],
- "tables": [
-  {
-   "id": "naevus_anaemicus-matrix",
-   "title": "naevus anaemicus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital vascular anomaly rather than a true pigmentary disorder, appearing as a pale, well-demarcated macule or patch",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital vascular anomaly rather than a true pigmentary disorder, appearing as a pale, well-demarcated macule or patch usually on the upper trunk.",
+      "The pallor is functional and reflects a localised hypersensitivity of dermal vessels to catecholamines causing persistent vasoconstriction, not a deficiency of melanin.",
+      "Diascopy (pressure with a glass slide) causes the lesion to blend indistinguishably with the surrounding blanched skin, confirming the vascular basis.",
+      "Rubbing or warming the area produces reactive erythema in the normal surrounding skin but not within the naevus, sharply outlining the lesion.",
+      "Wood's lamp examination does not accentuate the border, because there is no melanin abnormality, helping distinguish it from hypomelanotic lesions.",
+      "Injection of an alpha-adrenergic blocker or heating abolishes the pallor, underscoring the pharmacological (catecholamine-mediated) mechanism.",
+      "It is associated with neurofibromatosis type 1 and may be an early cutaneous marker, and can also co-occur with tuberous sclerosis and phacomatosis pigmentovascularis.",
+      "The lesion is stable throughout life and of cosmetic significance only."
     ],
-    [
-     "Key Investigations",
-     "Diascopy demonstrating disappearance of the lesion margin under glass pressure, Rubbing or warming test showing surrounding",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Naevus anaemicus is a congenital functional vascular defect in which the cutaneous blood vessels within a circumscribed area exhibit exaggerated sensitivity to circulating and locally released catecholamines. This heightened alpha-adrenergic responsiveness maintains the affected vessels in a state of near-permanent vasoconstriction, reducing local blood flow and producing the characteristic pallor against normally perfused surrounding skin. The vessels are structurally normal, and there is no abnormality of melanocytes, melanin, or vessel number; the phenomenon is therefore pharmacological rather than anatomical or pigmentary. Evidence for this mechanism includes the abolition of pallor by intradermal alpha-adrenergic blockade, by warming, and by physical trauma that would normally provoke a vasodilatory flare, and its persistence despite normal vascular architecture. Because there is no melanin defect, the lesion neither fluoresces abnormally under Wood's lamp nor blanches distinctly on diascopy.",
+    "additionalDifferentials": [
+      "Naevus depigmentosus",
+      "Vitiligo",
+      "Ash-leaf macule of tuberous sclerosis",
+      "Pityriasis alba",
+      "Post-inflammatory hypopigmentation",
+      "Hypopigmented segmental lesions of mosaicism"
     ],
-    [
-     "Primary Differentials",
-     "Naevus depigmentosus, Vitiligo, Ash-leaf macule of tuberous sclerosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diascopy demonstrating disappearance of the lesion margin under glass pressure",
+      "Rubbing or warming test showing surrounding erythema that spares the lesion",
+      "Wood's lamp examination confirming absence of pigmentary accentuation",
+      "Examination for café-au-lait macules, neurofibromas, and other features of neurofibromatosis type 1",
+      "Dermoscopy showing reduced or absent background vascular erythema",
+      "Skin biopsy (rarely required) confirming normal melanocytes and vasculature"
     ],
-    [
-     "Management Strategy",
-     "Reassure that the lesion is a benign, stable functional vascular anomaly requiring no active treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Multiple café-au-lait macules or neurofibromas suggesting associated neurofibromatosis type 1",
+      "Coexisting vascular and pigmentary naevi indicating phacomatosis pigmentovascularis",
+      "Features of tuberous sclerosis accompanying the lesion",
+      "Any progressive change, which would be atypical for this stable congenital anomaly"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the pallor as a hypomelanotic or depigmenting disorder and pursuing unnecessary pigmentary work-up",
-     "Prevent diagnostic or management error"
+    "prognosis": "Naevus anaemicus is entirely benign and permanent, remaining stable throughout life with no risk of malignant transformation. Its main clinical value is as a potential early cutaneous marker prompting evaluation for neurofibromatosis type 1.",
+    "pitfalls": [
+      "Misinterpreting the pallor as a hypomelanotic or depigmenting disorder and pursuing unnecessary pigmentary work-up",
+      "Omitting diascopy and the rub test, which are the simplest confirmatory bedside manoeuvres",
+      "Expecting Wood's lamp accentuation and doubting the diagnosis when none occurs",
+      "Failing to examine for neurofibromatosis type 1 when a naevus anaemicus is identified",
+      "Attempting active treatment of an inherently stable, benign vascular anomaly"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Fitzpatrick's Dermatology in General Medicine, current edition",
+      "Bolognia Dermatology, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that the lesion is a benign, stable functional vascular anomaly requiring no active treatment",
+      "Confirm the diagnosis clinically with diascopy and the rubbing or warming test rather than resorting to biopsy",
+      "Evaluate for neurofibromatosis type 1, since naevus anaemicus can be an early cutaneous marker, examining for cafe-au-lait macules, neurofibromas and other stigmata",
+      "Arrange neurocutaneous and genetic assessment with family-history review where features of neurofibromatosis type 1 coexist",
+      "Offer cosmetic camouflage for troublesome lesions, as no medical treatment alters the pallor",
+      "Provide follow-up focused on the associated neurofibromatosis risk rather than the naevus itself"
     ]
-   ],
-   "caption": "Overview comparison matrix for naevus anaemicus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "naevus-anaemicus-real-image",
-   "title": "naevus anaemicus: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "naevus_anaemicus-pathway",
+      "title": "naevus anaemicus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital vascular anomaly rather than a true pigmentary disorder, appearing as a pale, well-demarcated macule or patch usually on the upper trunk.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Multiple café-au-lait macules or neurofibromas suggesting associated neurofibromatosis type 1",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diascopy demonstrating disappearance of the lesion margin under glass pressure, Rubbing or warming test showing surrounding erythema that spares the lesion, Wood's lamp examination confirming absence of pigmentary"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that the lesion is a benign, stable functional vascular anomaly requiring no active treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the pallor as a hypomelanotic or depigmenting disorder and pursuing unnecessary pigmentary work-up"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of naevus anaemicus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "naevus_anaemicus-matrix",
+      "title": "naevus anaemicus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital vascular anomaly rather than a true pigmentary disorder, appearing as a pale, well-demarcated macule or patch",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diascopy demonstrating disappearance of the lesion margin under glass pressure, Rubbing or warming test showing surrounding",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Naevus depigmentosus, Vitiligo, Ash-leaf macule of tuberous sclerosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that the lesion is a benign, stable functional vascular anomaly requiring no active treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the pallor as a hypomelanotic or depigmenting disorder and pursuing unnecessary pigmentary work-up",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for naevus anaemicus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "naevus_anaemicus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diascopy",
+          "cells": [
+            {
+              "text": "Lesion margin disappears under glass pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rubbing or warming test",
+          "cells": [
+            {
+              "text": "Surrounding erythema spares the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "No accentuation of the border"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for NF1 features",
+          "cells": [
+            {
+              "text": "Cafe-au-lait macules and neurofibromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Reduced or absent background vascular erythema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Rarely required; normal melanocytes and vasculature"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "naevus_anaemicus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Naevus depigmentosus",
+          "cells": [
+            {
+              "text": "Hypomelanotic; naevus anaemicus is a vascular pallor with normal melanin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitiligo",
+          "cells": [
+            {
+              "text": "Diascopy and the rub test show a vascular pallor rather than a melanin defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ash-leaf macule of tuberous sclerosis",
+          "cells": [
+            {
+              "text": "Tuberous sclerosis features can coexist with naevus anaemicus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "naevus_anaemicus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, stable functional vascular anomaly needing no active treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical confirmation",
+          "cells": [
+            {
+              "text": "Diascopy and rubbing or warming, rather than biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurofibromatosis type 1 evaluation",
+          "cells": [
+            {
+              "text": "Naevus anaemicus can be an early marker; examine for cafe-au-lait macules and neurofibromas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocutaneous and genetic assessment",
+          "cells": [
+            {
+              "text": "Where NF1 features coexist; review family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic camouflage",
+          "cells": [
+            {
+              "text": "Offered for troublesome lesions; no medical treatment alters the pallor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focused follow-up",
+          "cells": [
+            {
+              "text": "On the associated neurofibromatosis risk rather than the naevus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "naevus_anaemicus-dx-mgmt",
+      "title": "Diagnosis and management of naevus anaemicus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital pale, well-demarcated macule or patch, usually on the upper trunk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (multiple cafe-au-lait macules, neurofibromas, progressive change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurocutaneous assessment for neurofibromatosis type 1",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diascopy, rubbing or warming test, Wood's lamp, dermoscopy, NF1 examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Vascular pallor confirmed by diascopy and the rub test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider naevus depigmentosus, vitiligo or tuberous sclerosis; biopsy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign, stable functional vascular anomaly needing no treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm clinically with diascopy and rubbing or warming, not biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Evaluate for neurofibromatosis type 1 and related neurocutaneous features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Offer cosmetic camouflage; no medical treatment alters the pallor",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Entirely benign and permanent; its main value is as a marker for NF1",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

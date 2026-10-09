@@ -1,172 +1,587 @@
 {
- "id": "pseudohypoparathyroidism",
- "name": "Pseudohypoparathyroidism (GNAS)",
- "aliases": [
-  "PHP",
-  "Albright hereditary osteodystrophy",
-  "GNAS-related pseudohypoparathyroidism",
-  "PTH resistance"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A disorder of end-organ resistance to parathyroid hormone rather than a deficiency of the hormone itself",
-   "Biochemically characterised by hypocalcaemia and hyperphosphataemia with an elevated PTH, the opposite of hypoparathyroidism",
-   "Caused by defects in GNAS, which encodes the stimulatory G-protein alpha subunit coupling receptors to adenylate cyclase",
-   "Subtype 1A is associated with the Albright hereditary osteodystrophy phenotype, including short stature, rounded face, and shortened metacarpals",
-   "Resistance may extend to other Gs-coupled hormones, producing features such as hypothyroidism from TSH resistance",
-   "Parental origin of the mutation influences the phenotype because GNAS is subject to tissue-specific imprinting",
-   "Pseudopseudohypoparathyroidism shares the physical phenotype but has normal calcium biochemistry"
+  "id": "pseudohypoparathyroidism",
+  "name": "Pseudohypoparathyroidism (GNAS)",
+  "aliases": [
+    "PHP",
+    "Albright hereditary osteodystrophy",
+    "GNAS-related pseudohypoparathyroidism",
+    "PTH resistance"
   ],
-  "pathophysiology": "Parathyroid hormone acts through a receptor that signals via the stimulatory G-protein to generate cyclic AMP in target tissues such as kidney and bone. In pseudohypoparathyroidism, GNAS mutations impair this Gs-alpha signalling, so target organs fail to respond to PTH despite adequate or elevated hormone levels. The renal resistance reduces calcium reabsorption and phosphate excretion, producing hypocalcaemia and hyperphosphataemia, while the low calcium drives compensatory secondary rises in PTH. Because GNAS is imprinted, the parent from whom the mutation is inherited determines whether multi-hormone resistance and the osteodystrophy phenotype are expressed.",
-  "additionalDifferentials": [
-   "Primary hypoparathyroidism",
-   "Vitamin D deficiency or resistance",
-   "Chronic kidney disease with secondary hyperparathyroidism",
-   "Pseudopseudohypoparathyroidism with normal calcium",
-   "Other causes of hypocalcaemia such as hypomagnesaemia"
-  ],
-  "additionalInvestigations": [
-   "Serum calcium, phosphate and intact parathyroid hormone demonstrating PTH resistance",
-   "Serum magnesium and vitamin D metabolites to exclude other causes of hypocalcaemia",
-   "Thyroid function tests to detect associated TSH resistance",
-   "Molecular genetic and methylation analysis of the GNAS locus",
-   "Radiographs of the hands to identify shortened metacarpals and other skeletal features"
-  ],
-  "redFlags": [
-   "Symptomatic hypocalcaemia with tetany, laryngospasm or seizures requiring urgent correction",
-   "Prolonged QT interval on the electrocardiogram from severe hypocalcaemia",
-   "Features of resistance to multiple hormones indicating broad Gs-alpha involvement",
-   "Ectopic ossification or other complications requiring specialist assessment"
-  ],
-  "prognosis": "With calcium and active vitamin D therapy guided by PTH and calcium targets, biochemical control and symptom prevention are generally achievable, although the skeletal phenotype and any additional hormone resistance persist and require ongoing management.",
-  "pitfalls": [
-   "Mistaking the high-PTH, low-calcium pattern for secondary hyperparathyroidism of renal disease",
-   "Confusing pseudohypoparathyroidism with pseudopseudohypoparathyroidism, which has normal calcium",
-   "Overlooking coexisting hormone resistance such as subclinical hypothyroidism",
-   "Aiming for high-normal calcium and risking hypercalciuria and nephrocalcinosis"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Restore calcium with oral calcium supplementation and an active vitamin D analogue such as calcitriol or alfacalcidol, titrated to calcium and PTH targets",
-   "Moderate dietary phosphate to help control hyperphosphataemia while avoiding ectopic calcification",
-   "Screen for and treat additional hormone resistance, notably hypothyroidism from TSH resistance, with levothyroxine",
-   "Monitor serum calcium, phosphate, PTH and urinary calcium, and the renal tract for calcification",
-   "Manage the Albright hereditary osteodystrophy features such as short stature and obesity",
-   "Genetic counselling with attention to imprinting and parent-of-origin effects, and family evaluation",
-   "Endocrinology and clinical genetics follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pseudohypoparathyroidism-pathway",
-   "title": "Pseudohypoparathyroidism (GNAS): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A disorder of end-organ resistance to parathyroid hormone rather than a deficiency of the hormone itself",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic hypocalcaemia with tetany, laryngospasm or seizures requiring urgent correction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum calcium, phosphate and intact parathyroid hormone demonstrating PTH resistance, Serum magnesium and vitamin D metabolites to exclude other causes of hypocalcaemia, Thyroid function tests to detect associated TSH"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Restore calcium with oral calcium supplementation and an active vitamin D analogue such as calcitriol or alfacalcidol, titrated to calcium and PTH targets"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the high-PTH, low-calcium pattern for secondary hyperparathyroidism of renal disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pseudohypoparathyroidism (gnas)."
-  }
- ],
- "tables": [
-  {
-   "id": "pseudohypoparathyroidism-matrix",
-   "title": "Pseudohypoparathyroidism (GNAS): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A disorder of end-organ resistance to parathyroid hormone rather than a deficiency of the hormone itself",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A disorder of end-organ resistance to parathyroid hormone rather than a deficiency of the hormone itself",
+      "Biochemically characterised by hypocalcaemia and hyperphosphataemia with an elevated PTH, the opposite of hypoparathyroidism",
+      "Caused by defects in GNAS, which encodes the stimulatory G-protein alpha subunit coupling receptors to adenylate cyclase",
+      "Subtype 1A is associated with the Albright hereditary osteodystrophy phenotype, including short stature, rounded face, and shortened metacarpals",
+      "Resistance may extend to other Gs-coupled hormones, producing features such as hypothyroidism from TSH resistance",
+      "Parental origin of the mutation influences the phenotype because GNAS is subject to tissue-specific imprinting",
+      "Pseudopseudohypoparathyroidism shares the physical phenotype but has normal calcium biochemistry"
     ],
-    [
-     "Key Investigations",
-     "Serum calcium, phosphate and intact parathyroid hormone demonstrating PTH resistance, Serum magnesium and vitamin D metabolites",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Parathyroid hormone acts through a receptor that signals via the stimulatory G-protein to generate cyclic AMP in target tissues such as kidney and bone. In pseudohypoparathyroidism, GNAS mutations impair this Gs-alpha signalling, so target organs fail to respond to PTH despite adequate or elevated hormone levels. The renal resistance reduces calcium reabsorption and phosphate excretion, producing hypocalcaemia and hyperphosphataemia, while the low calcium drives compensatory secondary rises in PTH. Because GNAS is imprinted, the parent from whom the mutation is inherited determines whether multi-hormone resistance and the osteodystrophy phenotype are expressed.",
+    "additionalDifferentials": [
+      "Primary hypoparathyroidism",
+      "Vitamin D deficiency or resistance",
+      "Chronic kidney disease with secondary hyperparathyroidism",
+      "Pseudopseudohypoparathyroidism with normal calcium",
+      "Other causes of hypocalcaemia such as hypomagnesaemia"
     ],
-    [
-     "Primary Differentials",
-     "Primary hypoparathyroidism, Vitamin D deficiency or resistance, Chronic kidney disease with secondary hyperparathyroidism",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum calcium, phosphate and intact parathyroid hormone demonstrating PTH resistance",
+      "Serum magnesium and vitamin D metabolites to exclude other causes of hypocalcaemia",
+      "Thyroid function tests to detect associated TSH resistance",
+      "Molecular genetic and methylation analysis of the GNAS locus",
+      "Radiographs of the hands to identify shortened metacarpals and other skeletal features"
     ],
-    [
-     "Management Strategy",
-     "Restore calcium with oral calcium supplementation and an active vitamin D analogue such as calcitriol or alfacalcidol, titrated",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic hypocalcaemia with tetany, laryngospasm or seizures requiring urgent correction",
+      "Prolonged QT interval on the electrocardiogram from severe hypocalcaemia",
+      "Features of resistance to multiple hormones indicating broad Gs-alpha involvement",
+      "Ectopic ossification or other complications requiring specialist assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the high-PTH, low-calcium pattern for secondary hyperparathyroidism of renal disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "With calcium and active vitamin D therapy guided by PTH and calcium targets, biochemical control and symptom prevention are generally achievable, although the skeletal phenotype and any additional hormone resistance persist and require ongoing management.",
+    "pitfalls": [
+      "Mistaking the high-PTH, low-calcium pattern for secondary hyperparathyroidism of renal disease",
+      "Confusing pseudohypoparathyroidism with pseudopseudohypoparathyroidism, which has normal calcium",
+      "Overlooking coexisting hormone resistance such as subclinical hypothyroidism",
+      "Aiming for high-normal calcium and risking hypercalciuria and nephrocalcinosis"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Restore calcium with oral calcium supplementation and an active vitamin D analogue such as calcitriol or alfacalcidol, titrated to calcium and PTH targets",
+      "Moderate dietary phosphate to help control hyperphosphataemia while avoiding ectopic calcification",
+      "Screen for and treat additional hormone resistance, notably hypothyroidism from TSH resistance, with levothyroxine",
+      "Monitor serum calcium, phosphate, PTH and urinary calcium, and the renal tract for calcification",
+      "Manage the Albright hereditary osteodystrophy features such as short stature and obesity",
+      "Genetic counselling with attention to imprinting and parent-of-origin effects, and family evaluation",
+      "Endocrinology and clinical genetics follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for pseudohypoparathyroidism (gnas)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pseudohypoparathyroidism-real-image",
-   "title": "Pseudohypoparathyroidism (GNAS): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "pseudohypoparathyroidism-pathway",
+      "title": "Pseudohypoparathyroidism (GNAS): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A disorder of end-organ resistance to parathyroid hormone rather than a deficiency of the hormone itself",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic hypocalcaemia with tetany, laryngospasm or seizures requiring urgent correction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum calcium, phosphate and intact parathyroid hormone demonstrating PTH resistance, Serum magnesium and vitamin D metabolites to exclude other causes of hypocalcaemia, Thyroid function tests to detect associated TSH"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Restore calcium with oral calcium supplementation and an active vitamin D analogue such as calcitriol or alfacalcidol, titrated to calcium and PTH targets"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the high-PTH, low-calcium pattern for secondary hyperparathyroidism of renal disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pseudohypoparathyroidism (gnas)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pseudohypoparathyroidism-matrix",
+      "title": "Pseudohypoparathyroidism (GNAS): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A disorder of end-organ resistance to parathyroid hormone rather than a deficiency of the hormone itself",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum calcium, phosphate and intact parathyroid hormone demonstrating PTH resistance, Serum magnesium and vitamin D metabolites",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary hypoparathyroidism, Vitamin D deficiency or resistance, Chronic kidney disease with secondary hyperparathyroidism",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Restore calcium with oral calcium supplementation and an active vitamin D analogue such as calcitriol or alfacalcidol, titrated",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the high-PTH, low-calcium pattern for secondary hyperparathyroidism of renal disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pseudohypoparathyroidism (gnas)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 353-6",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pseudohypoparathyroidism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate and intact PTH",
+          "cells": [
+            {
+              "text": "PTH resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum magnesium and vitamin D metabolites",
+          "cells": [
+            {
+              "text": "Other causes of hypocalcaemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Associated TSH resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNAS molecular and methylation analysis",
+          "cells": [
+            {
+              "text": "GNAS locus defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of the hands",
+          "cells": [
+            {
+              "text": "Shortened metacarpals and other skeletal features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudohypoparathyroidism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudopseudohypoparathyroidism",
+          "cells": [
+            {
+              "text": "Normal calcium and parathyroid hormone"
+            },
+            {
+              "text": "GNAS testing and parent-of-origin assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of hypocalcaemia such as hypomagnesaemia",
+          "cells": [
+            {
+              "text": "Low magnesium or vitamin D abnormality"
+            },
+            {
+              "text": "Serum magnesium and vitamin D metabolites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hypoparathyroidism",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Intact PTH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudohypoparathyroidism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium and active vitamin D",
+          "cells": [
+            {
+              "text": "Oral calcium with an active vitamin D analogue such as calcitriol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphate",
+          "cells": [
+            {
+              "text": "Moderate dietary phosphate to help control hyperphosphataemia, avoiding ectopic calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other hormone resistance",
+          "cells": [
+            {
+              "text": "Screen for and treat hypothyroidism from TSH resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Calcium, phosphate, PTH, urinary calcium and the renal tract for calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Albright features",
+          "cells": [
+            {
+              "text": "Management of short stature and obesity features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Imprinting and parent-of-origin effects; family screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Endocrinology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pseudohypoparathyroidism-ddx-2",
+      "kind": "ddx",
+      "title": "Pseudohypoparathyroidism subtypes versus PPHP",
+      "rowHeader": "Condition",
+      "columns": [
+        "Hypocalcemia, hyperphosphatemia",
+        "Urinary cAMP response to PTH",
+        "Serum PTH",
+        "Gs-alpha subunit deficiency",
+        "AHO",
+        "Resistance to hormones other than PTH"
+      ],
+      "rows": [
+        {
+          "parameter": "PHP-Ia",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Increased"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PHP-Ib",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Decreased"
+            },
+            {
+              "text": "Increased"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "Yes (in some patients)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PHP-II",
+          "cells": [
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Increased"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PPHP",
+          "cells": [
+            {
+              "text": "No"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "Yes"
+            },
+            {
+              "text": "No"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "AHO, Albright's hereditary osteodystrophy; PTH, parathyroid hormone."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pseudohypoparathyroidism-dx-mgmt",
+      "title": "Diagnosis and management of Pseudohypoparathyroidism (GNAS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pseudohypoparathyroidism: hypocalcaemia with PTH resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tetany, laryngospasm, seizures, QT prolongation, or new basal ganglia calcification?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent correction of symptomatic hypocalcaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, intact PTH; magnesium; vitamin D; thyroid; GNAS methylation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is PTH resistance confirmed with other causes of hypocalcaemia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary hypoparathyroidism, vitamin D or magnesium causes; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral calcium with an active vitamin D analogue such as calcitriol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Moderate dietary phosphate to control hyperphosphataemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thyroid hormone for TSH resistance where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor calcium, phosphate, PTH, renal function and urinary calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong endocrinology and clinical genetics follow-up with imprinting counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

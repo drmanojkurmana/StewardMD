@@ -1,173 +1,424 @@
 {
- "id": "nk_cell_deficiency",
- "name": "Natural killer cell deficiency",
- "aliases": [
-  "NK cell deficiency",
-  "NKD",
-  "classical and functional NK cell deficiency"
- ],
- "class": "non_infective",
- "system": "Immunology",
- "specialty": "Clinical Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / standard immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Natural killer cell deficiency is a rare primary immunodeficiency defined by absent or dysfunctional NK cells with otherwise preserved lymphocyte lineages",
-   "It is subdivided into classical deficiency (NK cells are absent or greatly reduced) and functional deficiency (NK cells are present but cannot perform cytotoxicity)",
-   "The characteristic infection susceptibility is to severe herpesvirus infections, including herpes simplex, varicella-zoster, cytomegalovirus, and Epstein-Barr virus",
-   "Severe or recurrent herpesvirus disease, sometimes disseminated or life-threatening, in the absence of another obvious immunodeficiency should raise suspicion",
-   "Human papillomavirus-related disease can also be prominent in some forms",
-   "Reported genetic causes include mutations affecting GATA2, MCM4, and other genes important for NK cell development or function",
-   "Diagnosis rests on demonstrating absent NK cells or impaired NK cytotoxic function after excluding secondary causes and other primary immunodeficiencies",
-   "Management centres on antiviral prophylaxis and prompt antiviral treatment, with haematopoietic stem cell transplantation considered in severe forms such as GATA2 deficiency"
+  "id": "nk_cell_deficiency",
+  "name": "Natural killer cell deficiency",
+  "aliases": [
+    "NK cell deficiency",
+    "NKD",
+    "classical and functional NK cell deficiency"
   ],
-  "pathophysiology": "Natural killer cells are innate lymphocytes that provide early defence against virally infected and transformed cells through cytotoxic granule release and cytokine production, and they are particularly important in controlling herpesviruses. In classical NK cell deficiency, mutations disrupt the development or survival of the NK lineage, so few or no NK cells are present; in functional deficiency, NK cells develop but cannot kill their targets because of defects in cytotoxic machinery or activating signals. The loss of this early antiviral surveillance leaves patients unable to contain herpesvirus infections, which can become severe or disseminated. Some causative genes, such as GATA2, also affect broader haematopoiesis, producing additional cytopenias and predisposition to myeloid malignancy.",
-  "additionalDifferentials": [
-   "Combined immunodeficiencies affecting T-cell antiviral immunity",
-   "GATA2 deficiency (as a broader bone marrow failure and immunodeficiency syndrome)",
-   "Hemophagocytic lymphohistiocytosis with impaired cytotoxicity",
-   "HIV and other causes of acquired immunodeficiency",
-   "Chediak-Higashi syndrome and other disorders of cytotoxic granules"
-  ],
-  "additionalInvestigations": [
-   "Lymphocyte subset analysis quantifying NK cells (CD3-negative, CD56/CD16-positive)",
-   "NK cell cytotoxicity functional assay",
-   "Genetic testing (including GATA2, MCM4 and related genes)",
-   "Full blood count and bone marrow evaluation where GATA2 deficiency is suspected",
-   "Viral studies for herpesviruses during acute infection",
-   "Exclusion of secondary causes of low or impaired NK cells"
-  ],
-  "redFlags": [
-   "Severe, disseminated, or recurrent herpesvirus infection requiring urgent antiviral therapy and immunological workup",
-   "Progressive cytopenias or evolving myeloid malignancy in GATA2-associated disease",
-   "Live vaccines should be approached with caution given impaired antiviral immunity",
-   "Features of haemophagocytic lymphohistiocytosis in functional cytotoxicity defects"
-  ],
-  "prognosis": "Outcome varies with the specific defect and the severity of viral disease; isolated functional deficiencies may be managed with antiviral strategies, whereas broader defects such as GATA2 deficiency carry risks of bone marrow failure and malignancy and may require haematopoietic stem cell transplantation.",
-  "pitfalls": [
-   "Attributing severe herpesvirus infections to bad luck rather than investigating NK cell function",
-   "Relying on NK cell numbers alone and missing a functional deficiency with normal counts",
-   "Failing to recognise GATA2 deficiency as a cause with wider haematological consequences",
-   "Not excluding secondary causes of reduced NK cells before diagnosing a primary deficiency",
-   "Overlooking the need for antiviral prophylaxis"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat herpesvirus infections promptly and aggressively with aciclovir or valaciclovir, and ganciclovir or valganciclovir for cytomegalovirus, given the characteristic susceptibility to severe herpesvirus disease",
-   "Use long-term antiviral prophylaxis to prevent recurrent or disseminated herpesvirus infection",
-   "Manage human papillomavirus-related disease with immunisation and ablative or topical treatment where prominent",
-   "In GATA2 deficiency, monitor blood counts and marrow and undertake surveillance for bone marrow failure and myeloid malignancy",
-   "Offer allogeneic haematopoietic stem cell transplantation, which can be curative in severe classical deficiency and GATA2-related disease",
-   "Coordinate multidisciplinary care through clinical immunology and haematology and keep vaccinations up to date",
-   "Provide genetic counselling and family screening for the identified causative gene"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nk_cell_deficiency-pathway",
-   "title": "Natural killer cell deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Natural killer cell deficiency is a rare primary immunodeficiency defined by absent or dysfunctional NK cells with otherwise preserved lymphocyte lineages",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe, disseminated, or recurrent herpesvirus infection requiring urgent antiviral therapy and immunological workup",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lymphocyte subset analysis quantifying NK cells (CD3-negative, CD56/CD16-positive), NK cell cytotoxicity functional assay, Genetic testing (including GATA2, MCM4 and related genes)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat herpesvirus infections promptly and aggressively with aciclovir or valaciclovir, and ganciclovir or valganciclovir for cytomegalovirus, given the characteristic susceptibility to severe herpesvirus disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing severe herpesvirus infections to bad luck rather than investigating NK cell function"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of natural killer cell deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "nk_cell_deficiency-matrix",
-   "title": "Natural killer cell deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Natural killer cell deficiency is a rare primary immunodeficiency defined by absent or dysfunctional NK cells with otherwise",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology",
+  "specialty": "Clinical Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / standard immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Natural killer cell deficiency is a rare primary immunodeficiency defined by absent or dysfunctional NK cells with otherwise preserved lymphocyte lineages",
+      "It is subdivided into classical deficiency (NK cells are absent or greatly reduced) and functional deficiency (NK cells are present but cannot perform cytotoxicity)",
+      "The characteristic infection susceptibility is to severe herpesvirus infections, including herpes simplex, varicella-zoster, cytomegalovirus, and Epstein-Barr virus",
+      "Severe or recurrent herpesvirus disease, sometimes disseminated or life-threatening, in the absence of another obvious immunodeficiency should raise suspicion",
+      "Human papillomavirus-related disease can also be prominent in some forms",
+      "Reported genetic causes include mutations affecting GATA2, MCM4, and other genes important for NK cell development or function",
+      "Diagnosis rests on demonstrating absent NK cells or impaired NK cytotoxic function after excluding secondary causes and other primary immunodeficiencies",
+      "Management centres on antiviral prophylaxis and prompt antiviral treatment, with haematopoietic stem cell transplantation considered in severe forms such as GATA2 deficiency"
     ],
-    [
-     "Key Investigations",
-     "Lymphocyte subset analysis quantifying NK cells (CD3-negative, CD56/CD16-positive), NK cell cytotoxicity functional assay,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Natural killer cells are innate lymphocytes that provide early defence against virally infected and transformed cells through cytotoxic granule release and cytokine production, and they are particularly important in controlling herpesviruses. In classical NK cell deficiency, mutations disrupt the development or survival of the NK lineage, so few or no NK cells are present; in functional deficiency, NK cells develop but cannot kill their targets because of defects in cytotoxic machinery or activating signals. The loss of this early antiviral surveillance leaves patients unable to contain herpesvirus infections, which can become severe or disseminated. Some causative genes, such as GATA2, also affect broader haematopoiesis, producing additional cytopenias and predisposition to myeloid malignancy.",
+    "additionalDifferentials": [
+      "Combined immunodeficiencies affecting T-cell antiviral immunity",
+      "GATA2 deficiency (as a broader bone marrow failure and immunodeficiency syndrome)",
+      "Hemophagocytic lymphohistiocytosis with impaired cytotoxicity",
+      "HIV and other causes of acquired immunodeficiency",
+      "Chediak-Higashi syndrome and other disorders of cytotoxic granules"
     ],
-    [
-     "Primary Differentials",
-     "Combined immunodeficiencies affecting T-cell antiviral immunity, GATA2 deficiency (as a broader bone marrow failure and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lymphocyte subset analysis quantifying NK cells (CD3-negative, CD56/CD16-positive)",
+      "NK cell cytotoxicity functional assay",
+      "Genetic testing (including GATA2, MCM4 and related genes)",
+      "Full blood count and bone marrow evaluation where GATA2 deficiency is suspected",
+      "Viral studies for herpesviruses during acute infection",
+      "Exclusion of secondary causes of low or impaired NK cells"
     ],
-    [
-     "Management Strategy",
-     "Treat herpesvirus infections promptly and aggressively with aciclovir or valaciclovir, and ganciclovir or valganciclovir for",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe, disseminated, or recurrent herpesvirus infection requiring urgent antiviral therapy and immunological workup",
+      "Progressive cytopenias or evolving myeloid malignancy in GATA2-associated disease",
+      "Live vaccines should be approached with caution given impaired antiviral immunity",
+      "Features of haemophagocytic lymphohistiocytosis in functional cytotoxicity defects"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing severe herpesvirus infections to bad luck rather than investigating NK cell function",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies with the specific defect and the severity of viral disease; isolated functional deficiencies may be managed with antiviral strategies, whereas broader defects such as GATA2 deficiency carry risks of bone marrow failure and malignancy and may require haematopoietic stem cell transplantation.",
+    "pitfalls": [
+      "Attributing severe herpesvirus infections to bad luck rather than investigating NK cell function",
+      "Relying on NK cell numbers alone and missing a functional deficiency with normal counts",
+      "Failing to recognise GATA2 deficiency as a cause with wider haematological consequences",
+      "Not excluding secondary causes of reduced NK cells before diagnosing a primary deficiency",
+      "Overlooking the need for antiviral prophylaxis"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat herpesvirus infections promptly and aggressively with aciclovir or valaciclovir, and ganciclovir or valganciclovir for cytomegalovirus, given the characteristic susceptibility to severe herpesvirus disease",
+      "Use long-term antiviral prophylaxis to prevent recurrent or disseminated herpesvirus infection",
+      "Manage human papillomavirus-related disease with immunisation and ablative or topical treatment where prominent",
+      "In GATA2 deficiency, monitor blood counts and marrow and undertake surveillance for bone marrow failure and myeloid malignancy",
+      "Offer allogeneic haematopoietic stem cell transplantation, which can be curative in severe classical deficiency and GATA2-related disease",
+      "Coordinate multidisciplinary care through clinical immunology and haematology and keep vaccinations up to date",
+      "Provide genetic counselling and family screening for the identified causative gene"
     ]
-   ],
-   "caption": "Overview comparison matrix for natural killer cell deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nk-cell-deficiency-real-image",
-   "title": "Natural killer cell deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "nk_cell_deficiency-pathway",
+      "title": "Natural killer cell deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Natural killer cell deficiency is a rare primary immunodeficiency defined by absent or dysfunctional NK cells with otherwise preserved lymphocyte lineages",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe, disseminated, or recurrent herpesvirus infection requiring urgent antiviral therapy and immunological workup",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lymphocyte subset analysis quantifying NK cells (CD3-negative, CD56/CD16-positive), NK cell cytotoxicity functional assay, Genetic testing (including GATA2, MCM4 and related genes)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat herpesvirus infections promptly and aggressively with aciclovir or valaciclovir, and ganciclovir or valganciclovir for cytomegalovirus, given the characteristic susceptibility to severe herpesvirus disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing severe herpesvirus infections to bad luck rather than investigating NK cell function"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of natural killer cell deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nk_cell_deficiency-matrix",
+      "title": "Natural killer cell deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Natural killer cell deficiency is a rare primary immunodeficiency defined by absent or dysfunctional NK cells with otherwise",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lymphocyte subset analysis quantifying NK cells (CD3-negative, CD56/CD16-positive), NK cell cytotoxicity functional assay,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Combined immunodeficiencies affecting T-cell antiviral immunity, GATA2 deficiency (as a broader bone marrow failure and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat herpesvirus infections promptly and aggressively with aciclovir or valaciclovir, and ganciclovir or valganciclovir for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing severe herpesvirus infections to bad luck rather than investigating NK cell function",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for natural killer cell deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nk_cell_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subset analysis of NK cells",
+          "cells": [
+            {
+              "text": "CD3-negative, CD56 and CD16-positive cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NK cell cytotoxicity functional assay",
+          "cells": [
+            {
+              "text": "Functional deficiency with normal counts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing including GATA2 and MCM4",
+          "cells": [
+            {
+              "text": "Defines the specific defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Cytopenias in GATA2-associated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nk_cell_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Combined immunodeficiency affecting T-cell antiviral immunity",
+          "cells": [
+            {
+              "text": "Broader lymphocyte defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GATA2 deficiency",
+          "cells": [
+            {
+              "text": "Bone marrow failure with immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophagocytic lymphohistiocytosis",
+          "cells": [
+            {
+              "text": "Impaired NK cytotoxicity drives it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nk_cell_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prompt antiviral treatment",
+          "cells": [
+            {
+              "text": "Aciclovir or valaciclovir for herpesvirus; ganciclovir or valganciclovir for CMV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term antiviral prophylaxis",
+          "cells": [
+            {
+              "text": "For recurrent or severe herpesvirus disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "For GATA2 deficiency with severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Live vaccine avoidance",
+          "cells": [
+            {
+              "text": "In immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nk_cell_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Natural killer cell deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe or recurrent herpesvirus infection with normal lymphocyte counts",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated herpesvirus, evolving cytopenia, myeloid malignancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antiviral therapy; immunological workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "NK cell subsets, cytotoxicity assay, GATA2 and MCM4 testing, full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Absent or defective NK function with a recognised genetic defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider combined immunodeficiency or HLH; widen testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prompt antiviral treatment of herpesvirus infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term antiviral prophylaxis for recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stem cell transplantation for severe GATA2 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on the defect; GATA2 deficiency carries risk of myeloid malignancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

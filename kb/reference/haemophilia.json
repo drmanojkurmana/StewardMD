@@ -1,179 +1,578 @@
 {
- "id": "haemophilia",
- "name": "Haemophilia",
- "aliases": [
-  "haemophilia A",
-  "haemophilia B",
-  "factor VIII deficiency",
-  "factor IX deficiency",
-  "Christmas disease",
-  "hemophilia"
- ],
- "class": "non_infective",
- "system": "Haematological",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked recessive bleeding disorder affecting mainly males; haemophilia A results from factor VIII deficiency and haemophilia B from factor IX deficiency.",
-   "The two types are clinically indistinguishable and are separated by specific factor assays.",
-   "Disease severity correlates with residual factor activity: severe disease often presents with spontaneous bleeding, while milder forms bleed mainly after trauma or surgery.",
-   "Hallmark manifestations are deep bleeding into joints (haemarthrosis) and muscles rather than mucocutaneous bleeding.",
-   "Screening typically shows a prolonged activated partial thromboplastin time (aPTT) with a normal prothrombin time and platelet count.",
-   "Recurrent joint bleeds lead to chronic synovitis and progressive haemophilic arthropathy if not prevented.",
-   "Management centres on replacing the deficient clotting factor, with prophylactic regimens preventing bleeds in severe disease and on-demand treatment for acute bleeds.",
-   "Development of inhibitory antibodies against the replaced factor is a major complication that reduces treatment efficacy.",
-   "Intracranial haemorrhage is a life-threatening event that warrants immediate factor replacement, and newer therapies such as non-factor agents and gene therapy are changing management."
+  "id": "haemophilia",
+  "name": "Haemophilia",
+  "aliases": [
+    "haemophilia A",
+    "haemophilia B",
+    "factor VIII deficiency",
+    "factor IX deficiency",
+    "Christmas disease",
+    "hemophilia"
   ],
-  "pathophysiology": "Deficiency of factor VIII or factor IX impairs the intrinsic pathway of the coagulation cascade, reducing generation of activated factor X and thereby the thrombin burst required for a stable fibrin clot. Primary haemostasis (platelet plug formation) is intact, so initial bleeding may stop, but the fibrin clot is inadequate and delayed or recurrent bleeding follows, characteristically into joints and muscles. Repeated haemarthroses cause iron deposition, synovial hypertrophy, and cartilage destruction leading to chronic arthropathy.",
-  "additionalDifferentials": [
-   "Von Willebrand disease",
-   "Other clotting factor deficiencies (e.g. factor XI)",
-   "Vitamin K deficiency or liver disease",
-   "Disseminated intravascular coagulation",
-   "Platelet function disorders or thrombocytopenia",
-   "Non-accidental injury when bruising pattern is unexplained"
-  ],
-  "additionalInvestigations": [
-   "aPTT, prothrombin time, and platelet count as initial screen",
-   "Specific factor VIII and factor IX activity assays",
-   "Mixing study to demonstrate factor deficiency versus inhibitor",
-   "Inhibitor (Bethesda) assay when replacement therapy is failing",
-   "Von Willebrand factor studies to exclude von Willebrand disease",
-   "Genetic testing for carrier detection and prenatal diagnosis"
-  ],
-  "redFlags": [
-   "Suspected intracranial haemorrhage (headache, vomiting, altered consciousness, focal signs)",
-   "Bleeding into the neck, throat, or retroperitoneum threatening the airway or causing large occult loss",
-   "Compartment syndrome from muscle bleeding",
-   "Poor response to factor replacement suggesting an inhibitor",
-   "Significant bleeding after trauma or before surgery without prophylaxis"
-  ],
-  "prognosis": "With modern factor replacement and prophylaxis, life expectancy and quality of life approach normal; outcomes worsen with inhibitor development, chronic arthropathy, and delayed treatment of major bleeds.",
-  "pitfalls": [
-   "Delaying factor replacement while awaiting imaging in suspected serious bleeding",
-   "Attributing bleeding solely to trauma and missing an underlying disorder",
-   "Using aspirin or NSAIDs and intramuscular injections that increase bleeding risk",
-   "Overlooking inhibitor development when a previously effective factor dose stops working"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Regular prophylactic factor VIII or factor IX replacement to prevent spontaneous bleeds in severe disease, with on-demand replacement for milder forms",
-   "Emicizumab subcutaneous prophylaxis as a non-factor option, particularly valuable in patients with inhibitors",
-   "Desmopressin to release stored factor VIII in mild haemophilia A, with tranexamic acid as an antifibrinolytic adjunct for mucosal bleeding",
-   "Prompt factor replacement, rest, ice and elevation for acute haemarthrosis, avoiding NSAIDs and intramuscular injections",
-   "Manage inhibitors with bypassing agents such as recombinant activated factor VII or activated prothrombin complex concentrate and consider immune tolerance induction",
-   "Physiotherapy and joint protection to limit chronic haemophilic arthropathy, with orthopaedic input for established joint damage",
-   "Lifelong follow-up at a specialist haemophilia centre with periodic inhibitor assays, joint assessment and consideration of emerging gene therapy",
-   "Genetic counselling and carrier testing for female relatives given X-linked inheritance, with prenatal diagnosis where requested"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "haemophilia-pathway",
-   "title": "Haemophilia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked recessive bleeding disorder affecting mainly males; haemophilia A results from factor VIII deficiency and haemophilia B from factor IX deficiency.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Suspected intracranial haemorrhage (headache, vomiting, altered consciousness, focal signs)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: aPTT, prothrombin time, and platelet count as initial screen, Specific factor VIII and factor IX activity assays, Mixing study to demonstrate factor deficiency versus inhibitor"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Regular prophylactic factor VIII or factor IX replacement to prevent spontaneous bleeds in severe disease, with on-demand replacement for milder forms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying factor replacement while awaiting imaging in suspected serious bleeding"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of haemophilia."
-  }
- ],
- "tables": [
-  {
-   "id": "haemophilia-matrix",
-   "title": "Haemophilia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked recessive bleeding disorder affecting mainly males; haemophilia A results from factor VIII deficiency and haemophilia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked recessive bleeding disorder affecting mainly males; haemophilia A results from factor VIII deficiency and haemophilia B from factor IX deficiency.",
+      "The two types are clinically indistinguishable and are separated by specific factor assays.",
+      "Disease severity correlates with residual factor activity: severe disease often presents with spontaneous bleeding, while milder forms bleed mainly after trauma or surgery.",
+      "Hallmark manifestations are deep bleeding into joints (haemarthrosis) and muscles rather than mucocutaneous bleeding.",
+      "Screening typically shows a prolonged activated partial thromboplastin time (aPTT) with a normal prothrombin time and platelet count.",
+      "Recurrent joint bleeds lead to chronic synovitis and progressive haemophilic arthropathy if not prevented.",
+      "Management centres on replacing the deficient clotting factor, with prophylactic regimens preventing bleeds in severe disease and on-demand treatment for acute bleeds.",
+      "Development of inhibitory antibodies against the replaced factor is a major complication that reduces treatment efficacy.",
+      "Intracranial haemorrhage is a life-threatening event that warrants immediate factor replacement, and newer therapies such as non-factor agents and gene therapy are changing management."
     ],
-    [
-     "Key Investigations",
-     "aPTT, prothrombin time, and platelet count as initial screen, Specific factor VIII and factor IX activity assays, Mixing study to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Deficiency of factor VIII or factor IX impairs the intrinsic pathway of the coagulation cascade, reducing generation of activated factor X and thereby the thrombin burst required for a stable fibrin clot. Primary haemostasis (platelet plug formation) is intact, so initial bleeding may stop, but the fibrin clot is inadequate and delayed or recurrent bleeding follows, characteristically into joints and muscles. Repeated haemarthroses cause iron deposition, synovial hypertrophy, and cartilage destruction leading to chronic arthropathy.",
+    "additionalDifferentials": [
+      "Von Willebrand disease",
+      "Other clotting factor deficiencies (e.g. factor XI)",
+      "Vitamin K deficiency or liver disease",
+      "Disseminated intravascular coagulation",
+      "Platelet function disorders or thrombocytopenia",
+      "Non-accidental injury when bruising pattern is unexplained"
     ],
-    [
-     "Primary Differentials",
-     "Von Willebrand disease, Other clotting factor deficiencies (e.g. factor XI), Vitamin K deficiency or liver disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "aPTT, prothrombin time, and platelet count as initial screen",
+      "Specific factor VIII and factor IX activity assays",
+      "Mixing study to demonstrate factor deficiency versus inhibitor",
+      "Inhibitor (Bethesda) assay when replacement therapy is failing",
+      "Von Willebrand factor studies to exclude von Willebrand disease",
+      "Genetic testing for carrier detection and prenatal diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Regular prophylactic factor VIII or factor IX replacement to prevent spontaneous bleeds in severe disease, with on-demand",
-     "Core treatment modality"
+    "redFlags": [
+      "Suspected intracranial haemorrhage (headache, vomiting, altered consciousness, focal signs)",
+      "Bleeding into the neck, throat, or retroperitoneum threatening the airway or causing large occult loss",
+      "Compartment syndrome from muscle bleeding",
+      "Poor response to factor replacement suggesting an inhibitor",
+      "Significant bleeding after trauma or before surgery without prophylaxis"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying factor replacement while awaiting imaging in suspected serious bleeding",
-     "Prevent diagnostic or management error"
+    "prognosis": "With modern factor replacement and prophylaxis, life expectancy and quality of life approach normal; outcomes worsen with inhibitor development, chronic arthropathy, and delayed treatment of major bleeds.",
+    "pitfalls": [
+      "Delaying factor replacement while awaiting imaging in suspected serious bleeding",
+      "Attributing bleeding solely to trauma and missing an underlying disorder",
+      "Using aspirin or NSAIDs and intramuscular injections that increase bleeding risk",
+      "Overlooking inhibitor development when a previously effective factor dose stops working"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Regular prophylactic factor VIII or factor IX replacement to prevent spontaneous bleeds in severe disease, with on-demand replacement for milder forms",
+      "Emicizumab subcutaneous prophylaxis as a non-factor option, particularly valuable in patients with inhibitors",
+      "Desmopressin to release stored factor VIII in mild haemophilia A, with tranexamic acid as an antifibrinolytic adjunct for mucosal bleeding",
+      "Prompt factor replacement, rest, ice and elevation for acute haemarthrosis, avoiding NSAIDs and intramuscular injections",
+      "Manage inhibitors with bypassing agents such as recombinant activated factor VII or activated prothrombin complex concentrate and consider immune tolerance induction",
+      "Physiotherapy and joint protection to limit chronic haemophilic arthropathy, with orthopaedic input for established joint damage",
+      "Lifelong follow-up at a specialist haemophilia centre with periodic inhibitor assays, joint assessment and consideration of emerging gene therapy",
+      "Genetic counselling and carrier testing for female relatives given X-linked inheritance, with prenatal diagnosis where requested"
     ]
-   ],
-   "caption": "Overview comparison matrix for haemophilia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "haemophilia-real-image",
-   "title": "Haemophilia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "haemophilia-pathway",
+      "title": "Haemophilia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked recessive bleeding disorder affecting mainly males; haemophilia A results from factor VIII deficiency and haemophilia B from factor IX deficiency.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Suspected intracranial haemorrhage (headache, vomiting, altered consciousness, focal signs)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: aPTT, prothrombin time, and platelet count as initial screen, Specific factor VIII and factor IX activity assays, Mixing study to demonstrate factor deficiency versus inhibitor"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Regular prophylactic factor VIII or factor IX replacement to prevent spontaneous bleeds in severe disease, with on-demand replacement for milder forms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying factor replacement while awaiting imaging in suspected serious bleeding"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of haemophilia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "haemophilia-matrix",
+      "title": "Haemophilia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked recessive bleeding disorder affecting mainly males; haemophilia A results from factor VIII deficiency and haemophilia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "aPTT, prothrombin time, and platelet count as initial screen, Specific factor VIII and factor IX activity assays, Mixing study to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Von Willebrand disease, Other clotting factor deficiencies (e.g. factor XI), Vitamin K deficiency or liver disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Regular prophylactic factor VIII or factor IX replacement to prevent spontaneous bleeds in severe disease, with on-demand",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying factor replacement while awaiting imaging in suspected serious bleeding",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for haemophilia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 113-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "haemophilia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "aPTT, prothrombin time and platelet count",
+          "cells": [
+            {
+              "text": "Initial screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII and factor IX activity assays",
+          "cells": [
+            {
+              "text": "Specific factor deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study",
+          "cells": [
+            {
+              "text": "Factor deficiency versus inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhibitor (Bethesda) assay",
+          "cells": [
+            {
+              "text": "Failing replacement therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand factor studies",
+          "cells": [
+            {
+              "text": "Excludes von Willebrand disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Carrier detection and prenatal diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemophilia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "Excluded by von Willebrand factor studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other factor deficiency such as factor XI",
+          "cells": [
+            {
+              "text": "Specific factor assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury",
+          "cells": [
+            {
+              "text": "Unexplained bruising pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemophilia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylactic factor replacement",
+          "cells": [
+            {
+              "text": "Regular factor VIII or IX to prevent spontaneous bleeds in severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emicizumab",
+          "cells": [
+            {
+              "text": "Subcutaneous non-factor prophylaxis, valuable with inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin and tranexamic acid",
+          "cells": [
+            {
+              "text": "Mild haemophilia A; antifibrinolytic for mucosal bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemarthrosis",
+          "cells": [
+            {
+              "text": "Prompt factor replacement, rest and elevation; avoid NSAIDs and intramuscular injections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhibitor management",
+          "cells": [
+            {
+              "text": "Bypassing agents such as recombinant factor VIIa or activated prothrombin complex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint protection",
+          "cells": [
+            {
+              "text": "Physiotherapy and orthopaedic input for chronic arthropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong specialist follow-up",
+          "cells": [
+            {
+              "text": "Inhibitor assays, joint assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked carrier testing and prenatal diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemophilia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Characteristics of selected blood components",
+      "rowHeader": "Component",
+      "columns": [
+        "Volume, mL",
+        "Content",
+        "Clinical response"
+      ],
+      "rows": [
+        {
+          "parameter": "PRBC",
+          "cells": [
+            {
+              "text": "180-200"
+            },
+            {
+              "text": "Red cells with variable leukocyte content and a small amount of plasma"
+            },
+            {
+              "text": "Raises hemoglobin by 10 g/L and hematocrit by 3%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (random donor unit)",
+          "cells": [
+            {
+              "text": "50-70"
+            },
+            {
+              "text": "5.5 x 10^10 per random-donor unit"
+            },
+            {
+              "text": "Raises platelet count by 5000-10,000/uL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (single-donor apheresis product)",
+          "cells": [
+            {
+              "text": "200-400"
+            },
+            {
+              "text": ">=3 x 10^11 per single-donor apheresis product"
+            },
+            {
+              "text": "Corrected count increment >=10 x 10^9/L within 1 h and >=7.5 x 10^9/L within 24 h after transfusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FFP",
+          "cells": [
+            {
+              "text": "200-250"
+            },
+            {
+              "text": "Plasma proteins: coagulation factors, proteins C and S, antithrombin"
+            },
+            {
+              "text": "Raises coagulation factors by about 2%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cryoprecipitate",
+          "cells": [
+            {
+              "text": "10-15"
+            },
+            {
+              "text": "Cold-insoluble plasma proteins: fibrinogen, factor VIII, vWF"
+            },
+            {
+              "text": "Used as topical fibrin glue; also supplies 80 IU of factor VIII"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The PDF prints the platelet component as two rows; the second row has no component label and is read here as the apheresis product (CCI = corrected count increment)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "haemophilia-dx-mgmt",
+      "title": "Diagnosis and management of Haemophilia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected haemophilia: spontaneous joint or muscle bleeding with prolonged aPTT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intracranial, airway or retroperitoneal bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate factor replacement for suspected intracranial or airway bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "aPTT, factor VIII and IX assays, mixing study and von Willebrand studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do factor VIII or IX levels confirm deficiency, with von Willebrand disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider von Willebrand disease, other factor deficiency or platelet disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Regular prophylactic factor VIII or IX replacement in severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emicizumab for prophylaxis, particularly with inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt factor replacement and joint care for haemarthrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bypassing agents for inhibitors and joint protection for arthropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With modern replacement, life expectancy and quality of life approach normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

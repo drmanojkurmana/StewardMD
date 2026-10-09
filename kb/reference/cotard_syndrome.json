@@ -1,174 +1,461 @@
 {
- "id": "cotard_syndrome",
- "name": "Cotard syndrome",
- "aliases": [
-  "Cotard delusion",
-  "nihilistic delusion",
-  "delire des negations",
-  "walking corpse syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Neuropsychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / Kaplan and Sadock's Comprehensive Textbook of Psychiatry",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by nihilistic delusions in which patients believe they are dead, do not exist, are decaying, or have lost their organs, blood, or soul",
-   "Often accompanied by profound depression, anxiety, and feelings of guilt or damnation, and sometimes a paradoxical belief in immortality",
-   "Most commonly seen in severe depression with psychotic features, but also in psychotic disorders and organic brain disease",
-   "May co-occur with or follow Capgras syndrome, and both are considered delusional misidentification-related phenomena",
-   "Loss of the normal emotional connection to self and the outside world is thought to underlie the sense of non-existence",
-   "High risk of self-neglect, refusal of food and fluids, and suicide, sometimes justified by the belief of already being dead",
-   "Management addresses the underlying disorder, with antidepressants, antipsychotics, and electroconvulsive therapy in severe or refractory cases"
+  "id": "cotard_syndrome",
+  "name": "Cotard syndrome",
+  "aliases": [
+    "Cotard delusion",
+    "nihilistic delusion",
+    "delire des negations",
+    "walking corpse syndrome"
   ],
-  "pathophysiology": "Cotard syndrome is a nihilistic delusional state proposed to arise from a global loss of the emotional resonance normally attached to perceptions of oneself and the world. Where Capgras involves loss of felt familiarity for a specific person, Cotard is conceptualised as an extension of this affective disconnection to the self, so that internal and external experiences feel unreal, leading to the conviction of being dead or non-existent. Dysfunction of frontal, temporoparietal, and limbic networks that integrate self-perception with emotional salience, combined with the depressive substrate that often accompanies it, is implicated. It occurs in severe affective and psychotic illness and in organic brain disease.",
-  "additionalDifferentials": [
-   "Severe (psychotic) depression",
-   "Schizophrenia and delusional disorder",
-   "Capgras and other delusional misidentification syndromes",
-   "Depersonalisation-derealisation disorder",
-   "Delirium or organic psychosis",
-   "Neurodegenerative dementia with delusions"
-  ],
-  "additionalInvestigations": [
-   "Comprehensive psychiatric and risk assessment, particularly for suicide and self-neglect",
-   "Cognitive testing to detect underlying dementia or focal deficits",
-   "Neuroimaging (MRI brain) where an organic cause is suspected",
-   "Bloods and metabolic screen to exclude reversible contributors",
-   "Electroencephalography if delirium or seizures are considered",
-   "Medication and substance review"
-  ],
-  "redFlags": [
-   "Suicidal ideation or acts, sometimes rationalised by the belief of being already dead",
-   "Refusal of food and fluids with dehydration and malnutrition",
-   "Rapid physical deterioration from severe self-neglect",
-   "New focal neurological signs or cognitive decline suggesting organic disease"
-  ],
-  "prognosis": "With treatment of the underlying disorder, including electroconvulsive therapy in severe cases, the delusion often remits, though relapse can occur and outcome depends on the primary illness. Untreated, the syndrome carries a serious risk of death from suicide or self-neglect.",
-  "pitfalls": [
-   "Underestimating suicide and self-neglect risk despite the bizarre content",
-   "Attributing all cases to functional illness and missing an organic cause",
-   "Delaying electroconvulsive therapy in severe or life-threatening presentations",
-   "Overlooking co-existing Capgras or other misidentification phenomena"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Kaplan and Sadock's Comprehensive Textbook of Psychiatry"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying disorder, whether severe depression with psychotic features, a primary psychotic illness or organic brain disease",
-   "Combine an antidepressant with an antipsychotic for psychotic depression",
-   "Electroconvulsive therapy for severe, refractory or life-threatening presentations with food and fluid refusal or high suicide risk",
-   "Urgent risk assessment and management for suicide and self-neglect, with inpatient admission where risk is high",
-   "Nutritional support and rehydration where refusal of food and fluids threatens physical health",
-   "Investigate and treat any reversible organic contributor identified on metabolic screen or neuroimaging",
-   "Psychiatric follow-up and relapse prevention, as recurrence can occur after remission"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cotard_syndrome-pathway",
-   "title": "Cotard syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by nihilistic delusions in which patients believe they are dead, do not exist, are decaying, or have lost their organs, blood, or soul",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Suicidal ideation or acts, sometimes rationalised by the belief of being already dead",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Comprehensive psychiatric and risk assessment, particularly for suicide and self-neglect, Cognitive testing to detect underlying dementia or focal deficits, Neuroimaging (MRI brain) where an organic cause is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying disorder, whether severe depression with psychotic features, a primary psychotic illness or organic brain disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating suicide and self-neglect risk despite the bizarre content"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cotard syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cotard_syndrome-matrix",
-   "title": "Cotard syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by nihilistic delusions in which patients believe they are dead, do not exist, are decaying, or have lost their",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Neuropsychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / Kaplan and Sadock's Comprehensive Textbook of Psychiatry",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by nihilistic delusions in which patients believe they are dead, do not exist, are decaying, or have lost their organs, blood, or soul",
+      "Often accompanied by profound depression, anxiety, and feelings of guilt or damnation, and sometimes a paradoxical belief in immortality",
+      "Most commonly seen in severe depression with psychotic features, but also in psychotic disorders and organic brain disease",
+      "May co-occur with or follow Capgras syndrome, and both are considered delusional misidentification-related phenomena",
+      "Loss of the normal emotional connection to self and the outside world is thought to underlie the sense of non-existence",
+      "High risk of self-neglect, refusal of food and fluids, and suicide, sometimes justified by the belief of already being dead",
+      "Management addresses the underlying disorder, with antidepressants, antipsychotics, and electroconvulsive therapy in severe or refractory cases"
     ],
-    [
-     "Key Investigations",
-     "Comprehensive psychiatric and risk assessment, particularly for suicide and self-neglect, Cognitive testing to detect underlying",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cotard syndrome is a nihilistic delusional state proposed to arise from a global loss of the emotional resonance normally attached to perceptions of oneself and the world. Where Capgras involves loss of felt familiarity for a specific person, Cotard is conceptualised as an extension of this affective disconnection to the self, so that internal and external experiences feel unreal, leading to the conviction of being dead or non-existent. Dysfunction of frontal, temporoparietal, and limbic networks that integrate self-perception with emotional salience, combined with the depressive substrate that often accompanies it, is implicated. It occurs in severe affective and psychotic illness and in organic brain disease.",
+    "additionalDifferentials": [
+      "Severe (psychotic) depression",
+      "Schizophrenia and delusional disorder",
+      "Capgras and other delusional misidentification syndromes",
+      "Depersonalisation-derealisation disorder",
+      "Delirium or organic psychosis",
+      "Neurodegenerative dementia with delusions"
     ],
-    [
-     "Primary Differentials",
-     "Severe (psychotic) depression, Schizophrenia and delusional disorder, Capgras and other delusional misidentification syndromes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Comprehensive psychiatric and risk assessment, particularly for suicide and self-neglect",
+      "Cognitive testing to detect underlying dementia or focal deficits",
+      "Neuroimaging (MRI brain) where an organic cause is suspected",
+      "Bloods and metabolic screen to exclude reversible contributors",
+      "Electroencephalography if delirium or seizures are considered",
+      "Medication and substance review"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying disorder, whether severe depression with psychotic features, a primary psychotic illness or organic brain",
-     "Core treatment modality"
+    "redFlags": [
+      "Suicidal ideation or acts, sometimes rationalised by the belief of being already dead",
+      "Refusal of food and fluids with dehydration and malnutrition",
+      "Rapid physical deterioration from severe self-neglect",
+      "New focal neurological signs or cognitive decline suggesting organic disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating suicide and self-neglect risk despite the bizarre content",
-     "Prevent diagnostic or management error"
+    "prognosis": "With treatment of the underlying disorder, including electroconvulsive therapy in severe cases, the delusion often remits, though relapse can occur and outcome depends on the primary illness. Untreated, the syndrome carries a serious risk of death from suicide or self-neglect.",
+    "pitfalls": [
+      "Underestimating suicide and self-neglect risk despite the bizarre content",
+      "Attributing all cases to functional illness and missing an organic cause",
+      "Delaying electroconvulsive therapy in severe or life-threatening presentations",
+      "Overlooking co-existing Capgras or other misidentification phenomena"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Kaplan and Sadock's Comprehensive Textbook of Psychiatry"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying disorder, whether severe depression with psychotic features, a primary psychotic illness or organic brain disease",
+      "Combine an antidepressant with an antipsychotic for psychotic depression",
+      "Electroconvulsive therapy for severe, refractory or life-threatening presentations with food and fluid refusal or high suicide risk",
+      "Urgent risk assessment and management for suicide and self-neglect, with inpatient admission where risk is high",
+      "Nutritional support and rehydration where refusal of food and fluids threatens physical health",
+      "Investigate and treat any reversible organic contributor identified on metabolic screen or neuroimaging",
+      "Psychiatric follow-up and relapse prevention, as recurrence can occur after remission"
     ]
-   ],
-   "caption": "Overview comparison matrix for cotard syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cotard-syndrome-real-image",
-   "title": "Cotard syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cotard_syndrome-pathway",
+      "title": "Cotard syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by nihilistic delusions in which patients believe they are dead, do not exist, are decaying, or have lost their organs, blood, or soul",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Suicidal ideation or acts, sometimes rationalised by the belief of being already dead",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Comprehensive psychiatric and risk assessment, particularly for suicide and self-neglect, Cognitive testing to detect underlying dementia or focal deficits, Neuroimaging (MRI brain) where an organic cause is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying disorder, whether severe depression with psychotic features, a primary psychotic illness or organic brain disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating suicide and self-neglect risk despite the bizarre content"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cotard syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cotard_syndrome-matrix",
+      "title": "Cotard syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by nihilistic delusions in which patients believe they are dead, do not exist, are decaying, or have lost their",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Comprehensive psychiatric and risk assessment, particularly for suicide and self-neglect, Cognitive testing to detect underlying",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Severe (psychotic) depression, Schizophrenia and delusional disorder, Capgras and other delusional misidentification syndromes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying disorder, whether severe depression with psychotic features, a primary psychotic illness or organic brain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating suicide and self-neglect risk despite the bizarre content",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cotard syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Kaplan and Sadock's Comprehensive Textbook of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cotard_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychiatric and suicide risk assessment",
+          "cells": [
+            {
+              "text": "Risk identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive testing",
+          "cells": [
+            {
+              "text": "Dementia or focal deficit detected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Organic cause excluded when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods and metabolic screen",
+          "cells": [
+            {
+              "text": "Reversible contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "When delirium or seizures are considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cotard_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe (psychotic) depression",
+          "cells": [
+            {
+              "text": "Antidepressant with antipsychotic treatment applies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delirium or organic psychosis",
+          "cells": [
+            {
+              "text": "Organic cause; EEG and metabolic screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodegenerative dementia with delusions",
+          "cells": [
+            {
+              "text": "Cognitive testing and MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cotard_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying disorder",
+          "cells": [
+            {
+              "text": "Psychotic depression, primary psychotic illness or organic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antidepressant with antipsychotic",
+          "cells": [
+            {
+              "text": "For psychotic depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroconvulsive therapy",
+          "cells": [
+            {
+              "text": "Severe, refractory or life-threatening presentations, including food refusal or high suicide risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent risk management",
+          "cells": [
+            {
+              "text": "Suicide and self-neglect; inpatient admission where risk is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and rehydration",
+          "cells": [
+            {
+              "text": "Where food and fluid refusal threatens health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reversible organic contributors",
+          "cells": [
+            {
+              "text": "Identified on metabolic screen or neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse prevention",
+          "cells": [
+            {
+              "text": "Psychiatric follow-up; recurrence can occur after remission"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cotard_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cotard syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cotard syndrome: delusion of being dead or nonexistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (suicidal ideation, food and fluid refusal, rapid deterioration)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent risk assessment; admission where suicide risk is high",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Risk and psychiatric assessment; cognition; MRI brain; metabolic screen; EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an organic cause excluded on metabolic screen and imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary psychotic illness or neurodegenerative dementia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat psychotic depression with antidepressant and antipsychotic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Electroconvulsive therapy for severe or refractory presentations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent risk management and nutrition or rehydration as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat reversible organic contributors; relapse prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Delusion often remits with treatment of the underlying disorder, though relapse can occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,510 @@
 {
- "id": "central_precocious_puberty",
- "name": "Central precocious puberty",
- "aliases": [
-  "gonadotropin-dependent precocious puberty",
-  "true precocious puberty",
-  "GnRH-dependent precocious puberty",
-  "CPP"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive",
- "specialty": "Paediatric & Reproductive Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by the onset of progressive secondary sexual characteristics before the conventional age thresholds (around 8 years in girls and 9 years in boys), driven by premature reactivation of the hypothalamic-pituitary-gonadal axis",
-   "Because it is gonadotropin-dependent, puberty progresses in the normal sequence and tempo, including testicular enlargement in boys and true breast development with a growth spurt in girls",
-   "A GnRH (LHRH) stimulation test showing a pubertal luteinising hormone response is the biochemical hallmark that distinguishes it from gonadotropin-independent (peripheral) causes",
-   "It is far more often idiopathic in girls, whereas an identifiable central nervous system lesion is more likely in boys and in very young children, mandating cranial imaging",
-   "Hypothalamic hamartoma is a classic structural cause and may be accompanied by gelastic (laughing) seizures",
-   "Bone age is advanced relative to chronological age, and untreated progression risks premature epiphyseal fusion and reduced adult height",
-   "First-line management is a long-acting GnRH analogue (agonist), which after initial stimulation down-regulates pituitary gonadotropin secretion and halts pubertal progression"
+  "id": "central_precocious_puberty",
+  "name": "Central precocious puberty",
+  "aliases": [
+    "gonadotropin-dependent precocious puberty",
+    "true precocious puberty",
+    "GnRH-dependent precocious puberty",
+    "CPP"
   ],
-  "pathophysiology": "Central precocious puberty results from premature reactivation of pulsatile hypothalamic gonadotropin-releasing hormone secretion, which stimulates pituitary release of LH and FSH and consequent gonadal sex-steroid production. The activated axis reproduces normal puberty but at an inappropriately early age, so the sequence and progression of pubertal events are physiological. Triggers include disinhibition of the GnRH pulse generator by hypothalamic lesions (hamartoma, tumours, hydrocephalus, cranial irradiation, or previous chronic sex-steroid exposure), genetic changes affecting the pubertal timing network (such as MKRN3 loss of function), and, most commonly in girls, no identifiable cause. The premature sex-steroid exposure accelerates skeletal maturation, advancing bone age ahead of height gain.",
-  "additionalDifferentials": [
-   "Gonadotropin-independent (peripheral) precocious puberty, including testotoxicosis and McCune-Albright syndrome",
-   "Congenital adrenal hyperplasia or a virilising/feminising adrenal tumour",
-   "Isolated premature thelarche",
-   "Isolated premature adrenarche",
-   "Hormone-secreting gonadal tumour",
-   "Exogenous sex-steroid exposure",
-   "Severe primary hypothyroidism causing overlapping pubertal signs"
-  ],
-  "additionalInvestigations": [
-   "GnRH (LHRH) stimulation test demonstrating a pubertal LH-predominant response",
-   "Basal LH and FSH with sex-steroid levels (oestradiol or testosterone)",
-   "Bone-age radiograph to assess skeletal advancement and height prediction",
-   "Magnetic resonance imaging of the brain and hypothalamic-pituitary region to identify a central lesion",
-   "Pelvic ultrasound in girls to assess uterine and ovarian maturation",
-   "Thyroid function tests to exclude profound hypothyroidism"
-  ],
-  "redFlags": [
-   "Neurological features (headache, visual disturbance, seizures, or gelastic episodes) suggesting an intracranial lesion",
-   "Precocious puberty in a boy or in a child under about 6 years, which carries a higher risk of underlying pathology",
-   "Very rapid pubertal progression with markedly advancing bone age threatening final height",
-   "Signs of raised intracranial pressure or new focal neurological deficit"
-  ],
-  "prognosis": "Idiopathic central precocious puberty generally responds well to GnRH analogue therapy, with arrest of pubertal progression and preservation of adult height potential when treatment is started early; prognosis in secondary forms depends on the underlying central nervous system cause.",
-  "pitfalls": [
-   "Relying on a single basal LH value, which may be prepubertal, rather than performing a stimulation test when suspicion is high",
-   "Omitting brain imaging in young children and in boys, in whom central lesions are more frequent",
-   "Confusing benign isolated premature thelarche or adrenarche with progressive true puberty",
-   "Delaying treatment until height potential is already lost",
-   "Overlooking a peripheral cause that has secondarily triggered central puberty"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "GnRH analogue therapy, such as depot leuprorelin, to suppress the reactivated hypothalamic-pituitary-gonadal axis and halt pubertal progression",
-   "MRI-directed treatment of any underlying central lesion such as hamartoma, tumour or hydrocephalus",
-   "Monitoring of pubertal signs, growth velocity and serial bone age to confirm efficacy and preserve adult height potential",
-   "Management of associated gelastic seizures where a hypothalamic hamartoma is present",
-   "Psychological and psychosocial support for the child and family",
-   "Timing cessation of analogue therapy at an age-appropriate point to allow normal resumption of puberty",
-   "Paediatric endocrinology multidisciplinary follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "central_precocious_puberty-pathway",
-   "title": "Central precocious puberty: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by the onset of progressive secondary sexual characteristics before the conventional age thresholds (around 8 years in girls and 9 years in boys), driven by premature reactivation of the hypothalamic-pituitary-gonadal axis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological features (headache, visual disturbance, seizures, or gelastic episodes) suggesting an intracranial lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: GnRH (LHRH) stimulation test demonstrating a pubertal LH-predominant response, Basal LH and FSH with sex-steroid levels (oestradiol or testosterone), Bone-age radiograph to assess skeletal advancement and height prediction"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: GnRH analogue therapy, such as depot leuprorelin, to suppress the reactivated hypothalamic-pituitary-gonadal axis and halt pubertal progression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on a single basal LH value, which may be prepubertal, rather than performing a stimulation test when suspicion is high"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of central precocious puberty."
-  }
- ],
- "tables": [
-  {
-   "id": "central_precocious_puberty-matrix",
-   "title": "Central precocious puberty: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by the onset of progressive secondary sexual characteristics before the conventional age thresholds (around 8 years in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive",
+  "specialty": "Paediatric & Reproductive Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by the onset of progressive secondary sexual characteristics before the conventional age thresholds (around 8 years in girls and 9 years in boys), driven by premature reactivation of the hypothalamic-pituitary-gonadal axis",
+      "Because it is gonadotropin-dependent, puberty progresses in the normal sequence and tempo, including testicular enlargement in boys and true breast development with a growth spurt in girls",
+      "A GnRH (LHRH) stimulation test showing a pubertal luteinising hormone response is the biochemical hallmark that distinguishes it from gonadotropin-independent (peripheral) causes",
+      "It is far more often idiopathic in girls, whereas an identifiable central nervous system lesion is more likely in boys and in very young children, mandating cranial imaging",
+      "Hypothalamic hamartoma is a classic structural cause and may be accompanied by gelastic (laughing) seizures",
+      "Bone age is advanced relative to chronological age, and untreated progression risks premature epiphyseal fusion and reduced adult height",
+      "First-line management is a long-acting GnRH analogue (agonist), which after initial stimulation down-regulates pituitary gonadotropin secretion and halts pubertal progression"
     ],
-    [
-     "Key Investigations",
-     "GnRH (LHRH) stimulation test demonstrating a pubertal LH-predominant response, Basal LH and FSH with sex-steroid levels",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Central precocious puberty results from premature reactivation of pulsatile hypothalamic gonadotropin-releasing hormone secretion, which stimulates pituitary release of LH and FSH and consequent gonadal sex-steroid production. The activated axis reproduces normal puberty but at an inappropriately early age, so the sequence and progression of pubertal events are physiological. Triggers include disinhibition of the GnRH pulse generator by hypothalamic lesions (hamartoma, tumours, hydrocephalus, cranial irradiation, or previous chronic sex-steroid exposure), genetic changes affecting the pubertal timing network (such as MKRN3 loss of function), and, most commonly in girls, no identifiable cause. The premature sex-steroid exposure accelerates skeletal maturation, advancing bone age ahead of height gain.",
+    "additionalDifferentials": [
+      "Gonadotropin-independent (peripheral) precocious puberty, including testotoxicosis and McCune-Albright syndrome",
+      "Congenital adrenal hyperplasia or a virilising/feminising adrenal tumour",
+      "Isolated premature thelarche",
+      "Isolated premature adrenarche",
+      "Hormone-secreting gonadal tumour",
+      "Exogenous sex-steroid exposure",
+      "Severe primary hypothyroidism causing overlapping pubertal signs"
     ],
-    [
-     "Primary Differentials",
-     "Gonadotropin-independent (peripheral) precocious puberty, including testotoxicosis and McCune-Albright syndrome, Congenital",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "GnRH (LHRH) stimulation test demonstrating a pubertal LH-predominant response",
+      "Basal LH and FSH with sex-steroid levels (oestradiol or testosterone)",
+      "Bone-age radiograph to assess skeletal advancement and height prediction",
+      "Magnetic resonance imaging of the brain and hypothalamic-pituitary region to identify a central lesion",
+      "Pelvic ultrasound in girls to assess uterine and ovarian maturation",
+      "Thyroid function tests to exclude profound hypothyroidism"
     ],
-    [
-     "Management Strategy",
-     "GnRH analogue therapy, such as depot leuprorelin, to suppress the reactivated hypothalamic-pituitary-gonadal axis and halt",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological features (headache, visual disturbance, seizures, or gelastic episodes) suggesting an intracranial lesion",
+      "Precocious puberty in a boy or in a child under about 6 years, which carries a higher risk of underlying pathology",
+      "Very rapid pubertal progression with markedly advancing bone age threatening final height",
+      "Signs of raised intracranial pressure or new focal neurological deficit"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on a single basal LH value, which may be prepubertal, rather than performing a stimulation test when suspicion is high",
-     "Prevent diagnostic or management error"
+    "prognosis": "Idiopathic central precocious puberty generally responds well to GnRH analogue therapy, with arrest of pubertal progression and preservation of adult height potential when treatment is started early; prognosis in secondary forms depends on the underlying central nervous system cause.",
+    "pitfalls": [
+      "Relying on a single basal LH value, which may be prepubertal, rather than performing a stimulation test when suspicion is high",
+      "Omitting brain imaging in young children and in boys, in whom central lesions are more frequent",
+      "Confusing benign isolated premature thelarche or adrenarche with progressive true puberty",
+      "Delaying treatment until height potential is already lost",
+      "Overlooking a peripheral cause that has secondarily triggered central puberty"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "GnRH analogue therapy, such as depot leuprorelin, to suppress the reactivated hypothalamic-pituitary-gonadal axis and halt pubertal progression",
+      "MRI-directed treatment of any underlying central lesion such as hamartoma, tumour or hydrocephalus",
+      "Monitoring of pubertal signs, growth velocity and serial bone age to confirm efficacy and preserve adult height potential",
+      "Management of associated gelastic seizures where a hypothalamic hamartoma is present",
+      "Psychological and psychosocial support for the child and family",
+      "Timing cessation of analogue therapy at an age-appropriate point to allow normal resumption of puberty",
+      "Paediatric endocrinology multidisciplinary follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for central precocious puberty."
-  }
- ],
- "diagrams": [
-  {
-   "id": "central-precocious-puberty-real-image",
-   "title": "Central precocious puberty: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "central_precocious_puberty-pathway",
+      "title": "Central precocious puberty: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by the onset of progressive secondary sexual characteristics before the conventional age thresholds (around 8 years in girls and 9 years in boys), driven by premature reactivation of the hypothalamic-pituitary-gonadal axis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological features (headache, visual disturbance, seizures, or gelastic episodes) suggesting an intracranial lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: GnRH (LHRH) stimulation test demonstrating a pubertal LH-predominant response, Basal LH and FSH with sex-steroid levels (oestradiol or testosterone), Bone-age radiograph to assess skeletal advancement and height prediction"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: GnRH analogue therapy, such as depot leuprorelin, to suppress the reactivated hypothalamic-pituitary-gonadal axis and halt pubertal progression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on a single basal LH value, which may be prepubertal, rather than performing a stimulation test when suspicion is high"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of central precocious puberty."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "central_precocious_puberty-matrix",
+      "title": "Central precocious puberty: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by the onset of progressive secondary sexual characteristics before the conventional age thresholds (around 8 years in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "GnRH (LHRH) stimulation test demonstrating a pubertal LH-predominant response, Basal LH and FSH with sex-steroid levels",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gonadotropin-independent (peripheral) precocious puberty, including testotoxicosis and McCune-Albright syndrome, Congenital",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "GnRH analogue therapy, such as depot leuprorelin, to suppress the reactivated hypothalamic-pituitary-gonadal axis and halt",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a single basal LH value, which may be prepubertal, rather than performing a stimulation test when suspicion is high",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for central precocious puberty."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 347-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_precocious_puberty-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "GnRH (LHRH) stimulation test",
+          "cells": [
+            {
+              "text": "Pubertal LH-predominant response is the biochemical hallmark"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basal LH and FSH with sex-steroid levels",
+          "cells": [
+            {
+              "text": "Oestradiol or testosterone levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-age radiograph",
+          "cells": [
+            {
+              "text": "Skeletal advancement relative to chronological age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain and hypothalamic-pituitary region",
+          "cells": [
+            {
+              "text": "Identifies a central lesion; more likely in boys and very young children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound in girls",
+          "cells": [
+            {
+              "text": "Uterine and ovarian maturation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_precocious_puberty-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gonadotropin-independent (peripheral) precocious puberty",
+          "cells": [
+            {
+              "text": "No pubertal LH response on GnRH stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated premature thelarche",
+          "cells": [
+            {
+              "text": "Benign breast development, not progressive true puberty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_precocious_puberty-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "GnRH analogue therapy",
+          "cells": [
+            {
+              "text": "Long-acting GnRH agonist such as depot leuprorelin"
+            },
+            {
+              "text": "First-line; halts pubertal progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any central lesion",
+          "cells": [
+            {
+              "text": "MRI-directed treatment of hamartoma, tumour or hydrocephalus"
+            },
+            {
+              "text": "Structural cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Pubertal signs, growth velocity and serial bone age"
+            },
+            {
+              "text": "Preserves adult height potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gelastic seizures",
+          "cells": [
+            {
+              "text": "Manage gelastic seizures where a hypothalamic hamartoma is present"
+            },
+            {
+              "text": "Hypothalamic hamartoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosocial support",
+          "cells": [
+            {
+              "text": "Psychological and psychosocial support for child and family"
+            },
+            {
+              "text": "Child and family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timing of cessation",
+          "cells": [
+            {
+              "text": "Stop analogue therapy at an age-appropriate point"
+            },
+            {
+              "text": "Normal puberty then resumes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric endocrinology follow-up",
+          "cells": [
+            {
+              "text": "Multidisciplinary follow-up"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_precocious_puberty-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Differential diagnosis of precocious puberty",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Central (GnRH dependent)",
+          "cells": [
+            {
+              "text": "Idiopathic; CNS tumors (hamartomas, astrocytomas, adenomyomas, gliomas, germinomas); CNS infection; head trauma; iatrogenic (radiation, chemotherapy, surgical); CNS malformation (arachnoid or suprasellar cysts, septo-optic dysplasia, hydrocephalus)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral (GnRH independent)",
+          "cells": [
+            {
+              "text": "Congenital adrenal hyperplasia; estrogen-producing tumors (adrenal, ovarian); gonadotropin or hCG-producing tumors; exogenous exposure to estrogen or androgen; McCune-Albright syndrome; aromatase excess syndrome"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_precocious_puberty-dx-mgmt",
+      "title": "Diagnosis and management of Central precocious puberty",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central precocious puberty: early progressive secondary sexual characteristics",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological features, a boy, or a child under about 6 years)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: MRI brain and urgent paediatric endocrinology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GnRH stimulation test, basal LH and FSH, bone age and MRI of the brain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pubertal LH response on GnRH stimulation confirms central puberty?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "GnRH analogue therapy, such as depot leuprorelin, to halt progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check peripheral precocious puberty and premature thelarche",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat any central lesion such as hamartoma, tumour or hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor growth velocity and serial bone age to preserve adult height",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage gelastic seizures if a hypothalamic hamartoma is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early treatment preserves height potential; secondary forms depend on the cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

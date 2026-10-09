@@ -1,175 +1,462 @@
 {
- "id": "spinal_muscular_atrophy_lower_extremity",
- "name": "Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2)",
- "aliases": [
-  "SMA-LED",
-  "lower-extremity predominant spinal muscular atrophy",
-  "DYNC1H1",
-  "BICD2",
-  "autosomal dominant lower-limb SMA"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley and Daroff Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant motor neuronopathy in which weakness and wasting predominate in the lower limbs, particularly the proximal thigh and quadriceps muscles",
-   "Caused by variants in DYNC1H1 (the heavy chain of cytoplasmic dynein) or BICD2 (a dynein-adaptor protein), both essential for retrograde axonal transport",
-   "Often presents in early childhood with delayed walking, a waddling gait and difficulty rising, and may appear relatively static over long periods",
-   "Predominant proximal lower-limb involvement with relative sparing of the upper limbs helps distinguish it from length-dependent neuropathies",
-   "Some DYNC1H1 cases have associated cortical malformations and learning difficulty, reflecting the wider role of dynein in the developing brain",
-   "Electrophysiology shows a motor neuronopathy pattern with chronic denervation and preserved sensory responses",
-   "Diagnosis requires the lower-limb-predominant distribution together with genetic confirmation of a DYNC1H1 or BICD2 variant"
+  "id": "spinal_muscular_atrophy_lower_extremity",
+  "name": "Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2)",
+  "aliases": [
+    "SMA-LED",
+    "lower-extremity predominant spinal muscular atrophy",
+    "DYNC1H1",
+    "BICD2",
+    "autosomal dominant lower-limb SMA"
   ],
-  "pathophysiology": "Lower-extremity-predominant spinal muscular atrophy is a dominant motor neurone disorder caused by variants in components of the cytoplasmic dynein transport machinery: DYNC1H1 encodes the dynein heavy chain and BICD2 encodes an adaptor that links dynein to its cargo. Disruption of dynein-mediated retrograde axonal transport impairs the delivery of signalling molecules and organelles within motor neurones, leading to degeneration that preferentially affects the neurones supplying proximal lower-limb muscles. The result is a largely static or slowly progressive lower motor neurone weakness with preserved sensation. Because dynein is also crucial to neuronal migration, some DYNC1H1 variants additionally cause brain malformation and cognitive impairment.",
-  "additionalDifferentials": [
-   "SMN1-related spinal muscular atrophy type 3",
-   "Limb-girdle muscular dystrophies",
-   "Congenital myopathies with proximal weakness",
-   "Chronic inflammatory demyelinating polyradiculoneuropathy with proximal weakness",
-   "Hereditary spastic paraplegia when there is a lower-limb-predominant picture",
-   "Other distal or proximal hereditary motor neuropathies"
-  ],
-  "additionalInvestigations": [
-   "Electromyography and nerve conduction studies showing chronic motor neuronopathy with preserved sensation",
-   "DYNC1H1 and BICD2 sequencing or a hereditary neuromuscular panel",
-   "SMN1 testing to exclude 5q spinal muscular atrophy",
-   "Creatine kinase and muscle imaging to help separate neurogenic from myopathic weakness",
-   "Brain MRI where cortical malformation or learning difficulty is present",
-   "Detailed family history for dominant inheritance"
-  ],
-  "redFlags": [
-   "Prominent upper motor neurone signs suggesting an alternative diagnosis",
-   "Seizures or significant developmental regression pointing to associated brain malformation",
-   "Rapidly progressive weakness inconsistent with a largely static disorder",
-   "Respiratory involvement, which is atypical and warrants review"
-  ],
-  "prognosis": "Often relatively static or only slowly progressive, with many patients remaining ambulant into adulthood; prognosis is more guarded in DYNC1H1 cases complicated by brain malformation and cognitive impairment.",
-  "pitfalls": [
-   "Mistaking proximal lower-limb weakness for a primary muscle disease without electrophysiology",
-   "Not testing DYNC1H1/BICD2 after a negative SMN1 result",
-   "Overlooking associated cortical malformation and learning difficulty in DYNC1H1 disease",
-   "Assuming steady progression when the course is frequently static"
-  ],
-  "references": [
-   "GeneReviews: DYNC1H1- and BICD2-Related Spinal Muscular Atrophy",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive care centred on physiotherapy to maintain lower-limb strength, range of motion and gait, as there is no gene-specific disease-modifying therapy",
-   "Prescribe orthoses such as ankle-foot orthoses and mobility aids to support proximal lower-limb weakness and reduce falls",
-   "Manage foot deformity and contractures with orthopaedic input and, where indicated, corrective surgery",
-   "Screen DYNC1H1 patients for associated cortical malformation and learning difficulty with brain MRI and neurodevelopmental support where indicated",
-   "Monitor the largely static to slowly progressive course with periodic functional and respiratory assessment",
-   "Distinguish from 5q spinal muscular atrophy by SMN1 testing so that prognosis and management are correctly framed",
-   "Offer genetic counselling for autosomal dominant inheritance and cascade testing of relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinal_muscular_atrophy_lower_extremity-pathway",
-   "title": "Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant motor neuronopathy in which weakness and wasting predominate in the lower limbs, particularly the proximal thigh and quadriceps muscles",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Prominent upper motor neurone signs suggesting an alternative diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electromyography and nerve conduction studies showing chronic motor neuronopathy with preserved sensation, DYNC1H1 and BICD2 sequencing or a hereditary neuromuscular panel, SMN1 testing to exclude 5q spinal muscular atrophy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive care centred on physiotherapy to maintain lower-limb strength, range of motion and gait, as there is no gene-specific disease-modifying therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking proximal lower-limb weakness for a primary muscle disease without electrophysiology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinal muscular atrophy, lower-extremity predominant (dync1h1/bicd2)."
-  }
- ],
- "tables": [
-  {
-   "id": "spinal_muscular_atrophy_lower_extremity-matrix",
-   "title": "Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant motor neuronopathy in which weakness and wasting predominate in the lower limbs, particularly the proximal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley and Daroff Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant motor neuronopathy in which weakness and wasting predominate in the lower limbs, particularly the proximal thigh and quadriceps muscles",
+      "Caused by variants in DYNC1H1 (the heavy chain of cytoplasmic dynein) or BICD2 (a dynein-adaptor protein), both essential for retrograde axonal transport",
+      "Often presents in early childhood with delayed walking, a waddling gait and difficulty rising, and may appear relatively static over long periods",
+      "Predominant proximal lower-limb involvement with relative sparing of the upper limbs helps distinguish it from length-dependent neuropathies",
+      "Some DYNC1H1 cases have associated cortical malformations and learning difficulty, reflecting the wider role of dynein in the developing brain",
+      "Electrophysiology shows a motor neuronopathy pattern with chronic denervation and preserved sensory responses",
+      "Diagnosis requires the lower-limb-predominant distribution together with genetic confirmation of a DYNC1H1 or BICD2 variant"
     ],
-    [
-     "Key Investigations",
-     "Electromyography and nerve conduction studies showing chronic motor neuronopathy with preserved sensation, DYNC1H1 and BICD2",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lower-extremity-predominant spinal muscular atrophy is a dominant motor neurone disorder caused by variants in components of the cytoplasmic dynein transport machinery: DYNC1H1 encodes the dynein heavy chain and BICD2 encodes an adaptor that links dynein to its cargo. Disruption of dynein-mediated retrograde axonal transport impairs the delivery of signalling molecules and organelles within motor neurones, leading to degeneration that preferentially affects the neurones supplying proximal lower-limb muscles. The result is a largely static or slowly progressive lower motor neurone weakness with preserved sensation. Because dynein is also crucial to neuronal migration, some DYNC1H1 variants additionally cause brain malformation and cognitive impairment.",
+    "additionalDifferentials": [
+      "SMN1-related spinal muscular atrophy type 3",
+      "Limb-girdle muscular dystrophies",
+      "Congenital myopathies with proximal weakness",
+      "Chronic inflammatory demyelinating polyradiculoneuropathy with proximal weakness",
+      "Hereditary spastic paraplegia when there is a lower-limb-predominant picture",
+      "Other distal or proximal hereditary motor neuropathies"
     ],
-    [
-     "Primary Differentials",
-     "SMN1-related spinal muscular atrophy type 3, Limb-girdle muscular dystrophies, Congenital myopathies with proximal weakness",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electromyography and nerve conduction studies showing chronic motor neuronopathy with preserved sensation",
+      "DYNC1H1 and BICD2 sequencing or a hereditary neuromuscular panel",
+      "SMN1 testing to exclude 5q spinal muscular atrophy",
+      "Creatine kinase and muscle imaging to help separate neurogenic from myopathic weakness",
+      "Brain MRI where cortical malformation or learning difficulty is present",
+      "Detailed family history for dominant inheritance"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive care centred on physiotherapy to maintain lower-limb strength, range of motion and gait, as there is no",
-     "Core treatment modality"
+    "redFlags": [
+      "Prominent upper motor neurone signs suggesting an alternative diagnosis",
+      "Seizures or significant developmental regression pointing to associated brain malformation",
+      "Rapidly progressive weakness inconsistent with a largely static disorder",
+      "Respiratory involvement, which is atypical and warrants review"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking proximal lower-limb weakness for a primary muscle disease without electrophysiology",
-     "Prevent diagnostic or management error"
+    "prognosis": "Often relatively static or only slowly progressive, with many patients remaining ambulant into adulthood; prognosis is more guarded in DYNC1H1 cases complicated by brain malformation and cognitive impairment.",
+    "pitfalls": [
+      "Mistaking proximal lower-limb weakness for a primary muscle disease without electrophysiology",
+      "Not testing DYNC1H1/BICD2 after a negative SMN1 result",
+      "Overlooking associated cortical malformation and learning difficulty in DYNC1H1 disease",
+      "Assuming steady progression when the course is frequently static"
+    ],
+    "references": [
+      "GeneReviews: DYNC1H1- and BICD2-Related Spinal Muscular Atrophy",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive care centred on physiotherapy to maintain lower-limb strength, range of motion and gait, as there is no gene-specific disease-modifying therapy",
+      "Prescribe orthoses such as ankle-foot orthoses and mobility aids to support proximal lower-limb weakness and reduce falls",
+      "Manage foot deformity and contractures with orthopaedic input and, where indicated, corrective surgery",
+      "Screen DYNC1H1 patients for associated cortical malformation and learning difficulty with brain MRI and neurodevelopmental support where indicated",
+      "Monitor the largely static to slowly progressive course with periodic functional and respiratory assessment",
+      "Distinguish from 5q spinal muscular atrophy by SMN1 testing so that prognosis and management are correctly framed",
+      "Offer genetic counselling for autosomal dominant inheritance and cascade testing of relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinal muscular atrophy, lower-extremity predominant (dync1h1/bicd2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinal-muscular-atrophy-lower-extremity-real-image",
-   "title": "Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinal_muscular_atrophy_lower_extremity-pathway",
+      "title": "Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant motor neuronopathy in which weakness and wasting predominate in the lower limbs, particularly the proximal thigh and quadriceps muscles",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Prominent upper motor neurone signs suggesting an alternative diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electromyography and nerve conduction studies showing chronic motor neuronopathy with preserved sensation, DYNC1H1 and BICD2 sequencing or a hereditary neuromuscular panel, SMN1 testing to exclude 5q spinal muscular atrophy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive care centred on physiotherapy to maintain lower-limb strength, range of motion and gait, as there is no gene-specific disease-modifying therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking proximal lower-limb weakness for a primary muscle disease without electrophysiology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinal muscular atrophy, lower-extremity predominant (dync1h1/bicd2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity-matrix",
+      "title": "Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant motor neuronopathy in which weakness and wasting predominate in the lower limbs, particularly the proximal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electromyography and nerve conduction studies showing chronic motor neuronopathy with preserved sensation, DYNC1H1 and BICD2",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SMN1-related spinal muscular atrophy type 3, Limb-girdle muscular dystrophies, Congenital myopathies with proximal weakness",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive care centred on physiotherapy to maintain lower-limb strength, range of motion and gait, as there is no",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking proximal lower-limb weakness for a primary muscle disease without electrophysiology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinal muscular atrophy, lower-extremity predominant (dync1h1/bicd2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley and Daroff Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "EMG and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Chronic motor neuronopathy with preserved sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DYNC1H1 and BICD2 sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SMN1 testing",
+          "cells": [
+            {
+              "text": "Excludes 5q spinal muscular atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and muscle imaging",
+          "cells": [
+            {
+              "text": "Neurogenic versus myopathic weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cortical malformation or learning difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "SMN1-related spinal muscular atrophy type 3",
+          "cells": [
+            {
+              "text": "Excluded by SMN1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spastic paraplegia",
+          "cells": [
+            {
+              "text": "Upper motor neurone signs argue against a motor neuronopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+          "cells": [
+            {
+              "text": "Sensation is preserved here; electrophysiology separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Lower-limb strength, range of motion and gait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-foot orthoses and mobility aids",
+          "cells": [
+            {
+              "text": "Proximal lower-limb weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic care",
+          "cells": [
+            {
+              "text": "Foot deformity and contractures, with corrective surgery if indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and neurodevelopmental review",
+          "cells": [
+            {
+              "text": "DYNC1H1 patients with cortical malformation or learning difficulty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic assessment",
+          "cells": [
+            {
+              "text": "Functional and respiratory review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; cascade testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinal_muscular_atrophy_lower_extremity-dx-mgmt",
+      "title": "Diagnosis and management of Spinal muscular atrophy, lower-extremity predominant (DYNC1H1/BICD2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lower-limb weakness with waddling gait in childhood: suspected lower-limb SMA",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (upper motor neurone signs, seizures, rapid decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for an alternative diagnosis or brain malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "EMG and nerve conduction; DYNC1H1 and BICD2 sequencing; SMN1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are DYNC1H1 or BICD2 variants found with a lower-limb-predominant neuronopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider SMN1 type 3 SMA, HSP or CIDP; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy to maintain strength, range of motion and gait",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses and mobility aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic care for foot deformity and contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Brain MRI and neurodevelopmental review for DYNC1H1 patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Course is largely static to slowly progressive; genetic confirmation is needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,505 @@
 {
- "id": "adtkd_uromodulin",
- "name": "Autosomal dominant tubulointerstitial kidney disease, UMOD-related",
- "aliases": [
-  "ADTKD-UMOD",
-  "Uromodulin-associated kidney disease",
-  "Familial juvenile hyperuricaemic nephropathy type 1",
-  "Medullary cystic kidney disease type 2"
- ],
- "class": "non_infective",
- "system": "Renal (tubulointerstitial)",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical genetics and nephrology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant tubulointerstitial kidney disease caused by variants in UMOD, which encodes uromodulin (Tamm-Horsfall protein), the predominant protein of normal urine, synthesised only in the thick ascending limb of the loop of Henle.",
-   "Early hyperuricaemia and gout, often appearing in adolescence or young adulthood and disproportionate to the degree of renal impairment, are the most characteristic clues.",
-   "Urinalysis is typically bland with minimal proteinuria and little or no haematuria, which can falsely reassure the clinician.",
-   "The fractional excretion of urate is inappropriately low for the level of serum urate, reflecting avid tubular urate reabsorption.",
-   "Kidneys are normal-sized or small; medullary or corticomedullary cysts may be present but are not required for the diagnosis.",
-   "Most pathogenic variants are missense changes affecting conserved cysteine residues, causing uromodulin misfolding and endoplasmic reticulum retention within tubular cells.",
-   "Diagnosis rests on targeted genetic testing supported by a family history of dominantly inherited chronic kidney disease and premature gout.",
-   "The disease does not recur after kidney transplantation, so grafting is an effective long-term option."
+  "id": "adtkd_uromodulin",
+  "name": "Autosomal dominant tubulointerstitial kidney disease, UMOD-related",
+  "aliases": [
+    "ADTKD-UMOD",
+    "Uromodulin-associated kidney disease",
+    "Familial juvenile hyperuricaemic nephropathy type 1",
+    "Medullary cystic kidney disease type 2"
   ],
-  "pathophysiology": "UMOD encodes uromodulin, a glycosylphosphatidylinositol-anchored glycoprotein produced exclusively by epithelial cells of the thick ascending limb and early distal convoluted tubule. Most disease-causing variants are missense changes that alter conserved cysteine residues within the calcium-binding domains, disrupting disulphide bonding and causing the protein to misfold. Rather than trafficking to the apical membrane, misfolded uromodulin is retained in the endoplasmic reticulum, triggering the unfolded protein response, chronic endoplasmic reticulum stress and progressive tubular injury, with reduced urinary uromodulin excretion. Impaired uromodulin handling disturbs thick ascending limb transport (including the sodium-potassium-chloride cotransport apparatus), promoting subtle salt wasting and volume contraction that secondarily enhance proximal urate reabsorption; this manifests as a low fractional excretion of urate with early hyperuricaemia and gout. Over years the accumulated tubular stress drives interstitial fibrosis and tubular atrophy, producing slowly progressive chronic kidney disease.",
-  "additionalDifferentials": [
-   "Other ADTKD subtypes (MUC1, REN, HNF1B, SEC61A1)",
-   "Autosomal dominant polycystic kidney disease",
-   "Nephronophthisis",
-   "Primary gout with chronic urate nephropathy",
-   "Alport syndrome and other hereditary nephropathies (usually with haematuria)",
-   "Chronic lead nephropathy"
-  ],
-  "additionalInvestigations": [
-   "Serum urate together with fractional excretion of urate",
-   "Renal ultrasound to assess kidney size and medullary or corticomedullary cysts",
-   "Urinalysis with quantification of proteinuria",
-   "Targeted UMOD sequencing or a dedicated ADTKD gene panel",
-   "Detailed multigenerational family pedigree",
-   "Renal biopsy with uromodulin immunostaining showing tubular endoplasmic reticulum retention, when biopsy is performed"
-  ],
-  "redFlags": [
-   "Gout in adolescence or early adulthood, especially with a family history of kidney failure",
-   "Progressive chronic kidney disease with a persistently bland urinary sediment",
-   "Family history of dominantly inherited end-stage kidney disease of unexplained cause",
-   "Rapidly worsening renal function suggesting a superimposed insult"
-  ],
-  "prognosis": "Slowly progressive chronic kidney disease reaching the end stage in adulthood, with wide variation in the age of onset within and between affected families. Kidney transplantation is effective because the disease does not recur in the allograft.",
-  "pitfalls": [
-   "Labelling the presentation as primary gout and missing the underlying hereditary kidney disease",
-   "Being falsely reassured by bland urine and normal-sized kidneys",
-   "Expecting cysts to be present, when their absence does not exclude the diagnosis",
-   "Assuming urate-lowering therapy will halt renal progression, for which evidence is lacking"
-  ],
-  "references": [
-   "Clinical genetics references",
-   "Nephrology reference texts",
-   "Consensus guidance on autosomal dominant tubulointerstitial kidney disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initiate urate-lowering therapy with a xanthine oxidase inhibitor such as allopurinol or febuxostat early to control hyperuricaemia and prevent recurrent gout, even before significant renal impairment",
-   "Treat acute gout flares with colchicine or corticosteroids, using non-steroidal anti-inflammatory drugs cautiously given the renal impairment",
-   "Provide general chronic kidney disease care with blood pressure control, avoidance of nephrotoxins and management of cardiovascular risk",
-   "Encourage adequate salt and fluid intake and avoid volume depletion, since impaired thick ascending limb transport predisposes to salt wasting",
-   "Monitor renal function, serum urate and blood pressure at regular intervals to track progression",
-   "Plan renal replacement therapy as disease advances, with kidney transplantation preferred because the disorder does not recur in the allograft",
-   "Offer genetic counselling and cascade UMOD testing to at-risk relatives given autosomal dominant inheritance",
-   "Refer to nephrology with clinical genetics input for confirmatory testing and family assessment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adtkd_uromodulin-pathway",
-   "title": "Autosomal dominant tubulointerstitial kidney disease, UMOD-related: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant tubulointerstitial kidney disease caused by variants in UMOD, which encodes uromodulin (Tamm-Horsfall protein), the predominant protein of normal urine, synthesised only in the thick ascending limb of the loop of Henle.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Gout in adolescence or early adulthood, especially with a family history of kidney failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum urate together with fractional excretion of urate, Renal ultrasound to assess kidney size and medullary or corticomedullary cysts, Urinalysis with quantification of proteinuria"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initiate urate-lowering therapy with a xanthine oxidase inhibitor such as allopurinol or febuxostat early to control hyperuricaemia and prevent recurrent gout, even before significant renal impairment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the presentation as primary gout and missing the underlying hereditary kidney disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autosomal dominant tubulointerstitial kidney disease, umod-related."
-  }
- ],
- "tables": [
-  {
-   "id": "adtkd_uromodulin-matrix",
-   "title": "Autosomal dominant tubulointerstitial kidney disease, UMOD-related: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant tubulointerstitial kidney disease caused by variants in UMOD, which encodes uromodulin (Tamm-Horsfall",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal (tubulointerstitial)",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical genetics and nephrology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant tubulointerstitial kidney disease caused by variants in UMOD, which encodes uromodulin (Tamm-Horsfall protein), the predominant protein of normal urine, synthesised only in the thick ascending limb of the loop of Henle.",
+      "Early hyperuricaemia and gout, often appearing in adolescence or young adulthood and disproportionate to the degree of renal impairment, are the most characteristic clues.",
+      "Urinalysis is typically bland with minimal proteinuria and little or no haematuria, which can falsely reassure the clinician.",
+      "The fractional excretion of urate is inappropriately low for the level of serum urate, reflecting avid tubular urate reabsorption.",
+      "Kidneys are normal-sized or small; medullary or corticomedullary cysts may be present but are not required for the diagnosis.",
+      "Most pathogenic variants are missense changes affecting conserved cysteine residues, causing uromodulin misfolding and endoplasmic reticulum retention within tubular cells.",
+      "Diagnosis rests on targeted genetic testing supported by a family history of dominantly inherited chronic kidney disease and premature gout.",
+      "The disease does not recur after kidney transplantation, so grafting is an effective long-term option."
     ],
-    [
-     "Key Investigations",
-     "Serum urate together with fractional excretion of urate, Renal ultrasound to assess kidney size and medullary or corticomedullary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "UMOD encodes uromodulin, a glycosylphosphatidylinositol-anchored glycoprotein produced exclusively by epithelial cells of the thick ascending limb and early distal convoluted tubule. Most disease-causing variants are missense changes that alter conserved cysteine residues within the calcium-binding domains, disrupting disulphide bonding and causing the protein to misfold. Rather than trafficking to the apical membrane, misfolded uromodulin is retained in the endoplasmic reticulum, triggering the unfolded protein response, chronic endoplasmic reticulum stress and progressive tubular injury, with reduced urinary uromodulin excretion. Impaired uromodulin handling disturbs thick ascending limb transport (including the sodium-potassium-chloride cotransport apparatus), promoting subtle salt wasting and volume contraction that secondarily enhance proximal urate reabsorption; this manifests as a low fractional excretion of urate with early hyperuricaemia and gout. Over years the accumulated tubular stress drives interstitial fibrosis and tubular atrophy, producing slowly progressive chronic kidney disease.",
+    "additionalDifferentials": [
+      "Other ADTKD subtypes (MUC1, REN, HNF1B, SEC61A1)",
+      "Autosomal dominant polycystic kidney disease",
+      "Nephronophthisis",
+      "Primary gout with chronic urate nephropathy",
+      "Alport syndrome and other hereditary nephropathies (usually with haematuria)",
+      "Chronic lead nephropathy"
     ],
-    [
-     "Primary Differentials",
-     "Other ADTKD subtypes (MUC1, REN, HNF1B, SEC61A1), Autosomal dominant polycystic kidney disease, Nephronophthisis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum urate together with fractional excretion of urate",
+      "Renal ultrasound to assess kidney size and medullary or corticomedullary cysts",
+      "Urinalysis with quantification of proteinuria",
+      "Targeted UMOD sequencing or a dedicated ADTKD gene panel",
+      "Detailed multigenerational family pedigree",
+      "Renal biopsy with uromodulin immunostaining showing tubular endoplasmic reticulum retention, when biopsy is performed"
     ],
-    [
-     "Management Strategy",
-     "Initiate urate-lowering therapy with a xanthine oxidase inhibitor such as allopurinol or febuxostat early to control",
-     "Core treatment modality"
+    "redFlags": [
+      "Gout in adolescence or early adulthood, especially with a family history of kidney failure",
+      "Progressive chronic kidney disease with a persistently bland urinary sediment",
+      "Family history of dominantly inherited end-stage kidney disease of unexplained cause",
+      "Rapidly worsening renal function suggesting a superimposed insult"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the presentation as primary gout and missing the underlying hereditary kidney disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Slowly progressive chronic kidney disease reaching the end stage in adulthood, with wide variation in the age of onset within and between affected families. Kidney transplantation is effective because the disease does not recur in the allograft.",
+    "pitfalls": [
+      "Labelling the presentation as primary gout and missing the underlying hereditary kidney disease",
+      "Being falsely reassured by bland urine and normal-sized kidneys",
+      "Expecting cysts to be present, when their absence does not exclude the diagnosis",
+      "Assuming urate-lowering therapy will halt renal progression, for which evidence is lacking"
+    ],
+    "references": [
+      "Clinical genetics references",
+      "Nephrology reference texts",
+      "Consensus guidance on autosomal dominant tubulointerstitial kidney disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initiate urate-lowering therapy with a xanthine oxidase inhibitor such as allopurinol or febuxostat early to control hyperuricaemia and prevent recurrent gout, even before significant renal impairment",
+      "Treat acute gout flares with colchicine or corticosteroids, using non-steroidal anti-inflammatory drugs cautiously given the renal impairment",
+      "Provide general chronic kidney disease care with blood pressure control, avoidance of nephrotoxins and management of cardiovascular risk",
+      "Encourage adequate salt and fluid intake and avoid volume depletion, since impaired thick ascending limb transport predisposes to salt wasting",
+      "Monitor renal function, serum urate and blood pressure at regular intervals to track progression",
+      "Plan renal replacement therapy as disease advances, with kidney transplantation preferred because the disorder does not recur in the allograft",
+      "Offer genetic counselling and cascade UMOD testing to at-risk relatives given autosomal dominant inheritance",
+      "Refer to nephrology with clinical genetics input for confirmatory testing and family assessment"
     ]
-   ],
-   "caption": "Overview comparison matrix for autosomal dominant tubulointerstitial kidney disease, umod-related."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adtkd-uromodulin-real-image",
-   "title": "Autosomal dominant tubulointerstitial kidney disease, UMOD-related: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "adtkd_uromodulin-pathway",
+      "title": "Autosomal dominant tubulointerstitial kidney disease, UMOD-related: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant tubulointerstitial kidney disease caused by variants in UMOD, which encodes uromodulin (Tamm-Horsfall protein), the predominant protein of normal urine, synthesised only in the thick ascending limb of the loop of Henle.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Gout in adolescence or early adulthood, especially with a family history of kidney failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum urate together with fractional excretion of urate, Renal ultrasound to assess kidney size and medullary or corticomedullary cysts, Urinalysis with quantification of proteinuria"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initiate urate-lowering therapy with a xanthine oxidase inhibitor such as allopurinol or febuxostat early to control hyperuricaemia and prevent recurrent gout, even before significant renal impairment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the presentation as primary gout and missing the underlying hereditary kidney disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autosomal dominant tubulointerstitial kidney disease, umod-related."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adtkd_uromodulin-matrix",
+      "title": "Autosomal dominant tubulointerstitial kidney disease, UMOD-related: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant tubulointerstitial kidney disease caused by variants in UMOD, which encodes uromodulin (Tamm-Horsfall",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum urate together with fractional excretion of urate, Renal ultrasound to assess kidney size and medullary or corticomedullary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other ADTKD subtypes (MUC1, REN, HNF1B, SEC61A1), Autosomal dominant polycystic kidney disease, Nephronophthisis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initiate urate-lowering therapy with a xanthine oxidase inhibitor such as allopurinol or febuxostat early to control",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the presentation as primary gout and missing the underlying hereditary kidney disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autosomal dominant tubulointerstitial kidney disease, umod-related."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adtkd_uromodulin-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum urate with fractional excretion of urate",
+          "cells": [
+            {
+              "text": "Inappropriately low fractional excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Kidney size and medullary or corticomedullary cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis with quantification of proteinuria",
+          "cells": [
+            {
+              "text": "Bland sediment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UMOD sequencing or dedicated ADTKD gene panel",
+          "cells": [
+            {
+              "text": "UMOD variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed multigenerational family pedigree",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy with uromodulin immunostaining where performed",
+          "cells": [
+            {
+              "text": "Endoplasmic reticulum retention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adtkd_uromodulin-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other ADTKD subtypes (MUC1, REN, HNF1B, SEC61A1)",
+          "cells": [
+            {
+              "text": "Other ADTKD genes"
+            },
+            {
+              "text": "ADTKD gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant polycystic kidney disease",
+          "cells": [
+            {
+              "text": "Numerous bilateral cysts"
+            },
+            {
+              "text": "Renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alport syndrome and other hereditary nephropathies",
+          "cells": [
+            {
+              "text": "Haematuria"
+            },
+            {
+              "text": "Urinalysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adtkd_uromodulin-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early urate-lowering therapy with allopurinol or febuxostat",
+          "cells": [
+            {
+              "text": "Hyperuricaemia and recurrent gout"
+            },
+            {
+              "text": "Even before significant renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colchicine or corticosteroids for gout flares; NSAIDs with caution",
+          "cells": [
+            {
+              "text": "Acute gout flares"
+            },
+            {
+              "text": "NSAIDs cautiously given renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "General chronic kidney disease care",
+          "cells": [
+            {
+              "text": "Blood pressure, nephrotoxins and cardiovascular risk"
+            },
+            {
+              "text": "Standard CKD care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adequate salt and fluid intake; avoidance of volume depletion",
+          "cells": [
+            {
+              "text": "Salt wasting from impaired transport"
+            },
+            {
+              "text": "Thick ascending limb transport"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of renal function, serum urate and blood pressure",
+          "cells": [
+            {
+              "text": "Disease progression"
+            },
+            {
+              "text": "Regular checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement planning with transplantation preferred",
+          "cells": [
+            {
+              "text": "Advancing kidney failure"
+            },
+            {
+              "text": "No recurrence in the allograft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade UMOD testing",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            },
+            {
+              "text": "At-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adtkd_uromodulin-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal dominant tubulointerstitial kidney disease, UMOD-related",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gout in adolescence or young adulthood with family kidney failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive CKD with bland sediment and dominant family history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology and clinical genetics review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum urate and FEurate; renal ultrasound; urinalysis; pedigree",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Inappropriately low urate excretion with UMOD variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start early urate-lowering therapy; cascade testing in relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review MUC1, REN, HNF1B, ADPKD and Alport syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allopurinol or febuxostat early to control urate and prevent gout",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Colchicine or steroids for flares; NSAIDs cautiously",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood pressure control and avoidance of volume depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progresses to kidney failure in adulthood; transplant is effective",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

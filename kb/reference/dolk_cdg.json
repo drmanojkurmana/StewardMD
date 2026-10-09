@@ -1,176 +1,465 @@
 {
- "id": "dolk_cdg",
- "name": "DOLK-CDG (dolichol kinase, CDG-Im)",
- "aliases": [
-  "DOLK",
-  "DK1",
-  "dolichol kinase deficiency",
-  "congenital disorder of glycosylation type Im",
-  "CDG-Im"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A dolichol-pathway CDG caused by deficiency of dolichol kinase, which phosphorylates dolichol to dolichol phosphate, the essential lipid carrier for glycosylation",
-   "Classically presents with dilated cardiomyopathy, sometimes in relative isolation, which can dominate the clinical picture and lead to heart failure",
-   "A severe multisystem form with ichthyosis, seizures, hypotonia and early death is also recognised, reflecting phenotypic heterogeneity",
-   "Because dolichol phosphate is needed to assemble the lipid-linked oligosaccharide, the biochemical defect produces a type I transferrin pattern",
-   "Cardiac involvement can present without the prominent neurological picture typical of many other CDGs, so CDG should be considered in unexplained infantile cardiomyopathy",
-   "Management is supportive, including heart failure care and consideration of transplantation for end-stage cardiomyopathy, coordinated with metabolic specialists",
-   "Diagnosis is confirmed by DOLK molecular genetic testing"
+  "id": "dolk_cdg",
+  "name": "DOLK-CDG (dolichol kinase, CDG-Im)",
+  "aliases": [
+    "DOLK",
+    "DK1",
+    "dolichol kinase deficiency",
+    "congenital disorder of glycosylation type Im",
+    "CDG-Im"
   ],
-  "pathophysiology": "DOLK encodes dolichol kinase, the endoplasmic reticulum enzyme that phosphorylates dolichol to dolichol phosphate. Dolichol phosphate is the obligate lipid anchor on which the oligosaccharide precursor is assembled and is also required for O-mannosylation and GPI-anchor synthesis. Deficiency limits precursor assembly and transfer, giving under-occupied N-glycosylation sites and a type I transferrin pattern. Impaired glycosylation and O-mannosylation of cardiac and other structural proteins is thought to underlie the characteristic dilated cardiomyopathy and, in severe forms, the cutaneous and neurological features.",
-  "additionalDifferentials": [
-   "Other causes of infantile dilated cardiomyopathy (mitochondrial, storage, genetic sarcomeric)",
-   "Other dolichol-pathway and type I CDG subtypes (e.g. DPM1-CDG, SRD5A3-CDG)",
-   "Congenital ichthyosis syndromes when skin involvement predominates",
-   "Barth syndrome and other metabolic cardiomyopathies",
-   "Carnitine and fatty acid oxidation disorders",
-   "Neuromuscular disease with cardiac involvement"
-  ],
-  "additionalInvestigations": [
-   "Transferrin isoelectric focusing or mass spectrometry showing a type I pattern",
-   "DOLK molecular genetic testing",
-   "Echocardiography and cardiac assessment for dilated cardiomyopathy",
-   "Coagulation and liver function studies",
-   "Neuroimaging and electroencephalography when neurological features are present",
-   "Skin assessment for ichthyosis in severe presentations"
-  ],
-  "redFlags": [
-   "Signs of heart failure or a new dilated cardiomyopathy in an infant",
-   "Life-threatening arrhythmia",
-   "Severe ichthyosis with a multisystem, rapidly deteriorating course",
-   "Refractory seizures with encephalopathy"
-  ],
-  "prognosis": "Prognosis is largely determined by the cardiomyopathy, which can progress to end-stage heart failure and early death; the severe multisystem form carries high infant mortality, whereas more isolated cardiac disease may be amenable to heart failure treatment or transplantation.",
-  "pitfalls": [
-   "Not considering CDG in apparently isolated infantile dilated cardiomyopathy",
-   "Assuming a normal neurological examination excludes a glycosylation disorder",
-   "Overlooking the coagulopathy before cardiac procedures",
-   "Expecting a specific pharmacological cure when care is supportive"
-  ],
-  "references": [
-   "Scriver's OMMBID, dolichol pathway disorders of glycosylation",
-   "Nelson Textbook of Paediatrics, disorders of glycosylation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific disease-modifying therapy; management is supportive and coordinated with metabolic specialists",
-   "Heart failure therapy for the dilated cardiomyopathy with diuretics, angiotensin-converting-enzyme inhibitors or angiotensin receptor blockers and beta-blockers as tolerated",
-   "Consideration of cardiac transplantation for end-stage cardiomyopathy",
-   "Antiseizure medication and neurological supportive care in the severe multisystem form with seizures and hypotonia",
-   "Emollients and skin care for ichthyosis, with nutritional support",
-   "Monitor with serial echocardiography, coagulation studies and liver function given multisystem involvement",
-   "Multidisciplinary team including cardiology, metabolic medicine and paediatrics",
-   "Genetic counselling and family testing given autosomal recessive DOLK inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dolk_cdg-pathway",
-   "title": "DOLK-CDG (dolichol kinase, CDG-Im): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A dolichol-pathway CDG caused by deficiency of dolichol kinase, which phosphorylates dolichol to dolichol phosphate, the essential lipid carrier for glycosylation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of heart failure or a new dilated cardiomyopathy in an infant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry showing a type I pattern, DOLK molecular genetic testing, Echocardiography and cardiac assessment for dilated cardiomyopathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific disease-modifying therapy; management is supportive and coordinated with metabolic specialists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not considering CDG in apparently isolated infantile dilated cardiomyopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dolk-cdg (dolichol kinase, cdg-im)."
-  }
- ],
- "tables": [
-  {
-   "id": "dolk_cdg-matrix",
-   "title": "DOLK-CDG (dolichol kinase, CDG-Im): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A dolichol-pathway CDG caused by deficiency of dolichol kinase, which phosphorylates dolichol to dolichol phosphate, the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A dolichol-pathway CDG caused by deficiency of dolichol kinase, which phosphorylates dolichol to dolichol phosphate, the essential lipid carrier for glycosylation",
+      "Classically presents with dilated cardiomyopathy, sometimes in relative isolation, which can dominate the clinical picture and lead to heart failure",
+      "A severe multisystem form with ichthyosis, seizures, hypotonia and early death is also recognised, reflecting phenotypic heterogeneity",
+      "Because dolichol phosphate is needed to assemble the lipid-linked oligosaccharide, the biochemical defect produces a type I transferrin pattern",
+      "Cardiac involvement can present without the prominent neurological picture typical of many other CDGs, so CDG should be considered in unexplained infantile cardiomyopathy",
+      "Management is supportive, including heart failure care and consideration of transplantation for end-stage cardiomyopathy, coordinated with metabolic specialists",
+      "Diagnosis is confirmed by DOLK molecular genetic testing"
     ],
-    [
-     "Key Investigations",
-     "Transferrin isoelectric focusing or mass spectrometry showing a type I pattern, DOLK molecular genetic testing, Echocardiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "DOLK encodes dolichol kinase, the endoplasmic reticulum enzyme that phosphorylates dolichol to dolichol phosphate. Dolichol phosphate is the obligate lipid anchor on which the oligosaccharide precursor is assembled and is also required for O-mannosylation and GPI-anchor synthesis. Deficiency limits precursor assembly and transfer, giving under-occupied N-glycosylation sites and a type I transferrin pattern. Impaired glycosylation and O-mannosylation of cardiac and other structural proteins is thought to underlie the characteristic dilated cardiomyopathy and, in severe forms, the cutaneous and neurological features.",
+    "additionalDifferentials": [
+      "Other causes of infantile dilated cardiomyopathy (mitochondrial, storage, genetic sarcomeric)",
+      "Other dolichol-pathway and type I CDG subtypes (e.g. DPM1-CDG, SRD5A3-CDG)",
+      "Congenital ichthyosis syndromes when skin involvement predominates",
+      "Barth syndrome and other metabolic cardiomyopathies",
+      "Carnitine and fatty acid oxidation disorders",
+      "Neuromuscular disease with cardiac involvement"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of infantile dilated cardiomyopathy (mitochondrial, storage, genetic sarcomeric), Other dolichol-pathway and type I",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transferrin isoelectric focusing or mass spectrometry showing a type I pattern",
+      "DOLK molecular genetic testing",
+      "Echocardiography and cardiac assessment for dilated cardiomyopathy",
+      "Coagulation and liver function studies",
+      "Neuroimaging and electroencephalography when neurological features are present",
+      "Skin assessment for ichthyosis in severe presentations"
     ],
-    [
-     "Management Strategy",
-     "No specific disease-modifying therapy; management is supportive and coordinated with metabolic specialists",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of heart failure or a new dilated cardiomyopathy in an infant",
+      "Life-threatening arrhythmia",
+      "Severe ichthyosis with a multisystem, rapidly deteriorating course",
+      "Refractory seizures with encephalopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Not considering CDG in apparently isolated infantile dilated cardiomyopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is largely determined by the cardiomyopathy, which can progress to end-stage heart failure and early death; the severe multisystem form carries high infant mortality, whereas more isolated cardiac disease may be amenable to heart failure treatment or transplantation.",
+    "pitfalls": [
+      "Not considering CDG in apparently isolated infantile dilated cardiomyopathy",
+      "Assuming a normal neurological examination excludes a glycosylation disorder",
+      "Overlooking the coagulopathy before cardiac procedures",
+      "Expecting a specific pharmacological cure when care is supportive"
+    ],
+    "references": [
+      "Scriver's OMMBID, dolichol pathway disorders of glycosylation",
+      "Nelson Textbook of Paediatrics, disorders of glycosylation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific disease-modifying therapy; management is supportive and coordinated with metabolic specialists",
+      "Heart failure therapy for the dilated cardiomyopathy with diuretics, angiotensin-converting-enzyme inhibitors or angiotensin receptor blockers and beta-blockers as tolerated",
+      "Consideration of cardiac transplantation for end-stage cardiomyopathy",
+      "Antiseizure medication and neurological supportive care in the severe multisystem form with seizures and hypotonia",
+      "Emollients and skin care for ichthyosis, with nutritional support",
+      "Monitor with serial echocardiography, coagulation studies and liver function given multisystem involvement",
+      "Multidisciplinary team including cardiology, metabolic medicine and paediatrics",
+      "Genetic counselling and family testing given autosomal recessive DOLK inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for dolk-cdg (dolichol kinase, cdg-im)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dolk-cdg-real-image",
-   "title": "DOLK-CDG (dolichol kinase, CDG-Im): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dolk_cdg-pathway",
+      "title": "DOLK-CDG (dolichol kinase, CDG-Im): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A dolichol-pathway CDG caused by deficiency of dolichol kinase, which phosphorylates dolichol to dolichol phosphate, the essential lipid carrier for glycosylation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of heart failure or a new dilated cardiomyopathy in an infant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry showing a type I pattern, DOLK molecular genetic testing, Echocardiography and cardiac assessment for dilated cardiomyopathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific disease-modifying therapy; management is supportive and coordinated with metabolic specialists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not considering CDG in apparently isolated infantile dilated cardiomyopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dolk-cdg (dolichol kinase, cdg-im)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dolk_cdg-matrix",
+      "title": "DOLK-CDG (dolichol kinase, CDG-Im): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A dolichol-pathway CDG caused by deficiency of dolichol kinase, which phosphorylates dolichol to dolichol phosphate, the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transferrin isoelectric focusing or mass spectrometry showing a type I pattern, DOLK molecular genetic testing, Echocardiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of infantile dilated cardiomyopathy (mitochondrial, storage, genetic sarcomeric), Other dolichol-pathway and type I",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific disease-modifying therapy; management is supportive and coordinated with metabolic specialists",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not considering CDG in apparently isolated infantile dilated cardiomyopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dolk-cdg (dolichol kinase, cdg-im)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dolk_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Type I pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DOLK molecular genetic testing",
+          "cells": [
+            {
+              "text": "DOLK variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Dilated cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation and liver function studies",
+          "cells": [
+            {
+              "text": "Multisystem involvement and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging and EEG",
+          "cells": [
+            {
+              "text": "Neurological features when present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dolk_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital ichthyosis syndromes",
+          "cells": [
+            {
+              "text": "Skin involvement predominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other type I CDG subtypes (DPM1-CDG, SRD5A3-CDG)",
+          "cells": [
+            {
+              "text": "Type I transferrin pattern; gene testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dolk_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care with metabolic specialists",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Diuretics, ACE inhibitors or ARBs, and beta-blockers as tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac transplantation",
+          "cells": [
+            {
+              "text": "For end-stage cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Severe multisystem form with seizures and hypotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care and nutrition",
+          "cells": [
+            {
+              "text": "Emollients for ichthyosis; nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial echocardiography, coagulation and liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive DOLK; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dolk_cdg-dx-mgmt",
+      "title": "Diagnosis and management of DOLK-CDG (dolichol kinase, CDG-Im)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DOLK-CDG: infant with dilated cardiomyopathy and multisystem disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (heart failure, life-threatening arrhythmia, refractory seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent heart failure and arrhythmia management with cardiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin focusing (type I pattern); DOLK testing; echocardiography; coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a type I transferrin pattern found with a DOLK variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other infantile cardiomyopathies, metabolic disease or ichthyosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Heart failure therapy with diuretics, ACE inhibitors or ARBs, and beta-blockers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider cardiac transplantation for end-stage cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication for the severe multisystem form",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emollients and nutritional support for ichthyosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial echocardiography, coagulation and liver monitoring; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Prognosis set by cardiomyopathy; severe multisystem form carries high infant mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

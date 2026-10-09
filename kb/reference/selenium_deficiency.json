@@ -1,171 +1,411 @@
 {
- "id": "selenium_deficiency",
- "name": "Selenium deficiency",
- "aliases": [
-  "hyposelenaemia",
-  "Keshan disease",
-  "Kashin-Beck disease"
- ],
- "class": "non_infective",
- "system": "Nutrition / Metabolic",
- "specialty": "Nutrition & Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Selenium is an antioxidant trace element, and deficiency is classically linked to Keshan disease, an endemic cardiomyopathy, and Kashin-Beck disease, an osteoarthropathy",
-   "It occurs in geographic regions with selenium-poor soil and in patients on long-term unsupplemented parenteral nutrition",
-   "Manifestations can include cardiomyopathy, skeletal myopathy with weakness, and macrocytosis, and long-term deficiency may impair immune and thyroid function",
-   "Deficiency in Keshan disease areas is thought to increase susceptibility to a viral cofactor in producing the cardiomyopathy",
-   "Serum or plasma selenium and glutathione peroxidase activity help assess status",
-   "Repletion can prevent progression of the cardiomyopathy but may not reverse established myocardial damage",
-   "It should be considered in patients on prolonged artificial nutrition who develop unexplained cardiac or muscle disease"
+  "id": "selenium_deficiency",
+  "name": "Selenium deficiency",
+  "aliases": [
+    "hyposelenaemia",
+    "Keshan disease",
+    "Kashin-Beck disease"
   ],
-  "pathophysiology": "Selenium is incorporated into selenoproteins, notably the glutathione peroxidases and thioredoxin reductases that defend cells against oxidative damage, and into the deiodinases that convert thyroxine to active triiodothyronine. Deficiency reduces antioxidant defence, leaving tissues, especially cardiac and skeletal muscle, vulnerable to oxidative injury, which underlies the cardiomyopathy and myopathy. In endemic regions low soil selenium lowers intake across the population, and an interaction with viral infection is implicated in the pathogenesis of the endemic cardiomyopathy. Impaired deiodinase function can also affect thyroid hormone metabolism.",
-  "additionalDifferentials": [
-   "Other causes of dilated cardiomyopathy",
-   "Other nutritional or metabolic myopathies",
-   "Thiamine deficiency cardiomyopathy",
-   "Primary osteoarthropathy for the Kashin-Beck phenotype",
-   "Other trace element deficiencies in parenteral nutrition"
-  ],
-  "additionalInvestigations": [
-   "Serum or plasma selenium concentration",
-   "Erythrocyte glutathione peroxidase activity as a functional marker",
-   "Cardiac assessment including echocardiography where cardiomyopathy is suspected",
-   "Assessment for coexisting trace element deficiencies in long-term parenteral nutrition",
-   "Thyroid function testing where relevant"
-  ],
-  "redFlags": [
-   "Heart failure or arrhythmia from selenium-deficiency cardiomyopathy",
-   "Progressive skeletal myopathy with significant weakness",
-   "Unexplained cardiac or muscle disease in a patient on long-term parenteral nutrition",
-   "Deterioration despite treatment suggesting established irreversible myocardial damage"
-  ],
-  "prognosis": "Repletion can halt progression and prevent deficiency-related disease, and early cardiomyopathy may improve, but established myocardial damage in Keshan disease may be irreversible.",
-  "pitfalls": [
-   "Omitting trace element supplementation, including selenium, during long-term parenteral nutrition",
-   "Overlooking selenium deficiency as a reversible contributor to cardiomyopathy or myopathy",
-   "Failing to consider geographic and dietary risk in endemic regions",
-   "Assuming repletion will reverse advanced established cardiac damage"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO nutrition guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Replete stores with oral or parenteral selenium (sodium selenite or selenomethionine), the definitive corrective therapy",
-   "Add selenium to long-term parenteral nutrition regimens to prevent iatrogenic deficiency",
-   "Give guideline-based heart failure therapy for deficiency-related cardiomyopathy and treat the associated skeletal myopathy supportively",
-   "Monitor repletion with serial serum or plasma selenium and erythrocyte glutathione peroxidase activity as a functional marker",
-   "Undertake echocardiographic surveillance of cardiac function and screen for coexisting trace element deficiencies, checking thyroid function given impaired deiodinase activity",
-   "Support population-level dietary supplementation or food fortification in endemic selenium-poor regions",
-   "Initiate repletion early to halt progression, recognising that established myocardial damage in Keshan disease may be irreversible"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "selenium_deficiency-pathway",
-   "title": "Selenium deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Selenium is an antioxidant trace element, and deficiency is classically linked to Keshan disease, an endemic cardiomyopathy, and Kashin-Beck disease, an osteoarthropathy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Heart failure or arrhythmia from selenium-deficiency cardiomyopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum or plasma selenium concentration, Erythrocyte glutathione peroxidase activity as a functional marker, Cardiac assessment including echocardiography where cardiomyopathy is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replete stores with oral or parenteral selenium (sodium selenite or selenomethionine), the definitive corrective therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Omitting trace element supplementation, including selenium, during long-term parenteral nutrition"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of selenium deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "selenium_deficiency-matrix",
-   "title": "Selenium deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Selenium is an antioxidant trace element, and deficiency is classically linked to Keshan disease, an endemic cardiomyopathy, and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutrition / Metabolic",
+  "specialty": "Nutrition & Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Selenium is an antioxidant trace element, and deficiency is classically linked to Keshan disease, an endemic cardiomyopathy, and Kashin-Beck disease, an osteoarthropathy",
+      "It occurs in geographic regions with selenium-poor soil and in patients on long-term unsupplemented parenteral nutrition",
+      "Manifestations can include cardiomyopathy, skeletal myopathy with weakness, and macrocytosis, and long-term deficiency may impair immune and thyroid function",
+      "Deficiency in Keshan disease areas is thought to increase susceptibility to a viral cofactor in producing the cardiomyopathy",
+      "Serum or plasma selenium and glutathione peroxidase activity help assess status",
+      "Repletion can prevent progression of the cardiomyopathy but may not reverse established myocardial damage",
+      "It should be considered in patients on prolonged artificial nutrition who develop unexplained cardiac or muscle disease"
     ],
-    [
-     "Key Investigations",
-     "Serum or plasma selenium concentration, Erythrocyte glutathione peroxidase activity as a functional marker, Cardiac assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Selenium is incorporated into selenoproteins, notably the glutathione peroxidases and thioredoxin reductases that defend cells against oxidative damage, and into the deiodinases that convert thyroxine to active triiodothyronine. Deficiency reduces antioxidant defence, leaving tissues, especially cardiac and skeletal muscle, vulnerable to oxidative injury, which underlies the cardiomyopathy and myopathy. In endemic regions low soil selenium lowers intake across the population, and an interaction with viral infection is implicated in the pathogenesis of the endemic cardiomyopathy. Impaired deiodinase function can also affect thyroid hormone metabolism.",
+    "additionalDifferentials": [
+      "Other causes of dilated cardiomyopathy",
+      "Other nutritional or metabolic myopathies",
+      "Thiamine deficiency cardiomyopathy",
+      "Primary osteoarthropathy for the Kashin-Beck phenotype",
+      "Other trace element deficiencies in parenteral nutrition"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of dilated cardiomyopathy, Other nutritional or metabolic myopathies, Thiamine deficiency cardiomyopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum or plasma selenium concentration",
+      "Erythrocyte glutathione peroxidase activity as a functional marker",
+      "Cardiac assessment including echocardiography where cardiomyopathy is suspected",
+      "Assessment for coexisting trace element deficiencies in long-term parenteral nutrition",
+      "Thyroid function testing where relevant"
     ],
-    [
-     "Management Strategy",
-     "Replete stores with oral or parenteral selenium (sodium selenite or selenomethionine), the definitive corrective therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Heart failure or arrhythmia from selenium-deficiency cardiomyopathy",
+      "Progressive skeletal myopathy with significant weakness",
+      "Unexplained cardiac or muscle disease in a patient on long-term parenteral nutrition",
+      "Deterioration despite treatment suggesting established irreversible myocardial damage"
     ],
-    [
-     "Clinical Pitfall",
-     "Omitting trace element supplementation, including selenium, during long-term parenteral nutrition",
-     "Prevent diagnostic or management error"
+    "prognosis": "Repletion can halt progression and prevent deficiency-related disease, and early cardiomyopathy may improve, but established myocardial damage in Keshan disease may be irreversible.",
+    "pitfalls": [
+      "Omitting trace element supplementation, including selenium, during long-term parenteral nutrition",
+      "Overlooking selenium deficiency as a reversible contributor to cardiomyopathy or myopathy",
+      "Failing to consider geographic and dietary risk in endemic regions",
+      "Assuming repletion will reverse advanced established cardiac damage"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO nutrition guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Replete stores with oral or parenteral selenium (sodium selenite or selenomethionine), the definitive corrective therapy",
+      "Add selenium to long-term parenteral nutrition regimens to prevent iatrogenic deficiency",
+      "Give guideline-based heart failure therapy for deficiency-related cardiomyopathy and treat the associated skeletal myopathy supportively",
+      "Monitor repletion with serial serum or plasma selenium and erythrocyte glutathione peroxidase activity as a functional marker",
+      "Undertake echocardiographic surveillance of cardiac function and screen for coexisting trace element deficiencies, checking thyroid function given impaired deiodinase activity",
+      "Support population-level dietary supplementation or food fortification in endemic selenium-poor regions",
+      "Initiate repletion early to halt progression, recognising that established myocardial damage in Keshan disease may be irreversible"
     ]
-   ],
-   "caption": "Overview comparison matrix for selenium deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "selenium-deficiency-real-image",
-   "title": "Selenium deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "selenium_deficiency-pathway",
+      "title": "Selenium deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Selenium is an antioxidant trace element, and deficiency is classically linked to Keshan disease, an endemic cardiomyopathy, and Kashin-Beck disease, an osteoarthropathy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Heart failure or arrhythmia from selenium-deficiency cardiomyopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum or plasma selenium concentration, Erythrocyte glutathione peroxidase activity as a functional marker, Cardiac assessment including echocardiography where cardiomyopathy is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replete stores with oral or parenteral selenium (sodium selenite or selenomethionine), the definitive corrective therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Omitting trace element supplementation, including selenium, during long-term parenteral nutrition"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of selenium deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "selenium_deficiency-matrix",
+      "title": "Selenium deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Selenium is an antioxidant trace element, and deficiency is classically linked to Keshan disease, an endemic cardiomyopathy, and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum or plasma selenium concentration, Erythrocyte glutathione peroxidase activity as a functional marker, Cardiac assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of dilated cardiomyopathy, Other nutritional or metabolic myopathies, Thiamine deficiency cardiomyopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replete stores with oral or parenteral selenium (sodium selenite or selenomethionine), the definitive corrective therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Omitting trace element supplementation, including selenium, during long-term parenteral nutrition",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for selenium deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "selenium_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum or plasma selenium",
+          "cells": [
+            {
+              "text": "Assesses selenium status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrocyte glutathione peroxidase activity",
+          "cells": [
+            {
+              "text": "Functional marker of status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiomyopathy, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting trace element assessment",
+          "cells": [
+            {
+              "text": "Relevant in long-term parenteral nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function",
+          "cells": [
+            {
+              "text": "Impaired deiodinase activity can affect thyroid hormone metabolism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "selenium_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Selenium repletion",
+          "cells": [
+            {
+              "text": "Oral or parenteral sodium selenite or selenomethionine; definitive corrective therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Add selenium to long-term parenteral nutrition",
+          "cells": [
+            {
+              "text": "Prevents iatrogenic deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Guideline-based for cardiomyopathy; supportive care for myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor repletion",
+          "cells": [
+            {
+              "text": "Serial selenium and erythrocyte glutathione peroxidase activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography; screen other trace elements and thyroid function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Population measures",
+          "cells": [
+            {
+              "text": "Dietary supplementation or fortification in endemic selenium-poor regions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "selenium_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Selenium deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained cardiac or muscle disease; selenium-poor region or long-term PN",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Heart failure, arrhythmia or progressive weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Heart failure therapy and urgent selenium repletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum selenium, red cell glutathione peroxidase, echocardiography, trace elements",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low selenium or low glutathione peroxidase activity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Look for other dilated cardiomyopathy, thiamine deficiency or myopathy causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Replete with sodium selenite or selenomethionine, orally or parenterally",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add selenium to parenteral nutrition; screen other trace elements",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Guideline heart failure therapy; supportive care for myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial selenium and echocardiography; check thyroid function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Repletion halts progression; established Keshan myocardial damage may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

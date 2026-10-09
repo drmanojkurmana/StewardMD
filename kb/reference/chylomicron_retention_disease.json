@@ -1,173 +1,458 @@
 {
- "id": "chylomicron_retention_disease",
- "name": "Chylomicron retention disease",
- "aliases": [
-  "SAR1B",
-  "Anderson disease",
-  "CMRD",
-  "chylomicron retention disorder"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Genetics",
- "specialty": "Gastroenterology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive fat-malabsorption disorder caused by SAR1B variants, also known as Anderson disease",
-   "Presents in infancy with chronic steatorrhoea, failure to thrive and fat-soluble vitamin deficiency",
-   "The defect blocks secretion of intestinal chylomicrons while hepatic VLDL export is relatively preserved",
-   "Lipid studies show low total and LDL cholesterol with reduced but detectable apolipoprotein B, and low fat-soluble vitamin levels including vitamin E",
-   "Small-bowel biopsy demonstrates fat-laden enterocytes engorged with chylomicron-sized lipid droplets",
-   "Neurological and retinal complications are generally milder and later than in abetalipoproteinaemia but still relate to vitamin E deficiency",
-   "Treatment is a low-long-chain-fat diet with fat-soluble vitamin and vitamin E supplementation"
+  "id": "chylomicron_retention_disease",
+  "name": "Chylomicron retention disease",
+  "aliases": [
+    "SAR1B",
+    "Anderson disease",
+    "CMRD",
+    "chylomicron retention disorder"
   ],
-  "pathophysiology": "Chylomicron retention disease is caused by variants in SAR1B, which encodes a small GTPase essential for COPII vesicle formation and the intracellular transport of prechylomicron particles from the endoplasmic reticulum to the Golgi. When SAR1B is defective, newly formed chylomicrons cannot be trafficked and secreted from enterocytes, so dietary fat and fat-soluble vitamins are trapped within the cells. This produces fat malabsorption, steatorrhoea and deficiency of vitamins A, D, E and K, with characteristic lipid-laden enterocytes. Because the defect is selective for the intestinal chylomicron pathway, hepatic VLDL secretion is comparatively spared and plasma apolipoprotein B is reduced rather than absent.",
-  "additionalDifferentials": [
-   "Abetalipoproteinaemia (MTTP deficiency)",
-   "Homozygous hypobetalipoproteinaemia",
-   "Cystic fibrosis with pancreatic insufficiency",
-   "Coeliac disease and other malabsorptive enteropathies",
-   "Cholestatic liver disease with fat malabsorption",
-   "Other congenital enteropathies causing failure to thrive"
-  ],
-  "additionalInvestigations": [
-   "Fasting lipid profile showing low total and LDL cholesterol with reduced apolipoprotein B",
-   "Fat-soluble vitamin levels, particularly vitamin E",
-   "Small-bowel biopsy demonstrating chylomicron-laden enterocytes",
-   "Molecular genetic testing for SAR1B variants",
-   "Neurological and ophthalmological assessment and coagulation studies for vitamin K status"
-  ],
-  "redFlags": [
-   "Marked failure to thrive from ongoing fat malabsorption in infancy",
-   "Emerging neuromuscular or ophthalmological signs of fat-soluble vitamin deficiency",
-   "Coagulopathy from vitamin K deficiency",
-   "Evidence of hepatic steatosis or transaminase elevation on follow-up"
-  ],
-  "prognosis": "With early dietary fat restriction and lifelong fat-soluble vitamin, especially vitamin E, supplementation, growth improves and the usually milder neurological and retinal complications can be limited. Long-term monitoring for vitamin deficiency and hepatic changes is needed.",
-  "pitfalls": [
-   "Failing to distinguish it from abetalipoproteinaemia, which has absent apolipoprotein B and acanthocytosis",
-   "Under-supplementing vitamin E and allowing preventable neurological injury",
-   "Attributing steatorrhoea to pancreatic disease without lipid and biopsy evaluation",
-   "Neglecting long-term surveillance for hepatic steatosis"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong low-fat diet to limit steatorrhoea, with medium-chain triglycerides and essential fatty acid supplementation to sustain energy and growth",
-   "High-dose fat-soluble vitamin supplementation, especially vitamin E, together with vitamins A, D and K",
-   "Dietitian-led nutritional support with monitoring of growth and weight through infancy and childhood",
-   "Regular monitoring of fat-soluble vitamin levels and of coagulation reflecting vitamin K status",
-   "Neurological and ophthalmological surveillance for the vitamin E-related complications of neuropathy and retinopathy",
-   "Monitoring of the liver for hepatic steatosis and fibrosis",
-   "Genetic counselling for this autosomal recessive SAR1B disorder with family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chylomicron_retention_disease-pathway",
-   "title": "Chylomicron retention disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive fat-malabsorption disorder caused by SAR1B variants, also known as Anderson disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked failure to thrive from ongoing fat malabsorption in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting lipid profile showing low total and LDL cholesterol with reduced apolipoprotein B, Fat-soluble vitamin levels, particularly vitamin E, Small-bowel biopsy demonstrating chylomicron-laden enterocytes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong low-fat diet to limit steatorrhoea, with medium-chain triglycerides and essential fatty acid supplementation to sustain energy and growth"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish it from abetalipoproteinaemia, which has absent apolipoprotein B and acanthocytosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chylomicron retention disease."
-  }
- ],
- "tables": [
-  {
-   "id": "chylomicron_retention_disease-matrix",
-   "title": "Chylomicron retention disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive fat-malabsorption disorder caused by SAR1B variants, also known as Anderson disease",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Genetics",
+  "specialty": "Gastroenterology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive fat-malabsorption disorder caused by SAR1B variants, also known as Anderson disease",
+      "Presents in infancy with chronic steatorrhoea, failure to thrive and fat-soluble vitamin deficiency",
+      "The defect blocks secretion of intestinal chylomicrons while hepatic VLDL export is relatively preserved",
+      "Lipid studies show low total and LDL cholesterol with reduced but detectable apolipoprotein B, and low fat-soluble vitamin levels including vitamin E",
+      "Small-bowel biopsy demonstrates fat-laden enterocytes engorged with chylomicron-sized lipid droplets",
+      "Neurological and retinal complications are generally milder and later than in abetalipoproteinaemia but still relate to vitamin E deficiency",
+      "Treatment is a low-long-chain-fat diet with fat-soluble vitamin and vitamin E supplementation"
     ],
-    [
-     "Key Investigations",
-     "Fasting lipid profile showing low total and LDL cholesterol with reduced apolipoprotein B, Fat-soluble vitamin levels,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chylomicron retention disease is caused by variants in SAR1B, which encodes a small GTPase essential for COPII vesicle formation and the intracellular transport of prechylomicron particles from the endoplasmic reticulum to the Golgi. When SAR1B is defective, newly formed chylomicrons cannot be trafficked and secreted from enterocytes, so dietary fat and fat-soluble vitamins are trapped within the cells. This produces fat malabsorption, steatorrhoea and deficiency of vitamins A, D, E and K, with characteristic lipid-laden enterocytes. Because the defect is selective for the intestinal chylomicron pathway, hepatic VLDL secretion is comparatively spared and plasma apolipoprotein B is reduced rather than absent.",
+    "additionalDifferentials": [
+      "Abetalipoproteinaemia (MTTP deficiency)",
+      "Homozygous hypobetalipoproteinaemia",
+      "Cystic fibrosis with pancreatic insufficiency",
+      "Coeliac disease and other malabsorptive enteropathies",
+      "Cholestatic liver disease with fat malabsorption",
+      "Other congenital enteropathies causing failure to thrive"
     ],
-    [
-     "Primary Differentials",
-     "Abetalipoproteinaemia (MTTP deficiency), Homozygous hypobetalipoproteinaemia, Cystic fibrosis with pancreatic insufficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting lipid profile showing low total and LDL cholesterol with reduced apolipoprotein B",
+      "Fat-soluble vitamin levels, particularly vitamin E",
+      "Small-bowel biopsy demonstrating chylomicron-laden enterocytes",
+      "Molecular genetic testing for SAR1B variants",
+      "Neurological and ophthalmological assessment and coagulation studies for vitamin K status"
     ],
-    [
-     "Management Strategy",
-     "Lifelong low-fat diet to limit steatorrhoea, with medium-chain triglycerides and essential fatty acid supplementation to sustain",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked failure to thrive from ongoing fat malabsorption in infancy",
+      "Emerging neuromuscular or ophthalmological signs of fat-soluble vitamin deficiency",
+      "Coagulopathy from vitamin K deficiency",
+      "Evidence of hepatic steatosis or transaminase elevation on follow-up"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish it from abetalipoproteinaemia, which has absent apolipoprotein B and acanthocytosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early dietary fat restriction and lifelong fat-soluble vitamin, especially vitamin E, supplementation, growth improves and the usually milder neurological and retinal complications can be limited. Long-term monitoring for vitamin deficiency and hepatic changes is needed.",
+    "pitfalls": [
+      "Failing to distinguish it from abetalipoproteinaemia, which has absent apolipoprotein B and acanthocytosis",
+      "Under-supplementing vitamin E and allowing preventable neurological injury",
+      "Attributing steatorrhoea to pancreatic disease without lipid and biopsy evaluation",
+      "Neglecting long-term surveillance for hepatic steatosis"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong low-fat diet to limit steatorrhoea, with medium-chain triglycerides and essential fatty acid supplementation to sustain energy and growth",
+      "High-dose fat-soluble vitamin supplementation, especially vitamin E, together with vitamins A, D and K",
+      "Dietitian-led nutritional support with monitoring of growth and weight through infancy and childhood",
+      "Regular monitoring of fat-soluble vitamin levels and of coagulation reflecting vitamin K status",
+      "Neurological and ophthalmological surveillance for the vitamin E-related complications of neuropathy and retinopathy",
+      "Monitoring of the liver for hepatic steatosis and fibrosis",
+      "Genetic counselling for this autosomal recessive SAR1B disorder with family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for chylomicron retention disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chylomicron-retention-disease-real-image",
-   "title": "Chylomicron retention disease: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "chylomicron_retention_disease-pathway",
+      "title": "Chylomicron retention disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive fat-malabsorption disorder caused by SAR1B variants, also known as Anderson disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked failure to thrive from ongoing fat malabsorption in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting lipid profile showing low total and LDL cholesterol with reduced apolipoprotein B, Fat-soluble vitamin levels, particularly vitamin E, Small-bowel biopsy demonstrating chylomicron-laden enterocytes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong low-fat diet to limit steatorrhoea, with medium-chain triglycerides and essential fatty acid supplementation to sustain energy and growth"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish it from abetalipoproteinaemia, which has absent apolipoprotein B and acanthocytosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chylomicron retention disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chylomicron_retention_disease-matrix",
+      "title": "Chylomicron retention disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive fat-malabsorption disorder caused by SAR1B variants, also known as Anderson disease",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting lipid profile showing low total and LDL cholesterol with reduced apolipoprotein B, Fat-soluble vitamin levels,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Abetalipoproteinaemia (MTTP deficiency), Homozygous hypobetalipoproteinaemia, Cystic fibrosis with pancreatic insufficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong low-fat diet to limit steatorrhoea, with medium-chain triglycerides and essential fatty acid supplementation to sustain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish it from abetalipoproteinaemia, which has absent apolipoprotein B and acanthocytosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chylomicron retention disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chylomicron_retention_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting lipid profile",
+          "cells": [
+            {
+              "text": "Low total and LDL cholesterol with reduced apolipoprotein B"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin levels",
+          "cells": [
+            {
+              "text": "Particularly vitamin E"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel biopsy",
+          "cells": [
+            {
+              "text": "Chylomicron-laden enterocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAR1B genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Complications of vitamin E deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chylomicron_retention_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Abetalipoproteinaemia (MTTP deficiency)",
+          "cells": [
+            {
+              "text": "Earlier and more severe neurological and retinal complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis with pancreatic insufficiency",
+          "cells": [
+            {
+              "text": "Pancreatic cause of fat malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Malabsorptive enteropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chylomicron_retention_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-fat diet with medium-chain triglycerides",
+          "cells": [
+            {
+              "text": "Limits steatorrhoea; essential fatty acid supplementation"
+            },
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose vitamin E with vitamins A, D and K",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamin replacement"
+            },
+            {
+              "text": "Vitamin E especially"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietitian-led nutritional support",
+          "cells": [
+            {
+              "text": "Growth and weight monitoring through childhood"
+            },
+            {
+              "text": "Infancy and childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and ophthalmological surveillance",
+          "cells": [
+            {
+              "text": "Neuropathy and retinopathy from vitamin E deficiency"
+            },
+            {
+              "text": "Vitamin E complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver monitoring",
+          "cells": [
+            {
+              "text": "Hepatic steatosis and fibrosis"
+            },
+            {
+              "text": "Hepatic risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chylomicron_retention_disease-dx-mgmt",
+      "title": "Diagnosis and management of Chylomicron retention disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chylomicron retention disease: infant with steatorrhoea and failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (marked failure to thrive, neuromuscular signs, coagulopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric gastroenterology review for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lipid profile, fat-soluble vitamins, small-bowel biopsy and SAR1B testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low lipids with chylomicron-laden enterocytes and SAR1B variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lifelong low-fat diet with medium-chain triglycerides",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check abetalipoproteinaemia, cystic fibrosis and coeliac disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-dose vitamin E with vitamins A, D and K replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietitian-led nutrition support and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurological, ophthalmological and liver surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling for autosomal recessive SAR1B disorder with family testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,171 +1,487 @@
 {
- "id": "posterior_urethral_valves",
- "name": "Posterior urethral valves",
- "aliases": [
-  "PUV",
-  "congenital obstructing posterior urethral membrane"
- ],
- "class": "non_infective",
- "system": "Paediatric surgery / Thoracic",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common cause of congenital lower urinary tract obstruction in male infants, caused by obstructing membranous folds in the posterior urethra",
-   "Many cases are suspected antenatally from bilateral hydronephrosis, a thick-walled distended bladder, a dilated posterior urethra (keyhole sign), and oligohydramnios",
-   "Severe early obstruction and oligohydramnios can lead to pulmonary hypoplasia, which may be the immediate life-threatening problem at birth",
-   "Postnatal presentation ranges from a palpable bladder, poor urinary stream, and straining to urosepsis or failure to thrive, and older boys may present with voiding difficulty or incontinence",
-   "The voiding cystourethrogram is the key diagnostic study, showing a dilated posterior urethra, bladder trabeculation, and often vesicoureteric reflux",
-   "Initial management is bladder decompression with a catheter, correction of fluid and electrolyte disturbance, and treatment of infection before definitive intervention",
-   "Definitive treatment is endoscopic ablation of the valves, with temporary urinary diversion (vesicostomy) reserved for selected infants",
-   "Long-term follow-up is essential because bladder dysfunction and progressive renal impairment can persist or evolve even after successful valve ablation"
+  "id": "posterior_urethral_valves",
+  "name": "Posterior urethral valves",
+  "aliases": [
+    "PUV",
+    "congenital obstructing posterior urethral membrane"
   ],
-  "pathophysiology": "Posterior urethral valves are congenital obstructing tissue folds in the posterior (prostatic) urethra of males that impede bladder emptying from early in fetal life. The resulting high-pressure obstruction causes bladder wall hypertrophy and trabeculation, vesicoureteric reflux, and back-pressure that dilates the ureters and damages the developing kidneys, producing dysplasia and impaired concentrating ability. Reduced fetal urine output causes oligohydramnios, which in turn impairs lung development and can result in pulmonary hypoplasia. The renal and bladder damage sustained in utero often determines lifelong outcome.",
-  "additionalDifferentials": [
-   "Ureteropelvic or ureterovesical junction obstruction",
-   "Prune belly (Eagle-Barrett) syndrome",
-   "Bilateral high-grade vesicoureteric reflux",
-   "Neurogenic bladder",
-   "Urethral atresia or stricture"
-  ],
-  "additionalInvestigations": [
-   "Voiding cystourethrogram to demonstrate the valves and assess reflux and bladder morphology",
-   "Renal and bladder ultrasound to evaluate hydronephrosis and bladder wall thickness",
-   "Serum electrolytes, urea, and creatinine to assess renal function (interpreted after the first days of life)",
-   "Cystoscopy for direct visualisation and treatment of the valves",
-   "Isotope renography to assess differential renal function and drainage"
-  ],
-  "redFlags": [
-   "Neonatal respiratory distress from pulmonary hypoplasia secondary to oligohydramnios, which is immediately life-threatening",
-   "Urosepsis in an infant with obstruction requiring urgent decompression and antibiotics",
-   "Acute kidney injury with electrolyte disturbance and rising creatinine",
-   "Progressive deterioration in renal function or bladder function despite valve ablation"
-  ],
-  "prognosis": "Outcome depends largely on the degree of irreversible renal dysplasia established in utero. Many boys do well after valve ablation, but a significant proportion develop chronic kidney disease and bladder dysfunction, and some progress to end-stage renal failure requiring transplantation. Early nadir creatinine after treatment is a useful prognostic indicator.",
-  "pitfalls": [
-   "Attributing an antenatal keyhole bladder or bilateral hydronephrosis to a benign cause and delaying evaluation",
-   "Interpreting neonatal creatinine in the first day or two as the baby's true renal function rather than the mother's",
-   "Assuming valve ablation cures the child and neglecting long-term renal and bladder surveillance",
-   "Overlooking bladder dysfunction as an ongoing cause of upper tract deterioration"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e",
-   "Bailey & Love's Short Practice of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stabilise the newborn first with bladder decompression via a urethral catheter, correction of fluid and electrolyte disturbance, and treatment of any infection",
-   "Provide neonatal respiratory support for pulmonary hypoplasia, which may be the immediate life-threatening problem at birth",
-   "Perform definitive endoscopic valve ablation once the infant is stable, with a temporary vesicostomy as an alternative in the very small or unstable baby",
-   "Institute long-term management of the resulting valve-bladder dysfunction with anticholinergics, timed or double voiding and clean intermittent catheterisation where needed",
-   "Provide nephrology surveillance of renal function and growth, managing chronic kidney disease with attention to fluid, electrolytes, acidosis and nutrition, and plan for dialysis or transplantation if end-stage failure develops",
-   "Monitor for and treat urinary tract infections and vesicoureteric reflux, with antibiotic prophylaxis where indicated",
-   "Offer antenatal counselling, delivery planning and family support given the guarded renal prognosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "posterior_urethral_valves-pathway",
-   "title": "Posterior urethral valves: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common cause of congenital lower urinary tract obstruction in male infants, caused by obstructing membranous folds in the posterior urethra",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal respiratory distress from pulmonary hypoplasia secondary to oligohydramnios, which is immediately life-threatening",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Voiding cystourethrogram to demonstrate the valves and assess reflux and bladder morphology, Renal and bladder ultrasound to evaluate hydronephrosis and bladder wall thickness, Serum electrolytes, urea, and creatinine to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stabilise the newborn first with bladder decompression via a urethral catheter, correction of fluid and electrolyte disturbance, and treatment of any infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing an antenatal keyhole bladder or bilateral hydronephrosis to a benign cause and delaying evaluation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of posterior urethral valves."
-  }
- ],
- "tables": [
-  {
-   "id": "posterior_urethral_valves-matrix",
-   "title": "Posterior urethral valves: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common cause of congenital lower urinary tract obstruction in male infants, caused by obstructing membranous folds in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric surgery / Thoracic",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common cause of congenital lower urinary tract obstruction in male infants, caused by obstructing membranous folds in the posterior urethra",
+      "Many cases are suspected antenatally from bilateral hydronephrosis, a thick-walled distended bladder, a dilated posterior urethra (keyhole sign), and oligohydramnios",
+      "Severe early obstruction and oligohydramnios can lead to pulmonary hypoplasia, which may be the immediate life-threatening problem at birth",
+      "Postnatal presentation ranges from a palpable bladder, poor urinary stream, and straining to urosepsis or failure to thrive, and older boys may present with voiding difficulty or incontinence",
+      "The voiding cystourethrogram is the key diagnostic study, showing a dilated posterior urethra, bladder trabeculation, and often vesicoureteric reflux",
+      "Initial management is bladder decompression with a catheter, correction of fluid and electrolyte disturbance, and treatment of infection before definitive intervention",
+      "Definitive treatment is endoscopic ablation of the valves, with temporary urinary diversion (vesicostomy) reserved for selected infants",
+      "Long-term follow-up is essential because bladder dysfunction and progressive renal impairment can persist or evolve even after successful valve ablation"
     ],
-    [
-     "Key Investigations",
-     "Voiding cystourethrogram to demonstrate the valves and assess reflux and bladder morphology, Renal and bladder ultrasound to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Posterior urethral valves are congenital obstructing tissue folds in the posterior (prostatic) urethra of males that impede bladder emptying from early in fetal life. The resulting high-pressure obstruction causes bladder wall hypertrophy and trabeculation, vesicoureteric reflux, and back-pressure that dilates the ureters and damages the developing kidneys, producing dysplasia and impaired concentrating ability. Reduced fetal urine output causes oligohydramnios, which in turn impairs lung development and can result in pulmonary hypoplasia. The renal and bladder damage sustained in utero often determines lifelong outcome.",
+    "additionalDifferentials": [
+      "Ureteropelvic or ureterovesical junction obstruction",
+      "Prune belly (Eagle-Barrett) syndrome",
+      "Bilateral high-grade vesicoureteric reflux",
+      "Neurogenic bladder",
+      "Urethral atresia or stricture"
     ],
-    [
-     "Primary Differentials",
-     "Ureteropelvic or ureterovesical junction obstruction, Prune belly (Eagle-Barrett) syndrome, Bilateral high-grade vesicoureteric",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Voiding cystourethrogram to demonstrate the valves and assess reflux and bladder morphology",
+      "Renal and bladder ultrasound to evaluate hydronephrosis and bladder wall thickness",
+      "Serum electrolytes, urea, and creatinine to assess renal function (interpreted after the first days of life)",
+      "Cystoscopy for direct visualisation and treatment of the valves",
+      "Isotope renography to assess differential renal function and drainage"
     ],
-    [
-     "Management Strategy",
-     "Stabilise the newborn first with bladder decompression via a urethral catheter, correction of fluid and electrolyte disturbance,",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal respiratory distress from pulmonary hypoplasia secondary to oligohydramnios, which is immediately life-threatening",
+      "Urosepsis in an infant with obstruction requiring urgent decompression and antibiotics",
+      "Acute kidney injury with electrolyte disturbance and rising creatinine",
+      "Progressive deterioration in renal function or bladder function despite valve ablation"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing an antenatal keyhole bladder or bilateral hydronephrosis to a benign cause and delaying evaluation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends largely on the degree of irreversible renal dysplasia established in utero. Many boys do well after valve ablation, but a significant proportion develop chronic kidney disease and bladder dysfunction, and some progress to end-stage renal failure requiring transplantation. Early nadir creatinine after treatment is a useful prognostic indicator.",
+    "pitfalls": [
+      "Attributing an antenatal keyhole bladder or bilateral hydronephrosis to a benign cause and delaying evaluation",
+      "Interpreting neonatal creatinine in the first day or two as the baby's true renal function rather than the mother's",
+      "Assuming valve ablation cures the child and neglecting long-term renal and bladder surveillance",
+      "Overlooking bladder dysfunction as an ongoing cause of upper tract deterioration"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e",
+      "Bailey & Love's Short Practice of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stabilise the newborn first with bladder decompression via a urethral catheter, correction of fluid and electrolyte disturbance, and treatment of any infection",
+      "Provide neonatal respiratory support for pulmonary hypoplasia, which may be the immediate life-threatening problem at birth",
+      "Perform definitive endoscopic valve ablation once the infant is stable, with a temporary vesicostomy as an alternative in the very small or unstable baby",
+      "Institute long-term management of the resulting valve-bladder dysfunction with anticholinergics, timed or double voiding and clean intermittent catheterisation where needed",
+      "Provide nephrology surveillance of renal function and growth, managing chronic kidney disease with attention to fluid, electrolytes, acidosis and nutrition, and plan for dialysis or transplantation if end-stage failure develops",
+      "Monitor for and treat urinary tract infections and vesicoureteric reflux, with antibiotic prophylaxis where indicated",
+      "Offer antenatal counselling, delivery planning and family support given the guarded renal prognosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for posterior urethral valves."
-  }
- ],
- "diagrams": [
-  {
-   "id": "posterior-urethral-valves-real-image",
-   "title": "Posterior urethral valves: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "posterior_urethral_valves-pathway",
+      "title": "Posterior urethral valves: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common cause of congenital lower urinary tract obstruction in male infants, caused by obstructing membranous folds in the posterior urethra",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal respiratory distress from pulmonary hypoplasia secondary to oligohydramnios, which is immediately life-threatening",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Voiding cystourethrogram to demonstrate the valves and assess reflux and bladder morphology, Renal and bladder ultrasound to evaluate hydronephrosis and bladder wall thickness, Serum electrolytes, urea, and creatinine to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stabilise the newborn first with bladder decompression via a urethral catheter, correction of fluid and electrolyte disturbance, and treatment of any infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing an antenatal keyhole bladder or bilateral hydronephrosis to a benign cause and delaying evaluation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of posterior urethral valves."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "posterior_urethral_valves-matrix",
+      "title": "Posterior urethral valves: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common cause of congenital lower urinary tract obstruction in male infants, caused by obstructing membranous folds in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Voiding cystourethrogram to demonstrate the valves and assess reflux and bladder morphology, Renal and bladder ultrasound to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ureteropelvic or ureterovesical junction obstruction, Prune belly (Eagle-Barrett) syndrome, Bilateral high-grade vesicoureteric",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stabilise the newborn first with bladder decompression via a urethral catheter, correction of fluid and electrolyte disturbance,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing an antenatal keyhole bladder or bilateral hydronephrosis to a benign cause and delaying evaluation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for posterior urethral valves."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "posterior_urethral_valves-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Voiding cystourethrogram",
+          "cells": [
+            {
+              "text": "Valves, reflux and bladder morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and bladder ultrasound",
+          "cells": [
+            {
+              "text": "Hydronephrosis and bladder wall thickness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes, urea and creatinine",
+          "cells": [
+            {
+              "text": "Renal function, read after the first days of life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy",
+          "cells": [
+            {
+              "text": "Direct visualisation and treatment of the valves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isotope renography",
+          "cells": [
+            {
+              "text": "Differential renal function and drainage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_urethral_valves-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ureteropelvic or ureterovesical junction obstruction",
+          "cells": [
+            {
+              "text": "Unilateral or upper tract obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prune belly (Eagle-Barrett) syndrome",
+          "cells": [
+            {
+              "text": "Abdominal wall deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral high-grade vesicoureteric reflux",
+          "cells": [
+            {
+              "text": "Reflux without a valve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder",
+          "cells": [
+            {
+              "text": "Neurological cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral atresia or stricture",
+          "cells": [
+            {
+              "text": "Complete or fixed urethral obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "posterior_urethral_valves-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn bladder decompression",
+          "cells": [
+            {
+              "text": "Urethral catheter to stabilise the newborn"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal respiratory support",
+          "cells": [
+            {
+              "text": "Pulmonary hypoplasia from oligohydramnios"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic valve ablation",
+          "cells": [
+            {
+              "text": "Definitive treatment once stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term bladder management",
+          "cells": [
+            {
+              "text": "Anticholinergics and catheterisation for valve-bladder dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology surveillance",
+          "cells": [
+            {
+              "text": "Renal function and growth, managing chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection and reflux",
+          "cells": [
+            {
+              "text": "Antibiotic prophylaxis for urinary infection and reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal counselling",
+          "cells": [
+            {
+              "text": "Delivery planning and family support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "posterior_urethral_valves-dx-mgmt",
+      "title": "Diagnosis and management of Posterior urethral valves",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Obstructive uropathy or hydronephrosis in a boy, detected antenatally or in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (respiratory distress, urosepsis, acute kidney injury, falling renal function)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent bladder decompression and antibiotics for urosepsis or acute kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Voiding cystourethrogram; renal ultrasound; electrolytes and creatinine; cystoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does urethrography or cystoscopy show posterior urethral valves?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider junctional obstruction, prune belly syndrome, reflux or urethral atresia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stabilise the newborn with bladder decompression via a urethral catheter",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neonatal respiratory support for pulmonary hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic valve ablation once the infant is stable",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term management of valve-bladder dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Nephrology surveillance of renal function and growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Depends on irreversible renal dysplasia from in utero; many boys do well after ablation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

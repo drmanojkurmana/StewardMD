@@ -1,174 +1,470 @@
 {
- "id": "glycerol_kinase_deficiency",
- "name": "Glycerol kinase deficiency",
- "aliases": [
-  "GK deficiency",
-  "GKD",
-  "hyperglycerolaemia",
-  "glycerol kinase deficiency contiguous gene syndrome",
-  "Xp21 deletion syndrome"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked deficiency of glycerol kinase (GK gene at Xp21) causes accumulation of glycerol in blood and urine (hyperglycerolaemia and glyceroluria)",
-   "A classic pitfall is spurious hypertriglyceridaemia (pseudohypertriglyceridaemia), because many laboratory triglyceride assays measure glycerol released from triglyceride and are falsely elevated by free glycerol",
-   "Isolated glycerol kinase deficiency can be asymptomatic and discovered incidentally, or cause episodic vomiting, acidosis and hypoglycaemia in the juvenile form",
-   "Because the gene lies within the Xp21 region, contiguous-gene deletions may combine it with congenital adrenal hypoplasia (NR0B1/DAX1) and Duchenne muscular dystrophy (DMD)",
-   "The complex (contiguous-gene) form in male infants may present with adrenal insufficiency, developmental delay and later muscle weakness, so adrenal and muscle assessment is essential",
-   "Management of isolated disease is largely reassurance with avoidance of fasting; the complex form requires treatment of adrenal insufficiency and multidisciplinary care",
-   "Confirmation is by demonstrating hyperglycerolaemia/glyceroluria with GK molecular testing, and by deletion analysis when a contiguous-gene syndrome is suspected"
+  "id": "glycerol_kinase_deficiency",
+  "name": "Glycerol kinase deficiency",
+  "aliases": [
+    "GK deficiency",
+    "GKD",
+    "hyperglycerolaemia",
+    "glycerol kinase deficiency contiguous gene syndrome",
+    "Xp21 deletion syndrome"
   ],
-  "pathophysiology": "Glycerol kinase phosphorylates glycerol to glycerol-3-phosphate, linking glycerol from lipolysis into glycolysis and gluconeogenesis. Deficiency of the X-linked enzyme causes glycerol to accumulate in plasma and spill into urine. Isolated enzyme deficiency is often clinically mild, but because the GK locus at Xp21 neighbours the genes for congenital adrenal hypoplasia and Duchenne muscular dystrophy, larger deletions can remove all three, producing a contiguous-gene deletion syndrome. The associated adrenal hypoplasia leads to salt-losing adrenal insufficiency, and DMD deletion leads to progressive muscle disease. The accumulated glycerol also causes analytical interference with triglyceride measurement.",
-  "additionalDifferentials": [
-   "True hypertriglyceridaemia and familial dyslipidaemias",
-   "Primary adrenal insufficiency of other causes",
-   "Duchenne or Becker muscular dystrophy in isolation",
-   "Fatty-acid oxidation disorders causing hypoketotic hypoglycaemia",
-   "Fructose-1,6-bisphosphatase deficiency and other gluconeogenic defects",
-   "Other causes of metabolic acidosis with hypoglycaemia in infancy"
-  ],
-  "additionalInvestigations": [
-   "Plasma and urine glycerol measurement to confirm hyperglycerolaemia and glyceroluria",
-   "Repeat triglyceride assay with a glycerol-blanked method to exclude pseudohypertriglyceridaemia",
-   "Adrenal function testing (cortisol, ACTH, electrolytes) when a contiguous-gene syndrome is possible",
-   "Creatine kinase and neuromuscular assessment to screen for associated muscular dystrophy",
-   "GK molecular genetic testing and Xp21 deletion/array analysis",
-   "Blood glucose and blood gas during symptomatic episodes"
-  ],
-  "redFlags": [
-   "Salt-wasting adrenal crisis in a male infant suggesting associated adrenal hypoplasia",
-   "Hypoglycaemia with vomiting and acidosis during illness",
-   "Progressive muscle weakness or markedly raised creatine kinase indicating coexistent dystrophy",
-   "Developmental regression or failure to thrive in the complex form"
-  ],
-  "prognosis": "Isolated glycerol kinase deficiency is often benign with a normal life expectancy, but the contiguous-gene deletion form carries the serious risks of adrenal insufficiency and progressive muscular dystrophy that determine the outcome.",
-  "pitfalls": [
-   "Treating spurious hypertriglyceridaemia with lipid-lowering therapy instead of recognising glycerol interference",
-   "Failing to evaluate for adrenal insufficiency and muscular dystrophy in a male infant with hyperglycerolaemia",
-   "Assuming an isolated laboratory finding is harmless without excluding a contiguous-gene deletion",
-   "Overlooking a treatable, potentially fatal adrenal crisis while focusing on the lipid abnormality"
-  ],
-  "references": [
-   "Scriver's OMMBID: Glycerol Kinase Deficiency",
-   "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For isolated deficiency, reassure and advise avoidance of prolonged fasting, treating episodic vomiting, acidosis or hypoglycaemia with glucose-containing fluids",
-   "Recognise pseudohypertriglyceridaemia and confirm with a glycerol-blanked triglyceride assay to prevent inappropriate lipid-lowering treatment",
-   "In the contiguous-gene deletion form with adrenal hypoplasia, replace glucocorticoid and mineralocorticoid and provide stress sick-day dosing to prevent adrenal crisis",
-   "Screen for and manage associated Duchenne muscular dystrophy with creatine kinase and neuromuscular assessment, providing multidisciplinary care",
-   "Monitor blood glucose during illness and, in the complex form, adrenal function and muscle status over time",
-   "Offer genetic counselling for X-linked inheritance, including carrier testing of female relatives and Xp21 deletion analysis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glycerol_kinase_deficiency-pathway",
-   "title": "Glycerol kinase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked deficiency of glycerol kinase (GK gene at Xp21) causes accumulation of glycerol in blood and urine (hyperglycerolaemia and glyceroluria)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Salt-wasting adrenal crisis in a male infant suggesting associated adrenal hypoplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma and urine glycerol measurement to confirm hyperglycerolaemia and glyceroluria, Repeat triglyceride assay with a glycerol-blanked method to exclude pseudohypertriglyceridaemia, Adrenal function testing (cortisol,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For isolated deficiency, reassure and advise avoidance of prolonged fasting, treating episodic vomiting, acidosis or hypoglycaemia with glucose-containing fluids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating spurious hypertriglyceridaemia with lipid-lowering therapy instead of recognising glycerol interference"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glycerol kinase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "glycerol_kinase_deficiency-matrix",
-   "title": "Glycerol kinase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked deficiency of glycerol kinase (GK gene at Xp21) causes accumulation of glycerol in blood and urine (hyperglycerolaemia",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked deficiency of glycerol kinase (GK gene at Xp21) causes accumulation of glycerol in blood and urine (hyperglycerolaemia and glyceroluria)",
+      "A classic pitfall is spurious hypertriglyceridaemia (pseudohypertriglyceridaemia), because many laboratory triglyceride assays measure glycerol released from triglyceride and are falsely elevated by free glycerol",
+      "Isolated glycerol kinase deficiency can be asymptomatic and discovered incidentally, or cause episodic vomiting, acidosis and hypoglycaemia in the juvenile form",
+      "Because the gene lies within the Xp21 region, contiguous-gene deletions may combine it with congenital adrenal hypoplasia (NR0B1/DAX1) and Duchenne muscular dystrophy (DMD)",
+      "The complex (contiguous-gene) form in male infants may present with adrenal insufficiency, developmental delay and later muscle weakness, so adrenal and muscle assessment is essential",
+      "Management of isolated disease is largely reassurance with avoidance of fasting; the complex form requires treatment of adrenal insufficiency and multidisciplinary care",
+      "Confirmation is by demonstrating hyperglycerolaemia/glyceroluria with GK molecular testing, and by deletion analysis when a contiguous-gene syndrome is suspected"
     ],
-    [
-     "Key Investigations",
-     "Plasma and urine glycerol measurement to confirm hyperglycerolaemia and glyceroluria, Repeat triglyceride assay with a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glycerol kinase phosphorylates glycerol to glycerol-3-phosphate, linking glycerol from lipolysis into glycolysis and gluconeogenesis. Deficiency of the X-linked enzyme causes glycerol to accumulate in plasma and spill into urine. Isolated enzyme deficiency is often clinically mild, but because the GK locus at Xp21 neighbours the genes for congenital adrenal hypoplasia and Duchenne muscular dystrophy, larger deletions can remove all three, producing a contiguous-gene deletion syndrome. The associated adrenal hypoplasia leads to salt-losing adrenal insufficiency, and DMD deletion leads to progressive muscle disease. The accumulated glycerol also causes analytical interference with triglyceride measurement.",
+    "additionalDifferentials": [
+      "True hypertriglyceridaemia and familial dyslipidaemias",
+      "Primary adrenal insufficiency of other causes",
+      "Duchenne or Becker muscular dystrophy in isolation",
+      "Fatty-acid oxidation disorders causing hypoketotic hypoglycaemia",
+      "Fructose-1,6-bisphosphatase deficiency and other gluconeogenic defects",
+      "Other causes of metabolic acidosis with hypoglycaemia in infancy"
     ],
-    [
-     "Primary Differentials",
-     "True hypertriglyceridaemia and familial dyslipidaemias, Primary adrenal insufficiency of other causes, Duchenne or Becker",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma and urine glycerol measurement to confirm hyperglycerolaemia and glyceroluria",
+      "Repeat triglyceride assay with a glycerol-blanked method to exclude pseudohypertriglyceridaemia",
+      "Adrenal function testing (cortisol, ACTH, electrolytes) when a contiguous-gene syndrome is possible",
+      "Creatine kinase and neuromuscular assessment to screen for associated muscular dystrophy",
+      "GK molecular genetic testing and Xp21 deletion/array analysis",
+      "Blood glucose and blood gas during symptomatic episodes"
     ],
-    [
-     "Management Strategy",
-     "For isolated deficiency, reassure and advise avoidance of prolonged fasting, treating episodic vomiting, acidosis or",
-     "Core treatment modality"
+    "redFlags": [
+      "Salt-wasting adrenal crisis in a male infant suggesting associated adrenal hypoplasia",
+      "Hypoglycaemia with vomiting and acidosis during illness",
+      "Progressive muscle weakness or markedly raised creatine kinase indicating coexistent dystrophy",
+      "Developmental regression or failure to thrive in the complex form"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating spurious hypertriglyceridaemia with lipid-lowering therapy instead of recognising glycerol interference",
-     "Prevent diagnostic or management error"
+    "prognosis": "Isolated glycerol kinase deficiency is often benign with a normal life expectancy, but the contiguous-gene deletion form carries the serious risks of adrenal insufficiency and progressive muscular dystrophy that determine the outcome.",
+    "pitfalls": [
+      "Treating spurious hypertriglyceridaemia with lipid-lowering therapy instead of recognising glycerol interference",
+      "Failing to evaluate for adrenal insufficiency and muscular dystrophy in a male infant with hyperglycerolaemia",
+      "Assuming an isolated laboratory finding is harmless without excluding a contiguous-gene deletion",
+      "Overlooking a treatable, potentially fatal adrenal crisis while focusing on the lipid abnormality"
+    ],
+    "references": [
+      "Scriver's OMMBID: Glycerol Kinase Deficiency",
+      "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For isolated deficiency, reassure and advise avoidance of prolonged fasting, treating episodic vomiting, acidosis or hypoglycaemia with glucose-containing fluids",
+      "Recognise pseudohypertriglyceridaemia and confirm with a glycerol-blanked triglyceride assay to prevent inappropriate lipid-lowering treatment",
+      "In the contiguous-gene deletion form with adrenal hypoplasia, replace glucocorticoid and mineralocorticoid and provide stress sick-day dosing to prevent adrenal crisis",
+      "Screen for and manage associated Duchenne muscular dystrophy with creatine kinase and neuromuscular assessment, providing multidisciplinary care",
+      "Monitor blood glucose during illness and, in the complex form, adrenal function and muscle status over time",
+      "Offer genetic counselling for X-linked inheritance, including carrier testing of female relatives and Xp21 deletion analysis"
     ]
-   ],
-   "caption": "Overview comparison matrix for glycerol kinase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glycerol-kinase-deficiency-real-image",
-   "title": "Glycerol kinase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "glycerol_kinase_deficiency-pathway",
+      "title": "Glycerol kinase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked deficiency of glycerol kinase (GK gene at Xp21) causes accumulation of glycerol in blood and urine (hyperglycerolaemia and glyceroluria)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Salt-wasting adrenal crisis in a male infant suggesting associated adrenal hypoplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma and urine glycerol measurement to confirm hyperglycerolaemia and glyceroluria, Repeat triglyceride assay with a glycerol-blanked method to exclude pseudohypertriglyceridaemia, Adrenal function testing (cortisol,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For isolated deficiency, reassure and advise avoidance of prolonged fasting, treating episodic vomiting, acidosis or hypoglycaemia with glucose-containing fluids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating spurious hypertriglyceridaemia with lipid-lowering therapy instead of recognising glycerol interference"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glycerol kinase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glycerol_kinase_deficiency-matrix",
+      "title": "Glycerol kinase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked deficiency of glycerol kinase (GK gene at Xp21) causes accumulation of glycerol in blood and urine (hyperglycerolaemia",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma and urine glycerol measurement to confirm hyperglycerolaemia and glyceroluria, Repeat triglyceride assay with a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "True hypertriglyceridaemia and familial dyslipidaemias, Primary adrenal insufficiency of other causes, Duchenne or Becker",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For isolated deficiency, reassure and advise avoidance of prolonged fasting, treating episodic vomiting, acidosis or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating spurious hypertriglyceridaemia with lipid-lowering therapy instead of recognising glycerol interference",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glycerol kinase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glycerol_kinase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma and urine glycerol measurement",
+          "cells": [
+            {
+              "text": "Hyperglycerolaemia and glyceroluria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat triglyceride assay with glycerol-blanked method",
+          "cells": [
+            {
+              "text": "Excludes pseudohypertriglyceridaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal function testing",
+          "cells": [
+            {
+              "text": "When a contiguous-gene syndrome is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and neuromuscular assessment",
+          "cells": [
+            {
+              "text": "Associated muscular dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GK gene testing and Xp21 deletion analysis",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and blood gas during episodes",
+          "cells": [
+            {
+              "text": "Symptomatic episodes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glycerol_kinase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "True hypertriglyceridaemia",
+          "cells": [
+            {
+              "text": "Familial dyslipidaemia; excluded by glycerol-blanked assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duchenne or Becker muscular dystrophy",
+          "cells": [
+            {
+              "text": "Raised creatine kinase and muscle weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fructose-1,6-bisphosphatase deficiency",
+          "cells": [
+            {
+              "text": "Hypoglycaemia with acidosis in infancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glycerol_kinase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated deficiency",
+          "cells": [
+            {
+              "text": "Reassurance and avoidance of prolonged fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Episode management",
+          "cells": [
+            {
+              "text": "Treat vomiting, acidosis or hypoglycaemia during illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudohypertriglyceridaemia",
+          "cells": [
+            {
+              "text": "Recognised; avoids inappropriate lipid-lowering therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contiguous-gene deletion with adrenal hypoplasia",
+          "cells": [
+            {
+              "text": "Glucocorticoid and mineralocorticoid replacement with stress cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated Duchenne muscular dystrophy",
+          "cells": [
+            {
+              "text": "Creatine kinase and neuromuscular assessment; multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood glucose during illness; adrenal function and muscle status in the complex form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked; carrier testing of female relatives and Xp21 deletion analysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glycerol_kinase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Glycerol kinase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected glycerol kinase deficiency: hyperglycerolaemia with illness hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (salt-wasting adrenal crisis, raised creatine kinase, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent adrenal crisis management in a male infant with salt wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma and urine glycerol, glycerol-blanked triglycerides, creatine kinase and GK testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does glycerol measurement confirm it, with pseudohypertriglyceridaemia excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider true hypertriglyceridaemia, fatty acid oxidation disorder or FBP deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Isolated deficiency: reassurance and avoidance of prolonged fasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat vomiting, acidosis or hypoglycaemia promptly during illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Glucocorticoid and mineralocorticoid replacement in the contiguous-gene form",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for associated Duchenne muscular dystrophy with creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated form often benign; contiguous-gene form carries serious risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

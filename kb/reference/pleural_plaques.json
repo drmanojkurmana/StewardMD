@@ -1,179 +1,450 @@
 {
- "id": "pleural_plaques",
- "name": "pleural plaques",
- "aliases": [
-  "Pleural plaques",
-  "asbestos-related pleural plaques",
-  "hyaline pleural plaques",
-  "parietal pleural plaques",
-  "pleural plaque"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Murray & Nadel's Textbook of Respiratory Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Pleural plaques are discrete, well-circumscribed areas of hyaline (collagenous) fibrosis of the parietal pleura and are the commonest manifestation of asbestos exposure.",
-   "They characteristically involve the posterolateral chest wall, the domes of the diaphragm and the mediastinal pleura, while sparing the costophrenic angles and lung apices.",
-   "There is a long latency, typically 20 to 40 years from first exposure.",
-   "Plaques are usually asymptomatic incidental radiological findings and rarely cause meaningful functional impairment.",
-   "Calcification is common with time and aids radiological recognition.",
-   "They are a marker of asbestos exposure and hence of increased risk of other asbestos-related disease, but are not themselves premalignant and do not transform into mesothelioma.",
-   "CT is more sensitive and specific than chest radiography and helps separate plaques from mimics such as extrapleural fat.",
-   "Their main importance is as a marker of exposure prompting counselling on mesothelioma and lung cancer risk and on smoking cessation."
+  "id": "pleural_plaques",
+  "name": "pleural plaques",
+  "aliases": [
+    "Pleural plaques",
+    "asbestos-related pleural plaques",
+    "hyaline pleural plaques",
+    "parietal pleural plaques",
+    "pleural plaque"
   ],
-  "pathophysiology": "Inhaled asbestos fibres, particularly the longer amphibole fibres, are carried to the parietal pleura via lymphatic channels. There they incite a low-grade, chronic inflammatory and fibrogenic response with deposition of dense, relatively acellular basket-weave hyaline collagen, forming discrete plaques on the parietal pleura and diaphragm. Over years these plaques may calcify. Unlike diffuse pleural thickening and mesothelioma, plaques remain localised, typically spare the visceral pleura and reflect cumulative exposure rather than a progressive malignant process.",
-  "additionalDifferentials": [
-   "Diffuse pleural thickening (asbestos-related or post-inflammatory)",
-   "Malignant pleural mesothelioma",
-   "Pleural metastases",
-   "Extrapleural fat pads",
-   "Fibrothorax from healed empyema or haemothorax",
-   "Rounded atelectasis",
-   "Rib companion shadows and other plain-film mimics"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph",
-   "High-resolution CT of the thorax for characterisation and to exclude other disease",
-   "Detailed occupational and exposure history",
-   "Pulmonary function tests (usually normal; to detect coexistent asbestosis)",
-   "Comparison with previous imaging to confirm stability",
-   "Further characterisation with PET or biopsy only if features suggest malignancy"
-  ],
-  "redFlags": [
-   "Pleural thickening that is nodular, circumferential or associated with a mass, raising concern for mesothelioma",
-   "A new pleural effusion",
-   "Chest pain or unexplained weight loss",
-   "Progressive or asymmetric thickening on serial imaging"
-  ],
-  "prognosis": "Pleural plaques themselves are benign with an excellent prognosis and rarely cause symptoms or meaningful functional impairment; their significance lies in signalling asbestos exposure and the associated lifetime risk of mesothelioma and lung cancer.",
-  "pitfalls": [
-   "Misinterpreting plaques as metastases or mesothelioma, or vice versa.",
-   "Wrongly telling a patient that plaques turn into cancer, causing unnecessary alarm; they are markers, not precursors.",
-   "Confusing extrapleural fat or normal muscle shadows with plaques on plain films.",
-   "Failing to counsel on smoking cessation, which multiplies asbestos-related lung cancer risk.",
-   "Overlooking coexisting asbestosis or an early mesothelioma."
-  ],
-  "references": [
-   "Murray & Nadel's Textbook of Respiratory Medicine",
-   "BTS Statement on Asbestos-related Pleural Disease",
-   "Fishman's Pulmonary Diseases and Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that pleural plaques are benign, rarely symptomatic and not themselves premalignant, requiring no disease-specific therapy",
-   "Confirm cessation of asbestos exposure and document a detailed occupational history to support medico-legal and compensation needs",
-   "Advise smoking cessation to reduce the compounded lifetime risk of lung cancer",
-   "Maintain vigilance for other asbestos-related disease, investigating any new breathlessness, chest pain or pleural effusion",
-   "Compare with previous imaging to confirm stability and exclude evolving diffuse pleural thickening or malignancy",
-   "Monitor pulmonary function to detect coexistent asbestosis",
-   "Refer for further imaging or biopsy only where features suggest malignant transformation elsewhere in the pleura"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pleural_plaques-pathway",
-   "title": "pleural plaques: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Pleural plaques are discrete, well-circumscribed areas of hyaline (collagenous) fibrosis of the parietal pleura and are the commonest manifestation of asbestos exposure.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Pleural thickening that is nodular, circumferential or associated with a mass, raising concern for mesothelioma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph, High-resolution CT of the thorax for characterisation and to exclude other disease, Detailed occupational and exposure history"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that pleural plaques are benign, rarely symptomatic and not themselves premalignant, requiring no disease-specific therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting plaques as metastases or mesothelioma, or vice versa."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pleural plaques."
-  }
- ],
- "tables": [
-  {
-   "id": "pleural_plaques-matrix",
-   "title": "pleural plaques: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Pleural plaques are discrete, well-circumscribed areas of hyaline (collagenous) fibrosis of the parietal pleura and are the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Murray & Nadel's Textbook of Respiratory Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Pleural plaques are discrete, well-circumscribed areas of hyaline (collagenous) fibrosis of the parietal pleura and are the commonest manifestation of asbestos exposure.",
+      "They characteristically involve the posterolateral chest wall, the domes of the diaphragm and the mediastinal pleura, while sparing the costophrenic angles and lung apices.",
+      "There is a long latency, typically 20 to 40 years from first exposure.",
+      "Plaques are usually asymptomatic incidental radiological findings and rarely cause meaningful functional impairment.",
+      "Calcification is common with time and aids radiological recognition.",
+      "They are a marker of asbestos exposure and hence of increased risk of other asbestos-related disease, but are not themselves premalignant and do not transform into mesothelioma.",
+      "CT is more sensitive and specific than chest radiography and helps separate plaques from mimics such as extrapleural fat.",
+      "Their main importance is as a marker of exposure prompting counselling on mesothelioma and lung cancer risk and on smoking cessation."
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph, High-resolution CT of the thorax for characterisation and to exclude other disease, Detailed occupational and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Inhaled asbestos fibres, particularly the longer amphibole fibres, are carried to the parietal pleura via lymphatic channels. There they incite a low-grade, chronic inflammatory and fibrogenic response with deposition of dense, relatively acellular basket-weave hyaline collagen, forming discrete plaques on the parietal pleura and diaphragm. Over years these plaques may calcify. Unlike diffuse pleural thickening and mesothelioma, plaques remain localised, typically spare the visceral pleura and reflect cumulative exposure rather than a progressive malignant process.",
+    "additionalDifferentials": [
+      "Diffuse pleural thickening (asbestos-related or post-inflammatory)",
+      "Malignant pleural mesothelioma",
+      "Pleural metastases",
+      "Extrapleural fat pads",
+      "Fibrothorax from healed empyema or haemothorax",
+      "Rounded atelectasis",
+      "Rib companion shadows and other plain-film mimics"
     ],
-    [
-     "Primary Differentials",
-     "Diffuse pleural thickening (asbestos-related or post-inflammatory), Malignant pleural mesothelioma, Pleural metastases",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph",
+      "High-resolution CT of the thorax for characterisation and to exclude other disease",
+      "Detailed occupational and exposure history",
+      "Pulmonary function tests (usually normal; to detect coexistent asbestosis)",
+      "Comparison with previous imaging to confirm stability",
+      "Further characterisation with PET or biopsy only if features suggest malignancy"
     ],
-    [
-     "Management Strategy",
-     "Reassure that pleural plaques are benign, rarely symptomatic and not themselves premalignant, requiring no disease-specific",
-     "Core treatment modality"
+    "redFlags": [
+      "Pleural thickening that is nodular, circumferential or associated with a mass, raising concern for mesothelioma",
+      "A new pleural effusion",
+      "Chest pain or unexplained weight loss",
+      "Progressive or asymmetric thickening on serial imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting plaques as metastases or mesothelioma, or vice versa.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pleural plaques themselves are benign with an excellent prognosis and rarely cause symptoms or meaningful functional impairment; their significance lies in signalling asbestos exposure and the associated lifetime risk of mesothelioma and lung cancer.",
+    "pitfalls": [
+      "Misinterpreting plaques as metastases or mesothelioma, or vice versa.",
+      "Wrongly telling a patient that plaques turn into cancer, causing unnecessary alarm; they are markers, not precursors.",
+      "Confusing extrapleural fat or normal muscle shadows with plaques on plain films.",
+      "Failing to counsel on smoking cessation, which multiplies asbestos-related lung cancer risk.",
+      "Overlooking coexisting asbestosis or an early mesothelioma."
+    ],
+    "references": [
+      "Murray & Nadel's Textbook of Respiratory Medicine",
+      "BTS Statement on Asbestos-related Pleural Disease",
+      "Fishman's Pulmonary Diseases and Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that pleural plaques are benign, rarely symptomatic and not themselves premalignant, requiring no disease-specific therapy",
+      "Confirm cessation of asbestos exposure and document a detailed occupational history to support medico-legal and compensation needs",
+      "Advise smoking cessation to reduce the compounded lifetime risk of lung cancer",
+      "Maintain vigilance for other asbestos-related disease, investigating any new breathlessness, chest pain or pleural effusion",
+      "Compare with previous imaging to confirm stability and exclude evolving diffuse pleural thickening or malignancy",
+      "Monitor pulmonary function to detect coexistent asbestosis",
+      "Refer for further imaging or biopsy only where features suggest malignant transformation elsewhere in the pleura"
     ]
-   ],
-   "caption": "Overview comparison matrix for pleural plaques."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pleural-plaques-real-image",
-   "title": "pleural plaques: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pleural_plaques-pathway",
+      "title": "pleural plaques: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Pleural plaques are discrete, well-circumscribed areas of hyaline (collagenous) fibrosis of the parietal pleura and are the commonest manifestation of asbestos exposure.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Pleural thickening that is nodular, circumferential or associated with a mass, raising concern for mesothelioma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph, High-resolution CT of the thorax for characterisation and to exclude other disease, Detailed occupational and exposure history"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that pleural plaques are benign, rarely symptomatic and not themselves premalignant, requiring no disease-specific therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting plaques as metastases or mesothelioma, or vice versa."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pleural plaques."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pleural_plaques-matrix",
+      "title": "pleural plaques: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Pleural plaques are discrete, well-circumscribed areas of hyaline (collagenous) fibrosis of the parietal pleura and are the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph, High-resolution CT of the thorax for characterisation and to exclude other disease, Detailed occupational and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Diffuse pleural thickening (asbestos-related or post-inflammatory), Malignant pleural mesothelioma, Pleural metastases",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that pleural plaques are benign, rarely symptomatic and not themselves premalignant, requiring no disease-specific",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting plaques as metastases or mesothelioma, or vice versa.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pleural plaques."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pleural_plaques-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Pleural plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the thorax",
+          "cells": [
+            {
+              "text": "Characterisation; other disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and exposure history",
+          "cells": [
+            {
+              "text": "Asbestos exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Usually normal; detects coexistent asbestosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison with previous imaging",
+          "cells": [
+            {
+              "text": "Stability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleural_plaques-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malignant pleural mesothelioma",
+          "cells": [
+            {
+              "text": "Nodular or circumferential thickening, or an associated mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural metastases",
+          "cells": [
+            {
+              "text": "Chest pain or unexplained weight loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pleural_plaques-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, rarely symptomatic, not themselves premalignant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure",
+          "cells": [
+            {
+              "text": "Confirm cessation of asbestos exposure; detailed occupational history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Reduces the compounded lifetime risk of lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vigilance",
+          "cells": [
+            {
+              "text": "Investigate new breathlessness for other asbestos-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Compare with previous imaging; PET or biopsy only if malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pleural_plaques-dx-mgmt",
+      "title": "Diagnosis and management of pleural plaques",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental pleural thickening on imaging after asbestos exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (nodular or circumferential thickening, new effusion, weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent thoracic review for suspected mesothelioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT thorax; occupational history; spirometry; comparison with prior imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are the plaques stable and benign-looking on CT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider diffuse pleural thickening, mesothelioma, metastases or fibrothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that pleural plaques are benign and rarely symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm cessation of asbestos exposure and document occupational history",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Advise smoking cessation to reduce lung cancer risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor lung function to detect coexistent asbestosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer for biopsy only where features suggest malignant transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign with an excellent prognosis; rarely causes symptoms or impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

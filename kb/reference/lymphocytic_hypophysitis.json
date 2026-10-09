@@ -1,177 +1,475 @@
 {
- "id": "lymphocytic_hypophysitis",
- "name": "Lymphocytic hypophysitis",
- "aliases": [
-  "autoimmune hypophysitis",
-  "primary hypophysitis",
-  "lymphocytic adenohypophysitis",
-  "immune checkpoint inhibitor hypophysitis"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autoimmune inflammatory disorder of the pituitary that classically affects women in late pregnancy or the postpartum period",
-   "Increasingly recognised as an immune-related adverse effect of checkpoint-inhibitor cancer therapy",
-   "Headache and visual disturbance from an enlarging, inflamed gland can mimic a pituitary adenoma",
-   "Hormone loss often occurs in a characteristic sequence, with corticotroph and thyrotroph function frequently affected early",
-   "Involvement of the posterior pituitary or stalk can cause diabetes insipidus, which is unusual in adenomas and a useful discriminating clue",
-   "Imaging typically shows symmetrical pituitary enlargement with stalk thickening and avid, homogeneous enhancement",
-   "Corticotroph deficiency must be identified and treated with hormone replacement before any thyroid hormone is started",
-   "The condition may be self-limiting, and glucocorticoid therapy or drug withdrawal is used depending on the underlying trigger"
+  "id": "lymphocytic_hypophysitis",
+  "name": "Lymphocytic hypophysitis",
+  "aliases": [
+    "autoimmune hypophysitis",
+    "primary hypophysitis",
+    "lymphocytic adenohypophysitis",
+    "immune checkpoint inhibitor hypophysitis"
   ],
-  "pathophysiology": "Lymphocytic hypophysitis is characterised by immune-mediated infiltration of the pituitary gland by lymphocytes and plasma cells, producing inflammation, gland enlargement and progressive destruction of hormone-secreting cells. The classic form has a strong association with the peripartum state and other autoimmune conditions, suggesting a breakdown in immune tolerance to pituitary antigens. Checkpoint-inhibitor therapy can trigger a similar inflammatory hypophysitis by unleashing autoreactive immunity. Inflammation may involve the anterior lobe, the stalk and the posterior lobe, accounting for the variable pattern of anterior hormone deficiencies and, in some cases, diabetes insipidus, with eventual fibrosis and atrophy.",
-  "additionalDifferentials": [
-   "Non-functioning pituitary adenoma",
-   "Craniopharyngioma",
-   "Sarcoidosis or other granulomatous hypophysitis",
-   "Langerhans cell histiocytosis involving the pituitary",
-   "Metastatic disease to the pituitary",
-   "IgG4-related hypophysitis"
-  ],
-  "additionalInvestigations": [
-   "Magnetic resonance imaging of the pituitary and stalk",
-   "Full anterior pituitary hormone profile including cortisol assessment",
-   "Assessment for diabetes insipidus with paired plasma and urine osmolality",
-   "Prolactin measurement, which may be mildly elevated or reduced",
-   "Screening for coexisting autoimmune disease",
-   "Review of any recent checkpoint-inhibitor or other immunotherapy exposure"
-  ],
-  "redFlags": [
-   "Acute secondary adrenal insufficiency",
-   "Rapid visual deterioration from chiasmal compression",
-   "New diabetes insipidus indicating posterior or stalk involvement",
-   "Severe headache with a rapidly enlarging sellar mass",
-   "Hypopituitarism emerging during immunotherapy"
-  ],
-  "prognosis": "Many cases stabilise or partially recover, particularly with treatment of the trigger, but some hormone deficits, especially corticotroph loss, are permanent and require lifelong replacement; checkpoint-inhibitor-related corticotroph deficiency is often irreversible.",
-  "pitfalls": [
-   "Misdiagnosing the inflamed gland as a pituitary adenoma and proceeding to unnecessary surgery",
-   "Starting thyroid hormone before replacing cortisol and precipitating an adrenal crisis",
-   "Overlooking diabetes insipidus as a distinguishing feature",
-   "Failing to consider checkpoint-inhibitor therapy as a cause in cancer patients",
-   "Assuming full recovery of pituitary function when deficits may be permanent"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "DeGroot's Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Replace deficient hormones, giving glucocorticoids first to avoid adrenal crisis, then thyroid hormone, sex steroids and growth hormone as needed",
-   "Desmopressin for cranial diabetes insipidus arising from posterior lobe or stalk involvement",
-   "High-dose glucocorticoids to reduce inflammatory gland enlargement causing headache or visual compromise",
-   "Withhold the triggering checkpoint inhibitor and manage jointly with oncology when therapy-induced",
-   "Reserve trans-sphenoidal surgery for significant mass effect or diagnostic uncertainty rather than as routine treatment",
-   "Serial pituitary hormone testing and interval MRI to monitor recovery, relapse or gland atrophy",
-   "Counsel on likely lifelong corticotroph replacement and sick-day steroid rules given frequent irreversibility"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lymphocytic_hypophysitis-pathway",
-   "title": "Lymphocytic hypophysitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autoimmune inflammatory disorder of the pituitary that classically affects women in late pregnancy or the postpartum period",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute secondary adrenal insufficiency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Magnetic resonance imaging of the pituitary and stalk, Full anterior pituitary hormone profile including cortisol assessment, Assessment for diabetes insipidus with paired plasma and urine osmolality"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replace deficient hormones, giving glucocorticoids first to avoid adrenal crisis, then thyroid hormone, sex steroids and growth hormone as needed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the inflamed gland as a pituitary adenoma and proceeding to unnecessary surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lymphocytic hypophysitis."
-  }
- ],
- "tables": [
-  {
-   "id": "lymphocytic_hypophysitis-matrix",
-   "title": "Lymphocytic hypophysitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autoimmune inflammatory disorder of the pituitary that classically affects women in late pregnancy or the postpartum period",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autoimmune inflammatory disorder of the pituitary that classically affects women in late pregnancy or the postpartum period",
+      "Increasingly recognised as an immune-related adverse effect of checkpoint-inhibitor cancer therapy",
+      "Headache and visual disturbance from an enlarging, inflamed gland can mimic a pituitary adenoma",
+      "Hormone loss often occurs in a characteristic sequence, with corticotroph and thyrotroph function frequently affected early",
+      "Involvement of the posterior pituitary or stalk can cause diabetes insipidus, which is unusual in adenomas and a useful discriminating clue",
+      "Imaging typically shows symmetrical pituitary enlargement with stalk thickening and avid, homogeneous enhancement",
+      "Corticotroph deficiency must be identified and treated with hormone replacement before any thyroid hormone is started",
+      "The condition may be self-limiting, and glucocorticoid therapy or drug withdrawal is used depending on the underlying trigger"
     ],
-    [
-     "Key Investigations",
-     "Magnetic resonance imaging of the pituitary and stalk, Full anterior pituitary hormone profile including cortisol assessment,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lymphocytic hypophysitis is characterised by immune-mediated infiltration of the pituitary gland by lymphocytes and plasma cells, producing inflammation, gland enlargement and progressive destruction of hormone-secreting cells. The classic form has a strong association with the peripartum state and other autoimmune conditions, suggesting a breakdown in immune tolerance to pituitary antigens. Checkpoint-inhibitor therapy can trigger a similar inflammatory hypophysitis by unleashing autoreactive immunity. Inflammation may involve the anterior lobe, the stalk and the posterior lobe, accounting for the variable pattern of anterior hormone deficiencies and, in some cases, diabetes insipidus, with eventual fibrosis and atrophy.",
+    "additionalDifferentials": [
+      "Non-functioning pituitary adenoma",
+      "Craniopharyngioma",
+      "Sarcoidosis or other granulomatous hypophysitis",
+      "Langerhans cell histiocytosis involving the pituitary",
+      "Metastatic disease to the pituitary",
+      "IgG4-related hypophysitis"
     ],
-    [
-     "Primary Differentials",
-     "Non-functioning pituitary adenoma, Craniopharyngioma, Sarcoidosis or other granulomatous hypophysitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Magnetic resonance imaging of the pituitary and stalk",
+      "Full anterior pituitary hormone profile including cortisol assessment",
+      "Assessment for diabetes insipidus with paired plasma and urine osmolality",
+      "Prolactin measurement, which may be mildly elevated or reduced",
+      "Screening for coexisting autoimmune disease",
+      "Review of any recent checkpoint-inhibitor or other immunotherapy exposure"
     ],
-    [
-     "Management Strategy",
-     "Replace deficient hormones, giving glucocorticoids first to avoid adrenal crisis, then thyroid hormone, sex steroids and growth",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute secondary adrenal insufficiency",
+      "Rapid visual deterioration from chiasmal compression",
+      "New diabetes insipidus indicating posterior or stalk involvement",
+      "Severe headache with a rapidly enlarging sellar mass",
+      "Hypopituitarism emerging during immunotherapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the inflamed gland as a pituitary adenoma and proceeding to unnecessary surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many cases stabilise or partially recover, particularly with treatment of the trigger, but some hormone deficits, especially corticotroph loss, are permanent and require lifelong replacement; checkpoint-inhibitor-related corticotroph deficiency is often irreversible.",
+    "pitfalls": [
+      "Misdiagnosing the inflamed gland as a pituitary adenoma and proceeding to unnecessary surgery",
+      "Starting thyroid hormone before replacing cortisol and precipitating an adrenal crisis",
+      "Overlooking diabetes insipidus as a distinguishing feature",
+      "Failing to consider checkpoint-inhibitor therapy as a cause in cancer patients",
+      "Assuming full recovery of pituitary function when deficits may be permanent"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "DeGroot's Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Replace deficient hormones, giving glucocorticoids first to avoid adrenal crisis, then thyroid hormone, sex steroids and growth hormone as needed",
+      "Desmopressin for cranial diabetes insipidus arising from posterior lobe or stalk involvement",
+      "High-dose glucocorticoids to reduce inflammatory gland enlargement causing headache or visual compromise",
+      "Withhold the triggering checkpoint inhibitor and manage jointly with oncology when therapy-induced",
+      "Reserve trans-sphenoidal surgery for significant mass effect or diagnostic uncertainty rather than as routine treatment",
+      "Serial pituitary hormone testing and interval MRI to monitor recovery, relapse or gland atrophy",
+      "Counsel on likely lifelong corticotroph replacement and sick-day steroid rules given frequent irreversibility"
     ]
-   ],
-   "caption": "Overview comparison matrix for lymphocytic hypophysitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lymphocytic-hypophysitis-real-image",
-   "title": "Lymphocytic hypophysitis: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "lymphocytic_hypophysitis-pathway",
+      "title": "Lymphocytic hypophysitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autoimmune inflammatory disorder of the pituitary that classically affects women in late pregnancy or the postpartum period",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute secondary adrenal insufficiency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Magnetic resonance imaging of the pituitary and stalk, Full anterior pituitary hormone profile including cortisol assessment, Assessment for diabetes insipidus with paired plasma and urine osmolality"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replace deficient hormones, giving glucocorticoids first to avoid adrenal crisis, then thyroid hormone, sex steroids and growth hormone as needed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the inflamed gland as a pituitary adenoma and proceeding to unnecessary surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lymphocytic hypophysitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lymphocytic_hypophysitis-matrix",
+      "title": "Lymphocytic hypophysitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autoimmune inflammatory disorder of the pituitary that classically affects women in late pregnancy or the postpartum period",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Magnetic resonance imaging of the pituitary and stalk, Full anterior pituitary hormone profile including cortisol assessment,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-functioning pituitary adenoma, Craniopharyngioma, Sarcoidosis or other granulomatous hypophysitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replace deficient hormones, giving glucocorticoids first to avoid adrenal crisis, then thyroid hormone, sex steroids and growth",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the inflamed gland as a pituitary adenoma and proceeding to unnecessary surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lymphocytic hypophysitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lymphocytic_hypophysitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the pituitary and stalk",
+          "cells": [
+            {
+              "text": "Symmetrical enlargement with stalk thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full anterior pituitary hormone profile with cortisol",
+          "cells": [
+            {
+              "text": "Hormone loss, often corticotroph and thyrotroph"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paired plasma and urine osmolality",
+          "cells": [
+            {
+              "text": "Diabetes insipidus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin",
+          "cells": [
+            {
+              "text": "Mildly elevated or reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of immunotherapy exposure",
+          "cells": [
+            {
+              "text": "Checkpoint-inhibitor trigger"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_hypophysitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-functioning pituitary adenoma",
+          "cells": [
+            {
+              "text": "Diabetes insipidus is unusual in adenomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniopharyngioma",
+          "cells": [
+            {
+              "text": "Sellar mass with a different course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatous hypophysitis (sarcoidosis)",
+          "cells": [
+            {
+              "text": "Systemic granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related hypophysitis",
+          "cells": [
+            {
+              "text": "Immune profile and systemic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lymphocytic_hypophysitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoids first",
+          "cells": [
+            {
+              "text": "Give before thyroid hormone to avoid adrenal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other hormone replacement",
+          "cells": [
+            {
+              "text": "Thyroid hormone, sex steroids and growth hormone as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "Cranial diabetes insipidus from posterior or stalk involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose glucocorticoids",
+          "cells": [
+            {
+              "text": "Headache or visual compromise from gland enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger withdrawal",
+          "cells": [
+            {
+              "text": "Hold checkpoint inhibitor; manage jointly with oncology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Reserved for significant mass effect or diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lymphocytic_hypophysitis-dx-mgmt",
+      "title": "Diagnosis and management of Lymphocytic hypophysitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Headache, visual change and pituitary deficit, postpartum or on checkpoint inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute adrenal insufficiency, visual loss or new diabetes insipidus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent glucocorticoid cover and endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pituitary MRI, full hormone profile including cortisol, osmolality studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show an inflamed gland with the hormone deficit pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-functioning adenoma, craniopharyngioma or granulomatous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start glucocorticoids before any thyroid hormone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Desmopressin for cranial diabetes insipidus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-dose steroids for headache or visual compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Withhold checkpoint inhibitor and involve oncology",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lifelong replacement and sick-day steroid counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Some recover; corticotroph loss is often permanent and needs lifelong replacement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

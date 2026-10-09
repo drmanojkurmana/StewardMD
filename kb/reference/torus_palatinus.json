@@ -1,173 +1,462 @@
 {
- "id": "torus_palatinus",
- "name": "Torus palatinus",
- "aliases": [
-  "palatal torus",
-  "palatine torus",
-  "oral exostosis of the palate"
- ],
- "class": "non_infective",
- "system": "Oral & Maxillofacial",
- "specialty": "Oral Medicine / OMFS",
- "referenceOnly": true,
- "reference": {
-  "source": "Burket's Oral Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A common, benign bony outgrowth (exostosis) arising in the midline of the hard palate",
-   "Presents as a slow-growing, bony-hard, sessile or lobulated swelling covered by normal mucosa",
-   "More frequent in females and shows variation in prevalence between ethnic groups",
-   "Usually asymptomatic and often discovered incidentally",
-   "The thin overlying mucosa is prone to traumatic ulceration that can be slow to heal",
-   "Its main clinical importance lies in interference with the fitting and construction of dentures",
-   "The diagnosis is clinical; a hard midline palatal swelling with normal mucosa needs no biopsy",
-   "No treatment is required unless prosthetic needs, recurrent trauma, or patient concern warrant surgical removal"
+  "id": "torus_palatinus",
+  "name": "Torus palatinus",
+  "aliases": [
+    "palatal torus",
+    "palatine torus",
+    "oral exostosis of the palate"
   ],
-  "pathophysiology": "A torus palatinus is a developmental, benign exostosis composed of dense cortical bone with a variable amount of trabecular bone, arising along the midline palatal suture. Its growth is slow and it typically becomes apparent from adolescence or early adulthood; both genetic predisposition and functional or masticatory factors have been proposed as contributors. The lesion is not neoplastic and has no malignant potential, and the thin mucosa stretched over the bony prominence is easily traumatised, which accounts for the occasional ulceration seen clinically.",
-  "additionalDifferentials": [
-   "Torus mandibularis and other oral exostoses",
-   "Palatal abscess or dental infection",
-   "Salivary gland tumour of the palate such as pleomorphic adenoma",
-   "Osteoma or osteoid osteoma",
-   "Nasopalatine duct cyst",
-   "Squamous cell carcinoma or other palatal neoplasm if the mucosa is abnormal"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination confirming a bony-hard midline swelling with normal overlying mucosa",
-   "Palpation to assess consistency, extent, and mucosal integrity",
-   "Radiographs or cross-sectional imaging only if the diagnosis is uncertain or for surgical planning",
-   "Study models for denture planning when a prosthesis is required",
-   "Biopsy reserved for lesions with atypical, non-bony, ulcerated, or soft features",
-   "Review of the mucosa for traumatic ulceration"
-  ],
-  "redFlags": [
-   "Ulceration that fails to heal or shows induration, raising suspicion of neoplasia",
-   "Rapid growth, which is atypical for a torus",
-   "A soft or fluctuant rather than bony-hard swelling suggesting another lesion",
-   "Signs of infection or abscess formation"
-  ],
-  "prognosis": "The prognosis is excellent as the torus is entirely benign; although it continues to grow slowly it causes no harm, and surgical removal, when indicated, is generally curative with uncommon recurrence.",
-  "pitfalls": [
-   "Mistaking a torus for a neoplasm or abscess and over-investigating",
-   "Missing a genuine palatal tumour by assuming any midline swelling is a torus",
-   "Traumatising the thin overlying mucosa during denture fitting",
-   "Recommending surgery when observation would suffice"
-  ],
-  "references": [
-   "Burket's Oral Medicine",
-   "Cawson's Essentials of Oral Pathology and Oral Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that the lesion is a benign bony exostosis with no malignant potential and needs no treatment when asymptomatic",
-   "Observation with periodic review, as intervention is unnecessary for the incidental, asymptomatic torus",
-   "Manage traumatic ulceration of the thin overlying mucosa with local protective measures until healing",
-   "Surgical reduction or excision reserved for tori that interfere with denture construction, cause recurrent ulceration, or impair speech and function",
-   "Take study models and involve prosthodontics when a denture is required over a prominent torus",
-   "Biopsy only if features become atypical, non-bony, or fail to heal, to exclude other pathology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "torus_palatinus-pathway",
-   "title": "Torus palatinus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A common, benign bony outgrowth (exostosis) arising in the midline of the hard palate",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ulceration that fails to heal or shows induration, raising suspicion of neoplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination confirming a bony-hard midline swelling with normal overlying mucosa, Palpation to assess consistency, extent, and mucosal integrity, Radiographs or cross-sectional imaging only if the diagnosis is"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that the lesion is a benign bony exostosis with no malignant potential and needs no treatment when asymptomatic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a torus for a neoplasm or abscess and over-investigating"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of torus palatinus."
-  }
- ],
- "tables": [
-  {
-   "id": "torus_palatinus-matrix",
-   "title": "Torus palatinus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A common, benign bony outgrowth (exostosis) arising in the midline of the hard palate",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oral & Maxillofacial",
+  "specialty": "Oral Medicine / OMFS",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Burket's Oral Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A common, benign bony outgrowth (exostosis) arising in the midline of the hard palate",
+      "Presents as a slow-growing, bony-hard, sessile or lobulated swelling covered by normal mucosa",
+      "More frequent in females and shows variation in prevalence between ethnic groups",
+      "Usually asymptomatic and often discovered incidentally",
+      "The thin overlying mucosa is prone to traumatic ulceration that can be slow to heal",
+      "Its main clinical importance lies in interference with the fitting and construction of dentures",
+      "The diagnosis is clinical; a hard midline palatal swelling with normal mucosa needs no biopsy",
+      "No treatment is required unless prosthetic needs, recurrent trauma, or patient concern warrant surgical removal"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination confirming a bony-hard midline swelling with normal overlying mucosa, Palpation to assess consistency,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A torus palatinus is a developmental, benign exostosis composed of dense cortical bone with a variable amount of trabecular bone, arising along the midline palatal suture. Its growth is slow and it typically becomes apparent from adolescence or early adulthood; both genetic predisposition and functional or masticatory factors have been proposed as contributors. The lesion is not neoplastic and has no malignant potential, and the thin mucosa stretched over the bony prominence is easily traumatised, which accounts for the occasional ulceration seen clinically.",
+    "additionalDifferentials": [
+      "Torus mandibularis and other oral exostoses",
+      "Palatal abscess or dental infection",
+      "Salivary gland tumour of the palate such as pleomorphic adenoma",
+      "Osteoma or osteoid osteoma",
+      "Nasopalatine duct cyst",
+      "Squamous cell carcinoma or other palatal neoplasm if the mucosa is abnormal"
     ],
-    [
-     "Primary Differentials",
-     "Torus mandibularis and other oral exostoses, Palatal abscess or dental infection, Salivary gland tumour of the palate such as",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination confirming a bony-hard midline swelling with normal overlying mucosa",
+      "Palpation to assess consistency, extent, and mucosal integrity",
+      "Radiographs or cross-sectional imaging only if the diagnosis is uncertain or for surgical planning",
+      "Study models for denture planning when a prosthesis is required",
+      "Biopsy reserved for lesions with atypical, non-bony, ulcerated, or soft features",
+      "Review of the mucosa for traumatic ulceration"
     ],
-    [
-     "Management Strategy",
-     "Reassure that the lesion is a benign bony exostosis with no malignant potential and needs no treatment when asymptomatic",
-     "Core treatment modality"
+    "redFlags": [
+      "Ulceration that fails to heal or shows induration, raising suspicion of neoplasia",
+      "Rapid growth, which is atypical for a torus",
+      "A soft or fluctuant rather than bony-hard swelling suggesting another lesion",
+      "Signs of infection or abscess formation"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a torus for a neoplasm or abscess and over-investigating",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent as the torus is entirely benign; although it continues to grow slowly it causes no harm, and surgical removal, when indicated, is generally curative with uncommon recurrence.",
+    "pitfalls": [
+      "Mistaking a torus for a neoplasm or abscess and over-investigating",
+      "Missing a genuine palatal tumour by assuming any midline swelling is a torus",
+      "Traumatising the thin overlying mucosa during denture fitting",
+      "Recommending surgery when observation would suffice"
+    ],
+    "references": [
+      "Burket's Oral Medicine",
+      "Cawson's Essentials of Oral Pathology and Oral Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that the lesion is a benign bony exostosis with no malignant potential and needs no treatment when asymptomatic",
+      "Observation with periodic review, as intervention is unnecessary for the incidental, asymptomatic torus",
+      "Manage traumatic ulceration of the thin overlying mucosa with local protective measures until healing",
+      "Surgical reduction or excision reserved for tori that interfere with denture construction, cause recurrent ulceration, or impair speech and function",
+      "Take study models and involve prosthodontics when a denture is required over a prominent torus",
+      "Biopsy only if features become atypical, non-bony, or fail to heal, to exclude other pathology"
     ]
-   ],
-   "caption": "Overview comparison matrix for torus palatinus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "torus-palatinus-real-image",
-   "title": "Torus palatinus: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "torus_palatinus-pathway",
+      "title": "Torus palatinus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A common, benign bony outgrowth (exostosis) arising in the midline of the hard palate",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ulceration that fails to heal or shows induration, raising suspicion of neoplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination confirming a bony-hard midline swelling with normal overlying mucosa, Palpation to assess consistency, extent, and mucosal integrity, Radiographs or cross-sectional imaging only if the diagnosis is"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that the lesion is a benign bony exostosis with no malignant potential and needs no treatment when asymptomatic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a torus for a neoplasm or abscess and over-investigating"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of torus palatinus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "torus_palatinus-matrix",
+      "title": "Torus palatinus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A common, benign bony outgrowth (exostosis) arising in the midline of the hard palate",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination confirming a bony-hard midline swelling with normal overlying mucosa, Palpation to assess consistency,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Torus mandibularis and other oral exostoses, Palatal abscess or dental infection, Salivary gland tumour of the palate such as",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that the lesion is a benign bony exostosis with no malignant potential and needs no treatment when asymptomatic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a torus for a neoplasm or abscess and over-investigating",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for torus palatinus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Burket's Oral Medicine",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "torus_palatinus-dx-mgmt",
+      "title": "Diagnosis and management of Torus palatinus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected torus palatinus: bony-hard midline hard palate swelling with normal mucosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: non-healing ulcer, rapid growth, or soft or fluctuant swelling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy for suspected palatal neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination and palpation; imaging only if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the swelling bony-hard with normal overlying mucosa?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider salivary tumour, abscess or neoplasm; biopsy as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure that the torus is benign and needs no treatment if asymptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Periodic observation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Protect traumatised mucosa until healing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical reduction for denture interference or recurrent ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Biopsy only if features become atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Entirely benign; surgical removal when indicated is generally curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "torus_palatinus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Bony-hard midline palatal swelling with normal overlying mucosa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palpation of consistency and mucosal integrity",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs or cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Only when uncertain or for surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Study models",
+          "cells": [
+            {
+              "text": "Denture planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Atypical, non-bony, ulcerated or soft features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "torus_palatinus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Torus mandibularis",
+          "cells": [
+            {
+              "text": "Mandibular rather than palatal exostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palatal salivary gland tumour such as pleomorphic adenoma",
+          "cells": [
+            {
+              "text": "Soft or fluctuant rather than bony-hard swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Squamous cell carcinoma or other palatal neoplasm",
+          "cells": [
+            {
+              "text": "Abnormal mucosa, ulceration that fails to heal, or induration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "torus_palatinus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign bony exostosis with no malignant potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Asymptomatic torus; periodic review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local protection of ulcerated mucosa",
+          "cells": [
+            {
+              "text": "Until healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical reduction or excision",
+          "cells": [
+            {
+              "text": "Denture interference, recurrent ulceration, or impaired speech or function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prosthodontic planning",
+          "cells": [
+            {
+              "text": "Study models when a denture is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Only if features become atypical or fail to heal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

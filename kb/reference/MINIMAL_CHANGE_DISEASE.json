@@ -1,186 +1,572 @@
 {
- "id": "MINIMAL_CHANGE_DISEASE",
- "name": "Minimal change disease",
- "system": "Nephrology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "minimal change",
-  "MCD",
-  "minimal change nephropathy",
-  "nil disease",
-  "lipoid nephrosis",
-  "MCNS"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Most common cause of nephrotic syndrome in children (peak age 2-6 years) but also occurs in adults, sometimes elderly patients.",
-   "Presents with abrupt-onset heavy proteinuria, hypoalbuminemia, and edema; renal function and blood pressure are typically preserved at onset.",
-   "Light microscopy is essentially normal ('minimal change'); diagnosis relies on electron microscopy showing diffuse podocyte foot-process effacement.",
-   "Excellent response to corticosteroids is characteristic and considered almost diagnostic in children; failure to respond should prompt reconsideration of the diagnosis.",
-   "Frequent relapses and steroid dependence are common, often requiring steroid-sparing agents over time.",
-   "Can be triggered or associated with recent upper respiratory infection, atopy/allergy, immunizations, NSAID use, or (in adults) underlying lymphoproliferative disease (especially Hodgkin lymphoma).",
-   "Selective proteinuria (predominantly albumin, low IgG) on urine protein electrophoresis supports the diagnosis.",
-   "Thromboembolic risk and increased infection susceptibility parallel the severity of nephrotic syndrome regardless of underlying cause."
+  "id": "MINIMAL_CHANGE_DISEASE",
+  "name": "Minimal change disease",
+  "system": "Nephrology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "minimal change",
+    "MCD",
+    "minimal change nephropathy",
+    "nil disease",
+    "lipoid nephrosis",
+    "MCNS"
   ],
-  "pathophysiology": "Minimal change disease is thought to result from a circulating permeability factor or T-cell/immune dysregulation that injures podocytes, causing effacement of their foot processes and loss of the glomerular filtration barrier's charge/size selectivity without structural glomerular damage visible by light microscopy. This leads to massive selective loss of albumin into the urine, producing hypoalbuminemia, decreased plasma oncotic pressure, and edema, along with compensatory hepatic lipoprotein synthesis causing hyperlipidemia. The glomerular basement membrane and capillary architecture otherwise remain intact, distinguishing it from other primary glomerulopathies.",
-  "additionalDifferentials": [
-   "Focal segmental glomerulosclerosis (FSGS)",
-   "Membranous nephropathy",
-   "Membranoproliferative glomerulonephritis",
-   "Diabetic nephropathy",
-   "IgA nephropathy with heavy proteinuria",
-   "Amyloidosis or other infiltrative nephropathies"
-  ],
-  "infectionMimics": [
-   "Post-infectious glomerulonephritis",
-   "Hepatitis B/C-associated glomerulonephritis",
-   "HIV-associated nephropathy"
-  ],
-  "nonInfectiousMimics": [
-   "NSAID-induced acute interstitial nephritis with nephrotic-range proteinuria",
-   "Paraneoplastic nephrotic syndrome (Hodgkin lymphoma, other lymphoproliferative disorders)",
-   "Diabetic nephropathy",
-   "Amyloidosis"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis with microscopy — assess for selective proteinuria and absence of significant hematuria or cellular casts",
-   "24-hour urine protein or spot urine protein-to-creatinine ratio — quantify nephrotic-range proteinuria",
-   "Serum albumin and lipid panel — confirm hypoalbuminemia and hyperlipidemia typical of nephrotic syndrome",
-   "Renal function panel (creatinine, eGFR) — establish baseline and monitor for atypical renal impairment",
-   "Renal biopsy with electron microscopy — required in adults or steroid-resistant cases to confirm diagnosis and exclude FSGS/other glomerulopathies",
-   "Serum complement levels — typically normal in minimal change disease, helps exclude complement-mediated glomerulonephritides",
-   "Age-appropriate malignancy screening in adults — evaluate for underlying lymphoproliferative disease, especially if steroid-resistant",
-   "Coagulation studies/consideration of thromboembolic risk — nephrotic syndrome predisposes to venous thromboembolism"
-  ],
-  "redFlags": [
-   "Steroid resistance or failure to achieve remission — reconsider diagnosis (likely FSGS) and pursue biopsy",
-   "Significant hematuria, hypertension, or renal impairment at presentation — atypical for minimal change disease, suggests alternative diagnosis",
-   "Signs of thromboembolism (limb swelling, chest pain, dyspnea) given hypercoagulable state of nephrotic syndrome",
-   "Severe hypovolemia or acute kidney injury from aggressive diuresis in the setting of low oncotic pressure",
-   "Signs of serious infection (peritonitis, cellulitis, sepsis) due to functional hypogammaglobulinemia and immunosuppressive therapy",
-   "New systemic symptoms (weight loss, lymphadenopathy, night sweats) in adults raising concern for occult malignancy"
-  ],
-  "pitfalls": [
-   "Assuming a normal light microscopy biopsy excludes glomerular disease without electron microscopy to assess podocyte foot processes",
-   "Delaying biopsy in adults presenting with nephrotic syndrome, where minimal change disease is less common and other etiologies must be excluded",
-   "Misclassifying steroid-resistant nephrotic syndrome as minimal change disease when it more likely represents FSGS or another glomerulopathy",
-   "Overlooking secondary causes (drugs, malignancy) in adult-onset minimal change disease"
-  ],
-  "prognosis": "Minimal change disease has an excellent overall prognosis, with the large majority of children and most adults achieving remission with corticosteroid therapy and rarely progressing to chronic kidney disease. However, relapses are common and some patients become steroid-dependent or frequently relapsing, necessitating steroid-sparing immunosuppressive strategies.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Glomerular Diseases chapter"
-  ],
-  "crossLinks": [
-   "FSGS"
-  ],
-  "management": [
-   "Induce remission with corticosteroids, which produce a rapid response in most patients and are near-diagnostic in children",
-   "For frequent relapses or steroid dependence, use steroid-sparing agents such as calcineurin inhibitors, cyclophosphamide, mycophenolate, or rituximab",
-   "Manage nephrotic oedema with dietary sodium restriction and diuretics, adding statins for hyperlipidaemia",
-   "Address triggers and associations — withdraw NSAIDs, manage atopy, and evaluate adults for underlying lymphoproliferative disease such as Hodgkin lymphoma",
-   "Consider anticoagulation during heavy proteinuria given the hypercoagulable state, and observe infection precautions",
-   "Monitor proteinuria to detect relapse and watch for corticosteroid toxicity, referring to nephrology for steroid-resistant or atypical disease"
-  ]
- },
- "algorithms": [
-  {
-   "id": "minimal_change_disease-pathway",
-   "title": "Minimal change disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most common cause of nephrotic syndrome in children (peak age 2-6 years) but also occurs in adults, sometimes elderly patients.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Steroid resistance or failure to achieve remission - reconsider diagnosis (likely FSGS) and pursue biopsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis with microscopy - assess for selective proteinuria and absence of significant hematuria or cellular casts, 24-hour urine protein or spot urine protein-to-creatinine ratio - quantify nephrotic-range proteinuria,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with corticosteroids, which produce a rapid response in most patients and are near-diagnostic in children"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal light microscopy biopsy excludes glomerular disease without electron microscopy to assess podocyte foot processes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of minimal change disease."
-  }
- ],
- "tables": [
-  {
-   "id": "minimal_change_disease-matrix",
-   "title": "Minimal change disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most common cause of nephrotic syndrome in children (peak age 2-6 years) but also occurs in adults, sometimes elderly patients.",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Most common cause of nephrotic syndrome in children (peak age 2-6 years) but also occurs in adults, sometimes elderly patients.",
+      "Presents with abrupt-onset heavy proteinuria, hypoalbuminemia, and edema; renal function and blood pressure are typically preserved at onset.",
+      "Light microscopy is essentially normal ('minimal change'); diagnosis relies on electron microscopy showing diffuse podocyte foot-process effacement.",
+      "Excellent response to corticosteroids is characteristic and considered almost diagnostic in children; failure to respond should prompt reconsideration of the diagnosis.",
+      "Frequent relapses and steroid dependence are common, often requiring steroid-sparing agents over time.",
+      "Can be triggered or associated with recent upper respiratory infection, atopy/allergy, immunizations, NSAID use, or (in adults) underlying lymphoproliferative disease (especially Hodgkin lymphoma).",
+      "Selective proteinuria (predominantly albumin, low IgG) on urine protein electrophoresis supports the diagnosis.",
+      "Thromboembolic risk and increased infection susceptibility parallel the severity of nephrotic syndrome regardless of underlying cause."
     ],
-    [
-     "Key Investigations",
-     "Urinalysis with microscopy - assess for selective proteinuria and absence of significant hematuria or cellular casts, 24-hour",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Minimal change disease is thought to result from a circulating permeability factor or T-cell/immune dysregulation that injures podocytes, causing effacement of their foot processes and loss of the glomerular filtration barrier's charge/size selectivity without structural glomerular damage visible by light microscopy. This leads to massive selective loss of albumin into the urine, producing hypoalbuminemia, decreased plasma oncotic pressure, and edema, along with compensatory hepatic lipoprotein synthesis causing hyperlipidemia. The glomerular basement membrane and capillary architecture otherwise remain intact, distinguishing it from other primary glomerulopathies.",
+    "additionalDifferentials": [
+      "Focal segmental glomerulosclerosis (FSGS)",
+      "Membranous nephropathy",
+      "Membranoproliferative glomerulonephritis",
+      "Diabetic nephropathy",
+      "IgA nephropathy with heavy proteinuria",
+      "Amyloidosis or other infiltrative nephropathies"
     ],
-    [
-     "Primary Differentials",
-     "Focal segmental glomerulosclerosis (FSGS), Membranous nephropathy, Membranoproliferative glomerulonephritis",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Post-infectious glomerulonephritis",
+      "Hepatitis B/C-associated glomerulonephritis",
+      "HIV-associated nephropathy"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with corticosteroids, which produce a rapid response in most patients and are near-diagnostic in children",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "NSAID-induced acute interstitial nephritis with nephrotic-range proteinuria",
+      "Paraneoplastic nephrotic syndrome (Hodgkin lymphoma, other lymphoproliferative disorders)",
+      "Diabetic nephropathy",
+      "Amyloidosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal light microscopy biopsy excludes glomerular disease without electron microscopy to assess podocyte foot",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "Urinalysis with microscopy — assess for selective proteinuria and absence of significant hematuria or cellular casts",
+      "24-hour urine protein or spot urine protein-to-creatinine ratio — quantify nephrotic-range proteinuria",
+      "Serum albumin and lipid panel — confirm hypoalbuminemia and hyperlipidemia typical of nephrotic syndrome",
+      "Renal function panel (creatinine, eGFR) — establish baseline and monitor for atypical renal impairment",
+      "Renal biopsy with electron microscopy — required in adults or steroid-resistant cases to confirm diagnosis and exclude FSGS/other glomerulopathies",
+      "Serum complement levels — typically normal in minimal change disease, helps exclude complement-mediated glomerulonephritides",
+      "Age-appropriate malignancy screening in adults — evaluate for underlying lymphoproliferative disease, especially if steroid-resistant",
+      "Coagulation studies/consideration of thromboembolic risk — nephrotic syndrome predisposes to venous thromboembolism"
+    ],
+    "redFlags": [
+      "Steroid resistance or failure to achieve remission — reconsider diagnosis (likely FSGS) and pursue biopsy",
+      "Significant hematuria, hypertension, or renal impairment at presentation — atypical for minimal change disease, suggests alternative diagnosis",
+      "Signs of thromboembolism (limb swelling, chest pain, dyspnea) given hypercoagulable state of nephrotic syndrome",
+      "Severe hypovolemia or acute kidney injury from aggressive diuresis in the setting of low oncotic pressure",
+      "Signs of serious infection (peritonitis, cellulitis, sepsis) due to functional hypogammaglobulinemia and immunosuppressive therapy",
+      "New systemic symptoms (weight loss, lymphadenopathy, night sweats) in adults raising concern for occult malignancy"
+    ],
+    "pitfalls": [
+      "Assuming a normal light microscopy biopsy excludes glomerular disease without electron microscopy to assess podocyte foot processes",
+      "Delaying biopsy in adults presenting with nephrotic syndrome, where minimal change disease is less common and other etiologies must be excluded",
+      "Misclassifying steroid-resistant nephrotic syndrome as minimal change disease when it more likely represents FSGS or another glomerulopathy",
+      "Overlooking secondary causes (drugs, malignancy) in adult-onset minimal change disease"
+    ],
+    "prognosis": "Minimal change disease has an excellent overall prognosis, with the large majority of children and most adults achieving remission with corticosteroid therapy and rarely progressing to chronic kidney disease. However, relapses are common and some patients become steroid-dependent or frequently relapsing, necessitating steroid-sparing immunosuppressive strategies.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Glomerular Diseases chapter"
+    ],
+    "crossLinks": [
+      "FSGS"
+    ],
+    "management": [
+      "Induce remission with corticosteroids, which produce a rapid response in most patients and are near-diagnostic in children",
+      "For frequent relapses or steroid dependence, use steroid-sparing agents such as calcineurin inhibitors, cyclophosphamide, mycophenolate, or rituximab",
+      "Manage nephrotic oedema with dietary sodium restriction and diuretics, adding statins for hyperlipidaemia",
+      "Address triggers and associations — withdraw NSAIDs, manage atopy, and evaluate adults for underlying lymphoproliferative disease such as Hodgkin lymphoma",
+      "Consider anticoagulation during heavy proteinuria given the hypercoagulable state, and observe infection precautions",
+      "Monitor proteinuria to detect relapse and watch for corticosteroid toxicity, referring to nephrology for steroid-resistant or atypical disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for minimal change disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "minimal-change-disease-real-image",
-   "title": "Minimal change disease: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "minimal_change_disease-pathway",
+      "title": "Minimal change disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most common cause of nephrotic syndrome in children (peak age 2-6 years) but also occurs in adults, sometimes elderly patients.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Steroid resistance or failure to achieve remission - reconsider diagnosis (likely FSGS) and pursue biopsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis with microscopy - assess for selective proteinuria and absence of significant hematuria or cellular casts, 24-hour urine protein or spot urine protein-to-creatinine ratio - quantify nephrotic-range proteinuria,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with corticosteroids, which produce a rapid response in most patients and are near-diagnostic in children"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal light microscopy biopsy excludes glomerular disease without electron microscopy to assess podocyte foot processes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of minimal change disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "minimal_change_disease-matrix",
+      "title": "Minimal change disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most common cause of nephrotic syndrome in children (peak age 2-6 years) but also occurs in adults, sometimes elderly patients.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis with microscopy - assess for selective proteinuria and absence of significant hematuria or cellular casts, 24-hour",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Focal segmental glomerulosclerosis (FSGS), Membranous nephropathy, Membranoproliferative glomerulonephritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with corticosteroids, which produce a rapid response in most patients and are near-diagnostic in children",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal light microscopy biopsy excludes glomerular disease without electron microscopy to assess podocyte foot",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for minimal change disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Minimal Change Disease",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/glomerular-disorders/minimal-change-disease",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Focal Segmental Glomerulosclerosis",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/glomerular-disorders/focal-segmental-glomerulosclerosis",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Merck Manual Professional, Membranous Nephropathy",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/glomerular-disorders/membranous-nephropathy",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "MINIMAL_CHANGE_DISEASE-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in minimal change disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Share of childhood nephrotic syndrome",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "70 to 90 (over 1 year of age)",
+              "range": [
+                70,
+                90
+              ]
+            },
+            {
+              "text": "About 15% of adult nephrotic syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Proteinuria",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "3 or more, mainly albumin (selective)",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Abrupt oedema"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney function and sediment",
+          "cells": [
+            {
+              "text": "Usually normal; no hypertension"
+            },
+            {
+              "text": "Microscopic haematuria in over half of adults; AKI in older patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "When to biopsy",
+          "cells": [
+            {
+              "text": "{{hy:All adults; children only if atypical}}"
+            },
+            {
+              "text": "Typical children treated without biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Light microscopy and immunofluorescence",
+          "cells": [
+            {
+              "text": "Normal glomeruli; no immune deposits"
+            },
+            {
+              "text": "Hence the name"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Electron microscopy",
+          "cells": [
+            {
+              "text": "Diffuse podocyte foot process effacement"
+            },
+            {
+              "text": "Defining lesion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary causes",
+          "cells": [
+            {
+              "text": "NSAIDs, Hodgkin lymphoma"
+            },
+            {
+              "text": "Ask about drugs; examine for nodes"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "MINIMAL_CHANGE_DISEASE-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of minimal change disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "FSGS",
+          "cells": [
+            {
+              "text": "{{hy:Segmental sclerosis; non-selective proteinuria; often steroid resistant}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Membranous nephropathy",
+          "cells": [
+            {
+              "text": "Subepithelial deposits, anti-PLA2R positive; older adults"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "NSAID-related nephrotic syndrome with interstitial nephritis",
+          "cells": [
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic (Hodgkin lymphoma)",
+          "cells": [
+            {
+              "text": "Lymphadenopathy, B symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diabetic nephropathy or amyloidosis",
+          "cells": [
+            {
+              "text": "Separated by kidney biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "MINIMAL_CHANGE_DISEASE-treatment",
+      "kind": "treatment",
+      "title": "Treatment of minimal change disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prednisone",
+          "cells": [
+            {
+              "text": "{{hy:First line}}"
+            },
+            {
+              "text": "Adults 1 mg/kg daily for up to 8 weeks; 80% to 90% respond"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Slow taper and maintenance",
+          "cells": [
+            {
+              "text": "After remission"
+            },
+            {
+              "text": "Often 1 to 2 years; slower taper lowers relapse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cyclophosphamide, calcineurin inhibitor, mycophenolate, rituximab",
+          "cells": [
+            {
+              "text": "Steroid resistant, frequent relapse or steroid dependent"
+            },
+            {
+              "text": "Resistance under 5% of children, over 10% of adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Re-biopsy",
+          "cells": [
+            {
+              "text": "Steroid non-response"
+            },
+            {
+              "text": "Missed FSGS likely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Salt restriction and loop diuretic",
+          "cells": [
+            {
+              "text": "Oedema"
+            },
+            {
+              "text": "For example furosemide"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Kidney failure occurs in under 5%, mainly steroid non-responders."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "MINIMAL_CHANGE_DISEASE-dx-mgmt",
+      "title": "Diagnosis and management of minimal change disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abrupt nephrotic syndrome with normal kidney function",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Child with typical features?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Kidney biopsy with electron microscopy",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Normal light microscopy, effaced foot processes?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Manage FSGS, membranous or other lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Check for NSAIDs and lymphoma",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prednisone; salt restriction and diuretic",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Remission?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biopsy or re-biopsy for missed FSGS",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Frequent relapse or steroid dependence?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Steroid-sparing agent: CNI, cyclophosphamide, MMF or rituximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Slow taper; monitor for relapse",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

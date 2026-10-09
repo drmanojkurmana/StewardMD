@@ -1,172 +1,683 @@
 {
- "id": "fasciolopsiasis",
- "name": "Fasciolopsiasis (Fasciolopsis buski)",
- "aliases": [
-  "Fasciolopsis buski infection",
-  "giant intestinal fluke infection",
-  "large intestinal fluke disease"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by the giant intestinal fluke Fasciolopsis buski, the largest fluke to infect humans, endemic in parts of South and Southeast Asia",
-   "Acquired by eating raw aquatic plants such as water caltrop, water chestnut and water spinach on which metacercariae encyst",
-   "Light infection is often silent; heavy infection produces epigastric pain, diarrhoea alternating with constipation, nausea and, in children, malnutrition",
-   "Very heavy worm burdens can cause intestinal obstruction and a generalised toxic-allergic state with facial and peripheral oedema",
-   "Diagnosis is by finding the large operculated eggs in stool, which resemble those of Fasciola",
-   "Praziquantel is the treatment of choice and is highly effective",
-   "Prevention centres on not eating raw water plants and on improving sanitation, since pigs act as an important reservoir"
+  "id": "fasciolopsiasis",
+  "name": "Fasciolopsiasis (Fasciolopsis buski)",
+  "aliases": [
+    "Fasciolopsis buski infection",
+    "giant intestinal fluke infection",
+    "large intestinal fluke disease"
   ],
-  "pathophysiology": "Fasciolopsis buski is a large trematode of the small intestine whose life cycle involves freshwater snails and aquatic vegetation. Cercariae released from snails encyst as metacercariae on the surface of water plants; humans and pigs are infected by eating these plants raw or peeling them with the teeth. The larvae excyst in the duodenum and attach to the mucosa of the upper small intestine, where the large flukes cause local inflammation, ulceration and haemorrhage at the attachment sites. Heavy infections mechanically impair digestion and absorption and can obstruct the bowel, while absorption of fluke metabolites is thought to drive a systemic toxic and allergic reaction manifesting as oedema and constitutional upset. Eggs passed in faeces continue the cycle when they reach freshwater.",
-  "additionalDifferentials": [
-   "Fascioliasis (Fasciola hepatica), whose eggs are morphologically similar",
-   "Other intestinal fluke infection such as heterophyiasis and metagonimiasis",
-   "Giardiasis and other protozoal enteritis",
-   "Peptic ulcer disease or functional dyspepsia",
-   "Protein-losing enteropathy from other causes",
-   "Intestinal obstruction from other aetiologies"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy for the large operculated eggs, with concentration techniques",
-   "Careful egg morphometry to distinguish from Fasciola",
-   "Full blood count for eosinophilia and anaemia",
-   "Serum albumin and nutritional assessment in heavy or paediatric infection",
-   "Abdominal imaging if obstruction is suspected",
-   "Repeated stool sampling to improve sensitivity"
-  ],
-  "redFlags": [
-   "Signs of intestinal obstruction from a heavy worm burden",
-   "Generalised oedema and ascites indicating a severe toxic-allergic reaction",
-   "Profound malnutrition and growth failure in children",
-   "Severe anaemia or protein depletion"
-  ],
-  "prognosis": "Most infections respond promptly to anthelmintic treatment with full recovery; heavy infections in malnourished children can be debilitating and occasionally fatal if obstruction or profound protein loss is untreated.",
-  "pitfalls": [
-   "Confusing Fasciolopsis eggs with those of Fasciola and mislocating the disease to the biliary tract",
-   "Underestimating worm burden in children presenting mainly with malnutrition",
-   "Missing intestinal obstruction as a complication of heavy infection",
-   "Overlooking pigs as a reservoir when advising on control measures"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with the anthelmintic praziquantel, which is highly effective against Fasciolopsis buski",
-   "Provide nutritional rehabilitation and correct anaemia and hypoalbuminaemia in heavy or paediatric infection",
-   "Manage the toxic-allergic state and oedema supportively and treat intestinal obstruction surgically if it occurs",
-   "Confirm clearance with follow-up stool microscopy and re-treat if eggs persist",
-   "Advise thorough cooking of aquatic plants and discourage peeling them with the teeth, alongside community sanitation measures",
-   "Screen and treat affected household and community contacts to reduce reinfection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fasciolopsiasis-pathway",
-   "title": "Fasciolopsiasis (Fasciolopsis buski): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by the giant intestinal fluke Fasciolopsis buski, the largest fluke to infect humans, endemic in parts of South and Southeast Asia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of intestinal obstruction from a heavy worm burden",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy for the large operculated eggs, with concentration techniques, Careful egg morphometry to distinguish from Fasciola, Full blood count for eosinophilia and anaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with the anthelmintic praziquantel, which is highly effective against Fasciolopsis buski"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing Fasciolopsis eggs with those of Fasciola and mislocating the disease to the biliary tract"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fasciolopsiasis (fasciolopsis buski)."
-  }
- ],
- "tables": [
-  {
-   "id": "fasciolopsiasis-matrix",
-   "title": "Fasciolopsiasis (Fasciolopsis buski): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by the giant intestinal fluke Fasciolopsis buski, the largest fluke to infect humans, endemic in parts of South and",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by the giant intestinal fluke Fasciolopsis buski, the largest fluke to infect humans, endemic in parts of South and Southeast Asia",
+      "Acquired by eating raw aquatic plants such as water caltrop, water chestnut and water spinach on which metacercariae encyst",
+      "Light infection is often silent; heavy infection produces epigastric pain, diarrhoea alternating with constipation, nausea and, in children, malnutrition",
+      "Very heavy worm burdens can cause intestinal obstruction and a generalised toxic-allergic state with facial and peripheral oedema",
+      "Diagnosis is by finding the large operculated eggs in stool, which resemble those of Fasciola",
+      "Praziquantel is the treatment of choice and is highly effective",
+      "Prevention centres on not eating raw water plants and on improving sanitation, since pigs act as an important reservoir"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy for the large operculated eggs, with concentration techniques, Careful egg morphometry to distinguish from",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fasciolopsis buski is a large trematode of the small intestine whose life cycle involves freshwater snails and aquatic vegetation. Cercariae released from snails encyst as metacercariae on the surface of water plants; humans and pigs are infected by eating these plants raw or peeling them with the teeth. The larvae excyst in the duodenum and attach to the mucosa of the upper small intestine, where the large flukes cause local inflammation, ulceration and haemorrhage at the attachment sites. Heavy infections mechanically impair digestion and absorption and can obstruct the bowel, while absorption of fluke metabolites is thought to drive a systemic toxic and allergic reaction manifesting as oedema and constitutional upset. Eggs passed in faeces continue the cycle when they reach freshwater.",
+    "additionalDifferentials": [
+      "Fascioliasis (Fasciola hepatica), whose eggs are morphologically similar",
+      "Other intestinal fluke infection such as heterophyiasis and metagonimiasis",
+      "Giardiasis and other protozoal enteritis",
+      "Peptic ulcer disease or functional dyspepsia",
+      "Protein-losing enteropathy from other causes",
+      "Intestinal obstruction from other aetiologies"
     ],
-    [
-     "Primary Differentials",
-     "Fascioliasis (Fasciola hepatica), whose eggs are morphologically similar, Other intestinal fluke infection such as heterophyiasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy for the large operculated eggs, with concentration techniques",
+      "Careful egg morphometry to distinguish from Fasciola",
+      "Full blood count for eosinophilia and anaemia",
+      "Serum albumin and nutritional assessment in heavy or paediatric infection",
+      "Abdominal imaging if obstruction is suspected",
+      "Repeated stool sampling to improve sensitivity"
     ],
-    [
-     "Management Strategy",
-     "Treat with the anthelmintic praziquantel, which is highly effective against Fasciolopsis buski",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of intestinal obstruction from a heavy worm burden",
+      "Generalised oedema and ascites indicating a severe toxic-allergic reaction",
+      "Profound malnutrition and growth failure in children",
+      "Severe anaemia or protein depletion"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing Fasciolopsis eggs with those of Fasciola and mislocating the disease to the biliary tract",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most infections respond promptly to anthelmintic treatment with full recovery; heavy infections in malnourished children can be debilitating and occasionally fatal if obstruction or profound protein loss is untreated.",
+    "pitfalls": [
+      "Confusing Fasciolopsis eggs with those of Fasciola and mislocating the disease to the biliary tract",
+      "Underestimating worm burden in children presenting mainly with malnutrition",
+      "Missing intestinal obstruction as a complication of heavy infection",
+      "Overlooking pigs as a reservoir when advising on control measures"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with the anthelmintic praziquantel, which is highly effective against Fasciolopsis buski",
+      "Provide nutritional rehabilitation and correct anaemia and hypoalbuminaemia in heavy or paediatric infection",
+      "Manage the toxic-allergic state and oedema supportively and treat intestinal obstruction surgically if it occurs",
+      "Confirm clearance with follow-up stool microscopy and re-treat if eggs persist",
+      "Advise thorough cooking of aquatic plants and discourage peeling them with the teeth, alongside community sanitation measures",
+      "Screen and treat affected household and community contacts to reduce reinfection"
     ]
-   ],
-   "caption": "Overview comparison matrix for fasciolopsiasis (fasciolopsis buski)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fasciolopsiasis-real-image",
-   "title": "Fasciolopsiasis (Fasciolopsis buski): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "fasciolopsiasis-pathway",
+      "title": "Fasciolopsiasis (Fasciolopsis buski): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by the giant intestinal fluke Fasciolopsis buski, the largest fluke to infect humans, endemic in parts of South and Southeast Asia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of intestinal obstruction from a heavy worm burden",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy for the large operculated eggs, with concentration techniques, Careful egg morphometry to distinguish from Fasciola, Full blood count for eosinophilia and anaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with the anthelmintic praziquantel, which is highly effective against Fasciolopsis buski"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing Fasciolopsis eggs with those of Fasciola and mislocating the disease to the biliary tract"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fasciolopsiasis (fasciolopsis buski)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fasciolopsiasis-matrix",
+      "title": "Fasciolopsiasis (Fasciolopsis buski): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by the giant intestinal fluke Fasciolopsis buski, the largest fluke to infect humans, endemic in parts of South and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy for the large operculated eggs, with concentration techniques, Careful egg morphometry to distinguish from",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fascioliasis (Fasciola hepatica), whose eggs are morphologically similar, Other intestinal fluke infection such as heterophyiasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with the anthelmintic praziquantel, which is highly effective against Fasciolopsis buski",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing Fasciolopsis eggs with those of Fasciola and mislocating the disease to the biliary tract",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fasciolopsiasis (fasciolopsis buski)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 219-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fasciolopsiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with concentration techniques",
+          "cells": [
+            {
+              "text": "Large operculated eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Egg morphometry",
+          "cells": [
+            {
+              "text": "Distinguishes from Fasciola eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia and anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin and nutritional assessment",
+          "cells": [
+            {
+              "text": "Heavy or paediatric infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal imaging",
+          "cells": [
+            {
+              "text": "Obstruction, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated stool sampling",
+          "cells": [
+            {
+              "text": "Improves sensitivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fasciolopsiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fascioliasis (Fasciola hepatica)",
+          "cells": [
+            {
+              "text": "Eggs are morphologically similar; careful morphometry is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heterophyiasis or metagonimiasis",
+          "cells": [
+            {
+              "text": "Other intestinal fluke infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giardiasis or other protozoal enteritis",
+          "cells": [
+            {
+              "text": "Listed in the differential of intestinal symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fasciolopsiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel",
+          "cells": [
+            {
+              "text": "Highly effective; treatment of choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Anaemia and hypoalbuminaemia in heavy or paediatric infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for toxic-allergic state",
+          "cells": [
+            {
+              "text": "Oedema; surgery if intestinal obstruction occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up stool microscopy",
+          "cells": [
+            {
+              "text": "Confirms clearance; re-treat if eggs persist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cooking aquatic plants and sanitation",
+          "cells": [
+            {
+              "text": "Avoid raw water plants; community measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat household and community contacts",
+          "cells": [
+            {
+              "text": "Reduces reinfection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fasciolopsiasis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Major human trematode infections",
+      "rowHeader": "Trematode",
+      "columns": [
+        "Group",
+        "Transmission",
+        "Endemic area(s)"
+      ],
+      "rows": [
+        {
+          "parameter": "Schistosoma mansoni",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "Africa, South America, Middle East"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "S. japonicum",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "China, Philippines, Indonesia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "S. intercalatum",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "West Africa"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "S. mekongi",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "Southeast Asia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "S. haematobium",
+          "cells": [
+            {
+              "text": "Blood fluke"
+            },
+            {
+              "text": "Skin penetration by cercariae released from snails"
+            },
+            {
+              "text": "Africa, Middle East"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clonorchis sinensis",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in freshwater fish"
+            },
+            {
+              "text": "Far East"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opisthorchis viverrini",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in freshwater fish"
+            },
+            {
+              "text": "Far East, Thailand"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "O. felineus",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in freshwater fish"
+            },
+            {
+              "text": "Far East, Europe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fasciola hepatica",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae on aquatic plants or in water"
+            },
+            {
+              "text": "Worldwide"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "F. gigantica",
+          "cells": [
+            {
+              "text": "Biliary (hepatic) fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae on aquatic plants or in water"
+            },
+            {
+              "text": "Sporadic, Africa"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fasciolopsis buski",
+          "cells": [
+            {
+              "text": "Intestinal fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae on aquatic plants"
+            },
+            {
+              "text": "Southeast Asia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heterophyes heterophyes",
+          "cells": [
+            {
+              "text": "Intestinal fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in freshwater or brackish-water fish"
+            },
+            {
+              "text": "Far East, North Africa"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paragonimus westermani",
+          "cells": [
+            {
+              "text": "Lung fluke"
+            },
+            {
+              "text": "Ingestion of metacercariae in crayfish or crabs"
+            },
+            {
+              "text": "Global except North America and Europe"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fasciolopsiasis-dx-mgmt",
+      "title": "Diagnosis and management of Fasciolopsiasis (Fasciolopsis buski)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Epigastric pain, alternating diarrhoea and constipation after eating raw water plants",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (intestinal obstruction, generalised oedema, severe malnutrition or anaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical review for obstruction; nutritional rehabilitation for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy with concentration and egg morphometry; FBC; albumin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Large operculated eggs with fasciolopsis morphology in stool?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Fasciola, other intestinal flukes or protozoal enteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Praziquantel as the anthelmintic of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nutritional rehabilitation for anaemia and hypoalbuminaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical treatment if intestinal obstruction occurs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up stool microscopy to confirm clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cook aquatic plants and screen household contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most respond promptly; heavy infection in malnourished children can be debilitating",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,443 @@
 {
- "id": "spinocerebellar_ataxia_type_8",
- "name": "Spinocerebellar ataxia type 8 (ATXN8)",
- "aliases": [
-  "SCA8",
-  "ATXN8/ATXN8OS CTG-CAG repeat expansion",
-  "bidirectional repeat expansion ataxia"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Slowly progressive, often adult-onset cerebellar ataxia caused by a combined CTG-CAG repeat expansion at the ATXN8/ATXN8OS locus",
-   "The locus is transcribed bidirectionally, producing both a non-coding CTG (ATXN8OS) transcript and a CAG (ATXN8) polyglutamine transcript, so it shares features of both toxic RNA and polyglutamine mechanisms",
-   "Marked reduced penetrance and variable expansion size complicate interpretation, so a positive result must be correlated with the clinical picture",
-   "Typical features include gait and limb ataxia, scanning dysarthria, nystagmus and variable spasticity",
-   "Onset is usually in adulthood but ranges widely, and progression is generally slow",
-   "MRI shows cerebellar atrophy, sometimes with pontine involvement",
-   "Because expanded alleles occur in unaffected individuals, the test alone does not confirm symptomatic disease",
-   "Management is supportive with physiotherapy, speech therapy and falls prevention"
+  "id": "spinocerebellar_ataxia_type_8",
+  "name": "Spinocerebellar ataxia type 8 (ATXN8)",
+  "aliases": [
+    "SCA8",
+    "ATXN8/ATXN8OS CTG-CAG repeat expansion",
+    "bidirectional repeat expansion ataxia"
   ],
-  "pathophysiology": "SCA8 arises from an unstable combined CTG-CAG repeat expansion at the ATXN8OS/ATXN8 locus. The region is bidirectionally transcribed: the ATXN8OS strand yields a CUG-containing non-coding RNA thought to exert an RNA toxic gain-of-function similar to the myotonic dystrophies, while the opposite ATXN8 strand encodes a nearly pure polyglutamine protein via a CAG expansion. Both mechanisms are implicated in Purkinje cell and cerebellar degeneration. The considerable variability in expansion length, incomplete penetrance and presence of expanded alleles in the general population make genotype-phenotype correlation less clear-cut than in other repeat ataxias.",
-  "additionalDifferentials": [
-   "Other autosomal dominant spinocerebellar ataxias (SCA1, SCA2, SCA3, SCA6)",
-   "Myotonic dystrophy and other RNA repeat-expansion disorders",
-   "Multiple system atrophy, cerebellar type",
-   "Sporadic adult-onset idiopathic cerebellar ataxia",
-   "Alcohol-related or nutritional cerebellar degeneration",
-   "Acquired immune-mediated cerebellar ataxia"
-  ],
-  "additionalInvestigations": [
-   "Targeted ATXN8/ATXN8OS CTG-CAG repeat analysis interpreted alongside the clinical picture",
-   "Broad spinocerebellar ataxia repeat-expansion panel to exclude other subtypes",
-   "MRI brain to document cerebellar and any brainstem atrophy",
-   "Nerve conduction studies to assess for associated neuropathy",
-   "Screening for acquired causes (vitamin, thyroid, autoimmune, paraneoplastic)",
-   "Family history review and consideration of genetic counselling given reduced penetrance"
-  ],
-  "redFlags": [
-   "Rapid or subacute progression suggesting an acquired rather than genetic cause",
-   "Prominent autonomic failure raising the possibility of multiple system atrophy",
-   "Systemic myotonia or cardiac features prompting reassessment for myotonic dystrophy",
-   "A positive repeat result in a minimally symptomatic person that risks over-diagnosis"
-  ],
-  "prognosis": "SCA8 usually follows a slowly progressive course over years to decades with generally preserved life expectancy, though disability from gait ataxia and dysarthria accumulates over time. Reduced penetrance means some expansion carriers remain mildly affected or asymptomatic.",
-  "pitfalls": [
-   "Treating a positive expansion as definitive proof of disease despite the locus's reduced penetrance",
-   "Failing to exclude treatable acquired ataxias before attributing symptoms to SCA8",
-   "Overlooking myotonic dystrophy given the shared RNA toxicity mechanism",
-   "Providing overly deterministic genetic counselling without acknowledging variable expressivity"
-  ],
-  "references": [
-   "GeneReviews: Spinocerebellar Ataxia Type 8",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy; symptomatic and supportive management of the cerebellar syndrome",
-   "Physiotherapy with balance and gait training, and occupational therapy for aids and fall prevention",
-   "Speech and language therapy for scanning dysarthria, with swallow assessment for dysphagia",
-   "Symptomatic treatment of nystagmus and oscillopsia, and antispasticity agents where spasticity is troublesome",
-   "Periodic neurological review to monitor progression and safety",
-   "Genetic counselling that explicitly addresses reduced penetrance and variable expansion size when advising relatives",
-   "Referral to specialist ataxia services and patient support networks"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinocerebellar_ataxia_type_8-pathway",
-   "title": "Spinocerebellar ataxia type 8 (ATXN8): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Slowly progressive, often adult-onset cerebellar ataxia caused by a combined CTG-CAG repeat expansion at the ATXN8/ATXN8OS locus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid or subacute progression suggesting an acquired rather than genetic cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted ATXN8/ATXN8OS CTG-CAG repeat analysis interpreted alongside the clinical picture, Broad spinocerebellar ataxia repeat-expansion panel to exclude other subtypes, MRI brain to document cerebellar and any brainstem"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy; symptomatic and supportive management of the cerebellar syndrome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a positive expansion as definitive proof of disease despite the locus's reduced penetrance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 8 (atxn8)."
-  }
- ],
- "tables": [
-  {
-   "id": "spinocerebellar_ataxia_type_8-matrix",
-   "title": "Spinocerebellar ataxia type 8 (ATXN8): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Slowly progressive, often adult-onset cerebellar ataxia caused by a combined CTG-CAG repeat expansion at the ATXN8/ATXN8OS locus",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Slowly progressive, often adult-onset cerebellar ataxia caused by a combined CTG-CAG repeat expansion at the ATXN8/ATXN8OS locus",
+      "The locus is transcribed bidirectionally, producing both a non-coding CTG (ATXN8OS) transcript and a CAG (ATXN8) polyglutamine transcript, so it shares features of both toxic RNA and polyglutamine mechanisms",
+      "Marked reduced penetrance and variable expansion size complicate interpretation, so a positive result must be correlated with the clinical picture",
+      "Typical features include gait and limb ataxia, scanning dysarthria, nystagmus and variable spasticity",
+      "Onset is usually in adulthood but ranges widely, and progression is generally slow",
+      "MRI shows cerebellar atrophy, sometimes with pontine involvement",
+      "Because expanded alleles occur in unaffected individuals, the test alone does not confirm symptomatic disease",
+      "Management is supportive with physiotherapy, speech therapy and falls prevention"
     ],
-    [
-     "Key Investigations",
-     "Targeted ATXN8/ATXN8OS CTG-CAG repeat analysis interpreted alongside the clinical picture, Broad spinocerebellar ataxia",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCA8 arises from an unstable combined CTG-CAG repeat expansion at the ATXN8OS/ATXN8 locus. The region is bidirectionally transcribed: the ATXN8OS strand yields a CUG-containing non-coding RNA thought to exert an RNA toxic gain-of-function similar to the myotonic dystrophies, while the opposite ATXN8 strand encodes a nearly pure polyglutamine protein via a CAG expansion. Both mechanisms are implicated in Purkinje cell and cerebellar degeneration. The considerable variability in expansion length, incomplete penetrance and presence of expanded alleles in the general population make genotype-phenotype correlation less clear-cut than in other repeat ataxias.",
+    "additionalDifferentials": [
+      "Other autosomal dominant spinocerebellar ataxias (SCA1, SCA2, SCA3, SCA6)",
+      "Myotonic dystrophy and other RNA repeat-expansion disorders",
+      "Multiple system atrophy, cerebellar type",
+      "Sporadic adult-onset idiopathic cerebellar ataxia",
+      "Alcohol-related or nutritional cerebellar degeneration",
+      "Acquired immune-mediated cerebellar ataxia"
     ],
-    [
-     "Primary Differentials",
-     "Other autosomal dominant spinocerebellar ataxias (SCA1, SCA2, SCA3, SCA6), Myotonic dystrophy and other RNA repeat-expansion",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted ATXN8/ATXN8OS CTG-CAG repeat analysis interpreted alongside the clinical picture",
+      "Broad spinocerebellar ataxia repeat-expansion panel to exclude other subtypes",
+      "MRI brain to document cerebellar and any brainstem atrophy",
+      "Nerve conduction studies to assess for associated neuropathy",
+      "Screening for acquired causes (vitamin, thyroid, autoimmune, paraneoplastic)",
+      "Family history review and consideration of genetic counselling given reduced penetrance"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy; symptomatic and supportive management of the cerebellar syndrome",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid or subacute progression suggesting an acquired rather than genetic cause",
+      "Prominent autonomic failure raising the possibility of multiple system atrophy",
+      "Systemic myotonia or cardiac features prompting reassessment for myotonic dystrophy",
+      "A positive repeat result in a minimally symptomatic person that risks over-diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a positive expansion as definitive proof of disease despite the locus's reduced penetrance",
-     "Prevent diagnostic or management error"
+    "prognosis": "SCA8 usually follows a slowly progressive course over years to decades with generally preserved life expectancy, though disability from gait ataxia and dysarthria accumulates over time. Reduced penetrance means some expansion carriers remain mildly affected or asymptomatic.",
+    "pitfalls": [
+      "Treating a positive expansion as definitive proof of disease despite the locus's reduced penetrance",
+      "Failing to exclude treatable acquired ataxias before attributing symptoms to SCA8",
+      "Overlooking myotonic dystrophy given the shared RNA toxicity mechanism",
+      "Providing overly deterministic genetic counselling without acknowledging variable expressivity"
+    ],
+    "references": [
+      "GeneReviews: Spinocerebellar Ataxia Type 8",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy; symptomatic and supportive management of the cerebellar syndrome",
+      "Physiotherapy with balance and gait training, and occupational therapy for aids and fall prevention",
+      "Speech and language therapy for scanning dysarthria, with swallow assessment for dysphagia",
+      "Symptomatic treatment of nystagmus and oscillopsia, and antispasticity agents where spasticity is troublesome",
+      "Periodic neurological review to monitor progression and safety",
+      "Genetic counselling that explicitly addresses reduced penetrance and variable expansion size when advising relatives",
+      "Referral to specialist ataxia services and patient support networks"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinocerebellar ataxia type 8 (atxn8)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinocerebellar-ataxia-type-8-real-image",
-   "title": "Spinocerebellar ataxia type 8 (ATXN8): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinocerebellar_ataxia_type_8-pathway",
+      "title": "Spinocerebellar ataxia type 8 (ATXN8): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Slowly progressive, often adult-onset cerebellar ataxia caused by a combined CTG-CAG repeat expansion at the ATXN8/ATXN8OS locus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid or subacute progression suggesting an acquired rather than genetic cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted ATXN8/ATXN8OS CTG-CAG repeat analysis interpreted alongside the clinical picture, Broad spinocerebellar ataxia repeat-expansion panel to exclude other subtypes, MRI brain to document cerebellar and any brainstem"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy; symptomatic and supportive management of the cerebellar syndrome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a positive expansion as definitive proof of disease despite the locus's reduced penetrance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinocerebellar ataxia type 8 (atxn8)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinocerebellar_ataxia_type_8-matrix",
+      "title": "Spinocerebellar ataxia type 8 (ATXN8): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Slowly progressive, often adult-onset cerebellar ataxia caused by a combined CTG-CAG repeat expansion at the ATXN8/ATXN8OS locus",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted ATXN8/ATXN8OS CTG-CAG repeat analysis interpreted alongside the clinical picture, Broad spinocerebellar ataxia",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other autosomal dominant spinocerebellar ataxias (SCA1, SCA2, SCA3, SCA6), Myotonic dystrophy and other RNA repeat-expansion",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy; symptomatic and supportive management of the cerebellar syndrome",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a positive expansion as definitive proof of disease despite the locus's reduced penetrance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinocerebellar ataxia type 8 (atxn8)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spinocerebellar_ataxia_type_8-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ATXN8/ATXN8OS CTG-CAG repeat analysis",
+          "cells": [
+            {
+              "text": "Expansion, interpreted with the clinical picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad SCA repeat-expansion panel",
+          "cells": [
+            {
+              "text": "Excludes other subtypes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy, sometimes pontine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Associated neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired ataxia screen",
+          "cells": [
+            {
+              "text": "Vitamin, thyroid, autoimmune and paraneoplastic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history",
+          "cells": [
+            {
+              "text": "Reduced penetrance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_8-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myotonic dystrophy and other RNA repeat-expansion disorders",
+          "cells": [
+            {
+              "text": "Shared RNA toxicity; myotonia or cardiac features suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other repeat-expansion SCAs (SCA1, SCA2, SCA3, SCA6)",
+          "cells": [
+            {
+              "text": "Separated by repeat testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spinocerebellar_ataxia_type_8-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Balance, gait, aids and falls prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and swallow assessment",
+          "cells": [
+            {
+              "text": "Scanning dysarthria and dysphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment",
+          "cells": [
+            {
+              "text": "Nystagmus and oscillopsia; antispasticity agents where spasticity occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic neurological review",
+          "cells": [
+            {
+              "text": "Progression and safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Reduced penetrance and variable expansion size"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spinocerebellar_ataxia_type_8-dx-mgmt",
+      "title": "Diagnosis and management of Spinocerebellar ataxia type 8 (ATXN8)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult-onset slowly progressive cerebellar ataxia with nystagmus: suspected SCA8",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (subacute course, autonomic failure, myotonia or cardiac features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for an acquired cause, MSA or myotonic dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ATXN8/ATXN8OS CTG-CAG analysis; broad SCA panel; brain MRI; acquired screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is an expanded ATXN8 CTG-CAG repeat found with a compatible picture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider myotonic dystrophy, other SCAs or acquired ataxia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy for balance, gait and falls",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Speech therapy for scanning dysarthria and swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic treatment of nystagmus and oscillopsia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling on reduced penetrance and variable expansion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Not every carrier develops disease; the test alone does not confirm it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

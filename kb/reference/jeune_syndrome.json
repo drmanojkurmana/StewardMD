@@ -1,174 +1,463 @@
 {
- "id": "jeune_syndrome",
- "name": "Jeune syndrome",
- "aliases": [
-  "asphyxiating thoracic dystrophy",
-  "ATD",
-  "Jeune asphyxiating thoracic dystrophy",
-  "short-rib thoracic dysplasia"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A recessive ciliopathy defined by a small, narrow, bell-shaped thorax with short horizontal ribs, causing variable respiratory compromise from birth",
-   "Genetically heterogeneous, most often caused by biallelic variants in genes encoding intraflagellar transport proteins of the primary cilium",
-   "Thoracic insufficiency with restrictive lung disease is the principal early threat and can be fatal in infancy, though survivors may see relative thoracic growth",
-   "Additional skeletal features include short limbs, short broad hands, occasional postaxial polydactyly, and a characteristic trident acetabular roof",
-   "Progressive renal disease, and sometimes hepatic and retinal involvement, may emerge later and requires ongoing surveillance",
-   "Radiographs show a narrow thorax with short ribs, high clavicles, short iliac bones with medial and lateral acetabular spurs, and cone-shaped epiphyses",
-   "Management centres on respiratory support, and in selected cases thoracic expansion surgery, with monitoring for renal and other organ involvement"
+  "id": "jeune_syndrome",
+  "name": "Jeune syndrome",
+  "aliases": [
+    "asphyxiating thoracic dystrophy",
+    "ATD",
+    "Jeune asphyxiating thoracic dystrophy",
+    "short-rib thoracic dysplasia"
   ],
-  "pathophysiology": "Jeune syndrome is a ciliopathy caused by biallelic variants in genes required for intraflagellar transport and normal primary cilium function. Because the primary cilium is essential for hedgehog and other signalling that governs skeletal patterning and growth-plate function, its disruption impairs endochondral ossification, producing a constricted thoracic cage and short limbs. The small thorax restricts lung expansion and causes the characteristic respiratory insufficiency. The same ciliary dysfunction in the kidney, liver, and retina accounts for the progressive extraskeletal disease seen in longer-term survivors.",
-  "additionalDifferentials": [
-   "Ellis-van Creveld syndrome",
-   "Short-rib polydactyly syndromes",
-   "Thanatophoric dysplasia",
-   "Barnes syndrome and other thoracic dysplasias",
-   "Cranioectodermal dysplasia (Sensenbrenner syndrome)",
-   "Other skeletal ciliopathies"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating a narrow thorax, short ribs, and acetabular spurs",
-   "Respiratory assessment including lung function and imaging of thoracic capacity",
-   "Molecular genetic testing of a skeletal ciliopathy gene panel",
-   "Renal function tests and renal imaging with periodic surveillance",
-   "Liver function tests and hepatic imaging for fibrosis",
-   "Ophthalmological review for retinal dystrophy"
-  ],
-  "redFlags": [
-   "Severe restrictive respiratory failure in infancy from thoracic insufficiency",
-   "Recurrent respiratory infection with deteriorating gas exchange",
-   "Progressive renal impairment",
-   "Signs of hepatic fibrosis or retinal dystrophy in survivors"
-  ],
-  "prognosis": "Prognosis depends heavily on the severity of thoracic constriction: severe cases are frequently fatal in infancy from respiratory failure, whereas those surviving early childhood may have relative thoracic growth but face progressive renal and other organ complications.",
-  "pitfalls": [
-   "Focusing on the thorax and overlooking progressive renal and hepatic disease in survivors",
-   "Confusing it with Ellis-van Creveld syndrome without cardiac and ectodermal assessment",
-   "Underestimating the risk of respiratory decompensation with intercurrent infection",
-   "Failing to establish long-term multisystem surveillance"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide respiratory support proportionate to thoracic insufficiency, from supplemental oxygen and non-invasive ventilation to mechanical ventilation in severe infantile disease",
-   "Consider thoracic expansion surgery such as vertical expandable prosthetic titanium rib or lateral thoracoplasty to enlarge the constricted chest and relieve restrictive lung disease",
-   "Treat intercurrent chest infections promptly and provide airway clearance and immunisation to protect fragile lung function",
-   "Institute renal surveillance and manage progressive nephronopathy with medical measures, dialysis or transplantation as it evolves",
-   "Undertake periodic hepatic and ophthalmological review for fibrosis and retinal dystrophy in longer-term survivors",
-   "Give nutritional support to optimise growth and coordinate care through a multidisciplinary skeletal-dysplasia team",
-   "Arrange autosomal recessive genetic counselling and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "jeune_syndrome-pathway",
-   "title": "Jeune syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A recessive ciliopathy defined by a small, narrow, bell-shaped thorax with short horizontal ribs, causing variable respiratory compromise from birth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe restrictive respiratory failure in infancy from thoracic insufficiency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating a narrow thorax, short ribs, and acetabular spurs, Respiratory assessment including lung function and imaging of thoracic capacity, Molecular genetic testing of a skeletal ciliopathy gene panel"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide respiratory support proportionate to thoracic insufficiency, from supplemental oxygen and non-invasive ventilation to mechanical ventilation in severe infantile disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing on the thorax and overlooking progressive renal and hepatic disease in survivors"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of jeune syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "jeune_syndrome-matrix",
-   "title": "Jeune syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A recessive ciliopathy defined by a small, narrow, bell-shaped thorax with short horizontal ribs, causing variable respiratory",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A recessive ciliopathy defined by a small, narrow, bell-shaped thorax with short horizontal ribs, causing variable respiratory compromise from birth",
+      "Genetically heterogeneous, most often caused by biallelic variants in genes encoding intraflagellar transport proteins of the primary cilium",
+      "Thoracic insufficiency with restrictive lung disease is the principal early threat and can be fatal in infancy, though survivors may see relative thoracic growth",
+      "Additional skeletal features include short limbs, short broad hands, occasional postaxial polydactyly, and a characteristic trident acetabular roof",
+      "Progressive renal disease, and sometimes hepatic and retinal involvement, may emerge later and requires ongoing surveillance",
+      "Radiographs show a narrow thorax with short ribs, high clavicles, short iliac bones with medial and lateral acetabular spurs, and cone-shaped epiphyses",
+      "Management centres on respiratory support, and in selected cases thoracic expansion surgery, with monitoring for renal and other organ involvement"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating a narrow thorax, short ribs, and acetabular spurs, Respiratory assessment including lung function",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Jeune syndrome is a ciliopathy caused by biallelic variants in genes required for intraflagellar transport and normal primary cilium function. Because the primary cilium is essential for hedgehog and other signalling that governs skeletal patterning and growth-plate function, its disruption impairs endochondral ossification, producing a constricted thoracic cage and short limbs. The small thorax restricts lung expansion and causes the characteristic respiratory insufficiency. The same ciliary dysfunction in the kidney, liver, and retina accounts for the progressive extraskeletal disease seen in longer-term survivors.",
+    "additionalDifferentials": [
+      "Ellis-van Creveld syndrome",
+      "Short-rib polydactyly syndromes",
+      "Thanatophoric dysplasia",
+      "Barnes syndrome and other thoracic dysplasias",
+      "Cranioectodermal dysplasia (Sensenbrenner syndrome)",
+      "Other skeletal ciliopathies"
     ],
-    [
-     "Primary Differentials",
-     "Ellis-van Creveld syndrome, Short-rib polydactyly syndromes, Thanatophoric dysplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating a narrow thorax, short ribs, and acetabular spurs",
+      "Respiratory assessment including lung function and imaging of thoracic capacity",
+      "Molecular genetic testing of a skeletal ciliopathy gene panel",
+      "Renal function tests and renal imaging with periodic surveillance",
+      "Liver function tests and hepatic imaging for fibrosis",
+      "Ophthalmological review for retinal dystrophy"
     ],
-    [
-     "Management Strategy",
-     "Provide respiratory support proportionate to thoracic insufficiency, from supplemental oxygen and non-invasive ventilation to",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe restrictive respiratory failure in infancy from thoracic insufficiency",
+      "Recurrent respiratory infection with deteriorating gas exchange",
+      "Progressive renal impairment",
+      "Signs of hepatic fibrosis or retinal dystrophy in survivors"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing on the thorax and overlooking progressive renal and hepatic disease in survivors",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends heavily on the severity of thoracic constriction: severe cases are frequently fatal in infancy from respiratory failure, whereas those surviving early childhood may have relative thoracic growth but face progressive renal and other organ complications.",
+    "pitfalls": [
+      "Focusing on the thorax and overlooking progressive renal and hepatic disease in survivors",
+      "Confusing it with Ellis-van Creveld syndrome without cardiac and ectodermal assessment",
+      "Underestimating the risk of respiratory decompensation with intercurrent infection",
+      "Failing to establish long-term multisystem surveillance"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide respiratory support proportionate to thoracic insufficiency, from supplemental oxygen and non-invasive ventilation to mechanical ventilation in severe infantile disease",
+      "Consider thoracic expansion surgery such as vertical expandable prosthetic titanium rib or lateral thoracoplasty to enlarge the constricted chest and relieve restrictive lung disease",
+      "Treat intercurrent chest infections promptly and provide airway clearance and immunisation to protect fragile lung function",
+      "Institute renal surveillance and manage progressive nephronopathy with medical measures, dialysis or transplantation as it evolves",
+      "Undertake periodic hepatic and ophthalmological review for fibrosis and retinal dystrophy in longer-term survivors",
+      "Give nutritional support to optimise growth and coordinate care through a multidisciplinary skeletal-dysplasia team",
+      "Arrange autosomal recessive genetic counselling and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for jeune syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "jeune-syndrome-real-image",
-   "title": "Jeune syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "jeune_syndrome-pathway",
+      "title": "Jeune syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A recessive ciliopathy defined by a small, narrow, bell-shaped thorax with short horizontal ribs, causing variable respiratory compromise from birth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe restrictive respiratory failure in infancy from thoracic insufficiency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating a narrow thorax, short ribs, and acetabular spurs, Respiratory assessment including lung function and imaging of thoracic capacity, Molecular genetic testing of a skeletal ciliopathy gene panel"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide respiratory support proportionate to thoracic insufficiency, from supplemental oxygen and non-invasive ventilation to mechanical ventilation in severe infantile disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing on the thorax and overlooking progressive renal and hepatic disease in survivors"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of jeune syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "jeune_syndrome-matrix",
+      "title": "Jeune syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A recessive ciliopathy defined by a small, narrow, bell-shaped thorax with short horizontal ribs, causing variable respiratory",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating a narrow thorax, short ribs, and acetabular spurs, Respiratory assessment including lung function",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ellis-van Creveld syndrome, Short-rib polydactyly syndromes, Thanatophoric dysplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide respiratory support proportionate to thoracic insufficiency, from supplemental oxygen and non-invasive ventilation to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing on the thorax and overlooking progressive renal and hepatic disease in survivors",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for jeune syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "jeune_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Narrow thorax, short ribs and acetabular spurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung function and thoracic imaging",
+          "cells": [
+            {
+              "text": "Thoracic insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciliopathy skeletal gene panel",
+          "cells": [
+            {
+              "text": "Causal variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and imaging",
+          "cells": [
+            {
+              "text": "Progressive nephronopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function and hepatic imaging",
+          "cells": [
+            {
+              "text": "Hepatic fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jeune_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ellis-van Creveld syndrome",
+          "cells": [
+            {
+              "text": "Distinguished by cardiac and ectodermal assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-rib polydactyly syndromes",
+          "cells": [
+            {
+              "text": "Polydactyly present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "jeune_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Oxygen and non-invasive ventilation, to mechanical ventilation in severe infantile disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic expansion",
+          "cells": [
+            {
+              "text": "Vertical expandable prosthetic titanium rib or lateral thoracoplasty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection",
+          "cells": [
+            {
+              "text": "Prompt chest infection treatment, airway clearance and immunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal disease",
+          "cells": [
+            {
+              "text": "Surveillance and treatment as it evolves, including dialysis or transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term review",
+          "cells": [
+            {
+              "text": "Hepatic and ophthalmological review in survivors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; multidisciplinary skeletal dysplasia team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "jeune_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Jeune syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Narrow bell-shaped thorax with short ribs and respiratory distress from birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory failure, recurrent chest infection, renal impairment or liver fibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate respiratory support; urgent renal review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, lung function, thoracic imaging, ciliopathy panel, renal and liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thoracic insufficiency with ciliopathy variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Ellis-van Creveld or another short-rib dysplasia; repeat genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Respiratory support proportionate to need, up to ventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Thoracic expansion surgery such as VEPTR or lateral thoracoplasty",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prompt treatment of infection; airway clearance and immunisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal and hepatic surveillance with treatment as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling for recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Thoracic insufficiency can be fatal in infancy; long-term multisystem surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,456 @@
 {
- "id": "juvenile_polyposis",
- "name": "Juvenile polyposis syndrome",
- "aliases": [
-  "BMPR1A",
-  "JPS",
-  "SMAD4",
-  "familial juvenile polyposis",
-  "juvenile polyposis",
-  "juvenile polyposis coli",
-  "juvenile polyposis syndrome"
- ],
- "class": "non_infective",
- "system": "Oncology / Genetic",
- "specialty": "Cancer Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / NCCN & genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by germline variants in SMAD4 or BMPR1A, disrupting the TGF-beta/BMP signalling pathway, inherited autosomal dominantly with a significant de novo rate",
-   "The term juvenile refers to the histological type of hamartomatous polyp rather than the age of onset, though presentation is often in childhood or young adulthood",
-   "Multiple juvenile polyps develop throughout the gastrointestinal tract, most commonly in the colon and rectum but also in the stomach and small bowel",
-   "Common presenting features include rectal bleeding, iron-deficiency anaemia, and, with large polyps, intussusception, prolapse, or protein-losing enteropathy",
-   "Confers an increased lifetime risk of colorectal cancer and, especially with gastric involvement, gastric cancer, warranting endoscopic surveillance and polypectomy",
-   "SMAD4 variants are associated with a combined phenotype overlapping hereditary haemorrhagic telangiectasia, so carriers should be screened for arteriovenous malformations",
-   "Surveillance involves periodic upper gastrointestinal endoscopy and colonoscopy with polyp clearance, and colectomy or gastrectomy may be needed for uncontrollable polyp burden or cancer",
-   "A negative family history does not exclude the diagnosis given frequent de novo variants, so isolated cases with multiple juvenile polyps warrant genetic evaluation"
+  "id": "juvenile_polyposis",
+  "name": "Juvenile polyposis syndrome",
+  "aliases": [
+    "BMPR1A",
+    "JPS",
+    "SMAD4",
+    "familial juvenile polyposis",
+    "juvenile polyposis",
+    "juvenile polyposis coli",
+    "juvenile polyposis syndrome"
   ],
-  "pathophysiology": "SMAD4 and BMPR1A are components of the TGF-beta/BMP signalling pathway, which restrains proliferation and promotes differentiation of gastrointestinal epithelial and stromal cells. Loss of function disrupts this growth-suppressing signalling, producing the characteristic hamartomatous juvenile polyps and creating a field of mucosa predisposed to dysplastic and malignant change. SMAD4 additionally regulates vascular integrity, which explains the overlap of SMAD4-related juvenile polyposis with hereditary haemorrhagic telangiectasia and its arteriovenous malformations.",
-  "additionalDifferentials": [
-   "Peutz-Jeghers syndrome",
-   "Cowden syndrome and other PTEN hamartoma tumour syndromes",
-   "Familial adenomatous polyposis",
-   "Solitary sporadic juvenile polyp (not a syndrome)",
-   "Other mixed or hamartomatous polyposis syndromes"
-  ],
-  "additionalInvestigations": [
-   "Germline SMAD4 and BMPR1A sequencing and deletion/duplication analysis with genetic counselling",
-   "Colonoscopy and upper gastrointestinal endoscopy with polypectomy for surveillance",
-   "Full blood count and iron studies to assess chronic gastrointestinal blood loss",
-   "Small-bowel evaluation where clinically indicated",
-   "Screening for hereditary haemorrhagic telangiectasia features (including pulmonary and cerebral arteriovenous malformations) in SMAD4 carriers"
-  ],
-  "redFlags": [
-   "Significant or recurrent gastrointestinal bleeding with anaemia",
-   "Intussusception, rectal prolapse, or protein-losing enteropathy from heavy polyp burden",
-   "Endoscopic or histological features of dysplasia or malignancy",
-   "Complications of arteriovenous malformations in SMAD4-related disease"
-  ],
-  "prognosis": "With regular endoscopic surveillance and polyp clearance, the risk of gastrointestinal cancer can be reduced and outcomes are favourable, though heavy polyp burden may ultimately require surgical resection. In SMAD4 carriers, prognosis also depends on identifying and managing arteriovenous malformations.",
-  "pitfalls": [
-   "Regarding a juvenile polyp as invariably benign and failing to recognise the polyposis syndrome and its cancer risk",
-   "Omitting upper gastrointestinal surveillance and missing gastric polyps or cancer",
-   "Not screening SMAD4 carriers for hereditary haemorrhagic telangiectasia and dangerous arteriovenous malformations",
-   "Assuming a negative family history excludes the diagnosis despite common de novo variants"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "NCCN guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Endoscopic polypectomy at colonoscopy and upper gastrointestinal endoscopy to clear hamartomatous polyps and reduce malignant potential",
-   "Regular endoscopic surveillance of the colon, rectum, stomach and duodenum with intervals guided by polyp burden",
-   "Correct iron-deficiency anaemia from chronic gastrointestinal blood loss with iron replacement and manage protein-losing enteropathy",
-   "Consider risk-reducing colectomy or gastrectomy when polyp burden becomes endoscopically unmanageable or dysplasia develops",
-   "Screen SMAD4 carriers for hereditary haemorrhagic telangiectasia, including pulmonary and cerebral arteriovenous malformations",
-   "Offer genetic counselling with germline SMAD4/BMPR1A testing and predictive testing and surveillance of first-degree relatives",
-   "Coordinate multidisciplinary care across cancer genetics, gastroenterology and colorectal surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "juvenile_polyposis-pathway",
-   "title": "Juvenile polyposis syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by germline variants in SMAD4 or BMPR1A, disrupting the TGF-beta/BMP signalling pathway, inherited autosomal dominantly with a significant de novo rate",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Significant or recurrent gastrointestinal bleeding with anaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Germline SMAD4 and BMPR1A sequencing and deletion/duplication analysis with genetic counselling, Colonoscopy and upper gastrointestinal endoscopy with polypectomy for surveillance, Full blood count and iron studies to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Endoscopic polypectomy at colonoscopy and upper gastrointestinal endoscopy to clear hamartomatous polyps and reduce malignant potential"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regarding a juvenile polyp as invariably benign and failing to recognise the polyposis syndrome and its cancer risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of juvenile polyposis syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "juvenile_polyposis-matrix",
-   "title": "Juvenile polyposis syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by germline variants in SMAD4 or BMPR1A, disrupting the TGF-beta/BMP signalling pathway, inherited autosomal dominantly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Genetic",
+  "specialty": "Cancer Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / NCCN & genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by germline variants in SMAD4 or BMPR1A, disrupting the TGF-beta/BMP signalling pathway, inherited autosomal dominantly with a significant de novo rate",
+      "The term juvenile refers to the histological type of hamartomatous polyp rather than the age of onset, though presentation is often in childhood or young adulthood",
+      "Multiple juvenile polyps develop throughout the gastrointestinal tract, most commonly in the colon and rectum but also in the stomach and small bowel",
+      "Common presenting features include rectal bleeding, iron-deficiency anaemia, and, with large polyps, intussusception, prolapse, or protein-losing enteropathy",
+      "Confers an increased lifetime risk of colorectal cancer and, especially with gastric involvement, gastric cancer, warranting endoscopic surveillance and polypectomy",
+      "SMAD4 variants are associated with a combined phenotype overlapping hereditary haemorrhagic telangiectasia, so carriers should be screened for arteriovenous malformations",
+      "Surveillance involves periodic upper gastrointestinal endoscopy and colonoscopy with polyp clearance, and colectomy or gastrectomy may be needed for uncontrollable polyp burden or cancer",
+      "A negative family history does not exclude the diagnosis given frequent de novo variants, so isolated cases with multiple juvenile polyps warrant genetic evaluation"
     ],
-    [
-     "Key Investigations",
-     "Germline SMAD4 and BMPR1A sequencing and deletion/duplication analysis with genetic counselling, Colonoscopy and upper",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SMAD4 and BMPR1A are components of the TGF-beta/BMP signalling pathway, which restrains proliferation and promotes differentiation of gastrointestinal epithelial and stromal cells. Loss of function disrupts this growth-suppressing signalling, producing the characteristic hamartomatous juvenile polyps and creating a field of mucosa predisposed to dysplastic and malignant change. SMAD4 additionally regulates vascular integrity, which explains the overlap of SMAD4-related juvenile polyposis with hereditary haemorrhagic telangiectasia and its arteriovenous malformations.",
+    "additionalDifferentials": [
+      "Peutz-Jeghers syndrome",
+      "Cowden syndrome and other PTEN hamartoma tumour syndromes",
+      "Familial adenomatous polyposis",
+      "Solitary sporadic juvenile polyp (not a syndrome)",
+      "Other mixed or hamartomatous polyposis syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Peutz-Jeghers syndrome, Cowden syndrome and other PTEN hamartoma tumour syndromes, Familial adenomatous polyposis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Germline SMAD4 and BMPR1A sequencing and deletion/duplication analysis with genetic counselling",
+      "Colonoscopy and upper gastrointestinal endoscopy with polypectomy for surveillance",
+      "Full blood count and iron studies to assess chronic gastrointestinal blood loss",
+      "Small-bowel evaluation where clinically indicated",
+      "Screening for hereditary haemorrhagic telangiectasia features (including pulmonary and cerebral arteriovenous malformations) in SMAD4 carriers"
     ],
-    [
-     "Management Strategy",
-     "Endoscopic polypectomy at colonoscopy and upper gastrointestinal endoscopy to clear hamartomatous polyps and reduce malignant",
-     "Core treatment modality"
+    "redFlags": [
+      "Significant or recurrent gastrointestinal bleeding with anaemia",
+      "Intussusception, rectal prolapse, or protein-losing enteropathy from heavy polyp burden",
+      "Endoscopic or histological features of dysplasia or malignancy",
+      "Complications of arteriovenous malformations in SMAD4-related disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Regarding a juvenile polyp as invariably benign and failing to recognise the polyposis syndrome and its cancer risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "With regular endoscopic surveillance and polyp clearance, the risk of gastrointestinal cancer can be reduced and outcomes are favourable, though heavy polyp burden may ultimately require surgical resection. In SMAD4 carriers, prognosis also depends on identifying and managing arteriovenous malformations.",
+    "pitfalls": [
+      "Regarding a juvenile polyp as invariably benign and failing to recognise the polyposis syndrome and its cancer risk",
+      "Omitting upper gastrointestinal surveillance and missing gastric polyps or cancer",
+      "Not screening SMAD4 carriers for hereditary haemorrhagic telangiectasia and dangerous arteriovenous malformations",
+      "Assuming a negative family history excludes the diagnosis despite common de novo variants"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "NCCN guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Endoscopic polypectomy at colonoscopy and upper gastrointestinal endoscopy to clear hamartomatous polyps and reduce malignant potential",
+      "Regular endoscopic surveillance of the colon, rectum, stomach and duodenum with intervals guided by polyp burden",
+      "Correct iron-deficiency anaemia from chronic gastrointestinal blood loss with iron replacement and manage protein-losing enteropathy",
+      "Consider risk-reducing colectomy or gastrectomy when polyp burden becomes endoscopically unmanageable or dysplasia develops",
+      "Screen SMAD4 carriers for hereditary haemorrhagic telangiectasia, including pulmonary and cerebral arteriovenous malformations",
+      "Offer genetic counselling with germline SMAD4/BMPR1A testing and predictive testing and surveillance of first-degree relatives",
+      "Coordinate multidisciplinary care across cancer genetics, gastroenterology and colorectal surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for juvenile polyposis syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "juvenile-polyposis-real-image",
-   "title": "Juvenile polyposis syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "juvenile_polyposis-pathway",
+      "title": "Juvenile polyposis syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by germline variants in SMAD4 or BMPR1A, disrupting the TGF-beta/BMP signalling pathway, inherited autosomal dominantly with a significant de novo rate",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Significant or recurrent gastrointestinal bleeding with anaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Germline SMAD4 and BMPR1A sequencing and deletion/duplication analysis with genetic counselling, Colonoscopy and upper gastrointestinal endoscopy with polypectomy for surveillance, Full blood count and iron studies to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Endoscopic polypectomy at colonoscopy and upper gastrointestinal endoscopy to clear hamartomatous polyps and reduce malignant potential"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regarding a juvenile polyp as invariably benign and failing to recognise the polyposis syndrome and its cancer risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of juvenile polyposis syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "juvenile_polyposis-matrix",
+      "title": "Juvenile polyposis syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by germline variants in SMAD4 or BMPR1A, disrupting the TGF-beta/BMP signalling pathway, inherited autosomal dominantly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Germline SMAD4 and BMPR1A sequencing and deletion/duplication analysis with genetic counselling, Colonoscopy and upper",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peutz-Jeghers syndrome, Cowden syndrome and other PTEN hamartoma tumour syndromes, Familial adenomatous polyposis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Endoscopic polypectomy at colonoscopy and upper gastrointestinal endoscopy to clear hamartomatous polyps and reduce malignant",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regarding a juvenile polyp as invariably benign and failing to recognise the polyposis syndrome and its cancer risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for juvenile polyposis syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / NCCN & genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "juvenile_polyposis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SMAD4 and BMPR1A sequencing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Germline variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy and upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Polyp burden and polypectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Chronic blood loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel evaluation",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for hereditary haemorrhagic telangiectasia in SMAD4 carriers",
+          "cells": [
+            {
+              "text": "Arteriovenous malformations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_polyposis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Solitary sporadic juvenile polyp",
+          "cells": [
+            {
+              "text": "Single polyp; not a polyposis syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PTEN hamartoma tumour syndrome (Cowden syndrome)",
+          "cells": [
+            {
+              "text": "Germline PTEN testing distinguishes it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "juvenile_polyposis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Polypectomy",
+          "cells": [
+            {
+              "text": "Endoscopic removal at colonoscopy and upper endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Colon, rectum, stomach and duodenum; interval guided by polyp burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia and enteropathy",
+          "cells": [
+            {
+              "text": "Iron replacement; management of protein-losing enteropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Risk-reducing colectomy or gastrectomy if polyp burden is unmanageable or dysplasia develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SMAD4 carriers",
+          "cells": [
+            {
+              "text": "Screening for hereditary haemorrhagic telangiectasia and arteriovenous malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family",
+          "cells": [
+            {
+              "text": "Genetic counselling with predictive testing and surveillance of first-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "juvenile_polyposis-dx-mgmt",
+      "title": "Diagnosis and management of Juvenile polyposis syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple juvenile polyps with rectal bleeding and anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Significant bleeding, intussusception, prolapse, protein-losing enteropathy or dysplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endoscopy and polypectomy; anaemia correction; surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Colonoscopy and upper endoscopy, SMAD4 and BMPR1A testing, blood count, iron, HHT screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SMAD4 or BMPR1A variant confirmed with polyp burden defined?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider solitary sporadic juvenile polyp or PTEN syndrome; repeat genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Endoscopic polypectomy to clear hamartomatous polyps",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regular surveillance of colon, stomach and duodenum",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Iron replacement and management of protein-losing enteropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Risk-reducing colectomy or gastrectomy if unmanageable or dysplastic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen SMAD4 carriers for HHT and offer relatives testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong endoscopic surveillance; cancer risk depends on polyp burden and dysplasia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

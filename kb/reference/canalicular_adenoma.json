@@ -1,172 +1,227 @@
 {
- "id": "canalicular_adenoma",
- "name": "Canalicular adenoma",
- "aliases": [
-  "Canalicular type monomorphic adenoma"
- ],
- "class": "non_infective",
- "system": "Head and neck / Salivary glands",
- "specialty": "Head and neck surgery / Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Head and Neck Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign minor salivary gland adenoma with a striking predilection for the upper lip, and less commonly the buccal mucosa.",
-   "It typically affects older adults with a slight female predominance and presents as a slow-growing, submucosal, painless nodule.",
-   "The histological hallmark is columnar to cuboidal cells arranged in single or double branching, anastomosing cords that periodically separate to form bead-like canaliculi.",
-   "The stroma is characteristically loose, hypocellular and richly vascular, unlike the stroma of basal cell adenoma.",
-   "Multifocality is well recognised and can present as several discrete nodules within the upper lip.",
-   "In contrast to most salivary tumours, it lacks a true myoepithelial component; tumour cells are S100 positive and often bcl-2 positive.",
-   "It is readily mistaken clinically for a mucocele of the upper lip, but its solid nature at excision distinguishes it.",
-   "The principal serious differential is adenoid cystic carcinoma, which the cords and canaliculi can superficially resemble on small biopsies."
+  "id": "canalicular_adenoma",
+  "name": "Canalicular adenoma",
+  "aliases": [
+    "Canalicular type monomorphic adenoma"
   ],
-  "pathophysiology": "Canalicular adenoma is a benign neoplasm arising from the ductal (luminal) epithelial cells of minor salivary glands, most typically those of the upper lip. The neoplastic columnar cells retain ductal differentiation and are notable for the absence of a neoplastic myoepithelial population, which sets it apart from pleomorphic and basal cell adenomas. The tumour cells form long, branching, anastomosing cords that intermittently draw apart to create elongated canalicular lumina, set within a conspicuously loose and highly vascularised stroma that is prone to haemorrhage and cystic change. Its frequent multifocality within the upper lip suggests a field origin from multiple minor gland ducts rather than a single clonal focus.",
-  "additionalDifferentials": [
-   "Basal cell adenoma",
-   "Pleomorphic adenoma",
-   "Adenoid cystic carcinoma",
-   "Polymorphous adenocarcinoma",
-   "Mucocele (clinical mimic on the lip)",
-   "Other minor salivary gland adenomas"
-  ],
-  "additionalInvestigations": [
-   "Incisional or excisional biopsy for definitive histology",
-   "Fine-needle aspiration cytology (of limited value in the lip)",
-   "Ultrasound of the lip or cheek where useful",
-   "Immunohistochemistry including S100 and bcl-2",
-   "MRI for larger or deeper lesions to assess extent",
-   "Clinical examination of other minor gland sites for multifocal nodules"
-  ],
-  "redFlags": [
-   "Infiltrative growth or ill-defined margins on histology",
-   "Rapid growth or new pain",
-   "Mucosal ulceration",
-   "Perineural symptoms such as numbness suggesting a malignant mimic",
-   "Fixation to underlying tissues"
-  ],
-  "prognosis": "Prognosis is excellent, as the tumour is benign and local excision is curative. Apparent recurrence usually reflects a separate multifocal nodule rather than incomplete removal.",
-  "pitfalls": [
-   "Misdiagnosing it as adenoid cystic carcinoma on a small or fragmented biopsy",
-   "Overlooking multifocal nodules within the upper lip",
-   "Mistaking it clinically for a simple mucocele and delaying excision",
-   "Proceeding to overly aggressive surgery for a benign lesion"
-  ],
-  "references": [
-   "WHO Classification of Head and Neck Tumours",
-   "Gnepp's Diagnostic Surgical Pathology of the Head and Neck",
-   "Cummings Otolaryngology: Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm the diagnosis histologically, distinguishing it from basal cell and pleomorphic adenoma",
-   "Treat with complete conservative local excision, which is curative for this benign tumour",
-   "Inspect the upper lip for multifocal nodules and excise coexisting lesions at the same time",
-   "Keep excision margins minimal given the benign nature, avoiding overtreatment",
-   "Follow up clinically, recognising that a new nodule usually represents separate multifocal disease rather than true recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "canalicular_adenoma-pathway",
-   "title": "Canalicular adenoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign minor salivary gland adenoma with a striking predilection for the upper lip, and less commonly the buccal mucosa.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Infiltrative growth or ill-defined margins on histology",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Incisional or excisional biopsy for definitive histology, Fine-needle aspiration cytology (of limited value in the lip), Ultrasound of the lip or cheek where useful"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the diagnosis histologically, distinguishing it from basal cell and pleomorphic adenoma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing it as adenoid cystic carcinoma on a small or fragmented biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of canalicular adenoma."
-  }
- ],
- "tables": [
-  {
-   "id": "canalicular_adenoma-matrix",
-   "title": "Canalicular adenoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign minor salivary gland adenoma with a striking predilection for the upper lip, and less commonly the buccal mucosa.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Head and neck / Salivary glands",
+  "specialty": "Head and neck surgery / Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Head and Neck Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign minor salivary gland adenoma with a striking predilection for the upper lip, and less commonly the buccal mucosa.",
+      "It typically affects older adults with a slight female predominance and presents as a slow-growing, submucosal, painless nodule.",
+      "The histological hallmark is columnar to cuboidal cells arranged in single or double branching, anastomosing cords that periodically separate to form bead-like canaliculi.",
+      "The stroma is characteristically loose, hypocellular and richly vascular, unlike the stroma of basal cell adenoma.",
+      "Multifocality is well recognised and can present as several discrete nodules within the upper lip.",
+      "In contrast to most salivary tumours, it lacks a true myoepithelial component; tumour cells are S100 positive and often bcl-2 positive.",
+      "It is readily mistaken clinically for a mucocele of the upper lip, but its solid nature at excision distinguishes it.",
+      "The principal serious differential is adenoid cystic carcinoma, which the cords and canaliculi can superficially resemble on small biopsies."
     ],
-    [
-     "Key Investigations",
-     "Incisional or excisional biopsy for definitive histology, Fine-needle aspiration cytology (of limited value in the lip),",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Canalicular adenoma is a benign neoplasm arising from the ductal (luminal) epithelial cells of minor salivary glands, most typically those of the upper lip. The neoplastic columnar cells retain ductal differentiation and are notable for the absence of a neoplastic myoepithelial population, which sets it apart from pleomorphic and basal cell adenomas. The tumour cells form long, branching, anastomosing cords that intermittently draw apart to create elongated canalicular lumina, set within a conspicuously loose and highly vascularised stroma that is prone to haemorrhage and cystic change. Its frequent multifocality within the upper lip suggests a field origin from multiple minor gland ducts rather than a single clonal focus.",
+    "additionalDifferentials": [
+      "Basal cell adenoma",
+      "Pleomorphic adenoma",
+      "Adenoid cystic carcinoma",
+      "Polymorphous adenocarcinoma",
+      "Mucocele (clinical mimic on the lip)",
+      "Other minor salivary gland adenomas"
     ],
-    [
-     "Primary Differentials",
-     "Basal cell adenoma, Pleomorphic adenoma, Adenoid cystic carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Incisional or excisional biopsy for definitive histology",
+      "Fine-needle aspiration cytology (of limited value in the lip)",
+      "Ultrasound of the lip or cheek where useful",
+      "Immunohistochemistry including S100 and bcl-2",
+      "MRI for larger or deeper lesions to assess extent",
+      "Clinical examination of other minor gland sites for multifocal nodules"
     ],
-    [
-     "Management Strategy",
-     "Confirm the diagnosis histologically, distinguishing it from basal cell and pleomorphic adenoma",
-     "Core treatment modality"
+    "redFlags": [
+      "Infiltrative growth or ill-defined margins on histology",
+      "Rapid growth or new pain",
+      "Mucosal ulceration",
+      "Perineural symptoms such as numbness suggesting a malignant mimic",
+      "Fixation to underlying tissues"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing it as adenoid cystic carcinoma on a small or fragmented biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent, as the tumour is benign and local excision is curative. Apparent recurrence usually reflects a separate multifocal nodule rather than incomplete removal.",
+    "pitfalls": [
+      "Misdiagnosing it as adenoid cystic carcinoma on a small or fragmented biopsy",
+      "Overlooking multifocal nodules within the upper lip",
+      "Mistaking it clinically for a simple mucocele and delaying excision",
+      "Proceeding to overly aggressive surgery for a benign lesion"
+    ],
+    "references": [
+      "WHO Classification of Head and Neck Tumours",
+      "Gnepp's Diagnostic Surgical Pathology of the Head and Neck",
+      "Cummings Otolaryngology: Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm the diagnosis histologically, distinguishing it from basal cell and pleomorphic adenoma",
+      "Treat with complete conservative local excision, which is curative for this benign tumour",
+      "Inspect the upper lip for multifocal nodules and excise coexisting lesions at the same time",
+      "Keep excision margins minimal given the benign nature, avoiding overtreatment",
+      "Follow up clinically, recognising that a new nodule usually represents separate multifocal disease rather than true recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for canalicular adenoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "canalicular-adenoma-real-image",
-   "title": "Canalicular adenoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "canalicular_adenoma-pathway",
+      "title": "Canalicular adenoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign minor salivary gland adenoma with a striking predilection for the upper lip, and less commonly the buccal mucosa.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Infiltrative growth or ill-defined margins on histology",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Incisional or excisional biopsy for definitive histology, Fine-needle aspiration cytology (of limited value in the lip), Ultrasound of the lip or cheek where useful"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the diagnosis histologically, distinguishing it from basal cell and pleomorphic adenoma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing it as adenoid cystic carcinoma on a small or fragmented biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of canalicular adenoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "canalicular_adenoma-matrix",
+      "title": "Canalicular adenoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign minor salivary gland adenoma with a striking predilection for the upper lip, and less commonly the buccal mucosa.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Incisional or excisional biopsy for definitive histology, Fine-needle aspiration cytology (of limited value in the lip),",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Basal cell adenoma, Pleomorphic adenoma, Adenoid cystic carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the diagnosis histologically, distinguishing it from basal cell and pleomorphic adenoma",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing it as adenoid cystic carcinoma on a small or fragmented biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for canalicular adenoma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Head and Neck Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "canalicular_adenoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in canalicular adenoma",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Excisional or incisional biopsy", "cells": [{"text": "Definitive histology: branching cords with bead-like canaliculi"}], "cite": "c1"},
+        {"parameter": "Immunohistochemistry (S100, bcl-2)", "cells": [{"text": "Tumour cells S100 positive and often bcl-2 positive; no myoepithelial component"}], "cite": "c1"},
+        {"parameter": "Fine-needle aspiration cytology", "cells": [{"text": "Limited value in the lip"}], "cite": "c1"},
+        {"parameter": "Ultrasound of lip or cheek", "cells": [{"text": "Where useful"}], "cite": "c1"},
+        {"parameter": "MRI", "cells": [{"text": "Larger or deeper lesions to assess extent"}], "cite": "c1"},
+        {"parameter": "Examination of other minor gland sites", "cells": [{"text": "Multifocal nodules"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "canalicular_adenoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike lip and minor salivary lesions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Adenoid cystic carcinoma", "cells": [{"text": "Cords and canaliculi can resemble it on small biopsies; infiltrative growth and ill-defined margins on histology favour carcinoma"}], "cite": "c1"},
+        {"parameter": "Mucocele of the upper lip", "cells": [{"text": "Clinical mimic; solid nature at excision distinguishes canalicular adenoma"}], "cite": "c1"},
+        {"parameter": "Basal cell adenoma", "cells": [{"text": "Loose, hypocellular, richly vascular stroma of canalicular adenoma differs from the basal cell adenoma stroma"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "canalicular_adenoma-treatment",
+      "kind": "treatment",
+      "title": "Management options in canalicular adenoma",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Histological confirmation", "cells": [{"text": "Distinguish from basal cell and pleomorphic adenoma"}, {"text": "Before management"}], "cite": "c1"},
+        {"parameter": "Complete conservative local excision", "cells": [{"text": "Curative for this benign tumour"}, {"text": "Definitive"}], "cite": "c1"},
+        {"parameter": "Multifocal nodules", "cells": [{"text": "Inspect the upper lip and excise coexisting lesions at the same time"}, {"text": "Multifocality"}], "cite": "c1"},
+        {"parameter": "Margins", "cells": [{"text": "Minimal margins; avoid overtreatment of a benign lesion"}, {"text": "Benign"}], "cite": "c1"},
+        {"parameter": "Follow-up", "cells": [{"text": "Clinical review; a new nodule usually represents separate multifocal disease"}, {"text": "Ongoing"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "canalicular_adenoma-dx-mgmt",
+      "title": "Diagnosis and management of canalicular adenoma",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Slow-growing painless submucosal nodule of the upper lip in an older adult", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: infiltrative growth, ulceration, fixation, or new numbness?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: biopsy for malignant mimic such as adenoid cystic carcinoma; head and neck referral", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Excisional or incisional biopsy with S100 and bcl-2 immunohistochemistry", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Histology consistent with canalicular adenoma?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Complete conservative local excision; examine lip for multifocal nodules", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Reconsider the diagnosis, such as basal cell or pleomorphic adenoma or carcinoma", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Benign with excellent prognosis after excision; new nodules are usually separate lesions", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

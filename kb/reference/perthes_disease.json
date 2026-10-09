@@ -1,173 +1,471 @@
 {
- "id": "perthes_disease",
- "name": "Perthes' disease",
- "aliases": [
-  "Legg-Calve-Perthes disease",
-  "idiopathic avascular necrosis of the femoral head in children",
-  "coxa plana"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An idiopathic avascular necrosis of the femoral head in children, typically presenting between about 4 and 8 years and more common in boys",
-   "Presents with a limp and hip, groin, or referred knee pain, often intermittent, with restricted abduction and internal rotation of the hip",
-   "Knee pain in a child can be referred from the hip, so the hip must always be examined in a limping child",
-   "Early radiographs may be normal; later changes include increased femoral head density, fragmentation, flattening, and eventual remodelling",
-   "The key aims are to relieve symptoms, maintain hip movement, and keep the femoral head 'contained' within the acetabulum so it remodels into a congruent, spherical shape",
-   "Younger children with more remaining growth and greater remodelling potential generally have a better prognosis than older children",
-   "Treatment ranges from observation, activity restriction, and physiotherapy to containment by bracing or surgery (femoral or pelvic osteotomy) in more severe or older cases",
-   "Bilateral or atypical presentations should prompt consideration of alternative diagnoses such as skeletal dysplasia or hypothyroidism"
+  "id": "perthes_disease",
+  "name": "Perthes' disease",
+  "aliases": [
+    "Legg-Calve-Perthes disease",
+    "idiopathic avascular necrosis of the femoral head in children",
+    "coxa plana"
   ],
-  "pathophysiology": "Perthes' disease results from a temporary interruption of the blood supply to the immature femoral head epiphysis, causing avascular necrosis. The precise trigger is unknown but the epiphysis undergoes a sequence of ischaemic necrosis, followed by fragmentation and resorption of dead bone, then reossification and remodelling as revascularisation occurs. During the biologically 'plastic' necrotic and fragmentation phases the softened femoral head is vulnerable to deformation under load, and can flatten and enlarge (coxa magna) or become incongruent if not well contained within the acetabulum. The ultimate shape of the healed head, and hence long-term function, depends on how well sphericity and containment are preserved through this self-limiting but prolonged process.",
-  "additionalDifferentials": [
-   "Transient synovitis (irritable hip)",
-   "Septic arthritis or osteomyelitis of the hip",
-   "Slipped capital femoral epiphysis (in older children)",
-   "Developmental dysplasia of the hip",
-   "Juvenile idiopathic arthritis",
-   "Skeletal dysplasia or epiphyseal dysplasia (especially if bilateral)",
-   "Hypothyroidism and avascular necrosis from other causes (e.g. sickle cell disease, steroids)"
-  ],
-  "additionalInvestigations": [
-   "Anteroposterior and frog-lateral radiographs of both hips to assess and stage the changes",
-   "MRI for early detection before radiographic changes appear and to assess the extent of necrosis",
-   "Clinical assessment of hip range of movement, particularly abduction and internal rotation",
-   "Investigations to exclude infection or inflammatory arthritis when the presentation is acute",
-   "Consideration of bilateral or systemic workup (e.g. thyroid function, skeletal survey) if presentation is atypical or bilateral"
-  ],
-  "redFlags": [
-   "Fever, systemic upset, and an acutely irritable hip suggesting septic arthritis requiring urgent exclusion",
-   "Bilateral or atypical disease suggesting skeletal dysplasia or an underlying systemic cause",
-   "Marked loss of hip movement and femoral head extrusion indicating a head at risk of permanent deformity",
-   "An older child at presentation, associated with a poorer remodelling capacity"
-  ],
-  "prognosis": "The disease is self-limiting and many younger children with limited head involvement remodel to a near-normal, congruent hip; however, older children, extensive necrosis, and a poorly contained or deformed femoral head are associated with residual incongruity and an increased risk of premature hip osteoarthritis in adulthood.",
-  "pitfalls": [
-   "Attributing a child's knee pain to the knee and failing to examine the hip",
-   "Assuming a normal early radiograph excludes the disease and missing early presentation on MRI",
-   "Not distinguishing Perthes' disease from septic arthritis in the acutely painful hip",
-   "Overlooking bilateral involvement that should prompt evaluation for an underlying systemic disorder"
-  ],
-  "references": [
-   "Apley & Solomon's System of Orthopaedics and Fractures"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relieve symptoms with simple analgesia, activity modification and physiotherapy to preserve hip range of movement",
-   "Maintain femoral head containment within the acetabulum by preserving abduction and internal rotation, using physiotherapy and, in selected cases, abduction bracing",
-   "Protected weight-bearing and traction during painful active phases to reduce load on the softened epiphysis",
-   "Surgical containment with femoral varus or pelvic acetabular osteotomy for older children or those with extensive involvement or loss of containment",
-   "Serial radiographic monitoring through the fragmentation and reossification phases to track sphericity and containment",
-   "Coordinate orthopaedic and physiotherapy care, tailoring intensity to age and extent of head involvement",
-   "Long-term surveillance for residual deformity and premature hip osteoarthritis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "perthes_disease-pathway",
-   "title": "Perthes' disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An idiopathic avascular necrosis of the femoral head in children, typically presenting between about 4 and 8 years and more common in boys",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fever, systemic upset, and an acutely irritable hip suggesting septic arthritis requiring urgent exclusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anteroposterior and frog-lateral radiographs of both hips to assess and stage the changes, MRI for early detection before radiographic changes appear and to assess the extent of necrosis, Clinical assessment of hip range"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve symptoms with simple analgesia, activity modification and physiotherapy to preserve hip range of movement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a child's knee pain to the knee and failing to examine the hip"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of perthes' disease."
-  }
- ],
- "tables": [
-  {
-   "id": "perthes_disease-matrix",
-   "title": "Perthes' disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An idiopathic avascular necrosis of the femoral head in children, typically presenting between about 4 and 8 years and more",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An idiopathic avascular necrosis of the femoral head in children, typically presenting between about 4 and 8 years and more common in boys",
+      "Presents with a limp and hip, groin, or referred knee pain, often intermittent, with restricted abduction and internal rotation of the hip",
+      "Knee pain in a child can be referred from the hip, so the hip must always be examined in a limping child",
+      "Early radiographs may be normal; later changes include increased femoral head density, fragmentation, flattening, and eventual remodelling",
+      "The key aims are to relieve symptoms, maintain hip movement, and keep the femoral head 'contained' within the acetabulum so it remodels into a congruent, spherical shape",
+      "Younger children with more remaining growth and greater remodelling potential generally have a better prognosis than older children",
+      "Treatment ranges from observation, activity restriction, and physiotherapy to containment by bracing or surgery (femoral or pelvic osteotomy) in more severe or older cases",
+      "Bilateral or atypical presentations should prompt consideration of alternative diagnoses such as skeletal dysplasia or hypothyroidism"
     ],
-    [
-     "Key Investigations",
-     "Anteroposterior and frog-lateral radiographs of both hips to assess and stage the changes, MRI for early detection before",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Perthes' disease results from a temporary interruption of the blood supply to the immature femoral head epiphysis, causing avascular necrosis. The precise trigger is unknown but the epiphysis undergoes a sequence of ischaemic necrosis, followed by fragmentation and resorption of dead bone, then reossification and remodelling as revascularisation occurs. During the biologically 'plastic' necrotic and fragmentation phases the softened femoral head is vulnerable to deformation under load, and can flatten and enlarge (coxa magna) or become incongruent if not well contained within the acetabulum. The ultimate shape of the healed head, and hence long-term function, depends on how well sphericity and containment are preserved through this self-limiting but prolonged process.",
+    "additionalDifferentials": [
+      "Transient synovitis (irritable hip)",
+      "Septic arthritis or osteomyelitis of the hip",
+      "Slipped capital femoral epiphysis (in older children)",
+      "Developmental dysplasia of the hip",
+      "Juvenile idiopathic arthritis",
+      "Skeletal dysplasia or epiphyseal dysplasia (especially if bilateral)",
+      "Hypothyroidism and avascular necrosis from other causes (e.g. sickle cell disease, steroids)"
     ],
-    [
-     "Primary Differentials",
-     "Transient synovitis (irritable hip), Septic arthritis or osteomyelitis of the hip, Slipped capital femoral epiphysis (in older",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anteroposterior and frog-lateral radiographs of both hips to assess and stage the changes",
+      "MRI for early detection before radiographic changes appear and to assess the extent of necrosis",
+      "Clinical assessment of hip range of movement, particularly abduction and internal rotation",
+      "Investigations to exclude infection or inflammatory arthritis when the presentation is acute",
+      "Consideration of bilateral or systemic workup (e.g. thyroid function, skeletal survey) if presentation is atypical or bilateral"
     ],
-    [
-     "Management Strategy",
-     "Relieve symptoms with simple analgesia, activity modification and physiotherapy to preserve hip range of movement",
-     "Core treatment modality"
+    "redFlags": [
+      "Fever, systemic upset, and an acutely irritable hip suggesting septic arthritis requiring urgent exclusion",
+      "Bilateral or atypical disease suggesting skeletal dysplasia or an underlying systemic cause",
+      "Marked loss of hip movement and femoral head extrusion indicating a head at risk of permanent deformity",
+      "An older child at presentation, associated with a poorer remodelling capacity"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a child's knee pain to the knee and failing to examine the hip",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease is self-limiting and many younger children with limited head involvement remodel to a near-normal, congruent hip; however, older children, extensive necrosis, and a poorly contained or deformed femoral head are associated with residual incongruity and an increased risk of premature hip osteoarthritis in adulthood.",
+    "pitfalls": [
+      "Attributing a child's knee pain to the knee and failing to examine the hip",
+      "Assuming a normal early radiograph excludes the disease and missing early presentation on MRI",
+      "Not distinguishing Perthes' disease from septic arthritis in the acutely painful hip",
+      "Overlooking bilateral involvement that should prompt evaluation for an underlying systemic disorder"
+    ],
+    "references": [
+      "Apley & Solomon's System of Orthopaedics and Fractures"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relieve symptoms with simple analgesia, activity modification and physiotherapy to preserve hip range of movement",
+      "Maintain femoral head containment within the acetabulum by preserving abduction and internal rotation, using physiotherapy and, in selected cases, abduction bracing",
+      "Protected weight-bearing and traction during painful active phases to reduce load on the softened epiphysis",
+      "Surgical containment with femoral varus or pelvic acetabular osteotomy for older children or those with extensive involvement or loss of containment",
+      "Serial radiographic monitoring through the fragmentation and reossification phases to track sphericity and containment",
+      "Coordinate orthopaedic and physiotherapy care, tailoring intensity to age and extent of head involvement",
+      "Long-term surveillance for residual deformity and premature hip osteoarthritis"
     ]
-   ],
-   "caption": "Overview comparison matrix for perthes' disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "perthes-disease-real-image",
-   "title": "Perthes' disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "perthes_disease-pathway",
+      "title": "Perthes' disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An idiopathic avascular necrosis of the femoral head in children, typically presenting between about 4 and 8 years and more common in boys",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fever, systemic upset, and an acutely irritable hip suggesting septic arthritis requiring urgent exclusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anteroposterior and frog-lateral radiographs of both hips to assess and stage the changes, MRI for early detection before radiographic changes appear and to assess the extent of necrosis, Clinical assessment of hip range"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve symptoms with simple analgesia, activity modification and physiotherapy to preserve hip range of movement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a child's knee pain to the knee and failing to examine the hip"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of perthes' disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "perthes_disease-matrix",
+      "title": "Perthes' disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An idiopathic avascular necrosis of the femoral head in children, typically presenting between about 4 and 8 years and more",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anteroposterior and frog-lateral radiographs of both hips to assess and stage the changes, MRI for early detection before",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transient synovitis (irritable hip), Septic arthritis or osteomyelitis of the hip, Slipped capital femoral epiphysis (in older",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve symptoms with simple analgesia, activity modification and physiotherapy to preserve hip range of movement",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a child's knee pain to the knee and failing to examine the hip",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for perthes' disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "perthes_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AP and frog-lateral radiographs of both hips",
+          "cells": [
+            {
+              "text": "Staging of the changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Early change before radiographic change; extent of necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical hip range of movement",
+          "cells": [
+            {
+              "text": "Abduction and internal rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigations to exclude infection or inflammatory arthritis",
+          "cells": [
+            {
+              "text": "Acute presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and skeletal survey",
+          "cells": [
+            {
+              "text": "Atypical or bilateral presentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perthes_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic arthritis or osteomyelitis of the hip",
+          "cells": [
+            {
+              "text": "Fever, systemic upset and an acutely irritable hip"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slipped capital femoral epiphysis",
+          "cells": [
+            {
+              "text": "Occurs in older children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal or epiphyseal dysplasia",
+          "cells": [
+            {
+              "text": "Bilateral or atypical disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "perthes_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Simple analgesia, activity modification and physiotherapy to preserve hip range of movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head containment",
+          "cells": [
+            {
+              "text": "Physiotherapy to preserve abduction and internal rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protected weight-bearing",
+          "cells": [
+            {
+              "text": "Weight-bearing protection and traction during painful active phases, to reduce load on the softened epiphysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical containment",
+          "cells": [
+            {
+              "text": "Femoral varus or pelvic acetabular osteotomy for older children or extensive involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial radiographs",
+          "cells": [
+            {
+              "text": "Monitor the fragmentation and reossification phases for sphericity and containment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Orthopaedic and physiotherapy care, tailored to age and extent of head involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Residual deformity and premature hip osteoarthritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "perthes_disease-dx-mgmt",
+      "title": "Diagnosis and management of Perthes' disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with limp or hip or knee pain; hip range of movement assessed",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (fever with irritable hip, bilateral disease, marked loss of hip movement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of septic arthritis in a febrile, irritable hip",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AP and frog-lateral radiographs of both hips; MRI for early change",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do radiographs or MRI show femoral head changes consistent with Perthes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transient synovitis, SCFE, developmental dysplasia or juvenile arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Relieve symptoms with analgesia, activity modification and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Preserve abduction and internal rotation to keep the femoral head contained",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Protected weight-bearing and traction during painful active phases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Femoral varus or pelvic osteotomy for older children or extensive involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial radiographs through fragmentation and reossification to track containment",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Self-limiting; many younger children remodel to a near-normal hip, older children less so",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

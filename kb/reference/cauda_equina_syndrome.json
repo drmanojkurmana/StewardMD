@@ -1,172 +1,419 @@
 {
- "id": "cauda_equina_syndrome",
- "name": "Cauda equina syndrome",
- "aliases": [
-  "CES",
-  "cauda equina compression"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A neurosurgical emergency caused by compression of the lumbosacral nerve roots below the conus, requiring rapid recognition and decompression",
-   "Classic features include bilateral sciatica, saddle (perineal) sensory loss, bladder and bowel dysfunction, and lower limb weakness",
-   "Urinary symptoms progress from difficulty voiding and reduced sensation to painless retention with overflow incontinence, a late and ominous sign",
-   "Reduced anal tone and impaired perineal sensation on examination support the diagnosis and should be specifically sought",
-   "Because it involves nerve roots rather than the cord itself, signs are typically lower motor neuron with areflexia and flaccid weakness",
-   "The most common cause is a large central lumbar disc herniation, but tumour, epidural abscess, haematoma, and trauma are important alternatives",
-   "Urgent MRI of the whole lumbosacral spine is the investigation of choice to confirm and localise the compression",
-   "Early surgical decompression offers the best chance of preserving bladder, bowel, and sexual function and neurological recovery"
+  "id": "cauda_equina_syndrome",
+  "name": "Cauda equina syndrome",
+  "aliases": [
+    "CES",
+    "cauda equina compression"
   ],
-  "pathophysiology": "Cauda equina syndrome results from compression of the bundle of lumbar and sacral nerve roots within the spinal canal below the termination of the spinal cord. Because these are peripheral nerve roots, compression produces lower motor neuron deficits, radicular pain, and disruption of the sacral parasympathetic and somatic supply to the bladder, bowel, and perineum. Sustained compression causes ischaemia and mechanical injury to the roots, and delayed relief risks irreversible loss of sphincter and sexual function.",
-  "additionalDifferentials": [
-   "Conus medullaris syndrome",
-   "Acute transverse myelitis or other myelopathy",
-   "Peripheral polyneuropathy such as Guillain-Barre syndrome",
-   "Isolated lumbar radiculopathy",
-   "Spinal cord or vertebral metastatic disease",
-   "Functional or non-organic urinary retention"
-  ],
-  "additionalInvestigations": [
-   "Emergency MRI of the lumbosacral spine to identify the site and cause of compression",
-   "CT myelography when MRI is contraindicated or unavailable",
-   "Post-void residual bladder volume measurement or bladder scan to assess retention",
-   "Assessment of anal tone and perineal sensation as part of the neurological examination",
-   "Investigations directed at the underlying cause, such as inflammatory markers when abscess is suspected"
-  ],
-  "redFlags": [
-   "New urinary retention, overflow incontinence, or loss of bladder/bowel control demanding emergency imaging and surgical decompression",
-   "Saddle anaesthesia and reduced anal sphincter tone",
-   "Bilateral leg pain, weakness, or numbness with sphincter disturbance",
-   "Fever and severe back pain suggesting an epidural abscess requiring urgent intervention"
-  ],
-  "prognosis": "Outcome depends heavily on the speed of diagnosis and decompression. Surgery performed before the onset of established urinary retention gives the best functional results, whereas delayed treatment is associated with persistent bladder, bowel, sexual, and motor deficits. Some residual dysfunction is common even after timely surgery in severe cases.",
-  "pitfalls": [
-   "Dismissing back pain with subtle urinary or perineal symptoms and missing the diagnosis until retention is established",
-   "Delaying MRI or specialist referral, forfeiting the window for effective decompression",
-   "Failing to examine perineal sensation and anal tone",
-   "Assuming normal voiding excludes the syndrome without checking post-void residual volume"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Emergency surgical decompression (discectomy or laminectomy) without delay to relieve compression of the lumbosacral roots",
-   "Urgent MRI of the lumbosacral spine to localise the level and cause and guide operative planning",
-   "Cause-directed treatment: evacuation of epidural haematoma, drainage plus antibiotics for abscess, or tumour-directed surgery, radiotherapy and corticosteroids",
-   "Bladder management with catheterisation for retention pending and following decompression",
-   "Analgesia and, where a compressive tumour or inflammatory cause is present, corticosteroids",
-   "Rehabilitation with physiotherapy and bladder, bowel and sexual-function retraining and support",
-   "Immediate escalation for progressive neurological deficit or evolving painless retention, and multidisciplinary follow-up across spinal surgery, urology and rehabilitation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cauda_equina_syndrome-pathway",
-   "title": "Cauda equina syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A neurosurgical emergency caused by compression of the lumbosacral nerve roots below the conus, requiring rapid recognition and decompression",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New urinary retention, overflow incontinence, or loss of bladder/bowel control demanding emergency imaging and surgical decompression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Emergency MRI of the lumbosacral spine to identify the site and cause of compression, CT myelography when MRI is contraindicated or unavailable, Post-void residual bladder volume measurement or bladder scan to assess"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Emergency surgical decompression (discectomy or laminectomy) without delay to relieve compression of the lumbosacral roots"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing back pain with subtle urinary or perineal symptoms and missing the diagnosis until retention is established"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cauda equina syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "cauda_equina_syndrome-matrix",
-   "title": "Cauda equina syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A neurosurgical emergency caused by compression of the lumbosacral nerve roots below the conus, requiring rapid recognition and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A neurosurgical emergency caused by compression of the lumbosacral nerve roots below the conus, requiring rapid recognition and decompression",
+      "Classic features include bilateral sciatica, saddle (perineal) sensory loss, bladder and bowel dysfunction, and lower limb weakness",
+      "Urinary symptoms progress from difficulty voiding and reduced sensation to painless retention with overflow incontinence, a late and ominous sign",
+      "Reduced anal tone and impaired perineal sensation on examination support the diagnosis and should be specifically sought",
+      "Because it involves nerve roots rather than the cord itself, signs are typically lower motor neuron with areflexia and flaccid weakness",
+      "The most common cause is a large central lumbar disc herniation, but tumour, epidural abscess, haematoma, and trauma are important alternatives",
+      "Urgent MRI of the whole lumbosacral spine is the investigation of choice to confirm and localise the compression",
+      "Early surgical decompression offers the best chance of preserving bladder, bowel, and sexual function and neurological recovery"
     ],
-    [
-     "Key Investigations",
-     "Emergency MRI of the lumbosacral spine to identify the site and cause of compression, CT myelography when MRI is contraindicated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cauda equina syndrome results from compression of the bundle of lumbar and sacral nerve roots within the spinal canal below the termination of the spinal cord. Because these are peripheral nerve roots, compression produces lower motor neuron deficits, radicular pain, and disruption of the sacral parasympathetic and somatic supply to the bladder, bowel, and perineum. Sustained compression causes ischaemia and mechanical injury to the roots, and delayed relief risks irreversible loss of sphincter and sexual function.",
+    "additionalDifferentials": [
+      "Conus medullaris syndrome",
+      "Acute transverse myelitis or other myelopathy",
+      "Peripheral polyneuropathy such as Guillain-Barre syndrome",
+      "Isolated lumbar radiculopathy",
+      "Spinal cord or vertebral metastatic disease",
+      "Functional or non-organic urinary retention"
     ],
-    [
-     "Primary Differentials",
-     "Conus medullaris syndrome, Acute transverse myelitis or other myelopathy, Peripheral polyneuropathy such as Guillain-Barre",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Emergency MRI of the lumbosacral spine to identify the site and cause of compression",
+      "CT myelography when MRI is contraindicated or unavailable",
+      "Post-void residual bladder volume measurement or bladder scan to assess retention",
+      "Assessment of anal tone and perineal sensation as part of the neurological examination",
+      "Investigations directed at the underlying cause, such as inflammatory markers when abscess is suspected"
     ],
-    [
-     "Management Strategy",
-     "Emergency surgical decompression (discectomy or laminectomy) without delay to relieve compression of the lumbosacral roots",
-     "Core treatment modality"
+    "redFlags": [
+      "New urinary retention, overflow incontinence, or loss of bladder/bowel control demanding emergency imaging and surgical decompression",
+      "Saddle anaesthesia and reduced anal sphincter tone",
+      "Bilateral leg pain, weakness, or numbness with sphincter disturbance",
+      "Fever and severe back pain suggesting an epidural abscess requiring urgent intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing back pain with subtle urinary or perineal symptoms and missing the diagnosis until retention is established",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends heavily on the speed of diagnosis and decompression. Surgery performed before the onset of established urinary retention gives the best functional results, whereas delayed treatment is associated with persistent bladder, bowel, sexual, and motor deficits. Some residual dysfunction is common even after timely surgery in severe cases.",
+    "pitfalls": [
+      "Dismissing back pain with subtle urinary or perineal symptoms and missing the diagnosis until retention is established",
+      "Delaying MRI or specialist referral, forfeiting the window for effective decompression",
+      "Failing to examine perineal sensation and anal tone",
+      "Assuming normal voiding excludes the syndrome without checking post-void residual volume"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Emergency surgical decompression (discectomy or laminectomy) without delay to relieve compression of the lumbosacral roots",
+      "Urgent MRI of the lumbosacral spine to localise the level and cause and guide operative planning",
+      "Cause-directed treatment: evacuation of epidural haematoma, drainage plus antibiotics for abscess, or tumour-directed surgery, radiotherapy and corticosteroids",
+      "Bladder management with catheterisation for retention pending and following decompression",
+      "Analgesia and, where a compressive tumour or inflammatory cause is present, corticosteroids",
+      "Rehabilitation with physiotherapy and bladder, bowel and sexual-function retraining and support",
+      "Immediate escalation for progressive neurological deficit or evolving painless retention, and multidisciplinary follow-up across spinal surgery, urology and rehabilitation"
     ]
-   ],
-   "caption": "Overview comparison matrix for cauda equina syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cauda-equina-syndrome-real-image",
-   "title": "Cauda equina syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cauda_equina_syndrome-pathway",
+      "title": "Cauda equina syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A neurosurgical emergency caused by compression of the lumbosacral nerve roots below the conus, requiring rapid recognition and decompression",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New urinary retention, overflow incontinence, or loss of bladder/bowel control demanding emergency imaging and surgical decompression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Emergency MRI of the lumbosacral spine to identify the site and cause of compression, CT myelography when MRI is contraindicated or unavailable, Post-void residual bladder volume measurement or bladder scan to assess"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Emergency surgical decompression (discectomy or laminectomy) without delay to relieve compression of the lumbosacral roots"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing back pain with subtle urinary or perineal symptoms and missing the diagnosis until retention is established"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cauda equina syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cauda_equina_syndrome-matrix",
+      "title": "Cauda equina syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A neurosurgical emergency caused by compression of the lumbosacral nerve roots below the conus, requiring rapid recognition and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Emergency MRI of the lumbosacral spine to identify the site and cause of compression, CT myelography when MRI is contraindicated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Conus medullaris syndrome, Acute transverse myelitis or other myelopathy, Peripheral polyneuropathy such as Guillain-Barre",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Emergency surgical decompression (discectomy or laminectomy) without delay to relieve compression of the lumbosacral roots",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing back pain with subtle urinary or perineal symptoms and missing the diagnosis until retention is established",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cauda equina syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cauda_equina_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency MRI of the lumbosacral spine",
+          "cells": [
+            {
+              "text": "Identifies the site and cause of compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT myelography",
+          "cells": [
+            {
+              "text": "Used when MRI is contraindicated or unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-void residual bladder volume or bladder scan",
+          "cells": [
+            {
+              "text": "Assesses retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal tone and perineal sensation",
+          "cells": [
+            {
+              "text": "Reduced anal tone and impaired perineal sensation support the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Used when an abscess is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cauda_equina_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency surgical decompression",
+          "cells": [
+            {
+              "text": "Discectomy or laminectomy without delay"
+            },
+            {
+              "text": "Best chance of preserving bladder, bowel and sexual function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cause-directed treatment",
+          "cells": [
+            {
+              "text": "Evacuate haematoma; drain and treat abscess; tumour-directed surgery, radiotherapy or corticosteroids"
+            },
+            {
+              "text": "Depends on the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder management",
+          "cells": [
+            {
+              "text": "Catheterisation for retention before and after decompression"
+            },
+            {
+              "text": "Retention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and corticosteroids",
+          "cells": [
+            {
+              "text": "Analgesia; corticosteroids where a compressive tumour or inflammatory cause is present"
+            },
+            {
+              "text": "Compressive tumour or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and bladder, bowel and sexual-function retraining"
+            },
+            {
+              "text": "Multidisciplinary support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cauda_equina_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cauda equina syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cauda equina syndrome: bilateral sciatica with saddle sensory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (retention, overflow, bowel loss, low anal tone, fever with back pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency MRI and surgical decompression without delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Emergency MRI of the lumbosacral spine; post-void residual bladder volume",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Compression on MRI with saddle sensory loss or retention confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Emergency discectomy or laminectomy to decompress the lumbosacral roots",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check conus syndrome, transverse myelitis, Guillain-Barre and metastases",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Catheterise for retention before and after decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the cause: drain abscess, evacuate haematoma or treat tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rehabilitation with bladder, bowel and sexual-function retraining",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery before retention gives best function; residual deficits are common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

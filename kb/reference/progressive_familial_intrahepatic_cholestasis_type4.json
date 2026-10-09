@@ -1,175 +1,481 @@
 {
- "id": "progressive_familial_intrahepatic_cholestasis_type4",
- "name": "Progressive familial intrahepatic cholestasis type 4",
- "aliases": [
-  "PFIC4",
-  "PFIC type 4",
-  "TJP2 deficiency",
-  "tight junction protein 2 cholestasis",
-  "low-GGT familial intrahepatic cholestasis"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatology / Genetics",
- "specialty": "Hepatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System / Suchy Liver Disease in Children",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive cholestatic disorder caused by biallelic loss-of-function mutations in TJP2, encoding tight junction protein 2",
-   "Presents in infancy with cholestasis, pruritus, jaundice, and fat-soluble vitamin malabsorption",
-   "Characteristically has a low or normal serum gamma-glutamyl transferase, like PFIC types 1 and 2",
-   "Coagulopathy from vitamin K deficiency can be an early and dangerous manifestation",
-   "TJP2 maintains the integrity of the hepatocyte tight junction at the bile canaliculus, so its loss allows bile to leak and injure hepatocytes",
-   "There is an associated risk of hepatocellular carcinoma, warranting long-term surveillance",
-   "Management is supportive with ursodeoxycholic acid, fat-soluble vitamins, antipruritic measures, biliary diversion in selected cases, and liver transplantation for progressive disease"
+  "id": "progressive_familial_intrahepatic_cholestasis_type4",
+  "name": "Progressive familial intrahepatic cholestasis type 4",
+  "aliases": [
+    "PFIC4",
+    "PFIC type 4",
+    "TJP2 deficiency",
+    "tight junction protein 2 cholestasis",
+    "low-GGT familial intrahepatic cholestasis"
   ],
-  "pathophysiology": "PFIC type 4 is caused by biallelic mutations in TJP2, which encodes a scaffolding protein of the hepatocyte tight junction that seals the bile canaliculus. Loss of functional TJP2 disrupts the paracellular barrier between hepatocytes, allowing concentrated bile to regurgitate into the hepatocyte and paracellular space, causing cholestasis and progressive hepatocellular injury. The gamma-glutamyl transferase remains low or normal because canalicular membrane enzymes are not shed as in obstructive cholestasis. Chronic injury may progress to fibrosis and cirrhosis, and there is an increased risk of hepatocellular carcinoma.",
-  "additionalDifferentials": [
-   "PFIC type 1 (ATP8B1) and type 2 (ABCB11)",
-   "PFIC type 5 (NR1H4/FXR)",
-   "Bile acid synthesis disorders",
-   "Familial hypercholanaemia",
-   "Benign recurrent intrahepatic cholestasis",
-   "Alagille syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum bile acids and gamma-glutamyl transferase (characteristically low/normal GGT)",
-   "Liver function tests and fractionated bilirubin",
-   "Coagulation profile and fat-soluble vitamin levels",
-   "Liver biopsy with immunostaining for TJP2 and assessment of fibrosis",
-   "Genetic testing of TJP2 and the wider PFIC gene panel",
-   "Alpha-fetoprotein and imaging for hepatocellular carcinoma surveillance"
-  ],
-  "redFlags": [
-   "Vitamin K-dependent coagulopathy with intracranial or other bleeding",
-   "Progression to cirrhosis with portal hypertension",
-   "Development of hepatocellular carcinoma",
-   "Intractable pruritus with severe impairment of quality of life"
-  ],
-  "prognosis": "The course is variable, ranging from milder cholestasis to progressive liver disease requiring transplantation; the increased risk of hepatocellular carcinoma means lifelong surveillance is important even when liver function appears preserved.",
-  "pitfalls": [
-   "Assuming a normal GGT excludes significant inherited cholestasis",
-   "Failing to institute hepatocellular carcinoma surveillance",
-   "Overlooking vitamin K deficiency as a cause of bleeding in infancy",
-   "Not recognising the disorder within the broader PFIC differential when genotype is unknown"
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "Suchy, Sokol & Balistreri, Liver Disease in Children"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Interrupt enterohepatic bile acid recycling with an ileal bile acid transporter inhibitor and use ursodeoxycholic acid to reduce cholestatic bile acid load and pruritus",
-   "Antipruritic therapy with rifampicin and bile acid sequestrants for troublesome itch",
-   "Fat-soluble vitamin supplementation with early and vigilant vitamin K replacement to correct the coagulopathy of vitamin K deficiency",
-   "Nutritional support with medium-chain-triglyceride-enriched feeds and growth monitoring",
-   "Liver transplantation for progressive liver failure, with biliary diversion in selected cases",
-   "Lifelong hepatocellular carcinoma surveillance with alpha-fetoprotein and liver imaging, given persistent risk even when synthetic function appears preserved",
-   "Genetic counselling and family screening for this autosomal recessive TJP2 disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_familial_intrahepatic_cholestasis_type4-pathway",
-   "title": "Progressive familial intrahepatic cholestasis type 4: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive cholestatic disorder caused by biallelic loss-of-function mutations in TJP2, encoding tight junction protein 2",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Vitamin K-dependent coagulopathy with intracranial or other bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum bile acids and gamma-glutamyl transferase (characteristically low/normal GGT), Liver function tests and fractionated bilirubin, Coagulation profile and fat-soluble vitamin levels"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Interrupt enterohepatic bile acid recycling with an ileal bile acid transporter inhibitor and use ursodeoxycholic acid to reduce cholestatic bile acid load and pruritus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal GGT excludes significant inherited cholestasis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive familial intrahepatic cholestasis type 4."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_familial_intrahepatic_cholestasis_type4-matrix",
-   "title": "Progressive familial intrahepatic cholestasis type 4: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive cholestatic disorder caused by biallelic loss-of-function mutations in TJP2, encoding tight junction",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatology / Genetics",
+  "specialty": "Hepatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System / Suchy Liver Disease in Children",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive cholestatic disorder caused by biallelic loss-of-function mutations in TJP2, encoding tight junction protein 2",
+      "Presents in infancy with cholestasis, pruritus, jaundice, and fat-soluble vitamin malabsorption",
+      "Characteristically has a low or normal serum gamma-glutamyl transferase, like PFIC types 1 and 2",
+      "Coagulopathy from vitamin K deficiency can be an early and dangerous manifestation",
+      "TJP2 maintains the integrity of the hepatocyte tight junction at the bile canaliculus, so its loss allows bile to leak and injure hepatocytes",
+      "There is an associated risk of hepatocellular carcinoma, warranting long-term surveillance",
+      "Management is supportive with ursodeoxycholic acid, fat-soluble vitamins, antipruritic measures, biliary diversion in selected cases, and liver transplantation for progressive disease"
     ],
-    [
-     "Key Investigations",
-     "Serum bile acids and gamma-glutamyl transferase (characteristically low/normal GGT), Liver function tests and fractionated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PFIC type 4 is caused by biallelic mutations in TJP2, which encodes a scaffolding protein of the hepatocyte tight junction that seals the bile canaliculus. Loss of functional TJP2 disrupts the paracellular barrier between hepatocytes, allowing concentrated bile to regurgitate into the hepatocyte and paracellular space, causing cholestasis and progressive hepatocellular injury. The gamma-glutamyl transferase remains low or normal because canalicular membrane enzymes are not shed as in obstructive cholestasis. Chronic injury may progress to fibrosis and cirrhosis, and there is an increased risk of hepatocellular carcinoma.",
+    "additionalDifferentials": [
+      "PFIC type 1 (ATP8B1) and type 2 (ABCB11)",
+      "PFIC type 5 (NR1H4/FXR)",
+      "Bile acid synthesis disorders",
+      "Familial hypercholanaemia",
+      "Benign recurrent intrahepatic cholestasis",
+      "Alagille syndrome"
     ],
-    [
-     "Primary Differentials",
-     "PFIC type 1 (ATP8B1) and type 2 (ABCB11), PFIC type 5 (NR1H4/FXR), Bile acid synthesis disorders",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum bile acids and gamma-glutamyl transferase (characteristically low/normal GGT)",
+      "Liver function tests and fractionated bilirubin",
+      "Coagulation profile and fat-soluble vitamin levels",
+      "Liver biopsy with immunostaining for TJP2 and assessment of fibrosis",
+      "Genetic testing of TJP2 and the wider PFIC gene panel",
+      "Alpha-fetoprotein and imaging for hepatocellular carcinoma surveillance"
     ],
-    [
-     "Management Strategy",
-     "Interrupt enterohepatic bile acid recycling with an ileal bile acid transporter inhibitor and use ursodeoxycholic acid to reduce",
-     "Core treatment modality"
+    "redFlags": [
+      "Vitamin K-dependent coagulopathy with intracranial or other bleeding",
+      "Progression to cirrhosis with portal hypertension",
+      "Development of hepatocellular carcinoma",
+      "Intractable pruritus with severe impairment of quality of life"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal GGT excludes significant inherited cholestasis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable, ranging from milder cholestasis to progressive liver disease requiring transplantation; the increased risk of hepatocellular carcinoma means lifelong surveillance is important even when liver function appears preserved.",
+    "pitfalls": [
+      "Assuming a normal GGT excludes significant inherited cholestasis",
+      "Failing to institute hepatocellular carcinoma surveillance",
+      "Overlooking vitamin K deficiency as a cause of bleeding in infancy",
+      "Not recognising the disorder within the broader PFIC differential when genotype is unknown"
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "Suchy, Sokol & Balistreri, Liver Disease in Children"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Interrupt enterohepatic bile acid recycling with an ileal bile acid transporter inhibitor and use ursodeoxycholic acid to reduce cholestatic bile acid load and pruritus",
+      "Antipruritic therapy with rifampicin and bile acid sequestrants for troublesome itch",
+      "Fat-soluble vitamin supplementation with early and vigilant vitamin K replacement to correct the coagulopathy of vitamin K deficiency",
+      "Nutritional support with medium-chain-triglyceride-enriched feeds and growth monitoring",
+      "Liver transplantation for progressive liver failure, with biliary diversion in selected cases",
+      "Lifelong hepatocellular carcinoma surveillance with alpha-fetoprotein and liver imaging, given persistent risk even when synthetic function appears preserved",
+      "Genetic counselling and family screening for this autosomal recessive TJP2 disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis type 4."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-familial-intrahepatic-cholestasis-type4-real-image",
-   "title": "Progressive familial intrahepatic cholestasis type 4: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "progressive_familial_intrahepatic_cholestasis_type4-pathway",
+      "title": "Progressive familial intrahepatic cholestasis type 4: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive cholestatic disorder caused by biallelic loss-of-function mutations in TJP2, encoding tight junction protein 2",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Vitamin K-dependent coagulopathy with intracranial or other bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum bile acids and gamma-glutamyl transferase (characteristically low/normal GGT), Liver function tests and fractionated bilirubin, Coagulation profile and fat-soluble vitamin levels"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Interrupt enterohepatic bile acid recycling with an ileal bile acid transporter inhibitor and use ursodeoxycholic acid to reduce cholestatic bile acid load and pruritus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal GGT excludes significant inherited cholestasis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive familial intrahepatic cholestasis type 4."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type4-matrix",
+      "title": "Progressive familial intrahepatic cholestasis type 4: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive cholestatic disorder caused by biallelic loss-of-function mutations in TJP2, encoding tight junction",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum bile acids and gamma-glutamyl transferase (characteristically low/normal GGT), Liver function tests and fractionated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "PFIC type 1 (ATP8B1) and type 2 (ABCB11), PFIC type 5 (NR1H4/FXR), Bile acid synthesis disorders",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Interrupt enterohepatic bile acid recycling with an ileal bile acid transporter inhibitor and use ursodeoxycholic acid to reduce",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal GGT excludes significant inherited cholestasis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive familial intrahepatic cholestasis type 4."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Suchy Liver Disease in Children",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type4-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum bile acids and GGT",
+          "cells": [
+            {
+              "text": "Cholestasis with characteristically low or normal GGT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and fractionated bilirubin",
+          "cells": [
+            {
+              "text": "Liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile and fat-soluble vitamin levels",
+          "cells": [
+            {
+              "text": "Coagulation and fat-soluble vitamin status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy with TJP2 immunostaining",
+          "cells": [
+            {
+              "text": "TJP2 expression and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TJP2 and wider PFIC gene panel testing",
+          "cells": [
+            {
+              "text": "Genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-fetoprotein and imaging",
+          "cells": [
+            {
+              "text": "Hepatocellular carcinoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type4-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "PFIC type 1 (ATP8B1) and type 2 (ABCB11)",
+          "cells": [
+            {
+              "text": "Different gene: ATP8B1 or ABCB11"
+            },
+            {
+              "text": "PFIC gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFIC type 5 (NR1H4/FXR)",
+          "cells": [
+            {
+              "text": "Different gene: NR1H4"
+            },
+            {
+              "text": "Genetic testing of NR1H4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benign recurrent intrahepatic cholestasis",
+          "cells": [
+            {
+              "text": "Milder allelic condition"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type4-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interrupt bile acid recycling",
+          "cells": [
+            {
+              "text": "Ileal bile acid transporter inhibitor, with ursodeoxycholic acid to reduce cholestatic bile acids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipruritic therapy",
+          "cells": [
+            {
+              "text": "Rifampicin and bile acid sequestrants for troublesome itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K replacement",
+          "cells": [
+            {
+              "text": "Early and vigilant replacement to correct vitamin K-deficiency coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Medium-chain-triglyceride-enriched feeds and growth monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant or diversion",
+          "cells": [
+            {
+              "text": "Liver transplantation for progressive liver failure; biliary diversion in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein and liver imaging, given persistent risk even when synthetic function appears preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive TJP2 disorder; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "progressive_familial_intrahepatic_cholestasis_type4-dx-mgmt",
+      "title": "Diagnosis and management of Progressive familial intrahepatic cholestasis type 4",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PFIC type 4 (TJP2): cholestasis with low or normal GGT",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Vitamin K-dependent coagulopathy, cirrhosis, HCC or intractable pruritus?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent transplant assessment for progressive liver failure or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bile acids, GGT, LFTs, coagulation, vitamins; TJP2 biopsy; TJP2 and PFIC panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TJP2 testing or biopsy confirm PFIC type 4?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PFIC types 1, 2 or 5, or benign recurrent cholestasis; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ileal bile acid transporter inhibitor with ursodeoxycholic acid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rifampicin and bile acid sequestrants for pruritus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early vitamin K replacement and fat-soluble vitamin support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver transplantation for progressive liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong HCC surveillance with alpha-fetoprotein and liver imaging",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

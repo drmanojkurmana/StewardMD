@@ -1,173 +1,229 @@
 {
- "id": "carbon_monoxide_poisoning",
- "name": "Carbon monoxide poisoning",
- "aliases": [
-  "CO poisoning",
-  "carbon monoxide toxicity",
-  "carboxyhaemoglobinaemia"
- ],
- "class": "non_infective",
- "system": "Toxicology / Environmental",
- "specialty": "Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Carbon monoxide binds haemoglobin with far greater affinity than oxygen, forming carboxyhaemoglobin and causing profound tissue hypoxia despite a normal arterial oxygen tension",
-   "Symptoms are non-specific (headache, nausea, dizziness, confusion) and are frequently misdiagnosed as viral illness or food poisoning, especially when several household members are affected",
-   "Standard pulse oximetry is misleading because it cannot distinguish carboxyhaemoglobin from oxyhaemoglobin; a co-oximeter or blood carboxyhaemoglobin level is required",
-   "The classic cherry-red skin appearance is uncommon and unreliable, and its absence does not exclude poisoning",
-   "The cornerstone of treatment is high-flow 100 percent oxygen, which greatly shortens the elimination half-life of carboxyhaemoglobin",
-   "Hyperbaric oxygen therapy is considered for severe poisoning (loss of consciousness, neurological signs, cardiac involvement, pregnancy, or very high levels) to reduce delayed neurological sequelae",
-   "Delayed neuropsychiatric syndrome (cognitive impairment, movement disorders, personality change) can develop days to weeks after apparent recovery",
-   "Suspect concurrent cyanide poisoning in victims of smoke inhalation from enclosed-space fires"
+  "id": "carbon_monoxide_poisoning",
+  "name": "Carbon monoxide poisoning",
+  "aliases": [
+    "CO poisoning",
+    "carbon monoxide toxicity",
+    "carboxyhaemoglobinaemia"
   ],
-  "pathophysiology": "Carbon monoxide is a colourless, odourless gas produced by incomplete combustion. It binds haemoglobin with roughly 200-250 times the affinity of oxygen, forming carboxyhaemoglobin, which both reduces oxygen-carrying capacity and shifts the oxyhaemoglobin dissociation curve leftward, impairing oxygen release to tissues. CO also binds myoglobin and inhibits mitochondrial cytochrome oxidase, causing cellular hypoxia and oxidative stress. The brain and heart, with high oxygen demand, are most vulnerable, and a lipid peroxidation and inflammatory cascade underlies the delayed neurological injury.",
-  "additionalDifferentials": [
-   "Viral illness or gastroenteritis",
-   "Migraine or tension headache",
-   "Cyanide poisoning (smoke inhalation)",
-   "Diabetic or other metabolic coma",
-   "Acute coronary syndrome"
-  ],
-  "additionalInvestigations": [
-   "Blood carboxyhaemoglobin level by co-oximetry (venous or arterial)",
-   "Arterial blood gas with metabolic acidosis and lactate",
-   "ECG and cardiac biomarkers to detect myocardial ischaemia",
-   "Neuroimaging in severe cases (basal ganglia changes)",
-   "Pregnancy test in women of childbearing age given fetal risk"
-  ],
-  "redFlags": [
-   "Any loss of consciousness, seizure, or focal neurological deficit",
-   "Chest pain, arrhythmia, or ECG evidence of ischaemia",
-   "Metabolic acidosis with elevated lactate indicating severe tissue hypoxia",
-   "Pregnancy, as the fetus is disproportionately affected",
-   "Multiple people from the same environment falling ill simultaneously"
-  ],
-  "prognosis": "Mild poisoning usually resolves fully with oxygen, but severe exposure can cause death or lasting neurological and cardiac damage; delayed neuropsychiatric sequelae may appear after seemingly complete recovery, and early high-flow or hyperbaric oxygen reduces this risk.",
-  "pitfalls": [
-   "Trusting a normal pulse oximeter reading and normal arterial oxygen tension to exclude poisoning",
-   "Attributing symptoms to a viral illness and discharging the patient back to the source",
-   "Relying on the cherry-red sign, which is usually absent",
-   "Overlooking coexisting cyanide toxicity in fire victims"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/national toxicology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate removal from the source and high-flow 100 percent oxygen by non-rebreather mask to accelerate carboxyhaemoglobin elimination",
-   "Hyperbaric oxygen therapy considered for severe poisoning, including loss of consciousness, neurological or cardiac involvement, or pregnancy",
-   "Continuous cardiac monitoring with ECG and cardiac biomarkers to detect myocardial ischaemia",
-   "Measurement and serial monitoring of carboxyhaemoglobin by co-oximetry to guide the duration of oxygen therapy",
-   "Supportive care with correction of metabolic acidosis and management of seizures",
-   "Prioritisation of the pregnant patient, continuing oxygen longer given foetal susceptibility",
-   "Follow-up for delayed neuropsychiatric sequelae and advice on source identification and prevention, including CO alarms and appliance servicing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "carbon_monoxide_poisoning-pathway",
-   "title": "Carbon monoxide poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Carbon monoxide binds haemoglobin with far greater affinity than oxygen, forming carboxyhaemoglobin and causing profound tissue hypoxia despite a normal arterial oxygen tension",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Any loss of consciousness, seizure, or focal neurological deficit",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood carboxyhaemoglobin level by co-oximetry (venous or arterial), Arterial blood gas with metabolic acidosis and lactate, ECG and cardiac biomarkers to detect myocardial ischaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate removal from the source and high-flow 100 percent oxygen by non-rebreather mask to accelerate carboxyhaemoglobin elimination"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Trusting a normal pulse oximeter reading and normal arterial oxygen tension to exclude poisoning"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of carbon monoxide poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "carbon_monoxide_poisoning-matrix",
-   "title": "Carbon monoxide poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Carbon monoxide binds haemoglobin with far greater affinity than oxygen, forming carboxyhaemoglobin and causing profound tissue",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Environmental",
+  "specialty": "Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Carbon monoxide binds haemoglobin with far greater affinity than oxygen, forming carboxyhaemoglobin and causing profound tissue hypoxia despite a normal arterial oxygen tension",
+      "Symptoms are non-specific (headache, nausea, dizziness, confusion) and are frequently misdiagnosed as viral illness or food poisoning, especially when several household members are affected",
+      "Standard pulse oximetry is misleading because it cannot distinguish carboxyhaemoglobin from oxyhaemoglobin; a co-oximeter or blood carboxyhaemoglobin level is required",
+      "The classic cherry-red skin appearance is uncommon and unreliable, and its absence does not exclude poisoning",
+      "The cornerstone of treatment is high-flow 100 percent oxygen, which greatly shortens the elimination half-life of carboxyhaemoglobin",
+      "Hyperbaric oxygen therapy is considered for severe poisoning (loss of consciousness, neurological signs, cardiac involvement, pregnancy, or very high levels) to reduce delayed neurological sequelae",
+      "Delayed neuropsychiatric syndrome (cognitive impairment, movement disorders, personality change) can develop days to weeks after apparent recovery",
+      "Suspect concurrent cyanide poisoning in victims of smoke inhalation from enclosed-space fires"
     ],
-    [
-     "Key Investigations",
-     "Blood carboxyhaemoglobin level by co-oximetry (venous or arterial), Arterial blood gas with metabolic acidosis and lactate, ECG",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Carbon monoxide is a colourless, odourless gas produced by incomplete combustion. It binds haemoglobin with roughly 200-250 times the affinity of oxygen, forming carboxyhaemoglobin, which both reduces oxygen-carrying capacity and shifts the oxyhaemoglobin dissociation curve leftward, impairing oxygen release to tissues. CO also binds myoglobin and inhibits mitochondrial cytochrome oxidase, causing cellular hypoxia and oxidative stress. The brain and heart, with high oxygen demand, are most vulnerable, and a lipid peroxidation and inflammatory cascade underlies the delayed neurological injury.",
+    "additionalDifferentials": [
+      "Viral illness or gastroenteritis",
+      "Migraine or tension headache",
+      "Cyanide poisoning (smoke inhalation)",
+      "Diabetic or other metabolic coma",
+      "Acute coronary syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Viral illness or gastroenteritis, Migraine or tension headache, Cyanide poisoning (smoke inhalation)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood carboxyhaemoglobin level by co-oximetry (venous or arterial)",
+      "Arterial blood gas with metabolic acidosis and lactate",
+      "ECG and cardiac biomarkers to detect myocardial ischaemia",
+      "Neuroimaging in severe cases (basal ganglia changes)",
+      "Pregnancy test in women of childbearing age given fetal risk"
     ],
-    [
-     "Management Strategy",
-     "Immediate removal from the source and high-flow 100 percent oxygen by non-rebreather mask to accelerate carboxyhaemoglobin",
-     "Core treatment modality"
+    "redFlags": [
+      "Any loss of consciousness, seizure, or focal neurological deficit",
+      "Chest pain, arrhythmia, or ECG evidence of ischaemia",
+      "Metabolic acidosis with elevated lactate indicating severe tissue hypoxia",
+      "Pregnancy, as the fetus is disproportionately affected",
+      "Multiple people from the same environment falling ill simultaneously"
     ],
-    [
-     "Clinical Pitfall",
-     "Trusting a normal pulse oximeter reading and normal arterial oxygen tension to exclude poisoning",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mild poisoning usually resolves fully with oxygen, but severe exposure can cause death or lasting neurological and cardiac damage; delayed neuropsychiatric sequelae may appear after seemingly complete recovery, and early high-flow or hyperbaric oxygen reduces this risk.",
+    "pitfalls": [
+      "Trusting a normal pulse oximeter reading and normal arterial oxygen tension to exclude poisoning",
+      "Attributing symptoms to a viral illness and discharging the patient back to the source",
+      "Relying on the cherry-red sign, which is usually absent",
+      "Overlooking coexisting cyanide toxicity in fire victims"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/national toxicology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate removal from the source and high-flow 100 percent oxygen by non-rebreather mask to accelerate carboxyhaemoglobin elimination",
+      "Hyperbaric oxygen therapy considered for severe poisoning, including loss of consciousness, neurological or cardiac involvement, or pregnancy",
+      "Continuous cardiac monitoring with ECG and cardiac biomarkers to detect myocardial ischaemia",
+      "Measurement and serial monitoring of carboxyhaemoglobin by co-oximetry to guide the duration of oxygen therapy",
+      "Supportive care with correction of metabolic acidosis and management of seizures",
+      "Prioritisation of the pregnant patient, continuing oxygen longer given foetal susceptibility",
+      "Follow-up for delayed neuropsychiatric sequelae and advice on source identification and prevention, including CO alarms and appliance servicing"
     ]
-   ],
-   "caption": "Overview comparison matrix for carbon monoxide poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "carbon-monoxide-poisoning-real-image",
-   "title": "Carbon monoxide poisoning: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "carbon_monoxide_poisoning-pathway",
+      "title": "Carbon monoxide poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Carbon monoxide binds haemoglobin with far greater affinity than oxygen, forming carboxyhaemoglobin and causing profound tissue hypoxia despite a normal arterial oxygen tension",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Any loss of consciousness, seizure, or focal neurological deficit",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood carboxyhaemoglobin level by co-oximetry (venous or arterial), Arterial blood gas with metabolic acidosis and lactate, ECG and cardiac biomarkers to detect myocardial ischaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate removal from the source and high-flow 100 percent oxygen by non-rebreather mask to accelerate carboxyhaemoglobin elimination"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Trusting a normal pulse oximeter reading and normal arterial oxygen tension to exclude poisoning"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of carbon monoxide poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "carbon_monoxide_poisoning-matrix",
+      "title": "Carbon monoxide poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Carbon monoxide binds haemoglobin with far greater affinity than oxygen, forming carboxyhaemoglobin and causing profound tissue",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood carboxyhaemoglobin level by co-oximetry (venous or arterial), Arterial blood gas with metabolic acidosis and lactate, ECG",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Viral illness or gastroenteritis, Migraine or tension headache, Cyanide poisoning (smoke inhalation)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate removal from the source and high-flow 100 percent oxygen by non-rebreather mask to accelerate carboxyhaemoglobin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Trusting a normal pulse oximeter reading and normal arterial oxygen tension to exclude poisoning",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for carbon monoxide poisoning."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carbon_monoxide_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in carbon monoxide poisoning",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Blood carboxyhaemoglobin by co-oximetry", "cells": [{"text": "Confirms exposure; standard pulse oximetry cannot distinguish it"}], "cite": "c1"},
+        {"parameter": "Arterial blood gas and lactate", "cells": [{"text": "Metabolic acidosis and severe tissue hypoxia"}], "cite": "c1"},
+        {"parameter": "ECG and cardiac biomarkers", "cells": [{"text": "Myocardial ischaemia"}], "cite": "c1"},
+        {"parameter": "Neuroimaging", "cells": [{"text": "Basal ganglia changes in severe cases"}], "cite": "c1"},
+        {"parameter": "Pregnancy test", "cells": [{"text": "Fetal risk in women of childbearing age"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "carbon_monoxide_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of headache, nausea and confusion",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Viral illness or gastroenteritis", "cells": [{"text": "Several household members affected at once points to a shared environmental source"}], "cite": "c1"},
+        {"parameter": "Cyanide poisoning", "cells": [{"text": "Concurrent toxicity in victims of smoke inhalation from enclosed-space fires"}], "cite": "c1"},
+        {"parameter": "Acute coronary syndrome", "cells": [{"text": "Chest pain, arrhythmia or ECG evidence of ischaemia; raised carboxyhaemoglobin confirms CO"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "carbon_monoxide_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options in carbon monoxide poisoning",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Removal from source and oxygen", "cells": [{"text": "High-flow 100 percent oxygen by non-rebreather mask to accelerate carboxyhaemoglobin elimination"}, {"text": "Cornerstone"}], "cite": "c1"},
+        {"parameter": "Hyperbaric oxygen", "cells": [{"text": "Severe poisoning: loss of consciousness, neurological or cardiac involvement, pregnancy or very high levels"}, {"text": "Reduces delayed neurological sequelae"}], "cite": "c1"},
+        {"parameter": "Cardiac monitoring", "cells": [{"text": "ECG and cardiac biomarkers for myocardial ischaemia"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Carboxyhaemoglobin monitoring", "cells": [{"text": "Serial co-oximetry to guide the duration of oxygen therapy"}, {"text": "Ongoing"}], "cite": "c1"},
+        {"parameter": "Supportive care", "cells": [{"text": "Correction of metabolic acidosis; management of seizures"}, {"text": "As indicated"}], "cite": "c1"},
+        {"parameter": "Pregnancy", "cells": [{"text": "Prioritised; oxygen continued longer given fetal susceptibility"}, {"text": "Fetal risk"}], "cite": "c1"},
+        {"parameter": "Follow-up and prevention", "cells": [{"text": "Review for delayed neuropsychiatric sequelae; CO alarms and appliance servicing"}, {"text": "After discharge"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carbon_monoxide_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of carbon monoxide poisoning",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Headache, nausea, dizziness or confusion, with others in the same environment unwell", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: loss of consciousness, seizure, focal deficit, chest pain, or pregnancy?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: high-flow oxygen; urgent hyperbaric oxygen assessment; cardiac monitoring", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Blood carboxyhaemoglobin by co-oximetry; blood gas and lactate; ECG; pregnancy test", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Carboxyhaemoglobin raised with a compatible exposure?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "High-flow oxygen until carboxyhaemoglobin falls; remove from source", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Consider viral illness, cyanide poisoning or acute coronary syndrome", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Mild cases resolve; delayed neuropsychiatric sequelae may appear after recovery", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n4", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

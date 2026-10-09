@@ -1,172 +1,470 @@
 {
- "id": "trichuriasis",
- "name": "Trichuriasis (whipworm)",
- "aliases": [
-  "whipworm infection",
-  "Trichuris trichiura infection",
-  "trichocephaliasis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell/Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Trichuriasis is caused by the whipworm Trichuris trichiura, a soil-transmitted nematode acquired by ingesting embryonated eggs from faecally contaminated soil, food or water",
-   "The adult worm has a slender whip-like anterior threaded into the colonic mucosa and a thicker posterior end, and lives predominantly in the caecum and ascending colon",
-   "Light infections are usually asymptomatic, whereas heavy burdens cause chronic colitis with abdominal pain, tenesmus and mucoid, sometimes bloody, diarrhoea",
-   "Massive infection in children can produce the Trichuris dysentery syndrome with rectal prolapse, anaemia and growth and cognitive impairment",
-   "Diagnosis is by identifying the characteristic barrel-shaped eggs with bipolar mucous plugs on stool microscopy",
-   "Adult worms may be seen on colonoscopy attached to an inflamed mucosa",
-   "Albendazole or mebendazole is used, though whipworm responds less reliably to single-dose therapy than other soil-transmitted helminths and may need repeated or combination courses"
+  "id": "trichuriasis",
+  "name": "Trichuriasis (whipworm)",
+  "aliases": [
+    "whipworm infection",
+    "Trichuris trichiura infection",
+    "trichocephaliasis"
   ],
-  "pathophysiology": "Trichuris trichiura eggs passed in faeces embryonate in warm, moist soil and become infective over several weeks; once ingested they hatch in the small intestine and the larvae mature as they move to the large bowel. The adult worm embeds its narrow anterior portion within a syncytial tunnel in the colonic epithelium while its posterior lies free in the lumen. Heavy worm burdens cause a chronic inflammatory colitis with mucosal oedema, friability and bleeding; the resulting colorectal inflammation, chronic blood loss and, in intense infection, mechanical and inflammatory effects on the rectum contribute to dysentery, rectal prolapse, anaemia and, in children, impaired growth and development.",
-  "additionalDifferentials": [
-   "Amoebic or bacillary dysentery",
-   "Inflammatory bowel disease",
-   "Other soil-transmitted helminthiases",
-   "Schistosomal colitis",
-   "Rectal prolapse from other causes",
-   "Colonic polyps or other mucosal disease"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy for barrel-shaped bipolar-plugged eggs",
-   "Faecal egg quantification such as Kato-Katz to gauge burden",
-   "Full blood count for anaemia and eosinophilia",
-   "Colonoscopy or sigmoidoscopy visualising adult worms in heavy infection",
-   "Assessment of growth and nutritional status in children",
-   "Iron studies where anaemia is present"
-  ],
-  "redFlags": [
-   "Trichuris dysentery syndrome with rectal prolapse in a child",
-   "Significant anaemia from chronic colonic blood loss",
-   "Growth faltering and developmental impairment with heavy burden",
-   "Severe or persistent dysenteric symptoms despite treatment"
-  ],
-  "prognosis": "Light infections are benign; heavy infections respond to treatment with reversal of dysentery, anaemia and growth effects, although eradication may require repeated courses and reinfection is common without sanitation.",
-  "pitfalls": [
-   "Expecting reliable cure from single-dose therapy, to which whipworm responds relatively poorly",
-   "Overlooking whipworm as a cause of paediatric rectal prolapse",
-   "Missing coexisting soil-transmitted helminths",
-   "Attributing chronic colitis to inflammatory bowel disease without stool parasitology in endemic settings"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with a benzimidazole anthelmintic (albendazole or mebendazole), favouring an extended course of mebendazole or combination with ivermectin for heavy colonic infection",
-   "Correct anaemia with iron supplementation and provide nutritional rehabilitation and growth support in affected children",
-   "In the Trichuris dysentery syndrome, reduce the worm burden with anthelmintics and manage rectal prolapse with gentle manual reduction",
-   "Confirm cure with follow-up stool microscopy and repeat treatment, as clearance in heavy infection may require repeated courses",
-   "Advise prevention through improved sanitation, hand hygiene and safe food and water, supported by community deworming programmes to limit reinfection",
-   "Involve paediatrics and infectious diseases for severe disease with dysentery, prolapse or growth and cognitive impairment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trichuriasis-pathway",
-   "title": "Trichuriasis (whipworm): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Trichuriasis is caused by the whipworm Trichuris trichiura, a soil-transmitted nematode acquired by ingesting embryonated eggs from faecally contaminated soil, food or water",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Trichuris dysentery syndrome with rectal prolapse in a child",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy for barrel-shaped bipolar-plugged eggs, Faecal egg quantification such as Kato-Katz to gauge burden, Full blood count for anaemia and eosinophilia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with a benzimidazole anthelmintic (albendazole or mebendazole), favouring an extended course of mebendazole or combination with ivermectin for heavy colonic infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting reliable cure from single-dose therapy, to which whipworm responds relatively poorly"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trichuriasis (whipworm)."
-  }
- ],
- "tables": [
-  {
-   "id": "trichuriasis-matrix",
-   "title": "Trichuriasis (whipworm): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Trichuriasis is caused by the whipworm Trichuris trichiura, a soil-transmitted nematode acquired by ingesting embryonated eggs",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell/Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Trichuriasis is caused by the whipworm Trichuris trichiura, a soil-transmitted nematode acquired by ingesting embryonated eggs from faecally contaminated soil, food or water",
+      "The adult worm has a slender whip-like anterior threaded into the colonic mucosa and a thicker posterior end, and lives predominantly in the caecum and ascending colon",
+      "Light infections are usually asymptomatic, whereas heavy burdens cause chronic colitis with abdominal pain, tenesmus and mucoid, sometimes bloody, diarrhoea",
+      "Massive infection in children can produce the Trichuris dysentery syndrome with rectal prolapse, anaemia and growth and cognitive impairment",
+      "Diagnosis is by identifying the characteristic barrel-shaped eggs with bipolar mucous plugs on stool microscopy",
+      "Adult worms may be seen on colonoscopy attached to an inflamed mucosa",
+      "Albendazole or mebendazole is used, though whipworm responds less reliably to single-dose therapy than other soil-transmitted helminths and may need repeated or combination courses"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy for barrel-shaped bipolar-plugged eggs, Faecal egg quantification such as Kato-Katz to gauge burden, Full blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trichuris trichiura eggs passed in faeces embryonate in warm, moist soil and become infective over several weeks; once ingested they hatch in the small intestine and the larvae mature as they move to the large bowel. The adult worm embeds its narrow anterior portion within a syncytial tunnel in the colonic epithelium while its posterior lies free in the lumen. Heavy worm burdens cause a chronic inflammatory colitis with mucosal oedema, friability and bleeding; the resulting colorectal inflammation, chronic blood loss and, in intense infection, mechanical and inflammatory effects on the rectum contribute to dysentery, rectal prolapse, anaemia and, in children, impaired growth and development.",
+    "additionalDifferentials": [
+      "Amoebic or bacillary dysentery",
+      "Inflammatory bowel disease",
+      "Other soil-transmitted helminthiases",
+      "Schistosomal colitis",
+      "Rectal prolapse from other causes",
+      "Colonic polyps or other mucosal disease"
     ],
-    [
-     "Primary Differentials",
-     "Amoebic or bacillary dysentery, Inflammatory bowel disease, Other soil-transmitted helminthiases",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy for barrel-shaped bipolar-plugged eggs",
+      "Faecal egg quantification such as Kato-Katz to gauge burden",
+      "Full blood count for anaemia and eosinophilia",
+      "Colonoscopy or sigmoidoscopy visualising adult worms in heavy infection",
+      "Assessment of growth and nutritional status in children",
+      "Iron studies where anaemia is present"
     ],
-    [
-     "Management Strategy",
-     "Treat with a benzimidazole anthelmintic (albendazole or mebendazole), favouring an extended course of mebendazole or combination",
-     "Core treatment modality"
+    "redFlags": [
+      "Trichuris dysentery syndrome with rectal prolapse in a child",
+      "Significant anaemia from chronic colonic blood loss",
+      "Growth faltering and developmental impairment with heavy burden",
+      "Severe or persistent dysenteric symptoms despite treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting reliable cure from single-dose therapy, to which whipworm responds relatively poorly",
-     "Prevent diagnostic or management error"
+    "prognosis": "Light infections are benign; heavy infections respond to treatment with reversal of dysentery, anaemia and growth effects, although eradication may require repeated courses and reinfection is common without sanitation.",
+    "pitfalls": [
+      "Expecting reliable cure from single-dose therapy, to which whipworm responds relatively poorly",
+      "Overlooking whipworm as a cause of paediatric rectal prolapse",
+      "Missing coexisting soil-transmitted helminths",
+      "Attributing chronic colitis to inflammatory bowel disease without stool parasitology in endemic settings"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with a benzimidazole anthelmintic (albendazole or mebendazole), favouring an extended course of mebendazole or combination with ivermectin for heavy colonic infection",
+      "Correct anaemia with iron supplementation and provide nutritional rehabilitation and growth support in affected children",
+      "In the Trichuris dysentery syndrome, reduce the worm burden with anthelmintics and manage rectal prolapse with gentle manual reduction",
+      "Confirm cure with follow-up stool microscopy and repeat treatment, as clearance in heavy infection may require repeated courses",
+      "Advise prevention through improved sanitation, hand hygiene and safe food and water, supported by community deworming programmes to limit reinfection",
+      "Involve paediatrics and infectious diseases for severe disease with dysentery, prolapse or growth and cognitive impairment"
     ]
-   ],
-   "caption": "Overview comparison matrix for trichuriasis (whipworm)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trichuriasis-real-image",
-   "title": "Trichuriasis (whipworm): Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "trichuriasis-pathway",
+      "title": "Trichuriasis (whipworm): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Trichuriasis is caused by the whipworm Trichuris trichiura, a soil-transmitted nematode acquired by ingesting embryonated eggs from faecally contaminated soil, food or water",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Trichuris dysentery syndrome with rectal prolapse in a child",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy for barrel-shaped bipolar-plugged eggs, Faecal egg quantification such as Kato-Katz to gauge burden, Full blood count for anaemia and eosinophilia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with a benzimidazole anthelmintic (albendazole or mebendazole), favouring an extended course of mebendazole or combination with ivermectin for heavy colonic infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting reliable cure from single-dose therapy, to which whipworm responds relatively poorly"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trichuriasis (whipworm)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trichuriasis-matrix",
+      "title": "Trichuriasis (whipworm): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Trichuriasis is caused by the whipworm Trichuris trichiura, a soil-transmitted nematode acquired by ingesting embryonated eggs",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy for barrel-shaped bipolar-plugged eggs, Faecal egg quantification such as Kato-Katz to gauge burden, Full blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Amoebic or bacillary dysentery, Inflammatory bowel disease, Other soil-transmitted helminthiases",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with a benzimidazole anthelmintic (albendazole or mebendazole), favouring an extended course of mebendazole or combination",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting reliable cure from single-dose therapy, to which whipworm responds relatively poorly",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trichuriasis (whipworm)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trichuriasis-dx-mgmt",
+      "title": "Diagnosis and management of Trichuriasis (whipworm)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trichuriasis: chronic colitis-type symptoms in an endemic setting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: rectal prolapse in a child, significant anaemia, or growth faltering?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric review for dysentery with prolapse or severe anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy and Kato-Katz; full blood count; iron studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are barrel-shaped eggs with bipolar plugs seen on stool microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider amoebic or bacillary dysentery, inflammatory bowel disease or other helminths",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Albendazole or mebendazole, with extended course for heavy infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron supplementation and nutritional rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gentle reduction of rectal prolapse in dysentery syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Follow-up stool microscopy and repeat treatment if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Sanitation, hand hygiene and community deworming",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Light infection benign; heavy infection improves but reinfection is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trichuriasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Barrel-shaped eggs with bipolar mucous plugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kato-Katz egg quantification",
+          "cells": [
+            {
+              "text": "Gauges worm burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia and eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy or sigmoidoscopy",
+          "cells": [
+            {
+              "text": "Adult worms attached to inflamed mucosa in heavy infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and nutritional assessment",
+          "cells": [
+            {
+              "text": "Affected children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies",
+          "cells": [
+            {
+              "text": "Where anaemia is present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichuriasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Stool parasitology needed in endemic settings before attributing colitis to IBD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other soil-transmitted helminthiases",
+          "cells": [
+            {
+              "text": "Different egg morphology on stool microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amoebic or bacillary dysentery",
+          "cells": [
+            {
+              "text": "Acute dysenteric illness; stool testing differentiates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trichuriasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Albendazole or mebendazole",
+          "cells": [
+            {
+              "text": "Benzimidazole anthelmintic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended mebendazole or ivermectin combination",
+          "cells": [
+            {
+              "text": "Heavy colonic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron supplementation and nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Anaemia and growth support in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle manual reduction of rectal prolapse",
+          "cells": [
+            {
+              "text": "Trichuris dysentery syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up stool microscopy",
+          "cells": [
+            {
+              "text": "Repeat courses if clearance is incomplete"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sanitation, hand hygiene and deworming programmes",
+          "cells": [
+            {
+              "text": "Limit reinfection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

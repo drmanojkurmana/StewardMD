@@ -1,176 +1,901 @@
 {
- "id": "episodic_ataxia",
- "name": "Episodic ataxia (types 1 and 2)",
- "aliases": [
-  "EA1",
-  "EA2",
-  "KCNA1-related episodic ataxia",
-  "CACNA1A-related episodic ataxia",
-  "paroxysmal cerebellar ataxia"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant channelopathies causing recurrent, discrete episodes of ataxia rather than steady progression",
-   "EA1 is caused by KCNA1 potassium-channel mutations and features brief attacks (seconds to minutes) often with interictal myokymia, frequently triggered by startle or exertion",
-   "EA2 is caused by CACNA1A calcium-channel mutations and features longer attacks (minutes to hours) often with vertigo, nausea and nystagmus, frequently triggered by stress, exercise or caffeine",
-   "Interictal downbeat or gaze-evoked nystagmus is common in EA2 and may persist between attacks",
-   "EA2 is allelic with SCA6 and familial hemiplegic migraine, and progressive cerebellar atrophy with fixed ataxia can develop over time",
-   "Acetazolamide is a recognised prophylactic option, particularly effective in EA2; carbamazepine can help the myokymia and attacks of EA1",
-   "MRI may be normal early but can show cerebellar (vermian) atrophy in longstanding EA2",
-   "Diagnosis rests on the episodic history, family history and targeted KCNA1 or CACNA1A testing"
+  "id": "episodic_ataxia",
+  "name": "Episodic ataxia (types 1 and 2)",
+  "aliases": [
+    "EA1",
+    "EA2",
+    "KCNA1-related episodic ataxia",
+    "CACNA1A-related episodic ataxia",
+    "paroxysmal cerebellar ataxia"
   ],
-  "pathophysiology": "The episodic ataxias are inherited ion-channel disorders of the cerebellum. EA1 results from mutations in KCNA1, encoding the Kv1.1 voltage-gated potassium channel; impaired potassium conductance causes neuronal hyperexcitability that manifests as peripheral myokymia and brief cerebellar attacks. EA2 results from mutations in CACNA1A, encoding the alpha-1A subunit of the P/Q-type calcium channel densely expressed in Purkinje cells; disturbed calcium signalling produces longer attacks of ataxia and vertigo and, over years, can lead to Purkinje cell loss and progressive cerebellar atrophy. CACNA1A's allelic relationship with SCA6 and familial hemiplegic migraine reflects a shared channel dysfunction.",
-  "additionalDifferentials": [
-   "Vestibular migraine and basilar-type migraine",
-   "Transient ischaemic attacks affecting the posterior circulation",
-   "Peripheral vestibular disorders (e.g. Meniere disease, benign paroxysmal positional vertigo)",
-   "Paroxysmal movement disorders and other paroxysmal neurological syndromes",
-   "Metabolic episodic ataxias (e.g. related to pyruvate dehydrogenase or urea-cycle disorders)",
-   "Functional or anxiety-related episodic symptoms",
-   "Early progressive spinocerebellar ataxia (notably SCA6)"
-  ],
-  "additionalInvestigations": [
-   "Targeted KCNA1 and CACNA1A genetic testing guided by attack duration and associated features",
-   "MRI brain to assess for cerebellar atrophy and exclude structural lesions",
-   "Electromyography to detect myokymia supporting EA1",
-   "Vestibular and oculomotor testing to characterise interictal nystagmus",
-   "Metabolic screening when a metabolic episodic ataxia is suspected",
-   "A trial of acetazolamide as a supportive diagnostic and therapeutic measure in EA2"
-  ],
-  "redFlags": [
-   "Focal neurological deficit or first presentation in later life suggesting cerebrovascular disease",
-   "Progressive fixed ataxia developing between attacks indicating cerebellar degeneration",
-   "Attacks with reduced consciousness or hemiplegic features prompting reassessment for hemiplegic migraine or seizures",
-   "Metabolic decompensation with encephalopathy pointing to an inborn error of metabolism"
-  ],
-  "prognosis": "Attack frequency often lessens with prophylaxis, and many patients function well between episodes; EA1 generally does not cause fixed deficits, whereas EA2 may lead to slowly progressive cerebellar signs and atrophy over time. Overall life expectancy is typically normal.",
-  "pitfalls": [
-   "Misdiagnosing recurrent attacks as vestibular migraine or anxiety and missing a treatable channelopathy",
-   "Not offering a trial of acetazolamide in EA2, where it can markedly reduce attacks",
-   "Overlooking interictal myokymia or nystagmus that point to the specific subtype",
-   "Assuming a normal early MRI excludes the diagnosis or future cerebellar atrophy"
-  ],
-  "references": [
-   "GeneReviews: Episodic Ataxia Type 1 and Type 2",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer acetazolamide as prophylaxis to reduce attack frequency, particularly effective in EA2",
-   "Treat EA1 with carbamazepine or another anticonvulsant to lessen attacks and interictal myokymia, and use 4-aminopyridine as an alternative prophylactic in EA2",
-   "Advise avoidance of individual triggers, such as startle and exertion in EA1 and stress, exercise, caffeine and alcohol in EA2",
-   "Provide vestibular and balance physiotherapy with falls-prevention advice for recurrent ataxia and nystagmus",
-   "Monitor EA2 for slowly progressive cerebellar atrophy and manage coexisting migraine, given the allelic link with familial hemiplegic migraine",
-   "Offer genetic counselling for the autosomal dominant KCNA1 and CACNA1A inheritance and arrange family testing, coordinated through neurology and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "episodic_ataxia-pathway",
-   "title": "Episodic ataxia (types 1 and 2): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant channelopathies causing recurrent, discrete episodes of ataxia rather than steady progression",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Focal neurological deficit or first presentation in later life suggesting cerebrovascular disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted KCNA1 and CACNA1A genetic testing guided by attack duration and associated features, MRI brain to assess for cerebellar atrophy and exclude structural lesions, Electromyography to detect myokymia supporting EA1"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer acetazolamide as prophylaxis to reduce attack frequency, particularly effective in EA2"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing recurrent attacks as vestibular migraine or anxiety and missing a treatable channelopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of episodic ataxia (types 1 and 2)."
-  }
- ],
- "tables": [
-  {
-   "id": "episodic_ataxia-matrix",
-   "title": "Episodic ataxia (types 1 and 2): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant channelopathies causing recurrent, discrete episodes of ataxia rather than steady progression",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant channelopathies causing recurrent, discrete episodes of ataxia rather than steady progression",
+      "EA1 is caused by KCNA1 potassium-channel mutations and features brief attacks (seconds to minutes) often with interictal myokymia, frequently triggered by startle or exertion",
+      "EA2 is caused by CACNA1A calcium-channel mutations and features longer attacks (minutes to hours) often with vertigo, nausea and nystagmus, frequently triggered by stress, exercise or caffeine",
+      "Interictal downbeat or gaze-evoked nystagmus is common in EA2 and may persist between attacks",
+      "EA2 is allelic with SCA6 and familial hemiplegic migraine, and progressive cerebellar atrophy with fixed ataxia can develop over time",
+      "Acetazolamide is a recognised prophylactic option, particularly effective in EA2; carbamazepine can help the myokymia and attacks of EA1",
+      "MRI may be normal early but can show cerebellar (vermian) atrophy in longstanding EA2",
+      "Diagnosis rests on the episodic history, family history and targeted KCNA1 or CACNA1A testing"
     ],
-    [
-     "Key Investigations",
-     "Targeted KCNA1 and CACNA1A genetic testing guided by attack duration and associated features, MRI brain to assess for cerebellar",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The episodic ataxias are inherited ion-channel disorders of the cerebellum. EA1 results from mutations in KCNA1, encoding the Kv1.1 voltage-gated potassium channel; impaired potassium conductance causes neuronal hyperexcitability that manifests as peripheral myokymia and brief cerebellar attacks. EA2 results from mutations in CACNA1A, encoding the alpha-1A subunit of the P/Q-type calcium channel densely expressed in Purkinje cells; disturbed calcium signalling produces longer attacks of ataxia and vertigo and, over years, can lead to Purkinje cell loss and progressive cerebellar atrophy. CACNA1A's allelic relationship with SCA6 and familial hemiplegic migraine reflects a shared channel dysfunction.",
+    "additionalDifferentials": [
+      "Vestibular migraine and basilar-type migraine",
+      "Transient ischaemic attacks affecting the posterior circulation",
+      "Peripheral vestibular disorders (e.g. Meniere disease, benign paroxysmal positional vertigo)",
+      "Paroxysmal movement disorders and other paroxysmal neurological syndromes",
+      "Metabolic episodic ataxias (e.g. related to pyruvate dehydrogenase or urea-cycle disorders)",
+      "Functional or anxiety-related episodic symptoms",
+      "Early progressive spinocerebellar ataxia (notably SCA6)"
     ],
-    [
-     "Primary Differentials",
-     "Vestibular migraine and basilar-type migraine, Transient ischaemic attacks affecting the posterior circulation, Peripheral",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted KCNA1 and CACNA1A genetic testing guided by attack duration and associated features",
+      "MRI brain to assess for cerebellar atrophy and exclude structural lesions",
+      "Electromyography to detect myokymia supporting EA1",
+      "Vestibular and oculomotor testing to characterise interictal nystagmus",
+      "Metabolic screening when a metabolic episodic ataxia is suspected",
+      "A trial of acetazolamide as a supportive diagnostic and therapeutic measure in EA2"
     ],
-    [
-     "Management Strategy",
-     "Offer acetazolamide as prophylaxis to reduce attack frequency, particularly effective in EA2",
-     "Core treatment modality"
+    "redFlags": [
+      "Focal neurological deficit or first presentation in later life suggesting cerebrovascular disease",
+      "Progressive fixed ataxia developing between attacks indicating cerebellar degeneration",
+      "Attacks with reduced consciousness or hemiplegic features prompting reassessment for hemiplegic migraine or seizures",
+      "Metabolic decompensation with encephalopathy pointing to an inborn error of metabolism"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing recurrent attacks as vestibular migraine or anxiety and missing a treatable channelopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Attack frequency often lessens with prophylaxis, and many patients function well between episodes; EA1 generally does not cause fixed deficits, whereas EA2 may lead to slowly progressive cerebellar signs and atrophy over time. Overall life expectancy is typically normal.",
+    "pitfalls": [
+      "Misdiagnosing recurrent attacks as vestibular migraine or anxiety and missing a treatable channelopathy",
+      "Not offering a trial of acetazolamide in EA2, where it can markedly reduce attacks",
+      "Overlooking interictal myokymia or nystagmus that point to the specific subtype",
+      "Assuming a normal early MRI excludes the diagnosis or future cerebellar atrophy"
+    ],
+    "references": [
+      "GeneReviews: Episodic Ataxia Type 1 and Type 2",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer acetazolamide as prophylaxis to reduce attack frequency, particularly effective in EA2",
+      "Treat EA1 with carbamazepine or another anticonvulsant to lessen attacks and interictal myokymia, and use 4-aminopyridine as an alternative prophylactic in EA2",
+      "Advise avoidance of individual triggers, such as startle and exertion in EA1 and stress, exercise, caffeine and alcohol in EA2",
+      "Provide vestibular and balance physiotherapy with falls-prevention advice for recurrent ataxia and nystagmus",
+      "Monitor EA2 for slowly progressive cerebellar atrophy and manage coexisting migraine, given the allelic link with familial hemiplegic migraine",
+      "Offer genetic counselling for the autosomal dominant KCNA1 and CACNA1A inheritance and arrange family testing, coordinated through neurology and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for episodic ataxia (types 1 and 2)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "episodic-ataxia-real-image",
-   "title": "Episodic ataxia (types 1 and 2): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "episodic_ataxia-pathway",
+      "title": "Episodic ataxia (types 1 and 2): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant channelopathies causing recurrent, discrete episodes of ataxia rather than steady progression",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Focal neurological deficit or first presentation in later life suggesting cerebrovascular disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted KCNA1 and CACNA1A genetic testing guided by attack duration and associated features, MRI brain to assess for cerebellar atrophy and exclude structural lesions, Electromyography to detect myokymia supporting EA1"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer acetazolamide as prophylaxis to reduce attack frequency, particularly effective in EA2"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing recurrent attacks as vestibular migraine or anxiety and missing a treatable channelopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of episodic ataxia (types 1 and 2)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "episodic_ataxia-matrix",
+      "title": "Episodic ataxia (types 1 and 2): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant channelopathies causing recurrent, discrete episodes of ataxia rather than steady progression",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted KCNA1 and CACNA1A genetic testing guided by attack duration and associated features, MRI brain to assess for cerebellar",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vestibular migraine and basilar-type migraine, Transient ischaemic attacks affecting the posterior circulation, Peripheral",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer acetazolamide as prophylaxis to reduce attack frequency, particularly effective in EA2",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing recurrent attacks as vestibular migraine or anxiety and missing a treatable channelopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for episodic ataxia (types 1 and 2)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology / GeneReviews",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 24-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 366-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "episodic_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted KCNA1 and CACNA1A genetic testing",
+          "cells": [
+            {
+              "text": "Guided by attack duration and associated features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy; structural lesions excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Myokymia, supporting EA1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular and oculomotor testing",
+          "cells": [
+            {
+              "text": "Interictal nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening",
+          "cells": [
+            {
+              "text": "When a metabolic episodic ataxia is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of acetazolamide",
+          "cells": [
+            {
+              "text": "Supportive diagnostic and therapeutic measure in EA2"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "episodic_ataxia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Early progressive spinocerebellar ataxia (SCA6)",
+          "cells": [
+            {
+              "text": "Progressive fixed ataxia developing between attacks suggests degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient ischaemic attacks (posterior circulation)",
+          "cells": [
+            {
+              "text": "Focal deficit or first presentation in later life suggests cerebrovascular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "episodic_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acetazolamide prophylaxis",
+          "cells": [
+            {
+              "text": "Reduces attack frequency; particularly effective in EA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbamazepine or another anticonvulsant",
+          "cells": [
+            {
+              "text": "EA1: lessens attacks and interictal myokymia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "4-aminopyridine",
+          "cells": [
+            {
+              "text": "Alternative prophylaxis in EA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Startle and exertion in EA1; stress, exercise, caffeine and alcohol in EA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular and balance physiotherapy",
+          "cells": [
+            {
+              "text": "With falls-prevention advice for recurrent ataxia and nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring in EA2",
+          "cells": [
+            {
+              "text": "Slowly progressive cerebellar atrophy; manage coexisting migraine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant KCNA1 and CACNA1A inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "episodic_ataxia-ddx-2",
+      "kind": "ddx",
+      "title": "Cerebellar ataxia versus sensory ataxia versus frontal gait",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Cerebellar ataxia",
+        "Sensory ataxia",
+        "Frontal gait"
+      ],
+      "rows": [
+        {
+          "parameter": "Base of support",
+          "cells": [
+            {
+              "text": "Wide-based"
+            },
+            {
+              "text": "Narrow base, looks down"
+            },
+            {
+              "text": "Wide-based"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Velocity",
+          "cells": [
+            {
+              "text": "Variable"
+            },
+            {
+              "text": "Slow"
+            },
+            {
+              "text": "Very slow"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stride",
+          "cells": [
+            {
+              "text": "Irregular, lurching"
+            },
+            {
+              "text": "Regular with path deviation"
+            },
+            {
+              "text": "Short, shuffling"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Romberg",
+          "cells": [
+            {
+              "text": "+/-"
+            },
+            {
+              "text": "Unsteady, falls"
+            },
+            {
+              "text": "+/-"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heel to shin",
+          "cells": [
+            {
+              "text": "Abnormal"
+            },
+            {
+              "text": "+/-"
+            },
+            {
+              "text": "Normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Initiation",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Hesitant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Turns",
+          "cells": [
+            {
+              "text": "Unsteady"
+            },
+            {
+              "text": "+/-"
+            },
+            {
+              "text": "Hesitant, multistep"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Postural instability",
+          "cells": [
+            {
+              "text": "+"
+            },
+            {
+              "text": "+++"
+            },
+            {
+              "text": "++++; poor postural synergies when rising from a chair"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Falls",
+          "cells": [
+            {
+              "text": "Late event"
+            },
+            {
+              "text": "Frequent"
+            },
+            {
+              "text": "Frequent"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "episodic_ataxia-ddx-3",
+      "kind": "ddx",
+      "title": "Neurologic channelopathies: channel and gene",
+      "rowHeader": "Condition",
+      "columns": [
+        "Category",
+        "Channel type",
+        "Mutated gene"
+      ],
+      "rows": [
+        {
+          "parameter": "Episodic ataxia 1",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNA1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Episodic ataxia 2",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Spinocerebellar ataxia 6",
+          "cells": [
+            {
+              "text": "Genetic (ataxias)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 1",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Familial hemiplegic migraine 3",
+          "cells": [
+            {
+              "text": "Genetic (migraine)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN1A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Benign neonatal familial convulsions",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ2, KCNQ3, SCN1B"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Generalized epilepsy with febrile convulsions plus",
+          "cells": [
+            {
+              "text": "Genetic (epilepsy)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "not separately listed (shares the cell above)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hyperkalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hypokalemic periodic paralysis",
+          "cells": [
+            {
+              "text": "Genetic (periodic paralysis)"
+            },
+            {
+              "text": "Ca"
+            },
+            {
+              "text": "CACNL1A3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Cl"
+            },
+            {
+              "text": "CLCN1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paramyotonia congenita",
+          "cells": [
+            {
+              "text": "Genetic (myotonia)"
+            },
+            {
+              "text": "Na"
+            },
+            {
+              "text": "SCN4A"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Jervell and Lange-Nielsen syndrome (deafness, prolonged QT, arrhythmia)",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ1, KCNE1"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Autosomal dominant progressive deafness",
+          "cells": [
+            {
+              "text": "Genetic (deafness)"
+            },
+            {
+              "text": "K"
+            },
+            {
+              "text": "KCNQ4"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Limbic encephalitis",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Acquired neuromyotonia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Kv1"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cerebellar ataxia",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lambert-Eaton syndrome",
+          "cells": [
+            {
+              "text": "Autoimmune (paraneoplastic)"
+            },
+            {
+              "text": "Ca (P/Q type)"
+            },
+            {
+              "text": "none listed"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Chapter cross-references in the source are omitted."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "episodic_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of Episodic ataxia (types 1 and 2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent discrete episodes of ataxia with normal function between attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (focal deficit, progressive fixed ataxia, impaired consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for cerebrovascular disease, hemiplegic migraine, seizures or metabolic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Attack history, KCNA1 and CACNA1A testing, MRI brain, EMG and nystagmus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Myokymia (EA1) or interictal nystagmus (EA2) with a matching gene variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vestibular migraine, paroxysmal disorders or metabolic ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Acetazolamide prophylaxis, particularly effective in EA2",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Carbamazepine for EA1 attacks and myokymia; 4-aminopyridine in EA2",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trigger avoidance and vestibular physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor EA2 for slowly progressive cerebellar atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Attacks often lessen with prophylaxis; EA1 generally leaves no fixed deficit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

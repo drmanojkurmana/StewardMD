@@ -1,168 +1,437 @@
 {
- "id": "van_neck_disease",
- "name": "Van Neck disease",
- "aliases": [
-  "ischiopubic osteochondrosis",
-  "van Neck-Odelberg disease"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Orthopaedics / Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Paediatric orthopaedic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign osteochondrosis of the ischiopubic synchondrosis in children",
-   "It represents exuberant or asymmetric ossification at the junction of the ischium and pubis during normal development",
-   "It may be asymptomatic or cause groin, buttock or hip pain and a limp",
-   "The key issue is that its radiographic appearance can mimic osteomyelitis, Ewing sarcoma or a healing fracture",
-   "MRI can show marrow oedema that adds to the confusion with more serious pathology",
-   "Recognition of this normal variant avoids unnecessary biopsy and treatment"
+  "id": "van_neck_disease",
+  "name": "Van Neck disease",
+  "aliases": [
+    "ischiopubic osteochondrosis",
+    "van Neck-Odelberg disease"
   ],
-  "pathophysiology": "Van Neck disease reflects a normal but sometimes asymmetric or prominent stage in the ossification and fusion of the ischiopubic synchondrosis, the cartilaginous junction between the ischium and pubis that normally fuses in later childhood. The expanded, sometimes fragmented, appearance and associated marrow oedema are part of physiological development, but they can radiographically resemble infection or tumour. It is essentially a self-resolving developmental variant rather than a disease.",
-  "additionalDifferentials": [
-   "Osteomyelitis of the pelvis",
-   "Ewing sarcoma or other bone tumour",
-   "Pelvic (ischiopubic) stress or avulsion fracture",
-   "Other osteochondroses",
-   "Septic arthritis of the hip"
-  ],
-  "additionalInvestigations": [
-   "Radiographs, ideally with comparison of both sides and follow-up",
-   "MRI where infection or tumour must be excluded",
-   "Inflammatory markers to help exclude infection",
-   "Clinical correlation and observation over time",
-   "Avoidance of biopsy once the diagnosis is recognised"
-  ],
-  "redFlags": [
-   "Systemic features or raised inflammatory markers suggesting infection",
-   "Aggressive imaging features or a soft-tissue mass suggesting tumour",
-   "Progressive rather than resolving changes",
-   "Severe or worsening pain"
-  ],
-  "prognosis": "The condition is benign and resolves as the synchondrosis fuses, with an excellent prognosis once more serious mimics are excluded.",
-  "pitfalls": [
-   "Mistaking the normal variant for osteomyelitis or Ewing sarcoma and performing biopsy",
-   "Over-investigating an asymptomatic incidental finding",
-   "Failing to compare with the contralateral side",
-   "Not correlating imaging with the benign clinical picture"
-  ],
-  "references": [
-   "Paediatric orthopaedic references (standard reference)",
-   "Musculoskeletal imaging references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognition as a benign, self-limiting developmental variant to avoid unnecessary intervention",
-   "Reassurance and observation, as the condition resolves once the ischiopubic synchondrosis fuses",
-   "Activity modification with simple analgesia such as paracetamol or NSAIDs for pain and limp",
-   "Comparison radiographs of both sides with follow-up imaging to confirm the diagnosis",
-   "Inflammatory markers and MRI reserved for cases where osteomyelitis or tumour must be excluded",
-   "Avoidance of biopsy once the diagnosis is recognised"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "van_neck_disease-pathway",
-   "title": "Van Neck disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign osteochondrosis of the ischiopubic synchondrosis in children",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Systemic features or raised inflammatory markers suggesting infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Radiographs, ideally with comparison of both sides and follow-up, MRI where infection or tumour must be excluded, Inflammatory markers to help exclude infection"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognition as a benign, self-limiting developmental variant to avoid unnecessary intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the normal variant for osteomyelitis or Ewing sarcoma and performing biopsy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of van neck disease."
-  }
- ],
- "tables": [
-  {
-   "id": "van_neck_disease-matrix",
-   "title": "Van Neck disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign osteochondrosis of the ischiopubic synchondrosis in children",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Orthopaedics / Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Paediatric orthopaedic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign osteochondrosis of the ischiopubic synchondrosis in children",
+      "It represents exuberant or asymmetric ossification at the junction of the ischium and pubis during normal development",
+      "It may be asymptomatic or cause groin, buttock or hip pain and a limp",
+      "The key issue is that its radiographic appearance can mimic osteomyelitis, Ewing sarcoma or a healing fracture",
+      "MRI can show marrow oedema that adds to the confusion with more serious pathology",
+      "Recognition of this normal variant avoids unnecessary biopsy and treatment"
     ],
-    [
-     "Key Investigations",
-     "Radiographs, ideally with comparison of both sides and follow-up, MRI where infection or tumour must be excluded, Inflammatory",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Van Neck disease reflects a normal but sometimes asymmetric or prominent stage in the ossification and fusion of the ischiopubic synchondrosis, the cartilaginous junction between the ischium and pubis that normally fuses in later childhood. The expanded, sometimes fragmented, appearance and associated marrow oedema are part of physiological development, but they can radiographically resemble infection or tumour. It is essentially a self-resolving developmental variant rather than a disease.",
+    "additionalDifferentials": [
+      "Osteomyelitis of the pelvis",
+      "Ewing sarcoma or other bone tumour",
+      "Pelvic (ischiopubic) stress or avulsion fracture",
+      "Other osteochondroses",
+      "Septic arthritis of the hip"
     ],
-    [
-     "Primary Differentials",
-     "Osteomyelitis of the pelvis, Ewing sarcoma or other bone tumour, Pelvic (ischiopubic) stress or avulsion fracture",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Radiographs, ideally with comparison of both sides and follow-up",
+      "MRI where infection or tumour must be excluded",
+      "Inflammatory markers to help exclude infection",
+      "Clinical correlation and observation over time",
+      "Avoidance of biopsy once the diagnosis is recognised"
     ],
-    [
-     "Management Strategy",
-     "Recognition as a benign, self-limiting developmental variant to avoid unnecessary intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "Systemic features or raised inflammatory markers suggesting infection",
+      "Aggressive imaging features or a soft-tissue mass suggesting tumour",
+      "Progressive rather than resolving changes",
+      "Severe or worsening pain"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the normal variant for osteomyelitis or Ewing sarcoma and performing biopsy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and resolves as the synchondrosis fuses, with an excellent prognosis once more serious mimics are excluded.",
+    "pitfalls": [
+      "Mistaking the normal variant for osteomyelitis or Ewing sarcoma and performing biopsy",
+      "Over-investigating an asymptomatic incidental finding",
+      "Failing to compare with the contralateral side",
+      "Not correlating imaging with the benign clinical picture"
+    ],
+    "references": [
+      "Paediatric orthopaedic references (standard reference)",
+      "Musculoskeletal imaging references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognition as a benign, self-limiting developmental variant to avoid unnecessary intervention",
+      "Reassurance and observation, as the condition resolves once the ischiopubic synchondrosis fuses",
+      "Activity modification with simple analgesia such as paracetamol or NSAIDs for pain and limp",
+      "Comparison radiographs of both sides with follow-up imaging to confirm the diagnosis",
+      "Inflammatory markers and MRI reserved for cases where osteomyelitis or tumour must be excluded",
+      "Avoidance of biopsy once the diagnosis is recognised"
     ]
-   ],
-   "caption": "Overview comparison matrix for van neck disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "van-neck-disease-real-image",
-   "title": "Van Neck disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "van_neck_disease-pathway",
+      "title": "Van Neck disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign osteochondrosis of the ischiopubic synchondrosis in children",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Systemic features or raised inflammatory markers suggesting infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Radiographs, ideally with comparison of both sides and follow-up, MRI where infection or tumour must be excluded, Inflammatory markers to help exclude infection"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognition as a benign, self-limiting developmental variant to avoid unnecessary intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the normal variant for osteomyelitis or Ewing sarcoma and performing biopsy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of van neck disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "van_neck_disease-matrix",
+      "title": "Van Neck disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign osteochondrosis of the ischiopubic synchondrosis in children",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Radiographs, ideally with comparison of both sides and follow-up, MRI where infection or tumour must be excluded, Inflammatory",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Osteomyelitis of the pelvis, Ewing sarcoma or other bone tumour, Pelvic (ischiopubic) stress or avulsion fracture",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognition as a benign, self-limiting developmental variant to avoid unnecessary intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the normal variant for osteomyelitis or Ewing sarcoma and performing biopsy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for van neck disease."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric orthopaedic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "van_neck_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs of both sides with follow-up",
+          "cells": [
+            {
+              "text": "Exuberant or asymmetric ischiopubic ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Excludes infection or tumour where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "Helps exclude infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical observation over time",
+          "cells": [
+            {
+              "text": "Resolution as the synchondrosis fuses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "van_neck_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteomyelitis of the pelvis",
+          "cells": [
+            {
+              "text": "Radiographic appearance can mimic it; inflammatory markers help separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ewing sarcoma or other bone tumour",
+          "cells": [
+            {
+              "text": "Aggressive imaging features or a soft-tissue mass suggest tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic stress or avulsion fracture",
+          "cells": [
+            {
+              "text": "A healing fracture can mimic the appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other osteochondroses",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "van_neck_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognition as a benign variant",
+          "cells": [
+            {
+              "text": "Avoids unnecessary intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Resolves once the ischiopubic synchondrosis fuses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification and analgesia",
+          "cells": [
+            {
+              "text": "Paracetamol or NSAIDs for pain and limp"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comparison radiographs with follow-up",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid biopsy",
+          "cells": [
+            {
+              "text": "Once the diagnosis is recognised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "van_neck_disease-dx-mgmt",
+      "title": "Diagnosis and management of Van Neck disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected van Neck disease: groin or hip pain and limp in a growing child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (systemic features, raised markers or tumour features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for infection or tumour before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Comparison radiographs of both sides, inflammatory markers, MRI if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the change a symmetric benign ischiopubic variant on follow-up imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider osteomyelitis, Ewing sarcoma or pelvic stress fracture; investigate further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recognise as a benign variant to avoid unnecessary intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassurance and observation until the synchondrosis fuses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Activity modification with paracetamol or NSAIDs for pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid biopsy once the diagnosis is recognised",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting; resolves as the ischiopubic synchondrosis fuses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

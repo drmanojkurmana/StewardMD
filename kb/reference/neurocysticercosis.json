@@ -1,178 +1,509 @@
 {
- "id": "neurocysticercosis",
- "name": "Neurocysticercosis",
- "aliases": [
-  "NCC",
-  "CNS cysticercosis",
-  "cerebral cysticercosis"
- ],
- "class": "infective",
- "system": "Infectious / Tropical",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Central nervous system infection by larval Taenia solium and one of the leading causes of acquired epilepsy in India and other endemic regions",
-   "Seizures are the most frequent presentation, typically from a single or few degenerating parenchymal cysts",
-   "Clinical features depend on cyst number, location and stage, ranging from asymptomatic calcified lesions to disabling neurological disease",
-   "Extraparenchymal disease (intraventricular, subarachnoid or racemose forms) can obstruct cerebrospinal fluid flow and cause hydrocephalus, and behaves more aggressively",
-   "MRI and CT are central to diagnosis; the finding of a cyst with a visible scolex is highly characteristic, and calcified lesions indicate old, dead cysts",
-   "Antiparasitic therapy is combined with corticosteroids to blunt the inflammatory reaction to dying cysts, with antiseizure medication for those presenting with seizures",
-   "Treatment must be individualised: viable parenchymal cysts, calcified lesions and intraventricular cysts are managed differently, and some forms need neurosurgical intervention",
-   "Fundoscopy or ophthalmic assessment is advised before antiparasitic treatment to exclude ocular cysts"
+  "id": "neurocysticercosis",
+  "name": "Neurocysticercosis",
+  "aliases": [
+    "NCC",
+    "CNS cysticercosis",
+    "cerebral cysticercosis"
   ],
-  "pathophysiology": "Ingested Taenia solium eggs release oncospheres that reach the brain and develop into cysticerci. Viable cysts in the parenchyma may remain quiescent, but immune-mediated degeneration releases antigens that provoke perilesional inflammation and oedema, generating seizures and focal deficits. As cysts die they may calcify, and these calcified foci can remain epileptogenic. In the ventricles and subarachnoid space, cysts and the associated inflammation can block cerebrospinal fluid pathways, producing raised intracranial pressure and hydrocephalus, while subarachnoid (racemose) disease may cause arachnoiditis and vasculitis.",
-  "additionalDifferentials": [
-   "Tuberculoma",
-   "Cerebral toxoplasmosis",
-   "Pyogenic or fungal brain abscess",
-   "Primary or metastatic brain tumour",
-   "Other parasitic CNS lesions (e.g. hydatid cyst)"
-  ],
-  "infectionMimics": [
-   "CNS tuberculosis",
-   "Toxoplasma encephalitis in immunocompromised patients",
-   "Primary CNS neoplasm",
-   "Vasculitic or demyelinating lesions"
-  ],
-  "additionalInvestigations": [
-   "MRI brain to characterise cyst stage, detect a scolex and assess perilesional oedema",
-   "CT to identify calcified lesions",
-   "Serological antibody testing (e.g. EITB) as supportive evidence",
-   "Ophthalmological examination to exclude ocular cysts before therapy",
-   "CSF studies and assessment for hydrocephalus in suspected extraparenchymal disease"
-  ],
-  "redFlags": [
-   "New-onset or breakthrough seizures, including status epilepticus, requiring urgent management",
-   "Signs of raised intracranial pressure or hydrocephalus from intraventricular disease, a neurosurgical emergency",
-   "Rapid neurological deterioration precipitated by inflammation when antiparasitic therapy is started",
-   "Focal deficits, altered consciousness or signs of stroke from subarachnoid vasculitis"
-  ],
-  "prognosis": "Solitary parenchymal cysts often resolve with good seizure control and a favourable outcome, though some patients develop chronic epilepsy from residual calcified lesions. Extraparenchymal, subarachnoid and heavy-burden disease carries a worse prognosis with risk of hydrocephalus, recurrent complications and higher mortality.",
-  "pitfalls": [
-   "Giving antiparasitic drugs without corticosteroid cover, risking severe inflammatory worsening and seizures",
-   "Treating without first excluding ocular or intraventricular cysts, where drug-induced inflammation is dangerous",
-   "Assuming all ring-enhancing brain lesions are neurocysticercosis and missing tuberculoma or tumour",
-   "Overlooking hydrocephalus as a cause of deterioration in extraparenchymal disease"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give antiparasitic therapy with albendazole, with or without praziquantel, to hasten resolution of viable parenchymal cysts",
-   "Co-administer corticosteroids with antiparasitic treatment to blunt the inflammatory reaction to dying cysts and control perilesional oedema",
-   "Control seizures with antiseizure medication, a mainstay for those presenting with epilepsy",
-   "Exclude ocular cysticercosis by ophthalmological examination before starting antiparasitic therapy to avoid sight-threatening inflammation",
-   "Manage extraparenchymal disease and hydrocephalus with neurosurgical intervention such as endoscopic cyst removal or cerebrospinal fluid diversion, often with prolonged antiparasitic and corticosteroid therapy",
-   "Withhold antiparasitic drugs in calcified-only (dead) lesions and in cysticercal encephalitis with diffuse oedema, treating supportively",
-   "Institute public health measures and family screening for taeniasis, with follow-up imaging to confirm lesion resolution"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neurocysticercosis-pathway",
-   "title": "Neurocysticercosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Central nervous system infection by larval Taenia solium and one of the leading causes of acquired epilepsy in India and other endemic regions",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New-onset or breakthrough seizures, including status epilepticus, requiring urgent management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain to characterise cyst stage, detect a scolex and assess perilesional oedema, CT to identify calcified lesions, Serological antibody testing (e.g. EITB) as supportive evidence"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give antiparasitic therapy with albendazole, with or without praziquantel, to hasten resolution of viable parenchymal cysts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving antiparasitic drugs without corticosteroid cover, risking severe inflammatory worsening and seizures"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neurocysticercosis."
-  }
- ],
- "tables": [
-  {
-   "id": "neurocysticercosis-matrix",
-   "title": "Neurocysticercosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Central nervous system infection by larval Taenia solium and one of the leading causes of acquired epilepsy in India and other",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious / Tropical",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Central nervous system infection by larval Taenia solium and one of the leading causes of acquired epilepsy in India and other endemic regions",
+      "Seizures are the most frequent presentation, typically from a single or few degenerating parenchymal cysts",
+      "Clinical features depend on cyst number, location and stage, ranging from asymptomatic calcified lesions to disabling neurological disease",
+      "Extraparenchymal disease (intraventricular, subarachnoid or racemose forms) can obstruct cerebrospinal fluid flow and cause hydrocephalus, and behaves more aggressively",
+      "MRI and CT are central to diagnosis; the finding of a cyst with a visible scolex is highly characteristic, and calcified lesions indicate old, dead cysts",
+      "Antiparasitic therapy is combined with corticosteroids to blunt the inflammatory reaction to dying cysts, with antiseizure medication for those presenting with seizures",
+      "Treatment must be individualised: viable parenchymal cysts, calcified lesions and intraventricular cysts are managed differently, and some forms need neurosurgical intervention",
+      "Fundoscopy or ophthalmic assessment is advised before antiparasitic treatment to exclude ocular cysts"
     ],
-    [
-     "Key Investigations",
-     "MRI brain to characterise cyst stage, detect a scolex and assess perilesional oedema, CT to identify calcified lesions,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ingested Taenia solium eggs release oncospheres that reach the brain and develop into cysticerci. Viable cysts in the parenchyma may remain quiescent, but immune-mediated degeneration releases antigens that provoke perilesional inflammation and oedema, generating seizures and focal deficits. As cysts die they may calcify, and these calcified foci can remain epileptogenic. In the ventricles and subarachnoid space, cysts and the associated inflammation can block cerebrospinal fluid pathways, producing raised intracranial pressure and hydrocephalus, while subarachnoid (racemose) disease may cause arachnoiditis and vasculitis.",
+    "additionalDifferentials": [
+      "Tuberculoma",
+      "Cerebral toxoplasmosis",
+      "Pyogenic or fungal brain abscess",
+      "Primary or metastatic brain tumour",
+      "Other parasitic CNS lesions (e.g. hydatid cyst)"
     ],
-    [
-     "Primary Differentials",
-     "Tuberculoma, Cerebral toxoplasmosis, Pyogenic or fungal brain abscess",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "CNS tuberculosis",
+      "Toxoplasma encephalitis in immunocompromised patients",
+      "Primary CNS neoplasm",
+      "Vasculitic or demyelinating lesions"
     ],
-    [
-     "Management Strategy",
-     "Give antiparasitic therapy with albendazole, with or without praziquantel, to hasten resolution of viable parenchymal cysts",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "MRI brain to characterise cyst stage, detect a scolex and assess perilesional oedema",
+      "CT to identify calcified lesions",
+      "Serological antibody testing (e.g. EITB) as supportive evidence",
+      "Ophthalmological examination to exclude ocular cysts before therapy",
+      "CSF studies and assessment for hydrocephalus in suspected extraparenchymal disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving antiparasitic drugs without corticosteroid cover, risking severe inflammatory worsening and seizures",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "New-onset or breakthrough seizures, including status epilepticus, requiring urgent management",
+      "Signs of raised intracranial pressure or hydrocephalus from intraventricular disease, a neurosurgical emergency",
+      "Rapid neurological deterioration precipitated by inflammation when antiparasitic therapy is started",
+      "Focal deficits, altered consciousness or signs of stroke from subarachnoid vasculitis"
+    ],
+    "prognosis": "Solitary parenchymal cysts often resolve with good seizure control and a favourable outcome, though some patients develop chronic epilepsy from residual calcified lesions. Extraparenchymal, subarachnoid and heavy-burden disease carries a worse prognosis with risk of hydrocephalus, recurrent complications and higher mortality.",
+    "pitfalls": [
+      "Giving antiparasitic drugs without corticosteroid cover, risking severe inflammatory worsening and seizures",
+      "Treating without first excluding ocular or intraventricular cysts, where drug-induced inflammation is dangerous",
+      "Assuming all ring-enhancing brain lesions are neurocysticercosis and missing tuberculoma or tumour",
+      "Overlooking hydrocephalus as a cause of deterioration in extraparenchymal disease"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give antiparasitic therapy with albendazole, with or without praziquantel, to hasten resolution of viable parenchymal cysts",
+      "Co-administer corticosteroids with antiparasitic treatment to blunt the inflammatory reaction to dying cysts and control perilesional oedema",
+      "Control seizures with antiseizure medication, a mainstay for those presenting with epilepsy",
+      "Exclude ocular cysticercosis by ophthalmological examination before starting antiparasitic therapy to avoid sight-threatening inflammation",
+      "Manage extraparenchymal disease and hydrocephalus with neurosurgical intervention such as endoscopic cyst removal or cerebrospinal fluid diversion, often with prolonged antiparasitic and corticosteroid therapy",
+      "Withhold antiparasitic drugs in calcified-only (dead) lesions and in cysticercal encephalitis with diffuse oedema, treating supportively",
+      "Institute public health measures and family screening for taeniasis, with follow-up imaging to confirm lesion resolution"
     ]
-   ],
-   "caption": "Overview comparison matrix for neurocysticercosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neurocysticercosis-real-image",
-   "title": "Neurocysticercosis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "neurocysticercosis-pathway",
+      "title": "Neurocysticercosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Central nervous system infection by larval Taenia solium and one of the leading causes of acquired epilepsy in India and other endemic regions",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New-onset or breakthrough seizures, including status epilepticus, requiring urgent management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain to characterise cyst stage, detect a scolex and assess perilesional oedema, CT to identify calcified lesions, Serological antibody testing (e.g. EITB) as supportive evidence"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give antiparasitic therapy with albendazole, with or without praziquantel, to hasten resolution of viable parenchymal cysts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving antiparasitic drugs without corticosteroid cover, risking severe inflammatory worsening and seizures"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neurocysticercosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neurocysticercosis-matrix",
+      "title": "Neurocysticercosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Central nervous system infection by larval Taenia solium and one of the leading causes of acquired epilepsy in India and other",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain to characterise cyst stage, detect a scolex and assess perilesional oedema, CT to identify calcified lesions,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tuberculoma, Cerebral toxoplasmosis, Pyogenic or fungal brain abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give antiparasitic therapy with albendazole, with or without praziquantel, to hasten resolution of viable parenchymal cysts",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving antiparasitic drugs without corticosteroid cover, risking severe inflammatory worsening and seizures",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neurocysticercosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 220-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "neurocysticercosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Cyst stage, scolex and perilesional oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcified lesions, indicating dead cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serological antibody testing",
+          "cells": [
+            {
+              "text": "Supportive evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Excludes ocular cysts before therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF studies and hydrocephalus assessment",
+          "cells": [
+            {
+              "text": "Extraparenchymal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurocysticercosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculoma",
+          "cells": [
+            {
+              "text": "A ring-enhancing mimic; a cyst with a visible scolex is characteristic of cysticercosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral toxoplasmosis",
+          "cells": [
+            {
+              "text": "Infection mimic in immunocompromised patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary or metastatic brain tumour",
+          "cells": [
+            {
+              "text": "Mimics ring-enhancing lesions; imaging and biopsy decide"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurocysticercosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Albendazole, with or without praziquantel",
+          "cells": [
+            {
+              "text": "Hastens resolution of viable parenchymal cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids with antiparasitic therapy",
+          "cells": [
+            {
+              "text": "Blunt the inflammatory reaction to dying cysts and perilesional oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Mainstay for those presenting with epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude ocular cysts",
+          "cells": [
+            {
+              "text": "Ophthalmological examination before antiparasitic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical management",
+          "cells": [
+            {
+              "text": "For extraparenchymal disease and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withhold antiparasitics",
+          "cells": [
+            {
+              "text": "In calcified-only lesions and cysticercal encephalitis; treat supportively"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "neurocysticercosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for human cysticercosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Items"
+      ],
+      "rows": [
+        {
+          "parameter": "Absolute criteria",
+          "cells": [
+            {
+              "text": "Cysticerci shown on histologic or microscopic examination of biopsy material; parasite seen in the eye on funduscopy; neuroradiologic demonstration of cystic lesions containing a characteristic scolex"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Major criteria",
+          "cells": [
+            {
+              "text": "Neuroradiologic lesions suggestive of neurocysticercosis; antibodies to cysticerci in serum by enzyme-linked immunoelectrotransfer blot; spontaneous resolution of intracranial cystic lesions, or resolution after albendazole or praziquantel alone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor criteria",
+          "cells": [
+            {
+              "text": "Lesions compatible with neurocysticercosis on neuroimaging; clinical manifestations suggestive of neurocysticercosis; antibodies to cysticerci or cysticercal antigen in cerebrospinal fluid by ELISA; cysticercosis outside the CNS (for example cigar-shaped soft-tissue calcifications)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epidemiologic criteria",
+          "cells": [
+            {
+              "text": "Residence in a cysticercosis-endemic area; frequent travel to an endemic area; household contact with a person infected with Taenia solium"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote a of the source table is not shown on the page."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "neurocysticercosis-dx-mgmt",
+      "title": "Diagnosis and management of Neurocysticercosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New seizures with ring-enhancing or calcified brain lesions after endemic exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (status epilepticus, raised intracranial pressure, focal deficits)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for hydrocephalus; antiseizure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain for stage and scolex, CT for calcification, serology, eye examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Viable parenchymal cyst with a scolex on MRI, ocular cysts excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider tuberculoma, toxoplasmosis or tumour; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Albendazole with or without praziquantel for viable parenchymal cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids alongside antiparasitic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurosurgical treatment for extraparenchymal disease and hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Solitary cysts often resolve; extraparenchymal disease has a worse prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

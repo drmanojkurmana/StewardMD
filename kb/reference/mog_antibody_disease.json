@@ -1,176 +1,443 @@
 {
- "id": "mog_antibody_disease",
- "name": "MOG antibody-associated disease (MOGAD)",
- "aliases": [
-  "MOGAD",
-  "myelin oligodendrocyte glycoprotein antibody disease",
-  "anti-MOG associated demyelination",
-  "MOG-IgG associated disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuroimmunology",
- "specialty": "Neurology / Neuroimmunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A distinct demyelinating disorder recognised as separate from multiple sclerosis and from aquaporin-4-positive neuromyelitis optica",
-   "Common phenotypes include optic neuritis (often bilateral with marked disc swelling), transverse myelitis, and, in children particularly, acute disseminated encephalomyelitis (ADEM)",
-   "Antibodies target myelin oligodendrocyte glycoprotein on the outer myelin surface, and patients are characteristically aquaporin-4 antibody negative",
-   "Attacks are frequently steroid-responsive but relapse on steroid withdrawal, so tapering must be cautious",
-   "Optic neuritis tends to show longitudinally extensive anterior optic nerve involvement with perineural enhancement",
-   "Antibody testing should use a live cell-based assay, and low-positive titres require cautious interpretation",
-   "Acute attacks are treated with high-dose corticosteroids, with intravenous immunoglobulin or plasma exchange for severe or refractory episodes, and relapsing disease may need longer-term immunotherapy"
+  "id": "mog_antibody_disease",
+  "name": "MOG antibody-associated disease (MOGAD)",
+  "aliases": [
+    "MOGAD",
+    "myelin oligodendrocyte glycoprotein antibody disease",
+    "anti-MOG associated demyelination",
+    "MOG-IgG associated disorder"
   ],
-  "pathophysiology": "The disorder is associated with immunoglobulin G antibodies against myelin oligodendrocyte glycoprotein (MOG), a protein expressed on the outermost lamellae of central nervous system myelin and the oligodendrocyte surface. Antibody binding, together with complement and cellular effector mechanisms, produces inflammatory demyelination that preferentially affects the optic nerves, spinal cord, and, in children, the cerebral white matter and deep grey structures. In contrast to aquaporin-4 disease, astrocytes are relatively spared and demyelination can be more reversible, which correlates with the frequently good recovery from individual attacks.",
-  "additionalDifferentials": [
-   "Multiple sclerosis",
-   "Aquaporin-4-positive neuromyelitis optica spectrum disorder",
-   "Idiopathic or infective optic neuritis",
-   "Acute disseminated encephalomyelitis of other cause",
-   "Neurosarcoidosis",
-   "Infective or compressive myelopathy",
-   "Susac syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum MOG-IgG by a live cell-based assay with attention to titre",
-   "Aquaporin-4 antibody testing to distinguish neuromyelitis optica spectrum disorder",
-   "MRI of the brain, orbits, and spinal cord to characterise lesions and enhancement",
-   "Optical coherence tomography and visual evoked potentials for optic nerve involvement",
-   "Cerebrospinal fluid analysis, which shows oligoclonal bands less often than in multiple sclerosis",
-   "Screening for infective mimics before immunosuppression"
-  ],
-  "redFlags": [
-   "Severe or bilateral visual loss from optic neuritis",
-   "Longitudinally extensive myelitis with sphincter or respiratory compromise",
-   "Encephalopathy or seizures in an ADEM-like presentation",
-   "Frequent relapses on steroid tapering indicating need for maintenance therapy"
-  ],
-  "prognosis": "Recovery from individual attacks is often good, but a relapsing course occurs in a substantial minority and repeated attacks can accumulate visual or spinal disability. Prognosis is generally more favourable than aquaporin-4 disease when relapses are prevented.",
-  "pitfalls": [
-   "Misclassifying the disorder as multiple sclerosis and starting inappropriate disease-modifying drugs",
-   "Over-interpreting low-positive antibody titres, especially with an incompatible phenotype",
-   "Tapering corticosteroids too quickly and precipitating relapse",
-   "Assuming aquaporin-4 disease without confirming antibody status"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Continuum: Multiple Sclerosis and Related Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acute attacks with high-dose intravenous corticosteroids, escalating to plasma exchange or intravenous immunoglobulin for severe or steroid-refractory episodes",
-   "Taper corticosteroids slowly, since abrupt withdrawal precipitates relapse",
-   "Prevent relapses in relapsing disease with maintenance immunotherapy such as intravenous immunoglobulin, rituximab, mycophenolate mofetil or azathioprine",
-   "Avoid multiple sclerosis disease-modifying drugs, which are ineffective or harmful in MOGAD",
-   "Monitor with serial MOG-IgG titres, MRI and optical coherence tomography or visual evoked potentials for optic nerve involvement",
-   "Exclude infective mimics before starting immunosuppression and give appropriate infection prophylaxis",
-   "Refer to neuroimmunology with ophthalmology input for optic neuritis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mog_antibody_disease-pathway",
-   "title": "MOG antibody-associated disease (MOGAD): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A distinct demyelinating disorder recognised as separate from multiple sclerosis and from aquaporin-4-positive neuromyelitis optica",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or bilateral visual loss from optic neuritis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum MOG-IgG by a live cell-based assay with attention to titre, Aquaporin-4 antibody testing to distinguish neuromyelitis optica spectrum disorder, MRI of the brain, orbits, and spinal cord to characterise lesions and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acute attacks with high-dose intravenous corticosteroids, escalating to plasma exchange or intravenous immunoglobulin for severe or steroid-refractory episodes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying the disorder as multiple sclerosis and starting inappropriate disease-modifying drugs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mog antibody-associated disease (mogad)."
-  }
- ],
- "tables": [
-  {
-   "id": "mog_antibody_disease-matrix",
-   "title": "MOG antibody-associated disease (MOGAD): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A distinct demyelinating disorder recognised as separate from multiple sclerosis and from aquaporin-4-positive neuromyelitis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuroimmunology",
+  "specialty": "Neurology / Neuroimmunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A distinct demyelinating disorder recognised as separate from multiple sclerosis and from aquaporin-4-positive neuromyelitis optica",
+      "Common phenotypes include optic neuritis (often bilateral with marked disc swelling), transverse myelitis, and, in children particularly, acute disseminated encephalomyelitis (ADEM)",
+      "Antibodies target myelin oligodendrocyte glycoprotein on the outer myelin surface, and patients are characteristically aquaporin-4 antibody negative",
+      "Attacks are frequently steroid-responsive but relapse on steroid withdrawal, so tapering must be cautious",
+      "Optic neuritis tends to show longitudinally extensive anterior optic nerve involvement with perineural enhancement",
+      "Antibody testing should use a live cell-based assay, and low-positive titres require cautious interpretation",
+      "Acute attacks are treated with high-dose corticosteroids, with intravenous immunoglobulin or plasma exchange for severe or refractory episodes, and relapsing disease may need longer-term immunotherapy"
     ],
-    [
-     "Key Investigations",
-     "Serum MOG-IgG by a live cell-based assay with attention to titre, Aquaporin-4 antibody testing to distinguish neuromyelitis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The disorder is associated with immunoglobulin G antibodies against myelin oligodendrocyte glycoprotein (MOG), a protein expressed on the outermost lamellae of central nervous system myelin and the oligodendrocyte surface. Antibody binding, together with complement and cellular effector mechanisms, produces inflammatory demyelination that preferentially affects the optic nerves, spinal cord, and, in children, the cerebral white matter and deep grey structures. In contrast to aquaporin-4 disease, astrocytes are relatively spared and demyelination can be more reversible, which correlates with the frequently good recovery from individual attacks.",
+    "additionalDifferentials": [
+      "Multiple sclerosis",
+      "Aquaporin-4-positive neuromyelitis optica spectrum disorder",
+      "Idiopathic or infective optic neuritis",
+      "Acute disseminated encephalomyelitis of other cause",
+      "Neurosarcoidosis",
+      "Infective or compressive myelopathy",
+      "Susac syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Multiple sclerosis, Aquaporin-4-positive neuromyelitis optica spectrum disorder, Idiopathic or infective optic neuritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum MOG-IgG by a live cell-based assay with attention to titre",
+      "Aquaporin-4 antibody testing to distinguish neuromyelitis optica spectrum disorder",
+      "MRI of the brain, orbits, and spinal cord to characterise lesions and enhancement",
+      "Optical coherence tomography and visual evoked potentials for optic nerve involvement",
+      "Cerebrospinal fluid analysis, which shows oligoclonal bands less often than in multiple sclerosis",
+      "Screening for infective mimics before immunosuppression"
     ],
-    [
-     "Management Strategy",
-     "Treat acute attacks with high-dose intravenous corticosteroids, escalating to plasma exchange or intravenous immunoglobulin for",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or bilateral visual loss from optic neuritis",
+      "Longitudinally extensive myelitis with sphincter or respiratory compromise",
+      "Encephalopathy or seizures in an ADEM-like presentation",
+      "Frequent relapses on steroid tapering indicating need for maintenance therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying the disorder as multiple sclerosis and starting inappropriate disease-modifying drugs",
-     "Prevent diagnostic or management error"
+    "prognosis": "Recovery from individual attacks is often good, but a relapsing course occurs in a substantial minority and repeated attacks can accumulate visual or spinal disability. Prognosis is generally more favourable than aquaporin-4 disease when relapses are prevented.",
+    "pitfalls": [
+      "Misclassifying the disorder as multiple sclerosis and starting inappropriate disease-modifying drugs",
+      "Over-interpreting low-positive antibody titres, especially with an incompatible phenotype",
+      "Tapering corticosteroids too quickly and precipitating relapse",
+      "Assuming aquaporin-4 disease without confirming antibody status"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Continuum: Multiple Sclerosis and Related Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acute attacks with high-dose intravenous corticosteroids, escalating to plasma exchange or intravenous immunoglobulin for severe or steroid-refractory episodes",
+      "Taper corticosteroids slowly, since abrupt withdrawal precipitates relapse",
+      "Prevent relapses in relapsing disease with maintenance immunotherapy such as intravenous immunoglobulin, rituximab, mycophenolate mofetil or azathioprine",
+      "Avoid multiple sclerosis disease-modifying drugs, which are ineffective or harmful in MOGAD",
+      "Monitor with serial MOG-IgG titres, MRI and optical coherence tomography or visual evoked potentials for optic nerve involvement",
+      "Exclude infective mimics before starting immunosuppression and give appropriate infection prophylaxis",
+      "Refer to neuroimmunology with ophthalmology input for optic neuritis"
     ]
-   ],
-   "caption": "Overview comparison matrix for mog antibody-associated disease (mogad)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mog-antibody-disease-real-image",
-   "title": "MOG antibody-associated disease (MOGAD): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "mog_antibody_disease-pathway",
+      "title": "MOG antibody-associated disease (MOGAD): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A distinct demyelinating disorder recognised as separate from multiple sclerosis and from aquaporin-4-positive neuromyelitis optica",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or bilateral visual loss from optic neuritis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum MOG-IgG by a live cell-based assay with attention to titre, Aquaporin-4 antibody testing to distinguish neuromyelitis optica spectrum disorder, MRI of the brain, orbits, and spinal cord to characterise lesions and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acute attacks with high-dose intravenous corticosteroids, escalating to plasma exchange or intravenous immunoglobulin for severe or steroid-refractory episodes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying the disorder as multiple sclerosis and starting inappropriate disease-modifying drugs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mog antibody-associated disease (mogad)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mog_antibody_disease-matrix",
+      "title": "MOG antibody-associated disease (MOGAD): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A distinct demyelinating disorder recognised as separate from multiple sclerosis and from aquaporin-4-positive neuromyelitis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum MOG-IgG by a live cell-based assay with attention to titre, Aquaporin-4 antibody testing to distinguish neuromyelitis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Multiple sclerosis, Aquaporin-4-positive neuromyelitis optica spectrum disorder, Idiopathic or infective optic neuritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acute attacks with high-dose intravenous corticosteroids, escalating to plasma exchange or intravenous immunoglobulin for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying the disorder as multiple sclerosis and starting inappropriate disease-modifying drugs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mog antibody-associated disease (mogad)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mog_antibody_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum MOG-IgG by live cell-based assay",
+          "cells": [
+            {
+              "text": "Confirms MOGAD; interpret with the titre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquaporin-4 antibody",
+          "cells": [
+            {
+              "text": "Positive result points to NMOSD instead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain, orbits and spinal cord",
+          "cells": [
+            {
+              "text": "Lesion pattern and enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT and visual evoked potentials",
+          "cells": [
+            {
+              "text": "Optic nerve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Oligoclonal bands less often than in multiple sclerosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mog_antibody_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "Oligoclonal bands are more common than in MOGAD; MS drugs are ineffective or harmful in MOGAD"
+            },
+            {
+              "text": "Serum MOG-IgG by live cell-based assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aquaporin-4-positive NMOSD",
+          "cells": [
+            {
+              "text": "Defined by aquaporin-4 antibody"
+            },
+            {
+              "text": "Aquaporin-4 antibody testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mog_antibody_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-dose IV corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for acute attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange or IV immunoglobulin",
+          "cells": [
+            {
+              "text": "Severe or steroid-refractory attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slow steroid taper",
+          "cells": [
+            {
+              "text": "Abrupt withdrawal precipitates relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance immunotherapy",
+          "cells": [
+            {
+              "text": "IV immunoglobulin, rituximab, mycophenolate mofetil or azathioprine in relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid MS disease-modifying drugs",
+          "cells": [
+            {
+              "text": "Ineffective or harmful in MOGAD"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mog_antibody_disease-dx-mgmt",
+      "title": "Diagnosis and management of MOG antibody-associated disease (MOGAD)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Optic neuritis, myelitis or ADEM-like illness; MOG-IgG suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe or bilateral visual loss, LETM with sphincter or respiratory compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent high-dose IV steroids; plasma exchange if severe or refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Live cell-based MOG-IgG, AQP4 antibody, MRI brain/orbit/cord, infective screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MOG-IgG positive with a compatible phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider MS, AQP4 NMOSD or infective mimics; do not over-read low titres",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV methylprednisolone for the attack, then slow steroid taper",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Plasma exchange or IVIG if severe or steroid-refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Maintenance immunotherapy if relapsing; avoid MS drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial MOG-IgG titres, MRI and OCT; neuroimmunology and ophthalmology input",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good recovery from most attacks; relapsing course in a substantial minority",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

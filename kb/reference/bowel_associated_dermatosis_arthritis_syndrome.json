@@ -1,173 +1,233 @@
 {
- "id": "bowel_associated_dermatosis_arthritis_syndrome",
- "name": "Bowel-associated dermatosis-arthritis syndrome",
- "aliases": [
-  "BADAS",
-  "bowel bypass syndrome",
-  "bowel bypass syndrome without bowel bypass"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with recurrent crops of small erythematous macules that evolve into papules, vesiculopustules and purpuric lesions, typically on the upper trunk and proximal limbs",
-   "The eruption is accompanied by a non-deforming, often migratory polyarthralgia or arthritis and frequently by fever and malaise",
-   "It was first described after jejunoileal bypass surgery for obesity but also occurs with inflammatory bowel disease and other conditions causing a blind loop or bacterial overgrowth",
-   "The syndrome can arise without any bowel surgery ('bowel bypass syndrome without bowel bypass')",
-   "Episodes are recurrent and self-limited, lasting days at a time, and belong to the neutrophilic dermatoses",
-   "Biopsy shows a neutrophilic dermal infiltrate resembling early Sweet syndrome, sometimes with leucocytoclasis",
-   "Management addresses the underlying bowel abnormality, for example antibiotics for bacterial overgrowth or surgical revision of a bypassed segment"
+  "id": "bowel_associated_dermatosis_arthritis_syndrome",
+  "name": "Bowel-associated dermatosis-arthritis syndrome",
+  "aliases": [
+    "BADAS",
+    "bowel bypass syndrome",
+    "bowel bypass syndrome without bowel bypass"
   ],
-  "pathophysiology": "Bowel-associated dermatosis-arthritis syndrome is thought to arise from bacterial overgrowth within a bypassed, diverticular or diseased segment of bowel. Bacterial antigens, particularly peptidoglycan components, stimulate formation of circulating immune complexes that deposit in the skin and synovium, triggering a neutrophil-rich inflammatory response. This immune-complex-mediated, cross-reactive process produces the recurrent neutrophilic dermatosis and the accompanying arthralgia. The link to intestinal bacterial overgrowth explains why the syndrome responds to measures that reduce the bacterial burden.",
-  "additionalDifferentials": [
-   "Sweet syndrome",
-   "Leucocytoclastic vasculitis",
-   "Erythema nodosum (as part of inflammatory bowel disease)",
-   "Gonococcal or other septic arthritis-dermatitis",
-   "Behcet disease",
-   "Serum sickness"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing a neutrophilic infiltrate",
-   "Evaluation for inflammatory bowel disease or a bypassed/blind bowel loop",
-   "Full blood count and inflammatory markers during flares",
-   "Blood and, if relevant, joint fluid cultures to exclude sepsis",
-   "Imaging or endoscopy of the bowel as indicated",
-   "Assessment for bacterial overgrowth"
-  ],
-  "redFlags": [
-   "Features suggesting septic arthritis or disseminated gonococcal infection requiring urgent exclusion",
-   "Systemic sepsis in a patient with a blind bowel loop",
-   "Progressive or destructive joint disease",
-   "Underlying inflammatory bowel disease with complications"
-  ],
-  "prognosis": "Individual episodes are self-limited, but without correction of the underlying bowel problem the syndrome tends to recur; treating the intestinal cause, whether by antibiotics or surgical revision, generally controls the disease and carries a good outlook.",
-  "pitfalls": [
-   "Mistaking the eruption and arthritis for a septic process and missing the bowel-related cause",
-   "Failing to look for bacterial overgrowth or a bypassed loop in a patient without prior surgery",
-   "Treating flares symptomatically while ignoring the underlying gut abnormality",
-   "Confusing it with Sweet syndrome without considering the bowel association"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antibiotics such as tetracyclines or metronidazole to reduce the intestinal bacterial overgrowth that drives immune-complex formation",
-   "Systemic corticosteroids to suppress flares of the neutrophilic dermatosis and accompanying arthralgia",
-   "Surgical correction of the underlying blind loop or revision of a jejunoileal bypass when that is the precipitant",
-   "Treatment of coexisting inflammatory bowel disease when this is the underlying cause",
-   "Symptomatic analgesia for the migratory arthralgia during self-limited episodes",
-   "Steroid-sparing agents such as dapsone for frequent or recurrent flares, with monitoring of disease activity",
-   "Combined dermatology, gastroenterology and surgical input to address both skin and bowel components"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bowel_associated_dermatosis_arthritis_syndrome-pathway",
-   "title": "Bowel-associated dermatosis-arthritis syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with recurrent crops of small erythematous macules that evolve into papules, vesiculopustules and purpuric lesions, typically on the upper trunk and proximal limbs",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting septic arthritis or disseminated gonococcal infection requiring urgent exclusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing a neutrophilic infiltrate, Evaluation for inflammatory bowel disease or a bypassed/blind bowel loop, Full blood count and inflammatory markers during flares"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antibiotics such as tetracyclines or metronidazole to reduce the intestinal bacterial overgrowth that drives immune-complex formation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the eruption and arthritis for a septic process and missing the bowel-related cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bowel-associated dermatosis-arthritis syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "bowel_associated_dermatosis_arthritis_syndrome-matrix",
-   "title": "Bowel-associated dermatosis-arthritis syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with recurrent crops of small erythematous macules that evolve into papules, vesiculopustules and purpuric lesions,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with recurrent crops of small erythematous macules that evolve into papules, vesiculopustules and purpuric lesions, typically on the upper trunk and proximal limbs",
+      "The eruption is accompanied by a non-deforming, often migratory polyarthralgia or arthritis and frequently by fever and malaise",
+      "It was first described after jejunoileal bypass surgery for obesity but also occurs with inflammatory bowel disease and other conditions causing a blind loop or bacterial overgrowth",
+      "The syndrome can arise without any bowel surgery ('bowel bypass syndrome without bowel bypass')",
+      "Episodes are recurrent and self-limited, lasting days at a time, and belong to the neutrophilic dermatoses",
+      "Biopsy shows a neutrophilic dermal infiltrate resembling early Sweet syndrome, sometimes with leucocytoclasis",
+      "Management addresses the underlying bowel abnormality, for example antibiotics for bacterial overgrowth or surgical revision of a bypassed segment"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing a neutrophilic infiltrate, Evaluation for inflammatory bowel disease or a bypassed/blind bowel loop, Full",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bowel-associated dermatosis-arthritis syndrome is thought to arise from bacterial overgrowth within a bypassed, diverticular or diseased segment of bowel. Bacterial antigens, particularly peptidoglycan components, stimulate formation of circulating immune complexes that deposit in the skin and synovium, triggering a neutrophil-rich inflammatory response. This immune-complex-mediated, cross-reactive process produces the recurrent neutrophilic dermatosis and the accompanying arthralgia. The link to intestinal bacterial overgrowth explains why the syndrome responds to measures that reduce the bacterial burden.",
+    "additionalDifferentials": [
+      "Sweet syndrome",
+      "Leucocytoclastic vasculitis",
+      "Erythema nodosum (as part of inflammatory bowel disease)",
+      "Gonococcal or other septic arthritis-dermatitis",
+      "Behcet disease",
+      "Serum sickness"
     ],
-    [
-     "Primary Differentials",
-     "Sweet syndrome, Leucocytoclastic vasculitis, Erythema nodosum (as part of inflammatory bowel disease)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing a neutrophilic infiltrate",
+      "Evaluation for inflammatory bowel disease or a bypassed/blind bowel loop",
+      "Full blood count and inflammatory markers during flares",
+      "Blood and, if relevant, joint fluid cultures to exclude sepsis",
+      "Imaging or endoscopy of the bowel as indicated",
+      "Assessment for bacterial overgrowth"
     ],
-    [
-     "Management Strategy",
-     "Antibiotics such as tetracyclines or metronidazole to reduce the intestinal bacterial overgrowth that drives immune-complex",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting septic arthritis or disseminated gonococcal infection requiring urgent exclusion",
+      "Systemic sepsis in a patient with a blind bowel loop",
+      "Progressive or destructive joint disease",
+      "Underlying inflammatory bowel disease with complications"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the eruption and arthritis for a septic process and missing the bowel-related cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Individual episodes are self-limited, but without correction of the underlying bowel problem the syndrome tends to recur; treating the intestinal cause, whether by antibiotics or surgical revision, generally controls the disease and carries a good outlook.",
+    "pitfalls": [
+      "Mistaking the eruption and arthritis for a septic process and missing the bowel-related cause",
+      "Failing to look for bacterial overgrowth or a bypassed loop in a patient without prior surgery",
+      "Treating flares symptomatically while ignoring the underlying gut abnormality",
+      "Confusing it with Sweet syndrome without considering the bowel association"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antibiotics such as tetracyclines or metronidazole to reduce the intestinal bacterial overgrowth that drives immune-complex formation",
+      "Systemic corticosteroids to suppress flares of the neutrophilic dermatosis and accompanying arthralgia",
+      "Surgical correction of the underlying blind loop or revision of a jejunoileal bypass when that is the precipitant",
+      "Treatment of coexisting inflammatory bowel disease when this is the underlying cause",
+      "Symptomatic analgesia for the migratory arthralgia during self-limited episodes",
+      "Steroid-sparing agents such as dapsone for frequent or recurrent flares, with monitoring of disease activity",
+      "Combined dermatology, gastroenterology and surgical input to address both skin and bowel components"
     ]
-   ],
-   "caption": "Overview comparison matrix for bowel-associated dermatosis-arthritis syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bowel-associated-dermatosis-arthritis-syndrome-real-image",
-   "title": "Bowel-associated dermatosis-arthritis syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "bowel_associated_dermatosis_arthritis_syndrome-pathway",
+      "title": "Bowel-associated dermatosis-arthritis syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with recurrent crops of small erythematous macules that evolve into papules, vesiculopustules and purpuric lesions, typically on the upper trunk and proximal limbs",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting septic arthritis or disseminated gonococcal infection requiring urgent exclusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing a neutrophilic infiltrate, Evaluation for inflammatory bowel disease or a bypassed/blind bowel loop, Full blood count and inflammatory markers during flares"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antibiotics such as tetracyclines or metronidazole to reduce the intestinal bacterial overgrowth that drives immune-complex formation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the eruption and arthritis for a septic process and missing the bowel-related cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bowel-associated dermatosis-arthritis syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bowel_associated_dermatosis_arthritis_syndrome-matrix",
+      "title": "Bowel-associated dermatosis-arthritis syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with recurrent crops of small erythematous macules that evolve into papules, vesiculopustules and purpuric lesions,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing a neutrophilic infiltrate, Evaluation for inflammatory bowel disease or a bypassed/blind bowel loop, Full",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sweet syndrome, Leucocytoclastic vasculitis, Erythema nodosum (as part of inflammatory bowel disease)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antibiotics such as tetracyclines or metronidazole to reduce the intestinal bacterial overgrowth that drives immune-complex",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the eruption and arthritis for a septic process and missing the bowel-related cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bowel-associated dermatosis-arthritis syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bowel_associated_dermatosis_arthritis_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in bowel-associated dermatosis-arthritis syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Skin biopsy", "cells": [{"text": "Neutrophilic dermal infiltrate, sometimes with leucocytoclasis"}], "cite": "c1"},
+        {"parameter": "Bowel evaluation", "cells": [{"text": "Inflammatory bowel disease or a bypassed or blind bowel loop"}], "cite": "c1"},
+        {"parameter": "Full blood count and inflammatory markers during flares", "cells": [{"text": "Flare activity"}], "cite": "c1"},
+        {"parameter": "Blood and joint fluid cultures", "cells": [{"text": "Excludes sepsis, where indicated"}], "cite": "c1"},
+        {"parameter": "Endoscopy or imaging of the bowel", "cells": [{"text": "Structural or inflammatory abnormality, as indicated"}], "cite": "c1"},
+        {"parameter": "Assessment for bacterial overgrowth", "cells": [{"text": "Overgrowth as the driver of the syndrome"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bowel_associated_dermatosis_arthritis_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike neutrophilic and infective conditions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Sweet syndrome", "cells": [{"text": "The bowel bypass or overgrowth association points to this syndrome rather than Sweet syndrome"}], "cite": "c1"},
+        {"parameter": "Gonococcal or other septic arthritis-dermatitis", "cells": [{"text": "Excluded by blood and joint fluid cultures"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bowel_associated_dermatosis_arthritis_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in bowel-associated dermatosis-arthritis syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Antibiotics", "cells": [{"text": "Tetracyclines or metronidazole to reduce intestinal bacterial overgrowth"}, {"text": "Reduces the immune-complex driver"}], "cite": "c1"},
+        {"parameter": "Corticosteroids", "cells": [{"text": "Systemic corticosteroids for flares"}, {"text": "Flares of dermatosis and arthralgia"}], "cite": "c1"},
+        {"parameter": "Bowel surgery", "cells": [{"text": "Surgical correction of a blind loop or revision of a jejunoileal bypass"}, {"text": "When it is the precipitant"}], "cite": "c1"},
+        {"parameter": "Inflammatory bowel disease", "cells": [{"text": "Treatment of coexisting inflammatory bowel disease"}, {"text": "When it is the underlying cause"}], "cite": "c1"},
+        {"parameter": "Analgesia", "cells": [{"text": "Analgesia for migratory arthralgia"}, {"text": "During self-limited episodes"}], "cite": "c1"},
+        {"parameter": "Steroid-sparing therapy", "cells": [{"text": "Dapsone for frequent or recurrent flares"}, {"text": "Monitor disease activity"}], "cite": "c1"},
+        {"parameter": "Combined input", "cells": [{"text": "Dermatology, gastroenterology and surgical input"}, {"text": "Addresses skin and bowel components"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bowel_associated_dermatosis_arthritis_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of bowel-associated dermatosis-arthritis syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Recurrent crops of erythematous to purpuric lesions on the trunk with migratory arthralgia", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: possible septic or gonococcal arthritis, sepsis, or destructive joint disease?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: blood and joint fluid cultures; urgent treatment of infection", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Skin biopsy for neutrophilic infiltrate; blood tests during a flare", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Assess the bowel for bacterial overgrowth, a bypassed loop or inflammatory bowel disease", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Bowel abnormality or overgrowth identified?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Tetracycline or metronidazole; surgical revision or treatment of inflammatory bowel disease", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider Sweet syndrome, vasculitis or another cause", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Corticosteroids for flares; analgesia; dapsone if flares are frequent", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Recurs unless the bowel problem is corrected; controlled once the cause is treated", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

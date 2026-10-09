@@ -1,178 +1,456 @@
 {
- "id": "congenital_syphilis",
- "name": "Congenital syphilis",
- "aliases": [
-  "congenital syphilis",
-  "prenatal syphilis",
-  "Treponema pallidum",
-  "vertically transmitted syphilis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Genitourinary Medicine / Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell / BASHH-CDC STI guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Congenital syphilis follows transplacental (and occasionally perinatal) transmission of Treponema pallidum from an infected mother, and the risk is highest with untreated early maternal syphilis",
-   "It is almost entirely preventable through antenatal syphilis screening and timely maternal treatment with benzathine penicillin, so every case reflects a missed prevention opportunity",
-   "Outcomes range from miscarriage, stillbirth, and hydrops to a live-born infant who may be asymptomatic at birth yet still infected",
-   "Early congenital syphilis (within the first two years) features include snuffles (infectious nasal discharge), a maculopapular or desquamating rash often involving palms and soles, hepatosplenomegaly, jaundice, lymphadenopathy, and periostitis or osteochondritis causing painful pseudoparalysis",
-   "Late stigmata (after two years) include Hutchinson teeth, mulberry molars, interstitial keratitis, sensorineural deafness, a saddle-nose deformity, frontal bossing, and sabre shins",
-   "Diagnosis integrates maternal treponemal and non-treponemal serology, comparison of infant and maternal non-treponemal titres, direct detection from lesions or body fluids, and assessment for neurosyphilis",
-   "Treatment of the infant is with penicillin, and management must be coordinated with maternal treatment history and adequacy",
-   "A confirmed or suspected case mandates public health notification, maternal partner tracing, and evaluation of the mother's own syphilis stage"
+  "id": "congenital_syphilis",
+  "name": "Congenital syphilis",
+  "aliases": [
+    "congenital syphilis",
+    "prenatal syphilis",
+    "Treponema pallidum",
+    "vertically transmitted syphilis"
   ],
-  "pathophysiology": "Congenital syphilis results when the spirochaete Treponema pallidum crosses the placenta from an infected pregnant woman to the fetus, an event that can occur at any gestation but is most efficient during maternal spirochaetaemia in early (primary and secondary) syphilis. Disseminated fetal infection provokes widespread inflammation and endarteritis affecting the liver, bones, skin, mucous membranes, and central nervous system, and the resulting tissue injury underlies presentations from fetal hydrops and stillbirth to the multisystem features of early congenital disease. If the child survives untreated, chronic inflammation and scarring of developing structures such as the teeth, eyes, ears, nose, and long bones produce the classic late stigmata. Maternal treatment before or early in pregnancy prevents fetal infection, which is why antenatal screening is central to control.",
-  "additionalDifferentials": [
-   "Other congenital (TORCH) infections such as cytomegalovirus, toxoplasmosis, rubella, and herpes simplex",
-   "Neonatal sepsis or other bacterial infection",
-   "Neonatal hepatitis or haemolytic disease causing jaundice and hepatosplenomegaly",
-   "Non-accidental injury or metabolic bone disease as a cause of bony changes and irritability",
-   "Blistering or desquamating dermatoses of the newborn",
-   "Immune or non-immune hydrops fetalis from other causes"
-  ],
-  "additionalInvestigations": [
-   "Maternal treponemal and non-treponemal serological testing with review of treatment history",
-   "Quantitative non-treponemal titre in the infant compared with the maternal titre",
-   "Dark-field microscopy or molecular detection of Treponema pallidum from nasal discharge, mucocutaneous lesions, or placenta",
-   "Cerebrospinal fluid examination for cell count, protein, and treponemal testing to assess neurosyphilis",
-   "Long-bone radiographs to detect periostitis, osteochondritis, and metaphyseal changes",
-   "Full blood count, liver function tests, and additional imaging or ophthalmological and audiological assessment as indicated",
-   "Placental and, where relevant, autopsy histopathology in stillbirth"
-  ],
-  "redFlags": [
-   "Hydrops fetalis, stillbirth, or a severely unwell neonate",
-   "Signs of neurosyphilis or abnormal cerebrospinal fluid findings",
-   "Pseudoparalysis of a limb indicating painful bony involvement",
-   "Interstitial keratitis or new sensorineural deafness suggesting active or late disease",
-   "Maternal syphilis untreated or inadequately treated before delivery"
-  ],
-  "prognosis": "When the mother is screened and adequately treated in good time, fetal infection is usually prevented and the outlook is excellent; established infection treated promptly in the neonate generally does well, but untreated disease carries substantial mortality and, in survivors, irreversible late stigmata such as deafness and dental and skeletal deformity.",
-  "pitfalls": [
-   "Assuming an asymptomatic newborn of an infected mother is uninfected without appropriate evaluation",
-   "Judging maternal treatment adequate without confirming the agent, timing, and titre response (only benzathine penicillin given in good time is reliable)",
-   "Misinterpreting infant serology, since transplacental maternal antibody can produce a positive result without infection",
-   "Overlooking neurosyphilis by not examining the cerebrospinal fluid when indicated",
-   "Failing to notify public health services and trace and treat the mother's partners"
-  ],
-  "references": [
-   "BASHH UK national guidelines on the management of syphilis",
-   "CDC Sexually Transmitted Infections Treatment Guidelines",
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the infant with a penicillin regimen — parenteral benzylpenicillin — as definitive antimicrobial therapy, with the course guided by cerebrospinal fluid findings for neurosyphilis",
-   "Prevent disease through antenatal syphilis screening and timely maternal treatment with benzathine penicillin",
-   "Provide supportive care for the manifestations, including management of jaundice, anaemia and painful pseudoparalysis",
-   "Undertake serological follow-up with serial non-treponemal titres to confirm response and re-treat if titres fail to fall",
-   "Arrange ophthalmological, audiological and dental surveillance for late stigmata such as interstitial keratitis and sensorineural deafness",
-   "Notify public health, trace and treat maternal contacts, and screen for co-existing sexually transmitted infections"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_syphilis-pathway",
-   "title": "Congenital syphilis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Congenital syphilis follows transplacental (and occasionally perinatal) transmission of Treponema pallidum from an infected mother, and the risk is highest with untreated early maternal syphilis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hydrops fetalis, stillbirth, or a severely unwell neonate",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Maternal treponemal and non-treponemal serological testing with review of treatment history, Quantitative non-treponemal titre in the infant compared with the maternal titre, Dark-field microscopy or molecular detection of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the infant with a penicillin regimen - parenteral benzylpenicillin - as definitive antimicrobial therapy, with the course guided by cerebrospinal fluid findings for neurosyphilis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an asymptomatic newborn of an infected mother is uninfected without appropriate evaluation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital syphilis."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_syphilis-matrix",
-   "title": "Congenital syphilis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Congenital syphilis follows transplacental (and occasionally perinatal) transmission of Treponema pallidum from an infected",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Genitourinary Medicine / Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell / BASHH-CDC STI guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Congenital syphilis follows transplacental (and occasionally perinatal) transmission of Treponema pallidum from an infected mother, and the risk is highest with untreated early maternal syphilis",
+      "It is almost entirely preventable through antenatal syphilis screening and timely maternal treatment with benzathine penicillin, so every case reflects a missed prevention opportunity",
+      "Outcomes range from miscarriage, stillbirth, and hydrops to a live-born infant who may be asymptomatic at birth yet still infected",
+      "Early congenital syphilis (within the first two years) features include snuffles (infectious nasal discharge), a maculopapular or desquamating rash often involving palms and soles, hepatosplenomegaly, jaundice, lymphadenopathy, and periostitis or osteochondritis causing painful pseudoparalysis",
+      "Late stigmata (after two years) include Hutchinson teeth, mulberry molars, interstitial keratitis, sensorineural deafness, a saddle-nose deformity, frontal bossing, and sabre shins",
+      "Diagnosis integrates maternal treponemal and non-treponemal serology, comparison of infant and maternal non-treponemal titres, direct detection from lesions or body fluids, and assessment for neurosyphilis",
+      "Treatment of the infant is with penicillin, and management must be coordinated with maternal treatment history and adequacy",
+      "A confirmed or suspected case mandates public health notification, maternal partner tracing, and evaluation of the mother's own syphilis stage"
     ],
-    [
-     "Key Investigations",
-     "Maternal treponemal and non-treponemal serological testing with review of treatment history, Quantitative non-treponemal titre in",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital syphilis results when the spirochaete Treponema pallidum crosses the placenta from an infected pregnant woman to the fetus, an event that can occur at any gestation but is most efficient during maternal spirochaetaemia in early (primary and secondary) syphilis. Disseminated fetal infection provokes widespread inflammation and endarteritis affecting the liver, bones, skin, mucous membranes, and central nervous system, and the resulting tissue injury underlies presentations from fetal hydrops and stillbirth to the multisystem features of early congenital disease. If the child survives untreated, chronic inflammation and scarring of developing structures such as the teeth, eyes, ears, nose, and long bones produce the classic late stigmata. Maternal treatment before or early in pregnancy prevents fetal infection, which is why antenatal screening is central to control.",
+    "additionalDifferentials": [
+      "Other congenital (TORCH) infections such as cytomegalovirus, toxoplasmosis, rubella, and herpes simplex",
+      "Neonatal sepsis or other bacterial infection",
+      "Neonatal hepatitis or haemolytic disease causing jaundice and hepatosplenomegaly",
+      "Non-accidental injury or metabolic bone disease as a cause of bony changes and irritability",
+      "Blistering or desquamating dermatoses of the newborn",
+      "Immune or non-immune hydrops fetalis from other causes"
     ],
-    [
-     "Primary Differentials",
-     "Other congenital (TORCH) infections such as cytomegalovirus, toxoplasmosis, rubella, and herpes simplex, Neonatal sepsis or other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Maternal treponemal and non-treponemal serological testing with review of treatment history",
+      "Quantitative non-treponemal titre in the infant compared with the maternal titre",
+      "Dark-field microscopy or molecular detection of Treponema pallidum from nasal discharge, mucocutaneous lesions, or placenta",
+      "Cerebrospinal fluid examination for cell count, protein, and treponemal testing to assess neurosyphilis",
+      "Long-bone radiographs to detect periostitis, osteochondritis, and metaphyseal changes",
+      "Full blood count, liver function tests, and additional imaging or ophthalmological and audiological assessment as indicated",
+      "Placental and, where relevant, autopsy histopathology in stillbirth"
     ],
-    [
-     "Management Strategy",
-     "Treat the infant with a penicillin regimen - parenteral benzylpenicillin - as definitive antimicrobial therapy, with the course",
-     "Core treatment modality"
+    "redFlags": [
+      "Hydrops fetalis, stillbirth, or a severely unwell neonate",
+      "Signs of neurosyphilis or abnormal cerebrospinal fluid findings",
+      "Pseudoparalysis of a limb indicating painful bony involvement",
+      "Interstitial keratitis or new sensorineural deafness suggesting active or late disease",
+      "Maternal syphilis untreated or inadequately treated before delivery"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an asymptomatic newborn of an infected mother is uninfected without appropriate evaluation",
-     "Prevent diagnostic or management error"
+    "prognosis": "When the mother is screened and adequately treated in good time, fetal infection is usually prevented and the outlook is excellent; established infection treated promptly in the neonate generally does well, but untreated disease carries substantial mortality and, in survivors, irreversible late stigmata such as deafness and dental and skeletal deformity.",
+    "pitfalls": [
+      "Assuming an asymptomatic newborn of an infected mother is uninfected without appropriate evaluation",
+      "Judging maternal treatment adequate without confirming the agent, timing, and titre response (only benzathine penicillin given in good time is reliable)",
+      "Misinterpreting infant serology, since transplacental maternal antibody can produce a positive result without infection",
+      "Overlooking neurosyphilis by not examining the cerebrospinal fluid when indicated",
+      "Failing to notify public health services and trace and treat the mother's partners"
+    ],
+    "references": [
+      "BASHH UK national guidelines on the management of syphilis",
+      "CDC Sexually Transmitted Infections Treatment Guidelines",
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the infant with a penicillin regimen — parenteral benzylpenicillin — as definitive antimicrobial therapy, with the course guided by cerebrospinal fluid findings for neurosyphilis",
+      "Prevent disease through antenatal syphilis screening and timely maternal treatment with benzathine penicillin",
+      "Provide supportive care for the manifestations, including management of jaundice, anaemia and painful pseudoparalysis",
+      "Undertake serological follow-up with serial non-treponemal titres to confirm response and re-treat if titres fail to fall",
+      "Arrange ophthalmological, audiological and dental surveillance for late stigmata such as interstitial keratitis and sensorineural deafness",
+      "Notify public health, trace and treat maternal contacts, and screen for co-existing sexually transmitted infections"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital syphilis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-syphilis-real-image",
-   "title": "Congenital syphilis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "congenital_syphilis-pathway",
+      "title": "Congenital syphilis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Congenital syphilis follows transplacental (and occasionally perinatal) transmission of Treponema pallidum from an infected mother, and the risk is highest with untreated early maternal syphilis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hydrops fetalis, stillbirth, or a severely unwell neonate",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Maternal treponemal and non-treponemal serological testing with review of treatment history, Quantitative non-treponemal titre in the infant compared with the maternal titre, Dark-field microscopy or molecular detection of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the infant with a penicillin regimen - parenteral benzylpenicillin - as definitive antimicrobial therapy, with the course guided by cerebrospinal fluid findings for neurosyphilis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an asymptomatic newborn of an infected mother is uninfected without appropriate evaluation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital syphilis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_syphilis-matrix",
+      "title": "Congenital syphilis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Congenital syphilis follows transplacental (and occasionally perinatal) transmission of Treponema pallidum from an infected",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Maternal treponemal and non-treponemal serological testing with review of treatment history, Quantitative non-treponemal titre in",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other congenital (TORCH) infections such as cytomegalovirus, toxoplasmosis, rubella, and herpes simplex, Neonatal sepsis or other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the infant with a penicillin regimen - parenteral benzylpenicillin - as definitive antimicrobial therapy, with the course",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an asymptomatic newborn of an infected mother is uninfected without appropriate evaluation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital syphilis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell / BASHH-CDC STI guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_syphilis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Maternal treponemal and non-treponemal serology",
+          "cells": [
+            {
+              "text": "Maternal infection and treatment history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative non-treponemal titre in the infant",
+          "cells": [
+            {
+              "text": "Compared with the maternal titre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dark-field or molecular detection of Treponema pallidum",
+          "cells": [
+            {
+              "text": "Organism detected in lesions or discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF examination",
+          "cells": [
+            {
+              "text": "Cell count, protein and treponemal testing for neurosyphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-bone radiographs",
+          "cells": [
+            {
+              "text": "Periostitis, osteochondritis and metaphyseal change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_syphilis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other TORCH infections such as cytomegalovirus and toxoplasmosis",
+          "cells": [
+            {
+              "text": "Other congenital infections; syphilis serology separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis or other bacterial infection",
+          "cells": [
+            {
+              "text": "Acute bacterial illness rather than congenital infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury or metabolic bone disease",
+          "cells": [
+            {
+              "text": "Mimics of bony changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_syphilis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral benzylpenicillin",
+          "cells": [
+            {
+              "text": "Definitive antimicrobial therapy for the infant; course guided by CSF findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal screening and maternal treatment",
+          "cells": [
+            {
+              "text": "Benzathine penicillin treatment to prevent fetal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Jaundice, anaemia and painful pseudoparalysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serological follow-up",
+          "cells": [
+            {
+              "text": "Serial non-treponemal titres; re-treat if titres fail to fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late-stigmata surveillance",
+          "cells": [
+            {
+              "text": "Ophthalmological, audiological and dental review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health",
+          "cells": [
+            {
+              "text": "Notify, trace and treat maternal contacts; screen for other sexually transmitted infections"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_syphilis-dx-mgmt",
+      "title": "Diagnosis and management of Congenital syphilis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital syphilis: infant of a mother with syphilis or unclear treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hydrops, neurosyphilis on CSF, pseudoparalysis, late stigmata)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation and parenteral penicillin; CSF examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Maternal serology; infant titre; organism detection; CSF; long-bone radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do infant titres, organism detection or CSF confirm congenital syphilis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other TORCH infections, sepsis or metabolic bone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parenteral benzylpenicillin as definitive therapy, guided by CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive care for jaundice, anaemia and pseudoparalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial non-treponemal titres to confirm response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmological and audiological surveillance; notify and treat contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With timely maternal screening and treatment fetal infection is usually prevented",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

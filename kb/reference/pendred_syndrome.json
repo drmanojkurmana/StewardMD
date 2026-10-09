@@ -1,173 +1,433 @@
 {
- "id": "pendred_syndrome",
- "name": "Pendred syndrome",
- "aliases": [
-  "SLC26A4",
-  "pendrin deficiency",
-  "deafness with enlarged vestibular aqueduct and goitre",
-  "PDS"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology / Genetics",
- "specialty": "Otology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology / Emery's Principles of Medical Genetics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classic triad is sensorineural hearing loss, an enlarged vestibular aqueduct on imaging, and euthyroid goitre from an iodine organification defect",
-   "Caused by biallelic mutations in SLC26A4, which encodes the anion transporter pendrin; inheritance is autosomal recessive",
-   "Hearing loss is usually congenital or prelingual and may fluctuate or progress in a stepwise fashion, sometimes after minor head trauma",
-   "Enlarged vestibular aqueduct (with or without cochlear incomplete partition) is the most consistent temporal-bone finding on CT or MRI",
-   "Goitre often develops later, in later childhood or adolescence, and thyroid function is typically normal, so its absence does not exclude the diagnosis",
-   "A perchlorate discharge test can demonstrate the underlying iodine organification defect but is now largely superseded by genetic testing",
-   "Advise patients to avoid activities with head-injury risk that may precipitate sudden drops in hearing"
+  "id": "pendred_syndrome",
+  "name": "Pendred syndrome",
+  "aliases": [
+    "SLC26A4",
+    "pendrin deficiency",
+    "deafness with enlarged vestibular aqueduct and goitre",
+    "PDS"
   ],
-  "pathophysiology": "Pendred syndrome results from loss-of-function mutations in SLC26A4, encoding pendrin, a transmembrane anion (chloride/iodide/bicarbonate) exchanger expressed in the inner ear, thyroid and kidney. In the inner ear, impaired pendrin function disturbs endolymph ion and pH homeostasis, contributing to abnormal cochlear and vestibular development, an enlarged vestibular aqueduct, and sensorineural hearing loss. In the thyroid, defective iodide transport into the follicular lumen impairs organification of iodine, producing goitre while thyroid hormone levels are often maintained. The same gene can also cause non-syndromic hearing loss with enlarged vestibular aqueduct when thyroid involvement is absent.",
-  "additionalDifferentials": [
-   "Non-syndromic hearing loss with enlarged vestibular aqueduct (DFNB4)",
-   "Branchio-oto-renal syndrome with inner-ear malformation",
-   "Congenital hypothyroidism with dyshormonogenesis and goitre",
-   "Other syndromic sensorineural hearing loss such as Waardenburg or Usher",
-   "Acquired fluctuating sensorineural hearing loss from other causes",
-   "Isolated multinodular goitre unrelated to hearing loss"
-  ],
-  "additionalInvestigations": [
-   "Audiometry with serial testing to document fluctuating or progressive loss",
-   "High-resolution CT or MRI of the temporal bones for enlarged vestibular aqueduct and cochlear anomalies",
-   "Thyroid function tests and thyroid ultrasound to assess goitre",
-   "Perchlorate discharge test where genetic testing is unavailable",
-   "SLC26A4 molecular genetic testing to confirm the diagnosis"
-  ],
-  "redFlags": [
-   "Sudden or stepwise deterioration in hearing, especially after head trauma",
-   "Progressive goitre or evolving thyroid dysfunction requiring endocrine review",
-   "Vertigo or imbalance suggesting associated vestibular involvement",
-   "Bilateral profound loss threatening speech and language development in a child"
-  ],
-  "prognosis": "Hearing loss tends to be progressive and may fluctuate, with many patients eventually developing severe-to-profound loss suited to hearing aids or cochlear implantation; the goitre is usually benign and euthyroid, though thyroid function should be monitored over time.",
-  "pitfalls": [
-   "Excluding Pendred because goitre is absent in a young child before it typically develops",
-   "Overlooking an enlarged vestibular aqueduct on imaging as the key structural clue",
-   "Not warning patients about head-injury and pressure-related hearing drops",
-   "Assuming a euthyroid goitre is unrelated to the hearing loss"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Emery's Elements of Medical Genetics and Genomics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage sensorineural hearing loss with hearing aids and cochlear implantation for severe-to-profound loss",
-   "Provide early audiological rehabilitation with speech and language therapy and educational support for prelingual loss",
-   "Advise avoidance of head trauma and contact sports that may precipitate stepwise hearing deterioration in enlarged vestibular aqueduct",
-   "Monitor thyroid function and goitre size, and give thyroid hormone replacement if hypothyroidism develops",
-   "Perform serial audiometry to track fluctuating or progressive hearing loss",
-   "Refer for co-ordinated otology, audiology and endocrinology care",
-   "Offer genetic counselling for this autosomal recessive condition and screen affected siblings"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pendred_syndrome-pathway",
-   "title": "Pendred syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic triad is sensorineural hearing loss, an enlarged vestibular aqueduct on imaging, and euthyroid goitre from an iodine organification defect",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden or stepwise deterioration in hearing, especially after head trauma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Audiometry with serial testing to document fluctuating or progressive loss, High-resolution CT or MRI of the temporal bones for enlarged vestibular aqueduct and cochlear anomalies, Thyroid function tests and thyroid"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage sensorineural hearing loss with hearing aids and cochlear implantation for severe-to-profound loss"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding Pendred because goitre is absent in a young child before it typically develops"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pendred syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "pendred_syndrome-matrix",
-   "title": "Pendred syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic triad is sensorineural hearing loss, an enlarged vestibular aqueduct on imaging, and euthyroid goitre from an iodine",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology / Genetics",
+  "specialty": "Otology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology / Emery's Principles of Medical Genetics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classic triad is sensorineural hearing loss, an enlarged vestibular aqueduct on imaging, and euthyroid goitre from an iodine organification defect",
+      "Caused by biallelic mutations in SLC26A4, which encodes the anion transporter pendrin; inheritance is autosomal recessive",
+      "Hearing loss is usually congenital or prelingual and may fluctuate or progress in a stepwise fashion, sometimes after minor head trauma",
+      "Enlarged vestibular aqueduct (with or without cochlear incomplete partition) is the most consistent temporal-bone finding on CT or MRI",
+      "Goitre often develops later, in later childhood or adolescence, and thyroid function is typically normal, so its absence does not exclude the diagnosis",
+      "A perchlorate discharge test can demonstrate the underlying iodine organification defect but is now largely superseded by genetic testing",
+      "Advise patients to avoid activities with head-injury risk that may precipitate sudden drops in hearing"
     ],
-    [
-     "Key Investigations",
-     "Audiometry with serial testing to document fluctuating or progressive loss, High-resolution CT or MRI of the temporal bones for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pendred syndrome results from loss-of-function mutations in SLC26A4, encoding pendrin, a transmembrane anion (chloride/iodide/bicarbonate) exchanger expressed in the inner ear, thyroid and kidney. In the inner ear, impaired pendrin function disturbs endolymph ion and pH homeostasis, contributing to abnormal cochlear and vestibular development, an enlarged vestibular aqueduct, and sensorineural hearing loss. In the thyroid, defective iodide transport into the follicular lumen impairs organification of iodine, producing goitre while thyroid hormone levels are often maintained. The same gene can also cause non-syndromic hearing loss with enlarged vestibular aqueduct when thyroid involvement is absent.",
+    "additionalDifferentials": [
+      "Non-syndromic hearing loss with enlarged vestibular aqueduct (DFNB4)",
+      "Branchio-oto-renal syndrome with inner-ear malformation",
+      "Congenital hypothyroidism with dyshormonogenesis and goitre",
+      "Other syndromic sensorineural hearing loss such as Waardenburg or Usher",
+      "Acquired fluctuating sensorineural hearing loss from other causes",
+      "Isolated multinodular goitre unrelated to hearing loss"
     ],
-    [
-     "Primary Differentials",
-     "Non-syndromic hearing loss with enlarged vestibular aqueduct (DFNB4), Branchio-oto-renal syndrome with inner-ear malformation,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Audiometry with serial testing to document fluctuating or progressive loss",
+      "High-resolution CT or MRI of the temporal bones for enlarged vestibular aqueduct and cochlear anomalies",
+      "Thyroid function tests and thyroid ultrasound to assess goitre",
+      "Perchlorate discharge test where genetic testing is unavailable",
+      "SLC26A4 molecular genetic testing to confirm the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Manage sensorineural hearing loss with hearing aids and cochlear implantation for severe-to-profound loss",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden or stepwise deterioration in hearing, especially after head trauma",
+      "Progressive goitre or evolving thyroid dysfunction requiring endocrine review",
+      "Vertigo or imbalance suggesting associated vestibular involvement",
+      "Bilateral profound loss threatening speech and language development in a child"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding Pendred because goitre is absent in a young child before it typically develops",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hearing loss tends to be progressive and may fluctuate, with many patients eventually developing severe-to-profound loss suited to hearing aids or cochlear implantation; the goitre is usually benign and euthyroid, though thyroid function should be monitored over time.",
+    "pitfalls": [
+      "Excluding Pendred because goitre is absent in a young child before it typically develops",
+      "Overlooking an enlarged vestibular aqueduct on imaging as the key structural clue",
+      "Not warning patients about head-injury and pressure-related hearing drops",
+      "Assuming a euthyroid goitre is unrelated to the hearing loss"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Emery's Elements of Medical Genetics and Genomics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage sensorineural hearing loss with hearing aids and cochlear implantation for severe-to-profound loss",
+      "Provide early audiological rehabilitation with speech and language therapy and educational support for prelingual loss",
+      "Advise avoidance of head trauma and contact sports that may precipitate stepwise hearing deterioration in enlarged vestibular aqueduct",
+      "Monitor thyroid function and goitre size, and give thyroid hormone replacement if hypothyroidism develops",
+      "Perform serial audiometry to track fluctuating or progressive hearing loss",
+      "Refer for co-ordinated otology, audiology and endocrinology care",
+      "Offer genetic counselling for this autosomal recessive condition and screen affected siblings"
     ]
-   ],
-   "caption": "Overview comparison matrix for pendred syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pendred-syndrome-real-image",
-   "title": "Pendred syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pendred_syndrome-pathway",
+      "title": "Pendred syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic triad is sensorineural hearing loss, an enlarged vestibular aqueduct on imaging, and euthyroid goitre from an iodine organification defect",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden or stepwise deterioration in hearing, especially after head trauma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Audiometry with serial testing to document fluctuating or progressive loss, High-resolution CT or MRI of the temporal bones for enlarged vestibular aqueduct and cochlear anomalies, Thyroid function tests and thyroid"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage sensorineural hearing loss with hearing aids and cochlear implantation for severe-to-profound loss"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding Pendred because goitre is absent in a young child before it typically develops"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pendred syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pendred_syndrome-matrix",
+      "title": "Pendred syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic triad is sensorineural hearing loss, an enlarged vestibular aqueduct on imaging, and euthyroid goitre from an iodine",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Audiometry with serial testing to document fluctuating or progressive loss, High-resolution CT or MRI of the temporal bones for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-syndromic hearing loss with enlarged vestibular aqueduct (DFNB4), Branchio-oto-renal syndrome with inner-ear malformation,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage sensorineural hearing loss with hearing aids and cochlear implantation for severe-to-profound loss",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding Pendred because goitre is absent in a young child before it typically develops",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pendred syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology / Emery's Principles of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pendred_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Fluctuating or progressive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT or MRI of the temporal bones",
+          "cells": [
+            {
+              "text": "Enlarged vestibular aqueduct and cochlear anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests and thyroid ultrasound",
+          "cells": [
+            {
+              "text": "Goitre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perchlorate discharge test",
+          "cells": [
+            {
+              "text": "Used where genetic testing is unavailable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC26A4 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pendred_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hearing aids or cochlear implantation",
+          "cells": [
+            {
+              "text": "For severe-to-profound hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early audiological rehabilitation",
+          "cells": [
+            {
+              "text": "Speech and language therapy and educational support for prelingual loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head trauma avoidance",
+          "cells": [
+            {
+              "text": "Avoid head trauma and contact sports that may precipitate stepwise hearing deterioration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid monitoring",
+          "cells": [
+            {
+              "text": "Monitor thyroid function and goitre size; replace thyroid hormone if hypothyroidism develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial audiometry",
+          "cells": [
+            {
+              "text": "Track fluctuating or progressive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Co-ordinated otology, audiology and endocrinology care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screen affected siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pendred_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Pendred syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with sensorineural hearing loss, enlarged vestibular aqueduct or goitre",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stepwise hearing loss after head trauma, progressive goitre, vertigo)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent otology and endocrine review for stepwise loss or evolving thyroid disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial audiometry, temporal bone CT or MRI, and thyroid function with ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC26A4 testing (or perchlorate discharge test) confirm Pendred syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider non-syndromic enlarged vestibular aqueduct (DFNB4) or other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fit hearing aids or cochlear implantation for severe-to-profound hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start early speech, language and educational support for prelingual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Advise avoidance of head trauma and contact sports",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor thyroid function and goitre; replace thyroid hormone if hypothyroidism develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Offer genetic counselling and screen affected siblings",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Hearing is progressive or fluctuating; the goitre is usually benign",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

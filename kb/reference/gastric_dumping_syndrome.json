@@ -1,179 +1,475 @@
 {
- "id": "gastric_dumping_syndrome",
- "name": "gastric dumping syndrome",
- "aliases": [
-  "dumping syndrome",
-  "rapid gastric emptying",
-  "post-gastrectomy dumping"
- ],
- "class": "non_infective",
- "system": "gastrointestinal",
- "specialty": "gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A complication of gastric surgery (partial gastrectomy, pyloroplasty, vagotomy) and increasingly of bariatric procedures such as sleeve gastrectomy and gastric bypass, caused by loss of normal pyloric regulation of gastric emptying.",
-   "Early dumping occurs within about 15 to 30 minutes of eating and comprises both gastrointestinal (cramping, borborygmi, diarrhoea, bloating) and vasomotor (flushing, palpitations, tachycardia, light-headedness, need to lie down) features.",
-   "Late dumping occurs one to three hours after a meal and reflects reactive (postprandial) hypoglycaemia, presenting with sweating, tremor, hunger, confusion and palpitations.",
-   "A carbohydrate-rich meal, particularly rapidly absorbed simple sugars, is the classic trigger for both phases.",
-   "The modified Sigstad score and an oral glucose challenge with serial glucose and haematocrit measurement help confirm the diagnosis when it is uncertain.",
-   "First-line management is dietary: small frequent meals, restriction of simple sugars, separation of solids from liquids, and increased soluble fibre or viscosity-modifying agents to slow emptying.",
-   "Somatostatin analogues are the principal pharmacological option for refractory symptoms, slowing gastric emptying and blunting the vasomotor and hormonal responses; acarbose helps specifically with late dumping.",
-   "Surgical revision or feeding-tube strategies are reserved for severe, refractory cases after dietary and medical measures have failed."
+  "id": "gastric_dumping_syndrome",
+  "name": "gastric dumping syndrome",
+  "aliases": [
+    "dumping syndrome",
+    "rapid gastric emptying",
+    "post-gastrectomy dumping"
   ],
-  "pathophysiology": "Dumping syndrome arises when ablation or bypass of the pylorus allows rapid, unregulated delivery of hyperosmolar gastric contents into the small intestine. In early dumping, the hyperosmolar load draws fluid from the intravascular compartment into the bowel lumen, causing luminal distension, increased motility and a fall in plasma volume; this, combined with release of vasoactive and incretin gut hormones, produces the gastrointestinal and vasomotor symptoms. In late dumping, rapid absorption of carbohydrate provokes an exaggerated incretin (notably GLP-1) and insulin response; the insulin overshoot outlasts the transient hyperglycaemia and precipitates reactive hypoglycaemia one to three hours after the meal. The two mechanisms frequently coexist in the same patient.",
-  "additionalDifferentials": [
-   "postprandial (reactive) hypoglycaemia from other causes",
-   "insulinoma and other causes of endogenous hyperinsulinaemic hypoglycaemia",
-   "afferent or efferent loop syndrome after gastric surgery",
-   "bile-acid or bacterial-overgrowth diarrhoea following surgery",
-   "carcinoid syndrome and other neuroendocrine tumours causing flushing",
-   "autonomic dysfunction and postural hypotension",
-   "anxiety or panic disorder with autonomic symptoms"
-  ],
-  "additionalInvestigations": [
-   "oral glucose challenge with serial glucose and haematocrit measurement",
-   "gastric emptying scintigraphy to confirm rapid emptying",
-   "continuous glucose monitoring to capture late postprandial hypoglycaemia",
-   "modified Sigstad scoring and structured symptom questionnaires",
-   "upper gastrointestinal endoscopy or contrast study to assess post-surgical anatomy",
-   "72-hour fast or supervised testing where insulinoma is suspected",
-   "tests for bacterial overgrowth or bile-acid malabsorption when diarrhoea predominates"
-  ],
-  "redFlags": [
-   "recurrent severe hypoglycaemia causing loss of consciousness, seizures or falls",
-   "significant unintentional weight loss or malnutrition",
-   "hypoglycaemic symptoms occurring in the fasting state (pointing away from dumping toward insulinoma)",
-   "dehydration or syncope from severe vasomotor episodes",
-   "features suggesting mechanical complications such as afferent loop obstruction"
-  ],
-  "prognosis": "Most patients improve substantially with dietary modification, and symptoms often attenuate over months to a few years as the intestine adapts; a minority have persistent, disabling symptoms requiring somatostatin analogues or surgical revision. Late dumping with recurrent hypoglycaemia can be dangerous and warrants prompt, structured management.",
-  "pitfalls": [
-   "Confusing late dumping hypoglycaemia (postprandial) with fasting hypoglycaemia of insulinoma, leading to unnecessary or misdirected investigation.",
-   "Prescribing rapidly absorbed sugars to treat hypoglycaemic episodes, which perpetuates the cycle rather than resolving it.",
-   "Overlooking dumping in bariatric surgery patients, in whom it is now a common but under-recognised cause of postprandial symptoms.",
-   "Escalating to surgery before an adequate trial of dietary measures and somatostatin analogues.",
-   "Attributing vasomotor symptoms solely to anxiety and missing the temporal relationship to meals."
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease, current edition",
-   "International consensus guideline on the diagnosis and management of dumping syndrome",
-   "Maingot's Abdominal Operations, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Dietary modification is first-line: small frequent meals, restriction of rapidly absorbed simple sugars, separation of solids from liquids, and viscosity-modifying soluble fibre to slow emptying",
-   "Add acarbose, an alpha-glucosidase inhibitor, to blunt carbohydrate absorption and reactive hypoglycaemia in late dumping",
-   "Use somatostatin analogues such as octreotide or long-acting lanreotide for symptoms refractory to diet",
-   "Consider diazoxide or related measures for persistent postprandial hypoglycaemia",
-   "Reserve surgical revision or enteral-feeding approaches for the minority with disabling, treatment-resistant symptoms",
-   "Monitor late dumping with continuous glucose monitoring and educate patients to recognise and treat hypoglycaemia",
-   "Reassure that symptoms often attenuate with intestinal adaptation over time"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gastric_dumping_syndrome-pathway",
-   "title": "gastric dumping syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A complication of gastric surgery (partial gastrectomy, pyloroplasty, vagotomy) and increasingly of bariatric procedures such as sleeve gastrectomy and gastric bypass, caused by loss of normal pyloric regulation of gastric emptying.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: recurrent severe hypoglycaemia causing loss of consciousness, seizures or falls",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: oral glucose challenge with serial glucose and haematocrit measurement, gastric emptying scintigraphy to confirm rapid emptying, continuous glucose monitoring to capture late postprandial hypoglycaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Dietary modification is first-line: small frequent meals, restriction of rapidly absorbed simple sugars, separation of solids from liquids, and viscosity-modifying soluble fibre to slow emptying"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing late dumping hypoglycaemia (postprandial) with fasting hypoglycaemia of insulinoma, leading to unnecessary or misdirected investigation."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gastric dumping syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "gastric_dumping_syndrome-matrix",
-   "title": "gastric dumping syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A complication of gastric surgery (partial gastrectomy, pyloroplasty, vagotomy) and increasingly of bariatric procedures such as",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "gastrointestinal",
+  "specialty": "gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A complication of gastric surgery (partial gastrectomy, pyloroplasty, vagotomy) and increasingly of bariatric procedures such as sleeve gastrectomy and gastric bypass, caused by loss of normal pyloric regulation of gastric emptying.",
+      "Early dumping occurs within about 15 to 30 minutes of eating and comprises both gastrointestinal (cramping, borborygmi, diarrhoea, bloating) and vasomotor (flushing, palpitations, tachycardia, light-headedness, need to lie down) features.",
+      "Late dumping occurs one to three hours after a meal and reflects reactive (postprandial) hypoglycaemia, presenting with sweating, tremor, hunger, confusion and palpitations.",
+      "A carbohydrate-rich meal, particularly rapidly absorbed simple sugars, is the classic trigger for both phases.",
+      "The modified Sigstad score and an oral glucose challenge with serial glucose and haematocrit measurement help confirm the diagnosis when it is uncertain.",
+      "First-line management is dietary: small frequent meals, restriction of simple sugars, separation of solids from liquids, and increased soluble fibre or viscosity-modifying agents to slow emptying.",
+      "Somatostatin analogues are the principal pharmacological option for refractory symptoms, slowing gastric emptying and blunting the vasomotor and hormonal responses; acarbose helps specifically with late dumping.",
+      "Surgical revision or feeding-tube strategies are reserved for severe, refractory cases after dietary and medical measures have failed."
     ],
-    [
-     "Key Investigations",
-     "oral glucose challenge with serial glucose and haematocrit measurement, gastric emptying scintigraphy to confirm rapid emptying,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dumping syndrome arises when ablation or bypass of the pylorus allows rapid, unregulated delivery of hyperosmolar gastric contents into the small intestine. In early dumping, the hyperosmolar load draws fluid from the intravascular compartment into the bowel lumen, causing luminal distension, increased motility and a fall in plasma volume; this, combined with release of vasoactive and incretin gut hormones, produces the gastrointestinal and vasomotor symptoms. In late dumping, rapid absorption of carbohydrate provokes an exaggerated incretin (notably GLP-1) and insulin response; the insulin overshoot outlasts the transient hyperglycaemia and precipitates reactive hypoglycaemia one to three hours after the meal. The two mechanisms frequently coexist in the same patient.",
+    "additionalDifferentials": [
+      "postprandial (reactive) hypoglycaemia from other causes",
+      "insulinoma and other causes of endogenous hyperinsulinaemic hypoglycaemia",
+      "afferent or efferent loop syndrome after gastric surgery",
+      "bile-acid or bacterial-overgrowth diarrhoea following surgery",
+      "carcinoid syndrome and other neuroendocrine tumours causing flushing",
+      "autonomic dysfunction and postural hypotension",
+      "anxiety or panic disorder with autonomic symptoms"
     ],
-    [
-     "Primary Differentials",
-     "postprandial (reactive) hypoglycaemia from other causes, insulinoma and other causes of endogenous hyperinsulinaemic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "oral glucose challenge with serial glucose and haematocrit measurement",
+      "gastric emptying scintigraphy to confirm rapid emptying",
+      "continuous glucose monitoring to capture late postprandial hypoglycaemia",
+      "modified Sigstad scoring and structured symptom questionnaires",
+      "upper gastrointestinal endoscopy or contrast study to assess post-surgical anatomy",
+      "72-hour fast or supervised testing where insulinoma is suspected",
+      "tests for bacterial overgrowth or bile-acid malabsorption when diarrhoea predominates"
     ],
-    [
-     "Management Strategy",
-     "Dietary modification is first-line: small frequent meals, restriction of rapidly absorbed simple sugars, separation of solids",
-     "Core treatment modality"
+    "redFlags": [
+      "recurrent severe hypoglycaemia causing loss of consciousness, seizures or falls",
+      "significant unintentional weight loss or malnutrition",
+      "hypoglycaemic symptoms occurring in the fasting state (pointing away from dumping toward insulinoma)",
+      "dehydration or syncope from severe vasomotor episodes",
+      "features suggesting mechanical complications such as afferent loop obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing late dumping hypoglycaemia (postprandial) with fasting hypoglycaemia of insulinoma, leading to unnecessary or",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients improve substantially with dietary modification, and symptoms often attenuate over months to a few years as the intestine adapts; a minority have persistent, disabling symptoms requiring somatostatin analogues or surgical revision. Late dumping with recurrent hypoglycaemia can be dangerous and warrants prompt, structured management.",
+    "pitfalls": [
+      "Confusing late dumping hypoglycaemia (postprandial) with fasting hypoglycaemia of insulinoma, leading to unnecessary or misdirected investigation.",
+      "Prescribing rapidly absorbed sugars to treat hypoglycaemic episodes, which perpetuates the cycle rather than resolving it.",
+      "Overlooking dumping in bariatric surgery patients, in whom it is now a common but under-recognised cause of postprandial symptoms.",
+      "Escalating to surgery before an adequate trial of dietary measures and somatostatin analogues.",
+      "Attributing vasomotor symptoms solely to anxiety and missing the temporal relationship to meals."
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease, current edition",
+      "International consensus guideline on the diagnosis and management of dumping syndrome",
+      "Maingot's Abdominal Operations, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Dietary modification is first-line: small frequent meals, restriction of rapidly absorbed simple sugars, separation of solids from liquids, and viscosity-modifying soluble fibre to slow emptying",
+      "Add acarbose, an alpha-glucosidase inhibitor, to blunt carbohydrate absorption and reactive hypoglycaemia in late dumping",
+      "Use somatostatin analogues such as octreotide or long-acting lanreotide for symptoms refractory to diet",
+      "Consider diazoxide or related measures for persistent postprandial hypoglycaemia",
+      "Reserve surgical revision or enteral-feeding approaches for the minority with disabling, treatment-resistant symptoms",
+      "Monitor late dumping with continuous glucose monitoring and educate patients to recognise and treat hypoglycaemia",
+      "Reassure that symptoms often attenuate with intestinal adaptation over time"
     ]
-   ],
-   "caption": "Overview comparison matrix for gastric dumping syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gastric-dumping-syndrome-real-image",
-   "title": "gastric dumping syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "gastric_dumping_syndrome-pathway",
+      "title": "gastric dumping syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A complication of gastric surgery (partial gastrectomy, pyloroplasty, vagotomy) and increasingly of bariatric procedures such as sleeve gastrectomy and gastric bypass, caused by loss of normal pyloric regulation of gastric emptying.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: recurrent severe hypoglycaemia causing loss of consciousness, seizures or falls",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: oral glucose challenge with serial glucose and haematocrit measurement, gastric emptying scintigraphy to confirm rapid emptying, continuous glucose monitoring to capture late postprandial hypoglycaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Dietary modification is first-line: small frequent meals, restriction of rapidly absorbed simple sugars, separation of solids from liquids, and viscosity-modifying soluble fibre to slow emptying"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing late dumping hypoglycaemia (postprandial) with fasting hypoglycaemia of insulinoma, leading to unnecessary or misdirected investigation."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gastric dumping syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gastric_dumping_syndrome-matrix",
+      "title": "gastric dumping syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A complication of gastric surgery (partial gastrectomy, pyloroplasty, vagotomy) and increasingly of bariatric procedures such as",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "oral glucose challenge with serial glucose and haematocrit measurement, gastric emptying scintigraphy to confirm rapid emptying,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "postprandial (reactive) hypoglycaemia from other causes, insulinoma and other causes of endogenous hyperinsulinaemic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Dietary modification is first-line: small frequent meals, restriction of rapidly absorbed simple sugars, separation of solids",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing late dumping hypoglycaemia (postprandial) with fasting hypoglycaemia of insulinoma, leading to unnecessary or",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gastric dumping syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastric_dumping_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral glucose challenge with serial glucose and haematocrit",
+          "cells": [
+            {
+              "text": "Serial glucose and haematocrit response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric emptying scintigraphy",
+          "cells": [
+            {
+              "text": "Confirms rapid emptying"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous glucose monitoring",
+          "cells": [
+            {
+              "text": "Late postprandial hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modified Sigstad scoring and symptom questionnaires",
+          "cells": [
+            {
+              "text": "Structured symptom scoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy or contrast study",
+          "cells": [
+            {
+              "text": "Post-surgical anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised 72-hour fast",
+          "cells": [
+            {
+              "text": "Where insulinoma is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_dumping_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Insulinoma",
+          "cells": [
+            {
+              "text": "Hypoglycaemia in the fasting state rather than after meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Afferent or efferent loop syndrome",
+          "cells": [
+            {
+              "text": "Mechanical complication after gastric surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinoid syndrome",
+          "cells": [
+            {
+              "text": "Flushing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastric_dumping_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary modification",
+          "cells": [
+            {
+              "text": "First-line: small frequent meals and restriction of rapidly absorbed simple sugars"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acarbose",
+          "cells": [
+            {
+              "text": "Alpha-glucosidase inhibitor that blunts carbohydrate absorption in late dumping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin analogues",
+          "cells": [
+            {
+              "text": "Octreotide or long-acting lanreotide for symptoms refractory to diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diazoxide",
+          "cells": [
+            {
+              "text": "Persistent postprandial hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical revision or enteral feeding",
+          "cells": [
+            {
+              "text": "Minority with disabling, treatment-resistant symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and education",
+          "cells": [
+            {
+              "text": "Continuous glucose monitoring; recognise and treat hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Symptoms often attenuate with intestinal adaptation over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastric_dumping_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of gastric dumping syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected gastric dumping syndrome: postprandial symptoms after gastric surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypoglycaemia, weight loss, fasting hypoglycaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for recurrent severe hypoglycaemia with loss of consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oral glucose challenge, gastric emptying scan and continuous glucose monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the glucose challenge show rapid emptying with late hypoglycaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider insulinoma, loop syndrome, carcinoid or autonomic dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dietary modification: small frequent meals and restriction of simple sugars",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Acarbose to blunt carbohydrate absorption in late dumping",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Octreotide or lanreotide for symptoms refractory to diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical revision or enteral feeding for disabling, resistant symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most improve with diet; symptoms often attenuate over months to years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

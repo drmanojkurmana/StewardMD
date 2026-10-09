@@ -1,173 +1,464 @@
 {
- "id": "olmsted_syndrome",
- "name": "Olmsted syndrome",
- "aliases": [
-  "TRPV3",
-  "mutilating palmoplantar keratoderma with periorificial keratotic plaques",
-  "MGP-1"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by the combination of a severe, mutilating, bilateral palmoplantar keratoderma with sharply demarcated periorificial keratotic plaques (around the mouth, nose, eyes, anus and genitalia)",
-   "The keratoderma is often intensely painful and can be transgredient, with constricting bands and pseudo-ainhum threatening digits",
-   "Onset is usually in infancy or early childhood with progressive thickening",
-   "Most cases result from dominant gain-of-function mutations in TRPV3, a keratinocyte cation channel; recessive and other genetic forms exist",
-   "Associated features may include alopecia, nail dystrophy, oral leucokeratosis and, over time, a risk of squamous cell carcinoma within affected skin",
-   "Severe itch, pain and functional disability are prominent and difficult to manage",
-   "Management is supportive with emollients/keratolytics, oral retinoids, pain control and surgery for constricting bands; TRPV3-directed and other targeted therapies are under investigation"
+  "id": "olmsted_syndrome",
+  "name": "Olmsted syndrome",
+  "aliases": [
+    "TRPV3",
+    "mutilating palmoplantar keratoderma with periorificial keratotic plaques",
+    "MGP-1"
   ],
-  "pathophysiology": "Olmsted syndrome is most often caused by dominant gain-of-function mutations in TRPV3, which encodes a transient receptor potential vanilloid cation channel expressed in keratinocytes and involved in temperature sensing, epidermal barrier formation, keratinocyte proliferation and hair growth. Overactivity of the mutant channel increases calcium influx and drives excessive keratinocyte proliferation and abnormal differentiation, together with dysregulated apoptosis and sensory-nerve signalling that generates the marked pain and itch. The result is a severe, mutilating palmoplantar keratoderma with periorificial plaques; chronic hyperproliferation and inflammation also underlie the long-term risk of squamous cell carcinoma. Recessive and phenocopy forms involving other genes have been described.",
-  "additionalDifferentials": [
-   "Vohwinkel syndrome (mutilating keratoderma)",
-   "Mal de Meleda",
-   "Papillon-Lefevre syndrome",
-   "Pachyonychia congenita",
-   "Acrodermatitis enteropathica",
-   "Pityriasis rubra pilaris with palmoplantar involvement"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing massive orthohyperkeratosis, acanthosis and psoriasiform change",
-   "Molecular genetic testing of TRPV3 and related genes",
-   "Assessment and monitoring of digital constriction bands and function",
-   "Ophthalmological and oral examination for periorificial and mucosal involvement",
-   "Surveillance biopsy of chronic or ulcerated plaques for malignant change",
-   "Pain assessment and multidisciplinary evaluation"
-  ],
-  "redFlags": [
-   "Progressive pseudo-ainhum threatening digital viability",
-   "New, ulcerated or non-healing lesion within keratoderma suggesting squamous cell carcinoma",
-   "Uncontrolled pain or itch causing severe disability",
-   "Secondary infection of fissured or eroded plaques"
-  ],
-  "prognosis": "Olmsted syndrome is a chronic, often progressive and disabling disorder; the keratoderma rarely resolves and can be mutilating, and there is a long-term risk of cutaneous squamous cell carcinoma. Pain and functional impairment are major and lifelong, though targeted therapies offer emerging hope.",
-  "pitfalls": [
-   "Failing to recognise the diagnostic periorificial plaques and treating as isolated keratoderma",
-   "Neglecting early release of constricting bands, risking digital loss",
-   "Underestimating pain and itch, which are central to morbidity",
-   "Overlooking malignant transformation in long-standing plaques"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intensive topical skin care with emollients, keratolytics such as urea or salicylic acid, and mechanical debridement of hyperkeratotic plaques",
-   "Oral retinoids such as acitretin as the principal systemic therapy to reduce the keratoderma, with monitoring for retinoid toxicity",
-   "Emerging targeted therapy directed at the TRPV3 pathway, including mTOR inhibitors such as sirolimus and epidermal growth factor receptor inhibitors such as erlotinib in selected cases",
-   "Multimodal control of pain and pruritus, incorporating neuropathic analgesics",
-   "Prevention and management of digital constriction bands and pseudo-ainhum through physiotherapy, splinting and surgery to preserve the digits",
-   "Surveillance for cutaneous squamous cell carcinoma, with examination and biopsy of chronic or ulcerated plaques",
-   "Multidisciplinary dermatology, pain, physiotherapy, ophthalmology and dental care, with genetic counselling for the TRPV3 disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "olmsted_syndrome-pathway",
-   "title": "Olmsted syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by the combination of a severe, mutilating, bilateral palmoplantar keratoderma with sharply demarcated periorificial keratotic plaques (around the mouth, nose, eyes, anus and genitalia)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive pseudo-ainhum threatening digital viability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing massive orthohyperkeratosis, acanthosis and psoriasiform change, Molecular genetic testing of TRPV3 and related genes, Assessment and monitoring of digital constriction bands and function"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intensive topical skin care with emollients, keratolytics such as urea or salicylic acid, and mechanical debridement of hyperkeratotic plaques"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise the diagnostic periorificial plaques and treating as isolated keratoderma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of olmsted syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "olmsted_syndrome-matrix",
-   "title": "Olmsted syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by the combination of a severe, mutilating, bilateral palmoplantar keratoderma with sharply demarcated periorificial",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by the combination of a severe, mutilating, bilateral palmoplantar keratoderma with sharply demarcated periorificial keratotic plaques (around the mouth, nose, eyes, anus and genitalia)",
+      "The keratoderma is often intensely painful and can be transgredient, with constricting bands and pseudo-ainhum threatening digits",
+      "Onset is usually in infancy or early childhood with progressive thickening",
+      "Most cases result from dominant gain-of-function mutations in TRPV3, a keratinocyte cation channel; recessive and other genetic forms exist",
+      "Associated features may include alopecia, nail dystrophy, oral leucokeratosis and, over time, a risk of squamous cell carcinoma within affected skin",
+      "Severe itch, pain and functional disability are prominent and difficult to manage",
+      "Management is supportive with emollients/keratolytics, oral retinoids, pain control and surgery for constricting bands; TRPV3-directed and other targeted therapies are under investigation"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing massive orthohyperkeratosis, acanthosis and psoriasiform change, Molecular genetic testing of TRPV3 and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Olmsted syndrome is most often caused by dominant gain-of-function mutations in TRPV3, which encodes a transient receptor potential vanilloid cation channel expressed in keratinocytes and involved in temperature sensing, epidermal barrier formation, keratinocyte proliferation and hair growth. Overactivity of the mutant channel increases calcium influx and drives excessive keratinocyte proliferation and abnormal differentiation, together with dysregulated apoptosis and sensory-nerve signalling that generates the marked pain and itch. The result is a severe, mutilating palmoplantar keratoderma with periorificial plaques; chronic hyperproliferation and inflammation also underlie the long-term risk of squamous cell carcinoma. Recessive and phenocopy forms involving other genes have been described.",
+    "additionalDifferentials": [
+      "Vohwinkel syndrome (mutilating keratoderma)",
+      "Mal de Meleda",
+      "Papillon-Lefevre syndrome",
+      "Pachyonychia congenita",
+      "Acrodermatitis enteropathica",
+      "Pityriasis rubra pilaris with palmoplantar involvement"
     ],
-    [
-     "Primary Differentials",
-     "Vohwinkel syndrome (mutilating keratoderma), Mal de Meleda, Papillon-Lefevre syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing massive orthohyperkeratosis, acanthosis and psoriasiform change",
+      "Molecular genetic testing of TRPV3 and related genes",
+      "Assessment and monitoring of digital constriction bands and function",
+      "Ophthalmological and oral examination for periorificial and mucosal involvement",
+      "Surveillance biopsy of chronic or ulcerated plaques for malignant change",
+      "Pain assessment and multidisciplinary evaluation"
     ],
-    [
-     "Management Strategy",
-     "Intensive topical skin care with emollients, keratolytics such as urea or salicylic acid, and mechanical debridement of",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive pseudo-ainhum threatening digital viability",
+      "New, ulcerated or non-healing lesion within keratoderma suggesting squamous cell carcinoma",
+      "Uncontrolled pain or itch causing severe disability",
+      "Secondary infection of fissured or eroded plaques"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise the diagnostic periorificial plaques and treating as isolated keratoderma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Olmsted syndrome is a chronic, often progressive and disabling disorder; the keratoderma rarely resolves and can be mutilating, and there is a long-term risk of cutaneous squamous cell carcinoma. Pain and functional impairment are major and lifelong, though targeted therapies offer emerging hope.",
+    "pitfalls": [
+      "Failing to recognise the diagnostic periorificial plaques and treating as isolated keratoderma",
+      "Neglecting early release of constricting bands, risking digital loss",
+      "Underestimating pain and itch, which are central to morbidity",
+      "Overlooking malignant transformation in long-standing plaques"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intensive topical skin care with emollients, keratolytics such as urea or salicylic acid, and mechanical debridement of hyperkeratotic plaques",
+      "Oral retinoids such as acitretin as the principal systemic therapy to reduce the keratoderma, with monitoring for retinoid toxicity",
+      "Emerging targeted therapy directed at the TRPV3 pathway, including mTOR inhibitors such as sirolimus and epidermal growth factor receptor inhibitors such as erlotinib in selected cases",
+      "Multimodal control of pain and pruritus, incorporating neuropathic analgesics",
+      "Prevention and management of digital constriction bands and pseudo-ainhum through physiotherapy, splinting and surgery to preserve the digits",
+      "Surveillance for cutaneous squamous cell carcinoma, with examination and biopsy of chronic or ulcerated plaques",
+      "Multidisciplinary dermatology, pain, physiotherapy, ophthalmology and dental care, with genetic counselling for the TRPV3 disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for olmsted syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "olmsted-syndrome-real-image",
-   "title": "Olmsted syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "olmsted_syndrome-pathway",
+      "title": "Olmsted syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by the combination of a severe, mutilating, bilateral palmoplantar keratoderma with sharply demarcated periorificial keratotic plaques (around the mouth, nose, eyes, anus and genitalia)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive pseudo-ainhum threatening digital viability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing massive orthohyperkeratosis, acanthosis and psoriasiform change, Molecular genetic testing of TRPV3 and related genes, Assessment and monitoring of digital constriction bands and function"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intensive topical skin care with emollients, keratolytics such as urea or salicylic acid, and mechanical debridement of hyperkeratotic plaques"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise the diagnostic periorificial plaques and treating as isolated keratoderma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of olmsted syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "olmsted_syndrome-matrix",
+      "title": "Olmsted syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by the combination of a severe, mutilating, bilateral palmoplantar keratoderma with sharply demarcated periorificial",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing massive orthohyperkeratosis, acanthosis and psoriasiform change, Molecular genetic testing of TRPV3 and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vohwinkel syndrome (mutilating keratoderma), Mal de Meleda, Papillon-Lefevre syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intensive topical skin care with emollients, keratolytics such as urea or salicylic acid, and mechanical debridement of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise the diagnostic periorificial plaques and treating as isolated keratoderma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for olmsted syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "olmsted_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Massive orthohyperkeratosis, acanthosis and psoriasiform change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TRPV3 and related gene testing",
+          "cells": [
+            {
+              "text": "Variant in TRPV3, most often dominant gain-of-function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital constriction band assessment",
+          "cells": [
+            {
+              "text": "Constriction bands and pseudo-ainhum threatening digital function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic and oral examination",
+          "cells": [
+            {
+              "text": "Periorificial and mucosal involvement, including oral leucokeratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance biopsy",
+          "cells": [
+            {
+              "text": "Chronic or ulcerated plaques, to look for malignant change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain and itch assessment",
+          "cells": [
+            {
+              "text": "Severe pain and itch, central to morbidity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "olmsted_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive topical care",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "Emollients, keratolytics such as urea or salicylic acid, and mechanical debridement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral retinoids",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Acitretin as the principal systemic therapy, with monitoring for retinoid toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted therapy in selected cases",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Sirolimus or erlotinib; TRPV3-directed therapy under investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pain and pruritus control",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Multimodal, including neuropathic analgesics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital constriction bands",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "Physiotherapy, splinting and surgery to preserve the digits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Squamous cell carcinoma surveillance",
+          "cells": [
+            {
+              "text": "6"
+            },
+            {
+              "text": "Examination and biopsy of chronic or ulcerated plaques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary and genetic care",
+          "cells": [
+            {
+              "text": "7"
+            },
+            {
+              "text": "Dermatology, pain, physiotherapy, ophthalmology and dental care; genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "olmsted_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Olmsted syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Palmoplantar keratoderma with periorificial plaques since infancy; Olmsted suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (pseudo-ainhum, ulcerated plaque, uncontrolled pain or infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent release of constricting bands threatening digit viability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, TRPV3 testing, digit, ophthalmic and oral examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does TRPV3 testing or biopsy confirm the disorder with periorificial plaques?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Vohwinkel, Papillon-Lefevre, pachyonychia congenita or Mal de Meleda",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emollients, keratolytics such as urea or salicylic acid, and debridement",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral acitretin for keratoderma, with monitoring for retinoid toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sirolimus or erlotinib in selected cases; pain and itch controlled in parallel",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, splinting and surgery to preserve digits",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Biopsy of chronic or ulcerated plaques to screen for squamous cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and often disabling; long-term squamous cell carcinoma risk in affected skin",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

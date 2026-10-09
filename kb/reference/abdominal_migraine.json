@@ -1,175 +1,491 @@
 {
- "id": "abdominal_migraine",
- "name": "Abdominal migraine",
- "aliases": [
-  "abdominal migraine syndrome",
-  "childhood periodic syndrome (abdominal type)"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Paediatric neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / Swaiman's Pediatric Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An episodic syndrome that may be associated with migraine (ICHD-3), affecting mainly school-age children (peak around 5-10 years) and a recognised cause of recurrent abdominal pain",
-   "Attacks are recurrent, stereotyped episodes of moderate-to-severe midline or periumbilical dull pain lasting hours (typically up to 72 hours) with completely symptom-free intervals",
-   "Associated features include anorexia, nausea, vomiting and pallor; the child often looks unwell and withdraws from normal activity",
-   "The pain is characteristically midline and poorly localised, the abdomen is normal on examination, and the child is entirely well between attacks",
-   "A personal or family history of migraine is common and many children later develop typical migraine headaches",
-   "Diagnosis is clinical using ICHD-3 criteria (at least five attacks of midline pain lasting 2-72 hours with at least two of anorexia, nausea, vomiting or pallor and no better explanation)",
-   "It remains a diagnosis of exclusion, so a careful history and examination are needed to exclude gastrointestinal, renal and surgical causes",
-   "Management mirrors migraine care with trigger avoidance, reassurance, acute symptomatic measures and migraine prophylaxis in frequent or severe cases"
+  "id": "abdominal_migraine",
+  "name": "Abdominal migraine",
+  "aliases": [
+    "abdominal migraine syndrome",
+    "childhood periodic syndrome (abdominal type)"
   ],
-  "pathophysiology": "Abdominal migraine is considered part of the migraine continuum, sharing mechanisms with migraine including trigeminovascular activation, dysregulation of the brain-gut axis and altered central pain processing. The same paroxysmal neuronal excitability and neuropeptide changes thought to drive migraine are expressed with the gut as the principal symptomatic target, producing episodic midline pain with autonomic accompaniments. There is strong familial and genetic overlap with migraine, and attacks are provoked by migraine-type triggers such as stress, fatigue, missed meals and certain foods.",
-  "additionalDifferentials": [
-   "Functional abdominal pain and irritable bowel syndrome",
-   "Cyclical vomiting syndrome (a related episodic syndrome)",
-   "Constipation",
-   "Intermittent obstruction such as malrotation with volvulus or recurrent intussusception, and recurrent appendicitis",
-   "Urinary tract infection or pelvi-ureteric junction obstruction",
-   "Peptic ulcer disease and gastritis",
-   "Inflammatory bowel disease and coeliac disease"
-  ],
-  "additionalInvestigations": [
-   "Thorough history including an attack diary and family history of migraine",
-   "Abdominal examination with growth and weight monitoring between attacks",
-   "Urinalysis to exclude a urinary tract cause",
-   "Basic bloods including full blood count, inflammatory markers and coeliac serology to exclude organic disease",
-   "Abdominal ultrasound if structural or renal pathology is suspected",
-   "Referral for further gastrointestinal evaluation such as endoscopy only if red flags are present"
-  ],
-  "redFlags": [
-   "Bilious vomiting or pain that is not midline or is localised away from the umbilicus",
-   "Weight loss, faltering growth or nocturnal waking with pain or diarrhoea",
-   "Gastrointestinal bleeding, persistent vomiting or signs of obstruction",
-   "Abnormal examination findings such as a mass, organomegaly or perianal disease",
-   "Fever, joint symptoms or other systemic features suggesting organic disease"
-  ],
-  "prognosis": "Abdominal migraine is benign and self-limiting; attacks typically diminish over time and most children become symptom-free. A substantial proportion, however, develop migraine headaches during adolescence or adulthood.",
-  "pitfalls": [
-   "Labelling pain as abdominal migraine before excluding organic gastrointestinal, renal or surgical disease",
-   "Failing to recognise the migraine link and so delaying appropriate migraine-directed management",
-   "Attributing the pain purely to psychological causes and missing the diagnosis",
-   "Missing bilious vomiting or faltering growth that signal an alternative diagnosis",
-   "Over-investigating a child with a typical, stereotyped presentation and a normal examination"
-  ],
-  "references": [
-   "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the family of the benign nature and identify and avoid triggers such as missed meals, poor sleep, dehydration, stress and specific dietary precipitants",
-   "Manage acute attacks supportively with rest in a quiet dark room, simple analgesia and an antiemetic, considering a nasal or oral triptan for severe attacks in older children",
-   "For frequent or disabling attacks, offer prophylaxis with agents used in paediatric migraine such as pizotifen, propranolol, cyproheptadine, flunarizine or topiramate",
-   "Encourage lifestyle regularity with consistent meals, adequate hydration and good sleep hygiene",
-   "Keep an attack diary to characterise frequency, triggers and treatment response",
-   "Follow up to monitor for evolution into typical migraine headache and re-evaluate if the pattern changes or red flags emerge"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "abdominal_migraine-pathway",
-   "title": "Abdominal migraine: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An episodic syndrome that may be associated with migraine (ICHD-3), affecting mainly school-age children (peak around 5-10 years) and a recognised cause of recurrent abdominal pain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilious vomiting or pain that is not midline or is localised away from the umbilicus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thorough history including an attack diary and family history of migraine, Abdominal examination with growth and weight monitoring between attacks, Urinalysis to exclude a urinary tract cause"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the family of the benign nature and identify and avoid triggers such as missed meals, poor sleep, dehydration, stress and specific dietary precipitants"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling pain as abdominal migraine before excluding organic gastrointestinal, renal or surgical disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of abdominal migraine."
-  }
- ],
- "tables": [
-  {
-   "id": "abdominal_migraine-matrix",
-   "title": "Abdominal migraine: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An episodic syndrome that may be associated with migraine (ICHD-3), affecting mainly school-age children (peak around 5-10 years)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Paediatric neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / Swaiman's Pediatric Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An episodic syndrome that may be associated with migraine (ICHD-3), affecting mainly school-age children (peak around 5-10 years) and a recognised cause of recurrent abdominal pain",
+      "Attacks are recurrent, stereotyped episodes of moderate-to-severe midline or periumbilical dull pain lasting hours (typically up to 72 hours) with completely symptom-free intervals",
+      "Associated features include anorexia, nausea, vomiting and pallor; the child often looks unwell and withdraws from normal activity",
+      "The pain is characteristically midline and poorly localised, the abdomen is normal on examination, and the child is entirely well between attacks",
+      "A personal or family history of migraine is common and many children later develop typical migraine headaches",
+      "Diagnosis is clinical using ICHD-3 criteria (at least five attacks of midline pain lasting 2-72 hours with at least two of anorexia, nausea, vomiting or pallor and no better explanation)",
+      "It remains a diagnosis of exclusion, so a careful history and examination are needed to exclude gastrointestinal, renal and surgical causes",
+      "Management mirrors migraine care with trigger avoidance, reassurance, acute symptomatic measures and migraine prophylaxis in frequent or severe cases"
     ],
-    [
-     "Key Investigations",
-     "Thorough history including an attack diary and family history of migraine, Abdominal examination with growth and weight",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Abdominal migraine is considered part of the migraine continuum, sharing mechanisms with migraine including trigeminovascular activation, dysregulation of the brain-gut axis and altered central pain processing. The same paroxysmal neuronal excitability and neuropeptide changes thought to drive migraine are expressed with the gut as the principal symptomatic target, producing episodic midline pain with autonomic accompaniments. There is strong familial and genetic overlap with migraine, and attacks are provoked by migraine-type triggers such as stress, fatigue, missed meals and certain foods.",
+    "additionalDifferentials": [
+      "Functional abdominal pain and irritable bowel syndrome",
+      "Cyclical vomiting syndrome (a related episodic syndrome)",
+      "Constipation",
+      "Intermittent obstruction such as malrotation with volvulus or recurrent intussusception, and recurrent appendicitis",
+      "Urinary tract infection or pelvi-ureteric junction obstruction",
+      "Peptic ulcer disease and gastritis",
+      "Inflammatory bowel disease and coeliac disease"
     ],
-    [
-     "Primary Differentials",
-     "Functional abdominal pain and irritable bowel syndrome, Cyclical vomiting syndrome (a related episodic syndrome), Constipation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thorough history including an attack diary and family history of migraine",
+      "Abdominal examination with growth and weight monitoring between attacks",
+      "Urinalysis to exclude a urinary tract cause",
+      "Basic bloods including full blood count, inflammatory markers and coeliac serology to exclude organic disease",
+      "Abdominal ultrasound if structural or renal pathology is suspected",
+      "Referral for further gastrointestinal evaluation such as endoscopy only if red flags are present"
     ],
-    [
-     "Management Strategy",
-     "Reassure the family of the benign nature and identify and avoid triggers such as missed meals, poor sleep, dehydration, stress",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilious vomiting or pain that is not midline or is localised away from the umbilicus",
+      "Weight loss, faltering growth or nocturnal waking with pain or diarrhoea",
+      "Gastrointestinal bleeding, persistent vomiting or signs of obstruction",
+      "Abnormal examination findings such as a mass, organomegaly or perianal disease",
+      "Fever, joint symptoms or other systemic features suggesting organic disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling pain as abdominal migraine before excluding organic gastrointestinal, renal or surgical disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Abdominal migraine is benign and self-limiting; attacks typically diminish over time and most children become symptom-free. A substantial proportion, however, develop migraine headaches during adolescence or adulthood.",
+    "pitfalls": [
+      "Labelling pain as abdominal migraine before excluding organic gastrointestinal, renal or surgical disease",
+      "Failing to recognise the migraine link and so delaying appropriate migraine-directed management",
+      "Attributing the pain purely to psychological causes and missing the diagnosis",
+      "Missing bilious vomiting or faltering growth that signal an alternative diagnosis",
+      "Over-investigating a child with a typical, stereotyped presentation and a normal examination"
+    ],
+    "references": [
+      "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the family of the benign nature and identify and avoid triggers such as missed meals, poor sleep, dehydration, stress and specific dietary precipitants",
+      "Manage acute attacks supportively with rest in a quiet dark room, simple analgesia and an antiemetic, considering a nasal or oral triptan for severe attacks in older children",
+      "For frequent or disabling attacks, offer prophylaxis with agents used in paediatric migraine such as pizotifen, propranolol, cyproheptadine, flunarizine or topiramate",
+      "Encourage lifestyle regularity with consistent meals, adequate hydration and good sleep hygiene",
+      "Keep an attack diary to characterise frequency, triggers and treatment response",
+      "Follow up to monitor for evolution into typical migraine headache and re-evaluate if the pattern changes or red flags emerge"
     ]
-   ],
-   "caption": "Overview comparison matrix for abdominal migraine."
-  }
- ],
- "diagrams": [
-  {
-   "id": "abdominal-migraine-real-image",
-   "title": "Abdominal migraine: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "abdominal_migraine-pathway",
+      "title": "Abdominal migraine: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An episodic syndrome that may be associated with migraine (ICHD-3), affecting mainly school-age children (peak around 5-10 years) and a recognised cause of recurrent abdominal pain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilious vomiting or pain that is not midline or is localised away from the umbilicus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thorough history including an attack diary and family history of migraine, Abdominal examination with growth and weight monitoring between attacks, Urinalysis to exclude a urinary tract cause"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the family of the benign nature and identify and avoid triggers such as missed meals, poor sleep, dehydration, stress and specific dietary precipitants"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling pain as abdominal migraine before excluding organic gastrointestinal, renal or surgical disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of abdominal migraine."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "abdominal_migraine-matrix",
+      "title": "Abdominal migraine: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An episodic syndrome that may be associated with migraine (ICHD-3), affecting mainly school-age children (peak around 5-10 years)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thorough history including an attack diary and family history of migraine, Abdominal examination with growth and weight",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Functional abdominal pain and irritable bowel syndrome, Cyclical vomiting syndrome (a related episodic syndrome), Constipation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the family of the benign nature and identify and avoid triggers such as missed meals, poor sleep, dehydration, stress",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling pain as abdominal migraine before excluding organic gastrointestinal, renal or surgical disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for abdominal migraine."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / Swaiman's Pediatric Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "abdominal_migraine-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Attack diary and family history of migraine",
+          "cells": [
+            {
+              "text": "Attack pattern and migraine history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal examination with growth and weight monitoring",
+          "cells": [
+            {
+              "text": "Normal abdomen and growth between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Excludes a urinary tract cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, inflammatory markers and coeliac serology",
+          "cells": [
+            {
+              "text": "Excludes organic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Structural or renal pathology when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy",
+          "cells": [
+            {
+              "text": "Only when red flags are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abdominal_migraine-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Malrotation with volvulus, or recurrent intussusception",
+          "cells": [
+            {
+              "text": "Intermittent obstruction"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary tract infection or pelviureteric junction obstruction",
+          "cells": [
+            {
+              "text": "A urinary tract cause"
+            },
+            {
+              "text": "Urinalysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease and coeliac disease",
+          "cells": [
+            {
+              "text": "Organic bowel disease"
+            },
+            {
+              "text": "Coeliac serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abdominal_migraine-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and trigger avoidance",
+          "cells": [
+            {
+              "text": "Benign nature; avoid missed meals, poor sleep, dehydration, stress"
+            },
+            {
+              "text": "Also specific dietary precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care in acute attacks",
+          "cells": [
+            {
+              "text": "Rest in a quiet dark room, simple analgesia and an antiemetic"
+            },
+            {
+              "text": "Triptan for severe attacks in older children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylaxis for frequent or disabling attacks",
+          "cells": [
+            {
+              "text": "Pizotifen, propranolol, cyproheptadine, flunarizine or topiramate"
+            },
+            {
+              "text": "Agents used in paediatric migraine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle regularity",
+          "cells": [
+            {
+              "text": "Encourages a steady routine"
+            },
+            {
+              "text": "Consistent meals, hydration and sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attack diary",
+          "cells": [
+            {
+              "text": "Records frequency, triggers and response"
+            },
+            {
+              "text": "Characterises frequency, triggers and response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up for evolution into migraine",
+          "cells": [
+            {
+              "text": "Watch for typical migraine headache"
+            },
+            {
+              "text": "Re-evaluate if red flags emerge"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "abdominal_migraine-dx-mgmt",
+      "title": "Diagnosis and management of Abdominal migraine",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent midline periumbilical pain with anorexia, nausea or pallor",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Bilious vomiting, weight loss, GI bleeding or abnormal abdominal signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric evaluation for organic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Attack diary, family migraine history, growth, weight and urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FBC, coeliac serology and urine show no organic cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Diagnose abdominal migraine; reassure and identify triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ultrasound; review malrotation, urinary and coeliac causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid triggers: missed meals, poor sleep, dehydration, stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acute attacks: rest in a dark room, simple analgesia and antiemetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prophylaxis for frequent attacks (pizotifen, propranolol, topiramate)",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; many become symptom-free, some get migraine",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

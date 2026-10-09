@@ -1,173 +1,386 @@
 {
- "id": "restless_legs_syndrome",
- "name": "Restless legs syndrome",
- "aliases": [
-  "RLS",
-  "Willis-Ekbom disease",
-  "restless leg syndrome"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by an irresistible urge to move the legs, usually with uncomfortable sensations, that is partly or wholly relieved by movement",
-   "Symptoms worsen at rest and in the evening or night, disrupting sleep onset and contributing to daytime fatigue",
-   "Most patients also have periodic limb movements of sleep, which can be documented on polysomnography",
-   "Iron deficiency is a key and treatable contributor, so serum ferritin and transferrin saturation should be checked even when the haemoglobin is normal",
-   "Common secondary associations include pregnancy, chronic kidney disease and uraemia, and peripheral neuropathy",
-   "Certain drugs, including many antidepressants, antihistamines, and dopamine antagonists, can precipitate or aggravate symptoms",
-   "Treatment principles include iron repletion when stores are low, alpha-2-delta ligands, and dopaminergic agents, with attention to non-pharmacological measures",
-   "Long-term dopamine agonist use can lead to augmentation, a worsening and earlier onset of symptoms that requires careful management"
+  "id": "restless_legs_syndrome",
+  "name": "Restless legs syndrome",
+  "aliases": [
+    "RLS",
+    "Willis-Ekbom disease",
+    "restless leg syndrome"
   ],
-  "pathophysiology": "Restless legs syndrome is a sensorimotor disorder linked to dysfunction of central dopaminergic transmission and to abnormal brain iron handling, since iron is a cofactor for dopamine synthesis. Reduced iron availability within the central nervous system, even with normal peripheral stores, is thought to impair dopaminergic signalling in circuits including the spinal cord and diencephalon. There is a strong genetic contribution, and it may be primary or secondary to iron deficiency, uraemia, pregnancy, or neuropathy.",
-  "additionalDifferentials": [
-   "Peripheral neuropathy and radiculopathy",
-   "Nocturnal leg cramps",
-   "Akathisia, particularly drug-induced",
-   "Peripheral vascular disease and venous insufficiency",
-   "Positional discomfort and habitual foot tapping",
-   "Periodic limb movement disorder without the sensory urge"
-  ],
-  "additionalInvestigations": [
-   "Serum ferritin and transferrin saturation to assess iron status",
-   "Renal function tests to identify uraemia",
-   "Blood glucose and evaluation for peripheral neuropathy where clinically suspected",
-   "Review of medications that may provoke symptoms",
-   "Polysomnography in selected cases, particularly to document periodic limb movements or exclude other sleep disorders"
-  ],
-  "redFlags": [
-   "Rapidly progressive or asymmetric sensory or motor deficits suggesting a neuropathy or radiculopathy rather than primary RLS",
-   "Augmentation on dopaminergic therapy with earlier, more intense, and spreading symptoms",
-   "Symptoms secondary to unrecognised chronic kidney disease or severe iron deficiency",
-   "Severe sleep deprivation with significant mood disturbance or impaired daytime function"
-  ],
-  "prognosis": "Primary restless legs syndrome is usually a chronic condition that can fluctuate over time, often worsening with age. Secondary forms may resolve when the underlying cause, such as iron deficiency or pregnancy, is corrected. Most patients achieve good symptom control with appropriate treatment, though augmentation can complicate long-term dopaminergic therapy.",
-  "pitfalls": [
-   "Failing to check and correct iron status, missing a readily treatable driver of symptoms",
-   "Overlooking culprit medications that provoke or worsen the syndrome",
-   "Relying on long-term dopamine agonists and precipitating augmentation",
-   "Confusing the condition with akathisia, cramps, or neuropathy and treating the wrong problem"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Check iron status and replace iron with oral or intravenous supplementation when ferritin or transferrin saturation is low, even with a normal haemoglobin",
-   "Review and withdraw aggravating drugs where possible, including many antidepressants, sedating antihistamines and dopamine antagonists",
-   "Advise sleep hygiene and reduced caffeine and alcohol intake as first-line non-pharmacological measures",
-   "For troublesome symptoms start an alpha-2-delta ligand such as gabapentin or pregabalin, often preferred to limit augmentation",
-   "Use a dopamine agonist such as pramipexole, ropinirole or rotigotine with caution, monitoring for augmentation and impulse-control disorders",
-   "Treat secondary contributors including uraemia and pregnancy-related symptoms",
-   "Reserve low-potency opioids for refractory cases or dopaminergic augmentation under specialist supervision"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "restless_legs_syndrome-pathway",
-   "title": "Restless legs syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by an irresistible urge to move the legs, usually with uncomfortable sensations, that is partly or wholly relieved by movement",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive or asymmetric sensory or motor deficits suggesting a neuropathy or radiculopathy rather than primary RLS",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum ferritin and transferrin saturation to assess iron status, Renal function tests to identify uraemia, Blood glucose and evaluation for peripheral neuropathy where clinically suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Check iron status and replace iron with oral or intravenous supplementation when ferritin or transferrin saturation is low, even with a normal haemoglobin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to check and correct iron status, missing a readily treatable driver of symptoms"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of restless legs syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "restless_legs_syndrome-matrix",
-   "title": "Restless legs syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by an irresistible urge to move the legs, usually with uncomfortable sensations, that is partly or wholly relieved",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by an irresistible urge to move the legs, usually with uncomfortable sensations, that is partly or wholly relieved by movement",
+      "Symptoms worsen at rest and in the evening or night, disrupting sleep onset and contributing to daytime fatigue",
+      "Most patients also have periodic limb movements of sleep, which can be documented on polysomnography",
+      "Iron deficiency is a key and treatable contributor, so serum ferritin and transferrin saturation should be checked even when the haemoglobin is normal",
+      "Common secondary associations include pregnancy, chronic kidney disease and uraemia, and peripheral neuropathy",
+      "Certain drugs, including many antidepressants, antihistamines, and dopamine antagonists, can precipitate or aggravate symptoms",
+      "Treatment principles include iron repletion when stores are low, alpha-2-delta ligands, and dopaminergic agents, with attention to non-pharmacological measures",
+      "Long-term dopamine agonist use can lead to augmentation, a worsening and earlier onset of symptoms that requires careful management"
     ],
-    [
-     "Key Investigations",
-     "Serum ferritin and transferrin saturation to assess iron status, Renal function tests to identify uraemia, Blood glucose and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Restless legs syndrome is a sensorimotor disorder linked to dysfunction of central dopaminergic transmission and to abnormal brain iron handling, since iron is a cofactor for dopamine synthesis. Reduced iron availability within the central nervous system, even with normal peripheral stores, is thought to impair dopaminergic signalling in circuits including the spinal cord and diencephalon. There is a strong genetic contribution, and it may be primary or secondary to iron deficiency, uraemia, pregnancy, or neuropathy.",
+    "additionalDifferentials": [
+      "Peripheral neuropathy and radiculopathy",
+      "Nocturnal leg cramps",
+      "Akathisia, particularly drug-induced",
+      "Peripheral vascular disease and venous insufficiency",
+      "Positional discomfort and habitual foot tapping",
+      "Periodic limb movement disorder without the sensory urge"
     ],
-    [
-     "Primary Differentials",
-     "Peripheral neuropathy and radiculopathy, Nocturnal leg cramps, Akathisia, particularly drug-induced",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum ferritin and transferrin saturation to assess iron status",
+      "Renal function tests to identify uraemia",
+      "Blood glucose and evaluation for peripheral neuropathy where clinically suspected",
+      "Review of medications that may provoke symptoms",
+      "Polysomnography in selected cases, particularly to document periodic limb movements or exclude other sleep disorders"
     ],
-    [
-     "Management Strategy",
-     "Check iron status and replace iron with oral or intravenous supplementation when ferritin or transferrin saturation is low, even",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive or asymmetric sensory or motor deficits suggesting a neuropathy or radiculopathy rather than primary RLS",
+      "Augmentation on dopaminergic therapy with earlier, more intense, and spreading symptoms",
+      "Symptoms secondary to unrecognised chronic kidney disease or severe iron deficiency",
+      "Severe sleep deprivation with significant mood disturbance or impaired daytime function"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to check and correct iron status, missing a readily treatable driver of symptoms",
-     "Prevent diagnostic or management error"
+    "prognosis": "Primary restless legs syndrome is usually a chronic condition that can fluctuate over time, often worsening with age. Secondary forms may resolve when the underlying cause, such as iron deficiency or pregnancy, is corrected. Most patients achieve good symptom control with appropriate treatment, though augmentation can complicate long-term dopaminergic therapy.",
+    "pitfalls": [
+      "Failing to check and correct iron status, missing a readily treatable driver of symptoms",
+      "Overlooking culprit medications that provoke or worsen the syndrome",
+      "Relying on long-term dopamine agonists and precipitating augmentation",
+      "Confusing the condition with akathisia, cramps, or neuropathy and treating the wrong problem"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Check iron status and replace iron with oral or intravenous supplementation when ferritin or transferrin saturation is low, even with a normal haemoglobin",
+      "Review and withdraw aggravating drugs where possible, including many antidepressants, sedating antihistamines and dopamine antagonists",
+      "Advise sleep hygiene and reduced caffeine and alcohol intake as first-line non-pharmacological measures",
+      "For troublesome symptoms start an alpha-2-delta ligand such as gabapentin or pregabalin, often preferred to limit augmentation",
+      "Use a dopamine agonist such as pramipexole, ropinirole or rotigotine with caution, monitoring for augmentation and impulse-control disorders",
+      "Treat secondary contributors including uraemia and pregnancy-related symptoms",
+      "Reserve low-potency opioids for refractory cases or dopaminergic augmentation under specialist supervision"
     ]
-   ],
-   "caption": "Overview comparison matrix for restless legs syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "restless-legs-syndrome-real-image",
-   "title": "Restless legs syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "restless_legs_syndrome-pathway",
+      "title": "Restless legs syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by an irresistible urge to move the legs, usually with uncomfortable sensations, that is partly or wholly relieved by movement",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive or asymmetric sensory or motor deficits suggesting a neuropathy or radiculopathy rather than primary RLS",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum ferritin and transferrin saturation to assess iron status, Renal function tests to identify uraemia, Blood glucose and evaluation for peripheral neuropathy where clinically suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Check iron status and replace iron with oral or intravenous supplementation when ferritin or transferrin saturation is low, even with a normal haemoglobin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to check and correct iron status, missing a readily treatable driver of symptoms"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of restless legs syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "restless_legs_syndrome-matrix",
+      "title": "Restless legs syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by an irresistible urge to move the legs, usually with uncomfortable sensations, that is partly or wholly relieved",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum ferritin and transferrin saturation to assess iron status, Renal function tests to identify uraemia, Blood glucose and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peripheral neuropathy and radiculopathy, Nocturnal leg cramps, Akathisia, particularly drug-induced",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Check iron status and replace iron with oral or intravenous supplementation when ferritin or transferrin saturation is low, even",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to check and correct iron status, missing a readily treatable driver of symptoms",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for restless legs syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "restless_legs_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ferritin and transferrin saturation",
+          "cells": [
+            {
+              "text": "Iron status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests",
+          "cells": [
+            {
+              "text": "Uraemia excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Glucose status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "restless_legs_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral neuropathy and radiculopathy",
+          "cells": [
+            {
+              "text": "Asymmetric or progressive sensory or motor deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Akathisia, particularly drug-induced",
+          "cells": [
+            {
+              "text": "Drug-induced restlessness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "restless_legs_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron",
+          "cells": [
+            {
+              "text": "Replace iron orally or intravenously when ferritin is low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drugs",
+          "cells": [
+            {
+              "text": "Review and withdraw aggravating drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopaminergic therapy",
+          "cells": [
+            {
+              "text": "Monitor for augmentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "restless_legs_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Restless legs syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected restless legs syndrome: urge to move legs at rest, worse at night",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Asymmetric or progressive deficits, or augmentation on dopaminergic therapy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurology review for progressive deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ferritin and transferrin saturation; renal function; blood glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is iron deficiency or uraemia excluded with typical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neuropathy, cramps or akathisia; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Check iron status; replace iron if ferritin is low",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Review and withdraw aggravating drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor for augmentation on dopaminergic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Periodic review of symptoms and iron status",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

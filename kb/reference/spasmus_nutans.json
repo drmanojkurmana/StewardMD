@@ -1,167 +1,434 @@
 {
- "id": "spasmus_nutans",
- "name": "Spasmus nutans",
- "aliases": [
-  "spasmus nutans syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Paediatrics / Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign disorder of infancy defined by a triad of fine rapid asymmetric nystagmus, head nodding and an anomalous head posture",
-   "The nystagmus is typically small-amplitude, high-frequency and often dissociated or intermittent between the two eyes",
-   "Onset is usually in the first year of life and the condition tends to resolve spontaneously within a few years",
-   "It is a diagnosis of exclusion because chiasmal and suprasellar tumours (such as optic pathway gliomas) can mimic it",
-   "Neuroimaging is mandatory to exclude an intracranial lesion before accepting a benign diagnosis",
-   "Retinal dystrophies can produce similar nystagmus and may need electrophysiological testing to exclude"
+  "id": "spasmus_nutans",
+  "name": "Spasmus nutans",
+  "aliases": [
+    "spasmus nutans syndrome"
   ],
-  "pathophysiology": "Spasmus nutans is an idiopathic, usually self-limiting disorder of ocular motor control in infancy of unknown mechanism, in which the head nodding is thought to be a partially compensatory response to the shimmering nystagmus. Because an identical clinical picture can be produced by anterior visual pathway tumours compressing the chiasm and by certain retinal dystrophies, the benign form can only be diagnosed once these structural and retinal causes have been excluded.",
-  "additionalDifferentials": [
-   "Optic pathway or suprasellar glioma",
-   "Congenital (infantile) nystagmus syndrome",
-   "Retinal dystrophy causing sensory nystagmus",
-   "Bobble-head doll syndrome",
-   "Acquired nystagmus from posterior fossa disease"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and anterior visual pathways",
-   "Detailed ophthalmological and fundus examination",
-   "Electroretinography where a retinal dystrophy is suspected",
-   "Ocular motility and orthoptic assessment",
-   "Developmental and neurological review"
-  ],
-  "redFlags": [
-   "Optic disc pallor or afferent pupillary defect",
-   "Failure to resolve or progression of signs",
-   "Associated neurological deficit or failure to thrive",
-   "Monocular or grossly asymmetric visual loss"
-  ],
-  "prognosis": "The idiopathic form is benign and usually resolves spontaneously over months to a few years; prognosis otherwise depends entirely on excluding and, if present, treating a structural or retinal cause.",
-  "pitfalls": [
-   "Accepting the diagnosis without neuroimaging and missing an optic pathway glioma",
-   "Overlooking a retinal dystrophy as the cause of the nystagmus",
-   "Confusing it with congenital nystagmus syndrome",
-   "Attributing the head nodding to a primary movement disorder"
-  ],
-  "references": [
-   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Mandatory neuroimaging with MRI of the brain and anterior visual pathways to exclude a chiasmal or suprasellar tumour before accepting a benign diagnosis",
-   "Electroretinography where a retinal dystrophy is suspected as a mimic",
-   "Once structural and retinal causes are excluded, manage conservatively with reassurance as the condition is self-limiting",
-   "Regular ophthalmological and orthoptic follow-up to monitor the nystagmus, head posture and visual development",
-   "Developmental and neurological review to confirm normal progress",
-   "Refer promptly for treatment of any underlying lesion if imaging identifies a structural or retinal cause"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spasmus_nutans-pathway",
-   "title": "Spasmus nutans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign disorder of infancy defined by a triad of fine rapid asymmetric nystagmus, head nodding and an anomalous head posture",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Optic disc pallor or afferent pupillary defect",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and anterior visual pathways, Detailed ophthalmological and fundus examination, Electroretinography where a retinal dystrophy is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Mandatory neuroimaging with MRI of the brain and anterior visual pathways to exclude a chiasmal or suprasellar tumour before accepting a benign diagnosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Accepting the diagnosis without neuroimaging and missing an optic pathway glioma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spasmus nutans."
-  }
- ],
- "tables": [
-  {
-   "id": "spasmus_nutans-matrix",
-   "title": "Spasmus nutans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign disorder of infancy defined by a triad of fine rapid asymmetric nystagmus, head nodding and an anomalous head posture",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Paediatrics / Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign disorder of infancy defined by a triad of fine rapid asymmetric nystagmus, head nodding and an anomalous head posture",
+      "The nystagmus is typically small-amplitude, high-frequency and often dissociated or intermittent between the two eyes",
+      "Onset is usually in the first year of life and the condition tends to resolve spontaneously within a few years",
+      "It is a diagnosis of exclusion because chiasmal and suprasellar tumours (such as optic pathway gliomas) can mimic it",
+      "Neuroimaging is mandatory to exclude an intracranial lesion before accepting a benign diagnosis",
+      "Retinal dystrophies can produce similar nystagmus and may need electrophysiological testing to exclude"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and anterior visual pathways, Detailed ophthalmological and fundus examination, Electroretinography where a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spasmus nutans is an idiopathic, usually self-limiting disorder of ocular motor control in infancy of unknown mechanism, in which the head nodding is thought to be a partially compensatory response to the shimmering nystagmus. Because an identical clinical picture can be produced by anterior visual pathway tumours compressing the chiasm and by certain retinal dystrophies, the benign form can only be diagnosed once these structural and retinal causes have been excluded.",
+    "additionalDifferentials": [
+      "Optic pathway or suprasellar glioma",
+      "Congenital (infantile) nystagmus syndrome",
+      "Retinal dystrophy causing sensory nystagmus",
+      "Bobble-head doll syndrome",
+      "Acquired nystagmus from posterior fossa disease"
     ],
-    [
-     "Primary Differentials",
-     "Optic pathway or suprasellar glioma, Congenital (infantile) nystagmus syndrome, Retinal dystrophy causing sensory nystagmus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and anterior visual pathways",
+      "Detailed ophthalmological and fundus examination",
+      "Electroretinography where a retinal dystrophy is suspected",
+      "Ocular motility and orthoptic assessment",
+      "Developmental and neurological review"
     ],
-    [
-     "Management Strategy",
-     "Mandatory neuroimaging with MRI of the brain and anterior visual pathways to exclude a chiasmal or suprasellar tumour before",
-     "Core treatment modality"
+    "redFlags": [
+      "Optic disc pallor or afferent pupillary defect",
+      "Failure to resolve or progression of signs",
+      "Associated neurological deficit or failure to thrive",
+      "Monocular or grossly asymmetric visual loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Accepting the diagnosis without neuroimaging and missing an optic pathway glioma",
-     "Prevent diagnostic or management error"
+    "prognosis": "The idiopathic form is benign and usually resolves spontaneously over months to a few years; prognosis otherwise depends entirely on excluding and, if present, treating a structural or retinal cause.",
+    "pitfalls": [
+      "Accepting the diagnosis without neuroimaging and missing an optic pathway glioma",
+      "Overlooking a retinal dystrophy as the cause of the nystagmus",
+      "Confusing it with congenital nystagmus syndrome",
+      "Attributing the head nodding to a primary movement disorder"
+    ],
+    "references": [
+      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Mandatory neuroimaging with MRI of the brain and anterior visual pathways to exclude a chiasmal or suprasellar tumour before accepting a benign diagnosis",
+      "Electroretinography where a retinal dystrophy is suspected as a mimic",
+      "Once structural and retinal causes are excluded, manage conservatively with reassurance as the condition is self-limiting",
+      "Regular ophthalmological and orthoptic follow-up to monitor the nystagmus, head posture and visual development",
+      "Developmental and neurological review to confirm normal progress",
+      "Refer promptly for treatment of any underlying lesion if imaging identifies a structural or retinal cause"
     ]
-   ],
-   "caption": "Overview comparison matrix for spasmus nutans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spasmus-nutans-real-image",
-   "title": "Spasmus nutans: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spasmus_nutans-pathway",
+      "title": "Spasmus nutans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign disorder of infancy defined by a triad of fine rapid asymmetric nystagmus, head nodding and an anomalous head posture",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Optic disc pallor or afferent pupillary defect",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and anterior visual pathways, Detailed ophthalmological and fundus examination, Electroretinography where a retinal dystrophy is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Mandatory neuroimaging with MRI of the brain and anterior visual pathways to exclude a chiasmal or suprasellar tumour before accepting a benign diagnosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Accepting the diagnosis without neuroimaging and missing an optic pathway glioma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spasmus nutans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spasmus_nutans-matrix",
+      "title": "Spasmus nutans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign disorder of infancy defined by a triad of fine rapid asymmetric nystagmus, head nodding and an anomalous head posture",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and anterior visual pathways, Detailed ophthalmological and fundus examination, Electroretinography where a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Optic pathway or suprasellar glioma, Congenital (infantile) nystagmus syndrome, Retinal dystrophy causing sensory nystagmus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Mandatory neuroimaging with MRI of the brain and anterior visual pathways to exclude a chiasmal or suprasellar tumour before",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Accepting the diagnosis without neuroimaging and missing an optic pathway glioma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spasmus nutans."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spasmus_nutans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain and anterior visual pathways",
+          "cells": [
+            {
+              "text": "Excludes chiasmal or suprasellar tumour; mandatory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed fundus examination",
+          "cells": [
+            {
+              "text": "Retinal causes of nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Retinal dystrophy, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular motility and orthoptic assessment",
+          "cells": [
+            {
+              "text": "Nystagmus pattern and head posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological review",
+          "cells": [
+            {
+              "text": "Normal progress"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spasmus_nutans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Optic pathway or suprasellar glioma",
+          "cells": [
+            {
+              "text": "Can mimic it; imaging is needed before accepting a benign diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital (infantile) nystagmus syndrome",
+          "cells": [
+            {
+              "text": "Confused with it; the head nodding and triad are characteristic here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal dystrophy causing sensory nystagmus",
+          "cells": [
+            {
+              "text": "Similar nystagmus; electroretinography tests for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spasmus_nutans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neuroimaging before a benign diagnosis",
+          "cells": [
+            {
+              "text": "MRI of the brain and anterior visual pathways"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroretinography",
+          "cells": [
+            {
+              "text": "Where retinal dystrophy is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Self-limiting once structural and retinal causes are excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and orthoptic follow-up",
+          "cells": [
+            {
+              "text": "Nystagmus, head posture and visual development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological review",
+          "cells": [
+            {
+              "text": "Confirms normal progress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of any lesion found",
+          "cells": [
+            {
+              "text": "Prompt referral if imaging identifies a structural or retinal cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spasmus_nutans-dx-mgmt",
+      "title": "Diagnosis and management of Spasmus nutans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with nystagmus, head nodding and abnormal head posture: suspected spasmus nutans",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disc pallor, afferent pupillary defect, asymmetric visual loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuro-ophthalmology review for a suspected optic pathway lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of brain and anterior visual pathways; fundus exam; ERG if retinal disease suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are intracranial and retinal causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider optic pathway glioma or retinal dystrophy; treat the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance; the condition is self-limiting once causes are excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ophthalmology and orthoptic follow-up for nystagmus and posture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental and neurological review",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Usually resolves within a few years once structural causes are excluded",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

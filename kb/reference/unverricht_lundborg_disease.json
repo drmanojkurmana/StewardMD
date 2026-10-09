@@ -1,174 +1,461 @@
 {
- "id": "unverricht_lundborg_disease",
- "name": "Unverricht-Lundborg disease (EPM1, cystatin B)",
- "aliases": [
-  "EPM1",
-  "Baltic myoclonus",
-  "Mediterranean myoclonus",
-  "cystatin B (CSTB) deficiency",
-  "progressive myoclonic epilepsy type 1"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Unverricht-Lundborg disease (EPM1) is an autosomal recessive progressive myoclonic epilepsy caused by biallelic CSTB variants, most often an expansion of a dodecamer repeat in the promoter",
-   "Onset is usually in late childhood or adolescence with stimulus-sensitive and action myoclonus plus generalised tonic-clonic seizures",
-   "Compared with Lafora disease, cognition is relatively preserved and the course is far more benign, though myoclonus can become disabling",
-   "The severe, treatment-worsened myoclonus historically caused by phenytoin illustrates why sodium-channel-blocking drugs should be avoided",
-   "It is the commonest cause of progressive myoclonic epilepsy in some populations, including the Baltic and Mediterranean regions",
-   "EEG shows photosensitivity and generalised spike-wave discharges with relatively preserved background early in the disease",
-   "Anti-myoclonic agents such as valproate, levetiracetam, and adjunctive treatments form the mainstay of care"
+  "id": "unverricht_lundborg_disease",
+  "name": "Unverricht-Lundborg disease (EPM1, cystatin B)",
+  "aliases": [
+    "EPM1",
+    "Baltic myoclonus",
+    "Mediterranean myoclonus",
+    "cystatin B (CSTB) deficiency",
+    "progressive myoclonic epilepsy type 1"
   ],
-  "pathophysiology": "Unverricht-Lundborg disease is caused by deficiency of cystatin B, an inhibitor of cysteine proteases (cathepsins). The commonest mutation is an unstable expansion of a dodecamer repeat in the CSTB promoter that reduces gene expression. Loss of cystatin B is thought to lead to unopposed cathepsin activity, increased oxidative stress, and enhanced neuronal apoptosis, particularly affecting cerebellar and cortical neurones. Unlike Lafora disease there is no storage material; the pathology is one of neuronal loss and gliosis, which correlates with the predominance of myoclonus and ataxia over dementia.",
-  "additionalDifferentials": [
-   "Lafora disease (EPM2A/NHLRC1)",
-   "Juvenile myoclonic epilepsy",
-   "Mitochondrial disease including MERRF",
-   "Neuronal ceroid lipofuscinoses",
-   "Sialidosis",
-   "Dentatorubral-pallidoluysian atrophy"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of CSTB, including analysis of the dodecamer repeat expansion",
-   "EEG to demonstrate photosensitivity and generalised epileptiform discharges with relatively preserved background",
-   "Brain MRI to exclude structural causes and assess for atrophy",
-   "Metabolic and mitochondrial screening to exclude other progressive myoclonic epilepsies",
-   "Neuropsychological assessment to monitor the comparatively mild cognitive trajectory"
-  ],
-  "redFlags": [
-   "Rapid cognitive decline out of keeping with EPM1, suggesting an alternative such as Lafora disease",
-   "Marked worsening of myoclonus after starting a sodium-channel-blocking antiseizure drug",
-   "Status epilepticus or falls from severe myoclonus requiring urgent review",
-   "Emergence of prominent ataxia limiting mobility and safety"
-  ],
-  "prognosis": "With appropriate anti-myoclonic treatment and avoidance of aggravating drugs, many patients have a near-normal lifespan; disability relates mainly to action myoclonus and ataxia rather than dementia, and the course is much better than in Lafora disease.",
-  "pitfalls": [
-   "Using phenytoin or other sodium-channel-blocking agents, which markedly worsen myoclonus and cerebellar signs",
-   "Confusing EPM1 with juvenile myoclonic epilepsy and missing the progressive component",
-   "Assuming a uniformly poor prognosis and not distinguishing it from Lafora disease",
-   "Underestimating the functional impact of action myoclonus on daily activities"
-  ],
-  "references": [
-   "GeneReviews: Unverricht-Lundborg Disease",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line anti-myoclonic and antiseizure therapy with sodium valproate, adding levetiracetam and piracetam for disabling action myoclonus",
-   "Use clonazepam, zonisamide or topiramate as adjuncts for refractory myoclonus and generalised tonic-clonic seizures",
-   "Strictly avoid sodium-channel-blocking and GABAergic drugs (phenytoin, carbamazepine, oxcarbazepine, lamotrigine, gabapentin, pregabalin, vigabatrin, tiagabine) that aggravate myoclonus and ataxia",
-   "Consider N-acetylcysteine as an antioxidant adjunct given the oxidative-stress mechanism of cystatin B loss",
-   "Physiotherapy, occupational therapy and mobility aids for progressive action myoclonus and cerebellar ataxia, with screening and treatment for reactive depression",
-   "Periodic neurological, EEG and neuropsychological review to track the comparatively mild cognitive trajectory and photosensitivity",
-   "Offer genetic counselling and CSTB carrier testing to relatives given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "unverricht_lundborg_disease-pathway",
-   "title": "Unverricht-Lundborg disease (EPM1, cystatin B): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Unverricht-Lundborg disease (EPM1) is an autosomal recessive progressive myoclonic epilepsy caused by biallelic CSTB variants, most often an expansion of a dodecamer repeat in the promoter",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid cognitive decline out of keeping with EPM1, suggesting an alternative such as Lafora disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of CSTB, including analysis of the dodecamer repeat expansion, EEG to demonstrate photosensitivity and generalised epileptiform discharges with relatively preserved background, Brain MRI to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line anti-myoclonic and antiseizure therapy with sodium valproate, adding levetiracetam and piracetam for disabling action myoclonus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Using phenytoin or other sodium-channel-blocking agents, which markedly worsen myoclonus and cerebellar signs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of unverricht-lundborg disease (epm1, cystatin b)."
-  }
- ],
- "tables": [
-  {
-   "id": "unverricht_lundborg_disease-matrix",
-   "title": "Unverricht-Lundborg disease (EPM1, cystatin B): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Unverricht-Lundborg disease (EPM1) is an autosomal recessive progressive myoclonic epilepsy caused by biallelic CSTB variants,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Unverricht-Lundborg disease (EPM1) is an autosomal recessive progressive myoclonic epilepsy caused by biallelic CSTB variants, most often an expansion of a dodecamer repeat in the promoter",
+      "Onset is usually in late childhood or adolescence with stimulus-sensitive and action myoclonus plus generalised tonic-clonic seizures",
+      "Compared with Lafora disease, cognition is relatively preserved and the course is far more benign, though myoclonus can become disabling",
+      "The severe, treatment-worsened myoclonus historically caused by phenytoin illustrates why sodium-channel-blocking drugs should be avoided",
+      "It is the commonest cause of progressive myoclonic epilepsy in some populations, including the Baltic and Mediterranean regions",
+      "EEG shows photosensitivity and generalised spike-wave discharges with relatively preserved background early in the disease",
+      "Anti-myoclonic agents such as valproate, levetiracetam, and adjunctive treatments form the mainstay of care"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of CSTB, including analysis of the dodecamer repeat expansion, EEG to demonstrate photosensitivity and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Unverricht-Lundborg disease is caused by deficiency of cystatin B, an inhibitor of cysteine proteases (cathepsins). The commonest mutation is an unstable expansion of a dodecamer repeat in the CSTB promoter that reduces gene expression. Loss of cystatin B is thought to lead to unopposed cathepsin activity, increased oxidative stress, and enhanced neuronal apoptosis, particularly affecting cerebellar and cortical neurones. Unlike Lafora disease there is no storage material; the pathology is one of neuronal loss and gliosis, which correlates with the predominance of myoclonus and ataxia over dementia.",
+    "additionalDifferentials": [
+      "Lafora disease (EPM2A/NHLRC1)",
+      "Juvenile myoclonic epilepsy",
+      "Mitochondrial disease including MERRF",
+      "Neuronal ceroid lipofuscinoses",
+      "Sialidosis",
+      "Dentatorubral-pallidoluysian atrophy"
     ],
-    [
-     "Primary Differentials",
-     "Lafora disease (EPM2A/NHLRC1), Juvenile myoclonic epilepsy, Mitochondrial disease including MERRF",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of CSTB, including analysis of the dodecamer repeat expansion",
+      "EEG to demonstrate photosensitivity and generalised epileptiform discharges with relatively preserved background",
+      "Brain MRI to exclude structural causes and assess for atrophy",
+      "Metabolic and mitochondrial screening to exclude other progressive myoclonic epilepsies",
+      "Neuropsychological assessment to monitor the comparatively mild cognitive trajectory"
     ],
-    [
-     "Management Strategy",
-     "First-line anti-myoclonic and antiseizure therapy with sodium valproate, adding levetiracetam and piracetam for disabling action",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid cognitive decline out of keeping with EPM1, suggesting an alternative such as Lafora disease",
+      "Marked worsening of myoclonus after starting a sodium-channel-blocking antiseizure drug",
+      "Status epilepticus or falls from severe myoclonus requiring urgent review",
+      "Emergence of prominent ataxia limiting mobility and safety"
     ],
-    [
-     "Clinical Pitfall",
-     "Using phenytoin or other sodium-channel-blocking agents, which markedly worsen myoclonus and cerebellar signs",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate anti-myoclonic treatment and avoidance of aggravating drugs, many patients have a near-normal lifespan; disability relates mainly to action myoclonus and ataxia rather than dementia, and the course is much better than in Lafora disease.",
+    "pitfalls": [
+      "Using phenytoin or other sodium-channel-blocking agents, which markedly worsen myoclonus and cerebellar signs",
+      "Confusing EPM1 with juvenile myoclonic epilepsy and missing the progressive component",
+      "Assuming a uniformly poor prognosis and not distinguishing it from Lafora disease",
+      "Underestimating the functional impact of action myoclonus on daily activities"
+    ],
+    "references": [
+      "GeneReviews: Unverricht-Lundborg Disease",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line anti-myoclonic and antiseizure therapy with sodium valproate, adding levetiracetam and piracetam for disabling action myoclonus",
+      "Use clonazepam, zonisamide or topiramate as adjuncts for refractory myoclonus and generalised tonic-clonic seizures",
+      "Strictly avoid sodium-channel-blocking and GABAergic drugs (phenytoin, carbamazepine, oxcarbazepine, lamotrigine, gabapentin, pregabalin, vigabatrin, tiagabine) that aggravate myoclonus and ataxia",
+      "Consider N-acetylcysteine as an antioxidant adjunct given the oxidative-stress mechanism of cystatin B loss",
+      "Physiotherapy, occupational therapy and mobility aids for progressive action myoclonus and cerebellar ataxia, with screening and treatment for reactive depression",
+      "Periodic neurological, EEG and neuropsychological review to track the comparatively mild cognitive trajectory and photosensitivity",
+      "Offer genetic counselling and CSTB carrier testing to relatives given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for unverricht-lundborg disease (epm1, cystatin b)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "unverricht-lundborg-disease-real-image",
-   "title": "Unverricht-Lundborg disease (EPM1, cystatin B): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "unverricht_lundborg_disease-pathway",
+      "title": "Unverricht-Lundborg disease (EPM1, cystatin B): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Unverricht-Lundborg disease (EPM1) is an autosomal recessive progressive myoclonic epilepsy caused by biallelic CSTB variants, most often an expansion of a dodecamer repeat in the promoter",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid cognitive decline out of keeping with EPM1, suggesting an alternative such as Lafora disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of CSTB, including analysis of the dodecamer repeat expansion, EEG to demonstrate photosensitivity and generalised epileptiform discharges with relatively preserved background, Brain MRI to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line anti-myoclonic and antiseizure therapy with sodium valproate, adding levetiracetam and piracetam for disabling action myoclonus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Using phenytoin or other sodium-channel-blocking agents, which markedly worsen myoclonus and cerebellar signs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of unverricht-lundborg disease (epm1, cystatin b)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "unverricht_lundborg_disease-matrix",
+      "title": "Unverricht-Lundborg disease (EPM1, cystatin B): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Unverricht-Lundborg disease (EPM1) is an autosomal recessive progressive myoclonic epilepsy caused by biallelic CSTB variants,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of CSTB, including analysis of the dodecamer repeat expansion, EEG to demonstrate photosensitivity and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lafora disease (EPM2A/NHLRC1), Juvenile myoclonic epilepsy, Mitochondrial disease including MERRF",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line anti-myoclonic and antiseizure therapy with sodium valproate, adding levetiracetam and piracetam for disabling action",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Using phenytoin or other sodium-channel-blocking agents, which markedly worsen myoclonus and cerebellar signs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for unverricht-lundborg disease (epm1, cystatin b)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "unverricht_lundborg_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CSTB genetic testing with dodecamer repeat expansion analysis",
+          "cells": [
+            {
+              "text": "Confirms EPM1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Photosensitivity and generalised epileptiform discharges with relatively preserved background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural causes and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and mitochondrial screening",
+          "cells": [
+            {
+              "text": "Excludes other progressive myoclonic epilepsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Comparatively mild cognitive trajectory"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unverricht_lundborg_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lafora disease",
+          "cells": [
+            {
+              "text": "Rapid cognitive decline out of keeping with EPM1 points to it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile myoclonic epilepsy",
+          "cells": [
+            {
+              "text": "Confused with EPM1, which has a progressive component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial disease, including MERRF",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "unverricht_lundborg_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sodium valproate",
+          "cells": [
+            {
+              "text": "First-line anti-myoclonic and antiseizure therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levetiracetam and piracetam",
+          "cells": [
+            {
+              "text": "Added for disabling action myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clonazepam, zonisamide or topiramate",
+          "cells": [
+            {
+              "text": "Adjuncts for refractory myoclonus and generalised tonic-clonic seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid sodium-channel-blocking drugs",
+          "cells": [
+            {
+              "text": "Phenytoin, carbamazepine, oxcarbazepine and lamotrigine markedly worsen myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "N-acetylcysteine",
+          "cells": [
+            {
+              "text": "Antioxidant adjunct given the oxidative-stress mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and mobility aids",
+          "cells": [
+            {
+              "text": "Progressive action myoclonus and cerebellar ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic review",
+          "cells": [
+            {
+              "text": "Neurological, EEG and neuropsychological review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "unverricht_lundborg_disease-dx-mgmt",
+      "title": "Diagnosis and management of Unverricht-Lundborg disease (EPM1, cystatin B)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Unverricht-Lundborg disease: late childhood myoclonus with generalised seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid cognitive decline or myoclonus worse on a sodium-channel drug)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review; stop any sodium-channel drug and consider Lafora disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSTB testing with dodecamer expansion analysis, EEG, brain MRI and metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CSTB testing confirm an EPM1 expansion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Lafora disease, mitochondrial disease or other progressive myoclonic epilepsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sodium valproate as first-line therapy; avoid sodium-channel drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add levetiracetam or piracetam for disabling action myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Clonazepam, zonisamide or topiramate as adjuncts for refractory myoclonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, mobility aids and periodic neurological and cognitive review",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive but comparatively benign; myoclonus can become disabling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

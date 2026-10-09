@@ -1,180 +1,485 @@
 {
- "id": "n_acetylglutamate_synthase_deficiency",
- "name": "N-acetylglutamate synthase deficiency",
- "aliases": [
-  "NAGS deficiency",
-  "N-acetylglutamate synthetase deficiency",
-  "NAGS",
-  "hyperammonaemia due to NAGS deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rarest of the urea cycle disorders, caused by biallelic NAGS variants",
-   "NAGS makes N-acetylglutamate, the obligatory allosteric activator of carbamoyl phosphate synthetase 1, so its loss shuts down the first committed step of ureagenesis",
-   "Biochemically resembles CPS1 deficiency: hyperammonaemia with low/normal citrulline, low arginine and a characteristically low urine orotic acid",
-   "Presents as neonatal hyperammonaemic encephalopathy, or later with episodic hyperammonaemia and neurocognitive symptoms",
-   "The key distinguishing feature is its responsiveness to carglumic acid, a synthetic N-acetylglutamate analogue that restores CPS1 activity",
-   "Low or absent orotic aciduria helps separate proximal urea cycle defects (NAGS, CPS1) from OTC deficiency",
-   "Confirm with NAGS gene sequencing and by demonstrating a therapeutic response to carglumic acid",
-   "Acute management is emergency ammonia lowering (dialysis if needed) with carglumic acid, nitrogen scavengers, arginine and protein restriction"
+  "id": "n_acetylglutamate_synthase_deficiency",
+  "name": "N-acetylglutamate synthase deficiency",
+  "aliases": [
+    "NAGS deficiency",
+    "N-acetylglutamate synthetase deficiency",
+    "NAGS",
+    "hyperammonaemia due to NAGS deficiency"
   ],
-  "pathophysiology": "N-acetylglutamate synthase catalyses formation of N-acetylglutamate from glutamate and acetyl-CoA. N-acetylglutamate is the essential allosteric activator of carbamoyl phosphate synthetase 1 (CPS1), the enzyme that initiates the urea cycle by incorporating ammonia into carbamoyl phosphate. In NAGS deficiency the activator is not produced, so CPS1 remains inactive and the urea cycle cannot begin, leading to accumulation of ammonia. Because the block is at the very first step, downstream intermediates such as citrulline and arginine are low, and carbamoyl phosphate is not diverted into pyrimidine synthesis, so orotic acid excretion stays low (mirroring CPS1 deficiency and contrasting with OTC deficiency). Uniquely, the missing activator can be replaced pharmacologically by carglumic acid, which reactivates CPS1. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Carbamoyl phosphate synthetase 1 deficiency (biochemically near-identical)",
-   "Ornithine transcarbamylase deficiency (raised orotic acid, X-linked)",
-   "Citrullinaemia type 1 and argininosuccinic aciduria",
-   "Organic acidaemias causing secondary hyperammonaemia",
-   "Fatty acid oxidation disorders with hyperammonaemia",
-   "Transient hyperammonaemia of the newborn",
-   "Neonatal sepsis"
-  ],
-  "additionalInvestigations": [
-   "Urgent plasma ammonia during suspected crises",
-   "Plasma amino acids (low/normal citrulline, low arginine, raised glutamine)",
-   "Urine orotic acid (characteristically low, separating from OTC deficiency)",
-   "Blood gas showing respiratory alkalosis of hyperammonaemia",
-   "NAGS gene sequencing for confirmation",
-   "Documented biochemical response to a carglumic acid trial",
-   "Plasma acylcarnitines/organic acids to exclude secondary hyperammonaemia"
-  ],
-  "redFlags": [
-   "Neonatal hyperammonaemic coma requiring emergency ammonia removal",
-   "Cerebral oedema from severe hyperammonaemia",
-   "Rapidly rising ammonia with encephalopathy at any age",
-   "Decompensation triggered by catabolic illness, high protein load or surgery",
-   "Failure of ammonia to fall despite standard scavenger therapy (prompting carglumic acid)"
-  ],
-  "prognosis": "NAGS deficiency is one of the few urea cycle disorders with a specific pharmacological treatment; with early diagnosis and carglumic acid therapy long-term metabolic control and outcome can be excellent, whereas delayed treatment of severe neonatal hyperammonaemia risks permanent neurological injury.",
-  "pitfalls": [
-   "Not distinguishing NAGS from CPS1 deficiency and thereby missing a treatable disorder",
-   "Failing to trial carglumic acid, which is specifically effective in NAGS deficiency",
-   "Overlooking the low orotic acid clue that points to a proximal urea cycle defect",
-   "Delaying emergency ammonia lowering while awaiting confirmatory genetics",
-   "Assuming carglumic acid is equally effective in all urea cycle disorders"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics",
-   "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give carglumic acid as specific disease-directed therapy, a synthetic N-acetylglutamate analogue that restores carbamoyl phosphate synthetase 1 activity and can normalise ammonia",
-   "Institute a protein-restricted diet with adequate energy intake and essential amino-acid supplementation to limit ammonia generation",
-   "Treat acute hyperammonaemic crises by stopping protein intake, giving high-calorie glucose (with insulin if needed) to reverse catabolism, and intravenous carglumic acid with nitrogen-scavenger support",
-   "Escalate to haemodialysis or haemofiltration for severe or refractory hyperammonaemia to remove ammonia rapidly",
-   "Monitor plasma ammonia, amino acids and growth long term, and avoid catabolic triggers such as fasting, infection and the perioperative state",
-   "Provide an emergency regimen and sick-day plan with prompt hospital access during intercurrent illness",
-   "Offer genetic counselling and family screening given autosomal recessive inheritance, with antenatal or newborn diagnostic testing, and coordinate care through a metabolic medicine team with specialist dietetic input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "n_acetylglutamate_synthase_deficiency-pathway",
-   "title": "N-acetylglutamate synthase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rarest of the urea cycle disorders, caused by biallelic NAGS variants",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal hyperammonaemic coma requiring emergency ammonia removal",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urgent plasma ammonia during suspected crises, Plasma amino acids (low/normal citrulline, low arginine, raised glutamine), Urine orotic acid (characteristically low, separating from OTC deficiency)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give carglumic acid as specific disease-directed therapy, a synthetic N-acetylglutamate analogue that restores carbamoyl phosphate synthetase 1 activity and can normalise ammonia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not distinguishing NAGS from CPS1 deficiency and thereby missing a treatable disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of n-acetylglutamate synthase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "n_acetylglutamate_synthase_deficiency-matrix",
-   "title": "N-acetylglutamate synthase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rarest of the urea cycle disorders, caused by biallelic NAGS variants",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rarest of the urea cycle disorders, caused by biallelic NAGS variants",
+      "NAGS makes N-acetylglutamate, the obligatory allosteric activator of carbamoyl phosphate synthetase 1, so its loss shuts down the first committed step of ureagenesis",
+      "Biochemically resembles CPS1 deficiency: hyperammonaemia with low/normal citrulline, low arginine and a characteristically low urine orotic acid",
+      "Presents as neonatal hyperammonaemic encephalopathy, or later with episodic hyperammonaemia and neurocognitive symptoms",
+      "The key distinguishing feature is its responsiveness to carglumic acid, a synthetic N-acetylglutamate analogue that restores CPS1 activity",
+      "Low or absent orotic aciduria helps separate proximal urea cycle defects (NAGS, CPS1) from OTC deficiency",
+      "Confirm with NAGS gene sequencing and by demonstrating a therapeutic response to carglumic acid",
+      "Acute management is emergency ammonia lowering (dialysis if needed) with carglumic acid, nitrogen scavengers, arginine and protein restriction"
     ],
-    [
-     "Key Investigations",
-     "Urgent plasma ammonia during suspected crises, Plasma amino acids (low/normal citrulline, low arginine, raised glutamine), Urine",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "N-acetylglutamate synthase catalyses formation of N-acetylglutamate from glutamate and acetyl-CoA. N-acetylglutamate is the essential allosteric activator of carbamoyl phosphate synthetase 1 (CPS1), the enzyme that initiates the urea cycle by incorporating ammonia into carbamoyl phosphate. In NAGS deficiency the activator is not produced, so CPS1 remains inactive and the urea cycle cannot begin, leading to accumulation of ammonia. Because the block is at the very first step, downstream intermediates such as citrulline and arginine are low, and carbamoyl phosphate is not diverted into pyrimidine synthesis, so orotic acid excretion stays low (mirroring CPS1 deficiency and contrasting with OTC deficiency). Uniquely, the missing activator can be replaced pharmacologically by carglumic acid, which reactivates CPS1. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Carbamoyl phosphate synthetase 1 deficiency (biochemically near-identical)",
+      "Ornithine transcarbamylase deficiency (raised orotic acid, X-linked)",
+      "Citrullinaemia type 1 and argininosuccinic aciduria",
+      "Organic acidaemias causing secondary hyperammonaemia",
+      "Fatty acid oxidation disorders with hyperammonaemia",
+      "Transient hyperammonaemia of the newborn",
+      "Neonatal sepsis"
     ],
-    [
-     "Primary Differentials",
-     "Carbamoyl phosphate synthetase 1 deficiency (biochemically near-identical), Ornithine transcarbamylase deficiency (raised orotic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urgent plasma ammonia during suspected crises",
+      "Plasma amino acids (low/normal citrulline, low arginine, raised glutamine)",
+      "Urine orotic acid (characteristically low, separating from OTC deficiency)",
+      "Blood gas showing respiratory alkalosis of hyperammonaemia",
+      "NAGS gene sequencing for confirmation",
+      "Documented biochemical response to a carglumic acid trial",
+      "Plasma acylcarnitines/organic acids to exclude secondary hyperammonaemia"
     ],
-    [
-     "Management Strategy",
-     "Give carglumic acid as specific disease-directed therapy, a synthetic N-acetylglutamate analogue that restores carbamoyl",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal hyperammonaemic coma requiring emergency ammonia removal",
+      "Cerebral oedema from severe hyperammonaemia",
+      "Rapidly rising ammonia with encephalopathy at any age",
+      "Decompensation triggered by catabolic illness, high protein load or surgery",
+      "Failure of ammonia to fall despite standard scavenger therapy (prompting carglumic acid)"
     ],
-    [
-     "Clinical Pitfall",
-     "Not distinguishing NAGS from CPS1 deficiency and thereby missing a treatable disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "NAGS deficiency is one of the few urea cycle disorders with a specific pharmacological treatment; with early diagnosis and carglumic acid therapy long-term metabolic control and outcome can be excellent, whereas delayed treatment of severe neonatal hyperammonaemia risks permanent neurological injury.",
+    "pitfalls": [
+      "Not distinguishing NAGS from CPS1 deficiency and thereby missing a treatable disorder",
+      "Failing to trial carglumic acid, which is specifically effective in NAGS deficiency",
+      "Overlooking the low orotic acid clue that points to a proximal urea cycle defect",
+      "Delaying emergency ammonia lowering while awaiting confirmatory genetics",
+      "Assuming carglumic acid is equally effective in all urea cycle disorders"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics",
+      "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give carglumic acid as specific disease-directed therapy, a synthetic N-acetylglutamate analogue that restores carbamoyl phosphate synthetase 1 activity and can normalise ammonia",
+      "Institute a protein-restricted diet with adequate energy intake and essential amino-acid supplementation to limit ammonia generation",
+      "Treat acute hyperammonaemic crises by stopping protein intake, giving high-calorie glucose (with insulin if needed) to reverse catabolism, and intravenous carglumic acid with nitrogen-scavenger support",
+      "Escalate to haemodialysis or haemofiltration for severe or refractory hyperammonaemia to remove ammonia rapidly",
+      "Monitor plasma ammonia, amino acids and growth long term, and avoid catabolic triggers such as fasting, infection and the perioperative state",
+      "Provide an emergency regimen and sick-day plan with prompt hospital access during intercurrent illness",
+      "Offer genetic counselling and family screening given autosomal recessive inheritance, with antenatal or newborn diagnostic testing, and coordinate care through a metabolic medicine team with specialist dietetic input"
     ]
-   ],
-   "caption": "Overview comparison matrix for n-acetylglutamate synthase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "n-acetylglutamate-synthase-deficiency-real-image",
-   "title": "N-acetylglutamate synthase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "n_acetylglutamate_synthase_deficiency-pathway",
+      "title": "N-acetylglutamate synthase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rarest of the urea cycle disorders, caused by biallelic NAGS variants",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal hyperammonaemic coma requiring emergency ammonia removal",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urgent plasma ammonia during suspected crises, Plasma amino acids (low/normal citrulline, low arginine, raised glutamine), Urine orotic acid (characteristically low, separating from OTC deficiency)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give carglumic acid as specific disease-directed therapy, a synthetic N-acetylglutamate analogue that restores carbamoyl phosphate synthetase 1 activity and can normalise ammonia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not distinguishing NAGS from CPS1 deficiency and thereby missing a treatable disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of n-acetylglutamate synthase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "n_acetylglutamate_synthase_deficiency-matrix",
+      "title": "N-acetylglutamate synthase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rarest of the urea cycle disorders, caused by biallelic NAGS variants",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urgent plasma ammonia during suspected crises, Plasma amino acids (low/normal citrulline, low arginine, raised glutamine), Urine",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Carbamoyl phosphate synthetase 1 deficiency (biochemically near-identical), Ornithine transcarbamylase deficiency (raised orotic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give carglumic acid as specific disease-directed therapy, a synthetic N-acetylglutamate analogue that restores carbamoyl",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not distinguishing NAGS from CPS1 deficiency and thereby missing a treatable disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for n-acetylglutamate synthase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "n_acetylglutamate_synthase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent plasma ammonia during suspected crises",
+          "cells": [
+            {
+              "text": "Hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Low or normal citrulline, low arginine, raised glutamine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine orotic acid",
+          "cells": [
+            {
+              "text": "Characteristically low; separates it from OTC deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas",
+          "cells": [
+            {
+              "text": "Respiratory alkalosis of hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NAGS gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the genetic defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trial of carglumic acid",
+          "cells": [
+            {
+              "text": "Documented biochemical response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitines and organic acids",
+          "cells": [
+            {
+              "text": "Excludes secondary hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "n_acetylglutamate_synthase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbamoyl phosphate synthetase 1 deficiency",
+          "cells": [
+            {
+              "text": "Biochemically near-identical; NAGS deficiency responds to carglumic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ornithine transcarbamylase deficiency",
+          "cells": [
+            {
+              "text": "Raised orotic acid, unlike the characteristically low orotic acid here"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "n_acetylglutamate_synthase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carglumic acid",
+          "cells": [
+            {
+              "text": "A synthetic N-acetylglutamate analogue that restores CPS1 activity and can normalise ammonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein-restricted diet",
+          "cells": [
+            {
+              "text": "Adequate energy intake and essential amino-acid supplementation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute crisis management",
+          "cells": [
+            {
+              "text": "Stop protein intake; high-calorie glucose, with insulin if needed; intravenous carglumic acid with nitrogen-scavenger support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dialysis",
+          "cells": [
+            {
+              "text": "Haemodialysis or haemofiltration for severe or refractory hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Plasma ammonia, amino acids and growth; avoid catabolic triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day plan",
+          "cells": [
+            {
+              "text": "Emergency regimen and prompt hospital access during intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; antenatal or newborn diagnostic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic team",
+          "cells": [
+            {
+              "text": "With specialist dietetic input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "n_acetylglutamate_synthase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of N-acetylglutamate synthase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonatal hyperammonaemic encephalopathy, or episodic hyperammonaemia later in life",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hyperammonaemic coma, cerebral oedema, rising ammonia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency ammonia lowering with carglumic acid and scavengers; dialysis if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ammonia, amino acids, urine orotic acid, blood gas, NAGS sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low citrulline and orotic acid, with a response to carglumic acid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CPS1 or OTC deficiency or secondary hyperammonaemia; check acylcarnitines",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Carglumic acid, a synthetic N-acetylglutamate analogue that restores CPS1 activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Protein-restricted diet with adequate energy and essential amino acids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acute crises: stop protein, high-calorie glucose, IV carglumic acid and scavengers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Haemodialysis or haemofiltration for severe or refractory hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Carglumic acid can give excellent control; delayed treatment risks neurological injury",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

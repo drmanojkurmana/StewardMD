@@ -1,174 +1,421 @@
 {
- "id": "purtscher_retinopathy",
- "name": "Purtscher retinopathy",
- "aliases": [
-  "Purtscher's retinopathy",
-  "traumatic retinal angiopathy",
-  "Purtscher-like retinopathy"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Retina",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically follows severe trauma, particularly head injury, chest compression or long-bone fracture, with sudden visual loss developing shortly afterwards",
-   "The non-traumatic Purtscher-like form accompanies acute pancreatitis, renal failure, connective tissue disease, amniotic fluid embolism and childbirth",
-   "The fundus shows multiple cotton-wool spots and areas of superficial retinal whitening clustered around the optic disc, frequently bilateral",
-   "Purtscher flecken, polygonal patches of inner retinal whitening lying between arterioles and venules with a clear zone flanking the vessels, are highly characteristic",
-   "Retinal haemorrhages are usually few relative to the extent of ischaemic whitening",
-   "Fluorescein angiography demonstrates arteriolar and capillary non-perfusion in the affected areas",
-   "There is no proven ocular treatment, so care is directed at the underlying systemic cause and supportive observation"
+  "id": "purtscher_retinopathy",
+  "name": "Purtscher retinopathy",
+  "aliases": [
+    "Purtscher's retinopathy",
+    "traumatic retinal angiopathy",
+    "Purtscher-like retinopathy"
   ],
-  "pathophysiology": "The retinopathy results from occlusion of retinal arterioles and precapillary vessels by microemboli, which may consist of fat, air, fibrin or aggregated leucocytes. Complement activation with generation of C5a is thought to cause leucocyte aggregation and leucoembolisation, a mechanism particularly implicated in acute pancreatitis. The resulting precapillary arteriolar occlusion produces the ischaemic cotton-wool spots and polygonal Purtscher flecken seen around the posterior pole.",
-  "additionalDifferentials": [
-   "Commotio retinae",
-   "Central retinal artery occlusion",
-   "Non-arteritic anterior ischaemic optic neuropathy",
-   "Hypertensive retinopathy",
-   "Pre-eclampsia or HELLP-associated retinopathy",
-   "Fat embolism syndrome",
-   "Non-accidental injury with retinal haemorrhages in a child"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus examination to identify cotton-wool spots and Purtscher flecken",
-   "Fluorescein angiography to map arteriolar occlusion and capillary non-perfusion",
-   "Optical coherence tomography to document inner retinal ischaemic changes",
-   "Serum amylase and lipase when pancreatitis is suspected",
-   "Renal function tests and an autoimmune screen for a systemic precipitant",
-   "Detailed history for recent trauma or an obstetric or systemic trigger"
-  ],
-  "redFlags": [
-   "Bilateral severe visual loss",
-   "An underlying life-threatening cause such as acute pancreatitis or systemic embolism",
-   "Associated systemic decompensation requiring urgent medical care",
-   "Suspicion of non-accidental injury in a child"
-  ],
-  "prognosis": "The visual outcome is variable; some eyes recover partially over weeks to months as the ischaemic whitening resolves, while others are left with permanent central or field loss and subsequent optic atrophy.",
-  "pitfalls": [
-   "Missing the underlying systemic precipitant in the non-traumatic form",
-   "Attributing the picture to direct ocular trauma alone",
-   "Confusing the retinal whitening with commotio retinae",
-   "Failing to recognise Purtscher flecken as a distinctive sign"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying precipitant, stabilising severe trauma and managing acute pancreatitis, renal failure or connective tissue disease that triggered the leucoembolisation",
-   "Recognise there is no proven ocular-specific therapy; systemic corticosteroids are sometimes tried but remain of unproven benefit",
-   "Adopt a period of observation, since ischaemic retinal whitening and vision may recover partially as the occlusion resolves",
-   "Monitor with serial fundus examination, optical coherence tomography and fluorescein angiography to track resolution and areas of non-perfusion",
-   "Watch for and counsel about permanent central or field loss and subsequent optic atrophy",
-   "Coordinate care between ophthalmology and the team managing the systemic cause"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "purtscher_retinopathy-pathway",
-   "title": "Purtscher retinopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically follows severe trauma, particularly head injury, chest compression or long-bone fracture, with sudden visual loss developing shortly afterwards",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilateral severe visual loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus examination to identify cotton-wool spots and Purtscher flecken, Fluorescein angiography to map arteriolar occlusion and capillary non-perfusion, Optical coherence tomography to document inner retinal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying precipitant, stabilising severe trauma and managing acute pancreatitis, renal failure or connective tissue disease that triggered the leucoembolisation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the underlying systemic precipitant in the non-traumatic form"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of purtscher retinopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "purtscher_retinopathy-matrix",
-   "title": "Purtscher retinopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically follows severe trauma, particularly head injury, chest compression or long-bone fracture, with sudden visual loss",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Retina",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically follows severe trauma, particularly head injury, chest compression or long-bone fracture, with sudden visual loss developing shortly afterwards",
+      "The non-traumatic Purtscher-like form accompanies acute pancreatitis, renal failure, connective tissue disease, amniotic fluid embolism and childbirth",
+      "The fundus shows multiple cotton-wool spots and areas of superficial retinal whitening clustered around the optic disc, frequently bilateral",
+      "Purtscher flecken, polygonal patches of inner retinal whitening lying between arterioles and venules with a clear zone flanking the vessels, are highly characteristic",
+      "Retinal haemorrhages are usually few relative to the extent of ischaemic whitening",
+      "Fluorescein angiography demonstrates arteriolar and capillary non-perfusion in the affected areas",
+      "There is no proven ocular treatment, so care is directed at the underlying systemic cause and supportive observation"
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus examination to identify cotton-wool spots and Purtscher flecken, Fluorescein angiography to map arteriolar",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The retinopathy results from occlusion of retinal arterioles and precapillary vessels by microemboli, which may consist of fat, air, fibrin or aggregated leucocytes. Complement activation with generation of C5a is thought to cause leucocyte aggregation and leucoembolisation, a mechanism particularly implicated in acute pancreatitis. The resulting precapillary arteriolar occlusion produces the ischaemic cotton-wool spots and polygonal Purtscher flecken seen around the posterior pole.",
+    "additionalDifferentials": [
+      "Commotio retinae",
+      "Central retinal artery occlusion",
+      "Non-arteritic anterior ischaemic optic neuropathy",
+      "Hypertensive retinopathy",
+      "Pre-eclampsia or HELLP-associated retinopathy",
+      "Fat embolism syndrome",
+      "Non-accidental injury with retinal haemorrhages in a child"
     ],
-    [
-     "Primary Differentials",
-     "Commotio retinae, Central retinal artery occlusion, Non-arteritic anterior ischaemic optic neuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus examination to identify cotton-wool spots and Purtscher flecken",
+      "Fluorescein angiography to map arteriolar occlusion and capillary non-perfusion",
+      "Optical coherence tomography to document inner retinal ischaemic changes",
+      "Serum amylase and lipase when pancreatitis is suspected",
+      "Renal function tests and an autoimmune screen for a systemic precipitant",
+      "Detailed history for recent trauma or an obstetric or systemic trigger"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying precipitant, stabilising severe trauma and managing acute pancreatitis, renal failure or",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilateral severe visual loss",
+      "An underlying life-threatening cause such as acute pancreatitis or systemic embolism",
+      "Associated systemic decompensation requiring urgent medical care",
+      "Suspicion of non-accidental injury in a child"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the underlying systemic precipitant in the non-traumatic form",
-     "Prevent diagnostic or management error"
+    "prognosis": "The visual outcome is variable; some eyes recover partially over weeks to months as the ischaemic whitening resolves, while others are left with permanent central or field loss and subsequent optic atrophy.",
+    "pitfalls": [
+      "Missing the underlying systemic precipitant in the non-traumatic form",
+      "Attributing the picture to direct ocular trauma alone",
+      "Confusing the retinal whitening with commotio retinae",
+      "Failing to recognise Purtscher flecken as a distinctive sign"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying precipitant, stabilising severe trauma and managing acute pancreatitis, renal failure or connective tissue disease that triggered the leucoembolisation",
+      "Recognise there is no proven ocular-specific therapy; systemic corticosteroids are sometimes tried but remain of unproven benefit",
+      "Adopt a period of observation, since ischaemic retinal whitening and vision may recover partially as the occlusion resolves",
+      "Monitor with serial fundus examination, optical coherence tomography and fluorescein angiography to track resolution and areas of non-perfusion",
+      "Watch for and counsel about permanent central or field loss and subsequent optic atrophy",
+      "Coordinate care between ophthalmology and the team managing the systemic cause"
     ]
-   ],
-   "caption": "Overview comparison matrix for purtscher retinopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "purtscher-retinopathy-real-image",
-   "title": "Purtscher retinopathy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "purtscher_retinopathy-pathway",
+      "title": "Purtscher retinopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically follows severe trauma, particularly head injury, chest compression or long-bone fracture, with sudden visual loss developing shortly afterwards",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilateral severe visual loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus examination to identify cotton-wool spots and Purtscher flecken, Fluorescein angiography to map arteriolar occlusion and capillary non-perfusion, Optical coherence tomography to document inner retinal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying precipitant, stabilising severe trauma and managing acute pancreatitis, renal failure or connective tissue disease that triggered the leucoembolisation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the underlying systemic precipitant in the non-traumatic form"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of purtscher retinopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "purtscher_retinopathy-matrix",
+      "title": "Purtscher retinopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically follows severe trauma, particularly head injury, chest compression or long-bone fracture, with sudden visual loss",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus examination to identify cotton-wool spots and Purtscher flecken, Fluorescein angiography to map arteriolar",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Commotio retinae, Central retinal artery occlusion, Non-arteritic anterior ischaemic optic neuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying precipitant, stabilising severe trauma and managing acute pancreatitis, renal failure or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the underlying systemic precipitant in the non-traumatic form",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for purtscher retinopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "purtscher_retinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Cotton-wool spots and Purtscher flecken"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Arteriolar occlusion and capillary non-perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Inner retinal ischaemic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum amylase and lipase",
+          "cells": [
+            {
+              "text": "Pancreatitis, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests",
+          "cells": [
+            {
+              "text": "Systemic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "purtscher_retinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Central retinal artery occlusion",
+          "cells": [
+            {
+              "text": "Arterial occlusion"
+            },
+            {
+              "text": "Fluorescein angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-eclampsia or HELLP retinopathy",
+          "cells": [
+            {
+              "text": "Hypertensive disease of pregnancy"
+            },
+            {
+              "text": "Renal function tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "purtscher_retinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Underlying precipitant",
+          "cells": [
+            {
+              "text": "Direct treatment and stabilise severe trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular therapy",
+          "cells": [
+            {
+              "text": "No proven ocular-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Ischaemic whitening and vision may recover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial fundus examination and OCT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "purtscher_retinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Purtscher retinopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Purtscher retinopathy: bilateral visual loss after trauma or systemic illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Life-threatening cause such as pancreatitis or embolism, or non-accidental injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent medical care for systemic decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundus examination; fluorescein angiography; OCT; amylase and lipase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are Purtscher flecken found with a systemic precipitant identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CRAO, commotio retinae or hypertensive retinopathy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the underlying precipitant; stabilise severe trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "No proven ocular-specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Observation, as vision may recover",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Serial fundus examination and OCT monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

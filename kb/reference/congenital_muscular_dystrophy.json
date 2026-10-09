@@ -1,178 +1,474 @@
 {
- "id": "congenital_muscular_dystrophy",
- "name": "Congenital muscular dystrophy",
- "aliases": [
-  "CMD",
-  "merosin-deficient CMD (LAMA2-related)",
-  "collagen VI-related CMD",
-  "dystroglycanopathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley's Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A genetically heterogeneous group of mostly autosomal recessive dystrophies presenting at birth or in early infancy with hypotonia, weakness, and often early contractures",
-   "Major subtypes include merosin (laminin alpha-2)-deficient CMD from LAMA2 variants, collagen VI-related forms (Ullrich CMD and Bethlem myopathy), and the dystroglycanopathies",
-   "The dystroglycanopathies (for example those affecting fukutin-related and related glycosylation genes) can involve the brain and eyes, as in Walker-Warburg syndrome, muscle-eye-brain disease, and Fukuyama CMD",
-   "White-matter changes on brain MRI are characteristic of merosin-deficient CMD, even when cognition is preserved",
-   "Collagen VI-related disease combines proximal weakness and joint contractures with striking distal joint hyperlaxity",
-   "Respiratory insufficiency, including nocturnal hypoventilation, is a major complication and can occur even when ambulation is retained",
-   "Diagnosis integrates the clinical and MRI findings, serum creatine kinase, muscle biopsy with immunostaining, and molecular genetic testing",
-   "Management is supportive and multidisciplinary, with respiratory surveillance and support, physiotherapy, orthopaedic care for contractures and scoliosis, and feeding support"
+  "id": "congenital_muscular_dystrophy",
+  "name": "Congenital muscular dystrophy",
+  "aliases": [
+    "CMD",
+    "merosin-deficient CMD (LAMA2-related)",
+    "collagen VI-related CMD",
+    "dystroglycanopathy"
   ],
-  "pathophysiology": "The congenital muscular dystrophies result from variants in genes encoding proteins of the muscle-fibre basement membrane, extracellular matrix, or the glycosylation machinery that modifies alpha-dystroglycan. Loss of laminin alpha-2 (merosin) or collagen VI weakens the link between the muscle fibre and its surrounding matrix, while defective glycosylation of alpha-dystroglycan impairs its binding to matrix ligands and, in the brain, disrupts neuronal migration. These defects cause early muscle-fibre injury and dystrophic change and, in the dystroglycanopathies, associated structural brain and eye malformations. The particular protein affected determines whether disease is confined to muscle or extends to the central nervous system.",
-  "additionalDifferentials": [
-   "Congenital myopathies (for example nemaline and central core myopathy)",
-   "Spinal muscular atrophy presenting in infancy",
-   "Congenital myotonic dystrophy",
-   "Congenital myasthenic syndromes",
-   "Metabolic and mitochondrial myopathies of infancy",
-   "Central causes of neonatal hypotonia"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase measurement",
-   "Brain MRI to detect white-matter change or structural malformation",
-   "Muscle biopsy with immunostaining for merosin, collagen VI, and glycosylated alpha-dystroglycan",
-   "Next-generation sequencing gene panel for congenital muscular dystrophy",
-   "Respiratory function and sleep studies for hypoventilation",
-   "Ophthalmological assessment where a dystroglycanopathy is suspected"
-  ],
-  "redFlags": [
-   "Respiratory failure or nocturnal hypoventilation, which may be disproportionate to limb weakness",
-   "Feeding difficulty with aspiration risk and failure to thrive",
-   "Seizures or signs of significant brain involvement in dystroglycanopathies",
-   "Rapidly progressive scoliosis compromising respiration",
-   "Ophthalmic complications such as severe structural eye malformation"
-  ],
-  "prognosis": "Prognosis varies enormously by subtype, from severe neonatal forms such as Walker-Warburg syndrome with early mortality to milder collagen VI-related disease compatible with prolonged survival. Respiratory involvement is often the principal determinant of outcome, so early respiratory surveillance and support are critical.",
-  "pitfalls": [
-   "Assuming preserved cognition excludes brain involvement, since merosin-deficient CMD shows white-matter change without intellectual disability",
-   "Overlooking respiratory failure because a child remains ambulant",
-   "Not distinguishing subtypes, which is essential for prognosis, counselling, and surveillance",
-   "Missing the associated eye and brain anomalies of the dystroglycanopathies",
-   "Attributing neonatal hypotonia to a central cause without considering a muscle disorder"
-  ],
-  "references": [
-   "GeneReviews: Congenital muscular dystrophy overview",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No cure exists; care is supportive and subtype-directed, coordinated by a specialist neuromuscular team",
-   "Proactive respiratory surveillance with sleep studies and non-invasive ventilation for nocturnal hypoventilation",
-   "Physiotherapy, stretching, orthoses and serial casting or surgery to prevent and manage contractures",
-   "Monitoring and management of scoliosis, including spinal bracing or corrective surgery",
-   "Nutritional and safe-swallowing support, with gastrostomy feeding where bulbar involvement threatens intake",
-   "Cardiac surveillance in subtypes carrying cardiomyopathy risk",
-   "Ophthalmology and developmental input where a dystroglycanopathy involves the brain and eyes",
-   "Genetic counselling and family testing given the predominantly autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_muscular_dystrophy-pathway",
-   "title": "Congenital muscular dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A genetically heterogeneous group of mostly autosomal recessive dystrophies presenting at birth or in early infancy with hypotonia, weakness, and often early contractures",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory failure or nocturnal hypoventilation, which may be disproportionate to limb weakness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase measurement, Brain MRI to detect white-matter change or structural malformation, Muscle biopsy with immunostaining for merosin, collagen VI, and glycosylated alpha-dystroglycan"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No cure exists; care is supportive and subtype-directed, coordinated by a specialist neuromuscular team"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming preserved cognition excludes brain involvement, since merosin-deficient CMD shows white-matter change without intellectual disability"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital muscular dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_muscular_dystrophy-matrix",
-   "title": "Congenital muscular dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A genetically heterogeneous group of mostly autosomal recessive dystrophies presenting at birth or in early infancy with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley's Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A genetically heterogeneous group of mostly autosomal recessive dystrophies presenting at birth or in early infancy with hypotonia, weakness, and often early contractures",
+      "Major subtypes include merosin (laminin alpha-2)-deficient CMD from LAMA2 variants, collagen VI-related forms (Ullrich CMD and Bethlem myopathy), and the dystroglycanopathies",
+      "The dystroglycanopathies (for example those affecting fukutin-related and related glycosylation genes) can involve the brain and eyes, as in Walker-Warburg syndrome, muscle-eye-brain disease, and Fukuyama CMD",
+      "White-matter changes on brain MRI are characteristic of merosin-deficient CMD, even when cognition is preserved",
+      "Collagen VI-related disease combines proximal weakness and joint contractures with striking distal joint hyperlaxity",
+      "Respiratory insufficiency, including nocturnal hypoventilation, is a major complication and can occur even when ambulation is retained",
+      "Diagnosis integrates the clinical and MRI findings, serum creatine kinase, muscle biopsy with immunostaining, and molecular genetic testing",
+      "Management is supportive and multidisciplinary, with respiratory surveillance and support, physiotherapy, orthopaedic care for contractures and scoliosis, and feeding support"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase measurement, Brain MRI to detect white-matter change or structural malformation, Muscle biopsy with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The congenital muscular dystrophies result from variants in genes encoding proteins of the muscle-fibre basement membrane, extracellular matrix, or the glycosylation machinery that modifies alpha-dystroglycan. Loss of laminin alpha-2 (merosin) or collagen VI weakens the link between the muscle fibre and its surrounding matrix, while defective glycosylation of alpha-dystroglycan impairs its binding to matrix ligands and, in the brain, disrupts neuronal migration. These defects cause early muscle-fibre injury and dystrophic change and, in the dystroglycanopathies, associated structural brain and eye malformations. The particular protein affected determines whether disease is confined to muscle or extends to the central nervous system.",
+    "additionalDifferentials": [
+      "Congenital myopathies (for example nemaline and central core myopathy)",
+      "Spinal muscular atrophy presenting in infancy",
+      "Congenital myotonic dystrophy",
+      "Congenital myasthenic syndromes",
+      "Metabolic and mitochondrial myopathies of infancy",
+      "Central causes of neonatal hypotonia"
     ],
-    [
-     "Primary Differentials",
-     "Congenital myopathies (for example nemaline and central core myopathy), Spinal muscular atrophy presenting in infancy, Congenital",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase measurement",
+      "Brain MRI to detect white-matter change or structural malformation",
+      "Muscle biopsy with immunostaining for merosin, collagen VI, and glycosylated alpha-dystroglycan",
+      "Next-generation sequencing gene panel for congenital muscular dystrophy",
+      "Respiratory function and sleep studies for hypoventilation",
+      "Ophthalmological assessment where a dystroglycanopathy is suspected"
     ],
-    [
-     "Management Strategy",
-     "No cure exists; care is supportive and subtype-directed, coordinated by a specialist neuromuscular team",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory failure or nocturnal hypoventilation, which may be disproportionate to limb weakness",
+      "Feeding difficulty with aspiration risk and failure to thrive",
+      "Seizures or signs of significant brain involvement in dystroglycanopathies",
+      "Rapidly progressive scoliosis compromising respiration",
+      "Ophthalmic complications such as severe structural eye malformation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming preserved cognition excludes brain involvement, since merosin-deficient CMD shows white-matter change without",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies enormously by subtype, from severe neonatal forms such as Walker-Warburg syndrome with early mortality to milder collagen VI-related disease compatible with prolonged survival. Respiratory involvement is often the principal determinant of outcome, so early respiratory surveillance and support are critical.",
+    "pitfalls": [
+      "Assuming preserved cognition excludes brain involvement, since merosin-deficient CMD shows white-matter change without intellectual disability",
+      "Overlooking respiratory failure because a child remains ambulant",
+      "Not distinguishing subtypes, which is essential for prognosis, counselling, and surveillance",
+      "Missing the associated eye and brain anomalies of the dystroglycanopathies",
+      "Attributing neonatal hypotonia to a central cause without considering a muscle disorder"
+    ],
+    "references": [
+      "GeneReviews: Congenital muscular dystrophy overview",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No cure exists; care is supportive and subtype-directed, coordinated by a specialist neuromuscular team",
+      "Proactive respiratory surveillance with sleep studies and non-invasive ventilation for nocturnal hypoventilation",
+      "Physiotherapy, stretching, orthoses and serial casting or surgery to prevent and manage contractures",
+      "Monitoring and management of scoliosis, including spinal bracing or corrective surgery",
+      "Nutritional and safe-swallowing support, with gastrostomy feeding where bulbar involvement threatens intake",
+      "Cardiac surveillance in subtypes carrying cardiomyopathy risk",
+      "Ophthalmology and developmental input where a dystroglycanopathy involves the brain and eyes",
+      "Genetic counselling and family testing given the predominantly autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital muscular dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-muscular-dystrophy-real-image",
-   "title": "Congenital muscular dystrophy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "congenital_muscular_dystrophy-pathway",
+      "title": "Congenital muscular dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A genetically heterogeneous group of mostly autosomal recessive dystrophies presenting at birth or in early infancy with hypotonia, weakness, and often early contractures",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory failure or nocturnal hypoventilation, which may be disproportionate to limb weakness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase measurement, Brain MRI to detect white-matter change or structural malformation, Muscle biopsy with immunostaining for merosin, collagen VI, and glycosylated alpha-dystroglycan"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No cure exists; care is supportive and subtype-directed, coordinated by a specialist neuromuscular team"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming preserved cognition excludes brain involvement, since merosin-deficient CMD shows white-matter change without intellectual disability"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital muscular dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_muscular_dystrophy-matrix",
+      "title": "Congenital muscular dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A genetically heterogeneous group of mostly autosomal recessive dystrophies presenting at birth or in early infancy with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase measurement, Brain MRI to detect white-matter change or structural malformation, Muscle biopsy with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital myopathies (for example nemaline and central core myopathy), Spinal muscular atrophy presenting in infancy, Congenital",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No cure exists; care is supportive and subtype-directed, coordinated by a specialist neuromuscular team",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming preserved cognition excludes brain involvement, since merosin-deficient CMD shows white-matter change without",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital muscular dystrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_muscular_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Raised CK in dystrophic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "White-matter change or structural malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy with merosin, collagen VI and glycosylated alpha-dystroglycan staining",
+          "cells": [
+            {
+              "text": "Protein deficiency pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function and sleep studies",
+          "cells": [
+            {
+              "text": "Hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Next-generation sequencing gene panel",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_muscular_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital myopathies (nemaline, central core)",
+          "cells": [
+            {
+              "text": "Named look-alike on biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal muscular atrophy presenting in infancy",
+          "cells": [
+            {
+              "text": "Named look-alike; genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myasthenic syndromes",
+          "cells": [
+            {
+              "text": "Named look-alike; fatigable weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_muscular_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive, subtype-directed care",
+          "cells": [
+            {
+              "text": "No cure; specialist neuromuscular team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Sleep studies and non-invasive ventilation for nocturnal hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contracture prevention",
+          "cells": [
+            {
+              "text": "Physiotherapy, stretching, orthoses, serial casting or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scoliosis management",
+          "cells": [
+            {
+              "text": "Spinal bracing or corrective surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and swallowing",
+          "cells": [
+            {
+              "text": "Gastrostomy feeding where bulbar involvement threatens intake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Subtypes carrying cardiomyopathy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology and development",
+          "cells": [
+            {
+              "text": "Where dystroglycanopathy involves the brain and eyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Predominantly autosomal recessive; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_muscular_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Congenital muscular dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital muscular dystrophy: neonatal hypotonia and weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory failure, feeding failure, seizures, rapid scoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory assessment; non-invasive ventilation for hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CK; brain MRI; muscle biopsy immunostaining; gene panel; respiratory studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy or gene panel confirm a dystrophic subtype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital myopathy, SMA, congenital myasthenia or mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Respiratory surveillance and non-invasive ventilation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, orthoses and serial casting to prevent contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bracing or surgery for scoliosis; gastrostomy where bulbar weakness threatens intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac and ophthalmic surveillance; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Varies by subtype, from severe neonatal forms with early mortality to milder forms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

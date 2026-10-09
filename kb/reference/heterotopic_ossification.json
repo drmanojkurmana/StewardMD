@@ -1,174 +1,470 @@
 {
- "id": "heterotopic_ossification",
- "name": "Heterotopic ossification",
- "aliases": [
-  "HO",
-  "myositis ossificans",
-  "ectopic bone formation"
- ],
- "class": "non_infective",
- "system": "Rehabilitation / Pain",
- "specialty": "Rehabilitation Medicine (PM&R)",
- "referenceOnly": true,
- "reference": {
-  "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Heterotopic ossification is the formation of mature lamellar bone within soft tissues where bone does not normally exist, most often around large joints",
-   "It is common after spinal cord injury, traumatic brain injury, major joint surgery, burns, and severe trauma, typically appearing within weeks to a few months of the inciting event",
-   "Early presentation can mimic infection or thrombosis, with localised swelling, warmth, erythema, pain, and progressive loss of joint range of motion",
-   "A markedly raised serum alkaline phosphatase supports early disease but is non-specific and can be normal, so imaging is important",
-   "Plain radiographs are often normal early; triple-phase bone scan is the most sensitive method for detecting immature heterotopic bone before it is visible on x-ray",
-   "Maintaining joint range of motion through careful therapy is central to management, alongside prophylaxis in high-risk patients using measures such as NSAIDs and, in selected cases, radiation",
-   "Bisphosphonates may be used to limit mineralisation of immature lesions as part of medical management",
-   "Surgical excision is reserved for mature, well-established lesions that significantly limit function, ideally once bone activity has settled to reduce recurrence risk",
-   "The most disabling consequence is ankylosis of a joint, which can severely impair positioning, mobility, and self-care"
+  "id": "heterotopic_ossification",
+  "name": "Heterotopic ossification",
+  "aliases": [
+    "HO",
+    "myositis ossificans",
+    "ectopic bone formation"
   ],
-  "pathophysiology": "Heterotopic ossification involves aberrant differentiation of mesenchymal stem cells into osteoblasts within soft tissue, driven by a combination of an osteogenic local environment, tissue injury and inflammation, and neurogenic signalling in patients with central nervous system injury. Inflammatory mediators and bone morphogenetic proteins promote the formation of an osteoid matrix that subsequently mineralises into mature bone. The process evolves from an early inflammatory and immature phase through progressive mineralisation to eventual mature lamellar bone.",
-  "additionalDifferentials": [
-   "Deep vein thrombosis",
-   "Cellulitis or septic arthritis",
-   "Fracture or occult bony injury",
-   "Tumoral calcinosis or soft-tissue calcification",
-   "Osteosarcoma or other bone tumour",
-   "Complex regional pain syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serial serum alkaline phosphatase to support diagnosis and monitor activity",
-   "Triple-phase bone scintigraphy for early and sensitive detection of immature lesions",
-   "Plain radiographs to characterise and follow established, mineralised bone",
-   "Ultrasound or CT for further definition and surgical planning",
-   "Doppler ultrasound and inflammatory markers to exclude thrombosis and infection"
-  ],
-  "redFlags": [
-   "Presentation mimicking deep vein thrombosis or septic arthritis that must be excluded urgently",
-   "Rapidly progressive joint ankylosis threatening irreversible loss of function",
-   "Ossification compressing a peripheral nerve or vessel",
-   "Skin breakdown or pressure injury developing over a fixed, ossified joint"
-  ],
-  "prognosis": "Many lesions stabilise without causing major functional loss, but a significant proportion progress to restrict joint movement, and severe cases cause complete ankylosis. Outcomes are improved by early recognition, preserving range of motion, and appropriately timed prophylaxis or surgery.",
-  "pitfalls": [
-   "Attributing early swelling and warmth solely to thrombosis or infection and missing the diagnosis",
-   "Relying on early plain radiographs, which are frequently negative in immature disease",
-   "Aggressive forced manipulation of the affected joint, which may aggravate the lesion",
-   "Operating on immature, metabolically active bone, increasing the risk of recurrence",
-   "Neglecting prophylaxis in high-risk patients such as those with spinal cord or brain injury"
-  ],
-  "references": [
-   "Braddom's Physical Medicine and Rehabilitation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer prophylaxis in high-risk patients using non-steroidal anti-inflammatory drugs such as indometacin and, in selected cases, low-dose radiotherapy to suppress aberrant osteogenesis",
-   "Preserve joint range of motion through careful physiotherapy and gentle mobilisation, the central aim of management",
-   "Consider bisphosphonate therapy to slow mineralisation of immature lesions in selected cases",
-   "Reserve surgical excision for established mature bone causing functional impairment, timed once activity has settled on bone scan and alkaline phosphatase, with peri-operative prophylaxis to reduce recurrence",
-   "Provide analgesia and treat the local inflammatory phase symptomatically",
-   "Exclude mimics of the early presentation such as deep vein thrombosis and infection before attributing swelling to heterotopic bone",
-   "Coordinate rehabilitation-led multidisciplinary care to optimise function and time interventions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "heterotopic_ossification-pathway",
-   "title": "Heterotopic ossification: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Heterotopic ossification is the formation of mature lamellar bone within soft tissues where bone does not normally exist, most often around large joints",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Presentation mimicking deep vein thrombosis or septic arthritis that must be excluded urgently",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial serum alkaline phosphatase to support diagnosis and monitor activity, Triple-phase bone scintigraphy for early and sensitive detection of immature lesions, Plain radiographs to characterise and follow established,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer prophylaxis in high-risk patients using non-steroidal anti-inflammatory drugs such as indometacin and, in selected cases, low-dose radiotherapy to suppress aberrant osteogenesis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing early swelling and warmth solely to thrombosis or infection and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of heterotopic ossification."
-  }
- ],
- "tables": [
-  {
-   "id": "heterotopic_ossification-matrix",
-   "title": "Heterotopic ossification: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Heterotopic ossification is the formation of mature lamellar bone within soft tissues where bone does not normally exist, most",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rehabilitation / Pain",
+  "specialty": "Rehabilitation Medicine (PM&R)",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Heterotopic ossification is the formation of mature lamellar bone within soft tissues where bone does not normally exist, most often around large joints",
+      "It is common after spinal cord injury, traumatic brain injury, major joint surgery, burns, and severe trauma, typically appearing within weeks to a few months of the inciting event",
+      "Early presentation can mimic infection or thrombosis, with localised swelling, warmth, erythema, pain, and progressive loss of joint range of motion",
+      "A markedly raised serum alkaline phosphatase supports early disease but is non-specific and can be normal, so imaging is important",
+      "Plain radiographs are often normal early; triple-phase bone scan is the most sensitive method for detecting immature heterotopic bone before it is visible on x-ray",
+      "Maintaining joint range of motion through careful therapy is central to management, alongside prophylaxis in high-risk patients using measures such as NSAIDs and, in selected cases, radiation",
+      "Bisphosphonates may be used to limit mineralisation of immature lesions as part of medical management",
+      "Surgical excision is reserved for mature, well-established lesions that significantly limit function, ideally once bone activity has settled to reduce recurrence risk",
+      "The most disabling consequence is ankylosis of a joint, which can severely impair positioning, mobility, and self-care"
     ],
-    [
-     "Key Investigations",
-     "Serial serum alkaline phosphatase to support diagnosis and monitor activity, Triple-phase bone scintigraphy for early and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Heterotopic ossification involves aberrant differentiation of mesenchymal stem cells into osteoblasts within soft tissue, driven by a combination of an osteogenic local environment, tissue injury and inflammation, and neurogenic signalling in patients with central nervous system injury. Inflammatory mediators and bone morphogenetic proteins promote the formation of an osteoid matrix that subsequently mineralises into mature bone. The process evolves from an early inflammatory and immature phase through progressive mineralisation to eventual mature lamellar bone.",
+    "additionalDifferentials": [
+      "Deep vein thrombosis",
+      "Cellulitis or septic arthritis",
+      "Fracture or occult bony injury",
+      "Tumoral calcinosis or soft-tissue calcification",
+      "Osteosarcoma or other bone tumour",
+      "Complex regional pain syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Deep vein thrombosis, Cellulitis or septic arthritis, Fracture or occult bony injury",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial serum alkaline phosphatase to support diagnosis and monitor activity",
+      "Triple-phase bone scintigraphy for early and sensitive detection of immature lesions",
+      "Plain radiographs to characterise and follow established, mineralised bone",
+      "Ultrasound or CT for further definition and surgical planning",
+      "Doppler ultrasound and inflammatory markers to exclude thrombosis and infection"
     ],
-    [
-     "Management Strategy",
-     "Offer prophylaxis in high-risk patients using non-steroidal anti-inflammatory drugs such as indometacin and, in selected cases,",
-     "Core treatment modality"
+    "redFlags": [
+      "Presentation mimicking deep vein thrombosis or septic arthritis that must be excluded urgently",
+      "Rapidly progressive joint ankylosis threatening irreversible loss of function",
+      "Ossification compressing a peripheral nerve or vessel",
+      "Skin breakdown or pressure injury developing over a fixed, ossified joint"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing early swelling and warmth solely to thrombosis or infection and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many lesions stabilise without causing major functional loss, but a significant proportion progress to restrict joint movement, and severe cases cause complete ankylosis. Outcomes are improved by early recognition, preserving range of motion, and appropriately timed prophylaxis or surgery.",
+    "pitfalls": [
+      "Attributing early swelling and warmth solely to thrombosis or infection and missing the diagnosis",
+      "Relying on early plain radiographs, which are frequently negative in immature disease",
+      "Aggressive forced manipulation of the affected joint, which may aggravate the lesion",
+      "Operating on immature, metabolically active bone, increasing the risk of recurrence",
+      "Neglecting prophylaxis in high-risk patients such as those with spinal cord or brain injury"
+    ],
+    "references": [
+      "Braddom's Physical Medicine and Rehabilitation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer prophylaxis in high-risk patients using non-steroidal anti-inflammatory drugs such as indometacin and, in selected cases, low-dose radiotherapy to suppress aberrant osteogenesis",
+      "Preserve joint range of motion through careful physiotherapy and gentle mobilisation, the central aim of management",
+      "Consider bisphosphonate therapy to slow mineralisation of immature lesions in selected cases",
+      "Reserve surgical excision for established mature bone causing functional impairment, timed once activity has settled on bone scan and alkaline phosphatase, with peri-operative prophylaxis to reduce recurrence",
+      "Provide analgesia and treat the local inflammatory phase symptomatically",
+      "Exclude mimics of the early presentation such as deep vein thrombosis and infection before attributing swelling to heterotopic bone",
+      "Coordinate rehabilitation-led multidisciplinary care to optimise function and time interventions"
     ]
-   ],
-   "caption": "Overview comparison matrix for heterotopic ossification."
-  }
- ],
- "diagrams": [
-  {
-   "id": "heterotopic-ossification-real-image",
-   "title": "Heterotopic ossification: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "heterotopic_ossification-pathway",
+      "title": "Heterotopic ossification: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Heterotopic ossification is the formation of mature lamellar bone within soft tissues where bone does not normally exist, most often around large joints",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Presentation mimicking deep vein thrombosis or septic arthritis that must be excluded urgently",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial serum alkaline phosphatase to support diagnosis and monitor activity, Triple-phase bone scintigraphy for early and sensitive detection of immature lesions, Plain radiographs to characterise and follow established,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer prophylaxis in high-risk patients using non-steroidal anti-inflammatory drugs such as indometacin and, in selected cases, low-dose radiotherapy to suppress aberrant osteogenesis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing early swelling and warmth solely to thrombosis or infection and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of heterotopic ossification."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "heterotopic_ossification-matrix",
+      "title": "Heterotopic ossification: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Heterotopic ossification is the formation of mature lamellar bone within soft tissues where bone does not normally exist, most",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial serum alkaline phosphatase to support diagnosis and monitor activity, Triple-phase bone scintigraphy for early and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Deep vein thrombosis, Cellulitis or septic arthritis, Fracture or occult bony injury",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer prophylaxis in high-risk patients using non-steroidal anti-inflammatory drugs such as indometacin and, in selected cases,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing early swelling and warmth solely to thrombosis or infection and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for heterotopic ossification."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heterotopic_ossification-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial serum alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Supports diagnosis and tracks activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triple-phase bone scintigraphy",
+          "cells": [
+            {
+              "text": "Early and sensitive detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Characterises established, mature bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or CT",
+          "cells": [
+            {
+              "text": "Further definition and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound and inflammatory markers",
+          "cells": [
+            {
+              "text": "Excludes thrombosis and infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heterotopic_ossification-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep vein thrombosis",
+          "cells": [
+            {
+              "text": "Mimics DVT; Doppler separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis or septic arthritis",
+          "cells": [
+            {
+              "text": "Mimics infection; inflammatory markers separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumoral calcinosis or soft-tissue calcification",
+          "cells": [
+            {
+              "text": "Soft-tissue calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteosarcoma or other bone tumour",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heterotopic_ossification-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-steroidal prophylaxis",
+          "cells": [
+            {
+              "text": "Offered to high-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy",
+          "cells": [
+            {
+              "text": "Preserves joint range of motion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bisphosphonate therapy",
+          "cells": [
+            {
+              "text": "Considered to slow mineralisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Reserved for established, mature bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Local inflammatory phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of mimics",
+          "cells": [
+            {
+              "text": "Deep vein thrombosis and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation-led multidisciplinary care",
+          "cells": [
+            {
+              "text": "Optimises function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heterotopic_ossification-dx-mgmt",
+      "title": "Diagnosis and management of Heterotopic ossification",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful swelling and reduced joint range after trauma, surgery or spinal injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "DVT or infection mimic, rapid ankylosis, nerve compression, or skin breakdown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude DVT or infection before treating as heterotopic ossification",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial ALP; triple-phase bone scan; radiographs; ultrasound or CT; Doppler",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is new bone formation confirmed in soft tissue on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DVT, cellulitis, fracture, tumoral calcinosis or osteosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Non-steroidal prophylaxis in high-risk patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy to preserve joint range of motion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider bisphosphonates to slow mineralisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical excision once the bone is mature",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Range preserved; mature bone excised when symptomatic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

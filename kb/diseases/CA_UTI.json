@@ -261,25 +261,514 @@
       "caption": "Diagnostic and clinical overview matrix for catheter-associated urinary tract infection."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "ca-uti-real-image",
-      "title": "Catheter-Associated Urinary Tract Infection: Diagnostic Renal Ultrasonography",
-      "type": "ultrasound",
-      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "IDSA guideline, Catheter-associated urinary tract infection in adults, 2009",
+      "url": "https://academic.oup.com/cid/article/50/5/625/324341",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CA_UTI-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for catheter-associated UTI",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Renal Cortex",
-          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+          "parameter": "CA-UTI urine culture",
+          "unit": "cfu/mL",
+          "cells": [
+            {
+              "text": ">=10^3 of 1 or more species",
+              "op": ">=",
+              "value": 1000
+            },
+            {
+              "text": "{{hy:Counts only with compatible symptoms and no other source}}"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Corticomedullary Junction",
-          "description": "Medullary pyramid definition and structural architecture."
+          "parameter": "Specimen source",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Catheter specimen, or voided specimen within 48 h of removal",
+              "op": "<=",
+              "value": 48
+            },
+            {
+              "text": "Defines a catheter-associated episode"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Collecting System",
-          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+          "parameter": "Compatible symptoms",
+          "cells": [
+            {
+              "text": "New fever, rigors, altered mental status, malaise or lethargy without other cause; flank pain, CVA tenderness, acute haematuria"
+            },
+            {
+              "text": "Typical UTI features predict less well in catheterised patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter-associated asymptomatic bacteriuria",
+          "unit": "cfu/mL",
+          "cells": [
+            {
+              "text": ">=10^5 without symptoms",
+              "op": ">=",
+              "value": 100000
+            },
+            {
+              "text": "Do not screen or treat except pregnancy or urologic procedures with mucosal bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pyuria",
+          "cells": [
+            {
+              "text": "Not diagnostic"
+            },
+            {
+              "text": "{{hy:Absence in a symptomatic patient points to another diagnosis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cloudy or smelly urine",
+          "cells": [
+            {
+              "text": "Not diagnostic"
+            },
+            {
+              "text": "Not a reason to culture or treat"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine nitrite",
+          "cells": [
+            {
+              "text": "Often negative"
+            },
+            {
+              "text": "Enterococci, Pseudomonas and Candida do not make nitrite"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture sampling",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Catheter in place over 2 weeks: replace, then culture from the fresh catheter",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Old catheter reflects biofilm, not bladder"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "S. aureus in urine",
+          "cells": [
+            {
+              "text": "Any growth"
+            },
+            {
+              "text": "Consider concomitant bacteraemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "CA_UTI-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic catheter-associated UTI",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Catheter-associated asymptomatic bacteriuria",
+          "cells": [
+            {
+              "text": "Positive culture with no urinary or systemic symptoms"
+            },
+            {
+              "text": "{{hy:Clinical assessment; culture alone cannot separate}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other source of fever (chest, abdomen, line)",
+          "cells": [
+            {
+              "text": "Fever explained elsewhere"
+            },
+            {
+              "text": "Systematic search for alternative source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-infective delirium in older patient",
+          "cells": [
+            {
+              "text": "Metabolic or drug cause of confusion"
+            },
+            {
+              "text": "Exclude time-sensitive causes before blaming bacteriuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Candiduria from colonisation",
+          "cells": [
+            {
+              "text": "Common after antibiotics; often asymptomatic"
+            },
+            {
+              "text": "Catheter removal alone clears over a third of cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyuria from stasis or catheter trauma",
+          "cells": [
+            {
+              "text": "Obstructed catheter, local irritation or haematuria"
+            },
+            {
+              "text": "Check drainage; pyuria alone is not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyelonephritis, prostatitis or bacteraemia",
+          "cells": [
+            {
+              "text": "Infection beyond the bladder: flank pain, rigors, sepsis"
+            },
+            {
+              "text": "Blood cultures; imaging if fever persists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "CA_UTI-treatment",
+      "kind": "treatment",
+      "title": "Management of catheter-associated UTI",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine culture before antibiotics",
+          "cells": [
+            {
+              "text": "Every presumed CA-UTI"
+            },
+            {
+              "text": "Midstream sample if catheter can be removed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Remove or replace catheter",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "{{hy:Catheter in place over 2 weeks and still needed: replace}}",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Remove as soon as no longer needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotic for 7 days",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Prompt resolution of symptoms",
+              "op": "=",
+              "value": 7
+            },
+            {
+              "text": "Whether or not the catheter stays"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotic for 10 to 14 days",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Delayed response",
+              "range": [
+                10,
+                14
+              ]
+            },
+            {
+              "text": "3-day courses relapsed more than 14-day courses in a trial"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Levofloxacin 5 days",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Patient not severely ill",
+              "op": "=",
+              "value": 5
+            },
+            {
+              "text": "Insufficient data for other fluoroquinolones"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "3-day course",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Women aged 65 or under, no upper tract symptoms, after catheter removal",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "text": "Weak recommendation (B-II)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drainage of abscess or obstruction",
+          "cells": [
+            {
+              "text": "Persistent fever or bacteraemia on appropriate therapy"
+            },
+            {
+              "text": "Image for renal or perinephric abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Practices not recommended",
+          "cells": [
+            {
+              "text": "Routine prophylaxis, bladder irrigation, antiseptic in bag, antimicrobial-coated catheters"
+            },
+            {
+              "text": "No clinical benefit shown"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Empiric agent choice is not specified in the sources opened; tailor to culture and local resistance. The IDSA guideline dates from 2009."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CA_UTI-dx-mgmt",
+      "title": "Diagnosis and management of catheter-associated UTI",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Catheterised patient with fever, rigors, flank pain or new confusion",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Another source explains the symptoms?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat the other source; do not culture urine",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Catheter in place over 2 weeks and still needed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Replace catheter, culture urine from the new one",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove if possible; culture midstream or catheter urine",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Culture grows 10^3 cfu/mL or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "CA-UTI unlikely; look for another cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Start antibiotics, tailor to culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Prompt symptom resolution?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treat 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Extend to 10 to 14 days; image for abscess or obstruction if fever persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Complete course; remove catheter when no longer needed",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
         }
       ]
     }

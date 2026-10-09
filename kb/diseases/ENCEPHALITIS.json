@@ -318,25 +318,724 @@
       "caption": "Diagnostic and clinical overview matrix for encephalitis."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "encephalitis-real-image",
-      "title": "Encephalitis: Diagnostic Head Computed Tomography",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Venkatesan et al, International Encephalitis Consortium case definitions, Clin Infect Dis 2013",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3783060/",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Encephalitis",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/brain-infections/encephalitis",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Bell et al, Management of suspected HSV encephalitis in adults, Clin Med 2009",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4953608",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 191-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ENCEPHALITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Encephalitis case definition and key investigations",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cerebral Parenchyma",
-          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+          "parameter": "Major criterion: altered mental status",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Reduced or altered consciousness, lethargy or personality change lasting >=24 h",
+              "op": ">=",
+              "value": 24
+            },
+            {
+              "text": "{{hy:Required; no other cause found}}"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Ventricular System",
-          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+          "parameter": "Minor: fever",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">=38 within 72 h before or after presentation",
+              "op": ">=",
+              "value": 38
+            },
+            {
+              "text": "Counts as one minor criterion"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Extra-Axial Spaces",
-          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+          "parameter": "Minor: seizures",
+          "cells": [
+            {
+              "text": "Generalised or partial, not explained by a known seizure disorder"
+            },
+            {
+              "text": "Counts as one minor criterion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: focal neurology",
+          "cells": [
+            {
+              "text": "New-onset focal neurologic findings"
+            },
+            {
+              "text": "Counts as one minor criterion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: CSF white cell count",
+          "unit": "cells/mm3",
+          "cells": [
+            {
+              "text": ">=5",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Counts as one minor criterion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: neuroimaging or EEG",
+          "cells": [
+            {
+              "text": "New or acute parenchymal abnormality, or EEG change consistent with encephalitis"
+            },
+            {
+              "text": "Each counts as one minor criterion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Possible encephalitis",
+          "cells": [
+            {
+              "text": "Major criterion plus 2 minor criteria",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Start work-up and empiric therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Probable or confirmed encephalitis",
+          "cells": [
+            {
+              "text": "Major criterion plus >=3 minor criteria",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Confirmed needs pathology, microbiologic or autoimmune laboratory proof"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Typical viral CSF",
+          "cells": [
+            {
+              "text": "Lymphocytic pleocytosis, normal glucose, mildly raised protein, negative Gram stain"
+            },
+            {
+              "text": "Changes may lag 8 to 24 h after onset; glucose can be low with VZV, mumps, LCMV"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CSF HSV PCR",
+          "cells": [
+            {
+              "text": "Test of choice for HSV-1 and HSV-2"
+            },
+            {
+              "text": "{{hy:Can be falsely negative early; repeat if suspicion persists}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Orbitofrontal and temporal oedema in HSV; basal ganglia or thalamic change in West Nile"
+            },
+            {
+              "text": "MRI preferred to CT; CT much less sensitive for HSV"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CSF volume for testing",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "At least 20 mL in adults if possible",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "Freeze 5 to 10 mL for later tests"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Timing of a repeat HSV PCR differs by source: IEC 2013 says repeat LP within 3 to 7 days, Merck says 48 to 72 hours, Bell 2009 says 24 to 48 hours."
+    },
+    {
+      "id": "ENCEPHALITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic encephalitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial meningitis",
+          "cells": [
+            {
+              "text": "Neck stiffness with preserved brain function early; may overlap"
+            },
+            {
+              "text": "CSF Gram stain and culture"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Brain abscess",
+          "cells": [
+            {
+              "text": "Focal ring-enhancing lesion"
+            },
+            {
+              "text": "Contrast MRI or CT"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cerebral venous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Headache, seizures, raised pressure"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Anti-NMDA receptor encephalitis",
+          "cells": [
+            {
+              "text": "Abnormal behaviour, psychosis, seizures or movement disorder"
+            },
+            {
+              "text": "NMDAR antibody testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autoimmune limbic encephalitis",
+          "cells": [
+            {
+              "text": "Prominent limbic symptoms"
+            },
+            {
+              "text": "Autoimmune antibody panel (VGKC, GAD, AMPA, GABAb and others)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute disseminated encephalomyelitis",
+          "cells": [
+            {
+              "text": "Post-infectious demyelinating process"
+            },
+            {
+              "text": "MRI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rabies",
+          "cells": [
+            {
+              "text": "Animal bite or bat exposure, rapid decline, acute flaccid paralysis"
+            },
+            {
+              "text": "Rabies testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metabolic or toxic encephalopathy",
+          "cells": [
+            {
+              "text": "Encephalopathy without CSF inflammation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tuberculous meningoencephalitis",
+          "cells": [
+            {
+              "text": "Hyponatraemia is a clue"
+            },
+            {
+              "text": "MTB testing of CSF"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "IEC 2013 conditional-testing clues used for the autoimmune, rabies and TB rows."
+    },
+    {
+      "id": "ENCEPHALITIS-treatment",
+      "kind": "treatment",
+      "title": "Management of suspected encephalitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV aciclovir 10 mg/kg three times daily",
+          "cells": [
+            {
+              "text": "{{hy:All suspected HSV or VZV encephalitis, before results}}"
+            },
+            {
+              "text": "14 to 21 days if HSV confirmed, because of relapse risk"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Aciclovir infusion care",
+          "cells": [
+            {
+              "text": "Throughout therapy"
+            },
+            {
+              "text": "Infuse slowly over 1 hour with good hydration; watch renal, liver and marrow toxicity"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stop aciclovir",
+          "cells": [
+            {
+              "text": "HSV PCR negative with low suspicion, or another diagnosis found"
+            },
+            {
+              "text": "Recheck CSF if the first sample was early"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Empiric antibiotics",
+          "cells": [
+            {
+              "text": "Until bacterial meningitis is excluded"
+            },
+            {
+              "text": "Agent not specified in source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ganciclovir",
+          "cells": [
+            {
+              "text": "CMV encephalitis, usually after PCR"
+            },
+            {
+              "text": "Mainly immunocompromised patients"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Glucocorticoids, plasma exchange or IV immunoglobulin",
+          "cells": [
+            {
+              "text": "Immune-mediated encephalitis such as ADEM"
+            },
+            {
+              "text": "Start immediately"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Treat fever, dehydration, electrolyte disorders and seizures; keep euvolaemic"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Aciclovir dose from Bell 2009 (Clin Med); adjust for renal function per local formulary."
+    },
+    {
+      "id": "ENCEPHALITIS-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Manifestations commonly associated with enterovirus serotypes",
+      "rowHeader": "Manifestation",
+      "columns": [
+        "Coxsackievirus",
+        "Echovirus (E) and enterovirus (Ent)"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute hemorrhagic conjunctivitis",
+          "cells": [
+            {
+              "text": "A24"
+            },
+            {
+              "text": "E70"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Aseptic meningitis",
+          "cells": [
+            {
+              "text": "A2, 4, 7, 9, 10; B1 to 5"
+            },
+            {
+              "text": "E4, 6, 7, 9, 11, 13, 16, 18, 19, 30, 33; Ent70, 71"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Encephalitis",
+          "cells": [
+            {
+              "text": "A9; B1 to 5"
+            },
+            {
+              "text": "E3, 4, 6, 7, 9, 11, 18, 25, 30; Ent71"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Exanthem",
+          "cells": [
+            {
+              "text": "A4, 5, 9, 10, 16; B1, 3 to 5"
+            },
+            {
+              "text": "E4 to 7, 9, 11, 16 to 19, 25, 30; Ent71"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Generalized disease of the newborn",
+          "cells": [
+            {
+              "text": "B1 to 5"
+            },
+            {
+              "text": "E4 to 6, 7, 9, 11, 14, 16, 18, 19"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Hand-foot-and-mouth disease",
+          "cells": [
+            {
+              "text": "A5, 7, 9, 10, 16; B1, 2, 5"
+            },
+            {
+              "text": "Ent71"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Herpangina",
+          "cells": [
+            {
+              "text": "A1 to 10, 16, 22; B1 to 5"
+            },
+            {
+              "text": "E6, 9, 11, 16, 17, 25, 30; Ent71"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Myocarditis, pericarditis",
+          "cells": [
+            {
+              "text": "A4, 9, 16; B1 to 5"
+            },
+            {
+              "text": "E6, 9, 11, 22"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Paralysis",
+          "cells": [
+            {
+              "text": "A4, 7, 9; B1 to 5"
+            },
+            {
+              "text": "E2 to 4, 6, 7, 9, 11, 18, 30; Ent70, 71"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Pleurodynia",
+          "cells": [
+            {
+              "text": "A1, 2, 4, 6, 9, 10, 16; B1 to 6"
+            },
+            {
+              "text": "E1 to 3, 6, 7, 9, 11, 12, 14, 16, 19, 24, 25, 30"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "A9, 16; B1 to 5"
+            },
+            {
+              "text": "E6, 7, 9, 11, 12, 19, 20, 30; Ent68, 71"
+            }
+          ],
+          "cite": "c5"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ENCEPHALITIS-dx-mgmt",
+      "title": "Diagnosis and management of encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with altered mental status, seizures or focal signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Altered mental status >=24 h with no other cause?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Look for other causes of encephalopathy",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood cultures, start IV aciclovir and empiric antibiotics",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CT if needed to exclude LP contraindication, then LP",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "CSF cells, protein, glucose, Gram stain, culture, HSV, VZV, enterovirus PCR",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "MRI brain and EEG",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "CSF HSV PCR positive?",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Aciclovir for 14 to 21 days",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "HSV still suspected, eg temporal lobe changes?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Continue aciclovir and repeat LP for HSV PCR",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Stop aciclovir; pursue exposure-guided and autoimmune testing",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Treat specific cause; steroids, PLEX or IVIG for ADEM or autoimmune",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n8",
+          "label": "Repeat result"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
         }
       ]
     }

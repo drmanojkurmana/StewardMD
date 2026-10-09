@@ -1,175 +1,783 @@
 {
- "id": "beta2_microglobulin_amyloidosis",
- "name": "Beta-2 Microglobulin Amyloidosis (Dialysis-Related Amyloidosis)",
- "aliases": [
-  "Dialysis-related amyloidosis",
-  "Abeta2M amyloidosis",
-  "Haemodialysis-associated amyloidosis"
- ],
- "class": "non_infective",
- "system": "Multisystem / Haematology",
- "specialty": "Haematology / Amyloidosis",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The acquired form arises in patients on long-term dialysis, in whom beta-2 microglobulin, normally cleared by the kidney, accumulates and is poorly removed by conventional membranes.",
-   "The phenotype is predominantly osteoarticular, comprising carpal tunnel syndrome, chronic large-joint arthropathy (especially the shoulders) and destructive spondyloarthropathy.",
-   "Subchondral bone cysts (amyloidomas) and an increased risk of pathological fracture are characteristic radiological findings.",
-   "Risk rises with duration of dialysis and older age at commencement, and disease was more common before high-flux and more biocompatible membranes.",
-   "Carpal tunnel syndrome is frequently the earliest manifestation and is often bilateral.",
-   "A distinct rare hereditary form results from a variant beta-2 microglobulin (Asp76Asn) that causes visceral, gastrointestinal and autonomic disease unrelated to dialysis.",
-   "Successful renal transplantation lowers beta-2 microglobulin levels and generally halts progression, and improved dialysis techniques reduce incidence."
+  "id": "beta2_microglobulin_amyloidosis",
+  "name": "Beta-2 Microglobulin Amyloidosis (Dialysis-Related Amyloidosis)",
+  "aliases": [
+    "Dialysis-related amyloidosis",
+    "Abeta2M amyloidosis",
+    "Haemodialysis-associated amyloidosis"
   ],
-  "pathophysiology": "Beta-2 microglobulin is the invariant light chain of MHC class I molecules and is normally filtered and catabolised by the kidney. In renal failure, and especially during prolonged dialysis with membranes that clear it inefficiently, serum concentrations rise many-fold. Over years the protein, sometimes modified by advanced glycation, aggregates into amyloid fibrils that deposit with particular affinity for synovium, tendon sheaths, articular cartilage and bone. The resulting infiltration produces carpal tunnel compression, erosive arthropathy and cystic bone lesions. In the rare hereditary variant, an unstable mutant protein deposits in the viscera independent of renal function.",
-  "additionalDifferentials": [
-   "Other causes of carpal tunnel syndrome",
-   "Inflammatory and crystal arthropathies",
-   "Renal osteodystrophy",
-   "Septic or destructive arthritis",
-   "Multiple myeloma bone disease",
-   "Other systemic amyloidoses such as AL and ATTR"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs or ultrasound showing subchondral cysts and synovial thickening",
-   "MRI of affected joints",
-   "Nerve conduction studies for carpal tunnel syndrome",
-   "Synovial or bone biopsy with Congo red staining and amyloid typing where needed",
-   "Serum beta-2 microglobulin with review of dialysis modality and vintage",
-   "Serum free light chains and immunofixation to exclude AL amyloidosis",
-   "Genetic testing where a hereditary variant is suspected"
-  ],
-  "redFlags": [
-   "Destructive arthropathy or pathological fracture in a long-term dialysis patient",
-   "Rapidly progressive joint destruction",
-   "Spinal involvement with neurological compromise",
-   "Visceral or autonomic symptoms suggesting the hereditary variant"
-  ],
-  "prognosis": "In dialysis-related disease morbidity is largely musculoskeletal and progresses with dialysis vintage; renal transplantation arrests progression. The rare hereditary visceral form is slowly progressive and systemic.",
-  "pitfalls": [
-   "Attributing shoulder or wrist symptoms in dialysis patients to age or overuse rather than amyloid",
-   "Overlooking subchondral bone cysts as a fracture risk",
-   "Assuming all amyloid in a dialysis patient is beta-2 microglobulin without excluding AL",
-   "Failing to recognise the distinct hereditary variant"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology, chapter on dialysis-related amyloidosis",
-   "Oxford Textbook of Medicine, chapter on amyloidosis",
-   "International Society of Amyloidosis nomenclature guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Optimise dialysis using high-flux, more biocompatible or high-cut-off membranes and haemodiafiltration to enhance beta-2 microglobulin clearance",
-   "Pursue renal transplantation where feasible, as it arrests progression by restoring beta-2 microglobulin clearance",
-   "Provide surgical decompression for carpal tunnel syndrome and manage the chronic arthropathy with analgesia and physiotherapy",
-   "Address destructive spondyloarthropathy and repair or fix amyloid bone cysts at risk of pathological fracture",
-   "Monitor for progressive osteoarticular disease with imaging and nerve conduction studies over dialysis vintage",
-   "Coordinate multidisciplinary care across nephrology, orthopaedics and hand surgery, rheumatology and pain services",
-   "For the rare hereditary visceral variant, provide organ-directed supportive care with specialist amyloidosis referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "beta2_microglobulin_amyloidosis-pathway",
-   "title": "Beta-2 Microglobulin Amyloidosis (Dialysis-Related Amyloidosis): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The acquired form arises in patients on long-term dialysis, in whom beta-2 microglobulin, normally cleared by the kidney, accumulates and is poorly removed by conventional membranes.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Destructive arthropathy or pathological fracture in a long-term dialysis patient",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs or ultrasound showing subchondral cysts and synovial thickening, MRI of affected joints, Nerve conduction studies for carpal tunnel syndrome"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Optimise dialysis using high-flux, more biocompatible or high-cut-off membranes and haemodiafiltration to enhance beta-2 microglobulin clearance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing shoulder or wrist symptoms in dialysis patients to age or overuse rather than amyloid"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of beta-2 microglobulin amyloidosis (dialysis-related amyloidosis)."
-  }
- ],
- "tables": [
-  {
-   "id": "beta2_microglobulin_amyloidosis-matrix",
-   "title": "Beta-2 Microglobulin Amyloidosis (Dialysis-Related Amyloidosis): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The acquired form arises in patients on long-term dialysis, in whom beta-2 microglobulin, normally cleared by the kidney,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem / Haematology",
+  "specialty": "Haematology / Amyloidosis",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The acquired form arises in patients on long-term dialysis, in whom beta-2 microglobulin, normally cleared by the kidney, accumulates and is poorly removed by conventional membranes.",
+      "The phenotype is predominantly osteoarticular, comprising carpal tunnel syndrome, chronic large-joint arthropathy (especially the shoulders) and destructive spondyloarthropathy.",
+      "Subchondral bone cysts (amyloidomas) and an increased risk of pathological fracture are characteristic radiological findings.",
+      "Risk rises with duration of dialysis and older age at commencement, and disease was more common before high-flux and more biocompatible membranes.",
+      "Carpal tunnel syndrome is frequently the earliest manifestation and is often bilateral.",
+      "A distinct rare hereditary form results from a variant beta-2 microglobulin (Asp76Asn) that causes visceral, gastrointestinal and autonomic disease unrelated to dialysis.",
+      "Successful renal transplantation lowers beta-2 microglobulin levels and generally halts progression, and improved dialysis techniques reduce incidence."
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs or ultrasound showing subchondral cysts and synovial thickening, MRI of affected joints, Nerve conduction",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Beta-2 microglobulin is the invariant light chain of MHC class I molecules and is normally filtered and catabolised by the kidney. In renal failure, and especially during prolonged dialysis with membranes that clear it inefficiently, serum concentrations rise many-fold. Over years the protein, sometimes modified by advanced glycation, aggregates into amyloid fibrils that deposit with particular affinity for synovium, tendon sheaths, articular cartilage and bone. The resulting infiltration produces carpal tunnel compression, erosive arthropathy and cystic bone lesions. In the rare hereditary variant, an unstable mutant protein deposits in the viscera independent of renal function.",
+    "additionalDifferentials": [
+      "Other causes of carpal tunnel syndrome",
+      "Inflammatory and crystal arthropathies",
+      "Renal osteodystrophy",
+      "Septic or destructive arthritis",
+      "Multiple myeloma bone disease",
+      "Other systemic amyloidoses such as AL and ATTR"
     ],
-    [
-     "Primary Differentials",
-     "Other causes of carpal tunnel syndrome, Inflammatory and crystal arthropathies, Renal osteodystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs or ultrasound showing subchondral cysts and synovial thickening",
+      "MRI of affected joints",
+      "Nerve conduction studies for carpal tunnel syndrome",
+      "Synovial or bone biopsy with Congo red staining and amyloid typing where needed",
+      "Serum beta-2 microglobulin with review of dialysis modality and vintage",
+      "Serum free light chains and immunofixation to exclude AL amyloidosis",
+      "Genetic testing where a hereditary variant is suspected"
     ],
-    [
-     "Management Strategy",
-     "Optimise dialysis using high-flux, more biocompatible or high-cut-off membranes and haemodiafiltration to enhance beta-2",
-     "Core treatment modality"
+    "redFlags": [
+      "Destructive arthropathy or pathological fracture in a long-term dialysis patient",
+      "Rapidly progressive joint destruction",
+      "Spinal involvement with neurological compromise",
+      "Visceral or autonomic symptoms suggesting the hereditary variant"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing shoulder or wrist symptoms in dialysis patients to age or overuse rather than amyloid",
-     "Prevent diagnostic or management error"
+    "prognosis": "In dialysis-related disease morbidity is largely musculoskeletal and progresses with dialysis vintage; renal transplantation arrests progression. The rare hereditary visceral form is slowly progressive and systemic.",
+    "pitfalls": [
+      "Attributing shoulder or wrist symptoms in dialysis patients to age or overuse rather than amyloid",
+      "Overlooking subchondral bone cysts as a fracture risk",
+      "Assuming all amyloid in a dialysis patient is beta-2 microglobulin without excluding AL",
+      "Failing to recognise the distinct hereditary variant"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology, chapter on dialysis-related amyloidosis",
+      "Oxford Textbook of Medicine, chapter on amyloidosis",
+      "International Society of Amyloidosis nomenclature guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Optimise dialysis using high-flux, more biocompatible or high-cut-off membranes and haemodiafiltration to enhance beta-2 microglobulin clearance",
+      "Pursue renal transplantation where feasible, as it arrests progression by restoring beta-2 microglobulin clearance",
+      "Provide surgical decompression for carpal tunnel syndrome and manage the chronic arthropathy with analgesia and physiotherapy",
+      "Address destructive spondyloarthropathy and repair or fix amyloid bone cysts at risk of pathological fracture",
+      "Monitor for progressive osteoarticular disease with imaging and nerve conduction studies over dialysis vintage",
+      "Coordinate multidisciplinary care across nephrology, orthopaedics and hand surgery, rheumatology and pain services",
+      "For the rare hereditary visceral variant, provide organ-directed supportive care with specialist amyloidosis referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for beta-2 microglobulin amyloidosis (dialysis-related amyloidosis)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "beta2-microglobulin-amyloidosis-real-image",
-   "title": "Beta-2 Microglobulin Amyloidosis (Dialysis-Related Amyloidosis): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "beta2_microglobulin_amyloidosis-pathway",
+      "title": "Beta-2 Microglobulin Amyloidosis (Dialysis-Related Amyloidosis): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The acquired form arises in patients on long-term dialysis, in whom beta-2 microglobulin, normally cleared by the kidney, accumulates and is poorly removed by conventional membranes.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Destructive arthropathy or pathological fracture in a long-term dialysis patient",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs or ultrasound showing subchondral cysts and synovial thickening, MRI of affected joints, Nerve conduction studies for carpal tunnel syndrome"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Optimise dialysis using high-flux, more biocompatible or high-cut-off membranes and haemodiafiltration to enhance beta-2 microglobulin clearance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing shoulder or wrist symptoms in dialysis patients to age or overuse rather than amyloid"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of beta-2 microglobulin amyloidosis (dialysis-related amyloidosis)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "beta2_microglobulin_amyloidosis-matrix",
+      "title": "Beta-2 Microglobulin Amyloidosis (Dialysis-Related Amyloidosis): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The acquired form arises in patients on long-term dialysis, in whom beta-2 microglobulin, normally cleared by the kidney,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs or ultrasound showing subchondral cysts and synovial thickening, MRI of affected joints, Nerve conduction",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other causes of carpal tunnel syndrome, Inflammatory and crystal arthropathies, Renal osteodystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Optimise dialysis using high-flux, more biocompatible or high-cut-off membranes and haemodiafiltration to enhance beta-2",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing shoulder or wrist symptoms in dialysis patients to age or overuse rather than amyloid",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for beta-2 microglobulin amyloidosis (dialysis-related amyloidosis)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 112-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beta2_microglobulin_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in beta-2 microglobulin amyloidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs or ultrasound",
+          "cells": [
+            {
+              "text": "Subchondral cysts and synovial thickening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of affected joints",
+          "cells": [
+            {
+              "text": "Extent of joint involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Carpal tunnel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial or bone biopsy with Congo red staining",
+          "cells": [
+            {
+              "text": "Amyloid deposits and amyloid typing where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum beta-2 microglobulin",
+          "cells": [
+            {
+              "text": "Concentrations rise many-fold in dialysis; review dialysis modality and vintage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains and immunofixation",
+          "cells": [
+            {
+              "text": "Excludes AL amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Hereditary Asp76Asn variant, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beta2_microglobulin_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike amyloid disorders",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "AL amyloidosis and other systemic amyloidoses",
+          "cells": [
+            {
+              "text": "Excluded by serum free light chains and immunofixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary beta-2 microglobulin variant (Asp76Asn)",
+          "cells": [
+            {
+              "text": "Visceral, gastrointestinal and autonomic disease unrelated to dialysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beta2_microglobulin_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options in beta-2 microglobulin amyloidosis",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dialysis optimisation",
+          "cells": [
+            {
+              "text": "High-flux, more biocompatible or high-cut-off membranes, and haemodiafiltration"
+            },
+            {
+              "text": "Enhances beta-2 microglobulin clearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal transplantation",
+          "cells": [
+            {
+              "text": "Where feasible"
+            },
+            {
+              "text": "Arrests progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carpal tunnel syndrome",
+          "cells": [
+            {
+              "text": "Surgical decompression"
+            },
+            {
+              "text": "Often the earliest manifestation, frequently bilateral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic arthropathy",
+          "cells": [
+            {
+              "text": "Analgesia and physiotherapy"
+            },
+            {
+              "text": "Large-joint arthropathy, especially the shoulders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Destructive spondyloarthropathy and bone cysts",
+          "cells": [
+            {
+              "text": "Address the spondyloarthropathy; repair or fix cysts at risk of pathological fracture"
+            },
+            {
+              "text": "Fracture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Imaging and nerve conduction studies over dialysis vintage"
+            },
+            {
+              "text": "Progressive osteoarticular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Nephrology, orthopaedics, hand surgery, rheumatology and pain services"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary variant",
+          "cells": [
+            {
+              "text": "Organ-directed supportive care with specialist amyloidosis referral"
+            },
+            {
+              "text": "Rare visceral form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "beta2_microglobulin_amyloidosis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Amyloid fibril proteins and clinical syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Precursor protein",
+        "Clinical syndrome",
+        "Clinical involvement"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic: AL",
+          "cells": [
+            {
+              "text": "Immunoglobulin light chain"
+            },
+            {
+              "text": "Primary or myeloma associated (footnote a)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AH",
+          "cells": [
+            {
+              "text": "Immunoglobulin heavy chain"
+            },
+            {
+              "text": "Primary or myeloma associated (rare)"
+            },
+            {
+              "text": "Any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AA",
+          "cells": [
+            {
+              "text": "Serum amyloid A protein"
+            },
+            {
+              "text": "Secondary, reactive (footnote b)"
+            },
+            {
+              "text": "Renal, any organ"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: Abeta2M",
+          "cells": [
+            {
+              "text": "Beta2-microglobulin"
+            },
+            {
+              "text": "Hemodialysis associated"
+            },
+            {
+              "text": "Synovial membrane, bone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ATTR",
+          "cells": [
+            {
+              "text": "Transthyretin"
+            },
+            {
+              "text": "Familial (mutant); senile systemic (wild type)"
+            },
+            {
+              "text": "Cardiac, peripheral and autonomic nerves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAI",
+          "cells": [
+            {
+              "text": "Apolipoprotein AI"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Hepatic, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AApoAII",
+          "cells": [
+            {
+              "text": "Apolipoprotein AII"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AGel",
+          "cells": [
+            {
+              "text": "Gelsolin"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Corneas, cranial nerves, renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: AFib",
+          "cells": [
+            {
+              "text": "Fibrinogen A alpha"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALys",
+          "cells": [
+            {
+              "text": "Lysozyme"
+            },
+            {
+              "text": "Familial"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic: ALECT2",
+          "cells": [
+            {
+              "text": "Leukocyte chemotactic factor 2"
+            },
+            {
+              "text": "Uncertain (printed as ?)"
+            },
+            {
+              "text": "Renal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: Abeta",
+          "cells": [
+            {
+              "text": "Amyloid beta protein"
+            },
+            {
+              "text": "Alzheimer's disease"
+            },
+            {
+              "text": "Down syndrome (as printed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACys",
+          "cells": [
+            {
+              "text": "Cystatin C"
+            },
+            {
+              "text": "Cerebral amyloid angiopathy"
+            },
+            {
+              "text": "CNS, vascular"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APrP",
+          "cells": [
+            {
+              "text": "Prion protein"
+            },
+            {
+              "text": "Spongiform encephalopathies"
+            },
+            {
+              "text": "CNS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AIAPP",
+          "cells": [
+            {
+              "text": "Islet amyloid polypeptide (amylin)"
+            },
+            {
+              "text": "Diabetes associated"
+            },
+            {
+              "text": "Pancreas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: ACal",
+          "cells": [
+            {
+              "text": "Calcitonin"
+            },
+            {
+              "text": "Medullary carcinoma of the thyroid"
+            },
+            {
+              "text": "Thyroid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: AANF",
+          "cells": [
+            {
+              "text": "Atrial natriuretic factor"
+            },
+            {
+              "text": "Age related"
+            },
+            {
+              "text": "Cardiac atria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localized: APro",
+          "cells": [
+            {
+              "text": "Prolactin"
+            },
+            {
+              "text": "Endocrinopathy"
+            },
+            {
+              "text": "Pituitary"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Footnote letters a and b appear on the AL and AA rows in the source but their text is not printed. The Abeta row layout is as printed."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beta2_microglobulin_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of beta-2 microglobulin amyloidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Carpal tunnel syndrome or shoulder arthropathy in a long-term dialysis patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: destructive arthropathy, pathological fracture or spinal compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: orthopaedic and spinal review; image at-risk bone",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs or ultrasound for subchondral cysts; nerve conduction studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Serum free light chains and immunofixation; biopsy with Congo red if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "AL excluded and amyloid typed as beta-2 microglobulin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optimise dialysis membranes and haemodiafiltration; consider renal transplantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "No: consider AL or hereditary variant amyloidosis; specialist referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Carpal tunnel decompression; analgesia and physiotherapy for the arthropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Morbidity progresses with dialysis vintage; transplantation arrests progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,176 +1,465 @@
 {
- "id": "igg4_hypophysitis",
- "name": "IgG4-related hypophysitis",
- "aliases": [
-  "IgG4-related hypophysitis",
-  "IgG4-related pituitary disease",
-  "immunoglobulin G4-related hypophysitis"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The pituitary manifestation of systemic IgG4-related disease, an immune-mediated fibroinflammatory condition",
-   "Presents with anterior hypopituitarism and/or central diabetes insipidus, together with mass-effect symptoms such as headache and visual disturbance from a pituitary or stalk mass",
-   "More common in older men, often with evidence of IgG4-related disease elsewhere such as autoimmune pancreatitis, sialadenitis, retroperitoneal fibrosis or orbital disease",
-   "MRI shows pituitary enlargement and/or a thickened stalk that may mimic other inflammatory or neoplastic sellar lesions",
-   "Serum IgG4 is often but not always elevated, so diagnosis integrates histology, imaging, serology and other organ involvement",
-   "Where histology is obtained it shows a dense lymphoplasmacytic infiltrate rich in IgG4-positive plasma cells, storiform fibrosis and sometimes obliterative phlebitis",
-   "It typically responds well to glucocorticoid therapy with shrinkage of the mass, though hormone deficits may persist and relapse can occur",
-   "Recognised diagnostic criteria help distinguish it from other forms of hypophysitis"
+  "id": "igg4_hypophysitis",
+  "name": "IgG4-related hypophysitis",
+  "aliases": [
+    "IgG4-related hypophysitis",
+    "IgG4-related pituitary disease",
+    "immunoglobulin G4-related hypophysitis"
   ],
-  "pathophysiology": "IgG4-related hypophysitis is the pituitary expression of systemic IgG4-related disease, a fibroinflammatory disorder in which affected tissues are infiltrated by IgG4-positive plasma cells and lymphocytes, with storiform fibrosis and obliterative phlebitis. In the sella this infiltrate expands and later fibroses the anterior pituitary and infundibulum, impairing hormone secretion and disrupting antidiuretic hormone pathways, producing variable anterior hypopituitarism and central diabetes insipidus together with a space-occupying mass. The underlying immunopathogenesis involves aberrant T-helper, including T-follicular-helper, and regulatory responses driving class switching to IgG4 and tissue fibrosis, and the condition commonly coexists with IgG4-related involvement of other organs.",
-  "additionalDifferentials": [
-   "Lymphocytic (autoimmune) hypophysitis",
-   "Granulomatous hypophysitis and other primary hypophysitides",
-   "Immune checkpoint inhibitor-induced hypophysitis",
-   "Sarcoidosis or tuberculosis of the pituitary or stalk",
-   "Langerhans cell histiocytosis causing stalk thickening",
-   "Pituitary adenoma or other sellar neoplasm",
-   "Germinoma or metastasis presenting as a stalk lesion"
-  ],
-  "additionalInvestigations": [
-   "Pituitary MRI showing gland enlargement and/or stalk thickening, with loss of the posterior bright spot in diabetes insipidus",
-   "Serum IgG4 concentration, supportive if raised but neither sensitive nor specific",
-   "Full anterior pituitary hormone assessment and evaluation of posterior pituitary function with paired plasma and urine osmolality, and water deprivation testing where needed",
-   "Screening for IgG4-related disease elsewhere with imaging of the pancreas, salivary glands and retroperitoneum, and biopsy of an accessible organ if present",
-   "Pituitary biopsy with IgG4 immunostaining in diagnostically uncertain cases",
-   "Exclusion of alternative infiltrative or neoplastic causes as clinically indicated"
-  ],
-  "redFlags": [
-   "Acute visual field loss or ophthalmoplegia from mass effect",
-   "Adrenal insufficiency from ACTH deficiency, with a risk of crisis",
-   "Symptomatic diabetes insipidus with hypernatraemia",
-   "Rapid enlargement or atypical features suggesting malignancy and requiring biopsy"
-  ],
-  "prognosis": "Generally favourable; the mass and inflammation usually respond to glucocorticoid therapy with radiological improvement, but established hormone deficits including diabetes insipidus often persist and require replacement, and relapse may necessitate further immunosuppression.",
-  "pitfalls": [
-   "Mistaking it for a pituitary adenoma and proceeding to unnecessary surgery when it may respond to glucocorticoids",
-   "Relying on a normal serum IgG4 to exclude the diagnosis",
-   "Overlooking systemic IgG4-related disease in other organs",
-   "Failing to recognise and replace cortisol deficiency before it precipitates a crisis"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "DeGroot's Endocrinology",
-   "Diagnostic criteria for IgG4-related hypophysitis (Leporati et al.)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with glucocorticoids, which usually shrink the sellar mass and may partially restore pituitary function",
-   "Replace deficient anterior pituitary hormones, ensuring glucocorticoid cover is established before thyroxine, and add sex-steroid or growth-hormone replacement as needed",
-   "Treat central diabetes insipidus with desmopressin, as this deficit often persists",
-   "Monitor with serial pituitary MRI, formal visual field assessment and repeat hormone profiling",
-   "Use steroid-sparing immunosuppression or rituximab for relapse or steroid dependence",
-   "Screen for IgG4-related disease in other organs such as the pancreas, salivary glands and retroperitoneum",
-   "Manage through endocrinology, reserving neurosurgery for compressive disease unresponsive to medical therapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "igg4_hypophysitis-pathway",
-   "title": "IgG4-related hypophysitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The pituitary manifestation of systemic IgG4-related disease, an immune-mediated fibroinflammatory condition",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute visual field loss or ophthalmoplegia from mass effect",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pituitary MRI showing gland enlargement and/or stalk thickening, with loss of the posterior bright spot in diabetes insipidus, Serum IgG4 concentration, supportive if raised but neither sensitive nor specific, Full"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with glucocorticoids, which usually shrink the sellar mass and may partially restore pituitary function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for a pituitary adenoma and proceeding to unnecessary surgery when it may respond to glucocorticoids"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of igg4-related hypophysitis."
-  }
- ],
- "tables": [
-  {
-   "id": "igg4_hypophysitis-matrix",
-   "title": "IgG4-related hypophysitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The pituitary manifestation of systemic IgG4-related disease, an immune-mediated fibroinflammatory condition",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The pituitary manifestation of systemic IgG4-related disease, an immune-mediated fibroinflammatory condition",
+      "Presents with anterior hypopituitarism and/or central diabetes insipidus, together with mass-effect symptoms such as headache and visual disturbance from a pituitary or stalk mass",
+      "More common in older men, often with evidence of IgG4-related disease elsewhere such as autoimmune pancreatitis, sialadenitis, retroperitoneal fibrosis or orbital disease",
+      "MRI shows pituitary enlargement and/or a thickened stalk that may mimic other inflammatory or neoplastic sellar lesions",
+      "Serum IgG4 is often but not always elevated, so diagnosis integrates histology, imaging, serology and other organ involvement",
+      "Where histology is obtained it shows a dense lymphoplasmacytic infiltrate rich in IgG4-positive plasma cells, storiform fibrosis and sometimes obliterative phlebitis",
+      "It typically responds well to glucocorticoid therapy with shrinkage of the mass, though hormone deficits may persist and relapse can occur",
+      "Recognised diagnostic criteria help distinguish it from other forms of hypophysitis"
     ],
-    [
-     "Key Investigations",
-     "Pituitary MRI showing gland enlargement and/or stalk thickening, with loss of the posterior bright spot in diabetes insipidus,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "IgG4-related hypophysitis is the pituitary expression of systemic IgG4-related disease, a fibroinflammatory disorder in which affected tissues are infiltrated by IgG4-positive plasma cells and lymphocytes, with storiform fibrosis and obliterative phlebitis. In the sella this infiltrate expands and later fibroses the anterior pituitary and infundibulum, impairing hormone secretion and disrupting antidiuretic hormone pathways, producing variable anterior hypopituitarism and central diabetes insipidus together with a space-occupying mass. The underlying immunopathogenesis involves aberrant T-helper, including T-follicular-helper, and regulatory responses driving class switching to IgG4 and tissue fibrosis, and the condition commonly coexists with IgG4-related involvement of other organs.",
+    "additionalDifferentials": [
+      "Lymphocytic (autoimmune) hypophysitis",
+      "Granulomatous hypophysitis and other primary hypophysitides",
+      "Immune checkpoint inhibitor-induced hypophysitis",
+      "Sarcoidosis or tuberculosis of the pituitary or stalk",
+      "Langerhans cell histiocytosis causing stalk thickening",
+      "Pituitary adenoma or other sellar neoplasm",
+      "Germinoma or metastasis presenting as a stalk lesion"
     ],
-    [
-     "Primary Differentials",
-     "Lymphocytic (autoimmune) hypophysitis, Granulomatous hypophysitis and other primary hypophysitides, Immune checkpoint",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pituitary MRI showing gland enlargement and/or stalk thickening, with loss of the posterior bright spot in diabetes insipidus",
+      "Serum IgG4 concentration, supportive if raised but neither sensitive nor specific",
+      "Full anterior pituitary hormone assessment and evaluation of posterior pituitary function with paired plasma and urine osmolality, and water deprivation testing where needed",
+      "Screening for IgG4-related disease elsewhere with imaging of the pancreas, salivary glands and retroperitoneum, and biopsy of an accessible organ if present",
+      "Pituitary biopsy with IgG4 immunostaining in diagnostically uncertain cases",
+      "Exclusion of alternative infiltrative or neoplastic causes as clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with glucocorticoids, which usually shrink the sellar mass and may partially restore pituitary function",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute visual field loss or ophthalmoplegia from mass effect",
+      "Adrenal insufficiency from ACTH deficiency, with a risk of crisis",
+      "Symptomatic diabetes insipidus with hypernatraemia",
+      "Rapid enlargement or atypical features suggesting malignancy and requiring biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for a pituitary adenoma and proceeding to unnecessary surgery when it may respond to glucocorticoids",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generally favourable; the mass and inflammation usually respond to glucocorticoid therapy with radiological improvement, but established hormone deficits including diabetes insipidus often persist and require replacement, and relapse may necessitate further immunosuppression.",
+    "pitfalls": [
+      "Mistaking it for a pituitary adenoma and proceeding to unnecessary surgery when it may respond to glucocorticoids",
+      "Relying on a normal serum IgG4 to exclude the diagnosis",
+      "Overlooking systemic IgG4-related disease in other organs",
+      "Failing to recognise and replace cortisol deficiency before it precipitates a crisis"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "DeGroot's Endocrinology",
+      "Diagnostic criteria for IgG4-related hypophysitis (Leporati et al.)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with glucocorticoids, which usually shrink the sellar mass and may partially restore pituitary function",
+      "Replace deficient anterior pituitary hormones, ensuring glucocorticoid cover is established before thyroxine, and add sex-steroid or growth-hormone replacement as needed",
+      "Treat central diabetes insipidus with desmopressin, as this deficit often persists",
+      "Monitor with serial pituitary MRI, formal visual field assessment and repeat hormone profiling",
+      "Use steroid-sparing immunosuppression or rituximab for relapse or steroid dependence",
+      "Screen for IgG4-related disease in other organs such as the pancreas, salivary glands and retroperitoneum",
+      "Manage through endocrinology, reserving neurosurgery for compressive disease unresponsive to medical therapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for igg4-related hypophysitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "igg4-hypophysitis-real-image",
-   "title": "IgG4-related hypophysitis: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "igg4_hypophysitis-pathway",
+      "title": "IgG4-related hypophysitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The pituitary manifestation of systemic IgG4-related disease, an immune-mediated fibroinflammatory condition",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute visual field loss or ophthalmoplegia from mass effect",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pituitary MRI showing gland enlargement and/or stalk thickening, with loss of the posterior bright spot in diabetes insipidus, Serum IgG4 concentration, supportive if raised but neither sensitive nor specific, Full"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with glucocorticoids, which usually shrink the sellar mass and may partially restore pituitary function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for a pituitary adenoma and proceeding to unnecessary surgery when it may respond to glucocorticoids"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of igg4-related hypophysitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "igg4_hypophysitis-matrix",
+      "title": "IgG4-related hypophysitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The pituitary manifestation of systemic IgG4-related disease, an immune-mediated fibroinflammatory condition",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pituitary MRI showing gland enlargement and/or stalk thickening, with loss of the posterior bright spot in diabetes insipidus,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lymphocytic (autoimmune) hypophysitis, Granulomatous hypophysitis and other primary hypophysitides, Immune checkpoint",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with glucocorticoids, which usually shrink the sellar mass and may partially restore pituitary function",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for a pituitary adenoma and proceeding to unnecessary surgery when it may respond to glucocorticoids",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for igg4-related hypophysitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "igg4_hypophysitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Gland enlargement or stalk thickening; loss of posterior bright spot in DI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgG4",
+          "cells": [
+            {
+              "text": "Supportive; neither sensitive nor specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior and posterior pituitary assessment with paired osmolality",
+          "cells": [
+            {
+              "text": "Hormone deficits and diabetes insipidus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for IgG4-related disease elsewhere",
+          "cells": [
+            {
+              "text": "Pancreas, salivary glands and retroperitoneum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary biopsy with IgG4 immunostaining",
+          "cells": [
+            {
+              "text": "Diagnostically uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of alternative causes",
+          "cells": [
+            {
+              "text": "Infiltrative or neoplastic causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_hypophysitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pituitary adenoma",
+          "cells": [
+            {
+              "text": "Often responds to glucocorticoids, unlike an adenoma that would need surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germinoma or metastasis presenting as a stalk lesion",
+          "cells": [
+            {
+              "text": "Rapid enlargement or atypical features; biopsy needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_hypophysitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Induce remission; usually shrink the sellar mass and may partly restore function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormone replacement",
+          "cells": [
+            {
+              "text": "Glucocorticoid cover established before thyroxine; sex-steroid or growth hormone as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes insipidus",
+          "cells": [
+            {
+              "text": "Desmopressin, as this deficit often persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial pituitary MRI, formal visual fields and repeat hormone profiling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse or steroid dependence",
+          "cells": [
+            {
+              "text": "Steroid-sparing immunosuppression or rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Neurosurgery only for compressive disease unresponsive to medical therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "igg4_hypophysitis-dx-mgmt",
+      "title": "Diagnosis and management of IgG4-related hypophysitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anterior hypopituitarism or diabetes insipidus with headache or visual symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Visual loss, ophthalmoplegia, adrenal crisis risk or atypical mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucocorticoid cover and visual assessment; biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pituitary MRI, hormone profile, osmolality, IgG4 and other-organ screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical IgG4 pattern with alternatives excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pituitary biopsy with IgG4 staining for uncertain cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Glucocorticoids to shrink mass and partly restore function",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Glucocorticoid cover before thyroxine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Desmopressin for central diabetes insipidus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial MRI, visual fields and hormone profiling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Steroid-sparing agent or rituximab for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Partial pituitary recovery possible; monitor hormones and vision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

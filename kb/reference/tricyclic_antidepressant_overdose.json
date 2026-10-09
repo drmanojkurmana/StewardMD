@@ -1,174 +1,483 @@
 {
- "id": "tricyclic_antidepressant_overdose",
- "name": "Tricyclic antidepressant overdose",
- "aliases": [
-  "TCA overdose",
-  "tricyclic poisoning",
-  "amitriptyline overdose",
-  "tricyclic antidepressant toxicity"
- ],
- "class": "non_infective",
- "system": "Toxicology / Environmental",
- "specialty": "Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Toxicity combines an anticholinergic toxidrome (dry flushed skin, dilated pupils, urinary retention, agitation, delirium) with the far more dangerous cardiovascular and neurological effects",
-   "Sodium-channel blockade widens the QRS complex; a broad QRS is the key marker of cardiotoxicity and predicts arrhythmia and seizures",
-   "A prominent terminal R wave in lead aVR is a supportive ECG sign of sodium-channel blockade",
-   "Life-threatening features include ventricular arrhythmias, hypotension from myocardial depression and vasodilatation, seizures, and rapid deterioration in conscious level",
-   "Intravenous sodium bicarbonate is the cornerstone treatment for a widening QRS, ventricular arrhythmia, or hypotension, working by sodium loading and alkalinisation",
-   "Deterioration can be abrupt; a patient who looks well early can rapidly progress to coma, seizures, and cardiac arrest, so early cardiac monitoring is essential",
-   "Class Ia and Ic antiarrhythmics are contraindicated as they aggravate sodium-channel blockade; refractory arrhythmia may be treated with additional bicarbonate and supportive measures",
-   "Intravenous lipid emulsion may be considered as a rescue therapy in refractory cardiovascular collapse"
+  "id": "tricyclic_antidepressant_overdose",
+  "name": "Tricyclic antidepressant overdose",
+  "aliases": [
+    "TCA overdose",
+    "tricyclic poisoning",
+    "amitriptyline overdose",
+    "tricyclic antidepressant toxicity"
   ],
-  "pathophysiology": "Tricyclic antidepressants exert several toxic actions. Blockade of fast cardiac sodium channels slows myocardial depolarisation, widening the QRS and predisposing to ventricular arrhythmia and myocardial depression; this effect is worsened by acidosis. Anticholinergic (antimuscarinic) activity produces the classic peripheral and central anticholinergic features. Antagonism of peripheral alpha-adrenergic receptors causes vasodilatation and hypotension, and central effects plus GABA and other receptor actions lower the seizure threshold. Seizures worsen acidosis, which in turn intensifies sodium-channel blockade in a dangerous positive-feedback loop.",
-  "additionalDifferentials": [
-   "Other sodium-channel-blocking drug toxicity (some antiarrhythmics, carbamazepine)",
-   "Anticholinergic poisoning from other agents",
-   "Sympathomimetic toxicity",
-   "Other causes of wide-complex tachycardia",
-   "Hyperkalaemia causing QRS widening"
-  ],
-  "additionalInvestigations": [
-   "Serial 12-lead ECG focusing on QRS width and the aVR terminal R wave",
-   "Continuous cardiac monitoring",
-   "Arterial blood gas and serum electrolytes including potassium",
-   "Capillary glucose and paracetamol/salicylate co-ingestant screen",
-   "Creatine kinase if prolonged seizures or immobility raise concern for rhabdomyolysis"
-  ],
-  "redFlags": [
-   "QRS widening on the ECG indicating significant cardiotoxicity",
-   "Ventricular arrhythmia or haemodynamic instability",
-   "Seizures or rapidly declining conscious level",
-   "Refractory hypotension unresponsive to fluids",
-   "Rapid clinical deterioration in a patient who initially appeared stable"
-  ],
-  "prognosis": "Most deaths occur early from arrhythmia, refractory hypotension, or seizures, often before or soon after arrival; patients who reach hospital and receive prompt bicarbonate and supportive care and survive the first day generally recover well.",
-  "pitfalls": [
-   "Being reassured by an initially well-appearing patient and delaying continuous cardiac monitoring",
-   "Using class Ia or Ic antiarrhythmics, which worsen sodium-channel blockade",
-   "Failing to give sodium bicarbonate promptly for a widening QRS or arrhythmia",
-   "Allowing acidosis from seizures or hypoventilation to persist and aggravate cardiotoxicity"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/national toxicology guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Secure the airway with early intubation for depressed consciousness or seizures, obtain intravenous access and start continuous cardiac monitoring, anticipating abrupt deterioration",
-   "Give intravenous sodium bicarbonate as the cornerstone for a widening QRS, ventricular arrhythmia or hypotension, working through sodium loading and serum alkalinisation, and correct hypoxia and acidosis that intensify sodium-channel blockade",
-   "Administer activated charcoal for early presentations once the airway is protected",
-   "Control seizures with benzodiazepines as first-line agents, avoiding class Ia, Ic and III antiarrhythmics which worsen sodium-channel blockade",
-   "Treat hypotension with intravenous crystalloid then a vasopressor such as noradrenaline, and consider intravenous lipid emulsion or extracorporeal life support for refractory cardiotoxicity",
-   "Avoid physostigmine and manage hyperthermia and electrolyte disturbance including potassium, checking capillary glucose and a paracetamol and salicylate co-ingestant screen",
-   "Observe with cardiac monitoring until the ECG and mental status normalise, then arrange psychiatric assessment and risk evaluation for intentional overdose, with toxicology or poisons-centre and critical-care input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tricyclic_antidepressant_overdose-pathway",
-   "title": "Tricyclic antidepressant overdose: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Toxicity combines an anticholinergic toxidrome (dry flushed skin, dilated pupils, urinary retention, agitation, delirium) with the far more dangerous cardiovascular and neurological effects",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: QRS widening on the ECG indicating significant cardiotoxicity",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial 12-lead ECG focusing on QRS width and the aVR terminal R wave, Continuous cardiac monitoring, Arterial blood gas and serum electrolytes including potassium"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Secure the airway with early intubation for depressed consciousness or seizures, obtain intravenous access and start continuous cardiac monitoring, anticipating abrupt deterioration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Being reassured by an initially well-appearing patient and delaying continuous cardiac monitoring"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tricyclic antidepressant overdose."
-  }
- ],
- "tables": [
-  {
-   "id": "tricyclic_antidepressant_overdose-matrix",
-   "title": "Tricyclic antidepressant overdose: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Toxicity combines an anticholinergic toxidrome (dry flushed skin, dilated pupils, urinary retention, agitation, delirium) with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Toxicology / Environmental",
+  "specialty": "Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Toxicity combines an anticholinergic toxidrome (dry flushed skin, dilated pupils, urinary retention, agitation, delirium) with the far more dangerous cardiovascular and neurological effects",
+      "Sodium-channel blockade widens the QRS complex; a broad QRS is the key marker of cardiotoxicity and predicts arrhythmia and seizures",
+      "A prominent terminal R wave in lead aVR is a supportive ECG sign of sodium-channel blockade",
+      "Life-threatening features include ventricular arrhythmias, hypotension from myocardial depression and vasodilatation, seizures, and rapid deterioration in conscious level",
+      "Intravenous sodium bicarbonate is the cornerstone treatment for a widening QRS, ventricular arrhythmia, or hypotension, working by sodium loading and alkalinisation",
+      "Deterioration can be abrupt; a patient who looks well early can rapidly progress to coma, seizures, and cardiac arrest, so early cardiac monitoring is essential",
+      "Class Ia and Ic antiarrhythmics are contraindicated as they aggravate sodium-channel blockade; refractory arrhythmia may be treated with additional bicarbonate and supportive measures",
+      "Intravenous lipid emulsion may be considered as a rescue therapy in refractory cardiovascular collapse"
     ],
-    [
-     "Key Investigations",
-     "Serial 12-lead ECG focusing on QRS width and the aVR terminal R wave, Continuous cardiac monitoring, Arterial blood gas and serum",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tricyclic antidepressants exert several toxic actions. Blockade of fast cardiac sodium channels slows myocardial depolarisation, widening the QRS and predisposing to ventricular arrhythmia and myocardial depression; this effect is worsened by acidosis. Anticholinergic (antimuscarinic) activity produces the classic peripheral and central anticholinergic features. Antagonism of peripheral alpha-adrenergic receptors causes vasodilatation and hypotension, and central effects plus GABA and other receptor actions lower the seizure threshold. Seizures worsen acidosis, which in turn intensifies sodium-channel blockade in a dangerous positive-feedback loop.",
+    "additionalDifferentials": [
+      "Other sodium-channel-blocking drug toxicity (some antiarrhythmics, carbamazepine)",
+      "Anticholinergic poisoning from other agents",
+      "Sympathomimetic toxicity",
+      "Other causes of wide-complex tachycardia",
+      "Hyperkalaemia causing QRS widening"
     ],
-    [
-     "Primary Differentials",
-     "Other sodium-channel-blocking drug toxicity (some antiarrhythmics, carbamazepine), Anticholinergic poisoning from other agents,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial 12-lead ECG focusing on QRS width and the aVR terminal R wave",
+      "Continuous cardiac monitoring",
+      "Arterial blood gas and serum electrolytes including potassium",
+      "Capillary glucose and paracetamol/salicylate co-ingestant screen",
+      "Creatine kinase if prolonged seizures or immobility raise concern for rhabdomyolysis"
     ],
-    [
-     "Management Strategy",
-     "Secure the airway with early intubation for depressed consciousness or seizures, obtain intravenous access and start continuous",
-     "Core treatment modality"
+    "redFlags": [
+      "QRS widening on the ECG indicating significant cardiotoxicity",
+      "Ventricular arrhythmia or haemodynamic instability",
+      "Seizures or rapidly declining conscious level",
+      "Refractory hypotension unresponsive to fluids",
+      "Rapid clinical deterioration in a patient who initially appeared stable"
     ],
-    [
-     "Clinical Pitfall",
-     "Being reassured by an initially well-appearing patient and delaying continuous cardiac monitoring",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most deaths occur early from arrhythmia, refractory hypotension, or seizures, often before or soon after arrival; patients who reach hospital and receive prompt bicarbonate and supportive care and survive the first day generally recover well.",
+    "pitfalls": [
+      "Being reassured by an initially well-appearing patient and delaying continuous cardiac monitoring",
+      "Using class Ia or Ic antiarrhythmics, which worsen sodium-channel blockade",
+      "Failing to give sodium bicarbonate promptly for a widening QRS or arrhythmia",
+      "Allowing acidosis from seizures or hypoventilation to persist and aggravate cardiotoxicity"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/national toxicology guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Secure the airway with early intubation for depressed consciousness or seizures, obtain intravenous access and start continuous cardiac monitoring, anticipating abrupt deterioration",
+      "Give intravenous sodium bicarbonate as the cornerstone for a widening QRS, ventricular arrhythmia or hypotension, working through sodium loading and serum alkalinisation, and correct hypoxia and acidosis that intensify sodium-channel blockade",
+      "Administer activated charcoal for early presentations once the airway is protected",
+      "Control seizures with benzodiazepines as first-line agents, avoiding class Ia, Ic and III antiarrhythmics which worsen sodium-channel blockade",
+      "Treat hypotension with intravenous crystalloid then a vasopressor such as noradrenaline, and consider intravenous lipid emulsion or extracorporeal life support for refractory cardiotoxicity",
+      "Avoid physostigmine and manage hyperthermia and electrolyte disturbance including potassium, checking capillary glucose and a paracetamol and salicylate co-ingestant screen",
+      "Observe with cardiac monitoring until the ECG and mental status normalise, then arrange psychiatric assessment and risk evaluation for intentional overdose, with toxicology or poisons-centre and critical-care input"
     ]
-   ],
-   "caption": "Overview comparison matrix for tricyclic antidepressant overdose."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tricyclic-antidepressant-overdose-real-image",
-   "title": "Tricyclic antidepressant overdose: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "tricyclic_antidepressant_overdose-pathway",
+      "title": "Tricyclic antidepressant overdose: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Toxicity combines an anticholinergic toxidrome (dry flushed skin, dilated pupils, urinary retention, agitation, delirium) with the far more dangerous cardiovascular and neurological effects",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: QRS widening on the ECG indicating significant cardiotoxicity",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial 12-lead ECG focusing on QRS width and the aVR terminal R wave, Continuous cardiac monitoring, Arterial blood gas and serum electrolytes including potassium"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Secure the airway with early intubation for depressed consciousness or seizures, obtain intravenous access and start continuous cardiac monitoring, anticipating abrupt deterioration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Being reassured by an initially well-appearing patient and delaying continuous cardiac monitoring"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tricyclic antidepressant overdose."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tricyclic_antidepressant_overdose-matrix",
+      "title": "Tricyclic antidepressant overdose: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Toxicity combines an anticholinergic toxidrome (dry flushed skin, dilated pupils, urinary retention, agitation, delirium) with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial 12-lead ECG focusing on QRS width and the aVR terminal R wave, Continuous cardiac monitoring, Arterial blood gas and serum",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other sodium-channel-blocking drug toxicity (some antiarrhythmics, carbamazepine), Anticholinergic poisoning from other agents,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Secure the airway with early intubation for depressed consciousness or seizures, obtain intravenous access and start continuous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Being reassured by an initially well-appearing patient and delaying continuous cardiac monitoring",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tricyclic antidepressant overdose."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tricyclic_antidepressant_overdose-dx-mgmt",
+      "title": "Diagnosis and management of Tricyclic antidepressant overdose",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tricyclic overdose: anticholinergic features with reduced consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: QRS widening, ventricular arrhythmia, hypotension or seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate bicarbonate, airway protection and continuous cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG for QRS and aVR; blood gas; electrolytes; co-ingestant screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ECG show QRS widening or a prominent terminal R wave in aVR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other sodium-channel blockers, hyperkalaemia or anticholinergic poisoning",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early intubation for depressed consciousness or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous sodium bicarbonate for QRS widening or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Benzodiazepines for seizures; avoid class Ia, Ic and III drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Crystalloid then noradrenaline for hypotension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Lipid emulsion or extracorporeal support if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Psychiatric assessment once the ECG and mental state normalise",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Most deaths early from arrhythmia or hypotension; survivors of day one usually recover",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tricyclic_antidepressant_overdose-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial 12-lead ECG",
+          "cells": [
+            {
+              "text": "QRS width and terminal R wave in aVR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiac monitoring",
+          "cells": [
+            {
+              "text": "Abrupt deterioration is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and electrolytes",
+          "cells": [
+            {
+              "text": "Acidosis and potassium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capillary glucose and co-ingestant screen",
+          "cells": [
+            {
+              "text": "Paracetamol and salicylate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Prolonged seizures or immobility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tricyclic_antidepressant_overdose-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other sodium-channel blockers",
+          "cells": [
+            {
+              "text": "Similar QRS widening; drug history identifies the agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia",
+          "cells": [
+            {
+              "text": "Causes QRS widening; serum potassium distinguishes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other anticholinergic poisoning",
+          "cells": [
+            {
+              "text": "Broad QRS points to sodium-channel blockade"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tricyclic_antidepressant_overdose-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early intubation",
+          "cells": [
+            {
+              "text": "Depressed consciousness or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous sodium bicarbonate",
+          "cells": [
+            {
+              "text": "Widening QRS, ventricular arrhythmia or hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activated charcoal",
+          "cells": [
+            {
+              "text": "Early presentations once airway protected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Benzodiazepines for seizures",
+          "cells": [
+            {
+              "text": "Avoid class Ia, Ic and III antiarrhythmics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crystalloid then noradrenaline",
+          "cells": [
+            {
+              "text": "Hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid emulsion or extracorporeal support",
+          "cells": [
+            {
+              "text": "Refractory cardiotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid physostigmine",
+          "cells": [
+            {
+              "text": "Do not give"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -1,173 +1,489 @@
 {
- "id": "lightning_injury",
- "name": "Lightning injury",
- "aliases": [
-  "lightning strike injury",
-  "keraunopathy",
-  "lightning-related injury"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Tintinalli's Emergency Medicine / Auerbach's Wilderness Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The chief cause of immediate death is cardiac arrest, as the massive brief current can depolarise the entire myocardium and produce asystole; a secondary respiratory arrest from medullary paralysis may outlast the cardiac standstill",
-   "Because primary arrest may be reversible, lightning casualties warrant a 'reverse triage' approach in which apparently lifeless victims are resuscitated first",
-   "Keraunoparalysis is a transient limb paralysis, often of the legs, with cold, mottled, pulseless extremities that usually resolves over hours",
-   "Lichtenberg figures are transient, fern-like or feathering skin markings that are effectively pathognomonic of a lightning strike and fade within a day or two",
-   "Most of the current flashes over the body surface rather than passing deeply, so extensive deep tissue destruction and severe myoglobinuria are less typical than in high-voltage electrical injury",
-   "Tympanic membrane rupture, cataracts, autonomic disturbance, and a range of neurological and neuropsychological sequelae are recognised complications",
-   "Emergency management prioritises resuscitation and cardiac monitoring, with assessment for associated blunt trauma from the blast or a fall and evaluation of the eyes and ears"
+  "id": "lightning_injury",
+  "name": "Lightning injury",
+  "aliases": [
+    "lightning strike injury",
+    "keraunopathy",
+    "lightning-related injury"
   ],
-  "pathophysiology": "Lightning delivers an extremely high-voltage current over a very short duration, and much of it passes over the body surface as a flashover rather than through deep tissues, which distinguishes its injury pattern from that of sustained high-voltage electrical contact. The instantaneous current can act as a massive countershock that depolarises the myocardium and causes asystole; cardiac automaticity may then resume while the respiratory centre remains paralysed, so ongoing ventilation can be life-saving. Neurological effects include transient autonomic and vascular dysregulation producing keraunoparalysis. The characteristic skin ferning (Lichtenberg figures) reflects a transient electrical effect on cutaneous vessels rather than a true burn. Blast effect and secondary trauma from being thrown add to the injury burden.",
-  "additionalDifferentials": [
-   "High-voltage electrical injury",
-   "Cardiac arrest from primary arrhythmia or ischaemia",
-   "Blunt polytrauma from a fall or blast",
-   "Seizure with postictal deficit",
-   "Acute stroke",
-   "Syncope or collapse of other cause"
-  ],
-  "additionalInvestigations": [
-   "Continuous cardiac monitoring and electrocardiography to detect arrhythmia and conduction abnormality",
-   "Cardiac biomarkers where myocardial injury is suspected",
-   "Serum creatine kinase and renal function to assess for muscle injury, recognising it is usually less severe than in high-voltage injury",
-   "Trauma assessment with imaging directed at possible blunt injuries",
-   "Otoscopic examination for tympanic membrane rupture and audiological review",
-   "Ophthalmological assessment for cataract and other ocular injury, and neurological evaluation of persistent deficits"
-  ],
-  "redFlags": [
-   "Cardiac arrest or significant arrhythmia requiring immediate resuscitation and monitoring",
-   "Respiratory arrest persisting after return of cardiac activity",
-   "Depressed consciousness or focal neurological deficit",
-   "Evidence of major associated blunt trauma from blast or fall"
-  ],
-  "prognosis": "Prognosis hinges on whether cardiac and respiratory arrest are promptly and effectively treated; those who survive the initial event and receive early resuscitation can recover well, though a proportion are left with chronic neurological, cognitive, or autonomic sequelae. Keraunoparalysis and the cutaneous markings themselves are transient.",
-  "pitfalls": [
-   "Applying conventional triage and deprioritising an apparently dead lightning victim who could be resuscitated",
-   "Stopping ventilation once a pulse returns, when persistent respiratory arrest still requires support",
-   "Expecting the deep tissue destruction and severe rhabdomyolysis pattern of high-voltage injury and mismanaging fluids accordingly",
-   "Overlooking tympanic, ocular, or occult traumatic injuries while focused on the cardiac presentation"
-  ],
-  "references": [
-   "Tintinalli's Emergency Medicine: A Comprehensive Study Guide",
-   "Auerbach's Wilderness Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Apply reverse triage, prioritising cardiopulmonary resuscitation of apparently lifeless casualties, with prolonged ventilatory support because respiratory arrest often outlasts the reversible cardiac arrest",
-   "Provide continuous cardiac monitoring and ECG with treatment of arrhythmias and conduction disturbance",
-   "Give assisted ventilation for medullary respiratory paralysis until spontaneous breathing returns",
-   "Perform a trauma survey with spinal precautions for blast and secondary blunt injuries",
-   "Offer supportive care for keraunoparalysis, which is transient, and wound care for the usually superficial cutaneous injury",
-   "Examine for tympanic membrane rupture and arrange ophthalmological review for cataract and other ocular injury",
-   "Provide neurological and neuropsychological rehabilitation for persistent cognitive, autonomic or motor sequelae"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lightning_injury-pathway",
-   "title": "Lightning injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The chief cause of immediate death is cardiac arrest, as the massive brief current can depolarise the entire myocardium and produce asystole; a secondary respiratory arrest from medullary paralysis may outlast the cardiac standstill",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cardiac arrest or significant arrhythmia requiring immediate resuscitation and monitoring",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Continuous cardiac monitoring and electrocardiography to detect arrhythmia and conduction abnormality, Cardiac biomarkers where myocardial injury is suspected, Serum creatine kinase and renal function to assess for muscle"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Apply reverse triage, prioritising cardiopulmonary resuscitation of apparently lifeless casualties, with prolonged ventilatory support because respiratory arrest often outlasts the reversible cardiac arrest"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Applying conventional triage and deprioritising an apparently dead lightning victim who could be resuscitated"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lightning injury."
-  }
- ],
- "tables": [
-  {
-   "id": "lightning_injury-matrix",
-   "title": "Lightning injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The chief cause of immediate death is cardiac arrest, as the massive brief current can depolarise the entire myocardium and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tintinalli's Emergency Medicine / Auerbach's Wilderness Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The chief cause of immediate death is cardiac arrest, as the massive brief current can depolarise the entire myocardium and produce asystole; a secondary respiratory arrest from medullary paralysis may outlast the cardiac standstill",
+      "Because primary arrest may be reversible, lightning casualties warrant a 'reverse triage' approach in which apparently lifeless victims are resuscitated first",
+      "Keraunoparalysis is a transient limb paralysis, often of the legs, with cold, mottled, pulseless extremities that usually resolves over hours",
+      "Lichtenberg figures are transient, fern-like or feathering skin markings that are effectively pathognomonic of a lightning strike and fade within a day or two",
+      "Most of the current flashes over the body surface rather than passing deeply, so extensive deep tissue destruction and severe myoglobinuria are less typical than in high-voltage electrical injury",
+      "Tympanic membrane rupture, cataracts, autonomic disturbance, and a range of neurological and neuropsychological sequelae are recognised complications",
+      "Emergency management prioritises resuscitation and cardiac monitoring, with assessment for associated blunt trauma from the blast or a fall and evaluation of the eyes and ears"
     ],
-    [
-     "Key Investigations",
-     "Continuous cardiac monitoring and electrocardiography to detect arrhythmia and conduction abnormality, Cardiac biomarkers where",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lightning delivers an extremely high-voltage current over a very short duration, and much of it passes over the body surface as a flashover rather than through deep tissues, which distinguishes its injury pattern from that of sustained high-voltage electrical contact. The instantaneous current can act as a massive countershock that depolarises the myocardium and causes asystole; cardiac automaticity may then resume while the respiratory centre remains paralysed, so ongoing ventilation can be life-saving. Neurological effects include transient autonomic and vascular dysregulation producing keraunoparalysis. The characteristic skin ferning (Lichtenberg figures) reflects a transient electrical effect on cutaneous vessels rather than a true burn. Blast effect and secondary trauma from being thrown add to the injury burden.",
+    "additionalDifferentials": [
+      "High-voltage electrical injury",
+      "Cardiac arrest from primary arrhythmia or ischaemia",
+      "Blunt polytrauma from a fall or blast",
+      "Seizure with postictal deficit",
+      "Acute stroke",
+      "Syncope or collapse of other cause"
     ],
-    [
-     "Primary Differentials",
-     "High-voltage electrical injury, Cardiac arrest from primary arrhythmia or ischaemia, Blunt polytrauma from a fall or blast",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Continuous cardiac monitoring and electrocardiography to detect arrhythmia and conduction abnormality",
+      "Cardiac biomarkers where myocardial injury is suspected",
+      "Serum creatine kinase and renal function to assess for muscle injury, recognising it is usually less severe than in high-voltage injury",
+      "Trauma assessment with imaging directed at possible blunt injuries",
+      "Otoscopic examination for tympanic membrane rupture and audiological review",
+      "Ophthalmological assessment for cataract and other ocular injury, and neurological evaluation of persistent deficits"
     ],
-    [
-     "Management Strategy",
-     "Apply reverse triage, prioritising cardiopulmonary resuscitation of apparently lifeless casualties, with prolonged ventilatory",
-     "Core treatment modality"
+    "redFlags": [
+      "Cardiac arrest or significant arrhythmia requiring immediate resuscitation and monitoring",
+      "Respiratory arrest persisting after return of cardiac activity",
+      "Depressed consciousness or focal neurological deficit",
+      "Evidence of major associated blunt trauma from blast or fall"
     ],
-    [
-     "Clinical Pitfall",
-     "Applying conventional triage and deprioritising an apparently dead lightning victim who could be resuscitated",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis hinges on whether cardiac and respiratory arrest are promptly and effectively treated; those who survive the initial event and receive early resuscitation can recover well, though a proportion are left with chronic neurological, cognitive, or autonomic sequelae. Keraunoparalysis and the cutaneous markings themselves are transient.",
+    "pitfalls": [
+      "Applying conventional triage and deprioritising an apparently dead lightning victim who could be resuscitated",
+      "Stopping ventilation once a pulse returns, when persistent respiratory arrest still requires support",
+      "Expecting the deep tissue destruction and severe rhabdomyolysis pattern of high-voltage injury and mismanaging fluids accordingly",
+      "Overlooking tympanic, ocular, or occult traumatic injuries while focused on the cardiac presentation"
+    ],
+    "references": [
+      "Tintinalli's Emergency Medicine: A Comprehensive Study Guide",
+      "Auerbach's Wilderness Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Apply reverse triage, prioritising cardiopulmonary resuscitation of apparently lifeless casualties, with prolonged ventilatory support because respiratory arrest often outlasts the reversible cardiac arrest",
+      "Provide continuous cardiac monitoring and ECG with treatment of arrhythmias and conduction disturbance",
+      "Give assisted ventilation for medullary respiratory paralysis until spontaneous breathing returns",
+      "Perform a trauma survey with spinal precautions for blast and secondary blunt injuries",
+      "Offer supportive care for keraunoparalysis, which is transient, and wound care for the usually superficial cutaneous injury",
+      "Examine for tympanic membrane rupture and arrange ophthalmological review for cataract and other ocular injury",
+      "Provide neurological and neuropsychological rehabilitation for persistent cognitive, autonomic or motor sequelae"
     ]
-   ],
-   "caption": "Overview comparison matrix for lightning injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lightning-injury-real-image",
-   "title": "Lightning injury: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "lightning_injury-pathway",
+      "title": "Lightning injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The chief cause of immediate death is cardiac arrest, as the massive brief current can depolarise the entire myocardium and produce asystole; a secondary respiratory arrest from medullary paralysis may outlast the cardiac standstill",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cardiac arrest or significant arrhythmia requiring immediate resuscitation and monitoring",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Continuous cardiac monitoring and electrocardiography to detect arrhythmia and conduction abnormality, Cardiac biomarkers where myocardial injury is suspected, Serum creatine kinase and renal function to assess for muscle"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Apply reverse triage, prioritising cardiopulmonary resuscitation of apparently lifeless casualties, with prolonged ventilatory support because respiratory arrest often outlasts the reversible cardiac arrest"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Applying conventional triage and deprioritising an apparently dead lightning victim who could be resuscitated"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lightning injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lightning_injury-matrix",
+      "title": "Lightning injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The chief cause of immediate death is cardiac arrest, as the massive brief current can depolarise the entire myocardium and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Continuous cardiac monitoring and electrocardiography to detect arrhythmia and conduction abnormality, Cardiac biomarkers where",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "High-voltage electrical injury, Cardiac arrest from primary arrhythmia or ischaemia, Blunt polytrauma from a fall or blast",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Apply reverse triage, prioritising cardiopulmonary resuscitation of apparently lifeless casualties, with prolonged ventilatory",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Applying conventional triage and deprioritising an apparently dead lightning victim who could be resuscitated",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lightning injury."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tintinalli's Emergency Medicine / Auerbach's Wilderness Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lightning_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous ECG monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and conduction abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Where myocardial injury is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and renal function",
+          "cells": [
+            {
+              "text": "Muscle injury, usually less severe than in high-voltage injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma imaging",
+          "cells": [
+            {
+              "text": "Possible blunt injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoscopy and audiology",
+          "cells": [
+            {
+              "text": "Tympanic membrane rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Cataract and other ocular injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lightning_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "High-voltage electrical injury",
+          "cells": [
+            {
+              "text": "Deep tissue destruction and severe rhabdomyolysis are typical of this, less so of lightning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac arrest from primary arrhythmia or ischaemia",
+          "cells": [
+            {
+              "text": "Primary cardiac cause; standard resuscitation applies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blunt polytrauma from a fall or blast",
+          "cells": [
+            {
+              "text": "Associated trauma to be surveyed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lightning_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reverse triage",
+          "cells": [
+            {
+              "text": "Resuscitate apparently lifeless casualties first, as arrest may be reversible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged ventilatory support",
+          "cells": [
+            {
+              "text": "Where respiratory arrest persists after cardiac activity returns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "Continuous ECG and treatment of arrhythmias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assisted ventilation",
+          "cells": [
+            {
+              "text": "For medullary respiratory paralysis until spontaneous breathing returns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma survey",
+          "cells": [
+            {
+              "text": "Spinal precautions for blast or fall injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keraunoparalysis and skin",
+          "cells": [
+            {
+              "text": "Supportive care for transient keraunoparalysis; wound care for superficial injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ear and eye",
+          "cells": [
+            {
+              "text": "Tympanic membrane and ophthalmological review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological rehabilitation",
+          "cells": [
+            {
+              "text": "For persistent cognitive, autonomic or motor sequelae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lightning_injury-dx-mgmt",
+      "title": "Diagnosis and management of Lightning injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Person struck by lightning, with collapse and cardiac or respiratory arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cardiac or respiratory arrest, depressed consciousness, major trauma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate CPR with reverse-triage resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous ECG, cardiac biomarkers, CK, trauma imaging, otoscopy, eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are spontaneous circulation and breathing restored?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue resuscitation and ventilation while arrest persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reverse triage, with prolonged ventilatory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous cardiac monitoring and arrhythmia treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trauma survey with spinal precautions for blast or fall",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Examine for tympanic membrane rupture and ocular injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Neurological and neuropsychological rehabilitation for sequelae",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good recovery when arrest is promptly treated; some sequelae persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

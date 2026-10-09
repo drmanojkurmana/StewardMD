@@ -1,177 +1,493 @@
 {
- "id": "phacodonesis",
- "name": "phacodonesis",
- "aliases": [
-  "lens tremulousness",
-  "wobbling lens"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmic",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / AAO Basic and Clinical Science Course",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Phacodonesis is a tremulous, wobbling movement of the crystalline lens seen on ocular saccades, signifying loss of zonular integrity and impending or partial lens subluxation",
-   "It is a clinical sign rather than a diagnosis, and its presence should trigger a search for the underlying cause of zonular weakness",
-   "In adults the commonest cause is pseudoexfoliation syndrome, in which fibrillar deposits progressively degrade the zonular attachments",
-   "Blunt or penetrating ocular trauma is a frequent cause and may produce localised zonular dialysis with sectoral phacodonesis",
-   "Heritable connective-tissue disorders are key associations, notably Marfan syndrome (fibrillin-1), homocystinuria and Weill-Marchesani syndrome, and their systemic features must be sought",
-   "It is best elicited at the slit lamp by asking the patient to make quick eye movements and observing oscillation of the lens, often accompanied by iridodonesis (tremulous iris)",
-   "Phacodonesis markedly increases the risk of intra-operative complications such as zonular dialysis, capsular instability and dropped lens fragments, so it must be documented before cataract surgery",
-   "Progression to frank lens subluxation or complete dislocation into the anterior chamber or vitreous can precipitate pupillary-block or lens-induced glaucoma"
+  "id": "phacodonesis",
+  "name": "phacodonesis",
+  "aliases": [
+    "lens tremulousness",
+    "wobbling lens"
   ],
-  "pathophysiology": "The crystalline lens is suspended by the ciliary zonule, a system of fibrillin-rich microfibrils running from the ciliary body to the lens capsule that holds the lens centred and taut. Phacodonesis results when these fibres are reduced in number, stretched or disrupted, so the lens is inadequately anchored and oscillates with inertial movement of the eye. In pseudoexfoliation, abnormal fibrillar material and enzymatic degradation weaken the zonular insertions. In Marfan syndrome, mutations in the fibrillin-1 gene yield structurally deficient microfibrils; in homocystinuria, accumulated homocysteine disrupts zonular cross-linking; and trauma mechanically avulses zonular fibres. The common endpoint is a loss of stable zonular support that permits abnormal lens mobility and predisposes to subluxation.",
-  "additionalDifferentials": [
-   "Pseudoexfoliation syndrome with zonular laxity",
-   "Ectopia lentis of Marfan syndrome",
-   "Homocystinuria with lens dislocation",
-   "Weill-Marchesani syndrome and other microspherophakia-associated laxity",
-   "Traumatic zonular dialysis",
-   "High axial myopia or buphthalmos with stretched zonules",
-   "Zonular weakness after prior vitreoretinal surgery"
-  ],
-  "additionalInvestigations": [
-   "Dilated slit-lamp examination to grade lens movement, zonular gaps and any subluxation",
-   "Gonioscopy and intraocular pressure measurement to assess angle status and glaucoma risk",
-   "Ultrasound biomicroscopy to image the zonule, ciliary body and degree of lens decentration",
-   "Search for pseudoexfoliation material on the pupillary margin and anterior capsule",
-   "Plasma and urine homocysteine and amino-acid studies where homocystinuria is suspected",
-   "Systemic evaluation and echocardiography for Marfan syndrome and related connective-tissue disease",
-   "Genetic testing (for example FBN1) guided by the clinical phenotype"
-  ],
-  "redFlags": [
-   "Acute lens-induced or pupillary-block angle closure with pain and pressure rise",
-   "Complete lens dislocation into the anterior chamber threatening corneal decompensation",
-   "Features of Marfan syndrome warranting cardiovascular assessment for aortic root dilatation",
-   "Homocystinuria with its risk of thromboembolism",
-   "Sudden change from lens tremulousness to frank dislocation"
-  ],
-  "prognosis": "Prognosis depends on the underlying cause and on early recognition; with careful surgical planning using capsular support devices, good visual outcomes are achievable, though the presence of phacodonesis raises the risk of intra-operative and postoperative complications. Untreated progression to dislocation and secondary glaucoma can threaten sight and, in syndromic causes, systemic morbidity may dominate.",
-  "pitfalls": [
-   "Overlooking subtle phacodonesis and encountering unexpected zonular dialysis during cataract surgery",
-   "Failing to identify pseudoexfoliation as the underlying cause in an older patient",
-   "Missing a systemic diagnosis such as Marfan syndrome or homocystinuria with life-threatening implications",
-   "Not measuring intraocular pressure and assessing the angle in a mobile lens",
-   "Assuming a stable lens when only iridodonesis is noted without testing lens movement"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course (Lens and Cataract)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause of zonular weakness, whether pseudoexfoliation, heritable connective-tissue disease or trauma",
-   "Lens surgery using capsular support devices such as capsular tension rings and iris or capsule retractors, with careful planning for the fragile zonule",
-   "Intraocular pressure monitoring and pressure-lowering therapy for the associated glaucoma risk",
-   "Surgical management of lens subluxation or dislocation, including lensectomy with scleral- or iris-fixated intraocular lens where capsular support is inadequate",
-   "Where homocystinuria is identified, dietary methionine restriction with pyridoxine and betaine to reduce thromboembolic and further zonular risk",
-   "Systemic evaluation and echocardiography for Marfan syndrome with cardiovascular surveillance and genetic counselling for heritable connective-tissue disease",
-   "Referral to a specialist anterior-segment surgeon, with counselling on trauma avoidance and monitoring of the fellow eye"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phacodonesis-pathway",
-   "title": "phacodonesis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Phacodonesis is a tremulous, wobbling movement of the crystalline lens seen on ocular saccades, signifying loss of zonular integrity and impending or partial lens subluxation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute lens-induced or pupillary-block angle closure with pain and pressure rise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated slit-lamp examination to grade lens movement, zonular gaps and any subluxation, Gonioscopy and intraocular pressure measurement to assess angle status and glaucoma risk, Ultrasound biomicroscopy to image the"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause of zonular weakness, whether pseudoexfoliation, heritable connective-tissue disease or trauma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking subtle phacodonesis and encountering unexpected zonular dialysis during cataract surgery"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phacodonesis."
-  }
- ],
- "tables": [
-  {
-   "id": "phacodonesis-matrix",
-   "title": "phacodonesis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Phacodonesis is a tremulous, wobbling movement of the crystalline lens seen on ocular saccades, signifying loss of zonular",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmic",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / AAO Basic and Clinical Science Course",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Phacodonesis is a tremulous, wobbling movement of the crystalline lens seen on ocular saccades, signifying loss of zonular integrity and impending or partial lens subluxation",
+      "It is a clinical sign rather than a diagnosis, and its presence should trigger a search for the underlying cause of zonular weakness",
+      "In adults the commonest cause is pseudoexfoliation syndrome, in which fibrillar deposits progressively degrade the zonular attachments",
+      "Blunt or penetrating ocular trauma is a frequent cause and may produce localised zonular dialysis with sectoral phacodonesis",
+      "Heritable connective-tissue disorders are key associations, notably Marfan syndrome (fibrillin-1), homocystinuria and Weill-Marchesani syndrome, and their systemic features must be sought",
+      "It is best elicited at the slit lamp by asking the patient to make quick eye movements and observing oscillation of the lens, often accompanied by iridodonesis (tremulous iris)",
+      "Phacodonesis markedly increases the risk of intra-operative complications such as zonular dialysis, capsular instability and dropped lens fragments, so it must be documented before cataract surgery",
+      "Progression to frank lens subluxation or complete dislocation into the anterior chamber or vitreous can precipitate pupillary-block or lens-induced glaucoma"
     ],
-    [
-     "Key Investigations",
-     "Dilated slit-lamp examination to grade lens movement, zonular gaps and any subluxation, Gonioscopy and intraocular pressure",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The crystalline lens is suspended by the ciliary zonule, a system of fibrillin-rich microfibrils running from the ciliary body to the lens capsule that holds the lens centred and taut. Phacodonesis results when these fibres are reduced in number, stretched or disrupted, so the lens is inadequately anchored and oscillates with inertial movement of the eye. In pseudoexfoliation, abnormal fibrillar material and enzymatic degradation weaken the zonular insertions. In Marfan syndrome, mutations in the fibrillin-1 gene yield structurally deficient microfibrils; in homocystinuria, accumulated homocysteine disrupts zonular cross-linking; and trauma mechanically avulses zonular fibres. The common endpoint is a loss of stable zonular support that permits abnormal lens mobility and predisposes to subluxation.",
+    "additionalDifferentials": [
+      "Pseudoexfoliation syndrome with zonular laxity",
+      "Ectopia lentis of Marfan syndrome",
+      "Homocystinuria with lens dislocation",
+      "Weill-Marchesani syndrome and other microspherophakia-associated laxity",
+      "Traumatic zonular dialysis",
+      "High axial myopia or buphthalmos with stretched zonules",
+      "Zonular weakness after prior vitreoretinal surgery"
     ],
-    [
-     "Primary Differentials",
-     "Pseudoexfoliation syndrome with zonular laxity, Ectopia lentis of Marfan syndrome, Homocystinuria with lens dislocation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated slit-lamp examination to grade lens movement, zonular gaps and any subluxation",
+      "Gonioscopy and intraocular pressure measurement to assess angle status and glaucoma risk",
+      "Ultrasound biomicroscopy to image the zonule, ciliary body and degree of lens decentration",
+      "Search for pseudoexfoliation material on the pupillary margin and anterior capsule",
+      "Plasma and urine homocysteine and amino-acid studies where homocystinuria is suspected",
+      "Systemic evaluation and echocardiography for Marfan syndrome and related connective-tissue disease",
+      "Genetic testing (for example FBN1) guided by the clinical phenotype"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause of zonular weakness, whether pseudoexfoliation, heritable connective-tissue disease or",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute lens-induced or pupillary-block angle closure with pain and pressure rise",
+      "Complete lens dislocation into the anterior chamber threatening corneal decompensation",
+      "Features of Marfan syndrome warranting cardiovascular assessment for aortic root dilatation",
+      "Homocystinuria with its risk of thromboembolism",
+      "Sudden change from lens tremulousness to frank dislocation"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking subtle phacodonesis and encountering unexpected zonular dialysis during cataract surgery",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the underlying cause and on early recognition; with careful surgical planning using capsular support devices, good visual outcomes are achievable, though the presence of phacodonesis raises the risk of intra-operative and postoperative complications. Untreated progression to dislocation and secondary glaucoma can threaten sight and, in syndromic causes, systemic morbidity may dominate.",
+    "pitfalls": [
+      "Overlooking subtle phacodonesis and encountering unexpected zonular dialysis during cataract surgery",
+      "Failing to identify pseudoexfoliation as the underlying cause in an older patient",
+      "Missing a systemic diagnosis such as Marfan syndrome or homocystinuria with life-threatening implications",
+      "Not measuring intraocular pressure and assessing the angle in a mobile lens",
+      "Assuming a stable lens when only iridodonesis is noted without testing lens movement"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course (Lens and Cataract)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause of zonular weakness, whether pseudoexfoliation, heritable connective-tissue disease or trauma",
+      "Lens surgery using capsular support devices such as capsular tension rings and iris or capsule retractors, with careful planning for the fragile zonule",
+      "Intraocular pressure monitoring and pressure-lowering therapy for the associated glaucoma risk",
+      "Surgical management of lens subluxation or dislocation, including lensectomy with scleral- or iris-fixated intraocular lens where capsular support is inadequate",
+      "Where homocystinuria is identified, dietary methionine restriction with pyridoxine and betaine to reduce thromboembolic and further zonular risk",
+      "Systemic evaluation and echocardiography for Marfan syndrome with cardiovascular surveillance and genetic counselling for heritable connective-tissue disease",
+      "Referral to a specialist anterior-segment surgeon, with counselling on trauma avoidance and monitoring of the fellow eye"
     ]
-   ],
-   "caption": "Overview comparison matrix for phacodonesis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phacodonesis-real-image",
-   "title": "phacodonesis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "phacodonesis-pathway",
+      "title": "phacodonesis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Phacodonesis is a tremulous, wobbling movement of the crystalline lens seen on ocular saccades, signifying loss of zonular integrity and impending or partial lens subluxation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute lens-induced or pupillary-block angle closure with pain and pressure rise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated slit-lamp examination to grade lens movement, zonular gaps and any subluxation, Gonioscopy and intraocular pressure measurement to assess angle status and glaucoma risk, Ultrasound biomicroscopy to image the"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause of zonular weakness, whether pseudoexfoliation, heritable connective-tissue disease or trauma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking subtle phacodonesis and encountering unexpected zonular dialysis during cataract surgery"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phacodonesis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phacodonesis-matrix",
+      "title": "phacodonesis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Phacodonesis is a tremulous, wobbling movement of the crystalline lens seen on ocular saccades, signifying loss of zonular",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated slit-lamp examination to grade lens movement, zonular gaps and any subluxation, Gonioscopy and intraocular pressure",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pseudoexfoliation syndrome with zonular laxity, Ectopia lentis of Marfan syndrome, Homocystinuria with lens dislocation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause of zonular weakness, whether pseudoexfoliation, heritable connective-tissue disease or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking subtle phacodonesis and encountering unexpected zonular dialysis during cataract surgery",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phacodonesis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / AAO Basic and Clinical Science Course",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "phacodonesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated slit-lamp examination",
+          "cells": [
+            {
+              "text": "Lens movement, zonular gaps and subluxation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy and intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Angle status and glaucoma risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound biomicroscopy",
+          "cells": [
+            {
+              "text": "Zonule, ciliary body and lens decentration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Search for pseudoexfoliation material",
+          "cells": [
+            {
+              "text": "Pupillary margin and anterior capsule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma and urine homocysteine and amino-acid studies",
+          "cells": [
+            {
+              "text": "Homocystinuria, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation and echocardiography",
+          "cells": [
+            {
+              "text": "Marfan syndrome and related connective-tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing (for example FBN1)",
+          "cells": [
+            {
+              "text": "Guided by phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phacodonesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudoexfoliation syndrome",
+          "cells": [
+            {
+              "text": "Zonular laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopia lentis of Marfan syndrome",
+          "cells": [
+            {
+              "text": "Marfan features prompt cardiovascular assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Homocystinuria",
+          "cells": [
+            {
+              "text": "Lens dislocation with thromboembolism risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "phacodonesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the cause of zonular weakness",
+          "cells": [
+            {
+              "text": "Pseudoexfoliation, heritable connective-tissue disease or trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lens surgery with capsular support",
+          "cells": [
+            {
+              "text": "Capsular tension rings and iris or capsule retractors, with careful planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma risk",
+          "cells": [
+            {
+              "text": "Intraocular pressure monitoring and pressure-lowering therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subluxation or dislocation",
+          "cells": [
+            {
+              "text": "Surgery such as lensectomy with a scleral- or iris-fixated lens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Homocystinuria",
+          "cells": [
+            {
+              "text": "Dietary methionine restriction with pyridoxine and betaine to reduce thromboembolic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marfan syndrome",
+          "cells": [
+            {
+              "text": "Cardiovascular surveillance, genetic counselling and screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral",
+          "cells": [
+            {
+              "text": "Specialist anterior-segment surgeon; trauma avoidance and monitoring of the fellow eye"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "phacodonesis-dx-mgmt",
+      "title": "Diagnosis and management of phacodonesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lens tremulousness or movement on slit-lamp examination (phacodonesis)",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (acute angle closure, lens dislocation, Marfan or homocystinuria features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management for acute angle closure or lens dislocation into the chamber",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated slit-lamp; gonioscopy and pressure; ultrasound biomicroscopy; systemic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the systemic and zonular work-up identify a cause of zonular weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider pseudoexfoliation, traumatic dialysis or high myopia with stretched zonules",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Identify and treat the underlying cause of zonular weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Use capsular support devices such as capsular tension rings during lens surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor intraocular pressure and treat the associated glaucoma risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for dislocation, such as lensectomy with a scleral- or iris-fixated lens",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to a specialist anterior-segment surgeon with trauma-avoidance counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Good visual outcomes are achievable with careful planning; the cause shapes prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

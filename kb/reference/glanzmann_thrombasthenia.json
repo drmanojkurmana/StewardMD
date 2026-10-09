@@ -1,176 +1,524 @@
 {
- "id": "glanzmann_thrombasthenia",
- "name": "Glanzmann thrombasthenia (ITGA2B/ITGB3)",
- "aliases": [
-  "GT",
-  "ITGA2B",
-  "ITGB3",
-  "glycoprotein IIb/IIIa deficiency",
-  "integrin alphaIIbbeta3 deficiency"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive platelet function disorder caused by deficiency or dysfunction of the platelet integrin alphaIIbbeta3 (glycoprotein IIb/IIIa), encoded by ITGA2B and ITGB3",
-   "Bleeding is of the mucocutaneous (platelet-type) pattern: epistaxis, gum bleeding, menorrhagia, easy bruising and prolonged bleeding after surgery or dental work",
-   "The platelet count and platelet morphology are normal, which helps distinguish it from thrombocytopenic disorders",
-   "The characteristic laboratory hallmark is absent or markedly reduced platelet aggregation to all physiological agonists (ADP, collagen, adrenaline, thrombin) but a preserved response to ristocetin",
-   "The preserved ristocetin response, which depends on the glycoprotein Ib-von Willebrand factor axis, contrasts with the absent aggregation and points away from Bernard-Soulier syndrome",
-   "Diagnosis is confirmed by demonstrating reduced glycoprotein IIb/IIIa by flow cytometry and, where needed, ITGA2B/ITGB3 genetic testing",
-   "Management centres on local haemostatic measures, antifibrinolytics, and platelet transfusion for major bleeding, with alloimmunisation and, in selected cases, recombinant activated factor VII considered"
+  "id": "glanzmann_thrombasthenia",
+  "name": "Glanzmann thrombasthenia (ITGA2B/ITGB3)",
+  "aliases": [
+    "GT",
+    "ITGA2B",
+    "ITGB3",
+    "glycoprotein IIb/IIIa deficiency",
+    "integrin alphaIIbbeta3 deficiency"
   ],
-  "pathophysiology": "Glanzmann thrombasthenia results from biallelic mutations in ITGA2B or ITGB3, which encode the two subunits of the platelet integrin alphaIIbbeta3 (glycoprotein IIb/IIIa). This integrin is the fibrinogen receptor that mediates platelet-to-platelet bridging during aggregation. When it is quantitatively deficient or functionally defective, activated platelets can adhere and change shape but cannot cross-link through fibrinogen to form a stable aggregate, so primary haemostasis fails despite normal platelet numbers and normal von Willebrand-dependent adhesion. The result is a lifelong mucocutaneous bleeding tendency of variable severity that does not correlate closely with the residual receptor level.",
-  "additionalDifferentials": [
-   "Bernard-Soulier syndrome",
-   "Von Willebrand disease",
-   "Storage pool and other platelet secretion defects",
-   "Immune thrombocytopenia (distinguished by low platelet count)",
-   "Acquired antiplatelet drug effect",
-   "Mild inherited platelet function disorders"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film confirming normal platelet number and morphology",
-   "Light-transmission platelet aggregometry showing absent response to physiological agonists with preserved ristocetin response",
-   "Flow cytometry for platelet glycoprotein IIb/IIIa expression",
-   "Von Willebrand studies to exclude von Willebrand disease",
-   "Coagulation screen to confirm normal clotting factor pathways",
-   "ITGA2B and ITGB3 genetic testing for confirmation and counselling"
-  ],
-  "redFlags": [
-   "Major or life-threatening haemorrhage such as gastrointestinal or intracranial bleeding",
-   "Severe menorrhagia causing haemodynamic compromise",
-   "Uncontrolled bleeding around surgery or childbirth",
-   "Platelet refractoriness from alloimmunisation limiting transfusion response"
-  ],
-  "prognosis": "With modern supportive care most patients have a normal life expectancy, though bleeding episodes can be serious and platelet alloimmunisation may complicate the response to transfusion over time.",
-  "pitfalls": [
-   "Mislabelling the disorder as immune thrombocytopenia despite a normal platelet count",
-   "Transfusing platelets for minor bleeds and hastening alloimmunisation that impairs future responses",
-   "Overlooking the diagnosis when aggregometry is not performed because routine coagulation tests are normal",
-   "Failing to plan peri-procedural haemostatic cover before surgery or delivery"
-  ],
-  "references": [
-   "Postgraduate Haematology",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control bleeding with local haemostatic measures and antifibrinolytics such as tranexamic acid for mucosal bleeds and minor procedures",
-   "Recombinant activated factor VII as the first-line systemic haemostatic agent for serious bleeding and surgical cover",
-   "Reserve HLA-matched leukodepleted platelet transfusion for severe or refractory bleeding, mindful of the risk of platelet alloimmunisation",
-   "Manage menorrhagia with hormonal therapy and correct iron-deficiency anaemia with iron replacement",
-   "Avoid antiplatelet drugs and NSAIDs, maintain meticulous dental hygiene, and offer hepatitis B immunisation to transfusion recipients",
-   "Monitor for platelet alloantibodies and iron status, coordinated through haematology and transfusion services",
-   "Consider allogeneic haematopoietic stem cell transplantation as a curative option in severe refractory disease",
-   "Provide genetic counselling for this autosomal recessive disorder and screen at-risk family members"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glanzmann_thrombasthenia-pathway",
-   "title": "Glanzmann thrombasthenia (ITGA2B/ITGB3): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive platelet function disorder caused by deficiency or dysfunction of the platelet integrin alphaIIbbeta3 (glycoprotein IIb/IIIa), encoded by ITGA2B and ITGB3",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Major or life-threatening haemorrhage such as gastrointestinal or intracranial bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film confirming normal platelet number and morphology, Light-transmission platelet aggregometry showing absent response to physiological agonists with preserved ristocetin response, Flow"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control bleeding with local haemostatic measures and antifibrinolytics such as tranexamic acid for mucosal bleeds and minor procedures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the disorder as immune thrombocytopenia despite a normal platelet count"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glanzmann thrombasthenia (itga2b/itgb3)."
-  }
- ],
- "tables": [
-  {
-   "id": "glanzmann_thrombasthenia-matrix",
-   "title": "Glanzmann thrombasthenia (ITGA2B/ITGB3): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive platelet function disorder caused by deficiency or dysfunction of the platelet integrin alphaIIbbeta3",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Postgraduate Haematology / Oxford Textbook of Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive platelet function disorder caused by deficiency or dysfunction of the platelet integrin alphaIIbbeta3 (glycoprotein IIb/IIIa), encoded by ITGA2B and ITGB3",
+      "Bleeding is of the mucocutaneous (platelet-type) pattern: epistaxis, gum bleeding, menorrhagia, easy bruising and prolonged bleeding after surgery or dental work",
+      "The platelet count and platelet morphology are normal, which helps distinguish it from thrombocytopenic disorders",
+      "The characteristic laboratory hallmark is absent or markedly reduced platelet aggregation to all physiological agonists (ADP, collagen, adrenaline, thrombin) but a preserved response to ristocetin",
+      "The preserved ristocetin response, which depends on the glycoprotein Ib-von Willebrand factor axis, contrasts with the absent aggregation and points away from Bernard-Soulier syndrome",
+      "Diagnosis is confirmed by demonstrating reduced glycoprotein IIb/IIIa by flow cytometry and, where needed, ITGA2B/ITGB3 genetic testing",
+      "Management centres on local haemostatic measures, antifibrinolytics, and platelet transfusion for major bleeding, with alloimmunisation and, in selected cases, recombinant activated factor VII considered"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film confirming normal platelet number and morphology, Light-transmission platelet aggregometry",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glanzmann thrombasthenia results from biallelic mutations in ITGA2B or ITGB3, which encode the two subunits of the platelet integrin alphaIIbbeta3 (glycoprotein IIb/IIIa). This integrin is the fibrinogen receptor that mediates platelet-to-platelet bridging during aggregation. When it is quantitatively deficient or functionally defective, activated platelets can adhere and change shape but cannot cross-link through fibrinogen to form a stable aggregate, so primary haemostasis fails despite normal platelet numbers and normal von Willebrand-dependent adhesion. The result is a lifelong mucocutaneous bleeding tendency of variable severity that does not correlate closely with the residual receptor level.",
+    "additionalDifferentials": [
+      "Bernard-Soulier syndrome",
+      "Von Willebrand disease",
+      "Storage pool and other platelet secretion defects",
+      "Immune thrombocytopenia (distinguished by low platelet count)",
+      "Acquired antiplatelet drug effect",
+      "Mild inherited platelet function disorders"
     ],
-    [
-     "Primary Differentials",
-     "Bernard-Soulier syndrome, Von Willebrand disease, Storage pool and other platelet secretion defects",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film confirming normal platelet number and morphology",
+      "Light-transmission platelet aggregometry showing absent response to physiological agonists with preserved ristocetin response",
+      "Flow cytometry for platelet glycoprotein IIb/IIIa expression",
+      "Von Willebrand studies to exclude von Willebrand disease",
+      "Coagulation screen to confirm normal clotting factor pathways",
+      "ITGA2B and ITGB3 genetic testing for confirmation and counselling"
     ],
-    [
-     "Management Strategy",
-     "Control bleeding with local haemostatic measures and antifibrinolytics such as tranexamic acid for mucosal bleeds and minor",
-     "Core treatment modality"
+    "redFlags": [
+      "Major or life-threatening haemorrhage such as gastrointestinal or intracranial bleeding",
+      "Severe menorrhagia causing haemodynamic compromise",
+      "Uncontrolled bleeding around surgery or childbirth",
+      "Platelet refractoriness from alloimmunisation limiting transfusion response"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the disorder as immune thrombocytopenia despite a normal platelet count",
-     "Prevent diagnostic or management error"
+    "prognosis": "With modern supportive care most patients have a normal life expectancy, though bleeding episodes can be serious and platelet alloimmunisation may complicate the response to transfusion over time.",
+    "pitfalls": [
+      "Mislabelling the disorder as immune thrombocytopenia despite a normal platelet count",
+      "Transfusing platelets for minor bleeds and hastening alloimmunisation that impairs future responses",
+      "Overlooking the diagnosis when aggregometry is not performed because routine coagulation tests are normal",
+      "Failing to plan peri-procedural haemostatic cover before surgery or delivery"
+    ],
+    "references": [
+      "Postgraduate Haematology",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control bleeding with local haemostatic measures and antifibrinolytics such as tranexamic acid for mucosal bleeds and minor procedures",
+      "Recombinant activated factor VII as the first-line systemic haemostatic agent for serious bleeding and surgical cover",
+      "Reserve HLA-matched leukodepleted platelet transfusion for severe or refractory bleeding, mindful of the risk of platelet alloimmunisation",
+      "Manage menorrhagia with hormonal therapy and correct iron-deficiency anaemia with iron replacement",
+      "Avoid antiplatelet drugs and NSAIDs, maintain meticulous dental hygiene, and offer hepatitis B immunisation to transfusion recipients",
+      "Monitor for platelet alloantibodies and iron status, coordinated through haematology and transfusion services",
+      "Consider allogeneic haematopoietic stem cell transplantation as a curative option in severe refractory disease",
+      "Provide genetic counselling for this autosomal recessive disorder and screen at-risk family members"
     ]
-   ],
-   "caption": "Overview comparison matrix for glanzmann thrombasthenia (itga2b/itgb3)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glanzmann-thrombasthenia-real-image",
-   "title": "Glanzmann thrombasthenia (ITGA2B/ITGB3): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "glanzmann_thrombasthenia-pathway",
+      "title": "Glanzmann thrombasthenia (ITGA2B/ITGB3): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive platelet function disorder caused by deficiency or dysfunction of the platelet integrin alphaIIbbeta3 (glycoprotein IIb/IIIa), encoded by ITGA2B and ITGB3",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Major or life-threatening haemorrhage such as gastrointestinal or intracranial bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film confirming normal platelet number and morphology, Light-transmission platelet aggregometry showing absent response to physiological agonists with preserved ristocetin response, Flow"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control bleeding with local haemostatic measures and antifibrinolytics such as tranexamic acid for mucosal bleeds and minor procedures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the disorder as immune thrombocytopenia despite a normal platelet count"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glanzmann thrombasthenia (itga2b/itgb3)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glanzmann_thrombasthenia-matrix",
+      "title": "Glanzmann thrombasthenia (ITGA2B/ITGB3): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive platelet function disorder caused by deficiency or dysfunction of the platelet integrin alphaIIbbeta3",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film confirming normal platelet number and morphology, Light-transmission platelet aggregometry",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bernard-Soulier syndrome, Von Willebrand disease, Storage pool and other platelet secretion defects",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control bleeding with local haemostatic measures and antifibrinolytics such as tranexamic acid for mucosal bleeds and minor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the disorder as immune thrombocytopenia despite a normal platelet count",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glanzmann thrombasthenia (itga2b/itgb3)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Postgraduate Haematology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 58-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glanzmann_thrombasthenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "FBC and blood film",
+          "cells": [
+            {
+              "text": "Normal platelet number and morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Light-transmission platelet aggregometry",
+          "cells": [
+            {
+              "text": "Absent response to physiological agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for glycoprotein IIb/IIIa",
+          "cells": [
+            {
+              "text": "Expression level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand studies",
+          "cells": [
+            {
+              "text": "Excludes von Willebrand disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen",
+          "cells": [
+            {
+              "text": "Normal clotting factor pathways"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ITGA2B and ITGB3 genetic testing",
+          "cells": [
+            {
+              "text": "Confirmation and counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glanzmann_thrombasthenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "Excluded by von Willebrand studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Distinguished by low platelet count"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glanzmann_thrombasthenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tranexamic acid and local haemostasis",
+          "cells": [
+            {
+              "text": "Antifibrinolytics for mucosal bleeds and minor procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant activated factor VII",
+          "cells": [
+            {
+              "text": "First-line systemic agent for serious bleeding and surgical cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-matched platelet transfusion",
+          "cells": [
+            {
+              "text": "Severe or refractory bleeding; risk of platelet alloimmunisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menorrhagia and iron",
+          "cells": [
+            {
+              "text": "Hormonal therapy and iron replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiplatelet drugs and NSAIDs",
+          "cells": [
+            {
+              "text": "Meticulous dental hygiene; hepatitis B immunisation for transfusion recipients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Platelet alloantibodies and iron status, through haematology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Curative option in severe refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screening of at-risk family members"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glanzmann_thrombasthenia-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Primary hemostatic (platelet plug) disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Disorders"
+      ],
+      "rows": [
+        {
+          "parameter": "Defects of platelet adhesion",
+          "cells": [
+            {
+              "text": "Von Willebrand disease; Bernard-Soulier syndrome (absence or dysfunction of GpIb-IX-V)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defects of platelet aggregation",
+          "cells": [
+            {
+              "text": "Glanzmann's thrombasthenia (absence or dysfunction of GpIIbIIIa); afibrinogenemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defects of platelet secretion",
+          "cells": [
+            {
+              "text": "Decreased cyclooxygenase activity (drug-induced: aspirin, nonsteroidal anti-inflammatory agents, thienopyridines; or inherited); granule storage pool defects (inherited or acquired); nonspecific inherited secretory defects; nonspecific drug effects; uremia; platelet coating (for example paraprotein, penicillin)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defect of platelet coagulant activity",
+          "cells": [
+            {
+              "text": "Scott's syndrome"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glanzmann_thrombasthenia-dx-mgmt",
+      "title": "Diagnosis and management of Glanzmann thrombasthenia (ITGA2B/ITGB3)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Glanzmann thrombasthenia: mucosal bleeding with normal platelet count",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (major bleeding, severe menorrhagia, refractory platelets)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for life-threatening bleeding or refractory platelets",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC, platelet aggregometry, flow cytometry for IIb/IIIa, and ITGA2B/ITGB3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does aggregometry show an absent response with a normal platelet count?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider von Willebrand disease, Bernard-Soulier syndrome or immune thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Tranexamic acid and local haemostatic measures for mucosal bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Recombinant activated factor VII for serious bleeding or surgical cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "HLA-matched platelet transfusion for severe or refractory bleeding only",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid antiplatelet drugs and NSAIDs; monitor for platelet alloantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most have normal life expectancy with modern care, though bleeding can be serious",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

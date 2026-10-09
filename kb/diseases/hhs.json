@@ -192,25 +192,460 @@
       "caption": "Diagnostic and clinical overview matrix for hyperosmolar hyperglycaemic state."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "hhs-real-image",
-      "title": "Hyperosmolar hyperglycaemic state: Diagnostic Endocrine Cross-Sectional Imaging",
-      "type": "ct",
-      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-      "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Diabetic Ketoacidosis and HHS (acute complications of diabetes)",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/diabetic-ketoacidosis-dka",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hhs-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for hyperosmolar hyperglycaemic state",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Notes"
+      ],
+      "rows": [
         {
-          "label": "Gland Morphology",
-          "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+          "parameter": "Plasma glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">=600",
+              "op": ">=",
+              "value": 600
+            },
+            {
+              "text": "{{hy:Often far higher than in DKA; may exceed 1000}}"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Focal Lesions",
-          "description": "Nodularity, adenoma attenuation, and washout dynamics."
+          "parameter": "Serum osmolality",
+          "unit": "mOsm/kg",
+          "cells": [
+            {
+              "text": ">300 (typically >320)",
+              "op": ">",
+              "value": 300
+            },
+            {
+              "text": "Drives the altered sensorium"
+            }
+          ],
+          "cite": "c2"
         },
         {
-          "label": "Surrounding Structures",
-          "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+          "parameter": "Beta-hydroxybutyrate",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "<3.0",
+              "op": "<",
+              "value": 3.0
+            },
+            {
+              "text": "No significant ketosis; urine ketones <2+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "pH",
+          "cells": [
+            {
+              "text": ">=7.3",
+              "op": ">=",
+              "value": 7.3
+            },
+            {
+              "text": "No significant acidosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bicarbonate",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": ">=15",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "No significant acidosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corrected sodium",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "Add about 1.6 per 100 mg/dL glucose above 100"
+            },
+            {
+              "text": "Usually raised even if measured Na normal or low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatinine and urea",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Prerenal from volume loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical picture",
+          "cells": [
+            {
+              "text": "Older type 2 diabetic, weeks of polyuria, confusion, no Kussmaul breathing"
+            },
+            {
+              "text": "Absent vomiting and abdominal pain help separate from DKA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source difference: Harrison gives beta-hydroxybutyrate <1.0 mmol/L in HHS; Merck uses <3.0 mmol/L as the criterion. Up to one-third have overlapping DKA features; treat overlap with the DKA protocol."
+    },
+    {
+      "id": "hhs-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic HHS",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetic ketoacidosis or DKA/HHS overlap",
+          "cells": [
+            {
+              "text": "{{hy:Ketosis and acidosis, vomiting, Kussmaul breathing}}"
+            },
+            {
+              "text": "pH, bicarbonate, beta-hydroxybutyrate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stroke",
+          "cells": [
+            {
+              "text": "Focal deficit; can also precipitate HHS"
+            },
+            {
+              "text": "Brain imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis or pneumonia",
+          "cells": [
+            {
+              "text": "Fever, infective source; common precipitant"
+            },
+            {
+              "text": "Cultures, chest x-ray"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uraemia",
+          "cells": [
+            {
+              "text": "Renal failure causing confusion"
+            },
+            {
+              "text": "Urea and creatinine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Hyponatraemia or hypoglycaemia"
+            },
+            {
+              "text": "Electrolytes, glucose"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hhs-treatment",
+      "kind": "treatment",
+      "title": "Treatment of hyperosmolar hyperglycaemic state",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "0.9% saline",
+          "cells": [
+            {
+              "text": "{{hy:First hour}}"
+            },
+            {
+              "text": "1000 mL (500 mL boluses if heart failure risk), then 250 to 500 mL/h; deficit may exceed 10 L"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Switch to 0.45% saline",
+          "cells": [
+            {
+              "text": "Corrected sodium normal or high"
+            },
+            {
+              "text": "Continue 0.9% if corrected Na <135"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potassium",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "K <3.3: 40 mEq/h; 3.3 to 4.9: 20 to 30 mEq/h; >=5: none"
+            },
+            {
+              "text": "Correct before insulin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Insulin infusion",
+          "cells": [
+            {
+              "text": "After first litre of saline and K corrected"
+            },
+            {
+              "text": "0.05 unit/kg/h; fluids alone lower glucose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reduce insulin and add dextrose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Glucose about 300",
+              "op": "<=",
+              "value": 300
+            },
+            {
+              "text": "Basal 1 to 2 units/h; dextrose at 250 to 300; target 250 to 300 mg/dL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Slow correction of osmolality",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Too-rapid fall risks cerebral oedema"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat precipitant",
+          "cells": [
+            {
+              "text": "MI, stroke, sepsis, pneumonia"
+            },
+            {
+              "text": "Actively search"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICU care",
+          "cells": [
+            {
+              "text": "All HHS"
+            },
+            {
+              "text": "Then subcutaneous insulin after recovery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "VTE prophylaxis",
+          "cells": [
+            {
+              "text": "Immobile dehydrated patient"
+            },
+            {
+              "text": "Enoxaparin in entry drug list; dose not stated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Mortality: Merck up to about 2%; Harrison up to about 15% in some series. Both say higher than DKA."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hhs-dx-mgmt",
+      "title": "Diagnosis and management of HHS",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Older diabetic with confusion, dehydration, very high glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Glucose, osmolality, electrolytes, gas, ketones",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Significant ketosis and acidosis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat as DKA or overlap with DKA protocol",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "0.9% saline 1 L in first hour, then 250 to 500 mL/h",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "K <3.3 mEq/L?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Replace K 40 mEq/h before insulin",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Insulin 0.05 unit/kg/h; slow osmolality fall",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "At glucose 300: basal insulin, add dextrose",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Treat precipitant; SC insulin when eating",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
         }
       ]
     }

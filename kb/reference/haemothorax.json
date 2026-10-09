@@ -1,179 +1,464 @@
 {
- "id": "haemothorax",
- "name": "haemothorax",
- "aliases": [
-  "Haemothorax",
-  "hemothorax",
-  "massive haemothorax",
-  "pleural haemorrhage",
-  "traumatic haemothorax"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Thoracic surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Haemothorax is defined by blood in the pleural space; a pleural fluid haematocrit greater than half the peripheral blood haematocrit confirms it.",
-   "Trauma, whether blunt or penetrating, is the commonest cause; non-traumatic causes include malignancy, thoracic aortic rupture or dissection, pulmonary infarction, anticoagulation and catamenial (thoracic endometriosis) haemothorax.",
-   "Iatrogenic haemothorax follows central venous line insertion, pleural procedures and cardiothoracic surgery.",
-   "Initial management combines resuscitation with prompt large-bore chest tube drainage, which also quantifies ongoing blood loss.",
-   "Surgery (VATS or thoracotomy) is indicated for massive haemothorax (classically more than 1.5 litres drained immediately), ongoing bleeding (for example a persistently high hourly chest-drain output for several hours) or haemodynamic instability.",
-   "Retained, incompletely drained haemothorax predisposes to empyema and fibrothorax and is best managed by early VATS evacuation.",
-   "Point-of-care ultrasound (eFAST), erect chest radiograph and CT establish the diagnosis, with CT best for quantifying retained clot.",
-   "Chest drain output, physiology and imaging together, rather than any single value, should drive the decision to operate."
+  "id": "haemothorax",
+  "name": "haemothorax",
+  "aliases": [
+    "Haemothorax",
+    "hemothorax",
+    "massive haemothorax",
+    "pleural haemorrhage",
+    "traumatic haemothorax"
   ],
-  "pathophysiology": "Bleeding into the pleural space arises from injury to chest wall vessels (intercostal or internal mammary arteries), lung parenchyma, the great vessels or heart, or from non-traumatic vascular and pleural pathology. Because the pleura and the moving lung defibrinate blood, a haemothorax often fails to clot completely and can be drained; retained clot, however, organises, while pleural enzymes and mechanical motion may sustain oozing. Large accumulations compress the lung and, if under tension, impair venous return, producing combined hypovolaemic and obstructive compromise. Retained blood is an excellent culture medium and a scaffold for fibroblast proliferation, leading to empyema or a fibrothorax that traps the lung.",
-  "additionalDifferentials": [
-   "Simple or malignant pleural effusion",
-   "Empyema",
-   "Haemorrhagic pleural effusion not meeting haematocrit criteria (for example malignancy, pulmonary embolism)",
-   "Pneumothorax or haemopneumothorax",
-   "Diaphragmatic rupture with herniated abdominal contents",
-   "Chylothorax"
-  ],
-  "additionalInvestigations": [
-   "Erect chest radiograph",
-   "Thoracic ultrasound (eFAST)",
-   "CT thorax, with contrast or angiography if vascular injury is suspected",
-   "Pleural fluid haematocrit compared with blood haematocrit",
-   "Full blood count, coagulation screen and group and save or crossmatch",
-   "Continuous monitoring of chest drain output",
-   "Echocardiography or CT aortogram if an aortic or cardiac source is suspected"
-  ],
-  "redFlags": [
-   "Haemodynamic instability or signs of haemorrhagic shock",
-   "Massive initial chest drain output or persistently high hourly output",
-   "Tension physiology (tracheal deviation, distended neck veins, hypotension)",
-   "Penetrating injury to the cardiac box or a widened mediastinum on imaging"
-  ],
-  "prognosis": "Outcome depends on the cause and the promptness of drainage; most traumatic haemothoraces resolve well with a chest drain, but delayed or retained haemothorax risks empyema and fibrothorax, and massive haemothorax carries significant mortality.",
-  "pitfalls": [
-   "Using an inadequate or small-bore drain that fails to evacuate blood and leaves retained clot.",
-   "Assuming a small effusion on a supine film excludes a significant haemothorax.",
-   "Delaying surgery in the face of ongoing bleeding while awaiting further imaging.",
-   "Overlooking non-traumatic causes such as aortic, malignant, catamenial or anticoagulation-related bleeding.",
-   "Failing to address retained haemothorax early, allowing empyema or fibrothorax to develop."
-  ],
-  "references": [
-   "Sabiston Textbook of Surgery",
-   "Advanced Trauma Life Support (ATLS) Manual",
-   "BTS Pleural Disease Guideline"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt large-bore intercostal chest drain insertion to evacuate blood, re-expand the lung and quantify ongoing loss",
-   "Concurrent resuscitation with intravenous fluids and blood transfusion, and reversal of any anticoagulation or coagulopathy",
-   "Urgent VATS or thoracotomy for massive haemothorax, persistently high chest-drain output or haemodynamic instability",
-   "Early VATS evacuation of a retained, incompletely drained haemothorax to prevent empyema and fibrothorax",
-   "Continuous monitoring of chest drain output and haemodynamic status",
-   "Treat the underlying cause, whether traumatic vascular injury, malignancy, thoracic aortic pathology or catamenial haemothorax",
-   "Analgesia and chest physiotherapy to aid lung re-expansion, with prompt treatment of any secondary empyema"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "haemothorax-pathway",
-   "title": "haemothorax: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Haemothorax is defined by blood in the pleural space; a pleural fluid haematocrit greater than half the peripheral blood haematocrit confirms it.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haemodynamic instability or signs of haemorrhagic shock",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Erect chest radiograph, Thoracic ultrasound (eFAST), CT thorax, with contrast or angiography if vascular injury is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt large-bore intercostal chest drain insertion to evacuate blood, re-expand the lung and quantify ongoing loss"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Using an inadequate or small-bore drain that fails to evacuate blood and leaves retained clot."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of haemothorax."
-  }
- ],
- "tables": [
-  {
-   "id": "haemothorax-matrix",
-   "title": "haemothorax: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Haemothorax is defined by blood in the pleural space; a pleural fluid haematocrit greater than half the peripheral blood",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Thoracic surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Haemothorax is defined by blood in the pleural space; a pleural fluid haematocrit greater than half the peripheral blood haematocrit confirms it.",
+      "Trauma, whether blunt or penetrating, is the commonest cause; non-traumatic causes include malignancy, thoracic aortic rupture or dissection, pulmonary infarction, anticoagulation and catamenial (thoracic endometriosis) haemothorax.",
+      "Iatrogenic haemothorax follows central venous line insertion, pleural procedures and cardiothoracic surgery.",
+      "Initial management combines resuscitation with prompt large-bore chest tube drainage, which also quantifies ongoing blood loss.",
+      "Surgery (VATS or thoracotomy) is indicated for massive haemothorax (classically more than 1.5 litres drained immediately), ongoing bleeding (for example a persistently high hourly chest-drain output for several hours) or haemodynamic instability.",
+      "Retained, incompletely drained haemothorax predisposes to empyema and fibrothorax and is best managed by early VATS evacuation.",
+      "Point-of-care ultrasound (eFAST), erect chest radiograph and CT establish the diagnosis, with CT best for quantifying retained clot.",
+      "Chest drain output, physiology and imaging together, rather than any single value, should drive the decision to operate."
     ],
-    [
-     "Key Investigations",
-     "Erect chest radiograph, Thoracic ultrasound (eFAST), CT thorax, with contrast or angiography if vascular injury is suspected",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bleeding into the pleural space arises from injury to chest wall vessels (intercostal or internal mammary arteries), lung parenchyma, the great vessels or heart, or from non-traumatic vascular and pleural pathology. Because the pleura and the moving lung defibrinate blood, a haemothorax often fails to clot completely and can be drained; retained clot, however, organises, while pleural enzymes and mechanical motion may sustain oozing. Large accumulations compress the lung and, if under tension, impair venous return, producing combined hypovolaemic and obstructive compromise. Retained blood is an excellent culture medium and a scaffold for fibroblast proliferation, leading to empyema or a fibrothorax that traps the lung.",
+    "additionalDifferentials": [
+      "Simple or malignant pleural effusion",
+      "Empyema",
+      "Haemorrhagic pleural effusion not meeting haematocrit criteria (for example malignancy, pulmonary embolism)",
+      "Pneumothorax or haemopneumothorax",
+      "Diaphragmatic rupture with herniated abdominal contents",
+      "Chylothorax"
     ],
-    [
-     "Primary Differentials",
-     "Simple or malignant pleural effusion, Empyema, Haemorrhagic pleural effusion not meeting haematocrit criteria (for example",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Erect chest radiograph",
+      "Thoracic ultrasound (eFAST)",
+      "CT thorax, with contrast or angiography if vascular injury is suspected",
+      "Pleural fluid haematocrit compared with blood haematocrit",
+      "Full blood count, coagulation screen and group and save or crossmatch",
+      "Continuous monitoring of chest drain output",
+      "Echocardiography or CT aortogram if an aortic or cardiac source is suspected"
     ],
-    [
-     "Management Strategy",
-     "Prompt large-bore intercostal chest drain insertion to evacuate blood, re-expand the lung and quantify ongoing loss",
-     "Core treatment modality"
+    "redFlags": [
+      "Haemodynamic instability or signs of haemorrhagic shock",
+      "Massive initial chest drain output or persistently high hourly output",
+      "Tension physiology (tracheal deviation, distended neck veins, hypotension)",
+      "Penetrating injury to the cardiac box or a widened mediastinum on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Using an inadequate or small-bore drain that fails to evacuate blood and leaves retained clot.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the cause and the promptness of drainage; most traumatic haemothoraces resolve well with a chest drain, but delayed or retained haemothorax risks empyema and fibrothorax, and massive haemothorax carries significant mortality.",
+    "pitfalls": [
+      "Using an inadequate or small-bore drain that fails to evacuate blood and leaves retained clot.",
+      "Assuming a small effusion on a supine film excludes a significant haemothorax.",
+      "Delaying surgery in the face of ongoing bleeding while awaiting further imaging.",
+      "Overlooking non-traumatic causes such as aortic, malignant, catamenial or anticoagulation-related bleeding.",
+      "Failing to address retained haemothorax early, allowing empyema or fibrothorax to develop."
+    ],
+    "references": [
+      "Sabiston Textbook of Surgery",
+      "Advanced Trauma Life Support (ATLS) Manual",
+      "BTS Pleural Disease Guideline"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt large-bore intercostal chest drain insertion to evacuate blood, re-expand the lung and quantify ongoing loss",
+      "Concurrent resuscitation with intravenous fluids and blood transfusion, and reversal of any anticoagulation or coagulopathy",
+      "Urgent VATS or thoracotomy for massive haemothorax, persistently high chest-drain output or haemodynamic instability",
+      "Early VATS evacuation of a retained, incompletely drained haemothorax to prevent empyema and fibrothorax",
+      "Continuous monitoring of chest drain output and haemodynamic status",
+      "Treat the underlying cause, whether traumatic vascular injury, malignancy, thoracic aortic pathology or catamenial haemothorax",
+      "Analgesia and chest physiotherapy to aid lung re-expansion, with prompt treatment of any secondary empyema"
     ]
-   ],
-   "caption": "Overview comparison matrix for haemothorax."
-  }
- ],
- "diagrams": [
-  {
-   "id": "haemothorax-real-image",
-   "title": "haemothorax: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "haemothorax-pathway",
+      "title": "haemothorax: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Haemothorax is defined by blood in the pleural space; a pleural fluid haematocrit greater than half the peripheral blood haematocrit confirms it.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haemodynamic instability or signs of haemorrhagic shock",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Erect chest radiograph, Thoracic ultrasound (eFAST), CT thorax, with contrast or angiography if vascular injury is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt large-bore intercostal chest drain insertion to evacuate blood, re-expand the lung and quantify ongoing loss"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Using an inadequate or small-bore drain that fails to evacuate blood and leaves retained clot."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of haemothorax."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "haemothorax-matrix",
+      "title": "haemothorax: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Haemothorax is defined by blood in the pleural space; a pleural fluid haematocrit greater than half the peripheral blood",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Erect chest radiograph, Thoracic ultrasound (eFAST), CT thorax, with contrast or angiography if vascular injury is suspected",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Simple or malignant pleural effusion, Empyema, Haemorrhagic pleural effusion not meeting haematocrit criteria (for example",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt large-bore intercostal chest drain insertion to evacuate blood, re-expand the lung and quantify ongoing loss",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Using an inadequate or small-bore drain that fails to evacuate blood and leaves retained clot.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for haemothorax."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "haemothorax-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pleural fluid haematocrit",
+          "cells": [
+            {
+              "text": "Greater than half the peripheral blood haematocrit confirms haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest drain output",
+          "cells": [
+            {
+              "text": "Classically more than 1.5 litres drained immediately indicates massive haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Point-of-care ultrasound (eFAST)",
+          "cells": [
+            {
+              "text": "Helps establish the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect chest radiograph",
+          "cells": [
+            {
+              "text": "Helps establish the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT thorax",
+          "cells": [
+            {
+              "text": "Best for quantifying retained clot"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemothorax-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemorrhagic effusion not meeting haematocrit criteria",
+          "cells": [
+            {
+              "text": "Pleural fluid haematocrit not above half of peripheral value; malignancy or pulmonary embolism as causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diaphragmatic rupture",
+          "cells": [
+            {
+              "text": "Herniated abdominal contents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empyema",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax or haemopneumothorax",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemothorax-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Large-bore intercostal chest drain",
+          "cells": [
+            {
+              "text": "Evacuates blood, re-expands the lung and quantifies ongoing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resuscitation",
+          "cells": [
+            {
+              "text": "Intravenous fluids and blood transfusion; reverse anticoagulation or coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent VATS or thoracotomy",
+          "cells": [
+            {
+              "text": "Massive haemothorax, persistently high drain output or haemodynamic instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early VATS evacuation",
+          "cells": [
+            {
+              "text": "Retained, incompletely drained haemothorax, to prevent empyema and fibrothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Continuous chest drain output and haemodynamic status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Traumatic vascular injury, malignancy, thoracic aortic pathology or catamenial haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Aid lung re-expansion; treat any secondary empyema promptly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "haemothorax-dx-mgmt",
+      "title": "Diagnosis and management of haemothorax",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected haemothorax: blood in the pleural space after trauma or procedure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (shock, tension physiology, massive or high drain output)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: resuscitate and urgent VATS or thoracotomy for massive bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Erect chest radiograph, eFAST and CT thorax; compare pleural and blood haematocrit",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does pleural fluid haematocrit exceed half of the peripheral blood value?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider effusion, empyema, pneumothorax or diaphragmatic rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Large-bore intercostal chest drain; resuscitate and reverse coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor drain output and haemodynamic status",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early VATS evacuation if clot is retained, to prevent empyema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Lung re-expansion with controlled loss, or surgery if bleeding persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

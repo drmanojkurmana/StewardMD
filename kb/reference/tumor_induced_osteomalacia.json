@@ -1,175 +1,480 @@
 {
- "id": "tumor_induced_osteomalacia",
- "name": "Tumour-induced (oncogenic) osteomalacia (FGF23)",
- "aliases": [
-  "TIO",
-  "oncogenic osteomalacia",
-  "paraneoplastic osteomalacia",
-  "phosphaturic mesenchymal tumour syndrome",
-  "tumour induced osteomalacia"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Primer on the Metabolic Bone Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acquired paraneoplastic syndrome in which a usually small, benign mesenchymal tumour secretes fibroblast growth factor 23 (FGF23), driving renal phosphate wasting",
-   "Typically presents in adults with insidious bone pain, proximal muscle weakness, fatigue, and recurrent fragility fractures often misattributed to other rheumatological disease",
-   "Biochemistry shows hypophosphataemia with inappropriate phosphaturia and a low or inappropriately normal 1,25-dihydroxyvitamin D despite the low phosphate",
-   "Serum calcium and parathyroid hormone are usually normal, and alkaline phosphatase is commonly raised reflecting osteomalacia",
-   "The culprit phosphaturic mesenchymal tumour is often tiny and occult, hiding in the extremities, craniofacial region, or acral soft tissue and bone",
-   "Functional imaging exploiting somatostatin-receptor expression, alongside FGF23-guided venous sampling, aids localisation of an elusive tumour",
-   "Complete surgical resection is curative and normalises phosphate; when the tumour cannot be found or removed, phosphate salts with active vitamin D or FGF23-directed antibody therapy are used"
+  "id": "tumor_induced_osteomalacia",
+  "name": "Tumour-induced (oncogenic) osteomalacia (FGF23)",
+  "aliases": [
+    "TIO",
+    "oncogenic osteomalacia",
+    "paraneoplastic osteomalacia",
+    "phosphaturic mesenchymal tumour syndrome",
+    "tumour induced osteomalacia"
   ],
-  "pathophysiology": "Phosphaturic mesenchymal tumours ectopically overproduce FGF23 (and related phosphatonins). Circulating FGF23 acts on the proximal renal tubule to downregulate sodium-phosphate cotransporters, causing renal phosphate wasting and hypophosphataemia. FGF23 also suppresses 1-alpha-hydroxylase and stimulates 24-hydroxylase, so 1,25-dihydroxyvitamin D is inappropriately low or normal for the degree of hypophosphataemia, limiting compensatory intestinal phosphate absorption. Chronic hypophosphataemia impairs mineralisation of osteoid, producing osteomalacia with bone pain, weakness, and fractures. Because the mechanism mirrors the inherited FGF23-driven rickets syndromes, the biochemical fingerprint is shared, but here it is acquired and reversible with tumour removal.",
-  "additionalDifferentials": [
-   "X-linked hypophosphataemic rickets and other inherited FGF23-mediated phosphate-wasting disorders",
-   "Nutritional or malabsorptive vitamin D deficiency osteomalacia",
-   "Fanconi syndrome with generalised proximal tubulopathy",
-   "Primary hyperparathyroidism and other metabolic bone disease",
-   "Polymyalgia rheumatica or inflammatory myopathy given the proximal weakness",
-   "Metastatic bone disease or multiple myeloma"
-  ],
-  "additionalInvestigations": [
-   "Fasting serum phosphate with paired urine studies (tubular reabsorption of phosphate / TmP-GFR) to confirm renal phosphate wasting",
-   "Serum calcium, parathyroid hormone, alkaline phosphatase, and 25- and 1,25-dihydroxyvitamin D metabolites",
-   "Measurement of intact FGF23, which is elevated or inappropriately normal",
-   "Functional somatostatin-receptor imaging (e.g. gallium-labelled DOTA-peptide PET) to localise the occult tumour",
-   "Cross-sectional anatomical imaging of suspicious sites and selective venous sampling for FGF23 when localisation is difficult",
-   "Histological confirmation of a phosphaturic mesenchymal tumour after resection"
-  ],
-  "redFlags": [
-   "Recurrent low-trauma fractures with unexplained persistent hypophosphataemia",
-   "Progressive proximal weakness leading to falls and immobility",
-   "Failure of symptoms to resolve after apparent resection, suggesting incomplete removal or malignant behaviour",
-   "Nephrocalcinosis or hypercalciuria complicating high-dose phosphate and active vitamin D therapy"
-  ],
-  "prognosis": "Complete resection of the responsible tumour is curative, with rapid normalisation of phosphate and gradual healing of osteomalacia; when the tumour is unresectable or occult, long-term medical therapy controls symptoms but requires monitoring for secondary hyperparathyroidism and nephrocalcinosis.",
-  "pitfalls": [
-   "Overlooking hypophosphataemia because routine panels omit phosphate or the low value is dismissed as artefact",
-   "Attributing symptoms to primary rheumatological or psychiatric illness, delaying diagnosis for years",
-   "Abandoning the search for an occult tumour before functional and venous sampling techniques are exhausted",
-   "Inducing tertiary hyperparathyroidism and renal calcinosis with unmonitored phosphate and calcitriol supplementation"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical resection of the culprit phosphaturic mesenchymal tumour, which is curative and rapidly normalises phosphate",
-   "Oral phosphate supplementation combined with active vitamin D (calcitriol or alfacalcidol) when the tumour is occult or unresectable",
-   "The anti-FGF23 monoclonal antibody burosumab as targeted medical therapy where conventional replacement is inadequate",
-   "Functional somatostatin-receptor imaging with anatomical imaging and selective venous FGF23 sampling to localise the elusive tumour",
-   "Ablative approaches such as radiofrequency ablation for tumours not amenable to surgical resection",
-   "Surveillance for the complications of medical therapy, namely secondary and tertiary hyperparathyroidism and nephrocalcinosis",
-   "Multidisciplinary metabolic bone, surgical and radiology input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "tumor_induced_osteomalacia-pathway",
-   "title": "Tumour-induced (oncogenic) osteomalacia (FGF23): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acquired paraneoplastic syndrome in which a usually small, benign mesenchymal tumour secretes fibroblast growth factor 23 (FGF23), driving renal phosphate wasting",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent low-trauma fractures with unexplained persistent hypophosphataemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting serum phosphate with paired urine studies (tubular reabsorption of phosphate / TmP-GFR) to confirm renal phosphate wasting, Serum calcium, parathyroid hormone, alkaline phosphatase, and 25- and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical resection of the culprit phosphaturic mesenchymal tumour, which is curative and rapidly normalises phosphate"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking hypophosphataemia because routine panels omit phosphate or the low value is dismissed as artefact"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of tumour-induced (oncogenic) osteomalacia (fgf23)."
-  }
- ],
- "tables": [
-  {
-   "id": "tumor_induced_osteomalacia-matrix",
-   "title": "Tumour-induced (oncogenic) osteomalacia (FGF23): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acquired paraneoplastic syndrome in which a usually small, benign mesenchymal tumour secretes fibroblast growth factor 23",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Primer on the Metabolic Bone Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acquired paraneoplastic syndrome in which a usually small, benign mesenchymal tumour secretes fibroblast growth factor 23 (FGF23), driving renal phosphate wasting",
+      "Typically presents in adults with insidious bone pain, proximal muscle weakness, fatigue, and recurrent fragility fractures often misattributed to other rheumatological disease",
+      "Biochemistry shows hypophosphataemia with inappropriate phosphaturia and a low or inappropriately normal 1,25-dihydroxyvitamin D despite the low phosphate",
+      "Serum calcium and parathyroid hormone are usually normal, and alkaline phosphatase is commonly raised reflecting osteomalacia",
+      "The culprit phosphaturic mesenchymal tumour is often tiny and occult, hiding in the extremities, craniofacial region, or acral soft tissue and bone",
+      "Functional imaging exploiting somatostatin-receptor expression, alongside FGF23-guided venous sampling, aids localisation of an elusive tumour",
+      "Complete surgical resection is curative and normalises phosphate; when the tumour cannot be found or removed, phosphate salts with active vitamin D or FGF23-directed antibody therapy are used"
     ],
-    [
-     "Key Investigations",
-     "Fasting serum phosphate with paired urine studies (tubular reabsorption of phosphate / TmP-GFR) to confirm renal phosphate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phosphaturic mesenchymal tumours ectopically overproduce FGF23 (and related phosphatonins). Circulating FGF23 acts on the proximal renal tubule to downregulate sodium-phosphate cotransporters, causing renal phosphate wasting and hypophosphataemia. FGF23 also suppresses 1-alpha-hydroxylase and stimulates 24-hydroxylase, so 1,25-dihydroxyvitamin D is inappropriately low or normal for the degree of hypophosphataemia, limiting compensatory intestinal phosphate absorption. Chronic hypophosphataemia impairs mineralisation of osteoid, producing osteomalacia with bone pain, weakness, and fractures. Because the mechanism mirrors the inherited FGF23-driven rickets syndromes, the biochemical fingerprint is shared, but here it is acquired and reversible with tumour removal.",
+    "additionalDifferentials": [
+      "X-linked hypophosphataemic rickets and other inherited FGF23-mediated phosphate-wasting disorders",
+      "Nutritional or malabsorptive vitamin D deficiency osteomalacia",
+      "Fanconi syndrome with generalised proximal tubulopathy",
+      "Primary hyperparathyroidism and other metabolic bone disease",
+      "Polymyalgia rheumatica or inflammatory myopathy given the proximal weakness",
+      "Metastatic bone disease or multiple myeloma"
     ],
-    [
-     "Primary Differentials",
-     "X-linked hypophosphataemic rickets and other inherited FGF23-mediated phosphate-wasting disorders, Nutritional or malabsorptive",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting serum phosphate with paired urine studies (tubular reabsorption of phosphate / TmP-GFR) to confirm renal phosphate wasting",
+      "Serum calcium, parathyroid hormone, alkaline phosphatase, and 25- and 1,25-dihydroxyvitamin D metabolites",
+      "Measurement of intact FGF23, which is elevated or inappropriately normal",
+      "Functional somatostatin-receptor imaging (e.g. gallium-labelled DOTA-peptide PET) to localise the occult tumour",
+      "Cross-sectional anatomical imaging of suspicious sites and selective venous sampling for FGF23 when localisation is difficult",
+      "Histological confirmation of a phosphaturic mesenchymal tumour after resection"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical resection of the culprit phosphaturic mesenchymal tumour, which is curative and rapidly normalises phosphate",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent low-trauma fractures with unexplained persistent hypophosphataemia",
+      "Progressive proximal weakness leading to falls and immobility",
+      "Failure of symptoms to resolve after apparent resection, suggesting incomplete removal or malignant behaviour",
+      "Nephrocalcinosis or hypercalciuria complicating high-dose phosphate and active vitamin D therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking hypophosphataemia because routine panels omit phosphate or the low value is dismissed as artefact",
-     "Prevent diagnostic or management error"
+    "prognosis": "Complete resection of the responsible tumour is curative, with rapid normalisation of phosphate and gradual healing of osteomalacia; when the tumour is unresectable or occult, long-term medical therapy controls symptoms but requires monitoring for secondary hyperparathyroidism and nephrocalcinosis.",
+    "pitfalls": [
+      "Overlooking hypophosphataemia because routine panels omit phosphate or the low value is dismissed as artefact",
+      "Attributing symptoms to primary rheumatological or psychiatric illness, delaying diagnosis for years",
+      "Abandoning the search for an occult tumour before functional and venous sampling techniques are exhausted",
+      "Inducing tertiary hyperparathyroidism and renal calcinosis with unmonitored phosphate and calcitriol supplementation"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Primer on the Metabolic Bone Diseases and Disorders of Mineral Metabolism"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical resection of the culprit phosphaturic mesenchymal tumour, which is curative and rapidly normalises phosphate",
+      "Oral phosphate supplementation combined with active vitamin D (calcitriol or alfacalcidol) when the tumour is occult or unresectable",
+      "The anti-FGF23 monoclonal antibody burosumab as targeted medical therapy where conventional replacement is inadequate",
+      "Functional somatostatin-receptor imaging with anatomical imaging and selective venous FGF23 sampling to localise the elusive tumour",
+      "Ablative approaches such as radiofrequency ablation for tumours not amenable to surgical resection",
+      "Surveillance for the complications of medical therapy, namely secondary and tertiary hyperparathyroidism and nephrocalcinosis",
+      "Multidisciplinary metabolic bone, surgical and radiology input"
     ]
-   ],
-   "caption": "Overview comparison matrix for tumour-induced (oncogenic) osteomalacia (fgf23)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "tumor-induced-osteomalacia-real-image",
-   "title": "Tumour-induced (oncogenic) osteomalacia (FGF23): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "tumor_induced_osteomalacia-pathway",
+      "title": "Tumour-induced (oncogenic) osteomalacia (FGF23): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acquired paraneoplastic syndrome in which a usually small, benign mesenchymal tumour secretes fibroblast growth factor 23 (FGF23), driving renal phosphate wasting",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent low-trauma fractures with unexplained persistent hypophosphataemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting serum phosphate with paired urine studies (tubular reabsorption of phosphate / TmP-GFR) to confirm renal phosphate wasting, Serum calcium, parathyroid hormone, alkaline phosphatase, and 25- and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical resection of the culprit phosphaturic mesenchymal tumour, which is curative and rapidly normalises phosphate"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking hypophosphataemia because routine panels omit phosphate or the low value is dismissed as artefact"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of tumour-induced (oncogenic) osteomalacia (fgf23)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "tumor_induced_osteomalacia-matrix",
+      "title": "Tumour-induced (oncogenic) osteomalacia (FGF23): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acquired paraneoplastic syndrome in which a usually small, benign mesenchymal tumour secretes fibroblast growth factor 23",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting serum phosphate with paired urine studies (tubular reabsorption of phosphate / TmP-GFR) to confirm renal phosphate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "X-linked hypophosphataemic rickets and other inherited FGF23-mediated phosphate-wasting disorders, Nutritional or malabsorptive",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical resection of the culprit phosphaturic mesenchymal tumour, which is curative and rapidly normalises phosphate",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking hypophosphataemia because routine panels omit phosphate or the low value is dismissed as artefact",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for tumour-induced (oncogenic) osteomalacia (fgf23)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Primer on the Metabolic Bone Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tumor_induced_osteomalacia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting serum phosphate with paired urine studies",
+          "cells": [
+            {
+              "text": "Hypophosphataemia with inappropriate phosphaturia (renal phosphate wasting)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium and parathyroid hormone",
+          "cells": [
+            {
+              "text": "Usually normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Commonly raised, reflecting osteomalacia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "25- and 1,25-dihydroxyvitamin D",
+          "cells": [
+            {
+              "text": "1,25-dihydroxyvitamin D low or inappropriately normal despite low phosphate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intact FGF23",
+          "cells": [
+            {
+              "text": "Elevated or inappropriately normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin-receptor functional imaging",
+          "cells": [
+            {
+              "text": "Localises the occult phosphaturic tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective venous sampling for FGF23",
+          "cells": [
+            {
+              "text": "Used when localisation is difficult"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumor_induced_osteomalacia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked hypophosphataemic rickets",
+          "cells": [
+            {
+              "text": "Shares the FGF23 biochemical pattern; here the cause is acquired and reversible with tumour removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymyalgia rheumatica or inflammatory myopathy",
+          "cells": [
+            {
+              "text": "Bone pain, proximal weakness and fatigue are often misattributed to rheumatological disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Calcium and parathyroid hormone are usually normal in this condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "tumor_induced_osteomalacia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Curative; normalises phosphate once the culprit tumour is removed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphate with active vitamin D",
+          "cells": [
+            {
+              "text": "Calcitriol or alfacalcidol when the tumour is occult or unresectable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Burosumab",
+          "cells": [
+            {
+              "text": "Anti-FGF23 monoclonal antibody where conventional replacement is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localisation",
+          "cells": [
+            {
+              "text": "Somatostatin-receptor imaging, anatomical imaging and selective venous FGF23 sampling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablation",
+          "cells": [
+            {
+              "text": "Radiofrequency ablation for tumours not amenable to surgical resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance on medical therapy",
+          "cells": [
+            {
+              "text": "Secondary and tertiary hyperparathyroidism and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Metabolic bone, surgical and radiology teams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tumor_induced_osteomalacia-dx-mgmt",
+      "title": "Diagnosis and management of Tumour-induced (oncogenic) osteomalacia (FGF23)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected tumour-induced osteomalacia: bone pain, weakness, fractures and low phosphate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fractures, progressive weakness, or symptoms after resection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for incomplete removal or malignant behaviour of the tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting phosphate, intact FGF23, vitamin D metabolites and somatostatin-receptor PET",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the phosphaturic tumour localised on functional or anatomical imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Use selective venous FGF23 sampling; do not abandon the search for the tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete surgical resection of the culprit tumour, which is curative",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Phosphate with calcitriol or alfacalcidol when the tumour is occult or unresectable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Burosumab where conventional replacement is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for hyperparathyroidism and nephrocalcinosis from medical therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resection normalises phosphate; occult disease needs long-term medical control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

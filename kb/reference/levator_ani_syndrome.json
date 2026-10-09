@@ -1,175 +1,482 @@
 {
- "id": "levator_ani_syndrome",
- "name": "Levator ani syndrome",
- "aliases": [
-  "levator syndrome",
-  "puborectalis syndrome",
-  "chronic proctalgia",
-  "levator ani spasm"
- ],
- "class": "non_infective",
- "system": "Colorectal / Pelvic floor",
- "specialty": "Colorectal Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A functional anorectal pain disorder marked by a chronic or recurrent dull ache or pressure high in the rectum, often worse with sitting",
-   "Episodes typically last twenty minutes or longer, distinguishing it from the brief attacks of proctalgia fugax",
-   "Digital rectal examination classically reproduces the pain on posterior traction of the puborectalis, which is often tender and tight",
-   "It is a diagnosis of exclusion, so structural, inflammatory, and neoplastic causes of anorectal pain must first be ruled out",
-   "Associated with pelvic floor tension, psychological stress, and dyssynergic defecation",
-   "Management is conservative and directed at the pelvic floor: reassurance, warm baths, pelvic floor physiotherapy and biofeedback, digital massage, and muscle-relaxation or neuromodulation strategies",
-   "Overlaps with other functional pelvic floor and defecatory disorders"
+  "id": "levator_ani_syndrome",
+  "name": "Levator ani syndrome",
+  "aliases": [
+    "levator syndrome",
+    "puborectalis syndrome",
+    "chronic proctalgia",
+    "levator ani spasm"
   ],
-  "pathophysiology": "Levator ani syndrome is thought to arise from chronic spasm and tension of the pelvic floor muscles, particularly the puborectalis and levator ani, producing a persistent aching or pressure sensation high in the rectum. There is no structural lesion; central and peripheral pain sensitisation, pelvic floor dyssynergia, and psychological stress are all implicated. It sits within the spectrum of functional anorectal pain, sharing mechanisms with proctalgia fugax and dyssynergic defecation.",
-  "additionalDifferentials": [
-   "Proctalgia fugax",
-   "Coccygodynia",
-   "Chronic anal fissure",
-   "Anorectal abscess or fistula",
-   "Pudendal neuralgia",
-   "Endometriosis or other gynaecological pelvic pain",
-   "Presacral or pelvic tumour"
-  ],
-  "additionalInvestigations": [
-   "Digital rectal examination assessing puborectalis tenderness and pain on traction",
-   "Proctoscopy or sigmoidoscopy to exclude mucosal disease",
-   "Anorectal manometry and balloon expulsion to assess for dyssynergia",
-   "Defecography where obstructed defecation is suspected",
-   "Pelvic MRI or cross-sectional imaging to exclude structural or neoplastic causes",
-   "Colonoscopy where alarm features or age warrant exclusion of malignancy"
-  ],
-  "redFlags": [
-   "Rectal bleeding, weight loss, or a palpable mass suggesting malignancy",
-   "Nocturnal or progressive pain unresponsive to conservative measures",
-   "Neurological deficit suggesting a sacral or cauda equina lesion",
-   "New anorectal pain in an older patient without a prior functional history"
-  ],
-  "prognosis": "A benign but often chronic and relapsing condition; many patients improve with pelvic floor physiotherapy, biofeedback, and reassurance, though symptoms can persist or recur.",
-  "pitfalls": [
-   "Labelling anorectal pain as functional without excluding structural or neoplastic disease",
-   "Overlooking coexisting dyssynergic defecation amenable to biofeedback",
-   "Repeated ineffective surgery for presumed fissure or haemorrhoids",
-   "Underestimating the contribution of psychological stress and pelvic floor tension"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Rome IV Functional Gastrointestinal Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and explanation of the benign functional nature of the disorder",
-   "Pelvic-floor physiotherapy and biofeedback to retrain and relax the puborectalis",
-   "Digital transrectal massage of the levator ani and warm sitz baths for symptomatic relief",
-   "Electrogalvanic stimulation and neuromodulation strategies for refractory pain",
-   "Address dyssynergic defecation and treat coexisting constipation",
-   "Diagnosis of exclusion: rule out structural, inflammatory and neoplastic anorectal disease first",
-   "Psychological support for associated stress and chronic pain"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "levator_ani_syndrome-pathway",
-   "title": "Levator ani syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A functional anorectal pain disorder marked by a chronic or recurrent dull ache or pressure high in the rectum, often worse with sitting",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rectal bleeding, weight loss, or a palpable mass suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Digital rectal examination assessing puborectalis tenderness and pain on traction, Proctoscopy or sigmoidoscopy to exclude mucosal disease, Anorectal manometry and balloon expulsion to assess for dyssynergia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and explanation of the benign functional nature of the disorder"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling anorectal pain as functional without excluding structural or neoplastic disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of levator ani syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "levator_ani_syndrome-matrix",
-   "title": "Levator ani syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A functional anorectal pain disorder marked by a chronic or recurrent dull ache or pressure high in the rectum, often worse with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Colorectal / Pelvic floor",
+  "specialty": "Colorectal Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A functional anorectal pain disorder marked by a chronic or recurrent dull ache or pressure high in the rectum, often worse with sitting",
+      "Episodes typically last twenty minutes or longer, distinguishing it from the brief attacks of proctalgia fugax",
+      "Digital rectal examination classically reproduces the pain on posterior traction of the puborectalis, which is often tender and tight",
+      "It is a diagnosis of exclusion, so structural, inflammatory, and neoplastic causes of anorectal pain must first be ruled out",
+      "Associated with pelvic floor tension, psychological stress, and dyssynergic defecation",
+      "Management is conservative and directed at the pelvic floor: reassurance, warm baths, pelvic floor physiotherapy and biofeedback, digital massage, and muscle-relaxation or neuromodulation strategies",
+      "Overlaps with other functional pelvic floor and defecatory disorders"
     ],
-    [
-     "Key Investigations",
-     "Digital rectal examination assessing puborectalis tenderness and pain on traction, Proctoscopy or sigmoidoscopy to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Levator ani syndrome is thought to arise from chronic spasm and tension of the pelvic floor muscles, particularly the puborectalis and levator ani, producing a persistent aching or pressure sensation high in the rectum. There is no structural lesion; central and peripheral pain sensitisation, pelvic floor dyssynergia, and psychological stress are all implicated. It sits within the spectrum of functional anorectal pain, sharing mechanisms with proctalgia fugax and dyssynergic defecation.",
+    "additionalDifferentials": [
+      "Proctalgia fugax",
+      "Coccygodynia",
+      "Chronic anal fissure",
+      "Anorectal abscess or fistula",
+      "Pudendal neuralgia",
+      "Endometriosis or other gynaecological pelvic pain",
+      "Presacral or pelvic tumour"
     ],
-    [
-     "Primary Differentials",
-     "Proctalgia fugax, Coccygodynia, Chronic anal fissure",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Digital rectal examination assessing puborectalis tenderness and pain on traction",
+      "Proctoscopy or sigmoidoscopy to exclude mucosal disease",
+      "Anorectal manometry and balloon expulsion to assess for dyssynergia",
+      "Defecography where obstructed defecation is suspected",
+      "Pelvic MRI or cross-sectional imaging to exclude structural or neoplastic causes",
+      "Colonoscopy where alarm features or age warrant exclusion of malignancy"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and explanation of the benign functional nature of the disorder",
-     "Core treatment modality"
+    "redFlags": [
+      "Rectal bleeding, weight loss, or a palpable mass suggesting malignancy",
+      "Nocturnal or progressive pain unresponsive to conservative measures",
+      "Neurological deficit suggesting a sacral or cauda equina lesion",
+      "New anorectal pain in an older patient without a prior functional history"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling anorectal pain as functional without excluding structural or neoplastic disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "A benign but often chronic and relapsing condition; many patients improve with pelvic floor physiotherapy, biofeedback, and reassurance, though symptoms can persist or recur.",
+    "pitfalls": [
+      "Labelling anorectal pain as functional without excluding structural or neoplastic disease",
+      "Overlooking coexisting dyssynergic defecation amenable to biofeedback",
+      "Repeated ineffective surgery for presumed fissure or haemorrhoids",
+      "Underestimating the contribution of psychological stress and pelvic floor tension"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Rome IV Functional Gastrointestinal Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and explanation of the benign functional nature of the disorder",
+      "Pelvic-floor physiotherapy and biofeedback to retrain and relax the puborectalis",
+      "Digital transrectal massage of the levator ani and warm sitz baths for symptomatic relief",
+      "Electrogalvanic stimulation and neuromodulation strategies for refractory pain",
+      "Address dyssynergic defecation and treat coexisting constipation",
+      "Diagnosis of exclusion: rule out structural, inflammatory and neoplastic anorectal disease first",
+      "Psychological support for associated stress and chronic pain"
     ]
-   ],
-   "caption": "Overview comparison matrix for levator ani syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "levator-ani-syndrome-real-image",
-   "title": "Levator ani syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "levator_ani_syndrome-pathway",
+      "title": "Levator ani syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A functional anorectal pain disorder marked by a chronic or recurrent dull ache or pressure high in the rectum, often worse with sitting",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rectal bleeding, weight loss, or a palpable mass suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Digital rectal examination assessing puborectalis tenderness and pain on traction, Proctoscopy or sigmoidoscopy to exclude mucosal disease, Anorectal manometry and balloon expulsion to assess for dyssynergia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and explanation of the benign functional nature of the disorder"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling anorectal pain as functional without excluding structural or neoplastic disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of levator ani syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "levator_ani_syndrome-matrix",
+      "title": "Levator ani syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A functional anorectal pain disorder marked by a chronic or recurrent dull ache or pressure high in the rectum, often worse with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Digital rectal examination assessing puborectalis tenderness and pain on traction, Proctoscopy or sigmoidoscopy to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Proctalgia fugax, Coccygodynia, Chronic anal fissure",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and explanation of the benign functional nature of the disorder",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling anorectal pain as functional without excluding structural or neoplastic disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for levator ani syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ASCRS Textbook of Colon and Rectal Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "levator_ani_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Digital rectal examination",
+          "cells": [
+            {
+              "text": "Puborectalis tenderness and pain on posterior traction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proctoscopy or sigmoidoscopy",
+          "cells": [
+            {
+              "text": "Excludes mucosal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal manometry and balloon expulsion",
+          "cells": [
+            {
+              "text": "Dyssynergia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defecography",
+          "cells": [
+            {
+              "text": "Where obstructed defecation is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI or cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Structural or neoplastic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "Where alarm features or age warrant it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "levator_ani_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Proctalgia fugax",
+          "cells": [
+            {
+              "text": "Brief, fleeting episodes; levator ani episodes last 20 minutes or longer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal fissure, abscess or fistula",
+          "cells": [
+            {
+              "text": "Structural causes excluded first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometriosis or gynaecological pelvic pain",
+          "cells": [
+            {
+              "text": "Gynaecological source of pelvic pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "levator_ani_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Explains the benign functional nature of the disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic-floor physiotherapy and biofeedback",
+          "cells": [
+            {
+              "text": "Retrains and relaxes the puborectalis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital massage and warm baths",
+          "cells": [
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrogalvanic stimulation and neuromodulation",
+          "cells": [
+            {
+              "text": "For refractory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting dyssynergia and constipation",
+          "cells": [
+            {
+              "text": "Treated alongside the pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of structural disease",
+          "cells": [
+            {
+              "text": "Diagnosis of exclusion; rule out structural, inflammatory and neoplastic disease first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "For associated stress and chronic pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "levator_ani_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Levator ani syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic dull, aching anorectal pressure high in the rectum, worse on sitting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bleeding, weight loss, mass, neurological deficit, abscess)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review to exclude malignancy, abscess or sacral lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Digital rectal exam for puborectalis tenderness, proctoscopy, manometry, MRI if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is puborectalis tenderness found with structural disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider proctalgia fugax, fissure, pudendal neuralgia or gynaecological pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance on the benign functional nature of the disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pelvic-floor physiotherapy and biofeedback to relax the puborectalis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Digital massage and warm sitz baths for symptomatic relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Electrogalvanic stimulation or neuromodulation for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat coexisting dyssynergic defecation and constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Benign but often chronic and relapsing; many improve with biofeedback and physiotherapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

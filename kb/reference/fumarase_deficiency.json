@@ -1,176 +1,434 @@
 {
- "id": "fumarase_deficiency",
- "name": "Fumarase deficiency",
- "aliases": [
-  "fumarase deficiency",
-  "fumarate hydratase deficiency",
-  "FH deficiency",
-  "fumaric aciduria",
-  "HLRCC-associated gene (FH)"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deficiency of fumarate hydratase (fumarase, FH), a tricarboxylic acid cycle enzyme that hydrates fumarate to malate, with both mitochondrial and cytosolic isoforms from one gene",
-   "The recessive biallelic disorder causes a severe neonatal/infantile encephalopathy with hypotonia, seizures, failure to thrive, and characteristic brain malformations such as polymicrogyria and an open operculum",
-   "The biochemical signature is markedly elevated urinary fumaric acid (fumarate) on organic acid analysis, often with other TCA-cycle intermediates",
-   "The same gene underlies hereditary leiomyomatosis and renal cell cancer (HLRCC): heterozygous carriers, including parents, are predisposed to cutaneous and uterine leiomyomas and an aggressive form of renal cell carcinoma",
-   "Fumarate acts as an oncometabolite, inhibiting 2-oxoglutarate-dependent dioxygenases and stabilising hypoxia-inducible factor, linking the enzyme defect to tumourigenesis",
-   "Recognition of a biallelic case has implications for the wider family because of the dominant cancer-predisposition risk in carriers",
-   "Management of the severe infantile disorder is supportive; carrier relatives warrant tumour surveillance",
-   "British spelling applies (tumour, leiomyomatosis, paediatric)"
+  "id": "fumarase_deficiency",
+  "name": "Fumarase deficiency",
+  "aliases": [
+    "fumarase deficiency",
+    "fumarate hydratase deficiency",
+    "FH deficiency",
+    "fumaric aciduria",
+    "HLRCC-associated gene (FH)"
   ],
-  "pathophysiology": "Fumarate hydratase catalyses the reversible hydration of fumarate to malate within the citric acid cycle, a step central to mitochondrial energy production. Biallelic loss of function impairs oxidative metabolism and causes fumarate and related intermediates to accumulate and spill into the urine as fumaric aciduria. The resulting bioenergetic failure in the developing brain produces the severe encephalopathy and cortical malformations. Accumulated fumarate also behaves as an oncometabolite: it competitively inhibits 2-oxoglutarate-dependent dioxygenases and stabilises hypoxia-inducible factor, promoting tumour formation, which is why monoallelic mutation carriers are at risk of leiomyomas and renal cell carcinoma (the HLRCC syndrome).",
-  "additionalDifferentials": [
-   "Other TCA-cycle and mitochondrial encephalopathies",
-   "Other organic acidurias presenting with neonatal encephalopathy",
-   "Congenital cortical malformation syndromes (e.g. other causes of polymicrogyria)",
-   "Perinatal hypoxic-ischaemic encephalopathy",
-   "Congenital infection causing brain malformation",
-   "Peroxisomal disorders with neonatal hypotonia and seizures"
-  ],
-  "additionalInvestigations": [
-   "Urine organic acids demonstrating marked fumarate elevation",
-   "Brain MRI for polymicrogyria, open operculum, and other malformations",
-   "Fumarate hydratase enzyme activity in leucocytes or fibroblasts",
-   "Molecular analysis of the FH gene",
-   "Family history and carrier assessment for HLRCC-related tumours",
-   "Renal imaging surveillance for carrier relatives"
-  ],
-  "redFlags": [
-   "Severe neonatal encephalopathy with seizures and brain malformation",
-   "Family history of uterine or cutaneous leiomyomas and renal cell carcinoma indicating HLRCC risk",
-   "New renal mass in a carrier relative requiring urgent evaluation",
-   "Progressive failure to thrive and neurological decline in the affected infant"
-  ],
-  "prognosis": "The biallelic infantile disorder carries a poor prognosis with severe neurological impairment and frequent early death. The clinically important legacy for the family is the autosomal dominant HLRCC cancer risk in heterozygous carriers, for whom surveillance can be life-saving.",
-  "pitfalls": [
-   "Failing to counsel the family about the dominant HLRCC cancer risk after diagnosing a biallelic case",
-   "Overlooking fumarate on organic acid analysis as a diagnostic clue",
-   "Attributing the malformation to hypoxic injury rather than a metabolic cause",
-   "Not arranging renal and dermatological surveillance for carrier relatives"
-  ],
-  "references": [
-   "Scriver's OMMBID: fumarase deficiency and the tricarboxylic acid cycle",
-   "Nyhan, Atlas of Inherited Metabolic Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy exists for the biallelic disorder; management is supportive",
-   "Antiepileptic drugs for seizures and supportive management of the severe encephalopathy",
-   "Nutritional support with gastrostomy feeding for failure to thrive and feeding difficulties",
-   "Multidisciplinary neurodisability and palliative care given the poor prognosis",
-   "Genetic counselling for the family, recognising the autosomal dominant HLRCC cancer risk in heterozygous carriers",
-   "Surveillance of carrier relatives for renal cell carcinoma with regular renal MRI",
-   "Dermatological and gynaecological review of carriers for cutaneous and uterine leiomyomas"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fumarase_deficiency-pathway",
-   "title": "Fumarase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deficiency of fumarate hydratase (fumarase, FH), a tricarboxylic acid cycle enzyme that hydrates fumarate to malate, with both mitochondrial and cytosolic isoforms from one gene",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal encephalopathy with seizures and brain malformation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urine organic acids demonstrating marked fumarate elevation, Brain MRI for polymicrogyria, open operculum, and other malformations, Fumarate hydratase enzyme activity in leucocytes or fibroblasts"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy exists for the biallelic disorder; management is supportive"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to counsel the family about the dominant HLRCC cancer risk after diagnosing a biallelic case"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fumarase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "fumarase_deficiency-matrix",
-   "title": "Fumarase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deficiency of fumarate hydratase (fumarase, FH), a tricarboxylic acid cycle enzyme that hydrates fumarate to malate,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deficiency of fumarate hydratase (fumarase, FH), a tricarboxylic acid cycle enzyme that hydrates fumarate to malate, with both mitochondrial and cytosolic isoforms from one gene",
+      "The recessive biallelic disorder causes a severe neonatal/infantile encephalopathy with hypotonia, seizures, failure to thrive, and characteristic brain malformations such as polymicrogyria and an open operculum",
+      "The biochemical signature is markedly elevated urinary fumaric acid (fumarate) on organic acid analysis, often with other TCA-cycle intermediates",
+      "The same gene underlies hereditary leiomyomatosis and renal cell cancer (HLRCC): heterozygous carriers, including parents, are predisposed to cutaneous and uterine leiomyomas and an aggressive form of renal cell carcinoma",
+      "Fumarate acts as an oncometabolite, inhibiting 2-oxoglutarate-dependent dioxygenases and stabilising hypoxia-inducible factor, linking the enzyme defect to tumourigenesis",
+      "Recognition of a biallelic case has implications for the wider family because of the dominant cancer-predisposition risk in carriers",
+      "Management of the severe infantile disorder is supportive; carrier relatives warrant tumour surveillance",
+      "British spelling applies (tumour, leiomyomatosis, paediatric)"
     ],
-    [
-     "Key Investigations",
-     "Urine organic acids demonstrating marked fumarate elevation, Brain MRI for polymicrogyria, open operculum, and other",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fumarate hydratase catalyses the reversible hydration of fumarate to malate within the citric acid cycle, a step central to mitochondrial energy production. Biallelic loss of function impairs oxidative metabolism and causes fumarate and related intermediates to accumulate and spill into the urine as fumaric aciduria. The resulting bioenergetic failure in the developing brain produces the severe encephalopathy and cortical malformations. Accumulated fumarate also behaves as an oncometabolite: it competitively inhibits 2-oxoglutarate-dependent dioxygenases and stabilises hypoxia-inducible factor, promoting tumour formation, which is why monoallelic mutation carriers are at risk of leiomyomas and renal cell carcinoma (the HLRCC syndrome).",
+    "additionalDifferentials": [
+      "Other TCA-cycle and mitochondrial encephalopathies",
+      "Other organic acidurias presenting with neonatal encephalopathy",
+      "Congenital cortical malformation syndromes (e.g. other causes of polymicrogyria)",
+      "Perinatal hypoxic-ischaemic encephalopathy",
+      "Congenital infection causing brain malformation",
+      "Peroxisomal disorders with neonatal hypotonia and seizures"
     ],
-    [
-     "Primary Differentials",
-     "Other TCA-cycle and mitochondrial encephalopathies, Other organic acidurias presenting with neonatal encephalopathy, Congenital",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urine organic acids demonstrating marked fumarate elevation",
+      "Brain MRI for polymicrogyria, open operculum, and other malformations",
+      "Fumarate hydratase enzyme activity in leucocytes or fibroblasts",
+      "Molecular analysis of the FH gene",
+      "Family history and carrier assessment for HLRCC-related tumours",
+      "Renal imaging surveillance for carrier relatives"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy exists for the biallelic disorder; management is supportive",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal encephalopathy with seizures and brain malformation",
+      "Family history of uterine or cutaneous leiomyomas and renal cell carcinoma indicating HLRCC risk",
+      "New renal mass in a carrier relative requiring urgent evaluation",
+      "Progressive failure to thrive and neurological decline in the affected infant"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to counsel the family about the dominant HLRCC cancer risk after diagnosing a biallelic case",
-     "Prevent diagnostic or management error"
+    "prognosis": "The biallelic infantile disorder carries a poor prognosis with severe neurological impairment and frequent early death. The clinically important legacy for the family is the autosomal dominant HLRCC cancer risk in heterozygous carriers, for whom surveillance can be life-saving.",
+    "pitfalls": [
+      "Failing to counsel the family about the dominant HLRCC cancer risk after diagnosing a biallelic case",
+      "Overlooking fumarate on organic acid analysis as a diagnostic clue",
+      "Attributing the malformation to hypoxic injury rather than a metabolic cause",
+      "Not arranging renal and dermatological surveillance for carrier relatives"
+    ],
+    "references": [
+      "Scriver's OMMBID: fumarase deficiency and the tricarboxylic acid cycle",
+      "Nyhan, Atlas of Inherited Metabolic Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy exists for the biallelic disorder; management is supportive",
+      "Antiepileptic drugs for seizures and supportive management of the severe encephalopathy",
+      "Nutritional support with gastrostomy feeding for failure to thrive and feeding difficulties",
+      "Multidisciplinary neurodisability and palliative care given the poor prognosis",
+      "Genetic counselling for the family, recognising the autosomal dominant HLRCC cancer risk in heterozygous carriers",
+      "Surveillance of carrier relatives for renal cell carcinoma with regular renal MRI",
+      "Dermatological and gynaecological review of carriers for cutaneous and uterine leiomyomas"
     ]
-   ],
-   "caption": "Overview comparison matrix for fumarase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fumarase-deficiency-real-image",
-   "title": "Fumarase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fumarase_deficiency-pathway",
+      "title": "Fumarase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deficiency of fumarate hydratase (fumarase, FH), a tricarboxylic acid cycle enzyme that hydrates fumarate to malate, with both mitochondrial and cytosolic isoforms from one gene",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal encephalopathy with seizures and brain malformation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urine organic acids demonstrating marked fumarate elevation, Brain MRI for polymicrogyria, open operculum, and other malformations, Fumarate hydratase enzyme activity in leucocytes or fibroblasts"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy exists for the biallelic disorder; management is supportive"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to counsel the family about the dominant HLRCC cancer risk after diagnosing a biallelic case"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fumarase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fumarase_deficiency-matrix",
+      "title": "Fumarase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deficiency of fumarate hydratase (fumarase, FH), a tricarboxylic acid cycle enzyme that hydrates fumarate to malate,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urine organic acids demonstrating marked fumarate elevation, Brain MRI for polymicrogyria, open operculum, and other",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other TCA-cycle and mitochondrial encephalopathies, Other organic acidurias presenting with neonatal encephalopathy, Congenital",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy exists for the biallelic disorder; management is supportive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to counsel the family about the dominant HLRCC cancer risk after diagnosing a biallelic case",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fumarase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fumarase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Marked fumarate elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Polymicrogyria, open operculum and other malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fumarate hydratase enzyme activity",
+          "cells": [
+            {
+              "text": "In leucocytes or fibroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular analysis of the FH gene",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and carrier assessment",
+          "cells": [
+            {
+              "text": "HLRCC-related tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal imaging surveillance",
+          "cells": [
+            {
+              "text": "For carrier relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fumarase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No disease-specific therapy exists for the biallelic disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptic drugs",
+          "cells": [
+            {
+              "text": "For seizures and severe encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrostomy feeding",
+          "cells": [
+            {
+              "text": "For failure to thrive and feeding difficulties"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodisability and palliative care",
+          "cells": [
+            {
+              "text": "Multidisciplinary, given the poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Dominant HLRCC cancer risk in heterozygous carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carrier surveillance",
+          "cells": [
+            {
+              "text": "Regular renal MRI for renal cell carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological and gynaecological review",
+          "cells": [
+            {
+              "text": "Cutaneous and uterine leiomyomas in carriers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fumarase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Fumarase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected fumarase deficiency: neonatal encephalopathy with seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe encephalopathy, HLRCC family history, carrier renal mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation of a new renal mass in a carrier relative",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine organic acids for fumarate, brain MRI and FH gene analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does marked fumarate on urine organic acids with FH testing confirm the disorder?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other TCA-cycle or mitochondrial encephalopathies or cortical malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care and antiepileptic drugs for seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gastrostomy feeding for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Counsel the family on the dominant HLRCC cancer risk in carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Regular renal MRI surveillance of carrier relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Biallelic infantile form: poor prognosis, severe impairment, frequent early death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

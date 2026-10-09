@@ -1,175 +1,471 @@
 {
- "id": "megalencephaly_capillary_malformation",
- "name": "Megalencephaly-capillary malformation syndrome",
- "aliases": [
-  "MCAP",
-  "M-CM",
-  "megalencephaly-capillary malformation-polymicrogyria syndrome",
-  "PIK3CA-related overgrowth spectrum"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Progressive megalencephaly with somatic and often asymmetric (segmental) overgrowth and cutaneous capillary malformations, classically a midline facial or philtral stain",
-   "Neurological features include developmental delay, hypotonia, seizures, and a risk of cerebellar tonsillar herniation from the disproportionate brain growth",
-   "Connective tissue laxity, cutaneous syndactyly, polydactyly, and frontal bossing are supportive features",
-   "Part of the PIK3CA-related overgrowth spectrum caused by post-zygotic (mosaic) activating PIK3CA variants",
-   "Because the variant is mosaic the condition is sporadic and not inherited, with the pattern of overgrowth reflecting the tissues carrying the variant",
-   "Brain imaging may show polymicrogyria, ventriculomegaly, cerebellar tonsillar ectopia, and white matter changes, so neuroimaging surveillance is important",
-   "Diagnosis often needs high-sensitivity sequencing of affected tissue because the mosaic variant may not be detectable in blood"
+  "id": "megalencephaly_capillary_malformation",
+  "name": "Megalencephaly-capillary malformation syndrome",
+  "aliases": [
+    "MCAP",
+    "M-CM",
+    "megalencephaly-capillary malformation-polymicrogyria syndrome",
+    "PIK3CA-related overgrowth spectrum"
   ],
-  "pathophysiology": "Megalencephaly-capillary malformation syndrome is part of the PIK3CA-related overgrowth spectrum and results from post-zygotic mosaic activating variants in PIK3CA, which constitutively activate the PI3K/AKT/mTOR pathway. Excessive signalling promotes unregulated growth and proliferation, producing brain overgrowth (megalencephaly with cortical malformation such as polymicrogyria), segmental somatic overgrowth, and vascular anomalies. Because the mutation is mosaic, disease burden and distribution depend on when and where the variant arose during development.",
-  "additionalDifferentials": [
-   "CLOVES syndrome and other PIK3CA-related overgrowth phenotypes",
-   "Sotos syndrome and other macrocephalic overgrowth syndromes",
-   "PTEN hamartoma tumour syndrome",
-   "Proteus syndrome",
-   "Klippel-Trenaunay syndrome",
-   "Benign familial macrocephaly and hydrocephalus"
-  ],
-  "additionalInvestigations": [
-   "High-sensitivity sequencing of affected tissue for mosaic PIK3CA variants",
-   "Brain MRI to assess megalencephaly, polymicrogyria, ventriculomegaly, and cerebellar tonsillar ectopia",
-   "Serial head circumference measurement and neuroimaging surveillance for progressive changes",
-   "EEG where seizures are suspected",
-   "Developmental assessment to guide intervention",
-   "Echocardiography and evaluation for arrhythmia given reported cardiac associations"
-  ],
-  "redFlags": [
-   "Signs of raised intracranial pressure or symptomatic cerebellar tonsillar herniation",
-   "New or worsening seizures",
-   "Rapidly progressive macrocephaly suggesting hydrocephalus",
-   "Cardiac arrhythmia or structural heart disease requiring assessment"
-  ],
-  "prognosis": "Outcome is variable and largely determined by the severity of brain involvement, with many individuals having developmental delay, epilepsy, and a risk of hindbrain herniation requiring neurosurgical monitoring. Somatic overgrowth and vascular features are managed supportively, and targeted pathway inhibition is being explored for severe disease.",
-  "pitfalls": [
-   "Excluding the diagnosis after normal blood testing rather than sequencing affected tissue",
-   "Overlooking evolving cerebellar tonsillar herniation on follow-up imaging",
-   "Attributing macrocephaly to benign familial causes and missing associated capillary malformation and overgrowth",
-   "Failing to recognise the sporadic mosaic nature and giving incorrect recurrence-risk counselling"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "GeneReviews: PIK3CA-Related Overgrowth Spectrum"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Consider targeted inhibition of the overactive PI3K/AKT/mTOR pathway with an mTOR inhibitor such as sirolimus or a PI3K inhibitor as emerging disease-directed therapy",
-   "Undertake neuroimaging surveillance with neurosurgical decompression for cerebellar tonsillar herniation and management of hydrocephalus from disproportionate brain overgrowth",
-   "Control the associated epilepsy with antiseizure medication",
-   "Treat symptomatic or disfiguring capillary malformations with pulsed-dye laser",
-   "Provide developmental therapies and management of hypotonia and developmental delay",
-   "Arrange cardiac evaluation and monitoring for arrhythmia given reported cardiac associations",
-   "Reassure that the condition arises from a post-zygotic mosaic PIK3CA variant and is sporadic rather than inherited",
-   "Coordinate multidisciplinary clinical genetics, neurology and neurosurgery input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "megalencephaly_capillary_malformation-pathway",
-   "title": "Megalencephaly-capillary malformation syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Progressive megalencephaly with somatic and often asymmetric (segmental) overgrowth and cutaneous capillary malformations, classically a midline facial or philtral stain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of raised intracranial pressure or symptomatic cerebellar tonsillar herniation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: High-sensitivity sequencing of affected tissue for mosaic PIK3CA variants, Brain MRI to assess megalencephaly, polymicrogyria, ventriculomegaly, and cerebellar tonsillar ectopia, Serial head circumference measurement and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Consider targeted inhibition of the overactive PI3K/AKT/mTOR pathway with an mTOR inhibitor such as sirolimus or a PI3K inhibitor as emerging disease-directed therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis after normal blood testing rather than sequencing affected tissue"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of megalencephaly-capillary malformation syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "megalencephaly_capillary_malformation-matrix",
-   "title": "Megalencephaly-capillary malformation syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Progressive megalencephaly with somatic and often asymmetric (segmental) overgrowth and cutaneous capillary malformations,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Progressive megalencephaly with somatic and often asymmetric (segmental) overgrowth and cutaneous capillary malformations, classically a midline facial or philtral stain",
+      "Neurological features include developmental delay, hypotonia, seizures, and a risk of cerebellar tonsillar herniation from the disproportionate brain growth",
+      "Connective tissue laxity, cutaneous syndactyly, polydactyly, and frontal bossing are supportive features",
+      "Part of the PIK3CA-related overgrowth spectrum caused by post-zygotic (mosaic) activating PIK3CA variants",
+      "Because the variant is mosaic the condition is sporadic and not inherited, with the pattern of overgrowth reflecting the tissues carrying the variant",
+      "Brain imaging may show polymicrogyria, ventriculomegaly, cerebellar tonsillar ectopia, and white matter changes, so neuroimaging surveillance is important",
+      "Diagnosis often needs high-sensitivity sequencing of affected tissue because the mosaic variant may not be detectable in blood"
     ],
-    [
-     "Key Investigations",
-     "High-sensitivity sequencing of affected tissue for mosaic PIK3CA variants, Brain MRI to assess megalencephaly, polymicrogyria,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Megalencephaly-capillary malformation syndrome is part of the PIK3CA-related overgrowth spectrum and results from post-zygotic mosaic activating variants in PIK3CA, which constitutively activate the PI3K/AKT/mTOR pathway. Excessive signalling promotes unregulated growth and proliferation, producing brain overgrowth (megalencephaly with cortical malformation such as polymicrogyria), segmental somatic overgrowth, and vascular anomalies. Because the mutation is mosaic, disease burden and distribution depend on when and where the variant arose during development.",
+    "additionalDifferentials": [
+      "CLOVES syndrome and other PIK3CA-related overgrowth phenotypes",
+      "Sotos syndrome and other macrocephalic overgrowth syndromes",
+      "PTEN hamartoma tumour syndrome",
+      "Proteus syndrome",
+      "Klippel-Trenaunay syndrome",
+      "Benign familial macrocephaly and hydrocephalus"
     ],
-    [
-     "Primary Differentials",
-     "CLOVES syndrome and other PIK3CA-related overgrowth phenotypes, Sotos syndrome and other macrocephalic overgrowth syndromes, PTEN",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "High-sensitivity sequencing of affected tissue for mosaic PIK3CA variants",
+      "Brain MRI to assess megalencephaly, polymicrogyria, ventriculomegaly, and cerebellar tonsillar ectopia",
+      "Serial head circumference measurement and neuroimaging surveillance for progressive changes",
+      "EEG where seizures are suspected",
+      "Developmental assessment to guide intervention",
+      "Echocardiography and evaluation for arrhythmia given reported cardiac associations"
     ],
-    [
-     "Management Strategy",
-     "Consider targeted inhibition of the overactive PI3K/AKT/mTOR pathway with an mTOR inhibitor such as sirolimus or a PI3K inhibitor",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of raised intracranial pressure or symptomatic cerebellar tonsillar herniation",
+      "New or worsening seizures",
+      "Rapidly progressive macrocephaly suggesting hydrocephalus",
+      "Cardiac arrhythmia or structural heart disease requiring assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis after normal blood testing rather than sequencing affected tissue",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is variable and largely determined by the severity of brain involvement, with many individuals having developmental delay, epilepsy, and a risk of hindbrain herniation requiring neurosurgical monitoring. Somatic overgrowth and vascular features are managed supportively, and targeted pathway inhibition is being explored for severe disease.",
+    "pitfalls": [
+      "Excluding the diagnosis after normal blood testing rather than sequencing affected tissue",
+      "Overlooking evolving cerebellar tonsillar herniation on follow-up imaging",
+      "Attributing macrocephaly to benign familial causes and missing associated capillary malformation and overgrowth",
+      "Failing to recognise the sporadic mosaic nature and giving incorrect recurrence-risk counselling"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "GeneReviews: PIK3CA-Related Overgrowth Spectrum"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Consider targeted inhibition of the overactive PI3K/AKT/mTOR pathway with an mTOR inhibitor such as sirolimus or a PI3K inhibitor as emerging disease-directed therapy",
+      "Undertake neuroimaging surveillance with neurosurgical decompression for cerebellar tonsillar herniation and management of hydrocephalus from disproportionate brain overgrowth",
+      "Control the associated epilepsy with antiseizure medication",
+      "Treat symptomatic or disfiguring capillary malformations with pulsed-dye laser",
+      "Provide developmental therapies and management of hypotonia and developmental delay",
+      "Arrange cardiac evaluation and monitoring for arrhythmia given reported cardiac associations",
+      "Reassure that the condition arises from a post-zygotic mosaic PIK3CA variant and is sporadic rather than inherited",
+      "Coordinate multidisciplinary clinical genetics, neurology and neurosurgery input"
     ]
-   ],
-   "caption": "Overview comparison matrix for megalencephaly-capillary malformation syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "megalencephaly-capillary-malformation-real-image",
-   "title": "Megalencephaly-capillary malformation syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "megalencephaly_capillary_malformation-pathway",
+      "title": "Megalencephaly-capillary malformation syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Progressive megalencephaly with somatic and often asymmetric (segmental) overgrowth and cutaneous capillary malformations, classically a midline facial or philtral stain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of raised intracranial pressure or symptomatic cerebellar tonsillar herniation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: High-sensitivity sequencing of affected tissue for mosaic PIK3CA variants, Brain MRI to assess megalencephaly, polymicrogyria, ventriculomegaly, and cerebellar tonsillar ectopia, Serial head circumference measurement and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Consider targeted inhibition of the overactive PI3K/AKT/mTOR pathway with an mTOR inhibitor such as sirolimus or a PI3K inhibitor as emerging disease-directed therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis after normal blood testing rather than sequencing affected tissue"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of megalencephaly-capillary malformation syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "megalencephaly_capillary_malformation-matrix",
+      "title": "Megalencephaly-capillary malformation syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Progressive megalencephaly with somatic and often asymmetric (segmental) overgrowth and cutaneous capillary malformations,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "High-sensitivity sequencing of affected tissue for mosaic PIK3CA variants, Brain MRI to assess megalencephaly, polymicrogyria,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CLOVES syndrome and other PIK3CA-related overgrowth phenotypes, Sotos syndrome and other macrocephalic overgrowth syndromes, PTEN",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Consider targeted inhibition of the overactive PI3K/AKT/mTOR pathway with an mTOR inhibitor such as sirolimus or a PI3K inhibitor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis after normal blood testing rather than sequencing affected tissue",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for megalencephaly-capillary malformation syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "megalencephaly_capillary_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-sensitivity sequencing of affected tissue",
+          "cells": [
+            {
+              "text": "Mosaic PIK3CA variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Megalencephaly, polymicrogyria, ventriculomegaly and cerebellar tonsillar ectopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial head circumference and neuroimaging",
+          "cells": [
+            {
+              "text": "Progressive change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG, where seizures are suspected",
+          "cells": [
+            {
+              "text": "Seizures, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment",
+          "cells": [
+            {
+              "text": "Guides intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and arrhythmia evaluation",
+          "cells": [
+            {
+              "text": "Reported cardiac associations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "megalencephaly_capillary_malformation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CLOVES syndrome and other PIK3CA-related overgrowth",
+          "cells": [
+            {
+              "text": "Another PIK3CA-related overgrowth phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sotos syndrome and other macrocephalic overgrowth syndromes",
+          "cells": [
+            {
+              "text": "Macrocephalic overgrowth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "megalencephaly_capillary_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted PI3K/AKT/mTOR inhibition",
+          "cells": [
+            {
+              "text": "mTOR inhibitor such as sirolimus or a PI3K inhibitor, as emerging disease-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging surveillance and neurosurgery",
+          "cells": [
+            {
+              "text": "Decompression for cerebellar tonsillar herniation and hydrocephalus from disproportionate overgrowth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For the associated epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulsed-dye laser",
+          "cells": [
+            {
+              "text": "Symptomatic or disfiguring capillary malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental therapies",
+          "cells": [
+            {
+              "text": "Hypotonia and developmental delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac evaluation",
+          "cells": [
+            {
+              "text": "Arrhythmia monitoring, given reported cardiac associations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic reassurance",
+          "cells": [
+            {
+              "text": "Post-zygotic mosaic PIK3CA variant; sporadic rather than inherited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Clinical genetics, neurology and neurosurgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "megalencephaly_capillary_malformation-dx-mgmt",
+      "title": "Diagnosis and management of Megalencephaly-capillary malformation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Capillary malformation with megalencephaly; suspected PIK3CA mosaic overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised intracranial pressure, tonsillar herniation, new seizures or arrhythmia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical decompression for tonsillar herniation or hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mosaic PIK3CA sequencing of affected tissue; brain MRI; EEG; echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a mosaic PIK3CA variant confirmed in affected tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Sotos, PTEN hamartoma or Proteus syndrome; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider an mTOR inhibitor such as sirolimus as emerging disease-directed therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neuroimaging surveillance; neurosurgery for herniation or hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiseizure medication; pulsed-dye laser for disfiguring capillary malformations",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac evaluation and arrhythmia monitoring given reported cardiac associations",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling: sporadic post-zygotic variant; developmental therapy throughout life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

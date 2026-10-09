@@ -1,179 +1,686 @@
 {
- "id": "mucous_membrane_pemphigoid",
- "name": "mucous membrane pemphigoid",
- "aliases": [
-  "cicatricial pemphigoid",
-  "ocular cicatricial pemphigoid"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A heterogeneous group of subepithelial autoimmune blistering diseases with a predilection for mucous membranes and a marked tendency to scar.",
-   "The oral mucosa is most frequently involved (desquamative gingivitis is a common presenting sign), followed by ocular, nasopharyngeal, oesophageal, laryngeal and anogenital sites.",
-   "Ocular disease progresses through chronic conjunctivitis, subconjunctival fibrosis, symblepharon, forniceal shortening, entropion, trichiasis and ultimately corneal opacification and blindness.",
-   "Autoantibodies target multiple basement-membrane antigens, most commonly BP180 (particularly its C-terminus) and laminin-332; anti-laminin-332 disease carries an association with underlying malignancy.",
-   "Direct immunofluorescence of perilesional mucosa showing linear IgG, IgA and/or C3 along the basement-membrane zone is the diagnostic cornerstone; sensitivity rises with multiple biopsies.",
-   "The Nikolsky sign may be positive; healing with scarring distinguishes it clinically from bullous pemphigoid, which typically heals without scars.",
-   "Management is stratified by site and severity; high-risk (ocular, laryngeal, oesophageal, severe oral) disease warrants aggressive systemic immunosuppression to prevent irreversible scarring.",
-   "A multidisciplinary approach involving dermatology, ophthalmology, ENT, oral medicine and gastroenterology is essential for organ-threatening disease."
+  "id": "mucous_membrane_pemphigoid",
+  "name": "mucous membrane pemphigoid",
+  "aliases": [
+    "cicatricial pemphigoid",
+    "ocular cicatricial pemphigoid"
   ],
-  "pathophysiology": "Mucous membrane pemphigoid results from autoantibodies, predominantly IgG and IgA, directed against structural components of the epithelial basement-membrane zone, chiefly the BP180 (type XVII collagen) antigen and laminin-332 (epiligrin), and less often BP230, type VII collagen and the integrin beta-4 subunit. Antibody binding activates complement and recruits inflammatory cells, causing dermo-epidermal separation within the lamina lucida. Unlike bullous pemphigoid, the inflammatory infiltrate and cytokine milieu at mucosal sites drive a fibrotic reparative response, so repeated cycles of blistering and healing produce progressive submucosal scarring. The predilection for particular target antigens correlates loosely with clinical phenotype, and anti-laminin-332 reactivity is linked to paraneoplastic disease.",
-  "additionalDifferentials": [
-   "bullous pemphigoid",
-   "pemphigus vulgaris",
-   "erosive lichen planus",
-   "epidermolysis bullosa acquisita",
-   "linear IgA bullous dermatosis",
-   "paraneoplastic pemphigus",
-   "Stevens-Johnson syndrome / toxic epidermal necrolysis (chronic ocular sequelae)"
-  ],
-  "additionalInvestigations": [
-   "perilesional biopsy for direct immunofluorescence (linear IgG/IgA/C3 at the basement-membrane zone)",
-   "lesional biopsy for histopathology (subepithelial split with mixed infiltrate)",
-   "indirect immunofluorescence on salt-split skin (epidermal vs dermal binding)",
-   "serum ELISA/immunoblot for BP180, BP230 and laminin-332 antibodies",
-   "slit-lamp ophthalmological assessment and conjunctival forniceal measurement",
-   "nasendoscopy and laryngoscopy for upper-airway involvement",
-   "age-appropriate malignancy screening when anti-laminin-332 antibodies are detected"
-  ],
-  "redFlags": [
-   "ocular involvement with progressive symblepharon or forniceal shortening threatening sight",
-   "laryngeal or supraglottic disease causing stridor or airway compromise",
-   "oesophageal stricture with dysphagia and risk of aspiration or malnutrition",
-   "anti-laminin-332 antibodies signalling possible occult malignancy",
-   "rapidly progressive scarring despite first-line therapy"
-  ],
-  "prognosis": "The condition is chronic and relapsing; with early aggressive immunosuppression, scarring can often be arrested, but established fibrosis is irreversible and untreated organ-threatening disease may lead to blindness, airway stenosis or oesophageal stricture.",
-  "pitfalls": [
-   "Attributing desquamative gingivitis to poor oral hygiene or dental disease and delaying immunofluorescence biopsy.",
-   "Taking the biopsy from an ulcerated (rather than perilesional) site, yielding a false-negative direct immunofluorescence.",
-   "Overlooking asymptomatic early ocular disease because cutaneous involvement is minimal or absent.",
-   "Failing to screen for malignancy when laminin-332 antibodies are identified.",
-   "Under-treating so-called low-risk oral disease that later extends to high-risk sites."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Fitzpatrick's Dermatology in General Medicine, current edition",
-   "International consensus on diagnosis and management of mucous membrane pemphigoid"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Risk-stratified immunosuppression: topical or intralesional corticosteroids for limited oral disease, escalating to systemic corticosteroids with a steroid-sparing agent such as dapsone, mycophenolate mofetil or azathioprine",
-   "Cyclophosphamide with corticosteroids, or rituximab and intravenous immunoglobulin, for organ-threatening ocular, laryngeal or oesophageal involvement",
-   "Screen for glucose-6-phosphate dehydrogenase deficiency before dapsone and monitor blood counts during treatment",
-   "Meticulous oral hygiene and topical care to control desquamative gingivitis, with ocular surface lubrication and management of trichiasis and symblepharon",
-   "Investigate for occult malignancy where anti-laminin-332 antibodies are present",
-   "Surveillance for scarring complications, including ocular fibrosis and airway and oesophageal stricture, by slit-lamp, nasendoscopy, laryngoscopy and endoscopy",
-   "Multidisciplinary care coordinating dermatology, ophthalmology, ENT, oral medicine and gastroenterology",
-   "Early escalation of immunosuppression for progressive scarring to prevent irreversible blindness or airway and oesophageal stenosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mucous_membrane_pemphigoid-pathway",
-   "title": "mucous membrane pemphigoid: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A heterogeneous group of subepithelial autoimmune blistering diseases with a predilection for mucous membranes and a marked tendency to scar.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: ocular involvement with progressive symblepharon or forniceal shortening threatening sight",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: perilesional biopsy for direct immunofluorescence (linear IgG/IgA/C3 at the basement-membrane zone), lesional biopsy for histopathology (subepithelial split with mixed infiltrate), indirect immunofluorescence on salt-split"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Risk-stratified immunosuppression: topical or intralesional corticosteroids for limited oral disease, escalating to systemic corticosteroids with a steroid-sparing agent such as dapsone, mycophenolate mofetil or"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing desquamative gingivitis to poor oral hygiene or dental disease and delaying immunofluorescence biopsy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mucous membrane pemphigoid."
-  }
- ],
- "tables": [
-  {
-   "id": "mucous_membrane_pemphigoid-matrix",
-   "title": "mucous membrane pemphigoid: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A heterogeneous group of subepithelial autoimmune blistering diseases with a predilection for mucous membranes and a marked",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A heterogeneous group of subepithelial autoimmune blistering diseases with a predilection for mucous membranes and a marked tendency to scar.",
+      "The oral mucosa is most frequently involved (desquamative gingivitis is a common presenting sign), followed by ocular, nasopharyngeal, oesophageal, laryngeal and anogenital sites.",
+      "Ocular disease progresses through chronic conjunctivitis, subconjunctival fibrosis, symblepharon, forniceal shortening, entropion, trichiasis and ultimately corneal opacification and blindness.",
+      "Autoantibodies target multiple basement-membrane antigens, most commonly BP180 (particularly its C-terminus) and laminin-332; anti-laminin-332 disease carries an association with underlying malignancy.",
+      "Direct immunofluorescence of perilesional mucosa showing linear IgG, IgA and/or C3 along the basement-membrane zone is the diagnostic cornerstone; sensitivity rises with multiple biopsies.",
+      "The Nikolsky sign may be positive; healing with scarring distinguishes it clinically from bullous pemphigoid, which typically heals without scars.",
+      "Management is stratified by site and severity; high-risk (ocular, laryngeal, oesophageal, severe oral) disease warrants aggressive systemic immunosuppression to prevent irreversible scarring.",
+      "A multidisciplinary approach involving dermatology, ophthalmology, ENT, oral medicine and gastroenterology is essential for organ-threatening disease."
     ],
-    [
-     "Key Investigations",
-     "perilesional biopsy for direct immunofluorescence (linear IgG/IgA/C3 at the basement-membrane zone), lesional biopsy for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mucous membrane pemphigoid results from autoantibodies, predominantly IgG and IgA, directed against structural components of the epithelial basement-membrane zone, chiefly the BP180 (type XVII collagen) antigen and laminin-332 (epiligrin), and less often BP230, type VII collagen and the integrin beta-4 subunit. Antibody binding activates complement and recruits inflammatory cells, causing dermo-epidermal separation within the lamina lucida. Unlike bullous pemphigoid, the inflammatory infiltrate and cytokine milieu at mucosal sites drive a fibrotic reparative response, so repeated cycles of blistering and healing produce progressive submucosal scarring. The predilection for particular target antigens correlates loosely with clinical phenotype, and anti-laminin-332 reactivity is linked to paraneoplastic disease.",
+    "additionalDifferentials": [
+      "bullous pemphigoid",
+      "pemphigus vulgaris",
+      "erosive lichen planus",
+      "epidermolysis bullosa acquisita",
+      "linear IgA bullous dermatosis",
+      "paraneoplastic pemphigus",
+      "Stevens-Johnson syndrome / toxic epidermal necrolysis (chronic ocular sequelae)"
     ],
-    [
-     "Primary Differentials",
-     "bullous pemphigoid, pemphigus vulgaris, erosive lichen planus",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "perilesional biopsy for direct immunofluorescence (linear IgG/IgA/C3 at the basement-membrane zone)",
+      "lesional biopsy for histopathology (subepithelial split with mixed infiltrate)",
+      "indirect immunofluorescence on salt-split skin (epidermal vs dermal binding)",
+      "serum ELISA/immunoblot for BP180, BP230 and laminin-332 antibodies",
+      "slit-lamp ophthalmological assessment and conjunctival forniceal measurement",
+      "nasendoscopy and laryngoscopy for upper-airway involvement",
+      "age-appropriate malignancy screening when anti-laminin-332 antibodies are detected"
     ],
-    [
-     "Management Strategy",
-     "Risk-stratified immunosuppression: topical or intralesional corticosteroids for limited oral disease, escalating to systemic",
-     "Core treatment modality"
+    "redFlags": [
+      "ocular involvement with progressive symblepharon or forniceal shortening threatening sight",
+      "laryngeal or supraglottic disease causing stridor or airway compromise",
+      "oesophageal stricture with dysphagia and risk of aspiration or malnutrition",
+      "anti-laminin-332 antibodies signalling possible occult malignancy",
+      "rapidly progressive scarring despite first-line therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing desquamative gingivitis to poor oral hygiene or dental disease and delaying immunofluorescence biopsy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is chronic and relapsing; with early aggressive immunosuppression, scarring can often be arrested, but established fibrosis is irreversible and untreated organ-threatening disease may lead to blindness, airway stenosis or oesophageal stricture.",
+    "pitfalls": [
+      "Attributing desquamative gingivitis to poor oral hygiene or dental disease and delaying immunofluorescence biopsy.",
+      "Taking the biopsy from an ulcerated (rather than perilesional) site, yielding a false-negative direct immunofluorescence.",
+      "Overlooking asymptomatic early ocular disease because cutaneous involvement is minimal or absent.",
+      "Failing to screen for malignancy when laminin-332 antibodies are identified.",
+      "Under-treating so-called low-risk oral disease that later extends to high-risk sites."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Fitzpatrick's Dermatology in General Medicine, current edition",
+      "International consensus on diagnosis and management of mucous membrane pemphigoid"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Risk-stratified immunosuppression: topical or intralesional corticosteroids for limited oral disease, escalating to systemic corticosteroids with a steroid-sparing agent such as dapsone, mycophenolate mofetil or azathioprine",
+      "Cyclophosphamide with corticosteroids, or rituximab and intravenous immunoglobulin, for organ-threatening ocular, laryngeal or oesophageal involvement",
+      "Screen for glucose-6-phosphate dehydrogenase deficiency before dapsone and monitor blood counts during treatment",
+      "Meticulous oral hygiene and topical care to control desquamative gingivitis, with ocular surface lubrication and management of trichiasis and symblepharon",
+      "Investigate for occult malignancy where anti-laminin-332 antibodies are present",
+      "Surveillance for scarring complications, including ocular fibrosis and airway and oesophageal stricture, by slit-lamp, nasendoscopy, laryngoscopy and endoscopy",
+      "Multidisciplinary care coordinating dermatology, ophthalmology, ENT, oral medicine and gastroenterology",
+      "Early escalation of immunosuppression for progressive scarring to prevent irreversible blindness or airway and oesophageal stenosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for mucous membrane pemphigoid."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mucous-membrane-pemphigoid-real-image",
-   "title": "mucous membrane pemphigoid: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mucous_membrane_pemphigoid-pathway",
+      "title": "mucous membrane pemphigoid: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A heterogeneous group of subepithelial autoimmune blistering diseases with a predilection for mucous membranes and a marked tendency to scar.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: ocular involvement with progressive symblepharon or forniceal shortening threatening sight",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: perilesional biopsy for direct immunofluorescence (linear IgG/IgA/C3 at the basement-membrane zone), lesional biopsy for histopathology (subepithelial split with mixed infiltrate), indirect immunofluorescence on salt-split"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Risk-stratified immunosuppression: topical or intralesional corticosteroids for limited oral disease, escalating to systemic corticosteroids with a steroid-sparing agent such as dapsone, mycophenolate mofetil or"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing desquamative gingivitis to poor oral hygiene or dental disease and delaying immunofluorescence biopsy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mucous membrane pemphigoid."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mucous_membrane_pemphigoid-matrix",
+      "title": "mucous membrane pemphigoid: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A heterogeneous group of subepithelial autoimmune blistering diseases with a predilection for mucous membranes and a marked",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "perilesional biopsy for direct immunofluorescence (linear IgG/IgA/C3 at the basement-membrane zone), lesional biopsy for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "bullous pemphigoid, pemphigus vulgaris, erosive lichen planus",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Risk-stratified immunosuppression: topical or intralesional corticosteroids for limited oral disease, escalating to systemic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing desquamative gingivitis to poor oral hygiene or dental disease and delaying immunofluorescence biopsy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mucous membrane pemphigoid."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 54-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "mucous_membrane_pemphigoid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Perilesional biopsy for direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Linear IgG, IgA and/or C3 along the basement-membrane zone; the diagnostic cornerstone, sensitivity rises with multiple biopsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesional biopsy for histopathology",
+          "cells": [
+            {
+              "text": "Subepithelial split with mixed infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indirect immunofluorescence on salt-split skin",
+          "cells": [
+            {
+              "text": "Epidermal versus dermal binding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum ELISA or immunoblot",
+          "cells": [
+            {
+              "text": "Antibodies to BP180, BP230 and laminin-332"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp assessment and forniceal measurement",
+          "cells": [
+            {
+              "text": "Ocular progression: conjunctivitis, symblepharon, forniceal shortening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasendoscopy and laryngoscopy",
+          "cells": [
+            {
+              "text": "Upper-airway involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening",
+          "cells": [
+            {
+              "text": "Indicated when anti-laminin-332 antibodies are detected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucous_membrane_pemphigoid-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bullous pemphigoid",
+          "cells": [
+            {
+              "text": "Heals without scarring, unlike mucous membrane pemphigoid, which tends to scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Anti-laminin-332 reactivity is linked to paraneoplastic disease and occult malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stevens-Johnson syndrome and toxic epidermal necrolysis",
+          "cells": [
+            {
+              "text": "Listed as a look-alike for chronic ocular sequelae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucous_membrane_pemphigoid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Limited oral disease",
+          "cells": [
+            {
+              "text": "Topical or intralesional corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation of immunosuppression",
+          "cells": [
+            {
+              "text": "Systemic corticosteroids with a steroid-sparing agent such as dapsone, mycophenolate mofetil or azathioprine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-threatening disease",
+          "cells": [
+            {
+              "text": "Cyclophosphamide with corticosteroids, or rituximab and intravenous immunoglobulin, for ocular, laryngeal or oesophageal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dapsone safety",
+          "cells": [
+            {
+              "text": "Screen for G6PD deficiency before dapsone; monitor blood counts during treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local care",
+          "cells": [
+            {
+              "text": "Meticulous oral hygiene; ocular surface lubrication; manage trichiasis and symblepharon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy work-up",
+          "cells": [
+            {
+              "text": "Investigate for occult malignancy where anti-laminin-332 antibodies are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Slit-lamp, nasendoscopy, laryngoscopy and endoscopy for scarring complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Dermatology, ophthalmology, ENT, oral medicine and gastroenterology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "mucous_membrane_pemphigoid-ddx-2",
+      "kind": "ddx",
+      "title": "Immunologically mediated blistering diseases compared",
+      "rowHeader": "Condition",
+      "columns": [
+        "Clinical",
+        "Histology",
+        "Immunopathology",
+        "Autoantigens"
+      ],
+      "rows": [
+        {
+          "parameter": "Pemphigus foliaceus",
+          "cells": [
+            {
+              "text": "Crusts and shallow erosions on scalp, central face, upper chest and back"
+            },
+            {
+              "text": "Acantholytic blister in the superficial epidermis"
+            },
+            {
+              "text": "Cell surface IgG deposits on keratinocytes"
+            },
+            {
+              "text": "Dsg1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "Flaccid blisters, denuded skin, oromucosal lesions"
+            },
+            {
+              "text": "Acantholytic blister in the suprabasal epidermis"
+            },
+            {
+              "text": "Cell surface IgG deposits on keratinocytes"
+            },
+            {
+              "text": "Dsg3 (plus Dsg1 in patients with skin involvement)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Painful stomatitis with papulosquamous or lichenoid eruptions progressing to blisters"
+            },
+            {
+              "text": "Acantholysis, keratinocyte necrosis and vacuolar interface dermatitis"
+            },
+            {
+              "text": "Cell surface IgG and C3 on keratinocytes and, variably, similar deposits in the epidermal basement membrane zone"
+            },
+            {
+              "text": "Plakin protein family members and desmosomal cadherins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid",
+          "cells": [
+            {
+              "text": "Large tense blisters on flexor surfaces and trunk"
+            },
+            {
+              "text": "Subepidermal blister with eosinophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of IgG and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG1, BPAG2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigoid gestationis",
+          "cells": [
+            {
+              "text": "Pruritic urticarial plaques rimmed by vesicles and bullae on trunk and extremities"
+            },
+            {
+              "text": "Teardrop-shaped subepidermal blisters in dermal papillae; eosinophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2 (plus BPAG1 in some patients)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Linear IgA disease",
+          "cells": [
+            {
+              "text": "Pruritic small papules on extensor surfaces; occasionally larger arciform blisters"
+            },
+            {
+              "text": "Subepidermal blister with neutrophil-rich infiltrate"
+            },
+            {
+              "text": "Linear band of IgA in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cicatricial pemphigoid",
+          "cells": [
+            {
+              "text": "Erosive and/or blistering lesions of mucous membranes and possibly skin; scarring at some sites"
+            },
+            {
+              "text": "Subepidermal blister, leukocytic infiltrate may or may not be present"
+            },
+            {
+              "text": "Linear band of IgG, IgA and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "BPAG2, laminin-332, or others"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epidermolysis bullosa acquisita",
+          "cells": [
+            {
+              "text": "Blisters, erosions, scars and milia at trauma-exposed sites; widespread inflammatory tense blisters may be seen initially"
+            },
+            {
+              "text": "Subepidermal blister, leukocytic infiltrate may or may not be present"
+            },
+            {
+              "text": "Linear band of IgG and/or C3 in the epidermal basement membrane zone"
+            },
+            {
+              "text": "Type VII collagen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "Extremely pruritic small papules and vesicles on elbows, knees, buttocks and posterior neck"
+            },
+            {
+              "text": "Subepidermal blister with neutrophils in dermal papillae"
+            },
+            {
+              "text": "Granular IgA deposits in dermal papillae"
+            },
+            {
+              "text": "Epidermal transglutaminase"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Dsg1, desmoglein 1; Dsg3, desmoglein 3; BPAG1, bullous pemphigoid antigen 1; BPAG2, bullous pemphigoid antigen 2."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "mucous_membrane_pemphigoid-dx-mgmt",
+      "title": "Diagnosis and management of mucous membrane pemphigoid",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Desquamative gingivitis, mucosal blisters or conjunctivitis, possibly with scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (symblepharon, stridor, oesophageal stricture, laminin-332 antibodies)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent systemic immunosuppression and specialist review for organ-threatening disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Perilesional biopsy for direct immunofluorescence; BP180 and laminin-332 serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Linear IgG, IgA or C3 at the basement membrane on direct immunofluorescence?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat perilesional biopsy; consider bullous pemphigoid or pemphigus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical or intralesional corticosteroids for limited oral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic steroids with dapsone, mycophenolate or azathioprine if escalating",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyclophosphamide with steroids, or rituximab with IVIG, for organ-threatening disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for G6PD deficiency before dapsone; monitor blood counts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen for occult malignancy if anti-laminin-332 antibodies are present",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Early immunosuppression can arrest scarring; established fibrosis is irreversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

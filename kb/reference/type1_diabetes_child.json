@@ -1,177 +1,1094 @@
 {
- "id": "type1_diabetes_child",
- "name": "Type 1 Diabetes Mellitus (Child)",
- "aliases": [
-  "T1DM",
-  "type 1 diabetes",
-  "insulin-dependent diabetes",
-  "juvenile diabetes",
-  "paediatric type 1 diabetes"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute insulin deficiency.",
-   "Classic presenting features are polyuria, polydipsia, weight loss, and fatigue, often over a few weeks; new secondary enuresis in a previously dry child is a useful clue.",
-   "A substantial proportion of children present in diabetic ketoacidosis, which can be the first manifestation of the disease.",
-   "Lifelong insulin replacement is essential; unlike type 2 diabetes, it cannot be managed by lifestyle measures or oral agents alone.",
-   "A 'honeymoon' period of partial remission with reduced insulin needs may follow initial stabilisation but is temporary.",
-   "Management is multidisciplinary, combining insulin, carbohydrate awareness, glucose monitoring, and structured education for the child and family.",
-   "Careful attention to preventing and recognising hypoglycaemia is central to safe day-to-day care.",
-   "Long-term care includes screening for associated autoimmune conditions (such as thyroid disease and coeliac disease) and for microvascular complications over time."
+  "id": "type1_diabetes_child",
+  "name": "Type 1 Diabetes Mellitus (Child)",
+  "aliases": [
+    "T1DM",
+    "type 1 diabetes",
+    "insulin-dependent diabetes",
+    "juvenile diabetes",
+    "paediatric type 1 diabetes"
   ],
-  "pathophysiology": "Type 1 diabetes results from T-cell mediated autoimmune destruction of insulin-producing pancreatic beta cells in genetically predisposed children, often triggered by environmental factors. Progressive beta-cell loss produces absolute insulin deficiency, so glucose cannot enter cells and hyperglycaemia develops. Without insulin the body shifts to lipolysis and ketogenesis; unrestrained ketone production causes metabolic acidosis, while osmotic diuresis from glycosuria leads to dehydration and electrolyte loss, culminating in diabetic ketoacidosis if untreated.",
-  "additionalDifferentials": [
-   "Type 2 diabetes mellitus",
-   "Monogenic diabetes (MODY) and neonatal diabetes",
-   "Secondary diabetes (e.g. cystic fibrosis-related, steroid-induced)",
-   "Diabetes insipidus (for polyuria and polydipsia)",
-   "Transient stress hyperglycaemia during acute illness",
-   "Urinary tract infection (for enuresis or dysuria)"
-  ],
-  "additionalInvestigations": [
-   "Blood glucose and HbA1c",
-   "Blood and/or urine ketones",
-   "Venous blood gas and electrolytes to assess for ketoacidosis",
-   "Pancreatic autoantibodies (e.g. GAD, IA-2, ZnT8, islet cell)",
-   "Thyroid function and coeliac screening at diagnosis and during follow-up",
-   "C-peptide where the diabetes type is uncertain"
-  ],
-  "redFlags": [
-   "New-onset type 1 diabetes presenting in diabetic ketoacidosis (vomiting, abdominal pain, deep sighing breathing, dehydration, drowsiness) is a medical emergency",
-   "Reduced consciousness or focal neurological signs suggesting cerebral oedema during DKA management",
-   "Severe hypoglycaemia with seizures or loss of consciousness",
-   "Signs of significant dehydration or shock",
-   "Persistent vomiting in a known diabetic child, which may signal evolving ketoacidosis"
-  ],
-  "prognosis": "With modern insulin regimens, glucose monitoring, and multidisciplinary support most children live full lives; long-term outcome depends heavily on sustained glycaemic control, which reduces the risk of microvascular and macrovascular complications. Acute risks include ketoacidosis and severe hypoglycaemia.",
-  "pitfalls": [
-   "Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis",
-   "Failing to check ketones and acid-base status in a hyperglycaemic, unwell child",
-   "Correcting fluids and glucose too aggressively in DKA and precipitating cerebral oedema",
-   "Assuming the honeymoon phase means resolution and reducing vigilance",
-   "Overlooking associated autoimmune conditions during follow-up"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin infusion pump, as absolute insulin deficiency cannot be managed by lifestyle or oral agents",
-   "Structured carbohydrate awareness and dietary education, matching prandial insulin to carbohydrate intake and adjusting for exercise",
-   "Glucose monitoring with capillary testing or continuous glucose monitoring, with periodic HbA1c to guide dose titration and target glycaemic control",
-   "Prompt treatment of hypoglycaemia with fast-acting oral carbohydrate, and parenteral glucagon for severe episodes, with sick-day rules taught to the family",
-   "Emergency management of diabetic ketoacidosis with careful rehydration, insulin infusion and potassium replacement, avoiding overly rapid correction to reduce cerebral oedema risk",
-   "Surveillance for associated autoimmune conditions with thyroid and coeliac screening, and later screening for retinopathy, nephropathy and neuropathy",
-   "Multidisciplinary care through a paediatric diabetes team including diabetes specialist nurse, dietitian and psychological support for the child and family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "type1_diabetes_child-pathway",
-   "title": "Type 1 Diabetes Mellitus (Child): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute insulin deficiency.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New-onset type 1 diabetes presenting in diabetic ketoacidosis (vomiting, abdominal pain, deep sighing breathing, dehydration, drowsiness) is a medical emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood glucose and HbA1c, Blood and/or urine ketones, Venous blood gas and electrolytes to assess for ketoacidosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin infusion pump, as absolute insulin deficiency cannot be managed by lifestyle or oral"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of type 1 diabetes mellitus (child)."
-  }
- ],
- "tables": [
-  {
-   "id": "type1_diabetes_child-matrix",
-   "title": "Type 1 Diabetes Mellitus (Child): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute insulin deficiency.",
+      "Classic presenting features are polyuria, polydipsia, weight loss, and fatigue, often over a few weeks; new secondary enuresis in a previously dry child is a useful clue.",
+      "A substantial proportion of children present in diabetic ketoacidosis, which can be the first manifestation of the disease.",
+      "Lifelong insulin replacement is essential; unlike type 2 diabetes, it cannot be managed by lifestyle measures or oral agents alone.",
+      "A 'honeymoon' period of partial remission with reduced insulin needs may follow initial stabilisation but is temporary.",
+      "Management is multidisciplinary, combining insulin, carbohydrate awareness, glucose monitoring, and structured education for the child and family.",
+      "Careful attention to preventing and recognising hypoglycaemia is central to safe day-to-day care.",
+      "Long-term care includes screening for associated autoimmune conditions (such as thyroid disease and coeliac disease) and for microvascular complications over time."
     ],
-    [
-     "Key Investigations",
-     "Blood glucose and HbA1c, Blood and/or urine ketones, Venous blood gas and electrolytes to assess for ketoacidosis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Type 1 diabetes results from T-cell mediated autoimmune destruction of insulin-producing pancreatic beta cells in genetically predisposed children, often triggered by environmental factors. Progressive beta-cell loss produces absolute insulin deficiency, so glucose cannot enter cells and hyperglycaemia develops. Without insulin the body shifts to lipolysis and ketogenesis; unrestrained ketone production causes metabolic acidosis, while osmotic diuresis from glycosuria leads to dehydration and electrolyte loss, culminating in diabetic ketoacidosis if untreated.",
+    "additionalDifferentials": [
+      "Type 2 diabetes mellitus",
+      "Monogenic diabetes (MODY) and neonatal diabetes",
+      "Secondary diabetes (e.g. cystic fibrosis-related, steroid-induced)",
+      "Diabetes insipidus (for polyuria and polydipsia)",
+      "Transient stress hyperglycaemia during acute illness",
+      "Urinary tract infection (for enuresis or dysuria)"
     ],
-    [
-     "Primary Differentials",
-     "Type 2 diabetes mellitus, Monogenic diabetes (MODY) and neonatal diabetes, Secondary diabetes (e.g. cystic fibrosis-related,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood glucose and HbA1c",
+      "Blood and/or urine ketones",
+      "Venous blood gas and electrolytes to assess for ketoacidosis",
+      "Pancreatic autoantibodies (e.g. GAD, IA-2, ZnT8, islet cell)",
+      "Thyroid function and coeliac screening at diagnosis and during follow-up",
+      "C-peptide where the diabetes type is uncertain"
     ],
-    [
-     "Management Strategy",
-     "Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin",
-     "Core treatment modality"
+    "redFlags": [
+      "New-onset type 1 diabetes presenting in diabetic ketoacidosis (vomiting, abdominal pain, deep sighing breathing, dehydration, drowsiness) is a medical emergency",
+      "Reduced consciousness or focal neurological signs suggesting cerebral oedema during DKA management",
+      "Severe hypoglycaemia with seizures or loss of consciousness",
+      "Signs of significant dehydration or shock",
+      "Persistent vomiting in a known diabetic child, which may signal evolving ketoacidosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With modern insulin regimens, glucose monitoring, and multidisciplinary support most children live full lives; long-term outcome depends heavily on sustained glycaemic control, which reduces the risk of microvascular and macrovascular complications. Acute risks include ketoacidosis and severe hypoglycaemia.",
+    "pitfalls": [
+      "Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis",
+      "Failing to check ketones and acid-base status in a hyperglycaemic, unwell child",
+      "Correcting fluids and glucose too aggressively in DKA and precipitating cerebral oedema",
+      "Assuming the honeymoon phase means resolution and reducing vigilance",
+      "Overlooking associated autoimmune conditions during follow-up"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin infusion pump, as absolute insulin deficiency cannot be managed by lifestyle or oral agents",
+      "Structured carbohydrate awareness and dietary education, matching prandial insulin to carbohydrate intake and adjusting for exercise",
+      "Glucose monitoring with capillary testing or continuous glucose monitoring, with periodic HbA1c to guide dose titration and target glycaemic control",
+      "Prompt treatment of hypoglycaemia with fast-acting oral carbohydrate, and parenteral glucagon for severe episodes, with sick-day rules taught to the family",
+      "Emergency management of diabetic ketoacidosis with careful rehydration, insulin infusion and potassium replacement, avoiding overly rapid correction to reduce cerebral oedema risk",
+      "Surveillance for associated autoimmune conditions with thyroid and coeliac screening, and later screening for retinopathy, nephropathy and neuropathy",
+      "Multidisciplinary care through a paediatric diabetes team including diabetes specialist nurse, dietitian and psychological support for the child and family"
     ]
-   ],
-   "caption": "Overview comparison matrix for type 1 diabetes mellitus (child)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "type1-diabetes-child-real-image",
-   "title": "Type 1 Diabetes Mellitus (Child): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "type1_diabetes_child-pathway",
+      "title": "Type 1 Diabetes Mellitus (Child): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute insulin deficiency.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New-onset type 1 diabetes presenting in diabetic ketoacidosis (vomiting, abdominal pain, deep sighing breathing, dehydration, drowsiness) is a medical emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood glucose and HbA1c, Blood and/or urine ketones, Venous blood gas and electrolytes to assess for ketoacidosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin infusion pump, as absolute insulin deficiency cannot be managed by lifestyle or oral"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of type 1 diabetes mellitus (child)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "type1_diabetes_child-matrix",
+      "title": "Type 1 Diabetes Mellitus (Child): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood glucose and HbA1c, Blood and/or urine ketones, Venous blood gas and electrolytes to assess for ketoacidosis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Type 2 diabetes mellitus, Monogenic diabetes (MODY) and neonatal diabetes, Secondary diabetes (e.g. cystic fibrosis-related,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for type 1 diabetes mellitus (child)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 344-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "type1_diabetes_child-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Hyperglycaemia; HbA1c guides dose titration and glycaemic target"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood or urine ketones",
+          "cells": [
+            {
+              "text": "Ketosis; ketoacidosis when severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous blood gas and electrolytes",
+          "cells": [
+            {
+              "text": "Acid-base status in ketoacidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic autoantibodies (GAD, IA-2, ZnT8)",
+          "cells": [
+            {
+              "text": "Autoimmune beta-cell destruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and coeliac screening",
+          "cells": [
+            {
+              "text": "Associated autoimmune conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-peptide",
+          "cells": [
+            {
+              "text": "Used where the diabetes type is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "type1_diabetes_child-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 2 diabetes mellitus",
+          "cells": [
+            {
+              "text": "Type 1 needs lifelong insulin; lifestyle or oral agents alone are not enough"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes insipidus",
+          "cells": [
+            {
+              "text": "Shares polyuria and polydipsia; glucose testing separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary tract infection or behavioural enuresis",
+          "cells": [
+            {
+              "text": "New secondary enuresis in a previously dry child is a clue to diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monogenic diabetes (MODY) and neonatal diabetes",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "type1_diabetes_child-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong insulin",
+          "cells": [
+            {
+              "text": "Basal-bolus injections or insulin pump; lifestyle and oral agents alone are insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbohydrate awareness",
+          "cells": [
+            {
+              "text": "Match prandial insulin to carbohydrate intake and adjust for exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose monitoring",
+          "cells": [
+            {
+              "text": "Capillary testing or continuous glucose monitoring; HbA1c to titrate doses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia treatment",
+          "cells": [
+            {
+              "text": "Fast-acting oral carbohydrate; parenteral glucagon for severe episodes; sick-day rules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic ketoacidosis",
+          "cells": [
+            {
+              "text": "Careful rehydration, insulin infusion and potassium replacement; avoid rapid correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and complication screening",
+          "cells": [
+            {
+              "text": "Thyroid and coeliac screening; later retinopathy, nephropathy and neuropathy screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Paediatric diabetes team with specialist nurse, dietitian and psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "type1_diabetes_child-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    },
+    {
+      "id": "type1_diabetes_child-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Criteria for diagnosing diabetes mellitus (any one)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptoms of diabetes plus random glucose",
+          "cells": [
+            {
+              "text": ">=11.1 mmol/L (200 mg/dL)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fasting plasma glucose",
+          "cells": [
+            {
+              "text": ">=7.0 mmol/L (126 mg/dL)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "A1C",
+          "cells": [
+            {
+              "text": ">6.5%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Two-hour plasma glucose during oral glucose tolerance test",
+          "cells": [
+            {
+              "text": ">=11.1 mmol/L (200 mg/dL)"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Each criterion carries a footnote letter (a to d) whose text is not on the source page. A1C is printed as >6.5%."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "type1_diabetes_child-dx-mgmt",
+      "title": "Diagnosis and management of Type 1 Diabetes Mellitus (Child)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected type 1 diabetes in a child: polyuria, polydipsia, weight loss or enuresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ketoacidosis, reduced consciousness, severe hypoglycaemia or shock)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency DKA management: careful rehydration, insulin infusion and potassium",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood glucose, HbA1c, ketones, venous gas, electrolytes and pancreatic autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do autoantibodies and clinical features support type 1 diabetes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 2, monogenic or secondary diabetes; check C-peptide",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong insulin by injections or pump; lifestyle and oral agents are insufficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Carbohydrate matching and glucose monitoring with HbA1c-guided titration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hypoglycaemia treatment with oral carbohydrate, glucagon and sick-day rules",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary paediatric care with autoimmune and complication screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most live full lives with good control; ketoacidosis and hypoglycaemia are acute risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

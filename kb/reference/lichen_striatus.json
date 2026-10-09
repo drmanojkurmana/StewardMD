@@ -1,171 +1,469 @@
 {
- "id": "lichen_striatus",
- "name": "Lichen striatus",
- "aliases": [
-  "lichen striatus",
-  "linear lichenoid dermatosis",
-  "blaschkitis (related entity)"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A self-limiting linear inflammatory dermatosis that follows the lines of Blaschko, typically as a continuous or interrupted band running down a limb",
-   "Most common in children and often appears abruptly over days to weeks",
-   "Comprises small pink, tan, or hypopigmented flat-topped papules that may become confluent and scaly",
-   "Usually unilateral and solitary, most often on a limb but occasionally on the trunk, neck, or face",
-   "Nail involvement can occur when the band crosses a digit, causing ridging, splitting, or onycholysis",
-   "Post-inflammatory hypopigmentation is common and may be the most conspicuous residual feature in darker skin, persisting after the papules settle",
-   "Thought to reflect a T-cell response against a clone of cutaneous cells carrying a post-zygotic (mosaic) mutation expressed along Blaschko's lines",
-   "Generally needs only reassurance and emollients, with topical corticosteroids or calcineurin inhibitors used for itch"
+  "id": "lichen_striatus",
+  "name": "Lichen striatus",
+  "aliases": [
+    "lichen striatus",
+    "linear lichenoid dermatosis",
+    "blaschkitis (related entity)"
   ],
-  "pathophysiology": "Lichen striatus is believed to arise when an acquired trigger (possibly viral or environmental) provokes a T-lymphocyte-mediated reaction directed against a mosaic population of epidermal cells carrying a somatic mutation acquired during embryogenesis. Because these mutant clones are distributed along the developmental lines of Blaschko, the resulting lichenoid inflammation produces the characteristic linear band. The interface and sometimes spongiotic inflammation, often extending around adnexal structures deep in the dermis, damages the epidermis and disturbs pigmentation, accounting for the papules and the frequent residual hypopigmentation.",
-  "additionalDifferentials": [
-   "Linear lichen planus",
-   "Inflammatory linear verrucous epidermal naevus (ILVEN)",
-   "Linear psoriasis",
-   "Linear vitiligo (for the hypopigmented phase)",
-   "Linear porokeratosis",
-   "Blaschkitis (adult linear dermatosis)"
-  ],
-  "additionalInvestigations": [
-   "Clinical recognition of the Blaschko-linear distribution, which is usually sufficient for diagnosis",
-   "Skin biopsy in atypical cases showing lichenoid and sometimes spongiotic change with a deep peri-adnexal infiltrate",
-   "Wood's lamp examination to delineate the extent of post-inflammatory hypopigmentation",
-   "Nail examination and, if needed, nail-unit biopsy where there is dystrophy",
-   "Dermoscopy to support the diagnosis",
-   "Photographic follow-up to confirm spontaneous resolution"
-  ],
-  "redFlags": [
-   "Persistent or spreading linear lesions that do not resolve, prompting reconsideration of ILVEN or linear lichen planus",
-   "Progressive nail destruction",
-   "Atypical widespread or bilateral distribution requiring biopsy"
-  ],
-  "prognosis": "Excellent; most cases resolve spontaneously within months to about a year, although post-inflammatory hypopigmentation and nail changes may take longer to normalise.",
-  "pitfalls": [
-   "Mistaking it for linear lichen planus or ILVEN, which run more chronic courses",
-   "Attributing the residual hypopigmentation to vitiligo",
-   "Over-treating what is a self-limiting condition"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that the condition is benign and self-resolving, so active treatment is often unnecessary",
-   "Use emollients for dryness and scaling",
-   "Apply topical corticosteroids or calcineurin inhibitors for itch or inflammation",
-   "Explain that post-inflammatory hypopigmentation fades slowly and needs no specific therapy",
-   "Monitor and manage nail dystrophy where the band crosses a digit",
-   "Arrange photographic follow-up to confirm spontaneous resolution and refer to dermatology for atypical or persistent cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lichen_striatus-pathway",
-   "title": "Lichen striatus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A self-limiting linear inflammatory dermatosis that follows the lines of Blaschko, typically as a continuous or interrupted band running down a limb",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent or spreading linear lesions that do not resolve, prompting reconsideration of ILVEN or linear lichen planus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical recognition of the Blaschko-linear distribution, which is usually sufficient for diagnosis, Skin biopsy in atypical cases showing lichenoid and sometimes spongiotic change with a deep peri-adnexal infiltrate,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that the condition is benign and self-resolving, so active treatment is often unnecessary"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking it for linear lichen planus or ILVEN, which run more chronic courses"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lichen striatus."
-  }
- ],
- "tables": [
-  {
-   "id": "lichen_striatus-matrix",
-   "title": "Lichen striatus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A self-limiting linear inflammatory dermatosis that follows the lines of Blaschko, typically as a continuous or interrupted band",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A self-limiting linear inflammatory dermatosis that follows the lines of Blaschko, typically as a continuous or interrupted band running down a limb",
+      "Most common in children and often appears abruptly over days to weeks",
+      "Comprises small pink, tan, or hypopigmented flat-topped papules that may become confluent and scaly",
+      "Usually unilateral and solitary, most often on a limb but occasionally on the trunk, neck, or face",
+      "Nail involvement can occur when the band crosses a digit, causing ridging, splitting, or onycholysis",
+      "Post-inflammatory hypopigmentation is common and may be the most conspicuous residual feature in darker skin, persisting after the papules settle",
+      "Thought to reflect a T-cell response against a clone of cutaneous cells carrying a post-zygotic (mosaic) mutation expressed along Blaschko's lines",
+      "Generally needs only reassurance and emollients, with topical corticosteroids or calcineurin inhibitors used for itch"
     ],
-    [
-     "Key Investigations",
-     "Clinical recognition of the Blaschko-linear distribution, which is usually sufficient for diagnosis, Skin biopsy in atypical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lichen striatus is believed to arise when an acquired trigger (possibly viral or environmental) provokes a T-lymphocyte-mediated reaction directed against a mosaic population of epidermal cells carrying a somatic mutation acquired during embryogenesis. Because these mutant clones are distributed along the developmental lines of Blaschko, the resulting lichenoid inflammation produces the characteristic linear band. The interface and sometimes spongiotic inflammation, often extending around adnexal structures deep in the dermis, damages the epidermis and disturbs pigmentation, accounting for the papules and the frequent residual hypopigmentation.",
+    "additionalDifferentials": [
+      "Linear lichen planus",
+      "Inflammatory linear verrucous epidermal naevus (ILVEN)",
+      "Linear psoriasis",
+      "Linear vitiligo (for the hypopigmented phase)",
+      "Linear porokeratosis",
+      "Blaschkitis (adult linear dermatosis)"
     ],
-    [
-     "Primary Differentials",
-     "Linear lichen planus, Inflammatory linear verrucous epidermal naevus (ILVEN), Linear psoriasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical recognition of the Blaschko-linear distribution, which is usually sufficient for diagnosis",
+      "Skin biopsy in atypical cases showing lichenoid and sometimes spongiotic change with a deep peri-adnexal infiltrate",
+      "Wood's lamp examination to delineate the extent of post-inflammatory hypopigmentation",
+      "Nail examination and, if needed, nail-unit biopsy where there is dystrophy",
+      "Dermoscopy to support the diagnosis",
+      "Photographic follow-up to confirm spontaneous resolution"
     ],
-    [
-     "Management Strategy",
-     "Reassure that the condition is benign and self-resolving, so active treatment is often unnecessary",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent or spreading linear lesions that do not resolve, prompting reconsideration of ILVEN or linear lichen planus",
+      "Progressive nail destruction",
+      "Atypical widespread or bilateral distribution requiring biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking it for linear lichen planus or ILVEN, which run more chronic courses",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent; most cases resolve spontaneously within months to about a year, although post-inflammatory hypopigmentation and nail changes may take longer to normalise.",
+    "pitfalls": [
+      "Mistaking it for linear lichen planus or ILVEN, which run more chronic courses",
+      "Attributing the residual hypopigmentation to vitiligo",
+      "Over-treating what is a self-limiting condition"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that the condition is benign and self-resolving, so active treatment is often unnecessary",
+      "Use emollients for dryness and scaling",
+      "Apply topical corticosteroids or calcineurin inhibitors for itch or inflammation",
+      "Explain that post-inflammatory hypopigmentation fades slowly and needs no specific therapy",
+      "Monitor and manage nail dystrophy where the band crosses a digit",
+      "Arrange photographic follow-up to confirm spontaneous resolution and refer to dermatology for atypical or persistent cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for lichen striatus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lichen-striatus-real-image",
-   "title": "Lichen striatus: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "lichen_striatus-pathway",
+      "title": "Lichen striatus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A self-limiting linear inflammatory dermatosis that follows the lines of Blaschko, typically as a continuous or interrupted band running down a limb",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent or spreading linear lesions that do not resolve, prompting reconsideration of ILVEN or linear lichen planus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical recognition of the Blaschko-linear distribution, which is usually sufficient for diagnosis, Skin biopsy in atypical cases showing lichenoid and sometimes spongiotic change with a deep peri-adnexal infiltrate,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that the condition is benign and self-resolving, so active treatment is often unnecessary"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking it for linear lichen planus or ILVEN, which run more chronic courses"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lichen striatus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lichen_striatus-matrix",
+      "title": "Lichen striatus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A self-limiting linear inflammatory dermatosis that follows the lines of Blaschko, typically as a continuous or interrupted band",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical recognition of the Blaschko-linear distribution, which is usually sufficient for diagnosis, Skin biopsy in atypical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Linear lichen planus, Inflammatory linear verrucous epidermal naevus (ILVEN), Linear psoriasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that the condition is benign and self-resolving, so active treatment is often unnecessary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking it for linear lichen planus or ILVEN, which run more chronic courses",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lichen striatus."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lichen_striatus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognition of Blaschko-linear distribution",
+          "cells": [
+            {
+              "text": "Usually sufficient for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy in atypical cases",
+          "cells": [
+            {
+              "text": "Lichenoid and spongiotic change with deep peri-adnexal infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Extent of post-inflammatory hypopigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail examination and nail-unit biopsy",
+          "cells": [
+            {
+              "text": "Dystrophy where the band crosses a digit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_striatus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Linear lichen planus",
+          "cells": [
+            {
+              "text": "Runs a more chronic course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory linear verrucous epidermal naevus (ILVEN)",
+          "cells": [
+            {
+              "text": "Runs a more chronic course; persistent or spreading lesions prompt reconsideration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Linear vitiligo",
+          "cells": [
+            {
+              "text": "Hypopigmented phase; post-inflammatory hypopigmentation should not be called vitiligo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blaschkitis (adult linear dermatosis)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lichen_striatus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and self-resolving; active treatment often unnecessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients",
+          "cells": [
+            {
+              "text": "For dryness and scaling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids or calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "For itch or inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopigmentation",
+          "cells": [
+            {
+              "text": "Fades slowly and needs no specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail dystrophy",
+          "cells": [
+            {
+              "text": "Monitor and manage where the band crosses a digit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic follow-up",
+          "cells": [
+            {
+              "text": "Confirms spontaneous resolution; dermatology for atypical or persistent cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lichen_striatus-dx-mgmt",
+      "title": "Diagnosis and management of Lichen striatus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with an abrupt linear band of flat papules following Blaschko lines",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (persistent or spreading linear lesion, progressive nail destruction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: dermatology review to reconsider ILVEN or linear lichen planus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Recognise Blaschko distribution; biopsy if atypical; nail examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion typical of Blaschko-linear lichen striatus, with no red flags?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider linear lichen planus, ILVEN or linear psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: benign and self-resolving",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients for dryness and scaling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids or calcineurin inhibitors for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Explain that post-inflammatory hypopigmentation fades slowly",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Photographic follow-up; dermatology for atypical cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Excellent; most resolve within months to about a year",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

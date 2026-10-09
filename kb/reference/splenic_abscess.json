@@ -1,174 +1,461 @@
 {
- "id": "splenic_abscess",
- "name": "Splenic abscess",
- "aliases": [
-  "abscess of the spleen",
-  "splenic suppuration",
-  "pyogenic splenic abscess"
- ],
- "class": "infective",
- "system": "GI / Hepatobiliary surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Splenic abscess is uncommon but important, and classically presents with fever, left upper quadrant pain, and left-sided tenderness, sometimes with referred left shoulder-tip pain",
-   "It most often arises from haematogenous seeding, with infective endocarditis a notable source, and is increasingly seen in immunocompromised and diabetic patients",
-   "A left pleural effusion, basal atelectasis, or raised hemidiaphragm may be present and can distract from the underlying splenic pathology",
-   "Contrast CT is the imaging modality of choice and defines the size, number, and character of collections, while ultrasound is a useful bedside adjunct",
-   "Blood cultures and identification of the causative organism guide targeted antimicrobial therapy; polymicrobial, fungal (especially Candida in the immunosuppressed), and mycobacterial causes occur",
-   "Management combines appropriate antibiotics with drainage; image-guided percutaneous drainage may suffice for a unilocular collection, while splenectomy is often required for multiloculated or refractory disease",
-   "An untreated or ruptured splenic abscess can lead to overwhelming sepsis, so prompt diagnosis and source control are essential"
+  "id": "splenic_abscess",
+  "name": "Splenic abscess",
+  "aliases": [
+    "abscess of the spleen",
+    "splenic suppuration",
+    "pyogenic splenic abscess"
   ],
-  "pathophysiology": "Splenic abscesses develop when organisms reach and proliferate within splenic tissue, most commonly by haematogenous spread from a distant focus such as infective endocarditis, or from contiguous infection, penetrating trauma, or infarction of the spleen (as in sickle cell disease) that subsequently becomes infected. Immunosuppression, diabetes, and intravenous drug use increase susceptibility and broaden the range of pathogens to include fungi and unusual bacteria. Localised suppuration forms a walled-off collection of pus; as it enlarges it can rupture into the peritoneal cavity, causing peritonitis, or into adjacent structures, and can seed the bloodstream to produce systemic sepsis.",
-  "additionalDifferentials": [
-   "Splenic infarct",
-   "Splenic cyst (including hydatid cyst) or pseudocyst",
-   "Subphrenic abscess",
-   "Left-sided pyelonephritis or perinephric abscess",
-   "Pancreatic tail abscess or pseudocyst",
-   "Splenic tumour or lymphoma"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the abdomen to characterise the abscess",
-   "Blood cultures and inflammatory markers to identify the organism and monitor response",
-   "Echocardiography to seek infective endocarditis as a source",
-   "Ultrasound for bedside assessment and to guide percutaneous drainage",
-   "Aspirate microscopy, culture, and sensitivity from drained material",
-   "Screening for immunocompromise (including HIV and diabetes) where relevant"
-  ],
-  "redFlags": [
-   "Signs of rupture with peritonitis and haemodynamic instability requiring emergency surgery",
-   "Septic shock or multi-organ dysfunction from uncontrolled infection",
-   "Rapid clinical deterioration despite antibiotics indicating inadequate source control",
-   "Underlying infective endocarditis with ongoing embolic risk"
-  ],
-  "prognosis": "With early diagnosis, effective antimicrobial therapy, and adequate drainage or splenectomy the outlook is generally favourable. Mortality rises sharply with delayed treatment, rupture, multiloculated or fungal infection, and significant immunocompromise. After splenectomy patients require lifelong precautions and vaccination against encapsulated organisms.",
-  "pitfalls": [
-   "Attributing left upper quadrant pain and fever to pneumonia or a pleural effusion and missing the splenic source",
-   "Relying on antibiotics alone for a large or multiloculated abscess that requires drainage",
-   "Failing to seek and treat an underlying source such as endocarditis",
-   "Neglecting post-splenectomy sepsis prophylaxis and vaccination",
-   "Overlooking fungal or atypical organisms in immunocompromised patients"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt empirical intravenous antibiotics covering enteric Gram-negatives, anaerobes and streptococci, then narrowed to blood and aspirate culture and sensitivities",
-   "Add antifungal cover with an echinocandin or azole where Candida is likely, as in the immunocompromised, and antituberculous therapy if a mycobacterial cause is confirmed",
-   "Drainage of the collection: image-guided percutaneous drainage for a unilocular abscess, with splenectomy for multiloculated or refractory disease",
-   "Source control by identifying and treating the origin, notably infective endocarditis, using echocardiography and appropriately prolonged therapy",
-   "Resuscitation and sepsis management with fluids and haemodynamic support, and urgent laparotomy with splenectomy for rupture causing peritonitis",
-   "Monitor clinical response, inflammatory markers and repeat imaging to confirm resolution",
-   "After splenectomy, give pneumococcal, meningococcal and Haemophilus influenzae type b immunisation plus antibiotic prophylaxis, and counsel on overwhelming post-splenectomy infection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "splenic_abscess-pathway",
-   "title": "Splenic abscess: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Splenic abscess is uncommon but important, and classically presents with fever, left upper quadrant pain, and left-sided tenderness, sometimes with referred left shoulder-tip pain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of rupture with peritonitis and haemodynamic instability requiring emergency surgery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the abdomen to characterise the abscess, Blood cultures and inflammatory markers to identify the organism and monitor response, Echocardiography to seek infective endocarditis as a source"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt empirical intravenous antibiotics covering enteric Gram-negatives, anaerobes and streptococci, then narrowed to blood and aspirate culture and sensitivities"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing left upper quadrant pain and fever to pneumonia or a pleural effusion and missing the splenic source"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of splenic abscess."
-  }
- ],
- "tables": [
-  {
-   "id": "splenic_abscess-matrix",
-   "title": "Splenic abscess: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Splenic abscess is uncommon but important, and classically presents with fever, left upper quadrant pain, and left-sided",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "GI / Hepatobiliary surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Splenic abscess is uncommon but important, and classically presents with fever, left upper quadrant pain, and left-sided tenderness, sometimes with referred left shoulder-tip pain",
+      "It most often arises from haematogenous seeding, with infective endocarditis a notable source, and is increasingly seen in immunocompromised and diabetic patients",
+      "A left pleural effusion, basal atelectasis, or raised hemidiaphragm may be present and can distract from the underlying splenic pathology",
+      "Contrast CT is the imaging modality of choice and defines the size, number, and character of collections, while ultrasound is a useful bedside adjunct",
+      "Blood cultures and identification of the causative organism guide targeted antimicrobial therapy; polymicrobial, fungal (especially Candida in the immunosuppressed), and mycobacterial causes occur",
+      "Management combines appropriate antibiotics with drainage; image-guided percutaneous drainage may suffice for a unilocular collection, while splenectomy is often required for multiloculated or refractory disease",
+      "An untreated or ruptured splenic abscess can lead to overwhelming sepsis, so prompt diagnosis and source control are essential"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the abdomen to characterise the abscess, Blood cultures and inflammatory markers to identify the organism",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Splenic abscesses develop when organisms reach and proliferate within splenic tissue, most commonly by haematogenous spread from a distant focus such as infective endocarditis, or from contiguous infection, penetrating trauma, or infarction of the spleen (as in sickle cell disease) that subsequently becomes infected. Immunosuppression, diabetes, and intravenous drug use increase susceptibility and broaden the range of pathogens to include fungi and unusual bacteria. Localised suppuration forms a walled-off collection of pus; as it enlarges it can rupture into the peritoneal cavity, causing peritonitis, or into adjacent structures, and can seed the bloodstream to produce systemic sepsis.",
+    "additionalDifferentials": [
+      "Splenic infarct",
+      "Splenic cyst (including hydatid cyst) or pseudocyst",
+      "Subphrenic abscess",
+      "Left-sided pyelonephritis or perinephric abscess",
+      "Pancreatic tail abscess or pseudocyst",
+      "Splenic tumour or lymphoma"
     ],
-    [
-     "Primary Differentials",
-     "Splenic infarct, Splenic cyst (including hydatid cyst) or pseudocyst, Subphrenic abscess",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the abdomen to characterise the abscess",
+      "Blood cultures and inflammatory markers to identify the organism and monitor response",
+      "Echocardiography to seek infective endocarditis as a source",
+      "Ultrasound for bedside assessment and to guide percutaneous drainage",
+      "Aspirate microscopy, culture, and sensitivity from drained material",
+      "Screening for immunocompromise (including HIV and diabetes) where relevant"
     ],
-    [
-     "Management Strategy",
-     "Prompt empirical intravenous antibiotics covering enteric Gram-negatives, anaerobes and streptococci, then narrowed to blood and",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of rupture with peritonitis and haemodynamic instability requiring emergency surgery",
+      "Septic shock or multi-organ dysfunction from uncontrolled infection",
+      "Rapid clinical deterioration despite antibiotics indicating inadequate source control",
+      "Underlying infective endocarditis with ongoing embolic risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing left upper quadrant pain and fever to pneumonia or a pleural effusion and missing the splenic source",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis, effective antimicrobial therapy, and adequate drainage or splenectomy the outlook is generally favourable. Mortality rises sharply with delayed treatment, rupture, multiloculated or fungal infection, and significant immunocompromise. After splenectomy patients require lifelong precautions and vaccination against encapsulated organisms.",
+    "pitfalls": [
+      "Attributing left upper quadrant pain and fever to pneumonia or a pleural effusion and missing the splenic source",
+      "Relying on antibiotics alone for a large or multiloculated abscess that requires drainage",
+      "Failing to seek and treat an underlying source such as endocarditis",
+      "Neglecting post-splenectomy sepsis prophylaxis and vaccination",
+      "Overlooking fungal or atypical organisms in immunocompromised patients"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt empirical intravenous antibiotics covering enteric Gram-negatives, anaerobes and streptococci, then narrowed to blood and aspirate culture and sensitivities",
+      "Add antifungal cover with an echinocandin or azole where Candida is likely, as in the immunocompromised, and antituberculous therapy if a mycobacterial cause is confirmed",
+      "Drainage of the collection: image-guided percutaneous drainage for a unilocular abscess, with splenectomy for multiloculated or refractory disease",
+      "Source control by identifying and treating the origin, notably infective endocarditis, using echocardiography and appropriately prolonged therapy",
+      "Resuscitation and sepsis management with fluids and haemodynamic support, and urgent laparotomy with splenectomy for rupture causing peritonitis",
+      "Monitor clinical response, inflammatory markers and repeat imaging to confirm resolution",
+      "After splenectomy, give pneumococcal, meningococcal and Haemophilus influenzae type b immunisation plus antibiotic prophylaxis, and counsel on overwhelming post-splenectomy infection"
     ]
-   ],
-   "caption": "Overview comparison matrix for splenic abscess."
-  }
- ],
- "diagrams": [
-  {
-   "id": "splenic-abscess-real-image",
-   "title": "Splenic abscess: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "splenic_abscess-pathway",
+      "title": "Splenic abscess: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Splenic abscess is uncommon but important, and classically presents with fever, left upper quadrant pain, and left-sided tenderness, sometimes with referred left shoulder-tip pain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of rupture with peritonitis and haemodynamic instability requiring emergency surgery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the abdomen to characterise the abscess, Blood cultures and inflammatory markers to identify the organism and monitor response, Echocardiography to seek infective endocarditis as a source"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt empirical intravenous antibiotics covering enteric Gram-negatives, anaerobes and streptococci, then narrowed to blood and aspirate culture and sensitivities"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing left upper quadrant pain and fever to pneumonia or a pleural effusion and missing the splenic source"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of splenic abscess."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "splenic_abscess-matrix",
+      "title": "Splenic abscess: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Splenic abscess is uncommon but important, and classically presents with fever, left upper quadrant pain, and left-sided",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the abdomen to characterise the abscess, Blood cultures and inflammatory markers to identify the organism",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Splenic infarct, Splenic cyst (including hydatid cyst) or pseudocyst, Subphrenic abscess",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt empirical intravenous antibiotics covering enteric Gram-negatives, anaerobes and streptococci, then narrowed to blood and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing left upper quadrant pain and fever to pneumonia or a pleural effusion and missing the splenic source",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for splenic abscess."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "splenic_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast CT of the abdomen",
+          "cells": [
+            {
+              "text": "Size, number and character of the abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures and inflammatory markers",
+          "cells": [
+            {
+              "text": "Causative organism and response to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Infective endocarditis as a source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Bedside assessment; guides percutaneous drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspirate microscopy, culture and sensitivity",
+          "cells": [
+            {
+              "text": "Organism and sensitivities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunocompromise screen",
+          "cells": [
+            {
+              "text": "HIV and diabetes, where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenic_abscess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Splenic infarct",
+          "cells": [
+            {
+              "text": "An ischaemic lesion without infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenic cyst (including hydatid cyst) or pseudocyst",
+          "cells": [
+            {
+              "text": "Cystic lesion without infection; the hydatid form must be considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "splenic_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical intravenous antibiotics",
+          "cells": [
+            {
+              "text": "Covering enteric Gram-negatives, anaerobes and streptococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifungal cover",
+          "cells": [
+            {
+              "text": "An echinocandin or azole where Candida is likely, as in the immunocompromised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided percutaneous drainage",
+          "cells": [
+            {
+              "text": "For a unilocular abscess; surgery for large or multiloculated collections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Treat the origin, notably infective endocarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resuscitation and sepsis management",
+          "cells": [
+            {
+              "text": "Fluids, haemodynamic support, and surgery when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Clinical response, inflammatory markers and repeat imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-splenectomy immunisation",
+          "cells": [
+            {
+              "text": "Pneumococcal, meningococcal and Haemophilus influenzae type b vaccines"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "splenic_abscess-dx-mgmt",
+      "title": "Diagnosis and management of Splenic abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever and left upper quadrant pain with a splenic mass: suspected splenic abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rupture with peritonitis, septic shock, poor response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgery and resuscitation for rupture or septic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT of abdomen; blood cultures; echocardiography for endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CT confirm a splenic abscess with a source identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider splenic infarct, cyst or another left-sided collection; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical IV antibiotics covering Gram-negatives, anaerobes and streptococci",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Image-guided percutaneous drainage for a unilocular abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the source, such as infective endocarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pneumococcal, meningococcal and Hib vaccination after splenectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated or ruptured abscess can cause overwhelming sepsis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

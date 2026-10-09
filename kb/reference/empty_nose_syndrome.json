@@ -1,169 +1,467 @@
 {
- "id": "empty_nose_syndrome",
- "name": "Empty nose syndrome",
- "aliases": [
-  "ENS",
-  "iatrogenic nasal emptiness"
- ],
- "class": "non_infective",
- "system": "Respiratory / Nose",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Otolaryngology reference texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A paradoxical sensation of nasal obstruction and difficulty breathing despite an objectively wide, patent nasal airway",
-   "It is typically iatrogenic, following extensive turbinate reduction or resection",
-   "Patients describe a feeling of suffocation, nasal dryness, crusting and a distressing loss of awareness of airflow",
-   "There is often a significant burden of anxiety, low mood and sleep disturbance",
-   "Diagnosis is clinical, correlating symptoms with a history of turbinate surgery and a paradoxically open nasal cavity",
-   "Management is challenging and includes humidification, nasal conditioning and, in selected cases, procedures to augment tissue"
+  "id": "empty_nose_syndrome",
+  "name": "Empty nose syndrome",
+  "aliases": [
+    "ENS",
+    "iatrogenic nasal emptiness"
   ],
-  "pathophysiology": "Empty nose syndrome is attributed to loss of functional turbinate tissue, which normally regulates nasal airflow, resistance, humidification and sensation. Excessive turbinate reduction disrupts laminar airflow and the mucosal sensory feedback (including cooling detected by nasal receptors) that generates the perception of comfortable breathing, so patients feel obstructed despite a wide airway. Impaired air conditioning also causes dryness, crusting and mucosal dysfunction, and the distressing symptoms are compounded by neurosensory and psychological factors.",
-  "additionalDifferentials": [
-   "Persistent structural nasal obstruction",
-   "Chronic rhinosinusitis",
-   "Atrophic rhinitis",
-   "Non-allergic rhinitis",
-   "Somatic symptom or anxiety disorder"
-  ],
-  "additionalInvestigations": [
-   "History correlating symptoms with prior turbinate surgery",
-   "Nasal endoscopy documenting the wide cavity and mucosal state",
-   "Cotton test placing tissue where turbinate was removed to gauge symptom relief",
-   "Assessment of mood, anxiety and sleep",
-   "Exclusion of coexisting rhinosinusitis or atrophic rhinitis"
-  ],
-  "redFlags": [
-   "Severe psychological distress or suicidal ideation",
-   "Features suggesting atrophic rhinitis with secondary infection",
-   "Progressive crusting and mucosal breakdown",
-   "Significant sleep or quality-of-life impairment"
-  ],
-  "prognosis": "The condition is often chronic and difficult to treat; conservative measures and, in some, augmentation procedures can improve symptoms, but outcomes are variable and psychological support is frequently needed.",
-  "pitfalls": [
-   "Dismissing the complaint because the airway looks widely patent",
-   "Overlooking the substantial psychological burden",
-   "Performing further tissue-removing surgery that worsens symptoms",
-   "Confusing it with ordinary structural obstruction or rhinosinusitis"
-  ],
-  "references": [
-   "Otolaryngology reference texts (standard reference)",
-   "Rhinology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line conservative care with nasal humidification, saline irrigation, sprays and emollient ointment to relieve dryness, crusting and the paradoxical sensation of obstruction",
-   "Nasal conditioning measures to improve air humidification and mucosal health",
-   "Surgical augmentation of the nasal cavity with implants or grafts to restore lost turbinate bulk and airflow resistance in selected refractory cases",
-   "Use of the cotton test to predict likely benefit from tissue augmentation before surgery",
-   "Assessment and treatment of the associated anxiety, low mood and sleep disturbance, with psychological support",
-   "Exclusion and treatment of coexisting rhinosinusitis or atrophic rhinitis",
-   "Otolaryngology referral to a specialist familiar with the condition given its challenging, often chronic course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "empty_nose_syndrome-pathway",
-   "title": "Empty nose syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A paradoxical sensation of nasal obstruction and difficulty breathing despite an objectively wide, patent nasal airway",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe psychological distress or suicidal ideation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: History correlating symptoms with prior turbinate surgery, Nasal endoscopy documenting the wide cavity and mucosal state, Cotton test placing tissue where turbinate was removed to gauge symptom relief"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line conservative care with nasal humidification, saline irrigation, sprays and emollient ointment to relieve dryness, crusting and the paradoxical sensation of obstruction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing the complaint because the airway looks widely patent"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of empty nose syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "empty_nose_syndrome-matrix",
-   "title": "Empty nose syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A paradoxical sensation of nasal obstruction and difficulty breathing despite an objectively wide, patent nasal airway",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Nose",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Otolaryngology reference texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A paradoxical sensation of nasal obstruction and difficulty breathing despite an objectively wide, patent nasal airway",
+      "It is typically iatrogenic, following extensive turbinate reduction or resection",
+      "Patients describe a feeling of suffocation, nasal dryness, crusting and a distressing loss of awareness of airflow",
+      "There is often a significant burden of anxiety, low mood and sleep disturbance",
+      "Diagnosis is clinical, correlating symptoms with a history of turbinate surgery and a paradoxically open nasal cavity",
+      "Management is challenging and includes humidification, nasal conditioning and, in selected cases, procedures to augment tissue"
     ],
-    [
-     "Key Investigations",
-     "History correlating symptoms with prior turbinate surgery, Nasal endoscopy documenting the wide cavity and mucosal state, Cotton",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Empty nose syndrome is attributed to loss of functional turbinate tissue, which normally regulates nasal airflow, resistance, humidification and sensation. Excessive turbinate reduction disrupts laminar airflow and the mucosal sensory feedback (including cooling detected by nasal receptors) that generates the perception of comfortable breathing, so patients feel obstructed despite a wide airway. Impaired air conditioning also causes dryness, crusting and mucosal dysfunction, and the distressing symptoms are compounded by neurosensory and psychological factors.",
+    "additionalDifferentials": [
+      "Persistent structural nasal obstruction",
+      "Chronic rhinosinusitis",
+      "Atrophic rhinitis",
+      "Non-allergic rhinitis",
+      "Somatic symptom or anxiety disorder"
     ],
-    [
-     "Primary Differentials",
-     "Persistent structural nasal obstruction, Chronic rhinosinusitis, Atrophic rhinitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "History correlating symptoms with prior turbinate surgery",
+      "Nasal endoscopy documenting the wide cavity and mucosal state",
+      "Cotton test placing tissue where turbinate was removed to gauge symptom relief",
+      "Assessment of mood, anxiety and sleep",
+      "Exclusion of coexisting rhinosinusitis or atrophic rhinitis"
     ],
-    [
-     "Management Strategy",
-     "First-line conservative care with nasal humidification, saline irrigation, sprays and emollient ointment to relieve dryness,",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe psychological distress or suicidal ideation",
+      "Features suggesting atrophic rhinitis with secondary infection",
+      "Progressive crusting and mucosal breakdown",
+      "Significant sleep or quality-of-life impairment"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing the complaint because the airway looks widely patent",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is often chronic and difficult to treat; conservative measures and, in some, augmentation procedures can improve symptoms, but outcomes are variable and psychological support is frequently needed.",
+    "pitfalls": [
+      "Dismissing the complaint because the airway looks widely patent",
+      "Overlooking the substantial psychological burden",
+      "Performing further tissue-removing surgery that worsens symptoms",
+      "Confusing it with ordinary structural obstruction or rhinosinusitis"
+    ],
+    "references": [
+      "Otolaryngology reference texts (standard reference)",
+      "Rhinology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line conservative care with nasal humidification, saline irrigation, sprays and emollient ointment to relieve dryness, crusting and the paradoxical sensation of obstruction",
+      "Nasal conditioning measures to improve air humidification and mucosal health",
+      "Surgical augmentation of the nasal cavity with implants or grafts to restore lost turbinate bulk and airflow resistance in selected refractory cases",
+      "Use of the cotton test to predict likely benefit from tissue augmentation before surgery",
+      "Assessment and treatment of the associated anxiety, low mood and sleep disturbance, with psychological support",
+      "Exclusion and treatment of coexisting rhinosinusitis or atrophic rhinitis",
+      "Otolaryngology referral to a specialist familiar with the condition given its challenging, often chronic course"
     ]
-   ],
-   "caption": "Overview comparison matrix for empty nose syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "empty-nose-syndrome-real-image",
-   "title": "Empty nose syndrome: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "empty_nose_syndrome-pathway",
+      "title": "Empty nose syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A paradoxical sensation of nasal obstruction and difficulty breathing despite an objectively wide, patent nasal airway",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe psychological distress or suicidal ideation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: History correlating symptoms with prior turbinate surgery, Nasal endoscopy documenting the wide cavity and mucosal state, Cotton test placing tissue where turbinate was removed to gauge symptom relief"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line conservative care with nasal humidification, saline irrigation, sprays and emollient ointment to relieve dryness, crusting and the paradoxical sensation of obstruction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing the complaint because the airway looks widely patent"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of empty nose syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "empty_nose_syndrome-matrix",
+      "title": "Empty nose syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A paradoxical sensation of nasal obstruction and difficulty breathing despite an objectively wide, patent nasal airway",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "History correlating symptoms with prior turbinate surgery, Nasal endoscopy documenting the wide cavity and mucosal state, Cotton",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Persistent structural nasal obstruction, Chronic rhinosinusitis, Atrophic rhinitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line conservative care with nasal humidification, saline irrigation, sprays and emollient ointment to relieve dryness,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing the complaint because the airway looks widely patent",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for empty nose syndrome."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Otolaryngology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "empty_nose_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom history against prior turbinate surgery",
+          "cells": [
+            {
+              "text": "Temporal link to tissue removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal endoscopy",
+          "cells": [
+            {
+              "text": "Wide cavity and mucosal state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cotton test",
+          "cells": [
+            {
+              "text": "Predicts benefit from tissue augmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mood, anxiety and sleep assessment",
+          "cells": [
+            {
+              "text": "Psychological burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for rhinosinusitis or atrophic rhinitis",
+          "cells": [
+            {
+              "text": "Coexisting disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "empty_nose_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Persistent structural nasal obstruction",
+          "cells": [
+            {
+              "text": "Obstruction with a narrow airway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic rhinosinusitis",
+          "cells": [
+            {
+              "text": "Mucus and facial pressure with sinus disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrophic rhinitis",
+          "cells": [
+            {
+              "text": "Crusting and foetor with mucosal atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatic symptom or anxiety disorder",
+          "cells": [
+            {
+              "text": "Symptoms without objective findings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "empty_nose_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Humidification, saline irrigation, sprays and emollient ointment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal conditioning",
+          "cells": [
+            {
+              "text": "Improves humidification and mucosal health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cotton test",
+          "cells": [
+            {
+              "text": "Predicts likely benefit before augmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical augmentation",
+          "cells": [
+            {
+              "text": "Implants or grafts in selected refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Anxiety, low mood and sleep disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Otolaryngology familiar with the condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "empty_nose_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Empty nose syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected empty nose syndrome: paradoxical obstruction after turbinate reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (suicidal ideation, progressive crusting, atrophic infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent mental health assessment for severe distress or suicidal ideation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy; cotton test; history of turbinate surgery; mood and sleep assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the cotton test relieve symptoms after prior turbinate removal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider structural obstruction, rhinosinusitis, atrophic rhinitis or somatic disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Saline irrigation, humidification, sprays and emollient ointment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cotton test to predict benefit before any augmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Implant or graft augmentation in selected refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychological support for anxiety, low mood and poor sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Avoid further tissue-removing surgery; refer to a specialist",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Chronic and hard to treat; outcomes variable, psychological support often needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

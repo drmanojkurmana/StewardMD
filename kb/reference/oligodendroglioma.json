@@ -1,184 +1,469 @@
 {
- "id": "oligodendroglioma",
- "name": "oligodendroglioma",
- "aliases": [
-  "oligodendroglial tumour",
-  "IDH-mutant 1p/19q-codeleted glioma"
- ],
- "class": "non_infective",
- "system": "nervous",
- "specialty": "neuro-oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours of the Central Nervous System",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Diagnosis now requires both an IDH1 or IDH2 mutation and whole-arm 1p/19q codeletion; without codeletion the tumour is not an oligodendroglioma regardless of morphology.",
-   "It is a tumour of adults with a predilection for the cerebral cortex and subcortical white matter, most often frontal.",
-   "Seizures are the commonest presenting feature and may precede diagnosis by years, reflecting the tumour's cortical, slow-growing nature.",
-   "Calcification is frequent and is well seen on CT, an unusual and helpful feature among diffuse gliomas.",
-   "Classic histology shows monotonous cells with perinuclear haloes, the fried-egg artefact, and a delicate chicken-wire capillary network.",
-   "The 1p/19q codeletion predicts sensitivity to alkylating chemotherapy and to combined chemoradiotherapy, underpinning a relatively favourable outcome.",
-   "Graded as CNS WHO grade 2 or grade 3, with grade 3 showing brisk mitoses, microvascular proliferation or necrosis, and CDKN2A homozygous deletion portends worse behaviour.",
-   "Even grade 3 oligodendroglioma generally outperforms IDH-mutant astrocytoma of comparable grade."
+  "id": "oligodendroglioma",
+  "name": "oligodendroglioma",
+  "aliases": [
+    "oligodendroglial tumour",
+    "IDH-mutant 1p/19q-codeleted glioma"
   ],
-  "pathophysiology": "Oligodendroglioma is a diffusely infiltrating glioma defined molecularly by an early IDH1 or IDH2 mutation together with combined whole-arm loss of chromosomes 1p and 19q, typically arising from an unbalanced translocation. The mutant isocitrate dehydrogenase produces the oncometabolite 2-hydroxyglutarate, which inhibits alpha-ketoglutarate-dependent dioxygenases and drives a hypermethylator phenotype that reprogrammes gene expression. TERT promoter mutation and, frequently, CIC and FUBP1 mutations accompany the codeletion. The resulting neoplastic cells infiltrate cortex and white matter while retaining an indolent tempo, and higher-grade transformation is marked by increased proliferation, microvascular proliferation, necrosis and CDKN2A loss.",
-  "additionalDifferentials": [
-   "IDH-mutant astrocytoma",
-   "glioblastoma, IDH-wildtype",
-   "clear cell ependymoma",
-   "central neurocytoma",
-   "dysembryoplastic neuroepithelial tumour",
-   "small cell glioblastoma",
-   "cerebral metastasis"
-  ],
-  "additionalInvestigations": [
-   "contrast-enhanced MRI of the brain with perfusion and spectroscopy",
-   "CT to demonstrate calcification",
-   "IDH1 and IDH2 mutation testing",
-   "1p/19q codeletion analysis to confirm the diagnosis",
-   "TERT promoter and CDKN2A status",
-   "tissue diagnosis by resection or stereotactic biopsy",
-   "neuropsychological and seizure assessment at baseline"
-  ],
-  "redFlags": [
-   "clinical or radiological signs of raised intracranial pressure",
-   "new or progressive focal neurological deficit",
-   "status epilepticus or escalating seizure frequency",
-   "new nodular enhancement suggesting higher-grade transformation"
-  ],
-  "prognosis": "Among diffuse gliomas the outlook is relatively favourable, with prolonged survival particularly in grade 2 disease, and the 1p/19q codeletion predicts chemosensitivity; nonetheless the tumour remains incurable and eventually progresses.",
-  "pitfalls": [
-   "diagnosing oligodendroglioma on morphology alone without confirming 1p/19q codeletion",
-   "mistaking the fried-egg halo, a fixation artefact, for a specific diagnostic finding",
-   "overlooking calcified cortical lesions on MRI that are obvious on CT",
-   "assuming all IDH-mutant gliomas share the same prognosis and treatment",
-   "underestimating higher-grade transformation when enhancement appears"
-  ],
-  "references": [
-   "WHO Classification of Tumours of the Central Nervous System",
-   "EANO guidelines on the diagnosis and treatment of diffuse gliomas",
-   "DeAngelis and Wen, Neurologic Complications of Cancer"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Confirm diagnosis molecularly with IDH1/IDH2 mutation plus whole-arm 1p/19q codeletion before planning treatment, since histology alone is unreliable; tumours are grade 2 or grade 3, there is no grade 4 oligodendroglioma",
-   "Pursue maximal safe surgical resection as the principal treatment, coordinating timing with radiotherapy and chemotherapy since upfront radiotherapy can reduce brain plasticity needed for later staged resection",
-   "Consider giving chemotherapy first in partially resectable tumours to allow response and plasticity before a later staged resection",
-   "For grade 3 (anaplastic) codeleted disease, use postoperative combined chemoradiotherapy rather than radiotherapy alone, given a durable survival benefit for combined therapy over radiotherapy alone in this molecularly defined population",
-   "Use an alkylating-agent-based chemotherapy regimen with radiotherapy for codeleted anaplastic disease, since this combination is associated with roughly double the survival of radiotherapy alone in this subgroup",
-   "Do not substitute chemotherapy alone for radiotherapy in newly diagnosed disease, as chemotherapy-only strategies are unproven and associated with more progression outside a trial setting",
-   "Weigh the long-term cognitive toxicity of radiotherapy against benefit given the long survival horizon typical of this tumour, particularly in lower grade disease",
-   "Consider watchful waiting after resection in select lower-risk patients, while recognizing that CDKN2A/B homozygous loss, incomplete resection, large tumour size, and midline crossing suggest a less favourable course",
-   "For grade 2 disease, discuss early postoperative radiotherapy versus deferring to progression, since early radiotherapy improves progression-free survival and one-year seizure control without a clear overall survival difference",
-   "At recurrence after radiotherapy, offer chemotherapy since most patients with anaplastic oligodendroglioma respond",
-   "Consider switching to temozolomide, an oral alkylating agent, at first recurrence after progression on an alkylating combination regimen, given comparable efficacy and better tolerability",
-   "Regard IDH1-targeted therapy and IDH1 vaccine approaches as investigational for this tumour rather than standard of care, since oligodendroglioma-specific outcome data were not established",
-   "Monitor with periodic contrast-enhanced brain MRI to detect progression or higher-grade transformation, and manage seizures with antiseizure medication as an ongoing need",
-   "Refer urgently to neuro-oncology or neurosurgery for new or progressive focal deficits, escalating seizures or status epilepticus, raised intracranial pressure signs, or new nodular enhancement suggesting higher-grade transformation, and manage all patients within a multidisciplinary neuro-oncology framework with supportive and palliative input introduced over time"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oligodendroglioma-pathway",
-   "title": "oligodendroglioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Diagnosis now requires both an IDH1 or IDH2 mutation and whole-arm 1p/19q codeletion; without codeletion the tumour is not an oligodendroglioma regardless of morphology.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: clinical or radiological signs of raised intracranial pressure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: contrast-enhanced MRI of the brain with perfusion and spectroscopy, CT to demonstrate calcification, IDH1 and IDH2 mutation testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm diagnosis molecularly with IDH1/IDH2 mutation plus whole-arm 1p/19q codeletion before planning treatment, since histology alone is unreliable; tumours are grade 2 or grade 3, there is no grade 4"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: diagnosing oligodendroglioma on morphology alone without confirming 1p/19q codeletion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oligodendroglioma."
-  }
- ],
- "tables": [
-  {
-   "id": "oligodendroglioma-matrix",
-   "title": "oligodendroglioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Diagnosis now requires both an IDH1 or IDH2 mutation and whole-arm 1p/19q codeletion; without codeletion the tumour is not an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "nervous",
+  "specialty": "neuro-oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours of the Central Nervous System",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Diagnosis now requires both an IDH1 or IDH2 mutation and whole-arm 1p/19q codeletion; without codeletion the tumour is not an oligodendroglioma regardless of morphology.",
+      "It is a tumour of adults with a predilection for the cerebral cortex and subcortical white matter, most often frontal.",
+      "Seizures are the commonest presenting feature and may precede diagnosis by years, reflecting the tumour's cortical, slow-growing nature.",
+      "Calcification is frequent and is well seen on CT, an unusual and helpful feature among diffuse gliomas.",
+      "Classic histology shows monotonous cells with perinuclear haloes, the fried-egg artefact, and a delicate chicken-wire capillary network.",
+      "The 1p/19q codeletion predicts sensitivity to alkylating chemotherapy and to combined chemoradiotherapy, underpinning a relatively favourable outcome.",
+      "Graded as CNS WHO grade 2 or grade 3, with grade 3 showing brisk mitoses, microvascular proliferation or necrosis, and CDKN2A homozygous deletion portends worse behaviour.",
+      "Even grade 3 oligodendroglioma generally outperforms IDH-mutant astrocytoma of comparable grade."
     ],
-    [
-     "Key Investigations",
-     "contrast-enhanced MRI of the brain with perfusion and spectroscopy, CT to demonstrate calcification, IDH1 and IDH2 mutation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oligodendroglioma is a diffusely infiltrating glioma defined molecularly by an early IDH1 or IDH2 mutation together with combined whole-arm loss of chromosomes 1p and 19q, typically arising from an unbalanced translocation. The mutant isocitrate dehydrogenase produces the oncometabolite 2-hydroxyglutarate, which inhibits alpha-ketoglutarate-dependent dioxygenases and drives a hypermethylator phenotype that reprogrammes gene expression. TERT promoter mutation and, frequently, CIC and FUBP1 mutations accompany the codeletion. The resulting neoplastic cells infiltrate cortex and white matter while retaining an indolent tempo, and higher-grade transformation is marked by increased proliferation, microvascular proliferation, necrosis and CDKN2A loss.",
+    "additionalDifferentials": [
+      "IDH-mutant astrocytoma",
+      "glioblastoma, IDH-wildtype",
+      "clear cell ependymoma",
+      "central neurocytoma",
+      "dysembryoplastic neuroepithelial tumour",
+      "small cell glioblastoma",
+      "cerebral metastasis"
     ],
-    [
-     "Primary Differentials",
-     "IDH-mutant astrocytoma, glioblastoma, IDH-wildtype, clear cell ependymoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "contrast-enhanced MRI of the brain with perfusion and spectroscopy",
+      "CT to demonstrate calcification",
+      "IDH1 and IDH2 mutation testing",
+      "1p/19q codeletion analysis to confirm the diagnosis",
+      "TERT promoter and CDKN2A status",
+      "tissue diagnosis by resection or stereotactic biopsy",
+      "neuropsychological and seizure assessment at baseline"
     ],
-    [
-     "Management Strategy",
-     "Confirm diagnosis molecularly with IDH1/IDH2 mutation plus whole-arm 1p/19q codeletion before planning treatment, since histology",
-     "Core treatment modality"
+    "redFlags": [
+      "clinical or radiological signs of raised intracranial pressure",
+      "new or progressive focal neurological deficit",
+      "status epilepticus or escalating seizure frequency",
+      "new nodular enhancement suggesting higher-grade transformation"
     ],
-    [
-     "Clinical Pitfall",
-     "diagnosing oligodendroglioma on morphology alone without confirming 1p/19q codeletion",
-     "Prevent diagnostic or management error"
+    "prognosis": "Among diffuse gliomas the outlook is relatively favourable, with prolonged survival particularly in grade 2 disease, and the 1p/19q codeletion predicts chemosensitivity; nonetheless the tumour remains incurable and eventually progresses.",
+    "pitfalls": [
+      "diagnosing oligodendroglioma on morphology alone without confirming 1p/19q codeletion",
+      "mistaking the fried-egg halo, a fixation artefact, for a specific diagnostic finding",
+      "overlooking calcified cortical lesions on MRI that are obvious on CT",
+      "assuming all IDH-mutant gliomas share the same prognosis and treatment",
+      "underestimating higher-grade transformation when enhancement appears"
+    ],
+    "references": [
+      "WHO Classification of Tumours of the Central Nervous System",
+      "EANO guidelines on the diagnosis and treatment of diffuse gliomas",
+      "DeAngelis and Wen, Neurologic Complications of Cancer"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Confirm diagnosis molecularly with IDH1/IDH2 mutation plus whole-arm 1p/19q codeletion before planning treatment, since histology alone is unreliable; tumours are grade 2 or grade 3, there is no grade 4 oligodendroglioma",
+      "Pursue maximal safe surgical resection as the principal treatment, coordinating timing with radiotherapy and chemotherapy since upfront radiotherapy can reduce brain plasticity needed for later staged resection",
+      "Consider giving chemotherapy first in partially resectable tumours to allow response and plasticity before a later staged resection",
+      "For grade 3 (anaplastic) codeleted disease, use postoperative combined chemoradiotherapy rather than radiotherapy alone, given a durable survival benefit for combined therapy over radiotherapy alone in this molecularly defined population",
+      "Use an alkylating-agent-based chemotherapy regimen with radiotherapy for codeleted anaplastic disease, since this combination is associated with roughly double the survival of radiotherapy alone in this subgroup",
+      "Do not substitute chemotherapy alone for radiotherapy in newly diagnosed disease, as chemotherapy-only strategies are unproven and associated with more progression outside a trial setting",
+      "Weigh the long-term cognitive toxicity of radiotherapy against benefit given the long survival horizon typical of this tumour, particularly in lower grade disease",
+      "Consider watchful waiting after resection in select lower-risk patients, while recognizing that CDKN2A/B homozygous loss, incomplete resection, large tumour size, and midline crossing suggest a less favourable course",
+      "For grade 2 disease, discuss early postoperative radiotherapy versus deferring to progression, since early radiotherapy improves progression-free survival and one-year seizure control without a clear overall survival difference",
+      "At recurrence after radiotherapy, offer chemotherapy since most patients with anaplastic oligodendroglioma respond",
+      "Consider switching to temozolomide, an oral alkylating agent, at first recurrence after progression on an alkylating combination regimen, given comparable efficacy and better tolerability",
+      "Regard IDH1-targeted therapy and IDH1 vaccine approaches as investigational for this tumour rather than standard of care, since oligodendroglioma-specific outcome data were not established",
+      "Monitor with periodic contrast-enhanced brain MRI to detect progression or higher-grade transformation, and manage seizures with antiseizure medication as an ongoing need",
+      "Refer urgently to neuro-oncology or neurosurgery for new or progressive focal deficits, escalating seizures or status epilepticus, raised intracranial pressure signs, or new nodular enhancement suggesting higher-grade transformation, and manage all patients within a multidisciplinary neuro-oncology framework with supportive and palliative input introduced over time"
     ]
-   ],
-   "caption": "Overview comparison matrix for oligodendroglioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oligodendroglioma-real-image",
-   "title": "oligodendroglioma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "oligodendroglioma-pathway",
+      "title": "oligodendroglioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Diagnosis now requires both an IDH1 or IDH2 mutation and whole-arm 1p/19q codeletion; without codeletion the tumour is not an oligodendroglioma regardless of morphology.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: clinical or radiological signs of raised intracranial pressure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: contrast-enhanced MRI of the brain with perfusion and spectroscopy, CT to demonstrate calcification, IDH1 and IDH2 mutation testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm diagnosis molecularly with IDH1/IDH2 mutation plus whole-arm 1p/19q codeletion before planning treatment, since histology alone is unreliable; tumours are grade 2 or grade 3, there is no grade 4"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: diagnosing oligodendroglioma on morphology alone without confirming 1p/19q codeletion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oligodendroglioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oligodendroglioma-matrix",
+      "title": "oligodendroglioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diagnosis now requires both an IDH1 or IDH2 mutation and whole-arm 1p/19q codeletion; without codeletion the tumour is not an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "contrast-enhanced MRI of the brain with perfusion and spectroscopy, CT to demonstrate calcification, IDH1 and IDH2 mutation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "IDH-mutant astrocytoma, glioblastoma, IDH-wildtype, clear cell ependymoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm diagnosis molecularly with IDH1/IDH2 mutation plus whole-arm 1p/19q codeletion before planning treatment, since histology",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "diagnosing oligodendroglioma on morphology alone without confirming 1p/19q codeletion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oligodendroglioma."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the Central Nervous System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "oligodendroglioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced MRI",
+          "cells": [
+            {
+              "text": "New nodular enhancement suggests higher-grade transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcification, frequent and well seen on CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IDH1 and IDH2 mutation testing",
+          "cells": [
+            {
+              "text": "Mutation required for the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "1p/19q codeletion analysis",
+          "cells": [
+            {
+              "text": "Whole-arm codeletion required; without it the tumour is not an oligodendroglioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TERT promoter and CDKN2A status",
+          "cells": [
+            {
+              "text": "CDKN2A homozygous deletion portends worse behaviour in grade 3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue diagnosis by resection or biopsy",
+          "cells": [
+            {
+              "text": "Histology alone is unreliable; molecular confirmation is needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oligodendroglioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "IDH-mutant astrocytoma",
+          "cells": [
+            {
+              "text": "No 1p/19q codeletion; morphology alone does not decide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glioblastoma, IDH-wildtype",
+          "cells": [
+            {
+              "text": "Lacks the IDH mutation required for this diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "oligodendroglioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular confirmation before treatment",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "IDH1/IDH2 mutation plus whole-arm 1p/19q codeletion; grade 2 or grade 3 only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maximal safe surgical resection",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Principal treatment; timing coordinated with radiotherapy and chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy first in partially resectable tumours",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Allows response and preserved brain plasticity before a later staged resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grade 3 codeleted disease",
+          "cells": [
+            {
+              "text": "4"
+            },
+            {
+              "text": "Postoperative combined chemoradiotherapy rather than radiotherapy alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alkylating-agent chemotherapy with radiotherapy",
+          "cells": [
+            {
+              "text": "5"
+            },
+            {
+              "text": "For codeleted anaplastic disease; roughly double the survival of radiotherapy alone in this subgroup"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "oligodendroglioma-dx-mgmt",
+      "title": "Diagnosis and management of oligodendroglioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult with seizures and a cortical or frontal glioma; oligodendroglioma suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (raised pressure, new deficit, status epilepticus or nodular enhancement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for raised pressure or status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI, CT for calcification, IDH1/2 and 1p/19q testing on tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do IDH mutation and whole-arm 1p/19q codeletion both confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider IDH-mutant astrocytoma or IDH-wildtype glioblastoma; reassess the tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Maximal safe surgical resection as the principal treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chemotherapy first in partially resectable tumours, before staged resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Grade 3 codeleted disease: postoperative chemoradiotherapy, not radiotherapy alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Alkylating-agent chemotherapy with radiotherapy for codeleted anaplastic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Relatively favourable outcome, but the tumour remains incurable and eventually progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

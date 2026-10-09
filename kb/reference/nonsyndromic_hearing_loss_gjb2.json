@@ -1,175 +1,426 @@
 {
- "id": "nonsyndromic_hearing_loss_gjb2",
- "name": "Non-syndromic hearing loss (GJB2/connexin 26, DFNB1)",
- "aliases": [
-  "DFNB1",
-  "connexin 26 deafness",
-  "GJB2-related hearing loss",
-  "GJB6 deletion deafness",
-  "connexin-related SNHL"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology",
- "specialty": "Otology / Audiovestibular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Biallelic GJB2 (connexin 26) variants at the DFNB1 locus are the commonest single cause of hereditary sensorineural hearing loss in many populations",
-   "Hearing loss is typically congenital, bilateral, symmetrical, and non-progressive, ranging from mild to profound with no associated systemic features",
-   "The 35delG frameshift variant predominates in European-derived populations, while other founder variants (such as 235delC) are common elsewhere",
-   "A common cause of missed genotyping is a large GJB6 deletion in trans with a single GJB2 variant, so testing must consider the wider DFNB1 region",
-   "Inheritance is usually autosomal recessive with unaffected carrier parents, though rare dominant GJB2 variants exist and may co-segregate with skin phenotypes",
-   "Vestibular function is generally preserved, and imaging is usually normal, distinguishing it from malformation-related or syndromic causes",
-   "Cochlear implantation outcomes are typically excellent because the lesion is cochlear with an intact auditory nerve and central pathway"
+  "id": "nonsyndromic_hearing_loss_gjb2",
+  "name": "Non-syndromic hearing loss (GJB2/connexin 26, DFNB1)",
+  "aliases": [
+    "DFNB1",
+    "connexin 26 deafness",
+    "GJB2-related hearing loss",
+    "GJB6 deletion deafness",
+    "connexin-related SNHL"
   ],
-  "pathophysiology": "Connexin 26, encoded by GJB2, is a gap-junction protein expressed in the supporting cells and fibrocytes of the cochlea. Connexins assemble into intercellular channels that permit potassium and small-molecule movement, supporting recycling of potassium away from hair cells back to the endolymph and maintaining the endocochlear potential. Loss-of-function variants disrupt this gap-junction network, impairing potassium homeostasis and cochlear amplification, which produces sensorineural hearing loss without structural malformation. Because the deficit lies within the cochlear support apparatus rather than the auditory nerve, the phenotype is a pure cochlear sensorineural loss.",
-  "additionalDifferentials": [
-   "Enlarged vestibular aqueduct and other inner-ear malformations",
-   "Congenital cytomegalovirus-related hearing loss",
-   "Syndromic hearing loss (Pendred, Usher, Waardenburg)",
-   "Auditory neuropathy spectrum disorder",
-   "Mitochondrial non-syndromic hearing loss",
-   "Acquired perinatal ototoxic or hypoxic injury"
-  ],
-  "additionalInvestigations": [
-   "Newborn hearing screening followed by diagnostic audiometry (age-appropriate behavioural or objective testing)",
-   "Otoacoustic emissions and auditory brainstem response to characterise the site and severity of loss",
-   "Targeted GJB2 sequencing and assessment for GJB6 deletions across the DFNB1 locus",
-   "Comprehensive deafness gene panel when DFNB1 testing is uninformative",
-   "Cross-sectional temporal bone imaging to exclude structural anomalies before implantation",
-   "Congenital cytomegalovirus testing where the loss may be acquired"
-  ],
-  "redFlags": [
-   "Progressive or fluctuating loss, which is atypical and should prompt review for another cause such as EVA",
-   "Asymmetry or unilateral loss suggesting a structural or acquired lesion",
-   "Any associated dysmorphism, pigmentary, thyroid, renal, or visual features indicating a syndrome",
-   "Delayed speech and language development from unrecognised or under-amplified hearing loss"
-  ],
-  "prognosis": "The hearing loss is usually stable over time, and because the auditory nerve and central pathways are intact, most children achieve good outcomes with early amplification or cochlear implantation and structured habilitation.",
-  "pitfalls": [
-   "Assuming a single heterozygous GJB2 variant explains the phenotype without excluding a GJB6 deletion in trans",
-   "Overlooking congenital cytomegalovirus as a mimicking or coexisting cause",
-   "Delaying intervention while awaiting genetic results and missing the critical window for language acquisition",
-   "Attributing later progression solely to DFNB1 rather than reassessing for another disorder"
-  ],
-  "references": [
-   "Cummings Otolaryngology",
-   "GeneReviews: Nonsyndromic Hearing Loss and Deafness, DFNB1"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Fit hearing aids early after diagnosis to provide auditory access during the critical period of language development",
-   "Refer for cochlear implantation when loss is severe to profound, since the intact auditory nerve predicts good outcomes",
-   "Provide structured habilitation with speech and language therapy and family-centred communication support",
-   "Undertake audiological surveillance to confirm the usually stable loss and adjust amplification as the child grows",
-   "Offer genetic counselling for this autosomal recessive condition, testing relatives and considering GJB6 deletions across the DFNB1 locus",
-   "Exclude structural anomalies with temporal bone imaging before implantation and confirm the loss is genetic rather than acquired",
-   "Coordinate care through a multidisciplinary audiovestibular, otology, speech therapy and educational team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nonsyndromic_hearing_loss_gjb2-pathway",
-   "title": "Non-syndromic hearing loss (GJB2/connexin 26, DFNB1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Biallelic GJB2 (connexin 26) variants at the DFNB1 locus are the commonest single cause of hereditary sensorineural hearing loss in many populations",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive or fluctuating loss, which is atypical and should prompt review for another cause such as EVA",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Newborn hearing screening followed by diagnostic audiometry (age-appropriate behavioural or objective testing), Otoacoustic emissions and auditory brainstem response to characterise the site and severity of loss, Targeted"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Fit hearing aids early after diagnosis to provide auditory access during the critical period of language development"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a single heterozygous GJB2 variant explains the phenotype without excluding a GJB6 deletion in trans"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of non-syndromic hearing loss (gjb2/connexin 26, dfnb1)."
-  }
- ],
- "tables": [
-  {
-   "id": "nonsyndromic_hearing_loss_gjb2-matrix",
-   "title": "Non-syndromic hearing loss (GJB2/connexin 26, DFNB1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Biallelic GJB2 (connexin 26) variants at the DFNB1 locus are the commonest single cause of hereditary sensorineural hearing loss",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology",
+  "specialty": "Otology / Audiovestibular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Biallelic GJB2 (connexin 26) variants at the DFNB1 locus are the commonest single cause of hereditary sensorineural hearing loss in many populations",
+      "Hearing loss is typically congenital, bilateral, symmetrical, and non-progressive, ranging from mild to profound with no associated systemic features",
+      "The 35delG frameshift variant predominates in European-derived populations, while other founder variants (such as 235delC) are common elsewhere",
+      "A common cause of missed genotyping is a large GJB6 deletion in trans with a single GJB2 variant, so testing must consider the wider DFNB1 region",
+      "Inheritance is usually autosomal recessive with unaffected carrier parents, though rare dominant GJB2 variants exist and may co-segregate with skin phenotypes",
+      "Vestibular function is generally preserved, and imaging is usually normal, distinguishing it from malformation-related or syndromic causes",
+      "Cochlear implantation outcomes are typically excellent because the lesion is cochlear with an intact auditory nerve and central pathway"
     ],
-    [
-     "Key Investigations",
-     "Newborn hearing screening followed by diagnostic audiometry (age-appropriate behavioural or objective testing), Otoacoustic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Connexin 26, encoded by GJB2, is a gap-junction protein expressed in the supporting cells and fibrocytes of the cochlea. Connexins assemble into intercellular channels that permit potassium and small-molecule movement, supporting recycling of potassium away from hair cells back to the endolymph and maintaining the endocochlear potential. Loss-of-function variants disrupt this gap-junction network, impairing potassium homeostasis and cochlear amplification, which produces sensorineural hearing loss without structural malformation. Because the deficit lies within the cochlear support apparatus rather than the auditory nerve, the phenotype is a pure cochlear sensorineural loss.",
+    "additionalDifferentials": [
+      "Enlarged vestibular aqueduct and other inner-ear malformations",
+      "Congenital cytomegalovirus-related hearing loss",
+      "Syndromic hearing loss (Pendred, Usher, Waardenburg)",
+      "Auditory neuropathy spectrum disorder",
+      "Mitochondrial non-syndromic hearing loss",
+      "Acquired perinatal ototoxic or hypoxic injury"
     ],
-    [
-     "Primary Differentials",
-     "Enlarged vestibular aqueduct and other inner-ear malformations, Congenital cytomegalovirus-related hearing loss, Syndromic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Newborn hearing screening followed by diagnostic audiometry (age-appropriate behavioural or objective testing)",
+      "Otoacoustic emissions and auditory brainstem response to characterise the site and severity of loss",
+      "Targeted GJB2 sequencing and assessment for GJB6 deletions across the DFNB1 locus",
+      "Comprehensive deafness gene panel when DFNB1 testing is uninformative",
+      "Cross-sectional temporal bone imaging to exclude structural anomalies before implantation",
+      "Congenital cytomegalovirus testing where the loss may be acquired"
     ],
-    [
-     "Management Strategy",
-     "Fit hearing aids early after diagnosis to provide auditory access during the critical period of language development",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive or fluctuating loss, which is atypical and should prompt review for another cause such as EVA",
+      "Asymmetry or unilateral loss suggesting a structural or acquired lesion",
+      "Any associated dysmorphism, pigmentary, thyroid, renal, or visual features indicating a syndrome",
+      "Delayed speech and language development from unrecognised or under-amplified hearing loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a single heterozygous GJB2 variant explains the phenotype without excluding a GJB6 deletion in trans",
-     "Prevent diagnostic or management error"
+    "prognosis": "The hearing loss is usually stable over time, and because the auditory nerve and central pathways are intact, most children achieve good outcomes with early amplification or cochlear implantation and structured habilitation.",
+    "pitfalls": [
+      "Assuming a single heterozygous GJB2 variant explains the phenotype without excluding a GJB6 deletion in trans",
+      "Overlooking congenital cytomegalovirus as a mimicking or coexisting cause",
+      "Delaying intervention while awaiting genetic results and missing the critical window for language acquisition",
+      "Attributing later progression solely to DFNB1 rather than reassessing for another disorder"
+    ],
+    "references": [
+      "Cummings Otolaryngology",
+      "GeneReviews: Nonsyndromic Hearing Loss and Deafness, DFNB1"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Fit hearing aids early after diagnosis to provide auditory access during the critical period of language development",
+      "Refer for cochlear implantation when loss is severe to profound, since the intact auditory nerve predicts good outcomes",
+      "Provide structured habilitation with speech and language therapy and family-centred communication support",
+      "Undertake audiological surveillance to confirm the usually stable loss and adjust amplification as the child grows",
+      "Offer genetic counselling for this autosomal recessive condition, testing relatives and considering GJB6 deletions across the DFNB1 locus",
+      "Exclude structural anomalies with temporal bone imaging before implantation and confirm the loss is genetic rather than acquired",
+      "Coordinate care through a multidisciplinary audiovestibular, otology, speech therapy and educational team"
     ]
-   ],
-   "caption": "Overview comparison matrix for non-syndromic hearing loss (gjb2/connexin 26, dfnb1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nonsyndromic-hearing-loss-gjb2-real-image",
-   "title": "Non-syndromic hearing loss (GJB2/connexin 26, DFNB1): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "nonsyndromic_hearing_loss_gjb2-pathway",
+      "title": "Non-syndromic hearing loss (GJB2/connexin 26, DFNB1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Biallelic GJB2 (connexin 26) variants at the DFNB1 locus are the commonest single cause of hereditary sensorineural hearing loss in many populations",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive or fluctuating loss, which is atypical and should prompt review for another cause such as EVA",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Newborn hearing screening followed by diagnostic audiometry (age-appropriate behavioural or objective testing), Otoacoustic emissions and auditory brainstem response to characterise the site and severity of loss, Targeted"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Fit hearing aids early after diagnosis to provide auditory access during the critical period of language development"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a single heterozygous GJB2 variant explains the phenotype without excluding a GJB6 deletion in trans"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of non-syndromic hearing loss (gjb2/connexin 26, dfnb1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nonsyndromic_hearing_loss_gjb2-matrix",
+      "title": "Non-syndromic hearing loss (GJB2/connexin 26, DFNB1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Biallelic GJB2 (connexin 26) variants at the DFNB1 locus are the commonest single cause of hereditary sensorineural hearing loss",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Newborn hearing screening followed by diagnostic audiometry (age-appropriate behavioural or objective testing), Otoacoustic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Enlarged vestibular aqueduct and other inner-ear malformations, Congenital cytomegalovirus-related hearing loss, Syndromic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Fit hearing aids early after diagnosis to provide auditory access during the critical period of language development",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a single heterozygous GJB2 variant explains the phenotype without excluding a GJB6 deletion in trans",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for non-syndromic hearing loss (gjb2/connexin 26, dfnb1)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "nonsyndromic_hearing_loss_gjb2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn hearing screening",
+          "cells": [
+            {
+              "text": "Followed by diagnostic audiometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otoacoustic emissions and auditory brainstem response",
+          "cells": [
+            {
+              "text": "Cochlear and nerve function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GJB2 and GJB6 genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic variants, including GJB6 deletion in trans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of the inner ear",
+          "cells": [
+            {
+              "text": "Excludes enlarged vestibular aqueduct when loss is progressive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nonsyndromic_hearing_loss_gjb2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Enlarged vestibular aqueduct",
+          "cells": [
+            {
+              "text": "Progressive or fluctuating loss suggests this"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cytomegalovirus hearing loss",
+          "cells": [
+            {
+              "text": "Infection can mimic genetic loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndromic hearing loss such as Pendred syndrome",
+          "cells": [
+            {
+              "text": "Hearing loss with other features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "nonsyndromic_hearing_loss_gjb2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early hearing aids",
+          "cells": [
+            {
+              "text": "Auditory access during the critical period for language"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cochlear implantation",
+          "cells": [
+            {
+              "text": "Referral when loss is severe and aids are insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Language and educational support",
+          "cells": [
+            {
+              "text": "Supports outcomes after early amplification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "nonsyndromic_hearing_loss_gjb2-dx-mgmt",
+      "title": "Diagnosis and management of Non-syndromic hearing loss (GJB2/connexin 26, DFNB1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Congenital sensorineural hearing loss on newborn or early screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive or fluctuating loss, asymmetry, unilateral loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent audiology review for progressive or asymmetric loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diagnostic audiometry, emissions and brainstem response, GJB2 and GJB6 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic GJB2 or GJB2 with GJB6 deletion with stable sensorineural loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider enlarged vestibular aqueduct or congenital CMV; investigate further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fit hearing aids early after diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Refer for cochlear implantation when loss is severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Language and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling for family risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually stable; most children do well with early amplification and support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

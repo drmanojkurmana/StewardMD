@@ -1,175 +1,473 @@
 {
- "id": "familial_hyperaldosteronism_type3",
- "name": "Familial hyperaldosteronism type 3 (KCNJ5)",
- "aliases": [
-  "FH-III",
-  "FH type 3",
-  "KCNJ5-related familial hyperaldosteronism",
-  "GIRK4 hyperaldosteronism"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal dominant form of primary aldosteronism caused by germline mutations in KCNJ5, which encodes the GIRK4 potassium channel of the adrenal zona glomerulosa",
-   "Typically presents in childhood with severe, often treatment-resistant hypertension and hypokalaemia",
-   "Distinct from glucocorticoid-remediable aldosteronism (familial hyperaldosteronism type 1); it is generally not corrected by dexamethasone and dexamethasone may paradoxically worsen aldosterone secretion in some patients",
-   "The phenotype is variable, from florid disease with massive bilateral adrenal hyperplasia needing bilateral adrenalectomy to milder disease responsive to mineralocorticoid receptor antagonism",
-   "Biochemistry shows elevated aldosterone with suppressed renin, and the hybrid steroids 18-hydroxycortisol and 18-oxocortisol are typically raised",
-   "The mutations impair channel selectivity, causing sodium influx, membrane depolarisation, calcium entry and autonomous aldosterone production",
-   "Germline genetic testing confirms the diagnosis and informs cascade family screening"
+  "id": "familial_hyperaldosteronism_type3",
+  "name": "Familial hyperaldosteronism type 3 (KCNJ5)",
+  "aliases": [
+    "FH-III",
+    "FH type 3",
+    "KCNJ5-related familial hyperaldosteronism",
+    "GIRK4 hyperaldosteronism"
   ],
-  "pathophysiology": "Familial hyperaldosteronism type 3 is an autosomal dominant disorder caused by germline mutations in KCNJ5, which encodes the G-protein-activated inwardly rectifying potassium channel GIRK4 in the adrenal zona glomerulosa. Mutations near the channel selectivity filter cause loss of potassium selectivity and pathological sodium conductance, depolarising the cell, opening voltage-gated calcium channels and raising intracellular calcium. This drives constitutive transcription of aldosterone synthase and autonomous aldosterone hypersecretion independent of the renin-angiotensin system, with resulting sodium retention, potassium wasting and hypertension. The same channel is somatically mutated in many sporadic aldosterone-producing adenomas.",
-  "additionalDifferentials": [
-   "Other familial hyperaldosteronism subtypes (type 1 glucocorticoid-remediable, type 2, type 4 with CACNA1H)",
-   "Sporadic aldosterone-producing adenoma (Conn syndrome)",
-   "Bilateral idiopathic adrenal hyperplasia",
-   "Apparent mineralocorticoid excess or Liddle syndrome",
-   "Congenital adrenal hyperplasia (11-beta-hydroxylase or 17-alpha-hydroxylase deficiency)",
-   "Renovascular or other secondary hypertension"
-  ],
-  "additionalInvestigations": [
-   "Plasma aldosterone-to-renin ratio as the screening test, showing high aldosterone with suppressed renin",
-   "Confirmatory aldosterone suppression testing where the diagnosis is unclear",
-   "Serum potassium and acid-base assessment for hypokalaemic metabolic alkalosis",
-   "Urinary or plasma hybrid steroids 18-hydroxycortisol and 18-oxocortisol",
-   "Adrenal CT and, in selected cases, adrenal venous sampling to assess lateralisation",
-   "KCNJ5 germline genetic testing with cascade family screening"
-  ],
-  "redFlags": [
-   "Severe childhood-onset hypertension resistant to multiple agents",
-   "Profound or symptomatic hypokalaemia causing arrhythmia or weakness",
-   "Massive bilateral adrenal enlargement that may require bilateral adrenalectomy",
-   "Target-organ damage such as left ventricular hypertrophy or stroke from early sustained hypertension"
-  ],
-  "prognosis": "Outcome depends on severity: milder cases are controlled with mineralocorticoid receptor antagonists, whereas florid disease with bilateral hyperplasia may need bilateral adrenalectomy and lifelong steroid replacement; early diagnosis and blood-pressure control limit cardiovascular and renal damage.",
-  "pitfalls": [
-   "Assuming, as in type 1 disease, that dexamethasone will control aldosterone, when it usually does not and can worsen it in this subtype",
-   "Attributing resistant paediatric hypertension to essential hypertension and missing a monogenic cause",
-   "Failing to exclude secondary causes of hypokalaemia before genetic testing",
-   "Overlooking family screening once a KCNJ5 mutation is identified"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society Clinical Practice Guideline on Primary Aldosteronism",
-   "DeGroot's Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Mineralocorticoid-receptor antagonists such as spironolactone or eplerenone as first-line medical therapy to block the aldosterone excess",
-   "Correction of hypokalaemia and control of hypertension with additional antihypertensive agents as needed",
-   "Bilateral adrenalectomy with subsequent lifelong glucocorticoid and mineralocorticoid replacement for florid, treatment-resistant disease with massive hyperplasia",
-   "Avoid dexamethasone, which does not correct and may paradoxically worsen aldosterone secretion in this type",
-   "Monitoring of blood pressure, serum potassium and cardiovascular and renal end-organ damage",
-   "Genetic counselling with KCNJ5 testing and cascade family screening given autosomal dominant inheritance",
-   "Specialist endocrinology and hypertension referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "familial_hyperaldosteronism_type3-pathway",
-   "title": "Familial hyperaldosteronism type 3 (KCNJ5): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal dominant form of primary aldosteronism caused by germline mutations in KCNJ5, which encodes the GIRK4 potassium channel of the adrenal zona glomerulosa",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe childhood-onset hypertension resistant to multiple agents",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma aldosterone-to-renin ratio as the screening test, showing high aldosterone with suppressed renin, Confirmatory aldosterone suppression testing where the diagnosis is unclear, Serum potassium and acid-base assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Mineralocorticoid-receptor antagonists such as spironolactone or eplerenone as first-line medical therapy to block the aldosterone excess"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming, as in type 1 disease, that dexamethasone will control aldosterone, when it usually does not and can worsen it in this subtype"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of familial hyperaldosteronism type 3 (kcnj5)."
-  }
- ],
- "tables": [
-  {
-   "id": "familial_hyperaldosteronism_type3-matrix",
-   "title": "Familial hyperaldosteronism type 3 (KCNJ5): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal dominant form of primary aldosteronism caused by germline mutations in KCNJ5, which encodes the GIRK4 potassium",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal dominant form of primary aldosteronism caused by germline mutations in KCNJ5, which encodes the GIRK4 potassium channel of the adrenal zona glomerulosa",
+      "Typically presents in childhood with severe, often treatment-resistant hypertension and hypokalaemia",
+      "Distinct from glucocorticoid-remediable aldosteronism (familial hyperaldosteronism type 1); it is generally not corrected by dexamethasone and dexamethasone may paradoxically worsen aldosterone secretion in some patients",
+      "The phenotype is variable, from florid disease with massive bilateral adrenal hyperplasia needing bilateral adrenalectomy to milder disease responsive to mineralocorticoid receptor antagonism",
+      "Biochemistry shows elevated aldosterone with suppressed renin, and the hybrid steroids 18-hydroxycortisol and 18-oxocortisol are typically raised",
+      "The mutations impair channel selectivity, causing sodium influx, membrane depolarisation, calcium entry and autonomous aldosterone production",
+      "Germline genetic testing confirms the diagnosis and informs cascade family screening"
     ],
-    [
-     "Key Investigations",
-     "Plasma aldosterone-to-renin ratio as the screening test, showing high aldosterone with suppressed renin, Confirmatory aldosterone",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Familial hyperaldosteronism type 3 is an autosomal dominant disorder caused by germline mutations in KCNJ5, which encodes the G-protein-activated inwardly rectifying potassium channel GIRK4 in the adrenal zona glomerulosa. Mutations near the channel selectivity filter cause loss of potassium selectivity and pathological sodium conductance, depolarising the cell, opening voltage-gated calcium channels and raising intracellular calcium. This drives constitutive transcription of aldosterone synthase and autonomous aldosterone hypersecretion independent of the renin-angiotensin system, with resulting sodium retention, potassium wasting and hypertension. The same channel is somatically mutated in many sporadic aldosterone-producing adenomas.",
+    "additionalDifferentials": [
+      "Other familial hyperaldosteronism subtypes (type 1 glucocorticoid-remediable, type 2, type 4 with CACNA1H)",
+      "Sporadic aldosterone-producing adenoma (Conn syndrome)",
+      "Bilateral idiopathic adrenal hyperplasia",
+      "Apparent mineralocorticoid excess or Liddle syndrome",
+      "Congenital adrenal hyperplasia (11-beta-hydroxylase or 17-alpha-hydroxylase deficiency)",
+      "Renovascular or other secondary hypertension"
     ],
-    [
-     "Primary Differentials",
-     "Other familial hyperaldosteronism subtypes (type 1 glucocorticoid-remediable, type 2, type 4 with CACNA1H), Sporadic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma aldosterone-to-renin ratio as the screening test, showing high aldosterone with suppressed renin",
+      "Confirmatory aldosterone suppression testing where the diagnosis is unclear",
+      "Serum potassium and acid-base assessment for hypokalaemic metabolic alkalosis",
+      "Urinary or plasma hybrid steroids 18-hydroxycortisol and 18-oxocortisol",
+      "Adrenal CT and, in selected cases, adrenal venous sampling to assess lateralisation",
+      "KCNJ5 germline genetic testing with cascade family screening"
     ],
-    [
-     "Management Strategy",
-     "Mineralocorticoid-receptor antagonists such as spironolactone or eplerenone as first-line medical therapy to block the",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe childhood-onset hypertension resistant to multiple agents",
+      "Profound or symptomatic hypokalaemia causing arrhythmia or weakness",
+      "Massive bilateral adrenal enlargement that may require bilateral adrenalectomy",
+      "Target-organ damage such as left ventricular hypertrophy or stroke from early sustained hypertension"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming, as in type 1 disease, that dexamethasone will control aldosterone, when it usually does not and can worsen it in this",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on severity: milder cases are controlled with mineralocorticoid receptor antagonists, whereas florid disease with bilateral hyperplasia may need bilateral adrenalectomy and lifelong steroid replacement; early diagnosis and blood-pressure control limit cardiovascular and renal damage.",
+    "pitfalls": [
+      "Assuming, as in type 1 disease, that dexamethasone will control aldosterone, when it usually does not and can worsen it in this subtype",
+      "Attributing resistant paediatric hypertension to essential hypertension and missing a monogenic cause",
+      "Failing to exclude secondary causes of hypokalaemia before genetic testing",
+      "Overlooking family screening once a KCNJ5 mutation is identified"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society Clinical Practice Guideline on Primary Aldosteronism",
+      "DeGroot's Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Mineralocorticoid-receptor antagonists such as spironolactone or eplerenone as first-line medical therapy to block the aldosterone excess",
+      "Correction of hypokalaemia and control of hypertension with additional antihypertensive agents as needed",
+      "Bilateral adrenalectomy with subsequent lifelong glucocorticoid and mineralocorticoid replacement for florid, treatment-resistant disease with massive hyperplasia",
+      "Avoid dexamethasone, which does not correct and may paradoxically worsen aldosterone secretion in this type",
+      "Monitoring of blood pressure, serum potassium and cardiovascular and renal end-organ damage",
+      "Genetic counselling with KCNJ5 testing and cascade family screening given autosomal dominant inheritance",
+      "Specialist endocrinology and hypertension referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for familial hyperaldosteronism type 3 (kcnj5)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "familial-hyperaldosteronism-type3-real-image",
-   "title": "Familial hyperaldosteronism type 3 (KCNJ5): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "familial_hyperaldosteronism_type3-pathway",
+      "title": "Familial hyperaldosteronism type 3 (KCNJ5): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal dominant form of primary aldosteronism caused by germline mutations in KCNJ5, which encodes the GIRK4 potassium channel of the adrenal zona glomerulosa",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe childhood-onset hypertension resistant to multiple agents",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma aldosterone-to-renin ratio as the screening test, showing high aldosterone with suppressed renin, Confirmatory aldosterone suppression testing where the diagnosis is unclear, Serum potassium and acid-base assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Mineralocorticoid-receptor antagonists such as spironolactone or eplerenone as first-line medical therapy to block the aldosterone excess"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming, as in type 1 disease, that dexamethasone will control aldosterone, when it usually does not and can worsen it in this subtype"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of familial hyperaldosteronism type 3 (kcnj5)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "familial_hyperaldosteronism_type3-matrix",
+      "title": "Familial hyperaldosteronism type 3 (KCNJ5): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal dominant form of primary aldosteronism caused by germline mutations in KCNJ5, which encodes the GIRK4 potassium",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma aldosterone-to-renin ratio as the screening test, showing high aldosterone with suppressed renin, Confirmatory aldosterone",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other familial hyperaldosteronism subtypes (type 1 glucocorticoid-remediable, type 2, type 4 with CACNA1H), Sporadic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Mineralocorticoid-receptor antagonists such as spironolactone or eplerenone as first-line medical therapy to block the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming, as in type 1 disease, that dexamethasone will control aldosterone, when it usually does not and can worsen it in this",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for familial hyperaldosteronism type 3 (kcnj5)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_hyperaldosteronism_type3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma aldosterone-to-renin ratio",
+          "cells": [
+            {
+              "text": "High aldosterone with suppressed renin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmatory aldosterone suppression testing",
+          "cells": [
+            {
+              "text": "Where the diagnosis is unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium and acid-base assessment",
+          "cells": [
+            {
+              "text": "Hypokalaemic metabolic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary or plasma 18-hydroxycortisol and 18-oxocortisol",
+          "cells": [
+            {
+              "text": "Hybrid steroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal CT and adrenal venous sampling",
+          "cells": [
+            {
+              "text": "Lateralisation, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KCNJ5 germline genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant and cascade screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hyperaldosteronism_type3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aldosterone-producing adenoma (Conn syndrome)",
+          "cells": [
+            {
+              "text": "A sporadic cause; adrenal CT and venous sampling assess lateralisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liddle syndrome or apparent mineralocorticoid excess",
+          "cells": [
+            {
+              "text": "Listed in the differential; the aldosterone-to-renin ratio screens for aldosterone excess"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_hyperaldosteronism_type3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mineralocorticoid-receptor antagonists",
+          "cells": [
+            {
+              "text": "Spironolactone or eplerenone as first-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of hypokalaemia and hypertension",
+          "cells": [
+            {
+              "text": "Additional antihypertensive agents as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral adrenalectomy",
+          "cells": [
+            {
+              "text": "Florid, treatment-resistant disease; lifelong replacement afterwards"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid dexamethasone",
+          "cells": [
+            {
+              "text": "Does not correct aldosterone excess and may worsen it in this type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure, potassium and end-organ damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "KCNJ5 testing; autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrinology and hypertension referral",
+          "cells": [
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_hyperaldosteronism_type3-dx-mgmt",
+      "title": "Diagnosis and management of Familial hyperaldosteronism type 3 (KCNJ5)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe childhood-onset hypertension with hypokalaemia, resistant to several drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (profound hypokalaemia with arrhythmia, end-organ damage, massive adrenals)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Correct hypokalaemia; cardiology and renal review for end-organ damage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aldosterone-to-renin ratio; potassium; hybrid steroids; adrenal CT; KCNJ5 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "High aldosterone with suppressed renin and KCNJ5 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sporadic adenoma, bilateral hyperplasia or other primary aldosteronism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Spironolactone or eplerenone as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct hypokalaemia and add antihypertensives as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bilateral adrenalectomy for florid, resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid dexamethasone, which does not correct this type",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and cascade family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Milder cases controlled by antagonists; florid bilateral hyperplasia may need surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,502 @@
 {
- "id": "acyl_coa_oxidase_deficiency",
- "name": "Acyl-CoA oxidase deficiency",
- "aliases": [
-  "ACOX1 deficiency",
-  "peroxisomal acyl-CoA oxidase 1 deficiency",
-  "pseudoneonatal adrenoleukodystrophy",
-  "straight-chain acyl-CoA oxidase deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive single-enzyme peroxisomal defect caused by ACOX1 mutations, in which peroxisome assembly is intact but the first step of peroxisomal fatty-acid beta-oxidation fails",
-   "Presents in infancy with hypotonia, seizures, and developmental delay followed by regression, clinically resembling neonatal adrenoleukodystrophy hence the label pseudoneonatal adrenoleukodystrophy",
-   "Very-long-chain fatty acids (VLCFA) accumulate in plasma, providing a key screening abnormality, whereas bile acids and plerodenic phytanic/pristanic acids are typically normal because those pathways use different oxidases",
-   "White-matter demyelination and hearing and visual impairment develop as the disease advances",
-   "Because peroxisome biogenesis is normal, some markers seen in Zellweger-spectrum disorders (very high plasma phytanic acid, abnormal plasmalogens) may be unremarkable, so an isolated VLCFA elevation should prompt consideration of a single-enzyme defect",
-   "Diagnosis is confirmed by ACOX1 molecular testing and functional studies; care is supportive with no established disease-modifying therapy"
+  "id": "acyl_coa_oxidase_deficiency",
+  "name": "Acyl-CoA oxidase deficiency",
+  "aliases": [
+    "ACOX1 deficiency",
+    "peroxisomal acyl-CoA oxidase 1 deficiency",
+    "pseudoneonatal adrenoleukodystrophy",
+    "straight-chain acyl-CoA oxidase deficiency"
   ],
-  "pathophysiology": "Acyl-CoA oxidase deficiency is a peroxisomal single-enzyme disorder in which ACOX1 mutations abolish straight-chain acyl-CoA oxidase, the enzyme catalysing the first and rate-limiting oxidation step in peroxisomal beta-oxidation of very-long-chain fatty acids. Because peroxisomes are assembled normally, only this pathway is blocked, so VLCFA accumulate in plasma and tissues while bile-acid and branched-chain (phytanic/pristanic) processing is relatively preserved. Accumulated lipids are neurotoxic, driving progressive cerebral and cerebellar demyelination, neuronal loss, and the associated regression, seizures, and sensory impairment.",
-  "additionalDifferentials": [
-   "Zellweger-spectrum peroxisome biogenesis disorders",
-   "X-linked adrenoleukodystrophy and neonatal adrenoleukodystrophy",
-   "D-bifunctional protein deficiency (another single-enzyme peroxisomal beta-oxidation defect)",
-   "Other leukodystrophies presenting with infantile regression",
-   "Mitochondrial encephalopathies with seizures and hypotonia",
-   "Congenital or early-infantile epileptic encephalopathies of other cause"
-  ],
-  "additionalInvestigations": [
-   "Plasma very-long-chain fatty acid profile (elevated C26:0 and ratios)",
-   "ACOX1 gene sequencing to confirm the molecular diagnosis",
-   "Plasma phytanic and pristanic acids and bile-acid intermediates to distinguish from broader peroxisomal defects",
-   "Brain MRI to characterise the demyelinating leukodystrophy pattern",
-   "Fibroblast studies of peroxisomal beta-oxidation and immunofluorescence confirming normal peroxisome assembly",
-   "Auditory and visual evoked potentials to document sensory involvement"
-  ],
-  "redFlags": [
-   "Developmental regression with seizures after an initial period of near-normal development",
-   "Rapidly progressive white-matter disease on neuroimaging",
-   "Emergent loss of hearing and vision indicating advancing neurodegeneration",
-   "Intractable epilepsy requiring escalation of anticonvulsant management"
-  ],
-  "prognosis": "The condition is progressive and usually fatal in childhood after a period of neurological regression, though the age of decline varies. There is no curative treatment, and management focuses on seizure control, nutrition, and supportive multidisciplinary care.",
-  "pitfalls": [
-   "Assuming a normal peroxisome-biogenesis screen excludes a peroxisomal disorder, missing an isolated single-enzyme defect",
-   "Confusing the phenotype with X-linked adrenoleukodystrophy and delaying autosomal recessive genetic testing",
-   "Failing to repeat or extend the VLCFA and enzyme testing when clinical suspicion is high",
-   "Overlooking sensory (hearing and visual) impairment that affects developmental support"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise that no disease-modifying therapy exists and provide structured supportive multidisciplinary care",
-   "Control seizures with appropriate anticonvulsant therapy",
-   "Support nutrition and safe feeding, using gastrostomy feeding when swallowing becomes unsafe",
-   "Manage hypotonia, spasticity and contractures with physiotherapy and occupational therapy",
-   "Provide hearing and visual aids and rehabilitation for the sensorineural deafness and visual impairment",
-   "Monitor neurological progression with periodic brain MRI and evoked potentials",
-   "Offer genetic counselling, carrier testing and prenatal or preimplantation options for this autosomal recessive disorder",
-   "Introduce paediatric palliative care as the disease progresses"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acyl_coa_oxidase_deficiency-pathway",
-   "title": "Acyl-CoA oxidase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive single-enzyme peroxisomal defect caused by ACOX1 mutations, in which peroxisome assembly is intact but the first step of peroxisomal fatty-acid beta-oxidation fails",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Developmental regression with seizures after an initial period of near-normal development",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma very-long-chain fatty acid profile (elevated C26:0 and ratios), ACOX1 gene sequencing to confirm the molecular diagnosis, Plasma phytanic and pristanic acids and bile-acid intermediates to distinguish from broader"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise that no disease-modifying therapy exists and provide structured supportive multidisciplinary care"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a normal peroxisome-biogenesis screen excludes a peroxisomal disorder, missing an isolated single-enzyme defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acyl-coa oxidase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "acyl_coa_oxidase_deficiency-matrix",
-   "title": "Acyl-CoA oxidase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive single-enzyme peroxisomal defect caused by ACOX1 mutations, in which peroxisome assembly is intact but the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive single-enzyme peroxisomal defect caused by ACOX1 mutations, in which peroxisome assembly is intact but the first step of peroxisomal fatty-acid beta-oxidation fails",
+      "Presents in infancy with hypotonia, seizures, and developmental delay followed by regression, clinically resembling neonatal adrenoleukodystrophy hence the label pseudoneonatal adrenoleukodystrophy",
+      "Very-long-chain fatty acids (VLCFA) accumulate in plasma, providing a key screening abnormality, whereas bile acids and plerodenic phytanic/pristanic acids are typically normal because those pathways use different oxidases",
+      "White-matter demyelination and hearing and visual impairment develop as the disease advances",
+      "Because peroxisome biogenesis is normal, some markers seen in Zellweger-spectrum disorders (very high plasma phytanic acid, abnormal plasmalogens) may be unremarkable, so an isolated VLCFA elevation should prompt consideration of a single-enzyme defect",
+      "Diagnosis is confirmed by ACOX1 molecular testing and functional studies; care is supportive with no established disease-modifying therapy"
     ],
-    [
-     "Key Investigations",
-     "Plasma very-long-chain fatty acid profile (elevated C26:0 and ratios), ACOX1 gene sequencing to confirm the molecular diagnosis,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acyl-CoA oxidase deficiency is a peroxisomal single-enzyme disorder in which ACOX1 mutations abolish straight-chain acyl-CoA oxidase, the enzyme catalysing the first and rate-limiting oxidation step in peroxisomal beta-oxidation of very-long-chain fatty acids. Because peroxisomes are assembled normally, only this pathway is blocked, so VLCFA accumulate in plasma and tissues while bile-acid and branched-chain (phytanic/pristanic) processing is relatively preserved. Accumulated lipids are neurotoxic, driving progressive cerebral and cerebellar demyelination, neuronal loss, and the associated regression, seizures, and sensory impairment.",
+    "additionalDifferentials": [
+      "Zellweger-spectrum peroxisome biogenesis disorders",
+      "X-linked adrenoleukodystrophy and neonatal adrenoleukodystrophy",
+      "D-bifunctional protein deficiency (another single-enzyme peroxisomal beta-oxidation defect)",
+      "Other leukodystrophies presenting with infantile regression",
+      "Mitochondrial encephalopathies with seizures and hypotonia",
+      "Congenital or early-infantile epileptic encephalopathies of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Zellweger-spectrum peroxisome biogenesis disorders, X-linked adrenoleukodystrophy and neonatal adrenoleukodystrophy,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma very-long-chain fatty acid profile (elevated C26:0 and ratios)",
+      "ACOX1 gene sequencing to confirm the molecular diagnosis",
+      "Plasma phytanic and pristanic acids and bile-acid intermediates to distinguish from broader peroxisomal defects",
+      "Brain MRI to characterise the demyelinating leukodystrophy pattern",
+      "Fibroblast studies of peroxisomal beta-oxidation and immunofluorescence confirming normal peroxisome assembly",
+      "Auditory and visual evoked potentials to document sensory involvement"
     ],
-    [
-     "Management Strategy",
-     "Recognise that no disease-modifying therapy exists and provide structured supportive multidisciplinary care",
-     "Core treatment modality"
+    "redFlags": [
+      "Developmental regression with seizures after an initial period of near-normal development",
+      "Rapidly progressive white-matter disease on neuroimaging",
+      "Emergent loss of hearing and vision indicating advancing neurodegeneration",
+      "Intractable epilepsy requiring escalation of anticonvulsant management"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a normal peroxisome-biogenesis screen excludes a peroxisomal disorder, missing an isolated single-enzyme defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is progressive and usually fatal in childhood after a period of neurological regression, though the age of decline varies. There is no curative treatment, and management focuses on seizure control, nutrition, and supportive multidisciplinary care.",
+    "pitfalls": [
+      "Assuming a normal peroxisome-biogenesis screen excludes a peroxisomal disorder, missing an isolated single-enzyme defect",
+      "Confusing the phenotype with X-linked adrenoleukodystrophy and delaying autosomal recessive genetic testing",
+      "Failing to repeat or extend the VLCFA and enzyme testing when clinical suspicion is high",
+      "Overlooking sensory (hearing and visual) impairment that affects developmental support"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise that no disease-modifying therapy exists and provide structured supportive multidisciplinary care",
+      "Control seizures with appropriate anticonvulsant therapy",
+      "Support nutrition and safe feeding, using gastrostomy feeding when swallowing becomes unsafe",
+      "Manage hypotonia, spasticity and contractures with physiotherapy and occupational therapy",
+      "Provide hearing and visual aids and rehabilitation for the sensorineural deafness and visual impairment",
+      "Monitor neurological progression with periodic brain MRI and evoked potentials",
+      "Offer genetic counselling, carrier testing and prenatal or preimplantation options for this autosomal recessive disorder",
+      "Introduce paediatric palliative care as the disease progresses"
     ]
-   ],
-   "caption": "Overview comparison matrix for acyl-coa oxidase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acyl-coa-oxidase-deficiency-real-image",
-   "title": "Acyl-CoA oxidase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "acyl_coa_oxidase_deficiency-pathway",
+      "title": "Acyl-CoA oxidase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive single-enzyme peroxisomal defect caused by ACOX1 mutations, in which peroxisome assembly is intact but the first step of peroxisomal fatty-acid beta-oxidation fails",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Developmental regression with seizures after an initial period of near-normal development",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma very-long-chain fatty acid profile (elevated C26:0 and ratios), ACOX1 gene sequencing to confirm the molecular diagnosis, Plasma phytanic and pristanic acids and bile-acid intermediates to distinguish from broader"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise that no disease-modifying therapy exists and provide structured supportive multidisciplinary care"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a normal peroxisome-biogenesis screen excludes a peroxisomal disorder, missing an isolated single-enzyme defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acyl-coa oxidase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acyl_coa_oxidase_deficiency-matrix",
+      "title": "Acyl-CoA oxidase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive single-enzyme peroxisomal defect caused by ACOX1 mutations, in which peroxisome assembly is intact but the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma very-long-chain fatty acid profile (elevated C26:0 and ratios), ACOX1 gene sequencing to confirm the molecular diagnosis,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Zellweger-spectrum peroxisome biogenesis disorders, X-linked adrenoleukodystrophy and neonatal adrenoleukodystrophy,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise that no disease-modifying therapy exists and provide structured supportive multidisciplinary care",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal peroxisome-biogenesis screen excludes a peroxisomal disorder, missing an isolated single-enzyme defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acyl-coa oxidase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acyl_coa_oxidase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma very-long-chain fatty acid profile (C26:0 and ratios)",
+          "cells": [
+            {
+              "text": "Elevated; the key screening abnormality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACOX1 gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the molecular diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma phytanic and pristanic acids and bile-acid intermediates",
+          "cells": [
+            {
+              "text": "Typically normal; separates from broader defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Demyelinating leukodystrophy pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibroblast studies of peroxisomal beta-oxidation and immunofluorescence",
+          "cells": [
+            {
+              "text": "Normal peroxisome assembly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Auditory and visual evoked potentials",
+          "cells": [
+            {
+              "text": "Sensory involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acyl_coa_oxidase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Zellweger-spectrum peroxisome biogenesis disorders",
+          "cells": [
+            {
+              "text": "Peroxisome assembly is intact in this disorder"
+            },
+            {
+              "text": "Fibroblast immunofluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-bifunctional protein deficiency",
+          "cells": [
+            {
+              "text": "Another single-enzyme peroxisomal beta-oxidation defect"
+            },
+            {
+              "text": "Bile-acid intermediates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acyl_coa_oxidase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured supportive multidisciplinary care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy exists"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsant therapy",
+          "cells": [
+            {
+              "text": "Seizures"
+            },
+            {
+              "text": "Escalate for intractable epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and safe feeding",
+          "cells": [
+            {
+              "text": "Swallowing difficulty"
+            },
+            {
+              "text": "Gastrostomy when swallowing becomes unsafe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Hypotonia, spasticity and contractures"
+            },
+            {
+              "text": "Supports function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and visual aids with rehabilitation",
+          "cells": [
+            {
+              "text": "Sensorineural deafness and visual impairment"
+            },
+            {
+              "text": "Sensory support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial brain MRI and evoked potentials",
+          "cells": [
+            {
+              "text": "Neurological progression"
+            },
+            {
+              "text": "Monitors disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling, carrier testing and prenatal options",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder"
+            },
+            {
+              "text": "Prenatal or preimplantation options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric palliative care",
+          "cells": [
+            {
+              "text": "Progressive disease"
+            },
+            {
+              "text": "As the disease progresses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acyl_coa_oxidase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Acyl-CoA oxidase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with hypotonia, seizures and developmental regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Regression with seizures after near-normal early development?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review; escalate anticonvulsant treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma VLCFA profile; phytanic, pristanic and bile-acid intermediates",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised VLCFA with normal bile acids and peroxisome assembly?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ACOX1 sequencing to confirm the single-enzyme defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review Zellweger spectrum, X-ALD and D-bifunctional protein deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticonvulsants for seizures; nutrition and safe feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy; hearing and visual aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial brain MRI and evoked potentials; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive and usually fatal in childhood; supportive care only",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

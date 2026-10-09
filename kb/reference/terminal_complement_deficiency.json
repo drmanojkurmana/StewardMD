@@ -1,178 +1,485 @@
 {
- "id": "terminal_complement_deficiency",
- "name": "Terminal complement (C5-C9) deficiency",
- "aliases": [
-  "membrane attack complex deficiency",
-  "MAC deficiency",
-  "C5 deficiency",
-  "C6 deficiency",
-  "C7 deficiency",
-  "C8 deficiency",
-  "C9 deficiency",
-  "terminal pathway complement deficiency"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immune Deficiencies / Middleton's Allergy: Principles and Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The signature clinical association is recurrent invasive Neisseria infection, especially meningococcal disease and disseminated gonococcal infection",
-   "Meningococcal disease in these patients is often caused by uncommon serogroups and may recur or present at an atypical age",
-   "Inheritance is autosomal recessive, so consanguinity or affected siblings increase suspicion",
-   "The defect lies in assembling the membrane attack complex, so bacteriolysis of Neisseria is impaired despite otherwise intact immunity",
-   "A low CH50 (classical pathway) with normal individual early components points to a terminal pathway defect and should trigger measurement of individual terminal components",
-   "Properdin deficiency (X-linked) and early complement defects can produce overlapping neisserial susceptibility and should be considered",
-   "Prevention centres on meningococcal vaccination including serogroup B and quadrivalent conjugate vaccines, and prompt treatment of febrile illness"
+  "id": "terminal_complement_deficiency",
+  "name": "Terminal complement (C5-C9) deficiency",
+  "aliases": [
+    "membrane attack complex deficiency",
+    "MAC deficiency",
+    "C5 deficiency",
+    "C6 deficiency",
+    "C7 deficiency",
+    "C8 deficiency",
+    "C9 deficiency",
+    "terminal pathway complement deficiency"
   ],
-  "pathophysiology": "The terminal complement components C5 through C9 assemble on microbial surfaces to form the membrane attack complex, a pore that lyses susceptible organisms. Neisseria species are unusually dependent on this direct complement-mediated bacteriolysis for their clearance. When any terminal component is genetically deficient, the classical, lectin and alternative pathways can still opsonise but cannot complete lytic killing, so the host is left disproportionately vulnerable to Neisseria meningitidis and Neisseria gonorrhoeae. Because early complement functions such as opsonisation and immune-complex handling are preserved, patients typically do not have the encapsulated-organism infection pattern or autoimmune features seen with early classical pathway defects.",
-  "additionalDifferentials": [
-   "Properdin deficiency (X-linked neisserial susceptibility)",
-   "Early classical pathway component deficiency (C1, C2, C4)",
-   "Factor D or other alternative pathway defects",
-   "Asplenia or hyposplenism",
-   "Antibody deficiency predisposing to bacterial infection",
-   "Complement consumption from active immune-complex disease"
-  ],
-  "additionalInvestigations": [
-   "CH50 (total classical haemolytic complement) as a screen for terminal pathway integrity",
-   "AH50 (alternative pathway haemolytic assay) to help localise the defect",
-   "Measurement of individual terminal components C5 to C9",
-   "Properdin and early component (C3, C4, C2) levels to exclude other complement defects",
-   "Microbiological culture and serogrouping of any neisserial isolate",
-   "Genetic confirmation of the deficient component where available"
-  ],
-  "redFlags": [
-   "Recurrent or second episode of invasive meningococcal disease",
-   "Meningococcal infection caused by an unusual serogroup or occurring in an adolescent/adult",
-   "Family history of invasive neisserial infection or unexplained meningitis deaths",
-   "Fulminant sepsis with purpura requiring immediate treatment"
-  ],
-  "prognosis": "Individual invasive episodes tend to be less fulminant than in complement-sufficient patients, but the lifelong risk of recurrent neisserial infection persists, and outcome depends heavily on vaccination, patient education, and rapid treatment of febrile illness.",
-  "pitfalls": [
-   "Attributing a single meningococcal episode to bad luck and not screening the complement system after recurrent or atypical disease",
-   "Measuring only individual components without a functional CH50/AH50 to guide localisation",
-   "Assuming vaccination gives complete protection and failing to counsel on urgent care for fevers",
-   "Overlooking properdin deficiency, which mimics the neisserial phenotype"
-  ],
-  "references": [
-   "Stiehm's Immune Deficiencies",
-   "Middleton's Allergy: Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise immunisation against Neisseria meningitidis with both quadrivalent conjugate (MenACWY) and serogroup B vaccines, with boosters, as the cornerstone of prevention",
-   "Complete vaccination against other encapsulated organisms including pneumococcus and Haemophilus influenzae type b",
-   "Consider long-term prophylactic penicillin to reduce the risk of invasive meningococcal disease",
-   "Educate the patient to seek urgent medical care for any febrile illness and to carry an alert document, given the lifelong recurrent-infection risk",
-   "Treat suspected invasive meningococcal or gonococcal infection promptly with a third-generation cephalosporin such as ceftriaxone",
-   "Screen and vaccinate at-risk family members and offer genetic counselling for this autosomal recessive defect",
-   "Provide ongoing clinical immunology follow-up and culture and serogroup any neisserial isolate to guide public-health action"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "terminal_complement_deficiency-pathway",
-   "title": "Terminal complement (C5-C9) deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The signature clinical association is recurrent invasive Neisseria infection, especially meningococcal disease and disseminated gonococcal infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or second episode of invasive meningococcal disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CH50 (total classical haemolytic complement) as a screen for terminal pathway integrity, AH50 (alternative pathway haemolytic assay) to help localise the defect, Measurement of individual terminal components C5 to C9"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise immunisation against Neisseria meningitidis with both quadrivalent conjugate (MenACWY) and serogroup B vaccines, with boosters, as the cornerstone of prevention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a single meningococcal episode to bad luck and not screening the complement system after recurrent or atypical disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of terminal complement (c5-c9) deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "terminal_complement_deficiency-matrix",
-   "title": "Terminal complement (C5-C9) deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The signature clinical association is recurrent invasive Neisseria infection, especially meningococcal disease and disseminated",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immune Deficiencies / Middleton's Allergy: Principles and Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The signature clinical association is recurrent invasive Neisseria infection, especially meningococcal disease and disseminated gonococcal infection",
+      "Meningococcal disease in these patients is often caused by uncommon serogroups and may recur or present at an atypical age",
+      "Inheritance is autosomal recessive, so consanguinity or affected siblings increase suspicion",
+      "The defect lies in assembling the membrane attack complex, so bacteriolysis of Neisseria is impaired despite otherwise intact immunity",
+      "A low CH50 (classical pathway) with normal individual early components points to a terminal pathway defect and should trigger measurement of individual terminal components",
+      "Properdin deficiency (X-linked) and early complement defects can produce overlapping neisserial susceptibility and should be considered",
+      "Prevention centres on meningococcal vaccination including serogroup B and quadrivalent conjugate vaccines, and prompt treatment of febrile illness"
     ],
-    [
-     "Key Investigations",
-     "CH50 (total classical haemolytic complement) as a screen for terminal pathway integrity, AH50 (alternative pathway haemolytic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The terminal complement components C5 through C9 assemble on microbial surfaces to form the membrane attack complex, a pore that lyses susceptible organisms. Neisseria species are unusually dependent on this direct complement-mediated bacteriolysis for their clearance. When any terminal component is genetically deficient, the classical, lectin and alternative pathways can still opsonise but cannot complete lytic killing, so the host is left disproportionately vulnerable to Neisseria meningitidis and Neisseria gonorrhoeae. Because early complement functions such as opsonisation and immune-complex handling are preserved, patients typically do not have the encapsulated-organism infection pattern or autoimmune features seen with early classical pathway defects.",
+    "additionalDifferentials": [
+      "Properdin deficiency (X-linked neisserial susceptibility)",
+      "Early classical pathway component deficiency (C1, C2, C4)",
+      "Factor D or other alternative pathway defects",
+      "Asplenia or hyposplenism",
+      "Antibody deficiency predisposing to bacterial infection",
+      "Complement consumption from active immune-complex disease"
     ],
-    [
-     "Primary Differentials",
-     "Properdin deficiency (X-linked neisserial susceptibility), Early classical pathway component deficiency (C1, C2, C4), Factor D or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CH50 (total classical haemolytic complement) as a screen for terminal pathway integrity",
+      "AH50 (alternative pathway haemolytic assay) to help localise the defect",
+      "Measurement of individual terminal components C5 to C9",
+      "Properdin and early component (C3, C4, C2) levels to exclude other complement defects",
+      "Microbiological culture and serogrouping of any neisserial isolate",
+      "Genetic confirmation of the deficient component where available"
     ],
-    [
-     "Management Strategy",
-     "Prioritise immunisation against Neisseria meningitidis with both quadrivalent conjugate (MenACWY) and serogroup B vaccines, with",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or second episode of invasive meningococcal disease",
+      "Meningococcal infection caused by an unusual serogroup or occurring in an adolescent/adult",
+      "Family history of invasive neisserial infection or unexplained meningitis deaths",
+      "Fulminant sepsis with purpura requiring immediate treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a single meningococcal episode to bad luck and not screening the complement system after recurrent or atypical disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Individual invasive episodes tend to be less fulminant than in complement-sufficient patients, but the lifelong risk of recurrent neisserial infection persists, and outcome depends heavily on vaccination, patient education, and rapid treatment of febrile illness.",
+    "pitfalls": [
+      "Attributing a single meningococcal episode to bad luck and not screening the complement system after recurrent or atypical disease",
+      "Measuring only individual components without a functional CH50/AH50 to guide localisation",
+      "Assuming vaccination gives complete protection and failing to counsel on urgent care for fevers",
+      "Overlooking properdin deficiency, which mimics the neisserial phenotype"
+    ],
+    "references": [
+      "Stiehm's Immune Deficiencies",
+      "Middleton's Allergy: Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise immunisation against Neisseria meningitidis with both quadrivalent conjugate (MenACWY) and serogroup B vaccines, with boosters, as the cornerstone of prevention",
+      "Complete vaccination against other encapsulated organisms including pneumococcus and Haemophilus influenzae type b",
+      "Consider long-term prophylactic penicillin to reduce the risk of invasive meningococcal disease",
+      "Educate the patient to seek urgent medical care for any febrile illness and to carry an alert document, given the lifelong recurrent-infection risk",
+      "Treat suspected invasive meningococcal or gonococcal infection promptly with a third-generation cephalosporin such as ceftriaxone",
+      "Screen and vaccinate at-risk family members and offer genetic counselling for this autosomal recessive defect",
+      "Provide ongoing clinical immunology follow-up and culture and serogroup any neisserial isolate to guide public-health action"
     ]
-   ],
-   "caption": "Overview comparison matrix for terminal complement (c5-c9) deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "terminal-complement-deficiency-real-image",
-   "title": "Terminal complement (C5-C9) deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "terminal_complement_deficiency-pathway",
+      "title": "Terminal complement (C5-C9) deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The signature clinical association is recurrent invasive Neisseria infection, especially meningococcal disease and disseminated gonococcal infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or second episode of invasive meningococcal disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CH50 (total classical haemolytic complement) as a screen for terminal pathway integrity, AH50 (alternative pathway haemolytic assay) to help localise the defect, Measurement of individual terminal components C5 to C9"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise immunisation against Neisseria meningitidis with both quadrivalent conjugate (MenACWY) and serogroup B vaccines, with boosters, as the cornerstone of prevention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a single meningococcal episode to bad luck and not screening the complement system after recurrent or atypical disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of terminal complement (c5-c9) deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "terminal_complement_deficiency-matrix",
+      "title": "Terminal complement (C5-C9) deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The signature clinical association is recurrent invasive Neisseria infection, especially meningococcal disease and disseminated",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CH50 (total classical haemolytic complement) as a screen for terminal pathway integrity, AH50 (alternative pathway haemolytic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Properdin deficiency (X-linked neisserial susceptibility), Early classical pathway component deficiency (C1, C2, C4), Factor D or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise immunisation against Neisseria meningitidis with both quadrivalent conjugate (MenACWY) and serogroup B vaccines, with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a single meningococcal episode to bad luck and not screening the complement system after recurrent or atypical disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for terminal complement (c5-c9) deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immune Deficiencies / Middleton's Allergy: Principles and Practice",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "terminal_complement_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Terminal complement (C5-C9) deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected terminal complement deficiency: recurrent invasive Neisseria infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: second invasive meningococcal episode, or unusual serogroup?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate antibiotics, such as ceftriaxone, for fulminant sepsis with purpura",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CH50 and AH50; individual C5 to C9 levels; properdin and early components",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a terminal pathway component deficient, with properdin normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider properdin deficiency, early classical defects or asplenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "MenACWY and serogroup B meningococcal vaccination with boosters",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pneumococcal and Haemophilus influenzae type b vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider long-term prophylactic penicillin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Patient education, urgent care for fever and an alert document",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen and vaccinate at-risk family members",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Invasive episodes tend to be less fulminant, but recurrent risk persists lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "terminal_complement_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CH50 (total classical haemolytic complement)",
+          "cells": [
+            {
+              "text": "Terminal pathway integrity; a low value points to a terminal defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AH50 (alternative pathway haemolytic assay)",
+          "cells": [
+            {
+              "text": "Helps localise the defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Individual terminal components C5 to C9",
+          "cells": [
+            {
+              "text": "The deficient component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Properdin and early components C3, C4, C2",
+          "cells": [
+            {
+              "text": "Other complement defects excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture and serogrouping of neisserial isolates",
+          "cells": [
+            {
+              "text": "Organism and serogroup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic confirmation",
+          "cells": [
+            {
+              "text": "Deficient component, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "terminal_complement_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Properdin deficiency",
+          "cells": [
+            {
+              "text": "X-linked; mimics the neisserial phenotype and must not be overlooked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early classical pathway deficiency (C1, C2, C4)",
+          "cells": [
+            {
+              "text": "Low CH50 with normal individual early components points to a terminal defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asplenia or hyposplenism",
+          "cells": [
+            {
+              "text": "Predisposes to invasive bacterial infection; not a complement defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "terminal_complement_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningococcal vaccination",
+          "cells": [
+            {
+              "text": "MenACWY and serogroup B vaccines with boosters; cornerstone of prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other encapsulated organisms",
+          "cells": [
+            {
+              "text": "Pneumococcal and Haemophilus influenzae type b vaccination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic penicillin",
+          "cells": [
+            {
+              "text": "Long-term, to reduce invasive meningococcal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patient education and alert document",
+          "cells": [
+            {
+              "text": "Urgent care for any febrile illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt antibiotics for invasive disease",
+          "cells": [
+            {
+              "text": "Third-generation cephalosporin such as ceftriaxone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening and genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screen and vaccinate relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical immunology follow-up",
+          "cells": [
+            {
+              "text": "Culture and serogroup any neisserial isolate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

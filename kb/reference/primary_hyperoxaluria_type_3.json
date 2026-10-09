@@ -1,180 +1,486 @@
 {
- "id": "primary_hyperoxaluria_type_3",
- "name": "Primary Hyperoxaluria Type 3",
- "aliases": [
-  "4-hydroxy-2-oxoglutarate aldolase deficiency",
-  "DHDPSL deficiency",
-  "HOGA1",
-  "HOGA1 deficiency",
-  "PH3",
-  "Primary hyperoxaluria type 3",
-  "hyperoxaluria type 3",
-  "primary hyperoxaluria type III"
- ],
- "class": "non_infective",
- "system": "Renal / Hepatic metabolic",
- "specialty": "Nephrology / Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Metabolic medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder caused by biallelic HOGA1 mutations affecting mitochondrial 4-hydroxy-2-oxoglutarate aldolase in the hydroxyproline degradation pathway.",
-   "Frequently the earliest of the three types to present, often with recurrent calcium oxalate stones in infancy or early childhood.",
-   "Despite early stones, it usually carries the best long-term renal prognosis, with progression to end-stage renal failure being uncommon.",
-   "Biochemical signature is raised urinary oxalate together with elevated 4-hydroxy-2-oxoglutarate and 2,4-dihydroxyglutarate, the discriminating metabolites.",
-   "Hypercalciuria is commonly seen alongside the hyperoxaluria and can confuse the clinical picture.",
-   "The precise mechanism linking HOGA1 loss to oxalate overproduction is incompletely understood, involving accumulation of hydroxy-oxoglutarate and its diversion to glyoxylate.",
-   "Management is largely conservative with hyperhydration and crystallisation inhibitors, and transplantation is rarely required.",
-   "Stone activity may lessen with age in some patients."
+  "id": "primary_hyperoxaluria_type_3",
+  "name": "Primary Hyperoxaluria Type 3",
+  "aliases": [
+    "4-hydroxy-2-oxoglutarate aldolase deficiency",
+    "DHDPSL deficiency",
+    "HOGA1",
+    "HOGA1 deficiency",
+    "PH3",
+    "Primary hyperoxaluria type 3",
+    "hyperoxaluria type 3",
+    "primary hyperoxaluria type III"
   ],
-  "pathophysiology": "Primary hyperoxaluria type 3 is an autosomal recessive disorder resulting from deficiency of 4-hydroxy-2-oxoglutarate aldolase (HOGA1), a mitochondrial enzyme of the hydroxyproline degradation pathway encoded by HOGA1. Loss of enzyme activity leads to accumulation of 4-hydroxy-2-oxoglutarate and dihydroxyglutarate; the precise route to oxalate overproduction remains debated, but the accumulating intermediates are thought to be cleaved to glyoxylate outside the normal compartment or to inhibit glyoxylate-handling enzymes, so that glyoxylate is diverted to oxalate. The excess oxalate causes urinary calcium oxalate supersaturation with recurrent stones, frequently accompanied by hypercalciuria. Compared with types 1 and 2, oxalate overproduction is generally less relentless and renal parenchymal damage less severe, so nephrocalcinosis, chronic kidney disease and systemic oxalosis are distinctly uncommon, and many patients maintain preserved renal function into adult life.",
-  "additionalDifferentials": [
-   "Primary hyperoxaluria types 1 and 2",
-   "Idiopathic hypercalciuric calcium oxalate stone disease",
-   "Enteric and dietary hyperoxaluria",
-   "Other paediatric monogenic stone or nephrocalcinosis disorders",
-   "Distal renal tubular acidosis",
-   "Hypocitraturic calcium stone disease"
-  ],
-  "additionalInvestigations": [
-   "Urinary oxalate with 4-hydroxy-2-oxoglutarate and dihydroxyglutarate measurement",
-   "Urinary calcium and citrate, as hypercalciuria frequently coexists",
-   "Renal tract imaging for stones and, rarely, nephrocalcinosis",
-   "Molecular genetic testing of HOGA1",
-   "Stone composition analysis",
-   "Longitudinal monitoring of renal function"
-  ],
-  "redFlags": [
-   "Unexpectedly rapid decline in renal function, which should prompt review of the diagnosis",
-   "Development of nephrocalcinosis, which is atypical and warrants reassessment",
-   "Recurrent obstructing stones causing acute kidney injury",
-   "Rising plasma oxalate, which is rare in type 3 and should raise concern"
-  ],
-  "prognosis": "Type 3 typically has the most benign renal prognosis of the primary hyperoxalurias; despite early and recurrent stone formation, progression to end-stage renal failure is uncommon and most patients retain good renal function. Lifelong monitoring remains prudent because a minority develop chronic kidney disease.",
-  "pitfalls": [
-   "Assuming any hyperoxaluria implies the severe type 1 course and over-treating",
-   "Overlooking coexisting hypercalciuria that also needs addressing",
-   "Missing the diagnosis when only oxalate is measured without the specific hydroxy-oxoglutarate metabolites",
-   "Failing to reconsider the diagnosis if renal function declines unexpectedly"
-  ],
-  "references": [
-   "Inborn errors of metabolism reference texts",
-   "Paediatric and adult nephrology reference texts",
-   "International guidelines on primary hyperoxaluria"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Sustained maintenance hyperhydration to keep the urine dilute and reduce calcium oxalate supersaturation",
-   "Potassium citrate and other crystallisation inhibitors to counter stone formation and any hypocitraturia",
-   "Management of the frequently coexisting hypercalciuria with dietary sodium restriction and, where marked, a thiazide diuretic, while maintaining adequate dietary calcium",
-   "Active but nephron-sparing stone clearance by lithotripsy or endourology for recurrent calculi",
-   "Longitudinal monitoring of renal function, urinary oxalate and the discriminating metabolites, and of stone activity",
-   "Reassurance regarding the generally favourable renal prognosis, with continued surveillance since a minority develop chronic kidney disease",
-   "Genetic counselling and family screening given autosomal recessive HOGA1 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_hyperoxaluria_type_3-pathway",
-   "title": "Primary Hyperoxaluria Type 3: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder caused by biallelic HOGA1 mutations affecting mitochondrial 4-hydroxy-2-oxoglutarate aldolase in the hydroxyproline degradation pathway.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unexpectedly rapid decline in renal function, which should prompt review of the diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinary oxalate with 4-hydroxy-2-oxoglutarate and dihydroxyglutarate measurement, Urinary calcium and citrate, as hypercalciuria frequently coexists, Renal tract imaging for stones and, rarely, nephrocalcinosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Sustained maintenance hyperhydration to keep the urine dilute and reduce calcium oxalate supersaturation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming any hyperoxaluria implies the severe type 1 course and over-treating"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary hyperoxaluria type 3."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_hyperoxaluria_type_3-matrix",
-   "title": "Primary Hyperoxaluria Type 3: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder caused by biallelic HOGA1 mutations affecting mitochondrial 4-hydroxy-2-oxoglutarate aldolase in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Hepatic metabolic",
+  "specialty": "Nephrology / Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Metabolic medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder caused by biallelic HOGA1 mutations affecting mitochondrial 4-hydroxy-2-oxoglutarate aldolase in the hydroxyproline degradation pathway.",
+      "Frequently the earliest of the three types to present, often with recurrent calcium oxalate stones in infancy or early childhood.",
+      "Despite early stones, it usually carries the best long-term renal prognosis, with progression to end-stage renal failure being uncommon.",
+      "Biochemical signature is raised urinary oxalate together with elevated 4-hydroxy-2-oxoglutarate and 2,4-dihydroxyglutarate, the discriminating metabolites.",
+      "Hypercalciuria is commonly seen alongside the hyperoxaluria and can confuse the clinical picture.",
+      "The precise mechanism linking HOGA1 loss to oxalate overproduction is incompletely understood, involving accumulation of hydroxy-oxoglutarate and its diversion to glyoxylate.",
+      "Management is largely conservative with hyperhydration and crystallisation inhibitors, and transplantation is rarely required.",
+      "Stone activity may lessen with age in some patients."
     ],
-    [
-     "Key Investigations",
-     "Urinary oxalate with 4-hydroxy-2-oxoglutarate and dihydroxyglutarate measurement, Urinary calcium and citrate, as hypercalciuria",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary hyperoxaluria type 3 is an autosomal recessive disorder resulting from deficiency of 4-hydroxy-2-oxoglutarate aldolase (HOGA1), a mitochondrial enzyme of the hydroxyproline degradation pathway encoded by HOGA1. Loss of enzyme activity leads to accumulation of 4-hydroxy-2-oxoglutarate and dihydroxyglutarate; the precise route to oxalate overproduction remains debated, but the accumulating intermediates are thought to be cleaved to glyoxylate outside the normal compartment or to inhibit glyoxylate-handling enzymes, so that glyoxylate is diverted to oxalate. The excess oxalate causes urinary calcium oxalate supersaturation with recurrent stones, frequently accompanied by hypercalciuria. Compared with types 1 and 2, oxalate overproduction is generally less relentless and renal parenchymal damage less severe, so nephrocalcinosis, chronic kidney disease and systemic oxalosis are distinctly uncommon, and many patients maintain preserved renal function into adult life.",
+    "additionalDifferentials": [
+      "Primary hyperoxaluria types 1 and 2",
+      "Idiopathic hypercalciuric calcium oxalate stone disease",
+      "Enteric and dietary hyperoxaluria",
+      "Other paediatric monogenic stone or nephrocalcinosis disorders",
+      "Distal renal tubular acidosis",
+      "Hypocitraturic calcium stone disease"
     ],
-    [
-     "Primary Differentials",
-     "Primary hyperoxaluria types 1 and 2, Idiopathic hypercalciuric calcium oxalate stone disease, Enteric and dietary hyperoxaluria",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinary oxalate with 4-hydroxy-2-oxoglutarate and dihydroxyglutarate measurement",
+      "Urinary calcium and citrate, as hypercalciuria frequently coexists",
+      "Renal tract imaging for stones and, rarely, nephrocalcinosis",
+      "Molecular genetic testing of HOGA1",
+      "Stone composition analysis",
+      "Longitudinal monitoring of renal function"
     ],
-    [
-     "Management Strategy",
-     "Sustained maintenance hyperhydration to keep the urine dilute and reduce calcium oxalate supersaturation",
-     "Core treatment modality"
+    "redFlags": [
+      "Unexpectedly rapid decline in renal function, which should prompt review of the diagnosis",
+      "Development of nephrocalcinosis, which is atypical and warrants reassessment",
+      "Recurrent obstructing stones causing acute kidney injury",
+      "Rising plasma oxalate, which is rare in type 3 and should raise concern"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming any hyperoxaluria implies the severe type 1 course and over-treating",
-     "Prevent diagnostic or management error"
+    "prognosis": "Type 3 typically has the most benign renal prognosis of the primary hyperoxalurias; despite early and recurrent stone formation, progression to end-stage renal failure is uncommon and most patients retain good renal function. Lifelong monitoring remains prudent because a minority develop chronic kidney disease.",
+    "pitfalls": [
+      "Assuming any hyperoxaluria implies the severe type 1 course and over-treating",
+      "Overlooking coexisting hypercalciuria that also needs addressing",
+      "Missing the diagnosis when only oxalate is measured without the specific hydroxy-oxoglutarate metabolites",
+      "Failing to reconsider the diagnosis if renal function declines unexpectedly"
+    ],
+    "references": [
+      "Inborn errors of metabolism reference texts",
+      "Paediatric and adult nephrology reference texts",
+      "International guidelines on primary hyperoxaluria"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Sustained maintenance hyperhydration to keep the urine dilute and reduce calcium oxalate supersaturation",
+      "Potassium citrate and other crystallisation inhibitors to counter stone formation and any hypocitraturia",
+      "Management of the frequently coexisting hypercalciuria with dietary sodium restriction and, where marked, a thiazide diuretic, while maintaining adequate dietary calcium",
+      "Active but nephron-sparing stone clearance by lithotripsy or endourology for recurrent calculi",
+      "Longitudinal monitoring of renal function, urinary oxalate and the discriminating metabolites, and of stone activity",
+      "Reassurance regarding the generally favourable renal prognosis, with continued surveillance since a minority develop chronic kidney disease",
+      "Genetic counselling and family screening given autosomal recessive HOGA1 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary hyperoxaluria type 3."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-hyperoxaluria-type-3-real-image",
-   "title": "Primary Hyperoxaluria Type 3: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "primary_hyperoxaluria_type_3-pathway",
+      "title": "Primary Hyperoxaluria Type 3: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder caused by biallelic HOGA1 mutations affecting mitochondrial 4-hydroxy-2-oxoglutarate aldolase in the hydroxyproline degradation pathway.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unexpectedly rapid decline in renal function, which should prompt review of the diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinary oxalate with 4-hydroxy-2-oxoglutarate and dihydroxyglutarate measurement, Urinary calcium and citrate, as hypercalciuria frequently coexists, Renal tract imaging for stones and, rarely, nephrocalcinosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Sustained maintenance hyperhydration to keep the urine dilute and reduce calcium oxalate supersaturation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming any hyperoxaluria implies the severe type 1 course and over-treating"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary hyperoxaluria type 3."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_hyperoxaluria_type_3-matrix",
+      "title": "Primary Hyperoxaluria Type 3: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder caused by biallelic HOGA1 mutations affecting mitochondrial 4-hydroxy-2-oxoglutarate aldolase in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinary oxalate with 4-hydroxy-2-oxoglutarate and dihydroxyglutarate measurement, Urinary calcium and citrate, as hypercalciuria",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary hyperoxaluria types 1 and 2, Idiopathic hypercalciuric calcium oxalate stone disease, Enteric and dietary hyperoxaluria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Sustained maintenance hyperhydration to keep the urine dilute and reduce calcium oxalate supersaturation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any hyperoxaluria implies the severe type 1 course and over-treating",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary hyperoxaluria type 3."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "primary_hyperoxaluria_type_3-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary oxalate with 4-hydroxy-2-oxoglutarate and dihydroxyglutarate",
+          "cells": [
+            {
+              "text": "Discriminating metabolites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium and citrate",
+          "cells": [
+            {
+              "text": "Hypercalciuria, which frequently coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract imaging",
+          "cells": [
+            {
+              "text": "Stones and, rarely, nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HOGA1 molecular testing",
+          "cells": [
+            {
+              "text": "Confirmatory genetic diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone composition analysis",
+          "cells": [
+            {
+              "text": "Stone type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Longitudinal monitoring of renal function",
+          "cells": [
+            {
+              "text": "Renal prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperoxaluria_type_3-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary hyperoxaluria types 1 and 2",
+          "cells": [
+            {
+              "text": "Defect in a gene other than HOGA1"
+            },
+            {
+              "text": "Molecular genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic hypercalciuric calcium oxalate stone disease",
+          "cells": [
+            {
+              "text": "Hypercalciuria"
+            },
+            {
+              "text": "Urinary calcium and citrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypocitraturic calcium stone disease",
+          "cells": [
+            {
+              "text": "Hypocitraturia"
+            },
+            {
+              "text": "Urinary citrate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "primary_hyperoxaluria_type_3-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maintenance hyperhydration",
+          "cells": [
+            {
+              "text": "Sustained, to keep the urine dilute and reduce calcium oxalate supersaturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crystallisation inhibitors",
+          "cells": [
+            {
+              "text": "Potassium citrate and others to counter stone formation and any hypocitraturia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypercalciuria",
+          "cells": [
+            {
+              "text": "Dietary sodium restriction; thiazide diuretic where hypercalciuria is marked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone clearance",
+          "cells": [
+            {
+              "text": "Nephron-sparing lithotripsy or endourology for recurrent calculi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, urinary oxalate, discriminating metabolites and stone activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Generally favourable renal prognosis; a minority develop chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive HOGA1 inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "primary_hyperoxaluria_type_3-dx-mgmt",
+      "title": "Diagnosis and management of Primary Hyperoxaluria Type 3",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary hyperoxaluria type 3: recurrent calcium oxalate stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid renal decline, atypical nephrocalcinosis, obstruction or high plasma oxalate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review; reassess the diagnosis for rapid renal decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary oxalate with 4-OH-2-oxoglutarate and DHG; urinary calcium and citrate; HOGA1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does HOGA1 testing confirm primary hyperoxaluria type 3?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypercalciuric or hypocitraturic stone disease or other types; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sustained hyperhydration to keep urine dilute",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium citrate and other crystallisation inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietary sodium restriction; thiazide if hypercalciuria is marked",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nephron-sparing lithotripsy or endourology for recurrent stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Renal function monitoring; generally favourable prognosis with CKD surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

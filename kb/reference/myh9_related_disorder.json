@@ -1,176 +1,472 @@
 {
- "id": "myh9_related_disorder",
- "name": "MYH9-related disorder",
- "aliases": [
-  "MYH9-related disease",
-  "May-Hegglin anomaly",
-  "Sebastian syndrome",
-  "Fechtner syndrome",
-  "Epstein syndrome",
-  "MYH9-RD"
- ],
- "class": "non_infective",
- "system": "Haematology / Genetics",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant disorder caused by MYH9 mutations affecting non-muscle myosin heavy chain IIA, presenting with macrothrombocytopenia",
-   "The blood film shows large or giant platelets together with pale blue Dohle-like cytoplasmic inclusions in neutrophils",
-   "The historical eponyms (May-Hegglin, Sebastian, Fechtner, Epstein) are now recognised as one disease spectrum defined by the MYH9 gene",
-   "Extra-haematological features may include progressive sensorineural deafness, presenile cataract, and nephropathy that can advance to renal failure",
-   "The thrombocytopenia is often mild and the bleeding tendency modest, so the low platelet count is frequently discovered incidentally",
-   "Automated counters may undercount the giant platelets and overstate the severity, so film review is essential",
-   "Diagnosis combines macrothrombocytopenia with leucocyte inclusions on immunofluorescence for myosin IIA and MYH9 sequencing"
+  "id": "myh9_related_disorder",
+  "name": "MYH9-related disorder",
+  "aliases": [
+    "MYH9-related disease",
+    "May-Hegglin anomaly",
+    "Sebastian syndrome",
+    "Fechtner syndrome",
+    "Epstein syndrome",
+    "MYH9-RD"
   ],
-  "pathophysiology": "MYH9-related disorder results from mutations in MYH9, which encodes the heavy chain of non-muscle myosin IIA, a cytoskeletal motor protein expressed in platelets, leucocytes, cochlea, lens, and kidney. In megakaryocytes, defective myosin IIA disrupts the cytoskeletal remodelling required for orderly proplatelet formation, so platelets are released as fewer, abnormally large cells, producing macrothrombocytopenia. In neutrophils, the mutant protein aggregates into cytoplasmic inclusions visible as Dohle-like bodies. The same protein is essential in other tissues, so its dysfunction can cause sensorineural hearing loss, cataract, and a glomerular nephropathy, with the pattern and severity of extra-haematological involvement varying by the specific mutation.",
-  "additionalDifferentials": [
-   "Immune thrombocytopenia (ITP)",
-   "Bernard-Soulier syndrome",
-   "Gray platelet syndrome",
-   "Other inherited macrothrombocytopenias (for example TUBB1, ACTN1)",
-   "Type 2B von Willebrand disease",
-   "Alport syndrome (for the renal and auditory features)"
-  ],
-  "additionalInvestigations": [
-   "Blood film review for giant platelets and neutrophil Dohle-like inclusions",
-   "Immunofluorescence staining for myosin IIA distribution in neutrophils",
-   "MYH9 sequencing to confirm the diagnosis and correlate genotype",
-   "Audiometry to detect and monitor sensorineural hearing loss",
-   "Urinalysis and renal function tests to screen for nephropathy",
-   "Ophthalmological assessment for cataract"
-  ],
-  "redFlags": [
-   "Progressive proteinuria or declining renal function heralding nephropathy",
-   "Rapidly progressive hearing loss requiring audiological intervention",
-   "Significant bleeding disproportionate to the platelet count, prompting review of the diagnosis",
-   "Unnecessary immunosuppression or splenectomy after misdiagnosis as immune thrombocytopenia"
-  ],
-  "prognosis": "The haematological course is usually benign with only a modest bleeding tendency, but long-term prognosis is shaped by extra-haematological complications, particularly progressive nephropathy and hearing loss in susceptible genotypes.",
-  "pitfalls": [
-   "Misdiagnosing the condition as immune thrombocytopenia and giving steroids, immunoglobulin, or splenectomy",
-   "Relying on automated platelet counts that miss giant platelets",
-   "Failing to screen for and monitor renal, auditory, and ocular involvement",
-   "Overtreating a mild, incidentally found thrombocytopenia"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise the inherited macrothrombocytopenia to avoid misdiagnosis as immune thrombocytopenia and inappropriate corticosteroids, immunosuppression or splenectomy",
-   "Cover bleeding and surgical or peripartum haemostasis with platelet transfusions and an antifibrinolytic such as tranexamic acid; a thrombopoietin-receptor agonist can raise counts before procedures",
-   "Monitor renal function and urinalysis for proteinuria, treating emerging nephropathy with renin-angiotensin system blockade",
-   "Perform serial audiometry and provide hearing aids or cochlear implantation for progressive sensorineural deafness",
-   "Arrange ophthalmological review with cataract surgery when visually significant",
-   "Offer genetic counselling for this autosomal dominant MYH9 disorder and testing of at-risk relatives",
-   "Refer to nephrology as chronic kidney disease advances, with consideration of dialysis or renal transplantation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myh9_related_disorder-pathway",
-   "title": "MYH9-related disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant disorder caused by MYH9 mutations affecting non-muscle myosin heavy chain IIA, presenting with macrothrombocytopenia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive proteinuria or declining renal function heralding nephropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood film review for giant platelets and neutrophil Dohle-like inclusions, Immunofluorescence staining for myosin IIA distribution in neutrophils, MYH9 sequencing to confirm the diagnosis and correlate genotype"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise the inherited macrothrombocytopenia to avoid misdiagnosis as immune thrombocytopenia and inappropriate corticosteroids, immunosuppression or splenectomy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the condition as immune thrombocytopenia and giving steroids, immunoglobulin, or splenectomy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myh9-related disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "myh9_related_disorder-matrix",
-   "title": "MYH9-related disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant disorder caused by MYH9 mutations affecting non-muscle myosin heavy chain IIA, presenting with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology / Genetics",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant disorder caused by MYH9 mutations affecting non-muscle myosin heavy chain IIA, presenting with macrothrombocytopenia",
+      "The blood film shows large or giant platelets together with pale blue Dohle-like cytoplasmic inclusions in neutrophils",
+      "The historical eponyms (May-Hegglin, Sebastian, Fechtner, Epstein) are now recognised as one disease spectrum defined by the MYH9 gene",
+      "Extra-haematological features may include progressive sensorineural deafness, presenile cataract, and nephropathy that can advance to renal failure",
+      "The thrombocytopenia is often mild and the bleeding tendency modest, so the low platelet count is frequently discovered incidentally",
+      "Automated counters may undercount the giant platelets and overstate the severity, so film review is essential",
+      "Diagnosis combines macrothrombocytopenia with leucocyte inclusions on immunofluorescence for myosin IIA and MYH9 sequencing"
     ],
-    [
-     "Key Investigations",
-     "Blood film review for giant platelets and neutrophil Dohle-like inclusions, Immunofluorescence staining for myosin IIA",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MYH9-related disorder results from mutations in MYH9, which encodes the heavy chain of non-muscle myosin IIA, a cytoskeletal motor protein expressed in platelets, leucocytes, cochlea, lens, and kidney. In megakaryocytes, defective myosin IIA disrupts the cytoskeletal remodelling required for orderly proplatelet formation, so platelets are released as fewer, abnormally large cells, producing macrothrombocytopenia. In neutrophils, the mutant protein aggregates into cytoplasmic inclusions visible as Dohle-like bodies. The same protein is essential in other tissues, so its dysfunction can cause sensorineural hearing loss, cataract, and a glomerular nephropathy, with the pattern and severity of extra-haematological involvement varying by the specific mutation.",
+    "additionalDifferentials": [
+      "Immune thrombocytopenia (ITP)",
+      "Bernard-Soulier syndrome",
+      "Gray platelet syndrome",
+      "Other inherited macrothrombocytopenias (for example TUBB1, ACTN1)",
+      "Type 2B von Willebrand disease",
+      "Alport syndrome (for the renal and auditory features)"
     ],
-    [
-     "Primary Differentials",
-     "Immune thrombocytopenia (ITP), Bernard-Soulier syndrome, Gray platelet syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood film review for giant platelets and neutrophil Dohle-like inclusions",
+      "Immunofluorescence staining for myosin IIA distribution in neutrophils",
+      "MYH9 sequencing to confirm the diagnosis and correlate genotype",
+      "Audiometry to detect and monitor sensorineural hearing loss",
+      "Urinalysis and renal function tests to screen for nephropathy",
+      "Ophthalmological assessment for cataract"
     ],
-    [
-     "Management Strategy",
-     "Recognise the inherited macrothrombocytopenia to avoid misdiagnosis as immune thrombocytopenia and inappropriate corticosteroids,",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive proteinuria or declining renal function heralding nephropathy",
+      "Rapidly progressive hearing loss requiring audiological intervention",
+      "Significant bleeding disproportionate to the platelet count, prompting review of the diagnosis",
+      "Unnecessary immunosuppression or splenectomy after misdiagnosis as immune thrombocytopenia"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the condition as immune thrombocytopenia and giving steroids, immunoglobulin, or splenectomy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The haematological course is usually benign with only a modest bleeding tendency, but long-term prognosis is shaped by extra-haematological complications, particularly progressive nephropathy and hearing loss in susceptible genotypes.",
+    "pitfalls": [
+      "Misdiagnosing the condition as immune thrombocytopenia and giving steroids, immunoglobulin, or splenectomy",
+      "Relying on automated platelet counts that miss giant platelets",
+      "Failing to screen for and monitor renal, auditory, and ocular involvement",
+      "Overtreating a mild, incidentally found thrombocytopenia"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise the inherited macrothrombocytopenia to avoid misdiagnosis as immune thrombocytopenia and inappropriate corticosteroids, immunosuppression or splenectomy",
+      "Cover bleeding and surgical or peripartum haemostasis with platelet transfusions and an antifibrinolytic such as tranexamic acid; a thrombopoietin-receptor agonist can raise counts before procedures",
+      "Monitor renal function and urinalysis for proteinuria, treating emerging nephropathy with renin-angiotensin system blockade",
+      "Perform serial audiometry and provide hearing aids or cochlear implantation for progressive sensorineural deafness",
+      "Arrange ophthalmological review with cataract surgery when visually significant",
+      "Offer genetic counselling for this autosomal dominant MYH9 disorder and testing of at-risk relatives",
+      "Refer to nephrology as chronic kidney disease advances, with consideration of dialysis or renal transplantation"
     ]
-   ],
-   "caption": "Overview comparison matrix for myh9-related disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myh9-related-disorder-real-image",
-   "title": "MYH9-related disorder: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "myh9_related_disorder-pathway",
+      "title": "MYH9-related disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant disorder caused by MYH9 mutations affecting non-muscle myosin heavy chain IIA, presenting with macrothrombocytopenia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive proteinuria or declining renal function heralding nephropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood film review for giant platelets and neutrophil Dohle-like inclusions, Immunofluorescence staining for myosin IIA distribution in neutrophils, MYH9 sequencing to confirm the diagnosis and correlate genotype"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise the inherited macrothrombocytopenia to avoid misdiagnosis as immune thrombocytopenia and inappropriate corticosteroids, immunosuppression or splenectomy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the condition as immune thrombocytopenia and giving steroids, immunoglobulin, or splenectomy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myh9-related disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myh9_related_disorder-matrix",
+      "title": "MYH9-related disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant disorder caused by MYH9 mutations affecting non-muscle myosin heavy chain IIA, presenting with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood film review for giant platelets and neutrophil Dohle-like inclusions, Immunofluorescence staining for myosin IIA",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Immune thrombocytopenia (ITP), Bernard-Soulier syndrome, Gray platelet syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise the inherited macrothrombocytopenia to avoid misdiagnosis as immune thrombocytopenia and inappropriate corticosteroids,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the condition as immune thrombocytopenia and giving steroids, immunoglobulin, or splenectomy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myh9-related disorder."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski's Hematology of Infancy and Childhood",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myh9_related_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood film review",
+          "cells": [
+            {
+              "text": "Giant platelets and neutrophil Dohle-like inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunofluorescence for myosin IIA in neutrophils",
+          "cells": [
+            {
+              "text": "Myosin IIA distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MYH9 sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and correlates genotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and renal function tests",
+          "cells": [
+            {
+              "text": "Screen for nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Cataract"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myh9_related_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Mislabelling leads to steroids, immunoglobulin or splenectomy, which are inappropriate here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alport syndrome",
+          "cells": [
+            {
+              "text": "Shares renal and auditory features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other inherited macrothrombocytopenias, such as Bernard-Soulier or gray platelet syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myh9_related_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Step",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognise the inherited macrothrombocytopenia",
+          "cells": [
+            {
+              "text": "Do not give corticosteroids, immunosuppression or splenectomy for presumed ITP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemostasis",
+          "cells": [
+            {
+              "text": "Platelet transfusions and tranexamic acid for surgery or delivery; a thrombopoietin-receptor agonist can raise counts before procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal monitoring",
+          "cells": [
+            {
+              "text": "Urinalysis and renal function; renin-angiotensin blockade for emerging nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological care",
+          "cells": [
+            {
+              "text": "Serial audiometry; hearing aids or cochlear implantation for progressive deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological care",
+          "cells": [
+            {
+              "text": "Cataract surgery when visually significant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; testing of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "cells": [
+            {
+              "text": "As chronic kidney disease advances; dialysis or transplant considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myh9_related_disorder-dx-mgmt",
+      "title": "Diagnosis and management of MYH9-related disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Low platelet count with large platelets and neutrophil inclusions on the film",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (proteinuria or falling renal function, progressive hearing loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology and audiology review; stop any unnecessary immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Film review, myosin IIA immunofluorescence, MYH9 sequencing, urinalysis, audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MYH9 variant confirmed with giant platelets and neutrophil inclusions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ITP, Bernard-Soulier, Alport or other macrothrombocytopenia; test further",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Do not give steroids, immunosuppression or splenectomy for presumed ITP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Platelets and tranexamic acid for surgery; thrombopoietin agonist before procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor urinalysis and renal function; renin-angiotensin blockade if nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial audiometry with hearing aids or cochlear implantation for deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually benign; long-term outlook shaped by renal and hearing disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

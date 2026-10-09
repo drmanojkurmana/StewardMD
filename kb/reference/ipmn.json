@@ -1,180 +1,467 @@
 {
- "id": "ipmn",
- "name": "Intraductal papillary mucinous neoplasm",
- "aliases": [
-  "IPMN",
-  "branch-duct IPMN",
-  "intraductal papillary mucinous neoplasm",
-  "intraductal papillary mucinous neoplasm of the pancreas",
-  "main-duct IPMN"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatobiliary",
- "specialty": "Hepatobiliary / Pancreatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mucin-producing epithelial neoplasm arising within the pancreatic ducts, classified as main-duct, branch-duct, or mixed type",
-   "Main-duct and mixed types carry a substantially higher risk of high-grade dysplasia and invasive carcinoma than branch-duct disease",
-   "Branch-duct lesions communicate with the main duct and are frequently multifocal, often found incidentally as cystic lesions",
-   "A classic endoscopic finding of main-duct disease is a patulous, mucin-extruding ampulla (the fish-mouth papilla)",
-   "Worrisome features and high-risk stigmata (as in the international consensus and European guidelines) drive decisions between surveillance and resection",
-   "High-risk stigmata include obstructive jaundice with a pancreatic head cyst, an enhancing mural nodule of significant size, and marked main pancreatic duct dilatation",
-   "Worrisome features include cyst growth, thickened enhancing cyst walls, smaller mural nodules, an abrupt duct calibre change with distal atrophy, and raised CA 19-9",
-   "Management ranges from periodic imaging surveillance for low-risk branch-duct lesions to surgical resection for main-duct disease and lesions with high-risk features"
+  "id": "ipmn",
+  "name": "Intraductal papillary mucinous neoplasm",
+  "aliases": [
+    "IPMN",
+    "branch-duct IPMN",
+    "intraductal papillary mucinous neoplasm",
+    "intraductal papillary mucinous neoplasm of the pancreas",
+    "main-duct IPMN"
   ],
-  "pathophysiology": "Intraductal papillary mucinous neoplasms are proliferations of mucin-secreting columnar epithelium that grow within and dilate the pancreatic ductal system. Excess mucin production and papillary epithelial growth obstruct the ducts, producing cystic dilatation of branch ducts, diffuse or segmental dilatation of the main duct, or both. These lesions progress through a spectrum from low-grade dysplasia to high-grade dysplasia and, ultimately, invasive adenocarcinoma, following an adenoma-to-carcinoma sequence. The malignant potential correlates with the ductal compartment involved and with morphological features such as mural nodules, main duct dilatation, and epithelial subtype, with pancreatobiliary and intestinal subtypes behaving differently.",
-  "additionalDifferentials": [
-   "Mucinous cystic neoplasm of the pancreas",
-   "Serous cystadenoma",
-   "Pancreatic pseudocyst",
-   "Chronic obstructive pancreatitis with duct dilatation",
-   "Pancreatic ductal adenocarcinoma",
-   "Solid pseudopapillary neoplasm"
-  ],
-  "additionalInvestigations": [
-   "MRI with MRCP to assess ductal communication, cyst morphology, and main duct calibre",
-   "Endoscopic ultrasound with fine-needle aspiration for cyst fluid and mural nodule assessment",
-   "Cyst fluid CEA (elevated in mucinous lesions) and cytology",
-   "Cyst fluid molecular analysis for KRAS and GNAS mutations to support the diagnosis",
-   "Serum CA 19-9 as a marker of concern for malignancy",
-   "Contrast-enhanced CT to evaluate for a solid mass or vascular involvement",
-   "ERCP or pancreatoscopy in selected cases to inspect the duct directly"
-  ],
-  "redFlags": [
-   "Obstructive jaundice attributable to a cystic head lesion",
-   "An enhancing mural nodule of significant size or a solid component",
-   "Marked dilatation of the main pancreatic duct",
-   "New-onset diabetes, weight loss, or rapid cyst growth",
-   "Positive or high-grade atypical cytology on aspiration"
-  ],
-  "prognosis": "Branch-duct lesions without worrisome features generally have a low short-term risk of malignancy and can be safely surveyed, whereas main-duct and mixed lesions carry a high risk of harbouring or progressing to invasive cancer; outcomes after resection depend on whether invasive carcinoma is present and on its stage and subtype.",
-  "pitfalls": [
-   "Misclassifying a mucinous cyst as a benign serous cystadenoma or pseudocyst",
-   "Under-recognising main-duct involvement and its high malignant potential",
-   "Discontinuing surveillance prematurely, as risk persists and can increase over time",
-   "Attributing main duct dilatation to chronic pancreatitis and missing an IPMN",
-   "Over-reliance on cyst size alone rather than the full set of worrisome and high-risk features"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "International (Fukuoka/Kyoto) consensus guidelines on IPMN of the pancreas",
-   "European evidence-based guidelines on pancreatic cystic neoplasms"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stratify risk using worrisome features and high-risk stigmata to decide between surveillance and resection",
-   "Surveil branch-duct lesions without worrisome features with serial MRI/MRCP and endoscopic ultrasound",
-   "Resect main-duct, mixed-type and high-risk lesions surgically by pancreaticoduodenectomy or distal pancreatectomy given their malignant potential",
-   "Characterise indeterminate lesions with endoscopic ultrasound and fine-needle aspiration for cyst fluid analysis and mural nodule assessment",
-   "Manage post-resection exocrine and endocrine insufficiency with pancreatic enzyme replacement and insulin",
-   "Continue long-term surveillance of the pancreatic remnant after resection given the field defect and risk of new lesions",
-   "Refer to a hepatobiliary and pancreatic multidisciplinary team for management decisions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ipmn-pathway",
-   "title": "Intraductal papillary mucinous neoplasm: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mucin-producing epithelial neoplasm arising within the pancreatic ducts, classified as main-duct, branch-duct, or mixed type",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Obstructive jaundice attributable to a cystic head lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI with MRCP to assess ductal communication, cyst morphology, and main duct calibre, Endoscopic ultrasound with fine-needle aspiration for cyst fluid and mural nodule assessment, Cyst fluid CEA (elevated in mucinous"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stratify risk using worrisome features and high-risk stigmata to decide between surveillance and resection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misclassifying a mucinous cyst as a benign serous cystadenoma or pseudocyst"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of intraductal papillary mucinous neoplasm."
-  }
- ],
- "tables": [
-  {
-   "id": "ipmn-matrix",
-   "title": "Intraductal papillary mucinous neoplasm: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mucin-producing epithelial neoplasm arising within the pancreatic ducts, classified as main-duct, branch-duct, or mixed type",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatobiliary",
+  "specialty": "Hepatobiliary / Pancreatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mucin-producing epithelial neoplasm arising within the pancreatic ducts, classified as main-duct, branch-duct, or mixed type",
+      "Main-duct and mixed types carry a substantially higher risk of high-grade dysplasia and invasive carcinoma than branch-duct disease",
+      "Branch-duct lesions communicate with the main duct and are frequently multifocal, often found incidentally as cystic lesions",
+      "A classic endoscopic finding of main-duct disease is a patulous, mucin-extruding ampulla (the fish-mouth papilla)",
+      "Worrisome features and high-risk stigmata (as in the international consensus and European guidelines) drive decisions between surveillance and resection",
+      "High-risk stigmata include obstructive jaundice with a pancreatic head cyst, an enhancing mural nodule of significant size, and marked main pancreatic duct dilatation",
+      "Worrisome features include cyst growth, thickened enhancing cyst walls, smaller mural nodules, an abrupt duct calibre change with distal atrophy, and raised CA 19-9",
+      "Management ranges from periodic imaging surveillance for low-risk branch-duct lesions to surgical resection for main-duct disease and lesions with high-risk features"
     ],
-    [
-     "Key Investigations",
-     "MRI with MRCP to assess ductal communication, cyst morphology, and main duct calibre, Endoscopic ultrasound with fine-needle",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Intraductal papillary mucinous neoplasms are proliferations of mucin-secreting columnar epithelium that grow within and dilate the pancreatic ductal system. Excess mucin production and papillary epithelial growth obstruct the ducts, producing cystic dilatation of branch ducts, diffuse or segmental dilatation of the main duct, or both. These lesions progress through a spectrum from low-grade dysplasia to high-grade dysplasia and, ultimately, invasive adenocarcinoma, following an adenoma-to-carcinoma sequence. The malignant potential correlates with the ductal compartment involved and with morphological features such as mural nodules, main duct dilatation, and epithelial subtype, with pancreatobiliary and intestinal subtypes behaving differently.",
+    "additionalDifferentials": [
+      "Mucinous cystic neoplasm of the pancreas",
+      "Serous cystadenoma",
+      "Pancreatic pseudocyst",
+      "Chronic obstructive pancreatitis with duct dilatation",
+      "Pancreatic ductal adenocarcinoma",
+      "Solid pseudopapillary neoplasm"
     ],
-    [
-     "Primary Differentials",
-     "Mucinous cystic neoplasm of the pancreas, Serous cystadenoma, Pancreatic pseudocyst",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI with MRCP to assess ductal communication, cyst morphology, and main duct calibre",
+      "Endoscopic ultrasound with fine-needle aspiration for cyst fluid and mural nodule assessment",
+      "Cyst fluid CEA (elevated in mucinous lesions) and cytology",
+      "Cyst fluid molecular analysis for KRAS and GNAS mutations to support the diagnosis",
+      "Serum CA 19-9 as a marker of concern for malignancy",
+      "Contrast-enhanced CT to evaluate for a solid mass or vascular involvement",
+      "ERCP or pancreatoscopy in selected cases to inspect the duct directly"
     ],
-    [
-     "Management Strategy",
-     "Stratify risk using worrisome features and high-risk stigmata to decide between surveillance and resection",
-     "Core treatment modality"
+    "redFlags": [
+      "Obstructive jaundice attributable to a cystic head lesion",
+      "An enhancing mural nodule of significant size or a solid component",
+      "Marked dilatation of the main pancreatic duct",
+      "New-onset diabetes, weight loss, or rapid cyst growth",
+      "Positive or high-grade atypical cytology on aspiration"
     ],
-    [
-     "Clinical Pitfall",
-     "Misclassifying a mucinous cyst as a benign serous cystadenoma or pseudocyst",
-     "Prevent diagnostic or management error"
+    "prognosis": "Branch-duct lesions without worrisome features generally have a low short-term risk of malignancy and can be safely surveyed, whereas main-duct and mixed lesions carry a high risk of harbouring or progressing to invasive cancer; outcomes after resection depend on whether invasive carcinoma is present and on its stage and subtype.",
+    "pitfalls": [
+      "Misclassifying a mucinous cyst as a benign serous cystadenoma or pseudocyst",
+      "Under-recognising main-duct involvement and its high malignant potential",
+      "Discontinuing surveillance prematurely, as risk persists and can increase over time",
+      "Attributing main duct dilatation to chronic pancreatitis and missing an IPMN",
+      "Over-reliance on cyst size alone rather than the full set of worrisome and high-risk features"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "International (Fukuoka/Kyoto) consensus guidelines on IPMN of the pancreas",
+      "European evidence-based guidelines on pancreatic cystic neoplasms"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stratify risk using worrisome features and high-risk stigmata to decide between surveillance and resection",
+      "Surveil branch-duct lesions without worrisome features with serial MRI/MRCP and endoscopic ultrasound",
+      "Resect main-duct, mixed-type and high-risk lesions surgically by pancreaticoduodenectomy or distal pancreatectomy given their malignant potential",
+      "Characterise indeterminate lesions with endoscopic ultrasound and fine-needle aspiration for cyst fluid analysis and mural nodule assessment",
+      "Manage post-resection exocrine and endocrine insufficiency with pancreatic enzyme replacement and insulin",
+      "Continue long-term surveillance of the pancreatic remnant after resection given the field defect and risk of new lesions",
+      "Refer to a hepatobiliary and pancreatic multidisciplinary team for management decisions"
     ]
-   ],
-   "caption": "Overview comparison matrix for intraductal papillary mucinous neoplasm."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ipmn-real-image",
-   "title": "Intraductal papillary mucinous neoplasm: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "ipmn-pathway",
+      "title": "Intraductal papillary mucinous neoplasm: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mucin-producing epithelial neoplasm arising within the pancreatic ducts, classified as main-duct, branch-duct, or mixed type",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Obstructive jaundice attributable to a cystic head lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI with MRCP to assess ductal communication, cyst morphology, and main duct calibre, Endoscopic ultrasound with fine-needle aspiration for cyst fluid and mural nodule assessment, Cyst fluid CEA (elevated in mucinous"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stratify risk using worrisome features and high-risk stigmata to decide between surveillance and resection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misclassifying a mucinous cyst as a benign serous cystadenoma or pseudocyst"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of intraductal papillary mucinous neoplasm."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ipmn-matrix",
+      "title": "Intraductal papillary mucinous neoplasm: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mucin-producing epithelial neoplasm arising within the pancreatic ducts, classified as main-duct, branch-duct, or mixed type",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI with MRCP to assess ductal communication, cyst morphology, and main duct calibre, Endoscopic ultrasound with fine-needle",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mucinous cystic neoplasm of the pancreas, Serous cystadenoma, Pancreatic pseudocyst",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stratify risk using worrisome features and high-risk stigmata to decide between surveillance and resection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misclassifying a mucinous cyst as a benign serous cystadenoma or pseudocyst",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for intraductal papillary mucinous neoplasm."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ipmn-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with MRCP",
+          "cells": [
+            {
+              "text": "Ductal communication, cyst morphology and main duct calibre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound with fine-needle aspiration",
+          "cells": [
+            {
+              "text": "Cyst fluid and mural nodule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst fluid CEA and cytology",
+          "cells": [
+            {
+              "text": "Mucinous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyst fluid KRAS and GNAS testing",
+          "cells": [
+            {
+              "text": "Supportive diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CA 19-9",
+          "cells": [
+            {
+              "text": "Concern for malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Solid mass or vascular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ERCP or pancreatoscopy",
+          "cells": [
+            {
+              "text": "Direct duct inspection in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ipmn-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mucinous cystic neoplasm",
+          "cells": [
+            {
+              "text": "Does not communicate with the pancreatic duct on MRCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic ductal adenocarcinoma",
+          "cells": [
+            {
+              "text": "Solid mass or vascular involvement on CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ipmn-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Worrisome features and high-risk stigmata decide surveillance or resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Branch-duct lesions",
+          "cells": [
+            {
+              "text": "Surveillance with serial MRI or MRCP and endoscopic ultrasound when no worrisome features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resection",
+          "cells": [
+            {
+              "text": "Main-duct, mixed-type and high-risk lesions by pancreaticoduodenectomy or distal pancreatectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indeterminate lesions",
+          "cells": [
+            {
+              "text": "Endoscopic ultrasound with fine-needle aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "After resection",
+          "cells": [
+            {
+              "text": "Enzyme replacement and insulin for exocrine and endocrine insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remnant surveillance",
+          "cells": [
+            {
+              "text": "Long-term surveillance of the pancreatic remnant; hepatobiliary and pancreatic team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ipmn-dx-mgmt",
+      "title": "Diagnosis and management of Intraductal papillary mucinous neoplasm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cystic lesion communicating with the pancreatic duct on MRCP",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Obstructive jaundice, mural nodule or solid component, or high-grade cytology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hepatobiliary and pancreatic team review; resection planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with MRCP, EUS with fine-needle aspiration, cyst fluid CEA and KRAS, CT, CA 19-9",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Main-duct or mixed type, or high-risk features present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Branch-duct lesion without worrisome features: serial MRI and EUS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Resect main-duct and mixed-type lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resect lesions with high-risk stigmata",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Enzyme replacement and insulin after resection as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term surveillance of the pancreatic remnant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Malignant potential tracked; surveillance continues after resection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,177 +1,475 @@
 {
- "id": "entomophthoromycosis",
- "name": "Entomophthoromycosis",
- "aliases": [
-  "Conidiobolus coronatus",
-  "Basidiobolus ranarum",
-  "conidiobolomycosis (rhinofacial)",
-  "basidiobolomycosis",
-  "subcutaneous zygomycosis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Entomophthoromycosis is a chronic subcutaneous fungal infection caused by the Entomophthorales, principally Conidiobolus coronatus and Basidiobolus ranarum, seen in tropical Africa, Asia and Latin America",
-   "Unlike the angioinvasive mucormycoses of immunocompromised patients, these infections typically occur in immunocompetent hosts and are slow, localised and non-angioinvasive",
-   "Conidiobolus infection (rhinofacial/rhinoentomophthoromycosis) affects adults, producing painless, firm swelling of the central face, nose and paranasal tissues that can cause gross disfigurement",
-   "Basidiobolus infection presents mainly in children as a firm, mobile, painless subcutaneous swelling of the limbs, shoulder or trunk with a well-defined edge, and can less commonly involve the gastrointestinal tract",
-   "Gastrointestinal basidiobolomycosis mimics abdominal malignancy or inflammatory bowel disease and is often diagnosed only after surgery",
-   "Diagnosis is histological, showing broad, thin-walled, sparsely septate hyphae surrounded by eosinophilic material (the Splendore-Hoeppli phenomenon), with culture for confirmation",
-   "Prolonged medical therapy with agents such as oral potassium iodide or azole antifungals is used, sometimes combined with surgery, but rhinofacial disease can leave permanent disfigurement"
+  "id": "entomophthoromycosis",
+  "name": "Entomophthoromycosis",
+  "aliases": [
+    "Conidiobolus coronatus",
+    "Basidiobolus ranarum",
+    "conidiobolomycosis (rhinofacial)",
+    "basidiobolomycosis",
+    "subcutaneous zygomycosis"
   ],
-  "pathophysiology": "The Entomophthorales are environmental saprophytes of soil and decaying vegetation and are also found in the gut of amphibians and reptiles. Infection follows implantation into subcutaneous tissue through minor trauma or insect contact, or, for Conidiobolus, inhalation of spores into the nasal mucosa. The fungi grow slowly within subcutaneous or submucosal tissue, eliciting a chronic granulomatous and eosinophilic inflammatory response rather than invading blood vessels, which distinguishes them clinically from the acute mucormycoses. Progressive local extension produces firm, indurated swelling; gastrointestinal disease arises from mucosal implantation and causes inflammatory masses.",
-  "additionalDifferentials": [
-   "Angioinvasive mucormycosis (in immunocompromised hosts)",
-   "Soft-tissue tumours (benign or malignant)",
-   "Lymphoedema or filariasis (for limb swelling)",
-   "Cellulitis or other subcutaneous infection",
-   "Inflammatory bowel disease or abdominal malignancy (for the gastrointestinal form)",
-   "Rhinoscleroma or other causes of destructive facial swelling"
-  ],
-  "additionalInvestigations": [
-   "Biopsy with histology showing broad sparsely septate hyphae and the Splendore-Hoeppli phenomenon",
-   "Fungal culture to identify Conidiobolus or Basidiobolus",
-   "Full blood count (peripheral eosinophilia is common)",
-   "Imaging (CT/MRI) to define the extent of facial or abdominal disease",
-   "Endoscopy and biopsy for suspected gastrointestinal involvement",
-   "Assessment of immune status to distinguish from mucormycosis"
-  ],
-  "redFlags": [
-   "Progressive facial swelling threatening the airway, orbit or vision",
-   "Gastrointestinal disease with obstruction, perforation or a mass mimicking cancer",
-   "Rapid progression or angioinvasive features suggesting mucormycosis instead",
-   "Extensive disfiguring disease unresponsive to therapy",
-   "Relapse after treatment"
-  ],
-  "prognosis": "Subcutaneous basidiobolomycosis of the limbs often responds well to prolonged medical therapy, whereas rhinofacial conidiobolomycosis frequently leaves permanent facial disfigurement despite treatment; gastrointestinal disease carries higher morbidity and can be serious if diagnosed late.",
-  "pitfalls": [
-   "Confusing indolent entomophthoromycosis with aggressive angioinvasive mucormycosis and mismanaging accordingly",
-   "Stopping prolonged therapy prematurely, leading to relapse",
-   "Missing gastrointestinal basidiobolomycosis, which mimics malignancy or inflammatory bowel disease",
-   "Failing to obtain adequate tissue for histology and culture",
-   "Underestimating the disfigurement and functional impact of rhinofacial disease"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prolonged systemic antifungal therapy, most often oral itraconazole or another azole, continued for months until the induration resolves",
-   "Potassium iodide as an adjunct or alternative agent, particularly in subcutaneous basidiobolomycosis",
-   "Surgical debridement or resection for obstructing gastrointestinal masses and for reconstruction of disfiguring rhinofacial disease, combined with antifungal cover",
-   "Monitor peripheral eosinophilia and use serial imaging to track regression of facial or abdominal masses",
-   "Reconstructive and plastic surgery for residual rhinofacial disfigurement once infection is controlled",
-   "Distinguish from angioinvasive mucormycosis, as its urgency and management differ substantially",
-   "Multidisciplinary care involving infectious diseases, surgery and gastroenterology for gastrointestinal disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "entomophthoromycosis-pathway",
-   "title": "Entomophthoromycosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Entomophthoromycosis is a chronic subcutaneous fungal infection caused by the Entomophthorales, principally Conidiobolus coronatus and Basidiobolus ranarum, seen in tropical Africa, Asia and Latin America",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive facial swelling threatening the airway, orbit or vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Biopsy with histology showing broad sparsely septate hyphae and the Splendore-Hoeppli phenomenon, Fungal culture to identify Conidiobolus or Basidiobolus, Full blood count (peripheral eosinophilia is common)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prolonged systemic antifungal therapy, most often oral itraconazole or another azole, continued for months until the induration resolves"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing indolent entomophthoromycosis with aggressive angioinvasive mucormycosis and mismanaging accordingly"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of entomophthoromycosis."
-  }
- ],
- "tables": [
-  {
-   "id": "entomophthoromycosis-matrix",
-   "title": "Entomophthoromycosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Entomophthoromycosis is a chronic subcutaneous fungal infection caused by the Entomophthorales, principally Conidiobolus",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Entomophthoromycosis is a chronic subcutaneous fungal infection caused by the Entomophthorales, principally Conidiobolus coronatus and Basidiobolus ranarum, seen in tropical Africa, Asia and Latin America",
+      "Unlike the angioinvasive mucormycoses of immunocompromised patients, these infections typically occur in immunocompetent hosts and are slow, localised and non-angioinvasive",
+      "Conidiobolus infection (rhinofacial/rhinoentomophthoromycosis) affects adults, producing painless, firm swelling of the central face, nose and paranasal tissues that can cause gross disfigurement",
+      "Basidiobolus infection presents mainly in children as a firm, mobile, painless subcutaneous swelling of the limbs, shoulder or trunk with a well-defined edge, and can less commonly involve the gastrointestinal tract",
+      "Gastrointestinal basidiobolomycosis mimics abdominal malignancy or inflammatory bowel disease and is often diagnosed only after surgery",
+      "Diagnosis is histological, showing broad, thin-walled, sparsely septate hyphae surrounded by eosinophilic material (the Splendore-Hoeppli phenomenon), with culture for confirmation",
+      "Prolonged medical therapy with agents such as oral potassium iodide or azole antifungals is used, sometimes combined with surgery, but rhinofacial disease can leave permanent disfigurement"
     ],
-    [
-     "Key Investigations",
-     "Biopsy with histology showing broad sparsely septate hyphae and the Splendore-Hoeppli phenomenon, Fungal culture to identify",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The Entomophthorales are environmental saprophytes of soil and decaying vegetation and are also found in the gut of amphibians and reptiles. Infection follows implantation into subcutaneous tissue through minor trauma or insect contact, or, for Conidiobolus, inhalation of spores into the nasal mucosa. The fungi grow slowly within subcutaneous or submucosal tissue, eliciting a chronic granulomatous and eosinophilic inflammatory response rather than invading blood vessels, which distinguishes them clinically from the acute mucormycoses. Progressive local extension produces firm, indurated swelling; gastrointestinal disease arises from mucosal implantation and causes inflammatory masses.",
+    "additionalDifferentials": [
+      "Angioinvasive mucormycosis (in immunocompromised hosts)",
+      "Soft-tissue tumours (benign or malignant)",
+      "Lymphoedema or filariasis (for limb swelling)",
+      "Cellulitis or other subcutaneous infection",
+      "Inflammatory bowel disease or abdominal malignancy (for the gastrointestinal form)",
+      "Rhinoscleroma or other causes of destructive facial swelling"
     ],
-    [
-     "Primary Differentials",
-     "Angioinvasive mucormycosis (in immunocompromised hosts), Soft-tissue tumours (benign or malignant), Lymphoedema or filariasis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Biopsy with histology showing broad sparsely septate hyphae and the Splendore-Hoeppli phenomenon",
+      "Fungal culture to identify Conidiobolus or Basidiobolus",
+      "Full blood count (peripheral eosinophilia is common)",
+      "Imaging (CT/MRI) to define the extent of facial or abdominal disease",
+      "Endoscopy and biopsy for suspected gastrointestinal involvement",
+      "Assessment of immune status to distinguish from mucormycosis"
     ],
-    [
-     "Management Strategy",
-     "Prolonged systemic antifungal therapy, most often oral itraconazole or another azole, continued for months until the induration",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive facial swelling threatening the airway, orbit or vision",
+      "Gastrointestinal disease with obstruction, perforation or a mass mimicking cancer",
+      "Rapid progression or angioinvasive features suggesting mucormycosis instead",
+      "Extensive disfiguring disease unresponsive to therapy",
+      "Relapse after treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing indolent entomophthoromycosis with aggressive angioinvasive mucormycosis and mismanaging accordingly",
-     "Prevent diagnostic or management error"
+    "prognosis": "Subcutaneous basidiobolomycosis of the limbs often responds well to prolonged medical therapy, whereas rhinofacial conidiobolomycosis frequently leaves permanent facial disfigurement despite treatment; gastrointestinal disease carries higher morbidity and can be serious if diagnosed late.",
+    "pitfalls": [
+      "Confusing indolent entomophthoromycosis with aggressive angioinvasive mucormycosis and mismanaging accordingly",
+      "Stopping prolonged therapy prematurely, leading to relapse",
+      "Missing gastrointestinal basidiobolomycosis, which mimics malignancy or inflammatory bowel disease",
+      "Failing to obtain adequate tissue for histology and culture",
+      "Underestimating the disfigurement and functional impact of rhinofacial disease"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prolonged systemic antifungal therapy, most often oral itraconazole or another azole, continued for months until the induration resolves",
+      "Potassium iodide as an adjunct or alternative agent, particularly in subcutaneous basidiobolomycosis",
+      "Surgical debridement or resection for obstructing gastrointestinal masses and for reconstruction of disfiguring rhinofacial disease, combined with antifungal cover",
+      "Monitor peripheral eosinophilia and use serial imaging to track regression of facial or abdominal masses",
+      "Reconstructive and plastic surgery for residual rhinofacial disfigurement once infection is controlled",
+      "Distinguish from angioinvasive mucormycosis, as its urgency and management differ substantially",
+      "Multidisciplinary care involving infectious diseases, surgery and gastroenterology for gastrointestinal disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for entomophthoromycosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "entomophthoromycosis-real-image",
-   "title": "Entomophthoromycosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "entomophthoromycosis-pathway",
+      "title": "Entomophthoromycosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Entomophthoromycosis is a chronic subcutaneous fungal infection caused by the Entomophthorales, principally Conidiobolus coronatus and Basidiobolus ranarum, seen in tropical Africa, Asia and Latin America",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive facial swelling threatening the airway, orbit or vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Biopsy with histology showing broad sparsely septate hyphae and the Splendore-Hoeppli phenomenon, Fungal culture to identify Conidiobolus or Basidiobolus, Full blood count (peripheral eosinophilia is common)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prolonged systemic antifungal therapy, most often oral itraconazole or another azole, continued for months until the induration resolves"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing indolent entomophthoromycosis with aggressive angioinvasive mucormycosis and mismanaging accordingly"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of entomophthoromycosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "entomophthoromycosis-matrix",
+      "title": "Entomophthoromycosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Entomophthoromycosis is a chronic subcutaneous fungal infection caused by the Entomophthorales, principally Conidiobolus",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Biopsy with histology showing broad sparsely septate hyphae and the Splendore-Hoeppli phenomenon, Fungal culture to identify",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Angioinvasive mucormycosis (in immunocompromised hosts), Soft-tissue tumours (benign or malignant), Lymphoedema or filariasis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prolonged systemic antifungal therapy, most often oral itraconazole or another azole, continued for months until the induration",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing indolent entomophthoromycosis with aggressive angioinvasive mucormycosis and mismanaging accordingly",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for entomophthoromycosis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "entomophthoromycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy histology",
+          "cells": [
+            {
+              "text": "Broad, sparsely septate hyphae with the Splendore-Hoeppli phenomenon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture",
+          "cells": [
+            {
+              "text": "Identifies Conidiobolus or Basidiobolus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Extent of facial or abdominal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy and biopsy",
+          "cells": [
+            {
+              "text": "Suspected gastrointestinal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of immune status",
+          "cells": [
+            {
+              "text": "Distinguishes it from mucormycosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "entomophthoromycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Angioinvasive mucormycosis",
+          "cells": [
+            {
+              "text": "Occurs in immunocompromised hosts; entomophthoromycosis is typically indolent in immunocompetent hosts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal malignancy or inflammatory bowel disease (gastrointestinal form)",
+          "cells": [
+            {
+              "text": "Gastrointestinal basidiobolomycosis mimics these and is often diagnosed only after surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "entomophthoromycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged systemic antifungal therapy",
+          "cells": [
+            {
+              "text": "Oral itraconazole or another azole, continued for months until induration resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium iodide",
+          "cells": [
+            {
+              "text": "Adjunct or alternative, particularly in subcutaneous basidiobolomycosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debridement or resection",
+          "cells": [
+            {
+              "text": "Obstructing gastrointestinal masses, and reconstruction of rhinofacial disease, with antifungal cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia and serial imaging for regression of masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstructive surgery",
+          "cells": [
+            {
+              "text": "Residual rhinofacial disfigurement once infection is controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish from angioinvasive mucormycosis",
+          "cells": [
+            {
+              "text": "Urgency and management differ substantially"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Infectious diseases, surgery and gastroenterology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "entomophthoromycosis-dx-mgmt",
+      "title": "Diagnosis and management of Entomophthoromycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm, painless subcutaneous swelling of face, limb or abdomen",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (airway or orbit threat, obstruction, angioinvasive features, relapse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude angioinvasive mucormycosis, whose urgency and management differ",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy for histology and culture; CT or MRI to define the extent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Broad, sparsely septate hyphae with Splendore-Hoeppli material on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-biopsy for adequate tissue; consider mucormycosis or another mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged systemic azole, most often oral itraconazole, for months",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium iodide as adjunct or alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical debridement or resection of obstructing masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor peripheral eosinophilia and serial imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reconstructive surgery once infection is controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Limb disease often responds; rhinofacial disease can leave disfigurement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

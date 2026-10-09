@@ -1,173 +1,528 @@
 {
- "id": "hypertensive_retinopathy",
- "name": "Hypertensive retinopathy",
- "aliases": [
-  "HTN retinopathy",
-  "hypertensive fundus changes",
-  "hypertensive retinal disease"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Retina",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The Keith-Wagener-Barker classification grades severity from grade I through IV and correlates with systemic vascular risk",
-   "Grade I shows mild generalised arteriolar narrowing and grade II adds focal narrowing and arteriovenous nipping (Gunn sign; the related Salus sign is venous deflection at the crossing)",
-   "Grade III adds flame haemorrhages, cotton-wool spots and hard exudates, which may form a macular star",
-   "Grade IV (malignant or accelerated hypertension) adds optic disc swelling and is a medical emergency",
-   "Chronic arteriolosclerosis produces copper-wiring and later silver-wiring of the arterioles",
-   "Fundus findings are a window onto systemic end-organ damage and predict cerebrovascular and cardiac risk",
-   "Management is directed at controlled lowering of blood pressure and reduction of overall cardiovascular risk rather than any ocular intervention"
+  "id": "hypertensive_retinopathy",
+  "name": "Hypertensive retinopathy",
+  "aliases": [
+    "HTN retinopathy",
+    "hypertensive fundus changes",
+    "hypertensive retinal disease"
   ],
-  "pathophysiology": "Sustained elevation of blood pressure first causes reactive arteriolar vasoconstriction and then structural arteriolosclerosis with medial hyperplasia and intimal thickening. Breakdown of the inner blood-retinal barrier allows leakage that produces haemorrhages and hard exudates, while precapillary arteriolar occlusion causes ischaemic cotton-wool spots. In accelerated (malignant) hypertension, fibrinoid necrosis of arterioles and choroidal vascular compromise damage the optic nerve head, producing disc swelling that reflects a systemic hypertensive emergency.",
-  "additionalDifferentials": [
-   "Diabetic retinopathy",
-   "Radiation retinopathy",
-   "Retinal vein occlusion",
-   "Anaemic or leukaemic retinopathy",
-   "Connective tissue disease retinopathy",
-   "Papilloedema from raised intracranial pressure"
-  ],
-  "additionalInvestigations": [
-   "Blood pressure measurement, ideally repeated and including ambulatory monitoring where appropriate",
-   "Dilated fundus examination to grade the retinopathy",
-   "Fasting glucose or HbA1c to detect coexisting diabetes",
-   "Renal function tests and urinalysis for end-organ damage",
-   "Lipid profile and broader cardiovascular risk assessment",
-   "Optical coherence tomography if macular oedema or exudate threatens the fovea"
-  ],
-  "redFlags": [
-   "Grade IV changes with optic disc swelling indicating malignant hypertension",
-   "Very high blood pressure with headache, chest pain or breathlessness",
-   "Accompanying neurological symptoms suggesting hypertensive encephalopathy or stroke",
-   "Bilateral disc oedema requiring differentiation from raised intracranial pressure"
-  ],
-  "prognosis": "Mild and moderate changes are largely reversible with sustained blood pressure control, whereas malignant hypertension is a life-threatening emergency with significant systemic morbidity and mortality if untreated.",
-  "pitfalls": [
-   "Mistaking hypertensive disc swelling for primary papilloedema and missing the underlying blood pressure crisis",
-   "Failing to measure blood pressure in any patient with retinal vascular signs",
-   "Overlooking asymptomatic malignant hypertension detected first in the fundus",
-   "Not screening for coexisting diabetes when retinopathy is present"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control systemic blood pressure with antihypertensive therapy as the mainstay, which reverses mild to moderate changes",
-   "Treat malignant (grade IV) hypertension as an emergency with careful, controlled blood pressure reduction to avoid ischaemic optic and cerebral injury",
-   "Reduce overall cardiovascular risk with lipid-lowering therapy, glycaemic control and smoking cessation",
-   "Manage sight-threatening macular oedema or exudate encroaching on the fovea in liaison with ophthalmology",
-   "Investigate and treat secondary causes of hypertension and screen for coexisting diabetes",
-   "Monitor blood pressure, serial dilated fundus examination and renal function for end-organ damage"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypertensive_retinopathy-pathway",
-   "title": "Hypertensive retinopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The Keith-Wagener-Barker classification grades severity from grade I through IV and correlates with systemic vascular risk",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Grade IV changes with optic disc swelling indicating malignant hypertension",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood pressure measurement, ideally repeated and including ambulatory monitoring where appropriate, Dilated fundus examination to grade the retinopathy, Fasting glucose or HbA1c to detect coexisting diabetes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control systemic blood pressure with antihypertensive therapy as the mainstay, which reverses mild to moderate changes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking hypertensive disc swelling for primary papilloedema and missing the underlying blood pressure crisis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypertensive retinopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "hypertensive_retinopathy-matrix",
-   "title": "Hypertensive retinopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The Keith-Wagener-Barker classification grades severity from grade I through IV and correlates with systemic vascular risk",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Retina",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The Keith-Wagener-Barker classification grades severity from grade I through IV and correlates with systemic vascular risk",
+      "Grade I shows mild generalised arteriolar narrowing and grade II adds focal narrowing and arteriovenous nipping (Gunn sign; the related Salus sign is venous deflection at the crossing)",
+      "Grade III adds flame haemorrhages, cotton-wool spots and hard exudates, which may form a macular star",
+      "Grade IV (malignant or accelerated hypertension) adds optic disc swelling and is a medical emergency",
+      "Chronic arteriolosclerosis produces copper-wiring and later silver-wiring of the arterioles",
+      "Fundus findings are a window onto systemic end-organ damage and predict cerebrovascular and cardiac risk",
+      "Management is directed at controlled lowering of blood pressure and reduction of overall cardiovascular risk rather than any ocular intervention"
     ],
-    [
-     "Key Investigations",
-     "Blood pressure measurement, ideally repeated and including ambulatory monitoring where appropriate, Dilated fundus examination to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sustained elevation of blood pressure first causes reactive arteriolar vasoconstriction and then structural arteriolosclerosis with medial hyperplasia and intimal thickening. Breakdown of the inner blood-retinal barrier allows leakage that produces haemorrhages and hard exudates, while precapillary arteriolar occlusion causes ischaemic cotton-wool spots. In accelerated (malignant) hypertension, fibrinoid necrosis of arterioles and choroidal vascular compromise damage the optic nerve head, producing disc swelling that reflects a systemic hypertensive emergency.",
+    "additionalDifferentials": [
+      "Diabetic retinopathy",
+      "Radiation retinopathy",
+      "Retinal vein occlusion",
+      "Anaemic or leukaemic retinopathy",
+      "Connective tissue disease retinopathy",
+      "Papilloedema from raised intracranial pressure"
     ],
-    [
-     "Primary Differentials",
-     "Diabetic retinopathy, Radiation retinopathy, Retinal vein occlusion",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood pressure measurement, ideally repeated and including ambulatory monitoring where appropriate",
+      "Dilated fundus examination to grade the retinopathy",
+      "Fasting glucose or HbA1c to detect coexisting diabetes",
+      "Renal function tests and urinalysis for end-organ damage",
+      "Lipid profile and broader cardiovascular risk assessment",
+      "Optical coherence tomography if macular oedema or exudate threatens the fovea"
     ],
-    [
-     "Management Strategy",
-     "Control systemic blood pressure with antihypertensive therapy as the mainstay, which reverses mild to moderate changes",
-     "Core treatment modality"
+    "redFlags": [
+      "Grade IV changes with optic disc swelling indicating malignant hypertension",
+      "Very high blood pressure with headache, chest pain or breathlessness",
+      "Accompanying neurological symptoms suggesting hypertensive encephalopathy or stroke",
+      "Bilateral disc oedema requiring differentiation from raised intracranial pressure"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking hypertensive disc swelling for primary papilloedema and missing the underlying blood pressure crisis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mild and moderate changes are largely reversible with sustained blood pressure control, whereas malignant hypertension is a life-threatening emergency with significant systemic morbidity and mortality if untreated.",
+    "pitfalls": [
+      "Mistaking hypertensive disc swelling for primary papilloedema and missing the underlying blood pressure crisis",
+      "Failing to measure blood pressure in any patient with retinal vascular signs",
+      "Overlooking asymptomatic malignant hypertension detected first in the fundus",
+      "Not screening for coexisting diabetes when retinopathy is present"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course: Retina and Vitreous"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control systemic blood pressure with antihypertensive therapy as the mainstay, which reverses mild to moderate changes",
+      "Treat malignant (grade IV) hypertension as an emergency with careful, controlled blood pressure reduction to avoid ischaemic optic and cerebral injury",
+      "Reduce overall cardiovascular risk with lipid-lowering therapy, glycaemic control and smoking cessation",
+      "Manage sight-threatening macular oedema or exudate encroaching on the fovea in liaison with ophthalmology",
+      "Investigate and treat secondary causes of hypertension and screen for coexisting diabetes",
+      "Monitor blood pressure, serial dilated fundus examination and renal function for end-organ damage"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypertensive retinopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypertensive-retinopathy-real-image",
-   "title": "Hypertensive retinopathy: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "hypertensive_retinopathy-pathway",
+      "title": "Hypertensive retinopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The Keith-Wagener-Barker classification grades severity from grade I through IV and correlates with systemic vascular risk",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Grade IV changes with optic disc swelling indicating malignant hypertension",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood pressure measurement, ideally repeated and including ambulatory monitoring where appropriate, Dilated fundus examination to grade the retinopathy, Fasting glucose or HbA1c to detect coexisting diabetes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control systemic blood pressure with antihypertensive therapy as the mainstay, which reverses mild to moderate changes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking hypertensive disc swelling for primary papilloedema and missing the underlying blood pressure crisis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypertensive retinopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypertensive_retinopathy-matrix",
+      "title": "Hypertensive retinopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The Keith-Wagener-Barker classification grades severity from grade I through IV and correlates with systemic vascular risk",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood pressure measurement, ideally repeated and including ambulatory monitoring where appropriate, Dilated fundus examination to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Diabetic retinopathy, Radiation retinopathy, Retinal vein occlusion",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control systemic blood pressure with antihypertensive therapy as the mainstay, which reverses mild to moderate changes",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking hypertensive disc swelling for primary papilloedema and missing the underlying blood pressure crisis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypertensive retinopathy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 247-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypertensive_retinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood pressure measurement, repeated and ambulatory where appropriate",
+          "cells": [
+            {
+              "text": "Hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Grades retinopathy (Keith-Wagener-Barker grade I to IV)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose or HbA1c",
+          "cells": [
+            {
+              "text": "Coexisting diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests and urinalysis",
+          "cells": [
+            {
+              "text": "End-organ damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid profile",
+          "cells": [
+            {
+              "text": "Cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular oedema or exudate threatening the fovea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypertensive_retinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetic retinopathy",
+          "cells": [
+            {
+              "text": "Coexisting diabetes; screen with fasting glucose or HbA1c"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Papilloedema from raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Bilateral disc oedema; differentiated from hypertensive disc swelling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypertensive_retinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Antihypertensive therapy is the mainstay; mild to moderate changes reverse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant hypertension",
+          "cells": [
+            {
+              "text": "Grade IV: emergency with careful, controlled reduction to avoid ischaemic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk reduction",
+          "cells": [
+            {
+              "text": "Lipid-lowering therapy, glycaemic control and smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macular oedema",
+          "cells": [
+            {
+              "text": "Ophthalmology liaison for fovea-threatening exudate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary causes",
+          "cells": [
+            {
+              "text": "Investigate secondary hypertension and screen for diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Blood pressure, serial dilated fundus examination and renal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypertensive_retinopathy-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Blood pressure classification",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Systolic, mmHg",
+        "Diastolic, mmHg"
+      ],
+      "rows": [
+        {
+          "parameter": "Normal",
+          "cells": [
+            {
+              "text": "<120"
+            },
+            {
+              "text": "and <80"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prehypertension",
+          "cells": [
+            {
+              "text": "120 to 139"
+            },
+            {
+              "text": "or 80 to 89"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage 1 hypertension",
+          "cells": [
+            {
+              "text": "140 to 159"
+            },
+            {
+              "text": "or 90 to 99"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stage 2 hypertension",
+          "cells": [
+            {
+              "text": "160 or higher"
+            },
+            {
+              "text": "or 100 or higher"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isolated systolic hypertension",
+          "cells": [
+            {
+              "text": "140 or higher"
+            },
+            {
+              "text": "and <90"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypertensive_retinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Hypertensive retinopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Retinal arteriolar narrowing or haemorrhages on fundus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Grade IV change with disc swelling, or neurological symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency blood pressure control with controlled reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood pressure, fundus grading, glucose or HbA1c, renal function, lipids",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Diabetes and secondary hypertension excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat secondary causes and screen for diabetes, then repeat",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antihypertensive therapy as mainstay; mild changes reverse",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lipid lowering, glycaemic control and smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ophthalmology review for fovea-threatening exudate or oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor blood pressure, fundus examination and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild to moderate changes reverse with blood pressure control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

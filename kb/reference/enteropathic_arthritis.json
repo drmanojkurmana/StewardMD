@@ -1,177 +1,482 @@
 {
- "id": "enteropathic_arthritis",
- "name": "Enteropathic arthritis",
- "aliases": [
-  "enteropathic arthropathy",
-  "IBD-associated arthritis",
-  "inflammatory bowel disease arthritis",
-  "enteropathic spondyloarthritis"
- ],
- "class": "non_infective",
- "system": "Rheumatology",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Enteropathic arthritis is the inflammatory arthritis associated with inflammatory bowel disease (Crohn's disease and ulcerative colitis) and belongs to the seronegative spondyloarthritis family",
-   "It has two broad patterns, peripheral arthritis and axial (spinal and sacroiliac) disease, which may overlap in the same patient",
-   "Peripheral disease is subdivided into a type 1 pattern (pauciarticular, large-joint, asymmetrical, often flaring with bowel activity and self-limiting) and a type 2 pattern (polyarticular, small-joint, more persistent, and largely independent of bowel activity)",
-   "Axial involvement (sacroiliitis and spondylitis) resembles ankylosing spondylitis, may be asymptomatic or cause inflammatory back pain, and runs a course independent of the gut inflammation",
-   "Extra-articular spondyloarthritis features may occur, including enthesitis, dactylitis, anterior uveitis, erythema nodosum, and pyoderma gangrenosum",
-   "The condition is seronegative (rheumatoid factor negative), and HLA-B27 is associated particularly with the axial disease",
-   "Management coordinates treatment of the bowel and joint disease: controlling gut inflammation helps type 1 peripheral disease, physiotherapy and appropriate therapy address axial disease, non-steroidal anti-inflammatory drugs are used cautiously as they may aggravate colitis, and certain biologic agents such as anti-tumour necrosis factor drugs treat both gut and joints"
+  "id": "enteropathic_arthritis",
+  "name": "Enteropathic arthritis",
+  "aliases": [
+    "enteropathic arthropathy",
+    "IBD-associated arthritis",
+    "inflammatory bowel disease arthritis",
+    "enteropathic spondyloarthritis"
   ],
-  "pathophysiology": "In genetically predisposed individuals, including carriers of HLA-B27 for the axial phenotype, inflammation of the gut mucosa in inflammatory bowel disease is thought to allow translocation of luminal antigens and trafficking of activated immune cells that promote inflammation at the joints, entheses, and axial skeleton. This shared gut-joint immune axis links intestinal and musculoskeletal inflammation and places the disorder within the spondyloarthritis spectrum, helping explain why type 1 peripheral disease often parallels bowel activity while axial disease pursues an independent course.",
-  "additionalDifferentials": [
-   "Ankylosing spondylitis (idiopathic axial spondyloarthritis)",
-   "Psoriatic arthritis",
-   "Reactive arthritis",
-   "Rheumatoid arthritis",
-   "Gout or CPP crystal arthritis in acute peripheral joint presentations",
-   "Septic arthritis",
-   "Arthralgia related to inflammatory bowel disease therapy"
-  ],
-  "additionalInvestigations": [
-   "Inflammatory markers (C-reactive protein and ESR) and faecal calprotectin to gauge bowel activity",
-   "HLA-B27 testing, especially where there are axial features",
-   "Radiographs and MRI of the sacroiliac joints and spine for sacroiliitis and spondylitis",
-   "Radiographs or ultrasound of affected peripheral joints and entheses",
-   "Joint aspiration with microscopy and culture to exclude crystal or septic arthritis",
-   "Rheumatoid factor and anti-CCP antibodies to help exclude rheumatoid arthritis",
-   "Colonoscopy and gastroenterology assessment to confirm and monitor the inflammatory bowel disease"
-  ],
-  "redFlags": [
-   "A hot swollen joint that could represent septic arthritis rather than a flare",
-   "New or worsening axial symptoms with neurological features",
-   "Acute anterior uveitis (a painful red eye) requiring urgent ophthalmology review",
-   "Severe bowel disease activity or complications needing gastroenterology input"
-  ],
-  "prognosis": "Type 1 peripheral arthritis is usually self-limiting and improves as the bowel disease is controlled, whereas type 2 peripheral and axial disease tend to be more persistent and can, like ankylosing spondylitis, lead to structural spinal damage if untreated; the overall outlook is improved by coordinated control of both gut and joint inflammation.",
-  "pitfalls": [
-   "Using non-steroidal anti-inflammatory drugs freely for the arthritis without recognising they can worsen colitis",
-   "Treating the joints in isolation and neglecting the underlying bowel disease, or vice versa",
-   "Missing axial disease because it runs independently of gut symptoms",
-   "Overlooking coexisting septic or crystal arthritis in an acutely inflamed joint",
-   "Attributing all joint symptoms to the bowel disease without excluding other spondyloarthropathies"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Oxford Textbook of Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying inflammatory bowel disease, since controlling gut inflammation often settles type 1 peripheral arthritis, using aminosalicylates, corticosteroids, thiopurines and biologics chosen jointly with gastroenterology",
-   "Physiotherapy and a regular exercise programme to preserve spinal mobility and function, particularly in axial disease",
-   "Intra-articular corticosteroid injections for isolated active peripheral joints, using systemic NSAIDs cautiously as they may provoke bowel flares",
-   "Escalate persistent peripheral or axial disease to anti-TNF monoclonal antibodies such as infliximab or adalimumab that treat both joints and gut, avoiding etanercept which does not control the bowel disease",
-   "Prompt ophthalmology referral and topical corticosteroids for acute anterior uveitis",
-   "Monitor disease activity with C-reactive protein and faecal calprotectin and screen for structural sacroiliac and spinal damage on imaging",
-   "Coordinated rheumatology and gastroenterology multidisciplinary follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "enteropathic_arthritis-pathway",
-   "title": "Enteropathic arthritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Enteropathic arthritis is the inflammatory arthritis associated with inflammatory bowel disease (Crohn's disease and ulcerative colitis) and belongs to the seronegative spondyloarthritis family",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A hot swollen joint that could represent septic arthritis rather than a flare",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Inflammatory markers (C-reactive protein and ESR) and faecal calprotectin to gauge bowel activity, HLA-B27 testing, especially where there are axial features, Radiographs and MRI of the sacroiliac joints and spine for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying inflammatory bowel disease, since controlling gut inflammation often settles type 1 peripheral arthritis, using aminosalicylates, corticosteroids, thiopurines and biologics chosen jointly with"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Using non-steroidal anti-inflammatory drugs freely for the arthritis without recognising they can worsen colitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of enteropathic arthritis."
-  }
- ],
- "tables": [
-  {
-   "id": "enteropathic_arthritis-matrix",
-   "title": "Enteropathic arthritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Enteropathic arthritis is the inflammatory arthritis associated with inflammatory bowel disease (Crohn's disease and ulcerative",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Enteropathic arthritis is the inflammatory arthritis associated with inflammatory bowel disease (Crohn's disease and ulcerative colitis) and belongs to the seronegative spondyloarthritis family",
+      "It has two broad patterns, peripheral arthritis and axial (spinal and sacroiliac) disease, which may overlap in the same patient",
+      "Peripheral disease is subdivided into a type 1 pattern (pauciarticular, large-joint, asymmetrical, often flaring with bowel activity and self-limiting) and a type 2 pattern (polyarticular, small-joint, more persistent, and largely independent of bowel activity)",
+      "Axial involvement (sacroiliitis and spondylitis) resembles ankylosing spondylitis, may be asymptomatic or cause inflammatory back pain, and runs a course independent of the gut inflammation",
+      "Extra-articular spondyloarthritis features may occur, including enthesitis, dactylitis, anterior uveitis, erythema nodosum, and pyoderma gangrenosum",
+      "The condition is seronegative (rheumatoid factor negative), and HLA-B27 is associated particularly with the axial disease",
+      "Management coordinates treatment of the bowel and joint disease: controlling gut inflammation helps type 1 peripheral disease, physiotherapy and appropriate therapy address axial disease, non-steroidal anti-inflammatory drugs are used cautiously as they may aggravate colitis, and certain biologic agents such as anti-tumour necrosis factor drugs treat both gut and joints"
     ],
-    [
-     "Key Investigations",
-     "Inflammatory markers (C-reactive protein and ESR) and faecal calprotectin to gauge bowel activity, HLA-B27 testing, especially",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In genetically predisposed individuals, including carriers of HLA-B27 for the axial phenotype, inflammation of the gut mucosa in inflammatory bowel disease is thought to allow translocation of luminal antigens and trafficking of activated immune cells that promote inflammation at the joints, entheses, and axial skeleton. This shared gut-joint immune axis links intestinal and musculoskeletal inflammation and places the disorder within the spondyloarthritis spectrum, helping explain why type 1 peripheral disease often parallels bowel activity while axial disease pursues an independent course.",
+    "additionalDifferentials": [
+      "Ankylosing spondylitis (idiopathic axial spondyloarthritis)",
+      "Psoriatic arthritis",
+      "Reactive arthritis",
+      "Rheumatoid arthritis",
+      "Gout or CPP crystal arthritis in acute peripheral joint presentations",
+      "Septic arthritis",
+      "Arthralgia related to inflammatory bowel disease therapy"
     ],
-    [
-     "Primary Differentials",
-     "Ankylosing spondylitis (idiopathic axial spondyloarthritis), Psoriatic arthritis, Reactive arthritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Inflammatory markers (C-reactive protein and ESR) and faecal calprotectin to gauge bowel activity",
+      "HLA-B27 testing, especially where there are axial features",
+      "Radiographs and MRI of the sacroiliac joints and spine for sacroiliitis and spondylitis",
+      "Radiographs or ultrasound of affected peripheral joints and entheses",
+      "Joint aspiration with microscopy and culture to exclude crystal or septic arthritis",
+      "Rheumatoid factor and anti-CCP antibodies to help exclude rheumatoid arthritis",
+      "Colonoscopy and gastroenterology assessment to confirm and monitor the inflammatory bowel disease"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying inflammatory bowel disease, since controlling gut inflammation often settles type 1 peripheral arthritis,",
-     "Core treatment modality"
+    "redFlags": [
+      "A hot swollen joint that could represent septic arthritis rather than a flare",
+      "New or worsening axial symptoms with neurological features",
+      "Acute anterior uveitis (a painful red eye) requiring urgent ophthalmology review",
+      "Severe bowel disease activity or complications needing gastroenterology input"
     ],
-    [
-     "Clinical Pitfall",
-     "Using non-steroidal anti-inflammatory drugs freely for the arthritis without recognising they can worsen colitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Type 1 peripheral arthritis is usually self-limiting and improves as the bowel disease is controlled, whereas type 2 peripheral and axial disease tend to be more persistent and can, like ankylosing spondylitis, lead to structural spinal damage if untreated; the overall outlook is improved by coordinated control of both gut and joint inflammation.",
+    "pitfalls": [
+      "Using non-steroidal anti-inflammatory drugs freely for the arthritis without recognising they can worsen colitis",
+      "Treating the joints in isolation and neglecting the underlying bowel disease, or vice versa",
+      "Missing axial disease because it runs independently of gut symptoms",
+      "Overlooking coexisting septic or crystal arthritis in an acutely inflamed joint",
+      "Attributing all joint symptoms to the bowel disease without excluding other spondyloarthropathies"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Oxford Textbook of Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying inflammatory bowel disease, since controlling gut inflammation often settles type 1 peripheral arthritis, using aminosalicylates, corticosteroids, thiopurines and biologics chosen jointly with gastroenterology",
+      "Physiotherapy and a regular exercise programme to preserve spinal mobility and function, particularly in axial disease",
+      "Intra-articular corticosteroid injections for isolated active peripheral joints, using systemic NSAIDs cautiously as they may provoke bowel flares",
+      "Escalate persistent peripheral or axial disease to anti-TNF monoclonal antibodies such as infliximab or adalimumab that treat both joints and gut, avoiding etanercept which does not control the bowel disease",
+      "Prompt ophthalmology referral and topical corticosteroids for acute anterior uveitis",
+      "Monitor disease activity with C-reactive protein and faecal calprotectin and screen for structural sacroiliac and spinal damage on imaging",
+      "Coordinated rheumatology and gastroenterology multidisciplinary follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for enteropathic arthritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "enteropathic-arthritis-real-image",
-   "title": "Enteropathic arthritis: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "enteropathic_arthritis-pathway",
+      "title": "Enteropathic arthritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Enteropathic arthritis is the inflammatory arthritis associated with inflammatory bowel disease (Crohn's disease and ulcerative colitis) and belongs to the seronegative spondyloarthritis family",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A hot swollen joint that could represent septic arthritis rather than a flare",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Inflammatory markers (C-reactive protein and ESR) and faecal calprotectin to gauge bowel activity, HLA-B27 testing, especially where there are axial features, Radiographs and MRI of the sacroiliac joints and spine for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying inflammatory bowel disease, since controlling gut inflammation often settles type 1 peripheral arthritis, using aminosalicylates, corticosteroids, thiopurines and biologics chosen jointly with"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Using non-steroidal anti-inflammatory drugs freely for the arthritis without recognising they can worsen colitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of enteropathic arthritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "enteropathic_arthritis-matrix",
+      "title": "Enteropathic arthritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Enteropathic arthritis is the inflammatory arthritis associated with inflammatory bowel disease (Crohn's disease and ulcerative",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Inflammatory markers (C-reactive protein and ESR) and faecal calprotectin to gauge bowel activity, HLA-B27 testing, especially",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ankylosing spondylitis (idiopathic axial spondyloarthritis), Psoriatic arthritis, Reactive arthritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying inflammatory bowel disease, since controlling gut inflammation often settles type 1 peripheral arthritis,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Using non-steroidal anti-inflammatory drugs freely for the arthritis without recognising they can worsen colitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for enteropathic arthritis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "enteropathic_arthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CRP, ESR and faecal calprotectin",
+          "cells": [
+            {
+              "text": "Bowel activity alongside joint inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B27 testing",
+          "cells": [
+            {
+              "text": "Especially where there are axial features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs and MRI of sacroiliac joints and spine",
+          "cells": [
+            {
+              "text": "Sacroiliitis and spondylitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs or ultrasound of peripheral joints and entheses",
+          "cells": [
+            {
+              "text": "Affected peripheral joints and entheses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint aspiration with microscopy and culture",
+          "cells": [
+            {
+              "text": "Excludes crystal or septic arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid factor and anti-CCP antibodies",
+          "cells": [
+            {
+              "text": "Help exclude rheumatoid arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "Confirms and monitors the inflammatory bowel disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enteropathic_arthritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Seronegative for rheumatoid factor; anti-CCP helps exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "A hot swollen joint may be septic rather than a flare; joint aspiration decides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankylosing spondylitis (axial spondyloarthritis)",
+          "cells": [
+            {
+              "text": "Axial disease resembles it; HLA-B27 is associated with the axial pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enteropathic_arthritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Aminosalicylates, corticosteroids, thiopurines and biologics chosen jointly with gastroenterology; often settles type 1 peripheral arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and exercise",
+          "cells": [
+            {
+              "text": "Preserves spinal mobility and function, particularly in axial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular corticosteroid injection",
+          "cells": [
+            {
+              "text": "Isolated active peripheral joints; systemic NSAIDs used cautiously as they may provoke bowel flares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-TNF monoclonal antibodies",
+          "cells": [
+            {
+              "text": "Infliximab or adalimumab for persistent peripheral or axial disease that treat joints and gut; avoid etanercept, which does not control the bowel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "Prompt ophthalmology referral and topical corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "C-reactive protein, faecal calprotectin, and imaging for sacroiliac and spinal damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Coordinated rheumatology and gastroenterology care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "enteropathic_arthritis-dx-mgmt",
+      "title": "Diagnosis and management of Enteropathic arthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Inflammatory arthritis in a patient with Crohn's disease or ulcerative colitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (hot swollen joint, painful red eye, axial symptoms with neurological features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent joint aspiration for septic arthritis; ophthalmology review for uveitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CRP, ESR, faecal calprotectin, HLA-B27, and sacroiliac MRI or radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Septic or crystal arthritis excluded on joint aspiration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat septic or crystal arthritis; reassess the enteropathic diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat the bowel inflammation, which often settles type 1 peripheral arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intra-articular corticosteroids for isolated active peripheral joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-TNF therapy for persistent peripheral or axial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and exercise to preserve spinal mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type 1 arthritis often improves as bowel disease is controlled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

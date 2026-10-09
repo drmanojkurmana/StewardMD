@@ -1,171 +1,477 @@
 {
- "id": "catathrenia",
- "name": "Catathrenia (sleep-related groaning)",
- "aliases": [
-  "sleep-related groaning",
-  "nocturnal groaning",
-  "expiratory groaning"
- ],
- "class": "non_infective",
- "system": "Sleep medicine",
- "specialty": "Sleep Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ICHD-3 / International Classification of Sleep Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by recurrent groaning sounds produced during a prolonged expiration in sleep, often occurring in clusters",
-   "A typical event begins with a deep breath in, followed by a drawn-out expiration accompanied by a monotonous groaning or moaning vocalisation",
-   "It arises predominantly during REM sleep but can also occur in non-REM sleep",
-   "The sleeper is usually unaware, while the sound is disturbing to a bed partner and often prompts presentation",
-   "It is benign and, unlike snoring, occurs on expiration rather than inspiration",
-   "In current classification it is grouped with the sleep-related breathing disorders rather than the parasomnias",
-   "Polysomnography shows the characteristic slow breathing with a markedly prolonged expiration during the groaning episodes"
+  "id": "catathrenia",
+  "name": "Catathrenia (sleep-related groaning)",
+  "aliases": [
+    "sleep-related groaning",
+    "nocturnal groaning",
+    "expiratory groaning"
   ],
-  "pathophysiology": "Catathrenia reflects an abnormal breathing pattern during sleep in which expiration becomes greatly prolonged and airflow is vocalised against a partially adducted larynx, producing the groaning sound. The precise trigger is uncertain; a disturbance of the central control of respiratory rhythm during sleep, particularly in REM, and possibly upper-airway factors, have been proposed. It is generally regarded as benign, without an associated significant gas-exchange abnormality.",
-  "additionalDifferentials": [
-   "Snoring, which is an inspiratory sound",
-   "Sleep talking (somniloquy)",
-   "Obstructive sleep apnoea",
-   "Nocturnal stridor, for example in multiple system atrophy",
-   "Nocturnal seizures with vocalisation",
-   "Nocturnal moaning or expiratory sounds of another origin"
-  ],
-  "additionalInvestigations": [
-   "Bed-partner account and, where possible, an audio or video recording of the sounds",
-   "Video-polysomnography with sound recording to capture the expiratory groaning and its sleep stage",
-   "Assessment of the breathing pattern, showing prolonged expiration without significant desaturation",
-   "Screening for obstructive sleep apnoea as a comorbid or alternative cause",
-   "Neurological review if nocturnal stridor or seizures are being considered"
-  ],
-  "redFlags": [
-   "Inspiratory stridor or neurological features suggesting a condition such as multiple system atrophy",
-   "Significant oxygen desaturation indicating a sleep-related breathing disorder",
-   "Stereotyped vocalisation with other features suggesting nocturnal seizures",
-   "Excessive daytime sleepiness pointing to coexisting sleep apnoea"
-  ],
-  "prognosis": "Catathrenia is benign with no known harmful consequences for the sleeper, but it tends to be persistent and its main impact is disturbance to a bed partner; response to treatment, including continuous positive airway pressure, is inconsistent.",
-  "pitfalls": [
-   "Mistaking expiratory groaning for snoring or obstructive sleep apnoea",
-   "Overlooking nocturnal stridor, which can signal serious neurological disease",
-   "Confusing stereotyped nocturnal vocalisation with seizures",
-   "Offering firm promises of cure when the treatment response is variable"
-  ],
-  "references": [
-   "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
-   "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and explanation of the benign nature of the condition to the patient and bed partner",
-   "A trial of continuous positive airway pressure, recognising that the response is inconsistent",
-   "Identification and treatment of coexisting obstructive sleep apnoea",
-   "Consideration of a mandibular advancement device or ENT assessment where upper-airway factors are suspected",
-   "Confirmation of the diagnosis by video-polysomnography to exclude other sleep-related breathing disorders",
-   "Sleep-medicine follow-up given the tendency of the condition to persist"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "catathrenia-pathway",
-   "title": "Catathrenia (sleep-related groaning): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by recurrent groaning sounds produced during a prolonged expiration in sleep, often occurring in clusters",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Inspiratory stridor or neurological features suggesting a condition such as multiple system atrophy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bed-partner account and, where possible, an audio or video recording of the sounds, Video-polysomnography with sound recording to capture the expiratory groaning and its sleep stage, Assessment of the breathing pattern,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and explanation of the benign nature of the condition to the patient and bed partner"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking expiratory groaning for snoring or obstructive sleep apnoea"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of catathrenia (sleep-related groaning)."
-  }
- ],
- "tables": [
-  {
-   "id": "catathrenia-matrix",
-   "title": "Catathrenia (sleep-related groaning): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by recurrent groaning sounds produced during a prolonged expiration in sleep, often occurring in clusters",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Sleep medicine",
+  "specialty": "Sleep Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ICHD-3 / International Classification of Sleep Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by recurrent groaning sounds produced during a prolonged expiration in sleep, often occurring in clusters",
+      "A typical event begins with a deep breath in, followed by a drawn-out expiration accompanied by a monotonous groaning or moaning vocalisation",
+      "It arises predominantly during REM sleep but can also occur in non-REM sleep",
+      "The sleeper is usually unaware, while the sound is disturbing to a bed partner and often prompts presentation",
+      "It is benign and, unlike snoring, occurs on expiration rather than inspiration",
+      "In current classification it is grouped with the sleep-related breathing disorders rather than the parasomnias",
+      "Polysomnography shows the characteristic slow breathing with a markedly prolonged expiration during the groaning episodes"
     ],
-    [
-     "Key Investigations",
-     "Bed-partner account and, where possible, an audio or video recording of the sounds, Video-polysomnography with sound recording to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Catathrenia reflects an abnormal breathing pattern during sleep in which expiration becomes greatly prolonged and airflow is vocalised against a partially adducted larynx, producing the groaning sound. The precise trigger is uncertain; a disturbance of the central control of respiratory rhythm during sleep, particularly in REM, and possibly upper-airway factors, have been proposed. It is generally regarded as benign, without an associated significant gas-exchange abnormality.",
+    "additionalDifferentials": [
+      "Snoring, which is an inspiratory sound",
+      "Sleep talking (somniloquy)",
+      "Obstructive sleep apnoea",
+      "Nocturnal stridor, for example in multiple system atrophy",
+      "Nocturnal seizures with vocalisation",
+      "Nocturnal moaning or expiratory sounds of another origin"
     ],
-    [
-     "Primary Differentials",
-     "Snoring, which is an inspiratory sound, Sleep talking (somniloquy), Obstructive sleep apnoea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bed-partner account and, where possible, an audio or video recording of the sounds",
+      "Video-polysomnography with sound recording to capture the expiratory groaning and its sleep stage",
+      "Assessment of the breathing pattern, showing prolonged expiration without significant desaturation",
+      "Screening for obstructive sleep apnoea as a comorbid or alternative cause",
+      "Neurological review if nocturnal stridor or seizures are being considered"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and explanation of the benign nature of the condition to the patient and bed partner",
-     "Core treatment modality"
+    "redFlags": [
+      "Inspiratory stridor or neurological features suggesting a condition such as multiple system atrophy",
+      "Significant oxygen desaturation indicating a sleep-related breathing disorder",
+      "Stereotyped vocalisation with other features suggesting nocturnal seizures",
+      "Excessive daytime sleepiness pointing to coexisting sleep apnoea"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking expiratory groaning for snoring or obstructive sleep apnoea",
-     "Prevent diagnostic or management error"
+    "prognosis": "Catathrenia is benign with no known harmful consequences for the sleeper, but it tends to be persistent and its main impact is disturbance to a bed partner; response to treatment, including continuous positive airway pressure, is inconsistent.",
+    "pitfalls": [
+      "Mistaking expiratory groaning for snoring or obstructive sleep apnoea",
+      "Overlooking nocturnal stridor, which can signal serious neurological disease",
+      "Confusing stereotyped nocturnal vocalisation with seizures",
+      "Offering firm promises of cure when the treatment response is variable"
+    ],
+    "references": [
+      "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
+      "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and explanation of the benign nature of the condition to the patient and bed partner",
+      "A trial of continuous positive airway pressure, recognising that the response is inconsistent",
+      "Identification and treatment of coexisting obstructive sleep apnoea",
+      "Consideration of a mandibular advancement device or ENT assessment where upper-airway factors are suspected",
+      "Confirmation of the diagnosis by video-polysomnography to exclude other sleep-related breathing disorders",
+      "Sleep-medicine follow-up given the tendency of the condition to persist"
     ]
-   ],
-   "caption": "Overview comparison matrix for catathrenia (sleep-related groaning)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "catathrenia-real-image",
-   "title": "Catathrenia (sleep-related groaning): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "catathrenia-pathway",
+      "title": "Catathrenia (sleep-related groaning): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by recurrent groaning sounds produced during a prolonged expiration in sleep, often occurring in clusters",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Inspiratory stridor or neurological features suggesting a condition such as multiple system atrophy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bed-partner account and, where possible, an audio or video recording of the sounds, Video-polysomnography with sound recording to capture the expiratory groaning and its sleep stage, Assessment of the breathing pattern,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and explanation of the benign nature of the condition to the patient and bed partner"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking expiratory groaning for snoring or obstructive sleep apnoea"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of catathrenia (sleep-related groaning)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "catathrenia-matrix",
+      "title": "Catathrenia (sleep-related groaning): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by recurrent groaning sounds produced during a prolonged expiration in sleep, often occurring in clusters",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bed-partner account and, where possible, an audio or video recording of the sounds, Video-polysomnography with sound recording to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Snoring, which is an inspiratory sound, Sleep talking (somniloquy), Obstructive sleep apnoea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and explanation of the benign nature of the condition to the patient and bed partner",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking expiratory groaning for snoring or obstructive sleep apnoea",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for catathrenia (sleep-related groaning)."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ICHD-3 / International Classification of Sleep Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "catathrenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bed-partner account and audio or video recording",
+          "cells": [
+            {
+              "text": "Records the groaning sounds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-polysomnography with sound recording",
+          "cells": [
+            {
+              "text": "Captures expiratory groaning and its sleep stage; mainly REM sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breathing pattern assessment",
+          "cells": [
+            {
+              "text": "Prolonged expiration without significant desaturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Comorbid or alternative cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological review",
+          "cells": [
+            {
+              "text": "Considered if nocturnal stridor or seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "catathrenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Snoring",
+          "cells": [
+            {
+              "text": "An inspiratory sound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocturnal stridor",
+          "cells": [
+            {
+              "text": "Inspiratory stridor with neurological features, such as multiple system atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocturnal seizures",
+          "cells": [
+            {
+              "text": "Stereotyped vocalisation with other features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Significant oxygen desaturation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "catathrenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Explain the benign nature to the patient and bed partner"
+            },
+            {
+              "text": "No known harmful consequences"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous positive airway pressure",
+          "cells": [
+            {
+              "text": "Trial of CPAP"
+            },
+            {
+              "text": "Response is inconsistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "Identify and treat coexisting obstructive sleep apnoea"
+            },
+            {
+              "text": "If present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper-airway measures",
+          "cells": [
+            {
+              "text": "Mandibular advancement device or ENT assessment"
+            },
+            {
+              "text": "Where upper-airway factors are suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic confirmation",
+          "cells": [
+            {
+              "text": "Video-polysomnography to exclude other sleep-related breathing disorders"
+            },
+            {
+              "text": "Exclude other disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep-medicine follow-up",
+          "cells": [
+            {
+              "text": "Ongoing review"
+            },
+            {
+              "text": "Tends to persist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "catathrenia-dx-mgmt",
+      "title": "Diagnosis and management of Catathrenia (sleep-related groaning)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected catathrenia: recurrent expiratory groaning in sleep, reported by bed partner",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (inspiratory stridor, neurological features, desaturation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: stridor or neurological features; assess for multiple system atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Video-polysomnography with sound recording; breathing pattern assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Prolonged expiratory groaning confirmed, other breathing disorders excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassure patient and bed partner about the benign course",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check snoring, obstructive sleep apnoea, sleep talking and nocturnal seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat coexisting obstructive sleep apnoea if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trial of CPAP, noting the inconsistent response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Mandibular advancement device or ENT assessment for upper-airway factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign, but tends to persist; main impact is on the bed partner",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

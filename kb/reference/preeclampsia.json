@@ -1,178 +1,474 @@
 {
- "id": "preeclampsia",
- "name": "Pre-eclampsia",
- "aliases": [
-  "preeclampsia",
-  "pre-eclampsia",
-  "PET",
-  "pregnancy-induced hypertension with proteinuria",
-  "gestational proteinuric hypertension"
- ],
- "class": "non_infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by new-onset hypertension after 20 weeks' gestation combined with proteinuria or evidence of maternal organ dysfunction (renal, hepatic, neurological, haematological) or uteroplacental compromise",
-   "Proteinuria is no longer mandatory for diagnosis when hypertension is accompanied by features such as thrombocytopenia, raised transaminases, renal impairment, pulmonary oedema, or cerebral/visual symptoms",
-   "Warning symptoms include persistent severe headache, visual disturbance (flashing lights, blurring), right upper quadrant or epigastric pain, and rapid oedema of the face and hands",
-   "HELLP syndrome (haemolysis, elevated liver enzymes, low platelets) is a severe variant that can occur with only modest blood pressure elevation",
-   "Definitive treatment is delivery of the placenta; timing balances gestational age against maternal and fetal risk",
-   "Magnesium sulfate is used for seizure prophylaxis in severe disease and to treat eclamptic seizures, not as an antihypertensive",
-   "Antihypertensive therapy aims to lower dangerously high blood pressure to reduce maternal stroke risk while preserving placental perfusion",
-   "Low-dose aspirin from early pregnancy reduces incidence in women at high risk (prior pre-eclampsia, chronic hypertension, renal disease, diabetes, multiple pregnancy, antiphospholipid syndrome)"
+  "id": "preeclampsia",
+  "name": "Pre-eclampsia",
+  "aliases": [
+    "preeclampsia",
+    "pre-eclampsia",
+    "PET",
+    "pregnancy-induced hypertension with proteinuria",
+    "gestational proteinuric hypertension"
   ],
-  "pathophysiology": "Pre-eclampsia originates in abnormal placentation: inadequate remodelling of the maternal spiral arteries by trophoblast leads to a poorly perfused, ischaemic placenta. The ischaemic placenta releases anti-angiogenic factors (such as soluble fms-like tyrosine kinase-1 and soluble endoglin) that antagonise vascular endothelial and placental growth factors, producing widespread maternal endothelial dysfunction. This causes vasospasm, increased vascular permeability, activation of coagulation, and multi-organ hypoperfusion, manifesting as hypertension, proteinuria, hepatic and cerebral involvement, and fetal growth restriction.",
-  "additionalDifferentials": [
-   "Chronic (pre-existing) hypertension",
-   "Gestational hypertension without organ involvement",
-   "Chronic kidney disease with proteinuria",
-   "Acute fatty liver of pregnancy",
-   "Thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome",
-   "Systemic lupus erythematosus flare"
-  ],
-  "additionalInvestigations": [
-   "Serial blood pressure measurement and urine protein quantification (protein:creatinine ratio or 24-hour collection)",
-   "Full blood count for thrombocytopenia and evidence of haemolysis",
-   "Liver transaminases and lactate dehydrogenase",
-   "Renal function including serum creatinine and urate",
-   "Angiogenic markers (sFlt-1/PlGF ratio) where available to aid risk stratification",
-   "Fetal assessment with ultrasound growth, amniotic fluid volume, and umbilical artery Doppler"
-  ],
-  "redFlags": [
-   "Severe hypertension unresponsive to treatment threatening maternal stroke",
-   "Neurological signs (severe headache, visual loss, hyperreflexia with clonus) heralding impending eclampsia",
-   "Right upper quadrant pain with abnormal liver enzymes suggesting HELLP or hepatic haematoma/rupture",
-   "Pulmonary oedema or oliguria indicating organ failure",
-   "Fetal growth restriction with abnormal Dopplers or non-reassuring fetal status"
-  ],
-  "prognosis": "With timely surveillance, blood pressure control, seizure prophylaxis, and appropriately timed delivery most women recover fully postpartum, though there is an increased lifetime risk of cardiovascular and renal disease. Severe or early-onset disease carries higher maternal and perinatal morbidity, and recurrence in future pregnancies is common.",
-  "pitfalls": [
-   "Excluding the diagnosis because proteinuria is absent despite organ dysfunction",
-   "Underestimating severity in HELLP syndrome where blood pressure may be only mildly raised",
-   "Over-aggressive blood pressure lowering compromising placental perfusion",
-   "Failing to continue monitoring postpartum, when eclampsia and severe hypertension can still occur",
-   "Treating magnesium sulfate as an antihypertensive rather than as seizure prophylaxis"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Delivery of the placenta is the only definitive cure, with timing balancing gestational age against maternal and foetal risk",
-   "Blood-pressure control with antihypertensives such as labetalol, nifedipine or methyldopa, and intravenous hydralazine or labetalol for acute severe hypertension",
-   "Magnesium sulfate for seizure prophylaxis in severe disease and for treating eclamptic seizures",
-   "Antenatal corticosteroids to promote foetal lung maturity when preterm delivery is anticipated",
-   "Intensive maternal surveillance of blood pressure, platelets and liver and renal function alongside foetal monitoring with growth scans and umbilical artery Doppler",
-   "Recognise and manage severe complications including HELLP syndrome, pulmonary oedema and eclampsia",
-   "Continued postpartum monitoring, with low-dose aspirin prophylaxis and cardiovascular-risk follow-up for future pregnancies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "preeclampsia-pathway",
-   "title": "Pre-eclampsia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by new-onset hypertension after 20 weeks' gestation combined with proteinuria or evidence of maternal organ dysfunction (renal, hepatic, neurological, haematological) or uteroplacental compromise",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypertension unresponsive to treatment threatening maternal stroke",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial blood pressure measurement and urine protein quantification (protein:creatinine ratio or 24-hour collection), Full blood count for thrombocytopenia and evidence of haemolysis, Liver transaminases and lactate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Delivery of the placenta is the only definitive cure, with timing balancing gestational age against maternal and foetal risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis because proteinuria is absent despite organ dysfunction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pre-eclampsia."
-  }
- ],
- "tables": [
-  {
-   "id": "preeclampsia-matrix",
-   "title": "Pre-eclampsia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by new-onset hypertension after 20 weeks' gestation combined with proteinuria or evidence of maternal organ dysfunction",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by new-onset hypertension after 20 weeks' gestation combined with proteinuria or evidence of maternal organ dysfunction (renal, hepatic, neurological, haematological) or uteroplacental compromise",
+      "Proteinuria is no longer mandatory for diagnosis when hypertension is accompanied by features such as thrombocytopenia, raised transaminases, renal impairment, pulmonary oedema, or cerebral/visual symptoms",
+      "Warning symptoms include persistent severe headache, visual disturbance (flashing lights, blurring), right upper quadrant or epigastric pain, and rapid oedema of the face and hands",
+      "HELLP syndrome (haemolysis, elevated liver enzymes, low platelets) is a severe variant that can occur with only modest blood pressure elevation",
+      "Definitive treatment is delivery of the placenta; timing balances gestational age against maternal and fetal risk",
+      "Magnesium sulfate is used for seizure prophylaxis in severe disease and to treat eclamptic seizures, not as an antihypertensive",
+      "Antihypertensive therapy aims to lower dangerously high blood pressure to reduce maternal stroke risk while preserving placental perfusion",
+      "Low-dose aspirin from early pregnancy reduces incidence in women at high risk (prior pre-eclampsia, chronic hypertension, renal disease, diabetes, multiple pregnancy, antiphospholipid syndrome)"
     ],
-    [
-     "Key Investigations",
-     "Serial blood pressure measurement and urine protein quantification (protein:creatinine ratio or 24-hour collection), Full blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pre-eclampsia originates in abnormal placentation: inadequate remodelling of the maternal spiral arteries by trophoblast leads to a poorly perfused, ischaemic placenta. The ischaemic placenta releases anti-angiogenic factors (such as soluble fms-like tyrosine kinase-1 and soluble endoglin) that antagonise vascular endothelial and placental growth factors, producing widespread maternal endothelial dysfunction. This causes vasospasm, increased vascular permeability, activation of coagulation, and multi-organ hypoperfusion, manifesting as hypertension, proteinuria, hepatic and cerebral involvement, and fetal growth restriction.",
+    "additionalDifferentials": [
+      "Chronic (pre-existing) hypertension",
+      "Gestational hypertension without organ involvement",
+      "Chronic kidney disease with proteinuria",
+      "Acute fatty liver of pregnancy",
+      "Thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome",
+      "Systemic lupus erythematosus flare"
     ],
-    [
-     "Primary Differentials",
-     "Chronic (pre-existing) hypertension, Gestational hypertension without organ involvement, Chronic kidney disease with proteinuria",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial blood pressure measurement and urine protein quantification (protein:creatinine ratio or 24-hour collection)",
+      "Full blood count for thrombocytopenia and evidence of haemolysis",
+      "Liver transaminases and lactate dehydrogenase",
+      "Renal function including serum creatinine and urate",
+      "Angiogenic markers (sFlt-1/PlGF ratio) where available to aid risk stratification",
+      "Fetal assessment with ultrasound growth, amniotic fluid volume, and umbilical artery Doppler"
     ],
-    [
-     "Management Strategy",
-     "Delivery of the placenta is the only definitive cure, with timing balancing gestational age against maternal and foetal risk",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypertension unresponsive to treatment threatening maternal stroke",
+      "Neurological signs (severe headache, visual loss, hyperreflexia with clonus) heralding impending eclampsia",
+      "Right upper quadrant pain with abnormal liver enzymes suggesting HELLP or hepatic haematoma/rupture",
+      "Pulmonary oedema or oliguria indicating organ failure",
+      "Fetal growth restriction with abnormal Dopplers or non-reassuring fetal status"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis because proteinuria is absent despite organ dysfunction",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely surveillance, blood pressure control, seizure prophylaxis, and appropriately timed delivery most women recover fully postpartum, though there is an increased lifetime risk of cardiovascular and renal disease. Severe or early-onset disease carries higher maternal and perinatal morbidity, and recurrence in future pregnancies is common.",
+    "pitfalls": [
+      "Excluding the diagnosis because proteinuria is absent despite organ dysfunction",
+      "Underestimating severity in HELLP syndrome where blood pressure may be only mildly raised",
+      "Over-aggressive blood pressure lowering compromising placental perfusion",
+      "Failing to continue monitoring postpartum, when eclampsia and severe hypertension can still occur",
+      "Treating magnesium sulfate as an antihypertensive rather than as seizure prophylaxis"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Delivery of the placenta is the only definitive cure, with timing balancing gestational age against maternal and foetal risk",
+      "Blood-pressure control with antihypertensives such as labetalol, nifedipine or methyldopa, and intravenous hydralazine or labetalol for acute severe hypertension",
+      "Magnesium sulfate for seizure prophylaxis in severe disease and for treating eclamptic seizures",
+      "Antenatal corticosteroids to promote foetal lung maturity when preterm delivery is anticipated",
+      "Intensive maternal surveillance of blood pressure, platelets and liver and renal function alongside foetal monitoring with growth scans and umbilical artery Doppler",
+      "Recognise and manage severe complications including HELLP syndrome, pulmonary oedema and eclampsia",
+      "Continued postpartum monitoring, with low-dose aspirin prophylaxis and cardiovascular-risk follow-up for future pregnancies"
     ]
-   ],
-   "caption": "Overview comparison matrix for pre-eclampsia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "preeclampsia-real-image",
-   "title": "Pre-eclampsia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "preeclampsia-pathway",
+      "title": "Pre-eclampsia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by new-onset hypertension after 20 weeks' gestation combined with proteinuria or evidence of maternal organ dysfunction (renal, hepatic, neurological, haematological) or uteroplacental compromise",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypertension unresponsive to treatment threatening maternal stroke",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial blood pressure measurement and urine protein quantification (protein:creatinine ratio or 24-hour collection), Full blood count for thrombocytopenia and evidence of haemolysis, Liver transaminases and lactate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Delivery of the placenta is the only definitive cure, with timing balancing gestational age against maternal and foetal risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis because proteinuria is absent despite organ dysfunction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pre-eclampsia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "preeclampsia-matrix",
+      "title": "Pre-eclampsia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by new-onset hypertension after 20 weeks' gestation combined with proteinuria or evidence of maternal organ dysfunction",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial blood pressure measurement and urine protein quantification (protein:creatinine ratio or 24-hour collection), Full blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic (pre-existing) hypertension, Gestational hypertension without organ involvement, Chronic kidney disease with proteinuria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Delivery of the placenta is the only definitive cure, with timing balancing gestational age against maternal and foetal risk",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis because proteinuria is absent despite organ dysfunction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pre-eclampsia."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "preeclampsia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial blood pressure and urine protein quantification",
+          "cells": [
+            {
+              "text": "Hypertension and proteinuria, quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Thrombocytopenia and haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transaminases and lactate dehydrogenase",
+          "cells": [
+            {
+              "text": "Liver involvement and haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function (creatinine and urate)",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiogenic markers (sFlt-1/PlGF ratio)",
+          "cells": [
+            {
+              "text": "Risk stratification, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fetal ultrasound and umbilical artery Doppler",
+          "cells": [
+            {
+              "text": "Fetal growth, amniotic fluid volume and umbilical artery flow"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "preeclampsia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic (pre-existing) hypertension",
+          "cells": [
+            {
+              "text": "Hypertension present before pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gestational hypertension",
+          "cells": [
+            {
+              "text": "Without organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic kidney disease with proteinuria",
+          "cells": [
+            {
+              "text": "Chronic kidney disease with proteinuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "preeclampsia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Delivery of the placenta",
+          "cells": [
+            {
+              "text": "Only definitive cure; timing balances gestational age against maternal and fetal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Labetalol, nifedipine or methyldopa; intravenous hydralazine or labetalol for acute severe hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium sulfate",
+          "cells": [
+            {
+              "text": "Seizure prophylaxis in severe disease and treatment of eclamptic seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal corticosteroids",
+          "cells": [
+            {
+              "text": "Fetal lung maturity when preterm delivery is anticipated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive surveillance",
+          "cells": [
+            {
+              "text": "Blood pressure, platelets, liver and renal function; growth scans and umbilical artery Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage severe complications",
+          "cells": [
+            {
+              "text": "HELLP syndrome, pulmonary oedema and eclampsia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum follow-up",
+          "cells": [
+            {
+              "text": "Low-dose aspirin prophylaxis and cardiovascular-risk follow-up for future pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "preeclampsia-dx-mgmt",
+      "title": "Diagnosis and management of Pre-eclampsia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected pre-eclampsia: new-onset hypertension in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe hypertension, neurological signs, HELLP features or organ failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat severe hypertension, eclampsia or HELLP, and pulmonary oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial BP, urine protein ratio, FBC, liver enzymes, LDH, creatinine, fetal scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do results confirm pre-eclampsia with proteinuria or organ involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic hypertension, gestational hypertension or CKD; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antihypertensives: labetalol, nifedipine or methyldopa",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Magnesium sulfate for seizure prophylaxis and eclamptic seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antenatal corticosteroids if preterm delivery is anticipated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Intensive maternal and fetal surveillance with growth scans",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Delivery of the placenta is the only definitive cure; timing balances risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

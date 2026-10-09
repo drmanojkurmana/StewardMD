@@ -1,192 +1,170 @@
 {
- "id": "neonatal-intraosseous-access",
- "title": "Intraosseous access in neonates",
- "subject": "paediatrics",
- "population": "Neonates",
- "basis": "international",
- "setting": "Delivery room, emergency department, SNCU, NICU, transport",
- "aliases": [
-  "IO access",
-  "intraosseous needle",
-  "intraosseous infusion",
-  "IO line",
-  "neonatal IO",
-  "tibial IO",
-  "emergency vascular access newborn",
-  "EZ-IO neonate"
- ],
- "summary": "Emergency route for drugs and fluids when umbilical venous or peripheral access fails. Use the flat anteromedial proximal tibia 1 to 2 cm below and 1 cm medial to the tibial tuberosity, stop at the loss of resistance, watch the limb for extravasation and remove the needle as soon as other access is secured.",
- "sections": [
-  {
-   "kind": "recognise",
-   "title": "When to use IO",
-   "items": [
-    "At birth the umbilical vein is the primary emergency access; if umbilical venous access is not feasible, or the baby is outside the delivery room, IO is a reasonable alternative (ERC, weak recommendation, very low certainty evidence).",
-    "Place an IO if venous access cannot be secured within three attempts and within 90 seconds.",
-    "IO can be used in preterm and term neonates, and all intravenous medications can be given by this route.",
-    "After resuscitation, IO access may be sufficient in the short term if no other site is available."
-   ]
-  },
-  {
-   "kind": "immediate",
-   "title": "Site and insertion",
-   "items": [
-    "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition describes about 2 cm distal and 1 to 2 cm medial.",
-    "If the tuberosity cannot be felt, use the flat medial tibia 1.5 to 2 cm distal to the patella.",
-    "Second site: distal femur, anterior midline, 1 to 3 cm above the external condyles.",
-    "Keep clear of the growth plate: an ultrasound study aimed for at least 10 mm from it, and a puncture 10 mm below the tuberosity breached that margin in 53% of proximal sites. At 3000 to 4000 g the most suitable site was a median 13.0 mm below the tuberosity.",
-    "Insert the needle perpendicular to the skin through periosteum and cortex, and stop at the loss of resistance that marks entry into the marrow cavity.",
-    "In neonatal cadavers, manually inserted needles leaked less than drill-assisted ones and depth needed adjusting for birth weight; contrast leaked in 15.8% overall and 41.7% of VLBW infants."
-   ]
-  },
-  {
-   "kind": "monitoring",
-   "title": "After insertion",
-   "items": [
-    "Watch the limb for swelling, extravasation and poor perfusion throughout every infusion.",
-    "Remove the IO line once alternative venous access is secured."
-   ]
-  },
-  {
-   "kind": "pitfalls",
-   "title": "Complications and pitfalls",
-   "items": [
-    "German surveillance of 161 neonates: IO access succeeded in 91%, at the first attempt in 75%; severe complications occurred in 6%.",
-    "Severe complications (about 6%): necrosis, fracture, broken needle, osteomyelitis, soft tissue infection and perfusion problems. Minor (about 30%): soft tissue misplacement, mild paravasation, poor healing and local swelling.",
-    "Reported serious events include tibial fracture, osteomyelitis, and extravasation causing compartment syndrome and amputation.",
-    "Neonatal staff rarely train on IO devices; regular role-appropriate training is needed."
-   ]
-  }
- ],
- "sources": [
-  {
-   "org": "European Resuscitation Council",
-   "title": "ERC Guidelines 2021: Newborn resuscitation and support of transition of infants at birth",
-   "year": 2021,
-   "url": "https://doi.org/10.1016/j.resuscitation.2021.02.014"
-  },
-  {
-   "org": "Int J Pediatr (Zubi ZBH et al.)",
-   "title": "Indications, Measurements, and Complications of Ten Essential Neonatal Procedures",
-   "year": 2023,
-   "url": "https://doi.org/10.1155/2023/3241607"
-  },
-  {
-   "org": "Front Pediatr (Schwindt E et al.)",
-   "title": "Intraosseous access in neonates is feasible and safe: a prospective nationwide surveillance study in Germany",
-   "year": 2022,
-   "url": "https://doi.org/10.3389/fped.2022.952632"
-  },
-  {
-   "org": "Eur J Pediatr (Schwindt EM et al.)",
-   "title": "Finding the most suitable puncture site for intraosseous access in term and preterm neonates",
-   "year": 2023,
-   "url": "https://doi.org/10.1007/s00431-023-04972-8"
-  },
-  {
-   "org": "J Perinatol (Sengasai C et al.)",
-   "title": "A prospective evaluation of tibial insertion sites for intraosseous needles in Asian neonates",
-   "year": 2025,
-   "url": "https://doi.org/10.1038/s41372-024-02018-x"
-  }
- ],
- "review": {
-  "status": "ai_drafted",
-  "compiled": "2026-09-30"
- },
- "algorithms": [
-  {
-   "id": "neonatal-intraosseous-access-pathway",
-   "title": "Intraosseous access in neonates Clinical Decision & Management Pathway",
-   "steps": [
+  "id": "neonatal-intraosseous-access",
+  "title": "Intraosseous access in neonates",
+  "subject": "paediatrics",
+  "population": "Neonates",
+  "basis": "international",
+  "setting": "Delivery room, emergency department, SNCU, NICU, transport",
+  "aliases": [
+    "IO access",
+    "intraosseous needle",
+    "intraosseous infusion",
+    "IO line",
+    "neonatal IO",
+    "tibial IO",
+    "emergency vascular access newborn",
+    "EZ-IO neonate"
+  ],
+  "summary": "Emergency route for drugs and fluids when umbilical venous or peripheral access fails. Use the flat anteromedial proximal tibia 1 to 2 cm below and 1 cm medial to the tibial tuberosity, stop at the loss of resistance, watch the limb for extravasation and remove the needle as soon as other access is secured.",
+  "sections": [
     {
-     "step": "Triage & Clinical Presentation",
-     "action": "At birth the umbilical vein is the primary emergency access; if umbilical venous access is not feasible, or the baby is outside the delivery room, IO is a reasonable alternative (ERC, weak recommendation, very low certainty evidence).",
-     "critical": true
+      "kind": "recognise",
+      "title": "When to use IO",
+      "items": [
+        "At birth the umbilical vein is the primary emergency access; if umbilical venous access is not feasible, or the baby is outside the delivery room, IO is a reasonable alternative (ERC, weak recommendation, very low certainty evidence).",
+        "Place an IO if venous access cannot be secured within three attempts and within 90 seconds.",
+        "IO can be used in preterm and term neonates, and all intravenous medications can be given by this route.",
+        "After resuscitation, IO access may be sufficient in the short term if no other site is available."
+      ]
     },
     {
-     "step": "Immediate Stabilization",
-     "branch": "Emergency Stabilization",
-     "action": "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition describes about 2 cm distal and 1 to 2 cm medial.",
-     "critical": true
+      "kind": "immediate",
+      "title": "Site and insertion",
+      "items": [
+        "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition describes about 2 cm distal and 1 to 2 cm medial.",
+        "If the tuberosity cannot be felt, use the flat medial tibia 1.5 to 2 cm distal to the patella.",
+        "Second site: distal femur, anterior midline, 1 to 3 cm above the external condyles.",
+        "Keep clear of the growth plate: an ultrasound study aimed for at least 10 mm from it, and a puncture 10 mm below the tuberosity breached that margin in 53% of proximal sites. At 3000 to 4000 g the most suitable site was a median 13.0 mm below the tuberosity.",
+        "Insert the needle perpendicular to the skin through periosteum and cortex, and stop at the loss of resistance that marks entry into the marrow cavity.",
+        "In neonatal cadavers, manually inserted needles leaked less than drill-assisted ones and depth needed adjusting for birth weight; contrast leaked in 15.8% overall and 41.7% of VLBW infants."
+      ]
     },
     {
-     "step": "Diagnostic Workup & Risk Stratification",
-     "action": "IO can be used in preterm and term neonates, and all intravenous medications can be given by this route."
+      "kind": "monitoring",
+      "title": "After insertion",
+      "items": [
+        "Watch the limb for swelling, extravasation and poor perfusion throughout every infusion.",
+        "Remove the IO line once alternative venous access is secured."
+      ]
     },
     {
-     "step": "Definitive Medical Management",
-     "branch": "Targeted Therapy",
-     "action": "If the tuberosity cannot be felt, use the flat medial tibia 1.5 to 2 cm distal to the patella."
-    },
-    {
-     "step": "Monitoring & Escalation Thresholds",
-     "action": "Watch the limb for swelling, extravasation and poor perfusion throughout every infusion."
+      "kind": "pitfalls",
+      "title": "Complications and pitfalls",
+      "items": [
+        "German surveillance of 161 neonates: IO access succeeded in 91%, at the first attempt in 75%; severe complications occurred in 6%.",
+        "Severe complications (about 6%): necrosis, fracture, broken needle, osteomyelitis, soft tissue infection and perfusion problems. Minor (about 30%): soft tissue misplacement, mild paravasation, poor healing and local swelling.",
+        "Reported serious events include tibial fracture, osteomyelitis, and extravasation causing compartment syndrome and amputation.",
+        "Neonatal staff rarely train on IO devices; regular role-appropriate training is needed."
+      ]
     }
-   ],
-   "caption": "Evidence-based clinical decision pathway for intraosseous access in neonates."
-  }
- ],
- "tables": [
-  {
-   "id": "neonatal-intraosseous-access-summary-matrix",
-   "title": "Intraosseous access in neonates Clinical Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "At birth the umbilical vein is the primary emergency access; if umbilical venous access is not feasible, or the baby is outside the",
-     "Mandatory clinical criteria"
-    ],
-    [
-     "Immediate Priority",
-     "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition",
-     "Time-critical initial resuscitation"
-    ],
-    [
-     "Key Investigations",
-     "Standard laboratory and imaging workup",
-     "Differentiates etiology and severity"
-    ],
-    [
-     "Targeted Treatment",
-     "Specialist consultation and organ support",
-     "Definitive care pathway"
-    ],
-    [
-     "Critical Pitfall",
-     "German surveillance of 161 neonates: IO access succeeded in 91%, at the first attempt in 75%; severe complications occurred in 6%.",
-     "Avoid preventable clinical error"
-    ]
-   ],
-   "caption": "Core clinical management matrix for intraosseous access in neonates."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neonatal-intraosseous-access-real-image",
-   "title": "Intraosseous access in neonates: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  ],
+  "sources": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
+      "org": "European Resuscitation Council",
+      "title": "ERC Guidelines 2021: Newborn resuscitation and support of transition of infants at birth",
+      "year": 2021,
+      "url": "https://doi.org/10.1016/j.resuscitation.2021.02.014"
     },
     {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+      "org": "Int J Pediatr (Zubi ZBH et al.)",
+      "title": "Indications, Measurements, and Complications of Ten Essential Neonatal Procedures",
+      "year": 2023,
+      "url": "https://doi.org/10.1155/2023/3241607"
     },
     {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "org": "Front Pediatr (Schwindt E et al.)",
+      "title": "Intraosseous access in neonates is feasible and safe: a prospective nationwide surveillance study in Germany",
+      "year": 2022,
+      "url": "https://doi.org/10.3389/fped.2022.952632"
+    },
+    {
+      "org": "Eur J Pediatr (Schwindt EM et al.)",
+      "title": "Finding the most suitable puncture site for intraosseous access in term and preterm neonates",
+      "year": 2023,
+      "url": "https://doi.org/10.1007/s00431-023-04972-8"
+    },
+    {
+      "org": "J Perinatol (Sengasai C et al.)",
+      "title": "A prospective evaluation of tibial insertion sites for intraosseous needles in Asian neonates",
+      "year": 2025,
+      "url": "https://doi.org/10.1038/s41372-024-02018-x"
     }
-   ]
-  }
- ]
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "compiled": "2026-09-30"
+  },
+  "algorithms": [
+    {
+      "id": "neonatal-intraosseous-access-pathway",
+      "title": "Intraosseous access in neonates Clinical Decision & Management Pathway",
+      "steps": [
+        {
+          "step": "Triage & Clinical Presentation",
+          "action": "At birth the umbilical vein is the primary emergency access; if umbilical venous access is not feasible, or the baby is outside the delivery room, IO is a reasonable alternative (ERC, weak recommendation, very low certainty evidence).",
+          "critical": true
+        },
+        {
+          "step": "Immediate Stabilization",
+          "branch": "Emergency Stabilization",
+          "action": "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition describes about 2 cm distal and 1 to 2 cm medial.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Risk Stratification",
+          "action": "IO can be used in preterm and term neonates, and all intravenous medications can be given by this route."
+        },
+        {
+          "step": "Definitive Medical Management",
+          "branch": "Targeted Therapy",
+          "action": "If the tuberosity cannot be felt, use the flat medial tibia 1.5 to 2 cm distal to the patella."
+        },
+        {
+          "step": "Monitoring & Escalation Thresholds",
+          "action": "Watch the limb for swelling, extravasation and poor perfusion throughout every infusion."
+        }
+      ],
+      "caption": "Evidence-based clinical decision pathway for intraosseous access in neonates."
+    }
+  ],
+  "tables": [
+    {
+      "id": "neonatal-intraosseous-access-summary-matrix",
+      "title": "Intraosseous access in neonates Clinical Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "At birth the umbilical vein is the primary emergency access; if umbilical venous access is not feasible, or the baby is outside the",
+          "Mandatory clinical criteria"
+        ],
+        [
+          "Immediate Priority",
+          "Preferred site: proximal tibia, flat anteromedial surface 1 to 2 cm below and 1 cm medial to the tibial tuberosity. NRP 8th edition",
+          "Time-critical initial resuscitation"
+        ],
+        [
+          "Key Investigations",
+          "Standard laboratory and imaging workup",
+          "Differentiates etiology and severity"
+        ],
+        [
+          "Targeted Treatment",
+          "Specialist consultation and organ support",
+          "Definitive care pathway"
+        ],
+        [
+          "Critical Pitfall",
+          "German surveillance of 161 neonates: IO access succeeded in 91%, at the first attempt in 75%; severe complications occurred in 6%.",
+          "Avoid preventable clinical error"
+        ]
+      ],
+      "caption": "Core clinical management matrix for intraosseous access in neonates."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,171 +1,405 @@
 {
- "id": "patent_foramen_ovale",
- "name": "Patent foramen ovale",
- "aliases": [
-  "PFO",
-  "persistent foramen ovale",
-  "interatrial communication (foramen ovale)"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A residual flap-like channel between the atrial septum primum and secundum that fails to seal after birth, present in roughly a quarter of adults",
-   "Usually an incidental finding of no consequence, but under conditions that transiently raise right atrial pressure it can permit right-to-left shunting",
-   "Chief clinical importance is paradoxical embolism, in which venous thrombus crosses to the systemic circulation and causes cryptogenic stroke, particularly in younger patients without other vascular risk factors",
-   "Frequently accompanied by an atrial septal aneurysm, and the combination increases the likelihood that the PFO is the culprit for stroke",
-   "Linked with migraine, especially migraine with aura, and with decompression illness in divers and platypnoea-orthodeoxia in selected patients",
-   "Detected by transthoracic or transoesophageal echocardiography with an agitated-saline bubble study, ideally combined with a Valsalva manoeuvre to provoke shunting",
-   "Percutaneous device closure reduces recurrent stroke in carefully selected younger patients with an otherwise unexplained (cryptogenic) stroke and a high-risk PFO"
+  "id": "patent_foramen_ovale",
+  "name": "Patent foramen ovale",
+  "aliases": [
+    "PFO",
+    "persistent foramen ovale",
+    "interatrial communication (foramen ovale)"
   ],
-  "pathophysiology": "The foramen ovale is a physiological right-to-left channel in fetal life; after birth the rise in left atrial pressure normally holds the flap of septum primum against septum secundum, and the two fuse. When fusion is incomplete a potential channel persists. Because left atrial pressure usually exceeds right, the flap stays shut, but a transient reversal of the interatrial pressure gradient, for example during straining, coughing, or the release phase of a Valsalva manoeuvre, can open the channel and allow right-to-left flow. This permits venous thrombus or other material to bypass the pulmonary filter and enter the systemic circulation, the mechanism of paradoxical embolism; an associated atrial septal aneurysm increases septal mobility and the propensity to shunt.",
-  "additionalDifferentials": [
-   "Secundum atrial septal defect",
-   "Sinus venosus atrial septal defect",
-   "Pulmonary arteriovenous malformation causing right-to-left shunt",
-   "Other cardioembolic sources such as atrial fibrillation or left atrial thrombus",
-   "Aortic arch or carotid atherosclerotic embolism",
-   "Hypercoagulable state causing arterial thrombosis"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography with agitated-saline contrast and Valsalva to demonstrate right-to-left shunting",
-   "Transoesophageal echocardiography to confirm the PFO, size the channel, and identify an atrial septal aneurysm",
-   "Transcranial Doppler with bubble contrast to detect and grade right-to-left shunt",
-   "Cardiac and neurological workup for other embolic sources, including prolonged rhythm monitoring for atrial fibrillation",
-   "Venous imaging and thrombophilia assessment when paradoxical embolism is suspected"
-  ],
-  "redFlags": [
-   "Cryptogenic ischaemic stroke or systemic embolism in a younger patient",
-   "Recurrent embolic events despite antithrombotic therapy",
-   "Platypnoea-orthodeoxia with hypoxaemia that worsens on sitting or standing",
-   "A large shunt with an associated atrial septal aneurysm in the context of unexplained stroke"
-  ],
-  "prognosis": "Most patent foramina are benign and never cause problems, but in those with a cryptogenic stroke and a high-risk PFO, appropriate device closure or antithrombotic therapy substantially reduces the risk of recurrent stroke.",
-  "pitfalls": [
-   "Attributing a stroke to a PFO without excluding atrial fibrillation and other embolic sources first",
-   "Performing a bubble study without an adequate Valsalva, so a shunt is missed",
-   "Offering closure to older patients whose stroke is more likely due to conventional vascular disease",
-   "Confusing a PFO with a true secundum atrial septal defect, which has different management"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines for the management of adult congenital heart disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "After a cryptogenic stroke with a high-risk foramen, offer percutaneous transcatheter device closure in appropriately selected younger patients following joint cardiology and neurology assessment",
-   "Provide secondary-prevention antithrombotic therapy, with antiplatelet agents or anticoagulation guided by the presence of venous thromboembolism or another embolic mechanism",
-   "Exclude competing embolic sources before attributing stroke to the foramen, including prolonged rhythm monitoring for atrial fibrillation and thrombophilia and venous imaging where paradoxical embolism is suspected",
-   "Modify conventional vascular risk factors to reduce overall stroke recurrence",
-   "Leave an incidental foramen without a clinical event untreated, reserving intervention for demonstrated paradoxical embolism",
-   "Consider closure in selected patients with refractory platypnoea-orthodeoxia or recurrent decompression illness in divers"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "patent_foramen_ovale-pathway",
-   "title": "Patent foramen ovale: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A residual flap-like channel between the atrial septum primum and secundum that fails to seal after birth, present in roughly a quarter of adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cryptogenic ischaemic stroke or systemic embolism in a younger patient",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography with agitated-saline contrast and Valsalva to demonstrate right-to-left shunting, Transoesophageal echocardiography to confirm the PFO, size the channel, and identify an atrial septal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: After a cryptogenic stroke with a high-risk foramen, offer percutaneous transcatheter device closure in appropriately selected younger patients following joint cardiology and neurology assessment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a stroke to a PFO without excluding atrial fibrillation and other embolic sources first"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of patent foramen ovale."
-  }
- ],
- "tables": [
-  {
-   "id": "patent_foramen_ovale-matrix",
-   "title": "Patent foramen ovale: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A residual flap-like channel between the atrial septum primum and secundum that fails to seal after birth, present in roughly a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A residual flap-like channel between the atrial septum primum and secundum that fails to seal after birth, present in roughly a quarter of adults",
+      "Usually an incidental finding of no consequence, but under conditions that transiently raise right atrial pressure it can permit right-to-left shunting",
+      "Chief clinical importance is paradoxical embolism, in which venous thrombus crosses to the systemic circulation and causes cryptogenic stroke, particularly in younger patients without other vascular risk factors",
+      "Frequently accompanied by an atrial septal aneurysm, and the combination increases the likelihood that the PFO is the culprit for stroke",
+      "Linked with migraine, especially migraine with aura, and with decompression illness in divers and platypnoea-orthodeoxia in selected patients",
+      "Detected by transthoracic or transoesophageal echocardiography with an agitated-saline bubble study, ideally combined with a Valsalva manoeuvre to provoke shunting",
+      "Percutaneous device closure reduces recurrent stroke in carefully selected younger patients with an otherwise unexplained (cryptogenic) stroke and a high-risk PFO"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography with agitated-saline contrast and Valsalva to demonstrate right-to-left shunting, Transoesophageal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The foramen ovale is a physiological right-to-left channel in fetal life; after birth the rise in left atrial pressure normally holds the flap of septum primum against septum secundum, and the two fuse. When fusion is incomplete a potential channel persists. Because left atrial pressure usually exceeds right, the flap stays shut, but a transient reversal of the interatrial pressure gradient, for example during straining, coughing, or the release phase of a Valsalva manoeuvre, can open the channel and allow right-to-left flow. This permits venous thrombus or other material to bypass the pulmonary filter and enter the systemic circulation, the mechanism of paradoxical embolism; an associated atrial septal aneurysm increases septal mobility and the propensity to shunt.",
+    "additionalDifferentials": [
+      "Secundum atrial septal defect",
+      "Sinus venosus atrial septal defect",
+      "Pulmonary arteriovenous malformation causing right-to-left shunt",
+      "Other cardioembolic sources such as atrial fibrillation or left atrial thrombus",
+      "Aortic arch or carotid atherosclerotic embolism",
+      "Hypercoagulable state causing arterial thrombosis"
     ],
-    [
-     "Primary Differentials",
-     "Secundum atrial septal defect, Sinus venosus atrial septal defect, Pulmonary arteriovenous malformation causing right-to-left",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography with agitated-saline contrast and Valsalva to demonstrate right-to-left shunting",
+      "Transoesophageal echocardiography to confirm the PFO, size the channel, and identify an atrial septal aneurysm",
+      "Transcranial Doppler with bubble contrast to detect and grade right-to-left shunt",
+      "Cardiac and neurological workup for other embolic sources, including prolonged rhythm monitoring for atrial fibrillation",
+      "Venous imaging and thrombophilia assessment when paradoxical embolism is suspected"
     ],
-    [
-     "Management Strategy",
-     "After a cryptogenic stroke with a high-risk foramen, offer percutaneous transcatheter device closure in appropriately selected",
-     "Core treatment modality"
+    "redFlags": [
+      "Cryptogenic ischaemic stroke or systemic embolism in a younger patient",
+      "Recurrent embolic events despite antithrombotic therapy",
+      "Platypnoea-orthodeoxia with hypoxaemia that worsens on sitting or standing",
+      "A large shunt with an associated atrial septal aneurysm in the context of unexplained stroke"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a stroke to a PFO without excluding atrial fibrillation and other embolic sources first",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patent foramina are benign and never cause problems, but in those with a cryptogenic stroke and a high-risk PFO, appropriate device closure or antithrombotic therapy substantially reduces the risk of recurrent stroke.",
+    "pitfalls": [
+      "Attributing a stroke to a PFO without excluding atrial fibrillation and other embolic sources first",
+      "Performing a bubble study without an adequate Valsalva, so a shunt is missed",
+      "Offering closure to older patients whose stroke is more likely due to conventional vascular disease",
+      "Confusing a PFO with a true secundum atrial septal defect, which has different management"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines for the management of adult congenital heart disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "After a cryptogenic stroke with a high-risk foramen, offer percutaneous transcatheter device closure in appropriately selected younger patients following joint cardiology and neurology assessment",
+      "Provide secondary-prevention antithrombotic therapy, with antiplatelet agents or anticoagulation guided by the presence of venous thromboembolism or another embolic mechanism",
+      "Exclude competing embolic sources before attributing stroke to the foramen, including prolonged rhythm monitoring for atrial fibrillation and thrombophilia and venous imaging where paradoxical embolism is suspected",
+      "Modify conventional vascular risk factors to reduce overall stroke recurrence",
+      "Leave an incidental foramen without a clinical event untreated, reserving intervention for demonstrated paradoxical embolism",
+      "Consider closure in selected patients with refractory platypnoea-orthodeoxia or recurrent decompression illness in divers"
     ]
-   ],
-   "caption": "Overview comparison matrix for patent foramen ovale."
-  }
- ],
- "diagrams": [
-  {
-   "id": "patent-foramen-ovale-real-image",
-   "title": "Patent foramen ovale: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "patent_foramen_ovale-pathway",
+      "title": "Patent foramen ovale: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A residual flap-like channel between the atrial septum primum and secundum that fails to seal after birth, present in roughly a quarter of adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cryptogenic ischaemic stroke or systemic embolism in a younger patient",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography with agitated-saline contrast and Valsalva to demonstrate right-to-left shunting, Transoesophageal echocardiography to confirm the PFO, size the channel, and identify an atrial septal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: After a cryptogenic stroke with a high-risk foramen, offer percutaneous transcatheter device closure in appropriately selected younger patients following joint cardiology and neurology assessment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a stroke to a PFO without excluding atrial fibrillation and other embolic sources first"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of patent foramen ovale."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "patent_foramen_ovale-matrix",
+      "title": "Patent foramen ovale: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A residual flap-like channel between the atrial septum primum and secundum that fails to seal after birth, present in roughly a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography with agitated-saline contrast and Valsalva to demonstrate right-to-left shunting, Transoesophageal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secundum atrial septal defect, Sinus venosus atrial septal defect, Pulmonary arteriovenous malformation causing right-to-left",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "After a cryptogenic stroke with a high-risk foramen, offer percutaneous transcatheter device closure in appropriately selected",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a stroke to a PFO without excluding atrial fibrillation and other embolic sources first",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for patent foramen ovale."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "patent_foramen_ovale-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic echo with agitated saline and Valsalva",
+          "cells": [
+            {
+              "text": "Right-to-left shunting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Confirms PFO and atrial septal aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transcranial Doppler with bubble contrast",
+          "cells": [
+            {
+              "text": "Grades right-to-left shunt"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patent_foramen_ovale-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secundum atrial septal defect",
+          "cells": [
+            {
+              "text": "A fixed defect rather than a flap; echo sizes and characterises it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary arteriovenous malformation",
+          "cells": [
+            {
+              "text": "Right-to-left shunt from pulmonary vessels; contrast timing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "patent_foramen_ovale-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transcatheter device closure",
+          "cells": [
+            {
+              "text": "1"
+            },
+            {
+              "text": "For selected younger patients after cryptogenic stroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombotic secondary prevention",
+          "cells": [
+            {
+              "text": "2"
+            },
+            {
+              "text": "Antiplatelet or anticoagulation guided by the embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Source exclusion first",
+          "cells": [
+            {
+              "text": "3"
+            },
+            {
+              "text": "Exclude atrial fibrillation and other embolic sources before attributing stroke to PFO"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "patent_foramen_ovale-dx-mgmt",
+      "title": "Diagnosis and management of Patent foramen ovale",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cryptogenic ischaemic stroke or embolism in a younger patient with a septal flap",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (recurrent embolism on antithrombotics or positional hypoxaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent stroke and cardiology review for recurrent embolic events",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bubble echo with Valsalva, TOE for PFO and aneurysm, transcranial Doppler, source work-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a high-risk PFO confirmed after atrial fibrillation and other sources excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider secundum ASD, pulmonary AVM, atrial fibrillation or aortic atheroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transcatheter device closure for selected younger patients after cryptogenic stroke",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiplatelet or anticoagulant secondary prevention guided by the embolic source",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Joint cardiology and neurology assessment before any closure decision",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid closure in older patients whose stroke more likely has a vascular cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most PFOs benign; closure or antithrombotics cut recurrence in high-risk cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

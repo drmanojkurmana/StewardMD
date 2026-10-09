@@ -1,173 +1,235 @@
 {
- "id": "bells_palsy",
- "name": "Bell's palsy",
- "aliases": [
-  "Bell palsy",
-  "idiopathic facial paralysis",
-  "acute peripheral facial palsy"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acute idiopathic lower motor neuron facial palsy that involves the whole of one side of the face, including the forehead",
-   "Forehead sparing points instead to an upper motor neuron (central) lesion, because the upper face has bilateral cortical representation, and warrants a search for a stroke or other central cause",
-   "Onset is usually rapid over hours to a couple of days, and patients may report ipsilateral ear or postauricular pain preceding weakness",
-   "Associated features can include altered taste, hyperacusis, and reduced tear production depending on the level of the lesion along the facial nerve",
-   "Incomplete eye closure risks exposure keratopathy, so eye protection with lubrication and taping is an essential part of care",
-   "Early corticosteroid treatment improves the likelihood of complete recovery, and antiviral therapy is sometimes added in severe cases",
-   "Bilateral facial palsy or additional cranial nerve involvement suggests an alternative diagnosis and requires further investigation",
-   "A vesicular rash in the ear or palate indicates Ramsay Hunt syndrome from herpes zoster rather than Bell's palsy"
+  "id": "bells_palsy",
+  "name": "Bell's palsy",
+  "aliases": [
+    "Bell palsy",
+    "idiopathic facial paralysis",
+    "acute peripheral facial palsy"
   ],
-  "pathophysiology": "Bell's palsy is an acute mononeuropathy of the facial (seventh cranial) nerve, widely attributed to inflammation and oedema of the nerve, often linked to reactivation of herpes simplex virus. Swelling of the nerve within the narrow bony facial canal causes compression, ischaemia, and demyelination, producing unilateral weakness of all facial muscles on the affected side. Depending on the segment involved, taste, lacrimation, and stapedius function may also be impaired.",
-  "additionalDifferentials": [
-   "Ischaemic or haemorrhagic stroke causing central facial weakness",
-   "Ramsay Hunt syndrome (herpes zoster oticus)",
-   "Lyme disease, especially with bilateral palsy",
-   "Cerebellopontine angle or parotid tumour compressing the facial nerve",
-   "Guillain-Barre syndrome and its variants",
-   "Otitis media, cholesteatoma, or skull base pathology; sarcoidosis"
-  ],
-  "additionalInvestigations": [
-   "Careful clinical examination to confirm the lower motor neuron pattern and exclude other cranial nerve involvement",
-   "Otoscopy and skin inspection for vesicles suggesting Ramsay Hunt syndrome",
-   "Serology for Lyme disease in endemic areas or with bilateral palsy",
-   "MRI of the brain and facial nerve when the presentation is atypical, progressive, or recurrent",
-   "Investigation for sarcoidosis or other systemic causes when clinically indicated"
-  ],
-  "redFlags": [
-   "Forehead-sparing weakness or other focal deficits suggesting a central cause such as stroke",
-   "Gradually progressive or recurrent weakness suggesting a compressive or neoplastic lesion",
-   "Bilateral facial palsy prompting evaluation for systemic disease",
-   "Failure of eye closure with corneal exposure risking sight-threatening keratopathy"
-  ],
-  "prognosis": "Most patients with Bell's palsy recover well, and the majority regain normal or near-normal function, particularly with early corticosteroid treatment and when weakness is incomplete. A minority, especially those with complete paralysis, are left with residual weakness, synkinesis, or contracture. Recovery beginning within the first few weeks predicts a favourable outcome.",
-  "pitfalls": [
-   "Missing a central cause by not checking for forehead involvement",
-   "Neglecting eye protection and allowing exposure keratopathy",
-   "Overlooking Ramsay Hunt syndrome or Lyme disease as specific, treatable causes",
-   "Failing to reassess a palsy that is progressive, recurrent, or slow to recover for an underlying structural lesion"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start oral corticosteroids (prednisolone) as early as possible after symptom onset to improve the likelihood of complete recovery",
-   "Add antiviral therapy such as aciclovir or valaciclovir alongside corticosteroids in severe or complete palsy",
-   "Protect the eye with lubricating drops and ointment, taping or patching it closed at night to prevent exposure keratopathy",
-   "Reassure that most patients recover well, and arrange follow-up to confirm recovery",
-   "Consider facial physiotherapy and neuromuscular retraining for slow or incomplete recovery, with attention to synkinesis",
-   "Treat Ramsay Hunt syndrome, if vesicles are found, with antivirals and corticosteroids",
-   "Refer for further evaluation and imaging if the palsy is atypical, progressive, recurrent, bilateral or fails to recover"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bells_palsy-pathway",
-   "title": "Bell's palsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acute idiopathic lower motor neuron facial palsy that involves the whole of one side of the face, including the forehead",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Forehead-sparing weakness or other focal deficits suggesting a central cause such as stroke",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful clinical examination to confirm the lower motor neuron pattern and exclude other cranial nerve involvement, Otoscopy and skin inspection for vesicles suggesting Ramsay Hunt syndrome, Serology for Lyme disease in"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start oral corticosteroids (prednisolone) as early as possible after symptom onset to improve the likelihood of complete recovery"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing a central cause by not checking for forehead involvement"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bell's palsy."
-  }
- ],
- "tables": [
-  {
-   "id": "bells_palsy-matrix",
-   "title": "Bell's palsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acute idiopathic lower motor neuron facial palsy that involves the whole of one side of the face, including the forehead",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acute idiopathic lower motor neuron facial palsy that involves the whole of one side of the face, including the forehead",
+      "Forehead sparing points instead to an upper motor neuron (central) lesion, because the upper face has bilateral cortical representation, and warrants a search for a stroke or other central cause",
+      "Onset is usually rapid over hours to a couple of days, and patients may report ipsilateral ear or postauricular pain preceding weakness",
+      "Associated features can include altered taste, hyperacusis, and reduced tear production depending on the level of the lesion along the facial nerve",
+      "Incomplete eye closure risks exposure keratopathy, so eye protection with lubrication and taping is an essential part of care",
+      "Early corticosteroid treatment improves the likelihood of complete recovery, and antiviral therapy is sometimes added in severe cases",
+      "Bilateral facial palsy or additional cranial nerve involvement suggests an alternative diagnosis and requires further investigation",
+      "A vesicular rash in the ear or palate indicates Ramsay Hunt syndrome from herpes zoster rather than Bell's palsy"
     ],
-    [
-     "Key Investigations",
-     "Careful clinical examination to confirm the lower motor neuron pattern and exclude other cranial nerve involvement, Otoscopy and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bell's palsy is an acute mononeuropathy of the facial (seventh cranial) nerve, widely attributed to inflammation and oedema of the nerve, often linked to reactivation of herpes simplex virus. Swelling of the nerve within the narrow bony facial canal causes compression, ischaemia, and demyelination, producing unilateral weakness of all facial muscles on the affected side. Depending on the segment involved, taste, lacrimation, and stapedius function may also be impaired.",
+    "additionalDifferentials": [
+      "Ischaemic or haemorrhagic stroke causing central facial weakness",
+      "Ramsay Hunt syndrome (herpes zoster oticus)",
+      "Lyme disease, especially with bilateral palsy",
+      "Cerebellopontine angle or parotid tumour compressing the facial nerve",
+      "Guillain-Barre syndrome and its variants",
+      "Otitis media, cholesteatoma, or skull base pathology; sarcoidosis"
     ],
-    [
-     "Primary Differentials",
-     "Ischaemic or haemorrhagic stroke causing central facial weakness, Ramsay Hunt syndrome (herpes zoster oticus), Lyme disease,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful clinical examination to confirm the lower motor neuron pattern and exclude other cranial nerve involvement",
+      "Otoscopy and skin inspection for vesicles suggesting Ramsay Hunt syndrome",
+      "Serology for Lyme disease in endemic areas or with bilateral palsy",
+      "MRI of the brain and facial nerve when the presentation is atypical, progressive, or recurrent",
+      "Investigation for sarcoidosis or other systemic causes when clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "Start oral corticosteroids (prednisolone) as early as possible after symptom onset to improve the likelihood of complete recovery",
-     "Core treatment modality"
+    "redFlags": [
+      "Forehead-sparing weakness or other focal deficits suggesting a central cause such as stroke",
+      "Gradually progressive or recurrent weakness suggesting a compressive or neoplastic lesion",
+      "Bilateral facial palsy prompting evaluation for systemic disease",
+      "Failure of eye closure with corneal exposure risking sight-threatening keratopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing a central cause by not checking for forehead involvement",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients with Bell's palsy recover well, and the majority regain normal or near-normal function, particularly with early corticosteroid treatment and when weakness is incomplete. A minority, especially those with complete paralysis, are left with residual weakness, synkinesis, or contracture. Recovery beginning within the first few weeks predicts a favourable outcome.",
+    "pitfalls": [
+      "Missing a central cause by not checking for forehead involvement",
+      "Neglecting eye protection and allowing exposure keratopathy",
+      "Overlooking Ramsay Hunt syndrome or Lyme disease as specific, treatable causes",
+      "Failing to reassess a palsy that is progressive, recurrent, or slow to recover for an underlying structural lesion"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start oral corticosteroids (prednisolone) as early as possible after symptom onset to improve the likelihood of complete recovery",
+      "Add antiviral therapy such as aciclovir or valaciclovir alongside corticosteroids in severe or complete palsy",
+      "Protect the eye with lubricating drops and ointment, taping or patching it closed at night to prevent exposure keratopathy",
+      "Reassure that most patients recover well, and arrange follow-up to confirm recovery",
+      "Consider facial physiotherapy and neuromuscular retraining for slow or incomplete recovery, with attention to synkinesis",
+      "Treat Ramsay Hunt syndrome, if vesicles are found, with antivirals and corticosteroids",
+      "Refer for further evaluation and imaging if the palsy is atypical, progressive, recurrent, bilateral or fails to recover"
     ]
-   ],
-   "caption": "Overview comparison matrix for bell's palsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bells-palsy-real-image",
-   "title": "Bell's palsy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "bells_palsy-pathway",
+      "title": "Bell's palsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acute idiopathic lower motor neuron facial palsy that involves the whole of one side of the face, including the forehead",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Forehead-sparing weakness or other focal deficits suggesting a central cause such as stroke",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful clinical examination to confirm the lower motor neuron pattern and exclude other cranial nerve involvement, Otoscopy and skin inspection for vesicles suggesting Ramsay Hunt syndrome, Serology for Lyme disease in"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start oral corticosteroids (prednisolone) as early as possible after symptom onset to improve the likelihood of complete recovery"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing a central cause by not checking for forehead involvement"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bell's palsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bells_palsy-matrix",
+      "title": "Bell's palsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acute idiopathic lower motor neuron facial palsy that involves the whole of one side of the face, including the forehead",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful clinical examination to confirm the lower motor neuron pattern and exclude other cranial nerve involvement, Otoscopy and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ischaemic or haemorrhagic stroke causing central facial weakness, Ramsay Hunt syndrome (herpes zoster oticus), Lyme disease,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start oral corticosteroids (prednisolone) as early as possible after symptom onset to improve the likelihood of complete recovery",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing a central cause by not checking for forehead involvement",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bell's palsy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bells_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Bell's palsy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical examination", "cells": [{"text": "Lower motor neuron pattern; forehead sparing points to a central lesion"}], "cite": "c1"},
+        {"parameter": "Otoscopy and skin inspection", "cells": [{"text": "Vesicles suggest Ramsay Hunt syndrome"}], "cite": "c1"},
+        {"parameter": "Lyme serology", "cells": [{"text": "Indicated in endemic areas or with bilateral palsy"}], "cite": "c1"},
+        {"parameter": "MRI of brain and facial nerve", "cells": [{"text": "Indicated when the presentation is atypical, progressive or recurrent"}], "cite": "c1"},
+        {"parameter": "Investigation for sarcoidosis", "cells": [{"text": "Only when clinically indicated"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bells_palsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Bell's palsy",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Ischaemic or haemorrhagic stroke", "cells": [{"text": "Forehead sparing indicates a central lesion"}], "cite": "c1"},
+        {"parameter": "Ramsay Hunt syndrome", "cells": [{"text": "Vesicular rash in the ear or palate"}], "cite": "c1"},
+        {"parameter": "Lyme disease", "cells": [{"text": "Especially with bilateral palsy"}], "cite": "c1"},
+        {"parameter": "Cerebellopontine angle or parotid tumour", "cells": [{"text": "Progressive or recurrent weakness suggests a compressive or neoplastic lesion"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bells_palsy-treatment",
+      "kind": "treatment",
+      "title": "Management options in Bell's palsy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Corticosteroids", "cells": [{"text": "Oral prednisolone as early as possible after symptom onset"}, {"text": "Improves the likelihood of complete recovery"}], "cite": "c1"},
+        {"parameter": "Antiviral therapy", "cells": [{"text": "Aciclovir or valaciclovir alongside corticosteroids"}, {"text": "For severe or complete palsy"}], "cite": "c1"},
+        {"parameter": "Eye protection", "cells": [{"text": "Lubricating drops and ointment; tape or patch the eye closed at night"}, {"text": "Prevents exposure keratopathy"}], "cite": "c1"},
+        {"parameter": "Reassurance and follow-up", "cells": [{"text": "Explain most patients recover well; arrange follow-up to confirm recovery"}, {"text": "Majority regain normal or near-normal function"}], "cite": "c1"},
+        {"parameter": "Facial physiotherapy", "cells": [{"text": "Neuromuscular retraining for slow or incomplete recovery"}, {"text": "Attention to synkinesis"}], "cite": "c1"},
+        {"parameter": "Ramsay Hunt syndrome", "cells": [{"text": "Antivirals and corticosteroids if vesicles are found"}, {"text": "Herpes zoster oticus"}], "cite": "c1"},
+        {"parameter": "Referral for further evaluation", "cells": [{"text": "Refer if atypical, progressive, recurrent, bilateral or not recovering"}, {"text": "Imaging to exclude an alternative cause"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bells_palsy-dx-mgmt",
+      "title": "Diagnosis and management of Bell's palsy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Acute unilateral facial weakness over hours to days, sometimes after ear pain", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: forehead sparing, bilateral palsy, or progressive or recurrent weakness?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: MRI and search for stroke, compressive tumour, Lyme or sarcoidosis", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Examine other cranial nerves; check for lower motor neuron pattern", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Otoscopy and skin inspection; Lyme serology if endemic or bilateral", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Vesicular rash in ear or palate (Ramsay Hunt syndrome)?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Antivirals and corticosteroids for herpes zoster oticus", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Oral prednisolone as early as possible; aciclovir or valaciclovir if severe", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Protect the eye with lubricating drops; tape or patch closed at night", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Most recover well; refer and image if not recovering or atypical", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

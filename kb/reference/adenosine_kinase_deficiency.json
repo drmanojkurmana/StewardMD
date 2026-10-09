@@ -1,176 +1,492 @@
 {
- "id": "adenosine_kinase_deficiency",
- "name": "Adenosine kinase deficiency",
- "aliases": [
-  "ADK deficiency",
-  "hypermethioninaemia due to adenosine kinase deficiency",
-  "adenosine kinase-related methylation disorder",
-  "ADK"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder of adenosine kinase, which phosphorylates adenosine to AMP and is closely coupled to the transmethylation cycle",
-   "Removing adenosine normally pulls S-adenosylhomocysteine hydrolysis forward, so enzyme deficiency disturbs methionine metabolism and produces hypermethioninaemia",
-   "Presents with a distinctive combination of encephalopathy, global developmental delay and hypotonia",
-   "Characteristic additional features include dysmorphic facies, hepatic dysfunction and hypoglycaemia, sometimes with hyperinsulinism",
-   "Cardiac and, less often, other organ involvement can accompany the neurological and hepatic picture",
-   "Biochemically there is raised methionine with elevated S-adenosylmethionine and S-adenosylhomocysteine and often increased adenosine",
-   "It belongs to the group of methylation-cycle defects that must be separated from the benign hypermethioninaemias",
-   "Management is generic and largely supportive, with a methionine-restricted diet used to lower the toxic accumulation"
+  "id": "adenosine_kinase_deficiency",
+  "name": "Adenosine kinase deficiency",
+  "aliases": [
+    "ADK deficiency",
+    "hypermethioninaemia due to adenosine kinase deficiency",
+    "adenosine kinase-related methylation disorder",
+    "ADK"
   ],
-  "pathophysiology": "Adenosine kinase salvages adenosine by phosphorylating it to AMP. This reaction is important not only for purine handling but also for transmethylation, because clearance of adenosine helps drive the hydrolysis of S-adenosylhomocysteine to homocysteine and adenosine. When adenosine kinase is deficient, adenosine accumulates and the transmethylation cycle is impeded, so S-adenosylhomocysteine, S-adenosylmethionine and methionine all rise and cellular methylation is impaired. The resulting disturbance of methylation-dependent processes, together with effects on hepatic and pancreatic function, is thought to underlie the encephalopathy, liver dysfunction, hypoglycaemia and dysmorphism.",
-  "additionalDifferentials": [
-   "S-adenosylhomocysteine hydrolase deficiency",
-   "Methionine adenosyltransferase I/III deficiency",
-   "Glycine N-methyltransferase deficiency",
-   "Congenital disorders of glycosylation presenting with dysmorphism and hepatopathy",
-   "Neonatal liver disease with secondary hypermethioninaemia",
-   "Congenital hyperinsulinism from other causes"
-  ],
-  "additionalInvestigations": [
-   "Plasma amino acids showing raised methionine",
-   "S-adenosylmethionine, S-adenosylhomocysteine and adenosine measurement",
-   "Liver function tests and coagulation studies",
-   "Blood glucose and insulin during hypoglycaemia",
-   "ADK gene sequencing for confirmation",
-   "Brain MRI to characterise the encephalopathy"
-  ],
-  "redFlags": [
-   "Recurrent or persistent hypoglycaemia, particularly with hyperinsulinism",
-   "Progressive encephalopathy or developmental regression",
-   "Significant hepatic dysfunction",
-   "Cardiac involvement compromising function"
-  ],
-  "prognosis": "The disorder is typically serious, with substantial neurodevelopmental impairment in many patients; treatment is largely supportive, and outcome depends on the severity of encephalopathy, liver disease and metabolic instability.",
-  "pitfalls": [
-   "Overlooking it among the hypermethioninaemias because the biochemical overlap with AHCY deficiency is close",
-   "Attributing the hypoglycaemia solely to hyperinsulinism without recognising the underlying metabolic disorder",
-   "Ascribing the dysmorphism and hepatopathy to an unrelated syndrome",
-   "Failing to measure the methylation-cycle metabolites needed to place the diagnosis"
-  ],
-  "references": [
-   "Scriver's OMMBID",
-   "Bjursell MK et al. Adenosine kinase deficiency disrupts the methionine cycle",
-   "Mudd SH. Hypermethioninemias of genetic and non-genetic origin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive multidisciplinary care, as no disease-modifying therapy is established",
-   "Consider dietary methionine restriction to lower the hypermethioninaemia and abnormal transmethylation metabolites",
-   "Prevent and treat hypoglycaemia by maintaining glucose supply, using diazoxide where hyperinsulinism is demonstrated",
-   "Control seizures with anticonvulsants and manage the encephalopathy supportively",
-   "Monitor and support hepatic function and correct coagulopathy",
-   "Assess for cardiac involvement and provide developmental therapy and physiotherapy for hypotonia and delay",
-   "Offer genetic counselling and family testing for this autosomal recessive disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adenosine_kinase_deficiency-pathway",
-   "title": "Adenosine kinase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder of adenosine kinase, which phosphorylates adenosine to AMP and is closely coupled to the transmethylation cycle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or persistent hypoglycaemia, particularly with hyperinsulinism",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma amino acids showing raised methionine, S-adenosylmethionine, S-adenosylhomocysteine and adenosine measurement, Liver function tests and coagulation studies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive multidisciplinary care, as no disease-modifying therapy is established"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking it among the hypermethioninaemias because the biochemical overlap with AHCY deficiency is close"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of adenosine kinase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "adenosine_kinase_deficiency-matrix",
-   "title": "Adenosine kinase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder of adenosine kinase, which phosphorylates adenosine to AMP and is closely coupled to the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder of adenosine kinase, which phosphorylates adenosine to AMP and is closely coupled to the transmethylation cycle",
+      "Removing adenosine normally pulls S-adenosylhomocysteine hydrolysis forward, so enzyme deficiency disturbs methionine metabolism and produces hypermethioninaemia",
+      "Presents with a distinctive combination of encephalopathy, global developmental delay and hypotonia",
+      "Characteristic additional features include dysmorphic facies, hepatic dysfunction and hypoglycaemia, sometimes with hyperinsulinism",
+      "Cardiac and, less often, other organ involvement can accompany the neurological and hepatic picture",
+      "Biochemically there is raised methionine with elevated S-adenosylmethionine and S-adenosylhomocysteine and often increased adenosine",
+      "It belongs to the group of methylation-cycle defects that must be separated from the benign hypermethioninaemias",
+      "Management is generic and largely supportive, with a methionine-restricted diet used to lower the toxic accumulation"
     ],
-    [
-     "Key Investigations",
-     "Plasma amino acids showing raised methionine, S-adenosylmethionine, S-adenosylhomocysteine and adenosine measurement, Liver",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Adenosine kinase salvages adenosine by phosphorylating it to AMP. This reaction is important not only for purine handling but also for transmethylation, because clearance of adenosine helps drive the hydrolysis of S-adenosylhomocysteine to homocysteine and adenosine. When adenosine kinase is deficient, adenosine accumulates and the transmethylation cycle is impeded, so S-adenosylhomocysteine, S-adenosylmethionine and methionine all rise and cellular methylation is impaired. The resulting disturbance of methylation-dependent processes, together with effects on hepatic and pancreatic function, is thought to underlie the encephalopathy, liver dysfunction, hypoglycaemia and dysmorphism.",
+    "additionalDifferentials": [
+      "S-adenosylhomocysteine hydrolase deficiency",
+      "Methionine adenosyltransferase I/III deficiency",
+      "Glycine N-methyltransferase deficiency",
+      "Congenital disorders of glycosylation presenting with dysmorphism and hepatopathy",
+      "Neonatal liver disease with secondary hypermethioninaemia",
+      "Congenital hyperinsulinism from other causes"
     ],
-    [
-     "Primary Differentials",
-     "S-adenosylhomocysteine hydrolase deficiency, Methionine adenosyltransferase I/III deficiency, Glycine N-methyltransferase",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma amino acids showing raised methionine",
+      "S-adenosylmethionine, S-adenosylhomocysteine and adenosine measurement",
+      "Liver function tests and coagulation studies",
+      "Blood glucose and insulin during hypoglycaemia",
+      "ADK gene sequencing for confirmation",
+      "Brain MRI to characterise the encephalopathy"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive multidisciplinary care, as no disease-modifying therapy is established",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or persistent hypoglycaemia, particularly with hyperinsulinism",
+      "Progressive encephalopathy or developmental regression",
+      "Significant hepatic dysfunction",
+      "Cardiac involvement compromising function"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking it among the hypermethioninaemias because the biochemical overlap with AHCY deficiency is close",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is typically serious, with substantial neurodevelopmental impairment in many patients; treatment is largely supportive, and outcome depends on the severity of encephalopathy, liver disease and metabolic instability.",
+    "pitfalls": [
+      "Overlooking it among the hypermethioninaemias because the biochemical overlap with AHCY deficiency is close",
+      "Attributing the hypoglycaemia solely to hyperinsulinism without recognising the underlying metabolic disorder",
+      "Ascribing the dysmorphism and hepatopathy to an unrelated syndrome",
+      "Failing to measure the methylation-cycle metabolites needed to place the diagnosis"
+    ],
+    "references": [
+      "Scriver's OMMBID",
+      "Bjursell MK et al. Adenosine kinase deficiency disrupts the methionine cycle",
+      "Mudd SH. Hypermethioninemias of genetic and non-genetic origin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive multidisciplinary care, as no disease-modifying therapy is established",
+      "Consider dietary methionine restriction to lower the hypermethioninaemia and abnormal transmethylation metabolites",
+      "Prevent and treat hypoglycaemia by maintaining glucose supply, using diazoxide where hyperinsulinism is demonstrated",
+      "Control seizures with anticonvulsants and manage the encephalopathy supportively",
+      "Monitor and support hepatic function and correct coagulopathy",
+      "Assess for cardiac involvement and provide developmental therapy and physiotherapy for hypotonia and delay",
+      "Offer genetic counselling and family testing for this autosomal recessive disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for adenosine kinase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adenosine-kinase-deficiency-real-image",
-   "title": "Adenosine kinase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "adenosine_kinase_deficiency-pathway",
+      "title": "Adenosine kinase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder of adenosine kinase, which phosphorylates adenosine to AMP and is closely coupled to the transmethylation cycle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or persistent hypoglycaemia, particularly with hyperinsulinism",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma amino acids showing raised methionine, S-adenosylmethionine, S-adenosylhomocysteine and adenosine measurement, Liver function tests and coagulation studies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive multidisciplinary care, as no disease-modifying therapy is established"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking it among the hypermethioninaemias because the biochemical overlap with AHCY deficiency is close"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of adenosine kinase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adenosine_kinase_deficiency-matrix",
+      "title": "Adenosine kinase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder of adenosine kinase, which phosphorylates adenosine to AMP and is closely coupled to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma amino acids showing raised methionine, S-adenosylmethionine, S-adenosylhomocysteine and adenosine measurement, Liver",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "S-adenosylhomocysteine hydrolase deficiency, Methionine adenosyltransferase I/III deficiency, Glycine N-methyltransferase",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive multidisciplinary care, as no disease-modifying therapy is established",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking it among the hypermethioninaemias because the biochemical overlap with AHCY deficiency is close",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for adenosine kinase deficiency."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adenosine_kinase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Raised methionine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S-adenosylmethionine, S-adenosylhomocysteine and adenosine measurement",
+          "cells": [
+            {
+              "text": "Transmethylation metabolites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and coagulation studies",
+          "cells": [
+            {
+              "text": "Hepatic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and insulin during hypoglycaemia",
+          "cells": [
+            {
+              "text": "Hyperinsulinism when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADK gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Characterises the encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenosine_kinase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "S-adenosylhomocysteine hydrolase (AHCY) deficiency",
+          "cells": [
+            {
+              "text": "Close biochemical overlap in methionine metabolism"
+            },
+            {
+              "text": "ADK gene sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital disorders of glycosylation",
+          "cells": [
+            {
+              "text": "Dysmorphism and hepatopathy"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenosine_kinase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive multidisciplinary care",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy is established"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary methionine restriction",
+          "cells": [
+            {
+              "text": "Lowers hypermethioninaemia and transmethylation metabolites"
+            },
+            {
+              "text": "Considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose supply; diazoxide where hyperinsulinism is shown",
+          "cells": [
+            {
+              "text": "Prevents and treats hypoglycaemia"
+            },
+            {
+              "text": "Diazoxide for demonstrated hyperinsulinism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsants",
+          "cells": [
+            {
+              "text": "Seizures"
+            },
+            {
+              "text": "Encephalopathy managed supportively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic monitoring and correction of coagulopathy",
+          "cells": [
+            {
+              "text": "Hepatic dysfunction"
+            },
+            {
+              "text": "Liver support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment, developmental therapy and physiotherapy",
+          "cells": [
+            {
+              "text": "Cardiac involvement, hypotonia and delay"
+            },
+            {
+              "text": "Developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder"
+            },
+            {
+              "text": "Family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adenosine_kinase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Adenosine kinase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Encephalopathy, global delay and hypotonia with dysmorphic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Recurrent hypoglycaemia, hyperinsulinism or hepatic dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent glucose support and hepatology review; diazoxide if hyperinsulinism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma amino acids for methionine; SAM, SAH, adenosine and LFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised methionine with transmethylation abnormality confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ADK gene sequencing; brain MRI for encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review AHCY, MAT and GNMT deficiency, and glycosylation disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive multidisciplinary care; no disease-modifying therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider dietary methionine restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticonvulsants for seizures; hepatic and cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Typically serious neurodevelopmental impairment; outcome depends on severity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

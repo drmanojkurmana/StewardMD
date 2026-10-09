@@ -234,25 +234,1434 @@
       "caption": "Diagnostic and clinical overview matrix for sle / autoimmune flare."
     }
   ],
-  "diagrams": [
+  "diagrams": [],
+  "citations": [
     {
-      "id": "sle-flare-real-image",
-      "title": "SLE / autoimmune flare: Diagnostic Imaging Evaluation",
-      "type": "xray",
-      "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-      "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-      "annotations": [
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 283-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Merck Manual Professional, Systemic Lupus Erythematosus",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/autoimmune-rheumatic-disorders/systemic-lupus-erythematosus-sle",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 331-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c7",
+      "label": "Tables PDF, Table 314-17",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c8",
+      "label": "Tables PDF, Table 319-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c9",
+      "label": "Tables PDF, Table 285-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sle_flare-diagnostic",
+      "kind": "diagnostic",
+      "title": "Confirming SLE and grading a flare",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
         {
-          "label": "Cardiothoracic Ratio",
-          "description": "Heart size, mediastinal width, and great vessel contours."
+          "parameter": "ANA (EULAR/ACR 2019 entry criterion)",
+          "cells": [
+            {
+              "text": "Titre at least 1:80"
+            },
+            {
+              "text": "Required before scoring; positive in about 95% of SLE"
+            }
+          ],
+          "cite": "c4"
         },
         {
-          "label": "Visceral Fields",
-          "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+          "parameter": "EULAR/ACR 2019 weighted score",
+          "unit": "points",
+          "cells": [
+            {
+              "text": ">=10 with at least one clinical criterion",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Classifies as SLE; built for research, not diagnosis"
+            }
+          ],
+          "cite": "c4"
         },
         {
-          "label": "Bony Thorax & Soft Tissues",
-          "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+          "parameter": "ANA rim pattern (anti-dsDNA)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Present in about 50% of SLE",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Highly specific for SLE"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled pattern, anti-Sm",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 30% of SLE",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Most specific SLE antibody"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diffuse pattern, antihistone",
+          "cells": [
+            {
+              "text": "Antihistone antibodies"
+            },
+            {
+              "text": "Suggests drug-induced lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-dsDNA and C3/C4 trend",
+          "cells": [
+            {
+              "text": "Rising anti-dsDNA with falling C3/C4"
+            },
+            {
+              "text": "{{hy:Warns of active or impending nephritis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP",
+          "cells": [
+            {
+              "text": "Often normal in a flare"
+            },
+            {
+              "text": "High CRP suggests infection or serositis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Urine protein",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": ">500 mg/day, haematuria or red cell casts",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "Indication for renal biopsy"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Lupus nephritis class on biopsy",
+          "cells": [
+            {
+              "text": "Classes I to VI, mesangial to sclerotic"
+            },
+            {
+              "text": "Class III or IV (proliferative) needs aggressive therapy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "SLEDAI, low disease activity",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "0 to 4",
+              "range": [
+                0,
+                4
+              ]
+            },
+            {
+              "text": "Treatment target with prednisone 5 mg/day or less"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild flare (EULAR tier)",
+          "cells": [
+            {
+              "text": "Rash 9% BSA or less, platelets 50 to 100, SLEDAI 6 or less"
+            },
+            {
+              "text": "Constitutional symptoms, mild arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate flare (EULAR tier)",
+          "cells": [
+            {
+              "text": "Rash 9 to 18% BSA, platelets 20 to 50, SLEDAI 7 to 12"
+            },
+            {
+              "text": "RA-like arthritis, serositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe flare (EULAR tier)",
+          "cells": [
+            {
+              "text": "Platelets <20, rash >18% BSA, SLEDAI >12"
+            },
+            {
+              "text": "{{hy:Organ-threatening: nephritis, cerebritis, myelitis, pneumonitis, mesenteric vasculitis}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Platelet values are x10^9/L. Anti-dsDNA prevalence differs: the tables PDF gives about 50% of SLE, Harrison gives about 40 to 70%. Merck notes anti-dsDNA and complement may not track non-renal flares."
+    },
+    {
+      "id": "sle_flare-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from an SLE flare",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infection (pneumonia, sepsis, endocarditis)",
+          "cells": [
+            {
+              "text": "{{hy:Can mimic flare cytopenias, fever and pneumonitis; exclude before escalating}}"
+            },
+            {
+              "text": "Cultures and imaging; high CRP favours infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced lupus",
+          "cells": [
+            {
+              "text": "Hydralazine, procainamide, isoniazid, anti-TNF; rarely renal or CNS"
+            },
+            {
+              "text": "Antihistone positive, anti-dsDNA usually absent; resolves off drug"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Glucocorticoid-induced psychosis",
+          "cells": [
+            {
+              "text": "Psychosis after steroid escalation"
+            },
+            {
+              "text": "Neither shows marked CSF or imaging change; clinical judgement"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Avascular necrosis",
+          "cells": [
+            {
+              "text": "Pain out of proportion in one hip, shoulder or knee after steroids"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid arthritis or rhupus",
+          "cells": [
+            {
+              "text": "Erosive arthritis; lupus arthritis is non-erosive"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Isolated low platelets without SLE features"
+            },
+            {
+              "text": "Anti-dsDNA or anti-Sm positivity favours SLE"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Rosacea",
+          "cells": [
+            {
+              "text": "Involves nasolabial folds, papules and pustules"
+            },
+            {
+              "text": "Lupus malar rash spares nasolabial folds"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sle_flare-treatment",
+      "kind": "treatment",
+      "title": "Treating an SLE flare by severity",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "All patients, background therapy"
+            },
+            {
+              "text": "5 mg/kg actual body weight daily, maximum 400 mg/day; yearly eye screening"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Mild arthralgia"
+            },
+            {
+              "text": "As needed; avoid chronic use"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Mild to moderate disease needing steroids"
+            },
+            {
+              "text": "Methotrexate 15 to 20 mg weekly, azathioprine 2 mg/kg daily, or mycophenolate 1 to 1.5 g twice daily"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Belimumab",
+          "cells": [
+            {
+              "text": "Active disease despite standard therapy; nephritis add-on"
+            },
+            {
+              "text": "10 mg/kg IV every 2 weeks for 3 doses then monthly, or 200 mg SC weekly"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "IV methylprednisolone pulse",
+          "cells": [
+            {
+              "text": "Severe, organ-threatening flare"
+            },
+            {
+              "text": "{{hy:1 g over 1 hour on 3 consecutive days}}; exclude infection first"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oral prednisone",
+          "cells": [
+            {
+              "text": "Severe disease after or instead of pulse"
+            },
+            {
+              "text": "0.5 to 1 mg/kg daily (usually 40 to 60 mg), taper over about 6 months to 7.5 mg or less"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Cyclophosphamide",
+          "cells": [
+            {
+              "text": "Class III or IV nephritis, organ- or life-threatening disease"
+            },
+            {
+              "text": "Euro-Lupus 500 mg IV every 2 weeks for 6 doses; NIH 0.75 to 1 g/m2 monthly for 6 months"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Mycophenolate mofetil induction",
+          "cells": [
+            {
+              "text": "Lupus nephritis"
+            },
+            {
+              "text": "Up to 3 g/day in 2 doses; may add voclosporin 23.7 mg twice daily"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Anifrolumab",
+          "cells": [
+            {
+              "text": "Active non-renal disease"
+            },
+            {
+              "text": "300 mg IV every 4 weeks; not studied in severe renal or neuropsychiatric disease"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            },
+            {
+              "text": "1 g on days 1 and 15"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Severe thrombocytopenia or haemolysis",
+          "cells": [
+            {
+              "text": "Haematological flare"
+            },
+            {
+              "text": "Prednisone 1 mg/kg daily (max 80 mg) plus azathioprine or mycophenolate; IVIG 400 mg/kg daily for 5 days or 1 g/kg daily for 2 days"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Response typically takes 4 to 12 weeks. Glucocorticoid damage accrues even at 5 mg/day prednisone equivalent, so taper is a goal."
+    },
+    {
+      "id": "sle_flare-ddx-2",
+      "kind": "ddx",
+      "title": "Drugs linked to lupus-like illness",
+      "rowHeader": "Condition",
+      "columns": [
+        "Drugs or agents listed"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced lupus",
+          "cells": [
+            {
+              "text": "hydralazine, procainamide, quinidine, phenytoin, carbamazepine, methyldopa, isoniazid, chlorpromazine, lithium, penicillamine, tetracyclines, TNF inhibitors, ACE inhibitors, ticlopidine"
+            }
+          ],
+          "cite": "c5"
+        }
+      ]
+    },
+    {
+      "id": "sle_flare-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "HLA markers associated with disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Marker",
+        "Gene",
+        "Strength of association"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "B*2702, B*2704, B*2705"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Reiter's syndrome",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Acute anterior uveitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Reactive arthritis (Yersinia, Salmonella, Shigella, Chlamydia)",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Psoriatic spondylitis",
+          "cells": [
+            {
+              "text": "B27"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular",
+          "cells": [
+            {
+              "text": "DR8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Juvenile arthritis, pauciarticular (second marker)",
+          "cells": [
+            {
+              "text": "DR5"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404, DRB1*0405"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Sjogren's syndrome",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, White patients",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus, Japanese patients",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease)",
+          "cells": [
+            {
+              "text": "DQ2"
+            },
+            {
+              "text": "DQA1*0501"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Gluten-sensitive enteropathy (celiac disease), second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DQB1*0201"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Chronic active hepatitis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Dermatitis herpetiformis",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Psoriasis vulgaris",
+          "cells": [
+            {
+              "text": "Cw6"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Pemphigus vulgaris",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0402"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Pemphigus vulgaris, second marker",
+          "cells": [
+            {
+              "text": "DQ1"
+            },
+            {
+              "text": "DQB1*0503"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Bullous pemphigoid variant",
+          "cells": [
+            {
+              "text": "DQ7"
+            },
+            {
+              "text": "DQB1*0301"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus",
+          "cells": [
+            {
+              "text": "DQ8"
+            },
+            {
+              "text": "DQB1*0302"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, second marker",
+          "cells": [
+            {
+              "text": "DR4"
+            },
+            {
+              "text": "DRB1*0401, DRB1*0404"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, third marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Type 1 diabetes mellitus, fourth marker",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "Negative association (protective), footnote a"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves')",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hyperthyroidism (Graves'), second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Hyperthyroidism (Japanese patients)",
+          "cells": [
+            {
+              "text": "B35"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "B8"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Myasthenia gravis, second marker",
+          "cells": [
+            {
+              "text": "DR3"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "+"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Multiple sclerosis",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DRB1*1501"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Multiple sclerosis, second gene",
+          "cells": [
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "DRB5*0101"
+            },
+            {
+              "text": "Not listed"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Behcet's disease",
+          "cells": [
+            {
+              "text": "B51"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "B47"
+            },
+            {
+              "text": "21-OH (Cyp21B)"
+            },
+            {
+              "text": "+++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "DQB1*0602"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Goodpasture's syndrome (anti-GBM)",
+          "cells": [
+            {
+              "text": "DR2"
+            },
+            {
+              "text": "Not listed"
+            },
+            {
+              "text": "++"
+            }
+          ],
+          "cite": "c6"
+        },
+        {
+          "parameter": "Abacavir hypersensitivity",
+          "cells": [
+            {
+              "text": "B57"
+            },
+            {
+              "text": "B*5701"
+            },
+            {
+              "text": "++++"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "Table continues on the next page (adrenal insufficiency row onward). The printed footnote a for the negative association and the key for the number of plus signs are not shown on the pages."
+    },
+    {
+      "id": "sle_flare-diagnostic-3",
+      "kind": "diagnostic",
+      "title": "Complement component deficiencies and the diseases they cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Associated diseases"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic pathway: C1q, C1r, C1s, C4",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Classic pathway: C2",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), few with pyogenic infections"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Classic pathway: C1 inhibitor",
+          "cells": [
+            {
+              "text": "Rare immune-complex disease, few with pyogenic infections"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "C3 and alternative pathway: C3",
+          "cells": [
+            {
+              "text": "Immune-complex syndromes (see footnote), pyogenic infections"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor D",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "C3 and alternative pathway: properdin",
+          "cells": [
+            {
+              "text": "Neisseria infections"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor I",
+          "cells": [
+            {
+              "text": "Pyogenic infections"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "C3 and alternative pathway: factor H",
+          "cells": [
+            {
+              "text": "Hemolytic uremic syndrome"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Membrane attack complex: C5, C6, C7, C8",
+          "cells": [
+            {
+              "text": "Recurrent Neisseria infections, immune-complex disease"
+            }
+          ],
+          "cite": "c7"
+        },
+        {
+          "parameter": "Membrane attack complex: C9",
+          "cells": [
+            {
+              "text": "Rare Neisseria infections"
+            }
+          ],
+          "cite": "c7"
+        }
+      ],
+      "footnote": "Immune-complex syndromes here include systemic lupus erythematosus and SLE-like syndromes, glomerulonephritis and vasculitis syndromes."
+    },
+    {
+      "id": "sle_flare-diagnostic-4",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for systemic lupus erythematosus",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Definition"
+      ],
+      "rows": [
+        {
+          "parameter": "Malar rash",
+          "cells": [
+            {
+              "text": "Fixed erythema, flat or raised, over the malar eminences."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Discoid rash",
+          "cells": [
+            {
+              "text": "Erythematous circular raised patches with adherent keratotic scaling and follicular plugging; atrophic scarring may occur."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Photosensitivity",
+          "cells": [
+            {
+              "text": "Rash after exposure to ultraviolet light."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Oral ulcers",
+          "cells": [
+            {
+              "text": "Oral or nasopharyngeal ulcers observed by a physician."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Arthritis",
+          "cells": [
+            {
+              "text": "Nonerosive arthritis of two or more peripheral joints with tenderness, swelling, or effusion."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Serositis",
+          "cells": [
+            {
+              "text": "Pleuritis or pericarditis documented by ECG, rub, or evidence of effusion."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Renal disorder",
+          "cells": [
+            {
+              "text": "Proteinuria above 0.5 g/d, or a urine dipstick grade (printed value unreadable), or cellular casts."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Neurologic disorder",
+          "cells": [
+            {
+              "text": "Seizures or psychosis without other cause."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Hematologic disorder",
+          "cells": [
+            {
+              "text": "Hemolytic anemia, or leukopenia (below 4000/uL), or lymphopenia (below 1500/uL), or thrombocytopenia (below 100,000/uL), in the absence of offending drugs."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Immunologic disorder",
+          "cells": [
+            {
+              "text": "Anti-dsDNA, anti-Sm, and/or antiphospholipid antibodies."
+            }
+          ],
+          "cite": "c8"
+        },
+        {
+          "parameter": "Antinuclear antibodies",
+          "cells": [
+            {
+              "text": "Abnormal ANA titer by immunofluorescence or equivalent assay at any time, without drugs known to induce ANA."
+            }
+          ],
+          "cite": "c8"
+        }
+      ],
+      "footnote": "If 4 or more of these criteria are well documented at any time in a patient's history, SLE is likely. Specificity is about 95%; sensitivity is about 75%."
+    },
+    {
+      "id": "sle_flare-diagnostic-5",
+      "kind": "diagnostic",
+      "title": "Indications for corticosteroids and immunosuppressives in interstitial nephritis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Settings"
+      ],
+      "rows": [
+        {
+          "parameter": "Absolute indications",
+          "cells": [
+            {
+              "text": "Sjogren's syndrome; sarcoidosis; SLE interstitial nephritis; adults with TINU; idiopathic and other granulomatous interstitial nephritis"
+            }
+          ],
+          "cite": "c9"
+        },
+        {
+          "parameter": "Relative indications",
+          "cells": [
+            {
+              "text": "Drug-induced or idiopathic acute interstitial nephritis with rapid progression of renal failure, diffuse infiltrates on biopsy, impending need for dialysis, or delayed recovery; children with TINU; postinfectious acute interstitial nephritis with delayed recovery (marked with a question mark in the source)"
+            }
+          ],
+          "cite": "c9"
+        }
+      ],
+      "footnote": "The PDF text has a rendering artifact before the last three relative-indication items."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sle_flare-dx-mgmt",
+      "title": "Diagnosis and management of an SLE flare",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known or suspected SLE with new symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CBC, creatinine, urinalysis and UPCR, anti-dsDNA, C3/C4, CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infection possible (fever, high CRP, new infiltrate)?",
+          "cite": "c4"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cultures and imaging; treat infection before escalating immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organ-threatening disease (renal, CNS, lung, gut, platelets under 20)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Proteinuria over 500 mg/day or active sediment?",
+          "cite": "c4"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Renal biopsy; class III or IV gets induction therapy",
+          "cite": "c4"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV methylprednisolone 1 g daily for 3 days",
+          "cite": "c4"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Induction: cyclophosphamide or mycophenolate, then taper steroids",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Mild or moderate flare: optimise hydroxychloroquine, short steroid",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Add methotrexate, azathioprine, mycophenolate or belimumab if needed",
+          "cite": "c4"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
         }
       ]
     }

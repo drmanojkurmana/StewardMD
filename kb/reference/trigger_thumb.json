@@ -1,175 +1,482 @@
 {
- "id": "trigger_thumb",
- "name": "Trigger thumb",
- "aliases": [
-  "stenosing tenosynovitis of the thumb",
-  "pollex flexus"
- ],
- "class": "non_infective",
- "system": "musculoskeletal",
- "specialty": "hand and plastic surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Stenosing tenosynovitis of flexor pollicis longus at the first annular (A1) pulley, causing catching, locking or triggering of the thumb interphalangeal joint on flexion and extension.",
-   "A tender palpable nodule (Notta node) is often felt over the A1 pulley at the metacarpophalangeal flexion crease of the thumb.",
-   "Adult disease is most common in middle-aged women and is associated with diabetes mellitus, rheumatoid arthritis, hypothyroidism and repetitive gripping; diabetic triggering responds less well to conservative measures.",
-   "Paediatric (congenital) trigger thumb typically presents as a fixed flexion deformity of the interphalangeal joint rather than true triggering, and a proportion resolve spontaneously in early childhood.",
-   "Grading progresses from painful triggering, to demonstrable catching that self-corrects, to locking requiring passive release, and finally to a fixed contracture.",
-   "First-line management in adults is activity modification, splinting and corticosteroid injection into the flexor sheath; injection is highly effective though less so in diabetics.",
-   "Surgical A1 pulley release (open or percutaneous) is definitive for refractory or recurrent cases; the radial digital nerve to the thumb lies close to the sheath and is at risk.",
-   "Persistent triggering after apparently adequate release should raise suspicion of an incompletely divided pulley or an unrecognised trigger at a more distal site."
+  "id": "trigger_thumb",
+  "name": "Trigger thumb",
+  "aliases": [
+    "stenosing tenosynovitis of the thumb",
+    "pollex flexus"
   ],
-  "pathophysiology": "Trigger thumb arises from a size mismatch between flexor pollicis longus and the mouth of the fibro-osseous A1 pulley. Repetitive loading and shear at the pulley provoke fibrocartilaginous metaplasia and thickening of the pulley together with tenosynovial hyperplasia of the tendon, producing a localised nodule. As the thickened tendon segment is forced through the constricted pulley it catches, generating the characteristic triggering; progressive stenosis leads to locking and, ultimately, a fixed flexion contracture. Systemic conditions such as diabetes mellitus promote glycation and matrix changes that predispose to and perpetuate the stenosis.",
-  "additionalDifferentials": [
-   "Thumb metacarpophalangeal or interphalangeal joint osteoarthritis",
-   "Flexor pollicis longus tendon rupture or partial laceration",
-   "De Quervain tenosynovitis",
-   "Sesamoid pathology at the thumb MCP joint",
-   "Dupuytren nodule of the thumb ray",
-   "Retained foreign body or infective flexor tenosynovitis",
-   "Congenital clasped thumb in the paediatric setting"
-  ],
-  "additionalInvestigations": [
-   "Diagnosis is clinical from history and examination of triggering and the Notta node",
-   "Ultrasound to confirm pulley thickening, tenosynovitis or a discrete nodule in equivocal cases",
-   "Screening for diabetes mellitus in recurrent or multi-digit disease",
-   "Thyroid function assessment where clinically suggested",
-   "Plain radiographs if concomitant joint arthritis or bony pathology is suspected",
-   "Inflammatory markers and rheumatoid screen when an inflammatory arthropathy is considered",
-   "Documentation of triggering grade and interphalangeal joint range of motion"
-  ],
-  "redFlags": [
-   "Fixed interphalangeal flexion contracture that will not passively extend",
-   "Signs of infective flexor tenosynovitis (fusiform swelling, pain on passive extension, disproportionate tenderness)",
-   "Loss of active interphalangeal flexion suggesting tendon rupture rather than triggering",
-   "Sensory disturbance in the thumb suggesting digital nerve involvement"
-  ],
-  "prognosis": "Generally excellent; most adults respond to corticosteroid injection and the majority of the remainder are cured by A1 pulley release, while a substantial proportion of congenital cases resolve spontaneously or after release. Diabetic patients have higher recurrence and lower injection success.",
-  "pitfalls": [
-   "Injecting or releasing without recognising an associated fixed contracture that requires additional therapy or splinting",
-   "Injuring the radial digital nerve, which crosses obliquely near the thumb A1 pulley, during percutaneous release",
-   "Dividing the oblique pulley in error, which can cause flexor pollicis longus bowstringing and loss of interphalangeal flexion power",
-   "Attributing a locked thumb to triggering when the underlying problem is joint arthritis or tendon rupture",
-   "Assuming poor injection response in diabetics reflects wrong diagnosis rather than expected reduced efficacy"
-  ],
-  "references": [
-   "Green's Operative Hand Surgery",
-   "British Society for Surgery of the Hand patient and clinical guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage adult disease first-line with activity modification, splinting and a corticosteroid injection into the flexor sheath at the A1 pulley, which is highly effective",
-   "Refer for surgical A1 pulley release for triggering refractory to injection or a fixed interphalangeal flexion contracture",
-   "For paediatric congenital trigger thumb, observe initially as a proportion resolve spontaneously, reserving surgical release for a persistent fixed flexion deformity",
-   "Screen for and optimise associated diabetes mellitus, hypothyroidism and rheumatoid arthritis",
-   "Provide hand therapy with stretching and tendon-gliding, particularly after injection or surgical release",
-   "Monitor for recurrence, which is higher in diabetic patients, and escalate to surgery when injection fails"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trigger_thumb-pathway",
-   "title": "Trigger thumb: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Stenosing tenosynovitis of flexor pollicis longus at the first annular (A1) pulley, causing catching, locking or triggering of the thumb interphalangeal joint on flexion and extension.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fixed interphalangeal flexion contracture that will not passively extend",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diagnosis is clinical from history and examination of triggering and the Notta node, Ultrasound to confirm pulley thickening, tenosynovitis or a discrete nodule in equivocal cases, Screening for diabetes mellitus in"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage adult disease first-line with activity modification, splinting and a corticosteroid injection into the flexor sheath at the A1 pulley, which is highly effective"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Injecting or releasing without recognising an associated fixed contracture that requires additional therapy or splinting"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trigger thumb."
-  }
- ],
- "tables": [
-  {
-   "id": "trigger_thumb-matrix",
-   "title": "Trigger thumb: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Stenosing tenosynovitis of flexor pollicis longus at the first annular (A1) pulley, causing catching, locking or triggering of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "musculoskeletal",
+  "specialty": "hand and plastic surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Stenosing tenosynovitis of flexor pollicis longus at the first annular (A1) pulley, causing catching, locking or triggering of the thumb interphalangeal joint on flexion and extension.",
+      "A tender palpable nodule (Notta node) is often felt over the A1 pulley at the metacarpophalangeal flexion crease of the thumb.",
+      "Adult disease is most common in middle-aged women and is associated with diabetes mellitus, rheumatoid arthritis, hypothyroidism and repetitive gripping; diabetic triggering responds less well to conservative measures.",
+      "Paediatric (congenital) trigger thumb typically presents as a fixed flexion deformity of the interphalangeal joint rather than true triggering, and a proportion resolve spontaneously in early childhood.",
+      "Grading progresses from painful triggering, to demonstrable catching that self-corrects, to locking requiring passive release, and finally to a fixed contracture.",
+      "First-line management in adults is activity modification, splinting and corticosteroid injection into the flexor sheath; injection is highly effective though less so in diabetics.",
+      "Surgical A1 pulley release (open or percutaneous) is definitive for refractory or recurrent cases; the radial digital nerve to the thumb lies close to the sheath and is at risk.",
+      "Persistent triggering after apparently adequate release should raise suspicion of an incompletely divided pulley or an unrecognised trigger at a more distal site."
     ],
-    [
-     "Key Investigations",
-     "Diagnosis is clinical from history and examination of triggering and the Notta node, Ultrasound to confirm pulley thickening,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trigger thumb arises from a size mismatch between flexor pollicis longus and the mouth of the fibro-osseous A1 pulley. Repetitive loading and shear at the pulley provoke fibrocartilaginous metaplasia and thickening of the pulley together with tenosynovial hyperplasia of the tendon, producing a localised nodule. As the thickened tendon segment is forced through the constricted pulley it catches, generating the characteristic triggering; progressive stenosis leads to locking and, ultimately, a fixed flexion contracture. Systemic conditions such as diabetes mellitus promote glycation and matrix changes that predispose to and perpetuate the stenosis.",
+    "additionalDifferentials": [
+      "Thumb metacarpophalangeal or interphalangeal joint osteoarthritis",
+      "Flexor pollicis longus tendon rupture or partial laceration",
+      "De Quervain tenosynovitis",
+      "Sesamoid pathology at the thumb MCP joint",
+      "Dupuytren nodule of the thumb ray",
+      "Retained foreign body or infective flexor tenosynovitis",
+      "Congenital clasped thumb in the paediatric setting"
     ],
-    [
-     "Primary Differentials",
-     "Thumb metacarpophalangeal or interphalangeal joint osteoarthritis, Flexor pollicis longus tendon rupture or partial laceration,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diagnosis is clinical from history and examination of triggering and the Notta node",
+      "Ultrasound to confirm pulley thickening, tenosynovitis or a discrete nodule in equivocal cases",
+      "Screening for diabetes mellitus in recurrent or multi-digit disease",
+      "Thyroid function assessment where clinically suggested",
+      "Plain radiographs if concomitant joint arthritis or bony pathology is suspected",
+      "Inflammatory markers and rheumatoid screen when an inflammatory arthropathy is considered",
+      "Documentation of triggering grade and interphalangeal joint range of motion"
     ],
-    [
-     "Management Strategy",
-     "Manage adult disease first-line with activity modification, splinting and a corticosteroid injection into the flexor sheath at",
-     "Core treatment modality"
+    "redFlags": [
+      "Fixed interphalangeal flexion contracture that will not passively extend",
+      "Signs of infective flexor tenosynovitis (fusiform swelling, pain on passive extension, disproportionate tenderness)",
+      "Loss of active interphalangeal flexion suggesting tendon rupture rather than triggering",
+      "Sensory disturbance in the thumb suggesting digital nerve involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Injecting or releasing without recognising an associated fixed contracture that requires additional therapy or splinting",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generally excellent; most adults respond to corticosteroid injection and the majority of the remainder are cured by A1 pulley release, while a substantial proportion of congenital cases resolve spontaneously or after release. Diabetic patients have higher recurrence and lower injection success.",
+    "pitfalls": [
+      "Injecting or releasing without recognising an associated fixed contracture that requires additional therapy or splinting",
+      "Injuring the radial digital nerve, which crosses obliquely near the thumb A1 pulley, during percutaneous release",
+      "Dividing the oblique pulley in error, which can cause flexor pollicis longus bowstringing and loss of interphalangeal flexion power",
+      "Attributing a locked thumb to triggering when the underlying problem is joint arthritis or tendon rupture",
+      "Assuming poor injection response in diabetics reflects wrong diagnosis rather than expected reduced efficacy"
+    ],
+    "references": [
+      "Green's Operative Hand Surgery",
+      "British Society for Surgery of the Hand patient and clinical guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage adult disease first-line with activity modification, splinting and a corticosteroid injection into the flexor sheath at the A1 pulley, which is highly effective",
+      "Refer for surgical A1 pulley release for triggering refractory to injection or a fixed interphalangeal flexion contracture",
+      "For paediatric congenital trigger thumb, observe initially as a proportion resolve spontaneously, reserving surgical release for a persistent fixed flexion deformity",
+      "Screen for and optimise associated diabetes mellitus, hypothyroidism and rheumatoid arthritis",
+      "Provide hand therapy with stretching and tendon-gliding, particularly after injection or surgical release",
+      "Monitor for recurrence, which is higher in diabetic patients, and escalate to surgery when injection fails"
     ]
-   ],
-   "caption": "Overview comparison matrix for trigger thumb."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trigger-thumb-real-image",
-   "title": "Trigger thumb: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "trigger_thumb-pathway",
+      "title": "Trigger thumb: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Stenosing tenosynovitis of flexor pollicis longus at the first annular (A1) pulley, causing catching, locking or triggering of the thumb interphalangeal joint on flexion and extension.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fixed interphalangeal flexion contracture that will not passively extend",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diagnosis is clinical from history and examination of triggering and the Notta node, Ultrasound to confirm pulley thickening, tenosynovitis or a discrete nodule in equivocal cases, Screening for diabetes mellitus in"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage adult disease first-line with activity modification, splinting and a corticosteroid injection into the flexor sheath at the A1 pulley, which is highly effective"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Injecting or releasing without recognising an associated fixed contracture that requires additional therapy or splinting"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trigger thumb."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trigger_thumb-matrix",
+      "title": "Trigger thumb: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Stenosing tenosynovitis of flexor pollicis longus at the first annular (A1) pulley, causing catching, locking or triggering of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diagnosis is clinical from history and examination of triggering and the Notta node, Ultrasound to confirm pulley thickening,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thumb metacarpophalangeal or interphalangeal joint osteoarthritis, Flexor pollicis longus tendon rupture or partial laceration,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage adult disease first-line with activity modification, splinting and a corticosteroid injection into the flexor sheath at",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Injecting or releasing without recognising an associated fixed contracture that requires additional therapy or splinting",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trigger thumb."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "trigger_thumb-dx-mgmt",
+      "title": "Diagnosis and management of Trigger thumb",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected trigger thumb: catching or locking of the thumb IP joint on flexion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: fixed flexion contracture or loss of active IP flexion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hand surgery review for infective flexor tenosynovitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis with Notta node; ultrasound if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a tender Notta node present with triggering at the A1 pulley?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider joint arthritis, flexor pollicis longus rupture or De Quervain tenosynovitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Activity modification, splint and sheath steroid injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "A1 pulley release for refractory triggering or fixed contracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen and optimise diabetes, hypothyroidism and rheumatoid arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hand therapy with stretching and tendon gliding",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor recurrence, which is higher in diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Generally excellent; most respond to injection or release; diabetics recur more",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "trigger_thumb-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination",
+          "cells": [
+            {
+              "text": "Triggering and Notta node"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Pulley thickening or nodule in equivocal cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes screen",
+          "cells": [
+            {
+              "text": "Recurrent or multi-digit disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function",
+          "cells": [
+            {
+              "text": "Where clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Concomitant joint arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and rheumatoid screen",
+          "cells": [
+            {
+              "text": "Inflammatory arthropathy considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation of triggering grade and IP range",
+          "cells": [
+            {
+              "text": "Baseline for review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigger_thumb-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thumb joint osteoarthritis",
+          "cells": [
+            {
+              "text": "Joint pain and bony change on radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexor pollicis longus rupture",
+          "cells": [
+            {
+              "text": "Loss of active interphalangeal flexion rather than triggering"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "De Quervain tenosynovitis",
+          "cells": [
+            {
+              "text": "Radial wrist pain over the first compartment without A1 triggering"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "trigger_thumb-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Activity modification, splint and sheath steroid injection",
+          "cells": [
+            {
+              "text": "Highly effective in adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "A1 pulley release",
+          "cells": [
+            {
+              "text": "Triggering refractory to injection or fixed IP flexion contracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation in paediatric congenital cases",
+          "cells": [
+            {
+              "text": "Many resolve spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimise diabetes, hypothyroidism and rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy with stretching and gliding",
+          "cells": [
+            {
+              "text": "After injection or release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence monitoring",
+          "cells": [
+            {
+              "text": "Higher in diabetes; escalate when injection fails"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ]
 }

@@ -1,174 +1,490 @@
 {
- "id": "ligamentum_flavum_hypertrophy",
- "name": "Ligamentum flavum hypertrophy",
- "aliases": [
-  "ligamentum flavum thickening",
-  "hypertrophic ligamentum flavum",
-  "yellow ligament hypertrophy"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal system / Spine",
- "specialty": "Spinal surgery / Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "The Adult and Pediatric Spine (Rothman-Simeone) / Apley and Solomon's System of Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The ligamentum flavum connects adjacent laminae and is normally rich in elastin, giving it its characteristic recoil; hypertrophy reflects loss of elastic fibres with fibrosis and increased collagen rather than simple thickening",
-   "It is a major posterior contributor to degenerative spinal canal stenosis, combining with disc bulging and facet hypertrophy to produce the trefoil-shaped canal of lumbar stenosis",
-   "The thickened ligament buckles and infolds into the canal during extension and axial loading, producing a dynamic component to stenosis that worsens on standing and walking and eases on flexion",
-   "This dynamic behaviour underlies neurogenic claudication, with the shopping-trolley sign and relief on sitting or leaning forward",
-   "It should be distinguished from ossification of the ligamentum flavum, a distinct entity that predominantly affects the thoracic spine and can cause myelopathy, particularly in East Asian populations and in association with diffuse idiopathic skeletal hyperostosis",
-   "MRI shows the thickened low-signal ligament indenting the dorsolateral thecal sac, and the degree of thickening correlates with the severity of canal narrowing",
-   "Definitive treatment of symptomatic stenosis is surgical decompression to remove the hypertrophied ligament, with conservative measures reserved for milder disease"
+  "id": "ligamentum_flavum_hypertrophy",
+  "name": "Ligamentum flavum hypertrophy",
+  "aliases": [
+    "ligamentum flavum thickening",
+    "hypertrophic ligamentum flavum",
+    "yellow ligament hypertrophy"
   ],
-  "pathophysiology": "Ligamentum flavum hypertrophy is a degenerative process in which chronic mechanical stress and low-grade inflammation drive fibrosis of the normally elastic ligament. Repetitive loading, disc-height loss and segmental instability increase strain on the ligament and stimulate fibroblasts through transforming growth factor beta and other profibrotic mediators, leading to loss of elastic fibres, disorganised collagen deposition, scarring and sometimes calcification or ossification. Reduced disc height also allows the ligament to buckle and infold into the canal rather than stretch. The combined static bulk and dynamic buckling narrow the central canal and lateral recesses, compressing neural elements and, with axial loading and extension, producing intermittent ischaemia of the cauda equina or nerve roots that manifests as neurogenic claudication.",
-  "additionalDifferentials": [
-   "Ossification of the ligamentum flavum, particularly in the thoracic spine",
-   "Ossification of the posterior longitudinal ligament",
-   "Degenerative disc herniation or bulge causing anterior canal compromise",
-   "Facet joint hypertrophy or synovial cyst compressing the lateral recess",
-   "Epidural lipomatosis narrowing the canal",
-   "Spondylolisthesis with dynamic instability",
-   "Vascular claudication as a cause of exertional leg symptoms"
-  ],
-  "additionalInvestigations": [
-   "MRI of the affected spinal region to measure ligamentum flavum thickness and grade canal and recess stenosis",
-   "CT to demonstrate any calcification or ossification and bony anatomy for surgical planning",
-   "Standing and flexion-extension radiographs to assess dynamic instability and spondylolisthesis",
-   "Upright or axially loaded MRI where dynamic stenosis is suspected but supine imaging is equivocal",
-   "Ankle-brachial pressure index or vascular studies to exclude peripheral arterial disease",
-   "Electrophysiological studies where a peripheral neuropathy or radiculopathy needs clarification"
-  ],
-  "redFlags": [
-   "Progressive myelopathy with hyperreflexia and gait disturbance, especially with thoracic ossification",
-   "Cauda equina syndrome with saddle anaesthesia and bladder or bowel dysfunction",
-   "Rapidly progressive or profound lower-limb weakness",
-   "New or nocturnal back pain with systemic features suggesting infection or malignancy rather than degenerative stenosis"
-  ],
-  "prognosis": "Symptomatic degenerative stenosis due to ligamentum flavum hypertrophy tends to progress slowly, and surgical decompression reliably relieves neurogenic claudication in appropriately selected patients, although established myelopathy from thoracic ossification recovers less predictably.",
-  "pitfalls": [
-   "Relying on supine MRI alone and underestimating dynamic stenosis that only manifests on standing or extension",
-   "Confusing neurogenic with vascular claudication and missing peripheral arterial disease",
-   "Overlooking thoracic ossification of the ligamentum flavum as a cause of myelopathy",
-   "Attributing all symptoms to ligamentum flavum thickening when a synovial cyst, disc herniation or instability is the dominant lesion"
-  ],
-  "references": [
-   "Rothman-Simeone and Herkowitz's The Spine",
-   "Apley and Solomon's System of Orthopaedics and Trauma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin conservative care with flexion-biased physiotherapy, activity modification and postural advice for neurogenic claudication",
-   "Provide analgesia with NSAIDs and neuropathic agents such as gabapentinoids for symptom control",
-   "Offer epidural or transforaminal corticosteroid injections for persistent radicular or claudicant symptoms",
-   "Optimise weight and general conditioning",
-   "Refer for surgical decompression (laminectomy or laminotomy) in refractory or progressive neurogenic claudication, and for decompression of thoracic ligamentum flavum ossification causing myelopathy",
-   "Monitor for progressive neurological deficit and escalate urgently for cauda equina syndrome or evolving myelopathy",
-   "Involve spinal surgery or neurosurgery for appropriate operative selection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ligamentum_flavum_hypertrophy-pathway",
-   "title": "Ligamentum flavum hypertrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The ligamentum flavum connects adjacent laminae and is normally rich in elastin, giving it its characteristic recoil; hypertrophy reflects loss of elastic fibres with fibrosis and increased collagen rather than simple thickening",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive myelopathy with hyperreflexia and gait disturbance, especially with thoracic ossification",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the affected spinal region to measure ligamentum flavum thickness and grade canal and recess stenosis, CT to demonstrate any calcification or ossification and bony anatomy for surgical planning, Standing and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin conservative care with flexion-biased physiotherapy, activity modification and postural advice for neurogenic claudication"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on supine MRI alone and underestimating dynamic stenosis that only manifests on standing or extension"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ligamentum flavum hypertrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "ligamentum_flavum_hypertrophy-matrix",
-   "title": "Ligamentum flavum hypertrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The ligamentum flavum connects adjacent laminae and is normally rich in elastin, giving it its characteristic recoil; hypertrophy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal system / Spine",
+  "specialty": "Spinal surgery / Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "The Adult and Pediatric Spine (Rothman-Simeone) / Apley and Solomon's System of Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The ligamentum flavum connects adjacent laminae and is normally rich in elastin, giving it its characteristic recoil; hypertrophy reflects loss of elastic fibres with fibrosis and increased collagen rather than simple thickening",
+      "It is a major posterior contributor to degenerative spinal canal stenosis, combining with disc bulging and facet hypertrophy to produce the trefoil-shaped canal of lumbar stenosis",
+      "The thickened ligament buckles and infolds into the canal during extension and axial loading, producing a dynamic component to stenosis that worsens on standing and walking and eases on flexion",
+      "This dynamic behaviour underlies neurogenic claudication, with the shopping-trolley sign and relief on sitting or leaning forward",
+      "It should be distinguished from ossification of the ligamentum flavum, a distinct entity that predominantly affects the thoracic spine and can cause myelopathy, particularly in East Asian populations and in association with diffuse idiopathic skeletal hyperostosis",
+      "MRI shows the thickened low-signal ligament indenting the dorsolateral thecal sac, and the degree of thickening correlates with the severity of canal narrowing",
+      "Definitive treatment of symptomatic stenosis is surgical decompression to remove the hypertrophied ligament, with conservative measures reserved for milder disease"
     ],
-    [
-     "Key Investigations",
-     "MRI of the affected spinal region to measure ligamentum flavum thickness and grade canal and recess stenosis, CT to demonstrate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ligamentum flavum hypertrophy is a degenerative process in which chronic mechanical stress and low-grade inflammation drive fibrosis of the normally elastic ligament. Repetitive loading, disc-height loss and segmental instability increase strain on the ligament and stimulate fibroblasts through transforming growth factor beta and other profibrotic mediators, leading to loss of elastic fibres, disorganised collagen deposition, scarring and sometimes calcification or ossification. Reduced disc height also allows the ligament to buckle and infold into the canal rather than stretch. The combined static bulk and dynamic buckling narrow the central canal and lateral recesses, compressing neural elements and, with axial loading and extension, producing intermittent ischaemia of the cauda equina or nerve roots that manifests as neurogenic claudication.",
+    "additionalDifferentials": [
+      "Ossification of the ligamentum flavum, particularly in the thoracic spine",
+      "Ossification of the posterior longitudinal ligament",
+      "Degenerative disc herniation or bulge causing anterior canal compromise",
+      "Facet joint hypertrophy or synovial cyst compressing the lateral recess",
+      "Epidural lipomatosis narrowing the canal",
+      "Spondylolisthesis with dynamic instability",
+      "Vascular claudication as a cause of exertional leg symptoms"
     ],
-    [
-     "Primary Differentials",
-     "Ossification of the ligamentum flavum, particularly in the thoracic spine, Ossification of the posterior longitudinal ligament,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the affected spinal region to measure ligamentum flavum thickness and grade canal and recess stenosis",
+      "CT to demonstrate any calcification or ossification and bony anatomy for surgical planning",
+      "Standing and flexion-extension radiographs to assess dynamic instability and spondylolisthesis",
+      "Upright or axially loaded MRI where dynamic stenosis is suspected but supine imaging is equivocal",
+      "Ankle-brachial pressure index or vascular studies to exclude peripheral arterial disease",
+      "Electrophysiological studies where a peripheral neuropathy or radiculopathy needs clarification"
     ],
-    [
-     "Management Strategy",
-     "Begin conservative care with flexion-biased physiotherapy, activity modification and postural advice for neurogenic claudication",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive myelopathy with hyperreflexia and gait disturbance, especially with thoracic ossification",
+      "Cauda equina syndrome with saddle anaesthesia and bladder or bowel dysfunction",
+      "Rapidly progressive or profound lower-limb weakness",
+      "New or nocturnal back pain with systemic features suggesting infection or malignancy rather than degenerative stenosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on supine MRI alone and underestimating dynamic stenosis that only manifests on standing or extension",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptomatic degenerative stenosis due to ligamentum flavum hypertrophy tends to progress slowly, and surgical decompression reliably relieves neurogenic claudication in appropriately selected patients, although established myelopathy from thoracic ossification recovers less predictably.",
+    "pitfalls": [
+      "Relying on supine MRI alone and underestimating dynamic stenosis that only manifests on standing or extension",
+      "Confusing neurogenic with vascular claudication and missing peripheral arterial disease",
+      "Overlooking thoracic ossification of the ligamentum flavum as a cause of myelopathy",
+      "Attributing all symptoms to ligamentum flavum thickening when a synovial cyst, disc herniation or instability is the dominant lesion"
+    ],
+    "references": [
+      "Rothman-Simeone and Herkowitz's The Spine",
+      "Apley and Solomon's System of Orthopaedics and Trauma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin conservative care with flexion-biased physiotherapy, activity modification and postural advice for neurogenic claudication",
+      "Provide analgesia with NSAIDs and neuropathic agents such as gabapentinoids for symptom control",
+      "Offer epidural or transforaminal corticosteroid injections for persistent radicular or claudicant symptoms",
+      "Optimise weight and general conditioning",
+      "Refer for surgical decompression (laminectomy or laminotomy) in refractory or progressive neurogenic claudication, and for decompression of thoracic ligamentum flavum ossification causing myelopathy",
+      "Monitor for progressive neurological deficit and escalate urgently for cauda equina syndrome or evolving myelopathy",
+      "Involve spinal surgery or neurosurgery for appropriate operative selection"
     ]
-   ],
-   "caption": "Overview comparison matrix for ligamentum flavum hypertrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ligamentum-flavum-hypertrophy-real-image",
-   "title": "Ligamentum flavum hypertrophy: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "ligamentum_flavum_hypertrophy-pathway",
+      "title": "Ligamentum flavum hypertrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The ligamentum flavum connects adjacent laminae and is normally rich in elastin, giving it its characteristic recoil; hypertrophy reflects loss of elastic fibres with fibrosis and increased collagen rather than simple thickening",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive myelopathy with hyperreflexia and gait disturbance, especially with thoracic ossification",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the affected spinal region to measure ligamentum flavum thickness and grade canal and recess stenosis, CT to demonstrate any calcification or ossification and bony anatomy for surgical planning, Standing and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin conservative care with flexion-biased physiotherapy, activity modification and postural advice for neurogenic claudication"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on supine MRI alone and underestimating dynamic stenosis that only manifests on standing or extension"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ligamentum flavum hypertrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ligamentum_flavum_hypertrophy-matrix",
+      "title": "Ligamentum flavum hypertrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The ligamentum flavum connects adjacent laminae and is normally rich in elastin, giving it its characteristic recoil; hypertrophy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the affected spinal region to measure ligamentum flavum thickness and grade canal and recess stenosis, CT to demonstrate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ossification of the ligamentum flavum, particularly in the thoracic spine, Ossification of the posterior longitudinal ligament,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin conservative care with flexion-biased physiotherapy, activity modification and postural advice for neurogenic claudication",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on supine MRI alone and underestimating dynamic stenosis that only manifests on standing or extension",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ligamentum flavum hypertrophy."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "The Adult and Pediatric Spine (Rothman-Simeone) / Apley and Solomon's System of Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ligamentum_flavum_hypertrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the affected spinal region",
+          "cells": [
+            {
+              "text": "Ligamentum flavum thickness and canal and recess stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Calcification or ossification; bony anatomy for surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standing and flexion-extension radiographs",
+          "cells": [
+            {
+              "text": "Dynamic instability and spondylolisthesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upright or axially loaded MRI",
+          "cells": [
+            {
+              "text": "Dynamic stenosis where supine imaging is equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial pressure index or vascular studies",
+          "cells": [
+            {
+              "text": "Excludes peripheral arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiological studies",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy or radiculopathy, where needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ligamentum_flavum_hypertrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ossification of the ligamentum flavum",
+          "cells": [
+            {
+              "text": "Predominantly thoracic; can cause myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial cyst or facet joint hypertrophy",
+          "cells": [
+            {
+              "text": "Compresses the lateral recess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular claudication",
+          "cells": [
+            {
+              "text": "Exertional leg symptoms without a spinal cause; ABPI separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epidural lipomatosis",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ligamentum_flavum_hypertrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Flexion-biased physiotherapy, activity modification and postural advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "NSAIDs and neuropathic agents such as gabapentinoids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Injections",
+          "cells": [
+            {
+              "text": "Epidural or transforaminal corticosteroids for persistent radicular or claudicant symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight and conditioning",
+          "cells": [
+            {
+              "text": "Optimised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical decompression",
+          "cells": [
+            {
+              "text": "Laminectomy or laminotomy for refractory or progressive neurogenic claudication, and for thoracic ligamentum ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Progressive neurological deficit; urgent escalation for cauda equina or evolving myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal surgery",
+          "cells": [
+            {
+              "text": "Operative selection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ligamentum_flavum_hypertrophy-dx-mgmt",
+      "title": "Diagnosis and management of Ligamentum flavum hypertrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neurogenic claudication, with symptoms relieved by sitting or leaning forward",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (myelopathy, cauda equina, progressive weakness, systemic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent spinal surgical review for cauda equina or myelopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI spine, CT if ossification, standing and flexion-extension films, ABPI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is canal stenosis from thickened ligamentum flavum confirmed on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vascular claudication, disc herniation or synovial cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Flexion-biased physiotherapy and activity modification",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs and gabapentinoids for symptom control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Epidural or transforaminal steroids for persistent symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical decompression for refractory or progressive neurogenic claudication",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor for progressive deficit; urgent escalation if evolving",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Progresses slowly; decompression reliably relieves claudication in selected patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,172 +1,474 @@
 {
- "id": "aspiration_pneumonitis",
- "name": "Aspiration pneumonitis",
- "aliases": [
-  "Mendelson's syndrome",
-  "perioperative pulmonary aspiration",
-  "acid aspiration syndrome"
- ],
- "class": "non_infective",
- "system": "Anaesthesia / Perioperative",
- "specialty": "Anaesthesiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Miller's Anesthesia / standard perioperative references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from inhalation of gastric contents, most often during induction, emergence, or in patients with impaired airway protection",
-   "Chemical injury from acidic gastric fluid produces a rapid inflammatory pneumonitis, which is distinct from later bacterial aspiration pneumonia",
-   "Risk is highest with a full stomach, delayed gastric emptying, bowel obstruction, pregnancy, obesity, reflux, and emergency or difficult airway situations",
-   "Signs include hypoxaemia, wheeze or bronchospasm, cough, tachypnoea, and diffuse crackles, sometimes with visible gastric material in the airway",
-   "Immediate management is to position to limit further soiling, apply suction, secure the airway, and provide oxygen and supportive ventilation with lung-protective strategies",
-   "Routine antibiotics and corticosteroids are not indicated for pure chemical pneumonitis; antibiotics are reserved for established infection or high-risk contamination",
-   "Prevention centres on appropriate fasting, rapid-sequence induction with cricoid pressure in at-risk patients, and airway protection with a cuffed tube",
-   "Aspiration prophylaxis with agents that reduce gastric volume and acidity may be considered in high-risk patients"
+  "id": "aspiration_pneumonitis",
+  "name": "Aspiration pneumonitis",
+  "aliases": [
+    "Mendelson's syndrome",
+    "perioperative pulmonary aspiration",
+    "acid aspiration syndrome"
   ],
-  "pathophysiology": "Aspiration occurs when protective airway reflexes are obtunded, allowing gastric contents to enter the tracheobronchial tree. Acidic fluid causes rapid chemical burn of the alveolar-capillary membrane, triggering an inflammatory cascade with increased permeability, alveolar oedema, surfactant dysfunction, and ventilation-perfusion mismatch that produces hypoxaemia. Particulate matter can cause mechanical obstruction and atelectasis. The initial insult is sterile, but secondary bacterial infection may supervene, and severe injury can progress to acute respiratory distress syndrome. Severity depends on the volume, acidity, and particulate content of the aspirate.",
-  "additionalDifferentials": [
-   "Bronchospasm from asthma or anaphylaxis",
-   "Pulmonary oedema (cardiogenic or negative-pressure)",
-   "Pulmonary embolism",
-   "Acute respiratory distress syndrome from other causes",
-   "Airway obstruction or laryngospasm",
-   "Bacterial aspiration pneumonia (later infective complication)"
-  ],
-  "additionalInvestigations": [
-   "Pulse oximetry and arterial blood gas to quantify hypoxaemia",
-   "Chest radiograph or CT to identify infiltrates, often in dependent lung zones",
-   "Bronchoscopy to clear particulate material when obstruction is suspected",
-   "Sputum or bronchoalveolar lavage culture if secondary infection is suspected",
-   "Serial observation for progression to acute respiratory distress syndrome"
-  ],
-  "redFlags": [
-   "Witnessed massive aspiration with rapid desaturation and airway soiling",
-   "Progressive hypoxaemia or rising oxygen requirement suggesting evolving acute respiratory distress syndrome",
-   "Severe bronchospasm with difficult ventilation",
-   "Haemodynamic instability or the need for escalating respiratory support"
-  ],
-  "prognosis": "Mild chemical pneumonitis often resolves within days with supportive care, but large-volume acidic or particulate aspiration can cause severe respiratory failure, acute respiratory distress syndrome, and death.",
-  "pitfalls": [
-   "Giving prophylactic antibiotics and steroids for uncomplicated chemical pneumonitis",
-   "Underestimating aspiration risk and omitting rapid-sequence induction in at-risk patients",
-   "Attributing hypoxaemia solely to aspiration and missing another cause",
-   "Failing to protect the airway promptly and allowing continued soiling",
-   "Assuming a normal early chest radiograph excludes significant aspiration"
-  ],
-  "references": [
-   "Miller's Anesthesia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate airway management with head-down or lateral positioning, suctioning of the airway, and tracheal intubation with suction to limit further soiling",
-   "Supplemental oxygen and lung-protective ventilation for hypoxaemia and respiratory failure",
-   "Flexible bronchoscopy to remove aspirated particulate material when large-airway obstruction is suspected, rather than routine lavage",
-   "Avoidance of routine antibiotics and corticosteroids in pure chemical pneumonitis, reserving antibiotics for established secondary infection or grossly contaminated aspirate",
-   "Close monitoring with serial oximetry, blood gases and imaging for progression to acute respiratory distress syndrome, escalating to critical care as needed",
-   "Perioperative prevention including appropriate fasting, rapid-sequence induction and aspiration precautions in high-risk patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aspiration_pneumonitis-pathway",
-   "title": "Aspiration pneumonitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from inhalation of gastric contents, most often during induction, emergence, or in patients with impaired airway protection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Witnessed massive aspiration with rapid desaturation and airway soiling",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pulse oximetry and arterial blood gas to quantify hypoxaemia, Chest radiograph or CT to identify infiltrates, often in dependent lung zones, Bronchoscopy to clear particulate material when obstruction is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate airway management with head-down or lateral positioning, suctioning of the airway, and tracheal intubation with suction to limit further soiling"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving prophylactic antibiotics and steroids for uncomplicated chemical pneumonitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aspiration pneumonitis."
-  }
- ],
- "tables": [
-  {
-   "id": "aspiration_pneumonitis-matrix",
-   "title": "Aspiration pneumonitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from inhalation of gastric contents, most often during induction, emergence, or in patients with impaired airway",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Anaesthesia / Perioperative",
+  "specialty": "Anaesthesiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Miller's Anesthesia / standard perioperative references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from inhalation of gastric contents, most often during induction, emergence, or in patients with impaired airway protection",
+      "Chemical injury from acidic gastric fluid produces a rapid inflammatory pneumonitis, which is distinct from later bacterial aspiration pneumonia",
+      "Risk is highest with a full stomach, delayed gastric emptying, bowel obstruction, pregnancy, obesity, reflux, and emergency or difficult airway situations",
+      "Signs include hypoxaemia, wheeze or bronchospasm, cough, tachypnoea, and diffuse crackles, sometimes with visible gastric material in the airway",
+      "Immediate management is to position to limit further soiling, apply suction, secure the airway, and provide oxygen and supportive ventilation with lung-protective strategies",
+      "Routine antibiotics and corticosteroids are not indicated for pure chemical pneumonitis; antibiotics are reserved for established infection or high-risk contamination",
+      "Prevention centres on appropriate fasting, rapid-sequence induction with cricoid pressure in at-risk patients, and airway protection with a cuffed tube",
+      "Aspiration prophylaxis with agents that reduce gastric volume and acidity may be considered in high-risk patients"
     ],
-    [
-     "Key Investigations",
-     "Pulse oximetry and arterial blood gas to quantify hypoxaemia, Chest radiograph or CT to identify infiltrates, often in dependent",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Aspiration occurs when protective airway reflexes are obtunded, allowing gastric contents to enter the tracheobronchial tree. Acidic fluid causes rapid chemical burn of the alveolar-capillary membrane, triggering an inflammatory cascade with increased permeability, alveolar oedema, surfactant dysfunction, and ventilation-perfusion mismatch that produces hypoxaemia. Particulate matter can cause mechanical obstruction and atelectasis. The initial insult is sterile, but secondary bacterial infection may supervene, and severe injury can progress to acute respiratory distress syndrome. Severity depends on the volume, acidity, and particulate content of the aspirate.",
+    "additionalDifferentials": [
+      "Bronchospasm from asthma or anaphylaxis",
+      "Pulmonary oedema (cardiogenic or negative-pressure)",
+      "Pulmonary embolism",
+      "Acute respiratory distress syndrome from other causes",
+      "Airway obstruction or laryngospasm",
+      "Bacterial aspiration pneumonia (later infective complication)"
     ],
-    [
-     "Primary Differentials",
-     "Bronchospasm from asthma or anaphylaxis, Pulmonary oedema (cardiogenic or negative-pressure), Pulmonary embolism",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pulse oximetry and arterial blood gas to quantify hypoxaemia",
+      "Chest radiograph or CT to identify infiltrates, often in dependent lung zones",
+      "Bronchoscopy to clear particulate material when obstruction is suspected",
+      "Sputum or bronchoalveolar lavage culture if secondary infection is suspected",
+      "Serial observation for progression to acute respiratory distress syndrome"
     ],
-    [
-     "Management Strategy",
-     "Immediate airway management with head-down or lateral positioning, suctioning of the airway, and tracheal intubation with suction",
-     "Core treatment modality"
+    "redFlags": [
+      "Witnessed massive aspiration with rapid desaturation and airway soiling",
+      "Progressive hypoxaemia or rising oxygen requirement suggesting evolving acute respiratory distress syndrome",
+      "Severe bronchospasm with difficult ventilation",
+      "Haemodynamic instability or the need for escalating respiratory support"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving prophylactic antibiotics and steroids for uncomplicated chemical pneumonitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mild chemical pneumonitis often resolves within days with supportive care, but large-volume acidic or particulate aspiration can cause severe respiratory failure, acute respiratory distress syndrome, and death.",
+    "pitfalls": [
+      "Giving prophylactic antibiotics and steroids for uncomplicated chemical pneumonitis",
+      "Underestimating aspiration risk and omitting rapid-sequence induction in at-risk patients",
+      "Attributing hypoxaemia solely to aspiration and missing another cause",
+      "Failing to protect the airway promptly and allowing continued soiling",
+      "Assuming a normal early chest radiograph excludes significant aspiration"
+    ],
+    "references": [
+      "Miller's Anesthesia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate airway management with head-down or lateral positioning, suctioning of the airway, and tracheal intubation with suction to limit further soiling",
+      "Supplemental oxygen and lung-protective ventilation for hypoxaemia and respiratory failure",
+      "Flexible bronchoscopy to remove aspirated particulate material when large-airway obstruction is suspected, rather than routine lavage",
+      "Avoidance of routine antibiotics and corticosteroids in pure chemical pneumonitis, reserving antibiotics for established secondary infection or grossly contaminated aspirate",
+      "Close monitoring with serial oximetry, blood gases and imaging for progression to acute respiratory distress syndrome, escalating to critical care as needed",
+      "Perioperative prevention including appropriate fasting, rapid-sequence induction and aspiration precautions in high-risk patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for aspiration pneumonitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aspiration-pneumonitis-real-image",
-   "title": "Aspiration pneumonitis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "aspiration_pneumonitis-pathway",
+      "title": "Aspiration pneumonitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from inhalation of gastric contents, most often during induction, emergence, or in patients with impaired airway protection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Witnessed massive aspiration with rapid desaturation and airway soiling",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pulse oximetry and arterial blood gas to quantify hypoxaemia, Chest radiograph or CT to identify infiltrates, often in dependent lung zones, Bronchoscopy to clear particulate material when obstruction is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate airway management with head-down or lateral positioning, suctioning of the airway, and tracheal intubation with suction to limit further soiling"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving prophylactic antibiotics and steroids for uncomplicated chemical pneumonitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aspiration pneumonitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aspiration_pneumonitis-matrix",
+      "title": "Aspiration pneumonitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from inhalation of gastric contents, most often during induction, emergence, or in patients with impaired airway",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pulse oximetry and arterial blood gas to quantify hypoxaemia, Chest radiograph or CT to identify infiltrates, often in dependent",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bronchospasm from asthma or anaphylaxis, Pulmonary oedema (cardiogenic or negative-pressure), Pulmonary embolism",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate airway management with head-down or lateral positioning, suctioning of the airway, and tracheal intubation with suction",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving prophylactic antibiotics and steroids for uncomplicated chemical pneumonitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aspiration pneumonitis."
+    }
+  ],
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 33-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aspiration_pneumonitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulse oximetry and arterial blood gas",
+          "cells": [
+            {
+              "text": "Quantifies hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph or CT",
+          "cells": [
+            {
+              "text": "Infiltrates, often in dependent lung zones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Clears particulate material when obstruction is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum or bronchoalveolar lavage culture",
+          "cells": [
+            {
+              "text": "Secondary infection, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial observation",
+          "cells": [
+            {
+              "text": "Progression to acute respiratory distress syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aspiration_pneumonitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Positioning and airway management",
+          "cells": [
+            {
+              "text": "Head-down or lateral positioning, suction, tracheal intubation with suction"
+            },
+            {
+              "text": "Limits further aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and lung-protective ventilation",
+          "cells": [
+            {
+              "text": "For hypoxaemia and respiratory failure"
+            },
+            {
+              "text": "Respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible bronchoscopy",
+          "cells": [
+            {
+              "text": "Removes aspirated particulate material when large-airway obstruction is suspected"
+            },
+            {
+              "text": "Not routine lavage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine antibiotics and steroids",
+          "cells": [
+            {
+              "text": "In pure chemical pneumonitis"
+            },
+            {
+              "text": "Antibiotics reserved for established secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Oximetry, blood gases and imaging for progression to ARDS"
+            },
+            {
+              "text": "Escalate to critical care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative prevention",
+          "cells": [
+            {
+              "text": "Appropriate fasting, rapid-sequence induction and aspiration precautions"
+            },
+            {
+              "text": "High-risk patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aspiration_pneumonitis-diagnostic-2",
+      "kind": "diagnostic",
+      "title": "Common causes of noncardiogenic pulmonary edema",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Causes"
+      ],
+      "rows": [
+        {
+          "parameter": "Direct injury to lung",
+          "cells": [
+            {
+              "text": "Chest trauma, pulmonary contusion; aspiration; smoke inhalation; pneumonia; oxygen toxicity; pulmonary embolism, reperfusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hematogenous injury to lung",
+          "cells": [
+            {
+              "text": "Sepsis; pancreatitis; nonthoracic trauma; leukoagglutination reactions; multiple transfusions; intravenous drug use (for example heroin); cardiopulmonary bypass"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Possible lung injury plus elevated hydrostatic pressure",
+          "cells": [
+            {
+              "text": "High-altitude pulmonary edema; neurogenic pulmonary edema; reexpansion pulmonary edema"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aspiration_pneumonitis-dx-mgmt",
+      "title": "Diagnosis and management of Aspiration pneumonitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Witnessed aspiration with rapid desaturation and airway soiling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Progressive hypoxaemia or rising oxygen requirement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate airway management, suction and oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oximetry, arterial blood gas, chest imaging, bronchoscopy if obstruction suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infiltrates in dependent lung zones with hypoxaemia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lung-protective ventilation and critical care escalation if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Flexible bronchoscopy for large-airway obstruction, not routine lavage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid routine antibiotics and steroids in pure chemical pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Watch for progression to ARDS with serial oximetry and gases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Perioperative prevention with rapid-sequence induction in high-risk patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }
